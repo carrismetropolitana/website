@@ -1,0 +1,13 @@
+{
+  "compilerOptions": {
+    // Using "baseUrl" allows you to use absolute paths
+    "baseUrl": ".",
+    // Using "paths" allows you to configure module path aliases
+    "paths": {
+      "@/components/*": ["components/*"],
+      "@/hooks/*": ["hooks/*"],
+      "@/services/*": ["services/*"],
+      "@/schemas/*": ["schemas/*"]
+    }
+  }
+}

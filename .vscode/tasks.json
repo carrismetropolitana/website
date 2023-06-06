@@ -1,0 +1,26 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "type": "npm",
+      "script": "dev",
+      "problemMatcher": [],
+      "label": "Start Project Locally",
+      "detail": "Start local development server with 'npm run dev'"
+    },
+    {
+      "type": "npm",
+      "script": "install",
+      "problemMatcher": [],
+      "label": "Initialize Repository",
+      "detail": "Install project dependencies."
+    },
+    {
+      "type": "npm",
+      "script": "bump",
+      "problemMatcher": [],
+      "label": "Bump Version",
+      "detail": "Increase version number to now."
+    }
+  ]
+}
