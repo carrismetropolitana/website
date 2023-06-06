@@ -1,0 +1,57 @@
+.container {
+  display: flex;
+  background: #222222;
+}
+
+@media (max-width: 640px) {
+  .container {
+    display: none;
+  }
+}
+
+.link {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  padding: 8px 18px;
+  border-right: 1px solid #4b4b4b;
+  color: #fff;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.link:hover,
+.active {
+  background-color: #2b2b2b;
+}
+
+.label {
+  padding: 1px;
+}
+
+.indicatorWrapper {
+  border-radius: 999px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  overflow: hidden;
+  padding: 4px;
+}
+
+.indicatorActive {
+  padding: 5px;
+  border-radius: 999px;
+  background-color: transparent;
+  transition: background-color 200ms ease;
+}
+
+.link:hover .indicatorActive {
+  opacity: 0.75;
+  background-color: var(--carris-metropolitana);
+}
+
+.link:active .indicatorActive,
+.link.active .indicatorActive {
+  opacity: 1;
+  background-color: var(--carris-metropolitana);
+}
