@@ -5,10 +5,12 @@
   justify-content: stretch;
   gap: var(--size-sm);
   width: 100%;
+  max-width: 1200px;
   height: 100%;
   flex-grow: 1;
   position: relative;
   width: 100%;
+  margin: auto;
 }
 
 .innerWrapper {
