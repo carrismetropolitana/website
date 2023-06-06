@@ -1,0 +1,1393 @@
+{
+    "auth": {
+        "signin": {
+            "submit": "Iniciar Sessão"
+        },
+        "verify": {
+            "instruction": "Por favor verifique o seu email",
+            "submit": "Não recebi o meu email"
+        },
+        "error": {
+            "submit": "Tentar Novamente",
+            "type": {
+                "configuration": "Existe um problema com a configuração do servidor.",
+                "access-denied": "Não é possível entrar com este email.",
+                "verification": "Este acesso expirou ou já foi utilizado.",
+                "unknown": "Erro Desconhecido"
+            }
+        }
+    },
+    "agencies": {
+        "untitled": "Operador sem título",
+        "list": {
+            "no_selection": "Selecione um Operador",
+            "footer": "{count, plural, one {}=1 {Encontrado 1 Operador} other {Encontrados # Operadores}}"
+        },
+        "operations": {
+            "create": {
+                "title": "Criar Operador",
+                "loading": "A criar Operador...",
+                "success": "Foi criado um novo um Operador!",
+                "error": "Ocorreu um erro ao criar este Operador."
+            },
+            "delete": {
+                "title": "Eliminar Operador",
+                "description": "Eliminar é irreversível. Tem certeza de que deseja eliminar este Operador para sempre?",
+                "confirm": "Eliminar Operador para sempre",
+                "cancel": "Não Eliminar",
+                "loading": "A eliminar Operador...",
+                "success": "Operador eliminado.",
+                "error": "Um erro ocorreu ao eliminar este Operador."
+            }
+        },
+        "sections": {
+            "config": {
+                "title": "Detalhes"
+            }
+        },
+        "form": {
+            "name": {
+                "label": "Nome do Operador",
+                "placeholder": "A.C.M.E. Transportes"
+            },
+            "code": {
+                "label": "Código do Operador",
+                "placeholder": "41"
+            },
+            "lang": {
+                "label": "Idioma Principal",
+                "placeholder": "Escolha uma opção...",
+                "nothingFound": "Nenhum Resultado Encontrado"
+            },
+            "timezone": {
+                "label": "Fuso horário",
+                "placeholder": "Escolha uma opção...",
+                "nothingFound": "Nenhum Resultado Encontrado"
+            },
+            "phone": {
+                "label": "Número de Telefone Público",
+                "placeholder": "+351 213 456 789"
+            },
+            "email": {
+                "label": "Endereço de Email Público",
+                "placeholder": "contact@agency.com"
+            },
+            "url": {
+                "label": "Website Público",
+                "placeholder": "https://agency.com"
+            },
+            "fare_url": {
+                "label": "Website para Informações de Tarifas",
+                "placeholder": "https://agency.com/fares"
+            }
+        }
+    },
+    "export": {
+        "gtfs_v18": {
+            "title": "Exportar Plano de Oferta (v18)",
+            "sections": {
+                "intro": {
+                    "title": "Export GTFS Intro",
+                    "description": "Algo sobre esta secção"
+                }
+            },
+            "operations": {
+                "start": {
+                    "label": "Iniciar Exportação (v18)"
+                }
+            },
+            "form": {
+                "agencies": {
+                    "label": "Exportar para este Operador",
+                    "description": "Escolha um Operador para exportar o GTFS.",
+                    "placeholder": "Escolha um Operador...",
+                    "nothingFound": "Nenhum Resultado Encontrado"
+                },
+                "lines": {
+                    "label": "Exportar estas linhas",
+                    "description": "Escolha Linhas ou deixe em branco para todas.",
+                    "placeholder": "Escolha Linhas...",
+                    "nothingFound": "Nenhum Resultado Encontrado"
+                }
+            }
+        },
+        "gtfs_v29": {
+            "title": "Exportar Plano de Oferta (v29)"
+        }
+    },
+    "calendars": {
+        "untitled": "Calendário sem título",
+        "list": {
+            "no_selection": "Selecione um Calendário",
+            "footer": "{count, plural, one {}=1 {Encontrado 1 Calendário} other {Encontrados # Calendários}}"
+        },
+        "operations": {
+            "create": {
+                "title": "Criar Calendário",
+                "loading": "A criar Calendário...",
+                "success": "Foi criado um novo Calendário!",
+                "error": "Ocorreu um erro ao criar este Calendário."
+            },
+            "delete": {
+                "title": "Eliminar Calendário",
+                "description": "Eliminar é irreversível. Tem certeza de que deseja eliminar este Calendário para sempre?",
+                "confirm": "Eliminar Calendário Definitivamente",
+                "cancel": "Não Eliminar",
+                "loading": "A eliminar Calendário...",
+                "success": "Calendário eliminado.",
+                "error": "Ocorreu um erro ao eliminar este Calendário."
+            }
+        },
+        "sections": {
+            "config": {
+                "title": "Detalhes"
+            }
+        },
+        "form": {
+            "name": {
+                "label": "Nome do Calendário",
+                "placeholder": "Dias Úteis"
+            },
+            "code": {
+                "label": "Código do Calendário",
+                "placeholder": "DU"
+            },
+            "is_holiday": {
+                "label": "Marcar todas as datas como Feriado",
+                "description": "Todas as datas aqui selecionadas serão marcadas como feriado, mesmo que marcadas como dias normais noutros calendários. Isto afeta apenas datas para os percursos onde este calendário está selecionado."
+            }
+        }
+    },
+    "dates": {
+        "title": "Todas as Datas Disponíveis",
+        "operations": {
+            "close": {
+                "title": "Voltar aos Calendários"
+            },
+            "manage": {
+                "title": "Gerir Datas"
+            },
+            "update": {
+                "title": "Atualizar",
+                "loading": "A atualizar...",
+                "success": "Datas atualizadas!",
+                "error": "Ocorreu um erro ao atualizar Datas."
+            },
+            "delete": {
+                "title": "Eliminar",
+                "description": "Eliminar é irreversível. Tem certeza de que deseja eliminar estas Datas para sempre?",
+                "confirm": "Eliminar Datas Definitivamente",
+                "cancel": "Não Eliminar",
+                "loading": "A eliminar...",
+                "success": "Datas eliminadas.",
+                "error": "Ocorreu um erro ao eliminar estas Datas."
+            }
+        },
+        "sections": {
+            "config": {
+                "title": "Detalhes"
+            },
+            "dates": {
+                "title": "Datas para este Calendário"
+            }
+        },
+        "form": {
+            "range": {
+                "title": "Intervalo de Datas"
+            },
+            "multiple": {
+                "title": "Datas Individuais"
+            },
+            "period": {
+                "label": "Período",
+                "placeholder": "Escolha uma opção...",
+                "nothingFound": "Nenhum Resultado Encontrado"
+            },
+            "notes": {
+                "label": "Notas para esta Data",
+                "placeholder": "Neste dia..."
+            }
+        }
+    },
+    "fares": {
+        "untitled": "Tarifa sem título",
+        "list": {
+            "no_selection": "Selecione uma Tarifa",
+            "footer": "{count, plural, one {}=1 {Encontrada 1 Tarifa} other {Encontradas # Tarifas}}"
+        },
+        "operations": {
+            "create": {
+                "title": "Criar Tarifa",
+                "loading": "A criar Tarifa...",
+                "success": "Foi criada uma nova Tarifa!",
+                "error": "Ocorreu um erro ao criar esta Tarifa."
+            },
+            "delete": {
+                "title": "Eliminar Tarifa",
+                "description": "Eliminar é irreversível. Tem certeza de que deseja eliminar esta Tarifa para sempre?",
+                "confirm": "Eliminar Tarifa Definitivamente",
+                "cancel": "Não Eliminar",
+                "loading": "Eliminar Tarifa...",
+                "success": "Tarifa eliminada.",
+                "error": "Ocorreu um erro ao eliminar esta Tarifa."
+            }
+        },
+        "sections": {
+            "config": {
+                "title": "Detalhes"
+            }
+        },
+        "form": {
+            "long_name": {
+                "label": "Nome da Tarifa",
+                "placeholder": "Tarifa 1"
+            },
+            "short_name": {
+                "label": "Abreviatura",
+                "placeholder": "T1"
+            },
+            "code": {
+                "label": "Código da Tarifa",
+                "placeholder": "T1"
+            },
+            "price": {
+                "label": "Preço",
+                "placeholder": "2.50"
+            },
+            "currency_type": {
+                "label": "Moeda",
+                "placeholder": "Escolha uma opção...",
+                "nothingFound": "Nenhum Resultado Encontrado",
+                "options": {
+                    "EUR": "Euro"
+                }
+            },
+            "payment_method": {
+                "label": "Método de Pagamento",
+                "placeholder": "Escolha uma opção...",
+                "nothingFound": "Nenhum Resultado Encontrado",
+                "options": {
+                    "0": "Pague ao motorista (navegante®️ a bordo)",
+                    "1": "Pague antes de embarcar (navegante®️ pré-pago, navegante®️)"
+                }
+            },
+            "transfers": {
+                "label": "Allow Transfers",
+                "placeholder": "Escolha uma opção...",
+                "nothingFound": "Nenhum Resultado Encontrado",
+                "options": {
+                    "0": "Transfers are not allowed",
+                    "1": "Only 1 transfer is allowed",
+                    "2": "Up to 2 transfers are allowed",
+                    "unlimited": "Unlimited transfers are allowed"
+                }
+            }
+        }
+    },
+    "municipalities": {
+        "untitled": "Município sem título",
+        "list": {
+            "no_selection": "Selecione um Município",
+            "footer": "{count, plural, one {}=1 {Encontrado 1 Município} other {Encontrados # Municípios}}"
+        },
+        "operations": {
+            "create": {
+                "title": "Criar Município",
+                "loading": "A criar Município...",
+                "success": "A new Municipality was created!",
+                "error": "An error occurred while creating this Municipality."
+            },
+            "delete": {
+                "title": "Eliminar Município",
+                "description": "Eliminar é irreversível. Tem certeza de que deseja eliminar este Município para sempre?",
+                "confirm": "Eliminar Município Definitivamente",
+                "cancel": "Não Eliminar",
+                "loading": "A eliminar Município...",
+                "success": "Municipality was deleted.",
+                "error": "An error occurred while deleting this Municipality."
+            }
+        },
+        "sections": {
+            "config": {
+                "title": "Detalhes"
+            }
+        },
+        "form": {
+            "code": {
+                "label": "Código do Município",
+                "placeholder": "T1"
+            },
+            "name": {
+                "label": "Nome do Município",
+                "placeholder": "Tarifa 1"
+            },
+            "district": {
+                "label": "Distrito",
+                "placeholder": "T1"
+            },
+            "dico": {
+                "label": "DICO",
+                "placeholder": "T1"
+            },
+            "nuts_iii": {
+                "label": "NUTS III",
+                "placeholder": "T1"
+            }
+        }
+    },
+    "lines": {
+        "untitled": "Linha sem título",
+        "list": {
+            "no_selection": "Selecione uma Linha",
+            "footer": "{count, plural, one {}=1 {Encontrada 1 Linha} other {Encontradas # Linhas}}"
+        },
+        "operations": {
+            "create": {
+                "title": "Criar Linha",
+                "loading": "A criar Linha...",
+                "success": "Foi criada uma nova Linha!",
+                "error": "Ocorreu um erro ao criar esta Linha."
+            },
+            "open_website": {
+                "title": "Abrir no Website"
+            },
+            "delete": {
+                "title": "Eliminar Linha",
+                "description": "Eliminar é irreversível. Tem certeza de que pretende eliminar esta Linha para sempre?",
+                "confirm": "Eliminar Linha Definitivamente",
+                "cancel": "Não Eliminar",
+                "loading": "A eliminar Linha...",
+                "success": "Linha eliminada.",
+                "error": "Ocorreu um erro ao eliminar esta Linha."
+            }
+        },
+        "sections": {
+            "config": {
+                "title": "Detalhes",
+                "description": "Algo sobre esta secção"
+            },
+            "routes": {
+                "title": "Rotas",
+                "description": "Algo sobre esta secção"
+            }
+        },
+        "form": {
+            "code": {
+                "label": "Código da Linha",
+                "placeholder": "1234"
+            },
+            "short_name": {
+                "label": "Número da Linha",
+                "placeholder": "1234"
+            },
+            "long_name": {
+                "label": "Nome da Linha",
+                "placeholder": "T1"
+            },
+            "color": {
+                "label": "Cor da Linha",
+                "placeholder": "#ED1A44"
+            },
+            "text_color": {
+                "label": "Cor do Texto",
+                "placeholder": "#FFFFFF"
+            },
+            "fare": {
+                "label": "Tarifa Associada",
+                "placeholder": "Selecionar Tarifa...",
+                "nothingFound": "Nenhum Resultado Encontrado"
+            },
+            "agency": {
+                "label": "Operate by this Agencies",
+                "description": "Choose one operator for this line.",
+                "placeholder": "Escolha uma opção...",
+                "nothingFound": "Nenhum Resultado Encontrado"
+            },
+            "routes": {
+                "create": {
+                    "title": "Criar Rota",
+                    "loading": "A criar Rota...",
+                    "success": "Foi criada uma nova Rota!",
+                    "error": "Ocorreu um erro ao criar esta Rota."
+                }
+            }
+        }
+    },
+    "routes": {
+        "untitled": "Rota sem título",
+        "operations": {
+            "delete": {
+                "title": "Eliminar Rota",
+                "description": "Eliminar é irreversível. Tem a certeza que pretende eliminar esta Rota para sempre?",
+                "confirm": "Eliminar Rota Definitivamente",
+                "cancel": "Não Eliminar",
+                "loading": "A eliminar Rota...",
+                "success": "Rota eliminada.",
+                "error": "Ocorreu um erro ao eliminar esta Rota."
+            }
+        },
+        "sections": {
+            "config": {
+                "title": "Detalhes"
+            },
+            "patterns": {
+                "title": "Patterns"
+            }
+        },
+        "form": {
+            "code": {
+                "label": "Código da Rota",
+                "placeholder": "1234_0"
+            },
+            "name": {
+                "label": "Nome da Rota",
+                "placeholder": "Origem - Destino (alternativa)"
+            },
+            "patterns": {
+                "create": {
+                    "title": "Criar Pattern",
+                    "loading": "A criar Pattern...",
+                    "success": "Foi criado um novo Pattern!",
+                    "error": "Ocorreu um erro ao criar este Pattern."
+                }
+            }
+        }
+    },
+    "patterns": {
+        "untitled": "Pattern sem título",
+        "direction": "{direction, plural, one {}=0 {Ida} =1 {Volta} other {Direction Error: < # > was found}}",
+        "operations": {
+            "delete": {
+                "title": "Eliminar Pattern",
+                "description": "Eliminar é irreversível. Tem a certeza que pretende eliminar este Pattern para sempre?",
+                "confirm": "Eliminar Pattern Definitivamente",
+                "cancel": "Não Eliminar",
+                "loading": "A eliminar Pattern...",
+                "success": "Pattern eliminado.",
+                "error": "Ocorreu um erro ao eliminar este Pattern."
+            }
+        },
+        "sections": {
+            "config": {
+                "title": "Detalhes",
+                "description": "Algo sobre esta secção"
+            },
+            "stops": {
+                "title": "Paragens",
+                "description": "Algo sobre esta secção"
+            },
+            "schedules": {
+                "title": "Horários",
+                "description": "Algo sobre esta secção"
+            }
+        },
+        "form": {
+            "code": {
+                "label": "Código do Pattern",
+                "placeholder": "1234"
+            },
+            "headsign": {
+                "label": "Bandeira",
+                "placeholder": "Destino (via Local Conhecido)",
+                "description": "Isto é o que deve ser exibido na bandeira do autocarro."
+            },
+            "shape": {
+                "label": "Shape Associada",
+                "placeholder": "Escolha uma opção...",
+                "description": "<link>Abrir numa nova janela.</link>",
+                "nothingFound": "Nenhum Resultado Encontrado",
+                "untitled": "Shape sem título"
+            }
+        }
+    },
+    "shapes": {
+        "untitled": "Shape sem título",
+        "list": {
+            "no_selection": "Selecione uma Shape",
+            "footer": "{count, plural, one {}=1 {Encontrada 1 Shape} other {Encontradas # Shapes}}"
+        },
+        "operations": {
+            "import": {
+                "title": "Criar Shape",
+                "loading": "A criar Shape...",
+                "success": "Foi criada uma nova Shape!",
+                "error": "Ocorreu um erro ao criar esta Shape."
+            },
+            "create": {
+                "title": "Criar Shape",
+                "loading": "A criar Shape...",
+                "success": "Foi criada uma nova Shape!",
+                "error": "Ocorreu um erro ao criar esta Shape."
+            },
+            "delete": {
+                "title": "Eliminar Shape",
+                "description": "Eliminar é irreversível. Tem certeza de que deseja eliminar esta Shape para sempre?",
+                "confirm": "Eliminar Shape Definitivamente",
+                "cancel": "Não Eliminar",
+                "loading": "A eliminar Shape...",
+                "success": "Shape eliminada.",
+                "error": "Ocorreu um erro ao eliminar esta Shape."
+            },
+            "delete_points": {
+                "title": "Eliminar Pontos da Shape",
+                "description": "Eliminar os pontos da Shape é irreversível. No entanto, esta operação não irá desassociar esta Shape do Pattern. Se novos pontos não forem importados irá ocorrer um erro ao exportar um GTFS. Tem a certeza que pretende eliminar os pontos desta Shape para sempre?",
+                "confirm": "Eliminar Pontos da Shape Definitivamente",
+                "cancel": "Não Eliminar",
+                "loading": "A eliminar Pontos da Shape...",
+                "success": "Pontos da Shape eliminados.",
+                "error": "Ocorreu um erro ao eliminar os pontos desta Shape."
+            },
+            "open_pattern": {
+                "title": "Open Pattern in New Tab"
+            }
+        },
+        "sections": {
+            "config": {
+                "title": "Detalhes da Shape",
+                "description": "Algo sobre esta secção"
+            },
+            "statistics": {
+                "title": "Estatísticas",
+                "description": "Algo sobre esta secção",
+                "cards": {
+                    "extension": "Shape Extension in Kilometers",
+                    "points_count": "Número de pontos"
+                }
+            },
+            "update": {
+                "title": "Atualizar Shape",
+                "description": "Algo sobre esta secção"
+            },
+            "points": {
+                "title": "Shape GTFS Points",
+                "description": "Algo sobre esta secção"
+            }
+        },
+        "form": {
+            "name": {
+                "label": "Nome da Shape",
+                "placeholder": "Shape da Linha 1234"
+            },
+            "code": {
+                "label": "Código da Shape",
+                "placeholder": "shp_1234_1_0"
+            }
+        }
+    },
+    "stops": {
+        "untitled": "Paragem sem título",
+        "list": {
+            "no_selection": "Selecione uma Paragem",
+            "footer": "{count, plural, one {}=1 {Encontrada 1 Paragem} other {Encontradas # Paragens}}"
+        },
+        "page": {
+            "title": "Todas as Paragens"
+        },
+        "operations": {
+            "recenter": {
+                "title": "Re-centrar Mapa"
+            },
+            "gmaps": {
+                "title": "Abrir no Google Maps"
+            },
+            "create": {
+                "title": "Criar Paragem",
+                "loading": "A criar Paragem...",
+                "success": "Foi criada uma nova Paragem!",
+                "error": "Ocorreu um erro ao criar esta Paragem."
+            },
+            "delete": {
+                "title": "Eliminar Paragem",
+                "description": "Eliminar é irreversível. Tem certeza de que deseja eliminar esta Paragem para sempre?",
+                "confirm": "Eliminar Paragem Definitivamente",
+                "cancel": "Não Eliminar",
+                "loading": "A eliminar Paragem...",
+                "success": "Paragem eliminada.",
+                "error": "Ocorreu um erro ao eliminar esta Paragem."
+            }
+        },
+        "sections": {
+            "config": {
+                "title": "Detalhes",
+                "description": "Info about this section"
+            },
+            "areas": {
+                "title": "Areas using this Stop",
+                "description": "Info about this section"
+            },
+            "admin": {
+                "title": "Informação Administrativa",
+                "description": "Info about this section"
+            },
+            "infrastructure": {
+                "title": "Infraestrutura",
+                "description": "Info about this section"
+            },
+            "public_info": {
+                "title": "Suportes de Informação ao Público",
+                "description": "Info about this section"
+            },
+            "accessibility": {
+                "title": "Acessibilidade",
+                "description": "Info about this section"
+            },
+            "services": {
+                "title": "Serviços",
+                "description": "Info about this section"
+            },
+            "connections": {
+                "title": "Ligações Modais",
+                "description": "Info about this section"
+            },
+            "notes": {
+                "title": "Notas Gerais e Comentários",
+                "description": "Info about this section"
+            }
+        },
+        "form": {
+            "code": {
+                "label": "Código da Paragem",
+                "placeholder": "012345"
+            },
+            "latitude": {
+                "label": "Latitude",
+                "placeholder": "38.123456"
+            },
+            "longitude": {
+                "label": "Longitude",
+                "placeholder": "-9.123456"
+            },
+            "name": {
+                "label": "Nome da Paragem",
+                "placeholder": "Rua Marquês de Pombal 8"
+            },
+            "short_name": {
+                "label": "Nome Abreviado",
+                "placeholder": "R. Mrq. de Pombal 8"
+            },
+            "tts_name": {
+                "label": "Nome Fonético",
+                "placeholder": "Rua Marquês de Pombal Porta Oito"
+            },
+            "agencies": {
+                "label": "Used by these Agencies",
+                "placeholder": "Choose Agencies...",
+                "nothingFound": "Nenhum Resultado Encontrado"
+            },
+            "address": {
+                "label": "Morada",
+                "placeholder": "Rua Marquês de Pombal 8"
+            },
+            "postal_code": {
+                "label": "Código Postal",
+                "placeholder": "1234-567"
+            },
+            "locality": {
+                "label": "Localidade",
+                "placeholder": "Bairro das Maçãs"
+            },
+            "region": {
+                "label": "Região",
+                "placeholder": "PT1234"
+            },
+            "municipality": {
+                "label": "Município",
+                "placeholder": "Moita",
+                "nothingFound": "Nenhum Resultado Encontrado"
+            },
+            "parish": {
+                "label": "Freguesia",
+                "placeholder": "Maçãs"
+            },
+            "jurisdiction": {
+                "label": "Jurisdição",
+                "placeholder": "CM Moita"
+            },
+            "stepp_id": {
+                "label": "Stepp ID",
+                "placeholder": "102030"
+            },
+            "has_pole": {
+                "label": "Tem Poste",
+                "placeholder": "Escolha uma opção...",
+                "nothingFound": "Nenhum Resultado Encontrado"
+            },
+            "pole_material": {
+                "label": "Material do Poste",
+                "placeholder": "Escolha uma opção..."
+            },
+            "has_shelter": {
+                "label": "Tem Abrigo",
+                "placeholder": "Escolha uma opção...",
+                "nothingFound": "Nenhum Resultado Encontrado"
+            },
+            "shelter_code": {
+                "label": "Código do Abrigo",
+                "placeholder": "SH1234"
+            },
+            "shelter_maintainer": {
+                "label": "Responsável pelo Abrigo",
+                "placeholder": "MOP"
+            },
+            "has_mupi": {
+                "label": "Tem Mupi",
+                "placeholder": "Escolha uma opção...",
+                "nothingFound": "Nenhum Resultado Encontrado"
+            },
+            "has_bench": {
+                "label": "Tem Banco",
+                "placeholder": "Escolha uma opção...",
+                "nothingFound": "Nenhum Resultado Encontrado"
+            },
+            "has_trash_bin": {
+                "label": "Tem Papeleira",
+                "placeholder": "Escolha uma opção...",
+                "nothingFound": "Nenhum Resultado Encontrado"
+            },
+            "has_lighting": {
+                "label": "Tem Iluminação",
+                "placeholder": "Escolha uma opção...",
+                "nothingFound": "Nenhum Resultado Encontrado"
+            },
+            "has_electricity": {
+                "label": "Tem Eletricidade",
+                "placeholder": "Escolha uma opção...",
+                "nothingFound": "Nenhum Resultado Encontrado"
+            },
+            "docking_bay_type": {
+                "label": "Docking Bay Type",
+                "placeholder": "Escolha uma opção...",
+                "nothingFound": "Nenhum Resultado Encontrado"
+            },
+            "last_infrastructure_maintenance": {
+                "label": "Última Manutenção da Infraestrutura",
+                "placeholder": "2023-02-10"
+            },
+            "last_infrastructure_check": {
+                "label": "Último Verificação da Infraestrutura",
+                "placeholder": "2023-02-10"
+            },
+            "has_stop_sign": {
+                "label": "Tem Postalete",
+                "placeholder": "Escolha uma opção...",
+                "nothingFound": "Nenhum Resultado Encontrado"
+            },
+            "stop_sign_maintainer": {
+                "label": "Responsável pelo Postalete",
+                "placeholder": "Alsa Todi"
+            },
+            "has_pole_frame": {
+                "label": "Tem Moldura no Poste",
+                "placeholder": "Escolha uma opção...",
+                "nothingFound": "Nenhum Resultado Encontrado"
+            },
+            "shelter_frame_area_cm": {
+                "label": "Área da Moldura do Abrigo (H x W cm)",
+                "placeholder": "23 x 42 cm"
+            },
+            "has_pip_real_time": {
+                "label": "Tem PIP Tempo Real",
+                "placeholder": "Escolha uma opção...",
+                "nothingFound": "Nenhum Resultado Encontrado"
+            },
+            "pip_real_time_code": {
+                "label": "Código do PIP Tempo Real",
+                "placeholder": "PIP372"
+            },
+            "has_h2oa_signage": {
+                "label": "Tem Sinalética H2OA",
+                "placeholder": "Escolha uma opção...",
+                "nothingFound": "Nenhum Resultado Encontrado"
+            },
+            "has_schedules": {
+                "label": "Tem Horários",
+                "placeholder": "Escolha uma opção...",
+                "nothingFound": "Nenhum Resultado Encontrado"
+            },
+            "has_network_map": {
+                "label": "Tem Mapa da Rede",
+                "placeholder": "Escolha uma opção...",
+                "nothingFound": "Nenhum Resultado Encontrado"
+            },
+            "last_schedules_maintenance": {
+                "label": "Última Atualização de Horários",
+                "placeholder": "2023-02-10"
+            },
+            "last_schedules_check": {
+                "label": "Última Verificação de Horários",
+                "placeholder": "2023-02-10"
+            },
+            "last_stop_sign_maintenance": {
+                "label": "Última Manutenção do Postalete",
+                "placeholder": "2023-02-10"
+            },
+            "last_stop_sign_check": {
+                "label": "Última Verificação do Postalete",
+                "placeholder": "2023-02-10"
+            },
+            "has_sidewalk": {
+                "label": "Tem Passeio",
+                "placeholder": "Escolha uma opção...",
+                "nothingFound": "Nenhum Resultado Encontrado"
+            },
+            "sidewalk_type": {
+                "label": "Tipo de Passeio",
+                "placeholder": "sidewalk_type"
+            },
+            "has_tactile_schedules": {
+                "label": "Tem Horários Táteis",
+                "placeholder": "Escolha uma opção...",
+                "nothingFound": "Nenhum Resultado Encontrado"
+            },
+            "stop_access_type": {
+                "label": "Tipo de Acesso à Paragem",
+                "placeholder": "Escolha uma opção...",
+                "nothingFound": "Nenhum Resultado Encontrado"
+            },
+            "has_crosswalk": {
+                "label": "Tem Passadeira",
+                "placeholder": "Escolha uma opção...",
+                "nothingFound": "Nenhum Resultado Encontrado"
+            },
+            "has_tactile_pavement": {
+                "label": "Tem Pavimento Tátil",
+                "placeholder": "Escolha uma opção...",
+                "nothingFound": "Nenhum Resultado Encontrado"
+            },
+            "has_abusive_parking": {
+                "label": "Tem Estacionamento Abusivo",
+                "placeholder": "Escolha uma opção...",
+                "nothingFound": "Nenhum Resultado Encontrado"
+            },
+            "has_audio_stop_info": {
+                "label": "Tem Informação Áudio",
+                "placeholder": "Escolha uma opção...",
+                "nothingFound": "Nenhum Resultado Encontrado"
+            },
+            "wheelchair_boarding": {
+                "label": "Permite Embarque por PMR",
+                "placeholder": "Escolha uma opção...",
+                "nothingFound": "Nenhum Resultado Encontrado"
+            },
+            "last_accessibility_check": {
+                "label": "Última Verificação de Acessibilidade",
+                "placeholder": "2023-02-10"
+            },
+            "near_health_clinic": {
+                "label": "Centro de Saúde"
+            },
+            "near_hospital": {
+                "label": "Hospital"
+            },
+            "near_university": {
+                "label": "Universidade"
+            },
+            "near_school": {
+                "label": "Escola"
+            },
+            "near_police_station": {
+                "label": "Esquadra"
+            },
+            "near_fire_station": {
+                "label": "Bombeiros"
+            },
+            "near_shopping": {
+                "label": "Comércio"
+            },
+            "near_historic_building": {
+                "label": "Zona Histórica"
+            },
+            "near_transit_office": {
+                "label": "Espaço navegante®"
+            },
+            "subway": {
+                "label": "Metro"
+            },
+            "light_rail": {
+                "label": "Metro de Superfície"
+            },
+            "train": {
+                "label": "Comboio"
+            },
+            "boat": {
+                "label": "Barco"
+            },
+            "airport": {
+                "label": "Aeroporto"
+            },
+            "bike_sharing": {
+                "label": "Bicicletas Partilhadas"
+            },
+            "bike_parking": {
+                "label": "Estacionamento de Bicicletas"
+            },
+            "car_parking": {
+                "label": "Estacionamento Automóvel"
+            },
+            "notes": {
+                "label": "Notas & Comentários sobre esta paragem",
+                "placeholder": "Construção planeada em..."
+            }
+        }
+    },
+    "threads": {
+        "untitled": "Untitled Thread",
+        "list": {
+            "no_selection": "Please Select a Thread",
+            "no_data": "No Threads Found",
+            "footer": "Found {count, plural, =1 {1 Thread} other {# Threads}}"
+        },
+        "operations": {
+            "close": {
+                "title": "Close Thread"
+            },
+            "create": {
+                "title": "Create New Thread",
+                "loading": "Creating new Thread...",
+                "success": "A new Thread was created!",
+                "error": "An error occurred while creating this Thread."
+            },
+            "delete": {
+                "title": "Delete Thread",
+                "description": "Deleting is irreversible. Are you sure you want to delete this Thread forever?",
+                "confirm": "Delete Thread Forever",
+                "cancel": "Não Eliminar",
+                "loading": "Deleting Thread...",
+                "success": "Thread was deleted.",
+                "error": "An error occurred while deleting this Thread."
+            }
+        },
+        "sections": {
+            "config": {
+                "title": "Detalhes"
+            }
+        },
+        "form": {
+            "subject": {
+                "label": "Thread Subject",
+                "placeholder": "Misplaced Stop"
+            },
+            "theme": {
+                "label": "Theme for this Thread",
+                "placeholder": "Escolha uma opção...",
+                "nothingFound": "Nenhum Resultado Encontrado",
+                "options": {
+                    "stops": "Paragens",
+                    "lines": "Linhas",
+                    "schedules": "Horários"
+                }
+            },
+            "status": {
+                "placeholder": "Escolha uma opção...",
+                "nothingFound": "Nenhum Resultado Encontrado",
+                "options": {
+                    "open": "Thread is open",
+                    "resolved": "Resolved"
+                }
+            },
+            "associated_lines": {
+                "label": "Lines Associated with this Thread",
+                "placeholder": "Escolha uma opção...",
+                "nothingFound": "Nenhum Resultado Encontrado"
+            },
+            "associated_stops": {
+                "label": "Stops Associated with this Thread",
+                "placeholder": "Escolha uma opção...",
+                "nothingFound": "Nenhum Resultado Encontrado"
+            }
+        },
+        "messages": {
+            "content": {
+                "placeholder": "Misplaced Stop"
+            }
+        }
+    },
+    "users": {
+        "untitled": "Utilizador sem título",
+        "list": {
+            "no_selection": "Selecione um Utilizador",
+            "footer": "{count, plural, one {}=1 {Encontrado 1 Utilizador} other {Encontrados # Utilizadores}}"
+        },
+        "operations": {
+            "create": {
+                "title": "Criar Utilizador",
+                "loading": "A criar Utilizador...",
+                "success": "Foi criado um novo Utilizador!",
+                "error": "Ocorreu um erro ao criar este Utilizador."
+            },
+            "delete": {
+                "title": "Eliminar Utilizador",
+                "description": "Eliminar é irreversível. Tem certeza de que deseja eliminar este Utilizador para sempre?",
+                "confirm": "Eliminar Utilizador Definitivamente",
+                "cancel": "Não Eliminar",
+                "loading": "A eliminar Utilizador...",
+                "success": "Utilizador eliminado.",
+                "error": "Ocorreu um erro ao eliminar este Utilizador."
+            }
+        },
+        "sections": {
+            "config": {
+                "title": "Detalhes do Utilizador",
+                "description": "About this section"
+            }
+        },
+        "form": {
+            "name": {
+                "label": "Primeiro e Último Nome",
+                "placeholder": "Alberto Soares"
+            },
+            "email": {
+                "label": "Email",
+                "placeholder": "primeiro.ultimo@tmlmobilidade.pt"
+            },
+            "phone": {
+                "label": "Número de Telefone",
+                "placeholder": "+351 912 345 678"
+            },
+            "agencies": {
+                "label": "Operadores Associados",
+                "placeholder": "Escolha uma opção...",
+                "nothingFound": "Nenhum Resultado Encontrado"
+            },
+            "municipalities": {
+                "label": "Municípios Associados",
+                "placeholder": "Escolha uma opção...",
+                "nothingFound": "Nenhum Resultado Encontrado"
+            },
+            "permissions": {
+                "agencies": {
+                    "title": "Operadores",
+                    "description": "Dolore officia dolore aliqua laboris est pariatur non cupidatat sit qui cupidatat adipisicing nulla.",
+                    "view": {
+                        "label": "Ver Operadores",
+                        "description": "Dolore officia dolore aliqua laboris est pariatur non cupidatat sit qui cupidatat adipisicing nulla."
+                    },
+                    "create_edit": {
+                        "label": "Criar & Editar Operadores",
+                        "description": "Dolore officia dolore aliqua laboris est pariatur non cupidatat sit qui cupidatat adipisicing nulla."
+                    },
+                    "delete": {
+                        "label": "Eliminar Operadores",
+                        "description": "Dolore officia dolore aliqua laboris est pariatur non cupidatat sit qui cupidatat adipisicing nulla."
+                    }
+                },
+                "export": {
+                    "title": "Exportar GTFS",
+                    "description": "Dolore officia dolore aliqua laboris est pariatur non cupidatat sit qui cupidatat adipisicing nulla.",
+                    "view": {
+                        "label": "Ver Página de Exportação",
+                        "description": "Dolore officia dolore aliqua laboris est pariatur non cupidatat sit qui cupidatat adipisicing nulla."
+                    },
+                    "gtfs_v18": {
+                        "label": "Exportar GTFS v18",
+                        "description": "Dolore officia dolore aliqua laboris est pariatur non cupidatat sit qui cupidatat adipisicing nulla."
+                    },
+                    "gtfs_v29": {
+                        "label": "Exportar GTFS v29",
+                        "description": "Dolore officia dolore aliqua laboris est pariatur non cupidatat sit qui cupidatat adipisicing nulla."
+                    },
+                    "agencies": {
+                        "label": "Can Export data from these Agencies",
+                        "placeholder": "Escolha uma opção...",
+                        "nothingFound": "Nenhum Resultado Encontrado"
+                    }
+                },
+                "users": {
+                    "title": "Utilizadores",
+                    "description": "Dolore officia dolore aliqua laboris est pariatur non cupidatat sit qui cupidatat adipisicing nulla.",
+                    "view": {
+                        "label": "Ver Utilizadores",
+                        "description": "Dolore officia dolore aliqua laboris est pariatur non cupidatat sit qui cupidatat adipisicing nulla."
+                    },
+                    "create_edit": {
+                        "label": "Criar & Editar Utilizadores",
+                        "description": "Dolore officia dolore aliqua laboris est pariatur non cupidatat sit qui cupidatat adipisicing nulla."
+                    },
+                    "delete": {
+                        "label": "Eliminar Utilizadores",
+                        "description": "Dolore officia dolore aliqua laboris est pariatur non cupidatat sit qui cupidatat adipisicing nulla."
+                    },
+                    "export": {
+                        "label": "Exportar Utilizadores",
+                        "description": "Dolore officia dolore aliqua laboris est pariatur non cupidatat sit qui cupidatat adipisicing nulla."
+                    }
+                },
+                "lines": {
+                    "title": "Linhas, Rotas & Patterns",
+                    "description": "Dolore officia dolore aliqua laboris est pariatur non cupidatat sit qui cupidatat adipisicing nulla.",
+                    "view": {
+                        "label": "Ver Linhas, Rotas & Patterns",
+                        "description": "Dolore officia dolore aliqua laboris est pariatur non cupidatat sit qui cupidatat adipisicing nulla."
+                    },
+                    "create_edit": {
+                        "label": "Criar & Editar Linhas, Rotas & Patterns",
+                        "description": "Dolore officia dolore aliqua laboris est pariatur non cupidatat sit qui cupidatat adipisicing nulla."
+                    },
+                    "delete": {
+                        "label": "Eliminar Linhas, Rotas & Patterns",
+                        "description": "Dolore officia dolore aliqua laboris est pariatur non cupidatat sit qui cupidatat adipisicing nulla."
+                    },
+                    "agencies": {
+                        "label": "Can Edit and/or Delete Lines, Routes & Patterns from these Agencies",
+                        "placeholder": "Escolha uma opção...",
+                        "nothingFound": "Nenhum Resultado Encontrado"
+                    }
+                },
+                "fares": {
+                    "title": "Tarifas",
+                    "description": "Dolore officia dolore aliqua laboris est pariatur non cupidatat sit qui cupidatat adipisicing nulla.",
+                    "view": {
+                        "label": "Ver Tarifas",
+                        "description": "Dolore officia dolore aliqua laboris est pariatur non cupidatat sit qui cupidatat adipisicing nulla."
+                    },
+                    "create_edit": {
+                        "label": "Criar & Editar Tarifas",
+                        "description": "Dolore officia dolore aliqua laboris est pariatur non cupidatat sit qui cupidatat adipisicing nulla."
+                    },
+                    "delete": {
+                        "label": "Eliminar Tarifas",
+                        "description": "Dolore officia dolore aliqua laboris est pariatur non cupidatat sit qui cupidatat adipisicing nulla."
+                    }
+                },
+                "stops": {
+                    "title": "Paragens",
+                    "description": "Dolore officia dolore aliqua laboris est pariatur non cupidatat sit qui cupidatat adipisicing nulla.",
+                    "view": {
+                        "label": "Ver Paragens",
+                        "description": "Dolore officia dolore aliqua laboris est pariatur non cupidatat sit qui cupidatat adipisicing nulla."
+                    },
+                    "propose": {
+                        "label": "Propor Alterações a Paragens",
+                        "description": "Dolore officia dolore aliqua laboris est pariatur non cupidatat sit qui cupidatat adipisicing nulla."
+                    },
+                    "create_edit": {
+                        "label": "Criar & Editar Paragens",
+                        "description": "Dolore officia dolore aliqua laboris est pariatur non cupidatat sit qui cupidatat adipisicing nulla."
+                    },
+                    "edit_code": {
+                        "label": "Editar Códigos de Paragens",
+                        "description": "Dolore officia dolore aliqua laboris est pariatur non cupidatat sit qui cupidatat adipisicing nulla."
+                    },
+                    "delete": {
+                        "label": "Eliminar Paragens",
+                        "description": "Dolore officia dolore aliqua laboris est pariatur non cupidatat sit qui cupidatat adipisicing nulla."
+                    },
+                    "municipalities": {
+                        "label": "Can Edit / Delete / Suggest Stops from these Municipalities",
+                        "placeholder": "Escolha uma opção...",
+                        "nothingFound": "Nenhum Resultado Encontrado"
+                    }
+                },
+                "municipalities": {
+                    "title": "Municípios",
+                    "description": "Dolore officia dolore aliqua laboris est pariatur non cupidatat sit qui cupidatat adipisicing nulla.",
+                    "view": {
+                        "label": "Ver Municípios",
+                        "description": "Dolore officia dolore aliqua laboris est pariatur non cupidatat sit qui cupidatat adipisicing nulla."
+                    },
+                    "create_edit": {
+                        "label": "Criar & Editar Municípios",
+                        "description": "Dolore officia dolore aliqua laboris est pariatur non cupidatat sit qui cupidatat adipisicing nulla."
+                    },
+                    "delete": {
+                        "label": "Eliminar Municípios",
+                        "description": "Dolore officia dolore aliqua laboris est pariatur non cupidatat sit qui cupidatat adipisicing nulla."
+                    }
+                },
+                "alerts": {
+                    "title": "Alertas",
+                    "description": "Dolore officia dolore aliqua laboris est pariatur non cupidatat sit qui cupidatat adipisicing nulla.",
+                    "view": {
+                        "label": "Ver Alertas",
+                        "description": "Dolore officia dolore aliqua laboris est pariatur non cupidatat sit qui cupidatat adipisicing nulla."
+                    },
+                    "create_edit": {
+                        "label": "Criar & Editar Alertas",
+                        "description": "Dolore officia dolore aliqua laboris est pariatur non cupidatat sit qui cupidatat adipisicing nulla."
+                    },
+                    "publish": {
+                        "label": "Publicar Alertas",
+                        "description": "Dolore officia dolore aliqua laboris est pariatur non cupidatat sit qui cupidatat adipisicing nulla."
+                    },
+                    "delete": {
+                        "label": "Eliminar Alertas",
+                        "description": "Dolore officia dolore aliqua laboris est pariatur non cupidatat sit qui cupidatat adipisicing nulla."
+                    }
+                },
+                "shapes": {
+                    "title": "Shapes",
+                    "description": "Dolore officia dolore aliqua laboris est pariatur non cupidatat sit qui cupidatat adipisicing nulla.",
+                    "view": {
+                        "label": "Ver Shapes",
+                        "description": "Dolore officia dolore aliqua laboris est pariatur non cupidatat sit qui cupidatat adipisicing nulla."
+                    },
+                    "create_edit": {
+                        "label": "Criar & Editar Shapes",
+                        "description": "Dolore officia dolore aliqua laboris est pariatur non cupidatat sit qui cupidatat adipisicing nulla."
+                    },
+                    "bulk_import": {
+                        "label": "Bulk Import Shapes",
+                        "description": "Dolore officia dolore aliqua laboris est pariatur non cupidatat sit qui cupidatat adipisicing nulla."
+                    },
+                    "delete": {
+                        "label": "Eliminar Shapes",
+                        "description": "Dolore officia dolore aliqua laboris est pariatur non cupidatat sit qui cupidatat adipisicing nulla."
+                    }
+                },
+                "calendars": {
+                    "title": "Calendários",
+                    "description": "Dolore officia dolore aliqua laboris est pariatur non cupidatat sit qui cupidatat adipisicing nulla.",
+                    "view": {
+                        "label": "Ver Calendários",
+                        "description": "Dolore officia dolore aliqua laboris est pariatur non cupidatat sit qui cupidatat adipisicing nulla."
+                    },
+                    "create_edit": {
+                        "label": "Criar & Editar Calendários",
+                        "description": "Dolore officia dolore aliqua laboris est pariatur non cupidatat sit qui cupidatat adipisicing nulla."
+                    },
+                    "delete": {
+                        "label": "Eliminar Calendários",
+                        "description": "Dolore officia dolore aliqua laboris est pariatur non cupidatat sit qui cupidatat adipisicing nulla."
+                    }
+                },
+                "dates": {
+                    "title": "Datas",
+                    "description": "Dolore officia dolore aliqua laboris est pariatur non cupidatat sit qui cupidatat adipisicing nulla.",
+                    "view": {
+                        "label": "Ver Datas",
+                        "description": "Dolore officia dolore aliqua laboris est pariatur non cupidatat sit qui cupidatat adipisicing nulla."
+                    },
+                    "create_edit": {
+                        "label": "Criar & Editar Datas",
+                        "description": "Dolore officia dolore aliqua laboris est pariatur non cupidatat sit qui cupidatat adipisicing nulla."
+                    },
+                    "delete": {
+                        "label": "Eliminar Datas",
+                        "description": "Dolore officia dolore aliqua laboris est pariatur non cupidatat sit qui cupidatat adipisicing nulla."
+                    }
+                },
+                "threads": {
+                    "title": "Mensagens",
+                    "description": "Dolore officia dolore aliqua laboris est pariatur non cupidatat sit qui cupidatat adipisicing nulla.",
+                    "view": {
+                        "label": "View Threads",
+                        "description": "Dolore officia dolore aliqua laboris est pariatur non cupidatat sit qui cupidatat adipisicing nulla."
+                    },
+                    "create_edit": {
+                        "label": "Create & Edit Threads",
+                        "description": "Dolore officia dolore aliqua laboris est pariatur non cupidatat sit qui cupidatat adipisicing nulla."
+                    },
+                    "delete": {
+                        "label": "Delete Threads",
+                        "description": "Dolore officia dolore aliqua laboris est pariatur non cupidatat sit qui cupidatat adipisicing nulla."
+                    }
+                }
+            }
+        }
+    },
+    "AppOptions": {
+        "language": {
+            "label": "Idioma",
+            "locale": "{locale, select, en {English} pt {Português} other {Desconhecido}}"
+        },
+        "auth": {
+            "logout": "Terminar Sessão"
+        },
+        "version": {
+            "label": "Versão"
+        }
+    },
+    "AppSidebar": {
+        "statistics": "Estatísticas",
+        "alerts": "Alertas",
+        "stops": "Paragens",
+        "lines": "Linhas",
+        "calendars": "Calendários",
+        "shapes": "Shapes",
+        "fares": "Tarifas",
+        "agencies": "Operadores",
+        "threads": "Mensagens",
+        "export": "Exportar",
+        "users": "Utilizadores"
+    },
+    "NoDataLabel": {
+        "title": "Sem Dados Disponíveis"
+    },
+    "UserActivityBadge": {
+        "was_active": "Ativo há {value}",
+        "was_never_active": "Este utilizador nunca iniciou sessão"
+    },
+    "BulkImportFileSelect": {
+        "dropzone": {
+            "idle": {
+                "title": "Adicione um ficheiro shapes.txt para importar em lote",
+                "description": "Este processo irá criar novas shapes. Será necessário posteriormente associar estas shapes aos patterns."
+            },
+            "accept": {
+                "title": "Largue para iniciar a importação",
+                "description": "Este processo irá criar novas shapes. Será necessário posteriormente associar estas shapes aos patterns."
+            },
+            "reject": {
+                "title": "Adicione apenas ficheiros TXT ou CSV",
+                "description": "Não é possível aceitar esta seleção."
+            }
+        },
+        "parsing_error": {
+            "title": "Ocorreu um erro na importação",
+            "description": "Não foi possível importar o(s) ficheiro(s). Por favor verifique a formatação."
+        }
+    },
+    "SearchField": {
+        "placeholder": "Procurar..."
+    },
+    "AutoSave": {
+        "retry": {
+            "title": "A tentar novamente..."
+        },
+        "idle": {
+            "close": {
+                "title": "Fechar"
+            },
+            "back": {
+                "title": "Voltar"
+            }
+        }
+    },
+    "ImportShapeFromGTFS": {
+        "title": "Estas são as Shapes encontradas no GTFS carregado:",
+        "clear": {
+            "title": "Limpar Tabela"
+        },
+        "import": {
+            "success": "Pontos da Shape importados! ({shape_id})"
+        },
+        "table": {
+            "header": {
+                "route_id": "Route ID",
+                "trip_headsign": "Bandeira",
+                "shape_id": "Shape ID",
+                "import": "Importar"
+            },
+            "body": {
+                "import": {
+                    "title": "Importar Pontos da Shape",
+                    "description": "Isto substituirá imediatamente todos os pontos desta Shape. Esta operação é irreversível."
+                }
+            }
+        }
+    },
+    "GTFSParser": {
+        "idle": {
+            "title": "Coloque aqui o ficheiro GTFS exportado do Remix, ou clique para selecionar numa pasta.",
+            "description": "Por favor, escolha apenas um ficheiro com menos de {max_file_size_value} {max_file_size_unit}."
+        },
+        "accept": {
+            "title": "Agora largue!",
+            "description": "Largue aqui para enviar."
+        },
+        "reject": {
+            "title": "O ficheiro selecionado não pode ser aceite.",
+            "description": "Tem a certeza que selecionou o ficheiro .zip exportado do Remix?"
+        }
+    }
+}

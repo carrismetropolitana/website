@@ -1,0 +1,12 @@
+:root {
+  /* SIZES */
+  --size-xs: 5px;
+  --size-sm: 10px;
+  --size-md: 15px;
+  --size-lg: 25px;
+
+  /* FONTS */
+  --font-sm: 12px;
+  --font-md: 14px;
+  --font-lg: 18px;
+}

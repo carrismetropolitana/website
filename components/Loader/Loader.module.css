@@ -1,0 +1,38 @@
+.spinner {
+  border-style: solid;
+  border-color: var(--gray3);
+  border-top-color: var(--gray6);
+  border-radius: 999px;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+.full,
+.fixed {
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  backdrop-filter: blur(4px);
+  background-color: var(--gray0-25);
+}
+
+.full {
+  position: absolute;
+}
+
+.fixed {
+  position: fixed;
+}

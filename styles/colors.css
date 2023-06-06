@@ -1,0 +1,225 @@
+:root {
+  /* ACCENT */
+  --primary1: #ffffc8;
+  --primary2: #ffff8c;
+  --primary3: #fff050;
+  --primary4: #ffe632;
+  --primary5: #ffdd00;
+  --primary6: #ffcd00;
+  --primary7: #ffb900;
+  --primary8: #f5a000;
+  --primary9: #e68c00;
+
+  /* TRANSPARENTS */
+  --gray0-15: rgba(255, 255, 255, 0.15);
+  --gray0-25: rgba(255, 255, 255, 0.25);
+  --gray0-50: rgba(255, 255, 255, 0.5);
+
+  /* GRAYS */
+  --reference-0: #ffffff;
+  --gray0: #f8f9fa;
+  --gray1: #f1f3f5;
+  --gray2: #e9ecef;
+  --gray3: #dee2e6;
+  --gray4: #ced4da;
+  --gray5: #adb5bd;
+  --gray6: #868e96;
+  --gray7: #495057;
+  --gray8: #343a40;
+  --gray9: #212529;
+  --reference-1: #000000;
+
+  /* STATUS-SUCCESS */
+  --success0: #ebfbee;
+  --success1: #d3f9d8;
+  --success2: #b2f2bb;
+  --success3: #8ce99a;
+  --success4: #69db7c;
+  --success5: #51cf66;
+  --success6: #40c057;
+  --success7: #37b24d;
+  --success8: #2f9e44;
+  --success9: #2b8a3e;
+
+  /* STATUS-WARNING */
+  --warning1: #fff8cc;
+  --warning2: #ffef99;
+  --warning3: #ffe466;
+  --warning4: #ffda3f;
+  --warning5: #ffc800;
+  --warning6: #dba700;
+  --warning7: #b78700;
+  --warning8: #936a00;
+  --warning9: #7a5500;
+
+  /* STATUS-DANGER */
+  --danger0: #fff5f5;
+  --danger1: #ffe3e3;
+  --danger2: #ffc9c9;
+  --danger3: #ffa8a8;
+  --danger4: #ff8787;
+  --danger5: #ff6b6b;
+  --danger6: #fa5252;
+  --danger7: #f03e3e;
+  --danger8: #e03131;
+  --danger9: #c92a2a;
+
+  /* STATUS-INFO */
+  --info1: #e7f5ff;
+  --info2: #d0ebff;
+  --info3: #79caf7;
+  --info4: #57b0f0;
+  --info5: #228be6;
+  --info6: #196cc5;
+  --info7: #1150a5;
+  --info8: #0b3885;
+  --info9: #06286e;
+
+  /* SIZES */
+  --size-xs: 5px;
+  --size-sm: 10px;
+  --size-md: 15px;
+  --size-lg: 25px;
+
+  /* FONTS */
+  --font-sm: 12px;
+  --font-md: 14px;
+  --font-lg: 18px;
+
+  /* PERIODO ESCOLAR */
+  --period-1-text-idle: #0759d3;
+  --period-1-note-idle: #0759d3;
+  --period-1-background-idle: #e2edfe;
+
+  --period-1-text-hover: #054098;
+  --period-1-note-hover: #054098;
+  --period-1-background-hover: #a5c8fc;
+
+  --period-1-text-active: #e2edfe;
+  --period-1-note-active: #e2edfe;
+  --period-1-background-active: #0759d3;
+
+  --period-1-text-active-hover: #e2edfe;
+  --period-1-note-active-hover: #e2edfe;
+  --period-1-background-active-hover: #0647a8;
+
+  /* PERIODO DE FERIAS */
+  --period-2-text-idle: #629c31;
+  --period-2-note-idle: #629c31;
+  --period-2-background-idle: #e1f1d3;
+
+  --period-2-text-hover: #477123;
+  --period-2-note-hover: #477123;
+  --period-2-background-hover: #c2e3a6;
+
+  --period-2-text-active: #e1f1d3;
+  --period-2-note-active: #e1f1d3;
+  --period-2-background-active: #629c31;
+
+  --period-2-text-active-hover: #e1f1d3;
+  --period-2-note-active-hover: #e1f1d3;
+  --period-2-background-active-hover: #548926;
+
+  /* PERIODO DE VERAO */
+  --period-3-text-idle: #ab7500;
+  --period-3-note-idle: #ab7500;
+  --period-3-background-idle: #ffeabd;
+
+  --period-3-text-hover: #926400;
+  --period-3-note-hover: #926400;
+  --period-3-background-hover: #ffd883;
+
+  --period-3-text-active: #ffeabd;
+  --period-3-note-active: #ffeabd;
+  --period-3-background-active: #ab7500;
+
+  --period-3-text-active-hover: #ffeabd;
+  --period-3-note-active-hover: #ffeabd;
+  --period-3-background-active-hover: #956600;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    /* TRANSPARENTS */
+    --gray0-15: rgba(0, 0, 0, 0.15);
+    --gray0-25: rgba(0, 0, 0, 0.25);
+    --gray0-50: rgba(0, 0, 0, 0.5);
+
+    /* GRAYS (Mantine Defaults) */
+    --reference-0: #000000;
+    --gray0: #101113;
+    --gray1: #141517;
+    --gray2: #1a1b1e;
+    --gray3: #25262b;
+    --gray4: #2c2e33;
+    --gray5: #373a40;
+    --gray6: #5c5f66;
+    --gray7: #909296;
+    --gray8: #a6a7ab;
+    --gray9: #c1c2c5;
+    --reference-1: #ffffff;
+
+    /* GRAYS (Github Inspired) */
+    /* --gray9: #ffffff; */
+    /* --gray8: #ced4da; */
+    /* --gray7: #adb5bd; */
+    /* --gray6: #868e96; */
+    /* --gray5: #495057; */
+    /* --gray4: #373e47; */
+    /* --gray3: #2d333b; */
+    /* --gray2: #22272e; */
+    /* --gray1: #1c2128; */
+    /* --gray0: #000000; */
+
+    /* PERIODO ESCOLAR */
+    --period-1-text-idle: #2971dc;
+    --period-1-note-idle: #2971dc;
+    --period-1-background-idle: rgb(5, 64, 152, 0.25);
+
+    --period-1-text-hover: #92beff;
+    --period-1-note-hover: #92beff;
+    --period-1-background-hover: rgba(5, 64, 152, 0.75);
+
+    --period-1-text-active: #d9e8ff;
+    --period-1-note-active: #d9e8ff;
+    --period-1-background-active: #0759d3;
+
+    --period-1-text-active-hover: #d9e8ff;
+    --period-1-note-active-hover: #d9e8ff;
+    --period-1-background-active-hover: #1869e1;
+
+    /* PERIODO DE FERIAS */
+    --period-2-text-idle: #629c31;
+    --period-2-note-idle: #629c31;
+    --period-2-background-idle: rgba(98, 156, 49, 0.25);
+
+    --period-2-text-hover: #a8ea72;
+    --period-2-note-hover: #a8ea72;
+    --period-2-background-hover: rgba(98, 156, 49, 0.5);
+
+    --period-2-text-active: #e4ffce;
+    --period-2-note-active: #e4ffce;
+    --period-2-background-active: #629c31;
+
+    --period-2-text-active-hover: #e4ffce;
+    --period-2-note-active-hover: #e4ffce;
+    --period-2-background-active-hover: #72b63b;
+
+    /* PERIODO DE VERAO */
+    --period-3-text-idle: #ab7500;
+    --period-3-note-idle: #ab7500;
+    --period-3-background-idle: rgba(171, 117, 0, 0.25);
+
+    --period-3-text-hover: #f0ac19;
+    --period-3-note-hover: #f0ac19;
+    --period-3-background-hover: rgba(171, 117, 0, 0.6);
+
+    --period-3-text-active: #ffe4aa;
+    --period-3-note-active: #ffe4aa;
+    --period-3-background-active: #9b6a00;
+
+    --period-3-text-active-hover: #ffe4aa;
+    --period-3-note-active-hover: #ffe4aa;
+    --period-3-background-active-hover: #ab7603;
+  }
+}
