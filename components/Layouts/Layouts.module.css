@@ -1,0 +1,41 @@
+.baseLayout {
+  display: grid;
+  grid-template-rows: 1fr;
+  align-items: stretch;
+  justify-content: stretch;
+  gap: var(--size-sm);
+  width: 100%;
+  height: 100%;
+  flex-grow: 1;
+  position: relative;
+  width: 100%;
+}
+
+.innerWrapper {
+  width: 100%;
+  height: 100%;
+  flex-grow: 1;
+  position: relative;
+  width: 100%;
+}
+
+.oneFullColumn {
+  grid-template-columns: 1fr;
+}
+
+.twoUnevenColumns {
+  grid-template-columns: 350px 1fr;
+}
+
+.threeEvenColumns {
+  grid-template-columns: 1fr 1fr 1fr;
+}
+
+/* SECTION */
+.section {
+  display: flex;
+  flex-direction: column;
+  padding: var(--size-lg);
+  gap: var(--size-md);
+  width: 100%;
+}
