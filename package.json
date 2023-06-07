@@ -20,11 +20,19 @@
         "@mantine/next": "^6.0.13",
         "@mantine/notifications": "^6.0.13",
         "@tabler/icons-react": "^2.21.0",
+        "@turf/turf": "^6.5.0",
+        "dayjs": "^1.11.8",
         "eslint": "8.42.0",
         "eslint-config-next": "13.4.4",
+        "inflected": "^2.1.0",
+        "mapbox-gl": "npm:empty-npm-package@^1.0.0",
+        "maplibre-gl": "^3.0.1",
         "next": "13.4.4",
         "next-intl": "^2.14.6",
         "react": "18.2.0",
-        "react-dom": "18.2.0"
+        "react-dom": "18.2.0",
+        "react-map-gl": "^7.0.25",
+        "sharp": "^0.32.1",
+        "swr": "^2.1.5"
     }
 }

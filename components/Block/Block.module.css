@@ -1,0 +1,39 @@
+.container {
+  overflow: hidden;
+  background-color: #ffffff;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  background: #000000;
+  color: #ffffff;
+  padding: var(--size-md);
+  border-top-left-radius: 15px;
+  border-top-right-radius: 15px;
+  overflow: hidden;
+}
+
+.headerTitle {
+  font-size: 20px;
+}
+
+.wrapper {
+  overflow: hidden;
+  border: 1px solid var(--gray3);
+  border-top: none;
+  border-bottom-left-radius: 15px;
+  border-bottom-right-radius: 15px;
+}
+
+.isLoading,
+.isError {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 200px;
+}
+
+.content {
+  padding: var(--size-md);
+}
