@@ -1,8 +1,9 @@
 'use client';
 
+import { SWRConfig } from 'swr';
 import { MantineProvider } from '@mantine/core';
 import { useColorScheme } from '@mantine/hooks';
-import { SWRConfig } from 'swr';
+import { MapProvider } from 'react-map-gl';
 
 export default function Providers({ children }) {
   //
@@ -30,7 +31,7 @@ export default function Providers({ children }) {
   return (
     <SWRConfig value={swrOptions}>
       <MantineProvider theme={{ colorScheme: preferredColorScheme }} withGlobalStyles withNormalizeCSS>
-        {children}
+        <MapProvider>{children}</MapProvider>
       </MantineProvider>
     </SWRConfig>
   );
