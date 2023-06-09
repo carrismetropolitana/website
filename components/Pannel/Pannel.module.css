@@ -1,17 +1,27 @@
 .container {
   overflow: hidden;
-  background-color: #ffffff;
 }
 
 .header {
   display: flex;
   justify-content: space-between;
+  align-items: center;
   background: #000000;
   color: #ffffff;
-  padding: var(--size-md);
+  padding: var(--size-md) var(--size-lg);
   border-top-left-radius: 15px;
   border-top-right-radius: 15px;
   overflow: hidden;
+}
+
+.headerLeftSection {
+  display: flex;
+  align-items: center;
+  gap: var(--size-md);
+}
+
+.headerIcon {
+  display: flex;
 }
 
 .headerTitle {
@@ -24,6 +34,7 @@
   border-top: none;
   border-bottom-left-radius: 15px;
   border-bottom-right-radius: 15px;
+  background-color: var(--reference-0);
 }
 
 .isLoading,

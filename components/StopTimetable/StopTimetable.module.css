@@ -1,0 +1,149 @@
+/* * */
+/* TABLE */
+
+.container {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--size-xs);
+  padding: var(--size-lg);
+  max-width: 600px;
+  margin: auto;
+}
+
+@media (max-width: 600px) {
+  .container {
+    padding: var(--size-md);
+  }
+}
+
+.tableBody {
+  display: grid;
+  grid-template-columns: 1fr;
+}
+
+.tableHeader,
+.tableBodyRowWrapper {
+  display: grid;
+  grid-template-columns: 1fr 100px;
+  gap: 2px;
+}
+
+/* * */
+/* TABLE HEADER */
+
+.tableHeaderColumn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--reference-0);
+  background-color: var(--reference-1);
+  font-size: 15px;
+  font-weight: 700;
+  line-height: 1;
+  padding: 8px;
+}
+
+.tableHeaderColumn:first-child {
+  border-top-left-radius: 999px;
+  border-bottom-left-radius: 999px;
+}
+
+.tableHeaderColumn:last-child {
+  border-top-right-radius: 999px;
+  border-bottom-right-radius: 999px;
+}
+
+.headerLine {
+  justify-content: flex-start;
+  padding-left: var(--size-md);
+}
+
+/* * */
+/* BODY ROW */
+
+.tableBodyRow {
+  display: flex;
+  flex-direction: column;
+  border-radius: 0;
+  border-bottom: 1px solid var(--gray2);
+  cursor: pointer;
+  transition-property: box-shadow, transform, margin, border-color;
+  transition-duration: 200ms;
+  transition-timing-function: ease;
+}
+
+.tableBodyRow:last-child {
+  border-bottom: none;
+}
+
+.tableBodyRow:hover {
+  border-bottom-color: transparent;
+}
+
+.tableBodyRow:has(+ .tableBodyRow:hover),
+.tableBodyRow:has(+ .selectedTrip) {
+  border-bottom-color: transparent;
+}
+
+/* * */
+/* BODY ROW WRAPPER */
+
+.tableBodyRowWrapper {
+  padding: var(--size-sm);
+}
+
+.tableBodyRow:hover {
+  background-color: var(--reference-0);
+  box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.05);
+  border-radius: var(--size-sm);
+  border-bottom-color: transparent;
+  /* margin-top: 2px;
+  margin-bottom: 2px; */
+}
+
+.selectedTrip,
+.selectedTrip:hover {
+  background-color: var(--reference-0);
+  box-shadow: 0px 0px 30px rgba(0, 0, 0, 0.1);
+  transform: scale(1.03);
+  border-radius: var(--size-sm);
+  border-bottom-color: transparent;
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
+
+/* * */
+/* TABLE BODY COLUMNS */
+
+.tableBodyColumn {
+  display: flex;
+  align-items: center;
+}
+
+.bodyArrivalTime {
+  justify-content: center;
+  align-items: center;
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--gray8);
+}
+
+.localitiesPerLine {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--gray6);
+}
+
+/* * */
+/* TRIP ADDITIONAL INFO */
+
+.tripAdditionalInfo {
+  display: none;
+  padding: var(--size-sm);
+}
+
+.selectedTrip .tripAdditionalInfo {
+  display: flex;
+  flex-direction: column;
+  border-top: 1px solid var(--gray2);
+}

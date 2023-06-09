@@ -1,3 +1,13 @@
+.container {
+  height: 70vh;
+}
+
+@media (max-width: 600px) {
+  .container {
+    height: 50vh;
+  }
+}
+
 .map-wrap {
   position: relative;
   width: 100%;

@@ -1,11 +1,12 @@
+import styles from './OSMMap.module.css';
 import osmMapDefaults from './OSMMap.config';
 import Map, { NavigationControl } from 'react-map-gl';
 import maplibregl from 'maplibre-gl';
 import 'maplibre-gl/dist/maplibre-gl.css';
 
-export default function OSMMap({ id, mapStyle, width, height, scrollZoom = true, onClick = () => {}, interactiveLayerIds = [], children }) {
+export default function OSMMap({ id, mapStyle, scrollZoom = true, onClick = () => {}, interactiveLayerIds = [], children }) {
   return (
-    <div style={{ width: width || '100%', height: height || '100%' }}>
+    <div className={styles.container}>
       <Map
         id={`${id}Map`}
         mapLib={maplibregl}
@@ -14,7 +15,7 @@ export default function OSMMap({ id, mapStyle, width, height, scrollZoom = true,
         maxZoom={osmMapDefaults.maxZoom}
         scrollZoom={scrollZoom}
         mapStyle={osmMapDefaults.styles[mapStyle] || osmMapDefaults.styles.default}
-        style={{ width: width || '100%', height: height || '100%' }}
+        // style={{ width: width || '100%', height: height || '100%' }}
         onClick={onClick}
         interactive={interactiveLayerIds ? true : false}
         interactiveLayerIds={interactiveLayerIds}

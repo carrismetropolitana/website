@@ -5,12 +5,19 @@
   justify-content: stretch;
   gap: var(--size-sm);
   width: 100%;
-  max-width: 1200px;
+  max-width: 1300px;
   height: 100%;
   flex-grow: 1;
   position: relative;
   width: 100%;
   margin: auto;
+  padding: 0 var(--size-lg);
+}
+
+@media (max-width: 600px) {
+  .baseLayout {
+    padding: 0;
+  }
 }
 
 .innerWrapper {

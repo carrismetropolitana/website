@@ -3,13 +3,16 @@
 import useSWR from 'swr';
 import { useState, useMemo } from 'react';
 import { useMap, Source, Layer } from 'react-map-gl';
-import { IconArrowsMinimize, IconBrandGoogleMaps } from '@tabler/icons-react';
-import { Tooltip, Text, ActionIcon, SegmentedControl } from '@mantine/core';
+import { IconArrowsMinimize, IconBrandGoogleMaps, IconBusStop, IconCircleArrowRightFilled, IconSearch } from '@tabler/icons-react';
+import { Tooltip, Tabs, Text, ActionIcon, SegmentedControl, TextInput, Divider } from '@mantine/core';
 import OSMMap from '@/components/OSMMap/OSMMap';
 import OSMMapDefaults from '@/components/OSMMap/OSMMap.config';
 import { useTranslations } from 'next-intl';
 import Pannel from '@/components/Pannel/Pannel';
 import { OneFullColumn } from '@/components/Layouts/Layouts';
+import MapToolbar from '@/components/MapToolbar/MapToolbar';
+import StopTimetable from '@/components/StopTimetable/StopTimetable';
+import StopInfo from '@/components/StopInfo/StopInfo';
 
 export default function Page() {
   //
@@ -19,6 +22,8 @@ export default function Page() {
 
   const { allStopsMap } = useMap();
   const [mapStyle, setMapStyle] = useState('map');
+  const [searchQuery, setSearchQuery] = useState('');
+  const [isLoadingGeocoder, setIsLoadingGeocoder] = useState(false);
   const t = useTranslations('stops');
 
   //
@@ -41,6 +46,14 @@ export default function Page() {
 
   const handleMapClick = (event) => {
     console.log(event.features[0]);
+  };
+
+  const handleSearchQueryChange = ({ target }) => {
+    setSearchQuery(target.value);
+  };
+
+  const handleGeocoderSearch = () => {
+    setIsLoadingGeocoder(true);
   };
 
   //
@@ -83,18 +96,7 @@ export default function Page() {
     <OneFullColumn
       first={
         <Pannel title='Consulta de Paragens' loading={allStopsLoading} error={allStopsError}>
-          <div style={{ display: 'flex', flexDirection: 'row' }}>
-            <Tooltip label={t('operations.recenter.title')} position='bottom' withArrow>
-              <ActionIcon color='gray' variant='light' size='lg' onClick={handleMapReCenter}>
-                <IconArrowsMinimize size='20px' />
-              </ActionIcon>
-            </Tooltip>
-            <Text size='h1'>{t('page.title')}</Text>
-            <Tooltip label={t('operations.gmaps.title')} position='bottom' withArrow>
-              <ActionIcon color='gray' variant='light' size='lg' onClick={handleOpenInGoogleMaps}>
-                <IconBrandGoogleMaps size='20px' />
-              </ActionIcon>
-            </Tooltip>
+          <MapToolbar>
             <div>
               <SegmentedControl
                 value={mapStyle}
@@ -105,14 +107,48 @@ export default function Page() {
                 ]}
               />
             </div>
-          </div>
-          <div>
-            <OSMMap id='allStops' mapStyle={mapStyle} onClick={handleMapClick} interactiveLayerIds={['all-stops']} height={500}>
-              <Source id='all-stops' type='geojson' data={mapData}>
-                <Layer id='all-stops' type='circle' source='all-stops' paint={{ 'circle-color': '#ffdd01', 'circle-radius': 6, 'circle-stroke-width': 2, 'circle-stroke-color': '#000000' }} />
-              </Source>
-            </OSMMap>
-          </div>
+            <Tooltip label={t('operations.recenter.title')} position='bottom' withArrow>
+              <ActionIcon color='gray' variant='light' size='lg' onClick={handleMapReCenter}>
+                <IconArrowsMinimize size={20} />
+              </ActionIcon>
+            </Tooltip>
+            <Tooltip label={t('operations.gmaps.title')} position='bottom' withArrow>
+              <ActionIcon color='gray' variant='light' size='lg' onClick={handleOpenInGoogleMaps}>
+                <IconBrandGoogleMaps size={20} />
+              </ActionIcon>
+            </Tooltip>
+            <TextInput
+              icon={<IconSearch size={18} />}
+              rightSection={
+                searchQuery && (
+                  <ActionIcon color='gray' variant='subtle' size='lg' onClick={handleGeocoderSearch} loading={isLoadingGeocoder}>
+                    <IconCircleArrowRightFilled size={20} />
+                  </ActionIcon>
+                )
+              }
+              placeholder='Procurar por morada, etc.'
+              value={searchQuery}
+              onChange={handleSearchQueryChange}
+              size='md'
+              w='100%'
+            />
+          </MapToolbar>
+
+          <Divider />
+
+          <OSMMap id='allStops' mapStyle={mapStyle} onClick={handleMapClick} interactiveLayerIds={['all-stops']} height={'50vh'}>
+            <Source id='all-stops' type='geojson' data={mapData}>
+              <Layer id='all-stops' type='circle' source='all-stops' paint={{ 'circle-color': '#ffdd01', 'circle-radius': 6, 'circle-stroke-width': 2, 'circle-stroke-color': '#000000' }} />
+            </Source>
+          </OSMMap>
+
+          <Divider />
+
+          <StopInfo stopId={'100021'} />
+
+          <Divider />
+
+          <StopTimetable stopId={'100021'} selectedDate={'20230607'} />
         </Pannel>
       }
     />

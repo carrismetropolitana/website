@@ -1,13 +1,17 @@
 import Loader from '../Loader/Loader';
 import styles from './Pannel.module.css';
 
-export default function Pannel({ loading, error, title, rightSection, children }) {
+export default function Pannel({ loading, error, icon, title, rightSection, children }) {
   //
 
   return (
     <div className={styles.container}>
       <div className={styles.header}>
-        <h2 className={styles.headerTitle}>{title}</h2>
+        <div className={styles.headerLeftSection}>
+          {icon && <div className={styles.headerIcon}>{icon}</div>}
+          {title && <h2 className={styles.headerTitle}>{title}</h2>}
+        </div>
+        <div className={styles.headerRightSection}></div>
       </div>
       <div className={styles.wrapper}>
         {loading && (
