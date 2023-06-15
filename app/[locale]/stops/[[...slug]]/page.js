@@ -1,5 +1,6 @@
 'use client';
 
+import { useState, useEffect } from 'react';
 import { Divider } from '@mantine/core';
 import { useTranslations } from 'next-intl';
 import StopTimetable from '@/components/StopTimetable/StopTimetable';
@@ -11,22 +12,26 @@ export default function Page({ params }) {
   //
   // A. Setup variables
 
+  const [selectedStopCode, setSelectedStopCode] = useState();
   const t = useTranslations('stops');
 
   //
   // D. Handle actions
 
+  useEffect(() => {
+    if (params && params.slug && params.slug.length) {
+      setSelectedStopCode(params.slug[0]);
+    }
+  }, [params]);
+
   //
   // E. Render components
 
   return (
-    params.stop_code && (
-      <>
-        <Divider />
-        <StopInfo stopCode={params.stop_code[0]} />
-        <Divider />
-        <StopTimetable stopCode={params.stop_code[0]} selectedDate={'20230607'} />
-      </>
-    )
+    <>
+      <StopInfo stopCode={selectedStopCode} />
+      <Divider />
+      <StopTimetable stopCode={selectedStopCode} selectedDate={'20230607'} />
+    </>
   );
 }

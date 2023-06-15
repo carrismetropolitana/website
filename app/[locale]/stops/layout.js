@@ -1,11 +1,11 @@
 'use client';
 
 import useSWR from 'swr';
-import { useState, useMemo } from 'react';
+import { useState, useMemo, forwardRef } from 'react';
 import { useRouter } from 'next/navigation';
 import { useMap, Source, Layer } from 'react-map-gl';
 import { IconArrowsMinimize, IconBrandGoogleMaps, IconCircleArrowRightFilled, IconSearch } from '@tabler/icons-react';
-import { Tooltip, ActionIcon, SegmentedControl, TextInput, Divider } from '@mantine/core';
+import { Tooltip, ActionIcon, SegmentedControl, Divider, Autocomplete, Group, Avatar, Text } from '@mantine/core';
 import OSMMap from '@/components/OSMMap/OSMMap';
 import OSMMapDefaults from '@/components/OSMMap/OSMMap.config';
 import { useTranslations } from 'next-intl';
@@ -13,7 +13,7 @@ import Pannel from '@/components/Pannel/Pannel';
 import { OneFullColumn } from '@/components/Layouts/Layouts';
 import MapToolbar from '@/components/MapToolbar/MapToolbar';
 
-export default function Layout({ children }) {
+export default function Page({ children }) {
   //
 
   //
@@ -34,6 +34,9 @@ export default function Layout({ children }) {
   //
   // D. Handle actions
 
+  //
+  // D. Handle actions
+
   const handleMapReCenter = () => {
     allStopsMap.flyTo({ ...OSMMapDefaults.viewport, duration: 2000 });
   };
@@ -44,19 +47,28 @@ export default function Layout({ children }) {
     window.open(`https://www.google.com/maps/@${center.lat},${center.lng},${zoom}z`, '_blank', 'noopener,noreferrer');
   };
 
+  const handleSelectStop = (newStopCode) => {
+    router.replace(`/stops/${newStopCode}`);
+  };
+
   const handleMapClick = (event) => {
     if (event?.features[0]?.properties?.code) {
-      const newStopCode = event.features[0].properties.code;
-      router.replace(`/stops/${newStopCode}`);
+      handleSelectStop(event.features[0].properties.code);
     }
   };
 
-  const handleSearchQueryChange = ({ target }) => {
-    setSearchQuery(target.value);
+  const handleSearchQueryChange = (value) => {
+    setSearchQuery(value);
   };
 
   const handleGeocoderSearch = () => {
-    setIsLoadingGeocoder(true);
+    if (allStopsData && allStopsData.find((stop) => searchQuery === stop.code)) {
+      // Do geocoder search
+      handleSelectStop(searchQuery);
+    } else {
+      // Do geocoder search
+      setIsLoadingGeocoder(true);
+    }
   };
 
   //
@@ -92,8 +104,31 @@ export default function Layout({ children }) {
     // Only run if allStopsData changes
   }, [allStopsData]);
 
+  const autocompleteData = useMemo(() => {
+    if (allStopsData) {
+      return allStopsData.map((stop) => {
+        return { code: stop.code, value: `${stop.code} - ${stop.name}`, description: `${stop.locality}, ${stop.municipality_name}` };
+      });
+    }
+    // Only run if allStopsData changes
+  }, [allStopsData]);
+
   //
   // E. Render components
+
+  const AutoCompleteItem = forwardRef(({ description, value, code, ...others }, ref) => (
+    <div ref={ref} {...others}>
+      <Group noWrap>
+        <div>
+          <Text>{value}</Text>
+          <Text size='xs' color='dimmed'>
+            {description}
+          </Text>
+        </div>
+      </Group>
+    </div>
+  ));
+  AutoCompleteItem.displayName = 'hello';
 
   return (
     <OneFullColumn
@@ -120,7 +155,7 @@ export default function Layout({ children }) {
                 <IconBrandGoogleMaps size={20} />
               </ActionIcon>
             </Tooltip>
-            <TextInput
+            <Autocomplete
               icon={<IconSearch size={18} />}
               rightSection={
                 searchQuery && (
@@ -129,9 +164,13 @@ export default function Layout({ children }) {
                   </ActionIcon>
                 )
               }
-              placeholder='Procurar por morada, etc.'
+              itemComponent={AutoCompleteItem}
+              onItemSubmit={(item) => handleSelectStop(item.code)}
               value={searchQuery}
-              onChange={handleSearchQueryChange}
+              onChange={setSearchQuery}
+              placeholder={'A pesquisa está muito básica mas funciona :)'}
+              data={autocompleteData}
+              filter={(value, item) => item.value.toLowerCase().includes(value.toLowerCase().trim()) || item.description.toLowerCase().includes(value.toLowerCase().trim()) || item.code.toLowerCase().includes(value.toLowerCase().trim())}
               size='md'
               w='100%'
             />
@@ -144,6 +183,8 @@ export default function Layout({ children }) {
               <Layer id='all-stops' type='circle' source='all-stops' paint={{ 'circle-color': '#ffdd01', 'circle-radius': 6, 'circle-stroke-width': 2, 'circle-stroke-color': '#000000' }} />
             </Source>
           </OSMMap>
+
+          <Divider />
 
           {children}
         </Pannel>
