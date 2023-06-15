@@ -23,9 +23,9 @@ export default function Page({ params }) {
     params.stop_code && (
       <>
         <Divider />
-        <StopInfo stopCode={params.stop_code} />
+        <StopInfo stopCode={params.stop_code[0]} />
         <Divider />
-        <StopTimetable stopCode={params.stop_code} selectedDate={'20230607'} />
+        <StopTimetable stopCode={params.stop_code[0]} selectedDate={'20230607'} />
       </>
     )
   );

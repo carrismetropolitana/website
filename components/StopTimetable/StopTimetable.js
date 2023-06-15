@@ -33,10 +33,12 @@ export default function StopTimetable({ stopCode, selectedDate }) {
         if (trip.dates.includes(selectedDate)) {
           // Get the schedule on the stop_sequence matching the given stop_id
           const schedule = trip.schedule.find((s, index) => {
+            // console.log(stopCode);
             const isSelectedStop = s.stop_code === stopCode;
             const isLastStop = index === trip.schedule.length - 1;
             return isSelectedStop && !isLastStop;
           });
+
           // If schedule is defined, then build the timetable entry object
           if (schedule) {
             // Find out which localities pass by this trip
@@ -44,10 +46,10 @@ export default function StopTimetable({ stopCode, selectedDate }) {
             // Parse trip to timetable format
             timetableDataTemp.push({
               trip_code: trip.trip_code,
-              line_code: pattern.line.code,
-              color: pattern.line.color,
-              text_color: pattern.line.text_color,
-              short_name: pattern.line.short_name,
+              line_code: pattern.line_code,
+              color: pattern.color,
+              text_color: pattern.text_color,
+              short_name: pattern.short_name,
               headsign: pattern.headsign,
               arrival_time: schedule.arrival_time.substring(0, 5),
             });
