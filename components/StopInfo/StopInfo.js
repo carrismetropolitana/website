@@ -1,13 +1,12 @@
 import useSWR from 'swr';
-import { useState, useEffect, useMemo } from 'react';
+import { useState, useEffect } from 'react';
 import styles from './StopInfo.module.css';
 import Loader from '../Loader/Loader';
-import { Chip } from '@mantine/core';
-import { useClipboard } from '@mantine/hooks';
 import CopyBadge from '../CopyBadge/CopyBadge';
 import EquipmentIcon from '../EquipmentIcon/EquipmentIcon';
+import { LineBadge } from '../LineDisplay/LineDisplay';
 
-export default function StopInfo({ stopId }) {
+export default function StopInfo({ stopCode }) {
   //
 
   //
@@ -18,31 +17,33 @@ export default function StopInfo({ stopId }) {
   //
   // B. Fetch data
 
-  const { data: stopData, error: stopError, isLoading: stopLoading } = useSWR(stopId && `https://schedules.carrismetropolitana.pt/api/stops/${stopId}`);
+  const { data: stopData, error: stopError, isLoading: stopLoading } = useSWR(stopCode && `https://schedules-test.carrismetropolitana.pt/api/stops/${stopCode}`);
 
   //
   // D. Handle actions
 
   useEffect(() => {
     if (!stopData) return;
-    setEquipmentsForThisStop(['bus', 'bus', 'near_hospital', 'near_historic_building', 'subway']);
+    setEquipmentsForThisStop([...stopData.near_services, ...stopData.intermodal_connections]);
   }, [stopData]);
 
   //
   // D. Render components
 
   return (
-    <>
-      {stopLoading && <Loader visible full />}
+    <div>
+      {stopLoading && <Loader visible />}
       {stopData && (
         <div className={styles.container}>
           <div className={styles.info}>
-            <CopyBadge label={`#${stopData.stop_id}`} value={stopData.stop_id} />
-            <CopyBadge label={`${stopData.stop_lat}, ${stopData.stop_lon}`} value={`${stopData.stop_lat}	${stopData.stop_lon}`} />
+            <CopyBadge label={`#${stopData.code}`} value={stopData.code} />
+            <CopyBadge label={`${stopData.latitude}, ${stopData.longitude}`} value={`${stopData.latitude}	${stopData.longitude}`} />
           </div>
           <div className={styles.stopNameLocationWrapper}>
-            <h2 className={styles.stopName}>{stopData.stop_name}</h2>
-            <div className={styles.location}>Minas de Água, Sintra</div>
+            <h2 className={styles.stopName} aria-label={stopData.tts_name || stopData.name}>
+              {stopData.name}
+            </h2>
+            {stopData.locality && <div className={styles.location}>{stopData.locality === stopData.municipality_name ? stopData.locality : `${stopData.locality}, ${stopData.municipality_name}`}</div>}
           </div>
           {equipmentsForThisStop.length > 0 && (
             <div className={styles.equipments}>
@@ -51,9 +52,13 @@ export default function StopInfo({ stopId }) {
               ))}
             </div>
           )}
-          {/* <div className={styles.routes}></div> */}
+          <div className={styles.routes}>
+            <LineBadge short_name='2030' />
+            <LineBadge short_name='2024' />
+            <LineBadge short_name='2034' />
+          </div>
         </div>
       )}
-    </>
+    </div>
   );
 }

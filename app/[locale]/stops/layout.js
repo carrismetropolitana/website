@@ -2,19 +2,18 @@
 
 import useSWR from 'swr';
 import { useState, useMemo } from 'react';
+import { useRouter } from 'next/navigation';
 import { useMap, Source, Layer } from 'react-map-gl';
-import { IconArrowsMinimize, IconBrandGoogleMaps, IconBusStop, IconCircleArrowRightFilled, IconSearch } from '@tabler/icons-react';
-import { Tooltip, Tabs, Text, ActionIcon, SegmentedControl, TextInput, Divider } from '@mantine/core';
+import { IconArrowsMinimize, IconBrandGoogleMaps, IconCircleArrowRightFilled, IconSearch } from '@tabler/icons-react';
+import { Tooltip, ActionIcon, SegmentedControl, TextInput, Divider } from '@mantine/core';
 import OSMMap from '@/components/OSMMap/OSMMap';
 import OSMMapDefaults from '@/components/OSMMap/OSMMap.config';
 import { useTranslations } from 'next-intl';
 import Pannel from '@/components/Pannel/Pannel';
 import { OneFullColumn } from '@/components/Layouts/Layouts';
 import MapToolbar from '@/components/MapToolbar/MapToolbar';
-import StopTimetable from '@/components/StopTimetable/StopTimetable';
-import StopInfo from '@/components/StopInfo/StopInfo';
 
-export default function Page() {
+export default function Layout({ children }) {
   //
 
   //
@@ -23,13 +22,14 @@ export default function Page() {
   const { allStopsMap } = useMap();
   const [mapStyle, setMapStyle] = useState('map');
   const [searchQuery, setSearchQuery] = useState('');
+  const router = useRouter();
   const [isLoadingGeocoder, setIsLoadingGeocoder] = useState(false);
   const t = useTranslations('stops');
 
   //
   // B. Fetch data
 
-  const { data: allStopsData, error: allStopsError, isLoading: allStopsLoading } = useSWR('https://schedules.carrismetropolitana.pt/api/stops');
+  const { data: allStopsData, error: allStopsError, isLoading: allStopsLoading } = useSWR('https://schedules-test.carrismetropolitana.pt/api/stops');
 
   //
   // D. Handle actions
@@ -45,7 +45,10 @@ export default function Page() {
   };
 
   const handleMapClick = (event) => {
-    console.log(event.features[0]);
+    if (event?.features[0]?.properties?.code) {
+      const newStopCode = event.features[0].properties.code;
+      router.replace(`/stops/${newStopCode}`);
+    }
   };
 
   const handleSearchQueryChange = ({ target }) => {
@@ -73,13 +76,13 @@ export default function Page() {
           type: 'Feature',
           geometry: {
             type: 'Point',
-            coordinates: [parseFloat(stop.stop_lon), parseFloat(stop.stop_lat)],
+            coordinates: [parseFloat(stop.longitude), parseFloat(stop.latitude)],
           },
           properties: {
-            stop_id: stop.stop_id,
-            stop_name: stop.stop_name,
-            stop_lat: stop.stop_lat,
-            stop_lon: stop.stop_lon,
+            code: stop.code,
+            name: stop.name,
+            latitude: stop.latitude,
+            longitude: stop.longitude,
           },
         });
       }
@@ -142,13 +145,7 @@ export default function Page() {
             </Source>
           </OSMMap>
 
-          <Divider />
-
-          <StopInfo stopId={'100021'} />
-
-          <Divider />
-
-          <StopTimetable stopId={'100021'} selectedDate={'20230607'} />
+          {children}
         </Pannel>
       }
     />
