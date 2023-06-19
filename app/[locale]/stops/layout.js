@@ -1,7 +1,7 @@
 'use client';
 
 import useSWR from 'swr';
-import { useState, useMemo, forwardRef } from 'react';
+import { useState, useMemo, forwardRef, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import { useMap, Source, Layer } from 'react-map-gl';
 import { IconArrowsMinimize, IconBrandGoogleMaps, IconCircleArrowRightFilled, IconSearch } from '@tabler/icons-react';
@@ -22,6 +22,8 @@ export default function Page({ children }) {
   const { allStopsMap } = useMap();
   const [mapStyle, setMapStyle] = useState('map');
   const [searchQuery, setSearchQuery] = useState('');
+  const [selectedStopCode, setSelectedStopCode] = useState();
+  const [selectedMapFeature, setSelectedMapFeature] = useState();
   const router = useRouter();
   const [isLoadingGeocoder, setIsLoadingGeocoder] = useState(false);
   const t = useTranslations('stops');
@@ -47,13 +49,50 @@ export default function Page({ children }) {
     window.open(`https://www.google.com/maps/@${center.lat},${center.lng},${zoom}z`, '_blank', 'noopener,noreferrer');
   };
 
-  const handleSelectStop = (newStopCode) => {
-    router.replace(`/stops/${newStopCode}`);
+  const handleSelectStop = (feature) => {
+    // Only do something if feature is set
+    if (feature.properties?.code) {
+      // Get all currently rendered features and mark all of them as unselected
+      const allRenderedFeatures = allStopsMap.queryRenderedFeatures();
+      allRenderedFeatures.forEach(function (f) {
+        allStopsMap.setFeatureState({ source: 'all-stops', id: f.id }, { selected: false });
+      });
+      // Save the current feature to state and mark it as selected
+      setSelectedMapFeature(feature);
+      allStopsMap.setFeatureState({ source: 'all-stops', id: feature.id }, { selected: true });
+      // Zoom and center if too far
+      if (allStopsMap.getZoom() < 14) allStopsMap.flyTo({ center: feature.geometry.coordinates, duration: 5000, zoom: 16 });
+      // Save the current stop code and update the URL
+      const newStopCode = feature.properties?.code || '';
+      router.replace(`/stops/${newStopCode}`);
+      setSelectedStopCode(newStopCode);
+    }
   };
 
   const handleMapClick = (event) => {
+    if (event?.features[0]) handleSelectStop(event.features[0]);
+  };
+
+  const handleMapMouseEnter = (event) => {
     if (event?.features[0]?.properties?.code) {
-      handleSelectStop(event.features[0].properties.code);
+      allStopsMap.getCanvas().style.cursor = 'pointer';
+    }
+  };
+
+  const handleMapMouseLeave = (event) => {
+    if (event?.features[0]?.properties?.code) {
+      allStopsMap.getCanvas().style.cursor = 'default';
+    }
+  };
+
+  const handleMapMove = () => {
+    if (selectedMapFeature) {
+      // Get all currently rendered features and mark all of them as unselected
+      const allRenderedFeatures = allStopsMap.queryRenderedFeatures();
+      allRenderedFeatures.forEach(function (f) {
+        allStopsMap.setFeatureState({ source: 'all-stops', id: f.id }, { selected: false });
+      });
+      allStopsMap.setFeatureState({ source: 'all-stops', id: selectedMapFeature.id }, { selected: true });
     }
   };
 
@@ -63,7 +102,7 @@ export default function Page({ children }) {
 
   const handleGeocoderSearch = () => {
     if (allStopsData && allStopsData.find((stop) => searchQuery === stop.code)) {
-      // Do geocoder search
+      // Select stop if exat match
       handleSelectStop(searchQuery);
     } else {
       // Do geocoder search
@@ -107,7 +146,7 @@ export default function Page({ children }) {
   const autocompleteData = useMemo(() => {
     if (allStopsData) {
       return allStopsData.map((stop) => {
-        return { code: stop.code, value: `${stop.code} - ${stop.name}`, description: `${stop.locality}, ${stop.municipality_name}` };
+        return { code: stop.code, value: stop.name, description: `${stop.locality}, ${stop.municipality_name}` };
       });
     }
     // Only run if allStopsData changes
@@ -117,15 +156,11 @@ export default function Page({ children }) {
   // E. Render components
 
   const AutoCompleteItem = forwardRef(({ description, value, code, ...others }, ref) => (
-    <div ref={ref} {...others}>
-      <Group noWrap>
-        <div>
-          <Text>{value}</Text>
-          <Text size='xs' color='dimmed'>
-            {description}
-          </Text>
-        </div>
-      </Group>
+    <div ref={ref} {...others} style={{ gap: '5px', padding: '8px' }}>
+      <Text size='sm'>{value}</Text>
+      <Text size='xs' color='dimmed'>
+        {description} ({code})
+      </Text>
     </div>
   ));
   AutoCompleteItem.displayName = 'hello';
@@ -136,51 +171,65 @@ export default function Page({ children }) {
         <Pannel title='Consulta de Paragens' loading={allStopsLoading} error={allStopsError}>
           <MapToolbar>
             <div>
-              <SegmentedControl
-                value={mapStyle}
-                onChange={setMapStyle}
-                data={[
-                  { label: 'Map', value: 'map' },
-                  { label: 'Satellite', value: 'satellite' },
-                ]}
+              <div>
+                <SegmentedControl
+                  value={mapStyle}
+                  onChange={setMapStyle}
+                  data={[
+                    { label: 'Map', value: 'map' },
+                    { label: 'Satellite', value: 'satellite' },
+                  ]}
+                />
+              </div>
+              <Tooltip label={t('operations.recenter.title')} position='bottom' withArrow>
+                <ActionIcon color='gray' variant='light' size='lg' onClick={handleMapReCenter}>
+                  <IconArrowsMinimize size={20} />
+                </ActionIcon>
+              </Tooltip>
+              <Tooltip label={t('operations.gmaps.title')} position='bottom' withArrow>
+                <ActionIcon color='gray' variant='light' size='lg' onClick={handleOpenInGoogleMaps}>
+                  <IconBrandGoogleMaps size={20} />
+                </ActionIcon>
+              </Tooltip>
+            </div>
+            <div style={{ width: '100%' }}>
+              <Autocomplete
+                icon={<IconSearch size={18} />}
+                rightSection={
+                  searchQuery && (
+                    <ActionIcon color='gray' variant='subtle' size='lg' onClick={handleGeocoderSearch} loading={isLoadingGeocoder}>
+                      <IconCircleArrowRightFilled size={20} />
+                    </ActionIcon>
+                  )
+                }
+                itemComponent={AutoCompleteItem}
+                onItemSubmit={(item) => handleSelectStop(item.code)}
+                value={searchQuery}
+                onChange={setSearchQuery}
+                placeholder={'A pesquisa está muito básica mas funciona :)'}
+                data={autocompleteData}
+                filter={(value, item) => item.value.toLowerCase().includes(value.toLowerCase().trim()) || item.description.toLowerCase().includes(value.toLowerCase().trim()) || item.code.toLowerCase().includes(value.toLowerCase().trim())}
+                size='md'
+                w='100%'
               />
             </div>
-            <Tooltip label={t('operations.recenter.title')} position='bottom' withArrow>
-              <ActionIcon color='gray' variant='light' size='lg' onClick={handleMapReCenter}>
-                <IconArrowsMinimize size={20} />
-              </ActionIcon>
-            </Tooltip>
-            <Tooltip label={t('operations.gmaps.title')} position='bottom' withArrow>
-              <ActionIcon color='gray' variant='light' size='lg' onClick={handleOpenInGoogleMaps}>
-                <IconBrandGoogleMaps size={20} />
-              </ActionIcon>
-            </Tooltip>
-            <Autocomplete
-              icon={<IconSearch size={18} />}
-              rightSection={
-                searchQuery && (
-                  <ActionIcon color='gray' variant='subtle' size='lg' onClick={handleGeocoderSearch} loading={isLoadingGeocoder}>
-                    <IconCircleArrowRightFilled size={20} />
-                  </ActionIcon>
-                )
-              }
-              itemComponent={AutoCompleteItem}
-              onItemSubmit={(item) => handleSelectStop(item.code)}
-              value={searchQuery}
-              onChange={setSearchQuery}
-              placeholder={'A pesquisa está muito básica mas funciona :)'}
-              data={autocompleteData}
-              filter={(value, item) => item.value.toLowerCase().includes(value.toLowerCase().trim()) || item.description.toLowerCase().includes(value.toLowerCase().trim()) || item.code.toLowerCase().includes(value.toLowerCase().trim())}
-              size='md'
-              w='100%'
-            />
           </MapToolbar>
 
           <Divider />
 
-          <OSMMap id='allStops' mapStyle={mapStyle} onClick={handleMapClick} interactiveLayerIds={['all-stops']} height={'50vh'}>
-            <Source id='all-stops' type='geojson' data={mapData}>
-              <Layer id='all-stops' type='circle' source='all-stops' paint={{ 'circle-color': '#ffdd01', 'circle-radius': 6, 'circle-stroke-width': 2, 'circle-stroke-color': '#000000' }} />
+          <OSMMap id='allStops' mapStyle={mapStyle} onClick={handleMapClick} onMouseEnter={handleMapMouseEnter} onMouseLeave={handleMapMouseLeave} onMove={handleMapMove} interactiveLayerIds={['all-stops']} height={'50vh'}>
+            <Source id='all-stops' type='geojson' data={mapData} generateId>
+              <Layer
+                id='all-stops'
+                type='circle'
+                source='all-stops'
+                paint={{
+                  'circle-color': ['case', ['boolean', ['feature-state', 'selected'], false], '#EE4B2B', '#ffdd01'],
+                  'circle-radius': ['interpolate', ['linear', 0.5], ['zoom'], 9, ['case', ['boolean', ['feature-state', 'selected'], false], 5, 1], 26, ['case', ['boolean', ['feature-state', 'selected'], false], 30, 20]],
+                  'circle-stroke-width': ['interpolate', ['linear', 0.5], ['zoom'], 9, 0.35, 26, 5],
+                  'circle-stroke-color': '#000000',
+                }}
+              />
             </Source>
           </OSMMap>
 

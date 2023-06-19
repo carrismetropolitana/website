@@ -14,6 +14,13 @@
   overflow: hidden;
 }
 
+@media (max-width: 600px) {
+  .header {
+    border-radius: 0px;
+    padding: var(--size-md);
+  }
+}
+
 .headerLeftSection {
   display: flex;
   align-items: center;
@@ -26,6 +33,12 @@
 
 .headerTitle {
   font-size: 20px;
+}
+
+@media (max-width: 600px) {
+  .headerTitle {
+    font-size: 18px;
+  }
 }
 
 .wrapper {

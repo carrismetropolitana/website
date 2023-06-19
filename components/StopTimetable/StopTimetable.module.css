@@ -76,13 +76,20 @@
   border-bottom: none;
 }
 
-.tableBodyRow:hover {
+.tableBodyRow:has(+ .selectedTrip) {
   border-bottom-color: transparent;
 }
 
-.tableBodyRow:has(+ .tableBodyRow:hover),
-.tableBodyRow:has(+ .selectedTrip) {
-  border-bottom-color: transparent;
+@media (hover: hover) {
+  .tableBodyRow:hover {
+    background-color: var(--reference-0);
+    box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.05);
+    border-radius: var(--size-sm);
+    border-bottom-color: transparent;
+  }
+  .tableBodyRow:has(+ .tableBodyRow:hover) {
+    border-bottom-color: transparent;
+  }
 }
 
 /* * */
@@ -90,15 +97,6 @@
 
 .tableBodyRowWrapper {
   padding: var(--size-sm);
-}
-
-.tableBodyRow:hover {
-  background-color: var(--reference-0);
-  box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.05);
-  border-radius: var(--size-sm);
-  border-bottom-color: transparent;
-  /* margin-top: 2px;
-  margin-bottom: 2px; */
 }
 
 .selectedTrip,

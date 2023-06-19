@@ -3,5 +3,20 @@
   flex-direction: row;
   gap: var(--size-md);
   padding: var(--size-sm);
+  align-items: stretch;
+  justify-content: stretch;
+}
+
+.container > div {
+  display: flex;
+  flex-direction: row;
   align-items: center;
+  gap: var(--size-sm);
+}
+
+@media (max-width: 600px) {
+  .container {
+    gap: var(--size-sm);
+    flex-direction: column;
+  }
 }

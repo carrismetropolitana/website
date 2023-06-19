@@ -3,13 +3,18 @@ import { useState, useMemo } from 'react';
 import styles from './StopTimetable.module.css';
 import LineDisplay from '../LineDisplay/LineDisplay';
 import Loader from '../Loader/Loader';
+import { IconCalendar } from '@tabler/icons-react';
+import { DatePicker, DatePickerInput } from '@mantine/dates';
+import dayjs from 'dayjs';
+import { Select } from '@mantine/core';
 
-export default function StopTimetable({ stopCode, selectedDate }) {
+export default function StopTimetable({ stopCode }) {
   //
 
   //
   // A. Setup variables
 
+  const [selectedDate, setSelectedDate] = useState(new Date());
   const [selectedTrip, setSelectedTrip] = useState();
 
   //
@@ -20,9 +25,14 @@ export default function StopTimetable({ stopCode, selectedDate }) {
   //
   // D. Handle actions
 
+  //
+  // D. Handle actions
+
   const timetableData = useMemo(() => {
     // Return empty if routesData is not finished loading
     if (!stopPatternsData || !stopPatternsData.patterns.length) return [];
+    // Initiate a temporary variable to hold values processed timetable
+    const selectedDateString = dayjs(selectedDate).format('YYYYMMDD');
     // Initiate a temporary variable to hold values processed timetable
     let timetableDataTemp = [];
     // Iterate on each route, direction and trip to filter out the arrival_time
@@ -30,7 +40,7 @@ export default function StopTimetable({ stopCode, selectedDate }) {
     for (const pattern of stopPatternsData.patterns) {
       for (const trip of pattern.trips) {
         // Only get timetables for trips happening on the selected date
-        if (trip.dates.includes(selectedDate)) {
+        if (trip.dates.includes(selectedDateString)) {
           // Get the schedule on the stop_sequence matching the given stop_id
           const schedule = trip.schedule.find((s, index) => {
             // console.log(stopCode);
@@ -79,6 +89,9 @@ export default function StopTimetable({ stopCode, selectedDate }) {
       {stopPatternsData && (
         <div className={styles.container}>
           <div>Filtrar por headsign, locality e escolher data</div>
+          <Select label='municipio' data={[]} />
+          <Select label='locality' data={[]} />
+          <DatePickerInput dropdownType='modal' icon={<IconCalendar size={18} />} valueFormat='DD MMMM YYYY' label='Date input' placeholder='Date input' value={selectedDate} onChange={setSelectedDate} />
           <div className={styles.tableHeader}>
             <div className={`${styles.tableHeaderColumn} ${styles.headerLine}`}>Linha e Destino</div>
             <div className={styles.tableHeaderColumn}>Previsão</div>
@@ -90,9 +103,8 @@ export default function StopTimetable({ stopCode, selectedDate }) {
                   key={index}
                   className={`${styles.tableBodyRow} ${selectedTrip === trip.trip_code ? styles.selectedTrip : ''}`}
                   onClick={() => {
-                    console.log(selectedTrip === trip.trip_code);
-
-                    setSelectedTrip(trip.trip_code);
+                    if (selectedTrip === trip.trip_code) setSelectedTrip();
+                    else setSelectedTrip(trip.trip_code);
                   }}
                 >
                   <div className={styles.tableBodyRowWrapper}>
