@@ -1,11 +1,11 @@
 'use client';
 
 import useSWR from 'swr';
-import { useState, useMemo, forwardRef, useEffect } from 'react';
-import { useRouter } from 'next/navigation';
+import { useState, useMemo, forwardRef, useEffect, useCallback } from 'react';
+import { useParams, useRouter } from 'next/navigation';
 import { useMap, Source, Layer } from 'react-map-gl';
 import { IconArrowsMinimize, IconBrandGoogleMaps, IconCircleArrowRightFilled, IconSearch } from '@tabler/icons-react';
-import { Tooltip, ActionIcon, SegmentedControl, Divider, Autocomplete, Group, Avatar, Text } from '@mantine/core';
+import { Tooltip, ActionIcon, SegmentedControl, Divider, Autocomplete, Text } from '@mantine/core';
 import OSMMap from '@/components/OSMMap/OSMMap';
 import OSMMapDefaults from '@/components/OSMMap/OSMMap.config';
 import { useTranslations } from 'next-intl';
@@ -27,14 +27,12 @@ export default function Page({ children }) {
   const router = useRouter();
   const [isLoadingGeocoder, setIsLoadingGeocoder] = useState(false);
   const t = useTranslations('stops');
+  const params = useParams();
 
   //
   // B. Fetch data
 
   const { data: allStopsData, error: allStopsError, isLoading: allStopsLoading } = useSWR('https://schedules-test.carrismetropolitana.pt/api/stops');
-
-  //
-  // D. Handle actions
 
   //
   // D. Handle actions
@@ -49,28 +47,28 @@ export default function Page({ children }) {
     window.open(`https://www.google.com/maps/@${center.lat},${center.lng},${zoom}z`, '_blank', 'noopener,noreferrer');
   };
 
-  const handleSelectStop = (feature) => {
+  const handleSelectStop = (stopCode) => {
     // Only do something if feature is set
-    if (feature.properties?.code) {
+    if (stopCode) {
       // Get all currently rendered features and mark all of them as unselected
-      const allRenderedFeatures = allStopsMap.queryRenderedFeatures();
-      allRenderedFeatures.forEach(function (f) {
-        allStopsMap.setFeatureState({ source: 'all-stops', id: f.id }, { selected: false });
-      });
-      // Save the current feature to state and mark it as selected
-      setSelectedMapFeature(feature);
-      allStopsMap.setFeatureState({ source: 'all-stops', id: feature.id }, { selected: true });
+      const stopMapFeature = mapData?.features.find((f) => f.properties?.code === stopCode);
       // Zoom and center if too far
-      if (allStopsMap.getZoom() < 14) allStopsMap.flyTo({ center: feature.geometry.coordinates, duration: 5000, zoom: 16 });
+      allStopsMap.flyTo({ center: stopMapFeature?.geometry?.coordinates, duration: 5000, zoom: 16 });
+      // Save the current feature to state and mark it as selected
+      setSelectedMapFeature(stopMapFeature);
       // Save the current stop code and update the URL
-      const newStopCode = feature.properties?.code || '';
-      router.replace(`/stops/${newStopCode}`);
-      setSelectedStopCode(newStopCode);
+      router.replace(`/stops/${stopCode}`);
+      setSelectedStopCode(stopCode);
     }
   };
 
+  //
+  // D. Handle actions
+
   const handleMapClick = (event) => {
-    if (event?.features[0]) handleSelectStop(event.features[0]);
+    if (event?.features[0]) {
+      handleSelectStop(event.features[0].properties.code);
+    }
   };
 
   const handleMapMouseEnter = (event) => {
@@ -92,7 +90,7 @@ export default function Page({ children }) {
       allRenderedFeatures.forEach(function (f) {
         allStopsMap.setFeatureState({ source: 'all-stops', id: f.id }, { selected: false });
       });
-      allStopsMap.setFeatureState({ source: 'all-stops', id: selectedMapFeature.id }, { selected: true });
+      allStopsMap.setFeatureState({ source: 'all-stops', id: selectedMapFeature.properties.mapid }, { selected: true });
     }
   };
 
@@ -100,18 +98,27 @@ export default function Page({ children }) {
     setSearchQuery(value);
   };
 
+  const handleAutocompleteSelect = (item) => {
+    handleSelectStop(item.code);
+  };
+
   const handleGeocoderSearch = () => {
-    if (allStopsData && allStopsData.find((stop) => searchQuery === stop.code)) {
-      // Select stop if exat match
-      handleSelectStop(searchQuery);
-    } else {
-      // Do geocoder search
-      setIsLoadingGeocoder(true);
-    }
+    setIsLoadingGeocoder(true);
   };
 
   //
   // D. Transform data
+
+  const generateUUID = () => {
+    return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function (c) {
+      var r = (Math.random() * 16) | 0,
+        v = c === 'x' ? r : (r & 0x3) | 0x8;
+      return v.toString(16);
+    });
+  };
+
+  //
+  // D. Handle actions
 
   const mapData = useMemo(() => {
     // Create a GeoJSON object
@@ -127,9 +134,10 @@ export default function Page({ children }) {
           type: 'Feature',
           geometry: {
             type: 'Point',
-            coordinates: [parseFloat(stop.longitude), parseFloat(stop.latitude)],
+            coordinates: [stop.longitude, stop.latitude],
           },
           properties: {
+            mapid: `${stop.code}${generateUUID()}`,
             code: stop.code,
             name: stop.name,
             latitude: stop.latitude,
@@ -146,7 +154,7 @@ export default function Page({ children }) {
   const autocompleteData = useMemo(() => {
     if (allStopsData) {
       return allStopsData.map((stop) => {
-        return { code: stop.code, value: stop.name, description: `${stop.locality}, ${stop.municipality_name}` };
+        return { code: stop.code, value: `${stop.name} [${stop.code}]`, name: stop.name, description: `${stop.locality}, ${stop.municipality_name}`, latitude: stop.latitude, longitude: stop.longitude };
       });
     }
     // Only run if allStopsData changes
@@ -155,9 +163,9 @@ export default function Page({ children }) {
   //
   // E. Render components
 
-  const AutoCompleteItem = forwardRef(({ description, value, code, ...others }, ref) => (
+  const AutoCompleteItem = forwardRef(({ code, name, description, ...others }, ref) => (
     <div ref={ref} {...others} style={{ gap: '5px', padding: '8px' }}>
-      <Text size='sm'>{value}</Text>
+      <Text size='sm'>{name}</Text>
       <Text size='xs' color='dimmed'>
         {description} ({code})
       </Text>
@@ -197,13 +205,13 @@ export default function Page({ children }) {
                 icon={<IconSearch size={18} />}
                 rightSection={
                   searchQuery && (
-                    <ActionIcon color='gray' variant='subtle' size='lg' onClick={handleGeocoderSearch} loading={isLoadingGeocoder}>
+                    <ActionIcon color='gray' variant='subtle' size='lg' onClick={handleAutocompleteSelect} loading={isLoadingGeocoder}>
                       <IconCircleArrowRightFilled size={20} />
                     </ActionIcon>
                   )
                 }
                 itemComponent={AutoCompleteItem}
-                onItemSubmit={(item) => handleSelectStop(item.code)}
+                onItemSubmit={handleAutocompleteSelect}
                 value={searchQuery}
                 onChange={setSearchQuery}
                 placeholder={'A pesquisa está muito básica mas funciona :)'}
@@ -218,7 +226,7 @@ export default function Page({ children }) {
           <Divider />
 
           <OSMMap id='allStops' mapStyle={mapStyle} onClick={handleMapClick} onMouseEnter={handleMapMouseEnter} onMouseLeave={handleMapMouseLeave} onMove={handleMapMove} interactiveLayerIds={['all-stops']} height={'50vh'}>
-            <Source id='all-stops' type='geojson' data={mapData} generateId>
+            <Source id='all-stops' type='geojson' data={mapData} generateId={false} promoteId={'mapid'}>
               <Layer
                 id='all-stops'
                 type='circle'
