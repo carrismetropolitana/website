@@ -6,6 +6,11 @@ module.exports = {
   async redirects() {
     return [
       {
+        source: '/horarios',
+        destination: '/schedules',
+        permanent: true,
+      },
+      {
         source: '/paragens',
         destination: '/stops',
         permanent: true,
