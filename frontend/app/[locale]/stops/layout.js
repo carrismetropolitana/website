@@ -3,7 +3,7 @@
 import useSWR from 'swr';
 import { useState, useMemo, forwardRef, useEffect, useCallback } from 'react';
 import { useParams, useRouter } from 'next/navigation';
-import { useMap, Source, Layer } from 'react-map-gl';
+import { useMap, Source, Layer } from 'react-map-gl/maplibre';
 import { IconArrowsMinimize, IconBrandGoogleMaps, IconCircleArrowRightFilled, IconSearch } from '@tabler/icons-react';
 import { Tooltip, ActionIcon, SegmentedControl, Divider, Autocomplete, Text } from '@mantine/core';
 import OSMMap from '@/components/OSMMap/OSMMap';
