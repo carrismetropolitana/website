@@ -3,7 +3,7 @@
 import { SWRConfig } from 'swr';
 import { MantineProvider } from '@mantine/core';
 import { useColorScheme } from '@mantine/hooks';
-import { MapProvider } from 'react-map-gl';
+import { MapProvider } from 'react-map-gl/maplibre';
 
 export default function Providers({ children }) {
   //
