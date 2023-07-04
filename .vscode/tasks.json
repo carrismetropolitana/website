@@ -2,25 +2,34 @@
   "version": "2.0.0",
   "tasks": [
     {
+      "label": "Start Frontend",
+      "detail": "Start local development server with 'npm run dev'",
       "type": "npm",
       "script": "dev",
       "problemMatcher": [],
-      "label": "Start Project Locally",
-      "detail": "Start local development server with 'npm run dev'"
+      "options": {
+        "cwd": "${workspaceFolder}/frontend"
+      }
     },
     {
+      "label": "Install Frontend Dependencies",
+      "detail": "Install project dependencies.",
       "type": "npm",
       "script": "install",
       "problemMatcher": [],
-      "label": "Initialize Repository",
-      "detail": "Install project dependencies."
+      "options": {
+        "cwd": "${workspaceFolder}/frontend"
+      }
     },
     {
       "type": "npm",
       "script": "bump",
       "problemMatcher": [],
-      "label": "Bump Version",
-      "detail": "Increase version number to now."
+      "label": "Bump Frontend Version",
+      "detail": "Increase version number to now.",
+      "options": {
+        "cwd": "${workspaceFolder}/frontend"
+      }
     }
   ]
 }

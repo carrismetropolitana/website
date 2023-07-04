@@ -1,0 +1,40 @@
+name: Build & Publish Docker Images
+
+on:
+  push:
+    branches:
+      - production
+
+jobs:
+  #
+
+  # # # # # # # # # # # # # # # # # # # # #
+  # # # # # # # # # # # # # # # # # # # # #
+
+  go-dashboard:
+    name: 'Build Docker Image (frontend)'
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+    permissions:
+      contents: read
+      packages: write
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Login to GitHub Container Registry
+        uses: docker/login-action@v2
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Build Docker Image - frontend
+        uses: docker/build-push-action@v4
+        with:
+          push: true
+          context: ./frontend
+          file: ./frontend/Dockerfile
+          tags: ghcr.io/carrismetropolitana/website-frontend:${{ github.ref_name }}
