@@ -20,7 +20,7 @@ export default function StopTimetable({ stopCode }) {
   //
   // B. Fetch data
 
-  const { data: stopPatternsData, error: stopPatternsError, isLoading: stopPatternsLoading } = useSWR(stopCode && `https://schedules-test.carrismetropolitana.pt/api/stops/${stopCode}/patterns`);
+  const { data: stopPatternsData, error: stopPatternsError, isLoading: stopPatternsLoading } = useSWR(stopCode && `https://api.carrismetropolitana.pt/stops/${stopCode}/patterns`);
 
   //
   // D. Handle actions

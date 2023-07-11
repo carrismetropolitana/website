@@ -1,0 +1,13 @@
+.container {
+  display: flex;
+  flex-direction: row;
+  gap: var(--size-xs);
+  align-items: center;
+  justify-content: center;
+  background-color: var(--gray2);
+}
+
+.button {
+  padding: var(--size-xs);
+  cursor: pointer;
+}

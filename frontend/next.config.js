@@ -7,7 +7,7 @@ module.exports = {
     return [
       {
         source: '/horarios',
-        destination: '/schedules',
+        destination: '/lines',
         permanent: true,
       },
       {

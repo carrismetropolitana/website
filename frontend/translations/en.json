@@ -359,5 +359,62 @@
                 "placeholder": "Planned construction in..."
             }
         }
+    },
+    "lines": {
+        "page_title": ""
+    },
+    "LinesPage": {
+        "pannel_title": "Lines & Schedules"
+    },
+    "LineSelector": {
+        "form": {
+            "municipality_code": {
+                "label": "Filter by Municipality",
+                "placeholder": "Filter by Municipality",
+                "nothingFound": "No Results Found"
+            },
+            "line_code": {
+                "label": "Select a Line",
+                "placeholder": "Select a Line",
+                "nothingFound": "No Results Found"
+            }
+        }
+    },
+    "LinePatternSelector": {
+        "destination_label": "destined to",
+        "form": {
+            "pattern_code": {
+                "label": "Select a Destination",
+                "placeholder": "Select a Destination",
+                "nothingFound": "No Results Found"
+            },
+            "line_code": {
+                "label": "Select a Line",
+                "placeholder": "Select a Line",
+                "nothingFound": "No Results Found"
+            }
+        }
+    },
+    "LinePatternDateSelector": {
+        "today": "Today",
+        "tomorrow": "Tomorrow",
+        "form": {
+            "date": {
+                "label": "Select a Destination",
+                "placeholder": "Select a Destination",
+                "nothingFound": "No Results Found"
+            }
+        }
+    },
+    "LinePatternMap": {
+        "today": "Today",
+        "tomorrow": "Tomorrow",
+        "form": {
+            "date": {
+                "label": "Select a Destination",
+                "placeholder": "Select a Destination",
+                "nothingFound": "No Results Found"
+            }
+        }
     }
 }

@@ -1,0 +1,25 @@
+.container {
+  min-height: 300px;
+}
+
+.destinationLabel {
+  color: var(--gray5);
+  font-size: 12px;
+}
+
+.mainSelect {
+  width: 100%;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--size-sm);
+}
+
+.mainSelect .mantine-Select-input {
+  text-align: center;
+}
+
+@media (max-width: 900px) {
+  .mainSelect {
+    grid-template-columns: 1fr;
+  }
+}

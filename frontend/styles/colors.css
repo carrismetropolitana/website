@@ -142,7 +142,7 @@
 }
 
 @media (prefers-color-scheme: dark) {
-  :root {
+  .root {
     /* TRANSPARENTS */
     --gray0-15: rgba(0, 0, 0, 0.15);
     --gray0-25: rgba(0, 0, 0, 0.25);

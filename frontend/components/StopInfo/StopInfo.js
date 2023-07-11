@@ -17,7 +17,7 @@ export default function StopInfo({ stopCode }) {
   //
   // B. Fetch data
 
-  const { data: stopData, error: stopError, isLoading: stopLoading } = useSWR(stopCode && `https://schedules-test.carrismetropolitana.pt/api/stops/${stopCode}`);
+  const { data: stopData, error: stopError, isLoading: stopLoading } = useSWR(stopCode && `https://api.carrismetropolitana.pt/stops/${stopCode}`);
 
   //
   // D. Handle actions

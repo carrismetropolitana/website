@@ -5,6 +5,7 @@
     // Using "paths" allows you to configure module path aliases
     "paths": {
       "@/styles/*": ["styles/*"],
+      "@/forms/*": ["forms/*"],
       "@/components/*": ["components/*"],
       "@/hooks/*": ["hooks/*"],
       "@/services/*": ["services/*"],

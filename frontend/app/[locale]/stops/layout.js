@@ -32,7 +32,7 @@ export default function Page({ children }) {
   //
   // B. Fetch data
 
-  const { data: allStopsData, error: allStopsError, isLoading: allStopsLoading } = useSWR('https://schedules-test.carrismetropolitana.pt/api/stops');
+  const { data: allStopsData, error: allStopsError, isLoading: allStopsLoading } = useSWR('https://api.carrismetropolitana.pt/stops');
 
   //
   // D. Handle actions
@@ -225,7 +225,7 @@ export default function Page({ children }) {
 
           <Divider />
 
-          <OSMMap id='allStops' mapStyle={mapStyle} onClick={handleMapClick} onMouseEnter={handleMapMouseEnter} onMouseLeave={handleMapMouseLeave} onMove={handleMapMove} interactiveLayerIds={['all-stops']} height={'50vh'}>
+          <OSMMap id='allStopsMap' mapStyle={mapStyle} onClick={handleMapClick} onMouseEnter={handleMapMouseEnter} onMouseLeave={handleMapMouseLeave} onMove={handleMapMove} interactiveLayerIds={['all-stops']} height={'50vh'}>
             <Source id='all-stops' type='geojson' data={mapData} generateId={false} promoteId={'mapid'}>
               <Layer
                 id='all-stops'

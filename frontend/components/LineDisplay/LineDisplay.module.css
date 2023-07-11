@@ -15,6 +15,14 @@
   line-height: 1;
 }
 
+.badge.lg {
+  font-size: 20px;
+  min-width: 85px;
+  max-width: 85px;
+  min-height: 34px;
+  max-height: 34px;
+}
+
 .name {
   display: flex;
   align-items: center;

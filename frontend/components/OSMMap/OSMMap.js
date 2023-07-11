@@ -8,7 +8,7 @@ export default function OSMMap({ id, mapStyle, scrollZoom = true, onClick = () =
   return (
     <div className={styles.container}>
       <Map
-        id={`${id}Map`}
+        id={id}
         mapLib={maplibregl}
         initialViewState={osmMapDefaults.initialViewState}
         minZoom={osmMapDefaults.minZoom}
