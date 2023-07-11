@@ -1,0 +1,10 @@
+.text {
+  font-size: 20px;
+  line-height: 1.2;
+  font-weight: 600;
+  color: var(--reference-1);
+}
+
+.text.lg {
+  font-size: 25px;
+}

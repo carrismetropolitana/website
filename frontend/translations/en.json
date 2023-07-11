@@ -2,7 +2,8 @@
     "equipments": {
         "bus": "Connection with Bus",
         "train": "Connection with Train",
-        "subway": "Connection with Subway"
+        "subway": "Connection with Subway",
+        "school": "School"
     },
     "stops": {
         "untitled": "Untitled Stop",

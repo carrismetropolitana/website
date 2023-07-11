@@ -22,43 +22,7 @@
   background-color: var(--reference-0);
   box-shadow: 0 0 50px -5px rgba(0, 0, 0, 0.1);
   z-index: 100;
-}
-
-/* * */
-/* TRAVEL TIME */
-
-/* .travelTime {
-  background-color: var(--gray0);
-} */
-
-/* * */
-/* SPINE */
-
-.spine {
-  background-color: red;
-  padding-top: 20px;
-}
-
-.spineIcon {
-  display: flex;
-  align-items: flex-start;
-}
-
-.spineIconOuter {
-  width: 100%;
-  aspect-ratio: 1;
-  border-radius: 999px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background-color: rgba(255, 255, 255, 0.2);
-}
-
-.spineIconInner {
-  border: solid #fff;
-  border-width: 2px;
-  border-radius: 999px;
-  padding: 0;
+  cursor: default;
 }
 
 /* * */
@@ -71,6 +35,7 @@
   justify-content: flex-start;
   width: 100%;
   padding: 20px;
+  gap: var(--size-md);
 }
 
 .header {
@@ -83,10 +48,11 @@
   gap: 2px;
 }
 
-.stopName {
-  font-size: 20px;
-  line-height: 1.2;
-  text-align: center;
+.facilitiesAndPdf {
+  display: flex;
+  flex-direction: row;
+  gap: var(--size-sm);
+  /* margin-top: var(--size-sm); */
 }
 
 .ids {
