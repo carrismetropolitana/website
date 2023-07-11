@@ -43,7 +43,16 @@ export default function LineSelector() {
   }, [allLinesData]);
 
   //
-  // D. Render components
+  // D. Handle actions
+
+  const handleSelectLine = (line_code) => {
+    lineForm.setFieldValue('line_code', line_code);
+    lineForm.setFieldValue('pattern_code', '');
+    lineForm.setFieldValue('stop_code', '');
+  };
+
+  //
+  // E. Render components
 
   const LineSelectorSelectOption = forwardRef(({ label, color, text_color, short_name, long_name, ...others }, ref) => {
     return (
@@ -74,6 +83,7 @@ export default function LineSelector() {
           placeholder={t('form.line_code.placeholder')}
           nothingFound={t('form.line_code.nothingFound')}
           {...lineForm.getInputProps('line_code')}
+          onChange={handleSelectLine}
           data={allLinesDataFormatted}
           itemComponent={LineSelectorSelectOption}
           radius='sm'

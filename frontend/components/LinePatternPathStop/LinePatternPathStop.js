@@ -6,13 +6,14 @@ import StopLocationInfo from '@/components/StopLocationInfo/StopLocationInfo';
 import CopyBadge from '../CopyBadge/CopyBadge';
 import LinePatternPathSpine from '../LinePatternPathSpine/LinePatternPathSpine';
 import LinePatternPathTimetable from '../LinePatternPathTimetable/LinePatternPathTimetable';
+import { useMemo } from 'react';
 
 //
 //
 //
 //
 
-export default function LinePatternPathStop({ index, stop_code, onSelect, isSelected }) {
+export default function LinePatternPathStop({ index, stop_code }) {
   //
 
   //
@@ -29,8 +30,15 @@ export default function LinePatternPathStop({ index, stop_code, onSelect, isSele
   //
   // C. Handle actions
 
+  const isThisStopSelected = useMemo(() => {
+    return lineForm.values.stop_code === stop_code;
+  }, [lineForm.values.stop_code, stop_code]);
+
+  //
+  // C. Handle actions
+
   const handleStopClick = () => {
-    onSelect(stop_code);
+    lineForm.setFieldValue('stop_code', stop_code);
   };
 
   //
@@ -38,16 +46,16 @@ export default function LinePatternPathStop({ index, stop_code, onSelect, isSele
 
   return (
     stopData && (
-      <div className={`${styles.container} ${isSelected && styles.selected}`} onClick={handleStopClick}>
+      <div className={`${styles.container} ${isThisStopSelected && styles.selected}`} onClick={handleStopClick}>
         <div className={styles.travelTime}>tt</div>
-        <LinePatternPathSpine style={index === 0 ? 'start' : 'regular'} isSelected={isSelected} />
+        <LinePatternPathSpine style={index === 0 ? 'start' : 'regular'} isSelected={isThisStopSelected} />
         <div className={styles.info}>
           <div className={styles.header}>
             <h2 className={styles.stopName}>{stopData.name}</h2>
             <StopLocationInfo locality={stopData.locality} municipality={stopData.municipality_name} />
             <div className={styles.facilities}></div>
           </div>
-          {isSelected && (
+          {isThisStopSelected && (
             <div className={styles.body}>
               <div className={styles.ids}>
                 <CopyBadge label={`#${stopData.code}`} value={stopData.code} />

@@ -1,7 +1,7 @@
 'use client';
 
 import useSWR from 'swr';
-import { useMemo, forwardRef } from 'react';
+import { useMemo, forwardRef, useEffect } from 'react';
 import { useTranslations } from 'next-intl';
 import { Select } from '@mantine/core';
 import styles from './LinePatternSelector.module.css';
@@ -31,7 +31,24 @@ export default function LinePatternSelector() {
   }, [lineData]);
 
   //
-  // D. Render components
+  // C. Format data
+
+  useEffect(() => {
+    if (lineData && !lineForm.values.pattern_code) {
+      lineForm.setFieldValue('pattern_code', lineData.patterns[0]);
+    }
+  }, [lineForm, lineData]);
+
+  //
+  // D. Handle actions
+
+  const handleSelectPattern = (pattern_code) => {
+    lineForm.setFieldValue('pattern_code', pattern_code);
+    lineForm.setFieldValue('stop_code', '');
+  };
+
+  //
+  // E. Render components
 
   const LinePatternSelectorSelectOption = forwardRef(({ label, color, text_color, short_name, long_name, ...others }, ref) => {
     return (
@@ -53,6 +70,7 @@ export default function LinePatternSelector() {
           placeholder={t('form.pattern_code.placeholder')}
           nothingFound={t('form.pattern_code.nothingFound')}
           {...lineForm.getInputProps('pattern_code')}
+          onChange={handleSelectPattern}
           data={linePatternsFormatted}
           radius='sm'
           size='lg'

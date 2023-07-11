@@ -1,3 +1,6 @@
+/* * */
+/* CONTAINER */
+
 .container {
   display: flex;
   flex-direction: row;
@@ -5,41 +8,63 @@
   row-gap: 20px;
 }
 
-.time {
+/* * */
+/* COLUMN */
+
+.column {
   display: flex;
   flex-direction: column;
 }
 
-.hour {
+/* * */
+/* HOURS & MINUTES */
+
+.hour,
+.minute {
   display: flex;
   align-items: center;
   justify-content: center;
   font-size: 15px;
-  font-weight: 400;
-  padding: 4px 5px;
+  padding: 7px 10px;
   min-width: 35px;
+  line-height: 1;
 }
 
-.hour:first-child {
+.column:first-child .hour,
+.column:first-child .minute {
+  justify-content: flex-start;
+  padding-left: 15px;
+}
+
+.column:last-child .hour,
+.column:last-child .minute {
+  padding-right: 20px;
+}
+
+/* * */
+/* HOURS */
+
+.hour {
+  font-weight: 800;
   background-color: #000;
   color: #fff;
-  font-weight: 600;
 }
 
-.time:first-child .hour:first-child {
+.column:first-child .hour {
+  font-weight: 700;
   border-top-left-radius: 999px;
   border-bottom-left-radius: 999px;
 }
 
-.time:first-child .hour {
-  padding-left: 15px;
-}
-
-.time:last-child .hour:first-child {
+.column:last-child .hour,
+.column:last-child .minute {
   border-top-right-radius: 999px;
   border-bottom-right-radius: 999px;
 }
 
-.time:last-child .hour {
-  padding-right: 15px;
+/* * */
+/* MINUTES */
+
+.minute {
+  font-weight: 500;
 }

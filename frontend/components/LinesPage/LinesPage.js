@@ -1,7 +1,7 @@
 'use client';
 
 import useSWR from 'swr';
-import { LineFormProvider, useLineForm, LineFormDefault } from '@/forms/LineForm';
+import { LineFormProvider, useLineForm, LineFormOptions } from '@/forms/LineForm';
 import { Divider } from '@mantine/core';
 import styles from './LinesPage.module.css';
 import Pannel from '../Pannel/Pannel';
@@ -29,12 +29,7 @@ export default function LinesPage() {
   //
   // B. Fetch data
 
-  const lineForm = useLineForm({
-    validateInputOnBlur: true,
-    validateInputOnChange: true,
-    clearInputErrorOnChange: true,
-    initialValues: LineFormDefault,
-  });
+  const lineForm = useLineForm(LineFormOptions);
 
   //
   // c. Render components

@@ -417,7 +417,14 @@
             }
         }
     },
-    "LinePatternPathTimetable": {},
+    "LinePatternPathTimetable": {
+        "hours": {
+            "label": "Hour"
+        },
+        "minutes": {
+            "label": "Min."
+        }
+    },
     "LinePatternPathStop": {},
     "LinePatternPath": {},
     "LinePatternPathSpine": {}

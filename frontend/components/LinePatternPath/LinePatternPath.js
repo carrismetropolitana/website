@@ -3,7 +3,7 @@ import { useTranslations } from 'next-intl';
 import { useLineFormContext } from '@/forms/LineForm';
 import styles from './LinePatternPath.module.css';
 import LinePatternPathStop from '../LinePatternPathStop/LinePatternPathStop';
-import { useState } from 'react';
+import { useEffect } from 'react';
 
 export default function LinePatternPath() {
   //
@@ -14,8 +14,6 @@ export default function LinePatternPath() {
   const lineForm = useLineFormContext();
   const t = useTranslations('LinePatternPath');
 
-  const [selectedStop, setSelectedStop] = useState('');
-
   //
   // B. Fetch data
 
@@ -23,6 +21,12 @@ export default function LinePatternPath() {
 
   //
   // C. Format data
+
+  useEffect(() => {
+    if (patternData && !lineForm.values.stop_code) {
+      lineForm.setFieldValue('stop_code', patternData.path[0].stop.code);
+    }
+  }, [lineForm, patternData]);
 
   //
   // D. Render components
@@ -32,7 +36,7 @@ export default function LinePatternPath() {
       <div className={styles.container}>
         {patternData.path.map((pathStop, pathIndex) => (
           <div key={pathIndex}>
-            <LinePatternPathStop index={pathIndex} stop_code={pathStop.stop.code} onSelect={setSelectedStop} isSelected={selectedStop === pathStop.stop.code} />
+            <LinePatternPathStop index={pathIndex} stop_code={pathStop.stop.code} />
           </div>
         ))}
       </div>

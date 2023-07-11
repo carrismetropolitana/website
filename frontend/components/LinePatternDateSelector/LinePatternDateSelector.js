@@ -4,6 +4,7 @@ import { useTranslations } from 'next-intl';
 import { DatePickerInput } from '@mantine/dates';
 import styles from './LinePatternDateSelector.module.css';
 import { useLineFormContext } from '@/forms/LineForm';
+import parseDateToString from '@/services/parseDateToString';
 
 export default function LinePatternDateSelector() {
   //
@@ -28,6 +29,7 @@ export default function LinePatternDateSelector() {
     }
     // Set the date value for today
     lineForm.setFieldValue('date', currentDate);
+    lineForm.setFieldValue('date_string', parseDateToString(currentDate));
   };
 
   const handleSetTomorrow = () => {
@@ -39,8 +41,15 @@ export default function LinePatternDateSelector() {
     if (!(currentHour >= 0 && currentHour < 4)) {
       currentDate.setDate(currentDate.getDate() + 1);
     }
-    // Set the date value for today
+    // Set the date value for tomorrow
     lineForm.setFieldValue('date', currentDate);
+    lineForm.setFieldValue('date_string', parseDateToString(currentDate));
+  };
+
+  const handleSetDate = (value) => {
+    // Set the date value for tomorrow
+    lineForm.setFieldValue('date', value);
+    lineForm.setFieldValue('date_string', parseDateToString(value));
   };
 
   //
@@ -54,7 +63,7 @@ export default function LinePatternDateSelector() {
       <div className={`${styles.button}`} onClick={handleSetTomorrow}>
         {t('tomorrow')}
       </div>
-      <DatePickerInput aria-label={t('form.date.label')} placeholder={t('form.date.placeholder')} dropdownType='modal' {...lineForm.getInputProps('date')} size='lg' />
+      <DatePickerInput aria-label={t('form.date.label')} placeholder={t('form.date.placeholder')} dropdownType='modal' {...lineForm.getInputProps('date')} onChange={handleSetDate} size='lg' />
     </div>
   );
 }
