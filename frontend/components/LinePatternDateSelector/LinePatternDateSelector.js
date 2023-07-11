@@ -16,13 +16,10 @@ export default function LinePatternDateSelector() {
   const lineForm = useLineFormContext();
   const t = useTranslations('LinePatternDateSelector');
 
-  const [isToday, setIsToday] = useState(false);
-  const [isTomorrow, setIsTomorrow] = useState(false);
-
   //
   // C. Handle actions
 
-  const todayDateString = useMemo(() => {
+  const todayDate = useMemo(() => {
     // Get the current date and time
     const currentDate = new Date();
     const currentHour = currentDate.getHours();
@@ -31,48 +28,50 @@ export default function LinePatternDateSelector() {
     if (currentHour >= 0 && currentHour < 4) {
       currentDate.setDate(currentDate.getDate() - 1);
     }
-    return parseDateToString(currentDate);
+    // Return date for today
+    return currentDate;
+    //
   }, []);
 
-  const tomorrowDateString = useMemo(() => {
+  const isTodaySelected = useMemo(() => {
+    const todayDateString = parseDateToString(todayDate);
+    return todayDateString === lineForm.values.date_string;
+  }, [lineForm.values.date_string, todayDate]);
+
+  //
+  //
+  //
+
+  const tomorrowDate = useMemo(() => {
     // Get the current date and time
     const currentDate = new Date();
     const currentHour = currentDate.getHours();
     // If the current hour is after midnight and before 4AM,
     // set the date to the previous day.
-    if (currentHour >= 0 && currentHour < 4) {
-      currentDate.setDate(currentDate.getDate() - 1);
+    if (!(currentHour >= 0 && currentHour < 4)) {
+      currentDate.setDate(currentDate.getDate() + 1);
     }
-    return parseDateToString(currentDate);
+    // Return date for today
+    return currentDate;
+    //
   }, []);
+
+  const isTomorrowSelected = useMemo(() => {
+    const tomorrowDateString = parseDateToString(tomorrowDate);
+    return tomorrowDateString === lineForm.values.date_string;
+  }, [lineForm.values.date_string, tomorrowDate]);
 
   //
   // C. Handle actions
 
   const handleSetToday = () => {
-    // Get the current date and time
-    const currentDate = new Date();
-    const currentHour = currentDate.getHours();
-    // If the current hour is after midnight and before 4AM,
-    // set the date to the previous day.
-    if (!(currentHour >= 0 && currentHour < 4)) {
-      currentDate.setDate(currentDate.getDate() + 1);
-    }
     // Set the date value for today
-    handleSetDate(currentDate);
+    handleSetDate(todayDate);
   };
 
   const handleSetTomorrow = () => {
-    // Get the current date and time
-    const currentDate = new Date();
-    const currentHour = currentDate.getHours();
-    // If the current hour is after midnight and before 4AM,
-    // set the date to the previous day.
-    if (!(currentHour >= 0 && currentHour < 4)) {
-      currentDate.setDate(currentDate.getDate() + 1);
-    }
     // Set the date value for tomorrow
-    handleSetDate(currentDate);
+    handleSetDate(tomorrowDate);
   };
 
   const handleSetDate = (value) => {
@@ -87,13 +86,30 @@ export default function LinePatternDateSelector() {
   return (
     <div className={styles.container}>
       <div className={styles.dateSelector}>
-        <div className={`${styles.button}`} onClick={handleSetToday}>
+        <div className={`${styles.button} ${isTodaySelected && styles.selected}`} onClick={handleSetToday}>
           {t('today')}
         </div>
-        <div className={`${styles.button}`} onClick={handleSetTomorrow}>
+        <div className={`${styles.button} ${isTomorrowSelected && styles.selected}`} onClick={handleSetTomorrow}>
           {t('tomorrow')}
         </div>
-        <DatePickerInput aria-label={t('form.date.label')} placeholder={t('form.date.placeholder')} dropdownType='modal' {...lineForm.getInputProps('date')} onChange={handleSetDate} size='lg' styles={{ input: { border: 'none' } }} />
+        <DatePickerInput
+          aria-label={t('form.date.label')}
+          placeholder={t('form.date.placeholder')}
+          dropdownType='modal'
+          {...lineForm.getInputProps('date')}
+          onChange={handleSetDate}
+          size='lg'
+          styles={{
+            input: {
+              border: 'none',
+              textAlign: 'center',
+              fontWeight: '600',
+              color: !isTodaySelected && !isTomorrowSelected ? 'var(--reference-0)' : 'var(--reference-1)',
+              backgroundColor: !isTodaySelected && !isTomorrowSelected ? 'var(--reference-1)' : 'transparent',
+              borderRadius: 0,
+            },
+          }}
+        />
       </div>
     </div>
   );
