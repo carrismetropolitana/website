@@ -44,8 +44,8 @@ export default function LinesPage() {
               <Divider />
               <LinePatternDateSelector />
               <LinePatternSelector />
-              {/* {lineForm.values.pattern_code && <LinePatternMap />} */}
               {lineForm.values.pattern_code && <LinePatternPath />}
+              {lineForm.values.pattern_code && <LinePatternMap />}
             </div>
           )}
         </form>

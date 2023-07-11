@@ -4,10 +4,30 @@
   gap: var(--size-xs);
   align-items: center;
   justify-content: center;
-  background-color: var(--gray2);
+}
+
+.dateSelector {
+  display: flex;
+  flex-direction: row;
+  /* gap: var(--size-md); */
+  align-items: center;
+  justify-content: center;
+  background-color: var(--reference-0);
+  /* padding: var(--size-sm); */
+  border-radius: var(--size-sm);
+  border: 2px solid var(--gray2);
+  box-shadow: 0 0 30px 0 rgba(0, 0, 0, 0.05);
+  overflow: hidden;
 }
 
 .button {
-  padding: var(--size-xs);
+  padding: var(--size-sm) var(--size-lg);
   cursor: pointer;
+  font-size: 18px;
+  font-weight: 500;
+  border-right: 2px solid var(--gray2);
+}
+
+.button:hover {
+  background-color: var(--gray0);
 }

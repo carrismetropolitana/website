@@ -57,13 +57,15 @@ export default function LinePatternDateSelector() {
 
   return (
     <div className={styles.container}>
-      <div className={`${styles.button}`} onClick={handleSetToday}>
-        {t('today')}
+      <div className={styles.dateSelector}>
+        <div className={`${styles.button}`} onClick={handleSetToday}>
+          {t('today')}
+        </div>
+        <div className={`${styles.button}`} onClick={handleSetTomorrow}>
+          {t('tomorrow')}
+        </div>
+        <DatePickerInput aria-label={t('form.date.label')} placeholder={t('form.date.placeholder')} dropdownType='modal' {...lineForm.getInputProps('date')} onChange={handleSetDate} size='lg' styles={{ input: { border: 'none' } }} />
       </div>
-      <div className={`${styles.button}`} onClick={handleSetTomorrow}>
-        {t('tomorrow')}
-      </div>
-      <DatePickerInput aria-label={t('form.date.label')} placeholder={t('form.date.placeholder')} dropdownType='modal' {...lineForm.getInputProps('date')} onChange={handleSetDate} size='lg' />
     </div>
   );
 }

@@ -4,8 +4,8 @@
 }
 
 .spine {
-  background-color: red;
   padding-top: 20px;
+  background-color: var(--gray2);
 }
 
 .spine.start {

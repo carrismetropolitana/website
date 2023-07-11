@@ -8,7 +8,7 @@ import styles from './LinePatternPathSpine.module.css';
 //
 //
 
-export default function LinePatternPathSpine({ style, isSelected }) {
+export default function LinePatternPathSpine({ style, color, text_color, isSelected }) {
   //
 
   //
@@ -22,7 +22,7 @@ export default function LinePatternPathSpine({ style, isSelected }) {
 
   if (style === 'start') {
     return (
-      <div className={`${styles.spine} ${styles.start}`}>
+      <div className={`${styles.spine} ${styles.start}`} style={{ backgroundColor: color }}>
         <div className={styles.spineIcon}>
           <div className={styles.spineIconOuter}>
             <div className={styles.spineIconInner}></div>
@@ -34,7 +34,7 @@ export default function LinePatternPathSpine({ style, isSelected }) {
 
   if (style === 'end') {
     return (
-      <div className={`${styles.spine} ${styles.end}`}>
+      <div className={`${styles.spine} ${styles.end}`} style={{ backgroundColor: color }}>
         <div className={styles.spineIcon}>
           <div className={styles.spineIconOuter}>
             <div className={styles.spineIconInner}></div>
@@ -45,7 +45,7 @@ export default function LinePatternPathSpine({ style, isSelected }) {
   }
 
   return (
-    <div className={styles.spine}>
+    <div className={styles.spine} style={{ backgroundColor: color }}>
       <div className={styles.spineIcon}>
         <div className={styles.spineIconOuter}>
           <div className={styles.spineIconInner}></div>
