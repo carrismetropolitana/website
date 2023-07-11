@@ -5,6 +5,7 @@ import { DatePickerInput } from '@mantine/dates';
 import styles from './LinePatternDateSelector.module.css';
 import { useLineFormContext } from '@/forms/LineForm';
 import parseDateToString from '@/services/parseDateToString';
+import { useMemo, useState } from 'react';
 
 export default function LinePatternDateSelector() {
   //
@@ -15,6 +16,36 @@ export default function LinePatternDateSelector() {
   const lineForm = useLineFormContext();
   const t = useTranslations('LinePatternDateSelector');
 
+  const [isToday, setIsToday] = useState(false);
+  const [isTomorrow, setIsTomorrow] = useState(false);
+
+  //
+  // C. Handle actions
+
+  const todayDateString = useMemo(() => {
+    // Get the current date and time
+    const currentDate = new Date();
+    const currentHour = currentDate.getHours();
+    // If the current hour is after midnight and before 4AM,
+    // set the date to the previous day.
+    if (currentHour >= 0 && currentHour < 4) {
+      currentDate.setDate(currentDate.getDate() - 1);
+    }
+    return parseDateToString(currentDate);
+  }, []);
+
+  const tomorrowDateString = useMemo(() => {
+    // Get the current date and time
+    const currentDate = new Date();
+    const currentHour = currentDate.getHours();
+    // If the current hour is after midnight and before 4AM,
+    // set the date to the previous day.
+    if (currentHour >= 0 && currentHour < 4) {
+      currentDate.setDate(currentDate.getDate() - 1);
+    }
+    return parseDateToString(currentDate);
+  }, []);
+
   //
   // C. Handle actions
 
@@ -24,12 +55,11 @@ export default function LinePatternDateSelector() {
     const currentHour = currentDate.getHours();
     // If the current hour is after midnight and before 4AM,
     // set the date to the previous day.
-    if (currentHour >= 0 && currentHour < 4) {
-      currentDate.setDate(currentDate.getDate() - 1);
+    if (!(currentHour >= 0 && currentHour < 4)) {
+      currentDate.setDate(currentDate.getDate() + 1);
     }
     // Set the date value for today
-    lineForm.setFieldValue('date', currentDate);
-    lineForm.setFieldValue('date_string', parseDateToString(currentDate));
+    handleSetDate(currentDate);
   };
 
   const handleSetTomorrow = () => {
@@ -42,8 +72,7 @@ export default function LinePatternDateSelector() {
       currentDate.setDate(currentDate.getDate() + 1);
     }
     // Set the date value for tomorrow
-    lineForm.setFieldValue('date', currentDate);
-    lineForm.setFieldValue('date_string', parseDateToString(currentDate));
+    handleSetDate(currentDate);
   };
 
   const handleSetDate = (value) => {
