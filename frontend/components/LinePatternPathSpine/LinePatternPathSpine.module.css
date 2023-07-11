@@ -11,6 +11,8 @@
 .spine.start {
   margin-top: 20px;
   padding-top: 0;
+  border-top-left-radius: 999px;
+  border-top-right-radius: 999px;
 }
 
 .spineIcon {

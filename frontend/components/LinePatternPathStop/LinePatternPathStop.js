@@ -39,7 +39,7 @@ export default function LinePatternPathStop({ index, stop_code, onSelect, isSele
   return (
     stopData && (
       <div className={`${styles.container} ${isSelected && styles.selected}`} onClick={handleStopClick}>
-        <div className={styles.travelTime}>ttime</div>
+        <div className={styles.travelTime}>tt</div>
         <LinePatternPathSpine style={index === 0 ? 'start' : 'regular'} isSelected={isSelected} />
         <div className={styles.info}>
           <div className={styles.header}>
