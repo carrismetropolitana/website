@@ -45,13 +45,13 @@ export default function LinesPage() {
         <form>
           <LineSelector />
           {lineForm.values.line_code && (
-            <>
+            <div className={styles.container}>
               <Divider />
               <LinePatternDateSelector />
               <LinePatternSelector />
               {/* {lineForm.values.pattern_code && <LinePatternMap />} */}
               {lineForm.values.pattern_code && <LinePatternPath />}
-            </>
+            </div>
           )}
         </form>
       </LineFormProvider>

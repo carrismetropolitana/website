@@ -4,13 +4,15 @@ import { useLineFormContext } from '@/forms/LineForm';
 import styles from './LinePatternPathStop.module.css';
 import StopLocationInfo from '@/components/StopLocationInfo/StopLocationInfo';
 import CopyBadge from '../CopyBadge/CopyBadge';
+import LinePatternPathSpine from '../LinePatternPathSpine/LinePatternPathSpine';
+import LinePatternPathTimetable from '../LinePatternPathTimetable/LinePatternPathTimetable';
 
 //
 //
 //
 //
 
-export default function LinePatternPathStop({ index, stop_code, onSelect, selectedStop }) {
+export default function LinePatternPathStop({ index, stop_code, onSelect, isSelected }) {
   //
 
   //
@@ -36,64 +38,28 @@ export default function LinePatternPathStop({ index, stop_code, onSelect, select
 
   return (
     stopData && (
-      <div className={`${styles.container} ${selectedStop === stop_code && styles.selected}`} onClick={handleStopClick}>
+      <div className={`${styles.container} ${isSelected && styles.selected}`} onClick={handleStopClick}>
         <div className={styles.travelTime}>ttime</div>
-        <div className={styles.spine}>
-          <div className={styles.spineIcon}>
-            <div className={styles.spineIconOuter}>
-              <div className={styles.spineIconInner}></div>
-            </div>
-          </div>
-        </div>
+        <LinePatternPathSpine style={index === 0 ? 'start' : 'regular'} isSelected={isSelected} />
         <div className={styles.info}>
           <div className={styles.header}>
             <h2 className={styles.stopName}>{stopData.name}</h2>
             <StopLocationInfo locality={stopData.locality} municipality={stopData.municipality_name} />
             <div className={styles.facilities}></div>
           </div>
-          {/* <div className={styles.body}>
-            <div className={styles.ids}>
-              <CopyBadge label={`#${stopData.code}`} value={stopData.code} />
-              <CopyBadge label={`${stopData.latitude}, ${stopData.longitude}`} value={`${stopData.latitude}	${stopData.longitude}`} />
+          {isSelected && (
+            <div className={styles.body}>
+              <div className={styles.ids}>
+                <CopyBadge label={`#${stopData.code}`} value={stopData.code} />
+                <CopyBadge label={`${stopData.latitude}, ${stopData.longitude}`} value={`${stopData.latitude}	${stopData.longitude}`} />
+              </div>
+              <LinePatternPathTimetable index={index} stop_code={stop_code} />
             </div>
-            <div>stop info</div>
-            <div>stop info</div>
-            <div>stop info</div>
-            <div>stop info</div>
-            <div>stop info</div>
-            <div>stop info</div>
-            <div>stop info</div>
-            <div>stop info</div>
-            <div>stop info</div>
-          </div> */}
+          )}
         </div>
       </div>
     )
   );
 
-  return (
-    stopData && (
-      <div className={styles.container}>
-        <div className='stop_marker-container'>
-          <div className='stop_marker_active'></div>
-          <div className='stop_marker_icon'>
-            <div className='outter'>
-              <div className='inner'></div>
-            </div>
-          </div>
-          <div className='stop_marker_dash'></div>
-        </div>
-        <div className='stop_info'>
-          <div className='stop_header'>
-            <p className='arrival_time'>arrival_time</p>
-            <p className='stop_name'>item.stop_name</p>
-          </div>
-          <div className='stop_details'>
-            <div className='pdf-container'></div>
-            <p className='stop_id'>#item.stop_id</p>
-          </div>
-        </div>
-      </div>
-    )
-  );
+  //
 }

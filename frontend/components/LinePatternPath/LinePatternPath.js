@@ -32,7 +32,7 @@ export default function LinePatternPath() {
       <div className={styles.container}>
         {patternData.path.map((pathStop, pathIndex) => (
           <div key={pathIndex}>
-            <LinePatternPathStop index={pathIndex} stop_code={pathStop.stop.code} onSelect={setSelectedStop} selectedStop={selectedStop} />
+            <LinePatternPathStop index={pathIndex} stop_code={pathStop.stop.code} onSelect={setSelectedStop} isSelected={selectedStop === pathStop.stop.code} />
           </div>
         ))}
       </div>

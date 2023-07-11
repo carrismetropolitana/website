@@ -416,5 +416,9 @@
                 "nothingFound": "No Results Found"
             }
         }
-    }
+    },
+    "LinePatternPathTimetable": {},
+    "LinePatternPathStop": {},
+    "LinePatternPath": {},
+    "LinePatternPathSpine": {}
 }

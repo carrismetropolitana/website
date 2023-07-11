@@ -1,0 +1,36 @@
+.container {
+  background-color: blue;
+  padding-top: 20px;
+}
+
+.spine {
+  background-color: red;
+  padding-top: 20px;
+}
+
+.spine.start {
+  margin-top: 20px;
+  padding-top: 0;
+}
+
+.spineIcon {
+  display: flex;
+  align-items: flex-start;
+}
+
+.spineIconOuter {
+  width: 100%;
+  aspect-ratio: 1;
+  border-radius: 999px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: rgba(255, 255, 255, 0.2);
+}
+
+.spineIconInner {
+  border: solid #fff;
+  border-width: 2px;
+  border-radius: 999px;
+  padding: 0;
+}

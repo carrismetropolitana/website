@@ -2,30 +2,41 @@
 /* CONTAINER */
 
 .container {
+  position: relative;
   display: grid;
   grid-template-columns: 60px 24px 1fr;
   width: 100%;
   align-items: stretch;
   justify-content: flex-start;
   gap: 1px;
+  transition: all 200ms ease;
+  cursor: pointer;
+  background-color: var(--gray0);
+}
+
+.container:hover {
+  background-color: var(--reference-0);
 }
 
 .container.selected {
-  background-color: var(--gray1);
+  background-color: var(--reference-0);
+  box-shadow: 0 0 50px -5px rgba(0, 0, 0, 0.1);
+  z-index: 100;
 }
 
 /* * */
 /* TRAVEL TIME */
 
-.travelTime {
-  background-color: blue;
-}
+/* .travelTime {
+  background-color: var(--gray0);
+} */
 
 /* * */
 /* SPINE */
 
 .spine {
   background-color: red;
+  padding-top: 20px;
 }
 
 .spineIcon {
@@ -59,7 +70,7 @@
   align-items: flex-start;
   justify-content: flex-start;
   width: 100%;
-  padding: 0 20px 20px 20px;
+  padding: 20px;
 }
 
 .header {
@@ -69,7 +80,7 @@
   align-items: flex-start;
   justify-content: flex-start;
   width: 100%;
-  gap: 3px;
+  gap: 2px;
 }
 
 .stopName {
