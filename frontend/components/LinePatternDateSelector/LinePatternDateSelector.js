@@ -85,7 +85,7 @@ export default function LinePatternDateSelector() {
 
   return (
     <div className={styles.container}>
-      <div className={styles.dateSelector}>
+      <div className={styles.wrapper}>
         <div className={`${styles.button} ${isTodaySelected && styles.selected}`} onClick={handleSetToday}>
           {t('today')}
         </div>
@@ -99,16 +99,7 @@ export default function LinePatternDateSelector() {
           {...lineForm.getInputProps('date')}
           onChange={handleSetDate}
           size='lg'
-          styles={{
-            input: {
-              border: 'none',
-              textAlign: 'center',
-              fontWeight: '600',
-              color: !isTodaySelected && !isTomorrowSelected ? 'var(--reference-0)' : 'var(--reference-1)',
-              backgroundColor: !isTodaySelected && !isTomorrowSelected ? 'var(--reference-1)' : 'transparent',
-              borderRadius: 0,
-            },
-          }}
+          classNames={{ input: `${styles.input} ${!isTodaySelected && !isTomorrowSelected && styles.selected}` }}
         />
       </div>
     </div>

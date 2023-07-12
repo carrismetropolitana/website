@@ -1,3 +1,6 @@
+/* * */
+/* CONTAINER */
+
 .container {
   display: flex;
   flex-direction: row;
@@ -6,36 +9,84 @@
   justify-content: center;
 }
 
-.dateSelector {
+/* * */
+/* WRAPPER */
+
+.wrapper {
   display: grid;
-  grid-template-columns: repeat(3, 150px);
+  grid-template-columns: repeat(3, auto);
   background-color: var(--gray1);
   border-radius: var(--size-sm);
   border: 2px solid var(--reference-1);
-  box-shadow: 0 0 30px 0 rgba(0, 0, 0, 0.05);
+  box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.1);
   overflow: hidden;
   background-color: var(--reference-0);
 }
+
+@media (max-width: 600px) {
+  .wrapper {
+    display: grid;
+    grid-template-columns: 1fr;
+    background-color: var(--gray1);
+    border-radius: var(--size-sm);
+    border: 2px solid var(--reference-1);
+    box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    background-color: var(--reference-0);
+  }
+}
+
+/* * */
+/* BUTTONS & INPUT */
+
+.button,
+.input {
+  border: none;
+  border-radius: 0;
+  font-size: 18px;
+  font-weight: 600;
+  text-align: center;
+  color: var(--reference-1);
+  background-color: var(--reference-0);
+  transition: all 200ms ease;
+  cursor: pointer;
+  padding: var(--size-sm) var(--size-lg);
+  line-height: 1;
+  min-height: 10px;
+}
+
+.button:hover,
+.input:hover {
+  background-color: var(--gray1);
+}
+
+/* * */
+/* BUTTONS */
 
 .button {
   display: flex;
   align-items: center;
   justify-content: center;
-  cursor: pointer;
-  font-size: 18px;
-  font-weight: 600;
   border-right: 2px solid var(--reference-1);
-  color: var(--reference-1);
-  transition: all 200ms ease;
-}
-
-.button:hover {
-  color: var(--gray7);
-  background-color: var(--reference-0);
 }
 
 .button.selected {
   cursor: default;
+  color: var(--reference-0);
+  background-color: var(--reference-1);
+}
+
+@media (max-width: 600px) {
+  .button {
+    border-right: none;
+    border-bottom: 2px solid var(--reference-1);
+  }
+}
+
+/* * */
+/* INPUT */
+
+.input.selected {
   color: var(--reference-0);
   background-color: var(--reference-1);
 }
