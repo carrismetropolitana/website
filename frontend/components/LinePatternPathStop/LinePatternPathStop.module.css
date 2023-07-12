@@ -4,7 +4,7 @@
 .container {
   position: relative;
   display: grid;
-  grid-template-columns: 20px 20px 1fr;
+  grid-template-columns: 14px 14px 1fr;
   width: 100%;
   align-items: stretch;
   justify-content: flex-start;
@@ -35,7 +35,7 @@
   justify-content: flex-start;
   width: 100%;
   padding: 20px;
-  gap: var(--size-md);
+  gap: var(--size-sm);
 }
 
 .header {
@@ -48,11 +48,13 @@
   gap: 2px;
 }
 
-.facilitiesAndPdf {
+.body {
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+  width: 100%;
   gap: var(--size-sm);
-  /* margin-top: var(--size-sm); */
 }
 
 .ids {

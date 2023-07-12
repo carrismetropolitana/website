@@ -11,6 +11,7 @@ import StopName from '../StopName/StopName';
 import StopFacilities from '../StopFacilities/StopFacilities';
 import { Space } from '@mantine/core';
 import StopPDF from '../StopPDF/StopPDF';
+import StopRealTime from '../StopRealTime/StopRealTime';
 
 //
 //
@@ -61,10 +62,9 @@ export default function LinePatternPathStop({ index, stop_code }) {
             <StopName code={stopData.code} name={stopData.name} short_name={stopData.short_name} tts_name={stopData.tts_name} />
             <StopLocationInfo locality={stopData.locality} municipality={stopData.municipality_name} />
           </div>
-          <div className={styles.facilitiesAndPdf}>
-            <StopFacilities facilities={stopData.near_services} />
-            {isThisStopSelected && <StopPDF line_code={lineForm.values.line_code} stop_code={stop_code} direction={patternData.direction} />}
-          </div>
+          <StopRealTime pattern_code={lineForm.values.pattern_code} stop_code={stopData.code} />
+          <StopFacilities facilities={stopData.near_services} />
+          {isThisStopSelected && <StopPDF line_code={lineForm.values.line_code} stop_code={stop_code} direction={patternData.direction} />}
           {isThisStopSelected && (
             <div className={styles.body}>
               <div className={styles.ids}>

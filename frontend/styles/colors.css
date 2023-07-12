@@ -2,6 +2,12 @@
   /* BRAND */
   --carris-metropolitana: #ffdd01;
 
+  /* REALTIME */
+  --realtime-0: rgba(0, 215, 50, 0);
+  --realtime-50: rgba(0, 215, 50, 0.5);
+  --realtime-75: rgba(0, 215, 50, 0.75);
+  --realtime-100: rgba(0, 205, 50, 1);
+
   /* ACCENT */
   --primary1: #ffffc8;
   --primary2: #ffff8c;
