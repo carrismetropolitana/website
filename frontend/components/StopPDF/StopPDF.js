@@ -16,40 +16,33 @@ export default function StopPDF({ line_code, stop_code, direction }) {
   // C. Handle actions
 
   useEffect(() => {
-    //
-    setIsLoading(true);
+    (async function () {
+      try {
+        //
+        let fetchUrl = '';
+        if (line_code.startsWith('3') || line_code.startsWith('4')) {
+          fetchUrl = `https://api.carrismetropolitana.pt/pdf/${stop_code}/${line_code}/${direction}`;
+        } else {
+          fetchUrl = `https://www.carrismetropolitana.pt/wp-content/themes/carrismetropolitana/horarios/${line_code}/Linha_${line_code}_${stop_code}.pdf`;
+        }
 
-    let fetchUrl = '';
+        const response = await fetch(fetchUrl);
+        const responseData = await response.arrayBuffer();
 
-    if (line_code.startsWith('3') || line_code.startsWith('4')) {
-      fetchUrl = `https://api.carrismetropolitana.pt/pdf/${stop_code}/${line_code}/${direction}`;
-    } else {
-      fetchUrl = `https://www.carrismetropolitana.pt/wp-content/themes/carrismetropolitana/horarios/${line_code}/Linha_${line_code}_${stop_code}.pdf`;
-    }
-
-    fetch(fetchUrl)
-      .then((res) => {
-        if (!res.ok) throw Error(res.statusText);
-        else return res.arrayBuffer();
-      })
-      .then((arrayBuffer) => {
-        const fileBlob = new Blob([arrayBuffer], { type: 'application/pdf' });
+        const fileBlob = new Blob([responseData], { type: 'application/pdf' });
         const fileBlobUrl = URL.createObjectURL(fileBlob);
         setPdfFileUrl(fileBlobUrl);
-        setIsLoading(false);
-      })
-      .catch((err) => {
-        setIsLoading(false);
+        //
+      } catch (error) {
         return null;
-      });
+      }
+    })();
   }, [direction, line_code, stop_code]);
 
   //
   // C. Render components
 
-  return isLoading ? (
-    <Loader size={27} visible />
-  ) : pdfFileUrl ? (
+  return pdfFileUrl ? (
     <a className={styles.container} target='_blank' href={pdfFileUrl}>
       <p>Abrir PDF</p>
       <IconFileDownload size={18} />

@@ -428,5 +428,9 @@
     },
     "LinePatternPathStop": {},
     "LinePatternPath": {},
-    "LinePatternPathSpine": {}
+    "LinePatternPathSpine": {},
+    "StopRealTime": {
+        "will_pass": "{value}",
+        "just_passed": "Just passed"
+    }
 }

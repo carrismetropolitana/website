@@ -1,6 +1,7 @@
 import useSWR from 'swr';
 import { useEffect, useMemo, useState } from 'react';
 import styles from './StopRealTime.module.css';
+import { useTranslations, useFormatter, useNow } from 'next-intl';
 import { IconFileDownload } from '@tabler/icons-react';
 import Loader from '../Loader/Loader';
 
@@ -10,20 +11,20 @@ export default function StopRealTime({ pattern_code, stop_code }) {
   //
   // A. Setup variables
 
-  const [isLoading, setIsLoading] = useState(true);
-  const [realTimeEstimate, setRealTimeEstimate] = useState();
+  const t = useTranslations('StopRealTime');
+  const format = useFormatter();
+  const now = useNow({ updateInterval: 1000 });
 
   //
   // B. Fetch data
 
-  const { data: realtimeData } = useSWR(stop_code && `https://api.carrismetropolitana.pt/stops/${stop_code}/realtime`);
+  const { data: realtimeData } = useSWR(stop_code && `https://api.carrismetropolitana.pt/stops/${stop_code}/realtime`, { refreshInterval: 30000 });
 
   //
   // C. Handle actions
 
   const estimatedNextArrivalTime = useMemo(() => {
     //
-    setIsLoading(true);
     if (!realtimeData) return '';
     // Filter estimates for the current pattern
     const filteredRealtimeData = realtimeData.filter((item) => {
@@ -33,13 +34,48 @@ export default function StopRealTime({ pattern_code, stop_code }) {
     // Sort by arrival_time
     const collator = new Intl.Collator('en', { numeric: true, sensitivity: 'base' });
     const sortedRealtimeData = filteredRealtimeData.sort((a, b) => collator.compare(a.estimatedArrivalTime, b.estimatedArrivalTime));
-    //
-    console.log(sortedRealtimeData);
-    setIsLoading(false);
-    if (sortedRealtimeData.length) return sortedRealtimeData[0].estimatedArrivalTime;
-    else return '';
+    // Exit early if no estimate matches this stop and pattern
+    if (!sortedRealtimeData.length) return '';
+    // Parse absolute time to relative
+    const relative = parseRelativeTime(sortedRealtimeData[0].estimatedArrivalTime);
+    // Return result
+    return relative;
+
     //
   }, [pattern_code, realtimeData]);
+
+  function parseRelativeTime(eta) {
+    // Get current time
+    var now = new Date();
+    var currentHours = now.getHours();
+    var currentMinutes = now.getMinutes();
+    var currentSeconds = now.getSeconds();
+
+    // Parse ETA
+    var parts = eta.split(':');
+    var etaHours = parseInt(parts[0]);
+    var etaMinutes = parseInt(parts[1]);
+    var etaSeconds = parseInt(parts[2]);
+
+    // Calculate time difference
+    var diffHours = etaHours - currentHours;
+    var diffMinutes = etaMinutes - currentMinutes;
+    var diffSeconds = etaSeconds - currentSeconds;
+
+    // Convert time difference into minutes
+    var totalDiffMinutes = diffHours * 60 + diffMinutes + diffSeconds / 60;
+
+    // Check if the time is in the future
+    if (totalDiffMinutes >= 0) {
+      // Calculate the relative time as a Date object
+      var relativeTime = new Date();
+      relativeTime.setMinutes(relativeTime.getMinutes() + totalDiffMinutes);
+      return relativeTime;
+    } else {
+      // Return null for times that have already passed
+      return null;
+    }
+  }
 
   //
   // C. Render components
@@ -47,7 +83,7 @@ export default function StopRealTime({ pattern_code, stop_code }) {
   return estimatedNextArrivalTime ? (
     <div className={styles.container}>
       <div className={styles.pulse} />
-      <p className={styles.estimate}>{estimatedNextArrivalTime}</p>
+      <p className={styles.estimate}>{estimatedNextArrivalTime > new Date() ? t('will_pass', { value: format.relativeTime(estimatedNextArrivalTime, now) }) : t('just_passed', { value: format.relativeTime(estimatedNextArrivalTime, now) })}</p>
     </div>
   ) : (
     <></>

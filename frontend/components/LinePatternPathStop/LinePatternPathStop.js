@@ -61,9 +61,14 @@ export default function LinePatternPathStop({ index, stop_code }) {
           <div className={styles.header}>
             <StopName code={stopData.code} name={stopData.name} short_name={stopData.short_name} tts_name={stopData.tts_name} />
             <StopLocationInfo locality={stopData.locality} municipality={stopData.municipality_name} />
+            <StopRealTime pattern_code={lineForm.values.pattern_code} stop_code={stopData.code} />
+            {stopData.near_services.length > 0 && (
+              <>
+                <Space h={5} />
+                <StopFacilities facilities={stopData.near_services} />
+              </>
+            )}
           </div>
-          <StopRealTime pattern_code={lineForm.values.pattern_code} stop_code={stopData.code} />
-          <StopFacilities facilities={stopData.near_services} />
           {isThisStopSelected && <StopPDF line_code={lineForm.values.line_code} stop_code={stop_code} direction={patternData.direction} />}
           {isThisStopSelected && (
             <div className={styles.body}>
