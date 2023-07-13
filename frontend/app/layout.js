@@ -11,7 +11,12 @@ import AppTopBar from '@/components/AppTopBar/AppTopBar';
 import AppHeader from '@/components/AppHeader/AppHeader';
 import AppFooter from '@/components/AppFooter/AppFooter';
 
-const inter = Inter({ subsets: ['latin'] });
+const inter = Inter({
+  weight: ['400', '500', '600', '700', '800'],
+  subsets: ['latin'],
+  variable: '--font-inter',
+  display: 'swap',
+});
 
 export const metadata = {
   title: 'Carris Metropolitana',
@@ -20,7 +25,7 @@ export const metadata = {
 
 export default function RootLayout({ children }) {
   return (
-    <html className={inter.className}>
+    <html className={inter.variable}>
       <body>
         <Providers>
           <AppWrapper>

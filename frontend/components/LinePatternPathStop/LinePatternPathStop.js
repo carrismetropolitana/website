@@ -2,7 +2,6 @@ import useSWR from 'swr';
 import { useTranslations } from 'next-intl';
 import { useLineFormContext } from '@/forms/LineForm';
 import styles from './LinePatternPathStop.module.css';
-import StopLocationInfo from '@/components/StopLocationInfo/StopLocationInfo';
 import CopyBadge from '../CopyBadge/CopyBadge';
 import LinePatternPathSpine from '../LinePatternPathSpine/LinePatternPathSpine';
 import LinePatternPathTimetable from '../LinePatternPathTimetable/LinePatternPathTimetable';
@@ -12,6 +11,8 @@ import StopFacilities from '../StopFacilities/StopFacilities';
 import { Space } from '@mantine/core';
 import StopPDF from '../StopPDF/StopPDF';
 import StopRealTime from '../StopRealTime/StopRealTime';
+import LiveIcon from '../LiveIcon/LiveIcon';
+import Text from '../Text/Text';
 
 //
 //
@@ -59,18 +60,27 @@ export default function LinePatternPathStop({ index, stop_code }) {
 
         <div className={styles.info}>
           <div className={styles.header}>
-            <StopName code={stopData.code} name={stopData.name} short_name={stopData.short_name} tts_name={stopData.tts_name} />
-            <StopLocationInfo locality={stopData.locality} municipality={stopData.municipality_name} />
-            <StopRealTime pattern_code={lineForm.values.pattern_code} stop_code={stopData.code} />
-            {stopData.near_services.length > 0 && (
-              <>
-                <Space h={5} />
-                <StopFacilities facilities={stopData.near_services} />
-              </>
-            )}
+            <StopName code={stopData.code} name={stopData.name} short_name={stopData.short_name} tts_name={stopData.tts_name} locality={stopData.locality} municipality={stopData.municipality_name} selected={isThisStopSelected} />
+            {!isThisStopSelected && <StopRealTime pattern_code={lineForm.values.pattern_code} stop_code={stopData.code} />}
+            <StopFacilities facilities={stopData.near_services} />
           </div>
-          {isThisStopSelected && <StopPDF line_code={lineForm.values.line_code} stop_code={stop_code} direction={patternData.direction} />}
+
           {isThisStopSelected && (
+            <div className={styles.body}>
+              <Text type='mini-label'>Próximas circulações</Text>
+              <StopRealTime pattern_code={lineForm.values.pattern_code} stop_code={stopData.code} />
+            </div>
+          )}
+
+          {isThisStopSelected && (
+            <div className={styles.body}>
+              <Text type='mini-label'>Horários previstos nesta paragem</Text>
+              <LinePatternPathTimetable index={index} stop_code={stop_code} />
+            </div>
+          )}
+
+          {/* {isThisStopSelected && <StopPDF line_code={lineForm.values.line_code} stop_code={stop_code} direction={patternData.direction} />} */}
+          {/* {isThisStopSelected && (
             <div className={styles.body}>
               <div className={styles.ids}>
                 <CopyBadge label={`#${stopData.code}`} value={stopData.code} />
@@ -78,7 +88,7 @@ export default function LinePatternPathStop({ index, stop_code }) {
               </div>
               <LinePatternPathTimetable index={index} stop_code={stop_code} />
             </div>
-          )}
+          )} */}
         </div>
       </div>
     )

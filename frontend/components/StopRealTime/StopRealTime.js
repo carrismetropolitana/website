@@ -1,9 +1,8 @@
 import useSWR from 'swr';
-import { useEffect, useMemo, useState } from 'react';
+import { useMemo } from 'react';
 import styles from './StopRealTime.module.css';
 import { useTranslations, useFormatter, useNow } from 'next-intl';
-import { IconFileDownload } from '@tabler/icons-react';
-import Loader from '../Loader/Loader';
+import LiveIcon from '../LiveIcon/LiveIcon';
 
 export default function StopRealTime({ pattern_code, stop_code }) {
   //
@@ -45,6 +44,9 @@ export default function StopRealTime({ pattern_code, stop_code }) {
   }, [pattern_code, realtimeData]);
 
   function parseRelativeTime(eta) {
+    // Skip if no eta
+    if (!eta) return null;
+
     // Get current time
     var now = new Date();
     var currentHours = now.getHours();
@@ -82,7 +84,7 @@ export default function StopRealTime({ pattern_code, stop_code }) {
 
   return estimatedNextArrivalTime ? (
     <div className={styles.container}>
-      <div className={styles.pulse} />
+      <LiveIcon />
       <p className={styles.estimate}>{estimatedNextArrivalTime > new Date() ? t('will_pass', { value: format.relativeTime(estimatedNextArrivalTime, now) }) : t('just_passed', { value: format.relativeTime(estimatedNextArrivalTime, now) })}</p>
     </div>
   ) : (

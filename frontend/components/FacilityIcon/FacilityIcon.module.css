@@ -1,10 +1,17 @@
 .container {
   display: flex;
-  width: 30px;
-  height: 30px;
+  width: 28px;
+  height: 28px;
   transition: transform 300ms ease;
 }
 
 /* .container:hover {
   transform: scale(1.1);
 } */
+
+@media (max-width: 600px) {
+  .container {
+    width: 24px;
+    height: 24px;
+  }
+}

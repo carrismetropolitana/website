@@ -3,7 +3,7 @@ import { useState, useEffect } from 'react';
 import styles from './StopInfo.module.css';
 import Loader from '../Loader/Loader';
 import CopyBadge from '../CopyBadge/CopyBadge';
-import EquipmentIcon from '../EquipmentIcon/EquipmentIcon';
+import EquipmentIcon from '../FacilityIcon/FacilityIcon';
 import { LineBadge } from '../LineDisplay/LineDisplay';
 
 export default function StopInfo({ stopCode }) {

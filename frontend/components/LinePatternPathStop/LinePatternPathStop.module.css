@@ -34,20 +34,17 @@
   align-items: flex-start;
   justify-content: flex-start;
   width: 100%;
-  padding: 20px;
-  gap: var(--size-sm);
+  padding: 20px 14px;
+  gap: var(--size-lg);
 }
 
-.header {
-  display: flex;
-  flex-direction: column;
-  /* background-color: green; */
-  align-items: flex-start;
-  justify-content: flex-start;
-  width: 100%;
-  gap: 2px;
+@media (max-width: 600px) {
+  .info {
+    padding-top: 23px;
+  }
 }
 
+.header,
 .body {
   display: flex;
   flex-direction: column;

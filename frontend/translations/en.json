@@ -432,5 +432,8 @@
     "StopRealTime": {
         "will_pass": "{value}",
         "just_passed": "Just passed"
+    },
+    "LiveIcon": {
+        "label": "Real-time data"
     }
 }
