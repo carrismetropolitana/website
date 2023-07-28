@@ -55,7 +55,7 @@ export default function StopTimetable({ stopCode }) {
             const tripLocalities = [];
             // Parse trip to timetable format
             timetableDataTemp.push({
-              trip_code: trip.trip_code,
+              code: trip.code,
               line_code: pattern.line_code,
               color: pattern.color,
               text_color: pattern.text_color,
@@ -101,10 +101,11 @@ export default function StopTimetable({ stopCode }) {
               timetableData.map((trip, index) => (
                 <div
                   key={index}
-                  className={`${styles.tableBodyRow} ${selectedTrip === trip.trip_code ? styles.selectedTrip : ''}`}
+                  className={`${styles.tableBodyRow} ${selectedTrip === trip.code ? styles.selectedTrip : ''}`}
                   onClick={() => {
-                    if (selectedTrip === trip.trip_code) setSelectedTrip();
-                    else setSelectedTrip(trip.trip_code);
+                    console.log(trip);
+                    if (selectedTrip === trip.code) setSelectedTrip();
+                    else setSelectedTrip(trip.code);
                   }}
                 >
                   <div className={styles.tableBodyRowWrapper}>

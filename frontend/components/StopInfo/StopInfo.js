@@ -17,7 +17,7 @@ export default function StopInfo({ stopCode }) {
   //
   // B. Fetch data
 
-  const { data: stopData, error: stopError, isLoading: stopLoading } = useSWR(stopCode && `https://api.carrismetropolitana.pt/stops/${stopCode}`);
+  const { data: stopData, isLoading: stopLoading } = useSWR(stopCode && `https://api.carrismetropolitana.pt/stops/${stopCode}`);
 
   //
   // D. Handle actions
@@ -37,7 +37,7 @@ export default function StopInfo({ stopCode }) {
         <div className={styles.container}>
           <div className={styles.info}>
             <CopyBadge label={`#${stopData.code}`} value={stopData.code} />
-            <CopyBadge label={`${stopData.latitude}, ${stopData.longitude}`} value={`${stopData.latitude}	${stopData.longitude}`} />
+            <CopyBadge label={`${stopData.lat}, ${stopData.lon}`} value={`${stopData.lat}	${stopData.lon}`} />
           </div>
           <div className={styles.stopNameLocationWrapper}>
             <h2 className={styles.stopName} aria-label={stopData.tts_name || stopData.name}>

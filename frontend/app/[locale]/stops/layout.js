@@ -134,14 +134,14 @@ export default function Page({ children }) {
           type: 'Feature',
           geometry: {
             type: 'Point',
-            coordinates: [stop.longitude, stop.latitude],
+            coordinates: [stop.lon, stop.lat],
           },
           properties: {
             mapid: `${stop.code}${generateUUID()}`,
             code: stop.code,
             name: stop.name,
-            latitude: stop.latitude,
-            longitude: stop.longitude,
+            lat: stop.lat,
+            lon: stop.lon,
           },
         });
       }
