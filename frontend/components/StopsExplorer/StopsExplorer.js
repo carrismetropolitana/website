@@ -5,14 +5,14 @@ import useSWR from 'swr';
 import { useState, useMemo } from 'react';
 import { useMap } from 'react-map-gl/maplibre';
 import { Divider } from '@mantine/core';
-import OSMMapDefaults from '@/components/OSMMap/OSMMap.config';
 import { useTranslations } from 'next-intl';
+import OSMMapDefaults from '@/components/OSMMap/OSMMap.config';
 import Pannel from '@/components/Pannel/Pannel';
-import StopTimetable from '@/components/StopTimetable/StopTimetable';
-import StopInfo from '@/components/StopInfo/StopInfo';
 import StopsExplorerToolbar from '../StopsExplorerToolbar/StopsExplorerToolbar';
 import StopsExplorerMap from '../StopsExplorerMap/StopsExplorerMap';
 import generateUUID from '@/services/generateUUID';
+import NoDataLabel from '../NoDataLabel/NoDataLabel';
+import StopsExplorerTimetable from '../StopsExplorerTimetable/StopsExplorerTimetable';
 
 export default function StopsExplorer() {
   //
@@ -105,16 +105,9 @@ export default function StopsExplorer() {
 
       <Divider />
 
-      <div className={styles.container}>
-        <div className={styles.map}>
-          <StopsExplorerMap mapData={allStopsMapData} selectedMapStyle={selectedMapStyle} selectedMapFeature={selectedMapFeature} onSelectStopCode={handleSelectStop} />
-        </div>
-
-        <div className={styles.timetable}>
-          <StopInfo stopCode={selectedStopCode} />
-          <Divider />
-          <StopTimetable stopCode={selectedStopCode} selectedDate={'20230607'} />
-        </div>
+      <div className={styles.mapAndTimetable}>
+        <StopsExplorerMap mapData={allStopsMapData} selectedMapStyle={selectedMapStyle} selectedMapFeature={selectedMapFeature} onSelectStopCode={handleSelectStop} />
+        {selectedStopCode ? <StopsExplorerTimetable selectedStopCode={selectedStopCode} /> : <NoDataLabel />}
       </div>
     </Pannel>
   );

@@ -430,6 +430,9 @@
     "LiveIcon": {
         "label": "Real-time data"
     },
+    "NoDataLabel": {
+        "title": "Nothing Selected"
+    },
     "ArrivalEstimates": {
         "label": "Real-time data"
     },

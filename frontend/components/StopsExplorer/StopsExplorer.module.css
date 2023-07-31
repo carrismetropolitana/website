@@ -1,10 +1,13 @@
-.container {
+.mapAndTimetable {
   display: grid;
-  grid-template-columns: 1fr 500px;
-  overflow: hidden;
-  height: 600px;
+  grid-template-columns: 1fr 400px;
+  grid-template-rows: 600px;
+  width: 100%;
 }
 
-.timetable {
-  overflow-y: scroll;
+@media (max-width: 900px) {
+  .mapAndTimetable {
+    grid-template-columns: 1fr;
+    grid-template-rows: 400px auto;
+  }
 }
