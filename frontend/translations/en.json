@@ -15,12 +15,6 @@
             "title": "All Stops"
         },
         "operations": {
-            "recenter": {
-                "title": "Re-center Map"
-            },
-            "gmaps": {
-                "title": "Open in Google Maps"
-            },
             "create": {
                 "title": "Create New Stop",
                 "loading": "Creating new Stop...",
@@ -438,5 +432,27 @@
     },
     "ArrivalEstimates": {
         "label": "Real-time data"
+    },
+    "StopsExplorer": {
+        "title": "Explore Stops and Schedules"
+    },
+    "StopsExplorerToolbar": {
+        "map_style": {
+            "label": "Explore Stops and Schedules",
+            "options": {
+                "map": "Map",
+                "satellite": "Satellite"
+            }
+        },
+        "recenter_map": {
+            "label": "Re-center Map"
+        },
+        "open_gmaps": {
+            "label": "Open in Google Maps"
+        },
+        "search": {
+            "label": "Search",
+            "placeholder": "A pesquisa está muito básica mas funciona :)"
+        }
     }
 }

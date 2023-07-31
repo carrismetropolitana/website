@@ -15,7 +15,7 @@ export default function OSMMap({ id, mapStyle, scrollZoom = true, onClick = () =
         maxZoom={osmMapDefaults.maxZoom}
         scrollZoom={scrollZoom}
         mapStyle={osmMapDefaults.styles[mapStyle] || osmMapDefaults.styles.default}
-        // style={{ width: width || '100%', height: height || '100%' }}
+        style={{ width: '100%', height: '100%' }}
         onClick={onClick}
         onMouseEnter={onMouseEnter}
         onMouseLeave={onMouseLeave}

@@ -144,8 +144,6 @@
   font-size: 12px;
   font-weight: 600;
   color: var(--gray6);
-  max-width: 600px;
-  overflow: hidden;
 }
 
 .localities,
@@ -155,8 +153,7 @@
   gap: var(--size-xs);
   align-items: center;
   justify-content: flex-start;
-  max-width: 600px;
-  overflow: hidden;
+  flex-wrap: wrap;
 }
 
 .localities p {
