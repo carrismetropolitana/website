@@ -1,10 +1,10 @@
 import useSWR from 'swr';
-import { useState, useMemo, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import styles from './StopTimetable.module.css';
 import LineDisplay from '../LineDisplay/LineDisplay';
 import Loader from '../Loader/Loader';
-import { IconCalendar, IconChevronRight } from '@tabler/icons-react';
-import { DatePicker, DatePickerInput } from '@mantine/dates';
+import { IconCalendar } from '@tabler/icons-react';
+import { DatePickerInput } from '@mantine/dates';
 import dayjs from 'dayjs';
 import { Select } from '@mantine/core';
 
@@ -105,8 +105,13 @@ export default function StopTimetable({ stopCode }) {
 
   return (
     <>
-      {stopLoading || (timetableLoading && <Loader visible />)}
-      {stopData && timetableData.length > 0 && (
+      {stopLoading ||
+        (timetableLoading && (
+          <div className={styles.container}>
+            <Loader visible />
+          </div>
+        ))}
+      {stopData && !timetableLoading && timetableData.length > 0 && (
         <div className={styles.container}>
           <div>Filtrar por headsign, locality e escolher data</div>
           <Select label='municipio' data={[]} />

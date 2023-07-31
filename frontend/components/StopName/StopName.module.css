@@ -6,12 +6,15 @@
 
 .container.flex-start {
   align-items: flex-start;
+  text-align: left;
 }
 
 .container.center {
   align-items: center;
+  text-align: center;
 }
 
 .container.flex-end {
   align-items: flex-end;
+  text-align: right;
 }

@@ -107,7 +107,7 @@ export default function StopsExplorer() {
 
       <div className={styles.mapAndTimetable}>
         <StopsExplorerMap mapData={allStopsMapData} selectedMapStyle={selectedMapStyle} selectedMapFeature={selectedMapFeature} onSelectStopCode={handleSelectStop} />
-        {selectedStopCode ? <StopsExplorerTimetable selectedStopCode={selectedStopCode} /> : <NoDataLabel />}
+        <StopsExplorerTimetable selectedStopCode={selectedStopCode} />
       </div>
     </Pannel>
   );

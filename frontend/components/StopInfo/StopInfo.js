@@ -2,8 +2,9 @@ import useSWR from 'swr';
 import styles from './StopInfo.module.css';
 import Loader from '../Loader/Loader';
 import CopyBadge from '../CopyBadge/CopyBadge';
-import EquipmentIcon from '../FacilityIcon/FacilityIcon';
+import FacilityIcon from '../FacilityIcon/FacilityIcon';
 import { NewLineBadge } from '../NewLineBadge/NewLineBadge';
+import StopName from '../StopName/StopName';
 
 export default function StopInfo({ stopCode }) {
   //
@@ -24,23 +25,24 @@ export default function StopInfo({ stopCode }) {
 
   return (
     <div>
-      {stopLoading && <Loader visible />}
+      {stopLoading && (
+        <div className={styles.container}>
+          <Loader visible />
+        </div>
+      )}
       {stopData && (
         <div className={styles.container}>
-          <div className={styles.info}>
+          <div className={styles.badges}>
             <CopyBadge label={`#${stopData.code}`} value={stopData.code} />
             <CopyBadge label={`${stopData.lat}, ${stopData.lon}`} value={`${stopData.lat}	${stopData.lon}`} />
           </div>
-          <div className={styles.stopNameLocationWrapper}>
-            <h2 className={styles.stopName} aria-label={stopData.tts_name || stopData.name}>
-              {stopData.name}
-            </h2>
-            {stopData.locality && <div className={styles.location}>{stopData.locality === stopData.municipality_name ? stopData.locality : `${stopData.locality}, ${stopData.municipality_name}`}</div>}
-          </div>
+
+          <StopName name={stopData.name} tts_name={stopData.tts_name} locality={stopData.locality} municipality={stopData.municipality_name} alignment='center' selected />
+
           {stopData.facilities.length > 0 && (
             <div className={styles.equipments}>
               {stopData.facilities.map((e, index) => (
-                <EquipmentIcon key={index} name={e} />
+                <FacilityIcon key={index} name={e} />
               ))}
             </div>
           )}

@@ -33,6 +33,7 @@
 
 .headerTitle {
   font-size: 20px;
+  line-height: 1.3;
 }
 
 @media (max-width: 600px) {

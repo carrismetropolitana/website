@@ -2,34 +2,15 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: center;
   gap: var(--size-md);
-  padding: var(--size-lg);
+  padding: var(--size-lg) var(--size-md);
 }
 
-.stopNameLocationWrapper {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: var(--size-sm);
-}
-
-.info {
+.badges {
   display: flex;
   flex-direction: row;
   gap: var(--size-sm);
-}
-
-.stopName {
-  font-size: 24px;
-  line-height: 1;
-  text-align: center;
-}
-
-.location {
-  font-size: 14px;
-  font-weight: 600;
-  color: var(--gray7);
-  line-height: 1;
 }
 
 .equipments,
