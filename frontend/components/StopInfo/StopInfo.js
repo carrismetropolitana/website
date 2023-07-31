@@ -1,18 +1,15 @@
 import useSWR from 'swr';
-import { useState, useEffect } from 'react';
 import styles from './StopInfo.module.css';
 import Loader from '../Loader/Loader';
 import CopyBadge from '../CopyBadge/CopyBadge';
 import EquipmentIcon from '../FacilityIcon/FacilityIcon';
-import { LineBadge } from '../LineDisplay/LineDisplay';
+import { NewLineBadge } from '../NewLineBadge/NewLineBadge';
 
 export default function StopInfo({ stopCode }) {
   //
 
   //
   // A. Setup variables
-
-  const [equipmentsForThisStop, setEquipmentsForThisStop] = useState([]);
 
   //
   // B. Fetch data
@@ -21,11 +18,6 @@ export default function StopInfo({ stopCode }) {
 
   //
   // D. Handle actions
-
-  useEffect(() => {
-    if (!stopData) return;
-    setEquipmentsForThisStop([...stopData.near_services, ...stopData.intermodal_connections]);
-  }, [stopData]);
 
   //
   // D. Render components
@@ -45,18 +37,20 @@ export default function StopInfo({ stopCode }) {
             </h2>
             {stopData.locality && <div className={styles.location}>{stopData.locality === stopData.municipality_name ? stopData.locality : `${stopData.locality}, ${stopData.municipality_name}`}</div>}
           </div>
-          {equipmentsForThisStop.length > 0 && (
+          {stopData.facilities.length > 0 && (
             <div className={styles.equipments}>
-              {equipmentsForThisStop.map((e, index) => (
+              {stopData.facilities.map((e, index) => (
                 <EquipmentIcon key={index} name={e} />
               ))}
             </div>
           )}
-          <div className={styles.routes}>
-            <LineBadge short_name='2030' />
-            <LineBadge short_name='2024' />
-            <LineBadge short_name='2034' />
-          </div>
+          {stopData.lines.length > 0 && (
+            <div className={styles.routes}>
+              {stopData.lines.map((lineCode, index) => (
+                <NewLineBadge key={index} code={lineCode} />
+              ))}
+            </div>
+          )}
         </div>
       )}
     </div>

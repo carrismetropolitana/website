@@ -36,6 +36,9 @@
 .routes {
   display: flex;
   flex-direction: row;
+  flex-wrap: wrap;
   align-items: center;
+  justify-content: center;
   gap: var(--size-sm);
+  max-width: 600px;
 }

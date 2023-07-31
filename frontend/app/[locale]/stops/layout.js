@@ -12,6 +12,9 @@ import { useTranslations } from 'next-intl';
 import Pannel from '@/components/Pannel/Pannel';
 import { OneFullColumn } from '@/components/Layouts/Layouts';
 import MapToolbar from '@/components/MapToolbar/MapToolbar';
+import MapAndTimetableWrapper from '@/components/MapAndTimetableWrapper/MapAndTimetableWrapper';
+import StopTimetable from '@/components/StopTimetable/StopTimetable';
+import StopInfo from '@/components/StopInfo/StopInfo';
 
 export default function Page({ children }) {
   //
@@ -57,7 +60,7 @@ export default function Page({ children }) {
       // Save the current feature to state and mark it as selected
       setSelectedMapFeature(stopMapFeature);
       // Save the current stop code and update the URL
-      router.replace(`/stops/${stopCode}`);
+      //   router.replace(`/stops/${stopCode}`);
       setSelectedStopCode(stopCode);
     }
   };
@@ -225,25 +228,34 @@ export default function Page({ children }) {
 
           <Divider />
 
-          <OSMMap id='allStopsMap' mapStyle={mapStyle} onClick={handleMapClick} onMouseEnter={handleMapMouseEnter} onMouseLeave={handleMapMouseLeave} onMove={handleMapMove} interactiveLayerIds={['all-stops']} height={'50vh'}>
-            <Source id='all-stops' type='geojson' data={mapData} generateId={false} promoteId={'mapid'}>
-              <Layer
-                id='all-stops'
-                type='circle'
-                source='all-stops'
-                paint={{
-                  'circle-color': ['case', ['boolean', ['feature-state', 'selected'], false], '#EE4B2B', '#ffdd01'],
-                  'circle-radius': ['interpolate', ['linear', 0.5], ['zoom'], 9, ['case', ['boolean', ['feature-state', 'selected'], false], 5, 1], 26, ['case', ['boolean', ['feature-state', 'selected'], false], 30, 20]],
-                  'circle-stroke-width': ['interpolate', ['linear', 0.5], ['zoom'], 9, 0.35, 26, 5],
-                  'circle-stroke-color': '#000000',
-                }}
-              />
-            </Source>
-          </OSMMap>
-
-          <Divider />
-
-          {children}
+          <MapAndTimetableWrapper
+            map={
+              <OSMMap id='allStopsMap' mapStyle={mapStyle} onClick={handleMapClick} onMouseEnter={handleMapMouseEnter} onMouseLeave={handleMapMouseLeave} onMove={handleMapMove} interactiveLayerIds={['all-stops']} height={'50vh'}>
+                <Source id='all-stops' type='geojson' data={mapData} generateId={false} promoteId={'mapid'}>
+                  <Layer
+                    id='all-stops'
+                    type='circle'
+                    source='all-stops'
+                    paint={{
+                      'circle-color': ['case', ['boolean', ['feature-state', 'selected'], false], '#EE4B2B', '#ffdd01'],
+                      'circle-radius': ['interpolate', ['linear', 0.5], ['zoom'], 9, ['case', ['boolean', ['feature-state', 'selected'], false], 5, 1], 26, ['case', ['boolean', ['feature-state', 'selected'], false], 30, 20]],
+                      'circle-stroke-width': ['interpolate', ['linear', 0.5], ['zoom'], 9, 0.35, 26, 5],
+                      'circle-stroke-color': '#000000',
+                    }}
+                  />
+                </Source>
+              </OSMMap>
+            }
+            timetable={
+              selectedStopCode && (
+                <>
+                  <StopInfo stopCode={selectedStopCode} />
+                  <Divider />
+                  <StopTimetable stopCode={selectedStopCode} selectedDate={'20230607'} />
+                </>
+              )
+            }
+          />
         </Pannel>
       }
     />

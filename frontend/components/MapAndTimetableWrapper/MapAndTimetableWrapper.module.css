@@ -1,0 +1,10 @@
+.container {
+  display: grid;
+  grid-template-columns: 1fr 500px;
+  overflow: hidden;
+  height: 600px;
+}
+
+.timetable {
+  overflow-y: scroll;
+}

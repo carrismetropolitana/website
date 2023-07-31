@@ -6,7 +6,7 @@ import { useTranslations } from 'next-intl';
 import { Select } from '@mantine/core';
 import styles from './LinePatternSelector.module.css';
 import { useLineFormContext } from '@/forms/LineForm';
-import LineDisplay, { LineBadge } from '@/components/LineDisplay/LineDisplay';
+import LineDisplay, { LineBadge } from '@/components/NewLineBadge/NewLineBadge';
 
 export default function LinePatternSelector() {
   //
