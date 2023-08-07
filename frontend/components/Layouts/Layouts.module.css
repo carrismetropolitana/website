@@ -10,7 +10,7 @@
   flex-grow: 1;
   position: relative;
   width: 100%;
-  margin: auto;
+  margin: var(--size-lg) auto;
   padding: 0 var(--size-lg);
 }
 

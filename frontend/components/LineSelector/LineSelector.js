@@ -20,7 +20,7 @@ export default function LineSelector() {
   //
   // B. Fetch data
 
-  const { data: allMunicipalitiesData } = useSWR('https://api.carrismetropolitana.pt/municipalities/');
+  const { data: allMunicipalitiesData } = useSWR('https://api.carrismetropolitana.pt/municipalities');
   const { data: allLinesData } = useSWR('https://api.carrismetropolitana.pt/lines');
 
   //
@@ -73,9 +73,9 @@ export default function LineSelector() {
           nothingFound={t('form.municipality_code.nothingFound')}
           {...lineForm.getInputProps('municipality_code')}
           data={allMunicipalitiesDataFormatted}
-          radius='sm'
-          size='lg'
-          w='100%'
+          radius="sm"
+          size="lg"
+          w="100%"
           searchable
         />
         <Select
@@ -86,9 +86,9 @@ export default function LineSelector() {
           onChange={handleSelectLine}
           data={allLinesDataFormatted}
           itemComponent={LineSelectorSelectOption}
-          radius='sm'
-          size='lg'
-          w='100%'
+          radius="sm"
+          size="lg"
+          w="100%"
           searchable
         />
       </div>
