@@ -6,7 +6,7 @@ import { useTranslations } from 'next-intl';
 import { Select } from '@mantine/core';
 import styles from './LinePatternSelector.module.css';
 import { useLineFormContext } from '@/forms/LineForm';
-import LineDisplay, { LineBadge } from '@/components/NewLineBadge/NewLineBadge';
+import LineDisplay, { LineBadge } from '@/components/LineDisplay/LineDisplay';
 
 export default function LinePatternSelector() {
   //
@@ -91,9 +91,9 @@ export default function LinePatternSelector() {
           {...lineForm.getInputProps('pattern_code')}
           onChange={handleSelectPattern}
           data={allPatternsData}
-          radius='sm'
-          size='lg'
-          w='100%'
+          radius="sm"
+          size="lg"
+          w="100%"
           searchable
         />
       </div>
