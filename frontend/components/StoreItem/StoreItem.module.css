@@ -1,0 +1,36 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  gap: var(--size-md);
+  padding: var(--size-md);
+}
+
+.container:hover {
+  background-color: var(--gray2);
+}
+
+.title {
+  vertical-align: top;
+  margin-bottom: 10px;
+  font-size: 24px;
+  line-height: 1.2;
+}
+
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  gap: 2px;
+}
+
+.label {
+  font-size: 13px;
+  font-weight: 700;
+  line-height: 1.2;
+}
+
+.text {
+  font-size: 15px;
+  font-weight: 400;
+}

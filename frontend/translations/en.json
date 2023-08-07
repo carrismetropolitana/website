@@ -473,5 +473,52 @@
         },
         "copyright": "© Carris Metropolitana 2023 - Todos os direitos reservados",
         "privacy_policy": "Política de Privacidade"
+    },
+    "StoresExplorer": {
+        "title": "Espaços navegante®"
+    },
+    "StoreItem": {
+        "address": {
+            "label": "Address"
+        },
+        "schedule": {
+            "label": "Schedule"
+        },
+        "occupation": {
+            "label": "Current Status"
+        }
+    },
+    "StoreItemTimetable": {
+        "from": "From",
+        "until": "until",
+        "and": "and",
+        "mon": "Mon",
+        "tue": "Tue",
+        "wed": "Wed",
+        "thu": "Thu",
+        "fri": "Fri",
+        "sat": "Sat",
+        "sun": "Sun"
+    },
+    "StoreItemOccupation": {
+        "waiting": "{value} waiting now",
+        "categories": {
+            "A": {
+                "label": "Recharge Transit Pass",
+                "description": "Description for this service"
+            },
+            "B": {
+                "label": "Request navegante® card",
+                "description": "Description for this service"
+            },
+            "C": {
+                "label": "Lost & Found",
+                "description": "Description for this service"
+            },
+            "D": {
+                "label": "Priority Line",
+                "description": "Description for this service"
+            }
+        }
     }
 }

@@ -1,0 +1,16 @@
+.container {
+  display: flex;
+  flex-direction: row;
+  gap: var(--size-md);
+  padding: var(--size-sm);
+  align-items: center;
+  justify-content: flex-start;
+}
+
+.elementWrapper {
+  width: auto;
+}
+
+.fullWidth {
+  width: 100%;
+}
