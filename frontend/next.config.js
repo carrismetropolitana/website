@@ -15,6 +15,11 @@ module.exports = {
         destination: '/stops',
         permanent: true,
       },
+      {
+        source: '/espacos-navegante',
+        destination: '/stores',
+        permanent: true,
+      },
     ];
   },
 };

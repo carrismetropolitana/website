@@ -6,12 +6,9 @@ import { useState, useMemo } from 'react';
 import { useMap } from 'react-map-gl/maplibre';
 import { Divider } from '@mantine/core';
 import { useTranslations } from 'next-intl';
-import OSMMapDefaults from '@/components/OSMMap/OSMMap.config';
 import Pannel from '@/components/Pannel/Pannel';
-import StoresExplorerToolbar from '../StoresExplorerToolbar/StoresExplorerToolbar';
 import StoresExplorerMap from '../StoresExplorerMap/StoresExplorerMap';
 import generateUUID from '@/services/generateUUID';
-import NoDataLabel from '../NoDataLabel/NoDataLabel';
 import StoreItem from '../StoreItem/StoreItem';
 // import StoresExplorerTimetable from '../StoresExplorerTimetable/StoresExplorerTimetable';
 

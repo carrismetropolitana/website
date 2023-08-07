@@ -1,3 +1,5 @@
+'use client';
+
 import useSWR from 'swr';
 import styles from './StoreItem.module.css';
 import { useTranslations } from 'next-intl';
