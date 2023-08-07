@@ -1,3 +1,5 @@
+'use client';
+
 import useSWR from 'swr';
 import { useState, useEffect } from 'react';
 import styles from './StopTimetable.module.css';
@@ -114,9 +116,9 @@ export default function StopTimetable({ stopCode }) {
       {stopData && !timetableLoading && timetableData.length > 0 && (
         <div className={styles.container}>
           <div>Filtrar por headsign, locality e escolher data</div>
-          <Select label='municipio' data={[]} />
-          <Select label='locality' data={[]} />
-          <DatePickerInput dropdownType='modal' icon={<IconCalendar size={18} />} valueFormat='DD MMMM YYYY' label='Date input' placeholder='Date input' value={selectedDate} onChange={setSelectedDate} />
+          <Select label="municipio" data={[]} />
+          <Select label="locality" data={[]} />
+          <DatePickerInput dropdownType="modal" icon={<IconCalendar size={18} />} valueFormat="DD MMMM YYYY" label="Date input" placeholder="Date input" value={selectedDate} onChange={setSelectedDate} />
           <div className={styles.tableHeader}>
             <div className={`${styles.tableHeaderColumn} ${styles.headerLine}`}>Linha e Destino</div>
             <div className={styles.tableHeaderColumn}>Previsão</div>

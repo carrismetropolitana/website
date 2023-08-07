@@ -1,3 +1,5 @@
+'use client';
+
 import { useTranslations } from 'next-intl';
 import styles from './StoreItemTimetable.module.css';
 import { useEffect, useState } from 'react';
