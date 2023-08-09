@@ -18,9 +18,7 @@ export default function StoreItem({ code }) {
   //
   // B. Fetch data
 
-  const { data: storeData, error: storeError, isLoading: storeLoading } = useSWR(code && `https://api.carrismetropolitana.pt/stores/${code}`, { refreshInterval: 3600 });
-
-  console.log(storeData);
+  const { data: storeData, error: storeError, isLoading: storeLoading } = useSWR(code && `https://api.carrismetropolitana.pt/stores/${code}`, { refreshInterval: 65000 });
 
   //
   // C. Render components
