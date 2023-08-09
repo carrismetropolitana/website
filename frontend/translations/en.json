@@ -474,10 +474,10 @@
         "copyright": "© Carris Metropolitana 2023 - Todos os direitos reservados",
         "privacy_policy": "Política de Privacidade"
     },
-    "StoresExplorer": {
+    "HelpdesksExplorer": {
         "title": "Espaços navegante®"
     },
-    "StoreItem": {
+    "HelpdeskItem": {
         "address": {
             "label": "Address"
         },
@@ -488,7 +488,7 @@
             "label": "Current Status"
         }
     },
-    "StoreItemTimetable": {
+    "HelpdeskItemTimetable": {
         "from": "From",
         "until": "until",
         "and": "and",
@@ -500,7 +500,7 @@
         "sat": "Sat",
         "sun": "Sun"
     },
-    "StoreItemOccupation": {
+    "HelpdeskItemOccupation": {
         "waiting": "{value} waiting now",
         "categories": {
             "A": {

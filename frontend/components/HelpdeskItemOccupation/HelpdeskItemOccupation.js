@@ -1,16 +1,16 @@
 'use client';
 
 import { useTranslations } from 'next-intl';
-import styles from './StoreItemOccupation.module.css';
+import styles from './HelpdeskItemOccupation.module.css';
 import { useEffect, useState } from 'react';
 
-export default function StoreItemOccupation({ occupationData }) {
+export default function HelpdeskItemOccupation({ occupationData }) {
   //
 
   //
   // A. Setup variables
 
-  const t = useTranslations('StoreItemOccupation');
+  const t = useTranslations('HelpdeskItemOccupation');
 
   const [parsedOccupation, setParsedOccupation] = useState([]);
 

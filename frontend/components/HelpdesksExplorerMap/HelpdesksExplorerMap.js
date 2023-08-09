@@ -3,44 +3,44 @@
 import OSMMap from '@/components/OSMMap/OSMMap';
 import { useMap, Source, Layer } from 'react-map-gl/maplibre';
 
-export default function StoresExplorerMap({ mapData, selectedMapStyle, selectedMapFeature, onSelectStopCode }) {
+export default function HelpdesksExplorerMap({ mapData, selectedMapStyle, selectedMapFeature, onSelectHelpdeskCode }) {
   //
 
   //
   // A. Setup variables
 
-  const { storessExplorerMap } = useMap();
+  const { helpdeskExplorerMap } = useMap();
 
   //
   // E. Handle actions
 
   const handleMapClick = (event) => {
     if (event?.features[0]) {
-      onSelectStopCode(event.features[0].properties.code);
+      onSelectHelpdeskCode(event.features[0].properties.code);
     }
   };
 
   const handleMapMouseEnter = (event) => {
     if (event?.features[0]?.properties?.code) {
-      storessExplorerMap.getCanvas().style.cursor = 'pointer';
+      helpdeskExplorerMap.getCanvas().style.cursor = 'pointer';
     }
   };
 
   const handleMapMouseLeave = (event) => {
     if (event?.features[0]?.properties?.code) {
-      storessExplorerMap.getCanvas().style.cursor = 'default';
+      helpdeskExplorerMap.getCanvas().style.cursor = 'default';
     }
   };
 
   const handleMapMove = () => {
     if (selectedMapFeature) {
       // Get all currently rendered features and mark all of them as unselected
-      const allRenderedFeatures = storessExplorerMap.queryRenderedFeatures();
+      const allRenderedFeatures = helpdeskExplorerMap.queryRenderedFeatures();
       allRenderedFeatures.forEach(function (f) {
-        storessExplorerMap.setFeatureState({ source: 'all-stops', id: f.id }, { selected: false });
+        helpdeskExplorerMap.setFeatureState({ source: 'all-helpdesks', id: f.id }, { selected: false });
       });
       // Then mark the selected one as selected
-      storessExplorerMap.setFeatureState({ source: 'all-stops', id: selectedMapFeature.properties.mapid }, { selected: true });
+      helpdeskExplorerMap.setFeatureState({ source: 'all-helpdesks', id: selectedMapFeature.properties.mapid }, { selected: true });
     }
   };
 
@@ -48,12 +48,12 @@ export default function StoresExplorerMap({ mapData, selectedMapStyle, selectedM
   // G. Render components
 
   return (
-    <OSMMap id="storessExplorerMap" mapStyle={selectedMapStyle} onClick={handleMapClick} onMouseEnter={handleMapMouseEnter} onMouseLeave={handleMapMouseLeave} onMove={handleMapMove} interactiveLayerIds={['all-stops']}>
-      <Source id="all-stops" type="geojson" data={mapData} generateId={false} promoteId={'mapid'}>
+    <OSMMap id="helpdeskExplorerMap" mapStyle={selectedMapStyle} onClick={handleMapClick} onMouseEnter={handleMapMouseEnter} onMouseLeave={handleMapMouseLeave} onMove={handleMapMove} interactiveLayerIds={['all-helpdesks']}>
+      <Source id="all-helpdesks" type="geojson" data={mapData} generateId={false} promoteId={'mapid'}>
         <Layer
-          id="all-stops"
+          id="all-helpdesks"
           type="circle"
-          source="all-stops"
+          source="all-helpdesks"
           paint={{
             'circle-color': ['case', ['boolean', ['feature-state', 'selected'], false], '#EE4B2B', '#ffdd01'],
             'circle-radius': ['interpolate', ['linear', 0.5], ['zoom'], 9, ['case', ['boolean', ['feature-state', 'selected'], false], 5, 1], 26, ['case', ['boolean', ['feature-state', 'selected'], false], 20, 10]],

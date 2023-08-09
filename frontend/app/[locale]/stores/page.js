@@ -1,5 +1,5 @@
 import { OneFullColumn } from '@/components/Layouts/Layouts';
-import StoresExplorer from '@/components/StoresExplorer/StoresExplorer';
+import HelpdesksExplorer from '@/components/HelpdesksExplorer/HelpdesksExplorer';
 
 export default function Page() {
   //
@@ -7,5 +7,5 @@ export default function Page() {
   //
   // E. Render components
 
-  return <OneFullColumn first={<StoresExplorer />} />;
+  return <OneFullColumn first={<HelpdesksExplorer />} />;
 }
