@@ -17,7 +17,7 @@ module.exports = {
       },
       {
         source: '/espacos-navegante',
-        destination: '/stores',
+        destination: '/helpdesks',
         permanent: true,
       },
     ];
