@@ -7,18 +7,13 @@ import Loader from '../Loader/Loader';
 import StoreItemTimetable from '../StoreItemTimetable/StoreItemTimetable';
 import StoreItemOccupation from '../StoreItemOccupation/StoreItemOccupation';
 
-export default function StoreItem({ code }) {
+export default function StoreItem({ storeData }) {
   //
 
   //
   // A. Setup variables
 
   const t = useTranslations('StoreItem');
-
-  //
-  // B. Fetch data
-
-  const { data: storeData, error: storeError, isLoading: storeLoading } = useSWR(code && `https://api.carrismetropolitana.pt/stores/${code}`, { refreshInterval: 65000 });
 
   //
   // C. Render components

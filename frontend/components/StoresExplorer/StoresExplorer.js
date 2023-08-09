@@ -29,7 +29,7 @@ export default function StoresExplorer() {
   //
   // B. Fetch data
 
-  const { data: allStoresData, error: allStoresError, isLoading: allStoresLoading } = useSWR('https://api.carrismetropolitana.pt/stores');
+  const { data: allStoresData, error: allStoresError, isLoading: allStoresLoading } = useSWR('https://api.carrismetropolitana.pt/stores', { refreshInterval: 65000 });
 
   //
   // D. Handle actions
@@ -86,7 +86,7 @@ export default function StoresExplorer() {
         <StoresExplorerMap mapData={allStoresMapData} selectedMapStyle={selectedMapStyle} selectedMapFeature={selectedMapFeature} onSelectStoreCode={handleSelectStore} />
       </div>
       <Divider />
-      <div className={styles.availableStores}>{allStoresData && allStoresData.map((store) => <StoreItem key={store.code} code={store.code} />)}</div>
+      <div className={styles.availableStores}>{allStoresData && allStoresData.map((store) => <StoreItem key={store.code} storeData={store} />)}</div>
     </Pannel>
   );
 }
