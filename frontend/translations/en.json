@@ -501,24 +501,11 @@
         "sun": "Sun"
     },
     "HelpdeskItemOccupation": {
-        "waiting": "{value} waiting now",
-        "categories": {
-            "A": {
-                "label": "Recharge Transit Pass",
-                "description": "Description for this service"
-            },
-            "B": {
-                "label": "Request navegante® card",
-                "description": "Description for this service"
-            },
-            "C": {
-                "label": "Lost & Found",
-                "description": "Description for this service"
-            },
-            "D": {
-                "label": "Priority Line",
-                "description": "Description for this service"
-            }
+        "currently_waiting": {
+            "label": "Clients waiting right now: {value}"
+        },
+        "expected_wait_time": {
+            "label": "Expected wait time: {value}"
         }
     }
 }

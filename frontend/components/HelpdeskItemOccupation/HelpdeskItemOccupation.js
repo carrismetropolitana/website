@@ -2,9 +2,8 @@
 
 import { useTranslations } from 'next-intl';
 import styles from './HelpdeskItemOccupation.module.css';
-import { useEffect, useState } from 'react';
 
-export default function HelpdeskItemOccupation({ occupationData }) {
+export default function HelpdeskItemOccupation({ currentlyWaiting, expectedWaitTime }) {
   //
 
   //
@@ -12,25 +11,19 @@ export default function HelpdeskItemOccupation({ occupationData }) {
 
   const t = useTranslations('HelpdeskItemOccupation');
 
-  const [parsedOccupation, setParsedOccupation] = useState([]);
-
-  //
-  // B. Transform data
-
-  useEffect(() => {
-    setParsedOccupation(occupationData || []);
-  }, [occupationData]);
-
   //
   // C. Render components
 
-  return parsedOccupation.map((item) => (
-    <div key={item.category_code} className={styles.container}>
-      <div className={styles.badge}>{item.category_code}</div>
-      <p className={styles.label}>{t(`categories.${item.category_code}.label`)}</p>
-      <p className={styles.occupation}>{t('waiting', { value: item.currently_waiting })}</p>
-    </div>
-  ));
+  return (
+    <>
+      <div className={styles.container}>
+        <p className={styles.text}>{t('currently_waiting.label', { value: currentlyWaiting })}</p>
+      </div>
+      <div className={styles.container}>
+        <p className={styles.text}>{t('expected_wait_time.label', { value: expectedWaitTime })}</p>
+      </div>
+    </>
+  );
 
   //
 }

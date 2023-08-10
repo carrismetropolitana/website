@@ -28,6 +28,10 @@
   font-size: 13px;
   font-weight: 700;
   line-height: 1.2;
+  display: flex;
+  flex-direction: row;
+  gap: 5px;
+  align-items: center;
 }
 
 .text {

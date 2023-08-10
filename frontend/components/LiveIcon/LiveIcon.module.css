@@ -36,8 +36,8 @@
   width: 20px;
   height: 20px;
   /* ANIMATION */
-  animation: 1750ms ease-out infinite pulse;
-  /* animation: 3000ms linear infinite pulse; */
+  /* animation: 1750ms ease-out infinite pulse; */
+  animation: 2500ms linear infinite pulse;
 }
 
 @keyframes pulse {

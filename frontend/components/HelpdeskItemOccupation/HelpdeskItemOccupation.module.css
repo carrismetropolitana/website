@@ -1,9 +1,14 @@
 .container {
   display: grid;
-  grid-template-columns: 20px 1fr auto;
+  grid-template-columns: 1fr;
   align-items: center;
   justify-content: center;
   gap: var(--size-xs);
+}
+
+.text {
+  font-size: 15px;
+  font-weight: 400;
 }
 
 .badge {

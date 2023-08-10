@@ -5,6 +5,7 @@ import { useTranslations } from 'next-intl';
 import Loader from '../Loader/Loader';
 import HelpdeskItemTimetable from '../HelpdeskItemTimetable/HelpdeskItemTimetable';
 import HelpdeskItemOccupation from '../HelpdeskItemOccupation/HelpdeskItemOccupation';
+import LiveIcon from '../LiveIcon/LiveIcon';
 
 export default function HelpdeskItem({ helpdeskData }) {
   //
@@ -37,8 +38,10 @@ export default function HelpdeskItem({ helpdeskData }) {
         />
       </div>
       <div className={styles.wrapper}>
-        <h4 className={styles.label}>{t('occupation.label')}</h4>
-        <HelpdeskItemOccupation occupationData={helpdeskData.status} />
+        <h4 className={styles.label}>
+          {t('occupation.label')} <LiveIcon />
+        </h4>
+        <HelpdeskItemOccupation currentlyWaiting={helpdeskData.currently_waiting} expectedWaitTime={helpdeskData.expected_wait_time} />
       </div>
     </div>
   ) : (
