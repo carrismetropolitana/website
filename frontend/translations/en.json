@@ -502,10 +502,10 @@
     },
     "HelpdeskItemOccupation": {
         "currently_waiting": {
-            "label": "Clients waiting right now: {value}"
+            "label": "Clients waiting right now:"
         },
         "expected_wait_time": {
-            "label": "Expected wait time: {value}"
+            "label": "Expected wait time:"
         }
     }
 }

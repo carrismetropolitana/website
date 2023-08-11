@@ -1,39 +1,16 @@
 .container {
-  display: grid;
-  grid-template-columns: 1fr;
-  align-items: center;
-  justify-content: center;
-  gap: var(--size-xs);
-}
-
-.text {
-  font-size: 15px;
-  font-weight: 400;
-}
-
-.badge {
   display: flex;
-  /* width: 100%; */
-  /* border: 1px solid black; */
-  /* aspect-ratio: 1; */
-  /* border-radius: 999px; */
-  font-size: 14px;
-  font-weight: 700;
-  color: black;
+  flex-direction: row;
   align-items: center;
-  justify-content: center;
-  line-height: 1;
-  text-align: center;
-  background-color: var(--gray1);
+  gap: var(--size-xs);
 }
 
 .label {
   font-weight: 500;
   font-size: 14px;
-  line-height: 1;
 }
 
-.daySchedule {
+.text {
   font-weight: 400;
   font-size: 15px;
 }

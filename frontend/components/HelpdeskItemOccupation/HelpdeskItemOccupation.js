@@ -44,10 +44,12 @@ export default function HelpdeskItemOccupation({ currentlyWaiting, expectedWaitT
   return (
     <>
       <div className={styles.container}>
-        <p className={styles.text}>{t('currently_waiting.label', { value: currentlyWaiting })}</p>
+        <p className={styles.label}>{t('currently_waiting.label')}</p>
+        <p className={styles.text}>{currentlyWaiting}</p>
       </div>
       <div className={styles.container}>
-        <p className={styles.text}>{t('expected_wait_time.label', { value: waitTimeString })}</p>
+        <p className={styles.label}>{t('expected_wait_time.label')}</p>
+        <p className={styles.text}>{waitTimeString}</p>
       </div>
     </>
   );
