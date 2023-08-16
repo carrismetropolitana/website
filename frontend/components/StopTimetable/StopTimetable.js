@@ -36,7 +36,10 @@ export default function StopTimetable({ stopCode }) {
   useEffect(() => {
     (async function fetchData() {
       // Return empty if routesData is not finished loading
-      if (!stopData || !stopData?.patterns?.length) return;
+      if (!stopData || !stopData?.patterns?.length) {
+        setTimetableData([]);
+        return;
+      }
       //
       setTimetableLoading(true);
       // Set today
