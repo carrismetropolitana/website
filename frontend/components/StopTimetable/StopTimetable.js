@@ -9,6 +9,7 @@ import { IconCalendar } from '@tabler/icons-react';
 import { DatePickerInput } from '@mantine/dates';
 import dayjs from 'dayjs';
 import { Select } from '@mantine/core';
+import NoDataLabel from '../NoDataLabel/NoDataLabel';
 
 export default function StopTimetable({ stopCode }) {
   //
@@ -38,6 +39,7 @@ export default function StopTimetable({ stopCode }) {
       // Return empty if routesData is not finished loading
       if (!stopData || !stopData?.patterns?.length) {
         setTimetableData([]);
+        setTimetableLoading(false);
         return;
       }
       //
@@ -110,13 +112,11 @@ export default function StopTimetable({ stopCode }) {
 
   return (
     <>
-      {stopLoading ||
-        (timetableLoading && (
-          <div className={styles.container}>
-            <Loader visible />
-          </div>
-        ))}
-      {stopData && !timetableLoading && timetableData.length > 0 && (
+      {stopLoading || timetableLoading ? (
+        <div className={styles.container}>
+          <Loader visible />
+        </div>
+      ) : stopData && !timetableLoading && timetableData.length > 0 ? (
         <div className={styles.container}>
           <div>Filtrar por headsign, locality e escolher data</div>
           <Select label="municipio" data={[]} />
@@ -160,6 +160,8 @@ export default function StopTimetable({ stopCode }) {
             ))}
           </div>
         </div>
+      ) : (
+        <NoDataLabel fill text={'no service'} />
       )}
     </>
   );

@@ -45,7 +45,7 @@ export default function StopsExplorerToolbar({ selectedMapStyle, onSelectMapStyl
   //
   // D. Search
 
-  const allStopsDataFiltered = useSearch(searchQuery, allStopsDataFormatted, { keys: ['code', 'name', 'locality', 'municipality_name'] });
+  const allStopsDataFiltered = useSearch(searchQuery, allStopsDataFormatted, { keys: ['code', 'name', 'locality', 'municipality_name'], regexReplace: /[^a-zA-Z0-9]/g });
 
   //
   // E. Handle actions
@@ -59,11 +59,11 @@ export default function StopsExplorerToolbar({ selectedMapStyle, onSelectMapStyl
 
   const AutoCompleteItem = forwardRef(({ code, name, description, ...others }, ref) => (
     <div ref={ref} {...others} style={{ gap: '5px', padding: '8px' }}>
-      <Text size='sm'>
+      <Text size="sm">
         {selectedStopCode === code ? '•> ' : ''}
         {name}
       </Text>
-      <Text size='xs' color='dimmed'>
+      <Text size="xs" color="dimmed">
         {description} ({code})
       </Text>
     </div>
@@ -88,16 +88,16 @@ export default function StopsExplorerToolbar({ selectedMapStyle, onSelectMapStyl
       </div>
 
       <div className={styles.elementWrapper}>
-        <Tooltip label={t('recenter_map.label')} position='bottom' withArrow>
-          <ActionIcon color='gray' variant='light' size='lg' onClick={onMapRecenter}>
+        <Tooltip label={t('recenter_map.label')} position="bottom" withArrow>
+          <ActionIcon color="gray" variant="light" size="lg" onClick={onMapRecenter}>
             <IconArrowsMinimize size={20} />
           </ActionIcon>
         </Tooltip>
       </div>
 
       <div className={styles.elementWrapper}>
-        <Tooltip label={t('open_gmaps.label')} position='bottom' withArrow>
-          <ActionIcon color='gray' variant='light' size='lg' onClick={onOpenInGoogleMaps}>
+        <Tooltip label={t('open_gmaps.label')} position="bottom" withArrow>
+          <ActionIcon color="gray" variant="light" size="lg" onClick={onOpenInGoogleMaps}>
             <IconBrandGoogleMaps size={20} />
           </ActionIcon>
         </Tooltip>
@@ -113,8 +113,8 @@ export default function StopsExplorerToolbar({ selectedMapStyle, onSelectMapStyl
           onItemSubmit={handleAutocompleteSelect}
           data={allStopsDataFiltered}
           filter={() => true}
-          size='md'
-          w='100%'
+          size="md"
+          w="100%"
         />
       </div>
     </div>
