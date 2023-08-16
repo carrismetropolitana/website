@@ -37,7 +37,7 @@ export default function StopInfo({ stopCode }) {
             <CopyBadge label={`${stopData.lat}, ${stopData.lon}`} value={`${stopData.lat}	${stopData.lon}`} />
           </div>
 
-          <StopName name={stopData.name} tts_name={stopData.tts_name} locality={stopData.locality} municipality={stopData.municipality_name} alignment='center' selected />
+          <StopName name={stopData.name} tts_name={stopData.tts_name} locality={stopData.locality} municipality={stopData.municipality_name} alignment="center" selected />
 
           {stopData.facilities.length > 0 && (
             <div className={styles.equipments}>
@@ -46,7 +46,7 @@ export default function StopInfo({ stopCode }) {
               ))}
             </div>
           )}
-          {stopData.lines.length > 0 && (
+          {stopData?.lines?.length > 0 && (
             <div className={styles.routes}>
               {stopData.lines.map((lineCode, index) => (
                 <NewLineBadge key={index} code={lineCode} />
