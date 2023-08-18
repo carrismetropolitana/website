@@ -49,13 +49,6 @@ export default function StopTimetable({ stopCode }) {
       // Initiate a temporary variable to hold values processed timetable
       let timetableDataTemp = [];
 
-      //   TEST LOAD
-      //   for (const routeCode of stopData.routes) {
-      //     const routeRequest = await fetch(`https://schedules.carrismetropolitana.pt/api/routes/route_id/${routeCode}`);
-      //     const routeData = await routeRequest.json();
-      //     console.log(routeData);
-      //   }
-
       // Iterate on each route, direction and trip to filter out the arrival_time
       // on the given stop and build the timetable object.
       for (const patternCode of stopData.patterns) {
