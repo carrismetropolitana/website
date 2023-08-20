@@ -4,7 +4,7 @@ volumes:
   certbotdata:
 
 networks:
-  default:
+  website:
     driver: bridge
 
 services:
