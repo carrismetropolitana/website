@@ -12,6 +12,7 @@ export default function AppFooterLegal() {
 
   const t = useTranslations('AppFooterLegal');
 
+  //
   // B. Render Components
 
   return (
