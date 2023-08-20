@@ -1,7 +1,6 @@
 'use client';
 
 import styles from './AppFooterNav.module.css';
-import Image from 'next/image';
 import { useTranslations } from 'next-intl';
 
 export default function AppFooterNav() {
@@ -16,33 +15,6 @@ export default function AppFooterNav() {
 
   return (
     <div className={styles.container}>
-      <div className={styles.contacts}>
-        <div className={styles.contactsInfo}>
-          <div className={styles.contactInfo}>
-            <a className={styles.number} href="tel:+351210418800">
-              {t('contacts.info_line.number')}
-            </a>
-            <p className={styles.legend}>{t('contacts.info_line.description')}</p>
-            <p className={styles.disclaimer}>{t('contacts.info_line.disclaimer')}</p>
-          </div>
-          <div className={styles.contactInfo}>
-            <a className={styles.number} href="tel:+351210410400">
-              {t('contacts.help_line.number')}
-            </a>
-            <p className={styles.legend}>{t('contacts.help_line.description')}</p>
-            <p className={styles.disclaimer}>{t('contacts.help_line.disclaimer')}</p>
-          </div>
-
-          <div className="footer-social">
-            <a href="https://www.facebook.com/carrismetropolitana" target="_blank">
-              <img src="https://www.carrismetropolitana.pt/wp-content/themes/carrismetropolitana/images/social-facebook.svg" width="24" height="auto" />
-            </a>
-            <a href="https://www.instagram.com/carrismetropolitana/" target="_blank">
-              <img src="https://www.carrismetropolitana.pt/wp-content/themes/carrismetropolitana/images/social-instagram.svg" width="24" height="auto" />
-            </a>
-          </div>
-        </div>
-      </div>
       <div className={styles.sitemap}>
         <div className="footer-menu">
           <div className="menu-menu-header-container">

@@ -472,6 +472,20 @@
             }
         }
     },
+    "AppFooterLogo": {
+        "contacts": {
+            "info_line": {
+                "number": "210 418 800",
+                "description": "Linha informativa Carris Metropolitana",
+                "disclaimer": "Chamada Rede Fixa Nacional"
+            },
+            "help_line": {
+                "number": "210 410 400",
+                "description": "Linha de apoio ao passageiro",
+                "disclaimer": "Chamada Rede Fixa Nacional"
+            }
+        }
+    },
     "AppFooterLegal": {
         "copyright": "© Carris Metropolitana 2023 - Todos os direitos reservados",
         "complaints_book": "Livro de Reclamações",
