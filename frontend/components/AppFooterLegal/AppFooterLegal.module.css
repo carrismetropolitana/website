@@ -1,0 +1,38 @@
+/* * */
+/* CONTAINER */
+
+.container {
+  display: flex;
+  flex-direction: row;
+  gap: var(--size-lg);
+  align-items: center;
+  justify-content: space-between;
+}
+
+/* * */
+/* COPYRIGHT */
+
+.copyright {
+  font-size: 12px;
+}
+
+/* * */
+/* LEGAL MENU */
+
+.legalMenu {
+  display: flex;
+  flex-direction: row;
+  gap: var(--size-lg);
+  align-items: center;
+  justify-content: flex-end;
+}
+
+.legalMenu a {
+  font-size: 12px;
+  opacity: 0.8;
+  transition: opacity 300ms ease;
+}
+
+.legalMenu a:hover {
+  opacity: 1;
+}

@@ -470,9 +470,15 @@
                 "description": "Linha de apoio ao passageiro",
                 "disclaimer": "Chamada Rede Fixa Nacional"
             }
-        },
+        }
+    },
+    "AppFooterLegal": {
         "copyright": "© Carris Metropolitana 2023 - Todos os direitos reservados",
-        "privacy_policy": "Política de Privacidade"
+        "complaints_book": "Livro de Reclamações",
+        "general_conditions": "Condições Gerais de Transporte",
+        "privacy_policy": "Política de Privacidade",
+        "cookies_policy": "Política de Cookies",
+        "legal_disclaimer": "Aviso Legal"
     },
     "HelpdesksExplorer": {
         "title": "Espaços navegante®"
