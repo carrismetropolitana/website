@@ -51,8 +51,23 @@ export default function StopsExplorer() {
     if (stopCode) {
       // Get all currently rendered features and mark all of them as unselected
       const stopMapFeature = allStopsMapData?.features.find((f) => f.properties?.code === stopCode);
-      // Zoom and center if too far
-      stopsExplorerMap.flyTo({ center: stopMapFeature?.geometry?.coordinates, duration: 5000, zoom: 16 });
+      // Set default map zoom and speed levels
+      const defaultSpeed = 4000;
+      const defaultZoom = 17;
+      const defaultZoomMargin = 3;
+      // Check if selected stop is within rendered bounds
+      const renderedFeatures = stopsExplorerMap.queryRenderedFeatures({ layers: ['all-stops'] });
+      const isStopCurrentlyRendered = renderedFeatures.find((item) => item.properties?.code === stopMapFeature.properties?.code);
+      // Get map current zoom level
+      const currentZoom = stopsExplorerMap.getZoom();
+      // If the stop is visible and the zoom is not too far back (plus a little margin)...
+      if (isStopCurrentlyRendered && currentZoom + defaultZoomMargin > defaultZoom) {
+        // ...then simply ease to it.
+        stopsExplorerMap.easeTo({ center: stopMapFeature?.geometry?.coordinates, zoom: currentZoom, duration: defaultSpeed * 0.25 });
+      } else {
+        // If the zoom is too far, or the desired stop is not visible, then fly to it
+        stopsExplorerMap.flyTo({ center: stopMapFeature?.geometry?.coordinates, zoom: defaultZoom, duration: defaultSpeed });
+      }
       // Save the current feature to state and mark it as selected
       setSelectedMapFeature(stopMapFeature);
       // Save the current stop code
