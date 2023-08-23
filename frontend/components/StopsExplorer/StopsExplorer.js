@@ -43,7 +43,8 @@ export default function StopsExplorer() {
   const handleOpenInGoogleMaps = () => {
     const center = stopsExplorerMap.getCenter();
     const zoom = stopsExplorerMap.getZoom();
-    window.open(`https://www.google.com/maps/@${center.lat},${center.lng},${zoom}z`, '_blank', 'noopener,noreferrer');
+    const zoomMargin = 2; // Compensate the difference between OSM and Google Maps
+    window.open(`https://www.google.com/maps/@${center.lat},${center.lng},${zoom + zoomMargin}z`, '_blank', 'noopener,noreferrer');
   };
 
   const handleSelectStop = (stopCode) => {
