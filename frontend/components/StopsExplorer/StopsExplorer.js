@@ -11,7 +11,6 @@ import Pannel from '@/components/Pannel/Pannel';
 import StopsExplorerToolbar from '../StopsExplorerToolbar/StopsExplorerToolbar';
 import StopsExplorerMap from '../StopsExplorerMap/StopsExplorerMap';
 import generateUUID from '@/services/generateUUID';
-import NoDataLabel from '../NoDataLabel/NoDataLabel';
 import StopsExplorerTimetable from '../StopsExplorerTimetable/StopsExplorerTimetable';
 
 export default function StopsExplorer() {

@@ -5,3 +5,29 @@
   display: flex;
   flex-direction: column;
 }
+
+/* * */
+/* CONTACTS */
+
+.contacts {
+  display: flex;
+  flex-direction: column;
+}
+
+/* * */
+/* SOCIAL */
+
+.social {
+  display: flex;
+  flex-direction: row;
+  gap: var(--size-md);
+}
+
+.social a {
+  opacity: 0.8;
+  transition: opacity 300ms ease;
+}
+
+.social a:hover {
+  opacity: 1;
+}
