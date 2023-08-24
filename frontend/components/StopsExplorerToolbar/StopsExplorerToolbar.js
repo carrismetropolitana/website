@@ -45,7 +45,7 @@ export default function StopsExplorerToolbar({ selectedMapStyle, onSelectMapStyl
   //
   // D. Search
 
-  const allStopsDataFiltered = useSearch(searchQuery, allStopsDataFormatted, { keys: ['code', 'name', 'locality', 'municipality_name'], regexReplace: /[^a-zA-Z0-9]/g });
+  const allStopsDataFiltered = useSearch(searchQuery, allStopsDataFormatted, { keys: ['code', 'name', 'tts_name', 'locality', 'municipality_name'], regexReplace: /[^a-zA-Z0-9]/g });
 
   //
   // E. Handle actions
