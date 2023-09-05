@@ -17,7 +17,7 @@ export default function StopRealTime({ pattern_code, stop_code }) {
   //
   // B. Fetch data
 
-  const { data: realtimeData } = useSWR(stop_code && `https://api.carrismetropolitana.pt/stops/${stop_code}/realtime`, { refreshInterval: 30000 });
+  const { data: realtimeData } = useSWR(stop_code && `https://api.carrismetropolitana.pt/stops/${stop_code}/realtime`);
 
   //
   // C. Handle actions

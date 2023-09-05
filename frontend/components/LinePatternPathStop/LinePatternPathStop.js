@@ -60,6 +60,7 @@ export default function LinePatternPathStop({ index, stop_code }) {
 
         <div className={styles.info}>
           <div className={styles.header}>
+            <div>{stopData.code}</div>
             <StopName code={stopData.code} name={stopData.name} short_name={stopData.short_name} tts_name={stopData.tts_name} locality={stopData.locality} municipality={stopData.municipality_name} selected={isThisStopSelected} />
             {!isThisStopSelected && <StopRealTime pattern_code={lineForm.values.pattern_code} stop_code={stopData.code} />}
             <StopFacilities facilities={stopData.near_services} />
@@ -67,14 +68,14 @@ export default function LinePatternPathStop({ index, stop_code }) {
 
           {isThisStopSelected && (
             <div className={styles.body}>
-              <Text type='mini-label'>Próximas circulações</Text>
+              <Text type="mini-label">Próximas circulações</Text>
               <StopRealTime pattern_code={lineForm.values.pattern_code} stop_code={stopData.code} />
             </div>
           )}
 
           {isThisStopSelected && (
             <div className={styles.body}>
-              <Text type='mini-label'>Horários previstos nesta paragem</Text>
+              <Text type="mini-label">Horários previstos nesta paragem</Text>
               <LinePatternPathTimetable index={index} stop_code={stop_code} />
             </div>
           )}

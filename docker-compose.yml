@@ -3,10 +3,6 @@ version: '3.9'
 volumes:
   certbotdata:
 
-networks:
-  website:
-    driver: bridge
-
 services:
   #
 
@@ -38,8 +34,6 @@ services:
       - ./nginx:/etc/nginx/conf.d
       - ./letsencrypt:/etc/letsencrypt
       - certbotdata:/var/www/certbot
-    networks:
-      - default
     ports:
       - 80:80
       - 443:443
@@ -66,7 +60,3 @@ services:
       options:
         max-size: '1m'
         max-file: '1'
-    networks:
-      - default
-    env_file:
-      - .env.production

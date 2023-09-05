@@ -34,6 +34,7 @@ export default function LinePatternPath() {
   return (
     patternData && (
       <div className={styles.container}>
+        <div>{patternData.code}</div>
         {patternData.path.map((pathStop, pathIndex) => (
           <div key={pathIndex}>
             <LinePatternPathStop index={pathIndex} stop_code={pathStop.stop.code} />

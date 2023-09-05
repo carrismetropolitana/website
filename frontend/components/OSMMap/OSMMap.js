@@ -1,10 +1,26 @@
 import styles from './OSMMap.module.css';
 import osmMapDefaults from './OSMMap.config';
-import Map, { NavigationControl } from 'react-map-gl/maplibre';
+import Map, { NavigationControl, FullscreenControl, ScaleControl } from 'react-map-gl/maplibre';
 import maplibregl from 'maplibre-gl';
 import 'maplibre-gl/dist/maplibre-gl.css';
 
-export default function OSMMap({ id, mapStyle, scrollZoom = true, onClick = () => {}, onMouseEnter = () => {}, onMouseLeave = () => {}, onMove = () => {}, onMoveStart = () => {}, onMoveEnd = () => {}, interactiveLayerIds = [], children }) {
+export default function OSMMap({
+  children,
+  id,
+  mapStyle,
+  onClick = () => {},
+  onMouseEnter = () => {},
+  onMouseLeave = () => {},
+  onMove = () => {},
+  onMoveStart = () => {},
+  onMoveEnd = () => {},
+  interactiveLayerIds = [],
+  toolbar,
+  scrollZoom = true,
+  navigation = true,
+  fullscreen = true,
+  scale = true,
+}) {
   return (
     <div className={styles.container}>
       <Map
@@ -25,7 +41,9 @@ export default function OSMMap({ id, mapStyle, scrollZoom = true, onClick = () =
         interactive={interactiveLayerIds ? true : false}
         interactiveLayerIds={interactiveLayerIds}
       >
-        <NavigationControl />
+        {navigation && <NavigationControl />}
+        {fullscreen && <FullscreenControl />}
+        {scale && <ScaleControl maxWidth={100} unit="metric" />}
         {children}
       </Map>
     </div>

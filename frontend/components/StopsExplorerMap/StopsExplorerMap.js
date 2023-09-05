@@ -48,12 +48,12 @@ export default function StopsExplorerMap({ mapData, selectedMapStyle, selectedMa
   // G. Render components
 
   return (
-    <OSMMap id='stopsExplorerMap' mapStyle={selectedMapStyle} onClick={handleMapClick} onMouseEnter={handleMapMouseEnter} onMouseLeave={handleMapMouseLeave} onMove={handleMapMove} interactiveLayerIds={['all-stops']}>
-      <Source id='all-stops' type='geojson' data={mapData} generateId={false} promoteId={'mapid'}>
+    <OSMMap id="stopsExplorerMap" mapStyle={selectedMapStyle} onClick={handleMapClick} onMouseEnter={handleMapMouseEnter} onMouseLeave={handleMapMouseLeave} onMove={handleMapMove} interactiveLayerIds={['all-stops']}>
+      <Source id="all-stops" type="geojson" data={mapData} generateId={false} promoteId={'mapid'}>
         <Layer
-          id='all-stops'
-          type='circle'
-          source='all-stops'
+          id="all-stops"
+          type="circle"
+          source="all-stops"
           paint={{
             'circle-color': ['case', ['boolean', ['feature-state', 'selected'], false], '#EE4B2B', '#ffdd01'],
             'circle-radius': ['interpolate', ['linear', 0.5], ['zoom'], 9, ['case', ['boolean', ['feature-state', 'selected'], false], 5, 1], 26, ['case', ['boolean', ['feature-state', 'selected'], false], 20, 10]],
