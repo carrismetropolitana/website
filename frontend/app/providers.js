@@ -30,7 +30,8 @@ export default function Providers({ children }) {
 
   return (
     <SWRConfig value={swrOptions}>
-      <MantineProvider theme={{ colorScheme: preferredColorScheme }} withGlobalStyles withNormalizeCSS>
+      {/* <MantineProvider theme={{ colorScheme: preferredColorScheme }} withGlobalStyles withNormalizeCSS> */}
+      <MantineProvider withGlobalStyles withNormalizeCSS>
         <MapProvider>{children}</MapProvider>
       </MantineProvider>
     </SWRConfig>
