@@ -27,16 +27,16 @@ export default function StopRealTime({ pattern_code, stop_code }) {
     if (!realtimeData) return '';
     // Filter estimates for the current pattern
     const filteredRealtimeData = realtimeData.filter((item) => {
-      const isForCurrentPattern = item.patternId === pattern_code;
+      const isForCurrentPattern = item.pattern_code === pattern_code;
       return isForCurrentPattern;
     });
     // Sort by arrival_time
     const collator = new Intl.Collator('en', { numeric: true, sensitivity: 'base' });
-    const sortedRealtimeData = filteredRealtimeData.sort((a, b) => collator.compare(a.estimatedArrivalTime, b.estimatedArrivalTime));
+    const sortedRealtimeData = filteredRealtimeData.sort((a, b) => collator.compare(a.estimated_arrival, b.estimated_arrival));
     // Exit early if no estimate matches this stop and pattern
     if (!sortedRealtimeData.length) return '';
     // Parse absolute time to relative
-    const relative = parseRelativeTime(sortedRealtimeData[0].estimatedArrivalTime);
+    const relative = parseRelativeTime(sortedRealtimeData[0].estimated_arrival);
     // Return result
     return relative;
 

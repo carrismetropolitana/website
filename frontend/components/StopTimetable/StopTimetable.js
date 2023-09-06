@@ -27,9 +27,7 @@ export default function StopTimetable({ stopCode }) {
   // B. Fetch data
 
   const { data: stopData, error: stopError, isLoading: stopLoading } = useSWR(stopCode && `https://api.carrismetropolitana.pt/stops/${stopCode}`);
-
-  //
-  // D. Handle actions
+  const { data: stopRealtimeData, error: stopRealtimeError, isLoading: stopRealtimeLoading } = useSWR(stopCode && `https://api.carrismetropolitana.pt/stops/${stopCode}/realtime`);
 
   //
   // D. Handle actions
