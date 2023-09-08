@@ -92,6 +92,10 @@
   }
 }
 
+.tableBodyRow.passed {
+  opacity: 0.5;
+}
+
 /* * */
 /* BODY ROW WRAPPER */
 
@@ -122,6 +126,17 @@
   justify-content: center;
   align-items: center;
   font-size: 16px;
+}
+
+.bodyArrivalTime.passed {
+  font-weight: 500;
+  color: var(--gray5);
+}
+.bodyArrivalTime.realtime {
+  font-weight: 600;
+  color: green;
+}
+.bodyArrivalTime.scheduled {
   font-weight: 600;
   color: var(--gray8);
 }

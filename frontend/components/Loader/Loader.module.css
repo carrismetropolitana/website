@@ -15,6 +15,7 @@
   }
 }
 
+.maxed,
 .full,
 .fixed {
   top: 0;
@@ -27,6 +28,10 @@
   justify-content: center;
   backdrop-filter: blur(4px);
   background-color: var(--gray0-25);
+}
+
+.maxed {
+  position: static;
 }
 
 .full {

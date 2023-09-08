@@ -6,7 +6,7 @@ import FacilityIcon from '../FacilityIcon/FacilityIcon';
 import { NewLineBadge } from '../NewLineBadge/NewLineBadge';
 import StopName from '../StopName/StopName';
 
-export default function StopInfo({ stopCode }) {
+export default function StopInfo({ selectedStopCode }) {
   //
 
   //
@@ -15,7 +15,7 @@ export default function StopInfo({ stopCode }) {
   //
   // B. Fetch data
 
-  const { data: stopData, isLoading: stopLoading } = useSWR(stopCode && `https://api.carrismetropolitana.pt/stops/${stopCode}`);
+  const { data: stopData, isLoading: stopLoading } = useSWR(selectedStopCode && `https://api.carrismetropolitana.pt/stops/${selectedStopCode}`);
 
   //
   // D. Handle actions

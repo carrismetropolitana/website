@@ -527,5 +527,30 @@
         "expected_wait_time": {
             "label": "Expected wait time:"
         }
+    },
+    "StopsExplorerTimetable": {
+        "no_service": "Sem Serviço"
+    },
+    "StopsExplorerTimetableHeader": {
+        "line": "Linha e Destino",
+        "estimate": "Previsão"
+    },
+    "StopsExplorerTimetablePreviousTrips": {
+        "toggle": {
+            "show": "Ver Viagens Anteriores",
+            "hide": "Esconder Viagens Anteriores"
+        },
+        "estimate": "Previsão"
+    },
+    "StopsExplorerTimetableCurrentAndFutureTrips": {
+        "line": "Linha e Destino",
+        "estimate": "Previsão"
+    },
+    "StopsExplorerTimetableRow": {
+        "trip_realtime_status": {
+            "scheduled": "Previsto",
+            "arriving_now": "< 1 min",
+            "realtime": "{value}"
+        }
     }
 }

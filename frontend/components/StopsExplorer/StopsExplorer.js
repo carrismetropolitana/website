@@ -11,7 +11,9 @@ import Pannel from '@/components/Pannel/Pannel';
 import StopsExplorerToolbar from '../StopsExplorerToolbar/StopsExplorerToolbar';
 import StopsExplorerMap from '../StopsExplorerMap/StopsExplorerMap';
 import generateUUID from '@/services/generateUUID';
-import StopsExplorerTimetable from '../StopsExplorerTimetable/StopsExplorerTimetable';
+import StopInfo from '../StopInfo/StopInfo';
+import StopTimetable from '../StopsExplorerTimetable/StopsExplorerTimetable';
+import NoDataLabel from '../NoDataLabel/NoDataLabel';
 
 export default function StopsExplorer() {
   //
@@ -24,13 +26,60 @@ export default function StopsExplorer() {
   const { stopsExplorerMap } = useMap();
 
   const [selectedMapStyle, setSelectedMapStyle] = useState('map');
+
   const [selectedStopCode, setSelectedStopCode] = useState();
   const [selectedMapFeature, setSelectedMapFeature] = useState();
+  const [selectedPatternCode, setSelectedPatternCode] = useState();
+  const [selectedShapeCode, setSelectedShapeCode] = useState();
+  const [selectedTripCode, setSelectedTripCode] = useState();
 
   //
   // B. Fetch data
 
   const { data: allStopsData, error: allStopsError, isLoading: allStopsLoading } = useSWR('https://api.carrismetropolitana.pt/stops');
+  const { data: selectedStopData } = useSWR(selectedStopCode && `https://api.carrismetropolitana.pt/stops/${selectedStopCode}`);
+  const { data: selectedPatternData } = useSWR(selectedPatternCode && `https://api.carrismetropolitana.pt/patterns/${selectedPatternCode}`);
+  const { data: selectedShapeData } = useSWR(selectedShapeCode && `https://api.carrismetropolitana.pt/shapes/${selectedShapeCode}`);
+
+  //
+  // C. Transform data
+
+  const allStopsMapData = useMemo(() => {
+    const geoJSON = {
+      type: 'FeatureCollection',
+      features: [],
+    };
+    if (allStopsData) {
+      for (const stop of allStopsData) {
+        geoJSON.features.push({
+          type: 'Feature',
+          geometry: {
+            type: 'Point',
+            coordinates: [stop.lon, stop.lat],
+          },
+          properties: {
+            mapid: `${stop.code}${generateUUID()}`,
+            code: stop.code,
+            name: stop.name,
+            lat: stop.lat,
+            lon: stop.lon,
+          },
+        });
+      }
+    }
+    return geoJSON;
+  }, [allStopsData]);
+
+  const selectedShapeMapData = useMemo(() => {
+    if (selectedPatternData && selectedShapeData) {
+      return {
+        ...selectedShapeData.geojson,
+        properties: {
+          color: selectedPatternData.color,
+        },
+      };
+    }
+  }, [selectedPatternData, selectedShapeData]);
 
   //
   // D. Handle actions
@@ -72,37 +121,18 @@ export default function StopsExplorer() {
       setSelectedMapFeature(stopMapFeature);
       // Save the current stop code
       setSelectedStopCode(stopCode);
+      // Reset other selected features
+      setSelectedTripCode();
+      setSelectedPatternCode();
+      setSelectedShapeCode();
     }
   };
 
-  //
-  // D. Transform data
-
-  const allStopsMapData = useMemo(() => {
-    const geoJSON = {
-      type: 'FeatureCollection',
-      features: [],
-    };
-    if (allStopsData) {
-      for (const stop of allStopsData) {
-        geoJSON.features.push({
-          type: 'Feature',
-          geometry: {
-            type: 'Point',
-            coordinates: [stop.lon, stop.lat],
-          },
-          properties: {
-            mapid: `${stop.code}${generateUUID()}`,
-            code: stop.code,
-            name: stop.name,
-            lat: stop.lat,
-            lon: stop.lon,
-          },
-        });
-      }
-    }
-    return geoJSON;
-  }, [allStopsData]);
+  const handleSelectTrip = (tripCode, patternCode, shapeCode) => {
+    setSelectedTripCode(tripCode);
+    setSelectedPatternCode(patternCode);
+    setSelectedShapeCode(shapeCode);
+  };
 
   //
   // E. Render components
@@ -117,12 +147,28 @@ export default function StopsExplorer() {
         selectedStopCode={selectedStopCode}
         onSelectStopCode={handleSelectStop}
       />
-
       <Divider />
-
-      <div className={styles.mapAndTimetable}>
-        <StopsExplorerMap mapData={allStopsMapData} selectedMapStyle={selectedMapStyle} selectedMapFeature={selectedMapFeature} onSelectStopCode={handleSelectStop} />
-        <StopsExplorerTimetable selectedStopCode={selectedStopCode} />
+      <div className={styles.container}>
+        <StopsExplorerMap
+          allStopsMapData={allStopsMapData}
+          selectedShapeMapData={selectedShapeMapData}
+          selectedMapStyle={selectedMapStyle}
+          selectedMapFeature={selectedMapFeature}
+          onSelectStopCode={handleSelectStop}
+          selectedShapeCode={selectedShapeCode}
+          selectedPatternCode={selectedPatternCode}
+        />
+        <div className={styles.sidebar}>
+          {selectedStopCode ? (
+            <>
+              <StopInfo selectedStopCode={selectedStopCode} />
+              <Divider />
+              <StopTimetable selectedStopCode={selectedStopCode} selectedTripCode={selectedTripCode} onSelectTrip={handleSelectTrip} />
+            </>
+          ) : (
+            <NoDataLabel />
+          )}
+        </div>
       </div>
     </Pannel>
   );

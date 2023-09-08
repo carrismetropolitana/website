@@ -1,6 +1,6 @@
 import styles from './Loader.module.css';
 
-export default function Loader({ visible, full, fixed, size = 30 }) {
+export default function Loader({ visible, maxed, full, fixed, size = 30 }) {
   //
 
   if (!visible) return <div />;
@@ -12,6 +12,15 @@ export default function Loader({ visible, full, fixed, size = 30 }) {
   if (full) {
     return (
       <div className={styles.full}>
+        <Spinner />
+      </div>
+    );
+  }
+
+  // If
+  if (maxed) {
+    return (
+      <div className={styles.maxed}>
         <Spinner />
       </div>
     );

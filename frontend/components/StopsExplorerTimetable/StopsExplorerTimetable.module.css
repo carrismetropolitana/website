@@ -1,12 +1,144 @@
+/* * */
+/* TABLE */
+
 .container {
-  overflow-y: auto;
-  border-left: 1px solid var(--gray3);
-  display: flex;
-  flex-direction: column;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--size-xs);
+  padding: var(--size-lg);
+  width: 100%;
 }
 
-@media (max-width: 900px) {
+@media (max-width: 600px) {
   .container {
-    border: none;
+    padding: var(--size-md);
   }
 }
+
+/* .tableBody {
+  display: grid;
+  grid-template-columns: 1fr;
+}
+
+.tableHeader,
+.tableBodyRowWrapper {
+  display: grid;
+  grid-template-columns: 1fr 100px;
+  gap: 2px;
+} */
+
+/* * */
+/* BODY ROW */
+
+/* .tableBodyRow {
+  display: flex;
+  flex-direction: column;
+  border-radius: 0;
+  border-bottom: 1px solid var(--gray2);
+  cursor: pointer;
+  transition-property: box-shadow, transform, margin, border-color;
+  transition-duration: 200ms;
+  transition-timing-function: ease;
+}
+
+.tableBodyRow:last-child {
+  border-bottom: none;
+}
+
+.tableBodyRow:has(+ .selectedTrip) {
+  border-bottom-color: transparent;
+}
+
+@media (hover: hover) {
+  .tableBodyRow:hover {
+    background-color: var(--reference-0);
+    box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.05);
+    border-radius: var(--size-sm);
+    border-bottom-color: transparent;
+  }
+  .tableBodyRow:has(+ .tableBodyRow:hover) {
+    border-bottom-color: transparent;
+  }
+} */
+
+/* * */
+/* BODY ROW WRAPPER */
+
+/* .tableBodyRowWrapper {
+  padding: var(--size-sm);
+}
+
+.selectedTrip,
+.selectedTrip:hover {
+  background-color: var(--reference-0);
+  box-shadow: 0px 0px 30px rgba(0, 0, 0, 0.1);
+  transform: scale(1.03);
+  border-radius: var(--size-sm);
+  border-bottom-color: transparent;
+  margin-top: 5px;
+  margin-bottom: 5px;
+} */
+
+/* * */
+/* TABLE BODY COLUMNS */
+
+/* .tableBodyColumn {
+  display: flex;
+  align-items: center;
+}
+
+.bodyArrivalTime {
+  justify-content: center;
+  align-items: center;
+  font-size: 16px;
+}
+
+.bodyArrivalTime.passed {
+  font-weight: 500;
+  color: var(--gray5);
+}
+.bodyArrivalTime.realtime {
+  font-weight: 600;
+  color: green;
+}
+.bodyArrivalTime.scheduled {
+  font-weight: 600;
+  color: var(--gray8);
+} */
+
+/* * */
+/* TRIP ADDITIONAL INFO */
+
+/* .tripAdditionalInfo {
+  display: none;
+  padding: var(--size-sm);
+}
+
+.selectedTrip .tripAdditionalInfo {
+  display: flex;
+  flex-direction: column;
+  border-top: 1px solid var(--gray2);
+}
+
+.localitiesPerLine {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--gray6);
+}
+
+.localities,
+.localities div {
+  display: flex;
+  flex-direction: row;
+  gap: var(--size-xs);
+  align-items: center;
+  justify-content: flex-start;
+  flex-wrap: wrap;
+}
+
+.localities p {
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  max-width: 600px;
+  overflow: hidden;
+} */
