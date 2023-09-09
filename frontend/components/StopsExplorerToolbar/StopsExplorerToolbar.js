@@ -75,35 +75,29 @@ export default function StopsExplorerToolbar({ selectedMapStyle, onSelectMapStyl
 
   return (
     <div className={styles.container}>
-      <div className={styles.elementWrapper}>
-        <SegmentedControl
-          aria-label={t('map_style.label')}
-          value={selectedMapStyle}
-          onChange={onSelectMapStyle}
-          data={[
-            { value: 'map', label: t('map_style.options.map') },
-            { value: 'satellite', label: t('map_style.options.satellite') },
-          ]}
-        />
-      </div>
+      <SegmentedControl
+        aria-label={t('map_style.label')}
+        value={selectedMapStyle}
+        onChange={onSelectMapStyle}
+        data={[
+          { value: 'map', label: t('map_style.options.map') },
+          { value: 'satellite', label: t('map_style.options.satellite') },
+        ]}
+      />
 
-      <div className={styles.elementWrapper}>
-        <Tooltip label={t('recenter_map.label')} position="bottom" withArrow>
-          <ActionIcon color="gray" variant="light" size="lg" onClick={onMapRecenter}>
-            <IconArrowsMinimize size={20} />
-          </ActionIcon>
-        </Tooltip>
-      </div>
+      <Tooltip label={t('recenter_map.label')} position="bottom" withArrow>
+        <ActionIcon color="gray" variant="light" size="lg" onClick={onMapRecenter}>
+          <IconArrowsMinimize size={20} />
+        </ActionIcon>
+      </Tooltip>
 
-      <div className={styles.elementWrapper}>
-        <Tooltip label={t('open_gmaps.label')} position="bottom" withArrow>
-          <ActionIcon color="gray" variant="light" size="lg" onClick={onOpenInGoogleMaps}>
-            <IconBrandGoogleMaps size={20} />
-          </ActionIcon>
-        </Tooltip>
-      </div>
+      <Tooltip label={t('open_gmaps.label')} position="bottom" withArrow>
+        <ActionIcon color="gray" variant="light" size="lg" onClick={onOpenInGoogleMaps}>
+          <IconBrandGoogleMaps size={20} />
+        </ActionIcon>
+      </Tooltip>
 
-      <div className={`${styles.elementWrapper} ${styles.fullWidth}`}>
+      <div className={styles.fullWidth}>
         <Autocomplete
           icon={<IconSearch size={18} />}
           itemComponent={AutoCompleteItem}

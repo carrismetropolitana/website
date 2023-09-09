@@ -86,7 +86,7 @@ export function getMinutesFromOperationTimeString(timeString) {
   const diffSeconds = timeStringSeconds - currentSeconds;
 
   // Convert time difference into minutes
-  return diffHours * 60 + diffMinutes + diffSeconds / 60;
+  return parseInt(diffHours * 60 + diffMinutes + diffSeconds / 60);
 
   //
 }

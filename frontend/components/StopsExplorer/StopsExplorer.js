@@ -32,11 +32,13 @@ export default function StopsExplorer() {
   const [selectedPatternCode, setSelectedPatternCode] = useState();
   const [selectedShapeCode, setSelectedShapeCode] = useState();
   const [selectedTripCode, setSelectedTripCode] = useState();
+  const [selectedVehicleCode, setSelectedVehicleCode] = useState();
 
   //
   // B. Fetch data
 
   const { data: allStopsData, error: allStopsError, isLoading: allStopsLoading } = useSWR('https://api.carrismetropolitana.pt/stops');
+  const { data: allVehiclesData, error: allVehiclesError, isLoading: allVehiclesLoading } = useSWR('https://api.carrismetropolitana.pt/vehicles', { refreshInterval: 1000 });
   const { data: selectedStopData } = useSWR(selectedStopCode && `https://api.carrismetropolitana.pt/stops/${selectedStopCode}`);
   const { data: selectedPatternData } = useSWR(selectedPatternCode && `https://api.carrismetropolitana.pt/patterns/${selectedPatternCode}`);
   const { data: selectedShapeData } = useSWR(selectedShapeCode && `https://api.carrismetropolitana.pt/shapes/${selectedShapeCode}`);
@@ -80,6 +82,29 @@ export default function StopsExplorer() {
       };
     }
   }, [selectedPatternData, selectedShapeData]);
+
+  const selectedVehicleMapData = useMemo(() => {
+    if (allVehiclesData && selectedVehicleCode) {
+      const selectedVehicleData = allVehiclesData.find((item) => item.code === selectedVehicleCode);
+      if (selectedVehicleData) {
+        return {
+          type: 'Feature',
+          geometry: {
+            type: 'Point',
+            coordinates: [selectedVehicleData.lon, selectedVehicleData.lat],
+          },
+          properties: {
+            code: selectedVehicleData.code,
+            speed: selectedVehicleData.speed,
+            timestamp: selectedVehicleData.timestamp,
+            heading: selectedVehicleData.heading,
+            trip_code: selectedVehicleData.trip_code,
+            pattern_code: selectedVehicleData.pattern_code,
+          },
+        };
+      }
+    }
+  }, [allVehiclesData, selectedVehicleCode]);
 
   //
   // D. Handle actions
@@ -128,10 +153,11 @@ export default function StopsExplorer() {
     }
   };
 
-  const handleSelectTrip = (tripCode, patternCode, shapeCode) => {
+  const handleSelectTrip = (tripCode, patternCode, shapeCode, vehicleCode) => {
     setSelectedTripCode(tripCode);
     setSelectedPatternCode(patternCode);
     setSelectedShapeCode(shapeCode);
+    setSelectedVehicleCode(vehicleCode);
   };
 
   //
@@ -152,11 +178,13 @@ export default function StopsExplorer() {
         <StopsExplorerMap
           allStopsMapData={allStopsMapData}
           selectedShapeMapData={selectedShapeMapData}
+          selectedVehicleMapData={selectedVehicleMapData}
           selectedMapStyle={selectedMapStyle}
           selectedMapFeature={selectedMapFeature}
           onSelectStopCode={handleSelectStop}
           selectedShapeCode={selectedShapeCode}
           selectedPatternCode={selectedPatternCode}
+          selectedVehicleCode={selectedVehicleCode}
         />
         <div className={styles.sidebar}>
           {selectedStopCode ? (

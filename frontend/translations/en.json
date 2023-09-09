@@ -358,6 +358,9 @@
     "lines": {
         "page_title": ""
     },
+    "Pannel": {
+        "error": "Temporarily unavailable"
+    },
     "LinesPage": {
         "pannel_title": "Lines & Schedules"
     },
@@ -548,9 +551,10 @@
     },
     "StopsExplorerTimetableRow": {
         "trip_realtime_status": {
-            "scheduled": "Previsto",
+            "passed": "{value}",
+            "scheduled": "{value}",
             "arriving_now": "< 1 min",
-            "realtime": "{value}"
+            "realtime": "{value} min"
         }
     }
 }

@@ -43,7 +43,7 @@ export default function StopsExplorerTimetablePreviousTrips({ tripsData, selecte
         </div>
       )}
       {visibleTrips.map((trip) => (
-        <StopsExplorerTimetableRow key={trip.trip_code} type={'previous'} tripData={trip} selectedTripCode={selectedTripCode} onSelectTrip={onSelectTrip} />
+        <StopsExplorerTimetableRow key={trip.trip_code} rowType={'previous'} tripData={trip} selectedTripCode={selectedTripCode} onSelectTrip={onSelectTrip} />
       ))}
       {showAllTrips && tripsData.length > previousTripsShownByDefault && (
         <div className={styles.toggle} onClick={handleToogleShowAllTrips}>

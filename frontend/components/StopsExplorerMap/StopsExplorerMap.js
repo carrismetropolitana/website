@@ -4,7 +4,7 @@ import OSMMap from '@/components/OSMMap/OSMMap';
 import { useEffect } from 'react';
 import { useMap, Source, Layer } from 'react-map-gl/maplibre';
 
-export default function StopsExplorerMap({ allStopsMapData, selectedShapeMapData, selectedMapStyle, selectedMapFeature, onSelectStopCode }) {
+export default function StopsExplorerMap({ allStopsMapData, selectedShapeMapData, selectedVehicleMapData, selectedMapStyle, selectedMapFeature, onSelectStopCode }) {
   //
 
   //
@@ -76,6 +76,21 @@ export default function StopsExplorerMap({ allStopsMapData, selectedShapeMapData
           />
         </Source>
       )}
+      {selectedVehicleMapData && (
+        <Source id="selected-vehicle" type="geojson" data={selectedVehicleMapData} generateId={true}>
+          <Layer
+            id="selected-vehicle"
+            type="circle"
+            source="selected-vehicle"
+            paint={{
+              'circle-color': '#0000FF',
+              'circle-radius': 10,
+              'circle-stroke-width': 5,
+              'circle-stroke-color': '#000000',
+            }}
+          />
+        </Source>
+      )}
       {selectedShapeMapData && (
         <Source id="selected-shape" type="geojson" data={selectedShapeMapData} generateId={true}>
           <Layer
@@ -101,8 +116,8 @@ export default function StopsExplorerMap({ allStopsMapData, selectedShapeMapData
               'icon-anchor': 'center',
               'symbol-placement': 'line',
               'icon-image': 'shape-arrow-direction',
-              'icon-size': ['interpolate', ['linear', 0.5], ['zoom'], 10, 0.1, 20, 0.25],
-              'symbol-spacing': ['interpolate', ['linear'], ['zoom'], 5, 50, 20, 50],
+              'icon-size': ['interpolate', ['linear', 0.5], ['zoom'], 10, 0.1, 20, 0.2],
+              'symbol-spacing': ['interpolate', ['linear'], ['zoom'], 10, 2, 20, 30],
               'icon-offset': [0, 0],
               'icon-rotate': 90,
             }}

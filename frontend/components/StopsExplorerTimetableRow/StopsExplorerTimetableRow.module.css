@@ -1,110 +1,46 @@
 /* * */
-/* TABLE */
+/* CONTAINER */
 
 .container {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: var(--size-xs);
-  padding: var(--size-lg);
-  max-width: 600px;
-  margin: auto;
-}
-
-@media (max-width: 600px) {
-  .container {
-    padding: var(--size-md);
-  }
-}
-
-.tableBody {
-  display: grid;
-  grid-template-columns: 1fr;
-}
-
-.tableHeader,
-.tableBodyRowWrapper {
-  display: grid;
-  grid-template-columns: 1fr 100px;
-  gap: 2px;
-}
-
-/* * */
-/* TABLE HEADER */
-
-.tableHeaderColumn {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: var(--reference-0);
-  background-color: var(--reference-1);
-  font-size: 15px;
-  font-weight: 700;
-  line-height: 1;
-  padding: 8px;
-}
-
-.tableHeaderColumn:first-child {
-  border-top-left-radius: 999px;
-  border-bottom-left-radius: 999px;
-}
-
-.tableHeaderColumn:last-child {
-  border-top-right-radius: 999px;
-  border-bottom-right-radius: 999px;
-}
-
-.headerLine {
-  justify-content: flex-start;
-  padding-left: var(--size-md);
-}
-
-/* * */
-/* BODY ROW */
-
-.tableBodyRow {
   display: flex;
   flex-direction: column;
   border-radius: 0;
   border-bottom: 1px solid var(--gray2);
   cursor: pointer;
-  transition-property: box-shadow, transform, margin, border-color;
+  transition-property: box-shadow, transform, margin, border-color, opacity;
   transition-duration: 200ms;
   transition-timing-function: ease;
 }
 
-.tableBodyRow:last-child {
+.container:last-child {
   border-bottom: none;
 }
 
-.tableBodyRow:has(+ .selectedTrip) {
+.container:has(+ .selected) {
   border-bottom-color: transparent;
 }
 
 @media (hover: hover) {
-  .tableBodyRow:hover {
+  .container:hover {
     background-color: var(--reference-0);
     box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.05);
     border-radius: var(--size-sm);
     border-bottom-color: transparent;
   }
-  .tableBodyRow:has(+ .tableBodyRow:hover) {
+  .container:has(+ .container:hover) {
     border-bottom-color: transparent;
   }
 }
 
-.tableBodyRow.passed {
+.container.passed {
   opacity: 0.5;
 }
 
 /* * */
-/* BODY ROW WRAPPER */
+/* SELECTED */
 
-.tableBodyRowWrapper {
-  padding: var(--size-sm);
-}
-
-.selectedTrip,
-.selectedTrip:hover {
+.selected,
+.selected:hover {
   background-color: var(--reference-0);
   box-shadow: 0px 0px 30px rgba(0, 0, 0, 0.1);
   transform: scale(1.03);
@@ -115,43 +51,83 @@
 }
 
 /* * */
-/* TABLE BODY COLUMNS */
+/* REALTIME STATUSES */
 
-.tableBodyColumn {
-  display: flex;
-  align-items: center;
+.container.passed {
+  opacity: 0.35;
+}
+.container:hover.passed {
+  opacity: 0.5;
+}
+.container.selected.passed {
+  opacity: 1;
 }
 
-.bodyArrivalTime {
-  justify-content: center;
-  align-items: center;
-  font-size: 16px;
+/* .scheduled {
 }
 
-.bodyArrivalTime.passed {
-  font-weight: 500;
-  color: var(--gray5);
+.arriving_now {
 }
-.bodyArrivalTime.realtime {
-  font-weight: 600;
-  color: green;
-}
-.bodyArrivalTime.scheduled {
-  font-weight: 600;
-  color: var(--gray8);
+
+.realtime {
+} */
+
+/* * */
+/* TRIP SUMMARY */
+
+.tripSummary {
+  display: grid;
+  grid-template-columns: 1fr 100px;
+  gap: 2px;
+  padding: var(--size-sm);
 }
 
 /* * */
-/* TRIP ADDITIONAL INFO */
+/* ARRIVAL ESTIMATE */
 
-.tripAdditionalInfo {
+.arrivalEstimate {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+.passed .arrivalEstimate p {
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--reference-1);
+}
+
+.arriving_now .arrivalEstimate p {
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--realtime-100);
+}
+
+.realtime .arrivalEstimate p {
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--realtime-100);
+}
+
+.scheduled .arrivalEstimate p {
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--reference-1);
+}
+
+/* * */
+/* TRIP DETAILS */
+
+.tripDetails {
   display: none;
   padding: var(--size-sm);
 }
 
-.selectedTrip .tripAdditionalInfo {
+.selected .tripDetails {
   display: flex;
   flex-direction: column;
+  gap: 5px;
   border-top: 1px solid var(--gray2);
 }
 
@@ -176,4 +152,17 @@
   white-space: nowrap;
   max-width: 600px;
   overflow: hidden;
+}
+
+/* * */
+/* TEST DATA */
+
+.testData,
+.testData * {
+  user-select: text;
+  -webkit-touch-callout: default;
+  cursor: text;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--gray6);
 }

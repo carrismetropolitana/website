@@ -26,7 +26,7 @@ export default function StopsExplorerTimetable({ selectedStopCode, selectedTripC
   //
   // B. Fetch data
 
-  const { data: stopRealtimeData, error: stopRealtimeError, isLoading: stopRealtimeLoading } = useSWR(selectedStopCode && `https://api.carrismetropolitana.pt/stops/${selectedStopCode}/realtime`);
+  const { data: stopRealtimeData, error: stopRealtimeError, isLoading: stopRealtimeLoading } = useSWR(selectedStopCode && `https://api.carrismetropolitana.pt/stops/${selectedStopCode}/realtime`, { refreshInterval: 1000 });
 
   //
   // C. Transform data
