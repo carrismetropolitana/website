@@ -1,6 +1,7 @@
 'use client';
 
 import OSMMap from '@/components/OSMMap/OSMMap';
+import { useEffect } from 'react';
 import { useMap, Source, Layer } from 'react-map-gl/maplibre';
 
 export default function StopsExplorerMap({ allStopsMapData, selectedShapeMapData, selectedMapStyle, selectedMapFeature, onSelectStopCode }) {
@@ -10,6 +11,17 @@ export default function StopsExplorerMap({ allStopsMapData, selectedShapeMapData
   // A. Setup variables
 
   const { stopsExplorerMap } = useMap();
+
+  //
+  // C. Handle actions
+
+  useEffect(() => {
+    if (!stopsExplorerMap) return;
+    stopsExplorerMap.loadImage('/shape-arrow-direction.png', (error, image) => {
+      if (error) throw error;
+      stopsExplorerMap.addImage('shape-arrow-direction', image, { sdf: true });
+    });
+  }, [stopsExplorerMap]);
 
   //
   // C. Handle actions
@@ -66,7 +78,39 @@ export default function StopsExplorerMap({ allStopsMapData, selectedShapeMapData
       )}
       {selectedShapeMapData && (
         <Source id="selected-shape" type="geojson" data={selectedShapeMapData} generateId={true}>
-          <Layer id="selected-shape" type="line" source="selected-shape" layout={{ 'line-join': 'round', 'line-cap': 'round' }} paint={{ 'line-color': selectedShapeMapData.properties.color, 'line-width': 4 }} />
+          <Layer
+            id="selected-shape"
+            type="line"
+            source="selected-shape"
+            layout={{
+              'line-join': 'round',
+              'line-cap': 'round',
+            }}
+            paint={{
+              'line-color': selectedShapeMapData.properties.color,
+              'line-width': ['interpolate', ['linear'], ['zoom'], 10, 4, 20, 12],
+            }}
+          />
+          <Layer
+            id="selected-shape-direction"
+            type="symbol"
+            source="selected-shape"
+            layout={{
+              'icon-allow-overlap': true,
+              'icon-ignore-placement': true,
+              'icon-anchor': 'center',
+              'symbol-placement': 'line',
+              'icon-image': 'shape-arrow-direction',
+              'icon-size': ['interpolate', ['linear', 0.5], ['zoom'], 10, 0.1, 20, 0.25],
+              'symbol-spacing': ['interpolate', ['linear'], ['zoom'], 5, 50, 20, 50],
+              'icon-offset': [0, 0],
+              'icon-rotate': 90,
+            }}
+            paint={{
+              'icon-color': '#ffffff',
+              'icon-opacity': 0.8,
+            }}
+          />
         </Source>
       )}
     </OSMMap>
