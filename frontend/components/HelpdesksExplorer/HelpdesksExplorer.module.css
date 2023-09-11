@@ -4,17 +4,3 @@
   grid-template-rows: 400px;
   width: 100%;
 }
-
-.availableHelpdesk {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  width: 100%;
-  gap: var(--size-md);
-  padding: var(--size-md);
-}
-
-@media (max-width: 800px) {
-  .availableHelpdesk {
-    grid-template-columns: 1fr;
-  }
-}

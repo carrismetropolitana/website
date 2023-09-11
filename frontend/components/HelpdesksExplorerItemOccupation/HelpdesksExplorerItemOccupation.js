@@ -1,16 +1,16 @@
 'use client';
 
 import { useTranslations } from 'next-intl';
-import styles from './HelpdeskItemOccupation.module.css';
+import styles from './HelpdesksExplorerItemOccupation.module.css';
 import { useEffect, useState } from 'react';
 
-export default function HelpdeskItemOccupation({ currentlyWaiting, expectedWaitTime }) {
+export default function HelpdesksExplorerItemOccupation({ currentlyWaiting, expectedWaitTime }) {
   //
 
   //
   // A. Setup variables
 
-  const t = useTranslations('HelpdeskItemOccupation');
+  const t = useTranslations('HelpdesksExplorerItemOccupation');
 
   const [waitTimeString, setWaitTimeString] = useState('');
 

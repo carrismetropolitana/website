@@ -1,16 +1,16 @@
 'use client';
 
 import { useTranslations } from 'next-intl';
-import styles from './HelpdeskItemTimetable.module.css';
+import styles from './HelpdesksExplorerItemTimetable.module.css';
 import { useEffect, useState } from 'react';
 
-export default function HelpdeskItemTimetable({ mon, tue, wed, thu, fri, sat, sun }) {
+export default function HelpdesksExplorerItemTimetable({ mon, tue, wed, thu, fri, sat, sun }) {
   //
 
   //
   // A. Setup variables
 
-  const t = useTranslations('HelpdeskItemTimetable');
+  const t = useTranslations('HelpdesksExplorerItemTimetable');
 
   const [parsedSchedules, setParsedSchedules] = useState([]);
 

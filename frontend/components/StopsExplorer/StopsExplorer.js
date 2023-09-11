@@ -212,10 +212,12 @@ export default function StopsExplorer() {
               <StopTimetable selectedStopCode={selectedStopCode} selectedTripCode={selectedTripCode} onSelectTrip={handleSelectTrip} />
             </>
           ) : (
-            <NoDataLabel />
+            <NoDataLabel text={t('no_selection')} />
           )}
         </div>
       </div>
     </Pannel>
   );
+
+  //
 }

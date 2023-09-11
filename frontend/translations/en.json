@@ -440,26 +440,45 @@
         "label": "Real-time data"
     },
     "StopsExplorer": {
-        "title": "Explore Stops and Schedules"
+        "title": "Paragens e Horários",
+        "no_selection": "Selecione uma Paragem"
     },
     "StopsExplorerToolbar": {
         "map_style": {
-            "label": "Explore Stops and Schedules",
+            "label": "Paragens e Horários",
             "options": {
-                "map": "Map",
-                "satellite": "Satellite"
+                "map": "Mapa",
+                "satellite": "Satélite"
             }
         },
         "recenter_map": {
-            "label": "Re-center Map"
+            "label": "Centrar Mapa"
         },
         "open_gmaps": {
-            "label": "Open in Google Maps"
-        },
-        "search": {
-            "label": "Search",
-            "placeholder": "A pesquisa está muito básica mas funciona :)"
+            "label": "Abrir no Google Maps"
         }
+    },
+    "HelpdesksExplorerToolbar": {
+        "map_style": {
+            "label": "Trocar vista do mapa",
+            "options": {
+                "map": "Mapa",
+                "satellite": "Satélite"
+            }
+        },
+        "recenter_map": {
+            "label": "Centrar Mapa"
+        },
+        "open_gmaps": {
+            "label": "Abrir no Google Maps"
+        }
+    },
+    "HelpdesksExplorerToolbarSearch": {
+        "label": "Procurar por nome, morada, município...",
+        "placeholder": "Procurar por nome, morada, município...",
+        "no_results": "Nenhum Resultado Encontrado",
+        "arriving_now": "< 1 min",
+        "realtime": "{value} min"
     },
     "AppFooter": {
         "contacts": {
@@ -498,9 +517,20 @@
         "legal_disclaimer": "Aviso Legal"
     },
     "HelpdesksExplorer": {
-        "title": "Espaços navegante®"
+        "title": "Espaços navegante® Carris Metropolitana"
     },
-    "HelpdeskItem": {
+    "HelpdesksExplorerItem": {
+        "address": {
+            "label": "Morada"
+        },
+        "schedule": {
+            "label": "Horário"
+        },
+        "occupation": {
+            "label": "Ocupação Atual"
+        }
+    },
+    "HelpdesksExplorerGrid": {
         "address": {
             "label": "Address"
         },
@@ -511,24 +541,27 @@
             "label": "Current Status"
         }
     },
-    "HelpdeskItemTimetable": {
-        "from": "From",
-        "until": "until",
-        "and": "and",
-        "mon": "Mon",
-        "tue": "Tue",
-        "wed": "Wed",
-        "thu": "Thu",
-        "fri": "Fri",
-        "sat": "Sat",
-        "sun": "Sun"
+    "HelpdesksExplorerInfo": {
+        "message": "Dedicados ao passageiro, os espaços navegante® Carris Metropolitana, concentram todos os serviços relacionados com a Carris Metropolitana, possibilitando esclarecer dúvidas, solicitar a emissão de cartões navegante® ou mesmo aderir ao passe navegante família e antigo combatente."
     },
-    "HelpdeskItemOccupation": {
+    "HelpdesksExplorerItemTimetable": {
+        "from": "De",
+        "until": "até",
+        "and": "e",
+        "mon": "Seg",
+        "tue": "Ter",
+        "wed": "Qua",
+        "thu": "Qui",
+        "fri": "Sex",
+        "sat": "Sab",
+        "sun": "Dom"
+    },
+    "HelpdesksExplorerItemOccupation": {
         "currently_waiting": {
-            "label": "Clients waiting right now:"
+            "label": "Clientes em espera:"
         },
         "expected_wait_time": {
-            "label": "Expected wait time:"
+            "label": "Tempo de espera estimado:"
         }
     },
     "StopsExplorerTimetable": {

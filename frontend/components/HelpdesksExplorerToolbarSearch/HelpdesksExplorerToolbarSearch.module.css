@@ -1,0 +1,15 @@
+.comboboxOption {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 5px;
+}
+
+.stopInfo {
+  display: flex;
+  flex-direction: column;
+}
+
+/* .selectedStop {
+  background-color: blue;
+} */

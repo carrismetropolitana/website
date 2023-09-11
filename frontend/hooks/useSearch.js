@@ -6,7 +6,7 @@ export default function useSearch(query, data, options) {
   // 1.
   // Define variables to hold the values
 
-  let finalResult = data;
+  let finalResult = data || [];
 
   // 2.
   // Return all data if query is empty

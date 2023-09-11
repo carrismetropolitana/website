@@ -1,19 +1,19 @@
 'use client';
 
-import styles from './HelpdeskItem.module.css';
+import styles from './HelpdesksExplorerItem.module.css';
 import { useTranslations } from 'next-intl';
-import Loader from '../Loader/Loader';
-import HelpdeskItemTimetable from '../HelpdeskItemTimetable/HelpdeskItemTimetable';
-import HelpdeskItemOccupation from '../HelpdeskItemOccupation/HelpdeskItemOccupation';
-import LiveIcon from '../LiveIcon/LiveIcon';
+import Loader from '@/components/Loader/Loader';
+import HelpdeskItemTimetable from '@/components/HelpdesksExplorerItemTimetable/HelpdesksExplorerItemTimetable';
+import HelpdeskItemOccupation from '@/components/HelpdesksExplorerItemOccupation/HelpdesksExplorerItemOccupation';
+import LiveIcon from '@/components/LiveIcon/LiveIcon';
 
-export default function HelpdeskItem({ helpdeskData }) {
+export default function HelpdesksExplorerItem({ helpdeskData }) {
   //
 
   //
   // A. Setup variables
 
-  const t = useTranslations('HelpdeskItem');
+  const t = useTranslations('HelpdesksExplorerItem');
 
   //
   // C. Render components
