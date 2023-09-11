@@ -4,7 +4,7 @@ import OSMMap from '@/components/OSMMap/OSMMap';
 import { useEffect } from 'react';
 import { useMap, Source, Layer } from 'react-map-gl/maplibre';
 
-export default function StopsExplorerMap({ allStopsMapData, selectedShapeMapData, selectedVehicleMapData, selectedMapStyle, selectedMapFeature, onSelectStopCode }) {
+export default function StopsExplorerMap({ allStopsMapData, selectedStopMapData, selectedShapeMapData, selectedVehicleMapData, selectedMapStyle, selectedMapFeature, onSelectStopCode }) {
   //
 
   //
@@ -17,9 +17,25 @@ export default function StopsExplorerMap({ allStopsMapData, selectedShapeMapData
 
   useEffect(() => {
     if (!stopsExplorerMap) return;
+    // Load direction arrows
     stopsExplorerMap.loadImage('/shape-arrow-direction.png', (error, image) => {
       if (error) throw error;
       stopsExplorerMap.addImage('shape-arrow-direction', image, { sdf: true });
+    });
+    // Load vehicle symbol
+    stopsExplorerMap.loadImage('/bus.png', (error, image) => {
+      if (error) throw error;
+      stopsExplorerMap.addImage('bus', image, { sdf: false });
+    });
+    // Load stop idle symbol
+    stopsExplorerMap.loadImage('/stop-idle.png', (error, image) => {
+      if (error) throw error;
+      stopsExplorerMap.addImage('stop-idle', image, { sdf: false });
+    });
+    // Load stop selected symbol
+    stopsExplorerMap.loadImage('/stop-selected.png', (error, image) => {
+      if (error) throw error;
+      stopsExplorerMap.addImage('stop-selected', image, { sdf: false });
     });
   }, [stopsExplorerMap]);
 
@@ -61,32 +77,71 @@ export default function StopsExplorerMap({ allStopsMapData, selectedShapeMapData
 
   return (
     <OSMMap id="stopsExplorerMap" mapStyle={selectedMapStyle} onClick={handleMapClick} onMouseEnter={handleMapMouseEnter} onMouseLeave={handleMapMouseLeave} onMove={handleMapMove} interactiveLayerIds={['all-stops']}>
-      {allStopsMapData && (
-        <Source id="all-stops" type="geojson" data={allStopsMapData} generateId={false} promoteId={'mapid'}>
-          <Layer
-            id="all-stops"
-            type="circle"
-            source="all-stops"
-            paint={{
-              'circle-color': ['case', ['boolean', ['feature-state', 'selected'], false], '#EE4B2B', '#ffdd01'],
-              'circle-radius': ['interpolate', ['linear', 0.5], ['zoom'], 9, ['case', ['boolean', ['feature-state', 'selected'], false], 5, 1], 26, ['case', ['boolean', ['feature-state', 'selected'], false], 20, 10]],
-              'circle-stroke-width': ['interpolate', ['linear', 0.5], ['zoom'], 9, 0.35, 26, 5],
-              'circle-stroke-color': '#000000',
-            }}
-          />
-        </Source>
-      )}
       {selectedVehicleMapData && (
         <Source id="selected-vehicle" type="geojson" data={selectedVehicleMapData} generateId={true}>
           <Layer
             id="selected-vehicle"
-            type="circle"
+            type="symbol"
             source="selected-vehicle"
+            layout={{
+              'icon-allow-overlap': true,
+              'icon-ignore-placement': true,
+              'icon-anchor': 'center',
+              'symbol-placement': 'point',
+              'icon-rotation-alignment': 'map',
+              'icon-image': 'bus',
+              'icon-size': ['interpolate', ['linear', 0.5], ['zoom'], 10, 0.05, 20, 0.15],
+              'icon-offset': [0, 0],
+              'icon-rotate': selectedVehicleMapData.properties.heading || 0,
+            }}
             paint={{
-              'circle-color': '#0000FF',
-              'circle-radius': 10,
-              'circle-stroke-width': 5,
-              'circle-stroke-color': '#000000',
+              'icon-opacity': ['interpolate', ['linear', 0.5], ['zoom'], 10, 0, 11, 1],
+            }}
+          />
+        </Source>
+      )}
+      {selectedStopMapData && (
+        <Source id="selected-stop" type="geojson" data={selectedStopMapData} generateId={true}>
+          <Layer
+            id="selected-stop"
+            type="symbol"
+            source="selected-stop"
+            beforeId={selectedVehicleMapData && 'selected-vehicle'}
+            layout={{
+              'icon-allow-overlap': true,
+              'icon-ignore-placement': true,
+              'icon-anchor': 'center',
+              'symbol-placement': 'point',
+              'icon-rotation-alignment': 'map',
+              'icon-image': 'stop-selected',
+              'icon-size': ['interpolate', ['linear', 0.5], ['zoom'], 10, 0.05, 20, 0.5],
+              'icon-offset': [0, 0],
+            }}
+            paint={{
+              'icon-opacity': ['interpolate', ['linear', 0.5], ['zoom'], 10, 0, 11, 1],
+            }}
+          />
+        </Source>
+      )}
+      {allStopsMapData && (
+        <Source id="all-stops" type="geojson" data={allStopsMapData} generateId={false} promoteId={'mapid'}>
+          <Layer
+            id="all-stops"
+            type="symbol"
+            source="all-stops"
+            beforeId={selectedStopMapData && 'selected-stop'}
+            layout={{
+              'icon-allow-overlap': true,
+              'icon-ignore-placement': true,
+              'icon-anchor': 'center',
+              'symbol-placement': 'point',
+              'icon-rotation-alignment': 'map',
+              'icon-image': 'stop-idle',
+              'icon-size': ['interpolate', ['linear', 0.5], ['zoom'], 10, 0.05, 20, 0.25],
+              'icon-offset': [0, 0],
+            }}
+            paint={{
+              'icon-opacity': ['interpolate', ['linear', 0.5], ['zoom'], 10, 0.5, 11, 1],
             }}
           />
         </Source>
@@ -94,22 +149,10 @@ export default function StopsExplorerMap({ allStopsMapData, selectedShapeMapData
       {selectedShapeMapData && (
         <Source id="selected-shape" type="geojson" data={selectedShapeMapData} generateId={true}>
           <Layer
-            id="selected-shape"
-            type="line"
-            source="selected-shape"
-            layout={{
-              'line-join': 'round',
-              'line-cap': 'round',
-            }}
-            paint={{
-              'line-color': selectedShapeMapData.properties.color,
-              'line-width': ['interpolate', ['linear'], ['zoom'], 10, 4, 20, 12],
-            }}
-          />
-          <Layer
             id="selected-shape-direction"
             type="symbol"
             source="selected-shape"
+            beforeId="all-stops"
             layout={{
               'icon-allow-overlap': true,
               'icon-ignore-placement': true,
@@ -124,6 +167,20 @@ export default function StopsExplorerMap({ allStopsMapData, selectedShapeMapData
             paint={{
               'icon-color': '#ffffff',
               'icon-opacity': 0.8,
+            }}
+          />
+          <Layer
+            id="selected-shape-line"
+            type="line"
+            source="selected-shape"
+            beforeId="selected-shape-direction"
+            layout={{
+              'line-join': 'round',
+              'line-cap': 'round',
+            }}
+            paint={{
+              'line-color': selectedShapeMapData.properties.color,
+              'line-width': ['interpolate', ['linear'], ['zoom'], 10, 4, 20, 12],
             }}
           />
         </Source>

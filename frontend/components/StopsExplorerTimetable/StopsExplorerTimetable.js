@@ -26,7 +26,7 @@ export default function StopsExplorerTimetable({ selectedStopCode, selectedTripC
   //
   // B. Fetch data
 
-  const { data: stopRealtimeData, error: stopRealtimeError, isLoading: stopRealtimeLoading } = useSWR(selectedStopCode && `https://api.carrismetropolitana.pt/stops/${selectedStopCode}/realtime`, { refreshInterval: 1000 });
+  const { data: stopRealtimeData, error: stopRealtimeError, isLoading: stopRealtimeLoading } = useSWR(selectedStopCode && `https://api.carrismetropolitana.pt/stops/${selectedStopCode}/realtime`, { refreshInterval: 5000 });
 
   //
   // C. Transform data
@@ -59,8 +59,6 @@ export default function StopsExplorerTimetable({ selectedStopCode, selectedTripC
       const tripHasObservedArrival = realtimeTrip.observed_arrival ? true : false;
       const tripScheduleIsInThePast = getMinutesFromOperationTimeString(realtimeTrip.scheduled_arrival) < 0;
 
-      console.log(getMinutesFromOperationTimeString(realtimeTrip.scheduled_arrival));
-
       if (tripHasObservedArrival || tripScheduleIsInThePast) {
         previousTrips_temp.push(realtimeTrip);
         continue;
@@ -82,8 +80,15 @@ export default function StopsExplorerTimetable({ selectedStopCode, selectedTripC
     });
 
     currentAndFutureTrips_temp.sort((a, b) => {
-      const timeStringA = a.scheduled_arrival.split(':').join('');
-      const timeStringB = b.scheduled_arrival.split(':').join('');
+      //
+      let timeStringA;
+      if (a.estimated_arrival) timeStringA = a.estimated_arrival.split(':').join('');
+      else timeStringA = a.scheduled_arrival.split(':').join('');
+      //
+      let timeStringB;
+      if (b.estimated_arrival) timeStringA = b.estimated_arrival.split(':').join('');
+      else timeStringA = b.scheduled_arrival.split(':').join('');
+      //
       return timeStringA - timeStringB;
     });
 
