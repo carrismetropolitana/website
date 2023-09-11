@@ -41,9 +41,10 @@
   color: #ffffff;
   font-size: 12px;
   font-weight: 500;
-  opacity: 0.8;
+  opacity: 0.75;
   transition: opacity 300ms ease;
   text-align: center;
+  line-height: 1;
 }
 
 .legalMenu a:hover {
