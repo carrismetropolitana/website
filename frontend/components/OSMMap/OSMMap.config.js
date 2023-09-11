@@ -20,6 +20,8 @@ const styleMap = 'https://maps.carrismetropolitana.pt/styles/default/style.json'
 
 const styleSatellite = {
   version: 8,
+  minZoom: 5,
+  maxZoom: 18,
   sources: {
     'raster-tiles': {
       type: 'raster',

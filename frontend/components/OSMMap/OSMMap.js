@@ -27,8 +27,8 @@ export default function OSMMap({
         id={id}
         mapLib={maplibregl}
         initialViewState={osmMapDefaults.initialViewState}
-        minZoom={osmMapDefaults.minZoom}
-        maxZoom={osmMapDefaults.maxZoom}
+        minZoom={osmMapDefaults.styles[mapStyle].minZoom || osmMapDefaults.minZoom}
+        maxZoom={osmMapDefaults.styles[mapStyle].maxZoom || osmMapDefaults.maxZoom}
         scrollZoom={scrollZoom}
         mapStyle={osmMapDefaults.styles[mapStyle] || osmMapDefaults.styles.default}
         style={{ width: '100%', height: '100%' }}
