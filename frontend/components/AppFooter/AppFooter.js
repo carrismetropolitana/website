@@ -15,7 +15,7 @@ export default function AppFooter() {
     <footer className={styles.container}>
       <div className={styles.grid}>
         <AppFooterLogo />
-        {/* <AppFooterNav /> */}
+        <AppFooterNav />
       </div>
       <AppFooterLegal />
     </footer>
