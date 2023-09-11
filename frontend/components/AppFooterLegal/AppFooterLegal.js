@@ -20,7 +20,7 @@ export default function AppFooterLegal() {
       <div className={styles.copyright}>{t('copyright')}</div>
       <div className={styles.legalMenu}>
         <a target="_blank" href="https://www.livroreclamacoes.pt">
-          <Image src="https://www.carrismetropolitana.pt/wp-content/themes/carrismetropolitana/images/livro-reclamacoes.png" alt={t('complaints_book')} width={140} height={58} />
+          <Image priority src="https://www.carrismetropolitana.pt/wp-content/themes/carrismetropolitana/images/livro-reclamacoes.png" alt={t('complaints_book')} width={140} height={58} />
         </a>
         <a href="/legal/conditions">{t('general_conditions')}</a>
         <a href="/legal/privacy">{t('privacy_policy')}</a>

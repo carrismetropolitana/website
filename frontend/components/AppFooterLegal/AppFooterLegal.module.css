@@ -9,11 +9,21 @@
   justify-content: space-between;
 }
 
+@media (max-width: 1100px) {
+  .container {
+    flex-direction: column;
+  }
+}
+
 /* * */
 /* COPYRIGHT */
 
 .copyright {
+  color: #ffffff;
   font-size: 12px;
+  font-weight: 500;
+  opacity: 0.5;
+  text-align: center;
 }
 
 /* * */
@@ -28,11 +38,20 @@
 }
 
 .legalMenu a {
+  color: #ffffff;
   font-size: 12px;
+  font-weight: 500;
   opacity: 0.8;
   transition: opacity 300ms ease;
+  text-align: center;
 }
 
 .legalMenu a:hover {
   opacity: 1;
+}
+
+@media (max-width: 600px) {
+  .legalMenu {
+    flex-direction: column;
+  }
 }
