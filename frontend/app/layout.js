@@ -4,6 +4,7 @@
 import '@/styles/reset.css';
 import '@/styles/defaults.css';
 import '@/styles/colors.css';
+import '@mantine/core/styles.css';
 import { Inter } from 'next/font/google';
 import Providers from './providers';
 
