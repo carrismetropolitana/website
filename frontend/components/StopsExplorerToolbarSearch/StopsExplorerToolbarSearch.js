@@ -8,6 +8,7 @@ import { useTranslations } from 'next-intl';
 import styles from './StopsExplorerToolbarSearch.module.css';
 import useSearch from '@/hooks/useSearch';
 import { IconX, IconSearch } from '@tabler/icons-react';
+import parseStopLocationName from '@/services/parseStopLocationName';
 
 export default function StopsExplorerToolbarSearch({ selectedStopCode, onSelectStopCode }) {
   //
@@ -32,13 +33,8 @@ export default function StopsExplorerToolbarSearch({ selectedStopCode, onSelectS
       return allStopsData.map((stop) => {
         return {
           code: stop.code,
-          value: `${stop.name} [${stop.code}]`,
           name: stop.name,
-          description: `${stop.locality}, ${stop.municipality_name}`,
-          locality: stop.locality,
-          municipality_name: stop.municipality_name,
-          latitude: stop.latitude,
-          longitude: stop.longitude,
+          location: parseStopLocationName(stop.locality, stop.municipality_name),
         };
       });
     }
@@ -48,7 +44,7 @@ export default function StopsExplorerToolbarSearch({ selectedStopCode, onSelectS
   // D. Search
 
   const allStopsDataFilteredBySearchQuery = useSearch(searchQuery, allStopsDataFormatted, {
-    keys: ['code', 'name', 'tts_name', 'locality', 'municipality_name'],
+    keys: ['code', 'name', 'tts_name', 'location'],
     regexReplace: /[^a-zA-Z0-9]/g,
     limitResults: 100,
   });
@@ -120,11 +116,18 @@ export default function StopsExplorerToolbarSearch({ selectedStopCode, onSelectS
             ) : (
               allStopsDataFilteredBySearchQuery.map((item) => (
                 <Combobox.Option key={item.code} value={item.code}>
-                  <div>
-                    <Highlight highlight={searchQuery} fz="sm" fw={500}>
-                      {item.name}
-                    </Highlight>
-                    <Text fz="xs">{item.municipality_name}</Text>
+                  <div className={styles.comboboxOption}>
+                    {selectedStopCode === item.code && (
+                      <div className={styles.selectedStop}>
+                        <Image priority src="/stop-selected.png" alt={'Selected stop icon'} width={20} height={20} />
+                      </div>
+                    )}
+                    <div className={styles.stopInfo}>
+                      <Highlight highlight={searchQuery} fz="sm" fw={500}>
+                        {item.name}
+                      </Highlight>
+                      <Text fz="xs">{item.location}</Text>
+                    </div>
                   </div>
                 </Combobox.Option>
               ))

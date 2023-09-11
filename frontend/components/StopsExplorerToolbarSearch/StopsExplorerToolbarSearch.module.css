@@ -1,20 +1,15 @@
-.container {
-  text-align: left;
-  /* font-size: 0.75rem; */
-  color: black;
-}
-
-.select {
-  text-align: left;
-  font-size: 0.65rem;
-  color: black;
-  margin: auto;
-}
-
-.selectedSearchField {
+.comboboxOption {
   display: flex;
+  flex-direction: row;
   align-items: center;
-  justify-content: flex-start;
-
-  padding: 20px;
+  gap: 5px;
 }
+
+.stopInfo {
+  display: flex;
+  flex-direction: column;
+}
+
+/* .selectedStop {
+  background-color: blue;
+} */
