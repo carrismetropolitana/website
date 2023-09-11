@@ -17,8 +17,8 @@ export default function StopsExplorerTimetableCurrentAndFutureTrips({ tripsData,
 
   return (
     <div className={styles.container}>
-      {tripsData.map((trip) => (
-        <StopsExplorerTimetableRow key={trip.trip_code} rowType={'current'} tripData={trip} selectedTripCode={selectedTripCode} onSelectTrip={onSelectTrip} />
+      {tripsData.map((trip, index) => (
+        <StopsExplorerTimetableRow key={`${trip.trip_code}_${index}`} rowType={'current'} tripData={trip} selectedTripCode={selectedTripCode} onSelectTrip={onSelectTrip} />
       ))}
     </div>
   );

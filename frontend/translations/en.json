@@ -556,5 +556,12 @@
             "arriving_now": "< 1 min",
             "realtime": "{value} min"
         }
+    },
+    "StopsExplorerToolbarSearch": {
+        "label": "Procurar paragens por nome, código, localização...",
+        "placeholder": "Procurar paragens por nome, código, localização...",
+        "no_results": "Nenhum Resultado Encontrado",
+        "arriving_now": "< 1 min",
+        "realtime": "{value} min"
     }
 }

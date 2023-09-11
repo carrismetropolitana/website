@@ -3,15 +3,26 @@ import { transliterate } from 'inflected';
 export default function useSearch(query, data, options) {
   //
 
-  // Return all data if query is empty
-  if (!query) return data;
+  // 1.
+  // Define variables to hold the values
 
+  let finalResult = data;
+
+  // 2.
+  // Return all data if query is empty
+
+  if (!query) return limitArraySize(finalResult, options.limitResults);
+
+  // 3.
   // Normalize the query
+
   const normalizedQuery = normalizeString(query, { toLowerCase: true, transliterate: true, regexReplace: options.regexReplace });
 
+  // 4.
   // Check if 'keys' option is present
+
   if (options && options.keys) {
-    return data.filter((item) => {
+    finalResult = finalResult.filter((item) => {
       let hasMatch = false;
       for (let key of options.keys) {
         if (item.hasOwnProperty(key)) {
@@ -26,14 +37,17 @@ export default function useSearch(query, data, options) {
       }
       return hasMatch;
     });
+    return limitArraySize(finalResult, options.limitResults);
   }
 
   // The case where options is not defined
-  return data.filter((item) => {
+  finalResult = finalResult.filter((item) => {
     const stringifiedValue = Object.values(item).join('');
     const normalizedValue = normalizeString(stringifiedValue, { toLowerCase: true, transliterate: true, regexReplace: options.regexReplace });
     return normalizedValue.includes(normalizedQuery);
   });
+
+  return limitArraySize(finalResult, options.limitResults);
 
   //
 }
@@ -50,4 +64,8 @@ function normalizeString(rawString, options) {
   // Return result
   return normalizedString;
   //
+}
+
+function limitArraySize(array, limit) {
+  return array.slice(0, limit || array.length);
 }
