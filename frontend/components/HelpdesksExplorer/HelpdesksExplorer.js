@@ -10,10 +10,9 @@ import { useTranslations } from 'next-intl';
 import Pannel from '@/components/Pannel/Pannel';
 import HelpdesksExplorerMap from '@/components/HelpdesksExplorerMap/HelpdesksExplorerMap';
 import generateUUID from '@/services/generateUUID';
-import HelpdesksExplorerItem from '@/components/HelpdesksExplorerItem/HelpdesksExplorerItem';
 import HelpdesksExplorerToolbar from '@/components/HelpdesksExplorerToolbar/HelpdesksExplorerToolbar';
-import HelpdesksExplorerGrid from '../HelpdesksExplorerGrid/HelpdesksExplorerGrid';
-import HelpdesksExplorerInfo from '../HelpdesksExplorerInfo/HelpdesksExplorerInfo';
+import HelpdesksExplorerInfo from '@/components/HelpdesksExplorerInfo/HelpdesksExplorerInfo';
+import HelpdesksExplorerGrid from '@/components/HelpdesksExplorerGrid/HelpdesksExplorerGrid';
 
 export default function HelpdesksExplorer() {
   //
