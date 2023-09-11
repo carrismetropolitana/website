@@ -15,7 +15,6 @@ export default function OSMMap({
   onMoveStart = () => {},
   onMoveEnd = () => {},
   interactiveLayerIds = [],
-  toolbar,
   scrollZoom = true,
   navigation = true,
   fullscreen = true,
