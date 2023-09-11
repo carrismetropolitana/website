@@ -17,7 +17,7 @@ WORKDIR /app
 
 COPY package.json ./
 
-RUN npm install --omit=dev
+RUN npm install --omit-dev
 
 
 # # # # # # # # #
@@ -55,10 +55,6 @@ COPY --from=builder /app/public ./public
 
 COPY --from=builder --chown=nextjs:nodejs /app/.next/standalone ./
 COPY --from=builder --chown=nextjs:nodejs /app/.next/static ./.next/static
-
-RUN mkdir -p ./exports
-RUN chown -R nextjs:nodejs ./exports
-RUN chmod -R 755 ./exports
 
 USER nextjs
 

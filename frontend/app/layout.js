@@ -7,6 +7,7 @@ import '@/styles/colors.css';
 import '@mantine/core/styles.css';
 import { Inter } from 'next/font/google';
 import Providers from './providers';
+import { ColorSchemeScript } from '@mantine/core';
 
 const inter = Inter({
   weight: ['400', '500', '600', '700', '800'],
@@ -23,6 +24,10 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html className={inter.variable}>
+      <head>
+        <ColorSchemeScript />
+        <link rel="shortcut icon" href="/favicon.svg" />
+      </head>
       <body>
         <Providers>{children}</Providers>
       </body>
