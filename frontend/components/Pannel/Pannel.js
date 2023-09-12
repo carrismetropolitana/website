@@ -1,7 +1,7 @@
 import { useTranslations } from 'next-intl';
 import Loader from '@/components/Loader/Loader';
 import styles from './Pannel.module.css';
-import NoDataLabel from '../NoDataLabel/NoDataLabel';
+import NoDataLabel from '@/components/NoDataLabel/NoDataLabel';
 
 export default function Pannel({ loading, error, icon, title, rightSection, children }) {
   //
@@ -10,6 +10,8 @@ export default function Pannel({ loading, error, icon, title, rightSection, chil
   // A. Setup variables
 
   const t = useTranslations('Pannel');
+
+  console.log(rightSection);
 
   //
   // A. Render components
@@ -22,7 +24,7 @@ export default function Pannel({ loading, error, icon, title, rightSection, chil
             {icon && <div className={styles.headerIcon}>{icon}</div>}
             {title && <h2 className={styles.headerTitle}>{title}</h2>}
           </div>
-          <div className={styles.headerRightSection}></div>
+          {rightSection && <div className={styles.headerRightSection}>{rightSection}</div>}
         </div>
         <div className={styles.wrapper}>
           <div className={styles.isError}>
@@ -41,7 +43,7 @@ export default function Pannel({ loading, error, icon, title, rightSection, chil
             {icon && <div className={styles.headerIcon}>{icon}</div>}
             {title && <h2 className={styles.headerTitle}>{title}</h2>}
           </div>
-          <div className={styles.headerRightSection}></div>
+          {rightSection && <div className={styles.headerRightSection}>{rightSection}</div>}
         </div>
         <div className={styles.wrapper}>
           <div className={styles.isLoading}>
@@ -59,7 +61,7 @@ export default function Pannel({ loading, error, icon, title, rightSection, chil
           {icon && <div className={styles.headerIcon}>{icon}</div>}
           {title && <h2 className={styles.headerTitle}>{title}</h2>}
         </div>
-        <div className={styles.headerRightSection}></div>
+        {rightSection && <div className={styles.headerRightSection}>{rightSection}</div>}
       </div>
       <div className={styles.wrapper}>
         <div className={styles.content}>{children}</div>

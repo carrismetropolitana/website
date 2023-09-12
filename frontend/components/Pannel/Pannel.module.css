@@ -21,7 +21,8 @@
   }
 }
 
-.headerLeftSection {
+.headerLeftSection,
+.headerRightSection {
   display: flex;
   align-items: center;
   gap: var(--size-md);

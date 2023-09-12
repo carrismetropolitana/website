@@ -1,8 +1,8 @@
 'use client';
 
 import { useTranslations } from 'next-intl';
-import styles from './HelpdesksExplorerItemOccupation.module.css';
 import { useEffect, useState } from 'react';
+import styles from './HelpdesksExplorerItemOccupation.module.css';
 
 export default function HelpdesksExplorerItemOccupation({ currentlyWaiting, expectedWaitTime }) {
   //
@@ -22,21 +22,21 @@ export default function HelpdesksExplorerItemOccupation({ currentlyWaiting, expe
     if (currentlyWaiting > 0) {
       if (expectedWaitTime < 60) {
         // If wait time is less than a minute, then round it to the minute
-        setWaitTimeString('< 1min');
+        setWaitTimeString(t('expected_wait_time.available_soon'));
       } else if (expectedWaitTime < 3600) {
         // If wait time is less than an hour
         const minutes = Math.floor(expectedWaitTime / 60);
-        setWaitTimeString(`${minutes} min`);
+        setWaitTimeString(t('expected_wait_time.available_at_minutes', { minutes: minutes }));
       } else {
         // If wait time is more than an hour
         const hours = Math.floor(expectedWaitTime / 3600);
         const minutes = Math.floor((expectedWaitTime % 3600) / 60);
-        setWaitTimeString(`${hours} h ${minutes} min`);
+        setWaitTimeString(t('expected_wait_time.available_at_hours', { hours: hours, minutes: minutes }));
       }
     } else {
-      setWaitTimeString(`Immediate`);
+      setWaitTimeString(t('expected_wait_time.available_now'));
     }
-  }, [currentlyWaiting, expectedWaitTime]);
+  }, [currentlyWaiting, expectedWaitTime, t]);
 
   //
   // C. Render components

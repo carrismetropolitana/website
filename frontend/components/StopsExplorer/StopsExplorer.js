@@ -184,7 +184,7 @@ export default function StopsExplorer() {
   // E. Render components
 
   return (
-    <Pannel title={t('title')} loading={allStopsLoading} error={allStopsError}>
+    <Pannel title={t('title')} loading={allStopsLoading} error={allStopsError} rightSection={<div className={styles.betaIcon}>Beta</div>}>
       <StopsExplorerToolbar
         selectedMapStyle={selectedMapStyle}
         onSelectMapStyle={setSelectedMapStyle}
