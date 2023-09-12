@@ -7,7 +7,7 @@ import HelpdeskItemTimetable from '@/components/EncmExplorerItemTimetable/EncmEx
 import HelpdeskItemOccupation from '@/components/EncmExplorerItemOccupation/EncmExplorerItemOccupation';
 import LiveIcon from '@/components/LiveIcon/LiveIcon';
 
-export default function EncmExplorerItem({ encmData }) {
+export default function EncmExplorerItem({ encmData, selectedEncmCode, onSelectEncmCode }) {
   //
 
   //
@@ -16,15 +16,24 @@ export default function EncmExplorerItem({ encmData }) {
   const t = useTranslations('EncmExplorerItem');
 
   //
+  // B. Handle actions
+
+  const handleClickViewMap = () => {
+    onSelectEncmCode(encmData.code);
+  };
+
+  //
   // C. Render components
 
   return encmData ? (
-    <div className={styles.container}>
+    <div id={`encm${encmData.code}`} className={`${styles.container} ${selectedEncmCode === encmData.code && styles.selected}`}>
       <h2 className={styles.title}>{encmData.name}</h2>
       <div className={styles.wrapper}>
         <h4 className={styles.label}>{t('address.label')}</h4>
         <p className={styles.text}>{`${encmData.address}, ${encmData.postal_code} ${encmData.locality}`}</p>
-        <div className={styles.viewInMap}>{t('address.view_in_map')}</div>
+        <a className={styles.viewInMap} onClick={handleClickViewMap} href="#encmExplorerMap">
+          {t('address.view_in_map')}
+        </a>
       </div>
       <div className={styles.wrapper}>
         <h4 className={styles.label}>{t('schedule.label')}</h4>

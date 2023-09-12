@@ -5,16 +5,11 @@ import { useMemo } from 'react';
 import { useTranslations } from 'next-intl';
 import EncmExplorerItem from '@/components/EncmExplorerItem/EncmExplorerItem';
 
-export default function EncmExplorerGrid({ allEncmData }) {
+export default function EncmExplorerGrid({ allEncmData, selectedEncmCode, onSelectEncmCode }) {
   //
 
   //
-  // A. Setup variables
-
-  const t = useTranslations('EncmExplorerGrid');
-
-  //
-  // C. Transform data
+  // A. Transform data
 
   const allEncmGroupedByMunicipality = useMemo(() => {
     if (!allEncmData) return [];
@@ -37,7 +32,7 @@ export default function EncmExplorerGrid({ allEncmData }) {
   }, [allEncmData]);
 
   //
-  // E. Render components
+  // B. Render components
 
   return (
     <div className={styles.container}>
@@ -48,7 +43,7 @@ export default function EncmExplorerGrid({ allEncmData }) {
               <p>{group.name}</p>
             </div>
             <div key={group.code} className={styles.grid}>
-              {group.encm && group.encm.map((encm) => <EncmExplorerItem key={encm.code} encmData={encm} />)}
+              {group.encm && group.encm.map((encm) => <EncmExplorerItem key={encm.code} encmData={encm} selectedEncmCode={selectedEncmCode} onSelectEncmCode={onSelectEncmCode} />)}
             </div>
           </div>
         ))}

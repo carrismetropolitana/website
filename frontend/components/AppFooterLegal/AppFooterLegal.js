@@ -20,7 +20,7 @@ export default function AppFooterLegal() {
       <div className={styles.copyright}>{t('copyright')}</div>
       <div className={styles.legalMenu}>
         <a target="_blank" href="https://www.livroreclamacoes.pt">
-          <Image priority src="/livro-de-reclamacoes.svg" alt={t('complaints_book')} width={125} height={50} />
+          <Image priority src="/images/livro-de-reclamacoes.svg" alt={t('complaints_book')} width={125} height={50} />
         </a>
         <a href="/legal/conditions">{t('general_conditions')}</a>
         <a href="/legal/privacy">{t('privacy_policy')}</a>

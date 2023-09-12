@@ -18,22 +18,22 @@ export default function StopsExplorerMap({ allStopsMapData, selectedStopMapData,
   useEffect(() => {
     if (!stopsExplorerMap) return;
     // Load direction arrows
-    stopsExplorerMap.loadImage('/shape-arrow-direction.png', (error, image) => {
+    stopsExplorerMap.loadImage('/icons/shape-arrow-direction.png', (error, image) => {
       if (error) throw error;
       stopsExplorerMap.addImage('shape-arrow-direction', image, { sdf: true });
     });
     // Load vehicle symbol
-    stopsExplorerMap.loadImage('/bus.png', (error, image) => {
+    stopsExplorerMap.loadImage('/icons/bus.png', (error, image) => {
       if (error) throw error;
       stopsExplorerMap.addImage('bus', image, { sdf: false });
     });
     // Load stop idle symbol
-    stopsExplorerMap.loadImage('/stop-idle.png', (error, image) => {
+    stopsExplorerMap.loadImage('/icons/stop-idle.png', (error, image) => {
       if (error) throw error;
       stopsExplorerMap.addImage('stop-idle', image, { sdf: false });
     });
     // Load stop selected symbol
-    stopsExplorerMap.loadImage('/stop-selected.png', (error, image) => {
+    stopsExplorerMap.loadImage('/icons/stop-selected.png', (error, image) => {
       if (error) throw error;
       stopsExplorerMap.addImage('stop-selected', image, { sdf: false });
     });

@@ -2,9 +2,10 @@
 
 import OSMMap from '@/components/OSMMap/OSMMap';
 import { useEffect } from 'react';
-import { useMap, Source, Layer } from 'react-map-gl/maplibre';
+import { useMap, Source, Layer, Popup } from 'react-map-gl/maplibre';
+import EncmExplorerMapPopup from '@/components/EncmExplorerMapPopup/EncmExplorerMapPopup';
 
-export default function EncmExplorerMap({ allEncmMapData, selectedHelpdeskMapData, selectedMapStyle, selectedMapFeature, onSelectHelpdeskCode }) {
+export default function EncmExplorerMap({ allEncmMapData, selectedEncmMapData, selectedMapStyle, selectedMapFeature, onSelectEncmCode }) {
   //
 
   //
@@ -18,12 +19,12 @@ export default function EncmExplorerMap({ allEncmMapData, selectedHelpdeskMapDat
   useEffect(() => {
     if (!encmExplorerMap) return;
     // Load stop idle symbol
-    encmExplorerMap.loadImage('/stop-idle.png', (error, image) => {
+    encmExplorerMap.loadImage('/icons/map-encm-idle.png', (error, image) => {
       if (error) throw error;
       encmExplorerMap.addImage('encm-idle', image, { sdf: false });
     });
     // Load encm selected symbol
-    encmExplorerMap.loadImage('/stop-selected.png', (error, image) => {
+    encmExplorerMap.loadImage('/icons/map-encm-selected.png', (error, image) => {
       if (error) throw error;
       encmExplorerMap.addImage('encm-selected', image, { sdf: false });
     });
@@ -34,8 +35,12 @@ export default function EncmExplorerMap({ allEncmMapData, selectedHelpdeskMapDat
 
   const handleMapClick = (event) => {
     if (event?.features[0]) {
-      onSelectHelpdeskCode(event.features[0].properties.code);
+      onSelectEncmCode(event.features[0].properties.code);
     }
+  };
+
+  const handlePopupClose = () => {
+    onSelectEncmCode();
   };
 
   const handleMapMouseEnter = (event) => {
@@ -67,27 +72,10 @@ export default function EncmExplorerMap({ allEncmMapData, selectedHelpdeskMapDat
 
   return (
     <OSMMap id="encmExplorerMap" mapStyle={selectedMapStyle} onClick={handleMapClick} onMouseEnter={handleMapMouseEnter} onMouseLeave={handleMapMouseLeave} onMove={handleMapMove} interactiveLayerIds={['all-encm']}>
-      {selectedHelpdeskMapData && (
-        <Source id="selected-encm" type="geojson" data={selectedHelpdeskMapData} generateId={true}>
-          <Layer
-            id="selected-encm"
-            type="symbol"
-            source="selected-encm"
-            layout={{
-              'icon-allow-overlap': true,
-              'icon-ignore-placement': true,
-              'icon-anchor': 'center',
-              'symbol-placement': 'point',
-              'icon-rotation-alignment': 'map',
-              'icon-image': 'encm-selected',
-              'icon-size': ['interpolate', ['linear', 0.5], ['zoom'], 10, 0.05, 20, 0.5],
-              'icon-offset': [0, 0],
-            }}
-            paint={{
-              'icon-opacity': ['interpolate', ['linear', 0.5], ['zoom'], 10, 0, 11, 1],
-            }}
-          />
-        </Source>
+      {selectedEncmMapData && (
+        <Popup onClose={handlePopupClose} closeButton={false} closeOnClick={false} latitude={selectedEncmMapData.geometry.coordinates[1]} longitude={selectedEncmMapData.geometry.coordinates[0]} anchor="bottom">
+          <EncmExplorerMapPopup encmData={selectedEncmMapData.properties} onSelectEncmCode={onSelectEncmCode} />
+        </Popup>
       )}
       {allEncmMapData && (
         <Source id="all-encm" type="geojson" data={allEncmMapData} generateId={false} promoteId={'mapid'}>
@@ -95,7 +83,6 @@ export default function EncmExplorerMap({ allEncmMapData, selectedHelpdeskMapDat
             id="all-encm"
             type="symbol"
             source="all-encm"
-            beforeId={selectedHelpdeskMapData && 'selected-encm'}
             layout={{
               'icon-allow-overlap': true,
               'icon-ignore-placement': true,
@@ -103,11 +90,8 @@ export default function EncmExplorerMap({ allEncmMapData, selectedHelpdeskMapDat
               'symbol-placement': 'point',
               'icon-rotation-alignment': 'map',
               'icon-image': 'encm-idle',
-              'icon-size': ['interpolate', ['linear', 0.5], ['zoom'], 10, 0.05, 20, 0.25],
+              'icon-size': ['interpolate', ['linear', 0.5], ['zoom'], 5, 0.1, 20, 0.25],
               'icon-offset': [0, 0],
-            }}
-            paint={{
-              'icon-opacity': ['interpolate', ['linear', 0.5], ['zoom'], 10, 0.5, 11, 1],
             }}
           />
         </Source>

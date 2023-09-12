@@ -10,6 +10,11 @@
   padding: var(--size-md);
 }
 
+.container.selected {
+  /* background-color: var(--gray0); */
+  box-shadow: 0 0 50px 0 rgba(0, 0, 0, 0.05);
+}
+
 .title,
 .wrapper {
   padding-left: var(--size-md);
@@ -19,8 +24,6 @@
 /* TITLE */
 
 .title {
-  vertical-align: top;
-  margin-bottom: 10px;
   font-size: 24px;
   line-height: 1.2;
   user-select: text;

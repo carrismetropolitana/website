@@ -11,8 +11,6 @@ export default function Pannel({ loading, error, icon, title, rightSection, chil
 
   const t = useTranslations('Pannel');
 
-  console.log(rightSection);
-
   //
   // A. Render components
 

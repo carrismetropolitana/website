@@ -32,10 +32,10 @@ export default function AppFooterLogo() {
 
       <div className={styles.social}>
         <a href="https://www.facebook.com/carrismetropolitana" target="_blank">
-          <Image src="/social-facebook.svg" alt="" width={24} height={24} />
+          <Image src="/icons/social-facebook.svg" alt="" width={24} height={24} />
         </a>
         <a href="https://www.instagram.com/carrismetropolitana/" target="_blank">
-          <Image src="/social-instagram.svg" alt="" width={24} height={24} />
+          <Image src="/icons/social-instagram.svg" alt="" width={24} height={24} />
         </a>
       </div>
     </div>

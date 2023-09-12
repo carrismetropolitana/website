@@ -568,6 +568,9 @@
             "label": "Informação em Tempo Real"
         }
     },
+    "EncmExplorerMapPopup": {
+        "view_in_list": "Mais Informação"
+    },
     "EncmExplorerGrid": {
         "address": {
             "label": "Address"

@@ -26,7 +26,7 @@ export default function EncmExplorer() {
 
   const [selectedMapStyle, setSelectedMapStyle] = useState('map');
 
-  const [selectedHelpdeskCode, setSelectedHelpdeskCode] = useState();
+  const [selectedEncmCode, setSelectedEncmCode] = useState();
   const [selectedMapFeature, setSelectedMapFeature] = useState();
 
   //
@@ -63,24 +63,28 @@ export default function EncmExplorer() {
     return geoJSON;
   }, [allEncmData]);
 
-  const selectedHelpdeskMapData = useMemo(() => {
-    if (allEncmData && selectedHelpdeskCode) {
-      const selectedHelpdeskData = allEncmData.find((item) => item.code === selectedHelpdeskCode);
-      if (selectedHelpdeskData) {
+  const selectedEncmMapData = useMemo(() => {
+    if (allEncmData && selectedEncmCode) {
+      const selectedEncmData = allEncmData.find((item) => item.code === selectedEncmCode);
+      if (selectedEncmData) {
         return {
           type: 'Feature',
           geometry: {
             type: 'Point',
-            coordinates: [selectedHelpdeskData.lon, selectedHelpdeskData.lat],
+            coordinates: [selectedEncmData.lon, selectedEncmData.lat],
           },
           properties: {
-            code: selectedHelpdeskData.code,
+            code: selectedEncmData.code,
+            name: selectedEncmData.name,
+            address: selectedEncmData.address,
+            postal_code: selectedEncmData.postal_code,
+            locality: selectedEncmData.locality,
           },
         };
       }
       return null;
     }
-  }, [allEncmData, selectedHelpdeskCode]);
+  }, [allEncmData, selectedEncmCode]);
 
   //
   // D. Handle actions
@@ -96,7 +100,7 @@ export default function EncmExplorer() {
     window.open(`https://www.google.com/maps/@${center.lat},${center.lng},${zoom + zoomMargin}z`, '_blank', 'noopener,noreferrer');
   };
 
-  const handleSelectHelpdesk = (encmCode) => {
+  const handleSelectEncm = (encmCode) => {
     // Only do something if feature is set
     if (encmCode) {
       // Get all currently rendered features and mark all of them as unselected
@@ -107,11 +111,11 @@ export default function EncmExplorer() {
       const defaultZoomMargin = 3;
       // Check if selected encm is within rendered bounds
       const renderedFeatures = encmExplorerMap.queryRenderedFeatures({ layers: ['all-encm'] });
-      const isHelpdeskCurrentlyRendered = renderedFeatures.find((item) => item.properties?.code === encmMapFeature.properties?.code);
+      const isEncmCurrentlyRendered = renderedFeatures.find((item) => item.properties?.code === encmMapFeature.properties?.code);
       // Get map current zoom level
       const currentZoom = encmExplorerMap.getZoom();
       // If the encm is visible and the zoom is not too far back (plus a little margin)...
-      if (isHelpdeskCurrentlyRendered && currentZoom + defaultZoomMargin > defaultZoom) {
+      if (isEncmCurrentlyRendered && currentZoom + defaultZoomMargin > defaultZoom) {
         // ...then simply ease to it.
         encmExplorerMap.easeTo({ center: encmMapFeature?.geometry?.coordinates, zoom: currentZoom, duration: defaultSpeed * 0.25 });
       } else {
@@ -121,7 +125,7 @@ export default function EncmExplorer() {
       // Save the current feature to state and mark it as selected
       setSelectedMapFeature(encmMapFeature);
       // Save the current encm code
-      setSelectedHelpdeskCode(encmCode);
+      setSelectedEncmCode(encmCode);
     }
   };
 
@@ -135,16 +139,16 @@ export default function EncmExplorer() {
         onSelectMapStyle={setSelectedMapStyle}
         onMapRecenter={handleMapReCenter}
         onOpenInGoogleMaps={handleOpenInGoogleMaps}
-        selectedHelpdeskCode={selectedHelpdeskCode}
-        onSelectHelpdeskCode={handleSelectHelpdesk}
+        selectedEncmCode={selectedEncmCode}
+        onSelectEncmCode={handleSelectEncm}
       />
       <Divider />
       <div className={styles.mapWrapper}>
-        <EncmExplorerMap allEncmMapData={allEncmMapData} selectedHelpdeskMapData={selectedHelpdeskMapData} selectedMapStyle={selectedMapStyle} selectedMapFeature={selectedMapFeature} onSelectHelpdeskCode={handleSelectHelpdesk} />
+        <EncmExplorerMap allEncmMapData={allEncmMapData} selectedEncmMapData={selectedEncmMapData} selectedMapStyle={selectedMapStyle} selectedMapFeature={selectedMapFeature} onSelectEncmCode={handleSelectEncm} />
       </div>
       <Divider />
       <EncmExplorerInfo />
-      <EncmExplorerGrid allEncmData={allEncmData} />
+      <EncmExplorerGrid allEncmData={allEncmData} selectedEncmCode={selectedEncmCode} onSelectEncmCode={handleSelectEncm} />
     </Pannel>
   );
 
