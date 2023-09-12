@@ -1,16 +1,16 @@
 'use client';
 
 import { useTranslations } from 'next-intl';
-import styles from './HelpdesksExplorerItemTimetable.module.css';
+import styles from './EncmExplorerItemTimetable.module.css';
 import { useEffect, useState } from 'react';
 
-export default function HelpdesksExplorerItemTimetable({ mon, tue, wed, thu, fri, sat, sun }) {
+export default function EncmExplorerItemTimetable({ mon, tue, wed, thu, fri, sat, sun }) {
   //
 
   //
   // A. Setup variables
 
-  const t = useTranslations('HelpdesksExplorerItemTimetable');
+  const t = useTranslations('EncmExplorerItemTimetable');
 
   const [parsedSchedules, setParsedSchedules] = useState([]);
 
@@ -18,14 +18,17 @@ export default function HelpdesksExplorerItemTimetable({ mon, tue, wed, thu, fri
   // B. Transform data
 
   useEffect(() => {
+    //
     const openHoursArray = [];
-    if (mon?.length > 0) openHoursArray.push({ day: 'mon', hours: mon }); // .join(' | ')
-    if (tue?.length > 0) openHoursArray.push({ day: 'tue', hours: tue }); // .join(' | ')
-    if (wed?.length > 0) openHoursArray.push({ day: 'wed', hours: wed }); // .join(' | ')
-    if (thu?.length > 0) openHoursArray.push({ day: 'thu', hours: thu }); // .join(' | ')
-    if (fri?.length > 0) openHoursArray.push({ day: 'fri', hours: fri }); // .join(' | ')
-    if (sat?.length > 0) openHoursArray.push({ day: 'sat', hours: sat }); // .join(' | ')
-    if (sun?.length > 0) openHoursArray.push({ day: 'sun', hours: sun }); // .join(' | ')
+
+    //
+    if (mon?.length > 0) openHoursArray.push({ day: 'mon', hours: mon });
+    if (tue?.length > 0) openHoursArray.push({ day: 'tue', hours: tue });
+    if (wed?.length > 0) openHoursArray.push({ day: 'wed', hours: wed });
+    if (thu?.length > 0) openHoursArray.push({ day: 'thu', hours: thu });
+    if (fri?.length > 0) openHoursArray.push({ day: 'fri', hours: fri });
+    if (sat?.length > 0) openHoursArray.push({ day: 'sat', hours: sat });
+    if (sun?.length > 0) openHoursArray.push({ day: 'sun', hours: sun });
 
     const resultArray = [];
 
@@ -42,7 +45,7 @@ export default function HelpdesksExplorerItemTimetable({ mon, tue, wed, thu, fri
 
     const parsedSchedulesResult = resultArray.map((parsedHours) => {
       return {
-        days: (parsedHours.first_day && `${t(parsedHours.first_day)}`) + (parsedHours.last_day && `-${t(parsedHours.last_day)}`),
+        days: `${parsedHours.first_day ? t(parsedHours.first_day) : ''}${parsedHours.last_day ? ' -' + t(parsedHours.last_day) : ''}`,
         hours: parsedHours.hours.join(' | '),
       };
     });

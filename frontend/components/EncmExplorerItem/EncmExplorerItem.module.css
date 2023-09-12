@@ -1,0 +1,91 @@
+/* * */
+/* CONTAINER */
+
+.container {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  gap: var(--size-md);
+  padding: var(--size-md);
+}
+
+.title,
+.wrapper {
+  padding-left: var(--size-md);
+}
+
+/* * */
+/* TITLE */
+
+.title {
+  vertical-align: top;
+  margin-bottom: 10px;
+  font-size: 24px;
+  line-height: 1.2;
+  user-select: text;
+  -webkit-touch-callout: default;
+  cursor: text;
+}
+
+/* * */
+/* WRAPPER */
+
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  gap: 2px;
+}
+
+/* * */
+/* LABEL */
+
+.label {
+  font-size: 13px;
+  font-weight: 700;
+  line-height: 1.2;
+  display: flex;
+  flex-direction: row;
+  gap: 5px;
+  align-items: center;
+}
+
+/* * */
+/* TEXT */
+
+.text {
+  font-size: 15px;
+  font-weight: 400;
+  user-select: text;
+  -webkit-touch-callout: default;
+  cursor: text;
+}
+
+/* * */
+/* VIEW IN MAP */
+
+.viewInMap {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--gray6);
+  cursor: pointer;
+}
+
+.viewInMap:hover {
+  text-decoration: underline;
+}
+
+/* * */
+/* OCCUPATION */
+
+.occupation {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  gap: 2px;
+  padding: var(--size-sm) var(--size-lg) var(--size-sm) var(--size-md);
+  background-color: var(--gray1);
+  border-radius: 3px;
+}

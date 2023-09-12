@@ -27,7 +27,12 @@ module.exports = {
       },
       {
         source: '/espacos-navegante',
-        destination: '/helpdesks',
+        destination: '/encm',
+        permanent: true,
+      },
+      {
+        source: '/helpdesks',
+        destination: '/encm',
         permanent: true,
       },
     ];

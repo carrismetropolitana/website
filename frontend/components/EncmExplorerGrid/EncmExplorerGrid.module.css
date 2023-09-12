@@ -39,7 +39,7 @@
   border-top-right-radius: 3px;
 }
 
-.helpdesksGrid {
+.grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
   width: 100%;
@@ -47,7 +47,7 @@
 }
 
 @media (max-width: 800px) {
-  .helpdesksGrid {
+  .grid {
     grid-template-columns: 1fr;
   }
 }

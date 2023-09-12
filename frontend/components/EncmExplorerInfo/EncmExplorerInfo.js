@@ -2,15 +2,15 @@
 
 import Image from 'next/image';
 import { useTranslations } from 'next-intl';
-import styles from './HelpdesksExplorerInfo.module.css';
+import styles from './EncmExplorerInfo.module.css';
 
-export default function HelpdesksExplorerInfo() {
+export default function EncmExplorerInfo() {
   //
 
   //
   // A. Setup variables
 
-  const t = useTranslations('HelpdesksExplorerInfo');
+  const t = useTranslations('EncmExplorerInfo');
 
   //
   // B. Render components

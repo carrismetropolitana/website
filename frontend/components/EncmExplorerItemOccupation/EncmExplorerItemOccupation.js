@@ -2,15 +2,15 @@
 
 import { useTranslations } from 'next-intl';
 import { useEffect, useState } from 'react';
-import styles from './HelpdesksExplorerItemOccupation.module.css';
+import styles from './EncmExplorerItemOccupation.module.css';
 
-export default function HelpdesksExplorerItemOccupation({ currentlyWaiting, expectedWaitTime }) {
+export default function EncmExplorerItemOccupation({ currentlyWaiting, expectedWaitTime }) {
   //
 
   //
   // A. Setup variables
 
-  const t = useTranslations('HelpdesksExplorerItemOccupation');
+  const t = useTranslations('EncmExplorerItemOccupation');
 
   const [waitTimeString, setWaitTimeString] = useState('');
 

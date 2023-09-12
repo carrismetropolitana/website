@@ -1,18 +1,18 @@
 'use client';
 
-import styles from './HelpdesksExplorerToolbar.module.css';
+import styles from './EncmExplorerToolbar.module.css';
 import { IconArrowsMinimize, IconBrandGoogleMaps } from '@tabler/icons-react';
 import { Tooltip, ActionIcon, SegmentedControl } from '@mantine/core';
 import { useTranslations } from 'next-intl';
-import HelpdesksExplorerToolbarSearch from '@/components/HelpdesksExplorerToolbarSearch/HelpdesksExplorerToolbarSearch';
+import EncmExplorerToolbarSearch from '@/components/EncmExplorerToolbarSearch/EncmExplorerToolbarSearch';
 
-export default function HelpdesksExplorerToolbar({ selectedMapStyle, onSelectMapStyle, onMapRecenter, onOpenInGoogleMaps, selectedHelpdeskCode, onSelectHelpdeskCode }) {
+export default function EncmExplorerToolbar({ selectedMapStyle, onSelectMapStyle, onMapRecenter, onOpenInGoogleMaps, selectedEncmCode, onSelectEncmCode }) {
   //
 
   //
   // A. Setup variables
 
-  const t = useTranslations('HelpdesksExplorerToolbar');
+  const t = useTranslations('EncmExplorerToolbar');
 
   //
   // B. Render components
@@ -42,7 +42,7 @@ export default function HelpdesksExplorerToolbar({ selectedMapStyle, onSelectMap
       </Tooltip>
 
       <div className={styles.fullWidth}>
-        <HelpdesksExplorerToolbarSearch selectedHelpdeskCode={selectedHelpdeskCode} onSelectHelpdeskCode={onSelectHelpdeskCode} />
+        <EncmExplorerToolbarSearch selectedEncmCode={selectedEncmCode} onSelectEncmCode={onSelectEncmCode} />
       </div>
     </div>
   );

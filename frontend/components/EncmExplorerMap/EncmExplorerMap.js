@@ -4,30 +4,30 @@ import OSMMap from '@/components/OSMMap/OSMMap';
 import { useEffect } from 'react';
 import { useMap, Source, Layer } from 'react-map-gl/maplibre';
 
-export default function HelpdesksExplorerMap({ allHelpdesksMapData, selectedHelpdeskMapData, selectedMapStyle, selectedMapFeature, onSelectHelpdeskCode }) {
+export default function EncmExplorerMap({ allEncmMapData, selectedHelpdeskMapData, selectedMapStyle, selectedMapFeature, onSelectHelpdeskCode }) {
   //
 
   //
   // A. Setup variables
 
-  const { helpdesksExplorerMap } = useMap();
+  const { encmExplorerMap } = useMap();
 
   //
   // C. Handle actions
 
   useEffect(() => {
-    if (!helpdesksExplorerMap) return;
+    if (!encmExplorerMap) return;
     // Load stop idle symbol
-    helpdesksExplorerMap.loadImage('/stop-idle.png', (error, image) => {
+    encmExplorerMap.loadImage('/stop-idle.png', (error, image) => {
       if (error) throw error;
-      helpdesksExplorerMap.addImage('helpdesk-idle', image, { sdf: false });
+      encmExplorerMap.addImage('encm-idle', image, { sdf: false });
     });
-    // Load helpdesk selected symbol
-    helpdesksExplorerMap.loadImage('/stop-selected.png', (error, image) => {
+    // Load encm selected symbol
+    encmExplorerMap.loadImage('/stop-selected.png', (error, image) => {
       if (error) throw error;
-      helpdesksExplorerMap.addImage('helpdesk-selected', image, { sdf: false });
+      encmExplorerMap.addImage('encm-selected', image, { sdf: false });
     });
-  }, [helpdesksExplorerMap]);
+  }, [encmExplorerMap]);
 
   //
   // C. Handle actions
@@ -40,25 +40,25 @@ export default function HelpdesksExplorerMap({ allHelpdesksMapData, selectedHelp
 
   const handleMapMouseEnter = (event) => {
     if (event?.features[0]?.properties?.code) {
-      helpdesksExplorerMap.getCanvas().style.cursor = 'pointer';
+      encmExplorerMap.getCanvas().style.cursor = 'pointer';
     }
   };
 
   const handleMapMouseLeave = (event) => {
     if (event?.features[0]?.properties?.code) {
-      helpdesksExplorerMap.getCanvas().style.cursor = 'default';
+      encmExplorerMap.getCanvas().style.cursor = 'default';
     }
   };
 
   const handleMapMove = () => {
     if (selectedMapFeature) {
       // Get all currently rendered features and mark all of them as unselected
-      const allRenderedFeatures = helpdesksExplorerMap.queryRenderedFeatures();
+      const allRenderedFeatures = encmExplorerMap.queryRenderedFeatures();
       allRenderedFeatures.forEach(function (f) {
-        helpdesksExplorerMap.setFeatureState({ source: 'all-helpdesks', id: f.id }, { selected: false });
+        encmExplorerMap.setFeatureState({ source: 'all-encm', id: f.id }, { selected: false });
       });
       // Then mark the selected one as selected
-      helpdesksExplorerMap.setFeatureState({ source: 'all-helpdesks', id: selectedMapFeature.properties.mapid }, { selected: true });
+      encmExplorerMap.setFeatureState({ source: 'all-encm', id: selectedMapFeature.properties.mapid }, { selected: true });
     }
   };
 
@@ -66,20 +66,20 @@ export default function HelpdesksExplorerMap({ allHelpdesksMapData, selectedHelp
   // G. Render components
 
   return (
-    <OSMMap id="helpdesksExplorerMap" mapStyle={selectedMapStyle} onClick={handleMapClick} onMouseEnter={handleMapMouseEnter} onMouseLeave={handleMapMouseLeave} onMove={handleMapMove} interactiveLayerIds={['all-helpdesks']}>
+    <OSMMap id="encmExplorerMap" mapStyle={selectedMapStyle} onClick={handleMapClick} onMouseEnter={handleMapMouseEnter} onMouseLeave={handleMapMouseLeave} onMove={handleMapMove} interactiveLayerIds={['all-encm']}>
       {selectedHelpdeskMapData && (
-        <Source id="selected-helpdesk" type="geojson" data={selectedHelpdeskMapData} generateId={true}>
+        <Source id="selected-encm" type="geojson" data={selectedHelpdeskMapData} generateId={true}>
           <Layer
-            id="selected-helpdesk"
+            id="selected-encm"
             type="symbol"
-            source="selected-helpdesk"
+            source="selected-encm"
             layout={{
               'icon-allow-overlap': true,
               'icon-ignore-placement': true,
               'icon-anchor': 'center',
               'symbol-placement': 'point',
               'icon-rotation-alignment': 'map',
-              'icon-image': 'helpdesk-selected',
+              'icon-image': 'encm-selected',
               'icon-size': ['interpolate', ['linear', 0.5], ['zoom'], 10, 0.05, 20, 0.5],
               'icon-offset': [0, 0],
             }}
@@ -89,20 +89,20 @@ export default function HelpdesksExplorerMap({ allHelpdesksMapData, selectedHelp
           />
         </Source>
       )}
-      {allHelpdesksMapData && (
-        <Source id="all-helpdesks" type="geojson" data={allHelpdesksMapData} generateId={false} promoteId={'mapid'}>
+      {allEncmMapData && (
+        <Source id="all-encm" type="geojson" data={allEncmMapData} generateId={false} promoteId={'mapid'}>
           <Layer
-            id="all-helpdesks"
+            id="all-encm"
             type="symbol"
-            source="all-helpdesks"
-            beforeId={selectedHelpdeskMapData && 'selected-helpdesk'}
+            source="all-encm"
+            beforeId={selectedHelpdeskMapData && 'selected-encm'}
             layout={{
               'icon-allow-overlap': true,
               'icon-ignore-placement': true,
               'icon-anchor': 'center',
               'symbol-placement': 'point',
               'icon-rotation-alignment': 'map',
-              'icon-image': 'helpdesk-idle',
+              'icon-image': 'encm-idle',
               'icon-size': ['interpolate', ['linear', 0.5], ['zoom'], 10, 0.05, 20, 0.25],
               'icon-offset': [0, 0],
             }}

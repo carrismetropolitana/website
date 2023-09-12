@@ -458,7 +458,7 @@
             "label": "Abrir no Google Maps"
         }
     },
-    "HelpdesksExplorerToolbar": {
+    "EncmExplorerToolbar": {
         "map_style": {
             "label": "Trocar vista do mapa",
             "options": {
@@ -473,7 +473,7 @@
             "label": "Abrir no Google Maps"
         }
     },
-    "HelpdesksExplorerToolbarSearch": {
+    "EncmExplorerToolbarSearch": {
         "label": "Procurar por nome, morada, município...",
         "placeholder": "Procurar por nome, morada, município...",
         "no_results": "Nenhum Resultado Encontrado",
@@ -553,12 +553,13 @@
             }
         }
     },
-    "HelpdesksExplorer": {
+    "EncmExplorer": {
         "title": "Espaços navegante® Carris Metropolitana"
     },
-    "HelpdesksExplorerItem": {
+    "EncmExplorerItem": {
         "address": {
-            "label": "Morada"
+            "label": "Morada",
+            "view_in_map": "Ver no Mapa"
         },
         "schedule": {
             "label": "Horário"
@@ -567,7 +568,7 @@
             "label": "Informação em Tempo Real"
         }
     },
-    "HelpdesksExplorerGrid": {
+    "EncmExplorerGrid": {
         "address": {
             "label": "Address"
         },
@@ -578,10 +579,10 @@
             "label": "Current Status"
         }
     },
-    "HelpdesksExplorerInfo": {
+    "EncmExplorerInfo": {
         "message": "Dedicados ao passageiro, os espaços navegante® Carris Metropolitana, concentram todos os serviços relacionados com a Carris Metropolitana, possibilitando esclarecer dúvidas, solicitar a emissão de cartões navegante® ou aderir ao passe navegante® família e antigo combatente."
     },
-    "HelpdesksExplorerItemTimetable": {
+    "EncmExplorerItemTimetable": {
         "from": "De",
         "until": "até",
         "and": "e",
@@ -593,7 +594,7 @@
         "sat": "Sab",
         "sun": "Dom"
     },
-    "HelpdesksExplorerItemOccupation": {
+    "EncmExplorerItemOccupation": {
         "currently_waiting": {
             "label": "Clientes em espera:"
         },

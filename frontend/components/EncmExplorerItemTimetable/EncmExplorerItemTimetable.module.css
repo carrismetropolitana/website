@@ -8,9 +8,15 @@
 .dayTitle {
   font-weight: 500;
   font-size: 14px;
+  user-select: text;
+  -webkit-touch-callout: default;
+  cursor: text;
 }
 
 .daySchedule {
   font-weight: 400;
   font-size: 15px;
+  user-select: text;
+  -webkit-touch-callout: default;
+  cursor: text;
 }

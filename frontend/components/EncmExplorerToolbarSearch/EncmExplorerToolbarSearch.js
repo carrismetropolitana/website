@@ -5,45 +5,45 @@ import Image from 'next/image';
 import { Combobox, Highlight, TextInput, useCombobox, Text, ActionIcon } from '@mantine/core';
 import { useMemo, useState } from 'react';
 import { useTranslations } from 'next-intl';
-import styles from './HelpdesksExplorerToolbarSearch.module.css';
+import styles from './EncmExplorerToolbarSearch.module.css';
 import useSearch from '@/hooks/useSearch';
 import { IconX, IconSearch } from '@tabler/icons-react';
 import parseStopLocationName from '@/services/parseStopLocationName';
 
-export default function HelpdesksExplorerToolbarSearch({ selectedHelpdeskCode, onSelectHelpdeskCode }) {
+export default function EncmExplorerToolbarSearch({ selectedEncmCode, onSelectEncmCode }) {
   //
 
   //
   // A. Setup variables
 
-  const t = useTranslations('HelpdesksExplorerToolbarSearch');
+  const t = useTranslations('EncmExplorerToolbarSearch');
   const comboboxStore = useCombobox();
   const [searchQuery, setSearchQuery] = useState('');
 
   //
   // B. Fetch data
 
-  const { data: allHelpdesksData } = useSWR('https://api.carrismetropolitana.pt/helpdesks');
+  const { data: allEncmData } = useSWR('https://api.carrismetropolitana.pt/facilities/encm');
 
   //
   // C. Transform data
 
-  const allHelpdesksDataFormatted = useMemo(() => {
-    if (allHelpdesksData) {
-      return allHelpdesksData.map((helpdesk) => {
+  const allEncmDataFormatted = useMemo(() => {
+    if (allEncmData) {
+      return allEncmData.map((encm) => {
         return {
-          code: helpdesk.code,
-          name: helpdesk.name,
-          location: parseStopLocationName(helpdesk.locality, helpdesk.municipality_name),
+          code: encm.code,
+          name: encm.name,
+          location: parseStopLocationName(encm.locality, encm.municipality_name),
         };
       });
     }
-  }, [allHelpdesksData]);
+  }, [allEncmData]);
 
   //
   // D. Search
 
-  const allHelpdesksDataFilteredBySearchQuery = useSearch(searchQuery, allHelpdesksDataFormatted, {
+  const allEncmDataFilteredBySearchQuery = useSearch(searchQuery, allEncmDataFormatted, {
     keys: ['code', 'name', 'location'],
     regexReplace: /[^a-zA-Z0-9]/g,
     limitResults: 100,
@@ -72,11 +72,11 @@ export default function HelpdesksExplorerToolbarSearch({ selectedHelpdeskCode, o
     comboboxStore.openDropdown();
   };
 
-  const handleSelectHelpdesk = (selectedHelpdeskCode) => {
-    const selectedHelpdeskData = allHelpdesksData.find((item) => item.code === selectedHelpdeskCode);
-    if (!selectedHelpdeskData) return;
-    setSearchQuery(selectedHelpdeskData.name);
-    onSelectHelpdeskCode(selectedHelpdeskCode);
+  const handleSelectEncm = (selectedEncmCode) => {
+    const selectedEncmData = allEncmData.find((item) => item.code === selectedEncmCode);
+    if (!selectedEncmData) return;
+    setSearchQuery(selectedEncmData.name);
+    onSelectEncmCode(selectedEncmCode);
     comboboxStore.closeDropdown();
   };
 
@@ -85,7 +85,7 @@ export default function HelpdesksExplorerToolbarSearch({ selectedHelpdeskCode, o
 
   return (
     <div className={styles.container}>
-      <Combobox onOptionSubmit={handleSelectHelpdesk} store={comboboxStore}>
+      <Combobox onOptionSubmit={handleSelectEncm} store={comboboxStore}>
         <Combobox.Target>
           <TextInput
             autoComplete="off"
@@ -111,18 +111,18 @@ export default function HelpdesksExplorerToolbarSearch({ selectedHelpdeskCode, o
 
         <Combobox.Dropdown>
           <Combobox.Options mah={200} style={{ overflowY: 'auto' }}>
-            {allHelpdesksDataFilteredBySearchQuery.length === 0 ? (
+            {allEncmDataFilteredBySearchQuery.length === 0 ? (
               <Combobox.Empty>{t('no_results')}</Combobox.Empty>
             ) : (
-              allHelpdesksDataFilteredBySearchQuery.map((item) => (
+              allEncmDataFilteredBySearchQuery.map((item) => (
                 <Combobox.Option key={item.code} value={item.code}>
                   <div className={styles.comboboxOption}>
-                    {selectedHelpdeskCode === item.code && (
-                      <div className={styles.selectedHelpdesk}>
-                        <Image priority src="/stop-selected.png" alt={'Selected helpdesk icon'} width={20} height={20} />
+                    {selectedEncmCode === item.code && (
+                      <div className={styles.selectedEncm}>
+                        <Image priority src="/stop-selected.png" alt={'Selected ENCM icon'} width={20} height={20} />
                       </div>
                     )}
-                    <div className={styles.helpdeskInfo}>
+                    <div className={styles.encmInfo}>
                       <Highlight highlight={searchQuery} fz="sm" fw={500}>
                         {item.name}
                       </Highlight>
