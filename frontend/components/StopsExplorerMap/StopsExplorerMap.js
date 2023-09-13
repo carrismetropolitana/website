@@ -2,7 +2,7 @@
 
 import OSMMap from '@/components/OSMMap/OSMMap';
 import { useEffect } from 'react';
-import { useMap, Source, Layer } from 'react-map-gl/maplibre';
+import { useMap, Source, Layer, Popup } from 'react-map-gl/maplibre';
 
 export default function StopsExplorerMap({ allStopsMapData, selectedStopMapData, selectedShapeMapData, selectedVehicleMapData, selectedMapStyle, selectedMapFeature, onSelectStopCode }) {
   //
@@ -77,6 +77,11 @@ export default function StopsExplorerMap({ allStopsMapData, selectedStopMapData,
 
   return (
     <OSMMap id="stopsExplorerMap" mapStyle={selectedMapStyle} onClick={handleMapClick} onMouseEnter={handleMapMouseEnter} onMouseLeave={handleMapMouseLeave} onMove={handleMapMove} interactiveLayerIds={['all-stops']}>
+      {selectedVehicleMapData && (
+        <Popup closeButton={false} closeOnClick={false} latitude={selectedVehicleMapData.geometry.coordinates[1]} longitude={selectedVehicleMapData.geometry.coordinates[0]} anchor="bottom">
+          <div>{selectedVehicleMapData.properties.timeString}</div>
+        </Popup>
+      )}
       {selectedVehicleMapData && (
         <Source id="selected-vehicle" type="geojson" data={selectedVehicleMapData} generateId={true}>
           <Layer

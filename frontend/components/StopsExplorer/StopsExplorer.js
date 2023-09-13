@@ -117,6 +117,7 @@ export default function StopsExplorer() {
             code: selectedVehicleData.code,
             speed: selectedVehicleData.speed,
             timestamp: selectedVehicleData.timestamp,
+            timeString: new Date(selectedVehicleData.timestamp).toLocaleString(),
             heading: selectedVehicleData.heading,
             trip_code: selectedVehicleData.trip_code,
             pattern_code: selectedVehicleData.pattern_code,
