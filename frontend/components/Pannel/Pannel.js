@@ -3,7 +3,7 @@ import Loader from '@/components/Loader/Loader';
 import styles from './Pannel.module.css';
 import NoDataLabel from '@/components/NoDataLabel/NoDataLabel';
 
-export default function Pannel({ loading, error, validating, icon, title, rightSection, children }) {
+export default function Pannel({ loading, error, icon, title, rightSection, children }) {
   //
 
   //
@@ -22,12 +22,7 @@ export default function Pannel({ loading, error, validating, icon, title, rightS
             {icon && <div className={styles.headerIcon}>{icon}</div>}
             {title && <h2 className={styles.headerTitle}>{title}</h2>}
           </div>
-          {rightSection && (
-            <div className={styles.headerRightSection}>
-              {validating && <Loader visible size={20} />}
-              {rightSection}
-            </div>
-          )}
+          {rightSection && <div className={styles.headerRightSection}>{rightSection}</div>}
         </div>
         <div className={styles.wrapper}>
           <div className={styles.isError}>
@@ -46,12 +41,7 @@ export default function Pannel({ loading, error, validating, icon, title, rightS
             {icon && <div className={styles.headerIcon}>{icon}</div>}
             {title && <h2 className={styles.headerTitle}>{title}</h2>}
           </div>
-          {rightSection && (
-            <div className={styles.headerRightSection}>
-              {validating && <Loader visible size={20} />}
-              {rightSection}
-            </div>
-          )}
+          {rightSection && <div className={styles.headerRightSection}>{rightSection}</div>}
         </div>
         <div className={styles.wrapper}>
           <div className={styles.isLoading}>
@@ -69,12 +59,7 @@ export default function Pannel({ loading, error, validating, icon, title, rightS
           {icon && <div className={styles.headerIcon}>{icon}</div>}
           {title && <h2 className={styles.headerTitle}>{title}</h2>}
         </div>
-        {rightSection && (
-          <div className={styles.headerRightSection}>
-            {validating && <Loader visible size={20} />}
-            {rightSection}
-          </div>
-        )}
+        {rightSection && <div className={styles.headerRightSection}>{rightSection}</div>}
       </div>
       <div className={styles.wrapper}>
         <div className={styles.content}>{children}</div>

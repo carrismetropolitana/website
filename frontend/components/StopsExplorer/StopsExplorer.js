@@ -6,16 +6,17 @@ import { useState, useMemo, useEffect, useCallback } from 'react';
 import { useMap } from 'react-map-gl/maplibre';
 import { Divider } from '@mantine/core';
 import { useTranslations } from 'next-intl';
-import * as turf from '@turf/turf';
 import OSMMapDefaults from '@/components/OSMMap/OSMMap.config';
 import Pannel from '@/components/Pannel/Pannel';
-import StopsExplorerToolbar from '../StopsExplorerToolbar/StopsExplorerToolbar';
-import StopsExplorerMap from '../StopsExplorerMap/StopsExplorerMap';
+import StopsExplorerToolbar from '@/components/StopsExplorerToolbar/StopsExplorerToolbar';
+import StopsExplorerMap from '@/components/StopsExplorerMap/StopsExplorerMap';
 import generateUUID from '@/services/generateUUID';
-import StopInfo from '../StopInfo/StopInfo';
-import StopTimetable from '../StopsExplorerTimetable/StopsExplorerTimetable';
-import NoDataLabel from '../NoDataLabel/NoDataLabel';
+import StopInfo from '@/components/StopInfo/StopInfo';
+import StopTimetable from '@/components/StopsExplorerTimetable/StopsExplorerTimetable';
+import NoDataLabel from '@/components/NoDataLabel/NoDataLabel';
 import { usePathname, useSearchParams, useRouter } from 'next/navigation';
+import Loader from '@/components/Loader/Loader';
+import LiveIcon from '../LiveIcon/LiveIcon';
 
 export default function StopsExplorer() {
   //
@@ -225,7 +226,19 @@ export default function StopsExplorer() {
   // E. Render components
 
   return (
-    <Pannel title={t('title')} loading={allStopsLoading} error={allStopsError} validating={allVehiclesValidating || stopRealtimeValidating} rightSection={<div className={styles.betaIcon}>Beta</div>}>
+    <Pannel
+      title={t('title')}
+      loading={allStopsLoading}
+      error={allStopsError}
+      validating={allVehiclesValidating || stopRealtimeValidating}
+      rightSection={
+        <>
+          {allVehiclesValidating && <div>V</div>}
+          {stopRealtimeValidating && <div>SR</div>}
+          <div className={styles.betaIcon}>Beta</div>
+        </>
+      }
+    >
       <StopsExplorerToolbar
         selectedMapStyle={selectedMapStyle}
         onSelectMapStyle={setSelectedMapStyle}
