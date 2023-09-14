@@ -631,7 +631,7 @@
         "trip_realtime_status": {
             "passed": "{value}",
             "scheduled": "{value}",
-            "arriving_now": "~ 1 min",
+            "arriving_now": "A chegar",
             "realtime": "{value} min"
         }
     },

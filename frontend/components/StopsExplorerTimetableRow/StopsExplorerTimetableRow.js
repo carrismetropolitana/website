@@ -136,6 +136,7 @@ export default function StopsExplorerTimetableRow({ rowType, tripData, selectedT
         )}
         {tripRealtimeStatus === 'arriving_now' && (
           <div className={styles.arrivalEstimate}>
+            <LiveIcon />
             <p>{t('trip_realtime_status.arriving_now')}</p>
           </div>
         )}
