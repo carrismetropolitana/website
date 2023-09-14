@@ -2,6 +2,7 @@
 
 import OSMMap from '@/components/OSMMap/OSMMap';
 import { useEffect } from 'react';
+import * as turf from '@turf/turf';
 import { useMap, Source, Layer, Popup } from 'react-map-gl/maplibre';
 
 export default function StopsExplorerMap({ allStopsMapData, selectedStopMapData, selectedShapeMapData, selectedVehicleMapData, selectedMapStyle, selectedMapFeature, onSelectStopCode }) {
@@ -38,6 +39,19 @@ export default function StopsExplorerMap({ allStopsMapData, selectedStopMapData,
       stopsExplorerMap.addImage('stop-selected', image, { sdf: false });
     });
   }, [stopsExplorerMap]);
+
+  useEffect(() => {
+    // Fit map
+    if (selectedStopMapData && selectedVehicleMapData) {
+      //   const multiPoint = turf.multiPoint([
+      //     [selectedStopData.lon, selectedStopData.lat],
+      //     [selectedVehicleData.lon, selectedVehicleData.lat],
+      //   ]);
+      const collection = turf.featureCollection([selectedStopMapData, selectedVehicleMapData]);
+      const boundingBox = turf.bbox(collection);
+      stopsExplorerMap.fitBounds(boundingBox, { duration: 2000, padding: 100, bearing: stopsExplorerMap.getBearing() });
+    }
+  }, [selectedStopMapData, selectedVehicleMapData, stopsExplorerMap]);
 
   //
   // C. Handle actions

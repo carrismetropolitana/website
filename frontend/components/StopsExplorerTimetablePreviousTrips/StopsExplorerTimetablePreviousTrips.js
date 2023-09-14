@@ -21,9 +21,21 @@ export default function StopsExplorerTimetablePreviousTrips({ tripsData, selecte
   // B. Transform data
 
   const visibleTrips = useMemo(() => {
-    if (showAllTrips) return tripsData;
-    else return tripsData.slice(tripsData.length - previousTripsShownByDefault, tripsData.length);
-  }, [showAllTrips, tripsData]);
+    if (showAllTrips) {
+      return tripsData;
+    } else {
+      const selectedTripData = tripsData.find((item) => item.trip_code === selectedTripCode);
+      const tripsThatShouldBeVisible = tripsData.slice(tripsData.length - previousTripsShownByDefault, tripsData.length);
+      const selectedTripIsAlreadyVisible = tripsThatShouldBeVisible.find((item) => item.trip_code === selectedTripCode);
+      if (selectedTripData && !selectedTripIsAlreadyVisible) tripsThatShouldBeVisible.push(selectedTripData);
+      tripsThatShouldBeVisible.sort((a, b) => {
+        const timeStringA = a.scheduled_arrival.split(':').join('');
+        const timeStringB = b.scheduled_arrival.split(':').join('');
+        return timeStringA - timeStringB;
+      });
+      return tripsThatShouldBeVisible;
+    }
+  }, [selectedTripCode, showAllTrips, tripsData]);
 
   //
   // C. Handle actions

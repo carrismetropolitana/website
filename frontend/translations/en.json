@@ -604,7 +604,7 @@
         "expected_wait_time": {
             "label": "Tempo de espera estimado:",
             "available_now": "Agora",
-            "available_soon": "< 1 min",
+            "available_soon": "~ 1 min",
             "available_at_minutes": "{minutes} min",
             "available_at_hours": "{hours} h {minutes} min"
         }
@@ -631,15 +631,13 @@
         "trip_realtime_status": {
             "passed": "{value}",
             "scheduled": "{value}",
-            "arriving_now": "< 1 min",
+            "arriving_now": "~ 1 min",
             "realtime": "{value} min"
         }
     },
     "StopsExplorerToolbarSearch": {
         "label": "Procurar paragens por nome, código, localização...",
         "placeholder": "Procurar paragens por nome, código, localização...",
-        "no_results": "Nenhum Resultado Encontrado",
-        "arriving_now": "< 1 min",
-        "realtime": "{value} min"
+        "no_results": "Nenhum Resultado Encontrado"
     }
 }

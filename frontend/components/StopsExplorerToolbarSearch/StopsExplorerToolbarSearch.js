@@ -119,7 +119,7 @@ export default function StopsExplorerToolbarSearch({ selectedStopCode, onSelectS
                   <div className={styles.comboboxOption}>
                     {selectedStopCode === item.code && (
                       <div className={styles.selectedStop}>
-                        <Image priority src="/stop-selected.png" alt={'Selected stop icon'} width={20} height={20} />
+                        <Image priority src="/icons/stop-selected.png" alt={'Selected stop icon'} width={20} height={20} />
                       </div>
                     )}
                     <div className={styles.stopInfo}>

@@ -2,10 +2,11 @@
 
 import styles from './StopsExplorer.module.css';
 import useSWR from 'swr';
-import { useState, useMemo } from 'react';
+import { useState, useMemo, useEffect, useCallback } from 'react';
 import { useMap } from 'react-map-gl/maplibre';
 import { Divider } from '@mantine/core';
 import { useTranslations } from 'next-intl';
+import * as turf from '@turf/turf';
 import OSMMapDefaults from '@/components/OSMMap/OSMMap.config';
 import Pannel from '@/components/Pannel/Pannel';
 import StopsExplorerToolbar from '../StopsExplorerToolbar/StopsExplorerToolbar';
@@ -14,6 +15,7 @@ import generateUUID from '@/services/generateUUID';
 import StopInfo from '../StopInfo/StopInfo';
 import StopTimetable from '../StopsExplorerTimetable/StopsExplorerTimetable';
 import NoDataLabel from '../NoDataLabel/NoDataLabel';
+import { usePathname, useSearchParams, useRouter } from 'next/navigation';
 
 export default function StopsExplorer() {
   //
@@ -22,6 +24,10 @@ export default function StopsExplorer() {
   // A. Setup variables
 
   const t = useTranslations('StopsExplorer');
+
+  const searchParams = useSearchParams();
+  const router = useRouter();
+  const pathName = usePathname() || '/';
 
   const { stopsExplorerMap } = useMap();
 
@@ -34,14 +40,20 @@ export default function StopsExplorer() {
   const [selectedTripCode, setSelectedTripCode] = useState();
   const [selectedVehicleCode, setSelectedVehicleCode] = useState();
 
+  function updateSearchParam(searchParams, param, value) {
+    const currentSearchParams = new URLSearchParams(Array.from(searchParams.entries()));
+    currentSearchParams.set(param, value);
+    return currentSearchParams;
+  }
+
   //
   // B. Fetch data
 
   const { data: allStopsData, error: allStopsError, isLoading: allStopsLoading } = useSWR('https://api.carrismetropolitana.pt/stops');
-  const { data: allVehiclesData, error: allVehiclesError, isLoading: allVehiclesLoading } = useSWR('https://api.carrismetropolitana.pt/vehicles', { refreshInterval: 5000 });
-  const { data: selectedStopData } = useSWR(selectedStopCode && `https://api.carrismetropolitana.pt/stops/${selectedStopCode}`);
+  const { data: allVehiclesData, isValidating: allVehiclesValidating } = useSWR('https://api.carrismetropolitana.pt/vehicles', { refreshInterval: 5000 });
   const { data: selectedPatternData } = useSWR(selectedPatternCode && `https://api.carrismetropolitana.pt/patterns/${selectedPatternCode}`);
   const { data: selectedShapeData } = useSWR(selectedShapeCode && `https://api.carrismetropolitana.pt/shapes/${selectedShapeCode}`);
+  const { isValidating: stopRealtimeValidating } = useSWR(selectedStopCode && `https://api.carrismetropolitana.pt/stops/${selectedStopCode}/realtime`, { refreshInterval: 5000 });
 
   //
   // C. Transform data
@@ -142,50 +154,78 @@ export default function StopsExplorer() {
     window.open(`https://www.google.com/maps/@${center.lat},${center.lng},${zoom + zoomMargin}z`, '_blank', 'noopener,noreferrer');
   };
 
-  const handleSelectStop = (stopCode) => {
-    // Only do something if feature is set
-    if (stopCode) {
-      // Get all currently rendered features and mark all of them as unselected
-      const stopMapFeature = allStopsMapData?.features.find((f) => f.properties?.code === stopCode);
-      // Set default map zoom and speed levels
-      const defaultSpeed = 4000;
-      const defaultZoom = 17;
-      const defaultZoomMargin = 3;
-      // Check if selected stop is within rendered bounds
-      const renderedFeatures = stopsExplorerMap.queryRenderedFeatures({ layers: ['all-stops'] });
-      const isStopCurrentlyRendered = renderedFeatures.find((item) => item.properties?.code === stopMapFeature.properties?.code);
-      // Get map current zoom level
-      const currentZoom = stopsExplorerMap.getZoom();
-      // If the stop is visible and the zoom is not too far back (plus a little margin)...
-      if (isStopCurrentlyRendered && currentZoom + defaultZoomMargin > defaultZoom) {
-        // ...then simply ease to it.
-        stopsExplorerMap.easeTo({ center: stopMapFeature?.geometry?.coordinates, zoom: currentZoom, duration: defaultSpeed * 0.25 });
-      } else {
-        // If the zoom is too far, or the desired stop is not visible, then fly to it
-        stopsExplorerMap.flyTo({ center: stopMapFeature?.geometry?.coordinates, zoom: defaultZoom, duration: defaultSpeed });
+  const handleSelectStop = useCallback(
+    (stopCode) => {
+      // Only do something if feature is set
+      console.log('gere');
+      if (stopCode && stopsExplorerMap) {
+        // Get all currently rendered features and mark all of them as unselected
+        const stopMapFeature = allStopsMapData?.features.find((f) => f.properties?.code === stopCode);
+        // Set default map zoom and speed levels
+        const defaultSpeed = 4000;
+        const defaultZoom = 17;
+        const defaultZoomMargin = 3;
+        // Check if selected stop is within rendered bounds
+        const renderedFeatures = stopsExplorerMap.queryRenderedFeatures({ layers: ['all-stops'] });
+        const isStopCurrentlyRendered = renderedFeatures.find((item) => item.properties?.code === stopMapFeature.properties?.code);
+        // Get map current zoom level
+        const currentZoom = stopsExplorerMap.getZoom();
+        // If the stop is visible and the zoom is not too far back (plus a little margin)...
+        if (isStopCurrentlyRendered && currentZoom + defaultZoomMargin > defaultZoom) {
+          // ...then simply ease to it.
+          stopsExplorerMap.easeTo({ center: stopMapFeature?.geometry?.coordinates, zoom: currentZoom, duration: defaultSpeed * 0.25 });
+        } else {
+          // If the zoom is too far, or the desired stop is not visible, then fly to it
+          stopsExplorerMap.flyTo({ center: stopMapFeature?.geometry?.coordinates, zoom: defaultZoom, duration: defaultSpeed });
+        }
+
+        if (searchParams.get('s') !== stopCode && searchParams?.entries()) {
+          const updatedSearchParams = updateSearchParam(searchParams, 's', stopCode);
+          router.push(`${pathName}?${updatedSearchParams.toString()}`, { shallow: true, scroll: false });
+        }
+
+        // Save the current feature to state and mark it as selected
+        setSelectedMapFeature(stopMapFeature);
+        // Save the current stop code
+        setSelectedStopCode(stopCode);
+        // Reset other selected features
+        setSelectedTripCode();
+        setSelectedPatternCode();
+        setSelectedShapeCode();
       }
-      // Save the current feature to state and mark it as selected
-      setSelectedMapFeature(stopMapFeature);
-      // Save the current stop code
-      setSelectedStopCode(stopCode);
-      // Reset other selected features
-      setSelectedTripCode();
-      setSelectedPatternCode();
-      setSelectedShapeCode();
-    }
-  };
+    },
+    [allStopsMapData?.features, pathName, router, searchParams, stopsExplorerMap]
+  );
 
   const handleSelectTrip = (tripCode, patternCode, shapeCode) => {
+    // Set state
     setSelectedTripCode(tripCode);
     setSelectedPatternCode(patternCode);
     setSelectedShapeCode(shapeCode);
+    // Fit map
+    // const selectedStopData = allStopsData.find((item) => item.code === selectedStopCode);
+    // const selectedVehicleData = allVehiclesData.find((item) => item.trip_code === tripCode);
+    // if (selectedStopData && selectedVehicleData) {
+    //   const multiPoint = turf.multiPoint([
+    //     [selectedStopData.lon, selectedStopData.lat],
+    //     [selectedVehicleData.lon, selectedVehicleData.lat],
+    //   ]);
+    //   const boundingBox = turf.bbox(multiPoint);
+    //   stopsExplorerMap.fitBounds(boundingBox, { duration: 2000, padding: 75, bearing: stopsExplorerMap.getBearing() });
+    // }
   };
+
+  useEffect(() => {
+    if (searchParams.get('s') && !selectedStopCode) {
+      handleSelectStop(searchParams.get('s'));
+    }
+  }, [handleSelectStop, searchParams, selectedStopCode]);
 
   //
   // E. Render components
 
   return (
-    <Pannel title={t('title')} loading={allStopsLoading} error={allStopsError} rightSection={<div className={styles.betaIcon}>Beta</div>}>
+    <Pannel title={t('title')} loading={allStopsLoading} error={allStopsError} validating={allVehiclesValidating || stopRealtimeValidating} rightSection={<div className={styles.betaIcon}>Beta</div>}>
       <StopsExplorerToolbar
         selectedMapStyle={selectedMapStyle}
         onSelectMapStyle={setSelectedMapStyle}
