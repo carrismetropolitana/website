@@ -1,6 +1,6 @@
 {
     "name": "@carrismetropolitana/website",
-    "version": "2023.09.11-1628",
+    "version": "2023.09.14-1408",
     "private": true,
     "scripts": {
         "dev": "next dev",
@@ -23,7 +23,7 @@
         "next-intl": "2.20.0",
         "react": "18.2.0",
         "react-dom": "18.2.0",
-        "react-map-gl": "7.1.5",
+        "react-map-gl": "7.1.6",
         "sharp": "0.32.5",
         "swr": "2.2.2"
     },
