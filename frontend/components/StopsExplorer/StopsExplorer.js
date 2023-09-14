@@ -15,8 +15,6 @@ import StopInfo from '@/components/StopInfo/StopInfo';
 import StopTimetable from '@/components/StopsExplorerTimetable/StopsExplorerTimetable';
 import NoDataLabel from '@/components/NoDataLabel/NoDataLabel';
 import { usePathname, useSearchParams, useRouter } from 'next/navigation';
-import Loader from '@/components/Loader/Loader';
-import LiveIcon from '../LiveIcon/LiveIcon';
 
 export default function StopsExplorer() {
   //
@@ -158,8 +156,7 @@ export default function StopsExplorer() {
   const handleSelectStop = useCallback(
     (stopCode) => {
       // Only do something if feature is set
-      console.log('gere');
-      if (stopCode && stopsExplorerMap) {
+      if (stopCode) {
         // Get all currently rendered features and mark all of them as unselected
         const stopMapFeature = allStopsMapData?.features.find((f) => f.properties?.code === stopCode);
         // Set default map zoom and speed levels
@@ -203,24 +200,13 @@ export default function StopsExplorer() {
     setSelectedTripCode(tripCode);
     setSelectedPatternCode(patternCode);
     setSelectedShapeCode(shapeCode);
-    // Fit map
-    // const selectedStopData = allStopsData.find((item) => item.code === selectedStopCode);
-    // const selectedVehicleData = allVehiclesData.find((item) => item.trip_code === tripCode);
-    // if (selectedStopData && selectedVehicleData) {
-    //   const multiPoint = turf.multiPoint([
-    //     [selectedStopData.lon, selectedStopData.lat],
-    //     [selectedVehicleData.lon, selectedVehicleData.lat],
-    //   ]);
-    //   const boundingBox = turf.bbox(multiPoint);
-    //   stopsExplorerMap.fitBounds(boundingBox, { duration: 2000, padding: 75, bearing: stopsExplorerMap.getBearing() });
-    // }
   };
 
   useEffect(() => {
-    if (searchParams.get('s') && !selectedStopCode) {
+    if (searchParams.get('s') && !selectedStopCode && stopsExplorerMap?.getSource('all-stops') !== undefined) {
       handleSelectStop(searchParams.get('s'));
     }
-  }, [handleSelectStop, searchParams, selectedStopCode]);
+  });
 
   //
   // E. Render components

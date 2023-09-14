@@ -23,6 +23,9 @@ export default function StopsExplorerTimetable({ selectedStopCode, selectedTripC
   const [previousTrips, setPreviousTrips] = useState([]);
   const [currentAndFutureTrips, setCurrentAndFutureTrips] = useState([]);
 
+  let previousTrips_temp = [];
+  let currentAndFutureTrips_temp = [];
+
   //
   // B. Fetch data
 
@@ -31,7 +34,7 @@ export default function StopsExplorerTimetable({ selectedStopCode, selectedTripC
   //
   // C. Transform data
 
-  useEffect(() => {
+  (() => {
     //
 
     // 1.
@@ -42,8 +45,8 @@ export default function StopsExplorerTimetable({ selectedStopCode, selectedTripC
     // 2.
     // Setup temporary variables
 
-    let previousTrips_temp = [];
-    let currentAndFutureTrips_temp = [];
+    // let previousTrips_temp = [];
+    // let currentAndFutureTrips_temp = [];
 
     // 3.
     // Classify each trip for relevance
@@ -95,24 +98,20 @@ export default function StopsExplorerTimetable({ selectedStopCode, selectedTripC
       return timeStringA - timeStringB;
     });
 
-    // Set state
-    setPreviousTrips(previousTrips_temp);
-    setCurrentAndFutureTrips(currentAndFutureTrips_temp);
-
     //
-  }, [stopRealtimeData]);
+  })();
 
   //
   // D. Handle actions
 
   return stopRealtimeLoading ? (
     <Loader visible maxed />
-  ) : previousTrips.length > 0 || currentAndFutureTrips.length > 0 ? (
+  ) : previousTrips_temp.length > 0 || currentAndFutureTrips_temp.length > 0 ? (
     <div className={styles.container}>
       <StopsExplorerTimetableHeader />
-      <StopsExplorerTimetablePreviousTrips tripsData={previousTrips} selectedTripCode={selectedTripCode} onSelectTrip={onSelectTrip} />
+      <StopsExplorerTimetablePreviousTrips tripsData={previousTrips_temp} selectedTripCode={selectedTripCode} onSelectTrip={onSelectTrip} />
       <StopsExplorerTimetableDividerLine />
-      <StopsExplorerTimetableCurrentAndFutureTrips tripsData={currentAndFutureTrips} selectedTripCode={selectedTripCode} onSelectTrip={onSelectTrip} />
+      <StopsExplorerTimetableCurrentAndFutureTrips tripsData={currentAndFutureTrips_temp} selectedTripCode={selectedTripCode} onSelectTrip={onSelectTrip} />
     </div>
   ) : (
     <NoDataLabel text={t('no_service')} />
