@@ -58,8 +58,9 @@ export default function StopsExplorerTimetable({ selectedStopCode, selectedTripC
 
       const tripHasObservedArrival = realtimeTrip.observed_arrival ? true : false;
       const tripScheduleIsInThePast = getMinutesFromOperationTimeString(realtimeTrip.scheduled_arrival) < 0;
+      const tripHasScheduledArrival = realtimeTrip.scheduled_arrival ? true : false;
 
-      if (tripHasObservedArrival || tripScheduleIsInThePast) {
+      if (tripHasObservedArrival || (tripScheduleIsInThePast && !tripHasScheduledArrival)) {
         previousTrips_temp.push(realtimeTrip);
         continue;
       }
