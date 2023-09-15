@@ -158,7 +158,11 @@
 /* TEST DATA */
 
 .testData,
-.testData * {
+.testData p {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 5px;
   user-select: text;
   -webkit-touch-callout: default;
   cursor: text;

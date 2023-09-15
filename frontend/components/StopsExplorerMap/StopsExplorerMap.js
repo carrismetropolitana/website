@@ -34,7 +34,7 @@ export default function StopsExplorerMap({ allStopsMapData, selectedStopMapData,
       stopsExplorerMap.addImage('stop-idle', image, { sdf: false });
     });
     // Load stop selected symbol
-    stopsExplorerMap.loadImage('/icons/stop-selected.png', (error, image) => {
+    stopsExplorerMap.loadImage('/icons/map-stop-selected.png', (error, image) => {
       if (error) throw error;
       stopsExplorerMap.addImage('stop-selected', image, { sdf: false });
     });
@@ -129,11 +129,10 @@ export default function StopsExplorerMap({ allStopsMapData, selectedStopMapData,
             layout={{
               'icon-allow-overlap': true,
               'icon-ignore-placement': true,
-              'icon-anchor': 'center',
+              'icon-anchor': 'bottom',
               'symbol-placement': 'point',
-              'icon-rotation-alignment': 'map',
               'icon-image': 'stop-selected',
-              'icon-size': ['interpolate', ['linear', 0.5], ['zoom'], 10, 0.05, 20, 0.5],
+              'icon-size': ['interpolate', ['linear', 0.5], ['zoom'], 10, 0.1, 20, 0.25],
               'icon-offset': [0, 0],
             }}
             paint={{
@@ -146,21 +145,15 @@ export default function StopsExplorerMap({ allStopsMapData, selectedStopMapData,
         <Source id="all-stops" type="geojson" data={allStopsMapData} generateId={false} promoteId={'mapid'}>
           <Layer
             id="all-stops"
-            type="symbol"
             source="all-stops"
             beforeId={selectedStopMapData && 'selected-stop'}
-            layout={{
-              'icon-allow-overlap': true,
-              'icon-ignore-placement': true,
-              'icon-anchor': 'center',
-              'symbol-placement': 'point',
-              'icon-rotation-alignment': 'map',
-              'icon-image': 'stop-idle',
-              'icon-size': ['interpolate', ['linear', 0.5], ['zoom'], 10, 0.05, 20, 0.25],
-              'icon-offset': [0, 0],
-            }}
+            type="circle"
             paint={{
-              'icon-opacity': ['interpolate', ['linear', 0.5], ['zoom'], 10, 0.5, 11, 1],
+              'circle-color': ['case', ['boolean', ['feature-state', 'selected'], false], '#ffffff', '#ffdd01'],
+              'circle-radius': ['interpolate', ['linear', 1], ['zoom'], 9, 1.5, 26, 10],
+              'circle-stroke-width': ['interpolate', ['linear', 1], ['zoom'], 9, 0.01, 26, 6],
+              'circle-stroke-color': '#000000',
+              'circle-pitch-alignment': 'map',
             }}
           />
         </Source>

@@ -8,6 +8,7 @@ import { convertOperationTimeStringTo24HourTimeString, getMinutesFromOperationTi
 import { useTranslations } from 'next-intl';
 import LiveIcon from '@/components/LiveIcon/LiveIcon';
 import { Divider } from '@mantine/core';
+import CopyBadge from '../CopyBadge/CopyBadge';
 
 export default function StopsExplorerTimetableRow({ rowType, tripData, selectedTripId, onSelectTrip }) {
   //
@@ -153,8 +154,8 @@ export default function StopsExplorerTimetableRow({ rowType, tripData, selectedT
 
       <div className={styles.tripDetails}>
         <div className={styles.testData} onClick={(e) => e.stopPropagation()}>
-          <p>trip: {tripData.trip_id}</p>
-          <p>vehicle: {tripData.vehicle_id}</p>
+          <CopyBadge label={`trip_id: ${tripData.trip_id}`} value={tripData.trip_id} />
+          <CopyBadge label={`vehicle_id: ${tripData.vehicle_id}`} value={tripData.vehicle_id} />
           <p>Observado: {tripData.observed_arrival}</p>
           <p>Estimado: {tripData.estimated_arrival}</p>
           <p>Planeado: {tripData.scheduled_arrival}</p>
