@@ -3,7 +3,7 @@
 import OSMMap from '@/components/OSMMap/OSMMap';
 import { useEffect } from 'react';
 import * as turf from '@turf/turf';
-import { useMap, Source, Layer, Popup } from 'react-map-gl/maplibre';
+import { useMap, Source, Layer, Popup, GeolocateControl } from 'react-map-gl/maplibre';
 
 export default function StopsExplorerMap({ allStopsMapData, selectedStopMapData, selectedShapeMapData, selectedVehicleMapData, selectedMapStyle, selectedMapFeature, onSelectStopId }) {
   //
@@ -49,7 +49,7 @@ export default function StopsExplorerMap({ allStopsMapData, selectedStopMapData,
       //   ]);
       const collection = turf.featureCollection([selectedStopMapData, selectedVehicleMapData]);
       const boundingBox = turf.bbox(collection);
-      stopsExplorerMap.fitBounds(boundingBox, { duration: 2000, padding: 100, bearing: stopsExplorerMap.getBearing() });
+      stopsExplorerMap.fitBounds(boundingBox, { duration: 2000, padding: 100, bearing: stopsExplorerMap.getBearing(), maxZoom: 16 });
     }
   }, [selectedStopMapData, selectedVehicleMapData, stopsExplorerMap]);
 
@@ -91,6 +91,7 @@ export default function StopsExplorerMap({ allStopsMapData, selectedStopMapData,
 
   return (
     <OSMMap id="stopsExplorerMap" mapStyle={selectedMapStyle} onClick={handleMapClick} onMouseEnter={handleMapMouseEnter} onMouseLeave={handleMapMouseLeave} onMove={handleMapMove} interactiveLayerIds={['all-stops']}>
+      <GeolocateControl />
       {selectedVehicleMapData && (
         <Popup closeButton={false} closeOnClick={false} latitude={selectedVehicleMapData.geometry.coordinates[1]} longitude={selectedVehicleMapData.geometry.coordinates[0]} anchor="bottom">
           <div>{selectedVehicleMapData.properties.timeString}</div>
@@ -150,7 +151,7 @@ export default function StopsExplorerMap({ allStopsMapData, selectedStopMapData,
             type="circle"
             paint={{
               'circle-color': ['case', ['boolean', ['feature-state', 'selected'], false], '#ffffff', '#ffdd01'],
-              'circle-radius': ['interpolate', ['linear', 1], ['zoom'], 9, 1.5, 26, 10],
+              'circle-radius': ['interpolate', ['linear', 0.5], ['zoom'], 9, ['case', ['boolean', ['feature-state', 'selected'], false], 5, 1], 26, ['case', ['boolean', ['feature-state', 'selected'], false], 15, 10]],
               'circle-stroke-width': ['interpolate', ['linear', 1], ['zoom'], 9, 0.01, 26, 6],
               'circle-stroke-color': '#000000',
               'circle-pitch-alignment': 'map',

@@ -219,8 +219,8 @@ export default function StopsExplorer() {
       validating={allVehiclesValidating || stopRealtimeValidating}
       rightSection={
         <>
-          {allVehiclesValidating && <div>V</div>}
-          {stopRealtimeValidating && <div>SR</div>}
+          {allVehiclesValidating && <div className={styles.validating}>V</div>}
+          {stopRealtimeValidating && <div className={styles.validating}>SR</div>}
           <div className={styles.betaIcon}>Beta</div>
         </>
       }
