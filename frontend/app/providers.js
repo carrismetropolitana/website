@@ -10,7 +10,9 @@ export default function Providers({ children }) {
 
   // Use SWR
   const swrOptions = {
-    // refreshInterval: 30000,
+    //
+    refreshInterval: 300000, // 5 minutes
+    //
     fetcher: async (...args) => {
       const res = await fetch(...args);
       if (!res.ok) {
@@ -22,6 +24,7 @@ export default function Providers({ children }) {
       }
       return res.json();
     },
+    //
   };
 
   // hook will return either 'dark' or 'light' on client
