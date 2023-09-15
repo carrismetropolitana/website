@@ -32,12 +32,12 @@ export default function StopsExplorer() {
 
   const [selectedMapStyle, setSelectedMapStyle] = useState('map');
 
-  const [selectedStopCode, setSelectedStopCode] = useState();
+  const [selectedStopId, setSelectedStopId] = useState();
   const [selectedMapFeature, setSelectedMapFeature] = useState();
-  const [selectedPatternCode, setSelectedPatternCode] = useState();
-  const [selectedShapeCode, setSelectedShapeCode] = useState();
-  const [selectedTripCode, setSelectedTripCode] = useState();
-  const [selectedVehicleCode, setSelectedVehicleCode] = useState();
+  const [selectedPatternId, setSelectedPatternId] = useState();
+  const [selectedShapeId, setSelectedShapeId] = useState();
+  const [selectedTripId, setSelectedTripId] = useState();
+  const [selectedVehicleId, setSelectedVehicleId] = useState();
 
   function updateSearchParam(searchParams, param, value) {
     const currentSearchParams = new URLSearchParams(Array.from(searchParams.entries()));
@@ -50,9 +50,9 @@ export default function StopsExplorer() {
 
   const { data: allStopsData, error: allStopsError, isLoading: allStopsLoading } = useSWR('https://api.carrismetropolitana.pt/stops');
   const { data: allVehiclesData, isValidating: allVehiclesValidating } = useSWR('https://api.carrismetropolitana.pt/vehicles', { refreshInterval: 5000 });
-  const { data: selectedPatternData } = useSWR(selectedPatternCode && `https://api.carrismetropolitana.pt/patterns/${selectedPatternCode}`);
-  const { data: selectedShapeData } = useSWR(selectedShapeCode && `https://api.carrismetropolitana.pt/shapes/${selectedShapeCode}`);
-  const { isValidating: stopRealtimeValidating } = useSWR(selectedStopCode && `https://api.carrismetropolitana.pt/stops/${selectedStopCode}/realtime`, { refreshInterval: 5000 });
+  const { data: selectedPatternData } = useSWR(selectedPatternId && `https://api.carrismetropolitana.pt/patterns/${selectedPatternId}`);
+  const { data: selectedShapeData } = useSWR(selectedShapeId && `https://api.carrismetropolitana.pt/shapes/${selectedShapeId}`);
+  const { isValidating: stopRealtimeValidating } = useSWR(selectedStopId && `https://api.carrismetropolitana.pt/stops/${selectedStopId}/realtime`, { refreshInterval: 5000 });
 
   //
   // C. Transform data
@@ -71,8 +71,8 @@ export default function StopsExplorer() {
             coordinates: [stop.lon, stop.lat],
           },
           properties: {
-            mapid: `${stop.code}${generateUUID()}`,
-            code: stop.code,
+            mapid: `${stop.id}${generateUUID()}`,
+            id: stop.id,
             name: stop.name,
             lat: stop.lat,
             lon: stop.lon,
@@ -84,8 +84,8 @@ export default function StopsExplorer() {
   }, [allStopsData]);
 
   const selectedStopMapData = useMemo(() => {
-    if (allStopsData && selectedStopCode) {
-      const selectedStopData = allStopsData.find((item) => item.code === selectedStopCode);
+    if (allStopsData && selectedStopId) {
+      const selectedStopData = allStopsData.find((item) => item.id === selectedStopId);
       if (selectedStopData) {
         return {
           type: 'Feature',
@@ -94,13 +94,13 @@ export default function StopsExplorer() {
             coordinates: [selectedStopData.lon, selectedStopData.lat],
           },
           properties: {
-            code: selectedStopData.code,
+            id: selectedStopData.id,
           },
         };
       }
       return null;
     }
-  }, [allStopsData, selectedStopCode]);
+  }, [allStopsData, selectedStopId]);
 
   const selectedShapeMapData = useMemo(() => {
     if (selectedPatternData && selectedShapeData) {
@@ -115,8 +115,8 @@ export default function StopsExplorer() {
   }, [selectedPatternData, selectedShapeData]);
 
   const selectedVehicleMapData = useMemo(() => {
-    if (allVehiclesData && selectedTripCode) {
-      const selectedVehicleData = allVehiclesData.find((item) => item.trip_code === selectedTripCode);
+    if (allVehiclesData && selectedTripId) {
+      const selectedVehicleData = allVehiclesData.find((item) => item.trip_id === selectedTripId);
       if (selectedVehicleData) {
         return {
           type: 'Feature',
@@ -125,19 +125,19 @@ export default function StopsExplorer() {
             coordinates: [selectedVehicleData.lon, selectedVehicleData.lat],
           },
           properties: {
-            code: selectedVehicleData.code,
+            id: selectedVehicleData.id,
             speed: selectedVehicleData.speed,
             timestamp: selectedVehicleData.timestamp,
             timeString: new Date(selectedVehicleData.timestamp).toLocaleString(),
             heading: selectedVehicleData.heading,
-            trip_code: selectedVehicleData.trip_code,
-            pattern_code: selectedVehicleData.pattern_code,
+            trip_id: selectedVehicleData.trip_id,
+            pattern_id: selectedVehicleData.pattern_id,
           },
         };
       }
       return null;
     }
-  }, [allVehiclesData, selectedTripCode]);
+  }, [allVehiclesData, selectedTripId]);
 
   //
   // D. Handle actions
@@ -154,18 +154,18 @@ export default function StopsExplorer() {
   };
 
   const handleSelectStop = useCallback(
-    (stopCode) => {
+    (stopId) => {
       // Only do something if feature is set
-      if (stopCode) {
+      if (stopId) {
         // Get all currently rendered features and mark all of them as unselected
-        const stopMapFeature = allStopsMapData?.features.find((f) => f.properties?.code === stopCode);
+        const stopMapFeature = allStopsMapData?.features.find((f) => f.properties?.id === stopId);
         // Set default map zoom and speed levels
         const defaultSpeed = 4000;
         const defaultZoom = 17;
         const defaultZoomMargin = 3;
         // Check if selected stop is within rendered bounds
         const renderedFeatures = stopsExplorerMap.queryRenderedFeatures({ layers: ['all-stops'] });
-        const isStopCurrentlyRendered = renderedFeatures.find((item) => item.properties?.code === stopMapFeature.properties?.code);
+        const isStopCurrentlyRendered = renderedFeatures.find((item) => item.properties?.id === stopMapFeature.properties?.id);
         // Get map current zoom level
         const currentZoom = stopsExplorerMap.getZoom();
         // If the stop is visible and the zoom is not too far back (plus a little margin)...
@@ -177,33 +177,33 @@ export default function StopsExplorer() {
           stopsExplorerMap.flyTo({ center: stopMapFeature?.geometry?.coordinates, zoom: defaultZoom, duration: defaultSpeed });
         }
 
-        if (searchParams.get('s') !== stopCode && searchParams?.entries()) {
-          const updatedSearchParams = updateSearchParam(searchParams, 's', stopCode);
+        if (searchParams.get('s') !== stopId && searchParams?.entries()) {
+          const updatedSearchParams = updateSearchParam(searchParams, 's', stopId);
           router.push(`${pathName}?${updatedSearchParams.toString()}`, { shallow: true, scroll: false });
         }
 
         // Save the current feature to state and mark it as selected
         setSelectedMapFeature(stopMapFeature);
-        // Save the current stop code
-        setSelectedStopCode(stopCode);
+        // Save the current stop id
+        setSelectedStopId(stopId);
         // Reset other selected features
-        setSelectedTripCode();
-        setSelectedPatternCode();
-        setSelectedShapeCode();
+        setSelectedTripId();
+        setSelectedPatternId();
+        setSelectedShapeId();
       }
     },
     [allStopsMapData?.features, pathName, router, searchParams, stopsExplorerMap]
   );
 
-  const handleSelectTrip = (tripCode, patternCode, shapeCode) => {
+  const handleSelectTrip = (tripId, patternId, shapeId) => {
     // Set state
-    setSelectedTripCode(tripCode);
-    setSelectedPatternCode(patternCode);
-    setSelectedShapeCode(shapeCode);
+    setSelectedTripId(tripId);
+    setSelectedPatternId(patternId);
+    setSelectedShapeId(shapeId);
   };
 
   useEffect(() => {
-    if (searchParams.get('s') && !selectedStopCode && stopsExplorerMap?.getSource('all-stops') !== undefined) {
+    if (searchParams.get('s') && !selectedStopId && stopsExplorerMap?.getSource('all-stops') !== undefined) {
       handleSelectStop(searchParams.get('s'));
     }
   });
@@ -225,14 +225,7 @@ export default function StopsExplorer() {
         </>
       }
     >
-      <StopsExplorerToolbar
-        selectedMapStyle={selectedMapStyle}
-        onSelectMapStyle={setSelectedMapStyle}
-        onMapRecenter={handleMapReCenter}
-        onOpenInGoogleMaps={handleOpenInGoogleMaps}
-        selectedStopCode={selectedStopCode}
-        onSelectStopCode={handleSelectStop}
-      />
+      <StopsExplorerToolbar selectedMapStyle={selectedMapStyle} onSelectMapStyle={setSelectedMapStyle} onMapRecenter={handleMapReCenter} onOpenInGoogleMaps={handleOpenInGoogleMaps} selectedStopId={selectedStopId} onSelectStopId={handleSelectStop} />
       <Divider />
       <div className={styles.container}>
         <StopsExplorerMap
@@ -242,14 +235,14 @@ export default function StopsExplorer() {
           selectedVehicleMapData={selectedVehicleMapData}
           selectedMapStyle={selectedMapStyle}
           selectedMapFeature={selectedMapFeature}
-          onSelectStopCode={handleSelectStop}
+          onSelectStopId={handleSelectStop}
         />
         <div className={styles.sidebar}>
-          {selectedStopCode ? (
+          {selectedStopId ? (
             <>
-              <StopInfo selectedStopCode={selectedStopCode} />
+              <StopInfo selectedStopId={selectedStopId} />
               <Divider />
-              <StopTimetable selectedStopCode={selectedStopCode} selectedTripCode={selectedTripCode} onSelectTrip={handleSelectTrip} />
+              <StopTimetable selectedStopId={selectedStopId} selectedTripId={selectedTripId} onSelectTrip={handleSelectTrip} />
             </>
           ) : (
             <NoDataLabel text={t('no_selection')} />

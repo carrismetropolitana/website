@@ -12,7 +12,7 @@ import StopsExplorerTimetablePreviousTrips from '@/components/StopsExplorerTimet
 import StopsExplorerTimetableCurrentAndFutureTrips from '@/components/StopsExplorerTimetableCurrentAndFutureTrips/StopsExplorerTimetableCurrentAndFutureTrips';
 import StopsExplorerTimetableDividerLine from '../StopsExplorerTimetableDividerLine/StopsExplorerTimetableDividerLine';
 
-export default function StopsExplorerTimetable({ selectedStopCode, selectedTripCode, onSelectTrip }) {
+export default function StopsExplorerTimetable({ selectedStopId, selectedTripId, onSelectTrip }) {
   //
 
   //
@@ -29,7 +29,7 @@ export default function StopsExplorerTimetable({ selectedStopCode, selectedTripC
   //
   // B. Fetch data
 
-  const { data: stopRealtimeData, isLoading: stopRealtimeLoading } = useSWR(selectedStopCode && `https://api.carrismetropolitana.pt/stops/${selectedStopCode}/realtime`, { refreshInterval: 5000 });
+  const { data: stopRealtimeData, isLoading: stopRealtimeLoading } = useSWR(selectedStopId && `https://api.carrismetropolitana.pt/stops/${selectedStopId}/realtime`, { refreshInterval: 5000 });
 
   //
   // C. Transform data
@@ -109,9 +109,9 @@ export default function StopsExplorerTimetable({ selectedStopCode, selectedTripC
   ) : previousTrips_temp.length > 0 || currentAndFutureTrips_temp.length > 0 ? (
     <div className={styles.container}>
       <StopsExplorerTimetableHeader />
-      <StopsExplorerTimetablePreviousTrips tripsData={previousTrips_temp} selectedTripCode={selectedTripCode} onSelectTrip={onSelectTrip} />
+      <StopsExplorerTimetablePreviousTrips tripsData={previousTrips_temp} selectedTripId={selectedTripId} onSelectTrip={onSelectTrip} />
       <StopsExplorerTimetableDividerLine />
-      <StopsExplorerTimetableCurrentAndFutureTrips tripsData={currentAndFutureTrips_temp} selectedTripCode={selectedTripCode} onSelectTrip={onSelectTrip} />
+      <StopsExplorerTimetableCurrentAndFutureTrips tripsData={currentAndFutureTrips_temp} selectedTripId={selectedTripId} onSelectTrip={onSelectTrip} />
     </div>
   ) : (
     <NoDataLabel text={t('no_service')} />

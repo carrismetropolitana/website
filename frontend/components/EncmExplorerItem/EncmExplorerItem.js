@@ -7,7 +7,7 @@ import HelpdeskItemTimetable from '@/components/EncmExplorerItemTimetable/EncmEx
 import HelpdeskItemOccupation from '@/components/EncmExplorerItemOccupation/EncmExplorerItemOccupation';
 import LiveIcon from '@/components/LiveIcon/LiveIcon';
 
-export default function EncmExplorerItem({ encmData, selectedEncmCode, onSelectEncmCode }) {
+export default function EncmExplorerItem({ encmData, selectedEncmId, onSelectEncmId }) {
   //
 
   //
@@ -19,14 +19,14 @@ export default function EncmExplorerItem({ encmData, selectedEncmCode, onSelectE
   // B. Handle actions
 
   const handleClickViewMap = () => {
-    onSelectEncmCode(encmData.code);
+    onSelectEncmId(encmData.id);
   };
 
   //
   // C. Render components
 
   return encmData ? (
-    <div id={`encm${encmData.code}`} className={`${styles.container} ${selectedEncmCode === encmData.code && styles.selected}`}>
+    <div id={`encm${encmData.id}`} className={`${styles.container} ${selectedEncmId === encmData.id && styles.selected}`}>
       <h2 className={styles.title}>{encmData.name}</h2>
       <div className={styles.wrapper}>
         <h4 className={styles.label}>{t('address.label')}</h4>

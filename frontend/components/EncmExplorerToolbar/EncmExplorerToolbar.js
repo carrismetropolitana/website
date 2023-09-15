@@ -6,7 +6,7 @@ import { Tooltip, ActionIcon, SegmentedControl } from '@mantine/core';
 import { useTranslations } from 'next-intl';
 import EncmExplorerToolbarSearch from '@/components/EncmExplorerToolbarSearch/EncmExplorerToolbarSearch';
 
-export default function EncmExplorerToolbar({ selectedMapStyle, onSelectMapStyle, onMapRecenter, onOpenInGoogleMaps, selectedEncmCode, onSelectEncmCode }) {
+export default function EncmExplorerToolbar({ selectedMapStyle, onSelectMapStyle, onMapRecenter, onOpenInGoogleMaps, selectedEncmId, onSelectEncmId }) {
   //
 
   //
@@ -42,7 +42,7 @@ export default function EncmExplorerToolbar({ selectedMapStyle, onSelectMapStyle
       </Tooltip>
 
       <div className={styles.fullWidth}>
-        <EncmExplorerToolbarSearch selectedEncmCode={selectedEncmCode} onSelectEncmCode={onSelectEncmCode} />
+        <EncmExplorerToolbarSearch selectedEncmId={selectedEncmId} onSelectEncmId={onSelectEncmId} />
       </div>
     </div>
   );

@@ -6,12 +6,10 @@ import LineDisplay from '@/components/LineDisplay/LineDisplay';
 import { useEffect, useState } from 'react';
 import { convertOperationTimeStringTo24HourTimeString, getMinutesFromOperationTimeString } from '@/services/parseRelativeTime';
 import { useTranslations } from 'next-intl';
-import Loader from '@/components/Loader/Loader';
 import LiveIcon from '@/components/LiveIcon/LiveIcon';
 import { Divider } from '@mantine/core';
-import CopyBadge from '../CopyBadge/CopyBadge';
 
-export default function StopsExplorerTimetableRow({ rowType, tripData, selectedTripCode, onSelectTrip }) {
+export default function StopsExplorerTimetableRow({ rowType, tripData, selectedTripId, onSelectTrip }) {
   //
 
   //
@@ -26,7 +24,7 @@ export default function StopsExplorerTimetableRow({ rowType, tripData, selectedT
   //
   // B. Fetch data
 
-  const { data: patternData, error: patternError, isLoading: patternLoading } = useSWR(tripData?.pattern_code && `https://api.carrismetropolitana.pt/patterns/${tripData.pattern_code}`);
+  const { data: patternData, error: patternError, isLoading: patternLoading } = useSWR(tripData?.pattern_id && `https://api.carrismetropolitana.pt/patterns/${tripData.pattern_id}`);
 
   //
   // B. Transform data
@@ -118,17 +116,17 @@ export default function StopsExplorerTimetableRow({ rowType, tripData, selectedT
 
   const handleSelectTrip = () => {
     if (!tripData || !patternData) return;
-    if (selectedTripCode === tripData.trip_code) onSelectTrip();
-    else onSelectTrip(tripData.trip_code, tripData.pattern_code, patternData.shape_code, tripData.vehicle_code);
+    if (selectedTripId === tripData.trip_id) onSelectTrip();
+    else onSelectTrip(tripData.trip_id, tripData.pattern_id, patternData.shape_id, tripData.vehicle_id);
   };
 
   //
   // D. Render components
 
   return (
-    <div className={`${styles.container} ${styles[tripRealtimeStatus]} ${selectedTripCode === tripData.trip_code && styles.selected}`} onClick={handleSelectTrip}>
+    <div className={`${styles.container} ${styles[tripRealtimeStatus]} ${selectedTripId === tripData.trip_id && styles.selected}`} onClick={handleSelectTrip}>
       <div className={styles.tripSummary}>
-        <LineDisplay short_name={tripData.line_code} long_name={patternData?.headsign} color={patternData?.color} text_color={patternData?.text_color} />
+        <LineDisplay short_name={tripData.line_id} long_name={patternData?.headsign} color={patternData?.color} text_color={patternData?.text_color} />
         {tripRealtimeStatus === 'passed' && (
           <div className={styles.arrivalEstimate}>
             <p>{t('trip_realtime_status.passed', { value: tripEtaString })}</p>
@@ -155,8 +153,8 @@ export default function StopsExplorerTimetableRow({ rowType, tripData, selectedT
 
       <div className={styles.tripDetails}>
         <div className={styles.testData} onClick={(e) => e.stopPropagation()}>
-          <p>trip: {tripData.trip_code}</p>
-          <p>vehicle: {tripData.vehicle_code}</p>
+          <p>trip: {tripData.trip_id}</p>
+          <p>vehicle: {tripData.vehicle_id}</p>
           <p>Observado: {tripData.observed_arrival}</p>
           <p>Estimado: {tripData.estimated_arrival}</p>
           <p>Planeado: {tripData.scheduled_arrival}</p>

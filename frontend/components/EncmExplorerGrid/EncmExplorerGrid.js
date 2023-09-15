@@ -2,10 +2,9 @@
 
 import styles from './EncmExplorerGrid.module.css';
 import { useMemo } from 'react';
-import { useTranslations } from 'next-intl';
 import EncmExplorerItem from '@/components/EncmExplorerItem/EncmExplorerItem';
 
-export default function EncmExplorerGrid({ allEncmData, selectedEncmCode, onSelectEncmCode }) {
+export default function EncmExplorerGrid({ allEncmData, selectedEncmId, onSelectEncmId }) {
   //
 
   //
@@ -14,12 +13,12 @@ export default function EncmExplorerGrid({ allEncmData, selectedEncmCode, onSele
   const allEncmGroupedByMunicipality = useMemo(() => {
     if (!allEncmData) return [];
     const groupedEncm = allEncmData.reduce((result, item) => {
-      const existingGroup = result.find((group) => group.code === item.municipality_code);
+      const existingGroup = result.find((group) => group.id === item.municipality_id);
       if (existingGroup) {
         existingGroup.encm.push(item);
       } else {
         result.push({
-          code: item.municipality_code,
+          id: item.municipality_id,
           name: item.municipality_name,
           encm: [item],
         });
@@ -38,12 +37,12 @@ export default function EncmExplorerGrid({ allEncmData, selectedEncmCode, onSele
     <div className={styles.container}>
       {allEncmGroupedByMunicipality &&
         allEncmGroupedByMunicipality.map((group) => (
-          <div key={group.code} className={styles.groupWrapper}>
+          <div key={group.id} className={styles.groupWrapper}>
             <div className={styles.groupTitle}>
               <p>{group.name}</p>
             </div>
-            <div key={group.code} className={styles.grid}>
-              {group.encm && group.encm.map((encm) => <EncmExplorerItem key={encm.code} encmData={encm} selectedEncmCode={selectedEncmCode} onSelectEncmCode={onSelectEncmCode} />)}
+            <div key={group.id} className={styles.grid}>
+              {group.encm && group.encm.map((encm) => <EncmExplorerItem key={encm.id} encmData={encm} selectedEncmId={selectedEncmId} onSelectEncmId={onSelectEncmId} />)}
             </div>
           </div>
         ))}

@@ -5,7 +5,7 @@ import { useEffect } from 'react';
 import { useMap, Source, Layer, Popup } from 'react-map-gl/maplibre';
 import EncmExplorerMapPopup from '@/components/EncmExplorerMapPopup/EncmExplorerMapPopup';
 
-export default function EncmExplorerMap({ allEncmMapData, selectedEncmMapData, selectedMapStyle, selectedMapFeature, onSelectEncmCode }) {
+export default function EncmExplorerMap({ allEncmMapData, selectedEncmMapData, selectedMapStyle, selectedMapFeature, onSelectEncmId }) {
   //
 
   //
@@ -35,22 +35,22 @@ export default function EncmExplorerMap({ allEncmMapData, selectedEncmMapData, s
 
   const handleMapClick = (event) => {
     if (event?.features[0]) {
-      onSelectEncmCode(event.features[0].properties.code);
+      onSelectEncmId(event.features[0].properties.id);
     }
   };
 
   const handlePopupClose = () => {
-    onSelectEncmCode();
+    onSelectEncmId();
   };
 
   const handleMapMouseEnter = (event) => {
-    if (event?.features[0]?.properties?.code) {
+    if (event?.features[0]?.properties?.id) {
       encmExplorerMap.getCanvas().style.cursor = 'pointer';
     }
   };
 
   const handleMapMouseLeave = (event) => {
-    if (event?.features[0]?.properties?.code) {
+    if (event?.features[0]?.properties?.id) {
       encmExplorerMap.getCanvas().style.cursor = 'default';
     }
   };
@@ -74,7 +74,7 @@ export default function EncmExplorerMap({ allEncmMapData, selectedEncmMapData, s
     <OSMMap id="encmExplorerMap" mapStyle={selectedMapStyle} onClick={handleMapClick} onMouseEnter={handleMapMouseEnter} onMouseLeave={handleMapMouseLeave} onMove={handleMapMove} interactiveLayerIds={['all-encm']}>
       {selectedEncmMapData && (
         <Popup onClose={handlePopupClose} closeButton={false} closeOnClick={false} latitude={selectedEncmMapData.geometry.coordinates[1]} longitude={selectedEncmMapData.geometry.coordinates[0]} anchor="bottom">
-          <EncmExplorerMapPopup encmData={selectedEncmMapData.properties} onSelectEncmCode={onSelectEncmCode} />
+          <EncmExplorerMapPopup encmData={selectedEncmMapData.properties} onSelectEncmId={onSelectEncmId} />
         </Popup>
       )}
       {allEncmMapData && (

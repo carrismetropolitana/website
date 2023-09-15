@@ -5,7 +5,7 @@ import { useMemo, useState } from 'react';
 import styles from './StopsExplorerTimetablePreviousTrips.module.css';
 import StopsExplorerTimetableRow from '@/components/StopsExplorerTimetableRow/StopsExplorerTimetableRow';
 
-export default function StopsExplorerTimetablePreviousTrips({ tripsData, selectedTripCode, onSelectTrip }) {
+export default function StopsExplorerTimetablePreviousTrips({ tripsData, selectedTripId, onSelectTrip }) {
   //
 
   //
@@ -24,9 +24,9 @@ export default function StopsExplorerTimetablePreviousTrips({ tripsData, selecte
     if (showAllTrips) {
       return tripsData;
     } else {
-      const selectedTripData = tripsData.find((item) => item.trip_code === selectedTripCode);
+      const selectedTripData = tripsData.find((item) => item.trip_id === selectedTripId);
       const tripsThatShouldBeVisible = tripsData.slice(tripsData.length - previousTripsShownByDefault, tripsData.length);
-      const selectedTripIsAlreadyVisible = tripsThatShouldBeVisible.find((item) => item.trip_code === selectedTripCode);
+      const selectedTripIsAlreadyVisible = tripsThatShouldBeVisible.find((item) => item.trip_id === selectedTripId);
       if (selectedTripData && !selectedTripIsAlreadyVisible) tripsThatShouldBeVisible.push(selectedTripData);
       tripsThatShouldBeVisible.sort((a, b) => {
         const timeStringA = a.scheduled_arrival.split(':').join('');
@@ -35,7 +35,7 @@ export default function StopsExplorerTimetablePreviousTrips({ tripsData, selecte
       });
       return tripsThatShouldBeVisible;
     }
-  }, [selectedTripCode, showAllTrips, tripsData]);
+  }, [selectedTripId, showAllTrips, tripsData]);
 
   //
   // C. Handle actions
@@ -55,7 +55,7 @@ export default function StopsExplorerTimetablePreviousTrips({ tripsData, selecte
         </div>
       )}
       {visibleTrips.map((trip, index) => (
-        <StopsExplorerTimetableRow key={`${trip.trip_code}_${index}`} rowType={'previous'} tripData={trip} selectedTripCode={selectedTripCode} onSelectTrip={onSelectTrip} />
+        <StopsExplorerTimetableRow key={`${trip.trip_id}_${index}`} rowType={'previous'} tripData={trip} selectedTripId={selectedTripId} onSelectTrip={onSelectTrip} />
       ))}
       {showAllTrips && tripsData.length > previousTripsShownByDefault && (
         <div className={styles.toggle} onClick={handleToogleShowAllTrips}>

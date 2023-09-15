@@ -5,7 +5,7 @@ import { useEffect } from 'react';
 import * as turf from '@turf/turf';
 import { useMap, Source, Layer, Popup } from 'react-map-gl/maplibre';
 
-export default function StopsExplorerMap({ allStopsMapData, selectedStopMapData, selectedShapeMapData, selectedVehicleMapData, selectedMapStyle, selectedMapFeature, onSelectStopCode }) {
+export default function StopsExplorerMap({ allStopsMapData, selectedStopMapData, selectedShapeMapData, selectedVehicleMapData, selectedMapStyle, selectedMapFeature, onSelectStopId }) {
   //
 
   //
@@ -58,18 +58,18 @@ export default function StopsExplorerMap({ allStopsMapData, selectedStopMapData,
 
   const handleMapClick = (event) => {
     if (event?.features[0]) {
-      onSelectStopCode(event.features[0].properties.code);
+      onSelectStopId(event.features[0].properties.id);
     }
   };
 
   const handleMapMouseEnter = (event) => {
-    if (event?.features[0]?.properties?.code) {
+    if (event?.features[0]?.properties?.id) {
       stopsExplorerMap.getCanvas().style.cursor = 'pointer';
     }
   };
 
   const handleMapMouseLeave = (event) => {
-    if (event?.features[0]?.properties?.code) {
+    if (event?.features[0]?.properties?.id) {
       stopsExplorerMap.getCanvas().style.cursor = 'default';
     }
   };

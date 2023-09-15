@@ -10,7 +10,7 @@ import useSearch from '@/hooks/useSearch';
 import { IconX, IconSearch } from '@tabler/icons-react';
 import parseStopLocationName from '@/services/parseStopLocationName';
 
-export default function EncmExplorerToolbarSearch({ selectedEncmCode, onSelectEncmCode }) {
+export default function EncmExplorerToolbarSearch({ selectedEncmId, onSelectEncmId }) {
   //
 
   //
@@ -32,7 +32,7 @@ export default function EncmExplorerToolbarSearch({ selectedEncmCode, onSelectEn
     if (allEncmData) {
       return allEncmData.map((encm) => {
         return {
-          code: encm.code,
+          id: encm.id,
           name: encm.name,
           location: parseStopLocationName(encm.locality, encm.municipality_name),
         };
@@ -44,7 +44,7 @@ export default function EncmExplorerToolbarSearch({ selectedEncmCode, onSelectEn
   // D. Search
 
   const allEncmDataFilteredBySearchQuery = useSearch(searchQuery, allEncmDataFormatted, {
-    keys: ['code', 'name', 'location'],
+    keys: ['id', 'name', 'location'],
     regexReplace: /[^a-zA-Z0-9]/g,
     limitResults: 100,
   });
@@ -72,11 +72,11 @@ export default function EncmExplorerToolbarSearch({ selectedEncmCode, onSelectEn
     comboboxStore.openDropdown();
   };
 
-  const handleSelectEncm = (selectedEncmCode) => {
-    const selectedEncmData = allEncmData.find((item) => item.code === selectedEncmCode);
+  const handleSelectEncm = (selectedEncmId) => {
+    const selectedEncmData = allEncmData.find((item) => item.id === selectedEncmId);
     if (!selectedEncmData) return;
     setSearchQuery(selectedEncmData.name);
-    onSelectEncmCode(selectedEncmCode);
+    onSelectEncmId(selectedEncmId);
     comboboxStore.closeDropdown();
   };
 
@@ -115,9 +115,9 @@ export default function EncmExplorerToolbarSearch({ selectedEncmCode, onSelectEn
               <Combobox.Empty>{t('no_results')}</Combobox.Empty>
             ) : (
               allEncmDataFilteredBySearchQuery.map((item) => (
-                <Combobox.Option key={item.code} value={item.code}>
+                <Combobox.Option key={item.id} value={item.id}>
                   <div className={styles.comboboxOption}>
-                    {selectedEncmCode === item.code && (
+                    {selectedEncmId === item.id && (
                       <div className={styles.selectedEncm}>
                         <Image priority src="/stop-selected.png" alt={'Selected ENCM icon'} width={20} height={20} />
                       </div>

@@ -26,7 +26,7 @@ export default function EncmExplorer() {
 
   const [selectedMapStyle, setSelectedMapStyle] = useState('map');
 
-  const [selectedEncmCode, setSelectedEncmCode] = useState();
+  const [selectedEncmId, setSelectedEncmId] = useState();
   const [selectedMapFeature, setSelectedMapFeature] = useState();
 
   //
@@ -51,8 +51,8 @@ export default function EncmExplorer() {
             coordinates: [encm.lon, encm.lat],
           },
           properties: {
-            mapid: `${encm.code}${generateUUID()}`,
-            code: encm.code,
+            mapid: `${encm.id}${generateUUID()}`,
+            id: encm.id,
             name: encm.name,
             lat: encm.lat,
             lon: encm.lon,
@@ -64,8 +64,8 @@ export default function EncmExplorer() {
   }, [allEncmData]);
 
   const selectedEncmMapData = useMemo(() => {
-    if (allEncmData && selectedEncmCode) {
-      const selectedEncmData = allEncmData.find((item) => item.code === selectedEncmCode);
+    if (allEncmData && selectedEncmId) {
+      const selectedEncmData = allEncmData.find((item) => item.id === selectedEncmId);
       if (selectedEncmData) {
         return {
           type: 'Feature',
@@ -74,17 +74,17 @@ export default function EncmExplorer() {
             coordinates: [selectedEncmData.lon, selectedEncmData.lat],
           },
           properties: {
-            code: selectedEncmData.code,
+            id: selectedEncmData.id,
             name: selectedEncmData.name,
             address: selectedEncmData.address,
-            postal_code: selectedEncmData.postal_code,
+            postal_id: selectedEncmData.postal_id,
             locality: selectedEncmData.locality,
           },
         };
       }
       return null;
     }
-  }, [allEncmData, selectedEncmCode]);
+  }, [allEncmData, selectedEncmId]);
 
   //
   // D. Handle actions
@@ -100,18 +100,18 @@ export default function EncmExplorer() {
     window.open(`https://www.google.com/maps/@${center.lat},${center.lng},${zoom + zoomMargin}z`, '_blank', 'noopener,noreferrer');
   };
 
-  const handleSelectEncm = (encmCode) => {
+  const handleSelectEncm = (encmId) => {
     // Only do something if feature is set
-    if (encmCode) {
+    if (encmId) {
       // Get all currently rendered features and mark all of them as unselected
-      const encmMapFeature = allEncmMapData?.features.find((f) => f.properties?.code === encmCode);
+      const encmMapFeature = allEncmMapData?.features.find((f) => f.properties?.id === encmId);
       // Set default map zoom and speed levels
       const defaultSpeed = 4000;
       const defaultZoom = 17;
       const defaultZoomMargin = 3;
       // Check if selected encm is within rendered bounds
       const renderedFeatures = encmExplorerMap.queryRenderedFeatures({ layers: ['all-encm'] });
-      const isEncmCurrentlyRendered = renderedFeatures.find((item) => item.properties?.code === encmMapFeature.properties?.code);
+      const isEncmCurrentlyRendered = renderedFeatures.find((item) => item.properties?.id === encmMapFeature.properties?.id);
       // Get map current zoom level
       const currentZoom = encmExplorerMap.getZoom();
       // If the encm is visible and the zoom is not too far back (plus a little margin)...
@@ -124,8 +124,8 @@ export default function EncmExplorer() {
       }
       // Save the current feature to state and mark it as selected
       setSelectedMapFeature(encmMapFeature);
-      // Save the current encm code
-      setSelectedEncmCode(encmCode);
+      // Save the current encm id
+      setSelectedEncmId(encmId);
     }
   };
 
@@ -134,21 +134,14 @@ export default function EncmExplorer() {
 
   return (
     <Pannel title={t('title')} loading={allEncmLoading} error={allEncmError}>
-      <EncmExplorerToolbar
-        selectedMapStyle={selectedMapStyle}
-        onSelectMapStyle={setSelectedMapStyle}
-        onMapRecenter={handleMapReCenter}
-        onOpenInGoogleMaps={handleOpenInGoogleMaps}
-        selectedEncmCode={selectedEncmCode}
-        onSelectEncmCode={handleSelectEncm}
-      />
+      <EncmExplorerToolbar selectedMapStyle={selectedMapStyle} onSelectMapStyle={setSelectedMapStyle} onMapRecenter={handleMapReCenter} onOpenInGoogleMaps={handleOpenInGoogleMaps} selectedEncmId={selectedEncmId} onSelectEncmId={handleSelectEncm} />
       <Divider />
       <div className={styles.mapWrapper}>
-        <EncmExplorerMap allEncmMapData={allEncmMapData} selectedEncmMapData={selectedEncmMapData} selectedMapStyle={selectedMapStyle} selectedMapFeature={selectedMapFeature} onSelectEncmCode={handleSelectEncm} />
+        <EncmExplorerMap allEncmMapData={allEncmMapData} selectedEncmMapData={selectedEncmMapData} selectedMapStyle={selectedMapStyle} selectedMapFeature={selectedMapFeature} onSelectEncmId={handleSelectEncm} />
       </div>
       <Divider />
       <EncmExplorerInfo />
-      <EncmExplorerGrid allEncmData={allEncmData} selectedEncmCode={selectedEncmCode} onSelectEncmCode={handleSelectEncm} />
+      <EncmExplorerGrid allEncmData={allEncmData} selectedEncmId={selectedEncmId} onSelectEncmId={handleSelectEncm} />
     </Pannel>
   );
 

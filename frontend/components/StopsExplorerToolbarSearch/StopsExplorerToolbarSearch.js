@@ -10,7 +10,7 @@ import useSearch from '@/hooks/useSearch';
 import { IconX, IconSearch } from '@tabler/icons-react';
 import parseStopLocationName from '@/services/parseStopLocationName';
 
-export default function StopsExplorerToolbarSearch({ selectedStopCode, onSelectStopCode }) {
+export default function StopsExplorerToolbarSearch({ selectedStopId, onSelectStopId }) {
   //
 
   //
@@ -32,7 +32,7 @@ export default function StopsExplorerToolbarSearch({ selectedStopCode, onSelectS
     if (allStopsData) {
       return allStopsData.map((stop) => {
         return {
-          code: stop.code,
+          id: stop.id,
           name: stop.name,
           location: parseStopLocationName(stop.locality, stop.municipality_name),
         };
@@ -44,7 +44,7 @@ export default function StopsExplorerToolbarSearch({ selectedStopCode, onSelectS
   // D. Search
 
   const allStopsDataFilteredBySearchQuery = useSearch(searchQuery, allStopsDataFormatted, {
-    keys: ['code', 'name', 'tts_name', 'location'],
+    keys: ['id', 'name', 'tts_name', 'location'],
     regexReplace: /[^a-zA-Z0-9]/g,
     limitResults: 100,
   });
@@ -72,11 +72,11 @@ export default function StopsExplorerToolbarSearch({ selectedStopCode, onSelectS
     comboboxStore.openDropdown();
   };
 
-  const handleSelectStop = (selectedStopCode) => {
-    const selectedStopData = allStopsData.find((item) => item.code === selectedStopCode);
+  const handleSelectStop = (selectedStopId) => {
+    const selectedStopData = allStopsData.find((item) => item.id === selectedStopId);
     if (!selectedStopData) return;
     setSearchQuery(selectedStopData.name);
-    onSelectStopCode(selectedStopCode);
+    onSelectStopId(selectedStopId);
     comboboxStore.closeDropdown();
   };
 
@@ -115,9 +115,9 @@ export default function StopsExplorerToolbarSearch({ selectedStopCode, onSelectS
               <Combobox.Empty>{t('no_results')}</Combobox.Empty>
             ) : (
               allStopsDataFilteredBySearchQuery.map((item) => (
-                <Combobox.Option key={item.code} value={item.code}>
+                <Combobox.Option key={item.id} value={item.id}>
                   <div className={styles.comboboxOption}>
-                    {selectedStopCode === item.code && (
+                    {selectedStopId === item.id && (
                       <div className={styles.selectedStop}>
                         <Image priority src="/icons/stop-selected.png" alt={'Selected stop icon'} width={20} height={20} />
                       </div>
