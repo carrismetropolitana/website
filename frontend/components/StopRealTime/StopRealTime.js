@@ -4,7 +4,7 @@ import styles from './StopRealTime.module.css';
 import { useTranslations, useFormatter, useNow } from 'next-intl';
 import LiveIcon from '../LiveIcon/LiveIcon';
 
-export default function StopRealTime({ pattern_code, stop_code }) {
+export default function StopRealTime({ pattern_id, stop_id }) {
   //
 
   //
@@ -17,7 +17,7 @@ export default function StopRealTime({ pattern_code, stop_code }) {
   //
   // B. Fetch data
 
-  const { data: realtimeData } = useSWR(stop_code && `https://api.carrismetropolitana.pt/stops/${stop_code}/realtime`);
+  const { data: realtimeData } = useSWR(stop_id && `https://api.carrismetropolitana.pt/stops/${stop_id}/realtime`);
 
   //
   // C. Handle actions
@@ -27,7 +27,7 @@ export default function StopRealTime({ pattern_code, stop_code }) {
     if (!realtimeData) return '';
     // Filter estimates for the current pattern
     const filteredRealtimeData = realtimeData.filter((item) => {
-      const isForCurrentPattern = item.pattern_code === pattern_code;
+      const isForCurrentPattern = item.pattern_id === pattern_id;
       return isForCurrentPattern;
     });
     // Sort by arrival_time
@@ -41,7 +41,7 @@ export default function StopRealTime({ pattern_code, stop_code }) {
     return relative;
 
     //
-  }, [pattern_code, realtimeData]);
+  }, [pattern_id, realtimeData]);
 
   function parseRelativeTime(eta) {
     // Skip if no eta

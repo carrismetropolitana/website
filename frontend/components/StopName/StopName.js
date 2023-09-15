@@ -1,7 +1,7 @@
 import Text from '../Text/Text';
 import styles from './StopName.module.css';
 
-export default function StopName({ code, name, short_name, tts_name, locality, municipality, selected = false, alignment = 'flex-start' }) {
+export default function StopName({ id, name, short_name, tts_name, locality, municipality, selected = false, alignment = 'flex-start' }) {
   //
 
   // If none of the location strings are defined,
@@ -23,7 +23,7 @@ export default function StopName({ code, name, short_name, tts_name, locality, m
         <Text type={selected ? 'h2' : 'h3'} aria-label={tts_name || name}>
           {name}
         </Text>
-        <Text type='subtitle'>{locality}</Text>
+        <Text type="subtitle">{locality}</Text>
       </div>
     );
   }
@@ -35,7 +35,7 @@ export default function StopName({ code, name, short_name, tts_name, locality, m
         <Text type={selected ? 'h2' : 'h3'} aria-label={tts_name || name}>
           {name}
         </Text>
-        <Text type='subtitle'>{municipality}</Text>
+        <Text type="subtitle">{municipality}</Text>
       </div>
     );
   }
@@ -48,7 +48,7 @@ export default function StopName({ code, name, short_name, tts_name, locality, m
         <Text type={selected ? 'h2' : 'h3'} aria-label={tts_name || name}>
           {name}
         </Text>
-        <Text type='subtitle'>{locality}</Text>
+        <Text type="subtitle">{locality}</Text>
       </div>
     );
   }
@@ -59,7 +59,7 @@ export default function StopName({ code, name, short_name, tts_name, locality, m
       <Text type={selected ? 'h2' : 'h3'} aria-label={tts_name || name}>
         {name}
       </Text>
-      <Text type='subtitle'>
+      <Text type="subtitle">
         {locality}, {municipality}
       </Text>
     </div>

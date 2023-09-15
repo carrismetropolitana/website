@@ -6,7 +6,7 @@ import FacilityIcon from '../FacilityIcon/FacilityIcon';
 import { NewLineBadge } from '../NewLineBadge/NewLineBadge';
 import StopName from '../StopName/StopName';
 
-export default function StopInfo({ selectedStopCode }) {
+export default function StopInfo({ selectedStopId }) {
   //
 
   //
@@ -15,7 +15,7 @@ export default function StopInfo({ selectedStopCode }) {
   //
   // B. Fetch data
 
-  const { data: stopData, isLoading: stopLoading } = useSWR(selectedStopCode && `https://api.carrismetropolitana.pt/stops/${selectedStopCode}`);
+  const { data: stopData, isLoading: stopLoading } = useSWR(selectedStopId && `https://api.carrismetropolitana.pt/stops/${selectedStopId}`);
 
   //
   // D. Handle actions
@@ -33,7 +33,7 @@ export default function StopInfo({ selectedStopCode }) {
       {stopData && (
         <div className={styles.container}>
           <div className={styles.badges}>
-            <CopyBadge label={`#${stopData.code}`} value={stopData.code} />
+            <CopyBadge label={`#${stopData.id}`} value={stopData.id} />
             <CopyBadge label={`${stopData.lat}, ${stopData.lon}`} value={`${stopData.lat}	${stopData.lon}`} />
           </div>
 
@@ -48,8 +48,8 @@ export default function StopInfo({ selectedStopCode }) {
           )}
           {stopData?.lines?.length > 0 && (
             <div className={styles.routes}>
-              {stopData.lines.map((lineCode, index) => (
-                <NewLineBadge key={index} code={lineCode} />
+              {stopData.lines.map((lineId, index) => (
+                <NewLineBadge key={index} id={lineId} />
               ))}
             </div>
           )}
