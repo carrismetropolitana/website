@@ -20,11 +20,8 @@ export default function StopsExplorerTimetable({ selectedStopId, selectedTripId,
 
   const t = useTranslations('StopsExplorerTimetable');
 
-  const [previousTrips, setPreviousTrips] = useState([]);
-  const [currentAndFutureTrips, setCurrentAndFutureTrips] = useState([]);
-
-  let previousTrips_temp = [];
-  let currentAndFutureTrips_temp = [];
+  let previousTrips = [];
+  let currentAndFutureTrips = [];
 
   //
   // B. Fetch data
@@ -43,12 +40,6 @@ export default function StopsExplorerTimetable({ selectedStopId, selectedTripId,
     if (!stopRealtimeData) return;
 
     // 2.
-    // Setup temporary variables
-
-    // let previousTrips_temp = [];
-    // let currentAndFutureTrips_temp = [];
-
-    // 3.
     // Classify each trip for relevance
 
     for (const realtimeTrip of stopRealtimeData) {
@@ -66,36 +57,49 @@ export default function StopsExplorerTimetable({ selectedStopId, selectedTripId,
       const tripEstimatedArrivalIsInThePast = getMinutesFromOperationTimeString(realtimeTrip.estimated_arrival) < -5;
 
       if (tripHasObservedArrival || (tripScheduledArrivalIsInThePast && !tripHasEstimatedArrival) || tripEstimatedArrivalIsInThePast) {
-        previousTrips_temp.push(realtimeTrip);
+        previousTrips.push(realtimeTrip);
         continue;
       }
 
-      currentAndFutureTrips_temp.push(realtimeTrip);
+      currentAndFutureTrips.push(realtimeTrip);
       continue;
 
       //
     }
 
-    // 4.
+    // 3.
     // Sort both arrays based on scheduled arrival
 
-    previousTrips_temp.sort((a, b) => {
+    previousTrips.sort((a, b) => {
       const timeStringA = a.scheduled_arrival.split(':').join('');
       const timeStringB = b.scheduled_arrival.split(':').join('');
       return timeStringA - timeStringB;
     });
 
-    currentAndFutureTrips_temp.sort((a, b) => {
+    currentAndFutureTrips.sort((a, b) => {
+      // Check if both `a` and `b` have estimated_arrival
+      if (a.estimated_arrival && b.estimated_arrival) {
+        // Both have estimated_arrival, compare them
+        const timeStringA = a.estimated_arrival.split(':').join('');
+        const timeStringB = b.estimated_arrival.split(':').join('');
+        return timeStringA - timeStringB;
+        //
+      } else if (a.estimated_arrival) {
+        // Only `a` has estimated_arrival, so it comes before `b`
+        return -1;
+        //
+      } else if (b.estimated_arrival) {
+        // Only `b` has estimated_arrival, so it comes before `a`
+        return 1;
+        //
+      } else {
+        // Both have only scheduled_arrival, compare them
+        const timeStringA = a.scheduled_arrival.split(':').join('');
+        const timeStringB = b.scheduled_arrival.split(':').join('');
+        return timeStringA - timeStringB;
+        //
+      }
       //
-      let timeStringA;
-      if (a.estimated_arrival) timeStringA = a.estimated_arrival.split(':').join('');
-      else timeStringA = a.scheduled_arrival.split(':').join('');
-      //
-      let timeStringB;
-      if (b.estimated_arrival) timeStringA = b.estimated_arrival.split(':').join('');
-      else timeStringA = b.scheduled_arrival.split(':').join('');
-      //
-      return timeStringA - timeStringB;
     });
 
     //
@@ -106,12 +110,12 @@ export default function StopsExplorerTimetable({ selectedStopId, selectedTripId,
 
   return stopRealtimeLoading ? (
     <Loader visible maxed />
-  ) : previousTrips_temp.length > 0 || currentAndFutureTrips_temp.length > 0 ? (
+  ) : previousTrips.length > 0 || currentAndFutureTrips.length > 0 ? (
     <div className={styles.container}>
       <StopsExplorerTimetableHeader />
-      <StopsExplorerTimetablePreviousTrips tripsData={previousTrips_temp} selectedTripId={selectedTripId} onSelectTrip={onSelectTrip} />
+      <StopsExplorerTimetablePreviousTrips tripsData={previousTrips} selectedTripId={selectedTripId} onSelectTrip={onSelectTrip} />
       <StopsExplorerTimetableDividerLine />
-      <StopsExplorerTimetableCurrentAndFutureTrips tripsData={currentAndFutureTrips_temp} selectedTripId={selectedTripId} onSelectTrip={onSelectTrip} />
+      <StopsExplorerTimetableCurrentAndFutureTrips tripsData={currentAndFutureTrips} selectedTripId={selectedTripId} onSelectTrip={onSelectTrip} />
     </div>
   ) : (
     <NoDataLabel text={t('no_service')} />
