@@ -45,7 +45,7 @@ export default function EncmExplorerItemTimetable({ mon, tue, wed, thu, fri, sat
 
     const parsedSchedulesResult = resultArray.map((parsedHours) => {
       return {
-        days: `${parsedHours.first_day ? t(parsedHours.first_day) : ''}${parsedHours.last_day ? ' -' + t(parsedHours.last_day) : ''}`,
+        days: `${parsedHours.first_day ? t(parsedHours.first_day) : ''}${parsedHours.last_day ? '-' + t(parsedHours.last_day) : ''}`,
         hours: parsedHours.hours.join(' | '),
       };
     });

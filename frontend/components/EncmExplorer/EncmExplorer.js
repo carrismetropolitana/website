@@ -77,7 +77,7 @@ export default function EncmExplorer() {
             id: selectedEncmData.id,
             name: selectedEncmData.name,
             address: selectedEncmData.address,
-            postal_id: selectedEncmData.postal_id,
+            postal_code: selectedEncmData.postal_code,
             locality: selectedEncmData.locality,
           },
         };
