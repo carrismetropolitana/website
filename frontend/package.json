@@ -1,6 +1,6 @@
 {
     "name": "@carrismetropolitana/website",
-    "version": "2023.09.14-1813",
+    "version": "2023.09.15-0144",
     "private": true,
     "scripts": {
         "dev": "next dev",
@@ -10,10 +10,10 @@
         "lint": "next lint"
     },
     "dependencies": {
-        "@mantine/core": "7.0.0-beta.4",
-        "@mantine/dates": "7.0.0-beta.4",
-        "@mantine/hooks": "7.0.0-beta.4",
-        "@mantine/form": "7.0.0-beta.4",
+        "@mantine/core": "7.0.0-beta.5",
+        "@mantine/dates": "7.0.0-beta.5",
+        "@mantine/hooks": "7.0.0-beta.5",
+        "@mantine/form": "7.0.0-beta.5",
         "@tabler/icons-react": "2.34.0",
         "@turf/turf": "6.5.0",
         "dayjs": "1.11.9",
