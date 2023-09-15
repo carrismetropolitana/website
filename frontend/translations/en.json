@@ -624,8 +624,7 @@
         "estimate": "Previsão"
     },
     "StopsExplorerTimetableCurrentAndFutureTrips": {
-        "line": "Linha e Destino",
-        "estimate": "Previsão"
+        "end_of_service": "Fim de Serviço"
     },
     "StopsExplorerTimetableRow": {
         "trip_realtime_status": {
