@@ -618,8 +618,8 @@
     },
     "StopsExplorerTimetablePreviousTrips": {
         "toggle": {
-            "show": "Ver Viagens Anteriores",
-            "hide": "Esconder Viagens Anteriores"
+            "show": "Ver Passagens Anteriores",
+            "hide": "Esconder Passagens Anteriores"
         },
         "estimate": "Previsão"
     },
