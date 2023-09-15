@@ -2,13 +2,13 @@ import useSWR from 'swr';
 import Loader from '../Loader/Loader';
 import styles from './NewLineBadge.module.css';
 
-export function NewLineBadge({ code }) {
+export function NewLineBadge({ id }) {
   //
 
   //
   // B. Fetch data
 
-  const { data: lineData, isLoading: lineLoading } = useSWR(code && `https://api.carrismetropolitana.pt/lines/${code}`);
+  const { data: lineData, isLoading: lineLoading } = useSWR(id && `https://api.carrismetropolitana.pt/lines/${id}`);
 
   //
   // D. Render components
