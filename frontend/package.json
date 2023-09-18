@@ -1,6 +1,6 @@
 {
     "name": "@carrismetropolitana/website",
-    "version": "2023.09.15-1537",
+    "version": "2023.09.18-2355",
     "private": true,
     "scripts": {
         "dev": "next dev",
@@ -24,16 +24,16 @@
         "react": "18.2.0",
         "react-dom": "18.2.0",
         "react-map-gl": "7.1.6",
-        "sharp": "0.32.5",
+        "sharp": "0.32.6",
         "swr": "2.2.2"
     },
     "devDependencies": {
         "@types/node": "20.6.2",
-        "@types/react": "18.2.21",
+        "@types/react": "18.2.22",
         "@types/react-dom": "18.2.7",
         "eslint": "8.49.0",
         "eslint-config-next": "13.4.19",
-        "postcss": "8.4.29",
+        "postcss": "8.4.30",
         "postcss-preset-mantine": "1.7.0",
         "postcss-simple-vars": "7.0.1",
         "typescript": "5.2.2"

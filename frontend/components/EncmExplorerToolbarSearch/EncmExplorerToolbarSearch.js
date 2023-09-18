@@ -117,11 +117,6 @@ export default function EncmExplorerToolbarSearch({ selectedEncmId, onSelectEncm
               allEncmDataFilteredBySearchQuery.map((item) => (
                 <Combobox.Option key={item.id} value={item.id}>
                   <div className={styles.comboboxOption}>
-                    {selectedEncmId === item.id && (
-                      <div className={styles.selectedEncm}>
-                        <Image priority src="/stop-selected.png" alt={'Selected ENCM icon'} width={20} height={20} />
-                      </div>
-                    )}
                     <div className={styles.encmInfo}>
                       <Highlight highlight={searchQuery} fz="sm" fw={500}>
                         {item.name}

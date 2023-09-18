@@ -28,11 +28,6 @@ export default function StopsExplorerMap({ allStopsMapData, selectedStopMapData,
       if (error) throw error;
       stopsExplorerMap.addImage('bus', image, { sdf: false });
     });
-    // Load stop idle symbol
-    stopsExplorerMap.loadImage('/icons/stop-idle.png', (error, image) => {
-      if (error) throw error;
-      stopsExplorerMap.addImage('stop-idle', image, { sdf: false });
-    });
     // Load stop selected symbol
     stopsExplorerMap.loadImage('/icons/map-stop-selected.png', (error, image) => {
       if (error) throw error;
@@ -43,10 +38,6 @@ export default function StopsExplorerMap({ allStopsMapData, selectedStopMapData,
   useEffect(() => {
     // Fit map
     if (selectedStopMapData && selectedVehicleMapData) {
-      //   const multiPoint = turf.multiPoint([
-      //     [selectedStopData.lon, selectedStopData.lat],
-      //     [selectedVehicleData.lon, selectedVehicleData.lat],
-      //   ]);
       const collection = turf.featureCollection([selectedStopMapData, selectedVehicleMapData]);
       const boundingBox = turf.bbox(collection);
       stopsExplorerMap.fitBounds(boundingBox, { duration: 2000, padding: 100, bearing: stopsExplorerMap.getBearing(), maxZoom: 16 });
