@@ -2,10 +2,11 @@
 
 import Image from 'next/image';
 import styles from './AppHeader.module.css';
-import { Menu, Button } from '@mantine/core';
-import { IconCaretDownFilled } from '@tabler/icons-react';
+import { Drawer, Button } from '@mantine/core';
 import AppHeaderMenu from '@/components/AppHeaderMenu/AppHeaderMenu';
 import { useTranslations } from 'next-intl';
+import { useDisclosure } from '@mantine/hooks';
+import AppHeaderDrawer from '../AppHeaderDrawer/AppHeaderDrawer';
 
 export default function AppHeader() {
   //
@@ -14,6 +15,8 @@ export default function AppHeader() {
   // A. Setup variables
 
   const t = useTranslations('AppHeader');
+
+  const [opened, { open, close }] = useDisclosure(false);
 
   //
   // B. Render Components
@@ -51,7 +54,9 @@ export default function AppHeader() {
           ]}
         />
       </div>
-      <div className={styles.navigation_drawer}></div>
+      <div className={styles.navigation_drawer}>
+        <AppHeaderDrawer />
+      </div>
     </div>
   );
 }

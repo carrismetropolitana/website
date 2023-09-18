@@ -1,0 +1,74 @@
+/* * */
+/* CONTAINER */
+
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: 80px;
+  align-items: flex-start;
+  justify-content: flex-end;
+  padding: 60px 30px;
+  color: white;
+  background-color: #000000;
+}
+
+/* * */
+/* GROUPS */
+
+.group,
+.corporate {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+  gap: 16px;
+}
+
+/* * */
+/* TITLES */
+
+.group h1 {
+  font-size: 18px;
+  font-weight: 800;
+  color: #fff;
+}
+
+/* * */
+/* LINKS */
+
+.group a,
+.corporate a {
+  font-size: 16px;
+  font-weight: 500;
+  color: #fff;
+  opacity: 0.9;
+  transition: all 300ms ease;
+}
+
+.corporate a {
+  opacity: 0.6;
+}
+
+.group a:hover {
+  opacity: 1;
+  text-decoration: underline;
+}
+
+.corporate a:hover {
+  opacity: 0.8;
+}
+
+/* * */
+/* VERSION */
+
+.corporate .version {
+  font-size: 12px;
+  font-weight: 600;
+  opacity: 0.3;
+  transition: all 300ms ease;
+}
+
+.corporate .version:hover {
+  opacity: 0.4;
+  text-decoration: none;
+}
