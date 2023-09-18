@@ -133,7 +133,7 @@ export default function StopsExplorerMap({ allStopsMapData, selectedStopMapData,
               'icon-anchor': 'bottom',
               'symbol-placement': 'point',
               'icon-image': 'stop-selected',
-              'icon-size': ['interpolate', ['linear', 0.5], ['zoom'], 10, 0.1, 20, 0.5],
+              'icon-size': ['interpolate', ['linear', 0.5], ['zoom'], 10, 0.1, 20, 0.25],
               'icon-offset': [0, 5],
             }}
             paint={{
