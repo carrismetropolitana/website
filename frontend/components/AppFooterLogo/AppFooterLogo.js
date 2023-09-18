@@ -1,7 +1,7 @@
 'use client';
 
-import styles from './AppFooterLogo.module.css';
 import Image from 'next/image';
+import styles from './AppFooterLogo.module.css';
 import { useTranslations } from 'next-intl';
 
 export default function AppFooterLogo() {
@@ -13,7 +13,7 @@ export default function AppFooterLogo() {
   const t = useTranslations('AppFooterLogo');
 
   //
-  // F. Render Components
+  // B. Render Components
 
   return (
     <div className={styles.container}>

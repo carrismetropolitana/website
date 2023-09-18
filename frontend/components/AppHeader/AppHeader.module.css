@@ -1,4 +1,29 @@
+/* * */
+/* CONTAINER */
+
 .container {
   background-color: var(--gray0);
   padding: 50px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+}
+
+/* * */
+/* NAVIGATION > MENUS */
+
+.navigation_menus {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-end;
+  gap: var(--size-lg);
+}
+
+/* * */
+/* NAVIGATION > DRAWER */
+
+.navigation_drawer {
+  display: none;
 }

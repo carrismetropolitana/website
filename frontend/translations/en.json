@@ -480,6 +480,64 @@
         "arriving_now": "< 1 min",
         "realtime": "{value} min"
     },
+    "AppHeader": {
+        "menus": {
+            "travel": {
+                "label": "Viajar",
+                "items": {
+                    "schedules": {
+                        "label": "Horários"
+                    },
+                    "stops": {
+                        "label": "Paragens"
+                    },
+                    "planner": {
+                        "label": "Planeador"
+                    }
+                }
+            },
+            "purchase": {
+                "label": "Comprar",
+                "items": {
+                    "cards": {
+                        "label": "Cartões"
+                    },
+                    "discounts": {
+                        "label": "Descontos"
+                    },
+                    "frequent_travels": {
+                        "label": "Viagens Frequentes"
+                    },
+                    "occasional_travels": {
+                        "label": "Viagens Ocasionais"
+                    },
+                    "tarifs": {
+                        "label": "Tarifas"
+                    }
+                }
+            },
+            "inform": {
+                "label": "Informar",
+                "items": {
+                    "schools": {
+                        "label": "Escolas e Universidades"
+                    },
+                    "encm": {
+                        "label": "Espaços navegante®"
+                    },
+                    "help": {
+                        "label": "Apoio ao Passageiro"
+                    },
+                    "faq": {
+                        "label": "Perguntas Frequentes"
+                    },
+                    "news": {
+                        "label": "Notícias"
+                    }
+                }
+            }
+        }
+    },
     "AppFooter": {
         "contacts": {
             "info_line": {
