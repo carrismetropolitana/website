@@ -17,7 +17,7 @@ export default function EncmExplorerMapPopup({ encmData }) {
   return (
     <div className={styles.container}>
       <h2 className={styles.title}>{encmData.name}</h2>
-      <a className={styles.viewInList} href={`#encm${encmData.code}`}>
+      <a className={styles.viewInList} href={`#encm${encmData.id}`}>
         {t('view_in_list')}
       </a>
     </div>
