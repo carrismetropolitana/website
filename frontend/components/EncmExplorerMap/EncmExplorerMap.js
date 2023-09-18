@@ -23,11 +23,6 @@ export default function EncmExplorerMap({ allEncmMapData, selectedEncmMapData, s
       if (error) throw error;
       encmExplorerMap.addImage('encm-idle', image, { sdf: false });
     });
-    // Load encm selected symbol
-    encmExplorerMap.loadImage('/icons/map-encm-selected.png', (error, image) => {
-      if (error) throw error;
-      encmExplorerMap.addImage('encm-selected', image, { sdf: false });
-    });
   }, [encmExplorerMap]);
 
   //
