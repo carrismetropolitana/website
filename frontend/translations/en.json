@@ -613,7 +613,8 @@
         "no_service": "Sem Serviço"
     },
     "StopsExplorerTimetableHeader": {
-        "line": "Linha e Destino",
+        "line": "Linha",
+        "headsign": "Destino",
         "estimate": "Previsão"
     },
     "StopsExplorerTimetablePreviousTrips": {
