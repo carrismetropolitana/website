@@ -39,7 +39,7 @@ export default function EncmExplorerGrid({ allEncmData, selectedEncmId, onSelect
         allEncmGroupedByMunicipality.map((group) => (
           <div key={group.id} className={styles.groupWrapper}>
             <div className={styles.groupTitle}>
-              <p>{group.name}</p>
+              <h2>{group.name}</h2>
             </div>
             <div key={group.id} className={styles.grid}>
               {group.encm && group.encm.map((encm) => <EncmExplorerItem key={encm.id} encmData={encm} selectedEncmId={selectedEncmId} onSelectEncmId={onSelectEncmId} />)}

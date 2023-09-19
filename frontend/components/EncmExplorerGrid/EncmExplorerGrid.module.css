@@ -25,7 +25,7 @@
   display: flex;
 }
 
-.groupTitle p {
+.groupTitle h2 {
   background: #000000;
   color: #ffffff;
   display: flex;
