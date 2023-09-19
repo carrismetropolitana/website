@@ -16,7 +16,7 @@ import StopTimetable from '@/components/StopsExplorerTimetable/StopsExplorerTime
 import NoDataLabel from '@/components/NoDataLabel/NoDataLabel';
 import { usePathname, useSearchParams, useRouter } from 'next/navigation';
 
-export default function StopsExplorer() {
+export default function StopsExplorer({ urlStopId }) {
   //
 
   //
@@ -25,8 +25,6 @@ export default function StopsExplorer() {
   const t = useTranslations('StopsExplorer');
 
   const searchParams = useSearchParams();
-  const router = useRouter();
-  const pathName = usePathname() || '/';
 
   const { stopsExplorerMap } = useMap();
 
@@ -38,12 +36,6 @@ export default function StopsExplorer() {
   const [selectedShapeId, setSelectedShapeId] = useState();
   const [selectedTripId, setSelectedTripId] = useState();
   const [selectedVehicleId, setSelectedVehicleId] = useState();
-
-  function updateSearchParam(searchParams, param, value) {
-    const currentSearchParams = new URLSearchParams(Array.from(searchParams.entries()));
-    currentSearchParams.set(param, value);
-    return currentSearchParams;
-  }
 
   //
   // B. Fetch data
@@ -177,9 +169,8 @@ export default function StopsExplorer() {
           stopsExplorerMap.flyTo({ center: stopMapFeature?.geometry?.coordinates, zoom: defaultZoom, duration: defaultSpeed });
         }
 
-        if (searchParams.get('s') !== stopId && searchParams?.entries()) {
-          const updatedSearchParams = updateSearchParam(searchParams, 's', stopId);
-          router.push(`${pathName}?${updatedSearchParams.toString()}`, { shallow: true, scroll: false });
+        if (urlStopId !== stopId) {
+          window.history.replaceState({ ...window.history.state, as: `/stops/${stopId}`, url: `/stops/${stopId}` }, '', `/stops/${stopId}`);
         }
 
         // Save the current feature to state and mark it as selected
@@ -192,7 +183,7 @@ export default function StopsExplorer() {
         setSelectedShapeId();
       }
     },
-    [allStopsMapData?.features, pathName, router, searchParams, stopsExplorerMap]
+    [allStopsMapData?.features, stopsExplorerMap, urlStopId]
   );
 
   const handleSelectTrip = (tripId, patternId, shapeId) => {
@@ -203,8 +194,8 @@ export default function StopsExplorer() {
   };
 
   useEffect(() => {
-    if (searchParams.get('s') && !selectedStopId && stopsExplorerMap?.getSource('all-stops') !== undefined) {
-      handleSelectStop(searchParams.get('s'));
+    if (urlStopId && !selectedStopId && stopsExplorerMap?.getSource('all-stops') !== undefined) {
+      handleSelectStop(urlStopId);
     }
   });
 

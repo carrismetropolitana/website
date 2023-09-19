@@ -12,8 +12,8 @@
     "dependencies": {
         "@mantine/core": "7.0.0",
         "@mantine/dates": "7.0.0",
-        "@mantine/hooks": "7.0.0",
         "@mantine/form": "7.0.0",
+        "@mantine/hooks": "7.0.0",
         "@tabler/icons-react": "2.34.0",
         "@turf/turf": "6.5.0",
         "dayjs": "1.11.9",
