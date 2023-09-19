@@ -14,9 +14,24 @@ export default function AppTopBar() {
 
   return (
     <div className={styles.container}>
-      <AppTopBarLink href="//www.tmlmobilidade.pt/" label="TML" />
-      <AppTopBarLink label="Carris Metropolitana" active />
-      <AppTopBarLink href="//www.navegante.pt/" label="navegante®" />
+      <a href="//www.tmlmobilidade.pt/" className={styles.link}>
+        <div className={styles.label}>TML</div>
+        <div className={styles.indicatorWrapper}>
+          <div className={styles.indicatorActive} />
+        </div>
+      </a>
+      <p className={`${styles.link} ${styles.active}`}>
+        <div className={styles.label}>Carris Metropolitana</div>
+        <div className={styles.indicatorWrapper}>
+          <div className={styles.indicatorActive} />
+        </div>
+      </p>
+      <a href="//www.navegante.pt/" className={styles.link}>
+        <div className={styles.label}>navegante®</div>
+        <div className={styles.indicatorWrapper}>
+          <div className={styles.indicatorActive} />
+        </div>
+      </a>
     </div>
   );
 }
