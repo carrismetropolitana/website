@@ -60,7 +60,7 @@ export default function AppHeaderDrawer() {
           </div>
         </div>
       </Drawer>
-      <ActionIcon onClick={open} variant="subtle" size="xl" color="black">
+      <ActionIcon onClick={open} variant="subtle" size="xl" color="black" aria-label="Abrir Menu">
         <IconMenu2 size={40} />
       </ActionIcon>
     </>
