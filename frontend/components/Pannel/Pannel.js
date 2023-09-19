@@ -57,7 +57,7 @@ export default function Pannel({ loading, error, icon, title, rightSection, chil
       <div className={styles.header}>
         <div className={styles.headerLeftSection}>
           {icon && <div className={styles.headerIcon}>{icon}</div>}
-          {title && <h2 className={styles.headerTitle}>{title}</h2>}
+          {title && <h1 className={styles.headerTitle}>{title}</h1>}
         </div>
         {rightSection && <div className={styles.headerRightSection}>{rightSection}</div>}
       </div>

@@ -17,13 +17,13 @@ export default function AppFooterNav() {
   return (
     <div className={styles.container}>
       <div className={styles.group}>
-        <h1>{t('travel.title')}</h1>
+        <p>{t('travel.title')}</p>
         <a href="https://www.carrismetropolitana.pt/horarios/">{t('travel.links.schedules')}</a>
         <a href="https://www.carrismetropolitana.pt/paragens/">{t('travel.links.stops')}</a>
         <a href="https://www.carrismetropolitana.pt/planeador/">{t('travel.links.planner')}</a>
       </div>
       <div className={styles.group}>
-        <h1>{t('purchase.title')}</h1>
+        <p>{t('purchase.title')}</p>
         <a href="https://www.carrismetropolitana.pt/cartoes/">{t('purchase.links.cards')}</a>
         <a href="https://www.carrismetropolitana.pt/descontos/">{t('purchase.links.discounts')}</a>
         <a href="https://www.carrismetropolitana.pt/viagens-frequentes/">{t('purchase.links.frequent')}</a>
@@ -31,7 +31,7 @@ export default function AppFooterNav() {
         <a href="https://www.carrismetropolitana.pt/tarifarios/">{t('purchase.links.tariffs')}</a>
       </div>
       <div className={styles.group}>
-        <h1>{t('inform.title')}</h1>
+        <p>{t('inform.title')}</p>
         <a href="https://www.carrismetropolitana.pt/espacos-navegante/">{t('inform.links.helpdesks')}</a>
         <a href="https://www.carrismetropolitana.pt/apoio/">{t('inform.links.help')}</a>
         <a href="https://www.carrismetropolitana.pt/perguntas-frequentes/1530/">{t('inform.links.faq')}</a>

@@ -17,7 +17,7 @@ export default function AppFooterLogo() {
 
   return (
     <div className={styles.container}>
-      <Image priority src="https://www.carrismetropolitana.pt/wp-content/themes/carrismetropolitana/images/carris-metropolitana-footer.svg" alt="Carris Metropolitana logo" width={180} height={64} />
+      <Image priority src="https://www.carrismetropolitana.pt/wp-content/themes/carrismetropolitana/images/carris-metropolitana-footer.svg" alt="Logo da Carris Metropolitana" width={180} height={64} />
 
       <div className={styles.contactGroup}>
         <a href="tel:+351210418800">{t('contacts.info_line.number')}</a>

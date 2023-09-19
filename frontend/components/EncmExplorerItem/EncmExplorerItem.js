@@ -29,21 +29,21 @@ export default function EncmExplorerItem({ encmData, selectedEncmId, onSelectEnc
     <div id={`encm${encmData.id}`} className={`${styles.container} ${selectedEncmId === encmData.id && styles.selected}`}>
       <h2 className={styles.title}>{encmData.name}</h2>
       <div className={styles.wrapper}>
-        <h4 className={styles.label}>{t('address.label')}</h4>
+        <h3 className={styles.label}>{t('address.label')}</h3>
         <p className={styles.text}>{`${encmData.address}, ${encmData.postal_code} ${encmData.locality}`}</p>
         <a className={styles.viewInMap} onClick={handleClickViewMap} href="#encmExplorerMap">
           {t('address.view_in_map')}
         </a>
       </div>
       <div className={styles.wrapper}>
-        <h4 className={styles.label}>{t('schedule.label')}</h4>
+        <h3 className={styles.label}>{t('schedule.label')}</h3>
         <HelpdeskItemTimetable mon={encmData.hours_monday} tue={encmData.hours_tuesday} wed={encmData.hours_wednesday} thu={encmData.hours_thursday} fri={encmData.hours_friday} sat={encmData.hours_saturday} sun={encmData.hours_sunday} />
       </div>
 
       <div className={styles.occupation}>
-        <h4 className={styles.label}>
+        <h3 className={styles.label}>
           {t('occupation.label')} <LiveIcon color="#000" />
-        </h4>
+        </h3>
         <HelpdeskItemOccupation currentlyWaiting={encmData.currently_waiting} expectedWaitTime={encmData.expected_wait_time} />
       </div>
     </div>
