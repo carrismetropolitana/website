@@ -9,7 +9,7 @@ export default function Page({ params }) {
   //
   // E. Render components
 
-  return <OneFullColumn first={<StopsExplorer urlStopId={params.stop_id[0]} />} />;
+  return <OneFullColumn first={<StopsExplorer urlStopId={params.stop_id?.length && params.stop_id[0]} />} />;
 
   //
 }
