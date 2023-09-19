@@ -662,7 +662,7 @@
         "expected_wait_time": {
             "label": "Tempo de espera estimado:",
             "available_now": "Agora",
-            "available_soon": "~ 1 min",
+            "available_soon": "1 min",
             "available_at_minutes": "{minutes} min",
             "available_at_hours": "{hours} h {minutes} min"
         }
