@@ -6,7 +6,6 @@ module.exports = {
   i18n: {
     locales: ['pt-PT' /* ,'en-US' */],
     defaultLocale: 'pt-PT',
-    localeDetection: false,
   },
   images: {
     remotePatterns: [
