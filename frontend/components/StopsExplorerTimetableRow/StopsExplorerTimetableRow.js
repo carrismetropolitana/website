@@ -25,6 +25,7 @@ export default function StopsExplorerTimetableRow({ rowType, tripData, selectedT
   //
   // B. Fetch data
 
+  const { data: allVehiclesData } = useSWR('https://api.carrismetropolitana.pt/vehicles');
   const { data: alertsData } = useSWR('https://api.carrismetropolitana.pt/alerts');
   const { data: patternData } = useSWR(tripData?.pattern_id && `https://api.carrismetropolitana.pt/patterns/${tripData.pattern_id}`);
 

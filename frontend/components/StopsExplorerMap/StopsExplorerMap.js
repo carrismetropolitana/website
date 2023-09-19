@@ -85,6 +85,7 @@ export default function StopsExplorerMap({ allStopsMapData, selectedStopMapData,
       <GeolocateControl />
       {selectedVehicleMapData && (
         <Popup closeButton={false} closeOnClick={false} latitude={selectedVehicleMapData.geometry.coordinates[1]} longitude={selectedVehicleMapData.geometry.coordinates[0]} anchor="bottom">
+          <div>{selectedVehicleMapData.properties.id}</div>
           <div>{selectedVehicleMapData.properties.timeString}</div>
         </Popup>
       )}

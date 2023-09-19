@@ -108,7 +108,7 @@ export default function StopsExplorer({ urlStopId }) {
 
   const selectedVehicleMapData = useMemo(() => {
     if (allVehiclesData && selectedTripId) {
-      const selectedVehicleData = allVehiclesData.find((item) => item.trip_id === selectedTripId);
+      const selectedVehicleData = allVehiclesData.find((item) => item.trip_id && item.trip_id === selectedTripId);
       if (selectedVehicleData) {
         return {
           type: 'Feature',
