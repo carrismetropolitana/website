@@ -564,6 +564,10 @@
                 "description": "Linha de apoio ao passageiro",
                 "disclaimer": "Chamada Rede Fixa Nacional"
             }
+        },
+        "socials": {
+            "facebook": "Facebook oficial da Carris Metropolitana",
+            "instagram": "Instagram oficial da Carris Metropolitana"
         }
     },
     "AppFooterLegal": {

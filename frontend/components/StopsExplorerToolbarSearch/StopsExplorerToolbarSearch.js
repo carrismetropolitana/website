@@ -117,11 +117,6 @@ export default function StopsExplorerToolbarSearch({ selectedStopId, onSelectSto
               allStopsDataFilteredBySearchQuery.map((item) => (
                 <Combobox.Option key={item.id} value={item.id}>
                   <div className={styles.comboboxOption}>
-                    {selectedStopId === item.id && (
-                      <div className={styles.selectedStop}>
-                        <Image priority src="/icons/stop-selected.png" alt={'Selected stop icon'} width={20} height={20} />
-                      </div>
-                    )}
                     <div className={styles.stopInfo}>
                       <Highlight highlight={searchQuery} fz="sm" fw={500}>
                         {item.name}

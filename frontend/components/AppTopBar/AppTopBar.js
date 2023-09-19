@@ -3,7 +3,7 @@ import styles from './AppTopBar.module.css';
 export default function AppTopBar() {
   //
 
-  const AppTopBarLink = ({ href, label, active }) => (
+  const AppTopBarLink = ({ href = '#', label, active }) => (
     <a href={href} className={`${styles.link} ${active && styles.active}`}>
       <div className={styles.çabel}>{label}</div>
       <div className={styles.indicatorWrapper}>
@@ -14,9 +14,9 @@ export default function AppTopBar() {
 
   return (
     <div className={styles.container}>
-      <AppTopBarLink href='//www.tmlmobilidade.pt/' label='TML' />
-      <AppTopBarLink href='//www.carrismetropolitana.pt/' label='Carris Metropolitana' active />
-      <AppTopBarLink href='//www.navegante.pt/' label='navegante®' />
+      <AppTopBarLink href="//www.tmlmobilidade.pt/" label="TML" />
+      <AppTopBarLink label="Carris Metropolitana" active />
+      <AppTopBarLink href="//www.navegante.pt/" label="navegante®" />
     </div>
   );
 }
