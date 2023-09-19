@@ -7,6 +7,7 @@ import AppHeaderMenu from '@/components/AppHeaderMenu/AppHeaderMenu';
 import { useTranslations } from 'next-intl';
 import { useDisclosure } from '@mantine/hooks';
 import AppHeaderDrawer from '../AppHeaderDrawer/AppHeaderDrawer';
+import Link from 'next/link';
 
 export default function AppHeader() {
   //
@@ -23,7 +24,9 @@ export default function AppHeader() {
 
   return (
     <div className={styles.container}>
-      <Image priority src="https://www.carrismetropolitana.pt/wp-content/themes/carrismetropolitana/images/carris-metropolitana.svg" alt="Carris Metropolitana logo" width={180} height={64} />
+      <Link href={'https://www.carrismetropolitana.pt'}>
+        <Image priority src="https://www.carrismetropolitana.pt/wp-content/themes/carrismetropolitana/images/carris-metropolitana.svg" alt="Carris Metropolitana logo" width={180} height={64} />
+      </Link>
       <div className={styles.navigation_menus}>
         <AppHeaderMenu
           title={t('menus.travel.label')}
