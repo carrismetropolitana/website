@@ -1,7 +1,6 @@
 'use client';
 
 import useSWR from 'swr';
-import Image from 'next/image';
 import { Combobox, Highlight, TextInput, useCombobox, Text, ActionIcon } from '@mantine/core';
 import { useMemo, useState } from 'react';
 import { useTranslations } from 'next-intl';

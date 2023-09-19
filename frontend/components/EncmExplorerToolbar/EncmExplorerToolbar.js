@@ -30,13 +30,13 @@ export default function EncmExplorerToolbar({ selectedMapStyle, onSelectMapStyle
       />
 
       <Tooltip label={t('recenter_map.label')} position="bottom" withArrow>
-        <ActionIcon color="gray" variant="light" size="lg" onClick={onMapRecenter}>
+        <ActionIcon color="gray" variant="light" size="lg" onClick={onMapRecenter} aria-label={t('recenter_map.label')}>
           <IconArrowsMinimize size={20} />
         </ActionIcon>
       </Tooltip>
 
       <Tooltip label={t('open_gmaps.label')} position="bottom" withArrow>
-        <ActionIcon color="gray" variant="light" size="lg" onClick={onOpenInGoogleMaps}>
+        <ActionIcon color="gray" variant="light" size="lg" onClick={onOpenInGoogleMaps} aria-label={t('open_gmaps.label')}>
           <IconBrandGoogleMaps size={20} />
         </ActionIcon>
       </Tooltip>
