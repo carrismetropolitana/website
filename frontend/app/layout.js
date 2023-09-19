@@ -26,7 +26,6 @@ export default function RootLayout({ children }) {
     <html className={inter.variable}>
       <head>
         <ColorSchemeScript />
-        <link rel="shortcut icon" href="/favicon.svg" />
       </head>
       <body>
         <Providers>{children}</Providers>
