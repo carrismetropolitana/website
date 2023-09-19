@@ -52,14 +52,14 @@
 /* * */
 /* TITLES */
 
-.group p {
+.group h6 {
   font-size: 18px;
   font-weight: 800;
   color: #fff;
 }
 
 @media (max-width: 900px) {
-  .group p {
+  .group h6 {
     width: 100%;
     text-align: center;
   }
