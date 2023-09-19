@@ -474,7 +474,7 @@
         }
     },
     "EncmExplorerToolbarSearch": {
-        "label": "Procurar por nome, morada, município...",
+        "label": "Procurar por nome, morada ou município",
         "placeholder": "Procurar por nome, morada, município...",
         "no_results": "Nenhum Resultado Encontrado",
         "arriving_now": "< 1 min",
