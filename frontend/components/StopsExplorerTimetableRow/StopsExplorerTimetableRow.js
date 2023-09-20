@@ -9,6 +9,7 @@ import { useTranslations } from 'next-intl';
 import LiveIcon from '@/components/LiveIcon/LiveIcon';
 import CopyBadge from '@/components/CopyBadge/CopyBadge';
 import { DebugContext } from '@/contexts/DebugContext';
+import StopsExplorerTimetableFeedback from '../StopsExplorerTimetableFeedback/StopsExplorerTimetableFeedback';
 
 export default function StopsExplorerTimetableRow({ rowType, tripData, selectedTripId, onSelectTrip, selectedStopId }) {
   //
@@ -20,6 +21,7 @@ export default function StopsExplorerTimetableRow({ rowType, tripData, selectedT
 
   const debugContext = useContext(DebugContext);
 
+  const [tripMissingRequiredData, setTripMissingRequiredData] = useState(false);
   const [tripIsAtLastStop, setTripIsAtLastStop] = useState(false);
   const [tripEtaMinutes, setTripEtaMinutes] = useState();
   const [tripEtaString, setTripEtaString] = useState('');
@@ -29,7 +31,7 @@ export default function StopsExplorerTimetableRow({ rowType, tripData, selectedT
   // B. Fetch data
 
   const { data: alertsData } = useSWR('https://api.carrismetropolitana.pt/alerts');
-  const { data: patternData } = useSWR(tripData?.pattern_id && `https://api.carrismetropolitana.pt/patterns/${tripData.pattern_id}`);
+  const { data: patternData, isLoading: patternLoading } = useSWR(tripData?.pattern_id && `https://api.carrismetropolitana.pt/patterns/${tripData.pattern_id}`);
 
   //
   // B. Transform data
@@ -45,7 +47,15 @@ export default function StopsExplorerTimetableRow({ rowType, tripData, selectedT
       // 1.
       // Return if data is not yet ready
 
-      if (!tripData || !patternData) return;
+      if (!tripData || patternLoading) return;
+
+      // 2.
+      // Check if all required data is available to display this trip
+
+      if (!tripData || !patternData || !patternData.path) {
+        setTripMissingRequiredData(true);
+        return;
+      }
 
       // 2.
       // Check if this trip is not at the last stop
@@ -121,7 +131,7 @@ export default function StopsExplorerTimetableRow({ rowType, tripData, selectedT
     return () => clearInterval(intervalId);
 
     //
-  }, [patternData, rowType, tripData]);
+  }, [patternData, patternLoading, rowType, tripData]);
 
   //
   // D. Handle actions
@@ -134,6 +144,8 @@ export default function StopsExplorerTimetableRow({ rowType, tripData, selectedT
 
   //
   // D. Render components
+
+  if (tripMissingRequiredData && !debugContext.isDebug) return null;
 
   if (tripIsAtLastStop && !debugContext.isDebug) return null;
 
@@ -170,12 +182,15 @@ export default function StopsExplorerTimetableRow({ rowType, tripData, selectedT
           <div className={styles.testData} onClick={(e) => e.stopPropagation()}>
             <CopyBadge label={`stop_id: ${selectedStopId}`} value={selectedStopId} />
             <CopyBadge label={`trip_id: ${tripData.trip_id}`} value={tripData.trip_id} />
+            <CopyBadge label={`stop_seq: ${tripData.stop_sequence}`} value={tripData.stop_sequence} />
             <CopyBadge label={`vehicle_id: ${tripData.vehicle_id}`} value={tripData.vehicle_id} />
             <CopyBadge label={`Observado: ${tripData.observed_arrival}`} value={tripData.observed_arrival} />
             <CopyBadge label={`Estimado: ${tripData.estimated_arrival}`} value={tripData.estimated_arrival} />
             <CopyBadge label={`Planeado: ${tripData.scheduled_arrival}`} value={tripData.scheduled_arrival} />
           </div>
         )}
+
+        {tripRealtimeStatus !== 'scheduled' && !debugContext.isDebug && <StopsExplorerTimetableFeedback tripData={tripData} selectedStopId={selectedStopId} />}
 
         <div className={styles.localitiesPerLine}>
           <p>Passa por</p>

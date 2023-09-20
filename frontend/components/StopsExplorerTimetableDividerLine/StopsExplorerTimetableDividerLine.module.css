@@ -6,7 +6,6 @@
   grid-template-columns: 8px 1fr;
   grid-template-rows: 8px;
   width: 100%;
-  width: 100%;
   align-items: center;
   justify-content: center;
 }

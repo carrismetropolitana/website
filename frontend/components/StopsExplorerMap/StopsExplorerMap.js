@@ -110,7 +110,7 @@ export default function StopsExplorerMap({ allStopsMapData, selectedStopMapData,
               'icon-rotate': selectedVehicleMapData.properties.heading || 0,
             }}
             paint={{
-              'icon-opacity': ['interpolate', ['linear', 0.5], ['zoom'], 10, 0, 11, 1],
+              'icon-opacity': ['interpolate', ['linear', 0.5], ['zoom'], 7, 0, 10, 1],
             }}
           />
         </Source>
@@ -132,7 +132,7 @@ export default function StopsExplorerMap({ allStopsMapData, selectedStopMapData,
               'icon-offset': [0, 5],
             }}
             paint={{
-              'icon-opacity': ['interpolate', ['linear', 0.5], ['zoom'], 10, 0, 11, 1],
+              'icon-opacity': ['interpolate', ['linear', 0.5], ['zoom'], 7, 0, 10, 1],
             }}
           />
         </Source>

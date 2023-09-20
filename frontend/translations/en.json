@@ -745,5 +745,13 @@
     "DebugToggle": {
         "enabled": "Disable Debug",
         "disabled": "Enable Debug"
+    },
+    "StopsExplorerTimetableFeedback": {
+        "message": "A estimativa está correta?",
+        "answers": {
+            "positive": "Sim",
+            "negative": "Não"
+        },
+        "thank_you": "Obrigado pelo contributo!"
     }
 }
