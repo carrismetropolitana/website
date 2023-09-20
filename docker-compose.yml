@@ -24,7 +24,7 @@ services:
   # # # # # # # # # # # # # # # # # # # # #
 
   nginx:
-    image: nginx:stable
+    image: nginx:alpine-slim
     restart: unless-stopped
     logging:
       options:
