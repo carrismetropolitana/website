@@ -2,7 +2,6 @@
 
 import useSWR from 'swr';
 import { useTranslations } from 'next-intl';
-import { useState, useEffect } from 'react';
 import styles from './StopsExplorerTimetable.module.css';
 import Loader from '@/components/Loader/Loader';
 import { getMinutesFromOperationTimeString } from '@/services/parseRelativeTime';
@@ -113,9 +112,9 @@ export default function StopsExplorerTimetable({ selectedStopId, selectedTripId,
   ) : previousTrips.length > 0 || currentAndFutureTrips.length > 0 ? (
     <div className={styles.container}>
       <StopsExplorerTimetableHeader />
-      <StopsExplorerTimetablePreviousTrips tripsData={previousTrips} selectedTripId={selectedTripId} onSelectTrip={onSelectTrip} />
+      <StopsExplorerTimetablePreviousTrips tripsData={previousTrips} selectedTripId={selectedTripId} onSelectTrip={onSelectTrip} selectedStopId={selectedStopId} />
       <StopsExplorerTimetableDividerLine />
-      <StopsExplorerTimetableCurrentAndFutureTrips tripsData={currentAndFutureTrips} selectedTripId={selectedTripId} onSelectTrip={onSelectTrip} />
+      <StopsExplorerTimetableCurrentAndFutureTrips tripsData={currentAndFutureTrips} selectedTripId={selectedTripId} onSelectTrip={onSelectTrip} selectedStopId={selectedStopId} />
     </div>
   ) : (
     <NoDataLabel text={t('no_service')} />

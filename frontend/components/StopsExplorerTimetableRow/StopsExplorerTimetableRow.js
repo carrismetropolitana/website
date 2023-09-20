@@ -7,11 +7,10 @@ import { useEffect, useState, useContext } from 'react';
 import { convertOperationTimeStringTo24HourTimeString, getMinutesFromOperationTimeString } from '@/services/parseRelativeTime';
 import { useTranslations } from 'next-intl';
 import LiveIcon from '@/components/LiveIcon/LiveIcon';
-import { Divider } from '@mantine/core';
 import CopyBadge from '@/components/CopyBadge/CopyBadge';
 import { DebugContext } from '@/contexts/DebugContext';
 
-export default function StopsExplorerTimetableRow({ rowType, tripData, selectedTripId, onSelectTrip }) {
+export default function StopsExplorerTimetableRow({ rowType, tripData, selectedTripId, onSelectTrip, selectedStopId }) {
   //
 
   //
@@ -21,6 +20,7 @@ export default function StopsExplorerTimetableRow({ rowType, tripData, selectedT
 
   const debugContext = useContext(DebugContext);
 
+  const [tripIsAtLastStop, setTripIsAtLastStop] = useState(false);
   const [tripEtaMinutes, setTripEtaMinutes] = useState();
   const [tripEtaString, setTripEtaString] = useState('');
   const [tripRealtimeStatus, setTripRealtimeStatus] = useState('scheduled');
@@ -28,7 +28,6 @@ export default function StopsExplorerTimetableRow({ rowType, tripData, selectedT
   //
   // B. Fetch data
 
-  const { data: allVehiclesData } = useSWR('https://api.carrismetropolitana.pt/vehicles');
   const { data: alertsData } = useSWR('https://api.carrismetropolitana.pt/alerts');
   const { data: patternData } = useSWR(tripData?.pattern_id && `https://api.carrismetropolitana.pt/patterns/${tripData.pattern_id}`);
 
@@ -47,6 +46,13 @@ export default function StopsExplorerTimetableRow({ rowType, tripData, selectedT
       // Return if data is not yet ready
 
       if (!tripData || !patternData) return;
+
+      // 2.
+      // Check if this trip is not at the last stop
+
+      if (tripData.stop_sequence === patternData.path[patternData.path.length - 1].stop_sequence) {
+        setTripIsAtLastStop(true);
+      }
 
       // 2.
       // Classify this trip for realtime status
@@ -129,6 +135,8 @@ export default function StopsExplorerTimetableRow({ rowType, tripData, selectedT
   //
   // D. Render components
 
+  if (tripIsAtLastStop && !debugContext.isDebug) return null;
+
   return (
     <div className={`${styles.container} ${styles[tripRealtimeStatus]} ${selectedTripId === tripData.trip_id && styles.selected}`} onClick={handleSelectTrip}>
       <div className={styles.tripSummary}>
@@ -160,6 +168,7 @@ export default function StopsExplorerTimetableRow({ rowType, tripData, selectedT
       <div className={styles.tripDetails}>
         {debugContext.isDebug && (
           <div className={styles.testData} onClick={(e) => e.stopPropagation()}>
+            <CopyBadge label={`stop_id: ${selectedStopId}`} value={selectedStopId} />
             <CopyBadge label={`trip_id: ${tripData.trip_id}`} value={tripData.trip_id} />
             <CopyBadge label={`vehicle_id: ${tripData.vehicle_id}`} value={tripData.vehicle_id} />
             <CopyBadge label={`Observado: ${tripData.observed_arrival}`} value={tripData.observed_arrival} />

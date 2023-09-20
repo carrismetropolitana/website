@@ -5,7 +5,7 @@ import { useMemo, useState } from 'react';
 import styles from './StopsExplorerTimetablePreviousTrips.module.css';
 import StopsExplorerTimetableRow from '@/components/StopsExplorerTimetableRow/StopsExplorerTimetableRow';
 
-export default function StopsExplorerTimetablePreviousTrips({ tripsData, selectedTripId, onSelectTrip }) {
+export default function StopsExplorerTimetablePreviousTrips({ tripsData, selectedTripId, onSelectTrip, selectedStopId }) {
   //
 
   //
@@ -55,7 +55,7 @@ export default function StopsExplorerTimetablePreviousTrips({ tripsData, selecte
         </div>
       )}
       {visibleTrips.map((trip, index) => (
-        <StopsExplorerTimetableRow key={`${trip.trip_id}_${index}`} rowType={'previous'} tripData={trip} selectedTripId={selectedTripId} onSelectTrip={onSelectTrip} />
+        <StopsExplorerTimetableRow key={`${trip.trip_id}_${index}`} rowType={'previous'} tripData={trip} selectedTripId={selectedTripId} onSelectTrip={onSelectTrip} selectedStopId={selectedStopId} />
       ))}
       {showAllTrips && tripsData.length > previousTripsShownByDefault && (
         <div className={styles.toggle} onClick={handleToogleShowAllTrips}>

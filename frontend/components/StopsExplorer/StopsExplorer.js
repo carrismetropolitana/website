@@ -2,7 +2,7 @@
 
 import styles from './StopsExplorer.module.css';
 import useSWR from 'swr';
-import { useState, useMemo, useEffect, useCallback, useContext } from 'react';
+import { useState, useMemo, useEffect, useCallback } from 'react';
 import { useMap } from 'react-map-gl/maplibre';
 import { Divider } from '@mantine/core';
 import { useTranslations } from 'next-intl';
@@ -14,7 +14,6 @@ import generateUUID from '@/services/generateUUID';
 import StopInfo from '@/components/StopInfo/StopInfo';
 import StopTimetable from '@/components/StopsExplorerTimetable/StopsExplorerTimetable';
 import NoDataLabel from '@/components/NoDataLabel/NoDataLabel';
-import { DebugContext } from '@/contexts/DebugContext';
 
 export default function StopsExplorer({ urlStopId }) {
   //
@@ -23,8 +22,6 @@ export default function StopsExplorer({ urlStopId }) {
   // A. Setup variables
 
   const t = useTranslations('StopsExplorer');
-
-  const debugContext = useContext(DebugContext);
 
   const { stopsExplorerMap } = useMap();
 
