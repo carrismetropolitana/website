@@ -2,8 +2,8 @@
 
 import { SWRConfig } from 'swr';
 import { MantineProvider } from '@mantine/core';
-import { useColorScheme } from '@mantine/hooks';
 import { MapProvider } from 'react-map-gl/maplibre';
+import { DebugProvider } from '@/contexts/DebugContext';
 
 export default function Providers({ children }) {
   //
@@ -27,15 +27,12 @@ export default function Providers({ children }) {
     //
   };
 
-  // hook will return either 'dark' or 'light' on client
-  // and always 'light' during ssr as window.matchMedia is not available
-  const preferredColorScheme = useColorScheme();
-
   return (
     <SWRConfig value={swrOptions}>
-      {/* <MantineProvider theme={{ colorScheme: preferredColorScheme }} withGlobalStyles withNormalizeCSS> */}
       <MantineProvider withGlobalStyles withNormalizeCSS>
-        <MapProvider>{children}</MapProvider>
+        <DebugProvider>
+          <MapProvider>{children}</MapProvider>
+        </DebugProvider>
       </MantineProvider>
     </SWRConfig>
   );

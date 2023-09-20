@@ -3,12 +3,13 @@
 import useSWR from 'swr';
 import styles from './StopsExplorerTimetableRow.module.css';
 import LineDisplay from '@/components/LineDisplay/LineDisplay';
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useContext } from 'react';
 import { convertOperationTimeStringTo24HourTimeString, getMinutesFromOperationTimeString } from '@/services/parseRelativeTime';
 import { useTranslations } from 'next-intl';
 import LiveIcon from '@/components/LiveIcon/LiveIcon';
 import { Divider } from '@mantine/core';
-import CopyBadge from '../CopyBadge/CopyBadge';
+import CopyBadge from '@/components/CopyBadge/CopyBadge';
+import { DebugContext } from '@/contexts/DebugContext';
 
 export default function StopsExplorerTimetableRow({ rowType, tripData, selectedTripId, onSelectTrip }) {
   //
@@ -17,6 +18,8 @@ export default function StopsExplorerTimetableRow({ rowType, tripData, selectedT
   // A. Setup variables
 
   const t = useTranslations('StopsExplorerTimetableRow');
+
+  const debugContext = useContext(DebugContext);
 
   const [tripEtaMinutes, setTripEtaMinutes] = useState();
   const [tripEtaString, setTripEtaString] = useState('');
@@ -155,15 +158,15 @@ export default function StopsExplorerTimetableRow({ rowType, tripData, selectedT
       </div>
 
       <div className={styles.tripDetails}>
-        <div className={styles.testData} onClick={(e) => e.stopPropagation()}>
-          <CopyBadge label={`trip_id: ${tripData.trip_id}`} value={tripData.trip_id} />
-          <CopyBadge label={`vehicle_id: ${tripData.vehicle_id}`} value={tripData.vehicle_id} />
-          <p>Observado: {tripData.observed_arrival}</p>
-          <p>Estimado: {tripData.estimated_arrival}</p>
-          <p>Planeado: {tripData.scheduled_arrival}</p>
-        </div>
-
-        <Divider />
+        {debugContext.isDebug && (
+          <div className={styles.testData} onClick={(e) => e.stopPropagation()}>
+            <CopyBadge label={`trip_id: ${tripData.trip_id}`} value={tripData.trip_id} />
+            <CopyBadge label={`vehicle_id: ${tripData.vehicle_id}`} value={tripData.vehicle_id} />
+            <CopyBadge label={`Observado: ${tripData.observed_arrival}`} value={tripData.observed_arrival} />
+            <CopyBadge label={`Estimado: ${tripData.estimated_arrival}`} value={tripData.estimated_arrival} />
+            <CopyBadge label={`Planeado: ${tripData.scheduled_arrival}`} value={tripData.scheduled_arrival} />
+          </div>
+        )}
 
         <div className={styles.localitiesPerLine}>
           <p>Passa por</p>

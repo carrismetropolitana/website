@@ -2,7 +2,7 @@
 
 import styles from './StopsExplorer.module.css';
 import useSWR from 'swr';
-import { useState, useMemo, useEffect, useCallback } from 'react';
+import { useState, useMemo, useEffect, useCallback, useContext } from 'react';
 import { useMap } from 'react-map-gl/maplibre';
 import { Divider } from '@mantine/core';
 import { useTranslations } from 'next-intl';
@@ -14,7 +14,7 @@ import generateUUID from '@/services/generateUUID';
 import StopInfo from '@/components/StopInfo/StopInfo';
 import StopTimetable from '@/components/StopsExplorerTimetable/StopsExplorerTimetable';
 import NoDataLabel from '@/components/NoDataLabel/NoDataLabel';
-import { usePathname, useSearchParams, useRouter } from 'next/navigation';
+import { DebugContext } from '@/contexts/DebugContext';
 
 export default function StopsExplorer({ urlStopId }) {
   //
@@ -24,7 +24,7 @@ export default function StopsExplorer({ urlStopId }) {
 
   const t = useTranslations('StopsExplorer');
 
-  const searchParams = useSearchParams();
+  const debugContext = useContext(DebugContext);
 
   const { stopsExplorerMap } = useMap();
 
@@ -212,7 +212,8 @@ export default function StopsExplorer({ urlStopId }) {
         <>
           {allVehiclesValidating && <div className={styles.validating}>V</div>}
           {stopRealtimeValidating && <div className={styles.validating}>SR</div>}
-          <div className={styles.betaIcon}>Beta</div>
+          {debugContext.isDebug && <div className={styles.validating}>DEBUG ENABLED</div>}
+          <div className={styles.betaIcon}>TESTE</div>
         </>
       }
     >

@@ -3,16 +3,21 @@
 
 .container {
   display: flex;
-  background: #000000;
+  background-color: #000000;
   padding: 60px 30px;
   flex-direction: column;
   gap: 50px;
+  transition: background-color 300ms ease;
 }
 
 @media (max-width: 900px) {
   .container {
     gap: 30px;
   }
+}
+
+.container.debugEnabled {
+  background-color: var(--debug);
 }
 
 /* * */

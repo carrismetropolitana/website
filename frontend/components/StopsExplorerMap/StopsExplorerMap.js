@@ -1,15 +1,18 @@
 'use client';
 
 import OSMMap from '@/components/OSMMap/OSMMap';
-import { useEffect } from 'react';
+import { useContext, useEffect } from 'react';
 import * as turf from '@turf/turf';
 import { useMap, Source, Layer, Popup, GeolocateControl } from 'react-map-gl/maplibre';
+import { DebugContext } from '@/contexts/DebugContext';
 
 export default function StopsExplorerMap({ allStopsMapData, selectedStopMapData, selectedShapeMapData, selectedVehicleMapData, selectedMapStyle, selectedMapFeature, onSelectStopId }) {
   //
 
   //
   // A. Setup variables
+
+  const debugContext = useContext(DebugContext);
 
   const { stopsExplorerMap } = useMap();
 
@@ -83,7 +86,7 @@ export default function StopsExplorerMap({ allStopsMapData, selectedStopMapData,
   return (
     <OSMMap id="stopsExplorerMap" mapStyle={selectedMapStyle} onClick={handleMapClick} onMouseEnter={handleMapMouseEnter} onMouseLeave={handleMapMouseLeave} onMove={handleMapMove} interactiveLayerIds={['all-stops']}>
       <GeolocateControl />
-      {selectedVehicleMapData && (
+      {selectedVehicleMapData && debugContext.isDebug && (
         <Popup closeButton={false} closeOnClick={false} latitude={selectedVehicleMapData.geometry.coordinates[1]} longitude={selectedVehicleMapData.geometry.coordinates[0]} anchor="bottom">
           <div>{selectedVehicleMapData.properties.id}</div>
           <div>{selectedVehicleMapData.properties.timeString}</div>

@@ -701,5 +701,9 @@
         "label": "Procurar paragens por nome, código, localização...",
         "placeholder": "Procurar paragens por nome, código, localização...",
         "no_results": "Nenhum Resultado Encontrado"
+    },
+    "DebugToggle": {
+        "enabled": "Disable Debug",
+        "disabled": "Enable Debug"
     }
 }

@@ -157,6 +157,12 @@
 /* * */
 /* TEST DATA */
 
+.testData {
+  padding: 10px;
+  border: 1px dashed var(--debug);
+  border-radius: 3px;
+}
+
 .testData,
 .testData p {
   display: flex;
