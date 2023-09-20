@@ -9,12 +9,12 @@ export default function AppTopBar() {
           <div className={styles.indicatorActive} />
         </div>
       </a>
-      <p className={`${styles.link} ${styles.active}`}>
+      <div className={`${styles.link} ${styles.active}`}>
         <div className={styles.label}>Carris Metropolitana</div>
         <div className={styles.indicatorWrapper}>
           <div className={styles.indicatorActive} />
         </div>
-      </p>
+      </div>
       <a href="//www.navegante.pt/" className={styles.link}>
         <div className={styles.label}>navegante®</div>
         <div className={styles.indicatorWrapper}>
