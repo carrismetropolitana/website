@@ -7,9 +7,16 @@
   opacity: 0.3;
   cursor: pointer;
   transition: all 300ms ease;
+  width: 100%;
 }
 
 .toggle:hover {
   opacity: 0.4;
   text-decoration: none;
 }
+
+/* @media (max-width: 900px) {
+  .toggle {
+    text-align: center;
+  }
+} */

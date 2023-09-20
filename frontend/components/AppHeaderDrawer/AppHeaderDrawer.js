@@ -5,7 +5,8 @@ import styles from './AppHeaderDrawer.module.css';
 import { Drawer, Button, ActionIcon } from '@mantine/core';
 import { useTranslations } from 'next-intl';
 import { useDisclosure } from '@mantine/hooks';
-import { IconMenu2 } from '@tabler/icons-react';
+import { IconMenu2, IconX } from '@tabler/icons-react';
+import DebugToggle from '../DebugToggle/DebugToggle';
 
 export default function AppHeaderDrawer() {
   //
@@ -13,7 +14,7 @@ export default function AppHeaderDrawer() {
   //
   // A. Setup variables
 
-  const t = useTranslations('AppFooterNav');
+  const t = useTranslations('AppHeaderDrawer');
 
   const [opened, { open, close }] = useDisclosure(false);
 
@@ -24,6 +25,11 @@ export default function AppHeaderDrawer() {
     <>
       <Drawer opened={opened} onClose={close} position="right" overlayProps={{ backgroundOpacity: 0.5, blur: 4 }} withCloseButton={false} padding={0}>
         <div className={styles.container}>
+          <div className={styles.closeButton}>
+            <ActionIcon onClick={close} size="xl" variant="light" color="white" aria-label={t('close.label')}>
+              <IconX size={30} />
+            </ActionIcon>
+          </div>
           <div className={styles.group}>
             <h1>{t('travel.title')}</h1>
             <a href="https://www.carrismetropolitana.pt/horarios/">{t('travel.links.schedules')}</a>
@@ -40,7 +46,7 @@ export default function AppHeaderDrawer() {
           </div>
           <div className={styles.group}>
             <h1>{t('inform.title')}</h1>
-            <a href="https://www.carrismetropolitana.pt/espacos-navegante/">{t('inform.links.helpdesks')}</a>
+            <a href="https://on.carrismetropolitana.pt/encm">{t('inform.links.helpdesks')}</a>
             <a href="https://www.carrismetropolitana.pt/apoio/">{t('inform.links.help')}</a>
             <a href="https://www.carrismetropolitana.pt/perguntas-frequentes/1530/">{t('inform.links.faq')}</a>
             <a href="https://www.carrismetropolitana.pt/noticias/">{t('inform.links.news')}</a>
@@ -57,6 +63,7 @@ export default function AppHeaderDrawer() {
             <a className={styles.version} href="https://www.github.com/carrismetropolitana/website" target="_blank">
               {pjson.version}
             </a>
+            <DebugToggle />
           </div>
         </div>
       </Drawer>

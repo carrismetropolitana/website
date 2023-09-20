@@ -13,6 +13,18 @@
 }
 
 /* * */
+/* CLOSE BUTTON */
+
+.closeButton {
+  position: absolute;
+  display: flex;
+  justify-content: flex-end;
+  width: 100%;
+  top: 20px;
+  right: 20px;
+}
+
+/* * */
 /* GROUPS */
 
 .group,

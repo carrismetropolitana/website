@@ -178,9 +178,9 @@ export default function StopsExplorer({ urlStopId }) {
         // Save the current stop id
         setSelectedStopId(stopId);
         // Reset other selected features
-        setSelectedTripId();
-        setSelectedPatternId();
-        setSelectedShapeId();
+        // setSelectedTripId();
+        // setSelectedPatternId();
+        // setSelectedShapeId();
       }
     },
     [allStopsMapData?.features, stopsExplorerMap, urlStopId]
@@ -212,8 +212,7 @@ export default function StopsExplorer({ urlStopId }) {
         <>
           {allVehiclesValidating && <div className={styles.validating}>V</div>}
           {stopRealtimeValidating && <div className={styles.validating}>SR</div>}
-          {debugContext.isDebug && <div className={styles.validating}>DEBUG ENABLED</div>}
-          <div className={styles.betaIcon}>TESTE</div>
+          <div className={styles.betaIcon}>BETA</div>
         </>
       }
     >

@@ -615,6 +615,46 @@
             }
         }
     },
+    "AppHeaderDrawer": {
+        "close": {
+            "label": "Fechar"
+        },
+        "travel": {
+            "title": "Viajar",
+            "links": {
+                "schedules": "Horários",
+                "stops": "Paragens",
+                "planner": "Planeador"
+            }
+        },
+        "purchase": {
+            "title": "Comprar",
+            "links": {
+                "cards": "Cartões",
+                "discounts": "Descontos",
+                "frequent": "Viagens Frequentes",
+                "ocasional": "Viagens Ocasionais",
+                "tariffs": "Tarifas"
+            }
+        },
+        "inform": {
+            "title": "Informar",
+            "links": {
+                "helpdesks": "Espaços navegante®",
+                "help": "Apoio ao Passageiro",
+                "faq": "Questões Frequentes",
+                "news": "Notícias"
+            }
+        },
+        "corporate": {
+            "links": {
+                "brand": "Carris Metropolitana",
+                "jobs": "Recrutamento",
+                "opendata": "Dados Abertos",
+                "status": "Estado"
+            }
+        }
+    },
     "EncmExplorer": {
         "title": "Espaços navegante® Carris Metropolitana"
     },
