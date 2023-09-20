@@ -5,7 +5,7 @@
   justify-content: stretch;
   gap: var(--size-sm);
   width: 100%;
-  max-width: 1300px;
+  max-width: 1400px;
   height: 100%;
   flex-grow: 1;
   position: relative;

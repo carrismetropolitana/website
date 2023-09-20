@@ -142,7 +142,7 @@
   color: var(--gray4);
   display: flex;
   flex-direction: row;
-  gap: 1px 5px;
+  gap: 1px 4px;
   align-items: center;
   justify-content: flex-start;
   flex-wrap: wrap;
