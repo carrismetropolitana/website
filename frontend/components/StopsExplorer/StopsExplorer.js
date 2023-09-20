@@ -175,9 +175,9 @@ export default function StopsExplorer({ urlStopId }) {
         // Save the current stop id
         setSelectedStopId(stopId);
         // Reset other selected features
-        // setSelectedTripId();
-        // setSelectedPatternId();
-        // setSelectedShapeId();
+        setSelectedTripId();
+        setSelectedPatternId();
+        setSelectedShapeId();
       }
     },
     [allStopsMapData?.features, stopsExplorerMap, urlStopId]
