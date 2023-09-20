@@ -50,7 +50,7 @@ export default function AppHeader() {
           title={t('menus.inform.label')}
           items={[
             { label: t('menus.inform.items.schools.label'), url: 'https://escolas.carrismetropolitana.pt', target: '_blank' },
-            { label: t('menus.inform.items.encm.label'), url: 'https://on.carrismetropolitana.pt/encm' },
+            { label: t('menus.inform.items.encm.label'), url: '/encm' },
             { label: t('menus.inform.items.help.label'), url: 'https://www.carrismetropolitana.pt/apoio' },
             { label: t('menus.inform.items.faq.label'), url: 'https://www.carrismetropolitana.pt/perguntas-frequentes/1530' },
             { label: t('menus.inform.items.news.label'), url: 'https://www.carrismetropolitana.pt/noticias' },
