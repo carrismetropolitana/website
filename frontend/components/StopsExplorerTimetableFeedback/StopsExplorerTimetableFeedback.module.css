@@ -53,3 +53,15 @@
 .answers:hover .negative:not(:hover) {
   opacity: 0.5;
 }
+
+/* * */
+/* THANK YOU */
+
+.thankYou {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--green-7);
+}

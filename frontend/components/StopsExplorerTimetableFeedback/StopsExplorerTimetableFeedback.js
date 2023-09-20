@@ -12,6 +12,7 @@ export default function StopsExplorerTimetableFeedback({ tripData, selectedStopI
 
   const t = useTranslations('StopsExplorerTimetableFeedback');
 
+  const [isVisible, setIsVisible] = useState(true);
   const [isAnswered, setIsAnswered] = useState(false);
 
   //
@@ -20,6 +21,7 @@ export default function StopsExplorerTimetableFeedback({ tripData, selectedStopI
   const handleClickAnswer = (e) => {
     e.stopPropagation();
     setIsAnswered(true);
+    setTimeout(() => setIsVisible(false), 10000);
   };
 
   //
@@ -38,8 +40,6 @@ export default function StopsExplorerTimetableFeedback({ tripData, selectedStopI
       </div>
     </div>
   ) : (
-    <div className={styles.container}>
-      <div className={styles.message}>{t('thank_you')}</div>
-    </div>
+    isVisible && <div className={styles.thankYou}>{t('thank_you')}</div>
   );
 }
