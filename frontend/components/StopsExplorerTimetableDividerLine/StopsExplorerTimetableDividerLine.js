@@ -12,6 +12,8 @@ export default function StopsExplorerTimetableDividerLine() {
   const currentHours = currentTime.getHours();
   const currentMinutes = currentTime.getMinutes();
 
+  const numberFormatter = Intl.NumberFormat('pt-PT', { minimumIntegerDigits: 2 });
+
   //
   // B. Render components
 
@@ -20,9 +22,9 @@ export default function StopsExplorerTimetableDividerLine() {
       <div className={styles.circle}></div>
       <div className={styles.line}></div>
       <div className={styles.time}>
-        {currentHours}
+        {numberFormatter.format(currentHours)}
         <span>:</span>
-        {currentMinutes}
+        {numberFormatter.format(currentMinutes)}
       </div>
     </div>
   );
