@@ -194,15 +194,15 @@ export default function StopsExplorerTimetableRow({ rowType, tripData, selectedT
 
         <div className={styles.localitiesPerLine}>
           <p>Passa por</p>
-          <div className={styles.localities}>
+          <p className={styles.localities}>
             {patternData?.localities?.length > 0 &&
               patternData.localities.map((locality, index) => (
-                <div key={index}>
-                  {index > 0 && '•'}
-                  <p style={{ color: 'var(--gray7)' }}>{locality}</p>
-                </div>
+                <>
+                  {index > 0 && <span> • </span>}
+                  {locality}
+                </>
               ))}
-          </div>
+          </p>
         </div>
       </div>
     </div>
