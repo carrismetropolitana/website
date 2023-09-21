@@ -33,32 +33,32 @@ export default function AppHeaderDrawer() {
           </div>
           <div className={styles.group}>
             <h1>{t('travel.title')}</h1>
-            <Link href="https://www.carrismetropolitana.pt/horarios/">{t('travel.links.schedules')}</Link>
-            <Link href="https://www.carrismetropolitana.pt/paragens/">{t('travel.links.stops')}</Link>
-            <Link href="https://www.carrismetropolitana.pt/planeador/">{t('travel.links.planner')}</Link>
+            <Link href="https://www.carrismetropolitana.pt/horarios">{t('travel.links.schedules')}</Link>
+            <Link href="/stops">{t('travel.links.stops')}</Link>
+            <Link href="https://www.carrismetropolitana.pt/planeador">{t('travel.links.planner')}</Link>
           </div>
           <div className={styles.group}>
             <h1>{t('purchase.title')}</h1>
-            <Link href="https://www.carrismetropolitana.pt/cartoes/">{t('purchase.links.cards')}</Link>
-            <Link href="https://www.carrismetropolitana.pt/descontos/">{t('purchase.links.discounts')}</Link>
-            <Link href="https://www.carrismetropolitana.pt/viagens-frequentes/">{t('purchase.links.frequent')}</Link>
-            <Link href="https://www.carrismetropolitana.pt/viagens-ocasionais/">{t('purchase.links.ocasional')}</Link>
-            <Link href="https://www.carrismetropolitana.pt/tarifarios/">{t('purchase.links.tariffs')}</Link>
+            <Link href="https://www.carrismetropolitana.pt/cartoes">{t('purchase.links.cards')}</Link>
+            <Link href="https://www.carrismetropolitana.pt/descontos">{t('purchase.links.discounts')}</Link>
+            <Link href="https://www.carrismetropolitana.pt/viagens-frequentes">{t('purchase.links.frequent')}</Link>
+            <Link href="https://www.carrismetropolitana.pt/viagens-ocasionais">{t('purchase.links.ocasional')}</Link>
+            <Link href="https://www.carrismetropolitana.pt/tarifarios">{t('purchase.links.tariffs')}</Link>
           </div>
           <div className={styles.group}>
             <h1>{t('inform.title')}</h1>
             <Link href="/encm">{t('inform.links.helpdesks')}</Link>
-            <Link href="https://www.carrismetropolitana.pt/apoio/">{t('inform.links.help')}</Link>
-            <Link href="https://www.carrismetropolitana.pt/perguntas-frequentes/1530/">{t('inform.links.faq')}</Link>
-            <Link href="https://www.carrismetropolitana.pt/noticias/">{t('inform.links.news')}</Link>
+            <Link href="https://www.carrismetropolitana.pt/apoio">{t('inform.links.help')}</Link>
+            <Link href="https://www.carrismetropolitana.pt/perguntas-frequentes/1530">{t('inform.links.faq')}</Link>
+            <Link href="https://www.carrismetropolitana.pt/noticias">{t('inform.links.news')}</Link>
           </div>
           <div className={styles.corporate}>
-            <Link href="https://www.carrismetropolitana.pt/carris-metropolitana/">{t('corporate.links.brand')}</Link>
-            <Link href="https://recrutamento.carrismetropolitana.pt/" target="_blank">
+            <Link href="https://www.carrismetropolitana.pt/carris-metropolitana">{t('corporate.links.brand')}</Link>
+            <Link href="https://recrutamento.carrismetropolitana.pt" target="_blank">
               {t('corporate.links.jobs')}
             </Link>
-            <Link href="https://www.carrismetropolitana.pt/opendata/">{t('corporate.links.opendata')}</Link>
-            <Link href="https://status.carrismetropolitana.pt/" target="_blank">
+            <Link href="https://www.carrismetropolitana.pt/opendata">{t('corporate.links.opendata')}</Link>
+            <Link href="https://status.carrismetropolitana.pt" target="_blank">
               {t('corporate.links.status')}
             </Link>
             <Link className={styles.version} href="https://www.github.com/carrismetropolitana/website" target="_blank">

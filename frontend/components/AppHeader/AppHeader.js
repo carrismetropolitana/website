@@ -32,7 +32,7 @@ export default function AppHeader() {
           title={t('menus.travel.label')}
           items={[
             { label: t('menus.travel.items.schedules.label'), url: 'https://www.carrismetropolitana.pt/horarios' },
-            { label: t('menus.travel.items.stops.label'), url: 'https://www.carrismetropolitana.pt/paragens' },
+            { label: t('menus.travel.items.stops.label'), url: '/stops' },
             { label: t('menus.travel.items.planner.label'), url: 'https://www.carrismetropolitana.pt/planeador' },
           ]}
         />
