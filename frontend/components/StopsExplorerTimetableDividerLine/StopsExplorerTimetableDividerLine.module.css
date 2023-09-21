@@ -44,11 +44,15 @@
 
 .time span {
   font-weight: 800;
-  animation: blink-animation 2s steps(2, start) infinite;
+  animation: 2s blink step-start infinite;
 }
 
-@keyframes blink-animation {
+@keyframes blink {
+  from,
   to {
-    opacity: 0.25;
+    opacity: 0.9;
+  }
+  50% {
+    opacity: 0.4;
   }
 }
