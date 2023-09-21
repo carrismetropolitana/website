@@ -30,17 +30,22 @@ export default function StopsExplorerTimetableFeedback({ tripData, selectedStopI
 
   const handleSendFeedback = async (sentiment) => {
     //
-    await fetch('https://grafana.carrismetropolitana.pt/feedback/stopsExplorerRealtime', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json; charset=utf-8' },
-      body: JSON.stringify({
-        stop_id: selectedStopId,
-        trip_id: tripData.trip_id,
-        vehicle_id: tripData.vehicle_id,
-        sentiment: sentiment,
-        details: tripData,
-      }),
-    });
+    try {
+      await fetch('https://grafana.carrismetropolitana.pt/feedback/stopsExplorerRealtime', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json; charset=utf-8' },
+        body: JSON.stringify({
+          stop_id: selectedStopId,
+          trip_id: tripData.trip_id,
+          vehicle_id: tripData.vehicle_id,
+          sentiment: sentiment,
+          details: tripData,
+        }),
+      });
+    } catch (error) {
+      console.log(error);
+    }
+
     //
     setIsAnswered(true);
     setTimeout(() => setIsVisible(false), 10000);
