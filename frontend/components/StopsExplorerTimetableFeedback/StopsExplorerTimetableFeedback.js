@@ -18,8 +18,30 @@ export default function StopsExplorerTimetableFeedback({ tripData, selectedStopI
   //
   // B. Handle actions
 
-  const handleClickAnswer = (e) => {
+  const handleClickPositive = async (e) => {
     e.stopPropagation();
+    await handleSendFeedback(1);
+  };
+
+  const handleClickNegative = async (e) => {
+    e.stopPropagation();
+    await handleSendFeedback(0);
+  };
+
+  const handleSendFeedback = async (sentiment) => {
+    //
+    await fetch('https://grafana.carrismetropolitana.pt/feedback/stopsExplorerRealtime', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json; charset=utf-8' },
+      body: JSON.stringify({
+        stop_id: selectedStopId,
+        trip_id: tripData.trip_id,
+        vehicle_id: tripData.vehicle_id,
+        sentiment: sentiment,
+        details: tripData,
+      }),
+    });
+    //
     setIsAnswered(true);
     setTimeout(() => setIsVisible(false), 10000);
   };
@@ -31,10 +53,10 @@ export default function StopsExplorerTimetableFeedback({ tripData, selectedStopI
     <div className={styles.container}>
       <div className={styles.message}>{t('message')}</div>
       <div className={styles.answers}>
-        <div className={`${styles.positive} ${styles.hover}`} onClick={handleClickAnswer}>
+        <div className={`${styles.positive} ${styles.hover}`} onClick={handleClickPositive}>
           {t('answers.positive')}
         </div>
-        <div className={`${styles.negative} ${styles.hover}`} onClick={handleClickAnswer}>
+        <div className={`${styles.negative} ${styles.hover}`} onClick={handleClickNegative}>
           {t('answers.negative')}
         </div>
       </div>
