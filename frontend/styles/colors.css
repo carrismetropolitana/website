@@ -23,7 +23,10 @@
   --realtime-75: rgba(0, 215, 50, 0.75);
   --realtime-100: rgba(0, 205, 50, 1);
 
-  /* REALTIME */
+  /* TIME RED */
+  --current-time-100: rgb(230, 75, 35);
+
+  /* GREEN */
   --green-7: #2b8a3e;
 
   /* * */
