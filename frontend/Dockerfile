@@ -1,7 +1,7 @@
 
 # # # # # # # # #
 
-FROM node:lts-alpine AS base
+FROM node:alpine AS base
 
 # # # # # # # # #
 
