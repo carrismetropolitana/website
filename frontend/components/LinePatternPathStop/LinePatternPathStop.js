@@ -7,7 +7,6 @@ import LinePatternPathSpine from '../LinePatternPathSpine/LinePatternPathSpine';
 import LinePatternPathTimetable from '../LinePatternPathTimetable/LinePatternPathTimetable';
 import { useMemo } from 'react';
 import StopName from '../StopName/StopName';
-import StopFacilities from '../StopFacilities/StopFacilities';
 import { Space } from '@mantine/core';
 import StopPDF from '../StopPDF/StopPDF';
 import StopRealTime from '../StopRealTime/StopRealTime';
@@ -63,7 +62,6 @@ export default function LinePatternPathStop({ index, stop_code }) {
             <div>{stopData.code}</div>
             <StopName code={stopData.code} name={stopData.name} short_name={stopData.short_name} tts_name={stopData.tts_name} locality={stopData.locality} municipality={stopData.municipality_name} selected={isThisStopSelected} />
             {!isThisStopSelected && <StopRealTime pattern_code={lineForm.values.pattern_code} stop_code={stopData.code} />}
-            <StopFacilities facilities={stopData.near_services} />
           </div>
 
           {isThisStopSelected && (
