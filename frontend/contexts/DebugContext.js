@@ -1,5 +1,3 @@
-'use client';
-
 import { createContext, useReducer } from 'react';
 
 // A.
