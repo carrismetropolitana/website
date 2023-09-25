@@ -21,10 +21,10 @@ export async function generateMetadata({ params }) {
   } else {
     switch (params.locale) {
       case 'pt':
-        return { title: stopData.name, description: 'Estimativas de chegada em tempo real para os autocarros da Carris Metropolitana nesta paragem.' };
+        return { title: `Horários na paragem ${stopData.name}`, description: 'Estimativas de chegada em tempo real para os autocarros da Carris Metropolitana nesta paragem.' };
       default:
       case 'en':
-        return { title: stopData.name, description: 'Estimativas de chegada em tempo real para os autocarros da Carris Metropolitana nesta paragem.' };
+        return { title: `Horários na paragem ${stopData.name}`, description: 'Estimativas de chegada em tempo real para os autocarros da Carris Metropolitana nesta paragem.' };
     }
   }
 
