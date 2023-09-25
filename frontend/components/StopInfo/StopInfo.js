@@ -1,10 +1,10 @@
 import useSWR from 'swr';
 import styles from './StopInfo.module.css';
-import Loader from '../Loader/Loader';
-import CopyBadge from '../CopyBadge/CopyBadge';
-import FacilityIcon from '../FacilityIcon/FacilityIcon';
-import { NewLineBadge } from '../NewLineBadge/NewLineBadge';
-import StopName from '../StopName/StopName';
+import Loader from '@/components/Loader/Loader';
+import CopyBadge from '@/components/CopyBadge/CopyBadge';
+import FacilityIcon from '@/components/Facilities/FacilityIcon';
+import { NewLineBadge } from '@/components/NewLineBadge/NewLineBadge';
+import StopName from '@/components/StopName/StopName';
 
 export default function StopInfo({ selectedStopId }) {
   //
@@ -42,7 +42,7 @@ export default function StopInfo({ selectedStopId }) {
           {stopData.facilities.length > 0 && (
             <div className={styles.equipments}>
               {stopData.facilities.map((e, index) => (
-                <FacilityIcon key={index} name={e} />
+                <FacilityIcon key={index} name={e} size={28} />
               ))}
             </div>
           )}

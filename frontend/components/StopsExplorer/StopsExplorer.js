@@ -27,6 +27,8 @@ export default function StopsExplorer({ urlStopId }) {
 
   const [selectedMapStyle, setSelectedMapStyle] = useState('map');
 
+  const [isLoading, setIsLoading] = useState(false);
+
   const [selectedStopId, setSelectedStopId] = useState();
   const [selectedMapFeature, setSelectedMapFeature] = useState();
   const [selectedPatternId, setSelectedPatternId] = useState();
@@ -146,41 +148,45 @@ export default function StopsExplorer({ urlStopId }) {
     (stopId) => {
       // Only do something if feature is set
       if (stopId) {
-        // Get all currently rendered features and mark all of them as unselected
-        const stopMapFeature = allStopsMapData?.features.find((f) => f.properties?.id === stopId);
-        // Set default map zoom and speed levels
-        const defaultSpeed = 4000;
-        const defaultZoom = 17;
-        const defaultZoomMargin = 3;
-        // Check if selected stop is within rendered bounds
-        const renderedFeatures = stopsExplorerMap.queryRenderedFeatures({ layers: ['all-stops'] });
-        const isStopCurrentlyRendered = renderedFeatures.find((item) => item.properties?.id === stopMapFeature.properties?.id);
-        // Get map current zoom level
-        const currentZoom = stopsExplorerMap.getZoom();
-        // If the stop is visible and the zoom is not too far back (plus a little margin)...
-        if (isStopCurrentlyRendered && currentZoom + defaultZoomMargin > defaultZoom) {
-          // ...then simply ease to it.
-          stopsExplorerMap.easeTo({ center: stopMapFeature?.geometry?.coordinates, zoom: currentZoom, duration: defaultSpeed * 0.25 });
-        } else {
-          // If the zoom is too far, or the desired stop is not visible, then fly to it
-          stopsExplorerMap.flyTo({ center: stopMapFeature?.geometry?.coordinates, zoom: defaultZoom, duration: defaultSpeed });
-        }
+        const foundStop = allStopsData.find((item) => item.id === stopId);
+        if (foundStop) {
+          // Get all currently rendered features and mark all of them as unselected
+          const stopMapFeature = allStopsMapData?.features.find((f) => f.properties?.id === stopId);
+          // Set default map zoom and speed levels
+          const defaultSpeed = 4000;
+          const defaultZoom = 17;
+          const defaultZoomMargin = 3;
+          // Check if selected stop is within rendered bounds
+          const renderedFeatures = stopsExplorerMap.queryRenderedFeatures({ layers: ['all-stops'] });
+          const isStopCurrentlyRendered = renderedFeatures.find((item) => item.properties?.id === stopMapFeature.properties?.id);
+          // Get map current zoom level
+          const currentZoom = stopsExplorerMap.getZoom();
+          // If the stop is visible and the zoom is not too far back (plus a little margin)...
+          if (isStopCurrentlyRendered && currentZoom + defaultZoomMargin > defaultZoom) {
+            // ...then simply ease to it.
+            stopsExplorerMap.easeTo({ center: stopMapFeature?.geometry?.coordinates, zoom: currentZoom, duration: defaultSpeed * 0.25 });
+          } else {
+            // If the zoom is too far, or the desired stop is not visible, then fly to it
+            stopsExplorerMap.flyTo({ center: stopMapFeature?.geometry?.coordinates, zoom: defaultZoom, duration: defaultSpeed });
+          }
 
-        if (urlStopId !== stopId) {
-          window.history.replaceState({ ...window.history.state, as: `/stops/${stopId}`, url: `/stops/${stopId}` }, '', `/stops/${stopId}`);
-        }
+          if (urlStopId !== stopId) {
+            window.history.replaceState({ ...window.history.state, as: `/stops/${stopId}`, url: `/stops/${stopId}` }, '', `/stops/${stopId}`);
+            document.title = foundStop.name;
+          }
 
-        // Save the current feature to state and mark it as selected
-        setSelectedMapFeature(stopMapFeature);
-        // Save the current stop id
-        setSelectedStopId(stopId);
-        // Reset other selected features
-        setSelectedTripId();
-        setSelectedPatternId();
-        setSelectedShapeId();
+          // Save the current feature to state and mark it as selected
+          setSelectedMapFeature(stopMapFeature);
+          // Save the current stop id
+          setSelectedStopId(stopId);
+          // Reset other selected features
+          setSelectedTripId();
+          setSelectedPatternId();
+          setSelectedShapeId();
+        }
       }
     },
-    [allStopsMapData?.features, stopsExplorerMap, urlStopId]
+    [allStopsData, allStopsMapData?.features, stopsExplorerMap, urlStopId]
   );
 
   const handleSelectTrip = (tripId, patternId, shapeId) => {

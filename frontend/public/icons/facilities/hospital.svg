@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="24px" height="24px" viewBox="0 0 24 24" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>hospital</title>
+    <g id="hospital" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Group-5">
+            <path d="M12,24 L12,24 C5.373,24 0,18.628 0,12 C0,5.373 5.373,0 12,0 C18.627,0 24,5.373 24,12 C24,18.628 18.627,24 12,24" id="Fill-1" fill="#2869AF"></path>
+            <polygon id="Fill-3" fill="#FFFFFF" points="15.5015 6.3711 15.5015 10.9791 8.4965 10.9791 8.4965 6.3711 6.4545 6.3711 6.4545 17.6291 8.4965 17.6291 8.4965 13.0201 15.5015 13.0201 15.5015 17.6291 17.5455 17.6291 17.5455 6.3711"></polygon>
+        </g>
+    </g>
+</svg>

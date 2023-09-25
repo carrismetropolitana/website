@@ -19,26 +19,12 @@ module.exports = {
   },
   async redirects() {
     return [
-      {
-        source: '/horarios',
-        destination: '/lines',
-        permanent: true,
-      },
-      {
-        source: '/paragens',
-        destination: '/stops',
-        permanent: true,
-      },
-      {
-        source: '/espacos-navegante',
-        destination: '/encm',
-        permanent: true,
-      },
-      {
-        source: '/helpdesks',
-        destination: '/encm',
-        permanent: true,
-      },
+      { source: '/', destination: '/stops', permanent: false },
+      { source: '/stops', destination: '/stops/all', permanent: true },
+      //
+      { source: '/paragens', destination: '/stops', permanent: true },
+      { source: '/horarios', destination: '/lines', permanent: true },
+      { source: '/espacos-navegante', destination: '/encm', permanent: true },
     ];
   },
 };
