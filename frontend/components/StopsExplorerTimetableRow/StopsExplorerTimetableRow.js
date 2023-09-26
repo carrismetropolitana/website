@@ -184,7 +184,7 @@ export default function StopsExplorerTimetableRow({ rowType, tripData }) {
       <div className={styles.tripDetails}>
         {debugContext.isDebug && (
           <div className={styles.testData} onClick={(e) => e.stopPropagation()}>
-            <CopyBadge label={`stop_id: ${stopsExplorerContext.values.selected_stop_id}`} value={stopsExplorerContext.values.selected_stop_id} />
+            <CopyBadge label={`stop_id: ${stopsExplorerContext.entities.stop_id}`} value={stopsExplorerContext.entities.stop_id} />
             <CopyBadge label={`trip_id: ${tripData.trip_id}`} value={tripData.trip_id} />
             <CopyBadge label={`stop_seq: ${tripData.stop_sequence}`} value={tripData.stop_sequence} />
             <CopyBadge label={`vehicle_id: ${tripData.vehicle_id}`} value={tripData.vehicle_id} />
