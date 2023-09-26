@@ -4,7 +4,7 @@
 
 @media (max-width: 600px) {
   .container {
-    min-height: 50vh;
+    min-height: 10vh;
   }
 }
 
