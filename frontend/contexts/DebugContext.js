@@ -10,14 +10,14 @@ const DebugContext = createContext({
   toggleIsDebug: () => null,
 });
 
-// C.
+// B.
 // SETUP CUSTOM HOOKS
 
 export function useDebugContext() {
   return useContext(DebugContext);
 }
 
-// B.
+// C.
 // PROVIDER
 
 export const DebugContextProvider = ({ children }) => {
