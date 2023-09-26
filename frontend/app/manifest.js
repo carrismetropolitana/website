@@ -4,7 +4,7 @@ export default function manifest() {
     short_name: 'Horários',
     description: 'Horários em Tempo Real da Carris Metropolitana',
     start_url: '/',
-    display: 'standalone',
+    display: 'fullscreen',
     background_color: '#FFFFFF',
     theme_color: '#FFDD00',
   };
