@@ -31,9 +31,9 @@ export default function StopInfo() {
 
   useEffect(() => {
     if (!allStopsData) return;
-    const foundItem = allStopsData.find((item) => item.id === stopsExplorerContext.values.selected_stop_id);
+    const foundItem = allStopsData.find((item) => item.id === stopsExplorerContext.entities.stop_id);
     if (foundItem) setSelectedStopData(foundItem);
-  }, [allStopsData, stopsExplorerContext.values.selected_stop_id]);
+  }, [allStopsData, stopsExplorerContext.entities.stop_id]);
 
   //
   // D. Render components

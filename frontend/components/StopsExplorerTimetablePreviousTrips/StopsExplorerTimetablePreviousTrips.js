@@ -29,9 +29,9 @@ export default function StopsExplorerTimetablePreviousTrips({ tripsData }) {
     if (showAllTrips) {
       return tripsData;
     } else {
-      const selectedTripData = tripsData.find((item) => item.trip_id === stopsExplorerContext.values.selected_trip_id);
+      const selectedTripData = tripsData.find((item) => item.trip_id === stopsExplorerContext.entities.trip_id);
       const tripsThatShouldBeVisible = tripsData.slice(tripsData.length - previousTripsShownByDefault, tripsData.length);
-      const selectedTripIsAlreadyVisible = tripsThatShouldBeVisible.find((item) => item.trip_id === stopsExplorerContext.values.selected_trip_id);
+      const selectedTripIsAlreadyVisible = tripsThatShouldBeVisible.find((item) => item.trip_id === stopsExplorerContext.entities.trip_id);
       if (selectedTripData && !selectedTripIsAlreadyVisible) tripsThatShouldBeVisible.push(selectedTripData);
       tripsThatShouldBeVisible.sort((a, b) => {
         const timeStringA = a.scheduled_arrival.split(':').join('');
@@ -40,7 +40,7 @@ export default function StopsExplorerTimetablePreviousTrips({ tripsData }) {
       });
       return tripsThatShouldBeVisible;
     }
-  }, [stopsExplorerContext.values.selected_trip_id, showAllTrips, tripsData]);
+  }, [stopsExplorerContext.entities.trip_id, showAllTrips, tripsData]);
 
   //
   // C. Handle actions

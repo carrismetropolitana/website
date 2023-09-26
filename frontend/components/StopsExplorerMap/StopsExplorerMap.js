@@ -11,26 +11,26 @@ import generateUUID from '@/services/generateUUID';
 
 /* * */
 
-export default function StopsExplorerMap({ selectedMapStyle }) {
+export default function StopsExplorerMap() {
   //
 
   //
   // A. Setup variables
 
   const debugContext = useDebugContext();
-  const stopsExplorerContext = useStopsExplorerContext();
 
   const { stopsExplorerMap } = useMap();
+  const stopsExplorerContext = useStopsExplorerContext();
 
-  const [selectedMapFeature, setSelectedMapFeature] = useState(null);
+  const [selectedMapFeatute, setSelectedMapFeature] = useState(null);
 
   //
   // B. Fetch data
 
   const { data: allStopsData } = useSWR('https://api.carrismetropolitana.pt/stops');
   const { data: allVehiclesData } = useSWR('https://api.carrismetropolitana.pt/vehicles', { refreshInterval: 5000 });
-  const { data: selectedPatternData } = useSWR(stopsExplorerContext.values.selected_pattern_id && `https://api.carrismetropolitana.pt/patterns/${stopsExplorerContext.values.selected_pattern_id}`);
-  const { data: selectedShapeData } = useSWR(stopsExplorerContext.values.selected_shape_id && `https://api.carrismetropolitana.pt/shapes/${stopsExplorerContext.values.selected_shape_id}`);
+  const { data: selectedPatternData } = useSWR(stopsExplorerContext.entities.pattern_id && `https://api.carrismetropolitana.pt/patterns/${stopsExplorerContext.entities.pattern_id}`);
+  const { data: selectedShapeData } = useSWR(stopsExplorerContext.entities.shape_id && `https://api.carrismetropolitana.pt/shapes/${stopsExplorerContext.entities.shape_id}`);
 
   //
   // C. Transform data
@@ -56,8 +56,8 @@ export default function StopsExplorerMap({ selectedMapStyle }) {
   }, [allStopsData]);
 
   const selectedStopMapData = useMemo(() => {
-    if (allStopsData && stopsExplorerContext.values.selected_stop_id) {
-      const selectedStopData = allStopsData.find((item) => item.id === stopsExplorerContext.values.selected_stop_id);
+    if (allStopsData && stopsExplorerContext.entities.stop_id) {
+      const selectedStopData = allStopsData.find((item) => item.id === stopsExplorerContext.entities.stop_id);
       if (selectedStopData) {
         return {
           type: 'Feature',
@@ -72,7 +72,7 @@ export default function StopsExplorerMap({ selectedMapStyle }) {
       }
       return null;
     }
-  }, [allStopsData, stopsExplorerContext.values.selected_stop_id]);
+  }, [allStopsData, stopsExplorerContext.entities.stop_id]);
 
   const selectedShapeMapData = useMemo(() => {
     if (selectedPatternData && selectedShapeData) {
@@ -87,8 +87,8 @@ export default function StopsExplorerMap({ selectedMapStyle }) {
   }, [selectedPatternData, selectedShapeData]);
 
   const selectedVehicleMapData = useMemo(() => {
-    if (allVehiclesData && stopsExplorerContext.values.selected_trip_id) {
-      const selectedVehicleData = allVehiclesData.find((item) => item.trip_id && item.trip_id === stopsExplorerContext.values.selected_trip_id);
+    if (allVehiclesData && stopsExplorerContext.entities.trip_id) {
+      const selectedVehicleData = allVehiclesData.find((item) => item.trip_id && item.trip_id === stopsExplorerContext.entities.trip_id);
       if (selectedVehicleData) {
         return {
           type: 'Feature',
@@ -109,7 +109,7 @@ export default function StopsExplorerMap({ selectedMapStyle }) {
       }
       return null;
     }
-  }, [allVehiclesData, stopsExplorerContext.values.selected_trip_id]);
+  }, [allVehiclesData, stopsExplorerContext.entities.trip_id]);
 
   //
   // C. Handle actions
@@ -146,9 +146,9 @@ export default function StopsExplorerMap({ selectedMapStyle }) {
   // C. Handle actions
 
   useEffect(() => {
-    if (stopsExplorerContext.values.selected_stop_id) {
+    if (stopsExplorerContext.entities.stop_id) {
       // Get map feature matching currently selected stop_id
-      const stopMapFeature = allStopsMapData?.features.find((f) => f.properties?.id === stopsExplorerContext.values.selected_stop_id);
+      const stopMapFeature = allStopsMapData?.features.find((f) => f.properties?.id === stopsExplorerContext.entities.stop_id);
       if (!stopMapFeature) return;
       // Set default map zoom and speed levels
       const defaultSpeed = 4000;
@@ -170,11 +170,11 @@ export default function StopsExplorerMap({ selectedMapStyle }) {
       // Update local state
       setSelectedMapFeature(stopMapFeature);
     }
-  }, [allStopsMapData?.features, stopsExplorerContext.values.selected_stop_id, stopsExplorerMap]);
+  }, [allStopsMapData?.features, stopsExplorerContext.entities.stop_id, stopsExplorerMap]);
 
   const handleMapClick = (event) => {
     if (event?.features[0]) {
-      stopsExplorerContext.selectStop(event.features[0].properties?.id);
+      stopsExplorerContext.updateEntities({ stop_id: event.features[0].properties?.id }, true);
     }
   };
 
@@ -191,14 +191,14 @@ export default function StopsExplorerMap({ selectedMapStyle }) {
   };
 
   const handleMapMove = () => {
-    if (selectedMapFeature) {
+    if (selectedMapFeatute) {
       // Get all currently rendered features and mark all of them as unselected
       const allRenderedFeatures = stopsExplorerMap.queryRenderedFeatures();
       allRenderedFeatures.forEach(function (f) {
         stopsExplorerMap.setFeatureState({ source: 'all-stops', id: f.id }, { selected: false });
       });
       // Then mark the selected one as selected
-      stopsExplorerMap.setFeatureState({ source: 'all-stops', id: selectedMapFeature.properties.mapid }, { selected: true });
+      stopsExplorerMap.setFeatureState({ source: 'all-stops', id: selectedMapFeatute.properties.mapid }, { selected: true });
     }
   };
 
@@ -206,7 +206,7 @@ export default function StopsExplorerMap({ selectedMapStyle }) {
   // G. Render components
 
   return (
-    <OSMMap id="stopsExplorerMap" mapStyle={selectedMapStyle} onClick={handleMapClick} onMouseEnter={handleMapMouseEnter} onMouseLeave={handleMapMouseLeave} onMove={handleMapMove} interactiveLayerIds={['all-stops']}>
+    <OSMMap id="stopsExplorerMap" mapStyle={stopsExplorerContext.map.style} onClick={handleMapClick} onMouseEnter={handleMapMouseEnter} onMouseLeave={handleMapMouseLeave} onMove={handleMapMove} interactiveLayerIds={['all-stops']}>
       <GeolocateControl />
       {selectedVehicleMapData && debugContext.isDebug && (
         <Popup closeButton={false} closeOnClick={false} latitude={selectedVehicleMapData.geometry.coordinates[1]} longitude={selectedVehicleMapData.geometry.coordinates[0]} anchor="bottom">

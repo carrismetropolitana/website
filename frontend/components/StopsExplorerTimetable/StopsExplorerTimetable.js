@@ -30,7 +30,7 @@ export default function StopsExplorerTimetable() {
   //
   // B. Fetch data
 
-  const { data: stopRealtimeData, isLoading: stopRealtimeLoading } = useSWR(stopsExplorerContext.values.selected_stop_id && `https://api.carrismetropolitana.pt/stops/${stopsExplorerContext.values.selected_stop_id}/realtime`, {
+  const { data: stopRealtimeData, isLoading: stopRealtimeLoading } = useSWR(stopsExplorerContext.entities.stop_id && `https://api.carrismetropolitana.pt/stops/${stopsExplorerContext.entities.stop_id}/realtime`, {
     refreshInterval: 5000,
   });
 

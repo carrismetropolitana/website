@@ -142,8 +142,8 @@ export default function StopsExplorerTimetableRow({ rowType, tripData }) {
 
   const handleSelectTrip = () => {
     if (!tripData || !patternData) return;
-    if (stopsExplorerContext.values.selected_trip_id === tripData.trip_id) stopsExplorerContext.unselectTrip();
-    else stopsExplorerContext.updateValues({ selected_trip_id: tripData.trip_id, selected_pattern_id: tripData.pattern_id, selected_shape_id: patternData.shape_id, selected_vehicle_id: tripData.vehicle_id });
+    if (stopsExplorerContext.entities.trip_id === tripData.trip_id) stopsExplorerContext.updateEntities({ trip_id: null, pattern_id: null, shape_id: null, vehicle_id: null });
+    else stopsExplorerContext.updateEntities({ trip_id: tripData.trip_id, pattern_id: tripData.pattern_id, shape_id: patternData.shape_id, vehicle_id: tripData.vehicle_id });
   };
 
   //
@@ -154,7 +154,7 @@ export default function StopsExplorerTimetableRow({ rowType, tripData }) {
   if (tripIsAtLastStop && !debugContext.isDebug) return null;
 
   return (
-    <div className={`${styles.container} ${styles[tripRealtimeStatus]} ${stopsExplorerContext.values.selected_trip_id === tripData.trip_id && styles.selected}`} onClick={handleSelectTrip}>
+    <div className={`${styles.container} ${styles[tripRealtimeStatus]} ${stopsExplorerContext.entities.trip_id === tripData.trip_id && styles.selected}`} onClick={handleSelectTrip}>
       <div className={styles.tripSummary}>
         <LineDisplay short_name={tripData.line_id} long_name={patternData?.headsign} color={patternData?.color} text_color={patternData?.text_color} />
         {tripRealtimeStatus === 'passed' && (
@@ -202,8 +202,8 @@ export default function StopsExplorerTimetableRow({ rowType, tripData }) {
             {patternData?.localities?.length > 0 &&
               patternData.localities.map((locality, index) => (
                 <span key={index}>
-                  {index > 0 && <span> • </span>}
-                  {locality}
+                  {index > 0 && <span className={styles.localitySeparator}> • </span>}
+                  <span className={styles.localityName}>{locality}</span>
                 </span>
               ))}
           </p>

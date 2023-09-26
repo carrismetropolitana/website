@@ -82,7 +82,7 @@ export default function StopsExplorerToolbarSearch() {
     const selectedStopData = allStopsData.find((item) => item.id === chosenSelectItemValue);
     if (!selectedStopData) return;
     setSearchQuery(selectedStopData.name);
-    stopsExplorerContext.selectStop(chosenSelectItemValue);
+    stopsExplorerContext.updateEntities({ stop_id: chosenSelectItemValue }, true);
     comboboxStore.closeDropdown();
   };
 

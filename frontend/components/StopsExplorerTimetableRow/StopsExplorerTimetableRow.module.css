@@ -144,11 +144,14 @@
   white-space: normal;
   overflow: hidden;
   line-height: 1.5;
-  color: var(--gray8);
 }
 
-.localities span {
+.localitySeparator {
   color: var(--gray4);
+}
+
+.localityName {
+  color: var(--gray8);
 }
 
 /* * */

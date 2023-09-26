@@ -2,11 +2,10 @@
 
 import styles from './StopsExplorer.module.css';
 import useSWR from 'swr';
-import { useState, useEffect, useCallback } from 'react';
+import { useEffect } from 'react';
 import { useMap } from 'react-map-gl/maplibre';
 import { Divider } from '@mantine/core';
 import { useTranslations } from 'next-intl';
-import OSMMapDefaults from '@/components/OSMMap/OSMMap.config';
 import Pannel from '@/components/Pannel/Pannel';
 import StopsExplorerToolbar from '@/components/StopsExplorerToolbar/StopsExplorerToolbar';
 import StopsExplorerMap from '@/components/StopsExplorerMap/StopsExplorerMap';
@@ -24,8 +23,8 @@ export default function StopsExplorer({ urlStopId }) {
   // A. Setup variables
 
   const t = useTranslations('StopsExplorer');
+
   const { stopsExplorerMap } = useMap();
-  const [selectedMapStyle, setSelectedMapStyle] = useState('map');
   const stopsExplorerContext = useStopsExplorerContext();
 
   //
@@ -33,41 +32,31 @@ export default function StopsExplorer({ urlStopId }) {
 
   const { data: allStopsData, error: allStopsError, isLoading: allStopsLoading } = useSWR('https://api.carrismetropolitana.pt/stops');
   const { isValidating: allVehiclesValidating } = useSWR('https://api.carrismetropolitana.pt/vehicles', { refreshInterval: 5000 });
-  const { isValidating: stopRealtimeValidating } = useSWR(stopsExplorerContext.values.selected_stop_id && `https://api.carrismetropolitana.pt/stops/${stopsExplorerContext.values.selected_stop_id}/realtime`, { refreshInterval: 5000 });
+  const { isValidating: stopRealtimeValidating } = useSWR(stopsExplorerContext.entities.stop_id && `https://api.carrismetropolitana.pt/stops/${stopsExplorerContext.entities.stop_id}/realtime`, { refreshInterval: 5000 });
 
   //
-  // D. Handle actions
-
-  const handleMapReCenter = () => {
-    stopsExplorerMap.flyTo({ ...OSMMapDefaults.viewport, duration: 2000 });
-  };
-
-  const handleOpenInGoogleMaps = () => {
-    const center = stopsExplorerMap.getCenter();
-    const zoom = stopsExplorerMap.getZoom();
-    const zoomMargin = 2; // Compensate the difference between OSM and Google Maps
-    window.open(`https://www.google.com/maps/@${center.lat},${center.lng},${zoom + zoomMargin}z`, '_blank', 'noopener,noreferrer');
-  };
+  // C. Handle actions
 
   useEffect(() => {
-    if (stopsExplorerContext.values.selected_stop_id && allStopsData) {
-      const foundStop = allStopsData.find((item) => item.id === stopsExplorerContext.values.selected_stop_id);
+    if (stopsExplorerContext.entities.stop_id && allStopsData) {
+      const foundStop = allStopsData.find((item) => item.id === stopsExplorerContext.entities.stop_id);
       if (foundStop) {
-        const newUrl = `/stops/${stopsExplorerContext.values.selected_stop_id}`;
+        const newUrl = `/stops/${stopsExplorerContext.entities.stop_id}`;
         window.history.replaceState({ ...window.history.state, as: newUrl, url: newUrl }, '', newUrl);
         document.title = foundStop.name;
       }
     }
-  }, [allStopsData, stopsExplorerContext.values.selected_stop_id]);
+  }, [allStopsData, stopsExplorerContext.entities.stop_id]);
 
   useEffect(() => {
-    if (urlStopId && urlStopId !== 'all' && !stopsExplorerContext.values.selected_stop_id && stopsExplorerMap?.getSource('all-stops') !== undefined) {
-      stopsExplorerContext.selectStop(urlStopId);
+    if (urlStopId && urlStopId !== 'all' && allStopsData && !stopsExplorerContext.entities.stop_id && stopsExplorerMap?.getSource('all-stops') !== undefined) {
+      const foundStop = allStopsData.find((item) => item.id === urlStopId);
+      if (foundStop) stopsExplorerContext.updateEntities({ stop_id: urlStopId }, true);
     }
   });
 
   //
-  // E. Render components
+  // D. Render components
 
   return (
     <Pannel
@@ -83,12 +72,12 @@ export default function StopsExplorer({ urlStopId }) {
         </>
       }
     >
-      <StopsExplorerToolbar selectedMapStyle={selectedMapStyle} onSelectMapStyle={setSelectedMapStyle} onMapRecenter={handleMapReCenter} onOpenInGoogleMaps={handleOpenInGoogleMaps} />
+      <StopsExplorerToolbar />
       <Divider />
       <div className={styles.container}>
-        <StopsExplorerMap selectedMapStyle={selectedMapStyle} />
+        <StopsExplorerMap />
         <div className={styles.sidebar}>
-          {stopsExplorerContext.values.selected_stop_id ? (
+          {stopsExplorerContext.entities.stop_id ? (
             <>
               <StopInfo />
               <Divider />

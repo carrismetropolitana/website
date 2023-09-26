@@ -5,13 +5,17 @@ import { createContext, useCallback, useContext, useMemo, useState } from 'react
 // A.
 // SETUP INITIAL STATE
 
-const initialValues = {
-  // Selections
-  selected_stop_id: null,
-  selected_pattern_id: null,
-  selected_shape_id: null,
-  selected_vehicle_id: null,
-  selected_trip_id: null,
+const initialMapState = {
+  style: 'map',
+  auto_zoom: null,
+};
+
+const initialEntitiesState = {
+  stop_id: null,
+  pattern_id: null,
+  shape_id: null,
+  vehicle_id: null,
+  trip_id: null,
 };
 
 // B.
@@ -35,30 +39,26 @@ export function StopsExplorerContextProvider({ children }) {
   //
   // A. Setup state
 
-  const [values, setValues] = useState(initialValues);
+  const [mapState, setMapState] = useState(initialMapState);
+  const [entitiesState, setEntitiesState] = useState(initialEntitiesState);
 
   //
   // B. Setup actions
 
-  const updateValues = useCallback(
-    (newValues) => {
-      setValues({ ...values, ...newValues });
+  const updateMapState = useCallback(
+    (newMapState, reset = false) => {
+      if (reset) setMapState({ ...initialMapState, ...newMapState });
+      else setMapState({ ...mapState, ...newMapState });
     },
-    [values]
+    [mapState]
   );
 
-  const selectStop = useCallback(
-    (stopId) => {
-      setValues({ ...values, selected_stop_id: stopId, selected_pattern_id: null, selected_shape_id: null, selected_vehicle_id: null, selected_trip_id: null });
+  const updateEntitiesState = useCallback(
+    (newEntitiesState, reset = false) => {
+      if (reset) setEntitiesState({ ...initialEntitiesState, ...newEntitiesState });
+      else setEntitiesState({ ...entitiesState, ...newEntitiesState });
     },
-    [values]
-  );
-
-  const unselectTrip = useCallback(
-    (newValues) => {
-      setValues({ ...values, selected_pattern_id: null, selected_shape_id: null, selected_vehicle_id: null, selected_trip_id: null });
-    },
-    [values]
+    [entitiesState]
   );
 
   //
@@ -66,12 +66,14 @@ export function StopsExplorerContextProvider({ children }) {
 
   const contextObject = useMemo(
     () => ({
-      values,
-      selectStop,
-      updateValues,
-      unselectTrip,
+      //
+      map: mapState,
+      updateMap: updateMapState,
+      //
+      entities: entitiesState,
+      updateEntities: updateEntitiesState,
     }),
-    [values, selectStop, updateValues, unselectTrip]
+    [mapState, updateMapState, entitiesState, updateEntitiesState]
   );
 
   //
