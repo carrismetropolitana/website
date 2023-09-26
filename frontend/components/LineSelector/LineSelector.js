@@ -6,7 +6,9 @@ import { useTranslations } from 'next-intl';
 import { Select } from '@mantine/core';
 import styles from './LineSelector.module.css';
 import { useLineFormContext } from '@/forms/LineForm';
-import LineDisplay from '../LineDisplay/LineDisplay';
+import LineDisplay from '@/components/LineDisplay/LineDisplay';
+
+/* * */
 
 export default function LineSelector() {
   //
@@ -31,24 +33,24 @@ export default function LineSelector() {
     const collator = new Intl.Collator('en', { numeric: true, sensitivity: 'base' });
     allMunicipalitiesData.sort((a, b) => collator.compare(a.name, b.name));
     return allMunicipalitiesData.map((item) => {
-      return { value: item.code, label: item.name };
+      return { value: item.id, label: item.name };
     });
   }, [allMunicipalitiesData]);
 
   const allLinesDataFormatted = useMemo(() => {
     if (!allLinesData) return [];
     return allLinesData.map((item) => {
-      return { value: item.code, label: `${item.short_name} - ${item.long_name}`, color: item.color, text_color: item.text_color, short_name: item.short_name, long_name: item.long_name };
+      return { value: item.id, label: `${item.short_name} - ${item.long_name}`, color: item.color, text_color: item.text_color, short_name: item.short_name, long_name: item.long_name };
     });
   }, [allLinesData]);
 
   //
   // D. Handle actions
 
-  const handleSelectLine = (line_code) => {
-    lineForm.setFieldValue('line_code', line_code);
-    lineForm.setFieldValue('pattern_code', '');
-    lineForm.setFieldValue('stop_code', '');
+  const handleSelectLine = (lineId) => {
+    lineForm.setFieldValue('line_id', lineId);
+    lineForm.setFieldValue('pattern_id', '');
+    lineForm.setFieldValue('stop_id', '');
   };
 
   //
@@ -70,7 +72,7 @@ export default function LineSelector() {
         <Select
           aria-label={t('form.municipality_code.label')}
           placeholder={t('form.municipality_code.placeholder')}
-          nothingFound={t('form.municipality_code.nothingFound')}
+          nothingFoundMessage={t('form.municipality_code.nothingFound')}
           {...lineForm.getInputProps('municipality_code')}
           data={allMunicipalitiesDataFormatted}
           radius="sm"
@@ -81,7 +83,7 @@ export default function LineSelector() {
         <Select
           aria-label={t('form.line_code.label')}
           placeholder={t('form.line_code.placeholder')}
-          nothingFound={t('form.line_code.nothingFound')}
+          nothingFoundMessage={t('form.line_code.nothingFound')}
           {...lineForm.getInputProps('line_code')}
           onChange={handleSelectLine}
           data={allLinesDataFormatted}

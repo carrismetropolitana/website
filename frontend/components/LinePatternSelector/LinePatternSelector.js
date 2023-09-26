@@ -22,7 +22,7 @@ export default function LinePatternSelector() {
   //
   // B. Fetch data
 
-  const { data: lineData } = useSWR(lineForm.values.line_code && `https://api.carrismetropolitana.pt/lines/${lineForm.values.line_code}`);
+  const { data: lineData } = useSWR(lineForm.values.line_id && `https://api.carrismetropolitana.pt/lines/${lineForm.values.line_id}`);
 
   //
   // C. Format data
@@ -34,15 +34,15 @@ export default function LinePatternSelector() {
       // Initiate a temporaty variable to hold formatted patterns
       let formattedPatternOptions = [];
       // Loop through each pattern to retrieve its info
-      for (const patternCode of lineData.patterns) {
+      for (const patternId of lineData.patterns) {
         // Fetch pattern info
-        const response = await fetch(`https://api.carrismetropolitana.pt/patterns/${patternCode}`);
+        const response = await fetch(`https://api.carrismetropolitana.pt/patterns/${patternId}`);
         const patternData = await response.json();
         // Check if this pattern is valid on the selected date
         const isValidOnSelectedDate = patternData.valid_on.includes(lineForm.values.date_string);
         // Format response
         formattedPatternOptions.push({
-          value: patternCode,
+          value: patternId,
           label: patternData.headsign || 'no headsign',
           disabled: !isValidOnSelectedDate,
         });
@@ -50,8 +50,8 @@ export default function LinePatternSelector() {
       // Update state with formatted patterns
       setAllPatternsData(formattedPatternOptions);
       // Pre-select the first pattern if none is selected
-      if (!lineForm.values.pattern_code) {
-        lineForm.setFieldValue('pattern_code', lineData.patterns[0]);
+      if (!lineForm.values.pattern_id) {
+        lineForm.setFieldValue('pattern_id', lineData.patterns[0]);
       }
       //
     })();
@@ -60,9 +60,9 @@ export default function LinePatternSelector() {
   //
   // D. Handle actions
 
-  const handleSelectPattern = (pattern_code) => {
-    lineForm.setFieldValue('pattern_code', pattern_code);
-    lineForm.setFieldValue('stop_code', '');
+  const handleSelectPattern = (patternId) => {
+    lineForm.setFieldValue('pattern_id', patternId);
+    lineForm.setFieldValue('stop_id', '');
   };
 
   //
@@ -87,7 +87,7 @@ export default function LinePatternSelector() {
         <Select
           aria-label={t('form.pattern_code.label')}
           placeholder={t('form.pattern_code.placeholder')}
-          nothingFound={t('form.pattern_code.nothingFound')}
+          nothingFoundMessage={t('form.pattern_code.nothingFound')}
           {...lineForm.getInputProps('pattern_code')}
           onChange={handleSelectPattern}
           data={allPatternsData}

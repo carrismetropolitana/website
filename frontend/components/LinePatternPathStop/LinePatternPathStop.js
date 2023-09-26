@@ -18,7 +18,7 @@ import Text from '../Text/Text';
 //
 //
 
-export default function LinePatternPathStop({ index, stop_code }) {
+export default function LinePatternPathStop({ index, stopId }) {
   //
 
   //
@@ -30,21 +30,21 @@ export default function LinePatternPathStop({ index, stop_code }) {
   //
   // B. Fetch data
 
-  const { data: patternData } = useSWR(lineForm.values.pattern_code && `https://api.carrismetropolitana.pt/patterns/${lineForm.values.pattern_code}`);
-  const { data: stopData } = useSWR(stop_code && `https://api.carrismetropolitana.pt/stops/${stop_code}`);
+  const { data: patternData } = useSWR(lineForm.values.pattern_id && `https://api.carrismetropolitana.pt/patterns/${lineForm.values.pattern_id}`);
+  const { data: stopData } = useSWR(stopId && `https://api.carrismetropolitana.pt/stops/${stopId}`);
 
   //
   // C. Handle actions
 
   const isThisStopSelected = useMemo(() => {
-    return lineForm.values.stop_code === stop_code;
-  }, [lineForm.values.stop_code, stop_code]);
+    return lineForm.values.stop_id === stopId;
+  }, [lineForm.values.stop_id, stopId]);
 
   //
   // C. Handle actions
 
   const handleStopClick = () => {
-    lineForm.setFieldValue('stop_code', stop_code);
+    lineForm.setFieldValue('stop_code', stopId);
   };
 
   //
@@ -59,22 +59,22 @@ export default function LinePatternPathStop({ index, stop_code }) {
 
         <div className={styles.info}>
           <div className={styles.header}>
-            <div>{stopData.code}</div>
-            <StopName code={stopData.code} name={stopData.name} short_name={stopData.short_name} tts_name={stopData.tts_name} locality={stopData.locality} municipality={stopData.municipality_name} selected={isThisStopSelected} />
-            {!isThisStopSelected && <StopRealTime pattern_code={lineForm.values.pattern_code} stop_code={stopData.code} />}
+            <div>{stopData.id}</div>
+            <StopName name={stopData.name} tts_name={stopData.tts_name} locality={stopData.locality} municipality={stopData.municipality_name} selected={isThisStopSelected} />
+            {!isThisStopSelected && <StopRealTime pattern_code={lineForm.values.pattern_id} stop_code={stopData.id} />}
           </div>
 
           {isThisStopSelected && (
             <div className={styles.body}>
               <Text type="mini-label">Próximas circulações</Text>
-              <StopRealTime pattern_code={lineForm.values.pattern_code} stop_code={stopData.code} />
+              <StopRealTime pattern_id={lineForm.values.pattern_code} stop_id={stopData.code} />
             </div>
           )}
 
           {isThisStopSelected && (
             <div className={styles.body}>
               <Text type="mini-label">Horários previstos nesta paragem</Text>
-              <LinePatternPathTimetable index={index} stop_code={stop_code} />
+              <LinePatternPathTimetable index={index} stopId={stopId} />
             </div>
           )}
 

@@ -4,12 +4,9 @@ import { useLineFormContext } from '@/forms/LineForm';
 import styles from './LinePatternPathTimetable.module.css';
 import { useEffect, useState } from 'react';
 
-//
-//
-//
-//
+/* * */
 
-export default function LinePatternPathTimetable({ index, stop_code }) {
+export default function LinePatternPathTimetable({ index, stopId }) {
   //
 
   //
@@ -22,7 +19,7 @@ export default function LinePatternPathTimetable({ index, stop_code }) {
   //
   // B. Fetch data
 
-  const { data: patternData } = useSWR(lineForm.values.pattern_code && `https://api.carrismetropolitana.pt/patterns/${lineForm.values.pattern_code}`);
+  const { data: patternData } = useSWR(lineForm.values.pattern_id && `https://api.carrismetropolitana.pt/patterns/${lineForm.values.pattern_id}`);
 
   //
   // C. Transform data
@@ -40,9 +37,9 @@ export default function LinePatternPathTimetable({ index, stop_code }) {
     // For each available trip, find out the schedules for the selected stop
     let schedulesForSelectedDateAndStop = tripsForSelectedDate.map((trip) => {
       // Ensure that the current stop_time matches
-      // both the current stop_code as well as the current stop_sequence
+      // both the current stop_id as well as the current stop_sequence
       return trip.schedule.find((stopTime, stopTimeIndex) => {
-        return stopTime && stopTime.stop_code === stop_code && stopTimeIndex === index;
+        return stopTime && stopTime.stop_id === stopId && stopTimeIndex === index;
       });
     });
 
@@ -65,7 +62,7 @@ export default function LinePatternPathTimetable({ index, stop_code }) {
     setTimetable(timetableTemp);
 
     //
-  }, [patternData, index, stop_code, lineForm.values.date_string]);
+  }, [patternData, index, lineForm.values.date_string, stopId]);
 
   //
   // D. Render components

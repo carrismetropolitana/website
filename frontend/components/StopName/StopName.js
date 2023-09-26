@@ -1,7 +1,7 @@
 import Text from '../Text/Text';
 import styles from './StopName.module.css';
 
-export default function StopName({ id, name, short_name, tts_name, locality, municipality, selected = false, alignment = 'flex-start' }) {
+export default function StopName({ name, tts_name, locality, municipality, selected = false, alignment = 'flex-start' }) {
   //
 
   // If none of the location strings are defined,

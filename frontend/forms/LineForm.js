@@ -14,12 +14,12 @@ export const [LineFormProvider, useLineFormContext, useLineForm] = createFormCon
 /* * */
 
 export const LineFormDefault = {
-  municipality_code: '',
-  line_code: '',
-  pattern_code: '',
+  municipality_id: '',
+  line_id: '',
+  pattern_id: '',
   date: new Date(),
   date_string: parseDateToString(new Date()),
-  stop_code: '',
+  stop_id: '',
 };
 
 /* * */

@@ -3,22 +3,24 @@
 import useSWR from 'swr';
 import { LineFormProvider, useLineForm, LineFormOptions } from '@/forms/LineForm';
 import { Divider } from '@mantine/core';
-import styles from './LinesPage.module.css';
-import Pannel from '../Pannel/Pannel';
+import styles from './LinesExplorer.module.css';
+import Pannel from '@/components/Pannel/Pannel';
 import { useTranslations } from 'next-intl';
-import LineSelector from '../LineSelector/LineSelector';
-import LinePatternSelector from '../LinePatternSelector/LinePatternSelector';
-import LinePatternDateSelector from '../LinePatternDateSelector/LinePatternDateSelector';
-import LinePatternMap from '../LinePatternMap/LinePatternMap';
-import LinePatternPath from '../LinePatternPath/LinePatternPath';
+import LineSelector from '@/components/LineSelector/LineSelector';
+import LinePatternSelector from '@/components/LinePatternSelector/LinePatternSelector';
+import LinePatternDateSelector from '@/components/LinePatternDateSelector/LinePatternDateSelector';
+import LinePatternMap from '@/components/LinePatternMap/LinePatternMap';
+import LinePatternPath from '@/components/LinePatternPath/LinePatternPath';
 
-export default function LinesPage() {
+/* * */
+
+export default function LinesExplorer() {
   //
 
   //
   // A. Setup variables
 
-  const t = useTranslations('LinesPage');
+  const t = useTranslations('LinesExplorer');
 
   //
   // B. Fetch data
@@ -39,13 +41,13 @@ export default function LinesPage() {
       <LineFormProvider form={lineForm}>
         <form>
           <LineSelector />
-          {lineForm.values.line_code && (
+          {lineForm.values.line_id && (
             <div className={styles.container}>
               <Divider />
               <LinePatternDateSelector />
               <LinePatternSelector />
-              {lineForm.values.pattern_code && <LinePatternPath />}
-              {lineForm.values.pattern_code && <LinePatternMap />}
+              {lineForm.values.pattern_id && <LinePatternPath />}
+              {lineForm.values.pattern_id && <LinePatternMap />}
             </div>
           )}
         </form>
