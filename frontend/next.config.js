@@ -21,9 +21,11 @@ module.exports = {
     return [
       { source: '/', destination: '/stops', permanent: false },
       { source: '/stops', destination: '/stops/all', permanent: true },
+      { source: '/paragens', destination: '/stops/all', permanent: true },
       //
-      { source: '/paragens', destination: '/stops', permanent: true },
-      { source: '/horarios', destination: '/lines', permanent: true },
+      { source: '/lines', destination: '/lines/all', permanent: true },
+      { source: '/horarios', destination: '/lines/all', permanent: true },
+      //
       { source: '/espacos-navegante', destination: '/encm', permanent: true },
     ];
   },

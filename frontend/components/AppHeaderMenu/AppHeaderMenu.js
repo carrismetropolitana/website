@@ -4,6 +4,7 @@ import Link from 'next/link';
 import styles from './AppHeaderMenu.module.css';
 import { Menu, Button } from '@mantine/core';
 import { IconCaretDownFilled } from '@tabler/icons-react';
+import LiveIcon from '../LiveIcon/LiveIcon';
 
 export default function AppHeaderMenu({ title, items }) {
   return (
@@ -16,7 +17,11 @@ export default function AppHeaderMenu({ title, items }) {
       <Menu.Dropdown miw={200} w={'auto'}>
         {items.map((item) => (
           <Link key={item.url} href={item.url} target={item.target || '_self'}>
-            <Menu.Item className={styles.menuItem}>{item.label}</Menu.Item>
+            <Menu.Item className={item.realtime && styles.realtime}>
+              <div className={styles.menuItem}>
+                {item.label} {item.realtime && <LiveIcon />}
+              </div>
+            </Menu.Item>
           </Link>
         ))}
       </Menu.Dropdown>

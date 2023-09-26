@@ -5,6 +5,7 @@ import pjson from '../../package.json';
 import DebugToggle from '@/components/DebugToggle/DebugToggle';
 import styles from './AppFooterNav.module.css';
 import { useTranslations } from 'next-intl';
+import LiveIcon from '../LiveIcon/LiveIcon';
 
 export default function AppFooterNav() {
   //
@@ -21,7 +22,9 @@ export default function AppFooterNav() {
       <nav className={styles.group}>
         <h6>{t('travel.title')}</h6>
         <Link href="https://www.carrismetropolitana.pt/horarios">{t('travel.links.schedules')}</Link>
-        <Link href="/stops">{t('travel.links.stops')}</Link>
+        <Link href="/stops" style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', justifyContent: 'flex-start', gap: 6 }}>
+          {t('travel.links.stops')} <LiveIcon />
+        </Link>
         <Link href="https://www.carrismetropolitana.pt/planeador">{t('travel.links.planner')}</Link>
       </nav>
       <nav className={styles.group}>
@@ -34,7 +37,9 @@ export default function AppFooterNav() {
       </nav>
       <nav className={styles.group}>
         <h6>{t('inform.title')}</h6>
-        <Link href="/encm">{t('inform.links.helpdesks')}</Link>
+        <Link href="/encm" style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', justifyContent: 'flex-start', gap: 6 }}>
+          {t('inform.links.helpdesks')} <LiveIcon />
+        </Link>
         <Link href="https://www.carrismetropolitana.pt/apoio">{t('inform.links.help')}</Link>
         <Link href="https://www.carrismetropolitana.pt/perguntas-frequentes/1530">{t('inform.links.faq')}</Link>
         <Link href="https://www.carrismetropolitana.pt/noticias">{t('inform.links.news')}</Link>

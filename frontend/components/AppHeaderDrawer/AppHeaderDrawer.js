@@ -8,6 +8,7 @@ import { useDisclosure } from '@mantine/hooks';
 import { IconMenu2, IconX } from '@tabler/icons-react';
 import DebugToggle from '../DebugToggle/DebugToggle';
 import Link from 'next/link';
+import LiveIcon from '../LiveIcon/LiveIcon';
 
 export default function AppHeaderDrawer() {
   //
@@ -34,7 +35,9 @@ export default function AppHeaderDrawer() {
           <div className={styles.group}>
             <h1>{t('travel.title')}</h1>
             <Link href="https://www.carrismetropolitana.pt/horarios">{t('travel.links.schedules')}</Link>
-            <Link href="/stops">{t('travel.links.stops')}</Link>
+            <Link href="/stops" style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', justifyContent: 'flex-start', gap: 6 }}>
+              {t('travel.links.stops')} <LiveIcon />
+            </Link>
             <Link href="https://www.carrismetropolitana.pt/planeador">{t('travel.links.planner')}</Link>
           </div>
           <div className={styles.group}>
@@ -47,7 +50,9 @@ export default function AppHeaderDrawer() {
           </div>
           <div className={styles.group}>
             <h1>{t('inform.title')}</h1>
-            <Link href="/encm">{t('inform.links.helpdesks')}</Link>
+            <Link href="/encm" style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', justifyContent: 'flex-start', gap: 6 }}>
+              {t('inform.links.helpdesks')} <LiveIcon />
+            </Link>
             <Link href="https://www.carrismetropolitana.pt/apoio">{t('inform.links.help')}</Link>
             <Link href="https://www.carrismetropolitana.pt/perguntas-frequentes/1530">{t('inform.links.faq')}</Link>
             <Link href="https://www.carrismetropolitana.pt/noticias">{t('inform.links.news')}</Link>
