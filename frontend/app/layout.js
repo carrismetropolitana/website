@@ -17,6 +17,7 @@ const inter = Inter({
 });
 
 export const metadata = {
+  metadataBase: new URL(process.env.VERCEL_URL || `http://0.0.0.0:${process.env.PORT}`),
   title: 'Carris Metropolitana',
   description: 'Horários e Paragens',
 };

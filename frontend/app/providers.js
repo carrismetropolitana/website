@@ -3,7 +3,7 @@
 import { SWRConfig } from 'swr';
 import { MantineProvider } from '@mantine/core';
 import { MapProvider } from 'react-map-gl/maplibre';
-import { DebugProvider } from '@/contexts/DebugContext';
+import { DebugContextProvider } from '@/contexts/DebugContext';
 
 export default function Providers({ children }) {
   //
@@ -30,9 +30,9 @@ export default function Providers({ children }) {
   return (
     <SWRConfig value={swrOptions}>
       <MantineProvider withGlobalStyles withNormalizeCSS>
-        <DebugProvider>
+        <DebugContextProvider>
           <MapProvider>{children}</MapProvider>
-        </DebugProvider>
+        </DebugContextProvider>
       </MantineProvider>
     </SWRConfig>
   );

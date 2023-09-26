@@ -9,9 +9,12 @@ import NoDataLabel from '@/components/NoDataLabel/NoDataLabel';
 import StopsExplorerTimetableHeader from '@/components/StopsExplorerTimetableHeader/StopsExplorerTimetableHeader';
 import StopsExplorerTimetablePreviousTrips from '@/components/StopsExplorerTimetablePreviousTrips/StopsExplorerTimetablePreviousTrips';
 import StopsExplorerTimetableCurrentAndFutureTrips from '@/components/StopsExplorerTimetableCurrentAndFutureTrips/StopsExplorerTimetableCurrentAndFutureTrips';
-import StopsExplorerTimetableDividerLine from '../StopsExplorerTimetableDividerLine/StopsExplorerTimetableDividerLine';
+import StopsExplorerTimetableDividerLine from '@/components/StopsExplorerTimetableDividerLine/StopsExplorerTimetableDividerLine';
+import { useStopsExplorerContext } from '@/contexts/StopsExplorerContext';
 
-export default function StopsExplorerTimetable({ selectedStopId, selectedTripId, onSelectTrip }) {
+/* * */
+
+export default function StopsExplorerTimetable() {
   //
 
   //
@@ -19,13 +22,17 @@ export default function StopsExplorerTimetable({ selectedStopId, selectedTripId,
 
   const t = useTranslations('StopsExplorerTimetable');
 
+  const stopsExplorerContext = useStopsExplorerContext();
+
   let previousTrips = [];
   let currentAndFutureTrips = [];
 
   //
   // B. Fetch data
 
-  const { data: stopRealtimeData, isLoading: stopRealtimeLoading } = useSWR(selectedStopId && `https://api.carrismetropolitana.pt/stops/${selectedStopId}/realtime`, { refreshInterval: 5000 });
+  const { data: stopRealtimeData, isLoading: stopRealtimeLoading } = useSWR(stopsExplorerContext.values.selected_stop_id && `https://api.carrismetropolitana.pt/stops/${stopsExplorerContext.values.selected_stop_id}/realtime`, {
+    refreshInterval: 5000,
+  });
 
   //
   // C. Transform data
@@ -112,9 +119,9 @@ export default function StopsExplorerTimetable({ selectedStopId, selectedTripId,
   ) : previousTrips.length > 0 || currentAndFutureTrips.length > 0 ? (
     <div className={styles.container}>
       <StopsExplorerTimetableHeader />
-      <StopsExplorerTimetablePreviousTrips tripsData={previousTrips} selectedTripId={selectedTripId} onSelectTrip={onSelectTrip} selectedStopId={selectedStopId} />
+      <StopsExplorerTimetablePreviousTrips tripsData={previousTrips} />
       <StopsExplorerTimetableDividerLine />
-      <StopsExplorerTimetableCurrentAndFutureTrips tripsData={currentAndFutureTrips} selectedTripId={selectedTripId} onSelectTrip={onSelectTrip} selectedStopId={selectedStopId} />
+      <StopsExplorerTimetableCurrentAndFutureTrips tripsData={currentAndFutureTrips} />
     </div>
   ) : (
     <NoDataLabel text={t('no_service')} />

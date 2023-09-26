@@ -1,5 +1,6 @@
 import { OneFullColumn } from '@/components/Layouts/Layouts';
 import StopsExplorer from '@/components/StopsExplorer/StopsExplorer';
+import { StopsExplorerContextProvider } from '@/contexts/StopsExplorerContext';
 
 /* * */
 
@@ -39,11 +40,15 @@ export default function Page({ params }) {
   //
   // E. Render components
 
-  return <OneFullColumn first={<StopsExplorer urlStopId={params.stop_id?.length && params.stop_id} />} />;
+  return (
+    <OneFullColumn
+      first={
+        <StopsExplorerContextProvider>
+          <StopsExplorer urlStopId={params.stop_id?.length && params.stop_id} />
+        </StopsExplorerContextProvider>
+      }
+    />
+  );
 
   //
-}
-
-function getStopName() {
-  return 'hasiuhi';
 }

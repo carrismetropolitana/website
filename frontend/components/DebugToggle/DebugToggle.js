@@ -1,9 +1,10 @@
 'use client';
 
-import { useContext } from 'react';
 import styles from './DebugToggle.module.css';
 import { useTranslations } from 'next-intl';
-import { DebugContext } from '@/contexts/DebugContext';
+import { useDebugContext } from '@/contexts/DebugContext';
+
+/* * */
 
 export default function DebugToggle() {
   //
@@ -13,7 +14,7 @@ export default function DebugToggle() {
 
   const t = useTranslations('DebugToggle');
 
-  const debugContext = useContext(DebugContext);
+  const debugContext = useDebugContext();
 
   // B. Render Components
 

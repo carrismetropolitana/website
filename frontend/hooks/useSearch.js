@@ -1,3 +1,5 @@
+'use client';
+
 import { transliterate } from 'inflected';
 
 export default function useSearch(query, data, options) {
@@ -16,7 +18,7 @@ export default function useSearch(query, data, options) {
   // 3.
   // Normalize the query
 
-  const normalizedQuery = normalizeString(query, { toLowerCase: true, transliterate: true, regexReplace: options.regexReplace });
+  const normalizedQuery = normalizeString(query, { toLowerCase: true, transliterate: true, regexReplace: options.regexReplace, regexMatch: true });
 
   // 4.
   // Check if 'keys' option is present
@@ -26,10 +28,8 @@ export default function useSearch(query, data, options) {
       let hasMatch = false;
       for (let key of options.keys) {
         if (item.hasOwnProperty(key)) {
-          const value = item[key];
-          const stringifiedValue = value ? String(value) : '';
-          const normalizedValue = normalizeString(stringifiedValue, { toLowerCase: true, transliterate: true, regexReplace: options.regexReplace });
-          if (normalizedValue.includes(normalizedQuery)) {
+          const normalizedValue = normalizeString(String(item[key]), { toLowerCase: true, transliterate: true, regexReplace: options.regexReplace });
+          if (normalizedQuery.test(normalizedValue)) {
             hasMatch = true;
             break;
           }
@@ -43,7 +43,7 @@ export default function useSearch(query, data, options) {
   // The case where options is not defined
   finalResult = finalResult.filter((item) => {
     const stringifiedValue = Object.values(item).join('');
-    const normalizedValue = normalizeString(stringifiedValue, { toLowerCase: true, transliterate: true, regexReplace: options.regexReplace });
+    const normalizedValue = normalizeString(stringifiedValue, { toLowerCase: true, transliterate: true });
     return normalizedValue.includes(normalizedQuery);
   });
 
@@ -60,7 +60,9 @@ function normalizeString(rawString, options) {
   // Use inflected to remove non-English characters
   if (options && options.transliterate) normalizedString = transliterate(normalizedString);
   // Check if 'regex' option is present and replace forbidden characters
-  if (options && options.regexReplace) normalizedString = normalizedString.replace(options.regexReplace, '');
+  if (options && options.regexReplace) normalizedString = normalizedString.replace(options.regexReplace, '').replace(/\s+/g, ' ');
+  // Use the join method to insert the pattern between each character
+  if (options && options.regexMatch) normalizedString = new RegExp(`.*${normalizedString.split(' ').join('.*')}.*`);
   // Return result
   return normalizedString;
   //

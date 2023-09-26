@@ -1,16 +1,21 @@
 'use client';
 
-import { useState } from 'react';
 import styles from './StopsExplorerTimetableFeedback.module.css';
+import { useState } from 'react';
 import { useTranslations } from 'next-intl';
+import { useStopsExplorerContext } from '@/contexts/StopsExplorerContext';
 
-export default function StopsExplorerTimetableFeedback({ tripData, selectedStopId }) {
+/* * */
+
+export default function StopsExplorerTimetableFeedback({ tripData }) {
   //
 
   //
   // A. Setup variables
 
   const t = useTranslations('StopsExplorerTimetableFeedback');
+
+  const stopsExplorerContext = useStopsExplorerContext();
 
   const [isVisible, setIsVisible] = useState(true);
   const [isAnswered, setIsAnswered] = useState(false);
@@ -35,7 +40,7 @@ export default function StopsExplorerTimetableFeedback({ tripData, selectedStopI
         method: 'POST',
         headers: { 'Content-Type': 'application/json; charset=utf-8' },
         body: JSON.stringify({
-          stop_id: selectedStopId,
+          stop_id: stopsExplorerContext.values.selected_stop_id,
           trip_id: tripData.trip_id,
           vehicle_id: tripData.vehicle_id,
           sentiment: sentiment,

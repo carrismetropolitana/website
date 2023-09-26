@@ -1,7 +1,6 @@
 'use client';
 
 import useSWR from 'swr';
-import Image from 'next/image';
 import { Combobox, Highlight, TextInput, useCombobox, Text, ActionIcon } from '@mantine/core';
 import { useMemo, useState } from 'react';
 import { useTranslations } from 'next-intl';
@@ -9,16 +8,22 @@ import styles from './StopsExplorerToolbarSearch.module.css';
 import useSearch from '@/hooks/useSearch';
 import { IconX, IconSearch } from '@tabler/icons-react';
 import parseStopLocationName from '@/services/parseStopLocationName';
+import { useStopsExplorerContext } from '@/contexts/StopsExplorerContext';
+import { useDebouncedValue } from '@mantine/hooks';
 
-export default function StopsExplorerToolbarSearch({ selectedStopId, onSelectStopId }) {
+/* * */
+
+export default function StopsExplorerToolbarSearch() {
   //
 
   //
   // A. Setup variables
 
   const t = useTranslations('StopsExplorerToolbarSearch');
+  const stopsExplorerContext = useStopsExplorerContext();
   const comboboxStore = useCombobox();
   const [searchQuery, setSearchQuery] = useState('');
+  const [debouncedSearchQuery] = useDebouncedValue(searchQuery, 300);
 
   //
   // B. Fetch data
@@ -34,6 +39,7 @@ export default function StopsExplorerToolbarSearch({ selectedStopId, onSelectSto
         return {
           id: stop.id,
           name: stop.name,
+          tts_name: stop.tts_name,
           location: parseStopLocationName(stop.locality, stop.municipality_name),
         };
       });
@@ -43,9 +49,9 @@ export default function StopsExplorerToolbarSearch({ selectedStopId, onSelectSto
   //
   // D. Search
 
-  const allStopsDataFilteredBySearchQuery = useSearch(searchQuery, allStopsDataFormatted, {
+  const allStopsDataFilteredBySearchQuery = useSearch(debouncedSearchQuery, allStopsDataFormatted, {
     keys: ['id', 'name', 'tts_name', 'location'],
-    regexReplace: /[^a-zA-Z0-9]/g,
+    regexReplace: /[^a-zA-Z0-9\s]/g,
     limitResults: 100,
   });
 
@@ -72,11 +78,11 @@ export default function StopsExplorerToolbarSearch({ selectedStopId, onSelectSto
     comboboxStore.openDropdown();
   };
 
-  const handleSelectStop = (selectedStopId) => {
-    const selectedStopData = allStopsData.find((item) => item.id === selectedStopId);
+  const handleSelectStop = (chosenSelectItemValue) => {
+    const selectedStopData = allStopsData.find((item) => item.id === chosenSelectItemValue);
     if (!selectedStopData) return;
     setSearchQuery(selectedStopData.name);
-    onSelectStopId(selectedStopId);
+    stopsExplorerContext.selectStop(chosenSelectItemValue);
     comboboxStore.closeDropdown();
   };
 
@@ -118,7 +124,7 @@ export default function StopsExplorerToolbarSearch({ selectedStopId, onSelectSto
                 <Combobox.Option key={item.id} value={item.id}>
                   <div className={styles.comboboxOption}>
                     <div className={styles.stopInfo}>
-                      <Highlight highlight={searchQuery} fz="sm" fw={500}>
+                      <Highlight fz="sm" fw={500}>
                         {item.name}
                       </Highlight>
                       <Text fz="xs">{item.location}</Text>

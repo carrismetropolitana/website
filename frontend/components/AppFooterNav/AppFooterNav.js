@@ -2,7 +2,7 @@
 
 import Link from 'next/link';
 import pjson from '../../package.json';
-import DebugToggle from '../DebugToggle/DebugToggle';
+import DebugToggle from '@/components/DebugToggle/DebugToggle';
 import styles from './AppFooterNav.module.css';
 import { useTranslations } from 'next-intl';
 

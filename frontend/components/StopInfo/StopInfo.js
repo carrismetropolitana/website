@@ -1,3 +1,5 @@
+'use client';
+
 import useSWR from 'swr';
 import styles from './StopInfo.module.css';
 import Loader from '@/components/Loader/Loader';
@@ -5,50 +7,63 @@ import CopyBadge from '@/components/CopyBadge/CopyBadge';
 import FacilityIcon from '@/components/Facilities/FacilityIcon';
 import { NewLineBadge } from '@/components/NewLineBadge/NewLineBadge';
 import StopName from '@/components/StopName/StopName';
+import { useStopsExplorerContext } from '@/contexts/StopsExplorerContext';
+import { useEffect, useState } from 'react';
 
-export default function StopInfo({ selectedStopId }) {
+/* * */
+
+export default function StopInfo() {
   //
 
   //
   // A. Setup variables
 
+  const stopsExplorerContext = useStopsExplorerContext();
+  const [selectedStopData, setSelectedStopData] = useState(null);
+
   //
   // B. Fetch data
 
-  const { data: stopData, isLoading: stopLoading } = useSWR(selectedStopId && `https://api.carrismetropolitana.pt/stops/${selectedStopId}`);
+  const { data: allStopsData, isLoading: allStopsLoading } = useSWR('https://api.carrismetropolitana.pt/stops');
 
   //
-  // D. Handle actions
+  // C. Handle actions
+
+  useEffect(() => {
+    if (!allStopsData) return;
+    const foundItem = allStopsData.find((item) => item.id === stopsExplorerContext.values.selected_stop_id);
+    if (foundItem) setSelectedStopData(foundItem);
+  }, [allStopsData, stopsExplorerContext.values.selected_stop_id]);
 
   //
   // D. Render components
 
   return (
     <div>
-      {stopLoading && (
+      {allStopsLoading && (
         <div className={styles.container}>
           <Loader visible />
         </div>
       )}
-      {stopData && (
+      {selectedStopData && (
         <div className={styles.container}>
           <div className={styles.badges}>
-            <CopyBadge label={`#${stopData.id}`} value={stopData.id} />
-            <CopyBadge label={`${stopData.lat}, ${stopData.lon}`} value={`${stopData.lat}	${stopData.lon}`} />
+            <CopyBadge label={`#${selectedStopData.id}`} value={selectedStopData.id} />
+            <CopyBadge label={`${selectedStopData.lat}, ${selectedStopData.lon}`} value={`${selectedStopData.lat}	${selectedStopData.lon}`} />
           </div>
 
-          <StopName name={stopData.name} tts_name={stopData.tts_name} locality={stopData.locality} municipality={stopData.municipality_name} alignment="center" selected />
+          <StopName name={selectedStopData.name} tts_name={selectedStopData.tts_name} locality={selectedStopData.locality} municipality={selectedStopData.municipality_name} alignment="center" selected />
 
-          {stopData.facilities.length > 0 && (
+          {selectedStopData.facilities.length > 0 && (
             <div className={styles.equipments}>
-              {stopData.facilities.map((e, index) => (
+              {selectedStopData.facilities.map((e, index) => (
                 <FacilityIcon key={index} name={e} size={28} />
               ))}
             </div>
           )}
-          {stopData?.lines?.length > 0 && (
+          {selectedStopData?.lines?.length > 0 && (
             <div className={styles.routes}>
-              {stopData.lines.map((lineId, index) => (
+              {selectedStopData.lines.map((lineId, index) => (
                 <NewLineBadge key={index} id={lineId} />
               ))}
             </div>

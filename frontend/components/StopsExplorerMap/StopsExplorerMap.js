@@ -1,20 +1,115 @@
 'use client';
 
 import OSMMap from '@/components/OSMMap/OSMMap';
-import { useContext, useEffect } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import * as turf from '@turf/turf';
 import { useMap, Source, Layer, Popup, GeolocateControl } from 'react-map-gl/maplibre';
-import { DebugContext } from '@/contexts/DebugContext';
+import { useDebugContext } from '@/contexts/DebugContext';
+import { useStopsExplorerContext } from '@/contexts/StopsExplorerContext';
+import useSWR from 'swr';
+import generateUUID from '@/services/generateUUID';
 
-export default function StopsExplorerMap({ allStopsMapData, selectedStopMapData, selectedShapeMapData, selectedVehicleMapData, selectedMapStyle, selectedMapFeature, onSelectStopId }) {
+/* * */
+
+export default function StopsExplorerMap({ selectedMapStyle }) {
   //
 
   //
   // A. Setup variables
 
-  const debugContext = useContext(DebugContext);
+  const debugContext = useDebugContext();
+  const stopsExplorerContext = useStopsExplorerContext();
 
   const { stopsExplorerMap } = useMap();
+
+  const [selectedMapFeature, setSelectedMapFeature] = useState(null);
+
+  //
+  // B. Fetch data
+
+  const { data: allStopsData } = useSWR('https://api.carrismetropolitana.pt/stops');
+  const { data: allVehiclesData } = useSWR('https://api.carrismetropolitana.pt/vehicles', { refreshInterval: 5000 });
+  const { data: selectedPatternData } = useSWR(stopsExplorerContext.values.selected_pattern_id && `https://api.carrismetropolitana.pt/patterns/${stopsExplorerContext.values.selected_pattern_id}`);
+  const { data: selectedShapeData } = useSWR(stopsExplorerContext.values.selected_shape_id && `https://api.carrismetropolitana.pt/shapes/${stopsExplorerContext.values.selected_shape_id}`);
+
+  //
+  // C. Transform data
+
+  const allStopsMapData = useMemo(() => {
+    const geoJSON = { type: 'FeatureCollection', features: [] };
+    if (allStopsData) {
+      for (const stop of allStopsData) {
+        geoJSON.features.push({
+          type: 'Feature',
+          geometry: { type: 'Point', coordinates: [stop.lon, stop.lat] },
+          properties: {
+            mapid: `${stop.id}|${generateUUID()}`,
+            id: stop.id,
+            name: stop.name,
+            lat: stop.lat,
+            lon: stop.lon,
+          },
+        });
+      }
+    }
+    return geoJSON;
+  }, [allStopsData]);
+
+  const selectedStopMapData = useMemo(() => {
+    if (allStopsData && stopsExplorerContext.values.selected_stop_id) {
+      const selectedStopData = allStopsData.find((item) => item.id === stopsExplorerContext.values.selected_stop_id);
+      if (selectedStopData) {
+        return {
+          type: 'Feature',
+          geometry: {
+            type: 'Point',
+            coordinates: [selectedStopData.lon, selectedStopData.lat],
+          },
+          properties: {
+            id: selectedStopData.id,
+          },
+        };
+      }
+      return null;
+    }
+  }, [allStopsData, stopsExplorerContext.values.selected_stop_id]);
+
+  const selectedShapeMapData = useMemo(() => {
+    if (selectedPatternData && selectedShapeData) {
+      return {
+        ...selectedShapeData.geojson,
+        properties: {
+          color: selectedPatternData.color,
+        },
+      };
+    }
+    return null;
+  }, [selectedPatternData, selectedShapeData]);
+
+  const selectedVehicleMapData = useMemo(() => {
+    if (allVehiclesData && stopsExplorerContext.values.selected_trip_id) {
+      const selectedVehicleData = allVehiclesData.find((item) => item.trip_id && item.trip_id === stopsExplorerContext.values.selected_trip_id);
+      if (selectedVehicleData) {
+        return {
+          type: 'Feature',
+          geometry: {
+            type: 'Point',
+            coordinates: [selectedVehicleData.lon, selectedVehicleData.lat],
+          },
+          properties: {
+            id: selectedVehicleData.id,
+            speed: selectedVehicleData.speed,
+            timestamp: selectedVehicleData.timestamp,
+            timeString: new Date(selectedVehicleData.timestamp).toLocaleString(),
+            heading: selectedVehicleData.heading,
+            trip_id: selectedVehicleData.trip_id,
+            pattern_id: selectedVehicleData.pattern_id,
+          },
+        };
+      }
+      return null;
+    }
+  }, [allVehiclesData, stopsExplorerContext.values.selected_trip_id]);
 
   //
   // C. Handle actions
@@ -50,9 +145,36 @@ export default function StopsExplorerMap({ allStopsMapData, selectedStopMapData,
   //
   // C. Handle actions
 
+  useEffect(() => {
+    if (stopsExplorerContext.values.selected_stop_id) {
+      // Get map feature matching currently selected stop_id
+      const stopMapFeature = allStopsMapData?.features.find((f) => f.properties?.id === stopsExplorerContext.values.selected_stop_id);
+      if (!stopMapFeature) return;
+      // Set default map zoom and speed levels
+      const defaultSpeed = 4000;
+      const defaultZoom = 17;
+      const defaultZoomMargin = 3;
+      // Check if selected stop is within rendered bounds
+      const renderedFeatures = stopsExplorerMap.queryRenderedFeatures({ layers: ['all-stops'] });
+      const isStopCurrentlyRendered = renderedFeatures.find((item) => item.properties?.id === stopMapFeature.properties?.id);
+      // Get map current zoom level
+      const currentZoom = stopsExplorerMap.getZoom();
+      // If the stop is visible and the zoom is not too far back (plus a little margin)...
+      if (isStopCurrentlyRendered && currentZoom + defaultZoomMargin > defaultZoom) {
+        // ...then simply ease to it.
+        stopsExplorerMap.easeTo({ center: stopMapFeature.geometry?.coordinates, zoom: currentZoom, duration: defaultSpeed * 0.25 });
+      } else {
+        // If the zoom is too far, or the desired stop is not visible, then fly to it
+        stopsExplorerMap.flyTo({ center: stopMapFeature.geometry?.coordinates, zoom: defaultZoom, duration: defaultSpeed });
+      }
+      // Update local state
+      setSelectedMapFeature(stopMapFeature);
+    }
+  }, [allStopsMapData?.features, stopsExplorerContext.values.selected_stop_id, stopsExplorerMap]);
+
   const handleMapClick = (event) => {
     if (event?.features[0]) {
-      onSelectStopId(event.features[0].properties.id);
+      stopsExplorerContext.selectStop(event.features[0].properties?.id);
     }
   };
 

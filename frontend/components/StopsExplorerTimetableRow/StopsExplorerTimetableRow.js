@@ -3,15 +3,18 @@
 import useSWR from 'swr';
 import styles from './StopsExplorerTimetableRow.module.css';
 import LineDisplay from '@/components/LineDisplay/LineDisplay';
-import { useEffect, useState, useContext } from 'react';
+import { useEffect, useState } from 'react';
 import { convertOperationTimeStringTo24HourTimeString, getMinutesFromOperationTimeString } from '@/services/parseRelativeTime';
 import { useTranslations } from 'next-intl';
 import LiveIcon from '@/components/LiveIcon/LiveIcon';
 import CopyBadge from '@/components/CopyBadge/CopyBadge';
-import { DebugContext } from '@/contexts/DebugContext';
-import StopsExplorerTimetableFeedback from '../StopsExplorerTimetableFeedback/StopsExplorerTimetableFeedback';
+import { useDebugContext } from '@/contexts/DebugContext';
+import StopsExplorerTimetableFeedback from '@/components/StopsExplorerTimetableFeedback/StopsExplorerTimetableFeedback';
+import { useStopsExplorerContext } from '@/contexts/StopsExplorerContext';
 
-export default function StopsExplorerTimetableRow({ rowType, tripData, selectedTripId, onSelectTrip, selectedStopId }) {
+/* * */
+
+export default function StopsExplorerTimetableRow({ rowType, tripData }) {
   //
 
   //
@@ -19,7 +22,8 @@ export default function StopsExplorerTimetableRow({ rowType, tripData, selectedT
 
   const t = useTranslations('StopsExplorerTimetableRow');
 
-  const debugContext = useContext(DebugContext);
+  const debugContext = useDebugContext();
+  const stopsExplorerContext = useStopsExplorerContext();
 
   const [tripMissingRequiredData, setTripMissingRequiredData] = useState(false);
   const [tripIsAtLastStop, setTripIsAtLastStop] = useState(false);
@@ -138,8 +142,8 @@ export default function StopsExplorerTimetableRow({ rowType, tripData, selectedT
 
   const handleSelectTrip = () => {
     if (!tripData || !patternData) return;
-    if (selectedTripId === tripData.trip_id) onSelectTrip();
-    else onSelectTrip(tripData.trip_id, tripData.pattern_id, patternData.shape_id, tripData.vehicle_id);
+    if (stopsExplorerContext.values.selected_trip_id === tripData.trip_id) stopsExplorerContext.unselectTrip();
+    else stopsExplorerContext.updateValues({ selected_trip_id: tripData.trip_id, selected_pattern_id: tripData.pattern_id, selected_shape_id: patternData.shape_id, selected_vehicle_id: tripData.vehicle_id });
   };
 
   //
@@ -150,7 +154,7 @@ export default function StopsExplorerTimetableRow({ rowType, tripData, selectedT
   if (tripIsAtLastStop && !debugContext.isDebug) return null;
 
   return (
-    <div className={`${styles.container} ${styles[tripRealtimeStatus]} ${selectedTripId === tripData.trip_id && styles.selected}`} onClick={handleSelectTrip}>
+    <div className={`${styles.container} ${styles[tripRealtimeStatus]} ${stopsExplorerContext.values.selected_trip_id === tripData.trip_id && styles.selected}`} onClick={handleSelectTrip}>
       <div className={styles.tripSummary}>
         <LineDisplay short_name={tripData.line_id} long_name={patternData?.headsign} color={patternData?.color} text_color={patternData?.text_color} />
         {tripRealtimeStatus === 'passed' && (
@@ -180,7 +184,7 @@ export default function StopsExplorerTimetableRow({ rowType, tripData, selectedT
       <div className={styles.tripDetails}>
         {debugContext.isDebug && (
           <div className={styles.testData} onClick={(e) => e.stopPropagation()}>
-            <CopyBadge label={`stop_id: ${selectedStopId}`} value={selectedStopId} />
+            <CopyBadge label={`stop_id: ${stopsExplorerContext.values.selected_stop_id}`} value={stopsExplorerContext.values.selected_stop_id} />
             <CopyBadge label={`trip_id: ${tripData.trip_id}`} value={tripData.trip_id} />
             <CopyBadge label={`stop_seq: ${tripData.stop_sequence}`} value={tripData.stop_sequence} />
             <CopyBadge label={`vehicle_id: ${tripData.vehicle_id}`} value={tripData.vehicle_id} />
@@ -190,17 +194,17 @@ export default function StopsExplorerTimetableRow({ rowType, tripData, selectedT
           </div>
         )}
 
-        {tripRealtimeStatus !== 'scheduled' && !debugContext.isDebug && <StopsExplorerTimetableFeedback tripData={tripData} selectedStopId={selectedStopId} />}
+        {tripRealtimeStatus !== 'scheduled' && !debugContext.isDebug && <StopsExplorerTimetableFeedback tripData={tripData} />}
 
         <div className={styles.localitiesPerLine}>
           <p>Passa por</p>
           <p className={styles.localities}>
             {patternData?.localities?.length > 0 &&
               patternData.localities.map((locality, index) => (
-                <>
+                <span key={index}>
                   {index > 0 && <span> • </span>}
                   {locality}
-                </>
+                </span>
               ))}
           </p>
         </div>

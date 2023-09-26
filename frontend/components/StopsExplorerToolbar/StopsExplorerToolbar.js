@@ -6,7 +6,7 @@ import { Tooltip, ActionIcon, SegmentedControl } from '@mantine/core';
 import { useTranslations } from 'next-intl';
 import StopsExplorerToolbarSearch from '@/components/StopsExplorerToolbarSearch/StopsExplorerToolbarSearch';
 
-export default function StopsExplorerToolbar({ selectedMapStyle, onSelectMapStyle, onMapRecenter, onOpenInGoogleMaps, selectedStopId, onSelectStopId }) {
+export default function StopsExplorerToolbar({ selectedMapStyle, onSelectMapStyle, onMapRecenter, onOpenInGoogleMaps }) {
   //
 
   //
@@ -42,7 +42,7 @@ export default function StopsExplorerToolbar({ selectedMapStyle, onSelectMapStyl
       </Tooltip>
 
       <div className={styles.fullWidth}>
-        <StopsExplorerToolbarSearch selectedStopId={selectedStopId} onSelectStopId={onSelectStopId} />
+        <StopsExplorerToolbarSearch />
       </div>
     </div>
   );

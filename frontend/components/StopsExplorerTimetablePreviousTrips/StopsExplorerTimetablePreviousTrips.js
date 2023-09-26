@@ -4,8 +4,11 @@ import { useTranslations } from 'next-intl';
 import { useMemo, useState } from 'react';
 import styles from './StopsExplorerTimetablePreviousTrips.module.css';
 import StopsExplorerTimetableRow from '@/components/StopsExplorerTimetableRow/StopsExplorerTimetableRow';
+import { useStopsExplorerContext } from '@/contexts/StopsExplorerContext';
 
-export default function StopsExplorerTimetablePreviousTrips({ tripsData, selectedTripId, onSelectTrip, selectedStopId }) {
+/* * */
+
+export default function StopsExplorerTimetablePreviousTrips({ tripsData }) {
   //
 
   //
@@ -17,6 +20,8 @@ export default function StopsExplorerTimetablePreviousTrips({ tripsData, selecte
 
   const [showAllTrips, setShowAllTrips] = useState(false);
 
+  const stopsExplorerContext = useStopsExplorerContext();
+
   //
   // B. Transform data
 
@@ -24,9 +29,9 @@ export default function StopsExplorerTimetablePreviousTrips({ tripsData, selecte
     if (showAllTrips) {
       return tripsData;
     } else {
-      const selectedTripData = tripsData.find((item) => item.trip_id === selectedTripId);
+      const selectedTripData = tripsData.find((item) => item.trip_id === stopsExplorerContext.values.selected_trip_id);
       const tripsThatShouldBeVisible = tripsData.slice(tripsData.length - previousTripsShownByDefault, tripsData.length);
-      const selectedTripIsAlreadyVisible = tripsThatShouldBeVisible.find((item) => item.trip_id === selectedTripId);
+      const selectedTripIsAlreadyVisible = tripsThatShouldBeVisible.find((item) => item.trip_id === stopsExplorerContext.values.selected_trip_id);
       if (selectedTripData && !selectedTripIsAlreadyVisible) tripsThatShouldBeVisible.push(selectedTripData);
       tripsThatShouldBeVisible.sort((a, b) => {
         const timeStringA = a.scheduled_arrival.split(':').join('');
@@ -35,7 +40,7 @@ export default function StopsExplorerTimetablePreviousTrips({ tripsData, selecte
       });
       return tripsThatShouldBeVisible;
     }
-  }, [selectedTripId, showAllTrips, tripsData]);
+  }, [stopsExplorerContext.values.selected_trip_id, showAllTrips, tripsData]);
 
   //
   // C. Handle actions
@@ -54,8 +59,8 @@ export default function StopsExplorerTimetablePreviousTrips({ tripsData, selecte
           {showAllTrips ? t('toggle.hide') : t('toggle.show')}
         </div>
       )}
-      {visibleTrips.map((trip, index) => (
-        <StopsExplorerTimetableRow key={`${trip.trip_id}_${index}`} rowType={'previous'} tripData={trip} selectedTripId={selectedTripId} onSelectTrip={onSelectTrip} selectedStopId={selectedStopId} />
+      {visibleTrips.map((trip) => (
+        <StopsExplorerTimetableRow key={`${trip.trip_id}_${trip.stop_sequence}`} rowType={'previous'} tripData={trip} />
       ))}
       {showAllTrips && tripsData.length > previousTripsShownByDefault && (
         <div className={styles.toggle} onClick={handleToogleShowAllTrips}>
