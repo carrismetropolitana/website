@@ -3,7 +3,7 @@
 
 .container {
   background-color: var(--gray0);
-  padding: 50px;
+  padding: 30px 50px 10px 50px;
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -12,7 +12,7 @@
 
 @media (max-width: 700px) {
   .container {
-    padding: 30px;
+    padding: 12px 20px 6px 20px;
   }
 }
 
