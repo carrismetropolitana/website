@@ -28,7 +28,7 @@ export default function AppHeaderDrawer() {
       <Drawer opened={opened} onClose={close} position="right" overlayProps={{ backgroundOpacity: 0.5, blur: 4 }} withCloseButton={false} padding={0}>
         <div className={styles.container}>
           <div className={styles.closeButton}>
-            <ActionIcon onClick={close} size="xl" variant="light" color="white" aria-label={t('close.label')}>
+            <ActionIcon onClick={close} variant="light" color="white" aria-label={t('close.label')}>
               <IconX size={30} />
             </ActionIcon>
           </div>
@@ -73,7 +73,7 @@ export default function AppHeaderDrawer() {
           </div>
         </div>
       </Drawer>
-      <ActionIcon onClick={open} variant="subtle" size="xl" color="black" aria-label="Abrir Menu">
+      <ActionIcon onClick={open} variant="subtle" size="md" color="black" aria-label="Abrir Menu">
         <IconMenu2 size={40} />
       </ActionIcon>
     </>
