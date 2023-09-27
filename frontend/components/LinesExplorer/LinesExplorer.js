@@ -6,11 +6,13 @@ import { Divider } from '@mantine/core';
 import styles from './LinesExplorer.module.css';
 import Pannel from '@/components/Pannel/Pannel';
 import { useTranslations } from 'next-intl';
-import LineSelector from '@/components/LineSelector/LineSelector';
+import LinesExplorerToolbar from '@/components/LinesExplorerToolbar/LinesExplorerToolbar';
+
 import LinePatternSelector from '@/components/LinePatternSelector/LinePatternSelector';
 import LinePatternDateSelector from '@/components/LinePatternDateSelector/LinePatternDateSelector';
 import LinePatternMap from '@/components/LinePatternMap/LinePatternMap';
 import LinePatternPath from '@/components/LinePatternPath/LinePatternPath';
+import LinesExplorerToolbarLineSearch from '../LinesExplorerToolbarLineSearch/LinesExplorerToolbarLineSearch';
 
 /* * */
 
@@ -40,7 +42,7 @@ export default function LinesExplorer() {
     <Pannel title={t('pannel_title')} loading={allLinesLoading || allMunicipalitiesLoading} error={allLinesError || allMunicipalitiesError}>
       <LineFormProvider form={lineForm}>
         <form>
-          <LineSelector />
+          <LinesExplorerToolbarLineSearch />
           {lineForm.values.line_id && (
             <div className={styles.container}>
               <Divider />

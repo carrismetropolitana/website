@@ -364,7 +364,7 @@
     "LinesExplorer": {
         "pannel_title": "Lines & Schedules"
     },
-    "LineSelector": {
+    "LinesExplorerToolbar": {
         "form": {
             "municipality_code": {
                 "label": "Filter by Municipality",
@@ -377,6 +377,11 @@
                 "nothingFound": "No Results Found"
             }
         }
+    },
+    "LinesExplorerToolbarLineSearch": {
+        "label": "Procurar linha por número, nome, localização...",
+        "placeholder": "Procurar linha por número, nome, localização...",
+        "no_results": "Nenhum Resultado Encontrado"
     },
     "LinePatternSelector": {
         "destination_label": "destined to",
@@ -476,9 +481,7 @@
     "EncmExplorerToolbarSearch": {
         "label": "Procurar por nome, morada ou município",
         "placeholder": "Procurar por nome, morada, município...",
-        "no_results": "Nenhum Resultado Encontrado",
-        "arriving_now": "< 1 min",
-        "realtime": "{value} min"
+        "no_results": "Nenhum Resultado Encontrado"
     },
     "AppHeader": {
         "menus": {

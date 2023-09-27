@@ -4,20 +4,20 @@ import useSWR from 'swr';
 import { useMemo, forwardRef } from 'react';
 import { useTranslations } from 'next-intl';
 import { Select } from '@mantine/core';
-import styles from './LineSelector.module.css';
+import styles from './LinesExplorerToolbar.module.css';
 import { useLineFormContext } from '@/forms/LineForm';
 import LineDisplay from '@/components/LineDisplay/LineDisplay';
 
 /* * */
 
-export default function LineSelector() {
+export default function LinesExplorerToolbar() {
   //
 
   //
   // A. Setup variables
 
   const lineForm = useLineFormContext();
-  const t = useTranslations('LineSelector');
+  const t = useTranslations('LinesExplorerToolbar');
 
   //
   // B. Fetch data

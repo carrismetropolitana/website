@@ -11,6 +11,8 @@ const initialMapState = {
 };
 
 const initialEntitiesState = {
+  line_id: null,
+  //
   stop_id: null,
   pattern_id: null,
   shape_id: null,
