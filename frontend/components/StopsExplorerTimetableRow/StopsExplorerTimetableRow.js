@@ -194,7 +194,7 @@ export default function StopsExplorerTimetableRow({ rowType, tripData }) {
           </div>
         )}
 
-        {tripRealtimeStatus !== 'scheduled' && !debugContext.isDebug && <StopsExplorerTimetableFeedback tripData={tripData} />}
+        {(tripRealtimeStatus === 'realtime' || tripRealtimeStatus === 'arriving_now' || tripRealtimeStatus === 'passed') && tripEtaMinutes > -10 && !debugContext.isDebug && <StopsExplorerTimetableFeedback tripData={tripData} />}
 
         <div className={styles.localitiesPerLine}>
           <p>Passa por</p>
