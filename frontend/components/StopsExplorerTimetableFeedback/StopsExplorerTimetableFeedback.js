@@ -40,7 +40,7 @@ export default function StopsExplorerTimetableFeedback({ tripData }) {
         method: 'POST',
         headers: { 'Content-Type': 'application/json; charset=utf-8' },
         body: JSON.stringify({
-          stop_id: stopsExplorerContext.values.selected_stop_id,
+          stop_id: stopsExplorerContext.entities.stop_id,
           trip_id: tripData.trip_id,
           vehicle_id: tripData.vehicle_id,
           sentiment: sentiment,
