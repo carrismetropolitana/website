@@ -43,29 +43,31 @@ export default function StopsExplorerToolbar() {
 
   return (
     <div className={styles.container}>
-      <SegmentedControl
-        aria-label={t('map_style.label')}
-        value={stopsExplorerContext.map.style}
-        onChange={handleMapStyleChange}
-        data={[
-          { value: 'map', label: t('map_style.options.map') },
-          { value: 'satellite', label: t('map_style.options.satellite') },
-        ]}
-      />
+      <div className={styles.controls}>
+        <SegmentedControl
+          aria-label={t('map_style.label')}
+          value={stopsExplorerContext.map.style}
+          onChange={handleMapStyleChange}
+          data={[
+            { value: 'map', label: t('map_style.options.map') },
+            { value: 'satellite', label: t('map_style.options.satellite') },
+          ]}
+        />
 
-      <Tooltip label={t('recenter_map.label')} position="bottom" withArrow>
-        <ActionIcon color="gray" variant="light" size="lg" onClick={handleMapReCenter}>
-          <IconArrowsMinimize size={20} />
-        </ActionIcon>
-      </Tooltip>
+        <Tooltip label={t('recenter_map.label')} position="bottom" withArrow>
+          <ActionIcon color="gray" variant="light" size="lg" onClick={handleMapReCenter}>
+            <IconArrowsMinimize size={20} />
+          </ActionIcon>
+        </Tooltip>
 
-      <Tooltip label={t('open_gmaps.label')} position="bottom" withArrow>
-        <ActionIcon color="gray" variant="light" size="lg" onClick={handleOpenInGoogleMaps}>
-          <IconBrandGoogleMaps size={20} />
-        </ActionIcon>
-      </Tooltip>
+        <Tooltip label={t('open_gmaps.label')} position="bottom" withArrow>
+          <ActionIcon color="gray" variant="light" size="lg" onClick={handleOpenInGoogleMaps}>
+            <IconBrandGoogleMaps size={20} />
+          </ActionIcon>
+        </Tooltip>
+      </div>
 
-      <div className={styles.fullWidth}>
+      <div className={styles.search}>
         <StopsExplorerToolbarSearch />
       </div>
     </div>
