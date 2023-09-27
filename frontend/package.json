@@ -1,6 +1,6 @@
 {
     "name": "@carrismetropolitana/website",
-    "version": "2023.09.26-1314",
+    "version": "2023.09.27-0221",
     "private": true,
     "scripts": {
         "dev": "next dev",
@@ -29,7 +29,7 @@
     },
     "devDependencies": {
         "@types/node": "20.7.0",
-        "@types/react": "18.2.22",
+        "@types/react": "18.2.23",
         "@types/react-dom": "18.2.7",
         "eslint": "8.50.0",
         "eslint-config-next": "13.5.3",
