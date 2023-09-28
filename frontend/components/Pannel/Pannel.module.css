@@ -5,6 +5,17 @@
   overflow: hidden;
 }
 
+@media all and (display-mode: standalone) {
+  .container {
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: auto 1fr;
+    position: absolute;
+    height: 100%;
+    width: 100%;
+  }
+}
+
 /* * */
 /* HEADER */
 
@@ -21,6 +32,13 @@
 }
 
 @media (max-width: 700px) {
+  .header {
+    border-radius: 0px;
+    padding: var(--size-md);
+  }
+}
+
+@media all and (display-mode: standalone) {
   .header {
     border-radius: 0px;
     padding: var(--size-md);
@@ -72,6 +90,16 @@
 
 @media (max-width: 700px) {
   .wrapper {
+    border-radius: 0px;
+    border: none;
+  }
+}
+
+@media all and (display-mode: standalone) {
+  .wrapper {
+    position: relative;
+    height: 100%;
+    width: 100%;
     border-radius: 0px;
     border: none;
   }

@@ -72,10 +72,13 @@ export default function StopsExplorer({ urlStopId }) {
         </>
       }
     >
-      <StopsExplorerToolbar />
-      <Divider />
       <div className={styles.container}>
-        <StopsExplorerMap />
+        <div className={styles.toolbar}>
+          <StopsExplorerToolbar />
+        </div>
+        <div className={styles.map}>
+          <StopsExplorerMap />
+        </div>
         <div className={styles.sidebar}>
           {stopsExplorerContext.entities.stop_id ? (
             <>
