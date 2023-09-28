@@ -1,11 +1,11 @@
 'use client';
 
 import Link from 'next/link';
-import pjson from '../../package.json';
 import DebugToggle from '@/components/DebugToggle/DebugToggle';
 import styles from './AppFooterNav.module.css';
 import { useTranslations } from 'next-intl';
 import LiveIcon from '../LiveIcon/LiveIcon';
+import AppVersion from '@/components/AppVersion/AppVersion';
 
 export default function AppFooterNav() {
   //
@@ -78,9 +78,7 @@ export default function AppFooterNav() {
         <Link className={styles.link} href="https://status.carrismetropolitana.pt" target="_blank">
           {t('corporate.links.status')}
         </Link>
-        <Link className={`${styles.link} ${styles.version}`} href="https://www.github.com/carrismetropolitana/website" target="_blank">
-          {pjson.version}
-        </Link>
+        <AppVersion />
         <DebugToggle />
       </nav>
     </div>
