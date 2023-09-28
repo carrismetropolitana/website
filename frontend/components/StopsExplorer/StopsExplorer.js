@@ -4,7 +4,6 @@ import styles from './StopsExplorer.module.css';
 import useSWR from 'swr';
 import { useEffect } from 'react';
 import { useMap } from 'react-map-gl/maplibre';
-import { Divider } from '@mantine/core';
 import { useTranslations } from 'next-intl';
 import Pannel from '@/components/Pannel/Pannel';
 import StopsExplorerToolbar from '@/components/StopsExplorerToolbar/StopsExplorerToolbar';
