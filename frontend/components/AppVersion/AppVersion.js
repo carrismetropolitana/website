@@ -17,11 +17,11 @@ export default function AppVersion() {
   //
   // B. Handle actions
 
-  //   useEffect(() => {
-  //     if (version && version.latest != pjson.version) {
-  //       window.location.reload();
-  //     }
-  //   }, [version]);
+  useEffect(() => {
+    if (version && version.latest !== pjson.version) {
+      window.location.reload();
+    }
+  }, [version]);
 
   //
   // C. Render components
