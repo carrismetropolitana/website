@@ -16,6 +16,12 @@
   }
 }
 
+@media all and (display-mode: standalone) {
+  .container {
+    display: none;
+  }
+}
+
 .container.debugEnabled {
   background-color: var(--debug);
 }

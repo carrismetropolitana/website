@@ -9,6 +9,12 @@
   }
 }
 
+@media all and (display-mode: standalone) {
+  .container {
+    display: none;
+  }
+}
+
 .link {
   display: flex;
   flex-direction: row;
