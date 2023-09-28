@@ -134,11 +134,14 @@ export default function StopsExplorerMap() {
   }, [stopsExplorerMap]);
 
   useEffect(() => {
-    // Fit map
     if (selectedStopMapData && selectedVehicleMapData) {
+      // Get window width and height
+      let fitBoundsPadding = 100;
+      if (window.innerWidth < window.innerHeight) fitBoundsPadding = 50;
+      // Fit map
       const collection = turf.featureCollection([selectedStopMapData, selectedVehicleMapData]);
       const boundingBox = turf.bbox(collection);
-      stopsExplorerMap.fitBounds(boundingBox, { duration: 2000, padding: 100, bearing: stopsExplorerMap.getBearing(), maxZoom: 16 });
+      stopsExplorerMap.fitBounds(boundingBox, { duration: 2000, padding: fitBoundsPadding, bearing: stopsExplorerMap.getBearing(), maxZoom: 16 });
     }
   }, [selectedStopMapData, selectedVehicleMapData, stopsExplorerMap]);
 
