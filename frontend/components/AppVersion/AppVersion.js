@@ -4,7 +4,6 @@ import useSWR from 'swr';
 import Link from 'next/link';
 import styles from './AppVersion.module.css';
 import pjson from '../../package.json';
-import { useRouter } from 'next/navigation';
 import { useEffect } from 'react';
 
 export default function AppVersion() {
@@ -13,17 +12,16 @@ export default function AppVersion() {
   //
   // A. Setup variables
 
-  const router = useRouter();
   const { data: version } = useSWR('/version', { refreshInterval: 5000 });
 
   //
   // B. Handle actions
 
   useEffect(() => {
-    if (version && version.latest != pjson.version) {
-      router.reload();
+    if (version && version.latest != pjson?.version) {
+      window.location.reload();
     }
-  }, [router, version]);
+  }, [version]);
 
   //
   // C. Render components
