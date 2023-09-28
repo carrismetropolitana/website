@@ -5,6 +5,7 @@
   justify-content: center;
   gap: var(--size-md);
   padding: var(--size-lg) var(--size-md);
+  border-bottom: 1px solid var(--gray-2);
 }
 
 .badges {

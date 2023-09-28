@@ -9,6 +9,7 @@
   padding: var(--size-sm);
   align-items: center;
   justify-content: flex-start;
+  border-bottom: 1px solid var(--gray-2);
 }
 
 .controls {

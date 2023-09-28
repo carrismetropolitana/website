@@ -83,7 +83,6 @@ export default function StopsExplorer({ urlStopId }) {
           {stopsExplorerContext.entities.stop_id ? (
             <>
               <StopInfo />
-              <Divider />
               <StopTimetable />
             </>
           ) : (
