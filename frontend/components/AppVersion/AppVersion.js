@@ -14,7 +14,7 @@ export default function AppVersion() {
   // A. Setup variables
 
   const router = useRouter();
-  const { data: version } = useSWR('/version', { fetchInterval: 5000 });
+  const { data: version } = useSWR('/version', { refreshInterval: 5000 });
 
   //
   // B. Handle actions
