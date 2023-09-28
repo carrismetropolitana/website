@@ -9,7 +9,7 @@ import { useTranslations } from 'next-intl';
 import Pannel from '@/components/Pannel/Pannel';
 import StopsExplorerToolbar from '@/components/StopsExplorerToolbar/StopsExplorerToolbar';
 import StopsExplorerMap from '@/components/StopsExplorerMap/StopsExplorerMap';
-import StopInfo from '@/components/StopInfo/StopInfo';
+import StopsExplorerStopInfo from '@/components/StopsExplorerStopInfo/StopsExplorerStopInfo';
 import StopTimetable from '@/components/StopsExplorerTimetable/StopsExplorerTimetable';
 import NoDataLabel from '@/components/NoDataLabel/NoDataLabel';
 import { useStopsExplorerContext } from '@/contexts/StopsExplorerContext';
@@ -82,7 +82,7 @@ export default function StopsExplorer({ urlStopId }) {
         <div className={styles.sidebar}>
           {stopsExplorerContext.entities.stop_id ? (
             <>
-              <StopInfo />
+              <StopsExplorerStopInfo />
               <StopTimetable />
             </>
           ) : (

@@ -1,7 +1,7 @@
 'use client';
 
 import useSWR from 'swr';
-import styles from './StopInfo.module.css';
+import styles from './StopsExplorerStopInfo.module.css';
 import Loader from '@/components/Loader/Loader';
 import CopyBadge from '@/components/CopyBadge/CopyBadge';
 import FacilityIcon from '@/components/Facilities/FacilityIcon';
@@ -12,7 +12,7 @@ import { useEffect, useState } from 'react';
 
 /* * */
 
-export default function StopInfo() {
+export default function StopsExplorerStopInfo() {
   //
 
   //

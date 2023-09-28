@@ -10,11 +10,11 @@
         "lint": "next lint"
     },
     "dependencies": {
-        "@mantine/core": "7.0.2",
-        "@mantine/dates": "7.0.2",
-        "@mantine/form": "7.0.2",
-        "@mantine/hooks": "7.0.2",
-        "@tabler/icons-react": "2.36.0",
+        "@mantine/core": "7.1.0",
+        "@mantine/dates": "7.1.0",
+        "@mantine/form": "7.1.0",
+        "@mantine/hooks": "7.1.0",
+        "@tabler/icons-react": "2.37.0",
         "@turf/turf": "6.5.0",
         "dayjs": "1.11.10",
         "inflected": "2.1.0",
