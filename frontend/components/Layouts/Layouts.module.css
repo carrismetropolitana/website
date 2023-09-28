@@ -24,6 +24,13 @@
   }
 }
 
+@media all and (display-mode: standalone) {
+  .baseLayout {
+    padding: 0;
+    margin: 0;
+  }
+}
+
 /* * */
 /* INNER WRAPPER */
 
