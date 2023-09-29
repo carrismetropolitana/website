@@ -2,6 +2,7 @@ import { useTranslations } from 'next-intl';
 import Loader from '@/components/Loader/Loader';
 import styles from './Pannel.module.css';
 import NoDataLabel from '@/components/NoDataLabel/NoDataLabel';
+import { useDebugContext } from '@/contexts/DebugContext';
 
 export default function Pannel({ loading, error, icon, title, rightSection, children }) {
   //
@@ -10,6 +11,7 @@ export default function Pannel({ loading, error, icon, title, rightSection, chil
   // A. Setup variables
 
   const t = useTranslations('Pannel');
+  const debugContext = useDebugContext();
 
   //
   // A. Render components
@@ -54,7 +56,7 @@ export default function Pannel({ loading, error, icon, title, rightSection, chil
 
   return (
     <div className={styles.container}>
-      <div className={styles.header}>
+      <div className={`${styles.header} ${debugContext.isDebug && styles.debugEnabled}`}>
         <div className={styles.headerLeftSection}>
           {icon && <div className={styles.headerIcon}>{icon}</div>}
           {title && <h1 className={styles.headerTitle}>{title}</h1>}

@@ -12,6 +12,7 @@ import StopsExplorerStopInfo from '@/components/StopsExplorerStopInfo/StopsExplo
 import StopTimetable from '@/components/StopsExplorerTimetable/StopsExplorerTimetable';
 import NoDataLabel from '@/components/NoDataLabel/NoDataLabel';
 import { useStopsExplorerContext } from '@/contexts/StopsExplorerContext';
+import BetaIcon from '../BetaIcon/BetaIcon';
 
 /* * */
 
@@ -67,7 +68,7 @@ export default function StopsExplorer({ urlStopId }) {
         <>
           {allVehiclesValidating && <div className={styles.validating}>V</div>}
           {stopRealtimeValidating && <div className={styles.validating}>SR</div>}
-          <div className={styles.betaIcon}>BETA</div>
+          <BetaIcon />
         </>
       }
     >
