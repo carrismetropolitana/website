@@ -12,7 +12,7 @@ export default function AppVersion() {
   //
   // A. Setup variables
 
-  const { data: version } = useSWR('/version', { refreshInterval: 5000 });
+  const { data: version } = useSWR('/version', { refreshInterval: 20000 });
 
   //
   // B. Handle actions
