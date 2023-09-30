@@ -100,7 +100,8 @@ export default function StopsExplorerMap() {
             id: selectedVehicleData.id,
             speed: selectedVehicleData.speed,
             timestamp: selectedVehicleData.timestamp,
-            timeString: new Date(selectedVehicleData.timestamp).toLocaleString(),
+            timeString: new Date(selectedVehicleData.timestamp * 1000).toLocaleString(),
+            delay: Math.floor(Date.now() / 1000) - selectedVehicleData.timestamp,
             heading: selectedVehicleData.heading,
             trip_id: selectedVehicleData.trip_id,
             pattern_id: selectedVehicleData.pattern_id,
@@ -125,6 +126,16 @@ export default function StopsExplorerMap() {
     stopsExplorerMap.loadImage('/icons/bus.png', (error, image) => {
       if (error) throw error;
       stopsExplorerMap.addImage('bus', image, { sdf: false });
+    });
+    // Load vehicle symbol
+    stopsExplorerMap.loadImage('/icons/bus-dead.png', (error, image) => {
+      if (error) throw error;
+      stopsExplorerMap.addImage('bus-dead', image, { sdf: false });
+    });
+    // Load vehicle symbol
+    stopsExplorerMap.loadImage('/icons/bus-delay.png', (error, image) => {
+      if (error) throw error;
+      stopsExplorerMap.addImage('bus-delay', image, { sdf: false });
     });
     // Load stop selected symbol
     stopsExplorerMap.loadImage('/icons/map-stop-selected.png', (error, image) => {
@@ -213,8 +224,9 @@ export default function StopsExplorerMap() {
       <GeolocateControl />
       {selectedVehicleMapData && debugContext.isDebug && (
         <Popup closeButton={false} closeOnClick={false} latitude={selectedVehicleMapData.geometry.coordinates[1]} longitude={selectedVehicleMapData.geometry.coordinates[0]} anchor="bottom">
-          <div>{selectedVehicleMapData.properties.id}</div>
-          <div>{selectedVehicleMapData.properties.timeString}</div>
+          <div>Vehicle ID: {selectedVehicleMapData.properties.id}</div>
+          <div>Timestamp: {selectedVehicleMapData.properties.timeString}</div>
+          <div>Delay: {selectedVehicleMapData.properties.delay} seconds</div>
         </Popup>
       )}
       {selectedVehicleMapData && (
@@ -236,6 +248,44 @@ export default function StopsExplorerMap() {
             }}
             paint={{
               'icon-opacity': ['interpolate', ['linear', 0.5], ['zoom'], 7, 0, 10, 1],
+            }}
+          />
+          {/* <Layer
+            id="selected-vehicle-delay"
+            type="symbol"
+            source="selected-vehicle"
+            layout={{
+              'icon-allow-overlap': true,
+              'icon-ignore-placement': true,
+              'icon-anchor': 'center',
+              'symbol-placement': 'point',
+              'icon-rotation-alignment': 'map',
+              'icon-image': 'bus-delay',
+              'icon-size': ['interpolate', ['linear', 0.5], ['zoom'], 10, 0.05, 20, 0.15],
+              'icon-offset': [0, 0],
+              'icon-rotate': selectedVehicleMapData.properties.heading || 0,
+            }}
+            paint={{
+              'icon-opacity': ['interpolate', ['linear', 0.5], ['get', 'delay'], 20, 0, 21, 1],
+            }}
+          /> */}
+          <Layer
+            id="selected-vehicle-dead"
+            type="symbol"
+            source="selected-vehicle"
+            layout={{
+              'icon-allow-overlap': true,
+              'icon-ignore-placement': true,
+              'icon-anchor': 'center',
+              'symbol-placement': 'point',
+              'icon-rotation-alignment': 'map',
+              'icon-image': 'bus-dead',
+              'icon-size': ['interpolate', ['linear', 0.5], ['zoom'], 10, 0.05, 20, 0.15],
+              'icon-offset': [0, 0],
+              'icon-rotate': selectedVehicleMapData.properties.heading || 0,
+            }}
+            paint={{
+              'icon-opacity': ['interpolate', ['linear', 0.5], ['get', 'delay'], 20, 0, 40, 1],
             }}
           />
         </Source>
