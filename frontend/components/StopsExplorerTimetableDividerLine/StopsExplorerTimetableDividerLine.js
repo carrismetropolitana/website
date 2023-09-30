@@ -9,10 +9,9 @@ export default function StopsExplorerTimetableDividerLine() {
   // A. Setup variables
 
   const currentTime = new Date();
-  const currentHours = currentTime.getHours();
-  const currentMinutes = currentTime.getMinutes();
 
-  const numberFormatter = Intl.NumberFormat('pt-PT', { minimumIntegerDigits: 2 });
+  const hoursFormatter = Intl.DateTimeFormat('pt-PT', { hour: '2-digit', timeZone: 'Europe/Lisbon' });
+  const minutesFormatter = Intl.DateTimeFormat('pt-PT', { minute: '2-digit', timeZone: 'Europe/Lisbon' });
 
   //
   // B. Render components
@@ -22,9 +21,9 @@ export default function StopsExplorerTimetableDividerLine() {
       <div className={styles.circle}></div>
       <div className={styles.line}></div>
       <div className={styles.time}>
-        {numberFormatter.format(currentHours)}
+        {hoursFormatter.format(currentTime)}
         <span>:</span>
-        {numberFormatter.format(currentMinutes)}
+        {minutesFormatter.format(currentTime)}
       </div>
     </div>
   );
