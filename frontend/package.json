@@ -1,6 +1,6 @@
 {
     "name": "@carrismetropolitana/website",
-    "version": "2023.09.30-2105",
+    "version": "2023.10.02-2352",
     "private": true,
     "scripts": {
         "dev": "next dev",
@@ -10,10 +10,10 @@
         "lint": "next lint"
     },
     "dependencies": {
-        "@mantine/core": "7.1.0",
-        "@mantine/dates": "7.1.0",
-        "@mantine/form": "7.1.0",
-        "@mantine/hooks": "7.1.0",
+        "@mantine/core": "7.1.2",
+        "@mantine/dates": "7.1.2",
+        "@mantine/form": "7.1.2",
+        "@mantine/hooks": "7.1.2",
         "@tabler/icons-react": "2.38.0",
         "@turf/turf": "6.5.0",
         "dayjs": "1.11.10",
@@ -28,13 +28,13 @@
         "swr": "2.2.4"
     },
     "devDependencies": {
-        "@types/node": "20.8.0",
-        "@types/react": "18.2.23",
+        "@types/node": "20.8.2",
+        "@types/react": "18.2.24",
         "@types/react-dom": "18.2.8",
         "eslint": "8.50.0",
         "eslint-config-next": "13.5.3",
         "postcss": "8.4.31",
-        "postcss-preset-mantine": "1.7.0",
+        "postcss-preset-mantine": "1.8.0",
         "postcss-simple-vars": "7.0.1",
         "typescript": "5.2.2"
     }
