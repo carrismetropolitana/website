@@ -87,7 +87,7 @@ export function StopsExplorerContextProvider({ children }) {
     (stopId) => {
       const foundStop = allStopsData.find((item) => item.id === stopId);
       if (foundStop) {
-        setEntitiesState((prev) => ({ ...prev, stop: foundStop }));
+        setEntitiesState({ ...initialEntitiesState, stop: foundStop });
         updateWindowUrl(stopId, foundStop.name);
       }
     },
