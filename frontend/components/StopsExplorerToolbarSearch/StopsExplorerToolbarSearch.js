@@ -1,15 +1,16 @@
 'use client';
 
 import useSWR from 'swr';
-import { Combobox, Highlight, TextInput, useCombobox, Text, ActionIcon } from '@mantine/core';
+import { Combobox, Highlight, TextInput, useCombobox, Text, ActionIcon, Divider } from '@mantine/core';
 import { useMemo, useState } from 'react';
 import { useTranslations } from 'next-intl';
 import styles from './StopsExplorerToolbarSearch.module.css';
 import useSearch from '@/hooks/useSearch';
-import { IconX, IconSearch } from '@tabler/icons-react';
+import { IconX, IconSearch, IconMapCode } from '@tabler/icons-react';
 import parseStopLocationName from '@/services/parseStopLocationName';
 import { useStopsExplorerContext } from '@/contexts/StopsExplorerContext';
 import { useDebouncedValue } from '@mantine/hooks';
+import { useMap } from 'react-map-gl/maplibre';
 
 /* * */
 
@@ -24,6 +25,9 @@ export default function StopsExplorerToolbarSearch() {
   const comboboxStore = useCombobox();
   const [searchQuery, setSearchQuery] = useState('');
   const [debouncedSearchQuery] = useDebouncedValue(searchQuery, 300);
+  const { stopsExplorerMap } = useMap();
+
+  const [searchQueryCoordinates, setSearchQueryCoordinates] = useState(null);
 
   //
   // B. Fetch data
@@ -69,20 +73,31 @@ export default function StopsExplorerToolbarSearch() {
 
   const handleClearSearchField = () => {
     setSearchQuery('');
+    setSearchQueryCoordinates(null);
     comboboxStore.openDropdown();
   };
 
   const handleSearchQueryChange = ({ currentTarget }) => {
+    // Always update text field
     setSearchQuery(currentTarget.value);
+    // Test if the input field is a set of coordinates
+    const coordinatesPattern = /^([-+]?\d+(\.\d+)?)\s+([-+]?\d+(\.\d+)?)$/;
+    const coordinatesMatch = coordinatesPattern.exec(currentTarget.value);
+    if (coordinatesMatch && coordinatesMatch.length === 5) setSearchQueryCoordinates([parseFloat(coordinatesMatch[3]), parseFloat(coordinatesMatch[1])]);
+    else setSearchQueryCoordinates(null);
+    // Update combobox
     comboboxStore.updateSelectedOptionIndex();
     comboboxStore.openDropdown();
   };
 
-  const handleSelectStop = (chosenSelectItemValue) => {
-    const selectedStopData = allStopsData.find((item) => item.id === chosenSelectItemValue);
-    if (!selectedStopData) return;
-    setSearchQuery(selectedStopData.name);
-    stopsExplorerContext.updateEntities({ stop_id: chosenSelectItemValue }, true);
+  const handleSelectStop = (chosenStop) => {
+    stopsExplorerContext.selectStop(chosenStop.id);
+    comboboxStore.closeDropdown();
+  };
+
+  const handleSelectCoordinates = () => {
+    stopsExplorerContext.clearSelectedStop();
+    stopsExplorerMap.flyTo({ center: searchQueryCoordinates, zoom: stopsExplorerMap.getZoom() < 10 ? 20 : stopsExplorerMap.getZoom() });
     comboboxStore.closeDropdown();
   };
 
@@ -91,7 +106,7 @@ export default function StopsExplorerToolbarSearch() {
 
   return (
     <div className={styles.container}>
-      <Combobox onOptionSubmit={handleSelectStop} store={comboboxStore}>
+      <Combobox store={comboboxStore}>
         <Combobox.Target>
           <TextInput
             autoComplete="off"
@@ -117,11 +132,20 @@ export default function StopsExplorerToolbarSearch() {
 
         <Combobox.Dropdown>
           <Combobox.Options mah={200} style={{ overflowY: 'auto' }}>
-            {allStopsDataFilteredBySearchQuery.length === 0 ? (
+            {searchQueryCoordinates ? (
+              <Combobox.Option value={searchQuery} onClick={() => handleSelectCoordinates()}>
+                <div className={styles.comboboxOption}>
+                  <div className={styles.coordinatesResult}>
+                    <IconMapCode size={20} />
+                    <p className={styles.coordinatesResultLabel}>Mover mapa para estas coordenadas</p>
+                  </div>
+                </div>
+              </Combobox.Option>
+            ) : allStopsDataFilteredBySearchQuery.length === 0 ? (
               <Combobox.Empty>{t('no_results')}</Combobox.Empty>
             ) : (
               allStopsDataFilteredBySearchQuery.map((item) => (
-                <Combobox.Option key={item.id} value={item.id}>
+                <Combobox.Option key={item.id} value={item.id} onClick={() => handleSelectStop(item)}>
                   <div className={styles.comboboxOption}>
                     <div className={styles.stopInfo}>
                       <Highlight fz="sm" fw={500}>

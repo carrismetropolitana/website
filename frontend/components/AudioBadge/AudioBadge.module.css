@@ -1,0 +1,14 @@
+/* * */
+/* CONTAINER */
+
+.container {
+  color: var(--gray-3);
+  background-color: transparent;
+  transition: all 100ms ease;
+}
+
+.container:hover,
+.playing {
+  color: var(--gray-5);
+  background-color: var(--gray-1);
+}

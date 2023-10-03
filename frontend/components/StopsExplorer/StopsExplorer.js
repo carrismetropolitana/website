@@ -12,11 +12,11 @@ import StopsExplorerStopInfo from '@/components/StopsExplorerStopInfo/StopsExplo
 import StopTimetable from '@/components/StopsExplorerTimetable/StopsExplorerTimetable';
 import NoDataLabel from '@/components/NoDataLabel/NoDataLabel';
 import { useStopsExplorerContext } from '@/contexts/StopsExplorerContext';
-import BetaIcon from '../BetaIcon/BetaIcon';
+import BetaIcon from '@/components/BetaIcon/BetaIcon';
 
 /* * */
 
-export default function StopsExplorer({ urlStopId }) {
+export default function StopsExplorer() {
   //
 
   //
@@ -32,26 +32,15 @@ export default function StopsExplorer({ urlStopId }) {
 
   const { data: allStopsData, error: allStopsError, isLoading: allStopsLoading } = useSWR('https://api.carrismetropolitana.pt/stops');
   const { isValidating: allVehiclesValidating } = useSWR('https://api.carrismetropolitana.pt/vehicles', { refreshInterval: 5000 });
-  const { isValidating: stopRealtimeValidating } = useSWR(stopsExplorerContext.entities.stop_id && `https://api.carrismetropolitana.pt/stops/${stopsExplorerContext.entities.stop_id}/realtime`, { refreshInterval: 5000 });
+  const { isValidating: stopRealtimeValidating } = useSWR(stopsExplorerContext.entities.stop?.id && `https://api.carrismetropolitana.pt/stops/${stopsExplorerContext.entities.stop.id}/realtime`, { refreshInterval: 5000 });
 
   //
   // C. Handle actions
 
   useEffect(() => {
-    if (stopsExplorerContext.entities.stop_id && allStopsData) {
-      const foundStop = allStopsData.find((item) => item.id === stopsExplorerContext.entities.stop_id);
-      if (foundStop) {
-        const newUrl = `/stops/${stopsExplorerContext.entities.stop_id}`;
-        window.history.replaceState({ ...window.history.state, as: newUrl, url: newUrl }, '', newUrl);
-        document.title = foundStop.name;
-      }
-    }
-  }, [allStopsData, stopsExplorerContext.entities.stop_id]);
-
-  useEffect(() => {
-    if (urlStopId && urlStopId !== 'all' && allStopsData && !stopsExplorerContext.entities.stop_id && stopsExplorerMap?.getSource('all-stops') !== undefined) {
-      const foundStop = allStopsData.find((item) => item.id === urlStopId);
-      if (foundStop) stopsExplorerContext.updateEntities({ stop_id: urlStopId }, true);
+    const matchedStopIdFromUrl = window.location.pathname.match(/\/stops\/(.+)/);
+    if (matchedStopIdFromUrl && matchedStopIdFromUrl[1] !== 'all' && allStopsData && !stopsExplorerContext.entities.stop?.id && stopsExplorerMap?.getSource('all-stops') !== undefined) {
+      stopsExplorerContext.selectStop(matchedStopIdFromUrl[1]);
     }
   });
 
@@ -80,7 +69,7 @@ export default function StopsExplorer({ urlStopId }) {
           <StopsExplorerMap />
         </div>
         <div className={styles.sidebar}>
-          {stopsExplorerContext.entities.stop_id ? (
+          {stopsExplorerContext.entities.stop?.id ? (
             <>
               <StopsExplorerStopInfo />
               <StopTimetable />

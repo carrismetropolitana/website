@@ -1,7 +1,8 @@
+import AudioBadge from '../AudioBadge/AudioBadge';
 import Text from '../Text/Text';
 import styles from './StopName.module.css';
 
-export default function StopName({ name, tts_name, locality, municipality, selected = false, alignment = 'flex-start' }) {
+export default function StopName({ id, name, tts_name, locality, municipality, selected = false, alignment = 'flex-start' }) {
   //
 
   // If none of the location strings are defined,
@@ -10,7 +11,7 @@ export default function StopName({ name, tts_name, locality, municipality, selec
     return (
       <div className={`${styles.container} ${styles[alignment]}`}>
         <Text type={selected ? 'h2' : 'h3'} aria-label={tts_name || name}>
-          {name}
+          {name} <AudioBadge type="stops" id={id} />
         </Text>
       </div>
     );
@@ -21,7 +22,7 @@ export default function StopName({ name, tts_name, locality, municipality, selec
     return (
       <div className={`${styles.container} ${styles[alignment]}`}>
         <Text type={selected ? 'h2' : 'h3'} aria-label={tts_name || name}>
-          {name}
+          {name} <AudioBadge type="stops" id={id} />
         </Text>
         <Text type="subtitle">{locality}</Text>
       </div>
@@ -33,7 +34,7 @@ export default function StopName({ name, tts_name, locality, municipality, selec
     return (
       <div className={`${styles.container} ${styles[alignment]}`}>
         <Text type={selected ? 'h2' : 'h3'} aria-label={tts_name || name}>
-          {name}
+          {name} <AudioBadge type="stops" id={id} />
         </Text>
         <Text type="subtitle">{municipality}</Text>
       </div>
@@ -46,7 +47,7 @@ export default function StopName({ name, tts_name, locality, municipality, selec
     return (
       <div className={`${styles.container} ${styles[alignment]}`}>
         <Text type={selected ? 'h2' : 'h3'} aria-label={tts_name || name}>
-          {name}
+          {name} <AudioBadge type="stops" id={id} />
         </Text>
         <Text type="subtitle">{locality}</Text>
       </div>
@@ -57,7 +58,7 @@ export default function StopName({ name, tts_name, locality, municipality, selec
   return (
     <div className={`${styles.container} ${styles[alignment]}`}>
       <Text type={selected ? 'h2' : 'h3'} aria-label={tts_name || name}>
-        {name}
+        {name} <AudioBadge type="stops" id={id} />
       </Text>
       <Text type="subtitle">
         {locality}, {municipality}

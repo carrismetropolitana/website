@@ -743,7 +743,7 @@
     "StopsExplorerToolbarSearch": {
         "label": "Procurar paragens por nome, código, localização...",
         "placeholder": "Procurar paragens por nome, código, localização...",
-        "no_results": "Nenhum Resultado Encontrado"
+        "no_results": "Nenhuma Paragem Encontrada"
     },
     "DebugToggle": {
         "enabled": "Disable Debug",

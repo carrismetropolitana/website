@@ -1,6 +1,7 @@
 'use client';
 
 import { createContext, useCallback, useContext, useMemo, useState } from 'react';
+import useSWR from 'swr';
 
 // A.
 // SETUP INITIAL STATE
@@ -11,11 +12,16 @@ const initialMapState = {
 };
 
 const initialEntitiesState = {
-  stop_id: null,
   pattern_id: null,
   shape_id: null,
   vehicle_id: null,
   trip_id: null,
+  //
+  stop: null,
+  trip: null,
+  pattern: null,
+  shape: null,
+  vehicle: null,
 };
 
 // B.
@@ -43,6 +49,20 @@ export function StopsExplorerContextProvider({ children }) {
   const [entitiesState, setEntitiesState] = useState(initialEntitiesState);
 
   //
+  // B. Fetch data
+
+  const { data: allStopsData } = useSWR('https://api.carrismetropolitana.pt/stops');
+
+  //
+  // C. Supporting functions
+
+  const updateWindowUrl = (stopId = 'all', stopName = 'Carris Metropolitana') => {
+    const newUrl = `/stops/${stopId}`;
+    window.history.replaceState({ ...window.history.state, as: newUrl, url: newUrl }, '', newUrl);
+    document.title = stopName;
+  };
+
+  //
   // B. Setup actions
 
   const updateMapState = useCallback(
@@ -53,13 +73,41 @@ export function StopsExplorerContextProvider({ children }) {
     [mapState]
   );
 
-  const updateEntitiesState = useCallback(
+  const updateEntities = useCallback(
     (newEntitiesState, reset = false) => {
       if (reset) setEntitiesState({ ...initialEntitiesState, ...newEntitiesState });
       else setEntitiesState({ ...entitiesState, ...newEntitiesState });
     },
     [entitiesState]
   );
+
+  // --------
+
+  const selectStop = useCallback(
+    (stopId) => {
+      const foundStop = allStopsData.find((item) => item.id === stopId);
+      if (foundStop) {
+        setEntitiesState((prev) => ({ ...prev, stop: foundStop }));
+        updateWindowUrl(stopId, foundStop.name);
+      }
+    },
+    [allStopsData]
+  );
+
+  const clearSelectedStop = useCallback(() => {
+    setEntitiesState(initialEntitiesState);
+    updateWindowUrl();
+  }, []);
+
+  // --------
+
+  const selectTrip = useCallback((tripData) => {
+    setEntitiesState((prev) => ({ ...prev, trip: tripData }));
+  }, []);
+
+  const clearSelectedTrip = useCallback(() => {
+    setEntitiesState((prev) => ({ ...initialEntitiesState, stop: prev.stop }));
+  }, []);
 
   //
   // C. Setup context object
@@ -71,9 +119,15 @@ export function StopsExplorerContextProvider({ children }) {
       updateMap: updateMapState,
       //
       entities: entitiesState,
-      updateEntities: updateEntitiesState,
+      updateEntities,
+      //
+      selectStop,
+      clearSelectedStop,
+      //
+      selectTrip,
+      clearSelectedTrip,
     }),
-    [mapState, updateMapState, entitiesState, updateEntitiesState]
+    [mapState, updateMapState, entitiesState, updateEntities, selectStop, clearSelectedStop, selectTrip, clearSelectedTrip]
   );
 
   //

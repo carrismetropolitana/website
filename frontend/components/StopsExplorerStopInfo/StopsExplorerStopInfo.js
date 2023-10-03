@@ -1,14 +1,12 @@
 'use client';
 
-import useSWR from 'swr';
 import styles from './StopsExplorerStopInfo.module.css';
-import Loader from '@/components/Loader/Loader';
 import CopyBadge from '@/components/CopyBadge/CopyBadge';
 import FacilityIcon from '@/components/Facilities/FacilityIcon';
 import { NewLineBadge } from '@/components/NewLineBadge/NewLineBadge';
-import StopName from '@/components/StopName/StopName';
 import { useStopsExplorerContext } from '@/contexts/StopsExplorerContext';
-import { useEffect, useState } from 'react';
+import AudioBadge from '@/components/AudioBadge/AudioBadge';
+import useStopLocation from '@/hooks/useStopLocation';
 
 /* * */
 
@@ -19,57 +17,42 @@ export default function StopsExplorerStopInfo() {
   // A. Setup variables
 
   const stopsExplorerContext = useStopsExplorerContext();
-  const [selectedStopData, setSelectedStopData] = useState(null);
+  const stopLocation = useStopLocation(stopsExplorerContext.entities.stop);
 
   //
-  // B. Fetch data
-
-  const { data: allStopsData, isLoading: allStopsLoading } = useSWR('https://api.carrismetropolitana.pt/stops');
-
-  //
-  // C. Handle actions
-
-  useEffect(() => {
-    if (!allStopsData) return;
-    const foundItem = allStopsData.find((item) => item.id === stopsExplorerContext.entities.stop_id);
-    if (foundItem) setSelectedStopData(foundItem);
-  }, [allStopsData, stopsExplorerContext.entities.stop_id]);
-
-  //
-  // D. Render components
+  // B. Render components
 
   return (
-    <div>
-      {allStopsLoading && (
-        <div className={styles.container}>
-          <Loader visible />
+    stopsExplorerContext.entities.stop && (
+      <div className={styles.container}>
+        <div className={styles.badges}>
+          <CopyBadge label={`#${stopsExplorerContext.entities.stop.id}`} value={stopsExplorerContext.entities.stop.id} />
+          <CopyBadge label={`${stopsExplorerContext.entities.stop.lat}, ${stopsExplorerContext.entities.stop.lon}`} value={`${stopsExplorerContext.entities.stop.lat}	${stopsExplorerContext.entities.stop.lon}`} />
         </div>
-      )}
-      {selectedStopData && (
-        <div className={styles.container}>
-          <div className={styles.badges}>
-            <CopyBadge label={`#${selectedStopData.id}`} value={selectedStopData.id} />
-            <CopyBadge label={`${selectedStopData.lat}, ${selectedStopData.lon}`} value={`${selectedStopData.lat}	${selectedStopData.lon}`} />
+
+        <div className={styles.nameAndLocation} aria-label={stopsExplorerContext.entities.stop.tts_name || stopsExplorerContext.entities.stop.name}>
+          <h3 className={styles.stopName} aria-label={stopsExplorerContext.entities.stop.tts_name || stopsExplorerContext.entities.stop.name}>
+            {stopsExplorerContext.entities.stop.name} <AudioBadge type="stops" id={stopsExplorerContext.entities.stop.id} />
+          </h3>
+          {stopLocation && <h5 className={styles.stopLocation}>{stopLocation}</h5>}
+        </div>
+
+        {stopsExplorerContext.entities.stop.facilities.length > 0 && (
+          <div className={styles.facilities}>
+            {stopsExplorerContext.entities.stop.facilities.map((e, index) => (
+              <FacilityIcon key={index} name={e} size={28} />
+            ))}
           </div>
+        )}
 
-          <StopName name={selectedStopData.name} tts_name={selectedStopData.tts_name} locality={selectedStopData.locality} municipality={selectedStopData.municipality_name} alignment="center" selected />
-
-          {selectedStopData.facilities.length > 0 && (
-            <div className={styles.equipments}>
-              {selectedStopData.facilities.map((e, index) => (
-                <FacilityIcon key={index} name={e} size={28} />
-              ))}
-            </div>
-          )}
-          {selectedStopData?.lines?.length > 0 && (
-            <div className={styles.routes}>
-              {selectedStopData.lines.map((lineId, index) => (
-                <NewLineBadge key={index} id={lineId} />
-              ))}
-            </div>
-          )}
-        </div>
-      )}
-    </div>
+        {stopsExplorerContext.entities.stop?.lines?.length > 0 && (
+          <div className={styles.lines}>
+            {stopsExplorerContext.entities.stop.lines.map((lineId, index) => (
+              <NewLineBadge key={index} id={lineId} />
+            ))}
+          </div>
+        )}
+      </div>
+    )
   );
 }

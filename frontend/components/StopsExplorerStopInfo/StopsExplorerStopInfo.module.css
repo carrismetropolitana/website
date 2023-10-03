@@ -1,3 +1,6 @@
+/* * */
+/* CONTAINER */
+
 .container {
   display: flex;
   flex-direction: column;
@@ -8,14 +11,58 @@
   border-bottom: 1px solid var(--gray-2);
 }
 
+/* * */
+/* BADGES */
+
 .badges {
   display: flex;
   flex-direction: row;
   gap: var(--size-sm);
 }
 
-.equipments,
-.routes {
+/* * */
+/* NAME AND LOCATION */
+
+.nameAndLocation {
+  display: flex;
+  flex-direction: column;
+  gap: var(--size-xs);
+  align-items: center;
+  text-align: center;
+}
+
+.stopName {
+  display: inline;
+  font-size: 22px;
+  font-weight: 700;
+  color: var(--gray-7);
+  text-align: center;
+  vertical-align: middle;
+}
+
+@media (max-width: 600px) {
+  .stopName {
+    font-size: 18px;
+  }
+}
+
+.stopLocation {
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--gray-5);
+}
+
+@media (max-width: 600px) {
+  .stopLocation {
+    font-size: 14px;
+  }
+}
+
+/* * */
+/* FACILITIES AND LINES */
+
+.facilities,
+.lines {
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;

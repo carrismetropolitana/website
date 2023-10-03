@@ -22,7 +22,7 @@ export default function StopsExplorerMap() {
   const { stopsExplorerMap } = useMap();
   const stopsExplorerContext = useStopsExplorerContext();
 
-  const [selectedMapFeatute, setSelectedMapFeature] = useState(null);
+  const [selectedMapFeature, setSelectedMapFeature] = useState(null);
 
   //
   // B. Fetch data
@@ -56,23 +56,19 @@ export default function StopsExplorerMap() {
   }, [allStopsData]);
 
   const selectedStopMapData = useMemo(() => {
-    if (allStopsData && stopsExplorerContext.entities.stop_id) {
-      const selectedStopData = allStopsData.find((item) => item.id === stopsExplorerContext.entities.stop_id);
-      if (selectedStopData) {
-        return {
-          type: 'Feature',
-          geometry: {
-            type: 'Point',
-            coordinates: [selectedStopData.lon, selectedStopData.lat],
-          },
-          properties: {
-            id: selectedStopData.id,
-          },
-        };
-      }
-      return null;
+    if (stopsExplorerContext.entities.stop) {
+      return {
+        type: 'Feature',
+        geometry: {
+          type: 'Point',
+          coordinates: [stopsExplorerContext.entities.stop.lon, stopsExplorerContext.entities.stop.lat],
+        },
+        properties: {
+          id: stopsExplorerContext.entities.stop.id,
+        },
+      };
     }
-  }, [allStopsData, stopsExplorerContext.entities.stop_id]);
+  }, [stopsExplorerContext.entities.stop]);
 
   const selectedShapeMapData = useMemo(() => {
     if (selectedPatternData && selectedShapeData) {
@@ -160,9 +156,9 @@ export default function StopsExplorerMap() {
   // C. Handle actions
 
   useEffect(() => {
-    if (stopsExplorerContext.entities.stop_id) {
+    if (stopsExplorerContext.entities.stop?.id) {
       // Get map feature matching currently selected stop_id
-      const stopMapFeature = allStopsMapData?.features.find((f) => f.properties?.id === stopsExplorerContext.entities.stop_id);
+      const stopMapFeature = allStopsMapData?.features.find((f) => f.properties?.id === stopsExplorerContext.entities.stop?.id);
       if (!stopMapFeature) return;
       // Set default map zoom and speed levels
       const defaultSpeed = 4000;
@@ -183,12 +179,12 @@ export default function StopsExplorerMap() {
       }
       // Update local state
       setSelectedMapFeature(stopMapFeature);
-    }
-  }, [allStopsMapData?.features, stopsExplorerContext.entities.stop_id, stopsExplorerMap]);
+    } else setSelectedMapFeature(null);
+  }, [allStopsMapData?.features, stopsExplorerContext.entities.stop?.id, stopsExplorerMap]);
 
   const handleMapClick = (event) => {
-    if (event?.features[0]) {
-      stopsExplorerContext.updateEntities({ stop_id: event.features[0].properties?.id }, true);
+    if (event?.features[0]?.properties?.id) {
+      stopsExplorerContext.selectStop(event.features[0].properties.id);
     }
   };
 
@@ -205,14 +201,14 @@ export default function StopsExplorerMap() {
   };
 
   const handleMapMove = () => {
-    if (selectedMapFeatute) {
-      // Get all currently rendered features and mark all of them as unselected
-      const allRenderedFeatures = stopsExplorerMap.queryRenderedFeatures();
-      allRenderedFeatures.forEach(function (f) {
-        stopsExplorerMap.setFeatureState({ source: 'all-stops', id: f.id }, { selected: false });
-      });
-      // Then mark the selected one as selected
-      stopsExplorerMap.setFeatureState({ source: 'all-stops', id: selectedMapFeatute.properties.mapid }, { selected: true });
+    // Get all currently rendered features and mark all of them as unselected
+    const allRenderedFeatures = stopsExplorerMap.queryRenderedFeatures();
+    allRenderedFeatures.forEach(function (f) {
+      stopsExplorerMap.setFeatureState({ source: 'all-stops', id: f.id }, { selected: false });
+    });
+    // Then mark the selected one as selected
+    if (selectedMapFeature) {
+      stopsExplorerMap.setFeatureState({ source: 'all-stops', id: selectedMapFeature.properties.mapid }, { selected: true });
     }
   };
 

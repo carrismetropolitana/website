@@ -13,3 +13,21 @@
 /* .selectedStop {
   background-color: blue;
 } */
+
+/* * */
+/* COORDINATES RESULT */
+
+.coordinatesResult {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-start;
+  gap: var(--size-sm);
+  padding-top: 5px;
+  padding-bottom: 5px;
+}
+
+.coordinatesResultLabel {
+  font-size: 16px;
+  font-weight: 600;
+}
