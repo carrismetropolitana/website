@@ -81,9 +81,10 @@ export default function StopsExplorerToolbarSearch() {
     // Always update text field
     setSearchQuery(currentTarget.value);
     // Test if the input field is a set of coordinates
-    const coordinatesPattern = /^([-+]?\d+(\.\d+)?)\s+([-+]?\d+(\.\d+)?)$/;
+    // const coordinatesPattern = /^([-+]?\d+(\.\d+)?)\s+([-+]?\d+(\.\d+)?)$/;
+    const coordinatesPattern = /^([-+]?\d{1,3}(?:\.\d+)?(?:,\d+)?)(?:\s+|,)\s*([-+]?\d{1,3}(?:\.\d+)?(?:,\d+)?)$/;
     const coordinatesMatch = coordinatesPattern.exec(currentTarget.value);
-    if (coordinatesMatch && coordinatesMatch.length === 5) setSearchQueryCoordinates([parseFloat(coordinatesMatch[3]), parseFloat(coordinatesMatch[1])]);
+    if (coordinatesMatch && coordinatesMatch.length === 3) setSearchQueryCoordinates([parseFloat(coordinatesMatch[2].replace(',', '.')), parseFloat(coordinatesMatch[1].replace(',', '.'))]);
     else setSearchQueryCoordinates(null);
     // Update combobox
     comboboxStore.updateSelectedOptionIndex();
