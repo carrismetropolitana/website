@@ -97,7 +97,7 @@ export default function StopsExplorerToolbarSearch() {
 
   const handleSelectCoordinates = () => {
     stopsExplorerContext.clearSelectedStop();
-    stopsExplorerMap.flyTo({ center: searchQueryCoordinates, zoom: stopsExplorerMap.getZoom() < 10 ? 20 : stopsExplorerMap.getZoom() });
+    stopsExplorerMap.flyTo({ center: searchQueryCoordinates, zoom: stopsExplorerMap.getZoom() > 17 ? stopsExplorerMap.getZoom() : 17 });
     comboboxStore.closeDropdown();
   };
 
