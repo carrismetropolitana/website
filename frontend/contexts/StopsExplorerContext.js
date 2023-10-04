@@ -9,6 +9,7 @@ import { createContext, useCallback, useContext, useMemo, useState } from 'react
 const initialMapState = {
   style: 'map',
   auto_zoom: null,
+  selected_coordinates: null,
 };
 
 const initialEntitiesState = {
@@ -83,10 +84,18 @@ export function StopsExplorerContextProvider({ children }) {
 
   // --------
 
+  const setSelectedCoordinates = useCallback((newCoordinates) => {
+    setEntitiesState(initialEntitiesState);
+    setMapState((prev) => ({ ...prev, selected_coordinates: newCoordinates }));
+  }, []);
+
+  // --------
+
   const selectStop = useCallback(
     (stopId) => {
       const foundStop = allStopsData.find((item) => item.id === stopId);
       if (foundStop) {
+        setMapState((prev) => ({ ...prev, selected_coordinates: null }));
         setEntitiesState({ ...initialEntitiesState, stop: foundStop });
         updateWindowUrl(stopId, foundStop.name);
       }
@@ -117,6 +126,7 @@ export function StopsExplorerContextProvider({ children }) {
       //
       map: mapState,
       updateMap: updateMapState,
+      setSelectedCoordinates,
       //
       entities: entitiesState,
       updateEntities,
@@ -127,7 +137,7 @@ export function StopsExplorerContextProvider({ children }) {
       selectTrip,
       clearSelectedTrip,
     }),
-    [mapState, updateMapState, entitiesState, updateEntities, selectStop, clearSelectedStop, selectTrip, clearSelectedTrip]
+    [mapState, updateMapState, setSelectedCoordinates, entitiesState, updateEntities, selectStop, clearSelectedStop, selectTrip, clearSelectedTrip]
   );
 
   //

@@ -81,8 +81,7 @@ export default function StopsExplorerToolbarSearch() {
     // Always update text field
     setSearchQuery(currentTarget.value);
     // Test if the input field is a set of coordinates
-    // const coordinatesPattern = /^([-+]?\d+(\.\d+)?)\s+([-+]?\d+(\.\d+)?)$/;
-    const coordinatesPattern = /^([-+]?\d{1,3}(?:\.\d+)?(?:,\d+)?)(?:\s+|,)\s*([-+]?\d{1,3}(?:\.\d+)?(?:,\d+)?)$/;
+    const coordinatesPattern = /^([-+]?\d{1,3}(?:\.|,)(?:\d+))(?:\s+|,)\s*([-+]?\d{1,3}(?:\.|,)(?:\d+))$/;
     const coordinatesMatch = coordinatesPattern.exec(currentTarget.value);
     if (coordinatesMatch && coordinatesMatch.length === 3) setSearchQueryCoordinates([parseFloat(coordinatesMatch[2].replace(',', '.')), parseFloat(coordinatesMatch[1].replace(',', '.'))]);
     else setSearchQueryCoordinates(null);
@@ -98,7 +97,7 @@ export default function StopsExplorerToolbarSearch() {
 
   const handleSelectCoordinates = () => {
     stopsExplorerContext.clearSelectedStop();
-    stopsExplorerMap.flyTo({ center: searchQueryCoordinates, zoom: stopsExplorerMap.getZoom() > 17 ? stopsExplorerMap.getZoom() : 17 });
+    stopsExplorerContext.setSelectedCoordinates(searchQueryCoordinates);
     comboboxStore.closeDropdown();
   };
 

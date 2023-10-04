@@ -1,13 +1,23 @@
 'use client';
 
 import OSMMap from '@/components/OSMMap/OSMMap';
-import { useEffect, useMemo, useState } from 'react';
+import { useCallback, useEffect, useMemo, useState } from 'react';
 import * as turf from '@turf/turf';
 import { useMap, Source, Layer, Popup, GeolocateControl } from 'react-map-gl/maplibre';
 import { useDebugContext } from '@/contexts/DebugContext';
 import { useStopsExplorerContext } from '@/contexts/StopsExplorerContext';
 import useSWR from 'swr';
 import generateUUID from '@/services/generateUUID';
+
+/* * */
+
+const MAP_DEFAULT_OPTIONS = {
+  speed: 4000,
+  duration: 2000,
+  zoom: 17,
+  zoomMargin: 3,
+  maxZoom: 16,
+};
 
 /* * */
 
@@ -108,6 +118,19 @@ export default function StopsExplorerMap() {
     }
   }, [allVehiclesData, stopsExplorerContext.entities.trip_id]);
 
+  const selectedCoordinatesMapData = useMemo(() => {
+    if (stopsExplorerContext.map.selected_coordinates) {
+      return {
+        type: 'Feature',
+        geometry: {
+          type: 'Point',
+          coordinates: stopsExplorerContext.map.selected_coordinates,
+        },
+      };
+    }
+    return null;
+  }, [stopsExplorerContext.map.selected_coordinates]);
+
   //
   // C. Handle actions
 
@@ -138,6 +161,11 @@ export default function StopsExplorerMap() {
       if (error) throw error;
       stopsExplorerMap.addImage('stop-selected', image, { sdf: false });
     });
+    // Load pin symbol
+    stopsExplorerMap.loadImage('/icons/map-pin.png', (error, image) => {
+      if (error) throw error;
+      stopsExplorerMap.addImage('map-pin', image, { sdf: false });
+    });
   }, [stopsExplorerMap]);
 
   useEffect(() => {
@@ -153,6 +181,29 @@ export default function StopsExplorerMap() {
   }, [selectedStopMapData, selectedVehicleMapData, stopsExplorerMap]);
 
   //
+  // C. Helper functions
+
+  const moveMap = useCallback(
+    (coordinates) => {
+      // Get map current zoom level
+      const currentZoom = stopsExplorerMap.getZoom();
+      const currentZoomWithMargin = currentZoom + MAP_DEFAULT_OPTIONS.zoomMargin;
+      // Check if the given coordinates are inside the currently rendered map bounds
+      const currentMapBounds = stopsExplorerMap.getBounds().toArray();
+      const isInside = turf.booleanIntersects(turf.point(coordinates), turf.bboxPolygon([...currentMapBounds[0], ...currentMapBounds[1]]));
+      // If the given coordinates are visible and the zoom is not too far back (plus a little margin)...
+      if (isInside && currentZoomWithMargin > MAP_DEFAULT_OPTIONS.zoom) {
+        // ...then simply ease to it.
+        stopsExplorerMap.easeTo({ center: coordinates, zoom: currentZoom, duration: MAP_DEFAULT_OPTIONS.speed * 0.25 });
+      } else {
+        // If the zoom is too far, or the given coordinates are not visible, then fly to it
+        stopsExplorerMap.flyTo({ center: coordinates, zoom: MAP_DEFAULT_OPTIONS.zoom, duration: MAP_DEFAULT_OPTIONS.speed });
+      }
+    },
+    [stopsExplorerMap]
+  );
+
+  //
   // C. Handle actions
 
   useEffect(() => {
@@ -160,27 +211,20 @@ export default function StopsExplorerMap() {
       // Get map feature matching currently selected stop_id
       const stopMapFeature = allStopsMapData?.features.find((f) => f.properties?.id === stopsExplorerContext.entities.stop?.id);
       if (!stopMapFeature) return;
-      // Set default map zoom and speed levels
-      const defaultSpeed = 4000;
-      const defaultZoom = 17;
-      const defaultZoomMargin = 3;
-      // Check if selected stop is within rendered bounds
-      const renderedFeatures = stopsExplorerMap.queryRenderedFeatures({ layers: ['all-stops'] });
-      const isStopCurrentlyRendered = renderedFeatures.find((item) => item.properties?.id === stopMapFeature.properties?.id);
-      // Get map current zoom level
-      const currentZoom = stopsExplorerMap.getZoom();
-      // If the stop is visible and the zoom is not too far back (plus a little margin)...
-      if (isStopCurrentlyRendered && currentZoom + defaultZoomMargin > defaultZoom) {
-        // ...then simply ease to it.
-        stopsExplorerMap.easeTo({ center: stopMapFeature.geometry?.coordinates, zoom: currentZoom, duration: defaultSpeed * 0.25 });
-      } else {
-        // If the zoom is too far, or the desired stop is not visible, then fly to it
-        stopsExplorerMap.flyTo({ center: stopMapFeature.geometry?.coordinates, zoom: defaultZoom, duration: defaultSpeed });
-      }
+      // Move map to this location
+      moveMap(stopMapFeature.geometry?.coordinates);
       // Update local state
       setSelectedMapFeature(stopMapFeature);
-    } else setSelectedMapFeature(null);
-  }, [allStopsMapData?.features, stopsExplorerContext.entities.stop?.id, stopsExplorerMap]);
+    } else {
+      setSelectedMapFeature(null);
+    }
+  }, [allStopsMapData?.features, moveMap, stopsExplorerContext.entities.stop?.id, stopsExplorerMap]);
+
+  useEffect(() => {
+    if (stopsExplorerContext.map.selected_coordinates) {
+      moveMap(stopsExplorerContext.map.selected_coordinates);
+    }
+  }, [moveMap, stopsExplorerContext.map.selected_coordinates]);
 
   const handleMapClick = (event) => {
     if (event?.features[0]?.properties?.id) {
@@ -282,6 +326,27 @@ export default function StopsExplorerMap() {
             }}
             paint={{
               'icon-opacity': ['interpolate', ['linear', 0.5], ['get', 'delay'], 20, 0, 40, 1],
+            }}
+          />
+        </Source>
+      )}
+      {stopsExplorerContext.map.selected_coordinates != null && (
+        <Source id="selected-coordinates" type="geojson" data={selectedCoordinatesMapData} generateId={true}>
+          <Layer
+            id="selected-coordinates-pin"
+            type="symbol"
+            source="selected-coordinates"
+            layout={{
+              'icon-allow-overlap': true,
+              'icon-ignore-placement': true,
+              'icon-anchor': 'bottom',
+              'symbol-placement': 'point',
+              'icon-image': 'map-pin',
+              'icon-size': ['interpolate', ['linear', 0.5], ['zoom'], 10, 0.25, 20, 0.35],
+              'icon-offset': [0, 5],
+            }}
+            paint={{
+              'icon-opacity': ['interpolate', ['linear', 0.5], ['zoom'], 7, 0, 10, 1],
             }}
           />
         </Source>
