@@ -32,7 +32,8 @@ export default function StopsExplorerStopInfo() {
 
         <div className={styles.nameAndLocation} aria-label={stopsExplorerContext.entities.stop.tts_name || stopsExplorerContext.entities.stop.name}>
           <h3 className={styles.stopName} aria-label={stopsExplorerContext.entities.stop.tts_name || stopsExplorerContext.entities.stop.name}>
-            {stopsExplorerContext.entities.stop.name} <AudioBadge type="stops" id={stopsExplorerContext.entities.stop.id} />
+            <AudioBadge type="stops" id={stopsExplorerContext.entities.stop.id} />
+            {stopsExplorerContext.entities.stop.name}
           </h3>
           {stopLocation && <h5 className={styles.stopLocation}>{stopLocation}</h5>}
         </div>

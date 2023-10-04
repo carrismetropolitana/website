@@ -1,7 +1,7 @@
 'use client';
 
-import { createContext, useCallback, useContext, useMemo, useState } from 'react';
 import useSWR from 'swr';
+import { createContext, useCallback, useContext, useMemo, useState } from 'react';
 
 // A.
 // SETUP INITIAL STATE

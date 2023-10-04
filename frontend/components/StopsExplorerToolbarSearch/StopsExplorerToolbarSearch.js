@@ -1,7 +1,7 @@
 'use client';
 
 import useSWR from 'swr';
-import { Combobox, Highlight, TextInput, useCombobox, Text, ActionIcon, Divider } from '@mantine/core';
+import { Combobox, Highlight, TextInput, useCombobox, Text, ActionIcon } from '@mantine/core';
 import { useMemo, useState } from 'react';
 import { useTranslations } from 'next-intl';
 import styles from './StopsExplorerToolbarSearch.module.css';

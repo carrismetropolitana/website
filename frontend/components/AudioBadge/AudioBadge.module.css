@@ -2,16 +2,16 @@
 /* CONTAINER */
 
 .container {
+  opacity: 0.75;
   color: var(--gray-3);
   background-color: transparent;
-  transition: all 100ms ease;
-  display: inline-block;
-  vertical-align: middle;
-  line-height: normal;
+  margin-right: 3px;
+  transition: all 200ms ease;
 }
 
 .container:hover,
 .playing {
+  opacity: 1;
   color: var(--gray-5);
   background-color: var(--gray-1);
 }

@@ -29,6 +29,11 @@ export default function AudioBadge({ type, id }) {
     return () => audio.removeEventListener('ended', () => setPlaying(false));
   }, [audio]);
 
+  useEffect(() => {
+    audio.addEventListener('loadstart', () => setPlaying(false));
+    return () => audio.removeEventListener('loadstart', () => setPlaying(false));
+  }, [audio]);
+
   const handleTogglePlay = () => {
     if (playing) {
       audio.pause();
@@ -47,7 +52,7 @@ export default function AudioBadge({ type, id }) {
     audio &&
     !audio.error && (
       <ActionIcon className={`${styles.container} ${playing && styles.playing}`} onClick={handleTogglePlay} size="sm">
-        {playing ? <IconPlayerPause size={18} /> : <IconVolume size={18} />}
+        {playing ? <IconPlayerPause size={16} /> : <IconVolume size={16} />}
       </ActionIcon>
     )
   );
