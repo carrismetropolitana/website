@@ -35,7 +35,7 @@ export default function AppHeaderDrawer() {
           <div className={styles.group}>
             <h1>{t('travel.title')}</h1>
             <Link href="https://www.carrismetropolitana.pt/horarios">{t('travel.links.schedules')}</Link>
-            <Link href="/stops" style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', justifyContent: 'flex-start', gap: 6 }}>
+            <Link href="/stops" onClick={close} style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', justifyContent: 'flex-start', gap: 6 }}>
               {t('travel.links.stops')} <LiveIcon />
             </Link>
             <Link href="https://www.carrismetropolitana.pt/planeador">{t('travel.links.planner')}</Link>
@@ -50,7 +50,7 @@ export default function AppHeaderDrawer() {
           </div>
           <div className={styles.group}>
             <h1>{t('inform.title')}</h1>
-            <Link href="/encm" style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', justifyContent: 'flex-start', gap: 6 }}>
+            <Link href="/encm" onClick={close} style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', justifyContent: 'flex-start', gap: 6 }}>
               {t('inform.links.helpdesks')} <LiveIcon />
             </Link>
             <Link href="https://www.carrismetropolitana.pt/apoio">{t('inform.links.help')}</Link>
