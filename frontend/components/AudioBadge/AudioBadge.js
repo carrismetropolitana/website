@@ -44,8 +44,11 @@ export default function AudioBadge({ type, id }) {
   // D. Render components
 
   return (
-    <ActionIcon className={`${styles.container} ${playing && styles.playing}`} onClick={handleTogglePlay} size="md">
-      {playing ? <IconPlayerPause size={18} /> : <IconVolume size={18} />}
-    </ActionIcon>
+    audio &&
+    !audio.error && (
+      <ActionIcon className={`${styles.container} ${playing && styles.playing}`} onClick={handleTogglePlay} size="sm">
+        {playing ? <IconPlayerPause size={18} /> : <IconVolume size={18} />}
+      </ActionIcon>
+    )
   );
 }

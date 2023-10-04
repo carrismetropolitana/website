@@ -5,6 +5,9 @@
   color: var(--gray-3);
   background-color: transparent;
   transition: all 100ms ease;
+  display: inline-block;
+  vertical-align: middle;
+  line-height: normal;
 }
 
 .container:hover,
