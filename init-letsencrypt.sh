@@ -1,7 +1,7 @@
 #!/bin/bash
 
 staging=0 # Set to 1 if you're testing your setup to avoid hitting request limits
-domain1=beta.carrismetropolitana.pt
+domain1=beta.carrismetropolitana.pt # The primary domain
 domain2=on.carrismetropolitana.pt
 email="carrismetropolitana@gmail.com" # Adding a valid address is strongly recommended
 
@@ -15,30 +15,12 @@ curl -s https://raw.githubusercontent.com/certbot/certbot/master/certbot-nginx/c
 curl -s https://raw.githubusercontent.com/certbot/certbot/master/certbot/certbot/ssl-dhparams.pem > "./letsencrypt/ssl-dhparams.pem"
 echo
 
-echo "### Creating dummy certificate for $domain1 and www.$domain1 and $domain2 and www.$domain2 ..."
+echo "### Creating dummy certificate..."
 mkdir -p "./letsencrypt/live/$domain1"
-mkdir -p "./letsencrypt/live/www.$domain1"
-mkdir -p "./letsencrypt/live/$domain2"
-mkdir -p "./letsencrypt/live/www.$domain2"
 docker compose run --rm --entrypoint "\
   openssl req -x509 -nodes -newkey rsa:4096 -days 1\
     -keyout '/etc/letsencrypt/live/$domain1/privkey.pem' \
     -out '/etc/letsencrypt/live/$domain1/fullchain.pem' \
-    -subj '/CN=localhost'" certbot
-docker compose run --rm --entrypoint "\
-  openssl req -x509 -nodes -newkey rsa:4096 -days 1\
-    -keyout '/etc/letsencrypt/live/www.$domain1/privkey.pem' \
-    -out '/etc/letsencrypt/live/www.$domain1/fullchain.pem' \
-    -subj '/CN=localhost'" certbot
-docker compose run --rm --entrypoint "\
-  openssl req -x509 -nodes -newkey rsa:4096 -days 1\
-    -keyout '/etc/letsencrypt/live/$domain2/privkey.pem' \
-    -out '/etc/letsencrypt/live/$domain2/fullchain.pem' \
-    -subj '/CN=localhost'" certbot
-docker compose run --rm --entrypoint "\
-  openssl req -x509 -nodes -newkey rsa:4096 -days 1\
-    -keyout '/etc/letsencrypt/live/www.$domain2/privkey.pem' \
-    -out '/etc/letsencrypt/live/www.$domain2/fullchain.pem' \
     -subj '/CN=localhost'" certbot
 echo
 
@@ -47,20 +29,11 @@ echo "### Starting nginx ..."
 docker compose up --force-recreate -d nginx
 echo
 
-echo "### Deleting dummy certificate for $domain1 and $domain2 ..."
+echo "### Deleting dummy certificate..."
 docker compose run --rm --entrypoint "\
   rm -Rf /etc/letsencrypt/live/$domain1 && \
   rm -Rf /etc/letsencrypt/archive/$domain1 && \
-  rm -Rf /etc/letsencrypt/renewal/$domain1.conf \
-  rm -Rf /etc/letsencrypt/live/www.$domain1 && \
-  rm -Rf /etc/letsencrypt/archive/www.$domain1 && \
-  rm -Rf /etc/letsencrypt/renewal/www.$domain1.conf \
-  rm -Rf /etc/letsencrypt/live/$domain2 && \
-  rm -Rf /etc/letsencrypt/archive/$domain2 && \
-  rm -Rf /etc/letsencrypt/renewal/$domain2.conf \
-  rm -Rf /etc/letsencrypt/live/www.$domain2 && \
-  rm -Rf /etc/letsencrypt/archive/www.$domain2 && \
-  rm -Rf /etc/letsencrypt/renewal/www.$domain2.conf" certbot
+  rm -Rf /etc/letsencrypt/renewal/$domain1.conf" certbot
 echo
 
 
