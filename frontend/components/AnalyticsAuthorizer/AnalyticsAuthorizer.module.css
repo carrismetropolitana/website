@@ -1,0 +1,67 @@
+/* * */
+/* CONTAINER */
+
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: var(--size-md);
+  align-items: center;
+}
+
+/* * */
+/* TEXT & TITLE */
+
+.title,
+.text {
+  text-align: center;
+}
+
+.title {
+  font-size: 18px;
+  font-weight: 700;
+}
+
+.text {
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.link {
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--gray-5);
+}
+
+/* * */
+/* ANSWERS */
+
+.answers {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: var(--size-sm);
+  align-items: center;
+  justify-content: center;
+}
+
+/* * */
+/* ACCEPT BUTTON */
+
+.acceptButton {
+  color: #000000;
+  background-color: var(--carris-metropolitana);
+  width: 100%;
+}
+
+/* * */
+/* REFUSE BUTTON */
+
+.refuseButton {
+  color: var(--gray-4);
+  background-color: var(--gray-0);
+}
+
+.refuseButton:hover {
+  color: var(--gray-4);
+  background-color: var(--gray-1);
+}

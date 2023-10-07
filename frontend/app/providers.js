@@ -4,6 +4,7 @@ import { SWRConfig } from 'swr';
 import { MantineProvider } from '@mantine/core';
 import { MapProvider } from 'react-map-gl/maplibre';
 import { DebugContextProvider } from '@/contexts/DebugContext';
+import { AnalyticsContextProvider } from '@/contexts/AnalyticsContext';
 
 export default function Providers({ children }) {
   //
@@ -30,9 +31,11 @@ export default function Providers({ children }) {
   return (
     <SWRConfig value={swrOptions}>
       <MantineProvider withGlobalStyles withNormalizeCSS>
-        <DebugContextProvider>
-          <MapProvider>{children}</MapProvider>
-        </DebugContextProvider>
+        <AnalyticsContextProvider>
+          <DebugContextProvider>
+            <MapProvider>{children}</MapProvider>
+          </DebugContextProvider>
+        </AnalyticsContextProvider>
       </MantineProvider>
     </SWRConfig>
   );

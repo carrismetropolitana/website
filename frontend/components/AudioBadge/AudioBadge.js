@@ -34,6 +34,13 @@ export default function AudioBadge({ type, id }) {
     return () => audio.removeEventListener('loadstart', () => setPlaying(false));
   }, [audio]);
 
+  useEffect(() => {
+    return () => {
+      audio.pause();
+      audio.currentTime = 0;
+    };
+  }, [audio]);
+
   const handleTogglePlay = () => {
     if (playing) {
       audio.pause();

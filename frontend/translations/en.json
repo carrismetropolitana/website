@@ -756,5 +756,12 @@
             "negative": "Não"
         },
         "thank_you": "Obrigado pelo contributo!"
+    },
+    "AnalyticsAuthorizer": {
+        "title": "Olá!",
+        "text": "Aceita guardar informação em local storage e partilhar dados de utilização anónimos com a Carris Metropolitana?",
+        "privacy_policy": "Consultar Política de Privacidade",
+        "accept": "OK",
+        "refuse": "Não, obrigado"
     }
 }
