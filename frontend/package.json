@@ -1,6 +1,6 @@
 {
     "name": "@carrismetropolitana/website",
-    "version": "2023.10.07-2101",
+    "version": "2023.10.08-0134",
     "private": true,
     "scripts": {
         "dev": "next dev",
@@ -26,7 +26,8 @@
         "react-dom": "18.2.0",
         "react-map-gl": "7.1.6",
         "sharp": "0.32.6",
-        "swr": "2.2.4"
+        "swr": "2.2.4",
+        "ua-parser-js": "^1.0.36"
     },
     "devDependencies": {
         "@types/node": "20.8.3",
