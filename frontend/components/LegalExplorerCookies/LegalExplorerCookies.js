@@ -1,17 +1,17 @@
 'use client';
 
-import styles from './LegalExplorer.module.css';
+import styles from './LegalExplorerCookies.module.css';
 import { Divider } from '@mantine/core';
 import { useTranslations } from 'next-intl';
 import Pannel from '@/components/Pannel/Pannel';
 
-export default function LegalExplorer() {
+export default function LegalExplorerCookies() {
   //
 
   //
   // A. Setup variables
 
-  const t = useTranslations('LegalExplorer');
+  const t = useTranslations('LegalExplorerCookies');
 
   //
   // E. Render components
