@@ -9,6 +9,12 @@
   .container {
     display: flex;
     flex-direction: column;
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: auto 1fr;
+    position: absolute;
+    height: 100%;
+    width: 100%;
   }
 }
 
