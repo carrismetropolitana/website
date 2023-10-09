@@ -4,6 +4,7 @@ import styles from './AnalyticsAuthorizer.module.css';
 import { Button, Modal } from '@mantine/core';
 import { useAnalyticsContext } from '@/contexts/AnalyticsContext';
 import { useEffect, useState } from 'react';
+import { usePathname } from 'next/navigation';
 import Image from 'next/image';
 import { useTranslations } from 'next-intl';
 import Link from 'next/link';
@@ -18,13 +19,17 @@ export default function AnalyticsAuthorizer() {
 
   const t = useTranslations('AnalyticsAuthorizer');
 
+  const pathname = usePathname();
+
   const analyticsContext = useAnalyticsContext();
 
   const [isOpen, setIsOpen] = useState(false);
 
   useEffect(() => {
-    setIsOpen(!analyticsContext.enabled);
-  }, [analyticsContext.enabled]);
+    const regexPatternToMatchCookiesPolicy = /^(\/[a-z]{2})?\/legal\/cookies\/?$/;
+    const isPrivacyPage = regexPatternToMatchCookiesPolicy.test(pathname);
+    setIsOpen(!analyticsContext.enabled && !isPrivacyPage);
+  }, [analyticsContext.enabled, pathname]);
 
   //
   // B. Render Components
@@ -47,9 +52,9 @@ export default function AnalyticsAuthorizer() {
     <Modal opened={isOpen} onClose={() => setIsOpen(false)} withCloseButton={false} trapFocus={false} closeOnEscape={false} closeOnClickOutside={false} returnFocus={true} overlayProps={{ backgroundOpacity: 0.55, blur: 3 }}>
       <div className={styles.container}>
         <Image src="/images/analytics-header.svg" alt="" width={350} height={120} />
-        {/* <h4 className={styles.title}>{t('title')}</h4> */}
+        <h4 className={styles.title}>{t('title')}</h4>
         <h4 className={styles.text}>{t('text')}</h4>
-        <Link href="https://www.carrismetropolitana.pt/politica-de-privacidade" target="_blank" className={styles.link}>
+        <Link href="/legal/cookies" target="_blank" className={styles.link}>
           {t('privacy_policy')}
         </Link>
         <div className={styles.answers}>

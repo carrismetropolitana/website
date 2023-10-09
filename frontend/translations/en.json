@@ -758,7 +758,14 @@
         "thank_you": "Obrigado pelo contributo!"
     },
     "AnalyticsAuthorizer": {
-        "title": "Olá!",
+        "title": "Respeitamos a sua Privacidade",
+        "text": "Com o objetivo de melhorar a performance, os conteúdos e a segurança deste site, a TML pretende recorrer à utilização de cookies ou tecnologias similares.",
+        "privacy_policy": "Consultar Política de Cookies",
+        "accept": "OK",
+        "refuse": "Não, obrigado"
+    },
+    "LegalExplorerCookies": {
+        "title": "Política de Cookies",
         "text": "Aceita guardar informação em local storage e partilhar dados de utilização anónimos com a Carris Metropolitana?",
         "privacy_policy": "Consultar Política de Privacidade",
         "accept": "OK",
