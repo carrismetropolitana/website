@@ -39,7 +39,7 @@ export default function LinesExplorer() {
   // c. Render components
 
   return (
-    <Pannel title={t('pannel_title')} loading={allLinesLoading || allMunicipalitiesLoading} error={allLinesError || allMunicipalitiesError}>
+    <Pannel type="A" title={t('pannel_title')} loading={allLinesLoading || allMunicipalitiesLoading} error={allLinesError || allMunicipalitiesError}>
       <LineFormProvider form={lineForm}>
         <form>
           <LinesExplorerToolbarLineSearch />

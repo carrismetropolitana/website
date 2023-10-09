@@ -7,12 +7,8 @@
 
 @media all and (display-mode: standalone) {
   .container {
-    display: grid;
-    grid-template-columns: 1fr;
-    grid-template-rows: auto 1fr;
-    position: absolute;
-    height: 100%;
-    width: 100%;
+    display: flex;
+    flex-direction: column;
   }
 }
 
@@ -21,11 +17,8 @@
 
 .header {
   display: flex;
-  justify-content: space-between;
   align-items: center;
-  background-color: #000000;
-  color: #ffffff;
-  padding: 15px 18px;
+  justify-content: space-between;
   border-top-left-radius: 10px;
   border-top-right-radius: 10px;
   overflow: hidden;
@@ -67,28 +60,14 @@
 }
 
 /* * */
-/* HEADER TITLE */
-
-.headerTitle {
-  font-size: 20px;
-  line-height: 1.3;
-}
-
-@media (max-width: 700px) {
-  .headerTitle {
-    font-size: 18px;
-  }
-}
-
-/* * */
 /* WRAPPER */
 
 .wrapper {
   overflow: hidden;
   border: 1px solid var(--gray3);
   border-top: none;
-  border-bottom-left-radius: 15px;
-  border-bottom-right-radius: 15px;
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;
   background-color: var(--reference-0);
 }
 
@@ -110,7 +89,7 @@
 }
 
 /* * */
-/* LOADING / ERROR */
+/* LOADING & ERROR */
 
 .isLoading,
 .isError {
@@ -120,6 +99,71 @@
   min-height: 200px;
 }
 
-.content {
+/* * */
+
+/* * */
+/* TYPE A */
+
+.typeA .header {
+  color: #ffffff;
+  background-color: #000000;
+  padding: 15px 18px;
+}
+
+.typeA .headerTitle {
+  font-size: 20px;
+  line-height: 1.3;
+}
+
+@media (max-width: 700px) {
+  .typeA .headerTitle {
+    font-size: 18px;
+  }
+}
+
+.typeA .content {
   padding: 0;
+}
+
+/* * */
+/* TYPE B */
+
+.typeB .header {
+  color: #000000;
+  background-color: #ffffff;
+  padding: 30px;
+  border: 1px solid var(--gray3);
+  border-bottom: none;
+}
+
+@media (max-width: 700px) {
+  .typeB .header {
+    padding: 25px;
+    border-left: none;
+    border-right: none;
+    border-bottom: none;
+  }
+}
+
+.typeB .headerTitle {
+  font-size: 40px;
+  line-height: 1.3;
+}
+
+@media (max-width: 700px) {
+  .typeB .headerTitle {
+    font-size: 28px;
+  }
+}
+
+.typeB .content {
+  padding: 30px;
+  padding-top: 0;
+}
+
+@media (max-width: 700px) {
+  .typeB .content {
+    padding: 25px;
+    padding-top: 0;
+  }
 }

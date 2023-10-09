@@ -133,7 +133,7 @@ export default function EncmExplorer() {
   // E. Render components
 
   return (
-    <Pannel title={t('title')} loading={allEncmLoading} error={allEncmError}>
+    <Pannel type="A" title={t('title')} loading={allEncmLoading} error={allEncmError}>
       <EncmExplorerToolbar selectedMapStyle={selectedMapStyle} onSelectMapStyle={setSelectedMapStyle} onMapRecenter={handleMapReCenter} onOpenInGoogleMaps={handleOpenInGoogleMaps} selectedEncmId={selectedEncmId} onSelectEncmId={handleSelectEncm} />
       <Divider />
       <div className={styles.mapWrapper}>

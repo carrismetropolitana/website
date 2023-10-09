@@ -49,6 +49,7 @@ export default function StopsExplorer() {
 
   return (
     <Pannel
+      type="A"
       title={t('title')}
       loading={allStopsLoading}
       error={allStopsError}
