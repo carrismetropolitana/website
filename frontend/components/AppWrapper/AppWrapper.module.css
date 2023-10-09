@@ -1,6 +1,6 @@
 .container {
   display: flex;
   flex-direction: column;
-  background-color: var(--gray0);
+  background-color: var(--gray-1);
   min-height: 100%;
 }

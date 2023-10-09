@@ -1,6 +1,28 @@
-.mapWrapper {
-  display: grid;
-  grid-template-columns: 1fr;
-  grid-template-rows: 400px;
-  width: 100%;
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: 50px;
+}
+
+.section {
+  display: flex;
+  flex-direction: column;
+  gap: var(--size-sm);
+}
+
+.title {
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.text {
+  font-size: 15px;
+  font-weight: 500;
+}
+
+.authorizationOptions {
+  display: flex;
+  flex-direction: column;
+  gap: var(--size-sm);
+  align-items: flex-start;
 }

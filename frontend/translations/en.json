@@ -766,9 +766,84 @@
     },
     "LegalExplorerCookies": {
         "title": "Política de Cookies",
-        "text": "Aceita guardar informação em local storage e partilhar dados de utilização anónimos com a Carris Metropolitana?",
-        "privacy_policy": "Consultar Política de Privacidade",
-        "accept": "OK",
-        "refuse": "Não, obrigado"
+        "sections": {
+            "intro": {
+                "title": "Utilização de Cookies e tecnologias similares:",
+                "paragraphs": {
+                    "1": "A TML recorre à utilização de cookies e outras tecnologias similares para perceber como o website é utilizado, de modo a melhorar o seus conteúdos, segurança e desempenho. O objetivo é proporcionar uma melhor experiência de navegação."
+                }
+            },
+            "question_1": {
+                "title": "O que são cookies e para que servem?",
+                "paragraphs": {
+                    "1": "Cookies são pequenos ficheiros de texto com informação relevante que o dispositivo de acesso (computador, telemóvel, smartphone, tablet, etc…) carrega, através do navegador de internet (browser), quando um site é visitado pelo utilizador.",
+                    "2": "A utilização de cookies ajuda os websites a reconhecer o dispositivo do utilizador na visita seguinte sendo com frequência imprescindível para o funcionamento do mesmo.",
+                    "3": "Os cookies usados pela TML não recolhem informações pessoais que permitam identificar um utilizador em particular, guardando apenas informações anónimas, genéricas e agregadas."
+                }
+            },
+            "question_2": {
+                "title": "Que tipos de Cookies existem?",
+                "paragraphs": {
+                    "1": "Atendendo às finalidades para os quais são utilizados, os cookies podem ser classificados do seguinte modo:",
+                    "2": "- Cookies estritamente necessários (também conhecidos por essenciais, técnicos ou básicos): são necessários para que o utilizador consiga aceder a áreas específicas do website, permitindo a navegação e a utilização das suas aplicações, tal como o acesso a áreas seguras do site, através de login. Sem estes cookies, os serviços que o exijam não podem ser prestados;",
+                    "3": "- Cookies de funcionalidade (também conhecidos por preferenciais):permitem o website relembrar as preferências do utilizador relativamente à sua navegação no website, não necessitando, assim, de o reconfigurar e personalizar cada vez que o visita;",
+                    "4": "- Cookies de performance (também conhecidos por analíticos ou estatísticos): são essencialmente utilizados para analisar a forma como o utilizador utiliza o website, permitindo destacar artigos ou serviços que podem ser do seu interesse, monitorizar o desempenho do website, dado a conhecer quais as páginas mais populares, qual o método de ligação entre páginas que é mais eficaz ou para determinar a razão de algumas páginas estarem a receber mensagens de erro;",
+                    "5": "- Cookies de publicidade (também conhecidos por marketing ou de rastreio): permitem proporcionar ao utilizador informação publicitária em função de suas preferências e interesses, bem como, ajudam a medir a eficácia dos anúncios mostrados (ex. quantas vezes são vistos)."
+                }
+            },
+            "question_3": {
+                "title": "Qual a validade dos Cookies?",
+                "paragraphs": {
+                    "1": "Quanto à sua validade, os cookies podem também ser classificados da seguinte forma:",
+                    "2": "- Cookies permanentes: são cookies que ficam armazenados nos dispositivos de acesso, ao nível do navegador de internet (browser), e são usados sempre que o utilizador visita novamente o website. Em geral, são usados para direcionar a navegação de acordo com os interesses do utilizador, permitindo a prestação de um serviço mais personalizado;",
+                    "3": "- Cookies de sessão: são cookies temporários, que são gerados e estão disponíveis até o utilizador encerrar a sessão. Da próxima vez que o utilizador aceder ao seu navegador de internet (browser), os cookies já não se encontrarão armazenados."
+                }
+            },
+            "question_4": {
+                "title": "Quais as possíveis origens dos Cookies?",
+                "paragraphs": {
+                    "1": "Em função da sua origem, os cookies podem ainda ter a seguinte tipologia:",
+                    "2": "- Cookies próprios (ou de primeira parte):são os que são enviados para o dispositivo do utilizador a partir de um website/domínio gerido pelo próprio editor e a partir do qual é fornecido o serviço solicitado pelo utilizador (o proprietário do website);",
+                    "3": "- Cookies de terceiros (ou de terceira parte):são os que são enviados para o dispositivo do utilizador a partir de um domínio que não é gerido pelo editor do website, mas por outras entidades a quem aproveitam a informação obtida através desses cookies. Dada a sua origem e natureza, a utilização deste tipo de cookies é da exclusiva responsabilidade das entidades que os utilizam."
+                }
+            },
+            "question_5": {
+                "title": "Quais os Cookies ou tecnologias similares utilizados neste site?",
+                "paragraphs": {
+                    "1": "Neste website:",
+                    "2": "- É colocado 1 (um) cookie obrigatório de forma automática com o idioma utilizado pelo dispositivo de acesso. Identificado pela chave NEXT_LOCALE, este cookie pode assumir os valores 'pt' ou 'en';",
+                    "3": "- Mediante expressa autorização, é colocada em local storage (tecnologia similar aos cookies) a data da expressa autorização. Esta chave permite que sejam comunicados eventos estatísticos de utilização do website e outras funcionalidades úteis (ex: paragens e linhas favoritas)."
+                }
+            },
+            "question_6": {
+                "title": "Consentimento do utilizador:",
+                "paragraphs": {
+                    "1": "Por serem essenciais ao bom funcionamento do site, a utilização de cookies estritamente necessários ou essenciais, não carece de consentimento prévio por parte do utilizador. Os demais (cookies de performance e funcionalidade) apenas são utilizados caso o utilizador expressamente autorize a sua utilização.",
+                    "2": "O utilizador pode, a qualquer momento, retirar o seu consentimento em matéria de cookies utilizando as opções seguintes:"
+                },
+                "accept": "Aceitar Política de Cookies",
+                "enabled": "Política de Cookies aceite",
+                "refuse": "Recusar e Limpar Dados",
+                "refuse_modal": {
+                    "title": "Retirar consentimento",
+                    "description": "Ao retirar o consentimento irá apagar todos os dados guardados neste site, incluindo todas as paragens e linhas favoritas.",
+                    "confirm": "Sim, apagar tudo",
+                    "cancel": "Cancelar"
+                }
+            },
+            "question_7": {
+                "title": "Como controlar o uso de Cookies?",
+                "paragraphs": {
+                    "1": "Os utilizadores podem ainda impedir ou condicionar a utilização de cookies através das configurações do seu navegador. Se limitar esta opção, no entanto, a utilização de alguns recursos ou o desempenho de alguns websites pode ficar condicionada.",
+                    "2": "Saiba como em:"
+                }
+            },
+            "question_8": {
+                "title": "Direito de reserva",
+                "paragraphs": {
+                    "1": "A TML reserva-se, a todo o tempo, no direito de alterar e/ou atualizar a informação constante da presente Política, assim como a faculdade de disponibilizar, a pedido, informações adicionais, mais detalhadas, sobre situações específicas em que são recolhidos e tratados dados pessoais."
+                }
+            }
+        }
     }
 }

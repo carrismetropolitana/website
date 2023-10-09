@@ -5,6 +5,7 @@ import { MantineProvider } from '@mantine/core';
 import { MapProvider } from 'react-map-gl/maplibre';
 import { DebugContextProvider } from '@/contexts/DebugContext';
 import { AnalyticsContextProvider } from '@/contexts/AnalyticsContext';
+import { ModalsProvider } from '@mantine/modals';
 
 export default function Providers({ children }) {
   //
@@ -31,11 +32,13 @@ export default function Providers({ children }) {
   return (
     <SWRConfig value={swrOptions}>
       <MantineProvider withGlobalStyles withNormalizeCSS>
-        <AnalyticsContextProvider>
-          <DebugContextProvider>
-            <MapProvider>{children}</MapProvider>
-          </DebugContextProvider>
-        </AnalyticsContextProvider>
+        <ModalsProvider>
+          <AnalyticsContextProvider>
+            <DebugContextProvider>
+              <MapProvider>{children}</MapProvider>
+            </DebugContextProvider>
+          </AnalyticsContextProvider>
+        </ModalsProvider>
       </MantineProvider>
     </SWRConfig>
   );
