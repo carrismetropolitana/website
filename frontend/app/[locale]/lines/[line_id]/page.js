@@ -38,16 +38,14 @@ export default function Page({ params }) {
   //
 
   //
-  // E. Render components
+  // A. Render components
 
   return (
-    <OneFullColumn
-      first={
-        <LinesExplorerContextProvider>
-          <LinesExplorer urlLineId={params.line_id?.length && params.line_id} />
-        </LinesExplorerContextProvider>
-      }
-    />
+    <OneFullColumn>
+      <LinesExplorerContextProvider>
+        <LinesExplorer urlLineId={params.line_id?.length && params.line_id} />
+      </LinesExplorerContextProvider>
+    </OneFullColumn>
   );
 
   //

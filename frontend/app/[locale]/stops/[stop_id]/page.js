@@ -38,16 +38,14 @@ export default function Page({ params }) {
   //
 
   //
-  // E. Render components
+  // A. Render components
 
   return (
-    <OneFullColumn
-      first={
-        <StopsExplorerContextProvider>
-          <StopsExplorer urlStopId={params.stop_id?.length && params.stop_id} />
-        </StopsExplorerContextProvider>
-      }
-    />
+    <OneFullColumn>
+      <StopsExplorerContextProvider>
+        <StopsExplorer urlStopId={params.stop_id?.length && params.stop_id} />
+      </StopsExplorerContextProvider>
+    </OneFullColumn>
   );
 
   //

@@ -2,8 +2,8 @@ import styles from './Layouts.module.css';
 
 //
 // ONE FULL COLUMN
-export function OneFullColumn({ first }) {
-  return <div className={`${styles.baseLayout} ${styles.oneFullColumn}`}>{first && <div className={styles.innerWrapper}>{first}</div>}</div>;
+export function OneFullColumn({ children }) {
+  return <div className={`${styles.baseLayout} ${styles.oneFullColumn}`}>{children && <div className={styles.innerWrapper}>{children}</div>}</div>;
 }
 
 //
