@@ -2,7 +2,7 @@
 
 import styles from './EncmExplorer.module.css';
 import useSWR from 'swr';
-import { useState, useMemo } from 'react';
+import { useState, useMemo, useEffect } from 'react';
 import { useMap } from 'react-map-gl/maplibre';
 import OSMMapDefaults from '@/components/OSMMap/OSMMap.config';
 import { Divider } from '@mantine/core';
@@ -13,6 +13,9 @@ import generateUUID from '@/services/generateUUID';
 import EncmExplorerToolbar from '@/components/EncmExplorerToolbar/EncmExplorerToolbar';
 import EncmExplorerInfo from '@/components/EncmExplorerInfo/EncmExplorerInfo';
 import EncmExplorerGrid from '@/components/EncmExplorerGrid/EncmExplorerGrid';
+import { useAnalyticsContext } from '@/contexts/AnalyticsContext';
+
+/* * */
 
 export default function EncmExplorer() {
   //
@@ -24,10 +27,19 @@ export default function EncmExplorer() {
 
   const { encmExplorerMap } = useMap();
 
+  const analyticsContext = useAnalyticsContext();
+
   const [selectedMapStyle, setSelectedMapStyle] = useState('map');
 
   const [selectedEncmId, setSelectedEncmId] = useState();
   const [selectedMapFeature, setSelectedMapFeature] = useState();
+
+  //
+  // B. Analytics
+
+  useEffect(() => {
+    analyticsContext.capture('view_encm_explorer');
+  });
 
   //
   // B. Fetch data

@@ -34,7 +34,7 @@ export async function generateMetadata({ params }) {
 
 /* * */
 
-export default function Page({ params }) {
+export default function Page() {
   //
 
   //
@@ -43,7 +43,7 @@ export default function Page({ params }) {
   return (
     <OneFullColumn>
       <StopsExplorerContextProvider>
-        <StopsExplorer urlStopId={params.stop_id?.length && params.stop_id} />
+        <StopsExplorer />
       </StopsExplorerContextProvider>
     </OneFullColumn>
   );

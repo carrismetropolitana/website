@@ -13,6 +13,7 @@ import StopTimetable from '@/components/StopsExplorerTimetable/StopsExplorerTime
 import NoDataLabel from '@/components/NoDataLabel/NoDataLabel';
 import { useStopsExplorerContext } from '@/contexts/StopsExplorerContext';
 import BetaIcon from '@/components/BetaIcon/BetaIcon';
+import { useAnalyticsContext } from '@/contexts/AnalyticsContext';
 
 /* * */
 
@@ -24,8 +25,17 @@ export default function StopsExplorer() {
 
   const t = useTranslations('StopsExplorer');
 
+  const analyticsContext = useAnalyticsContext();
+
   const { stopsExplorerMap } = useMap();
   const stopsExplorerContext = useStopsExplorerContext();
+
+  //
+  // B. Analytics
+
+  useEffect(() => {
+    analyticsContext.capture('view_stops_explorer');
+  });
 
   //
   // B. Fetch data

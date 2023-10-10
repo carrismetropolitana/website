@@ -74,49 +74,56 @@ export function AnalyticsContextProvider({ children }) {
   //
   // D. Capture events
 
-  const captureEvent = useCallback(async (key, properties = {}) => {
-    // Only capture anonymous analytics if user has allowed it
-    //   if (!isCaptureEnabled) return;
-    // Parse user-agent string
-    const parsedUserAgent = window.navigator.userAgent ? new UAParser(window.navigator.userAgent).getResult() : null;
-    // Fetch all the other properties
-    await fetch('https://stats.carrismetropolitana.pt/collector/usage/website', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json; charset=utf-8' },
-      body: JSON.stringify({
-        //
-        app_version: pjson.version,
-        //
-        referer: document.referrer,
-        //
-        fingerprint: await getCurrentBrowserFingerPrint(),
-        //
-        ua: parsedUserAgent?.ua,
-        ua_browser_name: parsedUserAgent?.browser?.name,
-        ua_browser_version: parsedUserAgent?.browser?.version,
-        ua_engine_name: parsedUserAgent?.engine?.name,
-        ua_engine_version: parsedUserAgent?.engine?.version,
-        ua_os_name: parsedUserAgent?.os?.name,
-        ua_os_version: parsedUserAgent?.os?.version,
-        ua_device_model: parsedUserAgent?.device?.model,
-        ua_device_type: parsedUserAgent?.device?.type,
-        ua_device_vendor: parsedUserAgent?.device?.vendor,
-        ua_cpu_architecture: parsedUserAgent?.cpu?.architecture,
-        //
-        device_timezone: Intl.DateTimeFormat().resolvedOptions().timeZone,
-        device_screen_width: document.documentElement.clientWidth,
-        device_screen_height: document.documentElement.clientHeight,
-        device_screen_orientation: window.innerHeight > window.innerWidth ? 'portrait' : 'landscape',
-        device_locale: navigator.language,
-        //
-        ip_address: null, // Server side
-        //
-        event_key: key,
-        event_properties: properties,
-        //
-      }),
-    });
-  }, []);
+  const captureEvent = useCallback(
+    async (key, properties = {}) => {
+      try {
+        // Only capture anonymous analytics if user has allowed it
+        if (!isCaptureEnabled) return;
+        // Parse user-agent string
+        const parsedUserAgent = window.navigator.userAgent ? new UAParser(window.navigator.userAgent).getResult() : null;
+        // Fetch all the other properties
+        await fetch('https://stats.carrismetropolitana.pt/collector/usage/website', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json; charset=utf-8' },
+          body: JSON.stringify({
+            //
+            app_version: pjson.version,
+            //
+            referer: document.referrer,
+            //
+            fingerprint: await getCurrentBrowserFingerPrint(),
+            //
+            ua: parsedUserAgent?.ua,
+            ua_browser_name: parsedUserAgent?.browser?.name,
+            ua_browser_version: parsedUserAgent?.browser?.version,
+            ua_engine_name: parsedUserAgent?.engine?.name,
+            ua_engine_version: parsedUserAgent?.engine?.version,
+            ua_os_name: parsedUserAgent?.os?.name,
+            ua_os_version: parsedUserAgent?.os?.version,
+            ua_device_model: parsedUserAgent?.device?.model,
+            ua_device_type: parsedUserAgent?.device?.type,
+            ua_device_vendor: parsedUserAgent?.device?.vendor,
+            ua_cpu_architecture: parsedUserAgent?.cpu?.architecture,
+            //
+            device_timezone: Intl.DateTimeFormat().resolvedOptions().timeZone,
+            device_screen_width: document.documentElement.clientWidth,
+            device_screen_height: document.documentElement.clientHeight,
+            device_screen_orientation: window.innerHeight > window.innerWidth ? 'portrait' : 'landscape',
+            device_locale: navigator.language,
+            //
+            ip_address: null, // Server side
+            //
+            event_key: key,
+            event_properties: properties,
+            //
+          }),
+        });
+      } catch (error) {
+        console.log(error);
+      }
+    },
+    [isCaptureEnabled]
+  );
 
   //
   // E. Setup context object
