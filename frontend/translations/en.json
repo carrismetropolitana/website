@@ -809,17 +809,34 @@
             },
             "question_5": {
                 "title": "Quais os Cookies ou tecnologias similares utilizados neste site?",
-                "paragraphs": {
-                    "1": "Neste website:",
-                    "2": "- É colocado 1 (um) cookie obrigatório de forma automática com o idioma utilizado pelo dispositivo de acesso. Identificado pela chave NEXT_LOCALE, este cookie pode assumir os valores 'pt' ou 'en';",
-                    "3": "- Mediante expressa autorização, é colocada em local storage (tecnologia similar aos cookies) a data da expressa autorização. Esta chave permite que sejam comunicados eventos estatísticos de utilização do website e outras funcionalidades úteis (ex: paragens e linhas favoritas)."
+                "table": {
+                    "header": {
+                        "col_1": "Tipo",
+                        "col_2": "Domínio/Origem",
+                        "col_3": "Finalidade",
+                        "col_4": "Validade"
+                    },
+                    "rows": {
+                        "1": {
+                            "col_1": "NEXT_LOCALE",
+                            "col_2": "beta.carrismetropolitana.pt",
+                            "col_3": "Identificar o idioma de preferência do utilizador",
+                            "col_4": "1 ano"
+                        },
+                        "2": {
+                            "col_1": "anonymous_analytics_enabled",
+                            "col_2": "beta.carrismetropolitana.pt",
+                            "col_3": "Obter informação estatística sobre a utilização do site",
+                            "col_4": "1 ano"
+                        }
+                    }
                 }
             },
             "question_6": {
                 "title": "Consentimento do utilizador:",
                 "paragraphs": {
-                    "1": "Por serem essenciais ao bom funcionamento do site, a utilização de cookies estritamente necessários ou essenciais, não carece de consentimento prévio por parte do utilizador. Os demais (cookies de performance e funcionalidade) apenas são utilizados caso o utilizador expressamente autorize a sua utilização.",
-                    "2": "O utilizador pode, a qualquer momento, retirar o seu consentimento em matéria de cookies utilizando as opções seguintes:"
+                    "1": "Por serem essenciais ao bom funcionamento do site, a utilização de cookies estritamente necessários ou essenciais, não carece de consentimento prévio por parte do utilizador. Os demais (cookies de funcionalidade, performance ou publicidade) apenas serão utilizados caso o utilizador expressamente autorize a sua utilização.",
+                    "2": "Uma vez aceite, pode a qualquer momento revogar esse consentimento, bastando para o efeito voltar à Política de Cookies e selecionar “Recusar e Limpar Dados”."
                 },
                 "accept": "Aceitar Política de Cookies",
                 "enabled": "Política de Cookies aceite",

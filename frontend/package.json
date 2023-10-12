@@ -1,6 +1,6 @@
 {
     "name": "@carrismetropolitana/website",
-    "version": "2023.10.10-2342",
+    "version": "2023.10.12-1141",
     "private": true,
     "scripts": {
         "dev": "next dev",
@@ -10,17 +10,17 @@
         "lint": "next lint"
     },
     "dependencies": {
-        "@mantine/core": "7.1.2",
-        "@mantine/dates": "7.1.2",
-        "@mantine/form": "7.1.2",
-        "@mantine/hooks": "7.1.2",
-        "@mantine/modals": "^7.1.2",
+        "@mantine/core": "7.1.3",
+        "@mantine/dates": "7.1.3",
+        "@mantine/form": "7.1.3",
+        "@mantine/hooks": "7.1.3",
+        "@mantine/modals": "^7.1.3",
         "@rajesh896/broprint.js": "^2.1.1",
         "@tabler/icons-react": "2.39.0",
         "@turf/turf": "6.5.0",
         "dayjs": "1.11.10",
         "inflected": "2.1.0",
-        "maplibre-gl": "3.4.0",
+        "maplibre-gl": "3.4.1",
         "next": "13.5.4",
         "next-intl": "2.20.2",
         "react": "18.2.0",

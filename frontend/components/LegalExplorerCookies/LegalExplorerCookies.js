@@ -2,12 +2,11 @@
 
 import styles from './LegalExplorerCookies.module.css';
 import Pannel from '@/components/Pannel/Pannel';
-import { Anchor, Button, Group } from '@mantine/core';
+import { Anchor, Button, Group, Table } from '@mantine/core';
 import { openConfirmModal } from '@mantine/modals';
 import { useTranslations } from 'next-intl';
 import { useAnalyticsContext } from '@/contexts/AnalyticsContext';
 import { IconCircleCheckFilled } from '@tabler/icons-react';
-import Link from 'next/link';
 
 export default function LegalExplorerCookies() {
   //
@@ -78,9 +77,30 @@ export default function LegalExplorerCookies() {
         </div>
         <div className={styles.section}>
           <div className={styles.title}>{t('sections.question_5.title')}</div>
-          <div className={styles.text}>{t('sections.question_5.paragraphs.1')}</div>
-          <div className={styles.text}>{t('sections.question_5.paragraphs.2')}</div>
-          <div className={styles.text}>{t('sections.question_5.paragraphs.3')}</div>
+          <Table withTableBorder withColumnBorders>
+            <Table.Thead>
+              <Table.Tr>
+                <Table.Th>{t('sections.question_5.table.header.col_1')}</Table.Th>
+                <Table.Th>{t('sections.question_5.table.header.col_2')}</Table.Th>
+                <Table.Th>{t('sections.question_5.table.header.col_3')}</Table.Th>
+                <Table.Th>{t('sections.question_5.table.header.col_4')}</Table.Th>
+              </Table.Tr>
+            </Table.Thead>
+            <Table.Tbody>
+              <Table.Tr>
+                <Table.Td>{t('sections.question_5.table.rows.1.col_1')}</Table.Td>
+                <Table.Td>{t('sections.question_5.table.rows.1.col_2')}</Table.Td>
+                <Table.Td>{t('sections.question_5.table.rows.1.col_3')}</Table.Td>
+                <Table.Td>{t('sections.question_5.table.rows.1.col_4')}</Table.Td>
+              </Table.Tr>
+              <Table.Tr>
+                <Table.Td>{t('sections.question_5.table.rows.2.col_1')}</Table.Td>
+                <Table.Td>{t('sections.question_5.table.rows.2.col_2')}</Table.Td>
+                <Table.Td>{t('sections.question_5.table.rows.2.col_3')}</Table.Td>
+                <Table.Td>{t('sections.question_5.table.rows.2.col_4')}</Table.Td>
+              </Table.Tr>
+            </Table.Tbody>
+          </Table>
         </div>
         <div className={styles.section}>
           <div className={styles.title}>{t('sections.question_6.title')}</div>
