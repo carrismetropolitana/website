@@ -43,7 +43,7 @@ export default function Page({ params }) {
   return (
     <OneFullColumn>
       <LinesExplorerContextProvider>
-        <LinesExplorer urlLineId={params.line_id?.length && params.line_id} />
+        <LinesExplorer />
       </LinesExplorerContextProvider>
     </OneFullColumn>
   );

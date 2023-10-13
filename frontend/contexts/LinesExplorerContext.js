@@ -1,5 +1,6 @@
 'use client';
 
+import useSWR from 'swr';
 import { createContext, useCallback, useContext, useMemo, useState } from 'react';
 
 // A.
@@ -11,11 +12,16 @@ const initialMapState = {
 };
 
 const initialEntitiesState = {
-  line_id: null,
+  //
+  municipality: null,
+  //
+  date: null,
+  //
+  line: null,
+  pattern: null,
+  shape: null,
   //
   stop_id: null,
-  pattern_id: null,
-  shape_id: null,
   vehicle_id: null,
   trip_id: null,
 };
@@ -45,7 +51,56 @@ export function LinesExplorerContextProvider({ children }) {
   const [entitiesState, setEntitiesState] = useState(initialEntitiesState);
 
   //
+  // B. Fetch data
+
+  const { data: allLinesData } = useSWR('https://api.carrismetropolitana.pt/lines');
+  const { data: allMunicipalitiesData } = useSWR('https://api.carrismetropolitana.pt/municipalities');
+
+  //
+  // C. Supporting functions
+
+  const updateWindowUrl = (lineId = 'all', lineName = 'Carris Metropolitana') => {
+    const newUrl = `/lines/${lineId}`;
+    window.history.replaceState({ ...window.history.state, as: newUrl, url: newUrl }, '', newUrl);
+    document.title = lineName;
+  };
+
+  //
   // B. Setup actions
+
+  const selectMunicipality = useCallback(
+    (municipalityId) => {
+      const foundMunicipality = allMunicipalitiesData.find((item) => item.id === municipalityId);
+      if (foundMunicipality) {
+        setEntitiesState((prev) => ({ ...prev, municipality: foundMunicipality }));
+      }
+    },
+    [allMunicipalitiesData]
+  );
+
+  const clearSelectedMunicipality = useCallback(() => {
+    setEntitiesState((prev) => ({ ...prev, municipality: null }));
+  }, []);
+
+  // ---------
+
+  const selectLine = useCallback(
+    (lineId) => {
+      const foundLine = allLinesData.find((item) => item.id === lineId);
+      if (foundLine) {
+        setEntitiesState((prev) => ({ ...prev, line: foundLine, pattern: null, shape: null }));
+        updateWindowUrl(lineId, foundLine.long_name);
+      }
+    },
+    [allLinesData]
+  );
+
+  const clearSelectedLine = useCallback(() => {
+    setEntitiesState((prev) => ({ ...initialEntitiesState, municipality: prev.municipality }));
+    updateWindowUrl();
+  }, []);
+
+  // ---------
 
   const updateMapState = useCallback(
     (newMapState, reset = false) => {
@@ -74,8 +129,15 @@ export function LinesExplorerContextProvider({ children }) {
       //
       entities: entitiesState,
       updateEntities: updateEntitiesState,
+      //
+      selectMunicipality,
+      clearSelectedMunicipality,
+      //
+      selectLine,
+      clearSelectedLine,
+      //
     }),
-    [mapState, updateMapState, entitiesState, updateEntitiesState]
+    [mapState, updateMapState, entitiesState, updateEntitiesState, selectMunicipality, clearSelectedMunicipality, selectLine, clearSelectedLine]
   );
 
   //

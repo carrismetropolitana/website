@@ -64,7 +64,7 @@ export function StopsExplorerContextProvider({ children }) {
   };
 
   //
-  // B. Setup actions
+  // D. Setup actions
 
   const updateMapState = useCallback(
     (newMapState, reset = false) => {
@@ -119,7 +119,7 @@ export function StopsExplorerContextProvider({ children }) {
   }, []);
 
   //
-  // C. Setup context object
+  // E. Setup context object
 
   const contextObject = useMemo(
     () => ({

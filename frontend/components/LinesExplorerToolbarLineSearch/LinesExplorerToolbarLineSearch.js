@@ -1,7 +1,7 @@
 'use client';
 
 import useSWR from 'swr';
-import { Combobox, Highlight, TextInput, useCombobox, Text, ActionIcon, Container, Group } from '@mantine/core';
+import { Combobox, TextInput, useCombobox, ActionIcon, Group } from '@mantine/core';
 import { useMemo, useState } from 'react';
 import { useTranslations } from 'next-intl';
 import styles from './LinesExplorerToolbarLineSearch.module.css';
@@ -25,19 +25,22 @@ export default function LinesExplorerToolbarLineSearch() {
   const [searchQuery, setSearchQuery] = useState('');
   const [debouncedSearchQuery] = useDebouncedValue(searchQuery, 300);
 
-  const [selectedLineData, setSelectedLineData] = useState(null);
-
   //
   // B. Fetch data
 
   const { data: allLinesData } = useSWR('https://api.carrismetropolitana.pt/lines');
+  console.log(allLinesData);
 
   //
   // C. Transform data
 
   const allLinesDataFormatted = useMemo(() => {
     if (allLinesData) {
-      return allLinesData.map((line) => {
+      let allLinesDataFiltered = allLinesData;
+      if (linesExplorerContext.entities.municipality) {
+        allLinesDataFiltered = allLinesDataFiltered.filter((line) => new Set(line.municipalities).has(linesExplorerContext.entities.municipality?.id));
+      }
+      return allLinesDataFiltered.map((line) => {
         return {
           id: line.id,
           short_name: line.short_name,
@@ -48,7 +51,7 @@ export default function LinesExplorerToolbarLineSearch() {
         };
       });
     }
-  }, [allLinesData]);
+  }, [allLinesData, linesExplorerContext.entities.municipality]);
 
   //
   // D. Search
@@ -73,7 +76,7 @@ export default function LinesExplorerToolbarLineSearch() {
 
   const handleClearSearchField = () => {
     setSearchQuery('');
-    linesExplorerContext.updateEntities({ line_id: null }, true);
+    linesExplorerContext.clearSelectedLine();
     comboboxStore.openDropdown();
   };
 
@@ -84,11 +87,7 @@ export default function LinesExplorerToolbarLineSearch() {
   };
 
   const handleSelectLine = (chosenSelectItemValue) => {
-    const chosenItem = allLinesData.find((item) => item.id === chosenSelectItemValue);
-    if (!chosenItem) return;
-    setSelectedLineData(chosenItem);
-    // setSearchQuery(chosenItem.long_name);
-    linesExplorerContext.updateEntities({ line_id: chosenSelectItemValue }, true);
+    linesExplorerContext.selectLine(chosenSelectItemValue);
     comboboxStore.closeDropdown();
   };
 
@@ -99,10 +98,10 @@ export default function LinesExplorerToolbarLineSearch() {
     <div className={styles.container}>
       <Combobox onOptionSubmit={handleSelectLine} store={comboboxStore}>
         <Combobox.Target>
-          {linesExplorerContext.entities.line_id && !comboboxStore.dropdownOpened ? (
+          {linesExplorerContext.entities.line?.id && !comboboxStore.dropdownOpened ? (
             <Group className={styles.comboboxTarget} onClick={handleClickSearchField}>
               <IconSearch size={20} />
-              <LineDisplay short_name={selectedLineData.short_name} long_name={selectedLineData.long_name} color={selectedLineData.color} text_color={selectedLineData.text_color} />
+              <LineDisplay short_name={linesExplorerContext.entities.line?.short_name} long_name={linesExplorerContext.entities.line?.long_name} color={linesExplorerContext.entities.line?.color} text_color={linesExplorerContext.entities.line?.text_color} />
               <ActionIcon onClick={handleClearSearchField} size="md" variant="subtle" color="gray">
                 <IconX size={20} />
               </ActionIcon>
@@ -137,7 +136,7 @@ export default function LinesExplorerToolbarLineSearch() {
               <Combobox.Empty>{t('no_results')}</Combobox.Empty>
             ) : (
               allLinesDataFilteredBySearchQuery.map((item) => (
-                <Combobox.Option key={item.id} value={item.id} className={item.id === linesExplorerContext.entities.line_id && styles.selected}>
+                <Combobox.Option key={item.id} value={item.id} className={item.id === linesExplorerContext.entities.line?.id && styles.selected}>
                   <div className={styles.comboboxOption}>
                     <LineDisplay short_name={item.short_name} long_name={item.long_name} color={item.color} text_color={item.text_color} />
                   </div>

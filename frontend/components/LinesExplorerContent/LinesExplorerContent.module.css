@@ -1,0 +1,18 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: var(--size-md);
+  /* padding: var(--size-lg); */
+  /* background-color: var(--reference-0); */
+  background-color: var(--gray0);
+}
+
+.lineTitle {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: var(--size-sm);
+  text-align: center;
+}
