@@ -5,7 +5,7 @@ import styles from './LinesExplorer.module.css';
 import Pannel from '@/components/Pannel/Pannel';
 import { useTranslations } from 'next-intl';
 import LinesExplorerToolbar from '@/components/LinesExplorerToolbar/LinesExplorerToolbar';
-import LinesExplorerContent from '../LinesExplorerContent/LinesExplorerContent';
+import LinesExplorerContent from '@/components/LinesExplorerContent/LinesExplorerContent';
 
 /* * */
 

@@ -29,7 +29,6 @@ export default function LinesExplorerToolbarLineSearch() {
   // B. Fetch data
 
   const { data: allLinesData } = useSWR('https://api.carrismetropolitana.pt/lines');
-  console.log(allLinesData);
 
   //
   // C. Transform data

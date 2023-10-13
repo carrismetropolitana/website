@@ -16,7 +16,7 @@
   width: 100%;
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
-  gap: var(--size-md);
+  gap: var(--size-lg);
 }
 
 @media (max-width: 900px) {

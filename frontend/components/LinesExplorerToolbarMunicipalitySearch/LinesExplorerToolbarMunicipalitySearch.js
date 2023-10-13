@@ -48,7 +48,7 @@ export default function LinesExplorerToolbarMunicipalitySearch() {
 
   return (
     <div className={styles.container}>
-      <Select aria-label={t('label')} placeholder={t('placeholder')} nothingFoundMessage={t('no_results')} onChange={handleSelectMunicipality} value={linesExplorerContext.entities.municipality?.id || null} data={allMunicipalitiesDataFormatted} radius="sm" size="lg" w="100%" searchable clearable />
+      <Select aria-label={t('label')} placeholder={t('placeholder')} nothingFoundMessage={t('no_results')} onChange={handleSelectMunicipality} value={linesExplorerContext.entities.municipality?.id || null} data={allMunicipalitiesDataFormatted} radius="sm" size="md" w="100%" searchable clearable />
     </div>
   );
 }
