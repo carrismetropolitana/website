@@ -8,7 +8,6 @@
   align-items: flex-start;
   gap: 20px;
   padding: var(--size-md);
-  border: 1px solid var(--gray-1);
 }
 
 .container.selected {
