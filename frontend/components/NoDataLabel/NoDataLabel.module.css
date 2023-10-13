@@ -8,7 +8,8 @@
   text-transform: uppercase;
   letter-spacing: 1px;
   color: var(--color-reference-1);
-  opacity: 0.1;
+  opacity: 0.15;
+  line-height: 1.2;
 }
 
 /* * */
