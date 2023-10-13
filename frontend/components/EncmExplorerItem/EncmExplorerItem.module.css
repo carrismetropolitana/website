@@ -6,8 +6,9 @@
   flex-direction: column;
   justify-content: flex-start;
   align-items: flex-start;
-  gap: var(--size-md);
+  gap: 20px;
   padding: var(--size-md);
+  border: 1px solid var(--gray-1);
 }
 
 .container.selected {
@@ -78,17 +79,4 @@
 
 .viewInMap:hover {
   text-decoration: underline;
-}
-
-/* * */
-/* OCCUPATION */
-
-.occupation {
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-  gap: 2px;
-  padding: var(--size-sm) var(--size-lg) var(--size-sm) var(--size-md);
-  background-color: var(--gray1);
-  border-radius: 3px;
 }

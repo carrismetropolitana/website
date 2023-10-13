@@ -3,8 +3,9 @@
 import { useTranslations } from 'next-intl';
 import { useEffect, useState } from 'react';
 import styles from './EncmExplorerItemOccupation.module.css';
+import LiveIcon from '@/components/LiveIcon/LiveIcon';
 
-export default function EncmExplorerItemOccupation({ currentlyWaiting, expectedWaitTime }) {
+export default function EncmExplorerItemOccupation({ currentlyWaiting, expectedWaitTime, activeCounters, isOpen }) {
   //
 
   //
@@ -42,16 +43,19 @@ export default function EncmExplorerItemOccupation({ currentlyWaiting, expectedW
   // C. Render components
 
   return (
-    <>
-      <div className={styles.container}>
+    <div className={styles.container}>
+      <h4 className={styles.title}>
+        {t('title')} <LiveIcon color="#000000" />
+      </h4>
+      <div className={styles.row}>
         <p className={styles.label}>{t('currently_waiting.label')}</p>
         <p className={styles.text}>{currentlyWaiting}</p>
       </div>
-      <div className={styles.container}>
+      <div className={styles.row}>
         <p className={styles.label}>{t('expected_wait_time.label')}</p>
         <p className={styles.text}>{waitTimeString}</p>
       </div>
-    </>
+    </div>
   );
 
   //

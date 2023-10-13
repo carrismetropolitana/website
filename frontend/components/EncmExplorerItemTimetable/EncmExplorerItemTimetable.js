@@ -4,7 +4,7 @@ import { useTranslations } from 'next-intl';
 import styles from './EncmExplorerItemTimetable.module.css';
 import { useEffect, useState } from 'react';
 
-export default function EncmExplorerItemTimetable({ mon, tue, wed, thu, fri, sat, sun }) {
+export default function EncmExplorerItemTimetable({ isOpen, mon, tue, wed, thu, fri, sat, sun }) {
   //
 
   //
@@ -57,12 +57,18 @@ export default function EncmExplorerItemTimetable({ mon, tue, wed, thu, fri, sat
   //
   // C. Render components
 
-  return parsedSchedules.map((item) => (
-    <div key={item.days} className={styles.container}>
-      <p className={styles.dayTitle}>{item.days}</p>
-      <p className={styles.daySchedule}>{item.hours}</p>
+  return (
+    <div className={styles.container}>
+      <h4 className={styles.title}>{t('title')}</h4>
+      {parsedSchedules.map((item) => (
+        <div key={item.days} className={styles.schedule}>
+          <p className={styles.day}>{item.days}</p>
+          <p className={styles.hours}>{item.hours}</p>
+        </div>
+      ))}
+      {/* {isOpen ? <p className={styles.isOpen}>{t('is_open')}</p> : <p className={styles.isClosed}>{t('is_closed')}</p>} */}
     </div>
-  ));
+  );
 
   //
 }

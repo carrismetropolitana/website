@@ -383,6 +383,11 @@
         "placeholder": "Procurar linha por número, nome, localização...",
         "no_results": "Nenhum Resultado Encontrado"
     },
+    "LinesExplorerToolbarMunicipalitySearch": {
+        "label": "Filtrar por município",
+        "placeholder": "Filtrar por município",
+        "no_results": "Nenhum Resultado Encontrado"
+    },
     "LinePatternSelector": {
         "destination_label": "destined to",
         "form": {
@@ -665,12 +670,6 @@
         "address": {
             "label": "Morada",
             "view_in_map": "Ver no Mapa"
-        },
-        "schedule": {
-            "label": "Horário"
-        },
-        "occupation": {
-            "label": "Informação em Tempo Real"
         }
     },
     "EncmExplorerMapPopup": {
@@ -691,6 +690,7 @@
         "message": "Disponíveis para os nossos passageiros, os Espaços navegante® Carris Metropolitana estão dedicados a prestar informações sobre a rede e bilhética Carris Metropolitana, possibilitando o esclarecimento de dúvidas, a emissão de cartões navegante® e a adesão a perfis e descontos."
     },
     "EncmExplorerItemTimetable": {
+        "title": "Horário",
         "from": "De",
         "until": "até",
         "and": "e",
@@ -700,9 +700,12 @@
         "thu": "Qui",
         "fri": "Sex",
         "sat": "Sab",
-        "sun": "Dom"
+        "sun": "Dom",
+        "is_open": "Aberto",
+        "is_closed": "Fechado"
     },
     "EncmExplorerItemOccupation": {
+        "title": "Informação em Tempo Real",
         "currently_waiting": {
             "label": "Clientes em espera:"
         },

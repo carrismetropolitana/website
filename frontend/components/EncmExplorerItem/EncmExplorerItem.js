@@ -1,11 +1,10 @@
 'use client';
 
-import styles from './EncmExplorerItem.module.css';
 import { useTranslations } from 'next-intl';
+import styles from './EncmExplorerItem.module.css';
 import Loader from '@/components/Loader/Loader';
-import HelpdeskItemTimetable from '@/components/EncmExplorerItemTimetable/EncmExplorerItemTimetable';
-import HelpdeskItemOccupation from '@/components/EncmExplorerItemOccupation/EncmExplorerItemOccupation';
-import LiveIcon from '@/components/LiveIcon/LiveIcon';
+import EncmExplorerItemTimetable from '@/components/EncmExplorerItemTimetable/EncmExplorerItemTimetable';
+import EncmExplorerItemOccupation from '@/components/EncmExplorerItemOccupation/EncmExplorerItemOccupation';
 
 export default function EncmExplorerItem({ encmData, selectedEncmId, onSelectEncmId }) {
   //
@@ -35,17 +34,10 @@ export default function EncmExplorerItem({ encmData, selectedEncmId, onSelectEnc
           {t('address.view_in_map')}
         </a>
       </div>
-      <div className={styles.wrapper}>
-        <h4 className={styles.label}>{t('schedule.label')}</h4>
-        <HelpdeskItemTimetable mon={encmData.hours_monday} tue={encmData.hours_tuesday} wed={encmData.hours_wednesday} thu={encmData.hours_thursday} fri={encmData.hours_friday} sat={encmData.hours_saturday} sun={encmData.hours_sunday} />
-      </div>
 
-      <div className={styles.occupation}>
-        <h4 className={styles.label}>
-          {t('occupation.label')} <LiveIcon color="#000" />
-        </h4>
-        <HelpdeskItemOccupation currentlyWaiting={encmData.currently_waiting} expectedWaitTime={encmData.expected_wait_time} />
-      </div>
+      <EncmExplorerItemTimetable isOpen={encmData.is_open} mon={encmData.hours_monday} tue={encmData.hours_tuesday} wed={encmData.hours_wednesday} thu={encmData.hours_thursday} fri={encmData.hours_friday} sat={encmData.hours_saturday} sun={encmData.hours_sunday} />
+
+      <EncmExplorerItemOccupation currentlyWaiting={encmData.currently_waiting} expectedWaitTime={encmData.expected_wait_time} activeCounters={encmData.active_counters} />
     </div>
   ) : (
     <Loader visible />
