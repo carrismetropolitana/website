@@ -24,3 +24,19 @@
     grid-template-columns: 1fr;
   }
 }
+
+/* * */
+/* MAIN */
+
+.main {
+  width: 100%;
+  display: grid;
+  grid-template-columns: 3fr 1fr;
+  gap: var(--size-lg);
+}
+
+@media (max-width: 900px) {
+  .main {
+    grid-template-columns: 1fr;
+  }
+}

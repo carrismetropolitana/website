@@ -4,7 +4,7 @@ import useSWR from 'swr';
 import { Combobox, TextInput, useCombobox, ActionIcon, Group } from '@mantine/core';
 import { useMemo, useState } from 'react';
 import { useTranslations } from 'next-intl';
-import styles from './LinesExplorerToolbarLineSearch.module.css';
+import styles from './LinesExplorerToolbarSelectLine.module.css';
 import useSearch from '@/hooks/useSearch';
 import { IconX, IconSearch } from '@tabler/icons-react';
 import { useLinesExplorerContext } from '@/contexts/LinesExplorerContext';
@@ -13,13 +13,13 @@ import LineDisplay from '../LineDisplay/LineDisplay';
 
 /* * */
 
-export default function LinesExplorerToolbarLineSearch() {
+export default function LinesExplorerToolbarSelectLine() {
   //
 
   //
   // A. Setup variables
 
-  const t = useTranslations('LinesExplorerToolbarLineSearch');
+  const t = useTranslations('LinesExplorerToolbarSelectLine');
   const linesExplorerContext = useLinesExplorerContext();
   const comboboxStore = useCombobox();
   const [searchQuery, setSearchQuery] = useState('');

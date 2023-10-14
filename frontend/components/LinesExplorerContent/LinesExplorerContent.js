@@ -7,10 +7,10 @@ import { useTranslations } from 'next-intl';
 import LinesExplorerToolbar from '@/components/LinesExplorerToolbar/LinesExplorerToolbar';
 
 import LinePatternSelector from '@/components/LinePatternSelector/LinePatternSelector';
-import LinePatternDateSelector from '@/components/LinePatternDateSelector/LinePatternDateSelector';
+import LinePatternDateSelector from '@/components/LinesExplorerToolbarSelectDate/LinesExplorerToolbarSelectDate';
 import LinePatternMap from '@/components/LinePatternMap/LinePatternMap';
 import LinePatternPath from '@/components/LinePatternPath/LinePatternPath';
-import LinesExplorerToolbarLineSearch from '../LinesExplorerToolbarLineSearch/LinesExplorerToolbarLineSearch';
+import LinesExplorerToolbarLineSearch from '../LinesExplorerToolbarSelectLine/LinesExplorerToolbarSelectLine';
 import { useLinesExplorerContext } from '@/contexts/LinesExplorerContext';
 
 /* * */
@@ -21,7 +21,6 @@ export default function LinesExplorerContent() {
   //
   // A. Setup variables
 
-  const t = useTranslations('LinesExplorer');
   const linesExplorerContext = useLinesExplorerContext();
 
   //
@@ -35,7 +34,7 @@ export default function LinesExplorerContent() {
 
   return (
     <div className={styles.container}>
-      {/* <LinePatternDateSelector /> */}
+      <LinePatternDateSelector />
       {/* <LinePatternSelector /> */}
       {/* <LinePatternPath /> */}
       {/* <LinePatternMap /> */}

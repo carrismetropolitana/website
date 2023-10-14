@@ -378,15 +378,21 @@
             }
         }
     },
-    "LinesExplorerToolbarLineSearch": {
+    "LinesExplorerToolbarSelectLine": {
         "label": "Procurar linha por número, nome, localização...",
         "placeholder": "Procurar linha por número, nome, localização...",
         "no_results": "Nenhum Resultado Encontrado"
     },
-    "LinesExplorerToolbarMunicipalitySearch": {
+    "LinesExplorerToolbarSelectMunicipality": {
         "label": "Filtrar por município",
         "placeholder": "Filtrar por município",
         "no_results": "Nenhum Resultado Encontrado"
+    },
+    "LinesExplorerToolbarSelectDate": {
+        "today": "Hoje",
+        "tomorrow": "Amanhã",
+        "label": "Selecione uma data",
+        "placeholder": "Selecione uma data"
     },
     "LinePatternSelector": {
         "destination_label": "destined to",
@@ -399,17 +405,6 @@
             "line_code": {
                 "label": "Select a Line",
                 "placeholder": "Select a Line",
-                "nothingFound": "No Results Found"
-            }
-        }
-    },
-    "LinePatternDateSelector": {
-        "today": "Today",
-        "tomorrow": "Tomorrow",
-        "form": {
-            "date": {
-                "label": "Select a Destination",
-                "placeholder": "Select a Destination",
                 "nothingFound": "No Results Found"
             }
         }

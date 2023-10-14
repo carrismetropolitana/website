@@ -1,8 +1,9 @@
 'use client';
 
 import styles from './LinesExplorerToolbar.module.css';
-import LinesExplorerToolbarLineSearch from '@/components/LinesExplorerToolbarLineSearch/LinesExplorerToolbarLineSearch';
-import LinesExplorerToolbarMunicipalitySearch from '@/components/LinesExplorerToolbarMunicipalitySearch/LinesExplorerToolbarMunicipalitySearch';
+import LinesExplorerToolbarSelectMunicipality from '@/components/LinesExplorerToolbarSelectMunicipality/LinesExplorerToolbarSelectMunicipality';
+import LinesExplorerToolbarSelectLine from '@/components/LinesExplorerToolbarSelectLine/LinesExplorerToolbarSelectLine';
+import LinesExplorerToolbarSelectDate from '../LinesExplorerToolbarSelectDate/LinesExplorerToolbarSelectDate';
 
 /* * */
 
@@ -15,12 +16,13 @@ export default function LinesExplorerToolbar() {
   return (
     <div className={styles.container}>
       <div className={styles.filters}>
-        <LinesExplorerToolbarMunicipalitySearch />
-        <LinesExplorerToolbarMunicipalitySearch />
-        <LinesExplorerToolbarMunicipalitySearch />
+        <LinesExplorerToolbarSelectMunicipality />
+        <LinesExplorerToolbarSelectMunicipality />
+        <LinesExplorerToolbarSelectMunicipality />
       </div>
-      <div className={styles.line}>
-        <LinesExplorerToolbarLineSearch />
+      <div className={styles.main}>
+        <LinesExplorerToolbarSelectLine />
+        <LinesExplorerToolbarSelectDate />
       </div>
     </div>
   );

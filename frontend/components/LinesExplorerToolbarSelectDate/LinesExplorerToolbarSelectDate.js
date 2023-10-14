@@ -1,20 +1,20 @@
 'use client';
 
+import { useMemo } from 'react';
 import { useTranslations } from 'next-intl';
 import { DatePickerInput } from '@mantine/dates';
-import styles from './LinePatternDateSelector.module.css';
-import { useLineFormContext } from '@/forms/LineForm';
+import styles from './LinesExplorerToolbarSelectDate.module.css';
 import parseDateToString from '@/services/parseDateToString';
-import { useMemo, useState } from 'react';
+import { useLinesExplorerContext } from '@/contexts/LinesExplorerContext';
 
-export default function LinePatternDateSelector() {
+export default function LinesExplorerToolbarSelectDate() {
   //
 
   //
   // A. Setup variables
 
-  const lineForm = useLineFormContext();
-  const t = useTranslations('LinePatternDateSelector');
+  const linesExplorerContext = useLinesExplorerContext();
+  const t = useTranslations('LinesExplorerToolbarSelectDate');
 
   //
   // C. Handle actions
@@ -35,8 +35,8 @@ export default function LinePatternDateSelector() {
 
   const isTodaySelected = useMemo(() => {
     const todayDateString = parseDateToString(todayDate);
-    return todayDateString === lineForm.values.date_string;
-  }, [lineForm.values.date_string, todayDate]);
+    return todayDateString === linesExplorerContext.entities.date;
+  }, [linesExplorerContext.entities.date, todayDate]);
 
   //
   //
@@ -58,8 +58,8 @@ export default function LinePatternDateSelector() {
 
   const isTomorrowSelected = useMemo(() => {
     const tomorrowDateString = parseDateToString(tomorrowDate);
-    return tomorrowDateString === lineForm.values.date_string;
-  }, [lineForm.values.date_string, tomorrowDate]);
+    return tomorrowDateString === linesExplorerContext.entities.date;
+  }, [linesExplorerContext.entities.date, tomorrowDate]);
 
   //
   // C. Handle actions
@@ -76,8 +76,8 @@ export default function LinePatternDateSelector() {
 
   const handleSetDate = (value) => {
     // Set the date value for tomorrow
-    lineForm.setFieldValue('date', value);
-    lineForm.setFieldValue('date_string', parseDateToString(value));
+    // lineForm.setFieldValue('date', value);
+    // lineForm.setFieldValue('date_string', parseDateToString(value));
   };
 
   //
@@ -92,15 +92,7 @@ export default function LinePatternDateSelector() {
         <div className={`${styles.button} ${isTomorrowSelected && styles.selected}`} onClick={handleSetTomorrow}>
           {t('tomorrow')}
         </div>
-        <DatePickerInput
-          aria-label={t('form.date.label')}
-          placeholder={t('form.date.placeholder')}
-          dropdownType='modal'
-          {...lineForm.getInputProps('date')}
-          onChange={handleSetDate}
-          size='lg'
-          classNames={{ input: `${styles.input} ${!isTodaySelected && !isTomorrowSelected && styles.selected}` }}
-        />
+        <DatePickerInput aria-label={t('label')} placeholder={t('placeholder')} dropdownType="modal" onChange={handleSetDate} value={linesExplorerContext.entities.date} size="lg" />
       </div>
     </div>
   );

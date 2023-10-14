@@ -4,18 +4,18 @@ import useSWR from 'swr';
 import { Select } from '@mantine/core';
 import { useMemo } from 'react';
 import { useTranslations } from 'next-intl';
-import styles from './LinesExplorerToolbarMunicipalitySearch.module.css';
+import styles from './LinesExplorerToolbarSelectMunicipality.module.css';
 import { useLinesExplorerContext } from '@/contexts/LinesExplorerContext';
 
 /* * */
 
-export default function LinesExplorerToolbarMunicipalitySearch() {
+export default function LinesExplorerToolbarSelectMunicipality() {
   //
 
   //
   // A. Setup variables
 
-  const t = useTranslations('LinesExplorerToolbarMunicipalitySearch');
+  const t = useTranslations('LinesExplorerToolbarSelectMunicipality');
   const linesExplorerContext = useLinesExplorerContext();
 
   //
