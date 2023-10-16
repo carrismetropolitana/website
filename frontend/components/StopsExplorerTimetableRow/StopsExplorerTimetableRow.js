@@ -184,7 +184,7 @@ export default function StopsExplorerTimetableRow({ rowType, tripData }) {
       <div className={styles.tripDetails}>
         {debugContext.isDebug && (
           <div className={styles.testData} onClick={(e) => e.stopPropagation()}>
-            <CopyBadge label={`stop_id: ${stopsExplorerContext.entities.stop_id}`} value={stopsExplorerContext.entities.stop_id} />
+            <CopyBadge label={`stop_id: ${stopsExplorerContext.entities.stop?.id}`} value={stopsExplorerContext.entities.stop?.id} />
             <CopyBadge label={`trip_id: ${tripData.trip_id}`} value={tripData.trip_id} />
             <CopyBadge label={`stop_seq: ${tripData.stop_sequence}`} value={tripData.stop_sequence} />
             <CopyBadge label={`vehicle_id: ${tripData.vehicle_id}`} value={tripData.vehicle_id} />
@@ -194,9 +194,7 @@ export default function StopsExplorerTimetableRow({ rowType, tripData }) {
           </div>
         )}
 
-        {(tripRealtimeStatus === 'realtime' || tripRealtimeStatus === 'arriving_now' || tripRealtimeStatus === 'passed') && tripEtaMinutes > -10 && tripData.vehicle_id && !debugContext.isDebug && (
-          <StopsExplorerTimetableFeedback tripData={tripData} />
-        )}
+        {(tripRealtimeStatus === 'realtime' || tripRealtimeStatus === 'arriving_now' || tripRealtimeStatus === 'passed') && tripEtaMinutes > -10 && tripData.vehicle_id && !debugContext.isDebug && <StopsExplorerTimetableFeedback tripData={tripData} />}
 
         <div className={styles.localitiesPerLine}>
           <p>Passa por</p>
