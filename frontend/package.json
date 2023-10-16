@@ -1,6 +1,6 @@
 {
     "name": "@carrismetropolitana/website",
-    "version": "2023.10.16-1659",
+    "version": "2023.10.16-1700",
     "private": true,
     "scripts": {
         "dev": "next dev",
@@ -21,7 +21,7 @@
         "dayjs": "1.11.10",
         "inflected": "2.1.0",
         "maplibre-gl": "3.5.0",
-        "next": "13.5.4",
+        "next": "13.5.5",
         "next-intl": "2.20.2",
         "react": "18.2.0",
         "react-dom": "18.2.0",
@@ -31,13 +31,13 @@
         "ua-parser-js": "^1.0.36"
     },
     "devDependencies": {
-        "@types/node": "20.8.5",
+        "@types/node": "20.8.6",
         "@types/react": "18.2.28",
         "@types/react-dom": "18.2.13",
         "eslint": "8.51.0",
-        "eslint-config-next": "13.5.4",
+        "eslint-config-next": "13.5.5",
         "postcss": "8.4.31",
-        "postcss-preset-mantine": "1.8.0",
+        "postcss-preset-mantine": "1.9.0",
         "postcss-simple-vars": "7.0.1",
         "typescript": "5.2.2"
     }
