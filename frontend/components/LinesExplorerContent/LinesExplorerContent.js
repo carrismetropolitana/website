@@ -34,7 +34,6 @@ export default function LinesExplorerContent() {
 
   return (
     <div className={styles.container}>
-      <LinePatternDateSelector />
       {/* <LinePatternSelector /> */}
       {/* <LinePatternPath /> */}
       {/* <LinePatternMap /> */}

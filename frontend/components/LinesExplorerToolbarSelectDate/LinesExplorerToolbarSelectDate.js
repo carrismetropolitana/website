@@ -6,6 +6,7 @@ import { DatePickerInput } from '@mantine/dates';
 import styles from './LinesExplorerToolbarSelectDate.module.css';
 import parseDateToString from '@/services/parseDateToString';
 import { useLinesExplorerContext } from '@/contexts/LinesExplorerContext';
+import { Button } from '@mantine/core';
 
 export default function LinesExplorerToolbarSelectDate() {
   //
@@ -85,6 +86,20 @@ export default function LinesExplorerToolbarSelectDate() {
 
   return (
     <div className={styles.container}>
+      <Button.Group>
+        <Button size="lg" variant="default">
+          {t('today')}
+        </Button>
+        <Button size="lg" variant="default">
+          {t('tomorrow')}
+        </Button>
+        <DatePickerInput aria-label={t('label')} placeholder={t('placeholder')} dropdownType="modal" onChange={handleSetDate} value={linesExplorerContext.entities.date} size="lg" classNames={{ input: `${styles.input} ${!isTodaySelected && !isTomorrowSelected && styles.selected}` }} />
+      </Button.Group>
+    </div>
+  );
+
+  return (
+    <div className={styles.container}>
       <div className={styles.wrapper}>
         <div className={`${styles.button} ${isTodaySelected && styles.selected}`} onClick={handleSetToday}>
           {t('today')}
@@ -96,4 +111,6 @@ export default function LinesExplorerToolbarSelectDate() {
       </div>
     </div>
   );
+
+  //
 }
