@@ -111,6 +111,7 @@ export default function StopsExplorerMap() {
             heading: selectedVehicleData.heading,
             trip_id: selectedVehicleData.trip_id,
             pattern_id: selectedVehicleData.pattern_id,
+            status: selectedVehicleData.status,
           },
         };
       }
@@ -267,6 +268,7 @@ export default function StopsExplorerMap() {
           <div>Vehicle ID: {selectedVehicleMapData.properties.id}</div>
           <div>Timestamp: {selectedVehicleMapData.properties.timeString}</div>
           <div>Delay: {selectedVehicleMapData.properties.delay} seconds</div>
+          <div>Inferred Status: {selectedVehicleMapData.properties.status}</div>
         </Popup>
       )}
       {selectedVehicleMapData && (
