@@ -203,18 +203,22 @@ export default function StopsExplorerMap() {
   // C. Handle actions
 
   useEffect(() => {
-    if (stopsExplorerContext.entities.stop?.id) {
-      // Get map feature matching currently selected stop_id
-      const stopMapFeature = allStopsMapData?.features.find((f) => f.properties?.id === stopsExplorerContext.entities.stop?.id);
-      if (!stopMapFeature) return;
-      // Move map to this location
-      moveMap(stopMapFeature.geometry?.coordinates);
-      // Update local state
-      setSelectedMapFeature(stopMapFeature);
-    } else {
-      setSelectedMapFeature(null);
-    }
-  }, [allStopsMapData?.features, moveMap, stopsExplorerContext.entities.stop?.id, stopsExplorerMap]);
+    // Check if map is ready
+    if (stopsExplorerMap?.getSource('all-stops') === undefined) return;
+    // Check if auto zoom is enabled
+    if (!stopsExplorerContext.map.auto_zoom) return;
+    // Check if there is a selected map feature
+    if (stopsExplorerContext.map.selected_feature) return;
+    // Check if there is a selected stop id
+    if (!stopsExplorerContext.entities.stop?.id) return;
+    // Find the corresponding map feature
+    const stopMapFeature = allStopsMapData?.features.find((f) => f.properties?.id === stopsExplorerContext.entities.stop?.id);
+    if (!stopMapFeature) return;
+    // Center the map and save the feature to state
+    moveMap(stopMapFeature.geometry?.coordinates);
+    stopsExplorerContext.setSelectedFeature(stopMapFeature);
+    //
+  });
 
   useEffect(() => {
     if (stopsExplorerContext.map.selected_coordinates) {
@@ -225,6 +229,8 @@ export default function StopsExplorerMap() {
   const handleMapClick = (event) => {
     if (event?.features[0]?.properties?.id) {
       stopsExplorerContext.selectStop(event.features[0].properties.id);
+      stopsExplorerContext.setSelectedFeature(event.features[0]);
+      moveMap(event.features[0].geometry?.coordinates);
     }
   };
 
@@ -247,8 +253,8 @@ export default function StopsExplorerMap() {
       stopsExplorerMap.setFeatureState({ source: 'all-stops', id: f.id }, { selected: false });
     });
     // Then mark the selected one as selected
-    if (selectedMapFeature) {
-      stopsExplorerMap.setFeatureState({ source: 'all-stops', id: selectedMapFeature.properties.mapid }, { selected: true });
+    if (stopsExplorerContext.map.selected_feature) {
+      stopsExplorerMap.setFeatureState({ source: 'all-stops', id: stopsExplorerContext.map.selected_feature.properties.mapid }, { selected: true });
     }
   };
 

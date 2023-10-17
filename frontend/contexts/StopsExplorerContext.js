@@ -10,6 +10,7 @@ const initialMapState = {
   style: 'map',
   auto_zoom: null,
   selected_coordinates: null,
+  selected_feature: null,
 };
 
 const initialEntitiesState = {
@@ -86,7 +87,15 @@ export function StopsExplorerContextProvider({ children }) {
 
   const setSelectedCoordinates = useCallback((newCoordinates) => {
     setEntitiesState(initialEntitiesState);
-    setMapState((prev) => ({ ...prev, selected_coordinates: newCoordinates }));
+    setMapState((prev) => ({ ...prev, selected_coordinates: newCoordinates, selected_feature: null }));
+  }, []);
+
+  const setSelectedFeature = useCallback((newFeature) => {
+    setMapState((prev) => ({ ...prev, selected_feature: newFeature, selected_coordinates: null }));
+  }, []);
+
+  const disableAutoZoom = useCallback(() => {
+    setMapState((prev) => ({ ...prev, auto_zoom: false }));
   }, []);
 
   // --------
@@ -95,7 +104,7 @@ export function StopsExplorerContextProvider({ children }) {
     (stopId) => {
       const foundStop = allStopsData.find((item) => item.id === stopId);
       if (foundStop) {
-        setMapState((prev) => ({ ...prev, selected_coordinates: null }));
+        setMapState((prev) => ({ ...prev, auto_zoom: true, selected_feature: null, selected_coordinates: null }));
         setEntitiesState({ ...initialEntitiesState, stop: foundStop });
         updateWindowUrl(stopId, foundStop.name);
       }
@@ -127,6 +136,8 @@ export function StopsExplorerContextProvider({ children }) {
       map: mapState,
       updateMap: updateMapState,
       setSelectedCoordinates,
+      setSelectedFeature,
+      disableAutoZoom,
       //
       entities: entitiesState,
       updateEntities,
@@ -137,7 +148,7 @@ export function StopsExplorerContextProvider({ children }) {
       selectTrip,
       clearSelectedTrip,
     }),
-    [mapState, updateMapState, setSelectedCoordinates, entitiesState, updateEntities, selectStop, clearSelectedStop, selectTrip, clearSelectedTrip]
+    [mapState, updateMapState, setSelectedCoordinates, setSelectedFeature, disableAutoZoom, entitiesState, updateEntities, selectStop, clearSelectedStop, selectTrip, clearSelectedTrip]
   );
 
   //

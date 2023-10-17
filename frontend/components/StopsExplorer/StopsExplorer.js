@@ -3,7 +3,6 @@
 import styles from './StopsExplorer.module.css';
 import useSWR from 'swr';
 import { useEffect } from 'react';
-import { useMap } from 'react-map-gl/maplibre';
 import { useTranslations } from 'next-intl';
 import Pannel from '@/components/Pannel/Pannel';
 import StopsExplorerToolbar from '@/components/StopsExplorerToolbar/StopsExplorerToolbar';
@@ -26,8 +25,6 @@ export default function StopsExplorer() {
   const t = useTranslations('StopsExplorer');
 
   const analyticsContext = useAnalyticsContext();
-
-  const { stopsExplorerMap } = useMap();
   const stopsExplorerContext = useStopsExplorerContext();
 
   //
@@ -49,7 +46,7 @@ export default function StopsExplorer() {
 
   useEffect(() => {
     const matchedStopIdFromUrl = window.location.pathname.match(/\/stops\/(.+)/);
-    if (matchedStopIdFromUrl && matchedStopIdFromUrl[1] !== 'all' && allStopsData && !stopsExplorerContext.entities.stop?.id && stopsExplorerMap?.getSource('all-stops') !== undefined) {
+    if (matchedStopIdFromUrl && matchedStopIdFromUrl[1] !== 'all' && allStopsData && !stopsExplorerContext.entities.stop?.id) {
       stopsExplorerContext.selectStop(matchedStopIdFromUrl[1]);
     }
   });
