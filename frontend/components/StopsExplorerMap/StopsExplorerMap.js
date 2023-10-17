@@ -143,19 +143,14 @@ export default function StopsExplorerMap() {
       stopsExplorerMap.addImage('shape-arrow-direction', image, { sdf: true });
     });
     // Load vehicle symbol
-    stopsExplorerMap.loadImage('/icons/bus.png', (error, image) => {
+    stopsExplorerMap.loadImage('/icons/cm-bus-regular.png', (error, image) => {
       if (error) throw error;
-      stopsExplorerMap.addImage('bus', image, { sdf: false });
+      stopsExplorerMap.addImage('cm-bus-regular', image, { sdf: false });
     });
     // Load vehicle symbol
-    stopsExplorerMap.loadImage('/icons/bus-dead.png', (error, image) => {
+    stopsExplorerMap.loadImage('/icons/cm-bus-delay.png', (error, image) => {
       if (error) throw error;
-      stopsExplorerMap.addImage('bus-dead', image, { sdf: false });
-    });
-    // Load vehicle symbol
-    stopsExplorerMap.loadImage('/icons/bus-delay.png', (error, image) => {
-      if (error) throw error;
-      stopsExplorerMap.addImage('bus-delay', image, { sdf: false });
+      stopsExplorerMap.addImage('cm-bus-delay', image, { sdf: false });
     });
     // Load stop selected symbol
     stopsExplorerMap.loadImage('/icons/map-stop-selected.png', (error, image) => {
@@ -283,34 +278,15 @@ export default function StopsExplorerMap() {
               'icon-anchor': 'center',
               'symbol-placement': 'point',
               'icon-rotation-alignment': 'map',
-              'icon-image': 'bus',
+              'icon-image': 'cm-bus-regular',
               'icon-size': ['interpolate', ['linear', 0.5], ['zoom'], 10, 0.05, 20, 0.15],
               'icon-offset': [0, 0],
               'icon-rotate': selectedVehicleMapData.properties.heading || 0,
             }}
-            paint={{
-              'icon-opacity': ['interpolate', ['linear', 0.5], ['zoom'], 7, 0, 10, 1],
-            }}
+            // paint={{
+            //   'icon-opacity': ['interpolate', ['linear', 0.5], ['zoom'], 7, 0, 10, 1],
+            // }}
           />
-          {/* <Layer
-            id="selected-vehicle-delay"
-            type="symbol"
-            source="selected-vehicle"
-            layout={{
-              'icon-allow-overlap': true,
-              'icon-ignore-placement': true,
-              'icon-anchor': 'center',
-              'symbol-placement': 'point',
-              'icon-rotation-alignment': 'map',
-              'icon-image': 'bus-delay',
-              'icon-size': ['interpolate', ['linear', 0.5], ['zoom'], 10, 0.05, 20, 0.15],
-              'icon-offset': [0, 0],
-              'icon-rotate': selectedVehicleMapData.properties.heading || 0,
-            }}
-            paint={{
-              'icon-opacity': ['interpolate', ['linear', 0.5], ['get', 'delay'], 20, 0, 21, 1],
-            }}
-          /> */}
           <Layer
             id="selected-vehicle-dead"
             type="symbol"
@@ -321,7 +297,7 @@ export default function StopsExplorerMap() {
               'icon-anchor': 'center',
               'symbol-placement': 'point',
               'icon-rotation-alignment': 'map',
-              'icon-image': 'bus-dead',
+              'icon-image': 'cm-bus-delay',
               'icon-size': ['interpolate', ['linear', 0.5], ['zoom'], 10, 0.05, 20, 0.15],
               'icon-offset': [0, 0],
               'icon-rotate': selectedVehicleMapData.properties.heading || 0,
