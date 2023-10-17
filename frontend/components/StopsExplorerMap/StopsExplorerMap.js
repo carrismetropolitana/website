@@ -283,9 +283,6 @@ export default function StopsExplorerMap() {
               'icon-offset': [0, 0],
               'icon-rotate': selectedVehicleMapData.properties.heading || 0,
             }}
-            // paint={{
-            //   'icon-opacity': ['interpolate', ['linear', 0.5], ['zoom'], 7, 0, 10, 1],
-            // }}
           />
           <Layer
             id="selected-vehicle-dead"
