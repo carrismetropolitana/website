@@ -860,5 +860,9 @@
                 }
             }
         }
+    },
+    "MaintenanceWarning": {
+        "title": "Website em Manutenção",
+        "subtitle": "Estaremos de volta em breve"
     }
 }

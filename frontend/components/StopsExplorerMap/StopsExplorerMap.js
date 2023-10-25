@@ -32,8 +32,6 @@ export default function StopsExplorerMap() {
   const { stopsExplorerMap } = useMap();
   const stopsExplorerContext = useStopsExplorerContext();
 
-  const [selectedMapFeature, setSelectedMapFeature] = useState(null);
-
   //
   // B. Fetch data
 

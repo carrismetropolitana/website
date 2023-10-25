@@ -8,6 +8,7 @@ import AppTopBar from '@/components/AppTopBar/AppTopBar';
 import AppHeader from '@/components/AppHeader/AppHeader';
 import AppFooter from '@/components/AppFooter/AppFooter';
 import AnalyticsAuthorizer from '@/components/AnalyticsAuthorizer/AnalyticsAuthorizer';
+import MaintenanceWarning from '@/components/MaintenanceWarning/MaintenanceWarning';
 
 export default async function LocaleLayout({ children, params: { locale } }) {
   //
@@ -27,7 +28,8 @@ export default async function LocaleLayout({ children, params: { locale } }) {
       <AppWrapper>
         <AppTopBar />
         <AppHeader />
-        {children}
+        <MaintenanceWarning />
+        {/* {children} */}
         <AppFooter />
       </AppWrapper>
     </NextIntlClientProvider>
