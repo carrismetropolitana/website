@@ -28,8 +28,8 @@ export default async function LocaleLayout({ children, params: { locale } }) {
       <AppWrapper>
         <AppTopBar />
         <AppHeader />
-        <MaintenanceWarning />
-        {/* {children} */}
+        {/* <MaintenanceWarning /> */}
+        {children}
         <AppFooter />
       </AppWrapper>
     </NextIntlClientProvider>
