@@ -14,8 +14,8 @@
         "@mantine/dates": "7.1.5",
         "@mantine/form": "7.1.5",
         "@mantine/hooks": "7.1.5",
-        "@mantine/modals": "^7.1.5",
-        "@rajesh896/broprint.js": "^2.1.1",
+        "@mantine/modals": "7.1.5",
+        "@rajesh896/broprint.js": "2.1.1",
         "@tabler/icons-react": "2.39.0",
         "@turf/turf": "6.5.0",
         "dayjs": "1.11.10",
@@ -28,7 +28,7 @@
         "react-map-gl": "7.1.6",
         "sharp": "0.32.6",
         "swr": "2.2.4",
-        "ua-parser-js": "^1.0.36"
+        "ua-parser-js": "1.0.36"
     },
     "devDependencies": {
         "@types/node": "20.8.8",
