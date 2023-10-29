@@ -78,6 +78,7 @@ export function AnalyticsContextProvider({ children }) {
     async (key, properties = {}) => {
       try {
         // Only capture anonymous analytics if user has allowed it
+        return;
         if (!isCaptureEnabled) return;
         // Parse user-agent string
         const parsedUserAgent = window.navigator.userAgent ? new UAParser(window.navigator.userAgent).getResult() : null;
