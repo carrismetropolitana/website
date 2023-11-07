@@ -59,7 +59,11 @@ export function StopsExplorerContextProvider({ children }) {
   // C. Supporting functions
 
   const updateWindowUrl = (stopId = 'all', stopName = 'Carris Metropolitana') => {
-    const newUrl = `/stops/${stopId}`;
+    let newUrl = `/stops/${stopId}`;
+    // TODO:
+    // Refactor to correctly parse the location path
+    if (window.location.pathname.includes('mupi')) newUrl = `/mupi${newUrl}`;
+    // :TODO
     window.history.replaceState({ ...window.history.state, as: newUrl, url: newUrl }, '', newUrl);
     document.title = stopName;
   };

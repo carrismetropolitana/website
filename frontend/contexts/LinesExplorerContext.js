@@ -60,7 +60,11 @@ export function LinesExplorerContextProvider({ children }) {
   // C. Supporting functions
 
   const updateWindowUrl = (lineId = 'all', lineName = 'Carris Metropolitana') => {
-    const newUrl = `/lines/${lineId}`;
+    let newUrl = `/lines/${lineId}`;
+    // TODO:
+    // Refactor to correctly parse the location path
+    if (window.location.pathname.includes('mupi')) newUrl = `/mupi${newUrl}`;
+    // :TODO
     window.history.replaceState({ ...window.history.state, as: newUrl, url: newUrl }, '', newUrl);
     document.title = lineName;
   };
