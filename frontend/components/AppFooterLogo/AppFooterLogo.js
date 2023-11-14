@@ -34,8 +34,14 @@ export default function AppFooterLogo() {
         <a href="https://www.facebook.com/carrismetropolitana" target="_blank">
           <Image src="/icons/social-facebook.svg" alt={t('socials.facebook')} width={24} height={24} />
         </a>
-        <a href="https://www.instagram.com/carrismetropolitana/" target="_blank">
+        <a href="https://www.instagram.com/carrismetropolitana" target="_blank">
           <Image src="/icons/social-instagram.svg" alt={t('socials.instagram')} width={24} height={24} />
+        </a>
+        <a href="https://www.whatsapp.com/channel/0029Va9z9d2JP2184daqbX0K" target="_blank">
+          <Image src="/icons/social-whatsapp.svg" alt={t('socials.instagram')} width={24} height={24} />
+        </a>
+        <a href="https://twitter.com/CMetropolitana_" target="_blank">
+          <Image src="/icons/social-twitter.svg" alt={t('socials.instagram')} width={24} height={24} />
         </a>
       </div>
     </div>

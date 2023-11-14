@@ -574,7 +574,7 @@
         }
     },
     "AppFooterLegal": {
-        "copyright": "© Carris Metropolitana 2023 - Todos os direitos reservados",
+        "copyright": "© Carris Metropolitana {year} - Todos os direitos reservados",
         "complaints_book": "Livro de Reclamações",
         "general_conditions": "Condições Gerais de Transporte",
         "privacy_policy": "Política de Privacidade",

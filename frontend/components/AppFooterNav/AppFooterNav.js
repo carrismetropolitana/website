@@ -69,9 +69,6 @@ export default function AppFooterNav() {
         <Link className={styles.link} href="https://www.carrismetropolitana.pt/carris-metropolitana">
           {t('corporate.links.brand')}
         </Link>
-        <Link className={styles.link} href="https://recrutamento.carrismetropolitana.pt" target="_blank">
-          {t('corporate.links.jobs')}
-        </Link>
         <Link className={styles.link} href="https://www.carrismetropolitana.pt/opendata">
           {t('corporate.links.opendata')}
         </Link>
