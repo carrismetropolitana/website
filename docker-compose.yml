@@ -54,7 +54,7 @@ services:
   # # # # # # # # # # # # # # # # # # # # #
   # # # # # # # # # # # # # # # # # # # # #
 
-  frontend:
+  website_frontend:
     image: ghcr.io/carrismetropolitana/website-frontend:production
     restart: unless-stopped
     logging:
@@ -63,3 +63,25 @@ services:
         max-file: '1'
     environment:
       - VERCEL_URL=beta.carrismetropolitana.pt
+
+  # # # # # # # # # # # # # # # # # # # # #
+  # # # # # # # # # # # # # # # # # # # # #
+
+  escolas_frontend:
+    image: ghcr.io/carrismetropolitana/escolas-frontend:main
+    restart: unless-stopped
+    logging:
+      options:
+        max-size: '1m'
+        max-file: '1'
+
+  # # # # # # # # # # # # # # # # # # # # #
+  # # # # # # # # # # # # # # # # # # # # #
+
+  meuhorario_frontend:
+    image: ghcr.io/carrismetropolitana/folhetos-frontend:main
+    restart: unless-stopped
+    logging:
+      options:
+        max-size: '1m'
+        max-file: '1'
