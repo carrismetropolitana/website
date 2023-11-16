@@ -48,8 +48,6 @@ echo
 # # #
 # WEBSITE (BETA)
 
-website_domain=beta.carrismetropolitana.pt # The primary domain
-website_domain_alias=on.carrismetropolitana.pt
 echo ">>> Preparing for "$website_domain" (and alias "$website_domain_alias") ..."
 
 echo ">>> Deleting dummy certificate..."
