@@ -82,6 +82,7 @@ export default function LinesExplorerToolbarSelectLine() {
   const handleSearchQueryChange = ({ currentTarget }) => {
     setSearchQuery(currentTarget.value);
     comboboxStore.updateSelectedOptionIndex();
+    comboboxStore.selectFirstOption();
     comboboxStore.openDropdown();
   };
 

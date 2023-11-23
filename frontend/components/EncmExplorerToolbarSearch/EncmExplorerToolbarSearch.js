@@ -68,6 +68,7 @@ export default function EncmExplorerToolbarSearch({ selectedEncmId, onSelectEncm
   const handleSearchQueryChange = ({ currentTarget }) => {
     setSearchQuery(currentTarget.value);
     comboboxStore.updateSelectedOptionIndex();
+    comboboxStore.selectFirstOption();
     comboboxStore.openDropdown();
   };
 
