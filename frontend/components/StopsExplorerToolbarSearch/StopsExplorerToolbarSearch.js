@@ -87,6 +87,7 @@ export default function StopsExplorerToolbarSearch() {
     else setSearchQueryCoordinates(null);
     // Update combobox
     comboboxStore.updateSelectedOptionIndex();
+    comboboxStore.selectFirstOption();
     comboboxStore.openDropdown();
   };
 
