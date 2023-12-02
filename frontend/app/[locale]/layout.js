@@ -9,7 +9,6 @@ import AppHeader from '@/components/AppHeader/AppHeader';
 import AppFooter from '@/components/AppFooter/AppFooter';
 import AnalyticsAuthorizer from '@/components/AnalyticsAuthorizer/AnalyticsAuthorizer';
 import StatusMessage from '@/components/StatusMessage/StatusMessage';
-import { OneFullColumn } from '@/components/Layouts/Layouts';
 // import MaintenanceWarning from '@/components/MaintenanceWarning/MaintenanceWarning';
 
 /* * */
@@ -27,9 +26,7 @@ export default function Layout({ children, params: { locale } }) {
       <AppWrapper>
         <AppTopBar />
         <AppHeader />
-        <OneFullColumn>
-          <StatusMessage />
-        </OneFullColumn>
+        <StatusMessage />
         {/* <MaintenanceWarning /> */}
         {children}
         <AppFooter />
