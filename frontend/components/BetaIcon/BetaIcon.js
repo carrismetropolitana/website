@@ -1,5 +1,7 @@
 'use client';
 
+/* * */
+
 import styles from './BetaIcon.module.css';
 import { useDebugContext } from '@/contexts/DebugContext';
 import useDoubleClick from '@/hooks/useDoubleClick';
@@ -26,7 +28,7 @@ export default function BetaIcon() {
 
   return (
     <div className={styles.beta} onClick={handleClick}>
-      {debugContext.isDebug ? 'DEBUG' : 'BETA'}
+      {debugContext.isDebug ? 'DEBUG' : 'LIVE'}
     </div>
   );
 
