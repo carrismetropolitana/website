@@ -114,17 +114,21 @@ export default function StopsExplorerTimetable() {
   //
   // D. Handle actions
 
-  return stopRealtimeLoading ? (
-    <Loader visible maxed />
-  ) : previousTrips.length > 0 || currentAndFutureTrips.length > 0 ? (
+  return (
     <div className={styles.container}>
-      <StopsExplorerTimetableHeader />
-      <StopsExplorerTimetablePreviousTrips tripsData={previousTrips} />
-      <StopsExplorerTimetableDividerLine />
-      <StopsExplorerTimetableCurrentAndFutureTrips tripsData={currentAndFutureTrips} />
+      {stopRealtimeLoading ? (
+        <Loader visible maxed />
+      ) : previousTrips.length > 0 || currentAndFutureTrips.length > 0 ? (
+        <>
+          <StopsExplorerTimetableHeader />
+          <StopsExplorerTimetablePreviousTrips tripsData={previousTrips} />
+          <StopsExplorerTimetableDividerLine />
+          <StopsExplorerTimetableCurrentAndFutureTrips tripsData={currentAndFutureTrips} />
+        </>
+      ) : (
+        <NoDataLabel text={t('no_service')} />
+      )}
     </div>
-  ) : (
-    <NoDataLabel text={t('no_service')} />
   );
 
   //

@@ -1,7 +1,11 @@
 'use client';
 
+/* * */
+
 import styles from './MaintenanceWarning.module.css';
 import { useTranslations } from 'next-intl';
+
+/* * */
 
 export default function MaintenanceWarning() {
   //

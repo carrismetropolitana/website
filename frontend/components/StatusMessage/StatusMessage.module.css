@@ -1,0 +1,24 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  background: #ffeebe;
+  padding: 15px 20px;
+  border-radius: 10px;
+}
+
+@media (max-width: 700px) {
+  .container {
+    border-radius: 0;
+  }
+}
+
+.title,
+.explanation,
+.solution {
+  line-height: 1.4;
+}
+
+.solution {
+  font-weight: 600;
+}

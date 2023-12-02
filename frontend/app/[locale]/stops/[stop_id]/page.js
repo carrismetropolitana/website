@@ -1,6 +1,8 @@
+/* * */
+
 import { OneFullColumn } from '@/components/Layouts/Layouts';
-import StopsExplorer from '@/components/StopsExplorer/StopsExplorer';
 import { StopsExplorerContextProvider } from '@/contexts/StopsExplorerContext';
+import StopsExplorer from '@/components/StopsExplorer/StopsExplorer';
 
 /* * */
 

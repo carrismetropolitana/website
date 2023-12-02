@@ -1,12 +1,12 @@
-/** @type {import('next').NextConfig} */
+/* * */
 
-module.exports = {
+const withNextIntl = require('next-intl/plugin')();
+
+/* * */
+
+module.exports = withNextIntl({
   output: 'standalone',
   reactStrictMode: true,
-  i18n: {
-    locales: ['pt-PT' /* ,'en-US' */],
-    defaultLocale: 'pt-PT',
-  },
   images: {
     remotePatterns: [
       {
@@ -29,4 +29,4 @@ module.exports = {
       { source: '/espacos-navegante', destination: '/encm', permanent: true },
     ];
   },
-};
+});
