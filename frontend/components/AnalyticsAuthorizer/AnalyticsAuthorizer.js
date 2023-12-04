@@ -51,7 +51,7 @@ export default function AnalyticsAuthorizer() {
   return (
     <Modal opened={isOpen} onClose={() => setIsOpen(false)} withCloseButton={false} trapFocus={false} closeOnEscape={false} closeOnClickOutside={false} returnFocus={true} overlayProps={{ backgroundOpacity: 0.55, blur: 3 }}>
       <div className={styles.container}>
-        <Image src="/images/analytics-header.svg" alt="" width={350} height={120} />
+        <Image src="/images/analytics-header.svg" alt="" width={350} height={120} priority />
         <h4 className={styles.title}>{t('title')}</h4>
         <h4 className={styles.text}>{t('text')}</h4>
         <Link href="/legal/cookies" target="_blank" className={styles.link}>

@@ -22,10 +22,10 @@ export async function generateMetadata({ params }) {
   } else {
     switch (params.locale) {
       case 'pt':
-        return { title: `Horários na linha ${lineData.short_name} - ${lineData.long_name}`, description: 'Estimativas de chegada em tempo real para os autocarros da Carris Metropolitana.' };
+        return { title: `Horários da linha ${lineData.short_name} - ${lineData.long_name}`, description: 'Estimativas de chegada em tempo real para os autocarros da Carris Metropolitana.' };
       default:
       case 'en':
-        return { title: `Horários na linha ${lineData.short_name} - ${lineData.long_name}`, description: 'Estimativas de chegada em tempo real para os autocarros da Carris Metropolitana.' };
+        return { title: `Horários da linha ${lineData.short_name} - ${lineData.long_name}`, description: 'Estimativas de chegada em tempo real para os autocarros da Carris Metropolitana.' };
     }
   }
 
