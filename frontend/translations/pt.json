@@ -405,6 +405,7 @@
         "placeholder": "Procurar linha por número, nome, localização...",
         "no_results": "Nenhum Resultado Encontrado"
     },
+    "LinesExplorerContentPatternPathStop": {},
     "LinePatternMap": {
         "today": "Today",
         "tomorrow": "Tomorrow",
@@ -424,8 +425,6 @@
             "label": "Min."
         }
     },
-    "LinePatternPathStop": {},
-    "LinePatternPath": {},
     "LinePatternPathSpine": {},
     "StopRealTime": {
         "will_pass": "{value}",

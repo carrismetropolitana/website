@@ -5,7 +5,8 @@
 import { useTranslations } from 'next-intl';
 import styles from './LinesExplorerContent.module.css';
 import { useLinesExplorerContext } from '@/contexts/LinesExplorerContext';
-import LinesExplorerContentHeader from '../LinesExplorerContentHeader/LinesExplorerContentHeader';
+import LinesExplorerContentHeader from '@/components/LinesExplorerContentHeader/LinesExplorerContentHeader';
+import LinesExplorerContentPatternPath from '@/components/LinesExplorerContentPatternPath/LinesExplorerContentPatternPath';
 
 /* * */
 
@@ -26,7 +27,7 @@ export default function LinesExplorerContent() {
     linesExplorerContext?.entities?.line?.id && (
       <div className={styles.container}>
         <LinesExplorerContentHeader />
-        {/* <LinePatternPath /> */}
+        {linesExplorerContext?.entities?.pattern?.id && <LinesExplorerContentPatternPath />}
         {/* <LinePatternMap /> */}
       </div>
     )

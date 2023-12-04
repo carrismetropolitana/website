@@ -47,17 +47,7 @@ export default function LinesExplorerContentSelectPattern() {
         const isValidOnSelectedDate = patternData.valid_on.includes(linesExplorerContext.entities.date_string);
         // Format response
         formattedPatternOptions.push({
-          id: patternData.id,
-          line_id: patternData.line_id,
-          route_id: patternData.route_id,
-          short_name: patternData.short_name,
-          direction: patternData.direction,
-          headsign: patternData.headsign,
-          color: patternData.color,
-          text_color: patternData.text_color,
-          municipalities: patternData.municipalities,
-          localities: patternData.localities,
-          label: patternData.headsign || 'no headsign',
+          ...patternData,
           disabled: !isValidOnSelectedDate,
         });
       }

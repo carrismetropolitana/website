@@ -1,6 +1,10 @@
-import AudioBadge from '../AudioBadge/AudioBadge';
-import Text from '../Text/Text';
+/* * */
+
 import styles from './StopName.module.css';
+import Text from '@/components/Text/Text';
+import AudioBadge from '@/components/AudioBadge/AudioBadge';
+
+/* * */
 
 export default function StopName({ id, name, tts_name, locality, municipality, selected = false, alignment = 'flex-start' }) {
   //
