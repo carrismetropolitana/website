@@ -1,5 +1,7 @@
+/* * */
+
 import fs from 'fs';
-import { ImageResponse } from 'next/server';
+import { ImageResponse } from 'next/og';
 import OpenGraphLinesDefault from 'opengraph/OpenGraphLinesDefault';
 import OpenGraphLinesDynamic from 'opengraph/OpenGraphLinesDynamic';
 
