@@ -1,0 +1,19 @@
+/* * */
+/* CONTAINER */
+
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: var(--size-xs);
+  padding: var(--size-lg);
+  align-items: center;
+  width: 100%;
+}
+
+/* * */
+/* DESTINATION LABEL */
+
+.destinationLabel {
+  color: var(--gray6);
+  font-size: 14px;
+}

@@ -1,9 +1,13 @@
 'use client';
 
+/* * */
+
 import useSWR from 'swr';
 import { createContext, useCallback, useContext, useMemo, useState } from 'react';
 
-// A.
+/* * */
+
+// 1.
 // SETUP INITIAL STATE
 
 const initialMapState = {
@@ -26,19 +30,25 @@ const initialEntitiesState = {
   trip_id: null,
 };
 
-// B.
+/* * */
+
+// 2.
 // CREATE CONTEXTS
 
 const LinesExplorerContext = createContext(null);
 
-// C.
+/* * */
+
+// 3.
 // SETUP CUSTOM HOOKS
 
 export function useLinesExplorerContext() {
   return useContext(LinesExplorerContext);
 }
 
-// D.
+/* * */
+
+// 4.
 // SETUP PROVIDER
 
 export function LinesExplorerContextProvider({ children }) {
@@ -89,7 +99,7 @@ export function LinesExplorerContextProvider({ children }) {
   // ---------
 
   const selectLine = useCallback(
-    (lineId) => {
+    async (lineId) => {
       const foundLine = allLinesData.find((item) => item.id === lineId);
       if (foundLine) {
         setEntitiesState((prev) => ({ ...prev, line: foundLine, pattern: null, shape: null }));
@@ -102,6 +112,16 @@ export function LinesExplorerContextProvider({ children }) {
   const clearSelectedLine = useCallback(() => {
     setEntitiesState((prev) => ({ ...initialEntitiesState, municipality: prev.municipality }));
     updateWindowUrl();
+  }, []);
+
+  // ---------
+
+  const selectPattern = useCallback(async (patternData) => {
+    setEntitiesState((prev) => ({ ...prev, pattern: patternData }));
+  }, []);
+
+  const clearSelectedPattern = useCallback(() => {
+    setEntitiesState((prev) => ({ ...prev, pattern: null }));
   }, []);
 
   // ---------
@@ -140,8 +160,11 @@ export function LinesExplorerContextProvider({ children }) {
       selectLine,
       clearSelectedLine,
       //
+      selectPattern,
+      clearSelectedPattern,
+      //
     }),
-    [mapState, updateMapState, entitiesState, updateEntitiesState, selectMunicipality, clearSelectedMunicipality, selectLine, clearSelectedLine]
+    [mapState, updateMapState, entitiesState, updateEntitiesState, selectMunicipality, clearSelectedMunicipality, selectLine, clearSelectedLine, selectPattern, clearSelectedPattern]
   );
 
   //

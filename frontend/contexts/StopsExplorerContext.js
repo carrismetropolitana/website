@@ -1,9 +1,13 @@
 'use client';
 
+/* * */
+
 import useSWR from 'swr';
 import { createContext, useCallback, useContext, useMemo, useState } from 'react';
 
-// A.
+/* * */
+
+// 1.
 // SETUP INITIAL STATE
 
 const initialMapState = {
@@ -26,19 +30,25 @@ const initialEntitiesState = {
   vehicle: null,
 };
 
-// B.
+/* * */
+
+// 2.
 // CREATE CONTEXTS
 
 const StopsExplorerContext = createContext(null);
 
-// C.
+/* * */
+
+// 3.
 // SETUP CUSTOM HOOKS
 
 export function useStopsExplorerContext() {
   return useContext(StopsExplorerContext);
 }
 
-// D.
+/* * */
+
+// 4.
 // SETUP PROVIDER
 
 export function StopsExplorerContextProvider({ children }) {

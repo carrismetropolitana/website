@@ -1,17 +1,11 @@
 'use client';
 
-import useSWR from 'swr';
-import { Divider } from '@mantine/core';
-import styles from './LinesExplorerContent.module.css';
-import { useTranslations } from 'next-intl';
-import LinesExplorerToolbar from '@/components/LinesExplorerToolbar/LinesExplorerToolbar';
+/* * */
 
-import LinePatternSelector from '@/components/LinePatternSelector/LinePatternSelector';
-import LinePatternDateSelector from '@/components/LinesExplorerToolbarSelectDate/LinesExplorerToolbarSelectDate';
-import LinePatternMap from '@/components/LinePatternMap/LinePatternMap';
-import LinePatternPath from '@/components/LinePatternPath/LinePatternPath';
-import LinesExplorerToolbarLineSearch from '../LinesExplorerToolbarSelectLine/LinesExplorerToolbarSelectLine';
+import { useTranslations } from 'next-intl';
+import styles from './LinesExplorerContent.module.css';
 import { useLinesExplorerContext } from '@/contexts/LinesExplorerContext';
+import LinesExplorerContentHeader from '../LinesExplorerContentHeader/LinesExplorerContentHeader';
 
 /* * */
 
@@ -21,22 +15,22 @@ export default function LinesExplorerContent() {
   //
   // A. Setup variables
 
+  const t = useTranslations('LinesExplorerContent');
+
   const linesExplorerContext = useLinesExplorerContext();
 
   //
-  // B. Fetch data
-
-  const { isLoading: allLinesLoading, error: allLinesError } = useSWR('https://api.carrismetropolitana.pt/lines');
-  const { isLoading: allMunicipalitiesLoading, error: allMunicipalitiesError } = useSWR('https://api.carrismetropolitana.pt/municipalities/');
-
-  //
-  // c. Render components
+  // B. Render components
 
   return (
-    <div className={styles.container}>
-      {/* <LinePatternSelector /> */}
-      {/* <LinePatternPath /> */}
-      {/* <LinePatternMap /> */}
-    </div>
+    linesExplorerContext?.entities?.line?.id && (
+      <div className={styles.container}>
+        <LinesExplorerContentHeader />
+        {/* <LinePatternPath /> */}
+        {/* <LinePatternMap /> */}
+      </div>
+    )
   );
+
+  //
 }
