@@ -4,6 +4,7 @@
 
 import useSWR from 'swr';
 import { createContext, useCallback, useContext, useMemo, useState } from 'react';
+import parseDateToString from '@/services/parseDateToString';
 
 /* * */
 
@@ -99,7 +100,7 @@ export function LinesExplorerContextProvider({ children }) {
   // ---------
 
   const selectLine = useCallback(
-    async (lineId) => {
+    (lineId) => {
       const foundLine = allLinesData.find((item) => item.id === lineId);
       if (foundLine) {
         setEntitiesState((prev) => ({ ...prev, line: foundLine, pattern: null, shape: null }));
@@ -116,7 +117,18 @@ export function LinesExplorerContextProvider({ children }) {
 
   // ---------
 
-  const selectPattern = useCallback(async (patternData) => {
+  const selectDate = useCallback((date) => {
+    if (!date) return;
+    setEntitiesState((prev) => ({ ...prev, date: date, date_string: parseDateToString(date) }));
+  }, []);
+
+  const clearSelectedDate = useCallback(() => {
+    setEntitiesState((prev) => ({ ...prev, date: null, date_string: null }));
+  }, []);
+
+  // ---------
+
+  const selectPattern = useCallback((patternData) => {
     setEntitiesState((prev) => ({ ...prev, pattern: patternData }));
   }, []);
 
@@ -160,11 +172,14 @@ export function LinesExplorerContextProvider({ children }) {
       selectLine,
       clearSelectedLine,
       //
+      selectDate,
+      clearSelectedDate,
+      //
       selectPattern,
       clearSelectedPattern,
       //
     }),
-    [mapState, updateMapState, entitiesState, updateEntitiesState, selectMunicipality, clearSelectedMunicipality, selectLine, clearSelectedLine, selectPattern, clearSelectedPattern]
+    [mapState, updateMapState, entitiesState, updateEntitiesState, selectMunicipality, clearSelectedMunicipality, selectLine, clearSelectedLine, selectDate, clearSelectedDate, selectPattern, clearSelectedPattern]
   );
 
   //

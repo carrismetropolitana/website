@@ -2,9 +2,8 @@
 
 /* * */
 
-import useSWR from 'swr';
 import { Combobox, TextInput, useCombobox, ActionIcon, Group } from '@mantine/core';
-import { useEffect, useMemo, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useTranslations } from 'next-intl';
 import styles from './LinesExplorerContentSelectPattern.module.css';
 import useSearch from '@/hooks/useSearch';
@@ -25,18 +24,63 @@ export default function LinesExplorerContentSelectPattern() {
   const linesExplorerContext = useLinesExplorerContext();
   const comboboxStore = useCombobox();
   const [searchQuery, setSearchQuery] = useState('');
-  const [debouncedSearchQuery] = useDebouncedValue(searchQuery, 300);
+  const [debouncedSearchQuery] = useDebouncedValue(searchQuery, 10);
+  const [allPatternsData, setAllPatternsData] = useState([]);
 
   //
-  // D. Search
+  // B. Fetch data
 
-  const allPatternsDataFilteredBySearchQuery = useSearch(debouncedSearchQuery, linesExplorerContext.entities?.available_patterns, {
-    keys: ['id', 'headsign'],
+  useEffect(() => {
+    (async function () {
+      // Exit if no line is selected
+      if (!linesExplorerContext.entities?.line?.id) return;
+      // Exit if no date is selected
+      if (!linesExplorerContext.entities?.date_string) return;
+      // Initiate a temporaty variable to hold formatted patterns
+      let formattedPatternOptions = [];
+      // Loop through each line pattern to retrieve its info
+      for (const patternId of linesExplorerContext.entities.line.patterns) {
+        // Fetch pattern info
+        const patternDataResponse = await fetch(`https://api.carrismetropolitana.pt/patterns/${patternId}`);
+        const patternData = await patternDataResponse.json();
+        // Check if this pattern is valid on the selected date
+        const isValidOnSelectedDate = patternData.valid_on.includes(linesExplorerContext.entities.date_string);
+        // Format response
+        formattedPatternOptions.push({
+          id: patternData.id,
+          line_id: patternData.line_id,
+          route_id: patternData.route_id,
+          short_name: patternData.short_name,
+          direction: patternData.direction,
+          headsign: patternData.headsign,
+          color: patternData.color,
+          text_color: patternData.text_color,
+          municipalities: patternData.municipalities,
+          localities: patternData.localities,
+          label: patternData.headsign || 'no headsign',
+          disabled: !isValidOnSelectedDate,
+        });
+      }
+      // Update state with formatted patterns
+      setAllPatternsData(formattedPatternOptions);
+      // Pre-select the first pattern if none is selected
+      if (!linesExplorerContext.entities.pattern) {
+        linesExplorerContext.selectPattern(formattedPatternOptions[0]);
+      }
+      //
+    })();
+  }, [linesExplorerContext]);
+
+  //
+  // C. Search
+
+  const allPatternsDataFilteredBySearchQuery = useSearch(debouncedSearchQuery, allPatternsData, {
+    keys: ['id', 'headsign', 'municipalities', 'localities'],
     regexReplace: /[^a-zA-Z0-9\s]/g,
   });
 
   //
-  // E. Handle actions
+  // D. Handle actions
 
   const handleClickSearchField = ({ currentTarget }) => {
     if (currentTarget.select) currentTarget.select();
@@ -61,17 +105,20 @@ export default function LinesExplorerContentSelectPattern() {
     comboboxStore.openDropdown();
   };
 
-  const handleSelectLine = (chosenSelectItemValue) => {
-    linesExplorerContext.selectPattern(chosenSelectItemValue);
-    comboboxStore.closeDropdown();
+  const handleSelectPattern = (chosenSelectItemValue) => {
+    const foundPattern = allPatternsData.find((item) => item.id === chosenSelectItemValue);
+    if (foundPattern) {
+      linesExplorerContext.selectPattern(foundPattern);
+      comboboxStore.closeDropdown();
+    }
   };
 
   //
-  // F. Render components
+  // E. Render components
 
   return (
     <div className={styles.container}>
-      <Combobox onOptionSubmit={handleSelectLine} store={comboboxStore}>
+      <Combobox onOptionSubmit={handleSelectPattern} store={comboboxStore}>
         <Combobox.Target>
           {linesExplorerContext.entities.line?.id && linesExplorerContext.entities.pattern?.id && !comboboxStore.dropdownOpened ? (
             <Group className={styles.comboboxTarget} onClick={handleClickSearchField}>
@@ -111,7 +158,7 @@ export default function LinesExplorerContentSelectPattern() {
               <Combobox.Empty>{t('no_results')}</Combobox.Empty>
             ) : (
               allPatternsDataFilteredBySearchQuery.map((item) => (
-                <Combobox.Option key={item.id} value={item.id} className={item.id === linesExplorerContext.entities.line?.id && styles.selected}>
+                <Combobox.Option key={item.id} value={item.id} className={item.id === linesExplorerContext.entities.line?.id && styles.selected} disabled={item.disabled}>
                   <div className={styles.comboboxOption}>{item.headsign}</div>
                 </Combobox.Option>
               ))
