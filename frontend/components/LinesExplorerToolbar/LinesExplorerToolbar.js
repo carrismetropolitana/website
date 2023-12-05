@@ -22,7 +22,7 @@ export default function LinesExplorerToolbar() {
       </div>
       <div className={styles.main}>
         <LinesExplorerToolbarSelectLine />
-        <LinesExplorerToolbarSelectDate />
+        {/* <LinesExplorerToolbarSelectDate /> */}
       </div>
     </div>
   );
