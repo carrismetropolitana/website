@@ -48,44 +48,53 @@ export default function LinesExplorerContentPatternPathStop({ pathStopData, path
 
   return (
     <div className={`${styles.container} ${isThisStopSelected && styles.selected}`} onClick={handleStopClick}>
-      <div className={styles.travelTime}></div>
+      <div className={styles.travelTime} />
 
-      <LinesExplorerContentPatternPathStopSpine style={pathIndex === 0 ? 'start' : pathIndex === pathIndexMax ? 'end' : 'regular'} color={linesExplorerContext.entities.pattern.color} text_color={linesExplorerContext.entities.pattern.text_color} isSelected={isThisStopSelected} />
+      <LinesExplorerContentPatternPathStopSpine style={pathIndex === 0 ? 'start' : pathIndex === pathIndexMax ? 'end' : 'regular'} color={linesExplorerContext.entities.pattern.color} textColor={linesExplorerContext.entities.pattern.text_color} isSelected={isThisStopSelected} />
 
-      <div className={styles.info}>
-        <div className={styles.header}>
-          {/* <div className={styles.ids}>
-            <CopyBadge label={`#${pathStopData.stop.id}`} value={pathStopData.stop.id} />
-            <CopyBadge label={`${pathStopData.stop.lat}, ${pathStopData.stop.lon}`} value={`${pathStopData.stop.lat}	${pathStopData.stop.lon}`} />
-          </div> */}
-          <LinesExplorerContentPatternPathStopName id={pathStopData.stop.id} name={pathStopData.stop.name} tts_name={pathStopData.stop.tts_name} locality={pathStopData.stop.localiy} municipality={pathStopData.stop.municipality} />
+      <div className={styles.innerWrapper}>
+        <div className={styles.stopInfo}>
+          <LinesExplorerContentPatternPathStopName stopData={pathStopData.stop} isSelected={isThisStopSelected} />
           {!isThisStopSelected && <LinesExplorerContentPatternPathStopRealtime patternId={linesExplorerContext.entities.pattern.id} stopId={pathStopData.stop.id} />}
         </div>
 
         {isThisStopSelected && (
-          <div className={styles.body}>
-            <Text type="mini-label">Próximas circulações</Text>
+          <div className={styles.content}>
+            <p className={styles.label}>Próximas circulações</p>
             <LinesExplorerContentPatternPathStopRealtime patternId={linesExplorerContext.entities.pattern.id} stopId={pathStopData.stop.id} />
           </div>
         )}
 
-        <Drawer offset={8} radius="md" opened={opened} onClose={close} title="Authentication" position="bottom">
-          <div className={styles.body}>
+        {isThisStopSelected && (
+          <div className={`${styles.content} ${styles.onlyDesktop}`}>
             <LinesExplorerToolbarSelectDate />
-            <Text type="mini-label">Horários previstos nesta paragem</Text>
+            <p className={styles.label}>Horários previstos nesta paragem</p>
+            <LinesExplorerContentPatternPathStopTimetable stopSequence={pathStopData.stop_sequence} stopId={pathStopData.stop.id} />
+            <LinesExplorerContentPatternPathStopPdf lineId={linesExplorerContext.entities.line.id} stopId={pathStopData.stop.id} direction={linesExplorerContext.entities.pattern.direction} />
+          </div>
+        )}
+
+        <Drawer radius="md" opened={opened} onClose={close} title="Authentication" position="bottom">
+          <div className={styles.content}>
+            <LinesExplorerToolbarSelectDate />
+            <p className={styles.label}>Horários previstos nesta paragem</p>
             <LinesExplorerContentPatternPathStopTimetable stopSequence={pathStopData.stop_sequence} stopId={pathStopData.stop.id} />
             <LinesExplorerContentPatternPathStopPdf lineId={linesExplorerContext.entities.line.id} stopId={pathStopData.stop.id} direction={linesExplorerContext.entities.pattern.direction} />
           </div>
         </Drawer>
 
         {isThisStopSelected && (
-          <div className={styles.openTimetable} onClick={open}>
+          <div className={`${styles.openTimetable} ${styles.onlyMobile}`} onClick={open}>
             Abrir Horários
           </div>
         )}
 
         {/* {isThisStopSelected && (
           <div className={styles.body}>
+            <div className={styles.ids}>
+              <CopyBadge label={`#${pathStopData.stop.id}`} value={pathStopData.stop.id} />
+              <CopyBadge label={`${pathStopData.stop.lat}, ${pathStopData.stop.lon}`} value={`${pathStopData.stop.lat}	${pathStopData.stop.lon}`} />
+            </div>
             <Text type="mini-label">Horários previstos nesta paragem</Text>
             <LinesExplorerContentPatternPathStopTimetable stopSequence={pathStopData.stop_sequence} stopId={pathStopData.stop.id} />
           </div>

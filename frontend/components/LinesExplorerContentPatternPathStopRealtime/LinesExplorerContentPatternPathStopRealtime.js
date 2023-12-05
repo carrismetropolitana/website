@@ -88,13 +88,13 @@ export default function LinesExplorerContentPatternPathStopRealtime({ patternId,
   //
   // C. Render components
 
-  return estimatedNextArrivalTime ? (
-    <div className={styles.container}>
-      <LiveIcon />
-      <p className={styles.estimate}>{estimatedNextArrivalTime > new Date() ? t('will_pass', { value: format.relativeTime(estimatedNextArrivalTime, now) }) : t('just_passed', { value: format.relativeTime(estimatedNextArrivalTime, now) })}</p>
-    </div>
-  ) : (
-    <>none</>
+  return (
+    estimatedNextArrivalTime && (
+      <div className={styles.container}>
+        <LiveIcon />
+        <p className={styles.estimate}>{estimatedNextArrivalTime > new Date() ? t('will_pass', { value: format.relativeTime(estimatedNextArrivalTime, now) }) : t('just_passed', { value: format.relativeTime(estimatedNextArrivalTime, now) })}</p>
+      </div>
+    )
   );
 
   //
