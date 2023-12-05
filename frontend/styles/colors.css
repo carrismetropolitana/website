@@ -33,6 +33,20 @@
   /* RED */
   --red-7: #f03e3e;
 
+  /* STATUS MESSAGES */
+
+  --status-background-ok-text: #ffffff;
+  --status-background-ok-background: #32be64;
+
+  --status-background-warning-text: #000000;
+  --status-background-warning-background: #fff0be;
+
+  --status-background-danger-text: #f5c8b4;
+  --status-background-danger-background: #f5c8b4;
+
+  --status-background-info-text: #bedcfa;
+  --status-background-info-background: #bedcfa;
+
   /* * */
   /* * */
   /* * */

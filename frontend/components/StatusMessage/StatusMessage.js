@@ -17,7 +17,7 @@ export default function StatusMessage() {
   // A. Setup variables
 
   const t = useTranslations('StatusMessage');
-  const [isVisible, setIsVisible] = useState(true);
+  const [isVisible, setIsVisible] = useState(false);
 
   //
   // B. Render components
@@ -34,7 +34,7 @@ export default function StatusMessage() {
       <div className={styles.innerWrapper}>
         <div className={styles.headerWrapper} onClick={handleSetIsVisible}>
           <h3 className={styles.title}>{t('title')}</h3>
-          <ActionIcon variant="subtle" color="rgba(0, 0, 0, 1)" size="lg">
+          <ActionIcon variant="subtle" size="lg" className={styles.colapseIcon}>
             {isVisible ? <IconChevronDown size={20} /> : <IconChevronLeft size={20} />}
           </ActionIcon>
         </div>

@@ -541,9 +541,9 @@
         }
     },
     "StatusMessage": {
-        "title": "Inconsistências com Tempo Real",
-        "explanation": "Devido a questões técnicas, durante os dias 2 e 3 de dezembro, poderão haver inconsistências na consulta do tempo real das linhas da Carris Metropolitana.",
-        "solution": "Estamos a tomar medidas para resolver a situação o mais rapidamente possível."
+        "title": "Tempo Real Estabilizado",
+        "explanation": "Foram resolvidas as questões técnicas que afetaram o tempo real das linhas da Carris Metropolitana.",
+        "solution": "Agradecemos a sua compreensão."
     },
     "AppFooter": {
         "contacts": {
