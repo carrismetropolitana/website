@@ -1,52 +1,45 @@
-import useSWR from 'swr';
-import { useTranslations } from 'next-intl';
-import { useLineFormContext } from '@/forms/LineForm';
-import styles from './LinePatternPathTimetable.module.css';
-import { useEffect, useState } from 'react';
+'use client';
 
 /* * */
 
-export default function LinePatternPathTimetable({ index, stopId }) {
+import { useTranslations } from 'next-intl';
+import { useEffect, useState } from 'react';
+import { useLinesExplorerContext } from '@/contexts/LinesExplorerContext';
+import styles from './LinesExplorerContentPatternPathStopTimetable.module.css';
+
+/* * */
+
+export default function LinesExplorerContentPatternPathStopTimetable({ stopSequence, stopId }) {
   //
 
   //
   // A. Setup variables
 
-  const lineForm = useLineFormContext();
+  const t = useTranslations('LinesExplorerContentPatternPathStopTimetable');
+  const linesExplorerContext = useLinesExplorerContext();
   const [timetable, setTimetable] = useState([]);
-  const t = useTranslations('LinePatternPathTimetable');
 
   //
-  // B. Fetch data
-
-  const { data: patternData } = useSWR(lineForm.values.pattern_id && `https://api.carrismetropolitana.pt/patterns/${lineForm.values.pattern_id}`);
-
-  //
-  // C. Transform data
+  // B. Transform data
 
   useEffect(() => {
-    //
-    // Return if patternData is undefined
-    if (!patternData) return;
-
+    // Return if linesExplorerContext.entities.pattern is undefined
+    if (!linesExplorerContext.entities.pattern) return;
     // Filter trips that happen on the selected date
-    const tripsForSelectedDate = patternData.trips.filter((trip) => {
-      return trip.dates.includes(lineForm.values.date_string);
+    const tripsForSelectedDate = linesExplorerContext.entities.pattern.trips.filter((trip) => {
+      return trip.dates.includes(linesExplorerContext.entities.date_string);
     });
-
     // For each available trip, find out the schedules for the selected stop
     let schedulesForSelectedDateAndStop = tripsForSelectedDate.map((trip) => {
       // Ensure that the current stop_time matches
       // both the current stop_id as well as the current stop_sequence
-      return trip.schedule.find((stopTime, stopTimeIndex) => {
-        return stopTime && stopTime.stop_id === stopId && stopTimeIndex === index;
+      return trip.schedule.find((stopTime) => {
+        return stopTime && stopTime.stop_id === stopId && stopTime.stop_sequence === stopSequence;
       });
     });
-
     // Define a variable to hold timetable values in the following format:
     // [{ hour: '07', minutes: ['23', '45'] }]
     let timetableTemp = [];
-
     // For each schedule for the selected stop, build the timetable
     schedulesForSelectedDateAndStop.map((item) => {
       // Parse the arrival_hour
@@ -57,15 +50,13 @@ export default function LinePatternPathTimetable({ index, stopId }) {
       if (existingTimetableEntry) existingTimetableEntry.minutes.push(item.arrival_time.substr(3, 2)); // 12:[34]
       else timetableTemp.push({ hour: arrival_hour, minutes: [item.arrival_time.substr(3, 2)] });
     });
-
     // Update the state variable
     setTimetable(timetableTemp);
-
     //
-  }, [patternData, index, lineForm.values.date_string, stopId]);
+  }, [linesExplorerContext.entities.pattern, stopSequence, stopId, linesExplorerContext.entities.date_string]);
 
   //
-  // D. Render components
+  // C. Render components
 
   return (
     <div className={styles.container}>

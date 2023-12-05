@@ -1,21 +1,11 @@
-import useSWR from 'swr';
-import { useTranslations } from 'next-intl';
-import { useLineFormContext } from '@/forms/LineForm';
-import styles from './LinePatternPathSpine.module.css';
+/* * */
 
-//
-//
-//
-//
+import styles from './LinesExplorerContentPatternPathStopSpine.module.css';
 
-export default function LinePatternPathSpine({ style, color, text_color, isSelected }) {
+/* * */
+
+export default function LinesExplorerContentPatternPathStopSpine({ style, color, text_color, isSelected }) {
   //
-
-  //
-  // A. Setup variables
-
-  const lineForm = useLineFormContext();
-  const t = useTranslations('LinePatternPathSpine');
 
   //
   // D. Render components

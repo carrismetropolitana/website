@@ -1,12 +1,14 @@
 'use client';
 
+/* * */
+
+import useSWR from 'swr';
 import OSMMap from '@/components/OSMMap/OSMMap';
-import { useCallback, useEffect, useMemo, useState } from 'react';
+import { useCallback, useEffect, useMemo } from 'react';
 import * as turf from '@turf/turf';
 import { useMap, Source, Layer, Popup, GeolocateControl } from 'react-map-gl/maplibre';
 import { useDebugContext } from '@/contexts/DebugContext';
 import { useStopsExplorerContext } from '@/contexts/StopsExplorerContext';
-import useSWR from 'swr';
 import generateUUID from '@/services/generateUUID';
 
 /* * */
@@ -131,7 +133,7 @@ export default function StopsExplorerMap() {
   }, [stopsExplorerContext.map.selected_coordinates]);
 
   //
-  // C. Handle actions
+  // D. Handle actions
 
   useEffect(() => {
     if (!stopsExplorerMap) return;
@@ -175,7 +177,7 @@ export default function StopsExplorerMap() {
   }, [selectedStopMapData, selectedVehicleMapData, stopsExplorerMap]);
 
   //
-  // C. Helper functions
+  // E. Helper functions
 
   const moveMap = useCallback(
     (coordinates) => {
@@ -198,7 +200,7 @@ export default function StopsExplorerMap() {
   );
 
   //
-  // C. Handle actions
+  // F. Handle actions
 
   useEffect(() => {
     // Check if map is ready

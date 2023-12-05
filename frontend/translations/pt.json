@@ -406,7 +406,23 @@
         "no_results": "Nenhum Resultado Encontrado"
     },
     "LinesExplorerContentPatternPathStop": {},
-    "LinePatternMap": {
+    "LinesExplorerContentPatternPathStopRealtime": {
+        "will_pass": "{value}",
+        "just_passed": "Just passed"
+    },
+    "LinesExplorerContentPatternPathStopTimetable": {
+        "hours": {
+            "label": "Hour"
+        },
+        "minutes": {
+            "label": "Min."
+        }
+    },
+    "LinesExplorerContentPatternPathStopPdf": {
+        "pdf_file_exists": "Abrir PDF",
+        "pdf_file_does_not_exist": "PDF Indisponível"
+    },
+    "LinesExplorerContentPatternMap": {
         "today": "Today",
         "tomorrow": "Tomorrow",
         "form": {
@@ -417,19 +433,7 @@
             }
         }
     },
-    "LinePatternPathTimetable": {
-        "hours": {
-            "label": "Hour"
-        },
-        "minutes": {
-            "label": "Min."
-        }
-    },
     "LinePatternPathSpine": {},
-    "StopRealTime": {
-        "will_pass": "{value}",
-        "just_passed": "Just passed"
-    },
     "LiveIcon": {
         "label": "Real-time data"
     },

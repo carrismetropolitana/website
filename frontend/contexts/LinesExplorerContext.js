@@ -24,7 +24,6 @@ const initialEntitiesState = {
   //
   line: null,
   pattern: null,
-  shape: null,
   //
   stop_id: null,
   vehicle_id: null,
@@ -138,6 +137,16 @@ export function LinesExplorerContextProvider({ children }) {
 
   // ---------
 
+  const selectStop = useCallback((stop_id) => {
+    setEntitiesState((prev) => ({ ...prev, stop_id: stop_id }));
+  }, []);
+
+  const clearSelectedStop = useCallback(() => {
+    setEntitiesState((prev) => ({ ...prev, stop_id: null }));
+  }, []);
+
+  // ---------
+
   const updateMapState = useCallback(
     (newMapState, reset = false) => {
       if (reset) setMapState({ ...initialMapState, ...newMapState });
@@ -178,8 +187,11 @@ export function LinesExplorerContextProvider({ children }) {
       selectPattern,
       clearSelectedPattern,
       //
+      selectStop,
+      clearSelectedStop,
+      //
     }),
-    [mapState, updateMapState, entitiesState, updateEntitiesState, selectMunicipality, clearSelectedMunicipality, selectLine, clearSelectedLine, selectDate, clearSelectedDate, selectPattern, clearSelectedPattern]
+    [mapState, updateMapState, entitiesState, updateEntitiesState, selectMunicipality, clearSelectedMunicipality, selectLine, clearSelectedLine, selectDate, clearSelectedDate, selectPattern, clearSelectedPattern, selectStop, clearSelectedStop]
   );
 
   //

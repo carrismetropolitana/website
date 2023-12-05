@@ -1,23 +1,29 @@
+'use client';
+
+/* * */
+
 import useSWR from 'swr';
 import { useMemo } from 'react';
-import styles from './StopRealTime.module.css';
 import { useTranslations, useFormatter, useNow } from 'next-intl';
-import LiveIcon from '../LiveIcon/LiveIcon';
+import styles from './LinesExplorerContentPatternPathStopRealtime.module.css';
+import LiveIcon from '@/components/LiveIcon/LiveIcon';
 
-export default function StopRealTime({ pattern_id, stop_id }) {
+/* * */
+
+export default function LinesExplorerContentPatternPathStopRealtime({ patternId, stopId }) {
   //
 
   //
   // A. Setup variables
 
-  const t = useTranslations('StopRealTime');
+  const t = useTranslations('LinesExplorerContentPatternPathStopRealtime');
   const format = useFormatter();
   const now = useNow({ updateInterval: 1000 });
 
   //
   // B. Fetch data
 
-  const { data: realtimeData } = useSWR(stop_id && `https://api.carrismetropolitana.pt/stops/${stop_id}/realtime`);
+  const { data: realtimeData } = useSWR(stopId && `https://api.carrismetropolitana.pt/stops/${stopId}/realtime`);
 
   //
   // C. Handle actions
@@ -27,7 +33,7 @@ export default function StopRealTime({ pattern_id, stop_id }) {
     if (!realtimeData) return '';
     // Filter estimates for the current pattern
     const filteredRealtimeData = realtimeData.filter((item) => {
-      const isForCurrentPattern = item.pattern_id === pattern_id;
+      const isForCurrentPattern = item.pattern_id === patternId;
       return isForCurrentPattern;
     });
     // Sort by arrival_time
@@ -41,7 +47,7 @@ export default function StopRealTime({ pattern_id, stop_id }) {
     return relative;
 
     //
-  }, [pattern_id, realtimeData]);
+  }, [patternId, realtimeData]);
 
   function parseRelativeTime(eta) {
     // Skip if no eta
@@ -88,7 +94,7 @@ export default function StopRealTime({ pattern_id, stop_id }) {
       <p className={styles.estimate}>{estimatedNextArrivalTime > new Date() ? t('will_pass', { value: format.relativeTime(estimatedNextArrivalTime, now) }) : t('just_passed', { value: format.relativeTime(estimatedNextArrivalTime, now) })}</p>
     </div>
   ) : (
-    <></>
+    <>none</>
   );
 
   //
