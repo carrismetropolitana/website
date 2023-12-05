@@ -8,6 +8,9 @@
   padding: var(--size-lg);
   align-items: center;
   width: 100%;
+  border-bottom: 1px solid var(--gray3);
+  background-color: var(--reference-0);
+  z-index: 200;
 }
 
 /* * */

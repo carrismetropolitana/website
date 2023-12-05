@@ -34,8 +34,6 @@ export default function LinesExplorerContentSelectPattern() {
     (async function () {
       // Exit if no line is selected
       if (!linesExplorerContext.entities?.line?.id) return;
-      // Exit if no date is selected
-      if (!linesExplorerContext.entities?.date_string) return;
       // Initiate a temporaty variable to hold formatted patterns
       let formattedPatternOptions = [];
       // Loop through each line pattern to retrieve its info
@@ -43,13 +41,8 @@ export default function LinesExplorerContentSelectPattern() {
         // Fetch pattern info
         const patternDataResponse = await fetch(`https://api.carrismetropolitana.pt/patterns/${patternId}`);
         const patternData = await patternDataResponse.json();
-        // Check if this pattern is valid on the selected date
-        const isValidOnSelectedDate = patternData.valid_on.includes(linesExplorerContext.entities.date_string);
-        // Format response
-        formattedPatternOptions.push({
-          ...patternData,
-          disabled: !isValidOnSelectedDate,
-        });
+        // Save pattern
+        formattedPatternOptions.push(patternData);
       }
       // Update state with formatted patterns
       setAllPatternsData(formattedPatternOptions);
@@ -148,7 +141,7 @@ export default function LinesExplorerContentSelectPattern() {
               <Combobox.Empty>{t('no_results')}</Combobox.Empty>
             ) : (
               allPatternsDataFilteredBySearchQuery.map((item) => (
-                <Combobox.Option key={item.id} value={item.id} className={item.id === linesExplorerContext.entities.line?.id && styles.selected} disabled={item.disabled}>
+                <Combobox.Option key={item.id} value={item.id} className={item.id === linesExplorerContext.entities.line?.id && styles.selected}>
                   <div className={styles.comboboxOption}>{item.headsign}</div>
                 </Combobox.Option>
               ))
@@ -158,4 +151,6 @@ export default function LinesExplorerContentSelectPattern() {
       </Combobox>
     </div>
   );
+
+  //
 }

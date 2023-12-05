@@ -21,12 +21,12 @@ export default function LinesExplorerContentPatternPath() {
 
   return (
     <div className={styles.container}>
-      <div>{linesExplorerContext.entities.pattern.id}</div>
       {linesExplorerContext.entities.pattern.path?.map((pathStop, pathIndex) => (
         <div key={pathIndex}>
           <LinePatternPathStop pathStopData={pathStop} pathIndex={pathIndex} pathIndexMax={linesExplorerContext.entities.pattern.path.length - 1} />
         </div>
       ))}
+      <div>{linesExplorerContext.entities.pattern.id}</div>
     </div>
   );
 

@@ -1,9 +1,10 @@
 'use client';
 
+/* * */
+
 import styles from './LinesExplorerToolbar.module.css';
 import LinesExplorerToolbarSelectMunicipality from '@/components/LinesExplorerToolbarSelectMunicipality/LinesExplorerToolbarSelectMunicipality';
 import LinesExplorerToolbarSelectLine from '@/components/LinesExplorerToolbarSelectLine/LinesExplorerToolbarSelectLine';
-import LinesExplorerToolbarSelectDate from '../LinesExplorerToolbarSelectDate/LinesExplorerToolbarSelectDate';
 
 /* * */
 
@@ -20,10 +21,9 @@ export default function LinesExplorerToolbar() {
         <LinesExplorerToolbarSelectMunicipality />
         <LinesExplorerToolbarSelectMunicipality />
       </div>
-      <div className={styles.main}>
-        <LinesExplorerToolbarSelectLine />
-        <LinesExplorerToolbarSelectDate />
-      </div>
+      <LinesExplorerToolbarSelectLine />
     </div>
   );
+
+  //
 }
