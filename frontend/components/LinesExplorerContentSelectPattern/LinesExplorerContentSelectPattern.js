@@ -10,7 +10,7 @@ import useSearch from '@/hooks/useSearch';
 import { IconX, IconSearch } from '@tabler/icons-react';
 import { useLinesExplorerContext } from '@/contexts/LinesExplorerContext';
 import { useDebouncedValue } from '@mantine/hooks';
-import LineDisplay from '../LineDisplay/LineDisplay';
+import LineDisplay from '@/components/LineDisplay/LineDisplay';
 
 /* * */
 
@@ -46,13 +46,16 @@ export default function LinesExplorerContentSelectPattern() {
       }
       // Update state with formatted patterns
       setAllPatternsData(formattedPatternOptions);
-      // Pre-select the first pattern if none is selected
-      if (!linesExplorerContext.entities.pattern) {
-        linesExplorerContext.selectPattern(formattedPatternOptions[0]);
-      }
       //
     })();
-  }, [linesExplorerContext]);
+  }, [linesExplorerContext.entities.line?.id, linesExplorerContext.entities.line.patterns]);
+
+  useEffect(() => {
+    // Pre-select the first pattern if none is selected
+    if (!linesExplorerContext.entities.pattern && allPatternsData.length > 0) {
+      linesExplorerContext.selectPattern(allPatternsData[0]);
+    }
+  }, [allPatternsData, linesExplorerContext]);
 
   //
   // C. Search

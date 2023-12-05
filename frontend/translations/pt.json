@@ -395,6 +395,7 @@
         "placeholder": "Selecione uma data"
     },
     "LinesExplorerContent": {
+        "no_selection": "Selecione um destino",
         "destination_label": "com destino a"
     },
     "LinesExplorerContentHeader": {

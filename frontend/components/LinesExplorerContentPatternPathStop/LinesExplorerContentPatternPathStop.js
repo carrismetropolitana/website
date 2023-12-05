@@ -54,13 +54,13 @@ export default function LinesExplorerContentPatternPathStop({ pathStopData, path
       <div className={styles.innerWrapper}>
         <div className={styles.stopInfo}>
           <LinesExplorerContentPatternPathStopName stopData={pathStopData.stop} isSelected={isThisStopSelected} />
-          {!isThisStopSelected && <LinesExplorerContentPatternPathStopRealtime patternId={linesExplorerContext.entities.pattern.id} stopId={pathStopData.stop.id} />}
+          {!isThisStopSelected && <LinesExplorerContentPatternPathStopRealtime patternId={linesExplorerContext.entities.pattern.id} stopId={pathStopData.stop.id} stopSequence={pathStopData.stop_sequence} />}
         </div>
 
         {isThisStopSelected && (
           <div className={styles.content}>
             <p className={styles.label}>Próximas circulações</p>
-            <LinesExplorerContentPatternPathStopRealtime patternId={linesExplorerContext.entities.pattern.id} stopId={pathStopData.stop.id} />
+            <LinesExplorerContentPatternPathStopRealtime patternId={linesExplorerContext.entities.pattern.id} stopId={pathStopData.stop.id} stopSequence={pathStopData.stop_sequence} />
           </div>
         )}
 
@@ -88,16 +88,14 @@ export default function LinesExplorerContentPatternPathStop({ pathStopData, path
           </div>
         )}
 
-        {/* {isThisStopSelected && (
-          <div className={styles.body}>
+        {isThisStopSelected && (
+          <div className={styles.content}>
             <div className={styles.ids}>
               <CopyBadge label={`#${pathStopData.stop.id}`} value={pathStopData.stop.id} />
               <CopyBadge label={`${pathStopData.stop.lat}, ${pathStopData.stop.lon}`} value={`${pathStopData.stop.lat}	${pathStopData.stop.lon}`} />
             </div>
-            <Text type="mini-label">Horários previstos nesta paragem</Text>
-            <LinesExplorerContentPatternPathStopTimetable stopSequence={pathStopData.stop_sequence} stopId={pathStopData.stop.id} />
           </div>
-        )} */}
+        )}
 
         {/* {isThisStopSelected && <LinesExplorerContentPatternPathStopPdf lineId={linesExplorerContext.entities.line.id} stopId={pathStopData.stop.id} direction={linesExplorerContext.entities.pattern.direction} />} */}
       </div>
