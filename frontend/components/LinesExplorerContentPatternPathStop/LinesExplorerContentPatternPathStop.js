@@ -15,6 +15,7 @@ import LinesExplorerContentPatternPathStopName from '@/components/LinesExplorerC
 import { useLinesExplorerContext } from '@/contexts/LinesExplorerContext';
 import { Drawer } from '@mantine/core';
 import { useDisclosure } from '@mantine/hooks';
+import LinesExplorerToolbarSelectDate from '../LinesExplorerToolbarSelectDate/LinesExplorerToolbarSelectDate';
 
 /* * */
 
@@ -70,15 +71,18 @@ export default function LinesExplorerContentPatternPathStop({ pathStopData }) {
 
         <Drawer offset={8} radius="md" opened={opened} onClose={close} title="Authentication" position="bottom">
           <div className={styles.body}>
+            <LinesExplorerToolbarSelectDate />
             <Text type="mini-label">Horários previstos nesta paragem</Text>
             <LinesExplorerContentPatternPathStopTimetable stopSequence={pathStopData.stop_sequence} stopId={pathStopData.stop.id} />
             <LinesExplorerContentPatternPathStopPdf lineId={linesExplorerContext.entities.line.id} stopId={pathStopData.stop.id} direction={linesExplorerContext.entities.pattern.direction} />
           </div>
         </Drawer>
 
-        <div className={styles.openTimetable} onClick={open}>
-          Abrir Horários
-        </div>
+        {isThisStopSelected && (
+          <div className={styles.openTimetable} onClick={open}>
+            Abrir Horários
+          </div>
+        )}
 
         {/* {isThisStopSelected && (
           <div className={styles.body}>
