@@ -5,7 +5,8 @@
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
-  row-gap: 20px;
+  row-gap: 10px;
+  margin-top: 3px;
 }
 
 /* * */
@@ -24,9 +25,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 15px;
-  padding: 6px 6px;
-  /* min-width: 10px; */
+  font-size: 14px;
   line-height: 1;
 }
 
@@ -45,6 +44,7 @@
 /* HOURS */
 
 .hour {
+  padding: 5px;
   font-weight: 800;
   background-color: #000;
   color: #fff;
@@ -66,5 +66,17 @@
 /* MINUTES */
 
 .minute {
+  padding: 3px 5px;
   font-weight: 500;
+}
+
+/* * */
+/* NO DATA */
+
+.noData {
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--gray6);
+  font-style: italic;
+  line-height: 1;
 }

@@ -59,7 +59,7 @@
   align-items: flex-start;
   justify-content: flex-start;
   width: 100%;
-  gap: var(--size-sm);
+  gap: 10px;
 }
 
 /* * */
@@ -68,7 +68,8 @@
 .label {
   font-size: 12px;
   font-weight: 600;
-  color: var(--gray-3);
+  line-height: 1.2;
+  color: var(--gray-5);
 }
 
 @media (max-width: 600px) {

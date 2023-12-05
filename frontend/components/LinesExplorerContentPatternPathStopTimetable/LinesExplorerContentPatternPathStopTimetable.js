@@ -6,6 +6,7 @@ import { useTranslations } from 'next-intl';
 import { useEffect, useState } from 'react';
 import { useLinesExplorerContext } from '@/contexts/LinesExplorerContext';
 import styles from './LinesExplorerContentPatternPathStopTimetable.module.css';
+import NoDataLabel from '../NoDataLabel/NoDataLabel';
 
 /* * */
 
@@ -58,7 +59,7 @@ export default function LinesExplorerContentPatternPathStopTimetable({ stopSeque
   //
   // C. Render components
 
-  return (
+  return timetable.length > 0 ? (
     <div className={styles.container}>
       <div className={styles.column}>
         <div className={styles.hour}>{t('hours.label')}</div>
@@ -74,6 +75,10 @@ export default function LinesExplorerContentPatternPathStopTimetable({ stopSeque
           ))}
         </div>
       ))}
+    </div>
+  ) : (
+    <div className={styles.container}>
+      <p className={styles.noData}>Sem horários nesta data.</p>
     </div>
   );
 

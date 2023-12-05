@@ -2,20 +2,19 @@
 
 /* * */
 
+import { useMemo } from 'react';
 import { useTranslations } from 'next-intl';
+import { Drawer } from '@mantine/core';
+import { useDisclosure } from '@mantine/hooks';
 import styles from './LinesExplorerContentPatternPathStop.module.css';
 import CopyBadge from '@/components/CopyBadge/CopyBadge';
-import LinesExplorerContentPatternPathStopTimetable from '@/components/LinesExplorerContentPatternPathStopTimetable/LinesExplorerContentPatternPathStopTimetable';
-import { useMemo, useState } from 'react';
+import { useLinesExplorerContext } from '@/contexts/LinesExplorerContext';
+import LinesExplorerSelectDate from '@/components/LinesExplorerSelectDate/LinesExplorerSelectDate';
 import LinesExplorerContentPatternPathStopPdf from '@/components/LinesExplorerContentPatternPathStopPdf/LinesExplorerContentPatternPathStopPdf';
-import Text from '@/components/Text/Text';
+import LinesExplorerContentPatternPathStopTimetable from '@/components/LinesExplorerContentPatternPathStopTimetable/LinesExplorerContentPatternPathStopTimetable';
 import LinesExplorerContentPatternPathStopRealtime from '@/components/LinesExplorerContentPatternPathStopRealtime/LinesExplorerContentPatternPathStopRealtime';
 import LinesExplorerContentPatternPathStopSpine from '@/components/LinesExplorerContentPatternPathStopSpine/LinesExplorerContentPatternPathStopSpine';
 import LinesExplorerContentPatternPathStopName from '@/components/LinesExplorerContentPatternPathStopName/LinesExplorerContentPatternPathStopName';
-import { useLinesExplorerContext } from '@/contexts/LinesExplorerContext';
-import { Drawer } from '@mantine/core';
-import { useDisclosure } from '@mantine/hooks';
-import LinesExplorerToolbarSelectDate from '../LinesExplorerToolbarSelectDate/LinesExplorerToolbarSelectDate';
 
 /* * */
 
@@ -67,19 +66,19 @@ export default function LinesExplorerContentPatternPathStop({ pathStopData, path
 
         {isThisStopSelected && (
           <div className={`${styles.content} ${styles.onlyDesktop}`}>
-            <LinesExplorerToolbarSelectDate />
             <p className={styles.label}>Horários previstos nesta paragem</p>
+            <LinesExplorerSelectDate />
             <LinesExplorerContentPatternPathStopTimetable stopSequence={pathStopData.stop_sequence} stopId={pathStopData.stop.id} />
-            <LinesExplorerContentPatternPathStopPdf lineId={linesExplorerContext.entities.line.id} stopId={pathStopData.stop.id} direction={linesExplorerContext.entities.pattern.direction} />
+            {/* <LinesExplorerContentPatternPathStopPdf lineId={linesExplorerContext.entities.line.id} stopId={pathStopData.stop.id} direction={linesExplorerContext.entities.pattern.direction} /> */}
           </div>
         )}
 
         <Drawer radius="md" opened={opened} onClose={close} title="Authentication" position="bottom">
           <div className={styles.content}>
-            <LinesExplorerToolbarSelectDate />
             <p className={styles.label}>Horários previstos nesta paragem</p>
+            <LinesExplorerSelectDate />
             <LinesExplorerContentPatternPathStopTimetable stopSequence={pathStopData.stop_sequence} stopId={pathStopData.stop.id} />
-            <LinesExplorerContentPatternPathStopPdf lineId={linesExplorerContext.entities.line.id} stopId={pathStopData.stop.id} direction={linesExplorerContext.entities.pattern.direction} />
+            {/* <LinesExplorerContentPatternPathStopPdf lineId={linesExplorerContext.entities.line.id} stopId={pathStopData.stop.id} direction={linesExplorerContext.entities.pattern.direction} /> */}
           </div>
         </Drawer>
 

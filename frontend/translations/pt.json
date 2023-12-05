@@ -388,7 +388,7 @@
         "placeholder": "Filtrar por município",
         "no_results": "Nenhum Resultado Encontrado"
     },
-    "LinesExplorerToolbarSelectDate": {
+    "LinesExplorerSelectDate": {
         "today": "Hoje",
         "tomorrow": "Amanhã",
         "label": "Selecione uma data",

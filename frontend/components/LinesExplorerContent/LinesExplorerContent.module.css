@@ -11,7 +11,7 @@
 
 .container {
   display: grid;
-  grid-template-columns: 5fr 3fr;
+  grid-template-columns: 6fr 4fr;
   grid-template-rows: 600px;
   width: 100%;
   border-top: 1px solid var(--gray3);
