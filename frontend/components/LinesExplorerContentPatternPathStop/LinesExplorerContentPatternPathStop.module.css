@@ -11,11 +11,11 @@
   gap: 1px;
   transition: all 200ms ease;
   cursor: pointer;
-  background-color: var(--gray0);
+  background-color: var(--reference-0);
 }
 
 .container:hover {
-  background-color: var(--reference-0);
+  background-color: var(--gray0);
 }
 
 .container.selected {

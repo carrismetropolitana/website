@@ -19,7 +19,7 @@ import LinesExplorerToolbarSelectDate from '../LinesExplorerToolbarSelectDate/Li
 
 /* * */
 
-export default function LinesExplorerContentPatternPathStop({ pathStopData }) {
+export default function LinesExplorerContentPatternPathStop({ pathStopData, pathIndex, pathIndexMax }) {
   //
 
   //
@@ -50,14 +50,14 @@ export default function LinesExplorerContentPatternPathStop({ pathStopData }) {
     <div className={`${styles.container} ${isThisStopSelected && styles.selected}`} onClick={handleStopClick}>
       <div className={styles.travelTime}></div>
 
-      <LinesExplorerContentPatternPathStopSpine style={pathStopData.stop_sequence === 0 ? 'start' : 'regular'} color={linesExplorerContext.entities.pattern.color} text_color={linesExplorerContext.entities.pattern.text_color} isSelected={isThisStopSelected} />
+      <LinesExplorerContentPatternPathStopSpine style={pathIndex === 0 ? 'start' : pathIndex === pathIndexMax ? 'end' : 'regular'} color={linesExplorerContext.entities.pattern.color} text_color={linesExplorerContext.entities.pattern.text_color} isSelected={isThisStopSelected} />
 
       <div className={styles.info}>
         <div className={styles.header}>
-          <div className={styles.ids}>
+          {/* <div className={styles.ids}>
             <CopyBadge label={`#${pathStopData.stop.id}`} value={pathStopData.stop.id} />
             <CopyBadge label={`${pathStopData.stop.lat}, ${pathStopData.stop.lon}`} value={`${pathStopData.stop.lat}	${pathStopData.stop.lon}`} />
-          </div>
+          </div> */}
           <LinesExplorerContentPatternPathStopName id={pathStopData.stop.id} name={pathStopData.stop.name} tts_name={pathStopData.stop.tts_name} locality={pathStopData.stop.localiy} municipality={pathStopData.stop.municipality} />
           {!isThisStopSelected && <LinesExplorerContentPatternPathStopRealtime patternId={linesExplorerContext.entities.pattern.id} stopId={pathStopData.stop.id} />}
         </div>

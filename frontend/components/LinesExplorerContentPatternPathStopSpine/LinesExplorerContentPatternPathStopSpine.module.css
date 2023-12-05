@@ -1,7 +1,13 @@
+/* * */
+/* CONTAINER */
+
 .container {
   background-color: blue;
   padding-top: 20px;
 }
+
+/* * */
+/* SPINE */
 
 .spine {
   padding-top: 25px;
@@ -14,6 +20,15 @@
   border-top-left-radius: 999px;
   border-top-right-radius: 999px;
 }
+
+.spine.end {
+  border-bottom-left-radius: 999px;
+  border-bottom-right-radius: 999px;
+  height: 39px;
+}
+
+/* * */
+/* SPINE ICON */
 
 .spineIcon {
   display: flex;
@@ -31,8 +46,12 @@
 }
 
 .spineIconInner {
-  border: solid #fff;
-  border-width: 2px;
+  border: 2px solid #ffffff;
   border-radius: 999px;
   padding: 0;
+  transition: all 50ms ease;
+}
+
+.isSelected .spineIconInner {
+  border-width: 4px;
 }

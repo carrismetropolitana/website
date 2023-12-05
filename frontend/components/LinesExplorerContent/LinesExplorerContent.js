@@ -19,26 +19,17 @@ export default function LinesExplorerContent() {
   // A. Setup variables
 
   const t = useTranslations('LinesExplorerContent');
-
   const linesExplorerContext = useLinesExplorerContext();
 
   //
   // B. Render components
 
-  //   return (
-  //     linesExplorerContext?.entities?.line?.id && (
-  //       <div className={styles.container}>
-  //         <LinesExplorerContentHeader />
-  //         {linesExplorerContext.entities.pattern?.shape_id && <LinesExplorerContentPatternMap />}
-  //         {linesExplorerContext.entities.pattern?.id && <LinesExplorerContentPatternPath />}
-  //       </div>
-  //     )
-  //   );
-
   return (
     linesExplorerContext?.entities?.line?.id && (
       <div className={styles.container}>
-        <div className={styles.toolbar}>{/* <LinesExplorerContentHeader /> */}</div>
+        <div className={styles.toolbar}>
+          <LinesExplorerContentHeader />
+        </div>
         <div className={styles.map}>{linesExplorerContext.entities.pattern?.shape_id && <LinesExplorerContentPatternMap />}</div>
         <div className={styles.sidebar}>
           {linesExplorerContext.entities.pattern?.id ? (

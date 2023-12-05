@@ -4,18 +4,18 @@ import styles from './LinesExplorerContentPatternPathStopSpine.module.css';
 
 /* * */
 
-export default function LinesExplorerContentPatternPathStopSpine({ style, color, text_color, isSelected }) {
+export default function LinesExplorerContentPatternPathStopSpine({ style = 'regular', color, text_color, isSelected }) {
   //
 
   //
-  // D. Render components
+  // A. Render components
 
   if (style === 'start') {
     return (
-      <div className={`${styles.spine} ${styles.start}`} style={{ backgroundColor: color }}>
+      <div className={`${styles.spine} ${styles.start} ${isSelected && styles.isSelected}`} style={{ backgroundColor: color }}>
         <div className={styles.spineIcon}>
           <div className={styles.spineIconOuter}>
-            <div className={styles.spineIconInner}></div>
+            <div className={styles.spineIconInner} style={{ borderColor: text_color }} />
           </div>
         </div>
       </div>
@@ -24,10 +24,10 @@ export default function LinesExplorerContentPatternPathStopSpine({ style, color,
 
   if (style === 'end') {
     return (
-      <div className={`${styles.spine} ${styles.end}`} style={{ backgroundColor: color }}>
+      <div className={`${styles.spine} ${styles.end} ${isSelected && styles.isSelected}`} style={{ backgroundColor: color }}>
         <div className={styles.spineIcon}>
           <div className={styles.spineIconOuter}>
-            <div className={styles.spineIconInner}></div>
+            <div className={styles.spineIconInner} style={{ borderColor: text_color }} />
           </div>
         </div>
       </div>
@@ -35,10 +35,10 @@ export default function LinesExplorerContentPatternPathStopSpine({ style, color,
   }
 
   return (
-    <div className={styles.spine} style={{ backgroundColor: color }}>
+    <div className={`${styles.spine} ${isSelected && styles.isSelected}`} style={{ backgroundColor: color }}>
       <div className={styles.spineIcon}>
         <div className={styles.spineIconOuter}>
-          <div className={styles.spineIconInner}></div>
+          <div className={styles.spineIconInner} style={{ borderColor: text_color }} />
         </div>
       </div>
     </div>
