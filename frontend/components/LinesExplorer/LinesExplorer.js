@@ -6,6 +6,7 @@ import Pannel from '@/components/Pannel/Pannel';
 import { useTranslations } from 'next-intl';
 import LinesExplorerToolbar from '@/components/LinesExplorerToolbar/LinesExplorerToolbar';
 import LinesExplorerContent from '@/components/LinesExplorerContent/LinesExplorerContent';
+import BetaIcon from '../BetaIcon/BetaIcon';
 
 /* * */
 
@@ -27,9 +28,11 @@ export default function LinesExplorer() {
   // c. Render components
 
   return (
-    <Pannel type="A" title={t('pannel_title')} loading={allLinesLoading || allMunicipalitiesLoading} error={allLinesError || allMunicipalitiesError}>
+    <Pannel type="A" title={t('pannel_title')} loading={allLinesLoading || allMunicipalitiesLoading} error={allLinesError || allMunicipalitiesError} rightSection={<BetaIcon />}>
       <LinesExplorerToolbar />
       <LinesExplorerContent />
     </Pannel>
   );
+
+  //
 }
