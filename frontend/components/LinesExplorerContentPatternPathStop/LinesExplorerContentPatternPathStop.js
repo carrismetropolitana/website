@@ -13,6 +13,8 @@ import LinesExplorerContentPatternPathStopRealtime from '@/components/LinesExplo
 import LinesExplorerContentPatternPathStopSpine from '@/components/LinesExplorerContentPatternPathStopSpine/LinesExplorerContentPatternPathStopSpine';
 import LinesExplorerContentPatternPathStopName from '@/components/LinesExplorerContentPatternPathStopName/LinesExplorerContentPatternPathStopName';
 import { useLinesExplorerContext } from '@/contexts/LinesExplorerContext';
+import { Drawer } from '@mantine/core';
+import { useDisclosure } from '@mantine/hooks';
 
 /* * */
 
@@ -24,6 +26,7 @@ export default function LinesExplorerContentPatternPathStop({ pathStopData }) {
 
   const t = useTranslations('LinesExplorerContentPatternPathStop');
   const linesExplorerContext = useLinesExplorerContext();
+  const [opened, { open, close }] = useDisclosure(false);
 
   //
   // B. Transform data
@@ -65,14 +68,26 @@ export default function LinesExplorerContentPatternPathStop({ pathStopData }) {
           </div>
         )}
 
-        {isThisStopSelected && (
+        <Drawer offset={8} radius="md" opened={opened} onClose={close} title="Authentication" position="bottom">
+          <div className={styles.body}>
+            <Text type="mini-label">Horários previstos nesta paragem</Text>
+            <LinesExplorerContentPatternPathStopTimetable stopSequence={pathStopData.stop_sequence} stopId={pathStopData.stop.id} />
+            <LinesExplorerContentPatternPathStopPdf lineId={linesExplorerContext.entities.line.id} stopId={pathStopData.stop.id} direction={linesExplorerContext.entities.pattern.direction} />
+          </div>
+        </Drawer>
+
+        <div className={styles.openTimetable} onClick={open}>
+          Abrir Horários
+        </div>
+
+        {/* {isThisStopSelected && (
           <div className={styles.body}>
             <Text type="mini-label">Horários previstos nesta paragem</Text>
             <LinesExplorerContentPatternPathStopTimetable stopSequence={pathStopData.stop_sequence} stopId={pathStopData.stop.id} />
           </div>
-        )}
+        )} */}
 
-        {isThisStopSelected && <LinesExplorerContentPatternPathStopPdf lineId={linesExplorerContext.entities.line.id} stopId={pathStopData.stop.id} direction={linesExplorerContext.entities.pattern.direction} />}
+        {/* {isThisStopSelected && <LinesExplorerContentPatternPathStopPdf lineId={linesExplorerContext.entities.line.id} stopId={pathStopData.stop.id} direction={linesExplorerContext.entities.pattern.direction} />} */}
       </div>
     </div>
   );
