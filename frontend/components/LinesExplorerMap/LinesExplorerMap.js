@@ -121,7 +121,6 @@ export default function LinesExplorerMap() {
     if (allVehiclesData && linesExplorerContext.entities.pattern?.id) {
       const selectedVehiclesData = allVehiclesData.filter((item) => item.pattern_id === linesExplorerContext.entities.pattern.id);
       geoJSON.features = selectedVehiclesData.map((vehicleData) => {
-        console.log(vehicleData.heading);
         return {
           type: 'Feature',
           geometry: {
