@@ -306,6 +306,7 @@ export default function LinesExplorerMap() {
           <Layer
             id="selected-vehicles-dead"
             source="selected-vehicles"
+            beforeId={'selected-vehicles'}
             type="symbol"
             layout={{
               'icon-allow-overlap': true,
@@ -330,7 +331,7 @@ export default function LinesExplorerMap() {
           <Layer
             id="selected-stop-stick"
             source="selected-stop"
-            // beforeId={selectedVehiclesMapData.length > 0 && 'selected-vehicles-dead'}
+            beforeId={selectedVehiclesMapData.length > 0 && 'selected-vehicles-dead'}
             type="symbol"
             layout={{
               'icon-allow-overlap': true,
@@ -384,7 +385,6 @@ export default function LinesExplorerMap() {
           <Layer
             id="all-stops"
             source="all-stops"
-            beforeId={patternStopsMapData && 'pattern-stops'}
             type="circle"
             paint={{
               'circle-color': '#ffffff',
@@ -402,7 +402,7 @@ export default function LinesExplorerMap() {
           <Layer
             id="selected-shape-direction"
             source="selected-shape"
-            beforeId="pattern-stops"
+            beforeId={patternStopsMapData && 'pattern-stops'}
             type="symbol"
             layout={{
               'icon-allow-overlap': true,

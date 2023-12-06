@@ -59,23 +59,23 @@ export default function LinesExplorerContentPatternPathStop({ pathStopData, path
 
         {isThisStopSelected && (
           <div className={styles.content}>
-            <p className={styles.label}>Próximas circulações</p>
+            <p className={styles.label}>Próximas circulações:</p>
             <LinesExplorerContentPatternPathStopRealtime patternId={linesExplorerContext.entities.pattern.id} stopId={pathStopData.stop.id} stopSequence={pathStopData.stop_sequence} />
           </div>
         )}
 
         {isThisStopSelected && (
           <div className={`${styles.content} ${styles.onlyDesktop}`}>
-            <p className={styles.label}>Horários previstos nesta paragem</p>
+            <p className={styles.label}>Horários previstos nesta paragem:</p>
             <LinesExplorerSelectDate />
             <LinesExplorerContentPatternPathStopTimetable stopSequence={pathStopData.stop_sequence} stopId={pathStopData.stop.id} />
             {/* <LinesExplorerContentPatternPathStopPdf lineId={linesExplorerContext.entities.line.id} stopId={pathStopData.stop.id} direction={linesExplorerContext.entities.pattern.direction} /> */}
           </div>
         )}
 
-        <Drawer radius="md" opened={opened} onClose={close} title="Authentication" position="bottom">
+        <Drawer radius="md" opened={opened} onClose={close} title="Horários previstos nesta paragem" position="bottom">
           <div className={styles.content}>
-            <p className={styles.label}>Horários previstos nesta paragem</p>
+            <p className={styles.label}>Horários previstos de passagem na paragem {pathStopData.stop.name}:</p>
             <LinesExplorerSelectDate />
             <LinesExplorerContentPatternPathStopTimetable stopSequence={pathStopData.stop_sequence} stopId={pathStopData.stop.id} />
             {/* <LinesExplorerContentPatternPathStopPdf lineId={linesExplorerContext.entities.line.id} stopId={pathStopData.stop.id} direction={linesExplorerContext.entities.pattern.direction} /> */}

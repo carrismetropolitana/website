@@ -7,9 +7,7 @@ import { useMemo } from 'react';
 import { useTranslations } from 'next-intl';
 import styles from './LinesExplorerContentPatternPathStopRealtime.module.css';
 import LiveIcon from '@/components/LiveIcon/LiveIcon';
-import parseTimeStringToDate from '@/services/parseTimeStringToDate';
 import { IconClock } from '@tabler/icons-react';
-import { convertOperationTimeStringTo24HourTimeString, getMinutesFromOperationTimeString } from '@/services/parseRelativeTime';
 
 /* * */
 
@@ -35,22 +33,22 @@ export default function LinesExplorerContentPatternPathStopRealtime({ patternId,
     // Filter estimates for the current pattern
     const filteredNextEstimatedArrivals = realtimeData.filter((item) => {
       // Skip if no estimated arrival is available
-      if (!item.estimated_arrival) return false;
+      if (!item.estimated_arrival_unix) return false;
       // Skip if the estimated arrival is for a different pattern
       if (item.pattern_id !== patternId) return false;
       // Skip if the estimated arrival is for a different stop sequence
       if (item.stop_sequence !== stopSequence) return false;
       // Skip if the estimated arrival is in the past
-      if (parseTimeStringToDate(item.estimated_arrival) < new Date()) return false;
+      if (new Date(item.estimated_arrival_unix * 1000) < new Date()) return false;
       // else return true
       return true;
     });
     // Sort by arrival_time
-    const collator = new Intl.Collator('en', { numeric: true, sensitivity: 'base' });
-    const sortedNextEstimatedArrivals = filteredNextEstimatedArrivals.sort((a, b) => collator.compare(a.estimated_arrival, b.estimated_arrival));
+    const sortedNextEstimatedArrivals = filteredNextEstimatedArrivals.sort((a, b) => a.estimated_arrival_unix - b.estimated_arrival_unix);
     // Format the arrival times
     const formattedNextEstimatedArrivals = sortedNextEstimatedArrivals.map((item) => {
-      return getMinutesFromOperationTimeString(item.scheduled_arrival);
+      const timeDifferenceBetweenEstimateAndNow = new Date(item.scheduled_arrival_unix * 1000) - new Date();
+      return Math.floor(timeDifferenceBetweenEstimateAndNow / 1000 / 60);
     });
     // Limit array to the max amount of items
     const limitedNextEstimatedArrivals = formattedNextEstimatedArrivals.slice(0, 3);
@@ -65,24 +63,24 @@ export default function LinesExplorerContentPatternPathStopRealtime({ patternId,
     // Filter estimates for the current pattern
     const filteredNextScheduledArrivals = realtimeData.filter((item) => {
       // Skip if there is no scheduled arrival
-      if (!item.scheduled_arrival) return false;
+      if (!item.scheduled_arrival_unix) return false;
       // Skip if there is an estimated arrival
-      if (item.estimated_arrival) return false;
+      if (item.estimated_arrival_unix) return false;
       // Skip if the estimated arrival is for a different pattern
       if (item.pattern_id !== patternId) return false;
       // Skip if the estimated arrival is for a different stop sequence
       if (item.stop_sequence !== stopSequence) return false;
       // Skip if the estimated arrival is in the past
-      if (parseTimeStringToDate(item.scheduled_arrival) < new Date()) return false;
+      if (new Date(item.scheduled_arrival_unix * 1000) < new Date()) return false;
       // else return true
       return true;
     });
     // Sort by arrival_time
-    const collator = new Intl.Collator('en', { numeric: true, sensitivity: 'base' });
-    const sortedNextScheduledArrivals = filteredNextScheduledArrivals.sort((a, b) => collator.compare(a.estimated_arrival, b.estimated_arrival));
+    const sortedNextScheduledArrivals = filteredNextScheduledArrivals.sort((a, b) => a.scheduled_arrival_unix - b.scheduled_arrival_unix);
     // Format the arrival times
     const formattedNextScheduledArrivals = sortedNextScheduledArrivals.map((item) => {
-      return convertOperationTimeStringTo24HourTimeString(item.scheduled_arrival).substring(0, 5);
+      const dateObject = new Date(item.scheduled_arrival_unix * 1000);
+      return `${dateObject.getHours()}:${dateObject.getMinutes()}`;
     });
     // Limit array to the max amount of items
     const limitedNextScheduledArrivals = formattedNextScheduledArrivals.slice(0, 3);
