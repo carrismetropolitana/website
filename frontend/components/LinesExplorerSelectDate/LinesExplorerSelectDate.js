@@ -89,7 +89,15 @@ export default function LinesExplorerSelectDate() {
         <div className={`${styles.button} ${isTomorrowSelected && styles.isSelected}`} onClick={handleSetTomorrow}>
           {t('tomorrow')}
         </div>
-        <DatePickerInput aria-label={t('label')} placeholder={t('placeholder')} dropdownType="modal" onChange={handleSetDate} value={linesExplorerContext.entities.date} classNames={{ input: `${styles.input} ${!isTodaySelected && !isTomorrowSelected && styles.isSelected}` }} />
+        <DatePickerInput
+          aria-label={t('label')}
+          placeholder={t('placeholder')}
+          dropdownType="modal"
+          onChange={handleSetDate}
+          value={linesExplorerContext.entities.date}
+          valueFormat="DD MMM YYYY"
+          classNames={{ input: `${styles.input} ${!isTodaySelected && !isTomorrowSelected && styles.isSelected}` }}
+        />
       </div>
     </div>
   );

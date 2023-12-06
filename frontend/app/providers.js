@@ -1,17 +1,25 @@
 'use client';
 
+/* * */
+
+import 'dayjs/locale/pt';
 import { SWRConfig } from 'swr';
 import { MantineProvider } from '@mantine/core';
 import { MapProvider } from 'react-map-gl/maplibre';
 import { DebugContextProvider } from '@/contexts/DebugContext';
 import { AnalyticsContextProvider } from '@/contexts/AnalyticsContext';
 import { ModalsProvider } from '@mantine/modals';
+import { DatesProvider } from '@mantine/dates';
+
+/* * */
 
 export default function Providers({ children }) {
   //
 
-  // Use SWR
-  const swrOptions = {
+  //
+  // A. Setup SWR provider
+
+  const swrSettings = {
     //
     refreshInterval: 300000, // 5 minutes
     //
@@ -29,17 +37,34 @@ export default function Providers({ children }) {
     //
   };
 
+  //
+  // A. Setup Mantine Dates provider
+
+  const mantineDatesSettings = {
+    locale: 'pt',
+    firstDayOfWeek: 1,
+    weekendDays: [7, 0],
+    timezone: 'Europe/Lisbon',
+  };
+
+  //
+  // B. Render providers
+
   return (
-    <SWRConfig value={swrOptions}>
+    <SWRConfig value={swrSettings}>
       <MantineProvider withGlobalStyles withNormalizeCSS>
-        <ModalsProvider>
-          <AnalyticsContextProvider>
-            <DebugContextProvider>
-              <MapProvider>{children}</MapProvider>
-            </DebugContextProvider>
-          </AnalyticsContextProvider>
-        </ModalsProvider>
+        <DatesProvider settings={mantineDatesSettings}>
+          <ModalsProvider>
+            <AnalyticsContextProvider>
+              <DebugContextProvider>
+                <MapProvider>{children}</MapProvider>
+              </DebugContextProvider>
+            </AnalyticsContextProvider>
+          </ModalsProvider>
+        </DatesProvider>
       </MantineProvider>
     </SWRConfig>
   );
+
+  //
 }

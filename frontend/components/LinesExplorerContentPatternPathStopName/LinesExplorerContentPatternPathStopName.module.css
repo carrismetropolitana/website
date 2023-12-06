@@ -22,23 +22,11 @@
   line-height: 1.3;
 }
 
-@media (max-width: 600px) {
-  .stopName {
-    font-size: 16px;
-  }
-}
-
 .isSelected .stopName {
   font-size: 18px;
   font-weight: 700;
   color: var(--gray-7);
   line-height: 1.3;
-}
-
-@media (max-width: 600px) {
-  .isSelected .stopName {
-    font-size: 18px;
-  }
 }
 
 /* * */
@@ -50,20 +38,8 @@
   color: var(--gray-5);
 }
 
-@media (max-width: 600px) {
-  .stopLocation {
-    font-size: 14px;
-  }
-}
-
 .isSelected .stopLocation {
   font-size: 14px;
   font-weight: 600;
   color: var(--gray-5);
-}
-
-@media (max-width: 600px) {
-  .isSelected .stopLocation {
-    font-size: 14px;
-  }
 }

@@ -1,9 +1,13 @@
+/* * */
+
 import styles from './AppTopBar.module.css';
+
+/* * */
 
 export default function AppTopBar() {
   return (
     <div className={styles.container}>
-      <a href="//www.tmlmobilidade.pt/" className={styles.link}>
+      <a href="https://www.tmlmobilidade.pt" className={styles.link}>
         <div className={styles.label}>TML</div>
         <div className={styles.indicatorWrapper}>
           <div className={styles.indicatorActive} />
@@ -15,7 +19,7 @@ export default function AppTopBar() {
           <div className={styles.indicatorActive} />
         </div>
       </div>
-      <a href="//www.navegante.pt/" className={styles.link}>
+      <a href="https://www.navegante.pt" className={styles.link}>
         <div className={styles.label}>navegante®</div>
         <div className={styles.indicatorWrapper}>
           <div className={styles.indicatorActive} />

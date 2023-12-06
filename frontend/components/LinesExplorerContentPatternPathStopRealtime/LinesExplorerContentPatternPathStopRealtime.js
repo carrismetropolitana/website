@@ -48,8 +48,8 @@ export default function LinesExplorerContentPatternPathStopRealtime({ patternId,
     const sortedNextEstimatedArrivals = filteredNextEstimatedArrivals.sort((a, b) => a.estimated_arrival_unix - b.estimated_arrival_unix);
     // Format the arrival times
     const formattedNextEstimatedArrivals = sortedNextEstimatedArrivals.map((item) => {
-      const timeDifferenceBetweenEstimateAndNow = new Date(item.scheduled_arrival_unix * 1000) - new Date();
-      return Math.floor(timeDifferenceBetweenEstimateAndNow / 1000 / 60);
+      const timeDifferenceBetweenEstimateAndNowInMilliseconds = new Date(item.scheduled_arrival_unix * 1000) - new Date();
+      return Math.floor(timeDifferenceBetweenEstimateAndNowInMilliseconds / 1000 / 60);
     });
     // Limit array to the max amount of items
     const limitedNextEstimatedArrivals = formattedNextEstimatedArrivals.slice(0, maxEstimatedArrivals);
@@ -71,8 +71,10 @@ export default function LinesExplorerContentPatternPathStopRealtime({ patternId,
       if (item.pattern_id !== patternId) return false;
       // Skip if the estimated arrival is for a different stop sequence
       if (item.stop_sequence !== stopSequence) return false;
-      // Skip if the estimated arrival is in the past
-      if (new Date(item.scheduled_arrival_unix * 1000) < new Date()) return false;
+      // Skip if the estimated arrival is in the past (within 2 minutes)
+      const scheduledArrivalDateTime = DateTime.fromSeconds(item.scheduled_arrival_unix, { zone: 'UTC' });
+      const nowDateTime = DateTime.now({ zone: 'UTC' });
+      if (scheduledArrivalDateTime < nowDateTime.minus({ minute: 2 })) return false;
       // else return true
       return true;
     });

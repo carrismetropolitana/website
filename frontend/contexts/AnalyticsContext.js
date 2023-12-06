@@ -1,5 +1,7 @@
 'use client';
 
+/* * */
+
 import pjson from '../package.json';
 import { UAParser } from 'ua-parser-js';
 import { getCurrentBrowserFingerPrint } from '@rajesh896/broprint.js';
@@ -7,16 +9,22 @@ import { createContext, useCallback, useContext, useEffect, useMemo, useState } 
 import parseDateToString from '@/services/parseDateToString';
 import parseStringToDate from '@/services/parseStringToDate';
 
-// A.
+/* * */
+
+// 1.
 // DEFAULT OPTIONS
 
 const LOCAL_STORAGE_ENABLED_KEY = 'anonymous_analytics_enabled';
 const LOCAL_STORAGE_VALIDITY_IN_DAYS = 365; // days
 
+/* * */
+
 // A.
 // CREATE CONTEXT
 
 const AnalyticsContext = createContext(null);
+
+/* * */
 
 // B.
 // SETUP CUSTOM HOOKS
@@ -24,6 +32,8 @@ const AnalyticsContext = createContext(null);
 export function useAnalyticsContext() {
   return useContext(AnalyticsContext);
 }
+
+/* * */
 
 // C.
 // SETUP PROVIDER
@@ -34,7 +44,7 @@ export function AnalyticsContextProvider({ children }) {
   //
   // A. Setup local state
 
-  const [isCaptureEnabled, setIsCaptureEnabled] = useState(false);
+  const [isCaptureEnabled, setIsCaptureEnabled] = useState();
 
   //
   // B. Retrieve authorization from local storage

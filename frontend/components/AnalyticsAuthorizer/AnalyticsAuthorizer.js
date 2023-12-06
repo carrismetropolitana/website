@@ -1,13 +1,15 @@
 'use client';
 
+/* * */
+
+import Link from 'next/link';
+import Image from 'next/image';
 import styles from './AnalyticsAuthorizer.module.css';
 import { Button, Modal } from '@mantine/core';
 import { useAnalyticsContext } from '@/contexts/AnalyticsContext';
 import { useEffect, useState } from 'react';
 import { usePathname } from 'next/navigation';
-import Image from 'next/image';
 import { useTranslations } from 'next-intl';
-import Link from 'next/link';
 
 /* * */
 
@@ -18,21 +20,24 @@ export default function AnalyticsAuthorizer() {
   // A. Setup variables
 
   const t = useTranslations('AnalyticsAuthorizer');
-
   const pathname = usePathname();
-
   const analyticsContext = useAnalyticsContext();
 
   const [isOpen, setIsOpen] = useState(false);
 
   useEffect(() => {
+    // Check if analyticsContext and pathname are ready
+    if (typeof analyticsContext.enabled !== 'boolean' || !pathname) return;
+    // Check if pathname is the cookies policy page
     const regexPatternToMatchCookiesPolicy = /^(\/[a-z]{2})?\/legal\/cookies\/?$/;
     const isPrivacyPage = regexPatternToMatchCookiesPolicy.test(pathname);
+    // Set the modal state based on the context and pathname
     setIsOpen(!analyticsContext.enabled && !isPrivacyPage);
+    //
   }, [analyticsContext.enabled, pathname]);
 
   //
-  // B. Render Components
+  // B. Handle actions
 
   const handleEnable = () => {
     analyticsContext.enable();
@@ -46,7 +51,7 @@ export default function AnalyticsAuthorizer() {
   };
 
   //
-  // B. Render Components
+  // C. Render Components
 
   return (
     <Modal opened={isOpen} onClose={() => setIsOpen(false)} withCloseButton={false} trapFocus={false} closeOnEscape={false} closeOnClickOutside={false} returnFocus={true} overlayProps={{ backgroundOpacity: 0.55, blur: 3 }}>
@@ -68,4 +73,6 @@ export default function AnalyticsAuthorizer() {
       </div>
     </Modal>
   );
+
+  //
 }

@@ -30,7 +30,7 @@
   }
 }
 
-@media (max-width: 450px) {
+@media (max-width: 359px) {
   .innerWrapper {
     grid-template-columns: 1fr;
   }

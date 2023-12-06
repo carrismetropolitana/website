@@ -1,10 +1,14 @@
 'use client';
 
+/* * */
+
 import useSWR from 'swr';
 import Link from 'next/link';
 import styles from './AppVersion.module.css';
 import pjson from '../../package.json';
 import { useEffect } from 'react';
+
+/* * */
 
 export default function AppVersion() {
   //
@@ -31,4 +35,6 @@ export default function AppVersion() {
       {pjson.version}
     </Link>
   );
+
+  //
 }
