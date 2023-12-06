@@ -408,8 +408,9 @@
     },
     "LinesExplorerContentPatternPathStop": {},
     "LinesExplorerContentPatternPathStopRealtime": {
-        "will_pass": "{value}",
-        "just_passed": "Just passed"
+        "arriving_now": "A chegar",
+        "estimated_arrival": "{value} min",
+        "scheduled_arrival": "{value}"
     },
     "LinesExplorerContentPatternPathStopTimetable": {
         "hours": {

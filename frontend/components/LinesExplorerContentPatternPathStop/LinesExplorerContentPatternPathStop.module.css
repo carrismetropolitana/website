@@ -34,8 +34,8 @@
   align-items: flex-start;
   justify-content: flex-start;
   width: 100%;
-  padding: 10px 14px;
-  gap: var(--size-lg);
+  padding: 15px 14px;
+  gap: 20px;
 }
 
 @media (max-width: 600px) {
@@ -45,8 +45,8 @@
 }
 
 .selected .innerWrapper {
-  padding-top: 15px;
-  padding-bottom: 15px;
+  padding-top: 30px;
+  padding-bottom: 30px;
 }
 
 /* * */
@@ -59,7 +59,14 @@
   align-items: flex-start;
   justify-content: flex-start;
   width: 100%;
-  gap: 10px;
+  gap: 7px;
+}
+
+/* * */
+/* STOP INFO */
+
+.stopInfo {
+  gap: 3px;
 }
 
 /* * */

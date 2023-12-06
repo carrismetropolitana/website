@@ -2,33 +2,33 @@
 /* CONTAINER */
 
 .container {
-  padding-top: 12px;
+  padding-top: 17px;
   background-color: var(--gray2);
 }
 
 .container.isSelected {
-  padding-top: 20px;
+  padding-top: 34px;
 }
 
 .container.start {
-  margin-top: 12px;
+  margin-top: 17px;
   padding-top: 0;
   border-top-left-radius: 999px;
   border-top-right-radius: 999px;
 }
 
 .container.start.isSelected {
-  margin-top: 20px;
+  margin-top: 34px;
 }
 
 .container.end {
   border-bottom-left-radius: 999px;
   border-bottom-right-radius: 999px;
-  height: 26px;
+  height: 31px;
 }
 
 .container.end.isSelected {
-  height: 36px;
+  height: 48px;
 }
 
 /* * */
@@ -37,6 +37,7 @@
 .spineIcon {
   display: flex;
   align-items: flex-start;
+  justify-content: center;
 }
 
 .spineIconOuter {

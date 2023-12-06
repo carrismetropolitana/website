@@ -32,14 +32,14 @@ export default function LinesExplorerContentPatternPathStop({ pathStopData, path
   // B. Transform data
 
   const isThisStopSelected = useMemo(() => {
-    return linesExplorerContext.entities.stop_id === pathStopData.stop.id;
-  }, [linesExplorerContext.entities.stop_id, pathStopData.stop.id]);
+    return linesExplorerContext.entities.stop?.id === pathStopData.stop.id;
+  }, [linesExplorerContext.entities.stop?.id, pathStopData.stop.id]);
 
   //
   // C. Handle actions
 
   const handleStopClick = () => {
-    linesExplorerContext.selectStop(pathStopData.stop.id);
+    linesExplorerContext.selectStop(pathStopData.stop);
   };
 
   //
@@ -54,7 +54,7 @@ export default function LinesExplorerContentPatternPathStop({ pathStopData, path
       <div className={styles.innerWrapper}>
         <div className={styles.stopInfo}>
           <LinesExplorerContentPatternPathStopName stopData={pathStopData.stop} isSelected={isThisStopSelected} />
-          {!isThisStopSelected && <LinesExplorerContentPatternPathStopRealtime patternId={linesExplorerContext.entities.pattern.id} stopId={pathStopData.stop.id} stopSequence={pathStopData.stop_sequence} />}
+          {!isThisStopSelected && <LinesExplorerContentPatternPathStopRealtime patternId={linesExplorerContext.entities.pattern.id} stopId={pathStopData.stop.id} stopSequence={pathStopData.stop_sequence} showScheduledArrivals={false} />}
         </div>
 
         {isThisStopSelected && (

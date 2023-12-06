@@ -25,7 +25,7 @@ const initialEntitiesState = {
   line: null,
   pattern: null,
   //
-  stop_id: null,
+  stop: null,
   vehicle_id: null,
   trip_id: null,
 };
@@ -102,7 +102,7 @@ export function LinesExplorerContextProvider({ children }) {
     (lineId) => {
       const foundLine = allLinesData.find((item) => item.id === lineId);
       if (foundLine) {
-        setEntitiesState((prev) => ({ ...prev, line: foundLine, pattern: null, shape: null }));
+        setEntitiesState((prev) => ({ ...prev, line: foundLine, pattern: null, stop: null }));
         updateWindowUrl(lineId, foundLine.long_name);
       }
     },
@@ -128,7 +128,7 @@ export function LinesExplorerContextProvider({ children }) {
   // ---------
 
   const selectPattern = useCallback((patternData) => {
-    setEntitiesState((prev) => ({ ...prev, pattern: patternData }));
+    setEntitiesState((prev) => ({ ...prev, pattern: patternData, stop: null }));
   }, []);
 
   const clearSelectedPattern = useCallback(() => {
@@ -137,12 +137,12 @@ export function LinesExplorerContextProvider({ children }) {
 
   // ---------
 
-  const selectStop = useCallback((stop_id) => {
-    setEntitiesState((prev) => ({ ...prev, stop_id: stop_id }));
+  const selectStop = useCallback((stopData) => {
+    setEntitiesState((prev) => ({ ...prev, stop: stopData }));
   }, []);
 
   const clearSelectedStop = useCallback(() => {
-    setEntitiesState((prev) => ({ ...prev, stop_id: null }));
+    setEntitiesState((prev) => ({ ...prev, stop: null }));
   }, []);
 
   // ---------

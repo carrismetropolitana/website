@@ -4,120 +4,120 @@
 
 import useSWR from 'swr';
 import { useMemo } from 'react';
-import { useTranslations, useFormatter, useNow } from 'next-intl';
+import { useTranslations } from 'next-intl';
 import styles from './LinesExplorerContentPatternPathStopRealtime.module.css';
 import LiveIcon from '@/components/LiveIcon/LiveIcon';
-import parseStringToDate from '@/services/parseStringToDate';
 import parseTimeStringToDate from '@/services/parseTimeStringToDate';
+import { IconClock } from '@tabler/icons-react';
+import { convertOperationTimeStringTo24HourTimeString, getMinutesFromOperationTimeString } from '@/services/parseRelativeTime';
 
 /* * */
 
-export default function LinesExplorerContentPatternPathStopRealtime({ patternId, stopId, stopSequence }) {
+export default function LinesExplorerContentPatternPathStopRealtime({ patternId, stopId, stopSequence, showScheduledArrivals = true, maxEstimatedArrivals = 3, maxScheduledArrivals = 3 }) {
   //
 
   //
   // A. Setup variables
 
   const t = useTranslations('LinesExplorerContentPatternPathStopRealtime');
-  const format = useFormatter();
-  const now = useNow({ updateInterval: 1000 });
 
   //
   // B. Fetch data
 
-  const { data: realtimeData } = useSWR(stopId && `https://api.carrismetropolitana.pt/stops/${stopId}/realtime`, { fetchInterval: 1000 });
+  const { data: realtimeData } = useSWR(stopId && `https://api.carrismetropolitana.pt/stops/${stopId}/realtime`, { refreshInterval: 10000 });
 
   //
-  // C. Handle actions
+  // C. Transform data
 
   const nextEstimatedArrivals = useMemo(() => {
     // Return early if no data is available
     if (!realtimeData) return [];
     // Filter estimates for the current pattern
-    const filteredNextRealtimeArrivals = realtimeData.filter((item) => {
+    const filteredNextEstimatedArrivals = realtimeData.filter((item) => {
+      // Skip if no estimated arrival is available
       if (!item.estimated_arrival) return false;
-      const isForCurrentPattern = item.pattern_id === patternId;
-      const isForCurrentStopSequence = item.stop_sequence === stopSequence;
-      const isInTheFuture = parseTimeStringToDate(item.estimated_arrival) >= new Date();
-      return isForCurrentPattern && isForCurrentStopSequence && isInTheFuture;
+      // Skip if the estimated arrival is for a different pattern
+      if (item.pattern_id !== patternId) return false;
+      // Skip if the estimated arrival is for a different stop sequence
+      if (item.stop_sequence !== stopSequence) return false;
+      // Skip if the estimated arrival is in the past
+      if (parseTimeStringToDate(item.estimated_arrival) < new Date()) return false;
+      // else return true
+      return true;
     });
     // Sort by arrival_time
     const collator = new Intl.Collator('en', { numeric: true, sensitivity: 'base' });
-    const sortedNextRealtimeArrivals = filteredNextRealtimeArrivals.sort((a, b) => collator.compare(a.estimated_arrival, b.estimated_arrival));
+    const sortedNextEstimatedArrivals = filteredNextEstimatedArrivals.sort((a, b) => collator.compare(a.estimated_arrival, b.estimated_arrival));
+    // Format the arrival times
+    const formattedNextEstimatedArrivals = sortedNextEstimatedArrivals.map((item) => {
+      return getMinutesFromOperationTimeString(item.scheduled_arrival);
+    });
+    // Limit array to the max amount of items
+    const limitedNextEstimatedArrivals = formattedNextEstimatedArrivals.slice(0, 3);
     // Return result
-    return sortedNextRealtimeArrivals;
+    return limitedNextEstimatedArrivals;
     //
   }, [realtimeData, patternId, stopSequence]);
 
-  if (nextEstimatedArrivals.length > 0) console.log('filteredNextRealtimeArrivals', nextEstimatedArrivals);
-
-  //   const estimatedNextArrivalTime = useMemo(() => {
-  //     //
-  //     if (!realtimeData) return '';
-  //     // Filter estimates for the current pattern
-  //     const filteredRealtimeData = realtimeData.filter((item) => {
-  //       const isForCurrentPattern = item.pattern_id === patternId;
-  //       return isForCurrentPattern;
-  //     });
-  //     // Sort by arrival_time
-  //     const collator = new Intl.Collator('en', { numeric: true, sensitivity: 'base' });
-  //     const sortedRealtimeData = filteredRealtimeData.sort((a, b) => collator.compare(a.estimated_arrival, b.estimated_arrival));
-  //     // Exit early if no estimate matches this stop and pattern
-  //     if (!sortedRealtimeData.length) return '';
-  //     // Parse absolute time to relative
-  //     const relative = parseStringToDate(sortedRealtimeData[0].estimated_arrival);
-  //     // console.log('sortedRealtimeData[0]', sortedRealtimeData[0]);
-  //     // Return result
-  //     return relative;
-  //     //
-  //   }, [patternId, realtimeData]);
-
-  //   console.log(estimatedNextArrivalTime);
-
-  //   function parseRelativeTime(eta) {
-  //     // Skip if no eta
-  //     if (!eta) return null;
-
-  //     // Get current time
-  //     var now = new Date();
-  //     var currentHours = now.getHours();
-  //     var currentMinutes = now.getMinutes();
-  //     var currentSeconds = now.getSeconds();
-
-  //     // Parse ETA
-  //     var parts = eta.split(':');
-  //     var etaHours = parseInt(parts[0]);
-  //     var etaMinutes = parseInt(parts[1]);
-  //     var etaSeconds = parseInt(parts[2]);
-
-  //     // Calculate time difference
-  //     var diffHours = etaHours - currentHours;
-  //     var diffMinutes = etaMinutes - currentMinutes;
-  //     var diffSeconds = etaSeconds - currentSeconds;
-
-  //     // Convert time difference into minutes
-  //     var totalDiffMinutes = diffHours * 60 + diffMinutes + diffSeconds / 60;
-
-  //     // Calculate the relative time as a Date object
-  //     var relativeTime = new Date();
-  //     relativeTime.setMinutes(relativeTime.getMinutes() + totalDiffMinutes);
-  //     return relativeTime;
-  //   }
+  const nextScheduledArrivals = useMemo(() => {
+    // Return early if no data is available
+    if (!realtimeData) return [];
+    // Filter estimates for the current pattern
+    const filteredNextScheduledArrivals = realtimeData.filter((item) => {
+      // Skip if there is no scheduled arrival
+      if (!item.scheduled_arrival) return false;
+      // Skip if there is an estimated arrival
+      if (item.estimated_arrival) return false;
+      // Skip if the estimated arrival is for a different pattern
+      if (item.pattern_id !== patternId) return false;
+      // Skip if the estimated arrival is for a different stop sequence
+      if (item.stop_sequence !== stopSequence) return false;
+      // Skip if the estimated arrival is in the past
+      if (parseTimeStringToDate(item.scheduled_arrival) < new Date()) return false;
+      // else return true
+      return true;
+    });
+    // Sort by arrival_time
+    const collator = new Intl.Collator('en', { numeric: true, sensitivity: 'base' });
+    const sortedNextScheduledArrivals = filteredNextScheduledArrivals.sort((a, b) => collator.compare(a.estimated_arrival, b.estimated_arrival));
+    // Format the arrival times
+    const formattedNextScheduledArrivals = sortedNextScheduledArrivals.map((item) => {
+      return convertOperationTimeStringTo24HourTimeString(item.scheduled_arrival).substring(0, 5);
+    });
+    // Limit array to the max amount of items
+    const limitedNextScheduledArrivals = formattedNextScheduledArrivals.slice(0, 3);
+    // Return result
+    return limitedNextScheduledArrivals;
+    //
+  }, [realtimeData, patternId, stopSequence]);
 
   //
-  // C. Render components
+  // D. Render components
 
   return (
-    nextEstimatedArrivals.length > 0 && (
-      <div className={styles.container}>
-        {nextEstimatedArrivals.map((item, index) => (
-          <div key={index} className={styles.container}>
-            <LiveIcon />
-            <p className={styles.estimate}>{item.estimated_arrival}</p>
-          </div>
-        ))}
-      </div>
-    )
+    <div className={styles.container}>
+      {nextEstimatedArrivals.length > 0 && (
+        <div className={styles.row}>
+          <LiveIcon />
+          {nextEstimatedArrivals.map((item, index) => (
+            <p key={index} className={styles.estimatedArrival}>
+              {t('estimated_arrival', { value: item })}
+            </p>
+          ))}
+        </div>
+      )}
+      {(showScheduledArrivals || !nextEstimatedArrivals.length) && nextScheduledArrivals.length > 0 && (
+        <div className={styles.row}>
+          <IconClock size={14} stroke={2.5} />
+          {nextScheduledArrivals.map((item, index) => (
+            <p key={index} className={styles.scheduledArrival}>
+              {t('scheduled_arrival', { value: item })}
+            </p>
+          ))}
+        </div>
+      )}
+      {!nextEstimatedArrivals.length && !nextScheduledArrivals.length && showScheduledArrivals && <p>-</p>}
+    </div>
   );
 
   //

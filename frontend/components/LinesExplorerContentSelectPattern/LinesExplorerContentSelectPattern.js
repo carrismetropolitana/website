@@ -53,7 +53,10 @@ export default function LinesExplorerContentSelectPattern() {
   useEffect(() => {
     // Pre-select the first pattern if none is selected
     if (!linesExplorerContext.entities.pattern && allPatternsData.length > 0) {
-      linesExplorerContext.selectPattern(allPatternsData[0]);
+      const firstPatternInTheArray = allPatternsData[0];
+      if (firstPatternInTheArray.line_id === linesExplorerContext.entities.line.id) {
+        linesExplorerContext.selectPattern(allPatternsData[0]);
+      }
     }
   }, [allPatternsData, linesExplorerContext]);
 
@@ -109,7 +112,7 @@ export default function LinesExplorerContentSelectPattern() {
           {linesExplorerContext.entities.line?.id && linesExplorerContext.entities.pattern?.id && !comboboxStore.dropdownOpened ? (
             <Group className={styles.comboboxTarget} onClick={handleClickSearchField}>
               <IconSearch size={20} />
-              <LineDisplay short_name={linesExplorerContext.entities.line?.short_name} long_name={linesExplorerContext.entities.pattern?.headsign} color={linesExplorerContext.entities.line?.color} text_color={linesExplorerContext.entities.line?.text_color} />
+              <p className={styles.comboboxSelection}>{linesExplorerContext.entities.pattern?.headsign}</p>
               <ActionIcon onClick={handleClearSearchField} size="md" variant="subtle" color="gray">
                 <IconX size={20} />
               </ActionIcon>
@@ -134,18 +137,19 @@ export default function LinesExplorerContentSelectPattern() {
               onClick={handleClickSearchField}
               onFocus={handleClickSearchField}
               onBlur={handleExitSearchField}
+              className={styles.comboboxInput}
             />
           )}
         </Combobox.Target>
 
-        <Combobox.Dropdown>
+        <Combobox.Dropdown className={styles.comboboxDropdown}>
           <Combobox.Options mah={200} style={{ overflowY: 'auto' }}>
             {allPatternsDataFilteredBySearchQuery.length === 0 ? (
               <Combobox.Empty>{t('no_results')}</Combobox.Empty>
             ) : (
               allPatternsDataFilteredBySearchQuery.map((item) => (
                 <Combobox.Option key={item.id} value={item.id} className={item.id === linesExplorerContext.entities.line?.id && styles.selected}>
-                  <div className={styles.comboboxOption}>{item.headsign}</div>
+                  <p className={styles.comboboxOption}>{item.headsign}</p>
                 </Combobox.Option>
               ))
             )}

@@ -1,14 +1,47 @@
+/* * */
+/* CONTAINER */
+
 .container {
   display: flex;
   flex-direction: row;
-  align-items: center;
-  justify-content: center;
-  gap: var(--size-xs);
-  padding-left: 2px;
+  gap: 20px;
 }
 
-.estimate {
+/* * */
+/* ROW */
+
+.row {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 6px;
   font-size: 14px;
   font-weight: 600;
+}
+
+/* * */
+/* ARRIVALS */
+
+.estimatedArrival,
+.scheduledArrival {
+  padding-right: 3px;
+}
+
+.estimatedArrival:last-child,
+.scheduledArrival:last-child {
+  padding-right: 0;
+}
+
+/* * */
+/* ESTIMATED ARRIVAL */
+
+.estimatedArrival {
   color: var(--realtime-100);
+}
+
+/* * */
+/* SCHEDULED ARRIVAL */
+
+.scheduledArrival {
+  color: var(--reference-1);
 }
