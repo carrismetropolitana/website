@@ -26,7 +26,7 @@ export default function Layout({ children, params: { locale } }) {
       <AppWrapper>
         <AppTopBar />
         <AppHeader />
-        <StatusMessage />
+        {/* <StatusMessage /> */}
         {/* <MaintenanceWarning /> */}
         {children}
         <AppFooter />
