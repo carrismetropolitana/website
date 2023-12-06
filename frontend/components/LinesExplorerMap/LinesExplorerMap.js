@@ -214,7 +214,7 @@ export default function LinesExplorerMap() {
 
   useEffect(() => {
     // Check if map is ready
-    if (linesExplorerMap?.getSource('all-stops') === undefined) return;
+    if (linesExplorerMap && linesExplorerMap?.getSource('all-stops') === undefined) return;
     // Check if auto zoom is enabled
     if (!linesExplorerContext.map.auto_zoom) return;
     // Check if there is a selected map feature

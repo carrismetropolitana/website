@@ -8,6 +8,7 @@ import { useTranslations } from 'next-intl';
 import styles from './LinesExplorerContentPatternPathStopRealtime.module.css';
 import LiveIcon from '@/components/LiveIcon/LiveIcon';
 import { IconClock } from '@tabler/icons-react';
+import { DateTime } from 'luxon';
 
 /* * */
 
@@ -51,11 +52,11 @@ export default function LinesExplorerContentPatternPathStopRealtime({ patternId,
       return Math.floor(timeDifferenceBetweenEstimateAndNow / 1000 / 60);
     });
     // Limit array to the max amount of items
-    const limitedNextEstimatedArrivals = formattedNextEstimatedArrivals.slice(0, 3);
+    const limitedNextEstimatedArrivals = formattedNextEstimatedArrivals.slice(0, maxEstimatedArrivals);
     // Return result
     return limitedNextEstimatedArrivals;
     //
-  }, [realtimeData, patternId, stopSequence]);
+  }, [realtimeData, maxEstimatedArrivals, patternId, stopSequence]);
 
   const nextScheduledArrivals = useMemo(() => {
     // Return early if no data is available
@@ -79,15 +80,15 @@ export default function LinesExplorerContentPatternPathStopRealtime({ patternId,
     const sortedNextScheduledArrivals = filteredNextScheduledArrivals.sort((a, b) => a.scheduled_arrival_unix - b.scheduled_arrival_unix);
     // Format the arrival times
     const formattedNextScheduledArrivals = sortedNextScheduledArrivals.map((item) => {
-      const dateObject = new Date(item.scheduled_arrival_unix * 1000);
-      return `${dateObject.getHours()}:${dateObject.getMinutes()}`;
+      const dateTimeObject = DateTime.fromSeconds(item.scheduled_arrival_unix, { zone: 'UTC' });
+      return `${dateTimeObject.toFormat('HH', { zone: 'Europe/Lisbon' })}:${dateTimeObject.toFormat('mm', { zone: 'Europe/Lisbon' })}`;
     });
     // Limit array to the max amount of items
-    const limitedNextScheduledArrivals = formattedNextScheduledArrivals.slice(0, 3);
+    const limitedNextScheduledArrivals = formattedNextScheduledArrivals.slice(0, maxScheduledArrivals);
     // Return result
     return limitedNextScheduledArrivals;
     //
-  }, [realtimeData, patternId, stopSequence]);
+  }, [realtimeData, maxScheduledArrivals, patternId, stopSequence]);
 
   //
   // D. Render components
