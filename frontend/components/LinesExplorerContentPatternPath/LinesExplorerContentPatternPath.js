@@ -26,7 +26,6 @@ export default function LinesExplorerContentPatternPath() {
           <LinePatternPathStop pathStopData={pathStop} pathIndex={pathIndex} pathIndexMax={linesExplorerContext.entities.pattern.path.length - 1} />
         </div>
       ))}
-      <div>{linesExplorerContext.entities.pattern.id}</div>
     </div>
   );
 

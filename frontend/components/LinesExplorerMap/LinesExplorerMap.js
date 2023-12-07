@@ -174,7 +174,7 @@ export default function LinesExplorerMap() {
   }, [linesExplorerMap]);
 
   useEffect(() => {
-    if (selectedShapeMapData) {
+    if (selectedShapeMapData && linesExplorerContext.map.auto_zoom) {
       // Get window width and height
       let fitBoundsPadding = 100;
       if (window.innerWidth < window.innerHeight) fitBoundsPadding = 50;
@@ -183,7 +183,7 @@ export default function LinesExplorerMap() {
       const boundingBox = turf.bbox(collection);
       linesExplorerMap.fitBounds(boundingBox, { duration: 2000, padding: fitBoundsPadding, bearing: linesExplorerMap.getBearing(), maxZoom: 16 });
     }
-  }, [selectedShapeMapData, selectedVehiclesMapData, linesExplorerMap]);
+  }, [selectedShapeMapData, selectedVehiclesMapData, linesExplorerMap, linesExplorerContext.map.auto_zoom]);
 
   //
   // E. Helper functions
@@ -252,6 +252,7 @@ export default function LinesExplorerMap() {
   };
 
   const handleMapMove = () => {
+    linesExplorerContext.disableAutoZoom();
     // Get all currently rendered features and mark all of them as unselected
     // const allRenderedFeatures = linesExplorerMap.queryRenderedFeatures();
     // allRenderedFeatures.forEach(function (f) {

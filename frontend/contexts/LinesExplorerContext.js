@@ -13,7 +13,7 @@ import parseDateToString from '@/services/parseDateToString';
 
 const initialMapState = {
   style: 'map',
-  auto_zoom: null,
+  auto_zoom: true,
 };
 
 const initialEntitiesState = {
@@ -129,6 +129,7 @@ export function LinesExplorerContextProvider({ children }) {
 
   const selectPattern = useCallback((patternData) => {
     setEntitiesState((prev) => ({ ...prev, pattern: patternData, stop: null }));
+    setMapState((prev) => ({ ...prev, auto_zoom: true }));
   }, []);
 
   const clearSelectedPattern = useCallback(() => {
@@ -139,13 +140,23 @@ export function LinesExplorerContextProvider({ children }) {
 
   const selectStop = useCallback((stopData) => {
     setEntitiesState((prev) => ({ ...prev, stop: stopData }));
+    setMapState((prev) => ({ ...prev, auto_zoom: false }));
   }, []);
 
   const clearSelectedStop = useCallback(() => {
     setEntitiesState((prev) => ({ ...prev, stop: null }));
+    setMapState((prev) => ({ ...prev, auto_zoom: true }));
   }, []);
 
   // ---------
+
+  const enableAutoZoom = useCallback(() => {
+    setMapState((prev) => ({ ...prev, auto_zoom: true }));
+  }, []);
+
+  const disableAutoZoom = useCallback(() => {
+    setMapState((prev) => ({ ...prev, auto_zoom: false }));
+  }, []);
 
   const updateMapState = useCallback(
     (newMapState, reset = false) => {
@@ -190,8 +201,11 @@ export function LinesExplorerContextProvider({ children }) {
       selectStop,
       clearSelectedStop,
       //
+      enableAutoZoom,
+      disableAutoZoom,
+      //
     }),
-    [mapState, updateMapState, entitiesState, updateEntitiesState, selectMunicipality, clearSelectedMunicipality, selectLine, clearSelectedLine, selectDate, clearSelectedDate, selectPattern, clearSelectedPattern, selectStop, clearSelectedStop]
+    [mapState, updateMapState, entitiesState, updateEntitiesState, selectMunicipality, clearSelectedMunicipality, selectLine, clearSelectedLine, selectDate, clearSelectedDate, selectPattern, clearSelectedPattern, selectStop, clearSelectedStop, enableAutoZoom, disableAutoZoom]
   );
 
   //
