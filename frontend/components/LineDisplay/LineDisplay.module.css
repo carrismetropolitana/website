@@ -5,17 +5,20 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  border-radius: 999px;
+  color: #ffffff;
+  background-color: var(--gray9);
+  font-weight: 800;
+  letter-spacing: 1px;
+  line-height: 1;
+}
+
+.badge.md {
+  font-size: 16px;
   min-width: 65px;
   max-width: 65px;
   min-height: 26px;
   max-height: 26px;
-  border-radius: 999px;
-  color: #ffffff;
-  background-color: var(--gray9);
-  font-size: 16px;
-  font-weight: 800;
-  letter-spacing: 1px;
-  line-height: 1;
 }
 
 .badge.lg {

@@ -25,7 +25,7 @@ export default function LinesExplorerContentHeader() {
 
   return (
     <div className={styles.container}>
-      <LineBadge short_name={linesExplorerContext.entities.line.short_name} color={linesExplorerContext.entities.line.color} text_color={linesExplorerContext.entities.line.text_color} />
+      <LineBadge short_name={linesExplorerContext.entities.line.short_name} color={linesExplorerContext.entities.line.color} text_color={linesExplorerContext.entities.line.text_color} size="lg" />
       <p className={styles.destinationLabel}>{t('destination_label')}</p>
       <LinesExplorerContentSelectPattern />
     </div>
