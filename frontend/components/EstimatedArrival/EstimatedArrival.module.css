@@ -1,0 +1,17 @@
+/* * */
+/* CONTAINER */
+
+.container {
+  display: flex;
+  flex-direction: row;
+  gap: 20px;
+}
+
+/* * */
+/* ESTIMATED ARRIVAL */
+
+.estimatedArrival {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--realtime-100);
+}

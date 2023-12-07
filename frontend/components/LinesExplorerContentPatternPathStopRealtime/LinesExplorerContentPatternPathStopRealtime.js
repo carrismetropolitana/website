@@ -4,11 +4,12 @@
 
 import useSWR from 'swr';
 import { useMemo } from 'react';
-import { useTranslations } from 'next-intl';
-import styles from './LinesExplorerContentPatternPathStopRealtime.module.css';
-import LiveIcon from '@/components/LiveIcon/LiveIcon';
-import { IconClock } from '@tabler/icons-react';
 import { DateTime } from 'luxon';
+import { useTranslations } from 'next-intl';
+import { IconClock } from '@tabler/icons-react';
+import LiveIcon from '@/components/LiveIcon/LiveIcon';
+import EstimatedArrival from '@/components/EstimatedArrival/EstimatedArrival';
+import styles from './LinesExplorerContentPatternPathStopRealtime.module.css';
 
 /* * */
 
@@ -101,9 +102,7 @@ export default function LinesExplorerContentPatternPathStopRealtime({ patternId,
         <div className={styles.row}>
           <LiveIcon />
           {nextEstimatedArrivals.map((item, index) => (
-            <p key={index} className={styles.estimatedArrival}>
-              {t('estimated_arrival', { value: item })}
-            </p>
+            <EstimatedArrival key={index} estimatedArrivalInMinutes={item} showLiveIcon={false} />
           ))}
         </div>
       )}

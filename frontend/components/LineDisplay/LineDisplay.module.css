@@ -1,3 +1,6 @@
+/* * */
+/* BADGE */
+
 .badge {
   display: flex;
   align-items: center;
@@ -22,6 +25,9 @@
   min-height: 34px;
   max-height: 34px;
 }
+
+/* * */
+/* NAME */
 
 .name {
   display: flex;

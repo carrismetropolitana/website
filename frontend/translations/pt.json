@@ -412,6 +412,10 @@
         "estimated_arrival": "{value} min",
         "scheduled_arrival": "{value}"
     },
+    "EstimatedArrival": {
+        "arriving_now": "A chegar",
+        "arriving_soon": "{value} min"
+    },
     "LinesExplorerContentPatternPathStopTimetable": {
         "hours": {
             "label": "Hour"
