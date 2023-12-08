@@ -10,16 +10,16 @@ export async function generateMetadata({ params }) {
   //
 
   // A. Fetch stop data
-  const stopData = await fetch(params.stop_id?.length && `https://api.carrismetropolitana.pt/stops/${params.stop_id}`).then((res) => res.json());
+  const stopData = await fetch(params.vehicle_id?.length && `https://api.carrismetropolitana.pt/vehicles/${params.vehicle_id}`).then((res) => res.json());
 
   // B. Render the titles
-  if (params.stop_id === 'all' || !stopData.name) {
+  if (params.vehicle_id === 'all' || !stopData.name) {
     switch (params.locale) {
       case 'pt':
-        return { title: 'Todas as Paragens', description: 'Conheça as paragens e horários da Carris Metropolitana' };
+        return { title: 'Todos os Veículos', description: 'Conheça os veículos da operação da Carris Metropolitana' };
       default:
       case 'en':
-        return { title: 'Todas as Paragens', description: 'Conheça as paragens e horários da Carris Metropolitana' };
+        return { title: 'Todas os Veículos', description: 'Conheça os veículos da operação da Carris Metropolitana' };
     }
   } else {
     switch (params.locale) {
