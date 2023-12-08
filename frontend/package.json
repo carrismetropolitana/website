@@ -1,6 +1,6 @@
 {
     "name": "@carrismetropolitana/website",
-    "version": "2023.12.06-2223",
+    "version": "2023.12.08-0234",
     "private": true,
     "scripts": {
         "dev": "next dev",
@@ -10,11 +10,11 @@
         "lint": "next lint"
     },
     "dependencies": {
-        "@mantine/core": "7.3.0",
-        "@mantine/dates": "7.3.0",
-        "@mantine/form": "7.3.0",
-        "@mantine/hooks": "7.3.0",
-        "@mantine/modals": "7.3.0",
+        "@mantine/core": "7.3.1",
+        "@mantine/dates": "7.3.1",
+        "@mantine/form": "7.3.1",
+        "@mantine/hooks": "7.3.1",
+        "@mantine/modals": "7.3.1",
         "@rajesh896/broprint.js": "2.1.1",
         "@tabler/icons-react": "2.42.0",
         "@turf/turf": "6.5.0",
@@ -22,7 +22,7 @@
         "inflected": "2.1.0",
         "luxon": "3.4.4",
         "maplibre-gl": "3.6.2",
-        "next": "14.0.3",
+        "next": "14.0.4",
         "next-intl": "3.3.1",
         "react": "18.2.0",
         "react-dom": "18.2.0",
@@ -36,7 +36,7 @@
         "@types/react": "18.2.42",
         "@types/react-dom": "18.2.17",
         "eslint": "8.55.0",
-        "eslint-config-next": "14.0.3",
+        "eslint-config-next": "14.0.4",
         "postcss": "8.4.32",
         "postcss-preset-mantine": "1.11.1",
         "postcss-simple-vars": "7.0.1",
