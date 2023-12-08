@@ -42,9 +42,11 @@ export default function LinesExplorerContentPatternPathStopTimetable({ stopSeque
     // [{ hour: '07', minutes: ['23', '45'] }]
     let timetableTemp = [];
     // For each schedule for the selected stop, build the timetable
-    schedulesForSelectedDateAndStop.map((item) => {
+    schedulesForSelectedDateAndStop.forEach((item) => {
+      // Return ealy if the schedule is undefined
+      if (!item) return;
       // Parse the arrival_hour
-      const arrival_hour = item ? item.arrival_time.substr(0, 2) : null; // [12]:34
+      const arrival_hour = item.arrival_time?.substr(0, 2); // [12]:34
       // Cycle through each formatted schedule in the timetable variable above
       // to check if there is already an entry for the given 'arrival_hour'
       const existingTimetableEntry = timetableTemp.find((item) => item.hour === arrival_hour);
