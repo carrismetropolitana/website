@@ -13,7 +13,6 @@ module.exports = withNextIntl({
         protocol: 'https',
         hostname: 'www.carrismetropolitana.pt',
         port: '',
-        // pathname: '/account123/**'
       },
     ],
   },
@@ -25,6 +24,8 @@ module.exports = withNextIntl({
       //
       { source: '/lines', destination: '/lines/all', permanent: true },
       { source: '/horarios', destination: '/lines/all', permanent: true },
+      //
+      { source: '/vehicles', destination: '/vehicles/all', permanent: true },
       //
       { source: '/espacos-navegante', destination: '/encm', permanent: true },
     ];

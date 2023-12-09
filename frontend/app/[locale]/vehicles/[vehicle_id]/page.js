@@ -1,8 +1,8 @@
 /* * */
 
 import { OneFullColumn } from '@/components/Layouts/Layouts';
-import { StopsExplorerContextProvider } from '@/contexts/StopsExplorerContext';
-import StopsExplorer from '@/components/StopsExplorer/StopsExplorer';
+import { VehiclesExplorerContextProvider } from '@/contexts/VehiclesExplorerContext';
+import VehiclesExplorer from '@/components/VehiclesExplorer/VehiclesExplorer';
 
 /* * */
 
@@ -44,9 +44,9 @@ export default function Page() {
 
   return (
     <OneFullColumn>
-      <StopsExplorerContextProvider>
-        <StopsExplorer />
-      </StopsExplorerContextProvider>
+      <VehiclesExplorerContextProvider>
+        <VehiclesExplorer />
+      </VehiclesExplorerContextProvider>
     </OneFullColumn>
   );
 

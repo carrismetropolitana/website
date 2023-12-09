@@ -7,7 +7,7 @@ import OpenGraphStopsDynamic from 'opengraph/OpenGraphStopsDynamic';
 
 /* * */
 
-export const alt = 'Mais sobre esta paragem';
+export const alt = 'Mais sobre este veículo';
 export const size = { width: 1200, height: 630 };
 export const contentType = 'image/png';
 
