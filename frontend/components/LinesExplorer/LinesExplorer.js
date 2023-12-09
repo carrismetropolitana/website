@@ -7,7 +7,7 @@ import Pannel from '@/components/Pannel/Pannel';
 import { useTranslations } from 'next-intl';
 import LinesExplorerToolbar from '@/components/LinesExplorerToolbar/LinesExplorerToolbar';
 import LinesExplorerContent from '@/components/LinesExplorerContent/LinesExplorerContent';
-import BetaIcon from '../BetaIcon/BetaIcon';
+import BetaIcon from '@/components/BetaIcon/BetaIcon';
 
 /* * */
 
