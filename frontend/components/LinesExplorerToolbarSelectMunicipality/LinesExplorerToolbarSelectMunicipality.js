@@ -1,5 +1,7 @@
 'use client';
 
+/* * */
+
 import useSWR from 'swr';
 import { Select } from '@mantine/core';
 import { useMemo } from 'react';
@@ -39,8 +41,12 @@ export default function LinesExplorerToolbarSelectMunicipality() {
   // D. Handle actions
 
   const handleSelectMunicipality = (chosenSelectItemValue) => {
-    if (chosenSelectItemValue) linesExplorerContext.selectMunicipality(chosenSelectItemValue);
-    else linesExplorerContext.clearSelectedMunicipality();
+    if (chosenSelectItemValue) {
+      const foundMunicipality = allMunicipalitiesData.find((item) => item.id === chosenSelectItemValue);
+      if (foundMunicipality) linesExplorerContext.selectMunicipality(foundMunicipality);
+    } else {
+      linesExplorerContext.clearSelectedMunicipality();
+    }
   };
 
   //
@@ -51,4 +57,6 @@ export default function LinesExplorerToolbarSelectMunicipality() {
       <Select aria-label={t('label')} placeholder={t('placeholder')} nothingFoundMessage={t('no_results')} onChange={handleSelectMunicipality} value={linesExplorerContext.entities.municipality?.id || null} data={allMunicipalitiesDataFormatted} radius="sm" size="md" w="100%" searchable clearable />
     </div>
   );
+
+  //
 }

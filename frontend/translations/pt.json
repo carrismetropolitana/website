@@ -388,6 +388,11 @@
         "placeholder": "Filtrar por município",
         "no_results": "Nenhum Resultado Encontrado"
     },
+    "LinesExplorerToolbarSelectLocality": {
+        "label": "Filtrar por localidade",
+        "placeholder": "Filtrar por localidade",
+        "no_results": "Nenhum Resultado Encontrado"
+    },
     "LinesExplorerSelectDate": {
         "today": "Hoje",
         "tomorrow": "Amanhã",

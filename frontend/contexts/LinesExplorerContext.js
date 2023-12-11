@@ -19,6 +19,7 @@ const initialMapState = {
 const initialEntitiesState = {
   //
   municipality: null,
+  locality: null,
   //
   date: null,
   //
@@ -64,7 +65,6 @@ export function LinesExplorerContextProvider({ children }) {
   // B. Fetch data
 
   const { data: allLinesData } = useSWR('https://api.carrismetropolitana.pt/lines');
-  const { data: allMunicipalitiesData } = useSWR('https://api.carrismetropolitana.pt/municipalities');
 
   //
   // C. Supporting functions
@@ -82,18 +82,22 @@ export function LinesExplorerContextProvider({ children }) {
   //
   // B. Setup actions
 
-  const selectMunicipality = useCallback(
-    (municipalityId) => {
-      const foundMunicipality = allMunicipalitiesData.find((item) => item.id === municipalityId);
-      if (foundMunicipality) {
-        setEntitiesState((prev) => ({ ...prev, municipality: foundMunicipality }));
-      }
-    },
-    [allMunicipalitiesData]
-  );
+  const selectMunicipality = useCallback((municipalityData) => {
+    setEntitiesState((prev) => ({ ...prev, municipality: municipalityData }));
+  }, []);
 
   const clearSelectedMunicipality = useCallback(() => {
     setEntitiesState((prev) => ({ ...prev, municipality: null }));
+  }, []);
+
+  // ---------
+
+  const selectLocality = useCallback((localityData) => {
+    setEntitiesState((prev) => ({ ...prev, locality: localityData }));
+  }, []);
+
+  const clearSelectedLocality = useCallback(() => {
+    setEntitiesState((prev) => ({ ...prev, locality: null }));
   }, []);
 
   // ---------
@@ -189,6 +193,9 @@ export function LinesExplorerContextProvider({ children }) {
       selectMunicipality,
       clearSelectedMunicipality,
       //
+      selectLocality,
+      clearSelectedLocality,
+      //
       selectLine,
       clearSelectedLine,
       //
@@ -205,7 +212,26 @@ export function LinesExplorerContextProvider({ children }) {
       disableAutoZoom,
       //
     }),
-    [mapState, updateMapState, entitiesState, updateEntitiesState, selectMunicipality, clearSelectedMunicipality, selectLine, clearSelectedLine, selectDate, clearSelectedDate, selectPattern, clearSelectedPattern, selectStop, clearSelectedStop, enableAutoZoom, disableAutoZoom]
+    [
+      clearSelectedDate,
+      clearSelectedLine,
+      clearSelectedLocality,
+      clearSelectedMunicipality,
+      clearSelectedPattern,
+      clearSelectedStop,
+      disableAutoZoom,
+      enableAutoZoom,
+      entitiesState,
+      mapState,
+      selectDate,
+      selectLine,
+      selectLocality,
+      selectMunicipality,
+      selectPattern,
+      selectStop,
+      updateEntitiesState,
+      updateMapState,
+    ]
   );
 
   //

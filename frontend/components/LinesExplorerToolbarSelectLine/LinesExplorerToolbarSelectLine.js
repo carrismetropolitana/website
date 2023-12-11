@@ -41,6 +41,9 @@ export default function LinesExplorerToolbarSelectLine() {
       if (linesExplorerContext.entities.municipality) {
         allLinesDataFiltered = allLinesDataFiltered.filter((line) => new Set(line.municipalities).has(linesExplorerContext.entities.municipality?.id));
       }
+      if (linesExplorerContext.entities.locality) {
+        allLinesDataFiltered = allLinesDataFiltered.filter((line) => new Set(line.localities).has(linesExplorerContext.entities.locality?.locality));
+      }
       return allLinesDataFiltered.map((line) => {
         return {
           id: line.id,
@@ -52,7 +55,7 @@ export default function LinesExplorerToolbarSelectLine() {
         };
       });
     }
-  }, [allLinesData, linesExplorerContext.entities.municipality]);
+  }, [allLinesData, linesExplorerContext.entities.locality, linesExplorerContext.entities.municipality]);
 
   //
   // D. Search
