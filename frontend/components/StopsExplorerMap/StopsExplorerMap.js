@@ -86,6 +86,7 @@ export default function StopsExplorerMap() {
         ...selectedShapeData.geojson,
         properties: {
           color: selectedPatternData.color,
+          text_color: selectedPatternData.text_color,
         },
       };
     }
@@ -287,7 +288,7 @@ export default function StopsExplorerMap() {
               'icon-image': 'cm-bus-regular',
               'icon-size': ['interpolate', ['linear', 0.5], ['zoom'], 10, 0.05, 20, 0.15],
               'icon-offset': [0, 0],
-              'icon-rotate': selectedVehicleMapData.properties.heading || 0,
+              'icon-rotate': ['get', 'heading'],
             }}
           />
           <Layer
@@ -303,7 +304,7 @@ export default function StopsExplorerMap() {
               'icon-image': 'cm-bus-delay',
               'icon-size': ['interpolate', ['linear', 0.5], ['zoom'], 10, 0.05, 20, 0.15],
               'icon-offset': [0, 0],
-              'icon-rotate': selectedVehicleMapData.properties.heading || 0,
+              'icon-rotate': ['get', 'heading'],
             }}
             paint={{
               'icon-opacity': ['interpolate', ['linear', 0.5], ['get', 'delay'], 20, 0, 40, 1],
@@ -404,7 +405,7 @@ export default function StopsExplorerMap() {
               'line-cap': 'round',
             }}
             paint={{
-              'line-color': selectedShapeMapData.properties.color,
+              'line-color': ['get', 'color'],
               'line-width': ['interpolate', ['linear'], ['zoom'], 10, 4, 20, 12],
             }}
           />

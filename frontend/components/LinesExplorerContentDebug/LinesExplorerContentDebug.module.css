@@ -1,0 +1,13 @@
+/* * */
+/* CONTAINER */
+
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: var(--size-lg);
+  width: 100%;
+  border-bottom: 1px solid var(--gray3);
+  background-color: var(--reference-0);
+  align-items: flex-start;
+}

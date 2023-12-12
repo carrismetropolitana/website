@@ -4,3 +4,11 @@
 .container {
   display: flex;
 }
+
+/* * */
+/* VALIDATING */
+
+.validating {
+  font-weight: 800;
+  opacity: 0.5;
+}

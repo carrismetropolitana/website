@@ -1,5 +1,7 @@
 'use client';
 
+/* * */
+
 import styles from './StopsExplorer.module.css';
 import useSWR from 'swr';
 import { useEffect } from 'react';
@@ -35,14 +37,14 @@ export default function StopsExplorer() {
   });
 
   //
-  // B. Fetch data
+  // C. Fetch data
 
   const { data: allStopsData, error: allStopsError, isLoading: allStopsLoading } = useSWR('https://api.carrismetropolitana.pt/stops');
-  const { isValidating: allVehiclesValidating } = useSWR('https://api.carrismetropolitana.pt/vehicles', { refreshInterval: 5000 });
+  const { isValidating: allVehiclesValidating } = useSWR('https://api.carrismetropolitana.pt/vehicles');
   const { isValidating: stopRealtimeValidating } = useSWR(stopsExplorerContext.entities.stop?.id && `https://api.carrismetropolitana.pt/stops/${stopsExplorerContext.entities.stop.id}/realtime`, { refreshInterval: 5000 });
 
   //
-  // C. Handle actions
+  // D. Handle actions
 
   useEffect(() => {
     const matchedStopIdFromUrl = window.location.pathname.match(/\/stops\/(.+)/);
@@ -52,7 +54,7 @@ export default function StopsExplorer() {
   });
 
   //
-  // D. Render components
+  // E. Render components
 
   return (
     <Pannel

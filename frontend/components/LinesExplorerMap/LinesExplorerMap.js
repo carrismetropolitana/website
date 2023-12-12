@@ -4,12 +4,14 @@
 
 import useSWR from 'swr';
 import OSMMap from '@/components/OSMMap/OSMMap';
+import styles from './LinesExplorerMap.module.css';
 import { useCallback, useEffect, useMemo } from 'react';
 import * as turf from '@turf/turf';
 import { useMap, Source, Layer, Popup, GeolocateControl } from 'react-map-gl/maplibre';
 import { useDebugContext } from '@/contexts/DebugContext';
 import { useLinesExplorerContext } from '@/contexts/LinesExplorerContext';
 import generateUUID from '@/services/generateUUID';
+import CopyBadge from '@/components/CopyBadge/CopyBadge';
 
 /* * */
 
@@ -65,82 +67,77 @@ export default function LinesExplorerMap() {
   }, [allStopsData]);
 
   const patternStopsMapData = useMemo(() => {
+    if (!linesExplorerContext.entities.pattern?.path?.length) return null;
     const geoJSON = { type: 'FeatureCollection', features: [] };
-    if (linesExplorerContext.entities.pattern?.path) {
-      for (const patternPath of linesExplorerContext.entities.pattern.path) {
-        geoJSON.features.push({
-          type: 'Feature',
-          geometry: { type: 'Point', coordinates: [patternPath.stop.lon, patternPath.stop.lat] },
-          properties: {
-            mapid: `${patternPath.stop.id}|${generateUUID()}`,
-            id: patternPath.stop.id,
-            name: patternPath.stop.name,
-            lat: patternPath.stop.lat,
-            lon: patternPath.stop.lon,
-            stop_sequence: patternPath.stop_sequence,
-            color: linesExplorerContext.entities.pattern.color,
-            text_color: linesExplorerContext.entities.pattern.text_color,
-          },
-        });
-      }
+    for (const patternPath of linesExplorerContext.entities.pattern.path) {
+      geoJSON.features.push({
+        type: 'Feature',
+        geometry: { type: 'Point', coordinates: [patternPath.stop.lon, patternPath.stop.lat] },
+        properties: {
+          mapid: `${patternPath.stop.id}|${generateUUID()}`,
+          id: patternPath.stop.id,
+          name: patternPath.stop.name,
+          lat: patternPath.stop.lat,
+          lon: patternPath.stop.lon,
+          stop_sequence: patternPath.stop_sequence,
+          color: linesExplorerContext.entities.pattern.color,
+          text_color: linesExplorerContext.entities.pattern.text_color,
+        },
+      });
     }
     return geoJSON;
   }, [linesExplorerContext.entities.pattern]);
 
   const selectedStopMapData = useMemo(() => {
-    if (linesExplorerContext.entities.pattern?.color && linesExplorerContext.entities.stop) {
+    if (!linesExplorerContext.entities.pattern?.color || !linesExplorerContext.entities.stop?.lon) return null;
+    return {
+      type: 'Feature',
+      geometry: {
+        type: 'Point',
+        coordinates: [linesExplorerContext.entities.stop.lon, linesExplorerContext.entities.stop.lat],
+      },
+      properties: {
+        color: linesExplorerContext.entities.pattern.color,
+        text_color: linesExplorerContext.entities.pattern.text_color,
+      },
+    };
+  }, [linesExplorerContext.entities.pattern, linesExplorerContext.entities.stop]);
+
+  const selectedShapeMapData = useMemo(() => {
+    if (!linesExplorerContext.entities.pattern?.color || !selectedShapeData) return null;
+    return {
+      ...selectedShapeData.geojson,
+      properties: {
+        color: linesExplorerContext.entities.pattern.color || '#000000',
+        text_color: linesExplorerContext.entities.pattern.text_color || '#ffffff',
+      },
+    };
+  }, [linesExplorerContext.entities.pattern, selectedShapeData]);
+
+  const selectedVehiclesMapData = useMemo(() => {
+    if (!allVehiclesData || !linesExplorerContext.entities.pattern?.id) return null;
+    const geoJSON = { type: 'FeatureCollection', features: [] };
+    const selectedVehiclesData = allVehiclesData.filter((item) => item.pattern_id === linesExplorerContext.entities.pattern.id);
+    geoJSON.features = selectedVehiclesData.map((vehicleData) => {
       return {
         type: 'Feature',
         geometry: {
           type: 'Point',
-          coordinates: [linesExplorerContext.entities.stop.lon, linesExplorerContext.entities.stop.lat],
+          coordinates: [vehicleData.lon, vehicleData.lat],
         },
         properties: {
-          color: linesExplorerContext.entities.pattern.color,
-          text_color: linesExplorerContext.entities.pattern.text_color,
+          id: vehicleData.id,
+          speed: vehicleData.speed,
+          timestamp: vehicleData.timestamp,
+          timeString: new Date(vehicleData.timestamp * 1000).toLocaleString(),
+          delay: Math.floor(Date.now() / 1000) - vehicleData.timestamp,
+          heading: vehicleData.heading,
+          trip_id: vehicleData.trip_id,
+          pattern_id: vehicleData.pattern_id,
+          status: vehicleData.status,
         },
       };
-    }
-    return null;
-  }, [linesExplorerContext.entities.pattern, linesExplorerContext.entities.stop]);
-
-  const selectedShapeMapData = useMemo(() => {
-    if (linesExplorerContext.entities.pattern?.color && selectedShapeData) {
-      return {
-        ...selectedShapeData.geojson,
-        properties: {
-          color: linesExplorerContext.entities.pattern.color,
-        },
-      };
-    }
-    return null;
-  }, [linesExplorerContext.entities.pattern, selectedShapeData]);
-
-  const selectedVehiclesMapData = useMemo(() => {
-    const geoJSON = { type: 'FeatureCollection', features: [] };
-    if (allVehiclesData && linesExplorerContext.entities.pattern?.id) {
-      const selectedVehiclesData = allVehiclesData.filter((item) => item.pattern_id === linesExplorerContext.entities.pattern.id);
-      geoJSON.features = selectedVehiclesData.map((vehicleData) => {
-        return {
-          type: 'Feature',
-          geometry: {
-            type: 'Point',
-            coordinates: [vehicleData.lon, vehicleData.lat],
-          },
-          properties: {
-            id: vehicleData.id,
-            speed: vehicleData.speed,
-            timestamp: vehicleData.timestamp,
-            timeString: new Date(vehicleData.timestamp * 1000).toLocaleString(),
-            delay: Math.floor(Date.now() / 1000) - vehicleData.timestamp,
-            heading: vehicleData.heading,
-            trip_id: vehicleData.trip_id,
-            pattern_id: vehicleData.pattern_id,
-            status: vehicleData.status,
-          },
-        };
-      });
-    }
+    });
     return geoJSON;
   }, [allVehiclesData, linesExplorerContext.entities.pattern?.id]);
 
@@ -253,15 +250,6 @@ export default function LinesExplorerMap() {
 
   const handleMapMove = () => {
     linesExplorerContext.disableAutoZoom();
-    // Get all currently rendered features and mark all of them as unselected
-    // const allRenderedFeatures = linesExplorerMap.queryRenderedFeatures();
-    // allRenderedFeatures.forEach(function (f) {
-    //   linesExplorerMap.setFeatureState({ source: 'all-stops', id: f.id }, { selected: false });
-    // });
-    // // Then mark the selected one as selected
-    // if (linesExplorerContext.map.selected_feature) {
-    //   linesExplorerMap.setFeatureState({ source: 'all-stops', id: linesExplorerContext.map.selected_feature.properties.mapid }, { selected: true });
-    // }
   };
 
   useEffect(() => {
@@ -276,37 +264,24 @@ export default function LinesExplorerMap() {
   return (
     <OSMMap id="linesExplorerMap" mapStyle={linesExplorerContext.map.style} onClick={handleMapClick} onMouseEnter={handleMapMouseEnter} onMouseLeave={handleMapMouseLeave} onMove={handleMapMove} interactiveLayerIds={['pattern-stops']}>
       <GeolocateControl />
-      {/* {selectedVehiclesMapData && debugContext.isDebug && (
-        <Popup closeButton={false} closeOnClick={false} latitude={selectedVehiclesMapData.geometry.coordinates[1]} longitude={selectedVehiclesMapData.geometry.coordinates[0]} anchor="bottom">
-          <div>Vehicle ID: {selectedVehiclesMapData.properties.id}</div>
-          <div>Timestamp: {selectedVehiclesMapData.properties.timeString}</div>
-          <div>Delay: {selectedVehiclesMapData.properties.delay} seconds</div>
-          <div>Inferred Status: {selectedVehiclesMapData.properties.status}</div>
-        </Popup>
-      )} */}
-
+      {selectedVehiclesMapData &&
+        debugContext.isDebug &&
+        selectedVehiclesMapData.features.map((vehicle) => (
+          <Popup key={vehicle.properties.id} closeButton={false} closeOnClick={false} latitude={vehicle.geometry.coordinates[1]} longitude={vehicle.geometry.coordinates[0]} anchor="bottom" maxWidth="fit-content" offset={15}>
+            <div className={styles.popupWrapper}>
+              <CopyBadge label={`Vehicle ID: ${vehicle.properties.id}`} value={vehicle.properties.id} />
+              <CopyBadge label={`Timestamp: ${vehicle.properties.timeString}`} value={vehicle.properties.timeString} />
+              <CopyBadge label={`Delay: ${vehicle.properties.delay} seconds`} value={vehicle.properties.delay} />
+              <CopyBadge label={`Trip ID: ${vehicle.properties.trip_id}`} value={vehicle.properties.trip_id} />
+              <CopyBadge label={`Inferred Status: ${vehicle.properties.status}`} value={vehicle.properties.status} />
+            </div>
+          </Popup>
+        ))}
       {selectedVehiclesMapData && (
         <Source id="selected-vehicles" type="geojson" data={selectedVehiclesMapData} generateId={true}>
           <Layer
-            id="selected-vehicles"
+            id="selected-vehicles-delay"
             source="selected-vehicles"
-            type="symbol"
-            layout={{
-              'icon-allow-overlap': true,
-              'icon-ignore-placement': true,
-              'icon-anchor': 'center',
-              'symbol-placement': 'point',
-              'icon-rotation-alignment': 'map',
-              'icon-image': 'cm-bus-regular',
-              'icon-size': ['interpolate', ['linear', 0.5], ['zoom'], 10, 0.05, 20, 0.15],
-              'icon-offset': [0, 0],
-              'icon-rotate': ['get', 'heading'],
-            }}
-          />
-          <Layer
-            id="selected-vehicles-dead"
-            source="selected-vehicles"
-            beforeId={'selected-vehicles'}
             type="symbol"
             layout={{
               'icon-allow-overlap': true,
@@ -323,15 +298,31 @@ export default function LinesExplorerMap() {
               'icon-opacity': ['interpolate', ['linear', 0.5], ['get', 'delay'], 20, 0, 40, 1],
             }}
           />
+          <Layer
+            id="selected-vehicles-normal"
+            beforeId="selected-vehicles-delay"
+            source="selected-vehicles"
+            type="symbol"
+            layout={{
+              'icon-allow-overlap': true,
+              'icon-ignore-placement': true,
+              'icon-anchor': 'center',
+              'symbol-placement': 'point',
+              'icon-rotation-alignment': 'map',
+              'icon-image': 'cm-bus-regular',
+              'icon-size': ['interpolate', ['linear', 0.5], ['zoom'], 10, 0.05, 20, 0.15],
+              'icon-offset': [0, 0],
+              'icon-rotate': ['get', 'heading'],
+            }}
+          />
         </Source>
       )}
-
       {selectedStopMapData && (
         <Source id="selected-stop" type="geojson" data={selectedStopMapData} generateId={true}>
           <Layer
             id="selected-stop-stick"
+            beforeId={selectedVehiclesMapData && 'selected-vehicles-normal'}
             source="selected-stop"
-            beforeId={selectedVehiclesMapData.length > 0 && 'selected-vehicles-dead'}
             type="symbol"
             layout={{
               'icon-allow-overlap': true,
@@ -348,8 +339,8 @@ export default function LinesExplorerMap() {
           />
           <Layer
             id="selected-stop-base"
-            source="selected-stop"
             beforeId="selected-stop-stick"
+            source="selected-stop"
             type="circle"
             paint={{
               'circle-color': ['get', 'text_color'],
@@ -361,13 +352,12 @@ export default function LinesExplorerMap() {
           />
         </Source>
       )}
-
       {patternStopsMapData && (
         <Source id="pattern-stops" type="geojson" data={patternStopsMapData} generateId={true}>
           <Layer
             id="pattern-stops"
+            beforeId={selectedStopMapData ? 'selected-stop-base' : selectedVehiclesMapData && 'selected-vehicles-normal'}
             source="pattern-stops"
-            beforeId={selectedStopMapData && 'selected-stop-base'}
             type="circle"
             paint={{
               'circle-color': ['get', 'text_color'],
@@ -379,30 +369,12 @@ export default function LinesExplorerMap() {
           />
         </Source>
       )}
-
-      {/* {allStopsMapData && (
-        <Source id="all-stops" type="geojson" data={allStopsMapData} generateId={false} promoteId={'mapid'}>
-          <Layer
-            id="all-stops"
-            source="all-stops"
-            type="circle"
-            paint={{
-              'circle-color': '#ffffff',
-              'circle-radius': ['interpolate', ['linear', 0.5], ['zoom'], 9, 1, 26, 10],
-              'circle-stroke-width': ['interpolate', ['linear', 0.5], ['zoom'], 9, 1, 26, 2],
-              'circle-stroke-color': '#000000',
-              'circle-pitch-alignment': 'map',
-            }}
-          />
-        </Source>
-      )} */}
-
       {selectedShapeMapData && (
         <Source id="selected-shape" type="geojson" data={selectedShapeMapData} generateId={true}>
           <Layer
             id="selected-shape-direction"
-            source="selected-shape"
             beforeId={patternStopsMapData && 'pattern-stops'}
+            source="selected-shape"
             type="symbol"
             layout={{
               'icon-allow-overlap': true,
@@ -416,21 +388,21 @@ export default function LinesExplorerMap() {
               'icon-rotate': 90,
             }}
             paint={{
-              'icon-color': '#ffffff',
+              'icon-color': ['get', 'text_color'],
               'icon-opacity': 0.8,
             }}
           />
           <Layer
             id="selected-shape-line"
-            source="selected-shape"
             beforeId="selected-shape-direction"
+            source="selected-shape"
             type="line"
             layout={{
               'line-join': 'round',
               'line-cap': 'round',
             }}
             paint={{
-              'line-color': selectedShapeMapData.properties.color,
+              'line-color': ['get', 'color'],
               'line-width': ['interpolate', ['linear'], ['zoom'], 10, 4, 20, 12],
             }}
           />
