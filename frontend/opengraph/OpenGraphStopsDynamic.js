@@ -76,7 +76,7 @@ export default function OpenGraphStopsDynamic({ stopData, allLinesData }) {
         )}
         <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', justifyContent: 'flex-start', gap: 25 }}>
           {allLinesData.slice(0, availableSlotsForLines).map((item) => (
-            <OpenGraphLineBadge key={item.id} shortName={item.short_name} />
+            <OpenGraphLineBadge key={item.id} shortName={item.short_name} color={item.color} textColor={item.text_color} />
           ))}
           {extraHiddenLinesAmount > 0 && <OpenGraphExtraHiddenLines amount={extraHiddenLinesAmount} />}
         </div>
@@ -140,7 +140,7 @@ function OpenGraphStopLocation({ locality, municipalityName }) {
   );
 }
 
-function OpenGraphLineBadge({ shortName }) {
+function OpenGraphLineBadge({ shortName, color, textColor }) {
   return (
     <div
       style={{
@@ -151,12 +151,12 @@ function OpenGraphLineBadge({ shortName }) {
         alignItems: 'center',
         justifyContent: 'center',
         borderRadius: 999,
-        backgroundColor: '#ED1944',
+        backgroundColor: color,
         fontSize: 50,
         fontWeight: 700,
         paddingTop: 4,
         lineHeight: 1,
-        color: '#fff',
+        color: textColor,
       }}
     >
       {shortName}
