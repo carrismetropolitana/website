@@ -28,31 +28,18 @@ export default async function Image({ params }) {
   //
   // B. Fetch data
 
-  const lineData = await fetch(params.line_id?.length && `https://api.carrismetropolitana.pt/stops/${params.line_id}`).then((res) => res.json());
+  const lineData = await fetch(params.line_id?.length && `https://api.carrismetropolitana.pt/lines/${params.line_id}`).then((res) => res.json());
 
   //
   // C. Render default component
-
   if (params.line_id === 'all' || !lineData?.id) {
     return new ImageResponse(<OpenGraphLinesDefault />, { ...size, fonts: customFonts });
   }
 
-  // - - -
-
   //
-  // D. Fetch additional data
+  // D. Render dynamic component
 
-  const allLinesData = [];
-
-  for (const lineId of lineData.lines) {
-    const lineData = await fetch(`https://api.carrismetropolitana.pt/lines/${lineId}`).then((res) => res.json());
-    allLinesData.push(lineData);
-  }
-
-  //
-  // E. Render dynamic component
-
-  return new ImageResponse(<OpenGraphLinesDynamic lineData={lineData} allLinesData={allLinesData} />, { ...size, fonts: customFonts });
+  return new ImageResponse(<OpenGraphLinesDynamic lineData={lineData} />, { ...size, fonts: customFonts });
 
   //
 }

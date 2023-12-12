@@ -1,51 +1,55 @@
+/* * */
+
 import CarrisMetropolitanaLogo from '@/components/CarrisMetropolitanaLogo/CarrisMetropolitanaLogo';
 import parseStopLocationName from '@/services/parseStopLocationName';
 import cutStringAtLength from '@/services/cutStringAtLength';
 import FacilityIcon from '@/components/Facilities/FacilityIcon';
 
-export default function OpenGraphLinesDynamic({ lineData, allLinesData }) {
+/* * */
+
+export default function OpenGraphLinesDynamic({ lineData }) {
   //
 
   //
   // A. Settings
 
-  let availableSlotsForLines = 4;
-  let facilitiesIconSize = 120;
+  //   let availableSlotsForLines = 4;
+  //   let facilitiesIconSize = 120;
 
-  switch (lineData.facilities.length) {
-    case 0:
-      availableSlotsForLines = 4;
-      facilitiesIconSize = 120;
-      break;
-    case 1:
-      availableSlotsForLines = 3;
-      facilitiesIconSize = 120;
-      break;
-    case 2:
-      availableSlotsForLines = 2;
-      facilitiesIconSize = 120;
-      break;
-    case 3:
-      availableSlotsForLines = 2;
-      facilitiesIconSize = 105;
-      break;
-    case 4:
-      availableSlotsForLines = 1;
-      facilitiesIconSize = 120;
-      break;
-    case 5:
-      availableSlotsForLines = 1;
-      facilitiesIconSize = 100;
-      break;
-    default:
-      availableSlotsForLines = 0;
-      facilitiesIconSize = 100;
-      break;
-  }
+  //   switch (lineData.facilities.length) {
+  //     case 0:
+  //       availableSlotsForLines = 4;
+  //       facilitiesIconSize = 120;
+  //       break;
+  //     case 1:
+  //       availableSlotsForLines = 3;
+  //       facilitiesIconSize = 120;
+  //       break;
+  //     case 2:
+  //       availableSlotsForLines = 2;
+  //       facilitiesIconSize = 120;
+  //       break;
+  //     case 3:
+  //       availableSlotsForLines = 2;
+  //       facilitiesIconSize = 105;
+  //       break;
+  //     case 4:
+  //       availableSlotsForLines = 1;
+  //       facilitiesIconSize = 120;
+  //       break;
+  //     case 5:
+  //       availableSlotsForLines = 1;
+  //       facilitiesIconSize = 100;
+  //       break;
+  //     default:
+  //       availableSlotsForLines = 0;
+  //       facilitiesIconSize = 100;
+  //       break;
+  //   }
 
-  if (allLinesData.length - availableSlotsForLines === 1) availableSlotsForLines++;
+  //   if (allLinesData.length - availableSlotsForLines === 1) availableSlotsForLines++;
 
-  const extraHiddenLinesAmount = allLinesData.length - availableSlotsForLines;
+  //   const extraHiddenLinesAmount = allLinesData.length - availableSlotsForLines;
 
   //
   // D. Render components
@@ -54,54 +58,54 @@ export default function OpenGraphLinesDynamic({ lineData, allLinesData }) {
     <div style={{ height: '100%', width: '100%', display: 'flex', padding: 50, backgroundColor: '#fff', alignItems: 'flex-start', justifyContent: 'flex-start', flexDirection: 'column' }}>
       <div style={{ width: '100%', display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
         <CarrisMetropolitanaLogo height={130} />
-        <OpenGraphStopId id={lineData.id} />
       </div>
 
       <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-start', justifyContent: 'flex-start', gap: 15, marginLeft: 15, marginTop: 70, marginBottom: 40 }}>
-        <OpenGraphStopName name={lineData.name} />
-        <OpenGraphStopLocation locality={lineData.locality} municipalityName={lineData.municipality_name} />
+        <OpenGraphLineShortName shortName={lineData.short_name} color={lineData.color} textColor={lineData.text_color} />
+        <OpenGraphLineLongName longName={lineData.long_name} />
+        <OpenGraphLineLocalities localities={lineData.localities} />
       </div>
 
       <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', justifyContent: 'flex-start', gap: 50, padding: 10 }}>
-        {lineData.facilities.length > 0 && (
+        {/* {lineData.facilities.length > 0 && (
           <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'flex-start', justifyContent: 'flex-start', gap: 25 }}>
             {lineData.facilities.map((item) => (
               <FacilityIcon key={item} name={item} size={facilitiesIconSize} />
             ))}
           </div>
-        )}
-        <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', justifyContent: 'flex-start', gap: 25 }}>
+        )} */}
+        {/* <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', justifyContent: 'flex-start', gap: 25 }}>
           {allLinesData.slice(0, availableSlotsForLines).map((item) => (
             <OpenGraphLineBadge key={item.id} shortName={item.short_name} />
           ))}
           {extraHiddenLinesAmount > 0 && <OpenGraphExtraHiddenLines amount={extraHiddenLinesAmount} />}
-        </div>
+        </div> */}
       </div>
     </div>
   );
 }
 
-function OpenGraphStopId({ id }) {
+function OpenGraphLineShortName({ shortName, color, textColor }) {
   return (
     <div
       style={{
         display: 'flex',
-        backgroundColor: '#f1f3f5',
-        fontSize: 50,
+        backgroundColor: color,
+        fontSize: 60,
         fontWeight: 700,
-        color: '#868e96',
+        color: textColor,
         lineHeight: 1,
         padding: '15px 40px 13px 40px',
         borderRadius: 999,
       }}
     >
-      #{id}
+      {shortName}
     </div>
   );
 }
 
-function OpenGraphStopName({ name }) {
-  const stopNameFormatted = cutStringAtLength(name, 50);
+function OpenGraphLineLongName({ longName }) {
+  const lineNameFormatted = cutStringAtLength(longName, 60);
   return (
     <div
       style={{
@@ -113,25 +117,25 @@ function OpenGraphStopName({ name }) {
         borderRadius: 999,
       }}
     >
-      {stopNameFormatted}
+      {lineNameFormatted}
     </div>
   );
 }
 
-function OpenGraphStopLocation({ locality, municipalityName }) {
-  const stopLocationFormatted = cutStringAtLength(parseStopLocationName(locality, municipalityName), 50);
+function OpenGraphLineLocalities({ localities }) {
+  const lineLocalitiesFormatted = cutStringAtLength(localities.join(' • '), 150);
   return (
     <div
       style={{
         display: 'flex',
-        fontSize: 48,
+        fontSize: 38,
         fontWeight: 600,
-        lineHeight: 1.1,
+        lineHeight: 1.3,
         color: '#919191',
         borderRadius: 999,
       }}
     >
-      {stopLocationFormatted}
+      {lineLocalitiesFormatted}
     </div>
   );
 }

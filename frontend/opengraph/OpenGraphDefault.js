@@ -1,4 +1,8 @@
+/* * */
+
 import CarrisMetropolitanaLogo from '@/components/CarrisMetropolitanaLogo/CarrisMetropolitanaLogo';
+
+/* * */
 
 export default function OpenGraphDefault() {
   return (

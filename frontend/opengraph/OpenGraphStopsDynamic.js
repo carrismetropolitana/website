@@ -1,7 +1,11 @@
+/* * */
+
 import CarrisMetropolitanaLogo from '@/components/CarrisMetropolitanaLogo/CarrisMetropolitanaLogo';
 import parseStopLocationName from '@/services/parseStopLocationName';
 import cutStringAtLength from '@/services/cutStringAtLength';
 import FacilityIcon from '@/components/Facilities/FacilityIcon';
+
+/* * */
 
 export default function OpenGraphStopsDynamic({ stopData, allLinesData }) {
   //
