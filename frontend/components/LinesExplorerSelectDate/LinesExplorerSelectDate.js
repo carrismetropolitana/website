@@ -8,6 +8,7 @@ import { DatePickerInput } from '@mantine/dates';
 import { useLinesExplorerContext } from '@/contexts/LinesExplorerContext';
 import styles from './LinesExplorerSelectDate.module.css';
 import parseDateToString from '@/services/parseDateToString';
+import { IconCalendar } from '@tabler/icons-react';
 
 /* * */
 
@@ -96,7 +97,8 @@ export default function LinesExplorerSelectDate() {
           onChange={handleSetDate}
           value={linesExplorerContext.entities.date}
           valueFormat="DD MMM YYYY"
-          classNames={{ input: `${styles.input} ${!isTodaySelected && !isTomorrowSelected && styles.isSelected}` }}
+          classNames={{ input: `${styles.input} ${!isTodaySelected && !isTomorrowSelected && styles.isSelected}`, section: styles.inputSection }}
+          leftSection={<IconCalendar size={14} />}
         />
       </div>
     </div>

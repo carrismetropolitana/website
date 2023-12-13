@@ -83,7 +83,15 @@
 /* * */
 /* INPUT */
 
+.input {
+  padding-left: 31px;
+}
+
 .input.isSelected {
   color: var(--reference-1);
   background-color: var(--reference-0);
+}
+
+.inputSection {
+  pointer-events: none;
 }
