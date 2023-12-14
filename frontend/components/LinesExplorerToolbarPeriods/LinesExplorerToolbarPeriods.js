@@ -53,12 +53,12 @@ export default function LinesExplorerToolbarPeriods() {
       });
       // Format the valid pairs into the display format
       const validPairsFormatted = validPairsFiltered.map((validPair) => {
-        const fromDateFormatted = DateTime.fromFormat(validPair.from, 'yyyyMMdd').toFormat('dd MMM yyyy');
-        const untilDateFormatted = DateTime.fromFormat(validPair.until, 'yyyyMMdd').toFormat('dd MMM yyyy');
+        const fromDateFormatted = DateTime.fromFormat(validPair.from, 'yyyyMMdd', { locale: 'pt' }).toFormat('dd MMM yyyy');
+        const untilDateFormatted = DateTime.fromFormat(validPair.until, 'yyyyMMdd', { locale: 'pt' }).toFormat('dd MMM yyyy');
         return { from: fromDateFormatted, until: untilDateFormatted };
       });
-      // Slice the valid pairs so that only the next is shown
-      const validPairsSliced = validPairsFormatted.slice(0, 1);
+      // Slice the valid pairs so that only the next two are shown
+      const validPairsSliced = validPairsFormatted.slice(0, 2);
       // Return the period object with the formatted valid pairs
       return {
         id: period.id,
@@ -87,25 +87,6 @@ export default function LinesExplorerToolbarPeriods() {
       </div>
     </>
   );
-
-  //   return (
-  //     <div className={styles.container}>
-  //       {periodsDataFormatted &&
-  //         periodsDataFormatted.map((item) => (
-  //           <div key={item.id} className={`${styles.period} ${item.isActive && styles.isActive}`}>
-  //             <h5 className={styles.periodName}>
-  //               {item.name}
-  //               {item.isActive && <LiveIcon color="#ffffff" />}
-  //             </h5>
-  //             {item.validPairs.map((validPair, index) => (
-  //               <p key={index} className={styles.validPair}>
-  //                 <span className={styles.validPairDate}>{validPair.from}</span> <IconArrowNarrowRight size={15} /> <span className={styles.validPairDate}>{validPair.until}</span>
-  //               </p>
-  //             ))}
-  //           </div>
-  //         ))}
-  //     </div>
-  //   );
 
   //
 }
