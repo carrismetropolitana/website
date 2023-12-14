@@ -8,7 +8,7 @@ import { useMemo, useState } from 'react';
 import { useTranslations } from 'next-intl';
 import styles from './LinesExplorerToolbarSelectLine.module.css';
 import useSearch from '@/hooks/useSearch';
-import { IconX, IconSearch } from '@tabler/icons-react';
+import { IconX, IconSearch, IconSelector } from '@tabler/icons-react';
 import { useLinesExplorerContext } from '@/contexts/LinesExplorerContext';
 import { useDebouncedValue } from '@mantine/hooks';
 import LineDisplay from '../LineDisplay/LineDisplay';
@@ -121,10 +121,12 @@ export default function LinesExplorerToolbarSelectLine() {
               size="lg"
               leftSection={<IconSearch size={20} />}
               rightSection={
-                searchQuery && (
+                searchQuery ? (
                   <ActionIcon onClick={handleClearSearchField} size="md" variant="subtle" color="gray">
                     <IconX size={20} />
                   </ActionIcon>
+                ) : (
+                  <IconSelector size={18} />
                 )
               }
               onChange={handleSearchQueryChange}
