@@ -32,14 +32,16 @@ export default function LinesExplorerContentPatternPathStop({ pathStopData, path
   // B. Transform data
 
   const isThisStopSelected = useMemo(() => {
-    return linesExplorerContext.entities.stop?.id === pathStopData.stop.id;
-  }, [linesExplorerContext.entities.stop?.id, pathStopData.stop.id]);
+    const isSameStopId = linesExplorerContext.entities.stop?.id === pathStopData.stop.id;
+    const isSameStopSequence = linesExplorerContext.entities.stop_sequence === pathStopData.stop_sequence;
+    return isSameStopId && isSameStopSequence;
+  }, [linesExplorerContext.entities.stop, linesExplorerContext.entities.stop_sequence, pathStopData]);
 
   //
   // C. Handle actions
 
   const handleStopClick = () => {
-    linesExplorerContext.selectStop(pathStopData.stop);
+    linesExplorerContext.selectStop(pathStopData.stop, pathStopData.stop_sequence);
   };
 
   //

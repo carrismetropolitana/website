@@ -101,7 +101,6 @@ export default function LinesExplorerContentPatternPathStopTimetable({ stopSeque
     for (let i = 0; i < timetableTemp.length - 1; i++) {
       const hour = timetableTemp[i];
       const nextHour = timetableTemp[i + 1];
-      console.log('hour.hour.value', hour.hour.value);
       if (Number(hour.hour.value) + 1 !== Number(nextHour.hour.value)) {
         timetableTemp.splice(i + 1, 0, { type: 'divider' });
         i++;

@@ -230,7 +230,7 @@ export default function LinesExplorerMap() {
     if (event?.features[0]?.properties?.id) {
       const foundStopInPath = linesExplorerContext.entities.pattern.path.find((item) => item.stop.id === event.features[0].properties.id && item.stop_sequence === event.features[0].properties.stop_sequence);
       if (foundStopInPath) {
-        linesExplorerContext.selectStop(foundStopInPath.stop);
+        linesExplorerContext.selectStop(foundStopInPath.stop, foundStopInPath.stop_sequence);
         moveMap(event.features[0].geometry?.coordinates);
       }
     }

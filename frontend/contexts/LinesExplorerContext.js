@@ -27,6 +27,7 @@ const initialEntitiesState = {
   pattern: null,
   //
   stop: null,
+  stop_sequence: null,
   vehicle_id: null,
   trip_id: null,
 };
@@ -142,13 +143,13 @@ export function LinesExplorerContextProvider({ children }) {
 
   // ---------
 
-  const selectStop = useCallback((stopData) => {
-    setEntitiesState((prev) => ({ ...prev, stop: stopData }));
+  const selectStop = useCallback((stopData, stopSequence) => {
+    setEntitiesState((prev) => ({ ...prev, stop: stopData, stop_sequence: stopSequence }));
     setMapState((prev) => ({ ...prev, auto_zoom: false }));
   }, []);
 
   const clearSelectedStop = useCallback(() => {
-    setEntitiesState((prev) => ({ ...prev, stop: null }));
+    setEntitiesState((prev) => ({ ...prev, stop: null, stop_sequence: null }));
     setMapState((prev) => ({ ...prev, auto_zoom: true }));
   }, []);
 
