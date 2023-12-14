@@ -6,14 +6,12 @@ import useSWR from 'swr';
 import { useMemo } from 'react';
 import { DateTime } from 'luxon';
 import { useTranslations } from 'next-intl';
-import { IconClock } from '@tabler/icons-react';
-import LiveIcon from '@/components/LiveIcon/LiveIcon';
-import EstimatedArrival from '@/components/EstimatedArrival/EstimatedArrival';
 import styles from './LinesExplorerContentPatternPathStopRealtime.module.css';
+import NextArrivals from '@/components/NextArrivals/NextArrivals';
 
 /* * */
 
-export default function LinesExplorerContentPatternPathStopRealtime({ patternId, stopId, stopSequence, showScheduledArrivals = true, maxEstimatedArrivals = 3, maxScheduledArrivals = 3 }) {
+export default function LinesExplorerContentPatternPathStopRealtime({ patternId, stopId, stopSequence, showScheduledArrivals = true, maxEstimatedArrivals = 3, maxScheduledArrivals = 3, showLabel = true }) {
   //
 
   //
@@ -45,15 +43,16 @@ export default function LinesExplorerContentPatternPathStopRealtime({ patternId,
       // else return true
       return true;
     });
-    // Sort by arrival_time
-    const sortedNextEstimatedArrivals = filteredNextEstimatedArrivals.sort((a, b) => a.estimated_arrival_unix - b.estimated_arrival_unix);
     // Format the arrival times
-    const formattedNextEstimatedArrivals = sortedNextEstimatedArrivals.map((item) => {
+    const formattedNextEstimatedArrivals = filteredNextEstimatedArrivals.map((item) => {
       const timeDifferenceBetweenEstimateAndNowInMilliseconds = new Date(item.scheduled_arrival_unix * 1000) - new Date();
       return Math.floor(timeDifferenceBetweenEstimateAndNowInMilliseconds / 1000 / 60);
     });
+    // Sort by arrival_time
+    const sortedNextEstimatedArrivals = formattedNextEstimatedArrivals.sort((a, b) => a - b);
     // Limit array to the max amount of items
-    const limitedNextEstimatedArrivals = formattedNextEstimatedArrivals.slice(0, maxEstimatedArrivals);
+    const limitedNextEstimatedArrivals = sortedNextEstimatedArrivals.slice(0, maxEstimatedArrivals);
+    // if (stopId === '090012') console.log(limitedNextEstimatedArrivals);
     // Return result
     return limitedNextEstimatedArrivals;
     //
@@ -96,29 +95,17 @@ export default function LinesExplorerContentPatternPathStopRealtime({ patternId,
   //
   // D. Render components
 
-  return (
-    <div className={styles.container}>
-      {nextEstimatedArrivals.length > 0 && (
-        <div className={styles.row}>
-          <LiveIcon />
-          {nextEstimatedArrivals.map((item, index) => (
-            <EstimatedArrival key={index} estimatedArrivalInMinutes={item} showLiveIcon={false} />
-          ))}
+  if ((nextScheduledArrivals.length > 0 && showScheduledArrivals) || nextEstimatedArrivals.length > 0) {
+    return (
+      <div className={styles.container}>
+        {showLabel && <p className={styles.label}>{t('next_arrivals')}</p>}
+        <div className={styles.estimates}>
+          {nextEstimatedArrivals.length > 0 && <NextArrivals type="estimated" arrivalsData={nextEstimatedArrivals} />}
+          {(showScheduledArrivals || !nextEstimatedArrivals.length) && nextScheduledArrivals.length > 0 && <NextArrivals type="scheduled" arrivalsData={nextScheduledArrivals} />}
         </div>
-      )}
-      {(showScheduledArrivals || !nextEstimatedArrivals.length) && nextScheduledArrivals.length > 0 && (
-        <div className={styles.row}>
-          <IconClock size={14} stroke={2.5} />
-          {nextScheduledArrivals.map((item, index) => (
-            <p key={index} className={styles.scheduledArrival}>
-              {t('scheduled_arrival', { value: item })}
-            </p>
-          ))}
-        </div>
-      )}
-      {!nextEstimatedArrivals.length && !nextScheduledArrivals.length && showScheduledArrivals && <p>-</p>}
-    </div>
-  );
+      </div>
+    );
+  }
 
   //
 }

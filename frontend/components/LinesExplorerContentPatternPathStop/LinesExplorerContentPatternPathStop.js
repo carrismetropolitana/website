@@ -56,15 +56,10 @@ export default function LinesExplorerContentPatternPathStop({ pathStopData, path
       <div className={styles.innerWrapper}>
         <div className={styles.stopInfo}>
           <LinesExplorerContentPatternPathStopName stopData={pathStopData.stop} isSelected={isThisStopSelected} />
-          {!isThisStopSelected && <LinesExplorerContentPatternPathStopRealtime patternId={linesExplorerContext.entities.pattern.id} stopId={pathStopData.stop.id} stopSequence={pathStopData.stop_sequence} showScheduledArrivals={false} />}
+          {!isThisStopSelected && <LinesExplorerContentPatternPathStopRealtime patternId={linesExplorerContext.entities.pattern.id} stopId={pathStopData.stop.id} stopSequence={pathStopData.stop_sequence} showScheduledArrivals={false} showLabel={false} />}
         </div>
 
-        {isThisStopSelected && (
-          <div className={styles.content}>
-            <p className={styles.label}>Próximas circulações:</p>
-            <LinesExplorerContentPatternPathStopRealtime patternId={linesExplorerContext.entities.pattern.id} stopId={pathStopData.stop.id} stopSequence={pathStopData.stop_sequence} />
-          </div>
-        )}
+        {isThisStopSelected && <LinesExplorerContentPatternPathStopRealtime patternId={linesExplorerContext.entities.pattern.id} stopId={pathStopData.stop.id} stopSequence={pathStopData.stop_sequence} />}
 
         {isThisStopSelected && (
           <div className={`${styles.content} ${styles.onlyDesktop}`}>

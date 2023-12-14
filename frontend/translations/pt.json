@@ -410,11 +410,9 @@
     },
     "LinesExplorerContentPatternPathStop": {},
     "LinesExplorerContentPatternPathStopRealtime": {
-        "arriving_now": "A chegar",
-        "estimated_arrival": "{value} min",
-        "scheduled_arrival": "{value}"
+        "next_arrivals": "Próximas circulações:"
     },
-    "EstimatedArrival": {
+    "NextArrivalsEstimated": {
         "arriving_now": "A chegar",
         "arriving_soon": "{value} min"
     },
