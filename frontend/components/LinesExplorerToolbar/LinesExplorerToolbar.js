@@ -1,9 +1,8 @@
 /* * */
 
 import styles from './LinesExplorerToolbar.module.css';
+import LinesExplorerToolbarFilters from '@/components/LinesExplorerToolbarFilters/LinesExplorerToolbarFilters';
 import LinesExplorerToolbarSelectLine from '@/components/LinesExplorerToolbarSelectLine/LinesExplorerToolbarSelectLine';
-import LinesExplorerToolbarSelectMunicipality from '@/components/LinesExplorerToolbarSelectMunicipality/LinesExplorerToolbarSelectMunicipality';
-import LinesExplorerToolbarSelectLocality from '@/components/LinesExplorerToolbarSelectLocality/LinesExplorerToolbarSelectLocality';
 import LinesExplorerToolbarPeriods from '@/components/LinesExplorerToolbarPeriods/LinesExplorerToolbarPeriods';
 
 /* * */
@@ -11,11 +10,7 @@ import LinesExplorerToolbarPeriods from '@/components/LinesExplorerToolbarPeriod
 export default function LinesExplorerToolbar() {
   return (
     <div className={styles.container}>
-      <div className={styles.filters}>
-        <LinesExplorerToolbarSelectMunicipality />
-        <LinesExplorerToolbarSelectLocality />
-        {/* <LinesExplorerToolbarSelectFacilities /> */}
-      </div>
+      <LinesExplorerToolbarFilters />
       <LinesExplorerToolbarSelectLine />
       <LinesExplorerToolbarPeriods />
     </div>

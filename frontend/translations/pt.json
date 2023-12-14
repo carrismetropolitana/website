@@ -364,17 +364,14 @@
     "LinesExplorer": {
         "pannel_title": "Linhas e Horários"
     },
-    "LinesExplorerToolbar": {
-        "form": {
-            "municipality_code": {
-                "label": "Filter by Municipality",
-                "placeholder": "Filter by Municipality",
-                "nothingFound": "No Results Found"
+    "LinesExplorerToolbar": {},
+    "LinesExplorerToolbarFilters": {
+        "toggle_filters": {
+            "open": {
+                "label": "Esconder Filtros"
             },
-            "line_code": {
-                "label": "Select a Line",
-                "placeholder": "Select a Line",
-                "nothingFound": "No Results Found"
+            "closed": {
+                "label": "Abrir Filtros"
             }
         }
     },
@@ -383,12 +380,12 @@
         "placeholder": "Procurar linha por número, nome, localização...",
         "no_results": "Nenhum Resultado Encontrado"
     },
-    "LinesExplorerToolbarSelectMunicipality": {
+    "LinesExplorerToolbarFiltersMunicipality": {
         "label": "Filtrar por município",
         "placeholder": "Filtrar por município",
         "no_results": "Nenhum Resultado Encontrado"
     },
-    "LinesExplorerToolbarSelectLocality": {
+    "LinesExplorerToolbarFiltersLocality": {
         "label": "Filtrar por localidade",
         "placeholder": "Filtrar por localidade",
         "no_results": "Nenhum Resultado Encontrado"

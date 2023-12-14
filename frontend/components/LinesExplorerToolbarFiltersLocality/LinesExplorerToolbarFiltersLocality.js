@@ -6,18 +6,18 @@ import useSWR from 'swr';
 import { Select } from '@mantine/core';
 import { useMemo } from 'react';
 import { useTranslations } from 'next-intl';
-import styles from './LinesExplorerToolbarSelectLocality.module.css';
+import styles from './LinesExplorerToolbarFiltersLocality.module.css';
 import { useLinesExplorerContext } from '@/contexts/LinesExplorerContext';
 
 /* * */
 
-export default function LinesExplorerToolbarSelectLocality() {
+export default function LinesExplorerToolbarFiltersLocality() {
   //
 
   //
   // A. Setup variables
 
-  const t = useTranslations('LinesExplorerToolbarSelectLocality');
+  const t = useTranslations('LinesExplorerToolbarFiltersLocality');
   const linesExplorerContext = useLinesExplorerContext();
 
   //
