@@ -64,7 +64,7 @@ export default function StopsExplorerTimetableRow({ rowType, tripData }) {
       // 2.
       // Check if this trip is not at the last stop
 
-      if (tripData.stop_sequence === patternData.path[patternData.path.length - 1].stop_sequence) {
+      if (tripData.stop_sequence === patternData.path[patternData.path.length - 1]?.stop_sequence) {
         setTripIsAtLastStop(true);
       }
 
