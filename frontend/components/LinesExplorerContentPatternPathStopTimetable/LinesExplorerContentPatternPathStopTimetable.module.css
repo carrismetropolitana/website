@@ -13,8 +13,8 @@
 /* COLUMN */
 
 .column {
-  display: flex;
-  flex-direction: column;
+  display: grid;
+  grid-template-rows: 26px repeat(auto-fill, 26px);
 }
 
 /* * */
@@ -44,7 +44,7 @@
 /* HOURS */
 
 .hour {
-  padding: 5px;
+  padding: 0 5px;
   font-weight: 800;
   background-color: #000;
   color: #fff;
@@ -62,11 +62,17 @@
   border-bottom-right-radius: 999px;
 }
 
+.hourDivider {
+  padding-left: 2px;
+  background-color: black;
+  opacity: 0.3;
+}
+
 /* * */
 /* MINUTES */
 
 .minute {
-  padding: 3px 5px;
+  padding: 0 5px;
   font-weight: 500;
 }
 

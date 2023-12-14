@@ -427,7 +427,8 @@
         },
         "minutes": {
             "label": "Min."
-        }
+        },
+        "no_data": "Sem horários nesta data."
     },
     "LinesExplorerContentPatternPathStopPdf": {
         "pdf_file_exists": "Abrir PDF",
