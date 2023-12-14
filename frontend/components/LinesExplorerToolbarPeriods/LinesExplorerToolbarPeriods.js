@@ -5,9 +5,9 @@
 import useSWR from 'swr';
 import { DateTime } from 'luxon';
 import { useEffect, useMemo, useState } from 'react';
-import { IconArrowNarrowRight } from '@tabler/icons-react';
-import LiveIcon from '@/components/LiveIcon/LiveIcon';
 import styles from './LinesExplorerToolbarPeriods.module.css';
+import { Carousel } from '@mantine/carousel';
+import LinesExplorerToolbarPeriodsPeriod from '@/components/LinesExplorerToolbarPeriodsPeriod/LinesExplorerToolbarPeriodsPeriod';
 
 /* * */
 
@@ -73,23 +73,39 @@ export default function LinesExplorerToolbarPeriods() {
   // D. Render components
 
   return (
-    <div className={styles.container}>
-      {periodsDataFormatted &&
-        periodsDataFormatted.map((item) => (
-          <div key={item.id} className={`${styles.period} ${item.isActive && styles.isActive}`}>
-            <h5 className={styles.periodName}>
-              {item.name}
-              {item.isActive && <LiveIcon color="#ffffff" />}
-            </h5>
-            {item.validPairs.map((validPair, index) => (
-              <p key={index} className={styles.validPair}>
-                <span className={styles.validPairDate}>{validPair.from}</span> <IconArrowNarrowRight size={15} /> <span className={styles.validPairDate}>{validPair.until}</span>
-              </p>
+    <>
+      <div className={styles.onlyOnDesktop}>{periodsDataFormatted && periodsDataFormatted.map((item) => <LinesExplorerToolbarPeriodsPeriod key={item.id} periodData={item} />)}</div>
+      <div className={styles.onlyOnMobile}>
+        <Carousel slideSize={300} align={'center'} withControls={false} withIndicators classNames={{ indicators: styles.indicators, indicator: styles.indicator }} initialSlide={periodsDataFormatted?.findIndex((item) => item.isActive)}>
+          {periodsDataFormatted &&
+            periodsDataFormatted.map((item) => (
+              <Carousel.Slide key={item.id}>
+                <LinesExplorerToolbarPeriodsPeriod periodData={item} />
+              </Carousel.Slide>
             ))}
-          </div>
-        ))}
-    </div>
+        </Carousel>
+      </div>
+    </>
   );
+
+  //   return (
+  //     <div className={styles.container}>
+  //       {periodsDataFormatted &&
+  //         periodsDataFormatted.map((item) => (
+  //           <div key={item.id} className={`${styles.period} ${item.isActive && styles.isActive}`}>
+  //             <h5 className={styles.periodName}>
+  //               {item.name}
+  //               {item.isActive && <LiveIcon color="#ffffff" />}
+  //             </h5>
+  //             {item.validPairs.map((validPair, index) => (
+  //               <p key={index} className={styles.validPair}>
+  //                 <span className={styles.validPairDate}>{validPair.from}</span> <IconArrowNarrowRight size={15} /> <span className={styles.validPairDate}>{validPair.until}</span>
+  //               </p>
+  //             ))}
+  //           </div>
+  //         ))}
+  //     </div>
+  //   );
 
   //
 }

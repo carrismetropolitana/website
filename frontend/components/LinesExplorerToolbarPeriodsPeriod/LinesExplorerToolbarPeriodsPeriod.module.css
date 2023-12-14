@@ -1,0 +1,62 @@
+/* * */
+/* CONTAINER */
+
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 15px;
+  width: 100%;
+  /* min-width: 300px; */
+  padding: 15px 20px;
+  border-radius: 15px;
+}
+
+.isActive.container {
+  background-color: rgba(255, 255, 255, 0.5);
+  box-shadow: 0 0 15px 0 rgba(0, 0, 0, 0.05);
+  transition: all 300ms ease;
+}
+
+/* * */
+/* PERIOD NAME */
+
+.periodName {
+  font-size: 16px;
+  line-height: 1.2;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--reference-0);
+  background-color: var(--reference-1);
+  border-radius: 999px;
+  padding: 4px 18px;
+  text-align: center;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+}
+
+.isActive .periodName {
+  padding-right: 5px;
+}
+
+/* * */
+/* VALID PAIR */
+
+.validPair {
+  display: flex;
+  flex-direction: row;
+  gap: 5px;
+  align-items: center;
+  justify-content: center;
+  font-weight: 500;
+  line-height: 1.2;
+}
+
+.isActive .validPair {
+  padding-right: 5px;
+  font-weight: 600;
+}

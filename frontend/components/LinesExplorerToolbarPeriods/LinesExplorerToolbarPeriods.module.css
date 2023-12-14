@@ -1,81 +1,52 @@
 /* * */
-/* CONTAINER */
+/* ONLY ON DESKTOP */
 
-.container {
+.onlyOnDesktop {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
   gap: var(--size-lg);
+  padding-left: var(--size-lg);
+  padding-right: var(--size-lg);
 }
 
-@media (max-width: 900px) {
-  .container {
-    grid-template-columns: 1fr;
+@media (max-width: 1050px) {
+  .onlyOnDesktop {
+    display: none;
   }
 }
 
 /* * */
-/* PERIOD */
+/* ONLY ON MOBILE */
 
-.period {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 15px;
-  width: 100%;
-  padding: 15px 20px;
-  border-radius: 15px;
+.onlyOnMobile {
+  display: none;
+  position: relative;
 }
 
-.isActive.period {
-  background-color: rgba(255, 255, 255, 0.5);
-  box-shadow: 0 0 15px 0 rgba(0, 0, 0, 0.05);
-  transition: all 300ms ease;
+@media (max-width: 1050px) {
+  .onlyOnMobile {
+    display: block;
+  }
 }
 
-/* .container:hover .isActive.period {
-  background-color: rgba(255, 255, 255, 1);
-  box-shadow: 0 0 25px 0 rgba(0, 0, 0, 0.1);
-} */
-
-/* * */
-/* PERIOD NAME */
-
-.periodName {
-  font-size: 16px;
-  line-height: 1.2;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: var(--reference-0);
-  background-color: var(--reference-1);
-  border-radius: 999px;
-  padding: 4px 18px;
-  text-align: center;
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: center;
-  gap: 5px;
-}
-
-.isActive .periodName {
-  padding-right: 5px;
+@media (max-width: 700px) {
+  .onlyOnMobile {
+    display: block;
+    width: 100vw;
+  }
 }
 
 /* * */
-/* VALID PAIR */
+/* INDICATORS */
 
-.validPair {
-  display: flex;
-  flex-direction: row;
-  gap: 5px;
-  align-items: center;
-  justify-content: center;
-  font-weight: 500;
-  line-height: 1.2;
+.indicators {
+  position: static;
+  margin-top: 20px;
 }
 
-.isActive .validPair {
-  padding-right: 5px;
-  font-weight: 600;
+.indicator {
+  width: 12px;
+  height: 4px;
+  transition: all 250ms ease;
+  background-color: white;
 }
