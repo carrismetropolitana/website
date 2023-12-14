@@ -130,6 +130,12 @@
   border-top: none;
 }
 
+@media (max-width: 700px) {
+  .typeA .wrapper {
+    border: none;
+  }
+}
+
 .typeA .content {
   padding: 0;
 }
