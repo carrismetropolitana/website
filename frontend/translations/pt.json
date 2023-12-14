@@ -404,8 +404,8 @@
         "destination_label": "com destino a"
     },
     "LinesExplorerContentSelectPattern": {
-        "label": "Procurar linha por número, nome, localização...",
-        "placeholder": "Procurar linha por número, nome, localização...",
+        "label": "Selecione um destino desta linha...",
+        "placeholder": "Selecione um destino desta linha...",
         "no_results": "Nenhum Resultado Encontrado"
     },
     "LinesExplorerContentPatternPathStop": {},

@@ -10,7 +10,6 @@ import useSearch from '@/hooks/useSearch';
 import { IconX, IconSearch } from '@tabler/icons-react';
 import { useLinesExplorerContext } from '@/contexts/LinesExplorerContext';
 import { useDebouncedValue } from '@mantine/hooks';
-import LineDisplay from '@/components/LineDisplay/LineDisplay';
 
 /* * */
 
@@ -148,7 +147,7 @@ export default function LinesExplorerContentSelectPattern() {
               <Combobox.Empty>{t('no_results')}</Combobox.Empty>
             ) : (
               allPatternsDataFilteredBySearchQuery.map((item) => (
-                <Combobox.Option key={item.id} value={item.id} className={item.id === linesExplorerContext.entities.line?.id && styles.selected}>
+                <Combobox.Option key={item.id} value={item.id} className={item.id === linesExplorerContext.entities.pattern?.id && styles.selected}>
                   <p className={styles.comboboxOption}>{item.headsign}</p>
                 </Combobox.Option>
               ))

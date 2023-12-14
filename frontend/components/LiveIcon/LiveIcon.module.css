@@ -20,7 +20,7 @@
 .dot {
   background-color: var(--realtime-100);
   border-radius: 999px;
-  z-index: 999;
+  z-index: 100;
   /* DOT SIZE */
   height: 4px;
   width: 4px;
