@@ -406,7 +406,11 @@
     "LinesExplorerContentSelectPattern": {
         "label": "Selecione um destino desta linha...",
         "placeholder": "Selecione um destino desta linha...",
-        "no_results": "Nenhum Resultado Encontrado"
+        "no_results": "Nenhum Resultado Encontrado",
+        "options": {
+            "origin": "Início em {value}",
+            "headsign": "-> {value}"
+        }
     },
     "LinesExplorerContentPatternPathStop": {},
     "LinesExplorerContentPatternPathStopRealtime": {
@@ -881,5 +885,11 @@
     },
     "VehiclesExplorerSummary": {
         "intro": "O passe navegante municipal Família permite que cada agregado familiar pague no máximo o valor de 2 passes navegante municipal, independentemente do número de elementos do agregado familiar. É válido em todas as empresas de serviço público de transporte regular de passageiros, em todos os 18 municípios da Área Metropolitana de Lisboa."
+    },
+    "ErrorExplorer": {
+        "title": "Ocorreu um erro inesperado",
+        "subtitle": "Fomos notificados e iremos corrigir em breve. Obrigado pela sua compreensão.",
+        "retry": "Nova tentativa em {value} segundos",
+        "goto_home": "Voltar à página principal"
     }
 }

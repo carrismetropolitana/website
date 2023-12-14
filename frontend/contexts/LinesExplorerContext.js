@@ -24,6 +24,7 @@ const initialEntitiesState = {
   date: null,
   //
   line: null,
+  route: null,
   pattern: null,
   //
   stop: null,
@@ -70,14 +71,14 @@ export function LinesExplorerContextProvider({ children }) {
   //
   // C. Supporting functions
 
-  const updateWindowUrl = (lineId = 'all', lineName = 'Carris Metropolitana') => {
+  const updateWindowUrl = (lineId = 'all', lineShortName = 'Horários', lineLongName = 'Carris Metropolitana') => {
     let newUrl = `/lines/${lineId}`;
     // TODO:
     // Refactor to correctly parse the location path
     if (window.location.pathname.includes('mupi')) newUrl = `/mupi${newUrl}`;
     // :TODO
     window.history.replaceState({ ...window.history.state, as: newUrl, url: newUrl }, '', newUrl);
-    document.title = lineName;
+    document.title = `${lineShortName} - ${lineLongName}`;
   };
 
   //
@@ -108,7 +109,7 @@ export function LinesExplorerContextProvider({ children }) {
       const foundLine = allLinesData.find((item) => item.id === lineId);
       if (foundLine) {
         setEntitiesState((prev) => ({ ...prev, line: foundLine, pattern: null, stop: null }));
-        updateWindowUrl(lineId, foundLine.long_name);
+        updateWindowUrl(lineId, foundLine.short_name, foundLine.long_name);
       }
     },
     [allLinesData]
@@ -132,13 +133,13 @@ export function LinesExplorerContextProvider({ children }) {
 
   // ---------
 
-  const selectPattern = useCallback((patternData) => {
-    setEntitiesState((prev) => ({ ...prev, pattern: patternData, stop: null }));
+  const selectPattern = useCallback((routeData, patternData) => {
+    setEntitiesState((prev) => ({ ...prev, route: routeData, pattern: patternData, stop: null }));
     setMapState((prev) => ({ ...prev, auto_zoom: true }));
   }, []);
 
   const clearSelectedPattern = useCallback(() => {
-    setEntitiesState((prev) => ({ ...prev, pattern: null }));
+    setEntitiesState((prev) => ({ ...prev, route: null, pattern: null }));
   }, []);
 
   // ---------

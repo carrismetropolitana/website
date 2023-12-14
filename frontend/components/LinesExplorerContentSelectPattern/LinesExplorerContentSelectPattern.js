@@ -7,7 +7,7 @@ import { useEffect, useState } from 'react';
 import { useTranslations } from 'next-intl';
 import styles from './LinesExplorerContentSelectPattern.module.css';
 import useSearch from '@/hooks/useSearch';
-import { IconX, IconSearch } from '@tabler/icons-react';
+import { IconX, IconSearch, IconSelector } from '@tabler/icons-react';
 import { useLinesExplorerContext } from '@/contexts/LinesExplorerContext';
 import { useDebouncedValue } from '@mantine/hooks';
 
@@ -24,6 +24,7 @@ export default function LinesExplorerContentSelectPattern() {
   const comboboxStore = useCombobox();
   const [searchQuery, setSearchQuery] = useState('');
   const [debouncedSearchQuery] = useDebouncedValue(searchQuery, 10);
+  const [allRoutesData, setAllRoutesData] = useState([]);
   const [allPatternsData, setAllPatternsData] = useState([]);
 
   //
@@ -33,31 +34,43 @@ export default function LinesExplorerContentSelectPattern() {
     (async function () {
       // Exit if no line is selected
       if (!linesExplorerContext.entities?.line?.id) return;
-      // Initiate a temporaty variable to hold formatted patterns
+      // Initiate a temporaty variable to hold formatted routes and patterns
+      let formattedRouteOptions = [];
       let formattedPatternOptions = [];
+      // Loop through each line route to retrieve its info
+      for (const routeId of linesExplorerContext.entities.line.routes) {
+        // Fetch pattern info
+        const routeDataResponse = await fetch(`https://api.carrismetropolitana.pt/routes/${routeId}`);
+        const routeData = await routeDataResponse.json();
+        // Save route
+        formattedRouteOptions.push(routeData);
+      }
       // Loop through each line pattern to retrieve its info
       for (const patternId of linesExplorerContext.entities.line.patterns) {
         // Fetch pattern info
         const patternDataResponse = await fetch(`https://api.carrismetropolitana.pt/patterns/${patternId}`);
         const patternData = await patternDataResponse.json();
         // Save pattern
-        formattedPatternOptions.push(patternData);
+        formattedPatternOptions.push({ ...patternData, route: formattedRouteOptions.find((route) => route.id === patternData.route_id) });
       }
       // Update state with formatted patterns
+      setAllRoutesData(formattedRouteOptions);
       setAllPatternsData(formattedPatternOptions);
       //
     })();
-  }, [linesExplorerContext.entities.line?.id, linesExplorerContext.entities.line.patterns]);
+  }, [linesExplorerContext.entities.line?.id, linesExplorerContext.entities.line?.patterns, linesExplorerContext.entities.line?.routes]);
 
   useEffect(() => {
     // Pre-select the first pattern if none is selected
     if (!linesExplorerContext.entities.pattern && allPatternsData.length > 0) {
       const firstPatternInTheArray = allPatternsData[0];
-      if (firstPatternInTheArray.line_id === linesExplorerContext.entities.line.id) {
-        linesExplorerContext.selectPattern(allPatternsData[0]);
+      const foundParentRoute = allRoutesData.find((route) => route.id === firstPatternInTheArray.route_id);
+      // Pre-select the first route and pattern if it belongs to the selected line
+      if (firstPatternInTheArray.line_id === linesExplorerContext.entities.line.id && foundParentRoute) {
+        linesExplorerContext.selectPattern(foundParentRoute, allPatternsData[0]);
       }
     }
-  }, [allPatternsData, linesExplorerContext]);
+  }, [allPatternsData, allRoutesData, linesExplorerContext]);
 
   //
   // C. Search
@@ -94,9 +107,10 @@ export default function LinesExplorerContentSelectPattern() {
   };
 
   const handleSelectPattern = (chosenSelectItemValue) => {
+    const foundRoute = allRoutesData.find((item) => item.route_id === chosenSelectItemValue);
     const foundPattern = allPatternsData.find((item) => item.id === chosenSelectItemValue);
     if (foundPattern) {
-      linesExplorerContext.selectPattern(foundPattern);
+      linesExplorerContext.selectPattern(foundRoute, foundPattern);
       comboboxStore.closeDropdown();
     }
   };
@@ -112,8 +126,8 @@ export default function LinesExplorerContentSelectPattern() {
             <Group className={styles.comboboxTarget} onClick={handleClickSearchField}>
               <IconSearch size={20} />
               <p className={styles.comboboxSelection}>{linesExplorerContext.entities.pattern?.headsign}</p>
-              <ActionIcon onClick={handleClearSearchField} size="md" variant="subtle" color="gray">
-                <IconX size={20} />
+              <ActionIcon size="md" variant="subtle" color="gray">
+                <IconSelector size={20} />
               </ActionIcon>
             </Group>
           ) : (
@@ -125,13 +139,7 @@ export default function LinesExplorerContentSelectPattern() {
               value={searchQuery}
               size="lg"
               leftSection={<IconSearch size={20} />}
-              rightSection={
-                searchQuery && (
-                  <ActionIcon onClick={handleClearSearchField} size="md" variant="subtle" color="gray">
-                    <IconX size={20} />
-                  </ActionIcon>
-                )
-              }
+              rightSection={<IconSelector size={20} />}
               onChange={handleSearchQueryChange}
               onClick={handleClickSearchField}
               onFocus={handleClickSearchField}
@@ -148,7 +156,12 @@ export default function LinesExplorerContentSelectPattern() {
             ) : (
               allPatternsDataFilteredBySearchQuery.map((item) => (
                 <Combobox.Option key={item.id} value={item.id} className={item.id === linesExplorerContext.entities.pattern?.id && styles.selected}>
-                  <p className={styles.comboboxOption}>{item.headsign}</p>
+                  <div className={styles.comboboxOption}>
+                    {/* <p className={styles.tripHeadsign}>{t('options.headsign', { value: item.headsign })}</p> */}
+                    <p className={styles.tripHeadsign}>{item.headsign}</p>
+                    <p className={styles.routeName}>{item.route.long_name}</p>
+                    {/* de {linesExplorerContext.entities.pattern.path[0].stop.locality} para {item.headsign} */}
+                  </div>
                 </Combobox.Option>
               ))
             )}

@@ -66,6 +66,9 @@
 
 .comboboxOption {
   padding: 6px;
+}
+
+.tripHeadsign {
   font-size: 16px;
   font-weight: 500;
   color: var(--reference-1);
