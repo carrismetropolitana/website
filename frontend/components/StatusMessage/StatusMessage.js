@@ -13,11 +13,13 @@ import { IconChevronDown, IconChevronLeft } from '@tabler/icons-react';
 export default function StatusMessage() {
   //
 
+  const STATUS_TYPE = 'warning'; // 'warning' || 'ok'
+
   //
   // A. Setup variables
 
   const t = useTranslations('StatusMessage');
-  const [isVisible, setIsVisible] = useState(false);
+  const [isVisible, setIsVisible] = useState(STATUS_TYPE === 'warning' ? true : false);
 
   //
   // B. Render components
@@ -30,7 +32,7 @@ export default function StatusMessage() {
   // C. Render components
 
   return (
-    <div className={styles.container}>
+    <div className={`${styles.container} ${styles[STATUS_TYPE]}`}>
       <div className={styles.innerWrapper}>
         <div className={styles.headerWrapper} onClick={handleSetIsVisible}>
           <h3 className={styles.title}>{t('title')}</h3>

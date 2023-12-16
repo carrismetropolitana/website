@@ -552,8 +552,8 @@
         }
     },
     "StatusMessage": {
-        "title": "Tempo Real Estabilizado",
-        "explanation": "Foram resolvidas as questões técnicas que afetaram o tempo real das linhas da Carris Metropolitana.",
+        "title": "Erros na consulta de horários",
+        "explanation": "Devido a falhas técnicas por parte do operador da área 4, os horários das linhas da área 4 encontram-se indisponíveis para o dia 16 de Dezembro. No entanto, os serviços serão realizados de acordo com o previsto para Sábados de Período Escolar (ex: dia 9 de Dezembro). O tempo real das linhas afetadas não estará disponível. Estamos a trabalhar em conjunto com o operador para resolver esta situação.",
         "solution": "Agradecemos a sua compreensão."
     },
     "AppFooter": {
