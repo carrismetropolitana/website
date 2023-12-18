@@ -8,7 +8,7 @@ import AppTopBar from '@/components/AppTopBar/AppTopBar';
 import AppHeader from '@/components/AppHeader/AppHeader';
 import AppFooter from '@/components/AppFooter/AppFooter';
 import AnalyticsAuthorizer from '@/components/AnalyticsAuthorizer/AnalyticsAuthorizer';
-import StatusMessage from '@/components/StatusMessage/StatusMessage';
+// import StatusMessage from '@/components/StatusMessage/StatusMessage';
 // import MaintenanceWarning from '@/components/MaintenanceWarning/MaintenanceWarning';
 
 /* * */
@@ -26,7 +26,7 @@ export default function Layout({ children, params: { locale } }) {
       <AppWrapper>
         <AppTopBar />
         <AppHeader />
-        <StatusMessage />
+        {/* <StatusMessage /> */}
         {/* <MaintenanceWarning /> */}
         {children}
         <AppFooter />
