@@ -7,7 +7,7 @@ import { useMap } from 'react-map-gl/maplibre';
 import OSMMapDefaults from '@/components/OSMMap/OSMMap.config';
 import { Divider } from '@mantine/core';
 import { useTranslations } from 'next-intl';
-import Pannel from '@/components/Pannel/Pannel';
+import Panel from '@/components/Panel/Panel';
 import FrontendEncmMap from '@/components/FrontendEncmMap/FrontendEncmMap';
 import generateUUID from '@/services/generateUUID';
 import FrontendEncmToolbar from '@/components/FrontendEncmToolbar/FrontendEncmToolbar';
@@ -145,7 +145,7 @@ export default function FrontendEncm() {
   // E. Render components
 
   return (
-    <Pannel type="A" title={t('title')} loading={allEncmLoading} error={allEncmError}>
+    <Panel type="A" title={t('title')} loading={allEncmLoading} error={allEncmError}>
       <FrontendEncmToolbar selectedMapStyle={selectedMapStyle} onSelectMapStyle={setSelectedMapStyle} onMapRecenter={handleMapReCenter} onOpenInGoogleMaps={handleOpenInGoogleMaps} selectedEncmId={selectedEncmId} onSelectEncmId={handleSelectEncm} />
       <Divider />
       <div className={styles.mapWrapper}>
@@ -154,7 +154,7 @@ export default function FrontendEncm() {
       <Divider />
       <FrontendEncmInfo />
       <FrontendEncmGrid allEncmData={allEncmData} selectedEncmId={selectedEncmId} onSelectEncmId={handleSelectEncm} />
-    </Pannel>
+    </Panel>
   );
 
   //

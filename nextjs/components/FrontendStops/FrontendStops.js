@@ -6,7 +6,7 @@ import styles from './FrontendStops.module.css';
 import useSWR from 'swr';
 import { useEffect } from 'react';
 import { useTranslations } from 'next-intl';
-import Pannel from '@/components/Pannel/Pannel';
+import Panel from '@/components/Panel/Panel';
 import FrontendStopsToolbar from '@/components/FrontendStopsToolbar/FrontendStopsToolbar';
 import FrontendStopsMap from '@/components/FrontendStopsMap/FrontendStopsMap';
 import FrontendStopsStopInfo from '@/components/FrontendStopsStopInfo/FrontendStopsStopInfo';
@@ -57,7 +57,7 @@ export default function FrontendStops() {
   // E. Render components
 
   return (
-    <Pannel
+    <Panel
       type="A"
       title={t('title')}
       loading={allStopsLoading}
@@ -89,7 +89,7 @@ export default function FrontendStops() {
           )}
         </div>
       </div>
-    </Pannel>
+    </Panel>
   );
 
   //

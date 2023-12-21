@@ -1,7 +1,7 @@
 'use client';
 
 import styles from './LegalExplorerCookies.module.css';
-import Pannel from '@/components/Pannel/Pannel';
+import Panel from '@/components/Panel/Panel';
 import { Anchor, Button, Group, Table } from '@mantine/core';
 import { openConfirmModal } from '@mantine/modals';
 import { useTranslations } from 'next-intl';
@@ -43,7 +43,7 @@ export default function LegalExplorerCookies() {
   // B. Render components
 
   return (
-    <Pannel type="B" title={t('title')}>
+    <Panel type="B" title={t('title')}>
       <div className={styles.container}>
         <div className={styles.section}>
           <div className={styles.title}>{t('sections.intro.title')}</div>
@@ -151,7 +151,7 @@ export default function LegalExplorerCookies() {
           <div className={styles.text}>{t('sections.question_8.paragraphs.1')}</div>
         </div>
       </div>
-    </Pannel>
+    </Panel>
   );
 
   //

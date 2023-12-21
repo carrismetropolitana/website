@@ -2,16 +2,16 @@
 
 import { useTranslations } from 'next-intl';
 import Loader from '@/components/Loader/Loader';
-import styles from './Pannel.module.css';
+import styles from './Panel.module.css';
 import NoDataLabel from '@/components/NoDataLabel/NoDataLabel';
 
-export default function Pannel({ type = 'A', loading, error, icon, title, rightSection, children }) {
+export default function Panel({ type = 'A', loading, error, icon, title, rightSection, children }) {
   //
 
   //
   // A. Setup variables
 
-  const t = useTranslations('Pannel');
+  const t = useTranslations('Panel');
 
   //
   // B. Render components

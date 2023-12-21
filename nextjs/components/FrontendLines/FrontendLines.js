@@ -6,7 +6,7 @@ import styles from './FrontendLines.module.css';
 import useSWR from 'swr';
 import { useEffect } from 'react';
 import { useTranslations } from 'next-intl';
-import Pannel from '@/components/Pannel/Pannel';
+import Panel from '@/components/Panel/Panel';
 import FrontendLinesToolbar from '@/components/FrontendLinesToolbar/FrontendLinesToolbar';
 import FrontendLinesContent from '@/components/FrontendLinesContent/FrontendLinesContent';
 import BetaIcon from '@/components/BetaIcon/BetaIcon';
@@ -54,9 +54,9 @@ export default function FrontendLines() {
   // E. Render components
 
   return (
-    <Pannel
+    <Panel
       type="A"
-      title={t('pannel_title')}
+      title={t('Panel_title')}
       loading={allLinesLoading || allMunicipalitiesLoading}
       error={allLinesError || allMunicipalitiesError}
       validating={allVehiclesValidating}
@@ -69,7 +69,7 @@ export default function FrontendLines() {
     >
       <FrontendLinesToolbar />
       <FrontendLinesContent />
-    </Pannel>
+    </Panel>
   );
 
   //
