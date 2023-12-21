@@ -7,7 +7,7 @@ import { useTranslations } from 'next-intl';
 import styles from './ErrorExplorer.module.css';
 import { IconBarrierBlock, IconMoodSad, IconTrafficCone } from '@tabler/icons-react';
 import { Button } from '@mantine/core';
-import { useAnalyticsContext } from '@/contexts/AnalyticsContext';
+import { useAnalyticsContext } from '@/contexts/FrontendAnalyticsContext';
 
 /* * */
 

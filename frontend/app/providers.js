@@ -7,7 +7,7 @@ import { SWRConfig } from 'swr';
 import { MantineProvider } from '@mantine/core';
 import { MapProvider } from 'react-map-gl/maplibre';
 import { DebugContextProvider } from '@/contexts/DebugContext';
-import { AnalyticsContextProvider } from '@/contexts/AnalyticsContext';
+import { AnalyticsContextProvider } from '@/contexts/FrontendAnalyticsContext';
 import { ModalsProvider } from '@mantine/modals';
 import { DatesProvider } from '@mantine/dates';
 

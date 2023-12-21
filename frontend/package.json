@@ -10,6 +10,7 @@
         "lint": "next lint"
     },
     "dependencies": {
+        "@auth/mongodb-adapter": "^2.0.10",
         "@mantine/carousel": "^7.3.2",
         "@mantine/core": "7.3.2",
         "@mantine/dates": "7.3.2",
@@ -24,23 +25,26 @@
         "inflected": "2.1.0",
         "luxon": "3.4.4",
         "maplibre-gl": "3.6.2",
+        "mongodb": "^6.3.0",
         "next": "14.0.4",
-        "next-intl": "3.3.2",
+        "next-auth": "^5.0.0-beta.4",
+        "next-intl": "3.4.0",
+        "nodemailer": "^6.9.7",
         "react": "18.2.0",
         "react-dom": "18.2.0",
-        "react-map-gl": "7.1.6",
-        "sharp": "0.33.0",
+        "react-map-gl": "7.1.7",
+        "sharp": "0.33.1",
         "swr": "2.2.4",
         "ua-parser-js": "1.0.37"
     },
     "devDependencies": {
-        "@types/node": "20.10.4",
+        "@types/node": "20.10.5",
         "@types/react": "18.2.45",
-        "@types/react-dom": "18.2.17",
-        "eslint": "8.55.0",
+        "@types/react-dom": "18.2.18",
+        "eslint": "8.56.0",
         "eslint-config-next": "14.0.4",
         "postcss": "8.4.32",
-        "postcss-preset-mantine": "1.11.1",
+        "postcss-preset-mantine": "1.12.1",
         "postcss-simple-vars": "7.0.1",
         "typescript": "5.3.3"
     }

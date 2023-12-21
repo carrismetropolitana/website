@@ -361,11 +361,11 @@
     "Pannel": {
         "error": "Temporarily unavailable"
     },
-    "LinesExplorer": {
+    "FrontendLines": {
         "pannel_title": "Linhas e Horários"
     },
-    "LinesExplorerToolbar": {},
-    "LinesExplorerToolbarFilters": {
+    "FrontendLinesToolbar": {},
+    "FrontendLinesToolbarFilters": {
         "toggle_filters": {
             "open": {
                 "label": "Esconder Filtros"
@@ -375,35 +375,35 @@
             }
         }
     },
-    "LinesExplorerToolbarSelectLine": {
+    "FrontendLinesToolbarSelectLine": {
         "label": "Procurar linha por número, nome, localização...",
         "placeholder": "Procurar linha por número, nome, localização...",
         "no_results": "Nenhum Resultado Encontrado"
     },
-    "LinesExplorerToolbarFiltersMunicipality": {
+    "FrontendLinesToolbarFiltersMunicipality": {
         "label": "Filtrar por município",
         "placeholder": "Filtrar por município",
         "no_results": "Nenhum Resultado Encontrado"
     },
-    "LinesExplorerToolbarFiltersLocality": {
+    "FrontendLinesToolbarFiltersLocality": {
         "label": "Filtrar por localidade",
         "placeholder": "Filtrar por localidade",
         "no_results": "Nenhum Resultado Encontrado"
     },
-    "LinesExplorerSelectDate": {
+    "FrontendLinesSelectDate": {
         "today": "Hoje",
         "tomorrow": "Amanhã",
         "label": "Selecione uma data",
         "placeholder": "Selecione uma data"
     },
-    "LinesExplorerContent": {
+    "FrontendLinesContent": {
         "no_selection": "Selecione um destino",
         "destination_label": "com destino a"
     },
-    "LinesExplorerContentHeader": {
+    "FrontendLinesContentHeader": {
         "destination_label": "com destino a"
     },
-    "LinesExplorerContentSelectPattern": {
+    "FrontendLinesContentSelectPattern": {
         "label": "Selecione um destino desta linha...",
         "placeholder": "Selecione um destino desta linha...",
         "no_results": "Nenhum Resultado Encontrado",
@@ -412,15 +412,15 @@
             "headsign": "-> {value}"
         }
     },
-    "LinesExplorerContentPatternPathStop": {},
-    "LinesExplorerContentPatternPathStopRealtime": {
+    "FrontendLinesContentPatternPathStop": {},
+    "FrontendLinesContentPatternPathStopRealtime": {
         "next_arrivals": "Próximas circulações:"
     },
     "NextArrivalsEstimated": {
         "arriving_now": "A chegar",
         "arriving_soon": "{value} min"
     },
-    "LinesExplorerContentPatternPathStopTimetable": {
+    "FrontendLinesContentPatternPathStopTimetable": {
         "hours": {
             "label": "Hour"
         },
@@ -429,11 +429,11 @@
         },
         "no_data": "Sem horários nesta data."
     },
-    "LinesExplorerContentPatternPathStopPdf": {
+    "FrontendLinesContentPatternPathStopPdf": {
         "pdf_file_exists": "Abrir PDF",
         "pdf_file_does_not_exist": "PDF Indisponível"
     },
-    "LinesExplorerContentPatternMap": {
+    "FrontendLinesContentPatternMap": {
         "today": "Today",
         "tomorrow": "Tomorrow",
         "form": {
@@ -454,11 +454,11 @@
     "ArrivalEstimates": {
         "label": "Real-time data"
     },
-    "StopsExplorer": {
+    "FrontendStops": {
         "title": "Paragens e Horários",
         "no_selection": "Selecione uma Paragem"
     },
-    "StopsExplorerToolbar": {
+    "FrontendStopsToolbar": {
         "map_style": {
             "label": "Paragens e Horários",
             "options": {
@@ -473,7 +473,7 @@
             "label": "Abrir no Google Maps"
         }
     },
-    "EncmExplorerToolbar": {
+    "FrontendEncmToolbar": {
         "map_style": {
             "label": "Trocar vista do mapa",
             "options": {
@@ -488,7 +488,7 @@
             "label": "Abrir no Google Maps"
         }
     },
-    "EncmExplorerToolbarSearch": {
+    "FrontendEncmToolbarSearch": {
         "label": "Procurar por nome, morada ou município",
         "placeholder": "Procurar por nome, morada, município...",
         "no_results": "Nenhum Resultado Encontrado"
@@ -673,19 +673,19 @@
             }
         }
     },
-    "EncmExplorer": {
+    "FrontendEncm": {
         "title": "Espaços navegante® Carris Metropolitana"
     },
-    "EncmExplorerItem": {
+    "FrontendEncmItem": {
         "address": {
             "label": "Morada",
             "view_in_map": "Ver no Mapa"
         }
     },
-    "EncmExplorerMapPopup": {
+    "FrontendEncmMapPopup": {
         "view_in_list": "Mais Informações"
     },
-    "EncmExplorerGrid": {
+    "FrontendEncmGrid": {
         "address": {
             "label": "Address"
         },
@@ -696,10 +696,10 @@
             "label": "Current Status"
         }
     },
-    "EncmExplorerInfo": {
+    "FrontendEncmInfo": {
         "message": "Disponíveis para os nossos passageiros, os Espaços navegante® Carris Metropolitana estão dedicados a prestar informações sobre a rede e bilhética Carris Metropolitana, possibilitando o esclarecimento de dúvidas, a emissão de cartões navegante® e a adesão a perfis e descontos."
     },
-    "EncmExplorerItemTimetable": {
+    "FrontendEncmItemTimetable": {
         "title": "Horário",
         "from": "De",
         "until": "até",
@@ -714,7 +714,7 @@
         "is_open": "Aberto",
         "is_closed": "Fechado"
     },
-    "EncmExplorerItemOccupation": {
+    "FrontendEncmItemOccupation": {
         "title": "Informação em Tempo Real",
         "currently_waiting": {
             "label": "Clientes em espera:"
@@ -727,25 +727,25 @@
             "available_at_hours": "{hours} h {minutes} min"
         }
     },
-    "StopsExplorerTimetable": {
+    "FrontendStopsTimetable": {
         "no_service": "Sem Serviço"
     },
-    "StopsExplorerTimetableHeader": {
+    "FrontendStopsTimetableHeader": {
         "line": "Linha",
         "headsign": "Destino",
         "estimate": "Previsão"
     },
-    "StopsExplorerTimetablePreviousTrips": {
+    "FrontendStopsTimetablePreviousTrips": {
         "toggle": {
             "show": "Ver Passagens Anteriores",
             "hide": "Esconder Passagens Anteriores"
         },
         "estimate": "Previsão"
     },
-    "StopsExplorerTimetableCurrentAndFutureTrips": {
+    "FrontendStopsTimetableCurrentAndFutureTrips": {
         "end_of_service": "Fim de Serviço"
     },
-    "StopsExplorerTimetableRow": {
+    "FrontendStopsTimetableRow": {
         "trip_realtime_status": {
             "passed": "{value}",
             "scheduled": "{value}",
@@ -753,7 +753,7 @@
             "realtime": "{value} min"
         }
     },
-    "StopsExplorerToolbarSearch": {
+    "FrontendStopsToolbarSearch": {
         "label": "Procurar paragens por nome, código, localização...",
         "placeholder": "Procurar paragens por nome, código, localização...",
         "no_results": "Nenhuma Paragem Encontrada"
@@ -762,7 +762,7 @@
         "enabled": "Disable Debug",
         "disabled": "Enable Debug"
     },
-    "StopsExplorerTimetableFeedback": {
+    "FrontendStopsTimetableFeedback": {
         "message": "A estimativa está correta?",
         "answers": {
             "positive": "Sim",
@@ -770,7 +770,7 @@
         },
         "thank_you": "Obrigado pelo contributo!"
     },
-    "AnalyticsAuthorizer": {
+    "FrontendAnalytics": {
         "title": "Respeitamos a sua Privacidade",
         "text": "Com o objetivo de melhorar a performance, os conteúdos e a segurança deste site, a TML pretende recorrer à utilização de cookies ou tecnologias similares.",
         "privacy_policy": "Consultar Política de Cookies",
@@ -880,10 +880,10 @@
         "title": "Website em Manutenção",
         "subtitle": "Estaremos de volta em breve"
     },
-    "VehiclesExplorer": {
+    "FrontendVehicles": {
         "pannel_title": "Veículos"
     },
-    "VehiclesExplorerSummary": {
+    "FrontendVehiclesSummary": {
         "intro": "O passe navegante municipal Família permite que cada agregado familiar pague no máximo o valor de 2 passes navegante municipal, independentemente do número de elementos do agregado familiar. É válido em todas as empresas de serviço público de transporte regular de passageiros, em todos os 18 municípios da Área Metropolitana de Lisboa."
     },
     "ErrorExplorer": {

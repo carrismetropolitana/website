@@ -4,6 +4,7 @@
     "baseUrl": ".",
     // Using "paths" allows you to configure module path aliases
     "paths": {
+      "@/authentication/*": ["authentication/*"],
       "@/styles/*": ["styles/*"],
       "@/forms/*": ["forms/*"],
       "@/components/*": ["components/*"],

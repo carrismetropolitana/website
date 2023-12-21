@@ -7,7 +7,7 @@ import AppWrapper from '@/components/AppWrapper/AppWrapper';
 import AppTopBar from '@/components/AppTopBar/AppTopBar';
 import AppHeader from '@/components/AppHeader/AppHeader';
 import AppFooter from '@/components/AppFooter/AppFooter';
-import AnalyticsAuthorizer from '@/components/AnalyticsAuthorizer/AnalyticsAuthorizer';
+import FrontendAnalytics from '@/components/FrontendAnalytics/FrontendAnalytics';
 // import StatusMessage from '@/components/StatusMessage/StatusMessage';
 // import MaintenanceWarning from '@/components/MaintenanceWarning/MaintenanceWarning';
 
@@ -22,7 +22,7 @@ export default function Layout({ children, params: { locale } }) {
 
   return (
     <NextIntlClientProvider locale={locale} messages={messages} timeZone="Europe/Lisbon" now={Date.now()}>
-      <AnalyticsAuthorizer />
+      <FrontendAnalytics />
       <AppWrapper>
         <AppTopBar />
         <AppHeader />

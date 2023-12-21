@@ -5,7 +5,7 @@ import Pannel from '@/components/Pannel/Pannel';
 import { Anchor, Button, Group, Table } from '@mantine/core';
 import { openConfirmModal } from '@mantine/modals';
 import { useTranslations } from 'next-intl';
-import { useAnalyticsContext } from '@/contexts/AnalyticsContext';
+import { useAnalyticsContext } from '@/contexts/FrontendAnalyticsContext';
 import { IconCircleCheckFilled } from '@tabler/icons-react';
 
 export default function LegalExplorerCookies() {
