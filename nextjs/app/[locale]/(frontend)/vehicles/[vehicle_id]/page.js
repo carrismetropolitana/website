@@ -1,7 +1,7 @@
 /* * */
 
 import { OneFullColumn } from '@/components/Layouts/Layouts';
-import { FrontendVehiclesContextProvider } from '@/contexts/VehiclesContext';
+import { FrontendVehiclesContextProvider } from '@/contexts/FrontendVehiclesContext';
 import FrontendVehicles from '@/components/FrontendVehicles/FrontendVehicles';
 
 /* * */
