@@ -11,8 +11,8 @@ jobs:
   # # # # # # # # # # # # # # # # # # # # #
   # # # # # # # # # # # # # # # # # # # # #
 
-  go-dashboard:
-    name: 'Build Docker Image (frontend)'
+  website-nextjs:
+    name: 'Build Docker Image (nextjs)'
     runs-on: ubuntu-latest
     strategy:
       fail-fast: false
@@ -31,10 +31,10 @@ jobs:
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Build Docker Image - frontend
+      - name: Build Docker Image - nextjs
         uses: docker/build-push-action@v4
         with:
           push: true
-          context: ./frontend
-          file: ./frontend/Dockerfile
-          tags: ghcr.io/carrismetropolitana/website-frontend:${{ github.ref_name }}
+          context: ./nextjs
+          file: ./nextjs/Dockerfile
+          tags: ghcr.io/carrismetropolitana/website-nextjs:${{ github.ref_name }}
