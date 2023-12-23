@@ -19,7 +19,7 @@ services:
     ports:
       - 27017:27017
     volumes:
-      - carrismetropolitana-website-mongodbdata:/data/db
+      - mongodbdata:/data/db
     environment:
       - MONGO_INITDB_ROOT_USERNAME=mongodbuser
       - MONGO_INITDB_ROOT_PASSWORD=mongodbpassword
