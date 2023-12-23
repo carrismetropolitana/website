@@ -1,0 +1,25 @@
+version: '3.9'
+
+volumes:
+  mongodbdata:
+
+services:
+  #
+
+  # # # # # # # # # # # # # # # # # # # # #
+  # # # # # # # # # # # # # # # # # # # # #
+
+  mongodb:
+    image: mongo
+    restart: unless-stopped
+    logging:
+      options:
+        max-size: '1m'
+        max-file: '1'
+    ports:
+      - 27017:27017
+    volumes:
+      - carrismetropolitana-website-mongodbdata:/data/db
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=mongodbuser
+      - MONGO_INITDB_ROOT_PASSWORD=mongodbpassword
