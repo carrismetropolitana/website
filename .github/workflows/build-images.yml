@@ -38,3 +38,34 @@ jobs:
           context: ./nextjs
           file: ./nextjs/Dockerfile
           tags: ghcr.io/carrismetropolitana/website-nextjs:${{ github.ref_name }}
+
+  # # # # # # # # # # # # # # # # # # # # #
+  # # # # # # # # # # # # # # # # # # # # #
+
+  website-backupd:
+    name: 'Build Docker Image (backupd)'
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+    permissions:
+      contents: read
+      packages: write
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Login to GitHub Container Registry
+        uses: docker/login-action@v2
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Build Docker Image - backupd
+        uses: docker/build-push-action@v4
+        with:
+          push: true
+          context: ./backupd
+          file: ./backupd/Dockerfile
+          tags: ghcr.io/carrismetropolitana/website-backupd:${{ github.ref_name }}
