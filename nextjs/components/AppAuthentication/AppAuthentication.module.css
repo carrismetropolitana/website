@@ -1,0 +1,18 @@
+/* * */
+/* CONTAINER */
+
+.container {
+  width: 100%;
+  background-color: var(--spg-brand-3);
+  padding: 50px 0;
+}
+
+/* * */
+/* GRID */
+
+.grid {
+  width: 100%;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 30px;
+}

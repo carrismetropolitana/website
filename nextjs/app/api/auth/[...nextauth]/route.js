@@ -1,3 +1,3 @@
 /* * */
 
-// export { GET, POST } from '@/authentication/config';
+export { GET, POST } from '@/authentication/config';
