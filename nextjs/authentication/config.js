@@ -17,7 +17,7 @@ import sessionCallback from './session.callback';
 
 const authjs = NextAuth({
   session: { strategy: 'database' },
-  adapter: MongoDBAdapter(mongodbAdapterConfig.connection),
+  adapter: MongoDBAdapter(mongodbAdapterConfig),
   providers: [EmailProvider(emailProviderConfig), GitHub(githubProviderConfig)],
   pages: {
     signIn: '/login',

@@ -14,9 +14,11 @@ const sessionCallback = async ({ session, token, user }) => {
 
   if (!user) throw new Error('Authentication failed: No user found.');
 
-  await MONGOOSE.connect();
+  //   await MONGOOSE.connect();
 
-  const foundUser = await UserModel.findOneAndUpdate({ _id: session.user.id }, { last_active: new Date() }, { new: true });
+  //   const foundUser = await UserModel.findOneAndUpdate({ _id: session.user.id }, { last_active: new Date() }, { new: true });
+  //   if (foundUser) session.user = foundUser;
+  return session;
 
   //
 };
