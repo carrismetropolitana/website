@@ -1,0 +1,32 @@
+/* * */
+/* CONTAINER */
+
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  justify-content: center;
+  width: 100%;
+  gap: 10px;
+  padding: 20px;
+  border-bottom: 1px solid var(--gray3);
+}
+
+/* * */
+/* SUBMIT BUTTON */
+
+.submitButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  outline: none;
+  cursor: pointer;
+  background-color: var(--gray1);
+  padding: 5px 20px;
+  border: 1px solid var(--gray4);
+  border-radius: 5px;
+  font-size: 14px;
+  font-weight: 600;
+  text-transform: uppercase;
+  color: var(--gray7);
+}

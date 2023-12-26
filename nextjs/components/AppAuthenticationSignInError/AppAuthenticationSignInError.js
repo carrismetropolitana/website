@@ -38,7 +38,7 @@ export default function AppAuthenticationSignInError() {
       default:
         return t('error_type.unknown.message');
     }
-  }, []);
+  }, [searchParams, t]);
 
   const errorAction = useMemo(() => {
     switch (searchParams.get('error')) {
@@ -51,7 +51,7 @@ export default function AppAuthenticationSignInError() {
       default:
         return t('error_type.unknown.action');
     }
-  }, []);
+  }, [searchParams, t]);
 
   //
   // C. Handle actions

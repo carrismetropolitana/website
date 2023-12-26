@@ -8,7 +8,6 @@ import { useSearchParams } from 'next/navigation';
 import { useRouter } from '@/translations/navigation';
 import styles from './AppAuthentication.module.css';
 import Loader from '@/components/Loader/Loader';
-import Panel from '@/components/Panel/Panel';
 
 /* * */
 
@@ -29,7 +28,7 @@ export default function AppAuthentication({ children }) {
     if (status === 'authenticated') {
       const callbackUrl = searchParams.get('callbackUrl');
       if (callbackUrl) router.push(callbackUrl);
-      else router.push('/');
+      else router.push('/profile');
     }
   }, [router, status, searchParams]);
 
@@ -39,12 +38,7 @@ export default function AppAuthentication({ children }) {
   return (
     <div className={styles.container}>
       {(status === 'loading' || status === 'authenticated') && <Loader visible fixed />}
-      <Panel first>
-        <div className={styles.grid}>
-          <Panel>{children}</Panel>
-          <div className={styles.advert}></div>
-        </div>
-      </Panel>
+      <div className={styles.content}>{children}</div>
     </div>
   );
 

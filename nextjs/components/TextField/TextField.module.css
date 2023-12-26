@@ -1,0 +1,82 @@
+/* * */
+/* CONTAINER */
+
+.container {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 25px;
+  font-family: 'lato';
+}
+
+/* * */
+/* REGULAR LABEL */
+
+.regularLabel {
+  color: var(--spg-brand-2);
+  font-size: 15px;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+/* * */
+/* DESCRIPTION LABEL */
+
+.descriptionLabel {
+  font-size: 12px;
+  font-weight: 400;
+  color: var(--spg-support-5);
+  margin-top: 5px;
+}
+
+/* * */
+/* ERROR LABEL */
+
+.errorLabel {
+  margin-top: 5px;
+  color: var(--color-state-error);
+  font-size: 12px;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+/* * */
+/* INPUT */
+
+.input {
+  width: 100%;
+  background: transparent;
+  color: var(--color-reference-1);
+  border-radius: 0;
+  border: none;
+  border-bottom: 2px solid var(--spg-brand-2);
+  padding: 4px 0 4px 1px;
+  font-size: 17px;
+  font-weight: 700;
+  outline: none;
+  line-height: 1;
+}
+
+.input:hover {
+  background: rgba(0, 0, 0, 0.02);
+}
+
+.input:focus {
+  background: transparent;
+  border-bottom-color: var(--spg-support-1);
+}
+
+.input::placeholder {
+  font-size: 15px;
+  text-transform: uppercase;
+  color: var(--spg-support-4);
+}
+
+.input:focus::placeholder,
+.isError .input::placeholder {
+  color: rgba(0, 0, 0, 0.15);
+}
+
+.isError .input {
+  background: rgba(180, 30, 0, 0.05);
+  border-bottom-color: var(--color-state-error);
+}

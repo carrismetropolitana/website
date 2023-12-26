@@ -891,5 +891,54 @@
         "subtitle": "Fomos notificados e iremos corrigir em breve. Obrigado pela sua compreensão.",
         "retry": "Nova tentativa em {value} segundos",
         "goto_home": "Voltar à página principal"
+    },
+    "AppAuthenticationSignIn": {
+        "title": "Title",
+        "subtitle": "subtitle"
+    },
+    "AppAuthenticationSignInProvider": {
+        "email": {
+            "label": "Email",
+            "placeholder": "Email"
+        },
+        "submit": {
+            "label": "Login com Email"
+        }
+    },
+    "AppAuthenticationSignInProviderEmail": {
+        "email": {
+            "label": "Email",
+            "placeholder": "Email"
+        },
+        "submit": {
+            "label": "Login com Email"
+        }
+    },
+    "AppAuthenticationSignInVerify": {
+        "title": "Login",
+        "subtitle": "Por favor verifique a sua caixa de email.",
+        "retry": "Não recebi o email de login"
+    },
+    "AppAuthenticationSignInError": {
+        "title": "Login",
+        "retry": "Tentar Novamente",
+        "error_type": {
+            "Configuration": {
+                "message": "Existe um problema com a configuração do servidor",
+                "action": "Por favor entre em contacto connosco."
+            },
+            "AccessDenied": {
+                "message": "Este email não existe nos nossos registos",
+                "action": "Tem a certeza que é com este email que está registado na SPG?"
+            },
+            "Verification": {
+                "message": "O login expirou ou foi utilizado noutro browser",
+                "action": "Por favor faça login novamente."
+            },
+            "unknown": {
+                "message": "Erro Desconhecido",
+                "action": "Por favor entre em contacto connosco."
+            }
+        }
     }
 }

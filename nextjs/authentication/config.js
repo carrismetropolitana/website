@@ -1,15 +1,33 @@
 /* * */
 
 import NextAuth from 'next-auth';
-import GitHub from 'next-auth/providers/github';
 import { MongoDBAdapter } from '@auth/mongodb-adapter';
-import mongoDbConnection from './mongodb.connection';
+import mongodbAdapterConfig from './mongodb.adapter';
+
+import GitHub from 'next-auth/providers/github';
+import githubProviderConfig from './github.provider';
+
+import EmailProvider from 'next-auth/providers/email';
+import emailProviderConfig from './email.provider';
+
+import signInCallback from './signIn.callback';
+import sessionCallback from './session.callback';
 
 /* * */
 
 const authjs = NextAuth({
-  providers: [GitHub],
-  adapter: MongoDBAdapter(mongoDbConnection),
+  session: { strategy: 'database' },
+  adapter: MongoDBAdapter(mongodbAdapterConfig.connection),
+  providers: [EmailProvider(emailProviderConfig), GitHub(githubProviderConfig)],
+  pages: {
+    signIn: '/login',
+    error: '/login/error',
+    verifyRequest: '/login/verify',
+  },
+  callbacks: {
+    signIn: signInCallback,
+    session: sessionCallback,
+  },
 });
 
 /* * */

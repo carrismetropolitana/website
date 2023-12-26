@@ -1,0 +1,16 @@
+.title {
+  font-family: 'lemonde-journal';
+  color: var(--color-reference-1);
+  font-weight: 700;
+  line-height: 1.2;
+  text-align: left;
+  letter-spacing: 0px;
+}
+
+h1.title {
+  font-size: 40px;
+}
+
+h2.title {
+  font-size: 30px;
+}
