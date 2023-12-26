@@ -1,3 +1,7 @@
 /* * */
 
-// export { GET, POST } from '@/authentication/config';
+import { handlers } from '@/authentication/config';
+
+/* * */
+
+export const { GET, POST } = handlers;

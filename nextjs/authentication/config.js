@@ -2,7 +2,7 @@
 
 import NextAuth from 'next-auth';
 import { MongoDBAdapter } from '@auth/mongodb-adapter';
-import mongodbAdapterConfig from './mongodb.adapter';
+import MONGODB from '@/services/MONGODB';
 
 import GitHub from 'next-auth/providers/github';
 import githubProviderConfig from './github.provider';
@@ -15,9 +15,9 @@ import sessionCallback from './session.callback';
 
 /* * */
 
-const authjs = NextAuth({
+const authConfig = {
   session: { strategy: 'database' },
-  adapter: MongoDBAdapter(mongodbAdapterConfig),
+  adapter: MongoDBAdapter(MONGODB.connection),
   providers: [EmailProvider(emailProviderConfig), GitHub(githubProviderConfig)],
   pages: {
     signIn: '/login',
@@ -28,11 +28,8 @@ const authjs = NextAuth({
     signIn: signInCallback,
     session: sessionCallback,
   },
-});
+};
 
 /* * */
 
-export const {
-  handlers: { GET, POST },
-  auth,
-} = authjs;
+export const { handlers, auth, signIn, signOut } = NextAuth(authConfig);

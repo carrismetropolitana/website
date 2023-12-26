@@ -8,9 +8,9 @@ import { UserModel } from '@/schemas/User/model';
 const sessionCallback = async ({ session, token, user }) => {
   //
 
-  console.log('----------------------------');
-  console.log('sessionCallback(user)', user);
-  console.log('----------------------------');
+  //   console.log('----------------------------');
+  //   console.log('sessionCallback(user)', user);
+  //   console.log('----------------------------');
 
   if (!user) throw new Error('Authentication failed: No user found.');
 
