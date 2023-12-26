@@ -35,5 +35,5 @@ yarn-error.log*
 
 # Tmp directory
 */tmp
-frontend/package-lock.json
+*/package-lock.json
 nginx/uptime.conf
