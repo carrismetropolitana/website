@@ -2,6 +2,7 @@ version: '3.9'
 
 volumes:
   certbotdata:
+  mongodbdata:
 
 services:
   #
@@ -94,8 +95,8 @@ services:
       options:
         max-size: '1m'
         max-file: '1'
-    environment:
-      - VERCEL_URL=beta.carrismetropolitana.pt
+    env_file:
+      - .env.production
 
   # # # # # # # # # # # # # # # # # # # # #
   # # # # # # # # # # # # # # # # # # # # #
