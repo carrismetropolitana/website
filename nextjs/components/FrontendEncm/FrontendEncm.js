@@ -25,7 +25,7 @@ export default function FrontendEncm() {
 
   const t = useTranslations('FrontendEncm');
 
-  const { FrontendEncmMap } = useMap();
+  const { frontendEncmMap } = useMap();
 
   const analyticsContext = useAnalyticsContext();
 
@@ -102,12 +102,12 @@ export default function FrontendEncm() {
   // D. Handle actions
 
   const handleMapReCenter = () => {
-    FrontendEncmMap.flyTo({ ...OSMMapDefaults.viewport, duration: 2000 });
+    frontendEncmMap.flyTo({ ...OSMMapDefaults.viewport, duration: 2000 });
   };
 
   const handleOpenInGoogleMaps = () => {
-    const center = FrontendEncmMap.getCenter();
-    const zoom = FrontendEncmMap.getZoom();
+    const center = frontendEncmMap.getCenter();
+    const zoom = frontendEncmMap.getZoom();
     const zoomMargin = 2; // Compensate the difference between OSM and Google Maps
     window.open(`https://www.google.com/maps/@${center.lat},${center.lng},${zoom + zoomMargin}z`, '_blank', 'noopener,noreferrer');
   };
@@ -122,17 +122,17 @@ export default function FrontendEncm() {
       const defaultZoom = 17;
       const defaultZoomMargin = 3;
       // Check if selected encm is within rendered bounds
-      const renderedFeatures = FrontendEncmMap.queryRenderedFeatures({ layers: ['all-encm'] });
+      const renderedFeatures = frontendEncmMap.queryRenderedFeatures({ layers: ['all-encm'] });
       const isEncmCurrentlyRendered = renderedFeatures.find((item) => item.properties?.id === encmMapFeature.properties?.id);
       // Get map current zoom level
-      const currentZoom = FrontendEncmMap.getZoom();
+      const currentZoom = frontendEncmMap.getZoom();
       // If the encm is visible and the zoom is not too far back (plus a little margin)...
       if (isEncmCurrentlyRendered && currentZoom + defaultZoomMargin > defaultZoom) {
         // ...then simply ease to it.
-        FrontendEncmMap.easeTo({ center: encmMapFeature?.geometry?.coordinates, zoom: currentZoom, duration: defaultSpeed * 0.25 });
+        frontendEncmMap.easeTo({ center: encmMapFeature?.geometry?.coordinates, zoom: currentZoom, duration: defaultSpeed * 0.25 });
       } else {
         // If the zoom is too far, or the desired encm is not visible, then fly to it
-        FrontendEncmMap.flyTo({ center: encmMapFeature?.geometry?.coordinates, zoom: defaultZoom, duration: defaultSpeed });
+        frontendEncmMap.flyTo({ center: encmMapFeature?.geometry?.coordinates, zoom: defaultZoom, duration: defaultSpeed });
       }
       // Save the current feature to state and mark it as selected
       setSelectedMapFeature(encmMapFeature);
