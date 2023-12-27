@@ -5,7 +5,7 @@ import Panel from '@/components/Panel/Panel';
 import { Anchor, Button, Group, Table } from '@mantine/core';
 import { openConfirmModal } from '@mantine/modals';
 import { useTranslations } from 'next-intl';
-import { useAnalyticsContext } from '@/contexts/FrontendAnalyticsContext';
+import { useAppAnalyticsContext } from '@/contexts/AppAnalyticsContext';
 import { IconCircleCheckFilled } from '@tabler/icons-react';
 
 export default function LegalExplorerCookies() {
@@ -15,7 +15,7 @@ export default function LegalExplorerCookies() {
   // A. Setup variables
 
   const t = useTranslations('LegalExplorerCookies');
-  const analyticsContext = useAnalyticsContext();
+  const analyticsContext = useAppAnalyticsContext();
 
   //
   // B. Handle actions

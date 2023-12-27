@@ -9,7 +9,8 @@ import { useState } from 'react';
 import Loader from '@/components/Loader/Loader';
 import useSWR from 'swr';
 import AppAuthenticationSignInProvider from '@/components/AppAuthenticationSignInProvider/AppAuthenticationSignInProvider';
-import AppAuthenticationSignInProviderEmail from '../AppAuthenticationSignInProviderEmail/AppAuthenticationSignInProviderEmail';
+import AppAuthenticationSignInProviderEmail from '@/components/AppAuthenticationSignInProviderEmail/AppAuthenticationSignInProviderEmail';
+import { useSearchParams } from 'next/navigation';
 
 /* * */
 
@@ -20,6 +21,8 @@ export default function AppAuthenticationSignIn() {
   // A. Setup variables
 
   const t = useTranslations('AppAuthenticationSignIn');
+  const searchParams = useSearchParams();
+
   const [isLoading, setIsLoading] = useState(false);
 
   //
@@ -32,7 +35,10 @@ export default function AppAuthenticationSignIn() {
 
   const handleSignIn = async (providerId, providerPayload) => {
     setIsLoading(true);
-    signIn(providerId, { ...providerPayload, callbackUrl: '/profile' });
+    let callbackUrl = searchParams.get('callbackUrl');
+    const shouldReturnJwt = searchParams.get('returnToken');
+    if (shouldReturnJwt === 'true') callbackUrl = '/profile/token';
+    signIn(providerId, { ...providerPayload, callbackUrl: callbackUrl || '/profile' });
   };
 
   //
@@ -40,11 +46,8 @@ export default function AppAuthenticationSignIn() {
 
   return (
     <div className={styles.container}>
-      {providersData ? (
-        Object.values(providersData).map((provider) => (provider.id === 'email' ? <AppAuthenticationSignInProviderEmail key={provider.id} onClick={handleSignIn} /> : <AppAuthenticationSignInProvider key={provider.id} providerId={provider.id} onClick={handleSignIn} />))
-      ) : (
-        <Loader visible fixed />
-      )}
+      {(isLoading || !providersData) && <Loader visible fixed />}
+      {providersData && Object.values(providersData).map((provider) => (provider.id === 'email' ? <AppAuthenticationSignInProviderEmail key={provider.id} onClick={handleSignIn} /> : <AppAuthenticationSignInProvider key={provider.id} providerId={provider.id} onClick={handleSignIn} />))}
     </div>
   );
 

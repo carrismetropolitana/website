@@ -10,7 +10,7 @@ import Panel from '@/components/Panel/Panel';
 import FrontendLinesToolbar from '@/components/FrontendLinesToolbar/FrontendLinesToolbar';
 import FrontendLinesContent from '@/components/FrontendLinesContent/FrontendLinesContent';
 import BetaIcon from '@/components/BetaIcon/BetaIcon';
-import { useAnalyticsContext } from '@/contexts/FrontendAnalyticsContext';
+import { useAppAnalyticsContext } from '@/contexts/AppAnalyticsContext';
 import { useFrontendLinesContext } from '@/contexts/FrontendLinesContext';
 
 /* * */
@@ -23,7 +23,7 @@ export default function FrontendLines() {
 
   const t = useTranslations('FrontendLines');
 
-  const analyticsContext = useAnalyticsContext();
+  const analyticsContext = useAppAnalyticsContext();
   const FrontendLinesContext = useFrontendLinesContext();
 
   //

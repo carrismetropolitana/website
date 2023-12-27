@@ -14,7 +14,7 @@ import StopTimetable from '@/components/FrontendStopsTimetable/FrontendStopsTime
 import NoDataLabel from '@/components/NoDataLabel/NoDataLabel';
 import { useFrontendStopsContext } from '@/contexts/FrontendStopsContext';
 import BetaIcon from '@/components/BetaIcon/BetaIcon';
-import { useAnalyticsContext } from '@/contexts/FrontendAnalyticsContext';
+import { useAppAnalyticsContext } from '@/contexts/AppAnalyticsContext';
 
 /* * */
 
@@ -26,7 +26,7 @@ export default function FrontendStops() {
 
   const t = useTranslations('FrontendStops');
 
-  const analyticsContext = useAnalyticsContext();
+  const analyticsContext = useAppAnalyticsContext();
   const FrontendStopsContext = useFrontendStopsContext();
 
   //

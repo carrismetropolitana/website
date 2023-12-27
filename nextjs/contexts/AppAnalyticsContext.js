@@ -22,15 +22,15 @@ const LOCAL_STORAGE_VALIDITY_IN_DAYS = 365; // days
 // A.
 // CREATE CONTEXT
 
-const AnalyticsContext = createContext(null);
+const AppAnalyticsContext = createContext(null);
 
 /* * */
 
 // B.
 // SETUP CUSTOM HOOKS
 
-export function useAnalyticsContext() {
-  return useContext(AnalyticsContext);
+export function useAppAnalyticsContext() {
+  return useContext(AppAnalyticsContext);
 }
 
 /* * */
@@ -38,7 +38,7 @@ export function useAnalyticsContext() {
 // C.
 // SETUP PROVIDER
 
-export function AnalyticsContextProvider({ children }) {
+export function AppAnalyticsContextProvider({ children }) {
   //
 
   //
@@ -152,7 +152,7 @@ export function AnalyticsContextProvider({ children }) {
   //
   // F. Return provider
 
-  return <AnalyticsContext.Provider value={contextObject}>{children}</AnalyticsContext.Provider>;
+  return <AppAnalyticsContext.Provider value={contextObject}>{children}</AppAnalyticsContext.Provider>;
 
   //
 }

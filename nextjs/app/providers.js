@@ -8,7 +8,7 @@ import { MantineProvider } from '@mantine/core';
 import { SessionProvider } from 'next-auth/react';
 import { MapProvider } from 'react-map-gl/maplibre';
 import { DebugContextProvider } from '@/contexts/DebugContext';
-import { AnalyticsContextProvider } from '@/contexts/FrontendAnalyticsContext';
+import { AppAnalyticsContextProvider } from '@/contexts/AppAnalyticsContext';
 import { ModalsProvider } from '@mantine/modals';
 import { DatesProvider } from '@mantine/dates';
 
@@ -57,11 +57,11 @@ export default function Providers({ children, session }) {
         <MantineProvider withGlobalStyles withNormalizeCSS>
           <DatesProvider settings={mantineDatesSettings}>
             <ModalsProvider>
-              <AnalyticsContextProvider>
+              <AppAnalyticsContextProvider>
                 <DebugContextProvider>
                   <MapProvider>{children}</MapProvider>
                 </DebugContextProvider>
-              </AnalyticsContextProvider>
+              </AppAnalyticsContextProvider>
             </ModalsProvider>
           </DatesProvider>
         </MantineProvider>

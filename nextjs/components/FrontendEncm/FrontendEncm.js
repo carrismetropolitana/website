@@ -13,7 +13,7 @@ import generateUUID from '@/services/generateUUID';
 import FrontendEncmToolbar from '@/components/FrontendEncmToolbar/FrontendEncmToolbar';
 import FrontendEncmInfo from '@/components/FrontendEncmInfo/FrontendEncmInfo';
 import FrontendEncmGrid from '@/components/FrontendEncmGrid/FrontendEncmGrid';
-import { useAnalyticsContext } from '@/contexts/FrontendAnalyticsContext';
+import { useAppAnalyticsContext } from '@/contexts/AppAnalyticsContext';
 
 /* * */
 
@@ -27,7 +27,7 @@ export default function FrontendEncm() {
 
   const { frontendEncmMap } = useMap();
 
-  const analyticsContext = useAnalyticsContext();
+  const analyticsContext = useAppAnalyticsContext();
 
   const [selectedMapStyle, setSelectedMapStyle] = useState('map');
 

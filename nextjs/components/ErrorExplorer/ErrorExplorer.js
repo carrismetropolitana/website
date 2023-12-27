@@ -7,7 +7,7 @@ import { useTranslations } from 'next-intl';
 import styles from './ErrorExplorer.module.css';
 import { IconBarrierBlock, IconMoodSad, IconTrafficCone } from '@tabler/icons-react';
 import { Button } from '@mantine/core';
-import { useAnalyticsContext } from '@/contexts/FrontendAnalyticsContext';
+import { useAppAnalyticsContext } from '@/contexts/AppAnalyticsContext';
 
 /* * */
 
@@ -18,7 +18,7 @@ export default function ErrorExplorer() {
   // A. Setup variables
 
   const t = useTranslations('ErrorExplorer');
-  const analyticsContext = useAnalyticsContext();
+  const analyticsContext = useAppAnalyticsContext();
 
   const [reloadInSeconds, setReloadInSeconds] = useState(10);
 

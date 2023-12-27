@@ -4,24 +4,24 @@
 
 import Link from 'next/link';
 import Image from 'next/image';
-import styles from './FrontendAnalytics.module.css';
+import styles from './AppAnalytics.module.css';
 import { Button, Modal } from '@mantine/core';
-import { useAnalyticsContext } from '@/contexts/FrontendAnalyticsContext';
+import { useAppAnalyticsContext } from '@/contexts/AppAnalyticsContext';
 import { useEffect, useState } from 'react';
 import { usePathname } from 'next/navigation';
 import { useTranslations } from 'next-intl';
 
 /* * */
 
-export default function FrontendAnalytics() {
+export default function AppAnalytics() {
   //
 
   //
   // A. Setup variables
 
-  const t = useTranslations('FrontendAnalytics');
+  const t = useTranslations('AppAnalytics');
   const pathname = usePathname();
-  const analyticsContext = useAnalyticsContext();
+  const analyticsContext = useAppAnalyticsContext();
 
   const [isOpen, setIsOpen] = useState(false);
 
