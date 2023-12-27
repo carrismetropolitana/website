@@ -12,7 +12,6 @@ import emailProviderConfig from './email.provider';
 
 import signInCallback from './signIn.callback';
 import sessionCallback from './session.callback';
-import redirectCallback from './redirect.callback';
 
 /* * */
 
@@ -28,7 +27,6 @@ const authConfig = {
   callbacks: {
     signIn: signInCallback,
     session: sessionCallback,
-    redirect: redirectCallback,
   },
 };
 
