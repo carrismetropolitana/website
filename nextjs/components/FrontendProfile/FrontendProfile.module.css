@@ -2,6 +2,11 @@
 /* CONTAINER */
 
 .container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
   width: 100%;
   padding: 50px 0;
 }
@@ -21,4 +26,18 @@
   background-color: var(--reference-0);
   border: 1px solid var(--gray-2);
   border-radius: 10px;
+}
+
+/* * */
+/* LOGOUT */
+
+.logout {
+  width: 100%;
+  text-align: center;
+  font-size: 15px;
+  font-weight: 600;
+  text-transform: uppercase;
+  color: var(--red-7);
+  padding: 4px 10px;
+  cursor: pointer;
 }
