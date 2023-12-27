@@ -1,7 +1,7 @@
 /* * */
 
 import createIntlMiddleware from 'next-intl/middleware';
-import { availableLocales } from './translations/config';
+import { availableLocales } from '@/translations/config';
 
 /* * */
 

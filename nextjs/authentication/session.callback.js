@@ -17,7 +17,7 @@ const sessionCallback = async ({ session, token, user }) => {
   //   await MONGOOSE.connect();
 
   //   const foundUser = await UserModel.findOneAndUpdate({ _id: session.user.id }, { last_active: new Date() }, { new: true });
-  //   if (foundUser) session.user = foundUser;
+  if (user) session.user = user;
   return session;
 
   //

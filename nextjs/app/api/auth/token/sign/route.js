@@ -1,6 +1,7 @@
 /* * */
 
 import { auth } from '@/authentication/config';
+import jwt from 'jsonwebtoken';
 // import MONGOOSE from '@/services/MONGOOSE';
 // import { UserModel } from '@/schemas/User/model';
 
@@ -12,13 +13,15 @@ export async function GET(request) {
   //
   // 1. Check authentication
 
-  const session = await auth(request);
-  if (!session) throw new Error('Authentication required.');
-
-  return Response.json({ status: 'success' });
+  const session = await auth();
+  if (!session) return new Response('Authentication required.', { status: 401 });
 
   //
-  // 2. Connect to MongoDB
+  // 2. Sign the token
+
+  const signedToken = jwt.sign({ user_id: session.user.id }, process.env.JWT_SIGN_SECRET, { expiresIn: '1h' });
+
+  return new Response(signedToken);
 
   //   await MONGOOSE.connect();
 

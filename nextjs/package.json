@@ -23,6 +23,7 @@
         "dayjs": "1.11.10",
         "embla-carousel-react": "7.1.0",
         "inflected": "2.1.0",
+        "jsonwebtoken": "^9.0.2",
         "luxon": "3.4.4",
         "maplibre-gl": "3.6.2",
         "mongodb": "6.3.0",

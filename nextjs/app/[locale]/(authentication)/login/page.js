@@ -1,9 +1,9 @@
 /* * */
 
-import AppAuthenticationSignIn from '@/components/AppAuthenticationSignIn/AppAuthenticationSignIn';
+import AppAuthenticationLogin from '@/components/AppAuthenticationLogin/AppAuthenticationLogin';
 
 /* * */
 
 export default function Page() {
-  return <AppAuthenticationSignIn />;
+  return <AppAuthenticationLogin />;
 }

@@ -4,7 +4,7 @@
 
 import { signIn } from 'next-auth/react';
 import { useTranslations } from 'next-intl';
-import styles from './AppAuthenticationSignIn.module.css';
+import styles from './AppAuthenticationLogin.module.css';
 import { useState } from 'react';
 import Loader from '@/components/Loader/Loader';
 import useSWR from 'swr';
@@ -14,7 +14,7 @@ import { useSearchParams } from 'next/navigation';
 
 /* * */
 
-export default function AppAuthenticationSignIn() {
+export default function AppAuthenticationLogin() {
   //
 
   //
