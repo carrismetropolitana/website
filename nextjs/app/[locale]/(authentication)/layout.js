@@ -1,9 +1,9 @@
 /* * */
 
-import FrontendWrapper from '@/components/FrontendWrapper/FrontendWrapper';
+import AppAuthentication from '@/components/AppAuthentication/AppAuthentication';
 
 /* * */
 
-export default function Layout({ children, params: { locale } }) {
-  return <FrontendWrapper>{children}</FrontendWrapper>;
+export default function Layout({ children }) {
+  return <AppAuthentication>{children}</AppAuthentication>;
 }
