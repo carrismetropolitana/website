@@ -1,8 +1,12 @@
 'use client';
 
+/* * */
+
 import styles from './FrontendEncmGrid.module.css';
 import { useMemo } from 'react';
 import FrontendEncmItem from '@/components/FrontendEncmItem/FrontendEncmItem';
+
+/* * */
 
 export default function FrontendEncmGrid({ allEncmData, selectedEncmId, onSelectEncmId }) {
   //

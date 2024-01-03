@@ -1,10 +1,14 @@
 'use client';
 
+/* * */
+
 import { useTranslations } from 'next-intl';
 import styles from './FrontendEncmItem.module.css';
 import Loader from '@/components/Loader/Loader';
 import FrontendEncmItemTimetable from '@/components/FrontendEncmItemTimetable/FrontendEncmItemTimetable';
 import FrontendEncmItemOccupation from '@/components/FrontendEncmItemOccupation/FrontendEncmItemOccupation';
+
+/* * */
 
 export default function FrontendEncmItem({ encmData, selectedEncmId, onSelectEncmId }) {
   //
@@ -37,7 +41,7 @@ export default function FrontendEncmItem({ encmData, selectedEncmId, onSelectEnc
 
       <FrontendEncmItemTimetable isOpen={encmData.is_open} mon={encmData.hours_monday} tue={encmData.hours_tuesday} wed={encmData.hours_wednesday} thu={encmData.hours_thursday} fri={encmData.hours_friday} sat={encmData.hours_saturday} sun={encmData.hours_sunday} />
 
-      <FrontendEncmItemOccupation currentlyWaiting={encmData.currently_waiting} expectedWaitTime={encmData.expected_wait_time} activeCounters={encmData.active_counters} />
+      {encmData.is_open && <FrontendEncmItemOccupation currentlyWaiting={encmData.currently_waiting} expectedWaitTime={encmData.expected_wait_time} activeCounters={encmData.active_counters} />}
     </div>
   ) : (
     <Loader visible />

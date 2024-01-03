@@ -1,9 +1,13 @@
 'use client';
 
+/* * */
+
 import OSMMap from '@/components/OSMMap/OSMMap';
 import { useEffect } from 'react';
 import { useMap, Source, Layer, Popup } from 'react-map-gl/maplibre';
 import FrontendEncmMapPopup from '@/components/FrontendEncmMapPopup/FrontendEncmMapPopup';
+
+/* * */
 
 export default function FrontendEncmMap({ allEncmMapData, selectedEncmMapData, selectedMapStyle, selectedMapFeature, onSelectEncmId }) {
   //
@@ -11,19 +15,19 @@ export default function FrontendEncmMap({ allEncmMapData, selectedEncmMapData, s
   //
   // A. Setup variables
 
-  const { FrontendEncmMap } = useMap();
+  const { frontendEncmMap } = useMap();
 
   //
-  // C. Handle actions
+  // B. Transform data
 
   useEffect(() => {
-    if (!FrontendEncmMap) return;
-    // Load stop idle symbol
-    FrontendEncmMap.loadImage('/icons/map-encm-idle.png', (error, image) => {
+    if (!frontendEncmMap) return;
+    // Load stop open symbol
+    frontendEncmMap.loadImage('/icons/map-encm-open.png', (error, image) => {
       if (error) throw error;
-      FrontendEncmMap.addImage('encm-idle', image, { sdf: false });
+      frontendEncmMap.addImage('encm-open', image, { sdf: false });
     });
-  }, [FrontendEncmMap]);
+  }, [frontendEncmMap]);
 
   //
   // C. Handle actions
@@ -40,33 +44,33 @@ export default function FrontendEncmMap({ allEncmMapData, selectedEncmMapData, s
 
   const handleMapMouseEnter = (event) => {
     if (event?.features[0]?.properties?.id) {
-      FrontendEncmMap.getCanvas().style.cursor = 'pointer';
+      frontendEncmMap.getCanvas().style.cursor = 'pointer';
     }
   };
 
   const handleMapMouseLeave = (event) => {
     if (event?.features[0]?.properties?.id) {
-      FrontendEncmMap.getCanvas().style.cursor = 'default';
+      frontendEncmMap.getCanvas().style.cursor = 'default';
     }
   };
 
   const handleMapMove = () => {
     if (selectedMapFeature) {
       // Get all currently rendered features and mark all of them as unselected
-      const allRenderedFeatures = FrontendEncmMap.queryRenderedFeatures();
+      const allRenderedFeatures = frontendEncmMap.queryRenderedFeatures();
       allRenderedFeatures.forEach(function (f) {
-        FrontendEncmMap.setFeatureState({ source: 'all-encm', id: f.id }, { selected: false });
+        frontendEncmMap.setFeatureState({ source: 'all-encm', id: f.id }, { selected: false });
       });
       // Then mark the selected one as selected
-      FrontendEncmMap.setFeatureState({ source: 'all-encm', id: selectedMapFeature.properties.mapid }, { selected: true });
+      frontendEncmMap.setFeatureState({ source: 'all-encm', id: selectedMapFeature.properties.mapid }, { selected: true });
     }
   };
 
   //
-  // G. Render components
+  // D. Render components
 
   return (
-    <OSMMap id="FrontendEncmMap" mapStyle={selectedMapStyle} onClick={handleMapClick} onMouseEnter={handleMapMouseEnter} onMouseLeave={handleMapMouseLeave} onMove={handleMapMove} interactiveLayerIds={['all-encm']}>
+    <OSMMap id="frontendEncmMap" mapStyle={selectedMapStyle} onClick={handleMapClick} onMouseEnter={handleMapMouseEnter} onMouseLeave={handleMapMouseLeave} onMove={handleMapMove} interactiveLayerIds={['all-encm']}>
       {selectedEncmMapData && (
         <Popup onClose={handlePopupClose} closeButton={false} closeOnClick={false} latitude={selectedEncmMapData.geometry.coordinates[1]} longitude={selectedEncmMapData.geometry.coordinates[0]} anchor="bottom">
           <FrontendEncmMapPopup encmData={selectedEncmMapData.properties} onSelectEncmId={onSelectEncmId} />
@@ -84,7 +88,7 @@ export default function FrontendEncmMap({ allEncmMapData, selectedEncmMapData, s
               'icon-anchor': 'center',
               'symbol-placement': 'point',
               'icon-rotation-alignment': 'map',
-              'icon-image': 'encm-idle',
+              'icon-image': 'encm-open',
               'icon-size': ['interpolate', ['linear', 0.5], ['zoom'], 5, 0.1, 20, 0.25],
               'icon-offset': [0, 0],
             }}
@@ -93,4 +97,6 @@ export default function FrontendEncmMap({ allEncmMapData, selectedEncmMapData, s
       )}
     </OSMMap>
   );
+
+  //
 }

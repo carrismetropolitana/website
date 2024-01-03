@@ -1,5 +1,7 @@
 'use client';
 
+/* * */
+
 import styles from './FrontendEncm.module.css';
 import useSWR from 'swr';
 import { useState, useMemo, useEffect } from 'react';
@@ -42,12 +44,12 @@ export default function FrontendEncm() {
   });
 
   //
-  // B. Fetch data
+  // C. Fetch data
 
   const { data: allEncmData, error: allEncmError, isLoading: allEncmLoading } = useSWR('https://api.carrismetropolitana.pt/facilities/encm', { refreshInterval: 30000 });
 
   //
-  // C. Transform data
+  // D. Transform data
 
   const allEncmMapData = useMemo(() => {
     const geoJSON = {
@@ -99,7 +101,7 @@ export default function FrontendEncm() {
   }, [allEncmData, selectedEncmId]);
 
   //
-  // D. Handle actions
+  // E. Handle actions
 
   const handleMapReCenter = () => {
     frontendEncmMap.flyTo({ ...OSMMapDefaults.viewport, duration: 2000 });
@@ -142,7 +144,7 @@ export default function FrontendEncm() {
   };
 
   //
-  // E. Render components
+  // F. Render components
 
   return (
     <Panel type="A" title={t('title')} loading={allEncmLoading} error={allEncmError}>

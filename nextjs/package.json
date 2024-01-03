@@ -1,6 +1,6 @@
 {
     "name": "@carrismetropolitana/website",
-    "version": "2023.12.18-0928",
+    "version": "2024.01.03-1519",
     "private": true,
     "scripts": {
         "dev": "next dev",

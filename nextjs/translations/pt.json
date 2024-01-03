@@ -711,8 +711,8 @@
         "fri": "Sex",
         "sat": "Sab",
         "sun": "Dom",
-        "is_open": "Aberto",
-        "is_closed": "Fechado"
+        "is_open": "Aberto Agora",
+        "is_closed": "Fechado / Completo"
     },
     "FrontendEncmItemOccupation": {
         "title": "Informação em Tempo Real",

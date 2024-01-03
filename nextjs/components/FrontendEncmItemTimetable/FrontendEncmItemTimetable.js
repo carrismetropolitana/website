@@ -1,8 +1,12 @@
 'use client';
 
+/* * */
+
 import { useTranslations } from 'next-intl';
 import styles from './FrontendEncmItemTimetable.module.css';
 import { useEffect, useState } from 'react';
+
+/* * */
 
 export default function FrontendEncmItemTimetable({ isOpen, mon, tue, wed, thu, fri, sat, sun }) {
   //
@@ -66,7 +70,7 @@ export default function FrontendEncmItemTimetable({ isOpen, mon, tue, wed, thu, 
           <p className={styles.hours}>{item.hours}</p>
         </div>
       ))}
-      {/* {isOpen ? <p className={styles.isOpen}>{t('is_open')}</p> : <p className={styles.isClosed}>{t('is_closed')}</p>} */}
+      {isOpen ? <p className={styles.isOpen}>{t('is_open')}</p> : <p className={styles.isClosed}>{t('is_closed')}</p>}
     </div>
   );
 

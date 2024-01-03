@@ -1,9 +1,13 @@
 'use client';
 
+/* * */
+
 import { useTranslations } from 'next-intl';
 import { useEffect, useState } from 'react';
 import styles from './FrontendEncmItemOccupation.module.css';
 import LiveIcon from '@/components/LiveIcon/LiveIcon';
+
+/* * */
 
 export default function FrontendEncmItemOccupation({ currentlyWaiting, expectedWaitTime, activeCounters, isOpen }) {
   //
