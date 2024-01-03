@@ -27,7 +27,7 @@ export default function FrontendStops() {
   const t = useTranslations('FrontendStops');
 
   const analyticsContext = useAppAnalyticsContext();
-  const FrontendStopsContext = useFrontendStopsContext();
+  const frontendStopsContext = useFrontendStopsContext();
 
   //
   // B. Analytics
@@ -41,15 +41,15 @@ export default function FrontendStops() {
 
   const { data: allStopsData, error: allStopsError, isLoading: allStopsLoading } = useSWR('https://api.carrismetropolitana.pt/stops');
   const { isValidating: allVehiclesValidating } = useSWR('https://api.carrismetropolitana.pt/vehicles');
-  const { isValidating: stopRealtimeValidating } = useSWR(FrontendStopsContext.entities.stop?.id && `https://api.carrismetropolitana.pt/stops/${FrontendStopsContext.entities.stop.id}/realtime`, { refreshInterval: 5000 });
+  const { isValidating: stopRealtimeValidating } = useSWR(frontendStopsContext.entities.stop?.id && `https://api.carrismetropolitana.pt/stops/${frontendStopsContext.entities.stop.id}/realtime`, { refreshInterval: 5000 });
 
   //
   // D. Handle actions
 
   useEffect(() => {
     const matchedStopIdFromUrl = window.location.pathname.match(/\/stops\/(.+)/);
-    if (matchedStopIdFromUrl && matchedStopIdFromUrl[1] !== 'all' && allStopsData && !FrontendStopsContext.entities.stop?.id) {
-      FrontendStopsContext.selectStop(matchedStopIdFromUrl[1]);
+    if (matchedStopIdFromUrl && matchedStopIdFromUrl[1] !== 'all' && allStopsData && !frontendStopsContext.entities.stop?.id) {
+      frontendStopsContext.selectStop(matchedStopIdFromUrl[1]);
     }
   });
 
@@ -79,7 +79,7 @@ export default function FrontendStops() {
           <FrontendStopsMap />
         </div>
         <div className={styles.sidebar}>
-          {FrontendStopsContext.entities.stop?.id ? (
+          {frontendStopsContext.entities.stop?.id ? (
             <>
               <FrontendStopsStopInfo />
               <StopTimetable />

@@ -31,16 +31,16 @@ export default function FrontendStopsMap() {
 
   const debugContext = useDebugContext();
 
-  const { FrontendStopsMap } = useMap();
-  const FrontendStopsContext = useFrontendStopsContext();
+  const { frontendStopsMap } = useMap();
+  const frontendStopsContext = useFrontendStopsContext();
 
   //
   // B. Fetch data
 
   const { data: allStopsData } = useSWR('https://api.carrismetropolitana.pt/stops');
   const { data: allVehiclesData } = useSWR('https://api.carrismetropolitana.pt/vehicles', { refreshInterval: 5000 });
-  const { data: selectedPatternData } = useSWR(FrontendStopsContext.entities.pattern_id && `https://api.carrismetropolitana.pt/patterns/${FrontendStopsContext.entities.pattern_id}`);
-  const { data: selectedShapeData } = useSWR(FrontendStopsContext.entities.shape_id && `https://api.carrismetropolitana.pt/shapes/${FrontendStopsContext.entities.shape_id}`);
+  const { data: selectedPatternData } = useSWR(frontendStopsContext.entities.pattern_id && `https://api.carrismetropolitana.pt/patterns/${frontendStopsContext.entities.pattern_id}`);
+  const { data: selectedShapeData } = useSWR(frontendStopsContext.entities.shape_id && `https://api.carrismetropolitana.pt/shapes/${frontendStopsContext.entities.shape_id}`);
 
   //
   // C. Transform data
@@ -66,19 +66,19 @@ export default function FrontendStopsMap() {
   }, [allStopsData]);
 
   const selectedStopMapData = useMemo(() => {
-    if (FrontendStopsContext.entities.stop) {
+    if (frontendStopsContext.entities.stop) {
       return {
         type: 'Feature',
         geometry: {
           type: 'Point',
-          coordinates: [FrontendStopsContext.entities.stop.lon, FrontendStopsContext.entities.stop.lat],
+          coordinates: [frontendStopsContext.entities.stop.lon, frontendStopsContext.entities.stop.lat],
         },
         properties: {
-          id: FrontendStopsContext.entities.stop.id,
+          id: frontendStopsContext.entities.stop.id,
         },
       };
     }
-  }, [FrontendStopsContext.entities.stop]);
+  }, [frontendStopsContext.entities.stop]);
 
   const selectedShapeMapData = useMemo(() => {
     if (selectedPatternData && selectedShapeData) {
@@ -94,8 +94,8 @@ export default function FrontendStopsMap() {
   }, [selectedPatternData, selectedShapeData]);
 
   const selectedVehicleMapData = useMemo(() => {
-    if (allVehiclesData && FrontendStopsContext.entities.trip_id) {
-      const selectedVehicleData = allVehiclesData.find((item) => item.trip_id && item.trip_id === FrontendStopsContext.entities.trip_id);
+    if (allVehiclesData && frontendStopsContext.entities.trip_id) {
+      const selectedVehicleData = allVehiclesData.find((item) => item.trip_id && item.trip_id === frontendStopsContext.entities.trip_id);
       if (selectedVehicleData) {
         return {
           type: 'Feature',
@@ -118,52 +118,52 @@ export default function FrontendStopsMap() {
       }
       return null;
     }
-  }, [allVehiclesData, FrontendStopsContext.entities.trip_id]);
+  }, [allVehiclesData, frontendStopsContext.entities.trip_id]);
 
   const selectedCoordinatesMapData = useMemo(() => {
-    if (FrontendStopsContext.map.selected_coordinates) {
+    if (frontendStopsContext.map.selected_coordinates) {
       return {
         type: 'Feature',
         geometry: {
           type: 'Point',
-          coordinates: FrontendStopsContext.map.selected_coordinates,
+          coordinates: frontendStopsContext.map.selected_coordinates,
         },
       };
     }
     return null;
-  }, [FrontendStopsContext.map.selected_coordinates]);
+  }, [frontendStopsContext.map.selected_coordinates]);
 
   //
   // D. Handle actions
 
   useEffect(() => {
-    if (!FrontendStopsMap) return;
+    if (!frontendStopsMap) return;
     // Load direction arrows
-    FrontendStopsMap.loadImage('/icons/shape-arrow-direction.png', (error, image) => {
+    frontendStopsMap.loadImage('/icons/shape-arrow-direction.png', (error, image) => {
       if (error) throw error;
-      FrontendStopsMap.addImage('shape-arrow-direction', image, { sdf: true });
+      frontendStopsMap.addImage('shape-arrow-direction', image, { sdf: true });
     });
     // Load vehicle symbol
-    FrontendStopsMap.loadImage('/icons/cm-bus-regular.png', (error, image) => {
+    frontendStopsMap.loadImage('/icons/cm-bus-regular.png', (error, image) => {
       if (error) throw error;
-      FrontendStopsMap.addImage('cm-bus-regular', image, { sdf: false });
+      frontendStopsMap.addImage('cm-bus-regular', image, { sdf: false });
     });
     // Load vehicle symbol
-    FrontendStopsMap.loadImage('/icons/cm-bus-delay.png', (error, image) => {
+    frontendStopsMap.loadImage('/icons/cm-bus-delay.png', (error, image) => {
       if (error) throw error;
-      FrontendStopsMap.addImage('cm-bus-delay', image, { sdf: false });
+      frontendStopsMap.addImage('cm-bus-delay', image, { sdf: false });
     });
     // Load stop selected symbol
-    FrontendStopsMap.loadImage('/icons/map-stop-selected.png', (error, image) => {
+    frontendStopsMap.loadImage('/icons/map-stop-selected.png', (error, image) => {
       if (error) throw error;
-      FrontendStopsMap.addImage('stop-selected', image, { sdf: false });
+      frontendStopsMap.addImage('stop-selected', image, { sdf: false });
     });
     // Load pin symbol
-    FrontendStopsMap.loadImage('/icons/map-pin.png', (error, image) => {
+    frontendStopsMap.loadImage('/icons/map-pin.png', (error, image) => {
       if (error) throw error;
-      FrontendStopsMap.addImage('map-pin', image, { sdf: false });
+      frontendStopsMap.addImage('map-pin', image, { sdf: false });
     });
-  }, [FrontendStopsMap]);
+  }, [frontendStopsMap]);
 
   useEffect(() => {
     if (selectedStopMapData && selectedVehicleMapData) {
@@ -173,9 +173,9 @@ export default function FrontendStopsMap() {
       // Fit map
       const collection = turf.featureCollection([selectedStopMapData, selectedVehicleMapData]);
       const boundingBox = turf.bbox(collection);
-      FrontendStopsMap.fitBounds(boundingBox, { duration: 2000, padding: fitBoundsPadding, bearing: FrontendStopsMap.getBearing(), maxZoom: 16 });
+      frontendStopsMap.fitBounds(boundingBox, { duration: 2000, padding: fitBoundsPadding, bearing: frontendStopsMap.getBearing(), maxZoom: 16 });
     }
-  }, [selectedStopMapData, selectedVehicleMapData, FrontendStopsMap]);
+  }, [selectedStopMapData, selectedVehicleMapData, frontendStopsMap]);
 
   //
   // E. Helper functions
@@ -183,21 +183,21 @@ export default function FrontendStopsMap() {
   const moveMap = useCallback(
     (coordinates) => {
       // Get map current zoom level
-      const currentZoom = FrontendStopsMap.getZoom();
+      const currentZoom = frontendStopsMap.getZoom();
       const currentZoomWithMargin = currentZoom + MAP_DEFAULT_OPTIONS.zoomMargin;
       // Check if the given coordinates are inside the currently rendered map bounds
-      const currentMapBounds = FrontendStopsMap.getBounds().toArray();
+      const currentMapBounds = frontendStopsMap.getBounds().toArray();
       const isInside = turf.booleanIntersects(turf.point(coordinates), turf.bboxPolygon([...currentMapBounds[0], ...currentMapBounds[1]]));
       // If the given coordinates are visible and the zoom is not too far back (plus a little margin)...
       if (isInside && currentZoomWithMargin > MAP_DEFAULT_OPTIONS.zoom) {
         // ...then simply ease to it.
-        FrontendStopsMap.easeTo({ center: coordinates, zoom: currentZoom, duration: MAP_DEFAULT_OPTIONS.speed * 0.25 });
+        frontendStopsMap.easeTo({ center: coordinates, zoom: currentZoom, duration: MAP_DEFAULT_OPTIONS.speed * 0.25 });
       } else {
         // If the zoom is too far, or the given coordinates are not visible, then fly to it
-        FrontendStopsMap.flyTo({ center: coordinates, zoom: MAP_DEFAULT_OPTIONS.zoom, duration: MAP_DEFAULT_OPTIONS.speed });
+        frontendStopsMap.flyTo({ center: coordinates, zoom: MAP_DEFAULT_OPTIONS.zoom, duration: MAP_DEFAULT_OPTIONS.speed });
       }
     },
-    [FrontendStopsMap]
+    [frontendStopsMap]
   );
 
   //
@@ -205,57 +205,57 @@ export default function FrontendStopsMap() {
 
   useEffect(() => {
     // Check if map is ready
-    if (FrontendStopsMap?.getSource('all-stops') === undefined) return;
+    if (frontendStopsMap?.getSource('all-stops') === undefined) return;
     // Check if auto zoom is enabled
-    if (!FrontendStopsContext.map.auto_zoom) return;
+    if (!frontendStopsContext.map.auto_zoom) return;
     // Check if there is a selected map feature
-    if (FrontendStopsContext.map.selected_feature) return;
+    if (frontendStopsContext.map.selected_feature) return;
     // Check if there is a selected stop id
-    if (!FrontendStopsContext.entities.stop?.id) return;
+    if (!frontendStopsContext.entities.stop?.id) return;
     // Find the corresponding map feature
-    const stopMapFeature = allStopsMapData?.features.find((f) => f.properties?.id === FrontendStopsContext.entities.stop?.id);
+    const stopMapFeature = allStopsMapData?.features.find((f) => f.properties?.id === frontendStopsContext.entities.stop?.id);
     if (!stopMapFeature) return;
     // Center the map and save the feature to state
     moveMap(stopMapFeature.geometry?.coordinates);
-    FrontendStopsContext.setSelectedFeature(stopMapFeature);
+    frontendStopsContext.setSelectedFeature(stopMapFeature);
     //
   });
 
   useEffect(() => {
-    if (FrontendStopsContext.map.selected_coordinates) {
-      moveMap(FrontendStopsContext.map.selected_coordinates);
+    if (frontendStopsContext.map.selected_coordinates) {
+      moveMap(frontendStopsContext.map.selected_coordinates);
     }
-  }, [moveMap, FrontendStopsContext.map.selected_coordinates]);
+  }, [moveMap, frontendStopsContext.map.selected_coordinates]);
 
   const handleMapClick = (event) => {
     if (event?.features[0]?.properties?.id) {
-      FrontendStopsContext.selectStop(event.features[0].properties.id);
-      FrontendStopsContext.setSelectedFeature(event.features[0]);
+      frontendStopsContext.selectStop(event.features[0].properties.id);
+      frontendStopsContext.setSelectedFeature(event.features[0]);
       moveMap(event.features[0].geometry?.coordinates);
     }
   };
 
   const handleMapMouseEnter = (event) => {
     if (event?.features[0]?.properties?.id) {
-      FrontendStopsMap.getCanvas().style.cursor = 'pointer';
+      frontendStopsMap.getCanvas().style.cursor = 'pointer';
     }
   };
 
   const handleMapMouseLeave = (event) => {
     if (event?.features[0]?.properties?.id) {
-      FrontendStopsMap.getCanvas().style.cursor = 'default';
+      frontendStopsMap.getCanvas().style.cursor = 'default';
     }
   };
 
   const handleMapMove = () => {
     // Get all currently rendered features and mark all of them as unselected
-    const allRenderedFeatures = FrontendStopsMap.queryRenderedFeatures();
+    const allRenderedFeatures = frontendStopsMap.queryRenderedFeatures();
     allRenderedFeatures.forEach(function (f) {
-      FrontendStopsMap.setFeatureState({ source: 'all-stops', id: f.id }, { selected: false });
+      frontendStopsMap.setFeatureState({ source: 'all-stops', id: f.id }, { selected: false });
     });
     // Then mark the selected one as selected
-    if (FrontendStopsContext.map.selected_feature) {
-      FrontendStopsMap.setFeatureState({ source: 'all-stops', id: FrontendStopsContext.map.selected_feature.properties.mapid }, { selected: true });
+    if (frontendStopsContext.map.selected_feature) {
+      frontendStopsMap.setFeatureState({ source: 'all-stops', id: frontendStopsContext.map.selected_feature.properties.mapid }, { selected: true });
     }
   };
 
@@ -263,7 +263,7 @@ export default function FrontendStopsMap() {
   // G. Render components
 
   return (
-    <OSMMap id="FrontendStopsMap" mapStyle={FrontendStopsContext.map.style} onClick={handleMapClick} onMouseEnter={handleMapMouseEnter} onMouseLeave={handleMapMouseLeave} onMove={handleMapMove} interactiveLayerIds={['all-stops']}>
+    <OSMMap id="frontendStopsMap" mapStyle={frontendStopsContext.map.style} onClick={handleMapClick} onMouseEnter={handleMapMouseEnter} onMouseLeave={handleMapMouseLeave} onMove={handleMapMove} interactiveLayerIds={['all-stops']}>
       <GeolocateControl />
       {selectedVehicleMapData && debugContext.isDebug && (
         <Popup closeButton={false} closeOnClick={false} latitude={selectedVehicleMapData.geometry.coordinates[1]} longitude={selectedVehicleMapData.geometry.coordinates[0]} anchor="bottom">
@@ -312,7 +312,7 @@ export default function FrontendStopsMap() {
           />
         </Source>
       )}
-      {FrontendStopsContext.map.selected_coordinates != null && (
+      {frontendStopsContext.map.selected_coordinates != null && (
         <Source id="selected-coordinates" type="geojson" data={selectedCoordinatesMapData} generateId={true}>
           <Layer
             id="selected-coordinates-pin"

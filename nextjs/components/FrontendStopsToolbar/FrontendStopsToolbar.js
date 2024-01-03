@@ -18,13 +18,13 @@ export default function FrontendStopsToolbar() {
   const t = useTranslations('FrontendStopsToolbar');
 
   const { FrontendStopsMap } = useMap();
-  const FrontendStopsContext = useFrontendStopsContext();
+  const frontendStopsContext = useFrontendStopsContext();
 
   //
   // B. Handle actions
 
   const handleMapStyleChange = (value) => {
-    FrontendStopsContext.updateMap({ style: value });
+    frontendStopsContext.updateMap({ style: value });
   };
 
   const handleMapReCenter = () => {
@@ -46,7 +46,7 @@ export default function FrontendStopsToolbar() {
       <div className={styles.controls}>
         <SegmentedControl
           aria-label={t('map_style.label')}
-          value={FrontendStopsContext.map.style}
+          value={frontendStopsContext.map.style}
           onChange={handleMapStyleChange}
           data={[
             { value: 'map', label: t('map_style.options.map') },
