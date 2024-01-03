@@ -1,5 +1,7 @@
 'use client';
 
+/* * */
+
 import styles from './FrontendStopsToolbar.module.css';
 import OSMMapDefaults from '@/components/OSMMap/OSMMap.config';
 import { IconArrowsMinimize, IconBrandGoogleMaps } from '@tabler/icons-react';
@@ -9,6 +11,8 @@ import { useMap } from 'react-map-gl/maplibre';
 import FrontendStopsToolbarSearch from '@/components/FrontendStopsToolbarSearch/FrontendStopsToolbarSearch';
 import { useFrontendStopsContext } from '@/contexts/FrontendStopsContext';
 
+/* * */
+
 export default function FrontendStopsToolbar() {
   //
 
@@ -17,7 +21,7 @@ export default function FrontendStopsToolbar() {
 
   const t = useTranslations('FrontendStopsToolbar');
 
-  const { FrontendStopsMap } = useMap();
+  const { frontendStopsMap } = useMap();
   const frontendStopsContext = useFrontendStopsContext();
 
   //
@@ -28,12 +32,12 @@ export default function FrontendStopsToolbar() {
   };
 
   const handleMapReCenter = () => {
-    FrontendStopsMap.flyTo({ ...OSMMapDefaults.viewport, duration: 2000 });
+    frontendStopsMap.flyTo({ ...OSMMapDefaults.viewport, duration: 2000 });
   };
 
   const handleOpenInGoogleMaps = () => {
-    const center = FrontendStopsMap.getCenter();
-    const zoom = FrontendStopsMap.getZoom();
+    const center = frontendStopsMap.getCenter();
+    const zoom = frontendStopsMap.getZoom();
     const zoomMargin = 2; // Compensate the difference between OSM and Google Maps
     window.open(`https://www.google.com/maps/@${center.lat},${center.lng},${zoom + zoomMargin}z`, '_blank', 'noopener,noreferrer');
   };
@@ -72,4 +76,6 @@ export default function FrontendStopsToolbar() {
       </div>
     </div>
   );
+
+  //
 }
