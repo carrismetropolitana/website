@@ -1,7 +1,11 @@
 'use client';
 
+/* * */
+
 import styles from './FrontendEncmMapPopup.module.css';
 import { useTranslations } from 'next-intl';
+
+/* * */
 
 export default function FrontendEncmMapPopup({ encmData }) {
   //
@@ -12,7 +16,7 @@ export default function FrontendEncmMapPopup({ encmData }) {
   const t = useTranslations('FrontendEncmMapPopup');
 
   //
-  // C. Render components
+  // B. Render components
 
   return (
     <div className={styles.container}>

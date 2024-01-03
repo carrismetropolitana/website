@@ -1,5 +1,7 @@
 'use client';
 
+/* * */
+
 import styles from './FrontendFooter.module.css';
 import FrontendFooterLogo from '@/components/FrontendFooterLogo/FrontendFooterLogo';
 import FrontendFooterLegal from '@/components/FrontendFooterLegal/FrontendFooterLegal';
@@ -28,4 +30,6 @@ export default function FrontendFooter() {
       <FrontendFooterLegal />
     </footer>
   );
+
+  //
 }

@@ -20,7 +20,7 @@ export default function FrontendEncmItemOccupation({ currentlyWaiting, expectedW
   const [waitTimeString, setWaitTimeString] = useState('');
 
   //
-  // C. Render components
+  // B. Transform data
 
   useEffect(() => {
     // When there are customers waiting

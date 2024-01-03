@@ -1,8 +1,12 @@
 'use client';
 
+/* * */
+
 import styles from './FrontendFooterLegal.module.css';
 import Image from 'next/image';
 import { useTranslations } from 'next-intl';
+
+/* * */
 
 export default function FrontendFooterLegal() {
   //
@@ -37,4 +41,6 @@ export default function FrontendFooterLegal() {
       </div>
     </div>
   );
+
+  //
 }
