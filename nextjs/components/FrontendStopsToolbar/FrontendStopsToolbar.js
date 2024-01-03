@@ -20,7 +20,6 @@ export default function FrontendStopsToolbar() {
   // A. Setup variables
 
   const t = useTranslations('FrontendStopsToolbar');
-
   const { frontendStopsMap } = useMap();
   const frontendStopsContext = useFrontendStopsContext();
 
