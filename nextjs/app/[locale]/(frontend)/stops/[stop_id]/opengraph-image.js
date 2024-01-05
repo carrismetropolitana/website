@@ -37,8 +37,6 @@ export default async function Image({ params }) {
     return new ImageResponse(<OpenGraphStopsDefault />, { ...size, fonts: customFonts });
   }
 
-  // - - -
-
   //
   // D. Fetch additional data
 

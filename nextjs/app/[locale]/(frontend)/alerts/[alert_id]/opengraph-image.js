@@ -7,7 +7,7 @@ import OpenGraphStopsDynamic from 'opengraph/OpenGraphStopsDynamic';
 
 /* * */
 
-export const alt = 'Mais sobre esta paragem';
+export const alt = 'Alertas de Serviço';
 export const size = { width: 1200, height: 630 };
 export const contentType = 'image/png';
 
@@ -36,8 +36,6 @@ export default async function Image({ params }) {
   if (params.stop_id === 'all' || !stopData?.id) {
     return new ImageResponse(<OpenGraphStopsDefault />, { ...size, fonts: customFonts });
   }
-
-  // - - -
 
   //
   // D. Fetch additional data
