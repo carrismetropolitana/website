@@ -36,7 +36,7 @@ export default function FrontendStopsTimetableFeedback({ tripData }) {
   const handleSendFeedback = async (sentiment) => {
     //
     try {
-      await fetch('https://stats.carrismetropolitana.pt/collector/feedback/FrontendStopsRealtime', {
+      await fetch('https://stats.carrismetropolitana.pt/collector/feedback/stopsRealtime', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json; charset=utf-8' },
         body: JSON.stringify({
