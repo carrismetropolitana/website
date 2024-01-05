@@ -34,7 +34,9 @@ export default function FrontendHeaderDrawer() {
           </div>
           <div className={styles.group}>
             <h1>{t('travel.title')}</h1>
-            <Link href="https://www.carrismetropolitana.pt/horarios">{t('travel.links.schedules')}</Link>
+            <Link href="/lines" onClick={close} style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', justifyContent: 'flex-start', gap: 6 }}>
+              {t('travel.links.lines')} <LiveIcon />
+            </Link>
             <Link href="/stops" onClick={close} style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', justifyContent: 'flex-start', gap: 6 }}>
               {t('travel.links.stops')} <LiveIcon />
             </Link>

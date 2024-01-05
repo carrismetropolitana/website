@@ -1,13 +1,15 @@
 'use client';
 
+/* * */
+
 import Image from 'next/image';
 import styles from './FrontendHeader.module.css';
-import { Drawer, Button } from '@mantine/core';
 import FrontendHeaderMenu from '@/components/FrontendHeaderMenu/FrontendHeaderMenu';
 import { useTranslations } from 'next-intl';
-import { useDisclosure } from '@mantine/hooks';
 import FrontendHeaderDrawer from '../FrontendHeaderDrawer/FrontendHeaderDrawer';
 import Link from 'next/link';
+
+/* * */
 
 export default function FrontendHeader() {
   //
@@ -16,8 +18,6 @@ export default function FrontendHeader() {
   // A. Setup variables
 
   const t = useTranslations('FrontendHeader');
-
-  const [opened, { open, close }] = useDisclosure(false);
 
   //
   // B. Render Components
@@ -31,7 +31,7 @@ export default function FrontendHeader() {
         <FrontendHeaderMenu
           title={t('menus.travel.label')}
           items={[
-            { label: t('menus.travel.items.schedules.label'), url: 'https://www.carrismetropolitana.pt/horarios' },
+            { label: t('menus.travel.items.lines.label'), url: '/lines', realtime: true },
             { label: t('menus.travel.items.stops.label'), url: '/stops', realtime: true },
             { label: t('menus.travel.items.planner.label'), url: 'https://www.carrismetropolitana.pt/planeador' },
           ]}
@@ -62,4 +62,6 @@ export default function FrontendHeader() {
       </div>
     </div>
   );
+
+  //
 }

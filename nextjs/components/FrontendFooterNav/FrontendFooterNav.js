@@ -21,8 +21,9 @@ export default function FrontendFooterNav() {
     <div className={styles.container}>
       <nav className={styles.group}>
         <h6>{t('travel.title')}</h6>
-        <Link className={styles.link} href="https://www.carrismetropolitana.pt/horarios">
-          {t('travel.links.schedules')}
+        <Link className={styles.link} href="/lines">
+          {t('travel.links.lines')}
+          <LiveIcon />
         </Link>
         <Link className={`${styles.link} ${styles.realtime}`} href="/stops">
           {t('travel.links.stops')}

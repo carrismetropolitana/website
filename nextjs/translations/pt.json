@@ -498,7 +498,7 @@
             "travel": {
                 "label": "Viajar",
                 "items": {
-                    "schedules": {
+                    "lines": {
                         "label": "Horários"
                     },
                     "stops": {
@@ -600,7 +600,7 @@
         "travel": {
             "title": "Viajar",
             "links": {
-                "schedules": "Horários",
+                "lines": "Horários",
                 "stops": "Paragens",
                 "planner": "Planeador"
             }
@@ -640,7 +640,7 @@
         "travel": {
             "title": "Viajar",
             "links": {
-                "schedules": "Horários",
+                "lines": "Horários",
                 "stops": "Paragens",
                 "planner": "Planeador"
             }

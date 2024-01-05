@@ -18,6 +18,10 @@ module.exports = withNextIntl({
   },
   async redirects() {
     return [
+      //
+      { source: '/alerts', destination: '/alerts/all', permanent: true },
+      { source: '/alertas', destination: '/alerts/all', permanent: true },
+      //
       { source: '/', destination: '/stops', permanent: false },
       { source: '/stops', destination: '/stops/all', permanent: true },
       { source: '/paragens', destination: '/stops/all', permanent: true },
@@ -28,6 +32,7 @@ module.exports = withNextIntl({
       { source: '/vehicles', destination: '/vehicles/all', permanent: true },
       //
       { source: '/espacos-navegante', destination: '/encm', permanent: true },
+      //
     ];
   },
 });
