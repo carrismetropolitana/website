@@ -1,0 +1,26 @@
+[
+    {
+        "relation": [
+            "delegate_permission/common.handle_all_urls"
+        ],
+        "target": {
+            "namespace": "android_app",
+            "package_name": "com.assignment",
+            "sha256_cert_fingerprints": [
+                "DD:7E:06:70:9A:7E:44:FB:19:EF:54:A9:E4:73:65:C1:7E:A2:2A:08:61:84:B0:55:1F:67:2C:93:21:E9:90:6D"
+            ]
+        }
+    },
+    {
+        "relation": [
+            "delegate_permission/common.handle_all_urls"
+        ],
+        "target": {
+            "namespace": "android_app",
+            "package_name": "com.carris",
+            "sha256_cert_fingerprints": [
+                "DD:7E:06:70:9A:7E:44:FB:19:EF:54:A9:E4:73:65:C1:7E:A2:2A:08:61:84:B0:55:1F:67:2C:93:21:E9:90:6D"
+            ]
+        }
+    }
+]
