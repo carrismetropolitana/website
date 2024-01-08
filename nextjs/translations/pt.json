@@ -422,7 +422,7 @@
     },
     "FrontendLinesContentPatternPathStopTimetable": {
         "hours": {
-            "label": "Hour"
+            "label": "Hora"
         },
         "minutes": {
             "label": "Min."
