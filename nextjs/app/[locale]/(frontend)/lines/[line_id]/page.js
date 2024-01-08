@@ -13,7 +13,7 @@ export async function generateMetadata({ params }) {
   const lineData = await fetch(params.line_id?.length && `https://api.carrismetropolitana.pt/lines/${params.line_id}`).then((res) => res.json());
 
   // B. Render the titles
-  if (params.line_id === 'all' || !lineData.name) {
+  if (params.line_id === 'all' || !lineData.short_name || !!lineData.long_name) {
     switch (params.locale) {
       case 'pt':
         return { title: 'Todas as Linhas', description: 'Conheça as linhas e horários da Carris Metropolitana' };
