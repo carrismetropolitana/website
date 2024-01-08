@@ -4,7 +4,7 @@
 
 import { useTranslations } from 'next-intl';
 import Panel from '@/components/Panel/Panel';
-import FrontendAlertsSummary from '@/components/FrontendAlertsSummary/FrontendAlertsSummary';
+// import FrontendAlertsSummary from '@/components/FrontendAlertsSummary/FrontendAlertsSummary';
 
 /* * */
 
@@ -20,8 +20,8 @@ export default function FrontendAlerts() {
   // B. Render components
 
   return (
-    <Panel type="B" title={t('Panel_title')}>
-      <FrontendAlertsSummary />
+    <Panel title={t('Panel_title')}>
+      {/* <FrontendAlertsSummary /> */}
       {/* <FrontendLinesContent /> */}
     </Panel>
   );

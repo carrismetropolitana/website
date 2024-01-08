@@ -1,8 +1,8 @@
 /* * */
 
 import { OneFullColumn } from '@/components/Layouts/Layouts';
-// import { FrontendAlertsContextProvider } from '@/contexts/FrontendAlertsContext';
-// import FrontendAlerts from '@/components/FrontendAlerts/FrontendAlerts';
+import { FrontendAlertsContextProvider } from '@/contexts/FrontendAlertsContext';
+import FrontendAlerts from '@/components/FrontendAlerts/FrontendAlerts';
 
 /* * */
 
@@ -26,9 +26,9 @@ export default function Page() {
 
   return (
     <OneFullColumn>
-      {/* <FrontendAlertsContextProvider>
+      <FrontendAlertsContextProvider>
         <FrontendAlerts />
-      </FrontendAlertsContextProvider> */}
+      </FrontendAlertsContextProvider>
     </OneFullColumn>
   );
 

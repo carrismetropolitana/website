@@ -2,10 +2,10 @@
 
 /* * */
 
-import ErrorExplorer from '@/components/ErrorExplorer/ErrorExplorer';
+import AppError from '@/components/AppError/AppError';
 
 /* * */
 
 export default function Error() {
-  return <ErrorExplorer />;
+  return <AppError />;
 }
