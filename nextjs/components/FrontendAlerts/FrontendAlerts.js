@@ -20,7 +20,7 @@ export default function FrontendAlerts() {
   // B. Render components
 
   return (
-    <Panel title={t('Panel_title')}>
+    <Panel title={t('panel_title')}>
       {/* <FrontendAlertsSummary /> */}
       {/* <FrontendLinesContent /> */}
     </Panel>

@@ -6,27 +6,26 @@ import useSWR from 'swr';
 import { Combobox, Highlight, TextInput, useCombobox, Text, ActionIcon } from '@mantine/core';
 import { useMemo, useState } from 'react';
 import { useTranslations } from 'next-intl';
-import styles from './FrontendStopsToolbarSearch.module.css';
+import styles from './FrontendDemandDateLineStopViewOneToolbarSearch.module.css';
 import useSearch from '@/hooks/useSearch';
 import { IconX, IconSearch, IconMapCode } from '@tabler/icons-react';
 import parseStopLocationName from '@/services/parseStopLocationName';
-import { useFrontendStopsContext } from '@/contexts/FrontendStopsContext';
 import { useDebouncedValue } from '@mantine/hooks';
+import { useFrontendDemandDateLineStopContext } from '@/contexts/FrontendDemandDateLineStopContext';
 
 /* * */
 
-export default function FrontendStopsToolbarSearch() {
+export default function FrontendDemandDateLineStopViewOneToolbarSearch() {
   //
 
   //
   // A. Setup variables
 
-  const t = useTranslations('FrontendStopsToolbarSearch');
-  const frontendStopsContext = useFrontendStopsContext();
+  const t = useTranslations('FrontendDemandDateLineStopViewOneToolbarSearch');
+  const frontendDemandDateLineStopContext = useFrontendDemandDateLineStopContext();
   const comboboxStore = useCombobox();
   const [searchQuery, setSearchQuery] = useState('');
   const [debouncedSearchQuery] = useDebouncedValue(searchQuery, 300);
-
   const [searchQueryCoordinates, setSearchQueryCoordinates] = useState(null);
 
   //
@@ -92,13 +91,13 @@ export default function FrontendStopsToolbarSearch() {
   };
 
   const handleSelectStop = (chosenStop) => {
-    frontendStopsContext.selectStop(chosenStop.id);
+    frontendDemandDateLineStopContext.selectStop(chosenStop.id);
     comboboxStore.closeDropdown();
   };
 
   const handleSelectCoordinates = () => {
-    frontendStopsContext.clearSelectedStop();
-    frontendStopsContext.setSelectedCoordinates(searchQueryCoordinates);
+    frontendDemandDateLineStopContext.clearSelectedStop();
+    frontendDemandDateLineStopContext.setSelectedCoordinates(searchQueryCoordinates);
     comboboxStore.closeDropdown();
   };
 
@@ -163,6 +162,4 @@ export default function FrontendStopsToolbarSearch() {
       </Combobox>
     </div>
   );
-
-  //
 }

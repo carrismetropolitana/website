@@ -362,7 +362,7 @@
         "error": "Temporarily unavailable"
     },
     "FrontendLines": {
-        "Panel_title": "Linhas e Horários"
+        "panel_title": "Linhas e Horários"
     },
     "FrontendLinesToolbar": {},
     "FrontendLinesToolbarFilters": {
@@ -881,13 +881,78 @@
         "subtitle": "Estaremos de volta em breve"
     },
     "FrontendVehicles": {
-        "Panel_title": "Veículos"
+        "panel_title": "Veículos"
     },
     "FrontendVehiclesSummary": {
         "intro": "O passe navegante municipal Família permite que cada agregado familiar pague no máximo o valor de 2 passes navegante municipal, independentemente do número de elementos do agregado familiar. É válido em todas as empresas de serviço público de transporte regular de passageiros, em todos os 18 municípios da Área Metropolitana de Lisboa."
     },
     "FrontendAlerts": {
-        "Panel_title": "Alertas de Serviço"
+        "panel_title": "Alertas de Serviço"
+    },
+    "FrontendDemand": {
+        "panel_title": "Dados de Procura"
+    },
+    "FrontendDemandDateLineStop": {
+        "intro": {
+            "title": "Lorem ipsum",
+            "description": "Lorem ipsum dolor sit amet"
+        },
+        "tabs": {
+            "view_one": "Visão por Paragem",
+            "view_two": "Visão por Linha",
+            "view_three": "View Threee"
+        }
+    },
+    "FrontendDemandDateLineStopViewOneDatePicker": {
+        "date_picker": {
+            "label": "Dia Escolhido",
+            "placeholder": "Escolha uma data"
+        },
+        "toggle_timeline_animation": {
+            "play": {
+                "tooltip": {
+                    "label": "Dar Play"
+                }
+            },
+            "pause": {
+                "tooltip": {
+                    "label": "Dar Pause"
+                }
+            }
+        }
+    },
+    "FrontendDemandDateLineStopViewOneToolbar": {
+        "map_style": {
+            "label": "Estilo do Mapa",
+            "options": {
+                "map": "Mapa",
+                "satellite": "Satélite"
+            }
+        },
+        "recenter_map": {
+            "label": "Centrar Mapa"
+        },
+        "open_gmaps": {
+            "label": "Abrir no Google Maps"
+        }
+    },
+    "FrontendDemandDateLineStopViewOneToolbarSearch": {
+        "label": "Procurar por nome, morada ou município",
+        "placeholder": "Procurar por nome, morada, município...",
+        "no_results": "Nenhum Resultado Encontrado"
+    },
+    "FrontendDemandDateLineStopViewOneMap": {},
+    "FrontendDemandDateLineStopViewTwo": {
+        "date_picker": {
+            "label": "Dia Escolhido",
+            "description": "Lorem ipsum dolor sit amet",
+            "placeholder": "Lorem ipsum dolor sit amet"
+        },
+        "line_chart": {
+            "series": {
+                "name": "Validações na Linha {line_short_name}"
+            }
+        }
     },
     "AppError": {
         "title": "Ocorreu um erro inesperado",

@@ -4,22 +4,7 @@ import Map, { NavigationControl, FullscreenControl, ScaleControl } from 'react-m
 import maplibregl from 'maplibre-gl';
 import 'maplibre-gl/dist/maplibre-gl.css';
 
-export default function OSMMap({
-  children,
-  id,
-  mapStyle,
-  onClick = () => {},
-  onMouseEnter = () => {},
-  onMouseLeave = () => {},
-  onMove = () => {},
-  onMoveStart = () => {},
-  onMoveEnd = () => {},
-  interactiveLayerIds = [],
-  scrollZoom = true,
-  navigation = true,
-  fullscreen = true,
-  scale = true,
-}) {
+export default function OSMMap({ children, id, mapStyle = 'map', onClick = () => {}, onMouseEnter = () => {}, onMouseLeave = () => {}, onMove = () => {}, onMoveStart = () => {}, onMoveEnd = () => {}, interactiveLayerIds = [], scrollZoom = true, navigation = true, fullscreen = true, scale = true }) {
   return (
     <div className={styles.container}>
       <Map

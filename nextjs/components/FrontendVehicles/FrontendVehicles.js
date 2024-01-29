@@ -20,7 +20,7 @@ export default function FrontendVehicles() {
   // B. Render components
 
   return (
-    <Panel type="B" title={t('Panel_title')}>
+    <Panel type="B" title={t('panel_title')}>
       <FrontendVehiclesSummary />
       {/* <FrontendLinesContent /> */}
     </Panel>

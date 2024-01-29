@@ -1,7 +1,4 @@
 /* * */
-/* PARSE DATE TO STRING */
-/* Explanation needed. */
-/* * */
 
 export default function parseDateToString(dateObject) {
   // Get date components

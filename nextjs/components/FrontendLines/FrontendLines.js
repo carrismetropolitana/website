@@ -56,7 +56,7 @@ export default function FrontendLines() {
   return (
     <Panel
       type="A"
-      title={t('Panel_title')}
+      title={t('panel_title')}
       loading={allLinesLoading || allMunicipalitiesLoading}
       error={allLinesError || allMunicipalitiesError}
       validating={allVehiclesValidating}
