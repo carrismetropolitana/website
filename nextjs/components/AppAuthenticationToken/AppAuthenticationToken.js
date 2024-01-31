@@ -34,7 +34,7 @@ export default function AppAuthenticationToken() {
         } else if (status === 'authenticated') {
           const signedTokenResponse = await fetch('/api/auth/token/sign');
           const signedTokenData = await signedTokenResponse.text();
-          const newUrl = `carrismetroplitana://token?token=${signedTokenData}`;
+          const newUrl = `/token?token=${signedTokenData}`;
           window.history.replaceState({ ...window.history.state, as: newUrl, url: newUrl }, '', newUrl);
         } else {
           router.push('/login?callbackUrl=/token');
