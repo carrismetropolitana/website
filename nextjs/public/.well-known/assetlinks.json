@@ -1,26 +1,53 @@
-[
-    {
-        "relation": [
-            "delegate_permission/common.handle_all_urls"
-        ],
-        "target": {
-            "namespace": "android_app",
-            "package_name": "com.assignment",
-            "sha256_cert_fingerprints": [
-                "DD:7E:06:70:9A:7E:44:FB:19:EF:54:A9:E4:73:65:C1:7E:A2:2A:08:61:84:B0:55:1F:67:2C:93:21:E9:90:6D"
-            ]
-        }
-    },
-    {
-        "relation": [
-            "delegate_permission/common.handle_all_urls"
-        ],
-        "target": {
-            "namespace": "android_app",
-            "package_name": "com.carris",
-            "sha256_cert_fingerprints": [
-                "DD:7E:06:70:9A:7E:44:FB:19:EF:54:A9:E4:73:65:C1:7E:A2:2A:08:61:84:B0:55:1F:67:2C:93:21:E9:90:6D"
-            ]
-        }
-    }
+[{
+  "relation": ["delegate_permission/common.handle_all_urls"],
+  "target": {
+    "namespace": "android_app",
+    "package_name": "com.horarios",
+    "sha256_cert_fingerprints":
+    ["FA:C6:17:45:DC:09:03:78:6F:B9:ED:E6:2A:96:2B:39:9F:73:48:F0:BB:6F:89:9B:83:32:66:75:91:03:3B:9C"]
+  }
+},
+{
+  "relation": ["delegate_permission/common.get_login_creds"],
+  "target": {
+    "namespace": "web",
+    "site": "https://beta.carrismetropolitana.pt"
+  }
+},
+{
+  "relation": ["delegate_permission/common.get_login_creds"],
+  "target": {
+    "namespace": "android_app",
+    "package_name": "com.horarios",
+    "sha256_cert_fingerprints":
+    ["FA:C6:17:45:DC:09:03:78:6F:B9:ED:E6:2A:96:2B:39:9F:73:48:F0:BB:6F:89:9B:83:32:66:75:91:03:3B:9C"]
+    
+  }
+},
+{
+  "relation": [
+      "delegate_permission/common.handle_all_urls"
+  ],
+  "target": {
+      "namespace": "android_app",
+      "package_name": "com.assignment",
+      "sha256_cert_fingerprints": [
+          "DD:7E:06:70:9A:7E:44:FB:19:EF:54:A9:E4:73:65:C1:7E:A2:2A:08:61:84:B0:55:1F:67:2C:93:21:E9:90:6D"
+      ]
+  }
+},
+{
+  "relation": [
+      "delegate_permission/common.handle_all_urls"
+  ],
+  "target": {
+      "namespace": "android_app",
+      "package_name": "com.carris",
+      "sha256_cert_fingerprints": [
+          "DD:7E:06:70:9A:7E:44:FB:19:EF:54:A9:E4:73:65:C1:7E:A2:2A:08:61:84:B0:55:1F:67:2C:93:21:E9:90:6D"
+      ]
+  }
+}
 ]
+
+
