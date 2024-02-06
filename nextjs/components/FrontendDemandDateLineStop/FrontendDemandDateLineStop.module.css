@@ -1,0 +1,15 @@
+/* * */
+/* CONTAINER */
+
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+}
+
+/* * */
+/* TAB PANEL WRAPPER */
+
+.tabPanelWrapper {
+  padding-top: 20px;
+}
