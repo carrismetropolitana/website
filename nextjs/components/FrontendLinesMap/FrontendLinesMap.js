@@ -131,7 +131,7 @@ export default function FrontendLinesMap() {
           timestamp: vehicleData.timestamp,
           timeString: new Date(vehicleData.timestamp * 1000).toLocaleString(),
           delay: Math.floor(Date.now() / 1000) - vehicleData.timestamp,
-          heading: vehicleData.heading,
+          bearing: vehicleData.bearing,
           trip_id: vehicleData.trip_id,
           pattern_id: vehicleData.pattern_id,
           status: vehicleData.status,
@@ -292,7 +292,7 @@ export default function FrontendLinesMap() {
               'icon-image': 'cm-bus-delay',
               'icon-size': ['interpolate', ['linear', 0.5], ['zoom'], 10, 0.05, 20, 0.15],
               'icon-offset': [0, 0],
-              'icon-rotate': ['get', 'heading'],
+              'icon-rotate': ['get', 'bearing'],
             }}
             paint={{
               'icon-opacity': ['interpolate', ['linear', 0.5], ['get', 'delay'], 20, 0, 40, 1],
@@ -312,7 +312,7 @@ export default function FrontendLinesMap() {
               'icon-image': 'cm-bus-regular',
               'icon-size': ['interpolate', ['linear', 0.5], ['zoom'], 10, 0.05, 20, 0.15],
               'icon-offset': [0, 0],
-              'icon-rotate': ['get', 'heading'],
+              'icon-rotate': ['get', 'bearing'],
             }}
           />
         </Source>

@@ -109,7 +109,7 @@ export default function FrontendStopsMap() {
             timestamp: selectedVehicleData.timestamp,
             timeString: new Date(selectedVehicleData.timestamp * 1000).toLocaleString(),
             delay: Math.floor(Date.now() / 1000) - selectedVehicleData.timestamp,
-            heading: selectedVehicleData.heading,
+            bearing: selectedVehicleData.bearing,
             trip_id: selectedVehicleData.trip_id,
             pattern_id: selectedVehicleData.pattern_id,
             status: selectedVehicleData.status,
@@ -288,7 +288,7 @@ export default function FrontendStopsMap() {
               'icon-image': 'cm-bus-regular',
               'icon-size': ['interpolate', ['linear', 0.5], ['zoom'], 10, 0.05, 20, 0.15],
               'icon-offset': [0, 0],
-              'icon-rotate': ['get', 'heading'],
+              'icon-rotate': ['get', 'bearing'],
             }}
           />
           <Layer
@@ -304,7 +304,7 @@ export default function FrontendStopsMap() {
               'icon-image': 'cm-bus-delay',
               'icon-size': ['interpolate', ['linear', 0.5], ['zoom'], 10, 0.05, 20, 0.15],
               'icon-offset': [0, 0],
-              'icon-rotate': ['get', 'heading'],
+              'icon-rotate': ['get', 'bearing'],
             }}
             paint={{
               'icon-opacity': ['interpolate', ['linear', 0.5], ['get', 'delay'], 20, 0, 40, 1],
