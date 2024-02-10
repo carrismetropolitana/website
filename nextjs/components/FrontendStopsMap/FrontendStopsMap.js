@@ -10,6 +10,8 @@ import { useMap, Source, Layer, Popup, GeolocateControl } from 'react-map-gl/map
 import { useDebugContext } from '@/contexts/DebugContext';
 import { useFrontendStopsContext } from '@/contexts/FrontendStopsContext';
 import generateUUID from '@/services/generateUUID';
+import CopyBadge from '@/components/CopyBadge/CopyBadge';
+import styles from './FrontendStopsMap.module.css';
 
 /* * */
 
@@ -105,14 +107,20 @@ export default function FrontendStopsMap() {
           },
           properties: {
             id: selectedVehicleData.id,
-            speed: selectedVehicleData.speed,
             timestamp: selectedVehicleData.timestamp,
             timeString: new Date(selectedVehicleData.timestamp * 1000).toLocaleString(),
             delay: Math.floor(Date.now() / 1000) - selectedVehicleData.timestamp,
-            bearing: selectedVehicleData.bearing,
+            schedule_relationship: selectedVehicleData.schedule_relationship,
             trip_id: selectedVehicleData.trip_id,
             pattern_id: selectedVehicleData.pattern_id,
-            status: selectedVehicleData.status,
+            route_id: selectedVehicleData.route_id,
+            line_id: selectedVehicleData.line_id,
+            stop_id: selectedVehicleData.stop_id,
+            current_status: selectedVehicleData.current_status,
+            block_id: selectedVehicleData.block_id,
+            shift_id: selectedVehicleData.shift_id,
+            bearing: selectedVehicleData.bearing,
+            speed: selectedVehicleData.speed,
           },
         };
       }
@@ -139,27 +147,27 @@ export default function FrontendStopsMap() {
   useEffect(() => {
     if (!frontendStopsMap) return;
     // Load direction arrows
-    frontendStopsMap.loadImage('/icons/shape-arrow-direction.png', (error, image) => {
+    frontendStopsMap.loadImage('https://beta.carrismetropolitana.pt/icons/shape-arrow-direction.png', (error, image) => {
       if (error) throw error;
       frontendStopsMap.addImage('shape-arrow-direction', image, { sdf: true });
     });
     // Load vehicle symbol
-    frontendStopsMap.loadImage('/icons/cm-bus-regular.png', (error, image) => {
+    frontendStopsMap.loadImage('https://beta.carrismetropolitana.pt/icons/cm-bus-regular.png', (error, image) => {
       if (error) throw error;
       frontendStopsMap.addImage('cm-bus-regular', image, { sdf: false });
     });
     // Load vehicle symbol
-    frontendStopsMap.loadImage('/icons/cm-bus-delay.png', (error, image) => {
+    frontendStopsMap.loadImage('https://beta.carrismetropolitana.pt/icons/cm-bus-delay.png', (error, image) => {
       if (error) throw error;
       frontendStopsMap.addImage('cm-bus-delay', image, { sdf: false });
     });
     // Load stop selected symbol
-    frontendStopsMap.loadImage('/icons/map-stop-selected.png', (error, image) => {
+    frontendStopsMap.loadImage('https://beta.carrismetropolitana.pt/icons/map-stop-selected.png', (error, image) => {
       if (error) throw error;
       frontendStopsMap.addImage('stop-selected', image, { sdf: false });
     });
     // Load pin symbol
-    frontendStopsMap.loadImage('/icons/map-pin.png', (error, image) => {
+    frontendStopsMap.loadImage('https://beta.carrismetropolitana.pt/icons/map-pin.png', (error, image) => {
       if (error) throw error;
       frontendStopsMap.addImage('map-pin', image, { sdf: false });
     });
@@ -266,11 +274,14 @@ export default function FrontendStopsMap() {
     <OSMMap id="frontendStopsMap" mapStyle={frontendStopsContext.map.style} onClick={handleMapClick} onMouseEnter={handleMapMouseEnter} onMouseLeave={handleMapMouseLeave} onMove={handleMapMove} interactiveLayerIds={['all-stops']}>
       <GeolocateControl />
       {selectedVehicleMapData && debugContext.isDebug && (
-        <Popup closeButton={false} closeOnClick={false} latitude={selectedVehicleMapData.geometry.coordinates[1]} longitude={selectedVehicleMapData.geometry.coordinates[0]} anchor="bottom">
-          <div>Vehicle ID: {selectedVehicleMapData.properties.id}</div>
-          <div>Timestamp: {selectedVehicleMapData.properties.timeString}</div>
-          <div>Delay: {selectedVehicleMapData.properties.delay} seconds</div>
-          <div>Inferred Status: {selectedVehicleMapData.properties.status}</div>
+        <Popup className={styles.popupWrapper} closeButton={false} closeOnClick={false} latitude={selectedVehicleMapData.geometry.coordinates[1]} longitude={selectedVehicleMapData.geometry.coordinates[0]} anchor="bottom" maxWidth="none">
+          <CopyBadge label={`Vehicle ID: ${selectedVehicleMapData.properties.id}`} value={selectedVehicleMapData.properties.id} />
+          <CopyBadge label={`Timestamp: ${selectedVehicleMapData.properties.timeString}`} value={selectedVehicleMapData.properties.timeString} />
+          <CopyBadge label={`Delay: ${selectedVehicleMapData.properties.delay} seconds`} value={selectedVehicleMapData.properties.delay} />
+          <CopyBadge label={`Trip ID: ${selectedVehicleMapData.properties.trip_id}`} value={selectedVehicleMapData.properties.trip_id} />
+          <CopyBadge label={`Status: ${selectedVehicleMapData.properties.current_status}: ${selectedVehicleMapData.properties.stop_id}`} value={selectedVehicleMapData.properties.current_status} />
+          <CopyBadge label={`Block ID: ${selectedVehicleMapData.properties.block_id}`} value={selectedVehicleMapData.properties.block_id} />
+          <CopyBadge label={`Shift ID: ${selectedVehicleMapData.properties.shift_id}`} value={selectedVehicleMapData.properties.shift_id} />
         </Popup>
       )}
       {selectedVehicleMapData && (

@@ -127,14 +127,20 @@ export default function FrontendLinesMap() {
         },
         properties: {
           id: vehicleData.id,
-          speed: vehicleData.speed,
           timestamp: vehicleData.timestamp,
           timeString: new Date(vehicleData.timestamp * 1000).toLocaleString(),
           delay: Math.floor(Date.now() / 1000) - vehicleData.timestamp,
-          bearing: vehicleData.bearing,
+          schedule_relationship: vehicleData.schedule_relationship,
           trip_id: vehicleData.trip_id,
           pattern_id: vehicleData.pattern_id,
-          status: vehicleData.status,
+          route_id: vehicleData.route_id,
+          line_id: vehicleData.line_id,
+          stop_id: vehicleData.stop_id,
+          current_status: vehicleData.current_status,
+          block_id: vehicleData.block_id,
+          shift_id: vehicleData.shift_id,
+          bearing: vehicleData.bearing,
+          speed: vehicleData.speed,
         },
       };
     });
@@ -267,14 +273,14 @@ export default function FrontendLinesMap() {
       {selectedVehiclesMapData &&
         debugContext.isDebug &&
         selectedVehiclesMapData.features.map((vehicle) => (
-          <Popup key={vehicle.properties.id} closeButton={false} closeOnClick={false} latitude={vehicle.geometry.coordinates[1]} longitude={vehicle.geometry.coordinates[0]} anchor="bottom" maxWidth="fit-content" offset={15}>
-            <div className={styles.popupWrapper}>
-              <CopyBadge label={`Vehicle ID: ${vehicle.properties.id}`} value={vehicle.properties.id} />
-              <CopyBadge label={`Timestamp: ${vehicle.properties.timeString}`} value={vehicle.properties.timeString} />
-              <CopyBadge label={`Delay: ${vehicle.properties.delay} seconds`} value={vehicle.properties.delay} />
-              <CopyBadge label={`Trip ID: ${vehicle.properties.trip_id}`} value={vehicle.properties.trip_id} />
-              <CopyBadge label={`Inferred Status: ${vehicle.properties.status}`} value={vehicle.properties.status} />
-            </div>
+          <Popup className={styles.popupWrapper} key={vehicle.properties.id} closeButton={false} closeOnClick={false} latitude={vehicle.geometry.coordinates[1]} longitude={vehicle.geometry.coordinates[0]} anchor="bottom" maxWidth="none" offset={15}>
+            <CopyBadge label={`Vehicle ID: ${vehicle.properties.id}`} value={vehicle.properties.id} />
+            <CopyBadge label={`Timestamp: ${vehicle.properties.timeString}`} value={vehicle.properties.timeString} />
+            <CopyBadge label={`Delay: ${vehicle.properties.delay} seconds`} value={vehicle.properties.delay} />
+            <CopyBadge label={`Trip ID: ${vehicle.properties.trip_id}`} value={vehicle.properties.trip_id} />
+            <CopyBadge label={`Status: ${vehicle.properties.current_status}: ${vehicle.properties.stop_id}`} value={vehicle.properties.current_status} />
+            <CopyBadge label={`Block ID: ${vehicle.properties.block_id}`} value={vehicle.properties.block_id} />
+            <CopyBadge label={`Shift ID: ${vehicle.properties.shift_id}`} value={vehicle.properties.shift_id} />
           </Popup>
         ))}
       {selectedVehiclesMapData && (

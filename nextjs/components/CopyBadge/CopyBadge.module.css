@@ -16,7 +16,7 @@
   font-weight: 600;
   letter-spacing: 0.5pt;
   line-height: 1;
-  text-wrap: nowrap;
+  /* text-wrap: nowrap; */
 }
 
 .container:hover {
