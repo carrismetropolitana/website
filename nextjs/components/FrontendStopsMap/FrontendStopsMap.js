@@ -4,7 +4,7 @@
 
 import useSWR from 'swr';
 import OSMMap from '@/components/OSMMap/OSMMap';
-import { useCallback, useEffect, useMemo } from 'react';
+import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import * as turf from '@turf/turf';
 import { useMap, Source, Layer, Popup, GeolocateControl } from 'react-map-gl/maplibre';
 import { useDebugContext } from '@/contexts/DebugContext';
@@ -43,6 +43,7 @@ export default function FrontendStopsMap() {
   const { data: allVehiclesData } = useSWR('https://api.carrismetropolitana.pt/vehicles', { refreshInterval: 5000 });
   const { data: selectedPatternData } = useSWR(frontendStopsContext.entities.pattern_id && `https://api.carrismetropolitana.pt/patterns/${frontendStopsContext.entities.pattern_id}`);
   const { data: selectedShapeData } = useSWR(frontendStopsContext.entities.shape_id && `https://api.carrismetropolitana.pt/shapes/${frontendStopsContext.entities.shape_id}`);
+  const { data: dummyShapeData } = useSWR(`https://api.carrismetropolitana.pt/shapes/p2_3708_0_1`);
 
   //
   // C. Transform data
@@ -83,6 +84,14 @@ export default function FrontendStopsMap() {
   }, [frontendStopsContext.entities.stop]);
 
   const selectedShapeMapData = useMemo(() => {
+    if (!dummyShapeData) return null;
+    return {
+      ...dummyShapeData.geojson,
+      properties: {
+        color: '000000',
+        text_color: '000000',
+      },
+    };
     if (selectedPatternData && selectedShapeData) {
       return {
         ...selectedShapeData.geojson,
@@ -93,11 +102,11 @@ export default function FrontendStopsMap() {
       };
     }
     return null;
-  }, [selectedPatternData, selectedShapeData]);
+  }, [dummyShapeData, selectedPatternData, selectedShapeData]);
 
   const selectedVehicleMapData = useMemo(() => {
-    if (allVehiclesData && frontendStopsContext.entities.trip_id) {
-      const selectedVehicleData = allVehiclesData.find((item) => item.trip_id && item.trip_id === frontendStopsContext.entities.trip_id);
+    if (allVehiclesData /*&& frontendStopsContext.entities.trip_id*/) {
+      const selectedVehicleData = frontendStopsContext.entities.vehicle; // allVehiclesData.find((item) => item.trip_id && item.trip_id === frontendStopsContext.entities.trip_id);
       if (selectedVehicleData) {
         return {
           type: 'Feature',
@@ -126,7 +135,7 @@ export default function FrontendStopsMap() {
       }
       return null;
     }
-  }, [allVehiclesData, frontendStopsContext.entities.trip_id]);
+  }, [allVehiclesData, frontendStopsContext]);
 
   const selectedCoordinatesMapData = useMemo(() => {
     if (frontendStopsContext.map.selected_coordinates) {
@@ -184,6 +193,76 @@ export default function FrontendStopsMap() {
       frontendStopsMap.fitBounds(boundingBox, { duration: 2000, padding: fitBoundsPadding, bearing: frontendStopsMap.getBearing(), maxZoom: 16 });
     }
   }, [selectedStopMapData, selectedVehicleMapData, frontendStopsMap]);
+
+  //
+  //
+  //
+  //
+  //
+  //
+  //
+  //
+  //
+
+  const pointLayer = {
+    id: 'point',
+    type: 'circle',
+    paint: {
+      'circle-radius': 10,
+      'circle-color': '#007cbf',
+    },
+  };
+
+  const [currentVehiclePoint, setCurrentVehiclePoint] = useState(null);
+
+  function pointOnCircle({ iteration }) {
+    //
+    // console.log('iteration', iteration);
+
+    if (iteration > 1) return turf.point([frontendStopsContext.entities.vehicle.lon, frontendStopsContext.entities.vehicle.lat]);
+
+    if (!selectedShapeMapData || !frontendStopsContext.entities.vehicle || !frontendStopsContext.entities.vehicle_prev) return;
+
+    const line = turf.lineString(selectedShapeMapData);
+
+    const start = turf.point([frontendStopsContext.entities.vehicle_prev.lon, frontendStopsContext.entities.vehicle_prev.lat]);
+    const stop = turf.point([frontendStopsContext.entities.vehicle.lon, frontendStopsContext.entities.vehicle.lat]);
+
+    const sliced = turf.lineSlice(start.geometry.coordinates, stop.geometry.coordinates, line.geometry.coordinates);
+    const totalLength = turf.length(sliced, { units: 'kilometers' });
+
+    // console.log('totalLength', totalLength);
+
+    const newVehiclePoint = turf.along(sliced, totalLength * iteration, { units: 'kilometers' });
+
+    return newVehiclePoint;
+
+    //
+  }
+
+  const currentIt = useRef(0);
+
+  useEffect(() => {
+    const intervalId = setInterval(() => {
+      // const animation = window.requestAnimationFrame(() => setCurrentVehiclePoint(pointOnCircle({ iteration: currentIt.current + 0.1 })));
+      setCurrentVehiclePoint(pointOnCircle({ iteration: currentIt.current + 0.01 }));
+      currentIt.current = currentIt.current + 0.01;
+    }, 50); // in milliseconds
+    return () => clearInterval(intervalId);
+
+    // return () => window.cancelAnimationFrame(animation);
+  });
+
+  //
+  //
+  //
+  //
+  //
+  //
+  //
+  //
+  //
+  //
 
   //
   // E. Helper functions
@@ -273,6 +352,11 @@ export default function FrontendStopsMap() {
   return (
     <OSMMap id="frontendStopsMap" mapStyle={frontendStopsContext.map.style} onClick={handleMapClick} onMouseEnter={handleMapMouseEnter} onMouseLeave={handleMapMouseLeave} onMove={handleMapMove} interactiveLayerIds={['all-stops']}>
       <GeolocateControl />
+      {currentVehiclePoint && (
+        <Source type="geojson" data={currentVehiclePoint}>
+          <Layer {...pointLayer} />
+        </Source>
+      )}
       {selectedVehicleMapData && debugContext.isDebug && (
         <Popup className={styles.popupWrapper} closeButton={false} closeOnClick={false} latitude={selectedVehicleMapData.geometry.coordinates[1]} longitude={selectedVehicleMapData.geometry.coordinates[0]} anchor="bottom" maxWidth="none">
           <CopyBadge label={`Vehicle ID: ${selectedVehicleMapData.properties.id}`} value={selectedVehicleMapData.properties.id} />
