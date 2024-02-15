@@ -234,9 +234,9 @@ export default function FrontendLinesMap() {
 
   const handleMapClick = (event) => {
     if (event?.features[0]?.properties?.id) {
-      const foundStopInPath = FrontendLinesContext.entities.pattern.path.find((item) => item.stop.id === event.features[0].properties.id && item.stop_sequence === event.features[0].properties.stop_sequence);
+      const foundStopInPath = frontendLinesContext.entities.pattern.path.find((item) => item.stop.id === event.features[0].properties.id && item.stop_sequence === event.features[0].properties.stop_sequence);
       if (foundStopInPath) {
-        FrontendLinesContext.selectStop(foundStopInPath.stop, foundStopInPath.stop_sequence);
+        frontendLinesContext.selectStop(foundStopInPath.stop, foundStopInPath.stop_sequence);
         moveMap(event.features[0].geometry?.coordinates);
       }
     }
