@@ -23,22 +23,22 @@ export default function FrontendLinesContent() {
   const t = useTranslations('FrontendLinesContent');
 
   const debugContext = useDebugContext();
-  const FrontendLinesContext = useFrontendLinesContext();
+  const frontendLinesContext = useFrontendLinesContext();
 
   //
   // B. Render components
 
   return (
-    <div className={`${styles.container} ${!FrontendLinesContext?.entities?.line?.id && styles.isHidden}`}>
+    <div className={`${styles.container} ${!frontendLinesContext?.entities?.line?.id && styles.isHidden}`}>
       <div className={styles.map}>
         <FrontendLinesMap />
       </div>
       <div className={styles.sidebar}>
-        {FrontendLinesContext?.entities?.line?.id ? (
+        {frontendLinesContext?.entities?.line?.id ? (
           <>
             <FrontendLinesContentHeader />
-            {FrontendLinesContext.entities.pattern?.id && debugContext.isDebug && <FrontendLinesContentDebug />}
-            {FrontendLinesContext.entities.pattern?.id ? <FrontendLinesContentPatternPath /> : <NoDataLabel text={t('no_selection')} />}
+            {frontendLinesContext.entities.pattern?.id && debugContext.isDebug && <FrontendLinesContentDebug />}
+            {frontendLinesContext.entities.pattern?.id ? <FrontendLinesContentPatternPath /> : <NoDataLabel text={t('no_selection')} />}
           </>
         ) : (
           <NoDataLabel text={t('no_selection')} />

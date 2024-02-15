@@ -193,6 +193,7 @@ export default function FrontendLinesMap() {
 
   const moveMap = useCallback(
     (coordinates) => {
+      if (!frontendLinesMap) return;
       // Get map current zoom level
       const currentZoom = frontendLinesMap.getZoom();
       const currentZoomWithMargin = currentZoom + MAP_DEFAULT_OPTIONS.zoomMargin;

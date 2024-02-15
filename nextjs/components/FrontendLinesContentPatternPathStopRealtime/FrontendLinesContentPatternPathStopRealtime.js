@@ -8,6 +8,7 @@ import { DateTime } from 'luxon';
 import { useTranslations } from 'next-intl';
 import styles from './FrontendLinesContentPatternPathStopRealtime.module.css';
 import NextArrivals from '@/components/NextArrivals/NextArrivals';
+import { useDebugContext } from '@/contexts/DebugContext';
 
 /* * */
 
@@ -17,6 +18,7 @@ export default function FrontendLinesContentPatternPathStopRealtime({ patternId,
   //
   // A. Setup variables
 
+  const debugContext = useDebugContext();
   const t = useTranslations('FrontendLinesContentPatternPathStopRealtime');
 
   //
@@ -45,14 +47,13 @@ export default function FrontendLinesContentPatternPathStopRealtime({ patternId,
     });
     // Format the arrival times
     const formattedNextEstimatedArrivals = filteredNextEstimatedArrivals.map((item) => {
-      const timeDifferenceBetweenEstimateAndNowInMilliseconds = new Date(item.scheduled_arrival_unix * 1000) - new Date();
-      return Math.floor(timeDifferenceBetweenEstimateAndNowInMilliseconds / 1000 / 60);
+      const timeDifferenceBetweenEstimateAndNowInMilliseconds = item.scheduled_arrival_unix - DateTime.now().toUnixInteger();
+      return Math.floor(timeDifferenceBetweenEstimateAndNowInMilliseconds / 60);
     });
     // Sort by arrival_time
     const sortedNextEstimatedArrivals = formattedNextEstimatedArrivals.sort((a, b) => a - b);
     // Limit array to the max amount of items
     const limitedNextEstimatedArrivals = sortedNextEstimatedArrivals.slice(0, maxEstimatedArrivals);
-    // if (stopId === '090012') console.log(limitedNextEstimatedArrivals);
     // Return result
     return limitedNextEstimatedArrivals;
     //
@@ -101,6 +102,7 @@ export default function FrontendLinesContentPatternPathStopRealtime({ patternId,
         {showLabel && <p className={styles.label}>{t('next_arrivals')}</p>}
         <div className={styles.estimates}>
           {nextEstimatedArrivals.length > 0 && <NextArrivals type="estimated" arrivalsData={nextEstimatedArrivals} />}
+          {nextEstimatedArrivals.length > 0 && debugContext.isDebug && <pre>{nextEstimatedArrivals.join('|')}</pre>}
           {(showScheduledArrivals || !nextEstimatedArrivals.length) && nextScheduledArrivals.length > 0 && <NextArrivals type="scheduled" arrivalsData={nextScheduledArrivals} />}
         </div>
       </div>

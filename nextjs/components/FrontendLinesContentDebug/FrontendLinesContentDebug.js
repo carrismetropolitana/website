@@ -14,18 +14,18 @@ export default function FrontendLinesContentDebug() {
   //
   // A. Setup variables
 
-  const FrontendLinesContext = useFrontendLinesContext();
+  const frontendLinesContext = useFrontendLinesContext();
 
   //
   // B. Render components
 
   return (
     <div className={styles.container}>
-      <CopyBadge label={`pattern_id: ${FrontendLinesContext.entities.pattern?.id}`} value={FrontendLinesContext.entities.pattern?.id} />
-      <CopyBadge label={`direction: ${FrontendLinesContext.entities.pattern?.direction}`} value={FrontendLinesContext.entities.pattern?.direction} />
-      <CopyBadge label={`headsign: ${FrontendLinesContext.entities.pattern?.headsign}`} value={FrontendLinesContext.entities.pattern?.headsign} />
-      <CopyBadge label={`line_color: ${FrontendLinesContext.entities.line?.color}`} value={FrontendLinesContext.entities.line?.color} />
-      <CopyBadge label={`total stops: ${FrontendLinesContext.entities.pattern?.path?.length}`} value={FrontendLinesContext.entities.pattern?.path?.length} />
+      <CopyBadge label={`pattern_id: ${frontendLinesContext.entities.pattern?.id}`} value={frontendLinesContext.entities.pattern?.id} />
+      <CopyBadge label={`direction: ${frontendLinesContext.entities.pattern?.direction}`} value={frontendLinesContext.entities.pattern?.direction} />
+      <CopyBadge label={`headsign: ${frontendLinesContext.entities.pattern?.headsign}`} value={frontendLinesContext.entities.pattern?.headsign} />
+      <CopyBadge label={`line_color: ${frontendLinesContext.entities.line?.color}`} value={frontendLinesContext.entities.line?.color} />
+      <CopyBadge label={`total stops: ${frontendLinesContext.entities.pattern?.path?.length}`} value={frontendLinesContext.entities.pattern?.path?.length} />
     </div>
   );
 
