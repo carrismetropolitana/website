@@ -728,7 +728,8 @@
         }
     },
     "FrontendStopsTimetable": {
-        "no_service": "Sem Serviço"
+        "no_service": "Sem Serviço",
+        "unavailable": "Temporariamente Indisponível"
     },
     "FrontendStopsTimetableHeader": {
         "line": "Linha",

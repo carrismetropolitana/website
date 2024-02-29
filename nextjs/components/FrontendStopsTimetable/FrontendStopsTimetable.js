@@ -1,5 +1,7 @@
 'use client';
 
+/* * */
+
 import useSWR from 'swr';
 import { useTranslations } from 'next-intl';
 import styles from './FrontendStopsTimetable.module.css';
@@ -30,7 +32,11 @@ export default function FrontendStopsTimetable() {
   //
   // B. Fetch data
 
-  const { data: stopRealtimeData, isLoading: stopRealtimeLoading } = useSWR(FrontendStopsContext.entities.stop?.id && `https://api.carrismetropolitana.pt/stops/${FrontendStopsContext.entities.stop.id}/realtime`, {
+  const {
+    data: stopRealtimeData,
+    isLoading: stopRealtimeLoading,
+    error: stopRealtimeError,
+  } = useSWR(FrontendStopsContext.entities.stop?.id && `https://api.carrismetropolitana.pt/stops/${FrontendStopsContext.entities.stop.id}/realtime`, {
     refreshInterval: 5000,
   });
 
@@ -114,11 +120,25 @@ export default function FrontendStopsTimetable() {
   //
   // D. Handle actions
 
+  if (stopRealtimeLoading) {
+    return (
+      <div className={styles.container}>
+        <Loader visible maxed />
+      </div>
+    );
+  }
+
+  if (stopRealtimeError) {
+    return (
+      <div className={styles.container}>
+        <NoDataLabel text={t('unavailable')} />
+      </div>
+    );
+  }
+
   return (
     <div className={styles.container}>
-      {stopRealtimeLoading ? (
-        <Loader visible maxed />
-      ) : previousTrips.length > 0 || currentAndFutureTrips.length > 0 ? (
+      {previousTrips.length > 0 || currentAndFutureTrips.length > 0 ? (
         <>
           <FrontendStopsTimetableHeader />
           <FrontendStopsTimetablePreviousTrips tripsData={previousTrips} />
