@@ -47,8 +47,8 @@ export default function FrontendLinesContentPatternPathStopRealtime({ patternId,
     });
     // Format the arrival times
     const formattedNextEstimatedArrivals = filteredNextEstimatedArrivals.map((item) => {
-      const timeDifferenceBetweenEstimateAndNowInMilliseconds = item.scheduled_arrival_unix - DateTime.now().toUnixInteger();
-      return Math.floor(timeDifferenceBetweenEstimateAndNowInMilliseconds / 60);
+      const timeDifferenceBetweenEstimateAndNowInSeconds = item.estimated_arrival_unix - DateTime.local({ zone: 'Europe/Lisbon' }).toUnixInteger();
+      return Math.floor(timeDifferenceBetweenEstimateAndNowInSeconds / 60);
     });
     // Sort by arrival_time
     const sortedNextEstimatedArrivals = formattedNextEstimatedArrivals.sort((a, b) => a - b);
