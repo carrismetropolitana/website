@@ -1,6 +1,6 @@
 {
     "name": "@carrismetropolitana/website",
-    "version": "2024.03.18-1604",
+    "version": "2024.03.18-1659",
     "private": true,
     "scripts": {
         "dev": "next dev",
@@ -27,7 +27,7 @@
         "inflected": "2.1.0",
         "jsonwebtoken": "^9.0.2",
         "luxon": "3.4.4",
-        "maplibre-gl": "4.1.1",
+        "maplibre-gl": "3.6.2",
         "mongodb": "6.5.0",
         "mongoose": "8.2.2",
         "next": "14.1.3",
