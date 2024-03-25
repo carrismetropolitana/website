@@ -1,11 +1,11 @@
 /* * */
 
+import { useMemo } from 'react';
+import Text from '@/components/Text/Text';
 import { useTranslations } from 'next-intl';
 import styles from './FrontendPipSurvey.module.css';
-import Text from '@/components/Text/Text';
-import { useMemo } from 'react';
 import { PipSurveyOptions } from '@/schemas/PipSurvey/options';
-import FrontendPipSurveyAnswer from '../FrontendPipSurveyAnswer/FrontendPipSurveyAnswer';
+import FrontendPipSurveyAnswer from '@/components/FrontendPipSurveyAnswer/FrontendPipSurveyAnswer';
 
 /* * */
 
@@ -31,10 +31,11 @@ export default function FrontendPipSurvey() {
   }, [pipSurveyOptionsLabels]);
 
   //
-  // B. Render components
+  // C. Render components
 
   return (
     <div className={styles.container}>
+      <Text>{t('question')}</Text>
       <div className={styles.answersGrid}>
         {pipSurveyAnswerData.map((item) => (
           <FrontendPipSurveyAnswer key={item.code} code={item.code} title={item.title} description={item.description} />

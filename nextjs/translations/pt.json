@@ -968,6 +968,9 @@
         "text": ""
     },
     "FrontendPipSurvey": {
-        "question": "Qual é o problema com este PIP?"
+        "question": "Qual é o problema com este painel?"
+    },
+    "FrontendPipStops": {
+        "question": "Estas são as paragens associadas a este painel"
     }
 }

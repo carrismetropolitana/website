@@ -1,3 +1,5 @@
+/* * */
+
 import { OneFullColumn } from '@/components/Layouts/Layouts';
 import FrontendEncm from '@/components/FrontendEncm/FrontendEncm';
 

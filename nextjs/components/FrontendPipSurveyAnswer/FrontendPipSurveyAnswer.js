@@ -14,17 +14,17 @@ export default function FrontendPipSurveyAnswer({ code, title, description }) {
   const frontendPipContext = useFrontendPipContext();
 
   //
-  // B. Render components
+  // B. Handle actions
 
   const handleSelectAnswer = () => {
     frontendPipContext.selectAnswer(code);
   };
 
   //
-  // B. Render components
+  // C. Render components
 
   return (
-    <div className={`${styles.container} ${frontendPipContext.survey.selected_answer_code === code && styles.selected}`} onClick={handleSelectAnswer}>
+    <div className={styles.container} onClick={handleSelectAnswer}>
       <p className={styles.title}>{title}</p>
       <p className={styles.description}>{description}</p>
     </div>

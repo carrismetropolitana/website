@@ -3,7 +3,7 @@
 
 .container {
   width: 100%;
-  padding: 25px;
+  padding: 15px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -12,27 +12,21 @@
   background-color: var(--color-reference-0);
   border: 1px solid var(--gray-2);
   border-radius: 10px;
-  box-shadow: 0 0 15px 0 rgba(0, 0, 0, 0.03);
-}
-
-.container:active {
-  opacity: 0.8;
-  background-color: var(--gray-1);
+  box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.05);
 }
 
 /* * */
-/* TITLE */
+/* STOP NAME */
 
-.title {
-  font-size: 20px;
+.stopName {
+  font-size: 18px;
   font-weight: 600;
 }
 
 /* * */
-/* DESCRIPTION */
+/* STOP ID */
 
-.description {
+.stopId {
   font-size: 16px;
   font-weight: 500;
-  color: var(--gray-6);
 }

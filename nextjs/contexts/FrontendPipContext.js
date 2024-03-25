@@ -11,13 +11,6 @@ import { useParams } from 'next/navigation';
 // 1.
 // SETUP INITIAL STATE
 
-const initialMapState = {
-  style: 'map',
-  auto_zoom: null,
-  selected_coordinates: null,
-  selected_feature: null,
-};
-
 const initialSurveyState = {
   selected_answer_code: null,
 };
@@ -54,25 +47,15 @@ export function FrontendPipContextProvider({ children }) {
   //
   // B. Setup state
 
-  const [mapState, setMapState] = useState(initialMapState);
   const [surveyState, setSurveyState] = useState(initialSurveyState);
 
   //
   // B. Fetch data
 
-  const { data: allItemsData } = useSWR('https://api.carrismetropolitana.pt/datasets/facilities/pip');
   const { data: itemData } = useSWR(itemId && `https://api.carrismetropolitana.pt/datasets/facilities/pip/${itemId}`);
 
   //
   // D. Setup actions
-
-  const updateMapState = useCallback(
-    (newMapState, reset = false) => {
-      if (reset) setMapState({ ...initialMapState, ...newMapState });
-      else setMapState({ ...mapState, ...newMapState });
-    },
-    [mapState]
-  );
 
   const updateSurvey = useCallback(
     (newSurveyState, reset = false) => {
@@ -84,38 +67,30 @@ export function FrontendPipContextProvider({ children }) {
 
   // --------
 
-  const setSelectedCoordinates = useCallback((newCoordinates) => {
-    setSurveyState(initialSurveyState);
-    setMapState((prev) => ({ ...prev, selected_coordinates: newCoordinates, selected_feature: null }));
-  }, []);
+  const selectAnswer = useCallback(
+    async (answerCode) => {
+      setSurveyState((prev) => ({ ...prev, selected_answer_code: answerCode }));
+      try {
+        await fetch('https://stats.carrismetropolitana.pt/collector/feedback/pipStatus', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json; charset=utf-8' },
+          body: JSON.stringify({
+            pip_id: itemId,
+            answer_code: answerCode,
+          }),
+        });
+      } catch (error) {
+        console.log(error);
+      }
+      if (itemData?.stops?.length < 2) {
+        // window.location = `/stops/${itemData?.stops[0]}`;
+      }
+    },
+    [itemData?.stops, itemId]
+  );
 
-  const setSelectedFeature = useCallback((newFeature) => {
-    setMapState((prev) => ({ ...prev, selected_feature: newFeature, selected_coordinates: null }));
-  }, []);
-
-  const disableAutoZoom = useCallback(() => {
-    setMapState((prev) => ({ ...prev, auto_zoom: false }));
-  }, []);
-
-  // --------
-
-  const selectAnswer = useCallback((answerCode) => {
-    setSurveyState((prev) => ({ ...prev, selected_answer_code: prev.selected_answer_code !== answerCode ? answerCode : null }));
-  }, []);
-
-  const clearSelectedStop = useCallback(() => {
-    setSurveyState(initialSurveyState);
-    updateWindowUrl();
-  }, []);
-
-  // --------
-
-  const selectTrip = useCallback((tripData) => {
-    setSurveyState((prev) => ({ ...prev, trip: tripData }));
-  }, []);
-
-  const clearSelectedTrip = useCallback(() => {
-    setSurveyState((prev) => ({ ...initialSurveyState, pip: prev.pip }));
+  const selectStop = useCallback((stopId) => {
+    window.location = `/stops/${stopId}`;
   }, []);
 
   //
@@ -127,22 +102,14 @@ export function FrontendPipContextProvider({ children }) {
       item_id: itemId,
       item_data: itemData,
       //
-      map: mapState,
-      updateMap: updateMapState,
-      setSelectedCoordinates,
-      setSelectedFeature,
-      disableAutoZoom,
-      //
       survey: surveyState,
       updateSurvey,
       //
       selectAnswer,
-      clearSelectedStop,
+      selectStop,
       //
-      selectTrip,
-      clearSelectedTrip,
     }),
-    [itemId, itemData, mapState, updateMapState, setSelectedCoordinates, setSelectedFeature, disableAutoZoom, surveyState, updateSurvey, selectAnswer, clearSelectedStop, selectTrip, clearSelectedTrip]
+    [itemId, itemData, surveyState, updateSurvey, selectAnswer, selectStop]
   );
 
   //
