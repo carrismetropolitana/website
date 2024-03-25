@@ -83,7 +83,7 @@ export function FrontendPipContextProvider({ children }) {
         console.log(error);
       }
       if (itemData?.stops?.length < 2) {
-        // window.location = `/stops/${itemData?.stops[0]}`;
+        window.location = `/stops/${itemData?.stops[0]}`;
       }
     },
     [itemData?.stops, itemId]
