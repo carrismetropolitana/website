@@ -22,7 +22,7 @@ export default function FrontendEncmToolbarSearch({ selectedEncmId, onSelectEncm
   //
   // B. Fetch data
 
-  const { data: allEncmData } = useSWR('https://api.carrismetropolitana.pt/facilities/encm');
+  const { data: allEncmData } = useSWR('https://api.carrismetropolitana.pt/datasets/facilities/encm');
 
   //
   // C. Transform data

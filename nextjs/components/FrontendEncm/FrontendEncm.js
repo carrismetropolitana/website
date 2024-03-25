@@ -46,7 +46,7 @@ export default function FrontendEncm() {
   //
   // C. Fetch data
 
-  const { data: allEncmData, error: allEncmError, isLoading: allEncmLoading } = useSWR('https://api.carrismetropolitana.pt/facilities/encm', { refreshInterval: 30000 });
+  const { data: allEncmData, error: allEncmError, isLoading: allEncmLoading } = useSWR('https://api.carrismetropolitana.pt/datasets/facilities/encm', { refreshInterval: 30000 });
 
   //
   // D. Transform data

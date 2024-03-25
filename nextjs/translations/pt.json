@@ -944,5 +944,30 @@
                 "action": "Por favor entre em contacto connosco."
             }
         }
+    },
+    "PipSurveyOptions": {
+        "answer": {
+            "ok": {
+                "title": "Tudo OK",
+                "description": "O painel está a funcionar corretamente"
+            },
+            "physical_damage": {
+                "title": "Danos Físicos",
+                "description": "Mais sobre Danos Físicos"
+            },
+            "other": {
+                "title": "Outra Situação"
+            }
+        }
+    },
+    "FrontendPip": {
+        "title": "Painel {pip_id}"
+    },
+    "FrontendPipIntro": {
+        "intro": "Obrigado por nos ajudar a manter este painel a funcionar.",
+        "text": ""
+    },
+    "FrontendPipSurvey": {
+        "question": "Qual é o problema com este PIP?"
     }
 }
