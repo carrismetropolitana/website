@@ -1,6 +1,6 @@
 {
     "name": "@carrismetropolitana/website",
-    "version": "2024.03.23-2240",
+    "version": "2024.03.25-1003",
     "private": true,
     "scripts": {
         "dev": "next dev",
@@ -32,7 +32,7 @@
         "mongoose": "8.2.3",
         "next": "14.1.4",
         "next-auth": "5.0.0-beta.4",
-        "next-intl": "3.9.5",
+        "next-intl": "3.10.0",
         "nodemailer": "6.9.13",
         "react": "18.2.0",
         "react-dom": "18.2.0",
@@ -44,7 +44,7 @@
     },
     "devDependencies": {
         "@types/node": "20.11.30",
-        "@types/react": "18.2.69",
+        "@types/react": "18.2.70",
         "@types/react-dom": "18.2.22",
         "eslint": "8.57.0",
         "eslint-config-next": "14.1.4",
