@@ -40,12 +40,7 @@ export default async function Image({ params }) {
   //
   // D. Fetch additional data
 
-  const allLinesData = [];
-
-  for (const lineId of stopData.lines) {
-    const lineData = await fetch(`https://api.carrismetropolitana.pt/lines/${lineId}`).then((res) => res.json());
-    allLinesData.push(lineData);
-  }
+  const allLinesData = Promise.all(stopData.lines.map((lineId) => fetch(`https://api.carrismetropolitana.pt/lines/${lineId}`).then((res) => res.json())));
 
   //
   // E. Render dynamic component
