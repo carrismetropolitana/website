@@ -58,7 +58,7 @@ export default function FrontendAlerts({ alerts,lines,municipalities }) {
           type={alert.alert.effect}
           header={alert.alert.headerText.translation[0].text}
           description={alert.alert.descriptionText.translation[0].text}
-          url={alert.alert.url.translation[0].text}
+          url={"/alerts/"+alert.id}
           />
         )):t('no_results')}
       </Accordion>

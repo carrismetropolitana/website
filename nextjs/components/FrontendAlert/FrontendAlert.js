@@ -3,9 +3,9 @@
 
 
 /* * */
-import { Badge } from "@mantine/core"
+import { Badge, Anchor } from "@mantine/core"
 import { getTranslations } from "next-intl/server";
-import Image from "next/image";
+import { redirect } from "next/navigation";
 
 export default async function FrontendAlert({alertId,locale}) {
   //
@@ -21,9 +21,10 @@ export default async function FrontendAlert({alertId,locale}) {
   // B. Fetch data
 
   const alerts = await fetch('https://api.carrismetropolitana.pt/alerts').then(res => res.json())
-  let tempAlertId = 'CarrisMetropolitanaGTFSAlerts-'+ alertId
-  let alert = alerts.entity.find((alert) => alert.id === tempAlertId)
-  console.log(alert.alert.image.localizedImage)
+  let alert = alerts.entity.find((alert) => alert.id === alertId)
+  if (!alert) {
+    return redirect("/")
+  }
   let dates = [];
   for (let p of alert.alert.activePeriod) {
     let start = new Date(p.start*1000);
@@ -35,8 +36,13 @@ export default async function FrontendAlert({alertId,locale}) {
   let imageUrl = alert.alert.image.localizedImage.find((image) => image.language === locale)?.url
   if (!imageUrl) imageUrl = alert.alert.image.localizedImage[0]?.url
 
+  let moreUrl = alert.alert.url.translation.find((url) => url.language === locale)?.text
+  if (!moreUrl) moreUrl = alert.alert.url.translation[0]?.text
+
   //
   // C. Render components
+  console.log(alert.alert.url.translation)
+
 
   return (
     <div style={{backgroundColor:"white", borderRadius:"5px"}}>
@@ -52,7 +58,8 @@ export default async function FrontendAlert({alertId,locale}) {
         </div>
         <p style={{fontWeight:"500",fontSize:"14px"}}> {t('period')}: {periodString} </p>
         <p>{alert.alert.descriptionText.translation[0].text}</p>
-        {imageUrl && <img style={{maxWidth:"100%"}} src={imageUrl} alt="alert image"/>}
+        {moreUrl && <Anchor href={moreUrl} underline="hover">Mais informações</Anchor>}
+        {imageUrl && <img style={{maxWidth:"100%"}} src={imageUrl} alt="alert"/>}
       </div>
     </div>
   );
