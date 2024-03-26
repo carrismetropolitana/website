@@ -43,7 +43,6 @@ export default async function FrontendAlert({alertId,locale}) {
 
   //
   // C. Render components
-  console.log(alert.alert.url.translation)
 
 
   return (
