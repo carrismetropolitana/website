@@ -34,25 +34,24 @@ export default function FrontendLinesContentSelectPattern() {
     (async function () {
       // Exit if no line is selected
       if (!FrontendLinesContext.entities?.line?.id) return;
-      // Initiate a temporaty variable to hold formatted routes and patterns
-      let formattedRouteOptions = [];
-      let formattedPatternOptions = [];
+
       // Loop through each line route to retrieve its info
-      for (const routeId of FrontendLinesContext.entities.line.routes) {
-        // Fetch pattern info
-        const routeDataResponse = await fetch(`https://api.carrismetropolitana.pt/routes/${routeId}`);
-        const routeData = await routeDataResponse.json();
-        // Save route
-        formattedRouteOptions.push(routeData);
-      }
+      const formattedRouteOptions = await Promise.all(
+        FrontendLinesContext.entities.line.routes.map(async (routeId) => {
+          const routeDataResponse = await fetch(`https://api.carrismetropolitana.pt/routes/${routeId}`);
+          return routeDataResponse.json();
+        })
+      )
+
       // Loop through each line pattern to retrieve its info
-      for (const patternId of FrontendLinesContext.entities.line.patterns) {
-        // Fetch pattern info
-        const patternDataResponse = await fetch(`https://api.carrismetropolitana.pt/patterns/${patternId}`);
-        const patternData = await patternDataResponse.json();
-        // Save pattern
-        formattedPatternOptions.push({ ...patternData, route: formattedRouteOptions.find((route) => route.id === patternData.route_id) });
-      }
+      const formattedPatternOptions = await Promise.all(
+        FrontendLinesContext.entities.line.patterns.map(async (patternId) => {
+          const patternDataResponse = await fetch(`https://api.carrismetropolitana.pt/patterns/${patternId}`);
+          const patternData = await patternDataResponse.json();
+          return { ...patternData, route: formattedRouteOptions.find((route) => route.id === patternData.route_id) };
+        })
+      )
+
       // Update state with formatted patterns
       setAllRoutesData(formattedRouteOptions);
       setAllPatternsData(formattedPatternOptions);

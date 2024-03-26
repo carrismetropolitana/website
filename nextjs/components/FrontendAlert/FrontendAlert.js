@@ -13,14 +13,16 @@ export default async function FrontendAlert({alertId,locale}) {
   //
   // A. Setup variables
 
-  const cT = await getTranslations('GTFSCause');
-  const eT = await getTranslations('GTFSEffect');
-  const t = await getTranslations('FrontendAlert');
+  const [cT, eT, t, alerts] = await Promise.all([
+    getTranslations('GTFSCause'),
+    getTranslations('GTFSEffect'),
+    getTranslations('FrontendAlert'),
+    fetch('https://api.carrismetropolitana.pt/alerts').then(res => res.json())
+  ]);
 
   //
   // B. Fetch data
 
-  const alerts = await fetch('https://api.carrismetropolitana.pt/alerts').then(res => res.json())
   let alert = alerts.entity.find((alert) => alert.id === alertId)
   if (!alert) {
     return redirect("/")
