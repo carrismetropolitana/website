@@ -19,8 +19,7 @@ module.exports = withNextIntl({
   async redirects() {
     return [
       //
-      { source: '/alerts', destination: '/alerts/all', permanent: true },
-      { source: '/alertas', destination: '/alerts/all', permanent: true },
+      { source: '/alertas', destination: '/alerts', permanent: true },
       //
       { source: '/', destination: '/stops', permanent: false },
       { source: '/stops', destination: '/stops/all', permanent: true },

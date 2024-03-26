@@ -972,5 +972,41 @@
     },
     "FrontendPipStops": {
         "question": "Estas são as paragens associadas a este painel"
+    },
+    "FrontendAlertsSummary": {
+        "no_results": "Não há alertas com esta pesquisa."
+    },
+    "FrontendAlertsItem": {
+        "show_more": "Saber Mais"
+    },
+    "GTFSCause": {
+        "UNKNOWN_CAUSE": "Causa desconhecida",
+        "OTHER_CAUSE": "Outra causa",
+        "TECHNICAL_PROBLEM": "Problema técnico",
+        "STRIKE": "Greve",
+        "DEMONSTRATION": "Manifestação",
+        "ACCIDENT": "Acidente",
+        "HOLIDAY": "Feriado",
+        "WEATHER": "Condições meteorológicas",
+        "MAINTENANCE": "Manutenção",
+        "CONSTRUCTION": "Obras",
+        "POLICE_ACTIVITY": "Polícia",
+        "MEDICAL_EMERGENCY": "Emergência médica"
+    },
+    "GTFSEffect": {
+        "NO_SERVICE": "Sem serviço",
+        "REDUCED_SERVICE": "Serviço reduzido",
+        "SIGNIFICANT_DELAYS": "Atrasos significativos",
+        "DETOUR": "Desvio",
+        "ADDITIONAL_SERVICE": "Serviço adicional",
+        "MODIFIED_SERVICE": "Serviço modificado",
+        "OTHER_EFFECT": "Outro efeito",
+        "UNKNOWN_EFFECT": "Efeito desconhecido",
+        "STOP_MOVED": "Paragem movida",
+        "NO_EFFECT": "Sem efeito",
+        "ACCESSIBILITY_ISSUE": "Problema de acessibilidade"
+    },
+    "FrontendAlert": {
+        "period": "Período"
     }
 }

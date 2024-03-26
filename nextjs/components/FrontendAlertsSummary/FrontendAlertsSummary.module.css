@@ -1,0 +1,23 @@
+/* * */
+/* CONTAINER */
+
+.container {
+  padding:0
+}
+
+.search {
+  display: flex;
+  padding: var(--size-md);
+  flex-direction: row;
+  gap: var(--size-md);
+  background-color: var(--carris-metropolitana);
+}
+
+@media (max-width: 900px) {
+  .search {
+    flex-direction: column;
+    height: auto;
+    /* padding-left: var(--size-lg);
+    padding-right: var(--size-lg); */
+  }
+}

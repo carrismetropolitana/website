@@ -1,28 +1,37 @@
-'use client';
 
 /* * */
 
-import { useTranslations } from 'next-intl';
+import { getTranslations } from 'next-intl/server';
 import Panel from '@/components/Panel/Panel';
-// import FrontendAlertsSummary from '@/components/FrontendAlertsSummary/FrontendAlertsSummary';
+import FrontendAlertsSummary from '@/components/FrontendAlertsSummary/FrontendAlertsSummary';
 
 /* * */
 
-export default function FrontendAlerts() {
+export default async function FrontendAlert() {
   //
 
   //
   // A. Setup variables
 
-  const t = useTranslations('FrontendAlerts');
+  const t = await getTranslations('FrontendAlerts');
 
   //
-  // B. Render components
+  // B. Fetch data
+
+  const [alerts, lines,municipalities] = await Promise.all([
+    fetch('https://api.carrismetropolitana.pt/alerts').then(res => res.json()),
+    fetch('https://api.carrismetropolitana.pt/lines').then(res => res.json()),
+    fetch('https://api.carrismetropolitana.pt/municipalities').then(res => res.json())
+  ]);
+
+  let municipalityDict = Object.fromEntries(municipalities.map((municipality) => [municipality.id, municipality]));
+  //
+  // C. Render components
 
   return (
     <Panel title={t('Panel_title')}>
-      {/* <FrontendAlertsSummary /> */}
       {/* <FrontendLinesContent /> */}
+      <FrontendAlertsSummary alerts={alerts} lines={lines} municipalities={municipalityDict} />
     </Panel>
   );
 

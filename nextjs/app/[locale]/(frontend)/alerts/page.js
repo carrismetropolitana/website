@@ -2,7 +2,8 @@
 
 import { OneFullColumn } from '@/components/Layouts/Layouts';
 import { FrontendAlertsContextProvider } from '@/contexts/FrontendAlertsContext';
-import FrontendAlert from '@/components/FrontendAlert/FrontendAlert';
+import FrontendAlerts from '@/components/FrontendAlerts/FrontendAlerts';
+// import FrontendAlert from '@/components/FrontendAlert/FrontendAlert';
 
 /* * */
 
@@ -18,7 +19,7 @@ export async function generateMetadata({ params }) {
 
 /* * */
 
-export default function Page({params: {alert_id,locale }}) {
+export default function Page({alert_id}) {
   //
 
   //
@@ -27,7 +28,8 @@ export default function Page({params: {alert_id,locale }}) {
   return (
     <OneFullColumn>
       <FrontendAlertsContextProvider>
-        <FrontendAlert alertId={alert_id} locale={locale}/>
+        {/* {alert_id=="all"?<FrontendAlerts />:<FrontendAlert alert_id={alert_id}/>} */}
+        <FrontendAlerts />
       </FrontendAlertsContextProvider>
     </OneFullColumn>
   );
