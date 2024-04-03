@@ -13,10 +13,10 @@ export async function generateMetadata({ params }) {
 	// B. Render the titles
 	switch (params.locale) {
 		case 'pt':
-			return { title: 'Perguntas frequentes', description: 'Esclareça as dúvidas frequentes' };
+			return { title: 'Planeador de viagens', description: 'Planeie as suas viagens' };
 		default:
 		case 'en':
-			return { title: 'Frequently asked questions', description: 'Clarify your frequently asked questions' };
+			return { title: 'Travel planner', description: 'Plan your trips' };
 	}
 
 	//
