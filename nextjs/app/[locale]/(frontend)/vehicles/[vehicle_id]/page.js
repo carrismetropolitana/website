@@ -10,7 +10,7 @@ export async function generateMetadata({ params }) {
   //
 
   // A. Fetch stop data
-  const stopData = await fetch(params.vehicle_id?.length && `https://api.carrismetropolitana.pt/vehicles/${params.vehicle_id}`).then((res) => res.json());
+  const stopData = await fetch(params.vehicle_id?.length && `https://api.carrismetropolitana.pt/vehicles/${params.vehicle_id}`).then(res => res.json());
 
   // B. Render the titles
   if (params.vehicle_id === 'all' || !stopData.name) {
