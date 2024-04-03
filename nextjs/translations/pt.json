@@ -1008,5 +1008,10 @@
     },
     "FrontendAlert": {
         "period": "Período"
+    },
+    "FrontendPlanner": {
+        "Panel_title": "Planeador de viagens",
+        "open": "Saiba como usar",
+        "how_to_use": "Como usar o planeador"
     }
 }
