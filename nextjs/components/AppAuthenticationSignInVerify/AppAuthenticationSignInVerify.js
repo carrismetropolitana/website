@@ -13,32 +13,32 @@ import { Space } from '@mantine/core';
 /* * */
 
 export default function AppAuthenticationSignInVerify() {
-  //
+	//
 
-  //
-  // A. Setup variables
+	//
+	// A. Setup variables
 
-  const router = useRouter();
-  const t = useTranslations('AppAuthenticationSignInVerify');
+	const router = useRouter();
+	const t = useTranslations('AppAuthenticationSignInVerify');
 
-  //
-  // B. Handle actions
+	//
+	// B. Handle actions
 
-  const handleSignInRetry = () => {
-    router.push('/login');
-  };
+	const handleSignInRetry = () => {
+		router.push('/login');
+	};
 
-  //
-  // C. Render components
+	//
+	// C. Render components
 
-  return (
-    <div className={styles.container}>
-      <Title level="h2" text={t('title')} />
-      <Text text={t('subtitle')} />
-      <Space />
-      <Button variant="muted" label={t('retry')} onClick={handleSignInRetry} />
-    </div>
-  );
+	return (
+		<div className={styles.container}>
+			<Title level='h2' text={t('title')} />
+			<Text text={t('subtitle')} />
+			<Space />
+			<Button variant='muted' label={t('retry')} onClick={handleSignInRetry} />
+		</div>
+	);
 
-  //
+	//
 }

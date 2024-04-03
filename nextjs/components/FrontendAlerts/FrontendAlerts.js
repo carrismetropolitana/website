@@ -1,4 +1,3 @@
-
 /* * */
 
 import { getTranslations } from 'next-intl/server';
@@ -8,32 +7,32 @@ import FrontendAlertsSummary from '@/components/FrontendAlertsSummary/FrontendAl
 /* * */
 
 export default async function FrontendAlert() {
-  //
+	//
 
-  //
-  // A. Setup variables
+	//
+	// A. Setup variables
 
-  const t = await getTranslations('FrontendAlerts');
+	const t = await getTranslations('FrontendAlerts');
 
-  //
-  // B. Fetch data
+	//
+	// B. Fetch data
 
-  const [alerts, lines,municipalities] = await Promise.all([
-    fetch('https://api.carrismetropolitana.pt/alerts').then(res => res.json()),
-    fetch('https://api.carrismetropolitana.pt/lines').then(res => res.json()),
-    fetch('https://api.carrismetropolitana.pt/municipalities').then(res => res.json())
-  ]);
+	const [alerts, lines, municipalities] = await Promise.all([
+		fetch('https://api.carrismetropolitana.pt/alerts').then(res => res.json()),
+		fetch('https://api.carrismetropolitana.pt/lines').then(res => res.json()),
+		fetch('https://api.carrismetropolitana.pt/municipalities').then(res => res.json()),
+	]);
 
-  let municipalityDict = Object.fromEntries(municipalities.map((municipality) => [municipality.id, municipality]));
-  //
-  // C. Render components
+	let municipalityDict = Object.fromEntries(municipalities.map(municipality => [municipality.id, municipality]));
+	//
+	// C. Render components
 
-  return (
-    <Panel title={t('Panel_title')}>
-      {/* <FrontendLinesContent /> */}
-      <FrontendAlertsSummary alerts={alerts} lines={lines} municipalities={municipalityDict} />
-    </Panel>
-  );
+	return (
+		<Panel title={t('Panel_title')}>
+			{/* <FrontendLinesContent /> */}
+			<FrontendAlertsSummary alerts={alerts} lines={lines} municipalities={municipalityDict} />
+		</Panel>
+	);
 
-  //
+	//
 }

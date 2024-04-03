@@ -13,21 +13,21 @@ export const contentType = 'image/png';
 /* * */
 
 export default async function Image({ params }) {
-  //
+	//
 
-  //
-  // A. Setup fonts
+	//
+	// A. Setup fonts
 
-  const customFonts = [
-    { name: 'Inter', style: 'normal', weight: 500, data: fs.readFileSync(`${process.cwd()}/assets/fonts/Inter-Medium.ttf`).buffer },
-    { name: 'Inter', style: 'normal', weight: 600, data: fs.readFileSync(`${process.cwd()}/assets/fonts/Inter-SemiBold.ttf`).buffer },
-    { name: 'Inter', style: 'normal', weight: 700, data: fs.readFileSync(`${process.cwd()}/assets/fonts/Inter-Bold.ttf`).buffer },
-  ];
+	const customFonts = [
+		{ name: 'Inter', style: 'normal', weight: 500, data: fs.readFileSync(`${process.cwd()}/assets/fonts/Inter-Medium.ttf`).buffer },
+		{ name: 'Inter', style: 'normal', weight: 600, data: fs.readFileSync(`${process.cwd()}/assets/fonts/Inter-SemiBold.ttf`).buffer },
+		{ name: 'Inter', style: 'normal', weight: 700, data: fs.readFileSync(`${process.cwd()}/assets/fonts/Inter-Bold.ttf`).buffer },
+	];
 
-  //
-  // B. Render components
+	//
+	// B. Render components
 
-  return new ImageResponse(<OpenGraphDefault />, { ...size, fonts: customFonts });
+	return new ImageResponse(<OpenGraphDefault />, { ...size, fonts: customFonts });
 
-  //
+	//
 }

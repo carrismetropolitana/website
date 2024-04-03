@@ -8,11 +8,11 @@ import FrontendLinesToolbarPeriods from '@/components/FrontendLinesToolbarPeriod
 /* * */
 
 export default function FrontendLinesToolbar() {
-  return (
-    <div className={styles.container}>
-      <FrontendLinesToolbarFilters />
-      <FrontendLinesToolbarSelectLine />
-      <FrontendLinesToolbarPeriods />
-    </div>
-  );
+	return (
+		<div className={styles.container}>
+			<FrontendLinesToolbarFilters />
+			<FrontendLinesToolbarSelectLine />
+			<FrontendLinesToolbarPeriods />
+		</div>
+	);
 }

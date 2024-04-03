@@ -10,23 +10,23 @@ import FrontendPipStopsStop from '@/components/FrontendPipStopsStop/FrontendPipS
 /* * */
 
 export default function FrontendPipStops() {
-  //
+	//
 
-  //
-  // A. Setup variables
+	//
+	// A. Setup variables
 
-  const t = useTranslations('FrontendPipStops');
-  const frontendPipContext = useFrontendPipContext();
+	const t = useTranslations('FrontendPipStops');
+	const frontendPipContext = useFrontendPipContext();
 
-  //
-  // B. Render components
+	//
+	// B. Render components
 
-  return (
-    <div className={styles.container}>
-      <Text>{t('question')}</Text>
-      <div className={styles.answersGrid}>{frontendPipContext.item_data ? frontendPipContext.item_data.stops.map((item) => <FrontendPipStopsStop key={item} stopId={item} />) : <Loader visible />}</div>
-    </div>
-  );
+	return (
+		<div className={styles.container}>
+			<Text>{t('question')}</Text>
+			<div className={styles.answersGrid}>{frontendPipContext.item_data ? frontendPipContext.item_data.stops.map(item => <FrontendPipStopsStop key={item} stopId={item} />) : <Loader visible />}</div>
+		</div>
+	);
 
-  //
+	//
 }

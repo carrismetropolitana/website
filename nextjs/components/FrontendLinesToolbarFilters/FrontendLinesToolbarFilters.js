@@ -13,50 +13,50 @@ import FrontendLinesToolbarFiltersLocality from '@/components/FrontendLinesToolb
 /* * */
 
 export default function FrontendLinesToolbarFilters() {
-  //
+	//
 
-  //
-  // A. Setup variables
+	//
+	// A. Setup variables
 
-  const t = useTranslations('FrontendLinesToolbarFilters');
+	const t = useTranslations('FrontendLinesToolbarFilters');
 
-  const [isOpen, setIsOpen] = useState(false);
+	const [isOpen, setIsOpen] = useState(false);
 
-  //
-  // B. Handle actions
+	//
+	// B. Handle actions
 
-  const handleToggleFilters = () => {
-    setIsOpen((prev) => !prev);
-  };
+	const handleToggleFilters = () => {
+		setIsOpen(prev => !prev);
+	};
 
-  //
-  // C. Render components
+	//
+	// C. Render components
 
-  return (
-    <>
-      <div className={styles.onlyOnDesktop}>
-        <div className={styles.filters}>
-          <FrontendLinesToolbarFiltersMunicipality />
-          <FrontendLinesToolbarFiltersLocality />
-          {/* <FrontendLinesToolbarFiltersFacilities /> */}
-        </div>
-      </div>
-      <div className={styles.onlyOnMobile}>
-        <div className={styles.toggleFilters}>
-          <Button onClick={handleToggleFilters} leftSection={isOpen ? <IconFilterUp size={18} /> : <IconFilterDown size={18} />} className={`${styles.toggleFiltersButton} ${isOpen && styles.isOpen}`} size="xs">
-            {isOpen ? t('toggle_filters.open.label') : t('toggle_filters.closed.label')}
-          </Button>
-        </div>
-        <Collapse in={isOpen}>
-          <div className={styles.filters}>
-            <FrontendLinesToolbarFiltersMunicipality />
-            <FrontendLinesToolbarFiltersLocality />
-            {/* <FrontendLinesToolbarFiltersFacilities /> */}
-          </div>
-        </Collapse>
-      </div>
-    </>
-  );
+	return (
+		<>
+			<div className={styles.onlyOnDesktop}>
+				<div className={styles.filters}>
+					<FrontendLinesToolbarFiltersMunicipality />
+					<FrontendLinesToolbarFiltersLocality />
+					{/* <FrontendLinesToolbarFiltersFacilities /> */}
+				</div>
+			</div>
+			<div className={styles.onlyOnMobile}>
+				<div className={styles.toggleFilters}>
+					<Button onClick={handleToggleFilters} leftSection={isOpen ? <IconFilterUp size={18} /> : <IconFilterDown size={18} />} className={`${styles.toggleFiltersButton} ${isOpen && styles.isOpen}`} size='xs'>
+						{isOpen ? t('toggle_filters.open.label') : t('toggle_filters.closed.label')}
+					</Button>
+				</div>
+				<Collapse in={isOpen}>
+					<div className={styles.filters}>
+						<FrontendLinesToolbarFiltersMunicipality />
+						<FrontendLinesToolbarFiltersLocality />
+						{/* <FrontendLinesToolbarFiltersFacilities /> */}
+					</div>
+				</Collapse>
+			</div>
+		</>
+	);
 
-  //
+	//
 }

@@ -9,22 +9,22 @@ import FrontendVehiclesSummary from '@/components/FrontendVehiclesSummary/Fronte
 /* * */
 
 export default function FrontendVehicles() {
-  //
+	//
 
-  //
-  // A. Setup variables
+	//
+	// A. Setup variables
 
-  const t = useTranslations('FrontendVehicles');
+	const t = useTranslations('FrontendVehicles');
 
-  //
-  // B. Render components
+	//
+	// B. Render components
 
-  return (
-    <Panel type='B' title={t('Panel_title')}>
-      {/* <FrontendVehiclesSummary /> */}
-      {/* <FrontendLinesContent /> */}
-    </Panel>
-  );
+	return (
+		<Panel type='B' title={t('Panel_title')}>
+			{/* <FrontendVehiclesSummary /> */}
+			{/* <FrontendLinesContent /> */}
+		</Panel>
+	);
 
-  //
+	//
 }

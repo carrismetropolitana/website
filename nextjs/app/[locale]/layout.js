@@ -8,18 +8,18 @@ import AppAnalytics from '@/components/AppAnalytics/AppAnalytics';
 /* * */
 
 export default function Layout({ children, params: { locale } }) {
-  //
+	//
 
-  if (!availableLocales.includes(locale)) notFound();
+	if (!availableLocales.includes(locale)) notFound();
 
-  const messages = useMessages();
+	const messages = useMessages();
 
-  return (
-    <NextIntlClientProvider locale={locale} messages={messages} timeZone="Europe/Lisbon" now={Date.now()}>
-      <AppAnalytics />
-      {children}
-    </NextIntlClientProvider>
-  );
+	return (
+		<NextIntlClientProvider locale={locale} messages={messages} timeZone='Europe/Lisbon' now={Date.now()}>
+			<AppAnalytics />
+			{children}
+		</NextIntlClientProvider>
+	);
 
-  //
+	//
 }

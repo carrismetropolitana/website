@@ -9,22 +9,22 @@ import styles from './FrontendEncmInfo.module.css';
 /* * */
 
 export default function FrontendEncmInfo() {
-  //
+	//
 
-  //
-  // A. Setup variables
+	//
+	// A. Setup variables
 
-  const t = useTranslations('FrontendEncmInfo');
+	const t = useTranslations('FrontendEncmInfo');
 
-  //
-  // B. Render components
+	//
+	// B. Render components
 
-  return (
-    <div className={styles.container}>
-      <Image priority src="/images/encm-header.svg" alt={'Espaços navegante Carris Metropolitana'} width={290} height={110} />
-      <p className={styles.message}>{t('message')}</p>
-    </div>
-  );
+	return (
+		<div className={styles.container}>
+			<Image priority src='/images/encm-header.svg' alt={'Espaços navegante Carris Metropolitana'} width={290} height={110} />
+			<p className={styles.message}>{t('message')}</p>
+		</div>
+	);
 
-  //
+	//
 }

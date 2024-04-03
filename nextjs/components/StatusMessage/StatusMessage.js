@@ -11,44 +11,44 @@ import { IconChevronDown, IconChevronLeft } from '@tabler/icons-react';
 /* * */
 
 export default function StatusMessage() {
-  //
+	//
 
-  const STATUS_TYPE = 'warning'; // 'warning' || 'ok'
+	const STATUS_TYPE = 'warning'; // 'warning' || 'ok'
 
-  //
-  // A. Setup variables
+	//
+	// A. Setup variables
 
-  const t = useTranslations('StatusMessage');
-  const [isVisible, setIsVisible] = useState(STATUS_TYPE === 'warning' ? true : false);
+	const t = useTranslations('StatusMessage');
+	const [isVisible, setIsVisible] = useState(STATUS_TYPE === 'warning' ? true : false);
 
-  //
-  // B. Render components
+	//
+	// B. Render components
 
-  const handleSetIsVisible = () => {
-    setIsVisible((prev) => !prev);
-  };
+	const handleSetIsVisible = () => {
+		setIsVisible(prev => !prev);
+	};
 
-  //
-  // C. Render components
+	//
+	// C. Render components
 
-  return (
-    <div className={`${styles.container} ${styles[STATUS_TYPE]}`}>
-      <div className={styles.innerWrapper}>
-        <div className={styles.headerWrapper} onClick={handleSetIsVisible}>
-          <h3 className={styles.title}>{t('title')}</h3>
-          <ActionIcon variant="subtle" size="lg" className={styles.colapseIcon}>
-            {isVisible ? <IconChevronDown size={20} /> : <IconChevronLeft size={20} />}
-          </ActionIcon>
-        </div>
-        {isVisible && (
-          <div className={styles.contentWrapper}>
-            <p className={styles.explanation}>{t('explanation')}</p>
-            <p className={styles.solution}>{t('solution')}</p>
-          </div>
-        )}
-      </div>
-    </div>
-  );
+	return (
+		<div className={`${styles.container} ${styles[STATUS_TYPE]}`}>
+			<div className={styles.innerWrapper}>
+				<div className={styles.headerWrapper} onClick={handleSetIsVisible}>
+					<h3 className={styles.title}>{t('title')}</h3>
+					<ActionIcon variant='subtle' size='lg' className={styles.colapseIcon}>
+						{isVisible ? <IconChevronDown size={20} /> : <IconChevronLeft size={20} />}
+					</ActionIcon>
+				</div>
+				{isVisible &&
+					<div className={styles.contentWrapper}>
+						<p className={styles.explanation}>{t('explanation')}</p>
+						<p className={styles.solution}>{t('solution')}</p>
+					</div>
+				}
+			</div>
+		</div>
+	);
 
-  //
+	//
 }

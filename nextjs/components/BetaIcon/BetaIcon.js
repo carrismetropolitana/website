@@ -9,28 +9,28 @@ import useDoubleClick from '@/hooks/useDoubleClick';
 /* * */
 
 export default function BetaIcon() {
-  //
+	//
 
-  //
-  // A. Setup variables
+	//
+	// A. Setup variables
 
-  const debugContext = useDebugContext();
+	const debugContext = useDebugContext();
 
-  //
-  // B. Handle actions
+	//
+	// B. Handle actions
 
-  const handleClick = useDoubleClick({
-    onDoubleClick: () => debugContext.toggleIsDebug(),
-  });
+	const handleClick = useDoubleClick({
+		onDoubleClick: () => debugContext.toggleIsDebug(),
+	});
 
-  //
-  // C. Render Components
+	//
+	// C. Render Components
 
-  return (
-    <div className={styles.beta} onClick={handleClick}>
-      {debugContext.isDebug ? 'DEBUG' : 'LIVE'}
-    </div>
-  );
+	return (
+		<div className={styles.beta} onClick={handleClick}>
+			{debugContext.isDebug ? 'DEBUG' : 'LIVE'}
+		</div>
+	);
 
-  //
+	//
 }

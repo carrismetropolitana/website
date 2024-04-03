@@ -15,59 +15,59 @@ import { DatesProvider } from '@mantine/dates';
 /* * */
 
 export default function Providers({ children, session }) {
-  //
+	//
 
-  //
-  // A. Setup SWR provider
+	//
+	// A. Setup SWR provider
 
-  const swrSettings = {
-    //
-    refreshInterval: 300000, // 5 minutes
-    //
-    fetcher: async (...args) => {
-      const res = await fetch(...args);
-      if (!res.ok) {
-        const errorDetails = await res.json();
-        const error = new Error(errorDetails.message || 'An error occurred while fetching data.');
-        error.description = errorDetails.description || 'No additional information was provided by the API.';
-        error.status = res.status;
-        throw error;
-      }
-      return res.json();
-    },
-    //
-  };
+	const swrSettings = {
+		//
+		refreshInterval: 300000, // 5 minutes
+		//
+		fetcher: async (...args) => {
+			const res = await fetch(...args);
+			if (!res.ok) {
+				const errorDetails = await res.json();
+				const error = new Error(errorDetails.message || 'An error occurred while fetching data.');
+				error.description = errorDetails.description || 'No additional information was provided by the API.';
+				error.status = res.status;
+				throw error;
+			}
+			return res.json();
+		},
+		//
+	};
 
-  //
-  // A. Setup Mantine Dates provider
+	//
+	// A. Setup Mantine Dates provider
 
-  const mantineDatesSettings = {
-    locale: 'pt',
-    firstDayOfWeek: 1,
-    weekendDays: [7, 0],
-    timezone: 'Europe/Lisbon',
-  };
+	const mantineDatesSettings = {
+		locale: 'pt',
+		firstDayOfWeek: 1,
+		weekendDays: [7, 0],
+		timezone: 'Europe/Lisbon',
+	};
 
-  //
-  // B. Render providers
+	//
+	// B. Render providers
 
-  return (
-    <SessionProvider session={session} refetchInterval={15}>
-      <SWRConfig value={swrSettings}>
-        <MantineProvider withGlobalStyles withNormalizeCSS>
-          <DatesProvider settings={mantineDatesSettings}>
-            <ModalsProvider>
-              <AppAnalyticsContextProvider>
-                <DebugContextProvider>
-                  <MapProvider>{children}</MapProvider>
-                </DebugContextProvider>
-              </AppAnalyticsContextProvider>
-            </ModalsProvider>
-          </DatesProvider>
-        </MantineProvider>
-      </SWRConfig>
-    </SessionProvider>
-  );
+	return (
+		<SessionProvider session={session} refetchInterval={15}>
+			<SWRConfig value={swrSettings}>
+				<MantineProvider withGlobalStyles withNormalizeCSS>
+					<DatesProvider settings={mantineDatesSettings}>
+						<ModalsProvider>
+							<AppAnalyticsContextProvider>
+								<DebugContextProvider>
+									<MapProvider>{children}</MapProvider>
+								</DebugContextProvider>
+							</AppAnalyticsContextProvider>
+						</ModalsProvider>
+					</DatesProvider>
+				</MantineProvider>
+			</SWRConfig>
+		</SessionProvider>
+	);
 
-  //
+	//
 }

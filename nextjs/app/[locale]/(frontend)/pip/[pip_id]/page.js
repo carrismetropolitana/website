@@ -7,11 +7,11 @@ import { FrontendPipContextProvider } from '@/contexts/FrontendPipContext';
 /* * */
 
 export default function Page() {
-  return (
-    <OneFullColumn>
-      <FrontendPipContextProvider>
-        <FrontendPip />
-      </FrontendPipContextProvider>
-    </OneFullColumn>
-  );
+	return (
+		<OneFullColumn>
+			<FrontendPipContextProvider>
+				<FrontendPip />
+			</FrontendPipContextProvider>
+		</OneFullColumn>
+	);
 }

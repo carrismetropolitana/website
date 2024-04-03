@@ -6,24 +6,24 @@ import { verifyAuthentication } from '@/authentication/verify';
 /* * */
 
 export async function GET(request) {
-  //
+	//
 
-  //
-  // 1. Check authentication
+	//
+	// 1. Check authentication
 
-  const userId = await verifyAuthentication(request);
-  if (!userId) return new Response('Authorization required.', { status: 401 });
+	const userId = await verifyAuthentication(request);
+	if (!userId) return new Response('Authorization required.', { status: 401 });
 
-  //
-  // 2. Fetch user data
+	//
+	// 2. Fetch user data
 
-  const userProfileData = await MONGODB.User.findOne({ _id: MONGODB.toObjectId(userId) });
-  if (!userProfileData) return new Response('User not found.', { status: 404 });
+	const userProfileData = await MONGODB.User.findOne({ _id: MONGODB.toObjectId(userId) });
+	if (!userProfileData) return new Response('User not found.', { status: 404 });
 
-  //
-  // 3. Return result
+	//
+	// 3. Return result
 
-  return Response.json(userProfileData);
+	return Response.json(userProfileData);
 
-  //
+	//
 }

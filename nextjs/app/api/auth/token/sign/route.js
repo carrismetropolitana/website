@@ -8,29 +8,29 @@ import jwt from 'jsonwebtoken';
 /* * */
 
 export async function GET(request) {
-  //
+	//
 
-  //
-  // 1. Check authentication
+	//
+	// 1. Check authentication
 
-  const session = await auth();
-  if (!session) return new Response('Authentication required.', { status: 401 });
+	const session = await auth();
+	if (!session) return new Response('Authentication required.', { status: 401 });
 
-  //
-  // 2. Sign the token
+	//
+	// 2. Sign the token
 
-  const signedToken = jwt.sign({ user_id: session.user.id }, process.env.JWT_SIGN_SECRET, { expiresIn: '1h' });
+	const signedToken = jwt.sign({ user_id: session.user.id }, process.env.JWT_SIGN_SECRET, { expiresIn: '1h' });
 
-  return new Response(signedToken);
+	return new Response(signedToken);
 
-  //   await MONGOOSE.connect();
+	//   await MONGOOSE.connect();
 
-  //
-  // 3. Retrieve user details
+	//
+	// 3. Retrieve user details
 
-  //   const userData = await UserModel.findOne({ _id: { $eq: session.user?._id } });
-  //   if (!userData) throw new Error('User not found.');
-  //   else return Response.json(userData);
+	//   const userData = await UserModel.findOne({ _id: { $eq: session.user?._id } });
+	//   if (!userData) throw new Error('User not found.');
+	//   else return Response.json(userData);
 
-  //
+	//
 }

@@ -11,25 +11,25 @@ import { useDebugContext } from '@/contexts/DebugContext';
 /* * */
 
 export default function FrontendFooter() {
-  //
+	//
 
-  //
-  // A. Setup variables
+	//
+	// A. Setup variables
 
-  const debugContext = useDebugContext();
+	const debugContext = useDebugContext();
 
-  //
-  // B. Render Components
+	//
+	// B. Render Components
 
-  return (
-    <footer className={`${styles.container} ${debugContext.isDebug && styles.debugEnabled}`}>
-      <div className={styles.grid}>
-        <FrontendFooterLogo />
-        <FrontendFooterNav />
-      </div>
-      <FrontendFooterLegal />
-    </footer>
-  );
+	return (
+		<footer className={`${styles.container} ${debugContext.isDebug && styles.debugEnabled}`}>
+			<div className={styles.grid}>
+				<FrontendFooterLogo />
+				<FrontendFooterNav />
+			</div>
+			<FrontendFooterLegal />
+		</footer>
+	);
 
-  //
+	//
 }

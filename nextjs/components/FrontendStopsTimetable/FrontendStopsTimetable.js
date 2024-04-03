@@ -17,139 +17,138 @@ import { useFrontendStopsContext } from '@/contexts/FrontendStopsContext';
 /* * */
 
 export default function FrontendStopsTimetable() {
-  //
+	//
 
-  //
-  // A. Setup variables
+	//
+	// A. Setup variables
 
-  const t = useTranslations('FrontendStopsTimetable');
+	const t = useTranslations('FrontendStopsTimetable');
 
-  const FrontendStopsContext = useFrontendStopsContext();
+	const FrontendStopsContext = useFrontendStopsContext();
 
-  let previousTrips = [];
-  let currentAndFutureTrips = [];
+	let previousTrips = [];
+	let currentAndFutureTrips = [];
 
-  //
-  // B. Fetch data
+	//
+	// B. Fetch data
 
-  const {
-    data: stopRealtimeData,
-    isLoading: stopRealtimeLoading,
-    error: stopRealtimeError,
-  } = useSWR(FrontendStopsContext.entities.stop?.id && `https://api.carrismetropolitana.pt/stops/${FrontendStopsContext.entities.stop.id}/realtime`, {
-    refreshInterval: 5000,
-  });
+	const {
+		data: stopRealtimeData,
+		isLoading: stopRealtimeLoading,
+		error: stopRealtimeError,
+	} = useSWR(FrontendStopsContext.entities.stop?.id && `https://api.carrismetropolitana.pt/stops/${FrontendStopsContext.entities.stop.id}/realtime`, {
+		refreshInterval: 5000,
+	});
 
-  //
-  // C. Transform data
+	//
+	// C. Transform data
 
-  (() => {
-    //
+	(() => {
+		//
 
-    // 1.
-    // Return if data is not yet ready
+		// 1.
+		// Return if data is not yet ready
 
-    if (!stopRealtimeData) return;
+		if (!stopRealtimeData) return;
 
-    // 2.
-    // Classify each trip for relevance
+		// 2.
+		// Classify each trip for relevance
 
-    for (const realtimeTrip of stopRealtimeData) {
-      //
-      // Regarding relevance:
-      //    1. A trip is considered 'previous' if:
-      //        1.1. there is an observed_arrival, or
-      //        1.2. the scheduled_arrival is previous to the current time, and there is no estimated_arrival, or
-      //        1.3. the estimated_arrival is previous to the current_time + 5 minutes
-      //    2. A trip is considered 'currentOrFuture' otherwise.
+		for (const realtimeTrip of stopRealtimeData) {
+			//
+			// Regarding relevance:
+			//    1. A trip is considered 'previous' if:
+			//        1.1. there is an observed_arrival, or
+			//        1.2. the scheduled_arrival is previous to the current time, and there is no estimated_arrival, or
+			//        1.3. the estimated_arrival is previous to the current_time + 5 minutes
+			//    2. A trip is considered 'currentOrFuture' otherwise.
 
-      const tripHasObservedArrival = realtimeTrip.observed_arrival ? true : false;
-      const tripScheduledArrivalIsInThePast = getMinutesFromOperationTimeString(realtimeTrip.scheduled_arrival) < 0;
-      const tripHasEstimatedArrival = realtimeTrip.estimated_arrival ? true : false;
-      const tripEstimatedArrivalIsInThePast = getMinutesFromOperationTimeString(realtimeTrip.estimated_arrival) < -5;
+			const tripHasObservedArrival = realtimeTrip.observed_arrival ? true : false;
+			const tripScheduledArrivalIsInThePast = getMinutesFromOperationTimeString(realtimeTrip.scheduled_arrival) < 0;
+			const tripHasEstimatedArrival = realtimeTrip.estimated_arrival ? true : false;
+			const tripEstimatedArrivalIsInThePast = getMinutesFromOperationTimeString(realtimeTrip.estimated_arrival) < -5;
 
-      if (tripHasObservedArrival || (tripScheduledArrivalIsInThePast && !tripHasEstimatedArrival) || tripEstimatedArrivalIsInThePast) {
-        previousTrips.push(realtimeTrip);
-        continue;
-      }
+			if (tripHasObservedArrival || (tripScheduledArrivalIsInThePast && !tripHasEstimatedArrival) || tripEstimatedArrivalIsInThePast) {
+				previousTrips.push(realtimeTrip);
+				continue;
+			}
 
-      currentAndFutureTrips.push(realtimeTrip);
-      continue;
+			currentAndFutureTrips.push(realtimeTrip);
+			continue;
 
-      //
-    }
+			//
+		}
 
-    // 3.
-    // Sort both arrays based on scheduled arrival
+		// 3.
+		// Sort both arrays based on scheduled arrival
 
-    previousTrips.sort((a, b) => {
-      const timeStringA = a.scheduled_arrival.split(':').join('');
-      const timeStringB = b.scheduled_arrival.split(':').join('');
-      return timeStringA - timeStringB;
-    });
+		previousTrips.sort((a, b) => {
+			const timeStringA = a.scheduled_arrival.split(':').join('');
+			const timeStringB = b.scheduled_arrival.split(':').join('');
+			return timeStringA - timeStringB;
+		});
 
-    currentAndFutureTrips.sort((a, b) => {
-      // Check if both `a` and `b` have estimated_arrival
-      if (a.estimated_arrival && b.estimated_arrival) {
-        // Both have estimated_arrival, compare them
-        const timeStringA = a.estimated_arrival.split(':').join('');
-        const timeStringB = b.estimated_arrival.split(':').join('');
-        return timeStringA - timeStringB;
-        //
-      } else if (a.estimated_arrival) {
-        // Only `a` has estimated_arrival, so it comes before `b`
-        return -1;
-        //
-      } else if (b.estimated_arrival) {
-        // Only `b` has estimated_arrival, so it comes before `a`
-        return 1;
-        //
-      } else {
-        // Both have only scheduled_arrival, compare them
-        const timeStringA = a.scheduled_arrival.split(':').join('');
-        const timeStringB = b.scheduled_arrival.split(':').join('');
-        return timeStringA - timeStringB;
-        //
-      }
-      //
-    });
+		currentAndFutureTrips.sort((a, b) => {
+			// Check if both `a` and `b` have estimated_arrival
+			if (a.estimated_arrival && b.estimated_arrival) {
+				// Both have estimated_arrival, compare them
+				const timeStringA = a.estimated_arrival.split(':').join('');
+				const timeStringB = b.estimated_arrival.split(':').join('');
+				return timeStringA - timeStringB;
+				//
+			} else if (a.estimated_arrival) {
+				// Only `a` has estimated_arrival, so it comes before `b`
+				return -1;
+				//
+			} else if (b.estimated_arrival) {
+				// Only `b` has estimated_arrival, so it comes before `a`
+				return 1;
+				//
+			} else {
+				// Both have only scheduled_arrival, compare them
+				const timeStringA = a.scheduled_arrival.split(':').join('');
+				const timeStringB = b.scheduled_arrival.split(':').join('');
+				return timeStringA - timeStringB;
+				//
+			}
+			//
+		});
 
-    //
-  })();
+		//
+	})();
 
-  //
-  // D. Handle actions
+	//
+	// D. Handle actions
 
-  if (stopRealtimeLoading) {
-    return (
-      <div className={styles.container}>
-        <Loader visible maxed />
-      </div>
-    );
-  }
+	if (stopRealtimeLoading) {
+		return (
+			<div className={styles.container}>
+				<Loader visible maxed />
+			</div>
+		);
+	}
 
-  if (stopRealtimeError) {
-    return (
-      <div className={styles.container}>
-        <NoDataLabel text={t('unavailable')} />
-      </div>
-    );
-  }
+	if (stopRealtimeError) {
+		return (
+			<div className={styles.container}>
+				<NoDataLabel text={t('unavailable')} />
+			</div>
+		);
+	}
 
-  return (
-    <div className={styles.container}>
-      {previousTrips.length > 0 || currentAndFutureTrips.length > 0 ? (
-        <>
-          <FrontendStopsTimetableHeader />
-          <FrontendStopsTimetablePreviousTrips tripsData={previousTrips} />
-          <FrontendStopsTimetableDividerLine />
-          <FrontendStopsTimetableCurrentAndFutureTrips tripsData={currentAndFutureTrips} />
-        </>
-      ) : (
-        <NoDataLabel text={t('no_service')} />
-      )}
-    </div>
-  );
+	return (
+		<div className={styles.container}>
+			{previousTrips.length > 0 || currentAndFutureTrips.length > 0 ?
+				<>
+					<FrontendStopsTimetableHeader />
+					<FrontendStopsTimetablePreviousTrips tripsData={previousTrips} />
+					<FrontendStopsTimetableDividerLine />
+					<FrontendStopsTimetableCurrentAndFutureTrips tripsData={currentAndFutureTrips} />
+				</> :
+				<NoDataLabel text={t('no_service')} />
+			}
+		</div>
+	);
 
-  //
+	//
 }

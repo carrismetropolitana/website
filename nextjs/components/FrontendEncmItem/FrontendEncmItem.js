@@ -11,41 +11,39 @@ import FrontendEncmItemOccupation from '@/components/FrontendEncmItemOccupation/
 /* * */
 
 export default function FrontendEncmItem({ encmData, selectedEncmId, onSelectEncmId }) {
-  //
+	//
 
-  //
-  // A. Setup variables
+	//
+	// A. Setup variables
 
-  const t = useTranslations('FrontendEncmItem');
+	const t = useTranslations('FrontendEncmItem');
 
-  //
-  // B. Handle actions
+	//
+	// B. Handle actions
 
-  const handleClickViewMap = () => {
-    onSelectEncmId(encmData.id);
-  };
+	const handleClickViewMap = () => {
+		onSelectEncmId(encmData.id);
+	};
 
-  //
-  // C. Render components
+	//
+	// C. Render components
 
-  return encmData ? (
-    <div id={`encm${encmData.id}`} className={`${styles.container} ${selectedEncmId === encmData.id && styles.selected}`}>
-      <h3 className={styles.title}>{encmData.name}</h3>
-      <div className={styles.wrapper}>
-        <h4 className={styles.label}>{t('address.label')}</h4>
-        <p className={styles.text}>{`${encmData.address}, ${encmData.postal_code} ${encmData.locality}`}</p>
-        <a className={styles.viewInMap} onClick={handleClickViewMap} href="#FrontendEncmMap">
-          {t('address.view_in_map')}
-        </a>
-      </div>
+	return encmData ?
+		<div id={`encm${encmData.id}`} className={`${styles.container} ${selectedEncmId === encmData.id && styles.selected}`}>
+			<h3 className={styles.title}>{encmData.name}</h3>
+			<div className={styles.wrapper}>
+				<h4 className={styles.label}>{t('address.label')}</h4>
+				<p className={styles.text}>{`${encmData.address}, ${encmData.postal_code} ${encmData.locality}`}</p>
+				<a className={styles.viewInMap} onClick={handleClickViewMap} href='#FrontendEncmMap'>
+					{t('address.view_in_map')}
+				</a>
+			</div>
 
-      <FrontendEncmItemTimetable isOpen={encmData.is_open} mon={encmData.hours_monday} tue={encmData.hours_tuesday} wed={encmData.hours_wednesday} thu={encmData.hours_thursday} fri={encmData.hours_friday} sat={encmData.hours_saturday} sun={encmData.hours_sunday} />
+			<FrontendEncmItemTimetable isOpen={encmData.is_open} mon={encmData.hours_monday} tue={encmData.hours_tuesday} wed={encmData.hours_wednesday} thu={encmData.hours_thursday} fri={encmData.hours_friday} sat={encmData.hours_saturday} sun={encmData.hours_sunday} />
 
-      {encmData.is_open && <FrontendEncmItemOccupation currentlyWaiting={encmData.currently_waiting} expectedWaitTime={encmData.expected_wait_time} activeCounters={encmData.active_counters} />}
-    </div>
-  ) : (
-    <Loader visible />
-  );
+			{encmData.is_open && <FrontendEncmItemOccupation currentlyWaiting={encmData.currently_waiting} expectedWaitTime={encmData.expected_wait_time} activeCounters={encmData.active_counters} />}
+		</div> :
+		<Loader visible />;
 
-  //
+	//
 }

@@ -8,27 +8,27 @@ import FrontendVehiclesLive from '@/components/FrontendVehiclesLive/FrontendVehi
 /* * */
 
 export default function FrontendVehiclesSummary() {
-  //
+	//
 
-  //
-  // A. Setup variables
+	//
+	// A. Setup variables
 
-  const t = useTranslations('FrontendVehiclesSummary');
+	const t = useTranslations('FrontendVehiclesSummary');
 
-  //
-  // B. Render components
+	//
+	// B. Render components
 
-  return (
-    <div className={styles.container}>
-      <div className={styles.intro}>{t('intro')}</div>
-      <FrontendVehiclesSummaryRow />
-      <FrontendVehiclesSummaryRow mirrored />
-      <FrontendVehiclesSummaryRow />
-      <FrontendVehiclesSummaryRow mirrored />
-      <FrontendVehiclesSummaryRow />
-      <FrontendVehiclesLive />
-    </div>
-  );
+	return (
+		<div className={styles.container}>
+			<div className={styles.intro}>{t('intro')}</div>
+			<FrontendVehiclesSummaryRow />
+			<FrontendVehiclesSummaryRow mirrored />
+			<FrontendVehiclesSummaryRow />
+			<FrontendVehiclesSummaryRow mirrored />
+			<FrontendVehiclesSummaryRow />
+			<FrontendVehiclesLive />
+		</div>
+	);
 
-  //
+	//
 }

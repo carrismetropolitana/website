@@ -7,22 +7,22 @@ import { useDebugContext } from '@/contexts/DebugContext';
 /* * */
 
 export default function DebugToggle() {
-  //
+	//
 
-  //
-  // A. Setup variables
+	//
+	// A. Setup variables
 
-  const t = useTranslations('DebugToggle');
+	const t = useTranslations('DebugToggle');
 
-  const debugContext = useDebugContext();
+	const debugContext = useDebugContext();
 
-  // B. Render Components
+	// B. Render Components
 
-  return (
-    <div className={styles.toggle} onClick={debugContext.toggleIsDebug}>
-      {debugContext.isDebug ? t('enabled') : t('disabled')}
-    </div>
-  );
+	return (
+		<div className={styles.toggle} onClick={debugContext.toggleIsDebug}>
+			{debugContext.isDebug ? t('enabled') : t('disabled')}
+		</div>
+	);
 
-  //
+	//
 }

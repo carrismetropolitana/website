@@ -6,21 +6,21 @@ import Text from '@/components/Text/Text';
 /* * */
 
 export default function FrontendPipIntro() {
-  //
+	//
 
-  //
-  // A. Setup variables
+	//
+	// A. Setup variables
 
-  const t = useTranslations('FrontendPipIntro');
+	const t = useTranslations('FrontendPipIntro');
 
-  //
-  // B. Render components
+	//
+	// B. Render components
 
-  return (
-    <div>
-      <Text>{t('intro')}</Text>
-    </div>
-  );
+	return (
+		<div>
+			<Text>{t('intro')}</Text>
+		</div>
+	);
 
-  //
+	//
 }

@@ -15,41 +15,41 @@ import { useSearchParams } from 'next/navigation';
 /* * */
 
 export default function AppAuthenticationLogin() {
-  //
+	//
 
-  //
-  // A. Setup variables
+	//
+	// A. Setup variables
 
-  const t = useTranslations('AppAuthenticationSignIn');
-  const searchParams = useSearchParams();
+	const t = useTranslations('AppAuthenticationSignIn');
+	const searchParams = useSearchParams();
 
-  const [isLoading, setIsLoading] = useState(false);
+	const [isLoading, setIsLoading] = useState(false);
 
-  //
-  // B. Fetch data
+	//
+	// B. Fetch data
 
-  const { data: providersData } = useSWR('/api/auth/providers');
+	const { data: providersData } = useSWR('/api/auth/providers');
 
-  //
-  // D. Handle actions
+	//
+	// D. Handle actions
 
-  const handleSignIn = async (providerId, providerPayload) => {
-    setIsLoading(true);
-    let callbackUrl = searchParams.get('callbackUrl');
-    const shouldReturnJwt = searchParams.get('returnToken');
-    if (shouldReturnJwt === 'true') callbackUrl = '/profile/token';
-    signIn(providerId, { ...providerPayload, callbackUrl: callbackUrl || '/profile' });
-  };
+	const handleSignIn = async (providerId, providerPayload) => {
+		setIsLoading(true);
+		let callbackUrl = searchParams.get('callbackUrl');
+		const shouldReturnJwt = searchParams.get('returnToken');
+		if (shouldReturnJwt === 'true') callbackUrl = '/profile/token';
+		signIn(providerId, { ...providerPayload, callbackUrl: callbackUrl || '/profile' });
+	};
 
-  //
-  // E. Render components
+	//
+	// E. Render components
 
-  return (
-    <div className={styles.container}>
-      {(isLoading || !providersData) && <Loader visible fixed />}
-      {providersData && Object.values(providersData).map((provider) => (provider.id === 'email' ? <AppAuthenticationSignInProviderEmail key={provider.id} onClick={handleSignIn} /> : <AppAuthenticationSignInProvider key={provider.id} providerId={provider.id} onClick={handleSignIn} />))}
-    </div>
-  );
+	return (
+		<div className={styles.container}>
+			{(isLoading || !providersData) && <Loader visible fixed />}
+			{providersData && Object.values(providersData).map(provider => provider.id === 'email' ? <AppAuthenticationSignInProviderEmail key={provider.id} onClick={handleSignIn} /> : <AppAuthenticationSignInProvider key={provider.id} providerId={provider.id} onClick={handleSignIn} />)}
+		</div>
+	);
 
-  //
+	//
 }

@@ -11,25 +11,25 @@ import FrontendLinesContentSelectPattern from '@/components/FrontendLinesContent
 /* * */
 
 export default function FrontendLinesContentHeader() {
-  //
+	//
 
-  //
-  // A. Setup variables
+	//
+	// A. Setup variables
 
-  const t = useTranslations('FrontendLinesContentHeader');
+	const t = useTranslations('FrontendLinesContentHeader');
 
-  const FrontendLinesContext = useFrontendLinesContext();
+	const FrontendLinesContext = useFrontendLinesContext();
 
-  //
-  // B. Render components
+	//
+	// B. Render components
 
-  return (
-    <div className={styles.container}>
-      <LineBadge short_name={FrontendLinesContext.entities.line.short_name} color={FrontendLinesContext.entities.line.color} text_color={FrontendLinesContext.entities.line.text_color} size="lg" />
-      <p className={styles.destinationLabel}>{t('destination_label')}</p>
-      <FrontendLinesContentSelectPattern />
-    </div>
-  );
+	return (
+		<div className={styles.container}>
+			<LineBadge short_name={FrontendLinesContext.entities.line.short_name} color={FrontendLinesContext.entities.line.color} text_color={FrontendLinesContext.entities.line.text_color} size='lg' />
+			<p className={styles.destinationLabel}>{t('destination_label')}</p>
+			<FrontendLinesContentSelectPattern />
+		</div>
+	);
 
-  //
+	//
 }

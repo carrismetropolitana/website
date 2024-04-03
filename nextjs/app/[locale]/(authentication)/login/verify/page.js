@@ -5,5 +5,5 @@ import AppAuthenticationSignInVerify from '@/components/AppAuthenticationSignInV
 /* * */
 
 export default function Page() {
-  return <AppAuthenticationSignInVerify />;
+	return <AppAuthenticationSignInVerify />;
 }

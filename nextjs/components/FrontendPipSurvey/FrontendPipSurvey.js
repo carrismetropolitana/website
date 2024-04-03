@@ -10,39 +10,37 @@ import FrontendPipSurveyAnswer from '@/components/FrontendPipSurveyAnswer/Fronte
 /* * */
 
 export default function FrontendPipSurvey() {
-  //
+	//
 
-  //
-  // A. Setup variables
+	//
+	// A. Setup variables
 
-  const t = useTranslations('FrontendPipSurvey');
-  const pipSurveyOptionsLabels = useTranslations('PipSurveyOptions');
+	const t = useTranslations('FrontendPipSurvey');
+	const pipSurveyOptionsLabels = useTranslations('PipSurveyOptions');
 
-  //
-  // B. Transform data
+	//
+	// B. Transform data
 
-  const pipSurveyAnswerData = useMemo(() => {
-    if (!PipSurveyOptions.answer) return [];
-    return PipSurveyOptions.answer.map((item) => ({
-      code: item,
-      title: pipSurveyOptionsLabels(`answer.${item}.title`),
-      description: pipSurveyOptionsLabels(`answer.${item}.description`),
-    }));
-  }, [pipSurveyOptionsLabels]);
+	const pipSurveyAnswerData = useMemo(() => {
+		if (!PipSurveyOptions.answer) return [];
+		return PipSurveyOptions.answer.map(item => ({
+			code: item,
+			title: pipSurveyOptionsLabels(`answer.${item}.title`),
+			description: pipSurveyOptionsLabels(`answer.${item}.description`),
+		}));
+	}, [pipSurveyOptionsLabels]);
 
-  //
-  // C. Render components
+	//
+	// C. Render components
 
-  return (
-    <div className={styles.container}>
-      <Text>{t('question')}</Text>
-      <div className={styles.answersGrid}>
-        {pipSurveyAnswerData.map((item) => (
-          <FrontendPipSurveyAnswer key={item.code} code={item.code} title={item.title} description={item.description} />
-        ))}
-      </div>
-    </div>
-  );
+	return (
+		<div className={styles.container}>
+			<Text>{t('question')}</Text>
+			<div className={styles.answersGrid}>
+				{pipSurveyAnswerData.map(item => <FrontendPipSurveyAnswer key={item.code} code={item.code} title={item.title} description={item.description} />)}
+			</div>
+		</div>
+	);
 
-  //
+	//
 }

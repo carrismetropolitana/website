@@ -9,25 +9,23 @@ import { useFrontendLinesContext } from '@/contexts/FrontendLinesContext';
 /* * */
 
 export default function FrontendLinesContentPatternPath() {
-  //
+	//
 
-  //
-  // A. Setup variables
+	//
+	// A. Setup variables
 
-  const FrontendLinesContext = useFrontendLinesContext();
+	const FrontendLinesContext = useFrontendLinesContext();
 
-  //
-  // B. Render components
+	//
+	// B. Render components
 
-  return (
-    <div className={styles.container}>
-      {FrontendLinesContext.entities.pattern.path?.map((pathStop, pathIndex) => (
-        <div key={pathIndex}>
-          <LinePatternPathStop pathStopData={pathStop} pathIndex={pathIndex} pathIndexMax={FrontendLinesContext.entities.pattern.path.length - 1} />
-        </div>
-      ))}
-    </div>
-  );
+	return (
+		<div className={styles.container}>
+			{FrontendLinesContext.entities.pattern.path?.map((pathStop, pathIndex) => <div key={pathIndex}>
+				<LinePatternPathStop pathStopData={pathStop} pathIndex={pathIndex} pathIndexMax={FrontendLinesContext.entities.pattern.path.length - 1} />
+			</div>)}
+		</div>
+	);
 
-  //
+	//
 }

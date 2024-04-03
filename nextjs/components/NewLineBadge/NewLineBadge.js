@@ -3,24 +3,24 @@ import Loader from '../Loader/Loader';
 import styles from './NewLineBadge.module.css';
 
 export function NewLineBadge({ id }) {
-  //
+	//
 
-  //
-  // B. Fetch data
+	//
+	// B. Fetch data
 
-  const { data: lineData, isLoading: lineLoading } = useSWR(id && `https://api.carrismetropolitana.pt/lines/${id}`);
+	const { data: lineData, isLoading: lineLoading } = useSWR(id && `https://api.carrismetropolitana.pt/lines/${id}`);
 
-  //
-  // D. Render components
+	//
+	// D. Render components
 
-  return (
-    <div>
-      {lineLoading && <Loader visible />}
-      {lineData && (
-        <div className={styles.badge} style={{ backgroundColor: lineData.color, color: lineData.text_color }}>
-          {lineData.short_name || '• • •'}
-        </div>
-      )}
-    </div>
-  );
+	return (
+		<div>
+			{lineLoading && <Loader visible />}
+			{lineData &&
+				<div className={styles.badge} style={{ backgroundColor: lineData.color, color: lineData.text_color }}>
+					{lineData.short_name || '• • •'}
+				</div>
+			}
+		</div>
+	);
 }

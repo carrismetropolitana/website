@@ -10,14 +10,14 @@ import StatusMessage from '@/components/StatusMessage/StatusMessage';
 /* * */
 
 export default function Layout({ children }) {
-  return (
-    <FrontendWrapper>
-      <FrontendBrandSwitcher />
-      <FrontendHeader />
-      {/* <StatusMessage /> */}
-      {/* <MaintenanceWarning /> */}
-      {children}
-      <FrontendFooter />
-    </FrontendWrapper>
-  );
+	return (
+		<FrontendWrapper>
+			<FrontendBrandSwitcher />
+			<FrontendHeader />
+			{/* <StatusMessage /> */}
+			{/* <MaintenanceWarning /> */}
+			{children}
+			<FrontendFooter />
+		</FrontendWrapper>
+	);
 }
