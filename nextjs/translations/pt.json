@@ -1014,5 +1014,42 @@
     "Panel_title": "Planeador de viagens",
     "open": "Saiba como usar",
     "how_to_use": "Como usar o planeador"
+  },
+  "FrontendVehiclesLive": {
+    "typology": [
+      "Desconhecido",
+      "Mini Urbano",
+      "Urbano Médio",
+      "Urbano Padrão",
+      "Urbano Articulado",
+      "Interurbano Padrão",
+      "Interurbano Articulado",
+      "Turismo"
+    ],
+    "vclass": [
+      "Desconhecido",
+      "A",
+      "I",
+      "II",
+      "III"
+    ],
+    "propulsion": [
+      "Desconhecido",
+      "Gasolina",
+      "Diesel",
+      "GPL auto",
+      "Mistura",
+      "Biodiesel",
+      "Eletricidade",
+      "Híbrido",
+      "Gás Natural",
+      "Outro"
+    ],
+    "climatization": "ar condicionado",
+    "wheelchair": "acessível a cadeiras de rodas",
+    "bus_info_sentence": "Autocarro {model} {make} com {available_seats} lugares sentados e {available_standing} lugares de pé, {propulsion}, {climatization} e {wheelchair}.",
+    "with_ac": "com ar condicionado",
+    "without_ac": "sem ar condicionado",
+    "info_not_available": "Informação não disponivel"
   }
 }

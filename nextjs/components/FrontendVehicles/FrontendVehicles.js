@@ -21,8 +21,7 @@ export default function FrontendVehicles() {
 
 	return (
 		<Panel type='B' title={t('Panel_title')}>
-			{/* <FrontendVehiclesSummary /> */}
-			{/* <FrontendLinesContent /> */}
+			<FrontendVehiclesSummary />
 		</Panel>
 	);
 
