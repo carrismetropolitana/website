@@ -949,14 +949,31 @@
     "answer": {
       "ok": {
         "title": "Tudo OK",
-        "description": "O painel está a funcionar corretamente"
+        "description": "O painel está a funcionar corretamente."
       },
-      "physical_damage": {
-        "title": "Danos Físicos",
-        "description": "Mais sobre Danos Físicos"
+      "inaccurate_estimates": {
+        "title": "Estimativas Incorretas",
+        "description": "O painel está ligado mas as estimativas não fazem sentido."
+      },
+      "wrong_time": {
+        "title": "Data/Hora Errada",
+        "description": "O painel está ligado mas a data/hora estão erradas. O painel está bloqueado na mesma imagem."
+      },
+      "screen_off": {
+        "title": "Painel Desligado",
+        "description": "O painel está desligado. É apresentado o logótipo da Carris Metropolitana."
+      },
+      "physical_damage_ok": {
+        "title": "Danos Físicos na Estrutura",
+        "description": "O painel funciona, mas a estrutura está danificada ou vandalizada."
+      },
+      "physical_damage_severe": {
+        "title": "Danos Físicos Graves",
+        "description": "Existem danos que impedem o correto funcionamento do painel."
       },
       "other": {
-        "title": "Outra Situação"
+        "title": "Outra Situação",
+        "description": "O painel tem outro problema."
       }
     }
   },
