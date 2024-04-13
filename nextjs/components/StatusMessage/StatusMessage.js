@@ -7,6 +7,7 @@ import { useTranslations } from 'next-intl';
 import { useState } from 'react';
 import { ActionIcon } from '@mantine/core';
 import { IconChevronDown, IconChevronLeft } from '@tabler/icons-react';
+import { Link } from '@/translations/navigation';
 
 /* * */
 
@@ -43,6 +44,7 @@ export default function StatusMessage() {
 				{isVisible &&
 					<div className={styles.contentWrapper}>
 						<p className={styles.explanation}>{t('explanation')}</p>
+						<Link href='https://www.navegante.pt/destaques/o-navegante-nao-para-mas-nos-dias-13-e-14-de-abril-fara-uma-pausa' target='_blank' className={styles.moreInfo}>{t('more_info')}</Link>
 						<p className={styles.solution}>{t('solution')}</p>
 					</div>
 				}

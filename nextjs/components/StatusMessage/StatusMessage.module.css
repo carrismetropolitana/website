@@ -108,3 +108,8 @@
 .solution {
   font-weight: 600;
 }
+
+.moreInfo {
+  font-weight: 600;
+  text-decoration: underline;
+}

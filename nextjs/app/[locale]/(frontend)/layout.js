@@ -14,7 +14,7 @@ export default function Layout({ children }) {
 		<FrontendWrapper>
 			<FrontendBrandSwitcher />
 			<FrontendHeader />
-			{/* <StatusMessage /> */}
+			<StatusMessage />
 			{/* <MaintenanceWarning /> */}
 			{children}
 			<FrontendFooter />
