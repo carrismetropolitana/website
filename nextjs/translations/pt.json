@@ -552,8 +552,8 @@
     }
   },
   "StatusMessage": {
-    "title": "Instabilidade do Tempo Real",
-    "explanation": "Devido a uma atualização planeada dos sistemas tecnológicos, o tempo real da Carris Metropolitana poderá estar temporariamente indisponível em determinados momentos. Prevemos voltar à normalidade no final do dia 14 de Abril (Domingo).",
+    "title": "Manutenção Finalizada",
+    "explanation": "Foi finalizada com sucesso a manutenção programada dos sistemas tecnológicos.",
     "solution": "Agradecemos a sua compreensão.",
     "more_info": "Saber Mais ›"
   },

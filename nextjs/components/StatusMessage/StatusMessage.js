@@ -14,7 +14,7 @@ import { Link } from '@/translations/navigation';
 export default function StatusMessage() {
 	//
 
-	const STATUS_TYPE = 'warning'; // 'warning' || 'ok'
+	const STATUS_TYPE = 'ok'; // 'warning' || 'ok'
 
 	//
 	// A. Setup variables
