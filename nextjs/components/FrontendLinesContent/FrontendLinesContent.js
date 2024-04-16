@@ -30,9 +30,6 @@ export default function FrontendLinesContent() {
 
 	return (
 		<div className={`${styles.container} ${!frontendLinesContext?.entities?.line?.id && styles.isHidden}`}>
-			<div className={styles.map}>
-				<FrontendLinesMap />
-			</div>
 			<div className={styles.sidebar}>
 				{frontendLinesContext?.entities?.line?.id ?
 					<>
@@ -42,6 +39,9 @@ export default function FrontendLinesContent() {
 					</> :
 					<NoDataLabel text={t('no_selection')} />
 				}
+			</div>
+			<div className={styles.map}>
+				<FrontendLinesMap />
 			</div>
 		</div>
 	);

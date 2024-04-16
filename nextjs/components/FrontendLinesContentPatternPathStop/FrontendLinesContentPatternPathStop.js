@@ -3,14 +3,14 @@
 /* * */
 
 import { useMemo } from 'react';
-import { useTranslations } from 'next-intl';
+// import { useTranslations } from 'next-intl';
 import { Drawer } from '@mantine/core';
 import { useDisclosure } from '@mantine/hooks';
 import styles from './FrontendLinesContentPatternPathStop.module.css';
 import CopyBadge from '@/components/CopyBadge/CopyBadge';
 import { useFrontendLinesContext } from '@/contexts/FrontendLinesContext';
 import FrontendLinesSelectDate from '@/components/FrontendLinesSelectDate/FrontendLinesSelectDate';
-import FrontendLinesContentPatternPathStopPdf from '@/components/FrontendLinesContentPatternPathStopPdf/FrontendLinesContentPatternPathStopPdf';
+// import FrontendLinesContentPatternPathStopPdf from '@/components/FrontendLinesContentPatternPathStopPdf/FrontendLinesContentPatternPathStopPdf';
 import FrontendLinesContentPatternPathStopTimetable from '@/components/FrontendLinesContentPatternPathStopTimetable/FrontendLinesContentPatternPathStopTimetable';
 import FrontendLinesContentPatternPathStopRealtime from '@/components/FrontendLinesContentPatternPathStopRealtime/FrontendLinesContentPatternPathStopRealtime';
 import FrontendLinesContentPatternPathStopSpine from '@/components/FrontendLinesContentPatternPathStopSpine/FrontendLinesContentPatternPathStopSpine';
@@ -24,24 +24,24 @@ export default function FrontendLinesContentPatternPathStop({ pathStopData, path
 	//
 	// A. Setup variables
 
-	const t = useTranslations('FrontendLinesContentPatternPathStop');
-	const FrontendLinesContext = useFrontendLinesContext();
-	const [opened, { open, close }] = useDisclosure(false);
+	// const t = useTranslations('FrontendLinesContentPatternPathStop');
+	const frontendLinesContext = useFrontendLinesContext();
+	const [opened, { open, close }] = useDisclosure();
 
 	//
 	// B. Transform data
 
 	const isThisStopSelected = useMemo(() => {
-		const isSameStopId = FrontendLinesContext.entities.stop?.id === pathStopData.stop.id;
-		const isSameStopSequence = FrontendLinesContext.entities.stop_sequence === pathStopData.stop_sequence;
+		const isSameStopId = frontendLinesContext.entities.stop?.id === pathStopData.stop.id;
+		const isSameStopSequence = frontendLinesContext.entities.stop_sequence === pathStopData.stop_sequence;
 		return isSameStopId && isSameStopSequence;
-	}, [FrontendLinesContext.entities.stop, FrontendLinesContext.entities.stop_sequence, pathStopData]);
+	}, [frontendLinesContext.entities.stop, frontendLinesContext.entities.stop_sequence, pathStopData]);
 
 	//
 	// C. Handle actions
 
 	const handleStopClick = () => {
-		FrontendLinesContext.selectStop(pathStopData.stop, pathStopData.stop_sequence);
+		frontendLinesContext.selectStop(pathStopData.stop, pathStopData.stop_sequence);
 	};
 
 	//
@@ -51,22 +51,22 @@ export default function FrontendLinesContentPatternPathStop({ pathStopData, path
 		<div className={`${styles.container} ${isThisStopSelected && styles.selected}`} onClick={handleStopClick}>
 			<div className={styles.travelTime} />
 
-			<FrontendLinesContentPatternPathStopSpine style={pathIndex === 0 ? 'start' : pathIndex === pathIndexMax ? 'end' : 'regular'} color={FrontendLinesContext.entities.pattern.color} textColor={FrontendLinesContext.entities.pattern.text_color} isSelected={isThisStopSelected} />
+			<FrontendLinesContentPatternPathStopSpine style={pathIndex === 0 ? 'start' : pathIndex === pathIndexMax ? 'end' : 'regular'} color={frontendLinesContext.entities.pattern.color} textColor={frontendLinesContext.entities.pattern.text_color} isSelected={isThisStopSelected} />
 
 			<div className={styles.innerWrapper}>
 				<div className={styles.stopInfo}>
 					<FrontendLinesContentPatternPathStopName stopData={pathStopData.stop} isSelected={isThisStopSelected} />
-					{!isThisStopSelected && <FrontendLinesContentPatternPathStopRealtime patternId={FrontendLinesContext.entities.pattern.id} stopId={pathStopData.stop.id} stopSequence={pathStopData.stop_sequence} showScheduledArrivals={false} showLabel={false} />}
+					{!isThisStopSelected && <FrontendLinesContentPatternPathStopRealtime patternId={frontendLinesContext.entities.pattern.id} stopId={pathStopData.stop.id} stopSequence={pathStopData.stop_sequence} showScheduledArrivals={false} showLabel={false} />}
 				</div>
 
-				{isThisStopSelected && <FrontendLinesContentPatternPathStopRealtime patternId={FrontendLinesContext.entities.pattern.id} stopId={pathStopData.stop.id} stopSequence={pathStopData.stop_sequence} />}
+				{isThisStopSelected && <FrontendLinesContentPatternPathStopRealtime patternId={frontendLinesContext.entities.pattern.id} stopId={pathStopData.stop.id} stopSequence={pathStopData.stop_sequence} />}
 
 				{isThisStopSelected &&
 					<div className={`${styles.content} ${styles.onlyDesktop}`}>
 						<p className={styles.label}>Horários previstos nesta paragem:</p>
 						<FrontendLinesSelectDate />
 						<FrontendLinesContentPatternPathStopTimetable stopSequence={pathStopData.stop_sequence} stopId={pathStopData.stop.id} />
-						{/* <FrontendLinesContentPatternPathStopPdf lineId={FrontendLinesContext.entities.line.id} stopId={pathStopData.stop.id} direction={FrontendLinesContext.entities.pattern.direction} /> */}
+						{/* <FrontendLinesContentPatternPathStopPdf lineId={frontendLinesContext.entities.line.id} stopId={pathStopData.stop.id} direction={frontendLinesContext.entities.pattern.direction} /> */}
 					</div>
 				}
 
@@ -75,7 +75,7 @@ export default function FrontendLinesContentPatternPathStop({ pathStopData, path
 						<p className={styles.label}>Horários previstos de passagem na paragem {pathStopData.stop.name}:</p>
 						<FrontendLinesSelectDate />
 						<FrontendLinesContentPatternPathStopTimetable stopSequence={pathStopData.stop_sequence} stopId={pathStopData.stop.id} />
-						{/* <FrontendLinesContentPatternPathStopPdf lineId={FrontendLinesContext.entities.line.id} stopId={pathStopData.stop.id} direction={FrontendLinesContext.entities.pattern.direction} /> */}
+						{/* <FrontendLinesContentPatternPathStopPdf lineId={frontendLinesContext.entities.line.id} stopId={pathStopData.stop.id} direction={frontendLinesContext.entities.pattern.direction} /> */}
 					</div>
 				</Drawer>
 
@@ -94,7 +94,7 @@ export default function FrontendLinesContentPatternPathStop({ pathStopData, path
 					</div>
 				}
 
-				{/* {isThisStopSelected && <FrontendLinesContentPatternPathStopPdf lineId={FrontendLinesContext.entities.line.id} stopId={pathStopData.stop.id} direction={FrontendLinesContext.entities.pattern.direction} />} */}
+				{/* {isThisStopSelected && <FrontendLinesContentPatternPathStopPdf lineId={frontendLinesContext.entities.line.id} stopId={pathStopData.stop.id} direction={frontendLinesContext.entities.pattern.direction} />} */}
 			</div>
 		</div>
 	);

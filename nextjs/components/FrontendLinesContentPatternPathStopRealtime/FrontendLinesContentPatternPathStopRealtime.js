@@ -24,7 +24,7 @@ export default function FrontendLinesContentPatternPathStopRealtime({ patternId,
 	//
 	// B. Fetch data
 
-	const { data: realtimeData } = useSWR(stopId && `https://api.carrismetropolitana.pt/stops/${stopId}/realtime`, { refreshInterval: 10000 });
+	const { data: realtimeData } = useSWR(patternId && `https://api.carrismetropolitana.pt/patterns/${patternId}/realtime`, { refreshInterval: 10000 });
 
 	//
 	// C. Transform data
@@ -34,6 +34,8 @@ export default function FrontendLinesContentPatternPathStopRealtime({ patternId,
 		if (!realtimeData) return [];
 		// Filter estimates for the current pattern
 		const filteredNextEstimatedArrivals = realtimeData.filter(item => {
+			// Skip if not for the current stop
+			if (item.stop_id !== stopId) return false;
 			// Skip if no estimated arrival is available
 			if (!item.estimated_arrival_unix) return false;
 			// Skip if the estimated arrival is for a different pattern
@@ -57,7 +59,7 @@ export default function FrontendLinesContentPatternPathStopRealtime({ patternId,
 		// Return result
 		return limitedNextEstimatedArrivals;
 		//
-	}, [realtimeData, maxEstimatedArrivals, patternId, stopSequence]);
+	}, [realtimeData, maxEstimatedArrivals, stopId, patternId, stopSequence]);
 
 	const nextScheduledArrivals = useMemo(() => {
 		// Return early if no data is available

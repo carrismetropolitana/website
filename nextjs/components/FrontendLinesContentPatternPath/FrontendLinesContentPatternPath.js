@@ -14,15 +14,15 @@ export default function FrontendLinesContentPatternPath() {
 	//
 	// A. Setup variables
 
-	const FrontendLinesContext = useFrontendLinesContext();
+	const frontendLinesContext = useFrontendLinesContext();
 
 	//
 	// B. Render components
 
 	return (
 		<div className={styles.container}>
-			{FrontendLinesContext.entities.pattern.path?.map((pathStop, pathIndex) => <div key={pathIndex}>
-				<LinePatternPathStop pathStopData={pathStop} pathIndex={pathIndex} pathIndexMax={FrontendLinesContext.entities.pattern.path.length - 1} />
+			{frontendLinesContext.entities.pattern.path?.map((pathStop, pathIndex) => <div key={pathIndex}>
+				<LinePatternPathStop pathStopData={pathStop} pathIndex={pathIndex} pathIndexMax={frontendLinesContext.entities.pattern.path.length - 1} />
 			</div>)}
 		</div>
 	);

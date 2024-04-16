@@ -134,12 +134,12 @@ export function FrontendLinesContextProvider({ children }) {
 	// ---------
 
 	const selectPattern = useCallback((routeData, patternData) => {
-		setEntitiesState(prev => ({ ...prev, route: routeData, pattern: patternData, stop: null }));
+		setEntitiesState(prev => ({ ...prev, route: routeData, pattern: patternData, stop: patternData.path[0].stop, stop_sequence: patternData.path[0].stop_sequence }));
 		setMapState(prev => ({ ...prev, auto_zoom: true }));
 	}, []);
 
 	const clearSelectedPattern = useCallback(() => {
-		setEntitiesState(prev => ({ ...prev, route: null, pattern: null }));
+		setEntitiesState(prev => ({ ...prev, route: null, pattern: null, stop: null }));
 	}, []);
 
 	// ---------

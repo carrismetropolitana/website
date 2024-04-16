@@ -3,7 +3,7 @@
 /* * */
 
 import { useTranslations } from 'next-intl';
-import { useEffect, useMemo, useState } from 'react';
+import { useMemo } from 'react';
 import { useFrontendLinesContext } from '@/contexts/FrontendLinesContext';
 import styles from './FrontendLinesContentPatternPathStopTimetable.module.css';
 
@@ -17,7 +17,7 @@ export default function FrontendLinesContentPatternPathStopTimetable({ stopSeque
 
 	const t = useTranslations('FrontendLinesContentPatternPathStopTimetable');
 	const FrontendLinesContext = useFrontendLinesContext();
-	const [timetable, setTimetable] = useState([]);
+	// const [timetable, setTimetable] = useState([]);
 
 	//
 	// B. Transform data

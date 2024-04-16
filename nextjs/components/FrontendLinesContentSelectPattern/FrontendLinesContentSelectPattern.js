@@ -7,7 +7,7 @@ import { useEffect, useState } from 'react';
 import { useTranslations } from 'next-intl';
 import styles from './FrontendLinesContentSelectPattern.module.css';
 import useSearch from '@/hooks/useSearch';
-import { IconX, IconSearch, IconSelector } from '@tabler/icons-react';
+import { IconSearch, IconSelector } from '@tabler/icons-react';
 import { useFrontendLinesContext } from '@/contexts/FrontendLinesContext';
 import { useDebouncedValue } from '@mantine/hooks';
 
@@ -92,11 +92,11 @@ export default function FrontendLinesContentSelectPattern() {
 		comboboxStore.closeDropdown();
 	};
 
-	const handleClearSearchField = () => {
-		setSearchQuery('');
-		FrontendLinesContext.clearSelectedPattern();
-		comboboxStore.openDropdown();
-	};
+	// const handleClearSearchField = () => {
+	// 	setSearchQuery('');
+	// 	FrontendLinesContext.clearSelectedPattern();
+	// 	comboboxStore.openDropdown();
+	// };
 
 	const handleSearchQueryChange = ({ currentTarget }) => {
 		setSearchQuery(currentTarget.value);
