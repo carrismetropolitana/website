@@ -3,7 +3,7 @@
 
 .container {
   display: grid;
-  grid-template-columns: 5fr 6fr;
+  grid-template-columns: 6fr 5fr;
   grid-template-rows: 800px;
   width: 100%;
   border-top: 1px solid var(--gray3);
@@ -43,7 +43,7 @@
 /* MAP */
 
 .map {
-  border-left: 1px solid var(--gray3);
+  border-right: 1px solid var(--gray3);
 }
 
 @media (max-width: 900px) {
