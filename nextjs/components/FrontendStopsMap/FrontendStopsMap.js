@@ -51,6 +51,19 @@ export default function FrontendStopsMap() {
 		const geoJSON = { type: 'FeatureCollection', features: [] };
 		if (allStopsData) {
 			for (const stop of allStopsData) {
+				let currentStatus;
+				switch (stop.operational_status) {
+					default:
+					case 'active':
+					case 'voided':
+						currentStatus = stop.operational_status;
+						break;
+					case 'seasonal':
+					case 'provisional':
+						if (!stop.lines.length) currentStatus = 'inactive';
+						else currentStatus = 'active';
+						break;
+				}
 				geoJSON.features.push({
 					type: 'Feature',
 					geometry: { type: 'Point', coordinates: [stop.lon, stop.lat] },
@@ -60,6 +73,7 @@ export default function FrontendStopsMap() {
 						name: stop.name,
 						lat: stop.lat,
 						lon: stop.lon,
+						current_status: currentStatus,
 					},
 				});
 			}
@@ -374,10 +388,22 @@ export default function FrontendStopsMap() {
 						beforeId={selectedStopMapData && 'selected-stop'}
 						type='circle'
 						paint={{
-							'circle-color': ['case', ['boolean', ['feature-state', 'selected'], false], '#ffffff', '#ffdd01'],
+							'circle-color':
+								['match',
+									['get', 'current_status'],
+									'inactive',
+									'#e6e6e6',
+									'#ffdd01'],
+							'circle-stroke-color':
+								['match',
+									['get', 'current_status'],
+									'inactive',
+									'#969696',
+									'voided',
+									'#cc5533',
+									'#000000'],
 							'circle-radius': ['interpolate', ['linear', 0.5], ['zoom'], 9, ['case', ['boolean', ['feature-state', 'selected'], false], 5, 1], 26, ['case', ['boolean', ['feature-state', 'selected'], false], 25, 20]],
 							'circle-stroke-width': ['interpolate', ['linear', 1], ['zoom'], 9, 0.01, 26, ['case', ['boolean', ['feature-state', 'selected'], false], 8, 7]],
-							'circle-stroke-color': '#000000',
 							'circle-pitch-alignment': 'map',
 						}}
 					/>

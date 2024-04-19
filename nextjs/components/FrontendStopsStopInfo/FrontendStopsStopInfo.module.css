@@ -38,6 +38,14 @@
   text-align: center;
 }
 
+.operationalStatus_inactive .stopName {
+  color: var(--gray-4);
+}
+
+.operationalStatus_voided .stopName {
+  color: #7d2819;
+}
+
 @media (max-width: 600px) {
   .stopName {
     font-size: 18px;
@@ -48,6 +56,10 @@
   font-size: 16px;
   font-weight: 600;
   color: var(--gray-5);
+}
+
+.operationalStatus_voided .stopLocation {
+  color: #7d2819;
 }
 
 @media (max-width: 600px) {

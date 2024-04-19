@@ -23,8 +23,9 @@ export default function FrontendStopsTimetable() {
 	// A. Setup variables
 
 	const t = useTranslations('FrontendStopsTimetable');
+	const stopOptionsLabels = useTranslations('StopOptions');
 
-	const FrontendStopsContext = useFrontendStopsContext();
+	const frontendStopsContext = useFrontendStopsContext();
 
 	let previousTrips = [];
 	let currentAndFutureTrips = [];
@@ -36,7 +37,7 @@ export default function FrontendStopsTimetable() {
 		data: stopRealtimeData,
 		isLoading: stopRealtimeLoading,
 		error: stopRealtimeError,
-	} = useSWR(FrontendStopsContext.entities.stop?.id && `https://api.carrismetropolitana.pt/stops/${FrontendStopsContext.entities.stop.id}/realtime`, {
+	} = useSWR(frontendStopsContext.entities.stop?.id && `https://api.carrismetropolitana.pt/stops/${frontendStopsContext.entities.stop.id}/realtime`, {
 		refreshInterval: 5000,
 	});
 
@@ -136,18 +137,21 @@ export default function FrontendStopsTimetable() {
 		);
 	}
 
+	if (previousTrips.length > 0 || currentAndFutureTrips.length > 0) {
+		return <div className={styles.container}>
+			<FrontendStopsTimetableHeader />
+			<FrontendStopsTimetablePreviousTrips tripsData={previousTrips} />
+			<FrontendStopsTimetableDividerLine />
+			<FrontendStopsTimetableCurrentAndFutureTrips tripsData={currentAndFutureTrips} />
+		</div>;
+	}
+
+	if (frontendStopsContext.entities.stop.operational_status !== 'active') {
+		return <NoDataLabel text={stopOptionsLabels(`operational_status.${frontendStopsContext.entities.stop.operational_status}`)} />;
+	}
+
 	return (
-		<div className={styles.container}>
-			{previousTrips.length > 0 || currentAndFutureTrips.length > 0 ?
-				<>
-					<FrontendStopsTimetableHeader />
-					<FrontendStopsTimetablePreviousTrips tripsData={previousTrips} />
-					<FrontendStopsTimetableDividerLine />
-					<FrontendStopsTimetableCurrentAndFutureTrips tripsData={currentAndFutureTrips} />
-				</> :
-				<NoDataLabel text={t('no_service')} />
-			}
-		</div>
+		<NoDataLabel text={t('no_service')} />
 	);
 
 	//

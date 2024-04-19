@@ -728,6 +728,15 @@
       "available_at_hours": "{hours} h {minutes} min"
     }
   },
+  "StopOptions": {
+    "operational_status": {
+      "active": "Paragem Ativa",
+      "provisional": "Paragem Provisória",
+      "seasonal": "Paragem Sasonal",
+      "inactive": "Paragem Inativa",
+      "voided": "Voided"
+    }
+  },
   "FrontendStopsTimetable": {
     "no_service": "Sem Serviço",
     "unavailable": "Temporariamente Indisponível"
