@@ -9,9 +9,8 @@ export default function FrontendStopsTimetableDividerLine() {
 	// A. Setup variables
 
 	const currentTime = new Date;
-
-	const hoursFormatter = Intl.DateTimeFormat('pt-PT', { hour: '2-digit', timeZone: 'Europe/Lisbon' });
-	const minutesFormatter = Intl.DateTimeFormat('pt-PT', { minute: '2-digit', timeZone: 'Europe/Lisbon' });
+	const currentTimeFormatted = currentTime.toLocaleString('pt-PT', { timeZone: 'Europe/Lisbon', hour: '2-digit', minute: '2-digit' });
+	const [hours, minutes] = currentTimeFormatted.split(':');
 
 	//
 	// B. Render components
@@ -21,9 +20,7 @@ export default function FrontendStopsTimetableDividerLine() {
 			<div className={styles.circle}></div>
 			<div className={styles.line}></div>
 			<div className={styles.time}>
-				{hoursFormatter.format(currentTime)}
-				<span>:</span>
-				{minutesFormatter.format(currentTime)}
+				{hours}<span>:</span>{minutes}
 			</div>
 		</div>
 	);
