@@ -86,7 +86,7 @@ export default function FrontendLinesContentPatternPathStopRealtime({ patternId,
 		// Format the arrival times
 		const formattedNextScheduledArrivals = sortedNextScheduledArrivals.map(item => {
 			const dateTimeObject = DateTime.fromSeconds(item.scheduled_arrival_unix, { zone: 'UTC' });
-			return `${dateTimeObject.toFormat('HH', { zone: 'Europe/Lisbon' })}:${dateTimeObject.toFormat('mm', { zone: 'Europe/Lisbon' })}`;
+			return `${dateTimeObject.setZone('Europe/Lisbon').toFormat('HH:mm')}`;
 		});
 		// Limit array to the max amount of items
 		const limitedNextScheduledArrivals = formattedNextScheduledArrivals.slice(0, maxScheduledArrivals);
