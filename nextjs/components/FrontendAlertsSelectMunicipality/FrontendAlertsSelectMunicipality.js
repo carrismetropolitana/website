@@ -54,8 +54,8 @@ export default function FrontendLinesToolbarFiltersMunicipality({ ctx }) {
 	return (
 		<div className={styles.container}>
 			<Select classNames={selectStyles} aria-label={t('label')} placeholder={t('placeholder')} nothingFoundMessage={t('no_results')}
-			onChange={handleSelectMunicipality} value={ctx.entities.municipality?.id || null}
-			data={allMunicipalitiesDataFormatted} radius='sm' w='100%' h='100%' size='lg' searchable clearable />
+				onChange={handleSelectMunicipality} value={ctx.entities.municipality?.id || null}
+				data={allMunicipalitiesDataFormatted} radius='sm' w='100%' h='100%' size='lg' searchable clearable />
 		</div>
 	);
 

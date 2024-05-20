@@ -62,7 +62,9 @@ export default async function FrontendAlert({ alertId, locale }) {
 				<p style={{ fontWeight: '500', fontSize: '14px' }}> {t('period')}: {periodString} </p>
 				<p>{alert.alert.descriptionText.translation[0].text}</p>
 				{moreUrl && <Anchor href={moreUrl} underline='hover'>{t('more_info')}</Anchor>}
-				{imageUrl && <img style={{ maxWidth: '100%' }} src={imageUrl} alt='alert'/>}
+				{imageUrl &&
+				// eslint-disable-next-line @next/next/no-img-element
+				<img style={{ maxWidth: '100%' }} src={imageUrl} alt='alert'/>}
 			</div>
 		</div>
 	);

@@ -19,7 +19,7 @@ export async function generateMetadata({ params }) {
 
 /* * */
 
-export default function Page({ alert_id }) {
+export default function Page({}) {
 	//
 
 	//

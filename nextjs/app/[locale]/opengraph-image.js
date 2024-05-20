@@ -12,7 +12,7 @@ export const contentType = 'image/png';
 
 /* * */
 
-export default async function Image({ params }) {
+export default async function Image({ _ }) {
 	//
 
 	//
