@@ -1,7 +1,6 @@
 /* * */
 
 import { OneFullColumn } from '@/components/Layouts/Layouts';
-import { FrontendAlertsContextProvider } from '@/contexts/FrontendAlertsContext';
 import FrontendAlert from '@/components/FrontendAlert/FrontendAlert';
 
 /* * */
@@ -26,9 +25,7 @@ export default function Page({ params: { alert_id, locale } }) {
 
 	return (
 		<OneFullColumn>
-			<FrontendAlertsContextProvider>
-				<FrontendAlert alertId={alert_id} locale={locale}/>
-			</FrontendAlertsContextProvider>
+			<FrontendAlert alertId={alert_id} locale={locale}/>
 		</OneFullColumn>
 	);
 
