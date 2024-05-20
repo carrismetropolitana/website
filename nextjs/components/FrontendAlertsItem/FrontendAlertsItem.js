@@ -26,7 +26,7 @@ export default function FrontendAlertsItem({ header, description, type, url }) {
 	}
 	let icon = <img src={'/icons/alerts/' + iconName + '.svg'} alt='icon' className={styles.icon} />;
 	return (
-		<Accordion.Item value={header}>
+		<Accordion.Item value={header} className={styles.item} py={4} >
 			<Accordion.Control icon={icon}>
 				<h3>{header}</h3>
 			</Accordion.Control>

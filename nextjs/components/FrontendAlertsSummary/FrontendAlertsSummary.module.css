@@ -21,3 +21,22 @@
     padding-right: var(--size-lg); */
   }
 }
+
+/* Alerts.module.css */
+.alertsContainer {
+  display: flex;
+  gap: 4px;
+  border-top: 1px solid var(--gray-3);
+}
+
+.alertDate {
+  color: var(--gray-4);
+  font-weight: 500;
+  font-size: var(--font-md);
+  padding-top: 20px;
+  padding-left: 12px;
+}
+
+.alertsContent {
+  flex-grow: 1;
+}
