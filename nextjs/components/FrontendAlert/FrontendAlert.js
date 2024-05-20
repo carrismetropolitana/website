@@ -4,6 +4,7 @@
 import { Badge, Anchor } from '@mantine/core';
 import { getTranslations } from 'next-intl/server';
 import { redirect } from 'next/navigation';
+import { headers } from 'next/headers';
 
 export default async function FrontendAlert({ alertId, locale }) {
 	//
@@ -17,6 +18,9 @@ export default async function FrontendAlert({ alertId, locale }) {
 		getTranslations('FrontendAlert'),
 		fetch('https://api.carrismetropolitana.pt/alerts').then(res => res.json()),
 	]);
+
+	const domain = headers().get('host');
+	const currentUrl = `https://${domain}/alerts/${alertId}`;
 
 	//
 	// B. Fetch data
@@ -38,6 +42,7 @@ export default async function FrontendAlert({ alertId, locale }) {
 
 	let moreUrl = alert.alert.url.translation.find(url => url.language === locale)?.text;
 	if (!moreUrl) moreUrl = alert.alert.url.translation[0]?.text;
+	if (moreUrl == currentUrl) moreUrl = null;
 
 	//
 	// C. Render components
@@ -56,7 +61,7 @@ export default async function FrontendAlert({ alertId, locale }) {
 				</div>
 				<p style={{ fontWeight: '500', fontSize: '14px' }}> {t('period')}: {periodString} </p>
 				<p>{alert.alert.descriptionText.translation[0].text}</p>
-				{moreUrl && <Anchor href={moreUrl} underline='hover'>Mais informações</Anchor>}
+				{moreUrl && <Anchor href={moreUrl} underline='hover'>{t('more_info')}</Anchor>}
 				{imageUrl && <img style={{ maxWidth: '100%' }} src={imageUrl} alt='alert'/>}
 			</div>
 		</div>

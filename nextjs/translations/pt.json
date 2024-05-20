@@ -1035,7 +1035,8 @@
     "ACCESSIBILITY_ISSUE": "Problema de acessibilidade"
   },
   "FrontendAlert": {
-    "period": "Período"
+    "period": "Período",
+    "more_info": "Mais informações"
   },
   "FrontendPlanner": {
     "Panel_title": "Planeador de viagens",
