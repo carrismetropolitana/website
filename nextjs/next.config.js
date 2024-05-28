@@ -5,34 +5,34 @@ const withNextIntl = require('next-intl/plugin')();
 /* * */
 
 module.exports = withNextIntl({
-  output: 'standalone',
-  reactStrictMode: true,
   images: {
     remotePatterns: [
       {
-        protocol: 'https',
         hostname: 'www.carrismetropolitana.pt',
         port: '',
+        protocol: 'https',
       },
     ],
   },
+  output: 'standalone',
+  reactStrictMode: true,
   async redirects() {
     return [
       //
-      { source: '/alertas', destination: '/alerts', permanent: true },
+      { destination: '/alerts', permanent: true, source: '/alertas' },
       //
-      { source: '/stops', destination: '/stops/all', permanent: true },
-      { source: '/paragens', destination: '/stops/all', permanent: true },
+      { destination: '/stops/all', permanent: true, source: '/stops' },
+      { destination: '/stops/all', permanent: true, source: '/paragens' },
       //
-      { source: '/lines', destination: '/lines/all', permanent: true },
-      { source: '/horarios', destination: '/lines/all', permanent: true },
+      { destination: '/lines/all', permanent: true, source: '/lines' },
+      { destination: '/lines/all', permanent: true, source: '/horarios' },
       //
-      { source: '/vehicles', destination: '/vehicles/all', permanent: true },
+      { destination: '/vehicles/all', permanent: true, source: '/vehicles' },
       //
-      { source: '/espacos-navegante', destination: '/encm', permanent: true },
+      { destination: '/encm', permanent: true, source: '/espacos-navegante' },
       //
-      { source: '/pip', destination: '/', permanent: true },
+      { destination: '/', permanent: true, source: '/pip' },
       //
-    ];
+    ]
   },
 });

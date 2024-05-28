@@ -11,7 +11,7 @@ export default function parseTimeStringToDate(timeString = '' /* HH:MM:DD */) {
   const minutes = parseInt(timeStringParts[1]);
   const seconds = parseInt(timeStringParts[2]);
   // Create a new Date object with the extracted components
-  const dateObject = new Date();
+  const dateObject = new Date()
   dateObject.setHours(hours);
   dateObject.setMinutes(minutes);
   dateObject.setSeconds(seconds);

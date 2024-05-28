@@ -1,212 +1,212 @@
 'use client';
 
-import useSWR from 'swr';
-import styles from './FrontendStopsTimetableRow.module.css';
-import LineDisplay from '@/components/LineDisplay/LineDisplay';
-import { useEffect, useState } from 'react';
-import { convertOperationTimeStringTo24HourTimeString, getMinutesFromOperationTimeString } from '@/services/parseRelativeTime';
-import { useTranslations } from 'next-intl';
-import LiveIcon from '@/components/LiveIcon/LiveIcon';
-import CopyBadge from '@/components/CopyBadge/CopyBadge';
-import { useDebugContext } from '@/contexts/DebugContext';
-import FrontendStopsTimetableFeedback from '@/components/FrontendStopsTimetableFeedback/FrontendStopsTimetableFeedback';
-import { useFrontendStopsContext } from '@/contexts/FrontendStopsContext';
+import CopyBadge from '@/components/CopyBadge/CopyBadge'
+import FrontendStopsTimetableFeedback from '@/components/FrontendStopsTimetableFeedback/FrontendStopsTimetableFeedback'
+import LineDisplay from '@/components/LineDisplay/LineDisplay'
+import LiveIcon from '@/components/LiveIcon/LiveIcon'
+import { useDebugContext } from '@/contexts/DebugContext'
+import { useFrontendStopsContext } from '@/contexts/FrontendStopsContext'
+import { convertOperationTimeStringTo24HourTimeString, getMinutesFromOperationTimeString } from '@/services/parseRelativeTime'
+import { useTranslations } from 'next-intl'
+import { useEffect, useState } from 'react'
+import useSWR from 'swr'
+
+import styles from './FrontendStopsTimetableRow.module.css'
 
 /* * */
 
 export default function FrontendStopsTimetableRow({ rowType, tripData }) {
-	//
+  //
 
-	//
-	// A. Setup variables
+  //
+  // A. Setup variables
 
-	const t = useTranslations('FrontendStopsTimetableRow');
+  const t = useTranslations('FrontendStopsTimetableRow');
 
-	const debugContext = useDebugContext();
-	const FrontendStopsContext = useFrontendStopsContext();
+  const debugContext = useDebugContext();
+  const FrontendStopsContext = useFrontendStopsContext();
 
-	const [tripMissingRequiredData, setTripMissingRequiredData] = useState(false);
-	const [tripIsAtLastStop, setTripIsAtLastStop] = useState(false);
-	const [tripEtaMinutes, setTripEtaMinutes] = useState();
-	const [tripEtaString, setTripEtaString] = useState('');
-	const [tripRealtimeStatus, setTripRealtimeStatus] = useState('scheduled');
+  const [tripMissingRequiredData, setTripMissingRequiredData] = useState(false);
+  const [tripIsAtLastStop, setTripIsAtLastStop] = useState(false);
+  const [tripEtaMinutes, setTripEtaMinutes] = useState();
+  const [tripEtaString, setTripEtaString] = useState('');
+  const [tripRealtimeStatus, setTripRealtimeStatus] = useState('scheduled');
 
-	//
-	// B. Fetch data
+  //
+  // B. Fetch data
 
-	const { data: alertsData } = useSWR('https://api.carrismetropolitana.pt/alerts');
-	const { data: patternData, isLoading: patternLoading } = useSWR(tripData?.pattern_id && `https://api.carrismetropolitana.pt/patterns/${tripData.pattern_id}`);
+  const { data: alertsData } = useSWR('https://api.carrismetropolitana.pt/alerts');
+  const { data: patternData, isLoading: patternLoading } = useSWR(tripData?.pattern_id && `https://api.carrismetropolitana.pt/patterns/${tripData.pattern_id}`);
 
-	//
-	// B. Transform data
+  //
+  // B. Transform data
 
-	useEffect(() => {
-		//
+  useEffect(() => {
+    //
 
-		// Re-render estimates on an interval
+    // Re-render estimates on an interval
 
-		function calculateArrivalEstimate() {
-			//
+    function calculateArrivalEstimate() {
+      //
 
-			// 1.
-			// Return if data is not yet ready
+      // 1.
+      // Return if data is not yet ready
 
-			if (!tripData || patternLoading) return;
+      if (!tripData || patternLoading) return;
 
-			// 2.
-			// Check if all required data is available to display this trip
+      // 2.
+      // Check if all required data is available to display this trip
 
-			if (!tripData || !patternData || !patternData.path) {
-				setTripMissingRequiredData(true);
-				return;
-			}
+      if (!tripData || !patternData || !patternData.path) {
+        setTripMissingRequiredData(true);
+        return;
+      }
 
-			// 2.
-			// Check if this trip is not at the last stop
+      // 2.
+      // Check if this trip is not at the last stop
 
-			if (tripData.stop_sequence === patternData.path[patternData.path.length - 1]?.stop_sequence) {
-				setTripIsAtLastStop(true);
-			}
+      if (tripData.stop_sequence === patternData.path[patternData.path.length - 1]?.stop_sequence) {
+        setTripIsAtLastStop(true);
+      }
 
-			// 2.
-			// Classify this trip for realtime status
+      // 2.
+      // Classify this trip for realtime status
 
-			// Regarding realtime status:
-			//		1. For 'previous' trips:
-			//				1.1. A trip always displays its scheduled value;
-			//		2. For 'current' trips:
-			//				2.1. If estimated_arrival is available, show it as relative time;
-			//				2.2. Otherwise show scheduled_arrival as absolute time.
+      // Regarding realtime status:
+      //		1. For 'previous' trips:
+      //				1.1. A trip always displays its scheduled value;
+      //		2. For 'current' trips:
+      //				2.1. If estimated_arrival is available, show it as relative time;
+      //				2.2. Otherwise show scheduled_arrival as absolute time.
 
-			if (rowType === 'previous') {
-				// Set the trip status
-				setTripRealtimeStatus('passed');
-				// Format the arrival estimate string
-				const parsedArrivalEstimate = convertOperationTimeStringTo24HourTimeString(tripData.scheduled_arrival);
-				const formattedArrivalEstimate = parsedArrivalEstimate.substring(0, 5);
-				setTripEtaString(formattedArrivalEstimate);
-				// Set minutes from now until arrival
-				const minutesToArrivalFromNow = getMinutesFromOperationTimeString(tripData.scheduled_arrival);
-				setTripEtaMinutes(minutesToArrivalFromNow);
-				//
-				return;
-			}
+      if (rowType === 'previous') {
+        // Set the trip status
+        setTripRealtimeStatus('passed');
+        // Format the arrival estimate string
+        const parsedArrivalEstimate = convertOperationTimeStringTo24HourTimeString(tripData.scheduled_arrival);
+        const formattedArrivalEstimate = parsedArrivalEstimate.substring(0, 5);
+        setTripEtaString(formattedArrivalEstimate);
+        // Set minutes from now until arrival
+        const minutesToArrivalFromNow = getMinutesFromOperationTimeString(tripData.scheduled_arrival);
+        setTripEtaMinutes(minutesToArrivalFromNow);
+        //
+        return;
+      }
 
-			if (rowType === 'current' || rowType === 'future') {
-				//
-				if (tripData.estimated_arrival) {
-					// Format the arrival estimate string
-					const parsedArrivalEstimate = convertOperationTimeStringTo24HourTimeString(tripData.estimated_arrival);
-					const formattedArrivalEstimate = parsedArrivalEstimate.substring(0, 5);
-					setTripEtaString(formattedArrivalEstimate);
-					// Set minutes from now until arrival
-					const minutesToArrivalFromNow = getMinutesFromOperationTimeString(tripData.estimated_arrival);
-					setTripEtaMinutes(minutesToArrivalFromNow);
-					// Check how close the estimate is to now
-					if (minutesToArrivalFromNow <= 1) setTripRealtimeStatus('arriving_now');
-					else setTripRealtimeStatus('realtime');
-					//
-					return;
-				}
+      if (rowType === 'current' || rowType === 'future') {
+        //
+        if (tripData.estimated_arrival) {
+          // Format the arrival estimate string
+          const parsedArrivalEstimate = convertOperationTimeStringTo24HourTimeString(tripData.estimated_arrival);
+          const formattedArrivalEstimate = parsedArrivalEstimate.substring(0, 5);
+          setTripEtaString(formattedArrivalEstimate);
+          // Set minutes from now until arrival
+          const minutesToArrivalFromNow = getMinutesFromOperationTimeString(tripData.estimated_arrival);
+          setTripEtaMinutes(minutesToArrivalFromNow);
+          // Check how close the estimate is to now
+          if (minutesToArrivalFromNow <= 1) setTripRealtimeStatus('arriving_now');
+          else setTripRealtimeStatus('realtime');
+          //
+          return;
+        }
 
-				// Set the trip status
-				setTripRealtimeStatus('scheduled');
-				// Format the arrival estimate string
-				const parsedArrivalEstimate = convertOperationTimeStringTo24HourTimeString(tripData.scheduled_arrival);
-				const formattedArrivalEstimate = parsedArrivalEstimate.substring(0, 5);
-				setTripEtaString(formattedArrivalEstimate);
-				// Set minutes from now until arrival
-				const minutesToArrivalFromNow = getMinutesFromOperationTimeString(tripData.scheduled_arrival);
-				setTripEtaMinutes(minutesToArrivalFromNow);
-				//
-				return;
-			}
+        // Set the trip status
+        setTripRealtimeStatus('scheduled');
+        // Format the arrival estimate string
+        const parsedArrivalEstimate = convertOperationTimeStringTo24HourTimeString(tripData.scheduled_arrival);
+        const formattedArrivalEstimate = parsedArrivalEstimate.substring(0, 5);
+        setTripEtaString(formattedArrivalEstimate);
+        // Set minutes from now until arrival
+        const minutesToArrivalFromNow = getMinutesFromOperationTimeString(tripData.scheduled_arrival);
+        setTripEtaMinutes(minutesToArrivalFromNow);
+        //
+        return;
+      }
 
-			//
-		}
+      //
+    }
 
-		// Run once
-		calculateArrivalEstimate();
+    // Run once
+    calculateArrivalEstimate();
 
-		// Run on an interval
-		const intervalId = setInterval(() => calculateArrivalEstimate(), 1000 * 10 /* milli * seconds */);
+    // Run on an interval
+    const intervalId = setInterval(() => calculateArrivalEstimate(), 1000 * 10 /* milli * seconds */);
 
-		// Clear interval on exit
-		return () => clearInterval(intervalId);
+    // Clear interval on exit
+    return () => clearInterval(intervalId);
 
-		//
-	}, [patternData, patternLoading, rowType, tripData]);
+    //
+  }, [patternData, patternLoading, rowType, tripData]);
 
-	//
-	// D. Handle actions
+  //
+  // D. Handle actions
 
-	const handleSelectTrip = () => {
-		if (!tripData || !patternData) return;
-		if (FrontendStopsContext.entities.trip_id === tripData.trip_id) FrontendStopsContext.updateEntities({ trip_id: null, pattern_id: null, shape_id: null, vehicle_id: null });
-		else FrontendStopsContext.updateEntities({ trip_id: tripData.trip_id, pattern_id: tripData.pattern_id, shape_id: patternData.shape_id, vehicle_id: tripData.vehicle_id });
-	};
+  const handleSelectTrip = () => {
+    if (!tripData || !patternData) return;
+    if (FrontendStopsContext.entities.trip_id === tripData.trip_id) FrontendStopsContext.updateEntities({ pattern_id: null, shape_id: null, trip_id: null, vehicle_id: null });
+    else FrontendStopsContext.updateEntities({ pattern_id: tripData.pattern_id, shape_id: patternData.shape_id, trip_id: tripData.trip_id, vehicle_id: tripData.vehicle_id });
+  };
 
-	//
-	// D. Render components
+  //
+  // D. Render components
 
-	if (tripMissingRequiredData && !debugContext.isDebug) return null;
+  if (tripMissingRequiredData && !debugContext.isDebug) return null;
 
-	if (tripIsAtLastStop && !debugContext.isDebug) return null;
+  if (tripIsAtLastStop && !debugContext.isDebug) return null;
 
-	return (
-		<div className={`${styles.container} ${styles[tripRealtimeStatus]} ${FrontendStopsContext.entities.trip_id === tripData.trip_id && styles.selected}`} onClick={handleSelectTrip}>
-			<div className={styles.tripSummary}>
-				<LineDisplay short_name={tripData.line_id} long_name={patternData?.headsign} color={patternData?.color} text_color={patternData?.text_color} />
-				{tripRealtimeStatus === 'passed' &&
+  return (
+    <div className={`${styles.container} ${styles[tripRealtimeStatus]} ${FrontendStopsContext.entities.trip_id === tripData.trip_id && styles.selected}`} onClick={handleSelectTrip}>
+      <div className={styles.tripSummary}>
+        <LineDisplay color={patternData?.color} long_name={patternData?.headsign} short_name={tripData.line_id} text_color={patternData?.text_color} />
+        {tripRealtimeStatus === 'passed' &&
 					<div className={styles.arrivalEstimate}>
-						<p>{t('trip_realtime_status.passed', { value: tripEtaString })}</p>
-					</div>
-				}
-				{tripRealtimeStatus === 'arriving_now' &&
+  <p>{t('trip_realtime_status.passed', { value: tripEtaString })}</p>
+        </div>}
+        {tripRealtimeStatus === 'arriving_now' &&
 					<div className={styles.arrivalEstimate}>
-						<LiveIcon />
-						<p>{t('trip_realtime_status.arriving_now')}</p>
-					</div>
-				}
-				{tripRealtimeStatus === 'realtime' &&
+  <LiveIcon />
+  <p>{t('trip_realtime_status.arriving_now')}</p>
+        </div>}
+        {tripRealtimeStatus === 'realtime' &&
 					<div className={styles.arrivalEstimate}>
-						<LiveIcon />
-						<p>{t('trip_realtime_status.realtime', { value: tripEtaMinutes })}</p>
-					</div>
-				}
-				{tripRealtimeStatus === 'scheduled' &&
+  <LiveIcon />
+  <p>{t('trip_realtime_status.realtime', { value: tripEtaMinutes })}</p>
+        </div>}
+        {tripRealtimeStatus === 'scheduled' &&
 					<div className={styles.arrivalEstimate}>
-						<p>{t('trip_realtime_status.scheduled', { value: tripEtaString })}</p>
-					</div>
-				}
-			</div>
+  <p>{t('trip_realtime_status.scheduled', { value: tripEtaString })}</p>
+        </div>}
+      </div>
 
-			<div className={styles.tripDetails}>
-				{debugContext.isDebug &&
+      <div className={styles.tripDetails}>
+        {debugContext.isDebug &&
 					<div className={styles.testData} onClick={e => e.stopPropagation()}>
-						<CopyBadge label={`stop_id: ${FrontendStopsContext.entities.stop?.id}`} value={FrontendStopsContext.entities.stop?.id} />
-						<CopyBadge label={`trip_id: ${tripData.trip_id}`} value={tripData.trip_id} />
-						<CopyBadge label={`stop_seq: ${tripData.stop_sequence}`} value={tripData.stop_sequence} />
-						<CopyBadge label={`vehicle_id: ${tripData.vehicle_id}`} value={tripData.vehicle_id} />
-						<CopyBadge label={`Observado: ${tripData.observed_arrival}`} value={tripData.observed_arrival} />
-						<CopyBadge label={`Estimado: ${tripData.estimated_arrival}`} value={tripData.estimated_arrival} />
-						<CopyBadge label={`Planeado: ${tripData.scheduled_arrival}`} value={tripData.scheduled_arrival} />
-					</div>
-				}
+  <CopyBadge label={`stop_id: ${FrontendStopsContext.entities.stop?.id}`} value={FrontendStopsContext.entities.stop?.id} />
+  <CopyBadge label={`trip_id: ${tripData.trip_id}`} value={tripData.trip_id} />
+  <CopyBadge label={`stop_seq: ${tripData.stop_sequence}`} value={tripData.stop_sequence} />
+  <CopyBadge label={`vehicle_id: ${tripData.vehicle_id}`} value={tripData.vehicle_id} />
+  <CopyBadge label={`Observado: ${tripData.observed_arrival}`} value={tripData.observed_arrival} />
+  <CopyBadge label={`Estimado: ${tripData.estimated_arrival}`} value={tripData.estimated_arrival} />
+  <CopyBadge label={`Planeado: ${tripData.scheduled_arrival}`} value={tripData.scheduled_arrival} />
+        </div>}
 
-				{(tripRealtimeStatus === 'realtime' || tripRealtimeStatus === 'arriving_now' || tripRealtimeStatus === 'passed') && tripEtaMinutes > -10 && tripData.vehicle_id && !debugContext.isDebug && <FrontendStopsTimetableFeedback tripData={tripData} />}
+        {(tripRealtimeStatus === 'realtime' || tripRealtimeStatus === 'arriving_now' || tripRealtimeStatus === 'passed') && tripEtaMinutes > -10 && tripData.vehicle_id && !debugContext.isDebug && <FrontendStopsTimetableFeedback tripData={tripData} />}
 
-				<div className={styles.localitiesPerLine}>
-					<p>Passa por</p>
-					<p className={styles.localities}>
-						{patternData?.localities?.length > 0 &&
-							patternData.localities.map((locality, index) => <span key={index}>
+        <div className={styles.localitiesPerLine}>
+          <p>Passa por</p>
+          <p className={styles.localities}>
+            {patternData?.localities?.length > 0 &&
+							patternData.localities.map((locality, index) => 
+<span key={index}>
 								{index > 0 && <span className={styles.localitySeparator}> • </span>}
 								<span className={styles.localityName}>{locality}</span>
-							</span>)}
-					</p>
-				</div>
-			</div>
-		</div>
-	);
+							</span>
+
+
+							)}
+          </p>
+        </div>
+      </div>
+    </div>
+  )
 }

@@ -1,7 +1,7 @@
 import styles from './MapToolbar.module.css';
 
-export default function MapToolbar({ loading, error, title, rightSection, children }) {
-	//
+export default function MapToolbar({ children, error, loading, rightSection, title }) {
+  //
 
-	return <div className={styles.container}>{children}</div>;
+  return <div className={styles.container}>{children}</div>;
 }

@@ -14,11 +14,11 @@ export const [LineFormProvider, useLineFormContext, useLineForm] = createFormCon
 /* * */
 
 export const LineFormDefault = {
-  municipality_id: '',
-  line_id: '',
-  pattern_id: '',
   date: new Date(),
   date_string: parseDateToString(new Date()),
+  line_id: '',
+  municipality_id: '',
+  pattern_id: '',
   stop_id: '',
 };
 
@@ -28,8 +28,8 @@ export const LineFormDefault = {
 /* * */
 
 export const LineFormOptions = {
-  validateInputOnBlur: true,
-  validateInputOnChange: true,
   clearInputErrorOnChange: true,
   initialValues: LineFormDefault,
+  validateInputOnBlur: true,
+  validateInputOnChange: true,
 };

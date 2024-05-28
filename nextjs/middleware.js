@@ -1,11 +1,11 @@
 /* * */
 
-import createIntlMiddleware from 'next-intl/middleware';
-import { availableLocales } from '@/translations/config';
+import { availableLocales } from '@/translations/config'
+import createIntlMiddleware from 'next-intl/middleware'
 
 /* * */
 
-const intlMiddleware = createIntlMiddleware({ locales: availableLocales, defaultLocale: 'pt', localePrefix: 'as-needed' });
+const intlMiddleware = createIntlMiddleware({ defaultLocale: 'pt', localePrefix: 'as-needed', locales: availableLocales });
 
 /* * */
 

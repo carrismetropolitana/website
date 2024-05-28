@@ -1,49 +1,50 @@
 'use client';
 
-import styles from './FrontendEncmToolbar.module.css';
-import { IconArrowsMinimize, IconBrandGoogleMaps } from '@tabler/icons-react';
-import { Tooltip, ActionIcon, SegmentedControl } from '@mantine/core';
-import { useTranslations } from 'next-intl';
-import FrontendEncmToolbarSearch from '@/components/FrontendEncmToolbarSearch/FrontendEncmToolbarSearch';
+import FrontendEncmToolbarSearch from '@/components/FrontendEncmToolbarSearch/FrontendEncmToolbarSearch'
+import { ActionIcon, SegmentedControl, Tooltip } from '@mantine/core'
+import { IconArrowsMinimize, IconBrandGoogleMaps } from '@tabler/icons-react'
+import { useTranslations } from 'next-intl'
 
-export default function FrontendEncmToolbar({ selectedMapStyle, onSelectMapStyle, onMapRecenter, onOpenInGoogleMaps, selectedEncmId, onSelectEncmId }) {
-	//
+import styles from './FrontendEncmToolbar.module.css'
 
-	//
-	// A. Setup variables
+export default function FrontendEncmToolbar({ onMapRecenter, onOpenInGoogleMaps, onSelectEncmId, onSelectMapStyle, selectedEncmId, selectedMapStyle }) {
+  //
 
-	const t = useTranslations('FrontendEncmToolbar');
+  //
+  // A. Setup variables
 
-	//
-	// B. Render components
+  const t = useTranslations('FrontendEncmToolbar');
 
-	return (
-		<div className={styles.container}>
-			<SegmentedControl
-				aria-label={t('map_style.label')}
-				value={selectedMapStyle}
-				onChange={onSelectMapStyle}
-				data={[
-					{ value: 'map', label: t('map_style.options.map') },
-					{ value: 'satellite', label: t('map_style.options.satellite') },
-				]}
-			/>
+  //
+  // B. Render components
 
-			<Tooltip label={t('recenter_map.label')} position='bottom' withArrow>
-				<ActionIcon color='gray' variant='light' size='lg' onClick={onMapRecenter} aria-label={t('recenter_map.label')}>
-					<IconArrowsMinimize size={20} />
-				</ActionIcon>
-			</Tooltip>
+  return (
+    <div className={styles.container}>
+      <SegmentedControl
+        aria-label={t('map_style.label')}
+        data={[
+				  { label: t('map_style.options.map'), value: 'map' },
+				  { label: t('map_style.options.satellite'), value: 'satellite' },
+        ]}
+        onChange={onSelectMapStyle}
+        value={selectedMapStyle}
+      />
 
-			<Tooltip label={t('open_gmaps.label')} position='bottom' withArrow>
-				<ActionIcon color='gray' variant='light' size='lg' onClick={onOpenInGoogleMaps} aria-label={t('open_gmaps.label')}>
-					<IconBrandGoogleMaps size={20} />
-				</ActionIcon>
-			</Tooltip>
+      <Tooltip label={t('recenter_map.label')} position="bottom" withArrow>
+        <ActionIcon aria-label={t('recenter_map.label')} color="gray" onClick={onMapRecenter} size="lg" variant="light">
+          <IconArrowsMinimize size={20} />
+        </ActionIcon>
+      </Tooltip>
 
-			<div className={styles.fullWidth}>
-				<FrontendEncmToolbarSearch selectedEncmId={selectedEncmId} onSelectEncmId={onSelectEncmId} />
-			</div>
-		</div>
-	);
+      <Tooltip label={t('open_gmaps.label')} position="bottom" withArrow>
+        <ActionIcon aria-label={t('open_gmaps.label')} color="gray" onClick={onOpenInGoogleMaps} size="lg" variant="light">
+          <IconBrandGoogleMaps size={20} />
+        </ActionIcon>
+      </Tooltip>
+
+      <div className={styles.fullWidth}>
+        <FrontendEncmToolbarSearch onSelectEncmId={onSelectEncmId} selectedEncmId={selectedEncmId} />
+      </div>
+    </div>
+  )
 }

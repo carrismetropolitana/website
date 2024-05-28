@@ -7,11 +7,13 @@ import Panel from '@/components/Panel/Panel';
 /* * */
 
 export default function Loading() {
-	return <OneFullColumn>
-		<Panel title={'Alertas de Serviço'}>
-			<div style={{ width: '100%', display: 'flex', justifyContent: 'center', padding: 8 }}>
-				<Loader visible />
-			</div>
-		</Panel>
-	</OneFullColumn>;
+  return (
+    <OneFullColumn>
+      <Panel title="Alertas de Serviço">
+        <div style={{ display: 'flex', justifyContent: 'center', padding: 8, width: '100%' }}>
+          <Loader visible />
+        </div>
+      </Panel>
+    </OneFullColumn>
+  );
 }

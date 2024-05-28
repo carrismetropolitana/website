@@ -3,27 +3,27 @@ export default function parseRelativeTime(eta) {
   if (!eta) return null;
 
   // Get current time
-  var now = new Date();
-  var currentHours = now.getHours();
-  var currentMinutes = now.getMinutes();
-  var currentSeconds = now.getSeconds();
+  let now = new Date()
+  let currentHours = now.getHours();
+  let currentMinutes = now.getMinutes();
+  let currentSeconds = now.getSeconds();
 
   // Parse ETA
-  var parts = eta.split(':');
-  var etaHours = parseInt(parts[0]);
-  var etaMinutes = parseInt(parts[1]);
-  var etaSeconds = parseInt(parts[2]);
+  let parts = eta.split(':');
+  let etaHours = parseInt(parts[0]);
+  let etaMinutes = parseInt(parts[1]);
+  let etaSeconds = parseInt(parts[2]);
 
   // Calculate time difference
-  var diffHours = etaHours - currentHours;
-  var diffMinutes = etaMinutes - currentMinutes;
-  var diffSeconds = etaSeconds - currentSeconds;
+  let diffHours = etaHours - currentHours;
+  let diffMinutes = etaMinutes - currentMinutes;
+  let diffSeconds = etaSeconds - currentSeconds;
 
   // Convert time difference into minutes
-  var totalDiffMinutes = diffHours * 60 + diffMinutes + diffSeconds / 60;
+  let totalDiffMinutes = diffHours * 60 + diffMinutes + diffSeconds / 60;
 
   // Calculate the relative time as a Date object
-  var relativeTime = new Date();
+  let relativeTime = new Date()
   relativeTime.setMinutes(relativeTime.getMinutes() + totalDiffMinutes);
   return relativeTime;
 
@@ -35,7 +35,7 @@ export function convertOperationTimeStringToDate(timeString) {
   if (!timeString) return null;
 
   // Get current time
-  const now = new Date();
+  const now = new Date()
   const currentHours = now.getHours();
   const currentMinutes = now.getMinutes();
   const currentSeconds = now.getSeconds();
@@ -55,7 +55,7 @@ export function convertOperationTimeStringToDate(timeString) {
   const totalDiffMinutes = diffHours * 60 + diffMinutes + diffSeconds / 60;
 
   // Calculate the relative time as a Date object
-  const relativeTime = new Date();
+  const relativeTime = new Date()
   relativeTime.setMinutes(relativeTime.getMinutes() + totalDiffMinutes);
   return relativeTime;
 
@@ -67,7 +67,7 @@ export function getMinutesFromOperationTimeString(timeString) {
   if (!timeString) return null;
 
   // Get current time
-  const now = new Date();
+  const now = new Date()
   let currentHours = now.getHours();
   const currentMinutes = now.getMinutes();
   const currentSeconds = now.getSeconds();

@@ -18,7 +18,7 @@ export default function useSearch(query, data, options) {
   // 3.
   // Normalize the query
 
-  const normalizedQuery = normalizeString(query, { toLowerCase: true, transliterate: true, regexReplace: options.regexReplace, regexMatch: true });
+  const normalizedQuery = normalizeString(query, { regexMatch: true, regexReplace: options.regexReplace, toLowerCase: true, transliterate: true });
 
   // 4.
   // Check if 'keys' option is present
@@ -28,15 +28,15 @@ export default function useSearch(query, data, options) {
       let hasMatch = false;
       for (let key of options.keys) {
         if (item.hasOwnProperty(key)) {
-          const normalizedValue = normalizeString(String(item[key]), { toLowerCase: true, transliterate: true, regexReplace: options.regexReplace });
+          const normalizedValue = normalizeString(String(item[key]), { regexReplace: options.regexReplace, toLowerCase: true, transliterate: true });
           if (normalizedQuery.test(normalizedValue)) {
             hasMatch = true;
-            break;
+            break
           }
         }
       }
       return hasMatch;
-    });
+    })
     return limitArraySize(finalResult, options.limitResults);
   }
 
@@ -45,7 +45,7 @@ export default function useSearch(query, data, options) {
     const stringifiedValue = Object.values(item).join('');
     const normalizedValue = normalizeString(stringifiedValue, { toLowerCase: true, transliterate: true });
     return normalizedValue.includes(normalizedQuery);
-  });
+  })
 
   return limitArraySize(finalResult, options.limitResults);
 

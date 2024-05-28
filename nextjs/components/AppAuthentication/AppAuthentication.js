@@ -7,20 +7,20 @@ import styles from './AppAuthentication.module.css';
 /* * */
 
 export default function AppAuthentication({ children }) {
-	//
+  //
 
-	//
-	// A. Setup variables
+  //
+  // A. Setup variables
 
-	//
-	// C. Render components
+  //
+  // C. Render components
 
-	return (
-		<div className={styles.container}>
-			{/* {(status === 'loading' || status === 'authenticated') && <Loader visible fixed />} */}
-			<div className={styles.content}>{children}</div>
-		</div>
-	);
+  return (
+    <div className={styles.container}>
+      {/* {(status === 'loading' || status === 'authenticated') && <Loader visible fixed />} */}
+      <div className={styles.content}>{children}</div>
+    </div>
+  )
 
-	//
+  //
 }

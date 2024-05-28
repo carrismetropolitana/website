@@ -2,64 +2,66 @@
 
 /* * */
 
-import { SignInValidation } from '@/schemas/SignIn/validation';
-import { useTranslations } from 'next-intl';
-import { TextInput } from '@mantine/core';
-import styles from './AppAuthenticationSignInProviderEmail.module.css';
-import { useEffect, useState } from 'react';
-import { useSearchParams } from 'next/navigation';
+import { SignInValidation } from '@/schemas/SignIn/validation'
+import { TextInput } from '@mantine/core'
+import { useSearchParams } from 'next/navigation'
+import { useTranslations } from 'next-intl'
+import { useEffect, useState } from 'react'
+
+import styles from './AppAuthenticationSignInProviderEmail.module.css'
 
 /* * */
 
 export default function AppAuthenticationSignInProviderEmail({ onClick }) {
-	//
+  //
 
-	//
-	// A. Setup variables
+  //
+  // A. Setup variables
 
-	const t = useTranslations('AppAuthenticationSignInProviderEmail');
-	const searchParams = useSearchParams();
+  const t = useTranslations('AppAuthenticationSignInProviderEmail');
+  const searchParams = useSearchParams();
 
-	const [inputValue, setInputValue] = useState('');
-	const [inputError, setInputError] = useState(null);
+  const [inputValue, setInputValue] = useState('');
+  const [inputError, setInputError] = useState(null);
 
-	//
-	// C. Render components
+  //
+  // C. Render components
 
-	useEffect(() => {
-		const urlHasEmailAddress = searchParams.get('email');
-		if (urlHasEmailAddress) setInputValue(urlHasEmailAddress);
-	}, [searchParams]);
+  useEffect(() => {
+    const urlHasEmailAddress = searchParams.get('email');
+    if (urlHasEmailAddress) setInputValue(urlHasEmailAddress);
+  }, [searchParams]);
 
-	//
-	// C. Handle actions
+  //
+  // C. Handle actions
 
-	const handleTextInputChange = ({ currentTarget }) => {
-		setInputValue(currentTarget.value);
-		setInputError(null);
-	};
+  const handleTextInputChange = ({ currentTarget }) => {
+    setInputValue(currentTarget.value);
+    setInputError(null);
+  };
 
-	const handleFormSubmit = async e => {
-		try {
-			e.preventDefault();
-			SignInValidation.validateSync({ email: inputValue });
-			onClick('email', { email: inputValue });
-		} catch (error) {
-			setInputError(error.message);
-		}
-	};
+  const handleFormSubmit = async (e) => {
+    try {
+      e.preventDefault();
+      SignInValidation.validateSync({ email: inputValue });
+      onClick('email', { email: inputValue });
+    }
+ catch (error) {
+      setInputError(error.message);
+    }
+  }
 
-	//
-	// C. Render components
+  //
+  // C. Render components
 
-	return (
-		<form className={styles.container} onSubmit={handleFormSubmit}>
-			<TextInput label={t('email.label')} placeholder={t('email.placeholder')} value={inputValue} onChange={handleTextInputChange} error={inputError} />
-			<button type='submit' className={styles.submitButton}>
-				{t('submit.label')}
-			</button>
-		</form>
-	);
+  return (
+    <form className={styles.container} onSubmit={handleFormSubmit}>
+      <TextInput error={inputError} label={t('email.label')} onChange={handleTextInputChange} placeholder={t('email.placeholder')} value={inputValue} />
+      <button className={styles.submitButton} type="submit">
+        {t('submit.label')}
+      </button>
+    </form>
+  )
 
-	//
+  //
 }

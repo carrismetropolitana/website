@@ -6,15 +6,15 @@ import CarrisMetropolitanaLogo from '@/components/CarrisMetropolitanaLogo/Carris
 
 export default function OpenGraphLinesDefault() {
   return (
-    <div style={{ height: '100%', width: '100%', display: 'flex', flexDirection: 'column', justifyContent: 'space-between', backgroundColor: '#fff' }}>
-      <div style={{ display: 'flex', padding: 60, backgroundColor: '#fff', alignItems: 'flex-start', justifyContent: 'flex-start', flexDirection: 'column' }}>
+    <div style={{ backgroundColor: '#fff', display: 'flex', flexDirection: 'column', height: '100%', justifyContent: 'space-between', width: '100%' }}>
+      <div style={{ alignItems: 'flex-start', backgroundColor: '#fff', display: 'flex', flexDirection: 'column', justifyContent: 'flex-start', padding: 60 }}>
         <CarrisMetropolitanaLogo height={180} />
-        <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-start', justifyContent: 'flex-start', gap: 20, marginLeft: 10, marginTop: 80 }}>
-          <div style={{ display: 'flex', fontSize: 60, fontWeight: 700, lineHeight: 1.1, color: '#000', borderRadius: 999 }}>Todas as Linhas e Horários em Tempo Real</div>
-          <div style={{ display: 'flex', fontSize: 50, fontWeight: 600, lineHeight: 1.1, color: '#919191', borderRadius: 999 }}>All Lines and Schedules in Real Time</div>
+        <div style={{ alignItems: 'flex-start', display: 'flex', flexDirection: 'column', gap: 20, justifyContent: 'flex-start', marginLeft: 10, marginTop: 80 }}>
+          <div style={{ borderRadius: 999, color: '#000', display: 'flex', fontSize: 60, fontWeight: 700, lineHeight: 1.1 }}>Todas as Linhas e Horários em Tempo Real</div>
+          <div style={{ borderRadius: 999, color: '#919191', display: 'flex', fontSize: 50, fontWeight: 600, lineHeight: 1.1 }}>All Lines and Schedules in Real Time</div>
         </div>
       </div>
-      <div style={{ height: 20, width: '100%', display: 'flex', backgroundColor: '#FFDD00' }} />
+      <div style={{ backgroundColor: '#FFDD00', display: 'flex', height: 20, width: '100%' }} />
     </div>
   );
 }
