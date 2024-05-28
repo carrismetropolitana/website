@@ -961,29 +961,29 @@
         "title": "Tudo OK",
         "description": "O painel está a funcionar corretamente."
       },
-      "inaccurate_estimates": {
-        "title": "Estimativas Incorretas",
-        "description": "O painel está ligado mas as estimativas não fazem sentido."
-      },
-      "wrong_time": {
-        "title": "Data/Hora Errada",
-        "description": "O painel está ligado mas a data/hora estão erradas. O painel está bloqueado na mesma imagem."
+      "wrong_clock": {
+        "title": "Relógio Errado",
+        "description": "O painel está ligado mas a data/hora estão incorretas."
       },
       "screen_off": {
         "title": "Painel Desligado",
-        "description": "O painel está desligado. É apresentado o logótipo da Carris Metropolitana."
+        "description": "O painel está desligado. É apresentado apenas o logótipo da Carris Metropolitana."
       },
-      "physical_damage_ok": {
+      "screen_graffiti": {
+        "title": "Graffiti / Tags / Autocolantes no Painel",
+        "description": "O painel está vandalizado. Não é possível ler a informação."
+      },
+      "screen_damage": {
+        "title": "Danos Físicos no Painel",
+        "description": "O painel está avariado (manchas, riscas). Não é possível ler a informação."
+      },
+      "structure_graffiti": {
+        "title": "Graffiti / Tags na Estrutura",
+        "description": "A estrutura está vandalizada."
+      },
+      "structure_damage": {
         "title": "Danos Físicos na Estrutura",
-        "description": "O painel funciona, mas a estrutura está danificada ou vandalizada."
-      },
-      "physical_damage_severe": {
-        "title": "Danos Físicos Graves",
-        "description": "Existem danos que impedem o correto funcionamento do painel."
-      },
-      "other": {
-        "title": "Outra Situação",
-        "description": "O painel tem outro problema."
+        "description": "A estrutura está danificada (amolgadelas, caixa torcida)."
       }
     }
   },
