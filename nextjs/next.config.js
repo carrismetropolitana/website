@@ -21,7 +21,6 @@ module.exports = withNextIntl({
       //
       { source: '/alertas', destination: '/alerts', permanent: true },
       //
-      { source: '/', destination: '/stops', permanent: false },
       { source: '/stops', destination: '/stops/all', permanent: true },
       { source: '/paragens', destination: '/stops/all', permanent: true },
       //
