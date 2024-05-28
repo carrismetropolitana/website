@@ -11,7 +11,6 @@
         "lint:fix": "eslint . --fix"
     },
     "dependencies": {
-        "@auth/mongodb-adapter": "3.1.0",
         "@mantine/carousel": "7.10.0",
         "@mantine/charts": "7.10.0",
         "@mantine/core": "7.10.0",
@@ -32,7 +31,6 @@
         "mongodb": "6.6.2",
         "mongoose": "8.4.0",
         "next": "14.2.3",
-        "next-auth": "5.0.0-beta.4",
         "next-intl": "3.14.1",
         "nodemailer": "6.9.13",
         "react": "18.3.1",
@@ -48,7 +46,6 @@
         "@types/node": "20.12.12",
         "@types/react": "18.3.3",
         "@types/react-dom": "18.3.0",
-        "@typescript-eslint/types": "7.11.0",
         "postcss": "8.4.38",
         "postcss-preset-mantine": "1.15.0",
         "postcss-simple-vars": "7.0.1",
