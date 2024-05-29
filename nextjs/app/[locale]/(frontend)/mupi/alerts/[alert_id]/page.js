@@ -5,16 +5,16 @@ import { OneFullColumn } from '@/components/Layouts/Layouts';
 /* * */
 
 export default function Page({ params }) {
-  //
+	//
 
-  //
-  // A. Render components
+	//
+	// A. Render components
 
-  return (
-    <OneFullColumn>
-      <p>ALERTS - MUPI VERSION</p>
-    </OneFullColumn>
-  )
+	return (
+		<OneFullColumn>
+			<p>ALERTS - MUPI VERSION</p>
+		</OneFullColumn>
+	);
 
-  //
+	//
 }

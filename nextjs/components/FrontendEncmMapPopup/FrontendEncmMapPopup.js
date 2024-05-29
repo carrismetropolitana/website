@@ -2,31 +2,31 @@
 
 /* * */
 
-import { useTranslations } from 'next-intl'
+import { useTranslations } from 'next-intl';
 
-import styles from './FrontendEncmMapPopup.module.css'
+import styles from './FrontendEncmMapPopup.module.css';
 
 /* * */
 
 export default function FrontendEncmMapPopup({ encmData }) {
-  //
+	//
 
-  //
-  // A. Setup variables
+	//
+	// A. Setup variables
 
-  const t = useTranslations('FrontendEncmMapPopup');
+	const t = useTranslations('FrontendEncmMapPopup');
 
-  //
-  // B. Render components
+	//
+	// B. Render components
 
-  return (
-    <div className={styles.container}>
-      <h2 className={styles.title}>{encmData.name}</h2>
-      <a className={styles.viewInList} href={`#encm${encmData.id}`}>
-        {t('view_in_list')}
-      </a>
-    </div>
-  )
+	return (
+		<div className={styles.container}>
+			<h2 className={styles.title}>{encmData.name}</h2>
+			<a className={styles.viewInList} href={`#encm${encmData.id}`}>
+				{t('view_in_list')}
+			</a>
+		</div>
+	);
 
-  //
+	//
 }

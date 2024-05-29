@@ -5,5 +5,5 @@ import AppAuthenticationLogin from '@/components/AppAuthenticationLogin/AppAuthe
 /* * */
 
 export default function Page() {
-  return <AppAuthenticationLogin />;
+	return <AppAuthenticationLogin />;
 }

@@ -1,49 +1,49 @@
 /* * */
 
 export default async function sitemap() {
-  //
+	//
 
-  //
-  // A. Setup variables
+	//
+	// A. Setup variables
 
-  const baseUrl = process.env.VERCEL_URL ? `https://${process.env.VERCEL_URL}` : `http://0.0.0.0:${process.env.PORT || 3000}`;
+	const baseUrl = process.env.VERCEL_URL ? `https://${process.env.VERCEL_URL}` : `http://0.0.0.0:${process.env.PORT || 3000}`;
 
-  //
-  // B. Fetch data
+	//
+	// B. Fetch data
 
-  const allStopsResponse = await fetch('https://api.carrismetropolitana.pt/stops');
-  const allStopsData = await allStopsResponse.json();
+	const allStopsResponse = await fetch('https://api.carrismetropolitana.pt/stops');
+	const allStopsData = await allStopsResponse.json();
 
-  //
-  // C. Transform data
+	//
+	// C. Transform data
 
-  const allStopsAsPages = allStopsData.map((stopData) => {
-    return {
-      changeFrequency: 'daily',
-      lastModified: new Date,
-      priority: 1,
-      url: `${baseUrl}/stops/${stopData.id}`,
-    }
-  });
+	const allStopsAsPages = allStopsData.map((stopData) => {
+		return {
+			changeFrequency: 'daily',
+			lastModified: (new Date()),
+			priority: 1,
+			url: `${baseUrl}/stops/${stopData.id}`,
+		};
+	});
 
-  //
-  // D. Return sitemap
+	//
+	// D. Return sitemap
 
-  return [
-    {
-      changeFrequency: 'always',
-      lastModified: new Date,
-      priority: 1,
-      url: `${baseUrl}/encm`,
-    },
-    {
-      changeFrequency: 'daily',
-      lastModified: new Date,
-      priority: 1,
-      url: `${baseUrl}/stops`,
-    },
-    ...allStopsAsPages,
-  ]
+	return [
+		{
+			changeFrequency: 'always',
+			lastModified: (new Date()),
+			priority: 1,
+			url: `${baseUrl}/encm`,
+		},
+		{
+			changeFrequency: 'daily',
+			lastModified: (new Date()),
+			priority: 1,
+			url: `${baseUrl}/stops`,
+		},
+		...allStopsAsPages,
+	];
 
-  //
+	//
 }

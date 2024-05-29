@@ -5,5 +5,5 @@ import AppAuthenticationToken from '@/components/AppAuthenticationToken/AppAuthe
 /* * */
 
 export default function Page() {
-  return <AppAuthenticationToken />;
+	return <AppAuthenticationToken />;
 }

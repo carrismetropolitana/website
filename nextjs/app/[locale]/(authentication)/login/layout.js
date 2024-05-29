@@ -5,5 +5,5 @@ import AppAuthenticationLoginWrapper from '@/components/AppAuthenticationLoginWr
 /* * */
 
 export default function Layout({ children }) {
-  return <AppAuthenticationLoginWrapper>{children}</AppAuthenticationLoginWrapper>;
+	return <AppAuthenticationLoginWrapper>{children}</AppAuthenticationLoginWrapper>;
 }

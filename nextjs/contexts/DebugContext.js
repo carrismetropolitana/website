@@ -8,21 +8,21 @@ import { createContext, useContext, useReducer } from 'react';
 // CONTEXT
 
 const DebugContext = createContext({
-  isDebug: false,
-  toggleIsDebug: () => null,
+	isDebug: false,
+	toggleIsDebug: () => null,
 });
 
 // B.
 // SETUP CUSTOM HOOKS
 
 export function useDebugContext() {
-  return useContext(DebugContext);
+	return useContext(DebugContext);
 }
 
 // C.
 // PROVIDER
 
 export const DebugContextProvider = ({ children }) => {
-  const [isDebug, toggleIsDebug] = useReducer(state => !state, false);
-  return <DebugContext.Provider value={{ isDebug: isDebug, toggleIsDebug: toggleIsDebug }}>{children}</DebugContext.Provider>;
-}
+	const [isDebug, toggleIsDebug] = useReducer(state => !state, false);
+	return <DebugContext.Provider value={{ isDebug: isDebug, toggleIsDebug: toggleIsDebug }}>{children}</DebugContext.Provider>;
+};

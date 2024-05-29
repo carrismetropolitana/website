@@ -40,7 +40,7 @@
         "swr": "2.2.5",
         "ua-parser-js": "1.0.38",
         "yup": "1.4.0",
-				"@carrismetropolitana/eslint": "2024.5.282215"
+				"@carrismetropolitana/eslint": "2024.5.1716946965"
     },
     "devDependencies": {
         "@types/node": "20.12.12",
