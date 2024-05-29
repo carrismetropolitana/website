@@ -8,9 +8,10 @@
         "build": "next build",
         "start": "next start",
         "lint": "eslint .",
-        "lint:fix": "eslint . --fix"
+        "lint:fix": "eslint . --fix && npx stylelint . --fix"
     },
     "dependencies": {
+        "@carrismetropolitana/eslint": "2024.5.1716990602",
         "@mantine/carousel": "7.10.0",
         "@mantine/charts": "7.10.0",
         "@mantine/core": "7.10.0",
@@ -39,8 +40,7 @@
         "sharp": "0.33.4",
         "swr": "2.2.5",
         "ua-parser-js": "1.0.38",
-        "yup": "1.4.0",
-				"@carrismetropolitana/eslint": "2024.5.1716946965"
+        "yup": "1.4.0"
     },
     "devDependencies": {
         "@types/node": "20.12.12",

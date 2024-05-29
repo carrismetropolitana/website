@@ -1,0 +1,112 @@
+/* * */
+
+:root {
+
+  /* * */
+  /* COLOR / BRAND */
+
+  --color-brand: #ffdd01;
+
+  /* * */
+  /* COLOR / DEBUG */
+
+	--color-debug: #055252;
+
+  /* * */
+  /* COLOR / SYSTEM */
+
+	--color-system-background-100: #ffffff;
+  --color-system-background-200: #fafafa;
+  --color-system-background-300: #f0f0f0;
+
+	--color-system-border-100: #f0f0fa;
+  --color-system-border-200: #bebec8;
+
+	--color-system-text-100: #000000;
+  --color-system-text-200: #5a5a64;
+  --color-system-text-300: #9696a0;
+  --color-system-text-400: #d2d2dc;
+
+	/* * */
+	/* COLOR / PRIMARY */
+
+	--color-primary-white: #ffffff;
+	--color-primary-black: #000000;
+
+	/* * */
+	/* COLOR / STATUS */
+
+	--color-status-info-background: #F5FAFF;
+	--color-status-info-border: #DCE6F0;
+	--color-status-info-text: #054B8C;
+
+	--color-status-ok-background: #EBF5EB;
+	--color-status-ok-border: #D7EBD7;
+	--color-status-ok-text: #2D8C3C;
+
+	--color-status-warning-background: #FFFAF5;
+	--color-status-warning-border: #FFF0D7;
+	--color-status-warning-text: #F09600;
+
+	--color-status-danger-background: #FFF5F5;
+	--color-status-danger-border: #FAE6DC;
+	--color-status-danger-text: #e64b23;
+
+	/* * */
+	/* COLOR / REALTIME */
+
+  --color-realtime-0: rgba(0, 215, 50, 0);
+  --color-realtime-5: rgba(0, 215, 50, 0.05);
+  --color-realtime-15: rgba(0, 215, 50, 0.15);
+  --color-realtime-25: rgba(0, 215, 50, 0.25);
+  --color-realtime-50: rgba(0, 215, 50, 0.5);
+  --color-realtime-75: rgba(0, 215, 50, 0.75);
+  --color-realtime-100: rgba(0, 205, 50, 1);
+
+	/* * */
+	/* SIZE / SPACING */
+
+	--size-spacing-5: 5px;
+  --size-spacing-10: 10px;
+  --size-spacing-15: 15px;
+  --size-spacing-20: 20px;
+
+	/* * */
+	/* FONT */
+
+	--font-size-heading: 26px;
+	--font-weight-heading: 'bold';
+
+	--font-size-title: 20px;
+	--font-weight-title: 'semi-bold';
+
+	--font-size-text: 14px;
+	--font-weight-text: 'medium';
+
+	--font-size-muted: 14px;
+	--font-weight-muted: 'medium';
+
+}
+
+/* * */
+
+@media (prefers-color-scheme: dark) {
+  :root {
+
+		/* * */
+		/* COLOR / SYSTEM */
+
+		--color-background-100: #3c3c46;
+		--color-background-200: #32323c;
+		--color-background-300: rgb(152, 136, 46);
+
+		--color-border-100: #50505a;
+		--color-border-200: #82828c;
+
+		--color-text-100: #ffffff;
+		--color-text-200: #c8c8d2;
+		--color-text-300: #8c8c96;
+		--color-text-400: #64646e;
+
+  }
+}

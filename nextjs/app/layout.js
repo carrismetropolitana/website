@@ -1,11 +1,7 @@
 /* * */
 
 import '@/styles/reset.css';
-import '@/styles/defaults.css';
-import '@/styles/colors.css';
-import '@mantine/core/styles.css';
-import '@mantine/dates/styles.css';
-import '@mantine/carousel/styles.css';
+import '@/styles/variables.css';
 
 /* * */
 

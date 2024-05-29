@@ -4,6 +4,7 @@
 
 import { AppAnalyticsContextProvider } from '@/contexts/AppAnalyticsContext';
 import { DebugContextProvider } from '@/contexts/DebugContext';
+import { theme } from '@/styles/theme';
 import { MantineProvider } from '@mantine/core';
 import { DatesProvider } from '@mantine/dates';
 import { ModalsProvider } from '@mantine/modals';
@@ -52,7 +53,7 @@ export default function Providers({ children }) {
 
 	return (
 		<SWRConfig value={swrSettings}>
-			<MantineProvider withGlobalStyles withNormalizeCSS>
+			<MantineProvider defaultColorScheme="auto" theme={theme}>
 				<DatesProvider settings={mantineDatesSettings}>
 					<ModalsProvider>
 						<AppAnalyticsContextProvider>
