@@ -54,5 +54,14 @@
     "yaml",
     "toml",
     "astro"
-  ]
+	],
+
+	"workbench.editor.customLabels.enabled": true,
+
+	"workbench.editor.customLabels.patterns": {
+		"**/components/**/*.js": "${dirname} (${extname})",
+		"**/components/**/*.ts": "${dirname} (${extname})",
+		"**/components/**/*.css": "${dirname} (${extname})"
+	},
+
 }

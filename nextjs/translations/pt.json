@@ -1,4 +1,11 @@
 {
+	"FrontendHomepage": {
+
+	},
+
+
+
+
   "equipments": {
     "bus": "Connection with Bus",
     "train": "Connection with Train",
@@ -494,6 +501,9 @@
     "no_results": "Nenhum Resultado Encontrado"
   },
   "FrontendHeader": {
+		"logo": {
+			"alt": "Carris Metropolitana"
+		},
     "menus": {
       "travel": {
         "label": "Viajar",

@@ -1,0 +1,28 @@
+/* * */
+/* CONTAINER */
+
+.container {
+  background-color: var(--color-system-background-100);
+	border-bottom: 1px solid var(--color-system-border-100);
+}
+
+@media all and (display-mode: standalone) {
+	.container {
+		display: none;
+  }
+}
+
+/* * */
+/* INNER WRAPPER */
+
+.innerWrapper {
+	display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+	width: 100%;
+	max-width: 1200px;
+	background-color: rgb(238, 238, 253);
+	margin: auto;
+	padding: var(--size-spacing-15) var(--size-spacing-20);
+}

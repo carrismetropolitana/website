@@ -1,0 +1,32 @@
+[
+	{
+		"id": "0001",
+		"src": "https://storage.carrismetropolitana.pt/static/assets/test/carousel_1.png",
+		"background": "#ffffff"
+	},
+	{
+		"id": "0002",
+		"src": "https://storage.carrismetropolitana.pt/static/assets/test/carousel_3.png",
+		"background": "#FFDD00"
+	},
+	{
+		"id": "0003",
+		"src": "https://storage.carrismetropolitana.pt/static/assets/test/carousel_2.png",
+		"background": "#FFDD00"
+	},
+	{
+		"id": "0004",
+		"src": "https://storage.carrismetropolitana.pt/static/assets/test/carousel_3.png",
+		"background": "#FFDD00"
+	},
+	{
+		"id": "0005",
+		"src": "https://storage.carrismetropolitana.pt/static/assets/test/carousel_1.png",
+		"background": "#ffffff"
+	},
+	{
+		"id": "0006",
+		"src": "https://storage.carrismetropolitana.pt/static/assets/test/carousel_3.png",
+		"background": "#FFDD00"
+	}
+]

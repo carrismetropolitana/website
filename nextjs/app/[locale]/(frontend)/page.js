@@ -1,14 +1,9 @@
 /* * */
 
-// import FrontendBrandSwitcher from '@/components/FrontendBrandSwitcher/FrontendBrandSwitcher';
-// import FrontendFooter from '@/components/FrontendFooter/FrontendFooter';
-// import FrontendHeader from '@/components/FrontendHeader/FrontendHeader';
-// import FrontendWrapper from '@/components/FrontendWrapper/FrontendWrapper';
-// import StatusMessage from '@/components/StatusMessage/StatusMessage';
-// import MaintenanceWarning from '@/components/MaintenanceWarning/MaintenanceWarning';
+import FrontendHomepage from '@/components/FrontendHomepage';
 
 /* * */
 
 export default function Page() {
-	return 'Homepage';
+	return <FrontendHomepage />;
 }

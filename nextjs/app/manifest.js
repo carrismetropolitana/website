@@ -1,6 +1,6 @@
 export default function manifest() {
 	return {
-		background_color: '#000000',
+		background_color: '#ffffff',
 		description: 'Horários em Tempo Real da Carris Metropolitana',
 		display: 'standalone',
 		icons: [
@@ -18,6 +18,5 @@ export default function manifest() {
 		name: 'Carris Metropolitana',
 		short_name: 'Horários',
 		start_url: '/',
-		theme_color: '#000000',
 	};
 }

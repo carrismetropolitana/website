@@ -1,0 +1,30 @@
+/* * */
+/* CONTAINER */
+
+.container {
+	width: 100%;
+	display: flex;
+	flex-direction: column;
+	align-items: flex-start;
+	justify-content: center;
+	gap: var(--size-spacing-10);
+	max-width: var(--size-global-width);
+	margin: auto;
+	padding-top: var(--size-spacing-30);
+}
+
+/* * */
+/* HEADING WRAPPER */
+
+.headingWrapper {
+	width: 100%;
+	padding-left: var(--size-spacing-20);
+	padding-right: var(--size-spacing-20);
+}
+
+/* * */
+/* CHILDREN WRAPPER */
+
+.childrenWrapper {
+	width: 100%;
+}
