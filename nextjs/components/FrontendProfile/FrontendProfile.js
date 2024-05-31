@@ -4,7 +4,6 @@
 
 import { useRouter } from '@/translations/navigation';
 import { JsonInput } from '@mantine/core';
-import { signOut, useSession } from 'next-auth/react';
 import { useEffect } from 'react';
 import useSWR from 'swr';
 
@@ -19,7 +18,6 @@ export default function FrontendProfile() {
 	// A. Setup variables
 
 	const router = useRouter();
-	const { status } = useSession();
 
 	//
 	// B. Handle actions
@@ -39,7 +37,7 @@ export default function FrontendProfile() {
 	return (
 		<div className={styles.container}>
 			<div className={styles.content}>{profileData && <JsonInput rows={10} value={JSON.stringify(profileData)} w="100%" />}</div>
-			<div className={styles.logout} onClick={signOut}>
+			<div className={styles.logout}>
 				Logout
 			</div>
 		</div>
