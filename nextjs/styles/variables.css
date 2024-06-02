@@ -130,13 +130,27 @@
 /* * */
 
 @media (prefers-color-scheme: dark) {
-  theme-light {
-    display: none;
+	theme-light {
+		display: none;
   }
 }
 
 @media (prefers-color-scheme: light) {
-  theme-dark {
+	theme-dark {
+		display: none;
+  }
+}
+
+/* * */
+
+@media only screen and (max-width: 900px) {
+  only-desktop {
+    display: none;
+  }
+}
+
+@media only screen and (min-width: 901px) {
+  only-mobile {
     display: none;
   }
 }

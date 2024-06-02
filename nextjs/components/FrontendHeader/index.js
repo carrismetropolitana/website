@@ -16,7 +16,9 @@ export default function Component() {
 				<div className={styles.mainWrapper}>
 					<FrontendHeaderLogo />
 					<div className={styles.navWrapper}>
-						<FrontendHeaderNav />
+						<only-desktop>
+							<FrontendHeaderNav />
+						</only-desktop>
 						<FrontendHeaderAccount />
 					</div>
 				</div>

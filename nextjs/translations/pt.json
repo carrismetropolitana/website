@@ -23,9 +23,23 @@
 		"contacts": "Contactos"
 	},
 	"FrontendHeaderAccount": {
-		"configs": "Personalizar",
+		"configs": "Personalizar Experiência",
 		"favorites": "Favoritos",
 		"history": "Histórico de Pesquisa"
+	},
+	"FrontendHeaderLocaleSwitcher": {
+		"pt": {
+			"label": "🇵🇹",
+			"alt": "Português"
+		},
+		"en": {
+			"label": "🇬🇧",
+			"alt": "English"
+		},
+		"fr": {
+			"label": "🇫🇷",
+			"alt": "Français"
+		}
 	},
 
 	"FrontendHomepage": {

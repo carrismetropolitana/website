@@ -2,9 +2,8 @@
 
 /* * */
 
-import { Link } from '@/translations/navigation';
+import FrontendHeaderNavLink from '@/components/FrontendHeaderNavLink';
 import { Menu, UnstyledButton } from '@mantine/core';
-import { IconArrowNarrowRight } from '@tabler/icons-react';
 import { useTranslations } from 'next-intl';
 import { useState } from 'react';
 
@@ -26,7 +25,7 @@ export default function Component({ item }) {
 
 	return (
 		<Menu
-			classNames={{ dropdown: styles.menuDropdown, item: styles.menuDropdownItem }}
+			classNames={{ dropdown: styles.menuDropdown }}
 			loop={false}
 			menuItemTabIndex={0}
 			offset={0}
@@ -41,9 +40,7 @@ export default function Component({ item }) {
 			</Menu.Target>
 			<Menu.Dropdown>
 				{item.links.map(link => (
-					<Menu.Item key={link._id} component={Link} href={link.href} leftSection={link.icon} rightSection={<IconArrowNarrowRight className={styles.menuDropdownItemRightSection} size={20} />} target={link.target}>
-						{t(link._id)}
-					</Menu.Item>
+					<Menu.Item key={link._id} component={FrontendHeaderNavLink} href={link.href} icon={link.icon} label={t(link._id)} target={link.target} />
 				))}
 			</Menu.Dropdown>
 		</Menu>

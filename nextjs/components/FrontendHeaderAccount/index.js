@@ -2,12 +2,13 @@
 
 /* * */
 
+import FrontendHeaderLocaleSwitcher from '@/components/FrontendHeaderLocaleSwitcher';
+import FrontendHeaderNavLink from '@/components/FrontendHeaderNavLink';
 import FrontendUserAvatar from '@/components/FrontendUserAvatar';
-import { Link } from '@/translations/navigation';
-import { Box, Menu, SegmentedControl } from '@mantine/core';
-import { IconArrowLoopRight, IconArrowNarrowRight, IconListSearch, IconSparkles, IconStar } from '@tabler/icons-react';
+import { CloseButton, Drawer } from '@mantine/core';
+import { useDisclosure } from '@mantine/hooks';
+import { IconListSearch, IconSparkles, IconStar } from '@tabler/icons-react';
 import { useTranslations } from 'next-intl';
-import { useState } from 'react';
 
 import styles from './styles.module.css';
 
@@ -28,45 +29,36 @@ export default function Component() {
 	// A. Setup variables
 
 	const t = useTranslations('FrontendHeaderAccount');
-	const [isOpen, setIsOpen] = useState(false);
+	const [isDrawerOpen, { close: closeDrawer, open: openDrawer }] = useDisclosure(false);
 
 	//
 	// B. Render Components
 
 	return (
-		<Menu
-			classNames={{ dropdown: styles.menuDropdown, item: styles.menuDropdownItem }}
-			loop={false}
-			menuItemTabIndex={0}
-			offset={-70}
-			onChange={setIsOpen}
-			opened={isOpen}
-			position="bottom-end"
-			trigger="click-hover"
-			withinPortal={false}
-		>
-			<Menu.Target>
-				<Box>
-					<FrontendUserAvatar />
-				</Box>
-			</Menu.Target>
-			<Menu.Dropdown>
-				<Menu.Item className={styles.profileMenuItem} component={Link} href="/profile">
-					<div className={styles.profileMenuItemInner}>
-						Polvo Ecológico
-						<FrontendUserAvatar />
-					</div>
-				</Menu.Item>
-				{NAV_ITEMS.map(link => (
-					<Menu.Item key={link._id} component={Link} href={link.href} leftSection={link.icon} rightSection={<IconArrowNarrowRight className={styles.menuDropdownItemRightSection} size={20} />} target={link.target}>
-						{t(link._id)}
-					</Menu.Item>
-				))}
-				<Menu.Item>
-					<SegmentedControl data={['PT', 'EN']} w="100%" />
-				</Menu.Item>
-			</Menu.Dropdown>
-		</Menu>
+		<>
+			<Drawer
+				onClose={closeDrawer}
+				opened={isDrawerOpen}
+				overlayProps={{ backgroundOpacity: 0.5, blur: 4 }}
+				position="right"
+				styles={{ body: { padding: 0 } }}
+				withCloseButton={false}
+			>
+				<div className={styles.userProfile}>
+					<FrontendUserAvatar withName />
+					<CloseButton onClick={closeDrawer} />
+				</div>
+				<div className={styles.navList}>
+					{NAV_ITEMS.map(item => (
+						<FrontendHeaderNavLink href={item.href} icon={item.icon} label={t(item._id)} />
+					))}
+				</div>
+				<div className={styles.componentWrapper}>
+					<FrontendHeaderLocaleSwitcher />
+				</div>
+			</Drawer>
+			<FrontendUserAvatar component="button" onClick={openDrawer} />
+		</>
 	);
 
 	//
