@@ -50,7 +50,7 @@ export default function Component() {
 				</div>
 				<div className={styles.navList}>
 					{NAV_ITEMS.map(item => (
-						<FrontendHeaderNavLink href={item.href} icon={item.icon} label={t(item._id)} />
+						<FrontendHeaderNavLink key={item._id} href={item.href} icon={item.icon} label={t(item._id)} />
 					))}
 				</div>
 				<div className={styles.componentWrapper}>

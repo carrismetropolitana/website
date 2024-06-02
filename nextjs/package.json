@@ -11,7 +11,7 @@
         "lint:fix": "eslint . --fix && npx stylelint . --fix"
     },
     "dependencies": {
-        "@carrismetropolitana/eslint": "2024.5.1717005279",
+        "@carrismetropolitana/eslint": "2024.6.1717351375",
         "@mantine/carousel": "7.10.1",
         "@mantine/charts": "7.10.1",
         "@mantine/core": "7.10.1",
@@ -42,7 +42,7 @@
         "yup": "1.4.0"
     },
     "devDependencies": {
-        "@types/node": "20.12.13",
+        "@types/node": "20.13.0",
         "@types/react": "18.3.3",
         "@types/react-dom": "18.3.0",
         "postcss": "8.4.38",

@@ -5,7 +5,7 @@
 import FrontendUserAvatar from '@/components/FrontendUserAvatar';
 import { Link } from '@/translations/navigation';
 import { Box, Menu, SegmentedControl } from '@mantine/core';
-import { IconArrowLoopRight, IconArrowNarrowRight, IconListSearch, IconSparkles, IconStar } from '@tabler/icons-react';
+import { IconArrowNarrowRight, IconListSearch, IconSparkles, IconStar } from '@tabler/icons-react';
 import { useTranslations } from 'next-intl';
 import { useState } from 'react';
 
