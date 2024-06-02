@@ -10,7 +10,7 @@ import FrontendHomepageTravel from '@/components/FrontendHomepageTravel';
 export default function Component() {
 	return (
 		<>
-			<FrontendHomepageCarousel />
+			{/* <FrontendHomepageCarousel /> */}
 			<FrontendHomepageTravel />
 			<FrontendHomepageNews />
 			<FrontendHomepageSupport />

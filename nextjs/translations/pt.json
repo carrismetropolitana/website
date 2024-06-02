@@ -1,4 +1,33 @@
 {
+	"FrontendHeaderLogo": {
+		"logo": {
+			"alt": "Carris Metropolitana"
+		}
+	},
+	"FrontendHeaderNavItem": {
+		"schedules": "Horários",
+		"lines": "Pesquisar Linhas",
+		"stops": "Pesquisar Paragens",
+		"alerts": "Alertas de Serviço",
+		"planner": "Planear Viagem",
+		"schools": "Escolas & Universidades",
+		"flyers": "O Meu Livro de Horários",
+		"tarifs": "Tarifas",
+		"tickets": "Bilhetes de Bordo",
+		"navegante": "Sistema navegante®",
+		"stores": "Lojas e Rede de Agentes",
+		"help": "Apoio ao Cliente",
+		"faq": "Perguntas Frequentes",
+		"lost-and-found": "Perdidos e Achados",
+		"complaints": "Sugestões e Reclamações",
+		"contacts": "Contactos"
+	},
+	"FrontendHeaderAccount": {
+		"configs": "Personalizar",
+		"favorites": "Favoritos",
+		"history": "Histórico de Pesquisa"
+	},
+
 	"FrontendHomepage": {
 
 	},
@@ -501,9 +530,6 @@
     "no_results": "Nenhum Resultado Encontrado"
   },
   "FrontendHeader": {
-		"logo": {
-			"alt": "Carris Metropolitana"
-		},
     "menus": {
       "travel": {
         "label": "Viajar",

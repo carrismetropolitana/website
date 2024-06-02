@@ -2,6 +2,6 @@
 /* CONTAINER */
 
 .container {
-	width: 100%;
-	background-color: var(--color-system-background-200);
+	margin: auto;
+	max-width: var(--size-global-width);
 }

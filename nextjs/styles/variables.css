@@ -80,11 +80,21 @@
 	/* * */
 	/* FONT */
 
+	--font-weight-bold: 700; /* SemiBold */
+	--font-weight-semibold: 600; /* SemiBold */
+	--font-weight-medium: 500; /* SemiBold */
+
 	--font-size-heading: 26px;
 	--font-weight-heading: 700; /* Bold */
 
 	--font-size-title: 20px;
 	--font-weight-title: 600; /* SemiBold */
+
+	--font-size-subtitle: 18px;
+	--font-weight-subtitle: 600; /* SemiBold */
+
+	--font-size-nav: 16px;
+	--font-weight-nav: 600; /* SemiBold */
 
 	--font-size-text: 14px;
 	--font-weight-text: 500; /* Medium */
@@ -104,7 +114,7 @@
 
 		--color-system-background-100: #3c3c46;
 		--color-system-background-200: #32323c;
-		--color-system-background-300: rgb(152, 136, 46);
+		--color-system-background-300: #282832;
 
 		--color-system-border-100: #50505a;
 		--color-system-border-200: #82828c;
@@ -114,6 +124,20 @@
 		--color-system-text-300: #8c8c96;
 		--color-system-text-400: #64646e;
 
+  }
+}
+
+/* * */
+
+@media (prefers-color-scheme: dark) {
+  theme-light {
+    display: none;
+  }
+}
+
+@media (prefers-color-scheme: light) {
+  theme-dark {
+    display: none;
   }
 }
 
