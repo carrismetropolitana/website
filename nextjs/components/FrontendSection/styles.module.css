@@ -11,6 +11,15 @@
 	max-width: var(--size-global-width);
 	margin: auto;
 	padding-top: var(--size-spacing-30);
+	background-color: var(--color-system-background-100);
+	border-top: 1px solid var(--color-system-border-100);
+}
+
+@media (max-width: 500px) {
+	.container {
+		background-color: transparent;
+		border-top: none;
+	}
 }
 
 /* * */

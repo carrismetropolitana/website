@@ -4,17 +4,16 @@
 
 import FrontendGridNav from '@/components/FrontendGridNav';
 import FrontendSection from '@/components/FrontendSection';
-import { IconHelpHexagon, IconMessage, IconPhoneCheck, IconUmbrella, IconUserPentagon } from '@tabler/icons-react';
+import { IconAlertTriangle, IconArrowLoopRight, IconBusStop, IconSignRight } from '@tabler/icons-react';
 import { useTranslations } from 'next-intl';
 
 /* * */
 
 const MENU_ITEMS = [
-	{ _id: 'faq', href: '/', icon: <IconHelpHexagon /> },
-	{ _id: 'lost-and-found', href: '/', icon: <IconUmbrella /> },
-	{ _id: 'complaints', href: '/', icon: <IconMessage /> },
-	{ _id: 'stores', href: '/', icon: <IconUserPentagon /> },
-	{ _id: 'contacts', href: '/', icon: <IconPhoneCheck /> },
+	{ _id: 'lines', href: '/', icon: <IconArrowLoopRight size={20} /> },
+	{ _id: 'stops', href: '/', icon: <IconBusStop size={20} /> },
+	{ _id: 'planner', href: '/', icon: <IconSignRight size={20} /> },
+	{ _id: 'alerts', href: '/', icon: <IconAlertTriangle size={20} /> },
 ];
 
 /* * */
@@ -25,7 +24,7 @@ export default function Component() {
 	//
 	// A. Setup variables
 
-	const t = useTranslations('FrontendHomepageSupport');
+	const t = useTranslations('FrontendHomepageSchedules');
 
 	//
 	// B. Transform data

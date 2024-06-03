@@ -2,8 +2,8 @@
 
 import FrontendHomepageCarousel from '@/components/FrontendHomepageCarousel';
 import FrontendHomepageNews from '@/components/FrontendHomepageNews';
+import FrontendHomepageSchedules from '@/components/FrontendHomepageSchedules';
 import FrontendHomepageSupport from '@/components/FrontendHomepageSupport';
-import FrontendHomepageTravel from '@/components/FrontendHomepageTravel';
 
 import styles from './styles.module.css';
 
@@ -18,7 +18,7 @@ export default function Component() {
 					<FrontendHomepageCarousel />
 				</div>
 			</div>
-			<FrontendHomepageTravel />
+			<FrontendHomepageSchedules />
 			<FrontendHomepageNews />
 			<FrontendHomepageSupport />
 		</>

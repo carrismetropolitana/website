@@ -31,7 +31,7 @@ export default function Component() {
 
 	return (
 		<FrontendSection heading="Notícias">
-			<FrontendGridNav items={MENU_ITEMS} />
+			news slider
 		</FrontendSection>
 	);
 

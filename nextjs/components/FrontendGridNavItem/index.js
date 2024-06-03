@@ -1,7 +1,7 @@
 /* * */
 
 import { Link } from '@/translations/navigation';
-import { IconArrowRight } from '@tabler/icons-react';
+import { IconArrowNarrowRight, IconArrowRight } from '@tabler/icons-react';
 
 import styles from './styles.module.css';
 
@@ -13,9 +13,9 @@ export default function Component({ href = '/', icon, label }) {
 			<div className={styles.iconWrapper}>
 				{icon}
 			</div>
-			<span className={styles.label}>{label}</span>
+			<div className={styles.label}>{label}</div>
 			<div className={styles.arrowWrapper}>
-				<IconArrowRight size={22} />
+				<IconArrowNarrowRight size={20} />
 			</div>
 		</Link>
 	);

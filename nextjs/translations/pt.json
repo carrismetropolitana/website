@@ -41,6 +41,25 @@
 			"alt": "Français"
 		}
 	},
+	"FrontendHomepageSchedules": {
+		"section_heading":"Horários",
+		"nav_items": {
+			"lines": "Pesquisar Linhas",
+			"stops": "Pesquisar Paragens",
+			"planner": "Planear Viagem",
+			"alerts": "Alertas de Serviço"
+		}
+	},
+	"FrontendHomepageSupport": {
+		"section_heading":"Apoio ao Cliente",
+		"nav_items": {
+			"faq": "Perguntas Frequentes",
+			"lost-and-found": "Perdidos e Achados",
+			"complaints": "Sugestões e Reclamações",
+			"stores": "Lojas e Rede de Agentes",
+			"contacts":"Contactos"
+		}
+	},
 
 	"FrontendHomepage": {
 
