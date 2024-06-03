@@ -27,6 +27,7 @@
 
 .headingWrapper {
 	width: 100%;
+	margin-left: var(--size-spacing-5);
 	padding-left: var(--size-spacing-20);
 	padding-right: var(--size-spacing-20);
 }

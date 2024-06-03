@@ -68,6 +68,15 @@
 			"alerts": "Alertas de Serviço"
 		}
 	},
+	"FrontendHomepageNews": {
+		"section_heading": "Notícias",
+		"nav_items": {
+			"news": "Notícias",
+			"events": "Eventos",
+			"promotions": "Promoções"
+		}
+
+	},
 	"FrontendHomepageSupport": {
 		"section_heading":"Apoio ao Cliente",
 		"nav_items": {
@@ -79,8 +88,8 @@
 		}
 	},
 
-	"FrontendHomepage": {
-
+	"FrontendNewsCard": {
+		"publish_date": "{publishDate, date, long}"
 	},
 
 

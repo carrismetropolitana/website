@@ -1,0 +1,38 @@
+[
+	{
+		"id": "0001",
+		"date": "2020-01-01",
+		"src": "https://storage.carrismetropolitana.pt/static/assets/test/carousel_1.png",
+		"title": "Rock in Rio: a Carris Metropolitana vai!"
+	},
+	{
+		"id": "0002",
+		"date": "2020-02-02",
+		"src": "https://storage.carrismetropolitana.pt/static/assets/test/carousel_3.png",
+		"title": "Rock in Rio: a Carris Metropolitana vai!"
+	},
+	{
+		"id": "0003",
+		"date": "2020-03-03",
+		"src": "https://storage.carrismetropolitana.pt/static/assets/test/carousel_2.png",
+		"title": "Rock in Rio: a Carris Metropolitana vai!"
+	},
+	{
+		"id": "0004",
+		"date": "2020-04-04",
+		"src": "https://storage.carrismetropolitana.pt/static/assets/test/carousel_3.png",
+		"title": "Rock in Rio: a Carris Metropolitana vai!"
+	},
+	{
+		"id": "0005",
+		"date": "2020-05-05",
+		"src": "https://storage.carrismetropolitana.pt/static/assets/test/carousel_1.png",
+		"title": "Rock in Rio: a Carris Metropolitana vai!"
+	},
+	{
+		"id": "0006",
+		"date": "2020-06-06",
+		"src": "https://storage.carrismetropolitana.pt/static/assets/test/carousel_3.png",
+		"title": "Rock in Rio: a Carris Metropolitana vai!"
+	}
+]

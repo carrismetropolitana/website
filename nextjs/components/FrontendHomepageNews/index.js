@@ -3,20 +3,14 @@
 /* * */
 
 import FrontendGridNav from '@/components/FrontendGridNav';
+import FrontendNewsCard from '@/components/FrontendNewsCard';
 import FrontendSection from '@/components/FrontendSection';
-import FrontendText from '@/components/FrontendText';
-import { IconAlertTriangle, IconArrowLoopRight, IconBusStop, IconSignRight } from '@tabler/icons-react';
+import { Carousel } from '@mantine/carousel';
+import { IconAlertTriangle, IconArrowLeft, IconArrowLoopRight, IconArrowRight, IconBusStop, IconSignRight } from '@tabler/icons-react';
+import { useTranslations } from 'next-intl';
 
+import data from './data.json';
 import styles from './styles.module.css';
-
-/* * */
-
-const MENU_ITEMS = [
-	{ href: '/', icon: <IconArrowLoopRight />, label: 'Horários por Linha' },
-	{ href: '/', icon: <IconBusStop />, label: 'Horários por Paragem' },
-	{ href: '/', icon: <IconSignRight />, label: 'Planear Viagem' },
-	{ href: '/', icon: <IconAlertTriangle />, label: 'Alertas de Serviço' },
-];
 
 /* * */
 
@@ -26,12 +20,32 @@ export default function Component() {
 	//
 	// A. Setup variables
 
+	const t = useTranslations('FrontendHomepageNews');
+
 	//
 	// C. Render Components
 
 	return (
-		<FrontendSection heading="Notícias">
-			news slider
+		<FrontendSection heading={t('section_heading')}>
+			<Carousel
+				align="start"
+				classNames={{ control: styles.carouselControl, controls: styles.carouselControlsWrapper }}
+				height="100%"
+				nextControlIcon={<IconArrowRight size={20} />}
+				previousControlIcon={<IconArrowLeft size={20} />}
+				slideGap={1}
+				slideSize={360}
+				dragFree
+				withIndicators
+			>
+				{data.map((item, index) => (
+					<Carousel.Slide key={index}>
+						<div className={styles.slideWrapper}>
+							<FrontendNewsCard coverImageSrc={item.src} publishDate={item.date} title={item.title} />
+						</div>
+					</Carousel.Slide>
+				))}
+			</Carousel>
 		</FrontendSection>
 	);
 
