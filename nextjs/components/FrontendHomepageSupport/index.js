@@ -7,6 +7,8 @@ import FrontendSection from '@/components/FrontendSection';
 import { IconHelpHexagon, IconMessage, IconPhoneCheck, IconUmbrella, IconUserPentagon } from '@tabler/icons-react';
 import { useTranslations } from 'next-intl';
 
+import styles from './styles.module.css';
+
 /* * */
 
 const MENU_ITEMS = [
@@ -37,7 +39,7 @@ export default function Component() {
 
 	return (
 		<FrontendSection heading={t('section_heading')}>
-			<FrontendGridNav items={menuItemsFormatted} />
+			<FrontendGridNav className={styles.gridNav} items={menuItemsFormatted} />
 		</FrontendSection>
 	);
 

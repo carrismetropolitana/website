@@ -1,0 +1,10 @@
+/* * */
+/* TOGGLE */
+
+.toggle {
+	cursor: pointer;
+}
+
+.enabled.toggle {
+  color: var(--color-debug);
+}

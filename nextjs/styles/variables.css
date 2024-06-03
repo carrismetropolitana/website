@@ -76,6 +76,7 @@
   --size-spacing-15: 15px;
   --size-spacing-20: 20px;
   --size-spacing-30: 30px;
+  --size-spacing-60: 60px;
 
 	/* * */
 	/* FONT */
@@ -99,7 +100,7 @@
 	--font-size-text: 14px;
 	--font-weight-text: 500; /* Medium */
 
-	--font-size-muted: 14px;
+	--font-size-muted: 12px;
 	--font-weight-muted: 500; /* SemiBold */
 
 }
