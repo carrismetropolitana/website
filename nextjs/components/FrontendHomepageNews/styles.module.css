@@ -2,8 +2,8 @@
 /* SLIDE WRAPPER */
 
 .slideWrapper {
-	padding-left: var(--size-spacing-20);
-  padding-bottom: var(--size-spacing-20);
+	padding: var(--size-spacing-20);
+	padding-right: 0;
 }
 
 /* * */
