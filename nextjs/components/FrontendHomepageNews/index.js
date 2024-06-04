@@ -2,11 +2,10 @@
 
 /* * */
 
-import FrontendGridNav from '@/components/FrontendGridNav';
 import FrontendNewsCard from '@/components/FrontendNewsCard';
 import FrontendSection from '@/components/FrontendSection';
 import { Carousel } from '@mantine/carousel';
-import { IconAlertTriangle, IconArrowLeft, IconArrowLoopRight, IconArrowRight, IconBusStop, IconSignRight } from '@tabler/icons-react';
+import { IconArrowLeft, IconArrowRight } from '@tabler/icons-react';
 import { useTranslations } from 'next-intl';
 
 import data from './data.json';
