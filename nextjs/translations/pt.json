@@ -730,11 +730,11 @@
   },
   "StopOptions": {
     "operational_status": {
-      "active": "Paragem Ativa",
-      "provisional": "Paragem Provisória",
-      "seasonal": "Paragem Sasonal",
-      "inactive": "Paragem Inativa",
-      "voided": "Voided"
+      "ACTIVE": "Paragem Ativa",
+      "PROVISIONAL": "Paragem Provisória",
+      "SEASONAL": "Paragem Sasonal",
+      "INACTIVE": "Paragem Inativa",
+      "VOIDED": "Voided"
     }
   },
   "FrontendStopsTimetable": {

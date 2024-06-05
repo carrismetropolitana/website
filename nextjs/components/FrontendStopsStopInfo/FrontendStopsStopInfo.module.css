@@ -58,11 +58,11 @@
   color: var(--gray-5);
 }
 
-.operationalStatus_inactive .stopLocation {
+.operationalStatus_INACTIVE .stopLocation {
   color: var(--gray-3);
 }
 
-.operationalStatus_voided .stopLocation {
+.operationalStatus_VOIDED .stopLocation {
   color: #7d2819;
 }
 

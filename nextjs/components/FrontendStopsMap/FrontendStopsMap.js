@@ -54,12 +54,12 @@ export default function FrontendStopsMap() {
 				let currentStatus;
 				switch (stop.operational_status) {
 					default:
-					case 'active':
-					case 'voided':
+					case 'ACTIVE':
+					case 'VOIDED':
 						currentStatus = stop.operational_status;
 						break;
-					case 'seasonal':
-					case 'provisional':
+					case 'SEASONAL':
+					case 'PROVISIONAL':
 						if (!stop.lines.length) currentStatus = 'inactive';
 						else currentStatus = 'active';
 						break;
