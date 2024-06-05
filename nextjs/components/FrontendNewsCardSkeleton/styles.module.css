@@ -14,7 +14,6 @@
   aspect-ratio: 16 / 9;
 	overflow: hidden;
 	width: 100%;
-	border-radius: 5px;
 	border: 1px solid var(--color-system-border-100);
 	background-color: var(--color-brand);
 }
@@ -23,19 +22,19 @@
 /* PUBLISH DATE */
 
 .publishDate {
-	font-size: var(--font-size-muted);
-	font-weight: var(--font-weight-muted);
-  color: var(--color-system-text-300);
-	margin-top: var(--size-spacing-5);
-	margin-left: var(--size-spacing-5);
+	width: 30%;
+	height: 10px;
 }
 
 /* * */
 /* TITLE */
 
-.title {
-	font-size: var(--font-size-text);
-	font-weight: var(--font-weight-bold);
-  color: var(--color-system-text-100);
-	margin-left: var(--size-spacing-5);
+.titleOne {
+	width: 80%;
+	height: 15px;
+}
+
+.titleTwo {
+	width: 60%;
+	height: 15px;
 }

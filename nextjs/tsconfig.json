@@ -8,6 +8,7 @@
     "paths": {
       "@/authentication/*": ["authentication/*"],
       "@/styles/*": ["styles/*"],
+      "@/utils/*": ["utils/*"],
       "@/forms/*": ["forms/*"],
       "@/components/*": ["components/*"],
       "@/hooks/*": ["hooks/*"],

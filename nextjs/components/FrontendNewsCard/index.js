@@ -17,15 +17,15 @@ export default function Component({ coverImageSrc, href = '', publishDate, title
 
 	const t = useTranslations('FrontendNewsCard');
 
-	const publishDateObject = DateTime.fromFormat(publishDate, 'yyyy-mm-dd').toJSDate();
+	const publishDateObject = DateTime.fromISO(publishDate).toJSDate();
 
 	//
 	// C. Render Components
 
 	return (
 		<Link className={styles.container} href={href}>
-			<Image alt={title} className={styles.coverImage} src={coverImageSrc} />
-			<p className={styles.date}>{t('publish_date', { publishDate: publishDateObject })}</p>
+			<Image alt={title} className={styles.coverImage} fallbackSrc="/news/placeholder.png" src={coverImageSrc} />
+			<p className={styles.publishDate}>{t('publish_date', { publishDate: publishDateObject })}</p>
 			<h4 className={styles.title}>{title}</h4>
 		</Link>
 	);
