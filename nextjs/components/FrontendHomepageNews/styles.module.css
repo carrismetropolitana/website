@@ -7,6 +7,19 @@
 }
 
 /* * */
+/* CAROUSEL CONTAINER */
+
+.carouselContainer {
+	width: 360px;
+}
+
+@media only screen and (max-width: 900px) {
+  .carouselContainer {
+    width: 300px;
+  }
+}
+
+/* * */
 /* CAROUSEL CONTROLS WRAPPER */
 
 .carouselControlsWrapper {
@@ -15,6 +28,12 @@
 	align-items: center;
 	width: 100%;
 	padding: 0 var(--size-spacing-30);
+}
+
+@media only screen and (max-width: 900px) {
+  .carouselControlsWrapper {
+    display: none;
+  }
 }
 
 /* * */

@@ -11,7 +11,7 @@ import styles from './styles.module.css';
 
 export default function Component({ href, icon, label, target, ...props }) {
 	return (
-		<Link href={href} leftSection={icon} target={target} {...props} className={styles.container}>
+		<Link href={href} target={target} {...props} className={styles.container}>
 			<span className={styles.icon}>
 				{icon}
 			</span>

@@ -25,8 +25,10 @@
 
 @media (max-width: 500px) {
 	.container {
+		border-left: none;
+		border-right: none;
 		padding: var(--size-spacing-15) var(--size-spacing-20);
-	border-top: 1px solid var(--color-system-border-100);
+		border-top: 1px solid var(--color-system-border-100);
 	}
 	.container:last-child {
 		border-bottom: 1px solid var(--color-system-border-100);

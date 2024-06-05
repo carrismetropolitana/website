@@ -5,9 +5,17 @@
 import FrontendHeaderNavLink from '@/components/FrontendHeaderNavLink';
 import { Menu, UnstyledButton } from '@mantine/core';
 import { useTranslations } from 'next-intl';
-import { useState } from 'react';
+import { forwardRef, useState } from 'react';
 
 import styles from './styles.module.css';
+
+/* * */
+
+const MenuItemProxy = forwardRef(
+	({ href, icon, label, target, ...others }, ref) => (
+		<FrontendHeaderNavLink ref={ref} href={href} icon={icon} label={label} target={target} {...others} />
+	),
+);
 
 /* * */
 
@@ -40,7 +48,7 @@ export default function Component({ item }) {
 			</Menu.Target>
 			<Menu.Dropdown>
 				{item.links.map(link => (
-					<Menu.Item key={link._id} component={FrontendHeaderNavLink} href={link.href} icon={link.icon} label={t(link._id)} target={link.target} />
+					<MenuItemProxy key={link._id} href={link.href} icon={link.icon} label={t(link._id)} target={link.target} />
 				))}
 			</Menu.Dropdown>
 		</Menu>

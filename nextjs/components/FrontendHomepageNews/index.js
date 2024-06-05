@@ -28,13 +28,14 @@ export default function Component() {
 		<FrontendSection heading={t('section_heading')}>
 			<Carousel
 				align="start"
-				classNames={{ control: styles.carouselControl, controls: styles.carouselControlsWrapper }}
+				classNames={{ container: styles.carouselContainer, control: styles.carouselControl, controls: styles.carouselControlsWrapper }}
 				height="100%"
 				nextControlIcon={<IconArrowRight size={20} />}
 				previousControlIcon={<IconArrowLeft size={20} />}
 				slideGap={1}
-				slideSize={360}
+				// slideSize={300}
 				dragFree
+				skipSnaps
 				withIndicators
 			>
 				{data.map((item, index) => (

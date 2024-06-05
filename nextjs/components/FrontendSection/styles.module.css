@@ -16,6 +16,7 @@
 
 @media (max-width: 500px) {
 	.container {
+		gap: var(--size-spacing-15);
 		background-color: transparent;
 		border-top: none;
 	}
@@ -26,8 +27,7 @@
 
 .headingWrapper {
 	width: 100%;
-	margin-left: var(--size-spacing-5);
-	padding-left: var(--size-spacing-20);
+	padding-left: var(--size-spacing-25);
 	padding-right: var(--size-spacing-20);
 }
 
