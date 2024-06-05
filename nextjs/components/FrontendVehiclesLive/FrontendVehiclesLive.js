@@ -2,24 +2,25 @@
 
 /* * */
 
-import useSWR from 'swr';
+import CopyBadge from '@/components/CopyBadge/CopyBadge';
 import OSMMap from '@/components/OSMMap/OSMMap';
-import styles from './FrontendVehiclesLive.module.css';
-import { useCallback, useEffect, useMemo, useState } from 'react';
-import * as turf from '@turf/turf';
-import { useMap, Source, Layer, Popup, GeolocateControl } from 'react-map-gl/maplibre';
 import { useDebugContext } from '@/contexts/DebugContext';
 import generateUUID from '@/services/generateUUID';
-import CopyBadge from '@/components/CopyBadge/CopyBadge';
+import * as turf from '@turf/turf';
 import { useTranslations } from 'next-intl';
+import { useCallback, useEffect, useMemo, useState } from 'react';
+import { GeolocateControl, Layer, Popup, Source, useMap } from 'react-map-gl/maplibre';
+import useSWR from 'swr';
+
+import styles from './FrontendVehiclesLive.module.css';
 /* * */
 
 const MAP_DEFAULT_OPTIONS = {
-	speed: 4000,
 	duration: 2000,
+	maxZoom: 16,
+	speed: 4000,
 	zoom: 17,
 	zoomMargin: 3,
-	maxZoom: 16,
 };
 
 /* * */
@@ -47,19 +48,19 @@ export default function FrontendLinesLive() {
 
 	//
 	// C. Transform data
-	let mappedVehiclesInfo = new Map;
+	let mappedVehiclesInfo = (new Map());
 	if (vehiclesInfo) {
 		for (const vehicleInfo of vehiclesInfo) {
 			let relevantInfo = {
-				owner: vehicleInfo.owner,
-				make: vehicleInfo.make,
-				model: vehicleInfo.model,
 				available_seats: vehicleInfo.available_seats,
 				available_standing: vehicleInfo.available_standing,
-				propulsion: t('propulsion.' + vehicleInfo.propulsion),
-				climatization: !!vehicleInfo.climatization,
-				wheelchair: vehicleInfo.wheelchair ? 'manual' : vehicleInfo.folding_system ? 'eletric' : null,
 				bicycles: !!vehicleInfo.bicycles,
+				climatization: !!vehicleInfo.climatization,
+				make: vehicleInfo.make,
+				model: vehicleInfo.model,
+				owner: vehicleInfo.owner,
+				propulsion: t('propulsion.' + vehicleInfo.propulsion),
+				wheelchair: vehicleInfo.wheelchair ? 'manual' : vehicleInfo.folding_system ? 'eletric' : null,
 			};
 			mappedVehiclesInfo.set(vehicleInfo.id, relevantInfo);
 		}
@@ -105,19 +106,19 @@ export default function FrontendLinesLive() {
 	const selectedShapeData = null;
 
 	const allStopsMapData = useMemo(() => {
-		const geoJSON = { type: 'FeatureCollection', features: [] };
+		const geoJSON = { features: [], type: 'FeatureCollection' };
 		if (allStopsData) {
 			for (const stop of allStopsData) {
 				geoJSON.features.push({
-					type: 'Feature',
-					geometry: { type: 'Point', coordinates: [stop.lon, stop.lat] },
+					geometry: { coordinates: [stop.lon, stop.lat], type: 'Point' },
 					properties: {
-						mapid: `${stop.id}|${generateUUID()}`,
 						id: stop.id,
-						name: stop.name,
 						lat: stop.lat,
 						lon: stop.lon,
+						mapid: `${stop.id}|${generateUUID()}`,
+						name: stop.name,
 					},
+					type: 'Feature',
 				});
 			}
 		}
@@ -125,26 +126,26 @@ export default function FrontendLinesLive() {
 	}, [allStopsData]);
 
 	// const patternStopsMapData = useMemo(() => {
-	// 	if (!frontendLinesContext.entities.pattern?.path?.length) return null;
-	// 	const geoJSON = { type: 'FeatureCollection', features: [] };
+	// 	if (!frontendLinesContext.entities.pattern?.path?.length) return null
+	// 	const geoJSON = { features: [], type: 'FeatureCollection' }
 	// 	for (const patternPath of frontendLinesContext.entities.pattern.path) {
 	// 		geoJSON.features.push({
-	// 			type: 'Feature',
-	// 			geometry: { type: 'Point', coordinates: [patternPath.stop.lon, patternPath.stop.lat] },
+	// 			geometry: { coordinates: [patternPath.stop.lon, patternPath.stop.lat], type: 'Point' },
 	// 			properties: {
-	// 				mapid: `${patternPath.stop.id}|${generateUUID()}`,
+	// 				color: frontendLinesContext.entities.pattern.color,
 	// 				id: patternPath.stop.id,
-	// 				name: patternPath.stop.name,
 	// 				lat: patternPath.stop.lat,
 	// 				lon: patternPath.stop.lon,
+	// 				mapid: `${patternPath.stop.id}|${generateUUID()}`,
+	// 				name: patternPath.stop.name,
 	// 				stop_sequence: patternPath.stop_sequence,
-	// 				color: frontendLinesContext.entities.pattern.color,
 	// 				text_color: frontendLinesContext.entities.pattern.text_color,
 	// 			},
-	// 		});
+	// 			type: 'Feature',
+	// 		})
 	// 	}
-	// 	return geoJSON;
-	// }, [frontendLinesContext.entities.pattern]);
+	// 	return geoJSON
+	// }, [frontendLinesContext.entities.pattern])
 
 	// const selectedStopMapData = useMemo(() => {
 	// 	if (!frontendLinesContext.entities.pattern?.color || !frontendLinesContext.entities.stop?.lon) return null;
@@ -174,33 +175,33 @@ export default function FrontendLinesLive() {
 
 	const selectedVehiclesMapData = useMemo(() => {
 		if (!allVehiclesData) return null;
-		const geoJSON = { type: 'FeatureCollection', features: [] };
+		const geoJSON = { features: [], type: 'FeatureCollection' };
 		// console.log(allVehiclesData);
-		geoJSON.features = allVehiclesData.map(vehicleData => {
+		geoJSON.features = allVehiclesData.map((vehicleData) => {
 			return {
-				type: 'Feature',
 				geometry: {
-					type: 'Point',
 					coordinates: [vehicleData.lon, vehicleData.lat],
+					type: 'Point',
 				},
 				properties: {
-					id: vehicleData.id,
-					timestamp: vehicleData.timestamp,
-					timeString: new Date(vehicleData.timestamp * 1000).toLocaleString(),
+					bearing: vehicleData.bearing,
+					block_id: vehicleData.block_id,
+					current_status: vehicleData.current_status,
 					delay: Math.floor(Date.now() / 1000) - vehicleData.timestamp,
-					schedule_relationship: vehicleData.schedule_relationship,
-					trip_id: vehicleData.trip_id,
+					id: vehicleData.id,
+					line_id: vehicleData.line_id,
 					pattern_id: vehicleData.pattern_id,
 					route_id: vehicleData.route_id,
-					line_id: vehicleData.line_id,
-					stop_id: vehicleData.stop_id,
-					current_status: vehicleData.current_status,
-					block_id: vehicleData.block_id,
-					shift_id: vehicleData.shift_id,
-					bearing: vehicleData.bearing,
-					speed: vehicleData.speed,
+					schedule_relationship: vehicleData.schedule_relationship,
 					selected: vehicleData.id === selectedVehicle,
+					shift_id: vehicleData.shift_id,
+					speed: vehicleData.speed,
+					stop_id: vehicleData.stop_id,
+					timeString: new Date(vehicleData.timestamp * 1000).toLocaleString(),
+					timestamp: vehicleData.timestamp,
+					trip_id: vehicleData.trip_id,
 				},
+				type: 'Feature',
 			};
 		});
 		return geoJSON;
@@ -251,7 +252,7 @@ export default function FrontendLinesLive() {
 	// E. Helper functions
 
 	const moveMap = useCallback(
-		coordinates => {
+		(coordinates) => {
 			if (!frontendLinesMap) return;
 			// Get map current zoom level
 			const currentZoom = frontendLinesMap.getZoom();
@@ -262,10 +263,11 @@ export default function FrontendLinesLive() {
 			// If the given coordinates are visible and the zoom is not too far back (plus a little margin)...
 			if (isInside && currentZoomWithMargin > MAP_DEFAULT_OPTIONS.zoom) {
 				// ...then simply ease to it.
-				frontendLinesMap.easeTo({ center: coordinates, zoom: currentZoom, duration: MAP_DEFAULT_OPTIONS.speed * 0.25 });
-			} else {
+				frontendLinesMap.easeTo({ center: coordinates, duration: MAP_DEFAULT_OPTIONS.speed * 0.25, zoom: currentZoom });
+			}
+			else {
 				// If the zoom is too far, or the given coordinates are not visible, then fly to it
-				frontendLinesMap.flyTo({ center: coordinates, zoom: MAP_DEFAULT_OPTIONS.zoom, duration: MAP_DEFAULT_OPTIONS.speed });
+				frontendLinesMap.flyTo({ center: coordinates, duration: MAP_DEFAULT_OPTIONS.speed, zoom: MAP_DEFAULT_OPTIONS.zoom });
 			}
 		},
 		[frontendLinesMap],
@@ -292,7 +294,7 @@ export default function FrontendLinesLive() {
 		//
 	});
 
-	const handleMapClick = event => {
+	const handleMapClick = (event) => {
 		if (event?.features[0]?.properties?.id) {
 			// const foundStopInPath = frontendLinesContext.entities.pattern.path.find(item => item.stop.id === event.features[0].properties.id && item.stop_sequence === event.features[0].properties.stop_sequence);
 			// if (foundStopInPath) {
@@ -307,14 +309,14 @@ export default function FrontendLinesLive() {
 		}
 	};
 
-	const handleMapMouseEnter = event => {
+	const handleMapMouseEnter = (event) => {
 		if (event?.features[0]?.properties?.id) {
 			frontendLinesMap.getCanvas().style.cursor = 'pointer';
 		}
 		// console.log(event);
 	};
 
-	const handleMapMouseLeave = event => {
+	const handleMapMouseLeave = (event) => {
 		if (event?.features[0]?.properties?.id) {
 			frontendLinesMap.getCanvas().style.cursor = 'default';
 		}
@@ -335,26 +337,37 @@ export default function FrontendLinesLive() {
 		// Yes this magic seems necessary otherwise react won't rerender the popup in some cases, I don't know why.
 		let child = '';
 		if (!relevantInfo) child = t('info_not_available');
-		else child = <>
-			<div>{t('bus_info_sentence', {
-				model: relevantInfo.model,
-				make: relevantInfo.make,
-				available_seats: relevantInfo.available_seats,
-				available_standing: relevantInfo.available_standing,
-				propulsion: relevantInfo.propulsion,
-				climatization: t(relevantInfo.climatization ? 'with_ac' : 'without_ac'),
-				wheelchair: relevantInfo.wheelchair ? t('wheelchair') : '',
-			})}</div>
-			<div>{relevantInfo.wheelchair}</div>
-			<div>{relevantInfo.bicycles}</div>
-		</>;
+		else child = (
+			<>
+				<div>
+					{t('bus_info_sentence', {
+						available_seats: relevantInfo.available_seats,
+						available_standing: relevantInfo.available_standing,
+						climatization: t(relevantInfo.climatization ? 'with_ac' : 'without_ac'),
+						make: relevantInfo.make,
+						model: relevantInfo.model,
+						propulsion: relevantInfo.propulsion,
+						wheelchair: relevantInfo.wheelchair ? t('wheelchair') : '',
+					})}
+				</div>
+				<div>{relevantInfo.wheelchair}</div>
+				<div>{relevantInfo.bicycles}</div>
+			</>
+		);
 
-		//TODO make decent component
+		// TODO make decent component
 		return (
-			<Popup className={styles.popupWrapper}
-			// quality text wrapping and stretching
+			<Popup
+				anchor="bottom"
+				className={styles.popupWrapper}
+				closeButton={false}
+				closeOnClick={false}
+				latitude={fullVehicleInfo.geometry.coordinates[1]}
+				longitude={fullVehicleInfo.geometry.coordinates[0]}
+				maxWidth="240px"
+				offset={15} // quality text wrapping and stretching
 				style={{ whiteSpace: 'pre-wrap' }}
-				closeButton={false} closeOnClick={false} latitude={fullVehicleInfo.geometry.coordinates[1]} longitude={fullVehicleInfo.geometry.coordinates[0]} anchor='bottom' maxWidth='240px' offset={15}>
+			>
 				{child}
 			</Popup>
 		);
@@ -372,48 +385,50 @@ export default function FrontendLinesLive() {
 	return (
 		<div style={{ height: '600px' }}>
 
-			<OSMMap id='frontendLinesMap' mapStyle={'map'} onClick={handleMapClick} onMouseEnter={handleMapMouseEnter} onMouseLeave={handleMapMouseLeave} onMove={handleMapMove} interactiveLayerIds={['selected-vehicles-normal', 'selected-vehicles-delay']}>
+			<OSMMap id="frontendLinesMap" interactiveLayerIds={['selected-vehicles-normal', 'selected-vehicles-delay']} mapStyle="map" onClick={handleMapClick} onMouseEnter={handleMapMouseEnter} onMouseLeave={handleMapMouseLeave} onMove={handleMapMove}>
 				<GeolocateControl />
 				{(console.log('tried to render', renderedPopup), renderedPopup)}
-				{selectedVehiclesMapData &&
-				<Source id='selected-vehicles' type='geojson' data={selectedVehiclesMapData} generateId={true}>
-					<Layer
-						id='selected-vehicles-delay'
-						source='selected-vehicles'
-						type='symbol'
-						layout={{
-							'icon-allow-overlap': true,
-							'icon-ignore-placement': true,
-							'icon-anchor': 'center',
-							'symbol-placement': 'point',
-							'icon-rotation-alignment': 'map',
-							'icon-image': 'cm-bus-delay',
-							'icon-size': ['interpolate', ['linear', 0.5], ['zoom'], 10, 0.05, 20, 0.15],
-							'icon-offset': [0, 0],
-							'icon-rotate': ['get', 'bearing'],
-						}}
-						paint={{
-							'icon-opacity': ['interpolate', ['linear', 0.5], ['get', 'delay'], 20, 0, 40, 1],
-						}}
-					/>
-					<Layer
-						id='selected-vehicles-normal'
-						beforeId='selected-vehicles-delay'
-						source='selected-vehicles'
-						type='symbol'
-						layout={{
-							'icon-allow-overlap': true,
-							'icon-ignore-placement': true,
-							'icon-anchor': 'center',
-							'symbol-placement': 'point',
-							'icon-rotation-alignment': 'map',
-							'icon-image': 'cm-bus-regular',
-							'icon-size': ['interpolate', ['linear', 0.5], ['zoom'], 10, 0.05, 20, 0.15],
-							'icon-offset': [0, 0],
-							'icon-rotate': ['get', 'bearing'],
-						}}
-					/>
-				</Source>}
+				{selectedVehiclesMapData
+				&& (
+					<Source data={selectedVehiclesMapData} generateId={true} id="selected-vehicles" type="geojson">
+						<Layer
+							id="selected-vehicles-delay"
+							source="selected-vehicles"
+							type="symbol"
+							layout={{
+								'icon-allow-overlap': true,
+								'icon-anchor': 'center',
+								'icon-ignore-placement': true,
+								'icon-image': 'cm-bus-delay',
+								'icon-offset': [0, 0],
+								'icon-rotate': ['get', 'bearing'],
+								'icon-rotation-alignment': 'map',
+								'icon-size': ['interpolate', ['linear', 0.5], ['zoom'], 10, 0.05, 20, 0.15],
+								'symbol-placement': 'point',
+							}}
+							paint={{
+								'icon-opacity': ['interpolate', ['linear', 0.5], ['get', 'delay'], 20, 0, 40, 1],
+							}}
+						/>
+						<Layer
+							beforeId="selected-vehicles-delay"
+							id="selected-vehicles-normal"
+							source="selected-vehicles"
+							type="symbol"
+							layout={{
+								'icon-allow-overlap': true,
+								'icon-anchor': 'center',
+								'icon-ignore-placement': true,
+								'icon-image': 'cm-bus-regular',
+								'icon-offset': [0, 0],
+								'icon-rotate': ['get', 'bearing'],
+								'icon-rotation-alignment': 'map',
+								'icon-size': ['interpolate', ['linear', 0.5], ['zoom'], 10, 0.05, 20, 0.15],
+								'symbol-placement': 'point',
+							}}
+						/>
+					</Source>
+				)}
 				{/* {selectedStopMapData &&
 				<Source id='selected-stop' type='geojson' data={selectedStopMapData} generateId={true}>
 					<Layer

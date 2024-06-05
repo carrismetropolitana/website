@@ -1,0 +1,49 @@
+/* * */
+/* CONTAINER */
+
+.container {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	justify-content: center;
+}
+
+
+/* * */
+/* USER PIC */
+
+.userPic {
+	width: 40px;
+	min-width: 40px;
+	max-width: 40px;
+	height: 40px;
+	min-height: 40px;
+	max-height: 40px;
+	margin: var(--size-spacing-15);
+	border: 3px solid #C84664;
+	background-color: #FFE6E6;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	text-align: center;
+	border-radius: 9999px;
+	font-size: 18px;
+	line-height: 1;
+	transition: all 200ms ease;
+}
+
+.asButton .userPic {
+	cursor: pointer;
+}
+
+.asButton:hover .userPic {
+	box-shadow: 0 0 15px 0 rgba(0, 0, 0, 0.1);
+	transform: scale(1.05);
+}
+
+/* * */
+/* USER NAME */
+
+.userName {
+	width: 100%;
+}

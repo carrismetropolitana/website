@@ -2,14 +2,15 @@
 
 /* * */
 
+import { useFrontendLinesContext } from '@/contexts/FrontendLinesContext';
 import { useTranslations } from 'next-intl';
 import { useMemo } from 'react';
-import { useFrontendLinesContext } from '@/contexts/FrontendLinesContext';
+
 import styles from './FrontendLinesContentPatternPathStopTimetable.module.css';
 
 /* * */
 
-export default function FrontendLinesContentPatternPathStopTimetable({ stopSequence, stopId }) {
+export default function FrontendLinesContentPatternPathStopTimetable({ stopId, stopSequence }) {
 	//
 
 	//
@@ -63,13 +64,13 @@ export default function FrontendLinesContentPatternPathStopTimetable({ stopSeque
 		// Return if FrontendLinesContext.entities.pattern is undefined
 		if (!FrontendLinesContext.entities.pattern) return;
 		// Filter trips that happen on the selected date
-		const tripsForSelectedDate = FrontendLinesContext.entities.pattern.trips.filter(trip => {
+		const tripsForSelectedDate = FrontendLinesContext.entities.pattern.trips.filter((trip) => {
 			return trip.dates.includes(FrontendLinesContext.entities.date_string);
 		});
 		// For each available trip, find out the schedules for the selected stop
-		let schedulesForSelectedDateAndStopAndStopSequence = tripsForSelectedDate.map(trip => {
+		let schedulesForSelectedDateAndStopAndStopSequence = tripsForSelectedDate.map((trip) => {
 			// Ensure that each stop_time matches both the selected stop_id and stop_sequence
-			return trip.schedule.find(stopTime => {
+			return trip.schedule.find((stopTime) => {
 				return stopTime && stopTime.stop_id === stopId && stopTime.stop_sequence === stopSequence;
 			});
 		});
@@ -77,7 +78,7 @@ export default function FrontendLinesContentPatternPathStopTimetable({ stopSeque
 		// [{ hour: { value: '01', label:'25' }, minutes: ['23', '45'] }]
 		let timetableTemp = [];
 		// For each schedule for the selected stop, build the timetable
-		schedulesForSelectedDateAndStopAndStopSequence.forEach(item => {
+		schedulesForSelectedDateAndStopAndStopSequence.forEach((item) => {
 			// Return ealy if the schedule is undefined
 			if (!item) return;
 			// Parse the arrival_hour
@@ -86,14 +87,14 @@ export default function FrontendLinesContentPatternPathStopTimetable({ stopSeque
 			// to check if there is already an entry for the given 'arrival_hour'
 			const existingTimetableEntry = timetableTemp.find(item => item.hour.value === arrival_hour);
 			if (existingTimetableEntry) existingTimetableEntry.minutes.push(item.arrival_time.substr(3, 2)); // 12:[34]
-			else timetableTemp.push({ hour: { value: item.arrival_time_operation?.substr(0, 2), label: arrival_hour }, minutes: [item.arrival_time.substr(3, 2)] });
+			else timetableTemp.push({ hour: { label: arrival_hour, value: item.arrival_time_operation?.substr(0, 2) }, minutes: [item.arrival_time.substr(3, 2)] });
 		});
 		// Sort the timetable by hour
 		timetableTemp.sort((a, b) => a.hour.value - b.hour.value);
 		// Sort the minutes
-		timetableTemp = timetableTemp.map(hour => {
+		timetableTemp = timetableTemp.map((hour) => {
 			return {
-				hour: { value: hour.hour.value, label: hour.hour.label },
+				hour: { label: hour.hour.label, value: hour.hour.value },
 				minutes: hour.minutes.sort((a, b) => a - b),
 			};
 		});
@@ -114,27 +115,38 @@ export default function FrontendLinesContentPatternPathStopTimetable({ stopSeque
 	//
 	// C. Render components
 
-	return newTimetable.length > 0 ?
-		<div className={styles.container}>
-			<div className={styles.column}>
-				<div className={styles.hour}>{t('hours.label')}</div>
-				<div className={styles.minute}>{t('minutes.label')}</div>
+	return newTimetable.length > 0
+		? (
+			<div className={styles.container}>
+				<div className={styles.column}>
+					<div className={styles.hour}>{t('hours.label')}</div>
+					<div className={styles.minute}>{t('minutes.label')}</div>
+				</div>
+				{newTimetable.map((schedule, scheduleIndex) => (
+					<div key={scheduleIndex} className={styles.column}>
+						{schedule.type
+							? <div className={styles.hourDivider} />
+							: (
+								<>
+									<div className={styles.hour}>{schedule.hour.label}</div>
+									{schedule.minutes.map((minute, minuteIndex) => (
+										<div key={minuteIndex} className={styles.minute}>
+											{minute}
+										</div>
+									))}
+								</>
+							)}
+					</div>
+				),
+
+				)}
 			</div>
-			{newTimetable.map((schedule, scheduleIndex) => <div key={scheduleIndex} className={styles.column}>
-				{schedule.type ?
-					<div className={styles.hourDivider} /> :
-					<>
-						<div className={styles.hour}>{schedule.hour.label}</div>
-						{schedule.minutes.map((minute, minuteIndex) => <div key={minuteIndex} className={styles.minute}>
-							{minute}
-						</div>)}
-					</>
-				}
-			</div>)}
-		</div> :
-		<div className={styles.container}>
-			<p className={styles.noData}>{t('no_data')}</p>
-		</div>;
+		)
+		: (
+			<div className={styles.container}>
+				<p className={styles.noData}>{t('no_data')}</p>
+			</div>
+		);
 
 	//
 }

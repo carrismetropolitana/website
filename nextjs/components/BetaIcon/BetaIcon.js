@@ -2,9 +2,10 @@
 
 /* * */
 
-import styles from './BetaIcon.module.css';
 import { useDebugContext } from '@/contexts/DebugContext';
 import useDoubleClick from '@/hooks/useDoubleClick';
+
+import styles from './BetaIcon.module.css';
 
 /* * */
 

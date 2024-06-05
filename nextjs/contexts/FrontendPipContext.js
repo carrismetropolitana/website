@@ -2,9 +2,9 @@
 
 /* * */
 
-import useSWR from 'swr';
-import { createContext, useCallback, useContext, useMemo, useState } from 'react';
 import { useParams } from 'next/navigation';
+import { createContext, useCallback, useContext, useMemo, useState } from 'react';
+import useSWR from 'swr';
 
 /* * */
 
@@ -68,30 +68,32 @@ export function FrontendPipContextProvider({ children }) {
 	// --------
 
 	const selectAnswer = useCallback(
-		async answerCode => {
+		async (answerCode) => {
 			setSurveyState(prev => ({ ...prev, selected_answer_code: answerCode }));
 			try {
 				await fetch('https://stats.carrismetropolitana.pt/collector/feedback/pipStatus', {
-					method: 'POST',
-					headers: { 'Content-Type': 'application/json; charset=utf-8' },
 					body: JSON.stringify({
-						pip_id: itemId,
 						answer_code: answerCode,
+						pip_id: itemId,
 					}),
+					headers: { 'Content-Type': 'application/json; charset=utf-8' },
+					method: 'POST',
 				});
-			} catch (error) {
+			}
+			catch (error) {
 				console.log(error);
 			}
 			if (!itemData?.stops || itemData?.stops.length === 0) {
 				window.location = '/stops';
-			} else if (itemData?.stops?.length === 1) {
+			}
+			else if (itemData?.stops?.length === 1) {
 				window.location = `/stops/${itemData?.stops[0]}`;
 			}
 		},
 		[itemData, itemId],
 	);
 
-	const selectStop = useCallback(stopId => {
+	const selectStop = useCallback((stopId) => {
 		window.location = `/stops/${stopId}`;
 	}, []);
 
@@ -100,15 +102,15 @@ export function FrontendPipContextProvider({ children }) {
 
 	const contextObject = useMemo(
 		() => ({
-			//
-			item_id: itemId,
 			item_data: itemData,
 			//
-			survey: surveyState,
-			updateSurvey,
+			item_id: itemId,
 			//
 			selectAnswer,
 			selectStop,
+			//
+			survey: surveyState,
+			updateSurvey,
 			//
 		}),
 		[itemId, itemData, surveyState, updateSurvey, selectAnswer, selectStop],

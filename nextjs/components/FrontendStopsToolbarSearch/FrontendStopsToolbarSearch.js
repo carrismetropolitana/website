@@ -1,16 +1,17 @@
 'use client';
 
-import useSWR from 'swr';
-import { Combobox, Highlight, TextInput, useCombobox, Text, ActionIcon } from '@mantine/core';
-import { useMemo, useState } from 'react';
-import { useTranslations } from 'next-intl';
-import styles from './FrontendStopsToolbarSearch.module.css';
-import useSearch from '@/hooks/useSearch';
-import { IconX, IconSearch, IconMapCode } from '@tabler/icons-react';
-import parseStopLocationName from '@/services/parseStopLocationName';
 import { useFrontendStopsContext } from '@/contexts/FrontendStopsContext';
+import useSearch from '@/hooks/useSearch';
+import parseStopLocationName from '@/services/parseStopLocationName';
+import { ActionIcon, Combobox, Highlight, Text, TextInput, useCombobox } from '@mantine/core';
 import { useDebouncedValue } from '@mantine/hooks';
+import { IconMapCode, IconSearch, IconX } from '@tabler/icons-react';
+import { useTranslations } from 'next-intl';
+import { useMemo, useState } from 'react';
 import { useMap } from 'react-map-gl/maplibre';
+import useSWR from 'swr';
+
+import styles from './FrontendStopsToolbarSearch.module.css';
 
 /* * */
 
@@ -39,12 +40,12 @@ export default function FrontendStopsToolbarSearch() {
 
 	const allStopsDataFormatted = useMemo(() => {
 		if (allStopsData) {
-			return allStopsData.map(stop => {
+			return allStopsData.map((stop) => {
 				return {
 					id: stop.id,
+					location: parseStopLocationName(stop.locality, stop.municipality_name),
 					name: stop.name,
 					tts_name: stop.tts_name,
-					location: parseStopLocationName(stop.locality, stop.municipality_name),
 				};
 			});
 		}
@@ -55,8 +56,8 @@ export default function FrontendStopsToolbarSearch() {
 
 	const allStopsDataFilteredBySearchQuery = useSearch(debouncedSearchQuery, allStopsDataFormatted, {
 		keys: ['id', 'name', 'tts_name', 'location'],
-		regexReplace: /[^a-zA-Z0-9\s]/g,
 		limitResults: 100,
+		regexReplace: /[^a-zA-Z0-9\s]/g,
 	});
 
 	//
@@ -91,7 +92,7 @@ export default function FrontendStopsToolbarSearch() {
 		comboboxStore.openDropdown();
 	};
 
-	const handleSelectStop = chosenStop => {
+	const handleSelectStop = (chosenStop) => {
 		FrontendStopsContext.selectStop(chosenStop.id);
 		comboboxStore.closeDropdown();
 	};
@@ -110,51 +111,58 @@ export default function FrontendStopsToolbarSearch() {
 			<Combobox store={comboboxStore}>
 				<Combobox.Target>
 					<TextInput
-						autoComplete='off'
-						type='search'
 						aria-label={t('label')}
-						placeholder={t('placeholder')}
-						value={searchQuery}
-						size='lg'
+						autoComplete="off"
 						leftSection={<IconSearch size={20} />}
-						rightSection={
-							searchQuery &&
-								<ActionIcon onClick={handleClearSearchField} size='md' variant='subtle' color='gray'>
-									<IconX size={20} />
-								</ActionIcon>
-
-						}
+						onBlur={handleExitSearchField}
 						onChange={handleSearchQueryChange}
 						onClick={handleClickSearchField}
 						onFocus={handleClickSearchField}
-						onBlur={handleExitSearchField}
+						placeholder={t('placeholder')}
+						size="lg"
+						type="search"
+						value={searchQuery}
+						rightSection={
+							searchQuery
+							&& (
+								<ActionIcon color="gray" onClick={handleClearSearchField} size="md" variant="subtle">
+									<IconX size={20} />
+								</ActionIcon>
+							)
+
+						}
 					/>
 				</Combobox.Target>
 
 				<Combobox.Dropdown>
 					<Combobox.Options mah={200} style={{ overflowY: 'auto' }}>
-						{searchQueryCoordinates ?
-							<Combobox.Option value={searchQuery} onClick={() => handleSelectCoordinates()}>
-								<div className={styles.comboboxOption}>
-									<div className={styles.coordinatesResult}>
-										<IconMapCode size={20} />
-										<p className={styles.coordinatesResultLabel}>Mover mapa para estas coordenadas</p>
-									</div>
-								</div>
-							</Combobox.Option> :
-							allStopsDataFilteredBySearchQuery.length === 0 ?
-								<Combobox.Empty>{t('no_results')}</Combobox.Empty> :
-								allStopsDataFilteredBySearchQuery.map(item => <Combobox.Option key={item.id} value={item.id} onClick={() => handleSelectStop(item)}>
+						{searchQueryCoordinates
+							? (
+								<Combobox.Option onClick={() => handleSelectCoordinates()} value={searchQuery}>
 									<div className={styles.comboboxOption}>
-										<div className={styles.stopInfo}>
-											<Highlight fz='sm' fw={500}>
-												{item.name}
-											</Highlight>
-											<Text fz='xs'>{item.location}</Text>
+										<div className={styles.coordinatesResult}>
+											<IconMapCode size={20} />
+											<p className={styles.coordinatesResultLabel}>Mover mapa para estas coordenadas</p>
 										</div>
 									</div>
-								</Combobox.Option>)
-						}
+								</Combobox.Option>
+							)
+							: allStopsDataFilteredBySearchQuery.length === 0
+								? <Combobox.Empty>{t('no_results')}</Combobox.Empty>
+								: allStopsDataFilteredBySearchQuery.map(item => (
+									<Combobox.Option key={item.id} onClick={() => handleSelectStop(item)} value={item.id}>
+										<div className={styles.comboboxOption}>
+											<div className={styles.stopInfo}>
+												<Highlight fw={500} fz="sm">
+													{item.name}
+												</Highlight>
+												<Text fz="xs">{item.location}</Text>
+											</div>
+										</div>
+									</Combobox.Option>
+								),
+
+								)}
 					</Combobox.Options>
 				</Combobox.Dropdown>
 			</Combobox>

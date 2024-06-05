@@ -1,9 +1,9 @@
 html,
 body {
-  height: 100%;
   padding: 0;
   margin: 0;
   scroll-behavior: smooth;
+	background-color: var(--color-system-background-200);
 }
 
 h1,
@@ -25,11 +25,16 @@ a {
   box-sizing: border-box;
   user-select: none;
   -webkit-touch-callout: none;
-  font-family: inter, sans-serif;
+  font-family: var(--font-inter), sans-serif;
+	line-height: 1.2;
 }
 
 input,
 textarea {
   user-select: text;
   -webkit-touch-callout: default;
+}
+
+img {
+	display: flex;
 }

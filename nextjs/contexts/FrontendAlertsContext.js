@@ -2,9 +2,9 @@
 
 /* * */
 
-import useSWR from 'swr';
-import { createContext, useCallback, useContext, useMemo, useState } from 'react';
 import parseDateToString from '@/services/parseDateToString';
+import { createContext, useCallback, useContext, useMemo, useState } from 'react';
+import useSWR from 'swr';
 
 /* * */
 
@@ -12,22 +12,22 @@ import parseDateToString from '@/services/parseDateToString';
 // SETUP INITIAL STATE
 
 const initialMapState = {
-	style: 'map',
 	auto_zoom: true,
+	style: 'map',
 };
 
 const initialEntitiesState = {
 	//
-	municipality: null,
-	//
 	date: null,
 	//
 	line: null,
+	//
+	municipality: null,
 	pattern: null,
 	//
 	stop: null,
-	vehicle_id: null,
 	trip_id: null,
+	vehicle_id: null,
 };
 
 /* * */
@@ -83,7 +83,7 @@ export function FrontendAlertsContextProvider({ children }) {
 	// B. Setup actions
 
 	const selectMunicipality = useCallback(
-		municipalityId => {
+		(municipalityId) => {
 			const foundMunicipality = allMunicipalitiesData.find(item => item.id === municipalityId);
 			if (foundMunicipality) {
 				setEntitiesState(prev => ({ ...prev, municipality: foundMunicipality }));
@@ -99,7 +99,7 @@ export function FrontendAlertsContextProvider({ children }) {
 	// ---------
 
 	const selectLine = useCallback(
-		lineId => {
+		(lineId) => {
 			const foundLine = allVehiclesData.find(item => item.id === lineId);
 			if (foundLine) {
 				setEntitiesState(prev => ({ ...prev, line: foundLine, pattern: null, stop: null }));
@@ -116,7 +116,7 @@ export function FrontendAlertsContextProvider({ children }) {
 
 	// ---------
 
-	const selectDate = useCallback(date => {
+	const selectDate = useCallback((date) => {
 		if (!date) return;
 		setEntitiesState(prev => ({ ...prev, date: date, date_string: parseDateToString(date) }));
 	}, []);
@@ -127,7 +127,7 @@ export function FrontendAlertsContextProvider({ children }) {
 
 	// ---------
 
-	const selectPattern = useCallback(patternData => {
+	const selectPattern = useCallback((patternData) => {
 		setEntitiesState(prev => ({ ...prev, pattern: patternData, stop: null }));
 		setMapState(prev => ({ ...prev, auto_zoom: true }));
 	}, []);
@@ -138,7 +138,7 @@ export function FrontendAlertsContextProvider({ children }) {
 
 	// ---------
 
-	const selectStop = useCallback(stopData => {
+	const selectStop = useCallback((stopData) => {
 		setEntitiesState(prev => ({ ...prev, stop: stopData }));
 		setMapState(prev => ({ ...prev, auto_zoom: false }));
 	}, []);
@@ -179,30 +179,30 @@ export function FrontendAlertsContextProvider({ children }) {
 
 	const contextObject = useMemo(
 		() => ({
-			//
-			map: mapState,
-			updateMap: updateMapState,
-			//
-			entities: entitiesState,
-			updateEntities: updateEntitiesState,
-			//
-			selectMunicipality,
-			clearSelectedMunicipality,
-			//
-			selectLine,
-			clearSelectedLine,
-			//
-			selectDate,
 			clearSelectedDate,
-			//
-			selectPattern,
+			clearSelectedLine,
+			clearSelectedMunicipality,
 			clearSelectedPattern,
-			//
-			selectStop,
 			clearSelectedStop,
+			disableAutoZoom,
 			//
 			enableAutoZoom,
-			disableAutoZoom,
+			//
+			entities: entitiesState,
+			//
+			map: mapState,
+			//
+			selectDate,
+			//
+			selectLine,
+			//
+			selectMunicipality,
+			//
+			selectPattern,
+			//
+			selectStop,
+			updateEntities: updateEntitiesState,
+			updateMap: updateMapState,
 			//
 		}),
 		[mapState, updateMapState, entitiesState, updateEntitiesState, selectMunicipality, clearSelectedMunicipality, selectLine, clearSelectedLine, selectDate, clearSelectedDate, selectPattern, clearSelectedPattern, selectStop, clearSelectedStop, enableAutoZoom, disableAutoZoom],

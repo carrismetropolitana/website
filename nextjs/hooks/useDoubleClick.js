@@ -1,19 +1,19 @@
 let timer;
-let latestTouchTap = { time: 0, target: null };
+let latestTouchTap = { target: null, time: 0 };
 
-export default function useDoubleClick({ onDoubleClick = () => {}, onSingleClick = () => {} }, maxDelay = 200) {
-  return (event) => {
-    clearTimeout(timer);
+export default function useDoubleClick({ onDoubleClick = () => null, onSingleClick = () => null }, maxDelay = 200) {
+	return (event) => {
+		clearTimeout(timer);
 
-    const touchTap = { time: new Date().getTime(), target: event.currentTarget };
+		const touchTap = { target: event.currentTarget, time: (new Date()).getTime() };
 
-    const isDoubleClick = touchTap.target === latestTouchTap.target && touchTap.time - latestTouchTap.time < maxDelay;
+		const isDoubleClick = touchTap.target === latestTouchTap.target && touchTap.time - latestTouchTap.time < maxDelay;
 
-    latestTouchTap = touchTap;
+		latestTouchTap = touchTap;
 
-    timer = setTimeout(() => {
-      if (isDoubleClick) onDoubleClick(event);
-      else onSingleClick(event);
-    }, maxDelay);
-  };
+		timer = setTimeout(() => {
+			if (isDoubleClick) onDoubleClick(event);
+			else onSingleClick(event);
+		}, maxDelay);
+	};
 }

@@ -3,7 +3,7 @@ name: Build & Publish Docker Images
 on:
   push:
     branches:
-      - production
+      - alpha
 
 jobs:
   #
@@ -12,7 +12,7 @@ jobs:
   # # # # # # # # # # # # # # # # # # # # #
 
   website-nextjs:
-    name: 'Build Docker Image (nextjs)'
+    name: NextJS (Docker)
     runs-on: ubuntu-latest
     strategy:
       fail-fast: false
@@ -31,41 +31,10 @@ jobs:
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Build Docker Image - nextjs
+      - name: Build Docker Image (NextJS)
         uses: docker/build-push-action@master
         with:
           push: true
           context: ./nextjs
           file: ./nextjs/Dockerfile
           tags: ghcr.io/carrismetropolitana/website-nextjs:${{ github.ref_name }}
-
-  # # # # # # # # # # # # # # # # # # # # #
-  # # # # # # # # # # # # # # # # # # # # #
-
-  website-backupd:
-    name: 'Build Docker Image (backupd)'
-    runs-on: ubuntu-latest
-    strategy:
-      fail-fast: false
-    permissions:
-      contents: read
-      packages: write
-
-    steps:
-      - name: Checkout repository
-        uses: actions/checkout@main
-
-      - name: Login to GitHub Container Registry
-        uses: docker/login-action@master
-        with:
-          registry: ghcr.io
-          username: ${{ github.actor }}
-          password: ${{ secrets.GITHUB_TOKEN }}
-
-      - name: Build Docker Image - backupd
-        uses: docker/build-push-action@master
-        with:
-          push: true
-          context: ./backupd
-          file: ./backupd/Dockerfile
-          tags: ghcr.io/carrismetropolitana/website-backupd:${{ github.ref_name }}

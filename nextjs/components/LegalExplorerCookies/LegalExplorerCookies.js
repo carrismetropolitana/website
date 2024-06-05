@@ -1,12 +1,13 @@
 'use client';
 
-import styles from './LegalExplorerCookies.module.css';
 import Panel from '@/components/Panel/Panel';
+import { useAppAnalyticsContext } from '@/contexts/AppAnalyticsContext';
 import { Anchor, Button, Group, Table } from '@mantine/core';
 import { openConfirmModal } from '@mantine/modals';
-import { useTranslations } from 'next-intl';
-import { useAppAnalyticsContext } from '@/contexts/AppAnalyticsContext';
 import { IconCircleCheckFilled } from '@tabler/icons-react';
+import { useTranslations } from 'next-intl';
+
+import styles from './LegalExplorerCookies.module.css';
 
 export default function LegalExplorerCookies() {
 	//
@@ -27,15 +28,15 @@ export default function LegalExplorerCookies() {
 
 	const handleDisable = () => {
 		openConfirmModal({
-			title: t('sections.question_6.refuse_modal.title'),
 			centered: true,
-			closeOnClickOutside: true,
 			children: <p>{t('sections.question_6.refuse_modal.description')}</p>,
-			labels: { confirm: t('sections.question_6.refuse_modal.confirm'), cancel: t('sections.question_6.refuse_modal.cancel') },
+			closeOnClickOutside: true,
 			confirmProps: { color: 'red' },
+			labels: { cancel: t('sections.question_6.refuse_modal.cancel'), confirm: t('sections.question_6.refuse_modal.confirm') },
 			onConfirm: () => {
 				analyticsContext.disable();
 			},
+			title: t('sections.question_6.refuse_modal.title'),
 		});
 	};
 
@@ -43,7 +44,7 @@ export default function LegalExplorerCookies() {
 	// B. Render components
 
 	return (
-		<Panel type='B' title={t('title')}>
+		<Panel title={t('title')} type="B">
 			<div className={styles.container}>
 				<div className={styles.section}>
 					<div className={styles.title}>{t('sections.intro.title')}</div>
@@ -77,7 +78,7 @@ export default function LegalExplorerCookies() {
 				</div>
 				<div className={styles.section}>
 					<div className={styles.title}>{t('sections.question_5.title')}</div>
-					<Table withTableBorder withColumnBorders>
+					<Table withColumnBorders withTableBorder>
 						<Table.Thead>
 							<Table.Tr>
 								<Table.Th>{t('sections.question_5.table.header.col_1')}</Table.Th>
@@ -107,21 +108,24 @@ export default function LegalExplorerCookies() {
 					<div className={styles.text}>{t('sections.question_6.paragraphs.1')}</div>
 					<div className={styles.text}>{t('sections.question_6.paragraphs.2')}</div>
 					<div className={styles.authorizationOptions}>
-						{!analyticsContext.enabled &&
-							<Button onClick={handleEnable} variant='light' color='green'>
+						{!analyticsContext.enabled
+						&& (
+							<Button color="green" onClick={handleEnable} variant="light">
 								{t('sections.question_6.accept')}
 							</Button>
-						}
-						{analyticsContext.enabled &&
-							<Button onClick={() => {}} leftSection={<IconCircleCheckFilled size={16} />} variant='outline' color='green'>
+						)}
+						{analyticsContext.enabled
+						&& (
+							<Button color="green" leftSection={<IconCircleCheckFilled size={16} />} onClick={() => null} variant="outline">
 								{t('sections.question_6.enabled')}
 							</Button>
-						}
-						{analyticsContext.enabled &&
-							<Button onClick={handleDisable} variant='light' color='red'>
+						)}
+						{analyticsContext.enabled
+						&& (
+							<Button color="red" onClick={handleDisable} variant="light">
 								{t('sections.question_6.refuse')}
 							</Button>
-						}
+						)}
 					</div>
 				</div>
 				<div className={styles.section}>
@@ -129,19 +133,19 @@ export default function LegalExplorerCookies() {
 					<div className={styles.text}>{t('sections.question_7.paragraphs.1')}</div>
 					<div className={styles.text}>{t('sections.question_7.paragraphs.2')}</div>
 					<Group>
-						<Anchor href='https://support.google.com/chrome/answer/95647?hl=pt' target='_blank'>
+						<Anchor href="https://support.google.com/chrome/answer/95647?hl=pt" target="_blank">
 							Google Chrome
 						</Anchor>
-						<Anchor href='https://support.apple.com/pt-pt/guide/safari/sfri11471/mac' target='_blank'>
+						<Anchor href="https://support.apple.com/pt-pt/guide/safari/sfri11471/mac" target="_blank">
 							Safari
 						</Anchor>
-						<Anchor href='https://support.mozilla.org/pt-PT/kb/cookies-informacao-que-websites-guardam-no-seu-computador' target='_blank'>
+						<Anchor href="https://support.mozilla.org/pt-PT/kb/cookies-informacao-que-websites-guardam-no-seu-computador" target="_blank">
 							Mozilla Firefox
 						</Anchor>
-						<Anchor href='https://support.microsoft.com/pt-br/microsoft-edge/excluir-cookies-no-microsoft-edge-63947406-40ac-c3b8-57b9-2a946a29ae09' target='_blank'>
+						<Anchor href="https://support.microsoft.com/pt-br/microsoft-edge/excluir-cookies-no-microsoft-edge-63947406-40ac-c3b8-57b9-2a946a29ae09" target="_blank">
 							Microsoft Edge
 						</Anchor>
-						<Anchor href='https://support.microsoft.com/pt-pt/windows/eliminar-e-gerir-cookies-168dab11-0753-043d-7c16-ede5947fc64d' target='_blank'>
+						<Anchor href="https://support.microsoft.com/pt-pt/windows/eliminar-e-gerir-cookies-168dab11-0753-043d-7c16-ede5947fc64d" target="_blank">
 							Internet Explorer
 						</Anchor>
 					</Group>

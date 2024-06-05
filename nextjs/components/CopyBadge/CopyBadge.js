@@ -1,5 +1,6 @@
-import styles from './CopyBadge.module.css';
 import { useClipboard } from '@mantine/hooks';
+
+import styles from './CopyBadge.module.css';
 
 export default function CopyBadge({ label, value }) {
 	//

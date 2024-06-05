@@ -2,14 +2,15 @@
 
 /* * */
 
-import Link from 'next/link';
-import Image from 'next/image';
-import styles from './AppAnalytics.module.css';
-import { Button, Modal } from '@mantine/core';
 import { useAppAnalyticsContext } from '@/contexts/AppAnalyticsContext';
-import { useEffect, useState } from 'react';
+import { Button, Modal } from '@mantine/core';
+import Image from 'next/image';
+import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { useTranslations } from 'next-intl';
+import { useEffect, useState } from 'react';
+
+import styles from './AppAnalytics.module.css';
 
 /* * */
 
@@ -54,19 +55,19 @@ export default function AppAnalytics() {
 	// C. Render Components
 
 	return (
-		<Modal opened={isOpen} onClose={() => setIsOpen(false)} withCloseButton={false} trapFocus={false} closeOnEscape={false} closeOnClickOutside={false} returnFocus={true} overlayProps={{ backgroundOpacity: 0.55, blur: 3 }}>
+		<Modal closeOnClickOutside={false} closeOnEscape={false} onClose={() => setIsOpen(false)} opened={isOpen} overlayProps={{ backgroundOpacity: 0.55, blur: 3 }} returnFocus={true} trapFocus={false} withCloseButton={false}>
 			<div className={styles.container}>
-				<Image src='/images/analytics-header.svg' alt='' width={350} height={120} priority />
+				<Image alt="" height={120} src="/images/analytics-header.svg" width={350} priority />
 				<h4 className={styles.title}>{t('title')}</h4>
 				<h4 className={styles.text}>{t('text')}</h4>
-				<Link href='/legal/cookies' target='_blank' className={styles.link}>
+				<Link className={styles.link} href="/legal/cookies" target="_blank">
 					{t('privacy_policy')}
 				</Link>
 				<div className={styles.answers}>
-					<Button onClick={handleEnable} className={styles.acceptButton} size='lg'>
+					<Button className={styles.acceptButton} onClick={handleEnable} size="lg">
 						{t('accept')}
 					</Button>
-					<Button onClick={handleDisable} className={styles.refuseButton} variant='subtle' size='xs'>
+					<Button className={styles.refuseButton} onClick={handleDisable} size="xs" variant="subtle">
 						{t('refuse')}
 					</Button>
 				</div>

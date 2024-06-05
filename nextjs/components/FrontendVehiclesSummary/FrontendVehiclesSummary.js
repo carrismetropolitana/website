@@ -1,9 +1,10 @@
 /* * */
 
-import { useTranslations } from 'next-intl';
-import styles from './FrontendVehiclesSummary.module.css';
-import FrontendVehiclesSummaryRow from '@/components/FrontendVehiclesSummaryRow/FrontendVehiclesSummaryRow';
 import FrontendVehiclesLive from '@/components/FrontendVehiclesLive/FrontendVehiclesLive';
+import FrontendVehiclesSummaryRow from '@/components/FrontendVehiclesSummaryRow/FrontendVehiclesSummaryRow';
+import { useTranslations } from 'next-intl';
+
+import styles from './FrontendVehiclesSummary.module.css';
 
 /* * */
 

@@ -19,24 +19,24 @@ const maxZoom = 20;
 const styleMap = 'https://maps.carrismetropolitana.pt/styles/default/style.json';
 
 const styleSatellite = {
-	version: 8,
-	minZoom: 5,
-	maxZoom: 18,
-	sources: {
-		'raster-tiles': {
-			type: 'raster',
-			tiles: ['https://server.arcgisonline.com/arcgis/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}'],
-			tileSize: 256,
-			attribution: 'Esri, Maxar, Earthstar Geographics, and the GIS User Community',
-		},
-	},
 	layers: [
 		{
 			id: 'simple-tiles',
-			type: 'raster',
 			source: 'raster-tiles',
+			type: 'raster',
 		},
 	],
+	maxZoom: 18,
+	minZoom: 5,
+	sources: {
+		'raster-tiles': {
+			attribution: 'Esri, Maxar, Earthstar Geographics, and the GIS User Community',
+			tileSize: 256,
+			tiles: ['https://server.arcgisonline.com/arcgis/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}'],
+			type: 'raster',
+		},
+	},
+	version: 8,
 };
 
 //
@@ -44,11 +44,11 @@ const styleSatellite = {
 
 const config = {
 	center: [defaultLon, defaultLat],
-	initialViewState: { longitude: defaultLon, latitude: defaultLat, bearing: defaultBearing, pitch: defaultPicth, zoom: defaultZoom },
-	viewport: { center: [defaultLon, defaultLat], bearing: defaultBearing, pitch: defaultPicth, zoom: defaultZoom },
-	styles: { default: styleMap, map: styleMap, satellite: styleSatellite },
-	minZoom: minZoom,
+	initialViewState: { bearing: defaultBearing, latitude: defaultLat, longitude: defaultLon, pitch: defaultPicth, zoom: defaultZoom },
 	maxZoom: maxZoom,
+	minZoom: minZoom,
+	styles: { default: styleMap, map: styleMap, satellite: styleSatellite },
+	viewport: { bearing: defaultBearing, center: [defaultLon, defaultLat], pitch: defaultPicth, zoom: defaultZoom },
 };
 
 export default config;

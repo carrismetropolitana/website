@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/no-var-requires */
+
 const packageJson = require('./package.json');
 const fs = require('fs');
 
@@ -15,5 +17,5 @@ packageJson.version = version;
 fs.writeFileSync('package.json', JSON.stringify(packageJson, null, 4));
 
 function padNumber(number) {
-  return number.toString().padStart(2, '0');
+	return number.toString().padStart(2, '0');
 }

@@ -1,10 +1,10 @@
 /* * */
 
 /* * */
-import { Badge, Anchor } from '@mantine/core';
-import { getTranslations } from 'next-intl/server';
-import { redirect } from 'next/navigation';
+import { Anchor, Badge } from '@mantine/core';
 import { headers } from 'next/headers';
+import { redirect } from 'next/navigation';
+import { getTranslations } from 'next-intl/server';
 
 export default async function FrontendAlert({ alertId, locale }) {
 	//
@@ -49,22 +49,26 @@ export default async function FrontendAlert({ alertId, locale }) {
 
 	return (
 		<div style={{ backgroundColor: 'white', borderRadius: '5px' }}>
-			<div style={{ padding: '30px', display: 'flex', flexDirection: 'column', gap: '15px' }}>
+			<div style={{ display: 'flex', flexDirection: 'column', gap: '15px', padding: '30px' }}>
 				<div>
 					<h1>{alert.alert.headerText.translation[0].text}</h1>
 				</div>
-				<div style={{ height: '1px', backgroundColor: 'var(--gray-2)', width: '100%' }}></div>
+				<div style={{ backgroundColor: 'var(--gray-2)', height: '1px', width: '100%' }} />
 				<div style={{ display: 'flex', gap: '10px' }}>
-
-					<Badge color='blue' variant='light'>{cT(alert.alert.cause)}</Badge>
-					<Badge color='blue' variant='light'>{eT(alert.alert.effect)}</Badge>
+					<Badge color="blue" variant="light">{cT(alert.alert.cause)}</Badge>
+					<Badge color="blue" variant="light">{eT(alert.alert.effect)}</Badge>
 				</div>
-				<p style={{ fontWeight: '500', fontSize: '14px' }}> {t('period')}: {periodString} </p>
+				<p style={{ fontSize: '14px', fontWeight: '500' }}>
+					{' '}
+					{t('period')}
+					:
+					{' '}
+					{periodString}
+					{' '}
+				</p>
 				<p>{alert.alert.descriptionText.translation[0].text}</p>
-				{moreUrl && <Anchor href={moreUrl} underline='hover'>{t('more_info')}</Anchor>}
-				{imageUrl &&
-				// eslint-disable-next-line @next/next/no-img-element
-				<img style={{ maxWidth: '100%' }} src={imageUrl} alt='alert'/>}
+				{moreUrl && <Anchor href={moreUrl} underline="hover">{t('more_info')}</Anchor>}
+				{imageUrl && <img alt="alert" src={imageUrl} style={{ maxWidth: '100%' }} />}
 			</div>
 		</div>
 	);

@@ -2,12 +2,13 @@
 
 /* * */
 
-import styles from './StatusMessage.module.css';
-import { useTranslations } from 'next-intl';
-import { useState } from 'react';
+import { Link } from '@/translations/navigation';
 import { ActionIcon } from '@mantine/core';
 import { IconChevronDown, IconChevronLeft } from '@tabler/icons-react';
-import { Link } from '@/translations/navigation';
+import { useTranslations } from 'next-intl';
+import { useState } from 'react';
+
+import styles from './StatusMessage.module.css';
 
 /* * */
 
@@ -37,17 +38,18 @@ export default function StatusMessage() {
 			<div className={styles.innerWrapper}>
 				<div className={styles.headerWrapper} onClick={handleSetIsVisible}>
 					<h3 className={styles.title}>{t('title')}</h3>
-					<ActionIcon variant='subtle' size='lg' className={styles.colapseIcon}>
+					<ActionIcon className={styles.colapseIcon} size="lg" variant="subtle">
 						{isVisible ? <IconChevronDown size={20} /> : <IconChevronLeft size={20} />}
 					</ActionIcon>
 				</div>
-				{isVisible &&
+				{isVisible
+				&& (
 					<div className={styles.contentWrapper}>
 						<p className={styles.explanation}>{t('explanation')}</p>
-						<Link href='https://www.navegante.pt/destaques/o-navegante-nao-para-mas-nos-dias-13-e-14-de-abril-fara-uma-pausa' target='_blank' className={styles.moreInfo}>{t('more_info')}</Link>
+						<Link className={styles.moreInfo} href="https://www.navegante.pt/destaques/o-navegante-nao-para-mas-nos-dias-13-e-14-de-abril-fara-uma-pausa" target="_blank">{t('more_info')}</Link>
 						<p className={styles.solution}>{t('solution')}</p>
 					</div>
-				}
+				)}
 			</div>
 		</div>
 	);

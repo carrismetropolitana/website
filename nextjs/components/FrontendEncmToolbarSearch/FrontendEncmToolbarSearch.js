@@ -1,15 +1,16 @@
 'use client';
 
-import useSWR from 'swr';
-import { Combobox, Highlight, TextInput, useCombobox, Text, ActionIcon } from '@mantine/core';
-import { useMemo, useState } from 'react';
-import { useTranslations } from 'next-intl';
-import styles from './FrontendEncmToolbarSearch.module.css';
 import useSearch from '@/hooks/useSearch';
-import { IconX, IconSearch } from '@tabler/icons-react';
 import parseStopLocationName from '@/services/parseStopLocationName';
+import { ActionIcon, Combobox, Highlight, Text, TextInput, useCombobox } from '@mantine/core';
+import { IconSearch, IconX } from '@tabler/icons-react';
+import { useTranslations } from 'next-intl';
+import { useMemo, useState } from 'react';
+import useSWR from 'swr';
 
-export default function FrontendEncmToolbarSearch({ selectedEncmId, onSelectEncmId }) {
+import styles from './FrontendEncmToolbarSearch.module.css';
+
+export default function FrontendEncmToolbarSearch({ onSelectEncmId, selectedEncmId }) {
 	//
 
 	//
@@ -29,11 +30,11 @@ export default function FrontendEncmToolbarSearch({ selectedEncmId, onSelectEncm
 
 	const allEncmDataFormatted = useMemo(() => {
 		if (allEncmData) {
-			return allEncmData.map(encm => {
+			return allEncmData.map((encm) => {
 				return {
 					id: encm.id,
-					name: encm.name,
 					location: parseStopLocationName(encm.locality, encm.municipality_name),
+					name: encm.name,
 				};
 			});
 		}
@@ -44,8 +45,8 @@ export default function FrontendEncmToolbarSearch({ selectedEncmId, onSelectEncm
 
 	const allEncmDataFilteredBySearchQuery = useSearch(searchQuery, allEncmDataFormatted, {
 		keys: ['id', 'name', 'location'],
-		regexReplace: /[^a-zA-Z0-9]/g,
 		limitResults: 100,
+		regexReplace: /[^a-zA-Z0-9]/g,
 	});
 
 	//
@@ -72,7 +73,7 @@ export default function FrontendEncmToolbarSearch({ selectedEncmId, onSelectEncm
 		comboboxStore.openDropdown();
 	};
 
-	const handleSelectEncm = selectedEncmId => {
+	const handleSelectEncm = (selectedEncmId) => {
 		const selectedEncmData = allEncmData.find(item => item.id === selectedEncmId);
 		if (!selectedEncmData) return;
 		setSearchQuery(selectedEncmData.name);
@@ -88,42 +89,47 @@ export default function FrontendEncmToolbarSearch({ selectedEncmId, onSelectEncm
 			<Combobox onOptionSubmit={handleSelectEncm} store={comboboxStore}>
 				<Combobox.Target>
 					<TextInput
-						autoComplete='off'
-						type='search'
 						aria-label={t('label')}
-						placeholder={t('placeholder')}
-						value={searchQuery}
-						size='lg'
+						autoComplete="off"
 						leftSection={<IconSearch size={20} />}
-						rightSection={
-							searchQuery &&
-								<ActionIcon onClick={handleClearSearchField} size='md' variant='subtle' color='gray'>
-									<IconX size={20} />
-								</ActionIcon>
-
-						}
+						onBlur={handleExitSearchField}
 						onChange={handleSearchQueryChange}
 						onClick={handleClickSearchField}
 						onFocus={handleClickSearchField}
-						onBlur={handleExitSearchField}
+						placeholder={t('placeholder')}
+						size="lg"
+						type="search"
+						value={searchQuery}
+						rightSection={
+							searchQuery
+							&& (
+								<ActionIcon color="gray" onClick={handleClearSearchField} size="md" variant="subtle">
+									<IconX size={20} />
+								</ActionIcon>
+							)
+
+						}
 					/>
 				</Combobox.Target>
 
 				<Combobox.Dropdown>
 					<Combobox.Options mah={200} style={{ overflowY: 'auto' }}>
-						{allEncmDataFilteredBySearchQuery.length === 0 ?
-							<Combobox.Empty>{t('no_results')}</Combobox.Empty> :
-							allEncmDataFilteredBySearchQuery.map(item => <Combobox.Option key={item.id} value={item.id}>
-								<div className={styles.comboboxOption}>
-									<div className={styles.encmInfo}>
-										<Highlight highlight={searchQuery} fz='sm' fw={500}>
-											{item.name}
-										</Highlight>
-										<Text fz='xs'>{item.location}</Text>
+						{allEncmDataFilteredBySearchQuery.length === 0
+							? <Combobox.Empty>{t('no_results')}</Combobox.Empty>
+							: allEncmDataFilteredBySearchQuery.map(item => (
+								<Combobox.Option key={item.id} value={item.id}>
+									<div className={styles.comboboxOption}>
+										<div className={styles.encmInfo}>
+											<Highlight fw={500} fz="sm" highlight={searchQuery}>
+												{item.name}
+											</Highlight>
+											<Text fz="xs">{item.location}</Text>
+										</div>
 									</div>
-								</div>
-							</Combobox.Option>)
-						}
+								</Combobox.Option>
+							),
+
+							)}
 					</Combobox.Options>
 				</Combobox.Dropdown>
 			</Combobox>

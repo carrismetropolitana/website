@@ -2,8 +2,8 @@
 
 /* * */
 
-import useSWR from 'swr';
 import { createContext, useCallback, useContext, useMemo, useState } from 'react';
+import useSWR from 'swr';
 
 /* * */
 
@@ -11,23 +11,23 @@ import { createContext, useCallback, useContext, useMemo, useState } from 'react
 // SETUP INITIAL STATE
 
 const initialMapState = {
-	style: 'map',
 	auto_zoom: null,
 	selected_coordinates: null,
 	selected_feature: null,
+	style: 'map',
 };
 
 const initialEntitiesState = {
+	pattern: null,
 	pattern_id: null,
+	shape: null,
 	shape_id: null,
-	vehicle_id: null,
-	trip_id: null,
 	//
 	stop: null,
 	trip: null,
-	pattern: null,
-	shape: null,
+	trip_id: null,
 	vehicle: null,
+	vehicle_id: null,
 };
 
 /* * */
@@ -99,13 +99,13 @@ export function FrontendStopsContextProvider({ children }) {
 
 	// --------
 
-	const setSelectedCoordinates = useCallback(newCoordinates => {
+	const setSelectedCoordinates = useCallback((newCoordinates) => {
 		setEntitiesState(initialEntitiesState);
 		setMapState(prev => ({ ...prev, selected_coordinates: newCoordinates, selected_feature: null }));
 	}, []);
 
-	const setSelectedFeature = useCallback(newFeature => {
-		setMapState(prev => ({ ...prev, selected_feature: newFeature, selected_coordinates: null }));
+	const setSelectedFeature = useCallback((newFeature) => {
+		setMapState(prev => ({ ...prev, selected_coordinates: null, selected_feature: newFeature }));
 	}, []);
 
 	const disableAutoZoom = useCallback(() => {
@@ -115,10 +115,10 @@ export function FrontendStopsContextProvider({ children }) {
 	// --------
 
 	const selectStop = useCallback(
-		stopId => {
+		(stopId) => {
 			const foundStop = allStopsData.find(item => item.id === stopId);
 			if (foundStop) {
-				setMapState(prev => ({ ...prev, auto_zoom: true, selected_feature: null, selected_coordinates: null }));
+				setMapState(prev => ({ ...prev, auto_zoom: true, selected_coordinates: null, selected_feature: null }));
 				setEntitiesState({ ...initialEntitiesState, stop: foundStop });
 				updateWindowUrl(stopId, foundStop.name);
 			}
@@ -133,7 +133,7 @@ export function FrontendStopsContextProvider({ children }) {
 
 	// --------
 
-	const selectTrip = useCallback(tripData => {
+	const selectTrip = useCallback((tripData) => {
 		setEntitiesState(prev => ({ ...prev, trip: tripData }));
 	}, []);
 
@@ -146,21 +146,21 @@ export function FrontendStopsContextProvider({ children }) {
 
 	const contextObject = useMemo(
 		() => ({
-			//
-			map: mapState,
-			updateMap: updateMapState,
-			setSelectedCoordinates,
-			setSelectedFeature,
+			clearSelectedStop,
+			clearSelectedTrip,
 			disableAutoZoom,
 			//
 			entities: entitiesState,
-			updateEntities,
+			//
+			map: mapState,
 			//
 			selectStop,
-			clearSelectedStop,
 			//
 			selectTrip,
-			clearSelectedTrip,
+			setSelectedCoordinates,
+			setSelectedFeature,
+			updateEntities,
+			updateMap: updateMapState,
 		}),
 		[mapState, updateMapState, setSelectedCoordinates, setSelectedFeature, disableAutoZoom, entitiesState, updateEntities, selectStop, clearSelectedStop, selectTrip, clearSelectedTrip],
 	);

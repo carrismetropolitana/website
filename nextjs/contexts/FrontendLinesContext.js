@@ -2,9 +2,9 @@
 
 /* * */
 
-import useSWR from 'swr';
-import { createContext, useCallback, useContext, useMemo, useState } from 'react';
 import parseDateToString from '@/services/parseDateToString';
+import { createContext, useCallback, useContext, useMemo, useState } from 'react';
+import useSWR from 'swr';
 
 /* * */
 
@@ -12,25 +12,25 @@ import parseDateToString from '@/services/parseDateToString';
 // SETUP INITIAL STATE
 
 const initialMapState = {
-	style: 'map',
 	auto_zoom: true,
+	style: 'map',
 };
 
 const initialEntitiesState = {
 	//
-	municipality: null,
-	locality: null,
-	//
 	date: null,
 	//
 	line: null,
-	route: null,
+	locality: null,
+	//
+	municipality: null,
 	pattern: null,
+	route: null,
 	//
 	stop: null,
 	stop_sequence: null,
-	vehicle_id: null,
 	trip_id: null,
+	vehicle_id: null,
 };
 
 /* * */
@@ -84,7 +84,7 @@ export function FrontendLinesContextProvider({ children }) {
 	//
 	// B. Setup actions
 
-	const selectMunicipality = useCallback(municipalityData => {
+	const selectMunicipality = useCallback((municipalityData) => {
 		setEntitiesState(prev => ({ ...prev, municipality: municipalityData }));
 	}, []);
 
@@ -94,7 +94,7 @@ export function FrontendLinesContextProvider({ children }) {
 
 	// ---------
 
-	const selectLocality = useCallback(localityData => {
+	const selectLocality = useCallback((localityData) => {
 		setEntitiesState(prev => ({ ...prev, locality: localityData }));
 	}, []);
 
@@ -105,7 +105,7 @@ export function FrontendLinesContextProvider({ children }) {
 	// ---------
 
 	const selectLine = useCallback(
-		lineId => {
+		(lineId) => {
 			const foundLine = allLinesData.find(item => item.id === lineId);
 			if (foundLine) {
 				setEntitiesState(prev => ({ ...prev, line: foundLine, pattern: null, stop: null }));
@@ -122,7 +122,7 @@ export function FrontendLinesContextProvider({ children }) {
 
 	// ---------
 
-	const selectDate = useCallback(date => {
+	const selectDate = useCallback((date) => {
 		if (!date) return;
 		setEntitiesState(prev => ({ ...prev, date: date, date_string: parseDateToString(date) }));
 	}, []);
@@ -134,12 +134,12 @@ export function FrontendLinesContextProvider({ children }) {
 	// ---------
 
 	const selectPattern = useCallback((routeData, patternData) => {
-		setEntitiesState(prev => ({ ...prev, route: routeData, pattern: patternData, stop: patternData.path[0]?.stop, stop_sequence: patternData.path[0]?.stop_sequence }));
+		setEntitiesState(prev => ({ ...prev, pattern: patternData, route: routeData, stop: patternData.path[0]?.stop, stop_sequence: patternData.path[0]?.stop_sequence }));
 		setMapState(prev => ({ ...prev, auto_zoom: true }));
 	}, []);
 
 	const clearSelectedPattern = useCallback(() => {
-		setEntitiesState(prev => ({ ...prev, route: null, pattern: null, stop: null }));
+		setEntitiesState(prev => ({ ...prev, pattern: null, route: null, stop: null }));
 	}, []);
 
 	// ---------
@@ -185,33 +185,33 @@ export function FrontendLinesContextProvider({ children }) {
 
 	const contextObject = useMemo(
 		() => ({
-			//
-			map: mapState,
-			updateMap: updateMapState,
-			//
-			entities: entitiesState,
-			updateEntities: updateEntitiesState,
-			//
-			selectMunicipality,
-			clearSelectedMunicipality,
-			//
-			selectLocality,
-			clearSelectedLocality,
-			//
-			selectLine,
-			clearSelectedLine,
-			//
-			selectDate,
 			clearSelectedDate,
-			//
-			selectPattern,
+			clearSelectedLine,
+			clearSelectedLocality,
+			clearSelectedMunicipality,
 			clearSelectedPattern,
-			//
-			selectStop,
 			clearSelectedStop,
+			disableAutoZoom,
 			//
 			enableAutoZoom,
-			disableAutoZoom,
+			//
+			entities: entitiesState,
+			//
+			map: mapState,
+			//
+			selectDate,
+			//
+			selectLine,
+			//
+			selectLocality,
+			//
+			selectMunicipality,
+			//
+			selectPattern,
+			//
+			selectStop,
+			updateEntities: updateEntitiesState,
+			updateMap: updateMapState,
 			//
 		}),
 		[

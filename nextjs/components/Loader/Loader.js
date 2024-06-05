@@ -1,12 +1,12 @@
 import styles from './Loader.module.css';
 
-export default function Loader({ visible, maxed, full, fixed, size = 30 }) {
+export default function Loader({ fixed, full, maxed, size = 30, visible }) {
 	//
 
 	if (!visible) return <div />;
 
 	// Setup spinner
-	const Spinner = () => <div className={styles.spinner} style={{ width: size, height: size, borderWidth: size / 7 }} />;
+	const Spinner = () => <div className={styles.spinner} style={{ borderWidth: size / 7, height: size, width: size }} />;
 
 	// If
 	if (full) {

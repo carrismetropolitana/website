@@ -1,7 +1,7 @@
 /* * */
 
-import { useTranslations } from 'next-intl';
 import Text from '@/components/Text/Text';
+import { useTranslations } from 'next-intl';
 
 /* * */
 

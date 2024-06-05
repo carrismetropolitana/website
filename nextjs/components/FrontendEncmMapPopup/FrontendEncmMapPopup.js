@@ -2,8 +2,9 @@
 
 /* * */
 
-import styles from './FrontendEncmMapPopup.module.css';
 import { useTranslations } from 'next-intl';
+
+import styles from './FrontendEncmMapPopup.module.css';
 
 /* * */
 

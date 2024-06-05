@@ -7,7 +7,7 @@ import styles from './FrontendBrandSwitcher.module.css';
 export default function FrontendBrandSwitcher() {
 	return (
 		<div className={styles.container}>
-			<a href='https://www.tmlmobilidade.pt' className={styles.link}>
+			<a className={styles.link} href="https://www.tmlmobilidade.pt">
 				<div className={styles.label}>TML</div>
 				<div className={styles.indicatorWrapper}>
 					<div className={styles.indicatorActive} />
@@ -19,7 +19,7 @@ export default function FrontendBrandSwitcher() {
 					<div className={styles.indicatorActive} />
 				</div>
 			</div>
-			<a href='https://www.navegante.pt' className={styles.link}>
+			<a className={styles.link} href="https://www.navegante.pt">
 				<div className={styles.label}>navegante®</div>
 				<div className={styles.indicatorWrapper}>
 					<div className={styles.indicatorActive} />

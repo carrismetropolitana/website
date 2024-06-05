@@ -1,4 +1,100 @@
 {
+	"FrontendHeaderLogo": {
+		"logo": {
+			"alt": "Carris Metropolitana"
+		}
+	},
+	"FrontendHeaderNavItem": {
+		"schedules": "Horários",
+		"lines": "Pesquisar Linhas",
+		"stops": "Pesquisar Paragens",
+		"alerts": "Alertas de Serviço",
+		"planner": "Planear Viagem",
+		"schools": "Escolas & Universidades",
+		"flyers": "O Meu Livro de Horários",
+		"tarifs": "Tarifas",
+		"tickets": "Bilhetes de Bordo",
+		"navegante": "Passe navegante®",
+		"stores": "Lojas e Rede de Agentes",
+		"help": "Apoio ao Cliente",
+		"faq": "Perguntas Frequentes",
+		"lost-and-found": "Perdidos e Achados",
+		"complaints": "Sugestões e Reclamações",
+		"contacts": "Contactos"
+	},
+	"FrontendHeaderAccount": {
+		"configs": "Personalizar Experiência",
+		"favorites": "Favoritos",
+		"history": "Histórico de Pesquisa"
+	},
+	"FrontendHeaderLocaleSwitcher": {
+		"pt": {
+			"label": "🇵🇹",
+			"alt": "Português"
+		},
+		"en": {
+			"label": "🇬🇧",
+			"alt": "English"
+		},
+		"fr": {
+			"label": "🇫🇷",
+			"alt": "Français"
+		}
+	},
+	"FrontendFooter": {
+    "primary_links": {
+			"about": "Sobre a Carris Metropolitana",
+			"opendata": "Dados Abertos",
+			"status": "Estado"
+    },
+    "secondary_links": {
+			"conditions": "Condições Gerais de Transporte",
+			"privacy": "Política de Privacidade",
+			"cookies": "Política de Cookies",
+			"legal": "Aviso Legal"
+    },
+    "copyright": "© Carris Metropolitana {year} - Todos os direitos reservados"
+  },
+	"FrontendFooterDebug":{
+		"enabled": "Desligar Debug",
+    "disabled": "Ligar Debug"
+	},
+	"FrontendHomepageSchedules": {
+		"section_heading":"Horários",
+		"nav_items": {
+			"lines": "Pesquisar Linhas",
+			"stops": "Pesquisar Paragens",
+			"planner": "Planear Viagem",
+			"alerts": "Alertas de Serviço"
+		}
+	},
+	"FrontendHomepageNews": {
+		"section_heading": "Notícias",
+		"nav_items": {
+			"news": "Notícias",
+			"events": "Eventos",
+			"promotions": "Promoções"
+		}
+
+	},
+	"FrontendHomepageSupport": {
+		"section_heading":"Apoio ao Cliente",
+		"nav_items": {
+			"faq": "Perguntas Frequentes",
+			"lost-and-found": "Perdidos e Achados",
+			"complaints": "Sugestões e Reclamações",
+			"stores": "Lojas e Rede de Agentes",
+			"contacts":"Contactos"
+		}
+	},
+
+	"FrontendNewsCard": {
+		"publish_date": "{publishDate, date, long}"
+	},
+
+
+
+
   "equipments": {
     "bus": "Connection with Bus",
     "train": "Connection with Train",
@@ -557,20 +653,7 @@
     "solution": "Agradecemos a sua compreensão.",
     "more_info": "Saber Mais ›"
   },
-  "FrontendFooter": {
-    "contacts": {
-      "info_line": {
-        "number": "210 418 800",
-        "description": "Linha informativa Carris Metropolitana",
-        "disclaimer": "Chamada Rede Fixa Nacional"
-      },
-      "help_line": {
-        "number": "210 410 400",
-        "description": "Linha de apoio ao passageiro",
-        "disclaimer": "Chamada Rede Fixa Nacional"
-      }
-    }
-  },
+
   "FrontendFooterLogo": {
     "contacts": {
       "info_line": {
@@ -768,10 +851,6 @@
     "label": "Procurar paragens por nome, código, localização...",
     "placeholder": "Procurar paragens por nome, código, localização...",
     "no_results": "Nenhuma Paragem Encontrada"
-  },
-  "DebugToggle": {
-    "enabled": "Disable Debug",
-    "disabled": "Enable Debug"
   },
   "FrontendStopsTimetableFeedback": {
     "message": "A estimativa está correta?",

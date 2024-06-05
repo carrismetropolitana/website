@@ -2,16 +2,17 @@
 
 /* * */
 
-import styles from './FrontendLines.module.css';
-import useSWR from 'swr';
-import { useEffect } from 'react';
-import { useTranslations } from 'next-intl';
-import Panel from '@/components/Panel/Panel';
-import FrontendLinesToolbar from '@/components/FrontendLinesToolbar/FrontendLinesToolbar';
-import FrontendLinesContent from '@/components/FrontendLinesContent/FrontendLinesContent';
 import BetaIcon from '@/components/BetaIcon/BetaIcon';
+import FrontendLinesContent from '@/components/FrontendLinesContent/FrontendLinesContent';
+import FrontendLinesToolbar from '@/components/FrontendLinesToolbar/FrontendLinesToolbar';
+import Panel from '@/components/Panel/Panel';
 import { useAppAnalyticsContext } from '@/contexts/AppAnalyticsContext';
 import { useFrontendLinesContext } from '@/contexts/FrontendLinesContext';
+import { useTranslations } from 'next-intl';
+import { useEffect } from 'react';
+import useSWR from 'swr';
+
+import styles from './FrontendLines.module.css';
 
 /* * */
 
@@ -36,8 +37,8 @@ export default function FrontendLines() {
 	//
 	// C. Fetch data
 
-	const { data: allLinesData, isLoading: allLinesLoading, error: allLinesError } = useSWR('https://api.carrismetropolitana.pt/lines');
-	const { isLoading: allMunicipalitiesLoading, error: allMunicipalitiesError } = useSWR('https://api.carrismetropolitana.pt/municipalities/');
+	const { data: allLinesData, error: allLinesError, isLoading: allLinesLoading } = useSWR('https://api.carrismetropolitana.pt/lines');
+	const { error: allMunicipalitiesError, isLoading: allMunicipalitiesLoading } = useSWR('https://api.carrismetropolitana.pt/municipalities/');
 	const { isValidating: allVehiclesValidating } = useSWR('https://api.carrismetropolitana.pt/vehicles');
 
 	//
@@ -55,17 +56,17 @@ export default function FrontendLines() {
 
 	return (
 		<Panel
-			type='A'
-			title={t('Panel_title')}
-			loading={allLinesLoading || allMunicipalitiesLoading}
 			error={allLinesError || allMunicipalitiesError}
+			loading={allLinesLoading || allMunicipalitiesLoading}
+			title={t('Panel_title')}
+			type="A"
 			validating={allVehiclesValidating}
-			rightSection={
+			rightSection={(
 				<>
 					{allVehiclesValidating && <div className={styles.validating}>V</div>}
 					<BetaIcon />
 				</>
-			}
+			)}
 		>
 			<FrontendLinesToolbar />
 			<FrontendLinesContent />

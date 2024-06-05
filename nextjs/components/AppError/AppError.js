@@ -2,12 +2,13 @@
 
 /* * */
 
-import { useEffect, useState } from 'react';
-import { useTranslations } from 'next-intl';
-import styles from './AppError.module.css';
-import { IconBarrierBlock, IconMoodSad, IconTrafficCone } from '@tabler/icons-react';
-import { Button } from '@mantine/core';
 import { useAppAnalyticsContext } from '@/contexts/AppAnalyticsContext';
+import { Button } from '@mantine/core';
+import { IconBarrierBlock, IconMoodSad, IconTrafficCone } from '@tabler/icons-react';
+import { useTranslations } from 'next-intl';
+import { useEffect, useState } from 'react';
+
+import styles from './AppError.module.css';
 
 /* * */
 
@@ -49,11 +50,11 @@ export default function AppError() {
 
 	return (
 		<div className={styles.container}>
-			<IconTrafficCone size={75} className={styles.icon} />
+			<IconTrafficCone className={styles.icon} size={75} />
 			<h1 className={styles.title}>{t('title')}</h1>
 			<h2 className={styles.subtitle}>{t('subtitle')}</h2>
 			<p className={styles.retryMessage}>{t('retry', { value: reloadInSeconds })}</p>
-			<Button onClick={handleGoToHomepage} variant='subtle' color='orange' size='xs'>
+			<Button color="orange" onClick={handleGoToHomepage} size="xs" variant="subtle">
 				{t('goto_home')}
 			</Button>
 		</div>

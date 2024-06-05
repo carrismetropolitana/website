@@ -1,16 +1,17 @@
 'use client';
 
-import useSWR from 'swr';
-import styles from './FrontendStopsTimetableRow.module.css';
+import CopyBadge from '@/components/CopyBadge/CopyBadge';
+import FrontendStopsTimetableFeedback from '@/components/FrontendStopsTimetableFeedback/FrontendStopsTimetableFeedback';
 import LineDisplay from '@/components/LineDisplay/LineDisplay';
-import { useEffect, useState } from 'react';
+import LiveIcon from '@/components/LiveIcon/LiveIcon';
+import { useDebugContext } from '@/contexts/DebugContext';
+import { useFrontendStopsContext } from '@/contexts/FrontendStopsContext';
 import { convertOperationTimeStringTo24HourTimeString, getMinutesFromOperationTimeString } from '@/services/parseRelativeTime';
 import { useTranslations } from 'next-intl';
-import LiveIcon from '@/components/LiveIcon/LiveIcon';
-import CopyBadge from '@/components/CopyBadge/CopyBadge';
-import { useDebugContext } from '@/contexts/DebugContext';
-import FrontendStopsTimetableFeedback from '@/components/FrontendStopsTimetableFeedback/FrontendStopsTimetableFeedback';
-import { useFrontendStopsContext } from '@/contexts/FrontendStopsContext';
+import { useEffect, useState } from 'react';
+import useSWR from 'swr';
+
+import styles from './FrontendStopsTimetableRow.module.css';
 
 /* * */
 
@@ -142,8 +143,8 @@ export default function FrontendStopsTimetableRow({ rowType, tripData }) {
 
 	const handleSelectTrip = () => {
 		if (!tripData || !patternData) return;
-		if (FrontendStopsContext.entities.trip_id === tripData.trip_id) FrontendStopsContext.updateEntities({ trip_id: null, pattern_id: null, shape_id: null, vehicle_id: null });
-		else FrontendStopsContext.updateEntities({ trip_id: tripData.trip_id, pattern_id: tripData.pattern_id, shape_id: patternData.shape_id, vehicle_id: tripData.vehicle_id });
+		if (FrontendStopsContext.entities.trip_id === tripData.trip_id) FrontendStopsContext.updateEntities({ pattern_id: null, shape_id: null, trip_id: null, vehicle_id: null });
+		else FrontendStopsContext.updateEntities({ pattern_id: tripData.pattern_id, shape_id: patternData.shape_id, trip_id: tripData.trip_id, vehicle_id: tripData.vehicle_id });
 	};
 
 	//
@@ -156,33 +157,38 @@ export default function FrontendStopsTimetableRow({ rowType, tripData }) {
 	return (
 		<div className={`${styles.container} ${styles[tripRealtimeStatus]} ${FrontendStopsContext.entities.trip_id === tripData.trip_id && styles.selected}`} onClick={handleSelectTrip}>
 			<div className={styles.tripSummary}>
-				<LineDisplay short_name={tripData.line_id} long_name={patternData?.headsign} color={patternData?.color} text_color={patternData?.text_color} />
-				{tripRealtimeStatus === 'passed' &&
+				<LineDisplay color={patternData?.color} long_name={patternData?.headsign} short_name={tripData.line_id} text_color={patternData?.text_color} />
+				{tripRealtimeStatus === 'passed'
+				&& (
 					<div className={styles.arrivalEstimate}>
 						<p>{t('trip_realtime_status.passed', { value: tripEtaString })}</p>
 					</div>
-				}
-				{tripRealtimeStatus === 'arriving_now' &&
+				)}
+				{tripRealtimeStatus === 'arriving_now'
+				&& (
 					<div className={styles.arrivalEstimate}>
 						<LiveIcon />
 						<p>{t('trip_realtime_status.arriving_now')}</p>
 					</div>
-				}
-				{tripRealtimeStatus === 'realtime' &&
+				)}
+				{tripRealtimeStatus === 'realtime'
+				&& (
 					<div className={styles.arrivalEstimate}>
 						<LiveIcon />
 						<p>{t('trip_realtime_status.realtime', { value: tripEtaMinutes })}</p>
 					</div>
-				}
-				{tripRealtimeStatus === 'scheduled' &&
+				)}
+				{tripRealtimeStatus === 'scheduled'
+				&& (
 					<div className={styles.arrivalEstimate}>
 						<p>{t('trip_realtime_status.scheduled', { value: tripEtaString })}</p>
 					</div>
-				}
+				)}
 			</div>
 
 			<div className={styles.tripDetails}>
-				{debugContext.isDebug &&
+				{debugContext.isDebug
+				&& (
 					<div className={styles.testData} onClick={e => e.stopPropagation()}>
 						<CopyBadge label={`stop_id: ${FrontendStopsContext.entities.stop?.id}`} value={FrontendStopsContext.entities.stop?.id} />
 						<CopyBadge label={`trip_id: ${tripData.trip_id}`} value={tripData.trip_id} />
@@ -192,18 +198,22 @@ export default function FrontendStopsTimetableRow({ rowType, tripData }) {
 						<CopyBadge label={`Estimado: ${tripData.estimated_arrival}`} value={tripData.estimated_arrival} />
 						<CopyBadge label={`Planeado: ${tripData.scheduled_arrival}`} value={tripData.scheduled_arrival} />
 					</div>
-				}
+				)}
 
 				{(tripRealtimeStatus === 'realtime' || tripRealtimeStatus === 'arriving_now' || tripRealtimeStatus === 'passed') && tripEtaMinutes > -10 && tripData.vehicle_id && !debugContext.isDebug && <FrontendStopsTimetableFeedback tripData={tripData} />}
 
 				<div className={styles.localitiesPerLine}>
 					<p>Passa por</p>
 					<p className={styles.localities}>
-						{patternData?.localities?.length > 0 &&
-							patternData.localities.map((locality, index) => <span key={index}>
+						{patternData?.localities?.length > 0
+						&& patternData.localities.map((locality, index) => (
+							<span key={index}>
 								{index > 0 && <span className={styles.localitySeparator}> • </span>}
 								<span className={styles.localityName}>{locality}</span>
-							</span>)}
+							</span>
+						),
+
+						)}
 					</p>
 				</div>
 			</div>

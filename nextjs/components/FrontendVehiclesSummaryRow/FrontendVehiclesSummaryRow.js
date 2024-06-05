@@ -4,6 +4,7 @@
 
 import Image from 'next/image';
 import { useTranslations } from 'next-intl';
+
 import styles from './FrontendVehiclesSummaryRow.module.css';
 
 /* * */
@@ -26,7 +27,7 @@ export default function FrontendVehiclesSummaryRow({ mirrored = false, vehicleMo
 					<h3>{vehicleModel}</h3>
 				</div>
 				<div className={styles.imageWrapper}>
-					<Image src={'/vehicles/placeholder.png'} alt='Picture of the author' sizes='500px' fill style={{ objectFit: 'contain' }} />
+					<Image alt="Picture of the author" sizes="500px" src="/vehicles/placeholder.png" style={{ objectFit: 'contain' }} fill />
 				</div>
 			</div>
 		);
@@ -35,7 +36,7 @@ export default function FrontendVehiclesSummaryRow({ mirrored = false, vehicleMo
 	return (
 		<div className={`${styles.container} ${styles.mirrored}`}>
 			<div className={styles.imageWrapper}>
-				<Image src={'/vehicles/placeholder.png'} alt='Picture of the author' sizes='500px' fill style={{ objectFit: 'contain' }} />
+				<Image alt="Picture of the author" sizes="500px" src="/vehicles/placeholder.png" style={{ objectFit: 'contain' }} fill />
 			</div>
 			<div className={styles.detailsWrapper}>
 				<h3>{vehicleModel}</h3>

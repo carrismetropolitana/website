@@ -1,7 +1,8 @@
 /* * */
 
-import styles from './NoDataLabel.module.css';
 import { useTranslations } from 'next-intl';
+
+import styles from './NoDataLabel.module.css';
 
 /* * */
 

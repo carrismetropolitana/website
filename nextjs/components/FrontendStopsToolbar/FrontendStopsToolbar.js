@@ -2,14 +2,15 @@
 
 /* * */
 
-import styles from './FrontendStopsToolbar.module.css';
+import FrontendStopsToolbarSearch from '@/components/FrontendStopsToolbarSearch/FrontendStopsToolbarSearch';
 import OSMMapDefaults from '@/components/OSMMap/OSMMap.config';
+import { useFrontendStopsContext } from '@/contexts/FrontendStopsContext';
+import { ActionIcon, SegmentedControl, Tooltip } from '@mantine/core';
 import { IconArrowsMinimize, IconBrandGoogleMaps } from '@tabler/icons-react';
-import { Tooltip, ActionIcon, SegmentedControl } from '@mantine/core';
 import { useTranslations } from 'next-intl';
 import { useMap } from 'react-map-gl/maplibre';
-import FrontendStopsToolbarSearch from '@/components/FrontendStopsToolbarSearch/FrontendStopsToolbarSearch';
-import { useFrontendStopsContext } from '@/contexts/FrontendStopsContext';
+
+import styles from './FrontendStopsToolbar.module.css';
 
 /* * */
 
@@ -26,7 +27,7 @@ export default function FrontendStopsToolbar() {
 	//
 	// B. Handle actions
 
-	const handleMapStyleChange = value => {
+	const handleMapStyleChange = (value) => {
 		frontendStopsContext.updateMap({ style: value });
 	};
 
@@ -49,22 +50,22 @@ export default function FrontendStopsToolbar() {
 			<div className={styles.controls}>
 				<SegmentedControl
 					aria-label={t('map_style.label')}
-					value={frontendStopsContext.map.style}
 					onChange={handleMapStyleChange}
+					value={frontendStopsContext.map.style}
 					data={[
-						{ value: 'map', label: t('map_style.options.map') },
-						{ value: 'satellite', label: t('map_style.options.satellite') },
+						{ label: t('map_style.options.map'), value: 'map' },
+						{ label: t('map_style.options.satellite'), value: 'satellite' },
 					]}
 				/>
 
-				<Tooltip label={t('recenter_map.label')} position='bottom' withArrow>
-					<ActionIcon color='gray' variant='light' size='lg' onClick={handleMapReCenter}>
+				<Tooltip label={t('recenter_map.label')} position="bottom" withArrow>
+					<ActionIcon color="gray" onClick={handleMapReCenter} size="lg" variant="light">
 						<IconArrowsMinimize size={20} />
 					</ActionIcon>
 				</Tooltip>
 
-				<Tooltip label={t('open_gmaps.label')} position='bottom' withArrow>
-					<ActionIcon color='gray' variant='light' size='lg' onClick={handleOpenInGoogleMaps}>
+				<Tooltip label={t('open_gmaps.label')} position="bottom" withArrow>
+					<ActionIcon color="gray" onClick={handleOpenInGoogleMaps} size="lg" variant="light">
 						<IconBrandGoogleMaps size={20} />
 					</ActionIcon>
 				</Tooltip>

@@ -1,12 +1,13 @@
 /* * */
 
-import styles from './StopName.module.css';
-import Text from '@/components/Text/Text';
 import AudioBadge from '@/components/AudioBadge/AudioBadge';
+import Text from '@/components/Text/Text';
+
+import styles from './StopName.module.css';
 
 /* * */
 
-export default function StopName({ id, name, tts_name, locality, municipality, selected = false, alignment = 'flex-start' }) {
+export default function StopName({ alignment = 'flex-start', id, locality, municipality, name, selected = false, tts_name }) {
 	//
 
 	// If none of the location strings are defined,
@@ -14,8 +15,10 @@ export default function StopName({ id, name, tts_name, locality, municipality, s
 	if (!locality && !municipality) {
 		return (
 			<div className={`${styles.container} ${styles[alignment]}`}>
-				<Text type={selected ? 'h2' : 'h3'} aria-label={tts_name || name}>
-					{name} <AudioBadge type='stops' id={id} />
+				<Text aria-label={tts_name || name} type={selected ? 'h2' : 'h3'}>
+					{name}
+					{' '}
+					<AudioBadge id={id} type="stops" />
 				</Text>
 			</div>
 		);
@@ -25,10 +28,12 @@ export default function StopName({ id, name, tts_name, locality, municipality, s
 	if (locality && !municipality) {
 		return (
 			<div className={`${styles.container} ${styles[alignment]}`}>
-				<Text type={selected ? 'h2' : 'h3'} aria-label={tts_name || name}>
-					{name} <AudioBadge type='stops' id={id} />
+				<Text aria-label={tts_name || name} type={selected ? 'h2' : 'h3'}>
+					{name}
+					{' '}
+					<AudioBadge id={id} type="stops" />
 				</Text>
-				<Text type='subtitle'>{locality}</Text>
+				<Text type="subtitle">{locality}</Text>
 			</div>
 		);
 	}
@@ -37,10 +42,12 @@ export default function StopName({ id, name, tts_name, locality, municipality, s
 	if (!locality && municipality) {
 		return (
 			<div className={`${styles.container} ${styles[alignment]}`}>
-				<Text type={selected ? 'h2' : 'h3'} aria-label={tts_name || name}>
-					{name} <AudioBadge type='stops' id={id} />
+				<Text aria-label={tts_name || name} type={selected ? 'h2' : 'h3'}>
+					{name}
+					{' '}
+					<AudioBadge id={id} type="stops" />
 				</Text>
-				<Text type='subtitle'>{municipality}</Text>
+				<Text type="subtitle">{municipality}</Text>
 			</div>
 		);
 	}
@@ -50,10 +57,12 @@ export default function StopName({ id, name, tts_name, locality, municipality, s
 	if (locality === municipality) {
 		return (
 			<div className={`${styles.container} ${styles[alignment]}`}>
-				<Text type={selected ? 'h2' : 'h3'} aria-label={tts_name || name}>
-					{name} <AudioBadge type='stops' id={id} />
+				<Text aria-label={tts_name || name} type={selected ? 'h2' : 'h3'}>
+					{name}
+					{' '}
+					<AudioBadge id={id} type="stops" />
 				</Text>
-				<Text type='subtitle'>{locality}</Text>
+				<Text type="subtitle">{locality}</Text>
 			</div>
 		);
 	}
@@ -61,11 +70,15 @@ export default function StopName({ id, name, tts_name, locality, municipality, s
 	// Return both if none of the previous conditions was matched.
 	return (
 		<div className={`${styles.container} ${styles[alignment]}`}>
-			<Text type={selected ? 'h2' : 'h3'} aria-label={tts_name || name}>
-				{name} <AudioBadge type='stops' id={id} />
+			<Text aria-label={tts_name || name} type={selected ? 'h2' : 'h3'}>
+				{name}
+				{' '}
+				<AudioBadge id={id} type="stops" />
 			</Text>
-			<Text type='subtitle'>
-				{locality}, {municipality}
+			<Text type="subtitle">
+				{locality}
+				,
+				{municipality}
 			</Text>
 		</div>
 	);

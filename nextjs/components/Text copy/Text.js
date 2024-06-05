@@ -4,7 +4,7 @@ import styles from './Text.module.css';
 
 /* * */
 
-export default function Text({ variant = 'default', text = '', ...props }) {
+export default function Text({ text = '', variant = 'default', ...props }) {
 	switch (variant) {
 		//
 

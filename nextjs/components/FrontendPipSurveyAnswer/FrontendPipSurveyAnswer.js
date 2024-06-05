@@ -1,11 +1,12 @@
 /* * */
 
 import { useFrontendPipContext } from '@/contexts/FrontendPipContext';
+
 import styles from './FrontendPipSurveyAnswer.module.css';
 
 /* * */
 
-export default function FrontendPipSurveyAnswer({ code, title, description }) {
+export default function FrontendPipSurveyAnswer({ code, description, title }) {
 	//
 
 	//

@@ -3,12 +3,13 @@
 /* * */
 
 import { useTranslations } from 'next-intl';
-import styles from './FrontendEncmItemTimetable.module.css';
 import { useEffect, useState } from 'react';
+
+import styles from './FrontendEncmItemTimetable.module.css';
 
 /* * */
 
-export default function FrontendEncmItemTimetable({ isOpen, mon, tue, wed, thu, fri, sat, sun }) {
+export default function FrontendEncmItemTimetable({ fri, isOpen, mon, sat, sun, thu, tue, wed }) {
 	//
 
 	//
@@ -41,13 +42,14 @@ export default function FrontendEncmItemTimetable({ isOpen, mon, tue, wed, thu, 
 			const arrayIndex = resultArray.findIndex(item => item.hours.join(',') === daySchedule.hours.join(','));
 			//
 			if (arrayIndex < 0) {
-				resultArray.push({ first_day: daySchedule.day, last_day: null, hours: daySchedule.hours });
-			} else {
+				resultArray.push({ first_day: daySchedule.day, hours: daySchedule.hours, last_day: null });
+			}
+			else {
 				resultArray[arrayIndex].last_day = daySchedule.day;
 			}
 		}
 
-		const parsedSchedulesResult = resultArray.map(parsedHours => {
+		const parsedSchedulesResult = resultArray.map((parsedHours) => {
 			return {
 				days: `${parsedHours.first_day ? t(parsedHours.first_day) : ''}${parsedHours.last_day ? '-' + t(parsedHours.last_day) : ''}`,
 				hours: parsedHours.hours.join(' | '),
@@ -64,10 +66,14 @@ export default function FrontendEncmItemTimetable({ isOpen, mon, tue, wed, thu, 
 	return (
 		<div className={styles.container}>
 			<h4 className={styles.title}>{t('title')}</h4>
-			{parsedSchedules.map(item => <div key={item.days} className={styles.schedule}>
-				<p className={styles.day}>{item.days}</p>
-				<p className={styles.hours}>{item.hours}</p>
-			</div>)}
+			{parsedSchedules.map(item => (
+				<div key={item.days} className={styles.schedule}>
+					<p className={styles.day}>{item.days}</p>
+					<p className={styles.hours}>{item.hours}</p>
+				</div>
+			),
+
+			)}
 			{isOpen ? <p className={styles.isOpen}>{t('is_open')}</p> : <p className={styles.isClosed}>{t('is_closed')}</p>}
 		</div>
 	);

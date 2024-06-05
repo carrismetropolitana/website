@@ -1,8 +1,8 @@
 /* * */
 
-import { getTranslations } from 'next-intl/server';
-import Panel from '@/components/Panel/Panel';
 import FrontendAlertsSummary from '@/components/FrontendAlertsSummary/FrontendAlertsSummary';
+import Panel from '@/components/Panel/Panel';
+import { getTranslations } from 'next-intl/server';
 
 /* * */
 

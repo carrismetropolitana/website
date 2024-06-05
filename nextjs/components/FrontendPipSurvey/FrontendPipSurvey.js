@@ -1,11 +1,12 @@
 /* * */
 
-import { useMemo } from 'react';
-import Text from '@/components/Text/Text';
-import { useTranslations } from 'next-intl';
-import styles from './FrontendPipSurvey.module.css';
-import { PipSurveyOptions } from '@/schemas/PipSurvey/options';
 import FrontendPipSurveyAnswer from '@/components/FrontendPipSurveyAnswer/FrontendPipSurveyAnswer';
+import Text from '@/components/Text/Text';
+import { PipSurveyOptions } from '@/schemas/PipSurvey/options';
+import { useTranslations } from 'next-intl';
+import { useMemo } from 'react';
+
+import styles from './FrontendPipSurvey.module.css';
 
 /* * */
 
@@ -25,8 +26,8 @@ export default function FrontendPipSurvey() {
 		if (!PipSurveyOptions.answer) return [];
 		return PipSurveyOptions.answer.map(item => ({
 			code: item,
-			title: pipSurveyOptionsLabels(`answer.${item}.title`),
 			description: pipSurveyOptionsLabels(`answer.${item}.description`),
+			title: pipSurveyOptionsLabels(`answer.${item}.title`),
 		}));
 	}, [pipSurveyOptionsLabels]);
 
@@ -37,7 +38,7 @@ export default function FrontendPipSurvey() {
 		<div className={styles.container}>
 			<Text>{t('question')}</Text>
 			<div className={styles.answersGrid}>
-				{pipSurveyAnswerData.map(item => <FrontendPipSurveyAnswer key={item.code} code={item.code} title={item.title} description={item.description} />)}
+				{pipSurveyAnswerData.map(item => <FrontendPipSurveyAnswer key={item.code} code={item.code} description={item.description} title={item.title} />)}
 			</div>
 		</div>
 	);

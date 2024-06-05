@@ -1,33 +1,30 @@
 /* * */
 
 import '@/styles/reset.css';
-import '@/styles/defaults.css';
-import '@/styles/colors.css';
-import '@mantine/core/styles.css';
-import '@mantine/dates/styles.css';
-import '@mantine/carousel/styles.css';
+import '@/styles/variables.css';
 
 /* * */
 
-import { Inter } from 'next/font/google';
-import Providers from './providers';
 import { ColorSchemeScript } from '@mantine/core';
+import { Inter } from 'next/font/google';
+
+import Providers from './providers';
 
 /* * */
 
 const inter = Inter({
-	weight: ['400', '500', '600', '700', '800'],
+	display: 'swap',
 	subsets: ['latin'],
 	variable: '--font-inter',
-	display: 'swap',
+	weight: ['500', '600', '700'],
 });
 
 /* * */
 
 export const metadata = {
+	description: 'Horários e Paragens',
 	metadataBase: process.env.VERCEL_URL ? new URL(`https://${process.env.VERCEL_URL}`) : new URL(`http://0.0.0.0:${process.env.PORT || 3000}`),
 	title: 'Carris Metropolitana',
-	description: 'Horários e Paragens',
 };
 
 /* * */

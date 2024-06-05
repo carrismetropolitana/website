@@ -2,17 +2,18 @@
 
 /* * */
 
-import useSWR from 'swr';
-import { useTranslations } from 'next-intl';
-import styles from './FrontendStopsTimetable.module.css';
-import Loader from '@/components/Loader/Loader';
-import { getMinutesFromOperationTimeString } from '@/services/parseRelativeTime';
-import NoDataLabel from '@/components/NoDataLabel/NoDataLabel';
-import FrontendStopsTimetableHeader from '@/components/FrontendStopsTimetableHeader/FrontendStopsTimetableHeader';
-import FrontendStopsTimetablePreviousTrips from '@/components/FrontendStopsTimetablePreviousTrips/FrontendStopsTimetablePreviousTrips';
 import FrontendStopsTimetableCurrentAndFutureTrips from '@/components/FrontendStopsTimetableCurrentAndFutureTrips/FrontendStopsTimetableCurrentAndFutureTrips';
 import FrontendStopsTimetableDividerLine from '@/components/FrontendStopsTimetableDividerLine/FrontendStopsTimetableDividerLine';
+import FrontendStopsTimetableHeader from '@/components/FrontendStopsTimetableHeader/FrontendStopsTimetableHeader';
+import FrontendStopsTimetablePreviousTrips from '@/components/FrontendStopsTimetablePreviousTrips/FrontendStopsTimetablePreviousTrips';
+import Loader from '@/components/Loader/Loader';
+import NoDataLabel from '@/components/NoDataLabel/NoDataLabel';
 import { useFrontendStopsContext } from '@/contexts/FrontendStopsContext';
+import { getMinutesFromOperationTimeString } from '@/services/parseRelativeTime';
+import { useTranslations } from 'next-intl';
+import useSWR from 'swr';
+
+import styles from './FrontendStopsTimetable.module.css';
 
 /* * */
 
@@ -35,8 +36,8 @@ export default function FrontendStopsTimetable() {
 
 	const {
 		data: stopRealtimeData,
-		isLoading: stopRealtimeLoading,
 		error: stopRealtimeError,
+		isLoading: stopRealtimeLoading,
 	} = useSWR(frontendStopsContext.entities.stop?.id && `https://api.carrismetropolitana.pt/stops/${frontendStopsContext.entities.stop.id}/realtime`, {
 		refreshInterval: 5000,
 	});
@@ -97,15 +98,18 @@ export default function FrontendStopsTimetable() {
 				const timeStringB = b.estimated_arrival.split(':').join('');
 				return timeStringA - timeStringB;
 				//
-			} else if (a.estimated_arrival) {
+			}
+			else if (a.estimated_arrival) {
 				// Only `a` has estimated_arrival, so it comes before `b`
 				return -1;
 				//
-			} else if (b.estimated_arrival) {
+			}
+			else if (b.estimated_arrival) {
 				// Only `b` has estimated_arrival, so it comes before `a`
 				return 1;
 				//
-			} else {
+			}
+			else {
 				// Both have only scheduled_arrival, compare them
 				const timeStringA = a.scheduled_arrival.split(':').join('');
 				const timeStringB = b.scheduled_arrival.split(':').join('');
@@ -124,7 +128,7 @@ export default function FrontendStopsTimetable() {
 	if (stopRealtimeLoading) {
 		return (
 			<div className={styles.container}>
-				<Loader visible maxed />
+				<Loader maxed visible />
 			</div>
 		);
 	}
@@ -138,12 +142,14 @@ export default function FrontendStopsTimetable() {
 	}
 
 	if (previousTrips.length > 0 || currentAndFutureTrips.length > 0) {
-		return <div className={styles.container}>
-			<FrontendStopsTimetableHeader />
-			<FrontendStopsTimetablePreviousTrips tripsData={previousTrips} />
-			<FrontendStopsTimetableDividerLine />
-			<FrontendStopsTimetableCurrentAndFutureTrips tripsData={currentAndFutureTrips} />
-		</div>;
+		return (
+			<div className={styles.container}>
+				<FrontendStopsTimetableHeader />
+				<FrontendStopsTimetablePreviousTrips tripsData={previousTrips} />
+				<FrontendStopsTimetableDividerLine />
+				<FrontendStopsTimetableCurrentAndFutureTrips tripsData={currentAndFutureTrips} />
+			</div>
+		);
 	}
 
 	if (frontendStopsContext.entities.stop.operational_status !== 'active') {

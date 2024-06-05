@@ -2,15 +2,16 @@
 
 /* * */
 
-import { useTranslations } from 'next-intl';
-import styles from './FrontendAlertsItem.module.css';
 // import FrontendAlertsSummary from '@/components/FrontendAlertsSummary/FrontendAlertsSummary';
 import { Accordion } from '@mantine/core';
 import Link from 'next/link';
+import { useTranslations } from 'next-intl';
+
+import styles from './FrontendAlertsItem.module.css';
 
 /* * */
 
-export default function FrontendAlertsItem({ header, description, type, url }) {
+export default function FrontendAlertsItem({ description, header, type, url }) {
 	//
 
 	//
@@ -24,13 +25,18 @@ export default function FrontendAlertsItem({ header, description, type, url }) {
 	if (possibleIcons.includes(type)) {
 		iconName = type;
 	}
-	let icon = <img src={'/icons/alerts/' + iconName + '.svg'} alt='icon' className={styles.icon} />;
+	let icon = <img alt="icon" className={styles.icon} src={'/icons/alerts/' + iconName + '.svg'} />;
 	return (
-		<Accordion.Item value={header} className={styles.item} py={4} >
+		<Accordion.Item className={styles.item} py={4} value={header}>
 			<Accordion.Control icon={icon}>
 				<h3>{header}</h3>
 			</Accordion.Control>
-			<Accordion.Panel>{description} <br/><Link prefetch={false} style={{ color: 'var(--info5)' }} href={url}>{t('show_more')}</Link></Accordion.Panel>
+			<Accordion.Panel>
+				{description}
+				{' '}
+				<br />
+				<Link href={url} prefetch={false} style={{ color: 'var(--info5)' }}>{t('show_more')}</Link>
+			</Accordion.Panel>
 		</Accordion.Item>
 	);
 

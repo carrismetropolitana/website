@@ -1,11 +1,12 @@
 /* * */
 
-import styles from './FrontendLinesContentPatternPathStopName.module.css';
 import AudioBadge from '@/components/AudioBadge/AudioBadge';
+
+import styles from './FrontendLinesContentPatternPathStopName.module.css';
 
 /* * */
 
-export default function FrontendLinesContentPatternPathStopName({ stopData, isSelected = false }) {
+export default function FrontendLinesContentPatternPathStopName({ isSelected = false, stopData }) {
 	//
 
 	// If none of the location strings are defined,
@@ -13,8 +14,10 @@ export default function FrontendLinesContentPatternPathStopName({ stopData, isSe
 	if (!stopData.locality && !stopData.municipality_name) {
 		return (
 			<div className={`${styles.container} ${isSelected && styles.isSelected}`}>
-				<h2 className={styles.stopName} aria-label={stopData.tts_name || stopData.name}>
-					{stopData.name} {isSelected && <AudioBadge type='stops' id={stopData.id} />}
+				<h2 aria-label={stopData.tts_name || stopData.name} className={styles.stopName}>
+					{stopData.name}
+					{' '}
+					{isSelected && <AudioBadge id={stopData.id} type="stops" />}
 				</h2>
 			</div>
 		);
@@ -24,8 +27,10 @@ export default function FrontendLinesContentPatternPathStopName({ stopData, isSe
 	if (stopData.locality && !stopData.municipality_name) {
 		return (
 			<div className={`${styles.container} ${isSelected && styles.isSelected}`}>
-				<h2 className={styles.stopName} aria-label={stopData.tts_name || stopData.name}>
-					{stopData.name} {isSelected && <AudioBadge type='stops' id={stopData.id} />}
+				<h2 aria-label={stopData.tts_name || stopData.name} className={styles.stopName}>
+					{stopData.name}
+					{' '}
+					{isSelected && <AudioBadge id={stopData.id} type="stops" />}
 				</h2>
 				<h6 className={styles.stopLocation}>{stopData.locality}</h6>
 			</div>
@@ -36,8 +41,10 @@ export default function FrontendLinesContentPatternPathStopName({ stopData, isSe
 	if (!stopData.locality && stopData.municipality_name) {
 		return (
 			<div className={`${styles.container} ${isSelected && styles.isSelected}`}>
-				<h2 className={styles.stopName} aria-label={stopData.tts_name || stopData.name}>
-					{stopData.name} {isSelected && <AudioBadge type='stops' id={stopData.id} />}
+				<h2 aria-label={stopData.tts_name || stopData.name} className={styles.stopName}>
+					{stopData.name}
+					{' '}
+					{isSelected && <AudioBadge id={stopData.id} type="stops" />}
 				</h2>
 				<h6 className={styles.stopLocation}>{stopData.municipality_name}</h6>
 			</div>
@@ -49,8 +56,10 @@ export default function FrontendLinesContentPatternPathStopName({ stopData, isSe
 	if (stopData.locality === stopData.municipality_name) {
 		return (
 			<div className={`${styles.container} ${isSelected && styles.isSelected}`}>
-				<h2 className={styles.stopName} aria-label={stopData.tts_name || stopData.name}>
-					{stopData.name} {isSelected && <AudioBadge type='stops' id={stopData.id} />}
+				<h2 aria-label={stopData.tts_name || stopData.name} className={styles.stopName}>
+					{stopData.name}
+					{' '}
+					{isSelected && <AudioBadge id={stopData.id} type="stops" />}
 				</h2>
 				<h6 className={styles.stopLocation}>{stopData.locality}</h6>
 			</div>
@@ -60,11 +69,15 @@ export default function FrontendLinesContentPatternPathStopName({ stopData, isSe
 	// Return both if none of the previous conditions was matched.
 	return (
 		<div className={`${styles.container} ${isSelected && styles.isSelected}`}>
-			<h2 className={styles.stopName} aria-label={stopData.tts_name || stopData.name}>
-				{stopData.name} {isSelected && <AudioBadge type='stops' id={stopData.id} />}
+			<h2 aria-label={stopData.tts_name || stopData.name} className={styles.stopName}>
+				{stopData.name}
+				{' '}
+				{isSelected && <AudioBadge id={stopData.id} type="stops" />}
 			</h2>
 			<h6 className={styles.stopLocation}>
-				{stopData.locality}, {stopData.municipality_name}
+				{stopData.locality}
+				,
+				{stopData.municipality_name}
 			</h6>
 		</div>
 	);

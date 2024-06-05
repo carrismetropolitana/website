@@ -2,12 +2,12 @@
 
 /* * */
 
-import { useEffect } from 'react';
-import { signOut, useSession } from 'next-auth/react';
 import { useRouter } from '@/translations/navigation';
-import styles from './FrontendProfile.module.css';
-import useSWR from 'swr';
 import { JsonInput } from '@mantine/core';
+import { useEffect } from 'react';
+import useSWR from 'swr';
+
+import styles from './FrontendProfile.module.css';
 
 /* * */
 
@@ -18,7 +18,6 @@ export default function FrontendProfile() {
 	// A. Setup variables
 
 	const router = useRouter();
-	const { status } = useSession();
 
 	//
 	// B. Handle actions
@@ -37,9 +36,9 @@ export default function FrontendProfile() {
 
 	return (
 		<div className={styles.container}>
-			<div className={styles.content}>{profileData && <JsonInput value={JSON.stringify(profileData)} w='100%' rows={10} />}</div>
-			<div onClick={signOut} className={styles.logout}>
-        Logout
+			<div className={styles.content}>{profileData && <JsonInput rows={10} value={JSON.stringify(profileData)} w="100%" />}</div>
+			<div className={styles.logout}>
+				Logout
 			</div>
 		</div>
 	);

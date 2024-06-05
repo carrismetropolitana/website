@@ -2,27 +2,25 @@
 
 /* * */
 
-import 'dayjs/locale/pt';
-import { SWRConfig } from 'swr';
-import { MantineProvider } from '@mantine/core';
-import { SessionProvider } from 'next-auth/react';
-import { MapProvider } from 'react-map-gl/maplibre';
-import { DebugContextProvider } from '@/contexts/DebugContext';
 import { AppAnalyticsContextProvider } from '@/contexts/AppAnalyticsContext';
-import { ModalsProvider } from '@mantine/modals';
+import { DebugContextProvider } from '@/contexts/DebugContext';
+import { theme } from '@/styles/theme';
+import { MantineProvider } from '@mantine/core';
 import { DatesProvider } from '@mantine/dates';
+import { ModalsProvider } from '@mantine/modals';
+import 'dayjs/locale/pt';
+import { MapProvider } from 'react-map-gl/maplibre';
+import { SWRConfig } from 'swr';
 
 /* * */
 
-export default function Providers({ children, session }) {
+export default function Providers({ children }) {
 	//
 
 	//
 	// A. Setup SWR provider
 
 	const swrSettings = {
-		//
-		refreshInterval: 300000, // 5 minutes
 		//
 		fetcher: async (...args) => {
 			const res = await fetch(...args);
@@ -36,37 +34,37 @@ export default function Providers({ children, session }) {
 			return res.json();
 		},
 		//
+		refreshInterval: 300000, // 5 minutes
+		//
 	};
 
 	//
 	// A. Setup Mantine Dates provider
 
 	const mantineDatesSettings = {
-		locale: 'pt',
 		firstDayOfWeek: 1,
-		weekendDays: [7, 0],
+		locale: 'pt',
 		timezone: 'Europe/Lisbon',
+		weekendDays: [7, 0],
 	};
 
 	//
 	// B. Render providers
 
 	return (
-		<SessionProvider session={session} refetchInterval={15}>
-			<SWRConfig value={swrSettings}>
-				<MantineProvider withGlobalStyles withNormalizeCSS>
-					<DatesProvider settings={mantineDatesSettings}>
-						<ModalsProvider>
-							<AppAnalyticsContextProvider>
-								<DebugContextProvider>
-									<MapProvider>{children}</MapProvider>
-								</DebugContextProvider>
-							</AppAnalyticsContextProvider>
-						</ModalsProvider>
-					</DatesProvider>
-				</MantineProvider>
-			</SWRConfig>
-		</SessionProvider>
+		<SWRConfig value={swrSettings}>
+			<MantineProvider defaultColorScheme="auto" theme={theme}>
+				<DatesProvider settings={mantineDatesSettings}>
+					<ModalsProvider>
+						<AppAnalyticsContextProvider>
+							<DebugContextProvider>
+								<MapProvider>{children}</MapProvider>
+							</DebugContextProvider>
+						</AppAnalyticsContextProvider>
+					</ModalsProvider>
+				</DatesProvider>
+			</MantineProvider>
+		</SWRConfig>
 	);
 
 	//

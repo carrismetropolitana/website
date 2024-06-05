@@ -2,19 +2,20 @@
 
 /* * */
 
-import styles from './FrontendStops.module.css';
-import useSWR from 'swr';
-import { useEffect } from 'react';
-import { useTranslations } from 'next-intl';
-import Panel from '@/components/Panel/Panel';
-import FrontendStopsToolbar from '@/components/FrontendStopsToolbar/FrontendStopsToolbar';
+import BetaIcon from '@/components/BetaIcon/BetaIcon';
 import FrontendStopsMap from '@/components/FrontendStopsMap/FrontendStopsMap';
 import FrontendStopsStopInfo from '@/components/FrontendStopsStopInfo/FrontendStopsStopInfo';
 import StopTimetable from '@/components/FrontendStopsTimetable/FrontendStopsTimetable';
+import FrontendStopsToolbar from '@/components/FrontendStopsToolbar/FrontendStopsToolbar';
 import NoDataLabel from '@/components/NoDataLabel/NoDataLabel';
-import { useFrontendStopsContext } from '@/contexts/FrontendStopsContext';
-import BetaIcon from '@/components/BetaIcon/BetaIcon';
+import Panel from '@/components/Panel/Panel';
 import { useAppAnalyticsContext } from '@/contexts/AppAnalyticsContext';
+import { useFrontendStopsContext } from '@/contexts/FrontendStopsContext';
+import { useTranslations } from 'next-intl';
+import { useEffect } from 'react';
+import useSWR from 'swr';
+
+import styles from './FrontendStops.module.css';
 
 /* * */
 
@@ -58,18 +59,18 @@ export default function FrontendStops() {
 
 	return (
 		<Panel
-			type='A'
-			title={t('title')}
-			loading={allStopsLoading}
 			error={allStopsError}
+			loading={allStopsLoading}
+			title={t('title')}
+			type="A"
 			validating={allVehiclesValidating || stopRealtimeValidating}
-			rightSection={
+			rightSection={(
 				<>
 					{allVehiclesValidating && <div className={styles.validating}>V</div>}
 					{stopRealtimeValidating && <div className={styles.validating}>SR</div>}
 					<BetaIcon />
 				</>
-			}
+			)}
 		>
 			<div className={styles.container}>
 				<div className={styles.toolbar}>
@@ -79,13 +80,14 @@ export default function FrontendStops() {
 					<FrontendStopsMap />
 				</div>
 				<div className={styles.sidebar}>
-					{frontendStopsContext.entities.stop?.id ?
-						<>
-							<FrontendStopsStopInfo />
-							<StopTimetable />
-						</> :
-						<NoDataLabel text={t('no_selection')} />
-					}
+					{frontendStopsContext.entities.stop?.id
+						? (
+							<>
+								<FrontendStopsStopInfo />
+								<StopTimetable />
+							</>
+						)
+						: <NoDataLabel text={t('no_selection')} />}
 				</div>
 			</div>
 		</Panel>

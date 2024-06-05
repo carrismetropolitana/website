@@ -2,12 +2,13 @@
 
 /* * */
 
-import useSWR from 'swr';
-import { Select } from '@mantine/core';
-import { useMemo } from 'react';
-import { useTranslations } from 'next-intl';
-import styles from './FrontendLinesToolbarFiltersMunicipality.module.css';
 import { useFrontendLinesContext } from '@/contexts/FrontendLinesContext';
+import { Select } from '@mantine/core';
+import { useTranslations } from 'next-intl';
+import { useMemo } from 'react';
+import useSWR from 'swr';
+
+import styles from './FrontendLinesToolbarFiltersMunicipality.module.css';
 
 /* * */
 
@@ -32,19 +33,20 @@ export default function FrontendLinesToolbarFiltersMunicipality() {
 		if (!allMunicipalitiesData) return [];
 		const collator = new Intl.Collator('en', { numeric: true, sensitivity: 'base' });
 		allMunicipalitiesData.sort((a, b) => collator.compare(a.name, b.name));
-		return allMunicipalitiesData.map(item => {
-			return { value: item.id, label: item.name };
+		return allMunicipalitiesData.map((item) => {
+			return { label: item.name, value: item.id };
 		});
 	}, [allMunicipalitiesData]);
 
 	//
 	// D. Handle actions
 
-	const handleSelectMunicipality = chosenSelectItemValue => {
+	const handleSelectMunicipality = (chosenSelectItemValue) => {
 		if (chosenSelectItemValue) {
 			const foundMunicipality = allMunicipalitiesData.find(item => item.id === chosenSelectItemValue);
 			if (foundMunicipality) FrontendLinesContext.selectMunicipality(foundMunicipality);
-		} else {
+		}
+		else {
 			FrontendLinesContext.clearSelectedMunicipality();
 		}
 	};
@@ -54,7 +56,7 @@ export default function FrontendLinesToolbarFiltersMunicipality() {
 
 	return (
 		<div className={styles.container}>
-			<Select aria-label={t('label')} placeholder={t('placeholder')} nothingFoundMessage={t('no_results')} onChange={handleSelectMunicipality} value={FrontendLinesContext.entities.municipality?.id || null} data={allMunicipalitiesDataFormatted} radius='sm' size='md' w='100%' searchable clearable />
+			<Select aria-label={t('label')} data={allMunicipalitiesDataFormatted} nothingFoundMessage={t('no_results')} onChange={handleSelectMunicipality} placeholder={t('placeholder')} radius="sm" size="md" value={FrontendLinesContext.entities.municipality?.id || null} w="100%" clearable searchable />
 		</div>
 	);
 

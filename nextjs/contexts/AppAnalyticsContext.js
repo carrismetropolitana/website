@@ -2,12 +2,13 @@
 
 /* * */
 
-import pjson from '../package.json';
-import { UAParser } from 'ua-parser-js';
-import { getCurrentBrowserFingerPrint } from '@rajesh896/broprint.js';
-import { createContext, useCallback, useContext, useEffect, useMemo, useState } from 'react';
 import parseDateToString from '@/services/parseDateToString';
 import parseStringToDate from '@/services/parseStringToDate';
+import { getCurrentBrowserFingerPrint } from '@rajesh896/broprint.js';
+import { createContext, useCallback, useContext, useEffect, useMemo, useState } from 'react';
+import { UAParser } from 'ua-parser-js';
+
+import pjson from '../package.json';
 
 /* * */
 
@@ -59,7 +60,7 @@ export function AppAnalyticsContextProvider({ children }) {
 		}
 		// If an authorization value is found then check if it is still valid
 		const savedAuthorizationDate = parseStringToDate(savedAuthorizationString);
-		const maximumValidAuthorizationDate = (new Date).setDate((new Date).getDate() - LOCAL_STORAGE_VALIDITY_IN_DAYS);
+		const maximumValidAuthorizationDate = (new Date()).setDate((new Date()).getDate() - LOCAL_STORAGE_VALIDITY_IN_DAYS);
 		const isAuthorizationStillValid = savedAuthorizationDate > maximumValidAuthorizationDate;
 		// If an authorization value is found then check if it is still valid
 		setIsCaptureEnabled(isAuthorizationStillValid ? true : false);
@@ -72,7 +73,7 @@ export function AppAnalyticsContextProvider({ children }) {
 	const enableCapture = useCallback(() => {
 		// Set local state and save decision to local storage
 		setIsCaptureEnabled(true);
-		localStorage.setItem(LOCAL_STORAGE_ENABLED_KEY, parseDateToString(new Date));
+		localStorage.setItem(LOCAL_STORAGE_ENABLED_KEY, parseDateToString(new Date()));
 	}, []);
 
 	const disableCapture = useCallback(() => {
@@ -94,42 +95,43 @@ export function AppAnalyticsContextProvider({ children }) {
 				const parsedUserAgent = window.navigator.userAgent ? new UAParser(window.navigator.userAgent).getResult() : null;
 				// Fetch all the other properties
 				await fetch('https://stats.carrismetropolitana.pt/collector/usage/website', {
-					method: 'POST',
-					headers: { 'Content-Type': 'application/json; charset=utf-8' },
 					body: JSON.stringify({
 						//
 						app_version: pjson.version,
-						//
-						referer: document.referrer,
-						//
-						fingerprint: await getCurrentBrowserFingerPrint(),
-						//
-						ua: parsedUserAgent?.ua,
-						ua_browser_name: parsedUserAgent?.browser?.name,
-						ua_browser_version: parsedUserAgent?.browser?.version,
-						ua_engine_name: parsedUserAgent?.engine?.name,
-						ua_engine_version: parsedUserAgent?.engine?.version,
-						ua_os_name: parsedUserAgent?.os?.name,
-						ua_os_version: parsedUserAgent?.os?.version,
-						ua_device_model: parsedUserAgent?.device?.model,
-						ua_device_type: parsedUserAgent?.device?.type,
-						ua_device_vendor: parsedUserAgent?.device?.vendor,
-						ua_cpu_architecture: parsedUserAgent?.cpu?.architecture,
-						//
-						device_timezone: Intl.DateTimeFormat().resolvedOptions().timeZone,
-						device_screen_width: document.documentElement.clientWidth,
+						device_locale: navigator.language,
 						device_screen_height: document.documentElement.clientHeight,
 						device_screen_orientation: window.innerHeight > window.innerWidth ? 'portrait' : 'landscape',
-						device_locale: navigator.language,
+						device_screen_width: document.documentElement.clientWidth,
 						//
-						ip_address: null, // Server side
+						device_timezone: Intl.DateTimeFormat().resolvedOptions().timeZone,
 						//
 						event_key: key,
 						event_properties: properties,
 						//
+						fingerprint: await getCurrentBrowserFingerPrint(),
+						//
+						ip_address: null, // Server side
+						//
+						referer: document.referrer,
+						//
+						ua: parsedUserAgent?.ua,
+						ua_browser_name: parsedUserAgent?.browser?.name,
+						ua_browser_version: parsedUserAgent?.browser?.version,
+						ua_cpu_architecture: parsedUserAgent?.cpu?.architecture,
+						ua_device_model: parsedUserAgent?.device?.model,
+						ua_device_type: parsedUserAgent?.device?.type,
+						ua_device_vendor: parsedUserAgent?.device?.vendor,
+						ua_engine_name: parsedUserAgent?.engine?.name,
+						ua_engine_version: parsedUserAgent?.engine?.version,
+						ua_os_name: parsedUserAgent?.os?.name,
+						ua_os_version: parsedUserAgent?.os?.version,
+						//
 					}),
+					headers: { 'Content-Type': 'application/json; charset=utf-8' },
+					method: 'POST',
 				});
-			} catch (error) {
+			}
+			catch (error) {
 				console.log(error);
 			}
 		},
@@ -141,10 +143,10 @@ export function AppAnalyticsContextProvider({ children }) {
 
 	const contextObject = useMemo(
 		() => ({
-			enabled: isCaptureEnabled,
-			enable: enableCapture,
-			disable: disableCapture,
 			capture: captureEvent,
+			disable: disableCapture,
+			enable: enableCapture,
+			enabled: isCaptureEnabled,
 		}),
 		[isCaptureEnabled, enableCapture, captureEvent, disableCapture],
 	);

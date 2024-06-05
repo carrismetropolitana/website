@@ -4,7 +4,7 @@ import styles from './Button.module.css';
 
 /* * */
 
-export default function Button({ variant = 'default', fullwidth = false, label = 'Button Label', ...props }) {
+export default function Button({ fullwidth = false, label = 'Button Label', variant = 'default', ...props }) {
 	switch (variant) {
 		default:
 		case 'default':

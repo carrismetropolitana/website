@@ -1,4 +1,5 @@
 import useSWR from 'swr';
+
 import Loader from '../Loader/Loader';
 import styles from './NewLineBadge.module.css';
 
@@ -16,11 +17,12 @@ export function NewLineBadge({ id }) {
 	return (
 		<div>
 			{lineLoading && <Loader visible />}
-			{lineData &&
+			{lineData
+			&& (
 				<div className={styles.badge} style={{ backgroundColor: lineData.color, color: lineData.text_color }}>
 					{lineData.short_name || '• • •'}
 				</div>
-			}
+			)}
 		</div>
 	);
 }

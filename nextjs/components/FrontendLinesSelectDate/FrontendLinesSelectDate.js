@@ -2,13 +2,14 @@
 
 /* * */
 
-import { useCallback, useEffect, useMemo } from 'react';
-import { useTranslations } from 'next-intl';
-import { DatePickerInput } from '@mantine/dates';
 import { useFrontendLinesContext } from '@/contexts/FrontendLinesContext';
-import styles from './FrontendLinesSelectDate.module.css';
 import parseDateToString from '@/services/parseDateToString';
+import { DatePickerInput } from '@mantine/dates';
 import { IconCalendar } from '@tabler/icons-react';
+import { useTranslations } from 'next-intl';
+import { useCallback, useEffect, useMemo } from 'react';
+
+import styles from './FrontendLinesSelectDate.module.css';
 
 /* * */
 
@@ -26,7 +27,7 @@ export default function FrontendLinesSelectDate() {
 
 	const todayDate = useMemo(() => {
 		// Get the current date and time
-		const currentDate = new Date;
+		const currentDate = (new Date());
 		const currentHour = currentDate.getHours();
 		// If the current hour is after midnight and before 4AM, set the date to the previous day.
 		if (currentHour >= 0 && currentHour < 4) currentDate.setDate(currentDate.getDate() - 1);
@@ -37,7 +38,7 @@ export default function FrontendLinesSelectDate() {
 
 	const tomorrowDate = useMemo(() => {
 		// Get the current date and time
-		const currentDate = new Date;
+		const currentDate = (new Date());
 		const currentHour = currentDate.getHours();
 		// If the current hour is after midnight and before 4AM,
 		// set the date to the previous day.
@@ -57,7 +58,7 @@ export default function FrontendLinesSelectDate() {
 	// C. Handle actions
 
 	const handleSetDate = useCallback(
-		value => {
+		(value) => {
 			FrontendLinesContext.selectDate(value);
 		},
 		[FrontendLinesContext],
@@ -92,13 +93,13 @@ export default function FrontendLinesSelectDate() {
 				</div>
 				<DatePickerInput
 					aria-label={t('label')}
-					placeholder={t('placeholder')}
-					dropdownType='modal'
-					onChange={handleSetDate}
-					value={FrontendLinesContext.entities.date}
-					valueFormat='DD MMM YYYY'
 					classNames={{ input: `${styles.input} ${!isTodaySelected && !isTomorrowSelected && styles.isSelected}`, section: styles.inputSection }}
+					dropdownType="modal"
 					leftSection={<IconCalendar size={14} />}
+					onChange={handleSetDate}
+					placeholder={t('placeholder')}
+					value={FrontendLinesContext.entities.date}
+					valueFormat="DD MMM YYYY"
 				/>
 			</div>
 		</div>

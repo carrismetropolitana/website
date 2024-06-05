@@ -1,48 +1,49 @@
-import styles from './OSMMap.module.css';
-import osmMapDefaults from './OSMMap.config';
-import Map, { NavigationControl, FullscreenControl, ScaleControl } from 'react-map-gl/maplibre';
 import maplibregl from 'maplibre-gl';
 import 'maplibre-gl/dist/maplibre-gl.css';
+import Map, { FullscreenControl, NavigationControl, ScaleControl } from 'react-map-gl/maplibre';
+
+import osmMapDefaults from './OSMMap.config';
+import styles from './OSMMap.module.css';
 
 export default function OSMMap({
 	children,
-	id,
-	mapStyle,
-	onClick = () => {},
-	onMouseEnter = () => {},
-	onMouseLeave = () => {},
-	onMove = () => {},
-	onMoveStart = () => {},
-	onMoveEnd = () => {},
-	interactiveLayerIds = [],
-	scrollZoom = true,
-	navigation = true,
 	fullscreen = true,
+	id,
+	interactiveLayerIds = [],
+	mapStyle,
+	navigation = true,
+	onClick = () => null,
+	onMouseEnter = () => null,
+	onMouseLeave = () => null,
+	onMove = () => null,
+	onMoveEnd = () => null,
+	onMoveStart = () => null,
 	scale = true,
+	scrollZoom = true,
 }) {
 	return (
 		<div className={styles.container}>
 			<Map
 				id={id}
-				mapLib={maplibregl}
 				initialViewState={osmMapDefaults.initialViewState}
-				minZoom={osmMapDefaults.styles[mapStyle].minZoom || osmMapDefaults.minZoom}
-				maxZoom={osmMapDefaults.styles[mapStyle].maxZoom || osmMapDefaults.maxZoom}
-				scrollZoom={scrollZoom}
+				interactive={interactiveLayerIds ? true : false}
+				interactiveLayerIds={interactiveLayerIds}
+				mapLib={maplibregl}
 				mapStyle={osmMapDefaults.styles[mapStyle] || osmMapDefaults.styles.default}
-				style={{ width: '100%', height: '100%' }}
+				maxZoom={osmMapDefaults.styles[mapStyle].maxZoom || osmMapDefaults.maxZoom}
+				minZoom={osmMapDefaults.styles[mapStyle].minZoom || osmMapDefaults.minZoom}
 				onClick={onClick}
 				onMouseEnter={onMouseEnter}
 				onMouseLeave={onMouseLeave}
 				onMove={onMove}
-				onMoveStart={onMoveStart}
 				onMoveEnd={onMoveEnd}
-				interactive={interactiveLayerIds ? true : false}
-				interactiveLayerIds={interactiveLayerIds}
+				onMoveStart={onMoveStart}
+				scrollZoom={scrollZoom}
+				style={{ height: '100%', width: '100%' }}
 			>
 				{navigation && <NavigationControl />}
 				{fullscreen && <FullscreenControl />}
-				{scale && <ScaleControl maxWidth={100} unit='metric' />}
+				{scale && <ScaleControl maxWidth={100} unit="metric" />}
 				{children}
 			</Map>
 		</div>

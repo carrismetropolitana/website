@@ -2,25 +2,26 @@
 
 /* * */
 
-import useSWR from 'swr';
+import CopyBadge from '@/components/CopyBadge/CopyBadge';
 import OSMMap from '@/components/OSMMap/OSMMap';
-import styles from './FrontendLinesMap.module.css';
-import { useCallback, useEffect, useMemo } from 'react';
-import * as turf from '@turf/turf';
-import { useMap, Source, Layer, Popup, GeolocateControl } from 'react-map-gl/maplibre';
 import { useDebugContext } from '@/contexts/DebugContext';
 import { useFrontendLinesContext } from '@/contexts/FrontendLinesContext';
 import generateUUID from '@/services/generateUUID';
-import CopyBadge from '@/components/CopyBadge/CopyBadge';
+import * as turf from '@turf/turf';
+import { useCallback, useEffect, useMemo } from 'react';
+import { GeolocateControl, Layer, Popup, Source, useMap } from 'react-map-gl/maplibre';
+import useSWR from 'swr';
+
+import styles from './FrontendLinesMap.module.css';
 
 /* * */
 
 const MAP_DEFAULT_OPTIONS = {
-	speed: 4000,
 	duration: 2000,
+	maxZoom: 16,
+	speed: 4000,
 	zoom: 17,
 	zoomMargin: 3,
-	maxZoom: 16,
 };
 
 /* * */
@@ -47,19 +48,19 @@ export default function FrontendLinesMap() {
 	// C. Transform data
 
 	const allStopsMapData = useMemo(() => {
-		const geoJSON = { type: 'FeatureCollection', features: [] };
+		const geoJSON = { features: [], type: 'FeatureCollection' };
 		if (allStopsData) {
 			for (const stop of allStopsData) {
 				geoJSON.features.push({
-					type: 'Feature',
-					geometry: { type: 'Point', coordinates: [stop.lon, stop.lat] },
+					geometry: { coordinates: [stop.lon, stop.lat], type: 'Point' },
 					properties: {
-						mapid: `${stop.id}|${generateUUID()}`,
 						id: stop.id,
-						name: stop.name,
 						lat: stop.lat,
 						lon: stop.lon,
+						mapid: `${stop.id}|${generateUUID()}`,
+						name: stop.name,
 					},
+					type: 'Feature',
 				});
 			}
 		}
@@ -68,21 +69,21 @@ export default function FrontendLinesMap() {
 
 	const patternStopsMapData = useMemo(() => {
 		if (!frontendLinesContext.entities.pattern?.path?.length) return null;
-		const geoJSON = { type: 'FeatureCollection', features: [] };
+		const geoJSON = { features: [], type: 'FeatureCollection' };
 		for (const patternPath of frontendLinesContext.entities.pattern.path) {
 			geoJSON.features.push({
-				type: 'Feature',
-				geometry: { type: 'Point', coordinates: [patternPath.stop.lon, patternPath.stop.lat] },
+				geometry: { coordinates: [patternPath.stop.lon, patternPath.stop.lat], type: 'Point' },
 				properties: {
-					mapid: `${patternPath.stop.id}|${generateUUID()}`,
+					color: frontendLinesContext.entities.pattern.color,
 					id: patternPath.stop.id,
-					name: patternPath.stop.name,
 					lat: patternPath.stop.lat,
 					lon: patternPath.stop.lon,
+					mapid: `${patternPath.stop.id}|${generateUUID()}`,
+					name: patternPath.stop.name,
 					stop_sequence: patternPath.stop_sequence,
-					color: frontendLinesContext.entities.pattern.color,
 					text_color: frontendLinesContext.entities.pattern.text_color,
 				},
+				type: 'Feature',
 			});
 		}
 		return geoJSON;
@@ -91,15 +92,15 @@ export default function FrontendLinesMap() {
 	const selectedStopMapData = useMemo(() => {
 		if (!frontendLinesContext.entities.pattern?.color || !frontendLinesContext.entities.stop?.lon) return null;
 		return {
-			type: 'Feature',
 			geometry: {
-				type: 'Point',
 				coordinates: [frontendLinesContext.entities.stop.lon, frontendLinesContext.entities.stop.lat],
+				type: 'Point',
 			},
 			properties: {
 				color: frontendLinesContext.entities.pattern.color,
 				text_color: frontendLinesContext.entities.pattern.text_color,
 			},
+			type: 'Feature',
 		};
 	}, [frontendLinesContext.entities.pattern, frontendLinesContext.entities.stop]);
 
@@ -116,32 +117,32 @@ export default function FrontendLinesMap() {
 
 	const selectedVehiclesMapData = useMemo(() => {
 		if (!allVehiclesData || !frontendLinesContext.entities.pattern?.id) return null;
-		const geoJSON = { type: 'FeatureCollection', features: [] };
+		const geoJSON = { features: [], type: 'FeatureCollection' };
 		const selectedVehiclesData = allVehiclesData.filter(item => item.pattern_id === frontendLinesContext.entities.pattern.id);
-		geoJSON.features = selectedVehiclesData.map(vehicleData => {
+		geoJSON.features = selectedVehiclesData.map((vehicleData) => {
 			return {
-				type: 'Feature',
 				geometry: {
-					type: 'Point',
 					coordinates: [vehicleData.lon, vehicleData.lat],
+					type: 'Point',
 				},
 				properties: {
-					id: vehicleData.id,
-					timestamp: vehicleData.timestamp,
-					timeString: new Date(vehicleData.timestamp * 1000).toLocaleString(),
+					bearing: vehicleData.bearing,
+					block_id: vehicleData.block_id,
+					current_status: vehicleData.current_status,
 					delay: Math.floor(Date.now() / 1000) - vehicleData.timestamp,
-					schedule_relationship: vehicleData.schedule_relationship,
-					trip_id: vehicleData.trip_id,
+					id: vehicleData.id,
+					line_id: vehicleData.line_id,
 					pattern_id: vehicleData.pattern_id,
 					route_id: vehicleData.route_id,
-					line_id: vehicleData.line_id,
-					stop_id: vehicleData.stop_id,
-					current_status: vehicleData.current_status,
-					block_id: vehicleData.block_id,
+					schedule_relationship: vehicleData.schedule_relationship,
 					shift_id: vehicleData.shift_id,
-					bearing: vehicleData.bearing,
 					speed: vehicleData.speed,
+					stop_id: vehicleData.stop_id,
+					timeString: new Date(vehicleData.timestamp * 1000).toLocaleString(),
+					timestamp: vehicleData.timestamp,
+					trip_id: vehicleData.trip_id,
 				},
+				type: 'Feature',
 			};
 		});
 		return geoJSON;
@@ -184,7 +185,7 @@ export default function FrontendLinesMap() {
 			// Fit map
 			const collection = turf.featureCollection([selectedShapeMapData]);
 			const boundingBox = turf.bbox(collection);
-			frontendLinesMap.fitBounds(boundingBox, { duration: 2000, padding: fitBoundsPadding, bearing: frontendLinesMap.getBearing(), maxZoom: 16 });
+			frontendLinesMap.fitBounds(boundingBox, { bearing: frontendLinesMap.getBearing(), duration: 2000, maxZoom: 16, padding: fitBoundsPadding });
 		}
 	}, [selectedShapeMapData, selectedVehiclesMapData, frontendLinesMap, frontendLinesContext.map.auto_zoom]);
 
@@ -192,7 +193,7 @@ export default function FrontendLinesMap() {
 	// E. Helper functions
 
 	const moveMap = useCallback(
-		coordinates => {
+		(coordinates) => {
 			if (!frontendLinesMap) return;
 			// Get map current zoom level
 			const currentZoom = frontendLinesMap.getZoom();
@@ -203,10 +204,11 @@ export default function FrontendLinesMap() {
 			// If the given coordinates are visible and the zoom is not too far back (plus a little margin)...
 			if (isInside && currentZoomWithMargin > MAP_DEFAULT_OPTIONS.zoom) {
 				// ...then simply ease to it.
-				frontendLinesMap.easeTo({ center: coordinates, zoom: currentZoom, duration: MAP_DEFAULT_OPTIONS.speed * 0.25 });
-			} else {
+				frontendLinesMap.easeTo({ center: coordinates, duration: MAP_DEFAULT_OPTIONS.speed * 0.25, zoom: currentZoom });
+			}
+			else {
 				// If the zoom is too far, or the given coordinates are not visible, then fly to it
-				frontendLinesMap.flyTo({ center: coordinates, zoom: MAP_DEFAULT_OPTIONS.zoom, duration: MAP_DEFAULT_OPTIONS.speed });
+				frontendLinesMap.flyTo({ center: coordinates, duration: MAP_DEFAULT_OPTIONS.speed, zoom: MAP_DEFAULT_OPTIONS.zoom });
 			}
 		},
 		[frontendLinesMap],
@@ -233,7 +235,7 @@ export default function FrontendLinesMap() {
 		//
 	});
 
-	const handleMapClick = event => {
+	const handleMapClick = (event) => {
 		if (event?.features[0]?.properties?.id) {
 			const foundStopInPath = frontendLinesContext.entities.pattern.path.find(item => item.stop.id === event.features[0].properties.id && item.stop_sequence === event.features[0].properties.stop_sequence);
 			if (foundStopInPath) {
@@ -243,13 +245,13 @@ export default function FrontendLinesMap() {
 		}
 	};
 
-	const handleMapMouseEnter = event => {
+	const handleMapMouseEnter = (event) => {
 		if (event?.features[0]?.properties?.id) {
 			frontendLinesMap.getCanvas().style.cursor = 'pointer';
 		}
 	};
 
-	const handleMapMouseLeave = event => {
+	const handleMapMouseLeave = (event) => {
 		if (event?.features[0]?.properties?.id) {
 			frontendLinesMap.getCanvas().style.cursor = 'default';
 		}
@@ -269,11 +271,12 @@ export default function FrontendLinesMap() {
 	// C. Render components
 
 	return (
-		<OSMMap id='frontendLinesMap' mapStyle={frontendLinesContext.map.style} onClick={handleMapClick} onMouseEnter={handleMapMouseEnter} onMouseLeave={handleMapMouseLeave} onMove={handleMapMove} interactiveLayerIds={['pattern-stops']}>
+		<OSMMap id="frontendLinesMap" interactiveLayerIds={['pattern-stops']} mapStyle={frontendLinesContext.map.style} onClick={handleMapClick} onMouseEnter={handleMapMouseEnter} onMouseLeave={handleMapMouseLeave} onMove={handleMapMove}>
 			<GeolocateControl />
-			{selectedVehiclesMapData &&
-				debugContext.isDebug &&
-				selectedVehiclesMapData.features.map(vehicle => <Popup className={styles.popupWrapper} key={vehicle.properties.id} closeButton={false} closeOnClick={false} latitude={vehicle.geometry.coordinates[1]} longitude={vehicle.geometry.coordinates[0]} anchor='bottom' maxWidth='none' offset={15}>
+			{selectedVehiclesMapData
+			&& debugContext.isDebug
+			&& selectedVehiclesMapData.features.map(vehicle => (
+				<Popup key={vehicle.properties.id} anchor="bottom" className={styles.popupWrapper} closeButton={false} closeOnClick={false} latitude={vehicle.geometry.coordinates[1]} longitude={vehicle.geometry.coordinates[0]} maxWidth="none" offset={15}>
 					<CopyBadge label={`Vehicle ID: ${vehicle.properties.id}`} value={vehicle.properties.id} />
 					<CopyBadge label={`Timestamp: ${vehicle.properties.timeString}`} value={vehicle.properties.timeString} />
 					<CopyBadge label={`Delay: ${vehicle.properties.delay} seconds`} value={vehicle.properties.delay} />
@@ -281,116 +284,123 @@ export default function FrontendLinesMap() {
 					<CopyBadge label={`Status: ${vehicle.properties.current_status}: ${vehicle.properties.stop_id}`} value={vehicle.properties.current_status} />
 					<CopyBadge label={`Block ID: ${vehicle.properties.block_id}`} value={vehicle.properties.block_id} />
 					<CopyBadge label={`Shift ID: ${vehicle.properties.shift_id}`} value={vehicle.properties.shift_id} />
-				</Popup>)}
-			{selectedVehiclesMapData &&
-				<Source id='selected-vehicles' type='geojson' data={selectedVehiclesMapData} generateId={true}>
+				</Popup>
+			),
+
+			)}
+			{selectedVehiclesMapData
+			&& (
+				<Source data={selectedVehiclesMapData} generateId={true} id="selected-vehicles" type="geojson">
 					<Layer
-						id='selected-vehicles-delay'
-						source='selected-vehicles'
-						type='symbol'
+						id="selected-vehicles-delay"
+						source="selected-vehicles"
+						type="symbol"
 						layout={{
 							'icon-allow-overlap': true,
-							'icon-ignore-placement': true,
 							'icon-anchor': 'center',
-							'symbol-placement': 'point',
-							'icon-rotation-alignment': 'map',
+							'icon-ignore-placement': true,
 							'icon-image': 'cm-bus-delay',
-							'icon-size': ['interpolate', ['linear', 0.5], ['zoom'], 10, 0.05, 20, 0.15],
 							'icon-offset': [0, 0],
 							'icon-rotate': ['get', 'bearing'],
+							'icon-rotation-alignment': 'map',
+							'icon-size': ['interpolate', ['linear', 0.5], ['zoom'], 10, 0.05, 20, 0.15],
+							'symbol-placement': 'point',
 						}}
 						paint={{
 							'icon-opacity': ['interpolate', ['linear', 0.5], ['get', 'delay'], 20, 0, 40, 1],
 						}}
 					/>
 					<Layer
-						id='selected-vehicles-normal'
-						beforeId='selected-vehicles-delay'
-						source='selected-vehicles'
-						type='symbol'
+						beforeId="selected-vehicles-delay"
+						id="selected-vehicles-normal"
+						source="selected-vehicles"
+						type="symbol"
 						layout={{
 							'icon-allow-overlap': true,
-							'icon-ignore-placement': true,
 							'icon-anchor': 'center',
-							'symbol-placement': 'point',
-							'icon-rotation-alignment': 'map',
+							'icon-ignore-placement': true,
 							'icon-image': 'cm-bus-regular',
-							'icon-size': ['interpolate', ['linear', 0.5], ['zoom'], 10, 0.05, 20, 0.15],
 							'icon-offset': [0, 0],
 							'icon-rotate': ['get', 'bearing'],
+							'icon-rotation-alignment': 'map',
+							'icon-size': ['interpolate', ['linear', 0.5], ['zoom'], 10, 0.05, 20, 0.15],
+							'symbol-placement': 'point',
 						}}
 					/>
 				</Source>
-			}
-			{selectedStopMapData &&
-				<Source id='selected-stop' type='geojson' data={selectedStopMapData} generateId={true}>
+			)}
+			{selectedStopMapData
+			&& (
+				<Source data={selectedStopMapData} generateId={true} id="selected-stop" type="geojson">
 					<Layer
-						id='selected-stop-stick'
 						beforeId={selectedVehiclesMapData && 'selected-vehicles-normal'}
-						source='selected-stop'
-						type='symbol'
+						id="selected-stop-stick"
+						source="selected-stop"
+						type="symbol"
 						layout={{
 							'icon-allow-overlap': true,
-							'icon-ignore-placement': true,
 							'icon-anchor': 'bottom',
-							'symbol-placement': 'point',
+							'icon-ignore-placement': true,
 							'icon-image': 'stop-selected',
-							'icon-size': ['interpolate', ['linear', 0.5], ['zoom'], 10, 0.1, 20, 0.25],
 							'icon-offset': [0, 5],
+							'icon-size': ['interpolate', ['linear', 0.5], ['zoom'], 10, 0.1, 20, 0.25],
+							'symbol-placement': 'point',
 						}}
 						paint={{
 							'icon-opacity': ['interpolate', ['linear', 0.5], ['zoom'], 7, 0, 10, 1],
 						}}
 					/>
 					<Layer
-						id='selected-stop-base'
-						beforeId='selected-stop-stick'
-						source='selected-stop'
-						type='circle'
+						beforeId="selected-stop-stick"
+						id="selected-stop-base"
+						source="selected-stop"
+						type="circle"
 						paint={{
 							'circle-color': ['get', 'text_color'],
+							'circle-pitch-alignment': 'map',
 							'circle-radius': ['interpolate', ['linear', 0.5], ['zoom'], 9, 5, 26, 18],
-							'circle-stroke-width': ['interpolate', ['linear', 0.5], ['zoom'], 9, 1, 26, 5],
 							'circle-stroke-color': ['get', 'color'],
-							'circle-pitch-alignment': 'map',
+							'circle-stroke-width': ['interpolate', ['linear', 0.5], ['zoom'], 9, 1, 26, 5],
 						}}
 					/>
 				</Source>
-			}
-			{patternStopsMapData &&
-				<Source id='pattern-stops' type='geojson' data={patternStopsMapData} generateId={true}>
+			)}
+			{patternStopsMapData
+			&& (
+				<Source data={patternStopsMapData} generateId={true} id="pattern-stops" type="geojson">
 					<Layer
-						id='pattern-stops'
 						beforeId={selectedStopMapData ? 'selected-stop-base' : selectedVehiclesMapData && 'selected-vehicles-normal'}
-						source='pattern-stops'
-						type='circle'
+						id="pattern-stops"
+						source="pattern-stops"
+						type="circle"
 						paint={{
 							'circle-color': ['get', 'text_color'],
-							'circle-radius': ['interpolate', ['linear', 0.5], ['zoom'], 9, 1, 26, 15],
-							'circle-stroke-width': ['interpolate', ['linear', 0.5], ['zoom'], 9, 1, 26, 7],
-							'circle-stroke-color': ['get', 'color'],
 							'circle-pitch-alignment': 'map',
+							'circle-radius': ['interpolate', ['linear', 0.5], ['zoom'], 9, 1, 26, 15],
+							'circle-stroke-color': ['get', 'color'],
+							'circle-stroke-width': ['interpolate', ['linear', 0.5], ['zoom'], 9, 1, 26, 7],
 						}}
 					/>
 				</Source>
-			}
-			{selectedShapeMapData &&
-				<Source id='selected-shape' type='geojson' data={selectedShapeMapData} generateId={true}>
+			)}
+			{selectedShapeMapData
+			&& (
+				<Source data={selectedShapeMapData} generateId={true} id="selected-shape" type="geojson">
 					<Layer
-						id='selected-shape-direction'
 						beforeId={patternStopsMapData && 'pattern-stops'}
-						source='selected-shape'
-						type='symbol'
+						id="selected-shape-direction"
+						source="selected-shape"
+						type="symbol"
 						layout={{
 							'icon-allow-overlap': true,
-							'icon-ignore-placement': true,
 							'icon-anchor': 'center',
-							'symbol-placement': 'line',
+							'icon-ignore-placement': true,
 							'icon-image': 'shape-arrow-direction',
-							'icon-size': ['interpolate', ['linear', 0.5], ['zoom'], 10, 0.1, 20, 0.2],
-							'symbol-spacing': ['interpolate', ['linear'], ['zoom'], 10, 2, 20, 30],
 							'icon-offset': [0, 0],
 							'icon-rotate': 90,
+							'icon-size': ['interpolate', ['linear', 0.5], ['zoom'], 10, 0.1, 20, 0.2],
+							'symbol-placement': 'line',
+							'symbol-spacing': ['interpolate', ['linear'], ['zoom'], 10, 2, 20, 30],
 						}}
 						paint={{
 							'icon-color': ['get', 'text_color'],
@@ -398,13 +408,13 @@ export default function FrontendLinesMap() {
 						}}
 					/>
 					<Layer
-						id='selected-shape-line'
-						beforeId='selected-shape-direction'
-						source='selected-shape'
-						type='line'
+						beforeId="selected-shape-direction"
+						id="selected-shape-line"
+						source="selected-shape"
+						type="line"
 						layout={{
-							'line-join': 'round',
 							'line-cap': 'round',
+							'line-join': 'round',
 						}}
 						paint={{
 							'line-color': ['get', 'color'],
@@ -412,7 +422,7 @@ export default function FrontendLinesMap() {
 						}}
 					/>
 				</Source>
-			}
+			)}
 		</OSMMap>
 	);
 

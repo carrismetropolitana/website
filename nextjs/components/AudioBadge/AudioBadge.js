@@ -1,7 +1,8 @@
-import styles from './AudioBadge.module.css';
+import { ActionIcon } from '@mantine/core';
 import { IconPlayerPause, IconVolume } from '@tabler/icons-react';
 import { useEffect, useMemo, useState } from 'react';
-import { ActionIcon } from '@mantine/core';
+
+import styles from './AudioBadge.module.css';
 
 /* * */
 
@@ -9,7 +10,7 @@ const BASE_TTS_URL = 'https://storage.carrismetropolitana.pt/static/tts/live';
 
 /* * */
 
-export default function AudioBadge({ type, id }) {
+export default function AudioBadge({ id, type }) {
 	//
 
 	//
@@ -46,7 +47,8 @@ export default function AudioBadge({ type, id }) {
 			audio.pause();
 			audio.currentTime = 0;
 			setPlaying(false);
-		} else {
+		}
+		else {
 			audio.play();
 			setPlaying(true);
 		}
@@ -56,11 +58,13 @@ export default function AudioBadge({ type, id }) {
 	// D. Render components
 
 	return (
-		audio &&
-		!audio.error &&
-			<ActionIcon className={`${styles.container} ${playing && styles.playing}`} onClick={handleTogglePlay} size='sm'>
+		audio
+		&& !audio.error
+		&& (
+			<ActionIcon className={`${styles.container} ${playing && styles.playing}`} onClick={handleTogglePlay} size="sm">
 				{playing ? <IconPlayerPause size={16} /> : <IconVolume size={16} />}
 			</ActionIcon>
+		)
 
 	);
 }

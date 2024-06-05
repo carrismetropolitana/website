@@ -3,6 +3,7 @@
 /* * */
 
 import { useTranslations } from 'next-intl';
+
 import styles from './NextArrivalsEstimated.module.css';
 
 /* * */

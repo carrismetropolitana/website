@@ -2,9 +2,10 @@
 
 /* * */
 
-import styles from './FrontendLinesContentDebug.module.css';
 import CopyBadge from '@/components/CopyBadge/CopyBadge';
 import { useFrontendLinesContext } from '@/contexts/FrontendLinesContext';
+
+import styles from './FrontendLinesContentDebug.module.css';
 
 /* * */
 

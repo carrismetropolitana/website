@@ -1,39 +1,39 @@
 /* * */
 
+// eslint-disable-next-line @typescript-eslint/no-var-requires
 const withNextIntl = require('next-intl/plugin')();
 
 /* * */
 
 module.exports = withNextIntl({
-  output: 'standalone',
-  reactStrictMode: true,
-  images: {
-    remotePatterns: [
-      {
-        protocol: 'https',
-        hostname: 'www.carrismetropolitana.pt',
-        port: '',
-      },
-    ],
-  },
-  async redirects() {
-    return [
-      //
-      { source: '/alertas', destination: '/alerts', permanent: true },
-      //
-      { source: '/', destination: '/stops', permanent: false },
-      { source: '/stops', destination: '/stops/all', permanent: true },
-      { source: '/paragens', destination: '/stops/all', permanent: true },
-      //
-      { source: '/lines', destination: '/lines/all', permanent: true },
-      { source: '/horarios', destination: '/lines/all', permanent: true },
-      //
-      { source: '/vehicles', destination: '/vehicles/all', permanent: true },
-      //
-      { source: '/espacos-navegante', destination: '/encm', permanent: true },
-      //
-      { source: '/pip', destination: '/', permanent: true },
-      //
-    ];
-  },
+	images: {
+		remotePatterns: [
+			{
+				hostname: 'www.carrismetropolitana.pt',
+				port: '',
+				protocol: 'https',
+			},
+		],
+	},
+	output: 'standalone',
+	reactStrictMode: true,
+	async redirects() {
+		return [
+			//
+			{ destination: '/alerts', permanent: true, source: '/alertas' },
+			//
+			{ destination: '/stops/all', permanent: true, source: '/stops' },
+			{ destination: '/stops/all', permanent: true, source: '/paragens' },
+			//
+			{ destination: '/lines/all', permanent: true, source: '/lines' },
+			{ destination: '/lines/all', permanent: true, source: '/horarios' },
+			//
+			{ destination: '/vehicles/all', permanent: true, source: '/vehicles' },
+			//
+			{ destination: '/encm', permanent: true, source: '/espacos-navegante' },
+			//
+			{ destination: '/', permanent: true, source: '/pip' },
+			//
+		];
+	},
 });

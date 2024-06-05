@@ -1,9 +1,10 @@
 /* * */
 
-import useSWR from 'swr';
-import { useFrontendPipContext } from '@/contexts/FrontendPipContext';
-import styles from './FrontendPipStopsStop.module.css';
 import Loader from '@/components/Loader/Loader';
+import { useFrontendPipContext } from '@/contexts/FrontendPipContext';
+import useSWR from 'swr';
+
+import styles from './FrontendPipStopsStop.module.css';
 
 /* * */
 
@@ -30,12 +31,14 @@ export default function FrontendPipStopsStop({ stopId }) {
 	//
 	// C. Render components
 
-	return stopData ?
-		<div className={styles.container} onClick={handleSelectAnswer}>
-			<p className={styles.stopName}>{stopData.name}</p>
-			<p className={styles.stopId}>{stopData.id}</p>
-		</div> :
-		<Loader visible />;
+	return stopData
+		? (
+			<div className={styles.container} onClick={handleSelectAnswer}>
+				<p className={styles.stopName}>{stopData.name}</p>
+				<p className={styles.stopId}>{stopData.id}</p>
+			</div>
+		)
+		: <Loader visible />;
 
 	//
 }

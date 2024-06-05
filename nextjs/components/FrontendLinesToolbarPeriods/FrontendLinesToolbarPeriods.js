@@ -2,12 +2,13 @@
 
 /* * */
 
-import useSWR from 'swr';
+import FrontendLinesToolbarPeriodsPeriod from '@/components/FrontendLinesToolbarPeriodsPeriod/FrontendLinesToolbarPeriodsPeriod';
+import { Carousel } from '@mantine/carousel';
 import { DateTime } from 'luxon';
 import { useEffect, useMemo, useState } from 'react';
+import useSWR from 'swr';
+
 import styles from './FrontendLinesToolbarPeriods.module.css';
-import { Carousel } from '@mantine/carousel';
-import FrontendLinesToolbarPeriodsPeriod from '@/components/FrontendLinesToolbarPeriodsPeriod/FrontendLinesToolbarPeriodsPeriod';
 
 /* * */
 
@@ -46,13 +47,13 @@ export default function FrontendLinesToolbarPeriods() {
 		// Setup variable for the current date date in YYYYMMDD format using luxon
 		const currentDayString = operationDateTime.toFormat('yyyyMMdd');
 		// For each period, check if it contains the date for today
-		return periodsData.map(period => {
+		return periodsData.map((period) => {
 			// Filter valid pairs with 'until' dates before the current date
-			const validPairsFiltered = period.valid.filter(validPair => {
+			const validPairsFiltered = period.valid.filter((validPair) => {
 				return Number(validPair.until) >= Number(currentDayString);
 			});
 			// Format the valid pairs into the display format
-			const validPairsFormatted = validPairsFiltered.map(validPair => {
+			const validPairsFormatted = validPairsFiltered.map((validPair) => {
 				const fromDateFormatted = DateTime.fromFormat(validPair.from, 'yyyyMMdd', { locale: 'pt' }).toFormat('dd MMM yyyy');
 				const untilDateFormatted = DateTime.fromFormat(validPair.until, 'yyyyMMdd', { locale: 'pt' }).toFormat('dd MMM yyyy');
 				return { from: fromDateFormatted, until: untilDateFormatted };
@@ -62,8 +63,8 @@ export default function FrontendLinesToolbarPeriods() {
 			// Return the period object with the formatted valid pairs
 			return {
 				id: period.id,
-				name: period.name,
 				isActive: period.dates.includes(currentDayString) ? true : false,
+				name: period.name,
 				validPairs: validPairsSliced,
 			};
 		});
@@ -76,11 +77,15 @@ export default function FrontendLinesToolbarPeriods() {
 		<>
 			<div className={styles.onlyOnDesktop}>{periodsDataFormatted && periodsDataFormatted.map(item => <FrontendLinesToolbarPeriodsPeriod key={item.id} periodData={item} />)}</div>
 			<div className={styles.onlyOnMobile}>
-				<Carousel slideSize={300} align={'center'} withControls={false} withIndicators classNames={{ indicators: styles.indicators, indicator: styles.indicator }} initialSlide={periodsDataFormatted?.findIndex(item => item.isActive)}>
-					{periodsDataFormatted &&
-						periodsDataFormatted.map(item => <Carousel.Slide key={item.id}>
+				<Carousel align="center" classNames={{ indicator: styles.indicator, indicators: styles.indicators }} initialSlide={periodsDataFormatted?.findIndex(item => item.isActive)} slideSize={300} withControls={false} withIndicators>
+					{periodsDataFormatted
+					&& periodsDataFormatted.map(item => (
+						<Carousel.Slide key={item.id}>
 							<FrontendLinesToolbarPeriodsPeriod periodData={item} />
-						</Carousel.Slide>)}
+						</Carousel.Slide>
+					),
+
+					)}
 				</Carousel>
 			</div>
 		</>

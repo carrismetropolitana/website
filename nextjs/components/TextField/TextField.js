@@ -2,13 +2,14 @@
 
 /* * */
 
-import { useEffect, useState } from 'react';
-import styles from './TextField.module.css';
 import generator from '@/services/generator';
+import { useEffect, useState } from 'react';
+
+import styles from './TextField.module.css';
 
 /* * */
 
-export default function TextField({ type = 'text', name, label, description, placeholder, error, ...props }) {
+export default function TextField({ description, error, label, name, placeholder, type = 'text', ...props }) {
 	//
 
 	//
@@ -19,28 +20,31 @@ export default function TextField({ type = 'text', name, label, description, pla
 	//
 	// B. Transform data
 
-	//	 useEffect(() => {
-	//		 setTextFieldId(name || generator(3));
-	//	 }, []);
+	// useEffect(() => {
+	//  setTextFieldId(name || generator(3))
+	// }, [])
 
 	//
 	// C. Render components
 
 	return (
 		<div className={`${styles.container} ${error && styles.isError}`}>
-			<label htmlFor={textFieldId} className={styles.regularLabel}>
+			<label className={styles.regularLabel} htmlFor={textFieldId}>
 				{label}
 			</label>
-			<input type={type} name={textFieldId} placeholder={placeholder} className={styles.input} {...props} />
-			{description &&
-				<label htmlFor={textFieldId} className={styles.descriptionLabel}>
-					{description} </label>
-			}
-			{error &&
-				<label htmlFor={textFieldId} className={styles.errorLabel}>
+			<input className={styles.input} name={textFieldId} placeholder={placeholder} type={type} {...props} />
+			{description
+			&& (
+				<label className={styles.descriptionLabel} htmlFor={textFieldId}>
+					{description}
+				</label>
+			)}
+			{error
+			&& (
+				<label className={styles.errorLabel} htmlFor={textFieldId}>
 					{error}
 				</label>
-			}
+			)}
 		</div>
 	);
 

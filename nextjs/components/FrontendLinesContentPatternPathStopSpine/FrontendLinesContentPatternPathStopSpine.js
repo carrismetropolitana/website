@@ -4,7 +4,7 @@ import styles from './FrontendLinesContentPatternPathStopSpine.module.css';
 
 /* * */
 
-export default function FrontendLinesContentPatternPathStopSpine({ style = 'regular', color, textColor, isSelected }) {
+export default function FrontendLinesContentPatternPathStopSpine({ color, isSelected, style = 'regular', textColor }) {
 	//
 
 	//

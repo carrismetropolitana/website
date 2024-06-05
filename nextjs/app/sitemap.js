@@ -17,12 +17,12 @@ export default async function sitemap() {
 	//
 	// C. Transform data
 
-	const allStopsAsPages = allStopsData.map(stopData => {
+	const allStopsAsPages = allStopsData.map((stopData) => {
 		return {
-			url: `${baseUrl}/stops/${stopData.id}`,
-			lastModified: new Date,
 			changeFrequency: 'daily',
+			lastModified: (new Date()),
 			priority: 1,
+			url: `${baseUrl}/stops/${stopData.id}`,
 		};
 	});
 
@@ -31,16 +31,16 @@ export default async function sitemap() {
 
 	return [
 		{
-			url: `${baseUrl}/encm`,
-			lastModified: new Date,
 			changeFrequency: 'always',
+			lastModified: (new Date()),
 			priority: 1,
+			url: `${baseUrl}/encm`,
 		},
 		{
-			url: `${baseUrl}/stops`,
-			lastModified: new Date,
 			changeFrequency: 'daily',
+			lastModified: (new Date()),
 			priority: 1,
+			url: `${baseUrl}/stops`,
 		},
 		...allStopsAsPages,
 	];

@@ -2,20 +2,21 @@
 
 /* * */
 
-import styles from './FrontendEncm.module.css';
-import useSWR from 'swr';
-import { useState, useMemo, useEffect } from 'react';
-import { useMap } from 'react-map-gl/maplibre';
+import FrontendEncmGrid from '@/components/FrontendEncmGrid/FrontendEncmGrid';
+import FrontendEncmInfo from '@/components/FrontendEncmInfo/FrontendEncmInfo';
+import FrontendEncmMap from '@/components/FrontendEncmMap/FrontendEncmMap';
+import FrontendEncmToolbar from '@/components/FrontendEncmToolbar/FrontendEncmToolbar';
 import OSMMapDefaults from '@/components/OSMMap/OSMMap.config';
+import Panel from '@/components/Panel/Panel';
+import { useAppAnalyticsContext } from '@/contexts/AppAnalyticsContext';
+import generateUUID from '@/services/generateUUID';
 import { Divider } from '@mantine/core';
 import { useTranslations } from 'next-intl';
-import Panel from '@/components/Panel/Panel';
-import FrontendEncmMap from '@/components/FrontendEncmMap/FrontendEncmMap';
-import generateUUID from '@/services/generateUUID';
-import FrontendEncmToolbar from '@/components/FrontendEncmToolbar/FrontendEncmToolbar';
-import FrontendEncmInfo from '@/components/FrontendEncmInfo/FrontendEncmInfo';
-import FrontendEncmGrid from '@/components/FrontendEncmGrid/FrontendEncmGrid';
-import { useAppAnalyticsContext } from '@/contexts/AppAnalyticsContext';
+import { useEffect, useMemo, useState } from 'react';
+import { useMap } from 'react-map-gl/maplibre';
+import useSWR from 'swr';
+
+import styles from './FrontendEncm.module.css';
 
 /* * */
 
@@ -53,24 +54,24 @@ export default function FrontendEncm() {
 
 	const allEncmMapData = useMemo(() => {
 		const geoJSON = {
-			type: 'FeatureCollection',
 			features: [],
+			type: 'FeatureCollection',
 		};
 		if (allEncmData) {
 			for (const encm of allEncmData) {
 				geoJSON.features.push({
-					type: 'Feature',
 					geometry: {
-						type: 'Point',
 						coordinates: [encm.lon, encm.lat],
+						type: 'Point',
 					},
 					properties: {
-						mapid: `${encm.id}${generateUUID()}`,
 						id: encm.id,
-						name: encm.name,
 						lat: encm.lat,
 						lon: encm.lon,
+						mapid: `${encm.id}${generateUUID()}`,
+						name: encm.name,
 					},
+					type: 'Feature',
 				});
 			}
 		}
@@ -82,18 +83,18 @@ export default function FrontendEncm() {
 			const selectedEncmData = allEncmData.find(item => item.id === selectedEncmId);
 			if (selectedEncmData) {
 				return {
-					type: 'Feature',
 					geometry: {
-						type: 'Point',
 						coordinates: [selectedEncmData.lon, selectedEncmData.lat],
+						type: 'Point',
 					},
 					properties: {
-						id: selectedEncmData.id,
-						name: selectedEncmData.name,
 						address: selectedEncmData.address,
-						postal_code: selectedEncmData.postal_code,
+						id: selectedEncmData.id,
 						locality: selectedEncmData.locality,
+						name: selectedEncmData.name,
+						postal_code: selectedEncmData.postal_code,
 					},
+					type: 'Feature',
 				};
 			}
 			return null;
@@ -114,7 +115,7 @@ export default function FrontendEncm() {
 		window.open(`https://www.google.com/maps/@${center.lat},${center.lng},${zoom + zoomMargin}z`, '_blank', 'noopener,noreferrer');
 	};
 
-	const handleSelectEncm = encmId => {
+	const handleSelectEncm = (encmId) => {
 		// Only do something if feature is set
 		if (encmId) {
 			// Get all currently rendered features and mark all of them as unselected
@@ -131,10 +132,11 @@ export default function FrontendEncm() {
 			// If the encm is visible and the zoom is not too far back (plus a little margin)...
 			if (isEncmCurrentlyRendered && currentZoom + defaultZoomMargin > defaultZoom) {
 				// ...then simply ease to it.
-				frontendEncmMap.easeTo({ center: encmMapFeature?.geometry?.coordinates, zoom: currentZoom, duration: defaultSpeed * 0.25 });
-			} else {
+				frontendEncmMap.easeTo({ center: encmMapFeature?.geometry?.coordinates, duration: defaultSpeed * 0.25, zoom: currentZoom });
+			}
+			else {
 				// If the zoom is too far, or the desired encm is not visible, then fly to it
-				frontendEncmMap.flyTo({ center: encmMapFeature?.geometry?.coordinates, zoom: defaultZoom, duration: defaultSpeed });
+				frontendEncmMap.flyTo({ center: encmMapFeature?.geometry?.coordinates, duration: defaultSpeed, zoom: defaultZoom });
 			}
 			// Save the current feature to state and mark it as selected
 			setSelectedMapFeature(encmMapFeature);
@@ -147,15 +149,15 @@ export default function FrontendEncm() {
 	// F. Render components
 
 	return (
-		<Panel type='A' title={t('title')} loading={allEncmLoading} error={allEncmError}>
-			<FrontendEncmToolbar selectedMapStyle={selectedMapStyle} onSelectMapStyle={setSelectedMapStyle} onMapRecenter={handleMapReCenter} onOpenInGoogleMaps={handleOpenInGoogleMaps} selectedEncmId={selectedEncmId} onSelectEncmId={handleSelectEncm} />
+		<Panel error={allEncmError} loading={allEncmLoading} title={t('title')} type="A">
+			<FrontendEncmToolbar onMapRecenter={handleMapReCenter} onOpenInGoogleMaps={handleOpenInGoogleMaps} onSelectEncmId={handleSelectEncm} onSelectMapStyle={setSelectedMapStyle} selectedEncmId={selectedEncmId} selectedMapStyle={selectedMapStyle} />
 			<Divider />
 			<div className={styles.mapWrapper}>
-				<FrontendEncmMap allEncmMapData={allEncmMapData} selectedEncmMapData={selectedEncmMapData} selectedMapStyle={selectedMapStyle} selectedMapFeature={selectedMapFeature} onSelectEncmId={handleSelectEncm} />
+				<FrontendEncmMap allEncmMapData={allEncmMapData} onSelectEncmId={handleSelectEncm} selectedEncmMapData={selectedEncmMapData} selectedMapFeature={selectedMapFeature} selectedMapStyle={selectedMapStyle} />
 			</div>
 			<Divider />
 			<FrontendEncmInfo />
-			<FrontendEncmGrid allEncmData={allEncmData} selectedEncmId={selectedEncmId} onSelectEncmId={handleSelectEncm} />
+			<FrontendEncmGrid allEncmData={allEncmData} onSelectEncmId={handleSelectEncm} selectedEncmId={selectedEncmId} />
 		</Panel>
 	);
 

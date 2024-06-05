@@ -1,24 +1,25 @@
 'use client';
 
+import { Divider } from '@mantine/core';
+import { DatePickerInput } from '@mantine/dates';
+import { IconCalendar } from '@tabler/icons-react';
+import dayjs from 'dayjs';
+import { useEffect, useState } from 'react';
 import useSWR from 'swr';
-import { useState, useEffect } from 'react';
-import styles from './FrontendStopsTimetable.module.css';
+
+import StopTimetableRow from '../FrontendStopsTimetableRow/FrontendStopsTimetableRow';
 import LineDisplay from '../LineDisplay/LineDisplay';
 import Loader from '../Loader/Loader';
-import { IconCalendar } from '@tabler/icons-react';
-import { DatePickerInput } from '@mantine/dates';
-import dayjs from 'dayjs';
-import { Divider } from '@mantine/core';
 import NoDataLabel from '../NoDataLabel/NoDataLabel';
-import StopTimetableRow from '../FrontendStopsTimetableRow/FrontendStopsTimetableRow';
+import styles from './FrontendStopsTimetable.module.css';
 
-export default function StopTimetable({ selectedStopCode, selectedTripCode, onSelectTrip }) {
+export default function StopTimetable({ onSelectTrip, selectedStopCode, selectedTripCode }) {
 	//
 
 	//
 	// A. Setup variables
 
-	const [selectedDate, setSelectedDate] = useState(new Date);
+	const [selectedDate, setSelectedDate] = useState(new Date());
 
 	const [timetableLoading, setTimetableLoading] = useState(true);
 	const [timetableData, setTimetableData] = useState([]);
@@ -59,7 +60,7 @@ export default function StopTimetable({ selectedStopCode, selectedTripCode, onSe
 			// 5.
 			// Show realtime for this stop if date is today
 			if (isSelectedDateToday) {
-				timetableDataTemp = stopRealtimeData.map(realtimeEntry => {
+				timetableDataTemp = stopRealtimeData.map((realtimeEntry) => {
 					//
 					const lineInfo = allLinesData.find(line => line.code === realtimeEntry.line_code);
 
@@ -71,10 +72,12 @@ export default function StopTimetable({ selectedStopCode, selectedTripCode, onSe
 						displayTime = realtimeEntry.observed_arrival.substring(0, 5);
 						tripStatus = 'passed';
 						//
-					} else if (realtimeEntry.estimated_arrival) {
+					}
+					else if (realtimeEntry.estimated_arrival) {
 						displayTime = realtimeEntry.estimated_arrival.substring(0, 5);
 						tripStatus = 'realtime';
-					} else {
+					}
+					else {
 						displayTime = realtimeEntry.scheduled_arrival.substring(0, 5);
 						tripStatus = 'scheduled';
 					}
@@ -82,10 +85,10 @@ export default function StopTimetable({ selectedStopCode, selectedTripCode, onSe
 					return {
 						...realtimeEntry,
 						color: lineInfo.color || '#000000',
-						text_color: lineInfo.text_color || '#ffffff',
-						localities: [],
-						is_real_time: false,
 						display_time: displayTime,
+						is_real_time: false,
+						localities: [],
+						text_color: lineInfo.text_color || '#ffffff',
 						trip_status: tripStatus,
 					};
 				});
@@ -193,24 +196,27 @@ export default function StopTimetable({ selectedStopCode, selectedTripCode, onSe
 
 	return (
 		<>
-			{stopLoading || timetableLoading ?
-				<div className={styles.container}>
-					<Loader visible />
-				</div> :
-				stopData && !timetableLoading && timetableData.length > 0 ?
+			{stopLoading || timetableLoading
+				? (
 					<div className={styles.container}>
-						<DatePickerInput dropdownType='modal' icon={<IconCalendar size={18} />} valueFormat='DD MMMM YYYY' label='Date input' placeholder='Date input' value={selectedDate} onChange={setSelectedDate} />
-						<Divider />
-						<div className={styles.tableHeader}>
-							<div className={`${styles.tableHeaderColumn} ${styles.headerLine}`}>Linha e Destino</div>
-							<div className={styles.tableHeaderColumn}>Previsão</div>
+						<Loader visible />
+					</div>
+				)
+				: stopData && !timetableLoading && timetableData.length > 0
+					? (
+						<div className={styles.container}>
+							<DatePickerInput dropdownType="modal" icon={<IconCalendar size={18} />} label="Date input" onChange={setSelectedDate} placeholder="Date input" value={selectedDate} valueFormat="DD MMMM YYYY" />
+							<Divider />
+							<div className={styles.tableHeader}>
+								<div className={`${styles.tableHeaderColumn} ${styles.headerLine}`}>Linha e Destino</div>
+								<div className={styles.tableHeaderColumn}>Previsão</div>
+							</div>
+							<div className={styles.tableBody}>
+								{timetableData.map(trip => <StopTimetableRow key={trip.trip_code} onSelectTrip={onSelectTrip} selectedTripCode={selectedTripCode} trip={trip} />)}
+							</div>
 						</div>
-						<div className={styles.tableBody}>
-							{timetableData.map(trip => <StopTimetableRow key={trip.trip_code} trip={trip} selectedTripCode={selectedTripCode} onSelectTrip={onSelectTrip} />)}
-						</div>
-					</div> :
-					<NoDataLabel fill text={'no service'} />
-			}
+					)
+					: <NoDataLabel text="no service" fill />}
 		</>
 	);
 }

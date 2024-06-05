@@ -2,16 +2,17 @@
 
 /* * */
 
-import useSWR from 'swr';
-import { Combobox, TextInput, useCombobox, ActionIcon, Group } from '@mantine/core';
-import { useMemo, useState } from 'react';
-import { useTranslations } from 'next-intl';
-import styles from './FrontendLinesToolbarSelectLine.module.css';
-import useSearch from '@/hooks/useSearch';
-import { IconX, IconSearch, IconSelector } from '@tabler/icons-react';
 import { useFrontendLinesContext } from '@/contexts/FrontendLinesContext';
+import useSearch from '@/hooks/useSearch';
+import { ActionIcon, Combobox, Group, TextInput, useCombobox } from '@mantine/core';
 import { useDebouncedValue } from '@mantine/hooks';
+import { IconSearch, IconSelector, IconX } from '@tabler/icons-react';
+import { useTranslations } from 'next-intl';
+import { useMemo, useState } from 'react';
+import useSWR from 'swr';
+
 import LineDisplay from '../LineDisplay/LineDisplay';
+import styles from './FrontendLinesToolbarSelectLine.module.css';
 
 /* * */
 
@@ -44,14 +45,14 @@ export default function FrontendLinesToolbarSelectLine() {
 			if (FrontendLinesContext.entities.locality) {
 				allLinesDataFiltered = allLinesDataFiltered.filter(line => new Set(line.localities).has(FrontendLinesContext.entities.locality?.locality));
 			}
-			return allLinesDataFiltered.map(line => {
+			return allLinesDataFiltered.map((line) => {
 				return {
-					id: line.id,
-					short_name: line.short_name,
-					long_name: line.long_name,
 					color: line.color,
-					text_color: line.text_color,
+					id: line.id,
 					localities: line.localities.join(', '),
+					long_name: line.long_name,
+					short_name: line.short_name,
+					text_color: line.text_color,
 				};
 			});
 		}
@@ -91,7 +92,7 @@ export default function FrontendLinesToolbarSelectLine() {
 		comboboxStore.openDropdown();
 	};
 
-	const handleSelectLine = chosenSelectItemValue => {
+	const handleSelectLine = (chosenSelectItemValue) => {
 		FrontendLinesContext.selectLine(chosenSelectItemValue);
 		comboboxStore.closeDropdown();
 	};
@@ -103,48 +104,56 @@ export default function FrontendLinesToolbarSelectLine() {
 		<div className={styles.container}>
 			<Combobox onOptionSubmit={handleSelectLine} store={comboboxStore}>
 				<Combobox.Target>
-					{FrontendLinesContext.entities.line?.id && !comboboxStore.dropdownOpened ?
-						<Group className={styles.comboboxTarget} onClick={handleClickSearchField}>
-							<IconSearch size={20} />
-							<LineDisplay short_name={FrontendLinesContext.entities.line?.short_name} long_name={FrontendLinesContext.entities.line?.long_name} color={FrontendLinesContext.entities.line?.color} text_color={FrontendLinesContext.entities.line?.text_color} />
-							<ActionIcon onClick={handleClearSearchField} size='md' variant='subtle' color='gray'>
-								<IconX size={20} />
-							</ActionIcon>
-						</Group> :
-						<TextInput
-							autoComplete='off'
-							type='search'
-							aria-label={t('label')}
-							placeholder={t('placeholder')}
-							value={searchQuery}
-							size='lg'
-							leftSection={<IconSearch size={20} />}
-							rightSection={
-								searchQuery ?
-									<ActionIcon onClick={handleClearSearchField} size='md' variant='subtle' color='gray'>
-										<IconX size={20} />
-									</ActionIcon> :
-									<IconSelector size={18} />
+					{FrontendLinesContext.entities.line?.id && !comboboxStore.dropdownOpened
+						? (
+							<Group className={styles.comboboxTarget} onClick={handleClickSearchField}>
+								<IconSearch size={20} />
+								<LineDisplay color={FrontendLinesContext.entities.line?.color} long_name={FrontendLinesContext.entities.line?.long_name} short_name={FrontendLinesContext.entities.line?.short_name} text_color={FrontendLinesContext.entities.line?.text_color} />
+								<ActionIcon color="gray" onClick={handleClearSearchField} size="md" variant="subtle">
+									<IconX size={20} />
+								</ActionIcon>
+							</Group>
+						)
+						: (
+							<TextInput
+								aria-label={t('label')}
+								autoComplete="off"
+								leftSection={<IconSearch size={20} />}
+								onBlur={handleExitSearchField}
+								onChange={handleSearchQueryChange}
+								onClick={handleClickSearchField}
+								onFocus={handleClickSearchField}
+								placeholder={t('placeholder')}
+								size="lg"
+								type="search"
+								value={searchQuery}
+								rightSection={
+									searchQuery
+										? (
+											<ActionIcon color="gray" onClick={handleClearSearchField} size="md" variant="subtle">
+												<IconX size={20} />
+											</ActionIcon>
+										)
+										: <IconSelector size={18} />
 
-							}
-							onChange={handleSearchQueryChange}
-							onClick={handleClickSearchField}
-							onFocus={handleClickSearchField}
-							onBlur={handleExitSearchField}
-						/>
-					}
+								}
+							/>
+						)}
 				</Combobox.Target>
 
 				<Combobox.Dropdown>
 					<Combobox.Options mah={200} style={{ overflowY: 'auto' }}>
-						{allLinesDataFilteredBySearchQuery.length === 0 ?
-							<Combobox.Empty>{t('no_results')}</Combobox.Empty> :
-							allLinesDataFilteredBySearchQuery.map(item => <Combobox.Option key={item.id} value={item.id} className={item.id === FrontendLinesContext.entities.line?.id && styles.selected}>
-								<div className={styles.comboboxOption}>
-									<LineDisplay short_name={item.short_name} long_name={item.long_name} color={item.color} text_color={item.text_color} />
-								</div>
-							</Combobox.Option>)
-						}
+						{allLinesDataFilteredBySearchQuery.length === 0
+							? <Combobox.Empty>{t('no_results')}</Combobox.Empty>
+							: allLinesDataFilteredBySearchQuery.map(item => (
+								<Combobox.Option key={item.id} className={item.id === FrontendLinesContext.entities.line?.id && styles.selected} value={item.id}>
+									<div className={styles.comboboxOption}>
+										<LineDisplay color={item.color} long_name={item.long_name} short_name={item.short_name} text_color={item.text_color} />
+									</div>
+								</Combobox.Option>
+							),
+
+							)}
 					</Combobox.Options>
 				</Combobox.Dropdown>
 			</Combobox>

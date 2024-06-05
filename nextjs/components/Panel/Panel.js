@@ -1,11 +1,12 @@
 // 'use client';
 
-import { useTranslations } from 'next-intl';
 import Loader from '@/components/Loader/Loader';
-import styles from './Panel.module.css';
 import NoDataLabel from '@/components/NoDataLabel/NoDataLabel';
+import { useTranslations } from 'next-intl';
 
-export default function Panel({ type = 'A', loading, error, icon, title, rightSection, children }) {
+import styles from './Panel.module.css';
+
+export default function Panel({ children, error, icon, loading, rightSection, title, type = 'A' }) {
 	//
 
 	//
@@ -25,25 +26,28 @@ export default function Panel({ type = 'A', loading, error, icon, title, rightSe
 				</div>
 				{rightSection && <div className={styles.headerRightSection}>{rightSection}</div>}
 			</div>
-			{error &&
+			{error
+			&& (
 				<div className={styles.wrapper}>
 					<div className={styles.isError}>
 						<NoDataLabel text={t('error')} />
 					</div>
 				</div>
-			}
-			{loading &&
+			)}
+			{loading
+			&& (
 				<div className={styles.wrapper}>
 					<div className={styles.isLoading}>
 						<Loader visible />
 					</div>
 				</div>
-			}
-			{!error && !loading &&
+			)}
+			{!error && !loading
+			&& (
 				<div className={styles.wrapper}>
 					<div className={styles.content}>{children}</div>
 				</div>
-			}
+			)}
 		</div>
 	);
 

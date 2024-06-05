@@ -2,13 +2,14 @@
 
 /* * */
 
-import { useState } from 'react';
-import { useTranslations } from 'next-intl';
+import FrontendLinesToolbarFiltersLocality from '@/components/FrontendLinesToolbarFiltersLocality/FrontendLinesToolbarFiltersLocality';
+import FrontendLinesToolbarFiltersMunicipality from '@/components/FrontendLinesToolbarFiltersMunicipality/FrontendLinesToolbarFiltersMunicipality';
 import { Button, Collapse } from '@mantine/core';
 import { IconFilterDown, IconFilterUp } from '@tabler/icons-react';
+import { useTranslations } from 'next-intl';
+import { useState } from 'react';
+
 import styles from './FrontendLinesToolbarFilters.module.css';
-import FrontendLinesToolbarFiltersMunicipality from '@/components/FrontendLinesToolbarFiltersMunicipality/FrontendLinesToolbarFiltersMunicipality';
-import FrontendLinesToolbarFiltersLocality from '@/components/FrontendLinesToolbarFiltersLocality/FrontendLinesToolbarFiltersLocality';
 
 /* * */
 
@@ -43,7 +44,7 @@ export default function FrontendLinesToolbarFilters() {
 			</div>
 			<div className={styles.onlyOnMobile}>
 				<div className={styles.toggleFilters}>
-					<Button onClick={handleToggleFilters} leftSection={isOpen ? <IconFilterUp size={18} /> : <IconFilterDown size={18} />} className={`${styles.toggleFiltersButton} ${isOpen && styles.isOpen}`} size='xs'>
+					<Button className={`${styles.toggleFiltersButton} ${isOpen && styles.isOpen}`} leftSection={isOpen ? <IconFilterUp size={18} /> : <IconFilterDown size={18} />} onClick={handleToggleFilters} size="xs">
 						{isOpen ? t('toggle_filters.open.label') : t('toggle_filters.closed.label')}
 					</Button>
 				</div>

@@ -2,14 +2,15 @@
 
 /* * */
 
+import LiveIcon from '@/components/LiveIcon/LiveIcon';
 import { useTranslations } from 'next-intl';
 import { useEffect, useState } from 'react';
+
 import styles from './FrontendEncmItemOccupation.module.css';
-import LiveIcon from '@/components/LiveIcon/LiveIcon';
 
 /* * */
 
-export default function FrontendEncmItemOccupation({ currentlyWaiting, expectedWaitTime, activeCounters, isOpen }) {
+export default function FrontendEncmItemOccupation({ activeCounters, currentlyWaiting, expectedWaitTime, isOpen }) {
 	//
 
 	//
@@ -28,17 +29,20 @@ export default function FrontendEncmItemOccupation({ currentlyWaiting, expectedW
 			if (expectedWaitTime < 60) {
 				// If wait time is less than a minute, then round it to the minute
 				setWaitTimeString(t('expected_wait_time.available_soon'));
-			} else if (expectedWaitTime < 3600) {
+			}
+			else if (expectedWaitTime < 3600) {
 				// If wait time is less than an hour
 				const minutes = Math.floor(expectedWaitTime / 60);
 				setWaitTimeString(t('expected_wait_time.available_at_minutes', { minutes: minutes }));
-			} else {
+			}
+			else {
 				// If wait time is more than an hour
 				const hours = Math.floor(expectedWaitTime / 3600);
 				const minutes = Math.floor((expectedWaitTime % 3600) / 60);
 				setWaitTimeString(t('expected_wait_time.available_at_hours', { hours: hours, minutes: minutes }));
 			}
-		} else {
+		}
+		else {
 			setWaitTimeString(t('expected_wait_time.available_now'));
 		}
 	}, [currentlyWaiting, expectedWaitTime, t]);
@@ -49,7 +53,9 @@ export default function FrontendEncmItemOccupation({ currentlyWaiting, expectedW
 	return (
 		<div className={styles.container}>
 			<h4 className={styles.title}>
-				{t('title')} <LiveIcon color='#000000' />
+				{t('title')}
+				{' '}
+				<LiveIcon color="#000000" />
 			</h4>
 			<div className={styles.row}>
 				<p className={styles.label}>{t('currently_waiting.label')}</p>

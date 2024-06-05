@@ -2,14 +2,15 @@
 
 /* * */
 
-import { Combobox, TextInput, useCombobox, ActionIcon, Group } from '@mantine/core';
-import { useEffect, useState } from 'react';
-import { useTranslations } from 'next-intl';
-import styles from './FrontendLinesContentSelectPattern.module.css';
-import useSearch from '@/hooks/useSearch';
-import { IconSearch, IconSelector } from '@tabler/icons-react';
 import { useFrontendLinesContext } from '@/contexts/FrontendLinesContext';
+import useSearch from '@/hooks/useSearch';
+import { ActionIcon, Combobox, Group, TextInput, useCombobox } from '@mantine/core';
 import { useDebouncedValue } from '@mantine/hooks';
+import { IconSearch, IconSelector } from '@tabler/icons-react';
+import { useTranslations } from 'next-intl';
+import { useEffect, useState } from 'react';
+
+import styles from './FrontendLinesContentSelectPattern.module.css';
 
 /* * */
 
@@ -37,7 +38,7 @@ export default function FrontendLinesContentSelectPattern() {
 
 			// Loop through each line route to retrieve its info
 			const formattedRouteOptions = await Promise.all(
-				FrontendLinesContext.entities.line.routes.map(async routeId => {
+				FrontendLinesContext.entities.line.routes.map(async (routeId) => {
 					const routeDataResponse = await fetch(`https://api.carrismetropolitana.pt/routes/${routeId}`);
 					return routeDataResponse.json();
 				}),
@@ -45,7 +46,7 @@ export default function FrontendLinesContentSelectPattern() {
 
 			// Loop through each line pattern to retrieve its info
 			const formattedPatternOptions = await Promise.all(
-				FrontendLinesContext.entities.line.patterns.map(async patternId => {
+				FrontendLinesContext.entities.line.patterns.map(async (patternId) => {
 					const patternDataResponse = await fetch(`https://api.carrismetropolitana.pt/patterns/${patternId}`);
 					const patternData = await patternDataResponse.json();
 					return { ...patternData, route: formattedRouteOptions.find(route => route.id === patternData.route_id) };
@@ -105,7 +106,7 @@ export default function FrontendLinesContentSelectPattern() {
 		comboboxStore.openDropdown();
 	};
 
-	const handleSelectPattern = chosenSelectItemValue => {
+	const handleSelectPattern = (chosenSelectItemValue) => {
 		const foundRoute = allRoutesData.find(item => item.route_id === chosenSelectItemValue);
 		const foundPattern = allPatternsData.find(item => item.id === chosenSelectItemValue);
 		if (foundPattern) {
@@ -121,45 +122,51 @@ export default function FrontendLinesContentSelectPattern() {
 		<div className={styles.container}>
 			<Combobox onOptionSubmit={handleSelectPattern} store={comboboxStore}>
 				<Combobox.Target>
-					{FrontendLinesContext.entities.line?.id && FrontendLinesContext.entities.pattern?.id && !comboboxStore.dropdownOpened ?
-						<Group className={styles.comboboxTarget} onClick={handleClickSearchField}>
-							<IconSearch size={20} />
-							<p className={styles.comboboxSelection}>{FrontendLinesContext.entities.pattern?.headsign}</p>
-							<ActionIcon size='md' variant='subtle' color='gray'>
-								<IconSelector size={20} />
-							</ActionIcon>
-						</Group> :
-						<TextInput
-							autoComplete='off'
-							type='search'
-							aria-label={t('label')}
-							placeholder={t('placeholder')}
-							value={searchQuery}
-							size='lg'
-							leftSection={<IconSearch size={20} />}
-							rightSection={<IconSelector size={20} />}
-							onChange={handleSearchQueryChange}
-							onClick={handleClickSearchField}
-							onFocus={handleClickSearchField}
-							onBlur={handleExitSearchField}
-							className={styles.comboboxInput}
-						/>
-					}
+					{FrontendLinesContext.entities.line?.id && FrontendLinesContext.entities.pattern?.id && !comboboxStore.dropdownOpened
+						? (
+							<Group className={styles.comboboxTarget} onClick={handleClickSearchField}>
+								<IconSearch size={20} />
+								<p className={styles.comboboxSelection}>{FrontendLinesContext.entities.pattern?.headsign}</p>
+								<ActionIcon color="gray" size="md" variant="subtle">
+									<IconSelector size={20} />
+								</ActionIcon>
+							</Group>
+						)
+						: (
+							<TextInput
+								aria-label={t('label')}
+								autoComplete="off"
+								className={styles.comboboxInput}
+								leftSection={<IconSearch size={20} />}
+								onBlur={handleExitSearchField}
+								onChange={handleSearchQueryChange}
+								onClick={handleClickSearchField}
+								onFocus={handleClickSearchField}
+								placeholder={t('placeholder')}
+								rightSection={<IconSelector size={20} />}
+								size="lg"
+								type="search"
+								value={searchQuery}
+							/>
+						)}
 				</Combobox.Target>
 
 				<Combobox.Dropdown className={styles.comboboxDropdown}>
 					<Combobox.Options mah={200} style={{ overflowY: 'auto' }}>
-						{allPatternsDataFilteredBySearchQuery.length === 0 ?
-							<Combobox.Empty>{t('no_results')}</Combobox.Empty> :
-							allPatternsDataFilteredBySearchQuery.map(item => <Combobox.Option key={item.id} value={item.id} className={item.id === FrontendLinesContext.entities.pattern?.id && styles.selected}>
-								<div className={styles.comboboxOption}>
-									{/* <p className={styles.tripHeadsign}>{t('options.headsign', { value: item.headsign })}</p> */}
-									<p className={styles.tripHeadsign}>{item.headsign}</p>
-									<p className={styles.routeName}>{item.route.long_name}</p>
-									{/* de {FrontendLinesContext.entities.pattern.path[0].stop.locality} para {item.headsign} */}
-								</div>
-							</Combobox.Option>)
-						}
+						{allPatternsDataFilteredBySearchQuery.length === 0
+							? <Combobox.Empty>{t('no_results')}</Combobox.Empty>
+							: allPatternsDataFilteredBySearchQuery.map(item => (
+								<Combobox.Option key={item.id} className={item.id === FrontendLinesContext.entities.pattern?.id && styles.selected} value={item.id}>
+									<div className={styles.comboboxOption}>
+										{/* <p className={styles.tripHeadsign}>{t('options.headsign', { value: item.headsign })}</p> */}
+										<p className={styles.tripHeadsign}>{item.headsign}</p>
+										<p className={styles.routeName}>{item.route.long_name}</p>
+										{/* de {FrontendLinesContext.entities.pattern.path[0].stop.locality} para {item.headsign} */}
+									</div>
+								</Combobox.Option>
+							),
+
+							)}
 					</Combobox.Options>
 				</Combobox.Dropdown>
 			</Combobox>

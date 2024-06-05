@@ -2,17 +2,18 @@
 
 /* * */
 
-import useSWR from 'swr';
-import { useMemo } from 'react';
-import { DateTime } from 'luxon';
-import { useTranslations } from 'next-intl';
-import styles from './FrontendLinesContentPatternPathStopRealtime.module.css';
 import NextArrivals from '@/components/NextArrivals/NextArrivals';
 import { useDebugContext } from '@/contexts/DebugContext';
+import { DateTime } from 'luxon';
+import { useTranslations } from 'next-intl';
+import { useMemo } from 'react';
+import useSWR from 'swr';
+
+import styles from './FrontendLinesContentPatternPathStopRealtime.module.css';
 
 /* * */
 
-export default function FrontendLinesContentPatternPathStopRealtime({ patternId, stopId, stopSequence, showScheduledArrivals = true, maxEstimatedArrivals = 3, maxScheduledArrivals = 3, showLabel = true }) {
+export default function FrontendLinesContentPatternPathStopRealtime({ maxEstimatedArrivals = 3, maxScheduledArrivals = 3, patternId, showLabel = true, showScheduledArrivals = true, stopId, stopSequence }) {
 	//
 
 	//
@@ -33,7 +34,7 @@ export default function FrontendLinesContentPatternPathStopRealtime({ patternId,
 		// Return early if no data is available
 		if (!realtimeData) return [];
 		// Filter estimates for the current pattern
-		const filteredNextEstimatedArrivals = realtimeData.filter(item => {
+		const filteredNextEstimatedArrivals = realtimeData.filter((item) => {
 			// Skip if not for the current stop
 			if (item.stop_id !== stopId) return false;
 			// Skip if no estimated arrival is available
@@ -43,12 +44,12 @@ export default function FrontendLinesContentPatternPathStopRealtime({ patternId,
 			// Skip if the estimated arrival is for a different stop sequence
 			if (item.stop_sequence !== stopSequence) return false;
 			// Skip if the estimated arrival is in the past
-			if (new Date(item.estimated_arrival_unix * 1000) < new Date) return false;
+			if (new Date(item.estimated_arrival_unix * 1000) < new Date()) return false;
 			// else return true
 			return true;
 		});
 		// Format the arrival times
-		const formattedNextEstimatedArrivals = filteredNextEstimatedArrivals.map(item => {
+		const formattedNextEstimatedArrivals = filteredNextEstimatedArrivals.map((item) => {
 			const timeDifferenceBetweenEstimateAndNowInSeconds = item.estimated_arrival_unix - DateTime.local({ zone: 'Europe/Lisbon' }).toUnixInteger();
 			return Math.floor(timeDifferenceBetweenEstimateAndNowInSeconds / 60);
 		});
@@ -65,7 +66,7 @@ export default function FrontendLinesContentPatternPathStopRealtime({ patternId,
 		// Return early if no data is available
 		if (!realtimeData) return [];
 		// Filter estimates for the current pattern
-		const filteredNextScheduledArrivals = realtimeData.filter(item => {
+		const filteredNextScheduledArrivals = realtimeData.filter((item) => {
 			// Skip if there is no scheduled arrival
 			if (!item.scheduled_arrival_unix) return false;
 			// Skip if there is an estimated arrival
@@ -84,7 +85,7 @@ export default function FrontendLinesContentPatternPathStopRealtime({ patternId,
 		// Sort by arrival_time
 		const sortedNextScheduledArrivals = filteredNextScheduledArrivals.sort((a, b) => a.scheduled_arrival_unix - b.scheduled_arrival_unix);
 		// Format the arrival times
-		const formattedNextScheduledArrivals = sortedNextScheduledArrivals.map(item => {
+		const formattedNextScheduledArrivals = sortedNextScheduledArrivals.map((item) => {
 			const dateTimeObject = DateTime.fromSeconds(item.scheduled_arrival_unix, { zone: 'UTC' });
 			return `${dateTimeObject.setZone('Europe/Lisbon').toFormat('HH:mm')}`;
 		});
@@ -103,9 +104,9 @@ export default function FrontendLinesContentPatternPathStopRealtime({ patternId,
 			<div className={styles.container}>
 				{showLabel && <p className={styles.label}>{t('next_arrivals')}</p>}
 				<div className={styles.estimates}>
-					{nextEstimatedArrivals.length > 0 && <NextArrivals type='estimated' arrivalsData={nextEstimatedArrivals} />}
+					{nextEstimatedArrivals.length > 0 && <NextArrivals arrivalsData={nextEstimatedArrivals} type="estimated" />}
 					{nextEstimatedArrivals.length > 0 && debugContext.isDebug && <pre>{nextEstimatedArrivals.join('|')}</pre>}
-					{(showScheduledArrivals || !nextEstimatedArrivals.length) && nextScheduledArrivals.length > 0 && <NextArrivals type='scheduled' arrivalsData={nextScheduledArrivals} />}
+					{(showScheduledArrivals || !nextEstimatedArrivals.length) && nextScheduledArrivals.length > 0 && <NextArrivals arrivalsData={nextScheduledArrivals} type="scheduled" />}
 				</div>
 			</div>
 		);

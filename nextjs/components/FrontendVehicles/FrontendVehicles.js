@@ -2,9 +2,9 @@
 
 /* * */
 
-import { useTranslations } from 'next-intl';
-import Panel from '@/components/Panel/Panel';
 import FrontendVehiclesSummary from '@/components/FrontendVehiclesSummary/FrontendVehiclesSummary';
+import Panel from '@/components/Panel/Panel';
+import { useTranslations } from 'next-intl';
 
 /* * */
 
@@ -20,7 +20,7 @@ export default function FrontendVehicles() {
 	// B. Render components
 
 	return (
-		<Panel type='B' title={t('Panel_title')}>
+		<Panel title={t('Panel_title')} type="B">
 			<FrontendVehiclesSummary />
 		</Panel>
 	);
