@@ -1,0 +1,51 @@
+/* * */
+/* HEADER HEIGHT */
+/* Header must have fixed height to make it easier to */
+/* center elements inside it, allow for full height menus */
+/* and compensate for the fixed positioning */
+
+.spacer,
+.container {
+	height: 70px;
+}
+
+/* * */
+/* CONTAINER */
+
+.container {
+	top:0;
+	left: 0;
+	width: 100%;
+	position: fixed;
+	z-index: 100;
+}
+
+/* * */
+/* MAIN WRAPPER */
+
+.mainWrapper {
+	display: flex;
+	flex-direction: row;
+	gap: var(--size-spacing-30);
+	margin: auto;
+	width: 100%;
+	height: 100%;
+	max-width: var(--size-global-width);
+  align-items: center;
+  justify-content: space-between;
+	background-color: var(--color-system-background-100);
+	border-bottom: 1px solid var(--color-system-border-100);
+}
+
+/* * */
+/* NAV WRAPPER */
+
+.navWrapper {
+	display: flex;
+	flex-direction: row;
+	gap: var(--size-spacing-30);
+	width: 100%;
+	height: 100%;
+  align-items: center;
+  justify-content: flex-end;
+}

@@ -1,0 +1,75 @@
+/* * */
+/* SLIDE WRAPPER */
+
+.slideWrapper {
+	padding: var(--size-spacing-20);
+	padding-right: 0;
+}
+
+@media only screen and (max-width: 900px) {
+  .slideWrapper {
+		padding-top: 0;
+	}
+}
+
+/* * */
+/* CAROUSEL CONTAINER */
+
+.carouselContainer {
+	width: 360px;
+}
+
+@media only screen and (max-width: 900px) {
+  .carouselContainer {
+    width: 300px;
+  }
+}
+
+/* * */
+/* CAROUSEL CONTROLS WRAPPER */
+
+.carouselControlsWrapper {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	width: 100%;
+	padding: 0 var(--size-spacing-30);
+}
+
+@media only screen and (max-width: 900px) {
+  .carouselControlsWrapper {
+    display: none;
+  }
+}
+
+/* * */
+/* CAROUSEL CONTROL */
+
+.carouselControl {
+	opacity: 1;
+	width: 50px;
+	aspect-ratio: 1;
+	border: 1px solid var(--color-system-border-200);
+	background-color: var(--color-system-background-100);
+	color: var(--color-system-text-300);
+	box-shadow: 0 0 15px 0 rgba(0, 0, 0, 0.1);
+	transition: all 100ms ease;
+}
+
+.carouselControl:hover {
+	border-color: var(--color-system-text-200);
+	color: var(--color-system-text-200);
+	opacity: 1;
+}
+
+.carouselControl:active {
+	color: var(--color-system-text-300);
+	border-color: var(--color-system-text-300);
+	background-color: var(--color-system-background-300);
+	opacity: 1;
+}
+
+.carouselControl[data-inactive] {
+	opacity: 0;
+	cursor: default;
+}

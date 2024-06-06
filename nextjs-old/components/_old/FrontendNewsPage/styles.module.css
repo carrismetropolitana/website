@@ -1,0 +1,30 @@
+/* * */
+/* TITLE */
+
+.title {
+	font-size: 36px;
+	font-weight: var(--font-weight-heading);
+	max-width: 700px;
+	padding: 5px;
+	/* margin: auto; */
+}
+
+/* * */
+/* CONTENT */
+
+.content {
+
+	/* margin: auto; */
+	padding: 5px;
+	padding-top: 20px;
+	display: flex;
+	flex-direction: column;
+	gap: 20px;
+}
+
+
+.content p {
+	font-size: 18px;
+	line-height: 1.5;
+	max-width: 700px;
+}

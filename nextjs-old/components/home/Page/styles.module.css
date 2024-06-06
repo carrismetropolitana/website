@@ -1,0 +1,33 @@
+/* * */
+/* FEATURED WRAPPER */
+
+.featuredWrapper {
+	display: grid;
+	grid-template-columns: 1fr 1fr;
+	gap: 1px;
+  background-color: var(--color-system-background-100);
+}
+
+@media only screen and (max-width: 900px) {
+	.featuredWrapper {
+		grid-template-columns: 1fr;
+	}
+}
+
+/* * */
+/*  */
+
+.quickSearchWrapper,
+.carouselWrapper {
+	background-color: var(--color-brand);
+	aspect-ratio: 16/9;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+@media only screen and (max-width: 900px) {
+	.quickSearchWrapper {
+		display: none;
+	}
+}

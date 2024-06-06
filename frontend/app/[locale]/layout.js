@@ -1,0 +1,32 @@
+/* * */
+
+import AppAnalytics from '@/components/AppAnalytics/AppAnalytics';
+import { availableLocales } from '@/translations/config';
+import { notFound } from 'next/navigation';
+import { NextIntlClientProvider, useMessages } from 'next-intl';
+import FrontendHeader from '@/components/_frontend/header/Header';
+import FrontendFooter from '@/components/FrontendFooter';
+import FrontendViewportWrapper from '@/components/FrontendViewportWrapper';
+
+/* * */
+
+export default function Layout({ children, params: { locale } }) {
+	//
+
+	if (!availableLocales.includes(locale)) notFound();
+
+	const messages = useMessages();
+
+	return (
+		<NextIntlClientProvider locale={locale} messages={messages} now={Date.now()} timeZone="Europe/Lisbon">
+			<FrontendViewportWrapper>
+			<FrontendHeader />
+			<AppAnalytics />
+			{children}
+			<FrontendFooter />
+		</FrontendViewportWrapper>
+		</NextIntlClientProvider>
+	);
+
+	//
+}

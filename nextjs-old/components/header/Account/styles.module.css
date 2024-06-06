@@ -1,0 +1,25 @@
+/* * */
+/* USER PROFILE */
+
+.userProfile {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	font-size: var(--font-size-subtitle);
+	font-weight: var(--font-weight-subtitle);
+	padding-right: var(--size-spacing-15);
+}
+
+/* * */
+/* NAV LIST */
+
+.navList {
+	border-bottom: 1px solid var(--color-system-border-100);
+}
+
+/* * */
+/* COMPONENT WRAPPER */
+
+.componentWrapper {
+	padding: var(--size-spacing-15);
+}
