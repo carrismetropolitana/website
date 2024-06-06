@@ -4,7 +4,7 @@
 
   "files.eol": "\n",
 
-  "eslint.workingDirectories": ["./nextjs"],
+  "eslint.workingDirectories": ["./frontend"],
 
   // Enable the ESlint flat config support
   "eslint.experimental.useFlatConfig": true,
