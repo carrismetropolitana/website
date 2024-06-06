@@ -56,8 +56,8 @@ services:
   # # # # # # # # # # # # # # # # # # # # #
   # # # # # # # # # # # # # # # # # # # # #
 
-  website_nextjs:
-    image: ghcr.io/carrismetropolitana/website-nextjs:alpha
+  website_frontend:
+    image: ghcr.io/carrismetropolitana/website-frontend:alpha
     restart: unless-stopped
     logging:
       options:
