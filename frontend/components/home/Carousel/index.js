@@ -12,7 +12,7 @@ import data from './data.json';
 
 export default function Component() {
 	return (
-		<Carousel height="100%" plugins={[WheelGesturesPlugin({ forceWheelAxis: 'x', target: document.documentElement })]} slideGap={1} style={{ flex: 1 }} loop withIndicators>
+		<Carousel height="100%" plugins={[WheelGesturesPlugin()]} slideGap={1} style={{ flex: 1 }} loop withIndicators>
 			{data.map((item, index) => (
 				<Carousel.Slide key={index}>
 					<Image src={item.src} />
