@@ -1,6 +1,6 @@
 /* * */
 
-export default async function sitemap() {
+export default async function Sitemap() {
 	//
 
 	//

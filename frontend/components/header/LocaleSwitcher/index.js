@@ -14,7 +14,7 @@ export default function Component() {
 	//
 	// A. Setup variables
 
-	const t = useTranslations('FrontendHeaderLocaleSwitcher');
+	const t = useTranslations('HeaderLocaleSwitcher');
 
 	//
 	// B. Transform data

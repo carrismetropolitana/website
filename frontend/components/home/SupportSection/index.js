@@ -1,9 +1,7 @@
-'use client';
-
 /* * */
 
-import FrontendGridNav from '@/components/FrontendGridNav';
-import FrontendSection from '@/components/FrontendSection';
+import LayoutGridNav from '@/components/layout/GridNav';
+import LayoutSection from '@/components/layout/Section';
 import { IconHelpHexagon, IconMessage, IconPhoneCheck, IconUmbrella, IconUserPentagon } from '@tabler/icons-react';
 import { useTranslations } from 'next-intl';
 
@@ -27,7 +25,7 @@ export default function Component() {
 	//
 	// A. Setup variables
 
-	const t = useTranslations('FrontendHomepageSupport');
+	const t = useTranslations('HomeSupportSection');
 
 	//
 	// B. Transform data
@@ -38,9 +36,9 @@ export default function Component() {
 	// C. Render Components
 
 	return (
-		<FrontendSection heading={t('section_heading')}>
-			<FrontendGridNav className={styles.gridNav} items={menuItemsFormatted} />
-		</FrontendSection>
+		<LayoutSection heading={t('section_heading')}>
+			<LayoutGridNav className={styles.gridNav} items={menuItemsFormatted} />
+		</LayoutSection>
 	);
 
 	//

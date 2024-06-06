@@ -1,3 +1,5 @@
+/* * */
+
 export default function manifest() {
 	return {
 		background_color: '#ffffff',

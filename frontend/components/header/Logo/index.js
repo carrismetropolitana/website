@@ -13,7 +13,7 @@ export default function Component() {
 	//
 	// A. Setup variables
 
-	const t = useTranslations('FrontendHeaderLogo');
+	const t = useTranslations('HeaderLogo');
 
 	//
 	// B. Render Components

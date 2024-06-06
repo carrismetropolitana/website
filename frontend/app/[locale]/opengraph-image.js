@@ -1,8 +1,8 @@
 /* * */
 
+import OpenGraphDefault from '@/opengraph/OpenGraphDefault';
 import fs from 'fs';
 import { ImageResponse } from 'next/og';
-import OpenGraphDefault from 'opengraph/OpenGraphDefault';
 
 /* * */
 

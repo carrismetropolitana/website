@@ -1,6 +1,6 @@
 /* * */
 
-import HomePage from '@/components/_home/Page';
+import HomePage from '@/components/home/Page';
 
 /* * */
 

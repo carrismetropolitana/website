@@ -1,9 +1,7 @@
-'use client';
-
 /* * */
 
-import FrontendGridNav from '@/components/FrontendGridNav';
-import FrontendSection from '@/components/FrontendSection';
+import LayoutGridNav from '@/components/layout/GridNav';
+import LayoutSection from '@/components/layout/Section';
 import { IconAlertTriangle, IconArrowLoopRight, IconBusStop, IconSignRight } from '@tabler/icons-react';
 import { useTranslations } from 'next-intl';
 
@@ -24,7 +22,7 @@ export default function Component() {
 	//
 	// A. Setup variables
 
-	const t = useTranslations('FrontendHomepageSchedules');
+	const t = useTranslations('HomeSchedulesSection');
 
 	//
 	// B. Transform data
@@ -35,9 +33,9 @@ export default function Component() {
 	// C. Render Components
 
 	return (
-		<FrontendSection heading={t('section_heading')}>
-			<FrontendGridNav items={menuItemsFormatted} />
-		</FrontendSection>
+		<LayoutSection heading={t('section_heading')}>
+			<LayoutGridNav items={menuItemsFormatted} />
+		</LayoutSection>
 	);
 
 	//

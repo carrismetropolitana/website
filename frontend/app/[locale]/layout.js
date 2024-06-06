@@ -1,12 +1,12 @@
 /* * */
 
-import AppAnalytics from '@/components/AppAnalytics/AppAnalytics';
+import AnalyticsConsentPopup from '@/components/analytics/ConsentPopup';
+import Footer from '@/components/footer/Footer';
+import Header from '@/components/header/Header';
+import LayoutViewportWrapper from '@/components/layout/ViewportWrapper';
 import { availableLocales } from '@/translations/config';
 import { notFound } from 'next/navigation';
 import { NextIntlClientProvider, useMessages } from 'next-intl';
-import FrontendHeader from '@/components/_frontend/header/Header';
-import FrontendFooter from '@/components/FrontendFooter';
-import FrontendViewportWrapper from '@/components/FrontendViewportWrapper';
 
 /* * */
 
@@ -19,12 +19,12 @@ export default function Layout({ children, params: { locale } }) {
 
 	return (
 		<NextIntlClientProvider locale={locale} messages={messages} now={Date.now()} timeZone="Europe/Lisbon">
-			<FrontendViewportWrapper>
-			<FrontendHeader />
-			<AppAnalytics />
-			{children}
-			<FrontendFooter />
-		</FrontendViewportWrapper>
+			<LayoutViewportWrapper>
+				<Header />
+				<AnalyticsConsentPopup />
+				{children}
+				<Footer />
+			</LayoutViewportWrapper>
 		</NextIntlClientProvider>
 	);
 

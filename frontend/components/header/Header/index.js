@@ -1,8 +1,8 @@
 /* * */
 
-import HeaderAccount from '@/components/header/Account';
 import HeaderLogo from '@/components/header/Logo';
-import HeaderNavigation from '@/components/header/Navigation';
+import HeaderNavigationAccount from '@/components/header/NavigationAccount';
+import HeaderNavigationMain from '@/components/header/NavigationMain';
 
 import styles from './styles.module.css';
 
@@ -16,8 +16,8 @@ export default function Component() {
 				<div className={styles.mainWrapper}>
 					<HeaderLogo />
 					<div className={styles.navWrapper}>
-						<HeaderNavigation />
-						<HeaderAccount />
+						<HeaderNavigationMain />
+						<HeaderNavigationAccount />
 					</div>
 				</div>
 			</div>

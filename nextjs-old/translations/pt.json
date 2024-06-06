@@ -1,104 +1,4 @@
 {
-	"FrontendHeaderLogo": {
-		"logo": {
-			"alt": "Carris Metropolitana"
-		}
-	},
-	"FrontendHeaderNavItem": {
-		"schedules": "Horários",
-		"lines": "Pesquisar Linhas",
-		"stops": "Pesquisar Paragens",
-		"alerts": "Alertas de Serviço",
-		"planner": "Planear Viagem",
-		"schools": "Escolas & Universidades",
-		"flyers": "O Meu Livro de Horários",
-		"tarifs": "Tarifas",
-		"tickets": "Bilhetes de Bordo",
-		"navegante": "Passe navegante®",
-		"stores": "Lojas e Rede de Agentes",
-		"help": "Apoio ao Cliente",
-		"faq": "Perguntas Frequentes",
-		"lost-and-found": "Perdidos e Achados",
-		"complaints": "Sugestões e Reclamações",
-		"contacts": "Contactos"
-	},
-	"FrontendHeaderAccount": {
-		"configs": "Personalizar Experiência",
-		"favorites": "Favoritos",
-		"history": "Histórico de Pesquisa"
-	},
-	"FrontendHeaderLocaleSwitcher": {
-		"pt": {
-			"label": "🇵🇹",
-			"alt": "Português"
-		},
-		"en": {
-			"label": "🇬🇧",
-			"alt": "English"
-		},
-		"fr": {
-			"label": "🇫🇷",
-			"alt": "Français"
-		}
-	},
-	"FrontendFooter": {
-    "primary_links": {
-			"about": "Sobre a Carris Metropolitana",
-			"opendata": "Dados Abertos",
-			"status": "Estado"
-    },
-    "secondary_links": {
-			"conditions": "Condições Gerais de Transporte",
-			"privacy": "Política de Privacidade",
-			"cookies": "Política de Cookies",
-			"legal": "Aviso Legal"
-    },
-    "copyright": "© Carris Metropolitana {year} - Todos os direitos reservados"
-  },
-	"FrontendFooterDebug":{
-		"enabled": "Desligar Debug",
-    "disabled": "Ligar Debug"
-	},
-	"FrontendHomepageSchedules": {
-		"section_heading":"Horários",
-		"nav_items": {
-			"lines": "Pesquisar Linhas",
-			"stops": "Pesquisar Paragens",
-			"planner": "Planear Viagem",
-			"alerts": "Alertas de Serviço"
-		}
-	},
-	"FrontendHomepageNews": {
-		"section_heading": "Notícias",
-		"nav_items": {
-			"news": "Notícias",
-			"events": "Eventos",
-			"promotions": "Promoções"
-		}
-
-	},
-	"FrontendHomepageSupport": {
-		"section_heading":"Apoio ao Cliente",
-		"nav_items": {
-			"faq": "Perguntas Frequentes",
-			"lost-and-found": "Perdidos e Achados",
-			"complaints": "Sugestões e Reclamações",
-			"stores": "Lojas e Rede de Agentes",
-			"contacts":"Contactos"
-		}
-	},
-
-	"FrontendNewsCard": {
-		"publish_date": "{publishDate, date, long}"
-	},
-
-	"FrontendNewsPage": {
-		"publish_date": "{publishDate, date, long}"
-	},
-
-
-
-
   "equipments": {
     "bus": "Connection with Bus",
     "train": "Connection with Train",
@@ -864,13 +764,7 @@
     },
     "thank_you": "Obrigado pelo contributo!"
   },
-  "AppAnalytics": {
-    "title": "Respeitamos a sua Privacidade",
-    "text": "Com o objetivo de melhorar a performance, os conteúdos e a segurança deste site, a TML pretende recorrer à utilização de cookies ou tecnologias similares.",
-    "privacy_policy": "Consultar Política de Cookies",
-    "accept": "OK",
-    "refuse": "Não, obrigado"
-  },
+
   "LegalExplorerCookies": {
     "title": "Política de Cookies",
     "sections": {
@@ -983,12 +877,7 @@
   "FrontendAlerts": {
     "Panel_title": "Alertas de Serviço"
   },
-  "AppError": {
-    "title": "Ocorreu um erro inesperado",
-    "subtitle": "Fomos notificados e iremos corrigir em breve. Obrigado pela sua compreensão.",
-    "retry": "Nova tentativa em {value} segundos",
-    "goto_home": "Voltar à página principal"
-  },
+
   "AppAuthenticationSignIn": {
     "title": "Title",
     "subtitle": "subtitle"

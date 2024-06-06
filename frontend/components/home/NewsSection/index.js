@@ -2,9 +2,9 @@
 
 /* * */
 
-import FrontendNewsCard from '@/components/FrontendNewsCard';
-import FrontendNewsCardSkeleton from '@/components/FrontendNewsCardSkeleton';
-import FrontendSection from '@/components/FrontendSection';
+import LayoutSection from '@/components/layout/Section';
+import NewsCard from '@/components/news/Card';
+import NewsCardSkeleton from '@/components/news/CardSkeleton';
 import collator from '@/utils/collator';
 import { Carousel } from '@mantine/carousel';
 import { IconArrowLeft, IconArrowRight } from '@tabler/icons-react';
@@ -22,7 +22,7 @@ export default function Component() {
 	//
 	// A. Setup variables
 
-	const t = useTranslations('FrontendHomepageNews');
+	const t = useTranslations('HomeNewsSection');
 
 	//
 	// B. Fetch Data
@@ -39,7 +39,7 @@ export default function Component() {
 
 	return (
 
-		<FrontendSection heading={t('section_heading')}>
+		<LayoutSection heading={t('section_heading')}>
 			<Carousel
 				align="start"
 				classNames={{ container: styles.carouselContainer, control: styles.carouselControl, controls: styles.carouselControlsWrapper }}
@@ -55,35 +55,35 @@ export default function Component() {
 				{allNewsDataLatest ? allNewsDataLatest.map((item, index) => (
 					<Carousel.Slide key={index}>
 						<div className={styles.slideWrapper}>
-							<FrontendNewsCard _id={item._id} coverImageSrc={item.cover_image_src} publishDate={item.publish_date} title={item.title} />
+							<NewsCard _id={item._id} coverImageSrc={item.cover_image_src} publishDate={item.publish_date} title={item.title} />
 						</div>
 					</Carousel.Slide>
 				)) : (
 					<>
 						<Carousel.Slide>
 							<div className={styles.slideWrapper}>
-								<FrontendNewsCardSkeleton />
+								<NewsCardSkeleton />
 							</div>
 						</Carousel.Slide>
 						<Carousel.Slide>
 							<div className={styles.slideWrapper}>
-								<FrontendNewsCardSkeleton />
+								<NewsCardSkeleton />
 							</div>
 						</Carousel.Slide>
 						<Carousel.Slide>
 							<div className={styles.slideWrapper}>
-								<FrontendNewsCardSkeleton />
+								<NewsCardSkeleton />
 							</div>
 						</Carousel.Slide>
 						<Carousel.Slide>
 							<div className={styles.slideWrapper}>
-								<FrontendNewsCardSkeleton />
+								<NewsCardSkeleton />
 							</div>
 						</Carousel.Slide>
 					</>
 				)}
 			</Carousel>
-		</FrontendSection>
+		</LayoutSection>
 	);
 
 	//
