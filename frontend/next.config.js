@@ -32,8 +32,6 @@ module.exports = withNextIntl({
 			//
 			{ destination: '/encm', permanent: true, source: '/espacos-navegante' },
 			//
-			{ destination: '/', permanent: true, source: '/pip' },
-			//
 		];
 	},
 });
