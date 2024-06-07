@@ -8,12 +8,23 @@ import '@mantine/dates/styles.layer.css';
 
 /* * */
 
-import { createTheme } from '@mantine/core';
+import SegmentedControlOverride from '@/styles/overrides/SegmentedControl.module.css';
+import { SegmentedControl, createTheme } from '@mantine/core';
 
 /* * */
 
 export const theme = createTheme({
 	//
+
+	components: {
+		SegmentedControl: SegmentedControl.extend({
+			classNames: {
+				indicator: SegmentedControlOverride.indicator,
+				label: SegmentedControlOverride.label,
+				root: SegmentedControlOverride.root,
+			},
+		}),
+	},
 
 	fontFamily: 'var(--font-inter)',
 

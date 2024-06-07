@@ -72,6 +72,22 @@
 		"enabled": "Desligar Debug",
     "disabled": "Ligar Debug"
 	},
+	"HomeQuickSearchFavoritesBar":{
+		"empty": "Ainda não tem linhas favoritas..."
+	},
+	"HomeQuickSearchWidget": {
+		"title": "Pesquisa Rápida",
+		"subtitle": "Encontre os horários planeados e em tempo real da linha que procura.",
+		"options": {
+			"lines": "Linhas",
+			"stops": "Paragens"
+		},
+		"search": {
+			"label": "Encontre os horários planeados e em tempo real da linha que procura.",
+			"placeholder": "Encontre os horários planeados e em tempo real da linha que procura.",
+			"nothing_found": "Encontre os horários planeados e em tempo real da linha que procura."
+		}
+	},
 	"HomeNewsSection": {
 		"section_heading": "Notícias",
 		"nav_items": {
