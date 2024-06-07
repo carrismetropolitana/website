@@ -120,5 +120,10 @@
 	},
 	"NewsPage": {
 		"publish_date": "{publishDate, date, long}"
+	},
+	"SelectLine": {
+		"label": "Procurar linha por número, nome, localização...",
+    "placeholder": "Procurar linha por número, nome, localização...",
+    "nothing_found": "Nenhum Resultado Encontrado"
 	}
 }

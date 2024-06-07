@@ -1,0 +1,18 @@
+/* * */
+/* NAME */
+
+.name {
+  display: flex;
+	width: 100%;
+  align-items: center;
+  justify-content: flex-start;
+  color: var(--color-system-text-100);
+  font-size: 15px;
+  font-weight: bold;
+  line-height: 1.2;
+  overflow: hidden;
+  text-overflow: ellipsis;
+	display: -webkit-box;
+	-webkit-line-clamp: 1;
+	-webkit-box-orient: vertical;
+}

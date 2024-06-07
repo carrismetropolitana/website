@@ -1,6 +1,10 @@
 'use client';
 
+/* * */
+
 import { transliterate } from 'inflected';
+
+/* * */
 
 export default function useSearch(query, data, options) {
 	//
@@ -27,7 +31,7 @@ export default function useSearch(query, data, options) {
 		finalResult = finalResult.filter((item) => {
 			let hasMatch = false;
 			for (let key of options.keys) {
-				if (Object.prototype.hasOwnProperty.call(Object.prototype, item, key)) {
+				if (Object.prototype.hasOwnProperty.call(item, key)) {
 					const normalizedValue = normalizeString(String(item[key]), { regexReplace: options.regexReplace, toLowerCase: true, transliterate: true });
 					if (normalizedQuery.test(normalizedValue)) {
 						hasMatch = true;
@@ -52,6 +56,8 @@ export default function useSearch(query, data, options) {
 	//
 }
 
+/* * */
+
 function normalizeString(rawString, options) {
 	// Initiate a variable to hold several normalization steps
 	let normalizedString = rawString;
@@ -67,6 +73,8 @@ function normalizeString(rawString, options) {
 	return normalizedString;
 	//
 }
+
+/* * */
 
 function limitArraySize(array, limit) {
 	return array.slice(0, limit || array.length);
