@@ -38,11 +38,11 @@
   text-align: center;
 }
 
-.operationalStatus_inactive .stopName {
+.operationalStatus_INACTIVE .stopName {
   color: var(--gray-4);
 }
 
-.operationalStatus_voided .stopName {
+.operationalStatus_VOIDED .stopName {
   color: #7d2819;
 }
 

@@ -58,6 +58,7 @@ export default function FrontendStopsMap() {
 					case 'VOIDED':
 						currentStatus = stop.operational_status;
 						break;
+					case 'INACTIVE':
 					case 'SEASONAL':
 					case 'PROVISIONAL':
 						if (!stop.lines.length) currentStatus = 'inactive';
