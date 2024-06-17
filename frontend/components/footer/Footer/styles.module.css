@@ -3,7 +3,6 @@
 
 .container {
   display: flex;
-  background-color: var(--color-system-background-100);
   flex-direction: column;
 }
 
