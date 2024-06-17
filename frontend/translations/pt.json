@@ -125,5 +125,10 @@
 		"label": "Procurar linha por número, nome, localização...",
     "placeholder": "Procurar linha por número, nome, localização...",
     "nothing_found": "Nenhum Resultado Encontrado"
+	},
+	"SelectStop": {
+		"label": "Procurar paragem por id, nome, localização...",
+    "placeholder": "Procurar paragem por id, nome, localização...",
+    "nothing_found": "Nenhum Resultado Encontrado"
 	}
 }

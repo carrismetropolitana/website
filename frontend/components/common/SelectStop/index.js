@@ -2,11 +2,11 @@
 
 /* * */
 
-import LineDisplay from '@/components/layout/LineDisplay';
+import StopDisplay from '@/components/layout/StopDisplay';
 import useSearch from '@/hooks/useSearch';
 import { ActionIcon, Combobox, Group, TextInput, useCombobox } from '@mantine/core';
 import { useDebouncedValue } from '@mantine/hooks';
-import { IconArrowLoopRight, IconSelector, IconX } from '@tabler/icons-react';
+import { IconBusStop, IconSelector, IconX } from '@tabler/icons-react';
 import { useTranslations } from 'next-intl';
 import { useMemo, useState } from 'react';
 
@@ -14,13 +14,13 @@ import styles from './styles.module.css';
 
 /* * */
 
-export default function Component({ data = [], onSelectLineId = () => null, selectedLineId, variant, ...props }) {
+export default function Component({ data = [], onSelectStopId = () => null, selectedStopId, variant, ...props }) {
 	//
 
 	//
 	// A. Setup variables
 
-	const t = useTranslations('SelectLine');
+	const t = useTranslations('SelectStop');
 	const comboboxStore = useCombobox();
 	const [searchQuery, setSearchQuery] = useState('');
 	const [debouncedSearchQuery] = useDebouncedValue(searchQuery, 200);
@@ -28,32 +28,33 @@ export default function Component({ data = [], onSelectLineId = () => null, sele
 	//
 	// B. Transform data
 
-	const allLinesDataFormatted = useMemo(() => {
+	const allStopsDataFormatted = useMemo(() => {
+		console.log(data);
 		if (data) {
-			return data.map((line) => {
+			return data.map((stop) => {
 				return {
-					_id: line.id,
-					color: line.color,
-					localities: line.localities.join(', '),
-					long_name: line.long_name,
-					short_name: line.short_name,
-					text_color: line.text_color,
+					_id: stop.id,
+					locality: stop.locality,
+					municipality_name: stop.municipality_name,
+					name: stop.name,
+					short_name: stop.short_name,
+					tts_name: stop.tts_name,
 				};
 			});
 		}
 	}, [data]);
 
-	const selectedLineData = useMemo(() => {
-		if (allLinesDataFormatted) {
-			return allLinesDataFormatted.find(item => item._id === selectedLineId);
+	const selectedStopData = useMemo(() => {
+		if (allStopsDataFormatted) {
+			return allStopsDataFormatted.find(item => item._id === selectedStopId);
 		}
-	}, [allLinesDataFormatted, selectedLineId]);
+	}, [allStopsDataFormatted, selectedStopId]);
 
 	//
 	// C. Search
 
-	const allLinesDataFilteredBySearchQuery = useSearch(debouncedSearchQuery, allLinesDataFormatted, {
-		keys: ['_id', 'short_name', 'long_name', 'localities'],
+	const allStopsDataFilteredBySearchQuery = useSearch(debouncedSearchQuery, allStopsDataFormatted, {
+		keys: ['_id', 'name', 'short_name', 'locality'],
 		limitResults: 100,
 		regexReplace: /[^a-zA-Z0-9\s]/g,
 	});
@@ -73,7 +74,7 @@ export default function Component({ data = [], onSelectLineId = () => null, sele
 
 	const handleClearSearchField = () => {
 		setSearchQuery('');
-		onSelectLineId();
+		onSelectStopId();
 		comboboxStore.openDropdown();
 	};
 
@@ -84,8 +85,8 @@ export default function Component({ data = [], onSelectLineId = () => null, sele
 		comboboxStore.openDropdown();
 	};
 
-	const handleSelectLine = (chosenSelectItemValue) => {
-		onSelectLineId(chosenSelectItemValue);
+	const handleSelectStop = (chosenSelectItemValue) => {
+		onSelectStopId(chosenSelectItemValue);
 		comboboxStore.closeDropdown();
 	};
 
@@ -93,16 +94,16 @@ export default function Component({ data = [], onSelectLineId = () => null, sele
 	// E. Render components
 
 	return (
-		<Combobox onOptionSubmit={handleSelectLine} store={comboboxStore}>
+		<Combobox onOptionSubmit={handleSelectStop} store={comboboxStore}>
 			<Combobox.Target>
-				{selectedLineData && !comboboxStore.dropdownOpened
+				{selectedStopData && !comboboxStore.dropdownOpened
 					? (
 						<Group className={`${styles.comboboxTargetWrapper} ${variant === 'white' && styles.variantWhite}`} onClick={handleClickSearchField}>
 							<div className={styles.comboboxTargetSection} data-position="left">
-								<IconArrowLoopRight size={20} />
+								<IconBusStop size={20} />
 							</div>
 							<div className={styles.comboboxTargetInput}>
-								<LineDisplay color={selectedLineData?.color} long_name={selectedLineData?.long_name} short_name={selectedLineData?.short_name} text_color={selectedLineData?.text_color} />
+								<StopDisplay _id={selectedStopData?._id}locality={selectedStopData?.locality} municipalityName={selectedStopData?.municipality_name} name={selectedStopData?.name} />
 							</div>
 							<div className={styles.comboboxTargetSection} data-position="right">
 								<ActionIcon color="gray" onClick={handleClearSearchField} size="md" variant="subtle">
@@ -115,7 +116,7 @@ export default function Component({ data = [], onSelectLineId = () => null, sele
 						<TextInput
 							aria-label={t('label')}
 							autoComplete="off"
-							leftSection={<IconArrowLoopRight size={20} />}
+							leftSection={<IconBusStop size={20} />}
 							onBlur={handleExitSearchField}
 							onChange={handleSearchQueryChange}
 							onClick={handleClickSearchField}
@@ -141,12 +142,12 @@ export default function Component({ data = [], onSelectLineId = () => null, sele
 
 			<Combobox.Dropdown>
 				<Combobox.Options mah={200} style={{ overflowY: 'auto' }}>
-					{allLinesDataFilteredBySearchQuery.length === 0
+					{allStopsDataFilteredBySearchQuery.length === 0
 						? <Combobox.Empty>{t('nothing_found')}</Combobox.Empty>
-						: allLinesDataFilteredBySearchQuery.map(item => (
-							<Combobox.Option key={item._id} className={item._id === selectedLineData?.id && styles.selected} value={item._id}>
+						: allStopsDataFilteredBySearchQuery.map(item => (
+							<Combobox.Option key={item._id} className={item._id === selectedStopData?.id && styles.selected} value={item._id}>
 								<div className={styles.comboboxOption}>
-									<LineDisplay color={item.color} long_name={item.long_name} short_name={item.short_name} text_color={item.text_color} />
+									<StopDisplay _id={item._id} locality={item?.locality} municipalityName={item?.municipality_name} name={item?.name} />
 								</div>
 							</Combobox.Option>
 						),

@@ -2,7 +2,7 @@
 /* ROOT */
 
 .root {
-	padding: 5px;
+	padding: 4px;
 	border-radius: 5px;
 	background-color: var(--color-system-background-300);
 }

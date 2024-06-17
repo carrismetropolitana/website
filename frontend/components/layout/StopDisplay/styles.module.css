@@ -1,0 +1,53 @@
+/* * */
+/* CONTAINER */
+
+.container {
+  display: flex;
+  flex-direction: column;
+	justify-content: flex-start;
+  align-items: flex-start;
+  gap: var(--size-spacing-5);
+}
+
+/* * */
+/* NAME */
+
+.name {
+  font-size: 15px;
+  font-weight: var(--font-weight-semibold);
+	color: var(--color-system-text-100);
+}
+
+/* * */
+/* ADDITIONAL INFO */
+
+.additionalInfo {
+  display: flex;
+	flex-direction: row;
+	align-items: center;
+	justify-content: center;
+	gap: var(--size-spacing-5);
+}
+
+/* * */
+/* LOCALITY & MUNICIPALITY NAME */
+
+.localityMunicipalityName {
+  font-size: 14px;
+  font-weight: var(--font-weight-medium);
+	color: var(--color-system-text-200);
+	line-height: 1;
+}
+
+/* * */
+/* STOP ID */
+
+.stopId {
+  font-size: 10px;
+  font-weight: var(--font-weight-bold);
+	color: var(--color-system-text-200);
+	background-color: var(--color-system-background-300);
+	padding: 2px 8px 3px 8px;
+	border-radius: 999px;
+	line-height: 1;
+}

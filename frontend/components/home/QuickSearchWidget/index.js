@@ -3,6 +3,7 @@
 /* * */
 
 import SelectLine from '@/components/common/SelectLine';
+import SelectStop from '@/components/common/SelectStop';
 import { useRouter } from '@/translations/navigation';
 import { SegmentedControl } from '@mantine/core';
 import { useTranslations } from 'next-intl';
@@ -29,6 +30,7 @@ export default function Component() {
 	// B. Fetch data
 
 	const { data: allLinesData } = useSWR('https://api.carrismetropolitana.pt/lines');
+	const { data: allStopsData } = useSWR('https://api.carrismetropolitana.pt/stops');
 
 	//
 	// C. Transform data
@@ -46,6 +48,11 @@ export default function Component() {
 		router.push(`/lines/${selectedLineId}`);
 	};
 
+	const handleSelectStop = (selectedStopId) => {
+		setSelectedStopId(selectedStopId);
+		router.push(`/stops/${selectedStopId}`);
+	};
+
 	//
 	// E. Render Components
 
@@ -59,7 +66,7 @@ export default function Component() {
 				<SegmentedControl data={segmentedControlOptions} onChange={setSelectedSearchType} value={selectedSearchType} variant="white" />
 				<div className={styles.searchInputWrapper}>
 					{selectedSearchType === 'lines' && <SelectLine data={allLinesData} onSelectLineId={handleSelectLine} selectedLineId={selectedLineId} variant="white" />}
-					{selectedSearchType === 'stops' && <p>stops</p>}
+					{selectedSearchType === 'stops' && <SelectStop data={allStopsData} onSelectStopId={handleSelectStop} selectedStopId={selectedStopId} variant="white" />}
 				</div>
 			</div>
 		</div>

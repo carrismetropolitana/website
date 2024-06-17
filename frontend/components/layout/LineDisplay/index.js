@@ -8,7 +8,7 @@ import styles from './styles.module.css';
 
 /* * */
 
-export default function LineDisplay({ color = '#000000', long_name, short_name, text_color = '#ffffff' }) {
+export default function Component({ color = '#000000', long_name, short_name, text_color = '#ffffff' }) {
 	return !short_name || !long_name
 		? <Loader size={20} visible />
 		: (
