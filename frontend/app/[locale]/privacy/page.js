@@ -1,9 +1,9 @@
 /* * */
 
-import PlannerPage from '@/components/planner/Page';
+import PrivacyPage from '@/components/privacy/Page';
 
 /* * */
 
 export default function Page() {
-	return <PlannerPage />;
+	return <PrivacyPage />;
 }

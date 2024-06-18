@@ -1,9 +1,9 @@
 /* * */
 
-import PlannerPage from '@/components/planner/Page';
+import LostAndFoundPage from '@/components/lost-and-found/Page';
 
 /* * */
 
 export default function Page() {
-	return <PlannerPage />;
+	return <LostAndFoundPage />;
 }

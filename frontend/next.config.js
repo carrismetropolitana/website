@@ -22,15 +22,14 @@ module.exports = withNextIntl({
 			//
 			{ destination: '/alerts', permanent: true, source: '/alertas' },
 			//
-			{ destination: '/stops/all', permanent: true, source: '/stops' },
-			{ destination: '/stops/all', permanent: true, source: '/paragens' },
+			{ destination: '/stops', permanent: true, source: '/paragens' },
 			//
-			{ destination: '/lines/all', permanent: true, source: '/lines' },
-			{ destination: '/lines/all', permanent: true, source: '/horarios' },
+			{ destination: '/lines', permanent: true, source: '/horarios' },
 			//
-			{ destination: '/vehicles/all', permanent: true, source: '/vehicles' },
+			{ destination: '/vehicles', permanent: true, source: '/veiculos' },
 			//
-			{ destination: '/encm', permanent: true, source: '/espacos-navegante' },
+			{ destination: '/stores', permanent: true, source: '/encm' },
+			{ destination: '/stores', permanent: true, source: '/espacos-navegante' },
 			//
 		];
 	},

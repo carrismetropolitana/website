@@ -1,9 +1,9 @@
 /* * */
 
-import PlannerPage from '@/components/planner/Page';
+import ContactsPage from '@/components/contacts/Page';
 
 /* * */
 
 export default function Page() {
-	return <PlannerPage />;
+	return <ContactsPage />;
 }

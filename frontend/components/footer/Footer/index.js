@@ -11,7 +11,7 @@ import styles from './styles.module.css';
 
 const PRIMARY_LINKS = [
 	{ _id: 'about', href: '/about' },
-	{ _id: 'opendata', href: '/opendata' },
+	{ _id: 'open-data', href: '/open-data' },
 	{ _id: 'status', href: 'https://status.carrismetropolitana.pt/', target: '_blank' },
 ];
 

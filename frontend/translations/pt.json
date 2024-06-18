@@ -57,7 +57,7 @@
 		"Footer": {
     "primary_links": {
 			"about": "Sobre a Carris Metropolitana",
-			"opendata": "Dados Abertos",
+			"open-data": "Dados Abertos",
 			"status": "Estado"
     },
     "secondary_links": {
