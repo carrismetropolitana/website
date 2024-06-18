@@ -130,5 +130,14 @@
 		"label": "Procurar paragem por id, nome, localização...",
     "placeholder": "Procurar paragem por id, nome, localização...",
     "nothing_found": "Nenhum Resultado Encontrado"
-	}
+	},
+	"AppUnavailable": {
+		"title": "Em Construção",
+		"subtitle": "Esta página ainda não está pronta :)"
+	},
+	"AppRedirect": {
+    "title": "A redirecionar...",
+    "subtitle": "Se não for redirecionado automaticamente utilize o botão seguinte.",
+    "action": "Ir para a Página"
+  }
 }

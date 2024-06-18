@@ -10,11 +10,11 @@ import styles from './styles.module.css';
 /* * */
 
 const MENU_ITEMS = [
-	{ _id: 'faq', href: '/', icon: <IconHelpHexagon /> },
-	{ _id: 'lost-and-found', href: '/', icon: <IconUmbrella /> },
-	{ _id: 'complaints', href: '/', icon: <IconMessage /> },
-	{ _id: 'stores', href: '/', icon: <IconUserPentagon /> },
-	{ _id: 'contacts', href: '/', icon: <IconPhoneCheck /> },
+	{ _id: 'faq', href: '/faq', icon: <IconHelpHexagon /> },
+	{ _id: 'lost-and-found', href: '/lost-and-found', icon: <IconUmbrella /> },
+	{ _id: 'complaints', href: '/complaints', icon: <IconMessage /> },
+	{ _id: 'stores', href: '/stores', icon: <IconUserPentagon /> },
+	{ _id: 'contacts', href: '/contacts', icon: <IconPhoneCheck /> },
 ];
 
 /* * */

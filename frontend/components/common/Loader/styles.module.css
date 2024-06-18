@@ -1,10 +1,16 @@
+/* * */
+/* SPINNER */
+
 .spinner {
   border-style: solid;
-  border-color: var(--gray3);
-  border-top-color: var(--gray6);
+  border-color: var(--color-system-background-200);
+  border-top-color: var(--color-system-border-200);
   border-radius: 999px;
   animation: spin 1s linear infinite;
 }
+
+/* * */
+/* ANIMATION */
 
 @keyframes spin {
   0% {
@@ -14,6 +20,9 @@
     transform: rotate(360deg);
   }
 }
+
+/* * */
+/* OPTIONS */
 
 .maxed,
 .full,

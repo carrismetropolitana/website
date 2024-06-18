@@ -8,10 +8,10 @@ import { useTranslations } from 'next-intl';
 /* * */
 
 const MENU_ITEMS = [
-	{ _id: 'lines', href: '/', icon: <IconArrowLoopRight size={20} /> },
-	{ _id: 'stops', href: '/', icon: <IconBusStop size={20} /> },
-	{ _id: 'planner', href: '/', icon: <IconSignRight size={20} /> },
-	{ _id: 'alerts', href: '/', icon: <IconAlertTriangle size={20} /> },
+	{ _id: 'lines', href: '/lines', icon: <IconArrowLoopRight size={20} /> },
+	{ _id: 'stops', href: '/stops', icon: <IconBusStop size={20} /> },
+	{ _id: 'planner', href: '/planner', icon: <IconSignRight size={20} /> },
+	{ _id: 'alerts', href: '/alerts', icon: <IconAlertTriangle size={20} /> },
 ];
 
 /* * */
