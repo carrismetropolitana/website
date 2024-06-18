@@ -30,7 +30,7 @@ export default function Component() {
 		// Check if analyticsContext and pathname are ready
 		if (typeof analyticsContext.enabled !== 'boolean' || !pathname) return;
 		// Check if pathname is the cookies policy page
-		const regexPatternToMatchCookiesPolicy = /^(\/[a-z]{2})?\/legal\/cookies\/?$/;
+		const regexPatternToMatchCookiesPolicy = /^(\/[a-z]{2})?\/cookies\/?$/;
 		const isPrivacyPage = regexPatternToMatchCookiesPolicy.test(pathname);
 		// Set the modal state based on the context and pathname
 		setIsOpen(!analyticsContext.enabled && !isPrivacyPage);

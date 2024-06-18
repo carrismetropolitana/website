@@ -14,15 +14,27 @@ export default async function Sitemap() {
 	const allStopsResponse = await fetch('https://api.carrismetropolitana.pt/stops');
 	const allStopsData = await allStopsResponse.json();
 
+	const allLinesResponse = await fetch('https://api.carrismetropolitana.pt/lines');
+	const allLinesData = await allLinesResponse.json();
+
 	//
 	// C. Transform data
 
 	const allStopsAsPages = allStopsData.map((stopData) => {
 		return {
 			changeFrequency: 'daily',
-			lastModified: (new Date()),
+			lastModified: new Date(),
 			priority: 1,
 			url: `${baseUrl}/stops/${stopData.id}`,
+		};
+	});
+
+	const allLinesAsPages = allLinesData.map((lineData) => {
+		return {
+			changeFrequency: 'daily',
+			lastModified: new Date(),
+			priority: 1,
+			url: `${baseUrl}/lines/${lineData.id}`,
 		};
 	});
 
@@ -32,17 +44,24 @@ export default async function Sitemap() {
 	return [
 		{
 			changeFrequency: 'always',
-			lastModified: (new Date()),
+			lastModified: new Date(),
 			priority: 1,
 			url: `${baseUrl}/encm`,
 		},
 		{
 			changeFrequency: 'daily',
-			lastModified: (new Date()),
+			lastModified: new Date(),
 			priority: 1,
 			url: `${baseUrl}/stops`,
 		},
 		...allStopsAsPages,
+		{
+			changeFrequency: 'daily',
+			lastModified: new Date(),
+			priority: 1,
+			url: `${baseUrl}/lines`,
+		},
+		...allLinesAsPages,
 	];
 
 	//

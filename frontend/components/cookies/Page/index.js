@@ -1,21 +1,25 @@
 'use client';
 
-import Panel from '@/components/Panel/Panel';
+/* * */
+
+import Section from '@/components/layout/Section';
 import { useAppAnalyticsContext } from '@/contexts/AppAnalyticsContext';
-import { Anchor, Button, Group, Table } from '@mantine/core';
+import { Button, Group, Table } from '@mantine/core';
 import { openConfirmModal } from '@mantine/modals';
 import { IconCircleCheckFilled } from '@tabler/icons-react';
 import { useTranslations } from 'next-intl';
 
-import styles from './LegalExplorerCookies.module.css';
+import styles from './styles.module.css';
 
-export default function LegalExplorerCookies() {
+/* * */
+
+export default function Component() {
 	//
 
 	//
 	// A. Setup variables
 
-	const t = useTranslations('LegalExplorerCookies');
+	const t = useTranslations('CookiesPage');
 	const analyticsContext = useAppAnalyticsContext();
 
 	//
@@ -44,7 +48,7 @@ export default function LegalExplorerCookies() {
 	// B. Render components
 
 	return (
-		<Panel title={t('title')} type="B">
+		<Section heading={t('title')} withGlobalPadding>
 			<div className={styles.container}>
 				<div className={styles.section}>
 					<div className={styles.title}>{t('sections.intro.title')}</div>
@@ -133,21 +137,21 @@ export default function LegalExplorerCookies() {
 					<div className={styles.text}>{t('sections.question_7.paragraphs.1')}</div>
 					<div className={styles.text}>{t('sections.question_7.paragraphs.2')}</div>
 					<Group>
-						<Anchor href="https://support.google.com/chrome/answer/95647?hl=pt" target="_blank">
+						<a href="https://support.google.com/chrome/answer/95647?hl=pt" target="_blank">
 							Google Chrome
-						</Anchor>
-						<Anchor href="https://support.apple.com/pt-pt/guide/safari/sfri11471/mac" target="_blank">
+						</a>
+						<a href="https://support.apple.com/pt-pt/guide/safari/sfri11471/mac" target="_blank">
 							Safari
-						</Anchor>
-						<Anchor href="https://support.mozilla.org/pt-PT/kb/cookies-informacao-que-websites-guardam-no-seu-computador" target="_blank">
+						</a>
+						<a href="https://support.mozilla.org/pt-PT/kb/cookies-informacao-que-websites-guardam-no-seu-computador" target="_blank">
 							Mozilla Firefox
-						</Anchor>
-						<Anchor href="https://support.microsoft.com/pt-br/microsoft-edge/excluir-cookies-no-microsoft-edge-63947406-40ac-c3b8-57b9-2a946a29ae09" target="_blank">
+						</a>
+						<a href="https://support.microsoft.com/pt-br/microsoft-edge/excluir-cookies-no-microsoft-edge-63947406-40ac-c3b8-57b9-2a946a29ae09" target="_blank">
 							Microsoft Edge
-						</Anchor>
-						<Anchor href="https://support.microsoft.com/pt-pt/windows/eliminar-e-gerir-cookies-168dab11-0753-043d-7c16-ede5947fc64d" target="_blank">
+						</a>
+						<a href="https://support.microsoft.com/pt-pt/windows/eliminar-e-gerir-cookies-168dab11-0753-043d-7c16-ede5947fc64d" target="_blank">
 							Internet Explorer
-						</Anchor>
+						</a>
 					</Group>
 				</div>
 				<div className={styles.section}>
@@ -155,7 +159,7 @@ export default function LegalExplorerCookies() {
 					<div className={styles.text}>{t('sections.question_8.paragraphs.1')}</div>
 				</div>
 			</div>
-		</Panel>
+		</Section>
 	);
 
 	//

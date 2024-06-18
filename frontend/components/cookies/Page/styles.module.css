@@ -1,28 +1,44 @@
+/* * */
+/* CONTAINER */
+
 .container {
-  display: flex;
+	display: flex;
   flex-direction: column;
   gap: 50px;
+	max-width: 900px;
 }
+
+/* * */
+/* SECTION */
 
 .section {
   display: flex;
   flex-direction: column;
-  gap: var(--size-sm);
+  gap: var(--size-spacing-10);
 }
+
+/* * */
+/* TITLE */
 
 .title {
   font-size: 18px;
   font-weight: 600;
 }
 
+/* * */
+/* TEXT */
+
 .text {
   font-size: 15px;
   font-weight: 500;
 }
 
+/* * */
+/* AUTHORIZATION OPTIONS */
+
 .authorizationOptions {
   display: flex;
   flex-direction: column;
-  gap: var(--size-sm);
+  gap: var(--size-spacing-10);
   align-items: flex-start;
 }

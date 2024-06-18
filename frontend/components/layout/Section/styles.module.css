@@ -44,6 +44,11 @@
 	padding-right: var(--size-spacing-20);
 }
 
+.withGlobalPadding .headingWrapper {
+	padding-left: 0;
+	padding-right: 0;
+}
+
 /* * */
 /* HEADING */
 
