@@ -6,7 +6,7 @@ import { DateTime } from 'luxon';
 
 /* * */
 
-export default async function GET(req) {
+export async function GET(req, { params }) {
 	//
 
 	// 1.
@@ -21,16 +21,16 @@ export default async function GET(req) {
 	// 2.
 	// Setup Operator ID
 
-	if (!req.query.operator_id || req.query.operator_id.length !== 2) return Response.json({ message: 'Invalid operator_id param.' }, { status: 400 });
+	if (!params.operator_id || params.operator_id.length !== 2) return Response.json({ message: 'Invalid operator_id param.' }, { status: 400 });
 
-	const operatorIdString = req.query.operator_id === 'cm' ? ['41', '42', '43', '44'] : [req.query.operator_id];
+	const operatorIdString = params.operator_id === 'cm' ? ['41', '42', '43', '44'] : [params.operator_id];
 
 	// 3.
 	// Setup timestamp boundaries
 
-	if (!req.query.date || req.query.date.length !== 8) return Response.json({ message: 'Invalid date param.' }, { status: 400 });
+	if (!params.date || params.date.length !== 8) return Response.json({ message: 'Invalid date param.' }, { status: 400 });
 
-	const dateObject = DateTime.fromFormat(req.query.date, 'yyyyLLdd');
+	const dateObject = DateTime.fromFormat(params.date, 'yyyyLLdd');
 	const startDateString = dateObject.set({ hour: 4, minute: 0, second: 0 }).toFormat('yyyy-LL-dd\'T\'HH\':\'mm\':\'ss');
 	const endDateString = dateObject.plus({ day: 1 }).set({ hour: 3, minute: 59, second: 59 }).toFormat('yyyy-LL-dd\'T\'HH\':\'mm\':\'ss');
 

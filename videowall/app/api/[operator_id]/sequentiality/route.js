@@ -5,7 +5,7 @@ import { DateTime } from 'luxon';
 
 /* * */
 
-export default async function GET(req) {
+export async function GET(req, { params }) {
 	//
 
 	// 1.
@@ -18,7 +18,7 @@ export default async function GET(req) {
 	// 2.
 	// Setup Operator ID
 
-	if (!req.query.operator_id || req.query.operator_id.length !== 2) return Response.json({ message: 'Invalid "operator_id" param.' }, { status: 400 });
+	if (!params.operator_id || params.operator_id.length !== 2) return Response.json({ message: 'Invalid "operator_id" param.' }, { status: 400 });
 
 	// 3.
 	// Setup timestamp boundaries
@@ -35,7 +35,7 @@ export default async function GET(req) {
 	const responseResult = {
 		end_date: endDateString,
 		//
-		operator_id: req.query.operator_id,
+		operator_id: params.operator_id,
 		//
 		sam_breakdown: [],
 		sam_complete_qty: 0,
@@ -79,15 +79,15 @@ export default async function GET(req) {
 		const samSerialNumberMap = {};
 
 		// SETUP STREAMS
-		const salesStream = PCGIDB.SalesEntity.find({ 'transaction.operatorLongID': { $eq: req.query.operator_id }, 'transaction.transactionDate': { $gte: startDateString, $lte: endDateString } }, { allowDiskUse: true, maxTimeMS: 180000 })
+		const salesStream = PCGIDB.SalesEntity.find({ 'transaction.operatorLongID': { $eq: params.operator_id }, 'transaction.transactionDate': { $gte: startDateString, $lte: endDateString } }, { allowDiskUse: true, maxTimeMS: 180000 })
 			.project({ '_id': true, 'transaction.macDataFields.aseCounterValue': true, 'transaction.macDataFields.samSerialNumber': true, 'transaction.transactionDate': true, 'transaction.transactionId': true })
 			.stream();
 
-		const validationsStream = PCGIDB.ValidationEntity.find({ 'transaction.operatorLongID': { $eq: req.query.operator_id }, 'transaction.transactionDate': { $gte: startDateString, $lte: endDateString } }, { allowDiskUse: true, maxTimeMS: 180000 })
+		const validationsStream = PCGIDB.ValidationEntity.find({ 'transaction.operatorLongID': { $eq: params.operator_id }, 'transaction.transactionDate': { $gte: startDateString, $lte: endDateString } }, { allowDiskUse: true, maxTimeMS: 180000 })
 			.project({ '_id': true, 'transaction.macDataFields.aseCounterValue': true, 'transaction.macDataFields.samSerialNumber': true, 'transaction.transactionDate': true, 'transaction.transactionId': true })
 			.stream();
 
-		const locationsStream = PCGIDB.LocationEntity.find({ 'transaction.operatorLongID': { $eq: req.query.operator_id }, 'transaction.transactionDate': { $gte: startDateString, $lte: endDateString } }, { allowDiskUse: true, maxTimeMS: 180000 })
+		const locationsStream = PCGIDB.LocationEntity.find({ 'transaction.operatorLongID': { $eq: params.operator_id }, 'transaction.transactionDate': { $gte: startDateString, $lte: endDateString } }, { allowDiskUse: true, maxTimeMS: 180000 })
 			.project({ '_id': true, 'transaction.macDataFields.aseCounterValue': true, 'transaction.macDataFields.samSerialNumber': true, 'transaction.transactionDate': true, 'transaction.transactionId': true })
 			.stream();
 
@@ -185,7 +185,7 @@ export default async function GET(req) {
 
 			responseResult.sam_breakdown.push(samBreakdown);
 
-			console.log(`[${req.query.operator_id}] SAM ${samSerialNumber} | Expected Tx Qty: ${samTransactionsExpectedQty} | Found Tx Qty: ${allTransactionsForThisSamSorted.length} | Missing Tx Qty: ${samTransactionsMissingQty} [${samBreakdown.sam_complete ? 'OK' : 'NOT OK'}] | Period: ${startDateString} - ${endDateString}`);
+			console.log(`[${params.operator_id}] SAM ${samSerialNumber} | Expected Tx Qty: ${samTransactionsExpectedQty} | Found Tx Qty: ${allTransactionsForThisSamSorted.length} | Missing Tx Qty: ${samTransactionsMissingQty} [${samBreakdown.sam_complete ? 'OK' : 'NOT OK'}] | Period: ${startDateString} - ${endDateString}`);
 
 			//
 		}

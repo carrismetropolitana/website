@@ -1,7 +1,7 @@
 /* * */
 
-import { readFileSync } from 'fs';
 import { MongoClient, ObjectId } from 'mongodb';
+import { readFileSync } from 'node:fs';
 import { createTunnel } from 'tunnel-ssh';
 
 /* * */
@@ -215,7 +215,7 @@ class PCGIDB {
 			const sshOptions = {
 				host: process.env.PCGIDB_SSH_HOST,
 				port: process.env.PCGIDB_SSH_PORT,
-				privateKey: readFileSync(process.env.PCGIDB_SSH_KEY_PATH),
+				privateKey: readFileSync(process.env.PCGIDB_SSH_KEY_PATH, { encoding: 'utf8' }),
 				username: process.env.PCGIDB_SSH_USERNAME,
 			};
 
