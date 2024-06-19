@@ -215,7 +215,7 @@ class PCGIDB {
 			const sshOptions = {
 				host: process.env.PCGIDB_SSH_HOST,
 				port: process.env.PCGIDB_SSH_PORT,
-				privateKey: readFileSync(process.env.PCGIDB_SSH_KEY_PATH, { encoding: 'utf8' }),
+				privateKey: readFileSync(process.env.PCGIDB_SSH_KEY_PATH || '', { encoding: 'utf8' }),
 				username: process.env.PCGIDB_SSH_USERNAME,
 			};
 
