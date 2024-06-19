@@ -1,6 +1,6 @@
 {
   "name": "@carrismetropolitana/website-frontend",
-  "version": "2024.06.19-1854",
+  "version": "2024.06.19-1858",
   "private": true,
   "scripts": {
     "dev": "next dev -p 3002",
