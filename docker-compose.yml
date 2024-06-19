@@ -64,7 +64,7 @@ services:
   # # # # # # # # # # # # # # # # # # # # #
   # # # # # # # # # # # # # # # # # # # # #
 
-  website_frontend:
+  frontend:
     image: ghcr.io/carrismetropolitana/website-frontend:alpha
     restart: unless-stopped
     mem_limit: 2g
@@ -78,7 +78,7 @@ services:
   # # # # # # # # # # # # # # # # # # # # #
   # # # # # # # # # # # # # # # # # # # # #
 
-  website_videowall:
+  videowall:
     image: ghcr.io/carrismetropolitana/website-videowall:alpha
     restart: unless-stopped
     mem_limit: 2g
