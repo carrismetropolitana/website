@@ -41,7 +41,7 @@ services:
     volumes:
       - ./nginx/nginx.conf:/etc/nginx/nginx.conf
       - ./nginx/uptime.conf:/etc/nginx/conf.d/uptime.conf
-      - ./.htpasswd:/etc/nginx/.htpasswd
+      - ./nginx/.htpasswd:/etc/nginx/.htpasswd
       - ./letsencrypt:/etc/letsencrypt
       - certbotdata:/var/www/certbot
     ports:
