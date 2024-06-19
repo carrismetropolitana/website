@@ -5,6 +5,10 @@ name: cmetropolitana-website
 volumes:
   certbotdata:
 
+secrets:
+  pcgidbkey:
+    file: PCGIDB.key
+
 services:
   #
 
