@@ -46,10 +46,10 @@
     --palette-orange: rgb(255, 95, 20);
     --palette-orange-alpha: rgb(45, 30, 15);
 
-    --system-light: rgb(0, 0, 0);
+    --system-light: rgb(30, 30, 30);
     --system-dark: rgba(210, 210, 225, 1);
 
-    --system-background: rgb(20, 20, 20);
+    --system-background: rgb(0, 0, 0);
     --system-border: rgb(50, 60, 60);
 
     --system-text: rgba(210, 210, 225, 1);

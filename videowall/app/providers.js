@@ -2,6 +2,7 @@
 
 /* * */
 
+import AppVersion from '@/components/AppVersion/AppVersion';
 import { theme } from '@/styles/theme';
 import { MantineProvider } from '@mantine/core';
 import { SWRConfig } from 'swr';
@@ -37,6 +38,7 @@ export default function Providers({ children }) {
 	return (
 		<SWRConfig value={swrOptions}>
 			<MantineProvider defaultColorScheme="auto" theme={theme}>
+				<AppVersion />
 				{children}
 			</MantineProvider>
 		</SWRConfig>
