@@ -21,9 +21,9 @@ const inter = Inter({
 });
 
 export const metadata = {
-	description: 'Hey! I`m João de Vasconcelos. Come take a look at my work :)',
+	description: 'Internal Carris Metropolitana dashboard',
 	metadataBase: process.env.VERCEL_URL ? new URL(`https://${process.env.VERCEL_URL}`) : new URL(`http://0.0.0.0:${process.env.PORT || 3000}`),
-	title: 'Earth › João',
+	title: 'CM Videowall',
 };
 
 /* * */
@@ -31,9 +31,6 @@ export const metadata = {
 export default function RootLayout({ children }) {
 	return (
 		<html className={inter.variable}>
-			<head>
-				<link href="https://use.typekit.net/lsv4vby.css" rel="stylesheet" />
-			</head>
 			<body>
 				<Providers>{children}</Providers>
 			</body>

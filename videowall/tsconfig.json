@@ -6,9 +6,6 @@
     "module": "NodeNext",
     "moduleResolution": "NodeNext",
     "paths": {
-			"crypto": [
-				"node_modules/crypto-js"
-			],
 			"@/utils/*": ["utils/*"],
 			"@/hooks/*": ["hooks/*"],
 			"@/styles/*": ["styles/*"],
