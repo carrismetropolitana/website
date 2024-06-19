@@ -1,0 +1,35 @@
+{
+	"name": "@carrismetropolitana/videowall",
+	"version": "2024.04.07-0415",
+	"private": true,
+	"scripts": {
+		"dev": "next dev -p 3003",
+		"bump": "node bump-version.js",
+		"build": "next build",
+    "start": "next start",
+    "lint": "next lint"
+	},
+	"dependencies": {
+		"@carrismetropolitana/eslint": "2024.6.1717593318",
+		"@mantine/core": "7.10.2",
+    "@mantine/hooks": "7.10.2",
+    "@tabler/icons-react": "3.6.0",
+    "dotenv": "16.4.5",
+    "luxon": "3.4.4",
+    "mongodb": "6.7.0",
+    "next": "14.2.4",
+    "next-intl": "3.15.0",
+    "papaparse": "5.4.1",
+    "react": "18.3.1",
+    "react-dom": "18.3.1",
+    "sharp": "0.33.4",
+    "swr": "2.2.5",
+    "tunnel-ssh": "5.1.2"
+	},
+	"devDependencies": {
+		"@types/node": "20.14.5",
+    "@types/react": "18.3.3",
+    "@types/react-dom": "18.3.0",
+    "typescript": "5.4.5"
+  }
+}

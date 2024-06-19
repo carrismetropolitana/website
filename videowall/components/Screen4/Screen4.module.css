@@ -1,0 +1,32 @@
+/* * */
+/* LOGO */
+
+.logo {
+  width: 800px;
+  background-color: white;
+  padding: 30px;
+  border-top-left-radius: 30px;
+  position: fixed;
+  bottom: 0;
+  right: 0;
+}
+
+.logo img {
+  width: 100%;
+}
+
+/* * */
+/* ALL VEHICLES */
+
+.vehicles {
+  width: 600px;
+  background-color: white;
+  padding: 30px;
+  border-top-left-radius: 30px;
+  position: absolute;
+  width: 100%;
+}
+
+.logo img {
+  width: 100%;
+}

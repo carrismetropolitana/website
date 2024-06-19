@@ -1,0 +1,13 @@
+/* * */
+/* CONTAINER */
+
+.container {
+  display: grid;
+  grid-template-columns: repeat(2, 1920px);
+  grid-template-rows: repeat(2, 1080px);
+  /* gap: 5px; */
+  background-color: black;
+  width: 3840px;
+  height: 2160px;
+  /* border: 5px solid black; */
+}

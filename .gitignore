@@ -37,3 +37,6 @@ yarn-error.log*
 */tmp
 */package-lock.json
 nginx/uptime.conf
+
+#
+.htpasswd

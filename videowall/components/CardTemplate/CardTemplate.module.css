@@ -1,0 +1,38 @@
+/* * */
+/* CONTAINER */
+
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+  gap: 25px;
+  background-color: var(--system-light);
+  border-radius: 10px;
+  box-shadow: var(--box-shadow-large);
+  border: 1px solid var(--system-border);
+  padding: 20px;
+}
+
+/* * */
+/* HEADER */
+
+.header {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  align-items: baseline;
+  justify-content: space-between;
+}
+
+/* * */
+/* TITLE */
+
+.title {
+  font-size: 20px;
+  font-weight: var(--font-weight-bold);
+  color: var(--system-dark);
+  text-transform: uppercase;
+  line-height: 1;
+  opacity: 0.7;
+}

@@ -1,0 +1,54 @@
+{
+  "compilerOptions": {
+    "target": "ES6",
+    "baseUrl": ".",
+    "rootDir": ".",
+    "module": "NodeNext",
+    "moduleResolution": "NodeNext",
+    "paths": {
+			"@/utils/*": ["utils/*"],
+			"@/hooks/*": ["hooks/*"],
+			"@/styles/*": ["styles/*"],
+			"@/contexts/*": ["contexts/*"],
+			"@/opengraph/*": ["opengraph/*"],
+			"@/schemas/*": ["schemas/*"],
+			"@/services/*": ["services/*"],
+			"@/components/*": ["components/*"],
+      "@/translations/*": ["translations/*"],
+    },
+    "allowJs": true,
+    "outDir": "build",
+    "sourceMap": true,
+    "esModuleInterop": true,
+    "lib": [
+      "dom",
+      "dom.iterable",
+      "esnext"
+    ],
+    "skipLibCheck": true,
+    "strict": false,
+    "noEmit": true,
+    "incremental": true,
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "jsx": "preserve",
+    "plugins": [
+      {
+        "name": "next"
+      }
+    ],
+    "strictNullChecks": true
+  },
+  "exclude": [
+    "**/node_modules",
+    "**/.*/",
+    "**/build/",
+    "**/.next/"
+  ],
+  "include": [
+    "next-env.d.ts",
+    ".next/types/**/*.ts",
+    "**/*.ts",
+    "**/*.tsx"
+  ]
+}

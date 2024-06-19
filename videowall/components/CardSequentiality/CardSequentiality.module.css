@@ -1,0 +1,33 @@
+/* * */
+/* SECTION */
+
+.section {
+  display: flex;
+  flex-direction: row;
+  align-items: baseline;
+  justify-content: flex-start;
+  gap: 20px;
+}
+
+/* * */
+/* SAM BREAKDOWN */
+
+.samBreakdown {
+  display: grid;
+  grid-template-columns: repeat(70, 1fr);
+  gap: 2px;
+  width: 100%;
+}
+
+.samSquare {
+  display: flex;
+  width: 100%;
+  padding-bottom: 100%;
+  background-color: var(--palette-orange);
+  /* background-color: var(--palette-green); */
+}
+
+.samSquare.samComplete {
+  background-color: var(--palette-green);
+  /* background-color: var(--palette-orange); */
+}

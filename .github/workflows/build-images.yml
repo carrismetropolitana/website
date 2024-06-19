@@ -38,3 +38,34 @@ jobs:
           context: ./frontend
           file: ./frontend/Dockerfile
           tags: ghcr.io/carrismetropolitana/website-frontend:${{ github.ref_name }}
+
+  # # # # # # # # # # # # # # # # # # # # #
+  # # # # # # # # # # # # # # # # # # # # #
+
+  website-videowall:
+    name: Videowall (NextJS)
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+    permissions:
+      contents: read
+      packages: write
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@main
+
+      - name: Login to GitHub Container Registry
+        uses: docker/login-action@master
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Build Frontend Docker Image (NextJS)
+        uses: docker/build-push-action@master
+        with:
+          push: true
+          context: ./videowall
+          file: ./videowall/Dockerfile
+          tags: ghcr.io/carrismetropolitana/website-videowall:${{ github.ref_name }}

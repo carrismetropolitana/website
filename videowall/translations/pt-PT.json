@@ -1,0 +1,28 @@
+{
+    "LabelDateFromTo": {
+        "default": "Dados de {start_date, date, timestamp} até {end_date, date, timestamp}",
+        "no_data": "-"
+    },
+    "LabelDateRelative": {
+        "default": "Atualizado {diff}",
+        "no_data": "-"
+    },
+    "BigNumber": {
+        "value": "{value, number}"
+    },
+    "CardSummary": {
+        "number": "{value, number}",
+        "percentage": "{value, number, percentage}"
+    },
+    "CardSequentiality": {
+        "number": "{value, number}",
+        "percentage": "{value, number, percentage}",
+        "sam_qty": "SAMS",
+        "sam_complete_qty": "SAMS OK",
+        "sam_incomplete_qty": "SAMS NOT OK",
+        "transactions_expected_qty": "TXs Expected",
+        "transactions_found_qty": "TXs Found",
+        "transactions_missing_qty": "TXs Missing",
+        "date_range": "De {start_date, date, timestamp} até {end_date, date, timestamp}"
+    }
+}

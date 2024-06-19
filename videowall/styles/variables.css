@@ -1,0 +1,112 @@
+/* * */
+/* COLORS > LIGHT */
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --carris-metropolitana: rgb(255, 220, 0);
+
+    --palette-blue: rgb(0, 115, 215);
+    --palette-blue-alpha: rgb(235, 245, 255);
+
+    --palette-green: rgb(0, 175, 60);
+    --palette-green-alpha: rgb(235, 250, 235);
+
+    --palette-yellow: rgba(255, 232, 0, 1);
+    --palette-yellow-alpha: rgba(255, 232, 0, 0.05);
+
+    --palette-orange: rgb(255, 110, 45);
+    --palette-orange-alpha: rgb(255, 252, 240);
+
+    --system-light: rgba(255, 255, 255, 1);
+    --system-dark: rgba(0, 0, 0, 1);
+
+    --system-background: rgba(247, 247, 247, 1);
+    --system-border: rgba(205, 205, 205, 1);
+
+    --system-text: rgba(30, 30, 35, 1);
+    --system-muted: rgba(105, 125, 145, 1);
+    --system-link: rgba(15, 110, 195, 1);
+  }
+}
+
+/* * */
+/* COLORS > DARK */
+
+@media (prefers-color-scheme: light) {
+  :root {
+    --palette-blue: rgb(0, 150, 255);
+    --palette-blue-alpha: rgb(0, 35, 80);
+
+    --palette-green: rgb(0, 175, 60);
+    --palette-green-alpha: rgb(35, 50, 35);
+
+    --palette-yellow: rgb(0, 91, 170);
+    --palette-yellow-alpha: rgba(255, 232, 0, 0.05);
+
+    --palette-orange: rgb(255, 95, 20);
+    --palette-orange-alpha: rgb(45, 30, 15);
+
+    --system-light: rgb(30, 30, 30);
+    --system-dark: rgba(210, 210, 225, 1);
+
+    --system-background: rgb(20, 20, 20);
+    --system-border: rgb(50, 60, 60);
+
+    --system-text: rgba(210, 210, 225, 1);
+    --system-muted: rgb(100, 105, 115);
+    --system-link: rgb(15, 125, 225);
+  }
+}
+
+/* * */
+/* FONTS */
+
+:root {
+  --font-family: var(--font-inter), sans-serif;
+  /* --font-family: 'greycliff-cf', sans-serif; */
+  --font-family-monospace: 'Menlo', monospace;
+
+  --font-weight: 400;
+  --font-weight-medium: 600;
+  --font-weight-bold: 900;
+
+  --box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+  --box-shadow-large: 0 3px 25px 0 rgba(0, 0, 0, 0.1);
+
+  --border-radius: 7px;
+  --border-radius-large: 20px;
+
+  --visual-square: 9/8; /* Visual Square */
+
+  --transition: all 300ms ease;
+}
+
+/* * */
+/* TOGGLE HTML ELEMENTS */
+
+@media (prefers-color-scheme: dark) {
+  theme-light {
+    display: none;
+  }
+}
+
+@media (prefers-color-scheme: light) {
+  theme-dark {
+    display: none;
+  }
+}
+
+/* * */
+/* TOGGLE HTML ELEMENTS */
+
+@media only screen and (max-width: 900px) {
+  only-desktop {
+    display: none;
+  }
+}
+
+@media only screen and (min-width: 901px) {
+  only-mobile {
+    display: none;
+  }
+}

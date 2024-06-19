@@ -10,6 +10,16 @@
       "options": {
         "cwd": "${workspaceFolder}/frontend"
       }
+    },
+		{
+      "label": "Start Videowall",
+      "detail": "Start local development server with 'npm run dev'",
+      "type": "npm",
+      "script": "dev",
+      "problemMatcher": [],
+      "options": {
+        "cwd": "${workspaceFolder}/videowall"
+      }
     }
   ]
 }

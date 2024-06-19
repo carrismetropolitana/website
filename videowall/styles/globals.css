@@ -1,0 +1,85 @@
+/* * */
+/* BODY */
+
+body {
+  background-color: var(--system-light);
+}
+
+@media only screen and (max-width: 900px) {
+  body {
+    margin-top: 50px;
+  }
+}
+
+/* * */
+/* ANCHORS */
+
+a {
+  font-size: 18px;
+  font-weight: var(--font-weight-bold);
+  text-decoration: none;
+  color: var(--system-link);
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+a::selection {
+  color: var(--system-light);
+  background-color: var(--system-link);
+}
+
+/* * */
+/* HEADINGS */
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  line-height: 1.2;
+  font-weight: var(--font-weight-bold);
+  color: var(--system-text);
+}
+
+h1::selection,
+h2::selection,
+h3::selection,
+h4::selection,
+h5::selection,
+h6::selection {
+  color: var(--system-light);
+  background-color: var(--system-text);
+}
+
+/* * */
+/* HEADINGS (MAIN TITLES) */
+
+h1,
+h2 {
+  font-size: 40px;
+}
+
+@media only screen and (max-width: 900px) {
+  h1,
+  h2 {
+    font-size: 35px;
+  }
+}
+
+/* * */
+/* PARAGRAPHS */
+
+p {
+  font-size: 18px;
+  font-weight: var(--font-weight);
+  line-height: 1.6;
+  color: var(--system-text);
+}
+
+p::selection {
+  color: var(--system-light);
+  background-color: var(--system-muted);
+}
