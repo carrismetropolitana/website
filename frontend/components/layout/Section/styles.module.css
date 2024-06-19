@@ -19,6 +19,7 @@
 
 .container.withGlobalPadding {
 	padding: var(--size-spacing-20);
+	gap: var(--size-spacing-10);
 }
 
 @media (max-width: 500px) {
