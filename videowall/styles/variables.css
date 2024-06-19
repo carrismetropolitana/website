@@ -1,7 +1,7 @@
 /* * */
 /* COLORS > LIGHT */
 
-@media (prefers-color-scheme: dark) {
+@media (prefers-color-scheme: light) {
   :root {
     --carris-metropolitana: rgb(255, 220, 0);
 
@@ -32,7 +32,7 @@
 /* * */
 /* COLORS > DARK */
 
-@media (prefers-color-scheme: light) {
+@media (prefers-color-scheme: dark) {
   :root {
     --palette-blue: rgb(0, 150, 255);
     --palette-blue-alpha: rgb(0, 35, 80);
