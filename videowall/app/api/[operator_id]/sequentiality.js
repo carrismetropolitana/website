@@ -5,7 +5,7 @@ import { DateTime } from 'luxon';
 
 /* * */
 
-export default async function handler(req, res) {
+export default async function GET(req) {
 	//
 
 	// 1.
@@ -18,7 +18,7 @@ export default async function handler(req, res) {
 	// 2.
 	// Setup Operator ID
 
-	if (!req.query.operator_id || req.query.operator_id.length !== 2) return await res.status(500).json({ message: 'Invalid "operator_id" param.' });
+	if (!req.query.operator_id || req.query.operator_id.length !== 2) return Response.json({ message: 'Invalid "operator_id" param.' }, { status: 400 });
 
 	// 3.
 	// Setup timestamp boundaries
@@ -53,7 +53,7 @@ export default async function handler(req, res) {
 		//
 	};
 
-	//   return await res.json(responseResult);
+	//   return Response.json(responseResult);
 
 	// 5.
 	// Connect to PCGIDB
@@ -63,7 +63,7 @@ export default async function handler(req, res) {
 	}
 	catch (err) {
 		console.log(err);
-		return await res.status(500).json({ message: 'Could not connect to PCGIDB.' });
+		return Response.json({ message: 'Could not connect to PCGIDB.' }, { status: 500	});
 	}
 
 	// 5.
@@ -72,7 +72,7 @@ export default async function handler(req, res) {
 	try {
 		//
 
-		let counter = 0;
+		// let counter = 0;
 
 		// SETUP MAPS
 
@@ -194,18 +194,18 @@ export default async function handler(req, res) {
 	}
 	catch (err) {
 		console.log(err);
-		return await res.status(500).json({ message: 'Cannot list sequentiality.' });
+		return Response.json({ message: 'Cannot list sequentiality.' }, { status: 500 });
 	}
 
 	// 6.
 	// Send response
 
 	try {
-		return await res.status(200).json(responseResult);
+		return Response.json(responseResult);
 	}
 	catch (err) {
 		console.log(err);
-		return await res.status(500).json({ message: 'Cannot send response.' });
+		return Response.json({ message: 'Cannot send response.' }, { status: 500 });
 	}
 
 	//

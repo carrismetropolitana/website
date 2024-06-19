@@ -6,7 +6,7 @@ import { DateTime } from 'luxon';
 
 /* * */
 
-export default async function handler(req, res) {
+export default async function GET(req) {
 	//
 
 	// 1.
@@ -21,14 +21,14 @@ export default async function handler(req, res) {
 	// 2.
 	// Setup Operator ID
 
-	if (!req.query.operator_id || req.query.operator_id.length !== 2) return await res.status(500).json({ message: 'Invalid "operator_id" param.' });
+	if (!req.query.operator_id || req.query.operator_id.length !== 2) return Response.json({ message: 'Invalid operator_id param.' }, { status: 400 });
 
 	const operatorIdString = req.query.operator_id === 'cm' ? ['41', '42', '43', '44'] : [req.query.operator_id];
 
 	// 3.
 	// Setup timestamp boundaries
 
-	if (!req.query.date || req.query.date.length !== 8) return await res.status(500).json({ message: 'Invalid "date" param.' });
+	if (!req.query.date || req.query.date.length !== 8) return Response.json({ message: 'Invalid date param.' }, { status: 400 });
 
 	const dateObject = DateTime.fromFormat(req.query.date, 'yyyyLLdd');
 	const startDateString = dateObject.set({ hour: 4, minute: 0, second: 0 }).toFormat('yyyy-LL-dd\'T\'HH\':\'mm\':\'ss');
@@ -56,7 +56,7 @@ export default async function handler(req, res) {
 	}
 	catch (err) {
 		console.log(err);
-		return await res.status(500).json({ message: 'Could not connect to PCGIDB.' });
+		return Response.json({ message: 'Could not connect to PCGIDB.' }, { status: 500 });
 	}
 
 	// 6.
@@ -66,7 +66,7 @@ export default async function handler(req, res) {
 		const searchResult = await PCGIDB.ValidationEntity.aggregate(
 			[
 				{ $match: { 'transaction.operatorLongID': { $in: operatorIdString }, 'transaction.transactionDate': { $gte: startDateString, $lte: endDateString }, 'transaction.validationStatus': { $in: ValidationOptions.allowed_validation_status } } },
-				{ $group: { _id: '$transaction.cardSerialNumber', count: { $sum: 1 } } },
+				{ $group: { _id: '$_id', count: { $sum: 1 } } },
 				{ $count: 'totalUnique' },
 			],
 			{ allowDiskUse: true, maxTimeMS: 180000 },
@@ -75,18 +75,18 @@ export default async function handler(req, res) {
 	}
 	catch (err) {
 		console.log(err);
-		return await res.status(500).json({ message: 'Cannot count value.' });
+		return Response.json({ message: 'Cannot count value.' }, { status: 500 });
 	}
 
 	// 7.
 	// Send response
 
 	try {
-		return await res.status(200).json(responseResult);
+		return Response.json(responseResult);
 	}
 	catch (err) {
 		console.log(err);
-		return await res.status(500).json({ message: 'Cannot send response.' });
+		return Response.json({ message: 'Cannot send response.' }, { status: 500 });
 	}
 
 	//

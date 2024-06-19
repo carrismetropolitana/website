@@ -92,19 +92,19 @@ class PCGIDB {
 			// Setup databases
 
 			const coreManagementDatabase = mongoClientInstance.db('CoreManagement');
-      const fileManagementDatabase = mongoClientInstance.db('FileManagement');
-      const salesManagementDatabase = mongoClientInstance.db('SalesManagement');
-      const validationsManagementDatabase = mongoClientInstance.db('ValidationsManagement');
-      const locationManagementDatabase = mongoClientInstance.db('LocationManagement');
+			const fileManagementDatabase = mongoClientInstance.db('FileManagement');
+			const salesManagementDatabase = mongoClientInstance.db('SalesManagement');
+			const validationsManagementDatabase = mongoClientInstance.db('ValidationsManagement');
+			const locationManagementDatabase = mongoClientInstance.db('LocationManagement');
 
-      //
-      // Setup collections
+			//
+			// Setup collections
 
-      this.VehicleEvents = coreManagementDatabase.collection('VehicleEvents');
-      this.TransactionEntity = fileManagementDatabase.collection('transactionEntity');
-      this.SalesEntity = salesManagementDatabase.collection('salesEntity');
-      this.ValidationEntity = validationsManagementDatabase.collection('validationEntity');
-      this.LocationEntity = locationManagementDatabase.collection('locationEntity');
+			this.VehicleEvents = coreManagementDatabase.collection('VehicleEvents');
+			this.TransactionEntity = fileManagementDatabase.collection('transactionEntity');
+			this.SalesEntity = salesManagementDatabase.collection('salesEntity');
+			this.ValidationEntity = validationsManagementDatabase.collection('validationEntity');
+			this.LocationEntity = locationManagementDatabase.collection('locationEntity');
 
 			//
 			// Save the instance in memory

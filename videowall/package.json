@@ -1,6 +1,6 @@
 {
   "name": "@carrismetropolitana/website-videowall",
-  "version": "2024.06.19-1715",
+  "version": "2024.06.19-1741",
   "private": true,
   "scripts": {
     "dev": "next dev -p 3003",
@@ -27,9 +27,12 @@
     "tunnel-ssh": "5.1.2"
   },
   "devDependencies": {
-    "@types/node": "20.14.6",
+    "@types/node": "20.14.2",
     "@types/react": "18.3.3",
     "@types/react-dom": "18.3.0",
+    "postcss": "8.4.38",
+    "postcss-preset-mantine": "1.15.0",
+    "postcss-simple-vars": "7.0.1",
     "typescript": "5.4.5"
   }
 }
