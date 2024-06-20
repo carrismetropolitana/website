@@ -1,6 +1,6 @@
 {
   "name": "@carrismetropolitana/website-videowall",
-  "version": "2024.06.20-1141",
+  "version": "2024.06.20-1647",
   "private": true,
   "scripts": {
     "dev": "next dev -p 3003 --turbo",
@@ -11,6 +11,7 @@
   },
   "dependencies": {
     "@carrismetropolitana/eslint": "2024.6.1717593318",
+    "@mantine/charts": "^7.10.2",
     "@mantine/core": "7.10.2",
     "@mantine/hooks": "7.10.2",
     "@tabler/icons-react": "3.6.0",
@@ -22,6 +23,7 @@
     "papaparse": "5.4.1",
     "react": "18.3.1",
     "react-dom": "18.3.1",
+    "recharts": "^2.12.7",
     "sharp": "0.33.4",
     "ssh2": "1.15.0",
     "swr": "2.2.5",

@@ -24,20 +24,20 @@ export default function Component() {
 	//
 	// B. Fetch data
 
-	const { data: todayPaxCmData, isLoading: todayPaxCmLoading, isValidating: todayPaxCmValidating } = useSWR(`/api/cm/${todayDateString}/pax`);
-	const { data: lastWeekPaxCmData, isLoading: lastWeekPaxCmLoading, isValidating: lastWeekPaxCmValidating } = useSWR(`/api/cm/${lastWeekDateString}/pax`);
+	const { data: todayPaxCmData, isLoading: todayPaxCmLoading, isValidating: todayPaxCmValidating } = useSWR(`/api/cm/pax/date_single/${todayDateString}`);
+	const { data: lastWeekPaxCmData, isLoading: lastWeekPaxCmLoading, isValidating: lastWeekPaxCmValidating } = useSWR(`/api/cm/pax/date_single/${lastWeekDateString}`);
 
-	const { data: todayPax41Data, isLoading: todayPax41Loading, isValidating: todayPax41Validating } = useSWR(`/api/41/${todayDateString}/pax`);
-	const { data: lastWeekPax41Data, isLoading: lastWeekPax41Loading, isValidating: lastWeekPax41Validating } = useSWR(`/api/41/${lastWeekDateString}/pax`);
+	const { data: todayPax41Data, isLoading: todayPax41Loading, isValidating: todayPax41Validating } = useSWR(`/api/41/pax/date_single/${todayDateString}`);
+	const { data: lastWeekPax41Data, isLoading: lastWeekPax41Loading, isValidating: lastWeekPax41Validating } = useSWR(`/api/41/pax/date_single/${lastWeekDateString}`);
 
-	const { data: todayPax42Data, isLoading: todayPax42Loading, isValidating: todayPax42Validating } = useSWR(`/api/42/${todayDateString}/pax`);
-	const { data: lastWeekPax42Data, isLoading: lastWeekPax42Loading, isValidating: lastWeekPax42Validating } = useSWR(`/api/42/${lastWeekDateString}/pax`);
+	const { data: todayPax42Data, isLoading: todayPax42Loading, isValidating: todayPax42Validating } = useSWR(`/api/42/pax/date_single/${todayDateString}`);
+	const { data: lastWeekPax42Data, isLoading: lastWeekPax42Loading, isValidating: lastWeekPax42Validating } = useSWR(`/api/42/pax/date_single/${lastWeekDateString}`);
 
-	const { data: todayPax43Data, isLoading: todayPax43Loading, isValidating: todayPax43Validating } = useSWR(`/api/43/${todayDateString}/pax`);
-	const { data: lastWeekPax43Data, isLoading: lastWeekPax43Loading, isValidating: lastWeekPax43Validating } = useSWR(`/api/43/${lastWeekDateString}/pax`);
+	const { data: todayPax43Data, isLoading: todayPax43Loading, isValidating: todayPax43Validating } = useSWR(`/api/43/pax/date_single/${todayDateString}`);
+	const { data: lastWeekPax43Data, isLoading: lastWeekPax43Loading, isValidating: lastWeekPax43Validating } = useSWR(`/api/43/pax/date_single/${lastWeekDateString}`);
 
-	const { data: todayPax44Data, isLoading: todayPax44Loading, isValidating: todayPax44Validating } = useSWR(`/api/44/${todayDateString}/pax`);
-	const { data: lastWeekPax44Data, isLoading: lastWeekPax44Loading, isValidating: lastWeekPax44Validating } = useSWR(`/api/44/${lastWeekDateString}/pax`);
+	const { data: todayPax44Data, isLoading: todayPax44Loading, isValidating: todayPax44Validating } = useSWR(`/api/44/pax/date_single/${todayDateString}`);
+	const { data: lastWeekPax44Data, isLoading: lastWeekPax44Loading, isValidating: lastWeekPax44Validating } = useSWR(`/api/44/pax/date_single/${lastWeekDateString}`);
 
 	//
 	// C. Transform data

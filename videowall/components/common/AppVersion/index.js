@@ -14,7 +14,7 @@ export default function AppVersion() {
 	//
 	// A. Fetch data
 
-	const { data: version } = useSWR('/api/version', { refreshInterval: 10000 });
+	const { data: version } = useSWR('/api/version', { refreshInterval: 1000 });
 
 	//
 	// B. Handle actions

@@ -9,6 +9,8 @@ import { DateTime } from 'luxon';
 export async function GET(req, { params }) {
 	//
 
+	return Response.json({});
+
 	// 1.
 	// Refuse if method is not GET
 
@@ -16,19 +18,17 @@ export async function GET(req, { params }) {
 		throw new Error('Request method not allowed.');
 	}
 
-	//   return await res.json({});
-
 	// 2.
 	// Setup Operator ID
 
-	if (!params.operator_id || params.operator_id.length !== 2) return Response.json({ message: 'Invalid "operator_id" param.' }, { status: 400 });
+	if (!params.operator_id || params.operator_id.length !== 2) return Response.json({ message: 'Invalid operator_id param.' }, { status: 400 });
 
 	const operatorIdString = params.operator_id === 'cm' ? ['41', '42', '43', '44'] : [params.operator_id];
 
 	// 3.
 	// Setup timestamp boundaries
 
-	if (!params.date || params.date.length !== 8) return Response.json({ message: 'Invalid "date" param.' }, { status: 400 });
+	if (!params.date || params.date.length !== 8) return Response.json({ message: 'Invalid date param.' }, { status: 400 });
 
 	const dateObject = DateTime.fromFormat(params.date, 'yyyyLLdd');
 	const startDateString = dateObject.set({ hour: 4, minute: 0, second: 0 }).toFormat('yyyy-LL-dd\'T\'HH\':\'mm\':\'ss');
@@ -38,6 +38,7 @@ export async function GET(req, { params }) {
 	// Setup the response JSON object
 
 	const responseResult = {
+		//
 		end_date: endDateString,
 		//
 		start_date: startDateString,
@@ -66,7 +67,7 @@ export async function GET(req, { params }) {
 		const searchResult = await PCGIDB.ValidationEntity.aggregate(
 			[
 				{ $match: { 'transaction.operatorLongID': { $in: operatorIdString }, 'transaction.transactionDate': { $gte: startDateString, $lte: endDateString }, 'transaction.validationStatus': { $in: ValidationOptions.allowed_validation_status } } },
-				{ $group: { _id: '$transaction.cardSerialNumber', count: { $sum: 1 } } },
+				{ $group: { _id: '$_id', count: { $sum: 1 } } },
 				{ $count: 'totalUnique' },
 			],
 			{ allowDiskUse: true, maxTimeMS: 180000 },

@@ -24,20 +24,20 @@ export default function Component() {
 	//
 	// B. Fetch data
 
-	const { data: todayPutCmData, isLoading: todayPutCmLoading, isValidating: todayPutCmValidating } = useSWR(`/api/cm/${todayDateString}/put`);
-	const { data: lastWeekPutCmData, isLoading: lastWeekPutCmLoading, isValidating: lastWeekPutCmValidating } = useSWR(`/api/cm/${lastWeekDateString}/put`);
+	const { data: todayPutCmData, isLoading: todayPutCmLoading, isValidating: todayPutCmValidating } = useSWR(`/api/cm/put/date_single/${todayDateString}`);
+	const { data: lastWeekPutCmData, isLoading: lastWeekPutCmLoading, isValidating: lastWeekPutCmValidating } = useSWR(`/api/cm/put/date_single/${lastWeekDateString}`);
 
-	const { data: todayPut41Data, isLoading: todayPut41Loading, isValidating: todayPut41Validating } = useSWR(`/api/41/${todayDateString}/put`);
-	const { data: lastWeekPut41Data, isLoading: lastWeekPut41Loading, isValidating: lastWeekPut41Validating } = useSWR(`/api/41/${lastWeekDateString}/put`);
+	const { data: todayPut41Data, isLoading: todayPut41Loading, isValidating: todayPut41Validating } = useSWR(`/api/41/put/date_single/${todayDateString}`);
+	const { data: lastWeekPut41Data, isLoading: lastWeekPut41Loading, isValidating: lastWeekPut41Validating } = useSWR(`/api/41/put/date_single/${lastWeekDateString}`);
 
-	const { data: todayPut42Data, isLoading: todayPut42Loading, isValidating: todayPut42Validating } = useSWR(`/api/42/${todayDateString}/put`);
-	const { data: lastWeekPut42Data, isLoading: lastWeekPut42Loading, isValidating: lastWeekPut42Validating } = useSWR(`/api/42/${lastWeekDateString}/put`);
+	const { data: todayPut42Data, isLoading: todayPut42Loading, isValidating: todayPut42Validating } = useSWR(`/api/42/put/date_single/${todayDateString}`);
+	const { data: lastWeekPut42Data, isLoading: lastWeekPut42Loading, isValidating: lastWeekPut42Validating } = useSWR(`/api/42/put/date_single/${lastWeekDateString}`);
 
-	const { data: todayPut43Data, isLoading: todayPut43Loading, isValidating: todayPut43Validating } = useSWR(`/api/43/${todayDateString}/put`);
-	const { data: lastWeekPut43Data, isLoading: lastWeekPut43Loading, isValidating: lastWeekPut43Validating } = useSWR(`/api/43/${lastWeekDateString}/put`);
+	const { data: todayPut43Data, isLoading: todayPut43Loading, isValidating: todayPut43Validating } = useSWR(`/api/43/put/date_single/${todayDateString}`);
+	const { data: lastWeekPut43Data, isLoading: lastWeekPut43Loading, isValidating: lastWeekPut43Validating } = useSWR(`/api/43/put/date_single/${lastWeekDateString}`);
 
-	const { data: todayPut44Data, isLoading: todayPut44Loading, isValidating: todayPut44Validating } = useSWR(`/api/44/${todayDateString}/put`);
-	const { data: lastWeekPut44Data, isLoading: lastWeekPut44Loading, isValidating: lastWeekPut44Validating } = useSWR(`/api/44/${lastWeekDateString}/put`);
+	const { data: todayPut44Data, isLoading: todayPut44Loading, isValidating: todayPut44Validating } = useSWR(`/api/44/put/date_single/${todayDateString}`);
+	const { data: lastWeekPut44Data, isLoading: lastWeekPut44Loading, isValidating: lastWeekPut44Validating } = useSWR(`/api/44/put/date_single/${lastWeekDateString}`);
 
 	//
 	// C. Transform data
