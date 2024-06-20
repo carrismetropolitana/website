@@ -9,8 +9,6 @@ import { DateTime } from 'luxon';
 export async function GET(req, { params }) {
 	//
 
-	return Response.json({});
-
 	// 1.
 	// Refuse if method is not GET
 
