@@ -1,7 +1,8 @@
 /* * */
 
-import { availableLocales } from './config';
 import { createSharedPathnamesNavigation } from 'next-intl/navigation';
+
+import { availableLocales } from './config';
 
 /* * */
 
