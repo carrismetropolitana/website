@@ -10,9 +10,8 @@
     "BigNumber": {
         "value": "{value, number}"
     },
-    "CardSummary": {
-        "number": "{value, number}",
-        "percentage": "{value, number, percentage}"
+    "Comparison": {
+				"value": "{value, number, percentage}"
     },
     "CardSequentiality": {
         "number": "{value, number}",

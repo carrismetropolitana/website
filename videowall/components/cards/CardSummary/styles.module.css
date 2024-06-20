@@ -10,16 +10,6 @@
 }
 
 /* * */
-/* COMPARISON */
-
-.comparison {
-  font-size: 20px;
-  font-weight: var(--font-weight-bold);
-  line-height: 1;
-  color: var(--palette-green);
-}
-
-/* * */
 /* BODY */
 
 .body {

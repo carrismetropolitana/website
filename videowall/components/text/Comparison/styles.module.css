@@ -16,18 +16,10 @@
 }
 
 /* * */
-/* LABEL */
-
-.label {
-  font-weight: var(--font-weight-bold);
-  line-height: 1;
-}
-
-/* * */
 /* LEVEL */
 
 .level_1 .value {
-  font-size: 150px;
+  font-size: 80px;
 }
 
 .level_1 .label {
@@ -35,7 +27,7 @@
 }
 
 .level_2 .value {
-  font-size: 35px;
+  font-size: 50px;
 }
 
 .level_2 .label {
@@ -55,7 +47,7 @@
 
 .type_normal .value,
 .type_normal .label {
-  color: var(--system-dark);
+  color: var(--palette-green);
 }
 
 .type_bad .value,
