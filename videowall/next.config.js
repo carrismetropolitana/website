@@ -10,7 +10,7 @@ module.exports = withNextIntl({
 	reactStrictMode: true,
 	async redirects() {
 		return [
-			{ destination: '/internal', permanent: true, source: '/' },
+			{ destination: '/', permanent: true, source: '/internal' },
 		];
 	},
 });

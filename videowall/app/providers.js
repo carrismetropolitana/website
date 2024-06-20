@@ -2,7 +2,7 @@
 
 /* * */
 
-import AppVersion from '@/components/AppVersion/AppVersion';
+import AppVersion from '@/components/common/AppVersion';
 import { theme } from '@/styles/theme';
 import { MantineProvider } from '@mantine/core';
 import { SWRConfig } from 'swr';
