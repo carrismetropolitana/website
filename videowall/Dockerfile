@@ -1,4 +1,3 @@
-
 # # # # # # # # #
 
 FROM node:alpine AS base
@@ -11,14 +10,13 @@ FROM node:alpine AS base
 
 FROM base AS dependencies
 
-RUN apk add --update --no-cache \
-        libc6-compat
+RUN apk add --no-cache libc6-compat
 
 WORKDIR /app
 
 COPY package.json ./
 
-RUN npm install \
+RUN npm install --omit-dev \
     && npm cache clean --force
 
 
@@ -34,6 +32,8 @@ WORKDIR /app
 
 COPY --from=dependencies /app/node_modules ./node_modules
 COPY . .
+
+RUN npx @helperkits/bumper bump
 
 RUN npm run build
 
@@ -58,7 +58,7 @@ COPY --from=builder /app/public ./public
 COPY --from=builder --chown=nextjs:nodejs /app/.next/standalone ./
 COPY --from=builder --chown=nextjs:nodejs /app/.next/static ./.next/static
 
-# USER nextjs
+USER nextjs
 
 EXPOSE 3000
 ENV PORT 3000

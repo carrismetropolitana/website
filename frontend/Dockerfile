@@ -1,4 +1,3 @@
-
 # # # # # # # # #
 
 FROM node:alpine AS base
@@ -17,7 +16,8 @@ WORKDIR /app
 
 COPY package.json ./
 
-RUN npm install --omit-dev
+RUN npm install --omit-dev \
+    && npm cache clean --force
 
 
 # # # # # # # # #
@@ -32,6 +32,8 @@ WORKDIR /app
 
 COPY --from=dependencies /app/node_modules ./node_modules
 COPY . .
+
+RUN npx @helperkits/bumper bump
 
 RUN npm run build
 
