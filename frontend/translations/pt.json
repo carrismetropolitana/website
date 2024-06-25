@@ -238,5 +238,13 @@
         }
       }
     }
+  },
+  "faq":{
+    "title": "Perguntas Frequentes",
+    "description":"Nesta página encontra respostas às perguntas mais frequentes sobre o nosso serviço. Caso pretenda esclarecimentos adicionais não hesite em falar connosco.",
+    "contacts": "Contactos"
+  },
+  "common":{
+    "back": "Voltar"
   }
 }
