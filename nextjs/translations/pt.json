@@ -552,8 +552,8 @@
     }
   },
   "StatusMessage": {
-    "title": "Manutenção Finalizada",
-    "explanation": "Foi finalizada com sucesso a manutenção programada dos sistemas tecnológicos.",
+    "title": "Falha Temporária no Tempo Real",
+    "explanation": "Existe uma falha temporária no tempo real. Estamos ativamente a trabalhar para a correção.",
     "solution": "Agradecemos a sua compreensão.",
     "more_info": "Saber Mais ›"
   },
