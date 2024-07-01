@@ -552,8 +552,8 @@
     }
   },
   "StatusMessage": {
-    "title": "Falha Temporária no Tempo Real",
-    "explanation": "Existe uma falha temporária no tempo real. Estamos ativamente a trabalhar para a correção.",
+    "title": "Instabilidade Resolvida",
+    "explanation": "Foi corrigida uma falha temporária no tempo real.",
     "solution": "Agradecemos a sua compreensão.",
     "more_info": "Saber Mais ›"
   },
