@@ -61,6 +61,7 @@
 	"workbench.editor.customLabels.patterns": {
 		"**/components/**/*.js": "${dirname} (${extname})",
 		"**/components/**/*.ts": "${dirname} (${extname})",
+		"**/components/**/*.tsx": "${dirname} (${extname})",
 		"**/components/**/*.css": "${dirname} (${extname})"
 	},
 

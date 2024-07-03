@@ -47,6 +47,10 @@
     "next-env.d.ts",
     ".next/types/**/*.ts",
     "**/*.ts",
-    "**/*.tsx"
-, "app/api/news/[news_id]/route.js"  ]
+    "**/*.tsx",
+    "app/api/news/[news_id]/route.js"
+  ],
+  "typingOptions": {
+      "enableAutoDiscovery": true
+    }
 }
