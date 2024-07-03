@@ -15,6 +15,7 @@ import pjson from '../package.json';
 // 1.
 // DEFAULT OPTIONS
 
+const LOCAL_STORAGE_DATE_KEY = 'anonymous_analytics_date';
 const LOCAL_STORAGE_ENABLED_KEY = 'anonymous_analytics_enabled';
 const LOCAL_STORAGE_VALIDITY_IN_DAYS = 365; // days
 
@@ -23,7 +24,14 @@ const LOCAL_STORAGE_VALIDITY_IN_DAYS = 365; // days
 // A.
 // CREATE CONTEXT
 
-const AppAnalyticsContext = createContext(null);
+const AppAnalyticsContext = createContext<{
+	// eslint-disable-next-line @typescript-eslint/no-explicit-any
+	capture: (key: any, properties?: Record<any, any>) => Promise<void>
+	disable: () => void
+	enable: () => void
+	enabled: boolean | null
+	shouldShow: boolean
+} | null>(null);
 
 /* * */
 
@@ -45,25 +53,29 @@ export function AppAnalyticsContextProvider({ children }) {
 	//
 	// A. Setup local state
 
-	const [isCaptureEnabled, setIsCaptureEnabled] = useState();
+	const [isCaptureEnabled, setIsCaptureEnabled] = useState<boolean | null>(null);
+
+	const [loaded, setLoaded] = useState(false);
 
 	//
 	// B. Retrieve authorization from local storage
-
 	useEffect(() => {
 		// Retrieve authorization value from local storage
-		const savedAuthorizationString = localStorage.getItem(LOCAL_STORAGE_ENABLED_KEY);
+		const savedAuthorizationString = localStorage.getItem(LOCAL_STORAGE_DATE_KEY);
+		const enabledString = localStorage.getItem(LOCAL_STORAGE_ENABLED_KEY);
 		// If no authorization is found then disable capture and exit
-		if (!savedAuthorizationString) {
-			setIsCaptureEnabled(false);
+		setLoaded(true);
+		if (!savedAuthorizationString || enabledString == null) {
+			// setIsCaptureEnabled(false);
 			return;
 		}
+		const enabled = enabledString === 'true';
 		// If an authorization value is found then check if it is still valid
 		const savedAuthorizationDate = parseStringToDate(savedAuthorizationString);
-		const maximumValidAuthorizationDate = (new Date()).setDate((new Date()).getDate() - LOCAL_STORAGE_VALIDITY_IN_DAYS);
-		const isAuthorizationStillValid = savedAuthorizationDate > maximumValidAuthorizationDate;
+		const maximumValidAuthorizationDate = new Date().getTime() - LOCAL_STORAGE_VALIDITY_IN_DAYS * 24 * 60 * 60 * 1000;
+		const isAuthorizationStillValid = savedAuthorizationDate && savedAuthorizationDate.getTime() > maximumValidAuthorizationDate;
 		// If an authorization value is found then check if it is still valid
-		setIsCaptureEnabled(isAuthorizationStillValid ? true : false);
+		setIsCaptureEnabled(isAuthorizationStillValid && enabled);
 		//
 	}, []);
 
@@ -73,13 +85,15 @@ export function AppAnalyticsContextProvider({ children }) {
 	const enableCapture = useCallback(() => {
 		// Set local state and save decision to local storage
 		setIsCaptureEnabled(true);
-		localStorage.setItem(LOCAL_STORAGE_ENABLED_KEY, parseDateToString(new Date()));
+		localStorage.setItem(LOCAL_STORAGE_ENABLED_KEY, 'true');
+		localStorage.setItem(LOCAL_STORAGE_DATE_KEY, parseDateToString(new Date()));
 	}, []);
 
 	const disableCapture = useCallback(() => {
 		// Set local state and clear local storage
 		setIsCaptureEnabled(false);
-		localStorage.clear();
+		localStorage.setItem(LOCAL_STORAGE_ENABLED_KEY, 'false');
+		localStorage.setItem(LOCAL_STORAGE_DATE_KEY, parseDateToString(new Date()));
 	}, []);
 
 	//
@@ -140,17 +154,16 @@ export function AppAnalyticsContextProvider({ children }) {
 
 	//
 	// E. Setup context object
-
 	const contextObject = useMemo(
 		() => ({
 			capture: captureEvent,
 			disable: disableCapture,
 			enable: enableCapture,
 			enabled: isCaptureEnabled,
+			shouldShow: isCaptureEnabled === null && loaded,
 		}),
-		[isCaptureEnabled, enableCapture, captureEvent, disableCapture],
+		[isCaptureEnabled, enableCapture, captureEvent, disableCapture, loaded],
 	);
-
 	//
 	// F. Return provider
 

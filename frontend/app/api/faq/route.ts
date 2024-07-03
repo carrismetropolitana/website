@@ -36,21 +36,19 @@ export async function fetchFaqs() {
 					body: 'Com a entrada da Carris Metropolitana deixaram de prestar serviço na AML as empresas de transportes: Boa Viagem, Henrique Leonardo da Mota, Isidoro Duarte, JJ Santo António, Mafrense, Sulfertagus, TST, Vimeca, Scotturb.',
 					title: 'Quais são as empresas que deixaram de prestar serviço na AML com a entrada em operação da Carris Metropolitana?',
 				},
-				// Os autocarros da Carris Metropolitana são novos?
-				// A frota da Carris Metropolitana possui idade média inferior a 1 ano onde 5% dos veículos são não poluentes, energeticamente eficientes e 90% possuem classe de emissões EURO V ou superior.
 				{
 					body: `A frota da Carris Metropolitana possui idade média inferior a 1 ano onde 5% dos veículos são não poluentes, energeticamente eficientes e 90% possuem classe de emissões EURO V ou superior.`,
 					title: 'Os autocarros da Carris Metropolitana são novos?',
 				},
 				{
-					body: `<div>
+					body: `
                     <p>Os operadores prestadores de serviço da Carris Metropolitana são 4 e estão divididos por áreas da seguinte forma:&nbsp;</p>
                     <p>Área 1: Viação Alvorada&nbsp;<br>Área 2: Rodoviária de Lisboa&nbsp;<br>Área 3: TST&nbsp;<br>Área 4: Alsa Todi</p>
-                    </div>`,
+                    `,
 					title: 'Quais são os operadores prestadores de serviço que atuam sob a marca Carris Metropolitana?',
 				},
 			],
-			title: 'FAQs',
+			title: 'Operação',
 		},
 	];
 	return faqs;
