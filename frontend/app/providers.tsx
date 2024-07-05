@@ -8,9 +8,11 @@ import { theme } from '@/styles/theme';
 import { MantineProvider } from '@mantine/core';
 import { DatesProvider } from '@mantine/dates';
 import { ModalsProvider } from '@mantine/modals';
+import { useCacheProvider } from '@piotr-cz/swr-idb-cache';
 import 'dayjs/locale/pt';
+import { DatesProviderValue } from 'node_modules/@mantine/dates/lib/components/DatesProvider/DatesProvider';
 import { MapProvider } from 'react-map-gl/maplibre';
-import { SWRConfig } from 'swr';
+import { SWRConfig, SWRConfiguration } from 'swr';
 
 /* * */
 
@@ -20,19 +22,29 @@ export default function Providers({ children }) {
 	//
 	// A. Setup SWR provider
 
-	const swrSettings = {
+	const cacheProvider = useCacheProvider({
+		dbName: 'alpha-cmetropolitana',
+		storeName: 'swr-store',
+	});
+
+	const swrSettings: SWRConfiguration = {
 		//
-		fetcher: async (...args) => {
+		// eslint-disable-next-line @typescript-eslint/no-explicit-any
+		async fetcher(...args: Parameters<typeof fetch>) {
 			const res = await fetch(...args);
 			if (!res.ok) {
 				const errorDetails = await res.json();
 				const error = new Error(errorDetails.message || 'An error occurred while fetching data.');
-				error.description = errorDetails.description || 'No additional information was provided by the API.';
-				error.status = res.status;
-				throw error;
+				const customError = {
+					...error,
+					description: errorDetails.description || 'No additional information was provided by the API.',
+					status: res.status,
+				};
+				throw customError;
 			}
 			return res.json();
 		},
+		provider: cacheProvider,
 		//
 		refreshInterval: 300000, // 5 minutes
 		//
@@ -41,11 +53,11 @@ export default function Providers({ children }) {
 	//
 	// A. Setup Mantine Dates provider
 
-	const mantineDatesSettings = {
+	const mantineDatesSettings: Partial<DatesProviderValue> = {
 		firstDayOfWeek: 1,
 		locale: 'pt',
 		timezone: 'Europe/Lisbon',
-		weekendDays: [7, 0],
+		weekendDays: [6, 0],
 	};
 
 	//

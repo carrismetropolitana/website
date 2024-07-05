@@ -251,5 +251,13 @@
     "our_partners": "Os nossos parceiros",
     "our_partners_description": "Porque os nossos dados são abertos, existem várias aplicações que oferecem experiências personalizadas para melhorar o seu dia-a-dia nos transportes.",
     "github_disclaimer": "Edite esta página no Github se pretende incluir a sua aplicação. A ordem é randomizada. Apenas são permitidas entradas que disponibilizem simultaneamente horários planeados e em tempo real ou posição de veículos."
+  },
+  "lines":{
+    "all_lines": "Todas as Linhas",
+    "favorites": "Favoritas",
+    "expand_filters": "Expandir Filtros",
+    "collapse_filters": "Esconder Filtros",
+    "search_by": "Pesquisar por nome, número...",
+    "found_x_lines": "Encontradas {count} linhas"
   }
 }

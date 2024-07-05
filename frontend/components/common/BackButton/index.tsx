@@ -5,7 +5,7 @@ import { useTranslations } from 'next-intl';
 
 import styles from './styles.module.css';
 
-export default async function Component() {
+export default function Component() {
 	const router = useRouter();
 	const t = useTranslations('common');
 	return (
