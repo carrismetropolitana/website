@@ -27,6 +27,7 @@ export default function Component() {
 	}];
 	const [tab, setTab] = useState('all_lines');
 	const { data } = useSWR<Line[]>('https://api.carrismetropolitana.pt/lines');
+	console.log(data);
 
 	const [searchText, setSearchText] = useState('');
 	const [foundNumber, setFoundNumber] = useState(0);

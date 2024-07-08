@@ -8,7 +8,7 @@ import { theme } from '@/styles/theme';
 import { MantineProvider } from '@mantine/core';
 import { DatesProvider } from '@mantine/dates';
 import { ModalsProvider } from '@mantine/modals';
-import { useCacheProvider } from '@piotr-cz/swr-idb-cache';
+// import { useCacheProvider } from '@piotr-cz/swr-idb-cache';
 import 'dayjs/locale/pt';
 import { DatesProviderValue } from 'node_modules/@mantine/dates/lib/components/DatesProvider/DatesProvider';
 import { MapProvider } from 'react-map-gl/maplibre';
@@ -22,10 +22,10 @@ export default function Providers({ children }) {
 	//
 	// A. Setup SWR provider
 
-	const cacheProvider = useCacheProvider({
-		dbName: 'alpha-cmetropolitana',
-		storeName: 'swr-store',
-	});
+	// const cacheProvider = useCacheProvider({
+	// 	dbName: 'alpha-cmetropolitana',
+	// 	storeName: 'swr-store',
+	// });
 
 	const swrSettings: SWRConfiguration = {
 		//
@@ -44,7 +44,7 @@ export default function Providers({ children }) {
 			}
 			return res.json();
 		},
-		provider: cacheProvider,
+		// provider: cacheProvider,
 		//
 		refreshInterval: 300000, // 5 minutes
 		//
