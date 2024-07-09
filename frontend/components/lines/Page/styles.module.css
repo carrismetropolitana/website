@@ -5,7 +5,7 @@
     gap:30px;
 }
 .header h1{
-    font-size: 26px;
+    font-size: var(--font-size-heading);
     font-weight: 700;
     color: var(--color-system-text-100);
 }
@@ -13,7 +13,7 @@
 .filter{
     display: flex;
     flex-direction: column;
-    align-items: start;
+    align-items: flex-start;
     gap: 15px;
 }
 
@@ -25,7 +25,7 @@
     border-radius: 1000px;
     border: 1px solid var(--color-system-border-200);
     padding: 4px 15px;
-    font-size: 14px;
+    font-size: var(--font-size-text);
     color: var(--color-system-text-300);
     font-weight: 600;
     background-color: var(--color-system-background-100);
@@ -33,13 +33,14 @@
 
 .foundSummary {
     padding-left: 4px;
-    font-size: 14px;
+    font-size: var(--font-size-text);
     color: var(--color-system-text-300);
     font-weight: 500;
 }
 
 .lines{
     display: flex;
+    position: relative;
     flex-direction: column;
 }
 
@@ -83,4 +84,11 @@
 .line .arrow{
     color: var(--color-system-text-400);
     flex-shrink: 0;
+}
+
+.highlight{
+    color: var(--color-system-text-100);
+    font-weight: 600;
+    background-color: var(--color-brand);
+    border-radius: 4px;
 }

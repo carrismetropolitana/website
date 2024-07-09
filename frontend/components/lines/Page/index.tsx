@@ -6,7 +6,7 @@ import type { Line } from '@/utils/types';
 import segmentedStyles from '@/components/common/CustomSegmentedControl/styles.module.css';
 import inputStyles from '@/components/common/Input/styles.module.css';
 import { Input, SegmentedControl, Skeleton } from '@mantine/core';
-import { IconRoute } from '@tabler/icons-react';
+import { IconArrowLoopLeft } from '@tabler/icons-react';
 import { useTranslations } from 'next-intl';
 import { useState } from 'react';
 import useSWR from 'swr';
@@ -27,7 +27,6 @@ export default function Component() {
 	}];
 	const [tab, setTab] = useState('all_lines');
 	const { data } = useSWR<Line[]>('https://api.carrismetropolitana.pt/lines');
-	console.log(data);
 
 	const [searchText, setSearchText] = useState('');
 	const [foundNumber, setFoundNumber] = useState(0);
@@ -41,7 +40,7 @@ export default function Component() {
 					<Input
 						className={styles.input}
 						classNames={inputStyles}
-						leftSection={<IconRoute size={16} />}
+						leftSection={<IconArrowLoopLeft size={16} />}
 						onChange={event => setSearchText(event.currentTarget.value)}
 						placeholder={t('search_by')}
 						size="lg"
