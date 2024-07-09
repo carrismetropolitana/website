@@ -1,21 +1,33 @@
 {
   "compilerOptions": {
-    "target": "ES6",
     "baseUrl": ".",
     "rootDir": ".",
-    "module": "NodeNext",
-    "moduleResolution": "NodeNext",
+    "module": "esnext",
+    "moduleResolution": "bundler",
     "paths": {
-			"@/utils/*": ["utils/*"],
-			"@/hooks/*": ["hooks/*"],
-      "@/styles/*": ["styles/*"],
-      "@/contexts/*": ["contexts/*"],
-      "@/opengraph/*": ["opengraph/*"],
-			"@/components/*": ["components/*"],
-      "@/translations/*": ["translations/*"],
+      "@/utils/*": [
+        "utils/*"
+      ],
+      "@/hooks/*": [
+        "hooks/*"
+      ],
+      "@/styles/*": [
+        "styles/*"
+      ],
+      "@/contexts/*": [
+        "contexts/*"
+      ],
+      "@/opengraph/*": [
+        "opengraph/*"
+      ],
+      "@/components/*": [
+        "components/*"
+      ],
+      "@/translations/*": [
+        "translations/*"
+      ]
     },
     "allowJs": true,
-    "outDir": "build",
     "sourceMap": true,
     "esModuleInterop": true,
     "lib": [
@@ -25,7 +37,6 @@
     ],
     "skipLibCheck": true,
     "strict": false,
-    "noEmit": true,
     "incremental": true,
     "resolveJsonModule": true,
     "isolatedModules": true,
@@ -35,7 +46,8 @@
         "name": "next"
       }
     ],
-    "strictNullChecks": true
+    "strictNullChecks": true,
+    "noEmit": true
   },
   "exclude": [
     "**/node_modules",
@@ -47,10 +59,9 @@
     "next-env.d.ts",
     ".next/types/**/*.ts",
     "**/*.ts",
-    "**/*.tsx",
-    "app/api/news/[news_id]/route.js"
+    "**/*.tsx"
   ],
   "typingOptions": {
-      "enableAutoDiscovery": true
-    }
+    "enableAutoDiscovery": true
+  }
 }
