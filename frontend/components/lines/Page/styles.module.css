@@ -86,9 +86,15 @@
     flex-shrink: 0;
 }
 
-.highlight{
+/* .highlight{
     color: var(--color-system-text-100);
     font-weight: 600;
     background-color: var(--color-brand);
     border-radius: 4px;
+} */
+
+.empty{
+    padding: 0 20px;
+    font-size: var(--font-size-title);
+    color: var(--color-system-text-300)
 }

@@ -4,6 +4,7 @@
 
 import { AppAnalyticsContextProvider } from '@/contexts/AppAnalyticsContext';
 import { DebugContextProvider } from '@/contexts/DebugContext';
+import { ProfileContextProvider } from '@/contexts/ProfileContext';
 import { theme } from '@/styles/theme';
 import { MantineProvider } from '@mantine/core';
 import { DatesProvider } from '@mantine/dates';
@@ -69,9 +70,11 @@ export default function Providers({ children }) {
 				<DatesProvider settings={mantineDatesSettings}>
 					<ModalsProvider>
 						<AppAnalyticsContextProvider>
-							<DebugContextProvider>
-								<MapProvider>{children}</MapProvider>
-							</DebugContextProvider>
+							<ProfileContextProvider>
+								<DebugContextProvider>
+									<MapProvider>{children}</MapProvider>
+								</DebugContextProvider>
+							</ProfileContextProvider>
 						</AppAnalyticsContextProvider>
 					</ModalsProvider>
 				</DatesProvider>

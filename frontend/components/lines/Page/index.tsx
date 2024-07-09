@@ -11,6 +11,7 @@ import { useTranslations } from 'next-intl';
 import { useState } from 'react';
 import useSWR from 'swr';
 
+import FavoritesList from './FavoritesList';
 import VirtualizedList from './VirtualizedList';
 import styles from './styles.module.css';
 
@@ -36,27 +37,33 @@ export default function Component() {
 			<div className={styles.header}>
 				<h1>Pesquisar Linhas</h1>
 				<SegmentedControl classNames={segmentedStyles} data={tabs} onChange={setTab} value={tab} fullWidth />
-				<div className={styles.filter}>
-					<Input
-						className={styles.input}
-						classNames={inputStyles}
-						leftSection={<IconArrowLoopLeft size={16} />}
-						onChange={event => setSearchText(event.currentTarget.value)}
-						placeholder={t('search_by')}
-						size="lg"
-						value={searchText}
-					/>
-					<div className={styles.expand}>{t('expand_filters')}</div>
-					{data !== undefined ? (
-						<div className={styles.foundSummary}>{t('found_x_lines', { count: foundNumber })}:</div>)
-						: (<Skeleton height={16} radius="xl" width={200} />
-						)}
-				</div>
+				{ tab === 'all_lines' && (
+					<div className={styles.filter}>
+						<Input
+							className={styles.input}
+							classNames={inputStyles}
+							leftSection={<IconArrowLoopLeft size={16} />}
+							onChange={event => setSearchText(event.currentTarget.value)}
+							placeholder={t('search_by')}
+							size="lg"
+							value={searchText}
+						/>
+						<div className={styles.expand}>{t('expand_filters')}</div>
+						{data !== undefined ? (
+							<div className={styles.foundSummary}>{t('found_x_lines', { count: foundNumber })}:</div>)
+							: (<Skeleton height={16} radius="xl" width={200} />
+							)}
+					</div>
+				)}
 			</div>
 			<div className={styles.lines}>
-				{ data !== undefined && (
+				{ data !== undefined && tab === 'all_lines' && (
 					<VirtualizedList data={data} searchText={searchText} setFoundNumber={setFoundNumber} />
 				)}
+				{
+					data !== undefined && tab === 'favorites' && (
+						<FavoritesList data={data} />)
+				}
 
 			</div>
 		</>

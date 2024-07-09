@@ -4,7 +4,7 @@ import MiniSearch from 'minisearch';
 import React, { useEffect, useMemo } from 'react';
 import { AutoSizer, CellMeasurer, CellMeasurerCache, List, WindowScroller } from 'react-virtualized';
 
-import styles from '../styles.module.css';
+import LineItem from '../LineItem';
 
 const cache = new CellMeasurerCache({
 	defaultHeight: 70,
@@ -12,12 +12,16 @@ const cache = new CellMeasurerCache({
 });
 
 export default function Component({ data, searchText, setFoundNumber }: { data: Line[], searchText: string, setFoundNumber: (_: number) => void }) {
-	const arrow = useMemo(() => <IconArrowRight className={styles.arrow} size={24} />, []);
-
 	const minisearch = useMemo(() => {
 		const minisearch = new MiniSearch<Line>({
 			fields: ['short_name', 'long_name'],
 			idField: 'id',
+			processTerm(term, fieldName) {
+				if (fieldName === 'long_name') {
+					return term.normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase();
+				}
+				return term.toLowerCase();
+			},
 			storeFields: ['short_name', 'long_name', 'color', 'text_color'],
 		});
 		minisearch.addAll(data);
@@ -27,7 +31,7 @@ export default function Component({ data, searchText, setFoundNumber }: { data: 
 	console.time('filter');
 	const results = useMemo(() => {
 		const shortRes = minisearch.search(searchText, { fields: ['short_name'], prefix: true });
-		const longRes = minisearch.search(searchText, { fields: ['long_name'], fuzzy: 0.2, prefix: true });
+		const longRes = minisearch.search(searchText, { fields: ['long_name'], fuzzy: 0.2 });
 		// Merge the two arrays
 		const merged = shortRes.concat(longRes.filter(e => !shortRes.some(e2 => e2.id === e.id)));
 
@@ -38,6 +42,7 @@ export default function Component({ data, searchText, setFoundNumber }: { data: 
 		? results.map(e => (
 			{
 				color: e.color,
+				id: e.id,
 				long_name: e.long_name,
 				short_name: e.short_name,
 				text_color: e.text_color,
@@ -78,13 +83,7 @@ export default function Component({ data, searchText, setFoundNumber }: { data: 
 											parent={parent}
 										>
 											{({ registerChild }) => (
-												<div key={key} ref={(element: Element | null) => registerChild && registerChild(element || undefined)} className={styles.line} style={style}>
-													<div className={styles.label}>
-														<div className={styles.badge} style={{ backgroundColor: line.color, color: line.text_color }}>{line.short_name}</div>
-														<div className={styles.name}>{line.long_name}</div>
-													</div>
-													{arrow}
-												</div>
+												<LineItem line={line} refFn={(element: Element | null) => registerChild && registerChild(element || undefined)} style={style} />
 											)}
 										</CellMeasurer>
 									);
