@@ -51,9 +51,15 @@
     color: var(--color-system-text-300)
 }
 
-.stopInfo>.live{
+.stopInfo>div{
     display:flex;
     align-items: center;
     font-size: 14px;
+    gap:2px;
+}
+.stopInfo>.live{
     color: var(--color-realtime-100)
+}
+.stopInfo>.scheduled{
+    color: var(--color-system-text-200)
 }

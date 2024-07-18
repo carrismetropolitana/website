@@ -1,17 +1,20 @@
 'use client';
 import LiveIcon from '@/components/common/LiveIcon';
 import { Pattern, PatternRealtime } from '@/utils/types';
+import { IconClock } from '@tabler/icons-react';
+import dayjs from 'dayjs';
 import React, { useMemo } from 'react';
 import useSWR from 'swr';
 
 import styles from './styles.module.css';
 
-function formatDate(ms: number) {
+function formatDelta(ms: number) {
 	let toReturn = '';
+	console.log(ms);
 	const seconds = Math.floor(ms / 1000);
 	const minutes = Math.floor(seconds / 60);
 	const hours = Math.floor(minutes / 60);
-	if (minutes < 0) {
+	if (minutes <= 0) {
 		return 'A chegar';
 	}
 
@@ -24,6 +27,10 @@ function formatDate(ms: number) {
 	return toReturn;
 }
 
+function formatDate(unixTs: number) {
+	return dayjs(unixTs).format('HH:mm');
+}
+
 export default function Component({ pattern }: { pattern: Pattern }) {
 	const { data: patternRealtime } = useSWR<PatternRealtime[]>('https://api.carrismetropolitana.pt/patterns/' + pattern.id + '/realtime', {
 		refreshInterval: 10000,
@@ -31,27 +38,27 @@ export default function Component({ pattern }: { pattern: Pattern }) {
 	const sortedStops = pattern.path.sort((a, b) => a.stop_sequence - b.stop_sequence);
 	const relevantRealtimes = useMemo(() => patternRealtime?.filter(realtime => realtime.pattern_id === pattern.id), [patternRealtime, pattern.id]);
 	const now = Date.now();
-	const nextArrivalsPerStop: Record<string, { deltaMs: number, type: 'realtime' | 'scheduled' }[]> = {};
+	const nextArrivalsPerStop: Record<string, { type: 'realtime' | 'scheduled', unixTs: number }[]> = {};
 	for (const realtime of relevantRealtimes ?? []) {
 		if (!nextArrivalsPerStop[realtime.stop_id]) {
 			nextArrivalsPerStop[realtime.stop_id] = [];
 		}
 
 		if (realtime.estimated_arrival_unix) {
-			nextArrivalsPerStop[realtime.stop_id].push({ deltaMs: realtime.estimated_arrival_unix * 1000 - now, type: 'realtime' });
+			nextArrivalsPerStop[realtime.stop_id].push({ type: 'realtime', unixTs: realtime.estimated_arrival_unix * 1000 });
 		}
 		else {
-			nextArrivalsPerStop[realtime.stop_id].push({ deltaMs: realtime.scheduled_arrival_unix * 1000 - now, type: 'scheduled' });
+			nextArrivalsPerStop[realtime.stop_id].push({ type: 'scheduled', unixTs: realtime.scheduled_arrival_unix * 1000 });
 		}
 	}
 	for (const stopId of Object.keys(nextArrivalsPerStop)) {
-		nextArrivalsPerStop[stopId].sort((a, b) => a.deltaMs - b.deltaMs);
+		nextArrivalsPerStop[stopId].sort((a, b) => a.unixTs - b.unixTs);
 	}
 	console.log(nextArrivalsPerStop);
 	return (
 		<div className={styles.container}>{sortedStops.map((stop) => {
 			const nextArrivals = nextArrivalsPerStop[stop.stop.id];
-			const nextArrival = nextArrivals?.find(arrival => arrival.deltaMs > 0);
+			const nextArrival = nextArrivals?.find(arrival => arrival.unixTs > now);
 
 			return (
 				<div key={stop.stop.id} className={styles.stop}>
@@ -62,8 +69,8 @@ export default function Component({ pattern }: { pattern: Pattern }) {
 						<div className={styles.name}>{stop.stop.name}</div>
 						<div className={styles.location}>{stop.stop.municipality_name}, {stop.stop.district_name}</div>
 						{ nextArrival != undefined && (nextArrival.type === 'realtime'
-							? <div className={styles.live}><LiveIcon /> {formatDate(nextArrival.deltaMs)}</div>
-							: <div className={styles.live}>{formatDate(nextArrival.deltaMs)}</div>)}
+							? <div className={styles.live}><LiveIcon /> {formatDelta(nextArrival.unixTs - now)}</div>
+							: <div className={styles.scheduled}><IconClock size={16} />{formatDate(nextArrival.unixTs)}</div>)}
 					</div>
 				</div>
 			);
