@@ -20,6 +20,7 @@ import styles from './styles.module.css';
 export default function Component({ lineInfo }: { lineInfo: Line }) {
 	const [date, setDate] = useState<Date>(new Date());
 	const [patternId, setPatternId] = useState<null | string>(null);
+	const [selectedStop, setSelectedStop] = useState<null | string>(null);
 
 	const patterns = lineInfo.patterns.map(pattern_id => ({ id: pattern_id, pattern: useSWR<Pattern>('https://api.carrismetropolitana.pt/patterns/' + pattern_id).data }));
 	const selectedPattern = patterns.find(r => r.id === patternId)?.pattern;
@@ -115,7 +116,7 @@ export default function Component({ lineInfo }: { lineInfo: Line }) {
 				</div>
 				{ selectedPattern
 				&& (
-					<StopList pattern={selectedPattern} />
+					<StopList pattern={selectedPattern} selectedStop={selectedStop} setSelectedStop={setSelectedStop} />
 				)}
 			</>
 		</div>

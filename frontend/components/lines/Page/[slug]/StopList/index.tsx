@@ -1,16 +1,17 @@
-'use client';
+import FacilityIcon from '@/components/common/FacilityIcon';
 import LiveIcon from '@/components/common/LiveIcon';
 import { Pattern, PatternRealtime } from '@/utils/types';
-import { IconClock } from '@tabler/icons-react';
+import { UnstyledButton } from '@mantine/core';
+import { IconClock, IconClockHour9, IconClockSearch, IconInfoCircle } from '@tabler/icons-react';
 import dayjs from 'dayjs';
-import React, { useMemo } from 'react';
+import { useTranslations } from 'next-intl';
+import { useMemo } from 'react';
 import useSWR from 'swr';
 
 import styles from './styles.module.css';
 
 function formatDelta(ms: number) {
 	let toReturn = '';
-	console.log(ms);
 	const seconds = Math.floor(ms / 1000);
 	const minutes = Math.floor(seconds / 60);
 	const hours = Math.floor(minutes / 60);
@@ -31,10 +32,11 @@ function formatDate(unixTs: number) {
 	return dayjs(unixTs).format('HH:mm');
 }
 
-export default function Component({ pattern }: { pattern: Pattern }) {
+export default function Component({ pattern, selectedStop, setSelectedStop }: { pattern: Pattern, selectedStop: null | string, setSelectedStop: (stopId: string) => void }) {
 	const { data: patternRealtime } = useSWR<PatternRealtime[]>('https://api.carrismetropolitana.pt/patterns/' + pattern.id + '/realtime', {
 		refreshInterval: 10000,
 	});
+	const t = useTranslations('line');
 	const sortedStops = pattern.path.sort((a, b) => a.stop_sequence - b.stop_sequence);
 	const relevantRealtimes = useMemo(() => patternRealtime?.filter(realtime => realtime.pattern_id === pattern.id), [patternRealtime, pattern.id]);
 	const now = Date.now();
@@ -54,23 +56,80 @@ export default function Component({ pattern }: { pattern: Pattern }) {
 	for (const stopId of Object.keys(nextArrivalsPerStop)) {
 		nextArrivalsPerStop[stopId].sort((a, b) => a.unixTs - b.unixTs);
 	}
-	console.log(nextArrivalsPerStop);
 	return (
-		<div className={styles.container}>{sortedStops.map((stop) => {
-			const nextArrivals = nextArrivalsPerStop[stop.stop.id];
+		<div className={styles.container}>{sortedStops.map((path) => {
+			const stop = path.stop;
+			const stopId = stop.id;
+			const arrivals = nextArrivalsPerStop[stopId];
+			const nextArrivals = arrivals?.filter(arrival => arrival.unixTs > now);
 			const nextArrival = nextArrivals?.find(arrival => arrival.unixTs > now);
-
+			const realtimeArrivals = nextArrivals?.filter(arrival => arrival.type === 'realtime');
+			const scheduledArrivals = nextArrivals?.filter(arrival => arrival.type === 'scheduled');
+			const isSelected = selectedStop == stopId;
 			return (
-				<div key={stop.stop.id} className={styles.stop}>
+				<div key={stopId} className={styles.stop} data-selected={isSelected} onClick={() => setSelectedStop(stopId)}>
 					<div className={styles.spineLine} style={{ backgroundColor: pattern.color }}>
-						<div />
+						<div style={{ backgroundColor: pattern.text_color }} />
 					</div>
 					<div className={styles.stopInfo}>
-						<div className={styles.name}>{stop.stop.name}</div>
-						<div className={styles.location}>{stop.stop.municipality_name}, {stop.stop.district_name}</div>
-						{ nextArrival != undefined && (nextArrival.type === 'realtime'
-							? <div className={styles.live}><LiveIcon /> {formatDelta(nextArrival.unixTs - now)}</div>
-							: <div className={styles.scheduled}><IconClock size={16} />{formatDate(nextArrival.unixTs)}</div>)}
+						<div className={styles.name}>{stop.name}</div>
+						<div className={styles.location}>{stop.municipality_name}, {stop.district_name}</div>
+						{ !isSelected ? (
+							<> { nextArrival != undefined && (nextArrival.type === 'realtime'
+								? <div className={styles.live}><LiveIcon /> {formatDelta(nextArrival.unixTs - now)}</div>
+								: <div className={styles.scheduled}><IconClock size={16} />{formatDate(nextArrival.unixTs)}</div>)}
+							</>
+						)
+							: (
+								<>
+									{stop.facilities.length > 0
+									&& (
+										<div className={styles.facilityIcons}>
+											{stop.facilities.map(facility => (
+												<FacilityIcon key={facility} name={facility} />
+											))}
+										</div>
+									)}
+									<div className={styles.label}>{t('next_buses')}</div>
+									<div className={styles.timesList}>
+										{realtimeArrivals.length > 0 && (
+											<div className={styles.realtimeList}>
+												<LiveIcon />{
+													realtimeArrivals.map(realtimeArrival => realtimeArrival != undefined
+													&& <div key={realtimeArrival.unixTs}>{formatDelta(realtimeArrival.unixTs - now)}</div>)
+												}
+											</div>
+										)}
+										{
+											scheduledArrivals.length > 0 && (
+												<div className={styles.scheduledList}>
+													<IconClockHour9 size={16} />
+													<div>
+														{
+															scheduledArrivals.slice(0, realtimeArrivals.length > 0 ? 3 : 4)
+																.map(scheduledArrival => scheduledArrival != undefined && (
+																	<div key={scheduledArrival.unixTs}>
+																		{formatDate(scheduledArrival.unixTs)}
+																	</div>
+																))
+														}
+													</div>
+												</div>
+											)
+										}
+									</div>
+									<div className={styles.buttons}>
+										<UnstyledButton>
+											<IconClockSearch size={18} />
+											Horários
+										</UnstyledButton>
+										<UnstyledButton>
+											<IconInfoCircle size={18} />
+											Sobre a Paragem
+										</UnstyledButton>
+									</div>
+								</>
+							)}
 					</div>
 				</div>
 			);

@@ -268,7 +268,8 @@
     "service_alerts": "Alertas de Serviço",
     "x_vehicles_active": "{count, plural, =0 {Sem veículos a circular} one { veículo em circulação} other { veículos em circulação}}",
     "from_until": "Entre {start} e {end}",
-    "route_explainer": "O que é o percurso/destino de uma linha?"
+    "route_explainer": "O que é o percurso/destino de uma linha?",
+    "next_buses": "Próximas circulações"
   }
 
 }

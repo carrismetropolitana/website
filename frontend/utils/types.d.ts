@@ -161,9 +161,23 @@ export enum DistrictName {
 }
 
 export enum Facility {
-	School = 'school',
-	Train = 'train',
-	TransitOffice = 'transit_office',
+	AIRPORT = 'airport',
+	BIKE_PARKING = 'bike_parking',
+	BIKE_SHARING = 'bike_sharing',
+	BOAT = 'boat',
+	CAR_PARKING = 'car_parking',
+	LIGHT_RAIL = 'light_rail',
+	NEAR_FIRE_STATION = 'near_fire_station',
+	NEAR_HEALTH_CLINIC = 'near_health_clinic',
+	NEAR_HISTORIC_BUILDING = 'near_historic_building',
+	NEAR_HOSPITAL = 'near_hospital',
+	NEAR_POLICE_STATION = 'near_police_station',
+	NEAR_SCHOOL = 'school',
+	NEAR_SHOPPING = 'shopping',
+	NEAR_TRANSIT_OFFICE = 'transit_office',
+	NEAR_UNIVERSITY = 'near_university',
+	SUBWAY = 'subway',
+	TRAIN = 'train',
 }
 
 export enum OperationalStatus {
