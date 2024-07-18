@@ -1,0 +1,52 @@
+/* * */
+/* INNER WRAPPER */
+
+.innerWrapper {
+    display: grid;
+    grid-template-columns: 1fr 1fr auto;
+    padding: 5px;
+    height: 50px;
+    background-color: var(--color-system-background-300);
+    border-radius: 5px;
+}
+
+.wrapper{
+    height: 100%;
+}
+
+/* * */
+/* BUTTONS & INPUT */
+.button, .input{
+    font-size: 17px;
+    cursor: pointer;
+    font-weight: 600;
+    border-radius: 3px;
+    color: var(--color-system-text-300);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height:100%;
+    border: none;
+    transition: all 200ms ease;
+    background: transparent;
+}
+
+.input{
+    padding-left: 38px;
+}
+
+
+.button[data-selected="true"], .input[data-selected="true"] {
+    color: var(--color-system-text-200);
+    background: var(--color-system-background-100);
+    box-shadow: 0 0 5px 0 rgba(0, 0, 0, 0.1);
+}
+
+
+.innerWrapper[data-custom="true"] .section {
+    --input-section-color: var(--color-system-text-200)
+}
+
+.section{
+    padding-left: 12px;
+}

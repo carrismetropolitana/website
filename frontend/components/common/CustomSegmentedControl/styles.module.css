@@ -8,6 +8,7 @@
     font-weight: 600;
     padding-left: 0;
     padding-right: 0;
+    --sc-font-size: 17px;
     color: var(--color-system-text-300);
     --input-section-color: var(--color-system-text-300);
     --mantine-color-text: var(--color-system-text-300);

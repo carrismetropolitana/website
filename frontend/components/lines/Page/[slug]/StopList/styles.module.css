@@ -1,0 +1,59 @@
+.container{
+    display: flex;
+    flex-direction: column;
+}
+
+.spineLine{
+    width: 16px;
+    align-self: stretch;
+    flex-shrink: 0;
+    display: flex;
+    justify-content: center;
+}
+
+.spineLine>div{
+    margin-top: 6px;
+    width: 4px;
+    height: 4px;
+    background-color: var(--color-system-background-100);
+    border-radius: 1000px;
+}
+
+.stop:first-child .spineLine{
+    border-radius: 1000px 1000px 0 0;
+}
+
+.stop:last-child .spineLine{
+    border-radius: 0 0 1000px 1000px;
+    height:16px;
+}
+
+.stop{
+    display: flex;
+    gap: 10px;
+    padding-left: 23px;
+    padding-right: 23px;
+}
+
+.stopInfo{
+    display: flex;
+    flex-direction: column;
+    font-weight: 600;
+    padding-bottom: 10px;
+}
+.stopInfo>.name{
+    font-size: 16px;
+    color: var(--color-system-text-100)
+}
+
+.stopInfo>.location{
+    font-size: 14px;
+    color: var(--color-system-text-300)
+}
+
+.stopInfo>.live{
+    display:flex;
+    align-items: center;
+    font-size: 14px;
+    color: var(--color-realtime-100)
+}

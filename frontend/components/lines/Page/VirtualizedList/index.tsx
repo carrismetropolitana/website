@@ -1,7 +1,6 @@
 import { Line } from '@/utils/types.js';
-import { IconArrowRight } from '@tabler/icons-react';
 import MiniSearch from 'minisearch';
-import React, { useEffect, useMemo } from 'react';
+import { useEffect, useMemo } from 'react';
 import { AutoSizer, CellMeasurer, CellMeasurerCache, List, WindowScroller } from 'react-virtualized';
 
 import LineItem from '../LineItem';

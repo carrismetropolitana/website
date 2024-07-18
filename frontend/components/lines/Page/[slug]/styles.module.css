@@ -1,0 +1,88 @@
+.wrapper{
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+}
+
+.header,.controls{
+    padding: 0px 20px 0px 20px;
+    display: flex;
+    flex-direction: column;
+    gap:10px;
+}
+
+.controls{
+    gap: 30px
+}
+
+.header{
+    padding-top: 0;
+}
+
+.header h3 {
+    font-size: 20px;
+    font-weight: 700;
+}
+
+.tag{
+    border-radius: 1000px;
+    padding: 3px 15px;
+    font-size: 20px;
+    font-weight: 700;
+}
+.lineHeader{
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.heart{
+    --fill: #0000;
+    --stroke: var(--color-system-text-400);
+}
+@media only screen and (max-width: 400px) {
+    .heart:hover{
+        --fill: #FEE2E2;
+        --stroke: #FECACA;
+    }
+}
+
+.routeSelector{
+    display: flex;
+    gap: 10px;
+    flex-direction: column;
+}
+
+.routeExplainer{
+    align-self: flex-end;
+    font-size: 10px;
+    color: var(--color-system-text-300);
+    font-style: italic;
+    display: flex;
+    align-items: center;
+}
+
+.mapAttribution{
+    display: flex;
+    gap: 4px;
+    padding-left: 8px;
+    font-size: 10px;
+    color: var(--color-system-text-300);
+}
+.mapAttribution a:hover{
+    text-decoration: underline;
+}
+
+.divisor{
+    height: 1px;
+    width: 100%;
+    background-color: var(--color-system-border-100);
+    margin: 0px 0px;
+}
+
+.input::placeholder{
+    color: var(--color-system-text-300)
+}
+.input{
+    color: var(--color-system-text-200)
+}

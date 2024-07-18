@@ -264,8 +264,11 @@
   "line":{
     "today": "Hoje",
     "tomorrow": "Amanhã",
-    "pick_path": "Escolha um percurso/destino...",
+    "pick_route": "Escolha um percurso/destino...",
     "service_alerts": "Alertas de Serviço",
-    "x_vehicles_active": "{count, plural, =0 {Sem veículos ativos} one {# veículo ativo} other {# veículos ativos}}"
+    "x_vehicles_active": "{count, plural, =0 {Sem veículos a circular} one { veículo em circulação} other { veículos em circulação}}",
+    "from_until": "Entre {start} e {end}",
+    "route_explainer": "O que é o percurso/destino de uma linha?"
   }
+
 }
