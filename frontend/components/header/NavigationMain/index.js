@@ -13,8 +13,8 @@ const NAV_ITEMS = [
 		links: [
 			{ _id: 'lines', href: '/lines', icon: <IconArrowLoopRight size={20} /> },
 			{ _id: 'stops', href: '/stops', icon: <IconBusStop size={20} /> },
-			{ _id: 'alerts', href: '/alerts', icon: <IconAlertTriangle size={20} /> },
 			{ _id: 'planner', href: '/planner', icon: <IconDirections size={20} /> },
+			{ _id: 'alerts', href: '/alerts', icon: <IconAlertTriangle size={20} /> },
 			{ _id: 'schools', href: '/schools', icon: <IconBellSchool size={20} /> },
 			{ _id: 'flyers', href: 'https://meuhorario.carrismetropolitana.pt', icon: <IconBook size={20} />, target: '_blank' },
 		],
