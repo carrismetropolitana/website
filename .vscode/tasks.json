@@ -1,25 +1,25 @@
 {
-  "version": "2.0.0",
-  "tasks": [
-    {
-      "label": "Start Frontend",
-      "detail": "Start local development server with 'npm run dev'",
-      "type": "npm",
-      "script": "dev",
-      "problemMatcher": [],
-      "options": {
-        "cwd": "${workspaceFolder}/frontend"
-      }
-    },
+	"version": "2.0.0",
+	"tasks": [
 		{
-      "label": "Start Videowall",
-      "detail": "Start local development server with 'npm run dev'",
-      "type": "npm",
-      "script": "dev",
-      "problemMatcher": [],
-      "options": {
-        "cwd": "${workspaceFolder}/videowall"
-      }
-    }
-  ]
+			"label": "Start Frontend",
+			"detail": "Start local development server for 'frontend' with 'npm run dev'",
+			"type": "npm",
+			"script": "dev",
+			"problemMatcher": [],
+			"options": {
+				"cwd": "${workspaceFolder}/frontend"
+			}
+		},
+		{
+			"label": "Start Videowall",
+			"detail": "Start local development server for 'videowall' with 'npm run dev'",
+			"type": "npm",
+			"script": "dev",
+			"problemMatcher": [],
+			"options": {
+				"cwd": "${workspaceFolder}/videowall"
+			}
+		}
+	]
 }

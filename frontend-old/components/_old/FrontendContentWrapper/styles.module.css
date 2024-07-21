@@ -4,5 +4,5 @@
 .container {
 	width: 100%;
 	margin: auto;
-	max-width: var(--size-global-width);
+	max-width: var(--size-width-global);
 }

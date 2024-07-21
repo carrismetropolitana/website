@@ -1,25 +1,14 @@
-.header{
-    padding: 30px 20px 20px 20px;
-    display: flex;
-    flex-direction: column;
-    gap:10px;
-}
+/* * */
+/* CAROUSEL ITEM */
 
-.header>h1{
-    color: var(--color-system-text-100);
-    font-size: 26px;
-    font-weight: 700;
-
-}
-.header>p{
-    color: var(--color-system-text-200);
-    font-size: 14px;
-    font-weight: 500;
-}
-.carouselItem{
+.carouselItem {
     padding-left: 15px;
 }
-.footer{
+
+/* * */
+/* DISCLAIMER */
+
+.disclaimer {
     padding: 0 20px;
     font-size: 12px;
     color: var(--color-system-text-400);

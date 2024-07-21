@@ -30,7 +30,7 @@
 	margin: auto;
 	width: 100%;
 	height: 100%;
-	max-width: var(--size-global-width);
+	max-width: var(--size-width-global);
   align-items: center;
   justify-content: space-between;
 	background-color: var(--color-system-background-100);

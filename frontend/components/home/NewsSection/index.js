@@ -38,7 +38,6 @@ export default function Component() {
 	// D. Render Components
 
 	return (
-
 		<LayoutSection heading={t('section_heading')}>
 			<Carousel
 				align="start"
