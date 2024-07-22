@@ -13,7 +13,9 @@ import { NextIntlClientProvider, useMessages } from 'next-intl';
 export default function Layout({ children, params: { locale } }) {
 	//
 
-	if (!availableLocales.includes(locale)) notFound();
+	if (!availableLocales.includes(locale)) {
+		notFound();
+	}
 
 	const messages = useMessages();
 
@@ -21,9 +23,9 @@ export default function Layout({ children, params: { locale } }) {
 		<NextIntlClientProvider locale={locale} messages={messages} now={Date.now()} timeZone="Europe/Lisbon">
 			<LayoutViewportWrapper>
 				<Header />
-				<AnalyticsConsentPopup />
 				{children}
 				<Footer />
+				<AnalyticsConsentPopup />
 			</LayoutViewportWrapper>
 		</NextIntlClientProvider>
 	);
