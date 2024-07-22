@@ -15,7 +15,8 @@ export default function Component() {
 	//
 	// A. Fetch data
 
-	const { data: appStatusData } = useSWR('https://api.carrismetropolitana.pt/status/message/NO_MESSAGE');
+	// const { data: appStatusData } = useSWR('https://api.carrismetropolitana.pt/status/message');
+	const appStatusData = null;
 
 	//
 	// B. Handle actions
