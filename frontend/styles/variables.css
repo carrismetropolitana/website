@@ -90,7 +90,7 @@
 	--font-weight-extrabold: 800; /* ExtraBold */
 	--font-weight-bold: 700; /* SemiBold */
 	--font-weight-semibold: 600; /* SemiBold */
-	--font-weight-medium: 500; /* SemiBold */
+	--font-weight-medium: 500; /* Medium */
 
 	--font-size-heading: 26px;
 	--font-weight-heading: 700; /* Bold */
@@ -131,6 +131,29 @@
 		--color-system-text-200: #c8c8d2;
 		--color-system-text-300: #8c8c96;
 		--color-system-text-400: #64646e;
+
+		/* * */
+		/* COLOR / STATUS */
+
+		--color-status-info-background: #F5FAFF;
+		--color-status-info-border: #DCE6F0;
+		--color-status-info-text: #054B8C;
+		--color-status-info-shadow: #054b8c80;
+
+		--color-status-ok-background: #EBF5EB;
+		--color-status-ok-border: #D7EBD7;
+		--color-status-ok-text: #2D8C3C;
+		--color-status-ok-shadow: #2D8C3C80;
+
+		--color-status-warning-background: #FFFAF5;
+		--color-status-warning-border: #FFF0D7;
+		--color-status-warning-text: #F09600;
+		--color-status-warning-shadow: #F0960080;
+
+		--color-status-danger-background: #FFF5F5;
+		--color-status-danger-border: #FAE6DC;
+		--color-status-danger-text: #e64b23;
+		--color-status-danger-shadow: #e64a2380;
 
   }
 }
