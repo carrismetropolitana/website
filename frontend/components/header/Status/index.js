@@ -9,22 +9,13 @@ import styles from './styles.module.css';
 
 /* * */
 
-const appStatusDataTest = {
-	body: 'Mais novidades em breve.',
-	more_info: 'https://developer.carrismetropolitana.pt/blog/...',
-	style: 'warning',
-	title: 'Aviso de Greve no dia 13 Janeiro',
-};
-
-/* * */
-
 export default function Component() {
 	//
 
 	//
 	// A. Fetch data
 
-	const { data: appStatusData } = useSWR('https://api.carrismetropolitana.pt/status/message');
+	const { data: appStatusData } = useSWR('https://api.carrismetropolitana.pt/status/message/NO_MESSAGE');
 
 	//
 	// B. Handle actions
