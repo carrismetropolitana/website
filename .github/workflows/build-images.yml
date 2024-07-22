@@ -12,7 +12,7 @@ jobs:
   # # # # # # # # # # # # # # # # # # # # #
 
   website-frontend:
-    name: Frontend (NextJS)
+    name: frontend (NextJS)
     runs-on: ubuntu-latest
     strategy:
       fail-fast: false
@@ -21,29 +21,47 @@ jobs:
       packages: write
 
     steps:
+      - name: Set module key
+        run: |
+          echo "MODULE_KEY=frontend" >> $GITHUB_ENV
+
       - name: Checkout repository
         uses: actions/checkout@main
 
+      - name: Calculate module SHA256 hash
+        run: |
+          find "./${{ env.MODULE_KEY }}" -type f -print0 | sort -z | xargs -0 sha256sum | sha256sum | cut -d' ' -f1 > ${{ env.MODULE_KEY }}.hash
+          echo "SHA256_HASH=$(cat ${{ env.MODULE_KEY }}.hash)" >> $GITHUB_ENV
+
+      - name: Fetch hash cache
+        uses: actions/cache@v4
+        id: cache
+        with:
+          path: ${{ env.MODULE_KEY }}.hash
+          key: ${{ github.ref_name }}-${{ env.MODULE_KEY }}-${{ env.SHA256_HASH }}
+
       - name: Login to GitHub Container Registry
+        if: steps.cache.outputs.cache-hit != 'true'
         uses: docker/login-action@master
         with:
           registry: ghcr.io
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Build Frontend Docker Image (NextJS)
+      - name: Build and Push Docker Image
+        if: steps.cache.outputs.cache-hit != 'true'
         uses: docker/build-push-action@master
         with:
           push: true
-          context: ./frontend
-          file: ./frontend/Dockerfile
-          tags: ghcr.io/carrismetropolitana/website-frontend:${{ github.ref_name }}
+          context: ./${{ env.MODULE_KEY }}
+          file: ./${{ env.MODULE_KEY }}/Dockerfile
+          tags: ghcr.io/carrismetropolitana/website-${{ env.MODULE_KEY }}:${{ github.ref_name }}
 
   # # # # # # # # # # # # # # # # # # # # #
   # # # # # # # # # # # # # # # # # # # # #
 
   website-videowall:
-    name: Videowall (NextJS)
+    name: videowall (NextJS)
     runs-on: ubuntu-latest
     strategy:
       fail-fast: false
@@ -52,20 +70,38 @@ jobs:
       packages: write
 
     steps:
+      - name: Set module key
+        run: |
+          echo "MODULE_KEY=videowall" >> $GITHUB_ENV
+
       - name: Checkout repository
         uses: actions/checkout@main
 
+      - name: Calculate module SHA256 hash
+        run: |
+          find "./${{ env.MODULE_KEY }}" -type f -print0 | sort -z | xargs -0 sha256sum | sha256sum | cut -d' ' -f1 > ${{ env.MODULE_KEY }}.hash
+          echo "SHA256_HASH=$(cat ${{ env.MODULE_KEY }}.hash)" >> $GITHUB_ENV
+
+      - name: Fetch hash cache
+        uses: actions/cache@v4
+        id: cache
+        with:
+          path: ${{ env.MODULE_KEY }}.hash
+          key: ${{ github.ref_name }}-${{ env.MODULE_KEY }}-${{ env.SHA256_HASH }}
+
       - name: Login to GitHub Container Registry
+        if: steps.cache.outputs.cache-hit != 'true'
         uses: docker/login-action@master
         with:
           registry: ghcr.io
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Build Frontend Docker Image (NextJS)
+      - name: Build and Push Docker Image
+        if: steps.cache.outputs.cache-hit != 'true'
         uses: docker/build-push-action@master
         with:
           push: true
-          context: ./videowall
-          file: ./videowall/Dockerfile
-          tags: ghcr.io/carrismetropolitana/website-videowall:${{ github.ref_name }}
+          context: ./${{ env.MODULE_KEY }}
+          file: ./${{ env.MODULE_KEY }}/Dockerfile
+          tags: ghcr.io/carrismetropolitana/website-${{ env.MODULE_KEY }}:${{ github.ref_name }}
