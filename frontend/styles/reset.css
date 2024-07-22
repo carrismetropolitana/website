@@ -1,9 +1,10 @@
 html,
 body {
-  padding: 0;
-  margin: 0;
-  scroll-behavior: smooth;
+	padding: 0;
+	margin: 0;
+	scroll-behavior: smooth;
 	background-color: var(--color-system-background-200);
+	color: var(--color-system-text-100);
 }
 
 h1,
@@ -13,26 +14,26 @@ h4,
 h5,
 h6,
 p {
-  margin: 0;
+	margin: 0;
 }
 
 a {
-  color: inherit;
-  text-decoration: none;
+	color: inherit;
+	text-decoration: none;
 }
 
 * {
-  box-sizing: border-box;
-  user-select: none;
-  -webkit-touch-callout: none;
-  font-family: var(--font-inter), sans-serif;
+	box-sizing: border-box;
+	user-select: none;
+	-webkit-touch-callout: none;
+	font-family: var(--font-inter), sans-serif;
 	line-height: 1.2;
 }
 
 input,
 textarea {
-  user-select: text;
-  -webkit-touch-callout: default;
+	user-select: text;
+	-webkit-touch-callout: default;
 }
 
 img {
