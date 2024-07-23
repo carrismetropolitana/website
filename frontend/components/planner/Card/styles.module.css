@@ -20,22 +20,29 @@
 }
 
 /* * */
-/* PUBLISH DATE */
+/* CONTENT */
 
-.publishDate {
-	font-size: var(--font-size-muted);
-	font-weight: var(--font-weight-muted);
-	color: var(--color-system-text-300);
-	margin-top: var(--size-spacing-5);
-	margin-left: var(--size-spacing-5);
+.content {
+	padding: var(--size-spacing-5);
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
 }
 
 /* * */
 /* TITLE */
 
 .title {
-	font-size: var(--font-size-text);
-	font-weight: var(--font-weight-bold);
+    font-size: var(--font-size-subtitle);
+	font-weight: var(--font-weight-subtitle);
 	color: var(--color-system-text-100);
-	margin-left: var(--size-spacing-5);
+}
+
+/* * */
+/* DESCRIPTION */
+
+.description {
+    color: var(--color-system-text-200);
+    font-size: var(--font-size-text);
+    font-weight: var(--font-weight-text);;
 }

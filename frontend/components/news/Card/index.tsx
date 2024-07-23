@@ -9,7 +9,16 @@ import styles from './styles.module.css';
 
 /* * */
 
-export default function Component({ _id, coverImageSrc, publishDate, title }) {
+interface NewsCardProps {
+	_id: string
+	coverImageSrc: string
+	publishDate: string
+	title: string
+}
+
+/* * */
+
+export default function Component({ _id, coverImageSrc, publishDate, title }: NewsCardProps) {
 	//
 
 	//
@@ -20,7 +29,7 @@ export default function Component({ _id, coverImageSrc, publishDate, title }) {
 	const publishDateObject = DateTime.fromISO(publishDate).toJSDate();
 
 	//
-	// C. Render Components
+	// B. Render Components
 
 	return (
 		<Link className={styles.container} href={`/news/${_id}`}>

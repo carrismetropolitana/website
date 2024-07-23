@@ -3,15 +3,20 @@
 
 .carouselItem {
     padding-left: 15px;
+	min-width: 300px;
 }
 
 /* * */
 /* DISCLAIMER */
 
 .disclaimer {
-    padding: 0 20px;
-    font-size: 12px;
+	display: block;
+	font-size: 12px;
+	max-width: var(--size-width-heading);
     color: var(--color-system-text-400);
-    padding-bottom: 20px;
-    padding-top: 10px
+    padding: 20px;
+}
+
+.disclaimer:hover {
+    text-decoration: underline;
 }
