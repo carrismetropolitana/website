@@ -47,7 +47,7 @@ export default function Component() {
 	//
 	// A. Setup variables
 
-	const t = useTranslations('planner');
+	const t = useTranslations('PlannerPage');
 
 	//
 	// B. Transform data
@@ -68,10 +68,10 @@ export default function Component() {
 	// C. Render Components
 
 	return (
-		<LayoutSection heading={t('our_partners')} subheading={t('our_partners_description')} withTopBorder={false}>
+		<LayoutSection heading={t('heading')} subheading={t('subheading')} withTopBorder={false}>
 			<Carousel skeletonComponent={<PlannerCardSkeleton />} skeletonQty={4} slides={carouselSlides} slideSize={300} />
 			<Link className={styles.disclaimer} href="https://github.com/carrismetropolitana/website/blob/alpha/frontend/components/planner/Page/index.tsx" target="_blank">
-				{t('github_disclaimer')}
+				{t('disclaimer')}
 			</Link>
 		</LayoutSection>
 	);
