@@ -1,12 +1,11 @@
-'use client';
-
 /* * */
 
+import Carousel from '@/components/common/Carousel';
 import LayoutSection from '@/components/layout/Section';
 import PlannerCard from '@/components/planner/Card';
+import PlannerCardSkeleton from '@/components/planner/CardSkeleton';
 import { Link } from '@/translations/navigation';
 import { shuffleArray } from '@/utils/shuffle';
-import { Carousel } from '@mantine/carousel';
 import { useTranslations } from 'next-intl';
 
 import styles from './styles.module.css';
@@ -51,19 +50,26 @@ export default function Component() {
 	const t = useTranslations('planner');
 
 	//
-	// B. Render Components
+	// B. Transform data
+
+	const carouselSlides = partnerApps.map(slideItem => ({
+		_id: slideItem.title,
+		component: (
+			<PlannerCard
+				description={slideItem.description}
+				imageUrl={slideItem.imageUrl}
+				title={slideItem.title}
+				url={slideItem.url}
+			/>
+		),
+	}));
+
+	//
+	// C. Render Components
 
 	return (
 		<LayoutSection heading={t('our_partners')} subheading={t('our_partners_description')} withTopBorder={false}>
-			<Carousel align="start" height={320} slideSize="300" withControls={false}>
-				{partnerApps.map(partnerApp => (
-					<Carousel.Slide key={partnerApp.title}>
-						<div className={styles.carouselItem}>
-							<PlannerCard description={partnerApp.description} imageUrl={partnerApp.imageUrl} title={partnerApp.title} url={partnerApp.url} />
-						</div>
-					</Carousel.Slide>
-				))}
-			</Carousel>
+			<Carousel skeletonComponent={<PlannerCardSkeleton />} skeletonQty={4} slides={carouselSlides} slideSize={300} />
 			<Link className={styles.disclaimer} href="https://github.com/carrismetropolitana/website/blob/alpha/frontend/components/planner/Page/index.tsx" target="_blank">
 				{t('github_disclaimer')}
 			</Link>

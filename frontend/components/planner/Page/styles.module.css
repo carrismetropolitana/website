@@ -2,8 +2,7 @@
 /* CAROUSEL ITEM */
 
 .carouselItem {
-    padding-left: 15px;
-	min-width: 300px;
+    padding-left: var(--size-spacing-20);
 }
 
 /* * */

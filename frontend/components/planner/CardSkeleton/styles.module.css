@@ -1,0 +1,40 @@
+/* * */
+/* CONTAINER */
+
+.container {
+  display: flex;
+	flex-direction: column;
+	gap: var(--size-spacing-5);
+}
+
+/* * */
+/* COVER IMAGE */
+
+.coverImage {
+  aspect-ratio: 16 / 9;
+	overflow: hidden;
+	width: 100%;
+	border: 1px solid var(--color-system-border-100);
+	background-color: var(--color-brand);
+}
+
+/* * */
+/* TITLE */
+
+.titleOne {
+	width: 80%;
+	height: 15px;
+}
+
+/* * */
+/* DESCRIPTION */
+
+.descriptionOne {
+	width: 55%;
+	height: 10px;
+}
+
+.descriptionTwo {
+	width: 70%;
+	height: 10px;
+}
