@@ -41,61 +41,61 @@ export default function Component() {
 		<ScreenWrapper>
 			<Columns cols={1}>
 				<CardSummaryFixed
-					bigNumber="0.012%"
-					comparison="10487"
-					endDate="2024-06-30T23:59:59"
+					bigNumber="97%"
+					comparison="489.999"
+					endDate="2024-07-01T03:59:59"
 					isLoading={false}
 					isValidating={false}
 					level={1}
-					startDate="2024-01-01T00:00:00"
+					startDate="2024-06-01T04:00:00"
 					// timestamp="Agora"
-					title="Percentagem de Reclamações por Total de Passageiros Transportados"
+					title="Cumprimento Serviço (TR+Bilh)"
 				/>
 			</Columns>
 			<Columns cols={2}>
 				<CardSummaryFixed
-					bigNumber="-1%"
-					comparison="-1"
-					endDate="2024-06-30T23:59:59"
+					bigNumber="97,1%"
+					comparison="167.926"
+					endDate="2024-07-01T03:59:59"
 					isLoading={false}
 					isValidating={false}
 					level={2}
-					startDate="2024-01-01T00:00:00"
+					startDate="2024-06-01T04:00:00"
 					// timestamp="Agora"
-					title="Área 1 / Reclamações por Total de Passageiros"
+					title="Área 1 / Cumprimento Serviço (TR+Bilh)"
 				/>
 				<CardSummaryFixed
-					bigNumber="-1%"
-					comparison="-1"
-					endDate="2024-06-30T23:59:59"
+					bigNumber="93,8%"
+					comparison="144.170"
+					endDate="2024-07-01T03:59:59"
 					isLoading={false}
 					isValidating={false}
 					level={2}
-					startDate="2024-01-01T00:00:00"
+					startDate="2024-06-01T04:00:00"
 					// timestamp="Agora"
-					title="Área 2 / Reclamações por Total de Passageiros"
+					title="Área 2 / Cumprimento Serviço (TR+Bilh)"
 				/>
 				<CardSummaryFixed
-					bigNumber="-1%"
-					comparison="-1"
-					endDate="2024-06-30T23:59:59"
+					bigNumber="98%"
+					comparison="114.093"
+					endDate="2024-07-01T03:59:59"
 					isLoading={false}
 					isValidating={false}
 					level={2}
-					startDate="2024-01-01T00:00:00"
+					startDate="2024-06-01T04:00:00"
 					// timestamp="Agora"
-					title="Área 3 / Reclamações por Total de Passageiros"
+					title="Área 3 / Cumprimento Serviço (TR+Bilh)"
 				/>
 				<CardSummaryFixed
-					bigNumber="-1%"
-					comparison="-1"
-					endDate="2024-06-30T23:59:59"
+					bigNumber="98%"
+					comparison="63.810"
+					endDate="2024-07-01T03:59:59"
 					isLoading={false}
 					isValidating={false}
 					level={2}
-					startDate="2024-01-01T00:00:00"
+					startDate="2024-06-01T04:00:00"
 					// timestamp="Agora"
-					title="Área 4 / Reclamações por Total de Passageiros"
+					title="Área 4 / Cumprimento Serviço (TR+Bilh)"
 				/>
 			</Columns>
 		</ScreenWrapper>
