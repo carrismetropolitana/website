@@ -15,7 +15,7 @@ export default function Screen1() {
 		<ScreenWrapper>
 			<Columns cols={1}>
 				<CardSummaryFixed
-					bigNumber="0.012%"
+					bigNumber="0,012%"
 					comparison="10 487"
 					endDate="2024-06-30T23:59:59"
 					isLoading={false}
