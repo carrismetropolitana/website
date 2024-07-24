@@ -16,7 +16,7 @@ export default function Screen1() {
 			<Columns cols={1}>
 				<CardSummaryFixed
 					bigNumber="0.012%"
-					comparison="10487"
+					comparison="10 487"
 					endDate="2024-06-30T23:59:59"
 					isLoading={false}
 					isValidating={false}
