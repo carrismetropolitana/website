@@ -149,46 +149,47 @@ export default function Component({ pattern }: { pattern: Pattern }) {
 	return (
 		<>{
 			bounding
-			&& (
-				<div style={{ height: '200px', position: 'relative', width: '100%' }}>
-					<Map
-						attributionControl={false}
-						id="map"
-						mapStyle="https://maps.carrismetropolitana.pt/styles/default/style.json"
-						style={{ height: '100%', width: '100%' }}
-						initialViewState={{
-							bounds: [[bounding[0], bounding[1]], [bounding[2], bounding[3]]],
-							fitBoundsOptions: {
-								padding: {
-									bottom: 20,
-									left: 20,
-									right: 20,
-									top: 20,
+				? (
+					<div style={{ height: '200px', position: 'relative', width: '100%' }}>
+						<Map
+							attributionControl={false}
+							id="map"
+							mapStyle="https://maps.carrismetropolitana.pt/styles/default/style.json"
+							style={{ height: '100%', width: '100%' }}
+							initialViewState={{
+								bounds: [[bounding[0], bounding[1]], [bounding[2], bounding[3]]],
+								fitBoundsOptions: {
+									padding: {
+										bottom: 20,
+										left: 20,
+										right: 20,
+										top: 20,
+									},
 								},
-							},
-							zoom: 11,
-						}}
-					>
-						{ pathGeoJson
-						&& (
-							<Source data={pathGeoJson} id="shape" type="geojson">
-								<Layer {...shapeStyle} />
-								<Layer {...shapeArrowStyle} />
+								zoom: 11,
+							}}
+						>
+							{ pathGeoJson
+							&& (
+								<Source data={pathGeoJson} id="shape" type="geojson">
+									<Layer {...shapeStyle} />
+									<Layer {...shapeArrowStyle} />
+								</Source>
+							)}
+							<Source data={stopsGeoJson} id="stops" type="geojson">
+								<Layer {...stopsStyle} />
 							</Source>
-						)}
-						<Source data={stopsGeoJson} id="stops" type="geojson">
-							<Layer {...stopsStyle} />
-						</Source>
-						<Source data={relevantVehiclesGeoJson} id="vehicles" type="geojson">
-							<Layer {...vehiclesStyle} />
-						</Source>
-					</Map>
-					<div className={styles.mapOverlay}>
-						<LiveIcon color="var(--color-realtime-100)" />
-						{nActiveVehicles != 0 ? nActiveVehicles : ''}{t('x_vehicles_active', { count: nActiveVehicles })}
+							<Source data={relevantVehiclesGeoJson} id="vehicles" type="geojson">
+								<Layer {...vehiclesStyle} />
+							</Source>
+						</Map>
+						<div className={styles.mapOverlay}>
+							<LiveIcon />
+							{nActiveVehicles != 0 ? nActiveVehicles : ''}{t('x_vehicles_active', { count: nActiveVehicles })}
+						</div>
 					</div>
-				</div>
-			)
+				)
+				: <div style={{ height: '200px', position: 'relative', width: '100%' }} />
 		}
 		</>
 	);

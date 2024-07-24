@@ -4,7 +4,7 @@ import styles from './styles.module.css';
 
 /* * */
 
-export default function Component({ fixed, full, maxed, size = 30, visible }) {
+export default function Component({ fixed = false, full = false, maxed = false, size = 30, visible = false }) {
 	//
 
 	if (!visible) return <div />;

@@ -8,8 +8,8 @@ export default function Component({ color = 'var(--color-realtime-100)' }) {
 
 	return (
 		<div className={styles.container}>
-			<div className={styles.dot} style={{ backgroundColor: color }} />
 			<div className={styles.ripple} style={{ backgroundColor: color }} />
+			<div className={styles.dot} style={{ backgroundColor: color }} />
 		</div>
 	);
 

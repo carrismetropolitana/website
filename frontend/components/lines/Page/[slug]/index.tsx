@@ -1,8 +1,9 @@
 'use client';
+import ScheduleDrawer from '@/components/common/ScheduleDrawer';
 import SelectDate from '@/components/common/SelectDate';
 import { useProfileContext } from '@/contexts/ProfileContext';
-import { AlertDTO, Line, Pattern } from '@/utils/types';
-import { Select } from '@mantine/core';
+import { AlertDTO, Line, Pattern, Stop } from '@/utils/types';
+import { Drawer, Select } from '@mantine/core';
 import { IconArrowBarToRight, IconVolume, IconZoomQuestionFilled } from '@tabler/icons-react';
 import dayjs from 'dayjs';
 import pt from 'dayjs/locale/pt';
@@ -20,7 +21,9 @@ import styles from './styles.module.css';
 export default function Component({ lineInfo }: { lineInfo: Line }) {
 	const [date, setDate] = useState<Date>(new Date());
 	const [patternId, setPatternId] = useState<null | string>(null);
-	const [selectedStop, setSelectedStop] = useState<null | string>(null);
+	const [selectedStop, setSelectedStop] = useState<Stop | null>(null);
+	const [selectedStopSequence, setSelectedStopSequence] = useState<null | number>(null);
+	const [drawerOpen, setDrawerOpen] = useState(false);
 
 	const patterns = lineInfo.patterns.map(pattern_id => ({ id: pattern_id, pattern: useSWR<Pattern>('https://api.carrismetropolitana.pt/patterns/' + pattern_id).data }));
 	const selectedPattern = patterns.find(r => r.id === patternId)?.pattern;
@@ -42,7 +45,7 @@ export default function Component({ lineInfo }: { lineInfo: Line }) {
 	}
 
 	return (
-		<div className={styles.wrapper}>
+		<div className={styles.pageWrapper}>
 			<div className={styles.header}>
 				<div className={styles.lineHeader}>
 					<div className={styles.tag} style={{ backgroundColor: lineInfo.color, color: lineInfo.text_color }}>{lineInfo.short_name}</div>
@@ -116,7 +119,27 @@ export default function Component({ lineInfo }: { lineInfo: Line }) {
 				</div>
 				{ selectedPattern
 				&& (
-					<StopList pattern={selectedPattern} selectedStop={selectedStop} setSelectedStop={setSelectedStop} />
+					<>
+						<StopList
+							pattern={selectedPattern}
+							selectedStop={selectedStop}
+							setDrawerOpen={setDrawerOpen}
+							setSelectedStop={setSelectedStop}
+							setSelectedStopSequence={setSelectedStopSequence}
+						/>
+						{ selectedStop && selectedStopSequence !== null
+						&& (
+							<Drawer
+								onClose={() => setDrawerOpen(false)}
+								opened={drawerOpen}
+								position="bottom"
+								radius="md"
+								title={selectedStop.name}
+							>
+								<ScheduleDrawer date={date} pattern={selectedPattern} stop={selectedStop} stopSequence={selectedStopSequence} />
+							</Drawer>
+						)}
+					</>
 				)}
 			</>
 		</div>

@@ -1,6 +1,6 @@
 import FacilityIcon from '@/components/common/FacilityIcon';
 import LiveIcon from '@/components/common/LiveIcon';
-import { Pattern, PatternRealtime } from '@/utils/types';
+import { Pattern, PatternRealtime, Stop } from '@/utils/types';
 import { UnstyledButton } from '@mantine/core';
 import { IconClock, IconClockHour9, IconClockSearch, IconInfoCircle } from '@tabler/icons-react';
 import dayjs from 'dayjs';
@@ -32,11 +32,13 @@ function formatDate(unixTs: number) {
 	return dayjs(unixTs).format('HH:mm');
 }
 
-export default function Component({ pattern, selectedStop, setSelectedStop }: { pattern: Pattern, selectedStop: null | string, setSelectedStop: (stopId: string) => void }) {
+export default function Component({ pattern, selectedStop, setDrawerOpen, setSelectedStop, setSelectedStopSequence }:
+{ pattern: Pattern, selectedStop: Stop | null, setDrawerOpen: (open: boolean) => void, setSelectedStop: (stop: Stop) => void, setSelectedStopSequence: (sequence: number) => void }) {
+	const t = useTranslations('line');
+
 	const { data: patternRealtime } = useSWR<PatternRealtime[]>('https://api.carrismetropolitana.pt/patterns/' + pattern.id + '/realtime', {
 		refreshInterval: 10000,
 	});
-	const t = useTranslations('line');
 	const sortedStops = pattern.path.sort((a, b) => a.stop_sequence - b.stop_sequence);
 	const relevantRealtimes = useMemo(() => patternRealtime?.filter(realtime => realtime.pattern_id === pattern.id), [patternRealtime, pattern.id]);
 	const now = Date.now();
@@ -65,9 +67,17 @@ export default function Component({ pattern, selectedStop, setSelectedStop }: { 
 			const nextArrival = nextArrivals?.find(arrival => arrival.unixTs > now);
 			const realtimeArrivals = nextArrivals?.filter(arrival => arrival.type === 'realtime');
 			const scheduledArrivals = nextArrivals?.filter(arrival => arrival.type === 'scheduled');
-			const isSelected = selectedStop == stopId;
+			const isSelected = selectedStop == stop;
 			return (
-				<div key={stopId} className={styles.stop} data-selected={isSelected} onClick={() => setSelectedStop(stopId)}>
+				<div
+					key={stopId + path.stop_sequence}
+					className={styles.stop}
+					data-selected={isSelected}
+					onClick={() => {
+						setSelectedStop(stop);
+						setSelectedStopSequence(path.stop_sequence);
+					}}
+				>
 					<div className={styles.spineLine} style={{ backgroundColor: pattern.color }}>
 						<div style={{ backgroundColor: pattern.text_color }} />
 					</div>
@@ -119,7 +129,7 @@ export default function Component({ pattern, selectedStop, setSelectedStop }: { 
 										}
 									</div>
 									<div className={styles.buttons}>
-										<UnstyledButton>
+										<UnstyledButton onClick={() => setDrawerOpen(true)}>
 											<IconClockSearch size={18} />
 											Horários
 										</UnstyledButton>
@@ -134,6 +144,7 @@ export default function Component({ pattern, selectedStop, setSelectedStop }: { 
 				</div>
 			);
 		})}
+
 		</div>
 	);
 }

@@ -1,11 +1,4 @@
-{ /* <div key={key} ref={(element: Element | null) => registerChild && registerChild(element || undefined)} className={styles.line} style={style}>
-<div className={styles.label}>
-    <div className={styles.badge} style={{ backgroundColor: line.color, color: line.text_color }}>{line.short_name}</div>
-    <div className={styles.name}>{line.long_name}</div>
-</div>
-{arrow}
-</div> */ }
-
+import { Link } from '@/translations/navigation';
 import { IconArrowRight } from '@tabler/icons-react';
 import { LegacyRef } from 'react';
 
@@ -17,12 +10,12 @@ export default function Component({ line, refFn, style }: {
 	refFn?: LegacyRef<HTMLAnchorElement>
 	style?: React.CSSProperties }) {
 	return (
-		<a ref={refFn} className={styles.line} href={`/lines/${line.id}`} style={style}>
+		<Link ref={refFn} className={styles.line} href={`/lines/${line.id}`} style={style}>
 			<div className={styles.label}>
 				<div className={styles.badge} style={{ backgroundColor: line.color, color: line.text_color }}>{line.short_name}</div>
 				<div className={styles.name}>{line.long_name}</div>
 			</div>
 			<IconArrowRight className={styles.arrow} size={24} />
-		</a>
+		</Link>
 	);
 }

@@ -273,6 +273,10 @@
     "from_until": "Entre {start} e {end}",
     "route_explainer": "O que é o percurso/destino de uma linha?",
     "next_buses": "Próximas circulações"
-  }
+  },
+	"schedule_drawer":{
+		"hours": "Horas",
+		"minutes": "Minutos"
+	}
 
 }

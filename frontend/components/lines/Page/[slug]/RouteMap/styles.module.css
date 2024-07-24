@@ -9,9 +9,8 @@
     background-color: var(--color-system-background-100);
     border-radius: 1000px;
     padding: 4px 8px 4px 4px;
-    color: #00CD32;
+    color: var(--color-realtime-100);
     font-size: 10px;
     font-weight: 600;
-    z-index: 99999;
     height: 20px;
 }
