@@ -1,0 +1,82 @@
+/* * */
+/* CONTAINER */
+
+.container {
+  display: flex;
+  align-items: baseline;
+  justify-content: flex-start;
+}
+
+/* * */
+/* VALUE */
+
+.value {
+  font-weight: var(--font-weight-bold);
+  line-height: 1;
+}
+
+/* * */
+/* LABEL */
+
+.label {
+  font-weight: var(--font-weight-bold);
+  line-height: 1;
+}
+
+/* * */
+/* LEVEL */
+
+.level_1 .value {
+  font-size: 150px;
+}
+
+.level_1 .label {
+  font-size: 20px;
+}
+
+.level_2 .value {
+  font-size: 100px;
+}
+
+.level_2 .label {
+  font-size: 20px;
+}
+
+.level_3 .value {
+  font-size: 30px;
+}
+
+.level_3 .label {
+  font-size: 20px;
+}
+
+/* * */
+/* TYPE */
+
+.type_normal .value,
+.type_normal .label {
+  color: var(--system-dark);
+}
+
+.type_bad .value,
+.type_bad .label {
+  color: var(--palette-orange);
+}
+
+.type_good .value,
+.type_good .label {
+  color: var(--palette-green);
+}
+
+/* * */
+/* DIRECTION */
+
+.direction_row {
+  flex-direction: row;
+  gap: 5px;
+}
+
+.direction_column {
+  flex-direction: column;
+  gap: 2px;
+}

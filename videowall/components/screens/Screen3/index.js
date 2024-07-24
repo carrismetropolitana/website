@@ -2,8 +2,10 @@
 
 /* * */
 
+import CardSummaryFixed from '@/components/cards/CardSummaryFixed';
 import Columns from '@/components/layout/Columns';
 import ScreenWrapper from '@/components/layout/ScreenWrapper';
+
 // import getOperationalDateStringForCurrentMonth from '@/services/getOperationalDateStringForCurrentMonth';
 // import { BarChart } from '@mantine/charts';
 // import { useMemo } from 'react';
@@ -38,83 +40,63 @@ export default function Component() {
 	return (
 		<ScreenWrapper>
 			<Columns cols={1}>
-				{/* <BarChart
-					dataKey="label"
-					h={350}
-					data={currentMonthPaxCmData?.data || [
-						{ label: 'January', value: 1 },
-						{ label: 'February', value: 1 },
-						{ label: 'March', value: 1 },
-						{ label: 'April', value: 1 },
-						{ label: 'May', value: 1 },
-						{ label: 'June', value: 1 },
-					]}
-					series={[
-						{ color: 'yellow.6', name: 'value' },
-					]}
+				<CardSummaryFixed
+					bigNumber="0.012%"
+					comparison="10487"
+					endDate="2024-06-30T23:59:59"
+					isLoading={false}
+					isValidating={false}
+					level={1}
+					startDate="2024-01-01T00:00:00"
+					// timestamp="Agora"
+					title="Percentagem de Reclamações por Total de Passageiros Transportados"
 				/>
 			</Columns>
 			<Columns cols={2}>
-				<BarChart
-					dataKey="label"
-					h={250}
-					data={currentMonthPax41Data?.data || [
-						{ label: 'January', value: 1 },
-						{ label: 'February', value: 1 },
-						{ label: 'March', value: 1 },
-						{ label: 'April', value: 1 },
-						{ label: 'May', value: 1 },
-						{ label: 'June', value: 1 },
-					]}
-					series={[
-						{ color: 'blue.6', name: 'value' },
-					]}
+				<CardSummaryFixed
+					bigNumber="-1%"
+					comparison="-1"
+					endDate="2024-06-30T23:59:59"
+					isLoading={false}
+					isValidating={false}
+					level={2}
+					startDate="2024-01-01T00:00:00"
+					// timestamp="Agora"
+					title="Área 1 / Reclamações por Total de Passageiros"
 				/>
-				<BarChart
-					dataKey="label"
-					h={250}
-					data={currentMonthPax42Data?.data || [
-						{ label: 'January', value: 1 },
-						{ label: 'February', value: 1 },
-						{ label: 'March', value: 1 },
-						{ label: 'April', value: 1 },
-						{ label: 'May', value: 1 },
-						{ label: 'June', value: 1 },
-					]}
-					series={[
-						{ color: 'red.6', name: 'value' },
-					]}
+				<CardSummaryFixed
+					bigNumber="-1%"
+					comparison="-1"
+					endDate="2024-06-30T23:59:59"
+					isLoading={false}
+					isValidating={false}
+					level={2}
+					startDate="2024-01-01T00:00:00"
+					// timestamp="Agora"
+					title="Área 2 / Reclamações por Total de Passageiros"
 				/>
-				<BarChart
-					dataKey="label"
-					h={250}
-					data={currentMonthPax43Data?.data || [
-						{ label: 'January', value: 1 },
-						{ label: 'February', value: 1 },
-						{ label: 'March', value: 1 },
-						{ label: 'April', value: 1 },
-						{ label: 'May', value: 1 },
-						{ label: 'June', value: 1 },
-					]}
-					series={[
-						{ color: 'violet.6', name: 'value' },
-					]}
+				<CardSummaryFixed
+					bigNumber="-1%"
+					comparison="-1"
+					endDate="2024-06-30T23:59:59"
+					isLoading={false}
+					isValidating={false}
+					level={2}
+					startDate="2024-01-01T00:00:00"
+					// timestamp="Agora"
+					title="Área 3 / Reclamações por Total de Passageiros"
 				/>
-				<BarChart
-					dataKey="label"
-					h={250}
-					data={currentMonthPax44Data?.data || [
-						{ label: 'January', value: 1 },
-						{ label: 'February', value: 1 },
-						{ label: 'March', value: 1 },
-						{ label: 'April', value: 1 },
-						{ label: 'May', value: 1 },
-						{ label: 'June', value: 1 },
-					]}
-					series={[
-						{ color: 'violet.6', name: 'value' },
-					]}
-				/> */}
+				<CardSummaryFixed
+					bigNumber="-1%"
+					comparison="-1"
+					endDate="2024-06-30T23:59:59"
+					isLoading={false}
+					isValidating={false}
+					level={2}
+					startDate="2024-01-01T00:00:00"
+					// timestamp="Agora"
+					title="Área 4 / Reclamações por Total de Passageiros"
+				/>
 			</Columns>
 		</ScreenWrapper>
 	);
