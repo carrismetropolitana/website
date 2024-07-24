@@ -17,6 +17,14 @@
 		"subheading": "Porque os nossos dados são abertos, existem várias aplicações que oferecem experiências personalizadas para melhorar o seu dia-a-dia nos transportes.",
 		"disclaimer": "Edite esta página no Github se pretende incluir a sua aplicação. A ordem é randomizada. Apenas são permitidas entradas que disponibilizem simultaneamente horários planeados e em tempo real ou posição de veículos."
 	},
+	"FaqPage":{
+		"heading": "Perguntas Frequentes",
+		"subheading":"Nesta página encontra respostas às perguntas mais frequentes sobre o nosso serviço. Caso pretenda esclarecimentos adicionais não hesite em falar connosco.",
+		"contacts": "Contactos"
+	},
+	"FaqTopic": {
+		"label": "Tópico"
+	},
 	"HeaderLogo": {
 		"logo": {
 			"alt": "Carris Metropolitana"
@@ -46,36 +54,36 @@
 		"contacts": "Contactos"
 	},
 	"HeaderLocaleSwitcher": {
-			"pt": {
-				"label": "🇵🇹",
-				"alt": "Português"
-			},
-			"en": {
-				"label": "🇬🇧",
-				"alt": "English"
-			},
-			"fr": {
-				"label": "🇫🇷",
-				"alt": "Français"
-			}
+		"pt": {
+			"label": "🇵🇹",
+			"alt": "Português"
 		},
-		"Footer": {
-    "primary_links": {
+		"en": {
+			"label": "🇬🇧",
+			"alt": "English"
+		},
+		"fr": {
+			"label": "🇫🇷",
+			"alt": "Français"
+		}
+	},
+	"Footer": {
+		"primary_links": {
 			"about": "Sobre a Carris Metropolitana",
 			"open-data": "Dados Abertos",
 			"status": "Estado"
-    },
-    "secondary_links": {
+		},
+		"secondary_links": {
 			"conditions": "Condições Gerais de Transporte",
 			"privacy": "Política de Privacidade",
 			"cookies": "Política de Cookies",
 			"legal": "Aviso Legal"
-    },
-    "copyright": "© Carris Metropolitana {year} - Todos os direitos reservados"
-  },
+		},
+		"copyright": "© Carris Metropolitana {year} - Todos os direitos reservados"
+	},
 	"FooterDebugToggle":{
 		"enabled": "Desligar Debug",
-    "disabled": "Ligar Debug"
+		"disabled": "Ligar Debug"
 	},
 	"HomeQuickSearchFavoritesBar":{
 		"empty": "Ainda não tem linhas favoritas..."
@@ -243,11 +251,6 @@
         }
       }
     }
-  },
-  "faq":{
-    "title": "Perguntas Frequentes",
-    "description":"Nesta página encontra respostas às perguntas mais frequentes sobre o nosso serviço. Caso pretenda esclarecimentos adicionais não hesite em falar connosco.",
-    "contacts": "Contactos"
   },
   "common":{
     "back": "Voltar"

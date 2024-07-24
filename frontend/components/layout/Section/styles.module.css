@@ -23,6 +23,10 @@
 	gap: var(--size-spacing-10);
 }
 
+.container.withChildrenPadding {
+	gap: 0;
+}
+
 @media (max-width: 500px) {
 	.container {
 		gap: var(--size-spacing-15);
@@ -81,4 +85,8 @@
 
 .childrenWrapper {
 	width: 100%;
+}
+
+.withChildrenPadding .childrenWrapper {
+	padding: var(--size-spacing-20);
 }
