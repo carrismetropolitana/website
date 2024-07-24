@@ -276,7 +276,8 @@
   },
 	"schedule_drawer":{
 		"hours": "Horas",
-		"minutes": "Minutos"
+		"minutes": "Minutos",
+		"no_data": "Sem horários disponíveis"
 	}
 
 }
