@@ -3,7 +3,7 @@ import ScheduleDrawer from '@/components/common/ScheduleDrawer';
 import SelectDate from '@/components/common/SelectDate';
 import { useProfileContext } from '@/contexts/ProfileContext';
 import { AlertDTO, Line, Pattern, Stop } from '@/utils/types';
-import { Drawer, Select } from '@mantine/core';
+import { Select } from '@mantine/core';
 import { IconArrowBarToRight, IconVolume, IconZoomQuestionFilled } from '@tabler/icons-react';
 import dayjs from 'dayjs';
 import pt from 'dayjs/locale/pt';
@@ -25,8 +25,13 @@ export default function Component({ lineInfo }: { lineInfo: Line }) {
 	const [selectedStopSequence, setSelectedStopSequence] = useState<null | number>(null);
 	const [drawerOpen, setDrawerOpen] = useState(false);
 
-	const patterns = lineInfo.patterns.map(pattern_id => ({ id: pattern_id, pattern: useSWR<Pattern>('https://api.carrismetropolitana.pt/patterns/' + pattern_id).data }));
-	const selectedPattern = patterns.find(r => r.id === patternId)?.pattern;
+	const patterns = lineInfo.patterns.map(pattern_id => ({
+		id: pattern_id,
+		pattern: useSWR<Pattern[]>('https://api.carrismetropolitana.pt/v2/patterns/' + pattern_id).data,
+	}));
+	const dayString = dayjs(date).format('YYYYMMDD');
+	const currentPatterns = patterns.map(p => p.pattern?.find(pat => pat.valid_on.includes(dayString))).filter(pat => pat != undefined);
+	const selectedPattern = currentPatterns.find(pat => pat.pattern_id === patternId);
 
 	const alerts = useSWR<AlertDTO>('https://api.carrismetropolitana.pt/alerts').data;
 
@@ -85,7 +90,7 @@ export default function Component({ lineInfo }: { lineInfo: Line }) {
 					<Select
 						checkIconPosition="right"
 						classNames={styles}
-						data={patterns.map(route => ({ disabled: route.pattern == undefined, label: route.pattern ? route.pattern.headsign : '', value: route.id }))}
+						data={currentPatterns.map(route => ({ disabled: route.pattern_id == undefined, label: route.headsign ? route.headsign : '', value: route.pattern_id }))}
 						leftSection={<IconArrowBarToRight size={20} />}
 						onChange={setPatternId}
 						placeholder={t('pick_route')}
@@ -121,6 +126,7 @@ export default function Component({ lineInfo }: { lineInfo: Line }) {
 				&& (
 					<>
 						<StopList
+							date={date}
 							pattern={selectedPattern}
 							selectedStop={selectedStop}
 							setDrawerOpen={setDrawerOpen}
@@ -129,15 +135,7 @@ export default function Component({ lineInfo }: { lineInfo: Line }) {
 						/>
 						{ selectedStop && selectedStopSequence !== null
 						&& (
-							<Drawer
-								onClose={() => setDrawerOpen(false)}
-								opened={drawerOpen}
-								position="bottom"
-								radius="md"
-								title={selectedStop.name}
-							>
-								<ScheduleDrawer date={date} pattern={selectedPattern} stop={selectedStop} stopSequence={selectedStopSequence} />
-							</Drawer>
+							<ScheduleDrawer date={date} open={drawerOpen} pattern={selectedPattern} setOpen={setDrawerOpen} stop={selectedStop} stopSequence={selectedStopSequence} />
 						)}
 					</>
 				)}

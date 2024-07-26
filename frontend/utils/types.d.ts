@@ -111,18 +111,19 @@ export interface Pattern {
 	direction: number
 	facilities: string[]
 	headsign: string
-	id: string
 	line_id: string
 	localities: string[]
-	municipalities: string[]
+	municipality_ids: string[]
 	path: Path[]
+	pattern_group_id: string
+	pattern_id: string
 	route_id: string
 	shape_id: string
 	short_name: string
 	text_color: string
 	trips: Trip[]
 	valid_on: string[]
-};
+}
 
 export interface Path {
 	allow_drop_off: boolean
@@ -134,7 +135,7 @@ export interface Path {
 
 export interface Stop {
 	district_id: string
-	district_name: DistrictName
+	district_name: string
 	facilities: Facility[]
 	id: string
 	lat: string
@@ -148,17 +149,13 @@ export interface Stop {
 	parish_id: null
 	parish_name: null
 	patterns: string[]
-	region_id: RegionID
-	region_name: RegionName
+	region_id: string
+	region_name: string
 	routes: string[]
-	short_name: ShortName
+	short_name: string
 	tts_name: string
 	wheelchair_boarding: string
 };
-
-export enum DistrictName {
-	Lisboa = 'Lisboa',
-}
 
 export enum Facility {
 	AIRPORT = 'airport',
@@ -184,34 +181,17 @@ export enum OperationalStatus {
 	Active = 'ACTIVE',
 }
 
-export enum RegionID {
-	Pt170 = 'PT170',
-}
-
-export enum RegionName {
-	Aml = 'AML',
-}
-
-export enum ShortName {
-	ADefinir = 'a definir',
-	HospitalAmadoraSintraP1 = 'Hospital Amadora-Sintra P1',
-	RLuísCamõesFtCTT = 'R. Luís Camões (Ft. CTT)',
-}
-
 export interface Trip {
-	calendar_description: string
-	calendar_id: string
 	dates: string[]
-	id: string
 	schedule: Schedule[]
+	trip_ids: string[]
 };
 
 export interface Schedule {
 	arrival_time: string
-	arrival_time_operation: string
+	arrival_time_24h: string
 	stop_id: string
 	stop_sequence: number
-	travel_time: string
 };
 
 export interface Shape {
