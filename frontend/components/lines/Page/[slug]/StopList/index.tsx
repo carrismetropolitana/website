@@ -91,7 +91,7 @@ export default function Component(
 						<div className={styles.name}>{stop.name}</div>
 						<div className={styles.location}>{stop.municipality_name}, {stop.district_name}</div>
 						{ !isSelected ? (
-							<> { nextArrival != undefined && (nextArrival.type === 'realtime'
+							<> { nextArrival != undefined && isToday && (nextArrival.type === 'realtime'
 								? <div className={styles.live}><LiveIcon /> {formatDelta(nextArrival.unixTs - now)}</div>
 								: nextArrival.unixTs && <div className={styles.scheduled}><IconClock size={16} />{formatDate(nextArrival.unixTs)}</div>)}
 							</>
