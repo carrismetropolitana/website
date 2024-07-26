@@ -40,7 +40,6 @@ export default function Timetable(
 			// Cycle through each formatted schedule in the timetable variable above
 			// to check if there is already an entry for the given 'arrival_hour'
 			const existingTimetableEntry = timetableTemp.find(item => item.hour.value === arrival_hour);
-			console.log(item);
 			if (existingTimetableEntry) existingTimetableEntry.minutes.push(item.arrival_time.slice(3, 5)); // 12:[34]
 			else timetableTemp.push({ hour: { label: arrival_hour, value: item.arrival_time_24h.slice(0, 2) }, minutes: [item.arrival_time.slice(3, 5)] });
 		});
