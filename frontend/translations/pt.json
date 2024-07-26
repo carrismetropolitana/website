@@ -275,7 +275,8 @@
     "next_buses": "Próximas circulações",
 		"schedules": "Horários",
 		"stop_info": "Sobre a Paragem",
-		"scheduled_times": "Horários Planeados"
+		"scheduled_times": "Horários Planeados",
+		"num_passengers":"passageiros transportados nesta linha nos últimos 15 dias"
 
   },
 	"schedule":{

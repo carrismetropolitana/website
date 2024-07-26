@@ -252,3 +252,10 @@ export interface PatternRealtime {
 	trip_id: string
 	vehicle_id: null | string
 };
+
+export interface DemandByLine {
+	count: number
+	end_date: string
+	line_id: string
+	start_date: string
+};

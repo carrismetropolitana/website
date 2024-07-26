@@ -87,3 +87,17 @@
 .input{
     color: var(--color-system-text-200)
 }
+
+.metrics{
+    padding-left: 20px;
+    padding-right: 20px;
+}
+.metrics h1 {
+    font-weight: 700;
+    font-size: 60px;
+}
+.metrics h3 {
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--color-system-text-100)
+}

@@ -2,13 +2,13 @@
 import ScheduleDrawer from '@/components/common/ScheduleDrawer';
 import SelectDate from '@/components/common/SelectDate';
 import { useProfileContext } from '@/contexts/ProfileContext';
-import { AlertDTO, Line, Pattern, Stop } from '@/utils/types';
+import { AlertDTO, DemandByLine, Line, Pattern, Stop } from '@/utils/types';
 import { Select } from '@mantine/core';
 import { IconArrowBarToRight, IconVolume, IconZoomQuestionFilled } from '@tabler/icons-react';
 import dayjs from 'dayjs';
 import pt from 'dayjs/locale/pt';
 import { useTranslations } from 'next-intl';
-import React, { useState } from 'react';
+import React, { useMemo, useState } from 'react';
 import useSWR from 'swr';
 
 import AlertCarousel from './AlertCarousel';
@@ -34,8 +34,10 @@ export default function Component({ lineInfo }: { lineInfo: Line }) {
 	const selectedPattern = currentPatterns.find(pat => pat.pattern_id === patternId);
 
 	const alerts = useSWR<AlertDTO>('https://api.carrismetropolitana.pt/alerts').data;
-
 	const relevantAlerts = alerts?.entity.filter(entity => entity.alert.informedEntity.some(informedEntity => lineInfo.routes.includes(informedEntity.routeId ?? '')));
+
+	const metrics = useSWR<DemandByLine[]>('https://api.carrismetropolitana.pt/v2/metrics/demand/by_line').data;
+	const relevantDemand = metrics?.find(metric => metric.line_id === lineInfo.id);
 
 	const t = useTranslations('line');
 	const { profile: { favoriteLines }, setFavoriteLines } = useProfileContext();
@@ -140,6 +142,15 @@ export default function Component({ lineInfo }: { lineInfo: Line }) {
 					</>
 				)}
 			</>
+			{
+				relevantDemand
+				&& (
+					<div className={styles.metrics}>
+						<h1 style={{ color: lineInfo.color }}>{relevantDemand.count}</h1>
+						<h3>{t('num_passengers')}</h3>
+					</div>
+				)
+			}
 		</div>
 	);
 }
