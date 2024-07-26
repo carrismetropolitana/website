@@ -15,7 +15,7 @@
 	"PlannerPage":{
 		"heading": "Os nossos parceiros",
 		"subheading": "Porque os nossos dados são abertos, existem várias aplicações que oferecem experiências personalizadas para melhorar o seu dia-a-dia nos transportes.",
-		"disclaimer": "Edite esta página no Github se pretende incluir a sua aplicação. A ordem é randomizada. Apenas são permitidas entradas que disponibilizem simultaneamente horários planeados e em tempo real ou posição de veículos."
+		"disclaimer": "Edite esta página no Github se pretende incluir a sua aplicação. A ordem é aleatória. Apenas são permitidas entradas que disponibilizem simultaneamente horários planeados e em tempo real ou posição de veículos."
 	},
 	"FaqPage":{
 		"heading": "Perguntas Frequentes",

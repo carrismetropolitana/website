@@ -1,5 +1,6 @@
+import { useProfileContext } from '@/contexts/ProfileContext';
+import { createDocCollection } from '@/hooks/useOtherSearch';
 import { Line } from '@/utils/types.js';
-import MiniSearch from 'minisearch';
 import { useEffect, useMemo } from 'react';
 import { AutoSizer, CellMeasurer, CellMeasurerCache, List, WindowScroller } from 'react-virtualized';
 
@@ -11,45 +12,24 @@ const cache = new CellMeasurerCache({
 });
 
 export default function Component({ data, searchText, setFoundNumber }: { data: Line[], searchText: string, setFoundNumber: (_: number) => void }) {
-	const minisearch = useMemo(() => {
-		const minisearch = new MiniSearch<Line>({
-			fields: ['short_name', 'long_name'],
-			idField: 'id',
-			processTerm(term, fieldName) {
-				if (fieldName === 'long_name') {
-					return term.normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase();
-				}
-				return term.toLowerCase();
-			},
-			storeFields: ['short_name', 'long_name', 'color', 'text_color'],
+	const { profile } = useProfileContext();
+
+	const { search } = useMemo(() => {
+		const boostedData = data.map(e => ({ ...e, boost: profile.favoriteLines.includes(e.id) }));
+		return createDocCollection(boostedData, {
+			id: 3,
+			localities: 1,
+			long_name: 1,
+			short_name: 1,
 		});
-		minisearch.addAll(data);
-		return minisearch;
-	}, []);
+	}, [data, profile.favoriteLines]);
+	const results = search(searchText);
 
-	console.time('filter');
-	const results = useMemo(() => {
-		const shortRes = minisearch.search(searchText, { fields: ['short_name'], prefix: true });
-		const longRes = minisearch.search(searchText, { fields: ['long_name'], fuzzy: 0.2 });
-		// Merge the two arrays
-		const merged = shortRes.concat(longRes.filter(e => !shortRes.some(e2 => e2.id === e.id)));
-
-		return merged;
-	}, [minisearch, searchText]);
-	// const filteredData = useMemo(() => results.map(e => e.) , [data, results, searchText]);
 	const renderableData = useMemo(() => searchText !== ''
-		? results.map(e => (
-			{
-				color: e.color,
-				id: e.id,
-				long_name: e.long_name,
-				short_name: e.short_name,
-				text_color: e.text_color,
-			})) : data ?? [], [data, results, searchText]);
+		? results : data ?? [], [data, results, searchText]);
 	useEffect(() => {
 		setFoundNumber(renderableData.length);
 	}, [renderableData.length, setFoundNumber]);
-	console.timeEnd('filter');
 
 	function onResize() {
 		cache.clearAll();

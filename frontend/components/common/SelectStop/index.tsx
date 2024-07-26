@@ -3,7 +3,8 @@
 /* * */
 
 import StopDisplay from '@/components/layout/StopDisplay';
-import useSearch from '@/hooks/useSearch';
+import { createDocCollection } from '@/hooks/useOtherSearch';
+import { Stop } from '@/utils/types';
 import { ActionIcon, Combobox, Group, TextInput, useCombobox } from '@mantine/core';
 import { useDebouncedValue } from '@mantine/hooks';
 import { IconBusStop, IconSelector, IconX } from '@tabler/icons-react';
@@ -14,7 +15,7 @@ import styles from './styles.module.css';
 
 /* * */
 
-export default function Component({ data = [], onSelectStopId = () => null, selectedStopId, variant, ...props }) {
+export default function Component({ data = [] as Stop[], onSelectStopId = (_: null | string) => null, selectedStopId, variant, ...props }) {
 	//
 
 	//
@@ -28,36 +29,40 @@ export default function Component({ data = [], onSelectStopId = () => null, sele
 	//
 	// B. Transform data
 
-	const allStopsDataFormatted = useMemo(() => {
-		console.log(data);
-		if (data) {
-			return data.map((stop) => {
-				return {
-					_id: stop.id,
-					locality: stop.locality,
-					municipality_name: stop.municipality_name,
-					name: stop.name,
-					short_name: stop.short_name,
-					tts_name: stop.tts_name,
-				};
-			});
-		}
-	}, [data]);
+	// const allStopsDataFormatted = useMemo(() => {
+	// 	console.log(data);
+	// 	if (data) {
+	// 		return data.map((stop) => {
+	// 			return {
+	// 				_id: stop.id,
+	// 				locality: stop.locality,
+	// 				municipality_name: stop.municipality_name,
+	// 				name: stop.name,
+	// 				short_name: stop.short_name,
+	// 				tts_name: stop.tts_name,
+	// 			};
+	// 		});
+	// 	}
+	// }, [data]);
+
+	const { search } = useMemo(() => createDocCollection(data.map(d => ({ boost: false, ...d })), {
+		id: 2,
+		locality: 1,
+		name: 1,
+		short_name: 1,
+		tts_name: 0.9,
+	}), [data]);
 
 	const selectedStopData = useMemo(() => {
-		if (allStopsDataFormatted) {
-			return allStopsDataFormatted.find(item => item._id === selectedStopId);
-		}
-	}, [allStopsDataFormatted, selectedStopId]);
+		return data.find(item => item.id === selectedStopId);
+	}, [data, selectedStopId]);
 
 	//
 	// C. Search
 
-	const allStopsDataFilteredBySearchQuery = useSearch(debouncedSearchQuery, allStopsDataFormatted, {
-		keys: ['_id', 'name', 'short_name', 'locality'],
-		limitResults: 100,
-		regexReplace: /[^a-zA-Z0-9\s]/g,
-	});
+	const allStopsDataFilteredBySearchQuery = useMemo(
+		() => (debouncedSearchQuery ? search(debouncedSearchQuery) : data).slice(0, 100),
+		[debouncedSearchQuery, search, data]);
 
 	//
 	// D. Handle actions
@@ -74,7 +79,7 @@ export default function Component({ data = [], onSelectStopId = () => null, sele
 
 	const handleClearSearchField = () => {
 		setSearchQuery('');
-		onSelectStopId();
+		onSelectStopId(null);
 		comboboxStore.openDropdown();
 	};
 
@@ -103,7 +108,7 @@ export default function Component({ data = [], onSelectStopId = () => null, sele
 								<IconBusStop size={20} />
 							</div>
 							<div className={styles.comboboxTargetInput}>
-								<StopDisplay _id={selectedStopData?._id}locality={selectedStopData?.locality} municipalityName={selectedStopData?.municipality_name} name={selectedStopData?.name} />
+								<StopDisplay _id={selectedStopData.id}locality={selectedStopData.locality} municipalityName={selectedStopData.municipality_name} name={selectedStopData.name} />
 							</div>
 							<div className={styles.comboboxTargetSection} data-position="right">
 								<ActionIcon color="gray" onClick={handleClearSearchField} size="md" variant="subtle">
@@ -145,9 +150,9 @@ export default function Component({ data = [], onSelectStopId = () => null, sele
 					{allStopsDataFilteredBySearchQuery.length === 0
 						? <Combobox.Empty>{t('nothing_found')}</Combobox.Empty>
 						: allStopsDataFilteredBySearchQuery.map(item => (
-							<Combobox.Option key={item._id} className={item._id === selectedStopData?.id && styles.selected} value={item._id}>
+							<Combobox.Option key={item.id} className={item.id === selectedStopData?.id ? styles.selected : ''} value={item.id}>
 								<div className={styles.comboboxOption}>
-									<StopDisplay _id={item._id} locality={item?.locality} municipalityName={item?.municipality_name} name={item?.name} />
+									<StopDisplay _id={item.id} locality={item?.locality} municipalityName={item?.municipality_name} name={item?.name} />
 								</div>
 							</Combobox.Option>
 						),

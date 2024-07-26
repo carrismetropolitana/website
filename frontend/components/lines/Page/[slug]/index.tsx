@@ -8,7 +8,7 @@ import { IconArrowBarToRight, IconVolume, IconZoomQuestionFilled } from '@tabler
 import dayjs from 'dayjs';
 import pt from 'dayjs/locale/pt';
 import { useTranslations } from 'next-intl';
-import React, { useMemo, useState } from 'react';
+import React, { useState } from 'react';
 import useSWR from 'swr';
 
 import AlertCarousel from './AlertCarousel';

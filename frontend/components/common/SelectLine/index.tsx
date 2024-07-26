@@ -3,7 +3,8 @@
 /* * */
 
 import LineDisplay from '@/components/layout/LineDisplay';
-import useSearch from '@/hooks/useSearch';
+import { createDocCollection } from '@/hooks/useOtherSearch';
+import { Line } from '@/utils/types';
 import { ActionIcon, Combobox, Group, TextInput, useCombobox } from '@mantine/core';
 import { useDebouncedValue } from '@mantine/hooks';
 import { IconArrowLoopRight, IconSelector, IconX } from '@tabler/icons-react';
@@ -14,9 +15,8 @@ import styles from './styles.module.css';
 
 /* * */
 
-export default function Component({ data = [], onSelectLineId = () => null, selectedLineId, variant, ...props }) {
+export default function Component({ data = [] as Line[], onSelectLineId = (_: null | string) => null, selectedLineId, variant, ...props }) {
 	//
-
 	//
 	// A. Setup variables
 
@@ -27,36 +27,23 @@ export default function Component({ data = [], onSelectLineId = () => null, sele
 
 	//
 	// B. Transform data
-
-	const allLinesDataFormatted = useMemo(() => {
-		if (data) {
-			return data.map((line) => {
-				return {
-					_id: line.id,
-					color: line.color,
-					localities: line.localities.join(', '),
-					long_name: line.long_name,
-					short_name: line.short_name,
-					text_color: line.text_color,
-				};
-			});
-		}
-	}, [data]);
+	const { search } = useMemo(() => createDocCollection(data.map(d => ({ boost: false, ...d })), {
+		id: 2,
+		localities: 1,
+		long_name: 1,
+		short_name: 1,
+	}), [data]);
 
 	const selectedLineData = useMemo(() => {
-		if (allLinesDataFormatted) {
-			return allLinesDataFormatted.find(item => item._id === selectedLineId);
-		}
-	}, [allLinesDataFormatted, selectedLineId]);
+		return data.find(item => item.id === selectedLineId);
+	}, [selectedLineId, data]);
 
 	//
 	// C. Search
 
-	const allLinesDataFilteredBySearchQuery = useSearch(debouncedSearchQuery, allLinesDataFormatted, {
-		keys: ['_id', 'short_name', 'long_name', 'localities'],
-		limitResults: 100,
-		regexReplace: /[^a-zA-Z0-9\s]/g,
-	});
+	const allLinesDataFilteredBySearchQuery = useMemo(
+		() => (debouncedSearchQuery ? search(debouncedSearchQuery) : data).slice(0, 100),
+		[debouncedSearchQuery, search, data]);
 
 	//
 	// D. Handle actions
@@ -73,7 +60,7 @@ export default function Component({ data = [], onSelectLineId = () => null, sele
 
 	const handleClearSearchField = () => {
 		setSearchQuery('');
-		onSelectLineId();
+		onSelectLineId(null);
 		comboboxStore.openDropdown();
 	};
 
@@ -144,7 +131,7 @@ export default function Component({ data = [], onSelectLineId = () => null, sele
 					{allLinesDataFilteredBySearchQuery.length === 0
 						? <Combobox.Empty>{t('nothing_found')}</Combobox.Empty>
 						: allLinesDataFilteredBySearchQuery.map(item => (
-							<Combobox.Option key={item._id} className={item._id === selectedLineData?.id && styles.selected} value={item._id}>
+							<Combobox.Option key={item.id} className={item.id === selectedLineData?.id ? styles.selected : ''} value={item.id}>
 								<div className={styles.comboboxOption}>
 									<LineDisplay color={item.color} long_name={item.long_name} short_name={item.short_name} text_color={item.text_color} />
 								</div>

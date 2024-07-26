@@ -6,13 +6,13 @@ import type { Line } from '@/utils/types';
 import segmentedStyles from '@/components/common/CustomSegmentedControl/styles.module.css';
 import inputStyles from '@/components/common/Input/styles.module.css';
 import { Input, SegmentedControl, Skeleton } from '@mantine/core';
-import { IconArrowLoopLeft } from '@tabler/icons-react';
+import { IconArrowLoopRight } from '@tabler/icons-react';
 import { useTranslations } from 'next-intl';
 import { useRef, useState } from 'react';
 import useSWR from 'swr';
 
 import FavoritesList from './FavoritesList';
-import VirtualizedList from './VirtualizedList';
+import VirtualizedList from './SearchedVirtualizedList';
 import styles from './styles.module.css';
 
 /* * */
@@ -50,7 +50,7 @@ export default function Component() {
 							ref={ref}
 							className={styles.input}
 							classNames={inputStyles}
-							leftSection={<IconArrowLoopLeft size={16} />}
+							leftSection={<IconArrowLoopRight size={16} />}
 							onChange={event => setSearchText(event.currentTarget.value)}
 							placeholder={t('search_by')}
 							size="lg"
