@@ -209,7 +209,7 @@ levCache: Map<string, number>): T[] {
 	// console.log('Levenshtein time:', cumLevTime);
 
 	return scoredDocs
-		.filter(scoredDoc => scoredDoc.score > 0.5)
+		.filter(scoredDoc => scoredDoc.score > (0.5 * queryWords.length))
 		.sort((a, b) => b.score - a.score)
 		.map(scoredDoc => scoredDoc.doc);
 }

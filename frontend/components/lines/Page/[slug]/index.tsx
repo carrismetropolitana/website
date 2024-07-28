@@ -146,7 +146,7 @@ export default function Component({ lineInfo }: { lineInfo: Line }) {
 				relevantDemand
 				&& (
 					<div className={styles.metrics}>
-						<h1 style={{ color: lineInfo.color }}>{relevantDemand.count}</h1>
+						<h1 style={{ color: lineInfo.color }}>{relevantDemand.total_qty}</h1>
 						<h3>{t('num_passengers')}</h3>
 					</div>
 				)

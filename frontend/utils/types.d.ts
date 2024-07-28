@@ -254,8 +254,8 @@ export interface PatternRealtime {
 };
 
 export interface DemandByLine {
-	count: number
 	end_date: string
 	line_id: string
 	start_date: string
+	total_qty: number
 };
