@@ -5,25 +5,25 @@ import { getRequestConfig } from 'next-intl/server';
 /* * */
 
 export default getRequestConfig(async ({ locale }) => ({
-  messages: (await import(`./translations/${locale}.json`)).default,
-  formats: {
-    number: {
-      kilometers: {
-        style: 'unit',
-        unit: 'kilometer',
-        unitDisplay: 'short',
-        maximumFractionDigits: 2,
-      },
-      currency_euro: {
-        currencySign: 'standard',
-        style: 'currency',
-        currency: 'EUR',
-      },
-      percentage: {
-        style: 'unit',
-        unit: 'percent',
-        maximumFractionDigits: 2,
-      },
-    },
-  },
+	formats: {
+		number: {
+			currency_euro: {
+				currency: 'EUR',
+				currencySign: 'standard',
+				style: 'currency',
+			},
+			kilometers: {
+				maximumFractionDigits: 2,
+				style: 'unit',
+				unit: 'kilometer',
+				unitDisplay: 'short',
+			},
+			percentage: {
+				maximumFractionDigits: 2,
+				style: 'unit',
+				unit: 'percent',
+			},
+		},
+	},
+	messages: (await import(`./translations/${locale}.json`)).default,
 }));

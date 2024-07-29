@@ -25,6 +25,12 @@
 	"FaqTopic": {
 		"label": "Tópico"
 	},
+	"FeaturedSectionMetrics": {
+		"total_today": {
+			"label": "Passageiros transportados hoje",
+			"value": "{value, number}"
+		}
+	},
 	"HeaderLogo": {
 		"logo": {
 			"alt": "Carris Metropolitana"
