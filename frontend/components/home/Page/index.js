@@ -1,6 +1,7 @@
 /* * */
 
 import HomeCarousel from '@/components/home/Carousel';
+import HomeFeaturedSection from '@/components/home/FeaturedSection';
 import HomeNewsSection from '@/components/home/NewsSection';
 import HomeQuickSearch from '@/components/home/QuickSearch';
 import HomeSchedulesSection from '@/components/home/SchedulesSection';
@@ -13,7 +14,7 @@ import styles from './styles.module.css';
 export default function Component() {
 	return (
 		<>
-			<div className={styles.featuredWrapper}>
+			<div className={styles.introWrapper}>
 				<div className={styles.quickSearchWrapper}>
 					<HomeQuickSearch />
 				</div>
@@ -24,6 +25,7 @@ export default function Component() {
 			<HomeSchedulesSection />
 			<HomeNewsSection />
 			<HomeSupportSection />
+			<HomeFeaturedSection />
 		</>
 	);
 }
