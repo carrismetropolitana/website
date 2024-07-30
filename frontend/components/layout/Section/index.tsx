@@ -9,15 +9,15 @@ interface SectionProps {
 	heading?: string
 	subheading?: string
 	withChildrenPadding?: boolean
-	withGlobalPadding?: boolean
 	withTopBorder?: boolean
+	withTopPadding?: boolean
 }
 
 /* * */
 
-export default function Component({ children, heading = '', subheading = '', withChildrenPadding = false, withGlobalPadding = false, withTopBorder = true }: SectionProps) {
+export default function Component({ children, heading = '', subheading = '', withChildrenPadding = false, withTopBorder = true, withTopPadding = false }: SectionProps) {
 	return (
-		<div className={`${styles.container} ${withTopBorder && styles.withTopBorder} ${withGlobalPadding && styles.withGlobalPadding} ${withChildrenPadding && styles.withChildrenPadding} ${!heading && !subheading && styles.withoutHeadingOrSubheading}`}>
+		<div className={`${styles.container} ${withTopBorder && styles.withTopBorder} ${withChildrenPadding && styles.withChildrenPadding} ${!heading && !subheading && styles.withoutHeadingOrSubheading}`}>
 			{heading && (
 				<div className={`${styles.headingWrapper}`}>
 					<h2 className={styles.heading}>{heading}</h2>

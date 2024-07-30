@@ -32,7 +32,7 @@ export default async function Component() {
 			<LayoutSection heading={t('heading')} subheading={t('subheading')} withTopBorder={false} withChildrenPadding>
 				<Button className={styles.btn} leftSection={<IconPhoneCheck />}>{t('contacts')}</Button>
 			</LayoutSection>
-			<LayoutSection>
+			<LayoutSection withTopPadding>
 				{allFaqData.map(faq => (
 					<FaqTopic key={faq._id} title={faq.title} topicItems={faq.items} />
 				))}

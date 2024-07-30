@@ -11,16 +11,11 @@
 	margin: auto;
 	padding-top: var(--size-spacing-30);
 	background-color: var(--color-system-background-100);
-	gap: var(--size-spacing-20);
+	gap: var(--size-spacing-10);
 }
 
 .container.withTopBorder {
 	border-top: 1px solid var(--color-system-border-100);
-}
-
-.container.withGlobalPadding {
-	padding: var(--size-spacing-20);
-	gap: var(--size-spacing-10);
 }
 
 .container.withChildrenPadding {
@@ -40,9 +35,6 @@
 	.container.withTopBorder {
 		border-top: none;
 	}
-	.container.withGlobalPadding {
-		padding: 0;
-	}
 }
 
 /* * */
@@ -58,11 +50,6 @@
 	justify-content: flex-start;
 	gap: var(--size-spacing-10);
 
-}
-
-.withGlobalPadding .headingWrapper {
-	padding-left: 0;
-	padding-right: 0;
 }
 
 /* * */
