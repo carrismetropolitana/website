@@ -27,6 +27,10 @@
 	gap: 0;
 }
 
+.container.withoutHeadingOrSubheading {
+	padding-top: 0;
+}
+
 @media (max-width: 500px) {
 	.container {
 		gap: var(--size-spacing-15);

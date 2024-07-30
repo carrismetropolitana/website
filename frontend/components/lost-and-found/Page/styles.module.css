@@ -1,0 +1,6 @@
+/* * */
+
+.map {
+	max-width: 450px;
+	padding: var(--size-spacing-15);
+}

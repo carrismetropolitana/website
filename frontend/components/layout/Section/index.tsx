@@ -4,9 +4,20 @@ import styles from './styles.module.css';
 
 /* * */
 
-export default function Component({ children, heading = '', subheading = '', withChildrenPadding = false, withGlobalPadding = false, withTopBorder = true }) {
+interface SectionProps {
+	children: React.ReactNode
+	heading?: string
+	subheading?: string
+	withChildrenPadding?: boolean
+	withGlobalPadding?: boolean
+	withTopBorder?: boolean
+}
+
+/* * */
+
+export default function Component({ children, heading = '', subheading = '', withChildrenPadding = false, withGlobalPadding = false, withTopBorder = true }: SectionProps) {
 	return (
-		<div className={`${styles.container} ${withTopBorder && styles.withTopBorder} ${withGlobalPadding && styles.withGlobalPadding} ${withChildrenPadding && styles.withChildrenPadding}`}>
+		<div className={`${styles.container} ${withTopBorder && styles.withTopBorder} ${withGlobalPadding && styles.withGlobalPadding} ${withChildrenPadding && styles.withChildrenPadding} ${!heading && !subheading && styles.withoutHeadingOrSubheading}`}>
 			{heading && (
 				<div className={`${styles.headingWrapper}`}>
 					<h2 className={styles.heading}>{heading}</h2>

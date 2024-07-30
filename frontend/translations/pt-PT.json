@@ -142,6 +142,36 @@
 			"contacts":"Contactos"
 		}
 	},
+	"LostAndFoundPage": {
+		"heading": "Perdidos e Achados",
+		"subheading": "O serviço de transporte da Carris Metropolitana é assegurado por 4 prestadores de serviço, cada um explorando a sua zona da Área Metropolitana de Lisboa, conforme a imagem seguinte. Por esta razão, a melhor forma de reaver o seu objeto é contactar o operador da área utilizada.",
+		"operator_sections": {
+			"41": {
+				"title": "Área 1 | Viação Alvorada",
+				"description": "Envie um email para passageiro@viacaoalvorada.pt com informação da linha utilizada, hora e descrição do objecto. Se possível, inclua o número ou matrícula do veículo."
+			},
+			"42": {
+				"title": "Área 2 | Rodoviária de Lisboa",
+				"description": "Preencha o Formulário Online disponibilizado no site do operador com informação da linha utilizada, hora e descrição do objeto. Se possível, inclua o número ou matrícula do veículo."
+			},
+			"43": {
+				"title": "Área 3 | TST",
+				"description": "Preencha o Formulário Online disponibilizado no site do operador com informação da linha utilizada, hora e descrição do objeto. Se possível, inclua o número ou matrícula do veículo."
+			},
+			"44": {
+				"title": "Área 4 | Alsa Todi",
+				"description": "Preencha o Formulário Online disponibilizado no site do operador ou envie email para passageiros@alsa.pt com informação da linha utilizada, hora e descrição do objeto. Se possível, inclua o número ou matrícula do veículo."
+			}
+		}
+	},
+	"LostAndFoundOperatorSection": {
+		"email": {
+			"label": "Enviar Email"
+		},
+		"form": {
+			"label": "Preencher Formulário"
+		}
+	},
 	"NewsCard": {
 		"publish_date": "{publishDate, date, long}"
 	},
