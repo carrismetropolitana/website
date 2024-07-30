@@ -3,8 +3,12 @@
 /* * */
 
 import LiveIcon from '@/components/common/LiveIcon';
+import HomeFeaturedSectionMetricDemandSkeleton from '@/components/home/FeaturedSectionMetricDemandSkeleton';
 import { Sparkline } from '@mantine/charts';
+import { ActionIcon, Popover } from '@mantine/core';
+import { IconInfoCircleFilled } from '@tabler/icons-react';
 import { DateTime } from 'luxon';
+import Link from 'next/link';
 import { useTranslations } from 'next-intl';
 import { useMemo } from 'react';
 import useSWR from 'swr';
@@ -61,8 +65,23 @@ export default function Component() {
 	//
 	// D. Render Components
 
+	if (!metricsData) {
+		return <HomeFeaturedSectionMetricDemandSkeleton />;
+	}
+
 	return (
 		<div className={styles.container}>
+			<Popover offset={0} position="top-end" shadow="md" width={300} withArrow>
+				<Popover.Target>
+					<ActionIcon className={styles.popoverAnchor} size="xs" variant="transparent">
+						<IconInfoCircleFilled />
+					</ActionIcon>
+				</Popover.Target>
+				<Popover.Dropdown>
+					<p className={styles.popoverText}>{t('popover.text')}</p>
+					<Link className={styles.popoverLink} href="/open-data" target="_blank">{t('popover.link')}</Link>
+				</Popover.Dropdown>
+			</Popover>
 			<div className={styles.metricsWrapper}>
 				<div className={`${styles.rowWrapper} ${styles.primary}`}>
 					<div className={styles.realtimeValueWrapper}>

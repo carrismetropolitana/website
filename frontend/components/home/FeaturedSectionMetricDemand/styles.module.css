@@ -86,3 +86,29 @@
 	margin: -5px; /* Fixed margins set by Recharts */
 	width: calc(100% + 10px); /* Fixed margins set by Recharts */
 }
+
+
+/* * */
+/* POPOVER */
+
+.popoverAnchor {
+	display: flex;
+	position: absolute;
+	top: 10px;
+	right: 10px;
+	width: 18px;
+	height: 18px;
+	z-index: 3;
+	color: var(--color-system-text-400);
+}
+
+.popoverText,
+.popoverLink {
+	font-size: var(--font-size-muted);
+	font-weight: var(--font-weight-muted);
+	color: var(--color-system-text-200);
+}
+
+.popoverLink {
+	text-decoration: underline;
+}

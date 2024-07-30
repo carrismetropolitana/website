@@ -1,0 +1,66 @@
+/* * */
+/* CONTAINER */
+
+.container {
+	position: relative;
+	aspect-ratio: 16 / 9;
+	overflow: hidden;
+	width: 100%;
+	border-radius: 5px;
+	border: 1px solid var(--color-system-border-100);
+	background-color: var(--color-system-background-100);
+}
+
+/* * */
+/* SKELETON WRAPPER */
+
+.skeletonWrapper {
+	padding: var(--size-spacing-20);
+}
+
+/* * */
+/* PRIMARY */
+
+.primaryValue {
+	width: 40%;
+	height: 35px;
+	margin-bottom: var(--size-spacing-5);
+}
+
+.primaryLabel {
+	width: 70%;
+	height: 15px;
+}
+
+/* * */
+/* SECONDARY */
+
+.secondaryValue {
+	width: 30%;
+	height: 25px;
+	margin-top: var(--size-spacing-15);
+	margin-bottom: var(--size-spacing-5);
+}
+
+.secondaryLabel {
+	width: 50%;
+	height: 10px;
+}
+
+/* * */
+/* GRAPH WRAPPER */
+
+.graphWrapper {
+	position: absolute;
+	bottom: 0;
+	width: 100%;
+	z-index: 1;
+	opacity: 0.2;
+	margin: -5px; /* Fixed margins set by Recharts */
+	width: calc(100% + 10px); /* Fixed margins set by Recharts */
+	animation: fadeIn 750ms infinite alternate;
+}
+
+@keyframes fadeIn {
+	from { opacity: 0.15; }
+}
