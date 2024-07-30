@@ -27,7 +27,7 @@
 	},
 	"FeaturedSectionMetricDemand": {
 		"today": {
-			"label": "passageiros transportados hoje, até agora",
+			"label": "passageiros transportados hoje",
 			"value": "{value, number}"
 		},
 		"yesterday": {
