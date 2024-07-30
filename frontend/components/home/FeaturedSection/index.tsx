@@ -10,7 +10,7 @@ import styles from './styles.module.css';
 
 export default function Component() {
 	return (
-		<LayoutSection withGlobalPadding>
+		<LayoutSection withChildrenPadding>
 			<div className={styles.innerWrapper}>
 				<HomeFeaturedSectionCard coverImageSrc="/images/drivers.png" href="#" title="iudshuisd" />
 				<HomeFeaturedSectionCard coverImageSrc="/images/loures.png" href="#" title="iudshuisd" />
