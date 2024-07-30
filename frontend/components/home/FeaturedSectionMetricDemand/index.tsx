@@ -28,7 +28,7 @@ export default function Component() {
 	//
 	// B. Fetch data
 
-	const { data: metricsData, error: metricsError } = useSWR('https://api.carrismetropolitana.pt/metrics/demand/by_day');
+	const { data: metricsData } = useSWR('https://api.carrismetropolitana.pt/metrics/demand/by_day');
 
 	//
 	// C. Transform data
