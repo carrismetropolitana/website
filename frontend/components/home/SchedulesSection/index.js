@@ -33,7 +33,7 @@ export default function Component() {
 	// C. Render Components
 
 	return (
-		<LayoutSection heading={t('section_heading')}>
+		<LayoutSection heading={t('section_heading')} withGap={false}>
 			<LayoutGridNav items={menuItemsFormatted} />
 		</LayoutSection>
 	);

@@ -11,11 +11,14 @@
 	margin: auto;
 	padding-top: var(--size-spacing-30);
 	background-color: var(--color-system-background-100);
-	gap: var(--size-spacing-10);
 }
 
 .container.withTopBorder {
 	border-top: 1px solid var(--color-system-border-100);
+}
+
+.container.withGap {
+	gap: var(--size-spacing-20);
 }
 
 .container.withChildrenPadding {
@@ -28,12 +31,14 @@
 
 @media (max-width: 500px) {
 	.container {
-		gap: var(--size-spacing-15);
 		background-color: transparent;
 		border-top: none;
 	}
 	.container.withTopBorder {
 		border-top: none;
+	}
+	.container.withGap {
+		gap: var(--size-spacing-15);
 	}
 }
 
