@@ -35,7 +35,7 @@
 			"value": "{value, number}"
 		},
 		"popover": {
-			"text": "Número de passageiros transportados atualizados a cada 60 minutos.",
+			"text": "Valores de passageiros transportados atualizados a cada 60 minutos.",
 			"link": "Explorar Dados Abertos"
 		}
 	},
