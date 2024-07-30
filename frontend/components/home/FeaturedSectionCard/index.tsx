@@ -8,7 +8,6 @@ import styles from './styles.module.css';
 /* * */
 
 interface FeaturedSectionCardProps {
-	_id: string
 	coverImageSrc: string
 	href: string
 	title: string

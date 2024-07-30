@@ -1,7 +1,7 @@
 /* * */
 
 import HomeFeaturedSectionCard from '@/components/home/FeaturedSectionCard';
-import HomeFeaturedSectionMetrics from '@/components/home/FeaturedSectionMetrics';
+import HomeFeaturedSectionMetricDemand from '@/components/home/FeaturedSectionMetricDemand';
 import LayoutSection from '@/components/layout/Section';
 import { IconHelpHexagon, IconMessage, IconPhoneCheck, IconUmbrella, IconUserPentagon } from '@tabler/icons-react';
 import { useTranslations } from 'next-intl';
@@ -39,9 +39,9 @@ export default function Component() {
 	return (
 		<LayoutSection withGlobalPadding>
 			<div className={styles.innerWrapper}>
-				<HomeFeaturedSectionCard _id="sjisjd" coverImageSrc="/images/drivers.png" href="asiduhius" title="iudshuisd" />
-				<HomeFeaturedSectionCard _id="sjisjd" coverImageSrc="sjdhjsk" href="asiduhius" title="iudshuisd" />
-				<HomeFeaturedSectionMetrics />
+				<HomeFeaturedSectionCard coverImageSrc="/images/drivers.png" href="#" title="iudshuisd" />
+				<HomeFeaturedSectionCard coverImageSrc="/images/loures.png" href="#" title="iudshuisd" />
+				<HomeFeaturedSectionMetricDemand />
 			</div>
 		</LayoutSection>
 	);

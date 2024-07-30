@@ -3,6 +3,6 @@
 
 .innerWrapper {
 	display: grid;
-	grid-template-columns: repeat(3, 1fr);
-	gap: var(--size-spacing-40);
+	grid-template-columns: 1fr 1fr 1fr;
+	gap: var(--size-spacing-20);
 }

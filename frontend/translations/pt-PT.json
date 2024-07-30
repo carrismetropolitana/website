@@ -25,9 +25,13 @@
 	"FaqTopic": {
 		"label": "Tópico"
 	},
-	"FeaturedSectionMetrics": {
-		"total_today": {
-			"label": "Passageiros transportados hoje",
+	"FeaturedSectionMetricDemand": {
+		"today": {
+			"label": "passageiros transportados hoje, até agora",
+			"value": "{value, number}"
+		},
+		"yesterday": {
+			"label": "passageiros transportados ontem",
 			"value": "{value, number}"
 		}
 	},
