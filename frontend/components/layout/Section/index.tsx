@@ -18,7 +18,7 @@ interface SectionProps {
 
 export default function Component({ children, heading = '', subheading = '', withChildrenPadding = false, withGap = true, withTopBorder = true, withTopPadding = false }: SectionProps) {
 	return (
-		<div className={`${styles.container} ${withTopBorder && styles.withTopBorder} ${withChildrenPadding && styles.withChildrenPadding} ${withTopPadding && styles.withTopPadding} ${withGap && styles.withGap} ${!heading && !subheading && styles.withoutHeadingOrSubheading}`}>
+		<div className={`${styles.container} ${withTopBorder && styles.withTopBorder} ${withChildrenPadding && styles.withChildrenPadding} ${withTopPadding && styles.withTopPadding} ${withGap && styles.withGap} ${!heading && !subheading && !withTopPadding && styles.withoutHeadingOrSubheading}`}>
 			{heading && (
 				<div className={`${styles.headingWrapper}`}>
 					<h2 className={styles.heading}>{heading}</h2>

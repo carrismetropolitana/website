@@ -17,6 +17,10 @@
 	border-top: 1px solid var(--color-system-border-100);
 }
 
+.container.withTopPadding {
+	padding-top: var(--size-spacing-30);
+}
+
 .container.withGap {
 	gap: var(--size-spacing-20);
 }
