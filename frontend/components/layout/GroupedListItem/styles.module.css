@@ -10,7 +10,7 @@
 /* HEADER */
 
 .header {
-	padding: 0 var(--size-spacing-25);
+	padding: 0 var(--size-spacing-20);
 	padding-bottom: var(--size-spacing-15);
 }
 
