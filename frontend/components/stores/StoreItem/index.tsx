@@ -115,15 +115,15 @@ export default function Component({ data }: StoreItemProps) {
 					</div>
 					<div className={styles.value}>
 						<IconUsers size={16} />
-						{t('realtime_status.people_waiting', { count: 0 })}
+						{t('realtime_status.people_waiting', { count: data.currently_waiting })}
 					</div>
 					<div className={styles.value}>
 						<IconUserStar size={16} />
-						{t('realtime_status.desks_open', { count: 0 })}
+						{t('realtime_status.desks_open', { count: data.active_counters })}
 					</div>
 					<div className={styles.value}>
 						<IconClockHour3 size={16} />
-						{t('realtime_status.expected_wait_time', { count: 0 })}
+						{t('realtime_status.expected_wait_time', { count: expectedWaitTimeInMinutes })}
 					</div>
 				</div>
 			) : (
