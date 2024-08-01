@@ -59,6 +59,14 @@
 			"expected_wait_time": "{count, plural, =0 {Atendimento imediato} =1 {Atendimento em aprox. 1 min} other {Atendimento em aprox. # min}}"
 		}
 	},
+	"StoresStoreItemRealtime": {
+		"is_open": "Aberto Agora",
+		"is_busy": "Movimentado",
+		"is_closed": "Fechado / Completo",
+		"people_waiting": "{count, plural, =0 {Ninguém em espera} =1 {1 cliente em espera} other {# clientes em espera}}",
+		"desks_open": "{count, plural, =0 {Nenhum posto aberto} =1 {1 posto aberto} other {# postos abertos}}",
+		"expected_wait_time": "{count, plural, =0 {Atendimento imediato} =1 {Atendimento em aprox. 1 min} other {Atendimento em aprox. # min}}"
+	},
 	"FeaturedSectionMetricDemand": {
 		"today": {
 			"label": "passageiros transportados hoje",

@@ -3,7 +3,7 @@
 /* * */
 
 import ButtonDefault from '@/components/common/ButtonDefault';
-import LiveIcon from '@/components/common/LiveIcon';
+import StoresStoreItemRealtime from '@/components/stores/StoreItemRealtime';
 import { IconClockHour3, IconMap, IconUserStar, IconUsers } from '@tabler/icons-react';
 import { useTranslations } from 'next-intl';
 import { useMemo } from 'react';
@@ -107,30 +107,7 @@ export default function Component({ data }: StoreItemProps) {
 	return (
 		<div className={styles.container}>
 			<h3 className={styles.storeTitle}>{data.name}</h3>
-			{data.is_open ? (
-				<div className={`${styles.infoGroupWrapper} ${styles.realtimeStatus} ${styles.isOpen}`}>
-					<div className={styles.label}>
-						{t('realtime_status.is_open')}
-						<LiveIcon color="var(--color-status-ok-text)" />
-					</div>
-					<div className={styles.value}>
-						<IconUsers size={16} />
-						{t('realtime_status.people_waiting', { count: data.currently_waiting })}
-					</div>
-					<div className={styles.value}>
-						<IconUserStar size={16} />
-						{t('realtime_status.desks_open', { count: data.active_counters })}
-					</div>
-					<div className={styles.value}>
-						<IconClockHour3 size={16} />
-						{t('realtime_status.expected_wait_time', { count: expectedWaitTimeInMinutes })}
-					</div>
-				</div>
-			) : (
-				<div className={`${styles.infoGroupWrapper} ${styles.realtimeStatus} ${styles.isClosed}`}>
-					<div className={styles.label}>{t('realtime_status.is_closed')}</div>
-				</div>
-			)}
+			<StoresStoreItemRealtime data={data} />
 			<div className={styles.infoGroupWrapper}>
 				<p className={styles.label}>{t('schedules.label')}</p>
 				{parsedSchedules.map(item => (
