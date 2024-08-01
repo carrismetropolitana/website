@@ -47,7 +47,7 @@ export default function Providers({ children }) {
 		},
 		// provider: cacheProvider,
 		//
-		refreshInterval: 300000, // 5 minutes
+		refreshInterval: 10000, // 10 seconds
 		//
 	};
 

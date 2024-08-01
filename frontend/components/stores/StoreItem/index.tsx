@@ -4,7 +4,7 @@
 
 import ButtonDefault from '@/components/common/ButtonDefault';
 import StoresStoreItemRealtime from '@/components/stores/StoreItemRealtime';
-import { IconClockHour3, IconMap, IconUserStar, IconUsers } from '@tabler/icons-react';
+import { IconMap } from '@tabler/icons-react';
 import { useTranslations } from 'next-intl';
 import { useMemo } from 'react';
 
@@ -58,8 +58,6 @@ export default function Component({ data }: StoreItemProps) {
 
 	//
 	// B. Transform data
-
-	const expectedWaitTimeInMinutes = Math.round(data.expected_wait_time / 60);
 
 	const parsedSchedules = useMemo(() => {
 		//
