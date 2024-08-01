@@ -1,13 +1,12 @@
 /* * */
 
+import ButtonDefault from '@/components/common/ButtonDefault';
 import FaqTopic from '@/components/faq/Topic';
-import LayoutSection from '@/components/layout/Section';
-import { Button } from '@mantine/core';
+import GroupedListItem from '@/components/layout/GroupedListItem';
+import Section from '@/components/layout/Section';
 import { IconPhoneCheck } from '@tabler/icons-react';
 import { FAQs, fetchFaqs } from 'app/api/faq/route';
 import { getTranslations } from 'next-intl/server';
-
-import styles from './styles.module.css';
 
 /* * */
 
@@ -29,14 +28,16 @@ export default async function Component() {
 
 	return (
 		<>
-			<LayoutSection heading={t('heading')} subheading={t('subheading')} withTopBorder={false} withChildrenPadding>
-				<Button className={styles.btn} leftSection={<IconPhoneCheck />}>{t('contacts')}</Button>
-			</LayoutSection>
-			<LayoutSection>
-				{allFaqData.map(faq => (
-					<FaqTopic key={faq._id} title={faq.title} topicItems={faq.items} />
+			<Section heading={t('heading')} subheading={t('subheading')} withTopBorder={false} withChildrenPadding>
+				<ButtonDefault icon={<IconPhoneCheck size={18} />} label={t('contacts')} />
+			</Section>
+			<Section withTopPadding>
+				{allFaqData.map(faqGroup => (
+					<GroupedListItem key={faqGroup._id} label={t('grouped_list.label')} title={faqGroup.title}>
+						<FaqTopic topicItems={faqGroup.items} />
+					</GroupedListItem>
 				))}
-			</LayoutSection>
+			</Section>
 		</>
 	);
 

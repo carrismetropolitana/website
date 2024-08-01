@@ -20,10 +20,21 @@
 	"FaqPage":{
 		"heading": "Perguntas Frequentes",
 		"subheading":"Nesta página encontra respostas às perguntas mais frequentes sobre o nosso serviço. Caso pretenda esclarecimentos adicionais não hesite em falar connosco.",
-		"contacts": "Contactos"
+		"contacts": "Contactos",
+		"grouped_list": {
+			"label": "Tópico"
+		}
 	},
 	"FaqTopic": {
 		"label": "Tópico"
+	},
+	"StoresPage":{
+		"heading": "Lojas e Rede de Agentes",
+		"subheading":"Disponíveis para os nossos passageiros, os Espaços navegante® Carris Metropolitana estão dedicados a prestar informações sobre a rede e bilhética Carris Metropolitana, possibilitando o esclarecimento de dúvidas, a emissão de cartões navegante® e a adesão a perfis e descontos. É possível também efetuar o carregamento de títulos nos pontos de atendimento PayShop® da rede de agentes navegante®.",
+		"external_link": "Rede de agentes navegante®",
+		"grouped_list": {
+			"label": "Município"
+		}
 	},
 	"FeaturedSectionMetricDemand": {
 		"today": {
