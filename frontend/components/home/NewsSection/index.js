@@ -3,7 +3,7 @@
 /* * */
 
 import Carousel from '@/components/common/Carousel';
-import LayoutSection from '@/components/layout/Section';
+import Section from '@/components/layout/Section';
 import NewsCard from '@/components/news/Card';
 import NewsCardSkeleton from '@/components/news/CardSkeleton';
 import collator from '@/utils/collator';
@@ -46,9 +46,9 @@ export default function Component() {
 	// D. Render Components
 
 	return (
-		<LayoutSection heading={t('section_heading')}>
+		<Section heading={t('section_heading')}>
 			<Carousel skeletonComponent={<NewsCardSkeleton />} skeletonQty={4} slides={carouselSlides} />
-		</LayoutSection>
+		</Section>
 	);
 
 	//

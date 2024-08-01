@@ -32,11 +32,11 @@
 		padding: var(--size-spacing-15) var(--size-spacing-20);
 		border-top: 1px solid var(--color-system-border-100);
 	}
-	.container:last-child,
+	/* .container:last-child,
 	.container:last-child:hover,
 	.container:last-child:active {
 		border-bottom: 1px solid var(--color-system-border-100);
-	}
+	} */
 }
 
 /* * */

@@ -3,7 +3,7 @@
 /* * */
 
 import LiveIcon from '@/components/common/LiveIcon';
-import HomeFeaturedSectionMetricDemandSkeleton from '@/components/home/FeaturedSectionMetricDemandSkeleton';
+import MetricsSectionDemandSkeleton from '@/components/home/MetricsSectionDemandSkeleton';
 import { Sparkline } from '@mantine/charts';
 import { ActionIcon, Popover } from '@mantine/core';
 import { IconInfoCircleFilled } from '@tabler/icons-react';
@@ -23,7 +23,7 @@ export default function Component() {
 	//
 	// A. Setup variables
 
-	const t = useTranslations('FeaturedSectionMetricDemand');
+	const t = useTranslations('HomeMetricsSectionDemand');
 
 	//
 	// B. Fetch data
@@ -66,7 +66,7 @@ export default function Component() {
 	// D. Render Components
 
 	if (!metricsData) {
-		return <HomeFeaturedSectionMetricDemandSkeleton />;
+		return <MetricsSectionDemandSkeleton />;
 	}
 
 	return (

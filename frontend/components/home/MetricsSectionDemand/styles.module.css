@@ -2,8 +2,6 @@
 /* CONTAINER */
 
 .container {
-	position: relative;
-	aspect-ratio: 16 / 9;
 	overflow: hidden;
 	width: 100%;
 	border-radius: 5px;
@@ -78,8 +76,6 @@
 /* GRAPH WRAPPER */
 
 .graphWrapper {
-	position: absolute;
-	bottom: 0;
 	width: 100%;
 	z-index: 1;
 	opacity: 0.5;

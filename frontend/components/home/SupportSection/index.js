@@ -1,7 +1,7 @@
 /* * */
 
-import LayoutGridNav from '@/components/layout/GridNav';
-import LayoutSection from '@/components/layout/Section';
+import GridNav from '@/components/layout/GridNav';
+import Section from '@/components/layout/Section';
 import { IconHelpHexagon, IconMessage, IconPhoneCheck, IconUmbrella, IconUserPentagon } from '@tabler/icons-react';
 import { useTranslations } from 'next-intl';
 
@@ -36,9 +36,9 @@ export default function Component() {
 	// C. Render Components
 
 	return (
-		<LayoutSection heading={t('section_heading')} withGap={false}>
-			<LayoutGridNav className={styles.gridNav} items={menuItemsFormatted} />
-		</LayoutSection>
+		<Section heading={t('section_heading')} withGap={false}>
+			<GridNav className={styles.gridNav} items={menuItemsFormatted} />
+		</Section>
 	);
 
 	//
