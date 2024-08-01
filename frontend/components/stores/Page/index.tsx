@@ -5,7 +5,8 @@
 import ButtonDefault from '@/components/common/ButtonDefault';
 import GroupedListItem from '@/components/layout/GroupedListItem';
 import Section from '@/components/layout/Section';
-import { IconPhoneCheck } from '@tabler/icons-react';
+import StoresStoreItem from '@/components/stores/StoreItem';
+import { IconExternalLink } from '@tabler/icons-react';
 import { useTranslations } from 'next-intl';
 import { useMemo } from 'react';
 import useSWR from 'swr';
@@ -57,13 +58,13 @@ export default function Component() {
 	return (
 		<>
 			<Section heading={t('heading')} subheading={t('subheading')} withTopBorder={false} withChildrenPadding>
-				<ButtonDefault icon={<IconPhoneCheck size={18} />} label={t('external_link')} onClick={() => window.open('https://www.navegante.pt/navegante/espacos-pontos-navegante', '_blank')} />
+				<ButtonDefault icon={<IconExternalLink size={18} />} label={t('external_link')} onClick={() => window.open('https://www.navegante.pt/navegante/espacos-pontos-navegante', '_blank')} />
 			</Section>
 			<Section withTopPadding>
 				{allStoresGroupedByMunicipality.map(storeGroup => (
 					<GroupedListItem key={storeGroup.municipality_id} label={t('grouped_list.label')} title={storeGroup.municipality_name}>
 						{storeGroup.stores.map(store => (
-							<div>{store.name}</div>
+							<StoresStoreItem key={store.id} data={store} />
 						))}
 					</GroupedListItem>
 				))}

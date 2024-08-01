@@ -19,7 +19,9 @@ export default function Component({ children, label, title }: GroupedListItemPro
 				<h6 className={styles.label}>{label}</h6>
 				<h2 className={styles.title}>{title}</h2>
 			</div>
-			{children}
+			<div className={styles.childrenWrapper}>
+				{children}
+			</div>
 		</div>
 	);
 }
