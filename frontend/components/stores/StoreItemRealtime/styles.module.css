@@ -8,15 +8,22 @@
 }
 
 /* * */
-/* LABEL */
+/* LABEL & VALUE */
 
-.label {
+.label, .value {
 	display: flex;
 	flex-direction: row;
 	align-items: center;
 	justify-content: flex-start;
 	gap: var(--size-spacing-5);
 	line-height: 1;
+}
+
+
+/* * */
+/* LABEL */
+
+.label {
 	font-size: var(--font-size-muted);
 	font-weight: var(--font-weight-bold);
 	text-transform: uppercase;
@@ -38,10 +45,6 @@
 /* VALUE */
 
 .value {
-	display: flex;
-	flex-direction: row;
-	align-items: center;
-	justify-content: flex-start;
 	gap: var(--size-spacing-5);
 	color: var(--color-system-text-200);
 	font-size: var(--font-size-text);

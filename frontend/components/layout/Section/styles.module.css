@@ -36,10 +36,10 @@
 @media (max-width: 500px) {
 	.container {
 		background-color: transparent;
-		border-top: none;
+		/* border-top: none; */
 	}
 	.container.withTopBorder {
-		border-top: none;
+		border-top: 1px solid var(--color-system-border-100);
 	}
 	.container.withGap {
 		gap: var(--size-spacing-15);
