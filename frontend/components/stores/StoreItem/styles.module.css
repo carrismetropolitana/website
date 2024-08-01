@@ -13,6 +13,29 @@
 }
 
 /* * */
+/* HEADER */
+
+.header {
+	display: flex;
+	flex-direction: column;
+	align-items: flex-start;
+	justify-content: flex-start;
+}
+
+.storeBrand {
+	font-size: var(--font-size-text);
+	font-weight: var(--font-weight-medium);
+	color: var(--color-system-text-300);
+}
+
+.storeName {
+	font-size: var(--font-size-heading);
+	font-weight: var(--font-weight-bold);
+	color: var(--color-system-text-100);
+	margin-bottom: -10px;
+}
+
+/* * */
 /* INFO GROUP WRAPPER */
 
 .infoGroupWrapper .label {
@@ -27,42 +50,4 @@
 	color: var(--color-system-text-100);
 	font-size: var(--font-size-text);
 	font-weight: var(--font-weight-medium);
-}
-
-/* * */
-/* REALTIME STATUS */
-
-.realtimeStatus {
-	display: flex;
-	flex-direction: column;
-	gap: var(--size-spacing-5);
-}
-
-.realtimeStatus .label {
-	display: flex;
-	flex-direction: row;
-	align-items: center;
-	justify-content: flex-start;
-	gap: var(--size-spacing-5);
-	line-height: 1;
-}
-
-.realtimeStatus .value {
-	display: flex;
-	flex-direction: row;
-	align-items: center;
-	justify-content: flex-start;
-	gap: var(--size-spacing-5);
-	color: var(--color-system-text-200);
-}
-
-/* * */
-/* REALTIME STATUS / IS OPEN / IS CLOSED */
-
-.realtimeStatus.isOpen .label {
-	color: var(--color-status-ok-text);
-}
-
-.realtimeStatus.isClosed .label {
-	color: var(--color-status-danger-text);
 }

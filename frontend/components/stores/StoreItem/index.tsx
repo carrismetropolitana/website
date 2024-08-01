@@ -3,7 +3,7 @@
 /* * */
 
 import ButtonDefault from '@/components/common/ButtonDefault';
-import StoresStoreItemRealtime from '@/components/stores/StoreItemRealtime';
+import StoreItemRealtime from '@/components/stores/StoreItemRealtime';
 import { IconMap } from '@tabler/icons-react';
 import { useTranslations } from 'next-intl';
 import { useMemo } from 'react';
@@ -19,6 +19,7 @@ interface StoreItemProps {
 interface EncmProps {
 	active_counters: number
 	address: string
+	brand_name: string
 	currently_waiting: number
 	expected_wait_time: number
 	hours_friday: string[]
@@ -104,8 +105,11 @@ export default function Component({ data }: StoreItemProps) {
 
 	return (
 		<div className={styles.container}>
-			<h3 className={styles.storeTitle}>{data.name}</h3>
-			<StoresStoreItemRealtime data={data} />
+			<div className={styles.header}>
+				<h3 className={styles.storeBrand}>{data.brand_name || 'Espaço navegante® Carris Metropolitana'}</h3>
+				<h3 className={styles.storeName}>{data.short_name}</h3>
+			</div>
+			<StoreItemRealtime data={data} />
 			<div className={styles.infoGroupWrapper}>
 				<p className={styles.label}>{t('schedules.label')}</p>
 				{parsedSchedules.map(item => (
