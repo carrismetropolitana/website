@@ -11,7 +11,7 @@ import useSWR from 'swr';
 
 const initialFiltersState = {
 	by_current_status: 'open',
-	by_municipality_id: '',
+	by_municipality: null,
 	order_by: '',
 };
 
@@ -19,6 +19,7 @@ const initialFiltersState = {
 
 interface StoresContextState {
 	actions: {
+		updateFilterByMunicipality: (value: string) => void
 		updateFilterCurrentStatus: (value: string) => void
 	}
 	counters: {
@@ -30,7 +31,11 @@ interface StoresContextState {
 		filtered: Store[]
 		raw: Store[]
 	}
-	filters: typeof initialFiltersState
+	filters: {
+		by_current_status: string
+		by_municipality: null | string
+		order_by: string
+	}
 	flags: {
 		is_loading: boolean
 	}
@@ -38,6 +43,7 @@ interface StoresContextState {
 
 const StoresContext = createContext<StoresContextState>({
 	actions: {
+		updateFilterByMunicipality: () => { /**/ },
 		updateFilterCurrentStatus: () => { /**/ },
 	},
 	counters: {
@@ -68,7 +74,7 @@ export const StoresContextProvider = ({ children }) => {
 	// A. Setup state
 
 	const [dataFilteredState, setDataFilteredState] = useState<Store[]>([]);
-	const [filtersState, setFiltersState] = useState(initialFiltersState);
+	const [filtersState, setFiltersState] = useState<StoresContextState['filters']>(initialFiltersState);
 
 	//
 	// B. Fetch data
@@ -93,9 +99,9 @@ export const StoresContextProvider = ({ children }) => {
 
 		//
 		// Filter by municipality_id
-		if (filtersState.by_municipality_id) {
+		if (filtersState.by_municipality) {
 			filterResult = filterResult.filter((store) => {
-				return store.municipality_id === filtersState.by_municipality_id;
+				return store.municipality_id === filtersState.by_municipality;
 			});
 		}
 
@@ -122,8 +128,11 @@ export const StoresContextProvider = ({ children }) => {
 	// D. Handle actions
 
 	const updateFilterCurrentStatus = (value: string) => {
-		console.log(value);
 		setFiltersState(prev => ({ ...prev, by_current_status: value }));
+	};
+
+	const updateFilterByMunicipality = (value?: string) => {
+		setFiltersState(prev => ({ ...prev, by_municipality: value || null }));
 	};
 
 	//
@@ -132,6 +141,7 @@ export const StoresContextProvider = ({ children }) => {
 	return (
 		<StoresContext.Provider value={{
 			actions: {
+				updateFilterByMunicipality,
 				updateFilterCurrentStatus,
 			},
 			counters: {

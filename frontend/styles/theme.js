@@ -10,8 +10,9 @@ import '@mantine/charts/styles.css';
 /* * */
 
 import SegmentedControlOverride from '@/styles/overrides/SegmentedControl.module.css';
+import SelectOverride from '@/styles/overrides/Select.module.css';
 import TextInputOverride from '@/styles/overrides/TextInput.module.css';
-import { SegmentedControl, TextInput, createTheme } from '@mantine/core';
+import { ScrollArea, SegmentedControl, Select, TextInput, createTheme } from '@mantine/core';
 
 /* * */
 
@@ -40,6 +41,19 @@ export const theme = createTheme({
 				if (props.variant === 'white') {
 					defaultClasses = combineClasses(defaultClasses, [SegmentedControlOverride.variantWhite]);
 				}
+				return defaultClasses;
+			},
+		}),
+
+		Select: Select.extend({
+			classNames: (_, props) => {
+				let defaultClasses = {
+					dropdown: SelectOverride.dropdown,
+					input: SelectOverride.input,
+					option: SelectOverride.option,
+					section: SelectOverride.section,
+					wrapper: SelectOverride.wrapper,
+				};
 				return defaultClasses;
 			},
 		}),

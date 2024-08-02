@@ -38,10 +38,19 @@
 			"label": "Município"
 		},
 		"StoresListEmpty": {
-			"title": "Nenhuma loja aberta por agora",
-			"subtitle": "Neste momento, todas as lojas aparentam estar encerradas.",
-			"action_1": "Consultar Horários das Lojas",
-			"action_2": "Explorer Rede de Agentes"
+			"default": {
+				"title": "Nenhuma loja disponível por agora",
+				"subtitle": "Neste momento, todas as lojas aparentam estar encerradas.",
+				"action_1": "Consultar Horários das Lojas",
+				"action_2": "Explorer Rede de Agentes"
+			},
+			"by_municipality": {
+				"title": "Nenhuma loja disponível neste município",
+				"subtitle": "Sugerimos que nos visite noutro local, para ser melhor atendido.",
+				"action_1": "Consultar Horários das Lojas",
+				"action_2": "Explorer Outros Municípios",
+				"action_3": "Explorer Rede de Agentes"
+			}
 		},
 		"StoresListItem": {
 			"schedules": {
@@ -74,10 +83,9 @@
 			"by_current_status": {
 				"open": "Abertas agora ({count})",
 				"all": "Todas as lojas"
-			}
-			,
+			},
 			"by_municipality": {
-				"label": "Município"
+				"label": "Filtrar por Município"
 			},
 			"found_items_counter": "{count, plural, =0 {Nenhuma loja encontrada} one {Encontrada # loja:} other {Encontradas # lojas:}}"
 		}
