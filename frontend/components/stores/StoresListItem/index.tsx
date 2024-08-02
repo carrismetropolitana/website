@@ -74,7 +74,7 @@ export default function Component({ data }: StoresListItemProps) {
 	}, [t, data.hours_monday, data.hours_tuesday, data.hours_wednesday, data.hours_thursday, data.hours_friday, data.hours_saturday, data.hours_sunday]);
 
 	//
-	// B. Render components
+	// C. Render components
 
 	return (
 		<div className={styles.container}>
