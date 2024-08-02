@@ -33,7 +33,7 @@
 	padding-top: 0;
 }
 
-@media (max-width: 500px) {
+@media (max-width: 1200px) {
 	.container {
 		background-color: transparent;
 		/* border-top: none; */
@@ -43,6 +43,9 @@
 	}
 	.container.withGap {
 		gap: var(--size-spacing-15);
+	}
+	.container.withChildrenPadding {
+		gap: 0;
 	}
 }
 

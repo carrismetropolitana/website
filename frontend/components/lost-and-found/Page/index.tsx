@@ -15,7 +15,7 @@ export default async function Component() {
 	//
 	// A. Setup variables
 
-	const t = await getTranslations('LostAndFoundPage');
+	const t = await getTranslations('lost-and-found.Page');
 
 	//
 	// B. Render components

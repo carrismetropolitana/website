@@ -2,8 +2,10 @@
 
 /* * */
 
+import type { Store } from '@/types/stores.types';
+
 import ButtonDefault from '@/components/common/ButtonDefault';
-import StoreItemRealtime from '@/components/stores/StoreItemRealtime';
+import StoresListItemRealtime from '@/components/stores/StoresListItemRealtime';
 import { IconMap } from '@tabler/icons-react';
 import { useTranslations } from 'next-intl';
 import { useMemo } from 'react';
@@ -12,50 +14,19 @@ import styles from './styles.module.css';
 
 /* * */
 
-interface StoreItemProps {
-	data: EncmProps
-}
-
-interface EncmProps {
-	active_counters: number
-	address: string
-	brand_name: string
-	currently_waiting: number
-	expected_wait_time: number
-	hours_friday: string[]
-	hours_monday: string[]
-	hours_saturday: string[]
-	hours_special: string
-	hours_sunday: string[]
-	hours_thursday: string[]
-	hours_tuesday: string[]
-	hours_wednesday: string[]
-	id: string
-	is_open: boolean
-	lat: number
-	locality: string
-	lon: number
-	municipality_id: string
-	municipality_name: string
-	name: string
-	parish_id: string
-	parish_name: string
-	phone: string
-	postal_code: string
-	region_id: string
-	region_name: string
-	short_name: string
+interface StoresListItemProps {
+	data: Store
 }
 
 /* * */
 
-export default function Component({ data }: StoreItemProps) {
+export default function Component({ data }: StoresListItemProps) {
 	//
 
 	//
 	// A. Setup variables
 
-	const t = useTranslations('StoresStoreItem');
+	const t = useTranslations('stores.StoresListItem');
 
 	//
 	// B. Transform data
@@ -106,10 +77,10 @@ export default function Component({ data }: StoreItemProps) {
 	return (
 		<div className={styles.container}>
 			<div className={styles.header}>
-				<h3 className={styles.storeBrand}>{data.brand_name || 'Espaço navegante® Carris Metropolitana'}</h3>
+				<h3 className={styles.storeBrand}>{data.brand_name}</h3>
 				<h3 className={styles.storeName}>{data.short_name}</h3>
 			</div>
-			<StoreItemRealtime data={data} />
+			<StoresListItemRealtime data={data} />
 			<div className={styles.infoGroupWrapper}>
 				<p className={styles.label}>{t('schedules.label')}</p>
 				{parsedSchedules.map(item => (
@@ -121,7 +92,7 @@ export default function Component({ data }: StoreItemProps) {
 				<p className={styles.value}>{data.address}</p>
 				<p className={styles.value}>{data.postal_code} {data.locality}</p>
 			</div>
-			<ButtonDefault icon={<IconMap size={18} />} label="Ver no Mapa" />
+			<ButtonDefault icon={<IconMap size={18} />} label={t('get_directions')} />
 		</div>
 	);
 

@@ -3,13 +3,12 @@
 /* * */
 
 import ButtonDefault from '@/components/common/ButtonDefault';
-import GroupedListItem from '@/components/layout/GroupedListItem';
 import Section from '@/components/layout/Section';
-import StoresStoreItem from '@/components/stores/StoreItem';
+import StoresList from '@/components/stores/StoresList';
+import Toolbar from '@/components/stores/Toolbar';
+import { StoresContextProvider } from '@/contexts/stores.context';
 import { IconExternalLink } from '@tabler/icons-react';
 import { useTranslations } from 'next-intl';
-import { useMemo } from 'react';
-import useSWR from 'swr';
 
 /* * */
 
@@ -19,57 +18,23 @@ export default function Component() {
 	//
 	// A. Setup variables
 
-	const t = useTranslations('StoresPage');
+	const t = useTranslations('stores.Page');
 
 	//
-	// B. Fetch data
-
-	const { data: allStoresData } = useSWR('https://api.carrismetropolitana.pt/datasets/facilities/encm');
-
-	//
-	// C. Render components
-
-	const allStoresGroupedByMunicipality = useMemo(() => {
-		//
-		if (!allStoresData) return [];
-		//
-		const groupedEncm = allStoresData.reduce((result, item) => {
-			const existingGroup = result.find(group => group.municipality_id === item.municipality_id);
-			if (existingGroup) {
-				existingGroup.stores.push(item);
-			}
-			else {
-				result.push({
-					municipality_id: item.municipality_id,
-					municipality_name: item.municipality_name,
-					stores: [item],
-				});
-			}
-			return result;
-		}, []);
-		const collator = new Intl.Collator('en', { numeric: true, sensitivity: 'base' });
-		const sortedGroups = groupedEncm.sort((a, b) => collator.compare(a.municipality_name, b.municipality_name));
-		return sortedGroups;
-	}, [allStoresData]);
-
-	//
-	// C. Render components
+	// B. Render components
 
 	return (
-		<>
+		<StoresContextProvider>
 			<Section heading={t('heading')} subheading={t('subheading')} withTopBorder={false} withChildrenPadding>
-				<ButtonDefault icon={<IconExternalLink size={18} />} label={t('external_link')} onClick={() => window.open('https://www.navegante.pt/navegante/espacos-pontos-navegante', '_blank')} />
+				<ButtonDefault href="https://www.navegante.pt/navegante/espacos-pontos-navegante" icon={<IconExternalLink size={18} />} label={t('external_link')} target="_blank" />
 			</Section>
-			<Section withTopPadding>
-				{allStoresGroupedByMunicipality.map(storeGroup => (
-					<GroupedListItem key={storeGroup.municipality_id} label={t('grouped_list.label')} title={storeGroup.municipality_name}>
-						{storeGroup.stores.map(store => (
-							<StoresStoreItem key={store.id} data={store} />
-						))}
-					</GroupedListItem>
-				))}
+			<Section withChildrenPadding>
+				<Toolbar />
 			</Section>
-		</>
+			<Section withTopBorder={false}>
+				<StoresList />
+			</Section>
+		</StoresContextProvider>
 	);
 
 	//

@@ -5,27 +5,14 @@
     "module": "esnext",
     "moduleResolution": "bundler",
     "paths": {
-      "@/utils/*": [
-        "utils/*"
-      ],
-      "@/hooks/*": [
-        "hooks/*"
-      ],
-      "@/styles/*": [
-        "styles/*"
-      ],
-      "@/contexts/*": [
-        "contexts/*"
-      ],
-      "@/opengraph/*": [
-        "opengraph/*"
-      ],
-      "@/components/*": [
-        "components/*"
-      ],
-      "@/translations/*": [
-        "translations/*"
-      ]
+      "@/utils/*": ["utils/*"],
+      "@/types/*": ["types/*"],
+      "@/hooks/*": ["hooks/*"],
+      "@/styles/*": ["styles/*"],
+      "@/contexts/*": ["contexts/*"],
+      "@/opengraph/*": ["opengraph/*"],
+      "@/components/*": ["components/*"],
+      "@/translations/*": ["translations/*"]
     },
     "allowJs": true,
     "sourceMap": true,

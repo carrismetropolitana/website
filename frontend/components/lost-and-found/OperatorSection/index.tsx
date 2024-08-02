@@ -30,7 +30,7 @@ export default function Component({ actions, description, title }: LostAndFoundO
 	//
 	// A. Setup variables
 
-	const t = useTranslations('LostAndFoundOperatorSection');
+	const t = useTranslations('lost-and-found.OperatorSection');
 
 	//
 	// B. Render components
@@ -43,8 +43,8 @@ export default function Component({ actions, description, title }: LostAndFoundO
 				<div className={styles.actionsWrapper}>
 					{actions.map(action => (
 						<div key={action.href} className={styles.actionItem}>
-							{action.type === 'email' && <ButtonDefault icon={<IconAt size={18} />} label={t('email.label')} onClick={() => window.open(action.href, '_blank')} />}
-							{action.type === 'form' && <ButtonDefault icon={<IconExternalLink size={18} />} label={t('form.label')} onClick={() => window.open(action.href, '_blank')} />}
+							{action.type === 'email' && <ButtonDefault href={action.href} icon={<IconAt size={18} />} label={t('email.label')} target="_blank" />}
+							{action.type === 'form' && <ButtonDefault href={action.href} icon={<IconExternalLink size={18} />} label={t('form.label')} target="_blank" />}
 						</div>
 					))}
 				</div>

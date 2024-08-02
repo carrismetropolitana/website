@@ -1,5 +1,7 @@
 /* * */
 
+import type { Store } from '@/types/stores.types';
+
 import LiveIcon from '@/components/common/LiveIcon';
 import { IconClockHour3, IconUserStar, IconUsers } from '@tabler/icons-react';
 import { useTranslations } from 'next-intl';
@@ -8,65 +10,33 @@ import styles from './styles.module.css';
 
 /* * */
 
-interface StoreItemProps {
-	data: EncmProps
-}
-
-interface EncmProps {
-	active_counters: number
-	address: string
-	currently_waiting: number
-	expected_wait_time: number
-	hours_friday: string[]
-	hours_monday: string[]
-	hours_saturday: string[]
-	hours_special: string
-	hours_sunday: string[]
-	hours_thursday: string[]
-	hours_tuesday: string[]
-	hours_wednesday: string[]
-	id: string
-	is_open: boolean
-	lat: number
-	locality: string
-	lon: number
-	municipality_id: string
-	municipality_name: string
-	name: string
-	parish_id: string
-	parish_name: string
-	phone: string
-	postal_code: string
-	region_id: string
-	region_name: string
-	short_name: string
+interface StoresListItemRealtime {
+	data: Store
 }
 
 /* * */
 
-export default function Component({ data }: StoreItemProps) {
+export default function Component({ data }: StoresListItemRealtime) {
 	//
 
 	//
 	// A. Setup variables
 
-	const t = useTranslations('StoresStoreItemRealtime');
+	const t = useTranslations('stores.StoresListItemRealtime');
 
 	//
 	// B. Transform data
 
 	const expectedWaitTimeInMinutes = Math.round(data.expected_wait_time / 60);
 
-	const openDesksToPeopleWaitingRatio = data.active_counters / data.currently_waiting;
-
 	//
 	// C. Render components
 
-	if (data.is_open && openDesksToPeopleWaitingRatio > 0.1) {
+	if (data.current_status === 'open') {
 		return (
 			<div className={`${styles.container} ${styles.isOpen}`}>
 				<div className={styles.label}>
-					{t('is_open')}
+					{t('current_status.open')}
 					<LiveIcon color="var(--color-status-ok-text)" />
 				</div>
 				<div className={styles.value}>
@@ -85,11 +55,11 @@ export default function Component({ data }: StoreItemProps) {
 		);
 	}
 
-	if (data.is_open) {
+	if (data.current_status === 'busy') {
 		return (
 			<div className={`${styles.container} ${styles.isBusy}`}>
 				<div className={styles.label}>
-					{t('is_busy')}
+					{t('current_status.busy')}
 					<LiveIcon color="var(--color-status-warning-text)" />
 				</div>
 				<div className={styles.value}>
@@ -108,9 +78,17 @@ export default function Component({ data }: StoreItemProps) {
 		);
 	}
 
+	if (data.current_status === 'closed') {
+		return (
+			<div className={`${styles.container} ${styles.isClosed}`}>
+				<div className={styles.label}>{t('current_status.closed')}</div>
+			</div>
+		);
+	}
+
 	return (
-		<div className={`${styles.container} ${styles.isClosed}`}>
-			<div className={styles.label}>{t('is_closed')}</div>
+		<div className={`${styles.container} ${styles.isUnknown}`}>
+			<div className={styles.label}>{t('current_status.unknown')}</div>
 		</div>
 	);
 
