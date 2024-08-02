@@ -11,8 +11,9 @@ import '@mantine/charts/styles.css';
 
 import SegmentedControlOverride from '@/styles/overrides/SegmentedControl.module.css';
 import SelectOverride from '@/styles/overrides/Select.module.css';
+import SkeletonOverride from '@/styles/overrides/Skeleton.module.css';
 import TextInputOverride from '@/styles/overrides/TextInput.module.css';
-import { ScrollArea, SegmentedControl, Select, TextInput, createTheme } from '@mantine/core';
+import { SegmentedControl, Select, Skeleton, TextInput, createTheme } from '@mantine/core';
 
 /* * */
 
@@ -53,6 +54,16 @@ export const theme = createTheme({
 					option: SelectOverride.option,
 					section: SelectOverride.section,
 					wrapper: SelectOverride.wrapper,
+				};
+				return defaultClasses;
+			},
+		}),
+
+		Skeleton: Skeleton.extend({
+			classNames: (_, props) => {
+				let defaultClasses = {
+					root: SkeletonOverride.root,
+
 				};
 				return defaultClasses;
 			},

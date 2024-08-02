@@ -1,0 +1,16 @@
+/* * */
+/* ROOT */
+
+.root:before {
+	background-color: transparent;
+}
+
+.root:after {
+	background-color: var(--color-system-background-300);
+}
+
+@media (prefers-color-scheme: dark) {
+	.root:after {
+		background-color: var(--color-system-border-100);
+	}
+}
