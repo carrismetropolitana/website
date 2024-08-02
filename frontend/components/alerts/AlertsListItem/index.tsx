@@ -4,8 +4,9 @@
 
 import type { Alert } from '@/types/alerts.types';
 
+import { Accordion } from '@mantine/core';
 // import AlertsListItemRealtime from '@/components/alerts/AlertsListItemRealtime';
-import { IconMap } from '@tabler/icons-react';
+import { IconMap, IconObjectScan } from '@tabler/icons-react';
 import { useTranslations } from 'next-intl';
 import { useMemo } from 'react';
 
@@ -34,17 +35,12 @@ export default function Component({ data }: AlertsListItemProps) {
 	// C. Render components
 
 	return (
-		<div className={styles.container}>
-			<div className={styles.header}>
-				<h3 className={styles.alertBrand}>{data.brand_name}</h3>
-				<h3 className={styles.alertName}>{data.short_name}</h3>
-			</div>
-			<div className={styles.infoGroupWrapper}>
-				<p className={styles.label}>{t('address')}</p>
-				<p className={styles.value}>{data.address}</p>
-				<p className={styles.value}>{data.postal_code} {data.locality}</p>
-			</div>
-		</div>
+		<Accordion.Item value={data._id}>
+			<Accordion.Control icon={<IconObjectScan />}>{data._id}{data._id}{data._id}{data._id}{data._id}</Accordion.Control>
+			<Accordion.Panel>
+				test
+			</Accordion.Panel>
+		</Accordion.Item>
 	);
 
 	//

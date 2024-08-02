@@ -4,16 +4,15 @@
 
 import type { AlertGroupByDate } from '@/types/alerts.types';
 
-// import AlertsListEmpty from '@/components/alerts/AlertsListEmpty';
+import AlertsListEmpty from '@/components/alerts/AlertsListEmpty';
 import AlertListItem from '@/components/alerts/AlertsListItem';
-// import AlertsListItemSkeleton from '@/components/alerts/AlertsListItemSkeleton';
+import AlertsListItemSkeleton from '@/components/alerts/AlertsListItemSkeleton';
 import GroupedListItem from '@/components/layout/GroupedListItem';
-// import GroupedListSkeleton from '@/components/layout/GroupedListSkeleton';
+import GroupedListSkeleton from '@/components/layout/GroupedListSkeleton';
 import { useAlertsContext } from '@/contexts/alerts.context';
 import collator from '@/utils/collator';
 import { Accordion } from '@mantine/core';
 import { DateTime } from 'luxon';
-import { useTranslations } from 'next-intl';
 import { useMemo } from 'react';
 
 /* * */
@@ -24,7 +23,6 @@ export default function Component() {
 	//
 	// A. Setup variables
 
-	const t = useTranslations('alerts.AlertsList');
 	const alertsContext = useAlertsContext();
 
 	//
@@ -58,11 +56,11 @@ export default function Component() {
 	//
 	// C. Render components
 
-	// if (alertsContext.flags.is_loading) {
-	// 	return (
-	// 		<GroupedListSkeleton groupCount={3} itemCount={2} itemSkeleton={<AlertsListItemSkeleton />} />
-	// 	);
-	// }
+	if (alertsContext.flags.is_loading) {
+		return (
+			<GroupedListSkeleton groupCount={3} itemCount={2} itemSkeleton={<AlertsListItemSkeleton />} />
+		);
+	}
 
 	if (allAlertsGroupedByMunicipality.length > 0) {
 		return (
@@ -70,13 +68,7 @@ export default function Component() {
 				<GroupedListItem key={alertGroup.start_date} title={alertGroup.start_date}>
 					<Accordion>
 						{alertGroup.alerts.map(alert => (
-							<Accordion.Item key={alert._id} value={alert._id}>
-								<Accordion.Control>{alert._id}</Accordion.Control>
-								<Accordion.Panel>
-									<AlertListItem key={alert._id} data={alert} />
-								</Accordion.Panel>
-							</Accordion.Item>
-
+							<AlertListItem key={alert._id} data={alert} />
 						))}
 					</Accordion>
 				</GroupedListItem>
@@ -84,9 +76,9 @@ export default function Component() {
 		);
 	}
 
-	// return (
-	// 	<AlertsListEmpty />
-	// );
+	return (
+		<AlertsListEmpty />
+	);
 
 	//
 }
