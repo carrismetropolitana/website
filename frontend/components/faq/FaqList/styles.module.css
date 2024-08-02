@@ -1,0 +1,11 @@
+/* * */
+/* INNER WRAPPER */
+
+.innerWrapper {
+	font-size: 14px;
+    color: var(--color-system-text-200);
+    font-weight: 500;
+	padding: var(--size-spacing-20);
+	padding-top: 0;
+	max-width: var(--size-width-heading);
+}

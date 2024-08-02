@@ -9,11 +9,8 @@
 /* ITEM */
 
 .item {
-	border-bottom: 1px solid var(--color-system-border-100);
-}
-
-.item:first-child {
 	border-top: 1px solid var(--color-system-border-100);
+	border-bottom: none;
 }
 
 /* * */
@@ -55,17 +52,5 @@
 /* CONTENT */
 
 .content {
-    font-size: 14px;
-    color: var(--color-system-text-200);
-    font-weight: 500;
-	padding: var(--size-spacing-20);
-	padding-top: 0;
-	max-width: var(--size-width-heading);
-}
-
-@media (max-width: 500px) {
-	.content {
-		padding: var(--size-spacing-20) var(--size-spacing-15);
-		padding-top: 0;
-	}
+	padding: 0;
 }

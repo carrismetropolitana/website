@@ -8,6 +8,8 @@ import GroupedListItem from '@/components/layout/GroupedListItem';
 import { Accordion } from '@mantine/core';
 import { useTranslations } from 'next-intl';
 
+import styles from './styles.module.css';
+
 /* * */
 
 interface FaqListProps {
@@ -35,7 +37,9 @@ export default function Component({ data }: FaqListProps) {
 						<Accordion.Item key={topicItem._id} value={topicItem.title}>
 							<Accordion.Control>{topicItem.title}</Accordion.Control>
 							<Accordion.Panel>
-								<div dangerouslySetInnerHTML={{ __html: topicItem.body }} />
+								<div className={styles.innerWrapper}>
+									<div dangerouslySetInnerHTML={{ __html: topicItem.body }} />
+								</div>
 							</Accordion.Panel>
 						</Accordion.Item>
 					))}
