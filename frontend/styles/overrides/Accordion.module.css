@@ -1,32 +1,50 @@
 /* * */
-/* ACCORDION ITEM */
+/* ROOT */
 
-.accordionItem {
+.root {
+    background-color: var(--color-system-background-100);
+}
+
+/* * */
+/* ITEM */
+
+.item {
 	border-bottom: 1px solid var(--color-system-border-100);
 }
 
-.accordionItem:first-child {
+.item:first-child {
 	border-top: 1px solid var(--color-system-border-100);
 }
 
 /* * */
-/* ACCORDION CONTROL */
+/* CONTROL */
 
-.accordionControl {
+.control {
 	padding: var(--size-spacing-20);
 	background-color: var(--color-system-background-100);
 }
 
 @media (max-width: 500px) {
-	.accordionControl {
+	.control {
 		padding: var(--size-spacing-20) var(--size-spacing-15);
 	}
 }
 
 /* * */
-/* ACCORDION LABEL */
+/* CHEVRON */
 
-.accordionLabel {
+.chevron {
+	color: var(--color-system-text-400)
+}
+
+.item[data-active=true] .chevron {
+	transform: rotate(-90deg);
+}
+
+/* * */
+/* LABEL */
+
+.label {
 	color: var(--color-system-text-100);
     font-size: var(--font-size-nav);
     font-weight: var(--font-weight-nav);
@@ -34,27 +52,9 @@
 }
 
 /* * */
-/* ACCORDION CHEVRON */
+/* CONTENT */
 
-.accordionChevron {
-	color: var(--color-system-text-400)
-}
-
-.accordionItem[data-active=true] .accordionChevron {
-	transform: rotate(-90deg);
-}
-
-/* * */
-/* ACCORDION ROOT */
-
-.accordionRoot {
-    background-color: var(--color-system-background-100);
-}
-
-/* * */
-/* ACCORDION CONTENT */
-
-.accordionContent {
+.content {
     font-size: 14px;
     color: var(--color-system-text-200);
     font-weight: 500;
@@ -64,7 +64,7 @@
 }
 
 @media (max-width: 500px) {
-	.accordionContent {
+	.content {
 		padding: var(--size-spacing-20) var(--size-spacing-15);
 		padding-top: 0;
 	}

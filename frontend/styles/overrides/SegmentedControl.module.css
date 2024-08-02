@@ -51,7 +51,7 @@
 }
 
 .label[data-disabled="true"] {
-	color: var(--color-system-text-400);
+	opacity: 0.15;
 }
 
 .label.variantWhite {

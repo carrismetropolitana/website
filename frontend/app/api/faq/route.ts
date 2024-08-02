@@ -1,22 +1,11 @@
 /* * */
 
-export interface FAQItem {
-	_id: string
-	body: string
-	title: string
-}
-export interface FAQ {
-	_id: string
-	items: FAQItem[]
-	title: string
-}
-
-export type FAQs = FAQ[];
+import type { FaqGroupByTopic } from '@/types/faq.types';
 
 /* * */
 
 export async function fetchFaqs() {
-	const faqs: FAQs = [
+	const faqs: FaqGroupByTopic[] = [
 		{
 			_id: 'A',
 			items: [

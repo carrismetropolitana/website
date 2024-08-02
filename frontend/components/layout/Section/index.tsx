@@ -5,7 +5,7 @@ import styles from './styles.module.css';
 /* * */
 
 interface SectionProps {
-	children: React.ReactNode
+	children?: React.ReactNode
 	heading?: string
 	subheading?: string
 	withChildrenPadding?: boolean

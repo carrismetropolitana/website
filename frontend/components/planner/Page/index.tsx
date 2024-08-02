@@ -47,7 +47,7 @@ export default function Component() {
 	//
 	// A. Setup variables
 
-	const t = useTranslations('PlannerPage');
+	const t = useTranslations('planner.Page');
 
 	//
 	// B. Transform data

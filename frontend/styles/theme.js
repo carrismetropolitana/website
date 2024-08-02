@@ -9,11 +9,13 @@ import '@mantine/charts/styles.css';
 
 /* * */
 
+import AccordionOverride from '@/styles/overrides/Accordion.module.css';
 import SegmentedControlOverride from '@/styles/overrides/SegmentedControl.module.css';
 import SelectOverride from '@/styles/overrides/Select.module.css';
 import SkeletonOverride from '@/styles/overrides/Skeleton.module.css';
 import TextInputOverride from '@/styles/overrides/TextInput.module.css';
-import { SegmentedControl, Select, Skeleton, TextInput, createTheme } from '@mantine/core';
+import { Accordion, SegmentedControl, Select, Skeleton, TextInput, createTheme } from '@mantine/core';
+import { IconCaretLeftFilled } from '@tabler/icons-react';
 
 /* * */
 
@@ -31,6 +33,23 @@ export const theme = createTheme({
 	//
 
 	components: {
+
+		Accordion: Accordion.extend({
+			classNames: (_, props) => {
+				let defaultClasses = {
+					chevron: AccordionOverride.chevron,
+					content: AccordionOverride.content,
+					control: AccordionOverride.control,
+					item: AccordionOverride.item,
+					label: AccordionOverride.label,
+					root: AccordionOverride.root,
+				};
+				return defaultClasses;
+			},
+			defaultProps: {
+				chevron: <IconCaretLeftFilled />,
+			},
+		}),
 
 		SegmentedControl: SegmentedControl.extend({
 			classNames: (_, props) => {

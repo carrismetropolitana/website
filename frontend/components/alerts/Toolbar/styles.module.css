@@ -1,0 +1,12 @@
+/* * */
+/* CONTAINER */
+
+.container {
+	display: flex;
+	flex-direction: column;
+	align-items: stretch;
+	justify-content: flex-start;
+	gap: var(--size-spacing-20);
+	width: 100%;
+	margin-bottom: var(--size-spacing-10);
+}

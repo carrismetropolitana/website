@@ -9,14 +9,6 @@ import useSWR from 'swr';
 
 /* * */
 
-const initialFiltersState = {
-	by_current_status: 'open',
-	by_municipality: null,
-	order_by: '',
-};
-
-/* * */
-
 interface StoresContextState {
 	actions: {
 		updateFilterByMunicipality: (value: string) => void
@@ -41,7 +33,7 @@ interface StoresContextState {
 	}
 }
 
-const StoresContext = createContext<StoresContextState>({
+const initialContextState = {
 	actions: {
 		updateFilterByMunicipality: () => { /**/ },
 		updateFilterCurrentStatus: () => { /**/ },
@@ -55,11 +47,17 @@ const StoresContext = createContext<StoresContextState>({
 		filtered: [],
 		raw: [],
 	},
-	filters: initialFiltersState,
+	filters: {
+		by_current_status: 'open',
+		by_municipality: null,
+		order_by: '',
+	},
 	flags: {
 		is_loading: true,
 	},
-});
+};
+
+const StoresContext = createContext<StoresContextState>(initialContextState);
 
 export function useStoresContext() {
 	return useContext(StoresContext);
@@ -74,12 +72,12 @@ export const StoresContextProvider = ({ children }) => {
 	// A. Setup state
 
 	const [dataFilteredState, setDataFilteredState] = useState<Store[]>([]);
-	const [filtersState, setFiltersState] = useState<StoresContextState['filters']>(initialFiltersState);
+	const [filtersState, setFiltersState] = useState<StoresContextState['filters']>(initialContextState.filters);
 
 	//
 	// B. Fetch data
 
-	const { data: allStoresData, isLoading: allStoresLoading } = useSWR('https://api.carrismetropolitana.pt/datasets/facilities/encm');
+	const { data: allStoresData, isLoading: allStoresLoading } = useSWR<Store[], Error>('https://api.carrismetropolitana.pt/datasets/facilities/encm');
 
 	//
 	// C. Transform data
@@ -151,7 +149,7 @@ export const StoresContextProvider = ({ children }) => {
 			},
 			data: {
 				filtered: dataFilteredState,
-				raw: allStoresData,
+				raw: allStoresData || [],
 			},
 			filters: filtersState,
 			flags: {

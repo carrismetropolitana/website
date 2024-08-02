@@ -12,21 +12,38 @@
 		"retry": "Nova tentativa em {value} segundos",
 		"goto_home": "Voltar à página principal"
 	},
-	"PlannerPage":{
-		"heading": "Os nossos parceiros",
-		"subheading": "Porque os nossos dados são abertos, existem várias aplicações que oferecem experiências personalizadas para melhorar o seu dia-a-dia nos transportes.",
-		"disclaimer": "Edite esta página no Github se pretende incluir a sua aplicação. A ordem é aleatória. Apenas são permitidas entradas que disponibilizem simultaneamente horários planeados e em tempo real ou posição de veículos."
+	"planner": {
+		"Page":{
+			"heading": "Os nossos parceiros",
+			"subheading": "Porque os nossos dados são abertos, existem várias aplicações que oferecem experiências personalizadas para melhorar o seu dia-a-dia nos transportes.",
+			"disclaimer": "Edite esta página no Github se pretende incluir a sua aplicação. A ordem é aleatória. Apenas são permitidas entradas que disponibilizem simultaneamente horários planeados e em tempo real ou posição de veículos."
+		}
 	},
-	"FaqPage":{
-		"heading": "Perguntas Frequentes",
-		"subheading":"Nesta página encontra respostas às perguntas mais frequentes sobre o nosso serviço. Caso pretenda esclarecimentos adicionais não hesite em falar connosco.",
-		"contacts": "Contactos",
-		"grouped_list": {
+	"faq": {
+		"Page":{
+			"heading": "Perguntas Frequentes",
+			"subheading":"Nesta página encontra respostas às perguntas mais frequentes sobre o nosso serviço. Caso pretenda esclarecimentos adicionais não hesite em falar connosco.",
+			"contacts": "Contactos"
+		},
+		"FaqList": {
 			"label": "Tópico"
 		}
 	},
-	"FaqTopic": {
-		"label": "Tópico"
+	"alerts": {
+		"Page":{
+			"heading": "Alertas de Serviço",
+			"subheading":"Fique a par de todas as alterações à rede. Lorem ipsum dolor sit amet."
+		},
+		"AlertsList": {
+			"label": "Município"
+		},
+		"Toolbar": {
+			"by_date": {
+				"current": "Esta semana",
+				"future": "Futuros"
+			},
+			"found_items_counter": "{count, plural, =0 {Nenhum alerta encontrado} one {Encontrado # alerta:} other {Encontrados # alertas:}}"
+		}
 	},
 	"stores": {
 		"Page":{

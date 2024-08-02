@@ -1,11 +1,12 @@
 /* * */
 
+import type { FaqGroupByTopic } from '@/types/faq.types';
+
 import ButtonDefault from '@/components/common/ButtonDefault';
-import FaqTopic from '@/components/faq/Topic';
-import GroupedListItem from '@/components/layout/GroupedListItem';
+import FaqList from '@/components/faq/FaqList';
 import Section from '@/components/layout/Section';
 import { IconPhoneCheck } from '@tabler/icons-react';
-import { FAQs, fetchFaqs } from 'app/api/faq/route';
+import { fetchFaqs } from 'app/api/faq/route';
 import { getTranslations } from 'next-intl/server';
 
 /* * */
@@ -16,12 +17,12 @@ export default async function Component() {
 	//
 	// A. Setup variables
 
-	const t = await getTranslations('FaqPage');
+	const t = await getTranslations('faq.Page');
 
 	//
 	// B. Fetch data
 
-	const allFaqData: FAQs = await fetchFaqs();
+	const allFaqData: FaqGroupByTopic[] = await fetchFaqs();
 
 	//
 	// C. Render components
@@ -32,11 +33,7 @@ export default async function Component() {
 				<ButtonDefault icon={<IconPhoneCheck size={18} />} label={t('contacts')} />
 			</Section>
 			<Section withTopPadding>
-				{allFaqData.map(faqGroup => (
-					<GroupedListItem key={faqGroup._id} label={t('grouped_list.label')} title={faqGroup.title}>
-						<FaqTopic topicItems={faqGroup.items} />
-					</GroupedListItem>
-				))}
+				<FaqList data={allFaqData} />
 			</Section>
 		</>
 	);
