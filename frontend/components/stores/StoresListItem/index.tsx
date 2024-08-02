@@ -31,7 +31,7 @@ export default function Component({ data }: StoresListItemProps) {
 	//
 	// B. Transform data
 
-	const googleMapsDirectionsUrl = `https://www.google.com/maps/dir/?api=1&destination=${data.lat},${data.lon}&destination_place_id=${data.google_place_id}`;
+	const googleMapsDirectionsUrl = `https://www.google.com/maps/dir/?api=1&destination=${data.name}&destination_place_id=${data.google_place_id}`;
 
 	const parsedSchedules = useMemo(() => {
 		//
