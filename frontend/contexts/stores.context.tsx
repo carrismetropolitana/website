@@ -129,7 +129,7 @@ export const StoresContextProvider = ({ children }) => {
 			},
 			counters: {
 				by_current_status: {
-					open: allStoresData?.filter((item => item.current_status === 'closed')).length || 0,
+					open: allStoresData?.filter((item => item.current_status === 'open')).length || 0,
 				},
 			},
 			data: {
