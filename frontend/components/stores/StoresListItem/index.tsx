@@ -31,6 +31,8 @@ export default function Component({ data }: StoresListItemProps) {
 	//
 	// B. Transform data
 
+	const googleMapsDirectionsUrl = `https://www.google.com/maps/dir/?api=1&destination=38.756310,-9.253493&destination_place_id=10845229782513764958`;
+
 	const parsedSchedules = useMemo(() => {
 		//
 		// eslint-disable-next-line @typescript-eslint/no-explicit-any
