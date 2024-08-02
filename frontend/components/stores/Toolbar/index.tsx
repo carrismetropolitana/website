@@ -33,7 +33,7 @@ export default function Component() {
 
 	return (
 		<div className={styles.container}>
-			<SegmentedControl data={byCurrentStatusOptions} onChange={storesContext.actions.updateFilterCurrentStatus} value={storesContext.filters.by_current_status} />
+			<SegmentedControl data={byCurrentStatusOptions} onChange={storesContext.actions.updateFilterCurrentStatus} value={storesContext.filters.by_current_status} fullWidth />
 			<FoundItemsCounter text={t('found_items_counter', { count: storesContext.data.filtered.length })} />
 		</div>
 	);

@@ -10,7 +10,7 @@ import useSWR from 'swr';
 /* * */
 
 const initialFiltersState = {
-	by_current_status: 'all',
+	by_current_status: 'open',
 	by_municipality_id: '',
 	order_by: '',
 };
@@ -110,6 +110,13 @@ export const StoresContextProvider = ({ children }) => {
 		const filteredStores = applyFiltersToData();
 		setDataFilteredState(filteredStores);
 	}, [allStoresData, filtersState]);
+
+	useEffect(() => {
+		if (!allStoresData) return;
+		if (allStoresData?.filter((item => item.current_status === 'open')).length === 0) {
+			setFiltersState(prev => ({ ...prev, by_current_status: 'all' }));
+		}
+	}, [allStoresData]);
 
 	//
 	// D. Handle actions
