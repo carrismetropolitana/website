@@ -31,7 +31,7 @@ export default function Component({ data }: StoresListItemProps) {
 	//
 	// B. Transform data
 
-	const googleMapsDirectionsUrl = `https://www.google.com/maps/dir/?api=1&destination=38.756310,-9.253493&destination_place_id=10845229782513764958`;
+	const googleMapsDirectionsUrl = `https://www.google.com/maps/dir/?api=1&destination=${data.lat},${data.lon}&destination_place_id=${data.google_place_id}`;
 
 	const parsedSchedules = useMemo(() => {
 		//
@@ -94,7 +94,7 @@ export default function Component({ data }: StoresListItemProps) {
 				<p className={styles.value}>{data.address}</p>
 				<p className={styles.value}>{data.postal_code} {data.locality}</p>
 			</div>
-			<ButtonDefault icon={<IconMap size={18} />} label={t('get_directions')} />
+			<ButtonDefault href={googleMapsDirectionsUrl} icon={<IconMap size={18} />} label={t('get_directions')} target="_blank" />
 		</div>
 	);
 

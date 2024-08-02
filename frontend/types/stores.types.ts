@@ -7,6 +7,7 @@ export interface Store {
 	current_status: 'busy' | 'closed' | 'open' | 'unknown'
 	currently_waiting: number
 	expected_wait_time: number
+	google_place_id: string
 	hours_friday: string[]
 	hours_monday: string[]
 	hours_saturday: string[]
