@@ -2,11 +2,11 @@
 /* ROOT */
 
 .root:before {
-	background-color: transparent;
+	background-color: var(--color-system-background-100);
 }
 
 .root:after {
-	background-color: var(--color-system-background-300);
+	background-color: var(--color-system-background-200);
 }
 
 @media (prefers-color-scheme: dark) {
