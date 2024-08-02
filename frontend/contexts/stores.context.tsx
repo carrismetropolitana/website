@@ -116,7 +116,7 @@ export const StoresContextProvider = ({ children }) => {
 		if (allStoresData?.filter((item => item.current_status === 'open')).length === 0) {
 			setFiltersState(prev => ({ ...prev, by_current_status: 'all' }));
 		}
-	}, [allStoresData]);
+	}, []);
 
 	//
 	// D. Handle actions
