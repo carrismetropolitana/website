@@ -64,8 +64,7 @@
 			"current_status": {
 				"open": "Aberto Agora",
 				"busy": "Movimentado",
-				"closed": "Fechado / Completo",
-				"unknown": "Em Atualização"
+				"closed": "Fechado / Completo"
 			},
 			"people_waiting": "{count, plural, =0 {Ninguém em espera} =1 {1 cliente em espera} other {# clientes em espera}}",
 			"desks_open": "{count, plural, =0 {Nenhum posto aberto} =1 {1 posto aberto} other {# postos abertos}}",

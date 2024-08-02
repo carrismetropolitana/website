@@ -41,8 +41,9 @@
 	color: var(--color-status-danger-text);
 }
 
-.isUnknown .label {
-	color: var(--color-system-text-300);
+.isUnknown .skeleton {
+	width: 150px;
+	height: 14px;
 }
 
 /* * */

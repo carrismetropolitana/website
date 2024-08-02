@@ -3,6 +3,7 @@
 import type { Store } from '@/types/stores.types';
 
 import LiveIcon from '@/components/common/LiveIcon';
+import { Skeleton } from '@mantine/core';
 import { IconClockHour3, IconUserStar, IconUsers } from '@tabler/icons-react';
 import { useTranslations } from 'next-intl';
 
@@ -88,7 +89,7 @@ export default function Component({ data }: StoresListItemRealtime) {
 
 	return (
 		<div className={`${styles.container} ${styles.isUnknown}`}>
-			<div className={styles.label}>{t('current_status.unknown')}</div>
+			<Skeleton className={styles.skeleton} />
 		</div>
 	);
 
