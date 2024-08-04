@@ -34,6 +34,9 @@
 			"heading": "Alertas de Serviço",
 			"subheading":"Fique a par de todas as alterações à rede. Lorem ipsum dolor sit amet."
 		},
+		"AlertsListItem":{
+			"open": "Abrir"
+		},
 		"Toolbar": {
 			"by_date": {
 				"current": "Esta semana",

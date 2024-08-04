@@ -20,12 +20,12 @@ interface Translation {
 /* * */
 
 export interface TranslatedImage {
-	localized_image: LocalizedImage[]
+	localizedImage: LocalizedImage[]
 }
 
 interface LocalizedImage {
 	language: string
-	media_type: string
+	mediaType: string
 	url: string
 }
 
@@ -66,8 +66,8 @@ export interface EntitySelector {
 	 *
 	 */
 
-	agency_id?: string
-	route_id?: string
-	stop_id?: string
-	trip_id?: string
+	agencyId?: string
+	routeId?: string
+	stopId?: string
+	tripId?: string
 }

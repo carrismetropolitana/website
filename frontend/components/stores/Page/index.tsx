@@ -2,7 +2,7 @@
 
 /* * */
 
-import ButtonDefault from '@/components/common/ButtonDefault';
+import Button from '@/components/common/Button';
 import Section from '@/components/layout/Section';
 import StoresList from '@/components/stores/StoresList';
 import Toolbar from '@/components/stores/Toolbar';
@@ -26,7 +26,7 @@ export default function Component() {
 	return (
 		<StoresContextProvider>
 			<Section heading={t('heading')} subheading={t('subheading')} withTopBorder={false} withChildrenPadding>
-				<ButtonDefault href="https://www.navegante.pt/navegante/espacos-pontos-navegante" icon={<IconExternalLink size={18} />} label={t('external_link')} target="_blank" />
+				<Button href="https://www.navegante.pt/navegante/espacos-pontos-navegante" icon={<IconExternalLink size={18} />} label={t('external_link')} target="_blank" />
 			</Section>
 			<Section withChildrenPadding>
 				<Toolbar />

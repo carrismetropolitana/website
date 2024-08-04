@@ -42,7 +42,7 @@ export interface Alert {
 	descriptionText: TranslatedString
 	effect: AlertEffect
 	headerText: TranslatedString
-	image: TranslatedImage[]
+	image: TranslatedImage
 	informedEntity: EntitySelector[]
 	url: TranslatedString
 }

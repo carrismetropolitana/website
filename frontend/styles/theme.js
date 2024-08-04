@@ -10,11 +10,12 @@ import '@mantine/charts/styles.css';
 /* * */
 
 import AccordionOverride from '@/styles/overrides/Accordion.module.css';
+import ButtonOverride from '@/styles/overrides/Button.module.css';
 import SegmentedControlOverride from '@/styles/overrides/SegmentedControl.module.css';
 import SelectOverride from '@/styles/overrides/Select.module.css';
 import SkeletonOverride from '@/styles/overrides/Skeleton.module.css';
 import TextInputOverride from '@/styles/overrides/TextInput.module.css';
-import { Accordion, SegmentedControl, Select, Skeleton, TextInput, createTheme } from '@mantine/core';
+import { Accordion, Button, SegmentedControl, Select, Skeleton, TextInput, createTheme } from '@mantine/core';
 import { IconCaretLeftFilled } from '@tabler/icons-react';
 
 /* * */
@@ -40,6 +41,7 @@ export const theme = createTheme({
 					chevron: AccordionOverride.chevron,
 					content: AccordionOverride.content,
 					control: AccordionOverride.control,
+					icon: AccordionOverride.icon,
 					item: AccordionOverride.item,
 					label: AccordionOverride.label,
 					root: AccordionOverride.root,
@@ -48,6 +50,21 @@ export const theme = createTheme({
 			},
 			defaultProps: {
 				chevron: <IconCaretLeftFilled />,
+			},
+		}),
+
+		Button: Button.extend({
+			classNames: (_, props) => {
+				let defaultClasses = {
+					inner: ButtonOverride.inner,
+					label: ButtonOverride.label,
+					root: ButtonOverride.root,
+					section: ButtonOverride.section,
+				};
+				if (props.variant === 'pill') {
+					defaultClasses = combineClasses(defaultClasses, [ButtonOverride.variantPill]);
+				}
+				return defaultClasses;
 			},
 		}),
 

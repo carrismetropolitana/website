@@ -19,6 +19,8 @@
 .control {
 	padding: var(--size-spacing-20);
 	background-color: var(--color-system-background-100);
+	align-items: flex-start;
+	gap: var(--size-spacing-10);
 }
 
 @media (max-width: 500px) {
@@ -31,7 +33,8 @@
 /* CHEVRON */
 
 .chevron {
-	color: var(--color-system-text-400)
+	padding-top: 1px;
+	color: var(--color-system-text-400);
 }
 
 .item[data-active=true] .chevron {
@@ -45,7 +48,15 @@
 	color: var(--color-system-text-100);
     font-size: var(--font-size-nav);
     font-weight: var(--font-weight-nav);
+	margin-top: 3px;
     padding: 0;
+}
+
+/* * */
+/* ICON */
+
+.icon {
+	margin: 0;
 }
 
 /* * */

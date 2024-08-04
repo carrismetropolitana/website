@@ -4,7 +4,7 @@
 
 import type { Store } from '@/types/stores.types';
 
-import ButtonDefault from '@/components/common/ButtonDefault';
+import Button from '@/components/common/Button';
 import StoresListItemRealtime from '@/components/stores/StoresListItemRealtime';
 import { IconMap } from '@tabler/icons-react';
 import { useTranslations } from 'next-intl';
@@ -94,7 +94,7 @@ export default function Component({ data }: StoresListItemProps) {
 				<p className={styles.value}>{data.address}</p>
 				<p className={styles.value}>{data.postal_code} {data.locality}</p>
 			</div>
-			<ButtonDefault href={googleMapsDirectionsUrl} icon={<IconMap size={18} />} label={t('get_directions')} target="_blank" />
+			<Button href={googleMapsDirectionsUrl} icon={<IconMap size={18} />} label={t('get_directions')} target="_blank" />
 		</div>
 	);
 

@@ -2,7 +2,7 @@
 
 import type { FaqGroupByTopic } from '@/types/faq.types';
 
-import ButtonDefault from '@/components/common/ButtonDefault';
+import Button from '@/components/common/Button';
 import FaqList from '@/components/faq/FaqList';
 import Section from '@/components/layout/Section';
 import { IconPhoneCheck } from '@tabler/icons-react';
@@ -30,7 +30,7 @@ export default async function Component() {
 	return (
 		<>
 			<Section heading={t('heading')} subheading={t('subheading')} withTopBorder={false} withChildrenPadding>
-				<ButtonDefault icon={<IconPhoneCheck size={18} />} label={t('contacts')} />
+				<Button icon={<IconPhoneCheck size={18} />} label={t('contacts')} />
 			</Section>
 			<Section withTopPadding>
 				<FaqList data={allFaqData} />

@@ -4,10 +4,11 @@
 
 import type { Alert } from '@/types/alerts.types';
 
+import AlertsListItemImageThumbnail from '@/components/alerts/AlertsListItemImageThumbnail';
+import Button from '@/components/common/Button';
 import { Accordion } from '@mantine/core';
-// import AlertsListItemRealtime from '@/components/alerts/AlertsListItemRealtime';
-import { IconMap, IconObjectScan } from '@tabler/icons-react';
-import { useTranslations } from 'next-intl';
+import { IconArrowBigUpLines, IconArrowUpRight, IconBarrierBlock } from '@tabler/icons-react';
+import { useLocale, useTranslations } from 'next-intl';
 import { useMemo } from 'react';
 
 import styles from './styles.module.css';
@@ -26,19 +27,52 @@ export default function Component({ data }: AlertsListItemProps) {
 	//
 	// A. Setup variables
 
+	const currentLocale = useLocale();
 	const t = useTranslations('alerts.AlertsListItem');
 
 	//
 	// B. Transform data
+
+	const alertHref = `/alerts/${data._id}`;
+
+	const alertIcon = useMemo(() => {
+		switch (data.effect) {
+			case 'ADDITIONAL_SERVICE':
+				return <IconBarrierBlock color="var(--color-status-ok-text)" />;
+			default:
+				return <IconArrowBigUpLines color="var(--color-status-ok-text)" />;
+		}
+	}, [data.effect]);
+
+	const localizedHeaderText = useMemo(() => {
+		const headerTextLocaleMatch = data.headerText.translation.find(item => item.language === currentLocale.split('-')[0]);
+		if (!headerTextLocaleMatch) return data.headerText.translation[0].text;
+		else return headerTextLocaleMatch.text;
+	}, [data.headerText]);
+
+	const localizedDescriptionText = useMemo(() => {
+		const descriptionTextLocaleMatch = data.descriptionText.translation.find(item => item.language === currentLocale.split('-')[0]);
+		if (!descriptionTextLocaleMatch) return data.descriptionText.translation[0].text;
+		else return descriptionTextLocaleMatch.text;
+	}, [data.descriptionText]);
+
+	const localizedImageUrl = useMemo(() => {
+		if (!data.image || !data.image.localizedImage?.length) return null;
+		const imageLocaleMatch = data.image.localizedImage.find(item => item.language === currentLocale.split('-')[0]);
+		if (!imageLocaleMatch) return data.image.localizedImage[0].url.length > 0 ? data.image.localizedImage[0].url : null;
+		else return imageLocaleMatch.url.length > 0 ? imageLocaleMatch.url : null;
+	}, [data.image]);
 
 	//
 	// C. Render components
 
 	return (
 		<Accordion.Item value={data._id}>
-			<Accordion.Control icon={<IconObjectScan />}>{data._id}{data._id}{data._id}{data._id}{data._id}</Accordion.Control>
-			<Accordion.Panel>
-				test
+			<Accordion.Control icon={alertIcon}>{localizedHeaderText}</Accordion.Control>
+			<Accordion.Panel classNames={{ content: styles.contentWrapper }}>
+				<p className={styles.description}>{localizedDescriptionText}</p>
+				{localizedImageUrl && <AlertsListItemImageThumbnail alt={localizedHeaderText} href={alertHref} src={localizedImageUrl} />}
+				<Button href={alertHref} icon={<IconArrowUpRight size={16} />} label={t('open')} variant="pill" />
 			</Accordion.Panel>
 		</Accordion.Item>
 	);
