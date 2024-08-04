@@ -8,6 +8,7 @@ import AlertsListItemImageThumbnail from '@/components/alerts/AlertsListItemImag
 import Button from '@/components/common/Button';
 import { Accordion } from '@mantine/core';
 import { IconArrowBigUpLines, IconArrowUpRight, IconBarrierBlock } from '@tabler/icons-react';
+import { DateTime } from 'luxon';
 import { useLocale, useTranslations } from 'next-intl';
 import { useMemo } from 'react';
 
@@ -63,13 +64,24 @@ export default function Component({ data }: AlertsListItemProps) {
 		else return imageLocaleMatch.url.length > 0 ? imageLocaleMatch.url : null;
 	}, [data.image]);
 
+	const startDateString = useMemo(() => {
+		const startDate = data.activePeriod[0].start ? data.activePeriod[0].start : -Infinity;
+		return DateTime.fromSeconds(startDate).toLocaleString(DateTime.DATE_FULL);
+	}, [data.activePeriod]);
+
+	const endDateString = useMemo(() => {
+		const endDate = data.activePeriod[0].end ? data.activePeriod[0].end : +Infinity;
+		return DateTime.fromSeconds(endDate).toLocaleString(DateTime.DATE_FULL);
+	}, [data.activePeriod]);
+
 	//
 	// C. Render components
 
 	return (
 		<Accordion.Item value={data._id}>
-			<Accordion.Control icon={alertIcon}>{localizedHeaderText}</Accordion.Control>
+			<Accordion.Control icon={alertIcon}>{localizedHeaderText} ({startDateString} -› {endDateString})</Accordion.Control>
 			<Accordion.Panel classNames={{ content: styles.contentWrapper }}>
+				<p className={styles.description}>{startDateString} -› {endDateString}</p>
 				<p className={styles.description}>{localizedDescriptionText}</p>
 				{localizedImageUrl && <AlertsListItemImageThumbnail alt={localizedHeaderText} href={alertHref} src={localizedImageUrl} />}
 				<Button href={alertHref} icon={<IconArrowUpRight size={16} />} label={t('open')} variant="pill" />

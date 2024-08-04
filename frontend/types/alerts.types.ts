@@ -50,6 +50,8 @@ export interface Alert {
 /* * */
 
 export interface AlertGroupByDate {
-	alerts: Alert[]
-	start_date: string
+	items: Alert[]
+	label?: string
+	title: string
+	value: string
 }

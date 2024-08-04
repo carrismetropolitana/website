@@ -34,6 +34,15 @@
 			"heading": "Alertas de Serviço",
 			"subheading":"Fique a par de todas as alterações à rede. Lorem ipsum dolor sit amet."
 		},
+		"AlertsList":{
+			"group_labels": {
+				"future": "A partir de {value, date, dayShort} {value, date, monthLong} {value, date, yearLong}",
+				"tomorrow": "A partir de amanhã, {value, date, dayShort} {value, date, monthLong} {value, date, yearLong}",
+				"today": "A partir de hoje, {value, date, dayShort} {value, date, monthLong} {value, date, yearLong}",
+				"yesterday": "Desde ontem, {value, date, dayShort} {value, date, monthLong} {value, date, yearLong}",
+				"past": "Desde {value, date, dayShort} {value, date, monthLong} {value, date, yearLong}"
+			}
+		},
 		"AlertsListItem":{
 			"open": "Abrir"
 		},

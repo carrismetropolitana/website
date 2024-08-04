@@ -4,6 +4,7 @@
 
 import type { Alert } from '@/types/alerts.types.js';
 
+import { DateTime } from 'luxon';
 import { createContext, useContext, useEffect, useState } from 'react';
 import useSWR from 'swr';
 
@@ -48,7 +49,7 @@ const initialContextState = {
 		raw: [],
 	},
 	filters: {
-		by_date: 'open',
+		by_date: 'current',
 		by_line: null,
 		by_municipality: null,
 	},
@@ -88,12 +89,31 @@ export const AlertsContextProvider = ({ children }) => {
 		let filterResult: Alert[] = allAlertsData || [];
 
 		//
-		// Filter by current_status
-		if (filtersState.by_date !== 'all') {
-			filterResult = filterResult.filter((alert) => {
-				return true; // alert.current_status === filtersState.by_date;
-			});
-		}
+		// Filter by_date
+		const nowInUnixSeconds = DateTime.now().startOf('day').toSeconds();
+		const oneWeekFromNowInUnixSeconds = DateTime.now().plus({ week: 1 }).endOf('day').toSeconds();
+
+		filterResult = filterResult.filter((item) => {
+			const alertStartDate = item.activePeriod[0].start || -Infinity;
+			const alertEndDate = item.activePeriod[0].end || +Infinity;
+			//
+			if (filtersState.by_date === 'current') {
+				// If the alert start date is before one week from now, and if the end date is after or equal to today
+				// then the alert is considered 'current'.
+				if (alertStartDate <= oneWeekFromNowInUnixSeconds && alertEndDate >= nowInUnixSeconds) {
+					return true;
+				}
+				return false;
+			}
+			else {
+				// If the alert start date is before one week from now, and if the end date is after or equal to today
+				// then the alert is considered 'current'.
+				if (alertStartDate <= oneWeekFromNowInUnixSeconds && alertEndDate >= nowInUnixSeconds) {
+					return false;
+				}
+				return true;
+			}
+		});
 
 		//
 		// Filter by municipality_id

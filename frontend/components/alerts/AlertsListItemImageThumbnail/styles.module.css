@@ -7,7 +7,7 @@
 	width: 100%;
 	max-width: 180px;
 	border-radius: 5px;
-	border: 1px solid var(--color-system-border-100);
+	border: 1px solid var(--color-system-border-200);
 	display: flex;
 	align-items: center;
 	justify-content: center;
@@ -16,8 +16,8 @@
 }
 
 .container:hover {
-	border-color: var(--color-system-border-200);
-	box-shadow: 0 0 15px 0 rgba(0, 0, 0, 0.03);
+	transform: scale(1.01);
+	box-shadow: 0 0 15px 0 rgba(0, 0, 0, 0.08);
 }
 
 /* * */
@@ -27,6 +27,12 @@
 	position: absolute;
 	z-index: 1;
 	color: var(--color-system-text-200);
+}
+
+@media (prefers-color-scheme: dark) {
+	.icon {
+		color: var(--color-system-text-400);
+	}
 }
 
 /* * */

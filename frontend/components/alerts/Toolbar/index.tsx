@@ -26,8 +26,8 @@ export default function Component() {
 	// B. Transform data
 
 	const byCurrentStatusOptions = [
-		{ disabled: alertsContext.counters.by_date.open === 0, label: t('by_date.current', { count: alertsContext.counters.by_date.open }), value: 'open' },
-		{ label: t('by_date.future'), value: 'all' },
+		{ disabled: alertsContext.counters.by_date.open === 1, label: t('by_date.current', { count: alertsContext.counters.by_date.open }), value: 'current' },
+		{ label: t('by_date.future'), value: 'future' },
 	];
 
 	// const byMunicipalityOptions = useMemo(() => {
