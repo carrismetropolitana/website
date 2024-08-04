@@ -46,19 +46,19 @@ export default function Component() {
 				const today = DateTime.local().startOf('day');
 				const alertStartDateObjectCompare = alertStartDateObject.startOf('day');
 				if (alertStartDateObjectCompare.equals(today)) {
-					formattedGroupLabel = t('group_labels.today', { value: alertStartDateObject.toJSDate() });
+					formattedGroupLabel = t('titles.today', { value: alertStartDateObject.toJSDate() });
 				}
 				else if (alertStartDateObjectCompare.equals(today.plus({ days: 1 }))) {
-					formattedGroupLabel = t('group_labels.tomorrow', { value: alertStartDateObject.toJSDate() });
+					formattedGroupLabel = t('titles.tomorrow', { value: alertStartDateObject.toJSDate() });
 				}
 				else if (alertStartDateObjectCompare.equals(today.minus({ days: 1 }))) {
-					formattedGroupLabel = t('group_labels.yesterday', { value: alertStartDateObject.toJSDate() });
+					formattedGroupLabel = t('titles.yesterday', { value: alertStartDateObject.toJSDate() });
 				}
 				else if (alertStartDateObjectCompare < today.minus({ days: 1 })) {
-					formattedGroupLabel = t('group_labels.past', { value: alertStartDateObject.toJSDate() });
+					formattedGroupLabel = t('titles.past', { value: alertStartDateObject.toJSDate() });
 				}
 				else {
-					formattedGroupLabel = t('group_labels.future', { value: alertStartDateObject.toJSDate() });
+					formattedGroupLabel = t('titles.future', { value: alertStartDateObject.toJSDate() });
 				}
 				result.push({
 					items: [item],
@@ -87,7 +87,7 @@ export default function Component() {
 	if (allAlertsGroupedByStartDate.length > 0) {
 		return (
 			allAlertsGroupedByStartDate.map(alertGroup => (
-				<GroupedListItem key={alertGroup.value} label="Alertas ativos" title={alertGroup.title}>
+				<GroupedListItem key={alertGroup.value} label={t('label', { count: alertGroup.items.length })} title={alertGroup.title}>
 					<Accordion>
 						{alertGroup.items.map(alert => (
 							<AlertListItem key={alert._id} data={alert} />

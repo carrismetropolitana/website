@@ -63,5 +63,13 @@
 /* CONTENT */
 
 .content {
-	padding: 0;
+	padding: var(--size-spacing-20);
+	padding-top: 0;
+}
+
+@media (max-width: 500px) {
+	.content {
+		padding: var(--size-spacing-20) var(--size-spacing-15);
+		padding-top: 0;
+	}
 }

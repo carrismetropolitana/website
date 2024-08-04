@@ -2,14 +2,18 @@
 /* CONTENT WRAPPER */
 
 .contentWrapper {
-	padding: var(--size-spacing-20) ;
-	padding-top: var(--size-spacing-5);
-	padding-left: 56px;
+	padding-left: calc(var(--size-spacing-20) + 35px);
 	display: flex;
 	flex-direction: column;
 	align-items: flex-start;
 	justify-content: flex-start;
 	gap: var(--size-spacing-20);
+}
+
+@media (max-width: 500px) {
+	.contentWrapper {
+		padding-left: calc(var(--size-spacing-15) + 35px);
+	}
 }
 
 /* * */
