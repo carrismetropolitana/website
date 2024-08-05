@@ -4,10 +4,10 @@
 
 import FoundItemsCounter from '@/components/common/FoundItemsCounter';
 import { useAlertsContext } from '@/contexts/alerts.context';
-import { SegmentedControl, Select } from '@mantine/core';
-import { IconMap } from '@tabler/icons-react';
+import { SegmentedControl } from '@mantine/core';
+// import { IconMap } from '@tabler/icons-react';
 import { useTranslations } from 'next-intl';
-import { useMemo } from 'react';
+// import { useMemo } from 'react';
 
 import styles from './styles.module.css';
 

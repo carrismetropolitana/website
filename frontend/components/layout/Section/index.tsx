@@ -1,10 +1,15 @@
 /* * */
 
+import { Link } from '@/translations/navigation';
+import { IconArrowLeft } from '@tabler/icons-react';
+import { useTranslations } from 'next-intl';
+
 import styles from './styles.module.css';
 
 /* * */
 
 interface SectionProps {
+	backButtonUrl?: string
 	children?: React.ReactNode
 	heading?: string
 	subheading?: string
@@ -16,12 +21,28 @@ interface SectionProps {
 
 /* * */
 
-export default function Component({ children, heading = '', subheading = '', withChildrenPadding = false, withGap = true, withTopBorder = true, withTopPadding = false }: SectionProps) {
+export default function Component({ backButtonUrl = '', children, heading = '', subheading = '', withChildrenPadding = false, withGap = true, withTopBorder = true, withTopPadding = false }: SectionProps) {
+	//
+
+	//
+	// A. Setup variables
+
+	const t = useTranslations('layout.Section');
+
+	//
+	// B. Render components
+
 	return (
 		<div className={`${styles.container} ${withTopBorder && styles.withTopBorder} ${withChildrenPadding && styles.withChildrenPadding} ${withTopPadding && styles.withTopPadding} ${withGap && styles.withGap} ${!heading && !subheading && !withTopPadding && styles.withoutHeadingOrSubheading}`}>
 			{heading && (
 				<div className={`${styles.headingWrapper}`}>
-					<h2 className={styles.heading}>{heading}</h2>
+					{backButtonUrl && (
+						<Link className={styles.backButton} href={backButtonUrl}>
+							<IconArrowLeft size={20} />
+							<span className={styles.backButtonLabel}>{t('back.label')}</span>
+						</Link>
+					)}
+					<h1 className={styles.heading}>{heading}</h1>
 					{subheading && <h6 className={styles.subheading}>{subheading}</h6>}
 				</div>
 			)}
@@ -30,4 +51,6 @@ export default function Component({ children, heading = '', subheading = '', wit
 			</div>
 		</div>
 	);
+
+	//
 }

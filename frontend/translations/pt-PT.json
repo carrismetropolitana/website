@@ -12,6 +12,13 @@
 		"retry": "Nova tentativa em {value} segundos",
 		"goto_home": "Voltar à página principal"
 	},
+	"layout": {
+		"Section":{
+			"back": {
+				"label": "Voltar"
+			}
+		}
+	},
 	"planner": {
 		"Page":{
 			"heading": "Os nossos parceiros",

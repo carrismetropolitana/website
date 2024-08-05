@@ -13,6 +13,7 @@
 	justify-content: center;
 	transition: all 300ms ease;
 	cursor: pointer;
+	position: relative;
 }
 
 .container:hover {
