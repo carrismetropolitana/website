@@ -11,24 +11,14 @@
 	justify-content: center;
 	transition: all 300ms ease;
 	cursor: pointer;
-	position: relative;
-}
-
-.blurAlways.container {
 	aspect-ratio: 16 / 9;
-}
-
-.blurAlways.container:hover {
-	transform: scale(1.01);
-	box-shadow: 0 0 15px 0 rgba(0, 0, 0, 0.08);
-}
-
-.container.sm {
+	position: relative;
 	max-width: 180px;
 }
 
-.container.lg {
-	max-width: none;
+.container:hover {
+	transform: scale(1.01);
+	box-shadow: 0 0 15px 0 rgba(0, 0, 0, 0.08);
 }
 
 /* * */
@@ -39,13 +29,6 @@
 	z-index: 1;
 	color: transparent;
 	transition: all 300ms ease;
-}
-
-.blurAlways .icon {
-	color: var(--color-system-text-200);
-}
-
-.blurHover:hover .icon {
 	color: var(--color-system-text-200);
 }
 
@@ -58,15 +41,8 @@
 /* * */
 /* IMAGE */
 
-.blurAlways .image {
-	filter: blur(3px);
+.image {
+	filter: blur(1px);
 	transform: scale(1.1);
-}
-
-.blurHover .image {
 	transition: all 300ms ease;
-}
-
-.blurHover:hover .image {
-	filter: blur(3px);
 }

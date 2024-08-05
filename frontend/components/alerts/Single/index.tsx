@@ -4,10 +4,11 @@
 
 import { AlertActivePeriodEnd, AlertActivePeriodStart } from '@/components/alerts/AlertActivePeriod';
 import { AlertCauseIcon, AlertEffectIcon } from '@/components/alerts/AlertIcon';
-import AlertsListItemImageThumbnail from '@/components/alerts/AlertsListItemImageThumbnail';
 import Button from '@/components/common/Button';
 import Section from '@/components/layout/Section';
 import { useAlertsContext } from '@/contexts/alerts.context';
+import { Image } from '@mantine/core';
+import { IconArrowUpRight, IconExternalLink } from '@tabler/icons-react';
 import { useTranslations } from 'next-intl';
 
 import styles from './styles.module.css';
@@ -20,7 +21,7 @@ export default function Component({ alert_id }) {
 	//
 	// A. Setup variables
 
-	const t = useTranslations('alerts.Page');
+	const t = useTranslations('alerts.Single');
 	const alertsContext = useAlertsContext();
 
 	//
@@ -41,8 +42,13 @@ export default function Component({ alert_id }) {
 			</Section>
 			<Section childrenWrapperStyles={styles.contentWrapper} withTopPadding={false} withChildrenNudge withChildrenPadding>
 				{simplifiedAlertData?.description && <p className={styles.description}>{simplifiedAlertData.description}</p>}
-				{simplifiedAlertData?.image_url && <AlertsListItemImageThumbnail alt={simplifiedAlertData?.title} blur="hover" href={simplifiedAlertData.image_url} size="lg" src={simplifiedAlertData.image_url} target="_blank" />}
-				{simplifiedAlertData?.url && <Button href={simplifiedAlertData.url} label={t('more_info')} />}
+				{simplifiedAlertData?.image_url && (
+					<>
+						<Image alt={simplifiedAlertData?.title} className={styles.image} src={simplifiedAlertData.image_url} />
+						<Button href={simplifiedAlertData.image_url} icon={<IconArrowUpRight size={16} />} label={t('open_full_image')} target="_blank" variant="pill" />
+					</>
+				)}
+				{simplifiedAlertData?.url && <Button href={simplifiedAlertData.url || '#'} icon={<IconExternalLink size={18} />} label={t('more_info')} />}
 			</Section>
 		</>
 	);

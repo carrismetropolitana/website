@@ -41,6 +41,10 @@
 			"heading": "Alertas de Serviço",
 			"subheading":"Fique a par de todas as alterações à rede. Lorem ipsum dolor sit amet."
 		},
+		"Single":{
+			"open_full_image": "Abrir imagem numa nova janela",
+			"more_info": "Mais informações"
+		},
 		"AlertsList":{
 			"label": "{count, plural, one {Alerta ativo} other {Alertas ativos}}",
 			"titles": {
