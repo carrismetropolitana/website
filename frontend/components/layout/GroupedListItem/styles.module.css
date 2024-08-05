@@ -20,8 +20,8 @@
 .label {
 	color: var(--color-system-text-300);
 	font-size: 10px;
-	font-weight: var(--font-weight-extrabold);
-	letter-spacing: 0.5px;
+	font-weight: var(--font-weight-bold);
+	letter-spacing: 0.25px;
 	text-align: left;
 	text-transform: uppercase;
 	padding-bottom: 3px;

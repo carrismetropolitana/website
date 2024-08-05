@@ -17,6 +17,26 @@
 }
 
 /* * */
+/* ACTIVE PERIOD */
+
+.activePeriod {
+	font-size: 10px;
+	font-weight: var(--font-weight-bold);
+	color: var(--color-system-text-300);
+	letter-spacing: 0.25px;
+	text-align: left;
+	text-transform: uppercase;
+}
+
+.activePeriod strong {
+	color: var(--color-system-text-200);
+}
+
+.activePeriod strong:first-child {
+	margin-right: var(--size-spacing-5);
+}
+
+/* * */
 /* DESCRIPTION */
 
 .description {

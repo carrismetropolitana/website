@@ -45,6 +45,7 @@
 			}
 		},
 		"AlertsListItem":{
+			"active_period": "Início: <important>{start, date, dayShort} {start, date, monthLong} {start, date, yearLong}</important> Fim: <important>{end, date, dayShort} {end, date, monthLong} {end, date, yearLong}</important>",
 			"open": "Abrir"
 		},
 		"Toolbar": {
