@@ -58,9 +58,9 @@
 		"AlertsListEmpty": {
 			"default": {
 				"title": "Nenhum alerta agendado",
-				"subtitle": "Instale a nossa app e seja notificado sobre alterações à rede.",
+				"subtitle": "Instale a App Carris Metropolitana e receba notificações sobre alterações à rede.",
 				"action_1": "Consultar Alertas Ativos Hoje",
-				"action_2": "Instalar App"
+				"action_2": "Instalar a App"
 			}
 		},
 		"AlertsListItem":{
