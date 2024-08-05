@@ -1,0 +1,38 @@
+/* * */
+/* CONTAINER */
+
+.container {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	justify-content: flex-start;
+	gap: var(--size-spacing-5);
+}
+
+/* * */
+/* LABEL */
+
+.label {
+	font-size: var(--font-size-text);
+	font-weight: var(--font-weight-bold);
+}
+
+
+/* * */
+/* SEVERITY LEVEL */
+
+.severityLevel_0 {
+	color: var(--color-alerts-0);
+}
+
+.severityLevel_1 {
+	color: var(--color-alerts-1);
+}
+
+.severityLevel_2 {
+	color: var(--color-alerts-2);
+}
+
+.severityLevel_3 {
+	color: var(--color-alerts-3);
+}

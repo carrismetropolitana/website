@@ -61,6 +61,35 @@
 				"future": "Futuros"
 			},
 			"found_items_counter": "{count, plural, =0 {Nenhum alerta encontrado} one {Encontrado # alerta:} other {Encontrados # alertas:}}"
+		},
+		"AlertIcon": {
+			"cause": {
+				"ACCIDENT": "Acidente",
+				"CONSTRUCTION": "Obras",
+				"DEMONSTRATION": "Evento / Manifestação",
+				"HOLIDAY": "Férias",
+				"MAINTENANCE": "Manutenção",
+				"MEDICAL_EMERGENCY": "Emergência Médica",
+				"OTHER_CAUSE": "Outras Causas",
+				"POLICE_ACTIVITY": "Atividade Policial",
+				"STRIKE": "Greve",
+				"TECHNICAL_PROBLEM": "Problema Técnico",
+				"UNKNOWN_CAUSE": "Outras Causas",
+				"WEATHER": "Mau Tempo"
+			},
+			"effect": {
+				"ACCESSIBILITY_ISSUE": "Impacto na Acessibilidade",
+				"ADDITIONAL_SERVICE": "Aumento de Serviço",
+				"DETOUR": "Desvio",
+				"MODIFIED_SERVICE": "Alteração de Horários",
+				"NO_EFFECT": "Outro",
+				"NO_SERVICE": "Serviço Cancelado",
+				"OTHER_EFFECT": "Outro",
+				"REDUCED_SERVICE": "Serviço Reduzido",
+				"SIGNIFICANT_DELAYS": "Atrasos Significativos",
+				"STOP_MOVED": "Paragem Deslocada",
+				"UNKNOWN_EFFECT": "Outro"
+			}
 		}
 	},
 	"stores": {

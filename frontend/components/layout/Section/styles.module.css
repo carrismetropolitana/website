@@ -65,6 +65,32 @@
 }
 
 /* * */
+/* BACK BUTTON */
+
+.backButton {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	justify-content: flex-start;
+	color: var(--color-system-text-400);
+	gap: var(--size-spacing-5);
+	margin-bottom: var(--size-spacing-5);
+	transition: all 300ms ease;
+}
+
+.backButton:hover {
+	color: var(--color-system-text-200);
+}
+
+.backButtonLabel {
+	font-size: 10px;
+	font-weight: var(--font-weight-bold);
+	text-transform: uppercase;
+	letter-spacing: 0.5px;
+	line-height: 1;
+}
+
+/* * */
 /* HEADING */
 
 .heading {

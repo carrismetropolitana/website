@@ -9,7 +9,7 @@ import styles from './styles.module.css';
 /* * */
 
 interface SectionProps {
-	backButtonUrl?: string
+	backButtonHref?: string
 	children?: React.ReactNode
 	heading?: string
 	subheading?: string
@@ -21,7 +21,7 @@ interface SectionProps {
 
 /* * */
 
-export default function Component({ backButtonUrl = '', children, heading = '', subheading = '', withChildrenPadding = false, withGap = true, withTopBorder = true, withTopPadding = false }: SectionProps) {
+export default function Component({ backButtonHref = '', children, heading = '', subheading = '', withChildrenPadding = false, withGap = true, withTopBorder = true, withTopPadding = false }: SectionProps) {
 	//
 
 	//
@@ -36,9 +36,9 @@ export default function Component({ backButtonUrl = '', children, heading = '', 
 		<div className={`${styles.container} ${withTopBorder && styles.withTopBorder} ${withChildrenPadding && styles.withChildrenPadding} ${withTopPadding && styles.withTopPadding} ${withGap && styles.withGap} ${!heading && !subheading && !withTopPadding && styles.withoutHeadingOrSubheading}`}>
 			{heading && (
 				<div className={`${styles.headingWrapper}`}>
-					{backButtonUrl && (
-						<Link className={styles.backButton} href={backButtonUrl}>
-							<IconArrowLeft size={20} />
+					{backButtonHref && (
+						<Link className={styles.backButton} href={backButtonHref}>
+							<IconArrowLeft size={14} />
 							<span className={styles.backButtonLabel}>{t('back.label')}</span>
 						</Link>
 					)}

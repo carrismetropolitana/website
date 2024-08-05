@@ -25,7 +25,7 @@
 		"dayjs": "1.11.12",
 		"embla-carousel-wheel-gestures": "8.0.1",
 		"inflected": "2.1.0",
-		"luxon": "3.4.4",
+		"luxon": "3.5.0",
 		"maplibre-gl": "4.5.1",
 		"minisearch": "^7.1.0",
 		"next": "14.2.5",

@@ -7,11 +7,12 @@ import type { Alert } from '@/types/alerts.types';
 import AlertsListItemImageThumbnail from '@/components/alerts/AlertsListItemImageThumbnail';
 import Button from '@/components/common/Button';
 import { Accordion } from '@mantine/core';
-import { IconAccessibleFilled, IconAlertHexagonFilled, IconArrowBigUpLinesFilled, IconArrowFork, IconArrowUpRight, IconCircleArrowDownFilled, IconClockExclamation, IconInfoCircleFilled, IconInfoTriangleFilled } from '@tabler/icons-react';
+import { IconArrowUpRight } from '@tabler/icons-react';
 import { DateTime } from 'luxon';
 import { useLocale, useTranslations } from 'next-intl';
 import { useMemo } from 'react';
 
+import { AlertEffectIcon } from '../AlertIcon';
 import styles from './styles.module.css';
 
 /* * */
@@ -35,27 +36,6 @@ export default function Component({ data }: AlertsListItemProps) {
 	// B. Transform data
 
 	const alertHref = `/alerts/${data._id}`;
-
-	const alertIcon = useMemo(() => {
-		switch (data.effect) {
-			case 'ACCESSIBILITY_ISSUE':
-				return <IconAccessibleFilled color="var(--color-alerts-0)" size={20} />;
-			case 'ADDITIONAL_SERVICE':
-				return <IconArrowBigUpLinesFilled color="var(--color-alerts-1)" size={20} />;
-			case 'DETOUR':
-				return <IconArrowFork color="var(--color-alerts-2)" size={20} />;
-			case 'MODIFIED_SERVICE':
-				return <IconInfoCircleFilled color="var(--color-alerts-0)" size={20} />;
-			case 'NO_SERVICE':
-				return <IconAlertHexagonFilled color="var(--color-alerts-3)" size={20} />;
-			case 'REDUCED_SERVICE':
-				return <IconCircleArrowDownFilled color="var(--color-alerts-2)" size={20} />;
-			case 'SIGNIFICANT_DELAYS':
-				return <IconClockExclamation color="var(--color-alerts-3)" size={20} />;
-			default:
-				return <IconInfoTriangleFilled color="var(--color-alerts-2)" size={20} />;
-		}
-	}, [data.effect]);
 
 	const localizedHeaderText = useMemo(() => {
 		const headerTextLocaleMatch = data.headerText.translation.find(item => item.language === currentLocale.split('-')[0]);
@@ -91,7 +71,7 @@ export default function Component({ data }: AlertsListItemProps) {
 
 	return (
 		<Accordion.Item value={data._id}>
-			<Accordion.Control icon={alertIcon}>{localizedHeaderText}</Accordion.Control>
+			<Accordion.Control icon={<AlertEffectIcon effect={data.effect} />}>{localizedHeaderText}</Accordion.Control>
 			<Accordion.Panel classNames={{ content: styles.contentWrapper }}>
 				<p className={styles.activePeriod}>{t.rich('active_period', { end: endDate, important: chunks => <strong>{chunks}</strong>, start: startDate })}</p>
 				<p className={styles.description}>{localizedDescriptionText}</p>

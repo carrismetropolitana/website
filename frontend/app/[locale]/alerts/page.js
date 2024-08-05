@@ -1,9 +1,14 @@
 /* * */
 
 import AlertsPage from '@/components/alerts/Page';
+import { AlertsContextProvider } from '@/contexts/alerts.context';
 
 /* * */
 
 export default function Page() {
-	return <AlertsPage />;
+	return (
+		<AlertsContextProvider>
+			<AlertsPage />
+		</AlertsContextProvider>
+	);
 }
