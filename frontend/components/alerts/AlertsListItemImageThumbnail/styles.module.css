@@ -2,10 +2,8 @@
 /* CONTAINER */
 
 .container {
-	aspect-ratio: 16 / 9;
 	overflow: hidden;
 	width: 100%;
-	max-width: 180px;
 	border-radius: 5px;
 	border: 1px solid var(--color-system-border-200);
 	display: flex;
@@ -16,9 +14,21 @@
 	position: relative;
 }
 
-.container:hover {
+.blurAlways.container {
+	aspect-ratio: 16 / 9;
+}
+
+.blurAlways.container:hover {
 	transform: scale(1.01);
 	box-shadow: 0 0 15px 0 rgba(0, 0, 0, 0.08);
+}
+
+.container.sm {
+	max-width: 180px;
+}
+
+.container.lg {
+	max-width: none;
 }
 
 /* * */
@@ -27,6 +37,15 @@
 .icon {
 	position: absolute;
 	z-index: 1;
+	color: transparent;
+	transition: all 300ms ease;
+}
+
+.blurAlways .icon {
+	color: var(--color-system-text-200);
+}
+
+.blurHover:hover .icon {
 	color: var(--color-system-text-200);
 }
 
@@ -39,7 +58,15 @@
 /* * */
 /* IMAGE */
 
-.image {
+.blurAlways .image {
 	filter: blur(3px);
 	transform: scale(1.1);
+}
+
+.blurHover .image {
+	transition: all 300ms ease;
+}
+
+.blurHover:hover .image {
+	filter: blur(3px);
 }

@@ -10,7 +10,7 @@ import styles from './styles.module.css';
 /* * */
 
 interface AlertCauseIconProps {
-	cause: AlertCause
+	cause?: AlertCause
 	withText?: boolean
 }
 
@@ -29,29 +29,16 @@ export function AlertCauseIcon({ cause, withText = false }: AlertCauseIconProps)
 
 	let severityLevel: number;
 	switch (cause) {
-		case 'ACCIDENT':
-		case 'TECHNICAL_PROBLEM':
-			severityLevel = 0;
-			break;
-		case 'CONSTRUCTION':
-			severityLevel = 0;
-			break;
-		case 'DEMONSTRATION':
-		case 'STRIKE':
-			severityLevel = 0;
-			break;
 		case 'HOLIDAY':
 			severityLevel = 0;
 			break;
-		case 'MAINTENANCE':
-			severityLevel = 0;
-			break;
+		case 'ACCIDENT':
+		case 'TECHNICAL_PROBLEM':
+		case 'DEMONSTRATION':
+		case 'STRIKE':
 		case 'MEDICAL_EMERGENCY':
 		case 'POLICE_ACTIVITY':
-			severityLevel = 0;
-			break;
-		case 'WEATHER':
-			severityLevel = 0;
+			severityLevel = 3;
 			break;
 		default:
 			severityLevel = 2;
@@ -109,7 +96,7 @@ export function AlertCauseIcon({ cause, withText = false }: AlertCauseIconProps)
 /* * */
 
 interface AlertEffectIconProps {
-	effect: AlertEffect
+	effect?: AlertEffect
 	withText?: boolean
 }
 

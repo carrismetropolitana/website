@@ -9,7 +9,6 @@
 	justify-content: center;
 	max-width: var(--size-width-global);
 	margin: auto;
-	padding-top: var(--size-spacing-30);
 	background-color: var(--color-system-background-100);
 }
 
@@ -54,7 +53,7 @@
 
 .headingWrapper {
 	width: 100%;
-	padding-left: var(--size-spacing-25);
+	padding-left: var(--size-spacing-20);
 	padding-right: var(--size-spacing-20);
 	display: flex;
 	flex-direction: column;
@@ -62,6 +61,10 @@
 	justify-content: flex-start;
 	gap: var(--size-spacing-10);
 
+}
+
+.headingWrapper.withHeadingNudge {
+	padding-left: var(--size-spacing-25);
 }
 
 /* * */
@@ -116,6 +119,10 @@
 	width: 100%;
 }
 
-.withChildrenPadding .childrenWrapper {
+.childrenWrapper.withChildrenPadding {
 	padding: var(--size-spacing-20);
+}
+
+.childrenWrapper.withChildrenNudge {
+	padding-left: var(--size-spacing-25);
 }

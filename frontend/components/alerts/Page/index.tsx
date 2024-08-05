@@ -21,10 +21,10 @@ export default function Component() {
 	return (
 		<>
 			<Section heading={t('heading')} subheading={t('subheading')} withTopBorder={false} />
-			<Section withChildrenPadding>
+			<Section withTopPadding={false} withChildrenPadding>
 				<Toolbar />
 			</Section>
-			<Section withTopBorder={false}>
+			<Section withTopBorder={false} withTopPadding={false}>
 				<AlertsList />
 			</Section>
 		</>

@@ -1,0 +1,19 @@
+/* * */
+/* TEXT */
+
+.text {
+	font-size: var(--font-size-text);
+	font-weight: var(--font-weight-bold);
+	color: var(--color-system-text-300);
+	text-align: left;
+}
+
+.text strong {
+	color: var(--color-system-text-200);
+}
+
+.text.sm {
+	font-size: 10px;
+	letter-spacing: 0.25px;
+	text-transform: uppercase;
+}

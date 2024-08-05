@@ -90,7 +90,7 @@ export default function Component() {
 				<GroupedListItem key={alertGroup.value} label={t('label', { count: alertGroup.items.length })} title={alertGroup.title}>
 					<Accordion>
 						{alertGroup.items.map(alert => (
-							<AlertListItem key={alert._id} data={alert} />
+							<AlertListItem key={alert._id} alert_id={alert._id} />
 						))}
 					</Accordion>
 				</GroupedListItem>

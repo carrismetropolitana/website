@@ -20,7 +20,7 @@ export default function Component() {
 	// B. Render components
 
 	return (
-		<Section heading={t('heading')} withChildrenPadding>
+		<Section heading={t('heading')} withGap={false} withChildrenPadding>
 			<div className={styles.innerWrapper}>
 				<MetricsSectionDemand />
 			</div>

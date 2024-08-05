@@ -2,9 +2,10 @@
 
 /* * */
 
-import type { Alert } from '@/types/alerts.types.js';
+import type { Alert, SimplifiedAlert } from '@/types/alerts.types.js';
 
 import { DateTime } from 'luxon';
+import { useLocale } from 'next-intl';
 import { createContext, useContext, useEffect, useState } from 'react';
 import useSWR from 'swr';
 
@@ -12,6 +13,7 @@ import useSWR from 'swr';
 
 interface AlertsContextState {
 	actions: {
+		getSimplifiedAlertById: (alert_id: string) => SimplifiedAlert | null
 		updateFilterByDate: (value: string) => void
 		updateFilterByMunicipality: (value: string) => void
 	}
@@ -36,6 +38,7 @@ interface AlertsContextState {
 
 const initialContextState = {
 	actions: {
+		getSimplifiedAlertById: () => null,
 		updateFilterByDate: () => { /**/ },
 		updateFilterByMunicipality: () => { /**/ },
 	},
@@ -70,7 +73,12 @@ export const AlertsContextProvider = ({ children }) => {
 	//
 
 	//
-	// A. Setup state
+	// A. Setup variables
+
+	const currentLocale = useLocale();
+
+	//
+	// B. Setup state
 
 	const [dataFilteredState, setDataFilteredState] = useState<Alert[]>([]);
 	const [filtersState, setFiltersState] = useState<AlertsContextState['filters']>(initialContextState.filters);
@@ -153,12 +161,61 @@ export const AlertsContextProvider = ({ children }) => {
 		setFiltersState(prev => ({ ...prev, by_municipality: value || null }));
 	};
 
+	const getSimplifiedAlertById = (alert_id: string): SimplifiedAlert | null => {
+		//
+		if (alert_id === 'CarrisMetropolitanaGTFSAlerts-21676') {
+			console.log('getSimplifiedAlertById', alert_id);
+		}
+		//
+		if (!allAlertsData) return null;
+		// Find the alert by ID
+		const alertData = allAlertsData.find(item => item._id === alert_id);
+		if (!alertData) return null;
+		// Find the localized header text
+		let localizedHeaderText: string;
+		const headerTextLocaleMatch = alertData.headerText.translation.find(item => item.language === currentLocale.split('-')[0]);
+		if (!headerTextLocaleMatch) localizedHeaderText = alertData.headerText.translation[0].text;
+		else localizedHeaderText = headerTextLocaleMatch.text;
+		// Find the localized description text
+		let localizedDescriptionText: string;
+		const descriptionTextLocaleMatch = alertData.descriptionText.translation.find(item => item.language === currentLocale.split('-')[0]);
+		if (!descriptionTextLocaleMatch) localizedDescriptionText = alertData.descriptionText.translation[0].text;
+		else localizedDescriptionText = descriptionTextLocaleMatch.text;
+		// Find the localized image URL
+		let localizedImageUrl: null | string;
+		if (!alertData.image || !alertData.image.localizedImage?.length) return null;
+		const imageLocaleMatch = alertData.image.localizedImage.find(item => item.language === currentLocale.split('-')[0]);
+		if (!imageLocaleMatch) localizedImageUrl = alertData.image.localizedImage[0].url.length > 0 ? alertData.image.localizedImage[0].url : null;
+		else localizedImageUrl = imageLocaleMatch.url.length > 0 ? imageLocaleMatch.url : null;
+		// Start date
+		const startDate = alertData.activePeriod[0].start ? alertData.activePeriod[0].start : -Infinity;
+		const startDateObject = DateTime.fromSeconds(startDate).toJSDate();
+		// End date
+		const endDate = alertData.activePeriod[0].end ? alertData.activePeriod[0].end : +Infinity;
+		const endDateObject = DateTime.fromSeconds(endDate).toJSDate();
+		//
+		return {
+			_id: alert_id,
+			cause: alertData.cause,
+			description: localizedDescriptionText,
+			effect: alertData.effect,
+			end_date: endDateObject,
+			image_url: localizedImageUrl,
+			locale: currentLocale,
+			start_date: startDateObject,
+			title: localizedHeaderText,
+			url: null,
+		};
+		//
+	};
+
 	//
 	// E. Render components
 
 	return (
 		<AlertsContext.Provider value={{
 			actions: {
+				getSimplifiedAlertById,
 				updateFilterByDate,
 				updateFilterByMunicipality,
 			},

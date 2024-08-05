@@ -49,6 +49,21 @@ export interface Alert {
 
 /* * */
 
+export interface SimplifiedAlert {
+	_id: string
+	cause: AlertCause
+	description: string
+	effect: AlertEffect
+	end_date: Date
+	image_url: null | string
+	locale: string
+	start_date: Date
+	title: string
+	url: null | string
+}
+
+/* * */
+
 export interface AlertGroupByDate {
 	items: Alert[]
 	label?: string

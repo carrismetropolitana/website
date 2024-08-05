@@ -52,7 +52,6 @@
 			}
 		},
 		"AlertsListItem":{
-			"active_period": "Início: <important>{start, date, dayShort} {start, date, monthLong} {start, date, yearLong}</important> Fim: <important>{end, date, dayShort} {end, date, monthLong} {end, date, yearLong}</important>",
 			"open": "Abrir"
 		},
 		"Toolbar": {
@@ -61,6 +60,10 @@
 				"future": "Futuros"
 			},
 			"found_items_counter": "{count, plural, =0 {Nenhum alerta encontrado} one {Encontrado # alerta:} other {Encontrados # alertas:}}"
+		},
+		"AlertActivePeriod": {
+			"start": "Início: <parsedDate>{start, date, dayShort} {start, date, monthLong} {start, date, yearLong}</parsedDate>",
+			"end": "Fim: <parsedDate>{end, date, dayShort} {end, date, monthLong} {end, date, yearLong}</parsedDate>"
 		},
 		"AlertIcon": {
 			"cause": {
