@@ -111,6 +111,14 @@
 	--font-size-muted: 12px;
 	--font-weight-muted: 500; /* Medium */
 
+	/* * */
+	/* COLOR / ALERTS */
+
+	--color-alerts-0: #3D85C6;
+	--color-alerts-1: #00CD32;
+	--color-alerts-2: #F5A000;
+	--color-alerts-3: #E64B23;
+
 }
 
 /* * */
@@ -155,6 +163,14 @@
 		--color-status-danger-border: #FAE6DC;
 		--color-status-danger-text: #e64b23;
 		--color-status-danger-shadow: #e64a2380;
+
+		/* * */
+		/* COLOR / ALERTS */
+
+		--color-alerts-0: #3D85C6;
+		--color-alerts-1: #00CD32;
+		--color-alerts-2: #F5A000;
+		--color-alerts-3: #E64B23;
 
   }
 }

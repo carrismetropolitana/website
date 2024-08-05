@@ -7,7 +7,7 @@ import type { Alert } from '@/types/alerts.types';
 import AlertsListItemImageThumbnail from '@/components/alerts/AlertsListItemImageThumbnail';
 import Button from '@/components/common/Button';
 import { Accordion } from '@mantine/core';
-import { IconArrowBigUpLines, IconArrowUpRight, IconBarrierBlock } from '@tabler/icons-react';
+import { IconAccessibleFilled, IconAlertHexagonFilled, IconArrowBigUpLinesFilled, IconArrowFork, IconArrowUpRight, IconCircleArrowDownFilled, IconClockExclamation, IconInfoCircleFilled, IconInfoTriangleFilled } from '@tabler/icons-react';
 import { DateTime } from 'luxon';
 import { useLocale, useTranslations } from 'next-intl';
 import { useMemo } from 'react';
@@ -38,10 +38,22 @@ export default function Component({ data }: AlertsListItemProps) {
 
 	const alertIcon = useMemo(() => {
 		switch (data.effect) {
+			case 'ACCESSIBILITY_ISSUE':
+				return <IconAccessibleFilled color="var(--color-alerts-0)" size={20} />;
 			case 'ADDITIONAL_SERVICE':
-				return <IconBarrierBlock color="var(--color-status-ok-text)" />;
+				return <IconArrowBigUpLinesFilled color="var(--color-alerts-1)" size={20} />;
+			case 'DETOUR':
+				return <IconArrowFork color="var(--color-alerts-2)" size={20} />;
+			case 'MODIFIED_SERVICE':
+				return <IconInfoCircleFilled color="var(--color-alerts-0)" size={20} />;
+			case 'NO_SERVICE':
+				return <IconAlertHexagonFilled color="var(--color-alerts-3)" size={20} />;
+			case 'REDUCED_SERVICE':
+				return <IconCircleArrowDownFilled color="var(--color-alerts-2)" size={20} />;
+			case 'SIGNIFICANT_DELAYS':
+				return <IconClockExclamation color="var(--color-alerts-3)" size={20} />;
 			default:
-				return <IconArrowBigUpLines color="var(--color-status-ok-text)" />;
+				return <IconInfoTriangleFilled color="var(--color-alerts-2)" size={20} />;
 		}
 	}, [data.effect]);
 

@@ -20,7 +20,7 @@
 	padding: var(--size-spacing-20);
 	background-color: var(--color-system-background-100);
 	align-items: flex-start;
-	gap: var(--size-spacing-10);
+	gap: var(--size-spacing-15);
 }
 
 @media (max-width: 500px) {
@@ -57,6 +57,7 @@
 
 .icon {
 	margin: 0;
+	margin-top: 3px;
 }
 
 /* * */
