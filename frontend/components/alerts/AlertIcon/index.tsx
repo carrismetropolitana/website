@@ -2,7 +2,7 @@
 
 import type { AlertCause, AlertEffect } from '@/types/alerts.types';
 
-import { IconAccessibleFilled, IconAlertHexagonFilled, IconAmbulance, IconArrowBigUpLinesFilled, IconArrowFork, IconBarrierBlockFilled, IconCalendarEvent, IconCarCrash, IconCircleArrowDownFilled, IconClock2, IconClockExclamation, IconCloudStorm, IconInfoCircleFilled, IconInfoTriangleFilled, IconSpeakerphone, IconTool } from '@tabler/icons-react';
+import { IconAccessible, IconAlertHexagon, IconAmbulance, IconArrowBigUpLines, IconArrowFork, IconBarrierBlock, IconCalendarEvent, IconCarCrash, IconCircleArrowDown, IconClock2, IconClockExclamation, IconCloudStorm, IconInfoTriangle, IconSpeakerphone, IconTool } from '@tabler/icons-react';
 import { useTranslations } from 'next-intl';
 
 import styles from './styles.module.css';
@@ -52,7 +52,7 @@ export function AlertCauseIcon({ cause, withText = false }: AlertCauseIconProps)
 			icon = <IconCarCrash className={styles[`severityLevel_${severityLevel}`]} size={20} />;
 			break;
 		case 'CONSTRUCTION':
-			icon = <IconBarrierBlockFilled className={styles[`severityLevel_${severityLevel}`]} size={20} />;
+			icon = <IconBarrierBlock className={styles[`severityLevel_${severityLevel}`]} size={20} />;
 			break;
 		case 'DEMONSTRATION':
 		case 'STRIKE':
@@ -134,10 +134,10 @@ export function AlertEffectIcon({ effect, withText = false }: AlertEffectIconPro
 	let icon: React.ReactNode;
 	switch (effect) {
 		case 'ACCESSIBILITY_ISSUE':
-			icon = <IconAccessibleFilled className={styles[`severityLevel_${severityLevel}`]} size={20} />;
+			icon = <IconAccessible className={styles[`severityLevel_${severityLevel}`]} size={20} />;
 			break;
 		case 'ADDITIONAL_SERVICE':
-			icon = <IconArrowBigUpLinesFilled className={styles[`severityLevel_${severityLevel}`]} size={20} />;
+			icon = <IconArrowBigUpLines className={styles[`severityLevel_${severityLevel}`]} size={20} />;
 			break;
 		case 'DETOUR':
 			icon = <IconArrowFork className={styles[`severityLevel_${severityLevel}`]} size={20} />;
@@ -146,16 +146,16 @@ export function AlertEffectIcon({ effect, withText = false }: AlertEffectIconPro
 			icon = <IconClock2 className={styles[`severityLevel_${severityLevel}`]} size={20} />;
 			break;
 		case 'NO_SERVICE':
-			icon = <IconAlertHexagonFilled className={styles[`severityLevel_${severityLevel}`]} size={20} />;
+			icon = <IconAlertHexagon className={styles[`severityLevel_${severityLevel}`]} size={20} />;
 			break;
 		case 'REDUCED_SERVICE':
-			icon = <IconCircleArrowDownFilled className={styles[`severityLevel_${severityLevel}`]} size={20} />;
+			icon = <IconCircleArrowDown className={styles[`severityLevel_${severityLevel}`]} size={20} />;
 			break;
 		case 'SIGNIFICANT_DELAYS':
 			icon = <IconClockExclamation className={styles[`severityLevel_${severityLevel}`]} size={20} />;
 			break;
 		default:
-			icon = <IconInfoTriangleFilled className={styles[`severityLevel_${severityLevel}`]} size={20} />;
+			icon = <IconInfoTriangle className={styles[`severityLevel_${severityLevel}`]} size={20} />;
 			break;
 	}
 
