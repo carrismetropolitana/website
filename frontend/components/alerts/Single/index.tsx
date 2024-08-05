@@ -8,8 +8,6 @@ import AlertsListItemImageThumbnail from '@/components/alerts/AlertsListItemImag
 import Button from '@/components/common/Button';
 import Section from '@/components/layout/Section';
 import { useAlertsContext } from '@/contexts/alerts.context';
-import { Link } from '@/translations/navigation';
-import { Image } from '@mantine/core';
 import { useTranslations } from 'next-intl';
 
 import styles from './styles.module.css';

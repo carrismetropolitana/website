@@ -5,4 +5,5 @@
 	color: var(--color-system-text-300);
     font-size: var(--font-size-text);
     font-weight: var(--font-weight-medium);
+	padding-left: var(--size-spacing-5);
 }

@@ -25,13 +25,13 @@ export default function Component() {
 
 	return (
 		<StoresContextProvider>
-			<Section heading={t('heading')} subheading={t('subheading')} withTopBorder={false} withChildrenPadding>
+			<Section heading={t('heading')} subheading={t('subheading')} withGap={false} withTopBorder={false} withChildrenPadding>
 				<Button href="https://www.navegante.pt/navegante/espacos-pontos-navegante" icon={<IconExternalLink size={18} />} label={t('external_link')} target="_blank" />
 			</Section>
-			<Section withChildrenPadding>
+			<Section withTopPadding={false} withChildrenPadding>
 				<Toolbar />
 			</Section>
-			<Section withTopBorder={false}>
+			<Section withTopBorder={false} withTopPadding={false}>
 				<StoresList />
 			</Section>
 		</StoresContextProvider>
