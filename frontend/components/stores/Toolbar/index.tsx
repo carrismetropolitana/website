@@ -26,7 +26,7 @@ export default function Component() {
 	// B. Transform data
 
 	const byCurrentStatusOptions = [
-		{ disabled: storesContext.counters.by_current_status.open === 0, label: t('by_current_status.open', { count: storesContext.counters.by_current_status.open }), value: 'open' },
+		{ label: t('by_current_status.open', { count: storesContext.counters.by_current_status.open }), value: 'open' },
 		{ label: t('by_current_status.all'), value: 'all' },
 	];
 
