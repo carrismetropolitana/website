@@ -91,7 +91,7 @@ export default function Component({ data }: AlertsListItemProps) {
 
 	return (
 		<Accordion.Item value={data._id}>
-			<Accordion.Control icon={alertIcon}>{localizedHeaderText} ({startDate.toLocaleString()} -› {endDate.toLocaleString()})</Accordion.Control>
+			<Accordion.Control icon={alertIcon}>{localizedHeaderText}</Accordion.Control>
 			<Accordion.Panel classNames={{ content: styles.contentWrapper }}>
 				<p className={styles.activePeriod}>{t.rich('active_period', { end: endDate, important: chunks => <strong>{chunks}</strong>, start: startDate })}</p>
 				<p className={styles.description}>{localizedDescriptionText}</p>
