@@ -22,7 +22,7 @@ export default async function Component() {
 
 	return (
 		<>
-			<Section heading={t('heading')} subheading={t('subheading')} withTopBorder={false} withChildrenPadding>
+			<Section heading={t('heading')} subheading={t('subheading')} withGap={false} withTopBorder={false} withChildrenPadding>
 				<Image alt="AML Map" className={styles.map} fallbackSrc="/news/placeholder.png" src="/images/aml-map.png" />
 			</Section>
 			<OperatorSection actions={[{ href: 'mailto:passageiro@viacaoalvorada.pt', type: 'email' }]} description={t('operator_sections.41.description')} title={t('operator_sections.41.title')} />
