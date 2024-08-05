@@ -51,6 +51,14 @@
 				"past": "Desde {value, date, dayShort} {value, date, monthLong} {value, date, yearLong}"
 			}
 		},
+		"AlertsListEmpty": {
+			"default": {
+				"title": "Nenhum alerta agendado",
+				"subtitle": "Instale a nossa app e seja notificado sobre alterações à rede.",
+				"action_1": "Consultar Alertas Ativos Hoje",
+				"action_2": "Instalar App"
+			}
+		},
 		"AlertsListItem":{
 			"open": "Abrir"
 		},
@@ -59,7 +67,7 @@
 				"current": "Esta semana",
 				"future": "Futuros"
 			},
-			"found_items_counter": "{count, plural, =0 {Nenhum alerta encontrado} one {Encontrado # alerta:} other {Encontrados # alertas:}}"
+			"found_items_counter": "{count, plural, =0 {Nenhum alerta encontrado.} one {Encontrado # alerta:} other {Encontrados # alertas:}}"
 		},
 		"AlertActivePeriod": {
 			"start": "Início: <parsedDate>{start, date, dayShort} {start, date, monthLong} {start, date, yearLong}</parsedDate>",
@@ -154,7 +162,7 @@
 			"by_municipality": {
 				"label": "Filtrar por Município"
 			},
-			"found_items_counter": "{count, plural, =0 {Nenhuma loja encontrada} one {Encontrada # loja:} other {Encontradas # lojas:}}"
+			"found_items_counter": "{count, plural, =0 {Nenhuma loja encontrada.} one {Encontrada # loja:} other {Encontradas # lojas:}}"
 		}
 	},
 	"HomeMetricsSection": {

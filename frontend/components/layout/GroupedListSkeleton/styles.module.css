@@ -37,5 +37,9 @@
 /* CHILDREN WRAPPER */
 
 .childrenWrapper {
+	border-top: 1px solid var(--color-system-border-100);
+}
+
+.childrenWrapper:last-child {
 	border-bottom: 1px solid var(--color-system-border-100);
 }

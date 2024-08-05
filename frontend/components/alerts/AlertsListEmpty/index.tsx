@@ -3,8 +3,8 @@
 /* * */
 
 import Button from '@/components/common/Button';
-import { useStoresContext } from '@/contexts/stores.context';
-import { IconExternalLink, IconEye, IconMap, IconSunset2 } from '@tabler/icons-react';
+import { useAlertsContext } from '@/contexts/alerts.context';
+import { IconExternalLink, IconEye, IconSunset2 } from '@tabler/icons-react';
 import { useTranslations } from 'next-intl';
 
 import styles from './styles.module.css';
@@ -17,33 +17,11 @@ export default function Component() {
 	//
 	// A. Setup variables
 
-	const t = useTranslations('stores.StoresListEmpty');
-	const storesContext = useStoresContext();
+	const t = useTranslations('alerts.AlertsListEmpty');
+	const alertsContext = useAlertsContext();
 
 	//
 	// D. Render Components
-
-	if (storesContext.filters.by_municipality) {
-		return (
-			<div className={styles.container}>
-				<IconSunset2 className={styles.icon} size={50} />
-				<h1 className={styles.title}>{t('by_municipality.title')}</h1>
-				<h2 className={styles.subtitle}>{t('by_municipality.subtitle')}</h2>
-				<div className={styles.actionWrapper}>
-					<Button icon={<IconEye size={18} />} label={t('by_municipality.action_1')} onClick={() => storesContext.actions.updateFilterCurrentStatus('all')} />
-					<Button
-						icon={<IconMap size={18} />}
-						label={t('by_municipality.action_2')}
-						onClick={() => {
-							storesContext.actions.updateFilterCurrentStatus('all');
-							storesContext.actions.updateFilterByMunicipality('');
-						}}
-					/>
-					<Button href="https://www.navegante.pt/navegante/espacos-pontos-navegante" icon={<IconExternalLink size={18} />} label={t('by_municipality.action_3')} target="_blank" />
-				</div>
-			</div>
-		);
-	}
 
 	return (
 		<div className={styles.container}>
@@ -51,7 +29,7 @@ export default function Component() {
 			<h1 className={styles.title}>{t('default.title')}</h1>
 			<h2 className={styles.subtitle}>{t('default.subtitle')}</h2>
 			<div className={styles.actionWrapper}>
-				<Button icon={<IconEye size={18} />} label={t('default.action_1')} onClick={() => storesContext.actions.updateFilterCurrentStatus('all')} />
+				<Button icon={<IconEye size={18} />} label={t('default.action_1')} onClick={() => alertsContext.actions.updateFilterByDate('current')} />
 				<Button href="https://www.navegante.pt/navegante/espacos-pontos-navegante" icon={<IconExternalLink size={18} />} label={t('default.action_2')} target="_blank" />
 			</div>
 		</div>
