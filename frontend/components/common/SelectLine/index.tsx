@@ -2,7 +2,7 @@
 
 /* * */
 
-import LineDisplay from '@/components/layout/LineDisplay';
+import LineDisplay from '@/components/lines/LineDisplay';
 import { createDocCollection } from '@/hooks/useOtherSearch';
 import { Line } from '@/utils/types';
 import { ActionIcon, Combobox, Group, TextInput, useCombobox } from '@mantine/core';

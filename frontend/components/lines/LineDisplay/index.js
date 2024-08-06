@@ -1,8 +1,8 @@
 /* * */
 
 import Loader from '@/components/common/Loader';
-import LineBadge from '@/components/layout/LineBadge';
-import LineName from '@/components/layout/LineName';
+import LineBadge from '@/components/lines/LineBadge';
+import LineName from '@/components/lines/LineName';
 
 import styles from './styles.module.css';
 

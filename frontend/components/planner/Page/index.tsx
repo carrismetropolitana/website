@@ -1,7 +1,7 @@
 /* * */
 
 import Carousel from '@/components/common/Carousel';
-import LayoutSection from '@/components/layout/Section';
+import Section from '@/components/layout/Section';
 import PlannerCard from '@/components/planner/Card';
 import PlannerCardSkeleton from '@/components/planner/CardSkeleton';
 import { Link } from '@/translations/navigation';
@@ -68,12 +68,12 @@ export default function Component() {
 	// C. Render Components
 
 	return (
-		<LayoutSection heading={t('heading')} subheading={t('subheading')} withTopBorder={false}>
+		<Section heading={t('heading')} subheading={t('subheading')} withTopBorder={false}>
 			<Carousel skeletonComponent={<PlannerCardSkeleton />} skeletonQty={4} slides={carouselSlides} slideSize={300} />
 			<Link className={styles.disclaimer} href="https://github.com/carrismetropolitana/website/blob/alpha/frontend/components/planner/Page/index.tsx" target="_blank">
 				{t('disclaimer')}
 			</Link>
-		</LayoutSection>
+		</Section>
 	);
 
 	//
