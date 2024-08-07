@@ -1,0 +1,67 @@
+'use client';
+
+/* * */
+
+import FoundItemsCounter from '@/components/common/FoundItemsCounter';
+import Section from '@/components/layout/Section';
+import { useLinesContext } from '@/contexts/lines.context';
+import { SegmentedControl, TextInput } from '@mantine/core';
+import { IconArrowLoopRight } from '@tabler/icons-react';
+import { useTranslations } from 'next-intl';
+
+import styles from './styles.module.css';
+
+/* * */
+
+export default function Component() {
+	//
+
+	//
+	// A. Setup variables
+
+	const t = useTranslations('lines.PageToolbar');
+	const linesContext = useLinesContext();
+
+	//
+	// B. Transform data
+
+	const currentViewOptions = [
+		{ label: t('by_current_view.all'), value: 'all' },
+		{ label: t('by_current_view.favorites'), value: 'favorites' },
+	];
+
+	//
+	// C. Handle actions
+
+	const handleFormSubmit = (e) => {
+		e.preventDefault();
+		return false;
+	};
+
+	const handleTextInputChange = ({ currentTarget }) => {
+		linesContext.actions.updateFilterBySearch(currentTarget.value);
+	};
+
+	//
+	// D. Render components
+
+	return (
+		<>
+			<Section childrenWrapperStyles={styles.container} withTopBorder={false} withTopPadding={false} withChildrenPadding>
+				<SegmentedControl data={currentViewOptions} onChange={linesContext.actions.updateFilterByCurrentView} value={linesContext.filters.by_current_view} fullWidth />
+			</Section>
+			{linesContext.filters.by_current_view === 'all' && (
+				<Section withTopBorder={false} withTopPadding={false} withChildrenPadding>
+					<form className={styles.container} onSubmit={handleFormSubmit}>
+						<TextInput leftSection={<IconArrowLoopRight size={20} />} onChange={handleTextInputChange} placeholder={t('by_search.placeholder')} type="search" value={linesContext.filters.by_search} />
+					</form>
+				</Section>
+			)}
+			<Section childrenWrapperStyles={styles.foundItemsCounterWrapper} withTopBorder={false} withTopPadding={false} withChildrenPadding>
+				<FoundItemsCounter text={t('found_items_counter', { count: linesContext.data.filtered.length })} />
+			</Section>
+		</>
+	);
+
+	//
+}

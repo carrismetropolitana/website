@@ -11,9 +11,9 @@ import { useTranslations } from 'next-intl';
 import React, { useState } from 'react';
 import useSWR from 'swr';
 
-import AlertCarousel from './AlertCarousel';
-import RouteMap from './RouteMap';
-import StopList from './StopList';
+import AlertCarousel from '../AlertCarousel';
+import RouteMap from '../RouteMap';
+import StopList from '../StopList';
 dayjs.locale(pt);
 
 import styles from './styles.module.css';

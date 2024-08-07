@@ -2,7 +2,7 @@ import { Link } from '@/translations/navigation';
 import { IconArrowRight } from '@tabler/icons-react';
 import { LegacyRef } from 'react';
 
-import styles from '../styles.module.css';
+import styles from '../Page/styles.module.css';
 
 // Single line component
 export default function Component({ line, refFn, style }: {

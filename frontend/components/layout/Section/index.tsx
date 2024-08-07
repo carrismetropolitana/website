@@ -49,9 +49,11 @@ export default function Component({ backButtonHref = '', children, childrenWrapp
 					{subheading && <h6 className={styles.subheading}>{subheading}</h6>}
 				</div>
 			)}
-			<div className={`${styles.childrenWrapper} ${withChildrenPadding && styles.withChildrenPadding} ${withChildrenNudge && styles.withChildrenNudge} ${childrenWrapperStyles && childrenWrapperStyles}`}>
-				{children}
-			</div>
+			{children && (
+				<div className={`${styles.childrenWrapper} ${withChildrenPadding && styles.withChildrenPadding} ${withChildrenNudge && styles.withChildrenNudge} ${childrenWrapperStyles && childrenWrapperStyles}`}>
+					{children}
+				</div>
+			)}
 		</div>
 	);
 

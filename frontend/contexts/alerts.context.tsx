@@ -84,12 +84,12 @@ export const AlertsContextProvider = ({ children }) => {
 	const [filtersState, setFiltersState] = useState<AlertsContextState['filters']>(initialContextState.filters);
 
 	//
-	// B. Fetch data
+	// C. Fetch data
 
 	const { data: allAlertsData, isLoading: allAlertsLoading } = useSWR<Alert[], Error>('https://api.carrismetropolitana.pt/v2/alerts');
 
 	//
-	// C. Transform data
+	// D. Transform data
 
 	const applyFiltersToData = () => {
 		//
@@ -151,7 +151,7 @@ export const AlertsContextProvider = ({ children }) => {
 	// }, []);
 
 	//
-	// D. Handle actions
+	// E. Handle actions
 
 	const updateFilterByDate = (value: string) => {
 		setFiltersState(prev => ({ ...prev, by_date: value }));
@@ -210,7 +210,7 @@ export const AlertsContextProvider = ({ children }) => {
 	};
 
 	//
-	// E. Render components
+	// F. Render components
 
 	return (
 		<AlertsContext.Provider value={{
@@ -233,7 +233,10 @@ export const AlertsContextProvider = ({ children }) => {
 				is_loading: allAlertsLoading,
 			},
 		}}
-		>{children}
+		>
+			{children}
 		</AlertsContext.Provider>
 	);
+
+	//
 };

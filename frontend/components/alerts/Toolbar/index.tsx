@@ -3,6 +3,7 @@
 /* * */
 
 import FoundItemsCounter from '@/components/common/FoundItemsCounter';
+import Section from '@/components/layout/Section';
 import { useAlertsContext } from '@/contexts/alerts.context';
 import { SegmentedControl } from '@mantine/core';
 // import { IconMap } from '@tabler/icons-react';
@@ -51,11 +52,12 @@ export default function Component() {
 	// C. Render components
 
 	return (
-		<div className={styles.container}>
+		<Section childrenWrapperStyles={styles.container} withTopBorder={false} withTopPadding={false} withChildrenPadding>
+
 			<SegmentedControl data={byCurrentStatusOptions} onChange={alertsContext.actions.updateFilterByDate} value={alertsContext.filters.by_date} fullWidth />
 			{/* <Select data={byMunicipalityOptions} leftSection={<IconMap size={20} />} onChange={alertsContext.actions.updateFilterByMunicipality} placeholder={t('by_municipality.label')} value={alertsContext.filters.by_municipality} clearable searchable /> */}
 			<FoundItemsCounter text={t('found_items_counter', { count: alertsContext.data.filtered.length })} />
-		</div>
+		</Section>
 	);
 
 	//

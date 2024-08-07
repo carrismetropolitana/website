@@ -1,5 +1,8 @@
-import ukkonen from 'ukkonen';
-// Faster levenshtein distance
+/* * */
+
+import ukkonen from 'ukkonen'; // Faster levenshtein distance
+
+/* * */
 
 type SearchType<T> = {
 	[K in keyof T]: T[K] extends string ? string : T[K];
@@ -7,9 +10,13 @@ type SearchType<T> = {
 	[key: string]: unknown
 	boost?: boolean
 };
+
 type KeyWithStringValue<T> = {
 	[K in keyof T]: T[K] extends string | string[] ? K : never;
 }[keyof T];
+
+/* * */
+
 function normalizeString(str: string): string {
 	const res = str.toLowerCase()
 		.normalize('NFD')
@@ -17,6 +24,8 @@ function normalizeString(str: string): string {
 		.replace(/[^a-z0-9 ]/g, '');
 	return res;
 };
+
+/* * */
 
 export function createDocCollection<T extends SearchType<T>>(docs: T[], scoring: { [K in KeyWithStringValue<T>]?: number }) {
 	const cachedDocs = docs.map((doc: T) => {

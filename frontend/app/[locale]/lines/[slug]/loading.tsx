@@ -1,11 +1,9 @@
 /* * */
 
-import Loading from '@/components/lines/Page/[slug]/loading';
+import Loader from '@/components/common/Loader';
 
 /* * */
 
-export default function Component() {
-	return (
-		<Loading />
-	);
+export default function Loading() {
+	return <Loader full visible />;
 }

@@ -50,7 +50,7 @@
     ".next/types/**/*.ts",
     "**/*.ts",
     "**/*.tsx"
-  ],
+, "components/lines/Page/index-prev._tsx", "components/layout/GridNav/index.js"  ],
   "typingOptions": {
     "enableAutoDiscovery": true
   }

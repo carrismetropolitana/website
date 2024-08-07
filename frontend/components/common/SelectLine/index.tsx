@@ -4,7 +4,7 @@
 
 import LineDisplay from '@/components/lines/LineDisplay';
 import { createDocCollection } from '@/hooks/useOtherSearch';
-import { Line } from '@/utils/types';
+import { Line } from '@/types/lines.types.js';
 import { ActionIcon, Combobox, Group, TextInput, useCombobox } from '@mantine/core';
 import { useDebouncedValue } from '@mantine/hooks';
 import { IconArrowLoopRight, IconSelector, IconX } from '@tabler/icons-react';
@@ -15,7 +15,16 @@ import styles from './styles.module.css';
 
 /* * */
 
-export default function Component({ data = [] as Line[], onSelectLineId = (_: null | string) => null, selectedLineId, variant, ...props }) {
+interface SelectLineProps {
+	data: Line[]
+	onSelectLineId: (lineId: null | string) => void
+	selectedLineId: null | string
+	variant: 'default' | 'white'
+}
+
+/* * */
+
+export default function Component({ data = [], onSelectLineId, selectedLineId, variant }: SelectLineProps) {
 	//
 	//
 	// A. Setup variables
@@ -28,14 +37,14 @@ export default function Component({ data = [] as Line[], onSelectLineId = (_: nu
 	//
 	// B. Transform data
 	const { search } = useMemo(() => createDocCollection(data.map(d => ({ boost: false, ...d })), {
-		id: 2,
+		line_id: 2,
 		localities: 1,
 		long_name: 1,
 		short_name: 1,
 	}), [data]);
 
 	const selectedLineData = useMemo(() => {
-		return data.find(item => item.id === selectedLineId);
+		return data.find(item => item.line_id === selectedLineId);
 	}, [selectedLineId, data]);
 
 	//
@@ -72,7 +81,8 @@ export default function Component({ data = [] as Line[], onSelectLineId = (_: nu
 	};
 
 	const handleSelectLine = (chosenSelectItemValue) => {
-		onSelectLineId(chosenSelectItemValue);
+		console.log(chosenSelectItemValue);
+		// onSelectLineId(chosenSelectItemValue);
 		comboboxStore.closeDropdown();
 	};
 
@@ -89,7 +99,7 @@ export default function Component({ data = [] as Line[], onSelectLineId = (_: nu
 								<IconArrowLoopRight size={20} />
 							</div>
 							<div className={styles.comboboxTargetInput}>
-								<LineDisplay color={selectedLineData?.color} long_name={selectedLineData?.long_name} short_name={selectedLineData?.short_name} text_color={selectedLineData?.text_color} />
+								<LineDisplay line={selectedLineData} />
 							</div>
 							<div className={styles.comboboxTargetSection} data-position="right">
 								<ActionIcon color="gray" onClick={handleClearSearchField} size="md" variant="subtle">
@@ -131,9 +141,9 @@ export default function Component({ data = [] as Line[], onSelectLineId = (_: nu
 					{allLinesDataFilteredBySearchQuery.length === 0
 						? <Combobox.Empty>{t('nothing_found')}</Combobox.Empty>
 						: allLinesDataFilteredBySearchQuery.map(item => (
-							<Combobox.Option key={item.id} className={item.id === selectedLineData?.id ? styles.selected : ''} value={item.id}>
+							<Combobox.Option key={item.line_id} className={item.line_id === selectedLineData?.line_id ? styles.selected : ''} value={item.line_id}>
 								<div className={styles.comboboxOption}>
-									<LineDisplay color={item.color} long_name={item.long_name} short_name={item.short_name} text_color={item.text_color} />
+									<LineDisplay line={item} />
 								</div>
 							</Combobox.Option>
 						),

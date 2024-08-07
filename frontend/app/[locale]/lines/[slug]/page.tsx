@@ -1,5 +1,5 @@
 /* * */
-import LinePage from '@/components/lines/Page/[slug]';
+import LinePage from '@/components/lines/Single';
 import { Line } from '@/utils/types';
 
 /* * */
