@@ -20,9 +20,10 @@ interface LinesContextState {
 		updateFilterBySearch: (value: string) => void
 	}
 	counters: {
-		none: number
+		favorites: number
 	}
 	data: {
+		favorites: Line[]
 		filtered: Line[]
 		raw: Line[]
 	}
@@ -47,9 +48,10 @@ const initialContextState = {
 		updateFilterBySearch: () => { /**/ },
 	},
 	counters: {
-		none: 0,
+		favorites: 0,
 	},
 	data: {
+		favorites: [],
 		filtered: [],
 		raw: [],
 	},
@@ -85,6 +87,7 @@ export const LinesContextProvider = ({ children }) => {
 	// B. Setup state
 
 	const [dataFilteredState, setDataFilteredState] = useState<Line[]>([]);
+	const [dataFavoritedState, setDataFavoritedState] = useState<Line[]>([]);
 	const [filtersState, setFiltersState] = useState<LinesContextState['filters']>(initialContextState.filters);
 
 	//
@@ -155,6 +158,11 @@ export const LinesContextProvider = ({ children }) => {
 		setDataFilteredState(filteredData);
 	}, [allLinesData, filtersState]);
 
+	useEffect(() => {
+		const favoritesLinesData = allLinesData?.filter(line => profileContext.profile.favoriteLines.includes(line.line_id)) || [];
+		setDataFavoritedState(favoritesLinesData);
+	}, [allLinesData, profileContext.profile.favoriteLines]);
+
 	//
 	// E. Handle actions
 
@@ -191,9 +199,10 @@ export const LinesContextProvider = ({ children }) => {
 				updateFilterBySearch,
 			},
 			counters: {
-				none: 0,
+				favorites: 0,
 			},
 			data: {
+				favorites: dataFavoritedState,
 				filtered: dataFilteredState,
 				raw: allLinesData || [],
 			},

@@ -51,7 +51,10 @@
 			"by_search": {
 				"placeholder": "Pesquisar por nome, número..."
 			},
-			"found_items_counter": "{count, plural, =0 {Nenhuma linha encontrada.} one {Encontrada # linha:} other {Encontradas # linhas:}}"
+			"found_items_counter": {
+				"all": "{count, plural, =0 {Nenhuma linha encontrada.} one {Encontrada # linha:} other {Encontradas # linhas:}}",
+				"favorites": "{count, plural, =0 {Nenhuma linha favorita encontrada.} one {Encontrada # linha favorita:} other {Encontradas # linhas favoritas:}}"
+			}
 		},
 		"FavoritesList":{
 			"no_favorites": "Ainda não tem linhas favoritas"
