@@ -15,11 +15,11 @@
 }
 
 .container:hover {
-	background-color: var(--color-system-background-200);
+	background-color: var(--color-system-background-300);
 }
 
 .container:active {
-	background-color: var(--color-system-background-300);
+	background-color: var(--color-system-background-200);
 }
 
 .container:last-child {

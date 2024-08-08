@@ -13,11 +13,14 @@ import useSWR from 'swr';
 
 interface LinesContextState {
 	actions: {
+		getLineById: (lineId: string) => Line | null
+		getLineIdFavoriteStatus: (lineId: string) => boolean | null
 		updateFilterByAttribute: (value: string) => void
 		updateFilterByCurrentView: (value: string) => void
 		updateFilterByFacility: (value: string) => void
 		updateFilterByMunicipalityOrLocality: (value: string) => void
 		updateFilterBySearch: (value: string) => void
+		updateLineIdFavoriteStatus: (lineId: string) => void
 	}
 	counters: {
 		favorites: number
@@ -41,11 +44,14 @@ interface LinesContextState {
 
 const initialContextState = {
 	actions: {
-		updateFilterByAttribute: () => { /**/ },
-		updateFilterByCurrentView: () => { /**/ },
-		updateFilterByFacility: () => { /**/ },
-		updateFilterByMunicipalityOrLocality: () => { /**/ },
-		updateFilterBySearch: () => { /**/ },
+		getLineById: () => null,
+		getLineIdFavoriteStatus: () => null,
+		updateFilterByAttribute: () => null,
+		updateFilterByCurrentView: () => null,
+		updateFilterByFacility: () => null,
+		updateFilterByMunicipalityOrLocality: () => null,
+		updateFilterBySearch: () => null,
+		updateLineIdFavoriteStatus: () => null,
 	},
 	counters: {
 		favorites: 0,
@@ -166,6 +172,23 @@ export const LinesContextProvider = ({ children }) => {
 	//
 	// E. Handle actions
 
+	const getLineById = (lineId: string) => {
+		return allLinesData?.find(line => line.line_id === lineId) || null;
+	};
+
+	const getLineIdFavoriteStatus = (lineId: string) => {
+		return profileContext.profile.favoriteLines.includes(lineId);
+	};
+
+	const updateLineIdFavoriteStatus = (lineId: string) => {
+		if (profileContext.profile.favoriteLines.includes(lineId)) {
+			profileContext.setFavoriteLines(profileContext.profile.favoriteLines.filter(id => id !== lineId));
+		}
+		else {
+			profileContext.setFavoriteLines([...profileContext.profile.favoriteLines, lineId]);
+		}
+	};
+
 	const updateFilterByAttribute = (value: string) => {
 		setFiltersState(prev => ({ ...prev, by_attribute: value }));
 	};
@@ -192,11 +215,14 @@ export const LinesContextProvider = ({ children }) => {
 	return (
 		<LinesContext.Provider value={{
 			actions: {
+				getLineById,
+				getLineIdFavoriteStatus,
 				updateFilterByAttribute,
 				updateFilterByCurrentView,
 				updateFilterByFacility,
 				updateFilterByMunicipalityOrLocality,
 				updateFilterBySearch,
+				updateLineIdFavoriteStatus,
 			},
 			counters: {
 				favorites: 0,

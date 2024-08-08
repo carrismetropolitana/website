@@ -11,11 +11,6 @@ import styles from './styles.module.css';
 
 /* * */
 
-/* * */
-/* PARSE DATE TO STRING */
-/* Explanation needed. */
-/* * */
-
 function dateToDayStr(dateObject: Date) {
 	// Get date components
 	const year = dateObject.getFullYear().toString();

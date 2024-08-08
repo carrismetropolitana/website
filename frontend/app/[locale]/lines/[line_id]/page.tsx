@@ -8,7 +8,7 @@ import { LinesContextProvider } from '@/contexts/lines.context';
 export default function Page({ params: { line_id } }) {
 	return (
 		<LinesContextProvider>
-			<LinesSingle line_id={line_id} />
+			<LinesSingle lineId={line_id} />
 		</LinesContextProvider>
 	);
 }
