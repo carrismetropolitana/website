@@ -1,0 +1,18 @@
+/* * */
+/* CONTAINER */
+
+.container {
+	display: flex;
+	align-items: center;
+	cursor: pointer;
+	transition: all 200ms ease;
+	color: var(--color-system-text-400);
+}
+
+.container:hover {
+	transform: scale(1.05);
+}
+
+.container:active {
+	transform: scale(1);
+}

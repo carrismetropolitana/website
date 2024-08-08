@@ -40,6 +40,9 @@
 		}
 	},
 	"lines":{
+		"Single":{
+			"heading": "Pesquisar Linhas"
+		},
 		"Page":{
 			"heading": "Pesquisar Linhas"
 		},

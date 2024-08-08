@@ -7,12 +7,20 @@
 	align-items: center;
 	justify-content: flex-start;
 	color: var(--color-system-text-100);
-	font-size: 15px;
-	font-weight: bold;
 	line-height: 1.2;
 	overflow: hidden;
 	text-overflow: ellipsis;
 	display: -webkit-box;
 	-webkit-line-clamp: 3;
 	-webkit-box-orient: vertical;
+}
+
+.name.md {
+	font-size: 15px;
+	font-weight: var(--font-weight-bold);
+}
+
+.name.lg {
+	font-size: 20px;
+	font-weight: var(--font-weight-bold);
 }
