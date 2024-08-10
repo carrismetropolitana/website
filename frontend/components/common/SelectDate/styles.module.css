@@ -1,9 +1,16 @@
 /* * */
+/* CONTAINER */
+
+.container {
+	width: 100%;
+}
+
+/* * */
 /* INNER WRAPPER */
 
 .innerWrapper {
     display: grid;
-    grid-template-columns: 1fr 1fr auto;
+    grid-template-columns: 1fr 1fr 1fr;
     padding: 5px;
     height: 50px;
     background-color: var(--color-system-background-300);

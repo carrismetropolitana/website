@@ -6,7 +6,7 @@ import { AlertActivePeriodEnd, AlertActivePeriodStart } from '@/components/alert
 import { AlertEffectIcon } from '@/components/alerts/AlertIcon';
 import AlertsListItemImageThumbnail from '@/components/alerts/AlertsListItemImageThumbnail';
 import Button from '@/components/common/Button';
-import { useAlertsContext } from '@/contexts/alerts.context';
+import { useAlertsListContext } from '@/contexts/alerts.list.context';
 import { Accordion } from '@mantine/core';
 import { IconArrowUpRight } from '@tabler/icons-react';
 import { useTranslations } from 'next-intl';
@@ -28,7 +28,7 @@ export default function Component({ alert_id }: AlertsListItemProps) {
 	// A. Setup variables
 
 	const t = useTranslations('alerts.AlertsListItem');
-	const alertsContext = useAlertsContext();
+	const alertsContext = useAlertsListContext();
 
 	//
 	// B. Transform data

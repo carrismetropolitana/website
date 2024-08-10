@@ -4,7 +4,7 @@
 
 import FoundItemsCounter from '@/components/common/FoundItemsCounter';
 import Section from '@/components/layout/Section';
-import { useAlertsContext } from '@/contexts/alerts.context';
+import { useAlertsListContext } from '@/contexts/alerts.list.context';
 import { SegmentedControl } from '@mantine/core';
 // import { IconMap } from '@tabler/icons-react';
 import { useTranslations } from 'next-intl';
@@ -21,7 +21,7 @@ export default function Component() {
 	// A. Setup variables
 
 	const t = useTranslations('alerts.Toolbar');
-	const alertsContext = useAlertsContext();
+	const alertsContext = useAlertsListContext();
 
 	//
 	// B. Transform data

@@ -11,7 +11,7 @@ import useSWR from 'swr';
 
 /* * */
 
-interface AlertsContextState {
+interface AlertsListContextState {
 	actions: {
 		getSimplifiedAlertById: (alert_id: string) => SimplifiedAlert | null
 		updateFilterByDate: (value: string) => void
@@ -61,15 +61,15 @@ const initialContextState = {
 	},
 };
 
-const AlertsContext = createContext<AlertsContextState>(initialContextState);
+const AlertsListContext = createContext<AlertsListContextState>(initialContextState);
 
-export function useAlertsContext() {
-	return useContext(AlertsContext);
+export function useAlertsListContext() {
+	return useContext(AlertsListContext);
 }
 
 /* * */
 
-export const AlertsContextProvider = ({ children }) => {
+export const AlertsListContextProvider = ({ children }) => {
 	//
 
 	//
@@ -81,7 +81,7 @@ export const AlertsContextProvider = ({ children }) => {
 	// B. Setup state
 
 	const [dataFilteredState, setDataFilteredState] = useState<Alert[]>([]);
-	const [filtersState, setFiltersState] = useState<AlertsContextState['filters']>(initialContextState.filters);
+	const [filtersState, setFiltersState] = useState<AlertsListContextState['filters']>(initialContextState.filters);
 
 	//
 	// C. Fetch data
@@ -126,7 +126,7 @@ export const AlertsContextProvider = ({ children }) => {
 		//
 		// Filter by municipality_id
 		if (filtersState.by_municipality) {
-			filterResult = filterResult.filter((alert) => {
+			filterResult = filterResult.filter(() => {
 				return true; // alert.municipality_id === filtersState.by_municipality;
 			});
 		}
@@ -213,7 +213,7 @@ export const AlertsContextProvider = ({ children }) => {
 	// F. Render components
 
 	return (
-		<AlertsContext.Provider value={{
+		<AlertsListContext.Provider value={{
 			actions: {
 				getSimplifiedAlertById,
 				updateFilterByDate,
@@ -235,7 +235,7 @@ export const AlertsContextProvider = ({ children }) => {
 		}}
 		>
 			{children}
-		</AlertsContext.Provider>
+		</AlertsListContext.Provider>
 	);
 
 	//

@@ -3,7 +3,7 @@
 /* * */
 
 import Button from '@/components/common/Button';
-import { useAlertsContext } from '@/contexts/alerts.context';
+import { useAlertsListContext } from '@/contexts/alerts.list.context';
 import { IconExternalLink, IconEye, IconSunset2 } from '@tabler/icons-react';
 import { useTranslations } from 'next-intl';
 
@@ -18,7 +18,7 @@ export default function Component() {
 	// A. Setup variables
 
 	const t = useTranslations('alerts.AlertsListEmpty');
-	const alertsContext = useAlertsContext();
+	const alertsContext = useAlertsListContext();
 
 	//
 	// D. Render Components

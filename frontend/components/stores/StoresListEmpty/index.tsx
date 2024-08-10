@@ -3,7 +3,7 @@
 /* * */
 
 import Button from '@/components/common/Button';
-import { useStoresContext } from '@/contexts/stores.context';
+import { useStoresListContext } from '@/contexts/stores.list.context';
 import { IconExternalLink, IconEye, IconMap, IconSunset2 } from '@tabler/icons-react';
 import { useTranslations } from 'next-intl';
 
@@ -18,7 +18,7 @@ export default function Component() {
 	// A. Setup variables
 
 	const t = useTranslations('stores.StoresListEmpty');
-	const storesContext = useStoresContext();
+	const storesContext = useStoresListContext();
 
 	//
 	// D. Render Components

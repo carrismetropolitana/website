@@ -9,7 +9,7 @@ import GroupedListSkeleton from '@/components/layout/GroupedListSkeleton';
 import StoresListEmpty from '@/components/stores/StoresListEmpty';
 import StoreListItem from '@/components/stores/StoresListItem';
 import StoresListItemSkeleton from '@/components/stores/StoresListItemSkeleton';
-import { useStoresContext } from '@/contexts/stores.context';
+import { useStoresListContext } from '@/contexts/stores.list.context';
 import collator from '@/utils/collator';
 import { useTranslations } from 'next-intl';
 import { useMemo } from 'react';
@@ -23,7 +23,7 @@ export default function Component() {
 	// A. Setup variables
 
 	const t = useTranslations('stores.StoresList');
-	const storesContext = useStoresContext();
+	const storesContext = useStoresListContext();
 
 	//
 	// B. Transform data

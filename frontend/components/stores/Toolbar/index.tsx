@@ -3,7 +3,7 @@
 /* * */
 
 import FoundItemsCounter from '@/components/common/FoundItemsCounter';
-import { useStoresContext } from '@/contexts/stores.context';
+import { useStoresListContext } from '@/contexts/stores.list.context';
 import { SegmentedControl, Select } from '@mantine/core';
 import { IconMap } from '@tabler/icons-react';
 import { useTranslations } from 'next-intl';
@@ -20,7 +20,7 @@ export default function Component() {
 	// A. Setup variables
 
 	const t = useTranslations('stores.Toolbar');
-	const storesContext = useStoresContext();
+	const storesContext = useStoresListContext();
 
 	//
 	// B. Transform data

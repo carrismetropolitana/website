@@ -6,7 +6,6 @@ import Button from '@/components/common/Button';
 import Section from '@/components/layout/Section';
 import StoresList from '@/components/stores/StoresList';
 import Toolbar from '@/components/stores/Toolbar';
-import { StoresContextProvider } from '@/contexts/stores.context';
 import { IconExternalLink } from '@tabler/icons-react';
 import { useTranslations } from 'next-intl';
 
@@ -24,7 +23,7 @@ export default function Component() {
 	// B. Render components
 
 	return (
-		<StoresContextProvider>
+		<>
 			<Section heading={t('heading')} subheading={t('subheading')} withGap={false} withTopBorder={false} withChildrenPadding>
 				<Button href="https://www.navegante.pt/navegante/espacos-pontos-navegante" icon={<IconExternalLink size={18} />} label={t('external_link')} target="_blank" />
 			</Section>
@@ -34,7 +33,7 @@ export default function Component() {
 			<Section withTopBorder={false} withTopPadding={false}>
 				<StoresList />
 			</Section>
-		</StoresContextProvider>
+		</>
 	);
 
 	//

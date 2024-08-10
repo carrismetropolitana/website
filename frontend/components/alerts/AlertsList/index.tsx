@@ -9,7 +9,7 @@ import AlertListItem from '@/components/alerts/AlertsListItem';
 import AlertsListItemSkeleton from '@/components/alerts/AlertsListItemSkeleton';
 import GroupedListItem from '@/components/layout/GroupedListItem';
 import GroupedListSkeleton from '@/components/layout/GroupedListSkeleton';
-import { useAlertsContext } from '@/contexts/alerts.context';
+import { useAlertsListContext } from '@/contexts/alerts.list.context';
 import collator from '@/utils/collator';
 import { Accordion } from '@mantine/core';
 import { DateTime } from 'luxon';
@@ -24,7 +24,7 @@ export default function Component() {
 	//
 	// A. Setup variables
 
-	const alertsContext = useAlertsContext();
+	const alertsContext = useAlertsListContext();
 	const t = useTranslations('alerts.AlertsList');
 
 	//

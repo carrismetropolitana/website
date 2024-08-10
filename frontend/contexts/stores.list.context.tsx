@@ -9,7 +9,7 @@ import useSWR from 'swr';
 
 /* * */
 
-interface StoresContextState {
+interface StoresListContextState {
 	actions: {
 		updateFilterByMunicipality: (value: string) => void
 		updateFilterCurrentStatus: (value: string) => void
@@ -57,22 +57,22 @@ const initialContextState = {
 	},
 };
 
-const StoresContext = createContext<StoresContextState>(initialContextState);
+const StoresListContext = createContext<StoresListContextState>(initialContextState);
 
-export function useStoresContext() {
-	return useContext(StoresContext);
+export function useStoresListContext() {
+	return useContext(StoresListContext);
 }
 
 /* * */
 
-export const StoresContextProvider = ({ children }) => {
+export const StoresListContextProvider = ({ children }) => {
 	//
 
 	//
 	// A. Setup state
 
 	const [dataFilteredState, setDataFilteredState] = useState<Store[]>([]);
-	const [filtersState, setFiltersState] = useState<StoresContextState['filters']>(initialContextState.filters);
+	const [filtersState, setFiltersState] = useState<StoresListContextState['filters']>(initialContextState.filters);
 
 	//
 	// B. Fetch data
@@ -137,7 +137,7 @@ export const StoresContextProvider = ({ children }) => {
 	// E. Render components
 
 	return (
-		<StoresContext.Provider value={{
+		<StoresListContext.Provider value={{
 			actions: {
 				updateFilterByMunicipality,
 				updateFilterCurrentStatus,
@@ -157,6 +157,6 @@ export const StoresContextProvider = ({ children }) => {
 			},
 		}}
 		>{children}
-		</StoresContext.Provider>
+		</StoresListContext.Provider>
 	);
 };
