@@ -4,7 +4,7 @@
 
 import FoundItemsCounter from '@/components/common/FoundItemsCounter';
 import Section from '@/components/layout/Section';
-import { useLinesContext } from '@/contexts/lines.context';
+import { useLinesListContext } from '@/contexts/LinesList.context';
 import { SegmentedControl, TextInput } from '@mantine/core';
 import { IconArrowLoopRight } from '@tabler/icons-react';
 import { useTranslations } from 'next-intl';
@@ -20,7 +20,7 @@ export default function Component() {
 	// A. Setup variables
 
 	const t = useTranslations('lines.PageToolbar');
-	const linesContext = useLinesContext();
+	const linesContext = useLinesListContext();
 
 	//
 	// B. Transform data

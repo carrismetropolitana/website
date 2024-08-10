@@ -2,7 +2,7 @@
 
 /* * */
 
-import type { Line } from '@/types/lines.types.js';
+import type { Line, Pattern, PatternGroup } from '@/types/lines.types.js';
 
 import { useProfileContext } from '@/contexts/ProfileContext';
 import { createDocCollection } from '@/hooks/useOtherSearch';
@@ -11,15 +11,11 @@ import useSWR from 'swr';
 
 /* * */
 
-interface LinesContextState {
+interface LinesSingleContextState {
 	actions: {
-		getLineById: (lineId: string) => Line | null
+		getLineDataByLineId: (lineId: string) => Line | null
 		getLineIdFavoriteStatus: (lineId: string) => boolean | null
-		updateFilterByAttribute: (value: string) => void
-		updateFilterByCurrentView: (value: string) => void
-		updateFilterByFacility: (value: string) => void
-		updateFilterByMunicipalityOrLocality: (value: string) => void
-		updateFilterBySearch: (value: string) => void
+		getLinePatternsDataByLineId: (lineId: string) => Pattern[] | null
 		updateLineIdFavoriteStatus: (lineId: string) => void
 	}
 	counters: {
@@ -44,8 +40,9 @@ interface LinesContextState {
 
 const initialContextState = {
 	actions: {
-		getLineById: () => null,
+		getLineDataByLineId: () => null,
 		getLineIdFavoriteStatus: () => null,
+		getLinePatternsDataByLineId: () => null,
 		updateFilterByAttribute: () => null,
 		updateFilterByCurrentView: () => null,
 		updateFilterByFacility: () => null,
@@ -73,15 +70,15 @@ const initialContextState = {
 	},
 };
 
-const LinesContext = createContext<LinesContextState>(initialContextState);
+const LinesSingleContext = createContext<LinesSingleContextState>(initialContextState);
 
-export function useLinesContext() {
-	return useContext(LinesContext);
+export function useLinesSingleContext() {
+	return useContext(LinesSingleContext);
 }
 
 /* * */
 
-export const LinesContextProvider = ({ children }) => {
+export const LinesSingleContextProvider = ({ children }) => {
 	//
 
 	//
@@ -94,7 +91,7 @@ export const LinesContextProvider = ({ children }) => {
 
 	const [dataFilteredState, setDataFilteredState] = useState<Line[]>([]);
 	const [dataFavoritedState, setDataFavoritedState] = useState<Line[]>([]);
-	const [filtersState, setFiltersState] = useState<LinesContextState['filters']>(initialContextState.filters);
+	const [filtersState, setFiltersState] = useState<LinesSingleContextState['filters']>(initialContextState.filters);
 
 	//
 	// C. Fetch data
@@ -172,8 +169,19 @@ export const LinesContextProvider = ({ children }) => {
 	//
 	// E. Handle actions
 
-	const getLineById = (lineId: string) => {
+	const getLineDataByLineId = (lineId: string) => {
 		return allLinesData?.find(line => line.line_id === lineId) || null;
+	};
+
+	const getLinePatternsDataByLineId = (lineId: string) => {
+		const lineData = getLineDataByLineId(lineId);
+		if (!lineData) return null;
+		return lineData.pattern_ids
+			.map((patternId) => {
+				const { data: patternData } = useSWR<Pattern>(`https://api.carrismetropolitana.pt/v2/patterns/${patternId}`);
+				return patternData;
+			})
+			.filter(item => item !== null && item !== undefined);
 	};
 
 	const getLineIdFavoriteStatus = (lineId: string) => {
@@ -213,10 +221,11 @@ export const LinesContextProvider = ({ children }) => {
 	// F. Render components
 
 	return (
-		<LinesContext.Provider value={{
+		<LinesSingleContext.Provider value={{
 			actions: {
-				getLineById,
+				getLineDataByLineId,
 				getLineIdFavoriteStatus,
+				getLinePatternsDataByLineId,
 				updateFilterByAttribute,
 				updateFilterByCurrentView,
 				updateFilterByFacility,
@@ -239,7 +248,7 @@ export const LinesContextProvider = ({ children }) => {
 		}}
 		>
 			{children}
-		</LinesContext.Provider>
+		</LinesSingleContext.Provider>
 	);
 
 	//

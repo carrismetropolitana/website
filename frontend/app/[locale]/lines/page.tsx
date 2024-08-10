@@ -1,14 +1,14 @@
 /* * */
 
 import LinesPage from '@/components/lines/Page';
-import { LinesContextProvider } from '@/contexts/lines.context';
+import { LinesListContextProvider } from '@/contexts/LinesList.context';
 
 /* * */
 
 export default function Page() {
 	return (
-		<LinesContextProvider>
+		<LinesListContextProvider>
 			<LinesPage />
-		</LinesContextProvider>
+		</LinesListContextProvider>
 	);
 }

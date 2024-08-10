@@ -4,7 +4,7 @@
 
 import FoundItemsCounter from '@/components/common/FoundItemsCounter';
 import Section from '@/components/layout/Section';
-import { useAlertsListContext } from '@/contexts/alerts.list.context';
+import { useAlertsListContext } from '@/contexts/AlertsList.context';
 import { SegmentedControl } from '@mantine/core';
 // import { IconMap } from '@tabler/icons-react';
 import { useTranslations } from 'next-intl';

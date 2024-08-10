@@ -6,7 +6,7 @@ import { AlertActivePeriodEnd, AlertActivePeriodStart } from '@/components/alert
 import { AlertCauseIcon, AlertEffectIcon } from '@/components/alerts/AlertIcon';
 import Button from '@/components/common/Button';
 import Section from '@/components/layout/Section';
-import { useAlertsListContext } from '@/contexts/alerts.list.context';
+import { useAlertsListContext } from '@/contexts/AlertsList.context';
 import { Image } from '@mantine/core';
 import { IconArrowUpRight, IconExternalLink } from '@tabler/icons-react';
 import { useTranslations } from 'next-intl';

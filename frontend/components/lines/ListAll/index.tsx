@@ -3,7 +3,7 @@
 import RegularListItem from '@/components/layout/RegularListItem';
 import Section from '@/components/layout/Section';
 import LineDisplay from '@/components/lines/LineDisplay';
-import { useLinesContext } from '@/contexts/lines.context';
+import { useLinesListContext } from '@/contexts/LinesList.context';
 import { AutoSizer, CellMeasurer, CellMeasurerCache, List, WindowScroller } from 'react-virtualized';
 
 import styles from './styles.module.css';
@@ -23,7 +23,7 @@ export default function Component() {
 	//
 	// A. Setup variables
 
-	const linesContext = useLinesContext();
+	const linesContext = useLinesListContext();
 
 	//
 	// B. Handle actions

@@ -9,7 +9,7 @@ import GroupedListSkeleton from '@/components/layout/GroupedListSkeleton';
 import StoresListEmpty from '@/components/stores/StoresListEmpty';
 import StoreListItem from '@/components/stores/StoresListItem';
 import StoresListItemSkeleton from '@/components/stores/StoresListItemSkeleton';
-import { useStoresListContext } from '@/contexts/stores.list.context';
+import { useStoresListContext } from '@/contexts/StoresList.context';
 import collator from '@/utils/collator';
 import { useTranslations } from 'next-intl';
 import { useMemo } from 'react';
@@ -57,9 +57,7 @@ export default function Component() {
 	// C. Render components
 
 	if (storesContext.flags.is_loading) {
-		return (
-			<GroupedListSkeleton groupCount={3} itemCount={2} itemSkeleton={<StoresListItemSkeleton />} />
-		);
+		return <GroupedListSkeleton groupCount={3} itemCount={2} itemSkeleton={<StoresListItemSkeleton />} />;
 	}
 
 	if (allStoresGroupedByMunicipality.length > 0) {
@@ -74,9 +72,7 @@ export default function Component() {
 		);
 	}
 
-	return (
-		<StoresListEmpty />
-	);
+	return <StoresListEmpty />;
 
 	//
 }

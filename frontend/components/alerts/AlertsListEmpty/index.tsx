@@ -3,7 +3,7 @@
 /* * */
 
 import Button from '@/components/common/Button';
-import { useAlertsListContext } from '@/contexts/alerts.list.context';
+import { useAlertsListContext } from '@/contexts/AlertsList.context';
 import { IconExternalLink, IconEye, IconSunset2 } from '@tabler/icons-react';
 import { useTranslations } from 'next-intl';
 

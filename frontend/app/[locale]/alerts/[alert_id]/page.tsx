@@ -1,7 +1,7 @@
 /* * */
 
 import AlertsSingle from '@/components/alerts/Single';
-import { AlertsListContextProvider } from '@/contexts/alerts.list.context';
+import { AlertsListContextProvider } from '@/contexts/AlertsList.context';
 
 /* * */
 

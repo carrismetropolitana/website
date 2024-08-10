@@ -4,7 +4,7 @@ import NoDataLabel from '@/components/layout/NoDataLabel';
 import RegularListItem from '@/components/layout/RegularListItem';
 import Section from '@/components/layout/Section';
 import LineDisplay from '@/components/lines/LineDisplay';
-import { useLinesContext } from '@/contexts/lines.context';
+import { useLinesListContext } from '@/contexts/LinesList.context';
 import { useTranslations } from 'next-intl';
 
 import styles from './styles.module.css';
@@ -18,7 +18,7 @@ export default function Component() {
 	// A. Setup variables
 
 	const t = useTranslations('lines.FavoritesList');
-	const linesContext = useLinesContext();
+	const linesContext = useLinesListContext();
 
 	//
 	// B. Render components

@@ -1,7 +1,7 @@
 /* * */
 
 import AlertsPage from '@/components/alerts/Page';
-import { AlertsListContextProvider } from '@/contexts/alerts.list.context';
+import { AlertsListContextProvider } from '@/contexts/AlertsList.context';
 
 /* * */
 

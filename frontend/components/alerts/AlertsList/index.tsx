@@ -9,7 +9,7 @@ import AlertListItem from '@/components/alerts/AlertsListItem';
 import AlertsListItemSkeleton from '@/components/alerts/AlertsListItemSkeleton';
 import GroupedListItem from '@/components/layout/GroupedListItem';
 import GroupedListSkeleton from '@/components/layout/GroupedListSkeleton';
-import { useAlertsListContext } from '@/contexts/alerts.list.context';
+import { useAlertsListContext } from '@/contexts/AlertsList.context';
 import collator from '@/utils/collator';
 import { Accordion } from '@mantine/core';
 import { DateTime } from 'luxon';

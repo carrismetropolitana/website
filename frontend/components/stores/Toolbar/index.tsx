@@ -3,7 +3,7 @@
 /* * */
 
 import FoundItemsCounter from '@/components/common/FoundItemsCounter';
-import { useStoresListContext } from '@/contexts/stores.list.context';
+import { useStoresListContext } from '@/contexts/StoresList.context';
 import { SegmentedControl, Select } from '@mantine/core';
 import { IconMap } from '@tabler/icons-react';
 import { useTranslations } from 'next-intl';

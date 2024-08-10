@@ -35,7 +35,7 @@ export interface Route {
 
 /* * */
 
-export interface Pattern {
+export interface PatternGroup {
 	color: string
 	direction: number
 	facilities: string[]
@@ -53,6 +53,8 @@ export interface Pattern {
 	trips: Trip[]
 	valid_on: string[]
 }
+
+export type Pattern = PatternGroup[];
 
 /* * */
 

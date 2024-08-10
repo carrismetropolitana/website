@@ -48,16 +48,16 @@ export default function Component({ lineId }) {
 	//
 	// B. Fetch data
 
-	const lineData = linesContext.actions.getLineById(lineId);
+	const lineData = linesContext.actions.getLineDataByLineId(lineId);
+	const allLinePatternsData = linesContext.actions.getLinePatternsDataByLineId(lineId);
 	const lineFavoriteStatus = linesContext.actions.getLineIdFavoriteStatus(lineId);
 
-	// const patterns = lineInfo.patterns.map(pattern_id => ({
-	// 	id: pattern_id,
-	// 	pattern: useSWR<Pattern[]>('https://api.carrismetropolitana.pt/v2/patterns/' + pattern_id).data,
-	// }));
+	//
+	// C. Transform data
 
-	// const dayString = dayjs(date).format('YYYYMMDD');
-	// const currentPatterns = patterns.map(p => p.pattern?.find(pat => pat.valid_on.includes(dayString))).filter(pat => pat != undefined);
+	const dayString = dayjs(date).format('YYYYMMDD');
+	const validPatternGroupsSelectOptions = allLinePatternsData?.find(pattern => pattern.find(patternGroup => patternGroup.valid_on.includes(dayString))) || null;
+
 	// const selectedPattern = currentPatterns.find(pat => pat.pattern_id === patternId);
 
 	// const alerts = useSWR<AlertDTO>('https://api.carrismetropolitana.pt/alerts').data;
@@ -100,8 +100,24 @@ export default function Component({ lineId }) {
 				</div>
 				<LineName line={lineData} size="lg" />
 			</Section>
-			<Section childrenWrapperStyles={styles.headingSection} withGap={false} withChildrenPadding>
+			<Section childrenWrapperStyles={styles.headingSection} withGap={false} withTopPadding={false} withChildrenPadding>
 				<SelectDate setDate={setDate} value={date} />
+				<div className={styles.routeSelector}>
+					<div className={styles.routeExplainer}>
+						<IconZoomQuestionFilled size={14} />{t('route_explainer')}
+					</div>
+					<Select
+						checkIconPosition="right"
+						classNames={styles}
+						data={currentPatterns.map(route => ({ disabled: route.pattern_id == undefined, label: route.headsign ? route.headsign : '', value: route.pattern_id }))}
+						leftSection={<IconArrowBarToRight size={20} />}
+						onChange={setPatternId}
+						placeholder={t('pick_route')}
+						rightSection={<IconVolume size={14} />}
+						size="lg"
+						value={patternId}
+					/>
+				</div>
 			</Section>
 		</>
 	);

@@ -19,7 +19,7 @@ interface AlertsListContextState {
 	}
 	counters: {
 		by_date: {
-			open: number
+			future: number
 		}
 	}
 	data: {
@@ -27,7 +27,7 @@ interface AlertsListContextState {
 		raw: Alert[]
 	}
 	filters: {
-		by_date: string
+		by_date: 'current' | 'future'
 		by_line: null | string
 		by_municipality: null | string
 	}
@@ -36,35 +36,16 @@ interface AlertsListContextState {
 	}
 }
 
-const initialContextState = {
-	actions: {
-		getSimplifiedAlertById: () => null,
-		updateFilterByDate: () => { /**/ },
-		updateFilterByMunicipality: () => { /**/ },
-	},
-	counters: {
-		by_date: {
-			open: 0,
-		},
-	},
-	data: {
-		filtered: [],
-		raw: [],
-	},
-	filters: {
-		by_date: 'current',
-		by_line: null,
-		by_municipality: null,
-	},
-	flags: {
-		is_loading: true,
-	},
-};
+/* * */
 
-const AlertsListContext = createContext<AlertsListContextState>(initialContextState);
+const AlertsListContext = createContext<AlertsListContextState | undefined>(undefined);
 
 export function useAlertsListContext() {
-	return useContext(AlertsListContext);
+	const context = useContext(AlertsListContext);
+	if (!context) {
+		throw new Error('useAlertsListContext must be used within a AlertsListContextProvider');
+	}
+	return context;
 }
 
 /* * */
@@ -77,19 +58,19 @@ export const AlertsListContextProvider = ({ children }) => {
 
 	const currentLocale = useLocale();
 
-	//
-	// B. Setup state
-
 	const [dataFilteredState, setDataFilteredState] = useState<Alert[]>([]);
-	const [filtersState, setFiltersState] = useState<AlertsListContextState['filters']>(initialContextState.filters);
+
+	const [filterByDateState, setFilterByDateState] = useState <AlertsListContextState['filters']['by_date']>('current');
+	const [filterByLineState, setFilterByLineState] = useState <AlertsListContextState['filters']['by_line']>(null);
+	const [filterByMunicipalityState, setFilterByMunicipalityState] = useState <AlertsListContextState['filters']['by_municipality']>(null);
 
 	//
-	// C. Fetch data
+	// B. Fetch data
 
 	const { data: allAlertsData, isLoading: allAlertsLoading } = useSWR<Alert[], Error>('https://api.carrismetropolitana.pt/v2/alerts');
 
 	//
-	// D. Transform data
+	// C. Transform data
 
 	const applyFiltersToData = () => {
 		//
@@ -105,7 +86,7 @@ export const AlertsListContextProvider = ({ children }) => {
 			const alertStartDate = item.activePeriod[0].start || -Infinity;
 			const alertEndDate = item.activePeriod[0].end || +Infinity;
 			//
-			if (filtersState.by_date === 'current') {
+			if (filterByDateState === 'current') {
 				// If the alert start date is before one week from now, and if the end date is after or equal to today
 				// then the alert is considered 'current'.
 				if (alertStartDate <= oneWeekFromNowInUnixSeconds && alertEndDate >= nowInUnixSeconds) {
@@ -125,9 +106,9 @@ export const AlertsListContextProvider = ({ children }) => {
 
 		//
 		// Filter by municipality_id
-		if (filtersState.by_municipality) {
+		if (filterByMunicipalityState) {
 			filterResult = filterResult.filter(() => {
-				return true; // alert.municipality_id === filtersState.by_municipality;
+				return true; // alert.municipality_id === filterByMunicipalityState;
 			});
 		}
 
@@ -141,24 +122,21 @@ export const AlertsListContextProvider = ({ children }) => {
 	useEffect(() => {
 		const filteredAlerts = applyFiltersToData();
 		setDataFilteredState(filteredAlerts);
-	}, [allAlertsData, filtersState]);
-
-	// useEffect(() => {
-	// 	if (!allAlertsData) return;
-	// 	if (allAlertsData?.filter((item => item.current_status === 'open')).length === 0) {
-	// 		setFiltersState(prev => ({ ...prev, by_date: 'all' }));
-	// 	}
-	// }, []);
+	}, [allAlertsData, filterByDateState, filterByMunicipalityState]);
 
 	//
-	// E. Handle actions
+	// D. Handle actions
 
-	const updateFilterByDate = (value: string) => {
-		setFiltersState(prev => ({ ...prev, by_date: value }));
+	const updateFilterByDate = (value: AlertsListContextState['filters']['by_date']) => {
+		setFilterByDateState(value);
 	};
 
-	const updateFilterByMunicipality = (value?: string) => {
-		setFiltersState(prev => ({ ...prev, by_municipality: value || null }));
+	const updateFilterByLine = (value: AlertsListContextState['filters']['by_line']) => {
+		setFilterByLineState(value || null);
+	};
+
+	const updateFilterByMunicipality = (value: AlertsListContextState['filters']['by_municipality']) => {
+		setFilterByMunicipalityState(value || null);
 	};
 
 	const getSimplifiedAlertById = (alert_id: string): SimplifiedAlert | null => {
@@ -210,30 +188,38 @@ export const AlertsListContextProvider = ({ children }) => {
 	};
 
 	//
+	// E. Define context value
+
+	const contextValue: AlertsListContextState = {
+		actions: {
+			getSimplifiedAlertById,
+			updateFilterByDate,
+			updateFilterByMunicipality,
+		},
+		counters: {
+			by_date: {
+				future: 0, // allAlertsData?.filter((item => item.current_status === 'open')).length || 0,
+			},
+		},
+		data: {
+			filtered: dataFilteredState,
+			raw: allAlertsData || [],
+		},
+		filters: {
+			by_date: filterByDateState,
+			by_line: filterByLineState,
+			by_municipality: filterByMunicipalityState,
+		},
+		flags: {
+			is_loading: allAlertsLoading,
+		},
+	};
+
+	//
 	// F. Render components
 
 	return (
-		<AlertsListContext.Provider value={{
-			actions: {
-				getSimplifiedAlertById,
-				updateFilterByDate,
-				updateFilterByMunicipality,
-			},
-			counters: {
-				by_date: {
-					open: 0, // allAlertsData?.filter((item => item.current_status === 'open')).length || 0,
-				},
-			},
-			data: {
-				filtered: dataFilteredState,
-				raw: allAlertsData || [],
-			},
-			filters: filtersState,
-			flags: {
-				is_loading: allAlertsLoading,
-			},
-		}}
-		>
+		<AlertsListContext.Provider value={contextValue}>
 			{children}
 		</AlertsListContext.Provider>
 	);

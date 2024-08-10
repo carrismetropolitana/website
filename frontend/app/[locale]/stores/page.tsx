@@ -1,7 +1,7 @@
 /* * */
 
 import StoresPage from '@/components/stores/Page';
-import { StoresListContextProvider } from '@/contexts/stores.list.context';
+import { StoresListContextProvider } from '@/contexts/StoresList.context';
 
 /* * */
 
