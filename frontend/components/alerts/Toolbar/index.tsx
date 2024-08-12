@@ -27,7 +27,7 @@ export default function Component() {
 	// B. Transform data
 
 	const byCurrentStatusOptions = [
-		{ disabled: alertsContext.counters.by_date.open === 1, label: t('by_date.current', { count: alertsContext.counters.by_date.open }), value: 'current' },
+		{ label: t('by_date.current', { count: alertsContext.counters.by_date.future }), value: 'current' },
 		{ label: t('by_date.future'), value: 'future' },
 	];
 
@@ -53,7 +53,6 @@ export default function Component() {
 
 	return (
 		<Section childrenWrapperStyles={styles.container} withTopBorder={false} withTopPadding={false} withChildrenPadding>
-
 			<SegmentedControl data={byCurrentStatusOptions} onChange={alertsContext.actions.updateFilterByDate} value={alertsContext.filters.by_date} fullWidth />
 			{/* <Select data={byMunicipalityOptions} leftSection={<IconMap size={20} />} onChange={alertsContext.actions.updateFilterByMunicipality} placeholder={t('by_municipality.label')} value={alertsContext.filters.by_municipality} clearable searchable /> */}
 			<FoundItemsCounter text={t('found_items_counter', { count: alertsContext.data.filtered.length })} />
