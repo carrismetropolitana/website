@@ -65,32 +65,31 @@ export const AnalyticsContextProvider = ({ children }) => {
 		// Get decision value from local storage
 		if (typeof window === 'undefined') return;
 		const isEnabledLocal = localStorage.getItem(LOCAL_STORAGE_KEYS.is_enabled);
+		const decisionDateLocal = localStorage.getItem(LOCAL_STORAGE_KEYS.decision_date);
+		// Check if the stored value is known
 		if (isEnabledLocal !== 'yes' && isEnabledLocal !== 'no' && isEnabledLocal !== null) {
+			console.log('here1');
 			reset();
 			return;
 		}
-		setFlagIsEnabledState(isEnabledLocal);
-	}, []);
-
-	useEffect(() => {
-		// Check if decision date is still valid
-		if (typeof window === 'undefined') return;
-		const decisionDateLocal = localStorage.getItem(LOCAL_STORAGE_KEYS.decision_date);
+		// Check if stored date is in a valid format
 		const decisionDateData = decisionDateLocal ? DateTime.fromFormat(decisionDateLocal, 'yyyyMMdd') : null;
 		if (!decisionDateData?.isValid) {
 			reset();
 			return;
 		};
-		//
+		// Check if stored decision date has not expired
 		const daysSinceLastDecision = DateTime.now().diff(decisionDateData, 'days');
 		const yesDecisionIsExpired = flagIsEnabledState === 'yes' && daysSinceLastDecision.days > DECISION_EXPIRATION_IN_DAYS_YES;
 		const noDecisionIsExpired = flagIsEnabledState === 'no' && daysSinceLastDecision.days > DECISION_EXPIRATION_IN_DAYS_NO;
-		//
 		if (yesDecisionIsExpired || noDecisionIsExpired) {
 			reset();
 			return;
 		}
-	}, []);
+		// Set local state
+		setFlagIsEnabledState(isEnabledLocal);
+		setFlagShouldAskState(false);
+	});
 
 	//
 	// C. Handle actions
