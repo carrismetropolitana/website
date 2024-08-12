@@ -3,7 +3,7 @@
 /* * */
 
 import Section from '@/components/layout/Section';
-import { useAppAnalyticsContext } from '@/contexts/AppAnalyticsContext';
+import { useAnalyticsContext } from '@/contexts/Analytics.context';
 import { Button, Group, Table } from '@mantine/core';
 import { openConfirmModal } from '@mantine/modals';
 import { IconCircleCheckFilled } from '@tabler/icons-react';
@@ -20,14 +20,14 @@ export default function Component() {
 	// A. Setup variables
 
 	const t = useTranslations('CookiesPage');
-	const analyticsContext = useAppAnalyticsContext();
+	const analyticsContext = useAnalyticsContext();
 
 	//
 	// B. Handle actions
 
 	const handleEnable = () => {
-		analyticsContext.enable();
-		analyticsContext.capture('test');
+		analyticsContext.actions.enable();
+		analyticsContext.actions.capture('test');
 	};
 
 	const handleDisable = () => {
@@ -38,7 +38,7 @@ export default function Component() {
 			confirmProps: { color: 'red' },
 			labels: { cancel: t('sections.question_6.refuse_modal.cancel'), confirm: t('sections.question_6.refuse_modal.confirm') },
 			onConfirm: () => {
-				analyticsContext.disable();
+				analyticsContext.actions.reset();
 			},
 			title: t('sections.question_6.refuse_modal.title'),
 		});
@@ -50,10 +50,10 @@ export default function Component() {
 	return (
 		<>
 
-			<Section heading={t('sections.intro.title')} withGlobalPadding>
+			<Section heading={t('sections.intro.title')} withChildrenPadding>
 				<div className={styles.text}>{t('sections.intro.paragraphs.1')}</div>
 			</Section>
-			<Section heading={t('title')} withGlobalPadding>
+			<Section heading={t('title')} withChildrenPadding>
 				<div className={styles.container}>
 					<div className={styles.section}>
 						<div className={styles.title}>{t('sections.question_1.title')}</div>
@@ -113,19 +113,19 @@ export default function Component() {
 						<div className={styles.text}>{t('sections.question_6.paragraphs.1')}</div>
 						<div className={styles.text}>{t('sections.question_6.paragraphs.2')}</div>
 						<div className={styles.authorizationOptions}>
-							{!analyticsContext.enabled
+							{!analyticsContext.flags.is_enabled
 							&& (
 								<Button color="green" onClick={handleEnable} variant="light">
 									{t('sections.question_6.accept')}
 								</Button>
 							)}
-							{analyticsContext.enabled
+							{analyticsContext.flags.is_enabled
 							&& (
 								<Button color="green" leftSection={<IconCircleCheckFilled size={16} />} onClick={() => null} variant="outline">
 									{t('sections.question_6.enabled')}
 								</Button>
 							)}
-							{analyticsContext.enabled
+							{analyticsContext.flags.is_enabled
 							&& (
 								<Button color="red" onClick={handleDisable} variant="light">
 									{t('sections.question_6.refuse')}
