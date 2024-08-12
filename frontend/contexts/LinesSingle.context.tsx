@@ -68,7 +68,7 @@ export const LinesSingleContextProvider = ({ children, lineId }) => {
 	}, [profileContext.data.favorite_lines, lineId]);
 
 	//
-	// E. Handle actions
+	// D. Handle actions
 
 	// const getLinePatternsDataByLineId = (lineId: string) => {
 	// 	const lineData = getLineDataByLineId(lineId);

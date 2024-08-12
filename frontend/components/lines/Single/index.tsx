@@ -28,7 +28,6 @@ export default function Component() {
 	//
 	// B. Fetch data
 
-	const lineData = linesSingleContext.data.line;
 	// const allLinePatternsData = linesContext.actions.getLinePatternsDataByLineId(lineId);
 
 	//
@@ -56,7 +55,7 @@ export default function Component() {
 	//
 	// E. Render components
 
-	if (!lineData) {
+	if (!linesSingleContext.data.line) {
 		return <Section backButtonHref="/lines" withTopBorder={false} withChildrenPadding />;
 	}
 
@@ -64,10 +63,10 @@ export default function Component() {
 		<>
 			<Section backButtonHref="/lines" childrenWrapperStyles={styles.headingSection} withGap={false} withTopBorder={false} withChildrenPadding>
 				<div className={styles.headingSectionRow}>
-					<LineBadge line={lineData} size="lg" />
-					<FavoriteToggle color={lineData.color} isActive={linesSingleContext.flags.is_favorite} onToggle={handleToggleFavorite} />
+					<LineBadge line={linesSingleContext.data.line} size="lg" />
+					<FavoriteToggle color={linesSingleContext.data.line.color} isActive={linesSingleContext.flags.is_favorite} onToggle={handleToggleFavorite} />
 				</div>
-				<LineName line={lineData} size="lg" />
+				<LineName line={linesSingleContext.data.line} size="lg" />
 			</Section>
 			{/* <Section childrenWrapperStyles={styles.headingSection} withGap={false} withTopPadding={false} withChildrenPadding>
 				<SelectDate setDate={setDate} value={date} />
