@@ -26,6 +26,7 @@ interface SelectLineProps {
 
 export default function Component({ data = [], onSelectLineId, selectedLineId, variant }: SelectLineProps) {
 	//
+
 	//
 	// A. Setup variables
 
@@ -36,6 +37,7 @@ export default function Component({ data = [], onSelectLineId, selectedLineId, v
 
 	//
 	// B. Transform data
+
 	const { search } = useMemo(() => createDocCollection(data.map(d => ({ boost: false, ...d })), {
 		line_id: 2,
 		localities: 1,
@@ -50,9 +52,10 @@ export default function Component({ data = [], onSelectLineId, selectedLineId, v
 	//
 	// C. Search
 
-	const allLinesDataFilteredBySearchQuery = useMemo(
-		() => (debouncedSearchQuery ? search(debouncedSearchQuery) : data).slice(0, 100),
-		[debouncedSearchQuery, search, data]);
+	const allLinesDataFilteredBySearchQuery = useMemo(() => {
+		const filteredData = debouncedSearchQuery ? search(debouncedSearchQuery) : data;
+		return filteredData.slice(0, 100);
+	}, [debouncedSearchQuery, search, data]);
 
 	//
 	// D. Handle actions

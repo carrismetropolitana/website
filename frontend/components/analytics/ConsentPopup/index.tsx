@@ -2,7 +2,7 @@
 
 /* * */
 
-import { useAppAnalyticsContext } from '@/contexts/AppAnalyticsContext';
+import { useAnalyticsContext } from '@/contexts/Analytics.context';
 import { Button, Modal } from '@mantine/core';
 import Image from 'next/image';
 import Link from 'next/link';
@@ -20,9 +20,9 @@ export default function Component() {
 	//
 	// A. Setup variables
 
-	const t = useTranslations('AnalyticsConsentPopup');
+	const t = useTranslations('analytics.ConsentPopup');
 	const pathname = usePathname();
-	const analyticsContext = useAppAnalyticsContext();
+	const analyticsContext = useAnalyticsContext();
 
 	const [isOpen, setIsOpen] = useState(false);
 
@@ -34,20 +34,20 @@ export default function Component() {
 		const regexPatternToMatchCookiesPolicy = /^(\/[a-z]{2})?\/cookies\/?$/;
 		const isPrivacyPage = regexPatternToMatchCookiesPolicy.test(pathname);
 		// Set the modal state based on the context and pathname
-		setIsOpen(analyticsContext.shouldShow && !isPrivacyPage);
-	}, [analyticsContext.shouldShow, pathname]);
+		setIsOpen(analyticsContext.flags.should_ask && !isPrivacyPage);
+	}, [analyticsContext.flags.should_ask, pathname]);
 
 	//
 	// B. Handle actions
 
 	const handleEnable = () => {
-		analyticsContext.enable();
+		analyticsContext.actions.enable();
 		setIsOpen(false);
-		analyticsContext.capture('test');
+		analyticsContext.actions.capture('test');
 	};
 
 	const handleDisable = () => {
-		analyticsContext.disable();
+		analyticsContext.actions.disable();
 		setIsOpen(false);
 	};
 

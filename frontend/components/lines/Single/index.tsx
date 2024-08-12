@@ -3,33 +3,18 @@
 /* * */
 
 import FavoriteToggle from '@/components/common/FavoriteToggle';
-import ScheduleDrawer from '@/components/common/ScheduleDrawer';
-import SelectDate from '@/components/common/SelectDate';
 import Section from '@/components/layout/Section';
 import LineBadge from '@/components/lines/LineBadge';
 import LineName from '@/components/lines/LineName';
-import { useProfileContext } from '@/contexts/ProfileContext';
-import { AlertDTO, DemandByLine, Line, Pattern, Stop } from '@/utils/types';
-import { Select } from '@mantine/core';
-import { IconArrowBarToRight, IconVolume, IconZoomQuestionFilled } from '@tabler/icons-react';
-import dayjs from 'dayjs';
-import pt from 'dayjs/locale/pt';
+import { useLinesSingleContext } from '@/contexts/LinesSingle.context';
+import { useProfileContext } from '@/contexts/Profile.context';
 import { useTranslations } from 'next-intl';
-import React, { useState } from 'react';
-import useSWR from 'swr';
-
-import AlertCarousel from '../AlertCarousel';
-import RouteMap from '../RouteMap';
-import StopList from '../StopList';
-dayjs.locale(pt);
-
-import { useLinesContext } from '@/contexts/lines.context';
 
 import styles from './styles.module.css';
 
 /* * */
 
-export default function Component({ lineId }) {
+export default function Component() {
 	//
 
 	//
@@ -37,26 +22,20 @@ export default function Component({ lineId }) {
 
 	const t = useTranslations('lines.Single');
 
-	const [date, setDate] = useState<Date>(new Date());
-	const [patternId, setPatternId] = useState<null | string>(null);
-	const [selectedStop, setSelectedStop] = useState<Stop | null>(null);
-	const [selectedStopSequence, setSelectedStopSequence] = useState<null | number>(null);
-	const [drawerOpen, setDrawerOpen] = useState(false);
-
-	const linesContext = useLinesContext();
+	const profileContext = useProfileContext();
+	const linesSingleContext = useLinesSingleContext();
 
 	//
 	// B. Fetch data
 
-	const lineData = linesContext.actions.getLineDataByLineId(lineId);
-	const allLinePatternsData = linesContext.actions.getLinePatternsDataByLineId(lineId);
-	const lineFavoriteStatus = linesContext.actions.getLineIdFavoriteStatus(lineId);
+	const lineData = linesSingleContext.data.line;
+	// const allLinePatternsData = linesContext.actions.getLinePatternsDataByLineId(lineId);
 
 	//
 	// C. Transform data
 
-	const dayString = dayjs(date).format('YYYYMMDD');
-	const validPatternGroupsSelectOptions = allLinePatternsData?.find(pattern => pattern.find(patternGroup => patternGroup.valid_on.includes(dayString))) || null;
+	// const dayString = dayjs(date).format('YYYYMMDD');
+	// const validPatternGroupsSelectOptions = allLinePatternsData?.find(pattern => pattern.find(patternGroup => patternGroup.valid_on.includes(dayString))) || null;
 
 	// const selectedPattern = currentPatterns.find(pat => pat.pattern_id === patternId);
 
@@ -66,26 +45,16 @@ export default function Component({ lineId }) {
 	// const metrics = useSWR<DemandByLine[]>('https://api.carrismetropolitana.pt/v2/metrics/demand/by_line').data;
 	// const relevantDemand = metrics?.find(metric => metric.line_id === lineInfo.id);
 
-	// const { profile: { favoriteLines }, setFavoriteLines } = useProfileContext();
-
-	// function onClickHeart() {
-	// 	if (favoriteLines.includes(lineInfo.id)) {
-	// 		setFavoriteLines(favoriteLines.filter(id => id !== lineInfo.id));
-	// 	}
-	// 	else {
-	// 		setFavoriteLines([...favoriteLines, lineInfo.id]);
-	// 	}
-	// }
-
 	//
-	// B. Handle actions
+	// D. Handle actions
 
 	const handleToggleFavorite = () => {
-		linesContext.actions.updateLineIdFavoriteStatus(lineId);
+		if (!linesSingleContext.data.line) return;
+		profileContext.actions.toggleFavoriteLine(linesSingleContext.data.line.line_id);
 	};
 
 	//
-	// C. Render components
+	// E. Render components
 
 	if (!lineData) {
 		return <Section backButtonHref="/lines" withTopBorder={false} withChildrenPadding />;
@@ -96,11 +65,11 @@ export default function Component({ lineId }) {
 			<Section backButtonHref="/lines" childrenWrapperStyles={styles.headingSection} withGap={false} withTopBorder={false} withChildrenPadding>
 				<div className={styles.headingSectionRow}>
 					<LineBadge line={lineData} size="lg" />
-					<FavoriteToggle color={lineData.color} isActive={lineFavoriteStatus} onToggle={handleToggleFavorite} />
+					<FavoriteToggle color={lineData.color} isActive={linesSingleContext.flags.is_favorite} onToggle={handleToggleFavorite} />
 				</div>
 				<LineName line={lineData} size="lg" />
 			</Section>
-			<Section childrenWrapperStyles={styles.headingSection} withGap={false} withTopPadding={false} withChildrenPadding>
+			{/* <Section childrenWrapperStyles={styles.headingSection} withGap={false} withTopPadding={false} withChildrenPadding>
 				<SelectDate setDate={setDate} value={date} />
 				<div className={styles.routeSelector}>
 					<div className={styles.routeExplainer}>
@@ -118,7 +87,7 @@ export default function Component({ lineId }) {
 						value={patternId}
 					/>
 				</div>
-			</Section>
+			</Section> */}
 		</>
 	);
 

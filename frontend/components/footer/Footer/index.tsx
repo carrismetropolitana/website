@@ -10,16 +10,16 @@ import styles from './styles.module.css';
 /* * */
 
 const PRIMARY_LINKS = [
-	{ _id: 'about', href: '/about' },
-	{ _id: 'open-data', href: '/open-data' },
+	{ _id: 'about', href: '/about', target: '_self' },
+	{ _id: 'open-data', href: '/open-data', target: '_self' },
 	{ _id: 'status', href: 'https://status.carrismetropolitana.pt/', target: '_blank' },
 ];
 
 const SECONDARY_LINKS = [
-	{ _id: 'conditions', href: '/conditions' },
-	{ _id: 'privacy', href: '/privacy' },
-	{ _id: 'cookies', href: '/cookies' },
-	{ _id: 'legal', href: '/legal' },
+	{ _id: 'conditions', href: '/conditions', target: '_self' },
+	{ _id: 'privacy', href: '/privacy', target: '_self' },
+	{ _id: 'cookies', href: '/cookies', target: '_self' },
+	{ _id: 'legal', href: '/legal', target: '_self' },
 ];
 
 /* * */
@@ -30,7 +30,7 @@ export default function Component() {
 	//
 	// A. Setup variables
 
-	const t = useTranslations('Footer');
+	const t = useTranslations('footer.Footer');
 
 	const currentYear = new Date().getFullYear();
 

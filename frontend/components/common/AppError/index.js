@@ -2,7 +2,7 @@
 
 /* * */
 
-import { useAppAnalyticsContext } from '@/contexts/AppAnalyticsContext';
+import { useAnalyticsContext } from '@/contexts/Analytics.context';
 import { Button } from '@mantine/core';
 import { IconTrafficCone } from '@tabler/icons-react';
 import { useTranslations } from 'next-intl';
@@ -19,7 +19,7 @@ export default function Component() {
 	// A. Setup variables
 
 	const t = useTranslations('AppError');
-	const analyticsContext = useAppAnalyticsContext();
+	const analyticsContext = useAnalyticsContext();
 
 	const [reloadInSeconds, setReloadInSeconds] = useState(10);
 

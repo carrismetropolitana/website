@@ -1,10 +1,12 @@
 {
-	"AnalyticsConsentPopup": {
-		"title": "Respeitamos a sua Privacidade",
-		"text": "Com o objetivo de melhorar a performance, os conteúdos e a segurança deste site, a TML pretende recorrer à utilização de cookies ou tecnologias similares.",
-		"privacy_policy": "Consultar Política de Cookies",
-		"accept": "OK",
-		"refuse": "Não, obrigado"
+	"analytics": {
+		"ConsentPopup": {
+			"title": "Respeitamos a sua Privacidade",
+			"text": "Com o objetivo de melhorar a performance, os conteúdos e a segurança deste site, a TML pretende recorrer à utilização de cookies ou tecnologias similares.",
+			"privacy_policy": "Consultar Política de Cookies",
+			"accept": "OK",
+			"refuse": "Não, obrigado"
+		}
 	},
 	"AppError": {
 		"title": "Ocorreu um erro inesperado",
@@ -261,23 +263,25 @@
 			"alt": "Français"
 		}
 	},
-	"Footer": {
-		"primary_links": {
-			"about": "Sobre a Carris Metropolitana",
-			"open-data": "Dados Abertos",
-			"status": "Estado"
+	"footer": {
+		"DebugToggle":{
+			"enabled": "Desligar Debug",
+			"disabled": "Ligar Debug"
 		},
-		"secondary_links": {
-			"conditions": "Condições Gerais de Transporte",
-			"privacy": "Política de Privacidade",
-			"cookies": "Política de Cookies",
-			"legal": "Aviso Legal"
-		},
-		"copyright": "© Carris Metropolitana {year} - Todos os direitos reservados"
-	},
-	"FooterDebugToggle":{
-		"enabled": "Desligar Debug",
-		"disabled": "Ligar Debug"
+		"Footer": {
+			"primary_links": {
+				"about": "Sobre a Carris Metropolitana",
+				"open-data": "Dados Abertos",
+				"status": "Estado"
+			},
+			"secondary_links": {
+				"conditions": "Condições Gerais de Transporte",
+				"privacy": "Política de Privacidade",
+				"cookies": "Política de Cookies",
+				"legal": "Aviso Legal"
+			},
+			"copyright": "© Carris Metropolitana {year} - Todos os direitos reservados"
+		}
 	},
 	"HomeQuickSearchFavoritesBar":{
 		"empty": "Ainda não tem linhas favoritas..."

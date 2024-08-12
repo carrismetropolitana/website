@@ -29,8 +29,8 @@ export default function Component() {
 	//
 	// B. Fetch data
 
-	const { data: allLinesData } = useSWR('https://api.carrismetropolitana.pt/lines');
-	const { data: allStopsData } = useSWR('https://api.carrismetropolitana.pt/stops');
+	const { data: allLinesData } = useSWR('https://api.carrismetropolitana.pt/v2/lines');
+	const { data: allStopsData } = useSWR('https://api.carrismetropolitana.pt/v2/stops');
 
 	//
 	// C. Transform data

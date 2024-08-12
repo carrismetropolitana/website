@@ -24,7 +24,11 @@ export default function Component() {
 	// B. Render components
 
 	if (!linesContext.data.favorites.length) {
-		return <NoDataLabel text={t('no_favorites')} withMinHeight />;
+		return (
+			<Section childrenWrapperStyles={styles.container} withChildrenPadding={false} withTopPadding={false}>
+				<NoDataLabel text={t('no_favorites')} withMinHeight />
+			</Section>
+		);
 	}
 
 	return (

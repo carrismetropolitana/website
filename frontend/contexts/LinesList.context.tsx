@@ -4,7 +4,7 @@
 
 import type { Line } from '@/types/lines.types.js';
 
-import { useProfileContext } from '@/contexts/ProfileContext';
+import { useProfileContext } from '@/contexts/Profile.context';
 import { createDocCollection } from '@/hooks/useOtherSearch';
 import { createContext, useContext, useEffect, useState } from 'react';
 import useSWR from 'swr';
@@ -115,7 +115,7 @@ export const LinesListContextProvider = ({ children }) => {
 
 		if (filterBySearchState) {
 			// Give extra weight to favorite lines
-			const boostedData = filterResult.map(line => ({ ...line, boost: profileContext.profile.favoriteLines.includes(line.line_id) }));
+			const boostedData = filterResult.map(line => ({ ...line, boost: profileContext.data.favorite_lines?.includes(line.line_id) ? true : false }));
 			const searchHook = createDocCollection(boostedData, {
 				line_id: 3,
 				localities: 1,
@@ -139,9 +139,9 @@ export const LinesListContextProvider = ({ children }) => {
 	}, [allLinesData, filterByAttributeState, filterByFacilityState, filterByMunicipalityOrLocalityState, filterBySearchState]);
 
 	useEffect(() => {
-		const favoritesLinesData = allLinesData?.filter(line => profileContext.profile.favoriteLines.includes(line.line_id)) || [];
+		const favoritesLinesData = allLinesData?.filter(line => profileContext.data.favorite_lines?.includes(line.line_id)) || [];
 		setDataFavoritesState(favoritesLinesData);
-	}, [allLinesData, profileContext.profile.favoriteLines]);
+	}, [allLinesData, profileContext.data.favorite_lines]);
 
 	//
 	// D. Handle actions
@@ -178,7 +178,7 @@ export const LinesListContextProvider = ({ children }) => {
 			updateFilterBySearch,
 		},
 		counters: {
-			favorites: dataFavoritesState.length,
+			favorites: profileContext.counters.favorite_lines,
 		},
 		data: {
 			favorites: dataFavoritesState,

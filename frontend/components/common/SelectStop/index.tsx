@@ -15,7 +15,16 @@ import styles from './styles.module.css';
 
 /* * */
 
-export default function Component({ data = [] as Stop[], onSelectStopId = (_: null | string) => null, selectedStopId, variant, ...props }) {
+interface SelectStopProps {
+	data: Stop[]
+	onSelectStopId: (stopId: null | string) => void
+	selectedStopId: null | string
+	variant: 'default' | 'white'
+}
+
+/* * */
+
+export default function Component({ data = [], onSelectStopId, selectedStopId, variant }: SelectStopProps) {
 	//
 
 	//

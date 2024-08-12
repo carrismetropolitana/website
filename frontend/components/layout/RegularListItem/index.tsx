@@ -22,7 +22,7 @@ interface RegularListItemProps {
 
 export default function Component({ children, href, icon, refFn, style }: RegularListItemProps) {
 	return (
-		<Link ref={refFn} className={styles.container} href={href} style={style}>
+		<Link ref={refFn || undefined} className={styles.container} href={href} style={style}>
 			{icon && (
 				<div className={styles.iconWrapper}>
 					{icon}

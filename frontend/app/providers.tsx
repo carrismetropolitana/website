@@ -2,10 +2,10 @@
 
 /* * */
 
-import { AppAnalyticsContextProvider } from '@/contexts/AppAnalyticsContext';
-import { DebugContextProvider } from '@/contexts/DebugContext';
+import { AnalyticsContextProvider } from '@/contexts/Analytics.context';
+import { DebugContextProvider } from '@/contexts/Debug.context';
 import { OperationalDayContextProvider } from '@/contexts/OperationalDay.context';
-import { ProfileContextProvider } from '@/contexts/ProfileContext';
+import { ProfileContextProvider } from '@/contexts/Profile.context';
 import { theme } from '@/styles/theme';
 import { MantineProvider } from '@mantine/core';
 import { DatesProvider } from '@mantine/dates';
@@ -24,8 +24,6 @@ export default function Providers({ children }) {
 	// A. Setup SWR provider
 
 	const swrSettings: SWRConfiguration = {
-		//
-		// eslint-disable-next-line @typescript-eslint/no-explicit-any
 		async fetcher(...args: Parameters<typeof fetch>) {
 			const res = await fetch(...args);
 			if (!res.ok) {
@@ -40,14 +38,11 @@ export default function Providers({ children }) {
 			}
 			return res.json();
 		},
-		// provider: cacheProvider,
-		//
 		refreshInterval: 10000, // 10 seconds
-		//
 	};
 
 	//
-	// A. Setup Mantine Dates provider
+	// B. Setup Mantine Dates provider
 
 	const mantineDatesSettings: Partial<DatesProviderValue> = {
 		firstDayOfWeek: 1,
@@ -57,14 +52,14 @@ export default function Providers({ children }) {
 	};
 
 	//
-	// B. Render providers
+	// C. Render providers
 
 	return (
 		<SWRConfig value={swrSettings}>
 			<MantineProvider defaultColorScheme="auto" theme={theme}>
 				<DatesProvider settings={mantineDatesSettings}>
 					<ModalsProvider>
-						<AppAnalyticsContextProvider>
+						<AnalyticsContextProvider>
 							<ProfileContextProvider>
 								<DebugContextProvider>
 									<OperationalDayContextProvider>
@@ -72,7 +67,7 @@ export default function Providers({ children }) {
 									</OperationalDayContextProvider>
 								</DebugContextProvider>
 							</ProfileContextProvider>
-						</AppAnalyticsContextProvider>
+						</AnalyticsContextProvider>
 					</ModalsProvider>
 				</DatesProvider>
 			</MantineProvider>
