@@ -3,7 +3,7 @@
 
 import Button from '@/components/common/Button';
 import Section from '@/components/layout/Section';
-import { IconBrandInstagram, IconBrandWhatsapp, IconMessage, IconPhone, IconPhoneCheck, IconUmbrellaClosed } from '@tabler/icons-react';
+import { IconBrandInstagram, IconBrandWhatsapp, IconMessage, IconPhone, IconUmbrella } from '@tabler/icons-react';
 import Image from 'next/image';
 import { useTranslations } from 'next-intl';
 
@@ -31,7 +31,7 @@ export default function Component() {
 				<div className={styles.sectionContent}>{t('operators_description')}</div>
 
 				<Button href="tel:+351210410400" icon={<IconPhone size={18} />} label="210 410 400" />
-				<Button icon={<IconUmbrellaClosed size={18} />} label={t('lost_found')} />
+				<Button icon={<IconUmbrella size={18} />} label={t('lost_found')} />
 			</Section>
 			<Image alt={t('heading')} height={500} src="/images/aml-map.svg" style={{ width: '100%' }} width={500} />
 		</>
