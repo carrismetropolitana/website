@@ -47,3 +47,11 @@
 .section.variantWhite {
 	color: var(--color-system-text-300);
 }
+
+.sizeSm{
+	height: auto;
+	max-height: none;
+	font-size: 18px;
+	line-height: 1;
+	font-size: var(--input-fz,var(--input-fz, var(--mantine-font-size-sm)));
+}

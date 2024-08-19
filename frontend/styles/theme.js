@@ -112,6 +112,9 @@ export const theme = createTheme({
 					section: TextInputOverride.section,
 					wrapper: TextInputOverride.wrapper,
 				};
+				if (props.size === 'sm') {
+					defaultClasses = combineClasses(defaultClasses, [TextInputOverride.sizeSm]);
+				}
 				if (props.variant === 'white') {
 					defaultClasses = combineClasses(defaultClasses, [TextInputOverride.variantWhite]);
 				}

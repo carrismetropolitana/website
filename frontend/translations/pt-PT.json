@@ -515,7 +515,29 @@
 		"by_instagram": "Falar pelo Instagram",
 		"by_form": "Formulário de Contacto",
 		"lost_found": "Perdidos e Achados"
+	},
+	"complaints":{
+		"heading": "Sugestões e Reclamações",
+		"subheading": "A Carris Metropolitana está empenhada em prestar um serviço de qualidade e a sua opinião é fundamental para a melhoria contínua dos nossos serviços. Se tem alguma sugestão ou reclamação, por favor preencha o formulário abaixo.",
+		"form": {
+			"fields": {
+				"name": "Nome",
+				"surname": "Apelido",
+				"email": "Email",
+				"naveganteNumber": "Número de Cartão Navegante",
+				"municipality": "Município",
+				"subject": "Assunto",
+				"upload": "Anexar Ficheiro",
+				"message": "Mensagem"
+			},
+			"types": {
+				"transport_title": "Título de Transporte",
+				"where": "Local de Atendimento",
+				"service":"Serviço de Transporte",
+				"stop_location": "Local de Paragem",
+				"lost_found": "Perdidos e Achados",
+				"document_request": "Pedido de Documento"
+			}
+		}
 	}
-
-
 }
