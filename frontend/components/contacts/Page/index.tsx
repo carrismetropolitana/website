@@ -38,7 +38,12 @@ export default function Component() {
 				<Button href="tel:+351210410400" icon={<IconPhone size={18} />} label="210 410 400" />
 				<Button href="/lost-and-found" icon={<IconUmbrella size={18} />} label={t('lost_found')} />
 			</Section>
-			<Image alt={t('heading')} height={500} src="/images/aml-map.svg" style={{ width: '100%' }} width={500} />
+			<Section
+				withTopBorder={false}
+				withTopPadding={false}
+			>
+				<Image alt={t('heading')} height={500} src="/images/aml-map.svg" style={{ width: '100%' }} width={500} />
+			</Section>
 		</>
 	);
 }
