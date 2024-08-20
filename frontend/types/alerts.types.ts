@@ -56,6 +56,7 @@ export interface SimplifiedAlert {
 	effect: AlertEffect
 	end_date: Date
 	image_url: null | string
+	informed_entity: EntitySelector[]
 	locale: string
 	start_date: Date
 	title: string

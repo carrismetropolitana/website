@@ -1,0 +1,18 @@
+{
+	"configurations": [
+		{
+			"name": "Start frontend",
+			"type": "node-terminal",
+			"request": "launch",
+			"command": "npm run dev",
+			"cwd": "${workspaceFolder}/frontend"
+		},
+		{
+			"name": "Start videowall",
+			"type": "node-terminal",
+			"request": "launch",
+			"command": "npm run dev",
+			"cwd": "${workspaceFolder}/videowall"
+		}
+	]
+}

@@ -3,18 +3,20 @@
 /* * */
 
 import { DateTime } from 'luxon';
-import { createContext, useContext, useState } from 'react';
+import { createContext, useContext, useEffect, useState } from 'react';
 
 /* * */
 
 interface OperationalDayContextState {
 	actions: {
 		updateSelectedDay: (value: string) => void
+		updateSelectedDayFromJsDate: (value: Date) => void
 		updateSelectedDayToToday: () => void
 		updateSelectedDayToTomorrow: () => void
 	}
 	data: {
 		selected_day: null | string
+		selected_day_jsdate: Date | null
 		today: null | string
 		tomorrow: null | string
 	}
@@ -44,7 +46,8 @@ export const OperationalDayContextProvider = ({ children }) => {
 	//
 	// A. Setup variables
 
-	const [selectedDay, setSelectedDate] = useState<null | string>(null);
+	const [selectedDay, setSelectedDay] = useState<null | string>(null);
+	const [selectedDayJsDate, setSelectedDayJsDate] = useState<Date | null>(null);
 
 	//
 	// B. Transform data
@@ -65,12 +68,40 @@ export const OperationalDayContextProvider = ({ children }) => {
 		return now.plus({ days: 1 }).toFormat('yyyyMMdd');
 	})();
 
+	useEffect(() => {
+		if (!selectedDay) {
+			setSelectedDay(todayDateString);
+		}
+	}, [selectedDay]);
+
+	useEffect(() => {
+		if (!selectedDay) {
+			setSelectedDayJsDate(null);
+		}
+		else {
+			setSelectedDayJsDate(DateTime.fromFormat(selectedDay, 'yyyyMMdd').toJSDate());
+		}
+	}, [selectedDay]);
+
 	//
 	// C. Handle actions
 
-	const updateSelectedDay = (value: string) => setSelectedDate(value);
-	const updateSelectedDayToToday = () => setSelectedDate(todayDateString);
-	const updateSelectedDayToTomorrow = () => setSelectedDate(tomorrowDateString);
+	const updateSelectedDay = (value: string) => {
+		setSelectedDay(value);
+	};
+
+	const updateSelectedDayFromJsDate = (value: Date) => {
+		const valueAsString = DateTime.fromJSDate(value).toFormat('yyyyMMdd');
+		setSelectedDay(valueAsString);
+	};
+
+	const updateSelectedDayToToday = () => {
+		setSelectedDay(todayDateString);
+	};
+
+	const updateSelectedDayToTomorrow = () => {
+		setSelectedDay(tomorrowDateString);
+	};
 
 	//
 	// D. Define context value
@@ -78,11 +109,13 @@ export const OperationalDayContextProvider = ({ children }) => {
 	const contextValue: OperationalDayContextState = {
 		actions: {
 			updateSelectedDay,
+			updateSelectedDayFromJsDate,
 			updateSelectedDayToToday,
 			updateSelectedDayToTomorrow,
 		},
 		data: {
 			selected_day: selectedDay,
+			selected_day_jsdate: selectedDayJsDate,
 			today: todayDateString,
 			tomorrow: tomorrowDateString,
 		},
