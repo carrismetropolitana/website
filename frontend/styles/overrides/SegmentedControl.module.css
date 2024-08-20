@@ -48,6 +48,10 @@
 
 .label[data-active="true"] {
 	color: var(--color-system-text-100);
+}
+
+/* Fix flashing before loading js, but don't apply to white variant */
+.label[data-active="true"]:not(.variantWhite) {
 	--sc-color: var(--color-system-background-100);
 }
 
