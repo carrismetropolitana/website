@@ -1,6 +1,6 @@
 /* * */
 
-import SelectDate from '@/components/common/SelectDate';
+import SelectOperationalDay from '@/components/common/SelectOperationalDay';
 import Timetable from '@/components/common/Timetable';
 import { Pattern, Stop } from '@/utils/types';
 import { Drawer } from '@mantine/core';
@@ -26,7 +26,7 @@ export default function Component(
 			radius="md"
 			title={pattern.headsign}
 		>
-			<SelectDate setDate={setInnerDate} value={innerDate} />
+			<SelectOperationalDay />
 			<Timetable date={innerDate} pattern={pattern} stop={stop} stopSequence={stopSequence} />
 
 		</Drawer>
