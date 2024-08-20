@@ -1,0 +1,163 @@
+.container{
+    display: flex;
+    flex-direction: column;
+}
+
+.spineLine{
+    width: 16px;
+    align-self: stretch;
+    flex-shrink: 0;
+    display: flex;
+    justify-content: center;
+    margin-bottom: -2px;
+}
+
+.spineLine>div{
+    margin-top: 12px;
+    width: 4px;
+    height: 4px;
+    border-radius: 1000px;
+}
+
+.stop:first-child .spineLine{
+    border-radius: 1000px 1000px 0 0;
+}
+
+.stop:last-child .spineLine{
+    border-radius: 0 0 1000px 1000px;
+    height:22px;
+}
+
+.stop{
+    display: flex;
+    gap: 10px;
+    padding-left: 23px;
+    padding-right: 23px;
+}
+
+.stopInfo{
+    display: flex;
+    flex-direction: column;
+    font-weight: 600;
+    padding-top: 5px;
+    padding-bottom: 5px;
+}
+.stopInfo>.name{
+    font-size: 16px;
+    color: var(--color-system-text-100)
+}
+
+.stopInfo>.location{
+    font-size: 14px;
+    color: var(--color-system-text-300)
+}
+
+.stopInfo>div{
+    display:flex;
+    align-items: center;
+    font-size: 14px;
+    gap:2px;
+}
+
+.stopInfo>.live{
+    color: var(--color-realtime-100)
+}
+
+.stopInfo>.scheduled{
+    color: var(--color-system-text-200)
+}
+
+.stop[data-selected="true"]{
+    background: var(--color-system-background-100);
+    box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.05);
+
+    .stopInfo {
+        padding-top:17px;
+        padding-bottom:26px;
+    }
+
+    .stopInfo>.name{
+        font-size: 18px;
+        font-weight: 900;
+    }
+
+    .stopInfo>.location{
+        color: var(--color-system-text-200);
+    }
+    .spineLine>div{
+        width:8px;
+        height:8px;
+    }
+
+    .spineLine{
+        padding-top: 14px;
+        margin-top:-2px;
+        margin-bottom: -2px;
+    }
+    &:last-child .spineLine>div{
+        padding-top:0;
+        margin-top: -12px;
+    }
+
+    &:first-child .spineLine{
+        padding-top: 17px;
+        margin-top:0px;
+    }
+    &:last-child .spineLine{
+        padding-top: 36px;
+        margin-top:-2px;
+    }
+    .label {
+        color: var(--color-system-border-200);
+        font-size: 10px;
+        font-weight: 600;
+        font-style: italic;
+        padding-bottom: 8px;
+    }
+    .scheduledList, .realtimeList {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        color:var(--color-system-text-100);
+        font-weight: 700;
+    }
+    .scheduledList>div{
+        display: flex;
+        gap: 15px;
+        align-items: center;
+    }
+    .realtimeList {
+        gap: 2px;
+        color:var(--color-realtime-100)
+    }
+    .timesList{
+        display: flex;
+        gap: 10px;
+        align-items: center;
+        padding-bottom: 23px;
+    }
+    .buttons button{
+        display:flex;
+        background-color: var(--color-system-background-200);
+        color: var(--color-system-text-200);
+        align-items: center;
+        font-size: 14px;
+        padding: 8px 10px;
+        gap: 2px;
+        border-radius: 7px;
+    }
+
+    .buttons {
+        display: flex;
+        gap: 15px;
+    }
+    .facilityIcons {
+        padding-top:10px;
+        padding-bottom:20px;
+        display:flex;
+        gap:8px;
+    }
+    .facilityIcons>svg {
+        height: 24px;
+    }
+}
