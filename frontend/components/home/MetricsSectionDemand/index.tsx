@@ -97,7 +97,7 @@ export default function Component() {
 			</div>
 			<div className={styles.graphWrapper}>
 				<Sparkline
-					color="blue"
+					color="var(--color-status-info-text)"
 					curveType="natural"
 					data={weekDistribution}
 					fillOpacity={1}

@@ -144,10 +144,10 @@
 		/* * */
 		/* COLOR / STATUS */
 
-		--color-status-info-background: #F5FAFF;
-		--color-status-info-border: #DCE6F0;
-		--color-status-info-text: #054B8C;
-		--color-status-info-shadow: #054b8c80;
+		--color-status-info-background: #3c495d;
+		--color-status-info-border: #525868;
+		--color-status-info-text: #84c1fb;
+		--color-status-info-shadow: #6bb5fa80;
 
 		--color-status-ok-background: #EBF5EB;
 		--color-status-ok-border: #D7EBD7;

@@ -48,6 +48,7 @@
 
 .label[data-active="true"] {
 	color: var(--color-system-text-100);
+	--sc-color: var(--color-system-background-100);
 }
 
 .label[data-disabled="true"] {
