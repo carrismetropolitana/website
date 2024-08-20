@@ -74,6 +74,7 @@ levCache: Map<string, number>): T[] {
      * @param {string} prefix - The prefix to match.
      * @returns {boolean} - True if the word starts with the prefix, false otherwise.
      */
+	// eslint-disable-next-line @typescript-eslint/no-unused-vars
 	let cumPrefixTime = 0;
 	const isPrefixMatch = (word: string, prefix: string): boolean => {
 		const start = Date.now();

@@ -1,7 +1,5 @@
 /* * */
 
-import type { Line } from '@/types/lines.types';
-
 import { Stop } from '@/types/stops.types';
 
 import styles from './styles.module.css';
