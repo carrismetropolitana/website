@@ -74,9 +74,6 @@
 		"FavoritesList":{
 			"no_favorites": "Ainda não tem linhas favoritas"
 		},
-		"AlertsCarousel": {
-			"heading": "Alertas de Serviço"
-		},
 		"expand_filters": "Expandir Filtros",
 		"collapse_filters": "Esconder Filtros"
 	},
@@ -567,10 +564,10 @@
 		"FavoritesList":{
 			"no_favorites": "Ainda não tem paragens favoritas"
 		},
-		"AlertsCarousel": {
-			"heading": "Alertas de Serviço"
-		},
 		"expand_filters": "Expandir Filtros",
 		"collapse_filters": "Esconder Filtros"
+	},
+	"AlertsCarousel": {
+		"heading": "Alertas de Serviço"
 	}
 }

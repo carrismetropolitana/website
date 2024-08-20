@@ -2,9 +2,9 @@
 
 import type { SimplifiedAlert } from '@/types/alerts.types';
 
+import AlertsCarouselSlide from '@/components/common/AlertsCarouselSlide';
 import Carousel from '@/components/common/Carousel';
 import Section from '@/components/layout/Section';
-import AlertsCarouselSlide from '@/components/stops/AlertsCarouselSlide';
 import { IconBellRingingFilled } from '@tabler/icons-react';
 import { useTranslations } from 'next-intl';
 
@@ -24,7 +24,7 @@ export default function Component({ alerts }: Props) {
 	//
 	// A. Setup variables
 
-	const t = useTranslations('stops.AlertsCarousel');
+	const t = useTranslations('AlertsCarousel');
 
 	//
 	// B. Render components

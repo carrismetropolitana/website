@@ -2,11 +2,11 @@
 
 /* * */
 
+import AlertsCarousel from '@/components/common/AlertsCarousel';
 import FavoriteToggle from '@/components/common/FavoriteToggle';
 import SelectOperationalDay from '@/components/common/SelectOperationalDay';
 import NoDataLabel from '@/components/layout/NoDataLabel';
 import Section from '@/components/layout/Section';
-import AlertsCarousel from '@/components/lines/AlertsCarousel';
 import LineBadge from '@/components/lines/LineBadge';
 import LineName from '@/components/lines/LineName';
 import SelectActivePatternGroup from '@/components/lines/SelectActivePatternGroup';

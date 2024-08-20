@@ -2,10 +2,10 @@
 
 /* * */
 
+import AlertsCarousel from '@/components/common/AlertsCarousel';
 import SelectOperationalDay from '@/components/common/SelectOperationalDay';
 import NoDataLabel from '@/components/layout/NoDataLabel';
 import Section from '@/components/layout/Section';
-import AlertsCarousel from '@/components/stops/AlertsCarousel';
 import { useOperationalDayContext } from '@/contexts/OperationalDay.context';
 import { useProfileContext } from '@/contexts/Profile.context';
 import { useStopsSingleContext } from '@/contexts/StopsSingle.context';
