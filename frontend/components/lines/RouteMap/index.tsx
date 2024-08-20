@@ -15,7 +15,7 @@ export default function Component({ pattern }: { pattern: Pattern }) {
 
 	const t = useTranslations('line');
 	const { data: shape } = useSWR<Shape>('https://api.carrismetropolitana.pt/shapes/' + pattern.shape_id);
-	const { data: allVehiclesData } = useSWR<VehiclePosition[]>('https://api.carrismetropolitana.pt/vehicles', {
+	const { data: realTime } = useSWR<VehiclePosition[]>('https://api.carrismetropolitana.pt/vehicles', {
 		refreshInterval: 10000,
 	});
 	const relevantVehiclesGeoJson: FeatureCollection<Geometry, GeoJsonProperties> = useMemo(() => {
