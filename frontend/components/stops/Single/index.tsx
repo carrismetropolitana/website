@@ -64,12 +64,12 @@ export default function Component() {
 	// E. Render components
 
 	if (!stopsSingleContext.data.stop) {
-		return <Section backButtonHref="/stops" withTopBorder={false} withChildrenPadding />;
+		return <Section withTopBorder={false} backRouter withChildrenPadding />;
 	}
 
 	return (
 		<>
-			<Section backButtonHref="/stops" childrenWrapperStyles={styles.headingSection} withGap={false} withTopBorder={false} withChildrenPadding>
+			<Section childrenWrapperStyles={styles.headingSection} withGap={false} withTopBorder={false} backRouter withChildrenPadding>
 				{/* <div className={styles.headingSectionRow}>
 					<LineBadge line={stopsSingleContext.data.line} size="lg" />
 					<FavoriteToggle color={stopsSingleContext.data.line.color} isActive={stopsSingleContext.flags.is_favorite} onToggle={handleToggleFavorite} />

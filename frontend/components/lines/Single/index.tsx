@@ -68,12 +68,12 @@ export default function Component() {
 	// E. Render components
 
 	if (!linesSingleContext.data.line) {
-		return <Section backButtonHref="/lines" withTopBorder={false} withChildrenPadding />;
+		return <Section withTopBorder={false} backRouter withChildrenPadding />;
 	}
 
 	return (
 		<>
-			<Section backButtonHref="/lines" childrenWrapperStyles={styles.headingSection} withGap={false} withTopBorder={false} withChildrenPadding>
+			<Section childrenWrapperStyles={styles.headingSection} withGap={false} withTopBorder={false} backRouter withChildrenPadding>
 				<div className={styles.headingSectionRow}>
 					<LineBadge line={linesSingleContext.data.line} size="lg" />
 					<FavoriteToggle color={linesSingleContext.data.line.color} isActive={linesSingleContext.flags.is_favorite} onToggle={handleToggleFavorite} />
