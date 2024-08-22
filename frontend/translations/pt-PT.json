@@ -584,5 +584,20 @@
 	},
 	"AlertsCarousel": {
 		"heading": "Alertas de Serviço"
+	},
+	"favorites": {
+		"Page":{
+			"heading": "Favoritos"
+		},
+		"PageToolbar": {
+			"by_current_view": {
+				"lines": "Linhas",
+				"stops": "Paragens"
+			},
+			"found_items_counter": {
+				"lines": "{count, plural, =0 {Nenhuma linha encontrada.} one {Encontrada # linha:} other {Encontradas # linhas:}}",
+				"stops": "{count, plural, =0 {Nenhum paragem encontrado.} one {Encontrado # paragem:} other {Encontrados # paragens:}}"
+			}
+		}
 	}
 }

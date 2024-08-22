@@ -115,7 +115,7 @@ export const StopsListContextProvider = ({ children }) => {
 
 		if (filterBySearchState) {
 			// Give extra weight to favorite lines
-			const boostedData = filterResult.map(stop => ({ ...stop, boost: profileContext.data.favorite_lines?.includes(stop.id) ? true : false }));
+			const boostedData = filterResult.map(stop => ({ ...stop, boost: profileContext.data.profile?.favorite_stops?.includes(stop.id) ? true : false }));
 			const searchHook = createDocCollection(boostedData, {
 				id: 5,
 				locality: 2,
@@ -139,9 +139,9 @@ export const StopsListContextProvider = ({ children }) => {
 	}, [allStopsData, filterByAttributeState, filterByFacilityState, filterByMunicipalityOrLocalityState, filterBySearchState]);
 
 	useEffect(() => {
-		const favoritesStopsData = allStopsData?.filter(stop => profileContext.data.favorite_stops?.includes(stop.id)) || [];
+		const favoritesStopsData = allStopsData?.filter(stop => profileContext.data.profile?.favorite_stops?.includes(stop.id)) || [];
 		setDataFavoritesState(favoritesStopsData);
-	}, [allStopsData, profileContext.data.favorite_stops]);
+	}, [allStopsData, profileContext.data.profile?.favorite_stops]);
 
 	//
 	// D. Handle actions
