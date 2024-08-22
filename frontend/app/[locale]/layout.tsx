@@ -1,8 +1,5 @@
 /* * */
 
-import AnalyticsConsentPopup from '@/components/analytics/ConsentPopup';
-import Footer from '@/components/footer/Footer';
-import Header from '@/components/header/Header';
 import LayoutViewportWrapper from '@/components/layout/ViewportWrapper';
 import { availableFormats, availableLocales } from '@/translations/config';
 import { notFound } from 'next/navigation';
@@ -28,10 +25,7 @@ export default function Layout({ children, params: { locale } }) {
 			timeZone="Europe/Lisbon"
 		>
 			<LayoutViewportWrapper>
-				<Header />
 				{children}
-				<Footer />
-				<AnalyticsConsentPopup />
 			</LayoutViewportWrapper>
 		</NextIntlClientProvider>
 	);

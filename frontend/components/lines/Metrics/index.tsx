@@ -32,12 +32,22 @@ export default function Component() {
 
 	return (
 		<div className={styles.container}>
-			<div className={styles.bigNumberWrapper}>
-				<h1 className={styles.bigNumber} style={{ color: linesSingleContext.data.line.color }}>{t('demand.big_number', { value: linesSingleContext.data.demand.total_qty })}</h1>
-				<LiveIcon className={styles.liveIcon} color={linesSingleContext.data.line.color} />
+			<div className={styles.metricWrapper}>
+				<div className={styles.bigNumberWrapper}>
+					<h1 className={styles.bigNumber} style={{ color: linesSingleContext.data.line.color }}>{t('demand.big_number', { value: linesSingleContext.data.demand.total_qty })}</h1>
+					<LiveIcon className={styles.liveIcon} color={linesSingleContext.data.line.color} />
+				</div>
+				<h3 className={styles.subtitle}>{t('demand.subtitle')}</h3>
+				{/* <h3 className={styles.description}>{t('demand.description')}</h3> */}
 			</div>
-			<h3 className={styles.subtitle}>{t('demand.subtitle')}</h3>
-			{/* <h3 className={styles.description}>{t('demand.description')}</h3> */}
+			<div className={styles.metricWrapper}>
+				<div className={styles.bigNumberWrapper}>
+					<h1 className={styles.bigNumber} style={{ color: linesSingleContext.data.line.color }}>{t('service.big_number', { value: 98.76 })}</h1>
+					<LiveIcon className={styles.liveIcon} color={linesSingleContext.data.line.color} />
+				</div>
+				<h3 className={styles.subtitle}>{t('service.subtitle')}</h3>
+				{/* <h3 className={styles.description}>{t('service.description')}</h3> */}
+			</div>
 		</div>
 	);
 

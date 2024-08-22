@@ -83,7 +83,11 @@
 		"Metrics": {
 			"demand": {
 				"big_number": "{value, number}",
-				"subtitle": "Total de passageiros transportados"
+				"subtitle": "passageiros transportados nesta linha nos últimos 15 dias"
+			},
+			"service": {
+				"big_number": "{value, number, percentage}",
+				"subtitle": "executabilidade do serviço de todos os percursos desta linha nos últimos 15 dias"
 			}
 		},
 		"expand_filters": "Expandir Filtros",

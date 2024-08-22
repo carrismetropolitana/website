@@ -30,7 +30,8 @@ export default function Component() {
 	};
 
 	const handleMouseMove = (e) => {
-		const deltaY = e.clientY - (initialMouseYRef.current || e.clientY);
+		if (initialMouseYRef.current === null || initialViewportHeightRef.current === null) return;
+		const deltaY = e.clientY - initialMouseYRef.current;
 		const newHeight = initialViewportHeightRef.current + deltaY;
 		mapOptionsContext.actions.setViewportHeight(newHeight);
 	};

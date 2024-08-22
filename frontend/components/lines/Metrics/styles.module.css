@@ -3,8 +3,20 @@
 
 .container {
 	display: flex;
+	flex-direction: row;
+	gap: var(--size-spacing-30);
+	align-items: flex-start;
+	flex-wrap: wrap;
+}
+
+/* * */
+/* METRIC WRAPPER */
+
+.metricWrapper {
+	display: flex;
 	flex-direction: column;
 	gap: var(--size-spacing-5);
+	max-width: 300px;
 }
 
 /* * */

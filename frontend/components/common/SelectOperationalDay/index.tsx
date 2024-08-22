@@ -3,9 +3,11 @@
 /* * */
 
 import { useOperationalDayContext } from '@/contexts/OperationalDay.context';
+import { SegmentedControl } from '@mantine/core';
 import { DatePickerInput } from '@mantine/dates';
 import { IconCalendarFilled } from '@tabler/icons-react';
 import { useTranslations } from 'next-intl';
+import { useMemo } from 'react';
 
 import styles from './styles.module.css';
 
@@ -21,7 +23,37 @@ export default function Component() {
 	const operationalDayContext = useOperationalDayContext();
 
 	//
-	// D. Render components
+	// B. Transform data
+
+	const segementedControlOptions = [
+		{
+			label: t('today'),
+			value: 'today' },
+		{
+			label: t('tomorrow'),
+			value: 'tomorrow' },
+		{
+			label: (
+				<DatePickerInput
+					classNames={styles}
+					data-selected={!operationalDayContext.flags.is_today_selected && !operationalDayContext.flags.is_tomorrow_selected}
+					dropdownType="modal"
+					leftSection={<IconCalendarFilled size={20} />}
+					onChange={operationalDayContext.actions.updateSelectedDayFromJsDate}
+					value={operationalDayContext.data.selected_day_jsdate}
+					valueFormat="DD MMM YYYY"
+				/>
+			),
+			value: 'custom_date',
+		},
+	];
+
+	//
+	// B. Render components
+
+	return (
+		<SegmentedControl data={segementedControlOptions} value="today" />
+	);
 
 	return (
 		<div className={styles.container}>
