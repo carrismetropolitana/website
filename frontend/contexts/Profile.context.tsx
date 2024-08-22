@@ -89,13 +89,7 @@ export const ProfileContextProvider = ({ children }) => {
 	//
 	// C. Handle actions
 	const toggleFavoriteLine = async (lineId: string) => {
-		const res = await fetch(`/api/accounts/${deviceId}/favorite-lines`, {
-			body: JSON.stringify({
-				line_id: lineId,
-			}),
-			headers: {
-				'Content-Type': 'application/json',
-			},
+		const res = await fetch(`/api/accounts/${deviceId}/favorite-lines/${lineId}`, {
 			method: 'POST',
 		});
 
@@ -109,13 +103,7 @@ export const ProfileContextProvider = ({ children }) => {
 	};
 
 	const toggleFavoriteStop = async (stopId: string) => {
-		const res = await fetch(`/api/accounts/${deviceId}/favorite-stops`, {
-			body: JSON.stringify({
-				id: stopId,
-			}),
-			headers: {
-				'Content-Type': 'application/json',
-			},
+		const res = await fetch(`/api/accounts/${deviceId}/favorite-stops/${stopId}`, {
 			method: 'POST',
 		});
 
