@@ -18,6 +18,7 @@ interface ProfileContextState {
 	actions: {
 		toggleFavoriteLine: (lineId: string) => void
 		toggleFavoriteStop: (stopId: string) => void
+		updateFilterByFavorite: (value: ProfileContextState['filters']['favorites']) => void
 	}
 	counters: {
 		favorite_lines: number
@@ -26,6 +27,9 @@ interface ProfileContextState {
 	data: {
 		device_id: null | string
 		profile: Profile | null
+	}
+	filters: {
+		favorites: 'lines' | 'stops'
 	}
 	flags: {
 		is_loading: boolean
@@ -54,6 +58,7 @@ export const ProfileContextProvider = ({ children }) => {
 
 	const [deviceId, setDeviceId] = useState<ProfileContextState['data']['device_id']>(null);
 	const [dataProfile, setDataProfile] = useState<ProfileContextState['data']['profile']>(null);
+	const [filterByFavorite, setFilterByFavorite] = useState <ProfileContextState['filters']['favorites']>('lines');
 
 	//
 	// B. Transform data
@@ -116,6 +121,8 @@ export const ProfileContextProvider = ({ children }) => {
 		setDataProfile(profile);
 	};
 
+	const updateFilterByFavorite = (value: ProfileContextState['filters']['favorites']) => setFilterByFavorite(value);
+
 	//
 	// D. Define context value
 
@@ -123,6 +130,7 @@ export const ProfileContextProvider = ({ children }) => {
 		actions: {
 			toggleFavoriteLine,
 			toggleFavoriteStop,
+			updateFilterByFavorite,
 		},
 		counters: {
 			favorite_lines: dataProfile?.favorite_lines?.length || 0,
@@ -131,6 +139,9 @@ export const ProfileContextProvider = ({ children }) => {
 		data: {
 			device_id: deviceId,
 			profile: dataProfile,
+		},
+		filters: {
+			favorites: filterByFavorite,
 		},
 		flags: {
 			is_loading: false,
