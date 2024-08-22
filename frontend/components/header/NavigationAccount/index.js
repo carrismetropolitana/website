@@ -50,7 +50,7 @@ export default function Component() {
 				</div>
 				<div className={styles.navList}>
 					{NAV_ITEMS.map(item => (
-						<NavigationMainMenuItem key={item._id} href={item.href} icon={item.icon} label={t(item._id)} />
+						<NavigationMainMenuItem key={item._id} href={item.href} icon={item.icon} label={t(item._id)} onClick={closeDrawer} />
 					))}
 				</div>
 				<div className={styles.componentWrapper}>
