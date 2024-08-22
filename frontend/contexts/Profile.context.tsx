@@ -1,14 +1,15 @@
 'use client';
 
 /* * */
-
+import { Profile } from '@/types/profile.type';
 import { createContext, useContext, useEffect, useState } from 'react';
+import { v4 as uuid } from 'uuid';
 
 /* * */
 
 const LOCAL_STORAGE_KEYS = {
-	favorite_lines: 'profile|favorite_lines',
-	favorite_stops: 'profile|favorite_stops',
+	device_id: 'profile|device_id',
+	profile: 'profile',
 };
 
 /* * */
@@ -23,8 +24,8 @@ interface ProfileContextState {
 		favorite_stops: number
 	}
 	data: {
-		favorite_lines: null | string[]
-		favorite_stops: null | string[]
+		device_id: null | string
+		profile: Profile | null
 	}
 	flags: {
 		is_loading: boolean
@@ -51,61 +52,80 @@ export const ProfileContextProvider = ({ children }) => {
 	//
 	// A. Setup variables
 
-	const [dataFavoriteLinesState, setDataFavoriteLinesState] = useState<ProfileContextState['data']['favorite_lines']>(null);
-	const [dataFavoriteStopsState, setDataFavoriteStopsState] = useState<ProfileContextState['data']['favorite_stops']>(null);
+	const [deviceId, setDeviceId] = useState<ProfileContextState['data']['device_id']>(null);
+	const [dataProfile, setDataProfile] = useState<ProfileContextState['data']['profile']>(null);
 
 	//
 	// B. Transform data
-
 	useEffect(() => {
-		// Get favorite lines from local storage
+		// Get device id from local storage
+		// If no device id is found then generate a new one
 		if (typeof window === 'undefined') return;
-		const favoriteLinesLocal = localStorage.getItem(LOCAL_STORAGE_KEYS.favorite_lines);
-		const favoriteLinesData = favoriteLinesLocal ? JSON.parse(favoriteLinesLocal) : null;
-		setDataFavoriteLinesState(favoriteLinesData);
+		const deviceIdLocal = localStorage.getItem(LOCAL_STORAGE_KEYS.device_id);
+
+		if (!deviceIdLocal) {
+			const id = uuid();
+			setDeviceId(id);
+			localStorage.setItem(LOCAL_STORAGE_KEYS.device_id, id);
+		}
+
+		setDeviceId(deviceIdLocal);
 	}, []);
 
 	useEffect(() => {
-		// Save favorite lines to local storage
-		if (typeof window === 'undefined' || dataFavoriteLinesState === null) return;
-		const favoriteLinesTxt = JSON.stringify(dataFavoriteLinesState);
-		localStorage.setItem(LOCAL_STORAGE_KEYS.favorite_lines, favoriteLinesTxt);
-	}, [dataFavoriteLinesState]);
+		// Fetch profile data from API on mount
+		// If the profile data is not found, set the data to null
+		const deviceIdLocal = localStorage.getItem(LOCAL_STORAGE_KEYS.device_id);
+		fetch(`/api/accounts/${deviceIdLocal}`).then((res) => {
+			if (!res.ok) {
+				setDataProfile(null);
+				return;
+			}
 
-	useEffect(() => {
-		// Get favorite stops from local storage
-		if (typeof window === 'undefined') return;
-		const favoriteStopsLocal = localStorage.getItem(LOCAL_STORAGE_KEYS.favorite_stops);
-		const favoriteStopsData = favoriteStopsLocal ? JSON.parse(favoriteStopsLocal) : null;
-		setDataFavoriteStopsState(favoriteStopsData);
-	}, []);
-
-	useEffect(() => {
-		// Save favorite stops to local storage
-		if (typeof window === 'undefined' || dataFavoriteStopsState === null) return;
-		const favoriteStopsTxt = JSON.stringify(dataFavoriteStopsState);
-		localStorage.setItem(LOCAL_STORAGE_KEYS.favorite_stops, favoriteStopsTxt);
-	}, [dataFavoriteStopsState]);
+			res.json().then(profile => setDataProfile(profile));
+		});
+	}, [deviceId]);
 
 	//
 	// C. Handle actions
+	const toggleFavoriteLine = async (lineId: string) => {
+		const res = await fetch(`/api/accounts/${deviceId}/favorite-lines`, {
+			body: JSON.stringify({
+				line_id: lineId,
+			}),
+			headers: {
+				'Content-Type': 'application/json',
+			},
+			method: 'POST',
+		});
 
-	const toggleFavoriteLine = (lineId: string) => {
-		if (dataFavoriteLinesState?.includes(lineId)) {
-			setDataFavoriteLinesState(prev => prev && prev.filter(itemId => itemId !== lineId));
+		if (!res.ok) {
+			// TODO: Handle error, maybe show a toast
+			console.error('Error toggling favorite line');
 		}
-		else {
-			setDataFavoriteLinesState(prev => prev && [...prev, lineId]);
-		}
+
+		const profile: Profile = await res.json();
+		setDataProfile(profile);
 	};
 
-	const toggleFavoriteStop = (stopId: string) => {
-		if (dataFavoriteStopsState?.includes(stopId)) {
-			setDataFavoriteStopsState(prev => prev && prev.filter(itemId => itemId !== stopId));
+	const toggleFavoriteStop = async (stopId: string) => {
+		const res = await fetch(`/api/accounts/${deviceId}/favorite-stops`, {
+			body: JSON.stringify({
+				id: stopId,
+			}),
+			headers: {
+				'Content-Type': 'application/json',
+			},
+			method: 'POST',
+		});
+
+		if (!res.ok) {
+			// TODO: Handle error, maybe show a toast
+			console.error('Error toggling favorite stop');
 		}
-		else {
-			setDataFavoriteStopsState(prev => prev && [...prev, stopId]);
-		}
+
+		const profile: Profile = await res.json();
+		setDataProfile(profile);
 	};
 
 	//
@@ -117,12 +137,12 @@ export const ProfileContextProvider = ({ children }) => {
 			toggleFavoriteStop,
 		},
 		counters: {
-			favorite_lines: dataFavoriteLinesState?.length || 0,
-			favorite_stops: dataFavoriteStopsState?.length || 0,
+			favorite_lines: dataProfile?.favorite_lines?.length || 0,
+			favorite_stops: dataProfile?.favorite_stops?.length || 0,
 		},
 		data: {
-			favorite_lines: dataFavoriteLinesState,
-			favorite_stops: dataFavoriteStopsState,
+			device_id: deviceId,
+			profile: dataProfile,
 		},
 		flags: {
 			is_loading: false,

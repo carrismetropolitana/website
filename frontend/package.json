@@ -39,6 +39,7 @@
 		"swr": "2.2.5",
 		"ua-parser-js": "1.0.38",
 		"ukkonen": "2.1.0",
+		"uuid": "^10.0.0",
 		"yup": "1.4.0"
 	},
 	"devDependencies": {
