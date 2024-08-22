@@ -37,7 +37,7 @@ export const theme = createTheme({
 	components: {
 
 		Accordion: Accordion.extend({
-			classNames: (_, props) => {
+			classNames: () => {
 				let defaultClasses = {
 					chevron: AccordionOverride.chevron,
 					content: AccordionOverride.content,
@@ -84,7 +84,7 @@ export const theme = createTheme({
 		}),
 
 		Select: Select.extend({
-			classNames: (_, props) => {
+			classNames: () => {
 				let defaultClasses = {
 					dropdown: SelectOverride.dropdown,
 					input: SelectOverride.input,
@@ -97,7 +97,7 @@ export const theme = createTheme({
 		}),
 
 		Skeleton: Skeleton.extend({
-			classNames: (_, props) => {
+			classNames: () => {
 				let defaultClasses = {
 					root: SkeletonOverride.root,
 
