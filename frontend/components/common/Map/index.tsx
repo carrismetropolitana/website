@@ -3,7 +3,6 @@
 import MapResizeHandle from '@/components/common/MapResizeHandle';
 import { useMapOptionsContext } from '@/contexts/MapOptions.context';
 import maplibregl from 'maplibre-gl';
-import { useTranslations } from 'next-intl';
 import { useEffect } from 'react';
 import Map, { MapRef } from 'react-map-gl/maplibre';
 
@@ -15,6 +14,15 @@ const MAP_LOAD_ASSETS = [
 	{ name: 'cm-bus-regular', sdf: false, url: 'https://beta.carrismetropolitana.pt/icons/cm-bus-regular.png' },
 	{ name: 'shape-arrow-direction', sdf: true, url: 'https://beta.carrismetropolitana.pt/icons/shape-arrow-direction.png' },
 ];
+
+const MAP_DEFAULTS = {
+	bearing: 0,
+	latitude: 38.7,
+	longitude: -9.0,
+	pitch: 0,
+	viewport_height: 300,
+	zoom: 11,
+};
 
 /* * */
 
@@ -56,13 +64,18 @@ export default function Component({ children, mapObject }: Props) {
 				id="linesSingleMap"
 				mapLib={maplibregl}
 				mapStyle="https://maps.carrismetropolitana.pt/styles/default/style.json"
-				style={{ height: '100%', maxHeight: mapOptionsContext.data.viewport_height, minHeight: mapOptionsContext.data.viewport_height, width: '100%' }}
 				initialViewState={{
-					bearing: 0,
-					latitude: 38.7,
-					longitude: -9.0,
-					pitch: 0,
-					zoom: 11,
+					bearing: MAP_DEFAULTS.bearing,
+					latitude: MAP_DEFAULTS.latitude,
+					longitude: MAP_DEFAULTS.longitude,
+					pitch: MAP_DEFAULTS.pitch,
+					zoom: MAP_DEFAULTS.zoom,
+				}}
+				style={{
+					height: '100%',
+					maxHeight: mapOptionsContext.data.viewport_height || MAP_DEFAULTS.viewport_height,
+					minHeight: mapOptionsContext.data.viewport_height || MAP_DEFAULTS.viewport_height,
+					width: '100%',
 				}}
 			>
 				{children}
