@@ -2,12 +2,13 @@
 
 /* * */
 
-import type { Line, Pattern, PatternGroup, Route } from '@/types/lines.types.js';
+import type { Line, Pattern, PatternGroup, Route, Shape } from '@/types/lines.types.js';
 
 import { useOperationalDayContext } from '@/contexts/OperationalDay.context';
 import { useProfileContext } from '@/contexts/Profile.context';
 import { Alert, SimplifiedAlert } from '@/types/alerts.types';
 import convertToSimplifiedAlert from '@/utils/convertToSimplifiedAlert';
+import { DemandByLine } from '@/utils/types';
 import { createContext, useContext, useEffect, useState } from 'react';
 import useSWR from 'swr';
 
@@ -20,8 +21,10 @@ interface LinesSingleContextState {
 	data: {
 		active_alerts: SimplifiedAlert[] | null
 		active_pattern_group: PatternGroup | null
+		active_shape: Shape | null
 		all_patterns: Pattern[] | null
 		all_routes: Route[] | null
+		demand: DemandByLine | null
 		line: Line | null
 		timetable: string
 		valid_pattern_groups: PatternGroup[] | null
@@ -61,8 +64,11 @@ export const LinesSingleContextProvider = ({ children, lineId }) => {
 	const [dataRoutesState, setDataRoutesState] = useState<Route[] | null>(null);
 	const [dataAllPatternsState, setDataAllPatternsState] = useState<Pattern[] | null>(null);
 	const [dataValidPatternGroupsState, setDataValidPatternGroupsState] = useState<PatternGroup[] | null>(null);
-	const [dataActivePatternGroupState, setDataActivePatternGroupState] = useState<PatternGroup | null>(null);
+	const [dataDemandForCurrentLineState, setDataDemandForCurrentLineState] = useState<DemandByLine | null>(null);
+
 	const [dataActiveAlertsState, setDataActiveAlertsState] = useState<SimplifiedAlert[] | null>(null);
+	const [dataActivePatternGroupState, setDataActivePatternGroupState] = useState<PatternGroup | null>(null);
+	const [dataActiveShapeState, setDataActiveShapeState] = useState<Shape | null>(null);
 
 	const [flagIsFavoriteState, setFlagIsFavoriteState] = useState<boolean>(false);
 
@@ -71,6 +77,7 @@ export const LinesSingleContextProvider = ({ children, lineId }) => {
 
 	const { data: lineData, isLoading: lineLoading } = useSWR<Line, Error>(`https://api.carrismetropolitana.pt/v2/lines/${lineId}`);
 	const { data: allAlertsData, isLoading: allAlertsLoading } = useSWR<Alert[], Error>('https://api.carrismetropolitana.pt/v2/alerts');
+	const { data: allDemandByLineData, isLoading: allDemandByLineLoading } = useSWR<DemandByLine[], Error>('https://api.carrismetropolitana.pt/v2/metrics/demand/by_line');
 
 	useEffect(() => {
 		(async () => {
@@ -104,6 +111,19 @@ export const LinesSingleContextProvider = ({ children, lineId }) => {
 		})();
 	}, [lineData]);
 
+	useEffect(() => {
+		(async () => {
+			try {
+				if (!dataActivePatternGroupState) return;
+				const resultData = await fetch(`https://api.carrismetropolitana.pt/v2/shapes/${dataActivePatternGroupState.shape_id}`).then(response => response.json());
+				setDataActiveShapeState(resultData);
+			}
+			catch (error) {
+				console.error('Error fetching shape data:', error);
+			}
+		})();
+	}, [dataActivePatternGroupState]);
+
 	//
 	// C. Transform data
 
@@ -122,6 +142,9 @@ export const LinesSingleContextProvider = ({ children, lineId }) => {
 			}
 		}
 		setDataValidPatternGroupsState(activePatternGroups);
+		if (!dataActivePatternGroupState) {
+			setDataActivePatternGroupState(activePatternGroups[0] || null);
+		}
 	}, [dataAllPatternsState, operationalDayContext.data.selected_day]);
 
 	useEffect(() => {
@@ -137,6 +160,12 @@ export const LinesSingleContextProvider = ({ children, lineId }) => {
 		});
 		setDataActiveAlertsState(activeAlerts);
 	}, [allAlertsData, lineData]);
+
+	useEffect(() => {
+		if (!allDemandByLineData) return;
+		const demandForCurrentLine = allDemandByLineData.find(demandByLineItem => demandByLineItem.line_id === lineData?.line_id);
+		setDataDemandForCurrentLineState(demandForCurrentLine || null);
+	}, [allDemandByLineData, lineData]);
 
 	//
 	// D. Handle actions
@@ -161,8 +190,10 @@ export const LinesSingleContextProvider = ({ children, lineId }) => {
 		data: {
 			active_alerts: dataActiveAlertsState,
 			active_pattern_group: dataActivePatternGroupState,
+			active_shape: dataActiveShapeState,
 			all_patterns: dataAllPatternsState,
 			all_routes: dataRoutesState,
+			demand: dataDemandForCurrentLineState,
 			line: lineData || null,
 			timetable: '',
 			valid_pattern_groups: dataValidPatternGroupsState,

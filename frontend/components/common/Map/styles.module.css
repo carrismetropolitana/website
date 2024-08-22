@@ -1,0 +1,25 @@
+/* * */
+/* CONTAINER */
+
+.container {
+	width: 100%;
+	height: 100%;
+	display: flex;
+	flex-direction: column;
+	position: relative;
+}
+
+/* * */
+/* ATTRIBUTION */
+
+.attributionWrapper {
+	display: flex;
+	gap: 4px;
+	padding-left: 8px;
+	font-size: 10px;
+	color: var(--color-system-text-300);
+}
+
+.attributionWrapper a:hover{
+	text-decoration: underline;
+}

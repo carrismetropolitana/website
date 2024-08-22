@@ -4,6 +4,7 @@
 
 import { AnalyticsContextProvider } from '@/contexts/Analytics.context';
 import { DebugContextProvider } from '@/contexts/Debug.context';
+import { MapOptionsContextProvider } from '@/contexts/MapOptions.context';
 import { OperationalDayContextProvider } from '@/contexts/OperationalDay.context';
 import { ProfileContextProvider } from '@/contexts/Profile.context';
 import { theme } from '@/styles/theme';
@@ -63,7 +64,9 @@ export default function Providers({ children }) {
 							<ProfileContextProvider>
 								<DebugContextProvider>
 									<OperationalDayContextProvider>
-										<MapProvider>{children}</MapProvider>
+										<MapOptionsContextProvider>
+											<MapProvider>{children}</MapProvider>
+										</MapOptionsContextProvider>
 									</OperationalDayContextProvider>
 								</DebugContextProvider>
 							</ProfileContextProvider>
