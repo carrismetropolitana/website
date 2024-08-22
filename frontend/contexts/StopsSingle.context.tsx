@@ -109,8 +109,8 @@ export const StopsSingleContextProvider = ({ children, stopId }) => {
 	// C. Transform data
 
 	useEffect(() => {
-		setFlagIsFavoriteState(profileContext.data.favorite_stops?.includes(stopId) ? true : false);
-	}, [profileContext.data.favorite_stops, stopId]);
+		setFlagIsFavoriteState(profileContext.data.profile?.favorite_stops?.includes(stopId) ? true : false);
+	}, [profileContext.data.profile?.favorite_stops, stopId]);
 
 	useEffect(() => {
 		if (!dataAllPatternsState || !operationalDayContext.data.selected_day) return;
