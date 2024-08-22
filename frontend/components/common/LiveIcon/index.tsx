@@ -4,9 +4,16 @@ import styles from './style.module.css';
 
 /* * */
 
-export default function Component({ color = 'var(--color-realtime-100)' }) {
+interface Props {
+	className?: string
+	color?: string
+}
+
+/* * */
+
+export default function Component({ className, color = 'var(--color-realtime-100)' }: Props) {
 	return (
-		<div className={styles.container}>
+		<div className={`${styles.container} ${!!className && className}`}>
 			<div className={styles.ripple} style={{ backgroundColor: color }} />
 			<div className={styles.dot} style={{ backgroundColor: color }} />
 		</div>

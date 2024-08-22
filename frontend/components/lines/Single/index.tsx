@@ -7,10 +7,10 @@ import FavoriteToggle from '@/components/common/FavoriteToggle';
 import SelectOperationalDay from '@/components/common/SelectOperationalDay';
 import NoDataLabel from '@/components/layout/NoDataLabel';
 import Section from '@/components/layout/Section';
-import DemandByLine from '@/components/lines/DemandByLine';
 import LineBadge from '@/components/lines/LineBadge';
 import LineMap from '@/components/lines/LineMap';
 import LineName from '@/components/lines/LineName';
+import Metrics from '@/components/lines/Metrics';
 import SelectActivePatternGroup from '@/components/lines/SelectActivePatternGroup';
 import { useLinesSingleContext } from '@/contexts/LinesSingle.context';
 import { useProfileContext } from '@/contexts/Profile.context';
@@ -74,7 +74,9 @@ export default function Component() {
 			)}
 
 			{linesSingleContext.data.demand && (
-				<DemandByLine />
+				<Section childrenWrapperStyles={styles.headingSection} withGap={false} withTopPadding={false} withChildrenPadding>
+					<Metrics />
+				</Section>
 			)}
 
 		</>
