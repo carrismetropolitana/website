@@ -1,5 +1,3 @@
-/* * */
-
 import type { FaqGroupByTopic } from '@/types/faq.types';
 
 /* * */
