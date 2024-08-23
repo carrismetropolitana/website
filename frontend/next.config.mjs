@@ -35,7 +35,7 @@ export default withNextIntl({
       //
     ]
   },
-  swcMinify: false,
+  //   swcMinify: false,
   webpack: (config, { isServer }) => {
     if (!isServer) {
       config.optimization.minimize = false
