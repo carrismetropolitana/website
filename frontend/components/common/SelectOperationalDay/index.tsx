@@ -7,7 +7,7 @@ import { SegmentedControl } from '@mantine/core';
 import { DatePickerInput } from '@mantine/dates';
 import { IconCalendarFilled } from '@tabler/icons-react';
 import { useTranslations } from 'next-intl';
-import { useMemo } from 'react';
+import { useMemo, useState } from 'react';
 
 import styles from './styles.module.css';
 
@@ -21,6 +21,8 @@ export default function Component() {
 
 	const t = useTranslations('common.SelectOperationalDay');
 	const operationalDayContext = useOperationalDayContext();
+
+	const [selectedSegmentedControlOption, setSelectedSegmentedControlOption] = useState<null | string>(null);
 
 	//
 	// B. Transform data
