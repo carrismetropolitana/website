@@ -5,9 +5,9 @@
 import { useOperationalDayContext } from '@/contexts/OperationalDay.context';
 import { SegmentedControl } from '@mantine/core';
 import { DatePickerInput } from '@mantine/dates';
-import { IconCalendarFilled } from '@tabler/icons-react';
+import { IconCalendarEvent } from '@tabler/icons-react';
 import { useTranslations } from 'next-intl';
-import { useMemo } from 'react';
+import { useEffect, useState } from 'react';
 
 import styles from './styles.module.css';
 
@@ -22,26 +22,28 @@ export default function Component() {
 	const t = useTranslations('common.SelectOperationalDay');
 	const operationalDayContext = useOperationalDayContext();
 
-	//
-	// B. Transform data
+	const [selectedSegmentedControlOption, setSelectedSegmentedControlOption] = useState<string | undefined>();
 
 	const segementedControlOptions = [
 		{
 			label: t('today'),
-			value: 'today' },
+			value: 'today',
+		},
 		{
 			label: t('tomorrow'),
-			value: 'tomorrow' },
+			value: 'tomorrow',
+		},
 		{
 			label: (
 				<DatePickerInput
-					classNames={styles}
+					classNames={{ input: styles.datePickerInput, root: styles.datePickerRoot, section: styles.datePickerSection, wrapper: styles.datePickerWrapper }}
 					data-selected={!operationalDayContext.flags.is_today_selected && !operationalDayContext.flags.is_tomorrow_selected}
 					dropdownType="modal"
-					leftSection={<IconCalendarFilled size={20} />}
+					leftSection={<IconCalendarEvent size={24} />}
 					onChange={operationalDayContext.actions.updateSelectedDayFromJsDate}
 					value={operationalDayContext.data.selected_day_jsdate}
 					valueFormat="DD MMM YYYY"
+					variant="unstyled"
 				/>
 			),
 			value: 'custom_date',
@@ -49,32 +51,37 @@ export default function Component() {
 	];
 
 	//
-	// B. Render components
+	// B. Transform data
+
+	useEffect(() => {
+		if (operationalDayContext.flags.is_today_selected) {
+			setSelectedSegmentedControlOption('today');
+		}
+		else if (operationalDayContext.flags.is_tomorrow_selected) {
+			setSelectedSegmentedControlOption('tomorrow');
+		}
+		else if (!operationalDayContext.flags.is_today_selected && !operationalDayContext.flags.is_tomorrow_selected) {
+			setSelectedSegmentedControlOption('custom_date');
+		}
+	}, [operationalDayContext.flags.is_today_selected, operationalDayContext.flags.is_tomorrow_selected]);
+
+	//
+	// C. Handle actions
+
+	const handleSegmentedControlChange = (value: string) => {
+		if (value === 'today') {
+			operationalDayContext.actions.updateSelectedDayToToday();
+		}
+		else if (value === 'tomorrow') {
+			operationalDayContext.actions.updateSelectedDayToTomorrow();
+		}
+	};
+
+	//
+	// D. Render components
 
 	return (
-		<SegmentedControl data={segementedControlOptions} value="today" />
-	);
-
-	return (
-		<div className={styles.container}>
-			<div className={styles.innerWrapper} data-custom={!operationalDayContext.flags.is_today_selected && !operationalDayContext.flags.is_tomorrow_selected}>
-				<div className={styles.button} data-selected={operationalDayContext.flags.is_today_selected} onClick={operationalDayContext.actions.updateSelectedDayToToday}>
-					{t('today')}
-				</div>
-				<div className={styles.button} data-selected={operationalDayContext.flags.is_tomorrow_selected} onClick={operationalDayContext.actions.updateSelectedDayToTomorrow}>
-					{t('tomorrow')}
-				</div>
-				<DatePickerInput
-					classNames={styles}
-					data-selected={!operationalDayContext.flags.is_today_selected && !operationalDayContext.flags.is_tomorrow_selected}
-					dropdownType="modal"
-					leftSection={<IconCalendarFilled size={20} />}
-					onChange={operationalDayContext.actions.updateSelectedDayFromJsDate}
-					value={operationalDayContext.data.selected_day_jsdate}
-					valueFormat="DD MMM YYYY"
-				/>
-			</div>
-		</div>
+		<SegmentedControl classNames={{ control: styles.segmentedControlDateInputOverride }} data={segementedControlOptions} onChange={handleSegmentedControlChange} value={selectedSegmentedControlOption} w="100%" />
 	);
 
 	//

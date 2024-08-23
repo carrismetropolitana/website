@@ -73,6 +73,7 @@ export const theme = createTheme({
 			classNames: (_, props) => {
 				let defaultClasses = {
 					indicator: SegmentedControlOverride.indicator,
+					innerLabel: SegmentedControlOverride.innerLabel,
 					label: SegmentedControlOverride.label,
 					root: SegmentedControlOverride.root,
 				};

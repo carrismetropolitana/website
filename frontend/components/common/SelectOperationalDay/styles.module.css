@@ -1,61 +1,68 @@
 /* * */
-/* CONTAINER */
+/* SEGMENTED CONTROL DATE INPUT OVERRIDE */
 
-.container {
+.segmentedControlDateInputOverride:last-child label,
+.segmentedControlDateInputOverride[data-active="true"]:last-child label {
+	padding: 0;
+	display: block;
+}
+
+/* * */
+/* DATE PICKER / ROOT */
+
+.datePickerRoot {
+	/* width: 100%; */
+	/* display: flex; */
+}
+
+/* * */
+/* DATE PICKER / WRAPPER */
+
+.datePickerWrapper {
+	/* margin: auto; */
+}
+
+/* * */
+/* DATE PICKER / INPUT */
+
+.datePickerInput {
 	width: 100%;
+	text-align: center;
+	border: none;
+	line-height: 1;
+	font-size: 17px;
+	font-weight: var(--font-weight-semibold);
+	padding: var(--size-spacing-15) var(--size-spacing-15) var(--size-spacing-15) calc(var(--size-spacing-15) + 27px);
+	color: var(--color-system-text-200);
+	background: transparent;
+}
+
+@media screen and (max-width: 500px) {
+	.datePickerInput {
+		font-size: 14px;
+		padding: var(--size-spacing-15) calc(var(--size-spacing-15) + 27px);
+	}
+}
+
+.segmentedControlDateInputOverride[data-active="true"] .datePickerInput {
+	color: var(--color-system-text-100);
 }
 
 /* * */
-/* INNER WRAPPER */
+/* DATE PICKER / SECTION */
 
-.innerWrapper {
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
-    padding: 5px;
-    min-height: 50px;
-    background-color: var(--color-system-background-300);
-    border-radius: 5px;
-}
-
-.wrapper {
-    height: 100%;
-}
-
-/* * */
-/* BUTTONS & INPUT */
-
-.button,
-.input {
-    font-size: 17px;
-    cursor: pointer;
-    font-weight: 600;
-    border-radius: 3px;
-    color: var(--color-system-text-300);
+.datePickerSection {
     display: flex;
-    align-items: center;
-    justify-content: center;
-    height:100%;
-    border: none;
-    transition: all 200ms ease;
-    background: transparent;
+	align-items: center;
+	justify-content: center;
+	color: var(--color-system-text-300);
+	margin-top: -3px;
+	pointer-events: none;
+	width: auto;
+	height: auto;
+	padding-left: var(--size-spacing-10);
 }
 
-.input {
-    /* padding-left: 38px; */
-}
-
-.button[data-selected="true"],
-.input[data-selected="true"] {
-    color: var(--color-system-text-200);
-    background: var(--color-system-background-100);
-    box-shadow: 0 0 5px 0 rgba(0, 0, 0, 0.1);
-}
-
-
-.innerWrapper[data-custom="true"] .section {
-    --input-section-color: var(--color-system-text-200)
-}
-
-.section {
-    padding-left: 12px;
+.segmentedControlDateInputOverride[data-active="true"] .datePickerSection {
+	color: var(--color-system-text-200);
 }
