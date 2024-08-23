@@ -5,6 +5,7 @@
 import AccountUserAvatar from '@/components/account/UserAvatar';
 import HeaderLocaleSwitcher from '@/components/header/LocaleSwitcher';
 import NavigationMainMenuItem from '@/components/header/NavigationMainMenuItem';
+import SyncAccount from '@/components/profile/sync';
 import { CloseButton, Drawer } from '@mantine/core';
 import { useDisclosure } from '@mantine/hooks';
 import { IconListSearch, IconSparkles, IconStar } from '@tabler/icons-react';
@@ -55,6 +56,9 @@ export default function Component() {
 				</div>
 				<div className={styles.componentWrapper}>
 					<HeaderLocaleSwitcher />
+				</div>
+				<div className={`${styles.componentWrapper} ${styles.topBorder}`}>
+					<SyncAccount />
 				</div>
 			</Drawer>
 			<AccountUserAvatar component="button" onClick={openDrawer} />
