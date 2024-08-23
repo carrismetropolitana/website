@@ -1,6 +1,6 @@
 # # # # # # # # #
 
-FROM node:alpine AS base
+FROM node:22.6-alpine3.20 AS base
 
 # # # # # # # # #
 

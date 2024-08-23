@@ -17,7 +17,6 @@ export default withNextIntl({
     ],
   },
   output: 'standalone',
-  productionBrowserSourceMaps: true,
   reactStrictMode: true,
   async redirects() {
     return [
@@ -35,11 +34,4 @@ export default withNextIntl({
       //
     ]
   },
-  //   swcMinify: false,
-  //   webpack: (config, { isServer }) => {
-  //     if (!isServer) {
-  //       config.optimization.minimize = false
-  //     }
-  //     return config
-  //   },
 })
