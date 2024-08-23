@@ -1,57 +1,57 @@
 {
-  "compilerOptions": {
-    "baseUrl": ".",
-    "rootDir": ".",
-    "module": "esnext",
-    "moduleResolution": "bundler",
-    "paths": {
-      "@/utils/*": ["utils/*"],
-      "@/types/*": ["types/*"],
-      "@/hooks/*": ["hooks/*"],
-      "@/styles/*": ["styles/*"],
-      "@/contexts/*": ["contexts/*"],
-      "@/opengraph/*": ["opengraph/*"],
-      "@/components/*": ["components/*"],
-      "@/translations/*": ["translations/*"]
-    },
-    "allowJs": true,
-    "sourceMap": true,
-    "esModuleInterop": true,
-    "lib": [
-      "dom",
-      "dom.iterable",
-      "esnext"
-    ],
-    "skipLibCheck": true,
-    "strict": false,
-    "incremental": true,
-    "resolveJsonModule": true,
-    "isolatedModules": true,
-    "jsx": "preserve",
-    "plugins": [
-      {
-        "name": "typescript-plugin-css-modules"
-      },
-      {
-        "name": "next"
-      }
-    ],
-    "strictNullChecks": true,
-    "noEmit": true
-  },
-  "exclude": [
-    "**/node_modules",
-    "**/.*/",
-    "**/build/",
-    "**/.next/"
-  ],
-  "include": [
-    "next-env.d.ts",
-    ".next/types/**/*.ts",
-    "**/*.ts",
-    "**/*.tsx"
-, "components/lines/Page/index-prev._tsx", "components/layout/GridNav/index.js"  ],
-  "typingOptions": {
-    "enableAutoDiscovery": true
-  }
+	"compilerOptions": {
+		"baseUrl": ".",
+		"rootDir": ".",
+		"module": "esnext",
+		"moduleResolution": "bundler",
+		"paths": {
+			"@/utils/*": ["utils/*"],
+			"@/types/*": ["types/*"],
+			"@/hooks/*": ["hooks/*"],
+			"@/styles/*": ["styles/*"],
+			"@/contexts/*": ["contexts/*"],
+			"@/opengraph/*": ["opengraph/*"],
+			"@/components/*": ["components/*"],
+			"@/translations/*": ["translations/*"]
+		},
+		"allowJs": true,
+		"sourceMap": true,
+		"esModuleInterop": true,
+		"lib": [
+			"dom",
+			"dom.iterable",
+			"esnext"
+		],
+		"skipLibCheck": true,
+		"strict": false,
+		"incremental": true,
+		"resolveJsonModule": true,
+		"isolatedModules": true,
+		"jsx": "preserve",
+		"plugins": [
+			{
+				"name": "typescript-plugin-css-modules"
+			},
+			{
+				"name": "next"
+			}
+		],
+		"strictNullChecks": true,
+		"noEmit": true
+	},
+	"exclude": [
+		"**/node_modules",
+		"**/.*/",
+		"**/build/",
+		"**/.next/",
+	],
+	"include": [
+		"next-env.d.ts",
+		".next/types/**/*.ts",
+		"**/*.ts",
+		"**/*.tsx"
+	],
+	"typingOptions": {
+		"enableAutoDiscovery": true
+	}
 }
