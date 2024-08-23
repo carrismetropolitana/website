@@ -7,7 +7,7 @@ import { SegmentedControl } from '@mantine/core';
 import { DatePickerInput } from '@mantine/dates';
 import { IconCalendarFilled } from '@tabler/icons-react';
 import { useTranslations } from 'next-intl';
-import { useMemo, useState } from 'react';
+import { useEffect, useState } from 'react';
 
 import styles from './styles.module.css';
 
@@ -22,7 +22,7 @@ export default function Component() {
 	const t = useTranslations('common.SelectOperationalDay');
 	const operationalDayContext = useOperationalDayContext();
 
-	const [selectedSegmentedControlOption, setSelectedSegmentedControlOption] = useState<null | string>(null);
+	const [selectedSegmentedControlOption, setSelectedSegmentedControlOption] = useState<string | undefined>();
 
 	//
 	// B. Transform data
@@ -30,10 +30,12 @@ export default function Component() {
 	const segementedControlOptions = [
 		{
 			label: t('today'),
-			value: 'today' },
+			value: 'today',
+		},
 		{
 			label: t('tomorrow'),
-			value: 'tomorrow' },
+			value: 'tomorrow',
+		},
 		{
 			label: (
 				<DatePickerInput
@@ -50,11 +52,35 @@ export default function Component() {
 		},
 	];
 
+	useEffect(() => {
+		if (operationalDayContext.flags.is_today_selected) {
+			setSelectedSegmentedControlOption('today');
+		}
+		else if (operationalDayContext.flags.is_tomorrow_selected) {
+			setSelectedSegmentedControlOption('tomorrow');
+		}
+		else if (!operationalDayContext.flags.is_today_selected && !operationalDayContext.flags.is_tomorrow_selected) {
+			setSelectedSegmentedControlOption('custom_date');
+		}
+	}, [operationalDayContext.flags.is_today_selected, operationalDayContext.flags.is_tomorrow_selected]);
+
+	//
+	// B. Handle actions
+
+	const handleSegmentedControlChange = (value: string) => {
+		if (value === 'today') {
+			operationalDayContext.actions.updateSelectedDayToToday();
+		}
+		else if (value === 'tomorrow') {
+			operationalDayContext.actions.updateSelectedDayToTomorrow();
+		}
+	};
+
 	//
 	// B. Render components
 
 	return (
-		<SegmentedControl data={segementedControlOptions} value="today" />
+		<SegmentedControl data={segementedControlOptions} onChange={handleSegmentedControlChange} value={selectedSegmentedControlOption} />
 	);
 
 	return (
