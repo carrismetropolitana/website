@@ -1,3 +1,5 @@
+/* * */
+
 import type { FaqGroupByTopic } from '@/types/faq.types';
 
 /* * */
@@ -43,8 +45,8 @@ export async function fetchFaqs() {
 				{
 					_id: 'B003',
 					body: `
-                    <p>Os operadores prestadores de serviço da Carris Metropolitana são 4 e estão divididos por áreas da seguinte forma:&nbsp;</p>
-                    <p>Área 1: Viação Alvorada&nbsp;<br>Área 2: Rodoviária de Lisboa&nbsp;<br>Área 3: TST&nbsp;<br>Área 4: Alsa Todi</p>
+						<p>Os operadores prestadores de serviço da Carris Metropolitana são 4 e estão divididos por áreas da seguinte forma:</p>
+						<p>Área 1: Viação Alvorada<br>Área 2: Rodoviária de Lisboa<br>Área 3: TST<br>Área 4: Alsa Todi</p>
                     `,
 					title: 'Quais são os operadores prestadores de serviço que atuam sob a marca Carris Metropolitana?',
 				},
