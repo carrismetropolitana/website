@@ -18,7 +18,10 @@
 		"title": "Ocorreu um erro inesperado",
 		"subtitle": "Fomos notificados e iremos corrigir em breve. Obrigado pela sua compreensão.",
 		"retry": "Nova tentativa em {value} segundos",
-		"goto_home": "Voltar à página principal"
+		"goto_home": "Voltar à página principal",
+		"sync": "Falha ao sincronizar os dispositivos.",
+		"token": "Falta o token de autenticação.",
+		"redirect": "A voltar à página de principal e em {value} segundo{s}."
 	},
 	"layout": {
 		"Section":{
@@ -584,6 +587,14 @@
 	},
 	"AlertsCarousel": {
 		"heading": "Alertas de Serviço"
+	},
+	"profile": {
+		"sync": {
+			"heading": "Sincronizar Perfil",
+			"description": "Scannar o código QR para sincronizar o perfil",
+			"loading": "A sincronizar...",
+			"success": "Perfil sincronizado com sucesso!"			
+		}
 	},
 	"favorites": {
 		"Page":{
