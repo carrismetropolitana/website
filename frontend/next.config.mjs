@@ -1,9 +1,9 @@
 /* * */
 
 import withNextIntlFn from 'next-intl/plugin'
-// const withNextIntl = require('next-intl/plugin')();
 
 /* * */
+
 const withNextIntl = withNextIntlFn()
 
 export default withNextIntl({
