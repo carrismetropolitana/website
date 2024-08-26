@@ -12,8 +12,10 @@ import LineMap from '@/components/lines/LineMap';
 import LineName from '@/components/lines/LineName';
 import Metrics from '@/components/lines/Metrics';
 import SelectActivePatternGroup from '@/components/lines/SelectActivePatternGroup';
+import StopList from '@/components/lines/StopList';
 import { useLinesSingleContext } from '@/contexts/LinesSingle.context';
 import { useProfileContext } from '@/contexts/Profile.context';
+import { useState } from 'react';
 
 import styles from './styles.module.css';
 
@@ -27,6 +29,9 @@ export default function Component() {
 
 	const profileContext = useProfileContext();
 	const linesSingleContext = useLinesSingleContext();
+
+	const [selectedStop, setSelectedStop] = useState(null);
+	const [selectedStopSequence, setSelectedStopSequence] = useState(null);
 
 	//
 	// B. Handle actions
@@ -65,7 +70,7 @@ export default function Component() {
 			{linesSingleContext.data.active_pattern_group ? (
 				<Section withGap={false} withTopPadding={false} withChildrenPadding>
 					<LineMap />
-					{/* <StopList /> */}
+					<StopList selectedStop={selectedStop} setSelectedStop={setSelectedStop} setSelectedStopSequence={setSelectedStopSequence} />
 				</Section>
 			) : (
 				<Section withGap={false} withTopPadding={false} withChildrenPadding>
