@@ -1,0 +1,7 @@
+.live{
+    color: var(--color-realtime-100)
+}
+
+.scheduled{
+    color: var(--color-system-text-200)
+}
