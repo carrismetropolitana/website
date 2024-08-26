@@ -1,6 +1,6 @@
 import FacilityIcon from '@/components/common/FacilityIcon';
 import LiveIcon from '@/components/common/LiveIcon';
-import Timetable from '@/components/common/Timetable';
+import TimetableWithVariants from '@/components/common/TimetableWithVariants';
 import { useLinesSingleContext } from '@/contexts/LinesSingle.context';
 import { useOperationalDayContext } from '@/contexts/OperationalDay.context';
 import { Stop } from '@/types/stops.types';
@@ -77,7 +77,16 @@ export default function SingleStopFullContent({ realtimeArrivals, scheduledArriv
 
 						</>
 					)
-					: linesSingleContext.data.active_pattern_group && <Timetable date={operationalDayContext.data.selected_day_jsdate || new Date()} pattern={linesSingleContext.data.active_pattern_group} stop={stop} stopSequence={stopSequence} />}
+					: linesSingleContext.data.active_pattern_group && linesSingleContext.data.valid_pattern_groups && operationalDayContext.data.selected_day_jsdate
+					&& (
+						<TimetableWithVariants
+							date={operationalDayContext.data.selected_day_jsdate || new Date()}
+							mainPatternId={linesSingleContext.data.active_pattern_group.pattern_id}
+							patternGroups={linesSingleContext.data.valid_pattern_groups}
+							stopId={stop.id}
+							stopSequence={stopSequence}
+						/>
+					)}
 			</div>
 			{
 			// Only give option to pop up timetable if today is selected, because otherwise it is already displayed
