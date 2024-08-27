@@ -530,9 +530,10 @@
 
   },
 	"schedule":{
-		"hours": "Horas",
-		"minutes": "Minutos",
-		"no_data": "Sem horários disponíveis"
+		"hours": "Hora",
+		"minutes": "Min.",
+		"no_data": "Sem horários disponíveis",
+		"path": "Percurso"
 	},
 	"contacts":{
 		"heading": "Contactos",

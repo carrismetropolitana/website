@@ -7,6 +7,7 @@ import type { Line, Pattern, PatternGroup, Route, Shape } from '@/types/lines.ty
 import { useOperationalDayContext } from '@/contexts/OperationalDay.context';
 import { useProfileContext } from '@/contexts/Profile.context';
 import { Alert, SimplifiedAlert } from '@/types/alerts.types';
+import { Stop } from '@/types/stops.types';
 import convertToSimplifiedAlert from '@/utils/convertToSimplifiedAlert';
 import { DemandByLine } from '@/utils/types';
 import { createContext, useContext, useEffect, useState } from 'react';
@@ -17,14 +18,21 @@ import useSWR from 'swr';
 interface LinesSingleContextState {
 	actions: {
 		setActivePatternGroup: (patternGroupId: string) => void
+		setActiveStop: (sequence: number, stop: Stop) => void
+		setDrawerOpen: (isOpen: boolean) => void
 	}
 	data: {
 		active_alerts: SimplifiedAlert[] | null
 		active_pattern_group: PatternGroup | null
 		active_shape: Shape | null
+		active_stop: {
+			sequence: number
+			stop: Stop
+		} | null
 		all_patterns: Pattern[] | null
 		all_routes: Route[] | null
 		demand: DemandByLine | null
+		drawer_open: boolean
 		line: Line | null
 		timetable: string
 		valid_pattern_groups: PatternGroup[] | null
@@ -70,7 +78,11 @@ export const LinesSingleContextProvider = ({ children, lineId }) => {
 	const [dataActivePatternGroupState, setDataActivePatternGroupState] = useState<PatternGroup | null>(null);
 	const [dataActiveShapeState, setDataActiveShapeState] = useState<Shape | null>(null);
 
+	const [dataActiveStopState, setDataActiveStopState] = useState<{ sequence: number, stop: Stop } | null>(null);
+
 	const [flagIsFavoriteState, setFlagIsFavoriteState] = useState<boolean>(false);
+
+	const [dataDrawerOpenState, setDataDrawerOpenState] = useState<boolean>(false);
 
 	//
 	// B. Fetch data
@@ -180,20 +192,32 @@ export const LinesSingleContextProvider = ({ children, lineId }) => {
 		setDataActivePatternGroupState(null);
 	};
 
+	const setActiveStop = (sequence: number, stop: Stop) => {
+		setDataActiveStopState({ sequence, stop });
+	};
+
+	const setDrawerOpen = (isOpen: boolean) => {
+		setDataDrawerOpenState(isOpen);
+	};
+
 	//
 	// E. Define context value
 
 	const contextValue: LinesSingleContextState = {
 		actions: {
 			setActivePatternGroup,
+			setActiveStop,
+			setDrawerOpen,
 		},
 		data: {
 			active_alerts: dataActiveAlertsState,
 			active_pattern_group: dataActivePatternGroupState,
 			active_shape: dataActiveShapeState,
+			active_stop: dataActiveStopState,
 			all_patterns: dataAllPatternsState,
 			all_routes: dataRoutesState,
 			demand: dataDemandForCurrentLineState,
+			drawer_open: dataDrawerOpenState,
 			line: lineData || null,
 			timetable: '',
 			valid_pattern_groups: dataValidPatternGroupsState,
