@@ -602,6 +602,8 @@
 		"Page": {
 			"heading": "Perfil",
 			"field": {
+				"default_first_name": "Polvo",
+				"default_last_name": "Ecológico",
 				"first_name": "Primeiro Nome",
 				"last_name": "Último Nome",
 				"email": "Email",
