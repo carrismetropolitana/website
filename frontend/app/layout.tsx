@@ -5,6 +5,7 @@ import '@/styles/variables.css';
 
 /* * */
 
+import Toaster from '@/components/Toast';
 import { ColorSchemeScript } from '@mantine/core';
 import { Inter } from 'next/font/google';
 
@@ -36,7 +37,10 @@ export default function RootLayout({ children }) {
 				<ColorSchemeScript />
 			</head>
 			<body>
-				<Providers>{children}</Providers>
+				<Providers>
+					<Toaster />
+					{children}
+				</Providers>
 			</body>
 		</html>
 	);
