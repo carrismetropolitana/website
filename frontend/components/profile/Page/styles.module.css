@@ -1,0 +1,34 @@
+.input__fields {
+	display: grid;
+	grid-template-columns: 1fr 1fr;
+	gap: var(--size-spacing-20);
+}
+
+.submit__container {
+	display: flex;
+	justify-content: center;
+}
+
+.submit__button {
+	margin-top: var(--size-spacing-20);
+	width: 300px;
+}
+
+.avatar {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	gap: var(--size-spacing-10);
+	margin-bottom: var(--size-spacing-30);
+}
+
+@media only screen and (max-width: 900px) {
+	.input__fields {
+		grid-template-columns: 1fr;
+	}
+
+	.submit__button {
+		width: 100%;
+	}
+}
