@@ -3,14 +3,34 @@
 
 import jwt from 'jsonwebtoken';
 
-export async function generateJWT(payload: Record<string, any>) {
-	return jwt.sign(payload, process.env.JWT_SECRET as string);
+/**
+ * Generates JWT token
+ *
+ * @param payload The payload to encode in the token
+ * @param expiresIn The expiration time of the token in seconds
+ * @returns The encoded token
+ */
+export async function generateJWT(payload: Record<string, any>, expiresIn: number | string = '5m'): Promise<string> {
+	const token = jwt.sign(payload, process.env.JWT_SECRET as string, {
+		algorithm: 'HS256',
+		expiresIn,
+	});
+
+	return token;
 }
 
-export async function verifyJWT(token: string) {
-	return jwt.verify(token, process.env.JWT_SECRET as string, { algorithms: ['HS256'] });
-}
-
-export async function decodeJWT(token: string) {
-	return jwt.decode(token) as Record<string, any>;
+/**
+ * Verifies a JWT token
+ *
+ * @param token The token to verify
+ * @returns The decoded token
+ */
+export async function verifyJWT<T = Record<string, any>>(token: string): Promise<T | null> {
+	try {
+		return jwt.verify(token, process.env.JWT_SECRET as string, { algorithms: ['HS256'] }) as T;
+	}
+	catch (error) {
+		console.error('Error verifying JWT:', error);
+		return null;
+	}
 }

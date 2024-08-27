@@ -42,7 +42,6 @@ export default function Component() {
 			data: {
 				device_id: profileContext.data.device_id,
 			},
-			exp: Math.floor(Date.now() / 1000) + 300, // 5 minutes expiration
 		};
 		const jwt = await generateJWT(payload);
 		const url = window.location.origin + '/add-device?token=' + jwt;
