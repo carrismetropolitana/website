@@ -8,7 +8,7 @@ import NavigationMainMenuItem from '@/components/header/NavigationMainMenuItem';
 import SyncAccount from '@/components/profile/sync';
 import { CloseButton, Drawer } from '@mantine/core';
 import { useDisclosure } from '@mantine/hooks';
-import { IconListSearch, IconSparkles, IconStar } from '@tabler/icons-react';
+import { IconSparkles, IconStar, IconUser } from '@tabler/icons-react';
 import { useTranslations } from 'next-intl';
 
 import styles from './styles.module.css';
@@ -18,7 +18,7 @@ import styles from './styles.module.css';
 const NAV_ITEMS = [
 	{ _id: 'configs', href: '/profile/configs', icon: <IconSparkles size={20} /> },
 	{ _id: 'favorites', href: '/profile/favorites', icon: <IconStar size={20} /> },
-	{ _id: 'history', href: '/profile/history', icon: <IconListSearch size={20} /> },
+	{ _id: 'profile', href: '/profile', icon: <IconUser size={20} /> },
 ];
 
 /* * */
