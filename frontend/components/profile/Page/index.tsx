@@ -36,13 +36,13 @@ export default function Component() {
 		{
 			label: t('profile.Page.field.first_name'),
 			onChange: event => updateProfileField({ first_name: event.currentTarget.value }),
-			placeholder: t('profile.Page.field.first_name'),
+			placeholder: t('profile.Page.field.default_first_name'),
 			value_id: 'first_name',
 		},
 		{
 			label: t('profile.Page.field.last_name'),
 			onChange: event => updateProfileField({ last_name: event.currentTarget.value }),
-			placeholder: t('profile.Page.field.last_name'),
+			placeholder: t('profile.Page.field.default_last_name'),
 			value_id: 'last_name',
 		},
 		{
