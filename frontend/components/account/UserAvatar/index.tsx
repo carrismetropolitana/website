@@ -49,11 +49,11 @@ export default function Component({ component = 'div', onClick = () => null, wit
 	};
 
 	const renderName = () => {
-		if (profileContext.flags.is_loading || !profileContext.data.profile || (!profileContext.data.profile.first_name && !profileContext.data.profile.last_name)) {
+		if (profileContext.flags.is_loading || !profile || (!profile.first_name && !profile.last_name)) {
 			return <>{t('Page.field.default_first_name')} {t('Page.field.default_last_name')}</>;
 		}
 
-		return <>{profileContext.data.profile.first_name} {profileContext.data.profile.last_name}</>;
+		return <>{profile.first_name} {profile.last_name}</>;
 	};
 
 	if (component === 'button') {
