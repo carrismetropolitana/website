@@ -19,6 +19,7 @@ interface ProfileContextState {
 		toggleFavoriteLine: (lineId: string) => void
 		toggleFavoriteStop: (stopId: string) => void
 		updateFilterByFavorite: (value: ProfileContextState['filters']['favorites']) => void
+		updateProfile: (profile: Partial<Profile>) => Promise<void>
 	}
 	counters: {
 		favorite_lines: number
@@ -123,6 +124,22 @@ export const ProfileContextProvider = ({ children }) => {
 
 	const updateFilterByFavorite = (value: ProfileContextState['filters']['favorites']) => setFilterByFavorite(value);
 
+	const updateProfile = async (profile: Partial<Profile>) => {
+		if (dataProfile) {
+			setDataProfile({ ...dataProfile, ...profile });
+		}
+
+		const res = await fetch(`/api/accounts/${deviceId}`, {
+			body: JSON.stringify(profile),
+			method: 'PUT',
+		});
+
+		// If !res.ok, reject the promise
+		if (!res.ok) {
+			throw new Error('An error occurred while updating the profile.');
+		}
+	};
+
 	//
 	// D. Define context value
 
@@ -131,6 +148,7 @@ export const ProfileContextProvider = ({ children }) => {
 			toggleFavoriteLine,
 			toggleFavoriteStop,
 			updateFilterByFavorite,
+			updateProfile,
 		},
 		counters: {
 			favorite_lines: dataProfile?.favorite_lines?.length || 0,

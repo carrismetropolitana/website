@@ -5,6 +5,7 @@ import { Device } from './device.type';
 /* * */
 
 export interface Profile {
+	avatar?: string
 	devices: Device[]
 	email?: string
 	favorite_lines: string[]

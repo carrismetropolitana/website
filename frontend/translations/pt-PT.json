@@ -12,6 +12,16 @@
 		"SelectOperationalDay": {
 			"today": "Hoje",
 			"tomorrow": "Amanhã"
+		},
+		"button": {
+			"save": "Salvar",
+			"cancel": "Cancelar",
+			"delete": "Excluir",
+			"add": "Adicionar",
+			"edit": "Editar",
+			"remove": "Remover",
+			"confirm": "Confirmar",
+			"generate": "Gerar"
 		}
 	},
 	"AppError": {
@@ -254,7 +264,7 @@
 	"HeaderNavigationAccount": {
 		"configs": "Personalizar Experiência",
 		"favorites": "Favoritos",
-		"history": "Histórico de Pesquisa"
+		"profile": "Perfil"
 	},
 	"HeaderNavigationMainMenu": {
 		"schedules": "Horários",
@@ -589,6 +599,18 @@
 		"heading": "Alertas de Serviço"
 	},
 	"profile": {
+		"Page": {
+			"heading": "Perfil",
+			"field": {
+				"default_first_name": "Polvo",
+				"default_last_name": "Ecológico",
+				"first_name": "Primeiro Nome",
+				"last_name": "Último Nome",
+				"email": "Email",
+				"email_error": "Este email é inválido",
+				"email_tooltip": "Util para recuperar a conta caso seja perdida"
+			}
+		},
 		"sync": {
 			"heading": "Sincronizar Perfil",
 			"description": "Scannar o código QR para sincronizar o perfil",
@@ -610,5 +632,10 @@
 				"stops": "{count, plural, =0 {Nenhum paragem encontrado.} one {Encontrado # paragem:} other {Encontrados # paragens:}}"
 			}
 		}
+	},
+	"toast": {
+		"update_profile_success": "Perfil atualizado com sucesso!",
+		"update_profile_error": "Erro ao atualizar o perfil.",
+		"update_profile_pending": "A Atualizar o perfil..."
 	}
 }

@@ -1,14 +1,8 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { decodeJWT, generateJWT } from '@/utils/jwt';
+import { IJwt } from '@/types/jwt.types';
+import { generateJWT, verifyJWT } from '@/utils/jwt';
 import { headers } from 'next/headers';
 import { NextRequest } from 'next/server';
-
-function isValidJWT(decoded: any): boolean {
-	const isExpired = decoded.exp < Date.now() / 1000;
-	const hasValidPayload = decoded.data.device_id;
-
-	return !isExpired && hasValidPayload;
-}
 
 async function fetchAddDeviceAPI(token: string) {
 	return fetch(`${process.env.ACCOUNTS_API_URL}/v1/accounts/add-device`, {
@@ -40,15 +34,14 @@ export async function POST(req: NextRequest, { params }: { params: AddDevicePara
 	}
 
 	try {
-		const decoded = await decodeJWT(token);
+		const decoded = await verifyJWT<IJwt>(token);
 
-		if (!isValidJWT(decoded)) {
+		if (!decoded) {
 			return Response.json({ message: 'Invalid Authorization Token.' }, { status: 401 });
 		}
 
 		const newJwt = await generateJWT({
-			data: { device_id: device_id, device_id_2: decoded.data.device_id },
-			exp: Math.floor(Date.now() / 1000) + 300,
+			data: { device_id: device_id, device_id_2: decoded.device_id },
 		});
 
 		return await fetchAddDeviceAPI(newJwt);
