@@ -68,10 +68,6 @@ export default function TimetableWithVariants(
 				const linePosition = nowMinute < minute.min
 					? (nowMinute - minute.interval[0]) / (minute.min - minute.interval[0]) * 50
 					: 50 + (nowMinute - minute.min) / (minute.interval[1] - minute.min) * 50;
-				if (showLine) {
-					console.log('showLine', minute);
-					console.log('linePosition', linePosition);
-				}
 
 				return (
 					<div
