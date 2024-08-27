@@ -24,15 +24,12 @@ const example: TimetableDayStop = {
 			hour: 8,
 			minutes: [
 				{
-					exceptions_ids: [],
 					min: 2,
 				},
 				{
-					exceptions_ids: [],
 					min: 12,
 				},
 				{
-					exceptions_ids: [],
 					min: 22,
 				},
 			],
@@ -45,11 +42,9 @@ const example: TimetableDayStop = {
 					min: 2,
 				},
 				{
-					exceptions_ids: [],
 					min: 12,
 				},
 				{
-					exceptions_ids: [],
 					min: 22,
 				},
 			],
@@ -74,7 +69,10 @@ export interface TimetableDayStop {
 	hours: {
 		hour: number
 		minutes: ({
-			exceptions_ids: string[]
+			// If this is the main pattern exception ids will be undefined
+			// We can have up to two entries for the same minute,
+			// one for the main pattern and one for the variants with exceptions
+			exceptions_ids?: string[]
 			min: number
 		})[]
 	}[]

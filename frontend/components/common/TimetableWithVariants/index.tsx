@@ -72,7 +72,7 @@ export default function TimetableWithVariants(
 				return (
 					<div
 						key={minuteIndex}
-						className={`${styles.minute} ${minute.exceptions_ids.length > 0 && styles.variant}`}
+						className={`${styles.minute} ${minute.exceptions_ids && styles.variant}`}
 						style={{
 						}}
 					>
@@ -91,13 +91,16 @@ export default function TimetableWithVariants(
 						>
 							{minute.min.toString().padStart(2, '0')}
 						</div>
-						<div
-							className={styles.exceptions}
-						>
-							{minute.exceptions_ids.map(exception =>
-								<span key={exception}>{exception}</span>,
-							)}
-						</div>
+						{minute.exceptions_ids
+						&& (
+							<div
+								className={styles.exceptions}
+							>
+								{minute.exceptions_ids.map(exception =>
+									<span key={exception}>{exception}</span>,
+								)}
+							</div>
+						)}
 					</div>
 				);
 			})}

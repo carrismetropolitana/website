@@ -55,48 +55,44 @@ export default function composeTimetable(patternGroups: PatternGroup[], stopId: 
 				}
 
 				// Add the minute entry with exception_ids if not already present
-				let minuteEntry = hourEntry.minutes.find(m => m.min === minute);
-				if (!minuteEntry) {
-					minuteEntry = { exceptions_ids: [], min: minute };
-					hourEntry.minutes.push(minuteEntry);
-				}
-
-				// If the pattern is the main pattern, skip adding exceptions
 				if (patternGroup.pattern_id === mainPatternId) {
-					return;
+					const minuteEntry = hourEntry.minutes.find(m => m.min === minute && m.exceptions_ids === undefined);
+					if (!minuteEntry) {
+						hourEntry.minutes.push({ min: minute });
+					}
 				}
 
-				const existingException = timetableDayStop.exceptions.find(ex => ex.pattern_id === patternGroup.pattern_id);
-
-				if (existingException) {
+				if (patternGroup.pattern_id !== mainPatternId) {
+					const minuteEntry = hourEntry.minutes.find(m => m.min === minute && m.exceptions_ids !== undefined);
+					let existingException = timetableDayStop.exceptions.find(ex => ex.pattern_id === patternGroup.pattern_id);
+					const exceptionId = existingException ? existingException.exception_id : getExceptionId();
+					if (!existingException) {
+						existingException = {
+							calendar_desc: null,
+							exception_id: exceptionId,
+							pattern_headsign: patternGroup.headsign,
+							pattern_id: patternGroup.pattern_id,
+							trip_ids: [],
+							type: 'variant',
+						};
+						timetableDayStop.exceptions.push(existingException);
+					}
 					for (const tripId of trip.trip_ids) {
 						if (!existingException.trip_ids.includes(tripId)) {
 							existingException.trip_ids.push(tripId);
 						}
 					}
-				}
-
-				// Generate an exception ID only if it doesn't already exist for the pattern_id
-				const exceptionId = existingException ? existingException.exception_id : getExceptionId();
-				// Add the exception ID to the minute entry
-				if (!minuteEntry.exceptions_ids.includes(exceptionId)) {
-					minuteEntry.exceptions_ids.push(exceptionId);
-				}
-
-				if (!existingException) {
-					// Add exception data
-					// TODO add the 'schedule' type
-					const exceptionType = 'variant';
-					const calendarDesc = null;
-
-					timetableDayStop.exceptions.push({
-						calendar_desc: calendarDesc,
-						exception_id: exceptionId,
-						pattern_headsign: patternGroup.headsign,
-						pattern_id: patternGroup.pattern_id,
-						trip_ids: trip.trip_ids,
-						type: exceptionType,
-					});
+					if (minuteEntry) {
+						if (!minuteEntry.exceptions_ids?.includes(exceptionId)) {
+							if (!minuteEntry.exceptions_ids) {
+								console.log('minuteEntry.exceptions_ids is undefined');
+							}
+							minuteEntry.exceptions_ids?.push(exceptionId);
+						}
+					}
+					else {
+						hourEntry.minutes.push({ exceptions_ids: [exceptionId], min: minute });
+					}
 				}
 			});
 		});
@@ -105,7 +101,11 @@ export default function composeTimetable(patternGroups: PatternGroup[], stopId: 
 	// Sort the hours and minutes
 	timetableDayStop.hours.sort((a, b) => a.hour - b.hour);
 	timetableDayStop.hours.forEach((hour) => {
-		hour.minutes.sort((a, b) => a.min - b.min);
+		hour.minutes.sort((a, b) => {
+			const diff = a.min - b.min;
+			// Make sure the main pattern comes first if there are 2 entries in the same minute
+			return diff !== 0 ? diff : (a.exceptions_ids?.length ?? 0) - (b.exceptions_ids?.length ?? 0);
+		});
 	});
 
 	return timetableDayStop;
