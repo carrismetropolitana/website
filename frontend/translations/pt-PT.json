@@ -55,8 +55,10 @@
 			"heading": "Pesquisar Linhas"
 		},
 		"SelectActivePatternGroup":{
-			"explainer": "O que é o percurso/destino de uma linha?",
 			"placeholder": "Selecionar percurso/destino..."
+		},
+		"SelectActivePatternGroupExplainer":{
+			"toggle": "O que é o percurso/destino de uma linha?"
 		},
 		"Page":{
 			"heading": "Pesquisar Linhas"
@@ -593,7 +595,7 @@
 			"heading": "Sincronizar Perfil",
 			"description": "Scannar o código QR para sincronizar o perfil",
 			"loading": "A sincronizar...",
-			"success": "Perfil sincronizado com sucesso!"			
+			"success": "Perfil sincronizado com sucesso!"
 		}
 	},
 	"favorites": {
