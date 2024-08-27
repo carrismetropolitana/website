@@ -11,6 +11,7 @@ import { useProfileContext } from '@/contexts/Profile.context';
 import { useStopsSingleContext } from '@/contexts/StopsSingle.context';
 import { useTranslations } from 'next-intl';
 import { useMemo } from 'react';
+import { toast } from 'react-toastify';
 
 import styles from './styles.module.css';
 
@@ -57,7 +58,12 @@ export default function Component() {
 
 	const handleToggleFavorite = () => {
 		if (!stopsSingleContext.data.stop) return;
-		profileContext.actions.toggleFavoriteStop(stopsSingleContext.data.stop.id);
+		try {
+			profileContext.actions.toggleFavoriteStop(stopsSingleContext.data.stop.id);
+		}
+		catch (error) {
+			toast.error('Ocorreu um erro ao adicionar o paragem aos favoritos');
+		}
 	};
 
 	//

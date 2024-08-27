@@ -15,7 +15,9 @@ import SelectActivePatternGroup from '@/components/lines/SelectActivePatternGrou
 import StopList from '@/components/lines/StopList';
 import { useLinesSingleContext } from '@/contexts/LinesSingle.context';
 import { useProfileContext } from '@/contexts/Profile.context';
+import { useTranslations } from 'next-intl';
 import { useState } from 'react';
+import { toast } from 'react-toastify';
 
 import styles from './styles.module.css';
 
@@ -26,7 +28,7 @@ export default function Component() {
 
 	//
 	// A. Setup variables
-
+	const t = useTranslations();
 	const profileContext = useProfileContext();
 	const linesSingleContext = useLinesSingleContext();
 
@@ -36,9 +38,14 @@ export default function Component() {
 	//
 	// B. Handle actions
 
-	const handleToggleFavorite = () => {
+	const handleToggleFavorite = async () => {
 		if (!linesSingleContext.data.line) return;
-		profileContext.actions.toggleFavoriteLine(linesSingleContext.data.line.line_id);
+		try {
+			await profileContext.actions.toggleFavoriteLine(linesSingleContext.data.line.line_id);
+		}
+		catch (error) {
+			toast.error(t('toast.toggle_favorite_error', { error: error.message }));
+		}
 	};
 
 	//

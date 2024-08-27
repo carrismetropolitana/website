@@ -16,8 +16,8 @@ const LOCAL_STORAGE_KEYS = {
 
 interface ProfileContextState {
 	actions: {
-		toggleFavoriteLine: (lineId: string) => void
-		toggleFavoriteStop: (stopId: string) => void
+		toggleFavoriteLine: (lineId: string) => Promise<void>
+		toggleFavoriteStop: (stopId: string) => Promise<void>
 		updateFilterByFavorite: (value: ProfileContextState['filters']['favorites']) => void
 		updateProfile: (profile: Partial<Profile>) => Promise<void>
 	}
@@ -100,8 +100,7 @@ export const ProfileContextProvider = ({ children }) => {
 		});
 
 		if (!res.ok) {
-			// TODO: Handle error, maybe show a toast
-			console.error('Error toggling favorite line');
+			throw new Error(res.statusText);
 		}
 
 		const profile: Profile = await res.json();
@@ -114,8 +113,7 @@ export const ProfileContextProvider = ({ children }) => {
 		});
 
 		if (!res.ok) {
-			// TODO: Handle error, maybe show a toast
-			console.error('Error toggling favorite stop');
+			throw new Error(res.statusText);
 		}
 
 		const profile: Profile = await res.json();
