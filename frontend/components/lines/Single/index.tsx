@@ -64,10 +64,14 @@ export default function Component() {
 			)}
 
 			{linesSingleContext.data.active_pattern_group ? (
-				<Section withGap={false} withTopPadding={false} withChildrenPadding>
-					<LineMap />
-					<StopList />
-				</Section>
+				<>
+					<Section withTopPadding={false}>
+						<LineMap />
+					</Section>
+					<Section withGap={false} withTopPadding={true}>
+						<StopList />
+					</Section>
+				</>
 			) : (
 				<Section withGap={false} withTopPadding={false} withChildrenPadding>
 					<NoDataLabel text="selecione um pattern" />
