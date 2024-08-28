@@ -3,6 +3,7 @@
 /* * */
 
 import AnalyticsConsentPopup from '@/components/analytics/ConsentPopup';
+import DebugColorPicker from '@/components/common/DebugColorPicker';
 import Footer from '@/components/footer/Footer';
 import Header from '@/components/header/Header';
 import { useDebugContext } from '@/contexts/Debug.context';
@@ -28,20 +29,7 @@ export default function Component({ children }) {
 			{children}
 			{hasHeader && <Footer />}
 			{hasHeader && <AnalyticsConsentPopup />}
-			{debug.flags.is_debug_mode && (
-				<div style={{ bottom: 0, position: 'fixed', right: 0 }}>
-
-					<ColorPicker
-						defaultValue={{ h: 240, l: 0.08, s: 0.12 }}
-						format="hsl"
-						onChange={
-							(color) => {
-								document.documentElement.style.setProperty('--hsl', color);
-							}
-						}
-					/>
-				</div>
-			)}
+			{debug.flags.is_debug_mode && <DebugColorPicker />}
 		</div>
 	);
 }
