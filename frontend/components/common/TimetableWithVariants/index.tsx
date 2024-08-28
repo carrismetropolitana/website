@@ -8,8 +8,8 @@ import { useMemo } from 'react';
 import styles from './styles.module.css';
 
 export default function TimetableWithVariants(
-	{ date, highlightNow = true, mainPatternId, patternGroups, stopId, stopSequence }:
-	{ date: Date, highlightNow?: boolean, mainPatternId: string, patternGroups: Pattern[], stopId: string, stopSequence: number }) {
+	{ date, direction, highlightNow = true, mainPatternId, patternGroups, stopId, stopSequence }:
+	{ date: Date, direction: number, highlightNow?: boolean, mainPatternId: string, patternGroups: Pattern[], stopId: string, stopSequence: number }) {
 	// A. Setup variables
 	const t = useTranslations('schedule');
 	const now = new Date();
@@ -17,8 +17,8 @@ export default function TimetableWithVariants(
 	const nowMinute = now.getMinutes() + now.getSeconds() / 60;
 
 	const timetable = useMemo(() => {
-		return composeTimetable(patternGroups, stopId, stopSequence, mainPatternId, date);
-	}, [date, mainPatternId, patternGroups, stopId, stopSequence]);
+		return composeTimetable(patternGroups, stopId, stopSequence, mainPatternId, date, direction);
+	}, [date, mainPatternId, patternGroups, stopId, stopSequence, direction]);
 
 	const newTimetable = {
 		...timetable,
@@ -82,7 +82,10 @@ export default function TimetableWithVariants(
 								style={{
 									top: `${linePosition}%`,
 								}}
-							/>
+							>
+								<div />
+								<div />
+							</div>
 						)}
 						<div
 							style={{

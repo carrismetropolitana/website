@@ -8,7 +8,7 @@ import { TimetableDayStop } from '@/types/timetables.types';
  * @param mainPatternId Pattern id for which we should not add exceptions
  *
  */
-export default function composeTimetable(patternGroups: PatternGroup[], stopId: string, stopSequence: number, mainPatternId: string, date: Date): TimetableDayStop {
+export default function composeTimetable(patternGroups: PatternGroup[], stopId: string, stopSequence: number, mainPatternId: string, date: Date, direction: number): TimetableDayStop {
 	// Format date
 	const formattedDate = `${date.getFullYear()}${(date.getMonth() + 1).toString().padStart(2, '0')}${date.getDate().toString().padStart(2, '0')}`;
 
@@ -36,12 +36,15 @@ export default function composeTimetable(patternGroups: PatternGroup[], stopId: 
 
 	// Loop through each pattern group in the pattern data
 	patternGroups.forEach((patternGroup) => {
+		if (patternGroup.direction !== direction) {
+			return;
+		}
 		patternGroup.trips.forEach((trip) => {
 			if (!trip.dates.includes(formattedDate)) {
 				return;
 			}
 			trip.schedule.forEach((schedule) => {
-				if (schedule.stop_id !== stopId && schedule.stop_sequence !== stopSequence) {
+				if (schedule.stop_id !== stopId || (patternGroup.pattern_id == mainPatternId && schedule.stop_sequence !== stopSequence)) {
 					return;
 				}
 				// Parse arrival time

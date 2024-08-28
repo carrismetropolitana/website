@@ -151,10 +151,17 @@
 
 
 .realtimeLine {
-  background-color: var(--color-realtime-75);
-  border-radius: 1000px;
   height: 2px;
   margin-top: -1px;
   position: absolute;
   width: 100%;
+  display: flex;
+  justify-content: space-between;
+}
+
+.realtimeLine>div{
+  background-color: var(--color-realtime-50);
+  border-radius: 1000px;
+  height: 100%;
+  width: 20%;
 }

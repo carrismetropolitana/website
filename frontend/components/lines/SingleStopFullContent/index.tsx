@@ -85,6 +85,7 @@ export default function SingleStopFullContent({ realtimeArrivals, scheduledArriv
 							patternGroups={linesSingleContext.data.valid_pattern_groups}
 							stopId={stop.id}
 							stopSequence={stopSequence}
+                direction={linesSingleContext.data.active_pattern_group.direction}
 						/>
 					)}
 			</div>
