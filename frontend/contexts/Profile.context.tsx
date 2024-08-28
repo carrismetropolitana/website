@@ -1,6 +1,12 @@
 'use client';
 
 /* * */
+import {
+	toggleFavoriteLine as favoriteLineAction,
+	toggleFavoriteStop as favoriteStopAction,
+	getProfile,
+	updateProfile as updateProfileAction,
+} from '@/actions/account.actions';
 import { Profile } from '@/types/profile.type';
 import { createContext, useContext, useEffect, useState } from 'react';
 import { v4 as uuid } from 'uuid';
@@ -16,8 +22,8 @@ const LOCAL_STORAGE_KEYS = {
 
 interface ProfileContextState {
 	actions: {
-		toggleFavoriteLine: (lineId: string) => void
-		toggleFavoriteStop: (stopId: string) => void
+		toggleFavoriteLine: (lineId: string) => Promise<void>
+		toggleFavoriteStop: (stopId: string) => Promise<void>
 		updateFilterByFavorite: (value: ProfileContextState['filters']['favorites']) => void
 		updateProfile: (profile: Partial<Profile>) => Promise<void>
 	}
@@ -82,62 +88,27 @@ export const ProfileContextProvider = ({ children }) => {
 		// Fetch profile data from API on mount
 		// If the profile data is not found, set the data to null
 		const deviceIdLocal = localStorage.getItem(LOCAL_STORAGE_KEYS.device_id);
-		fetch(`/api/accounts/${deviceIdLocal}`).then((res) => {
-			if (!res.ok) {
-				setDataProfile(null);
-				return;
-			}
-
-			res.json().then(profile => setDataProfile(profile));
-		});
+		getProfile(deviceIdLocal || '').then(profile => setDataProfile(profile)).catch(() => setDataProfile(null));
 	}, [deviceId]);
 
 	//
 	// C. Handle actions
 	const toggleFavoriteLine = async (lineId: string) => {
-		const res = await fetch(`/api/accounts/${deviceId}/favorite-lines/${lineId}`, {
-			method: 'POST',
-		});
-
-		if (!res.ok) {
-			// TODO: Handle error, maybe show a toast
-			console.error('Error toggling favorite line');
-		}
-
-		const profile: Profile = await res.json();
+		const profile = await favoriteLineAction(lineId, deviceId || '') as Profile;
 		setDataProfile(profile);
 	};
 
 	const toggleFavoriteStop = async (stopId: string) => {
-		const res = await fetch(`/api/accounts/${deviceId}/favorite-stops/${stopId}`, {
-			method: 'POST',
-		});
-
-		if (!res.ok) {
-			// TODO: Handle error, maybe show a toast
-			console.error('Error toggling favorite stop');
-		}
-
-		const profile: Profile = await res.json();
+		const profile = await favoriteStopAction(stopId, deviceId || '') as Profile;
 		setDataProfile(profile);
 	};
 
 	const updateFilterByFavorite = (value: ProfileContextState['filters']['favorites']) => setFilterByFavorite(value);
 
 	const updateProfile = async (profile: Partial<Profile>) => {
-		if (dataProfile) {
-			setDataProfile({ ...dataProfile, ...profile });
-		}
-
-		const res = await fetch(`/api/accounts/${deviceId}`, {
-			body: JSON.stringify(profile),
-			method: 'PUT',
-		});
-
-		// If !res.ok, reject the promise
-		if (!res.ok) {
-			throw new Error('An error occurred while updating the profile.');
-		}
+		if (!dataProfile) return;
+		const res = await updateProfileAction(profile, deviceId || '');
+		setDataProfile({ ...dataProfile, ...res });
 	};
 
 	//

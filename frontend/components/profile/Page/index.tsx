@@ -61,7 +61,13 @@ export default function Component() {
 	useEffect(() => {
 		if (profileContext.data.profile) {
 			setProfile(profileContext.data.profile);
-			setAvatarConfig(() => genConfig(profileContext.data.profile?.avatar || profileContext.data.profile?.devices[0]?.device_id));
+
+			const avatar = profileContext.data.profile?.avatar;
+			const device_id = profileContext.data.profile?.devices && profileContext.data.profile?.devices.length > 0
+				? profileContext.data.profile.devices[0]?.device_id
+				: undefined;
+
+			setAvatarConfig(() => genConfig(avatar || device_id));
 		}
 	}, [profileContext.data.profile]);
 

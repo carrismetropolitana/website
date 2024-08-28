@@ -5,6 +5,7 @@
 		"module": "esnext",
 		"moduleResolution": "bundler",
 		"paths": {
+			"@/actions/*": ["actions/*"],
 			"@/utils/*": ["utils/*"],
 			"@/types/*": ["types/*"],
 			"@/hooks/*": ["hooks/*"],
