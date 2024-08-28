@@ -2,8 +2,9 @@
 /* CONTAINER */
 
 .container {
-	display: flex;
-	align-items: center;
+	display:inline-block;
+	position: relative;
+	top: 6px;
 	cursor: pointer;
 	transition: all 200ms ease;
 	color: var(--color-system-text-400);
