@@ -175,10 +175,10 @@
 		/* complimentary cmetish */
 		/* --hs: 232, 8%; */
 
-		--hsl: hsl(240, 8%, 12%);
+		--hsl: hsl(232, 8%, 12%);
 
-		--color-system-background-100: hsl(from var(--hsl) h s calc(l * 17/13));
-		--color-system-background-200: hsl(from var(--hsl) h s calc(l * 14/13));
+		--color-system-background-100: hsl(from var(--hsl) h s calc(l * 18/13));
+		--color-system-background-200: hsl(from var(--hsl) h s calc(l * 15/13));
 		--color-system-background-300: var(--hsl);
 
 		--color-system-border-100: hsl(from var(--hsl) h s calc(l * 27/13));
