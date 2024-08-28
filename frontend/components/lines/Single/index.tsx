@@ -4,14 +4,13 @@
 
 import AlertsCarousel from '@/components/common/AlertsCarousel';
 import FavoriteToggle from '@/components/common/FavoriteToggle';
-import SelectOperationalDay from '@/components/common/SelectOperationalDay';
 import NoDataLabel from '@/components/layout/NoDataLabel';
 import Section from '@/components/layout/Section';
 import LineBadge from '@/components/lines/LineBadge';
 import LineMap from '@/components/lines/LineMap';
 import LineName from '@/components/lines/LineName';
 import Metrics from '@/components/lines/Metrics';
-import SelectActivePatternGroup from '@/components/lines/SelectActivePatternGroup';
+import SingleToolbar from '@/components/lines/SingleToolbar';
 import StopList from '@/components/lines/StopList';
 import { useLinesSingleContext } from '@/contexts/LinesSingle.context';
 import { useProfileContext } from '@/contexts/Profile.context';
@@ -54,10 +53,7 @@ export default function Component() {
 				<LineName line={linesSingleContext.data.line} size="lg" />
 			</Section>
 
-			<Section childrenWrapperStyles={styles.headingSection} withGap={false} withTopPadding={false} withChildrenPadding>
-				<SelectOperationalDay />
-				<SelectActivePatternGroup />
-			</Section>
+			<SingleToolbar />
 
 			{linesSingleContext.data.active_alerts && linesSingleContext.data.active_alerts?.length > 0 && (
 				<AlertsCarousel alerts={linesSingleContext.data.active_alerts} />

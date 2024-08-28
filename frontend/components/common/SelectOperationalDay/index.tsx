@@ -36,7 +36,7 @@ export default function Component() {
 		{
 			label: (
 				<DatePickerInput
-					classNames={{ input: styles.datePickerInput, root: styles.datePickerRoot, section: styles.datePickerSection, wrapper: styles.datePickerWrapper }}
+					classNames={{ input: styles.datePickerInput, section: styles.datePickerSection }}
 					data-selected={!operationalDayContext.flags.is_today_selected && !operationalDayContext.flags.is_tomorrow_selected}
 					dropdownType="modal"
 					leftSection={<IconCalendarEvent size={24} />}

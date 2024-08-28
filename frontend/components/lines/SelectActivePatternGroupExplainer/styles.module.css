@@ -1,7 +1,31 @@
 /* * */
 /* CONTAINER */
 
-.container{
+.container {
+	display: grid;
+	grid-template:
+            ".					explainer	explainer"	auto
+            "operational_day	pattern 	pattern"	auto / auto 1fr;
+	align-items: center;
+	justify-content: center;
+	row-gap: var(--size-spacing-10);
+	column-gap: var(--size-spacing-20);
+}
+
+
+.operationalDay {
+	grid-area: operational_day;
+}
+
+.pattern {
+	grid-area: pattern;
+}
+
+
+/* * */
+/* CONTROLS WRAPPER */
+
+.controlsWrapper{
 	width: 100%;
     display: flex;
     flex-direction: column;
@@ -12,17 +36,19 @@
 /* EXPLAINER */
 
 .explainer{
+	width: auto;
 	display: flex;
 	flex-direction: row;
     align-items: center;
 	gap: var(--size-spacing-5);
-    align-self: flex-end;
     font-size: var(--font-size-muted);
     font-weight: var(--font-size-weight);
     color: var(--color-system-text-300);
     font-style: italic;
 	transition: all 300ms ease;
 	cursor: pointer;
+	grid-area: explainer;
+	justify-self: flex-end;
 }
 
 .explainer:hover{
