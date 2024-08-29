@@ -31,6 +31,7 @@
 		"goto_home": "Voltar à página principal",
 		"sync": "Falha ao sincronizar os dispositivos.",
 		"token": "Falta o token de autenticação.",
+		"unauthorized": "Falha na autenticação.",
 		"redirect": "A voltar à página de principal e em {value} segundo{s}."
 	},
 	"layout": {

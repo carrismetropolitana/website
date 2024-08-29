@@ -140,3 +140,35 @@ export async function toggleFavoriteStop(stop_id: string, device_id: string): Pr
 		return { error: error.message, success: false };
 	}
 }
+
+/**
+ * Merge devices
+ * Merges the device data of the user with the device data of the server
+ *
+ * @param device_id - The Device ID of the user
+ * @returns Promise<ServerActionResult<Profile>> - The merged profile
+ */
+export async function mergeDevices(device_id: null | string, device_id_2: null | string): Promise<ServerActionResult<Profile>> {
+	const url = `${namespace}/add-device`;
+	const auth = await generateJWT({ device_id, device_id_2 });
+
+	try {
+		console.log(auth);
+		const res = await fetch(url, {
+			headers: {
+				Authorization: `Bearer ${auth}`,
+			},
+			method: 'POST',
+		});
+
+		if (!res.ok) {
+			return { error: res.statusText, success: false };
+		}
+
+		const profile = await res.json() as Profile;
+		return { success: true, value: profile };
+	}
+	catch (error) {
+		return { error: error.message, success: false };
+	}
+}

@@ -1,7 +1,12 @@
+import { mergeDevices } from '@/actions/account.actions';
 import { useProfileContext } from '@/contexts/Profile.context';
+import { ServerActionResult } from '@/types/actions.types';
+import { IJwt } from '@/types/jwt.types';
+import { Profile } from '@/types/profile.type';
+import { verifyJWT } from '@/utils/jwt';
 import { useSearchParams } from 'next/navigation';
 import { useTranslations } from 'next-intl';
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
 interface UseMergedDevicesResult {
 	error: boolean
@@ -15,11 +20,13 @@ const useMergedDevices = (): UseMergedDevicesResult => {
 	const profileContext = useProfileContext();
 	const searchParams = useSearchParams();
 	const token = searchParams.get('token');
-	const t = useTranslations('AppError');
+	const t = useTranslations();
 
 	const [loading, setLoading] = useState<UseMergedDevicesResult['loading']>(true);
-	const [error, seterror] = useState<UseMergedDevicesResult['error']>(false);
+	const [error, setError] = useState<UseMergedDevicesResult['error']>(false);
 	const [message, setMessage] = useState<UseMergedDevicesResult['message']>(null);
+
+	const hasCalledPostMergedDevices = useRef(false);
 
 	//
 	// B. Transform data
@@ -29,25 +36,27 @@ const useMergedDevices = (): UseMergedDevicesResult => {
 			setLoading(true);
 
 			try {
-				const res = await fetch(`/api/accounts/${profileContext.data.device_id}/add-device`, {
-					headers: {
-						'Authorization': `Bearer ${token}`,
-						'Content-Type': 'application/json',
-					},
-					method: 'POST',
-				});
+				const decoded = await verifyJWT<IJwt>(token as string);
 
-				const json = await res.json();
+				if (!decoded) {
+					setError(true);
+					setMessage(t('AppError.unauthorized'));
+					return;
+				}
 
-				console.log(res);
-				console.log(json);
+				const res: ServerActionResult<Profile> = await mergeDevices(profileContext.data.device_id, decoded.device_id);
 
-				seterror(!res.ok);
-				setMessage(json.message);
+				if (!res.success) {
+					setError(true);
+					setMessage(res.error);
+					return;
+				}
+
+				setMessage(t('Profile.sync.success'));
 			}
 			catch (error) {
-				seterror(true);
-				setMessage(t('sync'));
+				setError(true);
+				setMessage(t('AppError.sync'));
 			}
 			finally {
 				setLoading(false);
@@ -55,14 +64,15 @@ const useMergedDevices = (): UseMergedDevicesResult => {
 		};
 
 		if (!token) {
-			seterror(true);
+			setError(true);
 			setLoading(false);
 			setMessage(t('token'));
 			return;
 		}
 
-		if (token && profileContext.data.device_id) {
+		if (token && profileContext.data.device_id && !hasCalledPostMergedDevices.current) {
 			postMergedDevices();
+			hasCalledPostMergedDevices.current = true; // Mark as called
 		}
 	}, [profileContext.data.device_id, token]);
 
