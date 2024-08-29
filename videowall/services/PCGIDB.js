@@ -1,7 +1,7 @@
 /* * */
 
-import { MongoClient, ObjectId } from 'mongodb';
-import { readFileSync } from 'node:fs';
+import { readFileSync } from 'fs';
+import { MongoClient } from 'mongodb';
 import { createTunnel } from 'tunnel-ssh';
 
 /* * */
@@ -80,12 +80,7 @@ class PCGIDB {
 				mongoClientInstance = global._mongoClientConnectionInstance;
 			}
 			else {
-				const mongoUser = process.env.PCGIDB_MONGODB_USERNAME;
-				const mongoPass = process.env.PCGIDB_MONGODB_PASSWORD;
-				const mongoLocalHost = '127.0.0.1';
-				const mongoLocalPort = this.sshTunnelConnectionInstance?.address().port || global._sshTunnelConnectionInstance?.address().port;
-				const mongoConnectionString = `mongodb://${mongoUser}:${mongoPass}@${mongoLocalHost}:${mongoLocalPort}/`;
-				mongoClientInstance = await MongoClient.connect(mongoConnectionString, mongoClientOptions);
+				mongoClientInstance = await MongoClient.connect(process.env.PCGIDB_MONGODB_URI, mongoClientOptions);
 			}
 
 			//
@@ -137,8 +132,8 @@ class PCGIDB {
 	}
 
 	/* * *
-	 * CONNECT
-	 * This function sets up a MongoDB client instance with the necessary databases and collections.
+	 * SETUP SSH TUNNEL CONNECTION
+	 * This function sets up an instance of the SSH Tunnel necessary to connect to MongoDB.
 	 */
 
 	async reset() {
@@ -161,8 +156,8 @@ class PCGIDB {
 	}
 
 	/* * *
-	 * SETUP SSH TUNNEL CONNECTION
-	 * This function sets up an instance of the SSH Tunnel necessary to connect to MongoDB.
+	 * RESET CONNECTIONS
+	 * Resets all connections and flags
 	 */
 
 	async setupSshTunnel() {
@@ -210,18 +205,22 @@ class PCGIDB {
 				autoClose: true,
 			};
 
-			const serverOptions = {};
+			const serverOptions = {
+				port: process.env.PCGIDB_TUNNEL_LOCAL_PORT,
+			};
 
 			const sshOptions = {
 				host: process.env.PCGIDB_SSH_HOST,
 				port: process.env.PCGIDB_SSH_PORT,
-				privateKey: readFileSync(process.env.PCGIDB_SSH_KEY_PATH || '', { encoding: 'utf8' }),
+				privateKey: readFileSync(process.env.PCGIDB_SSH_KEY_PATH),
 				username: process.env.PCGIDB_SSH_USERNAME,
 			};
 
 			const forwardOptions = {
 				dstAddr: process.env.PCGIDB_TUNNEL_REMOTE_HOST,
 				dstPort: process.env.PCGIDB_TUNNEL_REMOTE_PORT,
+				srcAddr: process.env.PCGIDB_TUNNEL_LOCAL_HOST,
+				srcPort: process.env.PCGIDB_TUNNEL_LOCAL_PORT,
 			};
 
 			//
@@ -256,15 +255,6 @@ class PCGIDB {
 		}
 
 		//
-	}
-
-	/* * *
-	 * RESET CONNECTIONS
-	 * Resets all connections and flags
-	 */
-
-	toObjectId(string = '') {
-		return new ObjectId(string);
 	}
 
 	/* * *
