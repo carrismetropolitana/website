@@ -41,7 +41,8 @@ export async function POST(req: NextRequest, { params }: { params: AddDevicePara
 		}
 
 		const newJwt = await generateJWT({
-			data: { device_id: device_id, device_id_2: decoded.device_id },
+			device_id: device_id,
+			device_id_2: decoded.device_id,
 		});
 
 		return await fetchAddDeviceAPI(newJwt);

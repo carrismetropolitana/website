@@ -39,9 +39,7 @@ export default function Component() {
 
 	const buildUrl = async () => {
 		const payload = {
-			data: {
-				device_id: profileContext.data.device_id,
-			},
+			device_id: profileContext.data.device_id,
 		};
 		const jwt = await generateJWT(payload);
 		const url = window.location.origin + '/add-device?token=' + jwt;
