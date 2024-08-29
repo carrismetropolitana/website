@@ -7,6 +7,7 @@ import {
 	getProfile,
 	updateProfile as updateProfileAction,
 } from '@/actions/account.actions';
+import { ServerActionResult } from '@/types/actions.types';
 import { Profile } from '@/types/profile.type';
 import { createContext, useContext, useEffect, useState } from 'react';
 import { v4 as uuid } from 'uuid';
@@ -88,19 +89,30 @@ export const ProfileContextProvider = ({ children }) => {
 		// Fetch profile data from API on mount
 		// If the profile data is not found, set the data to null
 		const deviceIdLocal = localStorage.getItem(LOCAL_STORAGE_KEYS.device_id);
-		getProfile(deviceIdLocal || '').then(profile => setDataProfile(profile)).catch(() => setDataProfile(null));
+
+		// Get profile data from Server Action
+		getProfile(deviceIdLocal || '').then((profile: ServerActionResult<Profile>) => {
+			// Set the profile data
+			return setDataProfile(profile.success ? profile.value : null);
+		}).catch(() => setDataProfile(null));
 	}, [deviceId]);
 
 	//
 	// C. Handle actions
 	const toggleFavoriteLine = async (lineId: string) => {
-		const profile = await favoriteLineAction(lineId, deviceId || '') as Profile;
-		setDataProfile(profile);
+		const profile: ServerActionResult<Profile> = await favoriteLineAction(lineId, deviceId || '');
+
+		if (!profile.success) throw new Error(profile.error);
+
+		setDataProfile(profile.value);
 	};
 
 	const toggleFavoriteStop = async (stopId: string) => {
-		const profile = await favoriteStopAction(stopId, deviceId || '') as Profile;
-		setDataProfile(profile);
+		const profile: ServerActionResult<Profile> = await favoriteStopAction(stopId, deviceId || '');
+
+		if (!profile.success) throw new Error(profile.error);
+
+		setDataProfile(profile.value);
 	};
 
 	const updateFilterByFavorite = (value: ProfileContextState['filters']['favorites']) => setFilterByFavorite(value);
