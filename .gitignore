@@ -41,3 +41,4 @@ nginx/uptime.conf
 
 #
 .htpasswd
+*.key
