@@ -26,8 +26,8 @@ class PCGIDB {
 	}
 
 	/* * *
-	 * OBJECT ID
-	 * Convenience function to create a new ObjectId from a string
+	 * CONNECT
+	 * This function sets up a MongoDB client instance with the necessary databases and collections.
 	 */
 
 	async connect() {
