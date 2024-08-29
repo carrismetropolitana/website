@@ -5,13 +5,14 @@ import '@/styles/variables.css';
 
 /* * */
 
-import Toaster from '@/components/Toast';
 import { ColorSchemeScript } from '@mantine/core';
+import { Notifications } from '@mantine/notifications';
 import { Inter } from 'next/font/google';
 
 import Providers from './providers';
-
 /* * */
+
+import '@mantine/notifications/styles.css';
 
 const inter = Inter({
 	display: 'swap',
@@ -38,7 +39,7 @@ export default function RootLayout({ children }) {
 			</head>
 			<body>
 				<Providers>
-					<Toaster />
+					<Notifications styles={{ root: { marginTop: '60px' } }} />
 					{children}
 				</Providers>
 			</body>

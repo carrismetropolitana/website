@@ -44,6 +44,7 @@ export default function Component() {
 				position="right"
 				styles={{ body: { padding: 0 } }}
 				withCloseButton={false}
+				zIndex={500}
 			>
 				<div className={styles.userProfile}>
 					<AccountUserAvatar withName />
