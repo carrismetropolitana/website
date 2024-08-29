@@ -14,8 +14,8 @@ import SingleToolbar from '@/components/lines/SingleToolbar';
 import StopList from '@/components/lines/StopList';
 import { useLinesSingleContext } from '@/contexts/LinesSingle.context';
 import { useProfileContext } from '@/contexts/Profile.context';
+import toast from '@/utils/toast';
 import { useTranslations } from 'next-intl';
-import { toast } from 'react-toastify';
 
 import styles from './styles.module.css';
 
@@ -39,7 +39,7 @@ export default function Component() {
 			await profileContext.actions.toggleFavoriteLine(linesSingleContext.data.line.line_id);
 		}
 		catch (error) {
-			toast.error(t('toast.toggle_favorite_error', { error: error.message }));
+			toast.error({ message: t('toast.toggle_favorite_error', { error: error.message }) });
 		}
 	};
 

@@ -9,9 +9,9 @@ import Section from '@/components/layout/Section';
 import { useOperationalDayContext } from '@/contexts/OperationalDay.context';
 import { useProfileContext } from '@/contexts/Profile.context';
 import { useStopsSingleContext } from '@/contexts/StopsSingle.context';
+import toast from '@/utils/toast';
 import { useTranslations } from 'next-intl';
 import { useMemo } from 'react';
-import { toast } from 'react-toastify';
 
 import styles from './styles.module.css';
 
@@ -62,7 +62,7 @@ export default function Component() {
 			profileContext.actions.toggleFavoriteStop(stopsSingleContext.data.stop.id);
 		}
 		catch (error) {
-			toast.error('Ocorreu um erro ao adicionar o paragem aos favoritos');
+			toast.error({ message: t('toast.toggle_favorite_error', { error: error.message }) });
 		}
 	};
 
