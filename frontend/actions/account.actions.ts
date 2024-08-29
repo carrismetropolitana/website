@@ -7,6 +7,7 @@
 'use server';
 
 import { Profile } from '@/types/profile.type';
+// import { Profile } from '@/types/profile.type';
 import { generateJWT } from '@/utils/jwt';
 
 /* * */
@@ -31,7 +32,7 @@ export async function getProfile(device_id: string): Promise<Profile> {
 	});
 
 	if (!res.ok) {
-		throw new Error('An error occurred while fetching the profile.');
+		throw new Error(res.statusText);
 	}
 
 	return await res.json() as Profile;
@@ -59,7 +60,7 @@ export async function updateProfile(profile: Partial<Profile>, device_id: string
 	});
 
 	if (!res.ok) {
-		throw new Error('An error occurred while updating the profile.');
+		throw new Error(res.statusText);
 	}
 
 	return await res.json() as Profile;
@@ -84,7 +85,7 @@ export async function toggleFavoriteLine(line_id: string, device_id: string): Pr
 	const res = await fetch(url, options);
 
 	if (!res.ok) {
-		throw new Error('An error occurred while toggling the favorite status of the line.');
+		throw new Error(res.statusText);
 	}
 
 	return await res.json() as Profile;
@@ -109,7 +110,7 @@ export async function toggleFavoriteStop(stop_id: string, device_id: string): Pr
 	const res = await fetch(url, options);
 
 	if (!res.ok) {
-		throw new Error('An error occurred while toggling the favorite status of the stop.');
+		throw new Error(res.statusText);
 	}
 
 	return await res.json() as Profile;
