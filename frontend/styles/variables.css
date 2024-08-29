@@ -1,5 +1,3 @@
-/* * */
-
 :root {
 
 	/* * */
@@ -129,12 +127,64 @@
 		/* * */
 		/* COLOR / SYSTEM */
 
-		--color-system-background-100: #3c3c46;
-		--color-system-background-200: #32323c;
-		--color-system-background-300: #282832;
+		/* original */
+		/* --color-system-background-100: hsl(240, 8%, 25%);
+		--color-system-background-200: hsl(240, 9%, 22%);
+		--color-system-background-300: hsl(240, 11%, 18%); 
 
-		--color-system-border-100: #50505a;
-		--color-system-border-200: #82828c;
+		--color-system-border-100: hsl(240, 6%, 33%);
+		--color-system-border-200: hsl(240, 4%, 53%); */
+
+		/* tailwind-neutral */
+		/* --color-system-background-100: #404040;
+		--color-system-background-200:#262626;
+		--color-system-background-300: #171717; */
+
+		/* just gray */
+		/* --color-system-background-100: hsl(0, 0%, 18%);
+		--color-system-background-200: hsl(0, 0%, 14%);
+		--color-system-background-300: hsl(0, 0%, 10%); */
+
+		
+		/* blueish - fav*/
+		/* --color-system-background-100: hsl(240, 8%, 17%);
+		--color-system-background-200: hsl(240, 8%, 14%);
+		--color-system-background-300: hsl(240, 8%, 13%);
+
+
+		--color-system-border-100: hsl(240, 8%, 30%);
+		--color-system-border-200: hsl(240, 8%, 35%); */
+
+		/* cmetish */
+		/* --color-system-background-100: hsl(52, 8%, 13%);
+		--color-system-background-200: hsl(52, 8%, 10%);
+		--color-system-background-300: hsl(52, 8%, 8%); */
+
+		/* complimentary cmetish */
+		/* --color-system-background-100: hsl(232, 8%, 17%);
+		--color-system-background-200: hsl(232, 8%, 14%);
+		--color-system-background-300: hsl(232, 8%, 13%);
+
+		--color-system-border-100: hsl(232, 8%, 30%);
+		--color-system-border-200: hsl(232, 8%, 35%); */
+
+
+		/* blueish */
+		/* --hs: 240, 8%; */
+
+		/* complimentary cmetish */
+		/* --hs: 232, 8%; */
+
+		--hsl: hsl(232, 8%, 12%);
+
+		--color-system-background-100: hsl(from var(--hsl) h s calc(l * 18/13));
+		--color-system-background-200: hsl(from var(--hsl) h s calc(l * 15/13));
+		--color-system-background-300: var(--hsl);
+
+		--color-system-border-100: hsl(from var(--hsl) h s calc(l * 27/13));
+		--color-system-border-200: hsl(from var(--hsl) h s calc(l * 37/13));
+
+
 
 		--color-system-text-100: #ffffff;
 		--color-system-text-200: #c8c8d2;

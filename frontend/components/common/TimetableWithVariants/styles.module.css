@@ -1,0 +1,167 @@
+/* * */
+/* CONTAINER */
+
+.scheduleContainer{
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  row-gap: 12px;
+  margin-top: 2px;
+}
+
+/* * */
+/* COLUMN */
+
+.column {
+  display: grid;
+  grid-auto-rows: 26px;
+  height: min-content;
+}
+
+/* * */
+/* HOURS & MINUTES */
+
+.hour,
+.minute {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+  line-height: 1;
+}
+
+.minute {
+  position: relative;
+}
+
+.column:first-child .hour,
+.column:first-child .minute {
+  justify-content: flex-start;
+  padding-left: 10px;
+}
+
+.column:last-child .hour,
+.column:last-child .minute {
+  padding-right: 10px;
+}
+
+/* * */
+/* HOURS */
+
+.hour {
+  padding: 0 5px;
+  font-weight: 800;
+  background-color: #000;
+  color: #fff;
+}
+
+.column:first-child .hour {
+  font-weight: 700;
+  border-top-left-radius: 999px;
+  border-bottom-left-radius: 999px;
+}
+
+.column:last-child .hour,
+.column:last-child .minute {
+  border-top-right-radius: 999px;
+  border-bottom-right-radius: 999px;
+}
+
+.hourDivider {
+  padding-left: 2px;
+  background-color: black;
+  opacity: 0.3;
+}
+
+/* * */
+/* MINUTES */
+
+.minute {
+  display: flex;
+  padding: 0 5px;
+  font-weight: 600;
+  color: var(--color-system-text-100);
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: 0px;
+}
+.minute.variant{
+  color: var(--color-system-text-300);
+  font-weight: 500;
+}
+
+/* * */
+/* NO DATA */
+
+.noData {
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--gray6);
+  font-style: italic;
+  line-height: 1;
+}
+
+.exceptions{
+  display: flex;
+  flex-direction: column;
+  align-self: flex-start;
+  font-size: 9px;
+  font-weight: 500;
+  color: var(--color-system-text-100);
+  line-height: 1;
+  width:0;
+}
+
+.exceptions>span{
+  margin-bottom: -5px;
+  color: var(--color-system-text-100);
+  width:fit-content
+}
+
+.exceptionFooter{
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--color-system-text-200);
+}
+
+.exceptionFooter>div{
+  gap:2px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.exceptionTag{
+  font-weight: 700;
+  font-style: Bold;
+  letter-spacing: 0px;
+}
+
+.exceptionLink {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.exceptionLink .underline{
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+
+
+.realtimeLine {
+  height: 2px;
+  margin-top: -1px;
+  position: absolute;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+}
+
+.realtimeLine>div{
+  background-color: var(--color-realtime-50);
+  border-radius: 1000px;
+  height: 100%;
+  width: 20%;
+}

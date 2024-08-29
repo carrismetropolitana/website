@@ -72,6 +72,7 @@ export const theme = createTheme({
 		SegmentedControl: SegmentedControl.extend({
 			classNames: (_, props) => {
 				let defaultClasses = {
+					control: SegmentedControlOverride.control,
 					indicator: SegmentedControlOverride.indicator,
 					innerLabel: SegmentedControlOverride.innerLabel,
 					label: SegmentedControlOverride.label,

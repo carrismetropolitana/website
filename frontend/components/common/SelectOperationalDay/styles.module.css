@@ -8,25 +8,10 @@
 }
 
 /* * */
-/* DATE PICKER / ROOT */
-
-.datePickerRoot {
-	/* width: 100%; */
-	/* display: flex; */
-}
-
-/* * */
-/* DATE PICKER / WRAPPER */
-
-.datePickerWrapper {
-	/* margin: auto; */
-}
-
-/* * */
 /* DATE PICKER / INPUT */
 
 .datePickerInput {
-	width: 100%;
+	min-width: 175px;
 	text-align: center;
 	border: none;
 	line-height: 1;
@@ -35,13 +20,6 @@
 	padding: var(--size-spacing-15) var(--size-spacing-15) var(--size-spacing-15) calc(var(--size-spacing-15) + 27px);
 	color: var(--color-system-text-200);
 	background: transparent;
-}
-
-@media screen and (max-width: 500px) {
-	.datePickerInput {
-		font-size: 14px;
-		padding: var(--size-spacing-15) calc(var(--size-spacing-15) + 27px);
-	}
 }
 
 .segmentedControlDateInputOverride[data-active="true"] .datePickerInput {
