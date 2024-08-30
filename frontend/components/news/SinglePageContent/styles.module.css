@@ -45,3 +45,15 @@
 .content p em {
 	font-style: italic;
 }
+
+/* * */
+/* RESET / LINKS */
+
+.content a {
+	color: var(--color-system-text-100);
+	text-decoration: underline;
+}
+
+
+/* * */
+/* FOR MORE RESET STYLES PLEASE LOOK AT @/styles/wordpress.css FILE */
