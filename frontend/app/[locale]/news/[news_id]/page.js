@@ -1,9 +1,9 @@
 /* * */
 
-import NewsPage from 'components/news/Page';
+import SinglePage from 'components/news/SinglePage';
 
 /* * */
 
 export default function Page({ params: { news_id } }) {
-	return <NewsPage news_id={news_id} />;
+	return <SinglePage newsId={news_id} />;
 }

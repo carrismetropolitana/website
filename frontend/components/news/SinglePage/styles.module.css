@@ -1,0 +1,18 @@
+/* * */
+/* INNER WRAPPER */
+
+.innerWrapper {
+	display: grid;
+	grid-template-columns: 1fr 300px;
+	gap: var(--size-spacing-20);
+	/* background-color: bisque; */
+}
+
+@media screen and (max-width: 900px) {
+	/* .innerWrapper {
+		grid-template:
+			"b" auto [b_]
+			"a" auto [a_]
+			"c" auto [c_] / 1fr;
+	} */
+}

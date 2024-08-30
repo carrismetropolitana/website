@@ -55,7 +55,6 @@ export default function Component({ backButtonHref = '', backRouter = false, chi
 							<span className={styles.backButtonLabel}>{t('back.label')}</span>
 						</Link>
 					)}
-
 					{backRouter && !backButtonHref && (
 						<div className={styles.backButton} onClick={handleBackButtonClick}>
 							<IconArrowLeft size={14} />
