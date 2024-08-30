@@ -1,18 +1,12 @@
 /* * */
 
-import '@/styles/reset.css';
-import '@/styles/variables.css';
-
-/* * */
-
 import { ColorSchemeScript } from '@mantine/core';
 import { Notifications } from '@mantine/notifications';
 import { Inter } from 'next/font/google';
 
 import Providers from './providers';
-/* * */
 
-import '@mantine/notifications/styles.css';
+/* * */
 
 const inter = Inter({
 	display: 'swap',

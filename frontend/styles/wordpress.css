@@ -1,0 +1,35 @@
+/* * */
+/* WP RESET / COLUMNS */
+
+.wp-block-columns {
+	display: flex;
+    gap: var(--size-spacing-15);
+}
+
+.wp-block-column {
+	display: flex;
+	flex-direction: column;
+	gap: var(--size-spacing-15);
+}
+
+.wp-block-button {
+	display: flex;
+}
+
+.wp-block-button a {
+	display: flex;
+	font-weight: var(--font-weight-bold);
+    text-align: center;
+    word-break: break-word;
+    overflow-wrap: break-word;
+    cursor: pointer;
+    padding: var(--size-spacing-10) var(--size-spacing-20);
+    font-size: 18px !important;
+    color: var(--color-primary-black) !important;
+    border-radius: 8px !important;
+    background-color: var(--color-brand) !important;
+}
+
+.wp-block-button a:hover  {
+	text-decoration: underline;
+}

@@ -51,6 +51,11 @@
 			"disclaimer": "Edite esta página no Github se pretende incluir a sua aplicação. A ordem é aleatória. Apenas são permitidas entradas que disponibilizem simultaneamente horários planeados e em tempo real ou posição de veículos."
 		}
 	},
+	"news": {
+		"SinglePageHeader": {
+			"publish_date": "Publicada a {value, date, long}"
+		}
+	},
 	"faq": {
 		"Page":{
 			"heading": "Perguntas Frequentes",
@@ -397,9 +402,6 @@
 		}
 	},
 	"NewsCard": {
-		"publish_date": "{publishDate, date, long}"
-	},
-	"NewsPage": {
 		"publish_date": "{publishDate, date, long}"
 	},
 	"SelectLine": {

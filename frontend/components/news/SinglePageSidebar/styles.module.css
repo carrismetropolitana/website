@@ -1,15 +1,4 @@
 /* * */
-/* TITLE */
-
-.title {
-	font-size: 36px;
-	font-weight: var(--font-weight-heading);
-	max-width: 700px;
-	padding: 5px;
-	/* margin: auto; */
-}
-
-/* * */
 /* CONTENT */
 
 .content {
