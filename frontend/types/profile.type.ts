@@ -21,7 +21,6 @@ export interface Profile {
 		events: boolean
 		network: boolean
 	}
-	notifications?: boolean
 	phone?: string
 	role?: 'admin' | 'owner' | 'user'
 	utilization_type: 'frequent' | 'occasional'
