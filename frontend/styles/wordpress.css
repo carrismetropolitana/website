@@ -12,6 +12,9 @@
 	gap: var(--size-spacing-15);
 }
 
+/* * */
+/* WP RESET / BUTTONS */
+
 .wp-block-button {
 	display: flex;
 }
