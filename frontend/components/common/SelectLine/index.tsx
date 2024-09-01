@@ -85,7 +85,7 @@ export default function Component({ data = [], onSelectLineId, selectedLineId, v
 
 	const handleSelectLine = (chosenSelectItemValue) => {
 		console.log(chosenSelectItemValue);
-		// onSelectLineId(chosenSelectItemValue);
+		onSelectLineId(chosenSelectItemValue);
 		comboboxStore.closeDropdown();
 	};
 
