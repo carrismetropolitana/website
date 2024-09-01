@@ -163,7 +163,7 @@ levCache: Map<string, number>): T[] {
 				if (isPrefixMatch(word, queryWord)) {
 					matchScore += 1;
 				}
-				else if (queryWord.length > 2 && word.length >= 2 && levenshteinDistance(word, queryWord, maxLevDistance) < maxLevDistance) {
+				else if (queryWord.length > 2 && word.length >= 2 && levenshteinDistance(word, queryWord, maxLevDistance) < maxLevDistance && Number.isNaN(Number(queryWord))) {
 					matchScore += 0.5;
 				}
 			});
@@ -176,13 +176,15 @@ levCache: Map<string, number>): T[] {
 			if (Array.isArray(value)) {
 				const words = value;
 				const multiplier = scoring[key] ?? 1;
-
-				score += Math.max(...queryWords.map((queryWord: string) => {
-					let localScore = 0;
-					localScore += matchWord(words, queryWord);
-					localScore += getContextScore(value.join(' '), queryWords);
-					return localScore;
-				})) * multiplier;
+				// When queryWords is empty, the map function will return -Infinity
+				if (queryWords.length > 0) {
+					score += Math.max(...queryWords.map((queryWord: string) => {
+						let localScore = 0;
+						localScore += matchWord(words, queryWord);
+						localScore += getContextScore(value.join(' '), queryWords);
+						return localScore;
+					})) * multiplier;
+				}
 			}
 			else if (typeof value === 'string') {
 				const words = value.split(' ');
@@ -210,16 +212,15 @@ levCache: Map<string, number>): T[] {
 
 	const queryWords = normalizeString(query)
 		.split(' ')
-		.filter((word: string) => word.length > 1 || (word.length === 1 && !Number.isNaN(word)));
+		.filter((word: string) => word.length > 1 || (word.length === 1 && !Number.isNaN(Number(word))));
 
 	const scoredDocs = docs.map(doc => ({
 		doc: doc.doc,
 		score: calculateScore(doc.normalized, doc.doc.boost, queryWords, scoring),
 	}));
-	// console.log('Levenshtein time:', cumLevTime);
 
 	return scoredDocs
-		.filter(scoredDoc => scoredDoc.score > (0.5 * queryWords.length))
 		.sort((a, b) => b.score - a.score)
+		.filter(scoredDoc => scoredDoc.score > Math.floor(scoredDocs[0].score / 2) || scoredDocs[0].score === 0)
 		.map(scoredDoc => scoredDoc.doc);
 }
