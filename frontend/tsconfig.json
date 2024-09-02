@@ -5,15 +5,16 @@
 		"module": "esnext",
 		"moduleResolution": "bundler",
 		"paths": {
-			"@/actions/*": ["actions/*"],
 			"@/utils/*": ["utils/*"],
 			"@/types/*": ["types/*"],
 			"@/hooks/*": ["hooks/*"],
 			"@/styles/*": ["styles/*"],
+			"@/actions/*": ["actions/*"],
+			"@/settings/*": ["settings/*"],
 			"@/contexts/*": ["contexts/*"],
 			"@/opengraph/*": ["opengraph/*"],
 			"@/components/*": ["components/*"],
-			"@/translations/*": ["translations/*"]
+			"@/translations/*": ["translations/*"],
 		},
 		"allowJs": true,
 		"sourceMap": true,
