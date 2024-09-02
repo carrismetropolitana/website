@@ -74,11 +74,17 @@ export const AlertsContextProvider = ({ children }) => {
 	const getSimplifiedAlertsByLineId = (lineId: string): SimplifiedAlert[] => {
 		// TODO: Update this to use informed_entity.lineId instead of routeId
 		// This is a temporary solution to filter by lineId until the API is updated
-		return dataSimplifiedState.filter(simplifiedAlert => simplifiedAlert.informed_entity.forEach(informedEntity => informedEntity.routeId?.startsWith(lineId))) || null;
+		return dataSimplifiedState.filter((simplifiedAlert) => {
+			// Include this element if any informed_entity...
+			return simplifiedAlert.informed_entity.some((informedEntity) => {
+				// ...has a routeId that starts with the lineId
+				return informedEntity.routeId?.startsWith(lineId);
+			});
+		});
 	};
 
 	const getSimplifiedAlertsByStopId = (stopId: string): SimplifiedAlert[] => {
-		return dataSimplifiedState.filter(simplifiedAlert => simplifiedAlert.informed_entity.forEach(informedEntity => informedEntity.stopId === stopId)) || null;
+		return dataSimplifiedState.filter(simplifiedAlert => simplifiedAlert.informed_entity.some(informedEntity => informedEntity.stopId === stopId));
 	};
 
 	//

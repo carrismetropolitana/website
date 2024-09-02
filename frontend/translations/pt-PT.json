@@ -326,8 +326,11 @@
 			"copyright": "© Carris Metropolitana {year} - Todos os direitos reservados"
 		}
 	},
-	"HomeQuickSearchFavoritesBar":{
-		"empty": "Ainda não tem linhas favoritas..."
+	"home": {
+		"QuickSearchFavoritesBar": {
+			"empty": "Ainda não tem linhas favoritas...",
+			"more": "{count, plural, one {+ # linha} other {+ # linhas}}"
+		}
 	},
 	"HomeQuickSearchWidget": {
 		"title": "Pesquisa Rápida",
