@@ -1,10 +1,7 @@
 /* * */
 
 import { ColorSchemeScript } from '@mantine/core';
-import { Notifications } from '@mantine/notifications';
 import { Inter } from 'next/font/google';
-
-import Providers from './providers';
 
 /* * */
 
@@ -32,10 +29,7 @@ export default function RootLayout({ children }) {
 				<ColorSchemeScript />
 			</head>
 			<body>
-				<Providers>
-					<Notifications styles={{ root: { marginTop: '60px' } }} />
-					{children}
-				</Providers>
+				{children}
 			</body>
 		</html>
 	);
