@@ -1,0 +1,112 @@
+'use client';
+
+/* * */
+
+import type { Alert, SimplifiedAlert } from '@/types/alerts.types.js';
+
+import convertToSimplifiedAlert from '@/utils/convertToSimplifiedAlert';
+import { useLocale } from 'next-intl';
+import { createContext, useContext, useEffect, useState } from 'react';
+import useSWR from 'swr';
+
+/* * */
+
+interface AlertsContextState {
+	actions: {
+		getSimplifiedAlertById: (alertId: string) => SimplifiedAlert | null
+		getSimplifiedAlertsByLineId: (lineId: string) => SimplifiedAlert[]
+		getSimplifiedAlertsByStopId: (stopId: string) => SimplifiedAlert[]
+	}
+	data: {
+		raw: Alert[]
+		simplified: SimplifiedAlert[]
+	}
+	flags: {
+		is_loading: boolean
+	}
+}
+
+/* * */
+
+const AlertsContext = createContext<AlertsContextState | undefined>(undefined);
+
+export function useAlertsContext() {
+	const context = useContext(AlertsContext);
+	if (!context) {
+		throw new Error('useAlertsContext must be used within a AlertsContextProvider');
+	}
+	return context;
+}
+
+/* * */
+
+export const AlertsContextProvider = ({ children }) => {
+	//
+
+	//
+	// A. Setup variables
+
+	const currentLocale = useLocale();
+
+	const [dataSimplifiedState, setDataSimplifiedState] = useState<SimplifiedAlert[]>([]);
+
+	//
+	// B. Fetch data
+
+	const { data: allAlertsData, isLoading: allAlertsLoading } = useSWR<Alert[], Error>('https://api.carrismetropolitana.pt/v2/alerts');
+
+	//
+	// C. Transform data
+
+	useEffect(() => {
+		if (!allAlertsData) return;
+		const allSimplifiedAlerts = allAlertsData.map(alert => convertToSimplifiedAlert(alert, currentLocale));
+		setDataSimplifiedState(allSimplifiedAlerts);
+	}, [allAlertsData]);
+
+	//
+	// D. Handle actions
+
+	const getSimplifiedAlertById = (alertId: string): SimplifiedAlert | null => {
+		return dataSimplifiedState.find(item => item.alert_id === alertId) || null;
+	};
+
+	const getSimplifiedAlertsByLineId = (lineId: string): SimplifiedAlert[] => {
+		// TODO: Update this to use informed_entity.lineId instead of routeId
+		// This is a temporary solution to filter by lineId until the API is updated
+		return dataSimplifiedState.filter(simplifiedAlert => simplifiedAlert.informed_entity.forEach(informedEntity => informedEntity.routeId?.startsWith(lineId))) || null;
+	};
+
+	const getSimplifiedAlertsByStopId = (stopId: string): SimplifiedAlert[] => {
+		return dataSimplifiedState.filter(simplifiedAlert => simplifiedAlert.informed_entity.forEach(informedEntity => informedEntity.stopId === stopId)) || null;
+	};
+
+	//
+	// E. Define context value
+
+	const contextValue: AlertsContextState = {
+		actions: {
+			getSimplifiedAlertById,
+			getSimplifiedAlertsByLineId,
+			getSimplifiedAlertsByStopId,
+		},
+		data: {
+			raw: allAlertsData || [],
+			simplified: dataSimplifiedState,
+		},
+		flags: {
+			is_loading: allAlertsLoading,
+		},
+	};
+
+	//
+	// F. Render components
+
+	return (
+		<AlertsContext.Provider value={contextValue}>
+			{children}
+		</AlertsContext.Provider>
+	);
+
+	//
+};

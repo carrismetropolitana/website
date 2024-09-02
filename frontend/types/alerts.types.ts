@@ -35,6 +35,10 @@ export enum AlertEffect {
 
 /* * */
 
+/**
+ * An Alert is the JSON equivalent of a GTFS-RT Service Alert message.
+ * Please use a SimplifiedAlert as many convenience operations are already correctly applied.
+ */
 export interface Alert {
 	_id: string
 	activePeriod: TimeRange[]
@@ -49,8 +53,16 @@ export interface Alert {
 
 /* * */
 
+/**
+ * A Simplified Alert is the same as an Alert, but with the following differences:
+ * - The description is a string instead of a TranslatedString
+ * - The image URL is a string instead of a TranslatedImage
+ * - The URL is a string instead of a TranslatedString
+ * - The start_date and end_date are Date objects instead of TimeRange objects
+ * - All fields with translatable content are returned in the current app locale
+ */
 export interface SimplifiedAlert {
-	_id: string
+	alert_id: string
 	cause: AlertCause
 	description: string
 	effect: AlertEffect
