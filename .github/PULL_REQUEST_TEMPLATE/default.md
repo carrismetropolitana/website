@@ -6,9 +6,9 @@ labels: ''
 assignees: ''
 ---
 
-#### Please ensure the following:
-**Is the branch name the Linear issue code?:** [ ] Yes [ ] No
-**Did you succeeded a local `npm run build`?:** [ ] Yes [ ] No
+### Please ensure the following before merging:
+- [ ] Is the branch name the Linear issue code?
+- [ ] Did you successfully run a local `npm run build`?
 
 ### Description
 Please describe what this PR is for and an overview of what has changed.
