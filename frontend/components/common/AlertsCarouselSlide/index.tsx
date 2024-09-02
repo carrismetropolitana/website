@@ -20,7 +20,7 @@ export default function Component({ alert }: Props) {
 	//
 
 	return (
-		<Link className={styles.container} href={`/alerts/${alert._id}`} target="_blank">
+		<Link className={styles.container} href={`/alerts/${alert.alert_id}`} target="_blank">
 			<AlertActivePeriodStart date={alert.start_date} size="sm" />
 			<p className={styles.title}>
 				{alert.title}
