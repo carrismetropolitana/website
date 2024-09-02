@@ -2,6 +2,7 @@
 
 /* * */
 
+import { AlertsContextProvider } from '@/contexts/Alerts.context';
 import { AnalyticsContextProvider } from '@/contexts/Analytics.context';
 import { DebugContextProvider } from '@/contexts/Debug.context';
 import { MapOptionsContextProvider } from '@/contexts/MapOptions.context';
@@ -65,7 +66,11 @@ export default function Providers({ children }) {
 								<DebugContextProvider>
 									<OperationalDayContextProvider>
 										<MapOptionsContextProvider>
-											<MapProvider>{children}</MapProvider>
+											<MapProvider>
+												<AlertsContextProvider>
+													{children}
+												</AlertsContextProvider>
+											</MapProvider>
 										</MapOptionsContextProvider>
 									</OperationalDayContextProvider>
 								</DebugContextProvider>
