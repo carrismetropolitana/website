@@ -2,7 +2,7 @@
 
 import type { NavigationGroup, NavigationLink } from '@/types/navigation.types';
 
-import { IconAlertTriangle, IconArrowLoopRight, IconBellSchool, IconBuildingStore, IconBusStop, IconCreditCardPay, IconDirections, IconHelpHexagon, IconMessage, IconPhoneCheck, IconTicket, IconUmbrella } from '@tabler/icons-react';
+import { IconAlertTriangle, IconArrowLoopRight, IconBellSchool, IconBuildingStore, IconBusStop, IconCreditCardPay, IconDirections, IconHelpHexagon, IconMessage, IconPhoneCheck, IconTicket, IconUmbrella, IconWorld } from '@tabler/icons-react';
 
 /* * */
 
@@ -24,7 +24,7 @@ export const headerNavigationGroup: NavigationGroup[] = [
 		links: [
 			{ _id: 'tickets', href: '/tickets', icon: <IconTicket size={20} /> },
 			{ _id: 'cards', href: '/cards', icon: <IconCreditCardPay size={20} /> },
-			{ _id: 'stores', href: '/stores', icon: <IconBuildingStore size={20} /> },
+			{ _id: 'purchase', href: '/purchase', icon: <IconWorld size={20} /> },
 		],
 	},
 
