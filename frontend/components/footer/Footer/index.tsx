@@ -2,7 +2,7 @@
 
 import FooterDebugToggle from '@/components/footer/DebugToggle';
 import FooterVersionControl from '@/components/footer/VersionControl';
-import { footerPrimaryNavigationLinks, footerSecondaryNavigationLinks } from '@/settings/navigation';
+import { footerPrimaryNavigationLinks, footerSecondaryNavigationLinks } from '@/settings/navigation.settings';
 import { Link } from '@/translations/navigation';
 import { useTranslations } from 'next-intl';
 

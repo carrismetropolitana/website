@@ -1,7 +1,7 @@
 /* * */
 
 import NavigationMainMenu from '@/components/header/NavigationMainMenu';
-import { headerNavigationGroup } from '@/settings/navigation';
+import { headerNavigationGroup } from '@/settings/navigation.settings';
 
 import styles from './styles.module.css';
 
