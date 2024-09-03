@@ -3,16 +3,20 @@
 /* * */
 
 import AlertsCarousel from '@/components/common/AlertsCarousel';
+import CopyBadge from '@/components/common/CopyBadge';
+import FavoriteToggle from '@/components/common/FavoriteToggle';
 import SelectOperationalDay from '@/components/common/SelectOperationalDay';
 import NoDataLabel from '@/components/layout/NoDataLabel';
 import Section from '@/components/layout/Section';
 import { useOperationalDayContext } from '@/contexts/OperationalDay.context';
 import { useProfileContext } from '@/contexts/Profile.context';
 import { useStopsSingleContext } from '@/contexts/StopsSingle.context';
+import { IconVolume } from '@tabler/icons-react';
 import toast from '@/utils/toast';
 import { useTranslations } from 'next-intl';
 import { useMemo } from 'react';
 
+import StopMap from '../StopMap';
 import styles from './styles.module.css';
 
 /* * */
@@ -28,6 +32,7 @@ export default function Component() {
 	const profileContext = useProfileContext();
 	const operationalDayContext = useOperationalDayContext();
 	const stopsSingleContext = useStopsSingleContext();
+	const currentStop = stopsSingleContext.data.stop;
 
 	//
 	// B. Fetch data
@@ -69,27 +74,35 @@ export default function Component() {
 	//
 	// E. Render components
 
-	if (!stopsSingleContext.data.stop) {
+	if (!currentStop) {
 		return <Section withTopBorder={false} backRouter withChildrenPadding />;
 	}
 
 	return (
 		<>
 			<Section childrenWrapperStyles={styles.headingSection} withGap={false} withTopBorder={false} backRouter withChildrenPadding>
-				{/* <div className={styles.headingSectionRow}>
-					<LineBadge line={stopsSingleContext.data.line} size="lg" />
-					<FavoriteToggle color={stopsSingleContext.data.line.color} isActive={stopsSingleContext.flags.is_favorite} onToggle={handleToggleFavorite} />
+				<div className={styles.badges}>
+					<CopyBadge label={'#' + currentStop.id} value={currentStop.id} />
+					<CopyBadge
+						hasBorder={false}
+						label={currentStop.lat + ' ' + currentStop.lon}
+						value={currentStop.lat + '\t' + currentStop.lon}
+					/>
 				</div>
-				<LineName line={stopsSingleContext.data.line} size="lg" /> */}
-			</Section>
-
-			<Section childrenWrapperStyles={styles.headingSection} withGap={false} withTopPadding={false} withChildrenPadding>
-				<SelectOperationalDay />
+				<span className={styles.headingTitle}>
+					{currentStop.name}
+					<IconVolume className={styles.icon} size={24} />
+					<FavoriteToggle color="var(--color-brand)" isActive={stopsSingleContext.flags.is_favorite} onToggle={handleToggleFavorite} />
+				</span>
 			</Section>
 
 			{stopsSingleContext.data.active_alerts && stopsSingleContext.data.active_alerts?.length > 0 && (
 				<AlertsCarousel alerts={stopsSingleContext.data.active_alerts} />
 			)}
+			<StopMap />
+			<Section childrenWrapperStyles={styles.headingSection} withGap={false} withTopPadding={false} withChildrenPadding>
+				<SelectOperationalDay />
+			</Section>
 
 			{ stopsSingleContext.data.active_pattern_group ? (
 				<Section childrenWrapperStyles={styles.headingSection} withGap={false} withTopPadding={false} withChildrenPadding>
