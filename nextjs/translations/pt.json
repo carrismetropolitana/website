@@ -732,7 +732,7 @@
     "operational_status": {
       "ACTIVE": "Paragem Ativa",
       "PROVISIONAL": "Paragem Provisória",
-      "SEASONAL": "Paragem Sasonal",
+      "SEASONAL": "Paragem Sazonal",
       "INACTIVE": "Paragem Inativa",
       "VOIDED": "Voided"
     }
