@@ -581,7 +581,8 @@
 	},
 	"stops":{
 		"Single":{
-			"heading": "Pesquisar Paragens"
+			"heading": "Pesquisar Paragens",
+			"lines_that_pass_here": "Linhas que passam nesta paragem"
 		},
 		"Page":{
 			"heading": "Pesquisar Paragens"

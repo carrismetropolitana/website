@@ -26,10 +26,11 @@
     align-items: center;
 }
 
-.icon{
+.volumeIcon{
     position:relative;
     top: 6px;
     margin-left: 8px;
+    margin-right: 8px;
     color: var(--color-system-text-400);
 }
 

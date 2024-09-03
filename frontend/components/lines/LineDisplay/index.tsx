@@ -1,6 +1,6 @@
 /* * */
 
-import LineBadge from '@/components/lines/LineBadge';
+import LineBadge from '@/components/common/LineBadge';
 import LineName from '@/components/lines/LineName';
 import { Line } from '@/types/lines.types';
 import { Skeleton } from '@mantine/core';

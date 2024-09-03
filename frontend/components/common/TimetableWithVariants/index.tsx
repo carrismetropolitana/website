@@ -1,4 +1,3 @@
-import { Link } from '@/translations/navigation';
 import composeTimetable from '@/utils/composeTimetable';
 import { Pattern } from '@/utils/types';
 import { IconArrowUpRight } from '@tabler/icons-react';

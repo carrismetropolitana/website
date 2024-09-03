@@ -2,15 +2,14 @@
 
 /* * */
 
-import type { Stop } from '@/types/stops.types';
+import type { Stop, StopRealtime } from '@/types/stops.types';
 
 import { useOperationalDayContext } from '@/contexts/OperationalDay.context';
 import { useProfileContext } from '@/contexts/Profile.context';
-import { useRouter } from '@/translations/navigation';
 import { Alert, SimplifiedAlert } from '@/types/alerts.types';
-import { Pattern, PatternGroup, Route } from '@/types/lines.types';
+import { Line, Pattern, PatternGroup, Route } from '@/types/lines.types';
 import convertToSimplifiedAlert from '@/utils/convertToSimplifiedAlert';
-import { createContext, useContext, useEffect, useState } from 'react';
+import { createContext, useContext, useEffect, useMemo, useState } from 'react';
 import useSWR from 'swr';
 
 /* * */
@@ -25,8 +24,10 @@ interface StopsSingleContextState {
 		active_pattern_group: PatternGroup | null
 		all_patterns: Pattern[] | null
 		all_routes: Route[] | null
+		realtime: StopRealtime[] | null
 		stop: Stop | null
 		timetable: string
+		valid_lines: Line[] | null
 		valid_pattern_groups: PatternGroup[] | null
 	}
 	filters: {
@@ -52,7 +53,7 @@ export function useStopsSingleContext() {
 
 /* * */
 
-export const StopsSingleContextProvider = ({ children, stopId }) => {
+export const StopsSingleContextProvider = ({ children, stopId }: { children: React.ReactNode, stopId: string }) => {
 	//
 
 	//
@@ -68,14 +69,20 @@ export const StopsSingleContextProvider = ({ children, stopId }) => {
 	const [dataValidPatternGroupsState, setDataValidPatternGroupsState] = useState<PatternGroup[] | null>(null);
 	const [dataActivePatternGroupState, setDataActivePatternGroupState] = useState<PatternGroup | null>(null);
 	const [dataActiveAlertsState, setDataActiveAlertsState] = useState<SimplifiedAlert[] | null>(null);
+	// const [dataActiveLineState, setDataActiveLineState] = useState<Line | null>(null);
+	const [dataValidLinesState, setDataValidLinesState] = useState<Line[] | null>(null);
+
+	const [dataRealtimeState, setDataRealtimeState] = useState<StopRealtime[] | null>(null);
 
 	const [flagIsFavoriteState, setFlagIsFavoriteState] = useState<boolean>(false);
 
 	//
 	// B. Fetch data
+	const { data: allLinesData, isLoading: allLinesLoading } = useSWR<Line[], Error>('https://api.carrismetropolitana.pt/v2/lines');
 
 	const { data: allStopData, isLoading: allStopLoading } = useSWR<Stop[], Error>('https://api.carrismetropolitana.pt/v2/stops');
 	const stopData = allStopData?.find(stop => stop.id === stopIdState);
+
 	// const { data: stopData, isLoading: stopLoading } = useSWR<Stop, Error>(`https://api.carrismetropolitana.pt/v2/stops/${stopIdState}`);
 	const { data: allAlertsData, isLoading: allAlertsLoading } = useSWR<Alert[], Error>('https://api.carrismetropolitana.pt/v2/alerts');
 
@@ -94,6 +101,35 @@ export const StopsSingleContextProvider = ({ children, stopId }) => {
 			}
 		})();
 	}, [stopData]);
+
+	// Fill stoprealtime
+	useEffect(() => {
+		// Required to prevent unordered responses from overwriting the state
+		let isCancelled = false;
+		(async () => {
+			const realtimeData = await fetch(`https://api.carrismetropolitana.pt/v2/stops/${stopId}/realtime`).then(response => response.json());
+			if (!isCancelled) {
+				setDataRealtimeState(realtimeData);
+			}
+		})();
+		return () => {
+			isCancelled = true;
+		};
+	}, [stopId]);
+
+	const linesMap = useMemo(() => {
+		if (!allLinesData) return new Map<string, Line>();
+		const mappedLines = new Map<string, Line>();
+		for (const line of allLinesData) {
+			mappedLines.set(line.line_id, line);
+		}
+		return mappedLines;
+	}, [allLinesData]);
+
+	useEffect(() => {
+		if (!stopData) return;
+		setDataValidLinesState(stopData.lines.map(routeId => linesMap.get(routeId)).filter(line => line !== undefined));
+	}, [stopData, linesMap]);
 
 	useEffect(() => {
 		(async () => {
@@ -177,8 +213,10 @@ export const StopsSingleContextProvider = ({ children, stopId }) => {
 			active_pattern_group: dataActivePatternGroupState,
 			all_patterns: dataAllPatternsState,
 			all_routes: dataRoutesState,
+			realtime: dataRealtimeState,
 			stop: stopData || null,
 			timetable: '',
+			valid_lines: dataValidLinesState,
 			valid_pattern_groups: dataValidPatternGroupsState,
 		},
 		filters: {

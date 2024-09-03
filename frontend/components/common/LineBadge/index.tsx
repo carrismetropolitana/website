@@ -25,7 +25,7 @@ const cx = classNames.bind(styles);
 
 /* * */
 
-export default function Component({ color = '#000', line, onClick, shortName = '• • •', size = 'md', textColor = '#fff', withAlertIcon = false }: Props) {
+export default function LineBadge({ color = '#000', line, onClick, shortName = '• • •', size = 'md', textColor = '#fff', withAlertIcon = false }: Props) {
 	return (
 		<div
 			className={cx({ badge: true, clickable: !!onClick, lg: size === 'lg', md: size === 'md' })}
