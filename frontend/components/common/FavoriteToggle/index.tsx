@@ -15,7 +15,7 @@ interface FavoriteToggleProps {
 
 /* * */
 
-export default function Component({ color, isActive, onToggle }: FavoriteToggleProps) {
+export default function FavoriteToggle({ color, isActive, onToggle }: FavoriteToggleProps) {
 	//
 
 	//
@@ -31,16 +31,16 @@ export default function Component({ color, isActive, onToggle }: FavoriteToggleP
 
 	if (isActive) {
 		return (
-			<div className={styles.container} onClick={onToggle} style={{ color: color }}>
-				<IconHeartFilled className={`${styles.icon} ${styles.isActive}`} size={24} />
-			</div>
+			<span className={styles.container} onClick={onToggle} style={{ color: color }}>
+				<IconHeartFilled size={24} />
+			</span>
 		);
 	}
 
 	return (
-		<div className={styles.container} onClick={onToggle}>
-			<IconHeart className={styles.icon} size={24} />
-		</div>
+		<span className={styles.container} onClick={onToggle}>
+			<IconHeart size={24} />
+		</span>
 	);
 
 	//
