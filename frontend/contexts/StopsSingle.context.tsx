@@ -6,7 +6,6 @@ import type { Stop } from '@/types/stops.types';
 
 import { useOperationalDayContext } from '@/contexts/OperationalDay.context';
 import { useProfileContext } from '@/contexts/Profile.context';
-import { useRouter } from '@/translations/navigation';
 import { Alert, SimplifiedAlert } from '@/types/alerts.types';
 import { Pattern, PatternGroup, Route } from '@/types/lines.types';
 import convertToSimplifiedAlert from '@/utils/convertToSimplifiedAlert';
@@ -18,7 +17,6 @@ import useSWR from 'swr';
 interface StopsSingleContextState {
 	actions: {
 		setActivePatternGroup: (patternGroupId: string) => void
-		setStopId: (stopId: string) => void
 	}
 	data: {
 		active_alerts: SimplifiedAlert[] | null
@@ -61,8 +59,6 @@ export const StopsSingleContextProvider = ({ children, stopId }) => {
 	const profileContext = useProfileContext();
 	const operationalDayContext = useOperationalDayContext();
 
-	const [stopIdState, setStopIdState] = useState<string>(stopId);
-
 	const [dataRoutesState, setDataRoutesState] = useState<Route[] | null>(null);
 	const [dataAllPatternsState, setDataAllPatternsState] = useState<Pattern[] | null>(null);
 	const [dataValidPatternGroupsState, setDataValidPatternGroupsState] = useState<PatternGroup[] | null>(null);
@@ -74,9 +70,7 @@ export const StopsSingleContextProvider = ({ children, stopId }) => {
 	//
 	// B. Fetch data
 
-	const { data: allStopData, isLoading: allStopLoading } = useSWR<Stop[], Error>('https://api.carrismetropolitana.pt/v2/stops');
-	const stopData = allStopData?.find(stop => stop.id === stopIdState);
-	// const { data: stopData, isLoading: stopLoading } = useSWR<Stop, Error>(`https://api.carrismetropolitana.pt/v2/stops/${stopIdState}`);
+	const { data: stopData, isLoading: stopLoading } = useSWR<Stop, Error>(`https://api.carrismetropolitana.pt/v2/stops/${stopId}`);
 	const { data: allAlertsData, isLoading: allAlertsLoading } = useSWR<Alert[], Error>('https://api.carrismetropolitana.pt/v2/alerts');
 
 	useEffect(() => {
@@ -158,19 +152,12 @@ export const StopsSingleContextProvider = ({ children, stopId }) => {
 		setDataActivePatternGroupState(null);
 	};
 
-	const setStopId = (stopId: string) => {
-		// TODO change this into proper state management
-		window.history.replaceState({}, '', `/stops/${stopId}`);
-		setStopIdState(stopId);
-	};
-
 	//
 	// E. Define context value
 
 	const contextValue: StopsSingleContextState = {
 		actions: {
 			setActivePatternGroup,
-			setStopId,
 		},
 		data: {
 			active_alerts: dataActiveAlertsState,
@@ -186,7 +173,7 @@ export const StopsSingleContextProvider = ({ children, stopId }) => {
 		},
 		flags: {
 			is_favorite: flagIsFavoriteState,
-			is_loading: stopData == undefined || dataRoutesState === null || dataAllPatternsState === null || allAlertsLoading,
+			is_loading: stopLoading || dataRoutesState === null || dataAllPatternsState === null || allAlertsLoading,
 		},
 	};
 
