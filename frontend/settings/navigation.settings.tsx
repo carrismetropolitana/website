@@ -2,7 +2,7 @@
 
 import type { NavigationGroup, NavigationLink } from '@/types/navigation.types';
 
-import { IconAlertTriangle, IconArrowLoopRight, IconBellSchool, IconBuildingStore, IconBusStop, IconCreditCardPay, IconDirections, IconHelpHexagon, IconMessage, IconPhoneCheck, IconTicket, IconUmbrella, IconWorld } from '@tabler/icons-react';
+import { IconAlertTriangle, IconArrowLoopRight, IconBellSchool, IconBuildingStore, IconBusStop, IconCreditCardPay, IconDirections, IconHelpHexagon, IconMessage, IconPhoneCheck, IconSparkles, IconStar, IconTicket, IconUmbrella, IconUser, IconWorld } from '@tabler/icons-react';
 
 /* * */
 
@@ -39,6 +39,14 @@ export const headerNavigationGroup: NavigationGroup[] = [
 		],
 	},
 
+];
+
+/* * */
+
+export const headerAccountNavigationLinks: NavigationLink[] = [
+	{ _id: 'configs', href: '/profile/configs', icon: <IconSparkles size={20} /> },
+	{ _id: 'favorites', href: '/profile/favorites', icon: <IconStar size={20} /> },
+	{ _id: 'profile', href: '/profile', icon: <IconUser size={20} /> },
 ];
 
 /* * */
