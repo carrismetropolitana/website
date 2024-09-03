@@ -6,20 +6,12 @@ import AccountUserAvatar from '@/components/account/UserAvatar';
 import HeaderLocaleSwitcher from '@/components/header/LocaleSwitcher';
 import NavigationMainMenuItem from '@/components/header/NavigationMainMenuItem';
 import SyncAccount from '@/components/profile/sync';
+import { headerAccountNavigationLinks } from '@/settings/navigation.settings';
 import { CloseButton, Drawer } from '@mantine/core';
 import { useDisclosure } from '@mantine/hooks';
-import { IconSparkles, IconStar, IconUser } from '@tabler/icons-react';
 import { useTranslations } from 'next-intl';
 
 import styles from './styles.module.css';
-
-/* * */
-
-const NAV_ITEMS = [
-	{ _id: 'configs', href: '/profile/configs', icon: <IconSparkles size={20} /> },
-	{ _id: 'favorites', href: '/profile/favorites', icon: <IconStar size={20} /> },
-	{ _id: 'profile', href: '/profile', icon: <IconUser size={20} /> },
-];
 
 /* * */
 
@@ -51,8 +43,8 @@ export default function Component() {
 					<CloseButton onClick={closeDrawer} />
 				</div>
 				<div className={styles.navList}>
-					{NAV_ITEMS.map(item => (
-						<NavigationMainMenuItem key={item._id} href={item.href} icon={item.icon} label={t(item._id)} onClick={closeDrawer} />
+					{headerAccountNavigationLinks.map(item => (
+						<NavigationMainMenuItem key={item._id} label={t(item._id)} navigationLink={item} onClick={closeDrawer} />
 					))}
 				</div>
 				<div className={styles.componentWrapper}>
