@@ -8,8 +8,8 @@ import { useMemo } from 'react';
 import styles from './styles.module.css';
 
 export default function TimetableWithVariants(
-	{ date, direction, highlightNow = true, mainPatternId, patternGroups, stopId, stopSequence }:
-	{ date: Date, direction: number, highlightNow?: boolean, mainPatternId: string, patternGroups: Pattern[], stopId: string, stopSequence: number }) {
+	{ date, direction, highlightNow = true, mainPatternId, onClickException, patternGroups, stopId, stopSequence }:
+	{ date: Date, direction: number, highlightNow?: boolean, mainPatternId: string, onClickException: (patternId: string) => void, patternGroups: Pattern[], stopId: string, stopSequence: number }) {
 	// A. Setup variables
 	const t = useTranslations('schedule');
 	const now = new Date();
@@ -119,9 +119,9 @@ export default function TimetableWithVariants(
 						<span className={styles.exceptionTag}>
 							{exception.exception_id})
 						</span> {t('path')}&nbsp;{/* required for ESLint to play nice */}
-						<Link className={styles.exceptionLink} href="#"><span className={styles.underline}>{exception.pattern_headsign}</span>
+						<span className={styles.exceptionLink} onClick={() => onClickException(exception.pattern_id)}><span className={styles.underline}>{exception.pattern_headsign}</span>
 							<IconArrowUpRight size={12} />
-						</Link>
+						</span>
 					</div>
 				)
 			))}

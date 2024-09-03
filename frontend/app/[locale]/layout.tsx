@@ -2,8 +2,11 @@
 
 import LayoutViewportWrapper from '@/components/layout/ViewportWrapper';
 import { availableFormats, availableLocales } from '@/translations/config';
+import { Notifications } from '@mantine/notifications';
 import { notFound } from 'next/navigation';
 import { NextIntlClientProvider, useMessages } from 'next-intl';
+
+import Providers from './providers';
 
 /* * */
 
@@ -24,9 +27,12 @@ export default function Layout({ children, params: { locale } }) {
 			now={new Date()}
 			timeZone="Europe/Lisbon"
 		>
-			<LayoutViewportWrapper>
-				{children}
-			</LayoutViewportWrapper>
+			<Providers>
+				<Notifications styles={{ root: { marginTop: '60px' } }} />
+				<LayoutViewportWrapper>
+					{children}
+				</LayoutViewportWrapper>
+			</Providers>
 		</NextIntlClientProvider>
 	);
 

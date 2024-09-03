@@ -13,7 +13,15 @@ import styles from './styles.module.css';
 
 /* * */
 
-export default function Component({ component = 'div', onClick = () => null, withName = false }) {
+interface Props {
+	component?: 'button' | 'div'
+	onClick?: () => void
+	withName?: boolean
+}
+
+/* * */
+
+export default function Component({ component = 'div', onClick, withName = false }: Props) {
 	//
 	// A. Setup variables
 	const t = useTranslations('profile');

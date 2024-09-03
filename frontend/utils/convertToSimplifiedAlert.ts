@@ -33,7 +33,7 @@ export default (alertData: Alert, currentLocale = 'pt'): SimplifiedAlert => {
 	const endDateObject = DateTime.fromSeconds(endDate).toJSDate();
 	//
 	return {
-		_id: alertData._id,
+		alert_id: alertData._id,
 		cause: alertData.cause,
 		description: localizedDescriptionText,
 		effect: alertData.effect,

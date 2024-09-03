@@ -16,6 +16,7 @@ export interface Line {
 	route_ids: string[]
 	short_name: string
 	text_color: string
+	tts_name: string
 }
 
 /* * */

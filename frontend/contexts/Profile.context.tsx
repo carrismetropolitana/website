@@ -1,13 +1,11 @@
 'use client';
 
 /* * */
-import {
-	toggleFavoriteLine as favoriteLineAction,
-	toggleFavoriteStop as favoriteStopAction,
-	getProfile,
-	updateProfile as updateProfileAction,
-} from '@/actions/account.actions';
-import { Profile } from '@/types/profile.type';
+
+import type { ServerActionResult } from '@/types/actions.types';
+import type { Profile } from '@/types/profile.type';
+
+import { toggleFavoriteLine as favoriteLineAction, toggleFavoriteStop as favoriteStopAction, getProfile, updateProfile as updateProfileAction } from '@/actions/account.actions';
 import { createContext, useContext, useEffect, useState } from 'react';
 import { v4 as uuid } from 'uuid';
 
@@ -66,6 +64,7 @@ export const ProfileContextProvider = ({ children }) => {
 	const [deviceId, setDeviceId] = useState<ProfileContextState['data']['device_id']>(null);
 	const [dataProfile, setDataProfile] = useState<ProfileContextState['data']['profile']>(null);
 	const [filterByFavorite, setFilterByFavorite] = useState <ProfileContextState['filters']['favorites']>('lines');
+	const [flagIsLoading, setFlagIsLoading] = useState <ProfileContextState['flags']['is_loading']>(true);
 
 	//
 	// B. Transform data
@@ -85,22 +84,39 @@ export const ProfileContextProvider = ({ children }) => {
 	}, []);
 
 	useEffect(() => {
+		setFlagIsLoading(true);
 		// Fetch profile data from API on mount
-		// If the profile data is not found, set the data to null
 		const deviceIdLocal = localStorage.getItem(LOCAL_STORAGE_KEYS.device_id);
-		getProfile(deviceIdLocal || '').then(profile => setDataProfile(profile)).catch(() => setDataProfile(null));
+		// Get profile data from Server Action
+		getProfile(deviceIdLocal || '')
+			.then((profile: ServerActionResult<Profile>) => {
+				setDataProfile(profile.success ? profile.value : null);
+			})
+			.catch(() => {
+				// If no profile data was found, set the data to null
+				setDataProfile(null);
+			})
+			.finally(() => {
+				setFlagIsLoading(false);
+			});
 	}, [deviceId]);
 
 	//
 	// C. Handle actions
 	const toggleFavoriteLine = async (lineId: string) => {
-		const profile = await favoriteLineAction(lineId, deviceId || '') as Profile;
-		setDataProfile(profile);
+		const profile: ServerActionResult<Profile> = await favoriteLineAction(lineId, deviceId || '');
+
+		if (!profile.success) throw new Error(profile.error);
+
+		setDataProfile(profile.value);
 	};
 
 	const toggleFavoriteStop = async (stopId: string) => {
-		const profile = await favoriteStopAction(stopId, deviceId || '') as Profile;
-		setDataProfile(profile);
+		const profile: ServerActionResult<Profile> = await favoriteStopAction(stopId, deviceId || '');
+
+		if (!profile.success) throw new Error(profile.error);
+
+		setDataProfile(profile.value);
 	};
 
 	const updateFilterByFavorite = (value: ProfileContextState['filters']['favorites']) => setFilterByFavorite(value);
@@ -133,7 +149,7 @@ export const ProfileContextProvider = ({ children }) => {
 			favorites: filterByFavorite,
 		},
 		flags: {
-			is_loading: false,
+			is_loading: flagIsLoading,
 		},
 	};
 

@@ -12,8 +12,8 @@ import styles from './styles.module.css';
 /* * */
 
 const MenuItemProxy = forwardRef(
-	({ href, icon, label, target, ...others }, ref) => (
-		<HeaderNavigationMainMenuItem ref={ref} href={href} icon={icon} label={label} target={target} {...others} />
+	({ label, navigationLink, ...others }, ref) => (
+		<HeaderNavigationMainMenuItem ref={ref} label={label} navigationLink={navigationLink} {...others} />
 	),
 );
 
@@ -48,7 +48,7 @@ export default function Component({ item }) {
 			</Menu.Target>
 			<Menu.Dropdown>
 				{item.links.map(link => (
-					<MenuItemProxy key={link._id} href={link.href} icon={link.icon} label={t(link._id)} target={link.target} />
+					<MenuItemProxy key={link._id} label={t(link._id)} navigationLink={link} />
 				))}
 			</Menu.Dropdown>
 		</Menu>

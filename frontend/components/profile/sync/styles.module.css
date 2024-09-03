@@ -7,5 +7,8 @@
 }
 
 .qrCode {
-    padding: var(--size-spacing-20);
+    padding: var(--size-spacing-10);
+    margin: var(--size-spacing-10);
+    border-radius: 5px;
+    background-color: var(--color-primary-white);
 }

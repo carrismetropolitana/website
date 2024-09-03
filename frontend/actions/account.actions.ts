@@ -6,7 +6,9 @@
 
 'use server';
 
+import { ServerActionResult } from '@/types/actions.types';
 import { Profile } from '@/types/profile.type';
+// import { Profile } from '@/types/profile.type';
 import { generateJWT } from '@/utils/jwt';
 
 /* * */
@@ -17,24 +19,30 @@ const namespace = `${process.env.ACCOUNTS_API_URL}/v1/accounts`;
  * Gets the profile of a user
  *
  * @param device_id - The Device ID of the user
- * @returns Promise<Profile> - The profile of the user
+ * @returns Promise<ServerActionResult<Profile>> - The profile of the user
 */
-export async function getProfile(device_id: string): Promise<Profile> {
+export async function getProfile(device_id: string): Promise<ServerActionResult<Profile>> {
 	const url = `${namespace}/${device_id}`;
 	const auth = await generateJWT({ device_id });
 
-	const res = await fetch(url, {
-		headers: {
-			'Authorization': `Bearer ${auth}`,
-			'Content-Type': 'application/json',
-		},
-	});
+	try {
+		const res = await fetch(url, {
+			headers: {
+				'Authorization': `Bearer ${auth}`,
+				'Content-Type': 'application/json',
+			},
+		});
 
-	if (!res.ok) {
-		throw new Error('An error occurred while fetching the profile.');
+		if (!res.ok) {
+			return { error: res.statusText, success: false };
+		}
+
+		const profile = await res.json() as Profile;
+		return { success: true, value: profile };
 	}
-
-	return await res.json() as Profile;
+	catch (error) {
+		return { error: error.message, success: false };
+	}
 }
 
 /**
@@ -42,27 +50,33 @@ export async function getProfile(device_id: string): Promise<Profile> {
  *
  * @param profile - The updated profile
  * @param device_id - The Device ID of the user
- * @returns Promise<Profile> - The updated profile
+ * @returns Promise<ServerActionResult<Profile>> - The updated profile
 */
-export async function updateProfile(profile: Partial<Profile>, device_id: string): Promise<Profile> {
+export async function updateProfile(profile: Partial<Profile>, device_id: string): Promise<ServerActionResult<Profile>> {
 	const url = `${namespace}/${device_id}`;
 	const body = JSON.stringify(profile);
 	const auth = await generateJWT({ device_id });
 
-	const res = await fetch(url, {
-		body,
-		headers: {
-			'Authorization': `Bearer ${auth}`,
-			'Content-Type': 'application/json',
-		},
-		method: 'PUT',
-	});
+	try {
+		const res = await fetch(url, {
+			body,
+			headers: {
+				'Authorization': `Bearer ${auth}`,
+				'Content-Type': 'application/json',
+			},
+			method: 'PUT',
+		});
 
-	if (!res.ok) {
-		throw new Error('An error occurred while updating the profile.');
+		if (!res.ok) {
+			return { error: res.statusText, success: false };
+		}
+
+		const updatedProfile = await res.json() as Profile;
+		return { success: true, value: updatedProfile };
 	}
-
-	return await res.json() as Profile;
+	catch (error) {
+		return { error: error.message, success: false };
+	}
 }
 
 /**
@@ -72,7 +86,7 @@ export async function updateProfile(profile: Partial<Profile>, device_id: string
  * @param device_id  - The Device ID of the user
  * @returns Promise<boolean> - Whether the operation was successful or not
  */
-export async function toggleFavoriteLine(line_id: string, device_id: string): Promise<Profile> {
+export async function toggleFavoriteLine(line_id: string, device_id: string): Promise<ServerActionResult<Profile>> {
 	const url = `${namespace}/${device_id}/favorite-lines/${line_id}`;
 	const options = {
 		headers: {
@@ -81,13 +95,19 @@ export async function toggleFavoriteLine(line_id: string, device_id: string): Pr
 		method: 'POST',
 	};
 
-	const res = await fetch(url, options);
+	try {
+		const res = await fetch(url, options);
 
-	if (!res.ok) {
-		throw new Error('An error occurred while toggling the favorite status of the line.');
+		if (!res.ok) {
+			return { error: res.statusText, success: false };
+		}
+
+		const profile = await res.json() as Profile;
+		return { success: true, value: profile };
 	}
-
-	return await res.json() as Profile;
+	catch (error) {
+		return { error: error.message, success: false };
+	}
 }
 
 /**
@@ -97,7 +117,7 @@ export async function toggleFavoriteLine(line_id: string, device_id: string): Pr
  * @param device_id  - The Device ID of the user
  * @returns Promise<boolean> - Whether the operation was successful or not
  */
-export async function toggleFavoriteStop(stop_id: string, device_id: string): Promise<Profile> {
+export async function toggleFavoriteStop(stop_id: string, device_id: string): Promise<ServerActionResult<Profile>> {
 	const url = `${namespace}/${device_id}/favorite-stops/${stop_id}`;
 	const options = {
 		headers: {
@@ -106,11 +126,49 @@ export async function toggleFavoriteStop(stop_id: string, device_id: string): Pr
 		method: 'POST',
 	};
 
-	const res = await fetch(url, options);
+	try {
+		const res = await fetch(url, options);
 
-	if (!res.ok) {
-		throw new Error('An error occurred while toggling the favorite status of the stop.');
+		if (!res.ok) {
+			return { error: res.statusText, success: false };
+		}
+
+		const profile = await res.json() as Profile;
+		return { success: true, value: profile };
 	}
+	catch (error) {
+		return { error: error.message, success: false };
+	}
+}
 
-	return await res.json() as Profile;
+/**
+ * Merge devices
+ * Merges the device data of the user with the device data of the server
+ *
+ * @param device_id - The Device ID of the user
+ * @returns Promise<ServerActionResult<Profile>> - The merged profile
+ */
+export async function mergeDevices(device_id: null | string, device_id_2: null | string): Promise<ServerActionResult<Profile>> {
+	const url = `${namespace}/add-device`;
+	const auth = await generateJWT({ device_id, device_id_2 });
+
+	try {
+		console.log(auth);
+		const res = await fetch(url, {
+			headers: {
+				Authorization: `Bearer ${auth}`,
+			},
+			method: 'POST',
+		});
+
+		if (!res.ok) {
+			return { error: res.statusText, success: false };
+		}
+
+		const profile = await res.json() as Profile;
+		return { success: true, value: profile };
+	}
+	catch (error) {
+		return { error: error.message, success: false };
+	}
 }

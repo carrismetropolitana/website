@@ -30,7 +30,7 @@ export default function Component({ alerts }: Props) {
 	// B. Render components
 
 	const carouselSlides = alerts?.map(slideItem => ({
-		_id: slideItem._id,
+		_id: slideItem.alert_id,
 		component: (
 			<AlertsCarouselSlide alert={slideItem} />
 		),

@@ -4,19 +4,39 @@ import ukkonen from 'ukkonen'; // Faster levenshtein distance
 
 /* * */
 
-type SearchType<T> = {
+type SearchableDocument<T> = {
 	[K in keyof T]: T[K] extends string ? string : T[K];
 } & {
 	[key: string]: unknown
 	boost?: boolean
 };
 
-type KeyWithStringValue<T> = {
+type KeyWithStringOrStringArrayValue<T> = {
 	[K in keyof T]: T[K] extends string | string[] ? K : never;
 }[keyof T];
 
+interface Options {
+	/**
+	 * The multiplier to apply to the score of boosted documents.
+	 */
+	boostMultiplier?: number
+	/**
+	 * The minimum length of a query word to be considered in the search. Ignored when query is a number.
+	 */
+	minimumQueryLength?: number
+};
+
+interface FinalOptions {
+	boostMultiplier: number
+	minimumQueryLength: number
+};
 /* * */
 
+/**
+ * Normalize a string by converting to lowercase, removing accents, and non-alphanumeric characters.
+ * @param {string} str - The string to normalize.
+ * @returns {string} - The normalized string.
+ */
 function normalizeString(str: string): string {
 	const res = str.toLowerCase()
 		.normalize('NFD')
@@ -25,11 +45,27 @@ function normalizeString(str: string): string {
 	return res;
 };
 
-/* * */
+/**
+ *
+ * @param docs Array of documents to search through, documents with a true 'boost' key will have their score multiplied by the boostMultiplier.
+ * This is useful for prioritizing certain documents.
+ * @param scoring Object with the keys of the documents to search through and the weight of the search on each key.
+ * @param options Options for the search.
+ * @returns
+ */
+export function createDocCollection<T extends SearchableDocument<T>>(docs: T[], scoring: { [K in KeyWithStringOrStringArrayValue<T>]?: number }, options: Options = {}) {
+	const defaultOptions = {
+		boostMultiplier: 1.5,
+		minimumQueryLength: 1,
+	};
 
-export function createDocCollection<T extends SearchType<T>>(docs: T[], scoring: { [K in KeyWithStringValue<T>]?: number }) {
-	const cachedDocs = docs.map((doc: T) => {
-		const normalizedDoc = {} as { [K in KeyWithStringValue<T>]: string | string[] };
+	const finalOptions: FinalOptions = {
+		...defaultOptions,
+		...options,
+	};
+
+	const normalizedDocs = docs.map((doc: T) => {
+		const normalizedDoc = {} as { [K in KeyWithStringOrStringArrayValue<T>]: string | string[] };
 		for (const key in scoring) {
 			const v = doc[key];
 			if (typeof v === 'string') {
@@ -42,158 +78,140 @@ export function createDocCollection<T extends SearchType<T>>(docs: T[], scoring:
 		return { doc, normalized: normalizedDoc };
 	});
 
-	const levCache = new Map<string, number>();
+	const levenshteinCache = new Map<string, number>();
 	return {
-		search: (query: string) => searchDocuments(query, cachedDocs, scoring, levCache),
+		search: (query: string) => searchDocuments(query, normalizedDocs, scoring, levenshteinCache, finalOptions),
 	};
 }
+
+/**
+	   * Calculate the Levenshtein distance between two strings, using a cache to speed up the process.
+	   * @param a - The first string.
+	   * @param b - The second string.
+		 * @param maxDistance - The maximum distance allowed. Stops early which significantly speeds up the process.
+		 * @param levenshteinCache - The cache to store the results.
+	   * @returns - The Levenshtein distance.
+	   */
+const levenshteinDistance = (a: string, b: string, maxDistance: number, levenshteinCache: Map<string, number>): number => {
+	const cachekey = a + '\n' + b;
+	const cacheValue = levenshteinCache.get(cachekey);
+	if (cacheValue !== undefined) {
+		return cacheValue;
+	}
+	const res = ukkonen(a, b, maxDistance);
+	levenshteinCache.set(cachekey, res);
+	return res;
+};
+
+/**
+ * Calculate the score for a string, based on the number of consecutive query words that prefix match.
+ * "The quick brown fox" has a score of 1 for "quick brown" and 0 for "quick fox".
+ * @param {string} text - The text to score.
+ * @param {Array<string>} queryWords - The query words to match.
+ * @returns {number} - The context score.
+ */
+const sequentialWordsMatchScore = (text: string, queryWords: string[]): number => {
+	const textWords = text.split(' ');
+	let contextScore = 0;
+
+	for (let i = 0; i <= textWords.length - queryWords.length; i++) {
+		if (queryWords.every((qw: string, j: number) => isPrefixMatch(textWords[i + j], qw))) {
+			contextScore++;
+		}
+	}
+
+	return contextScore;
+};
+
+/**
+ * Check if a word starts with a given prefix.
+ * @param {string} word - The word to check.
+ * @param {string} prefix - The prefix to match.
+ * @returns {boolean} - True if the word starts with the prefix, false otherwise.
+ */
+const isPrefixMatch = (word: string, prefix: string): boolean => {
+	const res = word.startsWith(prefix);
+	return res;
+};
 
 /**
  * Search documents based on a query using prefix matching and fuzzy search.
  * @param query - The search query.
  * @param docs - Array of documents to search through. Each document should have 'primary' and 'secondary' fields.
- * @returns  - Filtered and sorted documents based on relevance to the query.
+ * @returns Filtered and sorted documents based on relevance to the query.
  */
-function searchDocuments<T extends SearchType<T>>(query: string, docs: {
-	doc: T
-	normalized: {
-		[K in KeyWithStringValue<T>]: string | string[]
-	}
-}[],
-scoring: { [K in KeyWithStringValue<T>]?: number },
-levCache: Map<string, number>): T[] {
-	/**
-     * Normalize a string by converting to lowercase, removing accents, and non-alphanumeric characters.
-     * @param {string} str - The string to normalize.
-     * @returns {string} - The normalized string.
-     */
-
-	/**
-     * Check if a word starts with a given prefix.
-     * @param {string} word - The word to check.
-     * @param {string} prefix - The prefix to match.
-     * @returns {boolean} - True if the word starts with the prefix, false otherwise.
-     */
-	// eslint-disable-next-line @typescript-eslint/no-unused-vars
-	let cumPrefixTime = 0;
-	const isPrefixMatch = (word: string, prefix: string): boolean => {
-		const start = Date.now();
-		const res = word.startsWith(prefix);
-		cumPrefixTime += Date.now() - start;
-		return res;
-	};
-
-	let cumLevTime = 0;
-	/**
-	   * Calculate the Levenshtein distance between two strings.
-	   * @param a - The first string.
-	   * @param b - The second string.
-	   * @returns - The Levenshtein distance.
-	   */
-	const levenshteinDistance = (a: string, b: string, maxDistance: number): number => {
-		const start = Date.now();
-		const cachekey = a + '\n' + b;
-		const cacheValue = levCache.get(cachekey);
-		if (cacheValue !== undefined) {
-			return cacheValue;
+function searchDocuments<T extends SearchableDocument<T>>(
+	query: string, docs: {
+		doc: T
+		normalized: {
+			[K in KeyWithStringOrStringArrayValue<T>]: string | string[]
 		}
-		const res = ukkonen(a, b, maxDistance);
-		levCache.set(cachekey, res);
-		cumLevTime += Date.now() - start;
-		return res;
-		// const matrix = Array.from({ length: b.length + 1 }, (_, i) => [i]);
-		// for (let j = 0; j <= a.length; j++) matrix[0][j] = j;
-
-		// for (let i = 1; i <= b.length; i++) {
-		// 	for (let j = 1; j <= a.length; j++) {
-		// 		if (b.charAt(i - 1) === a.charAt(j - 1)) {
-		// 			matrix[i][j] = matrix[i - 1][j - 1];
-		// 		}
-		// 		else {
-		// 			matrix[i][j] = Math.min(
-		// 				matrix[i - 1][j - 1] + 1, // substitution
-		// 				matrix[i][j - 1] + 1, // insertion
-		// 				matrix[i - 1][j] + 1, // deletion
-		// 			);
-		// 		}
-		// 	}
-		// }
-
-		// cumLevTime += Date.now() - start;
-		// return matrix[b.length][a.length];
-	};
-
-	/**
-     * Calculate the context score for a text based on the query words.
-     * @param {string} text - The text to score.
-     * @param {Array<string>} queryWords - The query words to match.
-     * @returns {number} - The context score.
-     */
-	const getContextScore = (text: string, queryWords: string[]): number => {
-		const textWords = normalizeString(text).split(' ');
-		let contextScore = 0;
-
-		for (let i = 0; i <= textWords.length - queryWords.length; i++) {
-			if (queryWords.every((qw: string, j: number) => isPrefixMatch(textWords[i + j], qw))) {
-				contextScore++;
-			}
-		}
-
-		return contextScore;
-	};
-
+	}[],
+	scoreWeights: { [K in KeyWithStringOrStringArrayValue<T>]?: number },
+	levenshteinCache: Map<string, number>,
+	options: FinalOptions,
+): T[] {
 	/**
      * Calculate the relevance score for a document based on the query words.
      * @param doc - The document to score.
      * @param queryWords - The query words to match.
      * @returns - The relevance score.
      */
-	function calculateScore<T>(doc: T, boost: boolean | undefined, queryWords: string[], scoring: { [k in KeyWithStringValue<T>]?: number }): number {
-		let score = 0;
+	const calculateScore = <T>(doc: T, boost: boolean | undefined, queryWords: string[], scoring: { [k in KeyWithStringOrStringArrayValue<T>]?: number }): number => {
+		let totalScore = 0;
 
 		// The algorithm implements a prefix search per word,
 		// followed by a fuzzy search if the prefix search is not successful
 
-		function matchWord(wordList: string[], queryWord: string) {
-			let matchScore = 0;
-			const maxLevDistance = Math.max(2, Math.ceil(0.3 * queryWord.length));
+		const matchWord = (documentSearchedWords: string[], queryWord: string) => {
 			// fuzzy search tolerance increases very slightly with query word length
+			const maxLevDistance = Math.max(options.minimumQueryLength, Math.ceil(0.3 * queryWord.length));
 
-			wordList.forEach((word: string) => {
+			const documentWordScores = documentSearchedWords.map((word: string) => {
+				// If the word is a prefix match, match, else fuzzy search and give lower score
 				if (isPrefixMatch(word, queryWord)) {
-					matchScore += 1;
+					return 1;
 				}
-				else if (queryWord.length > 2 && word.length >= 2 && levenshteinDistance(word, queryWord, maxLevDistance) < maxLevDistance) {
-					matchScore += 0.5;
+				// Check if the query is of enough size to be searched
+				else if (queryWord.length > options.minimumQueryLength && word.length > options.minimumQueryLength) {
+					// If the query is a number, we don't want to do a fuzzy search
+					if (Number.isNaN(Number(queryWord)) && levenshteinDistance(word, queryWord, maxLevDistance, levenshteinCache) < maxLevDistance) {
+						return 0.5;
+					}
 				}
+				return 0;
 			});
 
-			return matchScore;
+			return Math.max(...documentWordScores);
 		};
-		for (const untypedKey in scoring) {
-			const key = untypedKey as KeyWithStringValue<T>;
-			const value = doc[key];
-			if (Array.isArray(value)) {
-				const words = value;
-				const multiplier = scoring[key] ?? 1;
 
-				score += Math.max(...queryWords.map((queryWord: string) => {
-					let localScore = 0;
-					localScore += matchWord(words, queryWord);
-					localScore += getContextScore(value.join(' '), queryWords);
-					return localScore;
-				})) * multiplier;
+		// Calculate the score for each field in the document
+		for (const untypedKey in scoring) {
+			// Typescript magic for assuring the key is actually one of our keys
+			const key = untypedKey as KeyWithStringOrStringArrayValue<T>;
+			const documentValue = doc[key];
+			const multiplier = scoring[key] ?? 1;
+
+			// If the value is an array, we treat it as a list of words
+			if (Array.isArray(documentValue)) {
+				const documentStrings = documentValue;
+				if (queryWords.length > 0) {
+				// Match each query word against a locality.
+				// We do not match against each word in the locality as this would be very slow. TODO improve
+					queryWords.forEach((queryWord: string) => {
+						totalScore += matchWord(documentStrings, queryWord) * multiplier;
+					});
+				}
 			}
-			else if (typeof value === 'string') {
-				const words = value.split(' ');
-				const multiplier = scoring[key] ?? 1;
+			else if (typeof documentValue === 'string') {
+				const documentWords = documentValue.split(' ');
 
 				queryWords.forEach((queryWord: string) => {
-					score += matchWord(words, queryWord) * multiplier;
+					totalScore += matchWord(documentWords, queryWord) * multiplier;
 				});
 
 				if (queryWords.length > 1) {
-					score += getContextScore(value, queryWords) * multiplier;
+					totalScore += sequentialWordsMatchScore(documentValue, queryWords) * multiplier;
 				}
 			}
 		}
@@ -202,24 +220,31 @@ levCache: Map<string, number>): T[] {
 		// then the secondary string the same way
 
 		if (boost) {
-			score *= 1.5;
+			totalScore *= options.boostMultiplier;
 		}
 
-		return score;
+		return totalScore;
 	};
 
+	// Normalize query and split into words, filtering out words that are too short and that are not numbers
 	const queryWords = normalizeString(query)
 		.split(' ')
-		.filter((word: string) => word.length > 1 || (word.length === 1 && !Number.isNaN(word)));
+		.filter((word: string) => word.length > 0 && (word.length >= options.minimumQueryLength || !Number.isNaN(Number(word))));
 
+	// Calculate the score for each document, using the normalized string
 	const scoredDocs = docs.map(doc => ({
 		doc: doc.doc,
-		score: calculateScore(doc.normalized, doc.doc.boost, queryWords, scoring),
+		score: calculateScore(doc.normalized, doc.doc.boost, queryWords, scoreWeights),
 	}));
-	// console.log('Levenshtein time:', cumLevTime);
 
-	return scoredDocs
-		.filter(scoredDoc => scoredDoc.score > (0.5 * queryWords.length))
-		.sort((a, b) => b.score - a.score)
+	// Sort the documents by score
+	const sortedScoreDocs = scoredDocs.sort((a, b) => b.score - a.score);
+
+	// Filter out documents with a score less than half of the top score
+	const bestScore = sortedScoreDocs[0].score;
+	const filteredScoreDocs = sortedScoreDocs.filter(scoredDoc => scoredDoc.score > Math.floor(bestScore / 2) || bestScore === 0);
+
+	// Sort the documents by score and
+	return filteredScoreDocs
 		.map(scoredDoc => scoredDoc.doc);
 }

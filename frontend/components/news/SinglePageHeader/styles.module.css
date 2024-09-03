@@ -1,0 +1,40 @@
+/* * */
+/* CONTAINER */
+
+.container {
+	display: flex;
+	flex-direction: column;
+	align-items: flex-start;
+	justify-content: flex-start;
+	gap: var(--size-spacing-15);
+	padding: 5px;
+}
+
+/* * */
+/* TITLE */
+
+.title {
+	font-size: 30px;
+	font-weight: var(--font-weight-heading);
+	max-width: 700px;
+	line-height: 1.2;
+}
+
+.titleSkeleton {
+	width: 60%;
+	height: 40px;
+}
+
+/* * */
+/* PUBLISH DATE */
+
+.publishDate {
+	font-size: var(--font-size-text);
+	font-weight: var(--font-weight-medium);
+	color: var(--color-system-text-300);
+}
+
+.publishDateSkeleton {
+	width: 30%;
+	height: 20px;
+}

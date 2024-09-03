@@ -11,6 +11,7 @@
 	font-weight: var(--font-weight-extrabold);
 	letter-spacing: 1px;
 	line-height: 1;
+	position: relative;
 }
 
 .badge.md {
@@ -27,4 +28,33 @@
 	max-width: 85px;
 	min-height: 34px;
 	max-height: 34px;
+}
+
+.badge.clickable {
+	cursor: pointer;
+	transition: all 200ms ease;
+}
+
+.badge.clickable:hover {
+	transform: scale(1.05);
+	box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+
+/* * */
+/* ALERT ICON */
+
+.alertIcon {
+	background-color: var(--color-primary-white);
+	width: 20px;
+	height: 20px;
+	border-radius: 999px;
+	position: absolute;
+	right: -10px;
+	top: -10px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	border: 1px solid var(--color-status-info-border);
+	color: var(--color-status-info-text);
 }

@@ -1,0 +1,74 @@
+/* * */
+/* CONTENT */
+
+.content {
+	display: flex;
+	flex-direction: column;
+	gap: var(--size-spacing-10);
+}
+
+
+/* * */
+/* RESET / IMAGES & FIGURES */
+
+.content figure {
+	margin: 0;
+	padding: 0;
+	border: 1px solid var(--color-system-border-100);
+	overflow: hidden;
+	border-radius: 5px;
+	margin-bottom: var(--size-spacing-15);
+}
+
+.content figure img {
+	margin: 0;
+	padding: 0;
+	width: 100%;
+	height: auto;
+}
+
+/* * */
+/* RESET / HEADINGS */
+
+.content h1 {
+	font-size: 24px;
+	font-weight: var(--font-weight-bold);
+	color: var(--color-system-text-100);
+	margin-top: var(--size-spacing-20);
+}
+
+/* * */
+/* RESET / PARAGRAPHS */
+
+.content p {
+	font-size: 18px;
+	line-height: 1.5;
+	color: var(--color-system-text-100);
+	margin-top: var(--size-spacing-10);
+	margin-bottom: var(--size-spacing-10);
+}
+
+.content p strong {
+	font-weight: var(--font-weight-bold);
+}
+
+.content p em {
+	font-style: italic;
+}
+
+/* * */
+/* RESET / LINKS */
+
+.content a {
+	color: var(--color-system-text-100);
+	text-decoration: underline;
+	border-radius: 5px;
+}
+
+.content a:hover {
+	background-color: var(--color-system-background-300);
+}
+
+
+/* * */
+/* FOR MORE RESET STYLES PLEASE LOOK AT @/styles/wordpress.css FILE */

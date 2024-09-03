@@ -14,7 +14,7 @@
 			"tomorrow": "Amanhã"
 		},
 		"button": {
-			"save": "Salvar",
+			"save": "Guardar",
 			"cancel": "Cancelar",
 			"delete": "Excluir",
 			"add": "Adicionar",
@@ -31,6 +31,7 @@
 		"goto_home": "Voltar à página principal",
 		"sync": "Falha ao sincronizar os dispositivos.",
 		"token": "Falta o token de autenticação.",
+		"unauthorized": "Falha na autenticação.",
 		"redirect": "A voltar à página de principal e em {value} segundo{s}."
 	},
 	"layout": {
@@ -48,6 +49,11 @@
 			"heading": "Os nossos parceiros",
 			"subheading": "Porque os nossos dados são abertos, existem várias aplicações que oferecem experiências personalizadas para melhorar o seu dia-a-dia nos transportes.",
 			"disclaimer": "Edite esta página no Github se pretende incluir a sua aplicação. A ordem é aleatória. Apenas são permitidas entradas que disponibilizem simultaneamente horários planeados e em tempo real ou posição de veículos."
+		}
+	},
+	"news": {
+		"SinglePageHeader": {
+			"publish_date": "Publicada a {value, date, long}"
 		}
 	},
 	"faq": {
@@ -277,8 +283,9 @@
 		"schools": "Escolas & Universidades",
 		"flyers": "O Meu Livro de Horários",
 		"tarifs": "Tarifas",
-		"tickets": "Bilhetes de Bordo",
-		"navegante": "Passe navegante®",
+		"tickets": "Bilhetes Ocasionais",
+		"cards": "Cartão navegante®",
+		"purchase": "Onde comprar",
 		"stores": "Lojas e Rede de Agentes",
 		"help": "Apoio ao Cliente",
 		"faq": "Perguntas Frequentes",
@@ -320,8 +327,11 @@
 			"copyright": "© Carris Metropolitana {year} - Todos os direitos reservados"
 		}
 	},
-	"HomeQuickSearchFavoritesBar":{
-		"empty": "Ainda não tem linhas favoritas..."
+	"home": {
+		"QuickSearchFavoritesBar": {
+			"empty": "Ainda não tem linhas favoritas...",
+			"more": "{count, plural, one {+ # linha} other {+ # linhas}}"
+		}
 	},
 	"HomeQuickSearchWidget": {
 		"title": "Pesquisa Rápida",
@@ -396,9 +406,6 @@
 		}
 	},
 	"NewsCard": {
-		"publish_date": "{publishDate, date, long}"
-	},
-	"NewsPage": {
 		"publish_date": "{publishDate, date, long}"
 	},
 	"SelectLine": {

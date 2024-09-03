@@ -36,6 +36,15 @@ export default function SingleStopFullContent({ realtimeArrivals, scheduledArriv
 	const linesSingleContext = useLinesSingleContext();
 	const now = Date.now();
 
+	// B. Helper functions
+	function onClickException(patternId: string) {
+		const patternGroup = linesSingleContext.data.valid_pattern_groups?.find(patternGroup => patternGroup.pattern_id === patternId);
+		if (!patternGroup) {
+			return;
+		}
+		linesSingleContext.actions.setActivePatternGroup(patternGroup.pattern_group_id);
+	}
+
 	// D. Render components
 	return (
 		<>
@@ -81,11 +90,12 @@ export default function SingleStopFullContent({ realtimeArrivals, scheduledArriv
 					&& (
 						<TimetableWithVariants
 							date={operationalDayContext.data.selected_day_jsdate || new Date()}
+							direction={linesSingleContext.data.active_pattern_group.direction}
 							mainPatternId={linesSingleContext.data.active_pattern_group.pattern_id}
+							onClickException={onClickException}
 							patternGroups={linesSingleContext.data.valid_pattern_groups}
 							stopId={stop.id}
 							stopSequence={stopSequence}
-                direction={linesSingleContext.data.active_pattern_group.direction}
 						/>
 					)}
 			</div>

@@ -79,6 +79,7 @@
 	gap: var(--size-spacing-5);
 	margin-bottom: var(--size-spacing-5);
 	transition: all 300ms ease;
+	cursor: pointer;
 }
 
 .backButton:hover {
