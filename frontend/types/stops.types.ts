@@ -50,4 +50,8 @@ export enum Facility {
 
 export enum OperationalStatus {
 	Active = 'ACTIVE',
+	Inactive = 'INACTIVE',
+	Provisional = 'PROVISIONAL',
+	Seasonal = 'SEASONAL',
+	Voided = 'VOIDED',
 }
