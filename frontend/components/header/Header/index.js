@@ -21,9 +21,9 @@ export default function Component() {
 	useEffect(() => {
 		setInterval(() => {
 			const container = document.querySelector(`.${styles.container}`);
-			const spacer = document.querySelector(`.${styles.spacer}`);
-			if (container && spacer) {
-				spacer.style.height = `${container.clientHeight}px`;
+			const documentRoot = document.querySelector(':root');
+			if (container && documentRoot) {
+				documentRoot.style.setProperty('--size-height-header', `${container.clientHeight}px`);
 			}
 		}, 50);
 	});
