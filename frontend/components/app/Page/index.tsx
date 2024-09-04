@@ -22,7 +22,7 @@ export default function Component() {
 
 	const STORE_LINKS = [
 		{ _id: 'iphone', href: 'https://testflight.apple.com/join/pfknh1Xu', icon: <IconBrandAppleFilled />, label: t('iphone') },
-		{ _id: 'android', href: '#', icon: <IconBrandGoogleFilled />, label: t('android') },
+		{ _id: 'android', href: 'https://storage.carrismetropolitana.pt/static/app/app-release.apk', icon: <IconBrandGoogleFilled />, label: t('android') },
 	];
 
 	//
