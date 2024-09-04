@@ -1,4 +1,5 @@
-import { Pattern, Stop } from '@/utils/types';
+import { PatternGroup } from '@/types/lines.types';
+import { Stop } from '@/types/stops.types';
 import { useTranslations } from 'next-intl';
 import { useMemo } from 'react';
 
@@ -8,7 +9,7 @@ export default function Timetable(
 	{ date, pattern, stop, stopSequence }:
 	{
 		date: Date
-		pattern: Pattern
+		pattern: PatternGroup
 		stop: Stop
 		stopSequence: number
 	}) {

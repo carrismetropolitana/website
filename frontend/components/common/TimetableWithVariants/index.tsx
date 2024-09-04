@@ -1,6 +1,5 @@
-import { Link } from '@/translations/navigation';
+import { PatternGroup } from '@/types/lines.types';
 import composeTimetable from '@/utils/composeTimetable';
-import { Pattern } from '@/utils/types';
 import { IconArrowUpRight } from '@tabler/icons-react';
 import { useTranslations } from 'next-intl';
 import { useMemo } from 'react';
@@ -9,7 +8,7 @@ import styles from './styles.module.css';
 
 export default function TimetableWithVariants(
 	{ date, direction, highlightNow = true, mainPatternId, onClickException, patternGroups, stopId, stopSequence }:
-	{ date: Date, direction: number, highlightNow?: boolean, mainPatternId: string, onClickException: (patternId: string) => void, patternGroups: Pattern[], stopId: string, stopSequence: number }) {
+	{ date: Date, direction: number, highlightNow?: boolean, mainPatternId: string, onClickException: (patternId: string) => void, patternGroups: PatternGroup[], stopId: string, stopSequence: number }) {
 	// A. Setup variables
 	const t = useTranslations('schedule');
 	const now = new Date();

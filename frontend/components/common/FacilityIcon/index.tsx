@@ -1,4 +1,4 @@
-import { Facility } from '@/utils/types';
+import { Facility } from '@/types/stops.types';
 
 export default function Component({ name }: { name: Facility }) {
 	const icon = icons[name];
