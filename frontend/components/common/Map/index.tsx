@@ -73,19 +73,22 @@ export default function Component({ children, mapObject }: Props) {
 				}}
 				style={{
 					height: '100%',
-					maxHeight: mapOptionsContext.data.viewport_height || MAP_DEFAULTS.viewport_height,
-					minHeight: mapOptionsContext.data.viewport_height || MAP_DEFAULTS.viewport_height,
+					maxHeight: '100%',
+					minHeight: '100%',
+					// maxHeight: mapOptionsContext.data.viewport_height || MAP_DEFAULTS.viewport_height,
+					// minHeight: mapOptionsContext.data.viewport_height || MAP_DEFAULTS.viewport_height,
 					width: '100%',
 				}}
 			>
-				{children}
+				<div className={styles.childrenWrapper}>
+					{children}
+				</div>
 			</Map>
 			<div className={styles.attributionWrapper}>
 				<a href="https://maplibre.org/" target="_blank">MapLibre</a>
 				<a href="https://www.openmaptiles.org/" target="_blank">© OpenMapTiles</a>
 				<a href="https://www.openstreetmap.org/copyright" target="_blank">© OpenStreetMap contributors</a>
 			</div>
-			<MapResizeHandle />
 		</div>
 	);
 }
