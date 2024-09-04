@@ -66,6 +66,14 @@
 			"label": "Tópico"
 		}
 	},
+	"app": {
+		"Page":{
+			"heading": "App Carris Metropolitana (beta)",
+			"subheading":"Faça o download da app Carris Metropolitana para iOS ou Android.",
+			"iphone": "Apple iPhone",
+			"android": "Android"
+		}
+	},
 	"lines": {
 		"Single":{
 			"heading": "Pesquisar Linhas"
@@ -284,7 +292,7 @@
 		"flyers": "O Meu Livro de Horários",
 		"tarifs": "Tarifas",
 		"tickets": "Bilhetes Ocasionais",
-		"cards": "Cartão navegante®",
+		"cards": "Passe Mensal",
 		"purchase": "Onde comprar",
 		"stores": "Lojas e Rede de Agentes",
 		"help": "Apoio ao Cliente",
@@ -544,7 +552,7 @@
 		"no_data": "Sem horários disponíveis",
 		"path": "Percurso"
 	},
-	"contacts":{
+	"contacts": {
 		"heading": "Contactos",
 		"phone_line": "Linha informativa",
 		"phone_line_description": "Esta linha funciona todos os dias das 08:00 às 20:00 e é onde poderá tirar todas as suas dúvidas sobre a operação da Carris Metropolitana. Pergunte sobre linhas, percursos e horários, tarifas, ou efetue a sua reclamação.",
