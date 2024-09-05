@@ -46,21 +46,18 @@ export default function Component() {
 	// D. Render components
 
 	return (
-		<>
-			<Section childrenWrapperStyles={styles.container} withTopBorder={false} withTopPadding={false} withChildrenPadding>
-				<SegmentedControl data={currentViewOptions} onChange={linesContext.actions.updateFilterByCurrentView} value={linesContext.filters.by_current_view} fullWidth />
-				{linesContext.filters.by_current_view === 'all' && (
-					<form className={styles.container} onSubmit={handleFormSubmit}>
-						<TextInput leftSection={<IconArrowLoopRight size={20} />} onChange={handleTextInputChange} placeholder={t('by_search.placeholder')} type="search" value={linesContext.filters.by_search} />
-						<FoundItemsCounter text={t('found_items_counter.all', { count: linesContext.data.filtered.length })} />
-					</form>
-				)}
-				{linesContext.filters.by_current_view === 'favorites' && (
-					<FoundItemsCounter text={t('found_items_counter.favorites', { count: linesContext.data.favorites.length })} />
-				)}
-			</Section>
-
-		</>
+		<Section childrenWrapperStyles={styles.container} heading={t('heading')} withGap={false} withTopBorder={false} withChildrenPadding>
+			<SegmentedControl data={currentViewOptions} onChange={linesContext.actions.updateFilterByCurrentView} value={linesContext.filters.by_current_view} fullWidth />
+			{linesContext.filters.by_current_view === 'all' && (
+				<form className={styles.container} onSubmit={handleFormSubmit}>
+					<TextInput leftSection={<IconArrowLoopRight size={20} />} onChange={handleTextInputChange} placeholder={t('by_search.placeholder')} type="search" value={linesContext.filters.by_search} />
+					<FoundItemsCounter text={t('found_items_counter.all', { count: linesContext.data.filtered.length })} />
+				</form>
+			)}
+			{linesContext.filters.by_current_view === 'favorites' && (
+				<FoundItemsCounter text={t('found_items_counter.favorites', { count: linesContext.data.favorites.length })} />
+			)}
+		</Section>
 	);
 
 	//

@@ -7,9 +7,8 @@ import Section from '@/components/layout/Section';
 import LineDisplay from '@/components/lines/LineDisplay';
 import LinesListToolbar from '@/components/lines/LinesListToolbar';
 import LinesListViewAll from '@/components/lines/LinesListViewAll';
-import ListFavorites from '@/components/lines/ListFavorites';
+import LinesListViewFavorites from '@/components/lines/LinesListViewFavorites';
 import { useLinesListContext } from '@/contexts/LinesList.context';
-import { useTranslations } from 'next-intl';
 
 /* * */
 
@@ -19,7 +18,6 @@ export default function Component() {
 	//
 	// A. Setup variables
 
-	const t = useTranslations('lines.LinesList');
 	const linesContext = useLinesListContext();
 
 	//
@@ -27,7 +25,6 @@ export default function Component() {
 
 	return (
 		<>
-			<Section heading={t('heading')} withTopBorder={false} />
 			<LinesListToolbar />
 			{linesContext.flags.is_loading && (
 				<Section withTopBorder={true} withTopPadding={false}>
@@ -39,7 +36,7 @@ export default function Component() {
 				</Section>
 			)}
 			{(!linesContext.flags.is_loading && linesContext.filters.by_current_view === 'all') && <LinesListViewAll />}
-			{(!linesContext.flags.is_loading && linesContext.filters.by_current_view === 'favorites') && <ListFavorites />}
+			{(!linesContext.flags.is_loading && linesContext.filters.by_current_view === 'favorites') && <LinesListViewFavorites />}
 		</>
 	);
 

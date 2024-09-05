@@ -75,10 +75,8 @@
 		}
 	},
 	"lines": {
-		"LinesList":{
-			"heading": "Pesquisar Linhas"
-		},
 		"LinesListToolbar": {
+			"heading": "Pesquisar Linhas",
 			"by_current_view": {
 				"all": "Todas as Linhas",
 				"favorites": "Favoritas"
@@ -91,6 +89,9 @@
 				"favorites": "{count, plural, =0 {Nenhuma linha favorita encontrada.} one {Encontrada # linha favorita:} other {Encontradas # linhas favoritas:}}"
 			}
 		},
+		"LinesListViewFavorites":{
+			"no_favorites": "Ainda não tem linhas favoritas"
+		},
 		"Single":{
 			"heading": "Pesquisar Linhas"
 		},
@@ -99,9 +100,6 @@
 		},
 		"SelectActivePatternGroupExplainer":{
 			"toggle": "O que é o percurso/destino de uma linha?"
-		},
-		"FavoritesList":{
-			"no_favorites": "Ainda não tem linhas favoritas"
 		},
 		"AlertsCarousel": {
 			"heading": "Alertas de Serviço"

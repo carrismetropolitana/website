@@ -17,7 +17,7 @@ export default function Component() {
 	//
 	// A. Setup variables
 
-	const t = useTranslations('lines.FavoritesList');
+	const t = useTranslations('lines.LinesListViewFavorites');
 	const linesContext = useLinesListContext();
 
 	//
