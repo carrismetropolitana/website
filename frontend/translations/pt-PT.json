@@ -78,16 +78,7 @@
 		"LinesList":{
 			"heading": "Pesquisar Linhas"
 		},
-		"Single":{
-			"heading": "Pesquisar Linhas"
-		},
-		"SelectActivePatternGroup":{
-			"placeholder": "Selecionar percurso/destino..."
-		},
-		"SelectActivePatternGroupExplainer":{
-			"toggle": "O que é o percurso/destino de uma linha?"
-		},
-		"PageToolbar": {
+		"LinesListToolbar": {
 			"by_current_view": {
 				"all": "Todas as Linhas",
 				"favorites": "Favoritas"
@@ -99,6 +90,15 @@
 				"all": "{count, plural, =0 {Nenhuma linha encontrada.} one {Encontrada # linha:} other {Encontradas # linhas:}}",
 				"favorites": "{count, plural, =0 {Nenhuma linha favorita encontrada.} one {Encontrada # linha favorita:} other {Encontradas # linhas favoritas:}}"
 			}
+		},
+		"Single":{
+			"heading": "Pesquisar Linhas"
+		},
+		"SelectActivePatternGroup":{
+			"placeholder": "Selecionar percurso/destino..."
+		},
+		"SelectActivePatternGroupExplainer":{
+			"toggle": "O que é o percurso/destino de uma linha?"
 		},
 		"FavoritesList":{
 			"no_favorites": "Ainda não tem linhas favoritas"

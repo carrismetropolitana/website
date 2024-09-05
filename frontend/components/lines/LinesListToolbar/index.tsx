@@ -19,7 +19,7 @@ export default function Component() {
 	//
 	// A. Setup variables
 
-	const t = useTranslations('lines.PageToolbar');
+	const t = useTranslations('lines.LinesListToolbar');
 	const linesContext = useLinesListContext();
 
 	//
