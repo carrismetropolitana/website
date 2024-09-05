@@ -2,6 +2,8 @@
 
 import type { Path } from '@/types/lines.types';
 
+import PathStopHeader from '@/components/lines/PathStopHeader';
+import PathStopSpine from '@/components/lines/PathStopSpine';
 import SingleStopFullContent from '@/components/lines/SingleStopFullContent';
 import SingleLineSimpleContent from '@/components/lines/SingleStopSimpleContent';
 import { useLinesDetailContext } from '@/contexts/LinesDetail.context';
@@ -20,7 +22,7 @@ interface Props {
 
 /* * */
 
-export default function SingleStop({ arrivals, isFirstStop, isLastStop, isSelected, path }: Props) {
+export default function Component({ arrivals, isFirstStop, isLastStop, isSelected, path }: Props) {
 	//
 
 	//
@@ -53,7 +55,7 @@ export default function SingleStop({ arrivals, isFirstStop, isLastStop, isSelect
 	// C. Handle actions
 
 	const handleToggleStop = () => {
-		if (linesDetailContext.data.active_stop?.stop === stop && linesDetailContext.data.active_stop?.sequence === stopSequence) {
+		if (linesDetailContext.data.active_stop?.stop.id === stop.id && linesDetailContext.data.active_stop?.sequence === stopSequence) {
 			// linesDetailContext.actions.setActiveStop();
 		}
 		else {
@@ -66,13 +68,17 @@ export default function SingleStop({ arrivals, isFirstStop, isLastStop, isSelect
 
 	return (
 		<div className={`${styles.container} ${isFirstStop && styles.isFirstStop} ${isLastStop && styles.isLastStop} ${isSelected && styles.isSelected}`} onClick={handleToggleStop}>
-			<div className={styles.spineLine} style={{ backgroundColor: linesDetailContext.data.active_pattern_group?.color }}>
-				<div style={{ backgroundColor: linesDetailContext.data.active_pattern_group?.text_color }} />
-			</div>
-			<div className={styles.stopInfo}>
-				<div className={styles.name}>{stop.name}</div>
-				<div className={styles.location}>{stop.municipality_name}, {stop.district_name}</div>
-				{ !isSelected
+			<PathStopSpine
+				backgroundColor={linesDetailContext.data.active_pattern_group?.color}
+				foregroundColor={linesDetailContext.data.active_pattern_group?.text_color}
+				isFirstStop={isFirstStop}
+				isLastStop={isLastStop}
+				isSelected={isSelected}
+				stopId={stop.id}
+			/>
+			<div className={styles.details}>
+				<PathStopHeader stopData={stop} />
+				{!isSelected
 					? <SingleLineSimpleContent nextArrival={nextArrival} />
 					: <SingleStopFullContent realtimeArrivals={realtimeArrivals} scheduledArrivals={scheduledArrivals} stop={stop} stopSequence={stopSequence} />}
 			</div>

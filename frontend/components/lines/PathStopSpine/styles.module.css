@@ -1,0 +1,60 @@
+/* * */
+/* CONTAINER */
+
+.container {
+    display: flex;
+	align-items: flex-start;
+    justify-content: center;
+	padding: var(--size-spacing-10) 0;
+}
+
+.container.isFirstStop  {
+	padding: 0;
+	border-top-left-radius: 999px;
+	border-top-right-radius: 999px;
+}
+
+.container.isLastStop  {
+	border-bottom-left-radius: 999px;
+	border-bottom-right-radius: 999px;
+}
+
+.container.isSelected  {
+	padding: var(--size-spacing-20) 0;
+}
+
+.container.isFirstStop.isSelected  {
+	padding: 0;
+}
+
+/* * */
+/* MARKERS / DEFAULT */
+
+.marker {
+    width: 100%;
+    aspect-ratio: 1;
+	margin: 6px;
+    border-radius: 999px;
+	transition: all 200ms ease;
+}
+
+.isFirstStop .marker {
+	transform: translate(0, 2px);
+}
+
+.isSelected .marker {
+	margin: 4px;
+}
+
+/* * */
+/* MARKERS / FAVORITE */
+
+.marker.favorite {
+	margin: 3px;
+	margin-top: 0;
+	transform: translate(0, -3px);
+}
+
+.isFirstStop .marker.favorite {
+	transform: none;
+}

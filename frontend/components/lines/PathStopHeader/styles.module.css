@@ -2,47 +2,9 @@
 /* CONTAINER */
 
 .container {
-    display: grid;
-	grid-template-columns: 18px 1fr;
-	gap: var(--size-spacing-10);
-	padding: 0 var(--size-spacing-20);
-	cursor: pointer;
-}
-
-.container:hover {
-	background-color: var(--color-system-background-200);
-}
-
-.container.isFirstStop {
-	padding-top: var(--size-spacing-20)
-}
-
-.container.isLastStop {
-	padding-bottom: var(--size-spacing-20)
-}
-
-.container.isSelected,
-.container.isSelected:hover {
-	cursor: default;
-	background-color: var(--color-system-background-100);
-	box-shadow: 0 0 30px 0 rgba(0, 0, 0, 0.1);
-}
-
-/* * */
-/* DETAILS */
-
-.details {
 	display: flex;
 	flex-direction: column;
-}
-
-
-/* * */
-/* STOP DETAILS */
-
-.stopInfo {
-	padding: var(--size-spacing-10) 0;
-	/* transition: all 200ms ease; */
+	gap: var(--size-spacing-10);
 }
 
 .isFirstStop .stopInfo {
