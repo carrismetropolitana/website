@@ -2,12 +2,12 @@
 
 /* * */
 
+import PathStop from '@/components/lines/PathStop';
 import { useLinesDetailContext } from '@/contexts/LinesDetail.context';
 import { PatternRealtime } from '@/utils/types';
 import { useMemo } from 'react';
 import useSWR from 'swr';
 
-import SingleStop from '../SingleStop';
 import styles from './styles.module.css';
 
 /* * */
@@ -56,16 +56,17 @@ export default function Component() {
 	}
 
 	return (
-		<div className={styles.container}>{sortedStops.map(path => (
-			<SingleStop
-				key={path.stop.id + '-' + path.stop_sequence}
-				arrivals={nextArrivalsPerStop[path.stop.id] || []}
-				isSelected={linesDetailContext.data.active_stop?.stop === path.stop && linesDetailContext.data.active_stop?.sequence === path.stop_sequence}
-				path={path}
-			/>
-		),
-		)}
-
+		<div className={styles.container}>
+			{sortedStops.map((path, index) => (
+				<PathStop
+					key={`${path.stop.id}-${path.stop_sequence}`}
+					arrivals={nextArrivalsPerStop[path.stop.id] || []}
+					isFirstStop={index === 0}
+					isLastStop={index === sortedStops.length - 1}
+					isSelected={linesDetailContext.data.active_stop?.stop === path.stop && linesDetailContext.data.active_stop?.sequence === path.stop_sequence}
+					path={path}
+				/>
+			))}
 		</div>
 	);
 

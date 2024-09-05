@@ -2,9 +2,10 @@
 
 /* * */
 
+import type { Line } from '@/types/lines.types.js';
+
 import LineDisplay from '@/components/lines/LineDisplay';
 import { createDocCollection } from '@/hooks/useOtherSearch';
-import { Line } from '@/types/lines.types.js';
 import { ActionIcon, Combobox, Group, TextInput, useCombobox } from '@mantine/core';
 import { useDebouncedValue } from '@mantine/hooks';
 import { IconArrowLoopRight, IconSelector, IconX } from '@tabler/icons-react';

@@ -1,18 +1,38 @@
-import { useLinesDetailContext } from '@/contexts/LinesDetail.context';
-import { Path } from '@/types/lines.types';
+/* * */
 
-import SingleStopFullContent from '../SingleStopFullContent';
-import SingleLineSimpleContent from '../SingleStopSimpleContent';
+import type { Path } from '@/types/lines.types';
+
+import SingleStopFullContent from '@/components/lines/SingleStopFullContent';
+import SingleLineSimpleContent from '@/components/lines/SingleStopSimpleContent';
+import { useLinesDetailContext } from '@/contexts/LinesDetail.context';
+
 import styles from './styles.module.css';
 
-export default function SingleStop({ arrivals, isSelected, path }: { arrivals: { type: 'realtime' | 'scheduled', unixTs: number }[], isSelected: boolean, path: Path }) {
+/* * */
+
+interface Props {
+	arrivals: { type: 'realtime' | 'scheduled', unixTs: number }[]
+	isFirstStop?: boolean
+	isLastStop?: boolean
+	isSelected: boolean
+	path: Path
+}
+
+/* * */
+
+export default function SingleStop({ arrivals, isFirstStop, isLastStop, isSelected, path }: Props) {
+	//
+
+	//
 	// A. Setup variables
+
 	const linesDetailContext = useLinesDetailContext();
 	const now = Date.now();
 
-	// C. Transform data
+	//
+	// B. Transform data
+
 	const stop = path.stop;
-	const stopId = stop.id;
 	const stopSequence = path.stop_sequence;
 	const nextArrivals = arrivals?.filter(arrival => arrival.unixTs > now) || [];
 	const nextArrival = nextArrivals?.[0];
@@ -29,18 +49,23 @@ export default function SingleStop({ arrivals, isSelected, path }: { arrivals: {
 	// 	}
 	// }
 
+	//
+	// C. Handle actions
+
+	const handleToggleStop = () => {
+		if (linesDetailContext.data.active_stop?.stop === stop && linesDetailContext.data.active_stop?.sequence === stopSequence) {
+			// linesDetailContext.actions.setActiveStop();
+		}
+		else {
+			linesDetailContext.actions.setActiveStop(stopSequence, stop);
+		}
+	};
+
+	//
 	// D. Render components
 
 	return (
-		<div
-			key={stopId + stopSequence}
-			className={styles.stop}
-			data-selected={isSelected}
-			onClick={() => {
-				linesDetailContext.actions.setActiveStop(stopSequence, stop);
-			}}
-		>
-			{/* line in the left side of the stop list */}
+		<div className={`${styles.container} ${isFirstStop && styles.isFirstStop} ${isLastStop && styles.isLastStop} ${isSelected && styles.isSelected}`} onClick={handleToggleStop}>
 			<div className={styles.spineLine} style={{ backgroundColor: linesDetailContext.data.active_pattern_group?.color }}>
 				<div style={{ backgroundColor: linesDetailContext.data.active_pattern_group?.text_color }} />
 			</div>
@@ -53,4 +78,6 @@ export default function SingleStop({ arrivals, isSelected, path }: { arrivals: {
 			</div>
 		</div>
 	);
+
+	//
 }
