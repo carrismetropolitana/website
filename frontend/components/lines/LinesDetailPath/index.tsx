@@ -4,8 +4,8 @@
 
 import NoDataLabel from '@/components/layout/NoDataLabel';
 import Section from '@/components/layout/Section';
-import LineMap from '@/components/lines/LineMap';
-import StopList from '@/components/lines/StopList';
+import LinesDetailPathList from '@/components/lines/LinesDetailPathList';
+import LinesDetailPathMap from '@/components/lines/LinesDetailPathMap';
 import { useLinesDetailContext } from '@/contexts/LinesDetail.context';
 
 import styles from './styles.module.css';
@@ -33,9 +33,9 @@ export default function Component() {
 
 	return (
 		<Section childrenWrapperStyles={styles.container} withTopPadding={false}>
-			<StopList />
+			<LinesDetailPathList />
 			<div className={styles.mapWrapper}>
-				<LineMap />
+				<LinesDetailPathMap />
 			</div>
 		</Section>
 	);

@@ -24,7 +24,7 @@ export default function Component() {
 
 	const { linesSingleMap } = useMap();
 	const linesDetailContext = useLinesDetailContext();
-	const t = useTranslations('lines.LineMap');
+	const t = useTranslations('lines.LinesDetailPathMap');
 
 	//
 	// B. Fetch data
