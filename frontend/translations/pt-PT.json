@@ -96,6 +96,16 @@
 			"heading": "Pesquisar Linhas",
 			"toggle_favorite_error": "Erro ao adicionar a linha aos favoritos. {error}"
 		},
+		"LinesDetailMetrics": {
+			"demand": {
+				"big_number": "{value, number}",
+				"subtitle": "passageiros transportados nesta linha nos últimos 15 dias"
+			},
+			"service": {
+				"big_number": "{value, number, percentage}",
+				"subtitle": "executabilidade do serviço de todos os percursos desta linha nos últimos 15 dias"
+			}
+		},
 		"SelectActivePatternGroup":{
 			"placeholder": "Selecionar percurso/destino..."
 		},
@@ -107,16 +117,6 @@
 		},
 		"LineMap": {
 			"active_vehicles_counter": "{count, plural, =0 {Nenhum veículo em circulação} one {# veículo em circulação} other {# veículos em circulação}}"
-		},
-		"Metrics": {
-			"demand": {
-				"big_number": "{value, number}",
-				"subtitle": "passageiros transportados nesta linha nos últimos 15 dias"
-			},
-			"service": {
-				"big_number": "{value, number, percentage}",
-				"subtitle": "executabilidade do serviço de todos os percursos desta linha nos últimos 15 dias"
-			}
 		},
 		"expand_filters": "Expandir Filtros",
 		"collapse_filters": "Esconder Filtros"

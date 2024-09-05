@@ -16,7 +16,7 @@ export default function Component() {
 	//
 	// A. Setup variables
 
-	const t = useTranslations('lines.Metrics');
+	const t = useTranslations('lines.LinesDetailMetrics');
 	const linesDetailContext = useLinesDetailContext();
 
 	//
@@ -29,6 +29,9 @@ export default function Component() {
 			</div>
 		);
 	}
+
+	//
+	// C. Render components
 
 	return (
 		<div className={styles.container}>

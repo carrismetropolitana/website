@@ -1,0 +1,37 @@
+/* * */
+/* HEADING SECTION */
+
+.headingSection {
+	display: flex;
+	flex-direction: column;
+	justify-content: flex-start;
+	align-items: flex-start;
+	gap: var(--size-spacing-15);
+}
+
+.headingSectionRow {
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+	align-items: center;
+	gap: var(--size-spacing-15);
+}
+
+/* * */
+/* LINE NAME */
+
+.lineName {
+	display: flex;
+	width: 100%;
+	align-items: center;
+	justify-content: flex-start;
+	color: var(--color-system-text-100);
+	line-height: 1.2;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	display: -webkit-box;
+	-webkit-line-clamp: 3;
+	-webkit-box-orient: vertical;
+	font-size: 20px;
+	font-weight: var(--font-weight-bold);
+}
