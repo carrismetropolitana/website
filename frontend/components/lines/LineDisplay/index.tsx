@@ -9,7 +9,7 @@ import styles from './styles.module.css';
 
 /* * */
 
-interface LineDisplayProps {
+interface Props {
 	line?: Line
 	size?: 'lg' | 'md'
 	width?: number
@@ -17,7 +17,7 @@ interface LineDisplayProps {
 
 /* * */
 
-export default function Component({ line, size = 'md', width = 200 }: LineDisplayProps) {
+export default function Component({ line, size = 'md', width = 200 }: Props) {
 	return line
 		? (
 			<div className={styles.container}>
