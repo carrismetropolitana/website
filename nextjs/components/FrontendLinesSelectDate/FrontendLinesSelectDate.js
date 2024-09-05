@@ -18,7 +18,7 @@ export default function FrontendLinesSelectDate() {
 	//
 	// A. Setup variables
 
-	const FrontendLinesContext = useFrontendLinesContext();
+	const frontendLinesContext = useFrontendLinesContext();
 	const t = useTranslations('FrontendLinesSelectDate');
 
 	//
@@ -49,18 +49,18 @@ export default function FrontendLinesSelectDate() {
 		//
 	}, []);
 
-	const isTodaySelected = parseDateToString(todayDate) === FrontendLinesContext.entities.date_string;
+	const isTodaySelected = parseDateToString(todayDate) === frontendLinesContext.entities.date_string;
 
-	const isTomorrowSelected = parseDateToString(tomorrowDate) === FrontendLinesContext.entities.date_string;
+	const isTomorrowSelected = parseDateToString(tomorrowDate) === frontendLinesContext.entities.date_string;
 
 	//
 	// C. Handle actions
 
 	const handleSetDate = useCallback(
 		value => {
-			FrontendLinesContext.selectDate(value);
+			frontendLinesContext.selectDate(value);
 		},
-		[FrontendLinesContext],
+		[frontendLinesContext],
 	);
 
 	const handleSetToday = useCallback(() => {
@@ -75,8 +75,18 @@ export default function FrontendLinesSelectDate() {
 	// D. Render components
 
 	useEffect(() => {
-		if (!FrontendLinesContext.entities.date_string) handleSetToday();
-	}, [handleSetToday, FrontendLinesContext.entities.date_string]);
+		if (!frontendLinesContext.entities.date_string) handleSetToday();
+		// IF date is after today then go to google.com
+		if (frontendLinesContext.entities.date_string > '20240911' && frontendLinesContext.entities.route.id.startsWith('4')) {
+			const year = frontendLinesContext.entities.date_string.slice(0, 4);
+			const month = frontendLinesContext.entities.date_string.slice(4, 6);
+			const day = frontendLinesContext.entities.date_string.slice(6, 8);
+			const routeId = frontendLinesContext.entities.route.id;
+			const routeShortName = frontendLinesContext.entities.route.short_name;
+			const directionId = frontendLinesContext.entities.pattern.direction_id;
+			window.location.href = `https://www.carrismetropolitana.pt/horarios/?route_short_name=${routeShortName}&date=${year}-${month}-${day}&route_id=${routeId}&direction_id=${directionId}`;
+		}
+	}, [handleSetToday, frontendLinesContext.entities.date_string,frontendLinesContext.entities.route.id]);
 
 	//
 	// D. Render components
@@ -95,7 +105,7 @@ export default function FrontendLinesSelectDate() {
 					placeholder={t('placeholder')}
 					dropdownType='modal'
 					onChange={handleSetDate}
-					value={FrontendLinesContext.entities.date}
+					value={frontendLinesContext.entities.date}
 					valueFormat='DD MMM YYYY'
 					classNames={{ input: `${styles.input} ${!isTodaySelected && !isTomorrowSelected && styles.isSelected}`, section: styles.inputSection }}
 					leftSection={<IconCalendar size={14} />}
