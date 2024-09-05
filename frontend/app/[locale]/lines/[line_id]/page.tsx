@@ -1,17 +1,17 @@
 /* * */
 
-import LinesSingle from '@/components/lines/Single';
+import LinesDetail from '@/components/lines/LinesDetail';
+import { LinesDetailContextProvider } from '@/contexts/LinesDetail.context';
 import { LinesListContextProvider } from '@/contexts/LinesList.context';
-import { LinesSingleContextProvider } from '@/contexts/LinesSingle.context';
 
 /* * */
 
 export default function Page({ params: { line_id } }) {
 	return (
 		<LinesListContextProvider>
-			<LinesSingleContextProvider lineId={line_id}>
-				<LinesSingle />
-			</LinesSingleContextProvider>
+			<LinesDetailContextProvider lineId={line_id}>
+				<LinesDetail />
+			</LinesDetailContextProvider>
 		</LinesListContextProvider>
 	);
 }

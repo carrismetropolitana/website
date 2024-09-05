@@ -92,8 +92,9 @@
 		"LinesListViewFavorites":{
 			"no_favorites": "Ainda não tem linhas favoritas"
 		},
-		"Single":{
-			"heading": "Pesquisar Linhas"
+		"LinesDetail":{
+			"heading": "Pesquisar Linhas",
+			"toggle_favorite_error": "Erro ao adicionar a linha aos favoritos. {error}"
 		},
 		"SelectActivePatternGroup":{
 			"placeholder": "Selecionar percurso/destino..."
@@ -653,8 +654,6 @@
 		"update_profile_success": "Perfil atualizado com sucesso!",
 		"update_profile_error": "Erro ao atualizar o perfil.",
 		"update_profile_pending": "A Atualizar o perfil...",
-		"toggle_favorite_error": "Erro ao adicionar a linha aos favoritos. {error}",
 		"toggle_stop_error": "Erro ao adicionar o paragem aos favoritos. {error}"
-
 	}
 }

@@ -1,4 +1,4 @@
-import { useLinesSingleContext } from '@/contexts/LinesSingle.context';
+import { useLinesDetailContext } from '@/contexts/LinesDetail.context';
 import { Path } from '@/types/lines.types';
 
 import SingleStopFullContent from '../SingleStopFullContent';
@@ -7,7 +7,7 @@ import styles from './styles.module.css';
 
 export default function SingleStop({ arrivals, isSelected, path }: { arrivals: { type: 'realtime' | 'scheduled', unixTs: number }[], isSelected: boolean, path: Path }) {
 	// A. Setup variables
-	const linesSingleContext = useLinesSingleContext();
+	const linesDetailContext = useLinesDetailContext();
 	const now = Date.now();
 
 	// C. Transform data
@@ -19,9 +19,9 @@ export default function SingleStop({ arrivals, isSelected, path }: { arrivals: {
 	const realtimeArrivals = nextArrivals.filter(arrival => arrival.type === 'realtime');
 	const scheduledArrivals = nextArrivals.filter(arrival => arrival.type === 'scheduled');
 	// if (isSelected) {
-	// 	if (linesSingleContext.data.valid_pattern_groups && operationalDayContext.data.selected_day && linesSingleContext.data.active_pattern_group) {
-	// 		console.log('valid_pattern_groups', linesSingleContext.data.valid_pattern_groups);
-	// 		const tt = composeTimetable(linesSingleContext.data.valid_pattern_groups, stopId, linesSingleContext.data.active_pattern_group.pattern_id);
+	// 	if (linesDetailContext.data.valid_pattern_groups && operationalDayContext.data.selected_day && linesDetailContext.data.active_pattern_group) {
+	// 		console.log('valid_pattern_groups', linesDetailContext.data.valid_pattern_groups);
+	// 		const tt = composeTimetable(linesDetailContext.data.valid_pattern_groups, stopId, linesDetailContext.data.active_pattern_group.pattern_id);
 
 	// 		// eslint-disable-next-line perfectionist/sort-objects
 	// 		console.table(tt.hours.flatMap(h => h.minutes.map(m => ({ hour: h.hour, minute: m.min, exceptions: JSON.stringify(m.exceptions_ids) }))));
@@ -37,12 +37,12 @@ export default function SingleStop({ arrivals, isSelected, path }: { arrivals: {
 			className={styles.stop}
 			data-selected={isSelected}
 			onClick={() => {
-				linesSingleContext.actions.setActiveStop(stopSequence, stop);
+				linesDetailContext.actions.setActiveStop(stopSequence, stop);
 			}}
 		>
 			{/* line in the left side of the stop list */}
-			<div className={styles.spineLine} style={{ backgroundColor: linesSingleContext.data.active_pattern_group?.color }}>
-				<div style={{ backgroundColor: linesSingleContext.data.active_pattern_group?.text_color }} />
+			<div className={styles.spineLine} style={{ backgroundColor: linesDetailContext.data.active_pattern_group?.color }}>
+				<div style={{ backgroundColor: linesDetailContext.data.active_pattern_group?.text_color }} />
 			</div>
 			<div className={styles.stopInfo}>
 				<div className={styles.name}>{stop.name}</div>

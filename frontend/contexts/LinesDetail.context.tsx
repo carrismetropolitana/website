@@ -15,7 +15,7 @@ import useSWR from 'swr';
 
 /* * */
 
-interface LinesSingleContextState {
+interface LinesDetailContextState {
 	actions: {
 		setActivePatternGroup: (patternGroupId: string) => void
 		setActiveStop: (sequence: number, stop: Stop) => void
@@ -48,19 +48,19 @@ interface LinesSingleContextState {
 
 /* * */
 
-const LinesSingleContext = createContext<LinesSingleContextState | undefined>(undefined);
+const LinesDetailContext = createContext<LinesDetailContextState | undefined>(undefined);
 
-export function useLinesSingleContext() {
-	const context = useContext(LinesSingleContext);
+export function useLinesDetailContext() {
+	const context = useContext(LinesDetailContext);
 	if (!context) {
-		throw new Error('useLinesSingleContext must be used within a LinesSingleContextProvider');
+		throw new Error('useLinesDetailContext must be used within a LinesDetailContextProvider');
 	}
 	return context;
 }
 
 /* * */
 
-export const LinesSingleContextProvider = ({ children, lineId }) => {
+export const LinesDetailContextProvider = ({ children, lineId }) => {
 	//
 
 	//
@@ -203,7 +203,7 @@ export const LinesSingleContextProvider = ({ children, lineId }) => {
 	//
 	// E. Define context value
 
-	const contextValue: LinesSingleContextState = {
+	const contextValue: LinesDetailContextState = {
 		actions: {
 			setActivePatternGroup,
 			setActiveStop,
@@ -235,9 +235,9 @@ export const LinesSingleContextProvider = ({ children, lineId }) => {
 	// F. Render components
 
 	return (
-		<LinesSingleContext.Provider value={contextValue}>
+		<LinesDetailContext.Provider value={contextValue}>
 			{children}
-		</LinesSingleContext.Provider>
+		</LinesDetailContext.Provider>
 	);
 
 	//

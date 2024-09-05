@@ -2,7 +2,7 @@
 
 /* * */
 
-import { useLinesSingleContext } from '@/contexts/LinesSingle.context';
+import { useLinesDetailContext } from '@/contexts/LinesDetail.context';
 import { PatternRealtime } from '@/utils/types';
 import { useMemo } from 'react';
 import useSWR from 'swr';
@@ -18,17 +18,17 @@ export default function Component() {
 	//
 	// A. Setup variables
 
-	const linesSingleContext = useLinesSingleContext();
+	const linesDetailContext = useLinesDetailContext();
 
 	//
 	// B. Fetch data
 
-	const { data: patternRealtime } = useSWR<PatternRealtime[]>(linesSingleContext.data.active_pattern_group?.pattern_id && `https://api.carrismetropolitana.pt/patterns/${linesSingleContext.data.active_pattern_group.pattern_id}/realtime`, { refreshInterval: 10000 });
+	const { data: patternRealtime } = useSWR<PatternRealtime[]>(linesDetailContext.data.active_pattern_group?.pattern_id && `https://api.carrismetropolitana.pt/patterns/${linesDetailContext.data.active_pattern_group.pattern_id}/realtime`, { refreshInterval: 10000 });
 
 	// C. Transform data
 
-	const sortedStops = linesSingleContext.data.active_pattern_group?.path.sort((a, b) => a.stop_sequence - b.stop_sequence);
-	const relevantRealtimes = useMemo(() => patternRealtime?.filter(realtime => realtime.pattern_id === linesSingleContext.data.active_pattern_group?.pattern_id), [patternRealtime, linesSingleContext.data.active_pattern_group?.pattern_id]);
+	const sortedStops = linesDetailContext.data.active_pattern_group?.path.sort((a, b) => a.stop_sequence - b.stop_sequence);
+	const relevantRealtimes = useMemo(() => patternRealtime?.filter(realtime => realtime.pattern_id === linesDetailContext.data.active_pattern_group?.pattern_id), [patternRealtime, linesDetailContext.data.active_pattern_group?.pattern_id]);
 	const nextArrivalsPerStop: Record<string, { type: 'realtime' | 'scheduled', unixTs: number }[]> = {};
 
 	for (const realtime of relevantRealtimes ?? []) {
@@ -51,7 +51,7 @@ export default function Component() {
 	//
 	// D. Render components
 
-	if (!sortedStops || !linesSingleContext.data.active_pattern_group) {
+	if (!sortedStops || !linesDetailContext.data.active_pattern_group) {
 		return null;
 	}
 
@@ -60,7 +60,7 @@ export default function Component() {
 			<SingleStop
 				key={path.stop.id + '-' + path.stop_sequence}
 				arrivals={nextArrivalsPerStop[path.stop.id] || []}
-				isSelected={linesSingleContext.data.active_stop?.stop === path.stop && linesSingleContext.data.active_stop?.sequence === path.stop_sequence}
+				isSelected={linesDetailContext.data.active_stop?.stop === path.stop && linesDetailContext.data.active_stop?.sequence === path.stop_sequence}
 				path={path}
 			/>
 		),

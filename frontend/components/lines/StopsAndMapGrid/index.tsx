@@ -6,7 +6,7 @@ import NoDataLabel from '@/components/layout/NoDataLabel';
 import Section from '@/components/layout/Section';
 import LineMap from '@/components/lines/LineMap';
 import StopList from '@/components/lines/StopList';
-import { useLinesSingleContext } from '@/contexts/LinesSingle.context';
+import { useLinesDetailContext } from '@/contexts/LinesDetail.context';
 
 import styles from './styles.module.css';
 
@@ -18,12 +18,12 @@ export default function Component() {
 	//
 	// A. Setup variables
 
-	const linesSingleContext = useLinesSingleContext();
+	const linesDetailContext = useLinesDetailContext();
 
 	//
 	// B. Render components
 
-	if (!linesSingleContext.data.active_pattern_group) {
+	if (!linesDetailContext.data.active_pattern_group) {
 		return (
 			<Section childrenWrapperStyles={styles.noPatternWrapper} withTopPadding={false}>
 				<NoDataLabel text="selecione um pattern" />

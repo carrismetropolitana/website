@@ -1,7 +1,7 @@
 import FacilityIcon from '@/components/common/FacilityIcon';
 import LiveIcon from '@/components/common/LiveIcon';
 import TimetableWithVariants from '@/components/common/TimetableWithVariants';
-import { useLinesSingleContext } from '@/contexts/LinesSingle.context';
+import { useLinesDetailContext } from '@/contexts/LinesDetail.context';
 import { useOperationalDayContext } from '@/contexts/OperationalDay.context';
 import { Stop } from '@/types/stops.types';
 import { UnstyledButton } from '@mantine/core';
@@ -33,16 +33,16 @@ export default function SingleStopFullContent({ realtimeArrivals, scheduledArriv
 	// A. Setup variables
 	const operationalDayContext = useOperationalDayContext();
 	const t = useTranslations('line');
-	const linesSingleContext = useLinesSingleContext();
+	const linesDetailContext = useLinesDetailContext();
 	const now = Date.now();
 
 	// B. Helper functions
 	function onClickException(patternId: string) {
-		const patternGroup = linesSingleContext.data.valid_pattern_groups?.find(patternGroup => patternGroup.pattern_id === patternId);
+		const patternGroup = linesDetailContext.data.valid_pattern_groups?.find(patternGroup => patternGroup.pattern_id === patternId);
 		if (!patternGroup) {
 			return;
 		}
-		linesSingleContext.actions.setActivePatternGroup(patternGroup.pattern_group_id);
+		linesDetailContext.actions.setActivePatternGroup(patternGroup.pattern_group_id);
 	}
 
 	// D. Render components
@@ -86,14 +86,14 @@ export default function SingleStopFullContent({ realtimeArrivals, scheduledArriv
 
 						</>
 					)
-					: linesSingleContext.data.active_pattern_group && linesSingleContext.data.valid_pattern_groups && operationalDayContext.data.selected_day_jsdate
+					: linesDetailContext.data.active_pattern_group && linesDetailContext.data.valid_pattern_groups && operationalDayContext.data.selected_day_jsdate
 					&& (
 						<TimetableWithVariants
 							date={operationalDayContext.data.selected_day_jsdate || new Date()}
-							direction={linesSingleContext.data.active_pattern_group.direction}
-							mainPatternId={linesSingleContext.data.active_pattern_group.pattern_id}
+							direction={linesDetailContext.data.active_pattern_group.direction}
+							mainPatternId={linesDetailContext.data.active_pattern_group.pattern_id}
 							onClickException={onClickException}
-							patternGroups={linesSingleContext.data.valid_pattern_groups}
+							patternGroups={linesDetailContext.data.valid_pattern_groups}
 							stopId={stop.id}
 							stopSequence={stopSequence}
 						/>
@@ -104,7 +104,7 @@ export default function SingleStopFullContent({ realtimeArrivals, scheduledArriv
 				operationalDayContext.flags.is_today_selected
 				&& (
 					<div className={styles.buttons}>
-						<UnstyledButton onClick={() => linesSingleContext.actions.setDrawerOpen(true)}>
+						<UnstyledButton onClick={() => linesDetailContext.actions.setDrawerOpen(true)}>
 							<IconClockSearch size={18} />
 							{t('schedules')}
 						</UnstyledButton>

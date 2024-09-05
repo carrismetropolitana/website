@@ -10,7 +10,7 @@ import LineName from '@/components/lines/LineName';
 import Metrics from '@/components/lines/Metrics';
 import SingleToolbar from '@/components/lines/SingleToolbar';
 import StopsAndMapGrid from '@/components/lines/StopsAndMapGrid';
-import { useLinesSingleContext } from '@/contexts/LinesSingle.context';
+import { useLinesDetailContext } from '@/contexts/LinesDetail.context';
 import { useProfileContext } from '@/contexts/Profile.context';
 import toast from '@/utils/toast';
 import { useTranslations } from 'next-intl';
@@ -25,27 +25,27 @@ export default function Component() {
 	//
 	// A. Setup variables
 
-	const t = useTranslations();
+	const t = useTranslations('lines.LinesDetail');
 	const profileContext = useProfileContext();
-	const linesSingleContext = useLinesSingleContext();
+	const linesDetailContext = useLinesDetailContext();
 
 	//
 	// B. Handle actions
 
 	const handleToggleFavorite = async () => {
-		if (!linesSingleContext.data.line) return;
+		if (!linesDetailContext.data.line) return;
 		try {
-			await profileContext.actions.toggleFavoriteLine(linesSingleContext.data.line.line_id);
+			await profileContext.actions.toggleFavoriteLine(linesDetailContext.data.line.line_id);
 		}
 		catch (error) {
-			toast.error({ message: t('toast.toggle_favorite_error', { error: error.message }) });
+			toast.error({ message: t('toggle_favorite_error', { error: error.message }) });
 		}
 	};
 
 	//
 	// C. Render components
 
-	if (!linesSingleContext.data.line) {
+	if (!linesDetailContext.data.line) {
 		return <Section withTopBorder={false} backRouter withChildrenPadding />;
 	}
 
@@ -53,21 +53,21 @@ export default function Component() {
 		<>
 			<Section childrenWrapperStyles={styles.headingSection} withGap={false} withTopBorder={false} backRouter withChildrenPadding>
 				<div className={styles.headingSectionRow}>
-					<LineBadge line={linesSingleContext.data.line} size="lg" />
-					<FavoriteToggle color={linesSingleContext.data.line.color} isActive={linesSingleContext.flags.is_favorite} onToggle={handleToggleFavorite} />
+					<LineBadge line={linesDetailContext.data.line} size="lg" />
+					<FavoriteToggle color={linesDetailContext.data.line.color} isActive={linesDetailContext.flags.is_favorite} onToggle={handleToggleFavorite} />
 				</div>
-				<LineName line={linesSingleContext.data.line} size="lg" />
+				<LineName line={linesDetailContext.data.line} size="lg" />
 			</Section>
 
 			<SingleToolbar />
 
-			{linesSingleContext.data.active_alerts && linesSingleContext.data.active_alerts?.length > 0 && (
-				<AlertsCarousel alerts={linesSingleContext.data.active_alerts} />
+			{linesDetailContext.data.active_alerts && linesDetailContext.data.active_alerts?.length > 0 && (
+				<AlertsCarousel alerts={linesDetailContext.data.active_alerts} />
 			)}
 
 			<StopsAndMapGrid />
 
-			{linesSingleContext.data.demand && (
+			{linesDetailContext.data.demand && (
 				<Section childrenWrapperStyles={styles.headingSection} withGap={false} withTopPadding={false} withChildrenPadding>
 					<Metrics />
 				</Section>

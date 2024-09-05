@@ -3,7 +3,7 @@ import { TimetableDayStop } from '@/types/timetables.types';
 
 /**
  *
- * @param patternGroups usually linesSingleContext.data.valid_pattern_groups
+ * @param patternGroups usually linesDetailContext.data.valid_pattern_groups
  * @param stopId Stop id for which we want to compose the timetable
  * @param mainPatternId Pattern id for which we should not add exceptions
  *

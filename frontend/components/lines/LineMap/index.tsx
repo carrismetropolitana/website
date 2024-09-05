@@ -4,7 +4,7 @@
 
 import LiveIcon from '@/components/common/LiveIcon';
 import Map from '@/components/common/Map';
-import { useLinesSingleContext } from '@/contexts/LinesSingle.context';
+import { useLinesDetailContext } from '@/contexts/LinesDetail.context';
 import { VehiclePosition } from '@/utils/types';
 import { FeatureCollection, GeoJsonProperties, Geometry } from 'geojson';
 import { useTranslations } from 'next-intl';
@@ -23,7 +23,7 @@ export default function Component() {
 	// A. Setup variables
 
 	const { linesSingleMap } = useMap();
-	const linesSingleContext = useLinesSingleContext();
+	const linesDetailContext = useLinesDetailContext();
 	const t = useTranslations('lines.LineMap');
 
 	//
@@ -37,7 +37,7 @@ export default function Component() {
 	const activeVehiclesGeojson: FeatureCollection<Geometry, GeoJsonProperties> | null = useMemo(() => {
 		if (!allVehiclesData) return null;
 		const activeVehicles = allVehiclesData.filter((vehicleItem) => {
-			return vehicleItem.pattern_id === linesSingleContext.data.active_pattern_group?.pattern_id;
+			return vehicleItem.pattern_id === linesDetailContext.data.active_pattern_group?.pattern_id;
 		});
 		return {
 			features: activeVehicles.map(vehicleItem => ({
@@ -66,12 +66,12 @@ export default function Component() {
 			})) ?? [],
 			type: 'FeatureCollection',
 		};
-	}, [linesSingleContext.data.active_pattern_group, allVehiclesData]);
+	}, [linesDetailContext.data.active_pattern_group, allVehiclesData]);
 
 	const stopsGeoJson: FeatureCollection<Geometry, GeoJsonProperties> | null = useMemo(() => {
-		if (!linesSingleContext.data.active_pattern_group?.path) return null;
+		if (!linesDetailContext.data.active_pattern_group?.path) return null;
 		return {
-			features: linesSingleContext.data.active_pattern_group?.path.map((stop) => {
+			features: linesDetailContext.data.active_pattern_group?.path.map((stop) => {
 				const { lat, lon } = stop.stop;
 				return {
 					geometry: {
@@ -86,7 +86,7 @@ export default function Component() {
 			}),
 			type: 'FeatureCollection',
 		};
-	}, [linesSingleContext.data.active_pattern_group?.path]);
+	}, [linesDetailContext.data.active_pattern_group?.path]);
 
 	const stopsStyle: CircleLayer = {
 		id: 'stops',
@@ -106,7 +106,7 @@ export default function Component() {
 			'line-join': 'round',
 		},
 		paint: {
-			'line-color': linesSingleContext.data.line?.color,
+			'line-color': linesDetailContext.data.line?.color,
 			'line-width': ['interpolate', ['linear'], ['zoom'], 10, 4, 20, 12],
 		},
 
@@ -157,8 +157,8 @@ export default function Component() {
 
 	return (
 		<Map mapObject={linesSingleMap}>
-			{linesSingleContext.data.active_shape?.geojson && (
-				<Source data={linesSingleContext.data.active_shape?.geojson} id="shape" type="geojson">
+			{linesDetailContext.data.active_shape?.geojson && (
+				<Source data={linesDetailContext.data.active_shape?.geojson} id="shape" type="geojson">
 					<Layer {...shapeStyle} />
 					<Layer {...shapeArrowStyle} />
 				</Source>
