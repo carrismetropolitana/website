@@ -6,7 +6,7 @@ import RegularListItem from '@/components/layout/RegularListItem';
 import Section from '@/components/layout/Section';
 import LineDisplay from '@/components/lines/LineDisplay';
 import LinesListToolbar from '@/components/lines/LinesListToolbar';
-import ListAll from '@/components/lines/ListAll';
+import LinesListViewAll from '@/components/lines/LinesListViewAll';
 import ListFavorites from '@/components/lines/ListFavorites';
 import { useLinesListContext } from '@/contexts/LinesList.context';
 import { useTranslations } from 'next-intl';
@@ -38,7 +38,7 @@ export default function Component() {
 					))}
 				</Section>
 			)}
-			{(!linesContext.flags.is_loading && linesContext.filters.by_current_view === 'all') && <ListAll />}
+			{(!linesContext.flags.is_loading && linesContext.filters.by_current_view === 'all') && <LinesListViewAll />}
 			{(!linesContext.flags.is_loading && linesContext.filters.by_current_view === 'favorites') && <ListFavorites />}
 		</>
 	);
