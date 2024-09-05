@@ -84,7 +84,7 @@ export default function FrontendLinesSelectDate() {
 			const routeId = frontendLinesContext.entities.route.id;
 			const routeShortName = frontendLinesContext.entities.route.short_name;
 			const directionId = frontendLinesContext.entities.pattern.direction_id;
-			window.location.href = `https://www.carrismetropolitana.pt/horarios/?route_short_name=${routeShortName}&date=${year}-${month}-${day}&route_id=${routeId}&direction_id=${directionId}`;
+			window.location.href = `https://set24.carrismetropolitana.pt/horarios/?route_short_name=${routeShortName}&date=${year}-${month}-${day}&route_id=${routeId}&direction_id=${directionId}`;
 		}
 	}, [handleSetToday, frontendLinesContext.entities.date_string,frontendLinesContext.entities.route.id]);
 
