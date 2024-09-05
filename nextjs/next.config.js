@@ -28,6 +28,8 @@ module.exports = withNextIntl({
       { source: '/lines', destination: '/lines/all', permanent: true },
       { source: '/linhas', destination: '/lines/all', permanent: true },
       { source: '/horarios', destination: '/lines/all', permanent: true },
+      { source: '/linhas/:path*', destination: '/lines/:path*', permanent: true }
+      { source: '/horarios/:path*', destination: '/lines/:path*', permanent: true }
       //
       { source: '/vehicles', destination: '/vehicles/all', permanent: true },
       //
