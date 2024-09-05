@@ -19,7 +19,7 @@ export default function Component() {
 	//
 	// A. Setup variables
 
-	const t = useTranslations('lines.Page');
+	const t = useTranslations('lines.LinesList');
 	const linesContext = useLinesListContext();
 
 	//

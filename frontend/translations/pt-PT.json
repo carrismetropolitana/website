@@ -75,6 +75,9 @@
 		}
 	},
 	"lines": {
+		"LinesList":{
+			"heading": "Pesquisar Linhas"
+		},
 		"Single":{
 			"heading": "Pesquisar Linhas"
 		},
@@ -83,9 +86,6 @@
 		},
 		"SelectActivePatternGroupExplainer":{
 			"toggle": "O que é o percurso/destino de uma linha?"
-		},
-		"Page":{
-			"heading": "Pesquisar Linhas"
 		},
 		"PageToolbar": {
 			"by_current_view": {

@@ -1,6 +1,6 @@
 /* * */
 
-import LinesPage from '@/components/lines/Page';
+import LinesList from '@/components/lines/LinesList';
 import { LinesListContextProvider } from '@/contexts/LinesList.context';
 
 /* * */
@@ -8,7 +8,7 @@ import { LinesListContextProvider } from '@/contexts/LinesList.context';
 export default function Page() {
 	return (
 		<LinesListContextProvider>
-			<LinesPage />
+			<LinesList />
 		</LinesListContextProvider>
 	);
 }
