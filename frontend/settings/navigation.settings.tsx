@@ -44,7 +44,7 @@ export const headerNavigationGroup: NavigationGroup[] = [
 /* * */
 
 export const headerAccountNavigationLinks: NavigationLink[] = [
-	{ _id: 'configs', href: '/profile/configs', icon: <IconSparkles size={20} /> },
+	{ _id: 'notifications', href: '/profile/notifications', icon: <IconSparkles size={20} /> },
 	{ _id: 'favorites', href: '/profile/favorites', icon: <IconStar size={20} /> },
 	{ _id: 'profile', href: '/profile', icon: <IconUser size={20} /> },
 ];
