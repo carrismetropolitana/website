@@ -3,10 +3,11 @@
 import type { Path } from '@/types/lines.types';
 
 import PathStopHeader from '@/components/lines/PathStopHeader';
+import PathStopNextArrivals from '@/components/lines/PathStopNextArrivals';
 import PathStopSpine from '@/components/lines/PathStopSpine';
-import SingleStopFullContent from '@/components/lines/SingleStopFullContent';
-import SingleLineSimpleContent from '@/components/lines/SingleStopSimpleContent';
+import PathStopTimetable from '@/components/lines/PathStopTimetable';
 import { useLinesDetailContext } from '@/contexts/LinesDetail.context';
+import { useOperationalDayContext } from '@/contexts/OperationalDay.context';
 
 import styles from './styles.module.css';
 
@@ -29,6 +30,8 @@ export default function Component({ arrivals, isFirstStop, isLastStop, isSelecte
 	// A. Setup variables
 
 	const linesDetailContext = useLinesDetailContext();
+	const operationalDayContext = useOperationalDayContext();
+
 	const now = Date.now();
 
 	//
@@ -37,30 +40,15 @@ export default function Component({ arrivals, isFirstStop, isLastStop, isSelecte
 	const stop = path.stop;
 	const stopSequence = path.stop_sequence;
 	const nextArrivals = arrivals?.filter(arrival => arrival.unixTs > now) || [];
-	const nextArrival = nextArrivals?.[0];
 	const realtimeArrivals = nextArrivals.filter(arrival => arrival.type === 'realtime');
 	const scheduledArrivals = nextArrivals.filter(arrival => arrival.type === 'scheduled');
-	// if (isSelected) {
-	// 	if (linesDetailContext.data.valid_pattern_groups && operationalDayContext.data.selected_day && linesDetailContext.data.active_pattern_group) {
-	// 		console.log('valid_pattern_groups', linesDetailContext.data.valid_pattern_groups);
-	// 		const tt = composeTimetable(linesDetailContext.data.valid_pattern_groups, stopId, linesDetailContext.data.active_pattern_group.pattern_id);
-
-	// 		// eslint-disable-next-line perfectionist/sort-objects
-	// 		console.table(tt.hours.flatMap(h => h.minutes.map(m => ({ hour: h.hour, minute: m.min, exceptions: JSON.stringify(m.exceptions_ids) }))));
-	// 		console.log(tt);
-	// 	}
-	// }
 
 	//
 	// C. Handle actions
 
-	const handleToggleStop = () => {
-		if (linesDetailContext.data.active_stop?.stop.id === stop.id && linesDetailContext.data.active_stop?.sequence === stopSequence) {
-			// linesDetailContext.actions.setActiveStop();
-		}
-		else {
-			linesDetailContext.actions.setActiveStop(stopSequence, stop);
-		}
+	const handleToggleStop = (event: React.MouseEvent<HTMLDivElement>) => {
+		linesDetailContext.actions.setActiveStop(stopSequence, stop);
+		event.stopPropagation();
 	};
 
 	//
@@ -83,9 +71,15 @@ export default function Component({ arrivals, isFirstStop, isLastStop, isSelecte
 					isSelected={isSelected}
 					stopData={stop}
 				/>
-				{!isSelected
-					? <SingleLineSimpleContent nextArrival={nextArrival} />
-					: <SingleStopFullContent realtimeArrivals={realtimeArrivals} scheduledArrivals={scheduledArrivals} stop={stop} stopSequence={stopSequence} />}
+				{isSelected && operationalDayContext.flags.is_today_selected && (
+					<PathStopNextArrivals
+						realtimeArrivals={realtimeArrivals}
+						scheduledArrivals={scheduledArrivals}
+					/>
+				)}
+				{isSelected && (
+					<PathStopTimetable />
+				)}
 			</div>
 		</div>
 	);

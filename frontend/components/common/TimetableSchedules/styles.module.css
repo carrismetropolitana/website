@@ -9,16 +9,6 @@
 }
 
 /* * */
-/* TIMETABLE WRAPPER */
-
-.timetableWrapper {
-	display: flex;
-	flex-direction: row;
-	flex-wrap: wrap;
-	row-gap: var(--size-spacing-15);
-}
-
-/* * */
 /* COLUMN */
 
 .column {

@@ -2,45 +2,51 @@
 /* CONTAINER */
 
 .container {
-    display: flex;
+	display: flex;
 	align-items: flex-start;
-    justify-content: center;
-	padding: var(--size-spacing-10) 0;
+	justify-content: center;
+	padding: var(--size-spacing-20) 0;
 }
 
-.container.isFirstStop  {
+.container.isFirstStop {
 	padding: 0;
 	border-top-left-radius: 999px;
 	border-top-right-radius: 999px;
 }
 
-.container.isLastStop  {
+.container.isLastStop,
+.container.isLastStop.isSelected {
+	align-self: flex-start;
+	padding-bottom: 1px;
 	border-bottom-left-radius: 999px;
 	border-bottom-right-radius: 999px;
 }
 
-.container.isSelected  {
+.container.isSelected {
 	padding: var(--size-spacing-20) 0;
 }
 
-.container.isFirstStop.isSelected  {
+.container.isFirstStop.isSelected {
 	padding: 0;
+}
+
+.container.isLastStop.isSelected {
+	padding-bottom: 0;
 }
 
 /* * */
 /* MARKERS / DEFAULT */
 
 .marker {
-    width: 100%;
-    aspect-ratio: 1;
+	width: 100%;
+	aspect-ratio: 1;
 	margin: 6px;
-    border-radius: 999px;
+	border-radius: 999px;
 	transition: all 200ms ease;
-	transform: translate(0, 1px);
 }
 
 .isFirstStop .marker {
-	transform: translate(0, 3px);
+	transform: translate(0, 2px);
 }
 
 .isSelected .marker {

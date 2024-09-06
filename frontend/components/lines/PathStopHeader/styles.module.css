@@ -11,7 +11,7 @@
 /* STOP NAME */
 
 .stopName{
-	font-size: 16px;
+	font-size: 15px;
 	max-width: 400px;
 	line-height: 1.3;
 	font-weight: var(--font-weight-bold);
@@ -24,8 +24,47 @@
 .stopLocation{
 	font-size: 14px;
 	font-weight: var(--font-weight-semibold);
-    color: var(--color-system-text-300)
+    color: var(--color-system-text-300);
+	vertical-align: text-bottom;
 }
+
+/* * */
+/* STOP ID */
+
+.stopId {
+	line-height: 1.2;
+	vertical-align: baseline;
+	font-size: 12px;
+	margin-left: 5px;
+	font-weight: var(--font-weight-semibold);
+	color: var(--color-system-text-400);
+	transition: all 200ms ease;
+}
+
+.isSelected .stopId:hover {
+	cursor: pointer;
+	color: var(--color-system-text-200);
+}
+
+.stopIdCopyIcon {
+	width: 11px;
+	height: 11px;
+	color: transparent;
+	margin-left: 3px;
+	margin-bottom: 2px;
+	vertical-align: text-bottom;
+	transition: all 200ms ease;
+}
+
+.isSelected .stopId:hover .stopIdCopyIcon {
+	color: var(--color-system-text-200);
+}
+
+.isSelected .stopId.isCopied,
+.isSelected .stopId.isCopied .stopIdCopyIcon {
+	color: var(--color-status-ok-text);
+}
+
 
 /* * */
 /* FACILITIES WRAPPER */

@@ -1,0 +1,45 @@
+/* * */
+/* CONTAINER */
+
+.container {
+	display: flex;
+	flex-direction: column;
+	gap: var(--size-spacing-10);
+}
+
+/* * */
+/* EXCEPTION */
+
+.exception {
+	font-size: 14px;
+	font-weight: var(--font-weight-medium);
+	color: var(--color-system-text-300);
+}
+
+.exception.isSelected {
+	color: var(--color-status-info-text);
+}
+
+/* * */
+/* EXCEPTION ID */
+
+.exceptionId {
+	font-weight: var(--font-weight-bold);
+}
+
+/* * */
+/* PATTERN HEADSIGN */
+
+.patternHeadsign {
+	text-decoration: underline;
+}
+
+/* * */
+/* ICON */
+
+.icon{
+	width: 14px;
+	height: 14px;
+    margin-left: 2px;
+	vertical-align: text-bottom;
+}

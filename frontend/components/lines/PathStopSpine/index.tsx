@@ -1,8 +1,9 @@
+'use client';
+
 /* * */
 
 import { useProfileContext } from '@/contexts/Profile.context';
-import { IconHeartFilled, IconStarFilled } from '@tabler/icons-react';
-import { useMemo } from 'react';
+import { IconHeartFilled } from '@tabler/icons-react';
 
 import styles from './styles.module.css';
 
@@ -30,9 +31,7 @@ export default function Component({ backgroundColor, foregroundColor, isFirstSto
 	//
 	// B. Transform data
 
-	const isFavoriteStop = useMemo(() => {
-		return !!profileContext.data.profile?.favorite_stops?.includes(stopId);
-	}, [profileContext.data.profile?.favorite_stops]);
+	const isFavoriteStop = !!profileContext.data.profile?.favorite_stops?.includes(stopId);
 
 	//
 	// C. Render components

@@ -1,0 +1,18 @@
+/* * */
+/* CONTAINER */
+
+.container {
+	display: flex;
+	flex-direction: column;
+	gap: var(--size-spacing-5);
+}
+
+/* * */
+/* TITLE */
+
+.title {
+	font-size: 12px;
+	font-style: italic;
+	font-weight: var(--font-weight-medium);
+	color: var(--color-system-text-300);
+}
