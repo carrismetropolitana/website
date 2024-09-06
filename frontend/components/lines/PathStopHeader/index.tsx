@@ -2,32 +2,44 @@
 
 import type { Stop } from '@/types/stops.types';
 
+import FacilityIcon from '@/components/common/FacilityIcon';
+import parseStopLocationName from '@/utils/parseStopLocationName';
+
 import styles from './styles.module.css';
 
 /* * */
 
 interface Props {
+	isFirstStop?: boolean
+	isLastStop?: boolean
+	isSelected: boolean
 	stopData: Stop
 }
 
 /* * */
 
-export default function SingleStop({ stopData }: Props) {
+export default function SingleStop({ isFirstStop, isLastStop, isSelected, stopData }: Props) {
 	//
 
 	//
-	// A. Setup variables
+	// A. Transform data
+
+	const stopLocation = parseStopLocationName(stopData.locality, stopData.municipality_name);
 
 	//
-	// B. Transform data
-
-	//
-	// D. Render components
+	// B. Render components
 
 	return (
-		<div className={styles.container}>
+		<div className={`${styles.container} ${isFirstStop && styles.isFirstStop} ${isLastStop && styles.isLastStop} ${isSelected && styles.isSelected}`}>
 			<div className={styles.stopName}>{stopData.name}</div>
-			<div className={styles.stopLocation}>{stopData.municipality_name}, {stopData.district_name}</div>
+			<div className={styles.stopLocation}>{stopLocation}</div>
+			{stopData.facilities.length > 0 && (
+				<div className={styles.facilitiesWrapper}>
+					{stopData.facilities.map(facilityKey => (
+						<FacilityIcon key={facilityKey} name={facilityKey} />
+					))}
+				</div>
+			)}
 		</div>
 	);
 

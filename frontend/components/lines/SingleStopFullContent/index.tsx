@@ -48,14 +48,6 @@ export default function SingleStopFullContent({ realtimeArrivals, scheduledArriv
 	// D. Render components
 	return (
 		<>
-			{stop.facilities.length > 0
-			&& (
-				<div className={styles.facilityIcons}>
-					{stop.facilities.map(facility => (
-						<FacilityIcon key={facility} name={facility} />
-					))}
-				</div>
-			)}
 			<div className={styles.label}>{operationalDayContext.flags.is_today_selected ? t('next_buses') : t('scheduled_times')}</div>
 			<div className={styles.timesList}>
 				{/*

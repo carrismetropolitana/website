@@ -76,8 +76,13 @@ export default function Component({ arrivals, isFirstStop, isLastStop, isSelecte
 				isSelected={isSelected}
 				stopId={stop.id}
 			/>
-			<div className={styles.details}>
-				<PathStopHeader stopData={stop} />
+			<div className={styles.detailsWrapper}>
+				<PathStopHeader
+					isFirstStop={isFirstStop}
+					isLastStop={isLastStop}
+					isSelected={isSelected}
+					stopData={stop}
+				/>
 				{!isSelected
 					? <SingleLineSimpleContent nextArrival={nextArrival} />
 					: <SingleStopFullContent realtimeArrivals={realtimeArrivals} scheduledArrivals={scheduledArrivals} stop={stop} stopSequence={stopSequence} />}

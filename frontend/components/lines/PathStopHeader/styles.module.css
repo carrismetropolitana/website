@@ -4,110 +4,35 @@
 .container {
 	display: flex;
 	flex-direction: column;
-	gap: var(--size-spacing-10);
+
 }
 
-.isFirstStop .stopInfo {
-	padding-top: 2px;
-}
-.isFirstStop.isSelected .stopInfo {
-	padding-top: 2px;
-}
+/* * */
+/* STOP NAME */
 
-.isSelected .stopInfo {
-	padding: var(--size-spacing-20) 0;
-}
-
-
-/* * */
-/* * */
-/* * */
-/* * */
-/* * */
-/* * */
-/* * */
-/* * */
-/* * */
-/* * */
-/* * */
-/* * */
-
-
-
-.stopInfo{
-    display: flex;
-    flex-direction: column;
-    font-weight: 600;
-    /* padding-top: 5px;
-    padding-bottom: 5px; */
-}
-.name{
-    font-size: 16px;
+.stopName{
+	font-size: 16px;
+	max-width: 400px;
+	line-height: 1.3;
+	font-weight: var(--font-weight-bold);
     color: var(--color-system-text-100)
 }
 
-.location{
-    font-size: 14px;
+/* * */
+/* STOP LOCATION */
+
+.stopLocation{
+	font-size: 14px;
+	font-weight: var(--font-weight-semibold);
     color: var(--color-system-text-300)
 }
 
-.stopInfo>div{
-    display:flex;
-    align-items: center;
-    font-size: 14px;
-    gap:2px;
-}
+/* * */
+/* FACILITIES WRAPPER */
 
-.stopInfo>.live{
-    color: var(--color-realtime-100)
-}
-
-.stopInfo>.scheduled{
-    color: var(--color-system-text-200)
-}
-
-.stop[data-selected="true"]{
-    .stopInfo {
-        padding-top:17px;
-        padding-bottom:26px;
-    }
-
-    .stopInfo>.name{
-        font-size: 18px;
-        font-weight: 900;
-    }
-
-    .stopInfo>.location{
-        color: var(--color-system-text-200);
-    }
-    .spineLine>div{
-        width:8px;
-        height:8px;
-    }
-
-    .spineLine{
-        padding-top: 14px;
-        margin-top:-2px;
-        margin-bottom: -2px;
-    }
-    &:last-child .spineLine>div{
-        padding-top:0;
-        margin-top: -12px;
-    }
-
-    &:first-child .spineLine{
-        padding-top: 17px;
-        margin-top:0px;
-    }
-    &:last-child .spineLine{
-        padding-top: 36px;
-        margin-top:-2px;
-    }
-    .label {
-        color: var(--color-system-border-200);
-        font-size: 10px;
-        font-weight: 600;
-        font-style: italic;
-        padding-bottom: 8px;
-    }
+.facilitiesWrapper {
+	display:flex;
+	flex-direction: row;
+    gap: var(--size-spacing-10);
+    margin-top: var(--size-spacing-5);
 }

@@ -36,10 +36,11 @@
 	margin: 6px;
     border-radius: 999px;
 	transition: all 200ms ease;
+	transform: translate(0, 1px);
 }
 
 .isFirstStop .marker {
-	transform: translate(0, 2px);
+	transform: translate(0, 3px);
 }
 
 .isSelected .marker {
