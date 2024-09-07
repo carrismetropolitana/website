@@ -7,7 +7,7 @@ import styles from './styles.module.css';
 
 /* * */
 
-interface FavoriteToggleProps {
+interface Props {
 	color: string
 	isActive: boolean | null
 	onToggle: () => void
@@ -15,7 +15,7 @@ interface FavoriteToggleProps {
 
 /* * */
 
-export default function FavoriteToggle({ color, isActive, onToggle }: FavoriteToggleProps) {
+export default function FavoriteToggle({ color, isActive, onToggle }: Props) {
 	//
 
 	//
@@ -31,16 +31,16 @@ export default function FavoriteToggle({ color, isActive, onToggle }: FavoriteTo
 
 	if (isActive) {
 		return (
-			<span className={styles.container} onClick={onToggle} style={{ color: color }}>
+			<div className={styles.container} onClick={onToggle} style={{ color: color }}>
 				<IconHeartFilled size={24} />
-			</span>
+			</div>
 		);
 	}
 
 	return (
-		<span className={styles.container} onClick={onToggle}>
+		<div className={styles.container} onClick={onToggle}>
 			<IconHeart size={24} />
-		</span>
+		</div>
 	);
 
 	//

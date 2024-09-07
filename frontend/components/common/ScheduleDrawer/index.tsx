@@ -28,7 +28,7 @@ export default function Component(
 			title={pattern.headsign}
 		>
 			<SelectOperationalDay />
-			<Timetable date={innerDate} pattern={pattern} stop={stop} stopSequence={stopSequence} />
+			{/* <Timetable date={innerDate} pattern={pattern} stop={stop} stopSequence={stopSequence} /> */}
 
 		</Drawer>
 	);

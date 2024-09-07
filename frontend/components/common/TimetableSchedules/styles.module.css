@@ -1,0 +1,103 @@
+/* * */
+/* CONTAINER */
+
+.container {
+	display: flex;
+	flex-direction: row;
+	flex-wrap: wrap;
+	row-gap: var(--size-spacing-15);
+}
+
+/* * */
+/* COLUMN */
+
+.column {
+	display: grid;
+	grid-auto-rows: 28px;
+}
+
+/* * */
+/* HOURS & MINUTES */
+
+.hour,
+.minute {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	font-size: 14px;
+	line-height: 1;
+	padding: 0 6px;
+}
+
+.column:first-child .hour,
+.column:first-child .minute {
+	justify-content: flex-start;
+	padding-left: var(--size-spacing-15);
+	padding-right: var(--size-spacing-10);
+}
+
+.column:last-child .hour,
+.column:last-child .minute {
+	padding-right: var(--size-spacing-15);
+}
+
+/* * */
+/* HOURS */
+
+.hour {
+	font-weight: var(--font-weight-extrabold);
+	background-color: var(--color-primary-black);
+	color: var(--color-primary-white);
+}
+
+.column:first-child .hour {
+	border-top-left-radius: 999px;
+	border-bottom-left-radius: 999px;
+}
+
+.column:last-child .hour,
+.column:last-child .minute {
+	border-top-right-radius: 999px;
+	border-bottom-right-radius: 999px;
+}
+
+@media (prefers-color-scheme: dark) {
+	.hour {
+		background-color: var(--color-system-border-200);
+		color: var(--color-system-text-200);
+	}
+}
+
+/* * */
+/* HOUR DIVIDER */
+
+.hourDivider {
+	padding-left: 2px;
+	background-color: black;
+	opacity: 0.3;
+}
+
+/* * */
+/* MINUTES */
+
+.minute {
+	font-weight: var(--font-weight-semibold);
+}
+
+.minute.withException {
+	position: relative;
+	color: var(--color-system-text-300);
+	font-weight: var(--font-weight-medium);
+}
+
+
+/* * */
+/* EXCEPTION */
+
+.exception {
+	position: absolute;
+	top: 0;
+	right: -1px;
+	font-size: 10px;
+	font-weight: var(--font-weight-bold);
+}

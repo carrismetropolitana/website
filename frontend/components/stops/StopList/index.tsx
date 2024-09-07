@@ -108,7 +108,7 @@ export default function Component(
 									)}
 									<div className={styles.label}>{isToday ? t('next_buses') : t('scheduled_times')}</div>
 									<div className={styles.timesList}>
-										{ isToday
+										{/* { isToday
 											? (
 												<>
 													{realtimeArrivals.length > 0 && (
@@ -139,7 +139,7 @@ export default function Component(
 
 												</>
 											)
-											: <Timetable date={date} pattern={pattern} stop={stop} stopSequence={stopSequence} />}
+											: <Timetable date={date} pattern={pattern} stop={stop} stopSequence={stopSequence} />} */}
 									</div>
 									{
 										isToday

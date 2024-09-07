@@ -3,7 +3,7 @@
 /* * */
 
 import Section from '@/components/layout/Section';
-import FavoriteLines from '@/components/lines/ListFavorites';
+import FavoriteLines from '@/components/lines/LinesListViewFavorites';
 import PageToolbar from '@/components/profile/favorites/PageToolbar';
 import FavoriteStops from '@/components/stops/ListFavorites';
 import { useProfileContext } from '@/contexts/Profile.context';

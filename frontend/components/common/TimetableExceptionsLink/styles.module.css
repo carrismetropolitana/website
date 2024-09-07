@@ -1,0 +1,52 @@
+/* * */
+/* CONTAINER */
+
+.container {
+	font-size: 14px;
+	font-weight: var(--font-weight-medium);
+	color: var(--color-system-text-300);
+}
+
+.container.isSelected {
+	color: var(--color-status-info-text);
+}
+
+/* * */
+/* EXCEPTION ID */
+
+.exceptionId {
+	font-weight: var(--font-weight-bold);
+}
+
+/* * */
+/* ROUTE LONG NAME */
+
+.routeLongName {
+	font-weight: var(--font-weight-semibold);
+}
+
+.patternHeadsign:hover {
+	text-decoration: underline;
+}
+
+/* * */
+/* PATTERN HEADSIGN */
+
+.patternHeadsign {
+	font-weight: var(--font-weight-semibold);
+	text-decoration: underline;
+}
+
+.patternHeadsign:hover {
+	text-decoration: underline;
+}
+
+/* * */
+/* ICON */
+
+.icon{
+	width: 14px;
+	height: 14px;
+    margin-left: 2px;
+	vertical-align: text-bottom;
+}

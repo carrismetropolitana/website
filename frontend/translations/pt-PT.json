@@ -13,6 +13,14 @@
 			"today": "Hoje",
 			"tomorrow": "Amanhã"
 		},
+		"TimetableSchedules": {
+			"hours": "Hora",
+			"minutes": "Min."
+		},
+		"TimetableExceptionsLink": {
+			"variant": "<exceptionId>{exception_id})</exceptionId> Percurso <routeLongName>{route_long_name}</routeLongName> com destino a <patternHeadsign>{pattern_headsign}</patternHeadsign>",
+			"schedule": "Min."
+		},
 		"button": {
 			"save": "Guardar",
 			"cancel": "Cancelar",
@@ -75,19 +83,8 @@
 		}
 	},
 	"lines": {
-		"Single":{
-			"heading": "Pesquisar Linhas"
-		},
-		"SelectActivePatternGroup":{
-			"placeholder": "Selecionar percurso/destino..."
-		},
-		"SelectActivePatternGroupExplainer":{
-			"toggle": "O que é o percurso/destino de uma linha?"
-		},
-		"Page":{
-			"heading": "Pesquisar Linhas"
-		},
-		"PageToolbar": {
+		"LinesListToolbar": {
+			"heading": "Pesquisar Linhas",
 			"by_current_view": {
 				"all": "Todas as Linhas",
 				"favorites": "Favoritas"
@@ -100,16 +97,14 @@
 				"favorites": "{count, plural, =0 {Nenhuma linha favorita encontrada.} one {Encontrada # linha favorita:} other {Encontradas # linhas favoritas:}}"
 			}
 		},
-		"FavoritesList":{
+		"LinesListViewFavorites":{
 			"no_favorites": "Ainda não tem linhas favoritas"
 		},
-		"AlertsCarousel": {
-			"heading": "Alertas de Serviço"
+		"LinesDetail":{
+			"heading": "Pesquisar Linhas",
+			"toggle_favorite_error": "Erro ao adicionar a linha aos favoritos. {error}"
 		},
-		"LineMap": {
-			"active_vehicles_counter": "{count, plural, =0 {Nenhum veículo em circulação} one {# veículo em circulação} other {# veículos em circulação}}"
-		},
-		"Metrics": {
+		"LinesDetailMetrics": {
 			"demand": {
 				"big_number": "{value, number}",
 				"subtitle": "passageiros transportados nesta linha nos últimos 15 dias"
@@ -118,6 +113,24 @@
 				"big_number": "{value, number, percentage}",
 				"subtitle": "executabilidade do serviço de todos os percursos desta linha nos últimos 15 dias"
 			}
+		},
+		"LinesDetailPathMap": {
+			"active_vehicles_counter": "{count, plural, =0 {Nenhum veículo em circulação} one {# veículo em circulação} other {# veículos em circulação}}"
+		},
+		"SelectActivePatternGroup":{
+			"placeholder": "Selecionar percurso/destino..."
+		},
+		"SelectActivePatternGroupExplainer":{
+			"toggle": "O que é o percurso/destino de uma linha?"
+		},
+		"AlertsCarousel": {
+			"heading": "Alertas de Serviço"
+		},
+		"PathStopNextArrivals": {
+			"title": "Próximas circulações"
+		},
+		"PathStopTimetable": {
+			"title": "Horários planeados nesta paragem"
 		},
 		"expand_filters": "Expandir Filtros",
 		"collapse_filters": "Esconder Filtros"
@@ -655,8 +668,6 @@
 		"update_profile_success": "Perfil atualizado com sucesso!",
 		"update_profile_error": "Erro ao atualizar o perfil.",
 		"update_profile_pending": "A Atualizar o perfil...",
-		"toggle_favorite_error": "Erro ao adicionar a linha aos favoritos. {error}",
 		"toggle_stop_error": "Erro ao adicionar o paragem aos favoritos. {error}"
-
 	}
 }
