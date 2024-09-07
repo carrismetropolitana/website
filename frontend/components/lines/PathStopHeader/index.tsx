@@ -47,12 +47,13 @@ export default function SingleStop({ isFirstStop, isLastStop, isSelected, stopDa
 	return (
 		<div className={`${styles.container} ${isFirstStop && styles.isFirstStop} ${isLastStop && styles.isLastStop} ${isSelected && styles.isSelected}`}>
 			<p className={styles.stopName}>{stopData.name}</p>
-			<p className={styles.stopLocation}>{stopLocation}
-				<span className={`${styles.stopId} ${stopIdClipboard.copied && styles.isCopied}`} onClick={handleClickStopId}>
+			<div className={styles.subHeaderWrapper}>
+				<p className={styles.stopLocation}>{stopLocation}</p>
+				<p className={`${styles.stopId} ${stopIdClipboard.copied && styles.isCopied}`} onClick={handleClickStopId}>
 					#{stopData.id}
 					{stopIdClipboard.copied ? <IconCheck className={styles.stopIdCopyIcon} /> : <IconCopy className={styles.stopIdCopyIcon} />}
-				</span>
-			</p>
+				</p>
+			</div>
 			{stopData.facilities.length > 0 && (
 				<div className={styles.facilitiesWrapper}>
 					{stopData.facilities.map(facility => (

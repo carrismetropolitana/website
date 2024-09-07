@@ -11,6 +11,10 @@
 	color: var(--color-status-info-text);
 }
 
+.container.isOthersSelected {
+	color: var(--color-system-text-400);
+}
+
 /* * */
 /* EXCEPTION ID */
 

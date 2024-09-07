@@ -68,6 +68,7 @@ export const ProfileContextProvider = ({ children }) => {
 
 	//
 	// B. Transform data
+
 	useEffect(() => {
 		// Get device id from local storage
 		// If no device id is found then generate a new one

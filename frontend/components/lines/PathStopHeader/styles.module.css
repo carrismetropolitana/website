@@ -19,6 +19,15 @@
 }
 
 /* * */
+/* SUB-HEADER WRAPPER */
+
+.subHeaderWrapper {
+	display: flex;
+	flex-direction: row;
+	align-items: baseline;
+}
+
+/* * */
 /* STOP LOCATION */
 
 .stopLocation{
@@ -32,10 +41,9 @@
 /* STOP ID */
 
 .stopId {
-	line-height: 1.2;
-	vertical-align: baseline;
 	font-size: 12px;
-	margin-left: 5px;
+	transform: translate(0, 1px);
+	margin-left: var(--size-spacing-10);
 	font-weight: var(--font-weight-semibold);
 	color: var(--color-system-text-400);
 	transition: all 200ms ease;
