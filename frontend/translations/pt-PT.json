@@ -611,6 +611,10 @@
 			"headsign": "Destino",
 			"estimate": "Previsão"
 		},
+		"NextBuses":{
+			"show": "Ver passagens anteriores",
+			"hide": "Esconder passagens anteriores"
+		},
 		"FavoritesList":{
 			"no_favorites": "Ainda não tem paragens favoritas"
 		},
