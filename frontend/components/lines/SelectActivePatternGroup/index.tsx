@@ -25,6 +25,7 @@ export default function Component() {
 	const validPatternGroupsSelectOptions = useMemo(() => {
 		if (!linesDetailContext.data.valid_pattern_groups) return [];
 		return linesDetailContext.data.valid_pattern_groups.map(patternGroupData => ({ label: patternGroupData.headsign || '-', value: patternGroupData.pattern_group_id }));
+		// return linesDetailContext.data.all_patterns.flat().map(patternGroupData => ({ label: patternGroupData.headsign || '-', value: patternGroupData.pattern_group_id }));
 	}, [linesDetailContext.data.valid_pattern_groups]);
 
 	//

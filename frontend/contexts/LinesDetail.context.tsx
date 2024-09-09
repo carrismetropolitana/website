@@ -2,14 +2,14 @@
 
 /* * */
 
+import type { Alert, SimplifiedAlert } from '@/types/alerts.types';
 import type { Line, Pattern, PatternGroup, Route, Shape } from '@/types/lines.types.js';
+import type { Stop } from '@/types/stops.types';
+import type { DemandByLine } from '@/utils/types';
 
 import { useOperationalDayContext } from '@/contexts/OperationalDay.context';
 import { useProfileContext } from '@/contexts/Profile.context';
-import { Alert, SimplifiedAlert } from '@/types/alerts.types';
-import { Stop } from '@/types/stops.types';
 import convertToSimplifiedAlert from '@/utils/convertToSimplifiedAlert';
-import { DemandByLine } from '@/utils/types';
 import { createContext, useContext, useEffect, useState } from 'react';
 import useSWR from 'swr';
 
@@ -89,7 +89,7 @@ export const LinesDetailContextProvider = ({ children, lineId }) => {
 
 	const { data: lineData, isLoading: lineLoading } = useSWR<Line, Error>(`https://api.carrismetropolitana.pt/v2/lines/${lineId}`);
 	const { data: allAlertsData, isLoading: allAlertsLoading } = useSWR<Alert[], Error>('https://api.carrismetropolitana.pt/v2/alerts');
-	const { data: allDemandByLineData, isLoading: allDemandByLineLoading } = useSWR<DemandByLine[], Error>('https://api.carrismetropolitana.pt/v2/metrics/demand/by_line');
+	const { data: allDemandByLineData } = useSWR<DemandByLine[], Error>('https://api.carrismetropolitana.pt/v2/metrics/demand/by_line');
 
 	useEffect(() => {
 		(async () => {
