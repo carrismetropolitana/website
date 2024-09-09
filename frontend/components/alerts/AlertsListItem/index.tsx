@@ -3,10 +3,10 @@
 /* * */
 
 import { AlertActivePeriodEnd, AlertActivePeriodStart } from '@/components/alerts/AlertActivePeriod';
-import { AlertEffectIcon } from '@/components/alerts/AlertIcon';
+import { AlertEffectIcon } from '@/components/alerts/AlertCauseEffectIcon';
 import AlertsListItemImageThumbnail from '@/components/alerts/AlertsListItemImageThumbnail';
 import Button from '@/components/common/Button';
-import { useAlertsListContext } from '@/contexts/AlertsList.context';
+import { useAlertsContext } from '@/contexts/Alerts.context';
 import { Accordion } from '@mantine/core';
 import { IconArrowUpRight } from '@tabler/icons-react';
 import { useTranslations } from 'next-intl';
@@ -15,33 +15,33 @@ import styles from './styles.module.css';
 
 /* * */
 
-interface AlertsListItemProps {
-	alert_id: string
+interface Props {
+	alertId: string
 }
 
 /* * */
 
-export default function Component({ alert_id }: AlertsListItemProps) {
+export default function Component({ alertId }: Props) {
 	//
 
 	//
 	// A. Setup variables
 
 	const t = useTranslations('alerts.AlertsListItem');
-	const alertsContext = useAlertsListContext();
+	const alertsContext = useAlertsContext();
 
 	//
 	// B. Transform data
 
-	const alertHref = `/alerts/${alert_id}`;
+	const alertHref = `/alerts/${alertId}`;
 
-	const simplifiedAlertData = alertsContext.actions.getSimplifiedAlertById(alert_id);
+	const simplifiedAlertData = alertsContext.actions.getSimplifiedAlertById(alertId);
 
 	//
 	// C. Render components
 
 	return (
-		<Accordion.Item value={alert_id}>
+		<Accordion.Item value={alertId}>
 			<Accordion.Control icon={<AlertEffectIcon effect={simplifiedAlertData?.effect} />}>{simplifiedAlertData?.title}</Accordion.Control>
 			<Accordion.Panel classNames={{ content: styles.contentWrapper }}>
 				<div className={styles.infoBar}>
