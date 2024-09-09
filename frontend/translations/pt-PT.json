@@ -130,7 +130,8 @@
 			"title": "Próximas circulações"
 		},
 		"PathStopTimetable": {
-			"title": "Horários planeados nesta paragem"
+			"title": "Horários planeados nesta paragem:",
+			"no_data": "Horários indisponíveis para esta data."
 		},
 		"expand_filters": "Expandir Filtros",
 		"collapse_filters": "Esconder Filtros"
