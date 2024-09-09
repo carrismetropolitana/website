@@ -600,6 +600,12 @@
 				"favorites": "{count, plural, =0 {Nenhuma paragem favorita encontrada.} one {Encontrada # paragem favorita:} other {Encontradas # paragens favoritas:}}"
 			}
 		},
+		"NextBusRow":{
+      "passed": "{value}",
+      "scheduled": "{value}",
+      "arriving_now": "A chegar",
+      "realtime": "{value} min"
+		},
 		"FavoritesList":{
 			"no_favorites": "Ainda não tem paragens favoritas"
 		},

@@ -1,75 +1,114 @@
-import LineBadge from '@/components/common/LineBadge';
+import CopyBadge from '@/components/common/CopyBadge';
+import LiveIcon from '@/components/common/LiveIcon';
+import { useDebugContext } from '@/contexts/Debug.context';
 import { useStopsSingleContext } from '@/contexts/StopsSingle.context';
 import { StopRealtime } from '@/types/stops.types';
+import dayjs from 'dayjs';
+import { useTranslations } from 'next-intl';
 
+import LineDisplay from '../LineDisplay';
 import styles from './styles.module.css';
 
+function getTripRealtimeStatus(tripData: StopRealtime) {
+	const consideredTime = tripData.estimated_arrival_unix || tripData.scheduled_arrival_unix;
+	const currentTime = new Date().getTime() / 1000;
+
+	const timeDifference = consideredTime - currentTime;
+
+	if (timeDifference < -10) return 'passed';
+	if (timeDifference < 60) return 'arriving_now';
+
+	if (tripData.estimated_arrival_unix) return 'realtime';
+	return 'scheduled';
+}
+
 export function NextBusRow({ realtime }: { realtime: StopRealtime }) {
+	// A. Setup variables
 	const stopsSingleContext = useStopsSingleContext();
-	// return (
-	// 	<div className={`${styles.container} ${styles[tripRealtimeStatus]} ${FrontendStopsContext.entities.trip_id === tripData.trip_id && styles.selected}`} onClick={handleSelectTrip}>
-	// 		<div className={styles.tripSummary}>
-	// 			<LineDisplay color={patternData?.color} long_name={patternData?.headsign} short_name={tripData.line_id} text_color={patternData?.text_color} />
-	// 			{tripRealtimeStatus === 'passed'
-	// 			&& (
-	// 				<div className={styles.arrivalEstimate}>
-	// 					<p>{t('trip_realtime_status.passed', { value: tripEtaString })}</p>
-	// 				</div>
-	// 			)}
-	// 			{tripRealtimeStatus === 'arriving_now'
-	// 			&& (
-	// 				<div className={styles.arrivalEstimate}>
-	// 					<LiveIcon />
-	// 					<p>{t('trip_realtime_status.arriving_now')}</p>
-	// 				</div>
-	// 			)}
-	// 			{tripRealtimeStatus === 'realtime'
-	// 			&& (
-	// 				<div className={styles.arrivalEstimate}>
-	// 					<LiveIcon />
-	// 					<p>{t('trip_realtime_status.realtime', { value: tripEtaMinutes })}</p>
-	// 				</div>
-	// 			)}
-	// 			{tripRealtimeStatus === 'scheduled'
-	// 			&& (
-	// 				<div className={styles.arrivalEstimate}>
-	// 					<p>{t('trip_realtime_status.scheduled', { value: tripEtaString })}</p>
-	// 				</div>
-	// 			)}
-	// 		</div>
+	const debugContext = useDebugContext();
+	const t = useTranslations('stops.NextBusRow');
 
-	// 		<div className={styles.tripDetails}>
-	// 			{debugContext.isDebug
-	// 			&& (
-	// 				<div className={styles.testData} onClick={e => e.stopPropagation()}>
-	// 					<CopyBadge label={`stop_id: ${FrontendStopsContext.entities.stop?.id}`} value={FrontendStopsContext.entities.stop?.id} />
-	// 					<CopyBadge label={`trip_id: ${tripData.trip_id}`} value={tripData.trip_id} />
-	// 					<CopyBadge label={`stop_seq: ${tripData.stop_sequence}`} value={tripData.stop_sequence} />
-	// 					<CopyBadge label={`vehicle_id: ${tripData.vehicle_id}`} value={tripData.vehicle_id} />
-	// 					<CopyBadge label={`Observado: ${tripData.observed_arrival}`} value={tripData.observed_arrival} />
-	// 					<CopyBadge label={`Estimado: ${tripData.estimated_arrival}`} value={tripData.estimated_arrival} />
-	// 					<CopyBadge label={`Planeado: ${tripData.scheduled_arrival}`} value={tripData.scheduled_arrival} />
-	// 				</div>
-	// 			)}
+	// B. Transform data
+	const tripRealtimeStatus = getTripRealtimeStatus(realtime);
+	const bestTime = realtime.estimated_arrival_unix || realtime.scheduled_arrival_unix;
 
-	// 			{(tripRealtimeStatus === 'realtime' || tripRealtimeStatus === 'arriving_now' || tripRealtimeStatus === 'passed') && tripEtaMinutes > -10 && tripData.vehicle_id && !debugContext.isDebug && <FrontendStopsTimetableFeedback tripData={tripData} />}
+	// in format HH:mm
+	const tripEtaString = dayjs.unix(bestTime).format('HH:mm');
 
-	// 			<div className={styles.localitiesPerLine}>
-	// 				<p>Passa por</p>
-	// 				<p className={styles.localities}>
-	// 					{patternData?.localities?.length > 0
-	// 					&& patternData.localities.map((locality, index) => (
-	// 						<span key={index}>
-	// 							{index > 0 && <span className={styles.localitySeparator}> • </span>}
-	// 							<span className={styles.localityName}>{locality}</span>
-	// 						</span>
-	// 					),
+	const tripEtaMinutes = Math.floor((bestTime - (new Date().getTime() / 1000)) / 60);
+	const thisPattern = stopsSingleContext.data.valid_pattern_groups?.find(pattern => pattern.pattern_id === realtime.pattern_id);
+	if (!thisPattern) return null;
 
-	// 					)}
-	// 				</p>
-	// 			</div>
-	// 		</div>
-	// 	</div>
-	// );
-	return <div>stophere</div>;
+	// C. Handle events
+	const handleSelectTrip = () => {
+		stopsSingleContext.actions.setActiveTripId(realtime.trip_id);
+	};
+
+	// D. Render component
+	return (
+		<div className={`${styles.container} ${styles[tripRealtimeStatus]} ${stopsSingleContext.data.active_trip_id === realtime.trip_id && styles.selected}`} onClick={handleSelectTrip}>
+			<div className={styles.tripSummary}>
+				<LineDisplay color={thisPattern.color} long_name={thisPattern.headsign} short_name={thisPattern.line_id} text_color={thisPattern.text_color} />
+				{tripRealtimeStatus === 'passed'
+				&& (
+					<div className={styles.arrivalEstimate}>
+						<p>{t('passed', { value: tripEtaString })}</p>
+					</div>
+				)}
+				{tripRealtimeStatus === 'arriving_now'
+				&& (
+					<div className={styles.arrivalEstimate}>
+						<LiveIcon />
+						<p>{t('arriving_now')}</p>
+					</div>
+				)}
+				{tripRealtimeStatus === 'realtime'
+				&& (
+					<div className={styles.arrivalEstimate}>
+						<LiveIcon />
+						<p>{t('realtime', { value: tripEtaMinutes })}</p>
+					</div>
+				)}
+				{tripRealtimeStatus === 'scheduled'
+				&& (
+					<div className={styles.arrivalEstimate}>
+						<p>{t('scheduled', { value: tripEtaString })}</p>
+					</div>
+				)}
+			</div>
+
+			<div className={styles.tripDetails}>
+				{debugContext.flags.is_debug_mode
+				&& (
+					<div className={styles.testData} onClick={e => e.stopPropagation()}>
+						<CopyBadge label={`stop_id: ${stopsSingleContext.data.stop?.id}`} value={stopsSingleContext.data.stop?.id || 'None'} />
+						<CopyBadge label={`trip_id: ${realtime.trip_id}`} value={realtime.trip_id} />
+						<CopyBadge label={`stop_seq: ${realtime.stop_sequence}`} value={realtime.stop_sequence} />
+						<CopyBadge label={`vehicle_id: ${realtime.vehicle_id}`} value={realtime.vehicle_id || 'None'} />
+						<CopyBadge label={`Observado: ${realtime.observed_arrival}`} value={realtime.observed_arrival || 'None'} />
+						<CopyBadge label={`Estimado: ${realtime.estimated_arrival}`} value={realtime.estimated_arrival || 'None'} />
+						<CopyBadge label={`Planeado: ${realtime.scheduled_arrival}`} value={realtime.scheduled_arrival} />
+					</div>
+				)}
+
+				{/* //TODO - Implement feedback */}
+				{/* {(tripRealtimeStatus === 'realtime' || tripRealtimeStatus === 'arriving_now' || tripRealtimeStatus === 'passed') && tripEtaMinutes > -10 && realtime.vehicle_id && !debugContext.flags.is_debug_mode && <FrontendStopsTimetableFeedback realtime={realtime} />} */}
+
+				<div className={styles.localitiesPerLine}>
+					<p>Passa por</p>
+					<p className={styles.localities}>
+						{thisPattern.localities.length > 0
+						&& thisPattern.localities.map((locality, index) => (
+							<span key={index}>
+								{index > 0 && <span className={styles.localitySeparator}> • </span>}
+								<span className={styles.localityName}>{locality}</span>
+							</span>
+						),
+
+						)}
+					</p>
+				</div>
+			</div>
+		</div>
+	);
 }

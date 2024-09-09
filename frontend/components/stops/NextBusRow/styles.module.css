@@ -5,11 +5,12 @@
   display: flex;
   flex-direction: column;
   border-radius: 0;
-  border-bottom: 1px solid var(--gray2);
+  border-bottom: 1px solid var(--color-system-border-100);
   cursor: pointer;
   transition-property: box-shadow, transform, margin, border-color, opacity;
   transition-duration: 200ms;
   transition-timing-function: ease;
+  width: 100%;
 }
 
 .container:last-child {
@@ -22,13 +23,23 @@
 
 @media (hover: hover) {
   .container:hover {
-    background-color: var(--reference-0);
-    box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.05);
-    border-radius: var(--size-sm);
+    background-color: var(--color-system-background-200);
+    box-shadow: var(--box-shadow);
+    border-radius: 10px;
     border-bottom-color: transparent;
   }
   .container:has(+ .container:hover) {
     border-bottom-color: transparent;
+  }
+}
+
+@media (max-width: 1200px) {
+	.container {
+    /* border-bottom: 1px solid var(--color-system-border-200); */
+    background-color: var(--color-system-background-200)
+	}
+  .container:hover {
+    background-color: var(--color-system-background-300);
   }
 }
 
@@ -41,10 +52,10 @@
 
 .selected,
 .selected:hover {
-  background-color: var(--reference-0);
-  box-shadow: 0px 0px 30px rgba(0, 0, 0, 0.1);
+  background-color: var(--color-system-background-300);
+  box-shadow: var(--box-shadow-large);
   transform: scale(1.03);
-  border-radius: var(--size-sm);
+  border-radius: 10px;
   border-bottom-color: transparent;
   margin-top: 5px;
   margin-bottom: 5px;
@@ -79,7 +90,7 @@
   display: grid;
   grid-template-columns: 1fr 100px;
   gap: 2px;
-  padding: var(--size-sm);
+  padding: 10px;
 }
 
 /* * */
@@ -95,25 +106,25 @@
 .passed .arrivalEstimate p {
   font-size: 15px;
   font-weight: 600;
-  color: var(--reference-1);
+  color: var(--color-system-text-100);
 }
 
 .arriving_now .arrivalEstimate p {
   font-size: 16px;
   font-weight: 700;
-  color: var(--realtime-100);
+  color: var(--color-realtime-100);
 }
 
 .realtime .arrivalEstimate p {
   font-size: 16px;
   font-weight: 700;
-  color: var(--realtime-100);
+  color: var(--color-realtime-100);
 }
 
 .scheduled .arrivalEstimate p {
   font-size: 16px;
   font-weight: 700;
-  color: var(--reference-1);
+  color: var(--color-system-text-100);
 }
 
 /* * */
@@ -121,20 +132,20 @@
 
 .tripDetails {
   display: none;
-  padding: var(--size-sm);
+  padding: 10px;
 }
 
 .selected .tripDetails {
   display: flex;
   flex-direction: column;
   gap: 5px;
-  border-top: 1px solid var(--gray2);
+  border-top: 1px solid var(--color-system-border-200);
 }
 
 .localitiesPerLine {
   font-size: 12px;
   font-weight: 600;
-  color: var(--gray6);
+  color: var(--color-system-text-300);
 }
 
 .localities {
@@ -147,11 +158,11 @@
 }
 
 .localitySeparator {
-  color: var(--gray4);
+  color: var(--color-system-border-200);
 }
 
 .localityName {
-  color: var(--gray8);
+  color: var(--color-system-text-300);
 }
 
 /* * */
@@ -159,7 +170,7 @@
 
 .testData {
   padding: 10px;
-  border: 1px dashed var(--debug);
+  border: 1px dashed var(--color-debug);
   border-radius: 3px;
 }
 
@@ -174,6 +185,6 @@
   cursor: text;
   font-size: 12px;
   font-weight: 600;
-  color: var(--gray6);
+  color: var(--color-system-text-300);
 }
 

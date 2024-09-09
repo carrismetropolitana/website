@@ -4,9 +4,9 @@
 
 import AlertsCarousel from '@/components/common/AlertsCarousel';
 import FavoriteToggle from '@/components/common/FavoriteToggle';
+import LineBadge from '@/components/common/LineBadge';
 import NoDataLabel from '@/components/layout/NoDataLabel';
 import Section from '@/components/layout/Section';
-import LineBadge from '@/components/common/LineBadge';
 import LineMap from '@/components/lines/LineMap';
 import LineName from '@/components/lines/LineName';
 import Metrics from '@/components/lines/Metrics';

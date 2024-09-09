@@ -17,11 +17,13 @@ import useSWR from 'swr';
 interface StopsSingleContextState {
 	actions: {
 		setActivePatternGroup: (patternGroupId: string) => void
+		setActiveTripId: (tripId: string) => void
 		setStopId: (stopId: string) => void
 	}
 	data: {
 		active_alerts: SimplifiedAlert[] | null
 		active_pattern_group: PatternGroup | null
+		active_trip_id: null | string
 		all_patterns: Pattern[] | null
 		all_routes: Route[] | null
 		realtime: StopRealtime[] | null
@@ -69,6 +71,7 @@ export const StopsSingleContextProvider = ({ children, stopId }: { children: Rea
 	const [dataValidPatternGroupsState, setDataValidPatternGroupsState] = useState<PatternGroup[] | null>(null);
 	const [dataActivePatternGroupState, setDataActivePatternGroupState] = useState<PatternGroup | null>(null);
 	const [dataActiveAlertsState, setDataActiveAlertsState] = useState<SimplifiedAlert[] | null>(null);
+	const [dataActiveTripIdState, setDataActiveTripIdState] = useState<null | string>(null);
 	// const [dataActiveLineState, setDataActiveLineState] = useState<Line | null>(null);
 	const [dataValidLinesState, setDataValidLinesState] = useState<Line[] | null>(null);
 
@@ -200,17 +203,23 @@ export const StopsSingleContextProvider = ({ children, stopId }: { children: Rea
 		setStopIdState(stopId);
 	};
 
+	const setActiveTripId = (tripId: string) => {
+		setDataActiveTripIdState(tripId);
+	};
+
 	//
 	// E. Define context value
 
 	const contextValue: StopsSingleContextState = {
 		actions: {
 			setActivePatternGroup,
+			setActiveTripId,
 			setStopId,
 		},
 		data: {
 			active_alerts: dataActiveAlertsState,
 			active_pattern_group: dataActivePatternGroupState,
+			active_trip_id: dataActiveTripIdState,
 			all_patterns: dataAllPatternsState,
 			all_routes: dataRoutesState,
 			realtime: dataRealtimeState,
