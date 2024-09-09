@@ -15,6 +15,9 @@ interface OperationalDayContextState {
 		updateSelectedDayToTomorrow: () => void
 	}
 	data: {
+		/**
+		 * yyyyMMdd
+		 */
 		selected_day: null | string
 		selected_day_jsdate: Date | null
 		today: null | string
