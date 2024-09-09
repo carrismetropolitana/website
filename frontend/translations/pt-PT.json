@@ -606,6 +606,11 @@
       "arriving_now": "A chegar",
       "realtime": "{value} min"
 		},
+		"NextBusesHeader":{
+			"line": "Linha",
+			"headsign": "Destino",
+			"estimate": "Previsão"
+		},
 		"FavoritesList":{
 			"no_favorites": "Ainda não tem paragens favoritas"
 		},
