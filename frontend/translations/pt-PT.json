@@ -136,15 +136,15 @@
 		"collapse_filters": "Esconder Filtros"
 	},
 	"alerts": {
-		"Page":{
+		"AlertsList":{
 			"heading": "Alertas de Serviço",
 			"subheading":"Fique a par de todas as alterações à rede. Lorem ipsum dolor sit amet."
 		},
-		"Single":{
+		"AlertsDetail":{
 			"open_full_image": "Abrir imagem numa nova janela",
 			"more_info": "Mais informações"
 		},
-		"AlertsList":{
+		"AlertsListGroup":{
 			"label": "{count, plural, one {Alerta ativo} other {Alertas ativos}}",
 			"titles": {
 				"future": "A partir de {value, date, dayShort} {value, date, monthLong} {value, date, yearLong}",
@@ -165,7 +165,7 @@
 		"AlertsListItem":{
 			"open": "Abrir"
 		},
-		"Toolbar": {
+		"AlertsListToolbar": {
 			"by_date": {
 				"current": "Esta semana",
 				"future": "Futuros"
@@ -176,7 +176,7 @@
 			"start": "Início: <parsedDate>{start, date, dayShort} {start, date, monthLong} {start, date, yearLong}</parsedDate>",
 			"end": "Fim: <parsedDate>{end, date, dayShort} {end, date, monthLong} {end, date, yearLong}</parsedDate>"
 		},
-		"AlertIcon": {
+		"AlertCauseEffectIcon": {
 			"cause": {
 				"ACCIDENT": "Acidente",
 				"CONSTRUCTION": "Obras",

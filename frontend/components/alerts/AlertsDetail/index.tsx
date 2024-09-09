@@ -3,10 +3,11 @@
 /* * */
 
 import { AlertActivePeriodEnd, AlertActivePeriodStart } from '@/components/alerts/AlertActivePeriod';
-import { AlertCauseIcon, AlertEffectIcon } from '@/components/alerts/AlertIcon';
+import { AlertCauseIcon, AlertEffectIcon } from '@/components/alerts/AlertCauseEffectIcon';
+import AlertInformedEntity from '@/components/alerts/AlertInformedEntity';
 import Button from '@/components/common/Button';
 import Section from '@/components/layout/Section';
-import { useAlertsListContext } from '@/contexts/AlertsList.context';
+import { useAlertsContext } from '@/contexts/Alerts.context';
 import { Image } from '@mantine/core';
 import { IconArrowUpRight, IconExternalLink } from '@tabler/icons-react';
 import { useTranslations } from 'next-intl';
@@ -15,19 +16,25 @@ import styles from './styles.module.css';
 
 /* * */
 
-export default function Component({ alert_id }) {
+interface Props {
+	alertId: string
+}
+
+/* * */
+
+export default function Component({ alertId }: Props) {
 	//
 
 	//
 	// A. Setup variables
 
-	const t = useTranslations('alerts.Single');
-	const alertsContext = useAlertsListContext();
+	const t = useTranslations('alerts.AlertsDetail');
+	const alertsContext = useAlertsContext();
 
 	//
-	// B. Transform data
+	// B. Fetch data
 
-	const simplifiedAlertData = alertsContext.actions.getSimplifiedAlertById(alert_id);
+	const simplifiedAlertData = alertsContext.actions.getSimplifiedAlertById(alertId);
 
 	//
 	// C. Render components
@@ -39,6 +46,11 @@ export default function Component({ alert_id }) {
 				{simplifiedAlertData?.effect && <AlertEffectIcon effect={simplifiedAlertData.effect} withText />}
 				{simplifiedAlertData?.start_date && <AlertActivePeriodStart date={simplifiedAlertData.start_date} />}
 				{simplifiedAlertData?.end_date && <AlertActivePeriodEnd date={simplifiedAlertData.end_date} />}
+			</Section>
+			<Section childrenWrapperStyles={styles.infoBar} withGap={false} withTopPadding={false} withChildrenPadding>
+				{simplifiedAlertData?.informed_entity && simplifiedAlertData?.informed_entity.map((entity, index) => (
+					<AlertInformedEntity key={index} lineId={entity.lineId} />
+				))}
 			</Section>
 			<Section childrenWrapperStyles={styles.contentWrapper} withTopPadding={false} withChildrenNudge withChildrenPadding>
 				{simplifiedAlertData?.description && <p className={styles.description}>{simplifiedAlertData.description}</p>}

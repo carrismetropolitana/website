@@ -14,7 +14,7 @@ import useSWR from 'swr';
 
 interface AlertsListContextState {
 	actions: {
-		getSimplifiedAlertById: (alert_id: string) => SimplifiedAlert | null
+		getSimplifiedAlertById: (alertId: string) => SimplifiedAlert | null
 		updateFilterByDate: (value: string) => void
 		updateFilterByMunicipality: (value: string) => void
 	}
@@ -140,11 +140,11 @@ export const AlertsListContextProvider = ({ children }) => {
 		setFilterByMunicipalityState(value || null);
 	};
 
-	const getSimplifiedAlertById = (alert_id: string): SimplifiedAlert | null => {
+	const getSimplifiedAlertById = (alertId: string): SimplifiedAlert | null => {
 		//
 		if (!allAlertsData) return null;
 		// Find the alert by ID
-		const alertData = allAlertsData.find(item => item._id === alert_id);
+		const alertData = allAlertsData.find(item => item.alert_id === alertId);
 		if (!alertData) return null;
 		//
 		return convertToSimplifiedAlert(alertData);

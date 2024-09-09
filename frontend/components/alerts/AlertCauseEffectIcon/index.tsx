@@ -2,7 +2,7 @@
 
 import type { AlertCause, AlertEffect } from '@/types/alerts.types';
 
-import { IconAccessible, IconAlertHexagon, IconAmbulance, IconArrowBigUpLines, IconArrowFork, IconBarrierBlock, IconCalendarEvent, IconCarCrash, IconCircleArrowDown, IconClock2, IconClockExclamation, IconCloudStorm, IconInfoTriangle, IconSpeakerphone, IconTool } from '@tabler/icons-react';
+import { IconAccessible, IconAmbulance, IconArrowBigUpLines, IconBarrierBlock, IconCalendarEvent, IconCarCrash, IconCircleArrowDown, IconCircleMinus, IconClock2, IconClockExclamation, IconCloudStorm, IconInfoTriangle, IconRouteAltRight, IconSpeakerphone, IconTool } from '@tabler/icons-react';
 import { useTranslations } from 'next-intl';
 
 import styles from './styles.module.css';
@@ -22,7 +22,7 @@ export function AlertCauseIcon({ cause, withText = false }: AlertCauseIconProps)
 	//
 	// A. Setup variables
 
-	const t = useTranslations('alerts.AlertIcon.cause');
+	const t = useTranslations('alerts.AlertCauseEffectIcon.cause');
 
 	//
 	// B. Transform data
@@ -108,7 +108,7 @@ export function AlertEffectIcon({ effect, withText = false }: AlertEffectIconPro
 	//
 	// A. Setup variables
 
-	const t = useTranslations('alerts.AlertIcon.effect');
+	const t = useTranslations('alerts.AlertCauseEffectIcon.effect');
 
 	//
 	// B. Transform data
@@ -140,13 +140,13 @@ export function AlertEffectIcon({ effect, withText = false }: AlertEffectIconPro
 			icon = <IconArrowBigUpLines className={styles[`severityLevel_${severityLevel}`]} size={20} />;
 			break;
 		case 'DETOUR':
-			icon = <IconArrowFork className={styles[`severityLevel_${severityLevel}`]} size={20} />;
+			icon = <IconRouteAltRight className={styles[`severityLevel_${severityLevel}`]} size={20} />;
 			break;
 		case 'MODIFIED_SERVICE':
 			icon = <IconClock2 className={styles[`severityLevel_${severityLevel}`]} size={20} />;
 			break;
 		case 'NO_SERVICE':
-			icon = <IconAlertHexagon className={styles[`severityLevel_${severityLevel}`]} size={20} />;
+			icon = <IconCircleMinus className={styles[`severityLevel_${severityLevel}`]} size={20} />;
 			break;
 		case 'REDUCED_SERVICE':
 			icon = <IconCircleArrowDown className={styles[`severityLevel_${severityLevel}`]} size={20} />;
