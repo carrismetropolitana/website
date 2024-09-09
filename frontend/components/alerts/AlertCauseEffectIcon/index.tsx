@@ -22,7 +22,7 @@ export function AlertCauseIcon({ cause, withText = false }: AlertCauseIconProps)
 	//
 	// A. Setup variables
 
-	const t = useTranslations('alerts.AlertIcon.cause');
+	const t = useTranslations('alerts.AlertCauseEffectIcon.cause');
 
 	//
 	// B. Transform data
@@ -108,7 +108,7 @@ export function AlertEffectIcon({ effect, withText = false }: AlertEffectIconPro
 	//
 	// A. Setup variables
 
-	const t = useTranslations('alerts.AlertIcon.effect');
+	const t = useTranslations('alerts.AlertCauseEffectIcon.effect');
 
 	//
 	// B. Transform data

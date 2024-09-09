@@ -176,7 +176,7 @@
 			"start": "Início: <parsedDate>{start, date, dayShort} {start, date, monthLong} {start, date, yearLong}</parsedDate>",
 			"end": "Fim: <parsedDate>{end, date, dayShort} {end, date, monthLong} {end, date, yearLong}</parsedDate>"
 		},
-		"AlertIcon": {
+		"AlertCauseEffectIcon": {
 			"cause": {
 				"ACCIDENT": "Acidente",
 				"CONSTRUCTION": "Obras",
