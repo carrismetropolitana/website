@@ -1,6 +1,6 @@
 /* * */
 
-import AlertsSingle from '@/components/alerts/Single';
+import AlertsDetail from '@/components/alerts/AlertsDetail';
 import { AlertsListContextProvider } from '@/contexts/AlertsList.context';
 
 /* * */
@@ -8,7 +8,7 @@ import { AlertsListContextProvider } from '@/contexts/AlertsList.context';
 export default function Page({ params: { alert_id } }) {
 	return (
 		<AlertsListContextProvider>
-			<AlertsSingle alertId={alert_id} />
+			<AlertsDetail alertId={alert_id} />
 		</AlertsListContextProvider>
 	);
 }

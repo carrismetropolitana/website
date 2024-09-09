@@ -16,17 +16,23 @@ import styles from './styles.module.css';
 
 /* * */
 
-export default function Component({ alertId }) {
+interface Props {
+	alertId: string
+}
+
+/* * */
+
+export default function Component({ alertId }: Props) {
 	//
 
 	//
 	// A. Setup variables
 
-	const t = useTranslations('alerts.Single');
+	const t = useTranslations('alerts.AlertsDetail');
 	const alertsContext = useAlertsContext();
 
 	//
-	// B. Transform data
+	// B. Fetch data
 
 	const simplifiedAlertData = alertsContext.actions.getSimplifiedAlertById(alertId);
 
