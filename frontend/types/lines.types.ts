@@ -24,12 +24,12 @@ export interface Line {
 export interface Route {
 	color: string
 	facilities: string[]
-	id: string
 	line_id: string
 	localities: string[]
 	long_name: string
 	municipalities: string[]
 	patterns: string[]
+	route_id: string
 	short_name: string
 	text_color: string
 }

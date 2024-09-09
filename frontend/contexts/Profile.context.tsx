@@ -68,6 +68,7 @@ export const ProfileContextProvider = ({ children }) => {
 
 	//
 	// B. Transform data
+
 	useEffect(() => {
 		// Get device id from local storage
 		// If no device id is found then generate a new one
@@ -103,23 +104,22 @@ export const ProfileContextProvider = ({ children }) => {
 
 	//
 	// C. Handle actions
+
 	const toggleFavoriteLine = async (lineId: string) => {
 		const profile: ServerActionResult<Profile> = await favoriteLineAction(lineId, deviceId || '');
-
 		if (!profile.success) throw new Error(profile.error);
-
 		setDataProfile(profile.value);
 	};
 
 	const toggleFavoriteStop = async (stopId: string) => {
 		const profile: ServerActionResult<Profile> = await favoriteStopAction(stopId, deviceId || '');
-
 		if (!profile.success) throw new Error(profile.error);
-
 		setDataProfile(profile.value);
 	};
 
-	const updateFilterByFavorite = (value: ProfileContextState['filters']['favorites']) => setFilterByFavorite(value);
+	const updateFilterByFavorite = (value: ProfileContextState['filters']['favorites']) => {
+		setFilterByFavorite(value);
+	};
 
 	const updateProfile = async (profile: Partial<Profile>) => {
 		if (!dataProfile) return;

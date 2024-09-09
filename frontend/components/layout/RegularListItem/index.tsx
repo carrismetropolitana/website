@@ -9,7 +9,7 @@ import styles from './styles.module.css';
 
 /* * */
 
-interface RegularListItemProps {
+interface Props {
 	children?: React.ReactNode
 	href: string
 	icon?: React.ReactNode
@@ -20,7 +20,7 @@ interface RegularListItemProps {
 
 /* * */
 
-export default function Component({ children, href, icon, refFn, style }: RegularListItemProps) {
+export default function Component({ children, href, icon, refFn, style }: Props) {
 	return (
 		<Link ref={refFn || undefined} className={styles.container} href={href} style={style}>
 			{icon && (

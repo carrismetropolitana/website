@@ -1,10 +1,40 @@
-import { Facility } from '@/utils/types';
+/* * */
 
-export default function Component({ name }: { name: Facility }) {
-	const icon = icons[name];
+import type { Facility } from '@/types/stops.types';
 
-	return icon;
+import styles from './styles.module.css';
+
+/* * */
+
+interface Props {
+	name: Facility
 }
+
+/* * */
+
+export default function Component({ name }: Props) {
+	//
+
+	//
+	// A. Setup variables
+
+	const facilityIcon = icons[name];
+
+	//
+	// B. Render components
+
+	if (!facilityIcon) {
+		return null;
+	}
+
+	return (
+		<div className={styles.container}>{facilityIcon}</div>
+	);
+
+	//
+}
+
+/* * */
 
 const icons: { [key in Facility]?: JSX.Element } = {
 	bike_parking: (

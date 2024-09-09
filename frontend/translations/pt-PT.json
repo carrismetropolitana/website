@@ -13,6 +13,14 @@
 			"today": "Hoje",
 			"tomorrow": "Amanhã"
 		},
+		"TimetableSchedules": {
+			"hours": "Hora",
+			"minutes": "Min."
+		},
+		"TimetableExceptionsLink": {
+			"variant": "<exceptionId>{exception_id})</exceptionId> Percurso <routeLongName>{route_long_name}</routeLongName> com destino a <patternHeadsign>{pattern_headsign}</patternHeadsign>",
+			"schedule": "Min."
+		},
 		"button": {
 			"save": "Guardar",
 			"cancel": "Cancelar",
@@ -66,20 +74,17 @@
 			"label": "Tópico"
 		}
 	},
-	"lines": {
-		"Single":{
-			"heading": "Pesquisar Linhas"
-		},
-		"SelectActivePatternGroup":{
-			"placeholder": "Selecionar percurso/destino..."
-		},
-		"SelectActivePatternGroupExplainer":{
-			"toggle": "O que é o percurso/destino de uma linha?"
-		},
+	"app": {
 		"Page":{
-			"heading": "Pesquisar Linhas"
-		},
-		"PageToolbar": {
+			"heading": "App Carris Metropolitana (beta)",
+			"subheading":"Faça o download da app Carris Metropolitana para iOS ou Android.",
+			"iphone": "Apple iPhone",
+			"android": "Android"
+		}
+	},
+	"lines": {
+		"LinesListToolbar": {
+			"heading": "Pesquisar Linhas",
 			"by_current_view": {
 				"all": "Todas as Linhas",
 				"favorites": "Favoritas"
@@ -92,16 +97,14 @@
 				"favorites": "{count, plural, =0 {Nenhuma linha favorita encontrada.} one {Encontrada # linha favorita:} other {Encontradas # linhas favoritas:}}"
 			}
 		},
-		"FavoritesList":{
+		"LinesListViewFavorites":{
 			"no_favorites": "Ainda não tem linhas favoritas"
 		},
-		"AlertsCarousel": {
-			"heading": "Alertas de Serviço"
+		"LinesDetail":{
+			"heading": "Pesquisar Linhas",
+			"toggle_favorite_error": "Erro ao adicionar a linha aos favoritos. {error}"
 		},
-		"LineMap": {
-			"active_vehicles_counter": "{count, plural, =0 {Nenhum veículo em circulação} one {# veículo em circulação} other {# veículos em circulação}}"
-		},
-		"Metrics": {
+		"LinesDetailMetrics": {
 			"demand": {
 				"big_number": "{value, number}",
 				"subtitle": "passageiros transportados nesta linha nos últimos 15 dias"
@@ -110,6 +113,24 @@
 				"big_number": "{value, number, percentage}",
 				"subtitle": "executabilidade do serviço de todos os percursos desta linha nos últimos 15 dias"
 			}
+		},
+		"LinesDetailPathMap": {
+			"active_vehicles_counter": "{count, plural, =0 {Nenhum veículo em circulação} one {# veículo em circulação} other {# veículos em circulação}}"
+		},
+		"SelectActivePatternGroup":{
+			"placeholder": "Selecionar percurso/destino..."
+		},
+		"SelectActivePatternGroupExplainer":{
+			"toggle": "O que é o percurso/destino de uma linha?"
+		},
+		"AlertsCarousel": {
+			"heading": "Alertas de Serviço"
+		},
+		"PathStopNextArrivals": {
+			"title": "Próximas circulações"
+		},
+		"PathStopTimetable": {
+			"title": "Horários planeados nesta paragem"
 		},
 		"expand_filters": "Expandir Filtros",
 		"collapse_filters": "Esconder Filtros"
@@ -284,7 +305,7 @@
 		"flyers": "O Meu Livro de Horários",
 		"tarifs": "Tarifas",
 		"tickets": "Bilhetes Ocasionais",
-		"cards": "Cartão navegante®",
+		"cards": "Passe Mensal",
 		"purchase": "Onde comprar",
 		"stores": "Lojas e Rede de Agentes",
 		"help": "Apoio ao Cliente",
@@ -544,7 +565,7 @@
 		"no_data": "Sem horários disponíveis",
 		"path": "Percurso"
 	},
-	"contacts":{
+	"contacts": {
 		"heading": "Contactos",
 		"phone_line": "Linha informativa",
 		"phone_line_description": "Esta linha funciona todos os dias das 08:00 às 20:00 e é onde poderá tirar todas as suas dúvidas sobre a operação da Carris Metropolitana. Pergunte sobre linhas, percursos e horários, tarifas, ou efetue a sua reclamação.",
@@ -663,8 +684,6 @@
 		"update_profile_success": "Perfil atualizado com sucesso!",
 		"update_profile_error": "Erro ao atualizar o perfil.",
 		"update_profile_pending": "A Atualizar o perfil...",
-		"toggle_favorite_error": "Erro ao adicionar a linha aos favoritos. {error}",
 		"toggle_stop_error": "Erro ao adicionar o paragem aos favoritos. {error}"
-
 	}
 }
