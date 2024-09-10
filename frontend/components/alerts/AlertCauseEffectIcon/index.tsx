@@ -29,16 +29,16 @@ export function AlertCauseIcon({ cause, withText = false }: AlertCauseIconProps)
 
 	let severityLevel: number;
 	switch (cause) {
-		case 'HOLIDAY':
-			severityLevel = 0;
-			break;
 		case 'ACCIDENT':
-		case 'TECHNICAL_PROBLEM':
 		case 'DEMONSTRATION':
-		case 'STRIKE':
 		case 'MEDICAL_EMERGENCY':
 		case 'POLICE_ACTIVITY':
+		case 'STRIKE':
+		case 'TECHNICAL_PROBLEM':
 			severityLevel = 3;
+			break;
+		case 'HOLIDAY':
+			severityLevel = 0;
 			break;
 		default:
 			severityLevel = 2;
