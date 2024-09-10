@@ -21,8 +21,8 @@ export default function Component() {
 	// B. Transform data
 
 	const STORE_LINKS = [
-		{ _id: 'iphone', href: 'https://testflight.apple.com/join/pfknh1Xu', icon: <IconBrandAppleFilled />, label: t('iphone') },
-		{ _id: 'android', href: 'https://storage.carrismetropolitana.pt/static/app/app-release.apk', icon: <IconBrandGoogleFilled />, label: t('android') },
+		{ _id: 'iphone', href: 'https://testflight.apple.com/join/KXz5ZVH8', icon: <IconBrandAppleFilled />, label: t('iphone') },
+		{ _id: 'android', href: 'https://play.google.com/store/apps/details?id=pt.carrismetropolitana.mobile', icon: <IconBrandGoogleFilled />, label: t('android') },
 	];
 
 	//
