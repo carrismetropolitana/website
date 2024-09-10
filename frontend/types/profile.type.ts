@@ -1,6 +1,7 @@
 /* * */
 
 import { Device } from './device.type';
+import { Notification } from './notification.type';
 
 /* * */
 
@@ -21,6 +22,7 @@ export interface Profile {
 		events: boolean
 		network: boolean
 	}
+	notifications: Notification[]
 	phone?: string
 	role?: 'admin' | 'owner' | 'user'
 	utilization_type: 'frequent' | 'occasional'

@@ -34,7 +34,8 @@
 
 @media (max-width: 1200px) {
 	.container {
-		background-color: transparent;
+		/* background-color: transparent; */
+		background-color: var(--color-system-background-100);
 		/* border-top: none; */
 	}
 	.container.withTopBorder {

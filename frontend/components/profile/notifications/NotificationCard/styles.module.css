@@ -1,0 +1,64 @@
+/* * */
+/* CONTAINER */
+
+.container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: var(--size-spacing-10);
+}
+
+/* * */
+/* CARD HEADER */
+
+.card_header {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    gap: var(--size-spacing-10);
+    text-align: left;
+}
+
+.time_distance {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    gap: var(--size-spacing-10);
+}
+
+.distance {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    gap: var(--size-spacing-10);
+}
+
+.time {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    gap: var(--size-spacing-10);
+}
+
+.weekdays {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    gap: var(--size-spacing-10);
+}
+
+.icon {
+    opacity: 0.8;
+}
+
+@media screen and (max-width: 400px) {
+    .time_distance {
+        flex-direction: column;
+        justify-content: center;
+        align-items: start;
+
+        & span {
+            display: none;
+        }
+    }
+}

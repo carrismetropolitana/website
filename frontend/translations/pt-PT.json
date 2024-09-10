@@ -22,6 +22,26 @@
 			"remove": "Remover",
 			"confirm": "Confirmar",
 			"generate": "Gerar"
+		},
+		"weekdays": {
+			"full": {
+				"monday": "Segunda-feira",
+				"tuesday": "Terça-feira",
+				"wednesday": "Quarta-feira",
+				"thursday": "Quinta-feira",
+				"friday": "Sexta-feira",
+				"saturday": "Sábado",
+				"sunday": "Domingo"
+			},
+			"short": {
+				"monday": "Seg",
+				"tuesday": "Ter",
+				"wednesday": "Qua",
+				"thursday": "Qui",
+				"friday": "Sex",
+				"saturday": "Sáb",
+				"sunday": "Dom"
+			}
 		}
 	},
 	"AppError": {
@@ -649,6 +669,16 @@
 				"lines": "{count, plural, =0 {Nenhuma linha encontrada.} one {Encontrada # linha:} other {Encontradas # linhas:}}",
 				"stops": "{count, plural, =0 {Nenhum paragem encontrado.} one {Encontrado # paragem:} other {Encontrados # paragens:}}"
 			}
+		}
+	},
+	"notifications": {
+		"Page": {
+			"heading": "Notificações Inteligentes",
+			"subheading": "Receba notificações sobre as suas linhas e paragens favoritas. Ative as notificações e fique a par de todas as alterações à rede."
+		},
+		"Card": {
+			"min": "Minutos",
+			"meters": "Metros"
 		}
 	},
 	"toast": {
