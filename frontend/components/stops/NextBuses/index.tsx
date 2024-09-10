@@ -35,21 +35,7 @@ export default function NextBuses() {
 	// Get the valid scheduled trips for the current operationalDay
 	const validScheduledTrips = useMemo(() => {
 		// StopRealtime but only with required fields
-		const validScheduledTrips: {
-			estimated_arrival?: never
-			estimated_arrival_unix?: never
-			headsign: string
-			line_id: string
-			observed_arrival?: never
-			observed_arrival_unix?: never
-			pattern_id: string
-			route_id: string
-			scheduled_arrival: string
-			scheduled_arrival_unix: number
-			stop_sequence: number
-			trip_id: string
-			vehicle_id?: never
-		}[] = [];
+		const validScheduledTrips: StopRealtime[] = [];
 		// Filter the valid scheduled trips
 		if (operationalDate && !operationalDayContext.flags.is_today_selected) {
 			for (const patternGroup of stopsSingleContext.data.valid_pattern_groups || []) {
@@ -62,21 +48,25 @@ export default function NextBuses() {
 							const [hours, minutes, seconds] = stopTime.arrival_time.split(':').map(Number);
 							const unixTime = operationalDayJs.set('hour', hours).set('minute', minutes).set('second', seconds).unix();
 							validScheduledTrips.push({
+								estimated_arrival: null,
+								estimated_arrival_unix: null,
 								headsign: patternGroup.headsign,
 								line_id: patternGroup.line_id,
+								observed_arrival: null,
+								observed_arrival_unix: null,
 								pattern_id: patternGroup.pattern_id,
 								route_id: patternGroup.route_id,
 								scheduled_arrival: stopTime.arrival_time_24h,
 								scheduled_arrival_unix: unixTime,
 								stop_sequence: stopTime.stop_sequence,
 								trip_id: trip.trip_ids[0],
-							});
+								vehicle_id: null,
+							} satisfies StopRealtime);
 						}
 					}
 				}
 			}
 		}
-		console.log('validScheduledTrips', validScheduledTrips);
 		validScheduledTrips.sort((a, b) => a.scheduled_arrival_unix - b.scheduled_arrival_unix);
 		return validScheduledTrips;
 	}, [operationalDate, stopsSingleContext.data.valid_pattern_groups, stopsSingleContext.data.stop?.id]);
@@ -97,14 +87,14 @@ export default function NextBuses() {
 					<div>
 						{!showPrevious ? lastRealtime && <NextBusRow realtime={lastRealtime} />
 							: previousRealtimeData && previousRealtimeData.map(realtime => (
-								<NextBusRow key={realtime.pattern_id + '-' + realtime.scheduled_arrival} realtime={realtime} />
+								<NextBusRow key={realtime.trip_id} realtime={realtime} />
 							)) }
 					</div>
 					<NextBusesHeaderLine />
 				</>
 			)}
 			{renderedRealtimeData ? renderedRealtimeData.map(realtime => (
-				<NextBusRow key={realtime.pattern_id + '-' + realtime.scheduled_arrival} realtime={realtime} />
+				<NextBusRow key={realtime.trip_id} realtime={realtime} />
 			)) : <NoDataLabel text="Sem passagens" />}
 		</div>
 	);

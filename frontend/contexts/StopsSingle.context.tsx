@@ -204,6 +204,10 @@ export const StopsSingleContextProvider = ({ children, stopId }: { children: Rea
 	};
 
 	const setActiveTripId = (tripId: string) => {
+		const activePatternGroup = dataValidPatternGroupsState?.find(patternGroup => patternGroup.trips.find(trip => trip.trip_ids.includes(tripId)));
+		if (activePatternGroup) {
+			setDataActivePatternGroupState(activePatternGroup);
+		}
 		setDataActiveTripIdState(tripId);
 	};
 

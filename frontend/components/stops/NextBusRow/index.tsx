@@ -3,8 +3,10 @@ import LiveIcon from '@/components/common/LiveIcon';
 import { useDebugContext } from '@/contexts/Debug.context';
 import { useStopsSingleContext } from '@/contexts/StopsSingle.context';
 import { StopRealtime } from '@/types/stops.types';
+import { useWhatChanged } from '@simbathesailor/use-what-changed';
 import dayjs from 'dayjs';
 import { useTranslations } from 'next-intl';
+import { useCallback, useMemo } from 'react';
 
 import LineDisplay from '../LineDisplay';
 import styles from './styles.module.css';
@@ -31,22 +33,24 @@ export function NextBusRow({ realtime }: { realtime: StopRealtime }) {
 	// B. Transform data
 	const tripRealtimeStatus = getTripRealtimeStatus(realtime);
 	const bestTime = realtime.estimated_arrival_unix || realtime.scheduled_arrival_unix;
+	const isSelectedRow = stopsSingleContext.data.active_trip_id === realtime.trip_id;
 
 	// in format HH:mm
 	const tripEtaString = dayjs.unix(bestTime).format('HH:mm');
 
-	const tripEtaMinutes = Math.floor((bestTime - (new Date().getTime() / 1000)) / 60);
+	// This is needed to avoid rerendering the component when the time changes
+	const tripEtaMinutes = tripRealtimeStatus === 'realtime' && Math.floor((bestTime - (new Date().getTime() / 1000)) / 60);
 	const thisPattern = stopsSingleContext.data.valid_pattern_groups?.find(pattern => pattern.pattern_id === realtime.pattern_id);
-	if (!thisPattern) return null;
 
 	// C. Handle events
-	const handleSelectTrip = () => {
+	const handleSelectTrip = useCallback(() => {
 		stopsSingleContext.actions.setActiveTripId(realtime.trip_id);
-	};
+	}, [realtime.trip_id, stopsSingleContext.actions.setActiveTripId]);
+	if (!thisPattern) return null;
 
 	// D. Render component
 	return (
-		<div className={`${styles.container} ${styles[tripRealtimeStatus]} ${stopsSingleContext.data.active_trip_id === realtime.trip_id && styles.selected}`} onClick={handleSelectTrip}>
+		<div className={`${styles.container} ${styles[tripRealtimeStatus]} ${isSelectedRow && styles.selected}`} onClick={handleSelectTrip}>
 			<div className={styles.tripSummary}>
 				<LineDisplay color={thisPattern.color} long_name={thisPattern.headsign} short_name={thisPattern.line_id} text_color={thisPattern.text_color} />
 				{tripRealtimeStatus === 'passed'
