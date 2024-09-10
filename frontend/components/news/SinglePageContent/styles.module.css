@@ -9,43 +9,50 @@
 
 
 /* * */
-/* RESET / IMAGES & FIGURES */
+/* RESET / FIGURES, IMAGES & VIDEOS */
 
 .content figure {
-	margin: 0;
 	padding: 0;
-	border: 1px solid var(--color-system-border-100);
-	overflow: hidden;
-	border-radius: 5px;
+	margin: 0;
 	margin-bottom: var(--size-spacing-15);
+	overflow: hidden;
+	border: 1px solid var(--color-system-border-100);
+	border-radius: 5px;
 }
 
 .content figure img {
-	margin: 0;
-	padding: 0;
 	width: 100%;
 	height: auto;
+	padding: 0;
+	margin: 0;
+}
+
+.content figure video {
+	width: 100%;
+	height: auto;
+	padding: 0;
+	margin: 0;
 }
 
 /* * */
 /* RESET / HEADINGS */
 
 .content h1 {
+	margin-top: var(--size-spacing-20);
 	font-size: 24px;
 	font-weight: var(--font-weight-bold);
 	color: var(--color-system-text-100);
-	margin-top: var(--size-spacing-20);
 }
 
 /* * */
 /* RESET / PARAGRAPHS */
 
 .content p {
+	margin-top: var(--size-spacing-10);
+	margin-bottom: var(--size-spacing-10);
 	font-size: 18px;
 	line-height: 1.5;
 	color: var(--color-system-text-100);
-	margin-top: var(--size-spacing-10);
-	margin-bottom: var(--size-spacing-10);
 }
 
 .content p strong {
