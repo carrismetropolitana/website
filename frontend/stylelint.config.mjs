@@ -1,3 +1,5 @@
+/** @type {import('stylelint').Config} */
+
 /* * */
 
 import { css } from '@carrismetropolitana/eslint'

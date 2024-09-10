@@ -31,7 +31,7 @@
 		"luxon": "3.5.0",
 		"maplibre-gl": "4.7.0",
 		"minisearch": "7.1.0",
-		"next": "14.2.8",
+		"next": "14.2.9",
 		"next-intl": "3.19.1",
 		"react": "18.3.1",
 		"react-dom": "18.3.1",
@@ -50,7 +50,7 @@
 		"yup": "1.4.0"
 	},
 	"devDependencies": {
-		"@carrismetropolitana/eslint": "20240722.1548.55",
+		"@carrismetropolitana/eslint": "20240910.1602.52",
 		"@types/jsonwebtoken": "9.0.6",
 		"@types/luxon": "3.4.2",
 		"@types/node": "22.5.4",
