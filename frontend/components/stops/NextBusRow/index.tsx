@@ -3,10 +3,9 @@ import LiveIcon from '@/components/common/LiveIcon';
 import { useDebugContext } from '@/contexts/Debug.context';
 import { useStopsSingleContext } from '@/contexts/StopsSingle.context';
 import { StopRealtime } from '@/types/stops.types';
-import { useWhatChanged } from '@simbathesailor/use-what-changed';
 import dayjs from 'dayjs';
 import { useTranslations } from 'next-intl';
-import { useCallback, useMemo } from 'react';
+import { useCallback } from 'react';
 
 import LineDisplay from '../LineDisplay';
 import styles from './styles.module.css';
