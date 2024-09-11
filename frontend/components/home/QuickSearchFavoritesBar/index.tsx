@@ -5,7 +5,7 @@
 import type { Line } from '@/types/lines.types';
 
 import Loader from '@/components/common/Loader';
-import LineBadge from '@/components/lines/LineBadge';
+import LineBadge from '@/components/common/LineBadge';
 import { useAlertsContext } from '@/contexts/Alerts.context';
 import { useProfileContext } from '@/contexts/Profile.context';
 import { Link, useRouter } from '@/translations/navigation';

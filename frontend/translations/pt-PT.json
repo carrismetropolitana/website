@@ -603,7 +603,8 @@
 	},
 	"stops":{
 		"Single":{
-			"heading": "Pesquisar Paragens"
+			"heading": "Pesquisar Paragens",
+			"lines_that_pass_here": "Linhas que passam nesta paragem"
 		},
 		"Page":{
 			"heading": "Pesquisar Paragens"
@@ -620,6 +621,21 @@
 				"all": "{count, plural, =0 {Nenhuma paragem encontrada.} one {Encontrada # paragem:} other {Encontradas # paragens:}}",
 				"favorites": "{count, plural, =0 {Nenhuma paragem favorita encontrada.} one {Encontrada # paragem favorita:} other {Encontradas # paragens favoritas:}}"
 			}
+		},
+		"NextBusRow":{
+      "passed": "{value}",
+      "scheduled": "{value}",
+      "arriving_now": "A chegar",
+      "realtime": "{value} min"
+		},
+		"NextBusesHeader":{
+			"line": "Linha",
+			"headsign": "Destino",
+			"estimate": "Previsão"
+		},
+		"NextBuses":{
+			"show": "Ver passagens anteriores",
+			"hide": "Esconder passagens anteriores"
 		},
 		"FavoritesList":{
 			"no_favorites": "Ainda não tem paragens favoritas"

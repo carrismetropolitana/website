@@ -4,18 +4,21 @@
 
 import AlertsCarousel from '@/components/common/AlertsCarousel';
 import CopyBadge from '@/components/common/CopyBadge';
+import FacilityIcon from '@/components/common/FacilityIcon';
 import FavoriteToggle from '@/components/common/FavoriteToggle';
 import SelectOperationalDay from '@/components/common/SelectOperationalDay';
-import NoDataLabel from '@/components/layout/NoDataLabel';
 import Section from '@/components/layout/Section';
 import { useOperationalDayContext } from '@/contexts/OperationalDay.context';
 import { useProfileContext } from '@/contexts/Profile.context';
 import { useStopsSingleContext } from '@/contexts/StopsSingle.context';
-import { IconVolume } from '@tabler/icons-react';
+import { formatLocation } from '@/utils/formatLocation';
 import toast from '@/utils/toast';
+import { IconVolume } from '@tabler/icons-react';
 import { useTranslations } from 'next-intl';
-import { useMemo } from 'react';
+import { useCallback, useMemo } from 'react';
 
+import LinesHeader from '../LinesHeader';
+import NextBuses from '../NextBuses';
 import StopMap from '../StopMap';
 import styles from './styles.module.css';
 
@@ -71,6 +74,12 @@ export default function Component() {
 		}
 	};
 
+	const playAudio = useCallback(() => {
+		if (!currentStop) return;
+		const audio = new Audio('https://storage.carrismetropolitana.pt/static/tts/live/stops/' + currentStop.id + '.mp3');
+		audio.play();
+	}, [currentStop]);
+
 	//
 	// E. Render components
 
@@ -91,28 +100,32 @@ export default function Component() {
 				</div>
 				<span className={styles.headingTitle}>
 					{currentStop.name}
-					<IconVolume className={styles.icon} size={24} />
-					<FavoriteToggle color="var(--color-brand)" isActive={stopsSingleContext.flags.is_favorite} onToggle={handleToggleFavorite} />
+					<IconVolume className={styles.volumeIcon} onClick={playAudio} size={24} />
+					<FavoriteToggle classNames={styles.favoriteIcon} color="var(--color-brand)" isActive={stopsSingleContext.flags.is_favorite} onToggle={handleToggleFavorite} />
 				</span>
+				<span className={styles.stopLocation}>
+					{formatLocation([currentStop.locality, currentStop.municipality_name, currentStop.district_name])}
+				</span>
+				<div className={styles.badges}>
+					{currentStop.facilities.map(facility => (
+						<FacilityIcon key={facility} name={facility} />))}
+				</div>
 			</Section>
 
 			{stopsSingleContext.data.active_alerts && stopsSingleContext.data.active_alerts?.length > 0 && (
 				<AlertsCarousel alerts={stopsSingleContext.data.active_alerts} />
 			)}
+			<Section withTopPadding={false} withChildrenPadding withGap>
+				<LinesHeader />
+			</Section>
 			<StopMap />
 			<Section childrenWrapperStyles={styles.headingSection} withGap={false} withTopPadding={false} withChildrenPadding>
 				<SelectOperationalDay />
 			</Section>
 
-			{ stopsSingleContext.data.active_pattern_group ? (
-				<Section childrenWrapperStyles={styles.headingSection} withGap={false} withTopPadding={false} withChildrenPadding>
-					some
-				</Section>
-			) : (
-				<Section childrenWrapperStyles={styles.headingSection} withGap={false} withTopPadding={false} withChildrenPadding>
-					<NoDataLabel text="selecione um pattern" />
-				</Section>
-			) }
+			<Section childrenWrapperStyles={styles.headingSection} withGap={false} withTopPadding={false} withChildrenPadding>
+				<NextBuses />
+			</Section>
 
 		</>
 	);

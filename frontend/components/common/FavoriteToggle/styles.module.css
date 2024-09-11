@@ -2,7 +2,7 @@
 /* CONTAINER */
 
 .container {
-	display: flex;
+	display: inline-flex;
 	cursor: pointer;
 	transition: all 200ms ease;
 	color: var(--color-system-text-400);
