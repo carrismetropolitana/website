@@ -307,7 +307,7 @@
 		"tarifs": "Tarifas",
 		"tickets": "Bilhetes Ocasionais",
 		"cards": "Passe Mensal",
-		"purchase": "Onde comprar",
+		"helpdesks": "Onde comprar",
 		"stores": "Lojas e Rede de Agentes",
 		"help": "Apoio ao Cliente",
 		"faq": "Perguntas Frequentes",
@@ -567,15 +567,18 @@
 		"path": "Percurso"
 	},
 	"contacts": {
-		"heading": "Contactos",
-		"phone_line": "Linha informativa",
-		"phone_line_description": "Esta linha funciona todos os dias das 08:00 às 20:00 e é onde poderá tirar todas as suas dúvidas sobre a operação da Carris Metropolitana. Pergunte sobre linhas, percursos e horários, tarifas, ou efetue a sua reclamação.",
-		"operators": "Operadores cmetropolitana",
-		"operators_description": "Nesta linha pode contactar diretamente as empresas responsáveis pela operação de autocarros da Carris Metropolitana.",
-		"by_whatsapp": "Falar por WhatsApp",
-		"by_instagram": "Falar pelo Instagram",
-		"by_form": "Formulário de Contacto",
-		"lost_found": "Perdidos e Achados"
+		"Page": {
+			"heading": "Contactos",
+			"phone_line": "Linha informativa",
+			"phone_line_description": "Esta linha funciona todos os dias das 08:00 às 20:00 e é onde poderá tirar todas as suas dúvidas sobre a operação da Carris Metropolitana. Pergunte sobre linhas, percursos e horários, tarifas, ou efetue a sua reclamação.",
+			"operators": "Operadores cmetropolitana",
+			"operators_description": "Nesta linha pode contactar diretamente as empresas responsáveis pela operação de autocarros da Carris Metropolitana.",
+			"by_whatsapp": "Falar por WhatsApp",
+			"by_instagram": "Falar pelo Instagram",
+			"by_form": "Formulário de Contacto",
+			"lost_found": "Perdidos e Achados",
+			"form": "Formulário de Contacto"
+		}
 	},
 	"complaints":{
 		"heading": "Sugestões e Reclamações",

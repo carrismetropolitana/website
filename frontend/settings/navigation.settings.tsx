@@ -2,7 +2,7 @@
 
 import type { NavigationGroup, NavigationLink } from '@/types/navigation.types';
 
-import { IconAlertTriangle, IconArrowLoopRight, IconBellSchool, IconBuildingStore, IconBusStop, IconCreditCardPay, IconDirections, IconHelpHexagon, IconMessage, IconPhoneCheck, IconSparkles, IconStar, IconTicket, IconUmbrella, IconUser, IconWorld } from '@tabler/icons-react';
+import { IconAlertTriangle, IconArrowLoopRight, IconBellSchool, IconBuildingStore, IconBusStop, IconCreditCardPay, IconDirections, IconHelpHexagon, IconMapQuestion, IconMessages, IconPhoneCheck, IconSparkles, IconStar, IconTicket, IconUmbrella, IconUser } from '@tabler/icons-react';
 
 /* * */
 
@@ -24,7 +24,7 @@ export const headerNavigationGroup: NavigationGroup[] = [
 		links: [
 			{ _id: 'tickets', href: '/tickets', icon: <IconTicket size={20} /> },
 			{ _id: 'cards', href: '/cards', icon: <IconCreditCardPay size={20} /> },
-			{ _id: 'purchase', href: '/purchase', icon: <IconWorld size={20} /> },
+			{ _id: 'helpdesks', href: '/helpdesks', icon: <IconMapQuestion size={20} /> },
 		],
 	},
 
@@ -33,9 +33,8 @@ export const headerNavigationGroup: NavigationGroup[] = [
 		links: [
 			{ _id: 'faq', href: '/faq', icon: <IconHelpHexagon size={20} /> },
 			{ _id: 'lost-and-found', href: '/lost-and-found', icon: <IconUmbrella size={20} /> },
-			{ _id: 'complaints', href: '/complaints', icon: <IconMessage size={20} /> },
 			{ _id: 'stores', href: '/stores', icon: <IconBuildingStore size={20} /> },
-			{ _id: 'contacts', href: '/contacts', icon: <IconPhoneCheck size={20} /> },
+			{ _id: 'contacts', href: '/contacts', icon: <IconMessages size={20} /> },
 		],
 	},
 
