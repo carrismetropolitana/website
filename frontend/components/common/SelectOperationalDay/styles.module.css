@@ -1,10 +1,15 @@
 /* * */
 /* SEGMENTED CONTROL DATE INPUT OVERRIDE */
 
+.segmentedControlDateInputOverride label {
+	padding-right: 35px;
+	padding-left: 35px;
+}
+
 .segmentedControlDateInputOverride:last-child label,
 .segmentedControlDateInputOverride[data-active="true"]:last-child label {
-	padding: 0;
 	display: block;
+	padding: 0;
 }
 
 /* * */
@@ -12,14 +17,14 @@
 
 .datePickerInput {
 	min-width: 175px;
-	text-align: center;
-	border: none;
-	line-height: 1;
+	padding: var(--size-spacing-15) var(--size-spacing-15) var(--size-spacing-15) calc(var(--size-spacing-15) + 27px);
 	font-size: 17px;
 	font-weight: var(--font-weight-semibold);
-	padding: var(--size-spacing-15) var(--size-spacing-15) var(--size-spacing-15) calc(var(--size-spacing-15) + 27px);
+	line-height: 1;
 	color: var(--color-system-text-200);
+	text-align: center;
 	background: transparent;
+	border: none;
 }
 
 .segmentedControlDateInputOverride[data-active="true"] .datePickerInput {
@@ -33,12 +38,12 @@
     display: flex;
 	align-items: center;
 	justify-content: center;
-	color: var(--color-system-text-300);
-	margin-top: -3px;
-	pointer-events: none;
 	width: auto;
 	height: auto;
 	padding-left: var(--size-spacing-10);
+	margin-top: -3px;
+	color: var(--color-system-text-300);
+	pointer-events: none;
 }
 
 .segmentedControlDateInputOverride[data-active="true"] .datePickerSection {

@@ -33,11 +33,13 @@ export default function Component({ backButtonHref = '', backRouter = false, chi
 
 	//
 	// A. Setup variables
+
 	const router = useRouter();
 	const t = useTranslations('layout.Section');
 
 	//
 	// B. Handle actions
+
 	const handleBackButtonClick = () => {
 		router.back();
 	};

@@ -20,7 +20,7 @@ export default function Component() {
 	//
 	// A. Setup variables
 
-	const t = useTranslations('alerts.Toolbar');
+	const t = useTranslations('alerts.AlertsListToolbar');
 	const alertsContext = useAlertsListContext();
 
 	//

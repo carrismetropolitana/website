@@ -1,59 +1,48 @@
 {
 
-  "editor.tabSize": 4,
+	"editor.tabSize": 4,
 
-  "files.eol": "\n",
+	"files.eol": "\n",
 
-  "eslint.workingDirectories": ["./frontend"],
+	"eslint.workingDirectories": ["./frontend"],
 
-  // Enable the ESlint flat config support
-  "eslint.useFlatConfig": true,
+	// Disable the default formatter, use eslint instead
+	"prettier.enable": false,
+	"editor.formatOnSave": false,
+	"eslint.format.enable": true,
+	"editor.defaultFormatter": "dbaeumer.vscode-eslint",
 
-  // Disable the default formatter, use eslint instead
-  "prettier.enable": false,
-  "editor.formatOnSave": false,
-  "eslint.format.enable": true,
-  "editor.defaultFormatter": "dbaeumer.vscode-eslint",
-
-  // Disable the default CSS formatter, use stylelint instead
+	// Disable the default CSS formatter, use stylelint instead
 	"css.validate": false,
 	"less.validate": false,
 	"scss.validate": false,
 
-  // Auto fix
-  "editor.codeActionsOnSave": {
-    "source.fixAll.eslint": "explicit",
-    "source.organizeImports": "never"
-  },
+	// Auto fix
+	"editor.codeActionsOnSave": {
+		"source.fixAll.eslint": "explicit",
+	},
 
-  // Silent the stylistic rules in you IDE, but still auto fix them
-  "eslint.rules.customizations": [
-    // { "rule": "style/*", "severity": "off" },
-    // { "rule": "format/*", "severity": "off" },
-    // { "rule": "*-indent", "severity": "off" },
-    // { "rule": "*-spacing", "severity": "off" },
-    // { "rule": "*-spaces", "severity": "off" },
-    // { "rule": "*-order", "severity": "off" },
-    // { "rule": "*-dangle", "severity": "off" },
-    // { "rule": "*-newline", "severity": "off" },
-    // { "rule": "*quotes", "severity": "off" },
-    // { "rule": "*semi", "severity": "off" }
-  ],
+	"[css]": {
+		"editor.defaultFormatter": "stylelint.vscode-stylelint",
+		"editor.codeActionsOnSave": {
+			"source.fixAll.stylelint": "explicit"
+		}
+	},
 
-  // Enable eslint for all supported languages
-  "eslint.validate": [
-    "javascript",
-    "javascriptreact",
-    "typescript",
-    "typescriptreact",
-    "vue",
-    "html",
-    "markdown",
-    "json",
-    "jsonc",
-    "yaml",
-    "toml",
-    "astro"
+	// Enable eslint for all supported languages
+	"eslint.validate": [
+		"javascript",
+		"javascriptreact",
+		"typescript",
+		"typescriptreact",
+		"vue",
+		"html",
+		"markdown",
+		"json",
+		"jsonc",
+		"yaml",
+		"toml",
+		"astro"
 	],
 
 	"workbench.editor.customLabels.enabled": true,
@@ -65,6 +54,6 @@
 		"**/components/**/*.css": "${dirname} (${extname})"
 	},
 
-  "typescript.tsdk": "./frontend/node_modules/typescript/lib"
+  	"typescript.tsdk": "./frontend/node_modules/typescript/lib"
 
 }

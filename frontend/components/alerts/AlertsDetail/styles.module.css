@@ -21,6 +21,7 @@
 	justify-content: flex-start;
 	gap: var(--size-spacing-20);
 	max-width: var(--size-width-heading);
+	min-height: 250px;
 }
 
 
@@ -29,7 +30,7 @@
 
 .description {
 	line-height: 1.6;
-	font-size: var(--font-size-subheading);
+	font-size: 18px;
 	font-weight: var(--font-weight-text);
 	color: var(--color-system-text-100);
 }

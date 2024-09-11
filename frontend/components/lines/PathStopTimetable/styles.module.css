@@ -16,3 +16,13 @@
 	font-weight: var(--font-weight-medium);
 	color: var(--color-system-text-300);
 }
+
+/* * */
+/* NO DATA */
+
+.noData {
+	font-size: 14px;
+	font-style: italic;
+	font-weight: var(--font-weight-medium);
+	color: var(--color-system-text-300);
+}

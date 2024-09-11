@@ -3,21 +3,16 @@
 
 .container {
 	display: grid;
-	grid-template:
-		". a a" auto
-		"b c c" auto / auto 1fr 1fr;
+	grid-template-columns: auto 1fr;
+	gap: var(--size-spacing-10) var(--size-spacing-20);
 	align-items: center;
 	justify-content: center;
-	row-gap: var(--size-spacing-10);
-	column-gap: var(--size-spacing-20);
 }
 
-@media screen and (max-width: 900px) {
+@media screen and (width <= 900px) {
+
 	.container {
-		grid-template:
-			"b" auto [b_]
-			"a" auto [a_]
-			"c" auto [c_] / 1fr;
+		grid-template-columns: 1fr;
 	}
 }
 
@@ -25,26 +20,12 @@
 /* PATTERN SELECTOR EXPLAINER WRAPPER */
 
 .patternSelectorExplainerWrapper {
-	grid-area: a;
 	justify-self: flex-end;
 }
 
-@media screen and (max-width: 900px) {
+@media screen and (width <= 900px) {
+
 	.patternSelectorExplainerWrapper {
 		margin-top: var(--size-spacing-20);
 	}
-}
-
-/* * */
-/* OPERATIONAL DAY SELECTOR WRAPPER */
-
-.operationalDaySelectorWrapper {
-	grid-area: b;
-}
-
-/* * */
-/* PATTERN SELECTOR WRAPPER */
-
-.patternSelectorWrapper {
-	grid-area: c;
 }
