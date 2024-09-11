@@ -12,7 +12,7 @@ interface Props {
 
 /* * */
 
-export default function Component({ name }: Props) {
+export default function FacilityIcon({ name }: Props) {
 	//
 
 	//

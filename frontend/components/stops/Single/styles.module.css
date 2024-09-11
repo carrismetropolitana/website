@@ -32,13 +32,28 @@
     margin-left: 8px;
     margin-right: 8px;
     color: var(--color-system-text-400);
+    cursor:pointer;
+}
+
+.volumeIcon:hover{
+    color: var(--color-system-text-300);
+}
+
+.favoriteIcon {
+    position:relative;
+    top: 6px;
+}
+
+.stopLocation{
+    color: var(--color-system-text-300);
+    font-size: 14px;
+    font-weight: 600;
 }
 
 .badges{
     display: flex;
-    gap: 10px;
+    gap: 8px;
 }
-
 
 
 
