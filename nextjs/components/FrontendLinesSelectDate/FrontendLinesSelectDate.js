@@ -76,17 +76,18 @@ export default function FrontendLinesSelectDate() {
 
 	useEffect(() => {
 		if (!frontendLinesContext.entities.date_string) handleSetToday();
-		// IF date is after today then go to google.com
-		if (frontendLinesContext.entities.date_string > '20240911' && frontendLinesContext.entities.route.id.startsWith('4')) {
-			const year = frontendLinesContext.entities.date_string.slice(0, 4);
-			const month = frontendLinesContext.entities.date_string.slice(4, 6);
-			const day = frontendLinesContext.entities.date_string.slice(6, 8);
-			const routeId = frontendLinesContext.entities.route.id;
-			const routeShortName = frontendLinesContext.entities.route.short_name;
-			const directionId = frontendLinesContext.entities.pattern.direction_id;
-			window.location.href = `https://set24.carrismetropolitana.pt/horarios/?route_short_name=${routeShortName}&date=${year}-${month}-${day}&route_id=${routeId}&direction_id=${directionId}`;
-		}
-	}, [handleSetToday, frontendLinesContext.entities.date_string,frontendLinesContext.entities.route.id]);
+		// If date is after today then go to google.com
+		// if (frontendLinesContext.entities.date_string > '20240911' && frontendLinesContext.entities.route.id.startsWith('4')) {
+		// 	const year = frontendLinesContext.entities.date_string.slice(0, 4);
+		// 	const month = frontendLinesContext.entities.date_string.slice(4, 6);
+		// 	const day = frontendLinesContext.entities.date_string.slice(6, 8);
+		// 	const routeId = frontendLinesContext.entities.route.id;
+		// 	const routeShortName = frontendLinesContext.entities.route.short_name;
+		// 	const directionId = frontendLinesContext.entities.pattern.direction_id;
+		// 	window.location.href = `https://set24.carrismetropolitana.pt/horarios/?route_short_name=${routeShortName}&date=${year}-${month}-${day}&route_id=${routeId}&direction_id=${directionId}`;
+		// }
+	// }, [handleSetToday, frontendLinesContext.entities.date_string,frontendLinesContext.entities.route.id]);
+	}, [handleSetToday, frontendLinesContext.entities.date_string]);
 
 	//
 	// D. Render components
