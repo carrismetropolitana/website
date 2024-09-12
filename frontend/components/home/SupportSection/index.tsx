@@ -17,12 +17,12 @@ export default function Component() {
 
 	const t = useTranslations('home.SupportSection');
 	const mainNavLabels = useTranslations('settings.navigation.main');
-	const supportNavigationGroup = mainNavigationGroup.find(navGroup => navGroup._id === 'schedules');
+	const navigationGroup = mainNavigationGroup.find(navGroup => navGroup._id === 'support');
 
 	//
 	// B. Transform data
 
-	const menuItemsFormatted = supportNavigationGroup?.links.filter(item => item.target !== '_blank').map(item => ({ ...item, label: mainNavLabels(`schedules.links.${item._id}`) })) || [];
+	const menuItemsFormatted = navigationGroup?.links.map(item => ({ ...item, label: mainNavLabels(`support.links.${item._id}`) })) || [];
 
 	//
 	// C. Render Components

@@ -44,7 +44,7 @@ export default function Component() {
 			<Section withTopBorder={false} withTopPadding={false}>
 				<Image alt={t('heading')} height={500} src="/images/aml-map.svg" style={{ width: '100%' }} width={500} />
 			</Section>
-			<Section heading={t('form')} withChildrenPadding>
+			<Section heading={t('form.heading')} subheading={t('form.subheading')} withChildrenPadding>
 				<Form />
 			</Section>
 		</>

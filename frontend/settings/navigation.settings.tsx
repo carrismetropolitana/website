@@ -1,12 +1,12 @@
 /* * */
 
-import type { NavigationGroup, NavigationLink } from '@/types/navigation.types';
+import type { NavigationGroup } from '@/types/navigation.types';
 
-import { IconAlertTriangle, IconArrowLoopRight, IconBellSchool, IconBuildingStore, IconBusStop, IconCreditCardPay, IconDirections, IconHelpHexagon, IconMapQuestion, IconMessages, IconPhoneCheck, IconSparkles, IconStar, IconTicket, IconUmbrella, IconUser } from '@tabler/icons-react';
+import { IconAlertTriangle, IconArrowLoopRight, IconBellSchool, IconBuildingStore, IconBusStop, IconCreditCardPay, IconDirections, IconHelpHexagon, IconMapQuestion, IconMessages, IconSparkles, IconStar, IconTicket, IconUmbrella, IconUser } from '@tabler/icons-react';
 
 /* * */
 
-export const headerNavigationGroup: NavigationGroup[] = [
+export const mainNavigationGroup: NavigationGroup[] = [
 
 	{
 		_id: 'schedules',
@@ -29,7 +29,7 @@ export const headerNavigationGroup: NavigationGroup[] = [
 	},
 
 	{
-		_id: 'help',
+		_id: 'support',
 		links: [
 			{ _id: 'faq', href: '/faq', icon: <IconHelpHexagon size={20} /> },
 			{ _id: 'lost-and-found', href: '/lost-and-found', icon: <IconUmbrella size={20} /> },
@@ -42,25 +42,40 @@ export const headerNavigationGroup: NavigationGroup[] = [
 
 /* * */
 
-export const headerAccountNavigationLinks: NavigationLink[] = [
-	{ _id: 'configs', href: '/profile/configs', icon: <IconSparkles size={20} /> },
-	{ _id: 'favorites', href: '/profile/favorites', icon: <IconStar size={20} /> },
-	{ _id: 'profile', href: '/profile', icon: <IconUser size={20} /> },
+export const accountNavigationGroup: NavigationGroup[] = [
+
+	{
+		_id: 'primary',
+		links: [
+			{ _id: 'configs', href: '/profile/configs', icon: <IconSparkles size={20} /> },
+			{ _id: 'favorites', href: '/profile/favorites', icon: <IconStar size={20} /> },
+			{ _id: 'profile', href: '/profile', icon: <IconUser size={20} /> },
+		],
+	},
+
 ];
 
 /* * */
 
-export const footerPrimaryNavigationLinks: NavigationLink[] = [
-	{ _id: 'about', href: '/about' },
-	{ _id: 'open-data', href: '/open-data' },
-	{ _id: 'status', href: 'https://status.carrismetropolitana.pt/', target: '_blank' },
-];
+export const footerNavigationGroup: NavigationGroup[] = [
 
-/* * */
+	{
+		_id: 'primary',
+		links: [
+			{ _id: 'about', href: '/about' },
+			{ _id: 'open-data', href: '/open-data' },
+			{ _id: 'status', href: 'https://status.carrismetropolitana.pt/', target: '_blank' },
+		],
+	},
 
-export const footerSecondaryNavigationLinks: NavigationLink[] = [
-	{ _id: 'conditions', href: '/conditions' },
-	{ _id: 'privacy', href: '/privacy' },
-	{ _id: 'cookies', href: '/cookies' },
-	{ _id: 'legal', href: '/legal' },
+	{
+		_id: 'secondary',
+		links: [
+			{ _id: 'conditions', href: '/conditions' },
+			{ _id: 'privacy', href: '/privacy' },
+			{ _id: 'cookies', href: '/cookies' },
+			{ _id: 'legal', href: '/legal' },
+		],
+	},
+
 ];

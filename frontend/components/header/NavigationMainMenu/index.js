@@ -25,7 +25,8 @@ export default function Component({ item }) {
 	//
 	// A. Setup variables
 
-	const t = useTranslations('HeaderNavigationMainMenu');
+	const mainNavLabels = useTranslations('settings.navigation.main');
+
 	const [isOpen, setIsOpen] = useState(false);
 
 	//
@@ -44,11 +45,11 @@ export default function Component({ item }) {
 			withinPortal={false}
 		>
 			<Menu.Target>
-				<UnstyledButton classNames={{ root: `${styles.menuItemTarget} ${isOpen && styles.isOpen}` }}>{t(item._id)}</UnstyledButton>
+				<UnstyledButton classNames={{ root: `${styles.menuItemTarget} ${isOpen && styles.isOpen}` }}>{mainNavLabels(`${item._id}.label`)}</UnstyledButton>
 			</Menu.Target>
 			<Menu.Dropdown>
 				{item.links.map(link => (
-					<MenuItemProxy key={link._id} label={t(link._id)} navigationLink={link} />
+					<MenuItemProxy key={link._id} label={mainNavLabels(`${item._id}.links.${link._id}`)} navigationLink={link} />
 				))}
 			</Menu.Dropdown>
 		</Menu>

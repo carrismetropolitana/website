@@ -13,7 +13,7 @@ import useSWR from 'swr';
 
 interface AlertsContextState {
 	actions: {
-		getSimplifiedAlertById: (alertId: string) => SimplifiedAlert | null
+		getSimplifiedAlertById: (alertId: string) => null | SimplifiedAlert
 		getSimplifiedAlertsByLineId: (lineId: string) => SimplifiedAlert[]
 		getSimplifiedAlertsByStopId: (stopId: string) => SimplifiedAlert[]
 	}
@@ -67,7 +67,7 @@ export const AlertsContextProvider = ({ children }) => {
 	//
 	// D. Handle actions
 
-	const getSimplifiedAlertById = (alertId: string): SimplifiedAlert | null => {
+	const getSimplifiedAlertById = (alertId: string): null | SimplifiedAlert => {
 		return dataSimplifiedState.find(item => item.alert_id === alertId) || null;
 	};
 
