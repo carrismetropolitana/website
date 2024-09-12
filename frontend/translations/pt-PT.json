@@ -75,9 +75,15 @@
 		}
 	},
 	"app": {
-		"Page":{
-			"heading": "App Carris Metropolitana (beta)",
+		"DownloadProduction":{
+			"heading": "App CMetropolitana",
 			"subheading":"Faça o download da app Carris Metropolitana para iOS ou Android.",
+			"iphone": "Apple iPhone",
+			"android": "Android"
+		},
+		"DownloadBeta":{
+			"heading": "Beta: App CMetropolitana",
+			"subheading":"Faça o download da versão beta da app Carris Metropolitana para iOS ou Android, e contribua para o futuro desta aplicação.",
 			"iphone": "Apple iPhone",
 			"android": "Android"
 		}
