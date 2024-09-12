@@ -1,9 +1,9 @@
 /* * */
 
-import AppPage from '@/components/app/Page';
+import AppDownloadProduction from '@/components/app/DownloadProduction';
 
 /* * */
 
 export default function Page() {
-	return <AppPage />;
+	return <AppDownloadProduction />;
 }
