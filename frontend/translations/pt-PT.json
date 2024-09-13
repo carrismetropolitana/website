@@ -383,14 +383,17 @@
 			"empty": "Ainda não tem linhas favoritas...",
 			"more": "{count, plural, one {+ # linha} other {+ # linhas}}"
 		},
+		"TarifsSection": {
+			"section_heading":"Tarifas"
+		},
+		"SchedulesSection": {
+			"section_heading":"Horários"
+		},
 		"SupportSection": {
-			"section_heading":"Apoio ao Cliente",
-			"nav_items": {
-				"faq": "Perguntas Frequentes",
-				"lost-and-found": "Perdidos e Achados",
-				"stores": "Lojas e Rede de Agentes",
-				"contacts":"Contactos"
-			}
+			"section_heading":"Apoio ao Cliente"
+		},
+		"NewsSection": {
+			"section_heading": "Notícias"
 		}
 	},
 	"HomeQuickSearchWidget": {
@@ -404,23 +407,6 @@
 			"label": "Encontre os horários planeados e em tempo real da linha que procura.",
 			"placeholder": "Encontre os horários planeados e em tempo real da linha que procura.",
 			"nothing_found": "Encontre os horários planeados e em tempo real da linha que procura."
-		}
-	},
-	"HomeNewsSection": {
-		"section_heading": "Notícias",
-		"nav_items": {
-			"news": "Notícias",
-			"events": "Eventos",
-			"promotions": "Promoções"
-		}
-	},
-	"HomeSchedulesSection": {
-		"section_heading":"Horários",
-		"nav_items": {
-			"lines": "Pesquisar Linhas",
-			"stops": "Pesquisar Paragens",
-			"planner": "Planear Viagem",
-			"alerts": "Alertas de Serviço"
 		}
 	},
 	"lost-and-found": {

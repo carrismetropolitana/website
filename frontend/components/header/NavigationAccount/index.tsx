@@ -21,7 +21,6 @@ export default function Component() {
 	//
 	// A. Setup variables
 
-	const t = useTranslations('header.NavigationAccount');
 	const accountNavLabels = useTranslations('settings.navigation.account');
 	const navigationGroup = accountNavigationGroup.find(navGroup => navGroup._id === 'primary');
 
