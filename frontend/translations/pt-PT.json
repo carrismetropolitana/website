@@ -86,6 +86,16 @@
 			"subheading":"Faça o download da versão beta da app Carris Metropolitana para iOS ou Android, e contribua para o futuro desta aplicação.",
 			"iphone": "Apple iPhone",
 			"android": "Android"
+		},
+		"StartupMessages1": {
+			"heading": "Atualização disponível",
+			"subheading": "Existe uma nova versão melhorada da app CMetropolitana.",
+			"text": "Recomendamos que atualize em breve para uma melhor experiência de utilização.",
+			"actions": {
+				"update_android": "Atualizar na Play Store",
+				"update_ios": "Atualizar na App Store",
+				"close": "Fechar"
+			}
 		}
 	},
 	"lines": {

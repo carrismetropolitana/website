@@ -15,7 +15,7 @@ export default function Component() {
 	//
 	// A. Setup variables
 
-	const t = useTranslations('app.DownloadProduction');
+	const t = useTranslations('app.DownloadBeta');
 
 	//
 	// B. Transform data
