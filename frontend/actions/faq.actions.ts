@@ -1,3 +1,5 @@
+'use server';
+
 /* * */
 
 import type { FaqGroupByTopic } from '@/types/faq.types';
@@ -18,10 +20,4 @@ export async function fetchFaqs() {
 		},
 	];
 	return faqs;
-}
-
-/* * */
-
-export async function GET() {
-	return Response.json(await fetchFaqs());
 }
