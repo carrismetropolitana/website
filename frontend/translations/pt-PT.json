@@ -302,24 +302,64 @@
 		"favorites": "Favoritos",
 		"profile": "Perfil"
 	},
-	"HeaderNavigationMainMenu": {
-		"schedules": "Horários",
-		"lines": "Pesquisar Linhas",
-		"stops": "Pesquisar Paragens",
-		"alerts": "Alertas de Serviço",
-		"planner": "Planear Viagem",
-		"schools": "Escolas & Universidades",
-		"flyers": "O Meu Livro de Horários",
-		"tarifs": "Tarifas",
-		"tickets": "Bilhetes Ocasionais",
-		"cards": "Passe Mensal",
-		"purchase": "Onde comprar",
-		"stores": "Lojas e Rede de Agentes",
-		"help": "Apoio ao Cliente",
-		"faq": "Perguntas Frequentes",
-		"lost-and-found": "Perdidos e Achados",
-		"complaints": "Sugestões e Reclamações",
-		"contacts": "Contactos"
+	"settings": {
+		"navigation": {
+			"main": {
+				"schedules": {
+					"label": "Horários",
+					"links": {
+						"lines": "Pesquisar Linhas",
+						"stops": "Pesquisar Paragens",
+						"alerts": "Alertas de Serviço",
+						"planner": "Planear Viagem",
+						"schools": "Escolas & Universidades"
+					}
+				},
+				"tarifs": {
+					"label": "Tarifas",
+					"links": {
+						"tickets": "Bilhetes Ocasionais",
+						"cards": "Passe Mensal",
+						"helpdesks": "Onde comprar"
+					}
+				},
+				"support": {
+					"label": "Apoio ao Cliente",
+					"links": {
+						"stores": "Lojas e Rede de Agentes",
+						"faq": "Perguntas Frequentes",
+						"lost-and-found": "Perdidos e Achados",
+						"contacts": "Contactos"
+					}
+				}
+			},
+			"account": {
+				"primary": {
+					"links": {
+						"configs": "Configurações",
+						"favorites": "Favoritos",
+						"profile": "Ver perfil"
+					}
+				}
+			},
+			"footer": {
+				"primary": {
+					"links": {
+						"about": "Sobre a Carris Metropolitana",
+						"open-data": "Dados Abertos",
+						"status": "Estado"
+					}
+				},
+				"secondary": {
+					"links": {
+						"conditions": "Condições Gerais de Transporte",
+						"privacy": "Política de Privacidade",
+						"cookies": "Política de Cookies",
+						"legal": "Aviso Legal"
+					}
+				}
+			}
+		}
 	},
 	"HeaderLocaleSwitcher": {
 		"pt": {
@@ -341,17 +381,6 @@
 			"disabled": "Ligar Debug"
 		},
 		"Footer": {
-			"primary_links": {
-				"about": "Sobre a Carris Metropolitana",
-				"open-data": "Dados Abertos",
-				"status": "Estado"
-			},
-			"secondary_links": {
-				"conditions": "Condições Gerais de Transporte",
-				"privacy": "Política de Privacidade",
-				"cookies": "Política de Cookies",
-				"legal": "Aviso Legal"
-			},
 			"copyright": "© Carris Metropolitana {year} - Todos os direitos reservados"
 		}
 	},
@@ -359,6 +388,18 @@
 		"QuickSearchFavoritesBar": {
 			"empty": "Ainda não tem linhas favoritas...",
 			"more": "{count, plural, one {+ # linha} other {+ # linhas}}"
+		},
+		"TarifsSection": {
+			"section_heading":"Tarifas"
+		},
+		"SchedulesSection": {
+			"section_heading":"Horários"
+		},
+		"SupportSection": {
+			"section_heading":"Apoio ao Cliente"
+		},
+		"NewsSection": {
+			"section_heading": "Notícias"
 		}
 	},
 	"HomeQuickSearchWidget": {
@@ -372,33 +413,6 @@
 			"label": "Encontre os horários planeados e em tempo real da linha que procura.",
 			"placeholder": "Encontre os horários planeados e em tempo real da linha que procura.",
 			"nothing_found": "Encontre os horários planeados e em tempo real da linha que procura."
-		}
-	},
-	"HomeNewsSection": {
-		"section_heading": "Notícias",
-		"nav_items": {
-			"news": "Notícias",
-			"events": "Eventos",
-			"promotions": "Promoções"
-		}
-	},
-	"HomeSchedulesSection": {
-		"section_heading":"Horários",
-		"nav_items": {
-			"lines": "Pesquisar Linhas",
-			"stops": "Pesquisar Paragens",
-			"planner": "Planear Viagem",
-			"alerts": "Alertas de Serviço"
-		}
-	},
-	"HomeSupportSection": {
-		"section_heading":"Apoio ao Cliente",
-		"nav_items": {
-			"faq": "Perguntas Frequentes",
-			"lost-and-found": "Perdidos e Achados",
-			"complaints": "Sugestões e Reclamações",
-			"stores": "Lojas e Rede de Agentes",
-			"contacts":"Contactos"
 		}
 	},
 	"lost-and-found": {
@@ -573,37 +587,19 @@
 		"path": "Percurso"
 	},
 	"contacts": {
-		"heading": "Contactos",
-		"phone_line": "Linha informativa",
-		"phone_line_description": "Esta linha funciona todos os dias das 08:00 às 20:00 e é onde poderá tirar todas as suas dúvidas sobre a operação da Carris Metropolitana. Pergunte sobre linhas, percursos e horários, tarifas, ou efetue a sua reclamação.",
-		"operators": "Operadores cmetropolitana",
-		"operators_description": "Nesta linha pode contactar diretamente as empresas responsáveis pela operação de autocarros da Carris Metropolitana.",
-		"by_whatsapp": "Falar por WhatsApp",
-		"by_instagram": "Falar pelo Instagram",
-		"by_form": "Formulário de Contacto",
-		"lost_found": "Perdidos e Achados"
-	},
-	"complaints":{
-		"heading": "Sugestões e Reclamações",
-		"subheading": "A Carris Metropolitana está empenhada em prestar um serviço de qualidade e a sua opinião é fundamental para a melhoria contínua dos nossos serviços. Se tem alguma sugestão ou reclamação, por favor preencha o formulário abaixo.",
-		"form": {
-			"fields": {
-				"name": "Nome",
-				"surname": "Apelido",
-				"email": "Email",
-				"naveganteNumber": "Número de Cartão Navegante",
-				"municipality": "Município",
-				"subject": "Assunto",
-				"upload": "Anexar Ficheiro",
-				"message": "Mensagem"
-			},
-			"types": {
-				"transport_title": "Título de Transporte",
-				"where": "Local de Atendimento",
-				"service":"Serviço de Transporte",
-				"stop_location": "Local de Paragem",
-				"lost_found": "Perdidos e Achados",
-				"document_request": "Pedido de Documento"
+		"Page": {
+			"heading": "Contactos",
+			"phone_line": "Linha informativa",
+			"phone_line_description": "Esta linha funciona todos os dias das 08:00 às 20:00 e é onde poderá tirar todas as suas dúvidas sobre a operação da Carris Metropolitana. Pergunte sobre linhas, percursos e horários, tarifas, ou efetue a sua reclamação.",
+			"operators": "Operadores cmetropolitana",
+			"operators_description": "Nesta linha pode contactar diretamente as empresas responsáveis pela operação de autocarros da Carris Metropolitana.",
+			"by_whatsapp": "Falar por WhatsApp",
+			"by_instagram": "Falar pelo Instagram",
+			"by_form": "Formulário de Contacto",
+			"lost_found": "Perdidos e Achados",
+			"form": {
+				"heading": "Formulário de Contacto",
+				"subheading": "A Carris Metropolitana está empenhada em prestar um serviço de qualidade e a sua opinião é fundamental para a melhoria contínua dos nossos serviços. Se tem alguma sugestão ou reclamação, por favor preencha o formulário abaixo."
 			}
 		}
 	},

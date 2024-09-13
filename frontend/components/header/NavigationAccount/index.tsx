@@ -6,7 +6,7 @@ import AccountUserAvatar from '@/components/account/UserAvatar';
 import HeaderLocaleSwitcher from '@/components/header/LocaleSwitcher';
 import NavigationMainMenuItem from '@/components/header/NavigationMainMenuItem';
 import SyncAccount from '@/components/profile/sync';
-import { headerAccountNavigationLinks } from '@/settings/navigation.settings';
+import { accountNavigationGroup } from '@/settings/navigation.settings';
 import { CloseButton, Drawer } from '@mantine/core';
 import { useDisclosure } from '@mantine/hooks';
 import { useTranslations } from 'next-intl';
@@ -21,11 +21,18 @@ export default function Component() {
 	//
 	// A. Setup variables
 
-	const t = useTranslations('HeaderNavigationAccount');
+	const accountNavLabels = useTranslations('settings.navigation.account');
+	const navigationGroup = accountNavigationGroup.find(navGroup => navGroup._id === 'primary');
+
 	const [isDrawerOpen, { close: closeDrawer, open: openDrawer }] = useDisclosure(false);
 
 	//
-	// B. Render Components
+	// B. Transform data
+
+	const menuItemsFormatted = navigationGroup?.links.map(item => ({ ...item, label: accountNavLabels(`primary.links.${item._id}`) })) || [];
+
+	//
+	// C. Render Components
 
 	return (
 		<>
@@ -43,8 +50,8 @@ export default function Component() {
 					<CloseButton onClick={closeDrawer} />
 				</div>
 				<div className={styles.navList}>
-					{headerAccountNavigationLinks.map(item => (
-						<NavigationMainMenuItem key={item._id} label={t(item._id)} navigationLink={item} onClick={closeDrawer} />
+					{menuItemsFormatted.map(item => (
+						<NavigationMainMenuItem key={item._id} label={item.label} navigationLink={item} onClick={closeDrawer} />
 					))}
 				</div>
 				<div className={styles.componentWrapper}>

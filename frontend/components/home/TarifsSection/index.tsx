@@ -15,14 +15,14 @@ export default function Component() {
 	//
 	// A. Setup variables
 
-	const t = useTranslations('home.SchedulesSection');
+	const t = useTranslations('home.TarifsSection');
 	const mainNavLabels = useTranslations('settings.navigation.main');
-	const supportNavigationGroup = mainNavigationGroup.find(navGroup => navGroup._id === 'schedules');
+	const navigationGroup = mainNavigationGroup.find(navGroup => navGroup._id === 'tarifs');
 
 	//
 	// B. Transform data
 
-	const menuItemsFormatted = supportNavigationGroup?.links.filter(item => item.target !== '_blank').map(item => ({ ...item, label: mainNavLabels(`schedules.links.${item._id}`) })) || [];
+	const menuItemsFormatted = navigationGroup?.links.map(item => ({ ...item, label: mainNavLabels(`tarifs.links.${item._id}`) })) || [];
 
 	//
 	// C. Render Components
