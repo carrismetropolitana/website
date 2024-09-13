@@ -1,6 +1,6 @@
 /* * */
 
-import AppStartupMessages1 from '@/components/app/StartupMessages1';
+import AppStartupMessages1 from '@/components/app/StartupMessage1';
 
 /* * */
 

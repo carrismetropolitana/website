@@ -15,7 +15,7 @@ export default function Component({ label, onClick }: Props) {
 	//
 
 	//
-	// B. Handle actions
+	// A. Handle actions
 
 	const handleClick = (e) => {
 		onClick();

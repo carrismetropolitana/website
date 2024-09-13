@@ -5,7 +5,11 @@ import createIntlMiddleware from 'next-intl/middleware';
 
 /* * */
 
-const intlMiddleware = createIntlMiddleware({ defaultLocale: 'pt-PT', localePrefix: 'as-needed', locales: availableLocales });
+const intlMiddleware = createIntlMiddleware({
+	defaultLocale: 'pt-PT',
+	localePrefix: 'as-needed',
+	locales: availableLocales,
+});
 
 /* * */
 

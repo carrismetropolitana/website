@@ -2,7 +2,7 @@
 
 /* * */
 
-import { useAnalyticsContext } from '@/contexts/Analytics.context';
+// import { useAnalyticsContext } from '@/contexts/Analytics.context';
 import { Button } from '@mantine/core';
 import { IconTrafficCone } from '@tabler/icons-react';
 import { useTranslations } from 'next-intl';
@@ -19,16 +19,16 @@ export default function Component() {
 	// A. Setup variables
 
 	const t = useTranslations('AppError');
-	const analyticsContext = useAnalyticsContext();
+	// const analyticsContext = useAnalyticsContext();
 
 	const [reloadInSeconds, setReloadInSeconds] = useState(10);
 
 	//
 	// B. Transform data
 
-	useEffect(() => {
-		analyticsContext.capture('frontend_error', { url: window.location.href });
-	});
+	// useEffect(() => {
+	// 	analyticsContext.capture('frontend_error', { url: window.location.href });
+	// });
 
 	useEffect(() => {
 		const interval = setInterval(() => {

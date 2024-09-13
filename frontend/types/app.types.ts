@@ -4,5 +4,6 @@ export interface StartupMessage {
 	max_build: number
 	min_build: number
 	presentation_type: 'breaking' | 'changelog'
-	url: string
+	url_host: string
+	url_path: string
 }

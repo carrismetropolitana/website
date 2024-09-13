@@ -5,8 +5,9 @@ import type { Formats } from 'next-intl';
 /* * */
 
 export const availableLocales = ['pt-PT'];
-
 export const availableLocalesTest = ['pt', 'en', 'fr'];
+
+export const defaultLocale = 'pt-PT';
 
 /* * */
 
