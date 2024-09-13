@@ -8,7 +8,7 @@
     "paths": {
 			"@/utils/*": ["utils/*"],
 			"@/hooks/*": ["hooks/*"],
-			"@/styles/*": ["styles/*"],
+			"@/themes/*": ["styles/*"],
 			"@/contexts/*": ["contexts/*"],
 			"@/opengraph/*": ["opengraph/*"],
 			"@/schemas/*": ["schemas/*"],

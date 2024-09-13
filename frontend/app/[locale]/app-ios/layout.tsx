@@ -1,40 +1,20 @@
 /* * */
 
-import LayoutViewportWrapper from '@/components/layout/ViewportWrapper';
-import { availableFormats, availableLocales } from '@/translations/config';
-import { Notifications } from '@mantine/notifications';
-import { notFound } from 'next/navigation';
-import { NextIntlClientProvider, useMessages } from 'next-intl';
+import AppWrapper from '@/components/viewport/AppWrapper';
+import { EnvironmentContextProvider } from '@/contexts/Environment.context';
 
 import Providers from './providers';
 
 /* * */
 
-export default function Layout({ children, params: { locale } }) {
-	//
-
-	if (!availableLocales.includes(locale)) {
-		notFound();
-	}
-
-	const messages = useMessages();
-
+export default function Layout({ children }) {
 	return (
-		<NextIntlClientProvider
-			formats={availableFormats}
-			locale={locale}
-			messages={messages}
-			now={new Date()}
-			timeZone="Europe/Lisbon"
-		>
-			<Providers>
-				<Notifications styles={{ root: { marginTop: '60px' } }} />
-				<LayoutViewportWrapper>
+		<Providers>
+			<AppWrapper>
+				<EnvironmentContextProvider value="app-ios">
 					{children}
-				</LayoutViewportWrapper>
-			</Providers>
-		</NextIntlClientProvider>
+				</EnvironmentContextProvider>
+			</AppWrapper>
+		</Providers>
 	);
-
-	//
 }

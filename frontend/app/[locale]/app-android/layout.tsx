@@ -1,8 +1,7 @@
 /* * */
 
-import WebsiteWrapper from '@/components/viewport/WebsiteWrapper';
+import AppWrapper from '@/components/viewport/AppWrapper';
 import { EnvironmentContextProvider } from '@/contexts/Environment.context';
-import { Notifications } from '@mantine/notifications';
 
 import Providers from './providers';
 
@@ -11,12 +10,11 @@ import Providers from './providers';
 export default function Layout({ children }) {
 	return (
 		<Providers>
-			<Notifications styles={{ root: { marginTop: '60px' } }} />
-			<WebsiteWrapper>
-				<EnvironmentContextProvider value="website">
+			<AppWrapper>
+				<EnvironmentContextProvider value="app-android">
 					{children}
 				</EnvironmentContextProvider>
-			</WebsiteWrapper>
+			</AppWrapper>
 		</Providers>
 	);
 }

@@ -2,9 +2,9 @@
 
 /* * */
 
-import '@/styles/reset.css';
-import '@/styles/variables.css';
-import '@/styles/wordpress.css';
+import '@/themes/reset.css';
+import '@/themes/variables.css';
+import '@/themes/wordpress.css';
 import '@mantine/carousel/styles.layer.css';
 import '@mantine/charts/styles.layer.css';
 import '@mantine/core/styles.layer.css';
@@ -14,28 +14,18 @@ import 'maplibre-gl/dist/maplibre-gl.css';
 
 /* * */
 
-import AccordionOverride from '@/styles/overrides/Accordion.module.css';
-import ButtonOverride from '@/styles/overrides/Button.module.css';
-import SegmentedControlOverride from '@/styles/overrides/SegmentedControl.module.css';
-import SelectOverride from '@/styles/overrides/Select.module.css';
-import SkeletonOverride from '@/styles/overrides/Skeleton.module.css';
-import TextInputOverride from '@/styles/overrides/TextInput.module.css';
-import { Accordion, Button, SegmentedControl, Select, Skeleton, TextInput, createTheme } from '@mantine/core';
+import AccordionOverride from '@/themes/default/overrides/Accordion.module.css';
+import SegmentedControlOverride from '@/themes/default/overrides/SegmentedControl.module.css';
+import SelectOverride from '@/themes/default/overrides/Select.module.css';
+import SkeletonOverride from '@/themes/default/overrides/Skeleton.module.css';
+import TextInputOverride from '@/themes/default/overrides/TextInput.module.css';
+import combineClasses from '@/utils/combineClasses';
+import { Accordion, createTheme, SegmentedControl, Select, Skeleton, TextInput } from '@mantine/core';
 import { IconCaretLeftFilled } from '@tabler/icons-react';
 
 /* * */
 
-const combineClasses = (defaultClasses, customClasses) => {
-	const customClasesString = customClasses.join(' ');
-	return Object.entries(defaultClasses).reduce((acc, [key, value]) => {
-		acc[key] = `${value} ${customClasesString}`;
-		return acc;
-	}, {});
-};
-
-/* * */
-
-export const theme = createTheme({
+export default createTheme({
 	//
 
 	components: {
@@ -55,21 +45,6 @@ export const theme = createTheme({
 			},
 			defaultProps: {
 				chevron: <IconCaretLeftFilled />,
-			},
-		}),
-
-		Button: Button.extend({
-			classNames: (_, props) => {
-				let defaultClasses = {
-					inner: ButtonOverride.inner,
-					label: ButtonOverride.label,
-					root: ButtonOverride.root,
-					section: ButtonOverride.section,
-				};
-				if (props.variant === 'pill') {
-					defaultClasses = combineClasses(defaultClasses, [ButtonOverride.variantPill]);
-				}
-				return defaultClasses;
 			},
 		}),
 

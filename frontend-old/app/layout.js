@@ -1,7 +1,7 @@
 /* * */
 
-import '@/styles/reset.css';
-import '@/styles/variables.css';
+import '@/themes/reset.css';
+import '@/themes/variables.css';
 
 /* * */
 

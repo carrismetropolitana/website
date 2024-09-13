@@ -1,0 +1,46 @@
+/* * */
+/* BUTTON */
+
+.button {
+	width: 100%;
+	height: 60px;
+	border-radius: 999px;
+	transition: all 300ms ease-in;
+}
+
+/* * */
+/* VARIANTS */
+
+.primary {
+	color: var(--color-primary-black);
+	background-color: var(--color-brand);
+}
+
+.primary:active {
+	background-color: var(--color-brand);
+    border-color: var(--color-system-text-200);
+}
+
+.info {
+    color: var(--color-status-info-text);
+    background-color: var(--color-status-info-background);
+    border-color: var(--color-status-info-border);
+}
+
+.ok {
+    color: var(--color-status-ok-text);
+    background-color: var(--color-status-ok-background);
+    border-color: var(--color-status-ok-border);
+}
+
+.warning {
+    color: var(--color-status-warning-text);
+    background-color: var(--color-status-warning-background);
+    border-color: var(--color-status-warning-border);
+}
+
+.danger {
+    color: var(--color-status-danger-text);
+    background-color: var(--color-status-danger-background);
+    border-color: var(--color-status-danger-border);
+}

@@ -1,0 +1,59 @@
+/* * */
+/* ALL ELEMENTS */
+
+* {
+	box-sizing: border-box;
+	font-family: var(--font-inter), sans-serif !important;
+	line-height: 1.4;
+	user-select: none;
+	-webkit-touch-callout: none;
+}
+
+/* * */
+/* HTML & BODY */
+
+html,
+body {
+	padding: 0;
+	margin: 0;
+	color: var(--color-system-text-100);
+	background-color: var(--color-system-background-200);
+	scroll-behavior: smooth;
+}
+
+/* * */
+/* TEXT ELEMENTS */
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p {
+	margin: 0;
+	user-select: text;
+	-webkit-touch-callout: default;
+}
+
+a {
+	color: inherit;
+	text-decoration: none;
+}
+
+/* * */
+/* INPUT ELEMENTS */
+
+input,
+textarea {
+	user-select: text;
+	-webkit-touch-callout: default;
+}
+
+/* * */
+/* IMAGES & FIGURES */
+
+img,
+figure {
+	display: flex;
+}

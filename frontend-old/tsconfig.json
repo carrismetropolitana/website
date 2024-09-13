@@ -7,7 +7,7 @@
     "moduleResolution": "NodeNext",
     "paths": {
       "@/authentication/*": ["authentication/*"],
-      "@/styles/*": ["styles/*"],
+      "@/themes/*": ["styles/*"],
       "@/utils/*": ["utils/*"],
       "@/forms/*": ["forms/*"],
       "@/components/*": ["components/*"],

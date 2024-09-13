@@ -5,17 +5,7 @@
 		"module": "esnext",
 		"moduleResolution": "bundler",
 		"paths": {
-			"@/api/*": ["api/*"],
-			"@/utils/*": ["utils/*"],
-			"@/types/*": ["types/*"],
-			"@/hooks/*": ["hooks/*"],
-			"@/styles/*": ["styles/*"],
-			"@/actions/*": ["actions/*"],
-			"@/settings/*": ["settings/*"],
-			"@/contexts/*": ["contexts/*"],
-			"@/opengraph/*": ["opengraph/*"],
-			"@/components/*": ["components/*"],
-			"@/translations/*": ["translations/*"],
+			"@/*": ["./*"]
 		},
 		"allowJs": true,
 		"sourceMap": true,
@@ -53,7 +43,7 @@
 		".next/types/**/*.ts",
 		"**/*.ts",
 		"**/*.tsx"
-	],
+, "themes/website/website.theme.js"	],
 	"typingOptions": {
 		"enableAutoDiscovery": true
 	}

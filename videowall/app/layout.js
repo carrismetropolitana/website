@@ -1,9 +1,9 @@
 /* * */
 
-import '@/styles/reset.css';
-import '@/styles/globals.css';
-import '@/styles/variables.css';
-import '@/styles/widths.css';
+import '@/themes/reset.css';
+import '@/themes/globals.css';
+import '@/themes/variables.css';
+import '@/themes/widths.css';
 
 /* * */
 

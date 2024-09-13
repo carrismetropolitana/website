@@ -4,7 +4,7 @@
 
 import { AppAnalyticsContextProvider } from '@/contexts/AppAnalyticsContext';
 import { DebugContextProvider } from '@/contexts/DebugContext';
-import { theme } from '@/styles/theme';
+import { theme } from '@/themes/theme';
 import { MantineProvider } from '@mantine/core';
 import { DatesProvider } from '@mantine/dates';
 import { ModalsProvider } from '@mantine/modals';

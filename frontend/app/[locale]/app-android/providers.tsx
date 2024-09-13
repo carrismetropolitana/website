@@ -8,7 +8,7 @@ import { DebugContextProvider } from '@/contexts/Debug.context';
 import { MapOptionsContextProvider } from '@/contexts/MapOptions.context';
 import { OperationalDayContextProvider } from '@/contexts/OperationalDay.context';
 import { ProfileContextProvider } from '@/contexts/Profile.context';
-import { theme } from '@/styles/theme';
+import appAndroidTheme from '@/themes/app-android/app-android.theme';
 import { MantineProvider } from '@mantine/core';
 import { DatesProvider } from '@mantine/dates';
 import { ModalsProvider } from '@mantine/modals';
@@ -58,7 +58,7 @@ export default function Providers({ children }) {
 
 	return (
 		<SWRConfig value={swrSettings}>
-			<MantineProvider defaultColorScheme="auto" theme={theme}>
+			<MantineProvider defaultColorScheme="auto" theme={appAndroidTheme}>
 				<DatesProvider settings={mantineDatesSettings}>
 					<ModalsProvider>
 						<AnalyticsContextProvider>
