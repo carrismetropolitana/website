@@ -34,7 +34,11 @@ export default function middleware(req: NextRequest) {
 	// redirect to the default locale by remove the 'UNKNOWN' keyword from the URL.
 
 	if (possibleLocaleCode === 'UNKNOWN') {
-		return NextResponse.redirect(new URL(newPathWithoutPossibleLocaleCode, req.nextUrl.origin));
+		const destinationUrl = new URL(newPathWithoutPossibleLocaleCode, req.nextUrl.origin);
+		if (req.nextUrl.search) {
+			destinationUrl.search = req.nextUrl.search;
+		}
+		return NextResponse.redirect(destinationUrl);
 	}
 
 	//
@@ -43,7 +47,11 @@ export default function middleware(req: NextRequest) {
 
 	if (enabledLocaleAlias.includes(possibleLocaleCode)) {
 		const correspondingLocaleCode = availableLocales.find(item => item.alias.includes(possibleLocaleCode))?.value;
-		return NextResponse.redirect(new URL(`${correspondingLocaleCode}${newPathWithoutPossibleLocaleCode}`, req.nextUrl.origin));
+		const destinationUrl = new URL(`${correspondingLocaleCode}${newPathWithoutPossibleLocaleCode}`, req.nextUrl.origin);
+		if (req.nextUrl.search) {
+			destinationUrl.search = req.nextUrl.search;
+		}
+		return NextResponse.redirect(destinationUrl);
 	}
 
 	//
