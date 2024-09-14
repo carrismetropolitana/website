@@ -4,7 +4,7 @@
 
 import Button from '@/components/common/Button';
 import { useAlertsListContext } from '@/contexts/AlertsList.context';
-import { IconExternalLink, IconEye, IconSunset2 } from '@tabler/icons-react';
+import { IconCalendarEvent, IconDeviceMobileDown, IconSunset2 } from '@tabler/icons-react';
 import { useTranslations } from 'next-intl';
 
 import styles from './styles.module.css';
@@ -29,8 +29,8 @@ export default function Component() {
 			<h1 className={styles.title}>{t('default.title')}</h1>
 			<h2 className={styles.subtitle}>{t('default.subtitle')}</h2>
 			<div className={styles.actionWrapper}>
-				<Button icon={<IconEye size={18} />} label={t('default.action_1')} onClick={() => alertsContext.actions.updateFilterByDate('current')} />
-				<Button href="https://www.navegante.pt/navegante/espacos-pontos-navegante" icon={<IconExternalLink size={18} />} label={t('default.action_2')} target="_blank" />
+				<Button icon={<IconCalendarEvent size={18} />} label={t('default.action_1')} onClick={() => alertsContext.actions.updateFilterByDate('current')} />
+				<Button href="/app" icon={<IconDeviceMobileDown size={18} />} label={t('default.action_2')} />
 			</div>
 		</div>
 	);
