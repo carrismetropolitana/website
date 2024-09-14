@@ -8,7 +8,7 @@ const appStartupMessages: StartupMessage[] = [
 	{
 		max_build: 1826251148,
 		min_build: null,
-		presentation_type: 'breaking',
+		presentation_type: 'changelog',
 		url_host: 'https://alpha.carrismetropolitana.pt/',
 		url_path: '/app-ios/startup/message-1',
 	},
