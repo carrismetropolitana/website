@@ -6,15 +6,17 @@ import type { StartupMessage } from '@/types/app.types';
 
 const appStartupMessages: StartupMessage[] = [
 	{
-		max_build: 1826251148,
-		min_build: null,
+		build_max: 1826251148,
+		build_min: null,
+		message_id: 'IOS-0001',
 		presentation_type: 'changelog',
 		url_host: 'https://alpha.carrismetropolitana.pt/',
 		url_path: '/app-ios/startup/message-1',
 	},
 	{
-		max_build: 1,
-		min_build: 2,
+		build_max: 1,
+		build_min: 2,
+		message_id: 'IOS-0002',
 		presentation_type: 'changelog',
 		url_host: 'https://alpha.carrismetropolitana.pt/',
 		url_path: '/views/app/startup/messages/abc/?locale=pt&appVersion=1.2.3',
