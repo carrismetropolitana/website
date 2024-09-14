@@ -2,7 +2,7 @@
 
 import type { NavigationLink } from '@/types/navigation.types';
 
-import { Link } from '@/translations/navigation';
+import { Link } from '@/i18n/routing';
 import { IconArrowNarrowRight, IconExternalLink } from '@tabler/icons-react';
 
 import styles from './styles.module.css';

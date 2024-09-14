@@ -1,6 +1,6 @@
 /* * */
 
-import { availableLocales } from '@/translations/config';
+import { availableLocales } from '@/i18n/config';
 import createIntlMiddleware from 'next-intl/middleware';
 
 /* * */

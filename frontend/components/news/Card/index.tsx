@@ -1,6 +1,6 @@
 /* * */
 
-import { Link } from '@/translations/navigation';
+import { Link } from '@/i18n/routing';
 import { Image } from '@mantine/core';
 import { DateTime } from 'luxon';
 import { useTranslations } from 'next-intl';

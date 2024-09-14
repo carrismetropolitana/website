@@ -18,7 +18,7 @@ export default function Component() {
 	//
 	// A. Setup variables
 
-	const t = useTranslations('HomeNewsSection');
+	const t = useTranslations('home.NewsSection');
 
 	//
 	// B. Fetch Data

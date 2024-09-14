@@ -2,7 +2,7 @@
 
 /* * */
 
-import { useRouter } from '@/translations/navigation';
+import { useRouter } from '@/i18n/routing';
 import { JsonInput } from '@mantine/core';
 import { useEffect } from 'react';
 import useSWR from 'swr';

@@ -43,7 +43,7 @@
 		".next/types/**/*.ts",
 		"**/*.ts",
 		"**/*.tsx"
-, "themes/website/website.theme.js"	],
+	],
 	"typingOptions": {
 		"enableAutoDiscovery": true
 	}

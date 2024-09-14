@@ -1,6 +1,6 @@
 // /* * */
 
-// import pt from '@/translations/pt-PT.json';
+// import pt from '@/i18n/pt-PT.json';
 
 // /* * */
 

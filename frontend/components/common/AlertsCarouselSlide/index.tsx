@@ -3,7 +3,7 @@
 import type { SimplifiedAlert } from '@/types/alerts.types';
 
 import { AlertActivePeriodStart } from '@/components/alerts/AlertActivePeriod';
-import { Link } from '@/translations/navigation';
+import { Link } from '@/i18n/routing';
 import { IconCircleArrowRightFilled } from '@tabler/icons-react';
 
 import styles from './styles.module.css';

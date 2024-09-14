@@ -1,6 +1,6 @@
 /* * */
 
-import { Link } from '@/translations/navigation';
+import { Link } from '@/i18n/routing';
 import { Button } from '@mantine/core';
 import classNames from 'classnames';
 import React from 'react';

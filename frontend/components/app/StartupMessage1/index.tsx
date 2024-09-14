@@ -5,7 +5,7 @@
 import AppButton from '@/components/common/AppButton';
 import { useEnvironmentContext } from '@/contexts/Environment.context';
 import { appAndroidStoreUrl, appIosStoreUrl } from '@/settings/urls.settings';
-import { Link } from '@/translations/navigation';
+import { Link } from '@/i18n/routing';
 import { Button } from '@mantine/core';
 import { IconArrowBigUpLinesFilled } from '@tabler/icons-react';
 import { useTranslations } from 'next-intl';

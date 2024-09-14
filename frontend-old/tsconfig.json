@@ -17,7 +17,7 @@
       "@/scripts/*": ["scripts/*"],
       "@/services/*": ["services/*"],
       "@/schemas/*": ["schemas/*"],
-      "@/translations/*": ["translations/*"]
+      "@/i18n/*": ["translations/*"]
     },
     "allowJs": true,
     "outDir": "build",

@@ -1,7 +1,7 @@
 /* * */
 
 import AppAnalytics from '@/components/AppAnalytics/AppAnalytics';
-import { availableLocales } from '@/translations/config';
+import { availableLocales } from '@/i18n/config';
 import { notFound } from 'next/navigation';
 import { NextIntlClientProvider, useMessages } from 'next-intl';
 

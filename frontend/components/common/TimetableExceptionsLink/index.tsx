@@ -2,7 +2,7 @@
 
 import type { Exception } from '@/types/timetables.types';
 
-import { Link } from '@/translations/navigation';
+import { Link } from '@/i18n/routing';
 import { IconArrowUpRight } from '@tabler/icons-react';
 import { useTranslations } from 'next-intl';
 

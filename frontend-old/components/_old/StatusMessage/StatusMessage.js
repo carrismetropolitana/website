@@ -2,7 +2,7 @@
 
 /* * */
 
-import { Link } from '@/translations/navigation';
+import { Link } from '@/i18n/routing';
 import { ActionIcon } from '@mantine/core';
 import { IconChevronDown, IconChevronLeft } from '@tabler/icons-react';
 import { useTranslations } from 'next-intl';

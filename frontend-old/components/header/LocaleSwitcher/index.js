@@ -1,6 +1,6 @@
 /* * */
 
-import { availableLocalesTest } from '@/translations/config';
+import { availableLocalesTest } from '@/i18n/config';
 import { SegmentedControl } from '@mantine/core';
 import { useTranslations } from 'next-intl';
 

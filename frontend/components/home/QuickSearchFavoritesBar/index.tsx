@@ -8,7 +8,7 @@ import Loader from '@/components/common/Loader';
 import LineBadge from '@/components/common/LineBadge';
 import { useAlertsContext } from '@/contexts/Alerts.context';
 import { useProfileContext } from '@/contexts/Profile.context';
-import { Link, useRouter } from '@/translations/navigation';
+import { Link, useRouter } from '@/i18n/routing';
 import { useTranslations } from 'next-intl';
 import { useMemo } from 'react';
 import useSWR from 'swr';

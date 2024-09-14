@@ -4,7 +4,7 @@ import Carousel from '@/components/common/Carousel';
 import Section from '@/components/layout/Section';
 import PlannerCard from '@/components/planner/Card';
 import PlannerCardSkeleton from '@/components/planner/CardSkeleton';
-import { Link } from '@/translations/navigation';
+import { Link } from '@/i18n/routing';
 import { shuffleArray } from '@/utils/shuffle';
 import { useTranslations } from 'next-intl';
 

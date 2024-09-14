@@ -1,6 +1,6 @@
 /* * */
 
-import { availableLocalesTest } from '@/translations/config';
+import { enabledLocaleCodes } from '@/i18n/config';
 import { SegmentedControl } from '@mantine/core';
 import { useTranslations } from 'next-intl';
 
@@ -19,7 +19,7 @@ export default function Component() {
 	//
 	// B. Transform data
 
-	const availableLocalesFormatted = availableLocalesTest.map(locale => ({ label: t(`${locale}.label`), value: locale }));
+	const availableLocalesFormatted = enabledLocaleCodes.map(locale => ({ label: t(`${locale}.label`), value: locale }));
 
 	//
 	// B. Render Components

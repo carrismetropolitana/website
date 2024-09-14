@@ -2,7 +2,7 @@
 
 /* * */
 
-import { Link } from '@/translations/navigation';
+import { Link } from '@/i18n/routing';
 import pjson from 'package.json';
 
 /* * */
