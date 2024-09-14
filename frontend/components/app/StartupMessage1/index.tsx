@@ -4,8 +4,8 @@
 
 import AppButton from '@/components/common/AppButton';
 import { useEnvironmentContext } from '@/contexts/Environment.context';
-import { appAndroidStoreUrl, appIosStoreUrl } from '@/settings/urls.settings';
 import { Link } from '@/i18n/routing';
+import { appAndroidStoreUrl, appIosStoreUrl } from '@/settings/urls.settings';
 import { Button } from '@mantine/core';
 import { IconArrowBigUpLinesFilled } from '@tabler/icons-react';
 import { useTranslations } from 'next-intl';
@@ -29,7 +29,7 @@ export default function Component() {
 	const handleClose = () => {
 		if (environmentContext === 'app-ios') {
 			// eslint-disable-next-line @typescript-eslint/no-explicit-any
-			(window as any).webkit.messageHandlers.closeButtonClicked.postMessage();
+			(window as any).webkit.messageHandlers.closeButtonClicked.postMessage('');
 		}
 		if (environmentContext === 'app-android') {
 			// eslint-disable-next-line @typescript-eslint/no-explicit-any
