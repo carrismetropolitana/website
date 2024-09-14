@@ -2,9 +2,6 @@
 
 /* * */
 
-import '@/themes/reset.css';
-import '@/themes/variables.css';
-import '@/themes/wordpress.css';
 import '@mantine/carousel/styles.layer.css';
 import '@mantine/charts/styles.layer.css';
 import '@mantine/core/styles.layer.css';
@@ -14,11 +11,17 @@ import 'maplibre-gl/dist/maplibre-gl.css';
 
 /* * */
 
-import AccordionOverride from '@/themes/default/overrides/Accordion.module.css';
-import SegmentedControlOverride from '@/themes/default/overrides/SegmentedControl.module.css';
-import SelectOverride from '@/themes/default/overrides/Select.module.css';
-import SkeletonOverride from '@/themes/default/overrides/Skeleton.module.css';
-import TextInputOverride from '@/themes/default/overrides/TextInput.module.css';
+import '@/themes/_default/styles/reset.css';
+import '@/themes/_default/styles/variables.css';
+import '@/themes/_default/styles/wordpress.css';
+
+/* * */
+
+import AccordionOverride from '@/themes/_default/overrides/Accordion.module.css';
+import SegmentedControlOverride from '@/themes/_default/overrides/SegmentedControl.module.css';
+import SelectOverride from '@/themes/_default/overrides/Select.module.css';
+import SkeletonOverride from '@/themes/_default/overrides/Skeleton.module.css';
+import TextInputOverride from '@/themes/_default/overrides/TextInput.module.css';
 import combineClasses from '@/utils/combineClasses';
 import { Accordion, createTheme, SegmentedControl, Select, Skeleton, TextInput } from '@mantine/core';
 import { IconCaretLeftFilled } from '@tabler/icons-react';

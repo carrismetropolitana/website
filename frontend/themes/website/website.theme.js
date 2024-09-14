@@ -2,7 +2,11 @@
 
 /* * */
 
-import defaultTheme from '@/themes/default/default.theme';
+import '@/themes/website/styles/reset.css';
+
+/* * */
+
+import defaultTheme from '@/themes/_default/default.theme';
 import ButtonOverride from '@/themes/website/overrides/Button.module.css';
 import combineClasses from '@/utils/combineClasses';
 import { createTheme } from '@mantine/core';

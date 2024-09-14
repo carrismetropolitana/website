@@ -32,8 +32,6 @@ h5,
 h6,
 p {
 	margin: 0;
-	user-select: text;
-	-webkit-touch-callout: default;
 }
 
 a {
