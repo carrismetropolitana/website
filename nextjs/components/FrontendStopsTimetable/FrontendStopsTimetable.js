@@ -13,6 +13,7 @@ import FrontendStopsTimetablePreviousTrips from '@/components/FrontendStopsTimet
 import FrontendStopsTimetableCurrentAndFutureTrips from '@/components/FrontendStopsTimetableCurrentAndFutureTrips/FrontendStopsTimetableCurrentAndFutureTrips';
 import FrontendStopsTimetableDividerLine from '@/components/FrontendStopsTimetableDividerLine/FrontendStopsTimetableDividerLine';
 import { useFrontendStopsContext } from '@/contexts/FrontendStopsContext';
+import { DateTime } from 'luxon';
 
 /* * */
 
@@ -64,10 +65,11 @@ export default function FrontendStopsTimetable() {
 			//        1.3. the estimated_arrival is previous to the current_time + 5 minutes
 			//    2. A trip is considered 'currentOrFuture' otherwise.
 
-			const tripHasObservedArrival = realtimeTrip.observed_arrival ? true : false;
-			const tripScheduledArrivalIsInThePast = getMinutesFromOperationTimeString(realtimeTrip.scheduled_arrival) < 0;
-			const tripHasEstimatedArrival = realtimeTrip.estimated_arrival ? true : false;
-			const tripEstimatedArrivalIsInThePast = getMinutesFromOperationTimeString(realtimeTrip.estimated_arrival) < -5;
+			const nowInUnixSeconds = DateTime.local({ zone: 'Europe/Lisbon' }).toSeconds();
+			const tripHasObservedArrival = realtimeTrip.observed_arrival_unix ? true : false;
+			const tripScheduledArrivalIsInThePast = realtimeTrip.scheduled_arrival_unix < nowInUnixSeconds;
+			const tripHasEstimatedArrival = realtimeTrip.estimated_arrival_unix ? true : false;
+			const tripEstimatedArrivalIsInThePast = tripHasEstimatedArrival && realtimeTrip.estimated_arrival_unix < nowInUnixSeconds - 60;
 
 			if (tripHasObservedArrival || (tripScheduledArrivalIsInThePast && !tripHasEstimatedArrival) || tripEstimatedArrivalIsInThePast) {
 				previousTrips.push(realtimeTrip);

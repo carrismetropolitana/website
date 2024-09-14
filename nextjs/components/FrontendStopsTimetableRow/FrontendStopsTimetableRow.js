@@ -189,8 +189,11 @@ export default function FrontendStopsTimetableRow({ rowType, tripData }) {
 						<CopyBadge label={`stop_seq: ${tripData.stop_sequence}`} value={tripData.stop_sequence} />
 						<CopyBadge label={`vehicle_id: ${tripData.vehicle_id}`} value={tripData.vehicle_id} />
 						<CopyBadge label={`Observado: ${tripData.observed_arrival}`} value={tripData.observed_arrival} />
+						<CopyBadge label={`Observado: ${tripData.observed_arrival_unix}`} value={tripData.observed_arrival_unix} />
 						<CopyBadge label={`Estimado: ${tripData.estimated_arrival}`} value={tripData.estimated_arrival} />
+						<CopyBadge label={`Estimado: ${tripData.estimated_arrival_unix}`} value={tripData.estimated_arrival_unix} />
 						<CopyBadge label={`Planeado: ${tripData.scheduled_arrival}`} value={tripData.scheduled_arrival} />
+						<CopyBadge label={`Planeado: ${tripData.scheduled_arrival_unix}`} value={tripData.scheduled_arrival_unix} />
 					</div>
 				}
 
