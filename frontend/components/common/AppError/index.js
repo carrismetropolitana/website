@@ -23,20 +23,20 @@ export default function Component() {
 
 	const [reloadInSeconds, setReloadInSeconds] = useState(10);
 
-	//
-	// B. Transform data
+	// //
+	// // B. Transform data
 
 	// useEffect(() => {
 	// 	analyticsContext.capture('frontend_error', { url: window.location.href });
 	// });
 
-	useEffect(() => {
-		const interval = setInterval(() => {
-			if (reloadInSeconds === 1) window.location.reload();
-			else setReloadInSeconds(prev => prev - 1);
-		}, 1000);
-		return () => clearInterval(interval);
-	}, [reloadInSeconds]);
+	// useEffect(() => {
+	// 	const interval = setInterval(() => {
+	// 		if (reloadInSeconds === 1) window.location.reload();
+	// 		else setReloadInSeconds(prev => prev - 1);
+	// 	}, 1000);
+	// 	return () => clearInterval(interval);
+	// }, [reloadInSeconds]);
 
 	//
 	// C. Handle actions

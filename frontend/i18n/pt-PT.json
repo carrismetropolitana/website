@@ -30,6 +30,24 @@
 			"remove": "Remover",
 			"confirm": "Confirmar",
 			"generate": "Gerar"
+		},
+		"weekdays": {
+			"monday": "Segunda-feira",
+			"tuesday": "Terça-feira",
+			"wednesday": "Quarta-feira",
+			"thursday": "Quinta-feira",
+			"friday": "Sexta-feira",
+			"saturday": "Sábado",
+			"sunday": "Domingo",
+			"short": {
+				"monday": "Seg",
+				"tuesday": "Ter",
+				"wednesday": "Qua",
+				"thursday": "Qui",
+				"friday": "Sex",
+				"saturday": "Sáb",
+				"sunday": "Dom"
+			}
 		}
 	},
 	"AppError": {
@@ -691,6 +709,34 @@
 				"lines": "{count, plural, =0 {Nenhuma linha encontrada.} one {Encontrada # linha:} other {Encontradas # linhas:}}",
 				"stops": "{count, plural, =0 {Nenhum paragem encontrado.} one {Encontrado # paragem:} other {Encontrados # paragens:}}"
 			}
+		}
+	},
+	"notifications": {
+		"Page": {
+			"heading": "Notificações Inteligentes",
+			"subheading": "Receba notificações sobre as suas linhas e paragens favoritas. Ative as notificações e fique a par de todas as alterações à rede.",
+			"new": "Nova Notificação"
+		},
+		"Single": {
+			"heading_new" : "Nova Notificação",
+			"heading_edit" : "Editar Notificação",
+			"line": "Notificar-me quando um veículo da linha",
+			"distance": "estiver a",
+			"distance_unit": {
+				"meters": "metros",
+				"minutes": "minutos"
+			},
+			"stop": "da paragem",
+			"time": "no perído",
+			"start_time": "Hora de Início",
+			"end_time": "Hora de Fim",
+			"weekday": "Dias da Semana",
+			"warning": "Atenção\nPor Favor Teste esta funcionalidade antes de utilizar com confiança. Poderá ser necessário ajustar os tempos para garantir que chega ao local.",
+			"create": "Criar Notificação"
+		},
+		"Card": {
+			"min": "Minutos",
+			"meters": "Metros"
 		}
 	},
 	"toast": {
