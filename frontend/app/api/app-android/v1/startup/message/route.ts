@@ -8,8 +8,8 @@ const appStartupMessages: StartupMessage[] = [
 	{
 		build_max: 1826481590,
 		build_min: null,
-		message_id: 'ANDROID-0002',
-		presentation_type: 'breaking',
+		message_id: 'ANDROID-0082',
+		presentation_type: 'changelog',
 		url_host: 'https://alpha.carrismetropolitana.pt/',
 		url_path: '/app-android/startup/message-1',
 	},
