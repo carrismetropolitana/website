@@ -11,7 +11,7 @@ const appStartupMessages: StartupMessage[] = [
 		message_id: 'ANDROID-0001',
 		presentation_type: 'changelog',
 		url_host: 'https://alpha.carrismetropolitana.pt/',
-		url_path: '/app-ios/startup/message-1',
+		url_path: '/app-android/startup/message-1',
 	},
 	{
 		build_max: 1,
