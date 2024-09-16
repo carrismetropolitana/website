@@ -8,7 +8,7 @@ export const defaultLocaleCode = 'pt-PT';
 
 export const availableLocales = [
 	{ alias: ['pt', 'pt-BR', 'pt_BR', 'pt-GW', 'pt_GW', 'pt-MZ', 'pt_MZ'], enabled: true, value: 'pt-PT' },
-	{ alias: [], enabled: false, value: 'en' },
+	{ alias: ['en_US', 'en-US'], enabled: false, value: 'en' },
 ];
 
 export const enabledLocaleCodes = availableLocales.filter(item => item.enabled).map(({ value }) => value);
