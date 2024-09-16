@@ -6,7 +6,7 @@ import type { StartupMessage } from '@/types/app.types';
 
 const appStartupMessages: StartupMessage[] = [
 	{
-		build_max: 1726481590,
+		build_max: 1826481590,
 		build_min: null,
 		message_id: 'ANDROID-0001',
 		presentation_type: 'changelog',
