@@ -318,6 +318,9 @@
 		"popover": {
 			"text": "Valores de passageiros transportados atualizados a cada 60 minutos.",
 			"link": "Explorar Dados Abertos"
+		},
+		"by_line": {
+			"top": "linhas com mais passageiros transportados"
 		}
 	},
 	"HeaderLogo": {
