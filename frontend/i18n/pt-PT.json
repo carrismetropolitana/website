@@ -320,7 +320,8 @@
 			"link": "Explorar Dados Abertos"
 		},
 		"by_line": {
-			"top": "linhas com mais passageiros transportados"
+			"top": "linhas com mais passageiros transportados hoje",
+			"selected": "passageiros transportados nesta linha"
 		}
 	},
 	"HeaderLogo": {
