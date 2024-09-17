@@ -5,8 +5,7 @@
 import LineBadge from '@/components/common/LineBadge';
 import MetricsSectionDemandSkeleton from '@/components/home/MetricsSectionDemandSkeleton';
 import { useLinesListContext } from '@/contexts/LinesList.context';
-import { Line } from '@/types/lines.types';
-import { PieChart, Sparkline } from '@mantine/charts';
+import { Sparkline } from '@mantine/charts';
 import { ActionIcon, Popover } from '@mantine/core';
 import { IconInfoCircleFilled } from '@tabler/icons-react';
 import classNames from 'classnames';
