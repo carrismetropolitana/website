@@ -4,7 +4,9 @@
 
 import type { Store } from '@/types/stores.types.js';
 
+import { moveMap } from '@/utils/map';
 import { createContext, useContext, useEffect, useState } from 'react';
+import { useMap } from 'react-map-gl/dist/esm/exports-maplibre';
 import useSWR from 'swr';
 
 /* * */
@@ -14,6 +16,7 @@ interface StoresListContextState {
 		updateFilterByMunicipality: (value: string) => void
 		updateFilterCurrentStatus: (value: string) => void
 		updateFilterOrderBy: (value: string) => void
+		updateSelectedStore: (storeId: string) => void
 	}
 	counters: {
 		by_current_status: {
@@ -23,6 +26,7 @@ interface StoresListContextState {
 	data: {
 		filtered: Store[]
 		raw: Store[]
+		selected: null | Store
 	}
 	filters: {
 		by_current_status: 'all' | 'open'
@@ -54,7 +58,10 @@ export const StoresListContextProvider = ({ children }) => {
 	//
 	// A. Setup variables
 
+	const { storesListMap } = useMap();
+
 	const [dataFilteredState, setDataFilteredState] = useState<Store[]>([]);
+	const [dataSelectedState, setDataSelectedState] = useState<null | Store>(null);
 
 	const [filterByCurrentStatusState, setFilterByCurrentStatusState] = useState <StoresListContextState['filters']['by_current_status']>('open');
 	const [filterByMunicipalityState, setFilterByMunicipalityState] = useState <StoresListContextState['filters']['by_municipality']>(null);
@@ -131,6 +138,27 @@ export const StoresListContextProvider = ({ children }) => {
 		setFilterOrderByState(value);
 	};
 
+	const updateSelectedStore = (storeId: string) => {
+		if (!allStoresData) return;
+		// Search for store in filtered array
+		let foundStoreData = dataFilteredState.find(item => item.id === storeId) || null;
+		if (!foundStoreData) {
+			foundStoreData = allStoresData.find(item => item.id === storeId) || null;
+			if (!foundStoreData || !foundStoreData.id) return;
+			setFilterByCurrentStatusState('all');
+			setFilterByMunicipalityState(null);
+			moveMap(storesListMap, [foundStoreData.lon, foundStoreData.lat]);
+			setTimeout(() => {
+				if (!foundStoreData) return;
+				document.getElementById(foundStoreData.id)?.scrollIntoView();
+			}, 500);
+			return;
+		};
+		setDataSelectedState(foundStoreData);
+		moveMap(storesListMap, [foundStoreData.lon, foundStoreData.lat]);
+		document.getElementById(foundStoreData.id)?.scrollIntoView();
+	};
+
 	//
 	// E. Define context value
 
@@ -139,6 +167,7 @@ export const StoresListContextProvider = ({ children }) => {
 			updateFilterByMunicipality,
 			updateFilterCurrentStatus,
 			updateFilterOrderBy,
+			updateSelectedStore,
 		},
 		counters: {
 			by_current_status: {
@@ -148,6 +177,7 @@ export const StoresListContextProvider = ({ children }) => {
 		data: {
 			filtered: dataFilteredState,
 			raw: allStoresData || [],
+			selected: dataSelectedState,
 		},
 		filters: {
 			by_current_status: filterByCurrentStatusState,

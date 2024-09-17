@@ -2,17 +2,15 @@
 
 /* * */
 
-import type { StoreGroupByMunicipality } from '@/types/stores.types';
-
-import GroupedListItem from '@/components/layout/GroupedListItem';
-import GroupedListSkeleton from '@/components/layout/GroupedListSkeleton';
-import StoresListEmpty from '@/components/stores/StoresListEmpty';
-import StoreListItem from '@/components/stores/StoresListItem';
-import StoresListItemSkeleton from '@/components/stores/StoresListItemSkeleton';
-import { useStoresListContext } from '@/contexts/StoresList.context';
-import collator from '@/utils/collator';
+import Button from '@/components/common/Button';
+import Section from '@/components/layout/Section';
+import StoresListGroups from '@/components/stores/StoresListGroups';
+import StoresListMap from '@/components/stores/StoresListMap';
+import StoresListToolbar from '@/components/stores/StoresListToolbar';
+import { IconExternalLink } from '@tabler/icons-react';
 import { useTranslations } from 'next-intl';
-import { useMemo } from 'react';
+
+import styles from './styles.module.css';
 
 /* * */
 
@@ -23,56 +21,28 @@ export default function Component() {
 	// A. Setup variables
 
 	const t = useTranslations('stores.StoresList');
-	const storesContext = useStoresListContext();
 
 	//
-	// B. Transform data
+	// B. Render components
 
-	const allStoresGroupedByMunicipality = useMemo(() => {
-		//
-		if (!storesContext.data) return [];
-		//
-		const groupedStores: StoreGroupByMunicipality[] = storesContext.data.filtered.reduce((result: StoreGroupByMunicipality[], item) => {
-			const existingGroup = result.find(group => group.municipality_id === item.municipality_id);
-			if (existingGroup) {
-				existingGroup.stores.push(item);
-			}
-			else {
-				result.push({
-					municipality_id: item.municipality_id,
-					municipality_name: item.municipality_name,
-					stores: [item],
-				});
-			}
-			return result;
-		}, []) || [];
-		//
-		const sortedGroups = groupedStores.sort((a, b) => collator.compare(a.municipality_name, b.municipality_name));
-		//
-		return sortedGroups;
-		//
-	}, [storesContext.data]);
-
-	//
-	// C. Render components
-
-	if (storesContext.flags.is_loading) {
-		return <GroupedListSkeleton groupCount={3} itemCount={2} itemSkeleton={<StoresListItemSkeleton />} />;
-	}
-
-	if (allStoresGroupedByMunicipality.length > 0) {
-		return (
-			allStoresGroupedByMunicipality.map(storeGroup => (
-				<GroupedListItem key={storeGroup.municipality_id} label={t('label')} title={storeGroup.municipality_name}>
-					{storeGroup.stores.map(store => (
-						<StoreListItem key={store.id} data={store} />
-					))}
-				</GroupedListItem>
-			))
-		);
-	}
-
-	return <StoresListEmpty />;
+	return (
+		<>
+			<Section heading={t('heading')} subheading={t('subheading')} withGap={false} withTopBorder={false} withChildrenPadding>
+				<Button href="https://www.navegante.pt/navegante/espacos-pontos-navegante" icon={<IconExternalLink size={18} />} label={t('external_link')} target="_blank" />
+			</Section>
+			<Section withTopPadding={false} withChildrenPadding>
+				<StoresListToolbar />
+			</Section>
+			<Section childrenWrapperStyles={styles.contentWrapper} withTopBorder={false} withTopPadding={false}>
+				<div className={styles.groupsWrapper}>
+					<StoresListGroups />
+				</div>
+				<div className={styles.mapWrapper}>
+					<StoresListMap />
+				</div>
+			</Section>
+		</>
+	);
 
 	//
 }

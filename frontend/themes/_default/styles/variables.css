@@ -113,6 +113,12 @@
 	--color-alerts-2: #F5A000;
 	--color-alerts-3: #E64B23;
 
+	/* * */
+	/* BOX-SHADOW */
+
+	--box-shadow-md: 0 0 50px 0 red;
+	--box-shadow-lg: 0 0 50px 0 rgb(0 0 0 / 5%);
+
 }
 
 /* * */

@@ -412,13 +412,9 @@ export default function FrontendStopsMap() {
 
 									['get', 'current_status'],
 
-									'inactive',
+									'inactive', '#969696',
 
-									'#969696',
-
-									'voided',
-
-									'#cc5533',
+									'voided', '#cc5533',
 
 									'#000000'],
 							'circle-stroke-width': ['interpolate', ['linear', 1], ['zoom'], 9, 0.01, 26, ['case', ['boolean', ['feature-state', 'selected'], false], 8, 7]],
