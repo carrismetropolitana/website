@@ -19,6 +19,7 @@ body {
 	color: var(--color-system-text-100);
 	background-color: var(--color-system-background-200);
 	scroll-behavior: smooth;
+	scroll-padding-top: 80px;
 }
 
 /* * */
