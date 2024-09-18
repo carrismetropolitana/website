@@ -8,11 +8,11 @@ import { useMemo } from 'react';
 /* * */
 
 export interface SelectPatternProps extends SelectProps {
-	patterns: PatternGroup[]
 	date_filter?: string
+	patterns: PatternGroup[]
 }
 
-export default function Component({ onChange, patterns, value, date_filter ,...props }: SelectPatternProps) {
+export default function Component({ date_filter, onChange, patterns, value, ...props }: SelectPatternProps) {
 	//
 	// A. Setup variables
 
@@ -22,7 +22,7 @@ export default function Component({ onChange, patterns, value, date_filter ,...p
 		if (!patterns) return [];
 
 		// Filter patterns by date
-		return patterns.map(patternGroupData => ({ label: patternGroupData.headsign, value: patternGroupData.pattern_group_id, disabled: date_filter ? !patternGroupData.valid_on.includes(date_filter) : false }));
+		return patterns.map(patternGroupData => ({ disabled: date_filter ? !patternGroupData.valid_on.includes(date_filter) : false, label: patternGroupData.headsign, value: patternGroupData.pattern_group_id }));
 	}, [patterns]);
 
 	//
@@ -31,10 +31,10 @@ export default function Component({ onChange, patterns, value, date_filter ,...p
 		const pattern = patterns.find(pattern => pattern.pattern_group_id === option.value);
 
 		if (!pattern) return null;
-		if(pattern.path.length === 0) return null;
+		if (pattern.path.length === 0) return null;
 
 		return (
-			<Group gap={2} >
+			<Group gap={2}>
 				<Text fw="bold">{pattern.headsign}</Text>
 				{/* Route Long Name */}
 				<Text fw="bold">{pattern.route_id}</Text>
