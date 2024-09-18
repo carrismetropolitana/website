@@ -4,26 +4,26 @@ import type { Store } from '@/types/stores.types';
 
 import LiveIcon from '@/components/common/LiveIcon';
 import { Skeleton } from '@mantine/core';
-import { IconClockHour3, IconUserStar, IconUsers } from '@tabler/icons-react';
+import { IconClockHour3, IconUsers, IconUserStar } from '@tabler/icons-react';
 import { useTranslations } from 'next-intl';
 
 import styles from './styles.module.css';
 
 /* * */
 
-interface StoresListItemRealtime {
+interface Props {
 	data: Store
 }
 
 /* * */
 
-export default function Component({ data }: StoresListItemRealtime) {
+export default function Component({ data }: Props) {
 	//
 
 	//
 	// A. Setup variables
 
-	const t = useTranslations('stores.StoresListItemRealtime');
+	const t = useTranslations('stores.StoresListGroupItemRealtime');
 
 	//
 	// B. Transform data

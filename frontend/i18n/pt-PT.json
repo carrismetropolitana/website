@@ -242,13 +242,23 @@
 		}
 	},
 	"stores": {
-		"Page":{
+		"StoresList":{
 			"heading": "Lojas e Rede de Agentes",
-			"subheading":"Disponíveis para os nossos passageiros, os Espaços navegante® Carris Metropolitana estão dedicados a prestar informações sobre a rede e bilhética Carris Metropolitana, possibilitando o esclarecimento de dúvidas, a emissão de cartões navegante® e a adesão a perfis e descontos. É possível também efetuar o carregamento de títulos nos pontos de atendimento PayShop® da rede de agentes navegante®.",
+			"subheading":"Disponíveis para todos os passageiros, os Espaços navegante® estão dedicados a prestar informações sobre a rede e bilhética Carris Metropolitana, possibilitando o esclarecimento de dúvidas, a emissão de cartões navegante® e a adesão a perfis e descontos. É possível também efetuar o carregamento de títulos nos pontos de atendimento PayShop® da rede de agentes navegante®.",
 			"external_link": "Rede de agentes navegante®"
 		},
-		"StoresList": {
-			"label": "Município"
+		"StoresListToolbar": {
+			"by_current_status": {
+				"open": "Abertas agora ({count})",
+				"all": "Todas as lojas"
+			},
+			"by_municipality": {
+				"label": "Filtrar por Município"
+			},
+			"found_items_counter": "{count, plural, =0 {Nenhuma loja encontrada.} one {Encontrada # loja:} other {Encontradas # lojas:}}"
+		},
+		"StoresListGroups": {
+			"group_label": "Município"
 		},
 		"StoresListEmpty": {
 			"default": {
@@ -265,7 +275,7 @@
 				"action_3": "Explorer Rede de Agentes"
 			}
 		},
-		"StoresListItem": {
+		"StoresListGroupItem": {
 			"schedules": {
 				"label": "Horário",
 				"from": "De",
@@ -282,7 +292,7 @@
 			"address": "Morada",
 			"get_directions": "Obter Direções"
 		},
-		"StoresListItemRealtime": {
+		"StoresListGroupItemRealtime": {
 			"current_status": {
 				"open": "Aberto Agora",
 				"busy": "Movimentado",
@@ -290,17 +300,10 @@
 			},
 			"people_waiting": "{count, plural, =0 {Ninguém em espera} =1 {1 cliente em espera} other {# clientes em espera}}",
 			"desks_open": "{count, plural, =0 {Nenhum posto aberto} =1 {1 posto aberto} other {# postos abertos}}",
-			"expected_wait_time": "{count, plural, =0 {Atendimento imediato} =1 {Atendimento em aprox. 1 min} other {Atendimento em aprox. # min}}"
+			"expected_wait_time": "{count, plural, =0 {Atendimento imediato} other {Atendimento em aprox. # min}}"
 		},
-		"Toolbar": {
-			"by_current_status": {
-				"open": "Abertas agora ({count})",
-				"all": "Todas as lojas"
-			},
-			"by_municipality": {
-				"label": "Filtrar por Município"
-			},
-			"found_items_counter": "{count, plural, =0 {Nenhuma loja encontrada.} one {Encontrada # loja:} other {Encontradas # lojas:}}"
+		"StoresListMap": {
+			"expected_wait_time": "{count, plural, =0 {# min} other {# min}}"
 		}
 	},
 	"HomeMetricsSection": {

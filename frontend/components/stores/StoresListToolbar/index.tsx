@@ -19,7 +19,7 @@ export default function Component() {
 	//
 	// A. Setup variables
 
-	const t = useTranslations('stores.Toolbar');
+	const t = useTranslations('stores.StoresListToolbar');
 	const storesContext = useStoresListContext();
 
 	//

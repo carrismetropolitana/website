@@ -53,5 +53,5 @@
     ".next/types/**/*.ts",
     "**/*.ts",
     "**/*.tsx"
-, "app/api/news/[news_id]/route.js"  ]
+]
 }
