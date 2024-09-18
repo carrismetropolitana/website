@@ -34,7 +34,7 @@ export default function Component({ isSelected, onSelect, storeData }: Props) {
 	// B. Transform data
 
 	const googleMapsDirectionsUrl = `https://www.google.com/maps/dir/?api=1&destination=${storeData.name}&destination_place_id=${storeData.google_place_id}`;
-	const appleMapsDirectionsUrl = `https://www.google.com/maps/dir/?api=1&destination=${storeData.name}&destination_place_id=${storeData.google_place_id}`;
+	// const appleMapsDirectionsUrl = `https://www.google.com/maps/dir/?api=1&destination=${storeData.name}&destination_place_id=${storeData.google_place_id}`;
 
 	const parsedSchedules = useMemo(() => {
 		//

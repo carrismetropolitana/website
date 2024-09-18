@@ -8,7 +8,7 @@ import Map from '@/components/common/Map';
 import { useStoresListContext } from '@/contexts/StoresList.context';
 import * as turf from '@turf/turf';
 import { useTranslations } from 'next-intl';
-import { useEffect, useMemo } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import { Layer, Source, useMap } from 'react-map-gl/maplibre';
 
 /* * */
@@ -22,6 +22,8 @@ export default function Component() {
 	const { storesListMap } = useMap();
 	const storesListContext = useStoresListContext();
 	const t = useTranslations('stores.StoresListMap');
+
+	const [mapisLoaded, setMapisLoaded] = useState(false);
 
 	//
 	// B. Transform data
@@ -51,13 +53,14 @@ export default function Component() {
 	}, [storesListContext.data.raw, t]);
 
 	useEffect(() => {
-		if (!allStoresFeatureCollection || !storesListMap) return;
+		if (!allStoresFeatureCollection || !storesListMap || mapisLoaded) return;
 		const boundingBox = turf.bbox(allStoresFeatureCollection);
 		storesListMap.fitBounds([
 			[boundingBox[2], boundingBox[3]],
 			[boundingBox[0], boundingBox[1]],
 		]);
-	}, [allStoresFeatureCollection, storesListMap]);
+		setMapisLoaded(true);
+	}, [allStoresFeatureCollection, storesListMap, mapisLoaded]);
 
 	//
 	// C. Handle actions
