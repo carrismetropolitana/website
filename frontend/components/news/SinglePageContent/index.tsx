@@ -8,7 +8,7 @@ import styles from './styles.module.css';
 
 /* * */
 
-export default function Component({ newsData }) {
+export default function Component({ content }: { content: string }) {
 	//
 
 	//
@@ -23,7 +23,7 @@ export default function Component({ newsData }) {
 	// B. Render Components
 
 	return (
-		<div className={styles.content} dangerouslySetInnerHTML={{ __html: newsData?.content }} />
+		<div className={styles.content} dangerouslySetInnerHTML={{ __html: content }} />
 	);
 
 	//
