@@ -22,20 +22,20 @@ interface LinesDetailContextState {
 		setDrawerOpen: (isOpen: boolean) => void
 	}
 	data: {
-		active_alerts: SimplifiedAlert[] | null
-		active_pattern_group: PatternGroup | null
-		active_shape: Shape | null
+		active_alerts: null | SimplifiedAlert[]
+		active_pattern_group: null | PatternGroup
+		active_shape: null | Shape
 		active_stop: {
 			sequence: number
 			stop: Stop
 		} | null
-		all_patterns: Pattern[] | null
-		all_routes: Route[] | null
+		all_patterns: null | Pattern[]
+		all_routes: null | Route[]
 		demand: DemandByLine | null
 		drawer_open: boolean
 		line: Line | null
 		timetable: string
-		valid_pattern_groups: PatternGroup[] | null
+		valid_pattern_groups: null | PatternGroup[]
 	}
 	filters: {
 		none: null | string
@@ -69,14 +69,14 @@ export const LinesDetailContextProvider = ({ children, lineId }) => {
 	const profileContext = useProfileContext();
 	const operationalDayContext = useOperationalDayContext();
 
-	const [dataRoutesState, setDataRoutesState] = useState<Route[] | null>(null);
-	const [dataAllPatternsState, setDataAllPatternsState] = useState<Pattern[] | null>(null);
-	const [dataValidPatternGroupsState, setDataValidPatternGroupsState] = useState<PatternGroup[] | null>(null);
+	const [dataRoutesState, setDataRoutesState] = useState<null | Route[]>(null);
+	const [dataAllPatternsState, setDataAllPatternsState] = useState<null | Pattern[]>(null);
+	const [dataValidPatternGroupsState, setDataValidPatternGroupsState] = useState<null | PatternGroup[]>(null);
 	const [dataDemandForCurrentLineState, setDataDemandForCurrentLineState] = useState<DemandByLine | null>(null);
 
-	const [dataActiveAlertsState, setDataActiveAlertsState] = useState<SimplifiedAlert[] | null>(null);
-	const [dataActivePatternGroupState, setDataActivePatternGroupState] = useState<PatternGroup | null>(null);
-	const [dataActiveShapeState, setDataActiveShapeState] = useState<Shape | null>(null);
+	const [dataActiveAlertsState, setDataActiveAlertsState] = useState<null | SimplifiedAlert[]>(null);
+	const [dataActivePatternGroupState, setDataActivePatternGroupState] = useState<null | PatternGroup>(null);
+	const [dataActiveShapeState, setDataActiveShapeState] = useState<null | Shape>(null);
 
 	const [dataActiveStopState, setDataActiveStopState] = useState<{ sequence: number, stop: Stop } | null>(null);
 
