@@ -244,7 +244,7 @@
 	"stores": {
 		"StoresList":{
 			"heading": "Lojas e Rede de Agentes",
-			"subheading":"Disponíveis para os nossos passageiros, os Espaços navegante® Carris Metropolitana estão dedicados a prestar informações sobre a rede e bilhética Carris Metropolitana, possibilitando o esclarecimento de dúvidas, a emissão de cartões navegante® e a adesão a perfis e descontos. É possível também efetuar o carregamento de títulos nos pontos de atendimento PayShop® da rede de agentes navegante®.",
+			"subheading":"Disponíveis para todos os passageiros, os Espaços navegante® estão dedicados a prestar informações sobre a rede e bilhética Carris Metropolitana, possibilitando o esclarecimento de dúvidas, a emissão de cartões navegante® e a adesão a perfis e descontos. É possível também efetuar o carregamento de títulos nos pontos de atendimento PayShop® da rede de agentes navegante®.",
 			"external_link": "Rede de agentes navegante®"
 		},
 		"StoresListToolbar": {

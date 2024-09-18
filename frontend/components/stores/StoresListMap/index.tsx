@@ -115,10 +115,10 @@ export default function Component() {
 						type="symbol"
 						layout={{
 							'symbol-placement': 'point',
-							'text-anchor': 'bottom-left',
+							'text-anchor': 'bottom',
 							'text-field': ['get', 'text_value'],
-							'text-offset': [-0.7, -2.3],
-							'text-size': 14,
+							'text-offset': [0.5, -2.8],
+							'text-size': 12,
 						}}
 						paint={{
 							'text-color': [
