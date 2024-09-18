@@ -6,7 +6,7 @@ import type { StartupMessage } from '@/types/app.types';
 
 const appStartupMessages: StartupMessage[] = [
 	{
-		build_max: 1826251148,
+		build_max: 1,
 		build_min: null,
 		message_id: 'IOS-0001',
 		presentation_type: 'changelog',
