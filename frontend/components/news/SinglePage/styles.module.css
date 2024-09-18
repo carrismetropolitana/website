@@ -9,10 +9,9 @@
 }
 
 @media screen and (max-width: 900px) {
-	/* .innerWrapper {
+	.innerWrapper {
 		grid-template:
 			"b" auto [b_]
-			"a" auto [a_]
-			"c" auto [c_] / 1fr;
-	} */
+			"a" auto [a_];
+	}
 }

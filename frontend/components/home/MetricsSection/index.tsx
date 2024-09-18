@@ -1,6 +1,7 @@
 /* * */
 
 import MetricsSectionDemand from '@/components/home/MetricsSectionDemand';
+import MetricsSectionDemandByLine from '@/components/home/MetricsSectionDemandByLine';
 import Section from '@/components/layout/Section';
 import { useTranslations } from 'next-intl';
 
@@ -23,6 +24,9 @@ export default function Component() {
 		<Section heading={t('heading')} withGap={false} withChildrenPadding>
 			<div className={styles.innerWrapper}>
 				<MetricsSectionDemand />
+				{/* <MetricsSectionDemandYTD /> */}
+				<MetricsSectionDemandByLine />
+				{/* <MetricsSectionDemandByStop /> */}
 			</div>
 		</Section>
 	);
