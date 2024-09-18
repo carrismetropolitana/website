@@ -7,35 +7,18 @@ import FrontendStops from '@/components/FrontendStops/FrontendStops';
 /* * */
 
 export async function generateMetadata({ params }) {
-	//
-
+	const defaultMessage = { title: 'Todas as Paragens', description: 'Conheça as paragens e horários da Carris Metropolitana' };
 	try {
-		// A. Fetch stop data
-		const stopData = await fetch(params.stop_id?.length && `https://api.carrismetropolitana.pt/stops/${params.stop_id}`).then(res => res.json());
-
-		// B. Render the titles
-		if (params.stop_id === 'all' || !stopData.name) {
-			switch (params.locale) {
-				case 'pt':
-					return { title: 'Todas as Paragens', description: 'Conheça as paragens e horários da Carris Metropolitana' };
-				default:
-				case 'en':
-					return { title: 'Todas as Paragens', description: 'Conheça as paragens e horários da Carris Metropolitana' };
-			}
+		if (params.stop_id !== 'all') {
+			const stopData = await fetch(params.stop_id?.length && `https://api.carrismetropolitana.pt/stops/${params.stop_id}`).then(res => res.json());
+			if (!stopData && !stopData.name) return defaultMessage;
+			return { title: `Horários na paragem ${stopData.name}`, description: 'Estimativas de chegada em tempo real para os autocarros da Carris Metropolitana nesta paragem.' };
 		} else {
-			switch (params.locale) {
-				case 'pt':
-					return { title: `Horários na paragem ${stopData.name}`, description: 'Estimativas de chegada em tempo real para os autocarros da Carris Metropolitana nesta paragem.' };
-				default:
-				case 'en':
-					return { title: `Horários na paragem ${stopData.name}`, description: 'Estimativas de chegada em tempo real para os autocarros da Carris Metropolitana nesta paragem.' };
-			}
+			return defaultMessage;
 		}
 	} catch (error) {
-		return { title: `Horários na paragem ${stopData.name}`, description: 'Estimativas de chegada em tempo real para os autocarros da Carris Metropolitana nesta paragem.' };
+		return defaultMessage;
 	}
-
-	//
 }
 
 /* * */

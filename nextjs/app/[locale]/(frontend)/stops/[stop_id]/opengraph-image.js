@@ -26,24 +26,20 @@ export default async function Image({ params }) {
 	];
 
 	//
-	// B. Fetch data
-
-	const stopData = await fetch(params.stop_id?.length && `https://api.carrismetropolitana.pt/stops/${params.stop_id}`).then(res => res.json());
-
-	//
-	// C. Render default component
+	// B. Render default component
 
 	if (params.stop_id === 'all' || !stopData?.id) {
 		return new ImageResponse(<OpenGraphStopsDefault />, { ...size, fonts: customFonts });
 	}
 
 	//
-	// D. Fetch additional data
+	// C. Fetch data
 
+	const stopData = await fetch(params.stop_id?.length && `https://api.carrismetropolitana.pt/stops/${params.stop_id}`).then(res => res.json());
 	const allLinesData = await Promise.all(stopData.lines.map(lineId => fetch(`https://api.carrismetropolitana.pt/lines/${lineId}`).then(res => res.json())));
 
 	//
-	// E. Render dynamic component
+	// D. Render dynamic component
 
 	return new ImageResponse(<OpenGraphStopsDynamic stopData={stopData} allLinesData={allLinesData} />, { ...size, fonts: customFonts });
 
