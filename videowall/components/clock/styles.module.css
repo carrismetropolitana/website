@@ -1,0 +1,26 @@
+/* * */
+/* CONTAINER */
+
+.container {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	justify-content: flex-start;
+}
+
+/* * */
+/* NUMBERS */
+
+.hours, .minutes, .seconds {
+	font-size: 60px;
+	font-weight: 800;
+	line-height: 1;
+	color: #000;
+}
+
+
+.seconds {
+	font-size: 30px;
+	margin-top: 15px;
+	opacity: 0.25;
+}

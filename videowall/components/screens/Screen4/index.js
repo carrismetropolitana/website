@@ -3,6 +3,7 @@
 /* * */
 
 import CardSummaryFixed from '@/components/cards/CardSummaryFixed';
+import Clock from '@/components/clock';
 import Columns from '@/components/layout/Columns';
 import ScreenWrapper from '@/components/layout/ScreenWrapper';
 
@@ -73,6 +74,7 @@ export default function Screen1() {
 				/>
 			</Columns> */}
 			<div className={styles.logo}>
+				<Clock />
 				<img alt="Screen4" src="/portugal2020.jpg" />
 			</div>
 		</ScreenWrapper>
