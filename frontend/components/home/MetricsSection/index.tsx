@@ -2,6 +2,7 @@
 
 import MetricsSectionDemand from '@/components/home/MetricsSectionDemand';
 import MetricsSectionDemandByLine from '@/components/home/MetricsSectionDemandByLine';
+import MetricsSectionDemandByMonth from '@/components/home/MetricsSectionDemandByMonth';
 import Section from '@/components/layout/Section';
 import { useTranslations } from 'next-intl';
 
@@ -24,8 +25,8 @@ export default function Component() {
 		<Section heading={t('heading')} withGap={false} withChildrenPadding>
 			<div className={styles.innerWrapper}>
 				<MetricsSectionDemand />
-				{/* <MetricsSectionDemandYTD /> */}
 				<MetricsSectionDemandByLine />
+				<MetricsSectionDemandByMonth />
 				{/* <MetricsSectionDemandByStop /> */}
 			</div>
 		</Section>

@@ -48,6 +48,34 @@
 				"saturday": "Sáb",
 				"sunday": "Dom"
 			}
+		},
+		"month": {
+			"january": "Janeiro",
+			"february": "Fevereiro",
+			"march": "Março",
+			"april": "Abril",
+			"may": "Maio",
+			"june": "Junho",
+			"july": "Julho",
+			"august": "Agosto",
+			"september": "Setembro",
+			"october": "Outubro",
+			"november": "Novembro",
+			"december": "Dezembro",
+			"short": {
+				"january": "Jan",
+				"february": "Fev",
+				"march": "Mar",
+				"april": "Abr",
+				"may": "Mai",
+				"june": "Jun",
+				"july": "Jul",
+				"august": "Ago",
+				"september": "Set",
+				"october": "Out",
+				"november": "Nov",
+				"december": "Dez"
+			}
 		}
 	},
 	"AppError": {
@@ -313,6 +341,14 @@
 		},
 		"yesterday": {
 			"label": "passageiros transportados ontem",
+			"value": "{value, number}"
+		},
+		"yearToDate": {
+			"label": "passageiros transportados este ano",
+			"value": "{value, number}"
+		},
+		"lastMonth": {
+			"label": "passageiros transportados em {month}",
 			"value": "{value, number}"
 		},
 		"popover": {

@@ -37,20 +37,7 @@
 	display: flex;
 	flex-direction: row;
 	align-items: flex-start;
-	gap: var(--size-spacing-20);
-}
-
-/* * */
-/* REALTIME VALUE WRAPPER ITEM */
-.realtimeValueWrapperItem {
-	position: relative;
-	opacity: 0.5;
-	cursor: pointer;
-	transition: opacity 0.5;
-
-	&.selected {
-		opacity: 1;
-	}
+	gap: var(--size-spacing-5);
 }
 
 /* * */
@@ -92,7 +79,7 @@
 .graphWrapper {
 	width: 100%;
 	z-index: 1;
-	opacity: 0.75;
+	opacity: 0.5;
 	margin: -5px; /* Fixed margins set by Recharts */
 	width: calc(100% + 10px); /* Fixed margins set by Recharts */
 }
