@@ -12,7 +12,7 @@
 /* NUMBERS */
 
 .hours, .minutes, .seconds {
-	font-size: 60px;
+	font-size: 120px;
 	font-weight: 800;
 	line-height: 1;
 	color: #000;
@@ -20,7 +20,7 @@
 
 
 .seconds {
-	font-size: 30px;
+	font-size: 60px;
 	margin-top: 15px;
 	opacity: 0.25;
 }
