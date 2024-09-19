@@ -5,7 +5,7 @@
 import PathStop from '@/components/lines/PathStop';
 import { useLinesDetailContext } from '@/contexts/LinesDetail.context';
 import { PatternRealtime } from '@/utils/types';
-import { useMemo } from 'react';
+import { useEffect, useMemo } from 'react';
 import useSWR from 'swr';
 
 import styles from './styles.module.css';
@@ -47,6 +47,12 @@ export default function Component() {
 	for (const stopId of Object.keys(nextArrivalsPerStop)) {
 		nextArrivalsPerStop[stopId].sort((a, b) => a.unixTs - b.unixTs);
 	}
+
+	// On first load, select the first stop
+	useEffect(() => {
+		if (!sortedStops) return;
+		linesDetailContext.actions.setActiveStop(sortedStops?.[0].stop_sequence, sortedStops?.[0].stop);
+	}, [sortedStops]);
 
 	//
 	// D. Render components
