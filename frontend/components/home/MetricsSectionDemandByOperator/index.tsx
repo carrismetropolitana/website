@@ -2,7 +2,6 @@
 
 /* * */
 
-import LiveIcon from '@/components/common/LiveIcon';
 import MetricsSectionDemandSkeleton from '@/components/home/MetricsSectionDemandSkeleton';
 import { OperatorMetrics } from '@/types/metrics.types';
 import { Operators } from '@/utils/operation';
@@ -10,7 +9,6 @@ import { ActionIcon, Popover } from '@mantine/core';
 import { IconInfoCircleFilled } from '@tabler/icons-react';
 import Link from 'next/link';
 import { useTranslations } from 'next-intl';
-import { useMemo } from 'react';
 
 import styles from './styles.module.css';
 
