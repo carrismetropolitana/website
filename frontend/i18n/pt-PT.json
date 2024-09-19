@@ -358,6 +358,10 @@
 		"by_line": {
 			"top": "linhas com mais passageiros transportados hoje",
 			"selected": "passageiros transportados nesta linha"
+		},
+		"area": {
+			"label": "Nº de validações na Área {area} hoje",
+			"value": "{value, number}"
 		}
 	},
 	"HeaderLogo": {

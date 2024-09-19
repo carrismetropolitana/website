@@ -7,6 +7,12 @@
 	gap: var(--size-spacing-30);
 }
 
+.areaWrapper {
+	display: grid;
+	grid-template-columns: 1fr 1fr;
+	gap: var(--size-spacing-10);
+}
+
 @media only screen and (max-width: 900px) {
 	.innerWrapper {
 		grid-template-columns: 1fr;

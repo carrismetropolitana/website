@@ -25,3 +25,11 @@ export interface StopMetrics {
 	stop_id: string
 	total_qty: number
 }
+
+export interface OperatorMetrics {
+	end_date: string
+	operator_id: string
+	start_date: string
+	timestamp: number
+	value: number
+}
