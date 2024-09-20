@@ -15,6 +15,7 @@ import styles from './styles.module.css';
 
 interface Props {
 	arrivals: { type: 'realtime' | 'scheduled', unixTs: number }[]
+	id?: string
 	isFirstStop?: boolean
 	isLastStop?: boolean
 	isSelected: boolean
@@ -23,7 +24,7 @@ interface Props {
 
 /* * */
 
-export default function Component({ arrivals, isFirstStop, isLastStop, isSelected, path }: Props) {
+export default function Component({ arrivals, id, isFirstStop, isLastStop, isSelected, path }: Props) {
 	//
 
 	//
@@ -55,7 +56,7 @@ export default function Component({ arrivals, isFirstStop, isLastStop, isSelecte
 	// D. Render components
 
 	return (
-		<div className={`${styles.container} ${isFirstStop && styles.isFirstStop} ${isLastStop && styles.isLastStop} ${isSelected && styles.isSelected}`} onClick={handleToggleStop}>
+		<div className={`${styles.container} ${isFirstStop && styles.isFirstStop} ${isLastStop && styles.isLastStop} ${isSelected && styles.isSelected}`} id={id} onClick={handleToggleStop}>
 			<PathStopSpine
 				backgroundColor={linesDetailContext.data.active_pattern_group?.color}
 				foregroundColor={linesDetailContext.data.active_pattern_group?.text_color}

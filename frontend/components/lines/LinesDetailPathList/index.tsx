@@ -54,6 +54,15 @@ export default function Component() {
 		linesDetailContext.actions.setActiveStop(sortedStops?.[0].stop_sequence, sortedStops?.[0].stop);
 	}, [sortedStops]);
 
+	// Scroll to selected stop on stop change
+	useEffect(() => {
+		if (!linesDetailContext.data.active_stop) return;
+		const selectedStop = document.getElementById(`stop-${linesDetailContext.data.active_stop.sequence}`);
+		if (selectedStop) {
+			selectedStop.scrollIntoView({ behavior: 'smooth', block: 'center' });
+		}
+	}, [linesDetailContext.data.active_stop]);
+
 	//
 	// D. Render components
 
@@ -67,9 +76,10 @@ export default function Component() {
 				<PathStop
 					key={`${path.stop.id}-${path.stop_sequence}`}
 					arrivals={nextArrivalsPerStop[path.stop.id] || []}
+					id={`stop-${path.stop_sequence}`}
 					isFirstStop={index === 0}
 					isLastStop={index === sortedStops.length - 1}
-					isSelected={linesDetailContext.data.active_stop?.stop === path.stop && linesDetailContext.data.active_stop?.sequence === path.stop_sequence}
+					isSelected={linesDetailContext.data.active_stop?.sequence === path.stop_sequence}
 					path={path}
 				/>
 			))}
