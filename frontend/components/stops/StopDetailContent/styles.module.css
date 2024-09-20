@@ -1,0 +1,37 @@
+/* * */
+/* CONTAINER */
+
+.container {
+	display: grid;
+	gap: var(--size-spacing-15);
+	grid-template:
+		"a b" minmax(300px, auto) / 1fr 1fr;
+	align-items: flex-start;
+	justify-content: flex-start;
+}
+
+@media screen and (max-width: 900px) {
+	.container {
+		grid-template:
+			"b" minmax(200px, auto) [b_]
+			"a" auto [a_] / 1fr;
+	}
+}
+
+/* * */
+/* MAP WRAPPER */
+
+.mapWrapper {
+	grid-area: a;
+	position: -webkit-sticky;
+	position: sticky;
+	top: var(--size-height-header);
+	height: 100%;
+	max-height: calc(100vh - var(--size-height-header));;
+}
+
+@media screen and (max-width: 900px) {
+	.mapWrapper {
+		position: static;
+	}
+}

@@ -322,6 +322,7 @@ export default function FrontendStopsMap() {
 					onClick={handleMapClick}
 					onMouseEnter={handleMapMouseEnter}
 					onMouseLeave={handleMapMouseLeave}
+					style={{ height: '100%', width: '100%' }}
 					initialViewState={{
 						latitude: parseFloat(stopsSingleContext.data.stop.lat),
 						longitude: parseFloat(stopsSingleContext.data.stop.lon),

@@ -4,11 +4,13 @@
   font-weight: 700;
   letter-spacing: 0px;
 }
+
 .container {
   display: flex;
   flex-direction: column;
   gap: 15px;
 }
+
 .lineContainer{
     display: flex;
     justify-content: center;
