@@ -1,6 +1,6 @@
 /* * */
 
-import { availableFormats, availableLocales, defaultLocaleCode } from '@/i18n/config';
+import { availableFormats } from '@/i18n/config';
 import { NextIntlClientProvider } from 'next-intl';
 import { getMessages } from 'next-intl/server';
 

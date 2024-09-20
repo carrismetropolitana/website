@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable @stylistic/no-mixed-spaces-and-tabs */
 import { NotificationData, notifications } from '@mantine/notifications';
 

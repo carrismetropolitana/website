@@ -227,8 +227,8 @@ export interface VehiclePosition {
 };
 
 export enum CurrentStatus {
-	InTransitTo = 'IN_TRANSIT_TO',
 	IncomingAt = 'INCOMING_AT',
+	InTransitTo = 'IN_TRANSIT_TO',
 	StoppedAt = 'STOPPED_AT',
 }
 

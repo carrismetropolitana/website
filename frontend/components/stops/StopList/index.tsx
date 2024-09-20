@@ -35,7 +35,7 @@ function formatDate(unixTs: number) {
 
 export default function Component(
 	{ date, pattern, selectedStop, setDrawerOpen, setSelectedStop, setSelectedStopSequence }:
-	{ date: Date, pattern: Pattern, selectedStop: Stop | null, setDrawerOpen: (open: boolean) => void, setSelectedStop: (stop: Stop) => void, setSelectedStopSequence: (sequence: number) => void }) {
+	{ date: Date, pattern: Pattern, selectedStop: null | Stop, setDrawerOpen: (open: boolean) => void, setSelectedStop: (stop: Stop) => void, setSelectedStopSequence: (sequence: number) => void }) {
 	const t = useTranslations('stops.Single');
 
 	const today = dayjs().format('YYYYMMDD');

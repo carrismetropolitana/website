@@ -1,6 +1,6 @@
 /* * */
 
-import { Center, Text, TextInput, TextInputProps, Tooltip, rem } from '@mantine/core';
+import { Center, rem, Text, TextInput, TextInputProps, Tooltip } from '@mantine/core';
 import { IconInfoCircle } from '@tabler/icons-react';
 import { useEffect, useState } from 'react';
 

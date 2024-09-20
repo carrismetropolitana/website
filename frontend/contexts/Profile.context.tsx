@@ -31,7 +31,7 @@ interface ProfileContextState {
 	}
 	data: {
 		device_id: null | string
-		profile: Profile | null
+		profile: null | Profile
 	}
 	filters: {
 		favorites: 'lines' | 'stops'

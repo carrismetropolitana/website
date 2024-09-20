@@ -6,9 +6,9 @@ import dayjs from 'dayjs';
 import { useTranslations } from 'next-intl';
 import { useMemo, useState } from 'react';
 
-import { NextBusRow } from '../NextBusRow';
 import NextBusesHeader from '../NextBusesHeader';
 import NextBusesHeaderLine from '../NextBusesHeaderLine';
+import { NextBusRow } from '../NextBusRow';
 import styles from './styles.module.css';
 
 function bestTime(realtime: StopRealtime) {

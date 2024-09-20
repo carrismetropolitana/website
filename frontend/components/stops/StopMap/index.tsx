@@ -139,8 +139,8 @@ export default function FrontendStopsMap() {
 		shift_id: string
 		speed: number
 		stop_id: string
-		timeString: string
 		timestamp: number
+		timeString: string
 		trip_id: string
 	}> | null = useMemo(() => {
 		if (allVehiclesData && stopsSingleContext.data.active_trip_id) {
@@ -164,8 +164,8 @@ export default function FrontendStopsMap() {
 						shift_id: selectedVehicleData.shift_id,
 						speed: selectedVehicleData.speed,
 						stop_id: selectedVehicleData.stop_id,
-						timeString: new Date(selectedVehicleData.timestamp * 1000).toLocaleString(),
 						timestamp: selectedVehicleData.timestamp,
+						timeString: new Date(selectedVehicleData.timestamp * 1000).toLocaleString(),
 						trip_id: selectedVehicleData.trip_id,
 					},
 					type: 'Feature',

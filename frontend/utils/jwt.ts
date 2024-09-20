@@ -25,7 +25,7 @@ export async function generateJWT(payload: Record<string, any>, expiresIn: numbe
  * @param token The token to verify
  * @returns The decoded token
  */
-export async function verifyJWT<T = Record<string, any>>(token: string): Promise<T | null> {
+export async function verifyJWT<T = Record<string, any>>(token: string): Promise<null | T> {
 	try {
 		return jwt.verify(token, process.env.JWT_SECRET as string, { algorithms: ['HS256'] }) as T;
 	}

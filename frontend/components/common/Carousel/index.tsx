@@ -14,8 +14,8 @@ import styles from './styles.module.css';
 interface CarouselProps {
 	skeletonComponent?: React.ReactNode
 	skeletonQty?: number
-	slideSize?: number
 	slides?: SlideItemProps[]
+	slideSize?: number
 }
 
 interface SlideItemProps {
@@ -25,7 +25,7 @@ interface SlideItemProps {
 
 /* * */
 
-export default function Component({ skeletonComponent, skeletonQty = 3, slideSize = 300, slides = [] }: CarouselProps) {
+export default function Component({ skeletonComponent, skeletonQty = 3, slides = [], slideSize = 300 }: CarouselProps) {
 	return (
 		<Carousel
 			align="start"

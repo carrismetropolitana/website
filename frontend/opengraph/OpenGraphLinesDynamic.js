@@ -1,9 +1,7 @@
 /* * */
 
 import CarrisMetropolitanaLogo from '@/components/CarrisMetropolitanaLogo/CarrisMetropolitanaLogo';
-import FacilityIcon from '@/components/Facilities/FacilityIcon';
 import cutStringAtLength from '@/services/cutStringAtLength';
-import parseStopLocationName from '@/services/parseStopLocationName';
 
 /* * */
 

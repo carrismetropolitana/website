@@ -6,7 +6,7 @@
 import { Button } from '@mantine/core';
 import { IconTrafficCone } from '@tabler/icons-react';
 import { useTranslations } from 'next-intl';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 
 import styles from './styles.module.css';
 

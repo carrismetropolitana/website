@@ -5,13 +5,13 @@ export interface UseLinePatterns {
 	error: boolean
 	fetchPatterns: (pattern_ids: string[]) => void
 	loading: boolean
-	patterns: PatternGroup[] | null
+	patterns: null | PatternGroup[]
 }
 
 const useLinePatterns = () => {
 	const [loading, setLoading] = useState<boolean>(false);
 	const [error, setError] = useState<boolean>(false);
-	const [patterns, setPatterns] = useState<PatternGroup[] | null>(null);
+	const [patterns, setPatterns] = useState<null | PatternGroup[]>(null);
 
 	const fetchPatterns = async (pattern_ids: string[]) => {
 		setError(false);

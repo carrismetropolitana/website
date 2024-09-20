@@ -2,8 +2,8 @@
 
 /* * */
 
-import ButtonOverride from '@/themes/app-android/overrides/Button.module.css';
 import defaultTheme from '@/themes/_default/default.theme';
+import ButtonOverride from '@/themes/app-android/overrides/Button.module.css';
 import combineClasses from '@/utils/combineClasses';
 import { createTheme } from '@mantine/core';
 import { Button } from '@mantine/core';

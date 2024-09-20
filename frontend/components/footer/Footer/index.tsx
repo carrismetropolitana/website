@@ -2,8 +2,8 @@
 
 import FooterDebugToggle from '@/components/footer/DebugToggle';
 import FooterVersionControl from '@/components/footer/VersionControl';
-import { footerNavigationGroup } from '@/settings/navigation.settings';
 import { Link } from '@/i18n/routing';
+import { footerNavigationGroup } from '@/settings/navigation.settings';
 import { useTranslations } from 'next-intl';
 
 import styles from './styles.module.css';

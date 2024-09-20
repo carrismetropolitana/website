@@ -7,7 +7,7 @@
 		"build": "next build",
 		"start": "next start",
 		"lint": "eslint .",
-		"lint:fix": "eslint . --fix && npx stylelint . --fix"
+		"lint:fix": "eslint . --fix"
 	},
 	"dependencies": {
 		"@mantine/carousel": "7.12.2",

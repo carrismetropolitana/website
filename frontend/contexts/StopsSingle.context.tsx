@@ -21,16 +21,16 @@ interface StopsSingleContextState {
 		setStopId: (stopId: string) => void
 	}
 	data: {
-		active_alerts: SimplifiedAlert[] | null
-		active_pattern_group: PatternGroup | null
+		active_alerts: null | SimplifiedAlert[]
+		active_pattern_group: null | PatternGroup
 		active_trip_id: null | string
-		all_patterns: Pattern[] | null
-		all_routes: Route[] | null
-		realtime: StopRealtime[] | null
-		stop: Stop | null
+		all_patterns: null | Pattern[]
+		all_routes: null | Route[]
+		realtime: null | StopRealtime[]
+		stop: null | Stop
 		timetable: string
 		valid_lines: Line[] | null
-		valid_pattern_groups: PatternGroup[] | null
+		valid_pattern_groups: null | PatternGroup[]
 	}
 	filters: {
 		none: null | string
@@ -66,16 +66,16 @@ export const StopsSingleContextProvider = ({ children, stopId }: { children: Rea
 
 	const [stopIdState, setStopIdState] = useState<string>(stopId);
 
-	const [dataRoutesState, setDataRoutesState] = useState<Route[] | null>(null);
-	const [dataAllPatternsState, setDataAllPatternsState] = useState<Pattern[] | null>(null);
-	const [dataValidPatternGroupsState, setDataValidPatternGroupsState] = useState<PatternGroup[] | null>(null);
-	const [dataActivePatternGroupState, setDataActivePatternGroupState] = useState<PatternGroup | null>(null);
-	const [dataActiveAlertsState, setDataActiveAlertsState] = useState<SimplifiedAlert[] | null>(null);
+	const [dataRoutesState, setDataRoutesState] = useState<null | Route[]>(null);
+	const [dataAllPatternsState, setDataAllPatternsState] = useState<null | Pattern[]>(null);
+	const [dataValidPatternGroupsState, setDataValidPatternGroupsState] = useState<null | PatternGroup[]>(null);
+	const [dataActivePatternGroupState, setDataActivePatternGroupState] = useState<null | PatternGroup>(null);
+	const [dataActiveAlertsState, setDataActiveAlertsState] = useState<null | SimplifiedAlert[]>(null);
 	const [dataActiveTripIdState, setDataActiveTripIdState] = useState<null | string>(null);
 	// const [dataActiveLineState, setDataActiveLineState] = useState<Line | null>(null);
 	const [dataValidLinesState, setDataValidLinesState] = useState<Line[] | null>(null);
 
-	const [dataRealtimeState, setDataRealtimeState] = useState<StopRealtime[] | null>(null);
+	const [dataRealtimeState, setDataRealtimeState] = useState<null | StopRealtime[]>(null);
 
 	const [flagIsFavoriteState, setFlagIsFavoriteState] = useState<boolean>(false);
 
