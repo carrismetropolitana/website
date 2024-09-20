@@ -2,8 +2,8 @@
 
 /* * */
 
+import SelectPattern from '@/components/common/SelectPattern';
 import { useLinesDetailContext } from '@/contexts/LinesDetail.context';
-import { Select } from '@mantine/core';
 import { IconArrowBarToRight } from '@tabler/icons-react';
 import { useTranslations } from 'next-intl';
 import { useMemo } from 'react';
@@ -24,18 +24,21 @@ export default function Component() {
 
 	const validPatternGroupsSelectOptions = useMemo(() => {
 		if (!linesDetailContext.data.valid_pattern_groups) return [];
-		return linesDetailContext.data.valid_pattern_groups.map(patternGroupData => ({ label: `Destino: ${patternGroupData.headsign || '-'}`, value: patternGroupData.pattern_group_id }));
-		// return linesDetailContext.data.all_patterns.flat().map(patternGroupData => ({ label: patternGroupData.headsign || '-', value: patternGroupData.pattern_group_id }));
+		return linesDetailContext.data.valid_pattern_groups;
 	}, [linesDetailContext.data.valid_pattern_groups]);
 
 	//
 	// C. Render components
 
+	if (!validPatternGroupsSelectOptions) {
+		return null;
+	}
+
 	return (
-		<Select
-			data={validPatternGroupsSelectOptions}
+		<SelectPattern
 			leftSection={<IconArrowBarToRight size={20} />}
 			onChange={linesDetailContext.actions.setActivePatternGroup}
+			patterns={validPatternGroupsSelectOptions}
 			placeholder={t('placeholder')}
 			value={linesDetailContext.data.active_pattern_group?.pattern_group_id || null}
 			clearable

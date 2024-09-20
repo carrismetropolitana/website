@@ -791,5 +791,8 @@
 		"update_profile_error": "Erro ao atualizar o perfil.",
 		"update_profile_pending": "A Atualizar o perfil...",
 		"toggle_stop_error": "Erro ao adicionar o paragem aos favoritos. {error}"
+	},
+	"SelectPattern": {
+		"start_date" : "A Partir de {day} de {month} de {year}"
 	}
 }

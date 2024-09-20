@@ -48,6 +48,8 @@ export interface PatternGroup {
 	pattern_group_id: string
 	pattern_id: string
 	route_id: string
+	route_long_name: string
+	route_short_name: string
 	shape_id: string
 	short_name: string
 	text_color: string

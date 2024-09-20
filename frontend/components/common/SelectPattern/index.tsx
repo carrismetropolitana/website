@@ -2,7 +2,9 @@
 /* * */
 
 import { PatternGroup } from '@/types/lines.types';
-import { Group, Select, SelectProps, Text } from '@mantine/core';
+import { Flex, Group, Select, SelectProps, Text } from '@mantine/core';
+import { DateTime } from 'luxon';
+import { useTranslations } from 'next-intl';
 import { useMemo } from 'react';
 
 /* * */
@@ -15,6 +17,8 @@ export interface SelectPatternProps extends SelectProps {
 export default function Component({ date_filter, onChange, patterns, value, ...props }: SelectPatternProps) {
 	//
 	// A. Setup variables
+	const t = useTranslations('SelectPattern');
+	const tCommon = useTranslations('common');
 
 	//
 	// B. Transform data
@@ -27,18 +31,21 @@ export default function Component({ date_filter, onChange, patterns, value, ...p
 
 	//
 	// C. Render components
-	const renderSelectOption: SelectProps['renderOption'] = async ({ option }) => {
+	const renderSelectOption: SelectProps['renderOption'] = ({ option }) => {
 		const pattern = patterns.find(pattern => pattern.pattern_group_id === option.value);
 
 		if (!pattern) return null;
 		if (pattern.path.length === 0) return null;
 
+		const sinceDate = DateTime.fromISO(pattern.valid_on[0]);
+
 		return (
 			<Group gap={2}>
-				<Text fw="bold">{pattern.headsign}</Text>
-				{/* Route Long Name */}
-				<Text fw="bold">{pattern.route_id}</Text>
-				<Text size="xs">A partir de {pattern.valid_on[0]}</Text>
+				<Flex direction="column">
+					{/* Route Long Name */}
+					<Text fw="bold">{pattern.route_long_name}</Text>
+					<Text size="xs">{t('start_date', { day: sinceDate.day, month: tCommon(`month.${sinceDate.monthLong?.toLowerCase()}`), year: sinceDate.year })}</Text>
+				</Flex>
 			</Group>
 		);
 	};
@@ -55,7 +62,7 @@ export default function Component({ date_filter, onChange, patterns, value, ...p
 		return (
 			<div {...props}>
 				<Text fw="bold">{pattern.headsign}</Text>
-				<Text size="xs">{pattern.path[0].stop.name} → {pattern.path[pattern.path.length - 1].stop.name}</Text>
+				<Text size="xs">{pattern.route_long_name}</Text>
 			</div>
 		);
 	};
