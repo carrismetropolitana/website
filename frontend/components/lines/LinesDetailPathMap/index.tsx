@@ -3,11 +3,10 @@
 import LiveIcon from '@/components/common/LiveIcon';
 import Map from '@/components/common/Map';
 import { useLinesDetailContext } from '@/contexts/LinesDetail.context';
-import { PatternGroup } from '@/types/lines.types';
+import { Path, PatternGroup } from '@/types/lines.types';
 import { Stop } from '@/types/stops.types';
 import { moveMap } from '@/utils/map';
 import { VehiclePosition } from '@/utils/types';
-import * as turf from '@turf/turf';
 import { useTranslations } from 'next-intl';
 import { useEffect, useMemo } from 'react';
 import { CircleLayer, Layer, LineLayer, Source, SymbolLayer, useMap } from 'react-map-gl/maplibre';
@@ -36,7 +35,10 @@ export default function Component() {
 	useEffect(() => {
 		if (!linesDetailContext.data.active_stop?.stop) return;
 		if (!linesSingleMap) return;
-		const coordinates = turf.point([Number(linesDetailContext.data.active_stop.stop.lon), Number(linesDetailContext.data.active_stop?.stop.lat)]).geometry.coordinates;
+		const coordinates = [Number(linesDetailContext.data.active_stop.stop.lon), Number(linesDetailContext.data.active_stop?.stop.lat)];
+		console.log('Moving map to', coordinates);
+		if (coordinates.some(isNaN)) return;
+
 		moveMap(linesSingleMap, coordinates);
 	}, [linesDetailContext.data.active_stop, linesSingleMap]);
 
@@ -69,12 +71,18 @@ export default function Component() {
 	//
 	// D. Handle Actions
 	function handleLayerClick(event) {
-		if (event?.features[0]?.properties?.id) {
-			const foundStopInPath = linesDetailContext.data.active_pattern_group?.path.find(item => item.stop.id === event.features[0].properties.id && item.stop_sequence === event.features[0].properties.stop_sequence);
-			if (foundStopInPath) {
-				linesDetailContext.actions.setActiveStop(foundStopInPath.stop_sequence, foundStopInPath.stop);
-			}
-		}
+		console.log('Layer clicked', event);
+		if (!linesSingleMap) return;
+		const features = linesSingleMap.queryRenderedFeatures([event.point.x, event.point.y], {
+			layers: ['stops'],
+		});
+
+		console.log('Features', features);
+		if (features.length === 0) return;
+		const selectedStop = JSON.parse(features[0].properties.stop) as Stop;
+		const selectedStopSequence = features[0].properties.sequence as number;
+
+		linesDetailContext.actions.setActiveStop(selectedStopSequence, selectedStop);
 	}
 
 	//
@@ -113,9 +121,6 @@ export default function Component() {
 			id="linesSingleMap"
 			interactiveLayerIds={['stops']}
 			onClick={handleLayerClick}
-			// onMouseEnter={handleMapMouseEnter}
-			// onMouseLeave={handleMapMouseLeave}
-			// onMove={handleMapMove}
 		>
 			{/* Route Shape */}
 			{linesDetailContext.data.active_shape?.geojson && (
@@ -176,12 +181,12 @@ function generateActiveVehiclesGeojson(allVehiclesData, activePatternGroup) {
 }
 
 // Generates GeoJSON for stops
-function generateStopsGeoJson(stops) {
+function generateStopsGeoJson(stops?: Path[]) {
 	if (!stops) return null;
 	return {
 		features: stops.map(stop => ({
 			geometry: { coordinates: [parseFloat(stop.stop.lon), parseFloat(stop.stop.lat)], type: 'Point' },
-			properties: { name: stop.stop.name },
+			properties: { name: stop.stop.name, sequence: stop.stop_sequence, stop: stop.stop },
 			type: 'Feature',
 		})),
 		type: 'FeatureCollection',
