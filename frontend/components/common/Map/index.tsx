@@ -1,8 +1,10 @@
+'use client';
+
 /* * */
 
 import mapSettings from '@/settings/map.settings';
 import maplibregl from 'maplibre-gl';
-import { useEffect } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import Map, { MapRef, useMap } from 'react-map-gl/maplibre';
 
 import styles from './styles.module.css';
@@ -25,11 +27,13 @@ interface Props {
 	id?: string
 	interactiveLayerIds?: string[]
 	mapObject?: MapRef
-	mapStyle?: string
+	mapStyle?: 'default' | 'map' | 'satellite'
 	navigation?: boolean
 	onClick?: (arg0) => void
-	onMouseEnter?: (arg0) => void
-	onMouseLeave?: (arg0) => void
+	onMouseEnter?: (arg0) => void // When the mouse enters the interactive layer
+	onMouseLeave?: (arg0) => void // When the mouse leaves the interactive layer
+	onMouseOut?: (arg0) => void // When the mouse enters the map
+	onMouseOver?: (arg0) => void // When the mouse leaves the map
 	onMove?: (arg0) => void
 	onMoveEnd?: (arg0) => void
 	onMoveStart?: (arg0) => void
@@ -39,7 +43,8 @@ interface Props {
 
 /* * */
 
-export default function Component({ children,
+export default function Component({
+	children,
 	fullscreen = true,
 	id,
 	interactiveLayerIds = [],
@@ -48,17 +53,17 @@ export default function Component({ children,
 	onClick,
 	onMouseEnter,
 	onMouseLeave,
+	onMouseOut,
+	onMouseOver,
 	onMove,
 	onMoveEnd,
 	onMoveStart,
 	scale = true,
-	scrollZoom = true }: Props) {
-	//
-
+	scrollZoom = true,
+}: Props) {
 	//
 	// A. Setup variables
-
-	// const t = useTranslations('common.Map');
+	const [cursor, setCursor] = useState<string>('auto');
 	const allMaps = useMap();
 
 	//
@@ -77,34 +82,65 @@ export default function Component({ children,
 	}, [allMaps, id]);
 
 	//
+	// C. Handle actions
+	const handleOnMouseEnter = useCallback((event) => {
+		setCursor('pointer');
+
+		if (onMouseEnter) {
+			onMouseEnter(event);
+		}
+	}, []);
+
+	const handleOnMouseLeave = useCallback((event) => {
+		setCursor('auto');
+
+		if (onMouseLeave) {
+			onMouseLeave(event);
+		}
+	}, []);
+
+	const handleOnMoveStart = useCallback((event) => {
+		setCursor('grab');
+
+		if (onMoveStart) {
+			onMoveStart(event);
+		}
+	}, []);
+
+	const handleOnMoveEnd = useCallback((event) => {
+		setCursor('auto');
+
+		if (onMoveEnd) {
+			onMoveEnd(event);
+		}
+	}, []);
+
+	//
 	// C. Render components
 
 	return (
 		<div className={styles.container}>
 			<Map
 				attributionControl={false}
-				id={id}
+				cursor={cursor}
+				id={id || 'map'}
 				initialViewState={mapSettings.initialViewState}
 				interactive={interactiveLayerIds ? true : false}
 				interactiveLayerIds={interactiveLayerIds}
 				mapLib={maplibregl}
-				mapStyle={mapSettings.styles[mapStyle] || mapSettings.styles.default}
-				maxZoom={mapSettings.styles[mapStyle].maxZoom || mapSettings.maxZoom}
-				minZoom={mapSettings.styles[mapStyle].minZoom || mapSettings.minZoom}
+				mapStyle={mapSettings.styles[mapStyle as string] || mapSettings.styles.default}
+				maxZoom={mapSettings.styles[mapStyle as string].maxZoom || mapSettings.maxZoom}
+				minZoom={mapSettings.styles[mapStyle as string].minZoom || mapSettings.minZoom}
 				onClick={onClick}
-				onMouseEnter={onMouseEnter}
-				onMouseLeave={onMouseLeave}
-				onMove={onMove}
-				onMoveEnd={onMoveEnd}
-				onMoveStart={onMoveStart}
+				onMouseEnter={handleOnMouseEnter}
+				onMouseLeave={handleOnMouseLeave}
+				onMouseOut={onMouseOut}
+				onMouseOver={onMouseOver}
+				onMove={handleOnMoveStart}
+				onMoveEnd={handleOnMoveEnd}
+				onMoveStart={handleOnMoveStart}
 				scrollZoom={scrollZoom}
 				style={{ height: '100%', width: '100%' }}
-				// style={{
-				// 	height: '100%',
-				// 	maxHeight: '100%',
-				// 	minHeight: '100%',
-				// 	width: '100%',
-				// }}
 			>
 				<div className={styles.childrenWrapper}>
 					{children}
