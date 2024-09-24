@@ -193,7 +193,8 @@
 		},
 		"PathStopTimetable": {
 			"title": "Horários planeados nesta paragem:",
-			"no_data": "Horários indisponíveis para esta data."
+			"no_data": "Horários indisponíveis para esta data.",
+			"next_date": "Próximos horários disponíveis a partir de {value, date, dayShort} {value, date, monthLong} {value, date, yearLong}"
 		},
 		"expand_filters": "Expandir Filtros",
 		"collapse_filters": "Esconder Filtros"
@@ -793,6 +794,6 @@
 		"toggle_stop_error": "Erro ao adicionar o paragem aos favoritos. {error}"
 	},
 	"SelectPattern": {
-		"start_date" : "A Partir de {day} de {month} de {year}"
+		"option_label": "Início do percurso: {locality}"
 	}
 }

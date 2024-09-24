@@ -18,7 +18,6 @@ export default function Component({ date_filter, onChange, patterns, value, ...p
 	//
 	// A. Setup variables
 	const t = useTranslations('SelectPattern');
-	const tCommon = useTranslations('common');
 
 	//
 	// B. Transform data
@@ -37,14 +36,12 @@ export default function Component({ date_filter, onChange, patterns, value, ...p
 		if (!pattern) return null;
 		if (pattern.path.length === 0) return null;
 
-		const sinceDate = DateTime.fromISO(pattern.valid_on[0]);
-
 		return (
 			<Group gap={2}>
 				<Flex direction="column">
 					{/* Route Long Name */}
-					<Text fw="bold">{pattern.route_long_name}</Text>
-					<Text size="xs">{t('start_date', { day: sinceDate.day, month: tCommon(`month.${sinceDate.monthLong?.toLowerCase()}`), year: sinceDate.year })}</Text>
+					<Text fw="bold">{pattern.headsign}</Text>
+					<Text size="xs">{t('option_label', { locality: pattern.path[0].stop.locality })}</Text>
 				</Flex>
 			</Group>
 		);
@@ -69,6 +66,7 @@ export default function Component({ date_filter, onChange, patterns, value, ...p
 
 	return (
 		<Select
+			allowDeselect={false}
 			data={validPatternGroupsSelectOptions}
 			onChange={onChange}
 			renderOption={renderSelectOption}

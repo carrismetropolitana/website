@@ -36,7 +36,6 @@ export default function Component() {
 		if (!linesDetailContext.data.active_stop?.stop) return;
 		if (!linesSingleMap) return;
 		const coordinates = [Number(linesDetailContext.data.active_stop.stop.lon), Number(linesDetailContext.data.active_stop?.stop.lat)];
-		console.log('Moving map to', coordinates);
 		if (coordinates.some(isNaN)) return;
 
 		moveMap(linesSingleMap, coordinates);
@@ -71,13 +70,11 @@ export default function Component() {
 	//
 	// D. Handle Actions
 	function handleLayerClick(event) {
-		console.log('Layer clicked', event);
 		if (!linesSingleMap) return;
 		const features = linesSingleMap.queryRenderedFeatures([event.point.x, event.point.y], {
 			layers: ['stops'],
 		});
 
-		console.log('Features', features);
 		if (features.length === 0) return;
 		const selectedStop = JSON.parse(features[0].properties.stop) as Stop;
 		const selectedStopSequence = features[0].properties.sequence as number;

@@ -5,6 +5,7 @@ import { useLinesDetailContext } from '@/contexts/LinesDetail.context';
 import { useOperationalDayContext } from '@/contexts/OperationalDay.context';
 // import { useProfileContext } from '@/contexts/Profile.context';
 import createTimetable from '@/utils/createTimetable';
+import { DateTime } from 'luxon';
 import { useTranslations } from 'next-intl';
 import { useMemo } from 'react';
 
@@ -41,6 +42,17 @@ export default function Component() {
 		if (!activePatternGroup || !secondaryPatternGroups.length || !mentionedRoutes || !selectedStopId || !selectedStopSequence || !selectedOperationalDay) {
 			return null;
 		}
+
+		// Check if there are schedules for the selected operational day
+		if (!activePatternGroup.valid_on.includes(selectedOperationalDay)) {
+			// Find the closest valid date
+			return activePatternGroup.valid_on.reduce((acc, curr) => {
+				if (selectedOperationalDay <= curr && (acc === '' || curr < acc)) return curr;
+
+				return acc;
+			}, '');
+		}
+
 		// Check if the user has enabled complex schedules
 		if (showVariantsOnTimetable) {
 			return createTimetable(activePatternGroup, secondaryPatternGroups, mentionedRoutes, selectedStopId, selectedStopSequence, selectedOperationalDay);
@@ -51,12 +63,20 @@ export default function Component() {
 	}, [linesDetailContext.data.active_pattern_group, linesDetailContext.data.valid_pattern_groups, linesDetailContext.data.active_stop, operationalDayContext.data.selected_day]);
 
 	//
-	// C. Render components
+	// C. Handle actions
+	function handleNextDateClick(date: Date) {
+		operationalDayContext.actions.updateSelectedDayFromJsDate(date);
+	}
 
-	if (!timetableData) {
+	//
+	// D. Render components
+
+	if (!timetableData || typeof timetableData === 'string') {
+		const nextDate = timetableData && DateTime.fromISO(timetableData).toJSDate();
 		return (
 			<div className={styles.container}>
 				<p className={styles.noData}>{t('no_data')}</p>
+				{nextDate && <p className={styles.nextDate} onClick={() => handleNextDateClick(nextDate)}>{t('next_date', { value: nextDate })}</p>}
 			</div>
 		);
 	}

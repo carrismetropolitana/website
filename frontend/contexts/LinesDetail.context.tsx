@@ -148,9 +148,18 @@ export const LinesDetailContextProvider = ({ children, lineId }) => {
 		const activePatternGroups: PatternGroup[] = [];
 		for (const pattern of dataAllPatternsState) {
 			for (const patternGroup of pattern) {
-				if (patternGroup.valid_on.includes(operationalDayContext.data.selected_day)) {
-					activePatternGroups.push(patternGroup);
-				}
+				const selected_date = operationalDayContext.data.selected_day;
+				if (!selected_date) return;
+
+				// Find the closest valid date
+				const closest_date = patternGroup.valid_on.reduce((acc, curr) => {
+					if (selected_date <= curr && (acc === '' || curr < acc)) return curr;
+
+					return acc;
+				}, '');
+
+				// If the closest date is valid, add the pattern group to the list
+				if (closest_date != '') activePatternGroups.push(patternGroup);
 			}
 		}
 		setDataValidPatternGroupsState(activePatternGroups);
