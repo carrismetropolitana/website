@@ -793,6 +793,6 @@
 		"toggle_stop_error": "Erro ao adicionar o paragem aos favoritos. {error}"
 	},
 	"SelectPattern": {
-		"start_date" : "A Partir de {day} de {month} de {year}"
+		"option_label": "Início do percurso: {locality}"
 	}
 }
