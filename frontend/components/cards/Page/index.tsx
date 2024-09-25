@@ -1,9 +1,9 @@
 /* * */
 
-import Discounts from '../Discounts';
-import Modalities from '../Modalities2';
-import MunicipalDiscounts from '../MunicipalDiscounts';
-import Pass from '../Pass';
+import Discounts from '@/components/cards/Discounts';
+import Modalities from '@/components/cards/Modalities';
+import MunicipalDiscounts from '@/components/cards/MunicipalDiscounts';
+import Pass from '@/components/cards/Pass';
 
 /* * */
 
