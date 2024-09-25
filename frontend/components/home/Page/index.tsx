@@ -1,7 +1,7 @@
 /* * */
 
-import HomeCarousel from '@/components/home/Carousel';
 import FeaturedSection from '@/components/home/FeaturedSection';
+import MainCarousel from '@/components/home/MainCarousel';
 import MetricsSection from '@/components/home/MetricsSection';
 import NewsSection from '@/components/home/NewsSection';
 import QuickSearch from '@/components/home/QuickSearch';
@@ -21,7 +21,7 @@ export default function Component() {
 					<QuickSearch />
 				</div>
 				<div className={styles.carouselWrapper}>
-					<HomeCarousel />
+					<MainCarousel />
 				</div>
 			</div>
 			<SchedulesSection />

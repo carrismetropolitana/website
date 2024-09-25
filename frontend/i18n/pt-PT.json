@@ -465,6 +465,9 @@
 			"empty": "Ainda não tem linhas favoritas...",
 			"more": "{count, plural, one {+ # linha} other {+ # linhas}}"
 		},
+		"MainCarouselCard": {
+			"learn_more": "Saber mais"
+		},
 		"TarifsSection": {
 			"section_heading":"Tarifas"
 		},

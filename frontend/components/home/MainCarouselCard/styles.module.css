@@ -1,0 +1,43 @@
+/* * */
+/* CONTAINER */
+
+.container {
+	position: relative;
+	display: flex;
+	justify-content: center;
+}
+
+/* * */
+/* LEARN MORE */
+
+.learnMore {
+	position: absolute;
+	bottom: 0;
+	display: flex;
+	flex-direction: row;
+	gap: var(--size-spacing-5);
+	align-items: center;
+	justify-content: center;
+	padding: var(--size-spacing-5) var(--size-spacing-15);
+	margin: 0 auto;
+	margin-bottom: -20px;
+	font-size: 16px;
+	line-height: 1.4;
+	color: var(--color-primary-black);
+	background-color: var(--color-primary-white);
+	border: 1px solid var(--color-primary-black);
+	border-radius: 999px;
+	box-shadow: 0 0 20px 0 rgb(0 0 0 / 20%);
+	opacity: 0;
+	transition: all 200ms ease;
+}
+
+.learnMore:hover {
+	background-color: var(--color-brand);
+}
+
+.container:hover .learnMore {
+	margin-bottom: var(--size-spacing-15);
+	opacity: 1;
+}
+
