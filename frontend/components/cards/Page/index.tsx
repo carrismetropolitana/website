@@ -1,7 +1,7 @@
 /* * */
 
 import Discounts from '../Discounts';
-import Modalities from '../modalities';
+import Modalities from '../Modalities';
 import Pass from '../Pass';
 
 /* * */
