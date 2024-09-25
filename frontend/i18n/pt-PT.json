@@ -149,7 +149,7 @@
 			"heading": "Pesquisar Linhas",
 			"by_current_view": {
 				"all": "Todas as Linhas",
-				"favorites": "Favoritas"
+				"favorites": "Favoritas ({count})"
 			},
 			"by_search": {
 				"placeholder": "Pesquisar por nome, número..."
