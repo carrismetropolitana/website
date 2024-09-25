@@ -22,10 +22,9 @@ const namespace = `${process.env.ACCOUNTS_API_URL}/v1/accounts`;
  * @returns Promise<ServerActionResult<Profile>> - The profile of the user
 */
 export async function getProfile(device_id: string): Promise<ServerActionResult<Profile>> {
-	const url = `${namespace}/${device_id}`;
-	const auth = await generateJWT({ device_id });
-
 	try {
+		const url = `${namespace}/${device_id}`;
+		const auth = await generateJWT({ device_id });
 		const res = await fetch(url, {
 			headers: {
 				'Authorization': `Bearer ${auth}`,

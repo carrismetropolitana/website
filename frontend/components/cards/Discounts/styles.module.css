@@ -1,0 +1,17 @@
+.desktop {
+    display: none;
+}
+
+.mobile {
+    display: block;
+}
+
+@media only screen and (min-width: 901px) {
+    .desktop {
+        display: block;
+    }
+
+    .mobile {
+        display: none;
+    }
+}
