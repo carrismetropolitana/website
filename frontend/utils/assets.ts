@@ -34,6 +34,7 @@ export const IconsCommon = Object.freeze({
 	AML_MAP_OPERATORS: '/icons/common/aml-map-with-operators.svg',
 	AML_MAP_SINGLE: '/icons/common/aml-map-single.svg',
 	COINS: '/icons/common/coins.svg',
+	LINE_BADGE_BASE: '/icons/common/line-badge-base.svg',
 	LIVRO_RECLAMACOES: '/icons/common/livro-de-reclamacoes.svg',
 	QUESTION: '/icons/common/question.svg',
 	RECEIPT: '/icons/common/receipt.svg',
