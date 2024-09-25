@@ -54,7 +54,7 @@ export default function SingleStop({ isFirstStop, isLastStop, isSelected, stopDa
 					{stopIdClipboard.copied ? <IconCheck className={styles.stopIdCopyIcon} /> : <IconCopy className={styles.stopIdCopyIcon} />}
 				</p>
 			</div>
-			{stopData.facilities.length > 0 && (
+			{isSelected && stopData.facilities.length > 0 && (
 				<div className={styles.facilitiesWrapper}>
 					{stopData.facilities.map(facility => (
 						<FacilityIcon key={facility} name={facility} />
