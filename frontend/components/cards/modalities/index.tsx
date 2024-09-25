@@ -1,6 +1,8 @@
 /* * */
 
 import Section from '@/components/layout/Section';
+import { IconsCommon } from '@/utils/assets';
+import { Image } from '@mantine/core';
 
 import styles from './styles.module.css';
 
@@ -12,7 +14,7 @@ export default function Component() {
 			<div className={styles.content}>
 				<div className={styles.card}>
 					<div className={styles.images}>
-						<img alt="Passe Mensal" src="/images/aml-map.svg" />
+						<Image alt="AML Map" src={IconsCommon.AML_MAP} />
 					</div>
 					<div className={styles.cardContent}>
 						<h3><span>40€</span>/mês</h3>
@@ -22,7 +24,7 @@ export default function Component() {
 				</div>
 				<div className={styles.card}>
 					<div className={styles.images}>
-						<img alt="Passe Mensal" src="/images/aml-map.svg" />
+						<Image alt="AML Map Single" src={IconsCommon.AML_MAP_SINGLE} />
 					</div>
 					<div className={styles.cardContent}>
 						<h3><span>30€</span>/mês</h3>

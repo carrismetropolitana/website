@@ -35,7 +35,7 @@ export const IconsCommon = Object.freeze({
 	AML_MAP_SINGLE: '/icons/common/aml-map-single.svg',
 	COINS: '/icons/common/coins.svg',
 	LIVRO_RECLAMACOES: '/icons/common/livro-de-reclamacoes.svg',
-	RECEIPT: '/icons/common/receipt.sv',
+	RECEIPT: '/icons/common/receipt.svg',
 	SAFARI_PINNED_TAB: '/icons/common/safari-pinned-tab.svg',
 });
 
@@ -66,6 +66,7 @@ export const ImagesMunicipality = Object.freeze({
 });
 
 export const ImagesCommon = Object.freeze({
+	NAVEGANTE_CARD: '/images/common/navegante-card.png',
 	PLACEHOLDER: '/images/common/placeholder.png',
 });
 
