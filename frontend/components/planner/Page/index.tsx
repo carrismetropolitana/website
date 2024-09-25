@@ -5,6 +5,7 @@ import Section from '@/components/layout/Section';
 import PlannerCard from '@/components/planner/Card';
 import PlannerCardSkeleton from '@/components/planner/CardSkeleton';
 import { Link } from '@/i18n/routing';
+import { ImagesPlanner } from '@/utils/assets';
 import { shuffleArray } from '@/utils/shuffle';
 import { useTranslations } from 'next-intl';
 
@@ -15,25 +16,25 @@ import styles from './styles.module.css';
 const partnerApps = shuffleArray([
 	{
 		description: 'Citymapper é uma aplicação de transporte multimodal que oferece rotas de transporte público detalhadas e atualizadas em tempo real',
-		imageUrl: '/planner/citymapper.png',
+		imageUrl: ImagesPlanner.PLANNER_CITY_MAPPER,
 		title: 'Citymapper',
 		url: 'https://citymapper.com',
 	},
 	{
 		description: 'O Google Maps oferece rotas de transporte público detalhadas e atualizadas em tempo real para uma experiência de viagem sem preocupações',
-		imageUrl: '/planner/google-maps.png',
+		imageUrl: ImagesPlanner.PLANNER_GOOGLE_MAPS,
 		title: 'Google Maps',
 		url: 'https://www.google.com/maps',
 	},
 	{
 		description: 'A Moovit oferece informações abrangentes e atualizadas sobre horários, rotas e alertas de serviço, garantindo uma viagem tranquila e eficiente.',
-		imageUrl: '/planner/moovit.jpg',
+		imageUrl: ImagesPlanner.PLANNER_MOOVIT,
 		title: 'Moovit',
 		url: 'https://moovitapp.com',
 	},
 	{
 		description: 'A Transit é a mais recente aplicação na amL.',
-		imageUrl: '/planner/transit.jpg',
+		imageUrl: ImagesPlanner.PLANNER_TRANSIT,
 		title: 'Transit',
 		url: 'https://transit.app',
 	},

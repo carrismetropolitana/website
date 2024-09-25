@@ -7,11 +7,12 @@ import { useDebugContext } from '@/contexts/Debug.context';
 import { useStopsSingleContext } from '@/contexts/StopsSingle.context';
 import { Shape } from '@/types/lines.types';
 import { Stop } from '@/types/stops.types';
+import { IconsMap } from '@/utils/assets';
 import { VehiclePosition } from '@/utils/types';
 import * as turf from '@turf/turf';
 import { FeatureCollection } from 'geojson';
 import { useCallback, useEffect, useMemo } from 'react';
-import Map, { GeolocateControl, Layer, LineLayer, Popup, Source, SymbolLayer, useMap } from 'react-map-gl/maplibre';
+import Map, { GeolocateControl, Layer, Popup, Source, useMap } from 'react-map-gl/maplibre';
 import useSWR from 'swr';
 
 import styles from './styles.module.css';
@@ -198,11 +199,11 @@ export default function FrontendStopsMap() {
 			frontendStopsMap.addImage(id, response.data);
 		};
 		const images = [
-			{ id: 'shape-arrow-direction', url: '/icons/shape-arrow-direction.png' },
-			{ id: 'cm-bus-regular', url: '/icons/cm-bus-regular.png' },
-			{ id: 'cm-bus-delay', url: '/icons/cm-bus-delay.png' },
-			{ id: 'stop-selected', url: '/icons/map-stop-selected.png' },
-			{ id: 'map-pin', url: '/icons/map-pin.png' },
+			{ id: 'shape-arrow-direction', url: IconsMap.MAP_SHAPE_ARROW_DIRECTION },
+			{ id: 'cm-bus-regular', url: IconsMap.MAP_CM_BUS_REGULAR },
+			{ id: 'cm-bus-delay', url: IconsMap.MAP_CM_BUS_DELAY },
+			{ id: 'stop-selected', url: IconsMap.MAP_STOP_SELECTED },
+			{ id: 'map-pin', url: IconsMap.MAP_PIN },
 		];
 
 		Promise.all(images.map(image => loadImage(image.id, image.url)));

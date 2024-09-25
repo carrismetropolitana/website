@@ -5,6 +5,7 @@
 import Button from '@/components/common/Button';
 import Form from '@/components/contacts/Form';
 import Section from '@/components/layout/Section';
+import { IconsCommon } from '@/utils/assets';
 import { IconBrandInstagram, IconBrandWhatsapp, IconMessage, IconPhone, IconUmbrella } from '@tabler/icons-react';
 import Image from 'next/image';
 import { useTranslations } from 'next-intl';
@@ -42,7 +43,7 @@ export default function Component() {
 				<Button href="/lost-and-found" icon={<IconUmbrella size={18} />} label={t('lost_found')} />
 			</Section>
 			<Section withTopBorder={false} withTopPadding={false}>
-				<Image alt={t('heading')} height={500} src="/images/aml-map.svg" style={{ width: '100%' }} width={500} />
+				<Image alt={t('heading')} height={500} src={IconsCommon.AML_MAP_OPERATORS} style={{ width: '100%' }} width={500} />
 			</Section>
 			<Section heading={t('form.heading')} subheading={t('form.subheading')} withChildrenPadding>
 				<Form />

@@ -1,5 +1,7 @@
 /* * */
 
+import { IconsMobile } from '@/utils/assets';
+
 export default function manifest() {
 	return {
 		background_color: '#ffffff',
@@ -8,12 +10,12 @@ export default function manifest() {
 		icons: [
 			{
 				sizes: '192x192',
-				src: '/android-chrome-192x192.png',
+				src: IconsMobile.MOBILE_ANDROID_192,
 				type: 'image/png',
 			},
 			{
 				sizes: '512x512',
-				src: '/android-chrome-512x512.png',
+				src: IconsMobile.MOBILE_ANDROID_512,
 				type: 'image/png',
 			},
 		],

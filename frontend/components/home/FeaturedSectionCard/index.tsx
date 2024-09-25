@@ -1,6 +1,7 @@
 /* * */
 
 import { Link } from '@/i18n/routing';
+import { ImagesCommon } from '@/utils/assets';
 import { Image } from '@mantine/core';
 
 import styles from './styles.module.css';
@@ -23,7 +24,7 @@ export default function Component({ coverImageSrc, href, title }: FeaturedSectio
 
 	return (
 		<Link href={href}>
-			<Image alt={title} className={styles.coverImage} fallbackSrc="/news/placeholder.png" src={coverImageSrc} />
+			<Image alt={title} className={styles.coverImage} fallbackSrc={ImagesCommon.PLACEHOLDER} src={coverImageSrc} />
 		</Link>
 	);
 
