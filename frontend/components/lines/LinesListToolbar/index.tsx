@@ -27,7 +27,7 @@ export default function Component() {
 
 	const currentViewOptions = [
 		{ label: t('by_current_view.all'), value: 'all' },
-		{ label: t('by_current_view.favorites'), value: 'favorites' },
+		{ label: t('by_current_view.favorites', { count: linesContext.counters.favorites }), value: 'favorites' },
 	];
 
 	//
