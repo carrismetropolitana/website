@@ -1,11 +1,13 @@
 /* * */
 
-import AppUnavailable from '@/components/common/AppUnavailable';
+import TicketsHeader from '../TicketsHeader';
 
 /* * */
 
 export default function Component() {
 	return (
-		<AppUnavailable />
+		<>
+			<TicketsHeader />
+		</>
 	);
 }
