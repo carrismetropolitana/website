@@ -9,16 +9,16 @@ import styles from './styles.module.css';
 export default function Component({ discounts }: { discounts: Discount[] }) {
 	return (
 		<div className={styles.table}>
-			<div className={styles.table__head}>
-				<div className={styles.table__head__info}>
+			<div className={styles.tableHead}>
+				<div className={styles.tableHeadInfo}>
 					<div className={styles.cell}>Desconto</div>
 				</div>
-				<div className={styles.table__head__pricing}>
+				<div className={styles.tableHeadPricing}>
 					<div className={styles.cell}>Metropolitano</div>
 					<div className={styles.cell}>Municipal</div>
 				</div>
 			</div>
-			<div className={styles.table__body}>
+			<div className={styles.tableBody}>
 				{discounts.map((discount, index) => (
 					<div key={index}>
 						<div className={styles.info}>

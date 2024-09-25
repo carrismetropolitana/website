@@ -31,8 +31,8 @@ export default function Component() {
 				{municipalDiscounts.map((discount, index) => (
 					<Card key={index}>
 						<CardHeader>
-							<div className={styles.card__image__wrapper}>
-								<Image alt={discount.name} className={styles.card__image} src={discount.icon} />
+							<div className={styles.cardImageWrapper}>
+								<Image alt={discount.name} className={styles.cardImage} src={discount.icon} />
 							</div>
 						</CardHeader>
 						<CardContent>
