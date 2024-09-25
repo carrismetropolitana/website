@@ -1,6 +1,7 @@
 /* * */
 
 import Service from '../Service';
+import ServicePoints from '../ServicePoints';
 import WhereToBuy from '../WhereToBuy';
 
 export default function Component() {
@@ -8,6 +9,7 @@ export default function Component() {
 		<>
 			<WhereToBuy />
 			<Service />
+			<ServicePoints />
 		</>
 	);
 }

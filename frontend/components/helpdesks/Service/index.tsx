@@ -12,7 +12,7 @@ export default function Component() {
 	return (
 		<Section heading="Atendimento preferencial" subheading="Descubra quanto custa viajar na CMetropolitana de vez em quando. Para utilizações mais frequentes sugerimos a adesão ao sistema navegante®." withChildrenPadding>
 			<div className={styles.content}>
-				<Card>
+				<Card className={styles.card}>
 					<CardHeader>
 						<div className={styles.images}>
 							<Image alt="Navegante Ocasional" src={IconsCommon.NAVEGANTE_POINT} />
@@ -23,7 +23,7 @@ export default function Component() {
 						<CardDescription>Lorem ipsum dolor sit amet consectetur adipisicing elit. Obcaecati ea natus itaque qui iure nam consequuntur minima, quibusdam saepe odio molestiae soluta aspernatur, corrupti labore fugiat? Numquam blanditiis accusantium quibusdam!</CardDescription>
 					</CardContent>
 				</Card>
-				<Card>
+				<Card className={styles.card}>
 					<CardHeader>
 						<div className={styles.images}>
 							<Image alt="Passe Navegante" src={IconsCommon.NAVEGANTE_APP} />

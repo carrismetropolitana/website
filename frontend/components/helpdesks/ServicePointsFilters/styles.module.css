@@ -1,0 +1,35 @@
+.filters{
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 1rem;
+}
+
+.cardTypeWrapper{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-gap: 1rem;
+}
+
+.filtersA{
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.filtersB{
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+@media screen and (max-width: 768px){
+    .filters{
+        grid-template-columns: 1fr;
+    }
+
+    .filtersB{
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        grid-gap: 1rem;
+    }
+}
