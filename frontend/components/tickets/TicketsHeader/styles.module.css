@@ -22,3 +22,19 @@
         height: 100%;
     }
 }
+
+@media screen and (max-width: 768px) {
+    .content {
+        grid-template-columns: 1fr;
+    }
+
+    .card {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+
+        & img {
+            height: 80px;
+        }
+    }
+}

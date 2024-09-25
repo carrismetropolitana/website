@@ -12,11 +12,6 @@
     }
 }
 
-
-.info {
-    padding: 0 10px;
-}
-
 .pricing {
     border-top: 1px dashed var(--color-system-border-100);
     padding-top: 10px;

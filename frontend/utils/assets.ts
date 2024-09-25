@@ -75,7 +75,7 @@ export const ImagesMunicipality = Object.freeze({
 
 export const ImagesCommon = Object.freeze({
 	NAVEGANTE_CARD: '/images/common/navegante-card.png',
-	NAVEGANTE_OCCASIONAL: '/images/common/navegante-occasional.jpg',
+	NAVEGANTE_OCCASIONAL: '/images/common/navegante-occasional.png',
 	PLACEHOLDER: '/images/common/placeholder.png',
 });
 
