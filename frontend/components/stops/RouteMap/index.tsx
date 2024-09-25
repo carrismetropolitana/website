@@ -1,4 +1,5 @@
 import LiveIcon from '@/components/common/LiveIcon';
+import { IconsMap } from '@/utils/assets';
 import { Pattern, Shape, VehiclePosition } from '@/utils/types';
 import { bbox } from '@turf/turf';
 import { FeatureCollection, GeoJsonProperties, Geometry } from 'geojson';
@@ -135,11 +136,11 @@ export default function Component({ pattern }: { pattern: Pattern }) {
 
 	useEffect(() => {
 		// Change hardcoded urls
-		map?.loadImage('https://beta.carrismetropolitana.pt/icons/shape-arrow-direction.png').then((image) => {
+		map?.loadImage(IconsMap.MAP_SHAPE_ARROW_DIRECTION).then((image) => {
 			map.addImage('shape-arrow-direction', image.data, { sdf: true });
 		});
 
-		map?.loadImage('https://beta.carrismetropolitana.pt/icons/cm-bus-regular.png').then((image) => {
+		map?.loadImage(IconsMap.MAP_CM_BUS_REGULAR).then((image) => {
 			map.addImage('cm-bus-regular', image.data, { sdf: false });
 		});
 	}, [map]);

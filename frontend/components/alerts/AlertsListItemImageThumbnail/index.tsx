@@ -1,6 +1,7 @@
 /* * */
 
 import { Link } from '@/i18n/routing';
+import { ImagesCommon } from '@/utils/assets';
 import { Image } from '@mantine/core';
 import { IconCircleArrowUpRightFilled } from '@tabler/icons-react';
 
@@ -21,7 +22,7 @@ export default function Component({ alt, href, src, target }: AlertsListItemImag
 	return (
 		<Link className={styles.container} href={href} target={target}>
 			<IconCircleArrowUpRightFilled className={styles.icon} size={25} />
-			<Image alt={alt} className={styles.image} fallbackSrc="/planner/placeholder.png" src={src} />
+			<Image alt={alt} className={styles.image} fallbackSrc={ImagesCommon.PLACEHOLDER} src={src} />
 		</Link>
 	);
 }
