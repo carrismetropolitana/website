@@ -1,13 +1,13 @@
-
 /* * */
 /* Common */
 
 .table {
   width: 100%;
   /* border: 2px solid var(--color-system-border-200); */
+  display: block;
 }
 
-.cell{
+.cell {
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -18,9 +18,18 @@
   border: 1px solid var(--color-system-border-200);
 }
 
-.title {
+.table__head {
   text-transform: uppercase;
   color: var(--color-system-text-200);
+  position: sticky;
+  top: calc(var(--size-height-header));
+  background-color: var(--color-system-background-200);
+  z-index: 1;
+}
+
+.table__head__pricing {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
 }
 
 /* * */
@@ -49,12 +58,7 @@
 /* * */
 /* Pricing */
 
-.pricing{
-
-  & .title {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-  }
+.pricing {
 
   & .content {
     display: grid;
