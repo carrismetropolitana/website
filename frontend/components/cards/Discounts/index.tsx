@@ -10,7 +10,7 @@ import styles from './styles.module.css';
 
 export const discounts: Discount[] = [
 	{
-		description: 'O desconto que todos têm por direito. Com o passe navegante® as famílias portuguesas passaram a poupar 54€ em média por pessoa.',
+		description: 'O desconto que todos têm por direito. Com o passe navegante® as famílias portuguesas passaram a poupar ??€ em média por pessoa.',
 		metropolitan: '40 € / mês',
 		municipal: '30 € / mês',
 		name: 'Normal',
