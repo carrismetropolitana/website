@@ -39,7 +39,7 @@ export default function Component() {
 		const selectedStopSequence = linesDetailContext.data.active_stop?.sequence;
 		const selectedOperationalDay = operationalDayContext.data.selected_day;
 		// Check if all these variables are defined
-		if (!activePatternGroup || !secondaryPatternGroups.length || !mentionedRoutes || !selectedStopId || !selectedStopSequence || !selectedOperationalDay) {
+		if (!activePatternGroup || !secondaryPatternGroups.length || !mentionedRoutes || !selectedStopId || selectedStopSequence === undefined || !selectedOperationalDay) {
 			return null;
 		}
 
