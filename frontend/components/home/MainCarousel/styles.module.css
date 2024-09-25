@@ -26,6 +26,14 @@
 	opacity: 1;
 }
 
+@media only screen and (width <= 900px) {
+	.overlayIsActive {
+		visibility: hidden;
+		opacity: 0;
+	}
+}
+
+
 /* * */
 /* ROOT */
 
@@ -44,6 +52,14 @@
 
 .root:active {
 	cursor: grabbing;
+}
+
+@media only screen and (width <= 900px) {
+	.root:hover {
+		border-radius: unset;
+		box-shadow: none;
+		transform: unset;
+	}
 }
 
 
@@ -76,12 +92,19 @@
 
 .control[data-inactive],
 .root:hover .control[data-inactive] {
-	cursor: default;
+	visibility: hidden;
 	opacity: 0;
 }
 
 .root:hover .control {
 	opacity: 1;
+}
+
+@media only screen and (width <= 900px) {
+	.control {
+		width: 35px;
+		opacity: 1;
+	}
 }
 
 /* * */
@@ -97,7 +120,7 @@
 
 @media only screen and (width <= 900px) {
 	.controlsWrapper {
-		display: none;
+		padding: 0 var(--size-spacing-10);
 	}
 }
 
