@@ -3,6 +3,7 @@
 /* * */
 
 import mapSettings from '@/settings/map.settings';
+import { IconsMap } from '@/utils/assets';
 import maplibregl from 'maplibre-gl';
 import { useCallback, useEffect, useState } from 'react';
 import Map, { MapRef, useMap } from 'react-map-gl/maplibre';
@@ -12,11 +13,11 @@ import styles from './styles.module.css';
 /* * */
 
 const MAP_LOAD_ASSETS = [
-	{ name: 'cm-bus-regular', sdf: false, url: '/icons/map/cm-bus-regular.png' },
-	{ name: 'shape-arrow-direction', sdf: true, url: '/icons/map/shape-arrow-direction.png' },
-	{ name: 'cm-store-open', sdf: false, url: '/icons/map/cm-store-open.png' },
-	{ name: 'cm-store-busy', sdf: false, url: '/icons/map/cm-store-busy.png' },
-	{ name: 'cm-store-closed', sdf: false, url: '/icons/map/cm-store-closed.png' },
+	{ name: 'cm-bus-regular', sdf: false, url: IconsMap.MAP_CM_BUS_REGULAR },
+	{ name: 'shape-arrow-direction', sdf: true, url: IconsMap.MAP_SHAPE_ARROW_DIRECTION },
+	{ name: 'cm-store-open', sdf: false, url: IconsMap.MAP_CM_STORE_OPEN },
+	{ name: 'cm-store-busy', sdf: false, url: IconsMap.MAP_CM_STORE_BUSY },
+	{ name: 'cm-store-closed', sdf: false, url: IconsMap.MAP_CM_STORE_CLOSED },
 ];
 
 /* * */

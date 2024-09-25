@@ -1,6 +1,7 @@
 /* * */
 
 import { Link } from '@/i18n/routing';
+import { ImagesCommon } from '@/utils/assets';
 import { Image } from '@mantine/core';
 import { DateTime } from 'luxon';
 import { useTranslations } from 'next-intl';
@@ -33,7 +34,7 @@ export default function Component({ _id, coverImageSrc, publishDate, title }: Ne
 
 	return (
 		<Link className={styles.container} href={`/news/${_id}`}>
-			<Image alt={title} className={styles.coverImage} fallbackSrc="/news/placeholder.png" src={coverImageSrc} />
+			<Image alt={title} className={styles.coverImage} fallbackSrc={ImagesCommon.PLACEHOLDER} src={coverImageSrc} />
 			<p className={styles.publishDate}>{t('publish_date', { publishDate: publishDateObject })}</p>
 			<h4 className={styles.title}>{title}</h4>
 		</Link>

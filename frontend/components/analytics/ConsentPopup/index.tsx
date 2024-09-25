@@ -3,6 +3,7 @@
 /* * */
 
 import { useAnalyticsContext } from '@/contexts/Analytics.context';
+import { IconsBrand } from '@/utils/assets';
 import { Button, Modal } from '@mantine/core';
 import Image from 'next/image';
 import Link from 'next/link';
@@ -57,7 +58,7 @@ export default function Component() {
 	return (
 		<Modal closeOnClickOutside={false} closeOnEscape={false} onClose={() => setIsOpen(false)} opened={isOpen} overlayProps={{ backgroundOpacity: 0.55, blur: 3 }} returnFocus={true} trapFocus={false} withCloseButton={false}>
 			<div className={styles.container}>
-				<Image alt="" height={120} src="/images/analytics-header.svg" width={350} priority />
+				<Image alt="" height={120} src={IconsBrand.BRAND_LOGO_LIGHT} width={350} priority />
 				<h4 className={styles.title}>{t('title')}</h4>
 				<h4 className={styles.text}>{t('text')}</h4>
 				<Link className={styles.link} href="/legal/cookies" target="_blank">
