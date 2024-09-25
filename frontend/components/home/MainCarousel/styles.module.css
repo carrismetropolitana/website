@@ -1,0 +1,140 @@
+/* * */
+/* OVERLAY */
+
+.overlay {
+	position: fixed;
+	top: 0;
+	left: 0;
+	z-index: 1000;
+	width: 100%;
+	height: 100%;
+	visibility: hidden;
+	background-color: rgb(255 255 255 / 50%);
+	backdrop-filter: blur(10px);
+	opacity: 0;
+	transition: all 200ms ease;
+}
+
+@media (prefers-color-scheme: dark) {
+	.overlay {
+		background-color: rgb(0 0 0 / 50%);
+	}
+}
+
+.overlayIsActive {
+	visibility: visible;
+	opacity: 1;
+}
+
+@media only screen and (width <= 900px) {
+	.overlayIsActive {
+		visibility: hidden;
+		opacity: 0;
+	}
+}
+
+
+/* * */
+/* ROOT */
+
+.root {
+	z-index: 1005;
+	overflow: hidden;
+	cursor: grab;
+	transition: all 200ms ease;
+}
+
+.root:hover {
+	border-radius: 10px;
+	box-shadow: 0 0 15px 0 rgb(0 0 0 / 10%);
+	transform: scale(1.05)
+}
+
+.root:active {
+	cursor: grabbing;
+}
+
+@media only screen and (width <= 900px) {
+	.root:hover {
+		border-radius: unset;
+		box-shadow: none;
+		transform: unset;
+	}
+}
+
+
+/* * */
+/* CONTROL */
+
+.control {
+	width: 50px;
+	aspect-ratio: 1;
+	color: var(--color-system-text-300);
+	background-color: var(--color-system-background-100);
+	border: 1px solid var(--color-system-border-200);
+	box-shadow: 0 0 15px 0 rgb(0 0 0 / 10%);
+	opacity: 0.25;
+	transition: all 200ms ease;
+}
+
+.control:hover {
+	color: var(--color-system-text-200);
+	border-color: var(--color-system-text-200);
+	opacity: 1;
+}
+
+.control:active {
+	color: var(--color-system-text-300);
+	background-color: var(--color-system-background-300);
+	border-color: var(--color-system-text-300);
+	opacity: 1;
+}
+
+.control[data-inactive],
+.root:hover .control[data-inactive] {
+	visibility: hidden;
+	opacity: 0;
+}
+
+.root:hover .control {
+	opacity: 1;
+}
+
+@media only screen and (width <= 900px) {
+	.control {
+		width: 35px;
+		opacity: 1;
+	}
+}
+
+/* * */
+/* CONTROLS WRAPPER */
+
+.controlsWrapper {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	width: 100%;
+	padding: 0 var(--size-spacing-30);
+}
+
+@media only screen and (width <= 900px) {
+	.controlsWrapper {
+		padding: 0 var(--size-spacing-10);
+	}
+}
+
+/* * */
+/* SLIDE WRAPPER */
+
+.slideWrapper {
+	padding: 0;
+	padding-bottom: var(--size-spacing-20);
+	padding-left: var(--size-spacing-20);
+}
+
+@media only screen and (width <= 900px) {
+	.slideWrapper {
+		padding-top: 0;
+	}
+}

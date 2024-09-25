@@ -24,6 +24,7 @@
 		"@turf/turf": "^7.1.0",
 		"classnames": "2.5.1",
 		"dayjs": "1.11.13",
+		"embla-carousel-autoplay": "^8.3.0",
 		"embla-carousel-react": "8.3.0",
 		"embla-carousel-wheel-gestures": "8.0.1",
 		"inflected": "2.1.0",

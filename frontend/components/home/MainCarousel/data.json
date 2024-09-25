@@ -2,31 +2,36 @@
 	{
 		"id": "0001",
 		"src": "https://storage.carrismetropolitana.pt/static/assets/test/carousel_1.png",
-		"background": "#ffffff"
+		"url": "https://www.google.com",
+		"target": "_blank"
 	},
 	{
 		"id": "0002",
 		"src": "https://storage.carrismetropolitana.pt/static/assets/test/carousel_3.png",
-		"background": "#FFDD00"
+		"url": "https://www.google.com"
 	},
 	{
 		"id": "0003",
 		"src": "https://storage.carrismetropolitana.pt/static/assets/test/carousel_2.png",
-		"background": "#FFDD00"
+		"url": "https://www.google.com",
+		"target": "_self"
 	},
 	{
 		"id": "0004",
 		"src": "https://storage.carrismetropolitana.pt/static/assets/test/carousel_3.png",
-		"background": "#FFDD00"
+		"target": "_self",
+		"url": "https://www.google.com"
 	},
 	{
 		"id": "0005",
 		"src": "https://storage.carrismetropolitana.pt/static/assets/test/carousel_1.png",
-		"background": "#ffffff"
+		"target": "_blank",
+		"url": "https://www.google.com"
 	},
 	{
 		"id": "0006",
 		"src": "https://storage.carrismetropolitana.pt/static/assets/test/carousel_3.png",
-		"background": "#FFDD00"
+		"target": "_blank",
+		"url": "https://www.google.com"
 	}
 ]
