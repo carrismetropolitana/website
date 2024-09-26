@@ -1,20 +1,8 @@
-/* * */
+// DEFAULTS FOR OSM MAP
 
-export const defaults = Object.freeze({
-
-	bearing: 0,
-
-	latitude: 38.7,
-	longitude: -9.0,
-
-	picth: 0,
-
-	zoom: 9.5,
-	zoom_max: 20,
-	zoom_min: 5,
-
-	//
-});
+// Locations
+const defaultLat = 38.7;
+const defaultLon = -9.0;
 
 // Bearing, Pitch and Zoom
 const defaultBearing = 0;
