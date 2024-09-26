@@ -1,16 +1,18 @@
 :root {
-
 	/* * */
+
 	/* COLOR / BRAND */
 
 	--color-brand: #ffdd01;
 
 	/* * */
+
 	/* COLOR / DEBUG */
 
 	--color-debug: #055252;
 
 	/* * */
+
 	/* COLOR / SYSTEM */
 
 	--color-system-background-100: #fff;
@@ -30,12 +32,14 @@
 	--color-system-text-900: #fff;
 
 	/* * */
+
 	/* COLOR / PRIMARY */
 
 	--color-primary-white: #fff;
 	--color-primary-black: #000;
 
 	/* * */
+
 	/* COLOR / STATUS */
 
 	--color-status-info-background: #F5FAFF;
@@ -56,6 +60,7 @@
 	--color-status-danger-shadow: #e64a2380;
 
 	/* * */
+
 	/* COLOR / REALTIME */
 
 	--color-realtime-0: rgb(0 215 50 / 0%);
@@ -67,13 +72,15 @@
 	--color-realtime-100: rgb(0 205 50 / 100%);
 
 	/* * */
+
 	/* SIZE / WIDTH */
 
 	--size-width-global: 1200px;
 	--size-width-heading: 700px;
-	--size-height-header: 50px;
+	--size-height-header: 71px; /* Default SSR value */
 
 	/* * */
+
 	/* SIZE / SPACING */
 
 	--size-spacing-5: 5px;
@@ -86,6 +93,7 @@
 	--size-spacing-60: 60px;
 
 	/* * */
+
 	/* FONT */
 
 	--font-weight-extrabold: 800; /* ExtraBold */
@@ -106,6 +114,7 @@
 	--font-weight-muted: 500; /* Medium */
 
 	/* * */
+
 	/* COLOR / ALERTS */
 
 	--color-alerts-0: #3D85C6;
@@ -114,6 +123,7 @@
 	--color-alerts-3: #E64B23;
 
 	/* * */
+
 	/* BOX-SHADOW */
 
 	--box-shadow-md: 0 0 50px 0 red;
@@ -125,8 +135,8 @@
 
 @media (prefers-color-scheme: dark) {
   :root {
-
 		/* * */
+
 		/* COLOR / SYSTEM */
 
 		--hsl: hsl(232deg 8% 12%);
@@ -141,6 +151,7 @@
 		--color-system-text-400: #64646e;
 
 		/* * */
+
 		/* COLOR / STATUS */
 
 		--color-status-info-background: #3c495d;
@@ -161,6 +172,7 @@
 		--color-status-danger-shadow: #e64a2380;
 
 		/* * */
+
 		/* COLOR / ALERTS */
 
 		--color-alerts-0: #3D85C6;
@@ -203,8 +215,8 @@
 
 @media (width <= 500px) {
   :root {
-
 		/* * */
+
 		/* FONT */
 
 		--font-size-heading: 26px;

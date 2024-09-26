@@ -1,11 +1,11 @@
 /* * */
+
 /* OVERLAY */
 
 .overlay {
 	position: fixed;
 	top: 0;
 	left: 0;
-	z-index: 1000;
 	width: 100%;
 	height: 100%;
 	visibility: hidden;
@@ -22,6 +22,7 @@
 }
 
 .overlayIsActive {
+	z-index: 500;
 	visibility: visible;
 	opacity: 1;
 }
@@ -35,16 +36,17 @@
 
 
 /* * */
+
 /* ROOT */
 
 .root {
-	z-index: 1005;
 	overflow: hidden;
 	cursor: grab;
 	transition: all 200ms ease;
 }
 
 .root:hover {
+	z-index: 505;
 	border-radius: 10px;
 	box-shadow: 0 0 15px 0 rgb(0 0 0 / 10%);
 	transform: scale(1.05)
@@ -64,6 +66,7 @@
 
 
 /* * */
+
 /* CONTROL */
 
 .control {
@@ -108,6 +111,7 @@
 }
 
 /* * */
+
 /* CONTROLS WRAPPER */
 
 .controlsWrapper {
@@ -125,6 +129,7 @@
 }
 
 /* * */
+
 /* SLIDE WRAPPER */
 
 .slideWrapper {
