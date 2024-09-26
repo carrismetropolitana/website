@@ -43,17 +43,18 @@ export const mainNavigationGroup: NavigationGroup[] = [
 
 /* * */
 
-export const accountNavigationGroup: NavigationGroup[] = [
+export const drawerNavigationGroup: NavigationGroup[] = [
 
-	{
-		_id: 'primary',
-		links: [
-			{ _id: 'configs', href: RoutesProfile.CONFIGS, icon: <IconSparkles size={20} /> },
-			{ _id: 'favorites', href: RoutesProfile.FAVORITES, icon: <IconStar size={20} /> },
-			{ _id: 'profile', href: RoutesProfile.PROFILE, icon: <IconUser size={20} /> },
-		],
-	},
-
+	// TODO: Stage 2
+	// {
+	// 	_id: 'account',
+	// 	links: [
+	// 		{ _id: 'configs', href: RoutesProfile.CONFIGS, icon: <IconSparkles size={20} /> },
+	// 		{ _id: 'favorites', href: RoutesProfile.FAVORITES, icon: <IconStar size={20} /> },
+	// 		{ _id: 'profile', href: RoutesProfile.PROFILE, icon: <IconUser size={20} /> },
+	// 	],
+	// },
+	...mainNavigationGroup,
 ];
 
 /* * */
