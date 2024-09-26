@@ -42,6 +42,7 @@ interface Props {
 	onMoveStart?: (arg0) => void
 	scale?: boolean
 	scrollZoom?: boolean
+	toolbar?: boolean
 }
 
 /* * */
@@ -63,6 +64,7 @@ export default function Component({
 	onMoveStart,
 	scale = false,
 	scrollZoom = true,
+	toolbar = true,
 }: Props) {
 	//
 	// A. Setup variables
@@ -122,7 +124,7 @@ export default function Component({
 	// C. Render components
 	return (
 		<div className={styles.container}>
-			<MapToolBar className={styles.toolbar} />
+			{toolbar && <MapToolBar className={styles.toolbar} />}
 			<Map
 				attributionControl={false}
 				cursor={cursor}
