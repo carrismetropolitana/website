@@ -1,0 +1,27 @@
+.container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--size-spacing-10);
+}
+
+.button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--color-system-text-300);
+    background-color: var(--color-system-background-100);
+    padding: var(--size-spacing-5);
+    border-radius: var(--size-spacing-5);
+    cursor: pointer;
+    box-shadow: 0 0 5px 0 rgba(0, 0, 0, 0.1);
+    transition: all 300ms ease;
+
+    &:hover {
+        color: var(--color-system-text-200);
+    }
+}
+
+.segmentedControlLabel{
+    padding: var(--size-spacing-5) var(--size-spacing-10);
+    font-size: 14px;
+}

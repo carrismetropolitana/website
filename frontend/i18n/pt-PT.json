@@ -794,5 +794,15 @@
 	},
 	"SelectPattern": {
 		"option_label": "Início do percurso: {locality}"
+	},
+	"map" : {
+		"toolbar": {
+			"style": {
+				"satellite": "Satélite",
+				"map": "Mapa"
+			},
+			"center_map" : "Centrar Mapa",
+			"open_google_maps": "Abrir no Google Maps"
+		}
 	}
 }

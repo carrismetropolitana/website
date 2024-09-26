@@ -1,7 +1,7 @@
 'use client';
 
 import LiveIcon from '@/components/common/LiveIcon';
-import Map from '@/components/common/Map';
+import Map from '@/components/common/map/Map';
 import { useLinesDetailContext } from '@/contexts/LinesDetail.context';
 import { Path, PatternGroup } from '@/types/lines.types';
 import { Stop } from '@/types/stops.types';
