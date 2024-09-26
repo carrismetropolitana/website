@@ -3,7 +3,7 @@
 /* * */
 
 import HeaderLogo from '@/components/header/Logo';
-import HeaderNavigationAccount from '@/components/header/NavigationAccount';
+import HeaderNavigationDrawer from '@/components/header/NavigationDrawer';
 import HeaderNavigationMain from '@/components/header/NavigationMain';
 import HeaderStatus from '@/components/header/Status';
 import { useEffect } from 'react';
@@ -39,7 +39,7 @@ export default function Component() {
 					<HeaderLogo />
 					<div className={styles.navWrapper}>
 						<HeaderNavigationMain />
-						<HeaderNavigationAccount />
+						<HeaderNavigationDrawer />
 					</div>
 				</div>
 				<HeaderStatus />

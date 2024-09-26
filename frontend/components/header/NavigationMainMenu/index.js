@@ -25,7 +25,7 @@ export default function Component({ item }) {
 	//
 	// A. Setup variables
 
-	const mainNavLabels = useTranslations('settings.navigation.main');
+	const mainNavLabels = useTranslations('settings.navigation');
 
 	const [isOpen, setIsOpen] = useState(false);
 

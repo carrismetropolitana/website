@@ -4,6 +4,7 @@
 
 import LiveIcon from '@/components/common/LiveIcon';
 import MetricsSectionDemandSkeleton from '@/components/home/MetricsSectionDemandSkeleton';
+import { Routes } from '@/utils/routes';
 import { Sparkline } from '@mantine/charts';
 import { ActionIcon, Popover } from '@mantine/core';
 import { IconInfoCircleFilled } from '@tabler/icons-react';
@@ -28,7 +29,7 @@ export default function Component() {
 	//
 	// B. Fetch data
 
-	const { data: metricsData } = useSWR('https://api.carrismetropolitana.pt/metrics/demand/by_day');
+	const { data: metricsData } = useSWR(`${Routes.API}/metrics/demand/by_day`);
 
 	//
 	// C. Transform data

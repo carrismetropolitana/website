@@ -16,7 +16,7 @@ export default function Component() {
 	// A. Setup variables
 
 	const t = useTranslations('home.TarifsSection');
-	const mainNavLabels = useTranslations('settings.navigation.main');
+	const mainNavLabels = useTranslations('settings.navigation');
 	const navigationGroup = mainNavigationGroup.find(navGroup => navGroup._id === 'tarifs');
 
 	//

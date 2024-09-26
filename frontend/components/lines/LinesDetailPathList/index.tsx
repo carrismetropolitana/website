@@ -4,6 +4,7 @@
 
 import PathStop from '@/components/lines/PathStop';
 import { useLinesDetailContext } from '@/contexts/LinesDetail.context';
+import { Routes } from '@/utils/routes';
 import { PatternRealtime } from '@/utils/types';
 import { useEffect, useMemo } from 'react';
 import useSWR from 'swr';
@@ -23,7 +24,7 @@ export default function Component() {
 	//
 	// B. Fetch data
 
-	const { data: patternRealtime } = useSWR<PatternRealtime[]>(linesDetailContext.data.active_pattern_group?.pattern_id && `https://api.carrismetropolitana.pt/patterns/${linesDetailContext.data.active_pattern_group.pattern_id}/realtime`, { refreshInterval: 10000 });
+	const { data: patternRealtime } = useSWR<PatternRealtime[]>(linesDetailContext.data.active_pattern_group?.pattern_id && `${Routes.API}/patterns/${linesDetailContext.data.active_pattern_group.pattern_id}/realtime`, { refreshInterval: 10000 });
 
 	// C. Transform data
 

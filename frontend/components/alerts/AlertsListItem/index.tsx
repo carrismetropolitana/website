@@ -7,6 +7,7 @@ import { AlertEffectIcon } from '@/components/alerts/AlertCauseEffectIcon';
 import AlertsListItemImageThumbnail from '@/components/alerts/AlertsListItemImageThumbnail';
 import Button from '@/components/common/Button';
 import { useAlertsContext } from '@/contexts/Alerts.context';
+import { RoutesSchedule } from '@/utils/routes';
 import { Accordion } from '@mantine/core';
 import { IconArrowUpRight } from '@tabler/icons-react';
 import { useTranslations } from 'next-intl';
@@ -33,7 +34,7 @@ export default function Component({ alertId }: Props) {
 	//
 	// B. Transform data
 
-	const alertHref = `/alerts/${alertId}`;
+	const alertHref = `${RoutesSchedule.ALERTS}/${alertId}`;
 
 	const simplifiedAlertData = alertsContext.actions.getSimplifiedAlertById(alertId);
 

@@ -9,6 +9,7 @@ import Loader from '@/components/common/Loader';
 import { useAlertsContext } from '@/contexts/Alerts.context';
 import { useProfileContext } from '@/contexts/Profile.context';
 import { Link, useRouter } from '@/i18n/routing';
+import { Routes } from '@/utils/routes';
 import { useTranslations } from 'next-intl';
 import { useMemo } from 'react';
 import useSWR from 'swr';
@@ -37,7 +38,7 @@ export default function Component() {
 	//
 	// B. Fetch data
 
-	const { data: allLinesData, isLoading: allLinesLoading } = useSWR('https://api.carrismetropolitana.pt/v2/lines');
+	const { data: allLinesData, isLoading: allLinesLoading } = useSWR(`${Routes.API}/v2/lines`);
 
 	//
 	// C. Transform data
@@ -64,7 +65,7 @@ export default function Component() {
 	// D. Handle actions
 
 	const handleClick = (lineId: string) => {
-		router.push(`/lines/${lineId}`);
+		router.push(`${RoutesSchedule.LINES}/${lineId}`);
 	};
 
 	//

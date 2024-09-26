@@ -7,6 +7,7 @@ import { Path, PatternGroup } from '@/types/lines.types';
 import { Stop } from '@/types/stops.types';
 import { IconsMap } from '@/utils/assets';
 import { moveMap } from '@/utils/map';
+import { Routes } from '@/utils/routes';
 import { VehiclePosition } from '@/utils/types';
 import { useTranslations } from 'next-intl';
 import { useEffect, useMemo } from 'react';
@@ -25,7 +26,7 @@ export default function Component() {
 
 	//
 	// B. Fetch data (refreshes every 10 seconds)
-	const { data: allVehiclesData } = useSWR<VehiclePosition[]>('https://api.carrismetropolitana.pt/v2/vehicles', {
+	const { data: allVehiclesData } = useSWR<VehiclePosition[]>(`${Routes.API}/v2/vehicles`, {
 		refreshInterval: 10000,
 	});
 

@@ -10,10 +10,11 @@ import { ServerActionResult } from '@/types/actions.types';
 import { Profile } from '@/types/profile.type';
 // import { Profile } from '@/types/profile.type';
 import { generateJWT } from '@/utils/jwt';
+import { Routes } from '@/utils/routes';
 
 /* * */
 
-const namespace = `${process.env.ACCOUNTS_API_URL}/v1/accounts`;
+const namespace = `${Routes.API_ACCOUNTS}/v1/accounts`;
 
 /**
  * Gets the profile of a user

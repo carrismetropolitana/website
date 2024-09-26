@@ -1,5 +1,6 @@
 import LiveIcon from '@/components/common/LiveIcon';
 import { IconsMap } from '@/utils/assets';
+import { Routes } from '@/utils/routes';
 import { Pattern, Shape, VehiclePosition } from '@/utils/types';
 import { bbox } from '@turf/turf';
 import { FeatureCollection, GeoJsonProperties, Geometry } from 'geojson';
@@ -15,8 +16,8 @@ export default function Component({ pattern }: { pattern: Pattern }) {
 	const { map } = useMap();
 
 	const t = useTranslations('line');
-	const { data: shape } = useSWR<Shape>('https://api.carrismetropolitana.pt/shapes/' + pattern.shape_id);
-	const { data: realTime } = useSWR<VehiclePosition[]>('https://api.carrismetropolitana.pt/vehicles', {
+	const { data: shape } = useSWR<Shape>(`${Routes.API}/shapes/` + pattern.shape_id);
+	const { data: realTime } = useSWR<VehiclePosition[]>(`${Routes.API}/vehicles`, {
 		refreshInterval: 10000,
 	});
 	const relevantVehiclesGeoJson: FeatureCollection<Geometry, GeoJsonProperties> = useMemo(() => {

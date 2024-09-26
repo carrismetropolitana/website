@@ -5,6 +5,7 @@
 import SelectLine from '@/components/common/SelectLine';
 import SelectStop from '@/components/common/SelectStop';
 import { useRouter } from '@/i18n/routing';
+import { Routes } from '@/utils/routes';
 import { SegmentedControl } from '@mantine/core';
 import { useTranslations } from 'next-intl';
 import { useState } from 'react';
@@ -29,8 +30,8 @@ export default function Component() {
 	//
 	// B. Fetch data
 
-	const { data: allLinesData } = useSWR('https://api.carrismetropolitana.pt/v2/lines');
-	const { data: allStopsData } = useSWR('https://api.carrismetropolitana.pt/v2/stops');
+	const { data: allLinesData } = useSWR(`${Routes.API}/v2/lines`);
+	const { data: allStopsData } = useSWR(`${Routes.API}/v2/stops`);
 
 	//
 	// C. Transform data
@@ -45,12 +46,12 @@ export default function Component() {
 
 	const handleSelectLine = (selectedLineId) => {
 		setSelectedLineId(selectedLineId);
-		router.push(`/lines/${selectedLineId}`);
+		router.push(`${Routes.LINES}/${selectedLineId}`);
 	};
 
 	const handleSelectStop = (selectedStopId) => {
 		setSelectedStopId(selectedStopId);
-		router.push(`/stops/${selectedStopId}`);
+		router.push(`${Routes.STOPS}/${selectedStopId}`);
 	};
 
 	//

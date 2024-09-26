@@ -6,6 +6,7 @@ import type { Line } from '@/types/lines.types.js';
 
 import { useProfileContext } from '@/contexts/Profile.context';
 import { createDocCollection } from '@/hooks/useOtherSearch';
+import { Routes } from '@/utils/routes';
 import { createContext, useContext, useEffect, useState } from 'react';
 import useSWR from 'swr';
 
@@ -73,7 +74,7 @@ export const LinesListContextProvider = ({ children }) => {
 	//
 	// B. Fetch data
 
-	const { data: allLinesData, isLoading: allLinesLoading } = useSWR<Line[], Error>('https://api.carrismetropolitana.pt/v2/lines');
+	const { data: allLinesData, isLoading: allLinesLoading } = useSWR<Line[], Error>(`${Routes.API}/v2/lines`);
 
 	//
 	// C. Transform data

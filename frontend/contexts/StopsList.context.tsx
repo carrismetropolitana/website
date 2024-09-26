@@ -6,6 +6,7 @@ import type { Stop } from '@/types/stops.types';
 
 import { useProfileContext } from '@/contexts/Profile.context';
 import { createDocCollection } from '@/hooks/useOtherSearch';
+import { Routes } from '@/utils/routes';
 import { createContext, useContext, useEffect, useState } from 'react';
 import useSWR from 'swr';
 
@@ -73,7 +74,7 @@ export const StopsListContextProvider = ({ children }) => {
 	//
 	// B. Fetch data
 
-	const { data: allStopsData, isLoading: allStopsLoading } = useSWR<Stop[], Error>('https://api.carrismetropolitana.pt/v2/stops');
+	const { data: allStopsData, isLoading: allStopsLoading } = useSWR<Stop[], Error>(`${Routes.API}/v2/stops`);
 
 	//
 	// C. Transform data
