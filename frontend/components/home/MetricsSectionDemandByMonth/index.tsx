@@ -5,6 +5,7 @@
 import LiveIcon from '@/components/common/LiveIcon';
 import MetricsSectionDemandSkeleton from '@/components/home/MetricsSectionDemandSkeleton';
 import { MonthlyMetrics } from '@/types/metrics.types';
+import { Routes } from '@/utils/routes';
 import { Sparkline } from '@mantine/charts';
 import { ActionIcon, Popover } from '@mantine/core';
 import { IconInfoCircleFilled } from '@tabler/icons-react';
@@ -30,7 +31,7 @@ export default function Component() {
 	//
 	// B. Fetch data
 
-	const { data: metricsData } = useSWR<MonthlyMetrics[]>('https://api.carrismetropolitana.pt/metrics/demand/by_month');
+	const { data: metricsData } = useSWR<MonthlyMetrics[]>(`${Routes.API}/metrics/demand/by_month`);
 
 	//
 	// C. Transform data

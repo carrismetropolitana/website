@@ -4,6 +4,7 @@ import RegularListItem from '@/components/layout/RegularListItem';
 import Section from '@/components/layout/Section';
 import LineDisplay from '@/components/lines/LineDisplay';
 import { useLinesListContext } from '@/contexts/LinesList.context';
+import { RoutesSchedule } from '@/utils/routes';
 import { AutoSizer, CellMeasurer, CellMeasurerCache, List, WindowScroller } from 'react-virtualized';
 
 import styles from './styles.module.css';
@@ -55,7 +56,7 @@ export default function Component() {
 										return lineData && (
 											<CellMeasurer key={key} cache={rowMeasurementsCache} index={index} parent={parent}>
 												{({ registerChild }) => (
-													<RegularListItem key={lineData.line_id} href={`/lines/${lineData.line_id}`} refFn={(element: Element | null) => registerChild && registerChild(element || undefined)} style={style}>
+													<RegularListItem key={lineData.line_id} href={`${RoutesSchedule.LINES}/${lineData.line_id}`} refFn={(element: Element | null) => registerChild && registerChild(element || undefined)} style={style}>
 														<LineDisplay line={lineData} />
 													</RegularListItem>
 												)}

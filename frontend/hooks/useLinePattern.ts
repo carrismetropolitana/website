@@ -1,4 +1,5 @@
 import { Pattern, PatternGroup } from '@/types/lines.types';
+import { Routes } from '@/utils/routes';
 import { useState } from 'react';
 
 export interface UseLinePatterns {
@@ -23,7 +24,7 @@ const useLinePatterns = () => {
 
 		try {
 			const fetchPromises = pattern_ids.map(patternId =>
-				fetch(`https://api.carrismetropolitana.pt/v2/patterns/${patternId}`).then(response => response.json()),
+				fetch(`${Routes.API}/v2/patterns/${patternId}`).then(response => response.json()),
 			);
 			const resultData: Pattern[] = await Promise.all(fetchPromises);
 

@@ -5,6 +5,7 @@
 import type { Store } from '@/types/stores.types.js';
 
 import { moveMap } from '@/utils/map';
+import { Routes } from '@/utils/routes';
 import { createContext, useContext, useEffect, useState } from 'react';
 import { useMap } from 'react-map-gl/dist/esm/exports-maplibre';
 import useSWR from 'swr';
@@ -70,7 +71,7 @@ export const StoresListContextProvider = ({ children }) => {
 	//
 	// B. Fetch data
 
-	const { data: allStoresData, isLoading: allStoresLoading } = useSWR<Store[], Error>('https://api.carrismetropolitana.pt/datasets/facilities/encm');
+	const { data: allStoresData, isLoading: allStoresLoading } = useSWR<Store[], Error>(`${Routes.API}/datasets/facilities/encm`);
 
 	//
 	// C. Transform data

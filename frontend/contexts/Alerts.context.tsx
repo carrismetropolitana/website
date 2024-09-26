@@ -5,6 +5,7 @@
 import type { Alert, SimplifiedAlert } from '@/types/alerts.types.js';
 
 import convertToSimplifiedAlert from '@/utils/convertToSimplifiedAlert';
+import { Routes } from '@/utils/routes';
 import { useLocale } from 'next-intl';
 import { createContext, useContext, useEffect, useState } from 'react';
 import useSWR from 'swr';
@@ -53,7 +54,7 @@ export const AlertsContextProvider = ({ children }) => {
 	//
 	// B. Fetch data
 
-	const { data: allAlertsData, isLoading: allAlertsLoading } = useSWR<Alert[], Error>('https://api.carrismetropolitana.pt/v2/alerts');
+	const { data: allAlertsData, isLoading: allAlertsLoading } = useSWR<Alert[], Error>(`${Routes.API}/v2/alerts`);
 
 	//
 	// C. Transform data

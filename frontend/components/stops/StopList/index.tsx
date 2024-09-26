@@ -1,6 +1,7 @@
 import FacilityIcon from '@/components/common/FacilityIcon';
 import LiveIcon from '@/components/common/LiveIcon';
 import Timetable from '@/components/common/Timetable';
+import { Routes } from '@/utils/routes';
 import { Pattern, PatternRealtime, Stop } from '@/utils/types';
 import { UnstyledButton } from '@mantine/core';
 import { IconClock, IconClockHour9, IconClockSearch } from '@tabler/icons-react';
@@ -41,7 +42,7 @@ export default function Component(
 	const today = dayjs().format('YYYYMMDD');
 	const isToday = dayjs(date).format('YYYYMMDD') === today;
 
-	const { data: patternRealtime } = useSWR<PatternRealtime[]>('https://api.carrismetropolitana.pt/patterns/' + pattern.pattern_id + '/realtime', {
+	const { data: patternRealtime } = useSWR<PatternRealtime[]>(`${Routes.API}/patterns/` + pattern.pattern_id + '/realtime', {
 		refreshInterval: 10000,
 	});
 	const sortedStops = pattern.path.sort((a, b) => a.stop_sequence - b.stop_sequence);

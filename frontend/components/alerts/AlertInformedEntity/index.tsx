@@ -7,6 +7,7 @@ import type { Stop } from '@/types/stops.types';
 
 import LineBadge from '@/components/common/LineBadge';
 import { useRouter } from '@/i18n/routing';
+import { Routes } from '@/utils/routes';
 import useSWR from 'swr';
 
 /* * */
@@ -29,14 +30,14 @@ export default function Component({ lineId, stopId }: Props) {
 	//
 	// B. Fetch data
 
-	const { data: lineData } = useSWR<Line>(lineId && `https://api.carrismetropolitana.pt/v2/lines/${lineId}`);
-	const { data: stopData } = useSWR<Stop>(stopId && `https://api.carrismetropolitana.pt/v2/stops/${stopId}`);
+	const { data: lineData } = useSWR<Line>(lineId && `${Routes.API}/v2/lines/${lineId}`);
+	const { data: stopData } = useSWR<Stop>(stopId && `${Routes.API}/v2/stops/${stopId}`);
 
 	//
 	// C. Handle actions
 
 	const handleLineBadgeClick = () => {
-		router.push(`/lines/${lineId}`);
+		router.push(`${Routes.LINES}/${lineId}`);
 	};
 
 	//

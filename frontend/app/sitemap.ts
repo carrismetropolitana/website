@@ -1,5 +1,7 @@
 /* * */
 
+import { Routes } from '@/utils/routes';
+
 export default async function Sitemap() {
 	//
 
@@ -11,10 +13,10 @@ export default async function Sitemap() {
 	//
 	// B. Fetch data
 
-	const allStopsResponse = await fetch('https://api.carrismetropolitana.pt/stops');
+	const allStopsResponse = await fetch(`${Routes.API}/stops`);
 	const allStopsData = await allStopsResponse.json();
 
-	const allLinesResponse = await fetch('https://api.carrismetropolitana.pt/lines');
+	const allLinesResponse = await fetch(`${Routes.API}/lines`);
 	const allLinesData = await allLinesResponse.json();
 
 	//
