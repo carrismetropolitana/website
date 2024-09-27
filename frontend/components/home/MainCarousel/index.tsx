@@ -14,7 +14,7 @@ import styles from './styles.module.css';
 
 /* * */
 
-const AUTOPLAY_DELAY = 1000; // 10 seconds
+const AUTOPLAY_DELAY = 10000; // 10 seconds
 
 /* * */
 

@@ -6,8 +6,9 @@ import mapSettings from '@/settings/map.settings';
 import { IconsMap } from '@/utils/assets';
 import maplibregl from 'maplibre-gl';
 import { useCallback, useEffect, useState } from 'react';
-import Map, { MapRef, useMap } from 'react-map-gl/maplibre';
+import Map, { FullscreenControl, GeolocateControl, MapRef, NavigationControl, ScaleControl, useMap } from 'react-map-gl/maplibre';
 
+import MapToolBar from '../MapToolbar';
 import styles from './styles.module.css';
 
 /* * */
@@ -25,6 +26,7 @@ const MAP_LOAD_ASSETS = [
 interface Props {
 	children: React.ReactNode
 	fullscreen?: boolean
+	geolocate?: boolean
 	id?: string
 	interactiveLayerIds?: string[]
 	mapObject?: MapRef
@@ -40,6 +42,7 @@ interface Props {
 	onMoveStart?: (arg0) => void
 	scale?: boolean
 	scrollZoom?: boolean
+	toolbar?: boolean
 }
 
 /* * */
@@ -47,6 +50,7 @@ interface Props {
 export default function Component({
 	children,
 	fullscreen = true,
+	geolocate = true,
 	id,
 	interactiveLayerIds = [],
 	mapStyle = 'default',
@@ -56,11 +60,11 @@ export default function Component({
 	onMouseLeave,
 	onMouseOut,
 	onMouseOver,
-	onMove,
 	onMoveEnd,
 	onMoveStart,
-	scale = true,
+	scale = false,
 	scrollZoom = true,
+	toolbar = true,
 }: Props) {
 	//
 	// A. Setup variables
@@ -118,9 +122,9 @@ export default function Component({
 
 	//
 	// C. Render components
-
 	return (
 		<div className={styles.container}>
+			{toolbar && <MapToolBar className={styles.toolbar} />}
 			<Map
 				attributionControl={false}
 				cursor={cursor}
@@ -141,8 +145,12 @@ export default function Component({
 				onMoveEnd={handleOnMoveEnd}
 				onMoveStart={handleOnMoveStart}
 				scrollZoom={scrollZoom}
-				style={{ height: '100%', width: '100%' }}
+				style={{ height: '100%', position: 'relative', width: '100%' }}
 			>
+				{navigation && <NavigationControl />}
+				{fullscreen && <FullscreenControl />}
+				{geolocate && <GeolocateControl />}
+				{scale && <ScaleControl />}
 				<div className={styles.childrenWrapper}>
 					{children}
 				</div>

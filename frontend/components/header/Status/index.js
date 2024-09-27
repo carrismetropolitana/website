@@ -15,7 +15,7 @@ export default function Component() {
 	//
 	// A. Fetch data
 
-	// const { data: appStatusData } = useSWR('https://api.carrismetropolitana.pt/status/message');
+	// const { data: appStatusData } = useSWR(`${Routes.API}/status/message`);
 	const appStatusData = null;
 
 	//

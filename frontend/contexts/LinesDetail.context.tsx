@@ -10,6 +10,7 @@ import type { DemandByLine } from '@/utils/types';
 import { useOperationalDayContext } from '@/contexts/OperationalDay.context';
 import { useProfileContext } from '@/contexts/Profile.context';
 import convertToSimplifiedAlert from '@/utils/convertToSimplifiedAlert';
+import { Routes } from '@/utils/routes';
 import { createContext, useContext, useEffect, useState } from 'react';
 import useSWR from 'swr';
 
@@ -87,16 +88,16 @@ export const LinesDetailContextProvider = ({ children, lineId }) => {
 	//
 	// B. Fetch data
 
-	const { data: lineData, isLoading: lineLoading } = useSWR<Line, Error>(`https://api.carrismetropolitana.pt/v2/lines/${lineId}`);
-	const { data: allAlertsData, isLoading: allAlertsLoading } = useSWR<Alert[], Error>('https://api.carrismetropolitana.pt/v2/alerts');
-	const { data: allDemandByLineData } = useSWR<DemandByLine[], Error>('https://api.carrismetropolitana.pt/v2/metrics/demand/by_line');
+	const { data: lineData, isLoading: lineLoading } = useSWR<Line, Error>(`${Routes.API}/v2/lines/${lineId}`);
+	const { data: allAlertsData, isLoading: allAlertsLoading } = useSWR<Alert[], Error>(`${Routes.API}/v2/alerts`);
+	const { data: allDemandByLineData } = useSWR<DemandByLine[], Error>(`${Routes.API}/v2/metrics/demand/by_line`);
 
 	useEffect(() => {
 		(async () => {
 			try {
 				if (!lineData) return;
 				const fetchPromises = lineData.route_ids.map((routeId) => {
-					return fetch(`https://api.carrismetropolitana.pt/v2/routes/${routeId}`).then(response => response.json());
+					return fetch(`${Routes.API}/v2/routes/${routeId}`).then(response => response.json());
 				});
 				const resultData = await Promise.all(fetchPromises);
 				setDataRoutesState(resultData);
@@ -112,7 +113,7 @@ export const LinesDetailContextProvider = ({ children, lineId }) => {
 			try {
 				if (!lineData) return;
 				const fetchPromises = lineData.pattern_ids.map((patternId) => {
-					return fetch(`https://api.carrismetropolitana.pt/v2/patterns/${patternId}`).then(response => response.json());
+					return fetch(`${Routes.API}/v2/patterns/${patternId}`).then(response => response.json());
 				});
 				const resultData = await Promise.all(fetchPromises);
 				setDataAllPatternsState(resultData);
@@ -127,7 +128,7 @@ export const LinesDetailContextProvider = ({ children, lineId }) => {
 		(async () => {
 			try {
 				if (!dataActivePatternGroupState) return;
-				const resultData = await fetch(`https://api.carrismetropolitana.pt/v2/shapes/${dataActivePatternGroupState.shape_id}`).then(response => response.json());
+				const resultData = await fetch(`${Routes.API}/v2/shapes/${dataActivePatternGroupState.shape_id}`).then(response => response.json());
 				setDataActiveShapeState(resultData);
 			}
 			catch (error) {

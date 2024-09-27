@@ -3,13 +3,14 @@
 /* * */
 
 import { Link } from '@/i18n/routing';
+import { RoutesSocial } from '@/utils/routes';
 import pjson from 'package.json';
 
 /* * */
 
 export default function Component({ className }) {
 	return (
-		<Link className={className} href="https://www.github.com/carrismetropolitana/website" target="_blank">
+		<Link className={className} href={`${RoutesSocial.GITHUB}/website`} target="_blank">
 			{pjson.version}
 		</Link>
 	);

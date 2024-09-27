@@ -2,8 +2,7 @@
 /* * */
 
 import { PatternGroup } from '@/types/lines.types';
-import { Flex, Group, Select, SelectProps, Text } from '@mantine/core';
-import { DateTime } from 'luxon';
+import { ComboboxItemGroup, Flex, Group, Select, SelectProps, Text } from '@mantine/core';
 import { useTranslations } from 'next-intl';
 import { useMemo } from 'react';
 
@@ -24,8 +23,30 @@ export default function Component({ date_filter, onChange, patterns, value, ...p
 	const validPatternGroupsSelectOptions = useMemo(() => {
 		if (!patterns) return [];
 
+		const data: ComboboxItemGroup[] = [];
+
 		// Filter patterns by date
-		return patterns.map(patternGroupData => ({ disabled: date_filter ? !patternGroupData.valid_on.includes(date_filter) : false, label: patternGroupData.headsign, value: patternGroupData.pattern_group_id }));
+		patterns.map((patternGroupData) => {
+			const group = data.find(group => group.group === patternGroupData.route_long_name);
+
+			const item = {
+				disabled: date_filter ? !patternGroupData.valid_on.includes(date_filter) : false,
+				label: patternGroupData.headsign,
+				value: patternGroupData.pattern_group_id,
+			};
+
+			if (group) {
+				group.items.push(item);
+			}
+			else {
+				data.push({
+					group: patternGroupData.route_long_name,
+					items: [item],
+				});
+			}
+		});
+
+		return data;
 	}, [patterns]);
 
 	//

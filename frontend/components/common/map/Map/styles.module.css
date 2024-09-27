@@ -4,9 +4,9 @@
 .container {
 	width: 100%;
 	height: 100%;
-	display: grid;
+	/* display: grid;
 	grid-template-columns: 1fr;
-	grid-template-rows: 1fr auto;
+	grid-template-rows: 1fr auto; */
 	flex-direction: column;
 	position: relative;
 }
@@ -40,4 +40,10 @@
 .attributionWrapper a:hover{
 	color: var(--color-primary-black);
 	text-decoration: underline;
+}
+
+/* * */
+/* Toolbar */
+.toolbar{
+	margin: var(--size-spacing-10) var(--size-spacing-5);
 }

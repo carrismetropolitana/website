@@ -1,3 +1,5 @@
+'use client';
+
 /* * */
 
 import { Center, rem, Text, TextInput, TextInputProps, Tooltip } from '@mantine/core';

@@ -16,7 +16,7 @@ export default function Component() {
 	// A. Setup variables
 
 	const t = useTranslations('home.SchedulesSection');
-	const mainNavLabels = useTranslations('settings.navigation.main');
+	const mainNavLabels = useTranslations('settings.navigation');
 	const supportNavigationGroup = mainNavigationGroup.find(navGroup => navGroup._id === 'schedules');
 
 	//

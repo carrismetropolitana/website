@@ -1,0 +1,52 @@
+.container {
+    display: grid;
+    align-items: center;
+    grid-template-rows: auto 1fr; /* Default for smaller screens */
+    grid-template-columns: 1fr; /* Single column for smaller screens */
+    gap: 10px; /* Optional spacing */
+
+    & p {
+        font-weight: 500;
+        font-size: 14px;
+        color: var(--color-system-text-200);
+    }
+}
+
+.pricing {
+    border-top: 1px dashed var(--color-system-border-100);
+    padding-top: 10px;
+    display: grid;
+    grid-template-columns: 1fr 1fr; /* Two columns for the grouped items */
+    gap: 10px; /* Optional spacing */
+}
+
+.pricingItem {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    & > div {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+    }
+}
+
+
+/* Desktop layout */
+@media (min-width: 768px) {
+    .container {
+        grid-template-rows: none; /* Removes row definition */
+        grid-template-columns: 3fr 1fr 1fr; /* 3fr for item1, 1fr for each grouped item */
+        gap: 20px; /* Optional spacing */
+    }
+
+    .pricing {
+        border-top: none;
+        justify-content: space-between; /* Aligns the grouped items to the edges */
+        display: contents; /* Allows its children to behave as if they are direct children of .container */
+    }
+}

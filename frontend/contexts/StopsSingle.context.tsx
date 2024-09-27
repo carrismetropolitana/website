@@ -9,6 +9,7 @@ import { useProfileContext } from '@/contexts/Profile.context';
 import { Alert, SimplifiedAlert } from '@/types/alerts.types';
 import { Line, Pattern, PatternGroup, Route } from '@/types/lines.types';
 import convertToSimplifiedAlert from '@/utils/convertToSimplifiedAlert';
+import { Routes } from '@/utils/routes';
 import { createContext, useContext, useEffect, useMemo, useState } from 'react';
 import useSWR from 'swr';
 
@@ -81,20 +82,20 @@ export const StopsSingleContextProvider = ({ children, stopId }: { children: Rea
 
 	//
 	// B. Fetch data
-	const { data: allLinesData, isLoading: allLinesLoading } = useSWR<Line[], Error>('https://api.carrismetropolitana.pt/v2/lines');
+	const { data: allLinesData, isLoading: allLinesLoading } = useSWR<Line[], Error>(`${Routes.API}/v2/lines`);
 
-	const { data: allStopData, isLoading: allStopLoading } = useSWR<Stop[], Error>('https://api.carrismetropolitana.pt/v2/stops');
+	const { data: allStopData, isLoading: allStopLoading } = useSWR<Stop[], Error>(`${Routes.API}/v2/stops`);
 	const stopData = allStopData?.find(stop => stop.id === stopIdState);
 
-	// const { data: stopData, isLoading: stopLoading } = useSWR<Stop, Error>(`https://api.carrismetropolitana.pt/v2/stops/${stopIdState}`);
-	const { data: allAlertsData, isLoading: allAlertsLoading } = useSWR<Alert[], Error>('https://api.carrismetropolitana.pt/v2/alerts');
+	// const { data: stopData, isLoading: stopLoading } = useSWR<Stop, Error>(`${Routes.API}/v2/stops/${stopIdState}`);
+	const { data: allAlertsData, isLoading: allAlertsLoading } = useSWR<Alert[], Error>(`${Routes.API}/v2/alerts`);
 
 	useEffect(() => {
 		(async () => {
 			try {
 				if (!stopData) return;
 				const fetchPromises = stopData.routes.map((routeId) => {
-					return fetch(`https://api.carrismetropolitana.pt/v2/routes/${routeId}`).then(response => response.json());
+					return fetch(`${Routes.API}/v2/routes/${routeId}`).then(response => response.json());
 				});
 				const resultData = await Promise.all(fetchPromises);
 				setDataRoutesState(resultData);
@@ -110,7 +111,7 @@ export const StopsSingleContextProvider = ({ children, stopId }: { children: Rea
 		// Required to prevent unordered responses from overwriting the state
 		let isCancelled = false;
 		(async () => {
-			const realtimeData = await fetch(`https://api.carrismetropolitana.pt/v2/stops/${stopId}/realtime`).then(response => response.json());
+			const realtimeData = await fetch(`${Routes.API}/v2/stops/${stopId}/realtime`).then(response => response.json());
 			if (!isCancelled) {
 				setDataRealtimeState(realtimeData);
 			}
@@ -139,7 +140,7 @@ export const StopsSingleContextProvider = ({ children, stopId }: { children: Rea
 			try {
 				if (!stopData) return;
 				const fetchPromises = stopData.patterns.map((patternId) => {
-					return fetch(`https://api.carrismetropolitana.pt/v2/patterns/${patternId}`).then(response => response.json());
+					return fetch(`${Routes.API}/v2/patterns/${patternId}`).then(response => response.json());
 				});
 				const resultData = await Promise.all(fetchPromises);
 				setDataAllPatternsState(resultData);
@@ -199,7 +200,7 @@ export const StopsSingleContextProvider = ({ children, stopId }: { children: Rea
 
 	const setStopId = (stopId: string) => {
 		// TODO change this into proper state management
-		window.history.replaceState({}, '', `/stops/${stopId}`);
+		window.history.replaceState({}, '', `${Routes.STOPS}/${stopId}`);
 		setStopIdState(stopId);
 	};
 

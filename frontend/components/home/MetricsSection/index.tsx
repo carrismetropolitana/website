@@ -9,6 +9,7 @@ import MetricsSectionDemandByOperator from '@/components/home/MetricsSectionDema
 import Section from '@/components/layout/Section';
 import { OperatorMetrics } from '@/types/metrics.types';
 import getOperationalDay from '@/utils/operation';
+import { Routes } from '@/utils/routes';
 import { useTranslations } from 'next-intl';
 import useSWR from 'swr';
 
@@ -26,7 +27,7 @@ export default function Component() {
 
 	//
 	// B. Fetch Data
-	const { data, isLoading } = useSWR<OperatorMetrics[]>(`https://api.carrismetropolitana.pt/v2/metrics/demand/operator/cm/${getOperationalDay()}`, { refreshInterval: 5 * 60 * 1000 }); // 5 minutes
+	const { data, isLoading } = useSWR<OperatorMetrics[]>(`${Routes.API}/v2/metrics/demand/operator/cm/${getOperationalDay()}`, { refreshInterval: 5 * 60 * 1000 }); // 5 minutes
 
 	//
 	// C. Render components

@@ -1,6 +1,7 @@
 /* * */
 
 import { Link } from '@/i18n/routing';
+import { ImagesCommon } from '@/utils/assets';
 import { Image } from '@mantine/core';
 import { IconArrowRight } from '@tabler/icons-react';
 import { useTranslations } from 'next-intl';
@@ -31,7 +32,7 @@ export default function Component({ coverImageSrc, href, target, title }: Props)
 
 	if (!href) {
 		return (
-			<Image alt={title} fallbackSrc="/news/placeholder.png" src={coverImageSrc} />
+			<Image alt={title} fallbackSrc={ImagesCommon.PLACEHOLDER} src={coverImageSrc} />
 		);
 	}
 
@@ -41,7 +42,7 @@ export default function Component({ coverImageSrc, href, target, title }: Props)
 				{t('learn_more')}
 				<IconArrowRight size={18} />
 			</Link>
-			<Image alt={title} fallbackSrc="/news/placeholder.png" src={coverImageSrc} />
+			<Image alt={title} fallbackSrc={ImagesCommon.PLACEHOLDER} src={coverImageSrc} />
 		</div>
 	);
 

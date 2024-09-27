@@ -8,7 +8,7 @@
 			"refuse": "Não, obrigado"
 		}
 	},
-	"common":{
+	"common": {
 		"SelectOperationalDay": {
 			"today": "Hoje",
 			"tomorrow": "Amanhã"
@@ -89,7 +89,7 @@
 		"redirect": "A voltar à página de principal e em {value} segundo{s}."
 	},
 	"layout": {
-		"Section":{
+		"Section": {
 			"back": {
 				"label": "Voltar"
 			}
@@ -99,7 +99,7 @@
 		}
 	},
 	"planner": {
-		"Page":{
+		"Page": {
 			"heading": "Os nossos parceiros",
 			"subheading": "Porque os nossos dados são abertos, existem várias aplicações que oferecem experiências personalizadas para melhorar o seu dia-a-dia nos transportes.",
 			"disclaimer": "Edite esta página no Github se pretende incluir a sua aplicação. A ordem é aleatória. Apenas são permitidas entradas que disponibilizem simultaneamente horários planeados e em tempo real ou posição de veículos."
@@ -111,9 +111,9 @@
 		}
 	},
 	"faq": {
-		"Page":{
+		"Page": {
 			"heading": "Perguntas Frequentes",
-			"subheading":"Nesta página encontra respostas às perguntas mais frequentes sobre o nosso serviço. Caso pretenda esclarecimentos adicionais não hesite em falar connosco.",
+			"subheading": "Nesta página encontra respostas às perguntas mais frequentes sobre o nosso serviço. Caso pretenda esclarecimentos adicionais não hesite em falar connosco.",
 			"contacts": "Contactos"
 		},
 		"FaqList": {
@@ -121,15 +121,15 @@
 		}
 	},
 	"app": {
-		"DownloadProduction":{
+		"DownloadProduction": {
 			"heading": "App CMetropolitana",
-			"subheading":"Faça o download da app Carris Metropolitana para iOS ou Android.",
+			"subheading": "Faça o download da app Carris Metropolitana para iOS ou Android.",
 			"iphone": "Apple iPhone",
 			"android": "Android"
 		},
-		"DownloadBeta":{
+		"DownloadBeta": {
 			"heading": "Beta: App CMetropolitana",
-			"subheading":"Faça o download da versão beta da app Carris Metropolitana para iOS ou Android, e contribua para o futuro desta aplicação.",
+			"subheading": "Faça o download da versão beta da app Carris Metropolitana para iOS ou Android, e contribua para o futuro desta aplicação.",
 			"iphone": "Apple iPhone",
 			"android": "Android"
 		},
@@ -159,10 +159,10 @@
 				"favorites": "{count, plural, =0 {Nenhuma linha favorita encontrada.} one {Encontrada # linha favorita:} other {Encontradas # linhas favoritas:}}"
 			}
 		},
-		"LinesListViewFavorites":{
+		"LinesListViewFavorites": {
 			"no_favorites": "Ainda não tem linhas favoritas"
 		},
-		"LinesDetail":{
+		"LinesDetail": {
 			"heading": "Pesquisar Linhas",
 			"toggle_favorite_error": "Erro ao adicionar a linha aos favoritos. {error}"
 		},
@@ -179,10 +179,10 @@
 		"LinesDetailPathMap": {
 			"active_vehicles_counter": "{count, plural, =0 {Nenhum veículo em circulação} one {# veículo em circulação} other {# veículos em circulação}}"
 		},
-		"SelectActivePatternGroup":{
+		"SelectActivePatternGroup": {
 			"placeholder": "Selecionar percurso/destino..."
 		},
-		"SelectActivePatternGroupExplainer":{
+		"SelectActivePatternGroupExplainer": {
 			"toggle": "O que é o percurso/destino de uma linha?"
 		},
 		"AlertsCarousel": {
@@ -200,15 +200,15 @@
 		"collapse_filters": "Esconder Filtros"
 	},
 	"alerts": {
-		"AlertsList":{
+		"AlertsList": {
 			"heading": "Alertas de Serviço",
-			"subheading":"Fique a par de todas as alterações à rede. Lorem ipsum dolor sit amet."
+			"subheading": "Fique a par de todas as alterações à rede. Lorem ipsum dolor sit amet."
 		},
-		"AlertsDetail":{
+		"AlertsDetail": {
 			"open_full_image": "Abrir imagem numa nova janela",
 			"more_info": "Mais informações"
 		},
-		"AlertsListGroup":{
+		"AlertsListGroup": {
 			"label": "{count, plural, one {Alerta ativo} other {Alertas ativos}}",
 			"titles": {
 				"future": "A partir de {value, date, dayShort} {value, date, monthLong} {value, date, yearLong}",
@@ -226,7 +226,7 @@
 				"action_2": "Instalar a App"
 			}
 		},
-		"AlertsListItem":{
+		"AlertsListItem": {
 			"open": "Abrir"
 		},
 		"AlertsListToolbar": {
@@ -271,9 +271,9 @@
 		}
 	},
 	"stores": {
-		"StoresList":{
+		"StoresList": {
 			"heading": "Lojas e Rede de Agentes",
-			"subheading":"Disponíveis para todos os passageiros, os Espaços navegante® estão dedicados a prestar informações sobre a rede e bilhética Carris Metropolitana, possibilitando o esclarecimento de dúvidas, a emissão de cartões navegante® e a adesão a perfis e descontos. É possível também efetuar o carregamento de títulos nos pontos de atendimento PayShop® da rede de agentes navegante®.",
+			"subheading": "Disponíveis para todos os passageiros, os Espaços navegante® estão dedicados a prestar informações sobre a rede e bilhética Carris Metropolitana, possibilitando o esclarecimento de dúvidas, a emissão de cartões navegante® e a adesão a perfis e descontos. É possível também efetuar o carregamento de títulos nos pontos de atendimento PayShop® da rede de agentes navegante®.",
 			"external_link": "Rede de agentes navegante®"
 		},
 		"StoresListToolbar": {
@@ -380,42 +380,39 @@
 	},
 	"settings": {
 		"navigation": {
-			"main": {
-				"schedules": {
-					"label": "Horários",
-					"links": {
-						"lines": "Pesquisar Linhas",
-						"stops": "Pesquisar Paragens",
-						"alerts": "Alertas de Serviço",
-						"planner": "Planear Viagem",
-						"schools": "Escolas & Universidades"
-					}
-				},
-				"tarifs": {
-					"label": "Tarifas",
-					"links": {
-						"tickets": "Bilhetes Ocasionais",
-						"cards": "Passe Mensal",
-						"helpdesks": "Onde comprar"
-					}
-				},
-				"support": {
-					"label": "Apoio ao Cliente",
-					"links": {
-						"stores": "Lojas e Rede de Agentes",
-						"faq": "Perguntas Frequentes",
-						"lost-and-found": "Perdidos e Achados",
-						"contacts": "Contactos"
-					}
+			"schedules": {
+				"label": "Horários",
+				"links": {
+					"lines": "Pesquisar Linhas",
+					"stops": "Pesquisar Paragens",
+					"alerts": "Alertas de Serviço",
+					"planner": "Planear Viagem",
+					"schools": "Escolas & Universidades"
+				}
+			},
+			"tarifs": {
+				"label": "Tarifas",
+				"links": {
+					"tickets": "Bilhetes Ocasionais",
+					"cards": "Passe Mensal",
+					"helpdesks": "Onde comprar"
+				}
+			},
+			"support": {
+				"label": "Apoio ao Cliente",
+				"links": {
+					"stores": "Lojas e Rede de Agentes",
+					"faq": "Perguntas Frequentes",
+					"lost-and-found": "Perdidos e Achados",
+					"contacts": "Contactos"
 				}
 			},
 			"account": {
-				"primary": {
-					"links": {
-						"configs": "Configurações",
-						"favorites": "Favoritos",
-						"profile": "Ver perfil"
-					}
+				"label": "Conta",
+				"links": {
+					"configs": "Configurações",
+					"favorites": "Favoritos",
+					"profile": "Ver perfil"
 				}
 			},
 			"footer": {
@@ -452,7 +449,7 @@
 		}
 	},
 	"footer": {
-		"DebugToggle":{
+		"DebugToggle": {
 			"enabled": "Desligar Debug",
 			"disabled": "Ligar Debug"
 		},
@@ -469,13 +466,13 @@
 			"learn_more": "Saber mais"
 		},
 		"TarifsSection": {
-			"section_heading":"Tarifas"
+			"section_heading": "Tarifas"
 		},
 		"SchedulesSection": {
-			"section_heading":"Horários"
+			"section_heading": "Horários"
 		},
 		"SupportSection": {
-			"section_heading":"Apoio ao Cliente"
+			"section_heading": "Apoio ao Cliente"
 		},
 		"NewsSection": {
 			"section_heading": "Notícias"
@@ -531,135 +528,134 @@
 	},
 	"SelectLine": {
 		"label": "Procurar linha por número, nome, localização...",
-    "placeholder": "Procurar linha por número, nome, localização...",
-    "nothing_found": "Nenhum Resultado Encontrado"
+		"placeholder": "Procurar linha por número, nome, localização...",
+		"nothing_found": "Nenhum Resultado Encontrado"
 	},
 	"SelectStop": {
 		"label": "Procurar paragem por id, nome, localização...",
-    "placeholder": "Procurar paragem por id, nome, localização...",
-    "nothing_found": "Nenhum Resultado Encontrado"
+		"placeholder": "Procurar paragem por id, nome, localização...",
+		"nothing_found": "Nenhum Resultado Encontrado"
 	},
 	"AppUnavailable": {
 		"title": "Em Construção",
 		"subtitle": "Esta página ainda não está pronta :)"
 	},
 	"AppRedirect": {
-    "title": "A redirecionar...",
-    "subtitle": "Se não for redirecionado automaticamente utilize o botão seguinte.",
-    "action": "Ir para a Página"
-  },
+		"title": "A redirecionar...",
+		"subtitle": "Se não for redirecionado automaticamente utilize o botão seguinte.",
+		"action": "Ir para a Página"
+	},
 	"CookiesPage": {
-    "title": "Política de Cookies",
-    "sections": {
-      "intro": {
-        "title": "Política de Cookies",
-        "paragraphs": {
-          "1": "A TML recorre à utilização de cookies e outras tecnologias similares para perceber como o website é utilizado, de modo a melhorar o seus conteúdos, segurança e desempenho. O objetivo é proporcionar uma melhor experiência de navegação."
-        }
-      },
-      "question_1": {
-        "title": "O que são cookies e para que servem?",
-        "paragraphs": {
-          "1": "Cookies são pequenos ficheiros de texto com informação relevante que o dispositivo de acesso (computador, telemóvel, smartphone, tablet, etc…) carrega, através do navegador de internet (browser), quando um site é visitado pelo utilizador.",
-          "2": "A utilização de cookies ajuda os websites a reconhecer o dispositivo do utilizador na visita seguinte sendo com frequência imprescindível para o funcionamento do mesmo.",
-          "3": "Os cookies usados pela TML não recolhem informações pessoais que permitam identificar um utilizador em particular, guardando apenas informações anónimas, genéricas e agregadas."
-        }
-      },
-      "question_2": {
-        "title": "Que tipos de Cookies existem?",
-        "paragraphs": {
-          "1": "Atendendo às finalidades para os quais são utilizados, os cookies podem ser classificados do seguinte modo:",
-          "2": "- Cookies estritamente necessários (também conhecidos por essenciais, técnicos ou básicos): são necessários para que o utilizador consiga aceder a áreas específicas do website, permitindo a navegação e a utilização das suas aplicações, tal como o acesso a áreas seguras do site, através de login. Sem estes cookies, os serviços que o exijam não podem ser prestados;",
-          "3": "- Cookies de funcionalidade (também conhecidos por preferenciais):permitem o website relembrar as preferências do utilizador relativamente à sua navegação no website, não necessitando, assim, de o reconfigurar e personalizar cada vez que o visita;",
-          "4": "- Cookies de performance (também conhecidos por analíticos ou estatísticos): são essencialmente utilizados para analisar a forma como o utilizador utiliza o website, permitindo destacar artigos ou serviços que podem ser do seu interesse, monitorizar o desempenho do website, dado a conhecer quais as páginas mais populares, qual o método de ligação entre páginas que é mais eficaz ou para determinar a razão de algumas páginas estarem a receber mensagens de erro;",
-          "5": "- Cookies de publicidade (também conhecidos por marketing ou de rastreio): permitem proporcionar ao utilizador informação publicitária em função de suas preferências e interesses, bem como, ajudam a medir a eficácia dos anúncios mostrados (ex. quantas vezes são vistos)."
-        }
-      },
-      "question_3": {
-        "title": "Qual a validade dos Cookies?",
-        "paragraphs": {
-          "1": "Quanto à sua validade, os cookies podem também ser classificados da seguinte forma:",
-          "2": "- Cookies permanentes: são cookies que ficam armazenados nos dispositivos de acesso, ao nível do navegador de internet (browser), e são usados sempre que o utilizador visita novamente o website. Em geral, são usados para direcionar a navegação de acordo com os interesses do utilizador, permitindo a prestação de um serviço mais personalizado;",
-          "3": "- Cookies de sessão: são cookies temporários, que são gerados e estão disponíveis até o utilizador encerrar a sessão. Da próxima vez que o utilizador aceder ao seu navegador de internet (browser), os cookies já não se encontrarão armazenados."
-        }
-      },
-      "question_4": {
-        "title": "Quais as possíveis origens dos Cookies?",
-        "paragraphs": {
-          "1": "Em função da sua origem, os cookies podem ainda ter a seguinte tipologia:",
-          "2": "- Cookies próprios (ou de primeira parte):são os que são enviados para o dispositivo do utilizador a partir de um website/domínio gerido pelo próprio editor e a partir do qual é fornecido o serviço solicitado pelo utilizador (o proprietário do website);",
-          "3": "- Cookies de terceiros (ou de terceira parte):são os que são enviados para o dispositivo do utilizador a partir de um domínio que não é gerido pelo editor do website, mas por outras entidades a quem aproveitam a informação obtida através desses cookies. Dada a sua origem e natureza, a utilização deste tipo de cookies é da exclusiva responsabilidade das entidades que os utilizam."
-        }
-      },
-      "question_5": {
-        "title": "Quais os Cookies ou tecnologias similares utilizados neste site?",
-        "table": {
-          "header": {
-            "col_1": "Tipo",
-            "col_2": "Domínio/Origem",
-            "col_3": "Finalidade",
-            "col_4": "Validade"
-          },
-          "rows": {
-            "1": {
-              "col_1": "NEXT_LOCALE",
-              "col_2": "carrismetropolitana.pt",
-              "col_3": "Identificar o idioma de preferência do utilizador",
-              "col_4": "1 ano"
-            },
-            "2": {
-              "col_1": "anonymous_analytics_enabled",
-              "col_2": "carrismetropolitana.pt",
-              "col_3": "Obter informação estatística sobre a utilização do site",
-              "col_4": "1 ano"
-            }
-          }
-        }
-      },
-      "question_6": {
-        "title": "Consentimento do utilizador:",
-        "paragraphs": {
-          "1": "Por serem essenciais ao bom funcionamento do site, a utilização de cookies estritamente necessários ou essenciais, não carece de consentimento prévio por parte do utilizador. Os demais (cookies de funcionalidade, performance ou publicidade) apenas serão utilizados caso o utilizador expressamente autorize a sua utilização.",
-          "2": "Uma vez aceite, pode a qualquer momento revogar esse consentimento, bastando para o efeito voltar à Política de Cookies e selecionar “Recusar e Limpar Dados”."
-        },
-        "accept": "Aceitar Política de Cookies",
-        "enabled": "Política de Cookies aceite",
-        "refuse": "Recusar e Limpar Dados",
-        "refuse_modal": {
-          "title": "Retirar consentimento",
-          "description": "Ao retirar o consentimento irá apagar todos os dados guardados neste site, incluindo todas as paragens e linhas favoritas.",
-          "confirm": "Sim, apagar tudo",
-          "cancel": "Cancelar"
-        }
-      },
-      "question_7": {
-        "title": "Como controlar o uso de Cookies?",
-        "paragraphs": {
-          "1": "Os utilizadores podem ainda impedir ou condicionar a utilização de cookies através das configurações do seu navegador. Se limitar esta opção, no entanto, a utilização de alguns recursos ou o desempenho de alguns websites pode ficar condicionada.",
-          "2": "Saiba como em:"
-        }
-      },
-      "question_8": {
-        "title": "Direito de reserva",
-        "paragraphs": {
-          "1": "A TML reserva-se, a todo o tempo, no direito de alterar e/ou atualizar a informação constante da presente Política, assim como a faculdade de disponibilizar, a pedido, informações adicionais, mais detalhadas, sobre situações específicas em que são recolhidos e tratados dados pessoais."
-        }
-      }
-    }
-  },
-  "line":{
-    "pick_route": "Escolha um percurso/destino...",
-    "service_alerts": "Alertas de Serviço",
-    "from_until": "Entre {start} e {end}",
-    "route_explainer": "O que é o percurso/destino de uma linha?",
-    "next_buses": "Próximas circulações",
+		"title": "Política de Cookies",
+		"sections": {
+			"intro": {
+				"title": "Política de Cookies",
+				"paragraphs": {
+					"1": "A TML recorre à utilização de cookies e outras tecnologias similares para perceber como o website é utilizado, de modo a melhorar o seus conteúdos, segurança e desempenho. O objetivo é proporcionar uma melhor experiência de navegação."
+				}
+			},
+			"question_1": {
+				"title": "O que são cookies e para que servem?",
+				"paragraphs": {
+					"1": "Cookies são pequenos ficheiros de texto com informação relevante que o dispositivo de acesso (computador, telemóvel, smartphone, tablet, etc…) carrega, através do navegador de internet (browser), quando um site é visitado pelo utilizador.",
+					"2": "A utilização de cookies ajuda os websites a reconhecer o dispositivo do utilizador na visita seguinte sendo com frequência imprescindível para o funcionamento do mesmo.",
+					"3": "Os cookies usados pela TML não recolhem informações pessoais que permitam identificar um utilizador em particular, guardando apenas informações anónimas, genéricas e agregadas."
+				}
+			},
+			"question_2": {
+				"title": "Que tipos de Cookies existem?",
+				"paragraphs": {
+					"1": "Atendendo às finalidades para os quais são utilizados, os cookies podem ser classificados do seguinte modo:",
+					"2": "- Cookies estritamente necessários (também conhecidos por essenciais, técnicos ou básicos): são necessários para que o utilizador consiga aceder a áreas específicas do website, permitindo a navegação e a utilização das suas aplicações, tal como o acesso a áreas seguras do site, através de login. Sem estes cookies, os serviços que o exijam não podem ser prestados;",
+					"3": "- Cookies de funcionalidade (também conhecidos por preferenciais):permitem o website relembrar as preferências do utilizador relativamente à sua navegação no website, não necessitando, assim, de o reconfigurar e personalizar cada vez que o visita;",
+					"4": "- Cookies de performance (também conhecidos por analíticos ou estatísticos): são essencialmente utilizados para analisar a forma como o utilizador utiliza o website, permitindo destacar artigos ou serviços que podem ser do seu interesse, monitorizar o desempenho do website, dado a conhecer quais as páginas mais populares, qual o método de ligação entre páginas que é mais eficaz ou para determinar a razão de algumas páginas estarem a receber mensagens de erro;",
+					"5": "- Cookies de publicidade (também conhecidos por marketing ou de rastreio): permitem proporcionar ao utilizador informação publicitária em função de suas preferências e interesses, bem como, ajudam a medir a eficácia dos anúncios mostrados (ex. quantas vezes são vistos)."
+				}
+			},
+			"question_3": {
+				"title": "Qual a validade dos Cookies?",
+				"paragraphs": {
+					"1": "Quanto à sua validade, os cookies podem também ser classificados da seguinte forma:",
+					"2": "- Cookies permanentes: são cookies que ficam armazenados nos dispositivos de acesso, ao nível do navegador de internet (browser), e são usados sempre que o utilizador visita novamente o website. Em geral, são usados para direcionar a navegação de acordo com os interesses do utilizador, permitindo a prestação de um serviço mais personalizado;",
+					"3": "- Cookies de sessão: são cookies temporários, que são gerados e estão disponíveis até o utilizador encerrar a sessão. Da próxima vez que o utilizador aceder ao seu navegador de internet (browser), os cookies já não se encontrarão armazenados."
+				}
+			},
+			"question_4": {
+				"title": "Quais as possíveis origens dos Cookies?",
+				"paragraphs": {
+					"1": "Em função da sua origem, os cookies podem ainda ter a seguinte tipologia:",
+					"2": "- Cookies próprios (ou de primeira parte):são os que são enviados para o dispositivo do utilizador a partir de um website/domínio gerido pelo próprio editor e a partir do qual é fornecido o serviço solicitado pelo utilizador (o proprietário do website);",
+					"3": "- Cookies de terceiros (ou de terceira parte):são os que são enviados para o dispositivo do utilizador a partir de um domínio que não é gerido pelo editor do website, mas por outras entidades a quem aproveitam a informação obtida através desses cookies. Dada a sua origem e natureza, a utilização deste tipo de cookies é da exclusiva responsabilidade das entidades que os utilizam."
+				}
+			},
+			"question_5": {
+				"title": "Quais os Cookies ou tecnologias similares utilizados neste site?",
+				"table": {
+					"header": {
+						"col_1": "Tipo",
+						"col_2": "Domínio/Origem",
+						"col_3": "Finalidade",
+						"col_4": "Validade"
+					},
+					"rows": {
+						"1": {
+							"col_1": "NEXT_LOCALE",
+							"col_2": "carrismetropolitana.pt",
+							"col_3": "Identificar o idioma de preferência do utilizador",
+							"col_4": "1 ano"
+						},
+						"2": {
+							"col_1": "anonymous_analytics_enabled",
+							"col_2": "carrismetropolitana.pt",
+							"col_3": "Obter informação estatística sobre a utilização do site",
+							"col_4": "1 ano"
+						}
+					}
+				}
+			},
+			"question_6": {
+				"title": "Consentimento do utilizador:",
+				"paragraphs": {
+					"1": "Por serem essenciais ao bom funcionamento do site, a utilização de cookies estritamente necessários ou essenciais, não carece de consentimento prévio por parte do utilizador. Os demais (cookies de funcionalidade, performance ou publicidade) apenas serão utilizados caso o utilizador expressamente autorize a sua utilização.",
+					"2": "Uma vez aceite, pode a qualquer momento revogar esse consentimento, bastando para o efeito voltar à Política de Cookies e selecionar “Recusar e Limpar Dados”."
+				},
+				"accept": "Aceitar Política de Cookies",
+				"enabled": "Política de Cookies aceite",
+				"refuse": "Recusar e Limpar Dados",
+				"refuse_modal": {
+					"title": "Retirar consentimento",
+					"description": "Ao retirar o consentimento irá apagar todos os dados guardados neste site, incluindo todas as paragens e linhas favoritas.",
+					"confirm": "Sim, apagar tudo",
+					"cancel": "Cancelar"
+				}
+			},
+			"question_7": {
+				"title": "Como controlar o uso de Cookies?",
+				"paragraphs": {
+					"1": "Os utilizadores podem ainda impedir ou condicionar a utilização de cookies através das configurações do seu navegador. Se limitar esta opção, no entanto, a utilização de alguns recursos ou o desempenho de alguns websites pode ficar condicionada.",
+					"2": "Saiba como em:"
+				}
+			},
+			"question_8": {
+				"title": "Direito de reserva",
+				"paragraphs": {
+					"1": "A TML reserva-se, a todo o tempo, no direito de alterar e/ou atualizar a informação constante da presente Política, assim como a faculdade de disponibilizar, a pedido, informações adicionais, mais detalhadas, sobre situações específicas em que são recolhidos e tratados dados pessoais."
+				}
+			}
+		}
+	},
+	"line": {
+		"pick_route": "Escolha um percurso/destino...",
+		"service_alerts": "Alertas de Serviço",
+		"from_until": "Entre {start} e {end}",
+		"route_explainer": "O que é o percurso/destino de uma linha?",
+		"next_buses": "Próximas circulações",
 		"schedules": "Horários",
 		"stop_info": "Sobre a Paragem",
 		"scheduled_times": "Horários Planeados",
-		"num_passengers":"passageiros transportados nesta linha nos últimos 15 dias"
-
-  },
-	"schedule":{
+		"num_passengers": "passageiros transportados nesta linha nos últimos 15 dias"
+	},
+	"schedule": {
 		"hours": "Hora",
 		"minutes": "Min.",
 		"no_data": "Sem horários disponíveis",
@@ -682,12 +678,12 @@
 			}
 		}
 	},
-	"stops":{
-		"Single":{
+	"stops": {
+		"Single": {
 			"heading": "Pesquisar Paragens",
 			"lines_that_pass_here": "Linhas que passam nesta paragem"
 		},
-		"Page":{
+		"Page": {
 			"heading": "Pesquisar Paragens"
 		},
 		"PageToolbar": {
@@ -703,22 +699,22 @@
 				"favorites": "{count, plural, =0 {Nenhuma paragem favorita encontrada.} one {Encontrada # paragem favorita:} other {Encontradas # paragens favoritas:}}"
 			}
 		},
-		"NextBusRow":{
-      "passed": "{value}",
-      "scheduled": "{value}",
-      "arriving_now": "A chegar",
-      "realtime": "{value} min"
+		"NextBusRow": {
+			"passed": "{value}",
+			"scheduled": "{value}",
+			"arriving_now": "A chegar",
+			"realtime": "{value} min"
 		},
-		"NextBusesHeader":{
+		"NextBusesHeader": {
 			"line": "Linha",
 			"headsign": "Destino",
 			"estimate": "Previsão"
 		},
-		"NextBuses":{
+		"NextBuses": {
 			"show": "Ver passagens anteriores",
 			"hide": "Esconder passagens anteriores"
 		},
-		"FavoritesList":{
+		"FavoritesList": {
 			"no_favorites": "Ainda não tem paragens favoritas"
 		},
 		"expand_filters": "Expandir Filtros",
@@ -748,7 +744,7 @@
 		}
 	},
 	"favorites": {
-		"Page":{
+		"Page": {
 			"heading": "Favoritos"
 		},
 		"PageToolbar": {
@@ -769,8 +765,8 @@
 			"new": "Nova Notificação"
 		},
 		"Single": {
-			"heading_new" : "Nova Notificação",
-			"heading_edit" : "Editar Notificação",
+			"heading_new": "Nova Notificação",
+			"heading_edit": "Editar Notificação",
 			"line": "Notificar-me quando um veículo da linha",
 			"distance": "estiver a",
 			"distance_unit": {
@@ -798,5 +794,15 @@
 	},
 	"SelectPattern": {
 		"option_label": "Início do percurso: {locality}"
+	},
+	"map" : {
+		"toolbar": {
+			"style": {
+				"satellite": "Satélite",
+				"map": "Mapa"
+			},
+			"center_map" : "Centrar Mapa",
+			"open_google_maps": "Abrir no Google Maps"
+		}
 	}
 }

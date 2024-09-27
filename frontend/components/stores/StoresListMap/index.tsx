@@ -4,7 +4,7 @@
 
 import type { Feature, FeatureCollection, GeoJsonProperties, Geometry } from 'geojson';
 
-import Map from '@/components/common/Map';
+import Map from '@/components/common/map/Map';
 import { useStoresListContext } from '@/contexts/StoresList.context';
 import * as turf from '@turf/turf';
 import { useTranslations } from 'next-intl';

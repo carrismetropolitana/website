@@ -5,6 +5,7 @@
 import LineBadge from '@/components/common/LineBadge';
 import MetricsSectionDemandSkeleton from '@/components/home/MetricsSectionDemandSkeleton';
 import { useLinesListContext } from '@/contexts/LinesList.context';
+import { Routes } from '@/utils/routes';
 import { Sparkline } from '@mantine/charts';
 import { ActionIcon, Popover } from '@mantine/core';
 import { IconInfoCircleFilled } from '@tabler/icons-react';
@@ -31,7 +32,7 @@ export default function Component() {
 	//
 	// B. Fetch data
 
-	const { data: metricsData } = useSWR('https://api.carrismetropolitana.pt/metrics/demand/by_line');
+	const { data: metricsData } = useSWR(`${Routes.API}/metrics/demand/by_line`);
 
 	//
 	// C. Transform data

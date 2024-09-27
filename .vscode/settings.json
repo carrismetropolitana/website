@@ -54,6 +54,7 @@
 		"**/components/**/*.css": "${dirname} (${extname})"
 	},
 
-  	"typescript.tsdk": "./frontend/node_modules/typescript/lib"
+	"typescript.tsdk": "./frontend/node_modules/typescript/lib",
+	"svg.preview.background": "custom"
 
 }

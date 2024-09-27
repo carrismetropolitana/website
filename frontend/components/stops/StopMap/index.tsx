@@ -8,6 +8,7 @@ import { useStopsSingleContext } from '@/contexts/StopsSingle.context';
 import { Shape } from '@/types/lines.types';
 import { Stop } from '@/types/stops.types';
 import { IconsMap } from '@/utils/assets';
+import { Routes } from '@/utils/routes';
 import { VehiclePosition } from '@/utils/types';
 import * as turf from '@turf/turf';
 import { FeatureCollection } from 'geojson';
@@ -43,12 +44,12 @@ export default function FrontendStopsMap() {
 	//
 	// B. Fetch data
 
-	const { data: allStopsData } = useSWR<Stop[]>('https://api.carrismetropolitana.pt/stops');
-	const { data: allVehiclesData } = useSWR<VehiclePosition[]>('https://api.carrismetropolitana.pt/vehicles', { refreshInterval: 5000 });
-	// const { data: selectedPatternData } = useSWR<Pattern>(frontendStopsContext.data.active_pattern_group?.pattern_id && `https://api.carrismetropolitana.pt/v2/patterns/${frontendStopsContext.data.active_pattern_group.pattern_id}`);
+	const { data: allStopsData } = useSWR<Stop[]>(`${Routes.API}/stops`);
+	const { data: allVehiclesData } = useSWR<VehiclePosition[]>(`${Routes.API}/vehicles`, { refreshInterval: 5000 });
+	// const { data: selectedPatternData } = useSWR<Pattern>(frontendStopsContext.data.active_pattern_group?.pattern_id && `${Routes.API}/v2/patterns/${frontendStopsContext.data.active_pattern_group.pattern_id}`);
 	const selectedPatternData = stopsSingleContext.data.active_pattern_group;
 	// console.log(frontendStopsContext.data.active_pattern_group, selectedPatternData);
-	const { data: selectedShapeData } = useSWR<Shape>(stopsSingleContext.data.active_pattern_group?.shape_id && `https://api.carrismetropolitana.pt/shapes/${stopsSingleContext.data.active_pattern_group.shape_id}`);
+	const { data: selectedShapeData } = useSWR<Shape>(stopsSingleContext.data.active_pattern_group?.shape_id && `${Routes.API}/shapes/${stopsSingleContext.data.active_pattern_group.shape_id}`);
 
 	//
 	// C. Transform data

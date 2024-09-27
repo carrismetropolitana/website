@@ -2,6 +2,7 @@
 
 import { Link } from '@/i18n/routing';
 import { ImagesCommon } from '@/utils/assets';
+import { Routes } from '@/utils/routes';
 import { Image } from '@mantine/core';
 import { DateTime } from 'luxon';
 import { useTranslations } from 'next-intl';
@@ -33,7 +34,7 @@ export default function Component({ _id, coverImageSrc, publishDate, title }: Ne
 	// B. Render Components
 
 	return (
-		<Link className={styles.container} href={`/news/${_id}`}>
+		<Link className={styles.container} href={`${Routes.NEWS}/${_id}`}>
 			<Image alt={title} className={styles.coverImage} fallbackSrc={ImagesCommon.PLACEHOLDER} src={coverImageSrc} />
 			<p className={styles.publishDate}>{t('publish_date', { publishDate: publishDateObject })}</p>
 			<h4 className={styles.title}>{title}</h4>

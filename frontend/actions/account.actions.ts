@@ -10,10 +10,11 @@ import { ServerActionResult } from '@/types/actions.types';
 import { Profile } from '@/types/profile.type';
 // import { Profile } from '@/types/profile.type';
 import { generateJWT } from '@/utils/jwt';
+import { Routes } from '@/utils/routes';
 
 /* * */
 
-const namespace = `${process.env.ACCOUNTS_API_URL}/v1/accounts`;
+const namespace = `${Routes.API_ACCOUNTS}/v1/accounts`;
 
 /**
  * Gets the profile of a user
@@ -22,10 +23,9 @@ const namespace = `${process.env.ACCOUNTS_API_URL}/v1/accounts`;
  * @returns Promise<ServerActionResult<Profile>> - The profile of the user
 */
 export async function getProfile(device_id: string): Promise<ServerActionResult<Profile>> {
-	const url = `${namespace}/${device_id}`;
-	const auth = await generateJWT({ device_id });
-
 	try {
+		const url = `${namespace}/${device_id}`;
+		const auth = await generateJWT({ device_id });
 		const res = await fetch(url, {
 			headers: {
 				'Authorization': `Bearer ${auth}`,
