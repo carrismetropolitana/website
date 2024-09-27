@@ -1,244 +1,224 @@
 {
-	"analytics": {
-		"ConsentPopup": {
-			"title": "Respeitamos a sua Privacidade",
-			"text": "Com o objetivo de melhorar a performance, os conteúdos e a segurança deste site, a TML pretende recorrer à utilização de cookies ou tecnologias similares.",
-			"privacy_policy": "Consultar Política de Cookies",
-			"accept": "OK",
-			"refuse": "Não, obrigado"
-		}
-	},
-	"common": {
-		"SelectOperationalDay": {
-			"today": "Hoje",
-			"tomorrow": "Amanhã"
-		},
-		"TimetableSchedules": {
-			"hours": "Hora",
-			"minutes": "Min."
-		},
-		"TimetableExceptionsLink": {
-			"variant": "<exceptionId>{exception_id})</exceptionId> Percurso <routeLongName>{route_long_name}</routeLongName> com destino a <patternHeadsign>{pattern_headsign}</patternHeadsign>",
-			"schedule": "Min."
-		},
-		"button": {
-			"save": "Guardar",
-			"cancel": "Cancelar",
-			"delete": "Excluir",
-			"add": "Adicionar",
-			"edit": "Editar",
-			"remove": "Remover",
-			"confirm": "Confirmar",
-			"generate": "Gerar"
-		},
-		"weekdays": {
-			"monday": "Segunda-feira",
-			"tuesday": "Terça-feira",
-			"wednesday": "Quarta-feira",
-			"thursday": "Quinta-feira",
-			"friday": "Sexta-feira",
-			"saturday": "Sábado",
-			"sunday": "Domingo",
-			"short": {
-				"monday": "Seg",
-				"tuesday": "Ter",
-				"wednesday": "Qua",
-				"thursday": "Qui",
-				"friday": "Sex",
-				"saturday": "Sáb",
-				"sunday": "Dom"
-			}
-		},
-		"month": {
-			"january": "Janeiro",
-			"february": "Fevereiro",
-			"march": "Março",
-			"april": "Abril",
-			"may": "Maio",
-			"june": "Junho",
-			"july": "Julho",
-			"august": "Agosto",
-			"september": "Setembro",
-			"october": "Outubro",
-			"november": "Novembro",
-			"december": "Dezembro",
-			"short": {
-				"january": "Jan",
-				"february": "Fev",
-				"march": "Mar",
-				"april": "Abr",
-				"may": "Mai",
-				"june": "Jun",
-				"july": "Jul",
-				"august": "Ago",
-				"september": "Set",
-				"october": "Out",
-				"november": "Nov",
-				"december": "Dez"
-			}
-		}
+	"AlertsCarousel": {
+		"heading": "Alertas de Serviço"
 	},
 	"AppError": {
-		"title": "Ocorreu um erro inesperado",
-		"subtitle": "Fomos notificados e iremos corrigir em breve. Obrigado pela sua compreensão.",
-		"retry": "Nova tentativa em {value} segundos",
 		"goto_home": "Voltar à página principal",
+		"redirect": "A voltar à página de principal e em {value} segundo{s}.",
+		"retry": "Nova tentativa em {value} segundos",
+		"subtitle": "Fomos notificados e iremos corrigir em breve. Obrigado pela sua compreensão.",
 		"sync": "Falha ao sincronizar os dispositivos.",
+		"title": "Ocorreu um erro inesperado",
 		"token": "Falta o token de autenticação.",
-		"unauthorized": "Falha na autenticação.",
-		"redirect": "A voltar à página de principal e em {value} segundo{s}."
+		"unauthorized": "Falha na autenticação."
 	},
-	"layout": {
-		"Section": {
-			"back": {
-				"label": "Voltar"
-			}
-		},
-		"NoDataLabel": {
-			"default": "Sem dados disponíveis"
-		}
+	"AppRedirect": {
+		"action": "Ir para a Página",
+		"subtitle": "Se não for redirecionado automaticamente utilize o botão seguinte.",
+		"title": "A redirecionar..."
 	},
-	"planner": {
-		"Page": {
-			"heading": "Os nossos parceiros",
-			"subheading": "Porque os nossos dados são abertos, existem várias aplicações que oferecem experiências personalizadas para melhorar o seu dia-a-dia nos transportes.",
-			"disclaimer": "Edite esta página no Github se pretende incluir a sua aplicação. A ordem é aleatória. Apenas são permitidas entradas que disponibilizem simultaneamente horários planeados e em tempo real ou posição de veículos."
-		}
+	"AppUnavailable": {
+		"subtitle": "Esta página ainda não está pronta :)",
+		"title": "Em Construção"
 	},
-	"news": {
-		"SinglePageHeader": {
-			"publish_date": "Publicada a {value, date, long}"
-		}
-	},
-	"faq": {
-		"Page": {
-			"heading": "Perguntas Frequentes",
-			"subheading": "Nesta página encontra respostas às perguntas mais frequentes sobre o nosso serviço. Caso pretenda esclarecimentos adicionais não hesite em falar connosco.",
-			"contacts": "Contactos"
-		},
-		"FaqList": {
-			"label": "Tópico"
-		}
-	},
-	"app": {
-		"DownloadProduction": {
-			"heading": "App CMetropolitana",
-			"subheading": "Faça o download da app Carris Metropolitana para iOS ou Android.",
-			"iphone": "Apple iPhone",
-			"android": "Android"
-		},
-		"DownloadBeta": {
-			"heading": "Beta: App CMetropolitana",
-			"subheading": "Faça o download da versão beta da app Carris Metropolitana para iOS ou Android, e contribua para o futuro desta aplicação.",
-			"iphone": "Apple iPhone",
-			"android": "Android"
-		},
-		"StartupMessages1": {
-			"heading": "Atualização disponível",
-			"subheading": "Existe uma nova versão melhorada da app CMetropolitana.",
-			"text": "Recomendamos que atualize em breve para uma melhor experiência de utilização.",
-			"actions": {
-				"update_android": "Atualizar na Play Store",
-				"update_ios": "Atualizar na App Store",
-				"close": "Fechar"
-			}
-		}
-	},
-	"lines": {
-		"LinesListToolbar": {
-			"heading": "Pesquisar Linhas",
-			"by_current_view": {
-				"all": "Todas as Linhas",
-				"favorites": "Favoritas ({count})"
+	"CookiesPage": {
+		"sections": {
+			"intro": {
+				"paragraphs": {
+					"1": "A TML recorre à utilização de cookies e outras tecnologias similares para perceber como o website é utilizado, de modo a melhorar o seus conteúdos, segurança e desempenho. O objetivo é proporcionar uma melhor experiência de navegação."
+				},
+				"title": "Política de Cookies"
 			},
-			"by_search": {
-				"placeholder": "Pesquisar por nome, número..."
+			"question_1": {
+				"paragraphs": {
+					"1": "Cookies são pequenos ficheiros de texto com informação relevante que o dispositivo de acesso (computador, telemóvel, smartphone, tablet, etc…) carrega, através do navegador de internet (browser), quando um site é visitado pelo utilizador.",
+					"2": "A utilização de cookies ajuda os websites a reconhecer o dispositivo do utilizador na visita seguinte sendo com frequência imprescindível para o funcionamento do mesmo.",
+					"3": "Os cookies usados pela TML não recolhem informações pessoais que permitam identificar um utilizador em particular, guardando apenas informações anónimas, genéricas e agregadas."
+				},
+				"title": "O que são cookies e para que servem?"
 			},
-			"found_items_counter": {
-				"all": "{count, plural, =0 {Nenhuma linha encontrada.} one {Encontrada # linha:} other {Encontradas # linhas:}}",
-				"favorites": "{count, plural, =0 {Nenhuma linha favorita encontrada.} one {Encontrada # linha favorita:} other {Encontradas # linhas favoritas:}}"
+			"question_2": {
+				"paragraphs": {
+					"1": "Atendendo às finalidades para os quais são utilizados, os cookies podem ser classificados do seguinte modo:",
+					"2": "- Cookies estritamente necessários (também conhecidos por essenciais, técnicos ou básicos): são necessários para que o utilizador consiga aceder a áreas específicas do website, permitindo a navegação e a utilização das suas aplicações, tal como o acesso a áreas seguras do site, através de login. Sem estes cookies, os serviços que o exijam não podem ser prestados;",
+					"3": "- Cookies de funcionalidade (também conhecidos por preferenciais):permitem o website relembrar as preferências do utilizador relativamente à sua navegação no website, não necessitando, assim, de o reconfigurar e personalizar cada vez que o visita;",
+					"4": "- Cookies de performance (também conhecidos por analíticos ou estatísticos): são essencialmente utilizados para analisar a forma como o utilizador utiliza o website, permitindo destacar artigos ou serviços que podem ser do seu interesse, monitorizar o desempenho do website, dado a conhecer quais as páginas mais populares, qual o método de ligação entre páginas que é mais eficaz ou para determinar a razão de algumas páginas estarem a receber mensagens de erro;",
+					"5": "- Cookies de publicidade (também conhecidos por marketing ou de rastreio): permitem proporcionar ao utilizador informação publicitária em função de suas preferências e interesses, bem como, ajudam a medir a eficácia dos anúncios mostrados (ex. quantas vezes são vistos)."
+				},
+				"title": "Que tipos de Cookies existem?"
+			},
+			"question_3": {
+				"paragraphs": {
+					"1": "Quanto à sua validade, os cookies podem também ser classificados da seguinte forma:",
+					"2": "- Cookies permanentes: são cookies que ficam armazenados nos dispositivos de acesso, ao nível do navegador de internet (browser), e são usados sempre que o utilizador visita novamente o website. Em geral, são usados para direcionar a navegação de acordo com os interesses do utilizador, permitindo a prestação de um serviço mais personalizado;",
+					"3": "- Cookies de sessão: são cookies temporários, que são gerados e estão disponíveis até o utilizador encerrar a sessão. Da próxima vez que o utilizador aceder ao seu navegador de internet (browser), os cookies já não se encontrarão armazenados."
+				},
+				"title": "Qual a validade dos Cookies?"
+			},
+			"question_4": {
+				"paragraphs": {
+					"1": "Em função da sua origem, os cookies podem ainda ter a seguinte tipologia:",
+					"2": "- Cookies próprios (ou de primeira parte):são os que são enviados para o dispositivo do utilizador a partir de um website/domínio gerido pelo próprio editor e a partir do qual é fornecido o serviço solicitado pelo utilizador (o proprietário do website);",
+					"3": "- Cookies de terceiros (ou de terceira parte):são os que são enviados para o dispositivo do utilizador a partir de um domínio que não é gerido pelo editor do website, mas por outras entidades a quem aproveitam a informação obtida através desses cookies. Dada a sua origem e natureza, a utilização deste tipo de cookies é da exclusiva responsabilidade das entidades que os utilizam."
+				},
+				"title": "Quais as possíveis origens dos Cookies?"
+			},
+			"question_5": {
+				"table": {
+					"header": {
+						"col_1": "Tipo",
+						"col_2": "Domínio/Origem",
+						"col_3": "Finalidade",
+						"col_4": "Validade"
+					},
+					"rows": {
+						"1": {
+							"col_1": "NEXT_LOCALE",
+							"col_2": "carrismetropolitana.pt",
+							"col_3": "Identificar o idioma de preferência do utilizador",
+							"col_4": "1 ano"
+						},
+						"2": {
+							"col_1": "anonymous_analytics_enabled",
+							"col_2": "carrismetropolitana.pt",
+							"col_3": "Obter informação estatística sobre a utilização do site",
+							"col_4": "1 ano"
+						}
+					}
+				},
+				"title": "Quais os Cookies ou tecnologias similares utilizados neste site?"
+			},
+			"question_6": {
+				"accept": "Aceitar Política de Cookies",
+				"enabled": "Política de Cookies aceite",
+				"paragraphs": {
+					"1": "Por serem essenciais ao bom funcionamento do site, a utilização de cookies estritamente necessários ou essenciais, não carece de consentimento prévio por parte do utilizador. Os demais (cookies de funcionalidade, performance ou publicidade) apenas serão utilizados caso o utilizador expressamente autorize a sua utilização.",
+					"2": "Uma vez aceite, pode a qualquer momento revogar esse consentimento, bastando para o efeito voltar à Política de Cookies e selecionar “Recusar e Limpar Dados”."
+				},
+				"refuse": "Recusar e Limpar Dados",
+				"refuse_modal": {
+					"cancel": "Cancelar",
+					"confirm": "Sim, apagar tudo",
+					"description": "Ao retirar o consentimento irá apagar todos os dados guardados neste site, incluindo todas as paragens e linhas favoritas.",
+					"title": "Retirar consentimento"
+				},
+				"title": "Consentimento do utilizador:"
+			},
+			"question_7": {
+				"paragraphs": {
+					"1": "Os utilizadores podem ainda impedir ou condicionar a utilização de cookies através das configurações do seu navegador. Se limitar esta opção, no entanto, a utilização de alguns recursos ou o desempenho de alguns websites pode ficar condicionada.",
+					"2": "Saiba como em:"
+				},
+				"title": "Como controlar o uso de Cookies?"
+			},
+			"question_8": {
+				"paragraphs": {
+					"1": "A TML reserva-se, a todo o tempo, no direito de alterar e/ou atualizar a informação constante da presente Política, assim como a faculdade de disponibilizar, a pedido, informações adicionais, mais detalhadas, sobre situações específicas em que são recolhidos e tratados dados pessoais."
+				},
+				"title": "Direito de reserva"
 			}
 		},
-		"LinesListViewFavorites": {
-			"no_favorites": "Ainda não tem linhas favoritas"
+		"title": "Política de Cookies"
+	},
+	"HeaderLocaleSwitcher": {
+		"en": {
+			"alt": "English",
+			"label": "🇬🇧"
 		},
-		"LinesDetail": {
-			"heading": "Pesquisar Linhas",
-			"toggle_favorite_error": "Erro ao adicionar a linha aos favoritos. {error}"
+		"fr": {
+			"alt": "Français",
+			"label": "🇫🇷"
 		},
-		"LinesDetailMetrics": {
-			"demand": {
-				"big_number": "{value, number}",
-				"subtitle": "passageiros transportados nesta linha nos últimos 15 dias"
-			},
-			"service": {
-				"big_number": "{value, number, percentage}",
-				"subtitle": "executabilidade do serviço de todos os percursos desta linha nos últimos 15 dias"
-			}
+		"pt-PT": {
+			"alt": "Português",
+			"label": "🇵🇹"
+		}
+	},
+	"HeaderLogo": {
+		"logo": {
+			"alt": "Carris Metropolitana"
+		}
+	},
+	"HeaderNavigationAccount": {
+		"configs": "Personalizar Experiência",
+		"favorites": "Favoritos",
+		"profile": "Perfil"
+	},
+	"HomeMetricsSection": {
+		"heading": "A nossa operação ao vivo"
+	},
+	"HomeMetricsSectionDemand": {
+		"area": {
+			"label": "Nº de validações na Área {area} hoje",
+			"value": "{value, number}"
 		},
-		"LinesDetailPathMap": {
-			"active_vehicles_counter": "{count, plural, =0 {Nenhum veículo em circulação} one {# veículo em circulação} other {# veículos em circulação}}"
+		"by_line": {
+			"selected": "passageiros transportados nesta linha",
+			"top": "linhas com mais passageiros transportados hoje"
 		},
-		"SelectActivePatternGroup": {
-			"placeholder": "Selecionar percurso/destino..."
+		"lastMonth": {
+			"label": "passageiros transportados em {month}",
+			"value": "{value, number}"
 		},
-		"SelectActivePatternGroupExplainer": {
-			"toggle": "O que é o percurso/destino de uma linha?"
+		"popover": {
+			"link": "Explorar Dados Abertos",
+			"text": "Valores de passageiros transportados atualizados a cada 60 minutos."
 		},
-		"AlertsCarousel": {
-			"heading": "Alertas de Serviço"
+		"today": {
+			"label": "passageiros transportados hoje",
+			"value": "{value, number}"
 		},
-		"PathStopNextArrivals": {
-			"title": "Próximas circulações"
+		"yearToDate": {
+			"label": "passageiros transportados este ano",
+			"value": "{value, number}"
 		},
-		"PathStopTimetable": {
-			"title": "Horários planeados nesta paragem:",
-			"no_data": "Horários indisponíveis para esta data.",
-			"next_date": "Próximos horários disponíveis a partir de {value, date, dayShort} {value, date, monthLong} {value, date, yearLong}"
+		"yesterday": {
+			"label": "passageiros transportados ontem",
+			"value": "{value, number}"
+		}
+	},
+	"HomeQuickSearchWidget": {
+		"options": {
+			"lines": "Linhas",
+			"stops": "Paragens"
 		},
-		"expand_filters": "Expandir Filtros",
-		"collapse_filters": "Esconder Filtros"
+		"search": {
+			"label": "Encontre os horários planeados e em tempo real da linha que procura.",
+			"nothing_found": "Encontre os horários planeados e em tempo real da linha que procura.",
+			"placeholder": "Encontre os horários planeados e em tempo real da linha que procura."
+		},
+		"subtitle": "Encontre os horários planeados e em tempo real da linha que procura.",
+		"title": "Pesquisa Rápida"
+	},
+	"IconDisplay": {
+		"connections": {
+			"bus": "Ligação com Autocarro"
+		},
+		"facilities": {
+			"school": "Perto de uma Escola",
+			"university": "Perto de uma Universidade"
+		}
+	},
+	"NewsCard": {
+		"publish_date": "{publishDate, date, long}"
+	},
+	"SelectLine": {
+		"label": "Procurar linha por número, nome, localização...",
+		"nothing_found": "Nenhum Resultado Encontrado",
+		"placeholder": "Procurar linha por número, nome, localização..."
+	},
+	"SelectPattern": {
+		"option_label": "Início do percurso: {locality}"
+	},
+	"SelectStop": {
+		"label": "Procurar paragem por id, nome, localização...",
+		"nothing_found": "Nenhum Resultado Encontrado",
+		"placeholder": "Procurar paragem por id, nome, localização..."
 	},
 	"alerts": {
-		"AlertsList": {
-			"heading": "Alertas de Serviço",
-			"subheading": "Fique a par de todas as alterações à rede. Lorem ipsum dolor sit amet."
-		},
-		"AlertsDetail": {
-			"open_full_image": "Abrir imagem numa nova janela",
-			"more_info": "Mais informações"
-		},
-		"AlertsListGroup": {
-			"label": "{count, plural, one {Alerta ativo} other {Alertas ativos}}",
-			"titles": {
-				"future": "A partir de {value, date, dayShort} {value, date, monthLong} {value, date, yearLong}",
-				"tomorrow": "A partir de amanhã, {value, date, dayShort} {value, date, monthLong} {value, date, yearLong}",
-				"today": "A partir de hoje, {value, date, dayShort} {value, date, monthLong} {value, date, yearLong}",
-				"yesterday": "Desde ontem, {value, date, dayShort} {value, date, monthLong} {value, date, yearLong}",
-				"past": "Desde {value, date, dayShort} {value, date, monthLong} {value, date, yearLong}"
-			}
-		},
-		"AlertsListEmpty": {
-			"default": {
-				"title": "Nenhum alerta agendado",
-				"subtitle": "Instale a App Carris Metropolitana e receba notificações sobre alterações à rede.",
-				"action_1": "Consultar Alertas Ativos Hoje",
-				"action_2": "Instalar a App"
-			}
-		},
-		"AlertsListItem": {
-			"open": "Abrir"
-		},
-		"AlertsListToolbar": {
-			"by_date": {
-				"current": "Esta semana",
-				"future": "Futuros"
-			},
-			"found_items_counter": "{count, plural, =0 {Nenhum alerta encontrado.} one {Encontrado # alerta:} other {Encontrados # alertas:}}"
-		},
 		"AlertActivePeriod": {
-			"start": "Início: <parsedDate>{start, date, dayShort} {start, date, monthLong} {start, date, yearLong}</parsedDate>",
-			"end": "Fim: <parsedDate>{end, date, dayShort} {end, date, monthLong} {end, date, yearLong}</parsedDate>"
+			"end": "Fim: <parsedDate>{end, date, dayShort} {end, date, monthLong} {end, date, yearLong}</parsedDate>",
+			"start": "Início: <parsedDate>{start, date, dayShort} {start, date, monthLong} {start, date, yearLong}</parsedDate>"
 		},
 		"AlertCauseEffectIcon": {
 			"cause": {
@@ -268,145 +248,405 @@
 				"STOP_MOVED": "Paragem Deslocada",
 				"UNKNOWN_EFFECT": "Outro"
 			}
-		}
-	},
-	"stores": {
-		"StoresList": {
-			"heading": "Lojas e Rede de Agentes",
-			"subheading": "Disponíveis para todos os passageiros, os Espaços navegante® estão dedicados a prestar informações sobre a rede e bilhética Carris Metropolitana, possibilitando o esclarecimento de dúvidas, a emissão de cartões navegante® e a adesão a perfis e descontos. É possível também efetuar o carregamento de títulos nos pontos de atendimento PayShop® da rede de agentes navegante®.",
-			"external_link": "Rede de agentes navegante®"
 		},
-		"StoresListToolbar": {
-			"by_current_status": {
-				"open": "Abertas agora ({count})",
-				"all": "Todas as lojas"
-			},
-			"by_municipality": {
-				"label": "Filtrar por Município"
-			},
-			"found_items_counter": "{count, plural, =0 {Nenhuma loja encontrada.} one {Encontrada # loja:} other {Encontradas # lojas:}}"
+		"AlertsDetail": {
+			"more_info": "Mais informações",
+			"open_full_image": "Abrir imagem numa nova janela"
 		},
-		"StoresListGroups": {
-			"group_label": "Município"
+		"AlertsList": {
+			"heading": "Alertas de Serviço",
+			"subheading": "Fique a par de todas as alterações à rede. Lorem ipsum dolor sit amet."
 		},
-		"StoresListEmpty": {
+		"AlertsListEmpty": {
 			"default": {
-				"title": "Nenhuma loja disponível por agora",
-				"subtitle": "Neste momento, todas as lojas aparentam estar encerradas.",
-				"action_1": "Consultar Horários das Lojas",
-				"action_2": "Explorer Rede de Agentes"
-			},
-			"by_municipality": {
-				"title": "Nenhuma loja disponível neste município",
-				"subtitle": "Sugerimos que nos visite noutro local, para ser melhor atendido.",
-				"action_1": "Consultar Horários das Lojas",
-				"action_2": "Explorer Outros Municípios",
-				"action_3": "Explorer Rede de Agentes"
+				"action_1": "Consultar Alertas Ativos Hoje",
+				"action_2": "Instalar a App",
+				"subtitle": "Instale a App Carris Metropolitana e receba notificações sobre alterações à rede.",
+				"title": "Nenhum alerta agendado"
 			}
 		},
-		"StoresListGroupItem": {
-			"schedules": {
-				"label": "Horário",
-				"from": "De",
-				"until": "até",
-				"and": "e",
-				"mon": "Seg",
-				"tue": "Ter",
-				"wed": "Qua",
-				"thu": "Qui",
-				"fri": "Sex",
-				"sat": "Sab",
-				"sun": "Dom"
+		"AlertsListGroup": {
+			"label": "{count, plural, one {Alerta ativo} other {Alertas ativos}}",
+			"titles": {
+				"future": "A partir de {value, date, dayShort} {value, date, monthLong} {value, date, yearLong}",
+				"past": "Desde {value, date, dayShort} {value, date, monthLong} {value, date, yearLong}",
+				"today": "A partir de hoje, {value, date, dayShort} {value, date, monthLong} {value, date, yearLong}",
+				"tomorrow": "A partir de amanhã, {value, date, dayShort} {value, date, monthLong} {value, date, yearLong}",
+				"yesterday": "Desde ontem, {value, date, dayShort} {value, date, monthLong} {value, date, yearLong}"
+			}
+		},
+		"AlertsListItem": {
+			"open": "Abrir"
+		},
+		"AlertsListToolbar": {
+			"by_date": {
+				"current": "Esta semana",
+				"future": "Futuros"
 			},
-			"address": "Morada",
-			"get_directions": "Obter Direções"
+			"found_items_counter": "{count, plural, =0 {Nenhum alerta encontrado.} one {Encontrado # alerta:} other {Encontrados # alertas:}}"
+		}
+	},
+	"analytics": {
+		"ConsentPopup": {
+			"accept": "OK",
+			"privacy_policy": "Consultar Política de Cookies",
+			"refuse": "Não, obrigado",
+			"text": "Com o objetivo de melhorar a performance, os conteúdos e a segurança deste site, a TML pretende recorrer à utilização de cookies ou tecnologias similares.",
+			"title": "Respeitamos a sua Privacidade"
+		}
+	},
+	"app": {
+		"DownloadBeta": {
+			"android": "Android",
+			"heading": "Beta: App CMetropolitana",
+			"iphone": "Apple iPhone",
+			"subheading": "Faça o download da versão beta da app Carris Metropolitana para iOS ou Android, e contribua para o futuro desta aplicação."
 		},
-		"StoresListGroupItemRealtime": {
-			"current_status": {
-				"open": "Aberto Agora",
-				"busy": "Movimentado",
-				"closed": "Fechado / Completo"
+		"DownloadProduction": {
+			"android": "Android",
+			"heading": "App CMetropolitana",
+			"iphone": "Apple iPhone",
+			"subheading": "Faça o download da app Carris Metropolitana para iOS ou Android."
+		},
+		"StartupMessages1": {
+			"actions": {
+				"close": "Fechar",
+				"update_android": "Atualizar na Play Store",
+				"update_ios": "Atualizar na App Store"
 			},
-			"people_waiting": "{count, plural, =0 {Ninguém em espera} =1 {1 cliente em espera} other {# clientes em espera}}",
-			"desks_open": "{count, plural, =0 {Nenhum posto aberto} =1 {1 posto aberto} other {# postos abertos}}",
-			"expected_wait_time": "{count, plural, =0 {Atendimento imediato} other {Atendimento em aprox. # min}}"
-		},
-		"StoresListMap": {
-			"expected_wait_time": "{count, plural, =0 {# min} other {# min}}"
+			"heading": "Atualização disponível",
+			"subheading": "Existe uma nova versão melhorada da app CMetropolitana.",
+			"text": "Recomendamos que atualize em breve para uma melhor experiência de utilização."
 		}
 	},
-	"HomeMetricsSection": {
-		"heading": "A nossa operação ao vivo"
-	},
-	"HomeMetricsSectionDemand": {
-		"today": {
-			"label": "passageiros transportados hoje",
-			"value": "{value, number}"
+	"common": {
+		"SelectOperationalDay": {
+			"today": "Hoje",
+			"tomorrow": "Amanhã"
 		},
-		"yesterday": {
-			"label": "passageiros transportados ontem",
-			"value": "{value, number}"
+		"TimetableExceptionsLink": {
+			"schedule": "Min.",
+			"variant": "<exceptionId>{exception_id})</exceptionId> Percurso <routeLongName>{route_long_name}</routeLongName> com destino a <patternHeadsign>{pattern_headsign}</patternHeadsign>"
 		},
-		"yearToDate": {
-			"label": "passageiros transportados este ano",
-			"value": "{value, number}"
+		"TimetableSchedules": {
+			"hours": "Hora",
+			"minutes": "Min."
 		},
-		"lastMonth": {
-			"label": "passageiros transportados em {month}",
-			"value": "{value, number}"
+		"button": {
+			"add": "Adicionar",
+			"cancel": "Cancelar",
+			"confirm": "Confirmar",
+			"delete": "Excluir",
+			"edit": "Editar",
+			"generate": "Gerar",
+			"remove": "Remover",
+			"save": "Guardar"
 		},
-		"popover": {
-			"text": "Valores de passageiros transportados atualizados a cada 60 minutos.",
-			"link": "Explorar Dados Abertos"
+		"month": {
+			"april": "Abril",
+			"august": "Agosto",
+			"december": "Dezembro",
+			"february": "Fevereiro",
+			"january": "Janeiro",
+			"july": "Julho",
+			"june": "Junho",
+			"march": "Março",
+			"may": "Maio",
+			"november": "Novembro",
+			"october": "Outubro",
+			"september": "Setembro",
+			"short": {
+				"april": "Abr",
+				"august": "Ago",
+				"december": "Dez",
+				"february": "Fev",
+				"january": "Jan",
+				"july": "Jul",
+				"june": "Jun",
+				"march": "Mar",
+				"may": "Mai",
+				"november": "Nov",
+				"october": "Out",
+				"september": "Set"
+			}
 		},
-		"by_line": {
-			"top": "linhas com mais passageiros transportados hoje",
-			"selected": "passageiros transportados nesta linha"
-		},
-		"area": {
-			"label": "Nº de validações na Área {area} hoje",
-			"value": "{value, number}"
+		"weekdays": {
+			"friday": "Sexta-feira",
+			"monday": "Segunda-feira",
+			"saturday": "Sábado",
+			"short": {
+				"friday": "Sex",
+				"monday": "Seg",
+				"saturday": "Sáb",
+				"sunday": "Dom",
+				"thursday": "Qui",
+				"tuesday": "Ter",
+				"wednesday": "Qua"
+			},
+			"sunday": "Domingo",
+			"thursday": "Quinta-feira",
+			"tuesday": "Terça-feira",
+			"wednesday": "Quarta-feira"
 		}
 	},
-	"HeaderLogo": {
-		"logo": {
-			"alt": "Carris Metropolitana"
+	"contacts": {
+		"Page": {
+			"by_form": "Formulário de Contacto",
+			"by_instagram": "Falar pelo Instagram",
+			"by_whatsapp": "Falar por WhatsApp",
+			"form": {
+				"heading": "Formulário de Contacto",
+				"subheading": "A Carris Metropolitana está empenhada em prestar um serviço de qualidade e a sua opinião é fundamental para a melhoria contínua dos nossos serviços. Se tem alguma sugestão ou reclamação, por favor preencha o formulário abaixo."
+			},
+			"heading": "Contactos",
+			"lost_found": "Perdidos e Achados",
+			"operators": "Operadores cmetropolitana",
+			"operators_description": "Nesta linha pode contactar diretamente as empresas responsáveis pela operação de autocarros da Carris Metropolitana.",
+			"phone_line": "Linha informativa",
+			"phone_line_description": "Esta linha funciona todos os dias das 08:00 às 20:00 e é onde poderá tirar todas as suas dúvidas sobre a operação da Carris Metropolitana. Pergunte sobre linhas, percursos e horários, tarifas, ou efetue a sua reclamação."
 		}
 	},
-	"HeaderNavigationAccount": {
-		"configs": "Personalizar Experiência",
-		"favorites": "Favoritos",
-		"profile": "Perfil"
+	"faq": {
+		"FaqList": {
+			"label": "Tópico"
+		},
+		"Page": {
+			"contacts": "Contactos",
+			"heading": "Perguntas Frequentes",
+			"subheading": "Nesta página encontra respostas às perguntas mais frequentes sobre o nosso serviço. Caso pretenda esclarecimentos adicionais não hesite em falar connosco."
+		}
+	},
+	"favorites": {
+		"Page": {
+			"heading": "Favoritos"
+		},
+		"PageToolbar": {
+			"by_current_view": {
+				"lines": "Linhas",
+				"stops": "Paragens"
+			},
+			"found_items_counter": {
+				"lines": "{count, plural, =0 {Nenhuma linha encontrada.} one {Encontrada # linha:} other {Encontradas # linhas:}}",
+				"stops": "{count, plural, =0 {Nenhum paragem encontrado.} one {Encontrado # paragem:} other {Encontrados # paragens:}}"
+			}
+		}
+	},
+	"footer": {
+		"DebugToggle": {
+			"disabled": "Ligar Debug",
+			"enabled": "Desligar Debug"
+		},
+		"Footer": {
+			"copyright": "© Carris Metropolitana {year} - Todos os direitos reservados"
+		}
+	},
+	"home": {
+		"MainCarouselCard": {
+			"learn_more": "Saber mais"
+		},
+		"NewsSection": {
+			"section_heading": "Notícias"
+		},
+		"QuickSearchFavoritesBar": {
+			"empty": "Ainda não tem linhas favoritas...",
+			"more": "{count, plural, one {+ # linha} other {+ # linhas}}"
+		},
+		"SchedulesSection": {
+			"section_heading": "Horários"
+		},
+		"SupportSection": {
+			"section_heading": "Apoio ao Cliente"
+		},
+		"TarifsSection": {
+			"section_heading": "Tarifas"
+		}
+	},
+	"layout": {
+		"NoDataLabel": {
+			"default": "Sem dados disponíveis"
+		},
+		"Section": {
+			"back": {
+				"label": "Voltar"
+			}
+		}
+	},
+	"line": {
+		"from_until": "Entre {start} e {end}",
+		"next_buses": "Próximas circulações",
+		"num_passengers": "passageiros transportados nesta linha nos últimos 15 dias",
+		"pick_route": "Escolha um percurso/destino...",
+		"route_explainer": "O que é o percurso/destino de uma linha?",
+		"scheduled_times": "Horários Planeados",
+		"schedules": "Horários",
+		"service_alerts": "Alertas de Serviço",
+		"stop_info": "Sobre a Paragem"
+	},
+	"lines": {
+		"AlertsCarousel": {
+			"heading": "Alertas de Serviço"
+		},
+		"LinesDetail": {
+			"heading": "Pesquisar Linhas",
+			"toggle_favorite_error": "Erro ao adicionar a linha aos favoritos. {error}"
+		},
+		"LinesDetailMetrics": {
+			"demand": {
+				"big_number": "{value, number}",
+				"subtitle": "passageiros transportados nesta linha nos últimos 15 dias"
+			},
+			"service": {
+				"big_number": "{value, number, percentage}",
+				"subtitle": "executabilidade do serviço de todos os percursos desta linha nos últimos 15 dias"
+			}
+		},
+		"LinesDetailPathMap": {
+			"active_vehicles_counter": "{count, plural, =0 {Nenhum veículo em circulação} one {# veículo em circulação} other {# veículos em circulação}}"
+		},
+		"LinesListToolbar": {
+			"by_current_view": {
+				"all": "Todas as Linhas",
+				"favorites": "Favoritas ({count})"
+			},
+			"by_search": {
+				"placeholder": "Pesquisar por nome, número..."
+			},
+			"found_items_counter": {
+				"all": "{count, plural, =0 {Nenhuma linha encontrada.} one {Encontrada # linha:} other {Encontradas # linhas:}}",
+				"favorites": "{count, plural, =0 {Nenhuma linha favorita encontrada.} one {Encontrada # linha favorita:} other {Encontradas # linhas favoritas:}}"
+			},
+			"heading": "Pesquisar Linhas"
+		},
+		"LinesListViewFavorites": {
+			"no_favorites": "Ainda não tem linhas favoritas"
+		},
+		"PathStopNextArrivals": {
+			"title": "Próximas circulações"
+		},
+		"PathStopTimetable": {
+			"next_date": "Próximos horários disponíveis a partir de {value, date, dayShort} {value, date, monthLong} {value, date, yearLong}",
+			"no_data": "Horários indisponíveis para esta data.",
+			"title": "Horários planeados nesta paragem:"
+		},
+		"SelectActivePatternGroup": {
+			"placeholder": "Selecionar percurso/destino..."
+		},
+		"SelectActivePatternGroupExplainer": {
+			"toggle": "O que é o percurso/destino de uma linha?"
+		},
+		"collapse_filters": "Esconder Filtros",
+		"expand_filters": "Expandir Filtros"
+	},
+	"lost-and-found": {
+		"OperatorSection": {
+			"email": {
+				"label": "Enviar Email"
+			},
+			"form": {
+				"label": "Preencher Formulário"
+			}
+		},
+		"Page": {
+			"heading": "Perdidos e Achados",
+			"operator_sections": {
+				"41": {
+					"description": "Envie um email para passageiro@viacaoalvorada.pt com informação da linha utilizada, hora e descrição do objecto. Se possível, inclua o número ou matrícula do veículo.",
+					"title": "Área 1 | Viação Alvorada"
+				},
+				"42": {
+					"description": "Preencha o Formulário Online disponibilizado no site do operador com informação da linha utilizada, hora e descrição do objeto. Se possível, inclua o número ou matrícula do veículo.",
+					"title": "Área 2 | Rodoviária de Lisboa"
+				},
+				"43": {
+					"description": "Preencha o Formulário Online disponibilizado no site do operador com informação da linha utilizada, hora e descrição do objeto. Se possível, inclua o número ou matrícula do veículo.",
+					"title": "Área 3 | TST"
+				},
+				"44": {
+					"description": "Preencha o Formulário Online disponibilizado no site do operador ou envie email para passageiros@alsa.pt com informação da linha utilizada, hora e descrição do objeto. Se possível, inclua o número ou matrícula do veículo.",
+					"title": "Área 4 | Alsa Todi"
+				}
+			},
+			"subheading": "O serviço de transporte da Carris Metropolitana é assegurado por 4 prestadores de serviço, cada um explorando a sua zona da Área Metropolitana de Lisboa, conforme a imagem seguinte. Por esta razão, a melhor forma de reaver o seu objeto é contactar o operador da área utilizada."
+		}
+	},
+	"map": {
+		"toolbar": {
+			"center_map": "Centrar Mapa",
+			"open_google_maps": "Abrir no Google Maps",
+			"style": {
+				"map": "Mapa",
+				"satellite": "Satélite"
+			}
+		}
+	},
+	"news": {
+		"SinglePageHeader": {
+			"publish_date": "Publicada a {value, date, long}"
+		}
+	},
+	"notifications": {
+		"Card": {
+			"meters": "Metros",
+			"min": "Minutos"
+		},
+		"Page": {
+			"heading": "Notificações Inteligentes",
+			"new": "Nova Notificação",
+			"subheading": "Receba notificações sobre as suas linhas e paragens favoritas. Ative as notificações e fique a par de todas as alterações à rede."
+		},
+		"Single": {
+			"create": "Criar Notificação",
+			"distance": "estiver a",
+			"distance_unit": {
+				"meters": "metros",
+				"minutes": "minutos"
+			},
+			"end_time": "Hora de Fim",
+			"heading_edit": "Editar Notificação",
+			"heading_new": "Nova Notificação",
+			"line": "Notificar-me quando um veículo da linha",
+			"start_time": "Hora de Início",
+			"stop": "da paragem",
+			"time": "no perído",
+			"warning": "Atenção\nPor Favor Teste esta funcionalidade antes de utilizar com confiança. Poderá ser necessário ajustar os tempos para garantir que chega ao local.",
+			"weekday": "Dias da Semana"
+		}
+	},
+	"planner": {
+		"Page": {
+			"disclaimer": "Edite esta página no Github se pretende incluir a sua aplicação. A ordem é aleatória. Apenas são permitidas entradas que disponibilizem simultaneamente horários planeados e em tempo real ou posição de veículos.",
+			"heading": "Os nossos parceiros",
+			"subheading": "Porque os nossos dados são abertos, existem várias aplicações que oferecem experiências personalizadas para melhorar o seu dia-a-dia nos transportes."
+		}
+	},
+	"profile": {
+		"Page": {
+			"field": {
+				"default_first_name": "Polvo",
+				"default_last_name": "Ecológico",
+				"email": "Email",
+				"email_error": "Este email é inválido",
+				"email_tooltip": "Util para recuperar a conta caso seja perdida",
+				"first_name": "Primeiro Nome",
+				"last_name": "Último Nome"
+			},
+			"heading": "Perfil"
+		},
+		"sync": {
+			"description": "Scannar o código QR para sincronizar o perfil",
+			"heading": "Sincronizar Perfil",
+			"loading": "A sincronizar...",
+			"success": "Perfil sincronizado com sucesso!"
+		}
+	},
+	"schedule": {
+		"hours": "Hora",
+		"minutes": "Min.",
+		"no_data": "Sem horários disponíveis",
+		"path": "Percurso"
 	},
 	"settings": {
 		"navigation": {
-			"schedules": {
-				"label": "Horários",
-				"links": {
-					"lines": "Pesquisar Linhas",
-					"stops": "Pesquisar Paragens",
-					"alerts": "Alertas de Serviço",
-					"planner": "Planear Viagem",
-					"schools": "Escolas & Universidades"
-				}
-			},
-			"tarifs": {
-				"label": "Tarifas",
-				"links": {
-					"tickets": "Bilhetes Ocasionais",
-					"cards": "Passe Mensal",
-					"helpdesks": "Onde comprar"
-				}
-			},
-			"support": {
-				"label": "Apoio ao Cliente",
-				"links": {
-					"stores": "Lojas e Rede de Agentes",
-					"faq": "Perguntas Frequentes",
-					"lost-and-found": "Perdidos e Achados",
-					"contacts": "Contactos"
-				}
-			},
 			"account": {
 				"label": "Conta",
 				"links": {
@@ -426,262 +666,59 @@
 				"secondary": {
 					"links": {
 						"conditions": "Condições Gerais de Transporte",
-						"privacy": "Política de Privacidade",
 						"cookies": "Política de Cookies",
-						"legal": "Aviso Legal"
-					}
-				}
-			}
-		}
-	},
-	"HeaderLocaleSwitcher": {
-		"pt-PT": {
-			"label": "🇵🇹",
-			"alt": "Português"
-		},
-		"en": {
-			"label": "🇬🇧",
-			"alt": "English"
-		},
-		"fr": {
-			"label": "🇫🇷",
-			"alt": "Français"
-		}
-	},
-	"footer": {
-		"DebugToggle": {
-			"enabled": "Desligar Debug",
-			"disabled": "Ligar Debug"
-		},
-		"Footer": {
-			"copyright": "© Carris Metropolitana {year} - Todos os direitos reservados"
-		}
-	},
-	"home": {
-		"QuickSearchFavoritesBar": {
-			"empty": "Ainda não tem linhas favoritas...",
-			"more": "{count, plural, one {+ # linha} other {+ # linhas}}"
-		},
-		"MainCarouselCard": {
-			"learn_more": "Saber mais"
-		},
-		"TarifsSection": {
-			"section_heading": "Tarifas"
-		},
-		"SchedulesSection": {
-			"section_heading": "Horários"
-		},
-		"SupportSection": {
-			"section_heading": "Apoio ao Cliente"
-		},
-		"NewsSection": {
-			"section_heading": "Notícias"
-		}
-	},
-	"HomeQuickSearchWidget": {
-		"title": "Pesquisa Rápida",
-		"subtitle": "Encontre os horários planeados e em tempo real da linha que procura.",
-		"options": {
-			"lines": "Linhas",
-			"stops": "Paragens"
-		},
-		"search": {
-			"label": "Encontre os horários planeados e em tempo real da linha que procura.",
-			"placeholder": "Encontre os horários planeados e em tempo real da linha que procura.",
-			"nothing_found": "Encontre os horários planeados e em tempo real da linha que procura."
-		}
-	},
-	"lost-and-found": {
-		"Page": {
-			"heading": "Perdidos e Achados",
-			"subheading": "O serviço de transporte da Carris Metropolitana é assegurado por 4 prestadores de serviço, cada um explorando a sua zona da Área Metropolitana de Lisboa, conforme a imagem seguinte. Por esta razão, a melhor forma de reaver o seu objeto é contactar o operador da área utilizada.",
-			"operator_sections": {
-				"41": {
-					"title": "Área 1 | Viação Alvorada",
-					"description": "Envie um email para passageiro@viacaoalvorada.pt com informação da linha utilizada, hora e descrição do objecto. Se possível, inclua o número ou matrícula do veículo."
-				},
-				"42": {
-					"title": "Área 2 | Rodoviária de Lisboa",
-					"description": "Preencha o Formulário Online disponibilizado no site do operador com informação da linha utilizada, hora e descrição do objeto. Se possível, inclua o número ou matrícula do veículo."
-				},
-				"43": {
-					"title": "Área 3 | TST",
-					"description": "Preencha o Formulário Online disponibilizado no site do operador com informação da linha utilizada, hora e descrição do objeto. Se possível, inclua o número ou matrícula do veículo."
-				},
-				"44": {
-					"title": "Área 4 | Alsa Todi",
-					"description": "Preencha o Formulário Online disponibilizado no site do operador ou envie email para passageiros@alsa.pt com informação da linha utilizada, hora e descrição do objeto. Se possível, inclua o número ou matrícula do veículo."
-				}
-			}
-		},
-		"OperatorSection": {
-			"email": {
-				"label": "Enviar Email"
-			},
-			"form": {
-				"label": "Preencher Formulário"
-			}
-		}
-	},
-	"NewsCard": {
-		"publish_date": "{publishDate, date, long}"
-	},
-	"SelectLine": {
-		"label": "Procurar linha por número, nome, localização...",
-		"placeholder": "Procurar linha por número, nome, localização...",
-		"nothing_found": "Nenhum Resultado Encontrado"
-	},
-	"SelectStop": {
-		"label": "Procurar paragem por id, nome, localização...",
-		"placeholder": "Procurar paragem por id, nome, localização...",
-		"nothing_found": "Nenhum Resultado Encontrado"
-	},
-	"AppUnavailable": {
-		"title": "Em Construção",
-		"subtitle": "Esta página ainda não está pronta :)"
-	},
-	"AppRedirect": {
-		"title": "A redirecionar...",
-		"subtitle": "Se não for redirecionado automaticamente utilize o botão seguinte.",
-		"action": "Ir para a Página"
-	},
-	"CookiesPage": {
-		"title": "Política de Cookies",
-		"sections": {
-			"intro": {
-				"title": "Política de Cookies",
-				"paragraphs": {
-					"1": "A TML recorre à utilização de cookies e outras tecnologias similares para perceber como o website é utilizado, de modo a melhorar o seus conteúdos, segurança e desempenho. O objetivo é proporcionar uma melhor experiência de navegação."
-				}
-			},
-			"question_1": {
-				"title": "O que são cookies e para que servem?",
-				"paragraphs": {
-					"1": "Cookies são pequenos ficheiros de texto com informação relevante que o dispositivo de acesso (computador, telemóvel, smartphone, tablet, etc…) carrega, através do navegador de internet (browser), quando um site é visitado pelo utilizador.",
-					"2": "A utilização de cookies ajuda os websites a reconhecer o dispositivo do utilizador na visita seguinte sendo com frequência imprescindível para o funcionamento do mesmo.",
-					"3": "Os cookies usados pela TML não recolhem informações pessoais que permitam identificar um utilizador em particular, guardando apenas informações anónimas, genéricas e agregadas."
-				}
-			},
-			"question_2": {
-				"title": "Que tipos de Cookies existem?",
-				"paragraphs": {
-					"1": "Atendendo às finalidades para os quais são utilizados, os cookies podem ser classificados do seguinte modo:",
-					"2": "- Cookies estritamente necessários (também conhecidos por essenciais, técnicos ou básicos): são necessários para que o utilizador consiga aceder a áreas específicas do website, permitindo a navegação e a utilização das suas aplicações, tal como o acesso a áreas seguras do site, através de login. Sem estes cookies, os serviços que o exijam não podem ser prestados;",
-					"3": "- Cookies de funcionalidade (também conhecidos por preferenciais):permitem o website relembrar as preferências do utilizador relativamente à sua navegação no website, não necessitando, assim, de o reconfigurar e personalizar cada vez que o visita;",
-					"4": "- Cookies de performance (também conhecidos por analíticos ou estatísticos): são essencialmente utilizados para analisar a forma como o utilizador utiliza o website, permitindo destacar artigos ou serviços que podem ser do seu interesse, monitorizar o desempenho do website, dado a conhecer quais as páginas mais populares, qual o método de ligação entre páginas que é mais eficaz ou para determinar a razão de algumas páginas estarem a receber mensagens de erro;",
-					"5": "- Cookies de publicidade (também conhecidos por marketing ou de rastreio): permitem proporcionar ao utilizador informação publicitária em função de suas preferências e interesses, bem como, ajudam a medir a eficácia dos anúncios mostrados (ex. quantas vezes são vistos)."
-				}
-			},
-			"question_3": {
-				"title": "Qual a validade dos Cookies?",
-				"paragraphs": {
-					"1": "Quanto à sua validade, os cookies podem também ser classificados da seguinte forma:",
-					"2": "- Cookies permanentes: são cookies que ficam armazenados nos dispositivos de acesso, ao nível do navegador de internet (browser), e são usados sempre que o utilizador visita novamente o website. Em geral, são usados para direcionar a navegação de acordo com os interesses do utilizador, permitindo a prestação de um serviço mais personalizado;",
-					"3": "- Cookies de sessão: são cookies temporários, que são gerados e estão disponíveis até o utilizador encerrar a sessão. Da próxima vez que o utilizador aceder ao seu navegador de internet (browser), os cookies já não se encontrarão armazenados."
-				}
-			},
-			"question_4": {
-				"title": "Quais as possíveis origens dos Cookies?",
-				"paragraphs": {
-					"1": "Em função da sua origem, os cookies podem ainda ter a seguinte tipologia:",
-					"2": "- Cookies próprios (ou de primeira parte):são os que são enviados para o dispositivo do utilizador a partir de um website/domínio gerido pelo próprio editor e a partir do qual é fornecido o serviço solicitado pelo utilizador (o proprietário do website);",
-					"3": "- Cookies de terceiros (ou de terceira parte):são os que são enviados para o dispositivo do utilizador a partir de um domínio que não é gerido pelo editor do website, mas por outras entidades a quem aproveitam a informação obtida através desses cookies. Dada a sua origem e natureza, a utilização deste tipo de cookies é da exclusiva responsabilidade das entidades que os utilizam."
-				}
-			},
-			"question_5": {
-				"title": "Quais os Cookies ou tecnologias similares utilizados neste site?",
-				"table": {
-					"header": {
-						"col_1": "Tipo",
-						"col_2": "Domínio/Origem",
-						"col_3": "Finalidade",
-						"col_4": "Validade"
-					},
-					"rows": {
-						"1": {
-							"col_1": "NEXT_LOCALE",
-							"col_2": "carrismetropolitana.pt",
-							"col_3": "Identificar o idioma de preferência do utilizador",
-							"col_4": "1 ano"
-						},
-						"2": {
-							"col_1": "anonymous_analytics_enabled",
-							"col_2": "carrismetropolitana.pt",
-							"col_3": "Obter informação estatística sobre a utilização do site",
-							"col_4": "1 ano"
-						}
+						"legal": "Aviso Legal",
+						"privacy": "Política de Privacidade"
 					}
 				}
 			},
-			"question_6": {
-				"title": "Consentimento do utilizador:",
-				"paragraphs": {
-					"1": "Por serem essenciais ao bom funcionamento do site, a utilização de cookies estritamente necessários ou essenciais, não carece de consentimento prévio por parte do utilizador. Os demais (cookies de funcionalidade, performance ou publicidade) apenas serão utilizados caso o utilizador expressamente autorize a sua utilização.",
-					"2": "Uma vez aceite, pode a qualquer momento revogar esse consentimento, bastando para o efeito voltar à Política de Cookies e selecionar “Recusar e Limpar Dados”."
-				},
-				"accept": "Aceitar Política de Cookies",
-				"enabled": "Política de Cookies aceite",
-				"refuse": "Recusar e Limpar Dados",
-				"refuse_modal": {
-					"title": "Retirar consentimento",
-					"description": "Ao retirar o consentimento irá apagar todos os dados guardados neste site, incluindo todas as paragens e linhas favoritas.",
-					"confirm": "Sim, apagar tudo",
-					"cancel": "Cancelar"
+			"schedules": {
+				"label": "Horários",
+				"links": {
+					"alerts": "Alertas de Serviço",
+					"lines": "Pesquisar Linhas",
+					"planner": "Planear Viagem",
+					"schools": "Escolas & Universidades",
+					"stops": "Pesquisar Paragens"
 				}
 			},
-			"question_7": {
-				"title": "Como controlar o uso de Cookies?",
-				"paragraphs": {
-					"1": "Os utilizadores podem ainda impedir ou condicionar a utilização de cookies através das configurações do seu navegador. Se limitar esta opção, no entanto, a utilização de alguns recursos ou o desempenho de alguns websites pode ficar condicionada.",
-					"2": "Saiba como em:"
+			"support": {
+				"label": "Apoio ao Cliente",
+				"links": {
+					"contacts": "Contactos",
+					"faq": "Perguntas Frequentes",
+					"lost-and-found": "Perdidos e Achados",
+					"stores": "Lojas e Rede de Agentes"
 				}
 			},
-			"question_8": {
-				"title": "Direito de reserva",
-				"paragraphs": {
-					"1": "A TML reserva-se, a todo o tempo, no direito de alterar e/ou atualizar a informação constante da presente Política, assim como a faculdade de disponibilizar, a pedido, informações adicionais, mais detalhadas, sobre situações específicas em que são recolhidos e tratados dados pessoais."
+			"tarifs": {
+				"label": "Tarifas",
+				"links": {
+					"cards": "Passe Mensal",
+					"helpdesks": "Onde comprar",
+					"tickets": "Bilhetes Ocasionais"
 				}
-			}
-		}
-	},
-	"line": {
-		"pick_route": "Escolha um percurso/destino...",
-		"service_alerts": "Alertas de Serviço",
-		"from_until": "Entre {start} e {end}",
-		"route_explainer": "O que é o percurso/destino de uma linha?",
-		"next_buses": "Próximas circulações",
-		"schedules": "Horários",
-		"stop_info": "Sobre a Paragem",
-		"scheduled_times": "Horários Planeados",
-		"num_passengers": "passageiros transportados nesta linha nos últimos 15 dias"
-	},
-	"schedule": {
-		"hours": "Hora",
-		"minutes": "Min.",
-		"no_data": "Sem horários disponíveis",
-		"path": "Percurso"
-	},
-	"contacts": {
-		"Page": {
-			"heading": "Contactos",
-			"phone_line": "Linha informativa",
-			"phone_line_description": "Esta linha funciona todos os dias das 08:00 às 20:00 e é onde poderá tirar todas as suas dúvidas sobre a operação da Carris Metropolitana. Pergunte sobre linhas, percursos e horários, tarifas, ou efetue a sua reclamação.",
-			"operators": "Operadores cmetropolitana",
-			"operators_description": "Nesta linha pode contactar diretamente as empresas responsáveis pela operação de autocarros da Carris Metropolitana.",
-			"by_whatsapp": "Falar por WhatsApp",
-			"by_instagram": "Falar pelo Instagram",
-			"by_form": "Formulário de Contacto",
-			"lost_found": "Perdidos e Achados",
-			"form": {
-				"heading": "Formulário de Contacto",
-				"subheading": "A Carris Metropolitana está empenhada em prestar um serviço de qualidade e a sua opinião é fundamental para a melhoria contínua dos nossos serviços. Se tem alguma sugestão ou reclamação, por favor preencha o formulário abaixo."
 			}
 		}
 	},
 	"stops": {
-		"Single": {
-			"heading": "Pesquisar Paragens",
-			"lines_that_pass_here": "Linhas que passam nesta paragem"
+		"FavoritesList": {
+			"no_favorites": "Ainda não tem paragens favoritas"
+		},
+		"NextBusRow": {
+			"arriving_now": "A chegar",
+			"passed": "{value}",
+			"realtime": "{value} min",
+			"scheduled": "{value}"
+		},
+		"NextBuses": {
+			"hide": "Esconder passagens anteriores",
+			"show": "Ver passagens anteriores"
+		},
+		"NextBusesHeader": {
+			"estimate": "Previsão",
+			"headsign": "Destino",
+			"line": "Linha"
 		},
 		"Page": {
 			"heading": "Pesquisar Paragens"
@@ -699,110 +736,82 @@
 				"favorites": "{count, plural, =0 {Nenhuma paragem favorita encontrada.} one {Encontrada # paragem favorita:} other {Encontradas # paragens favoritas:}}"
 			}
 		},
-		"NextBusRow": {
-			"passed": "{value}",
-			"scheduled": "{value}",
-			"arriving_now": "A chegar",
-			"realtime": "{value} min"
-		},
-		"NextBusesHeader": {
-			"line": "Linha",
-			"headsign": "Destino",
-			"estimate": "Previsão"
-		},
-		"NextBuses": {
-			"show": "Ver passagens anteriores",
-			"hide": "Esconder passagens anteriores"
-		},
-		"FavoritesList": {
-			"no_favorites": "Ainda não tem paragens favoritas"
-		},
-		"expand_filters": "Expandir Filtros",
-		"collapse_filters": "Esconder Filtros"
-	},
-	"AlertsCarousel": {
-		"heading": "Alertas de Serviço"
-	},
-	"profile": {
-		"Page": {
-			"heading": "Perfil",
-			"field": {
-				"default_first_name": "Polvo",
-				"default_last_name": "Ecológico",
-				"first_name": "Primeiro Nome",
-				"last_name": "Último Nome",
-				"email": "Email",
-				"email_error": "Este email é inválido",
-				"email_tooltip": "Util para recuperar a conta caso seja perdida"
-			}
-		},
-		"sync": {
-			"heading": "Sincronizar Perfil",
-			"description": "Scannar o código QR para sincronizar o perfil",
-			"loading": "A sincronizar...",
-			"success": "Perfil sincronizado com sucesso!"
-		}
-	},
-	"favorites": {
-		"Page": {
-			"heading": "Favoritos"
-		},
-		"PageToolbar": {
-			"by_current_view": {
-				"lines": "Linhas",
-				"stops": "Paragens"
-			},
-			"found_items_counter": {
-				"lines": "{count, plural, =0 {Nenhuma linha encontrada.} one {Encontrada # linha:} other {Encontradas # linhas:}}",
-				"stops": "{count, plural, =0 {Nenhum paragem encontrado.} one {Encontrado # paragem:} other {Encontrados # paragens:}}"
-			}
-		}
-	},
-	"notifications": {
-		"Page": {
-			"heading": "Notificações Inteligentes",
-			"subheading": "Receba notificações sobre as suas linhas e paragens favoritas. Ative as notificações e fique a par de todas as alterações à rede.",
-			"new": "Nova Notificação"
-		},
 		"Single": {
-			"heading_new": "Nova Notificação",
-			"heading_edit": "Editar Notificação",
-			"line": "Notificar-me quando um veículo da linha",
-			"distance": "estiver a",
-			"distance_unit": {
-				"meters": "metros",
-				"minutes": "minutos"
-			},
-			"stop": "da paragem",
-			"time": "no perído",
-			"start_time": "Hora de Início",
-			"end_time": "Hora de Fim",
-			"weekday": "Dias da Semana",
-			"warning": "Atenção\nPor Favor Teste esta funcionalidade antes de utilizar com confiança. Poderá ser necessário ajustar os tempos para garantir que chega ao local.",
-			"create": "Criar Notificação"
+			"heading": "Pesquisar Paragens",
+			"lines_that_pass_here": "Linhas que passam nesta paragem"
 		},
-		"Card": {
-			"min": "Minutos",
-			"meters": "Metros"
+		"collapse_filters": "Esconder Filtros",
+		"expand_filters": "Expandir Filtros"
+	},
+	"stores": {
+		"StoresList": {
+			"external_link": "Rede de agentes navegante®",
+			"heading": "Lojas e Rede de Agentes",
+			"subheading": "Disponíveis para todos os passageiros, os Espaços navegante® estão dedicados a prestar informações sobre a rede e bilhética Carris Metropolitana, possibilitando o esclarecimento de dúvidas, a emissão de cartões navegante® e a adesão a perfis e descontos. É possível também efetuar o carregamento de títulos nos pontos de atendimento PayShop® da rede de agentes navegante®."
+		},
+		"StoresListEmpty": {
+			"by_municipality": {
+				"action_1": "Consultar Horários das Lojas",
+				"action_2": "Explorer Outros Municípios",
+				"action_3": "Explorer Rede de Agentes",
+				"subtitle": "Sugerimos que nos visite noutro local, para ser melhor atendido.",
+				"title": "Nenhuma loja disponível neste município"
+			},
+			"default": {
+				"action_1": "Consultar Horários das Lojas",
+				"action_2": "Explorer Rede de Agentes",
+				"subtitle": "Neste momento, todas as lojas aparentam estar encerradas.",
+				"title": "Nenhuma loja disponível por agora"
+			}
+		},
+		"StoresListGroupItem": {
+			"address": "Morada",
+			"get_directions": "Obter Direções",
+			"schedules": {
+				"and": "e",
+				"fri": "Sex",
+				"from": "De",
+				"label": "Horário",
+				"mon": "Seg",
+				"sat": "Sab",
+				"sun": "Dom",
+				"thu": "Qui",
+				"tue": "Ter",
+				"until": "até",
+				"wed": "Qua"
+			}
+		},
+		"StoresListGroupItemRealtime": {
+			"current_status": {
+				"busy": "Movimentado",
+				"closed": "Fechado / Completo",
+				"open": "Aberto Agora"
+			},
+			"desks_open": "{count, plural, =0 {Nenhum posto aberto} =1 {1 posto aberto} other {# postos abertos}}",
+			"expected_wait_time": "{count, plural, =0 {Atendimento imediato} other {Atendimento em aprox. # min}}",
+			"people_waiting": "{count, plural, =0 {Ninguém em espera} =1 {1 cliente em espera} other {# clientes em espera}}"
+		},
+		"StoresListGroups": {
+			"group_label": "Município"
+		},
+		"StoresListMap": {
+			"expected_wait_time": "{count, plural, =0 {# min} other {# min}}"
+		},
+		"StoresListToolbar": {
+			"by_current_status": {
+				"all": "Todas as lojas",
+				"open": "Abertas agora ({count})"
+			},
+			"by_municipality": {
+				"label": "Filtrar por Município"
+			},
+			"found_items_counter": "{count, plural, =0 {Nenhuma loja encontrada.} one {Encontrada # loja:} other {Encontradas # lojas:}}"
 		}
 	},
 	"toast": {
-		"update_profile_success": "Perfil atualizado com sucesso!",
+		"toggle_stop_error": "Erro ao adicionar o paragem aos favoritos. {error}",
 		"update_profile_error": "Erro ao atualizar o perfil.",
 		"update_profile_pending": "A Atualizar o perfil...",
-		"toggle_stop_error": "Erro ao adicionar o paragem aos favoritos. {error}"
-	},
-	"SelectPattern": {
-		"option_label": "Início do percurso: {locality}"
-	},
-	"map" : {
-		"toolbar": {
-			"style": {
-				"satellite": "Satélite",
-				"map": "Mapa"
-			},
-			"center_map" : "Centrar Mapa",
-			"open_google_maps": "Abrir no Google Maps"
-		}
+		"update_profile_success": "Perfil atualizado com sucesso!"
 	}
 }

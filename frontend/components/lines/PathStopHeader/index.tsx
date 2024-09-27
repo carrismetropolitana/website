@@ -2,7 +2,7 @@
 
 import type { Stop } from '@/types/stops.types';
 
-import FacilityIcon from '@/components/common/FacilityIcon';
+import { IconDisplay } from '@/components/common/IconDisplay';
 import parseStopLocationName from '@/utils/parseStopLocationName';
 import { useClipboard } from '@mantine/hooks';
 import { IconCheck, IconCopy } from '@tabler/icons-react';
@@ -57,7 +57,7 @@ export default function SingleStop({ isFirstStop, isLastStop, isSelected, stopDa
 			{isSelected && stopData.facilities.length > 0 && (
 				<div className={styles.facilitiesWrapper}>
 					{stopData.facilities.map(facility => (
-						<FacilityIcon key={facility} name={facility} />
+						<IconDisplay key={facility} category="facilities" name={facility} />
 					))}
 				</div>
 			)}

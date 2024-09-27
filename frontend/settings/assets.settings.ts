@@ -52,11 +52,11 @@ export const BrandsOperators = Object.freeze({
 
 export const IconsFacilities = Object.freeze({
 	court: '/icons/facilities/court.svg',
-	firemen: '/icons/facilities/firemen.svg',
+	fire_station: '/icons/facilities/fire_station.svg',
 	health_center: '/icons/facilities/health_center.svg',
 	hospital: '/icons/facilities/hospital.svg',
 	park: '/icons/facilities/park.svg',
-	police: '/icons/facilities/police.svg',
+	police_station: '/icons/facilities/police_station.svg',
 	school: '/icons/facilities/school.svg',
 	university: '/icons/facilities/university.svg',
 });
