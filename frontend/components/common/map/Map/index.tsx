@@ -27,6 +27,7 @@ const MAP_LOAD_ASSETS = [
 export type MapStyle = 'map' | 'satellite';
 
 interface Props {
+	centerLayer?: string
 	children: React.ReactNode
 	fullscreen?: boolean
 	geolocate?: boolean
@@ -51,6 +52,7 @@ interface Props {
 /* * */
 
 export default function Component({
+	centerLayer,
 	children,
 	fullscreen = true,
 	geolocate = true,
@@ -130,7 +132,7 @@ export default function Component({
 	// C. Render components
 	return (
 		<div className={styles.container}>
-			{toolbar && <MapToolBar className={styles.toolbar} />}
+			{toolbar && <MapToolBar centerLayer={centerLayer} className={styles.toolbar} />}
 			<Map
 				attributionControl={false}
 				cursor={cursor}

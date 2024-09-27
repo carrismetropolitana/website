@@ -22,7 +22,7 @@ const DEFAULT_OPTIONS = {
 
 interface MapOptionsContextState {
 	actions: {
-		centerMap: () => void
+		centerMap: (source?: string) => void
 		setMap: (map: MapRef) => void
 		setStyle: (value: MapStyle) => void
 		setViewportHeight: (value: number) => void
@@ -97,9 +97,9 @@ export const MapOptionsContextProvider = ({ children }) => {
 		setDataMapState(map);
 	};
 
-	const centerMap = () => {
+	const centerMap = (source = 'stops') => {
 		if (!dataMapState) return;
-		const stops = dataMapState.getSource('stops');
+		const stops = dataMapState.getSource(source);
 		if (!stops) return;
 
 		const combine = turf.combine(stops.serialize().data);

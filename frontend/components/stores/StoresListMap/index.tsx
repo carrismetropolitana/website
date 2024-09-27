@@ -76,7 +76,12 @@ export default function Component() {
 	// D. Render component
 
 	return (
-		<Map id="storesListMap" interactiveLayerIds={['stores-base']} onClick={handleMapClick}>
+		<Map
+			centerLayer="stores"
+			id="storesListMap"
+			interactiveLayerIds={['stores-base']}
+			onClick={handleMapClick}
+		>
 			{allStoresFeatureCollection && (
 				<Source data={allStoresFeatureCollection} id="stores" type="geojson">
 					<Layer

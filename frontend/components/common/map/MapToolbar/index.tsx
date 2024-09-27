@@ -9,7 +9,12 @@ import { useTranslations } from 'next-intl';
 
 import styles from './styles.module.css';
 
-export default function Component({ className }: { className?: string }) {
+interface Props {
+	centerLayer?: string
+	className?: string
+}
+
+export default function Component({ centerLayer, className }: Props) {
 	//
 	// A. Setup variables
 	const mapOptionsContext = useMapOptionsContext();
@@ -32,12 +37,16 @@ export default function Component({ className }: { className?: string }) {
 		window.open(`https://www.google.com/maps?q=${center.lat},${center.lng}&z=${map.getZoom() + 2}`, '_blank');
 	};
 
+	const handleCenterMap = () => {
+		mapOptionsContext.actions.centerMap(centerLayer);
+	};
+
 	//
 	// D. Render component
 	return (
 		<div className={classNames(styles.container, className)}>
 			<SegmentedControl classNames={{ label: styles.segmentedControlLabel }} data={mapStyles} onChange={mapOptionsContext.actions.setStyle} value={mapOptionsContext.data.style} />
-			<button className={styles.button} onClick={mapOptionsContext.actions.centerMap}>
+			<button className={styles.button} onClick={handleCenterMap}>
 				<TextPopover text={t('center_map')} textSize="md">
 					<IconArrowsMinimize />
 				</TextPopover>
