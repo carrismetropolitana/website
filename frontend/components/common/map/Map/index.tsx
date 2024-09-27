@@ -153,7 +153,7 @@ export default function Component({
 				onMoveEnd={handleOnMoveEnd}
 				onMoveStart={handleOnMoveStart}
 				scrollZoom={scrollZoom}
-				style={{ height: '100%', position: 'relative', width: '100%' }}
+				style={{ height: '100%', minHeight: '80vh', position: 'relative', width: '100%' }}
 			>
 				{navigation && <NavigationControl />}
 				{fullscreen && <FullscreenControl />}
