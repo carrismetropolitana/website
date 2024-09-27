@@ -1,4 +1,4 @@
-import FacilityIcon from '@/components/common/IconDisplay';
+import { IconDisplay } from '@/components/common/IconDisplay';
 import LiveIcon from '@/components/common/LiveIcon';
 import Timetable from '@/components/common/Timetable';
 import { Routes } from '@/utils/routes';
@@ -103,7 +103,7 @@ export default function Component(
 									&& (
 										<div className={styles.facilityIcons}>
 											{stop.facilities.map(facility => (
-												<FacilityIcon key={facility} name={facility} />
+												<IconDisplay key={facility} category="facilities" name={facility} />
 											))}
 										</div>
 									)}

@@ -3,8 +3,8 @@
 /* * */
 
 import CopyBadge from '@/components/common/CopyBadge';
-import FacilityIcon from '@/components/common/IconDisplay';
 import FavoriteToggle from '@/components/common/FavoriteToggle';
+import { IconDisplay } from '@/components/common/IconDisplay';
 import Section from '@/components/layout/Section';
 import { useProfileContext } from '@/contexts/Profile.context';
 import { useStopsSingleContext } from '@/contexts/StopsSingle.context';
@@ -75,7 +75,7 @@ export default function Component() {
 			</span>
 			<div className={styles.badges}>
 				{currentStop.facilities.map(facility => (
-					<FacilityIcon key={facility} name={facility} />))}
+					<IconDisplay key={facility} category="facilities" name={facility} />))}
 			</div>
 		</Section>
 	);
