@@ -5,7 +5,7 @@ import Section from '@/components/layout/Section';
 import PlannerCard from '@/components/planner/Card';
 import PlannerCardSkeleton from '@/components/planner/CardSkeleton';
 import { Link } from '@/i18n/routing';
-import { ImagesPlanner } from '@/utils/assets';
+import { ImagesPlanner } from '@/settings/assets.settings';
 import { shuffleArray } from '@/utils/shuffle';
 import { useTranslations } from 'next-intl';
 

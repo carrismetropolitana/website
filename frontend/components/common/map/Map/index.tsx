@@ -2,8 +2,8 @@
 
 /* * */
 
-import mapSettings from '@/settings/map.settings';
-import { IconsMap } from '@/utils/assets';
+import { IconsMap } from '@/settings/assets.settings';
+import { mapDefaultConfig } from '@/settings/map.settings';
 import maplibregl from 'maplibre-gl';
 import { useCallback, useEffect, useState } from 'react';
 import Map, { FullscreenControl, GeolocateControl, MapRef, NavigationControl, ScaleControl, useMap } from 'react-map-gl/maplibre';
@@ -14,11 +14,11 @@ import styles from './styles.module.css';
 /* * */
 
 const MAP_LOAD_ASSETS = [
-	{ name: 'cm-bus-regular', sdf: false, url: IconsMap.MAP_CM_BUS_REGULAR },
-	{ name: 'shape-arrow-direction', sdf: true, url: IconsMap.MAP_SHAPE_ARROW_DIRECTION },
-	{ name: 'cm-store-open', sdf: false, url: IconsMap.MAP_CM_STORE_OPEN },
-	{ name: 'cm-store-busy', sdf: false, url: IconsMap.MAP_CM_STORE_BUSY },
-	{ name: 'cm-store-closed', sdf: false, url: IconsMap.MAP_CM_STORE_CLOSED },
+	{ name: 'cm-bus-regular', sdf: false, url: IconsMap.bus_regular },
+	{ name: 'shape-arrow-direction', sdf: true, url: IconsMap.shape_direction },
+	{ name: 'cm-store-open', sdf: false, url: IconsMap.store_open },
+	{ name: 'cm-store-busy', sdf: false, url: IconsMap.store_busy },
+	{ name: 'cm-store-closed', sdf: false, url: IconsMap.store_closed },
 ];
 
 /* * */
@@ -129,13 +129,13 @@ export default function Component({
 				attributionControl={false}
 				cursor={cursor}
 				id={id || 'map'}
-				initialViewState={mapSettings.initialViewState}
+				initialViewState={mapDefaultConfig.initialViewState}
 				interactive={interactiveLayerIds ? true : false}
 				interactiveLayerIds={interactiveLayerIds}
 				mapLib={maplibregl}
-				mapStyle={mapSettings.styles[mapStyle as string] || mapSettings.styles.default}
-				maxZoom={mapSettings.styles[mapStyle as string].maxZoom || mapSettings.maxZoom}
-				minZoom={mapSettings.styles[mapStyle as string].minZoom || mapSettings.minZoom}
+				mapStyle={mapDefaultConfig.styles[mapStyle as string] || mapDefaultConfig.styles.default}
+				maxZoom={mapDefaultConfig.styles[mapStyle as string].maxZoom || mapDefaultConfig.maxZoom}
+				minZoom={mapDefaultConfig.styles[mapStyle as string].minZoom || mapDefaultConfig.minZoom}
 				onClick={onClick}
 				onMouseEnter={handleOnMouseEnter}
 				onMouseLeave={handleOnMouseLeave}

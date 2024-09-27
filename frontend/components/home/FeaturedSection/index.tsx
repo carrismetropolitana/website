@@ -2,7 +2,7 @@
 
 import FeaturedSectionCard from '@/components/home/FeaturedSectionCard';
 import Section from '@/components/layout/Section';
-import { ImagesHome } from '@/utils/assets';
+import { ImagesHome } from '@/settings/assets.settings';
 
 import styles from './styles.module.css';
 

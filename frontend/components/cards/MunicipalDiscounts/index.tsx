@@ -2,7 +2,7 @@
 
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/common/Card';
 import Section from '@/components/layout/Section';
-import { ImagesMunicipality } from '@/utils/assets';
+import { BrandsMunicipalities } from '@/settings/assets.settings';
 import { Image } from '@mantine/core';
 
 import styles from './styles.module.css';
@@ -12,17 +12,19 @@ import styles from './styles.module.css';
 const municipalDiscounts = [
 	{
 		description: 'A Câmara Municipal de Setúbal oferece, a todos os seus munícipes, 10€ de desconto sobre o valor do navegante® municipal Setúbal. Esta benece é cumulativa com outros descontos.',
-		icon: ImagesMunicipality.MUNICIPALITY_SETUBAL,
+		icon: BrandsMunicipalities.setubal,
 		name: 'CM Setúbal',
 		validity: new Date('2022-12-31').toLocaleDateString(),
 	},
 	{
 		description: 'A Câmara Municipal de Lisboa oferece o passe navegante® Lisboa a todos os munícipes com 65 ou mais anos de idade.',
-		icon: ImagesMunicipality.MUNICIPALITY_LISBOA,
+		icon: BrandsMunicipalities.lisboa,
 		name: 'CM Lisboa',
 		validity: 'active',
 	},
 ];
+
+/* * */
 
 export default function Component() {
 	return (

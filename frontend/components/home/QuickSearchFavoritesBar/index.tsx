@@ -9,7 +9,7 @@ import Loader from '@/components/common/Loader';
 import { useAlertsContext } from '@/contexts/Alerts.context';
 import { useProfileContext } from '@/contexts/Profile.context';
 import { Link, useRouter } from '@/i18n/routing';
-import { Routes } from '@/utils/routes';
+import { Routes, RoutesSchedule } from '@/utils/routes';
 import { useTranslations } from 'next-intl';
 import { useMemo } from 'react';
 import useSWR from 'swr';

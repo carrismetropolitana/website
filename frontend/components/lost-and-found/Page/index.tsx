@@ -2,7 +2,7 @@
 
 import Section from '@/components/layout/Section';
 import OperatorSection from '@/components/lost-and-found/OperatorSection';
-import { IconsCommon, ImagesCommon } from '@/utils/assets';
+import { IconsCommon, ImagesCommon } from '@/settings/assets.settings';
 import { RoutesLostAndFound } from '@/utils/routes';
 import { Image } from '@mantine/core';
 import { getTranslations } from 'next-intl/server';

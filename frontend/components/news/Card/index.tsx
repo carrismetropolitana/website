@@ -1,7 +1,7 @@
 /* * */
 
 import { Link } from '@/i18n/routing';
-import { ImagesCommon } from '@/utils/assets';
+import { ImagesCommon } from '@/settings/assets.settings';
 import { Routes } from '@/utils/routes';
 import { Image } from '@mantine/core';
 import { DateTime } from 'luxon';

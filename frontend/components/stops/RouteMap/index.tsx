@@ -1,5 +1,5 @@
 import LiveIcon from '@/components/common/LiveIcon';
-import { IconsMap } from '@/utils/assets';
+import { IconsMap } from '@/settings/assets.settings';
 import { Routes } from '@/utils/routes';
 import { Pattern, Shape, VehiclePosition } from '@/utils/types';
 import { bbox } from '@turf/turf';
@@ -137,11 +137,11 @@ export default function Component({ pattern }: { pattern: Pattern }) {
 
 	useEffect(() => {
 		// Change hardcoded urls
-		map?.loadImage(IconsMap.MAP_SHAPE_ARROW_DIRECTION).then((image) => {
+		map?.loadImage(IconsMap.shape_direction).then((image) => {
 			map.addImage('shape-arrow-direction', image.data, { sdf: true });
 		});
 
-		map?.loadImage(IconsMap.MAP_CM_BUS_REGULAR).then((image) => {
+		map?.loadImage(IconsMap.bus_regular).then((image) => {
 			map.addImage('cm-bus-regular', image.data, { sdf: false });
 		});
 	}, [map]);

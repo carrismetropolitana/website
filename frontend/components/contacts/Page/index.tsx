@@ -5,7 +5,7 @@
 import Button from '@/components/common/Button';
 import Form from '@/components/contacts/Form';
 import Section from '@/components/layout/Section';
-import { IconsCommon } from '@/utils/assets';
+import { IconsCommon } from '@/settings/assets.settings';
 import { Routes } from '@/utils/routes';
 import { IconBrandInstagram, IconBrandWhatsapp, IconMessage, IconPhone, IconUmbrella } from '@tabler/icons-react';
 import Image from 'next/image';

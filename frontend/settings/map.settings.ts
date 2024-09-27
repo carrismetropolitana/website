@@ -1,74 +1,78 @@
 /* * */
 
-export const defaults = Object.freeze({
+/**
+ * The default values for the map.
+ */
 
+export const mapDefaultValues = Object.freeze({
 	bearing: 0,
-
+	duration: 2000,
 	latitude: 38.7,
 	longitude: -9.0,
-
 	picth: 0,
-
+	speed: 4000,
 	zoom: 9.5,
+	zoom_margin: 3,
 	zoom_max: 20,
 	zoom_min: 5,
-
-	//
 });
 
-// Bearing, Pitch and Zoom
-const defaultBearing = 0;
-const defaultPicth = 0;
-const defaultZoom = 9.5;
+/* * */
 
-// Min and Max Zoom
-const minZoom = 5;
-const maxZoom = 20;
+/**
+ * The available styles for the map.
+ */
 
-//
-// MAP STYLES
-
-const styleMap = 'https://maps.carrismetropolitana.pt/styles/default/style.json';
-
-const styleSatellite = {
-	layers: [
-		{
-			id: 'simple-tiles',
-			source: 'raster-tiles',
-			type: 'raster',
+export const mapDefaultStyles = Object.freeze({
+	map: 'https://maps.carrismetropolitana.pt/styles/default/style.json',
+	satellite: {
+		layers: [
+			{
+				id: 'simple-tiles',
+				source: 'raster-tiles',
+				type: 'raster',
+			},
+		],
+		maxZoom: 18,
+		minZoom: 5,
+		sources: {
+			'raster-tiles': {
+				attribution: 'Esri, Maxar, Earthstar Geographics, and the GIS User Community',
+				tiles: ['https://server.arcgisonline.com/arcgis/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}'],
+				tileSize: 256,
+				type: 'raster',
+			},
 		},
-	],
-	maxZoom: 18,
-	minZoom: 5,
-	sources: {
-		'raster-tiles': {
-			attribution: 'Esri, Maxar, Earthstar Geographics, and the GIS User Community',
-			tiles: ['https://server.arcgisonline.com/arcgis/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}'],
-			tileSize: 256,
-			type: 'raster',
-		},
+		version: 8,
 	},
-	version: 8,
-};
+});
 
-//
-// EXPORT SINGLE OBJECT
+/* * */
 
-const config = {
-	center: [defaultLon, defaultLat],
-	initialViewState: { bearing: defaultBearing, latitude: defaultLat, longitude: defaultLon, pitch: defaultPicth, zoom: defaultZoom },
-	maxZoom: maxZoom,
-	minZoom: minZoom,
-	styles: { default: styleMap, map: styleMap, satellite: styleSatellite },
-	viewport: { bearing: defaultBearing, center: [defaultLon, defaultLat], pitch: defaultPicth, zoom: defaultZoom },
-};
+/**
+ * The configuration object for the map.
+ */
 
-export default config;
-
-export const MAP_DEFAULT_OPTIONS = {
-	duration: 2000,
-	maxZoom: 16,
-	speed: 4000,
-	zoom: 17,
-	zoomMargin: 3,
-};
+export const mapDefaultConfig = Object.freeze({
+	center: [mapDefaultValues.longitude, mapDefaultValues.latitude],
+	initialViewState: {
+		bearing: mapDefaultValues.bearing,
+		latitude: mapDefaultValues.latitude,
+		longitude: mapDefaultValues.longitude,
+		pitch: mapDefaultValues.picth,
+		zoom: mapDefaultValues.zoom,
+	},
+	maxZoom: mapDefaultValues.zoom_max,
+	minZoom: mapDefaultValues.zoom_min,
+	styles: {
+		default: mapDefaultStyles.map,
+		map: mapDefaultStyles.map,
+		satellite: mapDefaultStyles.satellite,
+	},
+	viewport: {
+		bearing: mapDefaultValues.bearing,
+		center: [mapDefaultValues.longitude, mapDefaultValues.latitude],
+		pitch: mapDefaultValues.picth,
+		zoom: mapDefaultValues.zoom,
+	},
+});
