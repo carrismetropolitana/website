@@ -192,11 +192,35 @@
 	},
 	"IconDisplay": {
 		"connections": {
-			"bus": "Ligação com Autocarro"
+			"bike_parking": "Perto de Estacionamento de Bicicletas",
+			"boat": "Ligação com o Barco",
+			"bus": "Ligação com outros Autocarros",
+			"car_parking": "Perto de Estacionamento Automóvel",
+			"light_rail": "Ligação com o Metro de Superfície",
+			"subway": "Ligação com o Metro",
+			"train": "Ligação com o Comboio"
 		},
 		"facilities": {
+			"court": "Perto de um Tribunal",
+			"fire_station": "Perto de um Quartel de Bombeiros",
+			"health_center": "Perto de um Centro de Saúde ou Clínca",
+			"hospital": "Perto de um Hospital",
+			"park": "Perto de um Parque",
+			"police_station": "Perto de uma Esquadra de Polícia",
 			"school": "Perto de uma Escola",
 			"university": "Perto de uma Universidade"
+		},
+		"operators": {
+			"atlantic_ferries": "Atlantic Ferries (barcos de Tróia)",
+			"ccfl": "Carris municipal",
+			"cmet": "CMET",
+			"cp": "CP Comboios de Portugal",
+			"fertagus": "Fertagus (comboio da Ponte)",
+			"metro": "Metro de Lisboa",
+			"mobi_cascais": "MobiCascais",
+			"mts": "Metro Transportes do Sul",
+			"tcb": "Transportes Colectivos do Barreiro",
+			"ttsl": "Transtejo e Soflusa"
 		}
 	},
 	"NewsCard": {
