@@ -1,0 +1,9 @@
+/* * */
+
+/* INNER WRAPPER */
+
+.areaWrapper {
+	display: grid;
+	grid-template-columns: 1fr 1fr;
+	gap: var(--size-spacing-10);
+}
