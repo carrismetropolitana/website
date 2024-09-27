@@ -40,6 +40,8 @@ export default function Component() {
 		const coordinates = [Number(linesDetailContext.data.active_stop.stop.lon), Number(linesDetailContext.data.active_stop?.stop.lat)];
 		if (coordinates.some(isNaN)) return;
 
+		console.log('Moving map to selected stop', coordinates);
+
 		moveMap(linesSingleMap, coordinates);
 	}, [linesDetailContext.data.active_stop, linesSingleMap]);
 

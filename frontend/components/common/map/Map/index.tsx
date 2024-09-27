@@ -2,6 +2,7 @@
 
 /* * */
 
+import { useMapOptionsContext } from '@/contexts/MapOptions.context';
 import { IconsMap } from '@/settings/assets.settings';
 import { mapDefaultConfig } from '@/settings/map.settings';
 import maplibregl from 'maplibre-gl';
@@ -23,6 +24,8 @@ const MAP_LOAD_ASSETS = [
 
 /* * */
 
+export type MapStyle = 'map' | 'satellite';
+
 interface Props {
 	children: React.ReactNode
 	fullscreen?: boolean
@@ -30,7 +33,7 @@ interface Props {
 	id?: string
 	interactiveLayerIds?: string[]
 	mapObject?: MapRef
-	mapStyle?: 'default' | 'map' | 'satellite'
+	mapStyle?: MapStyle
 	navigation?: boolean
 	onClick?: (arg0) => void
 	onMouseEnter?: (arg0) => void // When the mouse enters the interactive layer
@@ -53,7 +56,7 @@ export default function Component({
 	geolocate = true,
 	id,
 	interactiveLayerIds = [],
-	mapStyle = 'default',
+	mapStyle,
 	navigation = true,
 	onClick,
 	onMouseEnter,
@@ -70,6 +73,7 @@ export default function Component({
 	// A. Setup variables
 	const [cursor, setCursor] = useState<string>('auto');
 	const allMaps = useMap();
+	const mapOptionsContext = useMapOptionsContext();
 
 	//
 	// B. Transform data
@@ -77,7 +81,7 @@ export default function Component({
 	useEffect(() => {
 		if (!id || !allMaps || !allMaps[id]) return;
 		const mapObject = allMaps[id];
-		console.log(mapObject);
+		mapOptionsContext.actions.setMap(mapObject);
 		for (const mapLoadAsset of MAP_LOAD_ASSETS) {
 			mapObject.loadImage(mapLoadAsset.url).then((image) => {
 				mapObject.addImage(mapLoadAsset.name, image.data, { sdf: mapLoadAsset.sdf });
@@ -85,6 +89,8 @@ export default function Component({
 			});
 		}
 	}, [allMaps, id]);
+
+	const mapStyleValue = mapStyle ?? mapOptionsContext.data.style;
 
 	//
 	// C. Handle actions
@@ -133,9 +139,9 @@ export default function Component({
 				interactive={interactiveLayerIds ? true : false}
 				interactiveLayerIds={interactiveLayerIds}
 				mapLib={maplibregl}
-				mapStyle={mapDefaultConfig.styles[mapStyle as string] || mapDefaultConfig.styles.default}
-				maxZoom={mapDefaultConfig.styles[mapStyle as string].maxZoom || mapDefaultConfig.maxZoom}
-				minZoom={mapDefaultConfig.styles[mapStyle as string].minZoom || mapDefaultConfig.minZoom}
+				mapStyle={mapDefaultConfig.styles[mapStyleValue as string]}
+				maxZoom={mapDefaultConfig.maxZoom}
+				minZoom={mapDefaultConfig.minZoom}
 				onClick={onClick}
 				onMouseEnter={handleOnMouseEnter}
 				onMouseLeave={handleOnMouseLeave}

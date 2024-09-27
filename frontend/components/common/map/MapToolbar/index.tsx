@@ -1,6 +1,7 @@
 'use client';
 
 import TextPopover from '@/components/common/TextPopover';
+import { useMapOptionsContext } from '@/contexts/MapOptions.context';
 import { SegmentedControl, SegmentedControlItem } from '@mantine/core';
 import { IconArrowsMinimize, IconMapShare } from '@tabler/icons-react';
 import classNames from 'classnames';
@@ -11,6 +12,7 @@ import styles from './styles.module.css';
 export default function Component({ className }: { className?: string }) {
 	//
 	// A. Setup variables
+	const mapOptionsContext = useMapOptionsContext();
 	const t = useTranslations('map.toolbar');
 	const mapStyles: SegmentedControlItem[] = [
 		{ label: t('style.map'), value: 'map' },
@@ -18,20 +20,33 @@ export default function Component({ className }: { className?: string }) {
 	];
 
 	//
-	// C. Render component
+	// B. Transform data
+
+	//
+	// C. Handle events
+	const handleOpenInGoogle = () => {
+		const map = mapOptionsContext.data.map;
+		if (!map) return;
+
+		const center = map.getCenter();
+		window.open(`https://www.google.com/maps?q=${center.lat},${center.lng}&z=${map.getZoom() + 2}`, '_blank');
+	};
+
+	//
+	// D. Render component
 	return (
 		<div className={classNames(styles.container, className)}>
-			<SegmentedControl classNames={{ label: styles.segmentedControlLabel }} data={mapStyles} onChange={undefined} value={undefined} />
-			<div className={styles.button}>
+			<SegmentedControl classNames={{ label: styles.segmentedControlLabel }} data={mapStyles} onChange={mapOptionsContext.actions.setStyle} value={mapOptionsContext.data.style} />
+			<button className={styles.button} onClick={mapOptionsContext.actions.centerMap}>
 				<TextPopover text={t('center_map')} textSize="md">
 					<IconArrowsMinimize />
 				</TextPopover>
-			</div>
-			<div className={styles.button}>
+			</button>
+			<button className={styles.button} onClick={handleOpenInGoogle}>
 				<TextPopover text={t('open_google_maps')} textSize="md">
 					<IconMapShare />
 				</TextPopover>
-			</div>
+			</button>
 		</div>
 	);
 }

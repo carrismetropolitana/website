@@ -1,7 +1,11 @@
 'use client';
 
+import { MapStyle } from '@/components/common/map/Map';
+import { MapRef } from 'react-map-gl/maplibre';
 /* * */
 
+import * as turf from '@turf/turf';
+import maplibregl from 'maplibre-gl';
 import { createContext, useContext, useEffect, useState } from 'react';
 
 /* * */
@@ -18,9 +22,14 @@ const DEFAULT_OPTIONS = {
 
 interface MapOptionsContextState {
 	actions: {
+		centerMap: () => void
+		setMap: (map: MapRef) => void
+		setStyle: (value: MapStyle) => void
 		setViewportHeight: (value: number) => void
 	}
 	data: {
+		map: MapRef | undefined
+		style: string
 		viewport_height: null | number
 	}
 	flags: {
@@ -49,6 +58,8 @@ export const MapOptionsContextProvider = ({ children }) => {
 	// A. Setup variables
 
 	const [dataViewportHeightState, setDataViewportHeightState] = useState<MapOptionsContextState['data']['viewport_height']>(null);
+	const [dataStyleState, setDataStyleState] = useState<MapOptionsContextState['data']['style']>('map');
+	const [dataMapState, setDataMapState] = useState<MapOptionsContextState['data']['map']>(undefined);
 
 	//
 	// B. Transform data
@@ -78,14 +89,48 @@ export const MapOptionsContextProvider = ({ children }) => {
 		setDataViewportHeightState(value);
 	};
 
+	const setStyle = (value: MapStyle) => {
+		setDataStyleState(value);
+	};
+
+	const setMap = (map: MapRef) => {
+		setDataMapState(map);
+	};
+
+	const centerMap = () => {
+		if (!dataMapState) return;
+		const stops = dataMapState.getSource('stops');
+		if (!stops) return;
+
+		const combine = turf.combine(stops.serialize().data);
+		const coordinates = combine.features[0].geometry.coordinates;
+
+		// Calculate bounds
+		const bounds = coordinates.reduce((bounds, coord) => {
+			return bounds.extend(coord as [number, number]);
+		}, new maplibregl.LngLatBounds(coordinates[0] as [number, number], coordinates[0] as [number, number]));
+
+		dataMapState.fitBounds(
+			bounds,
+			{ padding: 130 },
+		);
+
+		return;
+	};
+
 	//
 	// D. Define context value
 
 	const contextValue: MapOptionsContextState = {
 		actions: {
+			centerMap,
+			setMap,
+			setStyle,
 			setViewportHeight,
 		},
 		data: {
+			map: dataMapState,
+			style: dataStyleState,
 			viewport_height: dataViewportHeightState,
 		},
 		flags: {
