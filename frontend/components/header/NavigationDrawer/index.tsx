@@ -7,8 +7,8 @@ import { ThemeSwitch } from '@/components/common/Theme';
 import HeaderLocaleSwitcher from '@/components/header/LocaleSwitcher';
 import NavigationMainMenuItem from '@/components/header/NavigationMainMenuItem';
 import SyncAccount from '@/components/profile/sync';
+import { BrandsCmet } from '@/settings/assets.settings';
 import { drawerNavigationGroup } from '@/settings/navigation.settings';
-import { Icons } from '@/utils/assets';
 import { CloseButton, Drawer, Image } from '@mantine/core';
 import { useDisclosure } from '@mantine/hooks';
 import { IconMenuDeep } from '@tabler/icons-react';
@@ -57,8 +57,8 @@ export default function Component() {
 						{/* TODO: Stage 2 */}
 						{/* <AccountUserAvatar withName /> */}
 						<ThemeSwitch
-							dark={<Image alt="Logo" height={40} src={Icons.BRAND_LOGO_DARK} />}
-							light={<Image alt="Logo" height={40} src={Icons.BRAND_LOGO_LIGHT} />}
+							dark={<Image alt="Logo" height={40} src={BrandsCmet.cmet_dark} />}
+							light={<Image alt="Logo" height={40} src={BrandsCmet.cmet_light} />}
 						/>
 						<CloseButton onClick={closeDrawer} />
 					</div>

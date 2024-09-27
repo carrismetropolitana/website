@@ -3,10 +3,10 @@
 import LiveIcon from '@/components/common/LiveIcon';
 import Map from '@/components/common/map/Map';
 import { useLinesDetailContext } from '@/contexts/LinesDetail.context';
+import { IconsMap } from '@/settings/assets.settings';
 import { Path, PatternGroup } from '@/types/lines.types';
 import { Stop } from '@/types/stops.types';
-import { IconsMap } from '@/utils/assets';
-import { moveMap } from '@/utils/map';
+import { moveMap } from '@/utils/map.utils';
 import { Routes } from '@/utils/routes';
 import { VehiclePosition } from '@/utils/types';
 import { useTranslations } from 'next-intl';
@@ -47,24 +47,24 @@ export default function Component() {
 	useEffect(() => {
 		if (!linesSingleMap) return;
 		// Load direction arrows
-		linesSingleMap.loadImage(IconsMap.MAP_SHAPE_ARROW_DIRECTION).then((image) => {
+		linesSingleMap.loadImage(IconsMap.shape_direction).then((image) => {
 			linesSingleMap.addImage('shape-arrow-direction', image.data, { sdf: true });
 		});
 
 		// Load vehicle symbol
-		linesSingleMap.loadImage(IconsMap.MAP_CM_BUS_REGULAR).then((image) => {
+		linesSingleMap.loadImage(IconsMap.bus_regular).then((image) => {
 			linesSingleMap.addImage('cm-bus-regular', image.data, { sdf: false });
 		});
 		// Load vehicle symbol
-		linesSingleMap.loadImage(IconsMap.MAP_CM_BUS_DELAY).then((image) => {
+		linesSingleMap.loadImage(IconsMap.bus_delay).then((image) => {
 			linesSingleMap.addImage('cm-bus-delay', image.data, { sdf: false });
 		});
 		// Load stop selected symbol
-		linesSingleMap.loadImage(IconsMap.MAP_STOP_SELECTED).then((image) => {
+		linesSingleMap.loadImage(IconsMap.stop_selected).then((image) => {
 			linesSingleMap.addImage('stop-selected', image.data, { sdf: false });
 		});
 		// Load pin symbol
-		linesSingleMap.loadImage(IconsMap.MAP_PIN).then((image) => {
+		linesSingleMap.loadImage(IconsMap.pin).then((image) => {
 			linesSingleMap.addImage('map-pin', image.data, { sdf: false });
 		});
 	}, [linesSingleMap]);

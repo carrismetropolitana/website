@@ -5,9 +5,9 @@
 import CopyBadge from '@/components/common/CopyBadge/';
 import { useDebugContext } from '@/contexts/Debug.context';
 import { useStopsSingleContext } from '@/contexts/StopsSingle.context';
+import { IconsMap } from '@/settings/assets.settings';
 import { Shape } from '@/types/lines.types';
 import { Stop } from '@/types/stops.types';
-import { IconsMap } from '@/utils/assets';
 import { Routes } from '@/utils/routes';
 import { VehiclePosition } from '@/utils/types';
 import * as turf from '@turf/turf';
@@ -200,11 +200,11 @@ export default function FrontendStopsMap() {
 			frontendStopsMap.addImage(id, response.data);
 		};
 		const images = [
-			{ id: 'shape-arrow-direction', url: IconsMap.MAP_SHAPE_ARROW_DIRECTION },
-			{ id: 'cm-bus-regular', url: IconsMap.MAP_CM_BUS_REGULAR },
-			{ id: 'cm-bus-delay', url: IconsMap.MAP_CM_BUS_DELAY },
-			{ id: 'stop-selected', url: IconsMap.MAP_STOP_SELECTED },
-			{ id: 'map-pin', url: IconsMap.MAP_PIN },
+			{ id: 'shape-arrow-direction', url: IconsMap.shape_direction },
+			{ id: 'cm-bus-regular', url: IconsMap.bus_regular },
+			{ id: 'cm-bus-delay', url: IconsMap.bus_delay },
+			{ id: 'stop-selected', url: IconsMap.stop_selected },
+			{ id: 'map-pin', url: IconsMap.pin },
 		];
 
 		Promise.all(images.map(image => loadImage(image.id, image.url)));

@@ -1,7 +1,7 @@
 /* * */
 
 import Section from '@/components/layout/Section';
-import { IconsCommon } from '@/utils/assets';
+import { IconsCommon } from '@/settings/assets.settings';
 import { Image } from '@mantine/core';
 
 import styles from './styles.module.css';

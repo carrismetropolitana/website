@@ -1,4 +1,4 @@
-import FacilityIcon from '@/components/common/FacilityIcon';
+import FacilityIcon from '@/components/common/IconDisplay';
 import LiveIcon from '@/components/common/LiveIcon';
 import Timetable from '@/components/common/Timetable';
 import { Routes } from '@/utils/routes';

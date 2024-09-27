@@ -1,6 +1,6 @@
 /* * */
 
-import { IconsMobile } from '@/utils/assets';
+import { IconsMobile } from '@/settings/assets.settings';
 
 export default function manifest() {
 	return {

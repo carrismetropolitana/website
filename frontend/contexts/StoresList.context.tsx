@@ -4,7 +4,7 @@
 
 import type { Store } from '@/types/stores.types.js';
 
-import { moveMap } from '@/utils/map';
+import { moveMap } from '@/utils/map.utils';
 import { Routes } from '@/utils/routes';
 import { createContext, useContext, useEffect, useState } from 'react';
 import { useMap } from 'react-map-gl/dist/esm/exports-maplibre';

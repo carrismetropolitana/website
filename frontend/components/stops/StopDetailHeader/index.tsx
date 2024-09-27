@@ -3,7 +3,7 @@
 /* * */
 
 import CopyBadge from '@/components/common/CopyBadge';
-import FacilityIcon from '@/components/common/FacilityIcon';
+import FacilityIcon from '@/components/common/IconDisplay';
 import FavoriteToggle from '@/components/common/FavoriteToggle';
 import Section from '@/components/layout/Section';
 import { useProfileContext } from '@/contexts/Profile.context';
