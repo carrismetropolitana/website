@@ -1,9 +1,0 @@
-/* * */
-/* CONTAINER */
-
-.item:last-child{
-  border-bottom: 0;
-}
-.item{
-  padding: 4;
-}
