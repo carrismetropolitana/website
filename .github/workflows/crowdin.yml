@@ -1,44 +1,44 @@
-# name: Sync with Crowdin
+name: Sync with Crowdin
 
-# on:
-#   push:
-#     branches:
-#       - alpha
+on:
+  push:
+    branches:
+      - alpha
 
-# jobs:
-#   #
+jobs:
+  #
 
-#   # # # # # # # # # # # # # # # # # # # # #
-#   # # # # # # # # # # # # # # # # # # # # #
+  # # # # # # # # # # # # # # # # # # # # #
+  # # # # # # # # # # # # # # # # # # # # #
 
-#   sync-with-crowdin:
-#     name: Sync with Crowdin
-#     runs-on: ubuntu-latest
-#     strategy:
-#       fail-fast: false
-#     permissions:
-#       contents: read
-#       packages: write
+  sync-with-crowdin:
+    name: Sync with Crowdin
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+    permissions:
+      contents: read
+      packages: write
 
-#     steps:
-#       - name: Checkout repository
-#         uses: actions/checkout@main
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@main
 
-#       - name: crowdin action
-#         uses: crowdin/github-action@v2
-#         with:
-#           upload_sources: true
-#           upload_translations: true
-#           download_translations: true
-#           localization_branch_name: l10n_crowdin_translations
-#           create_pull_request: true
-#           pull_request_title: 'New Crowdin Translations'
-#           pull_request_body: 'New Crowdin translations by [Crowdin GH Action](https://github.com/crowdin/github-action)'
-#           pull_request_base_branch_name: 'alpha'
-#         env:
-#           # A classic GitHub Personal Access Token with the 'repo' scope selected (the user should have write access to the repository).
-#           GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
-#           # A numeric ID, found at https://crowdin.com/project/<projectName>/tools/api
-#           CROWDIN_PROJECT_ID: ${{ secrets.CROWDIN_PROJECT_ID }}
-#           # Visit https://crowdin.com/settings#api-key to create this token
-#           CROWDIN_PERSONAL_TOKEN: ${{ secrets.CROWDIN_PERSONAL_TOKEN }}
+      - name: crowdin action
+        uses: crowdin/github-action@v2
+        with:
+          upload_sources: true
+          upload_translations: true
+          download_translations: true
+          localization_branch_name: l10n_crowdin_translations
+          create_pull_request: true
+          pull_request_title: 'New Crowdin Translations'
+          pull_request_body: 'New Crowdin translations by [Crowdin GH Action](https://github.com/crowdin/github-action)'
+          pull_request_base_branch_name: 'alpha'
+        env:
+          # A classic GitHub Personal Access Token with the 'repo' scope selected (the user should have write access to the repository).
+          GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
+          # A numeric ID, found at https://crowdin.com/project/<projectName>/tools/api
+          CROWDIN_PROJECT_ID: ${{ secrets.CROWDIN_PROJECT_ID }}
+          # Visit https://crowdin.com/settings#api-key to create this token
+          CROWDIN_PERSONAL_TOKEN: ${{ secrets.CROWDIN_PERSONAL_TOKEN }}
