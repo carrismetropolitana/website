@@ -73,14 +73,7 @@ export const ProfileContextProvider = ({ children }) => {
 		// Get device id from local storage
 		// If no device id is found then generate a new one
 		if (typeof window === 'undefined') return;
-		const deviceIdLocal = localStorage.getItem(LOCAL_STORAGE_KEYS.device_id);
-
-		if (!deviceIdLocal) {
-			_createDeviceId();
-		}
-		else {
-			setDeviceId(deviceIdLocal);
-		}
+		_createDeviceId();
 	}, []);
 
 	useEffect(() => {
@@ -102,6 +95,14 @@ export const ProfileContextProvider = ({ children }) => {
 	}, [deviceId]);
 
 	function _createDeviceId() {
+		// Check if device id exists in local storage
+		const device_id = localStorage.getItem(LOCAL_STORAGE_KEYS.device_id);
+		if (device_id) {
+			setDeviceId(device_id);
+			return;
+		}
+
+		// Generate a new device id and save it to local storage
 		const id = uuid();
 		localStorage.setItem(LOCAL_STORAGE_KEYS.device_id, id);
 		setDeviceId(id);
