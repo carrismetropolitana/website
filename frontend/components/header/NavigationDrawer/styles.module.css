@@ -1,36 +1,41 @@
 /* * */
+
 /* Drawer Content */
+
 .drawerContent{
-	height: 100vh;
-	overflow-y: hidden;
 	display: flex;
 	flex-direction: column;
+	height: 100vh;
+	overflow-y: hidden;
 }
 
 /* * */
+
 /* USER PROFILE */
 
 .userProfile {
 	display: flex;
 	align-items: center;
 	justify-content: space-between;
+	padding: var(--size-spacing-15);
 	font-size: var(--font-size-subtitle);
 	font-weight: var(--font-weight-subtitle);
-	padding: var(--size-spacing-15);
 }
 
 /* * */
+
 /* NAV LIST */
 
 .navList {
 	display: flex;
 	flex-direction: column;
 	gap: var(--size-spacing-15);
-	border-bottom: 1px solid var(--color-system-border-100);
 	overflow-y: auto;
+	border-bottom: 1px solid var(--color-system-border-100);
 }
 
 /* * */
+
 /* COMPONENT WRAPPER */
 
 .componentWrapper {
@@ -38,6 +43,7 @@
 }
 
 /* * */
+
 /* COMPONENT WRAPPER */
 
 .topBorder {
@@ -45,34 +51,39 @@
 }
 
 /* * */
+
 /* Group */
+
 .group {
 	display: flex;
 	flex-direction: column;
 }
 
 /* * */
-/* Group Label*/
+
+/* Group Label */
+
 .groupLabel {
 	margin: 0 var(--size-spacing-15);
-	color: var(--color-system-text-300);
 	font-size: 14px;
+	color: var(--color-system-text-300);
 }
 
 /* * */
+
 /* Menu Icon */
+
 .menuIcon {
-	width: 32px;
-	height: 32px;
-	margin: var(--size-spacing-15);
 	display: flex;
-	cursor: pointer;
 	align-items: center;
 	justify-content: center;
+	height: 100%;
+	aspect-ratio: 1/1;
 	text-align: center;
+	cursor: pointer;
 	transition: all 200ms ease;
+}
 
-	&:hover {
-		color: var(--color-system-text-200);
-	}
+.menuIcon:hover {
+	color: var(--color-system-text-200);
 }
