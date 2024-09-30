@@ -7,8 +7,8 @@ import type { Formats } from 'next-intl';
 export const defaultLocaleCode = 'pt-PT';
 
 export const availableLocales = [
-	{ alias: ['pt', 'pt_PT', 'pt-BR', 'pt_BR', 'pt-GW', 'pt_GW', 'pt-MZ', 'pt_MZ', 'en_US', 'en-US'], enabled: true, value: 'pt-PT' },
-	{ alias: [], enabled: false, value: 'en' },
+	{ alias: ['pt', 'pt_PT', 'pt-BR', 'pt_BR', 'pt-GW', 'pt_GW', 'pt-MZ', 'pt_MZ'], enabled: true, value: 'pt-PT' },
+	{ alias: ['en', 'en_US'], enabled: true, value: 'en-US' },
 ];
 
 export const enabledLocaleCodes = availableLocales.filter(item => item.enabled).map(({ value }) => value);
