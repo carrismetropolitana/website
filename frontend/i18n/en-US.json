@@ -1,0 +1,841 @@
+{
+	"AlertsCarousel": {
+		"heading": "Service Alerts"
+	},
+	"AppError": {
+		"goto_home": "Return to main page",
+		"redirect": "Going back to the main page and in {value} second{s}.",
+		"retry": "Retry in {value} seconds",
+		"subtitle": "We have been notified and will correct it soon. Thank you for your understanding.",
+		"sync": "Failed to sync devices.",
+		"title": "An unexpected error occurred",
+		"token": "The authentication token is missing.",
+		"unauthorized": "Authentication failed."
+	},
+	"AppRedirect": {
+		"action": "Go to Page",
+		"subtitle": "If it is not automatically redirected, use the next button.",
+		"title": "Redirecting..."
+	},
+	"AppUnavailable": {
+		"subtitle": "This page is not ready yet :)",
+		"title": "Under construction"
+	},
+	"CookiesPage": {
+		"sections": {
+			"intro": {
+				"paragraphs": {
+					"1": "TML uses cookies and other similar technologies to understand how the website is used, in order to improve its content, security and performance. The goal is to provide a better browsing experience."
+				},
+				"title": "Cookies Policy"
+			},
+			"question_1": {
+				"paragraphs": {
+					"1": "Cookies are small text files with relevant information that the access device (computer, cell phone, smartphone, tablet, etc.…) loads, through the internet browser (browser), when a website is visited by the user.",
+					"2": "The use of cookies helps websites recognize the user's device on the next visit and is often essential for its functioning.",
+					"3": "The cookies used by TML do not collect personal information that allows a particular user to be identified, but only store anonymous, generic and aggregated information."
+				},
+				"title": "What are cookies and what are they for?"
+			},
+			"question_2": {
+				"paragraphs": {
+					"1": "Taking into account the purposes for which they are used, cookies can be classified as follows:",
+					"2": "- Strictly necessary cookies (also known as essential, technical or basic): they are necessary for the user to be able to access specific areas of the website, allowing navigation and use of its applications, such as access to secure areas of the website, through login. Without these cookies, services that require them cannot be provided;",
+					"3": "- Functionality cookies (also known as preference cookies): allow the website to remember the user's preferences regarding their navigation on the website, thus not needing to reconfigure and personalize it each time they visit;",
+					"4": "- Performance cookies (also known as analytical or statistical): they are essentially used to analyze how the user uses the website, allowing you to highlight articles or services that may be of interest to you, monitor the performance of the website, letting you know which most popular pages, which method of linking between pages is most effective, or to determine why some pages are receiving error messages;",
+					"5": "- Advertising cookies (also known as marketing or tracking cookies): allow the user to be provided with advertising information based on their preferences and interests, as well as helping to measure the effectiveness of the advertisements shown (e.g. how many times they are seen)."
+				},
+				"title": "What types of Cookies are there?"
+			},
+			"question_3": {
+				"paragraphs": {
+					"1": "Regarding their validity, cookies can also be classified as follows:",
+					"2": "- Permanent cookies: these are cookies that are stored on access devices, at the browser level, and are used whenever the user visits the website again. In general, they are used to direct navigation according to the user's interests, allowing the provision of a more personalized service;",
+					"3": "- Session cookies: these are temporary cookies, which are generated and are available until the user ends the session. The next time the user accesses their internet browser, cookies will no longer be stored."
+				},
+				"title": "How valid are Cookies?"
+			},
+			"question_4": {
+				"paragraphs": {
+					"1": "Depending on their origin, cookies may also have the following typology:",
+					"2": "- Own (or first-party) cookies: these are those sent to the user's device from a website/domain managed by the publisher itself and from where the service requested by the user is provided (the website owner);",
+					"3": "- Third-party (or third-party) cookies: these are those that are sent to the user's device from a domain that is not managed by the website editor, but by other entities who use the information obtained through these cookies. Given their origin and nature, the use of this type of cookies is the exclusive responsibility of the entities that use them."
+				},
+				"title": "What are the possible origins of Cookies?"
+			},
+			"question_5": {
+				"table": {
+					"header": {
+						"col_1": "Type",
+						"col_2": "Domain/Origin",
+						"col_3": "Purpose",
+						"col_4": "Validity"
+					},
+					"rows": {
+						"1": {
+							"col_1": "NEXT_LOCALE",
+							"col_2": "carrismetropolitana.us",
+							"col_3": "Identify the user's preferred language",
+							"col_4": "1 year"
+						},
+						"2": {
+							"col_1": "anonymous_analytics_enabled",
+							"col_2": "carrismetropolitana.us",
+							"col_3": "Obtain statistical information about website usage",
+							"col_4": "1 year"
+						}
+					}
+				},
+				"title": "What Cookies or similar technologies are used on this website?"
+			},
+			"question_6": {
+				"accept": "Accept Cookies Policy",
+				"enabled": "Cookies Policy accepted",
+				"paragraphs": {
+					"1": "As they are essential for the proper functioning of the website, the use of strictly necessary or essential cookies does not require prior consent from the user. The rest (functionality, performance or advertising cookies) will only be used if the user expressly authorizes their use.",
+					"2": "Once accepted, you can revoke this consent at any time by simply returning to the Cookie Policy and selecting “Refuse and Clear Data”."
+				},
+				"refuse": "Opt Out and Clear Data",
+				"refuse_modal": {
+					"cancel": "Cancel",
+					"confirm": "Yes, delete everything",
+					"description": "By withdrawing consent you will delete all data saved on this website, including all stops and favorite lines.",
+					"title": "Withdraw consent"
+				},
+				"title": "User Consent:"
+			},
+			"question_7": {
+				"paragraphs": {
+					"1": "Users can also prevent or condition the use of cookies through their browser settings. If you limit this option, however, your use of some features or the performance of some sites may be affected.",
+					"2": "Find out how at:"
+				},
+				"title": "How to control the use of Cookies?"
+			},
+			"question_8": {
+				"paragraphs": {
+					"1": "TML reserves, at any time, the right to change and/or update the information contained in this Policy, as well as the right to provide, upon request, additional, more detailed information on specific situations in which data is collected and processed. personal."
+				},
+				"title": "Right of reservation"
+			}
+		},
+		"title": "Cookies Policy"
+	},
+	"HeaderLocaleSwitcher": {
+		"en": {
+			"alt": "English",
+			"label": "🇬🇧"
+		},
+		"fr": {
+			"alt": "Français",
+			"label": "🇫🇷"
+		},
+		"pt-PT": {
+			"alt": "Portuguese",
+			"label": "🇵🇹"
+		}
+	},
+	"HeaderLogo": {
+		"logo": {
+			"alt": "Metropolitan Trails"
+		}
+	},
+	"HeaderNavigationAccount": {
+		"configs": "Personalize Experience",
+		"favorites": "Favorites",
+		"profile": "Profile"
+	},
+	"HomeMetricsSection": {
+		"heading": "Our live operation"
+	},
+	"HomeMetricsSectionDemand": {
+		"area": {
+			"label": "Number of validations in the Area {area} today",
+			"value": "{value, number}"
+		},
+		"by_line": {
+			"selected": "passengers transported on this line",
+			"top": "lines with the most passengers transported today"
+		},
+		"lastMonth": {
+			"label": "passengers carried in {month}",
+			"value": "{value, number}"
+		},
+		"popover": {
+			"link": "Exploring Open Data",
+			"text": "Values of passengers transported updated every 60 minutes."
+		},
+		"today": {
+			"label": "passengers transported today",
+			"value": "{value, number}"
+		},
+		"yearToDate": {
+			"label": "passengers transported this year",
+			"value": "{value, number}"
+		},
+		"yesterday": {
+			"label": "passengers transported yesterday",
+			"value": "{value, number}"
+		}
+	},
+	"HomeQuickSearchWidget": {
+		"options": {
+			"lines": "Lines",
+			"stops": "Stops"
+		},
+		"search": {
+			"label": "Find the planned and real-time schedules for the line you are looking for.",
+			"nothing_found": "Find the planned and real-time schedules for the line you are looking for.",
+			"placeholder": "Find the planned and real-time schedules for the line you are looking for."
+		},
+		"subtitle": "Find the planned and real-time schedules for the line you are looking for.",
+		"title": "Quick Search"
+	},
+	"IconDisplay": {
+		"connections": {
+			"bike_parking": "Near Bike Parking",
+			"boat": "Connection to the Boat",
+			"bus": "Connection with other buses",
+			"car_parking": "Near Car Parking",
+			"light_rail": "Connection with the Light Rail",
+			"subway": "Connection with the Metro",
+			"train": "Connection with the Train"
+		},
+		"facilities": {
+			"court": "Near a Court",
+			"fire_station": "Close to a Fire Station",
+			"health_center": "Near a Health Center or Clinic",
+			"hospital": "Near a Hospital",
+			"park": "Near a Park",
+			"police_station": "Near a Police Station",
+			"school": "Near a School",
+			"university": "Close to a University"
+		},
+		"operators": {
+			"atlantic_ferries": "Atlantic Ferries (boats from Troy)",
+			"ccfl": "Municipal rails",
+			"cmet": "CMET",
+			"cp": "CP Comboios de Portugal",
+			"fertagus": "Fertagus (Bridge train)",
+			"metro": "Lisbon Metro",
+			"mobi_cascais": "MobiCascais",
+			"mts": "Southern Transport Metro",
+			"tcb": "Barreiro Public Transport",
+			"ttsl": "Transtejo and Soflusa"
+		}
+	},
+	"NewsCard": {
+		"publish_date": "{publishDate, date, long}"
+	},
+	"SelectLine": {
+		"label": "Search line by number, name, location...",
+		"nothing_found": "No Results Found",
+		"placeholder": "Search line by number, name, location..."
+	},
+	"SelectPattern": {
+		"option_label": "Start of route: {locality}"
+	},
+	"SelectStop": {
+		"label": "Search stop by id, name, location...",
+		"nothing_found": "No Results Found",
+		"placeholder": "Search stop by id, name, location..."
+	},
+	"alerts": {
+		"AlertActivePeriod": {
+			"end": "End: <parsedDate>{end, date, dayShort} {end, date, monthLong} {end, date, yearLong}</parsedDate>",
+			"start": "Start: <parsedDate>{start, date, dayShort} {start, date, monthLong} {start, date, yearLong}</parsedDate>"
+		},
+		"AlertCauseEffectIcon": {
+			"cause": {
+				"ACCIDENT": "Accident",
+				"CONSTRUCTION": "Works",
+				"DEMONSTRATION": "Event / Demonstration",
+				"HOLIDAY": "Vacation",
+				"MAINTENANCE": "Maintenance",
+				"MEDICAL_EMERGENCY": "Medical Emergency",
+				"OTHER_CAUSE": "Other Causes",
+				"POLICE_ACTIVITY": "Police Activity",
+				"STRIKE": "Strike",
+				"TECHNICAL_PROBLEM": "Technical Problem",
+				"UNKNOWN_CAUSE": "Other Causes",
+				"WEATHER": "Bad Weather"
+			},
+			"effect": {
+				"ACCESSIBILITY_ISSUE": "Impact on Accessibility",
+				"ADDITIONAL_SERVICE": "Service Increase",
+				"DETOUR": "Detour",
+				"MODIFIED_SERVICE": "Changing Schedules",
+				"NO_EFFECT": "Other",
+				"NO_SERVICE": "Service Canceled",
+				"OTHER_EFFECT": "Other",
+				"REDUCED_SERVICE": "Reduced Service",
+				"SIGNIFICANT_DELAYS": "Significant Delays",
+				"STOP_MOVED": "Shifted Stop",
+				"UNKNOWN_EFFECT": "Other"
+			}
+		},
+		"AlertsDetail": {
+			"more_info": "More information",
+			"open_full_image": "Open image in new window"
+		},
+		"AlertsList": {
+			"heading": "Service Alerts",
+			"subheading": "Stay up to date with all changes on the network. Lorem ipsum dolor sit amet."
+		},
+		"AlertsListEmpty": {
+			"default": {
+				"action_1": "Check Active Alerts Today",
+				"action_2": "Install the App",
+				"subtitle": "Install the Trilhos Metropolitan App and receive notifications about changes to the network.",
+				"title": "No alerts scheduled"
+			}
+		},
+		"AlertsListGroup": {
+			"label": "{count, plural, one {Alert active} other {Alerts active}}",
+			"titles": {
+				"future": "From {value, date, dayShort} {value, date, monthLong} {value, date, yearLong}",
+				"past": "Since {value, date, dayShort} {value, date, monthLong} {value, date, yearLong}",
+				"today": "Starting today, {value, date, dayShort} {value, date, monthLong} {value, date, yearLong}",
+				"tomorrow": "Starting tomorrow, {value, date, dayShort} {value, date, monthLong} {value, date, yearLong}",
+				"yesterday": "Since yesterday, {value, date, dayShort} {value, date, monthLong} {value, date, yearLong}"
+			}
+		},
+		"AlertsListItem": {
+			"open": "Open"
+		},
+		"AlertsListToolbar": {
+			"by_date": {
+				"current": "This week",
+				"future": "Futures"
+			},
+			"found_items_counter": "{count, plural, =0 {No alerts found.} one {Found # alert:} other {Found # alert:}}"
+		}
+	},
+	"analytics": {
+		"ConsentPopup": {
+			"accept": "OK",
+			"privacy_policy": "Consult Cookies Policy",
+			"refuse": "No thanks",
+			"text": "In order to improve the performance, content and security of this website, TML intends to use cookies or similar technologies.",
+			"title": "We respect your privacy"
+		}
+	},
+	"app": {
+		"DownloadBeta": {
+			"android": "Android",
+			"heading": "Beta: CMMetropolitano App",
+			"iphone": "Apple iPhone",
+			"subheading": "Download the beta version of the Carris Metropolitana app for iOS or Android, and contribute to the future of this app."
+		},
+		"DownloadProduction": {
+			"android": "Android",
+			"heading": "CMMetropolitano app",
+			"iphone": "Apple iPhone",
+			"subheading": "Download the Carris Metropolitana app for iOS or Android."
+		},
+		"StartupMessages1": {
+			"actions": {
+				"close": "To close",
+				"update_android": "Update on Play Store",
+				"update_ios": "Update on the App Store"
+			},
+			"heading": "Update available",
+			"subheading": "There is a new, improved version of the CMetropolitano app.",
+			"text": "We recommend you to update soon for better user experience."
+		}
+	},
+	"common": {
+		"SelectOperationalDay": {
+			"today": "Today",
+			"tomorrow": "Tomorrow"
+		},
+		"TimetableExceptionsLink": {
+			"schedule": "Min.",
+			"variant": "<exceptionId>{exception_id})</exceptionId> Route <routeLongName>{route_long_name}</routeLongName> to <patternHeadsign>{pattern_headsign}</patternHeadsign>"
+		},
+		"TimetableSchedules": {
+			"hours": "Time",
+			"minutes": "Min."
+		},
+		"button": {
+			"add": "To add",
+			"cancel": "Cancel",
+			"confirm": "Confirm",
+			"delete": "Delete",
+			"edit": "Edit",
+			"generate": "To generate",
+			"remove": "Remove",
+			"save": "Save"
+		},
+		"month": {
+			"april": "April",
+			"august": "August",
+			"december": "December",
+			"february": "February",
+			"january": "January",
+			"july": "July",
+			"june": "June",
+			"march": "March",
+			"may": "May",
+			"november": "November",
+			"october": "October",
+			"september": "September",
+			"short": {
+				"april": "Apr",
+				"august": "Aug",
+				"december": "Ten",
+				"february": "Feb",
+				"january": "Jan",
+				"july": "Jul",
+				"june": "June",
+				"march": "Sea",
+				"may": "May",
+				"november": "Nov",
+				"october": "Oct",
+				"september": "Set"
+			}
+		},
+		"weekdays": {
+			"friday": "Friday",
+			"monday": "Monday",
+			"saturday": "Saturday",
+			"short": {
+				"friday": "Fri",
+				"monday": "Mon",
+				"saturday": "Sat",
+				"sunday": "Sun",
+				"thursday": "Thu",
+				"tuesday": "To have",
+				"wednesday": "Wed"
+			},
+			"sunday": "Sunday",
+			"thursday": "Thursday",
+			"tuesday": "Tuesday",
+			"wednesday": "Wednesday"
+		}
+	},
+	"contacts": {
+		"Page": {
+			"by_form": "Contact Form",
+			"by_instagram": "Talk on Instagram",
+			"by_whatsapp": "Talk via WhatsApp",
+			"form": {
+				"heading": "Contact Form",
+				"subheading": "Carris Metropolitana is committed to providing a quality service and your opinion is essential for the continuous improvement of our services. If you have any suggestions or complaints, please fill out the form below."
+			},
+			"heading": "Contacts",
+			"lost_found": "Lost and Found",
+			"operators": "Cmetropolitan Operators",
+			"operators_description": "In this line you can contact directly the companies responsible for operating Carris Metropolitana buses.",
+			"phone_line": "Information line",
+			"phone_line_description": "This line operates every day from 8:00 am to 8:00 pm and is where you can ask all your questions about the operation of Trilhos Metropolitana. Ask about lines, routes and timetables, fares, or make a complaint."
+		}
+	},
+	"faq": {
+		"FaqList": {
+			"label": "Topic"
+		},
+		"Page": {
+			"contacts": "Contacts",
+			"heading": "Frequently Asked Questions",
+			"subheading": "On this page you will find answers to the most frequently asked questions about our service. If you would like additional clarification, do not hesitate to contact us."
+		}
+	},
+	"favorites": {
+		"Page": {
+			"heading": "Favorites"
+		},
+		"PageToolbar": {
+			"by_current_view": {
+				"lines": "Lines",
+				"stops": "Stops"
+			},
+			"found_items_counter": {
+				"lines": "{count, plural, =0 {No lines found.} one {Found # line:} other {Found # lines:}}",
+				"stops": "{count, plural, =0 {No stops found.} one {Found # stops:} other {Found # stops:}}"
+			}
+		}
+	},
+	"footer": {
+		"DebugToggle": {
+			"disabled": "Turn on Debug",
+			"enabled": "Turn off Debug"
+		},
+		"Footer": {
+			"copyright": "© Metropolitan Railways {year} - All rights reserved"
+		}
+	},
+	"home": {
+		"MainCarouselCard": {
+			"learn_more": "Find out more"
+		},
+		"NewsSection": {
+			"section_heading": "News"
+		},
+		"QuickSearchFavoritesBar": {
+			"empty": "No favorite lines yet...",
+			"more": "{count, plural, one {+ # line} other {+ # lines}}"
+		},
+		"SchedulesSection": {
+			"section_heading": "Schedules"
+		},
+		"SupportSection": {
+			"section_heading": "Customer Support"
+		},
+		"TarifsSection": {
+			"section_heading": "Rates"
+		}
+	},
+	"layout": {
+		"NoDataLabel": {
+			"default": "No data available"
+		},
+		"Section": {
+			"back": {
+				"label": "To go back"
+			}
+		}
+	},
+	"line": {
+		"from_until": "Between {start} and {end}",
+		"next_buses": "Next circulations",
+		"num_passengers": "passengers transported on this line in the last 15 days",
+		"pick_route": "Choose a route/destination...",
+		"route_explainer": "What is the path/destination of a line?",
+		"scheduled_times": "Planned Times",
+		"schedules": "Schedules",
+		"service_alerts": "Service Alerts",
+		"stop_info": "About the Parade"
+	},
+	"lines": {
+		"AlertsCarousel": {
+			"heading": "Service Alerts"
+		},
+		"LinesDetail": {
+			"heading": "Search Lines",
+			"toggle_favorite_error": "Error adding line to favorites. {error}"
+		},
+		"LinesDetailMetrics": {
+			"demand": {
+				"big_number": "{value, number}",
+				"subtitle": "passengers transported on this line in the last 15 days"
+			},
+			"service": {
+				"big_number": "{value, number, percentage}",
+				"subtitle": "feasibility of the service of all routes on this line in the last 15 days"
+			}
+		},
+		"LinesDetailPathMap": {
+			"active_vehicles_counter": "{count, plural, =0 {No vehicles in circulation} one {# vehicle in circulation} other {# vehicles in circulation}}"
+		},
+		"LinesListToolbar": {
+			"by_current_view": {
+				"all": "All Lines",
+				"favorites": "Favorites ({count})"
+			},
+			"by_search": {
+				"placeholder": "Search by name, number..."
+			},
+			"found_items_counter": {
+				"all": "{count, plural, =0 {No lines found.} one {Found # line:} other {Found # lines:}}",
+				"favorites": "{count, plural, =0 {No favorite lines found.} one {Found # favorite line:} other {Found # favorite lines:}}"
+			},
+			"heading": "Search Lines"
+		},
+		"LinesListViewFavorites": {
+			"no_favorites": "No favorite lines yet"
+		},
+		"PathStopNextArrivals": {
+			"title": "Next circulations"
+		},
+		"PathStopTimetable": {
+			"next_date": "Next times available from {value, date, dayShort} {value, date, monthLong} {value, date, yearLong}",
+			"no_data": "Times unavailable for this date.",
+			"title": "Planned times at this stop:"
+		},
+		"SelectActivePatternGroup": {
+			"placeholder": "Select route/destination..."
+		},
+		"SelectActivePatternGroupExplainer": {
+			"toggle": "What is the path/destination of a line?"
+		},
+		"collapse_filters": "Hide Filters",
+		"expand_filters": "Expand Filters"
+	},
+	"lost-and-found": {
+		"OperatorSection": {
+			"email": {
+				"label": "Send Email"
+			},
+			"form": {
+				"label": "Fill Form"
+			}
+		},
+		"Page": {
+			"heading": "Lost and Found",
+			"operator_sections": {
+				"41": {
+					"description": "Send an email to passenger@viacaoalvorada.pt with information about the line used, timetable and description of the object. If possible, include the vehicle number or license plate.",
+					"title": "Area 1 | Viação Alvorada"
+				},
+				"42": {
+					"description": "Fill out the Online Form available on the operator's website with information about the line used, time and description of the object. If possible, include the vehicle number or license plate.",
+					"title": "Area 2 | Lisbon Bus Station"
+				},
+				"43": {
+					"description": "Fill out the Online Form available on the operator's website with information about the line used, time and description of the object. If possible, include the vehicle number or license plate.",
+					"title": "Area 3 | TST"
+				},
+				"44": {
+					"description": "Fill out the Online Form available on the operator's website or send an email to passengers@alsa.com.br with information about the line used, time and description of the object. If possible, include the vehicle number or license plate.",
+					"title": "Area 4 | Alsa Todi"
+				}
+			},
+			"subheading": "Carris Metropolitana's transport service is provided by 4 service providers, each operating their own area of the Lisbon Metropolitan Area, as shown in the image below. Therefore, the best way to recover your object is to contact the operator of the area used."
+		}
+	},
+	"map": {
+		"toolbar": {
+			"center_map": "Center Map",
+			"open_google_maps": "Open in Google Maps",
+			"style": {
+				"map": "Map",
+				"satellite": "Satellite"
+			}
+		}
+	},
+	"news": {
+		"SinglePageHeader": {
+			"publish_date": "Posted in {value, date, long}"
+		}
+	},
+	"notifications": {
+		"Card": {
+			"meters": "Meters",
+			"min": "Minutes"
+		},
+		"Page": {
+			"heading": "Smart Notifications",
+			"new": "New Notification",
+			"subheading": "Receive notifications about your favorite lines and stops. Activate notifications and stay up to date with all changes on the network."
+		},
+		"Single": {
+			"create": "Create Notification",
+			"distance": "you are",
+			"distance_unit": {
+				"meters": "meters",
+				"minutes": "minutes"
+			},
+			"end_time": "End Time",
+			"heading_edit": "Edit Notification",
+			"heading_new": "New Notification",
+			"line": "Notify me when a vehicle on the line",
+			"start_time": "Start Time",
+			"stop": "from the stop",
+			"time": "in the period",
+			"warning": "Attention\nPlease Test this feature before using with confidence. You may need to adjust times to ensure you arrive at the location.",
+			"weekday": "Days of the Week"
+		}
+	},
+	"planner": {
+		"Page": {
+			"disclaimer": "Edit this page on Github if you want to include your app. The order is random. Only inputs that simultaneously provide planned and real-time schedules or vehicle positions are permitted.",
+			"heading": "Our partners",
+			"subheading": "Because our data is open, there are several apps that offer personalized experiences to improve your everyday transport life."
+		}
+	},
+	"profile": {
+		"Page": {
+			"field": {
+				"default_first_name": "Octopus",
+				"default_last_name": "Ecological",
+				"email": "E-mail",
+				"email_error": "This email is invalid",
+				"email_tooltip": "Useful to recover the account if it is lost",
+				"first_name": "First name",
+				"last_name": "Last Name"
+			},
+			"heading": "Profile"
+		},
+		"sync": {
+			"description": "Scan the QR code to sync profile",
+			"heading": "Sync Profile",
+			"loading": "Synchronizing...",
+			"success": "Profile synchronized successfully!"
+		}
+	},
+	"schedule": {
+		"hours": "Time",
+		"minutes": "Min.",
+		"no_data": "No available times",
+		"path": "Route"
+	},
+	"settings": {
+		"navigation": {
+			"account": {
+				"label": "Account",
+				"links": {
+					"configs": "Settings",
+					"favorites": "Favorites",
+					"profile": "View profile"
+				}
+			},
+			"footer": {
+				"primary": {
+					"links": {
+						"about": "About Carris Metropolitana",
+						"open-data": "Open Data",
+						"status": "State"
+					}
+				},
+				"secondary": {
+					"links": {
+						"conditions": "General Conditions of Transport",
+						"cookies": "Cookies Policy",
+						"legal": "Legal Notice",
+						"privacy": "Privacy Policy"
+					}
+				}
+			},
+			"schedules": {
+				"label": "Schedules",
+				"links": {
+					"alerts": "Service Alerts",
+					"lines": "Search Lines",
+					"planner": "Plan Trip",
+					"schools": "Schools & Universities",
+					"stops": "Search Stops"
+				}
+			},
+			"support": {
+				"label": "Customer Support",
+				"links": {
+					"contacts": "Contacts",
+					"faq": "Frequently Asked Questions",
+					"lost-and-found": "Lost and Found",
+					"stores": "Stores and Agent Network"
+				}
+			},
+			"tarifs": {
+				"label": "Rates",
+				"links": {
+					"cards": "Monthly Pass",
+					"helpdesks": "Where to buy",
+					"tickets": "Occasional Tickets"
+				}
+			}
+		}
+	},
+	"stops": {
+		"FavoritesList": {
+			"no_favorites": "No favorite stops yet"
+		},
+		"NextBusRow": {
+			"arriving_now": "Arriving",
+			"passed": "{value}",
+			"realtime": "{value} min",
+			"scheduled": "{value}"
+		},
+		"NextBuses": {
+			"hide": "Hide previous passages",
+			"show": "View previous passages"
+		},
+		"NextBusesHeader": {
+			"estimate": "Forecast",
+			"headsign": "Destination",
+			"line": "Line"
+		},
+		"Page": {
+			"heading": "Search Stops"
+		},
+		"PageToolbar": {
+			"by_current_view": {
+				"all": "All Stops",
+				"favorites": "Favorites"
+			},
+			"by_search": {
+				"placeholder": "Search by name, location..."
+			},
+			"found_items_counter": {
+				"all": "{count, plural, =0 {No stops found.} one {Found # stop:} other {Found # stops:}}",
+				"favorites": "{count, plural, =0 {No favorite stops found.} one {Found # favorite stops:} other {Found # favorite stops:}}"
+			}
+		},
+		"Single": {
+			"heading": "Search Stops",
+			"lines_that_pass_here": "Lines passing through this stop"
+		},
+		"collapse_filters": "Hide Filters",
+		"expand_filters": "Expand Filters"
+	},
+	"stores": {
+		"StoresList": {
+			"external_link": "Navigator® agent network",
+			"heading": "Stores and Agent Network",
+			"subheading": "Available to all passengers, Navante® Spaces are dedicated to providing information about the Carris Metropolitana network and ticketing, enabling queries to be clarified, the issuance of Navante® cards and membership to profiles and discounts. It is also possible to load titles at PayShop® service points within the Navante® agent network."
+		},
+		"StoresListEmpty": {
+			"by_municipality": {
+				"action_1": "Consult Store Opening Hours",
+				"action_2": "Explorer Other Municipalities",
+				"action_3": "Explorer Agent Network",
+				"subtitle": "We suggest that you visit us in another location to receive better service.",
+				"title": "No stores available in this municipality"
+			},
+			"default": {
+				"action_1": "Consult Store Opening Hours",
+				"action_2": "Explorer Agent Network",
+				"subtitle": "At this time, all stores appear to be closed.",
+				"title": "No stores available at this time"
+			}
+		},
+		"StoresListGroupItem": {
+			"address": "Household",
+			"get_directions": "Get Directions",
+			"schedules": {
+				"and": "and",
+				"fri": "Fri",
+				"from": "Of",
+				"label": "Time",
+				"mon": "Mon",
+				"sat": "Sat",
+				"sun": "Sun",
+				"thu": "Thu",
+				"tue": "To have",
+				"until": "until",
+				"wed": "Wed"
+			}
+		},
+		"StoresListGroupItemRealtime": {
+			"current_status": {
+				"busy": "Busy",
+				"closed": "Closed / Complete",
+				"open": "Open Now"
+			},
+			"desks_open": "{count, plural, =0 {No open posts} =1 {1 open post} other {# open posts}}",
+			"expected_wait_time": "{count, plural, =0 {Immediate service} other {Service in approx. # min}}",
+			"people_waiting": "{count, plural, =0 {No one waiting} =1 {1 customer waiting} other {# customers waiting}}"
+		},
+		"StoresListGroups": {
+			"group_label": "Municipality"
+		},
+		"StoresListMap": {
+			"expected_wait_time": "{count, plural, =0 {# min} other {# min}}"
+		},
+		"StoresListToolbar": {
+			"by_current_status": {
+				"all": "All stores",
+				"open": "Open now ({count})"
+			},
+			"by_municipality": {
+				"label": "Filter by Municipality"
+			},
+			"found_items_counter": "{count, plural, =0 {No stores found.} one {Found # store:} other {Found # stores:}}"
+		}
+	},
+	"toast": {
+		"toggle_stop_error": "Error adding stop to favorites. {error}",
+		"update_profile_error": "Error updating profile.",
+		"update_profile_pending": "Updating profile...",
+		"update_profile_success": "Profile updated successfully!"
+	}
+}
