@@ -200,7 +200,7 @@ export const StopsSingleContextProvider = ({ children, stopId }: { children: Rea
 
 	const setStopId = (stopId: string) => {
 		// TODO change this into proper state management
-		window.history.replaceState({}, '', `${Routes.STOPS}/${stopId}`);
+		window.history.replaceState({}, '', `${Routes.STOPS.route}/${stopId}`);
 		setStopIdState(stopId);
 	};
 

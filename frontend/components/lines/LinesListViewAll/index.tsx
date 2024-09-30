@@ -56,7 +56,7 @@ export default function Component() {
 										return lineData && (
 											<CellMeasurer key={key} cache={rowMeasurementsCache} index={index} parent={parent}>
 												{({ registerChild }) => (
-													<RegularListItem key={lineData.line_id} href={`${RoutesSchedule.LINES}/${lineData.line_id}`} refFn={(element: Element | null) => registerChild && registerChild(element || undefined)} style={style}>
+													<RegularListItem key={lineData.line_id} href={`${RoutesSchedule.LINES.route}/${lineData.line_id}`} refFn={(element: Element | null) => registerChild && registerChild(element || undefined)} style={style}>
 														<LineDisplay line={lineData} />
 													</RegularListItem>
 												)}

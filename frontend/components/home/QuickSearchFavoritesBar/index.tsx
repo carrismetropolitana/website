@@ -65,7 +65,7 @@ export default function Component() {
 	// D. Handle actions
 
 	const handleClick = (lineId: string) => {
-		router.push(`${RoutesSchedule.LINES}/${lineId}`);
+		router.push(`${RoutesSchedule.LINES.route}/${lineId}`);
 	};
 
 	//

@@ -56,7 +56,7 @@ export default function Component() {
 										return stopData && (
 											<CellMeasurer key={key} cache={rowMeasurementsCache} index={index} parent={parent}>
 												{({ registerChild }) => (
-													<RegularListItem key={stopData.id} href={`${RoutesSchedule.STOPS}/${stopData.id}`} refFn={(element: Element | null) => registerChild && registerChild(element || undefined)} style={style}>
+													<RegularListItem key={stopData.id} href={`${RoutesSchedule.STOPS.route}/${stopData.id}`} refFn={(element: Element | null) => registerChild && registerChild(element || undefined)} style={style}>
 														<StopDisplay stop={stopData} />
 													</RegularListItem>
 												)}

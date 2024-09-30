@@ -34,7 +34,7 @@ export default function Component({ _id, coverImageSrc, publishDate, title }: Ne
 	// B. Render Components
 
 	return (
-		<Link className={styles.container} href={`${Routes.NEWS}/${_id}`}>
+		<Link className={styles.container} href={`${Routes.NEWS.route}/${_id}`}>
 			<Image alt={title} className={styles.coverImage} fallbackSrc={ImagesCommon.PLACEHOLDER} src={coverImageSrc} />
 			<p className={styles.publishDate}>{t('publish_date', { publishDate: publishDateObject })}</p>
 			<h4 className={styles.title}>{title}</h4>

@@ -46,12 +46,12 @@ export default function Component() {
 
 	const handleSelectLine = (selectedLineId) => {
 		setSelectedLineId(selectedLineId);
-		router.push(`${Routes.LINES}/${selectedLineId}`);
+		router.push(`${Routes.LINES.route}/${selectedLineId}`);
 	};
 
 	const handleSelectStop = (selectedStopId) => {
 		setSelectedStopId(selectedStopId);
-		router.push(`${Routes.STOPS}/${selectedStopId}`);
+		router.push(`${Routes.STOPS.route}/${selectedStopId}`);
 	};
 
 	//
