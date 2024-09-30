@@ -76,12 +76,11 @@ export const ProfileContextProvider = ({ children }) => {
 		const deviceIdLocal = localStorage.getItem(LOCAL_STORAGE_KEYS.device_id);
 
 		if (!deviceIdLocal) {
-			const id = uuid();
-			setDeviceId(id);
-			localStorage.setItem(LOCAL_STORAGE_KEYS.device_id, id);
+			_createDeviceId();
 		}
-
-		setDeviceId(deviceIdLocal);
+		else {
+			setDeviceId(deviceIdLocal);
+		}
 	}, []);
 
 	useEffect(() => {
@@ -102,17 +101,29 @@ export const ProfileContextProvider = ({ children }) => {
 			});
 	}, [deviceId]);
 
+	function _createDeviceId() {
+		const id = uuid();
+		localStorage.setItem(LOCAL_STORAGE_KEYS.device_id, id);
+		setDeviceId(id);
+	}
+
 	//
 	// C. Handle actions
 
 	const toggleFavoriteLine = async (lineId: string) => {
-		const profile: ServerActionResult<Profile> = await favoriteLineAction(lineId, deviceId || '');
+		if (!deviceId) _createDeviceId();
+		if (!deviceId) throw new Error('Device ID is required');
+
+		const profile: ServerActionResult<Profile> = await favoriteLineAction(lineId, deviceId);
 		if (!profile.success) throw new Error(profile.error);
 		setDataProfile(profile.value);
 	};
 
 	const toggleFavoriteStop = async (stopId: string) => {
-		const profile: ServerActionResult<Profile> = await favoriteStopAction(stopId, deviceId || '');
+		if (!deviceId) _createDeviceId();
+		if (!deviceId) throw new Error('Device ID is required');
+
+		const profile: ServerActionResult<Profile> = await favoriteStopAction(stopId, deviceId);
 		if (!profile.success) throw new Error(profile.error);
 		setDataProfile(profile.value);
 	};
