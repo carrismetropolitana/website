@@ -34,7 +34,7 @@ export default function Component({ alertId }: Props) {
 	//
 	// B. Transform data
 
-	const alertHref = `${RoutesSchedule.ALERTS}/${alertId}`;
+	const alertHref = `${RoutesSchedule.ALERTS.route}/${alertId}`;
 
 	const simplifiedAlertData = alertsContext.actions.getSimplifiedAlertById(alertId);
 

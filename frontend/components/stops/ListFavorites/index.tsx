@@ -35,7 +35,7 @@ export default function Component() {
 	return (
 		<Section childrenWrapperStyles={styles.container} withChildrenPadding={false} withTopPadding={false}>
 			{stopsContext.data.favorites.map(stop => (
-				<RegularListItem key={stop.id} href={`${RoutesSchedule.STOPS}/${stop.id}`}>
+				<RegularListItem key={stop.id} href={`${RoutesSchedule.STOPS.route}/${stop.id}`}>
 					<StopDisplay stop={stop} />
 				</RegularListItem>
 			))}

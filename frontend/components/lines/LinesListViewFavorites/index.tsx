@@ -35,7 +35,7 @@ export default function Component() {
 	return (
 		<Section childrenWrapperStyles={styles.container} withChildrenPadding={false} withTopPadding={false}>
 			{linesContext.data.favorites.map(line => (
-				<RegularListItem key={line.line_id} href={`${RoutesSchedule.LINES}/${line.line_id}`}>
+				<RegularListItem key={line.line_id} href={`${RoutesSchedule.LINES.route}/${line.line_id}`}>
 					<LineDisplay line={line} />
 				</RegularListItem>
 			))}
