@@ -4,4 +4,4 @@ preserve_hierarchy: 1
 base_path: .
 files:
   - source: frontend/i18n/pt-PT.json
-    translation: frontend/i18n/%two_letters_code%.json
+    translation: frontend/i18n/%locale%.json
