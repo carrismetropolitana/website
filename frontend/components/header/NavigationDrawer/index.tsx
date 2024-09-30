@@ -2,11 +2,11 @@
 
 /* * */
 
-import AccountUserAvatar from '@/components/account/UserAvatar';
+// import AccountUserAvatar from '@/components/account/UserAvatar';
+// import HeaderLocaleSwitcher from '@/components/header/LocaleSwitcher';
+// import SyncAccount from '@/components/profile/sync';
 import { ThemeSwitch } from '@/components/common/Theme';
-import HeaderLocaleSwitcher from '@/components/header/LocaleSwitcher';
 import NavigationMainMenuItem from '@/components/header/NavigationMainMenuItem';
-import SyncAccount from '@/components/profile/sync';
 import { BrandsCmet } from '@/settings/assets.settings';
 import { drawerNavigationGroup } from '@/settings/navigation.settings';
 import { CloseButton, Drawer, Image } from '@mantine/core';
@@ -30,6 +30,7 @@ export default function Component() {
 
 	//
 	// B. Transform data
+
 	const menuItemsFormatted = drawerNavigationGroup.map(group => ({
 		items: group.links.map(item => ({
 			...item,
@@ -81,7 +82,9 @@ export default function Component() {
 					</div> */}
 				</div>
 			</Drawer>
-			<IconMenuDeep className={styles.menuIcon} onClick={openDrawer} />
+			<div className={styles.menuIcon} onClick={openDrawer}>
+				<IconMenuDeep size={35} />
+			</div>
 			{/* <AccountUserAvatar component="button" onClick={openDrawer} /> */}
 		</>
 	);

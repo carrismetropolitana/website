@@ -1,12 +1,13 @@
 /* * */
+
 /* MENU ITEM TARGET */
 
 .menuItemTarget {
 	display: flex;
 	align-items: center;
 	justify-content: center;
-	padding-left: var(--size-spacing-30);
 	padding-right: var(--size-spacing-30);
+	padding-left: var(--size-spacing-30);
 	font-size: var(--font-size-subtitle);
 	font-weight: var(--font-weight-subtitle);
 	cursor: pointer;
@@ -19,12 +20,13 @@
 }
 
 /* * */
+
 /* MENU DROPDOWN */
 
 .menuDropdown {
+	padding: 0;
 	background-color: var(--color-system-background-100);
 	border: none;
 	border-radius: 0;
-	padding: 0;
-	box-shadow: 0 0 30px 0 rgba(0, 0, 0, 0.1);
+	box-shadow: 0 0 30px 0 rgb(0 0 0 / 10%);
 }
