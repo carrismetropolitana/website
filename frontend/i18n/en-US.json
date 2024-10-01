@@ -120,20 +120,6 @@
 		},
 		"title": "Cookies Policy"
 	},
-	"HeaderLocaleSwitcher": {
-		"en": {
-			"alt": "English",
-			"label": "🇬🇧"
-		},
-		"fr": {
-			"alt": "Français",
-			"label": "🇫🇷"
-		},
-		"pt-PT": {
-			"alt": "Portuguese",
-			"label": "🇵🇹"
-		}
-	},
 	"HeaderLogo": {
 		"logo": {
 			"alt": "Metropolitan Trails"
@@ -462,6 +448,18 @@
 		},
 		"Footer": {
 			"copyright": "© Metropolitan Railways {year} - All rights reserved"
+		}
+	},
+	"header": {
+		"LocaleSwitcher": {
+			"en-US": {
+				"alt": "English",
+				"label": "🇬🇧"
+			},
+			"pt-PT": {
+				"alt": "Português",
+				"label": "🇵🇹"
+			}
 		}
 	},
 	"home": {

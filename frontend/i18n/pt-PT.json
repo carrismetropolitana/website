@@ -120,20 +120,6 @@
 		},
 		"title": "Política de Cookies"
 	},
-	"HeaderLocaleSwitcher": {
-		"en": {
-			"alt": "English",
-			"label": "🇬🇧"
-		},
-		"fr": {
-			"alt": "Français",
-			"label": "🇫🇷"
-		},
-		"pt-PT": {
-			"alt": "Português",
-			"label": "🇵🇹"
-		}
-	},
 	"HeaderLogo": {
 		"logo": {
 			"alt": "Carris Metropolitana"
@@ -462,6 +448,18 @@
 		},
 		"Footer": {
 			"copyright": "© Carris Metropolitana {year} - Todos os direitos reservados"
+		}
+	},
+	"header": {
+		"LocaleSwitcher": {
+			"en-US": {
+				"alt": "English",
+				"label": "🇬🇧"
+			},
+			"pt-PT": {
+				"alt": "Português",
+				"label": "🇵🇹"
+			}
 		}
 	},
 	"home": {
