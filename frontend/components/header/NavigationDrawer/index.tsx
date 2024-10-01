@@ -3,9 +3,9 @@
 /* * */
 
 // import AccountUserAvatar from '@/components/account/UserAvatar';
-// import HeaderLocaleSwitcher from '@/components/header/LocaleSwitcher';
 // import SyncAccount from '@/components/profile/sync';
 import { ThemeSwitch } from '@/components/common/Theme';
+import LocaleSwitcher from '@/components/header/LocaleSwitcher';
 import NavigationMainMenuItem from '@/components/header/NavigationMainMenuItem';
 import { BrandsCmet } from '@/settings/assets.settings';
 import { drawerNavigationGroup } from '@/settings/navigation.settings';
@@ -73,10 +73,10 @@ export default function Component() {
 							</div>
 						))}
 					</div>
+					<div className={styles.componentWrapper}>
+						<LocaleSwitcher />
+					</div>
 					{/* TODO: Stage 2 */}
-					{/* <div className={styles.componentWrapper}>
-						<HeaderLocaleSwitcher />
-					</div> */}
 					{/* <div className={`${styles.componentWrapper} ${styles.topBorder}`}>
 						<SyncAccount />
 					</div> */}
