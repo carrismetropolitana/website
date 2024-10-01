@@ -54,12 +54,12 @@ export default function Component() {
 				zIndex={500}
 			>
 				<div className={styles.drawerContent}>
-					<div className={styles.userProfile}>
+					<div className={styles.logoWrapper}>
 						{/* TODO: Stage 2 */}
 						{/* <AccountUserAvatar withName /> */}
 						<ThemeSwitch
-							dark={<Image alt="Logo" height={40} src={BrandsCmet.cmet_dark} />}
-							light={<Image alt="Logo" height={40} src={BrandsCmet.cmet_light} />}
+							dark={<Image alt="Logo" height={40} src={BrandsCmet.cmet_dark} width={112} />}
+							light={<Image alt="Logo" height={40} src={BrandsCmet.cmet_light} width={112} />}
 						/>
 						<CloseButton onClick={closeDrawer} />
 					</div>

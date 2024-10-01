@@ -3,7 +3,7 @@
 /* * */
 
 import { IconAlertTriangleFilled, IconBellRingingFilled, IconCircleCheckFilled, IconInfoCircleFilled } from '@tabler/icons-react';
-import useSWR from 'swr';
+// import useSWR from 'swr';
 
 import styles from './styles.module.css';
 

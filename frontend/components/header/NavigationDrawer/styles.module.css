@@ -11,15 +11,20 @@
 
 /* * */
 
-/* USER PROFILE */
+/* LOGO WRAPPER */
 
-.userProfile {
+.logoWrapper {
 	display: flex;
 	align-items: center;
 	justify-content: space-between;
 	padding: var(--size-spacing-15);
 	font-size: var(--font-size-subtitle);
 	font-weight: var(--font-weight-subtitle);
+}
+
+.logoWrapper img {
+	width: 112px;
+	height: 40px;
 }
 
 /* * */
