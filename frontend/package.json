@@ -3,11 +3,11 @@
 	"version": "1.0.0",
 	"private": true,
 	"scripts": {
-		"dev": "next dev -p 3002",
 		"build": "next build",
-		"start": "next start",
+		"dev": "next dev -p 3002",
 		"lint": "eslint .",
-		"lint:fix": "eslint . --fix"
+		"lint:fix": "eslint . --fix",
+		"start": "next start"
 	},
 	"dependencies": {
 		"@mantine/carousel": "7.13.1",
@@ -21,10 +21,10 @@
 		"@piotr-cz/swr-idb-cache": "1.1.0",
 		"@rajesh896/broprint.js": "2.1.1",
 		"@tabler/icons-react": "3.19.0",
-		"@turf/turf": "^7.1.0",
+		"@turf/turf": "7.1.0",
 		"classnames": "2.5.1",
 		"dayjs": "1.11.13",
-		"embla-carousel-autoplay": "^8.3.0",
+		"embla-carousel-autoplay": "8.3.0",
 		"embla-carousel-react": "8.3.0",
 		"embla-carousel-wheel-gestures": "8.0.1",
 		"inflected": "2.1.0",
@@ -51,7 +51,7 @@
 		"yup": "1.4.0"
 	},
 	"devDependencies": {
-		"@carrismetropolitana/eslint": "20240927.1154.41",
+		"@carrismetropolitana/eslint": "20241001.1357.32",
 		"@types/jsonwebtoken": "9.0.7",
 		"@types/luxon": "3.4.2",
 		"@types/node": "22.7.4",
