@@ -5,8 +5,7 @@
 .drawerContent{
 	display: flex;
 	flex-direction: column;
-	height: 100vh;
-	overflow-y: hidden;
+	gap: var(--size-spacing-15);
 }
 
 /* * */
@@ -34,9 +33,7 @@
 .navList {
 	display: flex;
 	flex-direction: column;
-	gap: var(--size-spacing-15);
-	overflow-y: auto;
-	border-bottom: 1px solid var(--color-system-border-100);
+	gap: var(--size-spacing-30);
 }
 
 /* * */
@@ -62,6 +59,8 @@
 .group {
 	display: flex;
 	flex-direction: column;
+	gap: var(--size-spacing-5);
+	border-bottom: 1px solid var(--color-system-border-100);
 }
 
 /* * */
@@ -70,8 +69,9 @@
 
 .groupLabel {
 	margin: 0 var(--size-spacing-15);
-	font-size: 14px;
-	color: var(--color-system-text-300);
+	font-size: 18px;
+	font-weight: var(--font-weight-heading);
+	color: var(--color-system-text-100);
 }
 
 /* * */
