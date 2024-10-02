@@ -33,7 +33,7 @@ const nextConfig = {
       { destination: '/vehicles', permanent: true, source: '/veiculos' },
       // //
       { destination: '/stores', permanent: true, source: '/encm' },
-      // { destination: '/stores', permanent: true, source: '/espacos-navegante' },
+      { destination: '/stores', permanent: true, source: '/espacos-navegante' },
       //
     ]
   },

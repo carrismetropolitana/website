@@ -1,6 +1,6 @@
 /* * */
 
-import { availableLocales, defaultLocaleCode, enabledLocaleCodes } from '@/i18n/config';
+import { defaultLocaleCode, enabledLocaleAlias, enabledLocaleCodes } from '@/i18n/config';
 import { Routes } from '@/utils/routes';
 import { createLocalizedPathnamesNavigation } from 'next-intl/navigation';
 import { defineRouting } from 'next-intl/routing';
@@ -14,9 +14,9 @@ const intlPathnames = Object.entries(Routes).reduce(
 
 			// Check if any of the available locales is not in translatedPathnames
 			// If not, add the default locale
-			for (const locale of availableLocales) {
-				if (locale.enabled && !(locale.value in translatedPathnames)) {
-					acc[value['route']][locale.value] = value['route'];
+			for (const localeCode of [...enabledLocaleCodes, ...enabledLocaleAlias]) {
+				if (!(localeCode in translatedPathnames)) {
+					acc[value['route']][localeCode] = value['route'];
 				}
 			}
 		}

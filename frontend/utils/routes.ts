@@ -32,7 +32,7 @@ export const RoutesSupport = Object.freeze({
 	},
 	STORES: {
 		intl: {
-			'pt-PT': '/espacos-navegante',
+			'pt-PT': '/lojas',
 		},
 		route: '/stores',
 	},
