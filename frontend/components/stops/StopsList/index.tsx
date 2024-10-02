@@ -24,9 +24,9 @@ export function StopsList() {
 	return (
 		<>
 			<StopsListToolbar />
-			{!stopsListContext.flags.is_loading && <StopsListViewSkeleton />}
-			{/* {(!stopsListContext.flags.is_loading && stopsListContext.filters.by_current_view === 'all') && <StopsListViewAll />}
-			{(!stopsListContext.flags.is_loading && stopsListContext.filters.by_current_view === 'favorites') && <StopsListViewFavorites />} */}
+			{stopsListContext.flags.is_loading && <StopsListViewSkeleton />}
+			{(!stopsListContext.flags.is_loading && stopsListContext.filters.by_current_view === 'all') && <StopsListViewAll />}
+			{(!stopsListContext.flags.is_loading && stopsListContext.filters.by_current_view === 'favorites') && <StopsListViewFavorites />}
 		</>
 	);
 
