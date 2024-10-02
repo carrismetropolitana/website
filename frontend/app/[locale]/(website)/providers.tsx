@@ -70,11 +70,7 @@ export default function Providers({ children }) {
 										<MapOptionsContextProvider>
 											<MapProvider>
 												<AlertsContextProvider>
-													<LinesListContextProvider>
-														<StopsListContextProvider>
-															{children}
-														</StopsListContextProvider>
-													</LinesListContextProvider>
+													{children}
 												</AlertsContextProvider>
 											</MapProvider>
 										</MapOptionsContextProvider>
