@@ -3,7 +3,7 @@
 import NoDataLabel from '@/components/layout/NoDataLabel';
 import RegularListItem from '@/components/layout/RegularListItem';
 import Section from '@/components/layout/Section';
-import StopDisplay from '@/components/stops/StopDisplay';
+import { StopDisplay } from '@/components/stops/StopDisplay';
 import { useStopsListContext } from '@/contexts/StopsList.context';
 import { RoutesSchedule } from '@/utils/routes';
 import { useTranslations } from 'next-intl';
@@ -18,7 +18,7 @@ export function StopsListViewFavorites() {
 	//
 	// A. Setup variables
 
-	const t = useTranslations('stops.FavoritesList');
+	const t = useTranslations('stops.StopsListViewFavorites');
 	const stopsContext = useStopsListContext();
 
 	//

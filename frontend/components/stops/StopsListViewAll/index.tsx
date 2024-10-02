@@ -2,7 +2,7 @@
 
 import RegularListItem from '@/components/layout/RegularListItem';
 import Section from '@/components/layout/Section';
-import StopDisplay from '@/components/stops/StopDisplay';
+import { StopDisplay } from '@/components/stops/StopDisplay';
 import { useStopsListContext } from '@/contexts/StopsList.context';
 import { RoutesSchedule } from '@/utils/routes';
 import { AutoSizer, CellMeasurer, CellMeasurerCache, List, WindowScroller } from 'react-virtualized';
@@ -24,7 +24,7 @@ export function StopsListViewAll() {
 	//
 	// A. Setup variables
 
-	const stopsContext = useStopsListContext();
+	const stopsListContext = useStopsListContext();
 
 	//
 	// B. Handle actions
@@ -47,12 +47,12 @@ export function StopsListViewAll() {
 									deferredMeasurementCache={rowMeasurementsCache}
 									height={height}
 									isScrolling={isScrolling}
-									rowCount={stopsContext.data.filtered.length}
+									rowCount={stopsListContext.data.filtered.length}
 									rowHeight={rowMeasurementsCache.rowHeight}
 									scrollTop={scrollTop}
 									width={width}
 									rowRenderer={({ index, key, parent, style }) => {
-										const stopData = stopsContext.data.filtered[index];
+										const stopData = stopsListContext.data.filtered[index];
 										return stopData && (
 											<CellMeasurer key={key} cache={rowMeasurementsCache} index={index} parent={parent}>
 												{({ registerChild }) => (

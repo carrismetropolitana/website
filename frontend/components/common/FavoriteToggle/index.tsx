@@ -16,7 +16,7 @@ interface Props {
 
 /* * */
 
-export default function FavoriteToggle({ classNames, color, isActive, onToggle }: Props) {
+export default function FavoriteToggle({ color, isActive, onToggle }: Props) {
 	//
 
 	//
@@ -24,23 +24,23 @@ export default function FavoriteToggle({ classNames, color, isActive, onToggle }
 
 	if (isActive === null) {
 		return (
-			<div className={styles.container + ' ' + classNames}>
-				<Loader size={18} visible />
+			<div className={styles.container}>
+				<Loader visible />
 			</div>
 		);
 	}
 
 	if (isActive) {
 		return (
-			<div className={styles.container + ' ' + classNames} onClick={onToggle} style={{ color: color }}>
-				<IconHeartFilled size={24} />
+			<div className={styles.container} onClick={onToggle} style={{ color: color }}>
+				<IconHeartFilled />
 			</div>
 		);
 	}
 
 	return (
-		<div className={styles.container + ' ' + classNames} onClick={onToggle}>
-			<IconHeart size={24} />
+		<div className={styles.container} onClick={onToggle}>
+			<IconHeart />
 		</div>
 	);
 

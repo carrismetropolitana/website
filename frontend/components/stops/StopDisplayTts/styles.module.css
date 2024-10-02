@@ -1,0 +1,20 @@
+/* * */
+/* NAME */
+
+.container {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+    color: var(--color-system-text-400);
+    cursor: pointer;
+	transition: all 100ms ease;
+}
+
+.container:hover {
+	color: var(--color-system-text-300);
+}
+
+.isPlaying,
+.isPlaying:hover {
+	color: var(--color-system-text-200);
+}

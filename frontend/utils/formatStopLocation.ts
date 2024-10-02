@@ -1,10 +1,15 @@
-/* * */
+/**
+ *
+ * @param locality Optional locality string for the stop.
+ * @param municipality Optional municipality string for the stop.
+ * @returns A string with the location of the stop, formatted as "locality, municipality" if both are defined, or just "locality" or "municipality" if only one is defined.
+ */
 
-export default function parseStopLocationName(locality: string | undefined, municipality: string | undefined) {
+export function formatStopLocation(locality?: string, municipality?: string): string | undefined {
 	//
 
 	// If none of the location strings are defined, then return null.
-	if (!locality && !municipality) return null;
+	if (!locality && !municipality) return;
 
 	// If only locality is defined, then return it.
 	if (locality && !municipality) return locality;

@@ -1,17 +1,18 @@
 'use client';
+
 /* * */
 
 import StopDetailAlerts from '@/components/stops/StopDetailAlerts';
 import StopDetailContent from '@/components/stops/StopDetailContent';
-import StopDetailHeader from '@/components/stops/StopDetailHeader';
 import StopDetailToolbar from '@/components/stops/StopDetailToolbar';
+import { StopsDetailHeader } from '@/components/stops/StopsDetailHeader';
 
 /* * */
 
-export default function Component() {
+export function StopsDetail() {
 	return (
 		<>
-			<StopDetailHeader />
+			<StopsDetailHeader />
 			<StopDetailToolbar />
 			<StopDetailAlerts />
 			<StopDetailContent />

@@ -1,4 +1,4 @@
-import LineBadge from '@/components/common/LineBadge';
+import LineBadge from '@/components/lines/LineBadge';
 import { useStopsSingleContext } from '@/contexts/StopsSingle.context';
 import { useTranslations } from 'next-intl';
 

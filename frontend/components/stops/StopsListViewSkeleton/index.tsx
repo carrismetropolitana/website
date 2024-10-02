@@ -2,7 +2,7 @@
 
 import RegularListItem from '@/components/layout/RegularListItem';
 import Section from '@/components/layout/Section';
-import StopDisplay from '@/components/stops/StopDisplay';
+import { StopDisplay } from '@/components/stops/StopDisplay';
 
 /* * */
 

@@ -1,6 +1,6 @@
 /* * */
 
-import StopsDetail from '@/components/stops/StopDetail';
+import { StopsDetail } from '@/components/stops/StopsDetail';
 import { StopsSingleContextProvider } from '@/contexts/StopsSingle.context';
 
 /* * */

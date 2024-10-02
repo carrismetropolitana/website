@@ -104,6 +104,7 @@
 	--font-weight-text: 500; /* Medium */
 	--font-size-muted: 12px;
 	--font-weight-muted: 500; /* Medium */
+	--font-family-monospace: 'Menlo', monospace;
 
 	/* * */
 	/* COLOR / ALERTS */

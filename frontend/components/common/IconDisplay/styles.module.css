@@ -4,7 +4,7 @@
 
 .container {
 	display: flex;
-	width: 24px;
+	width: 32px;
 	aspect-ratio: 1;
 	overflow: hidden;
 }

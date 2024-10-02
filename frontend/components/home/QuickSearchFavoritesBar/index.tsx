@@ -4,7 +4,7 @@
 
 import type { Line } from '@/types/lines.types';
 
-import LineBadge from '@/components/common/LineBadge';
+import LineBadge from '@/components/lines/LineBadge';
 import Loader from '@/components/common/Loader';
 import { useAlertsContext } from '@/contexts/Alerts.context';
 import { useProfileContext } from '@/contexts/Profile.context';

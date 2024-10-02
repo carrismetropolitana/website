@@ -1,5 +1,6 @@
 import CopyBadge from '@/components/common/CopyBadge';
 import LiveIcon from '@/components/common/LiveIcon';
+import LineDisplay from '@/components/lines/LineDisplay';
 import { useDebugContext } from '@/contexts/Debug.context';
 import { useStopsSingleContext } from '@/contexts/StopsSingle.context';
 import { StopRealtime } from '@/types/stops.types';
@@ -7,7 +8,6 @@ import dayjs from 'dayjs';
 import { useTranslations } from 'next-intl';
 import { useCallback } from 'react';
 
-import LineDisplay from '../LineDisplay';
 import styles from './styles.module.css';
 
 function getTripRealtimeStatus(tripData: StopRealtime) {

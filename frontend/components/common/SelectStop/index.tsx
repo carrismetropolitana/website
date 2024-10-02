@@ -2,7 +2,7 @@
 
 /* * */
 
-import StopDisplay from '@/components/layout/StopDisplay';
+import { StopDisplay } from '@/components/layout/StopDisplay';
 import { createDocCollection } from '@/hooks/useOtherSearch';
 import { Stop } from '@/types/stops.types';
 import { ActionIcon, Combobox, Group, TextInput, useCombobox } from '@mantine/core';
