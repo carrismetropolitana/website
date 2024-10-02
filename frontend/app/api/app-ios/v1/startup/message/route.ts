@@ -19,7 +19,7 @@ const appStartupMessages: StartupMessage[] = [
 		message_id: 'IOS-0002',
 		presentation_type: 'changelog',
 		url_host: 'https://alpha.carrismetropolitana.pt/',
-		url_path: '/views/app/startup/messages/abc/?locale=pt&appVersion=1.2.3',
+		url_path: '/app-ios/startup/message-1',
 	},
 ];
 
