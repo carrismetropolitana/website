@@ -18,7 +18,7 @@ const rowMeasurementsCache = new CellMeasurerCache({
 
 /* * */
 
-export default function Component() {
+export function StopsListViewAll() {
 	//
 
 	//

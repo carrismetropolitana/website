@@ -13,7 +13,7 @@ import styles from './styles.module.css';
 
 /* * */
 
-export default function Component() {
+export function StopsListToolbar() {
 	//
 
 	//
@@ -47,7 +47,7 @@ export default function Component() {
 
 	return (
 		<>
-			<Section childrenWrapperStyles={styles.container} withTopBorder={false} withTopPadding={false} withChildrenPadding>
+			<Section childrenWrapperStyles={styles.container} heading="Stops" withTopBorder={false} withChildrenPadding>
 				<SegmentedControl data={currentViewOptions} onChange={stopsContext.actions.updateFilterByCurrentView} value={stopsContext.filters.by_current_view} fullWidth />
 				{stopsContext.filters.by_current_view === 'all' && (
 					<form className={styles.container} onSubmit={handleFormSubmit}>

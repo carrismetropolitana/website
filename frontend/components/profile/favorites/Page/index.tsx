@@ -5,7 +5,7 @@
 import Section from '@/components/layout/Section';
 import FavoriteLines from '@/components/lines/LinesListViewFavorites';
 import PageToolbar from '@/components/profile/favorites/PageToolbar';
-import FavoriteStops from '@/components/stops/ListFavorites';
+import FavoriteStops from '@/components/stops/StopsListViewFavorites';
 import { useProfileContext } from '@/contexts/Profile.context';
 import { useTranslations } from 'next-intl';
 

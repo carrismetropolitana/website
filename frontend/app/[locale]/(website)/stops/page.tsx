@@ -1,11 +1,11 @@
 /* * */
 
-import StopsPage from '@/components/stops/Page';
+import { StopsList } from '@/components/stops/StopsList';
 
 /* * */
 
 export default function Page() {
 	return (
-		<StopsPage />
+		<StopsList />
 	);
 }
