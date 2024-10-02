@@ -22,7 +22,7 @@ interface Props {
 
 export default function Component({ children, href, icon, refFn, style }: Props) {
 	return (
-		<Link ref={refFn || undefined} className={styles.container} href={href} style={style}>
+		<Link ref={refFn || undefined} className={`${styles.container} ${href === '#' && styles.disableLink}`} href={href} style={style}>
 			{icon && (
 				<div className={styles.iconWrapper}>
 					{icon}
@@ -33,9 +33,11 @@ export default function Component({ children, href, icon, refFn, style }: Props)
 					{children}
 				</div>
 			)}
-			<div className={styles.arrowWrapper}>
-				<IconArrowNarrowRight size={20} />
-			</div>
+			{href !== '#' && (
+				<div className={styles.arrowWrapper}>
+					<IconArrowNarrowRight size={20} />
+				</div>
+			)}
 		</Link>
 	);
 }
