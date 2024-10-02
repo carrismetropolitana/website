@@ -2,6 +2,7 @@
 
 /* * */
 
+import SelectOperationalDay from '@/components/common/SelectOperationalDay';
 import Section from '@/components/layout/Section';
 
 import LinesHeader from '../LinesHeader';
@@ -21,8 +22,9 @@ export default function Component() {
 	// B. Render components
 
 	return (
-		<Section childrenWrapperStyles={styles.container} withGap={false} withTopPadding={false} withChildrenPadding>
-			<div>
+		<Section childrenWrapperStyles={styles.container} withGap={false} withTopPadding={false}>
+			<div className={styles.listWrapper}>
+				<SelectOperationalDay />
 				<LinesHeader />
 				<NextBuses />
 			</div>

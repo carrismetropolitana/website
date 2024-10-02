@@ -12,37 +12,19 @@ import styles from './styles.module.css';
 /* * */
 
 interface Props {
-	locality?: string
-	municipalityName?: string
 	size?: 'lg' | 'md'
 	stop?: Stop
-	stopName?: string
 	width?: number
 }
 
 /* * */
 
-export function StopDisplay({ locality, municipalityName, size = 'md', stop, width = 200 }: Props) {
-	//
-
-	//
-	// A. Setup variables
-
-	const formattedStopLocation = formatStopLocation(stop?.locality || locality, stop?.municipality_name || municipalityName);
-
-	//
-	// B. Render components
-
+export function StopDisplay({ size = 'md', stop, width = 200 }: Props) {
 	return stop
 		? (
 			<div className={`${styles.container} ${styles[size]}`}>
 				<StopDisplayName stopName={stop.name} />
-				<StopDisplayLocation />
-				{formattedStopLocation && (
-					<p className={styles.location}>
-						{formattedStopLocation}
-					</p>
-				)}
+				<StopDisplayLocation locality={stop?.locality} municipalityName={stop?.municipality_name} />
 			</div>
 		)
 		: (
@@ -50,6 +32,4 @@ export function StopDisplay({ locality, municipalityName, size = 'md', stop, wid
 				<Skeleton height={24} width={width} />
 			</div>
 		);
-
-	//
 }

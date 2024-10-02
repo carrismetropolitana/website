@@ -3,14 +3,14 @@
 
 .container {
 	display: grid;
-	gap: var(--size-spacing-15);
 	grid-template:
 		"a b" minmax(300px, auto) / 1fr 1fr;
+	gap: var(--size-spacing-15);
 	align-items: flex-start;
 	justify-content: flex-start;
 }
 
-@media screen and (max-width: 900px) {
+@media screen and (width <= 900px) {
 	.container {
 		grid-template:
 			"b" minmax(200px, auto) [b_]
@@ -18,19 +18,32 @@
 	}
 }
 
+
+/* * */
+/* LIST WRAPPER */
+
+.listWrapper {
+	display: flex;
+	flex-direction: column;
+	grid-area: b;
+	gap: var(--size-spacing-15);
+	align-items: flex-start;
+	justify-content: flex-start;
+	padding: var(--size-spacing-15);
+}
+
 /* * */
 /* MAP WRAPPER */
 
 .mapWrapper {
-	grid-area: a;
-	position: -webkit-sticky;
 	position: sticky;
 	top: var(--size-height-header);
+	grid-area: a;
 	height: 100%;
 	max-height: calc(100vh - var(--size-height-header));;
 }
 
-@media screen and (max-width: 900px) {
+@media screen and (width <= 900px) {
 	.mapWrapper {
 		position: static;
 	}

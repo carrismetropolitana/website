@@ -10,7 +10,6 @@ export default function LinesHeader() {
 	const availableLines = stopsSingleContext.data.valid_lines;
 	return (
 		<div className={styles.container}>
-			<div className={styles.title}>{t('lines_that_pass_here')}</div>
 			<div className={styles.lineContainer}>
 				{availableLines && availableLines.map(line => <LineBadge key={line.line_id} line={line} size="lg" />)}
 			</div>

@@ -51,7 +51,7 @@ export function NextBusRow({ realtime }: { realtime: StopRealtime }) {
 	return (
 		<div className={`${styles.container} ${styles[tripRealtimeStatus]} ${isSelectedRow && styles.selected}`} onClick={handleSelectTrip}>
 			<div className={styles.tripSummary}>
-				<LineDisplay color={thisPattern.color} long_name={thisPattern.headsign} short_name={thisPattern.line_id} text_color={thisPattern.text_color} />
+				<LineDisplay color={thisPattern.color} longName={thisPattern.headsign} shortName={thisPattern.line_id} textColor={thisPattern.text_color} />
 				{tripRealtimeStatus === 'passed'
 				&& (
 					<div className={styles.arrivalEstimate}>
