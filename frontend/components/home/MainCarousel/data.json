@@ -1,37 +1,19 @@
 [
 	{
 		"id": "0001",
-		"src": "https://storage.carrismetropolitana.pt/static/assets/test/carousel_1.png",
-		"url": "https://www.google.com",
-		"target": "_blank"
+		"src": "/assets/featured/download_app.png",
+		"target": "_blank",
+		"url": "https://www.carrismetropolitana.pt/viagemvirtual"
 	},
 	{
 		"id": "0002",
-		"src": "https://storage.carrismetropolitana.pt/static/assets/test/carousel_3.png",
-		"url": "https://www.google.com"
+		"src": "/assets/featured/join_whatsapp.png",
+		"url": "/news/7243"
 	},
 	{
 		"id": "0003",
-		"src": "https://storage.carrismetropolitana.pt/static/assets/test/carousel_2.png",
-		"url": "https://www.google.com",
-		"target": "_self"
-	},
-	{
-		"id": "0004",
-		"src": "https://storage.carrismetropolitana.pt/static/assets/test/carousel_3.png",
+		"src": "/assets/featured/participe.png",
 		"target": "_self",
-		"url": "https://www.google.com"
-	},
-	{
-		"id": "0005",
-		"src": "https://storage.carrismetropolitana.pt/static/assets/test/carousel_1.png",
-		"target": "_blank",
-		"url": "https://www.google.com"
-	},
-	{
-		"id": "0006",
-		"src": "https://storage.carrismetropolitana.pt/static/assets/test/carousel_3.png",
-		"target": "_blank",
-		"url": "https://www.google.com"
+		"url": "https://www.carrismetropolitana.pt/participe"
 	}
 ]
