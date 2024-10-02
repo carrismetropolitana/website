@@ -2,8 +2,9 @@
 /* CONTAINER */
 
 .container {
-  display: flex;
-  flex-direction: column;
+	display: flex;
+	flex-direction: row;
+	gap: var(--size-spacing-10);
+	align-items: center;
 	justify-content: flex-start;
-  gap: 3px;
 }

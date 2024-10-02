@@ -2,9 +2,9 @@
 /* CONTAINER */
 
 .container {
-  display: flex;
-  flex-direction: row;
+	display: flex;
+	flex-direction: row;
+	gap: var(--size-spacing-10);
+	align-items: center;
 	justify-content: flex-start;
-  align-items: center;
-  gap: var(--size-spacing-10);
 }

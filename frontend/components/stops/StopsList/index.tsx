@@ -16,7 +16,7 @@ export function StopsList() {
 	//
 	// A. Setup variables
 
-	const stopsContext = useStopsListContext();
+	const stopsListContext = useStopsListContext();
 
 	//
 	// B. Render components
@@ -24,9 +24,9 @@ export function StopsList() {
 	return (
 		<>
 			<StopsListToolbar />
-			{stopsContext.flags.is_loading && <StopsListViewSkeleton />}
-			{(!stopsContext.flags.is_loading && stopsContext.filters.by_current_view === 'all') && <StopsListViewAll />}
-			{(!stopsContext.flags.is_loading && stopsContext.filters.by_current_view === 'favorites') && <StopsListViewFavorites />}
+			{!stopsListContext.flags.is_loading && <StopsListViewSkeleton />}
+			{/* {(!stopsListContext.flags.is_loading && stopsListContext.filters.by_current_view === 'all') && <StopsListViewAll />}
+			{(!stopsListContext.flags.is_loading && stopsListContext.filters.by_current_view === 'favorites') && <StopsListViewFavorites />} */}
 		</>
 	);
 

@@ -19,15 +19,15 @@ export function StopsListToolbar() {
 	//
 	// A. Setup variables
 
-	const t = useTranslations('stops.PageToolbar');
-	const stopsContext = useStopsListContext();
+	const t = useTranslations('stops.StopsListToolbar');
+	const stopsListContext = useStopsListContext();
 
 	//
 	// B. Transform data
 
 	const currentViewOptions = [
-		{ label: t('by_current_view.all'), value: 'all' },
-		{ label: t('by_current_view.favorites'), value: 'favorites' },
+		{ label: t('filters.by_current_view.all'), value: 'all' },
+		{ label: t('filters.by_current_view.favorites'), value: 'favorites' },
 	];
 
 	//
@@ -39,7 +39,7 @@ export function StopsListToolbar() {
 	};
 
 	const handleTextInputChange = ({ currentTarget }) => {
-		stopsContext.actions.updateFilterBySearch(currentTarget.value);
+		stopsListContext.actions.updateFilterBySearch(currentTarget.value);
 	};
 
 	//
@@ -47,16 +47,16 @@ export function StopsListToolbar() {
 
 	return (
 		<>
-			<Section childrenWrapperStyles={styles.container} heading="Stops" withTopBorder={false} withChildrenPadding>
-				<SegmentedControl data={currentViewOptions} onChange={stopsContext.actions.updateFilterByCurrentView} value={stopsContext.filters.by_current_view} fullWidth />
-				{stopsContext.filters.by_current_view === 'all' && (
+			<Section childrenWrapperStyles={styles.container} heading={t('heading')} withTopBorder={false} withChildrenPadding>
+				<SegmentedControl data={currentViewOptions} onChange={stopsListContext.actions.updateFilterByCurrentView} value={stopsListContext.filters.by_current_view} fullWidth />
+				{stopsListContext.filters.by_current_view === 'all' && (
 					<form className={styles.container} onSubmit={handleFormSubmit}>
-						<TextInput leftSection={<IconArrowLoopRight size={20} />} onChange={handleTextInputChange} placeholder={t('by_search.placeholder')} type="search" value={stopsContext.filters.by_search} />
-						<FoundItemsCounter text={t('found_items_counter.all', { count: stopsContext.data.filtered.length })} />
+						<TextInput leftSection={<IconArrowLoopRight size={20} />} onChange={handleTextInputChange} placeholder={t('filters.by_search.placeholder')} type="search" value={stopsListContext.filters.by_search} />
+						<FoundItemsCounter text={t('found_items_counter.all', { count: stopsListContext.data.filtered.length })} />
 					</form>
 				)}
-				{stopsContext.filters.by_current_view === 'favorites' && (
-					<FoundItemsCounter text={t('found_items_counter.favorites', { count: stopsContext.data.favorites.length })} />
+				{stopsListContext.filters.by_current_view === 'favorites' && (
+					<FoundItemsCounter text={t('found_items_counter.favorites', { count: stopsListContext.data.favorites.length })} />
 				)}
 			</Section>
 
