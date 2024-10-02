@@ -6,7 +6,7 @@
 }
 
 .root:after {
-	background-color: var(--color-system-background-200);
+	background-color: var(--color-system-background-300);
 }
 
 @media (prefers-color-scheme: dark) {
