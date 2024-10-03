@@ -1,6 +1,6 @@
 /* * */
 
-import SelectOperationalDay from '@/components/common/SelectOperationalDay';
+import { SelectOperationalDay } from '@/components/common/SelectOperationalDay';
 import Timetable from '@/components/common/Timetable';
 import { PatternGroup } from '@/types/lines.types';
 import { Stop } from '@/types/stops.types';

@@ -1,0 +1,83 @@
+/* * */
+/* CONTAINER */
+
+.container {
+	position: sticky;
+	top: var(--size-height-header);
+	z-index: 10;
+	display: flex;
+	flex-direction: column;
+	gap: var(--size-spacing-15);
+	align-items: flex-start;
+	justify-content: flex-start;
+	width: 100%;
+	padding: var(--size-spacing-15);
+	background-color: var(--color-system-background-100);
+	border-bottom: 1px solid var(--color-system-border-100);
+}
+
+.container.isSticky {
+	box-shadow: 0 0 10px 0 rgb(0 0 0 / 15%);
+}
+
+/* * */
+/* STOP SUMMARY WRAPPER */
+
+.stopSummaryWrapper {
+	width: 100%;
+	font-size: 14px;
+	font-weight: var(--font-weight-semibold);
+	color: var(--color-system-text-200);
+}
+
+.stopSummaryWrapper .stopName,
+.stopSummaryWrapper .dayName {
+	font-size: 15px;
+	font-weight: var(--font-weight-bold);
+	color: var(--color-system-text-100);
+}
+
+.stopSummaryWrapper .changeDay {
+	color: var(--color-system-text-300);
+}
+
+.stopSummaryWrapper .changeDay:hover {
+	color: var(--color-status-info-text);
+	text-decoration: underline;
+}
+
+/* * */
+/* TRIPS LEGEND */
+
+.tripsLegend {
+	display: grid;
+	grid-template-columns: 75px 1fr 100px;
+	gap: 2px;
+	width: 100%;
+}
+
+/* * */
+/* TRIPS LEGEND / COLUMN */
+
+.tripsLegendColumn {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	padding: 8px;
+	font-size: 15px;
+	font-weight: 700;
+	line-height: 1;
+	color: var(--color-system-text-100);
+	background-color: var(--color-system-background-300);
+}
+
+.tripsLegendColumn:first-child {
+	padding-left: 12px;
+	border-top-left-radius: 999px;
+	border-bottom-left-radius: 999px;
+}
+
+.tripsLegendColumn:last-child {
+	border-top-right-radius: 999px;
+	border-bottom-right-radius: 999px;
+}

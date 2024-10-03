@@ -6,7 +6,6 @@ import dayjs from 'dayjs';
 import { useTranslations } from 'next-intl';
 import { useMemo, useState } from 'react';
 
-import NextBusesHeader from '../NextBusesHeader';
 import NextBusesHeaderLine from '../NextBusesHeaderLine';
 import { NextBusRow } from '../NextBusRow';
 import styles from './styles.module.css';
@@ -77,7 +76,7 @@ export default function NextBuses() {
 	// C. Render components
 	return (
 		<div className={styles.container}>
-			<NextBusesHeader />
+
 			{ operationalDayContext.flags.is_today_selected
 			&& (
 				<>

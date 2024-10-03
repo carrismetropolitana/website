@@ -5,9 +5,9 @@
 	display: grid;
 	grid-template:
 		"a b" minmax(300px, auto) / 1fr 1fr;
-	gap: var(--size-spacing-15);
 	align-items: flex-start;
 	justify-content: flex-start;
+	min-height: 100vh;
 }
 
 @media screen and (width <= 900px) {
@@ -15,9 +15,9 @@
 		grid-template:
 			"b" minmax(200px, auto) [b_]
 			"a" auto [a_] / 1fr;
+		min-height: unset;
 	}
 }
-
 
 /* * */
 /* LIST WRAPPER */
@@ -26,10 +26,9 @@
 	display: flex;
 	flex-direction: column;
 	grid-area: b;
-	gap: var(--size-spacing-15);
 	align-items: flex-start;
 	justify-content: flex-start;
-	padding: var(--size-spacing-15);
+	contain: paint;
 }
 
 /* * */

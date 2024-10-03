@@ -2,17 +2,16 @@
 
 /* * */
 
-import SelectOperationalDay from '@/components/common/SelectOperationalDay';
 import Section from '@/components/layout/Section';
+import { StopsDetailContentListHeader } from '@/components/stops/StopsDetailContentListHeader';
 
-import LinesHeader from '../LinesHeader';
 import NextBuses from '../NextBuses';
 import StopMap from '../StopMap';
 import styles from './styles.module.css';
 
 /* * */
 
-export default function Component() {
+export function StopsDetailContent() {
 	//
 
 	//
@@ -24,8 +23,7 @@ export default function Component() {
 	return (
 		<Section childrenWrapperStyles={styles.container} withGap={false} withTopPadding={false}>
 			<div className={styles.listWrapper}>
-				<SelectOperationalDay />
-				<LinesHeader />
+				<StopsDetailContentListHeader />
 				<NextBuses />
 			</div>
 			<div className={styles.mapWrapper}>

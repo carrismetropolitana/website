@@ -6,14 +6,14 @@ import CopyBadge from '@/components/common/CopyBadge';
 import FavoriteToggle from '@/components/common/FavoriteToggle';
 import { IconDisplay } from '@/components/common/IconDisplay';
 import Section from '@/components/layout/Section';
+import LineBadge from '@/components/lines/LineBadge';
+import { StopDisplayLocation } from '@/components/stops/StopDisplayLocation';
 import { StopDisplayName } from '@/components/stops/StopDisplayName';
+import { StopDisplayTts } from '@/components/stops/StopDisplayTts';
 import { useProfileContext } from '@/contexts/Profile.context';
 import { useStopsSingleContext } from '@/contexts/StopsSingle.context';
 import toast from '@/utils/toast';
-import { useTranslations } from 'next-intl';
 
-import { StopDisplayLocation } from '../StopDisplayLocation';
-import { StopDisplayTts } from '../StopDisplayTts';
 import styles from './styles.module.css';
 
 /* * */
@@ -24,7 +24,6 @@ export function StopsDetailHeader() {
 	//
 	// A. Setup variables
 
-	const t = useTranslations('stops.StopsDetail');
 	const profileContext = useProfileContext();
 	const stopsDetailContext = useStopsSingleContext();
 
@@ -37,7 +36,7 @@ export function StopsDetailHeader() {
 			profileContext.actions.toggleFavoriteStop(stopsDetailContext.data.stop.id);
 		}
 		catch (error) {
-			toast.error({ message: t('toast.toggle_favorite_error', { error: error.message }) });
+			toast.error({ message: 'Error: ' + error.message });
 		}
 	};
 
@@ -78,6 +77,10 @@ export function StopsDetailHeader() {
 				{stopsDetailContext.data.stop.facilities.map(facility => (
 					<IconDisplay key={facility} category="facilities" name={facility} />
 				))}
+			</div>
+
+			<div className={styles.lineBadgesWrapper}>
+				{stopsDetailContext.data.valid_lines && stopsDetailContext.data.valid_lines.map(line => <LineBadge key={line.line_id} line={line} size="lg" />)}
 			</div>
 
 		</Section>

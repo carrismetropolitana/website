@@ -35,7 +35,9 @@ export default function Component() {
 	// C. Handle actions
 
 	const handleLocaleChange = (value: string) => {
-		router.replace(pathname, { locale: value, scroll: true });
+		// TODO: Keep the 'param' property. Types are wrong.
+		// @ts-expect-error: Library says params should be named query, but it only works with params.
+		router.replace({ params: params, pathname: pathname as string }, { locale: value, scroll: true });
 	};
 
 	//

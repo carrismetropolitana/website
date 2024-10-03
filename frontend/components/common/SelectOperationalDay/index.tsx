@@ -13,7 +13,7 @@ import styles from './styles.module.css';
 
 /* * */
 
-export default function Component() {
+export function SelectOperationalDay() {
 	//
 
 	//
@@ -82,7 +82,16 @@ export default function Component() {
 	// D. Render components
 
 	return (
-		<SegmentedControl classNames={{ control: styles.segmentedControlDateInputOverrideControl, label: styles.segmentedControlDateInputOverrideLabel }} data={segementedControlOptions} onChange={handleSegmentedControlChange} value={selectedSegmentedControlOption} w="100%" />
+		<SegmentedControl
+			data={segementedControlOptions}
+			onChange={handleSegmentedControlChange}
+			value={selectedSegmentedControlOption}
+			w="100%"
+			classNames={{
+				control: styles.segmentedControlDateInputOverrideControl,
+				label: styles.segmentedControlDateInputOverrideLabel,
+			}}
+		/>
 	);
 
 	//

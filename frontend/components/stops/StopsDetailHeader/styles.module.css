@@ -62,3 +62,16 @@
     align-items: center;
 	justify-content: flex-start;
 }
+
+/* * */
+/* LINE BADGES WRAPPER */
+
+.lineBadgesWrapper {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--size-spacing-15);
+    align-items: flex-start;
+    justify-content: flex-start;
+    width: 100%;
+	margin-top: var(--size-spacing-15);
+}

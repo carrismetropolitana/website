@@ -3,7 +3,7 @@
 /* * */
 
 import StopDetailAlerts from '@/components/stops/StopDetailAlerts';
-import StopDetailContent from '@/components/stops/StopDetailContent';
+import { StopsDetailContent } from '@/components/stops/StopsDetailContent';
 import { StopsDetailHeader } from '@/components/stops/StopsDetailHeader';
 
 /* * */
@@ -13,7 +13,7 @@ export function StopsDetail() {
 		<>
 			<StopsDetailHeader />
 			<StopDetailAlerts />
-			<StopDetailContent />
+			<StopsDetailContent />
 			{/* TODO */}
 			{/* <StopDetailMetrics /> */}
 		</>
