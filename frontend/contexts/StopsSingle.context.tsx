@@ -10,6 +10,7 @@ import { Alert, SimplifiedAlert } from '@/types/alerts.types';
 import { Line, Pattern, PatternGroup, Route } from '@/types/lines.types';
 import convertToSimplifiedAlert from '@/utils/convertToSimplifiedAlert';
 import { Routes } from '@/utils/routes';
+import { notFound } from 'next/navigation';
 import { createContext, useContext, useEffect, useMemo, useState } from 'react';
 import useSWR from 'swr';
 
@@ -89,6 +90,11 @@ export const StopsSingleContextProvider = ({ children, stopId }: { children: Rea
 
 	// const { data: stopData, isLoading: stopLoading } = useSWR<Stop, Error>(`${Routes.API}/v2/stops/${stopIdState}`);
 	const { data: allAlertsData, isLoading: allAlertsLoading } = useSWR<Alert[], Error>(`${Routes.API}/v2/alerts`);
+
+	useEffect(() => {
+		if (!allStopData) return;
+		if (!allStopData?.find(stop => stop.id === stopIdState)) notFound();
+	}, [allStopData]);
 
 	useEffect(() => {
 		(async () => {

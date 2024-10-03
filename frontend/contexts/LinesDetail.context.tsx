@@ -11,6 +11,7 @@ import { useOperationalDayContext } from '@/contexts/OperationalDay.context';
 import { useProfileContext } from '@/contexts/Profile.context';
 import convertToSimplifiedAlert from '@/utils/convertToSimplifiedAlert';
 import { Routes } from '@/utils/routes';
+import { notFound } from 'next/navigation';
 import { useQueryState } from 'nuqs';
 import { createContext, useContext, useEffect, useState } from 'react';
 import useSWR from 'swr';
@@ -98,6 +99,11 @@ export const LinesDetailContextProvider = ({ children, lineId }) => {
 	const { data: lineData, isLoading: lineLoading } = useSWR<Line, Error>(`${Routes.API}/v2/lines/${lineId}`);
 	const { data: allAlertsData, isLoading: allAlertsLoading } = useSWR<Alert[], Error>(`${Routes.API}/v2/alerts`);
 	const { data: allDemandByLineData } = useSWR<DemandByLine[], Error>(`${Routes.API}/v2/metrics/demand/by_line`);
+
+	// Check if the line exists
+	useEffect(() => {
+		if (lineData && !lineData.line_id) return notFound();
+	}, [lineData]);
 
 	useEffect(() => {
 		(async () => {
@@ -224,14 +230,15 @@ export const LinesDetailContextProvider = ({ children, lineId }) => {
 	//
 	// E. Handle Filters State
 	useEffect(() => {
-		if (!dataValidPatternGroupsState) return;
-
-		const activePatternGroup = dataValidPatternGroupsState.find(
-			patternGroup => patternGroup.pattern_id === filterActivePatternGroupIdState,
-		);
-
-		setDataActivePatternGroupState(activePatternGroup || dataValidPatternGroupsState[0] || null);
-	}, [dataValidPatternGroupsState, filterActivePatternGroupIdState]);
+		if (filterActivePatternGroupIdState) {
+			for (const patternGroup of dataValidPatternGroupsState || []) {
+				if (patternGroup.pattern_id === filterActivePatternGroupIdState) {
+					setDataActivePatternGroupState(patternGroup);
+					return;
+				}
+			}
+		}
+	}, [dataValidPatternGroupsState]);
 
 	useEffect(() => {
 		const sortedStops = dataActivePatternGroupState?.path.sort((a, b) => a.stop_sequence - b.stop_sequence);
