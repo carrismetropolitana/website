@@ -3,7 +3,7 @@
 import type { Stop } from '@/types/stops.types';
 
 import { IconDisplay } from '@/components/common/IconDisplay';
-import parseStopLocationName from '@/utils/parseStopLocationName';
+import { formatStopLocation } from '@/utils/formatStopLocation';
 import { useClipboard } from '@mantine/hooks';
 import { IconCheck, IconCopy } from '@tabler/icons-react';
 
@@ -31,7 +31,7 @@ export default function SingleStop({ isFirstStop, isLastStop, isSelected, stopDa
 	//
 	// B. Transform data
 
-	const stopLocation = parseStopLocationName(stopData.locality, stopData.municipality_name);
+	const stopLocation = formatStopLocation(stopData.locality, stopData.municipality_name);
 
 	//
 	// C. Handle actions
