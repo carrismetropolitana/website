@@ -160,7 +160,9 @@ export const LinesDetailContextProvider = ({ children, lineId }) => {
 				}, '');
 
 				// If the closest date is valid, add the pattern group to the list
-				if (closest_date != '') activePatternGroups.push(patternGroup);
+				if (closest_date != '' && !activePatternGroups.find(activePatternGroup => activePatternGroup.pattern_id === patternGroup.pattern_id)) {
+					activePatternGroups.push(patternGroup);
+				}
 			}
 		}
 		setDataValidPatternGroupsState(activePatternGroups);
