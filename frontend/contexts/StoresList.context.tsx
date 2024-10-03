@@ -6,6 +6,7 @@ import type { Store } from '@/types/stores.types.js';
 
 import { moveMap } from '@/utils/map.utils';
 import { Routes } from '@/utils/routes';
+import { parseAsStringLiteral, useQueryState } from 'nuqs';
 import { createContext, useContext, useEffect, useState } from 'react';
 import { useMap } from 'react-map-gl/dist/esm/exports-maplibre';
 import useSWR from 'swr';
@@ -33,6 +34,7 @@ interface StoresListContextState {
 		by_current_status: 'all' | 'open'
 		by_municipality: null | string
 		order_by: 'municipality_name' | 'wait_time'
+		selected_store: null | string
 	}
 	flags: {
 		is_loading: boolean
@@ -64,9 +66,10 @@ export const StoresListContextProvider = ({ children }) => {
 	const [dataFilteredState, setDataFilteredState] = useState<Store[]>([]);
 	const [dataSelectedState, setDataSelectedState] = useState<null | Store>(null);
 
-	const [filterByCurrentStatusState, setFilterByCurrentStatusState] = useState <StoresListContextState['filters']['by_current_status']>('open');
-	const [filterByMunicipalityState, setFilterByMunicipalityState] = useState <StoresListContextState['filters']['by_municipality']>(null);
-	const [filterOrderByState, setFilterOrderByState] = useState <StoresListContextState['filters']['order_by']>('municipality_name');
+	const [filterByCurrentStatusState, setFilterByCurrentStatusState] = useQueryState <StoresListContextState['filters']['by_current_status']>('open', parseAsStringLiteral(['all', 'open']).withDefault('open').withOptions({ clearOnDefault: true }));
+	const [filterByMunicipalityState, setFilterByMunicipalityState] = useQueryState('municipality');
+	const [filterOrderByState, setFilterOrderByState] = useQueryState <StoresListContextState['filters']['order_by']>('open', parseAsStringLiteral(['municipality_name', 'wait_time']).withDefault('municipality_name').withOptions({ clearOnDefault: true }));
+	const [filterSelectedStoreState, setFilterSelectedStoreState] = useQueryState('store');
 
 	//
 	// B. Fetch data
@@ -122,6 +125,10 @@ export const StoresListContextProvider = ({ children }) => {
 		if (allStoresData?.filter((item => item.current_status === 'open')).length === 0) {
 			setFilterByCurrentStatusState('all');
 		}
+
+		// if (filterByCurrentStatusState) updateFilterCurrentStatus(filterByCurrentStatusState);
+		// if (filterOrderByState) updateFilterOrderBy(filterOrderByState);
+		if (filterSelectedStoreState) updateSelectedStore(filterSelectedStoreState);
 	}, [allStoresData]);
 
 	//
@@ -147,7 +154,6 @@ export const StoresListContextProvider = ({ children }) => {
 			foundStoreData = allStoresData.find(item => item.id === storeId) || null;
 			if (!foundStoreData || !foundStoreData.id) return;
 			setFilterByCurrentStatusState('all');
-			setFilterByMunicipalityState(null);
 			moveMap(storesListMap, [foundStoreData.lon, foundStoreData.lat]);
 			setTimeout(() => {
 				if (!foundStoreData) return;
@@ -156,6 +162,7 @@ export const StoresListContextProvider = ({ children }) => {
 			return;
 		};
 		setDataSelectedState(foundStoreData);
+		setFilterSelectedStoreState(storeId);
 		moveMap(storesListMap, [foundStoreData.lon, foundStoreData.lat]);
 		document.getElementById(foundStoreData.id)?.scrollIntoView();
 	};
@@ -184,6 +191,7 @@ export const StoresListContextProvider = ({ children }) => {
 			by_current_status: filterByCurrentStatusState,
 			by_municipality: filterByMunicipalityState,
 			order_by: filterOrderByState,
+			selected_store: filterSelectedStoreState,
 		},
 		flags: {
 			is_loading: allStoresLoading,
