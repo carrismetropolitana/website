@@ -186,7 +186,7 @@ export const Routes = Object.freeze({
 	...RoutesLostAndFound,
 	...RoutesFooter,
 
-	API: process.env.ACCOUNTS_API ?? 'https://api.carrismetropolitana.pt',
+	API: process.env.NEXT_PUBLIC_API_URL ?? 'https://api.carrismetropolitana.pt',
 	API_ACCOUNTS: process.env.ACCOUNTS_API_URL ?? 'https://accounts.carrismetropolitana.pt',
 	NAVEGANTE: 'https://www.navegante.pt',
 	// Other routes
