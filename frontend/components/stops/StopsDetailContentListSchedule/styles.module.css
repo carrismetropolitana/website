@@ -1,0 +1,19 @@
+/* * */
+/* SHOW PAST TRIPS TOGGLE */
+
+.showPastTripsToggle {
+	width: 100%;
+	padding: var(--size-spacing-5);
+	font-size: 14px;
+	font-weight: var(--font-weight-semibold);
+	color: var(--color-system-text-300);
+	text-align: center;
+	cursor: pointer;
+	border-radius: 5px;
+	transition: all 200ms ease;
+}
+
+.showPastTripsToggle:hover {
+	color: var(--color-system-text-100);
+	background-color: var(--color-system-background-200);
+}

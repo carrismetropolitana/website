@@ -3,9 +3,9 @@
 /* * */
 
 import Section from '@/components/layout/Section';
+import { StopsDetailContentList } from '@/components/stops/StopsDetailContentList';
 import { StopsDetailContentListHeader } from '@/components/stops/StopsDetailContentListHeader';
 
-import NextBuses from '../NextBuses';
 import StopMap from '../StopMap';
 import styles from './styles.module.css';
 
@@ -24,7 +24,7 @@ export function StopsDetailContent() {
 		<Section childrenWrapperStyles={styles.container} withGap={false} withTopPadding={false}>
 			<div className={styles.listWrapper}>
 				<StopsDetailContentListHeader />
-				<NextBuses />
+				<StopsDetailContentList />
 			</div>
 			<div className={styles.mapWrapper}>
 				<StopMap />

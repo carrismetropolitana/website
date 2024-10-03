@@ -11,13 +11,12 @@ interface OperationalDayContextState {
 	actions: {
 		updateSelectedDay: (value: string) => void
 		updateSelectedDayFromJsDate: (value: Date) => void
+		updateSelectedDayToLessOneDay: () => void
+		updateSelectedDayToPlusOneDay: () => void
 		updateSelectedDayToToday: () => void
 		updateSelectedDayToTomorrow: () => void
 	}
 	data: {
-		/**
-		 * yyyyMMdd
-		 */
 		selected_day: null | string
 		selected_day_jsdate: Date | null
 		today: null | string
@@ -106,6 +105,16 @@ export const OperationalDayContextProvider = ({ children }) => {
 		setSelectedDay(tomorrowDateString);
 	};
 
+	const updateSelectedDayToPlusOneDay = () => {
+		const selectedDayPlusOneDay = DateTime.fromFormat(selectedDay || todayDateString, 'yyyyMMdd').plus({ days: 1 }).toFormat('yyyyMMdd');
+		setSelectedDay(selectedDayPlusOneDay);
+	};
+
+	const updateSelectedDayToLessOneDay = () => {
+		const selectedDayPlusOneDay = DateTime.fromFormat(selectedDay || todayDateString, 'yyyyMMdd').minus({ days: 1 }).toFormat('yyyyMMdd');
+		setSelectedDay(selectedDayPlusOneDay);
+	};
+
 	//
 	// D. Define context value
 
@@ -113,6 +122,8 @@ export const OperationalDayContextProvider = ({ children }) => {
 		actions: {
 			updateSelectedDay,
 			updateSelectedDayFromJsDate,
+			updateSelectedDayToLessOneDay,
+			updateSelectedDayToPlusOneDay,
 			updateSelectedDayToToday,
 			updateSelectedDayToTomorrow,
 		},
