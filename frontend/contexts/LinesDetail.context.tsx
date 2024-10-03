@@ -40,7 +40,8 @@ interface LinesDetailContextState {
 		valid_pattern_groups: null | PatternGroup[]
 	}
 	filters: {
-		active_pattern_group_id: null | string
+		// active_pattern_group_id: null | string
+		active_pattern_id: null | string
 		active_stop_id: null | string
 	}
 	flags: {
@@ -87,7 +88,8 @@ export const LinesDetailContextProvider = ({ children, lineId }) => {
 
 	const [dataDrawerOpenState, setDataDrawerOpenState] = useState<boolean>(false);
 
-	const [filterActivePatternGroupIdState, setFilterActivePatternGroupIdState] = useQueryState('active_pattern_group_id');
+	const [filterActivePatternGroupIdState, setFilterActivePatternGroupIdState] = useQueryState('active_pattern_id');
+	// const [filterActivePatternGroupIdState, setFilterActivePatternGroupIdState] = useQueryState('active_pattern_group_id');
 	const [filterActiveStopIdState, setFilterActiveStopIdState] = useQueryState('active_stop_id');
 
 	//
@@ -203,7 +205,7 @@ export const LinesDetailContextProvider = ({ children, lineId }) => {
 		for (const patternGroup of dataValidPatternGroupsState || []) {
 			if (patternGroup.pattern_group_id === patternGroupId) {
 				setDataActivePatternGroupState(patternGroup);
-				setFilterActivePatternGroupIdState(patternGroupId);
+				setFilterActivePatternGroupIdState(patternGroup.pattern_id);
 				return;
 			}
 		}
@@ -220,20 +222,26 @@ export const LinesDetailContextProvider = ({ children, lineId }) => {
 	};
 
 	//
-	// E. Handle Filters Initial State
+	// E. Handle Filters State
 	useEffect(() => {
-		if (filterActivePatternGroupIdState) {
-			setActivePatternGroup(filterActivePatternGroupIdState);
-		}
-	}, [dataValidPatternGroupsState]);
+		if (!dataValidPatternGroupsState) return;
+
+		const activePatternGroup = dataValidPatternGroupsState.find(
+			patternGroup => patternGroup.pattern_id === filterActivePatternGroupIdState,
+		);
+
+		setDataActivePatternGroupState(activePatternGroup || dataValidPatternGroupsState[0] || null);
+	}, [dataValidPatternGroupsState, filterActivePatternGroupIdState]);
 
 	useEffect(() => {
 		const sortedStops = dataActivePatternGroupState?.path.sort((a, b) => a.stop_sequence - b.stop_sequence);
 		if (!sortedStops) return;
 
-		const selectedStop = filterActiveStopIdState ? sortedStops.find(stop => stop.stop.id === filterActiveStopIdState) : sortedStops[0];
+		const selectedStop = filterActiveStopIdState
+			? sortedStops.find(stop => stop.stop.id === filterActiveStopIdState) ?? sortedStops[0]
+			: sortedStops[0];
 		if (selectedStop) setActiveStop(selectedStop.stop_sequence, selectedStop.stop);
-	}, [dataActivePatternGroupState]);
+	}, [dataActivePatternGroupState, dataValidPatternGroupsState]);
 
 	//
 	// F. Define context value
@@ -258,7 +266,7 @@ export const LinesDetailContextProvider = ({ children, lineId }) => {
 			valid_pattern_groups: dataValidPatternGroupsState,
 		},
 		filters: {
-			active_pattern_group_id: filterActivePatternGroupIdState,
+			active_pattern_id: filterActivePatternGroupIdState,
 			active_stop_id: filterActiveStopIdState,
 		},
 		flags: {

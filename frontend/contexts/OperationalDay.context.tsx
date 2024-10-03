@@ -76,10 +76,9 @@ export const OperationalDayContextProvider = ({ children }) => {
 	useEffect(() => {
 		if (!selectedDay) {
 			setSelectedDay(todayDateString);
-			setSelectedDayQuery(todayDateString);
 		}
 
-		setSelectedDayQuery(selectedDay);
+		setSelectedDayQuery(todayDateString === selectedDay ? null : selectedDay);
 	}, [selectedDay]);
 
 	useEffect(() => {
