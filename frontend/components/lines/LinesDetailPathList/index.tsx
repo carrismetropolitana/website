@@ -49,12 +49,6 @@ export default function Component() {
 		nextArrivalsPerStop[stopId].sort((a, b) => a.unixTs - b.unixTs);
 	}
 
-	// On first load, select the first stop
-	useEffect(() => {
-		if (!sortedStops) return;
-		linesDetailContext.actions.setActiveStop(sortedStops?.[0].stop_sequence, sortedStops?.[0].stop);
-	}, [sortedStops]);
-
 	// Scroll to selected stop on stop change
 	useEffect(() => {
 		if (!linesDetailContext.data.active_stop) return;
