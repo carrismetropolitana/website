@@ -4,11 +4,14 @@
 .introWrapper {
 	display: grid;
 	grid-template-columns: 1fr 1fr;
-	gap: 1px;
-  background-color: var(--color-system-background-100);
+	gap: 15px;
+
+	/* padding: 15px 0; */
+
+  /* background-color: var(--color-system-background-100); */
 }
 
-@media only screen and (max-width: 900px) {
+@media only screen and (width <= 900px) {
 	.introWrapper {
 		grid-template-columns: 1fr;
 	}
@@ -19,9 +22,10 @@
 
 .quickSearchWrapper {
 	background-color: var(--color-brand);
+	border-radius: 18px;
 }
 
-@media only screen and (max-width: 900px) {
+@media only screen and (width <= 900px) {
 	.quickSearchWrapper {
 		display: none;
 	}
@@ -32,4 +36,6 @@
 
 .carouselWrapper {
 	aspect-ratio: 16/9;
+	overflow: hidden;
+	border-radius: 18px;
 }

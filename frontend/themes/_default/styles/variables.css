@@ -14,12 +14,12 @@
 	/* COLOR / SYSTEM */
 
 	--color-system-background-100: #fff;
-	--color-system-background-200: #fafafa;
+	--color-system-background-200: #f5f5f5;
 	--color-system-background-300: #f0f0f0;
 	--color-system-background-900: #000;
 
 	/* ... */
-	--color-system-border-100: #f0f0fa;
+	--color-system-border-100: rgb(230 230 250);
 	--color-system-border-200: #bebec8;
 	--color-system-text-100: #000;
 	--color-system-text-200: #5a5a64;
@@ -38,8 +38,8 @@
 	/* * */
 	/* COLOR / STATUS */
 
-	--color-status-info-background: #F5FAFF;
-	--color-status-info-border: #DCE6F0;
+	--color-status-info-background: #fff; /* #c8d3df; */
+	--color-status-info-border: #054B8C;
 	--color-status-info-text: #054B8C;
 	--color-status-info-shadow: #054b8c80;
 	--color-status-ok-background: #EBF5EB;

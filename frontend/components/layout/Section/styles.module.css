@@ -2,14 +2,16 @@
 /* CONTAINER */
 
 .container {
-	width: 100%;
 	display: flex;
 	flex-direction: column;
 	align-items: flex-start;
 	justify-content: center;
+	width: 100%;
 	max-width: var(--size-width-global);
 	margin: auto;
+	margin-top: var(--size-spacing-15);
 	background-color: var(--color-system-background-100);
+	border-radius: 18px;
 }
 
 .container.withTopBorder {
@@ -32,9 +34,10 @@
 	padding-top: 0;
 }
 
-@media (max-width: 1200px) {
+@media (width <= 1200px) {
 	.container {
 		background-color: transparent;
+
 		/* border-top: none; */
 	}
 	.container.withTopBorder {
@@ -52,14 +55,14 @@
 /* HEADING WRAPPER */
 
 .headingWrapper {
-	width: 100%;
-	padding-left: var(--size-spacing-20);
-	padding-right: var(--size-spacing-20);
 	display: flex;
 	flex-direction: column;
+	gap: var(--size-spacing-10);
 	align-items: flex-start;
 	justify-content: flex-start;
-	gap: var(--size-spacing-10);
+	width: 100%;
+	padding-right: var(--size-spacing-20);
+	padding-left: var(--size-spacing-20);
 
 }
 
@@ -73,13 +76,13 @@
 .backButton {
 	display: flex;
 	flex-direction: row;
+	gap: var(--size-spacing-5);
 	align-items: center;
 	justify-content: flex-start;
-	color: var(--color-system-text-400);
-	gap: var(--size-spacing-5);
 	margin-bottom: var(--size-spacing-5);
-	transition: all 300ms ease;
+	color: var(--color-system-text-400);
 	cursor: pointer;
+	transition: all 300ms ease;
 }
 
 .backButton:hover {
@@ -89,9 +92,9 @@
 .backButtonLabel {
 	font-size: 10px;
 	font-weight: var(--font-weight-bold);
+	line-height: 1;
 	text-transform: uppercase;
 	letter-spacing: 0.5px;
-	line-height: 1;
 }
 
 /* * */
@@ -107,10 +110,10 @@
 /* SUBHEADING */
 
 .subheading {
+	max-width: var(--size-width-heading);
 	font-size: var(--font-size-text);
 	font-weight: var(--font-weight-text);
 	color: var(--color-system-text-200);
-	max-width: var(--size-width-heading);
 }
 
 /* * */
