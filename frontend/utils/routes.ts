@@ -100,9 +100,11 @@ export const RoutesPricing = Object.freeze({
 });
 
 export const RoutesSocial = Object.freeze({
+	FACEBOOK: 'https://www.facebook.com/carrismetropolitana',
 	GITHUB: 'https://www.github.com/carrismetropolitana',
 	INSTAGRAM: 'https://www.instagram.com/carrismetropolitana',
 	WHATSAPP: 'https://whatsapp.com/channel/0029Va9z9d2JP2184daqbX0K',
+	X: 'https://x.com/CMetropolitana_',
 });
 
 export const RoutesLostAndFound = Object.freeze({
@@ -186,7 +188,7 @@ export const Routes = Object.freeze({
 	...RoutesLostAndFound,
 	...RoutesFooter,
 
-	API: process.env.ACCOUNTS_API ?? 'https://api.carrismetropolitana.pt',
+	API: process.env.NEXT_PUBLIC_API_URL ?? 'https://api.carrismetropolitana.pt',
 	API_ACCOUNTS: process.env.ACCOUNTS_API_URL ?? 'https://accounts.carrismetropolitana.pt',
 	NAVEGANTE: 'https://www.navegante.pt',
 	// Other routes

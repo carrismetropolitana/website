@@ -48,19 +48,6 @@ export default function Component() {
 	//
 	useEffect(() => {
 		if (!linesSingleMap) return;
-		// Load direction arrows
-		linesSingleMap.loadImage(IconsMap.shape_direction).then((image) => {
-			linesSingleMap.addImage('shape-arrow-direction', image.data, { sdf: true });
-		});
-
-		// Load vehicle symbol
-		linesSingleMap.loadImage(IconsMap.bus_regular).then((image) => {
-			linesSingleMap.addImage('cm-bus-regular', image.data, { sdf: false });
-		});
-		// Load vehicle symbol
-		linesSingleMap.loadImage(IconsMap.bus_delay).then((image) => {
-			linesSingleMap.addImage('cm-bus-delay', image.data, { sdf: false });
-		});
 		// Load stop selected symbol
 		linesSingleMap.loadImage(IconsMap.stop_selected).then((image) => {
 			linesSingleMap.addImage('stop-selected', image.data, { sdf: false });
@@ -126,23 +113,23 @@ export default function Component() {
 			{/* Route Shape */}
 			{linesDetailContext.data.active_shape?.geojson && (
 				<Source data={linesDetailContext.data.active_shape.geojson} id="shape" type="geojson">
-					<Layer beforeId="stops" {...shapeStyle} />
+					<Layer {...shapeStyle} />
 					<Layer {...shapeArrowStyle} />
-				</Source>
-			)}
-
-			{/* Selected Stop */}
-			{selectedStopMapData && (
-				<Source data={selectedStopMapData} generateId={true} id="selected-stop" type="geojson">
-					<Layer {...selectedStopStickStyle} />
-					<Layer beforeId="selected-stop-stick" {...selectedStopBaseStyle} />
 				</Source>
 			)}
 
 			{/* Stops */}
 			{stopsGeoJson && (
 				<Source data={stopsGeoJson} id="stops" type="geojson">
-					<Layer beforeId="selected-stop-base" {...stopsStyle} />
+					<Layer {...stopsStyle} />
+				</Source>
+			)}
+
+			{/* Selected Stop */}
+			{selectedStopMapData && (
+				<Source data={selectedStopMapData} generateId={true} id="selected-stop" type="geojson">
+					<Layer {...selectedStopBaseStyle} />
+					<Layer {...selectedStopStickStyle} />
 				</Source>
 			)}
 

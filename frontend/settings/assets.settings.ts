@@ -50,6 +50,13 @@ export const BrandsOperators = Object.freeze({
  * Icons used by alerts
  */
 
+export const IconsSocial = Object.freeze({
+	facebook: '/icons/social/social-facebook.svg',
+	instagram: '/icons/social/social-instagram.svg',
+	whatsapp: '/icons/social/social-whatsapp.svg',
+	x: '/icons/social/social-twitter.svg',
+});
+
 export const IconsFacilities = Object.freeze({
 	court: '/icons/facilities/court.svg',
 	fire_station: '/icons/facilities/fire_station.svg',

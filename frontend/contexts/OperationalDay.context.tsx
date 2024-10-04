@@ -3,6 +3,7 @@
 /* * */
 
 import { DateTime } from 'luxon';
+import { useQueryState } from 'nuqs';
 import { createContext, useContext, useEffect, useState } from 'react';
 
 /* * */
@@ -48,7 +49,8 @@ export const OperationalDayContextProvider = ({ children }) => {
 	//
 	// A. Setup variables
 
-	const [selectedDay, setSelectedDay] = useState<null | string>(null);
+	const [selectedDayQuery, setSelectedDayQuery] = useQueryState('day');
+	const [selectedDay, setSelectedDay] = useState<null | string>(selectedDayQuery);
 	const [selectedDayJsDate, setSelectedDayJsDate] = useState<Date | null>(null);
 
 	//
@@ -74,6 +76,8 @@ export const OperationalDayContextProvider = ({ children }) => {
 		if (!selectedDay) {
 			setSelectedDay(todayDateString);
 		}
+
+		setSelectedDayQuery(todayDateString === selectedDay ? null : selectedDay);
 	}, [selectedDay]);
 
 	useEffect(() => {

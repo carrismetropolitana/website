@@ -6,6 +6,7 @@ import { Link } from '@/i18n/routing';
 import { footerNavigationGroup } from '@/settings/navigation.settings';
 import { useTranslations } from 'next-intl';
 
+import SocialIcons from '../SocialIcons';
 import styles from './styles.module.css';
 
 /* * */
@@ -44,6 +45,7 @@ export default function Component() {
 				<div className={styles.linksWrapper}>
 					<FooterVersionControl className={styles.tertiaryLink} />
 					<FooterDebugToggle className={styles.tertiaryLink} />
+					<SocialIcons />
 				</div>
 				<div className={styles.linksWrapper}>
 					<p className={styles.copyright}>{t('copyright', { year: currentYear })}</p>

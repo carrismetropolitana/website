@@ -11,6 +11,8 @@ import { useOperationalDayContext } from '@/contexts/OperationalDay.context';
 import { useProfileContext } from '@/contexts/Profile.context';
 import convertToSimplifiedAlert from '@/utils/convertToSimplifiedAlert';
 import { Routes } from '@/utils/routes';
+import { notFound } from 'next/navigation';
+import { useQueryState } from 'nuqs';
 import { createContext, useContext, useEffect, useState } from 'react';
 import useSWR from 'swr';
 
@@ -39,7 +41,9 @@ interface LinesDetailContextState {
 		valid_pattern_groups: null | PatternGroup[]
 	}
 	filters: {
-		none: null | string
+		// active_pattern_group_id: null | string
+		active_pattern_id: null | string
+		active_stop_id: null | string
 	}
 	flags: {
 		is_favorite: boolean
@@ -85,12 +89,21 @@ export const LinesDetailContextProvider = ({ children, lineId }) => {
 
 	const [dataDrawerOpenState, setDataDrawerOpenState] = useState<boolean>(false);
 
+	const [filterActivePatternGroupIdState, setFilterActivePatternGroupIdState] = useQueryState('active_pattern_id');
+	// const [filterActivePatternGroupIdState, setFilterActivePatternGroupIdState] = useQueryState('active_pattern_group_id');
+	const [filterActiveStopIdState, setFilterActiveStopIdState] = useQueryState('active_stop_id');
+
 	//
 	// B. Fetch data
 
 	const { data: lineData, isLoading: lineLoading } = useSWR<Line, Error>(`${Routes.API}/v2/lines/${lineId}`);
 	const { data: allAlertsData, isLoading: allAlertsLoading } = useSWR<Alert[], Error>(`${Routes.API}/v2/alerts`);
 	const { data: allDemandByLineData } = useSWR<DemandByLine[], Error>(`${Routes.API}/v2/metrics/demand/by_line`);
+
+	// Check if the line exists
+	useEffect(() => {
+		if (lineData && !lineData.line_id) return notFound();
+	}, [lineData]);
 
 	useEffect(() => {
 		(async () => {
@@ -160,7 +173,9 @@ export const LinesDetailContextProvider = ({ children, lineId }) => {
 				}, '');
 
 				// If the closest date is valid, add the pattern group to the list
-				if (closest_date != '') activePatternGroups.push(patternGroup);
+				if (closest_date != '' && !activePatternGroups.find(activePatternGroup => activePatternGroup.pattern_id === patternGroup.pattern_id)) {
+					activePatternGroups.push(patternGroup);
+				}
 			}
 		}
 		setDataValidPatternGroupsState(activePatternGroups);
@@ -196,6 +211,7 @@ export const LinesDetailContextProvider = ({ children, lineId }) => {
 		for (const patternGroup of dataValidPatternGroupsState || []) {
 			if (patternGroup.pattern_group_id === patternGroupId) {
 				setDataActivePatternGroupState(patternGroup);
+				setFilterActivePatternGroupIdState(patternGroup.pattern_id);
 				return;
 			}
 		}
@@ -204,6 +220,7 @@ export const LinesDetailContextProvider = ({ children, lineId }) => {
 
 	const setActiveStop = (sequence: number, stop: Stop) => {
 		setDataActiveStopState({ sequence, stop });
+		setFilterActiveStopIdState(stop.id);
 	};
 
 	const setDrawerOpen = (isOpen: boolean) => {
@@ -211,7 +228,30 @@ export const LinesDetailContextProvider = ({ children, lineId }) => {
 	};
 
 	//
-	// E. Define context value
+	// E. Handle Filters State
+	useEffect(() => {
+		if (filterActivePatternGroupIdState) {
+			for (const patternGroup of dataValidPatternGroupsState || []) {
+				if (patternGroup.pattern_id === filterActivePatternGroupIdState) {
+					setDataActivePatternGroupState(patternGroup);
+					return;
+				}
+			}
+		}
+	}, [dataValidPatternGroupsState]);
+
+	useEffect(() => {
+		const sortedStops = dataActivePatternGroupState?.path.sort((a, b) => a.stop_sequence - b.stop_sequence);
+		if (!sortedStops) return;
+
+		const selectedStop = filterActiveStopIdState
+			? sortedStops.find(stop => stop.stop.id === filterActiveStopIdState) ?? sortedStops[0]
+			: sortedStops[0];
+		if (selectedStop) setActiveStop(selectedStop.stop_sequence, selectedStop.stop);
+	}, [dataActivePatternGroupState, dataValidPatternGroupsState]);
+
+	//
+	// F. Define context value
 
 	const contextValue: LinesDetailContextState = {
 		actions: {
@@ -233,7 +273,8 @@ export const LinesDetailContextProvider = ({ children, lineId }) => {
 			valid_pattern_groups: dataValidPatternGroupsState,
 		},
 		filters: {
-			none: null,
+			active_pattern_id: filterActivePatternGroupIdState,
+			active_stop_id: filterActiveStopIdState,
 		},
 		flags: {
 			is_favorite: flagIsFavoriteState,

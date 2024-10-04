@@ -1,4 +1,5 @@
 'use client';
+import { useDebugContext } from '@/contexts/Debug.context';
 /* * */
 
 import { PatternGroup } from '@/types/lines.types';
@@ -17,6 +18,7 @@ export default function Component({ date_filter, onChange, patterns, value, ...p
 	//
 	// A. Setup variables
 	const t = useTranslations('SelectPattern');
+	const debugContext = useDebugContext();
 
 	//
 	// B. Transform data
@@ -61,7 +63,10 @@ export default function Component({ date_filter, onChange, patterns, value, ...p
 			<Group gap={2}>
 				<Flex direction="column">
 					{/* Route Long Name */}
-					<Text fw="bold">{pattern.headsign}</Text>
+					<Flex align="center" gap={5}>
+						<Text fw="bold">{pattern.headsign}</Text>
+						{debugContext.flags.is_debug_mode && <Text c="gray" size="xs">({pattern.pattern_id})</Text>}
+					</Flex>
 					<Text size="xs">{t('option_label', { locality: pattern.path[0].stop.locality })}</Text>
 				</Flex>
 			</Group>
@@ -79,7 +84,10 @@ export default function Component({ date_filter, onChange, patterns, value, ...p
 
 		return (
 			<div {...props}>
-				<Text fw="bold">{pattern.headsign}</Text>
+				<Flex align="center" gap={5}>
+					<Text fw="bold">{pattern.headsign}</Text>
+					{debugContext.flags.is_debug_mode && <Text c="gray" size="xs">{pattern.pattern_id}</Text>}
+				</Flex>
 				<Text size="xs">{pattern.route_long_name}</Text>
 			</div>
 		);

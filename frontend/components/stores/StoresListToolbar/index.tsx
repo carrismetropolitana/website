@@ -3,6 +3,7 @@
 /* * */
 
 import FoundItemsCounter from '@/components/common/FoundItemsCounter';
+import SortButton from '@/components/common/SortButton';
 import { useStoresListContext } from '@/contexts/StoresList.context';
 import { SegmentedControl, Select } from '@mantine/core';
 import { IconMap } from '@tabler/icons-react';
@@ -30,6 +31,12 @@ export default function Component() {
 		{ label: t('by_current_status.all'), value: 'all' },
 	];
 
+	const filterByOptions = [
+		{ label: t('filter_by.municipality_name'), value: 'municipality_name' },
+		{ label: t('filter_by.capacity'), value: 'capacity' },
+		{ label: t('filter_by.time'), value: 'wait_time' },
+	];
+
 	const byMunicipalityOptions = useMemo(() => {
 		if (!storesContext.data.raw) return [];
 		const uniqueMunicipalities = new Set();
@@ -53,7 +60,16 @@ export default function Component() {
 	return (
 		<div className={styles.container}>
 			<SegmentedControl data={byCurrentStatusOptions} onChange={storesContext.actions.updateFilterCurrentStatus} value={storesContext.filters.by_current_status} fullWidth />
-			<Select data={byMunicipalityOptions} leftSection={<IconMap size={20} />} onChange={storesContext.actions.updateFilterByMunicipality} placeholder={t('by_municipality.label')} value={storesContext.filters.by_municipality} clearable searchable />
+
+			<div className={styles.filters}>
+				<Select data={byMunicipalityOptions} leftSection={<IconMap size={20} />} onChange={storesContext.actions.updateFilterByMunicipality} placeholder={t('by_municipality.label')} value={storesContext.filters.by_municipality} clearable searchable />
+				<SortButton
+					onDirectionChange={storesContext.actions.updateFilterOrderByDirection}
+					onOptionChange={storesContext.actions.updateFilterOrderBy}
+					options={filterByOptions}
+					selectedOption={storesContext.filters.order_by}
+				/>
+			</div>
 			<FoundItemsCounter text={t('found_items_counter', { count: storesContext.data.filtered.length })} />
 		</div>
 	);

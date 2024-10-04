@@ -5,10 +5,10 @@ import ukkonen from 'ukkonen'; // Faster levenshtein distance
 /* * */
 
 type SearchableDocument<T> = {
-	[K in keyof T]: T[K] extends string ? string : T[K];
-} & {
 	[key: string]: unknown
 	boost?: boolean
+} & {
+	[K in keyof T]: T[K] extends string ? string : T[K];
 };
 
 type KeyWithStringOrStringArrayValue<T> = {
