@@ -289,14 +289,14 @@
 			"open": "Abrir"
 		},
 		"AlertsListToolbar": {
-			"filters": {
-				"text_search": "Procurar alerta por titulo, descrição, localização...",
-				"lines_label": "Filtrar por linha",
-				"stops_label": "Filtrar por paragem"
-			},
 			"by_date": {
 				"current": "Esta semana ({count})",
 				"future": "Futuros ({count})"
+			},
+			"filters": {
+				"lines_label": "Filtrar por linha",
+				"stops_label": "Filtrar por paragem",
+				"text_search": "Procurar alerta por titulo, descrição, localização..."
 			},
 			"found_items_counter": "{count, plural, =0 {Nenhum alerta encontrado.} one {Encontrado # alerta:} other {Encontrados # alertas:}}"
 		},
@@ -764,7 +764,7 @@
 		},
 		"StopsDetailContentTimetableRealtime": {
 			"end_of_day": "Fim do Dia",
-			"no_service": "Sem Serviço",
+			"no_service": "Sem Serviço Hoje",
 			"show_past_trips_toggle": {
 				"hide": "Esconder passagens anteriores",
 				"show": "Ver passagens anteriores"

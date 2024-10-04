@@ -2,6 +2,7 @@
 
 /* * */
 
+import { MapViewToolbar } from '@/components/map/MapViewToolbar';
 import { useMapOptionsContext } from '@/contexts/MapOptions.context';
 import { IconsMap } from '@/settings/assets.settings';
 import { mapDefaultConfig } from '@/settings/map.settings';
@@ -9,17 +10,20 @@ import maplibregl from 'maplibre-gl';
 import { useCallback, useEffect, useState } from 'react';
 import Map, { FullscreenControl, GeolocateControl, MapRef, NavigationControl, ScaleControl, useMap } from 'react-map-gl/maplibre';
 
-import MapToolBar from '../MapToolbar';
 import styles from './styles.module.css';
 
 /* * */
 
 const MAP_LOAD_ASSETS = [
-	{ name: 'cm-bus-regular', sdf: false, url: IconsMap.bus_regular },
-	{ name: 'shape-arrow-direction', sdf: true, url: IconsMap.shape_direction },
-	{ name: 'cm-store-open', sdf: false, url: IconsMap.store_open },
-	{ name: 'cm-store-busy', sdf: false, url: IconsMap.store_busy },
-	{ name: 'cm-store-closed', sdf: false, url: IconsMap.store_closed },
+	{ name: 'cmet-bus_delay', sdf: false, url: IconsMap.bus_delay },
+	{ name: 'cmet-bus_regular', sdf: false, url: IconsMap.bus_regular },
+	{ name: 'cmet-bus_error', sdf: false, url: IconsMap.bus_error },
+	{ name: 'cmet-pin', sdf: false, url: IconsMap.pin },
+	{ name: 'cmet-shape-direction', sdf: true, url: IconsMap.shape_direction },
+	{ name: 'cmet-stop-selected', sdf: false, url: IconsMap.stop_selected },
+	{ name: 'cmet-store-busy', sdf: false, url: IconsMap.store_busy },
+	{ name: 'cmet-store-closed', sdf: false, url: IconsMap.store_closed },
+	{ name: 'cmet-store-open', sdf: false, url: IconsMap.store_open },
 ];
 
 /* * */
@@ -51,7 +55,7 @@ interface Props {
 
 /* * */
 
-export default function Component({
+export function MapView({
 	centerLayer,
 	children,
 	fullscreen = true,
@@ -87,7 +91,6 @@ export default function Component({
 		for (const mapLoadAsset of MAP_LOAD_ASSETS) {
 			mapObject.loadImage(mapLoadAsset.url).then((image) => {
 				mapObject.addImage(mapLoadAsset.name, image.data, { sdf: mapLoadAsset.sdf });
-				console.log('here', mapLoadAsset.name);
 			});
 		}
 	}, [allMaps, id]);
@@ -132,7 +135,7 @@ export default function Component({
 	// C. Render components
 	return (
 		<div className={styles.container}>
-			{toolbar && <MapToolBar centerLayer={centerLayer} className={styles.toolbar} />}
+			{toolbar && <MapViewToolbar centerLayer={centerLayer} className={styles.toolbar} />}
 			<Map
 				attributionControl={false}
 				cursor={cursor}

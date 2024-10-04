@@ -117,7 +117,7 @@ export default function Component({ data = [], onSelectStopId, selectedStopId, v
 								<IconBusStop size={20} />
 							</div>
 							<div className={styles.comboboxTargetInput}>
-								<StopDisplay _id={selectedStopData.id}locality={selectedStopData.locality} municipalityName={selectedStopData.municipality_name} name={selectedStopData.name} />
+								{/* <StopDisplay ={selectedStopData.id}locality={selectedStopData.locality} municipalityName={selectedStopData.municipality_name} name={selectedStopData.name} /> */}
 							</div>
 							<div className={styles.comboboxTargetSection} data-position="right">
 								<ActionIcon color="gray" onClick={handleClearSearchField} size="md" variant="subtle">
@@ -161,7 +161,7 @@ export default function Component({ data = [], onSelectStopId, selectedStopId, v
 						: allStopsDataFilteredBySearchQuery.map(item => (
 							<Combobox.Option key={item.id} className={item.id === selectedStopData?.id ? styles.selected : ''} value={item.id}>
 								<div className={styles.comboboxOption}>
-									<StopDisplay _id={item.id} locality={item?.locality} municipalityName={item?.municipality_name} name={item?.name} />
+									{/* <StopDisplay _id={item.id} locality={item?.locality} municipalityName={item?.municipality_name} name={item?.name} /> */}
 								</div>
 							</Combobox.Option>
 						),

@@ -230,7 +230,6 @@ export const StopsDetailContextProvider = ({ children, stopId }: { children: Rea
 						.set({ hour: 0, minute: 0, second: 0 })
 						.plus({ hours: arrivalHours, minute: arrivalMinutes, second: arrivalSeconds })
 						.toUnixInteger();
-					console.log('arrivalUnixTimestamp', arrivalUnixTimestamp);
 					validScheduledTrips.push({
 						estimated_arrival: null,
 						estimated_arrival_unix: null,

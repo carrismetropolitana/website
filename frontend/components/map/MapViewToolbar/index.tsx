@@ -14,7 +14,7 @@ interface Props {
 	className?: string
 }
 
-export default function Component({ centerLayer, className }: Props) {
+export function MapViewToolbar({ centerLayer, className }: Props) {
 	//
 	// A. Setup variables
 	const mapOptionsContext = useMapOptionsContext();

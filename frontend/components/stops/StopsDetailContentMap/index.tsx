@@ -1,62 +1,50 @@
 'use client';
 
-import Map from '@/components/common/map/Map';
+/* * */
+
+import type { Stop } from '@/types/stops.types';
+
+import { MapView } from '@/components/map/MapView';
 import { useStopsDetailContext } from '@/contexts/StopsDetail.context';
 import { useStopsListContext } from '@/contexts/StopsList.context';
-import { IconsMap } from '@/settings/assets.settings';
-import { Stop } from '@/types/stops.types';
 import { moveMap } from '@/utils/map.utils';
 import { useEffect, useMemo } from 'react';
 import { CircleLayer, Layer, Source, SymbolLayer, useMap } from 'react-map-gl/maplibre';
 
-/** Main component rendering the map and associated layers */
-export default function Component() {
+/* * */
+
+export function StopsDetailContentMap() {
+	//
+
 	//
 	// A. Setup variables
+
 	const { stopsMap } = useMap();
+
 	const stopListContext = useStopsListContext();
 	const stopSingleContext = useStopsDetailContext();
 
-	const stopsGeoJson = useMemo(() => generateStopsGeoJson(stopListContext.data.raw), [
-		stopListContext.data.raw,
-	]);
+	const stopsGeoJson = useMemo(() => {
+		return generateStopsGeoJson(stopListContext.data.raw);
+	}, [stopListContext.data.raw]);
 
-	const selectedStop = useMemo(() => stopSingleContext.data.stop, [
-		stopSingleContext.data.stop,
-	]);
-
-	const selectedStopGeoJson = useMemo(() => generateSelectedStopGeoJson(selectedStop ?? undefined), [
-		selectedStop,
-	]);
+	const selectedStopGeoJson = useMemo(() => {
+		return generateSelectedStopGeoJson(stopSingleContext.data.stop);
+	}, [stopSingleContext.data.stop]);
 
 	//
 	// B. Transform Data
 
 	useEffect(() => {
-		if (!stopsMap) return;
-		// Load stop selected symbol
-		stopsMap.loadImage(IconsMap.stop_selected).then((image) => {
-			stopsMap.addImage('stop-selected', image.data, { sdf: false });
-		});
-
-		// Load pin symbol
-		stopsMap.loadImage(IconsMap.pin).then((image) => {
-			stopsMap.addImage('map-pin', image.data, { sdf: false });
-		});
-	}, [stopsMap]);
-
-	// Move map to selected stop
-	useEffect(() => {
-		console.log('==>Selected stop', selectedStop);
-		if (!selectedStop) return;
-		if (!stopsMap) return;
-		const coordinates = [Number(selectedStop.lon), Number(selectedStop.lat)];
+		if (!stopSingleContext.data.stop || !stopsMap) return;
+		const coordinates = [Number(stopSingleContext.data.stop.lon), Number(stopSingleContext.data.stop.lat)];
 		if (coordinates.some(isNaN)) return;
 		moveMap(stopsMap, coordinates);
 	}, [stopSingleContext.data.stop, stopsMap]);
 
 	//
 	// C. Handle Actions
+
 	function handleLayerClick(event) {
 		if (!stopsMap) return;
 		const features = stopsMap.queryRenderedFeatures(event.point, { layers: ['stops'] });
@@ -68,36 +56,38 @@ export default function Component() {
 
 	//
 	// D. Layer Styles
+
 	const stopsStyle = generateStopsStyle();
 	const selectedStopBaseStyle = generateStopBaseStyle();
 	const selectedStopStickStyle = generateStopStickStyle();
 
 	//
 	// E. Render Components
-	return (
-		<>
-			<Map
-				id="stopsMap"
-				interactiveLayerIds={['stops']}
-				onClick={handleLayerClick}
-			>
-				{/* Selected Stop */}
-				{selectedStopGeoJson && (
-					<Source data={selectedStopGeoJson} generateId={true} id="selected-stop" type="geojson">
-						<Layer {...selectedStopStickStyle} />
-						<Layer beforeId="selected-stop-stick" {...selectedStopBaseStyle} />
-					</Source>
-				)}
 
-				{/* Stops */}
-				{stopsGeoJson && (
-					<Source data={stopsGeoJson} id="stops" type="geojson">
-						<Layer beforeId="selected-stop-base" {...stopsStyle} />
-					</Source>
-				)}
-			</Map>
-		</>
+	return (
+		<MapView
+			id="stopsMap"
+			interactiveLayerIds={['stops']}
+			onClick={handleLayerClick}
+		>
+			{/* Selected Stop */}
+			{selectedStopGeoJson && (
+				<Source data={selectedStopGeoJson} generateId={true} id="selected-stop" type="geojson">
+					<Layer {...selectedStopStickStyle} />
+					<Layer beforeId="selected-stop-stick" {...selectedStopBaseStyle} />
+				</Source>
+			)}
+
+			{/* Stops */}
+			{stopsGeoJson && (
+				<Source data={stopsGeoJson} id="stops" type="geojson">
+					<Layer beforeId="selected-stop-base" {...stopsStyle} />
+				</Source>
+			)}
+		</MapView>
 	);
+
+	//
 }
 
 /** Utility Functions **/

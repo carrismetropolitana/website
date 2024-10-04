@@ -78,7 +78,7 @@ export function StopsDetailContentTimetableRealtime() {
 						status={realtime.estimated_arrival_unix ? 'realtime' : 'scheduled'}
 					/>
 				))
-				: <NoDataLabel text={t('end_of_day')} />}
+				: <NoDataLabel text={t('end_of_day')} withMinHeight />}
 
 		</>
 	);

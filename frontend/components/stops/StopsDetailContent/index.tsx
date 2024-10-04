@@ -3,23 +3,15 @@
 /* * */
 
 import Section from '@/components/layout/Section';
+import { StopsDetailContentMap } from '@/components/stops/StopsDetailContentMap';
 import { StopsDetailContentTimetable } from '@/components/stops/StopsDetailContentTimetable';
 import { StopsDetailContentTimetableHeader } from '@/components/stops/StopsDetailContentTimetableHeader';
 
-import StopMap from '../StopMap';
 import styles from './styles.module.css';
 
 /* * */
 
 export function StopsDetailContent() {
-	//
-
-	//
-	// A. Setup variables
-
-	//
-	// B. Render components
-
 	return (
 		<Section childrenWrapperStyles={styles.container} withGap={false} withTopPadding={false}>
 			<div className={styles.listWrapper}>
@@ -27,10 +19,8 @@ export function StopsDetailContent() {
 				<StopsDetailContentTimetable />
 			</div>
 			<div className={styles.mapWrapper}>
-				<StopMap />
+				<StopsDetailContentMap />
 			</div>
 		</Section>
 	);
-
-	//
 }

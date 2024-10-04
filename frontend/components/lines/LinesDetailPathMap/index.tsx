@@ -1,7 +1,7 @@
 'use client';
 
 import LiveIcon from '@/components/common/LiveIcon';
-import Map from '@/components/common/map/Map';
+import { MapView } from '@/components/map/MapView';
 import { useLinesDetailContext } from '@/contexts/LinesDetail.context';
 import { IconsMap } from '@/settings/assets.settings';
 import { Path, PatternGroup } from '@/types/lines.types';
@@ -105,7 +105,7 @@ export default function Component() {
 	//
 	// G. Render Map and Layers
 	return (
-		<Map
+		<MapView
 			id="linesSingleMap"
 			interactiveLayerIds={['stops']}
 			onClick={handleLayerClick}
@@ -147,7 +147,7 @@ export default function Component() {
 					{t('active_vehicles_counter', { count: activeVehiclesGeojson.features.length })}
 				</div>
 			)}
-		</Map>
+		</MapView>
 	);
 }
 
