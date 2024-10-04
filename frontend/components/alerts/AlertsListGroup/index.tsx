@@ -35,7 +35,7 @@ export default function Component() {
 		if (!alertsListContext.data) return [];
 		//
 		const groupedAlerts: AlertGroupByDate[] = alertsListContext.data.filtered.reduce((result: AlertGroupByDate[], item) => {
-			const alertStartDateObject = DateTime.fromSeconds(item.activePeriod[0].start);
+			const alertStartDateObject = DateTime.fromJSDate(item.start_date);
 			const alertStartDateString = alertStartDateObject.toFormat('yyyyMMdd');
 			const existingGroup = result.find(group => group.value === alertStartDateString);
 			if (existingGroup) {

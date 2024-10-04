@@ -11,12 +11,13 @@ import styles from './styles.module.css';
 
 interface AlertCauseIconProps {
 	cause?: AlertCause
+	className?: string
 	withText?: boolean
 }
 
 /* * */
 
-export function AlertCauseIcon({ cause, withText = false }: AlertCauseIconProps) {
+export function AlertCauseIcon({ cause, className, withText = false }: AlertCauseIconProps) {
 	//
 
 	//
@@ -72,7 +73,7 @@ export function AlertCauseIcon({ cause, withText = false }: AlertCauseIconProps)
 			icon = <IconCloudStorm className={styles[`severityLevel_${severityLevel}`]} size={20} />;
 			break;
 		default:
-			icon = null;
+			icon = <IconInfoTriangle className={styles[`severityLevel_${severityLevel}`]} size={20} />;
 			break;
 	}
 
@@ -81,7 +82,7 @@ export function AlertCauseIcon({ cause, withText = false }: AlertCauseIconProps)
 
 	if (withText && icon) {
 		return (
-			<div className={`${styles.container} ${styles[`severityLevel_${severityLevel}`]}`}>
+			<div className={`${styles.container} ${styles[`severityLevel_${severityLevel}`]} ${className && className}`}>
 				{icon}
 				<span className={styles.label}>{t(cause)}</span>
 			</div>
@@ -96,13 +97,14 @@ export function AlertCauseIcon({ cause, withText = false }: AlertCauseIconProps)
 /* * */
 
 interface AlertEffectIconProps {
+	className?: string
 	effect?: AlertEffect
 	withText?: boolean
 }
 
 /* * */
 
-export function AlertEffectIcon({ effect, withText = false }: AlertEffectIconProps) {
+export function AlertEffectIcon({ className, effect, withText = false }: AlertEffectIconProps) {
 	//
 
 	//
@@ -164,7 +166,7 @@ export function AlertEffectIcon({ effect, withText = false }: AlertEffectIconPro
 
 	if (withText && icon) {
 		return (
-			<div className={`${styles.container} ${styles[`severityLevel_${severityLevel}`]}`}>
+			<div className={`${styles.container} ${styles[`severityLevel_${severityLevel}`]} ${className && className}`}>
 				{icon}
 				<span className={styles.label}>{t(effect)}</span>
 			</div>
