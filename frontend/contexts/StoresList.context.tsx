@@ -18,6 +18,7 @@ interface StoresListContextState {
 		updateFilterByMunicipality: (value: string) => void
 		updateFilterCurrentStatus: (value: string) => void
 		updateFilterOrderBy: (value: string) => void
+		updateFilterOrderByDirection: (value: 'asc' | 'desc') => void
 		updateSelectedStore: (storeId: string) => void
 	}
 	counters: {
@@ -33,7 +34,8 @@ interface StoresListContextState {
 	filters: {
 		by_current_status: 'all' | 'open'
 		by_municipality: null | string
-		order_by: 'municipality_name' | 'wait_time'
+		order_by: 'capacity' | 'municipality_name' | 'wait_time'
+		order_by_direction: 'asc' | 'desc'
 		selected_store: null | string
 	}
 	flags: {
@@ -68,7 +70,8 @@ export const StoresListContextProvider = ({ children }) => {
 
 	const [filterByCurrentStatusState, setFilterByCurrentStatusState] = useQueryState <StoresListContextState['filters']['by_current_status']>('open', parseAsStringLiteral(['all', 'open']).withDefault('open').withOptions({ clearOnDefault: true }));
 	const [filterByMunicipalityState, setFilterByMunicipalityState] = useQueryState('municipality');
-	const [filterOrderByState, setFilterOrderByState] = useQueryState <StoresListContextState['filters']['order_by']>('open', parseAsStringLiteral(['municipality_name', 'wait_time']).withDefault('municipality_name').withOptions({ clearOnDefault: true }));
+	const [filterOrderByState, setFilterOrderByState] = useQueryState <StoresListContextState['filters']['order_by']>('order_by', parseAsStringLiteral(['municipality_name', 'wait_time', 'capacity']).withDefault('municipality_name').withOptions({ clearOnDefault: true }));
+	const [filterOrderByDirectionState, setFilterOrderByDirectionState] = useQueryState('order_by_direction', parseAsStringLiteral(['asc', 'desc']).withDefault('asc').withOptions({ clearOnDefault: true }));
 	const [filterSelectedStoreState, setFilterSelectedStoreState] = useQueryState('store');
 
 	//
@@ -102,12 +105,26 @@ export const StoresListContextProvider = ({ children }) => {
 
 		//
 		// Filter Order by
-		if (filterOrderByState) {
-			filterResult = filterResult.sort((a, b) => {
-				return a[filterOrderByState] > b[filterOrderByState] ? 1 : -1;
-			});
+		switch (filterOrderByState) {
+			case 'capacity':
+				filterResult.sort((a, b) => filterOrderByDirectionState === 'asc'
+					? a.currently_waiting - b.currently_waiting
+					: b.currently_waiting - a.currently_waiting);
+				break;
+			case 'municipality_name':
+				filterResult.sort((a, b) => filterOrderByDirectionState === 'asc'
+					? a.municipality_name.localeCompare(b.municipality_name)
+					: b.municipality_name.localeCompare(a.municipality_name));
+				break;
+			case 'wait_time':
+				filterResult.sort((a, b) => filterOrderByDirectionState === 'asc'
+					? a.expected_wait_time - b.expected_wait_time
+					: b.expected_wait_time - a.expected_wait_time);
+				break;
+			default:
+				console.error('Invalid filterOrderByState:', filterOrderByState);
+				break;
 		}
-
 		//
 		// Save filter result to state
 		return filterResult;
@@ -118,7 +135,7 @@ export const StoresListContextProvider = ({ children }) => {
 	useEffect(() => {
 		const filteredStores = applyFiltersToData();
 		setDataFilteredState(filteredStores);
-	}, [allStoresData, filterByCurrentStatusState, filterByMunicipalityState, filterOrderByState]);
+	}, [allStoresData, filterByCurrentStatusState, filterByMunicipalityState, filterOrderByState, filterOrderByDirectionState]);
 
 	useEffect(() => {
 		if (!allStoresData) return;
@@ -167,6 +184,10 @@ export const StoresListContextProvider = ({ children }) => {
 		document.getElementById(foundStoreData.id)?.scrollIntoView();
 	};
 
+	const updateFilterOrderByDirection = (value: 'asc' | 'desc') => {
+		setFilterOrderByDirectionState(value);
+	};
+
 	//
 	// E. Define context value
 
@@ -175,6 +196,7 @@ export const StoresListContextProvider = ({ children }) => {
 			updateFilterByMunicipality,
 			updateFilterCurrentStatus,
 			updateFilterOrderBy,
+			updateFilterOrderByDirection,
 			updateSelectedStore,
 		},
 		counters: {
@@ -191,6 +213,7 @@ export const StoresListContextProvider = ({ children }) => {
 			by_current_status: filterByCurrentStatusState,
 			by_municipality: filterByMunicipalityState,
 			order_by: filterOrderByState,
+			order_by_direction: filterOrderByDirectionState,
 			selected_store: filterSelectedStoreState,
 		},
 		flags: {
