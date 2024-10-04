@@ -47,9 +47,9 @@ export default function Component() {
 			return result;
 		}, []) || [];
 		//
-		const sortedGroups = groupedStores.sort((a, b) => collator.compare(a.municipality_name, b.municipality_name));
+		// const sortedGroups = groupedStores.sort((a, b) => collator.compare(a.municipality_name, b.municipality_name));
 		//
-		return sortedGroups;
+		return groupedStores;
 		//
 	}, [storesListContext.data]);
 
@@ -67,13 +67,19 @@ export default function Component() {
 		return <GroupedListSkeleton groupCount={3} itemCount={2} itemSkeleton={<StoresListItemSkeleton />} />;
 	}
 
-	if (allStoresGroupedByMunicipality.length > 0) {
+	if (allStoresGroupedByMunicipality.length > 0 && storesListContext.filters.order_by === 'municipality_name') {
 		return allStoresGroupedByMunicipality.map(storeGroup => (
 			<GroupedListItem key={storeGroup.municipality_id} label={t('group_label')} title={storeGroup.municipality_name}>
 				{storeGroup.stores.map(store => (
 					<StoresListGroupItem key={store.id} isSelected={storesListContext.data.selected?.id === store.id} onSelect={handleSelectStore} storeData={store} />
 				))}
 			</GroupedListItem>
+		));
+	}
+
+	if (storesListContext.data.filtered.length > 0) {
+		return storesListContext.data.filtered.map(store => (
+			<StoresListGroupItem key={store.id} isSelected={storesListContext.data.selected?.id === store.id} onSelect={handleSelectStore} storeData={store} />
 		));
 	}
 
