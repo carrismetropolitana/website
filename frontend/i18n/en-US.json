@@ -636,9 +636,16 @@
 	},
 	"planner": {
 		"Page": {
-			"disclaimer": "Edit this page on Github if you want to include your app. The order is random. Only inputs that simultaneously provide planned and real-time schedules or vehicle positions are permitted.",
-			"heading": "Our partners",
-			"subheading": "Because our data is open, there are several apps that offer personalized experiences to improve your everyday transport life."
+			"Navegante": {
+				"heading": "Plan your trip with the Navegante®",
+				"subheading": "Use the Navegante® service to plan your trip, from A to B, combining various transport modes, if necessary. Discover all the options included with your subscription.",
+				"button": "View Options"
+			},
+			"Partners": {
+				"disclaimer": "Edit this page on Github if you want to include your app. The order is random. Only inputs that simultaneously provide planned and real-time schedules or vehicle positions are permitted.",
+				"heading": "Our partners",
+				"subheading": "Because our data is open, there are several apps that offer personalized experiences to improve your everyday transport life."
+			}
 		}
 	},
 	"profile": {
