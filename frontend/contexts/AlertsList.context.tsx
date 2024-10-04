@@ -2,36 +2,45 @@
 
 /* * */
 
-import type { Alert, SimplifiedAlert } from '@/types/alerts.types.js';
+import type { AlertCause, AlertEffect, SimplifiedAlert } from '@/types/alerts.types.js';
 
-import convertToSimplifiedAlert from '@/utils/convertToSimplifiedAlert';
-import { Routes } from '@/utils/routes';
 import { DateTime } from 'luxon';
 import { useLocale } from 'next-intl';
-import { createContext, useContext, useEffect, useState } from 'react';
-import useSWR from 'swr';
+import { useQueryState } from 'nuqs';
+import { createContext, useContext, useEffect, useMemo, useState } from 'react';
+
+import { useAlertsContext } from './Alerts.context';
 
 /* * */
 
 interface AlertsListContextState {
 	actions: {
-		getSimplifiedAlertById: (alertId: string) => null | SimplifiedAlert
+		updateFilterByCause: (value: AlertCause | null) => void
 		updateFilterByDate: (value: string) => void
-		updateFilterByMunicipality: (value: string) => void
+		updateFilterByEffect: (value: AlertEffect | null) => void
+		updateFilterByLineId: (value: string) => void
+		updateFilterBySearchQuery: (value: string) => void
+		updateFilterByStopId: (value: string) => void
+		// updateFilterByMunicipalityId: (value: string) => void
 	}
 	counters: {
 		by_date: {
+			current: number
 			future: number
 		}
 	}
 	data: {
-		filtered: Alert[]
-		raw: Alert[]
+		filtered: SimplifiedAlert[]
+		raw: SimplifiedAlert[]
 	}
 	filters: {
 		by_date: 'current' | 'future'
-		by_line: null | string
-		by_municipality: null | string
+		cause: AlertCause | null
+		effect: AlertEffect | null
+		line_id: null | string
+		search_query: null | string
+		stop_id: null | string
+		// municipality_id: null | string
 	}
 	flags: {
 		is_loading: boolean
@@ -60,24 +69,51 @@ export const AlertsListContextProvider = ({ children }) => {
 
 	const currentLocale = useLocale();
 
-	const [dataFilteredState, setDataFilteredState] = useState<Alert[]>([]);
+	const [dataFilteredState, setDataFilteredState] = useState<SimplifiedAlert[]>([]);
 
 	const [filterByDateState, setFilterByDateState] = useState <AlertsListContextState['filters']['by_date']>('current');
-	const [filterByLineState, setFilterByLineState] = useState <AlertsListContextState['filters']['by_line']>(null);
-	const [filterByMunicipalityState, setFilterByMunicipalityState] = useState <AlertsListContextState['filters']['by_municipality']>(null);
+	const [filterByLineIdState, setFilterByLineIdState] = useQueryState('line_id');
+	const [filterBySearchQueryState, setFilterBySearchQueryState] = useQueryState('search_query');
+	const [filterByStopIdState, setFilterByStopIdState] = useQueryState('stop_id');
+	const [filterByCauseState, setFilterByCauseState] = useQueryState('cause', {
+		parse: (value: string) => value as AlertCause | null,
+		serialize: (value: AlertCause | null) => value as string,
+	});
+	const [filterByEffectState, setFilterByEffectState] = useQueryState('effect', {
+		parse: (value: string) => value as AlertEffect | null,
+		serialize: (value: AlertEffect | null) => value as string,
+	});
+	// const [filterByMunicipalityIdState, setFilterByMunicipalityIdState] = useQueryState('municipality_id');
+
+	const [isLoading, setIsLoading] = useState(false);
 
 	//
 	// B. Fetch data
 
-	const { data: allAlertsData, isLoading: allAlertsLoading } = useSWR<Alert[], Error>(`${Routes.API}/v2/alerts`);
+	const alertsContext = useAlertsContext();
+
+	const allAlertsData = useMemo(() => alertsContext.data.simplified, [alertsContext.data.simplified]);
 
 	//
 	// C. Transform data
 
+	// Set Counters
+	const currentWeekAlerts = allAlertsData?.filter((item) => {
+		const oneWeekFromNowInUnixSeconds = DateTime.now().plus({ week: 1 }).endOf('day').toSeconds();
+		const nowInUnixSeconds = DateTime.now().startOf('day').toSeconds();
+		const alertStartDateInSeconds = DateTime.fromJSDate(item.start_date).toSeconds();
+		const alertEndDate = DateTime.fromJSDate(item.end_date).toSeconds();
+		//
+		if (alertStartDateInSeconds <= oneWeekFromNowInUnixSeconds && alertEndDate >= nowInUnixSeconds) {
+			return true;
+		}
+		return false;
+	}).length;
+
 	const applyFiltersToData = () => {
 		//
 
-		let filterResult: Alert[] = allAlertsData || [];
+		let filterResult: SimplifiedAlert[] = allAlertsData || [];
 
 		//
 		// Filter by_date
@@ -85,13 +121,13 @@ export const AlertsListContextProvider = ({ children }) => {
 		const oneWeekFromNowInUnixSeconds = DateTime.now().plus({ week: 1 }).endOf('day').toSeconds();
 
 		filterResult = filterResult.filter((item) => {
-			const alertStartDate = item.activePeriod[0].start || -Infinity;
-			const alertEndDate = item.activePeriod[0].end || +Infinity;
+			const alertStartDateInSeconds = DateTime.fromJSDate(item.start_date).toSeconds();
+			const alertEndDate = DateTime.fromJSDate(item.end_date).toSeconds();
 			//
 			if (filterByDateState === 'current') {
 				// If the alert start date is before one week from now, and if the end date is after or equal to today
 				// then the alert is considered 'current'.
-				if (alertStartDate <= oneWeekFromNowInUnixSeconds && alertEndDate >= nowInUnixSeconds) {
+				if (alertStartDateInSeconds <= oneWeekFromNowInUnixSeconds && alertEndDate >= nowInUnixSeconds) {
 					return true;
 				}
 				return false;
@@ -99,19 +135,42 @@ export const AlertsListContextProvider = ({ children }) => {
 			else {
 				// If the alert start date is before one week from now, and if the end date is after or equal to today
 				// then the alert is considered 'current'.
-				if (alertStartDate <= oneWeekFromNowInUnixSeconds && alertEndDate >= nowInUnixSeconds) {
+				if (alertStartDateInSeconds <= oneWeekFromNowInUnixSeconds && alertEndDate >= nowInUnixSeconds) {
 					return false;
 				}
 				return true;
 			}
 		});
 
-		//
-		// Filter by municipality_id
-		if (filterByMunicipalityState) {
-			filterResult = filterResult.filter(() => {
-				return true; // alert.municipality_id === filterByMunicipalityState;
+		if (filterByLineIdState) {
+			filterResult = filterResult.filter(alert => alert.informed_entity.some(entity => entity.lineId === filterByLineIdState));
+		}
+
+		if (filterByStopIdState) {
+			filterResult = filterResult.filter(alert => alert.informed_entity.some(entity => entity.stopId === filterByStopIdState));
+		}
+
+		// TODO: municipalityId does not exist in the informed_entity, needs to be added in API
+		// if (filterByMunicipalityIdState) {
+		// 	filterResult = filterResult.filter(alert => alert.informed_entity.some(entity => entity.municipalityId === filterByMunicipalityIdState));
+		// }
+
+		if (filterBySearchQueryState) {
+			filterResult = filterResult.filter((alert) => {
+				const searchQuery = filterBySearchQueryState.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '');
+				return (
+					alert.title.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '').includes(searchQuery)
+					|| alert.description.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '').includes(searchQuery)
+				);
 			});
+		}
+
+		if (filterByCauseState) {
+			filterResult = filterResult.filter(alert => alert.cause === filterByCauseState);
+		}
+
+		if (filterByEffectState) {
+			filterResult = filterResult.filter(alert => alert.effect === filterByEffectState);
 		}
 
 		//
@@ -124,7 +183,7 @@ export const AlertsListContextProvider = ({ children }) => {
 	useEffect(() => {
 		const filteredAlerts = applyFiltersToData();
 		setDataFilteredState(filteredAlerts);
-	}, [allAlertsData, filterByDateState, filterByMunicipalityState]);
+	}, [allAlertsData, filterByDateState, filterByLineIdState, filterBySearchQueryState, filterByStopIdState, filterByCauseState, filterByEffectState]);
 
 	//
 	// D. Handle actions
@@ -133,23 +192,24 @@ export const AlertsListContextProvider = ({ children }) => {
 		setFilterByDateState(value);
 	};
 
-	const updateFilterByLine = (value: AlertsListContextState['filters']['by_line']) => {
-		setFilterByLineState(value || null);
+	const updateFilterByLineId = (value: AlertsListContextState['filters']['line_id']) => {
+		setFilterByLineIdState(value);
 	};
 
-	const updateFilterByMunicipality = (value: AlertsListContextState['filters']['by_municipality']) => {
-		setFilterByMunicipalityState(value || null);
+	const updateFilterByStopId = (value: AlertsListContextState['filters']['stop_id']) => {
+		setFilterByStopIdState(value);
 	};
 
-	const getSimplifiedAlertById = (alertId: string): null | SimplifiedAlert => {
-		//
-		if (!allAlertsData) return null;
-		// Find the alert by ID
-		const alertData = allAlertsData.find(item => item.alert_id === alertId);
-		if (!alertData) return null;
-		//
-		return convertToSimplifiedAlert(alertData);
-		//
+	const updateFilterBySearchQuery = (value: AlertsListContextState['filters']['search_query']) => {
+		setFilterBySearchQueryState(value);
+	};
+
+	const updateFilterByCause = (value: AlertsListContextState['filters']['cause']) => {
+		setFilterByCauseState(value);
+	};
+
+	const updateFilterByEffect = (value: AlertsListContextState['filters']['effect']) => {
+		setFilterByEffectState(value);
 	};
 
 	//
@@ -157,13 +217,17 @@ export const AlertsListContextProvider = ({ children }) => {
 
 	const contextValue: AlertsListContextState = {
 		actions: {
-			getSimplifiedAlertById,
+			updateFilterByCause,
 			updateFilterByDate,
-			updateFilterByMunicipality,
+			updateFilterByEffect,
+			updateFilterByLineId,
+			updateFilterBySearchQuery,
+			updateFilterByStopId,
 		},
 		counters: {
 			by_date: {
-				future: 0, // allAlertsData?.filter((item => item.current_status === 'open')).length || 0,
+				current: currentWeekAlerts,
+				future: allAlertsData.length - currentWeekAlerts,
 			},
 		},
 		data: {
@@ -172,11 +236,14 @@ export const AlertsListContextProvider = ({ children }) => {
 		},
 		filters: {
 			by_date: filterByDateState,
-			by_line: filterByLineState,
-			by_municipality: filterByMunicipalityState,
+			cause: filterByCauseState,
+			effect: filterByEffectState,
+			line_id: filterByLineIdState,
+			search_query: filterBySearchQueryState,
+			stop_id: filterByStopIdState,
 		},
 		flags: {
-			is_loading: allAlertsLoading,
+			is_loading: isLoading,
 		},
 	};
 

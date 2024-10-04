@@ -1,0 +1,8 @@
+.placeholder {
+    font-size: 18px;
+	color: var(--color-system-text-300);
+}
+
+.icon {
+    color: var(--color-system-text-200);
+}
