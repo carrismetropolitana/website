@@ -1,5 +1,5 @@
 /* * */
-import { Menu, Select, Text } from '@mantine/core';
+import { Select } from '@mantine/core';
 import { IconSortAscending, IconSortDescending } from '@tabler/icons-react';
 import React, { useState } from 'react';
 
