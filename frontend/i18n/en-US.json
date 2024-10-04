@@ -827,6 +827,11 @@
 			"by_municipality": {
 				"label": "Filter by Municipality"
 			},
+			"filter_by": {
+				"capacity": "Pessoas em espera",
+				"municipality_name": "Município",
+				"time": "Tempo de espera"
+			},
 			"found_items_counter": "{count, plural, =0 {No stores found.} one {Found # store:} other {Found # stores:}}"
 		}
 	},
