@@ -14,6 +14,8 @@ import * as turf from '@turf/turf';
 
 export const moveMap = (mapObject, coordinates, options = {}) => {
 	//
+	// Check if the map object is valid
+	if (!mapObject) return;
 
 	if (options) {
 		console.log(options);
