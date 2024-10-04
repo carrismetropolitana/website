@@ -9,9 +9,11 @@
 	width: 100%;
 	max-width: var(--size-width-global);
 	margin: auto;
-	margin-top: var(--size-spacing-15);
 	background-color: var(--color-system-background-100);
-	border-radius: 18px;
+
+
+	/* margin-top: var(--size-spacing-15); */
+	/* border-radius: 18px; */
 }
 
 .container.withTopBorder {
