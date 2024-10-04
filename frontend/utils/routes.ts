@@ -100,9 +100,11 @@ export const RoutesPricing = Object.freeze({
 });
 
 export const RoutesSocial = Object.freeze({
+	FACEBOOK: 'https://www.facebook.com/carrismetropolitana',
 	GITHUB: 'https://www.github.com/carrismetropolitana',
 	INSTAGRAM: 'https://www.instagram.com/carrismetropolitana',
 	WHATSAPP: 'https://whatsapp.com/channel/0029Va9z9d2JP2184daqbX0K',
+	X: 'https://x.com/CMetropolitana_',
 });
 
 export const RoutesLostAndFound = Object.freeze({
