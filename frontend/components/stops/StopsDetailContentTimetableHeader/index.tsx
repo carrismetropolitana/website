@@ -1,7 +1,7 @@
 /* * */
 
 import { SelectOperationalDay } from '@/components/common/SelectOperationalDay';
-import { useStopsSingleContext } from '@/contexts/StopsSingle.context';
+import { useStopsDetailContext } from '@/contexts/StopsDetail.context';
 import { useStickyObserver } from '@/hooks/useStickyObserver';
 import { getCssVariableValue } from '@/utils/getCssVariableValue';
 import { useTranslations } from 'next-intl';
@@ -10,14 +10,14 @@ import styles from './styles.module.css';
 
 /* * */
 
-export function StopsDetailContentListHeader() {
+export function StopsDetailContentTimetableHeader() {
 	//
 
 	//
 	// A. Setup variables
 
-	const t = useTranslations('stops.StopsDetailContentListHeader');
-	const stopsSingleContext = useStopsSingleContext();
+	const t = useTranslations('stops.StopsDetailContentTimetableHeader');
+	const stopsDetailContext = useStopsDetailContext();
 
 	const headerHeight = getCssVariableValue('--size-height-header');
 	const { isSticky, ref: stickyElementRef } = useStickyObserver({ top: headerHeight }, [1], { top: -1 });
@@ -39,7 +39,7 @@ export function StopsDetailContentListHeader() {
 							changeDay: chunks => <a className={styles.changeDay} href="#">{chunks}</a>,
 							day_name: new Date(),
 							dayName: chunks => <span className={styles.dayName}>{chunks}</span>,
-							stop_name: stopsSingleContext.data.stop?.name,
+							stop_name: stopsDetailContext.data.stop?.name,
 							stopName: chunks => <span className={styles.stopName}>{chunks}</span>,
 						})}
 					</p>

@@ -5,11 +5,11 @@
 import { AlertsContextProvider } from '@/contexts/Alerts.context';
 import { AnalyticsContextProvider } from '@/contexts/Analytics.context';
 import { DebugContextProvider } from '@/contexts/Debug.context';
-import { LinesListContextProvider } from '@/contexts/LinesList.context';
+import { LinesContextProvider } from '@/contexts/Lines.context';
 import { MapOptionsContextProvider } from '@/contexts/MapOptions.context';
 import { OperationalDayContextProvider } from '@/contexts/OperationalDay.context';
 import { ProfileContextProvider } from '@/contexts/Profile.context';
-import { StopsListContextProvider } from '@/contexts/StopsList.context';
+import { StopsContextProvider } from '@/contexts/Stops.context';
 import websiteTheme from '@/themes/website/website.theme';
 import { MantineProvider } from '@mantine/core';
 import { DatesProvider } from '@mantine/dates';
@@ -70,7 +70,11 @@ export default function Providers({ children }) {
 										<MapOptionsContextProvider>
 											<MapProvider>
 												<AlertsContextProvider>
-													{children}
+													<LinesContextProvider>
+														<StopsContextProvider>
+															{children}
+														</StopsContextProvider>
+													</LinesContextProvider>
 												</AlertsContextProvider>
 											</MapProvider>
 										</MapOptionsContextProvider>

@@ -8,7 +8,7 @@ import { useStopsDetailContext } from '@/contexts/StopsDetail.context';
 
 /* * */
 
-export default function Component() {
+export function StopsDetailAlerts() {
 	//
 
 	//

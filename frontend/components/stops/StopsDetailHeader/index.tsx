@@ -11,7 +11,7 @@ import { StopDisplayLocation } from '@/components/stops/StopDisplayLocation';
 import { StopDisplayName } from '@/components/stops/StopDisplayName';
 import { StopDisplayTts } from '@/components/stops/StopDisplayTts';
 import { useProfileContext } from '@/contexts/Profile.context';
-import { useStopsSingleContext } from '@/contexts/StopsSingle.context';
+import { useStopsDetailContext } from '@/contexts/StopsDetail.context';
 import toast from '@/utils/toast';
 
 import styles from './styles.module.css';
@@ -25,7 +25,7 @@ export function StopsDetailHeader() {
 	// A. Setup variables
 
 	const profileContext = useProfileContext();
-	const stopsDetailContext = useStopsSingleContext();
+	const stopsDetailContext = useStopsDetailContext();
 
 	//
 	// B. Handle actions
@@ -80,7 +80,7 @@ export function StopsDetailHeader() {
 			</div>
 
 			<div className={styles.lineBadgesWrapper}>
-				{stopsDetailContext.data.valid_lines && stopsDetailContext.data.valid_lines.map(line => <LineBadge key={line.line_id} line={line} size="lg" />)}
+				{stopsDetailContext.data.lines && stopsDetailContext.data.lines.map(line => <LineBadge key={line.line_id} line={line} size="lg" />)}
 			</div>
 
 		</Section>

@@ -1,8 +1,8 @@
 'use client';
 
 import Map from '@/components/common/map/Map';
+import { useStopsDetailContext } from '@/contexts/StopsDetail.context';
 import { useStopsListContext } from '@/contexts/StopsList.context';
-import { useStopsSingleContext } from '@/contexts/StopsSingle.context';
 import { IconsMap } from '@/settings/assets.settings';
 import { Stop } from '@/types/stops.types';
 import { moveMap } from '@/utils/map.utils';
@@ -15,7 +15,7 @@ export default function Component() {
 	// A. Setup variables
 	const { stopsMap } = useMap();
 	const stopListContext = useStopsListContext();
-	const stopSingleContext = useStopsSingleContext();
+	const stopSingleContext = useStopsDetailContext();
 
 	const stopsGeoJson = useMemo(() => generateStopsGeoJson(stopListContext.data.raw), [
 		stopListContext.data.raw,
@@ -63,7 +63,7 @@ export default function Component() {
 
 		if (!features.length) return;
 		const stop = JSON.parse(features[0].properties.stop) as Stop;
-		stopSingleContext.actions.setStopId(stop.id);
+		stopSingleContext.actions.setActiveStopId(stop.id);
 	}
 
 	//

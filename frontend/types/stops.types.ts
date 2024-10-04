@@ -56,7 +56,7 @@ export enum OperationalStatus {
 	Voided = 'VOIDED',
 }
 
-export interface StopRealtime {
+export interface Arrival {
 	estimated_arrival: null | string
 	estimated_arrival_unix: null | number
 	headsign: string
@@ -71,3 +71,5 @@ export interface StopRealtime {
 	trip_id: string
 	vehicle_id: null | string
 };
+
+export type ArrivalStatus = 'canceled' | 'passed' | 'realtime' | 'scheduled';

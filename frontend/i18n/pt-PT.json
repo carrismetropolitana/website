@@ -330,6 +330,11 @@
 		}
 	},
 	"common": {
+		"NextArrivals": {
+			"arriving": "A chegar",
+			"hours": "h",
+			"minutes": "min"
+		},
 		"SelectOperationalDay": {
 			"today": "Hoje",
 			"tomorrow": "Amanhã"
@@ -636,15 +641,15 @@
 	},
 	"planner": {
 		"Page": {
+			"Navegante": {
+				"button": "Ver Opções",
+				"heading": "Planeie a sua viagem com o navegante®",
+				"subheading": "Utilize o serviço navegante® para planear a sua viagem, de A a B, combinando vários modos de transporte, se necessário. Descubra toda as opções que estão incluídas com a sua subscrição."
+			},
 			"Partners": {
 				"disclaimer": "Edite esta página no Github se pretende incluir a sua aplicação. A ordem é aleatória. Apenas são permitidas entradas que disponibilizem simultaneamente horários planeados e em tempo real ou posição de veículos.",
 				"heading": "Os nossos parceiros",
 				"subheading": "Porque os nossos dados são abertos, existem várias aplicações que oferecem experiências personalizadas para melhorar o seu dia-a-dia nos transportes."
-			},
-			"Navegante": {
-				"heading": "Planeie a sua viagem com o navegante®",
-				"subheading": "Utilize o serviço navegante® para planear a sua viagem, de A a B, combinando vários modos de transporte, se necessário. Descubra toda as opções que estão incluídas com a sua subscrição.",
-				"button": "Ver Opções"
 			}
 		}
 	},
@@ -731,16 +736,6 @@
 		}
 	},
 	"stops": {
-		"NextBusRow": {
-			"arriving_now": "A chegar",
-			"passed": "{value}",
-			"realtime": "{value} min",
-			"scheduled": "{value}"
-		},
-		"NextBuses": {
-			"hide": "Esconder passagens anteriores",
-			"show": "Ver passagens anteriores"
-		},
 		"Page": {
 			"heading": "Pesquisar Paragens"
 		},
@@ -748,13 +743,29 @@
 			"heading": "Pesquisar Paragens",
 			"lines_that_pass_here": "Linhas que passam nesta paragem"
 		},
-		"StopsDetailContentListHeader": {
+		"StopsDetailContentTimetableHeader": {
 			"summary": "Horários estimados de passagem na paragem <stopName>{stop_name}</stopName> para o dia <dayName>{day_name, date, long}</dayName>. <changeDay>Alterar dia ›</changeDay>",
 			"trips_legend": {
 				"estimate": "Previsão",
 				"headsign": "Destino",
 				"line": "Linha"
 			}
+		},
+		"StopsDetailContentTimetableRealtime": {
+			"end_of_day": "Fim do Dia",
+			"no_service": "Sem Serviço",
+			"show_past_trips_toggle": {
+				"hide": "Esconder passagens anteriores",
+				"show": "Ver passagens anteriores"
+			}
+		},
+		"StopsDetailContentTimetableRow": {
+			"localities": {
+				"label": "Passa por"
+			}
+		},
+		"StopsDetailContentTimetableSchedule": {
+			"no_service": "Sem Serviço para o dia selecionado"
 		},
 		"StopsListToolbar": {
 			"filters": {
