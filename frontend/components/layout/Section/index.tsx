@@ -16,6 +16,7 @@ interface SectionProps {
 	backRouter?: boolean
 	children?: React.ReactNode
 	childrenWrapperStyles?: string
+	className?: string
 	heading?: string
 	subheading?: string
 	withChildrenNudge?: boolean
@@ -28,7 +29,7 @@ interface SectionProps {
 
 /* * */
 
-export default function Component({ backButtonHref = '', backRouter = false, children, childrenWrapperStyles = '', heading = '', subheading = '', withChildrenNudge = false, withChildrenPadding = false, withGap = true, withHeadingNudge = true, withTopBorder = true, withTopPadding = true }: SectionProps) {
+export default function Component({ backButtonHref = '', backRouter = false, children, childrenWrapperStyles = '', className, heading = '', subheading = '', withChildrenNudge = false, withChildrenPadding = false, withGap = true, withHeadingNudge = true, withTopBorder = true, withTopPadding = true }: SectionProps) {
 	//
 
 	//
@@ -48,7 +49,7 @@ export default function Component({ backButtonHref = '', backRouter = false, chi
 	// C. Render components
 
 	return (
-		<div className={`${styles.container} ${withTopBorder && styles.withTopBorder} ${withTopPadding && styles.withTopPadding} ${withGap && styles.withGap}`}>
+		<div className={`${styles.container} ${withTopBorder && styles.withTopBorder} ${withTopPadding && styles.withTopPadding} ${withGap && styles.withGap} ${className && className}`}>
 			{(backButtonHref || backRouter || heading || subheading) && (
 				<div className={`${styles.headingWrapper} ${withHeadingNudge && styles.withHeadingNudge}`}>
 					{backButtonHref && (

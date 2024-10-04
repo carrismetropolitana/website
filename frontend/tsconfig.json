@@ -1,52 +1,52 @@
 {
-	"compilerOptions": {
-		"allowJs": true,
-		"baseUrl": ".",
-		"esModuleInterop": true,
-		"incremental": true,
-		"isolatedModules": true,
-		"jsx": "react-jsx",
-		"lib": [
-			"dom",
-			"dom.iterable",
-			"esnext"
-		],
-		"module": "esnext",
-		"moduleResolution": "bundler",
-		"noEmit": true,
-		"paths": {
-			"@/*": [
-				"./*"
-			]
-		},
-		"plugins": [
-			{
-				"name": "typescript-plugin-css-modules"
-			},
-			{
-				"name": "next"
-			}
-		],
-		"resolveJsonModule": true,
-		"rootDir": ".",
-		"skipLibCheck": true,
-		"sourceMap": true,
-		"strict": false,
-		"strictNullChecks": true
-	},
-	"exclude": [
-		"**/node_modules",
-		"**/.*/",
-		"**/build/",
-		"**/.next/"
-	],
-	"include": [
-		"next-env.d.ts",
-		".next/types/**/*.ts",
-		"**/*.ts",
-		"**/*.tsx"
-	],
-	"typingOptions": {
-		"enableAutoDiscovery": true
-	}
+  "compilerOptions": {
+    "allowJs": true,
+    "baseUrl": ".",
+    "esModuleInterop": true,
+    "incremental": true,
+    "isolatedModules": true,
+    "jsx": "preserve",
+    "lib": [
+      "dom",
+      "dom.iterable",
+      "esnext"
+    ],
+    "module": "esnext",
+    "moduleResolution": "bundler",
+    "noEmit": true,
+    "paths": {
+      "@/*": [
+        "./*"
+      ]
+    },
+    "plugins": [
+      {
+        "name": "typescript-plugin-css-modules"
+      },
+      {
+        "name": "next"
+      }
+    ],
+    "resolveJsonModule": true,
+    "rootDir": ".",
+    "skipLibCheck": true,
+    "sourceMap": true,
+    "strict": false,
+    "strictNullChecks": true
+  },
+  "exclude": [
+    "**/node_modules",
+    "**/.*/",
+    "**/build/",
+    "**/.next/"
+  ],
+  "include": [
+    "next-env.d.ts",
+    ".next/types/**/*.ts",
+    "**/*.ts",
+    "**/*.tsx"
+  ],
+  "typingOptions": {
+    "enableAutoDiscovery": true
+  }
 }
