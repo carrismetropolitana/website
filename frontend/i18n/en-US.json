@@ -289,14 +289,14 @@
 			"open": "Open"
 		},
 		"AlertsListToolbar": {
-			"filters": {
-				"text_search": "Search alert by title, description, location...",
-				"lines_label": "Filter by line",
-				"stops_label": "Filter by stop"
-			},
 			"by_date": {
 				"current": "This week ({count})",
 				"future": "Futures ({count})"
+			},
+			"filters": {
+				"lines_label": "Filter by line",
+				"stops_label": "Filter by stop",
+				"text_search": "Search alert by title, description, location..."
 			},
 			"found_items_counter": "{count, plural, =0 {No alerts found.} one {Found # alert:} other {Found # alert:}}"
 		},
@@ -341,6 +341,11 @@
 		}
 	},
 	"common": {
+		"NextArrivals": {
+			"arriving": "A chegar",
+			"hours": "h",
+			"minutes": "min"
+		},
 		"SelectOperationalDay": {
 			"today": "Today",
 			"tomorrow": "Tomorrow"
@@ -533,9 +538,6 @@
 				"subtitle": "feasibility of the service of all routes on this line in the last 15 days"
 			}
 		},
-		"LinesDetailPathMap": {
-			"active_vehicles_counter": "{count, plural, =0 {No vehicles in circulation} one {# vehicle in circulation} other {# vehicles in circulation}}"
-		},
 		"LinesListToolbar": {
 			"by_current_view": {
 				"all": "All Lines",
@@ -603,6 +605,9 @@
 		}
 	},
 	"map": {
+		"MapViewStyleVehicles": {
+			"vehicles_counter": "{count, plural, =0 {Nenhum veículo em circulação} one {# veículo em circulação} other {# veículos em circulação}}"
+		},
 		"toolbar": {
 			"center_map": "Center Map",
 			"open_google_maps": "Open in Google Maps",
@@ -647,15 +652,15 @@
 	},
 	"planner": {
 		"Page": {
+			"Navegante": {
+				"button": "View Options",
+				"heading": "Plan your trip with the Navegante®",
+				"subheading": "Use the Navegante® service to pla n your trip, from A to B, combining various transport modes, if necessary. Discover all the options included with your subscription."
+			},
 			"Partners": {
 				"disclaimer": "Edit this page on Github if you want to include your app. The order is random. Only inputs that simultaneously provide planned and real-time schedules or vehicle positions are permitted.",
 				"heading": "Our partners",
 				"subheading": "Because our data is open, there are several apps that offer personalized experiences to improve your everyday transport life."
-			},
-			"Navegante": {
-				"heading": "Plan your trip with the Navegante®",
-				"subheading": "Use the Navegante® service to pla n your trip, from A to B, combining various transport modes, if necessary. Discover all the options included with your subscription.",
-				"button": "View Options"
 			}
 		}
 	},
@@ -742,43 +747,55 @@
 		}
 	},
 	"stops": {
-		"FavoritesList": {
-			"no_favorites": "No favorite stops yet"
-		},
-		"NextBusRow": {
-			"arriving_now": "Arriving",
-			"passed": "{value}",
-			"realtime": "{value} min",
-			"scheduled": "{value}"
-		},
-		"NextBuses": {
-			"hide": "Hide previous passages",
-			"show": "View previous passages"
-		},
-		"NextBusesHeader": {
-			"estimate": "Forecast",
-			"headsign": "Destination",
-			"line": "Line"
-		},
 		"Page": {
 			"heading": "Search Stops"
-		},
-		"PageToolbar": {
-			"by_current_view": {
-				"all": "All Stops",
-				"favorites": "Favorites"
-			},
-			"by_search": {
-				"placeholder": "Search by name, location..."
-			},
-			"found_items_counter": {
-				"all": "{count, plural, =0 {No stops found.} one {Found # stop:} other {Found # stops:}}",
-				"favorites": "{count, plural, =0 {No favorite stops found.} one {Found # favorite stops:} other {Found # favorite stops:}}"
-			}
 		},
 		"Single": {
 			"heading": "Search Stops",
 			"lines_that_pass_here": "Lines passing through this stop"
+		},
+		"StopsDetailContentTimetableHeader": {
+			"summary": "Horários estimados de passagem na paragem <stopName>{stop_name}</stopName> para o dia <dayName>{day_name, date, long}</dayName>. <changeDay>Alterar dia ›</changeDay>",
+			"trips_legend": {
+				"estimate": "Previsão",
+				"headsign": "Destino",
+				"line": "Linha"
+			}
+		},
+		"StopsDetailContentTimetableRealtime": {
+			"end_of_day": "Fim do Dia",
+			"no_service": "Sem Serviço Hoje",
+			"show_past_trips_toggle": {
+				"hide": "Esconder passagens anteriores",
+				"show": "Ver passagens anteriores"
+			}
+		},
+		"StopsDetailContentTimetableRow": {
+			"localities": {
+				"label": "Passa por"
+			}
+		},
+		"StopsDetailContentTimetableSchedule": {
+			"no_service": "Sem Serviço para o dia selecionado"
+		},
+		"StopsListToolbar": {
+			"filters": {
+				"by_current_view": {
+					"all": "Todas as Paragens",
+					"favorites": "Favoritas"
+				},
+				"by_search": {
+					"placeholder": "Pesquisar por nome, localidade..."
+				}
+			},
+			"found_items_counter": {
+				"all": "{count, plural, =0 {Nenhuma paragem encontrada.} one {Encontrada # paragem:} other {Encontradas # paragens:}}",
+				"favorites": "{count, plural, =0 {Nenhuma paragem favorita encontrada.} one {Encontrada # paragem favorita:} other {Encontradas # paragens favoritas:}}"
+			},
+			"heading": "Pesquisar Paragens"
+		},
+		"StopsListViewFavorites": {
+			"no_favorites": "Ainda não tem paragens favoritas"
 		},
 		"collapse_filters": "Hide Filters",
 		"expand_filters": "Expand Filters"
