@@ -71,11 +71,11 @@ export function StopsDetailContentTimetableRealtime() {
 			<StopsDetailContentTimetableRealtimeClockLine />
 
 			{stopsDetailContext.data.timetable_realtime_future && stopsDetailContext.data.timetable_realtime_future.length > 0
-				? stopsDetailContext.data.timetable_realtime_future.map(realtime => (
+				? stopsDetailContext.data.timetable_realtime_future.map(tripData => (
 					<StopsDetailContentTimetableRow
-						key={realtime.trip_id}
-						arrivalData={realtime}
-						status={realtime.estimated_arrival_unix ? 'realtime' : 'scheduled'}
+						key={`${tripData.trip_id}-${tripData.stop_sequence}`}
+						arrivalData={tripData}
+						status={tripData.estimated_arrival_unix ? 'realtime' : 'scheduled'}
 					/>
 				))
 				: <NoDataLabel text={t('end_of_day')} withMinHeight />}

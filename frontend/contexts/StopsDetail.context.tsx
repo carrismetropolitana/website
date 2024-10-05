@@ -3,7 +3,7 @@
 /* * */
 
 import type { SimplifiedAlert } from '@/types/alerts.types';
-import type { Line, Pattern, PatternGroup } from '@/types/lines.types';
+import type { Line, Pattern, PatternGroup, Shape } from '@/types/lines.types';
 import type { Arrival, Stop } from '@/types/stops.types';
 
 import { useAlertsContext } from '@/contexts/Alerts.context';
@@ -27,6 +27,7 @@ interface StopsDetailContextState {
 	data: {
 		active_alerts: SimplifiedAlert[] | undefined
 		active_pattern_group: PatternGroup | undefined
+		active_shape: Shape | undefined
 		active_stop_id: string
 		active_stop_sequence: number | undefined
 		active_trip_id: string | undefined
@@ -81,6 +82,7 @@ export const StopsDetailContextProvider = ({ children, stopId }: { children: Rea
 	const [dataLinesState, setDataLinesState] = useState<Line[] | undefined>(undefined);
 	const [dataPatternsState, setDataPatternsState] = useState<Pattern[] | undefined>(undefined);
 	const [dataValidPatternGroupsState, setDataValidPatternGroupsState] = useState<PatternGroup[] | undefined>(undefined);
+	const [dataShapeState, setDataShapeState] = useState<Shape | undefined>(undefined);
 
 	const [dataTimetableRealtimeState, setDataTimetableRealtimeState] = useState<Arrival[] | undefined>(undefined);
 	const [dataTimetableRealtimePastState, setDataTimetableRealtimePastState] = useState<Arrival[] | undefined>(undefined);
@@ -175,6 +177,35 @@ export const StopsDetailContextProvider = ({ children, stopId }: { children: Rea
 			}
 		})();
 	}, [dataStopState]);
+
+	/**
+	 * TASK: Fetch shape data for the active trip.
+	 * WHEN: The `dataActivePatternGroupState` changes.
+	 */
+	useEffect(() => {
+		if (!dataActivePatternGroupState) return;
+		(async () => {
+			try {
+				const shapeData = await fetch(`${Routes.API}/v2/shapes/${dataActivePatternGroupState.shape_id}`).then((response) => {
+					if (!response.ok) console.log(`Failed to fetch shape data for shapeId: ${dataActivePatternGroupState.shape_id}`);
+					else return response.json();
+				});
+				if (shapeData) {
+					shapeData.geojson = {
+						...shapeData.geojson,
+						properties: {
+							color: dataActivePatternGroupState.color,
+							text_color: dataActivePatternGroupState.text_color,
+						},
+					};
+				}
+				setDataShapeState(shapeData);
+			}
+			catch (error) {
+				console.error('Error fetching shape data:', error);
+			}
+		})();
+	}, [dataActivePatternGroupState]);
 
 	//
 	// C. Transform data
@@ -286,6 +317,7 @@ export const StopsDetailContextProvider = ({ children, stopId }: { children: Rea
 	// D. Handle actions
 
 	const setActiveStopId = (stopId: string) => {
+		resetActiveTripId();
 		setDataActiveStopIdState(stopId);
 	};
 
@@ -301,6 +333,7 @@ export const StopsDetailContextProvider = ({ children, stopId }: { children: Rea
 	const resetActiveTripId = () => {
 		setDataActivePatternGroupState(undefined);
 		setDataActiveTripIdState(undefined);
+		setDataShapeState(undefined);
 		setDataActiveStopSequenceState(undefined);
 	};
 
@@ -316,6 +349,7 @@ export const StopsDetailContextProvider = ({ children, stopId }: { children: Rea
 		data: {
 			active_alerts: dataActiveAlertsState,
 			active_pattern_group: dataActivePatternGroupState,
+			active_shape: dataShapeState,
 			active_stop_id: dataActiveStopIdState,
 			active_stop_sequence: dataActiveStopSequenceState,
 			active_trip_id: dataActiveTripIdState,

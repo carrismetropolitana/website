@@ -53,7 +53,9 @@ export function StopsDetailContentTimetableRow({ arrivalData, status }: Props) {
 	//
 	// D. Render components
 
-	if (!thisPattern) return null;
+	if (!thisPattern) {
+		return null;
+	}
 
 	return (
 		<div className={`${styles.container} ${styles[status]} ${isSelected && styles.isSelected}`} onClick={handleSelectTrip}>
@@ -80,10 +82,10 @@ export function StopsDetailContentTimetableRow({ arrivalData, status }: Props) {
 							<p className={styles.localitiesLabel}>{t('localities.label')}</p>
 							<p>
 								{thisPattern.localities.map((locality, index) => (
-									<>
+									<span key={index}>
 										{index > 0 && <span className={styles.localitySeparator}> • </span>}
 										<span className={styles.localityName}>{locality}</span>
-									</>
+									</span>
 								))}
 							</p>
 						</div>

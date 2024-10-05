@@ -14,9 +14,9 @@ import useSWR from 'swr';
 
 interface StopsContextState {
 	actions: {
-		getAllStopsGeoJsonFC: () => GeoJSON.FeatureCollection
+		getAllStopsGeoJsonFC: () => GeoJSON.FeatureCollection | undefined
 		getStopById: (stopId: string) => Stop | undefined
-		getStopByIdGeoJsonFC: (stopId: string) => GeoJSON.FeatureCollection
+		getStopByIdGeoJsonFC: (stopId: string) => GeoJSON.FeatureCollection | undefined
 	}
 	counters: {
 		favorites: number
@@ -70,9 +70,9 @@ export const StopsContextProvider = ({ children }) => {
 	//
 	// D. Handle actions
 
-	const getAllStopsGeoJsonFC = (): GeoJSON.FeatureCollection => {
+	const getAllStopsGeoJsonFC = (): GeoJSON.FeatureCollection | undefined => {
+		if (!allStopsData) return;
 		const collection = getBaseGeoJsonFeatureCollection();
-		if (!allStopsData) return collection;
 		allStopsData.forEach(stop => collection.features.push(transformStopDataIntoGeoJsonFeature(stop)));
 		return collection;
 	};
@@ -81,10 +81,10 @@ export const StopsContextProvider = ({ children }) => {
 		return allStopsData?.find(stop => stop.id === stopId);
 	};
 
-	const getStopByIdGeoJsonFC = (stopId: string): GeoJSON.FeatureCollection => {
+	const getStopByIdGeoJsonFC = (stopId: string): GeoJSON.FeatureCollection | undefined => {
 		const stop = getStopById(stopId);
+		if (!stop) return;
 		const collection = getBaseGeoJsonFeatureCollection();
-		if (!stop) return collection;
 		collection.features.push(transformStopDataIntoGeoJsonFeature(stop));
 		return collection;
 	};
@@ -124,7 +124,7 @@ export const StopsContextProvider = ({ children }) => {
 
 /* * */
 
-function transformStopDataIntoGeoJsonFeature(stopData: Stop): GeoJSON.Feature {
+export function transformStopDataIntoGeoJsonFeature(stopData: Stop): GeoJSON.Feature {
 	return {
 		geometry: {
 			coordinates: [stopData.lon, stopData.lat],

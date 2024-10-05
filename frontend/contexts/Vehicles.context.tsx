@@ -14,13 +14,13 @@ import useSWR from 'swr';
 interface VehiclesContextState {
 	actions: {
 		getVehicleById: (vehicleId: string) => undefined | Vehicle
-		getVehicleByIdGeoJsonFC: (vehicleId: string) => GeoJSON.FeatureCollection
+		getVehicleByIdGeoJsonFC: (vehicleId: string) => GeoJSON.FeatureCollection | undefined
 		getVehiclesByLineId: (tripId: string) => Vehicle[]
-		getVehiclesByLineIdGeoJsonFC: (tripId: string) => GeoJSON.FeatureCollection
+		getVehiclesByLineIdGeoJsonFC: (tripId: string) => GeoJSON.FeatureCollection | undefined
 		getVehiclesByPatternId: (tripId: string) => Vehicle[]
-		getVehiclesByPatternIdGeoJsonFC: (tripId: string) => GeoJSON.FeatureCollection
+		getVehiclesByPatternIdGeoJsonFC: (tripId: string) => GeoJSON.FeatureCollection | undefined
 		getVehiclesByTripId: (tripId: string) => Vehicle[]
-		getVehiclesByTripIdGeoJsonFC: (tripId: string) => GeoJSON.FeatureCollection
+		getVehiclesByTripIdGeoJsonFC: (tripId: string) => GeoJSON.FeatureCollection | undefined
 	}
 	counters: {
 		total: number
@@ -62,10 +62,10 @@ export const VehiclesContextProvider = ({ children }) => {
 		return allVehiclesData?.find(vehicle => vehicle.id === vehicleId);
 	};
 
-	const getVehicleByIdGeoJsonFC = (vehicleId: string): GeoJSON.FeatureCollection => {
+	const getVehicleByIdGeoJsonFC = (vehicleId: string): GeoJSON.FeatureCollection | undefined => {
 		const vehicle = getVehicleById(vehicleId);
+		if (!vehicle) return;
 		const collection = getBaseGeoJsonFeatureCollection();
-		if (!vehicle) return collection;
 		collection.features.push(transformVehicleDataIntoGeoJsonFeature(vehicle));
 		return collection;
 	};
@@ -76,8 +76,9 @@ export const VehiclesContextProvider = ({ children }) => {
 		return allVehiclesData?.filter(vehicle => vehicle.line_id === lineId) || [];
 	};
 
-	const getVehiclesByLineIdGeoJsonFC = (lineId: string): GeoJSON.FeatureCollection => {
+	const getVehiclesByLineIdGeoJsonFC = (lineId: string): GeoJSON.FeatureCollection | undefined => {
 		const vehicles = getVehiclesByLineId(lineId);
+		if (!vehicles) return;
 		const collection = getBaseGeoJsonFeatureCollection();
 		vehicles.forEach(vehicle => collection.features.push(transformVehicleDataIntoGeoJsonFeature(vehicle)));
 		return collection;
@@ -89,9 +90,9 @@ export const VehiclesContextProvider = ({ children }) => {
 		return allVehiclesData?.filter(vehicle => vehicle.pattern_id === patternId) || [];
 	};
 
-	const getVehiclesByPatternIdGeoJsonFC = (patternId: string): GeoJSON.FeatureCollection => {
+	const getVehiclesByPatternIdGeoJsonFC = (patternId: string): GeoJSON.FeatureCollection | undefined => {
 		const vehicles = getVehiclesByPatternId(patternId);
-		console.log('Vehicles by pattern', vehicles, patternId, allVehiclesData);
+		if (!vehicles) return;
 		const collection = getBaseGeoJsonFeatureCollection();
 		vehicles.forEach(vehicle => collection.features.push(transformVehicleDataIntoGeoJsonFeature(vehicle)));
 		return collection;
@@ -103,8 +104,9 @@ export const VehiclesContextProvider = ({ children }) => {
 		return allVehiclesData?.filter(vehicle => vehicle.trip_id === tripId) || [];
 	};
 
-	const getVehiclesByTripIdGeoJsonFC = (tripId: string): GeoJSON.FeatureCollection => {
+	const getVehiclesByTripIdGeoJsonFC = (tripId: string): GeoJSON.FeatureCollection | undefined => {
 		const vehicles = getVehiclesByTripId(tripId);
+		if (!vehicles) return;
 		const collection = getBaseGeoJsonFeatureCollection();
 		vehicles.forEach(vehicle => collection.features.push(transformVehicleDataIntoGeoJsonFeature(vehicle)));
 		return collection;

@@ -22,6 +22,7 @@ interface LinesDetailContextState {
 	actions: {
 		setActivePatternGroup: (patternGroupId: string) => void
 		setActiveStop: (sequence: number, stop: Stop) => void
+		setActiveStopByStopId: (sequence: number, stopId: string) => void
 		setDrawerOpen: (isOpen: boolean) => void
 	}
 	data: {
@@ -137,12 +138,28 @@ export const LinesDetailContextProvider = ({ children, lineId }) => {
 		})();
 	}, [lineData]);
 
+	/**
+	 * TASK: Fetch shape data for the active trip.
+	 * WHEN: The `dataActivePatternGroupState` changes.
+	 */
 	useEffect(() => {
+		if (!dataActivePatternGroupState) return;
 		(async () => {
 			try {
-				if (!dataActivePatternGroupState) return;
-				const resultData = await fetch(`${Routes.API}/v2/shapes/${dataActivePatternGroupState.shape_id}`).then(response => response.json());
-				setDataActiveShapeState(resultData);
+				const shapeData = await fetch(`${Routes.API}/v2/shapes/${dataActivePatternGroupState.shape_id}`).then((response) => {
+					if (!response.ok) console.log(`Failed to fetch shape data for shapeId: ${dataActivePatternGroupState.shape_id}`);
+					else return response.json();
+				});
+				if (shapeData) {
+					shapeData.geojson = {
+						...shapeData.geojson,
+						properties: {
+							color: dataActivePatternGroupState.color,
+							text_color: dataActivePatternGroupState.text_color,
+						},
+					};
+				}
+				setDataActiveShapeState(shapeData);
 			}
 			catch (error) {
 				console.error('Error fetching shape data:', error);
@@ -223,6 +240,13 @@ export const LinesDetailContextProvider = ({ children, lineId }) => {
 		setFilterActiveStopIdState(stop.id);
 	};
 
+	const setActiveStopByStopId = (sequence: number, stopId: string) => {
+		const stop = dataActivePatternGroupState?.path.find(pathStop => pathStop.stop.id === stopId)?.stop;
+		if (!stop) return;
+		setDataActiveStopState({ sequence, stop });
+		setFilterActiveStopIdState(stop.id);
+	};
+
 	const setDrawerOpen = (isOpen: boolean) => {
 		setDataDrawerOpenState(isOpen);
 	};
@@ -257,6 +281,7 @@ export const LinesDetailContextProvider = ({ children, lineId }) => {
 		actions: {
 			setActivePatternGroup,
 			setActiveStop,
+			setActiveStopByStopId,
 			setDrawerOpen,
 		},
 		data: {

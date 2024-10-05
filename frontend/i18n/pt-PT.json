@@ -538,9 +538,6 @@
 				"subtitle": "executabilidade do serviço de todos os percursos desta linha nos últimos 15 dias"
 			}
 		},
-		"LinesDetailPathMap": {
-			"active_vehicles_counter": "{count, plural, =0 {Nenhum veículo em circulação} one {# veículo em circulação} other {# veículos em circulação}}"
-		},
 		"LinesListToolbar": {
 			"by_current_view": {
 				"all": "Todas as Linhas",
@@ -608,6 +605,9 @@
 		}
 	},
 	"map": {
+		"MapViewStyleVehicles": {
+			"vehicles_counter": "{count, plural, =0 {Nenhum veículo em circulação} one {# veículo em circulação} other {# veículos em circulação}}"
+		},
 		"toolbar": {
 			"center_map": "Centrar Mapa",
 			"open_google_maps": "Abrir no Google Maps",
