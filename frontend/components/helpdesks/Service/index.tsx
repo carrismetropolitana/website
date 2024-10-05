@@ -2,7 +2,7 @@
 
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/common/Card';
 import { ThemeDark, ThemeLight } from '@/components/common/Theme';
-import Section from '@/components/layout/Section';
+import { Section } from '@/components/layout/Section';
 import { IconsCommon } from '@/settings/assets.settings';
 import { Image } from '@mantine/core';
 

@@ -2,7 +2,7 @@
 
 import AlertsListGroup from '@/components/alerts/AlertsListGroup';
 import AlertsListToolbar from '@/components/alerts/AlertsListToolbar';
-import Section from '@/components/layout/Section';
+import { Section } from '@/components/layout/Section';
 import { useTranslations } from 'next-intl';
 
 /* * */

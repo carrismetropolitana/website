@@ -1,7 +1,7 @@
 /* * */
 
 import GridNav from '@/components/layout/GridNav';
-import Section from '@/components/layout/Section';
+import { Section } from '@/components/layout/Section';
 import { IconBrandAppleFilled, IconBrandGoogleFilled } from '@tabler/icons-react';
 import { useTranslations } from 'next-intl';
 

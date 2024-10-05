@@ -2,7 +2,7 @@
 
 /* * */
 import Carousel from '@/components/common/Carousel';
-import Section from '@/components/layout/Section';
+import { Section } from '@/components/layout/Section';
 import PlannerCard from '@/components/planner/Card';
 import PlannerCardSkeleton from '@/components/planner/CardSkeleton';
 import { Link } from '@/i18n/routing';

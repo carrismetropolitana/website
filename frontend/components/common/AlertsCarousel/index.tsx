@@ -4,7 +4,7 @@ import type { SimplifiedAlert } from '@/types/alerts.types';
 
 import AlertsCarouselSlide from '@/components/common/AlertsCarouselSlide';
 import Carousel from '@/components/common/Carousel';
-import Section from '@/components/layout/Section';
+import { Section } from '@/components/layout/Section';
 import { IconBellRingingFilled } from '@tabler/icons-react';
 import { useTranslations } from 'next-intl';
 

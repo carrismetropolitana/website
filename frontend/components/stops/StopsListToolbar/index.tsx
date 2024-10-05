@@ -3,7 +3,7 @@
 /* * */
 
 import FoundItemsCounter from '@/components/common/FoundItemsCounter';
-import Section from '@/components/layout/Section';
+import { Section } from '@/components/layout/Section';
 import { useStopsListContext } from '@/contexts/StopsList.context';
 import { SegmentedControl, TextInput } from '@mantine/core';
 import { IconArrowLoopRight } from '@tabler/icons-react';

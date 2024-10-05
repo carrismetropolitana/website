@@ -2,7 +2,7 @@
 
 /* * */
 
-import Section from '@/components/layout/Section';
+import { Section } from '@/components/layout/Section';
 import { Skeleton } from '@mantine/core';
 import { useTranslations } from 'next-intl';
 

@@ -3,7 +3,7 @@
 /* * */
 
 import AlertsCarousel from '@/components/common/AlertsCarousel';
-import Section from '@/components/layout/Section';
+import { Section } from '@/components/layout/Section';
 import { useLinesDetailContext } from '@/contexts/LinesDetail.context';
 
 import styles from './styles.module.css';

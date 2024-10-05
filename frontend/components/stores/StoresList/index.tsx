@@ -3,7 +3,7 @@
 /* * */
 
 import Button from '@/components/common/Button';
-import Section from '@/components/layout/Section';
+import { Section } from '@/components/layout/Section';
 import StoresListGroups from '@/components/stores/StoresListGroups';
 import StoresListMap from '@/components/stores/StoresListMap';
 import StoresListToolbar from '@/components/stores/StoresListToolbar';

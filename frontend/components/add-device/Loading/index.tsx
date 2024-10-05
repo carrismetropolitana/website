@@ -1,6 +1,6 @@
 /* * */
 
-import Section from '@/components/layout/Section';
+import { Section } from '@/components/layout/Section';
 import { useTranslations } from 'next-intl';
 
 import styles from './styles.module.css';

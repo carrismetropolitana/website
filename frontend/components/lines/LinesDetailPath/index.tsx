@@ -3,7 +3,7 @@
 /* * */
 
 import NoDataLabel from '@/components/layout/NoDataLabel';
-import Section from '@/components/layout/Section';
+import { Section } from '@/components/layout/Section';
 import LinesDetailPathList from '@/components/lines/LinesDetailPathList';
 import LinesDetailPathMap from '@/components/lines/LinesDetailPathMap';
 import { useLinesDetailContext } from '@/contexts/LinesDetail.context';

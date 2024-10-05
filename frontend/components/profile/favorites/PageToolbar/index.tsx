@@ -3,7 +3,7 @@
 /* * */
 
 import FoundItemsCounter from '@/components/common/FoundItemsCounter';
-import Section from '@/components/layout/Section';
+import { Section } from '@/components/layout/Section';
 import { useLinesListContext } from '@/contexts/LinesList.context';
 import { useProfileContext } from '@/contexts/Profile.context';
 import { useStopsListContext } from '@/contexts/StopsList.context';

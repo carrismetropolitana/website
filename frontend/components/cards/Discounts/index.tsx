@@ -1,6 +1,6 @@
 /* * */
 
-import Section from '@/components/layout/Section';
+import { Section } from '@/components/layout/Section';
 import { Discount } from '@/types/discount.types';
 
 import DiscountTableDesktop from '../DiscountTableDesktop';

@@ -2,7 +2,7 @@
 
 /* * */
 
-import Section from '@/components/layout/Section';
+import { Section } from '@/components/layout/Section';
 import { StopsDetailContentMap } from '@/components/stops/StopsDetailContentMap';
 import { StopsDetailContentTimetable } from '@/components/stops/StopsDetailContentTimetable';
 import { StopsDetailContentTimetableHeader } from '@/components/stops/StopsDetailContentTimetableHeader';

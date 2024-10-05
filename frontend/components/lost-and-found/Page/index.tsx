@@ -1,6 +1,6 @@
 /* * */
 
-import Section from '@/components/layout/Section';
+import { Section } from '@/components/layout/Section';
 import OperatorSection from '@/components/lost-and-found/OperatorSection';
 import { IconsCommon, ImagesCommon } from '@/settings/assets.settings';
 import { RoutesLostAndFound } from '@/utils/routes';

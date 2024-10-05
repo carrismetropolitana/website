@@ -3,7 +3,7 @@
 /* * */
 
 import AlertsCarousel from '@/components/common/AlertsCarousel';
-import Section from '@/components/layout/Section';
+import { Section } from '@/components/layout/Section';
 import { useStopsDetailContext } from '@/contexts/StopsDetail.context';
 
 /* * */

@@ -5,7 +5,7 @@ import type { FaqGroupByTopic } from '@/types/faq.types';
 import { fetchFaqs } from '@/actions/faq.actions';
 import Button from '@/components/common/Button';
 import FaqList from '@/components/faq/FaqList';
-import Section from '@/components/layout/Section';
+import { Section } from '@/components/layout/Section';
 import { IconPhoneCheck } from '@tabler/icons-react';
 import { getTranslations } from 'next-intl/server';
 

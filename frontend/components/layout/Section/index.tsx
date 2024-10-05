@@ -11,7 +11,7 @@ import styles from './styles.module.css';
 
 /* * */
 
-interface SectionProps {
+interface Props {
 	backButtonHref?: string
 	backRouter?: boolean
 	children?: React.ReactNode
@@ -29,7 +29,7 @@ interface SectionProps {
 
 /* * */
 
-export default function Component({ backButtonHref = '', backRouter = false, children, childrenWrapperStyles = '', className, heading = '', subheading = '', withChildrenNudge = false, withChildrenPadding = false, withGap = true, withHeadingNudge = true, withTopBorder = true, withTopPadding = true }: SectionProps) {
+export function Section({ backButtonHref = '', backRouter = false, children, childrenWrapperStyles = '', className, heading = '', subheading = '', withChildrenNudge = false, withChildrenPadding = false, withGap = true, withHeadingNudge = true, withTopBorder = true, withTopPadding = true }: Props) {
 	//
 
 	//

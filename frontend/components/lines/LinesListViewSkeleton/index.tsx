@@ -1,7 +1,7 @@
 /* * */
 
 import RegularListItem from '@/components/layout/RegularListItem';
-import Section from '@/components/layout/Section';
+import { Section } from '@/components/layout/Section';
 import LineDisplay from '@/components/lines/LineDisplay';
 
 /* * */

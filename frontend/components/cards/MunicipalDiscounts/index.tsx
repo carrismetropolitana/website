@@ -1,7 +1,7 @@
 /* * */
 
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/common/Card';
-import Section from '@/components/layout/Section';
+import { Section } from '@/components/layout/Section';
 import { BrandsMunicipalities } from '@/settings/assets.settings';
 import { Image } from '@mantine/core';
 

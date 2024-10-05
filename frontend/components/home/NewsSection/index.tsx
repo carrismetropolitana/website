@@ -3,7 +3,7 @@
 /* * */
 
 import Carousel from '@/components/common/Carousel';
-import Section from '@/components/layout/Section';
+import { Section } from '@/components/layout/Section';
 import NewsCard from '@/components/news/Card';
 import NewsCardSkeleton from '@/components/news/CardSkeleton';
 import collator from '@/utils/collator';

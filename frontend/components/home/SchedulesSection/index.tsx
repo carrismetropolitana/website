@@ -1,7 +1,7 @@
 /* * */
 
 import GridNav from '@/components/layout/GridNav';
-import Section from '@/components/layout/Section';
+import { Section } from '@/components/layout/Section';
 import { mainNavigationGroup } from '@/settings/navigation.settings';
 import { useTranslations } from 'next-intl';
 

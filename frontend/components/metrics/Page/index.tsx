@@ -5,7 +5,7 @@
 import MetricsSectionDemandByLine from '@/components/home/MetricsSectionDemandByLine';
 import MetricsSectionDemandByMonth from '@/components/home/MetricsSectionDemandByMonth';
 import MetricsSectionDemandByOperator from '@/components/home/MetricsSectionDemandByOperator';
-import Section from '@/components/layout/Section';
+import { Section } from '@/components/layout/Section';
 import { OperatorMetrics } from '@/types/metrics.types';
 import getOperationalDay from '@/utils/operation';
 import { Routes } from '@/utils/routes';

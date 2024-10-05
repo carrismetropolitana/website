@@ -1,6 +1,6 @@
 /* * */
 
-import Section from '@/components/layout/Section';
+import { Section } from '@/components/layout/Section';
 import { IconsCommon } from '@/settings/assets.settings';
 import { Image } from '@mantine/core';
 

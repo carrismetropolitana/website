@@ -3,7 +3,7 @@
 /* * */
 
 import FavoriteToggle from '@/components/common/FavoriteToggle';
-import Section from '@/components/layout/Section';
+import { Section } from '@/components/layout/Section';
 import LineBadge from '@/components/lines/LineBadge';
 import { useLinesDetailContext } from '@/contexts/LinesDetail.context';
 import { useProfileContext } from '@/contexts/Profile.context';

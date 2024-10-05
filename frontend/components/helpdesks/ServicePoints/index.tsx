@@ -1,4 +1,4 @@
-import Section from '@/components/layout/Section';
+import { Section } from '@/components/layout/Section';
 
 import ServicePointsFilters from '../ServicePointsFilters';
 import styles from './styles.module.css';

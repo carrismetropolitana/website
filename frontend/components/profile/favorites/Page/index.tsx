@@ -2,7 +2,7 @@
 
 /* * */
 
-import Section from '@/components/layout/Section';
+import { Section } from '@/components/layout/Section';
 import LinesListViewFavorites from '@/components/lines/LinesListViewFavorites';
 import PageToolbar from '@/components/profile/favorites/PageToolbar';
 import { StopsListViewFavorites } from '@/components/stops/StopsListViewFavorites';

@@ -2,7 +2,7 @@
 
 import NoDataLabel from '@/components/layout/NoDataLabel';
 import RegularListItem from '@/components/layout/RegularListItem';
-import Section from '@/components/layout/Section';
+import { Section } from '@/components/layout/Section';
 import { StopDisplay } from '@/components/stops/StopDisplay';
 import { useStopsListContext } from '@/contexts/StopsList.context';
 import { RoutesSchedule } from '@/utils/routes';

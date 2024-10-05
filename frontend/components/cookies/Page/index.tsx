@@ -2,7 +2,7 @@
 
 /* * */
 
-import Section from '@/components/layout/Section';
+import { Section } from '@/components/layout/Section';
 import { useAnalyticsContext } from '@/contexts/Analytics.context';
 import { Button, Group, Table } from '@mantine/core';
 import { openConfirmModal } from '@mantine/modals';

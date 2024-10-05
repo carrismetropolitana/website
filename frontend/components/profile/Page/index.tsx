@@ -4,7 +4,7 @@
 
 import Button from '@/components/common/Button';
 import Input, { InputProps } from '@/components/common/Input';
-import Section from '@/components/layout/Section';
+import { Section } from '@/components/layout/Section';
 import { useProfileContext } from '@/contexts/Profile.context';
 import { Profile } from '@/types/profile.type';
 import toast from '@/utils/toast';

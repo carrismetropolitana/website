@@ -6,7 +6,7 @@ import FoundItemsCounter from '@/components/common/FoundItemsCounter';
 import Input from '@/components/common/Input';
 import SelectLine from '@/components/common/SelectLine';
 import SelectStop from '@/components/common/SelectStop';
-import Section from '@/components/layout/Section';
+import { Section } from '@/components/layout/Section';
 import { useAlertsListContext } from '@/contexts/AlertsList.context';
 import { useLinesListContext } from '@/contexts/LinesList.context';
 import { useStopsListContext } from '@/contexts/StopsList.context';

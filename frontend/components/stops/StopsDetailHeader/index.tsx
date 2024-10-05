@@ -5,7 +5,7 @@
 import CopyBadge from '@/components/common/CopyBadge';
 import FavoriteToggle from '@/components/common/FavoriteToggle';
 import { IconDisplay } from '@/components/common/IconDisplay';
-import Section from '@/components/layout/Section';
+import { Section } from '@/components/layout/Section';
 import LineBadge from '@/components/lines/LineBadge';
 import { StopDisplayLocation } from '@/components/stops/StopDisplayLocation';
 import { StopDisplayName } from '@/components/stops/StopDisplayName';

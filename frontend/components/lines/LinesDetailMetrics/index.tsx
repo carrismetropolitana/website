@@ -3,7 +3,7 @@
 /* * */
 
 import LiveIcon from '@/components/common/LiveIcon';
-import Section from '@/components/layout/Section';
+import { Section } from '@/components/layout/Section';
 import { useLinesDetailContext } from '@/contexts/LinesDetail.context';
 import { useTranslations } from 'next-intl';
 

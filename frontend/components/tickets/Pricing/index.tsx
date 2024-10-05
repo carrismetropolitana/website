@@ -1,5 +1,5 @@
 import LineBadgeBaseIcon from '@/components/common/LineBadgeBaseIcon';
-import Section from '@/components/layout/Section';
+import { Section } from '@/components/layout/Section';
 
 import styles from './styles.module.css';
 

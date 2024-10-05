@@ -2,7 +2,7 @@
 
 /* * */
 
-import Section from '@/components/layout/Section';
+import { Section } from '@/components/layout/Section';
 import SinglePageContent from '@/components/news/SinglePageContent';
 import SinglePageHeader from '@/components/news/SinglePageHeader';
 import SinglePageSidebar from '@/components/news/SinglePageSidebar';

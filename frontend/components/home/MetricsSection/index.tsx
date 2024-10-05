@@ -3,7 +3,7 @@
 /* * */
 
 import MetricsSectionDemand from '@/components/home/MetricsSectionDemand';
-import Section from '@/components/layout/Section';
+import { Section } from '@/components/layout/Section';
 import { Link } from '@/i18n/routing';
 import { useTranslations } from 'next-intl';
 

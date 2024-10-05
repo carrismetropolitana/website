@@ -1,7 +1,7 @@
 'use client';
 
 import Button from '@/components/common/Button';
-import Section from '@/components/layout/Section';
+import { Section } from '@/components/layout/Section';
 import { Routes } from '@/utils/routes';
 import { IconArrowRight } from '@tabler/icons-react';
 import { useTranslations } from 'next-intl';
