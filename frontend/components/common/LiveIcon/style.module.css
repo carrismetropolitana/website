@@ -7,40 +7,45 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
+
     /* CONTAINER SIZE */
     width: 20px;
     height: 20px;
+
     /* CONTAINER MARGIN ADJUSTMENT */
     margin-left: -4px;
   }
-  
+
   /* * */
   /* DOT */
-  
+
   .dot {
-    background-color: var(--realtime-100);
-    border-radius: 999px;
+    width: 4px;
+
     /* z-index: 100; */
     /* DOT SIZE */
     height: 4px;
-    width: 4px;
+    background-color: var(--color-realtime-100);
+    border-radius: 999px;
   }
-  
+
   /* * */
   /* RIPPLE */
-  
+
   .ripple {
     position: absolute;
-    border-radius: 999px;
-    background-color: var(--realtime-100);
+
     /* RIPPLE SIZE */
     width: 20px;
     height: 20px;
+    background-color: var(--color-realtime-100);
+    border-radius: 999px;
+
     /* ANIMATION */
     /* animation: 1750ms ease-out infinite pulse; */
     animation: 2500ms linear infinite pulse;
   }
-  
+
   @keyframes pulse {
     0% {
       opacity: 1;
@@ -55,4 +60,3 @@
       transform: scale(1);
     }
   }
-  

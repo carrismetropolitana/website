@@ -2,7 +2,7 @@
 
 /* * */
 
-import LineBadge from '@/components/common/LineBadge';
+import LineBadge from '@/components/lines/LineBadge';
 import MetricsSectionDemandSkeleton from '@/components/home/MetricsSectionDemandSkeleton';
 import { useLinesListContext } from '@/contexts/LinesList.context';
 import { Routes } from '@/utils/routes';

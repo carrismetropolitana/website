@@ -1,8 +1,21 @@
+/* * */
+
 import { useClipboard } from '@mantine/hooks';
 
 import styles from './styles.module.css';
 
-export default function CopyBadge({ hasBorder = true, label, value }: { hasBorder?: boolean, label?: string, value: number | string }) {
+/* * */
+
+interface Props {
+	hasBorder?: boolean
+	label?: string
+	size?: 'lg' | 'md'
+	value: number | string
+}
+
+/* * */
+
+export default function CopyBadge({ hasBorder = true, label, size = 'md', value }: Props) {
 	//
 
 	//
@@ -11,11 +24,13 @@ export default function CopyBadge({ hasBorder = true, label, value }: { hasBorde
 	const clipboard = useClipboard({ timeout: 600 });
 
 	//
-	// D. Render components
+	// B. Render components
 
 	return (
-		<div className={`${styles.container} ${hasBorder && styles.border}`} onClick={() => clipboard.copy(value)}>
+		<div className={`${styles.container} ${hasBorder && styles.hasBorder} ${styles[size]}`} onClick={() => clipboard.copy(value)}>
 			{clipboard.copied ? 'Copied' : label ? label : value}
 		</div>
 	);
+
+	//
 }

@@ -1,7 +1,7 @@
 /* * */
 
 import { BrandsOperators, IconsConnections, IconsFacilities } from '@/settings/assets.settings';
-import Image from 'next/image';
+import { Image, Tooltip } from '@mantine/core';
 import { useTranslations } from 'next-intl';
 
 import styles from './styles.module.css';
@@ -49,7 +49,9 @@ export function IconDisplay({ category, name }: Props) {
 
 	return (
 		<div className={styles.container}>
-			<Image alt={t(`${category}.${name}`)} height={24} src={iconSrc} width={24} />
+			<Tooltip label={t(`${category}.${name}`)} withArrow>
+				<Image alt={t(`${category}.${name}`)} src={iconSrc} />
+			</Tooltip>
 		</div>
 	);
 

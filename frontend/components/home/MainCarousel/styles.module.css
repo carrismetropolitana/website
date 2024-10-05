@@ -42,6 +42,7 @@
 .root {
 	overflow: hidden;
 	cursor: grab;
+	background-color: var(--color-brand);
 	transition: all 200ms ease;
 }
 

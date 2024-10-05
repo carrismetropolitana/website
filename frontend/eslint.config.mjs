@@ -10,7 +10,6 @@ export default [
     ignores: [
       '.next/',
       'public/',
-      '**/*.json',
     ],
   },
 ]

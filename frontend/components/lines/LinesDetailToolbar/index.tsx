@@ -1,6 +1,6 @@
 /* * */
 
-import SelectOperationalDay from '@/components/common/SelectOperationalDay';
+import { SelectOperationalDay } from '@/components/common/SelectOperationalDay';
 import Section from '@/components/layout/Section';
 import SelectActivePatternGroup from '@/components/lines/SelectActivePatternGroup';
 // import SelectActivePatternGroupExplainer from '@/components/lines/SelectActivePatternGroupExplainer';

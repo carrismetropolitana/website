@@ -1,0 +1,77 @@
+/* * */
+/* CONTAINER */
+
+.container {
+	display: flex;
+	flex-direction: column;
+	gap: var(--size-spacing-10);
+	align-items: flex-start;
+	justify-content: flex-start;
+}
+
+/* * */
+/* BADGES WRAPPER */
+
+.badgesWrapper {
+    display: flex;
+	flex-direction: row;
+	gap: var(--size-spacing-5);
+    align-items: center;
+	justify-content: flex-start;
+}
+
+/* * */
+/* HEADING WRAPPER */
+
+.headingWrapper {
+	display: flex;
+	flex-direction: column;
+    align-items: flex-start;
+	justify-content: flex-start;
+}
+
+/* * */
+/* NAME WRAPPER */
+
+.nameWrapper {
+	display: flex;
+	flex-flow: row wrap-reverse;
+	gap: var(--size-spacing-5) var(--size-spacing-15);
+	align-items: center;
+	justify-content: flex-start;
+}
+
+/* * */
+/* HEADING SECTION / ROW */
+
+.headingSectionRow {
+	display: flex;
+	flex-direction: row;
+	gap: var(--size-spacing-15);
+	align-items: center;
+	justify-content: flex-start;
+}
+
+/* * */
+/* ICONS WRAPPER */
+
+.iconsWrapper {
+    display: flex;
+	flex-direction: row;
+	gap: var(--size-spacing-15);
+    align-items: center;
+	justify-content: flex-start;
+}
+
+/* * */
+/* LINE BADGES WRAPPER */
+
+.lineBadgesWrapper {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--size-spacing-15);
+    align-items: flex-start;
+    justify-content: flex-start;
+    width: 100%;
+	margin-top: var(--size-spacing-15);
+}

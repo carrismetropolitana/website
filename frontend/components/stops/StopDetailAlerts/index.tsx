@@ -4,7 +4,7 @@
 
 import AlertsCarousel from '@/components/common/AlertsCarousel';
 import Section from '@/components/layout/Section';
-import { useStopsSingleContext } from '@/contexts/StopsSingle.context';
+import { useStopsDetailContext } from '@/contexts/StopsDetail.context';
 
 /* * */
 
@@ -14,7 +14,7 @@ export default function Component() {
 	//
 	// A. Setup variables
 
-	const stopsDetailContext = useStopsSingleContext();
+	const stopsDetailContext = useStopsDetailContext();
 
 	//
 	// B. Render components

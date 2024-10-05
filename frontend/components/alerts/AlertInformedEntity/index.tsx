@@ -5,7 +5,7 @@
 import type { Line } from '@/types/lines.types';
 import type { Stop } from '@/types/stops.types';
 
-import LineBadge from '@/components/common/LineBadge';
+import LineBadge from '@/components/lines/LineBadge';
 import { useRouter } from '@/i18n/routing';
 import { Routes } from '@/utils/routes';
 import useSWR from 'swr';

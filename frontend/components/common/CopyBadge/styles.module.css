@@ -2,36 +2,46 @@
 /* CONTAINER */
 
 .container {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
-  cursor: pointer;
-  text-transform: uppercase;
-  font-family: var(--font-family-monospace);
-
-  color: var(--color-system-text-300);
-
-  padding: 3px 0px 2px 0px;
-  border-radius: 999px;
-  font-size: 10px;
-  font-weight: 600;
-  letter-spacing: 0.5pt;
-  line-height: 1;
-  /* text-wrap: nowrap; */
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	font-family: var(--font-family-monospace);
+	font-weight: var(--font-weight-bold);
+	line-height: 1;
+	color: var(--color-system-text-300);
+	text-align: center;
+	text-transform: uppercase;
+	text-wrap: nowrap;
+	cursor: pointer;
+	border-radius: 999px;
 }
 
 .container:hover {
-  color: var(--color-system-text-200);
+	color: var(--color-system-text-200);
 }
 
-.border{
-  padding: 3px 6px 2px 6px;
-  background-color: var(--color-system-background-200);
-  border: 1px solid var(--color-system-text-300);
+.container.md {
+	padding: 3px 8px;
+	font-size: 10px;
+	letter-spacing: 0.5px;
 }
 
-.border:hover{
-  background-color: var(--color-system-background-100);
-  border: 1px solid var(--color-system-text-200);
+.container.lg {
+	padding: 4px 12px;
+	font-size: 14px;
+	letter-spacing: 0.5px;
+}
+
+/* * */
+/* HAS BORDER */
+
+.hasBorder {
+	padding: 3px 6px 2px;
+	background-color: var(--color-system-background-200);
+	border: 1px solid var(--color-system-text-300);
+}
+
+.hasBorder:hover {
+	background-color: var(--color-system-background-100);
+	border: 1px solid var(--color-system-text-200);
 }

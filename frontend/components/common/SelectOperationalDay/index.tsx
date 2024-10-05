@@ -13,7 +13,7 @@ import styles from './styles.module.css';
 
 /* * */
 
-export default function Component() {
+export function SelectOperationalDay() {
 	//
 
 	//
@@ -36,11 +36,12 @@ export default function Component() {
 		{
 			label: (
 				<DatePickerInput
-					classNames={{ input: styles.datePickerInput, section: styles.datePickerSection }}
+					classNames={{ input: styles.datePickerInput, section: styles.datePickerSection, wrapper: styles.datePickerWrapper }}
 					data-selected={!operationalDayContext.flags.is_today_selected && !operationalDayContext.flags.is_tomorrow_selected}
 					dropdownType="modal"
-					leftSection={<IconCalendarEvent size={24} />}
+					leftSection={<IconCalendarEvent />}
 					onChange={operationalDayContext.actions.updateSelectedDayFromJsDate}
+					size="lg"
 					value={operationalDayContext.data.selected_day_jsdate}
 					valueFormat="DD MMM YYYY"
 					variant="unstyled"
@@ -81,7 +82,16 @@ export default function Component() {
 	// D. Render components
 
 	return (
-		<SegmentedControl classNames={{ control: styles.segmentedControlDateInputOverride }} data={segementedControlOptions} onChange={handleSegmentedControlChange} value={selectedSegmentedControlOption} w="100%" />
+		<SegmentedControl
+			data={segementedControlOptions}
+			onChange={handleSegmentedControlChange}
+			value={selectedSegmentedControlOption}
+			w="100%"
+			classNames={{
+				control: styles.segmentedControlDateInputOverrideControl,
+				label: styles.segmentedControlDateInputOverrideLabel,
+			}}
+		/>
 	);
 
 	//

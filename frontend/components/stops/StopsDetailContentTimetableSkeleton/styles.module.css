@@ -1,0 +1,19 @@
+/* * */
+/* CONTAINER */
+
+.container{
+	display: flex;
+	flex-direction: column;
+	gap: var(--size-spacing-15);
+	width: 100%;
+	padding: var(--size-spacing-15);
+}
+
+
+/* * */
+/* ROW */
+
+.row {
+	height: 50px;
+	border-radius: 999px;
+}

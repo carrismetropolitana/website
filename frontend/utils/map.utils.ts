@@ -18,7 +18,7 @@ export const moveMap = (mapObject, coordinates, options = {}) => {
 	if (!mapObject) return;
 
 	if (options) {
-		console.log(options);
+		// console.log(options);
 	}
 
 	//
@@ -31,7 +31,6 @@ export const moveMap = (mapObject, coordinates, options = {}) => {
 	// Check if the given coordinates are inside the currently rendered map bounds
 
 	const currentMapBounds: [[number, number], [number, number]] = mapObject.getBounds().toArray();
-	console.log(currentMapBounds);
 	const isInside = turf.booleanIntersects(turf.point(coordinates), turf.bboxPolygon([...currentMapBounds[0], ...currentMapBounds[1]]));
 
 	//
@@ -47,4 +46,15 @@ export const moveMap = (mapObject, coordinates, options = {}) => {
 	}
 
 	//
+};
+
+/* * */
+
+/**
+ * Return a base GeoJSON FeatureCollection object
+ * @returns A GeoJSON FeatureCollection object with an empty features array
+ */
+
+export const getBaseGeoJsonFeatureCollection = (): GeoJSON.FeatureCollection => {
+	return { features: [], type: 'FeatureCollection' };
 };

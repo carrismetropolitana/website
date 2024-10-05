@@ -1,0 +1,111 @@
+/* * */
+/* CONTAINER */
+
+.container {
+	display: flex;
+	flex-direction: column;
+	width: 100%;
+	cursor: pointer;
+	background-color: var(--color-system-background-100);
+	border-bottom: 1px solid var(--color-system-border-100);
+	border-radius: 0;
+	transition: all 200ms ease;
+}
+
+.container:last-child {
+  border-bottom: none;
+}
+
+.container:has(+ .isSelected) {
+  border-bottom-color: transparent;
+}
+
+.container:hover {
+	border-bottom-color: transparent;
+	border-radius: 15px;
+	box-shadow: 0 0 20px 0 rgb(0 0 0 / 5%);
+}
+
+.container:has(+ .container:hover) {
+	border-bottom-color: transparent;
+}
+
+@media (prefers-color-scheme: dark) {
+	.container:hover,
+	.container.isSelected {
+		background-color: var(--color-system-background-200);
+	}
+}
+
+/* * */
+/* CONTAINER / PASSED */
+
+.container.passed {
+	opacity: 0.35;
+}
+
+.container.passed:hover {
+	opacity: 0.5;
+}
+
+.container.passed.isSelected {
+	opacity: 1;
+}
+
+/* * */
+/* CONTAINER / IS SELECTED */
+
+.isSelected,
+.isSelected:hover {
+	margin: var(--size-spacing-10) 0;
+	border-bottom-color: transparent;
+	border-radius: 10px;
+	box-shadow: 0 0 20px 0 rgb(0 0 0 / 10%);
+	transform: scale(1.02);
+}
+
+/* * */
+/* SUMMARY */
+
+.summary {
+	display: flex;
+	flex-direction: row;
+	gap: var(--size-spacing-5);
+	align-items: center;
+	justify-content: space-between;
+	padding: var(--size-spacing-15);
+}
+
+/* * */
+/* DETAILS */
+
+.details {
+	display: flex;
+	flex-direction: column;
+	gap: var(--size-spacing-5);
+	padding: var(--size-spacing-15);
+	border-top: 1px solid var(--color-system-border-100);
+}
+
+/* * */
+/* LOCALITIES */
+
+.localitiesListWrapper {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--color-system-text-300);
+}
+
+.localitiesListLabel {
+	font-size: 12px;
+	font-weight: var(--font-weight-semibold);
+	color: var(--color-system-text-300);
+}
+
+.localitySeparator {
+  color: var(--color-system-border-200);
+}
+
+.localityName {
+  color: var(--color-system-text-200);
+}

@@ -4,7 +4,7 @@
 
 import type { Feature, FeatureCollection, GeoJsonProperties, Geometry } from 'geojson';
 
-import Map from '@/components/common/map/Map';
+import { MapView } from '@/components/map/MapView';
 import { useStoresListContext } from '@/contexts/StoresList.context';
 import * as turf from '@turf/turf';
 import { useTranslations } from 'next-intl';
@@ -76,7 +76,7 @@ export default function Component() {
 	// D. Render component
 
 	return (
-		<Map
+		<MapView
 			centerLayer="stores"
 			id="storesListMap"
 			interactiveLayerIds={['stores-base']}
@@ -137,7 +137,7 @@ export default function Component() {
 					/>
 				</Source>
 			)}
-		</Map>
+		</MapView>
 	);
 
 	//

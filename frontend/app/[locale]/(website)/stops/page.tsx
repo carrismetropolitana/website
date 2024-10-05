@@ -1,14 +1,11 @@
 /* * */
 
-import StopsPage from '@/components/stops/Page';
-import { StopsListContextProvider } from '@/contexts/StopsList.context';
+import { StopsList } from '@/components/stops/StopsList';
 
 /* * */
 
 export default function Page() {
 	return (
-		<StopsListContextProvider>
-			<StopsPage />
-		</StopsListContextProvider>
+		<StopsList />
 	);
 }

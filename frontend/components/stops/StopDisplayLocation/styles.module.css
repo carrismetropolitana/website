@@ -1,0 +1,16 @@
+/* * */
+/* LOCATION */
+
+.location {
+	color: var(--color-system-text-300);
+}
+
+.location.md {
+	font-size: 15px;
+	font-weight: var(--font-weight-bold);
+}
+
+.location.lg {
+	font-size: 20px;
+	font-weight: var(--font-weight-bold);
+}

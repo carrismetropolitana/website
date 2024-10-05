@@ -1,0 +1,69 @@
+/* * */
+/* CONTAINER */
+
+.container {
+	display: flex;
+	flex-direction: row;
+	gap: var(--size-spacing-5);
+	align-items: center;
+}
+
+/* * */
+/* ICON */
+
+.icon {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	width: 14px;
+}
+
+.realtime .icon {
+	width: auto;
+	padding-bottom: unset;
+}
+
+.canceled .icon {
+	color: var(--color-status-danger-text);
+}
+
+/* * */
+/* LIST */
+
+.list {
+	display: flex;
+	flex-direction: row;
+	gap: var(--size-spacing-5);
+	align-items: center;
+	justify-content: flex-start;
+}
+
+/* * */
+/* ARRIVAL */
+
+.arrival {
+	font-size: 16px;
+	line-height: 1.1;
+	text-wrap: nowrap;
+}
+
+.realtime .arrival {
+	font-weight: var(--font-weight-bold);
+	color: var(--color-realtime-100);
+}
+
+.scheduled .arrival {
+	font-weight: var(--font-weight-bold);
+	color: var(--color-system-text-100);
+}
+
+.passed .arrival {
+	font-weight: var(--font-weight-medium);
+	color: var(--color-system-text-200);
+}
+
+.canceled .arrival {
+	font-weight: var(--font-weight-medium);
+	color: var(--color-status-danger-text);
+	text-decoration: line-through;
+}
