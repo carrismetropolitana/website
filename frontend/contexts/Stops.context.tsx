@@ -5,6 +5,7 @@
 import type { Stop } from '@/types/stops.types';
 
 import { useProfileContext } from '@/contexts/Profile.context';
+import { getBaseGeoJsonFeatureCollection } from '@/utils/map.utils';
 import { Routes } from '@/utils/routes';
 import { createContext, useContext, useEffect, useState } from 'react';
 import useSWR from 'swr';
@@ -13,7 +14,9 @@ import useSWR from 'swr';
 
 interface StopsContextState {
 	actions: {
-		getStopDataById: (stopId: string) => Stop | undefined
+		getAllStopsGeoJsonFC: () => GeoJSON.FeatureCollection
+		getStopById: (stopId: string) => Stop | undefined
+		getStopByIdGeoJsonFC: (stopId: string) => GeoJSON.FeatureCollection
 	}
 	counters: {
 		favorites: number
@@ -67,8 +70,23 @@ export const StopsContextProvider = ({ children }) => {
 	//
 	// D. Handle actions
 
-	const getStopDataById = (stopId: string) => {
+	const getAllStopsGeoJsonFC = (): GeoJSON.FeatureCollection => {
+		const collection = getBaseGeoJsonFeatureCollection();
+		if (!allStopsData) return collection;
+		allStopsData.forEach(stop => collection.features.push(transformStopDataIntoGeoJsonFeature(stop)));
+		return collection;
+	};
+
+	const getStopById = (stopId: string) => {
 		return allStopsData?.find(stop => stop.id === stopId);
+	};
+
+	const getStopByIdGeoJsonFC = (stopId: string): GeoJSON.FeatureCollection => {
+		const stop = getStopById(stopId);
+		const collection = getBaseGeoJsonFeatureCollection();
+		if (!stop) return collection;
+		collection.features.push(transformStopDataIntoGeoJsonFeature(stop));
+		return collection;
 	};
 
 	//
@@ -76,7 +94,9 @@ export const StopsContextProvider = ({ children }) => {
 
 	const contextValue: StopsContextState = {
 		actions: {
-			getStopDataById,
+			getAllStopsGeoJsonFC,
+			getStopById,
+			getStopByIdGeoJsonFC,
 		},
 		counters: {
 			favorites: profileContext.counters.favorite_stops,
@@ -101,3 +121,22 @@ export const StopsContextProvider = ({ children }) => {
 
 	//
 };
+
+/* * */
+
+function transformStopDataIntoGeoJsonFeature(stopData: Stop): GeoJSON.Feature {
+	return {
+		geometry: {
+			coordinates: [stopData.lon, stopData.lat],
+			type: 'Point',
+		},
+		properties: {
+			current_status: stopData.current_status,
+			id: stopData.id,
+			lat: stopData.lat,
+			lon: stopData.lon,
+			name: stopData.name,
+		},
+		type: 'Feature',
+	};
+}

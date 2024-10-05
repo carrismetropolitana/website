@@ -15,9 +15,9 @@ import styles from './styles.module.css';
 /* * */
 
 const MAP_LOAD_ASSETS = [
-	{ name: 'cmet-bus_delay', sdf: false, url: IconsMap.bus_delay },
-	{ name: 'cmet-bus_regular', sdf: false, url: IconsMap.bus_regular },
-	{ name: 'cmet-bus_error', sdf: false, url: IconsMap.bus_error },
+	{ name: 'cmet-bus-delay', sdf: false, url: IconsMap.bus_delay },
+	{ name: 'cmet-bus-regular', sdf: false, url: IconsMap.bus_regular },
+	{ name: 'cmet-bus-error', sdf: false, url: IconsMap.bus_error },
 	{ name: 'cmet-pin', sdf: false, url: IconsMap.pin },
 	{ name: 'cmet-shape-direction', sdf: true, url: IconsMap.shape_direction },
 	{ name: 'cmet-stop-selected', sdf: false, url: IconsMap.stop_selected },

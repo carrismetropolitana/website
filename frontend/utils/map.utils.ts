@@ -47,3 +47,14 @@ export const moveMap = (mapObject, coordinates, options = {}) => {
 
 	//
 };
+
+/* * */
+
+/**
+ * Return a base GeoJSON FeatureCollection object
+ * @returns A GeoJSON FeatureCollection object with an empty features array
+ */
+
+export const getBaseGeoJsonFeatureCollection = (): GeoJSON.FeatureCollection => {
+	return { features: [], type: 'FeatureCollection' };
+};

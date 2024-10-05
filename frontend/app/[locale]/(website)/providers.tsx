@@ -10,6 +10,7 @@ import { MapOptionsContextProvider } from '@/contexts/MapOptions.context';
 import { OperationalDayContextProvider } from '@/contexts/OperationalDay.context';
 import { ProfileContextProvider } from '@/contexts/Profile.context';
 import { StopsContextProvider } from '@/contexts/Stops.context';
+import { VehiclesContextProvider } from '@/contexts/Vehicles.context';
 import websiteTheme from '@/themes/website/website.theme';
 import { MantineProvider } from '@mantine/core';
 import { DatesProvider } from '@mantine/dates';
@@ -72,7 +73,9 @@ export default function Providers({ children }) {
 												<AlertsContextProvider>
 													<LinesContextProvider>
 														<StopsContextProvider>
-															{children}
+															<VehiclesContextProvider>
+																{children}
+															</VehiclesContextProvider>
 														</StopsContextProvider>
 													</LinesContextProvider>
 												</AlertsContextProvider>

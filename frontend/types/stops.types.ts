@@ -1,14 +1,15 @@
 /* * */
 
 export interface Stop {
+	current_status: string
 	district_id: string
 	district_name: string
 	facilities: Facility[]
 	id: string
-	lat: string
+	lat: number
 	lines: string[]
 	locality: string
-	lon: string
+	lon: number
 	municipality_id: string
 	municipality_name: string
 	name: string
@@ -48,13 +49,9 @@ export enum Facility {
 
 /* * */
 
-export enum OperationalStatus {
-	Active = 'ACTIVE',
-	Inactive = 'INACTIVE',
-	Provisional = 'PROVISIONAL',
-	Seasonal = 'SEASONAL',
-	Voided = 'VOIDED',
-}
+export type OperationalStatus = 'active' | 'inactive' | 'provisional' | 'seasonal' | 'voided';
+
+/* * */
 
 export interface Arrival {
 	estimated_arrival: null | string

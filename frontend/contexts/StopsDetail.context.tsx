@@ -103,7 +103,7 @@ export const StopsDetailContextProvider = ({ children, stopId }: { children: Rea
 	 */
 	useEffect(() => {
 		if (!dataActiveStopIdState || !stopsContext.data.raw || !stopsContext.data.raw.length) return;
-		const foundStopData = stopsContext.actions.getStopDataById(dataActiveStopIdState);
+		const foundStopData = stopsContext.actions.getStopById(dataActiveStopIdState);
 		if (foundStopData) {
 			setDataStopState(foundStopData);
 			window.history.replaceState({}, '', `${Routes.STOPS.route}/${dataActiveStopIdState}` + window.location.search);

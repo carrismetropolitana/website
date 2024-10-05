@@ -1,34 +1,35 @@
 'use client';
 
+/* * */
+
 import LiveIcon from '@/components/common/LiveIcon';
 import { MapView } from '@/components/map/MapView';
+import { MapViewStyleStopsInteractiveLayerIds } from '@/components/map/MapViewStyleStops';
+import { MapViewStyleVehicles } from '@/components/map/MapViewStyleVehicles';
 import { useLinesDetailContext } from '@/contexts/LinesDetail.context';
-import { IconsMap } from '@/settings/assets.settings';
+import { useVehiclesContext } from '@/contexts/Vehicles.context';
 import { Path, PatternGroup } from '@/types/lines.types';
 import { Stop } from '@/types/stops.types';
 import { moveMap } from '@/utils/map.utils';
-import { Routes } from '@/utils/routes';
-import { VehiclePosition } from '@/utils/types';
 import { useTranslations } from 'next-intl';
 import { useEffect, useMemo } from 'react';
 import { CircleLayer, Layer, LineLayer, Source, SymbolLayer, useMap } from 'react-map-gl/maplibre';
-import useSWR from 'swr';
 
 import styles from './styles.module.css';
 
 /** Main component rendering the map and associated layers */
 export default function Component() {
 	//
-	// A. Setup variables
-	const { linesSingleMap } = useMap();
-	const linesDetailContext = useLinesDetailContext();
-	const t = useTranslations('lines.LinesDetailPathMap');
 
 	//
-	// B. Fetch data (refreshes every 10 seconds)
-	const { data: allVehiclesData } = useSWR<VehiclePosition[]>(`${Routes.API}/v2/vehicles`, {
-		refreshInterval: 10000,
-	});
+	// A. Setup variables
+
+	const t = useTranslations('lines.LinesDetailPathMap');
+
+	const vehiclesContext = useVehiclesContext();
+	const linesDetailContext = useLinesDetailContext();
+
+	const { linesSingleMap } = useMap();
 
 	//
 	// C. Transform Data
@@ -44,19 +45,6 @@ export default function Component() {
 
 		moveMap(linesSingleMap, coordinates);
 	}, [linesDetailContext.data.active_stop, linesSingleMap]);
-
-	//
-	useEffect(() => {
-		if (!linesSingleMap) return;
-		// Load stop selected symbol
-		linesSingleMap.loadImage(IconsMap.stop_selected).then((image) => {
-			linesSingleMap.addImage('stop-selected', image.data, { sdf: false });
-		});
-		// Load pin symbol
-		linesSingleMap.loadImage(IconsMap.pin).then((image) => {
-			linesSingleMap.addImage('map-pin', image.data, { sdf: false });
-		});
-	}, [linesSingleMap]);
 
 	//
 	// D. Handle Actions
@@ -77,10 +65,10 @@ export default function Component() {
 	// E. Memoized GeoJSON Data
 
 	// Vehicles on the map
-	const activeVehiclesGeojson = useMemo(() => generateActiveVehiclesGeojson(allVehiclesData, linesDetailContext.data.active_pattern_group), [
-		linesDetailContext.data.active_pattern_group,
-		allVehiclesData,
-	]);
+	const activeVehiclesGeojson = useMemo(() => {
+		if (!linesDetailContext.data.active_pattern_group?.pattern_id) return;
+		return vehiclesContext.actions.getVehiclesByPatternIdGeoJsonFC(linesDetailContext.data.active_pattern_group?.pattern_id);
+	}, [linesDetailContext.data.active_pattern_group, vehiclesContext.data.all]);
 
 	// Stops on the route
 	const stopsGeoJson = useMemo(() => generateStopsGeoJson(linesDetailContext.data.active_pattern_group?.path), [
@@ -98,7 +86,6 @@ export default function Component() {
 	const stopsStyle = generateStopsStyle(linesDetailContext.data.active_pattern_group ?? undefined);
 	const shapeStyle = generateShapeStyle(linesDetailContext.data.line?.color);
 	const shapeArrowStyle = generateShapeArrowStyle();
-	const vehiclesStyle = generateVehiclesStyle();
 	const selectedStopBaseStyle = generateStopBaseStyle();
 	const selectedStopStickStyle = generateStopStickStyle();
 
@@ -107,7 +94,7 @@ export default function Component() {
 	return (
 		<MapView
 			id="linesSingleMap"
-			interactiveLayerIds={['stops']}
+			interactiveLayerIds={[...MapViewStyleStopsInteractiveLayerIds]}
 			onClick={handleLayerClick}
 		>
 			{/* Route Shape */}
@@ -134,11 +121,7 @@ export default function Component() {
 			)}
 
 			{/* Vehicles */}
-			{activeVehiclesGeojson && (
-				<Source data={activeVehiclesGeojson} id="vehicles" type="geojson">
-					<Layer {...vehiclesStyle} />
-				</Source>
-			)}
+			{activeVehiclesGeojson && <MapViewStyleVehicles data={activeVehiclesGeojson} />}
 
 			{/* Active vehicles counter */}
 			{activeVehiclesGeojson?.features && activeVehiclesGeojson?.features.length > 0 && (
@@ -153,27 +136,12 @@ export default function Component() {
 
 /** Utility Functions **/
 
-// Generates GeoJSON for active vehicles
-function generateActiveVehiclesGeojson(allVehiclesData, activePatternGroup) {
-	if (!allVehiclesData) return null;
-	const activeVehicles = allVehiclesData.filter(vehicleItem => vehicleItem.pattern_id === activePatternGroup?.pattern_id);
-
-	return {
-		features: activeVehicles.map(vehicleItem => ({
-			geometry: { coordinates: [vehicleItem.lon, vehicleItem.lat], type: 'Point' },
-			properties: { ...vehicleItem, delay: Math.floor(Date.now() / 1000) - vehicleItem.timestamp },
-			type: 'Feature',
-		})),
-		type: 'FeatureCollection',
-	};
-}
-
 // Generates GeoJSON for stops
 function generateStopsGeoJson(stops?: Path[]) {
 	if (!stops) return null;
 	return {
 		features: stops.map(stop => ({
-			geometry: { coordinates: [parseFloat(stop.stop.lon), parseFloat(stop.stop.lat)], type: 'Point' },
+			geometry: { coordinates: [stop.stop.lon, stop.stop.lat], type: 'Point' },
 			properties: { name: stop.stop.name, sequence: stop.stop_sequence, stop: stop.stop },
 			type: 'Feature',
 		})),
@@ -234,20 +202,6 @@ function generateShapeArrowStyle(): SymbolLayer {
 		},
 		paint: { 'icon-color': '#ffffff', 'icon-opacity': 0.8 },
 		source: 'shape',
-		type: 'symbol',
-	};
-}
-
-// Generates style for vehicles
-function generateVehiclesStyle(): SymbolLayer {
-	return {
-		id: 'vehicles',
-		layout: {
-			'icon-image': 'cm-bus-regular',
-			'icon-rotate': ['get', 'bearing'],
-			'icon-size': ['interpolate', ['linear'], ['zoom'], 10, 0.05, 20, 0.15],
-		},
-		source: 'vehicles',
 		type: 'symbol',
 	};
 }
