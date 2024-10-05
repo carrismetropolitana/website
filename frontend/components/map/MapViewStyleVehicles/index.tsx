@@ -6,7 +6,7 @@ import { Layer, Source } from 'react-map-gl/maplibre';
 
 /* * */
 
-export const MapViewStyleVehiclesInteractiveLayerIds = ['default-layer-vehicles-delay', 'default-layer-vehicles-regular'];
+export const MapViewStyleVehiclesInteractiveLayerId = '';
 
 /* * */
 

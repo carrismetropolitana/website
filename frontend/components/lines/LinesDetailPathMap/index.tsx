@@ -4,7 +4,7 @@
 
 import LiveIcon from '@/components/common/LiveIcon';
 import { MapView } from '@/components/map/MapView';
-import { MapViewStyleStopsInteractiveLayerIds } from '@/components/map/MapViewStyleStops';
+import { MapViewStyleStopsInteractiveLayerId } from '@/components/map/MapViewStyleStops';
 import { MapViewStyleVehicles } from '@/components/map/MapViewStyleVehicles';
 import { useLinesDetailContext } from '@/contexts/LinesDetail.context';
 import { useVehiclesContext } from '@/contexts/Vehicles.context';
@@ -94,7 +94,7 @@ export default function Component() {
 	return (
 		<MapView
 			id="linesSingleMap"
-			interactiveLayerIds={[...MapViewStyleStopsInteractiveLayerIds]}
+			interactiveLayerIds={[MapViewStyleStopsInteractiveLayerId]}
 			onClick={handleLayerClick}
 		>
 			{/* Route Shape */}
