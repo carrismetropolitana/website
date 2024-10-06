@@ -120,6 +120,15 @@
 	--box-shadow-md: 0 0 50px 0 red;
 	--box-shadow-lg: 0 0 50px 0 rgb(0 0 0 / 5%);
 
+	/* * */
+	/* BORDER-RADIUS */
+
+	--border-radius-xs: 3px;
+	--border-radius-sm: 6px;
+	--border-radius-md: 12px;
+	--border-radius-lg: 18px;
+	--border-radius-xl: 30px;
+
 }
 
 /* * */
