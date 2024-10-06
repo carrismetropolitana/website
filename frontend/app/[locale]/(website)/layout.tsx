@@ -11,12 +11,12 @@ import Providers from './providers';
 export default function Layout({ children }) {
 	return (
 		<Providers>
-			<Notifications styles={{ root: { marginTop: '60px' } }} />
-			<WebsiteWrapper>
-				<EnvironmentContextProvider value="website">
+			<EnvironmentContextProvider value="website">
+				<Notifications styles={{ root: { marginTop: '60px' } }} />
+				<WebsiteWrapper>
 					{children}
-				</EnvironmentContextProvider>
-			</WebsiteWrapper>
+				</WebsiteWrapper>
+			</EnvironmentContextProvider>
 		</Providers>
 	);
 }
