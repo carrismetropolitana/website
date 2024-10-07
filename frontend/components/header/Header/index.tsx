@@ -5,6 +5,7 @@
 import Logo from '@/components/header/Logo';
 import HeaderNavigationDrawer from '@/components/header/NavigationDrawer';
 import HeaderNavigationMain from '@/components/header/NavigationMain';
+import { useStickyObserver } from '@/hooks/useStickyObserver';
 import { useEffect } from 'react';
 
 import styles from './styles.module.css';
@@ -15,7 +16,12 @@ export default function Component() {
 	//
 
 	//
-	// A. Transform data
+	// A. Setup variables
+
+	const { isSticky, ref: stickyElementRef } = useStickyObserver({ top: '0px' }, [1], { top: -1 });
+
+	//
+	// B. Transform data
 
 	useEffect(() => {
 		setInterval(() => {
@@ -28,21 +34,16 @@ export default function Component() {
 	});
 
 	//
-	// B. Render components
+	// C. Render components
 
 	return (
-		<>
-			<div className={styles.spacer} />
-			<div className={styles.container}>
-				<div className={styles.mainWrapper}>
-					<Logo />
-					<div className={styles.navWrapper}>
-						<HeaderNavigationMain />
-						<HeaderNavigationDrawer />
-					</div>
-				</div>
+		<header ref={stickyElementRef} className={`${styles.container} ${isSticky ? styles.isSticky : ''}`}>
+			<Logo />
+			<div className={styles.navWrapper}>
+				<HeaderNavigationMain />
+				<HeaderNavigationDrawer />
 			</div>
-		</>
+		</header>
 	);
 
 	//
