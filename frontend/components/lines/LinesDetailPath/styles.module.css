@@ -7,9 +7,10 @@
 		"a b" minmax(300px, auto) / 1fr 1fr;
 	align-items: flex-start;
 	justify-content: flex-start;
+	width: 100%;
 }
 
-@media screen and (max-width: 900px) {
+@media screen and (width <= 900px) {
 	.container {
 		grid-template:
 			"b" minmax(200px, auto) [b_]
@@ -21,15 +22,14 @@
 /* MAP WRAPPER */
 
 .mapWrapper {
-	grid-area: b;
-	position: -webkit-sticky;
 	position: sticky;
 	top: var(--size-height-header);
+	grid-area: b;
 	height: 100%;
 	max-height: calc(100vh - var(--size-height-header));;
 }
 
-@media screen and (max-width: 900px) {
+@media screen and (width <= 900px) {
 	.mapWrapper {
 		position: static;
 	}

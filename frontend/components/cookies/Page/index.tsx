@@ -3,6 +3,7 @@
 /* * */
 
 import { Section } from '@/components/layout/Section';
+import { Surface } from '@/components/layout/Surface';
 import { useAnalyticsContext } from '@/contexts/Analytics.context';
 import { Button, Group, Table } from '@mantine/core';
 import { openConfirmModal } from '@mantine/modals';
@@ -45,15 +46,14 @@ export default function Component() {
 	};
 
 	//
-	// B. Render components
+	// C. Render components
 
 	return (
-		<>
-
-			<Section heading={t('sections.intro.title')} withChildrenPadding>
+		<Surface>
+			<Section heading={t('sections.intro.title')} withPadding>
 				<div className={styles.text}>{t('sections.intro.paragraphs.1')}</div>
 			</Section>
-			<Section heading={t('title')} withChildrenPadding>
+			<Section heading={t('title')} withPadding>
 				<div className={styles.container}>
 					<div className={styles.section}>
 						<div className={styles.title}>{t('sections.question_1.title')}</div>
@@ -161,7 +161,7 @@ export default function Component() {
 					</div>
 				</div>
 			</Section>
-		</>
+		</Surface>
 	);
 
 	//

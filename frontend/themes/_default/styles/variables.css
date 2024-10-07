@@ -147,7 +147,6 @@
   :root {
 
 		/* * */
-
 		/* COLOR / SYSTEM */
 
 		--hsl: hsl(232deg 8% 12%);
@@ -162,7 +161,6 @@
 		--color-system-text-400: #64646e;
 
 		/* * */
-
 		/* COLOR / STATUS */
 
 		--color-status-info-background: #3c495d;
@@ -183,7 +181,6 @@
 		--color-status-danger-shadow: #e64a2380;
 
 		/* * */
-
 		/* COLOR / ALERTS */
 
 		--color-alerts-0: #3D85C6;
@@ -228,7 +225,6 @@
   :root {
 
 		/* * */
-
 		/* FONT */
 
 		--font-size-heading: 26px;
