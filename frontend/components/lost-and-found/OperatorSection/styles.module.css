@@ -1,13 +1,4 @@
 /* * */
-/* INNER WRAPPER */
-
-.innerWrapper {
-	display: flex;
-	flex-direction: column;
-	gap: var(--size-spacing-10);
-}
-
-/* * */
 /* TITLE */
 
 .title {
@@ -20,10 +11,10 @@
 /* DESCRIPTION */
 
 .description {
+	max-width: var(--size-width-heading);
 	font-size: var(--font-size-text);
 	font-weight: var(--font-weight-text);
 	color: var(--color-system-text-200);
-	max-width: var(--size-width-heading);
 }
 
 /* * */

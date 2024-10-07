@@ -2,9 +2,9 @@
 
 /* * */
 
-import LineBadge from '@/components/lines/LineBadge';
 import MetricsSectionDemandSkeleton from '@/components/home/MetricsSectionDemandSkeleton';
-import { useLinesListContext } from '@/contexts/LinesList.context';
+import LineBadge from '@/components/lines/LineBadge';
+import { useLinesContext } from '@/contexts/Lines.context';
 import { Routes } from '@/utils/routes';
 import { Sparkline } from '@mantine/charts';
 import { ActionIcon, Popover } from '@mantine/core';
@@ -26,7 +26,7 @@ export default function Component() {
 	// A. Setup variables
 
 	const t = useTranslations('HomeMetricsSectionDemand');
-	const linesContext = useLinesListContext();
+	const linesContext = useLinesContext();
 	const [selectedLineId, setSelectedLineId] = useState<string | undefined>();
 
 	//

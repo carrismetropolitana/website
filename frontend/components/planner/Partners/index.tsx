@@ -1,8 +1,10 @@
 'use client';
 
 /* * */
+
 import Carousel from '@/components/common/Carousel';
 import { Section } from '@/components/layout/Section';
+import { Surface } from '@/components/layout/Surface';
 import PlannerCard from '@/components/planner/Card';
 import PlannerCardSkeleton from '@/components/planner/CardSkeleton';
 import { Link } from '@/i18n/routing';
@@ -82,12 +84,14 @@ export default function Component() {
 	// C. Render Components
 
 	return (
-		<Section heading={t('heading')} subheading={t('subheading')} withTopBorder={false}>
-			<Carousel skeletonComponent={<PlannerCardSkeleton />} skeletonQty={4} slides={carouselSlides} slideSize={300} />
-			<Link className={styles.disclaimer} href="https://github.com/carrismetropolitana/website/blob/alpha/frontend/components/planner/Page/index.tsx" target="_blank">
-				{t('disclaimer')}
-			</Link>
-		</Section>
+		<Surface>
+			<Section heading={t('heading')} subheading={t('subheading')}>
+				<Carousel skeletonComponent={<PlannerCardSkeleton />} skeletonQty={4} slides={carouselSlides} slideSize={300} />
+				<Link className={styles.disclaimer} href="https://github.com/carrismetropolitana/website/blob/alpha/frontend/components/planner/Page/index.tsx" target="_blank">
+					{t('disclaimer')}
+				</Link>
+			</Section>
+		</Surface>
 	);
 
 	//

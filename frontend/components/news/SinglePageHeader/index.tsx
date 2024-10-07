@@ -23,7 +23,7 @@ export default function Component({ newsData }) {
 
 	if (!newsData) {
 		return (
-			<Section childrenWrapperStyles={styles.container} withGap={false} withTopBorder={false} backRouter withChildrenPadding>
+			<Section withGap withPadding>
 				<Skeleton className={styles.titleSkeleton} />
 				<Skeleton className={styles.publishDateSkeleton} />
 			</Section>
@@ -31,7 +31,7 @@ export default function Component({ newsData }) {
 	}
 
 	return (
-		<Section childrenWrapperStyles={styles.container} withGap={false} withTopBorder={false} backRouter withChildrenPadding>
+		<Section withBottomDivider withGap withPadding>
 			<h1 className={styles.title}>{newsData?.title || 'title'}</h1>
 			<p className={styles.publishDate}>{t('publish_date', { value: newsData?.date })}</p>
 		</Section>

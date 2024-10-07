@@ -4,15 +4,16 @@
 .container {
 	display: grid;
 	grid-template-columns: repeat(4, 1fr);
-	padding: var(--size-spacing-20);
 	gap: var(--size-spacing-20);
+	width: 100%;
+	padding: var(--size-spacing-20);
 }
 
-@media (max-width: 500px) {
+@media (width <= 500px) {
 	.container {
 		display: flex;
 		flex-direction: column;
-		padding: 0;
 		gap: 0;
+		padding: 0;
 	}
 }

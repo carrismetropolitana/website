@@ -3,6 +3,7 @@
 /* * */
 
 import { Section } from '@/components/layout/Section';
+import { Surface } from '@/components/layout/Surface';
 import SinglePageContent from '@/components/news/SinglePageContent';
 import SinglePageHeader from '@/components/news/SinglePageHeader';
 import SinglePageSidebar from '@/components/news/SinglePageSidebar';
@@ -47,13 +48,15 @@ export default function Component({ newsId }) {
 	// B. Render Components
 
 	return (
-		<>
+		<Surface>
 			<SinglePageHeader newsData={newsData} />
-			<Section childrenWrapperStyles={styles.innerWrapper} withTopPadding={false} withChildrenPadding>
-				{!isLoading && data && <SinglePageContent content={data.content} />}
-				{!isLoading && data && <SinglePageSidebar newsData={data} />}
+			<Section withPadding>
+				<div className={styles.innerWrapper}>
+					{!isLoading && data && <SinglePageContent content={data.content} />}
+					{!isLoading && data && <SinglePageSidebar newsData={data} />}
+				</div>
 			</Section>
-		</>
+		</Surface>
 	);
 
 	//

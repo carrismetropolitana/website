@@ -1,6 +1,7 @@
 /* * */
 
 import { Section } from '@/components/layout/Section';
+import { Surface } from '@/components/layout/Surface';
 import { Discount } from '@/types/discount.types';
 
 import DiscountTableDesktop from '../DiscountTableDesktop';
@@ -68,13 +69,15 @@ export const discounts: Discount[] = [
 
 export default function Component() {
 	return (
-		<Section heading="Descontos" subheading="Descubra quanto custa viajar na CMetropolitana de vez em quando. Para utilizações mais frequentes sugerimos a adesão ao sistema navegante®." withChildrenPadding>
-			<div className={styles.desktop}>
-				<DiscountTableDesktop discounts={discounts} />
-			</div>
-			<div className={styles.mobile}>
-				<DiscountTableMobile discounts={discounts} />
-			</div>
-		</Section>
+		<Surface>
+			<Section heading="Descontos" subheading="Descubra quanto custa viajar na CMetropolitana de vez em quando. Para utilizações mais frequentes sugerimos a adesão ao sistema navegante®." withPadding>
+				<div className={styles.desktop}>
+					<DiscountTableDesktop discounts={discounts} />
+				</div>
+				<div className={styles.mobile}>
+					<DiscountTableMobile discounts={discounts} />
+				</div>
+			</Section>
+		</Surface>
 	);
 }

@@ -1,12 +1,17 @@
 'use client';
 
+/* * */
+
 import Button from '@/components/common/Button';
 import { Section } from '@/components/layout/Section';
+import { Surface } from '@/components/layout/Surface';
 import { Routes } from '@/utils/routes';
 import { IconArrowRight } from '@tabler/icons-react';
 import { useTranslations } from 'next-intl';
 
 import styles from './styles.module.css';
+
+/* * */
 
 export default function Component() {
 	//
@@ -27,8 +32,12 @@ export default function Component() {
 	// C. Render Components
 
 	return (
-		<Section className={styles.container} heading={t('heading')} subheading={t('subheading')} withTopBorder={false} withChildrenPadding>
-			<Button className={styles.button} icon={<IconArrowRight />} label={t('button')} onClick={handleClick} />
-		</Section>
+		<Surface>
+			<Section heading={t('heading')} subheading={t('subheading')} withPadding>
+				<Button className={styles.button} icon={<IconArrowRight />} label={t('button')} onClick={handleClick} />
+			</Section>
+		</Surface>
 	);
+
+	//
 }

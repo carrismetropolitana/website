@@ -3,8 +3,11 @@
 /* * */
 
 import FavoriteToggle from '@/components/common/FavoriteToggle';
+import { SelectOperationalDay } from '@/components/common/SelectOperationalDay';
 import { Section } from '@/components/layout/Section';
+import { Surface } from '@/components/layout/Surface';
 import LineBadge from '@/components/lines/LineBadge';
+import SelectActivePatternGroup from '@/components/lines/SelectActivePatternGroup';
 import { useLinesDetailContext } from '@/contexts/LinesDetail.context';
 import { useProfileContext } from '@/contexts/Profile.context';
 import toast from '@/utils/toast';
@@ -41,19 +44,39 @@ export default function Component() {
 	// C. Render components
 
 	if (!linesDetailContext.data.line) {
-		return <Section withTopBorder={false} backRouter withChildrenPadding />;
+		return null;
 	}
 
 	return (
-		<Section childrenWrapperStyles={styles.headingSection} withGap={false} withTopBorder={false} backRouter withChildrenPadding>
-			<div className={styles.headingSectionRow}>
-				<LineBadge line={linesDetailContext.data.line} size="lg" />
-				<FavoriteToggle color={linesDetailContext.data.line.color} isActive={linesDetailContext.flags.is_favorite} onToggle={handleToggleFavorite} />
-			</div>
-			<div className={styles.lineName}>
-				{linesDetailContext.data.line.long_name}
-			</div>
-		</Section>
+		<Surface>
+
+			<Section withBottomDivider withPadding>
+				<div className={styles.headingSection}>
+					<div className={styles.headingSectionRow}>
+						<LineBadge line={linesDetailContext.data.line} size="lg" />
+						<FavoriteToggle color={linesDetailContext.data.line.color} isActive={linesDetailContext.flags.is_favorite} onToggle={handleToggleFavorite} />
+					</div>
+					<div className={styles.lineName}>
+						{linesDetailContext.data.line.long_name}
+					</div>
+				</div>
+			</Section>
+
+			<Section withPadding>
+				{/* <div className={styles.patternSelectorExplainerWrapper}>
+					<SelectActivePatternGroupExplainer />
+				</div> */}
+				<div className={styles.container}>
+					<div className={styles.operationalDaySelectorWrapper}>
+						<SelectOperationalDay />
+					</div>
+					<div className={styles.patternSelectorWrapper}>
+						<SelectActivePatternGroup />
+					</div>
+				</div>
+			</Section>
+
+		</Surface>
 	);
 
 	//

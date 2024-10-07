@@ -9,6 +9,7 @@ import AlertListItem from '@/components/alerts/AlertsListItem';
 import AlertsListItemSkeleton from '@/components/alerts/AlertsListItemSkeleton';
 import GroupedListItem from '@/components/layout/GroupedListItem';
 import GroupedListSkeleton from '@/components/layout/GroupedListSkeleton';
+import { Surface } from '@/components/layout/Surface';
 import { useAlertsListContext } from '@/contexts/AlertsList.context';
 import collator from '@/utils/collator';
 import { Accordion } from '@mantine/core';
@@ -80,26 +81,32 @@ export default function Component() {
 
 	if (alertsListContext.flags.is_loading) {
 		return (
-			<GroupedListSkeleton groupCount={3} itemCount={2} itemSkeleton={<AlertsListItemSkeleton />} />
+			<Surface>
+				<GroupedListSkeleton groupCount={3} itemCount={2} itemSkeleton={<AlertsListItemSkeleton />} />
+			</Surface>
 		);
 	}
 
 	if (allAlertsGroupedByStartDate.length > 0) {
 		return (
-			allAlertsGroupedByStartDate.map(alertGroup => (
-				<GroupedListItem key={alertGroup.value} label={t('label', { count: alertGroup.items.length })} title={alertGroup.title}>
-					<Accordion>
-						{alertGroup.items.map(alert => (
-							<AlertListItem key={alert.alert_id} alertId={alert.alert_id} />
-						))}
-					</Accordion>
-				</GroupedListItem>
-			))
+			<Surface>
+				{allAlertsGroupedByStartDate.map(alertGroup => (
+					<GroupedListItem key={alertGroup.value} label={t('label', { count: alertGroup.items.length })} title={alertGroup.title}>
+						<Accordion>
+							{alertGroup.items.map(alert => (
+								<AlertListItem key={alert.alert_id} alertId={alert.alert_id} />
+							))}
+						</Accordion>
+					</GroupedListItem>
+				))}
+			</Surface>
 		);
 	}
 
 	return (
-		<AlertsListEmpty />
+		<Surface>
+			<AlertsListEmpty />
+		</Surface>
 	);
 
 	//

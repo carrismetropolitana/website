@@ -3,10 +3,8 @@
 /* * */
 
 import AlertsCarousel from '@/components/common/AlertsCarousel';
-import { Section } from '@/components/layout/Section';
+import { Surface } from '@/components/layout/Surface';
 import { useLinesDetailContext } from '@/contexts/LinesDetail.context';
-
-import styles from './styles.module.css';
 
 /* * */
 
@@ -21,16 +19,14 @@ export default function Component() {
 	//
 	// B. Render components
 
-	if (!linesDetailContext.data.line) {
-		return <Section withTopBorder={false} backRouter withChildrenPadding />;
+	if (!linesDetailContext.data.line || !linesDetailContext.data.active_alerts || linesDetailContext.data.active_alerts?.length === 0) {
+		return null;
 	}
 
 	return (
-		<>
-			{linesDetailContext.data.active_alerts && linesDetailContext.data.active_alerts?.length > 0 && (
-				<AlertsCarousel alerts={linesDetailContext.data.active_alerts} />
-			)}
-		</>
+		<Surface>
+			<AlertsCarousel alerts={linesDetailContext.data.active_alerts} />
+		</Surface>
 	);
 
 	//

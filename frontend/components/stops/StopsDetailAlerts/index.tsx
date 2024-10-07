@@ -3,7 +3,7 @@
 /* * */
 
 import AlertsCarousel from '@/components/common/AlertsCarousel';
-import { Section } from '@/components/layout/Section';
+import { Surface } from '@/components/layout/Surface';
 import { useStopsDetailContext } from '@/contexts/StopsDetail.context';
 
 /* * */
@@ -19,16 +19,14 @@ export function StopsDetailAlerts() {
 	//
 	// B. Render components
 
-	if (!stopsDetailContext.data.stop) {
-		return <Section withTopBorder={false} backRouter withChildrenPadding />;
+	if (!stopsDetailContext.data.stop || !stopsDetailContext.data.active_alerts || stopsDetailContext.data.active_alerts?.length === 0) {
+		return null;
 	}
 
 	return (
-		<>
-			{stopsDetailContext.data.active_alerts && stopsDetailContext.data.active_alerts?.length > 0 && (
-				<AlertsCarousel alerts={stopsDetailContext.data.active_alerts} />
-			)}
-		</>
+		<Surface>
+			<AlertsCarousel alerts={stopsDetailContext.data.active_alerts} />
+		</Surface>
 	);
 
 	//

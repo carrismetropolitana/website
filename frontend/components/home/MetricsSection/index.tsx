@@ -25,7 +25,7 @@ export default function Component() {
 	// B. Render components
 
 	return (
-		<Surface>
+		<Surface variant="default">
 			<Section heading={t('heading')} withPadding>
 				<Grid columns="ab" withGap>
 					<MetricsSectionDemand />
