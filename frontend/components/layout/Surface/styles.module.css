@@ -69,29 +69,29 @@
 @keyframes rotate-background {
 	0% {
 		--border-angle: 0deg;
-		--border-spread: 10%;
+		--border-spread: 6%;
 	}
-	20% {
+	25% {
 		--border-angle: 90deg;
-		--border-spread: 1%;
+		--border-spread: 6%;
 	}
 	50% {
 		--border-angle: 180deg;
-		--border-spread: 10%;
+		--border-spread: 6%;
 	}
-	70% {
+	75% {
 		--border-angle: 270deg;
-		--border-spread: 1%;
+		--border-spread: 6%;
 	}
 	100% {
 		--border-angle: 360deg;
-		--border-spread: 10%;
+		--border-spread: 6%;
 	}
 }
 
 .container.standout {
 	--border-angle: 0deg;
-	--border-spread: 1%;
+	--border-spread: 6%;
 	display: flex;
 	width: 100%;
 	background-color: transparent;
