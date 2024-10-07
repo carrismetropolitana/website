@@ -263,10 +263,6 @@
 			"more_info": "More information",
 			"open_full_image": "Open image in new window"
 		},
-		"AlertsList": {
-			"heading": "Service Alerts",
-			"subheading": "Stay up to date with all changes on the network. Lorem ipsum dolor sit amet."
-		},
 		"AlertsListEmpty": {
 			"default": {
 				"action_1": "Check Active Alerts Today",
@@ -298,7 +294,9 @@
 				"stops_label": "Filter by stop",
 				"text_search": "Search alert by title, description, location..."
 			},
-			"found_items_counter": "{count, plural, =0 {No alerts found.} one {Found # alert:} other {Found # alert:}}"
+			"found_items_counter": "{count, plural, =0 {No alerts found.} one {Found # alert:} other {Found # alert:}}",
+			"heading": "Alertas de Serviço",
+			"subheading": "Fique a par de todas as alterações à rede. Lorem ipsum dolor sit amet."
 		},
 		"SelectCause": {
 			"placeholder": "Filter by cause"
@@ -801,11 +799,6 @@
 		"expand_filters": "Expand Filters"
 	},
 	"stores": {
-		"StoresList": {
-			"external_link": "Navigator® agent network",
-			"heading": "Stores and Agent Network",
-			"subheading": "Available to all passengers, Navante® Spaces are dedicated to providing information about the Carris Metropolitana network and ticketing, enabling queries to be clarified, the issuance of Navante® cards and membership to profiles and discounts. It is also possible to load titles at PayShop® service points within the Navante® agent network."
-		},
 		"StoresListEmpty": {
 			"by_municipality": {
 				"action_1": "Consult Store Opening Hours",
@@ -862,12 +855,15 @@
 			"by_municipality": {
 				"label": "Filter by Municipality"
 			},
+			"external_link": "Rede de agentes navegante®",
 			"filter_by": {
 				"capacity": "Pessoas em espera",
 				"municipality_name": "Município",
 				"time": "Tempo de espera"
 			},
-			"found_items_counter": "{count, plural, =0 {No stores found.} one {Found # store:} other {Found # stores:}}"
+			"found_items_counter": "{count, plural, =0 {No stores found.} one {Found # store:} other {Found # stores:}}",
+			"heading": "Lojas e Rede de Agentes",
+			"subheading": "Disponíveis para todos os passageiros, os Espaços navegante® estão dedicados a prestar informações sobre a rede e bilhética Carris Metropolitana, possibilitando o esclarecimento de dúvidas, a emissão de cartões navegante® e a adesão a perfis e descontos. É possível também efetuar o carregamento de títulos nos pontos de atendimento PayShop® da rede de agentes navegante®."
 		}
 	},
 	"toast": {
