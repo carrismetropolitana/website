@@ -10,7 +10,7 @@
 	width: 100%;
 }
 
-@media screen and (width <= 900px) {
+@media screen and (width <= 1000px) {
 	.container {
 		grid-template:
 			"b" minmax(200px, auto) [b_]
@@ -27,10 +27,12 @@
 	grid-area: b;
 	height: 100%;
 	max-height: calc(100vh - var(--size-height-header));;
+	border-left: 1px solid var(--color-system-border-100);
 }
 
-@media screen and (width <= 900px) {
+@media screen and (width <= 1000px) {
 	.mapWrapper {
 		position: static;
+		border: none;
 	}
 }

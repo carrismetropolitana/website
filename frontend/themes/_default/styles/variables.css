@@ -125,6 +125,14 @@
 	--color-alerts-3: #E64B23;
 
 	/* * */
+	/* COLOR / SOCIAL */
+
+	--color-social-facebook: #4267B2;
+	--color-social-instagram: #E1306C;
+	--color-social-twitter: #1DA1F2;
+	--color-social-whatsapp: #128C7E;
+
+	/* * */
 	/* BOX-SHADOW */
 
 	--box-shadow-md: 0 0 50px 0 red;

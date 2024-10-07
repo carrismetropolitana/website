@@ -46,9 +46,10 @@
 	gap: var(--size-spacing-10) var(--size-spacing-20);
 	align-items: center;
 	justify-content: center;
+	width: 100%;
 }
 
-@media screen and (width <= 900px) {
+@media screen and (width <= 1000px) {
 
 	.container {
 		grid-template-columns: 1fr;
@@ -62,7 +63,7 @@
 	justify-self: flex-end;
 }
 
-@media screen and (width <= 900px) {
+@media screen and (width <= 1000px) {
 
 	.patternSelectorExplainerWrapper {
 		margin-top: var(--size-spacing-20);

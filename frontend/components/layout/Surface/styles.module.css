@@ -113,3 +113,14 @@
 	border: 1px solid var(--color-system-border-100);
 	border-radius: calc(var(--border-radius-lg) - var(--border-size));
 }
+
+@media screen and (width <= 650px) {
+	.container.standout,
+	.container.standout .inner {
+		margin-right: 0;
+		margin-left: 0;
+		border-right: none;
+		border-left: none;
+		border-radius: unset;
+	}
+}

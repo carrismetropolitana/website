@@ -30,7 +30,6 @@
 		border-color: transparent;
 		border-bottom-color: var(--color-system-border-100);
 		border-radius: 0;
-		box-shadow: none;
 	}
 }
 
@@ -38,6 +37,7 @@
 	.container,
 	.container.isSticky {
 		width: 100%;
+		box-shadow: none;
 		transform: none;
 	}
 }

@@ -1,18 +1,4 @@
 /* * */
-/* CONTAINER */
-
-.container {
-	display: flex;
-	flex-direction: column;
-}
-
-@media (max-width: 500px) {
-	.container {
-		margin-top: var(--size-spacing-30);
-	}
-}
-
-/* * */
 /* SECTION WRAPPER */
 
 .sectionWrapper {
@@ -20,7 +6,6 @@
 	flex-direction: column;
 	gap: var(--size-spacing-20);
 	padding: var(--size-spacing-20);
-	background-color: var(--color-system-background-100);
 	border-top: 1px solid var(--color-system-border-100);
 }
 
@@ -32,12 +17,13 @@
 	flex-direction: row;
 	gap: var(--size-spacing-30);
 	align-items: center;
+	width: 100%;
 }
 
-@media (max-width: 500px) {
+@media (width <= 500px) {
 	.linksWrapper {
-		gap: var(--size-spacing-15);
 		flex-direction: column;
+		gap: var(--size-spacing-15);
 	}
 }
 

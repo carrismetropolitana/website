@@ -5,7 +5,7 @@
 	grid-template-columns: repeat(4, 1fr);
 }
 
-@media screen and (width <= 900px) {
+@media screen and (width <= 1000px) {
 	.gridNav {
 		grid-template-columns: 1fr 1fr;
 	}

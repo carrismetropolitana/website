@@ -1,32 +1,4 @@
 /* * */
-/* INTRO WRAPPER */
-
-.introWrapper {
-	display: grid;
-	grid-template-columns: 1fr 1fr;
-	gap: 1px;
-
-	/* gap: 15px; */
-	/* padding: 15px 0; */
-	/* background-color: var(--color-system-background-100); */
-}
-
-@media only screen and (width <= 900px) {
-	.introWrapper {
-		grid-template-columns: 1fr;
-	}
-}
-
-/* * */
-/* QUICK SEARCH WRAPPER */
-
-@media only screen and (width <= 900px) {
-	.quickSearchWrapper {
-		display: none;
-	}
-}
-
-/* * */
 /* CAROUSEL WRAPPER */
 
 .carouselWrapper {

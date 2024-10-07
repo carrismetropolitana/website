@@ -10,7 +10,7 @@
 	min-height: 100vh;
 }
 
-@media screen and (width <= 900px) {
+@media screen and (width <= 1000px) {
 	.container {
 		grid-template:
 			"b" minmax(200px, auto) [b_]
@@ -42,7 +42,7 @@
 	max-height: calc(100vh - var(--size-height-header));;
 }
 
-@media screen and (width <= 900px) {
+@media screen and (width <= 1000px) {
 	.mapWrapper {
 		position: static;
 	}

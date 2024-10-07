@@ -2,6 +2,8 @@
 
 import FooterDebugToggle from '@/components/footer/DebugToggle';
 import FooterVersionControl from '@/components/footer/VersionControl';
+import { Section } from '@/components/layout/Section';
+import { Surface } from '@/components/layout/Surface';
 import { Link } from '@/i18n/routing';
 import { footerNavigationGroup } from '@/settings/navigation.settings';
 import { useTranslations } from 'next-intl';
@@ -34,24 +36,32 @@ export default function Component() {
 	// C. Render Components
 
 	return (
-		<footer className={styles.container}>
-			<div className={`${styles.sectionWrapper} ${styles.linksWrapper}`}>
-				{primaryMenuItemsFormatted.map(item => (<Link key={item._id} className={styles.primaryLink} href={item.href} target={item.target}>{item.label}</Link>))}
-			</div>
-			<div className={styles.sectionWrapper}>
+		<Surface>
+			<Section withBottomDivider withPadding>
 				<div className={styles.linksWrapper}>
-					{secondaryMenuItemsFormatted.map(item => (<Link key={item._id} className={styles.secondaryLink} href={item.href} target={item.target}>{item.label}</Link>))}
+					<div className={styles.linksWrapper}>
+						{primaryMenuItemsFormatted.map(item => (
+							<Link key={item._id} className={styles.primaryLink} href={item.href} target={item.target}>{item.label}</Link>
+						))}
+					</div>
+					<SocialIcons />
+				</div>
+			</Section>
+			<Section withBottomDivider withGap withPadding>
+				<div className={styles.linksWrapper}>
+					{secondaryMenuItemsFormatted.map(item => (
+						<Link key={item._id} className={styles.secondaryLink} href={item.href} target={item.target}>{item.label}</Link>
+					))}
 				</div>
 				<div className={styles.linksWrapper}>
 					<FooterVersionControl className={styles.tertiaryLink} />
 					<FooterDebugToggle className={styles.tertiaryLink} />
-					<SocialIcons />
 				</div>
 				<div className={styles.linksWrapper}>
 					<p className={styles.copyright}>{t('copyright', { year: currentYear })}</p>
 				</div>
-			</div>
-		</footer>
+			</Section>
+		</Surface>
 	);
 
 	//

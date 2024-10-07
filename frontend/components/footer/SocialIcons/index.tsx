@@ -1,23 +1,28 @@
-import { IconsSocial } from '@/settings/assets.settings';
+/* * */
+
 import { Routes } from '@/utils/routes';
-import { Flex, Image } from '@mantine/core';
+import { IconBrandFacebook, IconBrandInstagram, IconBrandTwitter, IconBrandWhatsapp } from '@tabler/icons-react';
 import Link from 'next/link';
+
+import styles from './styles.module.css';
+
+/* * */
 
 export default function Component() {
 	return (
-		<Flex gap={10}>
-			<Link href={Routes.FACEBOOK} rel="noopener noreferrer" target="_blank">
-				<Image alt="Facebook" height={24} src={IconsSocial.facebook} width={24} />
+		<div className={styles.container}>
+			<Link className={`${styles.iconWtapper} ${styles.facebook}`} href={Routes.FACEBOOK} rel="noopener noreferrer" target="_blank">
+				<IconBrandFacebook />
 			</Link>
-			<Link href={Routes.X} rel="noopener noreferrer" target="_blank">
-				<Image alt="X" height={24} src={IconsSocial.x} width={24} />
+			<Link className={`${styles.iconWtapper} ${styles.instagram}`} href={Routes.INSTAGRAM} rel="noopener noreferrer" target="_blank">
+				<IconBrandInstagram />
 			</Link>
-			<Link href={Routes.INSTAGRAM} rel="noopener noreferrer" target="_blank">
-				<Image alt="Instagram" height={24} src={IconsSocial.instagram} width={24} />
+			<Link className={`${styles.iconWtapper} ${styles.twitter}`} href={Routes.X} rel="noopener noreferrer" target="_blank">
+				<IconBrandTwitter />
 			</Link>
-			<Link href={Routes.WHATSAPP} rel="noopener noreferrer" target="_blank">
-				<Image alt="WhatsApp" height={24} src={IconsSocial.whatsapp} width={24} />
+			<Link className={`${styles.iconWtapper} ${styles.whatsapp}`} href={Routes.WHATSAPP} rel="noopener noreferrer" target="_blank">
+				<IconBrandWhatsapp />
 			</Link>
-		</Flex>
+		</div>
 	);
 }

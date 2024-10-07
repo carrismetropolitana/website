@@ -1,0 +1,28 @@
+/* * */
+/* CONTAINER */
+
+.container {
+	display: flex;
+	flex-direction: row;
+	gap: var(--size-spacing-20);
+	color: var(--color-system-text-200);
+}
+
+/* * */
+/* ICONS */
+
+.facebook:hover {
+	color: var(--color-social-facebook);
+}
+
+.instagram:hover {
+	color: var(--color-social-instagram);
+}
+
+.twitter:hover {
+	color: var(--color-social-twitter);
+}
+
+.whatsapp:hover {
+	color: var(--color-social-whatsapp);
+}
