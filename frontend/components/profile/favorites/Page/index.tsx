@@ -3,6 +3,7 @@
 /* * */
 
 import { Section } from '@/components/layout/Section';
+import { Surface } from '@/components/layout/Surface';
 import LinesListViewFavorites from '@/components/lines/LinesListViewFavorites';
 import PageToolbar from '@/components/profile/favorites/PageToolbar';
 import { StopsListViewFavorites } from '@/components/stops/StopsListViewFavorites';
@@ -24,12 +25,12 @@ export default function Component() {
 	// B. Render components
 
 	return (
-		<>
-			<Section heading={t('heading')} withTopBorder={false} />
+		<Surface>
+			<Section heading={t('heading')} withPadding />
 			<PageToolbar />
 			{(!profileContext.flags.is_loading && profileContext.filters.favorites === 'lines') && <LinesListViewFavorites />}
 			{(!profileContext.flags.is_loading && profileContext.filters.favorites === 'stops') && <StopsListViewFavorites />}
-		</>
+		</Surface>
 	);
 
 	//
