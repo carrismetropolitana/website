@@ -221,7 +221,7 @@
 
 /* * */
 
-@media (width <= 500px) {
+@media screen and (width <= 650px) {
   :root {
 
 		/* * */

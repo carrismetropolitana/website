@@ -10,7 +10,7 @@
 	padding-top: 0;
 }
 
-@media (width <= 500px) {
+@media screen and (width <= 650px) {
 	.container {
 		display: flex;
 		flex-direction: column;

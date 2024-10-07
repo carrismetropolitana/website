@@ -56,13 +56,18 @@
 }
 
 @media only screen and (width <= 900px) {
+	.root:hover {
+		box-shadow: none;
+		transform: unset;
+	}
+}
+
+@media only screen and (width <= 650px) {
 	.root {
 		border-radius: unset;
 	}
 	.root:hover {
 		border-radius: unset;
-		box-shadow: none;
-		transform: unset;
 	}
 }
 

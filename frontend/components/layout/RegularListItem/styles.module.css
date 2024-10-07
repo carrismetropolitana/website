@@ -26,7 +26,7 @@
 	border-bottom: none;
 }
 
-@media (width <= 500px) {
+@media screen and (width <= 650px) {
 	.container,
 	.container:hover,
 	.container:active {

@@ -40,7 +40,28 @@
 	grid-template-columns: 1fr 1fr 1fr 1fr;
 }
 
-@media screen and (width <= 500px) {
+@media screen and (width <= 900px) {
+	.container.a {
+		grid-template-columns: 1fr;
+	}
+	.container.aab {
+		grid-template-columns: 1fr;
+	}
+	.container.ab {
+		grid-template-columns: 1fr;
+	}
+	.container.abb {
+		grid-template-columns: 1fr;
+	}
+	.container.abc {
+		grid-template-columns: 1fr 1fr;
+	}
+	.container.abcd {
+		grid-template-columns: 1fr 1fr;
+	}
+}
+
+@media screen and (width <= 650px) {
 	.container.a {
 		grid-template-columns: 1fr;
 	}

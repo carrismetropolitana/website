@@ -27,7 +27,7 @@
 	border-color: var(--color-system-border-300);
 }
 
-@media (width <= 500px) {
+@media screen and (width <= 650px) {
 	.container,
 	.container:hover,
 	.container:active {
