@@ -9,8 +9,8 @@
 	margin: auto;
 }
 
-/* @media screen and (width <= 500px) {
+@media screen and (width <= 500px) {
 	.container {
-		gap: 0;
+		margin-top: -20px;
 	}
-} */
+}
