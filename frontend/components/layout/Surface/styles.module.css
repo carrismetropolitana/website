@@ -9,6 +9,12 @@
 	border-radius: var(--border-radius-lg);
 }
 
+@media screen and (width <= 500px) {
+	.container {
+		border-radius: 0;
+	}
+}
+
 /* * */
 /* CONTAINER / VARIANTS */
 
@@ -27,6 +33,13 @@
 
 .container.standout {
 	background-color: var(--color-system-background-100);
+}
+
+@media screen and (width <= 500px) {
+	.container.default {
+		background-color: var(--color-system-background-200);
+		border: none;
+	}
 }
 
 /* * */

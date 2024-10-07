@@ -4,9 +4,3 @@
 .gridNav {
 	grid-template-columns: repeat(2, 1fr);
 }
-
-@media (width <= 500px) {
-	.gridNav {
-		padding-top: var(--size-spacing-10);
-	}
-}

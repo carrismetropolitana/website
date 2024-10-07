@@ -1,5 +1,4 @@
 /* * */
-
 /* OVERLAY */
 
 .overlay {
@@ -36,19 +35,18 @@
 
 
 /* * */
-
 /* ROOT */
 
 .root {
 	overflow: hidden;
 	cursor: grab;
 	background-color: var(--color-brand);
+	border-radius: var(--border-radius-lg);
 	transition: all 200ms ease;
 }
 
 .root:hover {
 	z-index: 505;
-	border-radius: 10px;
 	box-shadow: 0 0 15px 0 rgb(0 0 0 / 10%);
 	transform: scale(1.05)
 }
@@ -58,6 +56,9 @@
 }
 
 @media only screen and (width <= 900px) {
+	.root {
+		border-radius: unset;
+	}
 	.root:hover {
 		border-radius: unset;
 		box-shadow: none;
@@ -67,7 +68,6 @@
 
 
 /* * */
-
 /* CONTROL */
 
 .control {
@@ -112,7 +112,6 @@
 }
 
 /* * */
-
 /* CONTROLS WRAPPER */
 
 .controlsWrapper {
@@ -130,7 +129,6 @@
 }
 
 /* * */
-
 /* SLIDE WRAPPER */
 
 .slideWrapper {

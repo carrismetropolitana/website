@@ -40,10 +40,10 @@ export default function Component() {
 
 	return (
 		<Section heading={t('heading')} withBottomDivider withGap withPadding>
-			<SegmentedControl data={currentViewOptions} onChange={linesContext.actions.updateFilterByCurrentView} value={linesContext.filters.by_current_view} fullWidth />
+			<SegmentedControl data={currentViewOptions} onChange={linesContext.actions.updateFilterByCurrentView} value={linesContext.filters.by_current_view} w="100%" fullWidth />
 			{linesContext.filters.by_current_view === 'all' && (
 				<>
-					<TextInput leftSection={<IconArrowLoopRight size={20} />} onChange={handleTextInputChange} placeholder={t('by_search.placeholder')} type="search" value={linesContext.filters.by_search} />
+					<TextInput leftSection={<IconArrowLoopRight size={20} />} onChange={handleTextInputChange} placeholder={t('by_search.placeholder')} type="search" value={linesContext.filters.by_search} w="100%" />
 					<FoundItemsCounter text={t('found_items_counter.all', { count: linesContext.data.filtered.length })} />
 				</>
 			)}

@@ -8,3 +8,9 @@
 	max-width: var(--size-max-width-viewport);
 	margin: auto;
 }
+
+/* @media screen and (width <= 500px) {
+	.container {
+		gap: 0;
+	}
+} */

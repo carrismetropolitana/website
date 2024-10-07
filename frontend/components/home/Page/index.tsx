@@ -18,7 +18,9 @@ export default function Component() {
 	return (
 		<>
 			<Grid columns="ab" withGap>
-				<QuickSearch />
+				<only-desktop>
+					<QuickSearch />
+				</only-desktop>
 				<div className={styles.carouselWrapper}>
 					<MainCarousel />
 				</div>

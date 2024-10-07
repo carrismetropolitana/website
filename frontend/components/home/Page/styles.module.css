@@ -31,7 +31,11 @@
 
 .carouselWrapper {
 	aspect-ratio: 16/9;
+}
 
-	/* overflow: hidden; */
-	/* border-radius: 18px; */
+@media only screen and (width <= 500px) {
+	.carouselWrapper {
+		margin-top: -20px;
+		border-radius: unset;
+	}
 }
