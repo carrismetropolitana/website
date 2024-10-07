@@ -9,6 +9,7 @@ import SchedulesSection from '@/components/home/SchedulesSection';
 import SupportSection from '@/components/home/SupportSection';
 import TarifsSection from '@/components/home/TarifsSection';
 import { Grid } from '@/components/layout/Grid';
+import { FormatDesktop } from '@/components/responsive/FormatSwitch';
 
 import styles from './styles.module.css';
 
@@ -18,9 +19,9 @@ export default function Component() {
 	return (
 		<>
 			<Grid columns="ab" withGap>
-				<only-desktop>
+				<FormatDesktop>
 					<QuickSearch />
-				</only-desktop>
+				</FormatDesktop>
 				<div className={styles.carouselWrapper}>
 					<MainCarousel />
 				</div>

@@ -1,7 +1,7 @@
 'use client';
 
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/common/Card';
-import { ThemeDark, ThemeLight } from '@/components/common/Theme';
+import { ThemeDark, ThemeLight } from '@/components/responsive/ThemeSwitch';
 import { Grid } from '@/components/layout/Grid';
 import { Section } from '@/components/layout/Section';
 import { Surface } from '@/components/layout/Surface';

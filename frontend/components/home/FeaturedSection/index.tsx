@@ -4,8 +4,6 @@ import FeaturedSectionCard from '@/components/home/FeaturedSectionCard';
 import { Grid } from '@/components/layout/Grid';
 import { ImagesHome } from '@/settings/assets.settings';
 
-import styles from './styles.module.css';
-
 /* * */
 
 export default function Component() {

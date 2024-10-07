@@ -208,13 +208,13 @@
 /* * */
 
 @media only screen and (width <= 900px) {
-	only-desktop {
+	format-desktop {
 		display: none;
 	}
 }
 
 @media only screen and (width >= 901px) {
-	only-mobile {
+	format-mobile {
 		display: none;
 	}
 }
