@@ -16,23 +16,18 @@
 }
 
 /* * */
-/* CONTAINER / VARIANTS */
+/* CONTAINER / MODIFIERS */
+
+.forceOverflow {
+	overflow: hidden;
+}
+
+/* * */
+/* CONTAINER / VARIANTS / DEFAULT */
 
 .container.default {
 	background-color: var(--color-system-background-100);
 	border: 1px solid var(--color-system-border-100);
-}
-
-.container.brand {
-	background-color: var(--color-brand);
-}
-
-.container.muted {
-	background-color: var(--color-system-background-100);
-}
-
-.container.standout {
-	background-color: var(--color-system-background-100);
 }
 
 @media screen and (width <= 500px) {
@@ -43,8 +38,78 @@
 }
 
 /* * */
-/* CONTAINER / MODIFIER */
+/* CONTAINER / VARIANTS / BRAND */
 
-.forceOverflow {
-	overflow: hidden;
+.container.brand {
+	background-color: var(--color-brand);
+}
+
+/* * */
+/* CONTAINER / VARIANTS / MUTED */
+
+.container.muted {
+	background-color: var(--color-system-background-100);
+}
+
+/* * */
+/* CONTAINER / VARIANTS / STANDOUT */
+
+@property --border-angle {
+	syntax: "<angle>";
+	inherits: true;
+	initial-value: 0deg;
+}
+
+@property --border-spread {
+	syntax: "<percentage>";
+	inherits: true;
+	initial-value: 1%;
+}
+
+@keyframes rotate-background {
+	0% {
+		--border-angle: 0deg;
+		--border-spread: 10%;
+	}
+	20% {
+		--border-angle: 90deg;
+		--border-spread: 1%;
+	}
+	50% {
+		--border-angle: 180deg;
+		--border-spread: 10%;
+	}
+	70% {
+		--border-angle: 270deg;
+		--border-spread: 1%;
+	}
+	100% {
+		--border-angle: 360deg;
+		--border-spread: 10%;
+	}
+}
+
+.container.standout {
+	--border-angle: 0deg;
+	--border-spread: 1%;
+	display: flex;
+	width: 100%;
+	background-color: transparent;
+	background-image: conic-gradient(
+		from var(--border-angle) at 50% 50%,
+		transparent,
+		var(--color-system-border-200) var(--border-spread),
+		transparent 1%,
+		transparent
+	);
+	border-radius: var(--border-radius-lg);
+	animation: rotate-background 7000ms linear infinite;
+}
+
+.inner {
+	--border-size: 1px;
+	margin: var(--border-size);
+	background: var(--color-system-background-100);
+	border: 1px solid var(--color-system-border-100);
+	border-radius: calc(var(--border-radius-lg) - var(--border-size));
 }
