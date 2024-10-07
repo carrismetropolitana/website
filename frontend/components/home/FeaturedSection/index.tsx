@@ -1,7 +1,7 @@
 /* * */
 
 import FeaturedSectionCard from '@/components/home/FeaturedSectionCard';
-import { Section } from '@/components/layout/Section';
+import { Grid } from '@/components/layout/Grid';
 import { ImagesHome } from '@/settings/assets.settings';
 
 import styles from './styles.module.css';
@@ -10,10 +10,10 @@ import styles from './styles.module.css';
 
 export default function Component() {
 	return (
-		<Section childrenWrapperStyles={styles.innerWrapper} withTopPadding={false} withChildrenPadding>
+		<Grid columns="abc" withGap>
 			<FeaturedSectionCard coverImageSrc={ImagesHome.DRIVERS} href="#" title="1" />
 			<FeaturedSectionCard coverImageSrc={ImagesHome.CASO_DE_ESTUDO_LOURES} href="#" title="2" />
 			<FeaturedSectionCard coverImageSrc="#" href="#" title="3" />
-		</Section>
+		</Grid>
 	);
 }

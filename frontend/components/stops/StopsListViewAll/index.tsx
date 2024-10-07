@@ -7,8 +7,6 @@ import { useStopsListContext } from '@/contexts/StopsList.context';
 import { RoutesSchedule } from '@/utils/routes';
 import { AutoSizer, CellMeasurer, CellMeasurerCache, List, WindowScroller } from 'react-virtualized';
 
-import styles from './styles.module.css';
-
 /* * */
 
 const rowMeasurementsCache = new CellMeasurerCache({
@@ -37,7 +35,7 @@ export function StopsListViewAll() {
 	// C. Render components
 
 	return (
-		<Section childrenWrapperStyles={styles.container} withChildrenPadding={false} withTopPadding={false}>
+		<Section>
 			<AutoSizer disableHeight={true} onResize={handleResize}>
 				{({ width }) => (
 					<WindowScroller>

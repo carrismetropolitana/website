@@ -34,7 +34,7 @@
 	gap: var(--size-spacing-30);
 	justify-content: space-between;
 	width: 100%;
-	max-width: var(--size-width-global);
+	max-width: var(--size-max-width-viewport);
 	height: 100%;
 	margin: auto;
 	background-color: var(--color-system-background-100);

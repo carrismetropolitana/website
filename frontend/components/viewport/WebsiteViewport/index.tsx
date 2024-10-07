@@ -11,7 +11,7 @@ import styles from './styles.module.css';
 
 /* * */
 
-export default function Component({ children }) {
+export function WebsiteViewport({ children }) {
 	//
 
 	//

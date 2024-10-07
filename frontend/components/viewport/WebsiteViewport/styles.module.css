@@ -1,0 +1,10 @@
+/* * */
+/* CONTAINER */
+
+.container {
+	display: flex;
+	flex-direction: column;
+	gap: var(--size-spacing-20);
+	max-width: var(--size-max-width-viewport);
+	margin: auto;
+}

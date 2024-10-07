@@ -9,8 +9,6 @@ import { SegmentedControl, TextInput } from '@mantine/core';
 import { IconArrowLoopRight } from '@tabler/icons-react';
 import { useTranslations } from 'next-intl';
 
-import styles from './styles.module.css';
-
 /* * */
 
 export function StopsListToolbar() {
@@ -33,11 +31,6 @@ export function StopsListToolbar() {
 	//
 	// C. Handle actions
 
-	const handleFormSubmit = (event) => {
-		event.preventDefault();
-		return false;
-	};
-
 	const handleTextInputChange = ({ currentTarget }) => {
 		stopsListContext.actions.updateFilterBySearch(currentTarget.value);
 	};
@@ -46,21 +39,18 @@ export function StopsListToolbar() {
 	// D. Render components
 
 	return (
-		<>
-			<Section childrenWrapperStyles={styles.container} heading={t('heading')} withTopBorder={false} withChildrenPadding>
-				<SegmentedControl data={currentViewOptions} onChange={stopsListContext.actions.updateFilterByCurrentView} value={stopsListContext.filters.by_current_view} fullWidth />
-				{stopsListContext.filters.by_current_view === 'all' && (
-					<form className={styles.container} onSubmit={handleFormSubmit}>
-						<TextInput leftSection={<IconArrowLoopRight size={20} />} onChange={handleTextInputChange} placeholder={t('filters.by_search.placeholder')} type="search" value={stopsListContext.filters.by_search} />
-						<FoundItemsCounter text={t('found_items_counter.all', { count: stopsListContext.data.filtered.length })} />
-					</form>
-				)}
-				{stopsListContext.filters.by_current_view === 'favorites' && (
-					<FoundItemsCounter text={t('found_items_counter.favorites', { count: stopsListContext.data.favorites.length })} />
-				)}
-			</Section>
-
-		</>
+		<Section heading={t('heading')} withBottomDivider withGap withPadding>
+			<SegmentedControl data={currentViewOptions} onChange={stopsListContext.actions.updateFilterByCurrentView} value={stopsListContext.filters.by_current_view} fullWidth />
+			{stopsListContext.filters.by_current_view === 'all' && (
+				<>
+					<TextInput leftSection={<IconArrowLoopRight size={20} />} onChange={handleTextInputChange} placeholder={t('filters.by_search.placeholder')} type="search" value={stopsListContext.filters.by_search} />
+					<FoundItemsCounter text={t('found_items_counter.all', { count: stopsListContext.data.filtered.length })} />
+				</>
+			)}
+			{stopsListContext.filters.by_current_view === 'favorites' && (
+				<FoundItemsCounter text={t('found_items_counter.favorites', { count: stopsListContext.data.favorites.length })} />
+			)}
+		</Section>
 	);
 
 	//

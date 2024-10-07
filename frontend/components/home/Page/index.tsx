@@ -8,6 +8,7 @@ import QuickSearch from '@/components/home/QuickSearch';
 import SchedulesSection from '@/components/home/SchedulesSection';
 import SupportSection from '@/components/home/SupportSection';
 import TarifsSection from '@/components/home/TarifsSection';
+import { Grid } from '@/components/layout/Grid';
 
 import styles from './styles.module.css';
 
@@ -16,14 +17,12 @@ import styles from './styles.module.css';
 export default function Component() {
 	return (
 		<>
-			<div className={styles.introWrapper}>
-				<div className={styles.quickSearchWrapper}>
-					<QuickSearch />
-				</div>
+			<Grid columns="ab" withGap>
+				<QuickSearch />
 				<div className={styles.carouselWrapper}>
 					<MainCarousel />
 				</div>
-			</div>
+			</Grid>
 			<SchedulesSection />
 			<NewsSection />
 			<TarifsSection />

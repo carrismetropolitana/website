@@ -37,16 +37,16 @@
 	display: flex;
 	flex-direction: column;
 	gap: var(--size-spacing-15);
-	justify-content: flex-start;
 	align-items: flex-start;
+	justify-content: flex-start;
 	width: 100%;
 }
 
 .searchInputWrapper {
-	width: 100%;
 	display: flex;
 	flex-direction: column;
-	justify-content: flex-start;
-	align-items: stretch;
 	gap: 10px;
+	align-items: stretch;
+	justify-content: flex-start;
+	width: 100%;
 }

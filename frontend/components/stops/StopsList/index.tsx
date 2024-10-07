@@ -2,6 +2,7 @@
 
 /* * */
 
+import { Surface } from '@/components/layout/Surface';
 import { StopsListToolbar } from '@/components/stops/StopsListToolbar';
 import { StopsListViewAll } from '@/components/stops/StopsListViewAll';
 import { StopsListViewFavorites } from '@/components/stops/StopsListViewFavorites';
@@ -22,12 +23,12 @@ export function StopsList() {
 	// B. Render components
 
 	return (
-		<>
+		<Surface forceOverflow>
 			<StopsListToolbar />
 			{stopsListContext.flags.is_loading && <StopsListViewSkeleton />}
 			{(!stopsListContext.flags.is_loading && stopsListContext.filters.by_current_view === 'all') && <StopsListViewAll />}
 			{(!stopsListContext.flags.is_loading && stopsListContext.filters.by_current_view === 'favorites') && <StopsListViewFavorites />}
-		</>
+		</Surface>
 	);
 
 	//

@@ -8,8 +8,6 @@ import { useLinesListContext } from '@/contexts/LinesList.context';
 import { RoutesSchedule } from '@/utils/routes';
 import { useTranslations } from 'next-intl';
 
-import styles from './styles.module.css';
-
 /* * */
 
 export default function Component() {
@@ -26,14 +24,14 @@ export default function Component() {
 
 	if (!linesContext.data.favorites.length) {
 		return (
-			<Section childrenWrapperStyles={styles.container} withChildrenPadding={false} withTopPadding={false}>
+			<Section>
 				<NoDataLabel text={t('no_favorites')} withMinHeight />
 			</Section>
 		);
 	}
 
 	return (
-		<Section childrenWrapperStyles={styles.container} withChildrenPadding={false} withTopPadding={false}>
+		<Section>
 			{linesContext.data.favorites.map(line => (
 				<RegularListItem key={line.line_id} href={`${RoutesSchedule.LINES.route}/${line.line_id}`}>
 					<LineDisplay line={line} />

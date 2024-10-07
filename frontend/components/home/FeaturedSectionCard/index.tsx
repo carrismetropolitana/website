@@ -1,5 +1,6 @@
 /* * */
 
+import { Section } from '@/components/layout/Section';
 import { Link } from '@/i18n/routing';
 import { ImagesCommon } from '@/settings/assets.settings';
 import { Image } from '@mantine/core';
@@ -23,9 +24,11 @@ export default function Component({ coverImageSrc, href, title }: FeaturedSectio
 	// C. Render Components
 
 	return (
-		<Link href={href}>
-			<Image alt={title} className={styles.coverImage} fallbackSrc={ImagesCommon.PLACEHOLDER} src={coverImageSrc} />
-		</Link>
+		<Section>
+			<Link href={href}>
+				<Image alt={title} className={styles.coverImage} fallbackSrc={ImagesCommon.PLACEHOLDER} src={coverImageSrc} />
+			</Link>
+		</Section>
 	);
 
 	//

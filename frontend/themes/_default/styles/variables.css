@@ -69,8 +69,12 @@
 	/* * */
 	/* SIZE / WIDTH */
 
-	--size-width-global: 1200px;
-	--size-width-heading: 700px;
+	--size-max-width-viewport: 1200px;
+	--size-max-width-text: 700px;
+
+	/* * */
+	/* SIZE / HEIGHT */
+
 	--size-height-header: 71px; /* Default SSR value */
 
 	/* * */
@@ -92,8 +96,14 @@
 	--font-weight-bold: 700; /* SemiBold */
 	--font-weight-semibold: 600; /* SemiBold */
 	--font-weight-medium: 500; /* Medium */
+
+	/* * */
+	/* FONT / HEADING  */
+
 	--font-size-heading: 26px;
 	--font-weight-heading: 700; /* Bold */
+
+	/* * */
 	--font-size-title: 20px;
 	--font-weight-title: 600; /* SemiBold */
 	--font-size-subtitle: 18px;

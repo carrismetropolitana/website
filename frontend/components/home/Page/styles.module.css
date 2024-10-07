@@ -20,12 +20,6 @@
 /* * */
 /* QUICK SEARCH WRAPPER */
 
-.quickSearchWrapper {
-	background-color: var(--color-brand);
-
-	/* border-radius: 18px; */
-}
-
 @media only screen and (width <= 900px) {
 	.quickSearchWrapper {
 		display: none;
