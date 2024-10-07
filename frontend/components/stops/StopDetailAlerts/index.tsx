@@ -3,7 +3,6 @@
 /* * */
 
 import AlertsCarousel from '@/components/common/AlertsCarousel';
-import { Section } from '@/components/layout/Section';
 import { useStopsDetailContext } from '@/contexts/StopsDetail.context';
 
 /* * */
@@ -20,7 +19,7 @@ export default function Component() {
 	// B. Render components
 
 	if (!stopsDetailContext.data.stop) {
-		return <Section withTopBorder={false} backRouter withChildrenPadding />;
+		return null;
 	}
 
 	return (

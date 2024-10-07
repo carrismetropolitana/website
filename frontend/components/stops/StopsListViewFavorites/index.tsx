@@ -8,8 +8,6 @@ import { useStopsListContext } from '@/contexts/StopsList.context';
 import { RoutesSchedule } from '@/utils/routes';
 import { useTranslations } from 'next-intl';
 
-import styles from './styles.module.css';
-
 /* * */
 
 export function StopsListViewFavorites() {
@@ -26,14 +24,14 @@ export function StopsListViewFavorites() {
 
 	if (!stopsContext.data.favorites.length) {
 		return (
-			<Section childrenWrapperStyles={styles.container} withChildrenPadding={false} withTopPadding={false}>
+			<Section>
 				<NoDataLabel text={t('no_favorites')} withMinHeight />
 			</Section>
 		);
 	}
 
 	return (
-		<Section childrenWrapperStyles={styles.container} withChildrenPadding={false} withTopPadding={false}>
+		<Section>
 			{stopsContext.data.favorites.map(stop => (
 				<RegularListItem key={stop.id} href={`${RoutesSchedule.STOPS.route}/${stop.id}`}>
 					<StopDisplay stop={stop} />

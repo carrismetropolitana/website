@@ -1,6 +1,6 @@
 /* * */
 
-import WebsiteWrapper from '@/components/viewport/WebsiteWrapper';
+import { WebsiteViewport } from '@/components/viewport/WebsiteViewport';
 import { EnvironmentContextProvider } from '@/contexts/Environment.context';
 import { Notifications } from '@mantine/notifications';
 
@@ -13,9 +13,9 @@ export default function Layout({ children }) {
 		<Providers>
 			<EnvironmentContextProvider value="website">
 				<Notifications styles={{ root: { marginTop: '60px' } }} />
-				<WebsiteWrapper>
+				<WebsiteViewport>
 					{children}
-				</WebsiteWrapper>
+				</WebsiteViewport>
 			</EnvironmentContextProvider>
 		</Providers>
 	);

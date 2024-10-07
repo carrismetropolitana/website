@@ -3,7 +3,9 @@
 /* * */
 
 import MetricsSectionDemand from '@/components/home/MetricsSectionDemand';
+import { Grid } from '@/components/layout/Grid';
 import { Section } from '@/components/layout/Section';
+import { Surface } from '@/components/layout/Surface';
 import { Link } from '@/i18n/routing';
 import { useTranslations } from 'next-intl';
 
@@ -23,14 +25,16 @@ export default function Component() {
 	// B. Render components
 
 	return (
-		<Section heading={t('heading')} withGap={false} withChildrenPadding>
-			<div className={styles.innerWrapper}>
-				<MetricsSectionDemand />
-				<Link className={styles.goToMetrics} href="/metrics">
-					Abrir métricas completas ›
-				</Link>
-			</div>
-		</Section>
+		<Surface variant="default">
+			<Section heading={t('heading')} withPadding>
+				<Grid columns="ab" withGap>
+					<MetricsSectionDemand />
+					<Link className={styles.goToMetrics} href="/metrics">
+						Abrir métricas completas ›
+					</Link>
+				</Grid>
+			</Section>
+		</Surface>
 	);
 
 	//

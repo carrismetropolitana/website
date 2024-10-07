@@ -5,6 +5,7 @@
 import Button from '@/components/common/Button';
 import Input, { InputProps } from '@/components/common/Input';
 import { Section } from '@/components/layout/Section';
+import { Surface } from '@/components/layout/Surface';
 import { useProfileContext } from '@/contexts/Profile.context';
 import { Profile } from '@/types/profile.type';
 import toast from '@/utils/toast';
@@ -101,9 +102,9 @@ export default function Component() {
 	if (!profileContext.data.profile) return <Loading />;
 
 	return (
-		<>
-			<Section heading={t('profile.Page.heading')} withTopBorder={false} />
-			<Section withTopBorder={false} withChildrenPadding>
+		<Surface>
+			<Section heading={t('profile.Page.heading')} />
+			<Section withPadding>
 				<div className={styles.avatar}>
 					<Avatar style={{ height: '8rem', width: '8rem' }} {...avatarConfig} />
 					<Button label={t('common.button.generate')} onClick={generateAvatar} variant="pill" />
@@ -117,6 +118,6 @@ export default function Component() {
 					<Button className={styles.submit__button} label={t('common.button.save')} onClick={handleSubmit} variant="primary" />
 				</div>
 			</Section>
-		</>
+		</Surface>
 	);
 }

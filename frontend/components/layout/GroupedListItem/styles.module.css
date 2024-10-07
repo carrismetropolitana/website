@@ -3,7 +3,8 @@
 
 .container {
 	width: 100%;
-	padding-bottom: var(--size-spacing-60);
+	padding-top: var(--size-spacing-30);
+	padding-bottom: var(--size-spacing-30);
 }
 
 /* * */
@@ -18,14 +19,14 @@
 /* LABEL */
 
 .label {
-	color: var(--color-system-text-300);
-	font-size: 10px;
-	font-weight: var(--font-weight-bold);
-	letter-spacing: 0.25px;
-	text-align: left;
-	text-transform: uppercase;
 	padding-bottom: 3px;
 	padding-left: 1px;
+	font-size: 10px;
+	font-weight: var(--font-weight-bold);
+	color: var(--color-system-text-300);
+	text-align: left;
+	text-transform: uppercase;
+	letter-spacing: 0.25px;
 }
 
 /* * */
@@ -33,8 +34,8 @@
 
 .title {
 	font-size: var(--font-size-subtitle);
-	color: var(--color-system-text-100);
 	font-weight: var(--font-weight-bold);
+	color: var(--color-system-text-100);
 }
 
 /* * */

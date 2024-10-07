@@ -6,10 +6,10 @@ import MetricsSectionDemandByLine from '@/components/home/MetricsSectionDemandBy
 import MetricsSectionDemandByMonth from '@/components/home/MetricsSectionDemandByMonth';
 import MetricsSectionDemandByOperator from '@/components/home/MetricsSectionDemandByOperator';
 import { Section } from '@/components/layout/Section';
+import { Surface } from '@/components/layout/Surface';
 import { OperatorMetrics } from '@/types/metrics.types';
 import getOperationalDay from '@/utils/operation';
 import { Routes } from '@/utils/routes';
-import { useTranslations } from 'next-intl';
 import useSWR from 'swr';
 
 import styles from './styles.module.css';
@@ -20,21 +20,16 @@ export default function Component() {
 	//
 
 	//
-	// A. Setup variables
-
-	const t = useTranslations('HomeMetricsSection');
-
-	//
-	// B. Fetch Data
+	// A. Fetch Data
 
 	const { data, isLoading } = useSWR<OperatorMetrics[]>(`${Routes.API}/v2/metrics/demand/operator/cm/${getOperationalDay()}`, { refreshInterval: 5 * 60 * 1000 }); // 5 minutes
 
 	//
-	// C. Render components
+	// B. Render components
 
 	return (
-		<>
-			<Section withTopBorder={false} backRouter withChildrenPadding>
+		<Surface>
+			<Section withGap withPadding>
 				<MetricsSectionDemandByLine />
 				<MetricsSectionDemandByMonth />
 				<div className={styles.areaWrapper}>
@@ -44,7 +39,7 @@ export default function Component() {
 					<MetricsSectionDemandByOperator loading={isLoading} metrics={data && data[3]} />
 				</div>
 			</Section>
-		</>
+		</Surface>
 	);
 
 	//

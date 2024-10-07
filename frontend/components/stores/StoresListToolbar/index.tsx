@@ -2,15 +2,18 @@
 
 /* * */
 
+import Button from '@/components/common/Button';
 import FoundItemsCounter from '@/components/common/FoundItemsCounter';
 import SortButton from '@/components/common/SortButton';
+import { Grid } from '@/components/layout/Grid';
+import { Section } from '@/components/layout/Section';
+import { Surface } from '@/components/layout/Surface';
 import { useStoresListContext } from '@/contexts/StoresList.context';
 import { SegmentedControl, Select } from '@mantine/core';
+import { IconExternalLink } from '@tabler/icons-react';
 import { IconMap } from '@tabler/icons-react';
 import { useTranslations } from 'next-intl';
 import { useMemo } from 'react';
-
-import styles from './styles.module.css';
 
 /* * */
 
@@ -58,20 +61,24 @@ export default function Component() {
 	// C. Render components
 
 	return (
-		<div className={styles.container}>
-			<SegmentedControl data={byCurrentStatusOptions} onChange={storesContext.actions.updateFilterCurrentStatus} value={storesContext.filters.by_current_status} fullWidth />
-
-			<div className={styles.filters}>
-				<Select data={byMunicipalityOptions} leftSection={<IconMap size={20} />} onChange={storesContext.actions.updateFilterByMunicipality} placeholder={t('by_municipality.label')} value={storesContext.filters.by_municipality} clearable searchable />
-				<SortButton
-					onDirectionChange={storesContext.actions.updateFilterOrderByDirection}
-					onOptionChange={storesContext.actions.updateFilterOrderBy}
-					options={filterByOptions}
-					selectedOption={storesContext.filters.order_by}
-				/>
-			</div>
-			<FoundItemsCounter text={t('found_items_counter', { count: storesContext.data.filtered.length })} />
-		</div>
+		<Surface>
+			<Section heading={t('heading')} subheading={t('subheading')} withBottomDivider withPadding>
+				<Button href="https://www.navegante.pt/navegante/espacos-pontos-navegante" icon={<IconExternalLink size={18} />} label={t('external_link')} target="_blank" />
+			</Section>
+			<Section withGap withPadding>
+				<SegmentedControl data={byCurrentStatusOptions} onChange={storesContext.actions.updateFilterCurrentStatus} value={storesContext.filters.by_current_status} w="100%" fullWidth />
+				<Grid columns="ab" withGap>
+					<Select data={byMunicipalityOptions} leftSection={<IconMap size={20} />} onChange={storesContext.actions.updateFilterByMunicipality} placeholder={t('by_municipality.label')} value={storesContext.filters.by_municipality} clearable searchable />
+					<SortButton
+						onDirectionChange={storesContext.actions.updateFilterOrderByDirection}
+						onOptionChange={storesContext.actions.updateFilterOrderBy}
+						options={filterByOptions}
+						selectedOption={storesContext.filters.order_by}
+					/>
+				</Grid>
+				<FoundItemsCounter text={t('found_items_counter', { count: storesContext.data.filtered.length })} />
+			</Section>
+		</Surface>
 	);
 
 	//

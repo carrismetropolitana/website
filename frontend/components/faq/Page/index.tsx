@@ -6,6 +6,7 @@ import { fetchFaqs } from '@/actions/faq.actions';
 import Button from '@/components/common/Button';
 import FaqList from '@/components/faq/FaqList';
 import { Section } from '@/components/layout/Section';
+import { Surface } from '@/components/layout/Surface';
 import { IconPhoneCheck } from '@tabler/icons-react';
 import { getTranslations } from 'next-intl/server';
 
@@ -29,12 +30,12 @@ export default async function Component() {
 
 	return (
 		<>
-			<Section heading={t('heading')} subheading={t('subheading')} withTopBorder={false} withChildrenPadding>
-				<Button icon={<IconPhoneCheck size={18} />} label={t('contacts')} />
-			</Section>
-			<Section withTopPadding>
-				<FaqList data={allFaqData} />
-			</Section>
+			<Surface>
+				<Section heading={t('heading')} subheading={t('subheading')} withPadding>
+					<Button icon={<IconPhoneCheck size={18} />} label={t('contacts')} />
+				</Section>
+			</Surface>
+			<FaqList data={allFaqData} />
 		</>
 	);
 

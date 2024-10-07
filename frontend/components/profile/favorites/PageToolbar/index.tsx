@@ -4,6 +4,7 @@
 
 import FoundItemsCounter from '@/components/common/FoundItemsCounter';
 import { Section } from '@/components/layout/Section';
+import { Surface } from '@/components/layout/Surface';
 import { useLinesListContext } from '@/contexts/LinesList.context';
 import { useProfileContext } from '@/contexts/Profile.context';
 import { useStopsListContext } from '@/contexts/StopsList.context';
@@ -36,8 +37,8 @@ export default function Component() {
 	// D. Render components
 
 	return (
-		<>
-			<Section childrenWrapperStyles={styles.container} withTopBorder={false} withTopPadding={false} withChildrenPadding>
+		<Surface>
+			<Section withPadding>
 				<SegmentedControl data={currentViewOptions} onChange={profileContext.actions.updateFilterByFavorite} value={profileContext.filters.favorites} fullWidth />
 				{profileContext.filters.favorites === 'lines' && (
 					<FoundItemsCounter text={t('found_items_counter.lines', { count: linesContext.data.favorites.length })} />
@@ -46,8 +47,7 @@ export default function Component() {
 					<FoundItemsCounter text={t('found_items_counter.stops', { count: stopsContext.data.favorites.length })} />
 				)}
 			</Section>
-
-		</>
+		</Surface>
 	);
 
 	//

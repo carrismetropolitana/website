@@ -37,7 +37,7 @@ export default function Component({ alerts }: Props) {
 	}));
 
 	return (
-		<Section childrenWrapperStyles={styles.container} withGap={false} withTopPadding={false}>
+		<Section withGap>
 			<div className={styles.headingWrapper}>
 				<IconBellRingingFilled size={20} />
 				{t('heading')}

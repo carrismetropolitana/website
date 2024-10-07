@@ -2,8 +2,9 @@
 
 /* * */
 
+import { Routes } from '@/utils/routes';
 import { IconAlertTriangleFilled, IconBellRingingFilled, IconCircleCheckFilled, IconInfoCircleFilled } from '@tabler/icons-react';
-// import useSWR from 'swr';
+import useSWR from 'swr';
 
 import styles from './styles.module.css';
 
@@ -15,8 +16,8 @@ export default function Component() {
 	//
 	// A. Fetch data
 
-	// const { data: appStatusData } = useSWR(`${Routes.API}/status/message`);
-	const appStatusData = null;
+	const { data: appStatusData } = useSWR(`${Routes.API}/status/message`);
+	// const appStatusData = null;
 
 	//
 	// B. Handle actions

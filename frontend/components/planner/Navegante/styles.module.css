@@ -1,16 +1,8 @@
-.container {
-    background-color: var(--color-primary-black);
-
-    & h1 {
-        color: var(--color-brand);
-    }
-
-    & h6 {
-        color: var(--color-primary-white);
-    }
-}
+/* * */
+/* BUTTON */
 
 .button {
-    background-color: var(--color-primary-white);
+	width: auto;
     color: var(--color-primary-black);
+    background-color: var(--color-primary-white);
 }

@@ -36,6 +36,7 @@ export default function Component({ skeletonComponent, skeletonQty = 3, slides =
 			previousControlIcon={<IconArrowLeft size={20} />}
 			slideGap={1}
 			slideSize={slideSize}
+			w="100%"
 			withControls={slides.length > 0}
 			dragFree
 			skipSnaps

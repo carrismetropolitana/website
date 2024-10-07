@@ -6,6 +6,7 @@ import CopyBadge from '@/components/common/CopyBadge';
 import FavoriteToggle from '@/components/common/FavoriteToggle';
 import { IconDisplay } from '@/components/common/IconDisplay';
 import { Section } from '@/components/layout/Section';
+import { Surface } from '@/components/layout/Surface';
 import LineBadge from '@/components/lines/LineBadge';
 import { StopDisplayLocation } from '@/components/stops/StopDisplayLocation';
 import { StopDisplayName } from '@/components/stops/StopDisplayName';
@@ -44,46 +45,51 @@ export function StopsDetailHeader() {
 	// C. Render components
 
 	if (!stopsDetailContext.data.stop) {
-		return <Section withTopBorder={false} backRouter withChildrenPadding />;
+		return null;
 	}
 
 	return (
-		<Section childrenWrapperStyles={styles.container} withGap={false} withTopBorder={false} backRouter withChildrenPadding>
+		<Surface>
 
-			<div className={styles.badgesWrapper}>
-				<CopyBadge
-					label={'#' + stopsDetailContext.data.stop.id}
-					size="lg"
-					value={stopsDetailContext.data.stop.id}
-				/>
-				<CopyBadge
-					hasBorder={false}
-					label={`${stopsDetailContext.data.stop.lat}, ${stopsDetailContext.data.stop.lon}`}
-					size="lg"
-					value={stopsDetailContext.data.stop.lat + '\t' + stopsDetailContext.data.stop.lon}
-				/>
-			</div>
+			<Section withBottomDivider withPadding>
 
-			<div className={styles.headingWrapper}>
-				<div className={styles.nameWrapper}>
-					<StopDisplayName size="lg" stopName={stopsDetailContext.data.stop.name} />
-					<StopDisplayTts stopId={stopsDetailContext.data.stop.id} />
-					<FavoriteToggle color="var(--color-brand)" isActive={stopsDetailContext.flags.is_favorite} onToggle={handleToggleFavorite} />
+				<div className={styles.badgesWrapper}>
+					<CopyBadge
+						label={'#' + stopsDetailContext.data.stop.id}
+						size="lg"
+						value={stopsDetailContext.data.stop.id}
+					/>
+					<CopyBadge
+						hasBorder={false}
+						label={`${stopsDetailContext.data.stop.lat}, ${stopsDetailContext.data.stop.lon}`}
+						size="lg"
+						value={stopsDetailContext.data.stop.lat + '\t' + stopsDetailContext.data.stop.lon}
+					/>
 				</div>
-				<StopDisplayLocation locality={stopsDetailContext.data.stop.locality} municipalityName={stopsDetailContext.data.stop.municipality_name} size="lg" />
-			</div>
 
-			<div className={styles.iconsWrapper}>
-				{stopsDetailContext.data.stop.facilities.map(facility => (
-					<IconDisplay key={facility} category="facilities" name={facility} />
-				))}
-			</div>
+				<div className={styles.headingWrapper}>
+					<div className={styles.nameWrapper}>
+						<StopDisplayName size="lg" stopName={stopsDetailContext.data.stop.name} />
+						<StopDisplayTts stopId={stopsDetailContext.data.stop.id} />
+						<FavoriteToggle color="var(--color-brand)" isActive={stopsDetailContext.flags.is_favorite} onToggle={handleToggleFavorite} />
+					</div>
+					<StopDisplayLocation locality={stopsDetailContext.data.stop.locality} municipalityName={stopsDetailContext.data.stop.municipality_name} size="lg" />
+				</div>
 
-			<div className={styles.lineBadgesWrapper}>
-				{stopsDetailContext.data.lines && stopsDetailContext.data.lines.map(line => <LineBadge key={line.line_id} line={line} size="lg" />)}
-			</div>
+				<div className={styles.iconsWrapper}>
+					{stopsDetailContext.data.stop.facilities.map(facility => (
+						<IconDisplay key={facility} category="facilities" name={facility} />
+					))}
+				</div>
+			</Section>
 
-		</Section>
+			<Section withPadding>
+				<div className={styles.lineBadgesWrapper}>
+					{stopsDetailContext.data.lines && stopsDetailContext.data.lines.map(line => <LineBadge key={line.line_id} line={line} size="lg" />)}
+				</div>
+			</Section>
+
+		</Surface>
 	);
 
 	//

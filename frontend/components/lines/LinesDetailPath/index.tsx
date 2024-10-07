@@ -4,6 +4,7 @@
 
 import NoDataLabel from '@/components/layout/NoDataLabel';
 import { Section } from '@/components/layout/Section';
+import { Surface } from '@/components/layout/Surface';
 import LinesDetailPathList from '@/components/lines/LinesDetailPathList';
 import LinesDetailPathMap from '@/components/lines/LinesDetailPathMap';
 import { useLinesDetailContext } from '@/contexts/LinesDetail.context';
@@ -25,19 +26,23 @@ export default function Component() {
 
 	if (!linesDetailContext.data.active_pattern_group) {
 		return (
-			<Section childrenWrapperStyles={styles.noPatternWrapper} withTopPadding={false}>
-				<NoDataLabel text="selecione um pattern" />
-			</Section>
+			<Surface>
+				<NoDataLabel text="selecione um pattern" withMinHeight />
+			</Surface>
 		);
 	}
 
 	return (
-		<Section childrenWrapperStyles={styles.container} withTopPadding={false}>
-			<LinesDetailPathList />
-			<div className={styles.mapWrapper}>
-				<LinesDetailPathMap />
-			</div>
-		</Section>
+		<Surface>
+			<Section>
+				<div className={styles.container}>
+					<LinesDetailPathList />
+					<div className={styles.mapWrapper}>
+						<LinesDetailPathMap />
+					</div>
+				</div>
+			</Section>
+		</Surface>
 	);
 
 	//

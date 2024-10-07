@@ -2,6 +2,7 @@
 
 import GridNav from '@/components/layout/GridNav';
 import { Section } from '@/components/layout/Section';
+import { Surface } from '@/components/layout/Surface';
 import { mainNavigationGroup } from '@/settings/navigation.settings';
 import { useTranslations } from 'next-intl';
 
@@ -28,9 +29,11 @@ export default function Component() {
 	// C. Render Components
 
 	return (
-		<Section heading={t('section_heading')} withGap={false}>
-			<GridNav className={styles.gridNav} items={menuItemsFormatted} />
-		</Section>
+		<Surface>
+			<Section heading={t('section_heading')}>
+				<GridNav className={styles.gridNav} items={menuItemsFormatted} />
+			</Section>
+		</Surface>
 	);
 
 	//

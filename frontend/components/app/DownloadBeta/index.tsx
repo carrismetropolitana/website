@@ -2,6 +2,7 @@
 
 import GridNav from '@/components/layout/GridNav';
 import { Section } from '@/components/layout/Section';
+import { Surface } from '@/components/layout/Surface';
 import { IconBrandAppleFilled, IconBrandGoogleFilled } from '@tabler/icons-react';
 import { useTranslations } from 'next-intl';
 
@@ -29,9 +30,11 @@ export default function Component() {
 	// C. Render components
 
 	return (
-		<Section heading={t('heading')} subheading={t('subheading')} withTopBorder={false}>
-			<GridNav className={styles.gridNavOverride} items={STORE_LINKS} />
-		</Section>
+		<Surface>
+			<Section heading={t('heading')} subheading={t('subheading')}>
+				<GridNav className={styles.gridNavOverride} items={STORE_LINKS} />
+			</Section>
+		</Surface>
 	);
 
 	//

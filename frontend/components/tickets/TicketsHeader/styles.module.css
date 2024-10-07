@@ -1,21 +1,17 @@
-.content {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    grid-gap: 1rem;
-}
+
 
 .validity{
-    color: var(--color-system-text-300);
     font-size: 10px;
+    font-style: semibold;
     font-weight: 600;
-    font-style: SemiBold;
+    color: var(--color-system-text-300);
     text-align: left;
 }
 
 .images {
     display: flex;
+    gap: 20px;
     align-items: center;
-    gap: 1rem;
     height: 100px;
 
     & img {
@@ -23,15 +19,15 @@
     }
 }
 
-@media screen and (max-width: 768px) {
+@media screen and (width <= 768px) {
     .content {
         grid-template-columns: 1fr;
     }
 
     .card {
         display: flex;
+        gap: 20px;
         align-items: center;
-        gap: 1rem;
 
         & img {
             height: 80px;

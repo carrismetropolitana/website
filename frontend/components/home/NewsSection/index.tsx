@@ -4,6 +4,7 @@
 
 import Carousel from '@/components/common/Carousel';
 import { Section } from '@/components/layout/Section';
+import { Surface } from '@/components/layout/Surface';
 import NewsCard from '@/components/news/Card';
 import NewsCardSkeleton from '@/components/news/CardSkeleton';
 import collator from '@/utils/collator';
@@ -46,9 +47,11 @@ export default function Component() {
 	// D. Render Components
 
 	return (
-		<Section heading={t('section_heading')}>
-			<Carousel skeletonComponent={<NewsCardSkeleton />} skeletonQty={4} slides={carouselSlides} />
-		</Section>
+		<Surface>
+			<Section heading={t('section_heading')}>
+				<Carousel skeletonComponent={<NewsCardSkeleton />} skeletonQty={4} slides={carouselSlides} />
+			</Section>
+		</Surface>
 	);
 
 	//

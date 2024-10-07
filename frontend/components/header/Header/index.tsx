@@ -5,7 +5,6 @@
 import Logo from '@/components/header/Logo';
 import HeaderNavigationDrawer from '@/components/header/NavigationDrawer';
 import HeaderNavigationMain from '@/components/header/NavigationMain';
-import HeaderStatus from '@/components/header/Status';
 import { useEffect } from 'react';
 
 import styles from './styles.module.css';
@@ -42,7 +41,6 @@ export default function Component() {
 						<HeaderNavigationDrawer />
 					</div>
 				</div>
-				<HeaderStatus />
 			</div>
 		</>
 	);
