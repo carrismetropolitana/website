@@ -4,6 +4,7 @@
 
 import FoundItemsCounter from '@/components/common/FoundItemsCounter';
 import { Section } from '@/components/layout/Section';
+import { Surface } from '@/components/layout/Surface';
 import { useLinesListContext } from '@/contexts/LinesList.context';
 import { SegmentedControl, TextInput } from '@mantine/core';
 import { IconArrowLoopRight } from '@tabler/icons-react';
@@ -39,18 +40,20 @@ export default function Component() {
 	// D. Render components
 
 	return (
-		<Section heading={t('heading')} withBottomDivider withGap withPadding>
-			<SegmentedControl data={currentViewOptions} onChange={linesContext.actions.updateFilterByCurrentView} value={linesContext.filters.by_current_view} w="100%" fullWidth />
-			{linesContext.filters.by_current_view === 'all' && (
-				<>
-					<TextInput leftSection={<IconArrowLoopRight size={20} />} onChange={handleTextInputChange} placeholder={t('by_search.placeholder')} type="search" value={linesContext.filters.by_search} w="100%" />
-					<FoundItemsCounter text={t('found_items_counter.all', { count: linesContext.data.filtered.length })} />
-				</>
-			)}
-			{linesContext.filters.by_current_view === 'favorites' && (
-				<FoundItemsCounter text={t('found_items_counter.favorites', { count: linesContext.data.favorites.length })} />
-			)}
-		</Section>
+		<Surface>
+			<Section heading={t('heading')} withGap withPadding>
+				<SegmentedControl data={currentViewOptions} onChange={linesContext.actions.updateFilterByCurrentView} value={linesContext.filters.by_current_view} w="100%" fullWidth />
+				{linesContext.filters.by_current_view === 'all' && (
+					<>
+						<TextInput leftSection={<IconArrowLoopRight size={20} />} onChange={handleTextInputChange} placeholder={t('by_search.placeholder')} type="search" value={linesContext.filters.by_search} w="100%" />
+						<FoundItemsCounter text={t('found_items_counter.all', { count: linesContext.data.filtered.length })} />
+					</>
+				)}
+				{linesContext.filters.by_current_view === 'favorites' && (
+					<FoundItemsCounter text={t('found_items_counter.favorites', { count: linesContext.data.favorites.length })} />
+				)}
+			</Section>
+		</Surface>
 	);
 
 	//

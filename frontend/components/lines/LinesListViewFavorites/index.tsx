@@ -3,6 +3,7 @@
 import NoDataLabel from '@/components/layout/NoDataLabel';
 import RegularListItem from '@/components/layout/RegularListItem';
 import { Section } from '@/components/layout/Section';
+import { Surface } from '@/components/layout/Surface';
 import LineDisplay from '@/components/lines/LineDisplay';
 import { useLinesListContext } from '@/contexts/LinesList.context';
 import { RoutesSchedule } from '@/utils/routes';
@@ -24,20 +25,24 @@ export default function Component() {
 
 	if (!linesContext.data.favorites.length) {
 		return (
-			<Section>
-				<NoDataLabel text={t('no_favorites')} withMinHeight />
-			</Section>
+			<Surface>
+				<Section>
+					<NoDataLabel text={t('no_favorites')} withMinHeight />
+				</Section>
+			</Surface>
 		);
 	}
 
 	return (
-		<Section>
-			{linesContext.data.favorites.map(line => (
-				<RegularListItem key={line.line_id} href={`${RoutesSchedule.LINES.route}/${line.line_id}`}>
-					<LineDisplay line={line} />
-				</RegularListItem>
-			))}
-		</Section>
+		<Surface forceOverflow>
+			<Section>
+				{linesContext.data.favorites.map(line => (
+					<RegularListItem key={line.line_id} href={`${RoutesSchedule.LINES.route}/${line.line_id}`}>
+						<LineDisplay line={line} />
+					</RegularListItem>
+				))}
+			</Section>
+		</Surface>
 	);
 
 	//
