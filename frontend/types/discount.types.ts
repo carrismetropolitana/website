@@ -1,6 +1,7 @@
 export interface Discount {
 	description: string
-	metropolitan: string
-	municipal: string
-	name: string
+	id: string
+	price_metropolitano: string
+	price_municipal: string
+	title: string
 }

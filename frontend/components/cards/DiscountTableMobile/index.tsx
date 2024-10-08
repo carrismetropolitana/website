@@ -6,7 +6,7 @@ import styles from './styles.module.css';
 
 /* * */
 
-export default function Component({ discounts }: { discounts: Discount[] }) {
+export function DiscountTableMobile({ discounts }: { discounts: Discount[] }) {
 	return (
 		<div className={styles.table}>
 			<div className={styles.tableHead}>
@@ -23,14 +23,14 @@ export default function Component({ discounts }: { discounts: Discount[] }) {
 					<div key={index}>
 						<div className={styles.info}>
 							<div className={styles.content}>
-								<h3>{discount.name}</h3>
+								<h3>{discount.title}</h3>
 								<p>{discount.description}</p>
 							</div>
 						</div>
 						<div className={styles.pricing}>
 							<div className={styles.content}>
-								<div className={styles.cell}>{discount.metropolitan}</div>
-								<div className={classNames(styles.cell, discount.municipal.toLowerCase() === 'n/a' && styles.na)}>{discount.municipal}</div>
+								<div className={styles.cell}>{discount.price_metropolitano}</div>
+								<div className={classNames(styles.cell, discount.price_municipal.toLowerCase() === 'n/a' && styles.na)}>{discount.price_municipal}</div>
 							</div>
 						</div>
 					</div>

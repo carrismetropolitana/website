@@ -6,14 +6,25 @@ import { Section } from '@/components/layout/Section';
 import { Surface } from '@/components/layout/Surface';
 import { IconsCommon, ImagesCommon } from '@/settings/assets.settings';
 import { Image } from '@mantine/core';
+import { useTranslations } from 'next-intl';
 
 import styles from './styles.module.css';
 
 /* * */
-export default function Component() {
+export function Pass() {
+	//
+
+	//
+	// A. Setup variables
+
+	const t = useTranslations('cards.Pass');
+
+	//
+	// B. Render components
+
 	return (
 		<Surface>
-			<Section heading="Passe Mensal" subheading="Descubra quanto custa viajar na CMetropolitana de vez em quando. Para utilizações mais frequentes sugerimos a adesão ao sistema navegante®." withPadding>
+			<Section heading={t('heading')} subheading={t('subheading')} withPadding>
 				<Grid columns="ab" withGap>
 					<Card>
 						<CardHeader>
@@ -23,8 +34,8 @@ export default function Component() {
 							</div>
 						</CardHeader>
 						<CardContent>
-							<CardTitle>Descruba a melhor opção para si.</CardTitle>
-							<CardDescription>Lorem ipsum dolor sit amet consectetur adipisicing elit. Obcaecati ea natus itaque qui iure nam consequuntur minima, quibusdam saepe odio molestiae soluta aspernatur, corrupti labore fugiat? Numquam blanditiis accusantium quibusdam!</CardDescription>
+							<CardTitle>{t('wizard.title')}</CardTitle>
+							<CardDescription>{t('wizard.description')}</CardDescription>
 						</CardContent>
 					</Card>
 					<Card>
@@ -34,12 +45,14 @@ export default function Component() {
 							</div>
 						</CardHeader>
 						<CardContent>
-							<CardTitle>Já tem um cartão personalizado?</CardTitle>
-							<CardDescription>Lorem ipsum dolor sit amet consectetur adipisicing elit. Assumenda magnam incidunt nam pariatur, molestias sequi beatae modi odio cumque a nesciunt facilis ad. Provident, ullam. Quae vero quis dolor animi.</CardDescription>
+							<CardTitle>{t('navegante.title')}</CardTitle>
+							<CardDescription>{t('navegante.description')}</CardDescription>
 						</CardContent>
 					</Card>
 				</Grid>
 			</Section>
 		</Surface>
 	);
+
+	//
 }

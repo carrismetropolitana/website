@@ -1,7 +1,7 @@
 /* * */
 
-import Pricing from '../Pricing';
-import TicketsHeader from '../TicketsHeader';
+import { Pricing } from '@/components/tickets/Pricing';
+import { TicketsHeader } from '@/components/tickets/TicketsHeader';
 
 /* * */
 

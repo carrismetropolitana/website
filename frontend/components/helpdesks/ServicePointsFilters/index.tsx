@@ -1,10 +1,25 @@
+/* * */
+
 import Input from '@/components/common/Input';
 import { Select } from '@mantine/core';
 import { IconAB } from '@tabler/icons-react';
+import { useTranslations } from 'next-intl';
 
 import styles from './styles.module.css';
 
-export default function Component() {
+/* * */
+
+export function ServicePointsFilters() {
+	//
+
+	//
+	// A. Setup variables
+
+	const t = useTranslations('cards.MunicipalDiscounts');
+
+	//
+	// B. Render components
+
 	return (
 		<div className={styles.filters}>
 			<div className={styles.filtersA}>
@@ -20,4 +35,6 @@ export default function Component() {
 			</div>
 		</div>
 	);
+
+	//
 }

@@ -1,19 +1,34 @@
 'use client';
 
+/* * */
+
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/common/Card';
-import { ThemeDark, ThemeLight } from '@/components/responsive/ThemeSwitch';
 import { Grid } from '@/components/layout/Grid';
 import { Section } from '@/components/layout/Section';
 import { Surface } from '@/components/layout/Surface';
+import { ThemeDark, ThemeLight } from '@/components/responsive/ThemeSwitch';
 import { IconsCommon } from '@/settings/assets.settings';
 import { Image } from '@mantine/core';
+import { useTranslations } from 'next-intl';
 
 import styles from './styles.module.css';
 
-export default function Component() {
+/* * */
+
+export function Service() {
+	//
+
+	//
+	// A. Setup variables
+
+	const t = useTranslations('cards.Service');
+
+	//
+	// B. Render components
+
 	return (
 		<Surface>
-			<Section heading="Atendimento preferencial" subheading="Descubra quanto custa viajar na CMetropolitana de vez em quando. Para utilizações mais frequentes sugerimos a adesão ao sistema navegante®." withPadding>
+			<Section heading={t('heading')} subheading={t('subheading')} withPadding>
 				<Grid columns="ab" withGap>
 					<Card className={styles.card}>
 						<CardHeader>
@@ -22,8 +37,8 @@ export default function Component() {
 							</div>
 						</CardHeader>
 						<CardContent>
-							<CardTitle>Espaços navegante®</CardTitle>
-							<CardDescription>Lorem ipsum dolor sit amet consectetur adipisicing elit. Obcaecati ea natus itaque qui iure nam consequuntur minima, quibusdam saepe odio molestiae soluta aspernatur, corrupti labore fugiat? Numquam blanditiis accusantium quibusdam!</CardDescription>
+							<CardTitle>{t('stores.title')}</CardTitle>
+							<CardDescription>{t('stores.description')}</CardDescription>
 						</CardContent>
 					</Card>
 					<Card className={styles.card}>
@@ -33,8 +48,8 @@ export default function Component() {
 							</div>
 						</CardHeader>
 						<CardContent>
-							<CardTitle>App navegante®</CardTitle>
-							<CardDescription>Lorem ipsum dolor sit amet consectetur adipisicing elit. Assumenda magnam incidunt nam pariatur, molestias sequi beatae modi odio cumque a nesciunt facilis ad. Provident, ullam. Quae vero quis dolor animi.</CardDescription>
+							<CardTitle>{t('app.title')}</CardTitle>
+							<CardDescription>{t('app.description')}</CardDescription>
 						</CardContent>
 					</Card>
 					<Card className={styles.cardAlt}>
@@ -49,8 +64,8 @@ export default function Component() {
 							</div>
 						</CardHeader>
 						<CardContent>
-							<CardTitle>Rede multibanco™</CardTitle>
-							<CardDescription>Pode carregar o seu cartão navegante® em qualquer multibanco.</CardDescription>
+							<CardTitle>{t('multibanco.title')}</CardTitle>
+							<CardDescription>{t('multibanco.description')}</CardDescription>
 						</CardContent>
 					</Card>
 					<Card className={styles.cardAlt}>
@@ -60,12 +75,14 @@ export default function Component() {
 							</div>
 						</CardHeader>
 						<CardContent>
-							<CardTitle>Rede de Agentes payshop™</CardTitle>
-							<CardDescription>Pode carregar o seu cartão navegante® em qualquer multibanco.</CardDescription>
+							<CardTitle>{t('payshop.title')}</CardTitle>
+							<CardDescription>{t('payshop.description')}</CardDescription>
 						</CardContent>
 					</Card>
 				</Grid>
 			</Section>
 		</Surface>
 	);
+
+	//
 }

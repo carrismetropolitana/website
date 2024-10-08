@@ -6,6 +6,7 @@ import { Section } from '@/components/layout/Section';
 import { Surface } from '@/components/layout/Surface';
 import { BrandsMunicipalities } from '@/settings/assets.settings';
 import { Image } from '@mantine/core';
+import { useTranslations } from 'next-intl';
 
 import styles from './styles.module.css';
 
@@ -28,10 +29,20 @@ const municipalDiscounts = [
 
 /* * */
 
-export default function Component() {
+export function MunicipalDiscounts() {
+	//
+
+	//
+	// A. Setup variables
+
+	const t = useTranslations('cards.MunicipalDiscounts');
+
+	//
+	// B. Render components
+
 	return (
 		<Surface>
-			<Section heading="Descontos Municipais" subheading="Descubra quanto custa viajar na CMetropolitana de vez em quando. Para utilizações mais frequentes sugerimos a adesão ao sistema navegante®." withPadding>
+			<Section heading={t('heading')} subheading={t('subheading')} withPadding>
 				<Grid columns="abc" withGap>
 					{municipalDiscounts.map((discount, index) => (
 						<Card key={index}>
@@ -55,4 +66,6 @@ export default function Component() {
 			</Section>
 		</Surface>
 	);
+
+	//
 }

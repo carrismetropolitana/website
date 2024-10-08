@@ -5,7 +5,7 @@ import styles from './styles.module.css';
 
 /* * */
 
-export default function Component({ discounts }: { discounts: Discount[] }) {
+export function DiscountTableDesktop({ discounts }: { discounts: Discount[] }) {
 	return (
 		<div className={styles.table}>
 			<div className={styles.row}>
@@ -16,14 +16,14 @@ export default function Component({ discounts }: { discounts: Discount[] }) {
 			{discounts.map((discount, index) => (
 				<div key={index} className={styles.row}>
 					<div className={styles.cell}>
-						<div className={styles.title}>{discount.name}</div>
+						<div className={styles.title}>{discount.title}</div>
 						<div className={styles.description}>{discount.description}</div>
 					</div>
 					<div className={styles.cell}>
-						<div className={styles.title}>{discount.metropolitan}</div>
+						<div className={styles.title}>{discount.price_metropolitano}</div>
 					</div>
 					<div className={styles.cell}>
-						<div className={discount.municipal.toLowerCase() === 'n/a' ? styles.na : styles.title}>{discount.municipal}</div>
+						<div className={discount.price_municipal.toLowerCase() === 'n/a' ? styles.na : styles.title}>{discount.price_municipal}</div>
 					</div>
 				</div>
 			))}

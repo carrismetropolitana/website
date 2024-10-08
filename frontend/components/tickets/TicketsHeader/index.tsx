@@ -6,15 +6,26 @@ import { Section } from '@/components/layout/Section';
 import { Surface } from '@/components/layout/Surface';
 import { IconsCommon, ImagesCommon } from '@/settings/assets.settings';
 import { Image } from '@mantine/core';
+import { useTranslations } from 'next-intl';
 
 import styles from './styles.module.css';
 
 /* * */
 
-export default function Component() {
+export function TicketsHeader() {
+	//
+
+	//
+	// A. Setup variables
+
+	const t = useTranslations('tickets.TicketsHeader');
+
+	//
+	// B. Render components
+
 	return (
 		<Surface>
-			<Section heading="Bilhetes Ocasionais" subheading="Descubra quanto custa viajar na CMetropolitana de vez em quando. Para utilizações mais frequentes sugerimos a adesão ao sistema navegante®." withPadding>
+			<Section heading={t('heading')} subheading={t('subheading')} withPadding>
 				<Grid columns="ab" withGap>
 					<Card>
 						<CardHeader>
@@ -24,8 +35,8 @@ export default function Component() {
 							</div>
 						</CardHeader>
 						<CardContent>
-							<CardTitle>Comprar dentro do autocarro</CardTitle>
-							<CardDescription>Lorem ipsum dolor sit amet consectetur adipisicing elit. Obcaecati ea natus itaque qui iure nam consequuntur minima, quibusdam saepe odio molestiae soluta aspernatur, corrupti labore fugiat? Numquam blanditiis accusantium quibusdam!</CardDescription>
+							<CardTitle>{t('onboard.title')}</CardTitle>
+							<CardDescription>{t('onboard.description')}</CardDescription>
 						</CardContent>
 					</Card>
 					<Card>
@@ -35,12 +46,14 @@ export default function Component() {
 							</div>
 						</CardHeader>
 						<CardContent>
-							<CardTitle>Comprar antes da viagem</CardTitle>
-							<CardDescription>Lorem ipsum dolor sit amet consectetur adipisicing elit. Assumenda magnam incidunt nam pariatur, molestias sequi beatae modi odio cumque a nesciunt facilis ad. Provident, ullam. Quae vero quis dolor animi.</CardDescription>
+							<CardTitle>{t('prepaid.title')}</CardTitle>
+							<CardDescription>{t('prepaid.description')}</CardDescription>
 						</CardContent>
 					</Card>
 				</Grid>
 			</Section>
 		</Surface>
 	);
+
+	//
 }
