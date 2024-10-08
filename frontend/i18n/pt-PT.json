@@ -468,11 +468,11 @@
 		"LocaleSwitcher": {
 			"en-US": {
 				"alt": "English",
-				"label": "🇬🇧"
+				"label": "English"
 			},
 			"pt-PT": {
 				"alt": "Português",
-				"label": "🇵🇹"
+				"label": "Português"
 			}
 		}
 	},
