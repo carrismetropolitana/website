@@ -5,11 +5,32 @@
 	display: flex;
 	flex-direction: row;
 	gap: var(--size-spacing-20);
+	align-items: center;
 	color: var(--color-system-text-200);
+}
+
+.divider {
+	width: 1px;
+	height: 20px;
+	background-color: var(--color-system-border-100);
+}
+
+.iconWrapper {
+	display: flex;
+	align-items: center;
+	justify-content: center;
 }
 
 /* * */
 /* ICONS */
+
+.apple:hover {
+	color: var(--color-social-apple);
+}
+
+.android:hover {
+	color: var(--color-social-android);
+}
 
 .facebook:hover {
 	color: var(--color-social-facebook);
