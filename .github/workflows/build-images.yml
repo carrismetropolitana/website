@@ -13,7 +13,7 @@ jobs:
 
   website-frontend:
     name: frontend (NextJS)
-    runs-on: ubuntu-24.04-arm
+    runs-on: macos-15
     strategy:
       fail-fast: false
     permissions:
