@@ -47,7 +47,7 @@ export default function Component() {
 					<SocialIcons />
 				</div>
 			</Section>
-			<Section withBottomDivider withGap withPadding>
+			<Section withGap withPadding>
 				<div className={styles.linksWrapper}>
 					{secondaryMenuItemsFormatted.map(item => (
 						<Link key={item._id} className={styles.secondaryLink} href={item.href} target={item.target}>{item.label}</Link>
