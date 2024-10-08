@@ -13,6 +13,7 @@ jobs:
 
   website-frontend:
     name: frontend (NextJS)
+    # runs-on: ubuntu-latest
     runs-on: macos-15
     strategy:
       fail-fast: false
