@@ -338,6 +338,98 @@
 			"text": "We recommend you to update soon for better user experience."
 		}
 	},
+	"cards": {
+		"Discounts": {
+			"heading": "Descontos",
+			"products": {
+				"combatente-minus-65": {
+					"description": "Desconto de 30€ para antigos combatentes com menos de 65 anos. É necessário apresentar declaração. Saiba mais no site navegante.pt",
+					"price_metropolitano": "10 € / mês",
+					"price_municipal": "GRÁTIS",
+					"title": "Antigo Combatente <65"
+				},
+				"combatente-plus-65": {
+					"description": "Desconto de 100% para antigos combatentes com 65 ou mais anos. É necessário apresentar declaração. Saiba mais no site navegante.pt",
+					"price_metropolitano": "GRÁTIS",
+					"price_municipal": "N/A",
+					"title": "Antigo Combatente >65"
+				},
+				"family": {
+					"description": "Desconto válido para agregados familiares com pelo menos 3 indivíduos. É necessário que todos os elementos do agregado tenham o mesmo domicílio fiscal, residam num dos 18 municípios da aml, e que tenham relação familiar direta de ascendência ou descendência com o titular. Saiba mais no site navegante.pt",
+					"price_metropolitano": "80 € / mês",
+					"price_municipal": "60 € / mês",
+					"title": "Família"
+				},
+				"normal": {
+					"description": "O desconto que todos têm por direito. Com o passe navegante® as famílias portuguesas passaram a poupar ??€ em média por pessoa.",
+					"price_metropolitano": "40 € / mês",
+					"price_municipal": "30 € / mês",
+					"title": "Normal"
+				},
+				"plus-65": {
+					"description": "Desconto de 50% para utilizadores com 65 ou mais anos. Não é necessário apresentar declaração mas pode ser necessário confirmar a sua data de nascimento. Válido apenas para a modalidade metropolitana. Saiba mais no site navegante.pt",
+					"price_metropolitano": "20 € / mês",
+					"price_municipal": "N/A",
+					"title": "+65"
+				},
+				"social-a": {
+					"description": "Desconto de 50% mediante apresentação de declaração de rendimentos. Saiba mais no site navegante.pt",
+					"price_metropolitano": "20 € / mês",
+					"price_municipal": "15 € / mês",
+					"title": "Social+ A"
+				},
+				"social-b": {
+					"description": "Desconto de 25% mediante apresentação de declaração de rendimentos. Saiba mais no site navegante.pt",
+					"price_metropolitano": "30 € / mês",
+					"price_municipal": "22,5 € / mês",
+					"title": "Social+ B"
+				},
+				"sub18": {
+					"description": "Desconto de 100% para todos os jovens estudantes menores de 18 anos. Não é necessário apresentar nenhuma declaração, mas pode ser preciso confirmar a data de nascimento. Saiba mais no site navegante.pt",
+					"price_metropolitano": "GRÁTIS",
+					"price_municipal": "N/A",
+					"title": "Sub18"
+				},
+				"sub23": {
+					"description": "Desconto de 100% para todos os jovens estudantes entre os 19 e os 23 anos. Não é necessário apresentar declaração de inscrição em instituição de ensino. Saiba mais no site navegante.pt",
+					"price_metropolitano": "GRÁTIS",
+					"price_municipal": "N/A",
+					"title": "Sub23"
+				}
+			},
+			"subheading": "Descubra os descontos disponíveis para si."
+		},
+		"Modalities": {
+			"heading": "Modalidades",
+			"metropolitano": {
+				"description": "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Eius, ut.",
+				"price": "40€/mês",
+				"title": "Viaje por todo o lado, sem limites."
+			},
+			"municipal": {
+				"description": "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Eius, ut.",
+				"price": "30€/mês",
+				"title": "Viaje num município."
+			},
+			"subheading": "Descubra quanto custa viajar na CMetropolitana de vez em quando. Para utilizações mais frequentes sugerimos a adesão ao sistema navegante®."
+		},
+		"MunicipalDiscounts": {
+			"heading": "Descontos Municipais",
+			"subheading": "Descubra quanto custa viajar na CMetropolitana de vez em quando. Para utilizações mais frequentes sugerimos a adesão ao sistema navegante®."
+		},
+		"Pass": {
+			"heading": "Passe Mensal",
+			"navegante": {
+				"description": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Obcaecati ea natus itaque qui iure nam consequuntur minima, quibusdam saepe odio molestiae soluta aspernatur, corrupti labore fugiat? Numquam blanditiis accusantium quibusdam!",
+				"title": "Já tem um cartão personalizado?"
+			},
+			"subheading": "Descubra quanto custa viajar na CMetropolitana de vez em quando. Para utilizações mais frequentes sugerimos a adesão ao sistema navegante®.",
+			"wizard": {
+				"description": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Obcaecati ea natus itaque qui iure nam consequuntur minima, quibusdam saepe odio molestiae soluta aspernatur, corrupti labore fugiat? Numquam blanditiis accusantium quibusdam!",
+				"title": "Descruba a melhor opção para si."
+			}
+		}
+	},
 	"common": {
 		"NextArrivals": {
 			"arriving": "A chegar",
@@ -474,6 +566,44 @@
 				"alt": "Português",
 				"label": "Português"
 			}
+		}
+	},
+	"helpdesks": {
+		"Service": {
+			"app": {
+				"description": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Obcaecati ea natus itaque qui iure nam consequuntur minima, quibusdam saepe odio molestiae soluta aspernatur, corrupti labore fugiat? Numquam blanditiis accusantium quibusdam!",
+				"title": "App navegante®"
+			},
+			"heading": "Atendimento preferencial",
+			"multibanco": {
+				"description": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Obcaecati ea natus itaque qui iure nam consequuntur minima, quibusdam saepe odio molestiae soluta aspernatur, corrupti labore fugiat? Numquam blanditiis accusantium quibusdam!",
+				"title": "Rede multibanco™"
+			},
+			"payshop": {
+				"description": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Obcaecati ea natus itaque qui iure nam consequuntur minima, quibusdam saepe odio molestiae soluta aspernatur, corrupti labore fugiat? Numquam blanditiis accusantium quibusdam!",
+				"title": "Rede de Agentes payshop™"
+			},
+			"stores": {
+				"description": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Obcaecati ea natus itaque qui iure nam consequuntur minima, quibusdam saepe odio molestiae soluta aspernatur, corrupti labore fugiat? Numquam blanditiis accusantium quibusdam!",
+				"title": "Espaços navegante®"
+			},
+			"subheading": "Descubra quanto custa viajar na CMetropolitana de vez em quando. Para utilizações mais frequentes sugerimos a adesão ao sistema navegante®."
+		},
+		"ServicePoints": {
+			"heading": "Pontos de Atendimento",
+			"subheading": "Descubra onde pode adquirir o seu passe navegante®."
+		},
+		"WhereToBuy": {
+			"frequent_travel": {
+				"description": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Obcaecati ea natus itaque qui iure nam consequuntur minima, quibusdam saepe odio molestiae soluta aspernatur, corrupti labore fugiat? Numquam blanditiis accusantium quibusdam!",
+				"title": "Viagens Frequentes"
+			},
+			"heading": "Onde Comprar",
+			"ocasional_travel": {
+				"description": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Obcaecati ea natus itaque qui iure nam consequuntur minima, quibusdam saepe odio molestiae soluta aspernatur, corrupti labore fugiat? Numquam blanditiis accusantium quibusdam!",
+				"title": "Viagens Ocasionais"
+			},
+			"subheading": "Descubra onde pode adquirir o seu passe navegante®."
 		}
 	},
 	"home": {
@@ -864,6 +994,48 @@
 			"found_items_counter": "{count, plural, =0 {No stores found.} one {Found # store:} other {Found # stores:}}",
 			"heading": "Lojas e Rede de Agentes",
 			"subheading": "Disponíveis para todos os passageiros, os Espaços navegante® estão dedicados a prestar informações sobre a rede e bilhética Carris Metropolitana, possibilitando o esclarecimento de dúvidas, a emissão de cartões navegante® e a adesão a perfis e descontos. É possível também efetuar o carregamento de títulos nos pontos de atendimento PayShop® da rede de agentes navegante®."
+		}
+	},
+	"tickets": {
+		"Pricing": {
+			"inter-regional": {
+				"description": "Linhas dedicadas a bairros, zonas de pormenor. São linhas normalmente com percursos mais curtos, circulares e com mais paragens.",
+				"title": "Linhas Inter-Regionais"
+			},
+			"longa": {
+				"description": "Linhas dedicadas a bairros, zonas de pormenor. São linhas normalmente com percursos mais curtos, circulares e com mais paragens.",
+				"title": "Linhas Longas"
+			},
+			"mar": {
+				"description": "Linhas dedicadas a bairros, zonas de pormenor. São linhas normalmente com percursos mais curtos, circulares e com mais paragens.",
+				"title": "Linhas Mar"
+			},
+			"proxima": {
+				"description": "Linhas dedicadas a bairros, zonas de pormenor. São linhas normalmente com percursos mais curtos, circulares e com mais paragens.",
+				"title": "Linhas Próximas"
+			},
+			"rapida": {
+				"description": "Linhas dedicadas a bairros, zonas de pormenor. São linhas normalmente com percursos mais curtos, circulares e com mais paragens.",
+				"title": "Linhas Rápidas"
+			},
+			"ticket_types": {
+				"onboard": "bilhete de bordo",
+				"onboard_start_by_29": "bilhete de bordo linhas começadas por 29**",
+				"onboard_start_by_49": "bilhete de bordo linhas começadas por 49**",
+				"prepaid": "pré-pago"
+			}
+		},
+		"TicketsHeader": {
+			"heading": "Bilhetes Ocasionais",
+			"onboard": {
+				"description": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Obcaecati ea natus itaque qui iure nam consequuntur minima, quibusdam saepe odio molestiae soluta aspernatur, corrupti labore fugiat? Numquam blanditiis accusantium quibusdam!",
+				"title": "Comprar dentro do autocarro"
+			},
+			"prepaid": {
+				"description": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Obcaecati ea natus itaque qui iure nam consequuntur minima, quibusdam saepe odio molestiae soluta aspernatur, corrupti labore fugiat? Numquam blanditiis accusantium quibusdam!",
+				"title": "Comprar antes da viagem"
+			},
+			"subheading": "Descubra quanto custa viajar na CMetropolitana de vez em quando. Para utilizações mais frequentes sugerimos a adesão ao sistema navegante®."
 		}
 	},
 	"toast": {
