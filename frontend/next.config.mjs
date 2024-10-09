@@ -23,10 +23,6 @@ const nextConfig = {
   reactStrictMode: true,
   async redirects() {
     return [
-      //
-      // { destination: '/alerts', permanent: true, source: '/alertas' },
-      // //
-      // { destination: '/stops', permanent: true, source: '/paragens' },
       // //
       { destination: '/lines', permanent: true, source: '/horarios' },
       // //

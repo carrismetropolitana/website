@@ -22,6 +22,7 @@ export default function Component() {
 	const router = useRouter();
 	const pathname = usePathname();
 	const params = useParams();
+	const searchParams = new URLSearchParams(window.location.search);
 
 	//
 	// B. Transform data
@@ -37,11 +38,14 @@ export default function Component() {
 	const handleLocaleChange = (value: string) => {
 		try {
 			console.log('switching locale to', value);
+			console.log('current pathname', pathname);
+			console.log('current params', params);
+			console.log('search params', searchParams);
 			router.replace(
 				// @ts-expect-error -- TypeScript will validate that only known `params`
 				// are used in combination with a given `pathname`. Since the two will
 				// always match for the current route, we can skip runtime checks.
-				{ params, pathname },
+				{ params, pathname, query: Object.fromEntries(searchParams.entries()) },
 				{ locale: value, scroll: true },
 			);
 		}

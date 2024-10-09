@@ -1,8 +1,8 @@
 /* * */
 
-import { defaultLocaleCode, enabledLocaleAlias, enabledLocaleCodes } from '@/i18n/config';
+import { defaultLocaleCode, enabledLocaleAliases, enabledLocaleCodes } from '@/i18n/config';
 import { Routes } from '@/utils/routes';
-import { createLocalizedPathnamesNavigation } from 'next-intl/navigation';
+import { createLocalizedPathnamesNavigation, createSharedPathnamesNavigation } from 'next-intl/navigation';
 import { defineRouting } from 'next-intl/routing';
 
 /* * */
@@ -15,7 +15,7 @@ const intlPathnames = Object.entries(Routes).reduce(
 
 			// Check if any of the available locales is in translatedPathnames
 			// If not, add the default locale
-			for (const localeCode of [...enabledLocaleCodes, ...enabledLocaleAlias]) {
+			for (const localeCode of [...enabledLocaleCodes, ...enabledLocaleAliases]) {
 				if (!(localeCode in translatedPathnames)) {
 					acc[value['route']][localeCode] = value['route'];
 				}
@@ -38,3 +38,4 @@ export const nextIntlRouting = defineRouting({
 /* * */
 
 export const { Link, redirect, usePathname, useRouter } = createLocalizedPathnamesNavigation(nextIntlRouting);
+// export const { Link, redirect, usePathname, useRouter } = createSharedPathnamesNavigation(nextIntlRouting);

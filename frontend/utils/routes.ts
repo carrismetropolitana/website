@@ -8,31 +8,31 @@ export const AppRoutes = Object.freeze({
 export const RoutesSupport = Object.freeze({
 	COMPLAINTS: {
 		intl: {
-			'pt-PT': '/reclamacoes',
+			pt: '/reclamacoes',
 		},
 		route: '/complaints',
 	},
 	CONTACTS: {
 		intl: {
-			'pt-PT': '/contactos',
+			pt: '/contactos',
 		},
 		route: '/contacts',
 	},
 	FAQ: {
 		intl: {
-			'pt-PT': '/faq',
+			pt: '/faq',
 		},
 		route: '/faq',
 	},
 	LOST_AND_FOUND: {
 		intl: {
-			'pt-PT': '/perdidos-e-achados',
+			pt: '/perdidos-e-achados',
 		},
 		route: '/lost-and-found',
 	},
 	STORES: {
 		intl: {
-			'pt-PT': '/lojas',
+			pt: '/lojas',
 		},
 		route: '/stores',
 	},
@@ -41,38 +41,38 @@ export const RoutesSupport = Object.freeze({
 export const RoutesSchedule = Object.freeze({
 	ALERTS: {
 		intl: {
-			'pt-PT': '/alertas',
+			pt: '/alertas',
 		},
 		route: '/alerts',
 	},
 	LINES: {
 		intl: {
-			'pt-PT': '/linhas',
+			pt: '/linhas',
 		},
 		route: '/lines',
 	},
 	LINES_DETAIL: {
 		intl: {
-			'pt-PT': '/linhas/[line_id]',
+			pt: '/linhas/[line_id]',
 		},
 		route: '/lines/[line_id]',
 	},
 	PLANNER: {
 		intl: {
-			'pt-PT': '/planeador',
+			pt: '/planeador',
 		},
 		route: '/planner',
 	},
 	SCHOOLS: 'https://escolas.carrismetropolitana.pt',
 	STOPS: {
 		intl: {
-			'pt-PT': '/paragens',
+			pt: '/paragens',
 		},
 		route: '/stops',
 	},
 	STOPS_DETAIL: {
 		intl: {
-			'pt-PT': '/paragens/[stop_id]',
+			pt: '/paragens/[stop_id]',
 		},
 		route: '/stops/[stop_id]',
 	},
@@ -81,19 +81,19 @@ export const RoutesSchedule = Object.freeze({
 export const RoutesPricing = Object.freeze({
 	CARDS: {
 		intl: {
-			'pt-PT': '/passe',
+			pt: '/passe',
 		},
 		route: '/cards',
 	},
 	HELPDESKS: {
 		intl: {
-			'pt-PT': '/onde-comprar',
+			pt: '/onde-comprar',
 		},
 		route: '/helpdesks',
 	},
 	TICKETS: {
 		intl: {
-			'pt-PT': '/bilhetes',
+			pt: '/bilhetes',
 		},
 		route: '/tickets',
 	},
@@ -117,37 +117,37 @@ export const RoutesLostAndFound = Object.freeze({
 export const RoutesFooter = Object.freeze({
 	ABOUT: {
 		intl: {
-			'pt-PT': '/sobre',
+			pt: '/sobre',
 		},
 		route: '/about',
 	},
 	CONDITIONS: {
 		intl: {
-			'pt-PT': '/condicoes',
+			pt: '/condicoes',
 		},
 		route: '/conditions',
 	},
 	COOKIES: {
 		intl: {
-			'pt-PT': '/cookies',
+			pt: '/cookies',
 		},
 		route: '/cookies',
 	},
 	LEGAL: {
 		intl: {
-			'pt-PT': '/legal',
+			pt: '/legal',
 		},
 		route: '/legal',
 	},
 	OPEN_DATA: {
 		intl: {
-			'pt-PT': '/dados-abertos',
+			pt: '/dados-abertos',
 		},
 		route: '/open-data',
 	},
 	PRIVACY: {
 		intl: {
-			'pt-PT': '/privacidade',
+			pt: '/privacidade',
 		},
 		route: '/privacy',
 	},
@@ -157,19 +157,19 @@ export const RoutesFooter = Object.freeze({
 export const RoutesProfile = Object.freeze({
 	CONFIGS: {
 		intl: {
-			'pt-PT': '/perfil/configuracoes',
+			pt: '/perfil/configuracoes',
 		},
 		route: '/profile/configs',
 	},
 	FAVORITES: {
 		intl: {
-			'pt-PT': '/perfil/favoritos',
+			pt: '/perfil/favoritos',
 		},
 		route: '/profile/favorites',
 	},
 	PROFILE: {
 		intl: {
-			'pt-PT': '/perfil',
+			pt: '/perfil',
 		},
 		route: '/profile',
 	},
@@ -188,19 +188,19 @@ export const Routes = Object.freeze({
 	...RoutesLostAndFound,
 	...RoutesFooter,
 
-	API: process.env.NEXT_PUBLIC_API_URL ?? 'https://api.cmet.pt',
+	API: process.env.NEXT_PUBLIC_API_URL ?? 'https://api.cmet.pt/v2/',
 	API_ACCOUNTS: process.env.ACCOUNTS_API_URL ?? 'https://accounts.carrismetropolitana.pt',
 	NAVEGANTE: 'https://www.navegante.pt',
 	// Other routes
 	NEWS: {
 		intl: {
-			'pt-PT': '/noticias',
+			pt: '/noticias',
 		},
 		route: '/news',
 	},
 	NEWS_DETAIL: {
 		intl: {
-			'pt-PT': '/noticias/[news_id]',
+			pt: '/noticias/[news_id]',
 		},
 		route: '/news/[news_id]',
 	},

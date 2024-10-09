@@ -1,6 +1,6 @@
 /* * */
 
-import { availableLocales, enabledLocaleAlias } from '@/i18n/config';
+import { availableLocales, enabledLocaleAliases } from '@/i18n/config';
 import { nextIntlRouting } from '@/i18n/routing';
 import { NextRequest, NextResponse } from 'next/server';
 import createIntlMiddleware from 'next-intl/middleware';
@@ -13,6 +13,14 @@ const intlMiddleware = createIntlMiddleware(nextIntlRouting);
 
 export default function middleware(req: NextRequest) {
 	//
+
+	//
+	// First, we need to check if the URL is a static asset or an API route.
+	// If it is, we can return early and let the request continue as normal (without the next-intl plugin intervention).
+	// Please keep the regex in the negative condition (it is not a static asset or an API route) to match what is commonly used in the plugin docs.
+
+	const pathnameIsNotStaticAssetOrApiRoute = new RegExp(/^(?!\/api)(?!\/_next)(?!\/_vercel)(?!.*\.).*$/).test(req.nextUrl.pathname);
+	if (!pathnameIsNotStaticAssetOrApiRoute) return;
 
 	//
 	// Split the URL into segments. The locale should be the first segment after the first slash.
@@ -31,7 +39,7 @@ export default function middleware(req: NextRequest) {
 
 	//
 	// If the locale is the 'UNKNOWN' keyword, then we can with confidence
-	// redirect to the default locale by remove the 'UNKNOWN' keyword from the URL.
+	// redirect to the default locale by removing the 'UNKNOWN' keyword from the URL.
 
 	if (possibleLocaleCode === 'UNKNOWN') {
 		const destinationUrl = new URL(newPathWithoutPossibleLocaleCode, req.nextUrl.origin);
@@ -45,7 +53,7 @@ export default function middleware(req: NextRequest) {
 	// If the locale is any of the enabled alias, then we must redirect
 	// to the corresponding 'offical' locale code.
 
-	if (enabledLocaleAlias.includes(possibleLocaleCode)) {
+	if (enabledLocaleAliases.includes(possibleLocaleCode)) {
 		const correspondingLocaleCode = availableLocales.find(item => item.alias.includes(possibleLocaleCode))?.value;
 		const destinationUrl = new URL(`${correspondingLocaleCode}${newPathWithoutPossibleLocaleCode}`, req.nextUrl.origin);
 		if (req.nextUrl.search) {
@@ -62,16 +70,3 @@ export default function middleware(req: NextRequest) {
 
 	//
 }
-
-/* * */
-
-export const config = {
-	// Matcher entries are linked with a logical "or", therefore
-	// if one of them matches, the middleware will be invoked.
-	matcher: [
-		// Match all pathnames except for
-		// - … if they start with `/api`, `/_next` or `/_vercel`
-		// - … the ones containing a dot (e.g. `favicon.ico`)
-		'/((?!api|_next|_vercel|.*\\..*).*)',
-	],
-};

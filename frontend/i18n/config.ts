@@ -4,18 +4,18 @@ import type { Formats } from 'next-intl';
 
 /* * */
 
-export const defaultLocaleCode = 'pt-PT';
+export const defaultLocaleCode = 'pt';
 
 export const availableLocales = [
-	{ alias: ['pt', 'pt_PT', 'pt-BR', 'pt_BR', 'pt-GW', 'pt_GW', 'pt-MZ', 'pt_MZ'], enabled: true, value: 'pt-PT' },
-	{ alias: ['en', 'en_US'], enabled: true, value: 'en-US' },
+	{ alias: ['pt-PT', 'pt_PT', 'pt-BR', 'pt_BR', 'pt-GW', 'pt_GW', 'pt-MZ', 'pt_MZ'], enabled: true, file: 'pt-PT', value: 'pt' },
+	{ alias: ['en-US', 'en_US'], enabled: true, file: 'en-US', value: 'en' },
 ];
 
 export const enabledLocaleCodes = availableLocales.filter(item => item.enabled).map(({ value }) => value);
 
-export const enabledLocaleAlias = availableLocales.filter(item => item.enabled).flatMap(({ alias }) => alias);
+export const enabledLocaleAliases = availableLocales.filter(item => item.enabled).flatMap(({ alias }) => alias);
 
-export const allEnabledLocaleCodesAndAlias = [...enabledLocaleCodes, ...enabledLocaleAlias];
+export const allEnabledLocaleCodesAndAliases = [...enabledLocaleCodes, ...enabledLocaleAliases];
 
 /* * */
 

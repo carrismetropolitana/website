@@ -558,11 +558,11 @@
 	},
 	"header": {
 		"LocaleSwitcher": {
-			"en-US": {
+			"en": {
 				"alt": "English",
 				"label": "English"
 			},
-			"pt-PT": {
+			"pt": {
 				"alt": "Português",
 				"label": "Português"
 			}
