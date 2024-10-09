@@ -1019,7 +1019,7 @@
 				"title": "Fast lines"
 			},
 			"ticket_types": {
-				"onboard": "",
+				"onboard": "single ticket",
 				"onboard_start_by_29": "bilhete de bordo linhas começadas por 29**",
 				"onboard_start_by_49": "bilhete de bordo linhas começadas por 49**",
 				"prepaid": "Prepaid"
