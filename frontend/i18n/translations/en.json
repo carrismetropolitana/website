@@ -263,10 +263,6 @@
 			"more_info": "More information",
 			"open_full_image": "Open image in new window"
 		},
-		"AlertsList": {
-			"heading": "Service Alerts",
-			"subheading": "Stay up to date with all changes on the network. Lorem ipsum dolor sit amet."
-		},
 		"AlertsListEmpty": {
 			"default": {
 				"action_1": "Check Active Alerts Today",
@@ -289,16 +285,18 @@
 			"open": "Open"
 		},
 		"AlertsListToolbar": {
-			"filters": {
-				"text_search": "Search alert by title, description, location...",
-				"lines_label": "Filter by line",
-				"stops_label": "Filter by stop"
-			},
 			"by_date": {
 				"current": "This week ({count})",
 				"future": "Futures ({count})"
 			},
-			"found_items_counter": "{count, plural, =0 {No alerts found.} one {Found # alert:} other {Found # alert:}}"
+			"filters": {
+				"lines_label": "Filter by line",
+				"stops_label": "Filter by stop",
+				"text_search": "Search alert by title, description, location..."
+			},
+			"found_items_counter": "{count, plural, =0 {No alerts found.} one {Found # alert:} other {Found # alert:}}",
+			"heading": "Service Alerts",
+			"subheading": "Stay up to date with all changes on the network. Lorem ipsum dolor sit amet."
 		},
 		"SelectCause": {
 			"placeholder": "Filter by cause"
@@ -340,7 +338,104 @@
 			"text": "We recommend you to update soon for better user experience."
 		}
 	},
+	"cards": {
+		"Discounts": {
+			"heading": "Discounts",
+			"products": {
+				"combatente-minus-65": {
+					"description": "$30 discount for former combatants under 65. It is necessary to present a declaration. Find out more on the website navegante.pt",
+					"price_metropolitano": "€10/month",
+					"price_municipal": "FREE",
+					"title": "Former combatants <65"
+				},
+				"combatente-plus-65": {
+					"description": "100% discount for former combatants aged 65 or over. It is necessary to present a declaration. Find out more on the website navegante.pt",
+					"price_metropolitano": "FREE",
+					"price_municipal": "N/A",
+					"title": "Former combatants >65"
+				},
+				"family": {
+					"description": "Discount valid for households with at least 3 individuals. It is necessary that all family members have the same tax residence, reside in one of the 18 municipalities of aml, and have a direct family relationship of ancestry or descendants with the holder. Find out more on the website navegante.pt",
+					"price_metropolitano": "€80/month",
+					"price_municipal": "€60/month",
+					"title": "Family"
+				},
+				"normal": {
+					"description": "The discount that everyone is entitled to. With navegante®, Portuguese families started to save ??€ on average per person.",
+					"price_metropolitano": "€40/month",
+					"price_municipal": "€30/month",
+					"title": "Normal"
+				},
+				"plus-65": {
+					"description": "A 50% discount is available for users aged 65 and over. No declaration is required, but you may need to confirm your date of birth. Valid only for metropolitan services. For more information, visit the navegante.pt website",
+					"price_metropolitano": "€20/month",
+					"price_municipal": "N/A",
+					"title": "+65"
+				},
+				"social-a": {
+					"description": "A 50% discount is available upon presentation of an income tax return. For more details, visit the navegante.pt website",
+					"price_metropolitano": "€20/month",
+					"price_municipal": "€15/month",
+					"title": "Social+ A"
+				},
+				"social-b": {
+					"description": "A 25% discount is available upon presentation of an income tax return. For more details, visit the navegante.pt website",
+					"price_metropolitano": "€30/month",
+					"price_municipal": "€22,5/month",
+					"title": "Social+ B"
+				},
+				"sub18": {
+					"description": "A 100% discount is available for all students under 18 years old. No declaration is required, but you may need to confirm your date of birth. For more information, visit navegante.pt website",
+					"price_metropolitano": "FREE",
+					"price_municipal": "N/A",
+					"title": "U-18"
+				},
+				"sub23": {
+					"description": "A 100% discount is available for all students between 19 and 23 years old. No declaration is required, but you may need to present a registration at an educational institution. For more information, visit navegante.pt website",
+					"price_metropolitano": "FREE",
+					"price_municipal": "N/A",
+					"title": "U-23"
+				}
+			},
+			"subheading": "Discover the discounts available for you."
+		},
+		"Modalities": {
+			"heading": "Modalidades",
+			"metropolitano": {
+				"description": "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Eius, ut.",
+				"price": "€40/month",
+				"title": "Travel everywhere, without limits."
+			},
+			"municipal": {
+				"description": "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Eius, ut.",
+				"price": "€30/month",
+				"title": "Travel within municipality."
+			},
+			"subheading": "Find out how much it costs to travel occasionally on CMetropolitana. For more frequent use, we recommend subscribing to navegante®"
+		},
+		"MunicipalDiscounts": {
+			"heading": "Municipal Discounts",
+			"subheading": "Find out how much it costs to travel occasionally on CMetropolitana. For more frequent use, we recommend subscribing to navegante®"
+		},
+		"Pass": {
+			"heading": "Monthly Pass",
+			"navegante": {
+				"description": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Obcaecati ea natus itaque qui iure nam consequuntur minima, quibusdam saepe odio molestiae soluta aspernatur, corrupti labore fugiat? Numquam blanditiis accusantium quibusdam!",
+				"title": "Do you have a personalized card already?"
+			},
+			"subheading": "Find out how much it costs to travel occasionally on CMetropolitana. For more frequent use, we recommend subscribing to navegante®",
+			"wizard": {
+				"description": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Obcaecati ea natus itaque qui iure nam consequuntur minima, quibusdam saepe odio molestiae soluta aspernatur, corrupti labore fugiat? Numquam blanditiis accusantium quibusdam!",
+				"title": "Find out the best option for you."
+			}
+		}
+	},
 	"common": {
+		"NextArrivals": {
+			"arriving": "Coming up",
+			"hours": "h",
+			"minutes": "min"
+		},
 		"SelectOperationalDay": {
 			"today": "Today",
 			"tomorrow": "Tomorrow"
@@ -463,14 +558,52 @@
 	},
 	"header": {
 		"LocaleSwitcher": {
-			"en-US": {
+			"en": {
 				"alt": "English",
-				"label": "🇬🇧"
+				"label": "English"
 			},
-			"pt-PT": {
+			"pt": {
 				"alt": "Português",
-				"label": "🇵🇹"
+				"label": "Português"
 			}
+		}
+	},
+	"helpdesks": {
+		"Service": {
+			"app": {
+				"description": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Obcaecati ea natus itaque qui iure nam consequuntur minima, quibusdam saepe odio molestiae soluta aspernatur, corrupti labore fugiat? Numquam blanditiis accusantium quibusdam!",
+				"title": "navegante® app"
+			},
+			"heading": "Preferential service",
+			"multibanco": {
+				"description": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Obcaecati ea natus itaque qui iure nam consequuntur minima, quibusdam saepe odio molestiae soluta aspernatur, corrupti labore fugiat? Numquam blanditiis accusantium quibusdam!",
+				"title": "ATM™ Network"
+			},
+			"payshop": {
+				"description": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Obcaecati ea natus itaque qui iure nam consequuntur minima, quibusdam saepe odio molestiae soluta aspernatur, corrupti labore fugiat? Numquam blanditiis accusantium quibusdam!",
+				"title": "Rede de Agentes payshop™"
+			},
+			"stores": {
+				"description": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Obcaecati ea natus itaque qui iure nam consequuntur minima, quibusdam saepe odio molestiae soluta aspernatur, corrupti labore fugiat? Numquam blanditiis accusantium quibusdam!",
+				"title": "Espaço navegante®"
+			},
+			"subheading": "Find out how much it costs to travel occasionally on CMetropolitana. For more frequent use, we recommend subscribing to navegante®"
+		},
+		"ServicePoints": {
+			"heading": "Service Points",
+			"subheading": "Find out where you can purchase your navegante® pass."
+		},
+		"WhereToBuy": {
+			"frequent_travel": {
+				"description": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Obcaecati ea natus itaque qui iure nam consequuntur minima, quibusdam saepe odio molestiae soluta aspernatur, corrupti labore fugiat? Numquam blanditiis accusantium quibusdam!",
+				"title": "Frequent trips"
+			},
+			"heading": "Where to buy",
+			"ocasional_travel": {
+				"description": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Obcaecati ea natus itaque qui iure nam consequuntur minima, quibusdam saepe odio molestiae soluta aspernatur, corrupti labore fugiat? Numquam blanditiis accusantium quibusdam!",
+				"title": "Occasional trips"
+			},
+			"subheading": "Find out where you can purchase your navegante® pass."
 		}
 	},
 	"home": {
@@ -532,9 +665,6 @@
 				"big_number": "{value, number, percentage}",
 				"subtitle": "feasibility of the service of all routes on this line in the last 15 days"
 			}
-		},
-		"LinesDetailPathMap": {
-			"active_vehicles_counter": "{count, plural, =0 {No vehicles in circulation} one {# vehicle in circulation} other {# vehicles in circulation}}"
 		},
 		"LinesListToolbar": {
 			"by_current_view": {
@@ -603,6 +733,9 @@
 		}
 	},
 	"map": {
+		"MapViewStyleVehicles": {
+			"vehicles_counter": "{count, plural, =0 {No vehicles in circulation} one {# vehicle in circulation} other {# vehicles in circulation}}"
+		},
 		"toolbar": {
 			"center_map": "Center Map",
 			"open_google_maps": "Open in Google Maps",
@@ -648,9 +781,9 @@
 	"planner": {
 		"Page": {
 			"Navegante": {
+				"button": "View Options",
 				"heading": "Plan your trip with the Navegante®",
-				"subheading": "Use the Navegante® service to pla n your trip, from A to B, combining various transport modes, if necessary. Discover all the options included with your subscription.",
-				"button": "View Options"
+				"subheading": "Use the Navegante® service to pla n your trip, from A to B, combining various transport modes, if necessary. Discover all the options included with your subscription."
 			},
 			"Partners": {
 				"disclaimer": "Edit this page on Github if you want to include your app. The order is random. Only inputs that simultaneously provide planned and real-time schedules or vehicle positions are permitted.",
@@ -742,53 +875,60 @@
 		}
 	},
 	"stops": {
-		"FavoritesList": {
-			"no_favorites": "No favorite stops yet"
-		},
-		"NextBusRow": {
-			"arriving_now": "Arriving",
-			"passed": "{value}",
-			"realtime": "{value} min",
-			"scheduled": "{value}"
-		},
-		"NextBuses": {
-			"hide": "Hide previous passages",
-			"show": "View previous passages"
-		},
-		"NextBusesHeader": {
-			"estimate": "Forecast",
-			"headsign": "Destination",
-			"line": "Line"
-		},
 		"Page": {
 			"heading": "Search Stops"
-		},
-		"PageToolbar": {
-			"by_current_view": {
-				"all": "All Stops",
-				"favorites": "Favorites"
-			},
-			"by_search": {
-				"placeholder": "Search by name, location..."
-			},
-			"found_items_counter": {
-				"all": "{count, plural, =0 {No stops found.} one {Found # stop:} other {Found # stops:}}",
-				"favorites": "{count, plural, =0 {No favorite stops found.} one {Found # favorite stops:} other {Found # favorite stops:}}"
-			}
 		},
 		"Single": {
 			"heading": "Search Stops",
 			"lines_that_pass_here": "Lines passing through this stop"
 		},
+		"StopsDetailContentTimetableHeader": {
+			"summary": "Horários estimados de passagem na paragem <stopName>{stop_name}</stopName> para o dia <dayName>{day_name, date, long}</dayName>. <changeDay>Alterar dia ›</changeDay>",
+			"trips_legend": {
+				"estimate": "Prediction",
+				"headsign": "Destination",
+				"line": "Line"
+			}
+		},
+		"StopsDetailContentTimetableRealtime": {
+			"end_of_day": "End of day",
+			"no_service": "No Service Today",
+			"show_past_trips_toggle": {
+				"hide": "Hide previous passages",
+				"show": "View previous passages"
+			}
+		},
+		"StopsDetailContentTimetableRow": {
+			"localities": {
+				"label": "Pass through"
+			}
+		},
+		"StopsDetailContentTimetableSchedule": {
+			"no_service": "No Service for the selected day"
+		},
+		"StopsListToolbar": {
+			"filters": {
+				"by_current_view": {
+					"all": "All Stops",
+					"favorites": "Favorites"
+				},
+				"by_search": {
+					"placeholder": "Search by name, location..."
+				}
+			},
+			"found_items_counter": {
+				"all": "{count, plural, =0 {Nenhuma paragem encontrada.} one {Encontrada # paragem:} other {Encontradas # paragens:}}",
+				"favorites": "{count, plural, =0 {Nenhuma paragem favorita encontrada.} one {Encontrada # paragem favorita:} other {Encontradas # paragens favoritas:}}"
+			},
+			"heading": "Search Stops"
+		},
+		"StopsListViewFavorites": {
+			"no_favorites": "No favorite stops yet"
+		},
 		"collapse_filters": "Hide Filters",
 		"expand_filters": "Expand Filters"
 	},
 	"stores": {
-		"StoresList": {
-			"external_link": "Navigator® agent network",
-			"heading": "Stores and Agent Network",
-			"subheading": "Available to all passengers, Navante® Spaces are dedicated to providing information about the Carris Metropolitana network and ticketing, enabling queries to be clarified, the issuance of Navante® cards and membership to profiles and discounts. It is also possible to load titles at PayShop® service points within the Navante® agent network."
-		},
 		"StoresListEmpty": {
 			"by_municipality": {
 				"action_1": "Consult Store Opening Hours",
@@ -845,7 +985,57 @@
 			"by_municipality": {
 				"label": "Filter by Municipality"
 			},
-			"found_items_counter": "{count, plural, =0 {No stores found.} one {Found # store:} other {Found # stores:}}"
+			"external_link": "Espaço navegante®",
+			"filter_by": {
+				"capacity": "People waiting",
+				"municipality_name": "Municipality",
+				"time": "Waiting time"
+			},
+			"found_items_counter": "{count, plural, =0 {No stores found.} one {Found # store:} other {Found # stores:}}",
+			"heading": "Espaço navegante",
+			"subheading": "Available to all passengers, navante® Spaces are dedicated to providing information about the Carris Metropolitana network and ticketing, enabling queries to be clarified, the issuance of Navante® cards and membership to profiles and discounts. It is also possible to load titles at PayShop® service points within the navante® agent network."
+		}
+	},
+	"tickets": {
+		"Pricing": {
+			"inter-regional": {
+				"description": "Linhas dedicadas a bairros, zonas de pormenor. São linhas normalmente com percursos mais curtos, circulares e com mais paragens.",
+				"title": "Inter-Regional Lines"
+			},
+			"longa": {
+				"description": "Linhas dedicadas a bairros, zonas de pormenor. São linhas normalmente com percursos mais curtos, circulares e com mais paragens.",
+				"title": "Long Lines"
+			},
+			"mar": {
+				"description": "Linhas dedicadas a bairros, zonas de pormenor. São linhas normalmente com percursos mais curtos, circulares e com mais paragens.",
+				"title": "Sea Lines"
+			},
+			"proxima": {
+				"description": "Linhas dedicadas a bairros, zonas de pormenor. São linhas normalmente com percursos mais curtos, circulares e com mais paragens.",
+				"title": "Linhas Próximas"
+			},
+			"rapida": {
+				"description": "Linhas dedicadas a bairros, zonas de pormenor. São linhas normalmente com percursos mais curtos, circulares e com mais paragens.",
+				"title": "Fast lines"
+			},
+			"ticket_types": {
+				"onboard": "",
+				"onboard_start_by_29": "bilhete de bordo linhas começadas por 29**",
+				"onboard_start_by_49": "bilhete de bordo linhas começadas por 49**",
+				"prepaid": "Prepaid"
+			}
+		},
+		"TicketsHeader": {
+			"heading": "Occasional Tickets",
+			"onboard": {
+				"description": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Obcaecati ea natus itaque qui iure nam consequuntur minima, quibusdam saepe odio molestiae soluta aspernatur, corrupti labore fugiat? Numquam blanditiis accusantium quibusdam!",
+				"title": "Buy inside the bus"
+			},
+			"prepaid": {
+				"description": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Obcaecati ea natus itaque qui iure nam consequuntur minima, quibusdam saepe odio molestiae soluta aspernatur, corrupti labore fugiat? Numquam blanditiis accusantium quibusdam!",
+				"title": "Buy before your trip"
+			},
+			"subheading": "Find out how much it costs to travel occasionally on CMetropolitana. For more frequent use, we recommend subscribing to navegante®"
 		}
 	},
 	"toast": {
