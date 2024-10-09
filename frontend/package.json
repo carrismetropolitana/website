@@ -32,9 +32,9 @@
 		"luxon": "3.5.0",
 		"maplibre-gl": "4.7.1",
 		"minisearch": "7.1.0",
-		"next": "14.2.14",
-		"next-intl": "3.20.0",
-		"nuqs": "^1.19.3",
+		"next": "14.2.15",
+		"next-intl": "3.21.1",
+		"nuqs": "1.20.0",
 		"react": "18.3.1",
 		"react-dom": "18.3.1",
 		"react-map-gl": "7.1.7",
@@ -52,17 +52,17 @@
 		"yup": "1.4.0"
 	},
 	"devDependencies": {
-		"@carrismetropolitana/eslint": "20241001.1357.32",
+		"@carrismetropolitana/eslint": "20241008.2247.34",
 		"@types/jsonwebtoken": "9.0.7",
 		"@types/luxon": "3.4.2",
-		"@types/node": "22.7.4",
+		"@types/node": "22.7.5",
 		"@types/react": "18.3.11",
 		"@types/react-dom": "18.3.0",
 		"@types/react-virtualized": "9.21.30",
 		"postcss": "8.4.47",
 		"postcss-preset-mantine": "1.17.0",
 		"postcss-simple-vars": "7.0.1",
-		"typescript": "5.6.2",
+		"typescript": "5.6.3",
 		"typescript-plugin-css-modules": "5.1.0"
 	}
 }
