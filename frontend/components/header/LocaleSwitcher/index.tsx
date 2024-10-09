@@ -7,6 +7,7 @@ import { usePathname, useRouter } from '@/i18n/routing';
 import { SegmentedControl } from '@mantine/core';
 import { useParams } from 'next/navigation';
 import { useTranslations } from 'next-intl';
+import { useTransition } from 'react';
 
 import styles from './styles.module.css';
 
@@ -24,6 +25,8 @@ export default function Component() {
 	const params = useParams();
 	const searchParams = new URLSearchParams(window.location.search);
 
+	const [isPending, startTransition] = useTransition();
+
 	//
 	// B. Transform data
 
@@ -36,22 +39,24 @@ export default function Component() {
 	// C. Handle actions
 
 	const handleLocaleChange = (value: string) => {
-		try {
-			console.log('switching locale to', value);
-			console.log('current pathname', pathname);
-			console.log('current params', params);
-			console.log('search params', searchParams);
-			router.replace(
-				// @ts-expect-error -- TypeScript will validate that only known `params`
-				// are used in combination with a given `pathname`. Since the two will
-				// always match for the current route, we can skip runtime checks.
-				{ params, pathname, query: Object.fromEntries(searchParams.entries()) },
-				{ locale: value, scroll: true },
-			);
-		}
-		catch (error) {
-			console.error(error);
-		}
+		startTransition(() => {
+			try {
+				console.log('switching locale to', value);
+				console.log('current pathname', pathname);
+				console.log('current params', params);
+				console.log('search params', searchParams);
+				router.replace(
+					// @ts-expect-error -- TypeScript will validate that only known `params`
+					// are used in combination with a given `pathname`. Since the two will
+					// always match for the current route, we can skip runtime checks.
+					{ params, pathname, query: Object.fromEntries(searchParams.entries()) },
+					{ locale: value, scroll: true },
+				);
+			}
+			catch (error) {
+				console.error(error);
+			}
+		});
 	};
 
 	//
