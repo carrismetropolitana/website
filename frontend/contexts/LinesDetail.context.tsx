@@ -97,9 +97,9 @@ export const LinesDetailContextProvider = ({ children, lineId }) => {
 	//
 	// B. Fetch data
 
-	const { data: lineData, isLoading: lineLoading } = useSWR<Line, Error>(`${Routes.API}/v2/lines/${lineId}`);
-	const { data: allAlertsData, isLoading: allAlertsLoading } = useSWR<Alert[], Error>(`${Routes.API}/v2/alerts`);
-	const { data: allDemandByLineData } = useSWR<DemandByLine[], Error>(`${Routes.API}/v2/metrics/demand/by_line`);
+	const { data: lineData, isLoading: lineLoading } = useSWR<Line, Error>(`${Routes.API}/lines/${lineId}`);
+	const { data: allAlertsData, isLoading: allAlertsLoading } = useSWR<Alert[], Error>(`${Routes.API}/alerts`);
+	const { data: allDemandByLineData } = useSWR<DemandByLine[], Error>(`${Routes.API}/metrics/demand/by_line`);
 
 	// Check if the line exists
 	useEffect(() => {
@@ -111,7 +111,7 @@ export const LinesDetailContextProvider = ({ children, lineId }) => {
 			try {
 				if (!lineData) return;
 				const fetchPromises = lineData.route_ids.map((routeId) => {
-					return fetch(`${Routes.API}/v2/routes/${routeId}`).then(response => response.json());
+					return fetch(`${Routes.API}/routes/${routeId}`).then(response => response.json());
 				});
 				const resultData = await Promise.all(fetchPromises);
 				setDataRoutesState(resultData);
@@ -127,7 +127,7 @@ export const LinesDetailContextProvider = ({ children, lineId }) => {
 			try {
 				if (!lineData) return;
 				const fetchPromises = lineData.pattern_ids.map((patternId) => {
-					return fetch(`${Routes.API}/v2/patterns/${patternId}`).then(response => response.json());
+					return fetch(`${Routes.API}/patterns/${patternId}`).then(response => response.json());
 				});
 				const resultData = await Promise.all(fetchPromises);
 				setDataAllPatternsState(resultData);
@@ -146,7 +146,7 @@ export const LinesDetailContextProvider = ({ children, lineId }) => {
 		if (!dataActivePatternGroupState) return;
 		(async () => {
 			try {
-				const shapeData = await fetch(`${Routes.API}/v2/shapes/${dataActivePatternGroupState.shape_id}`).then((response) => {
+				const shapeData = await fetch(`${Routes.API}/shapes/${dataActivePatternGroupState.shape_id}`).then((response) => {
 					if (!response.ok) console.log(`Failed to fetch shape data for shapeId: ${dataActivePatternGroupState.shape_id}`);
 					else return response.json();
 				});

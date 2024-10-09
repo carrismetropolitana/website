@@ -30,8 +30,8 @@ export default function Component({ lineId, stopId }: Props) {
 	//
 	// B. Fetch data
 
-	const { data: lineData } = useSWR<Line>(lineId && `${Routes.API}/v2/lines/${lineId}`);
-	const { data: stopData } = useSWR<Stop>(stopId && `${Routes.API}/v2/stops/${stopId}`);
+	const { data: lineData } = useSWR<Line>(lineId && `${Routes.API}/lines/${lineId}`);
+	const { data: stopData } = useSWR<Stop>(stopId && `${Routes.API}/stops/${stopId}`);
 
 	//
 	// C. Handle actions

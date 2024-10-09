@@ -30,8 +30,8 @@ export default function Component() {
 	//
 	// B. Fetch data
 
-	const { data: allLinesData } = useSWR(`${Routes.API}/v2/lines`);
-	const { data: allStopsData } = useSWR(`${Routes.API}/v2/stops`);
+	const { data: allLinesData } = useSWR(`${Routes.API}/lines`);
+	const { data: allStopsData } = useSWR(`${Routes.API}/stops`);
 
 	//
 	// C. Transform data

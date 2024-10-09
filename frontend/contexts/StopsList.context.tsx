@@ -74,7 +74,7 @@ export const StopsListContextProvider = ({ children }) => {
 	//
 	// B. Fetch data
 
-	const { data: allStopsData, isLoading: allStopsLoading } = useSWR<Stop[], Error>(`${Routes.API}/v2/stops`);
+	const { data: allStopsData, isLoading: allStopsLoading } = useSWR<Stop[], Error>(`${Routes.API}/stops`);
 
 	//
 	// C. Transform data

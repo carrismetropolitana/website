@@ -38,7 +38,7 @@ export default function Component() {
 	//
 	// B. Fetch data
 
-	const { data: allLinesData, isLoading: allLinesLoading } = useSWR(`${Routes.API}/v2/lines`);
+	const { data: allLinesData, isLoading: allLinesLoading } = useSWR(`${Routes.API}/lines`);
 
 	//
 	// C. Transform data

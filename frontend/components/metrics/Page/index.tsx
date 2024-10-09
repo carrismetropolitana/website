@@ -22,7 +22,7 @@ export default function Component() {
 	//
 	// A. Fetch Data
 
-	const { data, isLoading } = useSWR<OperatorMetrics[]>(`${Routes.API}/v2/metrics/demand/operator/cm/${getOperationalDay()}`, { refreshInterval: 5 * 60 * 1000 }); // 5 minutes
+	const { data, isLoading } = useSWR<OperatorMetrics[]>(`${Routes.API}/metrics/demand/operator/cm/${getOperationalDay()}`, { refreshInterval: 5 * 60 * 1000 }); // 5 minutes
 
 	//
 	// B. Render components

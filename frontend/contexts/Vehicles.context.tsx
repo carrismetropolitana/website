@@ -53,7 +53,7 @@ export const VehiclesContextProvider = ({ children }) => {
 	//
 	// A. Fetch data
 
-	const { data: allVehiclesData, isLoading: allVehiclesLoading } = useSWR<Vehicle[], Error>(`${Routes.API}/v2/vehicles`, { refreshInterval: 3000 });
+	const { data: allVehiclesData, isLoading: allVehiclesLoading } = useSWR<Vehicle[], Error>(`${Routes.API}/vehicles`, { refreshInterval: 3000 });
 
 	//
 	// B. Handle actions

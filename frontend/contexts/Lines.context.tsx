@@ -54,7 +54,7 @@ export const LinesContextProvider = ({ children }) => {
 	//
 	// B. Fetch data
 
-	const { data: allLinesData, isLoading: allLinesLoading } = useSWR<Line[], Error>(`${Routes.API}/v2/lines`);
+	const { data: allLinesData, isLoading: allLinesLoading } = useSWR<Line[], Error>(`${Routes.API}/lines`);
 
 	//
 	// C. Transform data

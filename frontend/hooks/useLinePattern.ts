@@ -24,7 +24,7 @@ const useLinePatterns = () => {
 
 		try {
 			const fetchPromises = pattern_ids.map(patternId =>
-				fetch(`${Routes.API}/v2/patterns/${patternId}`).then(response => response.json()),
+				fetch(`${Routes.API}/patterns/${patternId}`).then(response => response.json()),
 			);
 			const resultData: Pattern[] = await Promise.all(fetchPromises);
 

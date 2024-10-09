@@ -137,7 +137,7 @@ export const StopsDetailContextProvider = ({ children, stopId }: { children: Rea
 		const fetchData = async () => {
 			try {
 				if (!dataActiveStopIdState) return;
-				const realtimeData = await fetch(`${Routes.API}/v2/stops/${dataActiveStopIdState}/realtime`)
+				const realtimeData = await fetch(`${Routes.API}/stops/${dataActiveStopIdState}/realtime`)
 					.then((response) => {
 						if (!response.ok) console.log(`Failed to fetch realtime data for stopId: ${dataActiveStopIdState}`);
 						else return response.json();
@@ -165,7 +165,7 @@ export const StopsDetailContextProvider = ({ children, stopId }: { children: Rea
 		(async () => {
 			try {
 				const patternsData = await Promise.all(dataStopState.patterns.map((patternId) => {
-					return fetch(`${Routes.API}/v2/patterns/${patternId}`).then((response) => {
+					return fetch(`${Routes.API}/patterns/${patternId}`).then((response) => {
 						if (!response.ok) console.log(`Failed to fetch pattern data for patternId: ${patternId}`);
 						else return response.json();
 					});
@@ -186,7 +186,7 @@ export const StopsDetailContextProvider = ({ children, stopId }: { children: Rea
 		if (!dataActivePatternGroupState) return;
 		(async () => {
 			try {
-				const shapeData = await fetch(`${Routes.API}/v2/shapes/${dataActivePatternGroupState.shape_id}`).then((response) => {
+				const shapeData = await fetch(`${Routes.API}/shapes/${dataActivePatternGroupState.shape_id}`).then((response) => {
 					if (!response.ok) console.log(`Failed to fetch shape data for shapeId: ${dataActivePatternGroupState.shape_id}`);
 					else return response.json();
 				});
