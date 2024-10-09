@@ -2,7 +2,7 @@
 
 import { defaultLocaleCode, enabledLocaleAliases, enabledLocaleCodes } from '@/i18n/config';
 import { Routes } from '@/utils/routes';
-import { createLocalizedPathnamesNavigation, createSharedPathnamesNavigation } from 'next-intl/navigation';
+import { createLocalizedPathnamesNavigation } from 'next-intl/navigation';
 import { defineRouting } from 'next-intl/routing';
 
 /* * */
@@ -38,4 +38,3 @@ export const nextIntlRouting = defineRouting({
 /* * */
 
 export const { Link, redirect, usePathname, useRouter } = createLocalizedPathnamesNavigation(nextIntlRouting);
-// export const { Link, redirect, usePathname, useRouter } = createSharedPathnamesNavigation(nextIntlRouting);
