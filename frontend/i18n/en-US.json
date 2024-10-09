@@ -295,7 +295,7 @@
 				"text_search": "Search alert by title, description, location..."
 			},
 			"found_items_counter": "{count, plural, =0 {No alerts found.} one {Found # alert:} other {Found # alert:}}",
-			"heading": "Alertas de Serviço",
+			"heading": "Service Alerts",
 			"subheading": "Fique a par de todas as alterações à rede. Lorem ipsum dolor sit amet."
 		},
 		"SelectCause": {
@@ -358,7 +358,7 @@
 					"description": "Desconto válido para agregados familiares com pelo menos 3 indivíduos. É necessário que todos os elementos do agregado tenham o mesmo domicílio fiscal, residam num dos 18 municípios da aml, e que tenham relação familiar direta de ascendência ou descendência com o titular. Saiba mais no site navegante.pt",
 					"price_metropolitano": "80 € / mês",
 					"price_municipal": "60 € / mês",
-					"title": "Família"
+					"title": "Family"
 				},
 				"normal": {
 					"description": "O desconto que todos têm por direito. Com o passe navegante® as famílias portuguesas passaram a poupar ??€ em média por pessoa.",
