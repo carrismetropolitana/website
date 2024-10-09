@@ -296,7 +296,7 @@
 			},
 			"found_items_counter": "{count, plural, =0 {No alerts found.} one {Found # alert:} other {Found # alert:}}",
 			"heading": "Service Alerts",
-			"subheading": "Fique a par de todas as alterações à rede. Lorem ipsum dolor sit amet."
+			"subheading": "Stay up to date with all changes on the network. Lorem ipsum dolor sit amet."
 		},
 		"SelectCause": {
 			"placeholder": "Filter by cause"
@@ -340,99 +340,99 @@
 	},
 	"cards": {
 		"Discounts": {
-			"heading": "Descontos",
+			"heading": "Discounts",
 			"products": {
 				"combatente-minus-65": {
-					"description": "Desconto de 30€ para antigos combatentes com menos de 65 anos. É necessário apresentar declaração. Saiba mais no site navegante.pt",
-					"price_metropolitano": "10 € / mês",
-					"price_municipal": "GRÁTIS",
-					"title": "Antigo Combatente <65"
+					"description": "$30 discount for former combatants under 65. It is necessary to present a declaration. Find out more on the website navegante.pt",
+					"price_metropolitano": "€10/month",
+					"price_municipal": "FREE",
+					"title": "Former combatants <65"
 				},
 				"combatente-plus-65": {
-					"description": "Desconto de 100% para antigos combatentes com 65 ou mais anos. É necessário apresentar declaração. Saiba mais no site navegante.pt",
-					"price_metropolitano": "GRÁTIS",
+					"description": "100% discount for former combatants aged 65 or over. It is necessary to present a declaration. Find out more on the website navegante.pt",
+					"price_metropolitano": "FREE",
 					"price_municipal": "N/A",
-					"title": "Antigo Combatente >65"
+					"title": "Former combatants >65"
 				},
 				"family": {
-					"description": "Desconto válido para agregados familiares com pelo menos 3 indivíduos. É necessário que todos os elementos do agregado tenham o mesmo domicílio fiscal, residam num dos 18 municípios da aml, e que tenham relação familiar direta de ascendência ou descendência com o titular. Saiba mais no site navegante.pt",
-					"price_metropolitano": "80 € / mês",
-					"price_municipal": "60 € / mês",
+					"description": "Discount valid for households with at least 3 individuals. It is necessary that all family members have the same tax residence, reside in one of the 18 municipalities of aml, and have a direct family relationship of ancestry or descendants with the holder. Find out more on the website navegante.pt",
+					"price_metropolitano": "€80/month",
+					"price_municipal": "€60/month",
 					"title": "Family"
 				},
 				"normal": {
-					"description": "O desconto que todos têm por direito. Com o passe navegante® as famílias portuguesas passaram a poupar ??€ em média por pessoa.",
-					"price_metropolitano": "40 € / mês",
-					"price_municipal": "30 € / mês",
+					"description": "The discount that everyone is entitled to. With navegante®, Portuguese families started to save ??€ on average per person.",
+					"price_metropolitano": "€40/month",
+					"price_municipal": "€30/month",
 					"title": "Normal"
 				},
 				"plus-65": {
-					"description": "Desconto de 50% para utilizadores com 65 ou mais anos. Não é necessário apresentar declaração mas pode ser necessário confirmar a sua data de nascimento. Válido apenas para a modalidade metropolitana. Saiba mais no site navegante.pt",
-					"price_metropolitano": "20 € / mês",
+					"description": "A 50% discount is available for users aged 65 and over. No declaration is required, but you may need to confirm your date of birth. Valid only for metropolitan services. For more information, visit the navegante.pt website",
+					"price_metropolitano": "€20/month",
 					"price_municipal": "N/A",
 					"title": "+65"
 				},
 				"social-a": {
-					"description": "Desconto de 50% mediante apresentação de declaração de rendimentos. Saiba mais no site navegante.pt",
-					"price_metropolitano": "20 € / mês",
-					"price_municipal": "15 € / mês",
+					"description": "A 50% discount is available upon presentation of an income tax return. For more details, visit the navegante.pt website",
+					"price_metropolitano": "€20/month",
+					"price_municipal": "€15/month",
 					"title": "Social+ A"
 				},
 				"social-b": {
-					"description": "Desconto de 25% mediante apresentação de declaração de rendimentos. Saiba mais no site navegante.pt",
-					"price_metropolitano": "30 € / mês",
-					"price_municipal": "22,5 € / mês",
+					"description": "A 25% discount is available upon presentation of an income tax return. For more details, visit the navegante.pt website",
+					"price_metropolitano": "€30/month",
+					"price_municipal": "€22,5/month",
 					"title": "Social+ B"
 				},
 				"sub18": {
-					"description": "Desconto de 100% para todos os jovens estudantes menores de 18 anos. Não é necessário apresentar nenhuma declaração, mas pode ser preciso confirmar a data de nascimento. Saiba mais no site navegante.pt",
-					"price_metropolitano": "GRÁTIS",
+					"description": "A 100% discount is available for all students under 18 years old. No declaration is required, but you may need to confirm your date of birth. For more information, visit navegante.pt website",
+					"price_metropolitano": "FREE",
 					"price_municipal": "N/A",
-					"title": "Sub18"
+					"title": "U-18"
 				},
 				"sub23": {
-					"description": "Desconto de 100% para todos os jovens estudantes entre os 19 e os 23 anos. Não é necessário apresentar declaração de inscrição em instituição de ensino. Saiba mais no site navegante.pt",
-					"price_metropolitano": "GRÁTIS",
+					"description": "A 100% discount is available for all students between 19 and 23 years old. No declaration is required, but you may need to present a registration at an educational institution. For more information, visit navegante.pt website",
+					"price_metropolitano": "FREE",
 					"price_municipal": "N/A",
-					"title": "Sub23"
+					"title": "U-23"
 				}
 			},
-			"subheading": "Descubra os descontos disponíveis para si."
+			"subheading": "Discover the discounts available for you."
 		},
 		"Modalities": {
 			"heading": "Modalidades",
 			"metropolitano": {
 				"description": "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Eius, ut.",
-				"price": "40€/mês",
-				"title": "Viaje por todo o lado, sem limites."
+				"price": "€40/month",
+				"title": "Travel everywhere, without limits."
 			},
 			"municipal": {
 				"description": "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Eius, ut.",
-				"price": "30€/mês",
-				"title": "Viaje num município."
+				"price": "€30/month",
+				"title": "Travel within municipality."
 			},
-			"subheading": "Descubra quanto custa viajar na CMetropolitana de vez em quando. Para utilizações mais frequentes sugerimos a adesão ao sistema navegante®."
+			"subheading": "Find out how much it costs to travel occasionally on CMetropolitana. For more frequent use, we recommend subscribing to navegante®"
 		},
 		"MunicipalDiscounts": {
-			"heading": "Descontos Municipais",
-			"subheading": "Descubra quanto custa viajar na CMetropolitana de vez em quando. Para utilizações mais frequentes sugerimos a adesão ao sistema navegante®."
+			"heading": "Municipal Discounts",
+			"subheading": "Find out how much it costs to travel occasionally on CMetropolitana. For more frequent use, we recommend subscribing to navegante®"
 		},
 		"Pass": {
-			"heading": "Passe Mensal",
+			"heading": "Monthly Pass",
 			"navegante": {
 				"description": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Obcaecati ea natus itaque qui iure nam consequuntur minima, quibusdam saepe odio molestiae soluta aspernatur, corrupti labore fugiat? Numquam blanditiis accusantium quibusdam!",
-				"title": "Já tem um cartão personalizado?"
+				"title": "Do you have a personalized card already?"
 			},
-			"subheading": "Descubra quanto custa viajar na CMetropolitana de vez em quando. Para utilizações mais frequentes sugerimos a adesão ao sistema navegante®.",
+			"subheading": "Find out how much it costs to travel occasionally on CMetropolitana. For more frequent use, we recommend subscribing to navegante®",
 			"wizard": {
 				"description": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Obcaecati ea natus itaque qui iure nam consequuntur minima, quibusdam saepe odio molestiae soluta aspernatur, corrupti labore fugiat? Numquam blanditiis accusantium quibusdam!",
-				"title": "Descruba a melhor opção para si."
+				"title": "Find out the best option for you."
 			}
 		}
 	},
 	"common": {
 		"NextArrivals": {
-			"arriving": "A chegar",
+			"arriving": "Coming up",
 			"hours": "h",
 			"minutes": "min"
 		},
@@ -564,7 +564,7 @@
 			},
 			"pt-PT": {
 				"alt": "Português",
-				"label": "Português"
+				"label": "Portuguese"
 			}
 		}
 	},
@@ -572,12 +572,12 @@
 		"Service": {
 			"app": {
 				"description": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Obcaecati ea natus itaque qui iure nam consequuntur minima, quibusdam saepe odio molestiae soluta aspernatur, corrupti labore fugiat? Numquam blanditiis accusantium quibusdam!",
-				"title": "App navegante®"
+				"title": "navegante® app"
 			},
-			"heading": "Atendimento preferencial",
+			"heading": "Preferential service",
 			"multibanco": {
 				"description": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Obcaecati ea natus itaque qui iure nam consequuntur minima, quibusdam saepe odio molestiae soluta aspernatur, corrupti labore fugiat? Numquam blanditiis accusantium quibusdam!",
-				"title": "Rede multibanco™"
+				"title": "ATM™ Network"
 			},
 			"payshop": {
 				"description": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Obcaecati ea natus itaque qui iure nam consequuntur minima, quibusdam saepe odio molestiae soluta aspernatur, corrupti labore fugiat? Numquam blanditiis accusantium quibusdam!",
@@ -585,25 +585,25 @@
 			},
 			"stores": {
 				"description": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Obcaecati ea natus itaque qui iure nam consequuntur minima, quibusdam saepe odio molestiae soluta aspernatur, corrupti labore fugiat? Numquam blanditiis accusantium quibusdam!",
-				"title": "Espaços navegante®"
+				"title": "Espaço navegante®"
 			},
-			"subheading": "Descubra quanto custa viajar na CMetropolitana de vez em quando. Para utilizações mais frequentes sugerimos a adesão ao sistema navegante®."
+			"subheading": "Find out how much it costs to travel occasionally on CMetropolitana. For more frequent use, we recommend subscribing to navegante®"
 		},
 		"ServicePoints": {
-			"heading": "Pontos de Atendimento",
-			"subheading": "Descubra onde pode adquirir o seu passe navegante®."
+			"heading": "Service Points",
+			"subheading": "Find out where you can purchase your navegante® pass."
 		},
 		"WhereToBuy": {
 			"frequent_travel": {
 				"description": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Obcaecati ea natus itaque qui iure nam consequuntur minima, quibusdam saepe odio molestiae soluta aspernatur, corrupti labore fugiat? Numquam blanditiis accusantium quibusdam!",
-				"title": "Viagens Frequentes"
+				"title": "Frequent trips"
 			},
-			"heading": "Onde Comprar",
+			"heading": "Where to buy",
 			"ocasional_travel": {
 				"description": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Obcaecati ea natus itaque qui iure nam consequuntur minima, quibusdam saepe odio molestiae soluta aspernatur, corrupti labore fugiat? Numquam blanditiis accusantium quibusdam!",
-				"title": "Viagens Ocasionais"
+				"title": "Occasional trips"
 			},
-			"subheading": "Descubra onde pode adquirir o seu passe navegante®."
+			"subheading": "Find out where you can purchase your navegante® pass."
 		}
 	},
 	"home": {
@@ -734,7 +734,7 @@
 	},
 	"map": {
 		"MapViewStyleVehicles": {
-			"vehicles_counter": "{count, plural, =0 {Nenhum veículo em circulação} one {# veículo em circulação} other {# veículos em circulação}}"
+			"vehicles_counter": "{count, plural, =0 {No vehicles in circulation} one {# vehicle in circulation} other {# vehicles in circulation}}"
 		},
 		"toolbar": {
 			"center_map": "Center Map",
@@ -885,45 +885,45 @@
 		"StopsDetailContentTimetableHeader": {
 			"summary": "Horários estimados de passagem na paragem <stopName>{stop_name}</stopName> para o dia <dayName>{day_name, date, long}</dayName>. <changeDay>Alterar dia ›</changeDay>",
 			"trips_legend": {
-				"estimate": "Previsão",
-				"headsign": "Destino",
-				"line": "Linha"
+				"estimate": "Prediction",
+				"headsign": "Destination",
+				"line": "Line"
 			}
 		},
 		"StopsDetailContentTimetableRealtime": {
-			"end_of_day": "Fim do Dia",
-			"no_service": "Sem Serviço Hoje",
+			"end_of_day": "End of day",
+			"no_service": "No Service Today",
 			"show_past_trips_toggle": {
-				"hide": "Esconder passagens anteriores",
-				"show": "Ver passagens anteriores"
+				"hide": "Hide previous passages",
+				"show": "View previous passages"
 			}
 		},
 		"StopsDetailContentTimetableRow": {
 			"localities": {
-				"label": "Passa por"
+				"label": "Pass through"
 			}
 		},
 		"StopsDetailContentTimetableSchedule": {
-			"no_service": "Sem Serviço para o dia selecionado"
+			"no_service": "No Service for the selected day"
 		},
 		"StopsListToolbar": {
 			"filters": {
 				"by_current_view": {
-					"all": "Todas as Paragens",
-					"favorites": "Favoritas"
+					"all": "All Stops",
+					"favorites": "Favorites"
 				},
 				"by_search": {
-					"placeholder": "Pesquisar por nome, localidade..."
+					"placeholder": "Search by name, location..."
 				}
 			},
 			"found_items_counter": {
 				"all": "{count, plural, =0 {Nenhuma paragem encontrada.} one {Encontrada # paragem:} other {Encontradas # paragens:}}",
 				"favorites": "{count, plural, =0 {Nenhuma paragem favorita encontrada.} one {Encontrada # paragem favorita:} other {Encontradas # paragens favoritas:}}"
 			},
-			"heading": "Pesquisar Paragens"
+			"heading": "Search Stops"
 		},
 		"StopsListViewFavorites": {
-			"no_favorites": "Ainda não tem paragens favoritas"
+			"no_favorites": "No favorite stops yet"
 		},
 		"collapse_filters": "Hide Filters",
 		"expand_filters": "Expand Filters"
@@ -985,30 +985,30 @@
 			"by_municipality": {
 				"label": "Filter by Municipality"
 			},
-			"external_link": "Rede de agentes navegante®",
+			"external_link": "Espaço navegante®",
 			"filter_by": {
-				"capacity": "Pessoas em espera",
-				"municipality_name": "Município",
-				"time": "Tempo de espera"
+				"capacity": "People waiting",
+				"municipality_name": "Municipality",
+				"time": "Waiting time"
 			},
 			"found_items_counter": "{count, plural, =0 {No stores found.} one {Found # store:} other {Found # stores:}}",
-			"heading": "Lojas e Rede de Agentes",
-			"subheading": "Disponíveis para todos os passageiros, os Espaços navegante® estão dedicados a prestar informações sobre a rede e bilhética Carris Metropolitana, possibilitando o esclarecimento de dúvidas, a emissão de cartões navegante® e a adesão a perfis e descontos. É possível também efetuar o carregamento de títulos nos pontos de atendimento PayShop® da rede de agentes navegante®."
+			"heading": "Espaço navegante",
+			"subheading": "Available to all passengers, navante® Spaces are dedicated to providing information about the Carris Metropolitana network and ticketing, enabling queries to be clarified, the issuance of Navante® cards and membership to profiles and discounts. It is also possible to load titles at PayShop® service points within the navante® agent network."
 		}
 	},
 	"tickets": {
 		"Pricing": {
 			"inter-regional": {
 				"description": "Linhas dedicadas a bairros, zonas de pormenor. São linhas normalmente com percursos mais curtos, circulares e com mais paragens.",
-				"title": "Linhas Inter-Regionais"
+				"title": "Inter-Regional Lines"
 			},
 			"longa": {
 				"description": "Linhas dedicadas a bairros, zonas de pormenor. São linhas normalmente com percursos mais curtos, circulares e com mais paragens.",
-				"title": "Linhas Longas"
+				"title": "Long Lines"
 			},
 			"mar": {
 				"description": "Linhas dedicadas a bairros, zonas de pormenor. São linhas normalmente com percursos mais curtos, circulares e com mais paragens.",
-				"title": "Linhas Mar"
+				"title": "Sea Lines"
 			},
 			"proxima": {
 				"description": "Linhas dedicadas a bairros, zonas de pormenor. São linhas normalmente com percursos mais curtos, circulares e com mais paragens.",
@@ -1016,26 +1016,26 @@
 			},
 			"rapida": {
 				"description": "Linhas dedicadas a bairros, zonas de pormenor. São linhas normalmente com percursos mais curtos, circulares e com mais paragens.",
-				"title": "Linhas Rápidas"
+				"title": "Fast lines"
 			},
 			"ticket_types": {
-				"onboard": "bilhete de bordo",
+				"onboard": "",
 				"onboard_start_by_29": "bilhete de bordo linhas começadas por 29**",
 				"onboard_start_by_49": "bilhete de bordo linhas começadas por 49**",
-				"prepaid": "pré-pago"
+				"prepaid": "Prepaid"
 			}
 		},
 		"TicketsHeader": {
-			"heading": "Bilhetes Ocasionais",
+			"heading": "Occasional Tickets",
 			"onboard": {
 				"description": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Obcaecati ea natus itaque qui iure nam consequuntur minima, quibusdam saepe odio molestiae soluta aspernatur, corrupti labore fugiat? Numquam blanditiis accusantium quibusdam!",
-				"title": "Comprar dentro do autocarro"
+				"title": "Buy inside the bus"
 			},
 			"prepaid": {
 				"description": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Obcaecati ea natus itaque qui iure nam consequuntur minima, quibusdam saepe odio molestiae soluta aspernatur, corrupti labore fugiat? Numquam blanditiis accusantium quibusdam!",
-				"title": "Comprar antes da viagem"
+				"title": "Buy before your trip"
 			},
-			"subheading": "Descubra quanto custa viajar na CMetropolitana de vez em quando. Para utilizações mais frequentes sugerimos a adesão ao sistema navegante®."
+			"subheading": "Find out how much it costs to travel occasionally on CMetropolitana. For more frequent use, we recommend subscribing to navegante®"
 		}
 	},
 	"toast": {
