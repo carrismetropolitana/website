@@ -1,4 +1,4 @@
-name: Build & Publish Docker Images
+name: Build & Publish Docker Images (ARM)
 
 on:
   push:
@@ -13,7 +13,7 @@ jobs:
 
   website-frontend:
     name: frontend (NextJS)
-    runs-on: ubuntu-latest
+    runs-on: self-hosted
     strategy:
       fail-fast: false
     permissions:
@@ -62,7 +62,7 @@ jobs:
 
   website-videowall:
     name: videowall (NextJS)
-    runs-on: ubuntu-latest
+    runs-on: self-hosted
     strategy:
       fail-fast: false
     permissions:
