@@ -96,7 +96,6 @@ export const IconsCommon = Object.freeze({
 	AML_MAP: '/icons/common/aml-map.svg',
 	AML_MAP_OPERATORS: '/icons/common/aml-map-with-operators.svg',
 	AML_MAP_SINGLE: '/icons/common/aml-map-single.svg',
-	COINS: '/icons/common/coins.svg',
 	LINE_BADGE_BASE: '/icons/common/line-badge-base.svg',
 	LIVRO_RECLAMACOES: '/icons/common/livro-de-reclamacoes.svg',
 	MULTIBANCO_DARK: '/icons/common/multibanco-dark.svg',
@@ -121,6 +120,11 @@ export const IconsMobile = Object.freeze({
 // Images
 
 export const ImagesCommon = Object.freeze({
+	AREA1: '/images/common/area1.svg',
+	AREA2: '/images/common/area2.svg',
+	AREA3: '/images/common/area3.svg',
+	AREA4: '/images/common/area4.svg',
+	COINS: '/images/common/coins.svg',
 	NAVEGANTE_CARD: '/images/common/navegante-card.png',
 	NAVEGANTE_OCCASIONAL: '/images/common/navegante-occasional.png',
 	PLACEHOLDER: '/images/common/placeholder.png',
