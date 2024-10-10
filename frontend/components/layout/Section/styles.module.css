@@ -16,6 +16,16 @@
 }
 
 /* * */
+/* TOP SECTION */
+
+.topSection {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	padding: 0 var(--size-spacing-25);
+}
+
+/* * */
 /* HEADING WRAPPER */
 
 .headingWrapper {
@@ -25,8 +35,7 @@
 	align-items: flex-start;
 	justify-content: flex-start;
 	width: 100%;
-	padding: var(--size-spacing-20);
-	padding-left: var(--size-spacing-25);
+	padding: var(--size-spacing-20) 0;
 }
 
 .withPadding .headingWrapper {
