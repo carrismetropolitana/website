@@ -14,6 +14,8 @@ export default getRequestConfig(async () => {
 
 	const locale = await getUserLocale();
 
+	console.log('LOCALE DECIDED: ', locale);
+
 	//
 	// Get messages for the given locale
 
