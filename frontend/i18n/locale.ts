@@ -24,13 +24,19 @@ export async function getUserLocale() {
 	// Read the cookie to retrieve the prefered locale setting fot the user.
 
 	const userPreferedLocale = cookies().get(COOKIE_NAME)?.value;
-	if (userPreferedLocale) return userPreferedLocale;
+	if (userPreferedLocale) {
+		console.log('1. LOCALE FROM COOKIE: ', userPreferedLocale);
+		return userPreferedLocale;
+	}
 
 	//
 	// If no locale is set, try to get the locale set on the browser using the accept-language header.
 
 	const browserPreferedLocales = headers().get('accept-language');
-	if (!browserPreferedLocales) return defaultLocaleCode;
+	if (!browserPreferedLocales) {
+		console.log('2. NO LOCALE FROM COOKIE OR BROWSER', defaultLocaleCode);
+		return defaultLocaleCode;
+	}
 
 	//
 	// Parse the accept-language header to get the best locale option for the user.
@@ -74,7 +80,10 @@ export async function getUserLocale() {
 		return isDefaultLocale || isDefaultLocaleAlias;
 	});
 
-	if (defaultLocaleIsViableOption) return defaultLocaleIsViableOption.locale;
+	if (defaultLocaleIsViableOption) {
+		console.log('3. LOCALE FROM BROWSER: ', defaultLocaleIsViableOption.locale);
+		return defaultLocaleIsViableOption.locale;
+	}
 
 	//
 	// If the default locale is not in the list of browser locales, check if any of the other
@@ -82,18 +91,25 @@ export async function getUserLocale() {
 	// If the result is an empty array, return the default locale.
 
 	const otherLocalesThatAreViableOptions = browserPreferedLocalesMatched.filter(lang => allEnabledLocaleCodesAndAliases.includes(lang.locale));
-	if (!otherLocalesThatAreViableOptions.length) return defaultLocaleCode;
+	if (!otherLocalesThatAreViableOptions.length) {
+		console.log('4. NO LOCALE FROM COOKIE OR BROWSER', defaultLocaleCode);
+		return defaultLocaleCode;
+	}
 
 	//
 	// From the list of available locales that are still a viable options,
 	// select the locale code with the highest preference value.
 
 	const browserPreferedLocaleWithHighestQuality = otherLocalesThatAreViableOptions[0].locale;
-	if (browserPreferedLocaleWithHighestQuality) return browserPreferedLocaleWithHighestQuality;
+	if (browserPreferedLocaleWithHighestQuality) {
+		console.log('5. LOCALE FROM BROWSER: ', browserPreferedLocaleWithHighestQuality);
+		return browserPreferedLocaleWithHighestQuality;
+	}
 
 	//
 	// Return the default locale if no other locale is found.
 
+	console.log('6. NO LOCALE FROM COOKIE OR BROWSER', defaultLocaleCode);
 	return defaultLocaleCode;
 
 	//
