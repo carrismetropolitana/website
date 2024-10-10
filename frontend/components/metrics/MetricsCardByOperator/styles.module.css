@@ -4,10 +4,20 @@
 .container {
 	overflow: hidden;
 	width: 100%;
-	border-radius: 5px;
+	border-radius: var(--border-radius-lg);
 	border: 1px solid var(--color-system-border-100);
-	background-color: var(--color-system-background-100);
+	background-color: var(--color-brand);
 	position: relative;
+	color: var(--color-primary-black);
+	height: 100%;
+}
+
+.backgroundImage {
+	position: absolute;
+	z-index: 0;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%) scale(0.7);
 }
 
 /* * */
@@ -16,73 +26,24 @@
 .metricsWrapper {
 	display: flex;
 	flex-direction: column;
-	gap: var(--size-spacing-15);
+	gap: var(--size-spacing-5);
 	padding: var(--size-spacing-20);
 	z-index: 2;
+	padding-bottom: 80px;
 }
-
-/* * */
-/* ROW WRAPPER */
-
-.rowWrapper {
-	display: flex;
-	flex-direction: column;
-	gap: 3px;
-}
-
-/* * */
-/* REALTIME VALUE WRAPPER */
-
-.realtimeValueWrapper {
-	display: flex;
-	flex-direction: row;
-	align-items: flex-start;
-	gap: var(--size-spacing-5);
-}
-
-/* * */
-/* VALUE */
 
 .value {
-	line-height: 1;
+	font-size: 26px;
+	z-index: 2;
 	font-weight: var(--font-weight-extrabold);
-	color: var(--color-status-info-text);
 }
-
-.primary .value {
-	font-size: 30px;
-}
-
-.secondary .value {
-	font-size: 30px;
-}
-
-/* * */
-/* LABEL */
 
 .label {
-	color: var(--color-system-text-100);
-	font-weight: var(--font-weight-bold);
-}
-
-.primary .label {
-	font-size: 16px;
-}
-
-.secondary .label {
 	font-size: 14px;
+	text-transform: lowercase;
+	opacity: 0.6;
 }
 
-/* * */
-/* GRAPH WRAPPER */
-
-.graphWrapper {
-	width: 100%;
-	z-index: 1;
-	opacity: 0.5;
-	margin: -5px; /* Fixed margins set by Recharts */
-	width: calc(100% + 10px); /* Fixed margins set by Recharts */
-}
 
 
 /* * */
@@ -108,4 +69,10 @@
 
 .popoverLink {
 	text-decoration: underline;
+}
+
+@media (max-width: 768px) {
+	.backgroundImage {
+		transform: translate(-30%, -50%) scale(0.35);
+	}
 }

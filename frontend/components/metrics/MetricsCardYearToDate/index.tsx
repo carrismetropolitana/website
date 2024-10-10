@@ -2,7 +2,6 @@
 
 /* * */
 
-import LiveIcon from '@/components/common/LiveIcon';
 import MetricsSectionDemandSkeleton from '@/components/home/MetricsSectionDemandSkeleton';
 import { MonthlyMetrics } from '@/types/metrics.types';
 import { Routes } from '@/utils/routes';
@@ -19,8 +18,12 @@ import useSWR from 'swr';
 import styles from './styles.module.css';
 
 /* * */
+interface Props {
+	chartHeight?: number
+	className?: string
+}
 
-export default function Component({ className }: { className?: string }) {
+export default function Component({ chartHeight = 100, className }: Props) {
 	//
 
 	//
@@ -111,7 +114,7 @@ export default function Component({ className }: { className?: string }) {
 						dataKey="month"
 						fillOpacity={1}
 						gridAxis="none"
-						h={100}
+						h={chartHeight}
 						style={{ height: '100%' }}
 						type="stacked"
 						withBarValueLabel={false}

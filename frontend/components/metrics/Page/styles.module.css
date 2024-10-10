@@ -2,8 +2,63 @@
 
 /* INNER WRAPPER */
 
-.areaWrapper {
-	display: grid;
-	grid-template-columns: 1fr 1fr;
-	gap: var(--size-spacing-10);
+.area{
+	& > img{
+		opacity: 0.6;
+	}
+}
+
+.areaOne {
+	background-color: rgba(255, 221, 0, 1) !important;
+}
+
+.areaTwo {
+	background-color: rgba(255, 221, 0, 0.6) !important;
+}
+
+.areaThree {
+	background-color: rgba(255, 221, 0, 0.4) !important;
+
+	& > img{
+		opacity: 0.6 !important;
+		transform: translate(-50%, -50%) scale(0.4);
+	}
+}
+
+.areaFour {
+	background-color: rgba(255, 221, 0, 0.2) !important;
+	
+	& > img{
+		opacity: 0.8 !important;
+	}
+}
+
+@media (max-width: 1024px) {
+	.area{
+		& > img{
+			opacity: 0.6 !important;
+			transform: translate(-50%, -50%) scale(0.45);
+		}
+	}
+
+	.areaThree {
+		& > img{
+			transform: translate(-50%, -50%) scale(0.3);
+		}
+	}
+}
+
+
+@media (max-width: 768px) {
+	.area{
+		& > img{
+			transform: translate(-30%, -50%) scale(0.3);
+		}
+	}
+
+	.areaThree {
+		& > img{
+			transform: translate(-30%, -50%) scale(0.22);
+		}
+	}
 }
