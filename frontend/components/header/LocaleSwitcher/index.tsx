@@ -3,32 +3,37 @@
 /* * */
 
 import { defaultLocaleCode, enabledLocaleCodes } from '@/i18n/config';
-import { usePathname, useRouter } from '@/i18n/routing';
+import { getUserLocale, setUserLocale } from '@/i18n/locale';
 import { SegmentedControl } from '@mantine/core';
-import { useParams } from 'next/navigation';
 import { useTranslations } from 'next-intl';
-import { useTransition } from 'react';
+import { useEffect, useState, useTransition } from 'react';
 
 import styles from './styles.module.css';
 
 /* * */
 
-export default function Component() {
+export function LocaleSwitcher() {
 	//
 
 	//
 	// A. Setup variables
 
 	const t = useTranslations('header.LocaleSwitcher');
-	const router = useRouter();
-	const pathname = usePathname();
-	const params = useParams();
-	const searchParams = new URLSearchParams(window.location.search);
-
-	const [isPending, startTransition] = useTransition();
+	const [, startTransition] = useTransition();
+	const [currentLocale, setCurrentLocale] = useState(defaultLocaleCode);
 
 	//
-	// B. Transform data
+	// B. Fetch data
+
+	useEffect(() => {
+		(async () => {
+			const locale = await getUserLocale();
+			setCurrentLocale(locale);
+		})();
+	}, []);
+
+	//
+	// C. Transform data
 
 	const availableLocalesFormatted = enabledLocaleCodes.map(locale => ({
 		label: t(`${locale}.label`),
@@ -36,22 +41,13 @@ export default function Component() {
 	}));
 
 	//
-	// C. Handle actions
+	// D. Handle actions
 
 	const handleLocaleChange = (value: string) => {
 		startTransition(() => {
 			try {
-				console.log('switching locale to', value);
-				console.log('current pathname', pathname);
-				console.log('current params', params);
-				console.log('search params', searchParams);
-				router.replace(
-					// @ts-expect-error -- TypeScript will validate that only known `params`
-					// are used in combination with a given `pathname`. Since the two will
-					// always match for the current route, we can skip runtime checks.
-					{ params, pathname, query: Object.fromEntries(searchParams.entries()) },
-					{ locale: value, scroll: true },
-				);
+				setUserLocale(value);
+				setCurrentLocale(value);
 			}
 			catch (error) {
 				console.error(error);
@@ -60,7 +56,7 @@ export default function Component() {
 	};
 
 	//
-	// D. Render Components
+	// E. Render Components
 
 	return (
 		<SegmentedControl
@@ -68,7 +64,7 @@ export default function Component() {
 			data={availableLocalesFormatted}
 			onChange={handleLocaleChange}
 			size="xs"
-			value={params.locale as string || defaultLocaleCode}
+			value={currentLocale}
 			w="100%"
 		/>
 	);

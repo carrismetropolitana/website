@@ -1,7 +1,10 @@
 /* * */
 
+import { availableFormats } from '@/i18n/config';
 import { ColorSchemeScript } from '@mantine/core';
 import { Inter } from 'next/font/google';
+import { NextIntlClientProvider } from 'next-intl';
+import { getLocale, getMessages } from 'next-intl/server';
 
 /* * */
 
@@ -22,15 +25,34 @@ export const metadata = {
 
 /* * */
 
-export default function RootLayout({ children }) {
+export default async function RootLayout({ children }) {
+	//
+
+	//
+	// A. Fetch data
+
+	const locale = await getLocale();
+	const messages = await getMessages();
+
+	//
+	// B. Render components
+
 	return (
-		<html className={inter.variable}>
+		<html className={inter.variable} lang={locale}>
 			<head>
 				<ColorSchemeScript />
 			</head>
 			<body>
-				{children}
+				<NextIntlClientProvider
+					formats={availableFormats}
+					locale={locale}
+					messages={messages}
+				>
+					{children}
+				</NextIntlClientProvider>
 			</body>
 		</html>
 	);
+
+	//
 }
