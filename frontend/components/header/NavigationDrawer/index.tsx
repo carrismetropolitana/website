@@ -2,11 +2,11 @@
 
 /* * */
 
+import { LocaleSwitcher } from '@/components/header/LocaleSwitcher';
+import NavigationMainMenuItem from '@/components/header/NavigationMainMenuItem';
 // import AccountUserAvatar from '@/components/account/UserAvatar';
 // import SyncAccount from '@/components/profile/sync';
 import { ThemeSwitch } from '@/components/responsive/ThemeSwitch';
-import LocaleSwitcher from '@/components/header/LocaleSwitcher';
-import NavigationMainMenuItem from '@/components/header/NavigationMainMenuItem';
 import { BrandsCmet } from '@/settings/assets.settings';
 import { drawerNavigationGroup } from '@/settings/navigation.settings';
 import { CloseButton, Drawer, Image } from '@mantine/core';
