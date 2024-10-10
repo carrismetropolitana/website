@@ -48,8 +48,7 @@
 .value {
 	line-height: 1;
 	font-weight: var(--font-weight-extrabold);
-	color: var(--color-brand);
-	/* text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.1); */
+	color: var(--color-primary-black);
 }
 
 .primary .value {
