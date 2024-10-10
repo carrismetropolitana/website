@@ -36,7 +36,7 @@ export async function getUserLocale() {
 
 	const browserPreferedLocales = headers().get('accept-language');
 	if (!browserPreferedLocales) {
-		console.log(`(2) No Locale from Cookie or Browser. Default: ${defaultLocaleCode}`);
+		console.log(`(2) No Locale Browser. Default: ${defaultLocaleCode}`);
 		return defaultLocaleCode;
 	}
 
