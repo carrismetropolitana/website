@@ -27,7 +27,7 @@ export default function Providers({ children }) {
 			}
 			return res.json();
 		},
-		refreshInterval: 60000 * 5,
+		refreshInterval: 30000,
 		revalidateOnFocus: false,
 		revalidateOnMount: true,
 	};
