@@ -456,7 +456,8 @@
 			"edit": "Editar",
 			"generate": "Gerar",
 			"remove": "Remover",
-			"save": "Guardar"
+			"save": "Guardar",
+			"view_all": "Ver todos"
 		},
 		"month": {
 			"april": "Abril",
@@ -789,6 +790,52 @@
 				"disclaimer": "Edite esta página no Github se pretende incluir a sua aplicação. A ordem é aleatória. Apenas são permitidas entradas que disponibilizem simultaneamente horários planeados e em tempo real ou posição de veículos.",
 				"heading": "Os nossos parceiros",
 				"subheading": "Porque os nossos dados são abertos, existem várias aplicações que oferecem experiências personalizadas para melhorar o seu dia-a-dia nos transportes."
+			}
+		}
+	},
+	"press": {
+		"Page": {
+			"brand": {
+				"heading": "A Marca",
+				"icons": "Ícones",
+				"images": "Banco de Imagens",
+				"logo": "Logo",
+				"paragraph_1": "A Carris Metropolitana é uma iniciativa dos 18 municípios da amL que, através da Transportes Metropolitanos de Lisboa (TML), funde a operação rodoviária de toda a amL numa mesma imagem e nível de serviço, focado no serviço às populações, com um elevado grau de complexidade tecnológica e operacional, neste caso, sobretudo pela dimensão geográfica e populacional.\n\nReduzindo a idade média da frota em operação, introduzindo melhorias na performance ambiental nas viaturas, prestando mais e melhor informação ao público - que é também uniformizada e simplificada à escala metropolitana - e aumentando a oferta do que era praticado antes da entrada em funcionamento, a Carris Metropolitana continua a trabalhar no sentido de criar opções de mobilidade para assegurar um transporte público de qualidade.\n\nPretendendo fomentar comportamentos sustentáveis e contribuir para a equidade social e territorial na amL, a Carris Metropolitana opera as redes municipais para 15 dos 18 municípios (Barreiro, Cascais e Lisboa mantêm as operações locais) e a totalidade da operação intermunicipal dos 18 municípios.."
+			},
+			"faq": {
+				"faqs": [
+					{
+						"answer": "A Carris Metropolitana e a Carris são entidades e marcas distintas, cada uma com as suas operações e áreas geográficas específicas.\n\nA Carris Metropolitana é a marca estabelecida pela Transportes Metropolitanos de Lisboa (TML), que gere os serviços de transporte público rodoviário em várias regiões municipais e intermunicipais da área metropolitana.\n\nPor sua vez, a Carris opera exclusivamente no município de Lisboa, tal como a MobiCascais em Cascais e os TCB (Transportes Coletivos do Barreiro) no Barreiro. ",
+						"question": "A Carris Metropolitana faz parte da Carris?"
+					},
+					{
+						"answer": "A Carris Metropolitana opera nos 18 municípios da AML: Alcochete, Almada, Amadora, Barreiro*, Cascais*, Lisboa*, Loures, Oeiras, Odivelas, Mafra, Moita, Montijo, Palmela, Seixal, Sesimbra, Setúbal, Sintra e Vila Franca de Xira.\n\n*Barreiro, Cascais e Lisboa são servidos, em maior parte, pelos respetivos operadores municipais.",
+						"question": "Em que municípios opera a Carris Metropolitana?"
+					},
+					{
+						"answer": "Os operadores prestadores de serviço da Carris Metropolitana são 4 e estão divididos por áreas da seguinte forma:\n\nÁrea 1: Viação Alvorada\nÁrea 2: Rodoviária de Lisboa\nÁrea 3: TST\nÁrea 4: Alsa Todi",
+						"question": "Quais são os operadores prestadores de serviço que atuam sob a marca Carris Metropolitana?"
+					},
+					{
+						"answer": "Alinhada com as diretivas europeias sobre dados abertos, a Carris Metropolitana disponibiliza publicamente informação relativa à sua operação.\n\nA publicação dos dados permite o desenvolvimento de ferramentas úteis e inovadoras por terceiros, permitindo existir apenas uma única versão da rede conhecida por todos, frequentemente atualizada para todos em simultâneo e com otimização de recursos.\n\nAtravés da página <a href=\"/open-data\" target=\"_blank\">Dados Abertos - Carris Metropolitana</a>, é possível encontrar dados como  GTFS, PDFs, API, Datasets e o Enquadramento Legal.",
+						"question": "Como posso aceder aos dados abertos disponibilizados pela CMetropolitana?"
+					},
+					{
+						"answer": "Todas as fotografias e imagens, mapas e logos encontram-se protegidos por lei. Qualquer reprodução (total ou parcial) para fins comerciais do conteúdo divulgado no site, sem a prévia autorização, é proibida.",
+						"question": "Posso usar as imagens e logos para fins comerciais?"
+					},
+					{
+						"answer": "Para obter contactar o departamento de comunicação, deverá preencher o <a href=\"https://www.carrismetropolitana.pt/pedido-de-informacao/\" target=\"_blank\">formulário</a>.",
+						"question": "Como posso contactar a CMetropolitana para obter informações ou solicitar entrevistas?"
+					}
+				],
+				"heading": "Perguntas Frequentes"
+			},
+			"knowledge_base": {
+				"heading": "Base de Conhecimento"
+			},
+			"press_statements": {
+				"heading": "Notas de imprensa"
 			}
 		}
 	},

@@ -456,7 +456,8 @@
 			"edit": "Edit",
 			"generate": "To generate",
 			"remove": "Remove",
-			"save": "Save"
+			"save": "Save",
+			"view_all": "View all"
 		},
 		"month": {
 			"april": "April",
@@ -789,6 +790,52 @@
 				"disclaimer": "Edit this page on Github if you want to include your app. The order is random. Only inputs that simultaneously provide planned and real-time schedules or vehicle positions are permitted.",
 				"heading": "Our partners",
 				"subheading": "Because our data is open, there are several apps that offer personalized experiences to improve your everyday transport life."
+			}
+		}
+	},
+	"press": {
+		"Page": {
+			"brand": {
+				"heading": "The Brand",
+				"icons": "Icons",
+				"images": "Image Bank",
+				"logo": "Logo",
+				"paragraph_1": "Carris Metropolitana is an initiative of the 18 municipalities of amL which, through Transportes Metropolitanos de Lisboa (TML), merges the road operation of the entire amL into the same image and level of service, focused on serving the population, with a high degree of technological and operational complexity, in this case, mainly due to geographic and population size.\n\nReducing the average age of the fleet in operation, introducing improvements in the environmental performance of vehicles, providing more and better information to the public - which is also standardized and simplified to metropolitan scale - and increasing the offer of what was practiced before entry into operation, Carris Metropolitana continues working to create mobility options to ensure quality public transport.\n\nIntending to encourage sustainable behaviors and contribute to social equity and territorial in amL, Carris Metropolitana operates the municipal networks for 15 of the 18 municipalities (Barreiro, Cascais and Lisbon maintain local operations) and the entire intermunicipal operation of the 18 municipalities."
+			},
+			"faq": {
+				"faqs": [
+					{
+						"answer": "Carris Metropolitana and Carris are distinct entities and brands, each with its own specific operations and geographic areas.\n\nCarris Metropolitana is the brand established by Transportes Metropolitanos de Lisboa (TML), which manages public road transport services in several municipal and intermunicipal regions of the metropolitan area.\n\nIn turn, Carris operates exclusively in the municipality of Lisbon, as does MobiCascais in Cascais and TCB (Transportes Coletivos do Barreiro) in Barreiro.",
+						"question": "Is Carris Metropolitana part of Carris?"
+					},
+					{
+						"answer": "Carris Metropolitana operates in the 18 municipalities of the AML: Alcochete, Almada, Amadora, Barreiro*, Cascais*, Lisbon*, Loures, Oeiras, Odivelas, Mafra, Moita, Montijo, Palmela, Seixal, Sesimbra, Setúbal, Sintra and Vila Franca de Xira.\n\n*Barreiro, Cascais and Lisbon are served, for the most part, by the respective municipal operators.",
+						"question": "In which municipalities does Carris Metropolitana operate?"
+					},
+					{
+						"answer": "There are 4 service providers for Carris Metropolitana and they are divided into areas as follows:\n\nArea 1: Viação Alvorada\nArea 2: São Paulo Bus Station\nArea 3: TST\nArea 4: Alsa Todi",
+						"question": "Which service providers operate under the Carris Metropolitana brand?"
+					},
+					{
+						"answer": "In line with European directives on open data, Carris Metropolitana makes information publicly available regarding its operation.\n\nThe publication of data allows the development of useful and innovative tools by third parties, allowing there to be only a single version of the network known to everyone, frequently updated for everyone simultaneously and with resource optimization.\n\nThrough the page <a href=\"/open-data\" target=\"_blank\">Open Data - Trilhos Metropolitana</a>, you can find data such as GTFS, PDFs, API, Datasets and the Legal Framework.",
+						"question": "How can I access the open data made available by CMetropolitana?"
+					},
+					{
+						"answer": "All photographs and images, maps and logos are protected by law. Any reproduction (total or partial) for commercial purposes of the content published on the website, without prior authorization, is prohibited.",
+						"question": "Can I use images and logos for commercial purposes?"
+					},
+					{
+						"answer": "To contact the communications department, you must fill out the <a href=\"https://www.carrismetropolitana.pt/pedido-de-informacao/\" target=\"_blank\">form</a> .",
+						"question": "Como posso contactar a CMetropolitana para obter informações ou solicitar entrevistas?"
+					}
+				],
+				"heading": "Frequently Asked Questions"
+			},
+			"knowledge_base": {
+				"heading": "Knowledge Base"
+			},
+			"press_statements": {
+				"heading": "Press Statements"
 			}
 		}
 	},

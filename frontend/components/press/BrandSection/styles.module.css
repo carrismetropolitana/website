@@ -1,0 +1,19 @@
+.cards {
+	& p {
+		color: var(--color-system-text-200);
+		font-size: var(--font-size-text) + 2px;
+	}
+}
+
+.imageContainer {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	height: 100%;
+}
+
+.image {
+	height: 70%;
+	width: 70%;
+}

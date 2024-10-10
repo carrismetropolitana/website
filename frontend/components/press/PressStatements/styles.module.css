@@ -1,0 +1,25 @@
+.panel {
+	color: var(--color-system-text-200);
+	font-size: var(--font-size-text) + 2px;
+	padding: var(--gap);
+	white-space: pre-line;
+
+	& a {
+		color: var(--color-system-text-200);
+		text-decoration: underline;
+	}
+}
+
+.card {
+	aspect-ratio: 1/1;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	height: 100%;
+}
+
+.image {
+	height: 70%;
+	width: 70%;
+}
