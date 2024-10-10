@@ -15,6 +15,7 @@
 
 .menuItemTarget:hover,
 .menuItemTarget.isOpen {
+	z-index: 500;
 	color: var(--color-primary-black);
 	background-color: var(--color-brand);
 }
