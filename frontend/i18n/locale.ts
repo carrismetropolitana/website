@@ -27,7 +27,7 @@ export async function getUserLocale() {
 	const userPreferedLocale = cookies().get(COOKIE_NAME)?.value;
 	const userPreferedLocaleMatched = userPreferedLocale && availableLocales.find(item => item.alias.includes(userPreferedLocale));
 	if (userPreferedLocaleMatched) {
-		console.log(`(1) Locale set from Cookie: ${userPreferedLocaleMatched}`);
+		console.log(`(1) Locale set from Cookie: ${userPreferedLocaleMatched.value}`);
 		return userPreferedLocaleMatched.value;
 	}
 
