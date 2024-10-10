@@ -81,7 +81,7 @@ export async function getUserLocale() {
 	// locales in the list are enabled. Remove the locales that are not enabled.
 	// If the result is an empty array, return the default locale.
 
-	const otherLocalesThatAreViableOptions = browserPreferedLocalesParsed.filter(lang => allEnabledLocaleCodesAndAliases.includes(lang.locale));
+	const otherLocalesThatAreViableOptions = browserPreferedLocalesMatched.filter(lang => allEnabledLocaleCodesAndAliases.includes(lang.locale));
 	if (!otherLocalesThatAreViableOptions.length) return defaultLocaleCode;
 
 	//
