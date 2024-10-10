@@ -6,9 +6,10 @@ import LiveIcon from '@/components/common/LiveIcon';
 import MetricsSectionDemandSkeleton from '@/components/home/MetricsSectionDemandSkeleton';
 import { MonthlyMetrics } from '@/types/metrics.types';
 import { Routes } from '@/utils/routes';
-import { Sparkline } from '@mantine/charts';
+import { BarChart } from '@mantine/charts';
 import { ActionIcon, Popover } from '@mantine/core';
 import { IconInfoCircleFilled } from '@tabler/icons-react';
+import classNames from 'classnames';
 import { DateTime, Info } from 'luxon';
 import Link from 'next/link';
 import { useTranslations } from 'next-intl';
@@ -19,7 +20,7 @@ import styles from './styles.module.css';
 
 /* * */
 
-export default function Component() {
+export default function Component({ className }: { className?: string }) {
 	//
 
 	//
@@ -50,7 +51,13 @@ export default function Component() {
 
 	const distribution = useMemo(() => {
 		if (!metricsData) return [];
-		return metricsData.map(month => month.count);
+		return metricsData.map(month => ({
+			month: Info.months('long')[month.month - 1].toLowerCase(),
+			p40: month.count * 0.4,
+			p60: month.count * 0.6,
+			p80: month.count * 0.8,
+			p100: month.count,
+		}));
 	}, [metricsData]);
 
 	//
@@ -72,7 +79,7 @@ export default function Component() {
 	};
 
 	return (
-		<div className={styles.container}>
+		<div className={classNames(styles.container, className)}>
 			<Popover offset={0} position="top-end" shadow="md" width={300} withArrow>
 				<Popover.Target>
 					<ActionIcon className={styles.popoverAnchor} size="xs" variant="transparent">
@@ -88,22 +95,38 @@ export default function Component() {
 				<div className={`${styles.rowWrapper} ${styles.primary}`}>
 					<div className={styles.realtimeValueWrapper}>
 						<p className={styles.value}>{t('today.value', { value: totalTrips })}</p>
-						<LiveIcon color="var(--color-status-info-text)" />
+						{/* <LiveIcon color="var(--color-status-info-text)" /> */}
 					</div>
 					<p className={styles.label}>{t('yearToDate.label')}</p>
 				</div>
-				<div className={`${styles.rowWrapper} ${styles.secondary}`}>
+				{/* <div className={`${styles.rowWrapper} ${styles.secondary}`}>
 					{ renderLastMonth() }
 				</div>
-			</div>
-			<div className={styles.graphWrapper}>
-				<Sparkline
-					color="var(--color-status-info-text)"
-					curveType="natural"
-					data={distribution}
-					fillOpacity={1}
-					h={75}
-				/>
+			</div> */}
+				<div className={styles.graphWrapper}>
+					<BarChart
+						classNames={{ root: styles.barChartRoot }}
+						color="var(--color-status-info-text)"
+						data={distribution}
+						dataKey="month"
+						fillOpacity={1}
+						gridAxis="none"
+						h={100}
+						style={{ height: '100%' }}
+						type="stacked"
+						withBarValueLabel={false}
+						withLegend={false}
+						withTooltip={false}
+						withXAxis={false}
+						withYAxis={false}
+						series={[
+							{ color: 'rgba(255, 255, 255, 0.4)', name: 'p40' },
+							{ color: 'rgba(255, 255, 255, 0.60)', name: 'p60' },
+							{ color: 'rgba(255, 255, 255, 0.80)', name: 'p80' },
+							{ color: 'rgba(255, 255, 255, 0.95)', name: 'p100' },
+						]}
+					/>
+				</div>
 			</div>
 		</div>
 	);

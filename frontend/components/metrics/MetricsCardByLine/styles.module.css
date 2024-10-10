@@ -4,10 +4,17 @@
 .container {
 	overflow: hidden;
 	width: 100%;
-	border-radius: 5px;
+	border-radius: 18px;
 	border: 1px solid var(--color-system-border-100);
 	background-color: var(--color-system-background-100);
+	box-shadow: var(--box-shadow-lg);
 	position: relative;
+	color: var(--color-system-text-300);
+}
+
+.light {
+	background-color: var(--color-primary-black);
+	color: var(--color-primary-white);
 }
 
 /* * */
@@ -37,7 +44,20 @@
 	display: flex;
 	flex-direction: row;
 	align-items: flex-start;
-	gap: var(--size-spacing-5);
+	gap: var(--size-spacing-20);
+}
+
+/* * */
+/* REALTIME VALUE WRAPPER ITEM */
+.realtimeValueWrapperItem {
+	position: relative;
+	opacity: 0.5;
+	cursor: pointer;
+	transition: opacity 0.5;
+
+	&.selected {
+		opacity: 1;
+	}
 }
 
 /* * */
@@ -46,7 +66,6 @@
 .value {
 	line-height: 1;
 	font-weight: var(--font-weight-extrabold);
-	color: var(--color-status-info-text);
 }
 
 .primary .value {
@@ -61,7 +80,6 @@
 /* LABEL */
 
 .label {
-	color: var(--color-system-text-100);
 	font-weight: var(--font-weight-bold);
 }
 
@@ -78,8 +96,8 @@
 
 .graphWrapper {
 	width: 100%;
+	padding-bottom: 20px;
 	z-index: 1;
-	opacity: 0.5;
 	margin: -5px; /* Fixed margins set by Recharts */
 	width: calc(100% + 10px); /* Fixed margins set by Recharts */
 }
@@ -96,14 +114,13 @@
 	width: 18px;
 	height: 18px;
 	z-index: 3;
-	color: var(--color-system-text-400);
+	color: var(--color-system-text-300);
 }
 
 .popoverText,
 .popoverLink {
 	font-size: var(--font-size-muted);
 	font-weight: var(--font-weight-muted);
-	color: var(--color-system-text-200);
 }
 
 .popoverLink {

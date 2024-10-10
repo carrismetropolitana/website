@@ -5,9 +5,10 @@
 import LiveIcon from '@/components/common/LiveIcon';
 import MetricsSectionDemandSkeleton from '@/components/home/MetricsSectionDemandSkeleton';
 import { Routes } from '@/utils/routes';
-import { Sparkline } from '@mantine/charts';
+import { LineChart, Sparkline } from '@mantine/charts';
 import { ActionIcon, Popover } from '@mantine/core';
 import { IconInfoCircleFilled } from '@tabler/icons-react';
+import classNames from 'classnames';
 import { DateTime } from 'luxon';
 import Link from 'next/link';
 import { useTranslations } from 'next-intl';
@@ -18,7 +19,7 @@ import styles from './styles.module.css';
 
 /* * */
 
-export default function Component() {
+export default function Component({ className }: { className?: string }) {
 	//
 
 	//
@@ -60,7 +61,10 @@ export default function Component() {
 
 	const weekDistribution = useMemo(() => {
 		if (!metricsData) return [];
-		return metricsData?.map(day => day.total_qty);
+		return metricsData?.map(day => ({
+			operational_day: DateTime.fromFormat(day.operational_day, 'yyyyLLdd').toFormat('dd/LL'),
+			total_qty: day.total_qty,
+		}));
 	}, [metricsData]);
 
 	//
@@ -71,7 +75,7 @@ export default function Component() {
 	}
 
 	return (
-		<div className={styles.container}>
+		<div className={classNames(styles.container, className)}>
 			<Popover offset={0} position="top-end" shadow="md" width={300} withArrow>
 				<Popover.Target>
 					<ActionIcon className={styles.popoverAnchor} size="xs" variant="transparent">
@@ -87,22 +91,35 @@ export default function Component() {
 				<div className={`${styles.rowWrapper} ${styles.primary}`}>
 					<div className={styles.realtimeValueWrapper}>
 						<p className={styles.value}>{t('today.value', { value: todayTotal })}</p>
-						<LiveIcon color="var(--color-status-info-text)" />
+						{/* <LiveIcon color="var(--color-status-info-text)" /> */}
 					</div>
 					<p className={styles.label}>{t('today.label')}</p>
 				</div>
-				<div className={`${styles.rowWrapper} ${styles.secondary}`}>
+				{/* <div className={`${styles.rowWrapper} ${styles.secondary}`}>
 					<p className={styles.value}>{t('yesterday.value', { value: yesterdayTotal })}</p>
 					<p className={styles.label}>{t('yesterday.label')}</p>
-				</div>
+				</div> */}
 			</div>
 			<div className={styles.graphWrapper}>
-				<Sparkline
-					color="var(--color-status-info-text)"
+				<LineChart
+					color="var(--color-brand)"
 					curveType="natural"
 					data={weekDistribution}
-					fillOpacity={1}
-					h={75}
+					dataKey="operational_day"
+					gridAxis="none"
+					h={100}
+					strokeWidth={5}
+					withDots={false}
+					withLegend={false}
+					withXAxis={false}
+					withYAxis={false}
+					series={[
+						{
+							color: 'var(--color-brand)',
+							label: 'Nº de validações',
+							name: 'total_qty',
+						},
+					]}
 				/>
 			</div>
 		</div>

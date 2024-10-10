@@ -6,8 +6,8 @@ import MetricsSectionDemandSkeleton from '@/components/home/MetricsSectionDemand
 import LineBadge from '@/components/lines/LineBadge';
 import { useLinesContext } from '@/contexts/Lines.context';
 import { Routes } from '@/utils/routes';
-import { Sparkline } from '@mantine/charts';
-import { ActionIcon, Popover } from '@mantine/core';
+import { LineChart } from '@mantine/charts';
+import { ActionIcon, Popover, useComputedColorScheme } from '@mantine/core';
 import { IconInfoCircleFilled } from '@tabler/icons-react';
 import classNames from 'classnames';
 import Link from 'next/link';
@@ -19,7 +19,7 @@ import styles from './styles.module.css';
 
 /* * */
 
-export default function Component() {
+export default function Component({ className, showGraph = true }: { className?: string, showGraph?: boolean }) {
 	//
 
 	//
@@ -28,6 +28,7 @@ export default function Component() {
 	const t = useTranslations('HomeMetricsSectionDemand');
 	const linesContext = useLinesContext();
 	const [selectedLineId, setSelectedLineId] = useState<string | undefined>();
+	const colorScheme = useComputedColorScheme();
 
 	//
 	// B. Fetch data
@@ -51,7 +52,12 @@ export default function Component() {
 
 	const selectedDistribution = useMemo(() => {
 		if (!metricsData) return null;
-		return metricsData.find(line => line.line_id === selectedLineId)?.by_hour.map(hour => hour.qty);
+		const metrics = metricsData.find(line => line.line_id === selectedLineId)?.by_hour;
+		if (!metrics) return null;
+		return metrics.sort((a, b) => a.hour - b.hour).map(item => ({
+			hour: (item.hour.toString().length === 1 ? '0' : '') + item.hour + ':00',
+			qty: item.qty,
+		}));
 	}, [metricsData, selectedLineId]);
 
 	//
@@ -62,7 +68,7 @@ export default function Component() {
 	}
 
 	return (
-		<div className={styles.container}>
+		<div className={classNames(styles.container, { [styles.light]: colorScheme === 'light' }, className)}>
 			<Popover offset={0} position="top-end" shadow="md" width={300} withArrow>
 				<Popover.Target>
 					<ActionIcon className={styles.popoverAnchor} size="xs" variant="transparent">
@@ -86,20 +92,35 @@ export default function Component() {
 					</div>
 					<p className={styles.label}>{t('by_line.top')}</p>
 				</div>
-				<div className={`${styles.rowWrapper} ${styles.secondary}`}>
+				{/* <div className={`${styles.rowWrapper} ${styles.secondary}`}>
 					<p className={styles.value}>{selectedValue}</p>
 					<p className={styles.label}>{t('by_line.selected')}</p>
+				</div> */}
+			</div>
+			{showGraph && (
+				<div className={styles.graphWrapper}>
+					<LineChart
+						color={linesContext.data.raw.find(line => line.line_id === selectedLineId)?.color || '#ff00ff'}
+						curveType="natural"
+						data={selectedDistribution}
+						dataKey="hour"
+						gridAxis="none"
+						h={80}
+						strokeWidth={5}
+						withDots={false}
+						withLegend={false}
+						withXAxis={false}
+						withYAxis={false}
+						series={[
+							{
+								color: linesContext.data.raw.find(line => line.line_id === selectedLineId)?.color || '#ff00ff',
+								label: 'Nº de passageniros transportados',
+								name: 'qty',
+							},
+						]}
+					/>
 				</div>
-			</div>
-			<div className={styles.graphWrapper}>
-				<Sparkline
-					color="var(--color-status-info-text)"
-					curveType="natural"
-					data={selectedDistribution}
-					fillOpacity={1}
-					h={75}
-				/>
-			</div>
+			)}
 		</div>
 	);
 
