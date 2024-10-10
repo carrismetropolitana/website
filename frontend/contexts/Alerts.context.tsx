@@ -54,7 +54,7 @@ export const AlertsContextProvider = ({ children }) => {
 	//
 	// B. Fetch data
 
-	const { data: allAlertsData, isLoading: allAlertsLoading } = useSWR<Alert[], Error>(`${Routes.API}/v2/alerts`);
+	const { data: allAlertsData, isLoading: allAlertsLoading } = useSWR<Alert[], Error>(`${Routes.API}/alerts`);
 
 	//
 	// C. Transform data
