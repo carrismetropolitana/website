@@ -37,6 +37,8 @@ export async function getUserLocale() {
 	// The Accept-Language header often contains a list of locales with optional quality values (q),
 	// where higher q values indicate higher preference. Split the header value and map through
 	// the array to extract the language and its q-value. Sort by quality value in descending order.
+	// Since we want to eventually return the locale code, we need to check if the locale is an alias
+	// and return the alias corresponding value instead.
 
 	const browserPreferedLocalesSplit = browserPreferedLocales.split(',');
 
@@ -48,14 +50,25 @@ export async function getUserLocale() {
 		};
 	});
 
-	browserPreferedLocalesParsed.sort((a, b) => b.quality - a.quality);
+	const browserPreferedLocalesMatched = browserPreferedLocalesParsed
+		.map((lang) => {
+			const matchingLocaleConfiguration = availableLocales.find(item => item.alias.includes(lang.locale));
+			if (matchingLocaleConfiguration) {
+				return {
+					...lang,
+					locale: matchingLocaleConfiguration.value,
+				};
+			}
+		})
+		.filter(lang => !!lang)
+		.sort((a, b) => b.quality - a.quality);
 
 	//
 	// Check if the default locale for this website is in the list of browser locales.
 	// This is useful because the user can be multi-lingual and its native language is not the primary browser locale.
 	// If the default locale for this website is in the list, return it. Search both for the locale code and its aliases.
 
-	const defaultLocaleIsViableOption = browserPreferedLocalesParsed.find((lang) => {
+	const defaultLocaleIsViableOption = browserPreferedLocalesMatched.find((lang) => {
 		const isDefaultLocale = lang.locale === defaultLocaleCode;
 		const isDefaultLocaleAlias = defaultLocaleCodesAndAliases.includes(lang.locale);
 		return isDefaultLocale || isDefaultLocaleAlias;
@@ -74,12 +87,9 @@ export async function getUserLocale() {
 	//
 	// From the list of available locales that are still a viable options,
 	// select the locale code with the highest preference value.
-	// Check if the desired locale is an alias and return the locale value instead.
 
 	const browserPreferedLocaleWithHighestQuality = otherLocalesThatAreViableOptions[0].locale;
-	const matchingLocaleConfiguration = availableLocales.find(item => item.alias.includes(browserPreferedLocaleWithHighestQuality));
-
-	if (matchingLocaleConfiguration) return matchingLocaleConfiguration.value;
+	if (browserPreferedLocaleWithHighestQuality) return browserPreferedLocaleWithHighestQuality;
 
 	//
 	// Return the default locale if no other locale is found.
