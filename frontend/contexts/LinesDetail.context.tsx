@@ -9,6 +9,7 @@ import type { DemandByLine } from '@/utils/types';
 
 import { useOperationalDayContext } from '@/contexts/OperationalDay.context';
 import { useProfileContext } from '@/contexts/Profile.context';
+import { ServiceMetrics } from '@/types/metrics.types';
 import convertToSimplifiedAlert from '@/utils/convertToSimplifiedAlert';
 import { Routes } from '@/utils/routes';
 import { notFound } from 'next/navigation';
@@ -38,6 +39,7 @@ interface LinesDetailContextState {
 		demand: DemandByLine | null
 		drawer_open: boolean
 		line: Line | null
+		service: null | ServiceMetrics[]
 		timetable: string
 		valid_pattern_groups: null | PatternGroup[]
 	}
@@ -83,7 +85,7 @@ export const LinesDetailContextProvider = ({ children, lineId }) => {
 	const [dataActiveAlertsState, setDataActiveAlertsState] = useState<null | SimplifiedAlert[]>(null);
 	const [dataActivePatternGroupState, setDataActivePatternGroupState] = useState<null | PatternGroup>(null);
 	const [dataActiveShapeState, setDataActiveShapeState] = useState<null | Shape>(null);
-
+	const [dataServiceMetricsState, setDataServiceMetricsState] = useState<null | ServiceMetrics[]>(null);
 	const [dataActiveStopState, setDataActiveStopState] = useState<{ sequence: number, stop: Stop } | null>(null);
 
 	const [flagIsFavoriteState, setFlagIsFavoriteState] = useState<boolean>(false);
@@ -100,6 +102,7 @@ export const LinesDetailContextProvider = ({ children, lineId }) => {
 	const { data: lineData, isLoading: lineLoading } = useSWR<Line, Error>(`${Routes.API}/lines/${lineId}`);
 	const { data: allAlertsData, isLoading: allAlertsLoading } = useSWR<Alert[], Error>(`${Routes.API}/alerts`);
 	const { data: allDemandByLineData } = useSWR<DemandByLine[], Error>(`${Routes.API}/metrics/demand/by_line`);
+	const { data: allServiceMetricsData } = useSWR<ServiceMetrics[], Error>(`${Routes.API}/metrics/service/by_line/${lineId}`);
 
 	// Check if the line exists
 	useEffect(() => {
@@ -221,6 +224,11 @@ export const LinesDetailContextProvider = ({ children, lineId }) => {
 		setDataDemandForCurrentLineState(demandForCurrentLine || null);
 	}, [allDemandByLineData, lineData]);
 
+	useEffect(() => {
+		if (!allServiceMetricsData) return;
+		setDataServiceMetricsState(allServiceMetricsData);
+	}, [allServiceMetricsData]);
+
 	//
 	// D. Handle actions
 
@@ -294,6 +302,7 @@ export const LinesDetailContextProvider = ({ children, lineId }) => {
 			demand: dataDemandForCurrentLineState,
 			drawer_open: dataDrawerOpenState,
 			line: lineData || null,
+			service: dataServiceMetricsState,
 			timetable: '',
 			valid_pattern_groups: dataValidPatternGroupsState,
 		},

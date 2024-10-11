@@ -659,10 +659,12 @@
 		"LinesDetailMetrics": {
 			"demand": {
 				"big_number": "{value, number}",
+				"label": "Passengers transported / day",
 				"subtitle": "passengers transported on this line in the last 15 days"
 			},
 			"service": {
 				"big_number": "{value, number, percentage}",
+				"label": "Success rate",
 				"subtitle": "feasibility of the service of all routes on this line in the last 15 days"
 			}
 		},
