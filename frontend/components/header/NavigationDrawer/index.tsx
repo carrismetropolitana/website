@@ -63,6 +63,9 @@ export default function Component() {
 						/>
 						<CloseButton onClick={closeDrawer} />
 					</div>
+					<div className={styles.componentWrapper}>
+						<LocaleSwitcher />
+					</div>
 					<div className={styles.navList}>
 						{menuItemsFormatted.map((group, index) => (
 							<div key={index} className={styles.group}>
@@ -72,9 +75,6 @@ export default function Component() {
 								))}
 							</div>
 						))}
-					</div>
-					<div className={styles.componentWrapper}>
-						<LocaleSwitcher />
 					</div>
 					{/* TODO: Stage 2 */}
 					{/* <div className={`${styles.componentWrapper} ${styles.topBorder}`}>
