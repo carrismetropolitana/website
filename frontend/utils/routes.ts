@@ -188,8 +188,8 @@ export const Routes = Object.freeze({
 	...RoutesLostAndFound,
 	...RoutesFooter,
 
-	API: process.env.NEXT_PUBLIC_API_URL,
-	API_ACCOUNTS: process.env.ACCOUNTS_API_URL,
+	API: process.env.NEXT_PUBLIC_API_URL ?? 'http://localhost:3000',
+	API_ACCOUNTS: process.env.ACCOUNTS_API_URL ?? 'http://localhost:3000',
 	METRICS: {
 		intl: {
 			pt: '/metricas',
