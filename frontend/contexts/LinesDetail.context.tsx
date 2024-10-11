@@ -4,8 +4,8 @@
 
 import type { Alert, SimplifiedAlert } from '@/types/alerts.types';
 import type { Line, Pattern, PatternGroup, Route, Shape } from '@/types/lines.types.js';
+import type { DemandByLineMetrics } from '@/types/metrics.types';
 import type { Stop } from '@/types/stops.types';
-import type { DemandByLine } from '@/utils/types';
 
 import { useOperationalDayContext } from '@/contexts/OperationalDay.context';
 import { useProfileContext } from '@/contexts/Profile.context';
@@ -36,7 +36,7 @@ interface LinesDetailContextState {
 		} | null
 		all_patterns: null | Pattern[]
 		all_routes: null | Route[]
-		demand: DemandByLine | null
+		demand: DemandByLineMetrics | null
 		drawer_open: boolean
 		line: Line | null
 		service: null | ServiceMetrics[]
@@ -80,7 +80,7 @@ export const LinesDetailContextProvider = ({ children, lineId }) => {
 	const [dataRoutesState, setDataRoutesState] = useState<null | Route[]>(null);
 	const [dataAllPatternsState, setDataAllPatternsState] = useState<null | Pattern[]>(null);
 	const [dataValidPatternGroupsState, setDataValidPatternGroupsState] = useState<null | PatternGroup[]>(null);
-	const [dataDemandForCurrentLineState, setDataDemandForCurrentLineState] = useState<DemandByLine | null>(null);
+	const [dataDemandForCurrentLineState, setDataDemandForCurrentLineState] = useState<DemandByLineMetrics | null>(null);
 
 	const [dataActiveAlertsState, setDataActiveAlertsState] = useState<null | SimplifiedAlert[]>(null);
 	const [dataActivePatternGroupState, setDataActivePatternGroupState] = useState<null | PatternGroup>(null);
@@ -101,7 +101,7 @@ export const LinesDetailContextProvider = ({ children, lineId }) => {
 
 	const { data: lineData, isLoading: lineLoading } = useSWR<Line, Error>(`${Routes.API}/lines/${lineId}`);
 	const { data: allAlertsData, isLoading: allAlertsLoading } = useSWR<Alert[], Error>(`${Routes.API}/alerts`);
-	const { data: allDemandByLineData } = useSWR<DemandByLine[], Error>(`${Routes.API}/metrics/demand/by_line`);
+	const { data: allDemandByLineData } = useSWR<DemandByLineMetrics[], Error>(`${Routes.API}/metrics/demand/by_line`);
 	const { data: allServiceMetricsData } = useSWR<ServiceMetrics[], Error>(`${Routes.API}/metrics/service/by_line/${lineId}`);
 
 	// Check if the line exists

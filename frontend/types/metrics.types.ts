@@ -45,8 +45,8 @@ export interface ServiceMetrics {
 
 export interface DemandByLineMetrics {
 	by_day: {
-		operational_day: number
-		total_qty: number
+		day: number
+		qty: number
 	}[]
 	by_hour: {
 		hour: number

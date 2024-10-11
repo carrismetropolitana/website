@@ -79,7 +79,7 @@ export default function DemandMetrics() {
 				<div className={styles.metricWrapper}>
 					<div className={styles.bigNumberWrapper}>
 						<h1 className={styles.bigNumber} style={{ color: linesDetailContext.data.line?.color }}>
-							{t('demand.big_number', { value: linesDetailContext.data.demand.total_qty })}
+							{t('demand.big_number', { value: linesDetailContext.data.demand?.total_qty })}
 						</h1>
 						<LiveIcon className={styles.liveIcon} color={linesDetailContext.data.line?.color} />
 					</div>
