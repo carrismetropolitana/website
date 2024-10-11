@@ -49,6 +49,10 @@
 	font-size: var(--font-size-heading);
 	font-weight: var(--font-weight-heading);
 	color: var(--color-system-text-100);
+
+	.brand & {
+		color: var(--color-primary-black);
+	}
 }
 
 /* * */
@@ -60,6 +64,10 @@
 	font-size: var(--font-size-text);
 	font-weight: var(--font-weight-text);
 	color: var(--color-system-text-200);
+
+	.brand & {
+		color: var(--color-primary-black);
+	}
 }
 
 /* * */

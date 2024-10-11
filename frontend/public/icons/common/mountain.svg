@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg id="Camada_1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 113.4 114.52">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: none;
+        stroke: #000;
+        stroke-linecap: round;
+        stroke-linejoin: round;
+        stroke-width: 5.07px;
+      }
+
+      .cls-2 {
+        fill: #fd0;
+      }
+    </style>
+  </defs>
+  <circle class="cls-2" cx="56.7" cy="57.26" r="47.06"/>
+  <g>
+    <polyline class="cls-1" points="23.52 71.65 50.72 44.73 77.78 72.07"/>
+    <polyline class="cls-1" points="62.57 56.37 76.66 42.43 89.89 55.8"/>
+  </g>
+</svg>

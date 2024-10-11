@@ -210,6 +210,18 @@ export const Routes = Object.freeze({
 		},
 		route: '/news/[news_id]',
 	},
+	PRESS: {
+		intl: {
+			pt: '/imprensa',
+		},
+		route: '/press',
+	},
+	PRESS_IMAGE_BANK: {
+		intl: {
+			pt: '/imprensa/banco-de-imagens',
+		},
+		route: '/press/image-bank',
+	},
 	SCHOOLS: 'https://escolas.carrismetropolitana.pt/',
 	STORAGE: 'https://storage.carrismetropolitana.pt',
 });

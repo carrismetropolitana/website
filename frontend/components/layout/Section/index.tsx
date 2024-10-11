@@ -9,6 +9,7 @@ interface Props {
 	heading?: string
 	right?: React.ReactNode
 	subheading?: string
+	variant?: 'brand' | 'default'
 	withBottomDivider?: boolean
 	withGap?: boolean
 	withPadding?: boolean
@@ -16,9 +17,9 @@ interface Props {
 
 /* * */
 
-export function Section({ children, heading, right, subheading, withBottomDivider, withGap, withPadding }: Props) {
+export function Section({ children, heading, right, subheading, variant = 'default', withBottomDivider, withGap, withPadding }: Props) {
 	return (
-		<section className={`${styles.container} ${withBottomDivider && styles.withBottomDivider} ${withGap && styles.withGap} ${withPadding && styles.withPadding}`}>
+		<section className={`${styles.container} ${withBottomDivider && styles.withBottomDivider} ${withGap && styles.withGap} ${withPadding && styles.withPadding} ${variant && styles[variant]}`}>
 
 			{(heading || subheading) && (
 				<div className={styles.topSection}>

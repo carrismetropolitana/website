@@ -1,14 +1,20 @@
 .cards {
 	& p {
-		color: var(--color-system-text-200);
+		color: var(--color-primary-black);
 		font-size: var(--font-size-text) + 2px;
 	}
+}
+
+.card {
+	justify-content: space-between;
+	height: 157px;
+	background-color: var(--color-primary-white);
+	color: var(--color-primary-black)
 }
 
 .imageContainer {
 	display: flex;
 	flex-direction: column;
-	justify-content: center;
 	align-items: center;
 	height: 100%;
 }
