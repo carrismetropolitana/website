@@ -30,7 +30,7 @@ export function TicketsHeader() {
 					<Card>
 						<CardHeader>
 							<div className={styles.images}>
-								<Image alt="Icon Coins" src={IconsCommon.COINS} />
+								<Image alt="Icon Coins" src={IconsCommon.RECEIPT} />
 								<Image alt="Icon Receipt" src={IconsCommon.RECEIPT} />
 							</div>
 						</CardHeader>
