@@ -42,3 +42,18 @@ export interface ServiceMetrics {
 	passTripPercentage: number
 	totalTripCount: number
 }
+
+export interface DemandByLineMetrics {
+	by_day: {
+		operational_day: number
+		total_qty: number
+	}[]
+	by_hour: {
+		hour: number
+		qty: number
+	}[]
+	end_date: string
+	line_id: string
+	start_date: string
+	total_qty: number
+};
