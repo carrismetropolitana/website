@@ -42,6 +42,16 @@
 	color: var(--color-system-text-100);
 }
 
+.warning .heading {
+	color: #FF6900;
+}
+
+.success .heading {
+	color: #5dba50;
+
+	/* color: #327a32; */
+}
+
 /* * */
 /* SUBHEADING */
 

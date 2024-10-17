@@ -2,9 +2,10 @@
 
 /* * */
 
+import type { Stop } from '@/types/stops.types';
+
 import { StopDisplay } from '@/components/stops/StopDisplay';
 import { createDocCollection } from '@/hooks/useOtherSearch';
-import { Stop } from '@/types/stops.types';
 import { ActionIcon, Combobox, Group, TextInput, useCombobox } from '@mantine/core';
 import { useDebouncedValue } from '@mantine/hooks';
 import { IconBusStop, IconSelector, IconX } from '@tabler/icons-react';
@@ -17,14 +18,17 @@ import styles from './styles.module.css';
 
 interface SelectStopProps {
 	data: Stop[]
+	label?: string
+	nothingFound?: string
 	onSelectStopId: (stopId: null | string) => void
+	placeholder?: string
 	selectedStopId: null | string
 	variant: 'default' | 'white'
 }
 
 /* * */
 
-export default function Component({ data = [], onSelectStopId, selectedStopId, variant }: SelectStopProps) {
+export default function Component({ data = [], label, nothingFound, onSelectStopId, placeholder, selectedStopId, variant }: SelectStopProps) {
 	//
 
 	//
@@ -117,7 +121,7 @@ export default function Component({ data = [], onSelectStopId, selectedStopId, v
 								<IconBusStop size={20} />
 							</div>
 							<div className={styles.comboboxTargetInput}>
-								{/* <StopDisplay ={selectedStopData.id}locality={selectedStopData.locality} municipalityName={selectedStopData.municipality_name} name={selectedStopData.name} /> */}
+								<StopDisplay stop={selectedStopData} />
 							</div>
 							<div className={styles.comboboxTargetSection} data-position="right">
 								<ActionIcon color="gray" onClick={handleClearSearchField} size="md" variant="subtle">
@@ -128,14 +132,14 @@ export default function Component({ data = [], onSelectStopId, selectedStopId, v
 					)
 					: (
 						<TextInput
-							aria-label={t('label')}
+							aria-label={label || t('label')}
 							autoComplete="off"
 							leftSection={<IconBusStop size={20} />}
 							onBlur={handleExitSearchField}
 							onChange={handleSearchQueryChange}
 							onClick={handleClickSearchField}
 							onFocus={handleClickSearchField}
-							placeholder={t('placeholder')}
+							placeholder={placeholder || t('placeholder')}
 							type="search"
 							value={searchQuery}
 							variant={variant}
@@ -157,11 +161,11 @@ export default function Component({ data = [], onSelectStopId, selectedStopId, v
 			<Combobox.Dropdown>
 				<Combobox.Options mah={200} style={{ overflowY: 'auto' }}>
 					{allStopsDataFilteredBySearchQuery.length === 0
-						? <Combobox.Empty>{t('nothing_found')}</Combobox.Empty>
+						? <Combobox.Empty>{nothingFound || t('nothing_found')}</Combobox.Empty>
 						: allStopsDataFilteredBySearchQuery.map(item => (
 							<Combobox.Option key={item.id} className={item.id === selectedStopData?.id ? styles.selected : ''} value={item.id}>
 								<div className={styles.comboboxOption}>
-									{/* <StopDisplay _id={item.id} locality={item?.locality} municipalityName={item?.municipality_name} name={item?.name} /> */}
+									<StopDisplay stop={item} />
 								</div>
 							</Combobox.Option>
 						),

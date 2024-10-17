@@ -16,6 +16,22 @@
 	padding: 0;
 }
 
+@media screen and (width <= 650px) {
+	.segmentedControlDateInputOverrideControl label {
+		padding-right: var(--size-spacing-15);
+		padding-left: var(--size-spacing-15);
+
+	}
+}
+
+@media screen and (width <= 350px) {
+	.segmentedControlDateInputOverrideControl label,
+	.segmentedControlDateInputOverrideControl:last-child label {
+		padding-top: var(--size-spacing-15);
+		padding-bottom: var(--size-spacing-15);
+	}
+}
+
 /* * */
 /* DATE PICKER / WRAPPER */
 
@@ -56,12 +72,15 @@
     display: flex;
 	align-items: center;
 	justify-content: center;
-	width: 24px;
 	aspect-ratio: 1/1;
 	padding-left: var(--size-spacing-10);
 	margin-top: -3px;
 	color: var(--color-system-text-300);
 	pointer-events: none;
+}
+
+.datePickerSection svg {
+	width: 22px;
 }
 
 .segmentedControlDateInputOverrideControl[data-active="true"] .datePickerSection {

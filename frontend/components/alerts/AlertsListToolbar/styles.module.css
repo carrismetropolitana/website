@@ -8,15 +8,15 @@
 }
 
 .selectsWrapper {
-	width: 100%;
 	display: grid;
 	grid-template-columns: 1fr 1fr;
 	gap: var(--size-spacing-15);
 	justify-content: stretch;
+	width: 100%;
 }
 
 
-@media screen and (max-width: 768px) {
+@media screen and (width <= 768px) {
 	.selectsWrapper {
 		grid-template-columns: 1fr;
 	}

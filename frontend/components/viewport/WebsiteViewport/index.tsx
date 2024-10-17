@@ -2,7 +2,7 @@
 
 /* * */
 
-import AnalyticsConsentPopup from '@/components/analytics/ConsentPopup';
+import { ConsentPopup } from '@/components/analytics/ConsentPopup';
 import Footer from '@/components/footer/Footer';
 import Header from '@/components/header/Header';
 import { useSearchParams } from 'next/navigation';
@@ -27,7 +27,7 @@ export function WebsiteViewport({ children }) {
 			{searchParams.get('origin') !== 'app' && <Header />}
 			{children}
 			{searchParams.get('origin') !== 'app' && <Footer />}
-			{searchParams.get('origin') !== 'app' && <AnalyticsConsentPopup />}
+			{searchParams.get('origin') !== 'app' && <ConsentPopup />}
 		</div>
 	);
 

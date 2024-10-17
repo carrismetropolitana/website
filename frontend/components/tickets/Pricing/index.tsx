@@ -72,8 +72,8 @@ export function Pricing() {
 					<div className={styles.container}>
 						<div className={styles.info}>
 							<LineBadgeBaseIcon line_variant="fast" />
-							<h3>{t('longa.title')}</h3>
-							<p>{t('longa.description')}</p>
+							<h3>{t('rapida.title')}</h3>
+							<p>{t('rapida.description')}</p>
 						</div>
 						<div className={styles.pricing}>
 							<div className={styles.pricingItem}>

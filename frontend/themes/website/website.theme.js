@@ -32,6 +32,15 @@ export default createTheme({
 				if (props.variant === 'pill') {
 					defaultClasses = combineClasses(defaultClasses, [ButtonOverride.variantPill]);
 				}
+				if (props.variant === 'primary') {
+					defaultClasses = combineClasses(defaultClasses, [ButtonOverride.variantPrimary]);
+				}
+				if (props.variant === 'secondary') {
+					defaultClasses = combineClasses(defaultClasses, [ButtonOverride.variantSecondary]);
+				}
+				if (props.variant === 'muted') {
+					defaultClasses = combineClasses(defaultClasses, [ButtonOverride.variantMuted]);
+				}
 				return defaultClasses;
 			},
 		}),

@@ -58,19 +58,23 @@
 .iconsWrapper {
     display: flex;
 	flex-direction: row;
-	gap: var(--size-spacing-15);
+	gap: var(--size-spacing-10);
     align-items: center;
 	justify-content: flex-start;
+	width: 100%;
+	padding: var(--size-spacing-20);
+	padding-top: 0;
+	overflow: auto;
 }
 
-/* * */
-/* LINE BADGES WRAPPER */
+@media screen and (width <= 768px) {
+	.iconsWrapper {
+		overflow: auto;
+	}
+}
 
-.lineBadgesWrapper {
-    display: flex;
-    flex-wrap: wrap;
-    gap: var(--size-spacing-15);
-    align-items: flex-start;
-    justify-content: flex-start;
-    width: 100%;
+.iconsDivider {
+	min-width: 2px;
+	height: 20px;
+	background-color: var(--color-system-border-100);
 }

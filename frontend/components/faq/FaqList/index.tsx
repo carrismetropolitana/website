@@ -13,13 +13,13 @@ import styles from './styles.module.css';
 
 /* * */
 
-interface FaqListProps {
+interface Props {
 	data: FaqGroupByTopic[]
 }
 
 /* * */
 
-export default function Component({ data }: FaqListProps) {
+export default function Component({ data }: Props) {
 	//
 
 	//

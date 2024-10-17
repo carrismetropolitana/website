@@ -2,6 +2,7 @@
 
 /* * */
 
+import { GeneralStatus } from '@/components/header/GeneralStatus';
 import Logo from '@/components/header/Logo';
 import HeaderNavigationDrawer from '@/components/header/NavigationDrawer';
 import HeaderNavigationMain from '@/components/header/NavigationMain';
@@ -37,13 +38,16 @@ export default function Component() {
 	// C. Render components
 
 	return (
-		<header ref={stickyElementRef} className={`${styles.container} ${isSticky ? styles.isSticky : ''}`}>
-			<Logo />
-			<div className={styles.navWrapper}>
-				<HeaderNavigationMain />
-				<HeaderNavigationDrawer />
-			</div>
-		</header>
+		<>
+			<header ref={stickyElementRef} className={`${styles.container} ${isSticky ? styles.isSticky : ''}`}>
+				<Logo />
+				<div className={styles.navWrapper}>
+					<HeaderNavigationMain />
+					<HeaderNavigationDrawer />
+				</div>
+			</header>
+			{/* <GeneralStatus /> */}
+		</>
 	);
 
 	//

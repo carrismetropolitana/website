@@ -2,6 +2,7 @@
 
 /* * */
 
+import { ExpandToggle } from '@/components/common/ExpandToggle';
 import FoundItemsCounter from '@/components/common/FoundItemsCounter';
 import Input from '@/components/common/Input';
 import SelectLine from '@/components/common/SelectLine';
@@ -58,22 +59,28 @@ export default function Component() {
 			<Section heading={t('heading')} subheading={t('subheading')} withGap withPadding>
 				<SegmentedControl data={byCurrentStatusOptions} onChange={alertsContext.actions.updateFilterByDate} value={alertsContext.filters.by_date} w="100%" fullWidth />
 				<Input leftSection={<IconSearch size={20} />} onChange={handleFilterBySearchQuery} placeholder={t('filters.text_search')} value={searchQuery ?? ''} w="100%" />
-				<div className={styles.selectsWrapper}>
-					<SelectLine
-						data={linesContext.data.raw}
-						onSelectLineId={alertsContext.actions.updateFilterByLineId}
-						selectedLineId={alertsContext.filters.line_id}
-						variant="default"
-					/>
-					<SelectStop
-						data={stopsContext.data.raw}
-						onSelectStopId={alertsContext.actions.updateFilterByStopId}
-						selectedStopId={alertsContext.filters.stop_id}
-						variant="default"
-					/>
-					<SelectCause onChange={alertsContext.actions.updateFilterByCause} value={alertsContext.filters.cause} />
-					<SelectEffect onChange={alertsContext.actions.updateFilterByEffect} value={alertsContext.filters.effect} />
-				</div>
+				<ExpandToggle>
+					<div className={styles.selectsWrapper}>
+						<SelectLine
+							data={linesContext.data.raw}
+							label={t('filters.by_line.label')}
+							onSelectLineId={alertsContext.actions.updateFilterByLineId}
+							placeholder={t('filters.by_line.placeholder')}
+							selectedLineId={alertsContext.filters.line_id}
+							variant="default"
+						/>
+						<SelectStop
+							data={stopsContext.data.raw}
+							label={t('filters.by_stop.label')}
+							onSelectStopId={alertsContext.actions.updateFilterByStopId}
+							placeholder={t('filters.by_stop.placeholder')}
+							selectedStopId={alertsContext.filters.stop_id}
+							variant="default"
+						/>
+						<SelectCause onChange={alertsContext.actions.updateFilterByCause} value={alertsContext.filters.cause} />
+						<SelectEffect onChange={alertsContext.actions.updateFilterByEffect} value={alertsContext.filters.effect} />
+					</div>
+				</ExpandToggle>
 				<FoundItemsCounter text={t('found_items_counter', { count: alertsContext.data.filtered.length })} />
 			</Section>
 		</Surface>

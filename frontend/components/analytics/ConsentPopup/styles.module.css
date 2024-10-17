@@ -1,11 +1,17 @@
 /* * */
-/* CONTAINER */
+/* OVERRIDES */
 
-.container {
-  display: flex;
-  flex-direction: column;
-  gap: var(--size-md);
-  align-items: center;
+.contentOverride {
+	background-color: var(--color-system-background-100);
+	border-radius: var(--border-radius-lg);
+}
+
+.bodyOverride {
+	display: flex;
+	flex-direction: column;
+	gap: var(--size-spacing-20);
+	align-items: center;
+	padding: var(--size-spacing-30);
 }
 
 /* * */
@@ -29,39 +35,25 @@
 .link {
   font-size: 12px;
   font-weight: 500;
-  color: var(--gray-5);
+  color: var(--color-system-text-200);
 }
 
 /* * */
-/* ANSWERS */
+/* ANSWERS WRAPPER */
 
-.answers {
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  gap: var(--size-sm);
+.answersWrapper {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--size-spacing-15);
   align-items: center;
   justify-content: center;
-}
-
-/* * */
-/* ACCEPT BUTTON */
-
-.acceptButton {
-  color: #000000;
-  background-color: var(--carris-metropolitana);
   width: 100%;
+  margin-top: var(--size-spacing-15);
 }
 
 /* * */
 /* REFUSE BUTTON */
 
-.refuseButton {
-  color: var(--gray-4);
-  background-color: var(--gray-0);
-}
-
-.refuseButton:hover {
-  color: var(--gray-4);
-  background-color: var(--gray-1);
+.refuseButtonOverride {
+  opacity: 0.5;
 }

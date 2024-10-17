@@ -1,9 +1,21 @@
 /* * */
 
-import { fetchFaqs } from '@/actions/faq.actions';
+import type { FaqGroupByTopic } from '@/types/faq.types';
 
 /* * */
 
 export async function GET() {
-	return Response.json(await fetchFaqs());
+	const faqs: FaqGroupByTopic[] = [
+		{
+			_id: 'A',
+			items: [],
+			title: 'Carris Metropolitana',
+		},
+		{
+			_id: 'B',
+			items: [],
+			title: 'Operação',
+		},
+	];
+	return Response.json(faqs);
 }

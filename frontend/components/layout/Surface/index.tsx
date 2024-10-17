@@ -7,7 +7,7 @@ import styles from './styles.module.css';
 interface Props {
 	children?: React.ReactNode
 	forceOverflow?: boolean
-	variant?: 'brand' | 'default' | 'muted' | 'standout'
+	variant?: 'brand' | 'default' | 'muted' | 'standout' | 'success' | 'warning'
 }
 
 /* * */

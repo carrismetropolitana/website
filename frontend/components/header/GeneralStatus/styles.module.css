@@ -1,14 +1,20 @@
+.success .heading {
+	color: #5dba50;
+}
+
+
+
 /* * */
 /* CONTAINER */
 
 .container {
+  z-index: 1000;
   display: flex;
   flex-direction: row;
   justify-content: flex-start;
   width: 100%;
-  margin: auto;
   max-width: var(--size-width-global);
-  z-index: 1000;
+  margin: auto;
   border-bottom: 1px solid var(--color-system-border-100);
 }
 
@@ -36,9 +42,9 @@
 /* ICON WRAPPER */
 
 .iconWrapper {
+	z-index: 1000;
 	display: flex;
 	padding: 12px;
-	z-index: 1000;
 }
 
 .style_info .iconWrapper {
@@ -85,11 +91,11 @@
 .messageWrapper {
 	display: flex;
 	flex-direction: row;
-	align-items: center;
 	gap: var(--size-spacing-15);
-	overflow-x: auto;
-	padding-left: 15px;
+	align-items: center;
 	padding-right: 15px;
+	padding-left: 15px;
+	overflow-x: auto;
 	white-space: nowrap;
 }
 

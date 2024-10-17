@@ -1,29 +1,31 @@
+'use client';
+
 /* * */
 
 import type { FaqGroupByTopic } from '@/types/faq.types';
 
-import { fetchFaqs } from '@/actions/faq.actions';
 import Button from '@/components/common/Button';
 import FaqList from '@/components/faq/FaqList';
 import { Section } from '@/components/layout/Section';
 import { Surface } from '@/components/layout/Surface';
 import { IconPhoneCheck } from '@tabler/icons-react';
-import { getTranslations } from 'next-intl/server';
+import { useTranslations } from 'next-intl';
+import useSWR from 'swr';
 
 /* * */
 
-export default async function Component() {
+export default function Component() {
 	//
 
 	//
 	// A. Setup variables
 
-	const t = await getTranslations('faq.Page');
+	const t = useTranslations('faq.Page');
 
 	//
 	// B. Fetch data
 
-	const allFaqData: FaqGroupByTopic[] = await fetchFaqs();
+	const { data: allFaqData } = useSWR<FaqGroupByTopic[]>('/api/faq');
 
 	//
 	// C. Render components
@@ -35,7 +37,7 @@ export default async function Component() {
 					<Button icon={<IconPhoneCheck size={18} />} label={t('contacts')} />
 				</Section>
 			</Surface>
-			<FaqList data={allFaqData} />
+			{allFaqData && <FaqList data={allFaqData} />}
 		</>
 	);
 

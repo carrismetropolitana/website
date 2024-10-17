@@ -2,6 +2,7 @@
 
 /* * */
 
+import Logo from '@/components/header/Logo';
 import { useAnalyticsContext } from '@/contexts/Analytics.context';
 import { BrandsCmet } from '@/settings/assets.settings';
 import { Button, Modal } from '@mantine/core';
@@ -15,7 +16,7 @@ import styles from './styles.module.css';
 
 /* * */
 
-export default function Component() {
+export function ConsentPopup() {
 	//
 
 	//
@@ -56,22 +57,20 @@ export default function Component() {
 	// C. Render Components
 
 	return (
-		<Modal closeOnClickOutside={false} closeOnEscape={false} onClose={() => setIsOpen(false)} opened={isOpen} overlayProps={{ backgroundOpacity: 0.55, blur: 3 }} returnFocus={true} trapFocus={false} withCloseButton={false}>
-			<div className={styles.container}>
-				<Image alt="" height={120} src={BrandsCmet.cmet_light} width={350} priority />
-				<h4 className={styles.title}>{t('title')}</h4>
-				<h4 className={styles.text}>{t('text')}</h4>
-				<Link className={styles.link} href="/legal/cookies" target="_blank">
-					{t('privacy_policy')}
-				</Link>
-				<div className={styles.answers}>
-					<Button className={styles.acceptButton} onClick={handleEnable} size="lg">
-						{t('accept')}
-					</Button>
-					<Button className={styles.refuseButton} onClick={handleDisable} size="xs" variant="subtle">
-						{t('refuse')}
-					</Button>
-				</div>
+		<Modal classNames={{ body: styles.bodyOverride, content: styles.contentOverride }} closeOnClickOutside={false} closeOnEscape={false} onClose={() => setIsOpen(false)} opened={isOpen} overlayProps={{ backgroundOpacity: 0.55, blur: 3 }} returnFocus={true} trapFocus={false} withCloseButton={false}>
+			<Logo />
+			<h4 className={styles.title}>{t('title')}</h4>
+			<h4 className={styles.text}>{t('text')}</h4>
+			<Link className={styles.link} href="/legal/cookies" target="_blank">
+				{t('privacy_policy')}
+			</Link>
+			<div className={styles.answersWrapper}>
+				<Button className={styles.refuseButtonOverride} onClick={handleDisable} size="xs">
+					{t('refuse')}
+				</Button>
+				<Button onClick={handleEnable} variant="primary">
+					{t('accept')}
+				</Button>
 			</div>
 		</Modal>
 	);

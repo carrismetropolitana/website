@@ -1,0 +1,40 @@
+/* * */
+/* CONTAINER */
+
+.container {
+	display: flex;
+	flex-direction: column;
+	gap: var(--size-spacing-15);
+	align-items: flex-start;
+	justify-content: flex-start;
+	width: 100%;
+}
+
+
+/* * */
+/* TOGGLE */
+
+.toggle {
+	display: flex;
+	padding: var(--size-spacing-5) var(--size-spacing-15);
+	font-size: 14px;
+	font-weight: var(--font-weight-semibold);
+	line-height: 1;
+	color: var(--color-system-text-300);
+	cursor: pointer;
+	background-color: var(--color-system-background-100);
+	border: 1px solid var(--color-system-border-200);
+	border-radius: 999px;
+	transition: all 200ms ease;
+}
+
+.toggle:hover {
+	color: var(--color-system-text-200);
+}
+
+/* * */
+/* CHILDREN WRAPPER */
+
+.childrenWrapper {
+	width: 100%;
+}

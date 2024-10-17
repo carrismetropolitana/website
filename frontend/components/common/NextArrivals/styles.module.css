@@ -54,6 +54,7 @@
 
 .scheduled .arrival {
 	font-weight: var(--font-weight-bold);
+	font-variant-numeric: tabular-nums;
 	color: var(--color-system-text-100);
 }
 

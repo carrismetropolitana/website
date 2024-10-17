@@ -65,6 +65,7 @@ export const IconsFacilities = Object.freeze({
 	park: '/icons/facilities/park.svg',
 	police_station: '/icons/facilities/police_station.svg',
 	school: '/icons/facilities/school.svg',
+	transit_office: '/icons/facilities/school.svg',
 	university: '/icons/facilities/university.svg',
 });
 

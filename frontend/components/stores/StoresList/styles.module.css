@@ -13,7 +13,7 @@
 @media screen and (width <= 1000px) {
 	.contentWrapper {
 		grid-template:
-			"b" minmax(300px, auto) [b_]
+			"b" 300px [b_]
 			"a" auto [a_] / 1fr;
 		gap: var(--size-spacing-30);
 	}
@@ -42,5 +42,6 @@
 @media screen and (width <= 1000px) {
 	.mapWrapper {
 		position: static;
+		height: 300px;
 	}
 }

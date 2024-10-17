@@ -52,6 +52,59 @@
 }
 
 /* * */
+/* CONTAINER / VARIANTS / WARNING */
+
+.container.warning {
+	background-color: var(--color-system-background-100);
+	animation: pulse-animation-warning 3000ms ease-out infinite;
+}
+
+@media screen and (width <= 650px) {
+	.container.warning {
+		border:none;
+		border-top: 5px solid #FF6900;
+		box-shadow: none;
+		animation: none;
+	}
+}
+
+@keyframes pulse-animation-warning {
+    0%   {
+		box-shadow: 0 0 5px 0 #ff6a0036;
+	}
+    25%  {
+		box-shadow: 0 0 15px 0 #FF6900;
+	}
+    100% {
+		box-shadow: 0 0 5px 0 #ff6a0036;
+	}
+}
+
+/* * */
+/* CONTAINER / VARIANTS / SUCCESS */
+
+.container.success {
+	background-color: white;
+	border: 3px solid #5dba50;
+
+	& .heading {
+		color: blue;
+	}
+
+	/* background-color: #5cba50;
+	border: 3px solid #2d7523; */
+}
+
+@media screen and (width <= 650px) {
+	.container.success {
+		border:none;
+		border-top: 5px solid #5dba50;
+		box-shadow: none;
+		animation: none;
+	}
+}
+
+/* * */
 /* CONTAINER / VARIANTS / STANDOUT */
 
 @property --border-angle {
