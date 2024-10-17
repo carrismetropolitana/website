@@ -168,12 +168,7 @@
 			"lines": "Linhas",
 			"stops": "Paragens"
 		},
-		"search": {
-			"label": "Encontre os horários planeados e em tempo real da linha que procura.",
-			"nothing_found": "Encontre os horários planeados e em tempo real da linha que procura.",
-			"placeholder": "Encontre os horários planeados e em tempo real da linha que procura."
-		},
-		"subtitle": "Encontre os horários planeados e em tempo real da linha que procura.",
+		"subtitle": "Encontre os horários planeados e em tempo real que procura.",
 		"title": "Pesquisa Rápida"
 	},
 	"IconDisplay": {
@@ -213,17 +208,17 @@
 		"publish_date": "{publishDate, date, long}"
 	},
 	"SelectLine": {
-		"label": "Procurar linha por número, nome, localização...",
+		"label": "Procurar linha por número, nome, localidade...",
 		"nothing_found": "Nenhum Resultado Encontrado",
-		"placeholder": "Procurar linha por número, nome, localização..."
+		"placeholder": "Procurar linha por número, nome, localidade..."
 	},
 	"SelectPattern": {
 		"option_label": "Início do percurso: {locality}"
 	},
 	"SelectStop": {
-		"label": "Procurar paragem por id, nome, localização...",
+		"label": "Procurar paragem por nome, número, localidade...",
 		"nothing_found": "Nenhum Resultado Encontrado",
-		"placeholder": "Procurar paragem por id, nome, localização..."
+		"placeholder": "Procurar paragem por nome, número, localidade..."
 	},
 	"alerts": {
 		"AlertActivePeriod": {
@@ -290,13 +285,19 @@
 				"future": "Futuros ({count})"
 			},
 			"filters": {
-				"lines_label": "Filtrar por linha",
-				"stops_label": "Filtrar por paragem",
-				"text_search": "Procurar alerta por titulo, descrição, localização..."
+				"by_line": {
+					"label": "Filtrar por linha",
+					"placeholder": "Filtrar por linha"
+				},
+				"by_stop": {
+					"label": "Filtrar por paragem",
+					"placeholder": "Filtrar por paragem"
+				},
+				"text_search": "Procurar alerta por título, descrição, localização..."
 			},
 			"found_items_counter": "{count, plural, =0 {Nenhum alerta encontrado.} one {Encontrado # alerta:} other {Encontrados # alertas:}}",
 			"heading": "Alertas de Serviço",
-			"subheading": "Fique a par de todas as alterações à rede. Lorem ipsum dolor sit amet."
+			"subheading": "Fique a par de todas as alterações à rede. Mantenha-se informado sobre novas linhas, mudanças de percurso e ajustes de horários, assim como sobre eventos que possam afetar a sua viagem."
 		},
 		"SelectCause": {
 			"placeholder": "Filtrar por causa"
@@ -426,11 +427,19 @@
 			"subheading": "Descubra quanto custa viajar na CMetropolitana de vez em quando. Para utilizações mais frequentes sugerimos a adesão ao sistema navegante®.",
 			"wizard": {
 				"description": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Obcaecati ea natus itaque qui iure nam consequuntur minima, quibusdam saepe odio molestiae soluta aspernatur, corrupti labore fugiat? Numquam blanditiis accusantium quibusdam!",
-				"title": "Descruba a melhor opção para si."
+				"title": "Descubra a melhor opção para si"
 			}
 		}
 	},
 	"common": {
+		"ExpandToggle": {
+			"is_hidden": {
+				"label": "Expandir Filtros"
+			},
+			"is_visible": {
+				"label": "Esconder Filtros"
+			}
+		},
 		"NextArrivals": {
 			"arriving": "A chegar",
 			"hours": "h",
