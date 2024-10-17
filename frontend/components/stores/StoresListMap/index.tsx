@@ -94,9 +94,9 @@ export default function Component() {
 							'icon-ignore-placement': true,
 							'icon-image': [
 								'match', ['get', 'current_status'],
-								'open', 'cm-store-open',
-								'busy', 'cm-store-busy',
-								'closed', 'cm-store-closed',
+								'open', 'cmet-store-open',
+								'busy', 'cmet-store-busy',
+								'closed', 'cmet-store-closed',
 								'#000000',
 							],
 							'icon-size': 0.45,
