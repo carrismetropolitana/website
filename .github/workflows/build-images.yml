@@ -13,7 +13,7 @@ jobs:
 
   website-frontend:
     name: frontend (NextJS)
-    runs-on: self-hosted
+    runs-on: ubuntu-latest
     strategy:
       fail-fast: false
     permissions:
@@ -62,7 +62,7 @@ jobs:
 
   website-videowall:
     name: videowall (NextJS)
-    runs-on: self-hosted
+    runs-on: ubuntu-latest
     strategy:
       fail-fast: false
     permissions:
