@@ -168,11 +168,6 @@
 			"lines": "Lines",
 			"stops": "Stops"
 		},
-		"search": {
-			"label": "Find the planned and real-time schedules for the line you are looking for.",
-			"nothing_found": "Find the planned and real-time schedules for the line you are looking for.",
-			"placeholder": "Find the planned and real-time schedules for the line you are looking for."
-		},
 		"subtitle": "Find the planned and real-time schedules for the line you are looking for.",
 		"title": "Quick Search"
 	},
@@ -290,8 +285,14 @@
 				"future": "Futures ({count})"
 			},
 			"filters": {
-				"lines_label": "Filter by line",
-				"stops_label": "Filter by stop",
+				"by_line": {
+					"label": "Filtrar por linha",
+					"placeholder": "Filtrar por linha"
+				},
+				"by_stop": {
+					"label": "Filtrar por paragem",
+					"placeholder": "Filtrar por paragem"
+				},
 				"text_search": "Search alert by title, description, location..."
 			},
 			"found_items_counter": "{count, plural, =0 {No alerts found.} one {Found # alert:} other {Found # alert:}}",
@@ -442,6 +443,14 @@
 		}
 	},
 	"common": {
+		"ExpandToggle": {
+			"is_hidden": {
+				"label": "Expandir Filtros"
+			},
+			"is_visible": {
+				"label": "Esconder Filtros"
+			}
+		},
 		"NextArrivals": {
 			"arriving": "Coming up",
 			"hours": "h",
@@ -1032,7 +1041,7 @@
 				"title": "Fast lines"
 			},
 			"ticket_types": {
-				"onboard": "",
+				"onboard": "single ticket",
 				"onboard_start_by_29": "bilhete de bordo linhas começadas por 29**",
 				"onboard_start_by_49": "bilhete de bordo linhas começadas por 49**",
 				"prepaid": "Prepaid"
