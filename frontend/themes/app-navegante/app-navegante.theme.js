@@ -10,7 +10,7 @@ import { Button } from '@mantine/core';
 
 /* * */
 
-export const appAndroidTheme = createTheme({
+export const appNaveganteTheme = createTheme({
 	//
 
 	components: {

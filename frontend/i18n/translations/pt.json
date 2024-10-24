@@ -339,6 +339,17 @@
 			"text": "Recomendamos que atualize em breve para uma melhor experiência de utilização."
 		}
 	},
+	"app-navegante": {
+		"StartupMessageDefault": {
+			"actions": {
+				"update_android": "Atualizar na Play Store",
+				"update_ios": "Atualizar na App Store"
+			},
+			"heading": "Nova versão disponível",
+			"subheading": "Por favor atualize a app navegante® para a versão mais recente.",
+			"text": "A nova versão inclui melhorias de desempenho, correções de erros e ."
+		}
+	},
 	"cards": {
 		"Discounts": {
 			"heading": "Descontos",

@@ -3,8 +3,7 @@
 /* * */
 
 import { EnvironmentContextProvider } from '@/contexts/Environment.context';
-import websiteTheme from '@/themes/website/website.theme';
-import { MantineProvider } from '@mantine/core';
+import { MantineProvider, MantineProviderProps } from '@mantine/core';
 import { DatesProvider } from '@mantine/dates';
 import { ModalsProvider } from '@mantine/modals';
 import 'dayjs/locale/pt';
@@ -12,7 +11,15 @@ import { DatesProviderValue } from 'node_modules/@mantine/dates/lib/components/D
 
 /* * */
 
-export function ThemeProviders({ children }) {
+interface Props {
+	children: React.ReactNode
+	themeData: MantineProviderProps['theme']
+	themeId: string
+}
+
+/* * */
+
+export function ThemeProviders({ children, themeData, themeId }: Props) {
 	//
 
 	//
@@ -29,10 +36,10 @@ export function ThemeProviders({ children }) {
 	// B. Render components
 
 	return (
-		<MantineProvider defaultColorScheme="auto" theme={websiteTheme}>
+		<MantineProvider defaultColorScheme="auto" theme={themeData}>
 			<DatesProvider settings={mantineDatesSettings}>
 				<ModalsProvider>
-					<EnvironmentContextProvider value="website">
+					<EnvironmentContextProvider value={themeId}>
 						{children}
 					</EnvironmentContextProvider>
 				</ModalsProvider>

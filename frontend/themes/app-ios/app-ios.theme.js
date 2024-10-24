@@ -10,7 +10,7 @@ import { Button } from '@mantine/core';
 
 /* * */
 
-export default createTheme({
+export const appIosTheme = createTheme({
 	//
 
 	components: {

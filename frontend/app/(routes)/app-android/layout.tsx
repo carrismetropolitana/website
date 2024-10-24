@@ -1,20 +1,20 @@
 /* * */
 
-import AppWrapper from '@/components/viewport/AppWrapper';
-import { EnvironmentContextProvider } from '@/contexts/Environment.context';
-
-import Providers from './providers';
+import { AppViewport } from '@/components/viewport/AppViewport';
+import { ConfigProviders } from '@/providers/config-providers';
+import { ThemeProviders } from '@/providers/theme-providers';
+import { appAndroidTheme } from '@/themes/app-android/app-android.theme';
 
 /* * */
 
 export default function Layout({ children }) {
 	return (
-		<Providers>
-			<AppWrapper>
-				<EnvironmentContextProvider value="app-android">
+		<ConfigProviders>
+			<ThemeProviders themeData={appAndroidTheme} themeId="app-android">
+				<AppViewport>
 					{children}
-				</EnvironmentContextProvider>
-			</AppWrapper>
-		</Providers>
+				</AppViewport>
+			</ThemeProviders>
+		</ConfigProviders>
 	);
 }

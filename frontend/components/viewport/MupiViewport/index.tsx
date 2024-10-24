@@ -4,7 +4,7 @@ import styles from './styles.module.css';
 
 /* * */
 
-export default function Component({ children }) {
+export function MupiViewport({ children }) {
 	return (
 		<div className={styles.container}>
 			{children}
