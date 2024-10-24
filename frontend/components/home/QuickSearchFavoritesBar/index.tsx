@@ -47,13 +47,13 @@ export default function Component() {
 		// Return early if data is not available
 		if (!allLinesData || !profileContext.data.profile?.favorite_lines?.length) return [];
 		// Filter all lines to only include favorited lines
-		const filteredFavoriteLines = allLinesData.filter((lineData: Line) => profileContext.data.profile?.favorite_lines?.includes(lineData.line_id));
+		const filteredFavoriteLines = allLinesData.filter((lineData: Line) => profileContext.data.profile?.favorite_lines?.includes(lineData.id));
 		const sortedFavoriteLines = filteredFavoriteLines.sort((a: Line, b: Line) => a.short_name.localeCompare(b.short_name));
 		// Extend array with check if any of these lines have active alerts
 		const extendedFavoriteLinesWithAlerts = sortedFavoriteLines.map((lineData: Line) => {
 			return {
 				data: lineData,
-				has_alert: alertsContext.actions.getSimplifiedAlertsByLineId(lineData.line_id).length > 0,
+				has_alert: alertsContext.actions.getSimplifiedAlertsByLineId(lineData.id).length > 0,
 			};
 		});
 		// Return extended array
@@ -91,9 +91,9 @@ export default function Component() {
 		<div className={styles.container}>
 			{favoriteLinesData.slice(0, DISPLAY_LIMIT).map(favoriteLine => (
 				<LineBadge
-					key={favoriteLine.data.line_id}
+					key={favoriteLine.data.id}
 					line={favoriteLine.data}
-					onClick={() => handleClick(favoriteLine.data.line_id)}
+					onClick={() => handleClick(favoriteLine.data.id)}
 					withAlertIcon={favoriteLine.has_alert}
 				/>
 			))}

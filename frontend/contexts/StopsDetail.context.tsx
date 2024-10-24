@@ -104,7 +104,7 @@ export const StopsDetailContextProvider = ({ children, stopId }: { children: Rea
 	 * Use data from stopsContext to avoid fetching the same data twice.
 	 */
 	useEffect(() => {
-		if (!dataActiveStopIdState || !stopsContext.data.raw || !stopsContext.data.raw.length) return;
+		if (!dataActiveStopIdState || !stopsContext.data.stops || !stopsContext.data.stops.length) return;
 		const foundStopData = stopsContext.actions.getStopById(dataActiveStopIdState);
 		if (foundStopData) {
 			setDataStopState(foundStopData);
@@ -113,7 +113,7 @@ export const StopsDetailContextProvider = ({ children, stopId }: { children: Rea
 		else {
 			notFound();
 		}
-	}, [stopsContext.data.raw, dataActiveStopIdState]);
+	}, [stopsContext.data.stops, dataActiveStopIdState]);
 
 	/**
 	 * Fetch line data for the selected stop.

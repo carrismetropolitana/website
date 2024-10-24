@@ -40,7 +40,7 @@ export default async function Sitemap() {
 			changeFrequency: 'daily',
 			lastModified: new Date(),
 			priority: 1,
-			url: `${baseUrl}/lines/${lineData.line_id}`,
+			url: `${baseUrl}/lines/${lineData.id}`,
 		};
 	}) ?? [];
 

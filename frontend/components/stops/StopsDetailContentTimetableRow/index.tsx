@@ -37,7 +37,7 @@ export function StopsDetailContentTimetableRow({ arrivalData, status }: Props) {
 	}, [stopsDetailContext.data.active_trip_id, stopsDetailContext.data.active_stop_sequence, arrivalData.trip_id, arrivalData.stop_sequence]);
 
 	// This is needed to avoid rerendering the component when the time changes
-	const thisPattern = stopsDetailContext.data.valid_pattern_groups?.find(pattern => pattern.id === arrivalData.id);
+	const thisPattern = stopsDetailContext.data.valid_pattern_groups?.find(pattern => pattern.id === arrivalData.pattern_id);
 
 	//
 	// C. Handle actions

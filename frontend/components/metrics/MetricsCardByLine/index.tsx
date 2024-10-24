@@ -129,20 +129,20 @@ export default function Component({
 					<div className={styles.realtimeValueWrapper}>
 						{topThree.map(line => (
 							<div
-								key={line.line_id}
-								onClick={() => setSelectedLineId(line.line_id)}
+								key={line.id}
+								onClick={() => setSelectedLineId(line.id)}
 								className={classNames(
 									styles.realtimeValueWrapperItem,
 									{
 										[styles.selected]:
-											line.line_id === selectedLineId,
+											line.id === selectedLineId,
 									},
 								)}
 							>
 								<LineBadge
-									key={line.line_id}
-									line={linesContext.data.raw.find(
-										raw => raw.line_id === line.line_id,
+									key={line.id}
+									line={linesContext.data.lines.find(
+										raw => raw.id === line.id,
 									)}
 								/>
 							</div>
@@ -170,16 +170,16 @@ export default function Component({
 						withXAxis={false}
 						withYAxis={false}
 						color={
-							linesContext.data.raw.find(
-								line => line.line_id === selectedLineId,
+							linesContext.data.lines.find(
+								line => line.id === selectedLineId,
 							)?.color || '#ff00ff'
 						}
 						series={[
 							{
 								color:
-									linesContext.data.raw.find(
+									linesContext.data.lines.find(
 										line =>
-											line.line_id === selectedLineId,
+											line.id === selectedLineId,
 									)?.color || '#ff00ff',
 								label: 'Nº de passageniros transportados',
 								name: 'qty',

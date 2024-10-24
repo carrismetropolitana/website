@@ -150,7 +150,7 @@ export const LinesDetailContextProvider = ({ children, lineId }) => {
 				console.error('Error fetching pattern data:', error);
 			}
 		})();
-	}, [dataLineState, stopsContext.data.raw]);
+	}, [dataLineState, stopsContext.data.stops]);
 
 	/**
 	 * TASK: Fetch shape data for the active trip.

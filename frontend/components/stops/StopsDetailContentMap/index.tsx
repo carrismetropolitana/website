@@ -33,7 +33,7 @@ export function StopsDetailContentMap() {
 
 	const allStopsGeoJson = useMemo(() => {
 		return stopsContext.actions.getAllStopsGeoJsonFC();
-	}, [stopsContext.data.raw]);
+	}, [stopsContext.data.stops]);
 
 	const activeStopGeoJson = useMemo(() => {
 		return stopsContext.actions.getStopByIdGeoJsonFC(stopsDetailContext.data.active_stop_id);
@@ -43,7 +43,9 @@ export function StopsDetailContentMap() {
 		if (!stopsDetailContext.data.active_pattern_group?.path) return;
 		const collection = getBaseGeoJsonFeatureCollection();
 		stopsDetailContext.data.active_pattern_group.path.forEach((pathStop) => {
-			const result = transformStopDataIntoGeoJsonFeature(pathStop.stop);
+			const stopData = stopsContext.actions.getStopById(pathStop.stop_id);
+			if (!stopData) return;
+			const result = transformStopDataIntoGeoJsonFeature(stopData);
 			result.properties = {
 				...result.properties,
 				color: stopsDetailContext.data.active_pattern_group?.color,
@@ -52,12 +54,12 @@ export function StopsDetailContentMap() {
 			collection.features.push(result);
 		});
 		return collection;
-	}, [stopsDetailContext.data.active_trip_id, vehiclesContext.data.all]);
+	}, [stopsDetailContext.data.active_trip_id, vehiclesContext.data.vehicles]);
 
 	const activeVehicleGeoJson = useMemo(() => {
 		if (!stopsDetailContext.data.active_trip_id) return;
 		return vehiclesContext.actions.getVehiclesByTripIdGeoJsonFC(stopsDetailContext.data.active_trip_id);
-	}, [stopsDetailContext.data.active_trip_id, vehiclesContext.data.all]);
+	}, [stopsDetailContext.data.active_trip_id, vehiclesContext.data.vehicles]);
 
 	//
 	// B. Transform Data

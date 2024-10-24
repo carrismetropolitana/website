@@ -90,7 +90,7 @@ export function StopsDetailHeader() {
 					)}
 					{stopsDetailContext.data.lines && stopsDetailContext.data.lines.map(line => (
 						<div className={styles.iconLineBadgeWrapper}>
-							<LineBadge key={line.line_id} line={line} />
+							<LineBadge key={line.id} line={line} />
 						</div>
 					))}
 				</div>

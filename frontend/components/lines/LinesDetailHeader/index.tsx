@@ -33,7 +33,7 @@ export default function Component() {
 	const handleToggleFavorite = async () => {
 		if (!linesDetailContext.data.line) return;
 		try {
-			await profileContext.actions.toggleFavoriteLine(linesDetailContext.data.line.line_id);
+			await profileContext.actions.toggleFavoriteLine(linesDetailContext.data.line.id);
 		}
 		catch (error) {
 			toast.error({ message: t('toggle_favorite_error', { error: error.message }) });

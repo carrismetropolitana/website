@@ -4,7 +4,7 @@
 
 import { Section } from '@/components/layout/Section';
 import { Surface } from '@/components/layout/Surface';
-import LinesListViewFavorites from '@/components/lines/LinesListViewFavorites';
+import { LinesListViewFavorites } from '@/components/lines/LinesListViewFavorites';
 import PageToolbar from '@/components/profile/favorites/PageToolbar';
 import { StopsListViewFavorites } from '@/components/stops/StopsListViewFavorites';
 import { useProfileContext } from '@/contexts/Profile.context';

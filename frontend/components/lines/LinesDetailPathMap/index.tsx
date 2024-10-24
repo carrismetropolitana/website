@@ -7,7 +7,7 @@ import { MapViewStyleActiveStops } from '@/components/map/MapViewStyleActiveStop
 import { MapViewStylePath, MapViewStylePathInteractiveLayerId } from '@/components/map/MapViewStylePath';
 import { MapViewStyleVehicles } from '@/components/map/MapViewStyleVehicles';
 import { useLinesDetailContext } from '@/contexts/LinesDetail.context';
-import { transformStopDataIntoGeoJsonFeature } from '@/contexts/Stops.context';
+import { transformStopDataIntoGeoJsonFeature, useStopsContext } from '@/contexts/Stops.context';
 import { useVehiclesContext } from '@/contexts/Vehicles.context';
 import { getBaseGeoJsonFeatureCollection, moveMap } from '@/utils/map.utils';
 import { useEffect, useMemo } from 'react';
@@ -21,6 +21,7 @@ export default function Component() {
 	//
 	// A. Setup variables
 
+	const stopsContext = useStopsContext();
 	const vehiclesContext = useVehiclesContext();
 	const linesDetailContext = useLinesDetailContext();
 
@@ -65,13 +66,15 @@ export default function Component() {
 	const activeVehiclesGeojson = useMemo(() => {
 		if (!linesDetailContext.data.active_pattern_group?.id) return;
 		return vehiclesContext.actions.getVehiclesByPatternIdGeoJsonFC(linesDetailContext.data.active_pattern_group?.id);
-	}, [linesDetailContext.data.active_pattern_group, vehiclesContext.data.all]);
+	}, [linesDetailContext.data.active_pattern_group, vehiclesContext.data.vehicles]);
 
 	const activePathStopsGeoJson = useMemo(() => {
 		if (!linesDetailContext.data.active_pattern_group?.path) return;
 		const collection = getBaseGeoJsonFeatureCollection();
 		linesDetailContext.data.active_pattern_group.path.forEach((pathStop) => {
-			const result = transformStopDataIntoGeoJsonFeature(pathStop.stop);
+			const stopData = stopsContext.actions.getStopById(pathStop.stop_id);
+			if (!stopData) return;
+			const result = transformStopDataIntoGeoJsonFeature(stopData);
 			result.properties = {
 				...result.properties,
 				color: linesDetailContext.data.active_pattern_group?.color,
@@ -80,7 +83,7 @@ export default function Component() {
 			collection.features.push(result);
 		});
 		return collection;
-	}, [linesDetailContext.data.active_pattern_group, vehiclesContext.data.all]);
+	}, [linesDetailContext.data.active_pattern_group, vehiclesContext.data.vehicles]);
 
 	const activeStopGeoJson = useMemo(() => {
 		if (!linesDetailContext.data.active_stop || !linesDetailContext.data.active_pattern_group) return;

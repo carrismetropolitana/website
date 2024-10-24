@@ -111,12 +111,12 @@ export interface Pattern {
 	direction: number
 	facilities: string[]
 	headsign: string
+	id: string
 	line_id: string
 	localities: string[]
 	municipality_ids: string[]
 	path: Path[]
 	pattern_version_id: string
-	pattern_id: string
 	route_id: string
 	shape_id: string
 	short_name: string

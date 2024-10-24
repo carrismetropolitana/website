@@ -5,8 +5,8 @@
 import { ExpandToggle } from '@/components/common/ExpandToggle';
 import FoundItemsCounter from '@/components/common/FoundItemsCounter';
 import Input from '@/components/common/Input';
-import SelectLine from '@/components/common/SelectLine';
-import SelectStop from '@/components/common/SelectStop';
+import { SelectLine } from '@/components/common/SelectLine';
+import { SelectStop } from '@/components/common/SelectStop';
 import { Section } from '@/components/layout/Section';
 import { Surface } from '@/components/layout/Surface';
 import { useAlertsListContext } from '@/contexts/AlertsList.context';
@@ -62,7 +62,7 @@ export default function Component() {
 				<ExpandToggle>
 					<div className={styles.selectsWrapper}>
 						<SelectLine
-							data={linesContext.data.raw}
+							data={linesContext.data.lines}
 							label={t('filters.by_line.label')}
 							onSelectLineId={alertsContext.actions.updateFilterByLineId}
 							placeholder={t('filters.by_line.placeholder')}
@@ -70,7 +70,7 @@ export default function Component() {
 							variant="default"
 						/>
 						<SelectStop
-							data={stopsContext.data.raw}
+							data={stopsContext.data.stops}
 							label={t('filters.by_stop.label')}
 							onSelectStopId={alertsContext.actions.updateFilterByStopId}
 							placeholder={t('filters.by_stop.placeholder')}
