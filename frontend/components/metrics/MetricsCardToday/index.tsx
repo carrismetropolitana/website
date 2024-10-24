@@ -2,10 +2,10 @@
 
 /* * */
 
-import LiveIcon from '@/components/common/LiveIcon';
+// import LiveIcon from '@/components/common/LiveIcon';
 import MetricsSectionDemandSkeleton from '@/components/home/MetricsSectionDemandSkeleton';
 import { Routes } from '@/utils/routes';
-import { LineChart, Sparkline } from '@mantine/charts';
+import { LineChart } from '@mantine/charts';
 import { ActionIcon, Popover } from '@mantine/core';
 import { IconInfoCircleFilled } from '@tabler/icons-react';
 import classNames from 'classnames';
@@ -47,17 +47,17 @@ export default function Component({ className }: { className?: string }) {
 		return metricsData?.find(day => day.operational_day === todayOperationalDay)?.total_qty;
 	}, [metricsData]);
 
-	const yesterdayTotal = useMemo(() => {
-		if (!metricsData) return null;
-		let yesterdayOperationalDay: string;
-		if (DateTime.now().setZone('Europe/Lisbon').get('hour') < 4) {
-			yesterdayOperationalDay = DateTime.now().setZone('Europe/Lisbon').minus({ days: 2 }).toFormat('yyyyLLdd');
-		}
-		else {
-			yesterdayOperationalDay = DateTime.now().setZone('Europe/Lisbon').minus({ days: 1 }).toFormat('yyyyLLdd');
-		}
-		return metricsData?.find(day => day.operational_day === yesterdayOperationalDay)?.total_qty;
-	}, [metricsData]);
+	// const yesterdayTotal = useMemo(() => {
+	// 	if (!metricsData) return null;
+	// 	let yesterdayOperationalDay: string;
+	// 	if (DateTime.now().setZone('Europe/Lisbon').get('hour') < 4) {
+	// 		yesterdayOperationalDay = DateTime.now().setZone('Europe/Lisbon').minus({ days: 2 }).toFormat('yyyyLLdd');
+	// 	}
+	// 	else {
+	// 		yesterdayOperationalDay = DateTime.now().setZone('Europe/Lisbon').minus({ days: 1 }).toFormat('yyyyLLdd');
+	// 	}
+	// 	return metricsData?.find(day => day.operational_day === yesterdayOperationalDay)?.total_qty;
+	// }, [metricsData]);
 
 	const weekDistribution = useMemo(() => {
 		if (!metricsData) return [];

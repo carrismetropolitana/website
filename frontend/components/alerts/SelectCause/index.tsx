@@ -3,7 +3,7 @@
 /* * */
 
 import { AlertCauseIcon } from '@/components/alerts/AlertCauseEffectIcon';
-import { useDebugContext } from '@/contexts/Debug.context';
+// import { useDebugContext } from '@/contexts/Debug.context';
 import { AlertCause } from '@/types/alerts.types';
 import { Flex, Group, Select, SelectProps, Text } from '@mantine/core';
 import { IconExclamationCircle } from '@tabler/icons-react';
@@ -19,7 +19,7 @@ export default function Component({ onChange, value, ...props }: SelectAlertCaus
 	//
 	// A. Setup variables
 	const t = useTranslations('alerts.SelectCause');
-	const debugContext = useDebugContext();
+	// const debugContext = useDebugContext();
 
 	//
 	// B. Transform data

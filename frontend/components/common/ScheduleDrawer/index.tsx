@@ -1,23 +1,20 @@
 /* * */
 
 import { SelectOperationalDay } from '@/components/common/SelectOperationalDay';
-import Timetable from '@/components/common/Timetable';
+// import Timetable from '@/components/common/Timetable';
 import { PatternGroup } from '@/types/lines.types';
 import { Stop } from '@/types/stops.types';
 import { Drawer } from '@mantine/core';
-import { useState } from 'react';
 
 /* * */
 
 export default function Component(
-	{ date, open, pattern, setOpen, stop, stopSequence }:
+	{ open, pattern, setOpen }:
 	{ date: Date, open: boolean, pattern: PatternGroup, setOpen: (open: boolean) => void, stop: Stop, stopSequence: number }) {
 	//
 
 	//
 	// A. Setup variables
-
-	const [innerDate, setInnerDate] = useState(date);
 
 	return (
 		<Drawer

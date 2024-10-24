@@ -10,7 +10,7 @@ import StoresListEmpty from '@/components/stores/StoresListEmpty';
 import StoresListGroupItem from '@/components/stores/StoresListGroupItem';
 import StoresListItemSkeleton from '@/components/stores/StoresListGroupItemSkeleton';
 import { useStoresListContext } from '@/contexts/StoresList.context';
-import collator from '@/utils/collator';
+// import collator from '@/utils/collator';
 import { useTranslations } from 'next-intl';
 import { useMemo } from 'react';
 

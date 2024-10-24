@@ -32,7 +32,8 @@
 		"skipLibCheck": true,
 		"sourceMap": true,
 		"strict": false,
-		"strictNullChecks": true
+		"strictNullChecks": true,
+		"target": "ES2017"
 	},
 	"exclude": [
 		"**/node_modules",

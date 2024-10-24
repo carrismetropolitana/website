@@ -2,7 +2,7 @@
 
 import type { Stop } from '@/types/stops.types';
 
-import { formatStopLocation } from '@/utils/formatStopLocation';
+// import { formatStopLocation } from '@/utils/formatStopLocation';
 import { Skeleton } from '@mantine/core';
 
 import { StopDisplayLocation } from '../StopDisplayLocation';

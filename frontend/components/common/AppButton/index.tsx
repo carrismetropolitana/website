@@ -15,7 +15,7 @@ interface Props extends React.ButtonHTMLAttributes<HTMLButtonElement> {
 
 /* * */
 
-export default function Component({ className, href, label, onClick, variant = 'primary' }: Props) {
+export default function Component({ href, label, onClick, variant = 'primary' }: Props) {
 	//
 
 	if (href) {

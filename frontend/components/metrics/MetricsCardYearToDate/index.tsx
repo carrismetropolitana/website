@@ -9,7 +9,8 @@ import { BarChart } from '@mantine/charts';
 import { ActionIcon, Popover } from '@mantine/core';
 import { IconInfoCircleFilled } from '@tabler/icons-react';
 import classNames from 'classnames';
-import { DateTime, Info } from 'luxon';
+import { Info } from 'luxon';
+// import { DateTime } from 'luxon';
 import Link from 'next/link';
 import { useTranslations } from 'next-intl';
 import { useMemo } from 'react';
@@ -30,7 +31,7 @@ export default function Component({ chartHeight = 100, className }: Props) {
 	// A. Setup variables
 
 	const t = useTranslations('HomeMetricsSectionDemand');
-	const tCommon = useTranslations('common');
+	// const tCommon = useTranslations('common');
 
 	//
 	// B. Fetch data
@@ -45,12 +46,12 @@ export default function Component({ chartHeight = 100, className }: Props) {
 		return metricsData.reduce((acc, month) => acc + month.count, 0);
 	}, [metricsData]);
 
-	const lastMonth = useMemo(() => {
-		if (!metricsData) return null;
-		const datenow = DateTime.now();
-		const lastMonth = datenow.minus({ months: 1 });
-		return metricsData.find(month => month.year === lastMonth.year && month.month === lastMonth.month);
-	}, [metricsData]);
+	// const lastMonth = useMemo(() => {
+	// 	if (!metricsData) return null;
+	// 	const datenow = DateTime.now();
+	// 	const lastMonth = datenow.minus({ months: 1 });
+	// 	return metricsData.find(month => month.year === lastMonth.year && month.month === lastMonth.month);
+	// }, [metricsData]);
 
 	const distribution = useMemo(() => {
 		if (!metricsData) return [];
@@ -70,16 +71,16 @@ export default function Component({ chartHeight = 100, className }: Props) {
 		return <MetricsSectionDemandSkeleton />;
 	}
 
-	const renderLastMonth = () => {
-		if (!lastMonth) return null;
-		const month = Info.months('long')[lastMonth.month - 1].toLowerCase();
-		return (
-			<div className={`${styles.rowWrapper} ${styles.secondary}`}>
-				<p className={styles.value}>{t('lastMonth.value', { value: lastMonth.count })}</p>
-				<p className={styles.label}>{t('lastMonth.label', { month: tCommon(`month.${month}`) })}</p>
-			</div>
-		);
-	};
+	// const renderLastMonth = () => {
+	// 	if (!lastMonth) return null;
+	// 	const month = Info.months('long')[lastMonth.month - 1].toLowerCase();
+	// 	return (
+	// 		<div className={`${styles.rowWrapper} ${styles.secondary}`}>
+	// 			<p className={styles.value}>{t('lastMonth.value', { value: lastMonth.count })}</p>
+	// 			<p className={styles.label}>{t('lastMonth.label', { month: tCommon(`month.${month}`) })}</p>
+	// 		</div>
+	// 	);
+	// };
 
 	return (
 		<div className={classNames(styles.container, className)}>

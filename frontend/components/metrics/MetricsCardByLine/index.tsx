@@ -57,13 +57,13 @@ export default function Component({
 		return top;
 	}, [metricsData]);
 
-	const selectedValue = useMemo(() => {
-		if (!metricsData) return null;
-		return metricsData
-			.find(line => line.line_id === selectedLineId)
-			?.total_qty.toLocaleString('en', { useGrouping: true })
-			.replace(/,/g, ' ');
-	}, [metricsData, selectedLineId]);
+	// const selectedValue = useMemo(() => {
+	// 	if (!metricsData) return null;
+	// 	return metricsData
+	// 		.find(line => line.line_id === selectedLineId)
+	// 		?.total_qty.toLocaleString('en', { useGrouping: true })
+	// 		.replace(/,/g, ' ');
+	// }, [metricsData, selectedLineId]);
 
 	const selectedDistribution = useMemo(() => {
 		if (!metricsData) return null;

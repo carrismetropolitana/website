@@ -6,7 +6,7 @@
 import { Button } from '@mantine/core';
 import { IconTrafficCone } from '@tabler/icons-react';
 import { useTranslations } from 'next-intl';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 import styles from './styles.module.css';
 
@@ -30,13 +30,13 @@ export default function Component() {
 	// 	analyticsContext.capture('frontend_error', { url: window.location.href });
 	// });
 
-	// useEffect(() => {
-	// 	const interval = setInterval(() => {
-	// 		if (reloadInSeconds === 1) window.location.reload();
-	// 		else setReloadInSeconds(prev => prev - 1);
-	// 	}, 1000);
-	// 	return () => clearInterval(interval);
-	// }, [reloadInSeconds]);
+	useEffect(() => {
+		const interval = setInterval(() => {
+			if (reloadInSeconds === 1) window.location.reload();
+			else setReloadInSeconds(prev => prev - 1);
+		}, 1000);
+		return () => clearInterval(interval);
+	}, [reloadInSeconds]);
 
 	//
 	// C. Handle actions

@@ -3,7 +3,7 @@
 import Input from '@/components/common/Input';
 import { Select } from '@mantine/core';
 import { IconAB } from '@tabler/icons-react';
-import { useTranslations } from 'next-intl';
+// import { useTranslations } from 'next-intl';
 
 import styles from './styles.module.css';
 
@@ -15,7 +15,7 @@ export function ServicePointsFilters() {
 	//
 	// A. Setup variables
 
-	const t = useTranslations('cards.MunicipalDiscounts');
+	// const t = useTranslations('cards.MunicipalDiscounts');
 
 	//
 	// B. Render components

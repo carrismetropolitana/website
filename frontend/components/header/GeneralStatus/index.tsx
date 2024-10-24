@@ -4,9 +4,8 @@
 
 import { Section } from '@/components/layout/Section';
 import { Surface } from '@/components/layout/Surface';
-import { Routes } from '@/utils/routes';
-import { IconAlertTriangleFilled, IconBellRingingFilled, IconCircleCheckFilled, IconInfoCircleFilled } from '@tabler/icons-react';
-import useSWR from 'swr';
+// import { Routes } from '@/utils/routes';
+// import useSWR from 'swr';
 
 import styles from './styles.module.css';
 
@@ -18,17 +17,17 @@ export function GeneralStatus() {
 	//
 	// A. Fetch data
 
-	const { data: appStatusData } = useSWR(`${Routes.API}/status/message`);
+	// const { data: appStatusData } = useSWR(`${Routes.API}/status/message`);
 	// const appStatusData = null;
 
 	//
 	// B. Handle actions
 
-	const handleClick = () => {
-		if (appStatusData.more_info) {
-			window.open(appStatusData.more_info, '_blank');
-		}
-	};
+	// const handleClick = () => {
+	// 	if (appStatusData.more_info) {
+	// 		window.open(appStatusData.more_info, '_blank');
+	// 	}
+	// };
 
 	//
 	// C. Render Components

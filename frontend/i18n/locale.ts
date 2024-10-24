@@ -12,7 +12,8 @@ const COOKIE_NAME = 'NEXT_LOCALE';
 /* * */
 
 export async function setUserLocale(locale) {
-	cookies().set(COOKIE_NAME, locale);
+	const cookieStore = await cookies();
+	cookieStore.set('name', 'lee');
 }
 
 /* * */
@@ -21,10 +22,16 @@ export async function getUserLocale() {
 	//
 
 	//
+	// Get headers and cookies from request
+
+	const headersList = await headers();
+	const cookieStore = await cookies();
+
+	//
 	// If the request URL has a locale in the query string, use that locale.
 	// This indicates that probably the user is coming from the app or another non-browser source.
 
-	const referer = headers().get('referer');
+	const referer = headersList.get('referer');
 	const localeQueryValue = referer && new URL(referer).searchParams.get('locale');
 
 	const queryStringLocaleMatched = localeQueryValue && availableLocales.find(item => item.value === localeQueryValue || item.alias.includes(localeQueryValue));
@@ -37,7 +44,7 @@ export async function getUserLocale() {
 	// Read the cookie to retrieve the prefered locale setting fot the user.
 	// The locale code might be an alias, so we need to match it against the list of available locales.
 
-	const userPreferedLocale = cookies().get(COOKIE_NAME)?.value;
+	const userPreferedLocale = cookieStore.get(COOKIE_NAME)?.value;
 	const userPreferedLocaleMatched = userPreferedLocale && availableLocales.find(item => item.value === userPreferedLocale || item.alias.includes(userPreferedLocale));
 	if (userPreferedLocaleMatched) {
 		console.log(`(2) Locale set from Cookie: ${userPreferedLocaleMatched.value}`);
@@ -47,7 +54,7 @@ export async function getUserLocale() {
 	//
 	// If no locale is set, try to get the locale set on the browser using the accept-language header.
 
-	const browserPreferedLocales = headers().get('accept-language');
+	const browserPreferedLocales = headersList.get('accept-language');
 	if (!browserPreferedLocales) {
 		console.log(`(3) No Locale Browser. Default: ${defaultLocaleCode}`);
 		return defaultLocaleCode;

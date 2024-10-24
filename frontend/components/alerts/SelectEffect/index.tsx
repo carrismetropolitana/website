@@ -3,10 +3,10 @@
 /* * */
 
 import { AlertEffectIcon } from '@/components/alerts/AlertCauseEffectIcon';
-import { useDebugContext } from '@/contexts/Debug.context';
+// import { useDebugContext } from '@/contexts/Debug.context';
 import { AlertEffect } from '@/types/alerts.types';
 import { Flex, Group, Select, SelectProps, Text } from '@mantine/core';
-import { IconBolt, IconExclamationCircle } from '@tabler/icons-react';
+import { IconBolt } from '@tabler/icons-react';
 import { useTranslations } from 'next-intl';
 
 import styles from './styles.module.css';
@@ -19,7 +19,7 @@ export default function Component({ onChange, value, ...props }: SelectAlertEffe
 	//
 	// A. Setup variables
 	const t = useTranslations('alerts.SelectEffect');
-	const debugContext = useDebugContext();
+	// const debugContext = useDebugContext();
 
 	//
 	// B. Transform data

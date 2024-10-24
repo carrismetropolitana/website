@@ -338,6 +338,17 @@
 			"text": "We recommend you to update soon for better user experience."
 		}
 	},
+	"app-navegante": {
+		"StartupMessageDefault": {
+			"actions": {
+				"update_android": "Update on Play Store",
+				"update_ios": "Update on App Store"
+			},
+			"heading": "New version available",
+			"subheading": "Please update the navegante® app to the latest version.",
+			"text": "The new version includes performance optimizations and bug fixes for a better user experience."
+		}
+	},
 	"cards": {
 		"Discounts": {
 			"heading": "Discounts",

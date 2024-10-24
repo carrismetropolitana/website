@@ -11,7 +11,7 @@ import { useStopsListContext } from '@/contexts/StopsList.context';
 import { SegmentedControl } from '@mantine/core';
 import { useTranslations } from 'next-intl';
 
-import styles from './styles.module.css';
+// import styles from './styles.module.css';
 
 /* * */
 
