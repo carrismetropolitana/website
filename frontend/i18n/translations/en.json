@@ -168,7 +168,7 @@
 			"lines": "Lines",
 			"stops": "Stops"
 		},
-		"subtitle": "Encontre os horários planeados e em tempo real que procura.",
+		"subtitle": "Find the planned and real-time schedules for the line you are looking for.",
 		"title": "Quick Search"
 	},
 	"IconDisplay": {
@@ -208,17 +208,17 @@
 		"publish_date": "{publishDate, date, long}"
 	},
 	"SelectLine": {
-		"label": "Procurar linha por número, nome, localidade...",
+		"label": "Search line by number, name, location...",
 		"nothing_found": "No Results Found",
-		"placeholder": "Procurar linha por número, nome, localidade..."
+		"placeholder": "Search line by number, name, location..."
 	},
 	"SelectPattern": {
 		"option_label": "Start of route: {locality}"
 	},
 	"SelectStop": {
-		"label": "Procurar paragem por nome, número, localidade...",
+		"label": "Search stop by id, name, location...",
 		"nothing_found": "No Results Found",
-		"placeholder": "Procurar paragem por nome, número, localidade..."
+		"placeholder": "Search stop by id, name, location..."
 	},
 	"alerts": {
 		"AlertActivePeriod": {
@@ -293,11 +293,11 @@
 					"label": "Filtrar por paragem",
 					"placeholder": "Filtrar por paragem"
 				},
-				"text_search": "Procurar alerta por título, descrição, localização..."
+				"text_search": "Search alert by title, description, location..."
 			},
 			"found_items_counter": "{count, plural, =0 {No alerts found.} one {Found # alert:} other {Found # alert:}}",
 			"heading": "Service Alerts",
-			"subheading": "Fique a par de todas as alterações à rede. Mantenha-se informado sobre novas linhas, mudanças de percurso e ajustes de horários, assim como sobre eventos que possam afetar a sua viagem."
+			"subheading": "Stay up to date with all changes on the network. Lorem ipsum dolor sit amet."
 		},
 		"SelectCause": {
 			"placeholder": "Filter by cause"
@@ -342,12 +342,12 @@
 	"app-navegante": {
 		"StartupMessageDefault": {
 			"actions": {
-				"update_android": "Atualizar na Play Store",
-				"update_ios": "Atualizar na App Store"
+				"update_android": "Update on Play Store",
+				"update_ios": "Update on App Store"
 			},
-			"heading": "Nova versão disponível",
-			"subheading": "Por favor atualize a app navegante® para a versão mais recente.",
-			"text": "A nova versão inclui melhorias de desempenho, correções de erros e ."
+			"heading": "New version available",
+			"subheading": "Please update the navegante® app to the latest version.",
+			"text": "The new version includes performance optimizations and bug fixes for a better user experience."
 		}
 	},
 	"cards": {
@@ -438,7 +438,7 @@
 			"subheading": "Find out how much it costs to travel occasionally on CMetropolitana. For more frequent use, we recommend subscribing to navegante®",
 			"wizard": {
 				"description": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Obcaecati ea natus itaque qui iure nam consequuntur minima, quibusdam saepe odio molestiae soluta aspernatur, corrupti labore fugiat? Numquam blanditiis accusantium quibusdam!",
-				"title": "Descubra a melhor opção para si"
+				"title": "Find out the best option for you."
 			}
 		}
 	},
