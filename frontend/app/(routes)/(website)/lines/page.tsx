@@ -1,6 +1,6 @@
 /* * */
 
-import LinesList from '@/components/lines/LinesList';
+import { LinesList } from '@/components/lines/LinesList';
 import { LinesListContextProvider } from '@/contexts/LinesList.context';
 
 /* * */

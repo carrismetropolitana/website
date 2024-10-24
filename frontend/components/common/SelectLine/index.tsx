@@ -28,7 +28,7 @@ interface SelectLineProps {
 
 /* * */
 
-export default function Component({ data = [], label, nothingFound, onSelectLineId, placeholder, selectedLineId, variant }: SelectLineProps) {
+export function SelectLine({ data = [], label, nothingFound, onSelectLineId, placeholder, selectedLineId, variant }: SelectLineProps) {
 	//
 
 	//
@@ -43,14 +43,14 @@ export default function Component({ data = [], label, nothingFound, onSelectLine
 	// B. Transform data
 
 	const { search } = useMemo(() => createDocCollection(data.map(d => ({ boost: false, ...d })), {
-		line_id: 2,
+		id: 2,
 		localities: 1,
 		long_name: 1,
 		short_name: 1,
 	}), [data]);
 
 	const selectedLineData = useMemo(() => {
-		return data.find(item => item.line_id === selectedLineId);
+		return data.find(item => item.id === selectedLineId);
 	}, [selectedLineId, data]);
 
 	//
@@ -148,7 +148,7 @@ export default function Component({ data = [], label, nothingFound, onSelectLine
 					{allLinesDataFilteredBySearchQuery.length === 0
 						? <Combobox.Empty>{nothingFound || t('nothing_found')}</Combobox.Empty>
 						: allLinesDataFilteredBySearchQuery.map(item => (
-							<Combobox.Option key={item.line_id} className={item.line_id === selectedLineData?.line_id ? styles.selected : ''} value={item.line_id}>
+							<Combobox.Option key={item.id} className={item.id === selectedLineData?.id ? styles.selected : ''} value={item.id}>
 								<div className={styles.comboboxOption}>
 									<LineDisplay line={item} />
 								</div>

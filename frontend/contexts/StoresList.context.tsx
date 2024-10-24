@@ -77,7 +77,7 @@ export const StoresListContextProvider = ({ children }) => {
 	//
 	// B. Fetch data
 
-	const { data: allStoresData, isLoading: allStoresLoading } = useSWR<Store[], Error>(`${Routes.API}/datasets/facilities/encm`);
+	const { data: allStoresData, isLoading: allStoresLoading } = useSWR<Store[], Error>(`${Routes.API}/facilities/stores`);
 
 	//
 	// C. Transform data
@@ -139,7 +139,7 @@ export const StoresListContextProvider = ({ children }) => {
 
 	useEffect(() => {
 		if (!allStoresData) return;
-		if (allStoresData?.filter((item => item.current_status === 'open')).length === 0) {
+		if (allStoresData?.filter(item => item.current_status === 'open').length === 0) {
 			setFilterByCurrentStatusState('all');
 		}
 
@@ -201,7 +201,7 @@ export const StoresListContextProvider = ({ children }) => {
 		},
 		counters: {
 			by_current_status: {
-				open: allStoresData?.filter((item => item.current_status === 'open')).length || 0,
+				open: allStoresData?.filter(item => item.current_status === 'open').length || 0,
 			},
 		},
 		data: {

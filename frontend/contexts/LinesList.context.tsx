@@ -4,11 +4,10 @@
 
 import type { Line } from '@/types/lines.types.js';
 
+import { useLinesContext } from '@/contexts/Lines.context';
 import { useProfileContext } from '@/contexts/Profile.context';
 import { createDocCollection } from '@/hooks/useOtherSearch';
-import { Routes } from '@/utils/routes';
 import { createContext, useContext, useEffect, useState } from 'react';
-import useSWR from 'swr';
 
 /* * */
 
@@ -60,6 +59,7 @@ export const LinesListContextProvider = ({ children }) => {
 	//
 	// A. Setup variables
 
+	const linesContext = useLinesContext();
 	const profileContext = useProfileContext();
 
 	const [dataFilteredState, setDataFilteredState] = useState<Line[]>([]);
@@ -70,11 +70,6 @@ export const LinesListContextProvider = ({ children }) => {
 	const [filterByFacilityState, setFilterByFacilityState] = useState <LinesListContextState['filters']['by_facility']>(null);
 	const [filterByMunicipalityOrLocalityState, setFilterByMunicipalityOrLocalityState] = useState <LinesListContextState['filters']['by_municipality_or_locality']>(null);
 	const [filterBySearchState, setFilterBySearchState] = useState <LinesListContextState['filters']['by_search']>('');
-
-	//
-	// B. Fetch data
-
-	const { data: allLinesData, isLoading: allLinesLoading } = useSWR<Line[], Error>(`${Routes.API}/lines`);
 
 	//
 	// C. Transform data
@@ -116,9 +111,9 @@ export const LinesListContextProvider = ({ children }) => {
 
 		if (filterBySearchState) {
 			// Give extra weight to favorite lines
-			const boostedData = filterResult.map(line => ({ ...line, boost: profileContext.data.profile?.favorite_lines?.includes(line.line_id) ? true : false }));
+			const boostedData = filterResult.map(line => ({ ...line, boost: profileContext.data.profile?.favorite_lines?.includes(line.id) ? true : false }));
 			const searchHook = createDocCollection(boostedData, {
-				line_id: 4,
+				id: 4,
 				localities: 1,
 				long_name: 2,
 				short_name: 4,
@@ -136,14 +131,14 @@ export const LinesListContextProvider = ({ children }) => {
 	};
 
 	useEffect(() => {
-		const filteredData = applyFiltersToData(allLinesData);
+		const filteredData = applyFiltersToData(linesContext.data.lines);
 		setDataFilteredState(filteredData);
-	}, [allLinesData, filterByAttributeState, filterByFacilityState, filterByMunicipalityOrLocalityState, filterBySearchState]);
+	}, [linesContext.data.lines, filterByAttributeState, filterByFacilityState, filterByMunicipalityOrLocalityState, filterBySearchState]);
 
 	useEffect(() => {
-		const favoritesLinesData = allLinesData?.filter(line => profileContext.data.profile?.favorite_lines?.includes(line.line_id)) || [];
+		const favoritesLinesData = linesContext.data.lines?.filter(line => profileContext.data.profile?.favorite_lines?.includes(line.id)) || [];
 		setDataFavoritesState(favoritesLinesData);
-	}, [allLinesData, profileContext.data.profile]);
+	}, [linesContext.data.lines, profileContext.data.profile]);
 
 	useEffect(() => {
 		if (dataFavoritesState.length > 0) {
@@ -191,7 +186,7 @@ export const LinesListContextProvider = ({ children }) => {
 		data: {
 			favorites: dataFavoritesState,
 			filtered: dataFilteredState,
-			raw: allLinesData || [],
+			raw: linesContext.data.lines || [],
 		},
 		filters: {
 			by_attribute: filterByAttributeState,
@@ -201,7 +196,7 @@ export const LinesListContextProvider = ({ children }) => {
 			by_search: filterBySearchState,
 		},
 		flags: {
-			is_loading: allLinesLoading,
+			is_loading: linesContext.flags.is_loading,
 		},
 	};
 

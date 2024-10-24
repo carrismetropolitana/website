@@ -12,7 +12,7 @@ import { useTranslations } from 'next-intl';
 
 /* * */
 
-export default function Component() {
+export function LinesListToolbar() {
 	//
 
 	//

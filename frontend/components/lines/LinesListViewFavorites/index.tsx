@@ -11,7 +11,7 @@ import { useTranslations } from 'next-intl';
 
 /* * */
 
-export default function Component() {
+export function LinesListViewFavorites() {
 	//
 
 	//
@@ -37,7 +37,7 @@ export default function Component() {
 		<Surface forceOverflow>
 			<Section>
 				{linesContext.data.favorites.map(line => (
-					<RegularListItem key={line.line_id} href={`${RoutesSchedule.LINES.route}/${line.line_id}`}>
+					<RegularListItem key={line.id} href={`${RoutesSchedule.LINES.route}/${line.id}`}>
 						<LineDisplay line={line} />
 					</RegularListItem>
 				))}

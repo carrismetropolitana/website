@@ -63,8 +63,8 @@ export default function Component() {
 	// E. Memoized GeoJSON Data
 
 	const activeVehiclesGeojson = useMemo(() => {
-		if (!linesDetailContext.data.active_pattern_group?.pattern_id) return;
-		return vehiclesContext.actions.getVehiclesByPatternIdGeoJsonFC(linesDetailContext.data.active_pattern_group?.pattern_id);
+		if (!linesDetailContext.data.active_pattern_group?.id) return;
+		return vehiclesContext.actions.getVehiclesByPatternIdGeoJsonFC(linesDetailContext.data.active_pattern_group?.id);
 	}, [linesDetailContext.data.active_pattern_group, vehiclesContext.data.all]);
 
 	const activePathStopsGeoJson = useMemo(() => {

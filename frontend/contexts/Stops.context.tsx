@@ -4,10 +4,9 @@
 
 import type { Stop } from '@/types/stops.types';
 
-import { useProfileContext } from '@/contexts/Profile.context';
 import { getBaseGeoJsonFeatureCollection } from '@/utils/map.utils';
 import { Routes } from '@/utils/routes';
-import { createContext, useContext, useEffect, useState } from 'react';
+import { createContext, useContext } from 'react';
 import useSWR from 'swr';
 
 /* * */
@@ -18,12 +17,8 @@ interface StopsContextState {
 		getStopById: (stopId: string) => Stop | undefined
 		getStopByIdGeoJsonFC: (stopId: string) => GeoJSON.FeatureCollection | undefined
 	}
-	counters: {
-		favorites: number
-	}
 	data: {
-		favorites: Stop[]
-		raw: Stop[]
+		stops: Stop[]
 	}
 	flags: {
 		is_loading: boolean
@@ -48,37 +43,22 @@ export const StopsContextProvider = ({ children }) => {
 	//
 
 	//
-	// A. Setup variables
-
-	const profileContext = useProfileContext();
-
-	const [dataFavoritesState, setDataFavoritesState] = useState<Stop[]>([]);
-
-	//
-	// B. Fetch data
+	// A. Fetch data
 
 	const { data: allStopsData, isLoading: allStopsLoading } = useSWR<Stop[], Error>(`${Routes.API}/stops`);
 
 	//
-	// C. Transform data
+	// B. Handle actions
 
-	useEffect(() => {
-		const favoritesStopsData = allStopsData?.filter(stop => profileContext.data.profile?.favorite_stops?.includes(stop.id)) || [];
-		setDataFavoritesState(favoritesStopsData);
-	}, [allStopsData, profileContext.data.profile?.favorite_stops]);
-
-	//
-	// D. Handle actions
+	const getStopById = (stopId: string): Stop | undefined => {
+		return allStopsData?.find(stop => stop.id === stopId);
+	};
 
 	const getAllStopsGeoJsonFC = (): GeoJSON.FeatureCollection | undefined => {
 		if (!allStopsData) return;
 		const collection = getBaseGeoJsonFeatureCollection();
 		allStopsData.forEach(stop => collection.features.push(transformStopDataIntoGeoJsonFeature(stop)));
 		return collection;
-	};
-
-	const getStopById = (stopId: string) => {
-		return allStopsData?.find(stop => stop.id === stopId);
 	};
 
 	const getStopByIdGeoJsonFC = (stopId: string): GeoJSON.FeatureCollection | undefined => {
@@ -90,7 +70,7 @@ export const StopsContextProvider = ({ children }) => {
 	};
 
 	//
-	// E. Define context value
+	// C. Define context value
 
 	const contextValue: StopsContextState = {
 		actions: {
@@ -98,12 +78,8 @@ export const StopsContextProvider = ({ children }) => {
 			getStopById,
 			getStopByIdGeoJsonFC,
 		},
-		counters: {
-			favorites: profileContext.counters.favorite_stops,
-		},
 		data: {
-			favorites: dataFavoritesState,
-			raw: allStopsData || [],
+			stops: allStopsData || [],
 		},
 		flags: {
 			is_loading: allStopsLoading,
@@ -111,7 +87,7 @@ export const StopsContextProvider = ({ children }) => {
 	};
 
 	//
-	// E. Render components
+	// D. Render components
 
 	return (
 		<StopsContext.Provider value={contextValue}>
@@ -125,6 +101,7 @@ export const StopsContextProvider = ({ children }) => {
 /* * */
 
 export function transformStopDataIntoGeoJsonFeature(stopData: Stop): GeoJSON.Feature {
+	if (!stopData) return {} as GeoJSON.Feature;
 	return {
 		geometry: {
 			coordinates: [stopData.lon, stopData.lat],

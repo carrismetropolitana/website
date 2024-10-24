@@ -24,12 +24,12 @@ export default function Component() {
 	//
 	// B. Fetch data
 
-	const { data: patternRealtime } = useSWR<PatternRealtime[]>(linesDetailContext.data.active_pattern_group?.pattern_id && `${Routes.API}/patterns/${linesDetailContext.data.active_pattern_group.pattern_id}/realtime`, { refreshInterval: 10000 });
+	const { data: patternRealtime } = useSWR<PatternRealtime[]>(linesDetailContext.data.active_pattern_group?.id && `${Routes.API}/patterns/${linesDetailContext.data.active_pattern_group.id}/realtime`, { refreshInterval: 10000 });
 
 	// C. Transform data
 
 	const sortedStops = linesDetailContext.data.active_pattern_group?.path.sort((a, b) => a.stop_sequence - b.stop_sequence);
-	const relevantRealtimes = useMemo(() => patternRealtime?.filter(realtime => realtime.pattern_id === linesDetailContext.data.active_pattern_group?.pattern_id), [patternRealtime, linesDetailContext.data.active_pattern_group?.pattern_id]);
+	const relevantRealtimes = useMemo(() => patternRealtime?.filter(realtime => realtime.pattern_id === linesDetailContext.data.active_pattern_group?.id), [patternRealtime, linesDetailContext.data.active_pattern_group?.id]);
 	const nextArrivalsPerStop: Record<string, { type: 'realtime' | 'scheduled', unixTs: number }[]> = {};
 
 	for (const realtime of relevantRealtimes ?? []) {
@@ -69,8 +69,8 @@ export default function Component() {
 		<div className={styles.container}>
 			{sortedStops.map((path, index) => (
 				<PathStop
-					key={`${path.stop.id}-${path.stop_sequence}`}
-					arrivals={nextArrivalsPerStop[path.stop.id] || []}
+					key={`${path.stop_id}-${path.stop_sequence}`}
+					arrivals={nextArrivalsPerStop[path.stop_id] || []}
 					id={`stop-${path.stop_sequence}`}
 					isFirstStop={index === 0}
 					isLastStop={index === sortedStops.length - 1}

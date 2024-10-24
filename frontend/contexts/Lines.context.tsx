@@ -2,11 +2,10 @@
 
 /* * */
 
-import type { Line } from '@/types/lines.types.js';
+import type { Line, Route } from '@/types/lines.types.js';
 
-import { useProfileContext } from '@/contexts/Profile.context';
 import { Routes } from '@/utils/routes';
-import { createContext, useContext, useEffect, useState } from 'react';
+import { createContext, useContext } from 'react';
 import useSWR from 'swr';
 
 /* * */
@@ -14,13 +13,11 @@ import useSWR from 'swr';
 interface LinesContextState {
 	actions: {
 		getLineDataById: (lineId: string) => Line | undefined
-	}
-	counters: {
-		favorites: number
+		getRouteDataById: (routeId: string) => Route | undefined
 	}
 	data: {
-		favorites: Line[]
-		raw: Line[]
+		lines: Line[]
+		routes: Route[]
 	}
 	flags: {
 		is_loading: boolean
@@ -45,53 +42,41 @@ export const LinesContextProvider = ({ children }) => {
 	//
 
 	//
-	// A. Setup variables
-
-	const profileContext = useProfileContext();
-
-	const [dataFavoritesState, setDataFavoritesState] = useState<Line[]>([]);
-
-	//
-	// B. Fetch data
+	// A. Fetch data
 
 	const { data: allLinesData, isLoading: allLinesLoading } = useSWR<Line[], Error>(`${Routes.API}/lines`);
+	const { data: allRoutesData, isLoading: allRoutesLoading } = useSWR<Route[], Error>(`${Routes.API}/routes`);
 
 	//
-	// C. Transform data
-
-	useEffect(() => {
-		const favoritesLinesData = allLinesData?.filter(line => profileContext.data.profile?.favorite_lines?.includes(line.line_id)) || [];
-		setDataFavoritesState(favoritesLinesData);
-	}, [allLinesData, profileContext.data.profile]);
-
-	//
-	// D. Handle actions
+	// B. Handle actions
 
 	const getLineDataById = (lineId: string) => {
-		return allLinesData?.find(line => line.line_id === lineId);
+		return allLinesData?.find(line => line.id === lineId);
+	};
+
+	const getRouteDataById = (routeId: string) => {
+		return allRoutesData?.find(route => route.id === routeId);
 	};
 
 	//
-	// E. Define context value
+	// C. Define context value
 
 	const contextValue: LinesContextState = {
 		actions: {
 			getLineDataById,
-		},
-		counters: {
-			favorites: profileContext.counters.favorite_lines,
+			getRouteDataById,
 		},
 		data: {
-			favorites: dataFavoritesState,
-			raw: allLinesData || [],
+			lines: allLinesData || [],
+			routes: allRoutesData || [],
 		},
 		flags: {
-			is_loading: allLinesLoading,
+			is_loading: allLinesLoading || allRoutesLoading,
 		},
 	};
 
 	//
-	// F. Render components
+	// D. Render components
 
 	return (
 		<LinesContext.Provider value={contextValue}>

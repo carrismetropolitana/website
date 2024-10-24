@@ -22,11 +22,8 @@ interface VehiclesContextState {
 		getVehiclesByTripId: (tripId: string) => Vehicle[]
 		getVehiclesByTripIdGeoJsonFC: (tripId: string) => GeoJSON.FeatureCollection | undefined
 	}
-	counters: {
-		total: number
-	}
 	data: {
-		all: Vehicle[]
+		vehicles: Vehicle[]
 	}
 	flags: {
 		is_loading: boolean
@@ -70,8 +67,6 @@ export const VehiclesContextProvider = ({ children }) => {
 		return collection;
 	};
 
-	//
-
 	const getVehiclesByLineId = (lineId: string): Vehicle[] => {
 		return allVehiclesData?.filter(vehicle => vehicle.line_id === lineId) || [];
 	};
@@ -84,10 +79,8 @@ export const VehiclesContextProvider = ({ children }) => {
 		return collection;
 	};
 
-	//
-
 	const getVehiclesByPatternId = (patternId: string): Vehicle[] => {
-		return allVehiclesData?.filter(vehicle => vehicle.pattern_id === patternId) || [];
+		return allVehiclesData?.filter(vehicle => vehicle.id === patternId) || [];
 	};
 
 	const getVehiclesByPatternIdGeoJsonFC = (patternId: string): GeoJSON.FeatureCollection | undefined => {
@@ -97,8 +90,6 @@ export const VehiclesContextProvider = ({ children }) => {
 		vehicles.forEach(vehicle => collection.features.push(transformVehicleDataIntoGeoJsonFeature(vehicle)));
 		return collection;
 	};
-
-	//
 
 	const getVehiclesByTripId = (tripId: string): Vehicle[] => {
 		return allVehiclesData?.filter(vehicle => vehicle.trip_id === tripId) || [];
@@ -126,11 +117,8 @@ export const VehiclesContextProvider = ({ children }) => {
 			getVehiclesByTripId,
 			getVehiclesByTripIdGeoJsonFC,
 		},
-		counters: {
-			total: allVehiclesData?.length || 0,
-		},
 		data: {
-			all: allVehiclesData || [],
+			vehicles: allVehiclesData || [],
 		},
 		flags: {
 			is_loading: allVehiclesLoading,
@@ -164,7 +152,7 @@ function transformVehicleDataIntoGeoJsonFeature(vehicleData: Vehicle): GeoJSON.F
 			delay: Math.floor(Date.now() / 1000) - vehicleData.timestamp,
 			id: vehicleData.id,
 			line_id: vehicleData.line_id,
-			pattern_id: vehicleData.pattern_id,
+			pattern_id: vehicleData.id,
 			route_id: vehicleData.route_id,
 			schedule_relationship: vehicleData.schedule_relationship,
 			shift_id: vehicleData.shift_id,

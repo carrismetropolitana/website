@@ -7,15 +7,17 @@ import type { Line, Pattern, PatternGroup, Route, Shape } from '@/types/lines.ty
 import type { DemandByLineMetrics } from '@/types/metrics.types';
 import type { Stop } from '@/types/stops.types';
 
+import { useLinesContext } from '@/contexts/Lines.context';
 import { useOperationalDayContext } from '@/contexts/OperationalDay.context';
 import { useProfileContext } from '@/contexts/Profile.context';
 import { ServiceMetrics } from '@/types/metrics.types';
 import convertToSimplifiedAlert from '@/utils/convertToSimplifiedAlert';
 import { Routes } from '@/utils/routes';
-import { notFound } from 'next/navigation';
 import { useQueryState } from 'nuqs';
-import { createContext, useContext, useEffect, useState } from 'react';
+import { createContext, useContext, useEffect, useMemo, useState } from 'react';
 import useSWR from 'swr';
+
+import { useStopsContext } from './Stops.context';
 
 /* * */
 
@@ -35,7 +37,7 @@ interface LinesDetailContextState {
 			stop: Stop
 		} | null
 		all_patterns: null | Pattern[]
-		all_routes: null | Route[]
+		all_routes: Route[] | undefined
 		demand: DemandByLineMetrics | null
 		drawer_open: boolean
 		line: Line | null
@@ -44,7 +46,7 @@ interface LinesDetailContextState {
 		valid_pattern_groups: null | PatternGroup[]
 	}
 	filters: {
-		// active_pattern_group_id: null | string
+		// active_pattern_version_id: null | string
 		active_pattern_id: null | string
 		active_stop_id: null | string
 	}
@@ -74,10 +76,12 @@ export const LinesDetailContextProvider = ({ children, lineId }) => {
 	//
 	// A. Setup variables
 
+	const linesContext = useLinesContext();
+	const stopsContext = useStopsContext();
 	const profileContext = useProfileContext();
 	const operationalDayContext = useOperationalDayContext();
 
-	const [dataRoutesState, setDataRoutesState] = useState<null | Route[]>(null);
+	// const [dataRoutesState, setDataRoutesState] = useState<null | Route[]>(null);
 	const [dataAllPatternsState, setDataAllPatternsState] = useState<null | Pattern[]>(null);
 	const [dataValidPatternGroupsState, setDataValidPatternGroupsState] = useState<null | PatternGroup[]>(null);
 	const [dataDemandForCurrentLineState, setDataDemandForCurrentLineState] = useState<DemandByLineMetrics | null>(null);
@@ -93,44 +97,51 @@ export const LinesDetailContextProvider = ({ children, lineId }) => {
 	const [dataDrawerOpenState, setDataDrawerOpenState] = useState<boolean>(false);
 
 	const [filterActivePatternGroupIdState, setFilterActivePatternGroupIdState] = useQueryState('active_pattern_id');
-	// const [filterActivePatternGroupIdState, setFilterActivePatternGroupIdState] = useQueryState('active_pattern_group_id');
+	// const [filterActivePatternGroupIdState, setFilterActivePatternGroupIdState] = useQueryState('active_pattern_version_id');
 	const [filterActiveStopIdState, setFilterActiveStopIdState] = useQueryState('active_stop_id');
 
 	//
 	// B. Fetch data
 
-	const { data: lineData, isLoading: lineLoading } = useSWR<Line, Error>(`${Routes.API}/lines/${lineId}`);
 	const { data: allAlertsData, isLoading: allAlertsLoading } = useSWR<Alert[], Error>(`${Routes.API}/alerts`);
 	const { data: allDemandByLineData } = useSWR<DemandByLineMetrics[], Error>(`${Routes.API}/metrics/demand/by_line`);
 	const { data: allServiceMetricsData } = useSWR<ServiceMetrics[], Error>(`${Routes.API}/metrics/service/by_line/${lineId}`);
 
-	// Check if the line exists
-	useEffect(() => {
-		if (lineData && !lineData.line_id) return notFound();
-	}, [lineData]);
+	const dataLineState = useMemo<Line | undefined>(() => {
+		const lineData = linesContext.actions.getLineDataById(lineId);
+		if (!lineData) return;
+		else return lineData;
+	}, [lineId, linesContext.data.lines]);
+
+	const dataRoutesState = useMemo<Route[] | undefined>(() => {
+		if (!dataLineState) return;
+		const lineRoutesData: Route[] = [];
+		dataLineState.route_ids.forEach((routeId) => {
+			const routeData = linesContext.actions.getRouteDataById(routeId);
+			if (!routeData) return;
+			lineRoutesData.push(routeData);
+		});
+		return lineRoutesData;
+	}, [dataLineState, linesContext.data.routes]);
 
 	useEffect(() => {
 		(async () => {
 			try {
-				if (!lineData) return;
-				const fetchPromises = lineData.route_ids.map((routeId) => {
-					return fetch(`${Routes.API}/routes/${routeId}`).then(response => response.json());
-				});
-				const resultData = await Promise.all(fetchPromises);
-				setDataRoutesState(resultData);
-			}
-			catch (error) {
-				console.error('Error fetching route data:', error);
-			}
-		})();
-	}, [lineData]);
-
-	useEffect(() => {
-		(async () => {
-			try {
-				if (!lineData) return;
-				const fetchPromises = lineData.pattern_ids.map((patternId) => {
-					return fetch(`${Routes.API}/patterns/${patternId}`).then(response => response.json());
+				if (!dataLineState) return;
+				const fetchPromises = dataLineState.pattern_ids.map((patternId) => {
+					return fetch(`${Routes.API}/patterns/${patternId}`)
+						.then(response => response.json())
+						.then((patternData) => {
+							return patternData.map((patternGroup) => {
+								patternGroup.path = patternGroup.path.map((waypoint) => {
+									const stopData = stopsContext.actions.getStopById(waypoint.stop_id);
+									console.log('stopData', stopData);
+									if (!stopData) return waypoint;
+									return { ...waypoint, stop: stopData };
+								});
+								return patternGroup;
+							});
+						});
 				});
 				const resultData = await Promise.all(fetchPromises);
 				setDataAllPatternsState(resultData);
@@ -139,7 +150,7 @@ export const LinesDetailContextProvider = ({ children, lineId }) => {
 				console.error('Error fetching pattern data:', error);
 			}
 		})();
-	}, [lineData]);
+	}, [dataLineState, stopsContext.data.raw]);
 
 	/**
 	 * TASK: Fetch shape data for the active trip.
@@ -193,7 +204,7 @@ export const LinesDetailContextProvider = ({ children, lineId }) => {
 				}, '');
 
 				// If the closest date is valid, add the pattern group to the list
-				if (closest_date != '' && !activePatternGroups.find(activePatternGroup => activePatternGroup.pattern_id === patternGroup.pattern_id)) {
+				if (closest_date != '' && !activePatternGroups.find(activePatternGroup => activePatternGroup.id === patternGroup.id)) {
 					activePatternGroups.push(patternGroup);
 				}
 			}
@@ -209,20 +220,20 @@ export const LinesDetailContextProvider = ({ children, lineId }) => {
 		const simplifiedAlerts = allAlertsData.map(alertData => convertToSimplifiedAlert(alertData));
 		const activeAlerts = simplifiedAlerts.filter((simplifiedAlertData) => {
 			return simplifiedAlertData.informed_entity.some((informedEntity) => {
-				if (!lineData || !informedEntity.routeId) return false;
-				const hasMatchingRoute = lineData.route_ids.includes(informedEntity.routeId);
+				if (!dataLineState || !informedEntity.routeId) return false;
+				const hasMatchingRoute = dataLineState.route_ids.includes(informedEntity.routeId);
 				const isActive = simplifiedAlertData.start_date <= new Date() && simplifiedAlertData.end_date >= new Date();
 				return hasMatchingRoute && isActive;
 			});
 		});
 		setDataActiveAlertsState(activeAlerts);
-	}, [allAlertsData, lineData]);
+	}, [allAlertsData, lineId]);
 
 	useEffect(() => {
 		if (!allDemandByLineData) return;
-		const demandForCurrentLine = allDemandByLineData.find(demandByLineItem => demandByLineItem.line_id === lineData?.line_id);
+		const demandForCurrentLine = allDemandByLineData.find(demandByLineItem => demandByLineItem.line_id === dataLineState?.id);
 		setDataDemandForCurrentLineState(demandForCurrentLine || null);
-	}, [allDemandByLineData, lineData]);
+	}, [allDemandByLineData, lineId]);
 
 	useEffect(() => {
 		if (!allServiceMetricsData) return;
@@ -234,9 +245,9 @@ export const LinesDetailContextProvider = ({ children, lineId }) => {
 
 	const setActivePatternGroup = (patternGroupId: string) => {
 		for (const patternGroup of dataValidPatternGroupsState || []) {
-			if (patternGroup.pattern_group_id === patternGroupId) {
+			if (patternGroup.pattern_version_id === patternGroupId) {
 				setDataActivePatternGroupState(patternGroup);
-				setFilterActivePatternGroupIdState(patternGroup.pattern_id);
+				setFilterActivePatternGroupIdState(patternGroup.id);
 				return;
 			}
 		}
@@ -249,7 +260,7 @@ export const LinesDetailContextProvider = ({ children, lineId }) => {
 	};
 
 	const setActiveStopByStopId = (sequence: number, stopId: string) => {
-		const stop = dataActivePatternGroupState?.path.find(pathStop => pathStop.stop.id === stopId)?.stop;
+		const stop = dataActivePatternGroupState?.path.find(pathStop => pathStop.stop_id === stopId)?.stop;
 		if (!stop) return;
 		setDataActiveStopState({ sequence, stop });
 		setFilterActiveStopIdState(stop.id);
@@ -264,7 +275,7 @@ export const LinesDetailContextProvider = ({ children, lineId }) => {
 	useEffect(() => {
 		if (filterActivePatternGroupIdState) {
 			for (const patternGroup of dataValidPatternGroupsState || []) {
-				if (patternGroup.pattern_id === filterActivePatternGroupIdState) {
+				if (patternGroup.id === filterActivePatternGroupIdState) {
 					setDataActivePatternGroupState(patternGroup);
 					return;
 				}
@@ -275,11 +286,14 @@ export const LinesDetailContextProvider = ({ children, lineId }) => {
 	useEffect(() => {
 		const sortedStops = dataActivePatternGroupState?.path.sort((a, b) => a.stop_sequence - b.stop_sequence);
 		if (!sortedStops) return;
-
 		const selectedStop = filterActiveStopIdState
-			? sortedStops.find(stop => stop.stop.id === filterActiveStopIdState) ?? sortedStops[0]
+			? sortedStops.find(waypoint => waypoint.stop_id === filterActiveStopIdState) ?? sortedStops[0]
 			: sortedStops[0];
-		if (selectedStop) setActiveStop(selectedStop.stop_sequence, selectedStop.stop);
+		if (selectedStop) {
+			const stopData = stopsContext.actions.getStopById(selectedStop.stop_id);
+			if (!stopData) return;
+			setActiveStop(selectedStop.stop_sequence, stopData);
+		}
 	}, [dataActivePatternGroupState, dataValidPatternGroupsState]);
 
 	//
@@ -301,7 +315,7 @@ export const LinesDetailContextProvider = ({ children, lineId }) => {
 			all_routes: dataRoutesState,
 			demand: dataDemandForCurrentLineState,
 			drawer_open: dataDrawerOpenState,
-			line: lineData || null,
+			line: dataLineState || null,
 			service: dataServiceMetricsState,
 			timetable: '',
 			valid_pattern_groups: dataValidPatternGroupsState,
@@ -312,7 +326,7 @@ export const LinesDetailContextProvider = ({ children, lineId }) => {
 		},
 		flags: {
 			is_favorite: flagIsFavoriteState,
-			is_loading: lineLoading || dataRoutesState === null || dataAllPatternsState === null || allAlertsLoading,
+			is_loading: linesContext.flags.is_loading || stopsContext.flags.is_loading || dataRoutesState === null || dataAllPatternsState === null || allAlertsLoading,
 		},
 	};
 

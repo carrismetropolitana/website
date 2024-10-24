@@ -25,7 +25,7 @@ export interface Minute {
 
 interface ExceptionTemplate {
 	exception_id: string
-	pattern_group_id: string
+	pattern_version_id: string
 	pattern_headsign: string
 	pattern_id: string
 	route_long_name: string

@@ -8,7 +8,7 @@ import type { FeatureCollection } from 'geojson';
 export interface Line {
 	color: string
 	facilities: string[]
-	line_id: string
+	id: string
 	localities: string[]
 	long_name: string
 	municipality_ids: string[]
@@ -24,12 +24,12 @@ export interface Line {
 export interface Route {
 	color: string
 	facilities: string[]
+	id: string
 	line_id: string
 	localities: string[]
 	long_name: string
 	municipalities: string[]
 	patterns: string[]
-	route_id: string
 	short_name: string
 	text_color: string
 }
@@ -41,12 +41,12 @@ export interface PatternGroup {
 	direction: number
 	facilities: string[]
 	headsign: string
+	id: string
 	line_id: string
 	localities: string[]
 	municipality_ids: string[]
 	path: Path[]
-	pattern_group_id: string
-	pattern_id: string
+	pattern_version_id: string
 	route_id: string
 	route_long_name: string
 	route_short_name: string
@@ -65,7 +65,8 @@ export interface Path {
 	allow_drop_off: boolean
 	allow_pickup: boolean
 	distance_delta: number
-	stop: Stop
+	stop?: Stop
+	stop_id: string
 	stop_sequence: number
 };
 

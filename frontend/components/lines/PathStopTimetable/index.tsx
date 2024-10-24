@@ -33,7 +33,7 @@ export default function Component() {
 	const timetableData = useMemo(() => {
 		// Setup variables
 		const activePatternGroup = linesDetailContext.data.active_pattern_group;
-		const secondaryPatternGroups = linesDetailContext.data.valid_pattern_groups?.filter(patternGroup => patternGroup.pattern_group_id !== activePatternGroup?.pattern_group_id) || [];
+		const secondaryPatternGroups = linesDetailContext.data.valid_pattern_groups?.filter(patternGroup => patternGroup.pattern_version_id !== activePatternGroup?.pattern_version_id) || [];
 		const mentionedRoutes = linesDetailContext.data.all_routes;
 		const selectedStopId = linesDetailContext.data.active_stop?.stop.id;
 		const selectedStopSequence = linesDetailContext.data.active_stop?.sequence;

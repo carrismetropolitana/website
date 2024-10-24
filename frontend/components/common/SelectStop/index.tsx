@@ -28,7 +28,7 @@ interface SelectStopProps {
 
 /* * */
 
-export default function Component({ data = [], label, nothingFound, onSelectStopId, placeholder, selectedStopId, variant }: SelectStopProps) {
+export function SelectStop({ data = [], label, nothingFound, onSelectStopId, placeholder, selectedStopId, variant }: SelectStopProps) {
 	//
 
 	//

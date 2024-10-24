@@ -87,15 +87,15 @@ export default function createTimetable(primaryPatternGroup: PatternGroup, secon
 				// Find or create the minute entry in the timetable
 				const minuteEntry = hourEntry.minutes.find(m => m.minute_value === minuteValue && m.exception_ids === undefined);
 				// Since we're processing secondary Patterns, we have to reuse or create exceptions for each minute entry.
-				let existingException = timetableResult.exceptions.find(exception => exception.pattern_id === patternGroup.pattern_id);
+				let existingException = timetableResult.exceptions.find(exception => exception.id === patternGroup.id);
 				// Create a new exception if it doesn't exist yet
 				if (!existingException) {
 					const mentionedRoute = mentionedRoutes.find(route => route.route_id === patternGroup.route_id);
 					existingException = {
 						exception_id: String.fromCharCode(97 + timetableResult.exceptions.length), // 'a' is 97 in ASCII
-						pattern_group_id: patternGroup.pattern_group_id,
+						pattern_version_id: patternGroup.pattern_version_id,
 						pattern_headsign: patternGroup.headsign,
-						pattern_id: patternGroup.pattern_id,
+						pattern_id: patternGroup.id,
 						route_long_name: mentionedRoute?.long_name ?? '-',
 						type: 'variant',
 					};

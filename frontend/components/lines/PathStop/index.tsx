@@ -8,6 +8,7 @@ import PathStopSpine from '@/components/lines/PathStopSpine';
 import PathStopTimetable from '@/components/lines/PathStopTimetable';
 import { useLinesDetailContext } from '@/contexts/LinesDetail.context';
 import { useOperationalDayContext } from '@/contexts/OperationalDay.context';
+import { useStopsContext } from '@/contexts/Stops.context';
 
 import styles from './styles.module.css';
 
@@ -30,6 +31,7 @@ export default function Component({ arrivals, id, isFirstStop, isLastStop, isSel
 	//
 	// A. Setup variables
 
+	const stopsContext = useStopsContext();
 	const linesDetailContext = useLinesDetailContext();
 	const operationalDayContext = useOperationalDayContext();
 
@@ -48,12 +50,18 @@ export default function Component({ arrivals, id, isFirstStop, isLastStop, isSel
 	// C. Handle actions
 
 	const handleToggleStop = (event: React.MouseEvent<HTMLDivElement>) => {
-		linesDetailContext.actions.setActiveStop(stopSequence, stop);
+		const stopData = stopsContext.actions.getStopById(path.stop_id);
+		if (!stopData) return;
+		linesDetailContext.actions.setActiveStop(stopSequence, stopData);
 		event.stopPropagation();
 	};
 
 	//
 	// D. Render components
+
+	if (!stop) {
+		return null;
+	}
 
 	return (
 		<div className={`${styles.container} ${isFirstStop && styles.isFirstStop} ${isLastStop && styles.isLastStop} ${isSelected && styles.isSelected}`} id={id} onClick={handleToggleStop}>

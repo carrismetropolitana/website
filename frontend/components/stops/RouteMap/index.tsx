@@ -21,7 +21,7 @@ export default function Component({ pattern }: { pattern: Pattern }) {
 		refreshInterval: 10000,
 	});
 	const relevantVehiclesGeoJson: FeatureCollection<Geometry, GeoJsonProperties> = useMemo(() => {
-		const relevantVehicles = realTime?.filter(vehicle => vehicle.pattern_id === pattern.pattern_id);
+		const relevantVehicles = realTime?.filter(vehicle => vehicle.id === pattern.id);
 		return {
 			features: relevantVehicles?.map(vehicle => ({
 				geometry: {
@@ -35,7 +35,7 @@ export default function Component({ pattern }: { pattern: Pattern }) {
 					delay: Math.floor(Date.now() / 1000) - vehicle.timestamp,
 					id: vehicle.id,
 					line_id: vehicle.line_id,
-					pattern_id: vehicle.pattern_id,
+					pattern_id: vehicle.id,
 					route_id: vehicle.route_id,
 					schedule_relationship: vehicle.schedule_relationship,
 					shift_id: vehicle.shift_id,
@@ -49,7 +49,7 @@ export default function Component({ pattern }: { pattern: Pattern }) {
 			})) ?? [],
 			type: 'FeatureCollection',
 		};
-	}, [pattern.pattern_id, realTime]);
+	}, [pattern.id, realTime]);
 	const nActiveVehicles = relevantVehiclesGeoJson.features.length;
 
 	const pathGeoJson = shape?.geojson;
@@ -68,7 +68,7 @@ export default function Component({ pattern }: { pattern: Pattern }) {
 			};
 		}),
 		type: 'FeatureCollection',
-	}), [pattern.pattern_id]);
+	}), [pattern.id]);
 
 	const stopsStyle: CircleLayer = {
 		id: 'stops',

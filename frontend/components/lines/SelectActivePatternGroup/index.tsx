@@ -2,7 +2,7 @@
 
 /* * */
 
-import SelectPattern from '@/components/common/SelectPattern';
+import { SelectPattern } from '@/components/common/SelectPattern';
 import { useLinesDetailContext } from '@/contexts/LinesDetail.context';
 import { IconArrowBarToRight } from '@tabler/icons-react';
 import { useTranslations } from 'next-intl';
@@ -40,7 +40,7 @@ export default function Component() {
 			onChange={linesDetailContext.actions.setActivePatternGroup}
 			patterns={validPatternGroupsSelectOptions}
 			placeholder={t('placeholder')}
-			value={linesDetailContext.data.active_pattern_group?.pattern_group_id || null}
+			value={linesDetailContext.data.active_pattern_group?.pattern_version_id || null}
 			clearable
 			searchable
 		/>

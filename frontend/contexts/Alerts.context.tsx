@@ -19,7 +19,7 @@ interface AlertsContextState {
 		getSimplifiedAlertsByStopId: (stopId: string) => SimplifiedAlert[]
 	}
 	data: {
-		raw: Alert[]
+		alerts: Alert[]
 		simplified: SimplifiedAlert[]
 	}
 	flags: {
@@ -98,7 +98,7 @@ export const AlertsContextProvider = ({ children }) => {
 			getSimplifiedAlertsByStopId,
 		},
 		data: {
-			raw: allAlertsData || [],
+			alerts: allAlertsData || [],
 			simplified: dataSimplifiedState,
 		},
 		flags: {

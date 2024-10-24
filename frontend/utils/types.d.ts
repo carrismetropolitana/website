@@ -115,7 +115,7 @@ export interface Pattern {
 	localities: string[]
 	municipality_ids: string[]
 	path: Path[]
-	pattern_group_id: string
+	pattern_version_id: string
 	pattern_id: string
 	route_id: string
 	shape_id: string

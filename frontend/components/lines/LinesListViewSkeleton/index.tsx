@@ -7,7 +7,7 @@ import LineDisplay from '@/components/lines/LineDisplay';
 
 /* * */
 
-export default function Component() {
+export function LinesListViewSkeleton() {
 	return (
 		<Surface>
 			<Section>

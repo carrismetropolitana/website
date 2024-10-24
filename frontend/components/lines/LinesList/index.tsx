@@ -2,15 +2,15 @@
 
 /* * */
 
-import LinesListToolbar from '@/components/lines/LinesListToolbar';
-import LinesListViewAll from '@/components/lines/LinesListViewAll';
-import LinesListViewFavorites from '@/components/lines/LinesListViewFavorites';
-import LinesListViewSkeleton from '@/components/lines/LinesListViewSkeleton';
+import { LinesListToolbar } from '@/components/lines/LinesListToolbar';
+import { LinesListViewAll } from '@/components/lines/LinesListViewAll';
+import { LinesListViewFavorites } from '@/components/lines/LinesListViewFavorites';
+import { LinesListViewSkeleton } from '@/components/lines/LinesListViewSkeleton';
 import { useLinesListContext } from '@/contexts/LinesList.context';
 
 /* * */
 
-export default function Component() {
+export function LinesList() {
 	//
 
 	//
