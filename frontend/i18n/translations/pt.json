@@ -353,6 +353,11 @@
 	"cards": {
 		"Discounts": {
 			"heading": "Descontos",
+			"pass_types": {
+				"family": "para o agregado familiar",
+				"metropolitano": "Metropolitano",
+				"municipal": "Municipal"
+			},
 			"products": {
 				"combatente-minus-65": {
 					"description": "Desconto de 30€ para antigos combatentes com menos de 65 anos. É necessário apresentar declaração. Saiba mais no site navegante.pt",
@@ -411,35 +416,22 @@
 			},
 			"subheading": "Descubra os descontos disponíveis para si."
 		},
-		"Modalities": {
-			"heading": "Modalidades",
-			"metropolitano": {
-				"description": "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Eius, ut.",
-				"price": "40€/mês",
-				"title": "Viaje por todo o lado, sem limites."
-			},
-			"municipal": {
-				"description": "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Eius, ut.",
-				"price": "30€/mês",
-				"title": "Viaje num município."
-			},
-			"subheading": "Descubra quanto custa viajar na CMetropolitana de vez em quando. Para utilizações mais frequentes sugerimos a adesão ao sistema navegante®."
-		},
 		"MunicipalDiscounts": {
-			"heading": "Descontos Municipais",
-			"subheading": "Descubra quanto custa viajar na CMetropolitana de vez em quando. Para utilizações mais frequentes sugerimos a adesão ao sistema navegante®."
+			"heading": "Descontos Municipais"
 		},
 		"Pass": {
 			"heading": "Passe Mensal",
-			"navegante": {
-				"description": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Obcaecati ea natus itaque qui iure nam consequuntur minima, quibusdam saepe odio molestiae soluta aspernatur, corrupti labore fugiat? Numquam blanditiis accusantium quibusdam!",
-				"title": "Já tem um cartão personalizado?"
+			"metropolitano": {
+				"description": "Válido em todos os modos de transporte em todos os 18 municípios da área metropolitana de Lisboa.",
+				"price": "40€/mês",
+				"title": "navegante® Metropolitano"
 			},
-			"subheading": "Descubra quanto custa viajar na CMetropolitana de vez em quando. Para utilizações mais frequentes sugerimos a adesão ao sistema navegante®.",
-			"wizard": {
-				"description": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Obcaecati ea natus itaque qui iure nam consequuntur minima, quibusdam saepe odio molestiae soluta aspernatur, corrupti labore fugiat? Numquam blanditiis accusantium quibusdam!",
-				"title": "Descubra a melhor opção para si"
-			}
+			"municipal": {
+				"description": "Válido em todos os modos de transporte dentro dos limites geográficos de um dos 18 municípios da área metropolitana de Lisboa.",
+				"price": "30€/mês",
+				"title": "navegante® Municipal"
+			},
+			"subheading": "Descubra quanto custa viajar na CMetropolitana, para quem utiliza transportes públicos todos os dias, através das diferentes modalidades do cartão navegante® personalizado."
 		}
 	},
 	"common": {
