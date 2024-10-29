@@ -581,41 +581,41 @@
 		}
 	},
 	"helpdesks": {
-		"Service": {
-			"app": {
-				"description": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Obcaecati ea natus itaque qui iure nam consequuntur minima, quibusdam saepe odio molestiae soluta aspernatur, corrupti labore fugiat? Numquam blanditiis accusantium quibusdam!",
-				"title": "App navegante®"
+		"Header": {
+			"frequent_travel": {
+				"description": "Para uma utilização recorrente, existe o navegante® personalizado, que permite o carregamento de um passe mensal, com tarifários pré-pagos e pós-pagos.",
+				"title": "Viagens Frequentes"
 			},
-			"heading": "Atendimento preferencial",
-			"multibanco": {
-				"description": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Obcaecati ea natus itaque qui iure nam consequuntur minima, quibusdam saepe odio molestiae soluta aspernatur, corrupti labore fugiat? Numquam blanditiis accusantium quibusdam!",
-				"title": "Rede multibanco™"
-			},
-			"payshop": {
-				"description": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Obcaecati ea natus itaque qui iure nam consequuntur minima, quibusdam saepe odio molestiae soluta aspernatur, corrupti labore fugiat? Numquam blanditiis accusantium quibusdam!",
-				"title": "Rede de Agentes payshop™"
-			},
-			"stores": {
-				"description": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Obcaecati ea natus itaque qui iure nam consequuntur minima, quibusdam saepe odio molestiae soluta aspernatur, corrupti labore fugiat? Numquam blanditiis accusantium quibusdam!",
-				"title": "Espaços navegante®"
-			},
-			"subheading": "Descubra quanto custa viajar na CMetropolitana de vez em quando. Para utilizações mais frequentes sugerimos a adesão ao sistema navegante®."
+			"ocasional_travel": {
+				"description": "Para utilizações pontuais, existe o cartão navegante® ocasional, que permite fazer carregamentos pré-pagos, por viagem ou por zapping.",
+				"title": "Viagens Ocasionais"
+			}
 		},
 		"ServicePoints": {
 			"heading": "Pontos de Atendimento",
 			"subheading": "Descubra onde pode adquirir o seu passe navegante®."
 		},
 		"WhereToBuy": {
-			"frequent_travel": {
-				"description": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Obcaecati ea natus itaque qui iure nam consequuntur minima, quibusdam saepe odio molestiae soluta aspernatur, corrupti labore fugiat? Numquam blanditiis accusantium quibusdam!",
-				"title": "Viagens Frequentes"
+			"app": {
+				"description": "Pode carregar o seu cartão navegante® personalizado diretamente através do seu telemóvel. Saiba mais em navegante.pt",
+				"title": "App navegante®"
 			},
+
 			"heading": "Onde Comprar",
-			"ocasional_travel": {
-				"description": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Obcaecati ea natus itaque qui iure nam consequuntur minima, quibusdam saepe odio molestiae soluta aspernatur, corrupti labore fugiat? Numquam blanditiis accusantium quibusdam!",
-				"title": "Viagens Ocasionais"
+			"multibanco": {
+				"description": "Pode carregar o seu cartão navegante® personalizado em qualquer equipamento multibanco.",
+				"title": "Rede multibanco™"
 			},
-			"subheading": "Descubra onde pode adquirir o seu passe navegante®."
+
+			"payshop": {
+				"description": "Pode carregar o seu cartão navegante® personalizado ou ocasional em qualquer parceiro Payshop.",
+				"title": "Rede de agentes PayShop™"
+			},
+			"stores": {
+				"description": "Com serviços de carregamento e emissão de passes mensais, compra de bilhetes ocasionais e prestação de informações sobre a rede e bilhética da Carris Metropolitana. Conheça os espaços aqui.",
+				"title": "Espaços navegante®"
+			},
+			"subheading": "Explore todas as opções para adquirir, renovar, atualizar ou carregar o seu cartão navegante®. O navegante® é o sistema de bilhética eletrónica que permite viajar em todos os transportes públicos da área metropolitana de Lisboa."
 		}
 	},
 	"home": {
