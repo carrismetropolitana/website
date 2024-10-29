@@ -353,6 +353,11 @@
 	"cards": {
 		"Discounts": {
 			"heading": "Discounts",
+			"pass_types": {
+				"family": "para o agregado familiar",
+				"metropolitano": "Metropolitano",
+				"municipal": "Municipal"
+			},
 			"products": {
 				"combatente-minus-65": {
 					"description": "$30 discount for former combatants under 65. It is necessary to present a declaration. Find out more on the website navegante.pt",
@@ -411,35 +416,22 @@
 			},
 			"subheading": "Discover the discounts available for you."
 		},
-		"Modalities": {
-			"heading": "Modalidades",
-			"metropolitano": {
-				"description": "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Eius, ut.",
-				"price": "€40/month",
-				"title": "Travel everywhere, without limits."
-			},
-			"municipal": {
-				"description": "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Eius, ut.",
-				"price": "€30/month",
-				"title": "Travel within municipality."
-			},
-			"subheading": "Find out how much it costs to travel occasionally on CMetropolitana. For more frequent use, we recommend subscribing to navegante®"
-		},
 		"MunicipalDiscounts": {
-			"heading": "Municipal Discounts",
-			"subheading": "Find out how much it costs to travel occasionally on CMetropolitana. For more frequent use, we recommend subscribing to navegante®"
+			"heading": "Municipal Discounts"
 		},
 		"Pass": {
 			"heading": "Monthly Pass",
-			"navegante": {
-				"description": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Obcaecati ea natus itaque qui iure nam consequuntur minima, quibusdam saepe odio molestiae soluta aspernatur, corrupti labore fugiat? Numquam blanditiis accusantium quibusdam!",
-				"title": "Do you have a personalized card already?"
+			"metropolitano": {
+				"description": "Válido em todos os modos de transporte em todos os 18 municípios da área metropolitana de Lisboa.",
+				"price": "40€/mês",
+				"title": "navegante® Metropolitano"
 			},
-			"subheading": "Find out how much it costs to travel occasionally on CMetropolitana. For more frequent use, we recommend subscribing to navegante®",
-			"wizard": {
-				"description": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Obcaecati ea natus itaque qui iure nam consequuntur minima, quibusdam saepe odio molestiae soluta aspernatur, corrupti labore fugiat? Numquam blanditiis accusantium quibusdam!",
-				"title": "Find out the best option for you."
-			}
+			"municipal": {
+				"description": "Válido em todos os modos de transporte dentro dos limites geográficos de um dos 18 municípios da área metropolitana de Lisboa.",
+				"price": "30€/mês",
+				"title": "navegante® Municipal"
+			},
+			"subheading": "Find out how much it costs to travel occasionally on CMetropolitana. For more frequent use, we recommend subscribing to navegante®"
 		}
 	},
 	"common": {
@@ -589,41 +581,39 @@
 		}
 	},
 	"helpdesks": {
-		"Service": {
-			"app": {
-				"description": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Obcaecati ea natus itaque qui iure nam consequuntur minima, quibusdam saepe odio molestiae soluta aspernatur, corrupti labore fugiat? Numquam blanditiis accusantium quibusdam!",
-				"title": "navegante® app"
+		"Header": {
+			"frequent_travel": {
+				"description": "Para uma utilização recorrente, existe o navegante® personalizado, que permite o carregamento de um passe mensal, com tarifários pré-pagos e pós-pagos.",
+				"title": "Viagens Frequentes"
 			},
-			"heading": "Preferential service",
-			"multibanco": {
-				"description": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Obcaecati ea natus itaque qui iure nam consequuntur minima, quibusdam saepe odio molestiae soluta aspernatur, corrupti labore fugiat? Numquam blanditiis accusantium quibusdam!",
-				"title": "ATM™ Network"
-			},
-			"payshop": {
-				"description": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Obcaecati ea natus itaque qui iure nam consequuntur minima, quibusdam saepe odio molestiae soluta aspernatur, corrupti labore fugiat? Numquam blanditiis accusantium quibusdam!",
-				"title": "Rede de Agentes payshop™"
-			},
-			"stores": {
-				"description": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Obcaecati ea natus itaque qui iure nam consequuntur minima, quibusdam saepe odio molestiae soluta aspernatur, corrupti labore fugiat? Numquam blanditiis accusantium quibusdam!",
-				"title": "Espaço navegante®"
-			},
-			"subheading": "Find out how much it costs to travel occasionally on CMetropolitana. For more frequent use, we recommend subscribing to navegante®"
+			"ocasional_travel": {
+				"description": "Para utilizações pontuais, existe o cartão navegante® ocasional, que permite fazer carregamentos pré-pagos, por viagem ou por zapping.",
+				"title": "Viagens Ocasionais"
+			}
 		},
 		"ServicePoints": {
 			"heading": "Service Points",
 			"subheading": "Find out where you can purchase your navegante® pass."
 		},
 		"WhereToBuy": {
-			"frequent_travel": {
-				"description": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Obcaecati ea natus itaque qui iure nam consequuntur minima, quibusdam saepe odio molestiae soluta aspernatur, corrupti labore fugiat? Numquam blanditiis accusantium quibusdam!",
-				"title": "Frequent trips"
+			"app": {
+				"description": "Pode carregar o seu cartão navegante® personalizado diretamente através do seu telemóvel. Saiba mais em navegante.pt",
+				"title": "App navegante®"
 			},
 			"heading": "Where to buy",
-			"ocasional_travel": {
-				"description": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Obcaecati ea natus itaque qui iure nam consequuntur minima, quibusdam saepe odio molestiae soluta aspernatur, corrupti labore fugiat? Numquam blanditiis accusantium quibusdam!",
-				"title": "Occasional trips"
+			"multibanco": {
+				"description": "Pode carregar o seu cartão navegante® personalizado em qualquer equipamento multibanco.",
+				"title": "Rede multibanco™"
 			},
-			"subheading": "Find out where you can purchase your navegante® pass."
+			"payshop": {
+				"description": "Pode carregar o seu cartão navegante® personalizado ou ocasional em qualquer parceiro Payshop.",
+				"title": "Rede de agentes PayShop™"
+			},
+			"stores": {
+				"description": "Com serviços de carregamento e emissão de passes mensais, compra de bilhetes ocasionais e prestação de informações sobre a rede e bilhética da Carris Metropolitana. Conheça os espaços aqui.",
+				"title": "Espaços navegante®"
+			},
+			"subheading": "Explore todas as opções para adquirir, renovar, atualizar ou carregar o seu cartão navegante®. O navegante® é o sistema de bilhética eletrónica que permite viajar em todos os transportes públicos da área metropolitana de Lisboa."
 		}
 	},
 	"home": {
