@@ -353,6 +353,11 @@
 	"cards": {
 		"Discounts": {
 			"heading": "Discounts",
+			"pass_types": {
+				"family": "para o agregado familiar",
+				"metropolitano": "Metropolitano",
+				"municipal": "Municipal"
+			},
 			"products": {
 				"combatente-minus-65": {
 					"description": "$30 discount for former combatants under 65. It is necessary to present a declaration. Find out more on the website navegante.pt",
@@ -411,35 +416,22 @@
 			},
 			"subheading": "Discover the discounts available for you."
 		},
-		"Modalities": {
-			"heading": "Modalidades",
-			"metropolitano": {
-				"description": "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Eius, ut.",
-				"price": "€40/month",
-				"title": "Travel everywhere, without limits."
-			},
-			"municipal": {
-				"description": "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Eius, ut.",
-				"price": "€30/month",
-				"title": "Travel within municipality."
-			},
-			"subheading": "Find out how much it costs to travel occasionally on CMetropolitana. For more frequent use, we recommend subscribing to navegante®"
-		},
 		"MunicipalDiscounts": {
-			"heading": "Municipal Discounts",
-			"subheading": "Find out how much it costs to travel occasionally on CMetropolitana. For more frequent use, we recommend subscribing to navegante®"
+			"heading": "Municipal Discounts"
 		},
 		"Pass": {
 			"heading": "Monthly Pass",
-			"navegante": {
-				"description": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Obcaecati ea natus itaque qui iure nam consequuntur minima, quibusdam saepe odio molestiae soluta aspernatur, corrupti labore fugiat? Numquam blanditiis accusantium quibusdam!",
-				"title": "Do you have a personalized card already?"
+			"metropolitano": {
+				"description": "Válido em todos os modos de transporte em todos os 18 municípios da área metropolitana de Lisboa.",
+				"price": "40€/mês",
+				"title": "navegante® Metropolitano"
 			},
-			"subheading": "Find out how much it costs to travel occasionally on CMetropolitana. For more frequent use, we recommend subscribing to navegante®",
-			"wizard": {
-				"description": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Obcaecati ea natus itaque qui iure nam consequuntur minima, quibusdam saepe odio molestiae soluta aspernatur, corrupti labore fugiat? Numquam blanditiis accusantium quibusdam!",
-				"title": "Find out the best option for you."
-			}
+			"municipal": {
+				"description": "Válido em todos os modos de transporte dentro dos limites geográficos de um dos 18 municípios da área metropolitana de Lisboa.",
+				"price": "30€/mês",
+				"title": "navegante® Municipal"
+			},
+			"subheading": "Find out how much it costs to travel occasionally on CMetropolitana. For more frequent use, we recommend subscribing to navegante®"
 		}
 	},
 	"common": {
