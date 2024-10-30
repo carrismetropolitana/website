@@ -617,6 +617,9 @@
 		}
 	},
 	"home": {
+		"AlertsSection": {
+			"section_heading": "Alertas em Destaque"
+		},
 		"MainCarouselCard": {
 			"learn_more": "Find out more"
 		},
@@ -665,6 +668,9 @@
 		"LinesDetail": {
 			"heading": "Search Lines",
 			"toggle_favorite_error": "Error adding line to favorites. {error}"
+		},
+		"LinesDetailAlerts": {
+			"heading": "Alertas ativos para esta linha"
 		},
 		"LinesDetailMetrics": {
 			"demand": {
@@ -944,16 +950,16 @@
 		"StoresListEmpty": {
 			"by_municipality": {
 				"action_1": "Consult Store Opening Hours",
-				"action_2": "Explorer Other Municipalities",
-				"action_3": "Explorer Agent Network",
+				"action_2": "Explorar Outros Municípios",
+				"action_3": "Explorar Rede de Agentes",
 				"subtitle": "We suggest that you visit us in another location to receive better service.",
 				"title": "No stores available in this municipality"
 			},
 			"default": {
 				"action_1": "Consult Store Opening Hours",
-				"action_2": "Explorer Agent Network",
+				"action_2": "Explorar Rede de Agentes",
 				"subtitle": "At this time, all stores appear to be closed.",
-				"title": "No stores available at this time"
+				"title": "Nenhuma loja disponível agora"
 			}
 		},
 		"StoresListGroupItem": {
