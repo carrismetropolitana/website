@@ -619,6 +619,9 @@
 		}
 	},
 	"home": {
+		"AlertsSection": {
+			"section_heading": "Alertas em Destaque"
+		},
 		"MainCarouselCard": {
 			"learn_more": "Saber mais"
 		},
@@ -667,6 +670,9 @@
 		"LinesDetail": {
 			"heading": "Pesquisar Linhas",
 			"toggle_favorite_error": "Erro ao adicionar a linha aos favoritos. {error}"
+		},
+		"LinesDetailAlerts": {
+			"heading": "Alertas ativos para esta linha"
 		},
 		"LinesDetailMetrics": {
 			"demand": {
@@ -946,16 +952,16 @@
 		"StoresListEmpty": {
 			"by_municipality": {
 				"action_1": "Consultar Horários das Lojas",
-				"action_2": "Explorer Outros Municípios",
-				"action_3": "Explorer Rede de Agentes",
+				"action_2": "Explorar Outros Municípios",
+				"action_3": "Explorar Rede de Agentes",
 				"subtitle": "Sugerimos que nos visite noutro local, para ser melhor atendido.",
 				"title": "Nenhuma loja disponível neste município"
 			},
 			"default": {
 				"action_1": "Consultar Horários das Lojas",
-				"action_2": "Explorer Rede de Agentes",
+				"action_2": "Explorar Rede de Agentes",
 				"subtitle": "Neste momento, todas as lojas aparentam estar encerradas.",
-				"title": "Nenhuma loja disponível por agora"
+				"title": "Nenhuma loja disponível agora"
 			}
 		},
 		"StoresListGroupItem": {
