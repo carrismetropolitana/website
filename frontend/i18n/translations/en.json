@@ -189,6 +189,7 @@
 			"park": "Near a Park",
 			"police_station": "Near a Police Station",
 			"school": "Near a School",
+			"transit_office": "Perto de um Espaço Navegante",
 			"university": "Close to a University"
 		},
 		"operators": {
