@@ -329,7 +329,7 @@
 			"iphone": "Apple iPhone",
 			"subheading": "Download the Carris Metropolitana app for iOS or Android."
 		},
-		"StartupMessages1": {
+		"StartupMessage1": {
 			"actions": {
 				"close": "To close",
 				"update_android": "Update on Play Store",
@@ -614,7 +614,7 @@
 				"description": "Com serviços de carregamento e emissão de passes mensais, compra de bilhetes ocasionais e prestação de informações sobre a rede e bilhética da Carris Metropolitana. Conheça os espaços aqui.",
 				"title": "Espaços navegante®"
 			},
-			"subheading": "Explore todas as opções para adquirir, renovar, atualizar ou carregar o seu cartão navegante®. O navegante® é o sistema de bilhética eletrónica que permite viajar em todos os transportes públicos da área metropolitana de Lisboa."
+			"subheading": "Find out where you can purchase your navegante® pass."
 		}
 	},
 	"home": {
@@ -951,14 +951,14 @@
 		"StoresListEmpty": {
 			"by_municipality": {
 				"action_1": "Consult Store Opening Hours",
-				"action_2": "Explore others municipalities",
-				"action_3": "Explore Point of Sales",
+				"action_2": "Explorer Other Municipalities",
+				"action_3": "Explorer Agent Network",
 				"subtitle": "We suggest that you visit us in another location to receive better service.",
 				"title": "No stores available in this municipality"
 			},
 			"default": {
 				"action_1": "Consult Store Opening Hours",
-				"action_2": "Explore Point of Sales",
+				"action_2": "Explorer Agent Network",
 				"subtitle": "At this time, all stores appear to be closed.",
 				"title": "No stores available at this time"
 			}
