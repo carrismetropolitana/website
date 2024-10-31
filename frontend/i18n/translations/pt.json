@@ -329,7 +329,7 @@
 			"iphone": "Apple iPhone",
 			"subheading": "Faça o download da app Carris Metropolitana para iOS ou Android."
 		},
-		"StartupMessages1": {
+		"StartupMessage1": {
 			"actions": {
 				"close": "Fechar",
 				"update_android": "Atualizar na Play Store",
