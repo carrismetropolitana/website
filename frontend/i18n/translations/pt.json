@@ -1203,7 +1203,33 @@
 			}
 		},
 		"Review2024QuizFinalResult": {
-			"points": "Já tens {points, plural, =1 {# ponto} other {# pontos}}!"
+			"acceptable": {
+				"subtitle": "{points, plural, =1 {Ganhaste só # ponto...} other {Ganhaste só # pontos...}}!",
+				"title": "Aceitável"
+			},
+			"actions": {
+				"restart": "Recomeçar"
+			},
+			"bad": {
+				"subtitle": "{points, plural, =1 {Ganhaste só # ponto...} other {Ganhaste só # pontos...}}!",
+				"title": "Não muito bom..."
+			},
+			"incredible": {
+				"subtitle": "{points, plural, =1 {Ganhaste só # ponto...} other {Ganhaste só # pontos...}}!",
+				"title": "Incrível!"
+			},
+			"perfect": {
+				"subtitle": "{points, plural, =1 {Ganhaste só # ponto...} other {Ganhaste só # pontos...}}!",
+				"title": "Uau. Perfeito. Sem falhas."
+			},
+			"terrible": {
+				"subtitle": "{points, plural, =1 {Ganhaste só # ponto...} other {Ganhaste só # pontos...}}!",
+				"title": "Terrível..."
+			},
+			"very_good": {
+				"subtitle": "{points, plural, =1 {Ganhaste só # ponto...} other {Ganhaste só # pontos...}}!",
+				"title": "Boa!"
+			}
 		},
 		"Review2024QuizPoints": {
 			"points": "{points, plural, =0 {Joga para ganhar pontos!} =1 {Já tens # ponto} other {Já tens # pontos}}"
