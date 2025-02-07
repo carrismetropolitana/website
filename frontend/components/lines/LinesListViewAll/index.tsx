@@ -164,6 +164,7 @@ export function LinesListViewAll() {
 		}),
 		mantineTableContainerProps: {
 			height: '100vh',
+			style: { maxHeight: 'unset' },
 		},
 		mantineTableHeadCellProps: {
 			height: 70,
@@ -171,6 +172,7 @@ export function LinesListViewAll() {
 		mantineTableProps: {
 			className: styles.table,
 			flex: 1,
+			style: { height: 0 },
 			withColumnBorders: false,
 			withRowBorders: true,
 			withTableBorder: false,
