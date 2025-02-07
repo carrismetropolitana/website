@@ -90,9 +90,12 @@ export function LinesListViewFavorites() {
 			header: t('header_designation'),
 			mantineTableBodyCellProps: {
 				align: 'left',
+				style: { paddingLeft: 30 },
 			},
 			mantineTableHeadCellProps: {
 				align: 'left',
+				style: { paddingLeft: 30 },
+
 			},
 			size: 700,
 		},
@@ -152,6 +155,7 @@ export function LinesListViewFavorites() {
 		},
 	});
 	//
+
 	// C. Handle Actions
 
 	useEffect(() => {
