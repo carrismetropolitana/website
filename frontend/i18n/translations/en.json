@@ -821,12 +821,16 @@
 		},
 		"LinesListViewAll": {
 			"header_area": "Area",
-			"header_designation": "Designation",
+			"header_designation": "Line",
 			"header_municipality": "Municipality",
 			"header_number": "Number",
 			"no_data": "Nenhuma linha encontrada para esta pesquisa"
 		},
 		"LinesListViewFavorites": {
+			"header_area": "Area",
+			"header_designation": "Line",
+			"header_municipality": "Municipality",
+			"header_number": "Number",
 			"no_favorites": "No favorite lines yet"
 		},
 		"PathStopNextArrivals": {

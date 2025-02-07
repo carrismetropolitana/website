@@ -1,5 +1,3 @@
-
-
 .table thead{
     font-size: var(--font-size-subtitle);
     font-weight: var(--font-weight-subtitle);
@@ -11,5 +9,11 @@
 }
 
 .designationName{
-    margin-left: 15px;
+    margin-left: 10px;
+}
+
+.lineBadgeDesignationContainer{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
 }

@@ -6,9 +6,7 @@ import { Section } from '@/components/layout/Section';
 import { Surface } from '@/components/layout/Surface';
 import { LineBadge } from '@/components/lines/LineBadge';
 import { useLinesListContext } from '@/contexts/LinesList.context';
-import { useProfileContext } from '@/contexts/Profile.context';
 import { Routes } from '@/utils/routes';
-import toast from '@/utils/toast';
 import { Line } from '@carrismetropolitana/api-types/network';
 import {
 	MantineReactTable,
@@ -34,10 +32,12 @@ interface LineListDetails {
 /* * */
 
 export function LinesListViewAll() {
+	//
+
+	//
 	// A. Setup variables
 
 	const linesListContext = useLinesListContext();
-	const profileContext = useProfileContext();
 
 	const favoriteLines: string[] = linesListContext.data.favorites.map((line: Line) => line.id);
 
@@ -47,7 +47,6 @@ export function LinesListViewAll() {
 	const t = useTranslations('lines.LinesListViewAll');
 
 	//
-
 	// B. Fetch Data
 
 	const setLineListDetails = (): LineListDetails[] => {
@@ -84,32 +83,41 @@ export function LinesListViewAll() {
 	const columns: MRT_ColumnDef<LineListDetails>[] = [
 		{
 			accessorKey: 'id',
-			Cell: ({ renderedCellValue, row }) => {
+			Cell: ({ row }) => {
+				return (
+					<div className={styles.favoriteToggle}>
+						<FavoriteToggle color={row.original.color} isActive={row.original.is_favorite ?? false} onToggle={() => void 0} />
+					</div>
+				);
+			},
+			enableColumnActions: false,
+			enableColumnFilter: false,
+			enableSorting: false,
+			header: '',
+			mantineTableBodyCellProps: {
+				align: 'right',
+			},
+			size: 40,
+		},
+		{
+			accessorFn: row => `${row.id} - ${row.designation}`,
+			accessorKey: 'designation',
+			Cell: ({ row }) => {
 				return (
 					<>
-						<div className={styles.favoriteToggle}>
-							<FavoriteToggle color={row.original.color} isActive={row.original.is_favorite ?? false} onToggle={() => { handleToggleFavorite(renderedCellValue); }} />
-						</div>
-						<LineBadge lineId={renderedCellValue?.toString()} />
+						<LineBadge lineId={row.original.id} />
+						<p className={styles.designationName}>{row.original.designation}</p>
 					</>
 				);
 			},
-			header: t('header_number'),
+			header: t('header_designation'),
 			mantineTableBodyCellProps: {
-				align: 'center',
+				align: 'left',
 			},
 			mantineTableHeadCellProps: {
 				align: 'left',
 			},
-			size: 100,
-		},
-		{
-			accessorKey: 'designation',
-			header: t('header_designation'),
-			mantineTableHeadCellProps: {
-				align: 'center',
-			},
-			size: 300,
+			size: 500,
 		},
 		{
 			accessorKey: 'area',
@@ -120,12 +128,12 @@ export function LinesListViewAll() {
 			mantineTableHeadCellProps: {
 				align: 'center',
 			},
-			size: 100,
+			size: 150,
 		},
 		{
 			accessorKey: 'name',
 			header: t('header_municipality'),
-			size: 100,
+			size: 150,
 		},
 	];
 
@@ -158,7 +166,7 @@ export function LinesListViewAll() {
 			height: '100vh',
 		},
 		mantineTableHeadCellProps: {
-			height: 60,
+			height: 70,
 		},
 		mantineTableProps: {
 			className: styles.table,
@@ -178,16 +186,6 @@ export function LinesListViewAll() {
 	// C. Handle Actions
 	const handleRowClick = (lineId) => {
 		redirect(`/lines/${lineId}`);
-	};
-
-	const handleToggleFavorite = async (lineId) => {
-		if (!lineId) return;
-		try {
-			await profileContext.actions.toggleFavoriteLine(lineId);
-		}
-		catch (error) {
-			toast.error({ message: t('toggle_favorite_error', { error: error.message }) });
-		}
 	};
 	//
 
