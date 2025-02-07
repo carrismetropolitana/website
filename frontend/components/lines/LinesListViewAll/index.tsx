@@ -38,10 +38,13 @@ export function LinesListViewAll() {
 
 	const linesListContext = useLinesListContext();
 	const profileContext = useProfileContext();
+
 	const favoriteLines: string[] = linesListContext.data.favorites.map((line: Line) => line.id);
+
 	const { data: allLocalitiesData } = useSWR(`${Routes.API}/locations/localities`).data;
-	const t = useTranslations('lines.LinesListViewAll');
+
 	const [allLinesParsed, setAllLinesParsed] = useState<LineListDetails[]>([]);
+	const t = useTranslations('lines.LinesListViewAll');
 
 	//
 
@@ -57,20 +60,9 @@ export function LinesListViewAll() {
 
 			let area = line.short_name;
 
-			if (line.id.startsWith('1')) {
-				area = '1';
-			}
-			else if (line.id.startsWith('2')) {
-				area = '2';
-			}
-			else if (line.id.startsWith('3')) {
-				area = '3';
-			}
-			else if (line.id.startsWith('4')) {
-				area = '4';
-			}
-			else if (line.id.startsWith('5')) {
-				area = '5';
+			const firstChar = line.id.charAt(0);
+			if (!isNaN(Number(firstChar))) {
+				area = firstChar;
 			}
 
 			const isFavorite = favoriteLines.includes(line.id);
@@ -84,6 +76,7 @@ export function LinesListViewAll() {
 				name: localities,
 			});
 		});
+
 		setAllLinesParsed(parsedLines);
 		return parsedLines;
 	};
@@ -102,22 +95,37 @@ export function LinesListViewAll() {
 				);
 			},
 			header: t('header_number'),
+			mantineTableBodyCellProps: {
+				align: 'center',
+			},
+			mantineTableHeadCellProps: {
+				align: 'left',
+			},
 			size: 100,
 		},
 		{
 			accessorKey: 'designation',
 			header: t('header_designation'),
-			size: 400,
+			mantineTableHeadCellProps: {
+				align: 'center',
+			},
+			size: 300,
 		},
 		{
 			accessorKey: 'area',
 			header: t('header_area'),
+			mantineTableBodyCellProps: {
+				align: 'center',
+			},
+			mantineTableHeadCellProps: {
+				align: 'center',
+			},
 			size: 100,
 		},
 		{
 			accessorKey: 'name',
 			header: t('header_municipality'),
-			maxSize: 350,
+			size: 100,
 		},
 	];
 
@@ -131,19 +139,30 @@ export function LinesListViewAll() {
 		enablePagination: false,
 		enableRowNumbers: false,
 		enableRowVirtualization: true,
+		enableStickyHeader: true,
 		enableTopToolbar: false,
 		initialState: { density: 'xs' },
 		mantinePaperProps: {
 			style: { boxShadow: 'none' },
 			withBorder: false,
 		},
+		mantineTableBodyCellProps: {
+			style: { whiteSpace: 'wrap' },
+		},
 		mantineTableBodyRowProps: ({ row }) => ({
 			onClick: () => {
 				handleRowClick(row.original.id);
 			},
 		}),
+		mantineTableContainerProps: {
+			height: '100vh',
+		},
+		mantineTableHeadCellProps: {
+			height: 60,
+		},
 		mantineTableProps: {
-			style: { overflow: 'visible' },
+			className: styles.table,
+			flex: 1,
 			withColumnBorders: false,
 			withRowBorders: true,
 			withTableBorder: false,
@@ -153,6 +172,7 @@ export function LinesListViewAll() {
 	useEffect(() => {
 		setLineListDetails();
 	}, [linesListContext.data.filtered, allLocalitiesData]);
+
 	//
 
 	// C. Handle Actions

@@ -1,6 +1,13 @@
-.tableWrapper{
-    width: 100%;
-}
 .favoriteToggle{
     margin-right: 10px;
+}
+
+.table thead{
+    font-size: var(--font-size-subtitle);
+    font-weight: var(--font-weight-subtitle);
+}
+
+.table tbody tr td{
+    font-size: var(--font-size-text);
+    font-weight: var(--font-weight-text);
 }
