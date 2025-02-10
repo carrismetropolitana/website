@@ -20,12 +20,13 @@ export function StopInquirySection({ description, title }: Props) {
 	const [isInquiryEnded, setInquiryEnded] = useState<boolean>(false);
 	const [isParticipating, setParticipatingStatus] = useState<boolean>(false);
 	const [isVisible, setIsVisible] = useState<boolean>(true);
-	const [isLoading, setIsLoading] = useState<boolean>(true);
 	const [currentPage, setCurrentPage] = useState<number>(0);
+
 	const [stopQuestion1Answer, setQuesion1Answer] = useState<string | undefined>(undefined);
 	const [stopQuestion2Answer, setQuesion2Answer] = useState<string | undefined>(undefined);
 	const [stopQuestion3Answer, setQuesion3Answer] = useState<string | undefined>(undefined);
 	const [stopQuestion4Answer, setQuesion4Answer] = useState<string | undefined>(undefined);
+
 	const [progress, setProgress] = useState<number>(0);
 
 	const t = useTranslations('stops.Inquiry');
@@ -37,29 +38,13 @@ export function StopInquirySection({ description, title }: Props) {
 		const currentQuestion = localStorage.getItem('Stops|InquiryCurrentPage');
 
 		setCurrentPage(currentQuestion ? parseInt(currentQuestion) : 0);
-		if (ended !== null) {
-			setInquiryEnded(ended === 'true');
-		}
-		else {
-			setInquiryEnded(false);
-		}
-		setParticipatingStatus(participates === 'true');
-		if (participates === null) {
-			setParticipatingStatus(true);
-		}
-		setIsLoading(false);
+		setInquiryEnded(ended === 'true' || false);
+		setParticipatingStatus(participates === 'true' || false);
 	}, []);
 
 	useEffect(() => {
 		if (isInquiryEnded) {
 			setIsVisible(true);
-		}
-		else if (!isParticipating) {
-			setIsVisible(true);
-			const timer = setTimeout(() => {
-				setIsVisible(false);
-			}, 5000);
-			return () => clearTimeout(timer);
 		}
 	}, [isInquiryEnded, isParticipating]);
 
@@ -101,6 +86,7 @@ export function StopInquirySection({ description, title }: Props) {
 			console.log('Inquiry ended');
 			localStorage.setItem('Stops|InquiryEnded', 'true');
 			setInquiryEnded(true);
+			setParticipatingStatus(false);
 			setIsVisible(true);
 			return;
 		}
@@ -134,14 +120,14 @@ export function StopInquirySection({ description, title }: Props) {
 	// D. Render Component
 	return (
 		<>
-			{!isParticipating && isVisible && !isLoading && isInquiryEnded ? (
-				<Surface>
-					<Section>
-						<div className={styles.fadeOut}>
+			{isInquiryEnded && isVisible ? (
+				<div className={styles.fadeOut}>
+					<Surface>
+						<Section withGap withPadding>
 							<p>{t('endingMessage')}</p>
-						</div>
-					</Section>
-				</Surface>
+						</Section>
+					</Surface>
+				</div>
 			) : (
 				<Surface>
 					<Section withGap withPadding>
@@ -210,7 +196,6 @@ export function StopInquirySection({ description, title }: Props) {
 						{currentPage > 0 && (<Button onClick={handleNextQuestion}>{t('submit')}</Button>)}
 					</Section>
 				</Surface>
-
 			)}
 		</>
 	);
