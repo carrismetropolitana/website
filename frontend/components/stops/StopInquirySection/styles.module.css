@@ -1,0 +1,83 @@
+/* INQUIRY */
+.inquiryContainer{
+  border: 2px solid var(--color-status-ok-border);
+}
+
+/* ACTION BUTTON */
+.actionButton {
+    margin-top: 10px;
+    margin-bottom: 10px;
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+    justify-content: space-evenly;
+    align-items: center;
+  }
+
+.actionButton button{
+  width: 150px;
+}
+  /* * */
+
+/* INQUIRY DESCRIPTION */
+.inquiryDescription{
+ font-size: var(--font-size-text);
+ font-weight: var(--font-weight-text);
+ color: var(--color-system-text-200);
+}
+/* * */
+
+/* INQUIRY TITLE */
+.inquiryTitle{
+  font-size: var(--font-size-title);
+  font-weight: var(--font-weight-title);
+  color: var(--color-system-text-100);
+}
+/* * */
+
+
+/* FADE OUT CONTAINER */
+@keyframes fadeOut {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}
+
+.fadeOut {
+  animation: fadeOut 1s ease-out forwards;
+}
+/* * */
+
+/* POSSIBLE ANSWERS */
+
+.possibleAnswersContainer{
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  padding: 25px 0 0 0;
+  gap: 10px;
+}
+.possibleAnswersContainer button:first-child{
+  color: red;
+}
+
+.possibleAnswersContainer button:nth-child(2){
+color: #ffc400
+}
+.possibleAnswersContainer button:nth-child(3){
+  color: #b0c92e
+}
+  .possibleAnswersContainer button:nth-child(4){
+    color: #71d302
+}
+
+/* PROGESS BAR */
+.progressBar{
+  width: 100%;
+}
+
+

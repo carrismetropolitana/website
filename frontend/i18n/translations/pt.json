@@ -1354,6 +1354,19 @@
 		}
 	},
 	"stops": {
+		"Inquiry": {
+			"Stop|Inquiry|Question1": "Questão 1",
+			"Stop|Inquiry|Question2": "Questão 2",
+			"Stop|Inquiry|Question3": "Questão 3",
+			"Stop|Inquiry|Question4": "Questão 4",
+			"description": "Este inquérito serve para melhorar a qualidade do nosso serviço. A sua opinião é importante para nós.",
+			"endingMessage": "Obrigado por ceder um pouco do seu tempo!",
+			"optin": "Sim",
+			"optout": "Não",
+			"previous": "Anterior",
+			"submit": "Submeter",
+			"title": "Pode dar-nos a sua opinião?"
+		},
 		"Page": {
 			"heading": "Pesquisar Paragens"
 		},

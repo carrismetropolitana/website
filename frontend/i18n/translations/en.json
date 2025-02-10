@@ -1353,6 +1353,19 @@
 		}
 	},
 	"stops": {
+		"Inquiry": {
+			"Previous": "Previous",
+			"Stop|Inquiry|Question1": "Question 1",
+			"Stop|Inquiry|Question2": "Question 2",
+			"Stop|Inquiry|Question3": "Question 3",
+			"Stop|Inquiry|Question4": "Question 4",
+			"description": "This inquiry serves the purpose of improving the quality of our service. Your opinion is important to us.",
+			"endingMessage": "Thank you for your time!",
+			"optin": "Yes",
+			"optout": "No",
+			"submit": "Submit",
+			"title": "Can you give us some feedback about our stops?"
+		},
 		"Page": {
 			"heading": "Search Stops"
 		},
