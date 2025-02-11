@@ -17,11 +17,9 @@ export function StopProbeSection({ description, title }: Props) {
 
 	//
 	// A. Setup Variables
+
 	const [isProbeEnded, setProbeEnded] = useState<boolean>(false);
-	const [isParticipating, setParticipatingStatus] = useState<boolean>(true);
-	const [isVisible, setIsVisible] = useState<boolean>(false);
 	const [currentPage, setCurrentPage] = useState<number>(0);
-	const [isFirstTime, setIsFirstTime] = useState<boolean>(true);
 	const [isMessageShown, setIsMessageShown] = useState<boolean>(true);
 
 	const [stopQuestion1Answer, setQuesion1Answer] = useState<string | undefined>(undefined);
@@ -32,41 +30,28 @@ export function StopProbeSection({ description, title }: Props) {
 	const [progress, setProgress] = useState<number>(0);
 
 	const t = useTranslations('stops.Probe');
+
 	//
 	// B. Fetch Data
+
 	useEffect(() => {
 		const ended = localStorage.getItem('Stops|ProbeEnded') === 'true';
-		const participates = localStorage.getItem('Stops|ProbeOptIn') === 'true';
 		const currentQuestion = parseInt(localStorage.getItem('Stops|ProbeCurrentPage') || '0');
-		const firstTime = localStorage.getItem('Stops|ProbeFirstTime') === 'true';
 		const messageShown = localStorage.getItem('Stops|EndingMessageShown') === 'true';
 
 		setCurrentPage(currentQuestion);
 		setProbeEnded(ended);
-		setParticipatingStatus(participates);
-		setIsFirstTime(firstTime);
 		setIsMessageShown(messageShown);
-
-		if (ended) {
-			setIsVisible(true);
-		}
-		else {
-			setIsVisible(false);
-		}
 	}, []);
-
-	useEffect(() => {
-		if (isProbeEnded) {
-			setIsVisible(true);
-		}
-	}, [isProbeEnded]);
 
 	useEffect(() => {
 		const progressPercentage = currentPage / 4 * 100;
 		setProgress(progressPercentage);
 	}, [currentPage]);
+
 	//
 	// C. Handle Actions
+
 	const handleParticipation = () => {
 		const currentQuestion = currentPage + 1;
 
@@ -77,7 +62,6 @@ export function StopProbeSection({ description, title }: Props) {
 		localStorage.setItem('Stops|ProbeCurrentPage', currentQuestion.toString());
 
 		setCurrentPage(currentQuestion);
-		setParticipatingStatus(true);
 		setProbeEnded(false);
 	};
 	const handleOptOut = () => {
@@ -87,9 +71,7 @@ export function StopProbeSection({ description, title }: Props) {
 		localStorage.setItem('Stops|ProbeEnded', 'true');
 		localStorage.setItem('Stops|EndingMessageShown', 'true');
 
-		setParticipatingStatus(false);
 		setProbeEnded(true);
-		setIsVisible(false);
 	};
 
 	const handleNextQuestion = () => {
@@ -100,8 +82,7 @@ export function StopProbeSection({ description, title }: Props) {
 			localStorage.setItem('Stops|ProbeEnded', 'true');
 			localStorage.setItem('Stops|EndingMessageShown', 'true');
 			setProbeEnded(true);
-			setParticipatingStatus(false);
-			setIsVisible(false);
+
 			return;
 		}
 
@@ -110,13 +91,13 @@ export function StopProbeSection({ description, title }: Props) {
 	};
 
 	const handleQuestion1 = (e) => {
-		const value = e.target.value;
+		const value = e.target.id;
 		console.log('1: ', value);
 		setQuesion1Answer(value);
 	};
 	const handleQuestion2 = (e) => {
-		const value = e.target.value;
-		console.log('2: ', value);
+		const value = e.target;
+		console.log('2: ', stopQuestion2Answer);
 		setQuesion2Answer(value);
 	};
 	const handleQuestion3 = (e) => {
@@ -129,8 +110,10 @@ export function StopProbeSection({ description, title }: Props) {
 		console.log('4: ', value);
 		setQuesion4Answer(value);
 	};
+
 	//
 	// D. Render Component
+
 	return (
 		<>
 			{!isProbeEnded && !isMessageShown ? (
@@ -138,23 +121,23 @@ export function StopProbeSection({ description, title }: Props) {
 					<Section withGap withPadding>
 						{currentPage > 0 && (<Progress className={styles.progressBar} color="green" transitionDuration={800} value={progress} />)}
 						{currentPage === 0 && (
-							<>
+							<div>
 								<p className={styles.probeTitle}>{title}</p>
 								<p className={styles.probeDescription}>{description}</p>
 								<div className={styles.actionButton}>
 									<Button onClick={handleParticipation}>{t('optin')}</Button>
 									<Button onClick={handleOptOut}>{t('optout')}</Button>
 								</div>
-							</>
+							</div>
 						)}
 						{currentPage === 1 && (
 							<div>
 								<p className={styles.probeTitle}>{t('stop|probe|question1')}</p>
 								<div className={styles.possibleAnswersContainer}>
-									<Button onClick={e => handleQuestion1(e)} value="1"> <IconMoodAngry size={40} /> </Button>
-									<Button onClick={e => handleQuestion1(e)} value="2"> <IconMoodSad size={40} /> </Button>
-									<Button onClick={e => handleQuestion1(e)} value="3"> <IconMoodSmileBeam size={40} /> </Button>
-									<Button onClick={e => handleQuestion1(e)} value="4"> <IconMoodHappy size={40} /> </Button>
+									<Button className={styles.questionButton} id="question1" onClick={e => handleQuestion1(e)} value="1"> <IconMoodAngry size={40} /> </Button>
+									<Button className={styles.questionButton} id="question2" onClick={e => handleQuestion1(e)} value="2"> <IconMoodSad size={40} /> </Button>
+									<Button className={styles.questionButton} id="question3" onClick={e => handleQuestion1(e)} value="3"> <IconMoodSmileBeam size={40} /> </Button>
+									<Button className={styles.questionButton} id="question4" onClick={e => handleQuestion1(e)} value="4"> <IconMoodHappy size={40} /> </Button>
 								</div>
 							</div>
 						)}
@@ -212,5 +195,6 @@ export function StopProbeSection({ description, title }: Props) {
 			) : null}
 		</>
 	);
+
 	//
 }

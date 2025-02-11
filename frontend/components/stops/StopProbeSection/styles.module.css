@@ -1,4 +1,4 @@
-/* Probe */
+/* PROBE */
 .probeContainer{
   border: 2px solid var(--color-status-ok-border);
 }
@@ -18,7 +18,7 @@
 }
 
 /* * */
-/* Probe DESCRIPTION */
+/* PROBE DESCRIPTION */
 
 .probeDescription{
  font-size: var(--font-size-text);
@@ -80,4 +80,11 @@ color: #ffc400
 
 .progressBar{
   width: 100%;
+}
+
+/* * */
+/* QUESTION BUTTON */
+
+.questionButton span{
+  pointer-events: none;
 }
