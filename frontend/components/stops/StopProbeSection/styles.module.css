@@ -1,9 +1,10 @@
-/* INQUIRY */
-.inquiryContainer{
+/* Probe */
+.probeContainer{
   border: 2px solid var(--color-status-ok-border);
 }
-
+/* * */
 /* ACTION BUTTON */
+
 .actionButton {
     margin-top: 10px;
     margin: 0 auto;
@@ -15,26 +16,28 @@
 .actionButton button{
   width: 150px;
 }
-  /* * */
 
-/* INQUIRY DESCRIPTION */
-.inquiryDescription{
+/* * */
+/* Probe DESCRIPTION */
+
+.probeDescription{
  font-size: var(--font-size-text);
  font-weight: var(--font-weight-text);
  color: var(--color-system-text-200);
 }
-/* * */
 
-/* INQUIRY TITLE */
-.inquiryTitle{
+/* * */
+/* PROBE TITLE */
+
+.probeTitle{
   font-size: var(--font-size-title);
   font-weight: var(--font-weight-title);
   color: var(--color-system-text-100);
 }
+
 /* * */
-
-
 /* FADE OUT CONTAINER */
+
 @keyframes fadeOut {
   from {
     opacity: 1;
@@ -46,10 +49,10 @@
 }
 
 .fadeOut {
-  animation: fadeOut 10s forwards;
+  animation: fadeOutb 10s forwards;
 }
-/* * */
 
+/* * */
 /* POSSIBLE ANSWERS */
 
 .possibleAnswersContainer{
@@ -72,10 +75,9 @@ color: #ffc400
   .possibleAnswersContainer button:nth-child(4){
     color: #71d302
 }
-
+/* * */
 /* PROGESS BAR */
+
 .progressBar{
   width: 100%;
 }
-
-

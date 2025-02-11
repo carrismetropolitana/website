@@ -12,12 +12,12 @@ interface Props {
 	title: string
 }
 
-export function StopInquirySection({ description, title }: Props) {
+export function StopProbeSection({ description, title }: Props) {
 	//
 
 	//
 	// A. Setup Variables
-	const [isInquiryEnded, setInquiryEnded] = useState<boolean>(false);
+	const [isProbeEnded, setProbeEnded] = useState<boolean>(false);
 	const [isParticipating, setParticipatingStatus] = useState<boolean>(true);
 	const [isVisible, setIsVisible] = useState<boolean>(false);
 	const [currentPage, setCurrentPage] = useState<number>(0);
@@ -31,18 +31,18 @@ export function StopInquirySection({ description, title }: Props) {
 
 	const [progress, setProgress] = useState<number>(0);
 
-	const t = useTranslations('stops.Inquiry');
+	const t = useTranslations('stops.Probe');
 	//
 	// B. Fetch Data
 	useEffect(() => {
-		const ended = localStorage.getItem('Stops|InquiryEnded') === 'true';
-		const participates = localStorage.getItem('Stops|InquiryOptIn') === 'true';
-		const currentQuestion = parseInt(localStorage.getItem('Stops|InquiryCurrentPage') || '0');
-		const firstTime = localStorage.getItem('Stops|InquiryFirstTime') === 'true';
+		const ended = localStorage.getItem('Stops|ProbeEnded') === 'true';
+		const participates = localStorage.getItem('Stops|ProbeOptIn') === 'true';
+		const currentQuestion = parseInt(localStorage.getItem('Stops|ProbeCurrentPage') || '0');
+		const firstTime = localStorage.getItem('Stops|ProbeFirstTime') === 'true';
 		const messageShown = localStorage.getItem('Stops|EndingMessageShown') === 'true';
 
 		setCurrentPage(currentQuestion);
-		setInquiryEnded(ended);
+		setProbeEnded(ended);
 		setParticipatingStatus(participates);
 		setIsFirstTime(firstTime);
 		setIsMessageShown(messageShown);
@@ -56,10 +56,10 @@ export function StopInquirySection({ description, title }: Props) {
 	}, []);
 
 	useEffect(() => {
-		if (isInquiryEnded) {
+		if (isProbeEnded) {
 			setIsVisible(true);
 		}
-	}, [isInquiryEnded]);
+	}, [isProbeEnded]);
 
 	useEffect(() => {
 		const progressPercentage = currentPage / 4 * 100;
@@ -71,24 +71,24 @@ export function StopInquirySection({ description, title }: Props) {
 		const currentQuestion = currentPage + 1;
 
 		console.log('You opted in.');
-		localStorage.setItem('Stops|InquiryOptIn', 'true');
-		localStorage.setItem('Stops|InquiryFirstTime', 'false');
-		localStorage.setItem('Stops|InquiryEnded', 'false');
-		localStorage.setItem('Stops|InquiryCurrentPage', currentQuestion.toString());
+		localStorage.setItem('Stops|ProbeOptIn', 'true');
+		localStorage.setItem('Stops|ProbeFirstTime', 'false');
+		localStorage.setItem('Stops|ProbeEnded', 'false');
+		localStorage.setItem('Stops|ProbeCurrentPage', currentQuestion.toString());
 
 		setCurrentPage(currentQuestion);
 		setParticipatingStatus(true);
-		setInquiryEnded(false);
+		setProbeEnded(false);
 	};
 	const handleOptOut = () => {
 		console.log('You opted out.');
-		localStorage.setItem('Stops|InquiryOptIn', 'false');
-		localStorage.setItem('Stops|InquiryFirstTime', 'false');
-		localStorage.setItem('Stops|InquiryEnded', 'true');
+		localStorage.setItem('Stops|ProbeOptIn', 'false');
+		localStorage.setItem('Stops|ProbeFirstTime', 'false');
+		localStorage.setItem('Stops|ProbeEnded', 'true');
 		localStorage.setItem('Stops|EndingMessageShown', 'true');
 
 		setParticipatingStatus(false);
-		setInquiryEnded(true);
+		setProbeEnded(true);
 		setIsVisible(false);
 	};
 
@@ -96,17 +96,17 @@ export function StopInquirySection({ description, title }: Props) {
 		const nextPage = currentPage + 1;
 
 		if (nextPage === 5) {
-			console.log('Inquiry ended');
-			localStorage.setItem('Stops|InquiryEnded', 'true');
+			console.log('Probe ended');
+			localStorage.setItem('Stops|ProbeEnded', 'true');
 			localStorage.setItem('Stops|EndingMessageShown', 'true');
-			setInquiryEnded(true);
+			setProbeEnded(true);
 			setParticipatingStatus(false);
 			setIsVisible(false);
 			return;
 		}
 
 		setCurrentPage(nextPage);
-		localStorage.setItem('Stops|InquiryCurrentPage', nextPage.toString());
+		localStorage.setItem('Stops|ProbeCurrentPage', nextPage.toString());
 	};
 
 	const handleQuestion1 = (e) => {
@@ -133,14 +133,14 @@ export function StopInquirySection({ description, title }: Props) {
 	// D. Render Component
 	return (
 		<>
-			{!isInquiryEnded && !isMessageShown ? (
+			{!isProbeEnded && !isMessageShown ? (
 				<Surface>
 					<Section withGap withPadding>
 						{currentPage > 0 && (<Progress className={styles.progressBar} color="green" transitionDuration={800} value={progress} />)}
 						{currentPage === 0 && (
 							<>
-								<p className={styles.inquiryTitle}>{title}</p>
-								<p className={styles.inquiryDescription}>{description}</p>
+								<p className={styles.probeTitle}>{title}</p>
+								<p className={styles.probeDescription}>{description}</p>
 								<div className={styles.actionButton}>
 									<Button onClick={handleParticipation}>{t('optin')}</Button>
 									<Button onClick={handleOptOut}>{t('optout')}</Button>
@@ -149,7 +149,7 @@ export function StopInquirySection({ description, title }: Props) {
 						)}
 						{currentPage === 1 && (
 							<div>
-								<p className={styles.inquiryTitle}>{t('Stop|Inquiry|Question1')}</p>
+								<p className={styles.probeTitle}>{t('stop|probe|question1')}</p>
 								<div className={styles.possibleAnswersContainer}>
 									<Button onClick={e => handleQuestion1(e)} value="1"> <IconMoodAngry size={40} /> </Button>
 									<Button onClick={e => handleQuestion1(e)} value="2"> <IconMoodSad size={40} /> </Button>
@@ -160,7 +160,7 @@ export function StopInquirySection({ description, title }: Props) {
 						)}
 						{currentPage === 2 && (
 							<div>
-								<p className={styles.inquiryTitle}>{t('Stop|Inquiry|Question2')}</p>
+								<p className={styles.probeTitle}>{t('stop|probe|question2')}</p>
 								<Radio.Group onChange={handleQuestion2} value={stopQuestion2Answer}>
 									<div className={styles.possibleAnswersContainer}>
 										<Radio label="Opção 1" value="1" />
@@ -173,7 +173,7 @@ export function StopInquirySection({ description, title }: Props) {
 						)}
 						{currentPage === 3 && (
 							<div>
-								<p className={styles.inquiryTitle}>{t('Stop|Inquiry|Question3')}</p>
+								<p className={styles.probeTitle}>{t('stop|probe|question3')}</p>
 								<Radio.Group onChange={handleQuestion3} value={stopQuestion3Answer}>
 									<div className={styles.possibleAnswersContainer}>
 										<Radio label="Opção 1" value="1" />
@@ -186,7 +186,7 @@ export function StopInquirySection({ description, title }: Props) {
 						)}
 						{currentPage === 4 && (
 							<div>
-								<p className={styles.inquiryTitle}>{t('Stop|Inquiry|Question4')}</p>
+								<p className={styles.probeTitle}>{t('stop|probe|question4')}</p>
 								<Radio.Group onChange={handleQuestion4} value={stopQuestion4Answer}>
 									<div className={styles.possibleAnswersContainer}>
 										<Radio label="Opção 1" value="1" />
@@ -201,7 +201,7 @@ export function StopInquirySection({ description, title }: Props) {
 						{currentPage > 0 && (<Button onClick={handleNextQuestion}>{t('submit')}</Button>)}
 					</Section>
 				</Surface>
-			) : isInquiryEnded && !isMessageShown ? (
+			) : isProbeEnded && !isMessageShown ? (
 				<div className={styles.fadeOut}>
 					<Surface>
 						<Section withGap withPadding>
