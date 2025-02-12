@@ -1,7 +1,7 @@
 /* * */
 
 import { Loader } from '@/components/common/Loader';
-import { useAnalyticsContext } from '@/contexts/Analytics.context';
+import { useConsentContext } from '@/contexts/Consent.context';
 import { useProfileContext } from '@/contexts/Profile.context';
 import { Tooltip } from '@mantine/core';
 import { IconHeart, IconHeartFilled, IconHeartX } from '@tabler/icons-react';
@@ -29,13 +29,13 @@ export function FavoriteToggle({ color, isActive, onToggle }: Props) {
 	const t = useTranslations('common.FavoriteToggle');
 
 	const profileContext = useProfileContext();
-	const analyticsContext = useAnalyticsContext();
+	const consentContext = useConsentContext();
 
 	//
 	// B. Handle Actions
 
 	const handleRequestConsent = () => {
-		analyticsContext.actions.reset();
+		consentContext.actions.ask();
 	};
 
 	//

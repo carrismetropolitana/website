@@ -91,15 +91,26 @@
 			"question_6": {
 				"accept": "Aceitar Política de Cookies",
 				"enabled": "Política de Cookies aceite",
+				"options": {
+					"analytics": {
+						"disable": "Dados Analíticos Aceites. Recusar?",
+						"enable": "Aceitar Dados Analíticos",
+						"label": "Dados Analíticos"
+					},
+					"functional": {
+						"disable": "Dados Funcionais Aceites. Recusar?",
+						"enable": "Aceitar Dados Funcionais",
+						"label": "Dados Funcionais"
+					}
+				},
 				"paragraphs": {
-					"1": "Por serem essenciais ao bom funcionamento do site, a utilização de cookies estritamente necessários ou essenciais, não carece de consentimento prévio por parte do utilizador. Os demais (cookies de funcionalidade, performance ou publicidade) apenas serão utilizados caso o utilizador expressamente autorize a sua utilização.",
-					"2": "Uma vez aceite, pode a qualquer momento revogar esse consentimento, bastando para o efeito voltar à Política de Cookies e selecionar “Recusar e Limpar Dados”."
+					"1": "Por serem essenciais ao bom funcionamento do site, a utilização de cookies estritamente necessários ou essenciais, não carece de consentimento prévio por parte do utilizador. Os demais (cookies de funcionalidade, performance ou publicidade) apenas serão utilizados caso o utilizador expressamente autorize a sua utilização."
 				},
 				"refuse": "Recusar e Limpar Dados",
 				"refuse_modal": {
 					"cancel": "Cancelar",
 					"confirm": "Sim, apagar tudo",
-					"description": "Ao retirar o consentimento irá apagar todos os dados guardados neste site, incluindo todas as paragens e linhas favoritas.",
+					"description": "Ao retirar o consentimento serão apagados todos os dados guardados neste site, incluindo as suas paragens e linhas favoritas.",
 					"title": "Retirar consentimento"
 				},
 				"title": "Consentimento do utilizador:"
@@ -360,9 +371,18 @@
 	},
 	"analytics": {
 		"ConsentPopup": {
-			"accept": "OK",
-			"privacy_policy": "Consultar Política de Cookies",
-			"refuse": "Não, obrigado",
+			"actions": {
+				"accept": "OK",
+				"hide_options": "Esconder Opções",
+				"refuse": "Não, obrigado",
+				"save": "Guardar",
+				"show_options": "Mostrar Opções"
+			},
+			"options": {
+				"analytics": "Guardar dados analíticos",
+				"functional": "Guardar dados funcionais"
+			},
+			"policy_page": "Consultar Política de Cookies",
 			"text": "Com o objetivo de melhorar a performance, os conteúdos e a segurança deste site, a TML pretende recorrer à utilização de cookies ou tecnologias similares.",
 			"title": "Respeitamos a sua Privacidade"
 		}
@@ -1127,6 +1147,28 @@
 			}
 		}
 	},
+	"options": {
+		"Agency": {
+			"41": "Viação Alvorada",
+			"42": "Rodoviária de Lisboa",
+			"43": "TST",
+			"44": "Alsa Todi"
+		},
+		"VehicleEmissionClass": {
+			"euro_1": "EURO 1",
+			"euro_2": "EURO 2",
+			"euro_3": "EURO 3",
+			"euro_4": "EURO 4",
+			"euro_5": "EURO 5",
+			"euro_6": "EURO 6"
+		},
+		"VehiclePropulsion": {
+			"diesel": "Diesel",
+			"electricity": "Eletricidade",
+			"lpg_auto": "GPL",
+			"natural_gas": "Gás Natural"
+		}
+	},
 	"periods": {
 		"PeriodsWidgetItem": {
 			"from": "inicia a {value, date, dayShort} {value, date, monthShort} {value, date, yearLong}",
@@ -1319,9 +1361,10 @@
 				"links": {
 					"about": "Sobre a CMetropolitana",
 					"drivers": "Recrutamento de Motoristas",
-					"metrics": "A nosssa operação ao vivo",
+					"metrics": "A nossa Operação ao Vivo",
 					"news": "Notícias",
-					"open-data": "Dados Abertos"
+					"open-data": "Dados Abertos",
+					"vehicles": "Frota"
 				}
 			},
 			"schedules": {
@@ -1564,5 +1607,51 @@
 	},
 	"utils": {
 		"number": "{value, number}"
+	},
+	"vehicles": {
+		"VehiclesList": {
+			"heading": "Frota",
+			"subheading": "Descubra todos os nossos veículos e acompanhe em tempo real a operação completa da CMetropolitana."
+		},
+		"VehiclesListDetails": {
+			"no_data": "Selecione um veículo",
+			"unknown": "Desconhecido"
+		},
+		"VehiclesListInfoBlock": {
+			"heading": "Informação do Veículo"
+		},
+		"VehiclesListToolbar": {
+			"filters": {
+				"by_agency": {
+					"placeholder": "Todos os operadores"
+				},
+				"by_bikes": {
+					"options": {
+						"false": "Não",
+						"true": "Sim"
+					},
+					"placeholder": "Permite Bicicletas"
+				},
+				"by_make_model": {
+					"placeholder": "Marca e Modelo"
+				},
+				"by_propulsion": {
+					"placeholder": "Todos os tipos de propulsão"
+				},
+				"by_search": {
+					"placeholder": "Pesquisar por id, matrícula..."
+				},
+				"by_wheelchair": {
+					"options": {
+						"false": "Não",
+						"true": "Sim"
+					},
+					"placeholder": "Permite Mobilidade Reduzida"
+				}
+
+			},
+			"found_items_counter": "{count, plural, =0 {Nenhum Veículo encontrado.} one {Encontrado # veículo:} other {Encontrados # veículos:}}",
+			"select_vehicle": "Selecione um veículo"
+		}
 	}
 }

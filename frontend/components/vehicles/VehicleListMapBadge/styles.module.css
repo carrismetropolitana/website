@@ -1,0 +1,38 @@
+/* * */
+/* BADGE */
+
+.badge {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	border-radius: 999px;
+	color: var(--color-system-background-100);
+	background-color: var(--color-system-text-200);
+	font-weight: var(--font-weight-extrabold);
+	letter-spacing: 1px;
+	line-height: 1;
+	position: relative;
+
+}
+
+.badge.md {
+	font-size: 16px;
+	min-width: 65px;
+	max-width: 65px;
+	min-height: 26px;
+	max-height: 26px;
+	text-align: center;
+	vertical-align: middle;
+	display: flex;
+
+}
+
+/* * */
+
+/* LINE HEADER */
+.line_name{
+	color: var(--color-system-text-100);
+	font-size: var(--font-size-subtitle);
+	font-weight: var(--font-weight-extrabold);
+}
+/* * */

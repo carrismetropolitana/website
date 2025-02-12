@@ -62,7 +62,7 @@ export function LinesDetailMetricsService() {
 				...service,
 				fail_trip_count: service.total_trip_count - service.pass_trip_count,
 				operational_date: DateTime.fromFormat(service.operational_date, 'yyyyMMdd').toFormat('ccc, dd LLL yyyy', { locale: 'pt-PT' }),
-				pass_trip_percentage: (service.pass_trip_percentage * 100).toFixed(2),
+				pass_trip_percentage: Math.round(((service.pass_trip_percentage * 100) + Number.EPSILON) * 100) / 100,
 			}));
 	}, [last15DaysService]);
 

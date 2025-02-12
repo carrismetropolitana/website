@@ -2,6 +2,7 @@
 
 /* * */
 
+import { Link } from '@/components/common/Link';
 import { DebugToggle } from '@/components/footer/DebugToggle';
 import { SocialIcons } from '@/components/footer/SocialIcons';
 import { VersionControl } from '@/components/footer/VersionControl';
@@ -10,7 +11,6 @@ import { Surface } from '@/components/layout/Surface';
 import { useDebugContext } from '@/contexts/Debug.context';
 import { footerNavigationGroup } from '@/settings/navigation.settings';
 import { useTranslations } from 'next-intl';
-import Link from 'next/link';
 
 import styles from './styles.module.css';
 

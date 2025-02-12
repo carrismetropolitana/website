@@ -12,7 +12,7 @@ import styles from './styles.module.css';
 /* * */
 
 export const MapViewStyleVehiclesPrimaryLayerId = 'default-layer-vehicles-regular';
-export const MapViewStyleVehiclesInteractiveLayerId = '';
+export const MapViewStyleVehiclesInteractiveLayerId = 'default-layer-vehicles-regular';
 
 /* * */
 

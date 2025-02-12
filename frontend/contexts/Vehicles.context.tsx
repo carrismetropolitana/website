@@ -2,7 +2,7 @@
 
 /* * */
 
-import type { Vehicle } from '@/types/vehicles.types';
+import type { Vehicle } from '@carrismetropolitana/api-types/vehicles';
 
 import { getBaseGeoJsonFeatureCollection } from '@/utils/map.utils';
 import { Routes } from '@/utils/routes';
@@ -14,6 +14,8 @@ import useSWR from 'swr';
 
 interface VehiclesContextState {
 	actions: {
+		getAllVehicles: () => undefined | Vehicle[]
+		getAllVehiclesGeoJsonFC: () => GeoJSON.FeatureCollection | undefined
 		getVehicleById: (vehicleId: string) => undefined | Vehicle
 		getVehicleByIdGeoJsonFC: (vehicleId: string) => GeoJSON.FeatureCollection | undefined
 		getVehiclesByLineId: (lineId: string) => Vehicle[]
@@ -55,7 +57,7 @@ export const VehiclesContextProvider = ({ children }) => {
 
 	const allVehiclesData = useMemo(() => {
 		const now = DateTime.now().toSeconds();
-		return fetchedVehiclesData?.filter((vehicle: Vehicle) => vehicle.timestamp > now - 180) || [];
+		return fetchedVehiclesData?.filter((vehicle: Vehicle) => vehicle.timestamp ?? 0 > now - 180) || [];
 	}, [fetchedVehiclesData]);
 
 	//
@@ -70,6 +72,16 @@ export const VehiclesContextProvider = ({ children }) => {
 		if (!vehicle) return;
 		const collection = getBaseGeoJsonFeatureCollection();
 		collection.features.push(transformVehicleDataIntoGeoJsonFeature(vehicle));
+		return collection;
+	};
+
+	const getAllVehicles = (): undefined | Vehicle[] => {
+		return allVehiclesData;
+	};
+
+	const getAllVehiclesGeoJsonFC = (): GeoJSON.FeatureCollection | undefined => {
+		const collection = getBaseGeoJsonFeatureCollection();
+		allVehiclesData.forEach(vehicle => collection.features.push(transformVehicleDataIntoGeoJsonFeature(vehicle)));
 		return collection;
 	};
 
@@ -114,8 +126,11 @@ export const VehiclesContextProvider = ({ children }) => {
 
 	const contextValue: VehiclesContextState = {
 		actions: {
+			getAllVehicles,
+			getAllVehiclesGeoJsonFC,
 			getVehicleById,
 			getVehicleByIdGeoJsonFC,
+			// getVehicleBySearch,
 			getVehiclesByLineId,
 			getVehiclesByLineIdGeoJsonFC,
 			getVehiclesByPatternId,
@@ -145,17 +160,17 @@ export const VehiclesContextProvider = ({ children }) => {
 
 /* * */
 
-function transformVehicleDataIntoGeoJsonFeature(vehicleData: Vehicle): GeoJSON.Feature<GeoJSON.Point> {
+export function transformVehicleDataIntoGeoJsonFeature(vehicleData: Vehicle): GeoJSON.Feature<GeoJSON.Point> {
 	return {
 		geometry: {
-			coordinates: [vehicleData.lon, vehicleData.lat],
+			coordinates: [vehicleData.lon || 0, vehicleData.lat || 0],
 			type: 'Point',
 		},
 		properties: {
 			bearing: vehicleData.bearing,
 			block_id: vehicleData.block_id,
 			current_status: vehicleData.current_status,
-			delay: Math.floor(Date.now() / 1000) - vehicleData.timestamp,
+			delay: Math.floor(Date.now() / 1000) - (vehicleData.timestamp || 0),
 			id: vehicleData.id,
 			line_id: vehicleData.line_id,
 			pattern_id: vehicleData.id,
@@ -165,7 +180,7 @@ function transformVehicleDataIntoGeoJsonFeature(vehicleData: Vehicle): GeoJSON.F
 			speed: vehicleData.speed,
 			stop_id: vehicleData.stop_id,
 			timestamp: vehicleData.timestamp,
-			timeString: new Date(vehicleData.timestamp * 1000).toLocaleString(),
+			timeString: new Date((vehicleData.timestamp || 0) * 1000).toLocaleString(),
 			trip_id: vehicleData.trip_id,
 		},
 		type: 'Feature',

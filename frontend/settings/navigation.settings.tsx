@@ -3,7 +3,7 @@
 import type { NavigationGroup } from '@/types/navigation.types';
 
 import { RoutesFooter, RoutesPricing, RoutesSchedule, RoutesSupport } from '@/utils/routes';
-import { IconAlertTriangle, IconArrowLoopRight, IconBellSchool, IconBuildingStore, IconBusStop, IconChartBar, IconCreditCardPay, IconDirections, IconHelpHexagon, IconHomeSpark, IconMapQuestion, IconMessages, IconNews, IconPrompt, IconTicket, IconUmbrella, IconUserHeart } from '@tabler/icons-react';
+import { IconAlertTriangle, IconArrowLoopRight, IconBellSchool, IconBuildingStore, IconBus, IconBusStop, IconChartBar, IconCreditCardPay, IconDirections, IconHelpHexagon, IconHomeSpark, IconMapQuestion, IconMessages, IconNews, IconPrompt, IconTicket, IconUmbrella, IconUserHeart } from '@tabler/icons-react';
 
 /* * */
 
@@ -47,6 +47,7 @@ export const mainNavigationGroup: NavigationGroup[] = [
 			{ _id: 'open-data', href: '/open-data', icon: <IconPrompt /> },
 			{ _id: 'drivers', href: '/drivers', icon: <IconUserHeart />, target: '_blank' },
 			{ _id: 'about', href: '/about', icon: <IconHomeSpark /> },
+			{ _id: 'vehicles', href: '/vehicles', icon: <IconBus /> },
 		],
 	},
 

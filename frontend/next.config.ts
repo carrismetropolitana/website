@@ -26,6 +26,7 @@ const nextConfig: NextConfig = {
 			{ destination: '/stops', permanent: true, source: '/paragens' },
 			//
 			{ destination: '/vehicles', permanent: true, source: '/veiculos' },
+			{ destination: '/vehicles', permanent: true, source: '/frota' },
 			//
 			{ destination: '/news', permanent: true, source: '/noticias' },
 			//
