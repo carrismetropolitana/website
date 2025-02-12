@@ -9,13 +9,14 @@
     margin-top: 10px;
     margin: 0 auto;
     display: flex;
-    flex-direction: row-reverse;
+    flex-direction: row;
+    align-content: flex-end;
     flex-wrap: wrap;
     gap: 10px;
   }
 
 .actionButton button{
-  width: 100px;
+  width: 200px;
 }
 
 /* * */
