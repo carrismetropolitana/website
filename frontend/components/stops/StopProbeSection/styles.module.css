@@ -35,6 +35,8 @@
   font-size: var(--font-size-title);
   font-weight: var(--font-weight-title);
   color: var(--color-system-text-100);
+  align-items: center;
+  display: flex;
 }
 
 /* * */
