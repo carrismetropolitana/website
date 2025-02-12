@@ -116,6 +116,34 @@ export interface RemoveFavoriteStopProperties {
   stop_id: string;
 }
 
+export interface StopProbeQuestion1Properties {
+  answer: string;
+  answer_date: string;
+  question_id: string;
+  question_title: string;
+}
+
+export interface StopProbeQuestion2Properties {
+  answer: string;
+  answer_date: string;
+  question_id: string;
+  question_title: string;
+}
+
+export interface StopProbeQuestion3Properties {
+  answer: string;
+  answer_date: string;
+  question_id: string;
+  question_title: string;
+}
+
+export interface StopProbeQuestion4Properties {
+  answer: string;
+  answer_date: string;
+  question_id: string;
+  question_title: string;
+}
+
 export class AcceptAnalyticsConsent implements BaseEvent {
   event_type = 'Accept Analytics Consent';
 }
@@ -185,6 +213,46 @@ export class RemoveFavoriteStop implements BaseEvent {
 
   constructor(
     public event_properties: RemoveFavoriteStopProperties,
+  ) {
+    this.event_properties = event_properties;
+  }
+}
+
+export class StopProbeQuestion1 implements BaseEvent {
+  event_type = 'Stop Probe Question 1';
+
+  constructor(
+    public event_properties: StopProbeQuestion1Properties,
+  ) {
+    this.event_properties = event_properties;
+  }
+}
+
+export class StopProbeQuestion2 implements BaseEvent {
+  event_type = 'Stop Probe Question 2';
+
+  constructor(
+    public event_properties: StopProbeQuestion2Properties,
+  ) {
+    this.event_properties = event_properties;
+  }
+}
+
+export class StopProbeQuestion3 implements BaseEvent {
+  event_type = 'Stop Probe Question 3';
+
+  constructor(
+    public event_properties: StopProbeQuestion3Properties,
+  ) {
+    this.event_properties = event_properties;
+  }
+}
+
+export class StopProbeQuestion4 implements BaseEvent {
+  event_type = 'Stop Probe Question 4';
+
+  constructor(
+    public event_properties: StopProbeQuestion4Properties,
   ) {
     this.event_properties = event_properties;
   }
@@ -431,6 +499,74 @@ export class Ampli {
     options?: EventOptions,
   ) {
     return this.track(new RemoveFavoriteStop(properties), options);
+  }
+
+  /**
+   * Stop Probe Question 1
+   *
+   * [View in Tracking Plan](https://data.eu.amplitude.com/tmlmobilidade/default/events/main/latest/Stop%20Probe%20Question%201)
+   *
+   * Event has no description in tracking plan.
+   *
+   * @param properties The event's properties (e.g. answer)
+   * @param options Amplitude event options.
+   */
+  stopProbeQuestion1(
+    properties: StopProbeQuestion1Properties,
+    options?: EventOptions,
+  ) {
+    return this.track(new StopProbeQuestion1(properties), options);
+  }
+
+  /**
+   * Stop Probe Question 2
+   *
+   * [View in Tracking Plan](https://data.eu.amplitude.com/tmlmobilidade/default/events/main/latest/Stop%20Probe%20Question%202)
+   *
+   * Event has no description in tracking plan.
+   *
+   * @param properties The event's properties (e.g. answer)
+   * @param options Amplitude event options.
+   */
+  stopProbeQuestion2(
+    properties: StopProbeQuestion2Properties,
+    options?: EventOptions,
+  ) {
+    return this.track(new StopProbeQuestion2(properties), options);
+  }
+
+  /**
+   * Stop Probe Question 3
+   *
+   * [View in Tracking Plan](https://data.eu.amplitude.com/tmlmobilidade/default/events/main/latest/Stop%20Probe%20Question%203)
+   *
+   * Event has no description in tracking plan.
+   *
+   * @param properties The event's properties (e.g. answer)
+   * @param options Amplitude event options.
+   */
+  stopProbeQuestion3(
+    properties: StopProbeQuestion3Properties,
+    options?: EventOptions,
+  ) {
+    return this.track(new StopProbeQuestion3(properties), options);
+  }
+
+  /**
+   * Stop Probe Question 4
+   *
+   * [View in Tracking Plan](https://data.eu.amplitude.com/tmlmobilidade/default/events/main/latest/Stop%20Probe%20Question%204)
+   *
+   * Event has no description in tracking plan.
+   *
+   * @param properties The event's properties (e.g. answer)
+   * @param options Amplitude event options.
+   */
+  stopProbeQuestion4(
+    properties: StopProbeQuestion4Properties,
+    options?: EventOptions,
+  ) {
+    return this.track(new StopProbeQuestion4(properties), options);
   }
 }
 

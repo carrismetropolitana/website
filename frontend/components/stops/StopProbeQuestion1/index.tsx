@@ -1,6 +1,7 @@
 /* * */
 
 import { LottiePlayer } from '@/components/common/LottiePlayer';
+import { useAnalyticsContext } from '@/contexts/Analytics.context';
 import { Button } from '@mantine/core';
 import { useTranslations } from 'next-intl';
 import { useState } from 'react';
@@ -20,6 +21,7 @@ export function Question1({ question1Answer }: Props) {
 	// A. Setup Variables
 
 	const t = useTranslations('stops.Probe');
+	const analyticsContext = useAnalyticsContext();
 	const [stopQuestion1Answer, setQuestion1Answer] = useState<string | undefined>(question1Answer);
 
 	//
@@ -29,6 +31,7 @@ export function Question1({ question1Answer }: Props) {
 		const value = e.currentTarget.value;
 		localStorage.setItem('Stops|Question1Answer', value);
 		setQuestion1Answer(value);
+		analyticsContext.actions.capture(ampli => ampli.stopProbeQuestion1({ answer: value, answer_date: new Date().toISOString(), question_id: '1', question_title: t('stop|probe|question1') }));
 	};
 
 	//

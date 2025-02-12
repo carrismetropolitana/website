@@ -1,3 +1,4 @@
+import { useAnalyticsContext } from '@/contexts/Analytics.context';
 import { Radio } from '@mantine/core';
 import { useTranslations } from 'next-intl';
 import { useState } from 'react';
@@ -11,6 +12,7 @@ interface Props {
 export function Question3({ question3Answer }: Props) {
 	// A. Setup Variables
 	const t = useTranslations('stops.Probe');
+	const analyticsContext = useAnalyticsContext();
 	const [stopQuestion3Answer, setQuestion3Answer] = useState<string | undefined>(question3Answer);
 
 	// B. Handle Actions
@@ -18,6 +20,7 @@ export function Question3({ question3Answer }: Props) {
 		const value = e;
 		localStorage.setItem('Stops|Question3Answer', value);
 		setQuestion3Answer(value);
+		analyticsContext.actions.capture(ampli => ampli.stopProbeQuestion3({ answer: value, answer_date: new Date().toISOString(), question_id: '3', question_title: t('stop|probe|question3') }));
 	};
 
 	console.log(stopQuestion3Answer);

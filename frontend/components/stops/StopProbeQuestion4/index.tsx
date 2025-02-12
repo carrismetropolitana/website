@@ -1,5 +1,6 @@
 /* * */
 
+import { useAnalyticsContext } from '@/contexts/Analytics.context';
 import { Radio } from '@mantine/core';
 import { useTranslations } from 'next-intl';
 import { useState } from 'react';
@@ -19,6 +20,7 @@ export function Question4({ question4Answer }: Props) {
 	// A. Setup Variables
 
 	const t = useTranslations('stops.Probe');
+	const analyticsContext = useAnalyticsContext();
 	const [stopQuestion4Answer, setQuestion4Answer] = useState<string | undefined>(question4Answer);
 
 	//
@@ -28,6 +30,7 @@ export function Question4({ question4Answer }: Props) {
 		const value = e;
 		localStorage.setItem('Stops|Question4Answer', value);
 		setQuestion4Answer(value);
+		analyticsContext.actions.capture(ampli => ampli.stopProbeQuestion4({ answer: value, answer_date: new Date().toISOString(), question_id: '4', question_title: t('stop|probe|question4') }));
 	};
 
 	//
