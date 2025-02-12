@@ -9,12 +9,13 @@
     margin-top: 10px;
     margin: 0 auto;
     display: flex;
-    flex-direction: row;
+    flex-direction: row-reverse;
+    flex-wrap: wrap;
     gap: 10px;
   }
 
 .actionButton button{
-  width: 150px;
+  width: 100px;
 }
 
 /* * */
@@ -49,32 +50,33 @@
 }
 
 .fadeOut {
-  animation: fadeOutb 10s forwards;
+  animation: fadeOut 10s forwards;
 }
 
 /* * */
 /* POSSIBLE ANSWERS */
 
-.possibleAnswersContainer{
+.fullWidth {
+  width: 100%;
+}
+
+.possibleAnswersContainer {
   display: flex;
-  flex-direction: row;
   flex-wrap: wrap;
   padding: 25px 0 0 0;
   gap: 10px;
-}
-.possibleAnswersContainer button:first-child{
-  color: red;
+  justify-content: center;
+  width: 100%;
+  align-items: center;
 }
 
-.possibleAnswersContainer button:nth-child(2){
-color: #ffc400
+.possibleAnswersContainer span{
+pointer-events: none;
 }
-.possibleAnswersContainer button:nth-child(3){
-  color: #b0c92e
+.selected{
+  border: 2px solid #000;
 }
-  .possibleAnswersContainer button:nth-child(4){
-    color: #71d302
-}
+
 /* * */
 /* PROGESS BAR */
 
@@ -83,8 +85,31 @@ color: #ffc400
 }
 
 /* * */
-/* QUESTION BUTTON */
+/* PROBE HEADER CONTAINER */
 
-.questionButton span{
-  pointer-events: none;
+.probeHeaderContainer{
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
+}
+
+.probeHeaderDetails{
+  display: flex;
+  flex-direction: column;
+}
+
+/* * */
+/* SUBMIT BUTTON CONTAINER */
+
+.submitContainer{
+  margin: 0 auto;
+  padding: 10px 0;
+  width: 100%;
+}
+
+.submitContainer button {
+  width: 100%;
 }
