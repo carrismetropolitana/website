@@ -26,7 +26,8 @@ export function Question3({ question3Answer }: Props) {
 		const value = e;
 		localStorage.setItem('Stops|Question3Answer', value);
 		setQuestion3Answer(value);
-		analyticsContext.actions.capture(ampli => ampli.stopProbeQuestion3({ answer: value, answer_date: new Date().toISOString(), question_id: '3', question_title: t('stop|probe|question3') }));
+		analyticsContext.actions.capture(ampli => ampli.stopsProbeAnswered({ question_3: value }));
+		// analyticsContext.actions.capture(ampli => ampli.stopProbeQuestion3({ answer: value, answer_date: new Date().toISOString(), question_id: '3', question_title: t('stop|probe|question3') }));
 	};
 	//
 	// C. Render Components
