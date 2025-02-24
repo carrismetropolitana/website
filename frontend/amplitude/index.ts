@@ -57,11 +57,6 @@ export interface IdentifyProperties {
   referring_domain?: string;
 }
 
-export interface IdentifyProperties {
-  referrer?: string;
-  referring_domain?: string;
-}
-
 export interface AddFavoriteLineProperties {
   /**
    * Holds a the ID of the entity "Line", which is usually a 4-digit numeric string.
@@ -596,66 +591,6 @@ export class ChangeStopsViewType implements BaseEvent {
   }
 }
 
-export class AlertClicked implements BaseEvent {
-  event_type = 'Alert Clicked';
-
-  constructor(
-    public event_properties: AlertClickedProperties,
-  ) {
-    this.event_properties = event_properties;
-  }
-}
-
-export class AlertsFilterChanged implements BaseEvent {
-  event_type = 'Alerts Filter Changed';
-
-  constructor(
-    public event_properties: AlertsFilterChangedProperties,
-  ) {
-    this.event_properties = event_properties;
-  }
-}
-
-export class CaptureAlertsReferer implements BaseEvent {
-  event_type = 'Capture Alerts Referer';
-
-  constructor(
-    public event_properties: CaptureAlertsRefererProperties,
-  ) {
-    this.event_properties = event_properties;
-  }
-}
-
-export class CaptureFrontendError implements BaseEvent {
-  event_type = 'Capture Frontend Error';
-
-  constructor(
-    public event_properties: CaptureFrontendErrorProperties,
-  ) {
-    this.event_properties = event_properties;
-  }
-}
-
-export class CaptureNewsReferer implements BaseEvent {
-  event_type = 'Capture News Referer';
-
-  constructor(
-    public event_properties: CaptureNewsRefererProperties,
-  ) {
-    this.event_properties = event_properties;
-  }
-}
-
-export class ChangeStopsViewType implements BaseEvent {
-  event_type = 'Change Stops View Type';
-
-  constructor(
-    public event_properties: ChangeStopsViewTypeProperties,
-  ) {
-    this.event_properties = event_properties;
-  }
-}
-
 export class ClickDebugToggle implements BaseEvent {
   event_type = 'Click Debug Toggle';
 
@@ -726,71 +661,11 @@ export class OpenGoogleMapsClicked implements BaseEvent {
   }
 }
 
-export class DatePeriodSelected implements BaseEvent {
-  event_type = 'Date Period Selected';
-
-  constructor(
-    public event_properties: DatePeriodSelectedProperties,
-  ) {
-    this.event_properties = event_properties;
-  }
-}
-
-export class GithubClicked implements BaseEvent {
-  event_type = 'Github Clicked';
-
-  constructor(
-    public event_properties: GithubClickedProperties,
-  ) {
-    this.event_properties = event_properties;
-  }
-}
-
-export class LostAndFoundAreaClicked implements BaseEvent {
-  event_type = 'Lost and Found Area Clicked';
-
-  constructor(
-    public event_properties: LostAndFoundAreaClickedProperties,
-  ) {
-    this.event_properties = event_properties;
-  }
-}
-
-export class OpenCardViagem2024 implements BaseEvent {
-  event_type = 'Open Card Viagem 2024';
-
-  constructor(
-    public event_properties: OpenCardViagem2024Properties,
-  ) {
-    this.event_properties = event_properties;
-  }
-}
-
-export class OpenGoogleMapsClicked implements BaseEvent {
-  event_type = 'Open GoogleMaps Clicked';
-
-  constructor(
-    public event_properties: OpenGoogleMapsClickedProperties,
-  ) {
-    this.event_properties = event_properties;
-  }
-}
-
 export class Ping implements BaseEvent {
   event_type = 'Ping';
 
   constructor(
     public event_properties: PingProperties,
-  ) {
-    this.event_properties = event_properties;
-  }
-}
-
-export class PlannerUsed implements BaseEvent {
-  event_type = 'Planner used';
-
-  constructor(
-    public event_properties: PlannerUsedProperties,
   ) {
     this.event_properties = event_properties;
   }
@@ -1050,12 +925,10 @@ export class Ampli {
    *
    * @param userId The user's id.
    * @param properties The user properties.
-   * @param properties The user properties.
    * @param options Optional event options.
    */
   identify(
     userId: string | undefined,
-    properties?: IdentifyProperties,
     properties?: IdentifyProperties,
     options?: EventOptions,
   ): PromiseResult<Result> {
@@ -1068,12 +941,6 @@ export class Ampli {
     }
 
     const amplitudeIdentify = new amplitude.Identify();
-    const eventProperties = properties;
-    if (eventProperties != null) {
-      for (const [key, value] of Object.entries(eventProperties)) {
-        amplitudeIdentify.set(key, value);
-      }
-    }
     const eventProperties = properties;
     if (eventProperties != null) {
       for (const [key, value] of Object.entries(eventProperties)) {
