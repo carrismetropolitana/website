@@ -9,6 +9,7 @@ import { useQueryState } from 'nuqs';
 import { createContext, useContext, useEffect, useMemo, useState } from 'react';
 
 import { useAlertsContext } from './Alerts.context';
+import { useAnalyticsContext } from './Analytics.context';
 
 /* * */
 
@@ -88,6 +89,7 @@ export const AlertsListContextProvider = ({ children }) => {
 	// B. Fetch data
 
 	const alertsContext = useAlertsContext();
+	const analyticsContext = useAnalyticsContext();
 
 	const allAlertsData = useMemo(() => alertsContext.data.simplified, [alertsContext.data.simplified]);
 
@@ -140,11 +142,11 @@ export const AlertsListContextProvider = ({ children }) => {
 		});
 
 		if (filterByLineIdState) {
-			filterResult = filterResult.filter(alert => alert.informed_entity.some(entity => entity.lineId === filterByLineIdState));
+			filterResult = filterResult.filter(alert => alert.informed_entity.some(entity => entity.line_id === filterByLineIdState));
 		}
 
 		if (filterByStopIdState) {
-			filterResult = filterResult.filter(alert => alert.informed_entity.some(entity => entity.stopId === filterByStopIdState));
+			filterResult = filterResult.filter(alert => alert.informed_entity.some(entity => entity.stop_id === filterByStopIdState));
 		}
 
 		// TODO: municipalityId does not exist in the informed_entity, needs to be added in API
@@ -187,26 +189,32 @@ export const AlertsListContextProvider = ({ children }) => {
 
 	const updateFilterByDate = (value: AlertsListContextState['filters']['by_date']) => {
 		setFilterByDateState(value);
+		analyticsContext.actions.capture(ampli => ampli.alertsFilterChanged({ filter_type: 'by_date', filter_value: value || '' }));
 	};
 
 	const updateFilterByLineId = (value: AlertsListContextState['filters']['line_id']) => {
 		setFilterByLineIdState(value);
+		analyticsContext.actions.capture(ampli => ampli.alertsFilterChanged({ filter_type: 'by_line_id', filter_value: value || '' }));
 	};
 
 	const updateFilterByStopId = (value: AlertsListContextState['filters']['stop_id']) => {
 		setFilterByStopIdState(value);
+		analyticsContext.actions.capture(ampli => ampli.alertsFilterChanged({ filter_type: 'by_stop_id', filter_value: value || '' }));
 	};
 
 	const updateFilterBySearchQuery = (value: AlertsListContextState['filters']['search_query']) => {
 		setFilterBySearchQueryState(value);
+		analyticsContext.actions.captureWithDelay(ampli => ampli.searchAlert({ search_value: value || '' }));
 	};
 
 	const updateFilterByCause = (value: AlertsListContextState['filters']['cause']) => {
 		setFilterByCauseState(value);
+		analyticsContext.actions.capture(ampli => ampli.alertsFilterChanged({ filter_type: 'by_cause', filter_value: value || '' }));
 	};
 
 	const updateFilterByEffect = (value: AlertsListContextState['filters']['effect']) => {
 		setFilterByEffectState(value);
+		analyticsContext.actions.capture(ampli => ampli.alertsFilterChanged({ filter_type: 'by_effect', filter_value: value || '' }));
 	};
 
 	//

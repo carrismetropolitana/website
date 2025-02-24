@@ -40,14 +40,14 @@ export enum AlertEffect {
  * Please use a SimplifiedAlert as many convenience operations are already correctly applied.
  */
 export interface Alert {
-	activePeriod: TimeRange[]
+	active_period: TimeRange
 	alert_id: string
 	cause: AlertCause
-	descriptionText: TranslatedString
+	description_text: TranslatedString
 	effect: AlertEffect
-	headerText: TranslatedString
+	header_text: TranslatedString
 	image: TranslatedImage
-	informedEntity: EntitySelector[]
+	informed_entity: EntitySelector[]
 	url: TranslatedString
 }
 

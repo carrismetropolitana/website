@@ -11,6 +11,8 @@ import { createDocCollection } from '@/hooks/useOtherSearch';
 import { getBaseGeoJsonFeatureCollection } from '@/utils/map.utils';
 import { createContext, useContext, useEffect, useRef, useState } from 'react';
 
+import { useAnalyticsContext } from './Analytics.context';
+
 /* * */
 
 interface StopsListContextState {
@@ -64,6 +66,7 @@ export const StopsListContextProvider = ({ children }) => {
 	const profileContext = useProfileContext();
 	const stopsContext = useStopsContext();
 	const locationsContext = useLocationsContext();
+	const analyticsContext = useAnalyticsContext();
 
 	const searchHook = useRef<{ search: (query: string) => Stop[] }>(undefined);
 
@@ -216,6 +219,7 @@ export const StopsListContextProvider = ({ children }) => {
 
 	const updateFilterByCurrentView = (value: StopsListContextState['filters']['by_current_view']) => {
 		setFilterByCurrentViewState(value);
+		analyticsContext.actions.capture(ampli => ampli.changeStopsViewType({ view_type: value }));
 	};
 
 	const updateFilterByFacility = (value: StopsListContextState['filters']['by_facility']) => {
@@ -228,6 +232,7 @@ export const StopsListContextProvider = ({ children }) => {
 
 	const updateFilterBySearch = (value: StopsListContextState['filters']['by_search']) => {
 		setFilterBySearchState(value);
+		analyticsContext.actions.captureWithDelay(ampli => ampli.searchStop({ search_value: value }));
 	};
 
 	//

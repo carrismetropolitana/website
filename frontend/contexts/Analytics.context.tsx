@@ -6,6 +6,7 @@ import { type Ampli, ampli } from '@/amplitude';
 import { useConsentContext } from '@/contexts/Consent.context';
 import pjson from '@/package.json';
 import { expireAllCookies } from '@/utils/expire-all-cookies.util';
+import { DateTime } from 'luxon';
 import { createContext, useContext, useEffect } from 'react';
 
 /* * */
@@ -13,6 +14,7 @@ import { createContext, useContext, useEffect } from 'react';
 interface AnalyticsContextState {
 	actions: {
 		capture: (callback: (instance: Ampli) => void) => void
+		captureWithDelay: (callback: (instance: Ampli) => void) => void
 	}
 }
 
@@ -42,18 +44,18 @@ export const AnalyticsContextProvider = ({ children }) => {
 	// B. Handle actions
 
 	useEffect(() => {
-		if (consentContext.data.enabled_analytics && !ampli?.isLoaded) {
+		if (consentContext.data.init_status && consentContext.data.enabled_analytics && !ampli?.isLoaded) {
 			ampli.load({ client: { configuration: { appVersion: pjson.version, autocapture: false } }, environment: 'default' });
 			ampli.client.setOptOut(false);
 		}
-		else if (ampli?.isLoaded) {
+		else if (consentContext.data.init_status && ampli?.isLoaded) {
 			ampli.client.setOptOut(true);
 			expireAllCookies();
 		}
-	}, [consentContext.data.enabled_analytics, ampli?.isLoaded]);
+	}, [consentContext.data.init_status, consentContext.data.enabled_analytics, ampli?.isLoaded]);
 
 	useEffect(() => {
-		// Capture a ping event every 30 seconds
+		// Capture a ping event every minute
 		const interval = setInterval(() => {
 			if (typeof window !== 'undefined' && ampli?.isLoaded) {
 				capture(() => ampli.ping({
@@ -61,7 +63,7 @@ export const AnalyticsContextProvider = ({ children }) => {
 					current_page: window.location.pathname,
 				}));
 			}
-		}, 30000);
+		}, 60000);
 		return () => clearInterval(interval);
 	});
 
@@ -71,12 +73,30 @@ export const AnalyticsContextProvider = ({ children }) => {
 		}
 	};
 
+	const captureWithDelay = (() => {
+		let timeout: NodeJS.Timeout | null = null;
+
+		return (callback: (instance: Ampli) => void) => {
+			if (!consentContext.data.enabled_analytics || !ampli?.isLoaded) return;
+
+			if (timeout) {
+				clearTimeout(timeout);
+			}
+
+			timeout = setTimeout(() => {
+				callback(ampli);
+				timeout = null;
+			}, 1000);
+		};
+	})();
+
 	//
 	// C. Define context value
 
 	const contextValue: AnalyticsContextState = {
 		actions: {
 			capture,
+			captureWithDelay,
 		},
 	};
 

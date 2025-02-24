@@ -5,6 +5,7 @@
 import Button from '@/components/common/Button';
 import { Section } from '@/components/layout/Section';
 import { Surface } from '@/components/layout/Surface';
+import { useAnalyticsContext } from '@/contexts/Analytics.context';
 import { Routes } from '@/utils/routes';
 import { IconArrowRight } from '@tabler/icons-react';
 import { useTranslations } from 'next-intl';
@@ -20,11 +21,13 @@ export function PlannerNavegante() {
 	// A. Setup variables
 
 	const t = useTranslations('planner.PlannerNavegante');
+	const analyticsContext = useAnalyticsContext();
 
 	//
 	// B. Handle Actions
 
 	const handleClick = () => {
+		analyticsContext.actions.capture(ampli => ampli.plannerUsed({ planner_clicked: 'Navegante' }));
 		window.open(`${Routes.NAVEGANTE}/viajar/planear-viagem`, '_blank');
 	};
 

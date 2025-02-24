@@ -214,9 +214,9 @@ export const LinesDetailContextProvider = ({ children, lineId }) => {
 		const activeAlerts = alertsContext.data.simplified.filter((simplifiedAlertData) => {
 			return simplifiedAlertData.informed_entity.some((informedEntity) => {
 				// Skip if no routeId and no stopId in line
-				if (!informedEntity.routeId) return false;
+				if (!informedEntity.route_id) return false;
 				// Check if the alert is active and has a matching route
-				const hasMatchingRoute = dataLineState?.route_ids.includes(informedEntity.routeId || '');
+				const hasMatchingRoute = dataLineState?.route_ids.includes(informedEntity.route_id || '');
 				const isActive = simplifiedAlertData.end_date ? simplifiedAlertData.end_date >= new Date() : true;
 				return hasMatchingRoute && isActive;
 			});

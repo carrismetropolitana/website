@@ -4,6 +4,7 @@
 
 import { NoDataLabel } from '@/components/layout/NoDataLabel';
 import { PathWaypoint } from '@/components/lines/PathWaypoint';
+import { useAnalyticsContext } from '@/contexts/Analytics.context';
 import { useLinesDetailContext } from '@/contexts/LinesDetail.context';
 import { Routes } from '@/utils/routes';
 import { PatternRealtime } from '@/utils/types';
@@ -21,6 +22,7 @@ export function LinesDetailPathList() {
 	// A. Setup variables
 
 	const linesDetailContext = useLinesDetailContext();
+	const analyticsContext = useAnalyticsContext();
 
 	//
 	// B. Fetch data
@@ -59,6 +61,15 @@ export function LinesDetailPathList() {
 	useEffect(() => {
 		if (!linesDetailContext.data.active_waypoint) return;
 		const selectedStop = document.getElementById(`waypoint-${linesDetailContext.data.active_waypoint.stop_id}-${linesDetailContext.data.active_waypoint.stop_sequence}`);
+
+		const selectedStopId = selectedStop?.id.split('-')[1];
+
+		analyticsContext.actions.capture((ampli) => {
+			if (selectedStopId) {
+				ampli.stopSelected({ stop_id: selectedStopId });
+			}
+		});
+
 		if (selectedStop) {
 			selectedStop.scrollIntoView({ behavior: 'smooth', block: 'center' });
 		}

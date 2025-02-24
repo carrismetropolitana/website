@@ -10,7 +10,7 @@
 		"start": "next start"
 	},
 	"dependencies": {
-		"@amplitude/analytics-browser": "^2.11.11",
+		"@amplitude/analytics-browser": "2.11.12",
 		"@mantine/carousel": "7.16.3",
 		"@mantine/charts": "7.16.3",
 		"@mantine/core": "7.16.3",
@@ -36,7 +36,7 @@
 		"nuqs": "2.3.2",
 		"react": "19.0.0",
 		"react-dom": "19.0.0",
-		"react-lottie-player": "^2.1.0",
+		"react-lottie-player": "2.1.0",
 		"react-nice-avatar": "1.5.0",
 		"react-qr-code": "2.0.15",
 		"react-viewport-list": "7.1.2",
@@ -48,12 +48,12 @@
 		"uuid": "11.0.5"
 	},
 	"devDependencies": {
-		"@carrismetropolitana/api-types": "20250211.240.42",
+		"@carrismetropolitana/api-types": "20250213.1628.58",
 		"@carrismetropolitana/eslint": "20250128.1601.13",
 		"@types/geojson": "7946.0.16",
 		"@types/jsonwebtoken": "9.0.8",
 		"@types/luxon": "3.4.2",
-		"@types/node": "22.13.1",
+		"@types/node": "22.13.4",
 		"@types/react": "19.0.8",
 		"@types/react-dom": "19.0.3",
 		"postcss": "8.5.2",
@@ -65,5 +65,6 @@
 	"overrides": {
 		"react": "19.0.0",
 		"react-dom": "19.0.0"
-	}
+	},
+	"packageManager": "npm@11.1.0"
 }

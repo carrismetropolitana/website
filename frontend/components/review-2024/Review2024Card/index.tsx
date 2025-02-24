@@ -6,6 +6,7 @@ import { LottiePlayer } from '@/components/common/LottiePlayer';
 import { Section } from '@/components/layout/Section';
 import { LineBadge } from '@/components/lines/LineBadge';
 import { Review2024CardSchema } from '@/components/review-2024/_data/cards';
+import { useAnalyticsContext } from '@/contexts/Analytics.context';
 import { Button, CopyButton, Tooltip } from '@mantine/core';
 import { modals } from '@mantine/modals';
 import { IconShare2 } from '@tabler/icons-react';
@@ -41,6 +42,7 @@ export function Review2024Card({ cardData, isFirstChild, isLastChild }: Props) {
 
 	const [isOpen, setIsOpen] = useState(false);
 	const [shareCardId, setShareCardId] = useQueryState('card');
+	const analyticsContext = useAnalyticsContext();
 
 	//
 	// B. Transform data
@@ -55,7 +57,6 @@ export function Review2024Card({ cardData, isFirstChild, isLastChild }: Props) {
 		if (typeof window === 'undefined') return;
 		return `${window.location.origin}${window.location.pathname}?card=${cardData._id}`;
 	}, []);
-
 	//
 	// C. Handle actions
 
@@ -78,6 +79,7 @@ export function Review2024Card({ cardData, isFirstChild, isLastChild }: Props) {
 
 	const handleToggleIsOpen = () => {
 		setIsOpen(prev => !prev);
+		analyticsContext.actions.capture(ampli => ampli.openCardViagem2024({ card_id: cardData._id, card_title: cardData.header.title }));
 		console.log(cardData._id);
 	};
 
@@ -100,6 +102,7 @@ export function Review2024Card({ cardData, isFirstChild, isLastChild }: Props) {
 				<p className={styles.urlTitle}>{t('share.title')}</p>
 			),
 		});
+		analyticsContext.actions.capture(ampli => ampli.shareCardViagem2024({ card_id: cardData._id, card_title: cardData.header.title }));
 	};
 
 	//

@@ -9,6 +9,8 @@ import { useProfileContext } from '@/contexts/Profile.context';
 import { createDocCollection } from '@/hooks/useOtherSearch';
 import { createContext, useContext, useEffect, useState } from 'react';
 
+import { useAnalyticsContext } from './Analytics.context';
+
 /* * */
 
 interface LinesListContextState {
@@ -61,6 +63,7 @@ export const LinesListContextProvider = ({ children }) => {
 
 	const linesContext = useLinesContext();
 	const profileContext = useProfileContext();
+	const analyticsContext = useAnalyticsContext();
 
 	const [dataFilteredState, setDataFilteredState] = useState<Line[]>([]);
 	const [dataFavoritesState, setDataFavoritesState] = useState<Line[]>([]);
@@ -167,6 +170,7 @@ export const LinesListContextProvider = ({ children }) => {
 
 	const updateFilterBySearch = (value: LinesListContextState['filters']['by_search']) => {
 		setFilterBySearchState(value);
+		analyticsContext.actions.captureWithDelay(ampli => ampli.searchLine({ search_value: value }));
 	};
 
 	//

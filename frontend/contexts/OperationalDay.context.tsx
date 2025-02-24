@@ -6,6 +6,8 @@ import { DateTime } from 'luxon';
 import { useQueryState } from 'nuqs';
 import { createContext, useContext, useEffect, useState } from 'react';
 
+import { useAnalyticsContext } from './Analytics.context';
+
 /* * */
 
 interface OperationalDayContextState {
@@ -53,6 +55,8 @@ export const OperationalDayContextProvider = ({ children }) => {
 	const [selectedDay, setSelectedDay] = useState<null | string>(selectedDayQuery);
 	const [selectedDayJsDate, setSelectedDayJsDate] = useState<Date | null>(null);
 
+	const analyticsContext = useAnalyticsContext();
+
 	//
 	// B. Transform data
 
@@ -99,6 +103,13 @@ export const OperationalDayContextProvider = ({ children }) => {
 	const updateSelectedDayFromJsDate = (value: Date) => {
 		const valueAsString = DateTime.fromJSDate(value).toFormat('yyyyMMdd');
 		setSelectedDay(valueAsString);
+
+		if (valueAsString > todayDateString) {
+			analyticsContext.actions.capture(ampli => ampli.datePeriodSelected({ date_value: 'Future' }));
+		}
+		else if (valueAsString < todayDateString) {
+			analyticsContext.actions.capture(ampli => ampli.datePeriodSelected({ date_value: 'Past' }));
+		}
 	};
 
 	const updateSelectedDayToToday = () => {

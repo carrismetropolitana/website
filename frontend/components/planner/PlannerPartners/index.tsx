@@ -7,6 +7,7 @@ import { Section } from '@/components/layout/Section';
 import { Surface } from '@/components/layout/Surface';
 import { PlannerCard } from '@/components/planner/PlannerCard';
 import { PlannerCardSkeleton } from '@/components/planner/PlannerCardSkeleton';
+import { useAnalyticsContext } from '@/contexts/Analytics.context';
 import { shuffleArray } from '@/utils/shuffle';
 import { useLocale, useTranslations } from 'next-intl';
 import Link from 'next/link';
@@ -74,6 +75,7 @@ export function PlannerPartners() {
 
 	const t = useTranslations('planner.PlannerPartners');
 	const locale = useLocale();
+	const analyticsContext = useAnalyticsContext();
 
 	//
 	// B. Transform data
@@ -89,15 +91,19 @@ export function PlannerPartners() {
 			/>
 		),
 	}));
-
 	//
-	// C. Render Components
+	// C. Handle Actions
+	const handleGithubRedirect = () => {
+		analyticsContext.actions.capture(ampli => ampli.githubClicked({ click: 'true' }));
+	};
+	//
+	// D. Render Components
 
 	return (
 		<Surface>
 			<Section heading={t('heading')} subheading={t('subheading')}>
 				<Carousel skeletonComponent={<PlannerCardSkeleton />} skeletonQty={4} slides={carouselSlides} slideSize={300} />
-				<Link className={styles.disclaimer} href="https://github.com/carrismetropolitana/website/blob/alpha/frontend/components/planner/Page/index.tsx" target="_blank">
+				<Link className={styles.disclaimer} href="https://github.com/carrismetropolitana/website/blob/production/frontend/components/planner/PlannerPartners/index.tsx" onClick={handleGithubRedirect} target="_blank">
 					{t('disclaimer')}
 				</Link>
 			</Section>

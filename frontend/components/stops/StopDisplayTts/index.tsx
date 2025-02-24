@@ -2,6 +2,7 @@
 
 /* * */
 
+import { useAnalyticsContext } from '@/contexts/Analytics.context';
 import { audioTtsUrl } from '@/settings/urls.settings';
 import { IconPlayerPause, IconVolume } from '@tabler/icons-react';
 import { useEffect, useRef, useState } from 'react';
@@ -24,6 +25,7 @@ export function StopDisplayTts({ stopId }: Props) {
 
 	const [isPlaying, setIsPlaying] = useState(false);
 	const audioPlayer = useRef<HTMLAudioElement | null>(null);
+	const analyticsContext = useAnalyticsContext();
 
 	//
 	// B. Transform data
@@ -58,6 +60,7 @@ export function StopDisplayTts({ stopId }: Props) {
 			audioPlayer.current?.load();
 			audioPlayer.current?.play();
 		}
+		analyticsContext.actions.capture(ampli => ampli.stopAudioPlayed({ audio_played: 'true', stop_id: stopId || '' }));
 	};
 
 	//
