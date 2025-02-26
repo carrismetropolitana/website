@@ -41,20 +41,24 @@ export function StopProbeSection({ description, selectedStop, title }: Props) {
 	// B. Fetch Data
 
 	useEffect(() => {
-		const ended = localStorage.getItem('Stops|ProbeEnded') === 'true';
-		const currentQuestion = parseInt(localStorage.getItem('Stops|ProbeCurrentPage') || '0');
-		const messageShown = localStorage.getItem('Stops|EndingMessageShown') === 'true';
+		const ended = localStorage.getItem('Stops|ProbeEnded');
+		const currentQuestion = parseInt(localStorage.getItem(`Stops${selectedStop}|ProbeCurrentPage`) || '0');
+		const messageShown = localStorage.getItem(`Stops${selectedStop}|EndingMessageShown`) === 'true';
 		const stopIdsLocal = localStorage.getItem('Stops|StopIds');
-		const answer1 = localStorage.getItem('Stops|Question1Answer');
-		const answer2 = localStorage.getItem('Stops|Question2Answer');
-		const answer3 = localStorage.getItem('Stops|Question3Answer');
-		const answer4 = localStorage.getItem('Stops|Question4Answer');
-		const hasParticipatedOnThisStop = stopIdsLocal?.includes(selectedStop) || false;
+		const answer1 = localStorage.getItem(`Stops${selectedStop}|Question1Answer`);
+		const answer2 = localStorage.getItem(`Stops${selectedStop}|Question2Answer`);
+		const answer3 = localStorage.getItem(`Stops${selectedStop}|Question3Answer`);
+		const answer4 = localStorage.getItem(`Stops${selectedStop}|Question4Answer`);
+		const hasParticipatedOnThisStop = stopIdsLocal?.includes(selectedStop);
 
 		if (hasParticipatedOnThisStop) {
-			setHasParticipatedOnThisStop(hasParticipatedOnThisStop);
+			if (ended === 'false' && hasParticipatedOnThisStop) {
+				setHasParticipatedOnThisStop(false);
+			}
 			setCurrentPage(currentQuestion);
-			setProbeEnded(ended);
+			if (ended === 'true' && currentQuestion === 4) {
+				setProbeEnded(true);
+			}
 			setIsMessageShown(messageShown);
 			setQuestion1Answer(answer1 || undefined);
 			setQuestion2Answer(answer2 || undefined);
@@ -88,14 +92,14 @@ export function StopProbeSection({ description, selectedStop, title }: Props) {
 		console.log('You opted in.');
 		localStorage.setItem('Stops|ProbeOptIn', 'true');
 		localStorage.setItem('Stops|ProbeFirstTime', 'false');
-		localStorage.setItem('Stops|ProbeEnded', 'false');
-		localStorage.setItem('Stops|ProbeCurrentPage', currentQuestion.toString());
+		localStorage.setItem(`Stops${selectedStop}|ProbeEnded`, 'false');
+		localStorage.setItem(`Stops${selectedStop}|ProbeCurrentPage`, currentQuestion.toString());
 		localStorage.setItem('Stops|StopIds', participatedOn + selectedStop || '');
-		localStorage.setItem('Stops|EndingMessageShown', 'false');
-		localStorage.setItem('Stops|Question1Answer', '');
-		localStorage.setItem('Stops|Question2Answer', '');
-		localStorage.setItem('Stops|Question3Answer', '');
-		localStorage.setItem('Stops|Question4Answer', '');
+		localStorage.setItem(`Stops${selectedStop}|EndingMessageShown`, 'false');
+		localStorage.setItem(`Stops${selectedStop}|Question1Answer`, '');
+		localStorage.setItem(`Stops${selectedStop}|Question2Answer`, '');
+		localStorage.setItem(`Stops${selectedStop}|Question3Answer`, '');
+		localStorage.setItem(`Stops${selectedStop}|Question4Answer`, '');
 
 		setCurrentPage(currentQuestion);
 		setProbeEnded(false);
@@ -105,8 +109,8 @@ export function StopProbeSection({ description, selectedStop, title }: Props) {
 		console.log('You opted out.');
 		localStorage.setItem('Stops|ProbeOptIn', 'false');
 		localStorage.setItem('Stops|ProbeFirstTime', 'false');
-		localStorage.setItem('Stops|ProbeEnded', 'true');
-		localStorage.setItem('Stops|EndingMessageShown', 'true');
+		localStorage.setItem(`Stops${selectedStop}|ProbeEnded`, 'true');
+		localStorage.setItem(`Stops${selectedStop}|EndingMessageShown`, 'true');
 		setProbeEnded(true);
 	};
 
@@ -114,13 +118,13 @@ export function StopProbeSection({ description, selectedStop, title }: Props) {
 		const nextPage = currentPage + 1;
 		if (nextPage === 5) {
 			console.log('Probe ended');
-			localStorage.setItem('Stops|ProbeEnded', 'true');
-			localStorage.setItem('Stops|EndingMessageShown', 'true');
+			localStorage.setItem(`Stops${selectedStop}|ProbeEnded`, 'true');
+			localStorage.setItem(`Stops${selectedStop}|EndingMessageShown`, 'true');
 			setProbeEnded(true);
 			return;
 		}
 		setCurrentPage(nextPage);
-		localStorage.setItem('Stops|ProbeCurrentPage', nextPage.toString());
+		localStorage.setItem(`Stops${selectedStop}|ProbeCurrentPage`, nextPage.toString());
 	};
 
 	//
