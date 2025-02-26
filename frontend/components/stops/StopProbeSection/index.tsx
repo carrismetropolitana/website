@@ -13,10 +13,11 @@ import styles from './styles.module.css';
 
 interface Props {
 	description?: string
+	selectedStop: string
 	title: string
 }
 
-export function StopProbeSection({ description, title }: Props) {
+export function StopProbeSection({ description, selectedStop, title }: Props) {
 	//
 
 	//
@@ -26,6 +27,7 @@ export function StopProbeSection({ description, title }: Props) {
 	const [currentPage, setCurrentPage] = useState<number>(0);
 	const [isMessageShown, setIsMessageShown] = useState<boolean>(true);
 
+	const [hasParticipatedOnThisStop, setHasParticipatedOnThisStop] = useState<boolean>(false);
 	const [stopQuestion1Answer, setQuestion1Answer] = useState<string | undefined>(undefined);
 	const [stopQuestion2Answer, setQuestion2Answer] = useState<string | undefined>(undefined);
 	const [stopQuestion3Answer, setQuestion3Answer] = useState<string | undefined>(undefined);
@@ -42,18 +44,33 @@ export function StopProbeSection({ description, title }: Props) {
 		const ended = localStorage.getItem('Stops|ProbeEnded') === 'true';
 		const currentQuestion = parseInt(localStorage.getItem('Stops|ProbeCurrentPage') || '0');
 		const messageShown = localStorage.getItem('Stops|EndingMessageShown') === 'true';
+		const stopIdsLocal = localStorage.getItem('Stops|StopIds');
 		const answer1 = localStorage.getItem('Stops|Question1Answer');
 		const answer2 = localStorage.getItem('Stops|Question2Answer');
 		const answer3 = localStorage.getItem('Stops|Question3Answer');
 		const answer4 = localStorage.getItem('Stops|Question4Answer');
+		const hasParticipatedOnThisStop = stopIdsLocal?.includes(selectedStop) || false;
 
-		setCurrentPage(currentQuestion);
-		setProbeEnded(ended);
-		setIsMessageShown(messageShown);
-		setQuestion1Answer(answer1 || undefined);
-		setQuestion2Answer(answer2 || undefined);
-		setQuestion3Answer(answer3 || undefined);
-		setQuestion4Answer(answer4 || undefined);
+		if (hasParticipatedOnThisStop) {
+			setHasParticipatedOnThisStop(hasParticipatedOnThisStop);
+			setCurrentPage(currentQuestion);
+			setProbeEnded(ended);
+			setIsMessageShown(messageShown);
+			setQuestion1Answer(answer1 || undefined);
+			setQuestion2Answer(answer2 || undefined);
+			setQuestion3Answer(answer3 || undefined);
+			setQuestion4Answer(answer4 || undefined);
+		}
+		else {
+			setHasParticipatedOnThisStop(false);
+			setCurrentPage(0);
+			setProbeEnded(false);
+			setIsMessageShown(false);
+			setQuestion1Answer('');
+			setQuestion2Answer('');
+			setQuestion3Answer('');
+			setQuestion4Answer('');
+		}
 	}, []);
 
 	useEffect(() => {
@@ -66,12 +83,19 @@ export function StopProbeSection({ description, title }: Props) {
 
 	const handleParticipation = () => {
 		const currentQuestion = currentPage + 1;
+		const participatedOn = localStorage.getItem('Stops|StopIds') || [];
 
 		console.log('You opted in.');
 		localStorage.setItem('Stops|ProbeOptIn', 'true');
 		localStorage.setItem('Stops|ProbeFirstTime', 'false');
 		localStorage.setItem('Stops|ProbeEnded', 'false');
 		localStorage.setItem('Stops|ProbeCurrentPage', currentQuestion.toString());
+		localStorage.setItem('Stops|StopIds', participatedOn + selectedStop || '');
+		localStorage.setItem('Stops|EndingMessageShown', 'false');
+		localStorage.setItem('Stops|Question1Answer', '');
+		localStorage.setItem('Stops|Question2Answer', '');
+		localStorage.setItem('Stops|Question3Answer', '');
+		localStorage.setItem('Stops|Question4Answer', '');
 
 		setCurrentPage(currentQuestion);
 		setProbeEnded(false);
@@ -104,7 +128,7 @@ export function StopProbeSection({ description, title }: Props) {
 
 	return (
 		<>
-			{!isProbeEnded && !isMessageShown ? (
+			{!isProbeEnded && !isMessageShown && !hasParticipatedOnThisStop ? (
 				<Surface>
 					<Section withGap withPadding>
 
@@ -115,19 +139,19 @@ export function StopProbeSection({ description, title }: Props) {
 						)}
 
 						{currentPage === 1 && (
-							<Question1 question1Answer={stopQuestion1Answer || ''} />
+							<Question1 question1Answer={stopQuestion1Answer || ''} stopId={selectedStop} />
 						)}
 
 						{currentPage === 2 && (
-							<Question2 question2Answer={stopQuestion2Answer || ''} />
+							<Question2 question2Answer={stopQuestion2Answer || ''} stopId={selectedStop} />
 						)}
 
 						{currentPage === 3 && (
-							<Question3 question3Answer={stopQuestion3Answer || ''} />
+							<Question3 question3Answer={stopQuestion3Answer || ''} stopId={selectedStop} />
 						)}
 
 						{currentPage === 4 && (
-							<Question4 question4Answer={stopQuestion4Answer || ''} />
+							<Question4 question4Answer={stopQuestion4Answer || ''} stopId={selectedStop} />
 						)}
 
 						{currentPage > 0 && (<div className={styles.submitContainer}><Button onClick={handleNextQuestion}>{t('submit')}</Button></div>)}

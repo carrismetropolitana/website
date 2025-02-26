@@ -7,9 +7,10 @@ import styles from '../StopProbeSection/styles.module.css';
 
 interface Props {
 	question3Answer: string
+	stopId: string
 }
 
-export function Question3({ question3Answer }: Props) {
+export function Question3({ question3Answer, stopId }: Props) {
 	//
 
 	//
@@ -26,7 +27,7 @@ export function Question3({ question3Answer }: Props) {
 		const value = e;
 		localStorage.setItem('Stops|Question3Answer', value);
 		setQuestion3Answer(value);
-		analyticsContext.actions.capture(ampli => ampli.stopsProbeAnswered({ question_3: value }));
+		analyticsContext.actions.capture(ampli => ampli.stopsProbeAnswered({ question_3: value, stop_id: stopId }));
 		// analyticsContext.actions.capture(ampli => ampli.stopProbeQuestion3({ answer: value, answer_date: new Date().toISOString(), question_id: '3', question_title: t('stop|probe|question3') }));
 	};
 	//

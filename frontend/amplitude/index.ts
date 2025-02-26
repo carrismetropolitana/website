@@ -295,73 +295,6 @@ export interface StopDetailRedirectedProperties {
   stop_id: string;
 }
 
-export interface StopProbeQuestion1Properties {
-  /**
-   * Captures an answer to a quiz
-   */
-  answer: string;
-  /**
-   * Captures the answer date of a quiz question
-   */
-  answer_date: string;
-  /**
-   * Stores a question id
-   */
-  question_id: string;
-  /**
-   * Captures the question title
-   */
-  question_title: string;
-}
-
-export interface StopProbeQuestion2Properties {
-  answer: string;
-  /**
-   * Captures the answer date of a quiz question
-   */
-  answer_date: string;
-  /**
-   * Stores a question id
-   */
-  question_id: string;
-  /**
-   * Captures the question title
-   */
-  question_title: string;
-}
-
-export interface StopProbeQuestion3Properties {
-  answer: string;
-  /**
-   * Captures the answer date of a quiz question
-   */
-  answer_date: string;
-  /**
-   * Stores a question id
-   */
-  question_id: string;
-  /**
-   * Captures the question title
-   */
-  question_title: string;
-}
-
-export interface StopProbeQuestion4Properties {
-  answer: string;
-  /**
-   * Captures the answer date of a quiz question
-   */
-  answer_date: string;
-  /**
-   * Stores a question id
-   */
-  question_id: string;
-  /**
-   * Captures the question title
-   */
-  question_title: string;
-}
-
 export interface StopSelectedProperties {
   /**
    * Holds a the ID of the entity "Stop", which is always a 6-digit numeric string.
@@ -387,10 +320,6 @@ export interface StopsProbeAnsweredProperties {
    */
   question_1?: string;
   /**
-   * Stores a question 10 answer
-   */
-  question_10?: string;
-  /**
    * Stores a question 2 answer
    */
   question_2?: string;
@@ -403,25 +332,14 @@ export interface StopsProbeAnsweredProperties {
    */
   question_4?: string;
   /**
-   * Stores a question 5 answer
+   * Holds a the ID of the entity "Stop", which is always a 6-digit numeric string.
+   *
+   * | Rule | Value |
+   * |---|---|
+   * | Min Length | 6 |
+   * | Max Length | 6 |
    */
-  question_5?: string;
-  /**
-   * Stores a question 6 answer
-   */
-  question_6?: string;
-  /**
-   * Stores a question 7 answer
-   */
-  question_7?: string;
-  /**
-   * Stores a question 8 answer
-   */
-  question_8?: string;
-  /**
-   * Stores a question 9 answer
-   */
-  question_9?: string;
+  stop_id: string;
 }
 
 export interface StoreSelectedProperties {
@@ -761,46 +679,6 @@ export class StopDetailRedirected implements BaseEvent {
   }
 }
 
-export class StopProbeQuestion1 implements BaseEvent {
-  event_type = 'Stop Probe Question 1';
-
-  constructor(
-    public event_properties: StopProbeQuestion1Properties,
-  ) {
-    this.event_properties = event_properties;
-  }
-}
-
-export class StopProbeQuestion2 implements BaseEvent {
-  event_type = 'Stop Probe Question 2';
-
-  constructor(
-    public event_properties: StopProbeQuestion2Properties,
-  ) {
-    this.event_properties = event_properties;
-  }
-}
-
-export class StopProbeQuestion3 implements BaseEvent {
-  event_type = 'Stop Probe Question 3';
-
-  constructor(
-    public event_properties: StopProbeQuestion3Properties,
-  ) {
-    this.event_properties = event_properties;
-  }
-}
-
-export class StopProbeQuestion4 implements BaseEvent {
-  event_type = 'Stop Probe Question 4';
-
-  constructor(
-    public event_properties: StopProbeQuestion4Properties,
-  ) {
-    this.event_properties = event_properties;
-  }
-}
-
 export class StopSelected implements BaseEvent {
   event_type = 'Stop Selected';
 
@@ -825,7 +703,7 @@ export class StopsProbeAnswered implements BaseEvent {
   event_type = 'Stops Probe Answered';
 
   constructor(
-    public event_properties?: StopsProbeAnsweredProperties,
+    public event_properties: StopsProbeAnsweredProperties,
   ) {
     this.event_properties = event_properties;
   }
@@ -1422,74 +1300,6 @@ export class Ampli {
   }
 
   /**
-   * Stop Probe Question 1
-   *
-   * [View in Tracking Plan](https://data.eu.amplitude.com/tmlmobilidade/default/events/main/latest/Stop%20Probe%20Question%201)
-   *
-   * Stop Probe Question 1 answered
-   *
-   * @param properties The event's properties (e.g. answer)
-   * @param options Amplitude event options.
-   */
-  stopProbeQuestion1(
-    properties: StopProbeQuestion1Properties,
-    options?: EventOptions,
-  ) {
-    return this.track(new StopProbeQuestion1(properties), options);
-  }
-
-  /**
-   * Stop Probe Question 2
-   *
-   * [View in Tracking Plan](https://data.eu.amplitude.com/tmlmobilidade/default/events/main/latest/Stop%20Probe%20Question%202)
-   *
-   * Stop Probe Question 2 answered
-   *
-   * @param properties The event's properties (e.g. answer)
-   * @param options Amplitude event options.
-   */
-  stopProbeQuestion2(
-    properties: StopProbeQuestion2Properties,
-    options?: EventOptions,
-  ) {
-    return this.track(new StopProbeQuestion2(properties), options);
-  }
-
-  /**
-   * Stop Probe Question 3
-   *
-   * [View in Tracking Plan](https://data.eu.amplitude.com/tmlmobilidade/default/events/main/latest/Stop%20Probe%20Question%203)
-   *
-   * Stop Probe Question 3 answered
-   *
-   * @param properties The event's properties (e.g. answer)
-   * @param options Amplitude event options.
-   */
-  stopProbeQuestion3(
-    properties: StopProbeQuestion3Properties,
-    options?: EventOptions,
-  ) {
-    return this.track(new StopProbeQuestion3(properties), options);
-  }
-
-  /**
-   * Stop Probe Question 4
-   *
-   * [View in Tracking Plan](https://data.eu.amplitude.com/tmlmobilidade/default/events/main/latest/Stop%20Probe%20Question%204)
-   *
-   * Stop Probe Question 4 answered
-   *
-   * @param properties The event's properties (e.g. answer)
-   * @param options Amplitude event options.
-   */
-  stopProbeQuestion4(
-    properties: StopProbeQuestion4Properties,
-    options?: EventOptions,
-  ) {
-    return this.track(new StopProbeQuestion4(properties), options);
-  }
-
-  /**
    * Stop Selected
    *
    * [View in Tracking Plan](https://data.eu.amplitude.com/tmlmobilidade/default/events/main/latest/Stop%20Selected)
@@ -1534,7 +1344,7 @@ export class Ampli {
    * @param options Amplitude event options.
    */
   stopsProbeAnswered(
-    properties?: StopsProbeAnsweredProperties,
+    properties: StopsProbeAnsweredProperties,
     options?: EventOptions,
   ) {
     return this.track(new StopsProbeAnswered(properties), options);
