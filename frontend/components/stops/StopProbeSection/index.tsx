@@ -24,6 +24,7 @@ export function StopProbeSection({ description, selectedStop, title }: Props) {
 	const [currentPage, setCurrentPage] = useState<number>(0);
 	const [isMessageShown, setIsMessageShown] = useState<boolean>(true);
 	const [hasParticipatedOnThisStop, setHasParticipatedOnThisStop] = useState<boolean>(false);
+	const [hasOptedOut, setOptedOut] = useState<string>('false');
 	const [stopQuestion1Answer, setQuestion1Answer] = useState<string | undefined>(undefined);
 	const [stopQuestion2Answer, setQuestion2Answer] = useState<string | undefined>(undefined);
 	const [stopQuestion3Answer, setQuestion3Answer] = useState<string | undefined>(undefined);
@@ -34,6 +35,7 @@ export function StopProbeSection({ description, selectedStop, title }: Props) {
 
 	useEffect(() => {
 		const ended = localStorage.getItem(`Stops${selectedStop}|ProbeEnded`);
+		const optedOut = localStorage.getItem('Stops|ProbeOptOut');
 		const currentQuestion = parseInt(localStorage.getItem(`Stops${selectedStop}|ProbeCurrentPage`) || '0');
 		const messageShown = localStorage.getItem(`Stops${selectedStop}|EndingMessageShown`) === 'true';
 		const stopIdsLocal = localStorage.getItem('Stops|StopIds');
@@ -43,14 +45,29 @@ export function StopProbeSection({ description, selectedStop, title }: Props) {
 		const answer4 = localStorage.getItem(`Stops${selectedStop}|Question4Answer`);
 		const hasParticipatedOnThisStop = stopIdsLocal?.includes(selectedStop);
 
+		if (optedOut === 'false') {
+			setOptedOut('false');
+		}
+		else {
+			setOptedOut('true');
+		}
+
+		if (optedOut === 'true') {
+			setProbeEnded(true);
+			setIsMessageShown(true);
+			return;
+		}
+
 		if (hasParticipatedOnThisStop) {
 			if (ended === 'false' && hasParticipatedOnThisStop) {
 				setHasParticipatedOnThisStop(false);
 			}
 			setCurrentPage(currentQuestion);
+			console.log(optedOut);
 			if (ended === 'true' && currentQuestion === TOTAL_QUESTIONS) {
 				setProbeEnded(true);
 			}
+
 			setIsMessageShown(messageShown);
 			setQuestion1Answer(answer1 || undefined);
 			setQuestion2Answer(answer2 || undefined);
@@ -66,6 +83,7 @@ export function StopProbeSection({ description, selectedStop, title }: Props) {
 			setQuestion2Answer('');
 			setQuestion3Answer('');
 			setQuestion4Answer('');
+			setOptedOut('notdefined');
 		}
 	}, [selectedStop]);
 
@@ -80,6 +98,7 @@ export function StopProbeSection({ description, selectedStop, title }: Props) {
 
 		console.log('You opted in.');
 		localStorage.setItem('Stops|ProbeOptIn', 'true');
+		localStorage.setItem('Stops|ProbeOptOut', 'false');
 		localStorage.setItem('Stops|ProbeFirstTime', 'false');
 		localStorage.setItem(`Stops${selectedStop}|ProbeEnded`, 'false');
 		localStorage.setItem(`Stops${selectedStop}|ProbeCurrentPage`, currentQuestion.toString());
@@ -98,6 +117,7 @@ export function StopProbeSection({ description, selectedStop, title }: Props) {
 	const handleOptOut = () => {
 		console.log('You opted out.');
 		localStorage.setItem('Stops|ProbeOptIn', 'false');
+		localStorage.setItem('Stops|ProbeOptOut', 'true');
 		localStorage.setItem('Stops|ProbeFirstTime', 'false');
 		localStorage.setItem(`Stops${selectedStop}|ProbeEnded`, 'true');
 		localStorage.setItem(`Stops${selectedStop}|EndingMessageShown`, 'true');
@@ -109,6 +129,7 @@ export function StopProbeSection({ description, selectedStop, title }: Props) {
 		if (nextPage > TOTAL_QUESTIONS) {
 			console.log('Probe ended');
 			localStorage.setItem(`Stops${selectedStop}|ProbeEnded`, 'true');
+			localStorage.setItem(`Stops${selectedStop}|EndingMessageShown`, 'true');
 			localStorage.setItem(`Stops${selectedStop}|EndingMessageShown`, 'true');
 			setProbeEnded(true);
 			return;
@@ -134,7 +155,7 @@ export function StopProbeSection({ description, selectedStop, title }: Props) {
 
 	return (
 		<>
-			{!isProbeEnded && !isMessageShown && !hasParticipatedOnThisStop ? (
+			{!isProbeEnded && !isMessageShown && !hasParticipatedOnThisStop && hasOptedOut !== 'true' ? (
 				<Surface>
 					<Section withGap withPadding>
 						{currentPage > 0 && (
