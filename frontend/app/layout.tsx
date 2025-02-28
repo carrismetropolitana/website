@@ -1,6 +1,7 @@
 /* * */
 
 import { availableFormats } from '@/i18n/config';
+import { PrivacyProviders } from '@/providers/privacy-providers';
 import { type Metadata } from 'next';
 import { NextIntlClientProvider } from 'next-intl';
 import { getLocale, getMessages } from 'next-intl/server';
@@ -48,13 +49,11 @@ export default async function RootLayout({ children }) {
 				<meta content="transparent" name="theme-color" />
 			</head>
 			<body>
-				<NextIntlClientProvider
-					formats={availableFormats}
-					locale={locale}
-					messages={messages}
-				>
+				<NextIntlClientProvider formats={availableFormats} locale={locale} messages={messages}>
 					<NuqsAdapter>
-						{children}
+						<PrivacyProviders>
+							{children}
+						</PrivacyProviders>
 					</NuqsAdapter>
 				</NextIntlClientProvider>
 			</body>

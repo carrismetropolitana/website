@@ -60,7 +60,7 @@ export function AlertsDetail({ alertId }: Props) {
 					<Section withPadding>
 						<div className={styles.infoBar}>
 							{simplifiedAlertData?.informed_entity.map((entity, index) => (
-								<AlertInformedEntity key={index} lineId={entity.lineId} />
+								<AlertInformedEntity key={index} lineId={entity.line_id} />
 							))}
 						</div>
 					</Section>

@@ -13,7 +13,7 @@ services:
 
   watchtower:
     image: containrrr/watchtower
-    mem_limit: 2g
+    mem_limit: 100m
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
     environment:
@@ -29,7 +29,7 @@ services:
   nginx:
     image: nginx:alpine-slim
     restart: unless-stopped
-    mem_limit: 2g
+    mem_limit: 1g
     logging:
       options:
         max-size: '1m'
@@ -51,7 +51,7 @@ services:
   certbot:
     image: certbot/certbot
     restart: unless-stopped
-    mem_limit: 2g
+    mem_limit: 100m
     volumes:
       - ./letsencrypt:/etc/letsencrypt
       - certbotdata:/var/www/certbot
@@ -63,7 +63,7 @@ services:
   frontend:
     image: ghcr.io/carrismetropolitana/website-frontend:production
     restart: unless-stopped
-    mem_limit: 2g
+    mem_limit: 6g
     logging:
       options:
         max-size: '1m'

@@ -2,37 +2,18 @@
 
 /* * */
 
+import { type Ampli, ampli } from '@/amplitude';
+import { useConsentContext } from '@/contexts/Consent.context';
 import pjson from '@/package.json';
-import { getCurrentBrowserFingerPrint } from '@rajesh896/broprint.js';
-import { DateTime } from 'luxon';
-import { createContext, useContext, useEffect, useState } from 'react';
-import { UAParser } from 'ua-parser-js';
-
-/* * */
-
-const DECISION_EXPIRATION_IN_DAYS_YES = 365;
-const DECISION_EXPIRATION_IN_DAYS_NO = 10;
-
-const LOCAL_STORAGE_KEYS = {
-	decision_date: 'analytics|decision_date',
-	is_enabled: 'analytics|is_enabled',
-};
+import { expireAllCookies } from '@/utils/expire-all-cookies.util';
+import { createContext, useContext, useEffect } from 'react';
 
 /* * */
 
 interface AnalyticsContextState {
 	actions: {
-		capture: (key: string, properties?: Record<string, number | string>) => Promise<void>
-		disable: () => void
-		enable: () => void
-		reset: () => void
-	}
-	data: {
-		is_enabled: 'no' | 'yes' | null
-	}
-	flags: {
-		is_enabled: boolean
-		should_ask: boolean
+		capture: (callback: (instance: Ampli) => void) => void
+		captureWithDelay: (callback: (instance: Ampli) => void) => void
 	}
 }
 
@@ -56,150 +37,90 @@ export const AnalyticsContextProvider = ({ children }) => {
 	//
 	// A. Setup variables
 
-	const [dataIsEnabledState, setDataIsEnabledState] = useState<AnalyticsContextState['data']['is_enabled']>(null);
-
-	const [flagIsEnabledState, setFlagIsEnabledState] = useState<AnalyticsContextState['flags']['is_enabled']>(false);
-	const [flagShouldAskState, setFlagShouldAskState] = useState<AnalyticsContextState['flags']['should_ask']>(false);
+	const consentContext = useConsentContext();
 
 	//
-	// B. Fetch data
+	// B. Handle actions
 
 	useEffect(() => {
-		// Get decision value from local storage
-		if (typeof window === 'undefined') return;
-		const isEnabledLocal = localStorage.getItem(LOCAL_STORAGE_KEYS.is_enabled);
-		const decisionDateLocal = localStorage.getItem(LOCAL_STORAGE_KEYS.decision_date);
-		// Check if the stored value is known
-		if (isEnabledLocal !== 'yes' && isEnabledLocal !== 'no' && isEnabledLocal !== null) {
-			reset();
-			return;
+		if (consentContext.data.init_status && consentContext.data.enabled_analytics && !ampli?.isLoaded) {
+			ampli.load({ client: { configuration: { appVersion: pjson.version, autocapture: false } }, environment: 'default' });
+			ampli.client.setOptOut(false);
 		}
-		// Check if stored date is in a valid format
-		const decisionDateData = decisionDateLocal ? DateTime.fromFormat(decisionDateLocal, 'yyyyMMdd') : null;
-		if (!decisionDateData?.isValid) {
-			reset();
-			return;
-		};
-		// Check if stored decision date has not expired
-		const daysSinceLastDecision = DateTime.now().diff(decisionDateData, 'days');
-		const yesDecisionIsExpired = dataIsEnabledState === 'yes' && daysSinceLastDecision.days > DECISION_EXPIRATION_IN_DAYS_YES;
-		const noDecisionIsExpired = dataIsEnabledState === 'no' && daysSinceLastDecision.days > DECISION_EXPIRATION_IN_DAYS_NO;
-		if (yesDecisionIsExpired || noDecisionIsExpired) {
-			reset();
-			return;
+		else if (consentContext.data.init_status && ampli?.isLoaded) {
+			ampli.client.setOptOut(true);
+			expireAllCookies();
 		}
-		// Set local state
-		setDataIsEnabledState(isEnabledLocal);
-		setFlagShouldAskState(false);
+	}, [consentContext.data.init_status, consentContext.data.enabled_analytics, ampli?.isLoaded]);
+
+	useEffect(() => {
+		// Capture a ping event every minute
+		const interval = setInterval(() => {
+			if (typeof window !== 'undefined' && ampli?.isLoaded) {
+				capture(() => ampli.ping({
+					app_version: pjson.version,
+					current_page: window.location.pathname,
+				}));
+			}
+		}, 60000);
+		return () => clearInterval(interval);
 	});
 
-	//
-	// C. Handle actions
-
-	useEffect(() => {
-		if (dataIsEnabledState === 'yes') {
-			setFlagIsEnabledState(true);
-		}
-		else {
-			setFlagIsEnabledState(false);
-		}
-	}, [dataIsEnabledState]);
-
-	const enable = () => {
-		// Set local state and save decision to local storage
-		setDataIsEnabledState('yes');
-		localStorage.setItem(LOCAL_STORAGE_KEYS.is_enabled, 'yes');
-		localStorage.setItem(LOCAL_STORAGE_KEYS.decision_date, DateTime.now().toFormat('yyyyMMdd'));
-	};
-
-	const disable = () => {
-		// Set local state and save decision to local storage
-		setDataIsEnabledState('no');
-		localStorage.setItem(LOCAL_STORAGE_KEYS.is_enabled, 'no');
-		localStorage.setItem(LOCAL_STORAGE_KEYS.decision_date, DateTime.now().toFormat('yyyyMMdd'));
-	};
-
-	const reset = () => {
-		// Set local state and save decision to local storage
-		setDataIsEnabledState(null);
-		localStorage.removeItem(LOCAL_STORAGE_KEYS.is_enabled);
-		localStorage.removeItem(LOCAL_STORAGE_KEYS.decision_date);
-		setFlagShouldAskState(true);
-	};
-
-	const capture = async (key, properties = {}) => {
-		try {
-			return;
-			// Only capture anonymous analytics if user has allowed it
-			// eslint-disable-next-line no-unreachable
-			if (!dataIsEnabledState) return;
-			// Parse user-agent string
-			const parsedUserAgent = window.navigator.userAgent ? new UAParser(window.navigator.userAgent).getResult() : null;
-			// Fetch all the other properties
-			await fetch('https://stats.carrismetropolitana.pt/collector/usage/website', {
-				body: JSON.stringify({
-					//
+	const capture = (callback: (instance: Ampli) => void) => {
+		if (consentContext.data.enabled_analytics && ampli?.isLoaded) {
+			if (typeof window !== 'undefined' && typeof document !== 'undefined') {
+				const defaultProps = {
 					app_version: pjson.version,
-					device_locale: navigator.language,
-					device_screen_height: document.documentElement.clientHeight,
-					device_screen_orientation: window.innerHeight > window.innerWidth ? 'portrait' : 'landscape',
-					device_screen_width: document.documentElement.clientWidth,
-					//
-					device_timezone: Intl.DateTimeFormat().resolvedOptions().timeZone,
-					//
-					event_key: key,
-					event_properties: properties,
-					//
-					fingerprint: await getCurrentBrowserFingerPrint(),
-					//
-					ip_address: null, // Server side
-					//
-					referer: document.referrer,
-					//
-					ua: parsedUserAgent?.ua,
-					ua_browser_name: parsedUserAgent?.browser?.name,
-					ua_browser_version: parsedUserAgent?.browser?.version,
-					ua_cpu_architecture: parsedUserAgent?.cpu?.architecture,
-					ua_device_model: parsedUserAgent?.device?.model,
-					ua_device_type: parsedUserAgent?.device?.type,
-					ua_device_vendor: parsedUserAgent?.device?.vendor,
-					ua_engine_name: parsedUserAgent?.engine?.name,
-					ua_engine_version: parsedUserAgent?.engine?.version,
-					ua_os_name: parsedUserAgent?.os?.name,
-					ua_os_version: parsedUserAgent?.os?.version,
-					//
-				}),
-				headers: { 'Content-Type': 'application/json; charset=utf-8' },
-				method: 'POST',
-			});
-		}
-		// eslint-disable-next-line no-unreachable
-		catch (error) {
-			console.log(error);
+					event_date: new Date().toISOString(),
+					page_domain: window.location.hostname,
+					page_location: window.location.href,
+					page_referer: document.referrer || window.location.origin,
+					page_title: document.title,
+				};
+
+				const wrappedAmpli = new Proxy(ampli, {
+					// Target is ampli and props is the event name
+					get(target, prop) {
+						if (typeof target[prop] === 'function') {
+							return (eventProps = {}) => target[prop]({ ...defaultProps, ...eventProps });
+						}
+					},
+				});
+
+				callback(wrappedAmpli);
+			};
 		}
 	};
 
+	const captureWithDelay = (() => {
+		let timeout: NodeJS.Timeout | null = null;
+
+		return (callback: (instance: Ampli) => void) => {
+			if (!consentContext.data.enabled_analytics || !ampli?.isLoaded) return;
+
+			if (timeout) {
+				clearTimeout(timeout);
+			}
+
+			timeout = setTimeout(() => {
+				callback(ampli);
+				timeout = null;
+			}, 1000);
+		};
+	})();
+
 	//
-	// D. Define context value
+	// C. Define context value
 
 	const contextValue: AnalyticsContextState = {
 		actions: {
 			capture,
-			disable,
-			enable,
-			reset,
-		},
-		data: {
-			is_enabled: dataIsEnabledState,
-		},
-		flags: {
-			is_enabled: flagIsEnabledState,
-			should_ask: flagShouldAskState,
+			captureWithDelay,
 		},
 	};
 
 	//
-	// E. Render components
+	// D. Render components
 
 	return (
 		<AnalyticsContext.Provider value={contextValue}>

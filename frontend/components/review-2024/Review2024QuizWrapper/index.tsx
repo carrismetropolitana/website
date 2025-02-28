@@ -9,6 +9,7 @@ import { allQuizData, type Review2024QuizAnswerSchema } from '@/components/revie
 import { Review2024QuizFinalResult } from '@/components/review-2024/Review2024QuizFinalResult';
 import { Review2024QuizPoints } from '@/components/review-2024/Review2024QuizPoints';
 import { Review2024QuizQuestion } from '@/components/review-2024/Review2024QuizQuestion';
+import { useAnalyticsContext } from '@/contexts/Analytics.context';
 import { useTranslations } from 'next-intl';
 
 import styles from './styles.module.css';
@@ -33,6 +34,7 @@ export function Review2024QuizWrapper({ answerStatus, points, progress, setAnswe
 	// A. Setup variables
 
 	const t = useTranslations('review-2024.Review2024QuizWrapper');
+	const analyticsContext = useAnalyticsContext();
 
 	//
 	// B. Handle actions
@@ -42,9 +44,11 @@ export function Review2024QuizWrapper({ answerStatus, points, progress, setAnswe
 			if (answerData.is_correct) {
 				setAnswerStatus('correct');
 				setPoints(points + (allQuizData[progress]?._points || 0));
+				analyticsContext.actions.capture(ampli => ampli.viagem2024QuizAnswered({ [`question_${progress}`]: 'correct' }));
 			}
 			else {
 				setAnswerStatus('wrong');
+				analyticsContext.actions.capture(ampli => ampli.viagem2024QuizAnswered({ [`question_${progress}`]: 'wrong' }));
 			}
 		}
 	};

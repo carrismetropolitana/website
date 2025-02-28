@@ -62,9 +62,9 @@ export interface TimeRange {
  *
  */
 export interface EntitySelector {
-	agencyId?: string
-	lineId?: string // Non-standard field
-	routeId?: string
-	stopId?: string
-	tripId?: string
+	agency_id?: string
+	line_id?: string // Non-standard field
+	route_id?: string
+	stop_id?: string
+	trip_id?: string
 }

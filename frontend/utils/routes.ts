@@ -93,7 +93,7 @@ export const RoutesPricing = Object.freeze({
 });
 
 export const RoutesLostAndFound = Object.freeze({
-	ALSA: 'mailto:passageiros@alsa.pt',
+	ALSA: 'mailto:passageiros@alsa.com',
 	RODOVIARIA_LISBOA: 'https://www.rodoviariadelisboa.pt/perdidoAchado',
 	TST: 'https://www.tsuldotejo.pt/index.php?page=perdidos',
 	VIACAO_ALVORADA: 'mailto:passageiro@viacaoalvorada.pt',

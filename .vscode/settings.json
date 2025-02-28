@@ -41,12 +41,10 @@
 	"less.validate": false,
 	// Disable the default formatter, use eslint instead
 	"prettier.enable": false,
+
 	"scss.validate": false,
 
-	"svg.preview.background": "custom",
-	"typescript.tsdk": "./frontend/node_modules/typescript/lib",
 	"workbench.editor.customLabels.enabled": true,
-
 	"workbench.editor.customLabels.patterns": {
 		"**/components/**/*.css": "${dirname} (${extname})",
 		"**/components/**/*.js": "${dirname} (${extname})",

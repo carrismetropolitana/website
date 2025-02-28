@@ -8,8 +8,10 @@ import { moveMap } from '@/utils/map.utils';
 import { Routes } from '@/utils/routes';
 import { useMap } from '@vis.gl/react-maplibre';
 import { parseAsStringLiteral, useQueryState } from 'nuqs';
-import { createContext, useContext, useEffect, useState } from 'react';
+import { createContext, use, useContext, useEffect, useState } from 'react';
 import useSWR from 'swr';
+
+import { useAnalyticsContext } from './Analytics.context';
 
 /* * */
 
@@ -73,6 +75,8 @@ export const StoresListContextProvider = ({ children }) => {
 	const [filterOrderByState, setFilterOrderByState] = useQueryState<StoresListContextState['filters']['order_by']>('order_by', parseAsStringLiteral(['municipality_name', 'wait_time', 'capacity']).withDefault('municipality_name').withOptions({ clearOnDefault: true }));
 	const [filterOrderByDirectionState, setFilterOrderByDirectionState] = useQueryState('order_by_direction', parseAsStringLiteral(['asc', 'desc']).withDefault('asc').withOptions({ clearOnDefault: true }));
 	const [filterSelectedStoreState, setFilterSelectedStoreState] = useQueryState('store');
+
+	const analyticsContext = useAnalyticsContext();
 
 	//
 	// B. Fetch data
@@ -157,16 +161,21 @@ export const StoresListContextProvider = ({ children }) => {
 
 	const updateFilterByMunicipality = (value: StoresListContextState['filters']['by_municipality']) => {
 		setFilterByMunicipalityState(value || null);
+		analyticsContext.actions.capture(ampli => ampli.storesFilterChanged({ filter_type: 'by_municipality', filter_value: value || '' }));
 	};
 
 	const updateFilterOrderBy = (value: StoresListContextState['filters']['order_by']) => {
 		setFilterOrderByState(value);
+		analyticsContext.actions.capture(ampli => ampli.storesFilterChanged({ filter_type: 'order_by', filter_value: value || '' }));
 	};
 
 	const updateSelectedStore = (storeId: string) => {
 		if (!allStoresData) return;
 		// Search for store in filtered array
 		let foundStoreData = dataFilteredState.find(item => item.id === storeId) || null;
+
+		analyticsContext.actions.capture(ampli => ampli.storeSelected({ store_district: foundStoreData?.district_name || '', store_id: foundStoreData?.id || '', store_location: foundStoreData?.locality || '', store_name: foundStoreData?.name || '' }));
+
 		if (!foundStoreData) {
 			foundStoreData = allStoresData.find(item => item.id === storeId) || null;
 			if (!foundStoreData || !foundStoreData.id) return;

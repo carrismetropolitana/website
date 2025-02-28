@@ -1,23 +1,32 @@
 /* * */
 
+import { Link } from '@/components/common/Link';
 import { URLS } from '@/settings/urls.settings';
 import { IconBrandAndroid, IconBrandApple, IconBrandFacebook, IconBrandInstagram, IconBrandTwitter, IconBrandWhatsapp } from '@tabler/icons-react';
-import Link from 'next/link';
 
 import styles from './styles.module.css';
 
 /* * */
 
 export function SocialIcons() {
+	//
+
+	//
+	// A.Render Components
+
 	return (
 		<div className={styles.container}>
+
 			<Link className={`${styles.iconWrapper} ${styles.apple}`} href={URLS.app.apple_app_store.prod} rel="noopener noreferrer" target="_blank">
 				<IconBrandApple />
 			</Link>
+
 			<Link className={`${styles.iconWrapper} ${styles.android}`} href={URLS.app.google_play_store.prod} rel="noopener noreferrer" target="_blank">
 				<IconBrandAndroid />
 			</Link>
+
 			<div className={styles.divider} />
+
 			<Link className={`${styles.iconWrapper} ${styles.facebook}`} href={URLS.socials.facebook} rel="noopener noreferrer" target="_blank">
 				<IconBrandFacebook />
 			</Link>
@@ -32,4 +41,6 @@ export function SocialIcons() {
 			</Link>
 		</div>
 	);
+
+	//
 }

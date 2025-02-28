@@ -1,0 +1,14 @@
+{
+  "Branch": "main",
+  "Language": "TypeScript",
+  "OrgId": "100009985",
+  "Path": "./amplitude",
+  "Platform": "Browser",
+  "Runtime": "browser:typescript-ampli-v2",
+  "SDK": "@amplitude/analytics-browser@^1.0",
+  "SourceId": "dce398f7-dac0-49cc-9cac-d995b0176415",
+  "Version": "2.0.0",
+  "VersionId": "c1eb6e9c-4fdb-4e52-a3e8-6bca97569cf4",
+  "WorkspaceId": "fde256ac-5ddb-42f0-ae88-0b1b16be4072",
+  "Zone": "eu"
+}

@@ -15,6 +15,8 @@ export function AboutPage() {
 	//
 
 	//
+
+	//
 	// A. Setup variables
 
 	const t = useTranslations('about.AboutPage');

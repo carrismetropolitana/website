@@ -91,15 +91,26 @@
 			"question_6": {
 				"accept": "Accept Cookies Policy",
 				"enabled": "Cookies Policy accepted",
+				"options": {
+					"analytics": {
+						"disable": "Dados Analíticos Aceites. Recusar?",
+						"enable": "Aceitar Dados Analíticos",
+						"label": "Dados Analíticos"
+					},
+					"functional": {
+						"disable": "Dados Funcionais Aceites. Recusar?",
+						"enable": "Aceitar Dados Funcionais",
+						"label": "Dados Funcionais"
+					}
+				},
 				"paragraphs": {
-					"1": "As they are essential for the proper functioning of the website, the use of strictly necessary or essential cookies does not require prior consent from the user. The rest (functionality, performance or advertising cookies) will only be used if the user expressly authorizes their use.",
-					"2": "Once accepted, you can revoke this consent at any time by simply returning to the Cookie Policy and selecting “Refuse and Clear Data”."
+					"1": "As they are essential for the proper functioning of the website, the use of strictly necessary or essential cookies does not require prior consent from the user. The rest (functionality, performance or advertising cookies) will only be used if the user expressly authorizes their use."
 				},
 				"refuse": "Opt Out and Clear Data",
 				"refuse_modal": {
 					"cancel": "Cancel",
 					"confirm": "Yes, delete everything",
-					"description": "By withdrawing consent you will delete all data saved on this website, including all stops and favorite lines.",
+					"description": "Ao retirar o consentimento serão apagados todos os dados guardados neste site, incluindo as suas paragens e linhas favoritas.",
 					"title": "Withdraw consent"
 				},
 				"title": "User Consent:"
@@ -360,9 +371,18 @@
 	},
 	"analytics": {
 		"ConsentPopup": {
-			"accept": "OK",
-			"privacy_policy": "Consult Cookies Policy",
-			"refuse": "No, thanks",
+			"actions": {
+				"accept": "OK",
+				"hide_options": "Esconder Opções",
+				"refuse": "Não, obrigado",
+				"save": "Guardar",
+				"show_options": "Mostrar Opções"
+			},
+			"options": {
+				"analytics": "Guardar dados analíticos",
+				"functional": "Guardar dados funcionais"
+			},
+			"policy_page": "Consultar Política de Cookies",
 			"text": "In order to improve the performance, content and security of this website, TML intends to use cookies or similar technologies.",
 			"title": "We respect your privacy"
 		}
@@ -541,6 +561,9 @@
 			"arriving": "Coming up",
 			"hours": "h",
 			"minutes": "min"
+		},
+		"ScrollToTopButton": {
+			"label": "Back to Top"
 		},
 		"SelectOperationalDay": {
 			"today": "Today",
@@ -803,7 +826,8 @@
 			"title": "das {total_trip_count, number} viagens planeadas para os últimos 15 dias, {pass_trip_count, number} foram corretamente realizadas"
 		},
 		"LinesDetailPath": {
-			"no_data": "Selecione um Percurso / Destino"
+			"no_data": "Select a Path / Destination",
+			"summary": "Line <lineNumber>{line_number}</lineNumber> headed towards <destinationName>{destination_name}</destinationName> on <dayName>{day_name, date, long}</dayName>. <changeDay>Change day ›</changeDay>"
 		},
 		"LinesListToolbar": {
 			"by_current_view": {
@@ -875,7 +899,7 @@
 					"title": "Area 3 | TST"
 				},
 				"44": {
-					"description": "Fill out the Online Form available on the operator's website or send an email to passengers@alsa.com.br with information about the line used, time and description of the object. If possible, include the vehicle number or license plate.",
+					"description": "Fill out the Online Form available on the operator's website or send an email to passageiros@alsa.com with information about the line used, time and description of the object. If possible, include the vehicle number or license plate.",
 					"title": "Area 4 | Alsa Todi"
 				}
 			},
@@ -1133,6 +1157,28 @@
 			}
 		}
 	},
+	"options": {
+		"Agency": {
+			"41": "Viação Alvorada",
+			"42": "Rodoviária de Lisboa",
+			"43": "TST",
+			"44": "Alsa Todi"
+		},
+		"VehicleEmissionClass": {
+			"euro_1": "EURO 1",
+			"euro_2": "EURO 2",
+			"euro_3": "EURO 3",
+			"euro_4": "EURO 4",
+			"euro_5": "EURO 5",
+			"euro_6": "EURO 6"
+		},
+		"VehiclePropulsion": {
+			"diesel": "Diesel",
+			"electricity": "Eletricidade",
+			"lpg_auto": "GPL",
+			"natural_gas": "Gás Natural"
+		}
+	},
 	"periods": {
 		"PeriodsWidgetItem": {
 			"from": "inicia a {value, date, dayShort} {value, date, monthShort} {value, date, yearLong}",
@@ -1327,7 +1373,8 @@
 					"drivers": "Apply to drive with us",
 					"metrics": "Our live operation",
 					"news": "News",
-					"open-data": "Open Data"
+					"open-data": "Open Data",
+					"vehicles": "Fleet"
 				}
 			},
 			"schedules": {
@@ -1541,5 +1588,50 @@
 	},
 	"utils": {
 		"number": "{value, number}"
+	},
+	"vehicles": {
+		"VehiclesList": {
+			"heading": "Veículos",
+			"subheading": "The pass navegante municipal Familia allows that each family pays at most the value of 2 municipal navegante pass indenpendently of the number of elemnts of the family. It is valid in all the companies of the public means of transport, in all of the 18 municipalities of the Lisbon metropolitan area."
+		},
+		"VehiclesListDetails": {
+			"no_data": "Selecione um veículo",
+			"unknown": "Desconhecido"
+		},
+		"VehiclesListInfoBlock": {
+			"heading": "Informação do Veículo"
+		},
+		"VehiclesListToolbar": {
+			"filters": {
+				"by_agency": {
+					"placeholder": "Todos os operadores"
+				},
+				"by_bikes": {
+					"options": {
+						"false": "Não",
+						"true": "Sim"
+					},
+					"placeholder": "Permite Bicicletas"
+				},
+				"by_make_model": {
+					"placeholder": "Marca e Modelo"
+				},
+				"by_propulsion": {
+					"placeholder": "Todos os tipos de propulsão"
+				},
+				"by_search": {
+					"placeholder": "Pesquisar por id, matrícula..."
+				},
+				"by_wheelchair": {
+					"options": {
+						"false": "Não",
+						"true": "Sim"
+					},
+					"placeholder": "Permite Mobilidade Reduzida"
+				}
+			},
+			"found_items_counter": "{count, plural, =0 {No vehicle found.} one {Found # vehicle} other {Found # vehicles}}",
+			"select_vehicle": "Select a vehicle"
+		}
 	}
 }

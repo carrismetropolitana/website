@@ -14,18 +14,18 @@ import { Notifications } from '@mantine/notifications';
 export default function Layout({ children }) {
 	return (
 		<ConfigProviders>
-			<ThemeProviders themeData={websiteTheme} themeId="website">
-				<DataProviders>
-					<ProfileProviders>
+			<ProfileProviders>
+				<ThemeProviders themeData={websiteTheme} themeId="website">
+					<DataProviders>
 						<MapProviders>
 							<Notifications styles={{ root: { marginTop: '60px' } }} />
 							<WebsiteViewport>
 								{children}
 							</WebsiteViewport>
 						</MapProviders>
-					</ProfileProviders>
-				</DataProviders>
-			</ThemeProviders>
+					</DataProviders>
+				</ThemeProviders>
+			</ProfileProviders>
 		</ConfigProviders>
 	);
 }

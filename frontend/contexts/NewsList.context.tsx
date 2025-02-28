@@ -7,6 +7,8 @@ import { DateTime } from 'luxon';
 import { createContext, useContext, useEffect, useState } from 'react';
 import useSWR from 'swr';
 
+import { useAnalyticsContext } from './Analytics.context';
+
 /* * */
 
 interface NewsListContextState {
@@ -50,6 +52,8 @@ export const NewsListContextProvider = ({ children }) => {
 	const [dataFilteredState, setDataFilteredState] = useState<NewsData[]>([]);
 	const [filterBySearch, setFilterBySearch] = useState<NewsListContextState['filters']['by_search']>('');
 	const [filterByDate, setFilterByDate] = useState<NewsListContextState['filters']['by_date']>(null);
+
+	const analyticsContext = useAnalyticsContext();
 
 	//
 	// B. Fetch data
@@ -96,6 +100,10 @@ export const NewsListContextProvider = ({ children }) => {
 		const filteredNews = applyFiltersToData();
 		setDataFilteredState(filteredNews);
 	}, [allNewsData, filterBySearch, filterByDate]);
+
+	useEffect(() => {
+		analyticsContext.actions.capture(ampli => ampli.captureNewsReferer({ page_referer: document.referrer }));
+	}, [allNewsData]);
 
 	//
 	// D. Handle actions

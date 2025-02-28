@@ -3,7 +3,6 @@
 
 .name {
 	display: -webkit-box;
-	align-items: center;
 	justify-content: flex-start;
 	width: 100%;
 	overflow: hidden;
@@ -13,12 +12,28 @@
 	-webkit-box-orient: vertical;
 }
 
-.name.md {
+/* * */
+/* SIZE */
+
+.name[data-size='md'] {
 	font-size: 15px;
 	font-weight: var(--font-weight-bold);
 }
 
-.name.lg {
+.name[data-size='lg'] {
 	font-size: 20px;
 	font-weight: var(--font-weight-bold);
+}
+
+/* * */
+/* ALIGN */
+
+.name[data-align='left'] {
+	align-items: flex-start;
+	text-align: left;
+}
+
+.name[data-align='center'] {
+	align-items: center;
+	text-align: center;
 }

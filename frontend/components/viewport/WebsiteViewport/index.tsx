@@ -2,9 +2,10 @@
 
 /* * */
 
-import { ConsentPopup } from '@/components/analytics/ConsentPopup';
+import { ScrollToTopButton } from '@/components/common/ScrollToTopButton';
 import { Footer } from '@/components/footer/Footer';
 import { Header } from '@/components/header/Header';
+import { ConsentPopup } from '@/components/privacy/ConsentPopup';
 import { useSearchParams } from 'next/navigation';
 
 import styles from './styles.module.css';
@@ -28,6 +29,7 @@ export function WebsiteViewport({ children }) {
 			{children}
 			{searchParams.get('origin') !== 'app' && <Footer />}
 			{searchParams.get('origin') !== 'app' && <ConsentPopup />}
+			<ScrollToTopButton showAfterHeight={350} />
 		</div>
 	);
 

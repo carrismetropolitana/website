@@ -2,12 +2,11 @@
 
 /* * */
 
-import type { Stop } from '@carrismetropolitana/api-types/network';
-
 import { StopDisplay } from '@/components/stops/StopDisplay';
-import { useLocationsContext } from '@/contexts/Locations.context';
 import { useProfileContext } from '@/contexts/Profile.context';
+import { useStopsContext } from '@/contexts/Stops.context';
 import { createDocCollection } from '@/hooks/useOtherSearch';
+import { type Stop } from '@carrismetropolitana/api-types/network';
 import { ActionIcon, Combobox, Group, TextInput, useCombobox } from '@mantine/core';
 import { useDebouncedValue } from '@mantine/hooks';
 import { IconBusStop, IconSelector, IconX } from '@tabler/icons-react';
@@ -39,8 +38,9 @@ export function SelectStop({ data = [], label, nothingFound, onSelectStopId, pla
 	const t = useTranslations('SelectStop');
 	const [searchQuery, setSearchQuery] = useState('');
 	const [debouncedSearchQuery] = useDebouncedValue(searchQuery, 200);
+
 	const profileContext = useProfileContext();
-	const locationsContext = useLocationsContext();
+	const stopsContext = useStopsContext();
 
 	const comboboxStore = useCombobox();
 
@@ -49,18 +49,16 @@ export function SelectStop({ data = [], label, nothingFound, onSelectStopId, pla
 
 	const { search } = useMemo(() => {
 		// Prepare data for search function
-		const preparedSearchCollection = data.map((item) => {
+		const preparedSearchCollection = stopsContext.data.stops.map((item) => {
 			const isFavorite = profileContext.data.favorite_stops?.includes(item.id) ? true : false;
-			const localityData = locationsContext.actions.getLocalityById(item.locality_id);
+
 			return {
 				...item,
 				boost: isFavorite,
-				locality_display: localityData?.display ?? '',
 			};
 		});
 		return createDocCollection(preparedSearchCollection, {
 			id: 2,
-			locality_display: 1,
 			long_name: 1,
 			short_name: 1,
 			tts_name: 1.5,
@@ -74,9 +72,10 @@ export function SelectStop({ data = [], label, nothingFound, onSelectStopId, pla
 	//
 	// C. Search
 
-	const allStopsDataFilteredBySearchQuery = useMemo(
-		() => (debouncedSearchQuery ? search(debouncedSearchQuery) : data).slice(0, 100),
-		[debouncedSearchQuery, search, data]);
+	const allStopsDataFilteredBySearchQuery = useMemo(() => {
+		const filteredData = debouncedSearchQuery ? search(debouncedSearchQuery) : data;
+		return filteredData.slice(0, 100);
+	}, [debouncedSearchQuery, search, data]);
 
 	//
 	// D. Handle actions

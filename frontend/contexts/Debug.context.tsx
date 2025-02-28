@@ -4,6 +4,8 @@
 
 import { createContext, useContext, useState } from 'react';
 
+import { useAnalyticsContext } from './Analytics.context';
+
 /* * */
 
 interface DebugContextState {
@@ -36,11 +38,13 @@ export const DebugContextProvider = ({ children }) => {
 	// A. Setup variables
 
 	const [flagIsDebugModeState, setFlagIsDebugModeState] = useState<boolean>(false);
+	const analyticsContext = useAnalyticsContext();
 
 	//
 	// B. Handle actions
 
 	const toggleDebugMode = () => {
+		analyticsContext.actions.capture(ampli => ampli.clickDebugToggle({ is_enabled: (!flagIsDebugModeState).toString() }));
 		setFlagIsDebugModeState(prev => !prev);
 	};
 

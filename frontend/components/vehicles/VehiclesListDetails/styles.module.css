@@ -1,0 +1,46 @@
+/* * */
+/* DATA WRAPPER */
+
+.dataWrapper {
+	display: flex;
+	flex-direction: column;
+	gap: 10px;
+	align-items: center;
+	width: 100%;
+}
+
+/* * */
+/* ICON LIST */
+
+.iconList {
+	display: flex;
+	flex-direction: row;
+	gap: 10px;
+	justify-content: center;
+	margin-bottom: 30px;
+}
+
+/* * */
+/* LICENSE PLATE */
+
+.licensePlate {
+	padding: 2px;
+	font-size: var(--font-size-text);
+	border: 2px solid var(--color-system-text-200);
+	border-radius: 10px;
+}
+
+/* * */
+/* TABLE DATA */
+
+.rowLabel {
+	font-size: 16px;
+	font-weight: var(--font-weight-text);
+}
+
+.rowValue {
+	text-overflow: ellipsis;
+	font-size: 16px;
+	font-weight: var(--font-weight-semibold);
+	word-break: break-all;
+}

@@ -10,6 +10,8 @@ import { useLocale } from 'next-intl';
 import { createContext, useContext, useEffect, useState } from 'react';
 import useSWR from 'swr';
 
+import { useAnalyticsContext } from './Analytics.context';
+
 /* * */
 
 interface AlertsContextState {
@@ -48,6 +50,7 @@ export const AlertsContextProvider = ({ children }) => {
 	// A. Setup variables
 
 	const currentLocale = useLocale();
+	const analyticsContext = useAnalyticsContext();
 
 	const [dataSimplifiedState, setDataSimplifiedState] = useState<SimplifiedAlert[]>([]);
 
@@ -60,9 +63,10 @@ export const AlertsContextProvider = ({ children }) => {
 	// C. Transform data
 
 	useEffect(() => {
-		if (!allAlertsData) return;
-		const allSimplifiedAlerts = allAlertsData.map(alert => convertToSimplifiedAlert(alert, currentLocale));
-		setDataSimplifiedState(allSimplifiedAlerts);
+		// if (!allAlertsData) return;
+		const allSimplifiedAlerts = allAlertsData?.map(alert => convertToSimplifiedAlert(alert, currentLocale));
+		setDataSimplifiedState(allSimplifiedAlerts || []);
+		analyticsContext.actions.capture(ampli => ampli.captureAlertsReferer({ page_referer: document.referrer }));
 	}, [allAlertsData]);
 
 	//
@@ -79,13 +83,13 @@ export const AlertsContextProvider = ({ children }) => {
 			// Include this element if any informed_entity...
 			return simplifiedAlert.informed_entity.some((informedEntity) => {
 				// ...has a routeId that starts with the lineId
-				return informedEntity.routeId?.startsWith(lineId);
+				return informedEntity.route_id?.startsWith(lineId);
 			});
 		});
 	};
 
 	const getSimplifiedAlertsByStopId = (stopId: string): SimplifiedAlert[] => {
-		return dataSimplifiedState.filter(simplifiedAlert => simplifiedAlert.informed_entity.some(informedEntity => informedEntity.stopId === stopId));
+		return dataSimplifiedState.filter(simplifiedAlert => simplifiedAlert.informed_entity.some(informedEntity => informedEntity.stop_id === stopId));
 	};
 
 	//

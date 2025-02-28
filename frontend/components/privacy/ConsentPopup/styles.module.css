@@ -1,0 +1,67 @@
+/* * */
+/* OVERRIDES */
+
+.contentOverride {
+	background-color: var(--color-system-background-100);
+	border-radius: var(--border-radius-lg);
+}
+
+.bodyOverride {
+	display: flex;
+	flex-direction: column;
+	gap: var(--size-spacing-20);
+	align-items: center;
+	padding: var(--size-spacing-30);
+}
+
+/* * */
+/* TEXT & TITLE */
+
+.title,
+.text {
+	text-align: center;
+}
+
+.title {
+	font-size: 18px;
+	font-weight: 700;
+}
+
+.text {
+	font-size: 14px;
+	font-weight: 500;
+}
+
+.link {
+	padding: 3px 8px;
+	font-size: 12px;
+	font-weight: 500;
+	color: var(--color-system-text-200);
+	cursor: pointer;
+	border-radius: 3px;
+}
+
+.link:hover {
+	background-color: var(--color-system-background-200);
+}
+
+/* * */
+/* ANSWERS WRAPPER */
+
+.answersWrapper {
+	display: grid;
+	grid-template-rows: 1fr;
+	grid-template-columns: 1fr 1fr;
+	gap: var(--size-spacing-15);
+	align-items: center;
+	justify-content: center;
+	width: 100%;
+	margin-top: var(--size-spacing-15);
+}
+
+/* * */
+/* REFUSE BUTTON */
+
+.refuseButtonOverride {
+	opacity: 0.5;
+}

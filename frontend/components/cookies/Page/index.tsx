@@ -4,10 +4,9 @@
 
 import { Section } from '@/components/layout/Section';
 import { Surface } from '@/components/layout/Surface';
-import { useAnalyticsContext } from '@/contexts/Analytics.context';
+import { useConsentContext } from '@/contexts/Consent.context';
 import { Button, Group, Table } from '@mantine/core';
 import { openConfirmModal } from '@mantine/modals';
-import { IconCircleCheckFilled } from '@tabler/icons-react';
 import { useTranslations } from 'next-intl';
 
 import styles from './styles.module.css';
@@ -21,26 +20,19 @@ export default function Component() {
 	// A. Setup variables
 
 	const t = useTranslations('CookiesPage');
-	const analyticsContext = useAnalyticsContext();
+	const consentContext = useConsentContext();
 
 	//
 	// B. Handle actions
 
-	const handleEnable = () => {
-		analyticsContext.actions.enable();
-		analyticsContext.actions.capture('test');
-	};
-
-	const handleDisable = () => {
+	const handleShowConfirmModal = (callback: () => void) => {
 		openConfirmModal({
 			centered: true,
 			children: <p>{t('sections.question_6.refuse_modal.description')}</p>,
 			closeOnClickOutside: true,
 			confirmProps: { color: 'red' },
 			labels: { cancel: t('sections.question_6.refuse_modal.cancel'), confirm: t('sections.question_6.refuse_modal.confirm') },
-			onConfirm: () => {
-				analyticsContext.actions.reset();
-			},
+			onConfirm: () => callback(),
 			title: t('sections.question_6.refuse_modal.title'),
 		});
 	};
@@ -111,26 +103,28 @@ export default function Component() {
 					<div className={styles.section}>
 						<div className={styles.title}>{t('sections.question_6.title')}</div>
 						<div className={styles.text}>{t('sections.question_6.paragraphs.1')}</div>
-						<div className={styles.text}>{t('sections.question_6.paragraphs.2')}</div>
 						<div className={styles.authorizationOptions}>
-							{!analyticsContext.flags.is_enabled
-							&& (
-								<Button color="green" onClick={handleEnable} variant="light">
-									{t('sections.question_6.accept')}
+
+							{consentContext.data.enabled_functional ? (
+								<Button color="green" onClick={() => handleShowConfirmModal(() => consentContext.actions.disable(['functional']))}>
+									{t('sections.question_6.options.functional.disable')}
+								</Button>
+							) : (
+								<Button onClick={() => consentContext.actions.enable(['functional'])} variant="secondary">
+									{t('sections.question_6.options.functional.enable')}
 								</Button>
 							)}
-							{analyticsContext.flags.is_enabled
-							&& (
-								<Button color="green" leftSection={<IconCircleCheckFilled size={16} />} onClick={() => null} variant="outline">
-									{t('sections.question_6.enabled')}
+
+							{consentContext.data.enabled_analytics ? (
+								<Button color="green" onClick={() => handleShowConfirmModal(() => consentContext.actions.disable(['analytics']))}>
+									{t('sections.question_6.options.analytics.disable')}
+								</Button>
+							) : (
+								<Button onClick={() => consentContext.actions.enable(['analytics'])} variant="secondary">
+									{t('sections.question_6.options.analytics.enable')}
 								</Button>
 							)}
-							{analyticsContext.flags.is_enabled
-							&& (
-								<Button color="red" onClick={handleDisable} variant="light">
-									{t('sections.question_6.refuse')}
-								</Button>
-							)}
+
 						</div>
 					</div>
 					<div className={styles.section}>
