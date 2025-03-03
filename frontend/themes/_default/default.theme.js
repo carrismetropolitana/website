@@ -8,6 +8,7 @@ import '@mantine/core/styles.layer.css';
 import '@mantine/dates/styles.layer.css';
 import '@mantine/notifications/styles.css';
 import 'maplibre-gl/dist/maplibre-gl.css';
+import 'mantine-react-table/styles.css';
 
 /* * */
 

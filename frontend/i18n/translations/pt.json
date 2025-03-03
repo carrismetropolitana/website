@@ -845,9 +845,17 @@
 			"heading": "Pesquisar Linhas"
 		},
 		"LinesListViewAll": {
+			"header_area": "Área",
+			"header_designation": "Linha",
+			"header_municipality": "Município",
+			"header_number": "Número",
 			"no_data": "Nenhuma linha encontrada para esta pesquisa"
 		},
 		"LinesListViewFavorites": {
+			"header_area": "Área",
+			"header_designation": "Linha",
+			"header_municipality": "Município",
+			"header_number": "Número",
 			"no_favorites": "Ainda não tem linhas favoritas"
 		},
 		"PathStopNextArrivals": {
