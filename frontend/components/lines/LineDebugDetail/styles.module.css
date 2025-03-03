@@ -2,4 +2,6 @@
 	display: flex;
 	flex-flow: row wrap;
 	gap: var(--size-spacing-10);
+	width: 100%;
+	overflow-x: scroll;
 }
