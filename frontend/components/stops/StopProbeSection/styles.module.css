@@ -17,6 +17,10 @@
 
 .actionButton button{
   width: 200px;
+  display: flex;
+  flex-wrap: wrap;
+  margin: 0 auto;
+  align-content: center;
 }
 
 /* * */
