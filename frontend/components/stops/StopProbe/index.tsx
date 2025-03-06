@@ -3,7 +3,7 @@
 
 import { StopProbeSection } from '@/components/stops/StopProbeSection';
 import { useTranslations } from 'next-intl';
-import { use, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 
 /* * */
 
