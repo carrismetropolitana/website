@@ -121,9 +121,37 @@ export interface CaptureFrontendErrorProperties {
 
 export interface CaptureNewsRefererProperties {
   /**
+   * The version of the application that generated the event.
+   */
+  app_version: string;
+  /**
+   * | Rule | Value |
+   * |---|---|
+   * | Regex |  |
+   */
+  event_date?: string;
+  /**
+   * | Rule | Value |
+   * |---|---|
+   * | Regex |  |
+   */
+  page_domain?: string;
+  /**
+   * | Rule | Value |
+   * |---|---|
+   * | Regex |  |
+   */
+  page_location?: string;
+  /**
    * Captures the Referrer for a page
    */
   page_referer: string;
+  /**
+   * | Rule | Value |
+   * |---|---|
+   * | Regex |  |
+   */
+  page_title?: string;
 }
 
 export interface ChangeStopsViewTypeProperties {
@@ -285,6 +313,38 @@ export interface StopAudioPlayedProperties {
 export interface StopDetailRedirectedProperties {
   "[Amplitude] Page Path"?: any;
   /**
+   * The version of the application that generated the event.
+   */
+  app_version: string;
+  /**
+   * | Rule | Value |
+   * |---|---|
+   * | Regex |  |
+   */
+  event_date?: string;
+  /**
+   * | Rule | Value |
+   * |---|---|
+   * | Regex |  |
+   */
+  page_domain?: string;
+  /**
+   * | Rule | Value |
+   * |---|---|
+   * | Regex |  |
+   */
+  page_location?: string;
+  /**
+   * Captures the Referrer for a page
+   */
+  page_referer: string;
+  /**
+   * | Rule | Value |
+   * |---|---|
+   * | Regex |  |
+   */
+  page_title?: string;
+  /**
    * Holds a the ID of the entity "Stop", which is always a 6-digit numeric string.
    *
    * | Rule | Value |
@@ -332,6 +392,10 @@ export interface StopsProbeAnsweredProperties {
    */
   question_4?: string;
   /**
+   * Captures the question title
+   */
+  question_title: string;
+  /**
    * Holds a the ID of the entity "Stop", which is always a 6-digit numeric string.
    *
    * | Rule | Value |
@@ -362,6 +426,17 @@ export interface StoreSelectedProperties {
 }
 
 export interface StoresFilterChangedProperties {
+  /**
+   * Captures a filter type
+   */
+  filter_type: string;
+  /**
+   * Stores a filter value
+   */
+  filter_value: string;
+}
+
+export interface Survey2024FilterChangedProperties {
   /**
    * Captures a filter type
    */
@@ -729,6 +804,16 @@ export class StoresFilterChanged implements BaseEvent {
   }
 }
 
+export class Survey2024FilterChanged implements BaseEvent {
+  event_type = 'Survey 2024 Filter Changed';
+
+  constructor(
+    public event_properties: Survey2024FilterChangedProperties,
+  ) {
+    this.event_properties = event_properties;
+  }
+}
+
 export class Viagem2024QuizAnswered implements BaseEvent {
   event_type = 'Viagem 2024 Quiz Answered';
 
@@ -980,7 +1065,7 @@ export class Ampli {
    *
    * Captured the user origin when loading the news page
    *
-   * @param properties The event's properties (e.g. page_referer)
+   * @param properties The event's properties (e.g. app_version)
    * @param options Amplitude event options.
    */
   captureNewsReferer(
@@ -1382,6 +1467,23 @@ export class Ampli {
     options?: EventOptions,
   ) {
     return this.track(new StoresFilterChanged(properties), options);
+  }
+
+  /**
+   * Survey 2024 Filter Changed
+   *
+   * [View in Tracking Plan](https://data.eu.amplitude.com/tmlmobilidade/default/events/main/latest/Survey%202024%20Filter%20Changed)
+   *
+   * Stores filetring data on the survey page
+   *
+   * @param properties The event's properties (e.g. filter_type)
+   * @param options Amplitude event options.
+   */
+  survey2024FilterChanged(
+    properties: Survey2024FilterChangedProperties,
+    options?: EventOptions,
+  ) {
+    return this.track(new Survey2024FilterChanged(properties), options);
   }
 
   /**

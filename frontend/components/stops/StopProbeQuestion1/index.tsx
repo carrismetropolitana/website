@@ -32,7 +32,7 @@ export function Question1({ question1Answer, stopId }: Props) {
 		const value = e.currentTarget.value;
 		localStorage.setItem(`Stops${stopId}|Question1Answer`, value);
 		setQuestion1Answer(value);
-		analyticsContext.actions.capture(ampli => ampli.stopsProbeAnswered({ question_1: value, stop_id: stopId }));
+		analyticsContext.actions.capture(ampli => ampli.stopsProbeAnswered({ question_1: value, question_title: t('stop|probe|question1'), stop_id: stopId }));
 		// analyticsContext.actions.capture(ampli => ampli.stopProbeQuestion1({ answer: value, answer_date: new Date().toISOString(), question_id: '1', question_title: t('stop|probe|question1') }));
 	};
 
