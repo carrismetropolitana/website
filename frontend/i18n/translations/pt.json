@@ -1531,6 +1531,91 @@
 			"subheading": "As nossas lojas estão dedicadas a esclarecer dúvidas sobre a rede da CMetropolitana e a resolver todas as questões relacionadas com o passe navegante® — emissão de cartões na hora, adesão a descontos e aquisição de títulos."
 		}
 	},
+	"survey": {
+		"SurveyAboutCard": {
+			"confidence_interval": "intervalo de confiança",
+			"days_description": "dias úteis, sábados e domingos",
+			"days_title": "Dias",
+			"details_title": "Detalhes",
+			"error_margin": "margem de erro",
+			"hours_description": "ente as 6h e 4h da manhã",
+			"hours_title": "Horas",
+			"months_description": "de março a junho 2024",
+			"months_title": "Meses"
+
+		},
+		"SurveyCriteriaCard": {
+			"firstRowText": "classes de procura de linhas (de alta a baixa procura)",
+			"firstRowValue": "4",
+			"fourthRowText": "A distribuição equilibrada das entrevistas asseguraram a representatividade da amostra.",
+			"header": "Com que critérios?",
+			"secondRowText": "tipos de dia (úteis e não úteis)",
+			"secondRowValue": "2",
+			"thirdRowText": "períodos horários",
+			"thirdRowValue": "6"
+		},
+		"SurveyHeader": {
+			"AnchorAboutSurvey": "Ficha técnica",
+			"AnchorAboutSurveyTitle": "Ficha técnica",
+			"AnchorIndex": "Índice Global de Satisfação",
+			"AnchorPassengerCaracter": "Caracterização do Passageiro",
+			"AnchorResults": "Resultados",
+			"DownloadButton": "Descarregar Relatório",
+			"heading": "Índice de Satisfação Global",
+			"legend": "A Carris Metropolitana ganhou o selo de aprovação dos passageiros",
+			"subtitle": "Selecione as opções abaixo para navegar pela página.",
+			"title": "Acesso rápido",
+			"value": "7.2"
+		},
+		"SurveyPrecisionCard": {
+			"firstRowText": "intervalo de confiança",
+			"firstRowValue": "99,5%",
+			"fourthRowText": "Estes valores refletem a precisão e fiabilidade dos resultados obtidos, uma vez que garantem que, se o inquérito fosse repetido múltiplas vezes nas mesmas condições, os resultados poderiam variar uma média de 1,8% em 99,5% das ocasiões. ",
+			"header": "Qual foi a precisão?",
+			"secondRowText": "margem de erro",
+			"secondRowValue": "1,8%",
+			"thirdRowText": "classes amostrais",
+			"thirdRowValue": "192"
+		},
+		"SurveyPsgrCharacterCard": {
+			"age_heading": "Idade",
+			"deslocation_type_heading": "Regime de Deslocação",
+			"gender_heading": "Género",
+			"heading": "Caracterização do  Passageiro",
+			"instruction_level__heading": "Nível de Instrução",
+			"occupation_heading": "Ocupação",
+			"subheading": "Os utilizadores da Carris Metropolitana são, na sua maioria, mulheres, jovens (idades entre 14 e 34 anos), trabalhadores a tempo inteiro e com grau de instrução secundário."
+		},
+		"SurveyRecomendationIndex": {
+			"card_heading": "Selo de aprovação dos passageiros",
+			"card_legend": "O Índice de Satisfação Global reflete a opinião dos milhares de passageiros que a Carris Metropolitana transporta, sobre o serviço prestado e resulta da avaliação dos diferentes temas apresentados anteriormente.",
+			"card_value": "7.2",
+			"recomendationIdexDescription": "\"Até que ponto recomendaria o serviço da Carris Metropolitana a um amigo ou familiar?\"",
+			"title": "Índice Global de Satisfação"
+		},
+		"SurveyResultsCard": {
+			"AnchorResultsSubheading": "Aqui, poderá navegar pelos resultados do inquérito de satisfação do passageiros da Carris Metropolitana.",
+			"footerInfo": "A Carris Metropolitana está comprometida em garantir uma comunicação clara e acessível a todos os passageiros. Combinando suportes digitais e físicos, a informação chega ao público em tempo útil, adaptando-se a diferentes hábitos e níveis de familiaridade tecnológica. A integração dos dados em tempo real nas principais plataformas de mobilidade e a expansão dos Painéis de Informação ao Público reforçam essa estratégia. Além disso, a monitorização contínua da eficácia destes canais permite ajustar e melhorar a experiência informativa diariamente.",
+			"footerInfoBus": "A frota da Carris Metropolitana foi renovada para garantir veículos modernos, seguros e confortáveis, com uma idade média inferior a três anos. No entanto, para responder às diferentes necessidades da operação, e atender aos requisitos de segurança do Código da Estrada, é fundamental uma gestão dinâmica da frota e motoristas continuamente formados para lidar com desafios da operação. Além disso, a manutenção e limpeza rigorosas garantem uma experiência mais confortável para os passageiros, enquanto ações de sensibilização ajudam a combater o vandalismo e a preservar a qualidade dos veículos.",
+			"footerInfoNetwork": "A rede de transportes da Carris Metropolitana está em constante adaptação para garantir um serviço eficiente e alinhado com as necessidades dos passageiros. Através de uma monitorização rigorosa e da análise de padrões de procura, são feitos ajustes estratégicos nos horários e percursos para otimizar a operação. Em 2024, foram implementadas 1 900 melhorias na rede, reforçando a qualidade do serviço. Além disso, a sinalização e a organização nos terminais estão a ser revistas para melhorar a experiência de deslocação e orientação dos passageiros.",
+			"footerInfoPublic": "A Carris Metropolitana está comprometida em garantir uma comunicação clara e acessível a todos os passageiros. Combinando suportes digitais e físicos, a informação chega ao público em tempo útil, adaptando-se a diferentes hábitos e níveis de familiaridade tecnológica. A integração dos dados em tempo real nas principais plataformas de mobilidade e a expansão dos Painéis de Informação ao Público reforçam essa estratégia. Além disso, a monitorização contínua da eficácia destes canais permite ajustar e melhorar a experiência informativa diariamente.",
+			"footerInfoStops": " Para garantir uma gestão eficiente e ajustada às necessidades reais da população, a Carris Metropolitana desenvolveu uma base de dados detalhada e georreferenciada de todas as paragens da rede. Além do mapeamento, são feitas avaliações constantes para identificar oportunidades de melhoria, como a relocalização de paragens ou a criação de novas infraestruturas. Estas ações são realizadas em conjunto com os municípios, assegurando que cada intervenção contribua para um serviço mais seguro e confortável para todos os utilizadores.",
+			"footerInfoSupport": "A Carris Metropolitana disponibiliza vários canais de contacto, incluindo e-mail, formulário online, call center e atendimento presencial nos espaços navegante. A escuta ativa dos passageiros, combinada com auditorias e monitorização em tempo real, permite ajustar e melhorar continuamente o serviço. Além disso, os motoristas, peça-chave na operação, recebem formação contínua para um atendimento de qualidade, com foco na segurança e acessibilidade.",
+			"heading": "Resultados",
+			"no_data": "Nenhum cartão encontrado"
+		},
+		"SurveyResultsInfoAccordion": {
+			"description1": "Foram avaliados diferentes indicadores (por exemplo: Conforto das paragens que utiliza), agrupados por temas como <b>informação ao público, rede, paragens, autocarros e atendimento.</b>",
+			"description2": "Cada indicador foi classificado numa escala de 0 a 10, representando a satisfação dos passageiros sobre aquele aspeto específico, em que 0 é 'nada satisfeito' e 10 significa 'totalmente satisfeito'.",
+			"heading": "Sobre os Resultados"
+		},
+		"SurveyResultsToolbar": {
+			"by_avaliation": "Filtrar por Avaliação",
+			"by_category": "Filtrar por Categoria",
+			"searchInput": "Pesquisar Resultados...",
+			"subheading": "Informação ao Público"
+		}
+	},
 	"tickets": {
 		"Pricing": {
 			"inter-regional": {
