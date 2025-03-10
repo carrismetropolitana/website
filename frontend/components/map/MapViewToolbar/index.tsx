@@ -27,9 +27,6 @@ export function MapViewToolbar({ className, onCenterMap }: Props) {
 	//
 	// A. Setup variables
 
-	const mapOptionsContext = useMapOptionsContext();
-	const analyticsContext = useAnalyticsContext();
-        
 	const t = useTranslations('map.toolbar');
 
 	const mapOptionsContext = useMapOptionsContext();
