@@ -1,3 +1,5 @@
+/* * */
+
 import { Section } from '@/components/layout/Section';
 import { Surface } from '@/components/layout/Surface';
 import { StopProbeHeader } from '@/components/stops/StopProbeHeader';
@@ -11,15 +13,28 @@ import React, { useEffect, useState } from 'react';
 
 import styles from './styles.module.css';
 
+/* * */
+
 interface Props {
 	description?: string
 	selectedStop: string
 	title: string
 }
 
+/* * */
+
 const TOTAL_QUESTIONS = 4;
 
+/* * */
+
 export function StopProbeSection({ description, selectedStop, title }: Props) {
+	//
+
+	//
+	// A. Setup variables
+
+	const t = useTranslations('stops.Probe');
+
 	const [isProbeEnded, setProbeEnded] = useState<boolean>(false);
 	const [currentPage, setCurrentPage] = useState<number>(0);
 	const [isMessageShown, setIsMessageShown] = useState<boolean>(true);
@@ -31,7 +46,8 @@ export function StopProbeSection({ description, selectedStop, title }: Props) {
 	const [stopQuestion4Answer, setQuestion4Answer] = useState<string | undefined>(undefined);
 	const [progress, setProgress] = useState<number>(0);
 
-	const t = useTranslations('stops.Probe');
+	//
+	// B. Handle actions
 
 	useEffect(() => {
 		const ended = localStorage.getItem(`Stops${selectedStop}|ProbeEnded`);
