@@ -14,6 +14,8 @@ interface Props {
 	title: string
 }
 
+/* * */
+
 export function StopProbeHeader({ description, handleOptOut, handleParticipation, title }: Props) {
 	//
 
@@ -37,5 +39,6 @@ export function StopProbeHeader({ description, handleOptOut, handleParticipation
 			</div>
 		</div>
 	);
+
 	//
 }

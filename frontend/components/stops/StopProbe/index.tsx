@@ -1,9 +1,10 @@
 'use client';
+
 /* * */
 
 import { StopProbeSection } from '@/components/stops/StopProbeSection';
+import { useStopsDetailContext } from '@/contexts/StopsDetail.context';
 import { useTranslations } from 'next-intl';
-import { useEffect, useState } from 'react';
 
 /* * */
 
@@ -13,20 +14,15 @@ export function StopProbe() {
 	//
 	// A. Setup Variables
 
-	const [selectedStop, setSelectedStop] = useState('');
 	const t = useTranslations('stops.Probe');
 
-	useEffect(() => {
-		if (typeof window === 'undefined') return;
-		const url = window.location.href;
-		setSelectedStop(url.split('/').pop() || '');
-	}, []);
+	const stopsDetailContext = useStopsDetailContext();
 
 	//
 	// B. Render Components
 
 	return (
-		<StopProbeSection description={t('description')} selectedStop={selectedStop || ''} title={t('title')} />
+		<StopProbeSection description={t('description')} selectedStop={stopsDetailContext.data.active_stop_id} title={t('title')} />
 	);
 
 	//
