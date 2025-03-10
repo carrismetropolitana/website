@@ -6,7 +6,6 @@ import { Section } from '@/components/layout/Section';
 import { Surface } from '@/components/layout/Surface';
 import { allPassangersCardsData } from '@/components/survey/_data/Passenger/cards';
 import { SurveyPasgrCharacterCard } from '@/components/survey/SurveyPasgrCharacterCard';
-import { Accordion } from '@mantine/core';
 import { useTranslations } from 'next-intl';
 
 import styles from './styles.module.css';

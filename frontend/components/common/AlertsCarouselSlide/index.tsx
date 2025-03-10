@@ -33,9 +33,9 @@ export default function Component({ alert }: Props) {
 		analyticsContext.actions.capture(ampli => ampli.alertClicked({ alert_id: alert.alert_id, alert_title: alert.title }));
 	};
 
-  //
+	//
 	// C. Render components
-  
+
 	return (
 		<Link className={styles.container} href={`${RoutesSchedule.ALERTS.route}/${alert.alert_id}`} onClick={handleAlertClick} target="_blank">
 			<AlertActivePeriodStart date={alert.start_date} size="sm" />

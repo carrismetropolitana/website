@@ -10,8 +10,6 @@ import { getBaseGeoJsonFeatureCollection } from '@/utils/map.utils';
 import { type Stop } from '@carrismetropolitana/api-types/network';
 import { createContext, useContext, useEffect, useMemo, useState } from 'react';
 
-import { useAnalyticsContext } from './Analytics.context';
-
 /* * */
 
 interface StopsListContextState {
@@ -64,10 +62,7 @@ export const StopsListContextProvider = ({ children }) => {
 
 	const profileContext = useProfileContext();
 	const stopsContext = useStopsContext();
-	const locationsContext = useLocationsContext();
 	const analyticsContext = useAnalyticsContext();
-
-	const searchHook = useRef<{ search: (query: string) => Stop[] }>(undefined);
 
 	const [dataFilteredState, setDataFilteredState] = useState<Stop[]>([]);
 	const [dataFilteredGeojsonFCState, setDataFilteredGeojsonFCState] = useState<GeoJSON.FeatureCollection<GeoJSON.Point, GeoJSON.GeoJsonProperties>>();

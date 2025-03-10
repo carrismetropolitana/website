@@ -8,7 +8,6 @@ import { Surface } from '@/components/layout/Surface';
 import { useAnalyticsContext } from '@/contexts/Analytics.context';
 import { IconAt, IconExternalLink } from '@tabler/icons-react';
 import { useTranslations } from 'next-intl';
-import { useEffect } from 'react';
 
 import styles from './styles.module.css';
 
