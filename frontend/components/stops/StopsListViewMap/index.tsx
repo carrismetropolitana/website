@@ -3,13 +3,12 @@
 import { Surface } from '@/components/layout/Surface';
 import { MapView } from '@/components/map/MapView';
 import { MapViewStyleStops, MapViewStyleStopsInteractiveLayerId } from '@/components/map/MapViewStyleStops';
-import { transformStopDataIntoGeoJsonFeature } from '@/contexts/Stops.context';
 import { useStopsListContext } from '@/contexts/StopsList.context';
-import { centerMap, getBaseGeoJsonFeatureCollection } from '@/utils/map.utils';
+import { centerMap } from '@/utils/map.utils';
 import * as turf from '@turf/turf';
 import { useMap } from '@vis.gl/react-maplibre';
 import { useRouter } from 'next/navigation';
-import { useEffect, useMemo } from 'react';
+import { useEffect } from 'react';
 
 /* * */
 
@@ -24,30 +23,18 @@ export function StopsListViewMap() {
 	const stopsListContext = useStopsListContext();
 
 	//
-	// B. Transform data
-
-	const allStopsFeatureCollection = useMemo(() => {
-		const collection = getBaseGeoJsonFeatureCollection();
-		stopsListContext.data.filtered.forEach((stop) => {
-			const stopFC = transformStopDataIntoGeoJsonFeature(stop);
-			if (stopFC) collection.features.push(stopFC);
-		});
-		return collection;
-	}, [stopsListContext.data.filtered]);
-
-	//
-	// C. Handle Actions
+	// B. Handle actions
 
 	useEffect(() => {
 		// Exit early if there are no stops or map
-		if (!allStopsFeatureCollection || !allStopsFeatureCollection.features.length || !stopsListMap) return;
+		if (!stopsListContext.data.filtered_fc || !stopsListContext.data.filtered_fc.features.length || !stopsListMap) return;
 		// When there are no search filters, center the map on all stops
 		if (!stopsListContext.filters.by_search.length) {
-			centerMap(stopsListMap, allStopsFeatureCollection.features);
+			centerMap(stopsListMap, stopsListContext.data.filtered_fc.features);
 			return;
 		}
 		// When there are search filters, center the map on the cluster with the most points
-		const clusterPoints = turf.clustersKmeans(allStopsFeatureCollection, { mutate: true, numberOfClusters: 2 });
+		const clusterPoints = turf.clustersKmeans(stopsListContext.data.filtered_fc, { mutate: true, numberOfClusters: 2 });
 		const clusterPointsCount = clusterPoints.features.reduce((acc, feature) => {
 			if (typeof feature.properties.cluster !== 'number') return acc;
 			const clusterId = feature.properties.cluster;
@@ -60,7 +47,7 @@ export function StopsListViewMap() {
 		console.log('filteredClusterPoints', filteredClusterPoints);
 		centerMap(stopsListMap, filteredClusterPoints);
 		//
-	}, [allStopsFeatureCollection, stopsListMap]);
+	}, [stopsListContext.data.filtered_fc, stopsListMap]);
 
 	function handleLayerClick(event) {
 		if (!stopsListMap) return;
@@ -75,7 +62,7 @@ export function StopsListViewMap() {
 	}
 
 	//
-	// D. Render components
+	// C. Render components
 
 	return (
 		<Surface variant="persistent" forceOverflow>
@@ -85,7 +72,7 @@ export function StopsListViewMap() {
 					interactiveLayerIds={[MapViewStyleStopsInteractiveLayerId]}
 					onClick={handleLayerClick}
 				>
-					<MapViewStyleStops stopsData={allStopsFeatureCollection} />
+					<MapViewStyleStops stopsData={stopsListContext.data.filtered_fc} />
 				</MapView>
 			</div>
 		</Surface>

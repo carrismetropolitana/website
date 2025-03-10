@@ -30,6 +30,8 @@ const nextConfig: NextConfig = {
 			//
 			{ destination: '/news', permanent: true, source: '/noticias' },
 			//
+			{ destination: '/survey', permanent: true, source: '/inquerito' },
+			//
 			{ destination: '/planner', permanent: true, source: '/planeador' },
 			//
 			{ destination: '/open-data', permanent: true, source: '/opendata' },
@@ -47,6 +49,8 @@ const nextConfig: NextConfig = {
 			{ destination: '/contacts', permanent: true, source: '/apoio' },
 			//
 			{ destination: '/viagem-2024', permanent: true, source: '/viagem2024' },
+			//
+			{ destination: '/metrics', permanent: true, source: '/metricas' },
 			//
 			{ destination: 'https://backoffice.carrismetropolitana.pt/imprensa', permanent: false, source: '/imprensa' },
 			{ destination: 'https://backoffice.carrismetropolitana.pt/embreveform', permanent: false, source: '/embreveform' },

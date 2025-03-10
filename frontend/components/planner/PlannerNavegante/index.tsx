@@ -24,7 +24,7 @@ export function PlannerNavegante() {
 	const analyticsContext = useAnalyticsContext();
 
 	//
-	// B. Handle Actions
+	// B. Handle actions
 
 	const handleClick = () => {
 		analyticsContext.actions.capture(ampli => ampli.plannerUsed({ planner_clicked: 'Navegante' }));

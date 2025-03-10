@@ -1,0 +1,53 @@
+/* HEADER */
+.header {
+	display: flex;
+	align-items: center;
+	gap: 10px; 
+  }
+.headerTitle {
+	font-size: 16px;
+	margin-left: 20px;
+	width: 100%;
+	color: var(--color-system-text-200);
+	padding-right: 10px;
+
+}
+.headerNumber {
+	font-size: 20px;
+	font-weight: var(--font-weight-bold);
+	position: relative;
+	z-index: 1;
+  }
+/* CIRCLED NUMBER */
+.circledNumber {
+	position: relative;
+	width: 80px;
+	height: 80px;
+	border-radius: 50%;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+  }
+  .blurredCircle {
+	position: absolute;
+	width: 100%; 
+	height: 100%;
+	border-radius: 50%;
+	filter: blur(3px);
+  }
+/* * */
+.container {
+	display: flex;
+	border-radius: 28px;
+	padding: 20px;
+	align-items: center;
+	min-height: 100%;
+	background-color: var(--color-system-background-100) !important;
+}
+.leftColumn {
+	flex-shrink: 0;
+}
+.rightColumn {
+	flex-grow: 1;
+	text-align: left;
+}

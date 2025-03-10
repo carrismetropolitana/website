@@ -1,0 +1,126 @@
+/* DOWNLOAD BUTTON */
+.downloadButton{
+    background: var(--color-brand);
+    color: var(--color-primary-black);
+    font-weight: var(--font-weight-semibold);
+    font-size:var(--color-system-text-300) ;
+}
+.downloadButtonContainer{
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    padding: 20px;
+}
+/* * */
+/* ANCHOR BUTTONS */
+.gridNav {
+	grid-template-columns: repeat(4, 1fr);
+}
+@media (width < 1000px) {
+	.gridNav {
+		grid-template-columns: 1fr 1fr;
+	}
+}
+@media (width <= 650px) {
+	.gridNav {
+		grid-template-columns: 1fr;
+	}
+}
+.gridNav a:nth-child(1){
+    background-color: var(--color-brand);
+}
+.gridNav a:nth-child(3){
+    background-color: var(--color-brand);
+}
+.gridNav a:nth-child(1) div{
+    color: var(--color-primary-black);
+}
+.gridNav a:nth-child(3) div{
+    color: var(--color-primary-black);
+}
+/* CONTAINER */
+.cardContainer{
+    border: 1px solid #FFDD00;
+    padding: 20px;
+    border-radius: 18px;
+    color: var(--color-primary-black);
+    width: 100%;
+}
+@media(width <= 650px) {
+	.cardContainer{
+        border-radius: 0px;
+    }
+}
+/* * */
+/* CARD HEADER */
+.header {
+	display: flex;
+	align-items: center;
+    justify-content: center;
+}
+.headerTitle {
+	font-size: 20px;
+	margin-left: 20px;
+	width: 100%;
+    font-weight: var(--font-weight-medium);
+	color: var(--color-system-text-200);
+
+}
+.headerNumber {
+	font-size: 30px;
+	font-weight: var(--font-weight-bold);
+	color: #FFFFFF;
+	position: relative;
+  }
+/* CARD CIRCLED NUMBER */
+.circledNumber {
+	position: relative;
+	width: 99px;
+	height: 99px;
+	border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .blurredCircle {
+    position: absolute;
+    width: 100%; 
+    height: 100%;
+    border-radius: 50%;
+    filter: blur(3px);
+    background-color: #CCCC1B;
+    color: #FFFFFF;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+/* * */
+/* CARD SQUIRCLE */
+.squircle{
+    padding: 20px;
+    border: 2px solid #CCCC1B;
+    box-shadow: 0px 0px 3px 0px #CCCC1B;
+    border-radius: 20px;
+}
+/* * */
+.globalSatisfactionText p{
+    font-size:  var(--font-size-heading);
+    font-weight: var(--font-weight-bold);
+    padding: 20px;
+    color: var(--color-system-text-300);
+    text-align: center;
+}
+/* * */
+/* GLOBAL SATISFACTION LOTTIE */
+.lottieGlobalSatisfaction{
+    width: 70%;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+@media(width <= 650px) {
+	.lottieGlobalSatisfaction{
+        width: 100%;
+        padding-bottom: 20px;
+    }
+}

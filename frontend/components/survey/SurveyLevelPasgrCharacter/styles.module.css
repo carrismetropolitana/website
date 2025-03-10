@@ -1,0 +1,45 @@
+/* * */
+/* HEADINGS */
+.headingWrapper {
+	display: flex;
+	flex-direction: column;
+	gap: var(--size-spacing-5);
+	align-items: flex-start;
+	justify-content: flex-start;
+	width: 100%;
+}
+.heading {
+	font-size: 24px;
+	font-weight: var(--font-weight-semibold);
+	color: var(--color-system-text-100);
+}
+.subheading {
+	font-size: 14px;
+	font-weight: var(--font-weight-medium);
+	color: var(--color-system-text-300);
+}
+/* * */
+/* CARDS */
+.cardGroup {
+	display: flex;
+	flex-direction: column;
+	gap: var(--size-spacing-10);
+}
+.contentWrapper{
+	display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+	
+}
+
+@media (width <= 650px) {
+	.headingWrapper {
+		padding: var(--size-spacing-20);
+		padding-bottom: 0;
+		padding-left: var(--size-spacing-25);
+	}
+	.contentWrapper{
+		margin: 0 auto;
+		grid-template-columns:  1fr;
+	}
+}

@@ -4,12 +4,13 @@
 
 import { SelectLine } from '@/components/common/SelectLine';
 import { SelectStop } from '@/components/common/SelectStop';
+import { useLinesContext } from '@/contexts/Lines.context';
+import { useStopsContext } from '@/contexts/Stops.context';
 import { Routes } from '@/utils/routes';
 import { SegmentedControl } from '@mantine/core';
 import { useTranslations } from 'next-intl';
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
-import useSWR from 'swr';
 
 import styles from './styles.module.css';
 
@@ -22,19 +23,17 @@ export function QuickSearchWidget() {
 	// A. Setup variables
 
 	const t = useTranslations('HomeQuickSearchWidget');
+
+	const stopsContext = useStopsContext();
+	const linesContext = useLinesContext();
+
 	const [selectedSearchType, setSelectedSearchType] = useState('lines');
 	const [selectedLineId, setSelectedLineId] = useState(null);
 	const [selectedStopId, setSelectedStopId] = useState(null);
 	const router = useRouter();
 
 	//
-	// B. Fetch data
-
-	const { data: allLinesData } = useSWR(`${Routes.API}/lines`);
-	const { data: allStopsData } = useSWR(`${Routes.API}/stops`);
-
-	//
-	// C. Transform data
+	// B. Transform data
 
 	const segmentedControlOptions = [
 		{ label: t('options.lines'), value: 'lines' },
@@ -42,7 +41,7 @@ export function QuickSearchWidget() {
 	];
 
 	//
-	// D. Handle actions
+	// C. Handle actions
 
 	const handleSelectLine = (selectedLineId) => {
 		setSelectedLineId(selectedLineId);
@@ -55,7 +54,7 @@ export function QuickSearchWidget() {
 	};
 
 	//
-	// E. Render Components
+	// D. Render Components
 
 	return (
 		<div className={styles.container}>
@@ -66,8 +65,8 @@ export function QuickSearchWidget() {
 			<div className={styles.searchWrapper}>
 				<SegmentedControl data={segmentedControlOptions} onChange={setSelectedSearchType} value={selectedSearchType} variant="white" />
 				<div className={styles.searchInputWrapper}>
-					{selectedSearchType === 'lines' && <SelectLine data={allLinesData} onSelectLineId={handleSelectLine} selectedLineId={selectedLineId} variant="white" />}
-					{selectedSearchType === 'stops' && <SelectStop data={allStopsData} onSelectStopId={handleSelectStop} selectedStopId={selectedStopId} variant="white" />}
+					{selectedSearchType === 'lines' && <SelectLine data={linesContext.data.lines} onSelectLineId={handleSelectLine} selectedLineId={selectedLineId} variant="white" />}
+					{selectedSearchType === 'stops' && <SelectStop data={stopsContext.data.stops} onSelectStopId={handleSelectStop} selectedStopId={selectedStopId} variant="white" />}
 				</div>
 			</div>
 		</div>

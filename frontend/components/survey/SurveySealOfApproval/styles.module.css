@@ -1,0 +1,91 @@
+/* CONTAINER */
+.container{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 30px;
+    margin: 0 auto;
+    border: 1px solid #CCCC1B;
+    padding: 20px;
+    border-radius: 28px;
+    background-color: var(--color-system-background-100) ;
+}
+/* * */
+/* NUMBER CONTAINER */
+.numberContainer {
+    border-radius: 50px;
+    color: #CCCC1B;
+    font-size: 24px;
+    padding: 10px;
+    border: 1px solid #CCCC1B;
+}
+/* * */
+/* HEADER */
+.header {
+	display: flex;
+	align-items: center;
+	gap: 10px; 
+  }
+.headerTitle {
+	font-size: 20px;
+	margin-left: 20px;
+	width: 100%;
+    font-weight: var(--font-weight-bold);
+	color: var(--color-system-text-300);
+	padding-right: 20px;
+    text-align: start;
+}
+.headerNumber {
+	font-size: 30px;
+	font-weight: var(--font-weight-bold);
+	color: #FFFFFF;
+	position: relative;
+  }
+/* CIRCLED NUMBER */
+.circledNumber {
+	position: relative;
+	width: 99px;
+	height: 99px;
+	border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .blurredCircle {
+    position: absolute;
+    width: 100%; 
+    height: 100%;
+    border-radius: 50%;
+    filter: blur(3px);
+    background-color: #CCCC1B;
+    color: #FFFFFF;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+/* * */
+/* COLUMNS */
+.leftColumn {
+    height: 150px;
+}
+.rightColumn {
+	text-align: end
+}
+/* * */
+/* SQUIRCLE */
+.squircle{
+    padding: 20px;
+    border: 2px solid #CCCC1B;
+    box-shadow: 0px 0px 3px 0px #CCCC1B;
+    border-radius: 20px;
+}
+/* * */
+/* SEAL OF APPROVAL TEXT */
+.sealOfApprovalText{
+    padding: 20px;
+	color: var(--color-system-text-300);
+    border-top: 1px solid var(--color-system-border-200);
+    text-align: center;
+}

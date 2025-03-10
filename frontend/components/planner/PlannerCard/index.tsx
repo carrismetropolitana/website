@@ -27,13 +27,15 @@ export function PlannerCard({ description, imageUrl, title, url }: Props) {
 	const analyticsContext = useAnalyticsContext();
 
 	//
-	// B. Handle Actions
+	// B. Handle actions
 
 	const handlePartnerCardClick = () => {
 		analyticsContext.actions.capture(ampli => ampli.plannerUsed({ planner_clicked: title }));
 	};
 
-	//
+  //
+	// C. Render components
+  
 	return (
 		<Link className={styles.container} href={url} onClick={handlePartnerCardClick} target="_blank">
 			<Image alt={title} className={styles.coverImage} fallbackSrc={ImagesCommon.PLACEHOLDER} src={imageUrl} />
@@ -43,4 +45,6 @@ export function PlannerCard({ description, imageUrl, title, url }: Props) {
 			</div>
 		</Link>
 	);
+  
+  //
 }

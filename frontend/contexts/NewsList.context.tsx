@@ -102,7 +102,7 @@ export const NewsListContextProvider = ({ children }) => {
 	}, [allNewsData, filterBySearch, filterByDate]);
 
 	useEffect(() => {
-		analyticsContext.actions.capture(ampli => ampli.captureNewsReferer({ page_referer: document.referrer }));
+		// analyticsContext.actions.capture(ampli => ampli.captureNewsReferer({ page_referer: document.referrer }));
 	}, [allNewsData]);
 
 	//

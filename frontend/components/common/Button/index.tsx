@@ -14,13 +14,14 @@ interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
 	icon?: React.ReactNode
 	label: string
 	onClick?: () => void
+	rightIcon?: React.ReactNode
 	target?: string
 	variant?: 'danger' | 'default' | 'info' | 'ok' | 'pill' | 'primary' | 'warning'
 }
 
 /* * */
 
-export default function Component({ className, href, icon, label, onClick, target, variant = 'default' }: ButtonProps) {
+export default function Component({ className, href, icon, label, onClick, rightIcon, target, variant = 'default' }: ButtonProps) {
 	//
 
 	const btnClass = classNames(className, styles.button, {
@@ -33,7 +34,7 @@ export default function Component({ className, href, icon, label, onClick, targe
 
 	if (href) {
 		return (
-			<Button className={btnClass} component={Link} href={href} leftSection={icon && icon} target={target} variant={variant}>
+			<Button className={btnClass} component={Link} href={href} leftSection={icon && icon} rightSection={rightIcon && rightIcon} target={target} variant={variant}>
 				{label}
 			</Button>
 		);

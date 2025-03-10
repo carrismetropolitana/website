@@ -69,7 +69,27 @@ export const AnalyticsContextProvider = ({ children }) => {
 
 	const capture = (callback: (instance: Ampli) => void) => {
 		if (consentContext.data.enabled_analytics && ampli?.isLoaded) {
-			callback(ampli);
+			if (typeof window !== 'undefined' && typeof document !== 'undefined') {
+				const defaultProps = {
+					app_version: pjson.version,
+					event_date: new Date().toISOString(),
+					page_domain: window.location.hostname,
+					page_location: window.location.href,
+					page_referer: document.referrer || window.location.origin,
+					page_title: document.title,
+				};
+
+				const wrappedAmpli = new Proxy(ampli, {
+					// Target is ampli and props is the event name
+					get(target, prop) {
+						if (typeof target[prop] === 'function') {
+							return (eventProps = {}) => target[prop]({ ...defaultProps, ...eventProps });
+						}
+					},
+				});
+
+				callback(wrappedAmpli);
+			};
 		}
 	};
 

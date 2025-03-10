@@ -32,7 +32,7 @@ export function FavoriteToggle({ color, isActive, onToggle }: Props) {
 	const consentContext = useConsentContext();
 
 	//
-	// B. Handle Actions
+	// B. Handle actions
 
 	const handleRequestConsent = () => {
 		consentContext.actions.ask();

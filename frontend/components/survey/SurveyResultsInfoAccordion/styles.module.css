@@ -1,0 +1,24 @@
+/* DESCRIPTION 1 2 */
+.desc1{
+padding: 10px;
+}
+
+.desc2{
+    padding: 0px 10px 0px 10px;
+}
+
+.desc1, .desc2{
+    font-size: var(--font-size-text);
+    font-weight: var(--font-weight-medium);
+    color: var(--color-system-text-200);
+}
+/* * */
+/* Accordion */
+.control{
+    color: var(--color-system-text-200);
+}
+.accordionAboutResults{
+    border-bottom: 1px solid #e9e9e9;
+    margin: 0 auto;
+    width: 100%
+}

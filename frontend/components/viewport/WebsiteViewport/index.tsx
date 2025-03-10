@@ -2,6 +2,7 @@
 
 /* * */
 
+import { ScrollToTopButton } from '@/components/common/ScrollToTopButton';
 import { Footer } from '@/components/footer/Footer';
 import { Header } from '@/components/header/Header';
 import { ConsentPopup } from '@/components/privacy/ConsentPopup';
@@ -28,6 +29,7 @@ export function WebsiteViewport({ children }) {
 			{children}
 			{searchParams.get('origin') !== 'app' && <Footer />}
 			{searchParams.get('origin') !== 'app' && <ConsentPopup />}
+			<ScrollToTopButton showAfterHeight={350} />
 		</div>
 	);
 

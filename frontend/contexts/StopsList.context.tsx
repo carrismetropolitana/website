@@ -2,14 +2,13 @@
 
 /* * */
 
-import type { Stop } from '@carrismetropolitana/api-types/network';
-
-import { useLocationsContext } from '@/contexts/Locations.context';
+import { useAnalyticsContext } from '@/contexts/Analytics.context';
 import { useProfileContext } from '@/contexts/Profile.context';
-import { useStopsContext } from '@/contexts/Stops.context';
+import { transformStopDataIntoGeoJsonFeature, useStopsContext } from '@/contexts/Stops.context';
 import { createDocCollection } from '@/hooks/useOtherSearch';
 import { getBaseGeoJsonFeatureCollection } from '@/utils/map.utils';
-import { createContext, useContext, useEffect, useRef, useState } from 'react';
+import { type Stop } from '@carrismetropolitana/api-types/network';
+import { createContext, useContext, useEffect, useMemo, useState } from 'react';
 
 import { useAnalyticsContext } from './Analytics.context';
 
@@ -29,7 +28,7 @@ interface StopsListContextState {
 	data: {
 		favorites: Stop[]
 		filtered: Stop[]
-		filtered_geojson_fc: GeoJSON.FeatureCollection
+		filtered_fc: GeoJSON.FeatureCollection<GeoJSON.Point, GeoJSON.GeoJsonProperties>
 	}
 	filters: {
 		by_attribute: null | string
@@ -71,7 +70,7 @@ export const StopsListContextProvider = ({ children }) => {
 	const searchHook = useRef<{ search: (query: string) => Stop[] }>(undefined);
 
 	const [dataFilteredState, setDataFilteredState] = useState<Stop[]>([]);
-	const [dataFilteredGeojsonFCState, setDataFilteredGeojsonFCState] = useState<GeoJSON.FeatureCollection>();
+	const [dataFilteredGeojsonFCState, setDataFilteredGeojsonFCState] = useState<GeoJSON.FeatureCollection<GeoJSON.Point, GeoJSON.GeoJsonProperties>>();
 	const [dataFavoritesState, setDataFavoritesState] = useState<Stop[]>([]);
 
 	const [filterByAttributeState, setFilterByAttributeState] = useState <StopsListContextState['filters']['by_attribute']>(null);
@@ -83,74 +82,25 @@ export const StopsListContextProvider = ({ children }) => {
 	//
 	// B. Transform data
 
-	useEffect(() => {
-		if (!stopsContext.data.stops.length) return;
-
-		const scheduleTask = (callback) => {
-			if ('requestIdleCallback' in window) {
-				return requestIdleCallback(callback);
-			}
-			else {
-				return setTimeout(callback, 0); // Fallback for Safari
-			}
-		};
-
-		const cancelTask = (id) => {
-			if ('cancelIdleCallback' in window) {
-				cancelIdleCallback(id);
-			}
-			else {
-				clearTimeout(id);
-			}
-		};
-
-		const taskId = scheduleTask(() => {
-			console.log('Running expensive computation asynchronously');
-			// Prepare data for search function
-			const preparedSearchCollection = stopsContext.data.stops.map((item) => {
-				const isFavorite = profileContext.data.favorite_stops?.includes(item.id) ?? false;
-				const localityData = locationsContext.actions.getLocalityById(item.locality_id);
-				return {
-					...item,
-					boost: isFavorite,
-					locality_display: localityData?.display ?? '',
-				};
-			});
-			searchHook.current = createDocCollection(preparedSearchCollection, {
-				id: 2,
-				locality_display: 1.5,
-				long_name: 1,
-				short_name: 1,
-				tts_name: 1.5,
-			}, {
-				threshold: 1.7,
-			});
+	const searchHook = useMemo(() => {
+		// Prepare data for search function
+		const preparedSearchCollection = stopsContext.data.stops.map((item) => {
+			const isFavorite = profileContext.data.favorite_stops?.includes(item.id) ? true : false;
+			return {
+				...item,
+				boost: isFavorite,
+			};
 		});
-
-		return () => cancelTask(taskId); // Cleanup on unmount
+		return createDocCollection(preparedSearchCollection, {
+			id: 2,
+			// locality_name: 1.5,
+			long_name: 1,
+			short_name: 1,
+			tts_name: 1.5,
+		}, {
+			threshold: 1.7,
+		});
 	}, [stopsContext.data.stops, profileContext.data.favorite_stops]);
-
-	// const searchHook = useMemo(() => {
-	// 	// Prepare data for search function
-	// 	const preparedSearchCollection = stopsContext.data.stops.map((item) => {
-	// 		const isFavorite = profileContext.data.favorite_stops?.includes(item.id) ? true : false;
-	// 		const localityData = locationsContext.actions.getLocalityById(item.locality_id);
-	// 		return {
-	// 			...item,
-	// 			boost: isFavorite,
-	// 			locality_display: localityData?.display ?? '',
-	// 		};
-	// 	});
-	// 	return createDocCollection(preparedSearchCollection, {
-	// 		id: 2,
-	// 		locality_display: 1.5,
-	// 		long_name: 1,
-	// 		short_name: 1,
-	// 		tts_name: 1.5,
-	// 	}, {
-	// 		threshold: 1.7,
-	// 	});
-	// }, [stopsContext.data.stops, profileContext.data.favorite_stops]);
 
 	const applyFiltersToData = (allData: Stop[] = []) => {
 		//
@@ -162,14 +112,14 @@ export const StopsListContextProvider = ({ children }) => {
 
 		if (filterBySearchState) {
 			// Give extra weight to favorite lines
-			filterResult = searchHook.current?.search(filterBySearchState) || filterResult;
+			filterResult = searchHook.search(filterBySearchState) || filterResult;
 		}
 
 		//
 		// Filter by_attribute
 
 		if (filterByAttributeState) {
-			filterResult = filterResult.filter((item) => {
+			filterResult = filterResult.filter(() => {
 				return true;
 			});
 		}
@@ -178,7 +128,7 @@ export const StopsListContextProvider = ({ children }) => {
 		// Filter by_facility
 
 		if (filterByFacilityState) {
-			filterResult = filterResult.filter((item) => {
+			filterResult = filterResult.filter(() => {
 				return true;
 			});
 		}
@@ -187,7 +137,7 @@ export const StopsListContextProvider = ({ children }) => {
 		// Filter by by_municipality_or_locality
 
 		if (filterByMunicipalityOrLocalityState) {
-			filterResult = filterResult.filter((line) => {
+			filterResult = filterResult.filter(() => {
 				return true; // line.municipality_id === filtersState.by_municipality;
 			});
 		}
@@ -210,8 +160,22 @@ export const StopsListContextProvider = ({ children }) => {
 		setDataFavoritesState(favoritesStopsData);
 	}, [stopsContext.data.stops, profileContext.data.favorite_stops]);
 
+	useEffect(() => {
+		// Check if all data is available
+		if (!dataFilteredState) return;
+		// Initialize worker if not already initialized
+		const collection = getBaseGeoJsonFeatureCollection();
+		dataFilteredState.forEach((stop) => {
+			const stopFC = transformStopDataIntoGeoJsonFeature(stop);
+			if (stopFC) collection.features.push(stopFC);
+		});
+		// Set state value
+		setDataFilteredGeojsonFCState(collection);
+		//
+	}, [dataFilteredState]);
+
 	//
-	// D. Handle actions
+	// C. Handle actions
 
 	const updateFilterByAttribute = (value: StopsListContextState['filters']['by_attribute']) => {
 		setFilterByAttributeState(value || null);
@@ -236,7 +200,7 @@ export const StopsListContextProvider = ({ children }) => {
 	};
 
 	//
-	// E. Define context value
+	// D. Define context value
 
 	const contextValue: StopsListContextState = {
 		actions: {
@@ -252,7 +216,7 @@ export const StopsListContextProvider = ({ children }) => {
 		data: {
 			favorites: dataFavoritesState,
 			filtered: dataFilteredState,
-			filtered_geojson_fc: dataFilteredGeojsonFCState || getBaseGeoJsonFeatureCollection(),
+			filtered_fc: dataFilteredGeojsonFCState || getBaseGeoJsonFeatureCollection(),
 		},
 		filters: {
 			by_attribute: filterByAttributeState,
@@ -267,7 +231,7 @@ export const StopsListContextProvider = ({ children }) => {
 	};
 
 	//
-	// F. Render components
+	// E. Render components
 
 	return (
 		<StopsListContext.Provider value={contextValue}>

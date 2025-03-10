@@ -123,7 +123,7 @@ export interface CaptureNewsRefererProperties {
   /**
    * The version of the application that generated the event.
    */
-  app_version: string;
+  app_version?: string;
   /**
    * | Rule | Value |
    * |---|---|
@@ -145,7 +145,7 @@ export interface CaptureNewsRefererProperties {
   /**
    * Captures the Referrer for a page
    */
-  page_referer: string;
+  page_referer?: string;
   /**
    * | Rule | Value |
    * |---|---|
@@ -238,7 +238,7 @@ export interface PingProperties {
   /**
    * The version of the application that generated the event.
    */
-  app_version: string;
+  app_version?: string;
   /**
    * This property indicates the location in the app (the pathname, the screen id) where the current event was generated at.
    */
@@ -315,7 +315,7 @@ export interface StopDetailRedirectedProperties {
   /**
    * The version of the application that generated the event.
    */
-  app_version: string;
+  app_version?: string;
   /**
    * | Rule | Value |
    * |---|---|
@@ -337,7 +337,7 @@ export interface StopDetailRedirectedProperties {
   /**
    * Captures the Referrer for a page
    */
-  page_referer: string;
+  page_referer?: string;
   /**
    * | Rule | Value |
    * |---|---|
@@ -568,7 +568,7 @@ export class CaptureNewsReferer implements BaseEvent {
   event_type = 'Capture News Referer';
 
   constructor(
-    public event_properties: CaptureNewsRefererProperties,
+    public event_properties?: CaptureNewsRefererProperties,
   ) {
     this.event_properties = event_properties;
   }
@@ -1069,7 +1069,7 @@ export class Ampli {
    * @param options Amplitude event options.
    */
   captureNewsReferer(
-    properties: CaptureNewsRefererProperties,
+    properties?: CaptureNewsRefererProperties,
     options?: EventOptions,
   ) {
     return this.track(new CaptureNewsReferer(properties), options);

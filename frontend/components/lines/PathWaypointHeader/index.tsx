@@ -53,7 +53,9 @@ export function PathWaypointHeader({ isFirstStop, isLastStop, isSelected, waypoi
 	};
 
 	const handleStopDetailLink = () => {
-		analyticsContext.actions.capture(ampli => ampli.stopDetailRedirected({ stop_id: waypointData.stop_id }));
+		analyticsContext.actions.capture(ampli => ampli.stopDetailRedirected({
+			stop_id: waypointData.stop_id,
+		}));
 	};
 
 	//

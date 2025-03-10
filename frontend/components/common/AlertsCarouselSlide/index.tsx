@@ -27,13 +27,15 @@ export default function Component({ alert }: Props) {
 	const analyticsContext = useAnalyticsContext();
 
 	//
-	// B. Handle Actions
+	// B. Handle actions
 
 	const handleAlertClick = () => {
 		analyticsContext.actions.capture(ampli => ampli.alertClicked({ alert_id: alert.alert_id, alert_title: alert.title }));
 	};
 
-	//
+  //
+	// C. Render components
+  
 	return (
 		<Link className={styles.container} href={`${RoutesSchedule.ALERTS.route}/${alert.alert_id}`} onClick={handleAlertClick} target="_blank">
 			<AlertActivePeriodStart date={alert.start_date} size="sm" />

@@ -170,9 +170,9 @@
 		--color-system-background-300: rgb(10 10 20);
 		--color-system-border-100: rgb(60 60 65);
 		--color-system-border-200: rgb(80 80 85);
-		--color-system-text-100: rgb(255 255 255);
-		--color-system-text-200: rgb(200 200 210);
-		--color-system-text-300: rgb(150 150 165);
+		--color-system-text-100: rgb(255, 255, 255);
+		--color-system-text-200: rgb(200, 200, 210);
+		--color-system-text-300: rgb(150, 150, 165);
 		--color-system-text-400: rgb(100 100 110);
 
 		/* * */

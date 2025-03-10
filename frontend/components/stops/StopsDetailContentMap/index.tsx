@@ -31,10 +31,6 @@ export function StopsDetailContentMap() {
 	//
 	// B. Fetch data
 
-	const allStopsGeoJson = useMemo(() => {
-		return stopsContext.actions.getAllStopsGeoJsonFC();
-	}, [stopsContext.data.stops]);
-
 	const activeStopGeoJson = useMemo(() => {
 		return stopsContext.actions.getStopByIdGeoJsonFC(stopsDetailContext.data.active_stop_id);
 	}, [stopsDetailContext.data.active_stop_id, stopsDetailContext.data.stop]);
@@ -131,7 +127,7 @@ export function StopsDetailContentMap() {
 
 			<MapViewStyleStops
 				presentBeforeId={MapViewStylePathPrimaryLayerId}
-				stopsData={allStopsGeoJson}
+				stopsData={stopsContext.data.stops_fc}
 				style={stopsDetailContext.data.active_shape ? 'muted' : 'primary'}
 			/>
 

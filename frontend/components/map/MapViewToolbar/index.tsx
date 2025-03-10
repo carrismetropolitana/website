@@ -1,5 +1,7 @@
 'use client';
 
+/* * */
+
 import TextPopover from '@/components/common/TextPopover';
 import { useAnalyticsContext } from '@/contexts/Analytics.context';
 import { useMapOptionsContext } from '@/contexts/MapOptions.context';
@@ -10,27 +12,37 @@ import { useTranslations } from 'next-intl';
 
 import styles from './styles.module.css';
 
+/* * */
+
 interface Props {
 	className?: string
 	onCenterMap?: () => void
 }
 
+/* * */
+
 export function MapViewToolbar({ className, onCenterMap }: Props) {
 	//
+
+	//
 	// A. Setup variables
+
 	const mapOptionsContext = useMapOptionsContext();
 	const analyticsContext = useAnalyticsContext();
+        
 	const t = useTranslations('map.toolbar');
+
+	const mapOptionsContext = useMapOptionsContext();
+	const analyticsContext = useAnalyticsContext();
+
 	const mapStyles: SegmentedControlItem[] = [
 		{ label: t('style.map'), value: 'map' },
 		{ label: t('style.satellite'), value: 'satellite' },
 	];
 
 	//
-	// B. Transform data
+	// B. Handle actions
 
-	//
-	// C. Handle events
 	const handleOpenInGoogle = () => {
 		const map = mapOptionsContext.data.map;
 		const clickedFrom: string = window.location.pathname;
@@ -61,7 +73,8 @@ export function MapViewToolbar({ className, onCenterMap }: Props) {
 	};
 
 	//
-	// D. Render component
+	// C. Render components
+
 	return (
 		<div className={classNames(styles.container, className)}>
 			<SegmentedControl classNames={{ label: styles.segmentedControlLabel }} data={mapStyles} onChange={mapOptionsContext.actions.setStyle} value={mapOptionsContext.data.style} />
@@ -79,4 +92,6 @@ export function MapViewToolbar({ className, onCenterMap }: Props) {
 			</button>
 		</div>
 	);
+
+	//
 }
