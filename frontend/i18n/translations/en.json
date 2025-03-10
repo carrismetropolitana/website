@@ -1530,6 +1530,90 @@
 			"subheading": "Available to all passengers, navegante® stores are dedicated to providing information about the Carris Metropolitana network and ticketing, enabling queries to be clarified, the issuance of navegante® cards and membership to profiles and discounts. It is also possible to load titles at PayShop® service points within the navegante® agent network."
 		}
 	},
+	"survey": {
+		"SurveyAboutCard": {
+			"confidence_interval": "confidence interval",
+			"days_description": "work days, saturdays and sundays",
+			"days_title": "Days",
+			"details_title": "Details",
+			"error_margin": "error margin",
+			"hours_description": "between 6AM and 4AM",
+			"hours_title": "Hours",
+			"months_description": "from March until June 2024",
+			"months_title": "Months"
+		},
+		"SurveyCriteriaCard": {
+			"firstRowText": "Line Searching Classes (from high to low)",
+			"firstRowValue": "4",
+			"fourthRowText": "The leveled distribuition  of entreiviews assure the representativity of the sample.",
+			"header": "By what criteria?",
+			"secondRowText": "Day Types (work and non work days)",
+			"secondRowValue": "2",
+			"thirdRowText": "Time Periods",
+			"thirdRowValue": "6"
+		},
+		"SurveyHeader": {
+			"AnchorAboutSurvey": "Tecnhical Information",
+			"AnchorAboutSurveyTitle": "Techincal Information",
+			"AnchorIndex": "Global Satisfaction Index",
+			"AnchorPassengerCaracter": "Passanger Charecterization",
+			"AnchorResults": "Results",
+			"DownloadButton": "Download Report",
+			"heading": "índice de Satisfação Global",
+			"legend": "A Carris Metropolitana ganhou o selo de aprovação dos passageiros",
+			"subtitle": "Select one of the options below to browse trough the page.",
+			"title": "Quick Access",
+			"value": "7.2"
+		},
+		"SurveyPrecisionCard": {
+			"firstRowText": "Confidence Interval",
+			"firstRowValue": "99,5%",
+			"fourthRowText": "These values reflect the accuracy and reliability of the results obtained, as they ensure that if the survey were repeated multiple times under the same conditions, the results could vary by an average of 1.8% in 99.5% of cases.",
+			"header": "By what criteria?",
+			"secondRowText": "Margin of error",
+			"secondRowValue": "1,8%",
+			"thirdRowText": "Sample classes",
+			"thirdRowValue": "192"
+		},
+		"SurveyPsgrCharacterCard": {
+			"age_heading": "Age",
+			"deslocation_type_heading": "Desclocation Type",
+			"gender_heading": "Gender",
+			"heading": "Passenger Characterization",
+			"instruction_level__heading": "Instruction Level",
+			"occupation_heading": "Occupation",
+			"subheading": "The users of Carris Metropolitana are, at most, women, teenagers (ages between 14 and 34 years old), working full time with some degree of high school education."
+		},
+		"SurveyRecomendationIndex": {
+			"card_heading": "Passenger Seal of Approval",
+			"card_legend": "The Global Satisfaction Index reflects the opinion of the thousands of passengers transported by Carris Metropolitana regarding the service provided. It results from the evaluation of the different topics presented earlier.",
+			"card_value": "7.2",
+			"recomendationIdexDescription": "\"How likely would you be to recommend the services of Carris Metropolitana to a friend or a family member?\"",
+			"title": "Global Satisfaction Index"
+		},
+		"SurveyResultsCard": {
+			"AnchorResultsSubheading": "Here, you can browse the results of the Carris Metropolitana passenger satisfaction survey.",
+			"footerInfo": "Carris Metropolitana is committed to ensuring clear and accessible communication for all passengers. By combining digital and physical media, information reaches the public in a timely manner, adapting to different habits and levels of technological familiarity. The integration of real-time data into the main mobility platforms and the expansion of Public Information Panels reinforce this strategy. Furthermore, continuous monitoring of the effectiveness of these channels allows for adjustments and improvements to the information experience on a daily basis.",
+			"footerInfoBus": "Carris Metropolitana's fleet has been renewed to ensure modern, safe, and comfortable vehicles, with an average age of less than three years. However, to meet the different operational needs and comply with the safety requirements of the Highway Code, a dynamic fleet management approach is essential, along with drivers who receive continuous training to handle operational challenges. Additionally, rigorous maintenance and cleaning ensure a more comfortable experience for passengers, while awareness campaigns help combat vandalism and preserve vehicle quality.",
+			"footerInfoNetwork": "The Carris Metropolitana transport network is constantly adapting to ensure an efficient service that aligns with passengers' needs. Through rigorous monitoring and demand pattern analysis, strategic adjustments are made to timetables and routes to optimise operations. In 2024, 1,900 improvements were implemented in the network, enhancing service quality. Additionally, signage and organisation at terminals are being reviewed to improve passengers' travel and orientation experience.",
+			"footerInfoPublic": "Carris Metropolitana is committed to ensuring clear and accessible communication for all passengers. By combining digital and physical media, information reaches the public in a timely manner, adapting to different habits and levels of technological familiarity. The integration of real-time data into the main mobility platforms and the expansion of Public Information Panels reinforce this strategy. Furthermore, continuous monitoring of the effectiveness of these channels allows for adjustments and improvements to the information experience on a daily basis.",
+			"footerInfoStops": "To ensure efficient management tailored to the real needs of the population, Carris Metropolitana has developed a detailed and georeferenced database of all stops in the network. In addition to mapping, constant assessments are carried out to identify improvement opportunities, such as relocating stops or creating new infrastructure. These actions are undertaken in collaboration with municipalities, ensuring that each intervention contributes to a safer and more comfortable service for all users.",
+			"footerInfoSupport": "Carris Metropolitana provides various contact channels, including email, an online form, a call centre, and in-person assistance at 'navegante' service points. Active listening to passengers, combined with audits and real-time monitoring, enables continuous service adjustments and improvements. Additionally, drivers, a key part of operations, receive continuous training to ensure high-quality customer service, with a focus on safety and accessibility.",
+			"heading": "Results",
+			"no_data": "No data available"
+		},
+		"SurveyResultsInfoAccordion": {
+			"description1": "Different indicators were assessed (e.g., Comfort of the stops you use), grouped into themes such as <b>public information, network, stops, buses, and customer service.</b>",
+			"description2": "Each indicator was rated on a scale from 0 to 10, representing passengers' satisfaction with that specific aspect, where 0 means 'not satisfied at all' and 10 means 'completely satisfied'.",
+			"heading": "About the Results"
+		},
+		"SurveyResultsToolbar": {
+			"by_avaliation": "Filter by Avaliation",
+			"by_category": "Filter by Category",
+			"searchInput": "Search result...",
+			"subheading": "Public Information"
+		}
+	},
 	"tickets": {
 		"Pricing": {
 			"inter-regional": {
