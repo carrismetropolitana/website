@@ -12,8 +12,10 @@ export function StopProbe() {
 
 	//
 	// A. Setup Variables
+
 	const [selectedStop, setSelectedStop] = useState('');
 	const t = useTranslations('stops.Probe');
+
 	useEffect(() => {
 		if (typeof window === 'undefined') return;
 		const url = window.location.href;
