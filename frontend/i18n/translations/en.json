@@ -1567,7 +1567,7 @@
 		},
 		"SurveyPrecisionCard": {
 			"firstRowText": "Confidence Interval",
-			"firstRowValue": "99,5%",
+			"firstRowValue": "95,5%",
 			"fourthRowText": "These values reflect the accuracy and reliability of the results obtained, as they ensure that if the survey were repeated multiple times under the same conditions, the results could vary by an average of 1.8% in 99.5% of cases.",
 			"header": "By what criteria?",
 			"secondRowText": "Margin of error",
