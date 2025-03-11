@@ -1569,7 +1569,7 @@
 		},
 		"SurveyPrecisionCard": {
 			"firstRowText": "intervalo de confiança",
-			"firstRowValue": "99,5%",
+			"firstRowValue": "95,5%",
 			"fourthRowText": "Estes valores refletem a precisão e fiabilidade dos resultados obtidos, uma vez que garantem que, se o inquérito fosse repetido múltiplas vezes nas mesmas condições, os resultados poderiam variar uma média de 1,8% em 99,5% das ocasiões. ",
 			"header": "Qual foi a precisão?",
 			"secondRowText": "margem de erro",
