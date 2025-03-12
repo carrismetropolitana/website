@@ -23,6 +23,7 @@ export function StopProbeSection({ description, selectedStop, title }: Props) {
 
 	//
 	// A. Setup variables
+
 	const t = useTranslations('stops.Probe');
 
 	const [currentPage, setCurrentPage] = useState<number>(0);
@@ -39,7 +40,6 @@ export function StopProbeSection({ description, selectedStop, title }: Props) {
 
 	useEffect(() => {
 		const storedProbeEnded = localStorage.getItem(`Stops${selectedStop}|ProbeEnded`) === 'true';
-		const endingShown = localStorage.getItem(`Stops${selectedStop}|EndingMessageShown`) === 'true';
 		const storedCurrentPage = parseInt(localStorage.getItem(`Stops${selectedStop}|ProbeCurrentPage`) || '0');
 		const storedAnswers = [
 			localStorage.getItem(`Stops${selectedStop}|Question1Answer`) || '',
@@ -57,10 +57,10 @@ export function StopProbeSection({ description, selectedStop, title }: Props) {
 
 	//
 	// C. Handle actions
+
 	const handleParticipation = () => {
 		localStorage.setItem('Stops|ProbeOptOut', 'false');
 		localStorage.setItem(`Stops${selectedStop}|ProbeEnded`, 'false');
-		// Reset the ending message flag for this stop.
 		localStorage.setItem(`Stops${selectedStop}|EndingMessageShown`, 'false');
 		localStorage.setItem(`Stops${selectedStop}|ProbeCurrentPage`, '1');
 
@@ -83,14 +83,10 @@ export function StopProbeSection({ description, selectedStop, title }: Props) {
 	const handleNextQuestion = () => {
 		const nextPage = currentPage + 1;
 		if (nextPage > TOTAL_QUESTIONS) {
-			// Mark the probe as ended
 			localStorage.setItem(`Stops${selectedStop}|ProbeEnded`, 'true');
 			setIsProbeEnded(true);
-			// If the ending message has not been shown yet, display it now.
-			if (localStorage.getItem(`Stops${selectedStop}|EndingMessageShown`) !== 'true') {
-				localStorage.setItem(`Stops${selectedStop}|EndingMessageShown`, 'true');
-				setDisplayEndingMessage(true);
-			}
+			localStorage.setItem(`Stops${selectedStop}|EndingMessageShown`, 'true');
+			setDisplayEndingMessage(true);
 			return;
 		}
 		localStorage.setItem(`Stops${selectedStop}|ProbeCurrentPage`, nextPage.toString());
@@ -99,6 +95,7 @@ export function StopProbeSection({ description, selectedStop, title }: Props) {
 	};
 
 	// D. Render Components
+
 	const renderQuestion = () => {
 		const questionIndex = currentPage - 1;
 		const QuestionComponent = questionComponents[questionIndex];
@@ -110,44 +107,35 @@ export function StopProbeSection({ description, selectedStop, title }: Props) {
 		) : null;
 	};
 
-	if (!isProbeEnded && !hasOptedOut) {
-		return (
-			<Surface>
-				<Section withGap withPadding>
-					{currentPage === 0 ? (
-						<StopProbeHeader
-							description={description}
-							handleOptOut={handleOptOut}
-							handleParticipation={handleParticipation}
-							title={title}
-						/>
-					) : (
-						<>
-							<Progress
-								className={styles.progressBar}
-								color="green"
-								transitionDuration={800}
-								value={progress}
-							/>
-							{renderQuestion()}
-							<div className={styles.submitContainer}>
-								<Button onClick={handleNextQuestion}>{t('submit')}</Button>
-							</div>
-						</>
-					)}
-				</Section>
-			</Surface>
-		);
-	}
-	else if (isProbeEnded && !hasOptedOut && displayEndingMessage) {
-		return (
-			<Surface>
-				<Section withGap withPadding>
-					<p>{t('endingMessage')}</p>
-				</Section>
-			</Surface>
-		);
-	}
-	return null;
+	return (
+		<>
+			{!isProbeEnded && !hasOptedOut ? (
+				<Surface>
+					<Section withGap withPadding>
+						{currentPage === 0 ? (
+							<StopProbeHeader description={description} handleOptOut={handleOptOut} handleParticipation={handleParticipation} title={title} />
+						) : (
+							<>
+								<Progress className={styles.progressBar} color="green" transitionDuration={800} value={progress} />
+								{renderQuestion()}
+								<div className={styles.submitContainer}>
+									<Button onClick={handleNextQuestion}>{t('submit')}</Button>
+								</div>
+							</>
+						)}
+					</Section>
+				</Surface>
+			) : isProbeEnded && displayEndingMessage && !hasOptedOut ? (
+				<div className={styles.fadeOut}>
+					<Surface>
+						<Section withGap withPadding>
+							<p>{t('endingMessage')}</p>
+						</Section>
+					</Surface>
+				</div>
+			) : null}
+		</>
+	);
+
 	//
 }
