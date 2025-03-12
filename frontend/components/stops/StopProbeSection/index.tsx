@@ -165,7 +165,7 @@ export function StopProbeSection({ description, selectedStop, title }: Props) {
 			case 4:
 				return <Question4 question4Answer={stopQuestion4Answer || ''} stopId={selectedStop} />;
 			default:
-				return null;
+				break;
 		}
 	};
 
@@ -174,20 +174,16 @@ export function StopProbeSection({ description, selectedStop, title }: Props) {
 			{!isProbeEnded && !isMessageShown && !hasParticipatedOnThisStop && hasOptedOut !== 'true' ? (
 				<Surface>
 					<Section withGap withPadding>
-						{currentPage > 0 && (
-							<Progress className={styles.progressBar} color="green" transitionDuration={800} value={progress} />
-						)}
-
-						{currentPage === 0 && (
+						{currentPage === 0 ? (
 							<StopProbeHeader description={description} handleOptOut={handleOptOut} handleParticipation={handleParticipation} title={title} />
-						)}
-
-						{renderQuestion()}
-
-						{currentPage > 0 && (
-							<div className={styles.submitContainer}>
-								<Button onClick={handleNextQuestion}>{t('submit')}</Button>
-							</div>
+						) : (
+							<>
+								<Progress className={styles.progressBar} color="green" transitionDuration={800} value={progress} />
+								{renderQuestion()}
+								<div className={styles.submitContainer}>
+									<Button onClick={handleNextQuestion}>{t('submit')}</Button>
+								</div>
+							</>
 						)}
 					</Section>
 				</Surface>
