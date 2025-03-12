@@ -28,8 +28,8 @@ export function StopProbeSection({ description, selectedStop, title }: Props) {
 
 	const [currentPage, setCurrentPage] = useState<number>(0);
 	const [progress, setProgress] = useState<number>(0);
-	const [isProbeEnded, setIsProbeEnded] = useState<boolean>(false);
-	const [hasOptedOut, setHasOptedOut] = useState<boolean>(false);
+	const [isProbeEnded, setIsProbeEnded] = useState<boolean>(true);
+	const [hasOptedOut, setHasOptedOut] = useState<boolean>(true);
 	const [answers, setAnswers] = useState<string[]>(['', '', '', '']);
 	const [displayEndingMessage, setDisplayEndingMessage] = useState<boolean>(false);
 	const questionComponents = [Question1, Question2, Question3, Question4];
