@@ -1583,15 +1583,15 @@
 			"thirdRowValue": "6"
 		},
 		"SurveyHeader": {
-			"AnchorAboutSurvey": "Tecnhical Information",
-			"AnchorAboutSurveyTitle": "Techincal Information",
+			"AnchorAboutSurvey": "Technical Information",
+			"AnchorAboutSurveyTitle": "Technical Information",
 			"AnchorIndex": "Global Satisfaction Index",
 			"AnchorPassengerCaracter": "Passanger Charecterization",
 			"AnchorResults": "Results",
 			"AnchorResultsSubheading": "Here, you can browse the results of the Carris Metropolitana passenger satisfaction survey.",
 			"DownloadButton": "Download Report",
 			"heading": "índice de Satisfação Global",
-			"legend": "A Carris Metropolitana ganhou o selo de aprovação dos passageiros",
+			"legend": "A Carris Metropolitana ganhou o selo de aprovação dos passageiros.",
 			"subtitle": "Select one of the options below to browse trough the page.",
 			"title": "Quick Access",
 			"value": "7.2"
@@ -1599,7 +1599,7 @@
 		},
 		"SurveyPrecisionCard": {
 			"firstRowText": "Confidence Interval",
-			"firstRowValue": "99,5%",
+			"firstRowValue": "95,5%",
 			"fourthRowText": "These values reflect the accuracy and reliability of the results obtained, as they ensure that if the survey were repeated multiple times under the same conditions, the results could vary by an average of 1.8% in 99.5% of cases.",
 			"header": "By what criteria?",
 			"secondRowText": "Margin of error",

@@ -56,8 +56,9 @@ export const VehiclesContextProvider = ({ children }) => {
 	const { data: fetchedVehiclesData, isLoading: allVehiclesLoading } = useSWR<Vehicle[], Error>(`${Routes.API}/vehicles`, { refreshInterval: 5000 });
 
 	const allVehiclesData = useMemo(() => {
-		const now = DateTime.now().toSeconds();
-		return fetchedVehiclesData?.filter((vehicle: Vehicle) => vehicle.timestamp ?? 0 > now - 180) || [];
+		if (!fetchedVehiclesData) return [];
+		const now = DateTime.now().toUnixInteger();
+		return fetchedVehiclesData.filter((vehicle: Vehicle) => (vehicle.timestamp ?? 0) > now - 180);
 	}, [fetchedVehiclesData]);
 
 	//
