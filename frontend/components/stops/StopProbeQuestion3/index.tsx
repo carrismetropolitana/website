@@ -6,11 +6,11 @@ import { useState } from 'react';
 import styles from './styles.module.css';
 
 interface Props {
-	question3Answer: string
+	questionAnswer: string
 	stopId: string
 }
 
-export function Question3({ question3Answer, stopId }: Props) {
+export function Question3({ questionAnswer, stopId }: Props) {
 	//
 
 	//
@@ -18,7 +18,7 @@ export function Question3({ question3Answer, stopId }: Props) {
 
 	const t = useTranslations('stops.Probe');
 	const analyticsContext = useAnalyticsContext();
-	const [stopQuestion3Answer, setQuestion3Answer] = useState<string | undefined>(question3Answer);
+	const [stopQuestion3Answer, setQuestion3Answer] = useState<string | undefined>(questionAnswer);
 
 	//
 	// B. Handle Actions

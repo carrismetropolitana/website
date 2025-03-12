@@ -10,11 +10,11 @@ import styles from './styles.module.css';
 /* * */
 
 interface Props {
-	question2Answer: string
+	questionAnswer: string
 	stopId: string
 }
 
-export function Question2({ question2Answer, stopId }: Props) {
+export function Question2({ questionAnswer, stopId }: Props) {
 	//
 
 	//
@@ -22,7 +22,7 @@ export function Question2({ question2Answer, stopId }: Props) {
 
 	const t = useTranslations('stops.Probe');
 	const analyticsContext = useAnalyticsContext();
-	const [stopQuestion2Answer, setQuestion2Answer] = useState<string | undefined>(question2Answer);
+	const [stopQuestion2Answer, setQuestion2Answer] = useState<string | undefined>(questionAnswer);
 
 	//
 	// B. Handle Actions
