@@ -1,0 +1,57 @@
+ /* ACTION BUTTON */
+  
+  .actionButton {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+      width: 100%;
+      padding: 10px;
+    }
+  
+  /* .actionButton button{
+    align-content: center;
+    width: 100%;
+  }
+  
+  @media (width <= 650px){
+    .actionButton{
+      flex-flow: column;
+    }
+  } */
+
+  /* * */
+  /* PROBE DESCRIPTION */
+  
+  .probeDescription{
+   font-size: var(--font-size-text);
+   font-weight: var(--font-weight-text);
+   color: var(--color-system-text-200);
+  }
+  
+  /* * */
+  /* PROBE TITLE */
+  
+  .probeTitle{
+    display: flex;
+    align-items: center;
+    font-size: var(--font-size-title);
+    font-weight: var(--font-weight-title);
+    color: var(--color-system-text-100);
+  }
+  
+  /* * */
+  /* PROBE HEADER CONTAINER */
+  
+  .probeHeaderContainer{
+    display: flex;
+    flex-flow: row wrap;
+    gap: 10px;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+  }
+  
+  .probeHeaderDetails{
+    display: flex;
+    flex-direction: column;
+  }

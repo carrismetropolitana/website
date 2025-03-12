@@ -5,7 +5,7 @@ import { Button } from '@mantine/core';
 import { useTranslations } from 'next-intl';
 import { useState } from 'react';
 
-import styles from '../StopProbeSection/styles.module.css';
+import styles from './styles.module.css';
 
 /* * */
 

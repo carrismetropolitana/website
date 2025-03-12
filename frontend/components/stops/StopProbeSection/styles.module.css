@@ -1,90 +1,20 @@
-/* PROBE */
-.probeContainer{
-  border: 2px solid var(--color-status-ok-border);
-}
-/* * */
-/* ACTION BUTTON */
-
-.actionButton {
-    margin-top: 10px;
-    margin: 0 auto;
-    display: flex;
-    flex-direction: row;
-    align-content: flex-end;
-    flex-wrap: wrap;
-    gap: 10px;
-  }
-
-.actionButton button{
-  width: 200px;
-  display: flex;
-  flex-wrap: wrap;
-  margin: 0 auto;
-  align-content: center;
-}
-
-/* * */
-/* PROBE DESCRIPTION */
-
-.probeDescription{
- font-size: var(--font-size-text);
- font-weight: var(--font-weight-text);
- color: var(--color-system-text-200);
-}
-
-/* * */
-/* PROBE TITLE */
-
-.probeTitle{
-  font-size: var(--font-size-title);
-  font-weight: var(--font-weight-title);
-  color: var(--color-system-text-100);
-  align-items: center;
-  display: flex;
-}
-
-/* * */
 /* FADE OUT CONTAINER */
+.fadeOut {
+  animation: fadeOut 10s forwards;
+}
 
 @keyframes fadeOut {
   from {
     opacity: 1;
   }
   to {
-    opacity: 1;
     display: none;
+    opacity: 1;
   }
 }
 
-.fadeOut {
-  animation: fadeOut 10s forwards;
-}
-
 /* * */
-/* POSSIBLE ANSWERS */
 
-.fullWidth {
-  width: 100%;
-}
-
-.possibleAnswersContainer {
-  display: flex;
-  flex-wrap: wrap;
-  padding: 25px 0 0 0;
-  gap: 10px;
-  justify-content: center;
-  width: 100%;
-  align-items: center;
-}
-
-.possibleAnswersContainer span{
-pointer-events: none;
-}
-.selected{
-  border: 2px solid #000;
-}
-
-/* * */
 /* PROGESS BAR */
 
 .progressBar{
@@ -92,29 +22,12 @@ pointer-events: none;
 }
 
 /* * */
-/* PROBE HEADER CONTAINER */
-
-.probeHeaderContainer{
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  justify-content: space-between;
-  align-items: center;
-  gap: 10px;
-}
-
-.probeHeaderDetails{
-  display: flex;
-  flex-direction: column;
-}
-
-/* * */
 /* SUBMIT BUTTON CONTAINER */
 
 .submitContainer{
-  margin: 0 auto;
-  padding: 10px 0;
   width: 100%;
+  padding: 10px 0;
+  margin: 0 auto;
 }
 
 .submitContainer button {

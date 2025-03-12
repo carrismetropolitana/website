@@ -1,0 +1,30 @@
+.fullWidth {
+    width: 100%;
+  }
+
+  /* PROBE TITLE */
+
+.probeTitle{
+    display: flex;
+    align-items: center;
+    font-size: var(--font-size-title);
+    font-weight: var(--font-weight-title);
+    color: var(--color-system-text-100);
+  }
+  
+  /* * */
+
+  /* POSSIBLE ANSWERS */
+.possibleAnswersContainer {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  width: 100%;
+  padding: 10px;
+  }
+
+  .selected{
+    border: 2px solid var(--color-brand);
+  }
+  
+  /* * */

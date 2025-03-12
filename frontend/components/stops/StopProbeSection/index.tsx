@@ -111,6 +111,7 @@ export function StopProbeSection({ description, selectedStop, title }: Props) {
 	const handleParticipation = () => {
 		const currentQuestion = currentPage + 1;
 		const participatedOn = localStorage.getItem('Stops|StopIds') || '';
+		const updatedParticipatedOn = participatedOn ? [...participatedOn.split(','), selectedStop] : [selectedStop];
 
 		console.log('You opted in.');
 		localStorage.setItem('Stops|ProbeOptIn', 'true');
@@ -118,7 +119,6 @@ export function StopProbeSection({ description, selectedStop, title }: Props) {
 		localStorage.setItem('Stops|ProbeFirstTime', 'false');
 		localStorage.setItem(`Stops${selectedStop}|ProbeEnded`, 'false');
 		localStorage.setItem(`Stops${selectedStop}|ProbeCurrentPage`, currentQuestion.toString());
-		const updatedParticipatedOn = participatedOn ? [...participatedOn.split(','), selectedStop] : [selectedStop];
 		localStorage.setItem('Stops|StopIds', updatedParticipatedOn.join(','));
 		localStorage.setItem(`Stops${selectedStop}|EndingMessageShown`, 'false');
 		localStorage.setItem(`Stops${selectedStop}|Question1Answer`, '');
