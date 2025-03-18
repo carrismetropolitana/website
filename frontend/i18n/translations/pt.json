@@ -1403,6 +1403,35 @@
 		"Page": {
 			"heading": "Pesquisar Paragens"
 		},
+		"Probe": {
+			"description": "Este inquérito serve para melhorar a qualidade do nosso serviço. A sua opinião é importante para nós.",
+			"endingMessage": "Obrigado por ceder um pouco do seu tempo!",
+			"optin": "Sim",
+			"optout": "Não",
+			"previous": "Anterior",
+			"stop|probe|q1|answer1": "Sim, sempre",
+			"stop|probe|q1|answer2": "Sim, na maioria das vezes",
+			"stop|probe|q1|answer3": "Não, algumas vezes sinto-me inseguro/a",
+			"stop|probe|q1|answer4": "Não, nunca me sinto seguro/a",
+			"stop|probe|q2|answer1": "Sim",
+			"stop|probe|q2|answer2": "Não",
+			"stop|probe|q3|answer1": "Iluminação insuficiente à noite",
+			"stop|probe|q3|answer2": "Paragem demasiado isolada",
+			"stop|probe|q3|answer3": "Presença de vandalismo ou falta de manutenção",
+			"stop|probe|q3|answer4": "Falta de informação de emergência",
+			"stop|probe|q3|answer5": "Nenhum, sinto-me seguro/a",
+			"stop|probe|q4|answer1": "Melhor iluminação",
+			"stop|probe|q4|answer2": "Melhor estrutura da paragem",
+			"stop|probe|q4|answer3": "Melhor manutenção do espaço",
+			"stop|probe|q4|answer4": "Melhor informação sobre contactos de emergência",
+			"stop|probe|q4|answer5": "Nada, sinto-me seguro/a",
+			"stop|probe|question1": "Sente-se seguro/a nesta paragem, tanto de dia como à noite?",
+			"stop|probe|question2": "Se precisasse de ajuda nesta paragem, teria informações acessíveis de como pedi-la?",
+			"stop|probe|question3": "Verifica algum destes fatores nesta paragem?",
+			"stop|probe|question4": "O que poderíamos melhorar nesta paragem para se sentir mais seguro/a ou confortável?",
+			"submit": "Submeter",
+			"title": "Pode dar-nos a sua opinião?"
+		},
 		"Single": {
 			"heading": "Pesquisar Paragens",
 			"lines_that_pass_here": "Linhas que passam nesta paragem"

@@ -34,6 +34,8 @@ export default function Component({ alert }: Props) {
 	};
 
 	//
+	// C. Render components
+
 	return (
 		<Link className={styles.container} href={`${RoutesSchedule.ALERTS.route}/${alert.alert_id}`} onClick={handleAlertClick} target="_blank">
 			<AlertActivePeriodStart date={alert.start_date} size="sm" />

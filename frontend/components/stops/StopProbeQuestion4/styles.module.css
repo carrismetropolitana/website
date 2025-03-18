@@ -1,0 +1,28 @@
+.fullWidth {
+    width: 100%;
+  }
+
+  /* PROBE TITLE */
+
+.probeTitle{
+    display: flex;
+    align-items: center;
+    font-size: var(--font-size-title);
+    font-weight: var(--font-weight-title);
+    color: var(--color-system-text-100);
+  }
+  
+  /* * */
+
+  /* POSSIBLE ANSWERS */
+.possibleAnswersContainer {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    align-items: flex-start;
+    justify-content: flex-start;
+    width: 100%;
+    padding: 25px 0 0;
+  }
+  
+  /* * */

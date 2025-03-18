@@ -1402,6 +1402,35 @@
 		"Page": {
 			"heading": "Search Stops"
 		},
+		"Probe": {
+			"description": "This probe serves the purpose of improving the quality of our service. Your opinion is important to us.",
+			"endingMessage": "Thank you for your time!",
+			"optin": "Yes",
+			"optout": "No",
+			"previous": "Previous",
+			"stop|probe|q1|answer1": "Yes, always",
+			"stop|probe|q1|answer2": "Yes, mostly",
+			"stop|probe|q1|answer3": "No, sometime in feel unsafe",
+			"stop|probe|q1|answer4": "No, I never feel safe",
+			"stop|probe|q2|answer1": "Yes",
+			"stop|probe|q2|answer2": "No",
+			"stop|probe|q3|answer1": "Ilumination at night",
+			"stop|probe|q3|answer2": "Lack of visibility of the stop",
+			"stop|probe|q3|answer3": "Presence of vandalism or lack of maintenance",
+			"stop|probe|q3|answer4": "Lack of emergency sinalization or of means of asking for help",
+			"stop|probe|q3|answer5": "None, I feel safe",
+			"stop|probe|q4|answer1": "Better ilumination",
+			"stop|probe|q4|answer2": "Better infrastructure",
+			"stop|probe|q4|answer3": "Better maintenance of the space",
+			"stop|probe|q4|answer4": "Better information about the emergency contacts",
+			"stop|probe|q4|answer5": "Nothing, I feel safe",
+			"stop|probe|question1": "Do you feel safe at this stop, both during the day and at night?",
+			"stop|probe|question2": "If you needed help at this stop, would you have accessible information on how to ask for it?",
+			"stop|probe|question3": "Do you notice any of these factors at this stop?",
+			"stop|probe|question4": "What could we improve at this stop to make you feel safer or more comfortable?",
+			"submit": "Submit",
+			"title": "Can you give us some feedback about our stops?"
+		},
 		"Single": {
 			"heading": "Search Stops",
 			"lines_that_pass_here": "Lines passing through this stop"

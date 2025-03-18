@@ -34,6 +34,8 @@ export function PlannerCard({ description, imageUrl, title, url }: Props) {
 	};
 
 	//
+	// C. Render components
+
 	return (
 		<Link className={styles.container} href={url} onClick={handlePartnerCardClick} target="_blank">
 			<Image alt={title} className={styles.coverImage} fallbackSrc={ImagesCommon.PLACEHOLDER} src={imageUrl} />
@@ -43,4 +45,6 @@ export function PlannerCard({ description, imageUrl, title, url }: Props) {
 			</div>
 		</Link>
 	);
+
+	//
 }

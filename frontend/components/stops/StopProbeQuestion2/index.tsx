@@ -1,0 +1,51 @@
+/* * */
+
+import { useAnalyticsContext } from '@/contexts/Analytics.context';
+import { Button } from '@mantine/core';
+import { useTranslations } from 'next-intl';
+import { useState } from 'react';
+
+import styles from './styles.module.css';
+
+/* * */
+
+interface Props {
+	questionAnswer: string
+	stopId: string
+}
+
+export function Question2({ questionAnswer, stopId }: Props) {
+	//
+
+	//
+	// A. Setup Variables
+
+	const t = useTranslations('stops.Probe');
+	const analyticsContext = useAnalyticsContext();
+	const [stopQuestion2Answer, setQuestion2Answer] = useState<string | undefined>(questionAnswer);
+
+	//
+	// B. Handle Actions
+
+	const handleQuestion2 = (e: React.MouseEvent<HTMLButtonElement>) => {
+		const value = e.currentTarget.value;
+		localStorage.setItem(`Stops${stopId}|Question2Answer`, value);
+		setQuestion2Answer(value);
+		analyticsContext.actions.capture(ampli => ampli.stopsProbeAnswered({ question_2: value, question_title: t('stop|probe|question2'), stop_id: stopId }));
+	};
+
+	//
+	// C. Render Components
+
+	return (
+		<div className={styles.fullWidth}>
+			<p className={styles.probeTitle}>{t('stop|probe|question2')}</p>
+			<div className={styles.possibleAnswersContainer}>
+				<Button className={stopQuestion2Answer === 'yes' ? styles.selected : ''} onClick={e => handleQuestion2(e)} value="yes">{t('stop|probe|q2|answer1')}</Button>
+				<Button className={stopQuestion2Answer === 'no' ? styles.selected : ''} onClick={e => handleQuestion2(e)} value="no">{t('stop|probe|q2|answer2')}</Button>
+			</div>
+		</div>
+	);
+
+	//
+}
