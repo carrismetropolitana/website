@@ -1185,7 +1185,7 @@
 			"subheading": "Utilize o serviço navegante® para planear a sua viagem, de A a B, combinando vários modos de transporte, se necessário. Descubra toda as opções que estão incluídas com a sua subscrição."
 		},
 		"PlannerPartners": {
-			"disclaimer": "Edite esta página no Github se pretende incluir a sua aplicação. A ordem é aleatória. Apenas são permitidas entradas que disponibilizem simultaneamente horários planeados e em tempo real ou posição de veículos.",
+			"disclaimer": "Edite esta página no Github se pretende incluir a sua aplicação. A ordem é aleatória. Apenas são permitidas entradas que disponibilizem posição de veículos ou horários planeados e em tempo real.",
 			"heading": "Os nossos parceiros",
 			"subheading": "Porque os nossos dados são abertos, existem várias aplicações que oferecem experiências personalizadas para melhorar o seu dia-a-dia nos transportes."
 		}
