@@ -733,13 +733,13 @@
 		},
 		"MetricsSection": {
 			"demand": {
-				"label": "Total de passageiros transportados hoje",
+				"label": "Total passengers transported today",
 				"value": "{value, number}"
 			},
-			"heading": "A nossa operação ao vivo",
-			"link_label": "Explorar mais métricas em tempo real",
+			"heading": "Our live operation",
+			"link_label": "Explore more realtime metrics",
 			"service": {
-				"label": "Total de passageiros transportados hoje",
+				"label": "Total passengers transported today",
 				"value": "{value, number}"
 			}
 		},
@@ -1143,7 +1143,7 @@
 					"text_4": "A interação com a comunidade de reutilizadores permitirá recolher sugestões e correções com impacto na operação, que se quer, de todos, impulsionando o seu envolvimento."
 				},
 				"partners": {
-					"heading": "Onde estamos",
+					"heading": "Where we are",
 					"subheading": "Pode consultar os nossos dados abertos através das seguintes plataformas."
 				}
 			}
@@ -1166,40 +1166,40 @@
 		},
 		"VehiclePropulsion": {
 			"diesel": "Diesel",
-			"electricity": "Eletricidade",
+			"electricity": "Electricity",
 			"lpg_auto": "GPL",
-			"natural_gas": "Gás Natural"
+			"natural_gas": "Natural Gas"
 		}
 	},
 	"periods": {
 		"PeriodsWidgetItem": {
-			"from": "inicia a {value, date, dayShort} {value, date, monthShort} {value, date, yearLong}",
-			"until": "termina a {value, date, dayShort} {value, date, monthShort} {value, date, yearLong}"
+			"from": "starts at {value, date, dayShort} {value, date, monthShort} {value, date, yearLong}",
+			"until": "ends at {value, date, dayShort} {value, date, monthShort} {value, date, yearLong}"
 		}
 	},
 	"planner": {
 		"PlannerNavegante": {
-			"button": "Ver Opções",
-			"heading": "Planeie a sua viagem com o navegante®",
-			"subheading": "Utilize o serviço navegante® para planear a sua viagem, de A a B, combinando vários modos de transporte, se necessário. Descubra toda as opções que estão incluídas com a sua subscrição."
+			"button": "Explore Options",
+			"heading": "Plan your trip with navegante®",
+			"subheading": "Use the navegante® website to plan your trip, from A to B, combining several transportation modes. Explore all options included with your transit pass subscription."
 		},
 		"PlannerPartners": {
-			"disclaimer": "Edite esta página no Github se pretende incluir a sua aplicação. A ordem é aleatória. Apenas são permitidas entradas que disponibilizem simultaneamente horários planeados e em tempo real ou posição de veículos.",
-			"heading": "Os nossos parceiros",
-			"subheading": "Porque os nossos dados são abertos, existem várias aplicações que oferecem experiências personalizadas para melhorar o seu dia-a-dia nos transportes."
+			"disclaimer": "Edit this page on Github if you'd like to include your app. Order of presentation is random. Only submissions that present either vehicle positions or planned schedules and realtime estimates.",
+			"heading": "Our partners",
+			"subheading": "Because our data is open, there are several apps that offer personalized experiences to improve your everyday in public transit."
 		}
 	},
 	"profile": {
 		"FavoritesListToolbar": {
 			"by_current_view": {
-				"lines": "Linhas",
-				"stops": "Paragens"
+				"lines": "Lines",
+				"stops": "Stops"
 			},
 			"found_items_counter": {
 				"lines": "{count, plural, =0 {Nenhuma linha encontrada.} one {Encontrada # linha:} other {Encontradas # linhas:}}",
 				"stops": "{count, plural, =0 {Nenhum paragem encontrado.} one {Encontrado # paragem:} other {Encontrados # paragens:}}"
 			},
-			"heading": "Favoritos"
+			"heading": "Favorites"
 		},
 		"Page": {
 			"field": {
