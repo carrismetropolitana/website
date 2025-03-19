@@ -1556,7 +1556,7 @@
 			"AnchorAboutSurvey": "Technical Information",
 			"AnchorAboutSurveyTitle": "Technical Information",
 			"AnchorIndex": "Global Satisfaction Index",
-			"AnchorPassengerCaracter": "Passanger Charecterization",
+			"AnchorPassengerCaracter": "Passenger Charecterization",
 			"AnchorResults": "Results",
 			"DownloadButton": "Download Report",
 			"heading": "índice de Satisfação Global",
@@ -1564,6 +1564,10 @@
 			"subtitle": "Select one of the options below to browse trough the page.",
 			"title": "Quick Access",
 			"value": "7.2"
+		},
+		"SurveyLevelPassenger": {
+			"heading": "Passenger Characterization",
+			"subheading": "The users of Carris Metropolitana are, at most, women, teenagers (ages between 14 and 34 years old), working full time with some degree of high school education."
 		},
 		"SurveyPrecisionCard": {
 			"firstRowText": "Confidence Interval",
@@ -1574,15 +1578,6 @@
 			"secondRowValue": "1,8%",
 			"thirdRowText": "Sample classes",
 			"thirdRowValue": "192"
-		},
-		"SurveyPsgrCharacterCard": {
-			"age_heading": "Age",
-			"deslocation_type_heading": "Desclocation Type",
-			"gender_heading": "Gender",
-			"heading": "Passenger Characterization",
-			"instruction_level__heading": "Instruction Level",
-			"occupation_heading": "Occupation",
-			"subheading": "The users of Carris Metropolitana are, at most, women, teenagers (ages between 14 and 34 years old), working full time with some degree of high school education."
 		},
 		"SurveyRecomendationIndex": {
 			"card_heading": "Passenger Seal of Approval",
