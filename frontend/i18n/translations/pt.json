@@ -1567,6 +1567,10 @@
 			"title": "Acesso rápido",
 			"value": "7.2"
 		},
+		"SurveyLevelPassenger": {
+			"heading": "Caracterização do  Passageiro",
+			"subheading": "Os utilizadores da Carris Metropolitana são, na sua maioria, mulheres, jovens (idades entre 14 e 34 anos), trabalhadores a tempo inteiro e com grau de instrução secundário."
+		},
 		"SurveyPrecisionCard": {
 			"firstRowText": "intervalo de confiança",
 			"firstRowValue": "95,5%",
@@ -1576,15 +1580,6 @@
 			"secondRowValue": "1,8%",
 			"thirdRowText": "classes amostrais",
 			"thirdRowValue": "192"
-		},
-		"SurveyPsgrCharacterCard": {
-			"age_heading": "Idade",
-			"deslocation_type_heading": "Regime de Deslocação",
-			"gender_heading": "Género",
-			"heading": "Caracterização do  Passageiro",
-			"instruction_level__heading": "Nível de Instrução",
-			"occupation_heading": "Ocupação",
-			"subheading": "Os utilizadores da Carris Metropolitana são, na sua maioria, mulheres, jovens (idades entre 14 e 34 anos), trabalhadores a tempo inteiro e com grau de instrução secundário."
 		},
 		"SurveyRecomendationIndex": {
 			"card_heading": "Selo de aprovação dos passageiros",
