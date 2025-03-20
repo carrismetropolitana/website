@@ -2,16 +2,6 @@
 	"AlertsCarousel": {
 		"heading": "Service Alerts"
 	},
-	"AppError": {
-		"goto_home": "Return to home page",
-		"redirect": "Returning to home page in {value} second{s}.",
-		"retry": "Retry in {value} seconds",
-		"subtitle": "We have been notified and will correct it soon. Thank you for your understanding.",
-		"sync": "Failed to sync devices.",
-		"title": "An unexpected error occurred",
-		"token": "The authentication token is missing.",
-		"unauthorized": "Authentication failed."
-	},
 	"AppRedirect": {
 		"action": "Go to Page",
 		"subtitle": "If you are not automatically redirected, use the following button.",
@@ -543,6 +533,12 @@
 		}
 	},
 	"common": {
+		"AppError": {
+			"goto_home": "Return to home page",
+			"retry": "Retry in {value} seconds",
+			"subtitle": "We have been notified and will correct it soon. Thank you for your understanding.",
+			"title": "An unexpected error occurred"
+		},
 		"BackButton": {
 			"label": "Go Back"
 		},
