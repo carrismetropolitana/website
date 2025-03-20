@@ -2,16 +2,6 @@
 	"AlertsCarousel": {
 		"heading": "Alertas de Serviço"
 	},
-	"AppError": {
-		"goto_home": "Voltar à página principal",
-		"redirect": "A voltar à página de principal e em {value} segundo{s}.",
-		"retry": "Nova tentativa em {value} segundos",
-		"subtitle": "Fomos notificados e iremos corrigir em breve. Obrigado pela sua compreensão.",
-		"sync": "Falha ao sincronizar os dispositivos.",
-		"title": "Ocorreu um erro inesperado",
-		"token": "Falta o token de autenticação.",
-		"unauthorized": "Falha na autenticação."
-	},
 	"AppRedirect": {
 		"action": "Ir para a Página",
 		"subtitle": "Se não for redirecionado automaticamente utilize o botão seguinte.",
@@ -543,6 +533,12 @@
 		}
 	},
 	"common": {
+		"AppError": {
+			"goto_home": "Voltar à página principal",
+			"retry": "Nova tentativa em {value} segundos",
+			"subtitle": "Fomos notificados e iremos corrigir em breve. Obrigado pela sua compreensão.",
+			"title": "Ocorreu um erro inesperado"
+		},
 		"BackButton": {
 			"label": "Voltar"
 		},
