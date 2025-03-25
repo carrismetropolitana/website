@@ -848,7 +848,7 @@
 		"PathStopNextArrivals": {
 			"title": "Next circulations"
 		},
-		"PathStopTimetable": {
+		"PathWaypointTimetable": {
 			"next_date": "Next times available from {value, date, dayShort} {value, date, monthLong} {value, date, yearLong}",
 			"no_data": "Timetables unavailable for this date.",
 			"title": "Scheduled times at this stop:"
@@ -1537,7 +1537,6 @@
 			"hours_title": "Hours",
 			"months_description": "from March until June 2024",
 			"months_title": "Months"
-
 		},
 		"SurveyCriteriaCard": {
 			"firstRowText": "Line Searching Classes (from high to low)",
@@ -1555,14 +1554,12 @@
 			"AnchorIndex": "Global Satisfaction Index",
 			"AnchorPassengerCaracter": "Passenger Charecterization",
 			"AnchorResults": "Results",
-			"AnchorResultsSubheading": "Here, you can browse the results of the Carris Metropolitana passenger satisfaction survey.",
 			"DownloadButton": "Download Report",
 			"heading": "índice de Satisfação Global",
 			"legend": "A Carris Metropolitana ganhou o selo de aprovação dos passageiros.",
 			"subtitle": "Select one of the options below to browse trough the page.",
 			"title": "Quick Access",
 			"value": "7.2"
-
 		},
 		"SurveyLevelPassenger": {
 			"heading": "Passenger Characterization",
@@ -1604,7 +1601,6 @@
 		"SurveyResultsToolbar": {
 			"by_avaliation": "Filter by Avaliation",
 			"by_category": "Filter by Category",
-			"confidence_interval": "Filter by Avaliation",
 			"searchInput": "Search result...",
 			"subheading": "Public Information"
 		}
