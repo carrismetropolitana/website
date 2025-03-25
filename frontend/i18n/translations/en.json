@@ -750,7 +750,7 @@
 			"section_heading": "Schedules"
 		},
 		"SupportSection": {
-			"section_heading": "Customer Support"
+			"section_heading": "Support"
 		},
 		"TarifsSection": {
 			"section_heading": "Fares"
@@ -1376,7 +1376,7 @@
 				}
 			},
 			"support": {
-				"label": "Customer Support",
+				"label": "Support",
 				"links": {
 					"contacts": "Contacts",
 					"faq": "Frequently Asked Questions",
