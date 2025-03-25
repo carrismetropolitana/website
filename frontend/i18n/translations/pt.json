@@ -750,7 +750,7 @@
 			"section_heading": "Horários"
 		},
 		"SupportSection": {
-			"section_heading": "Apoio ao Cliente"
+			"section_heading": "Apoio ao Passageiro"
 		},
 		"TarifsSection": {
 			"section_heading": "Tarifas"
@@ -1377,7 +1377,7 @@
 				}
 			},
 			"support": {
-				"label": "Apoio ao Cliente",
+				"label": "Apoio ao Passageiro",
 				"links": {
 					"contacts": "Contactos",
 					"faq": "Perguntas Frequentes",
