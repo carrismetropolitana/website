@@ -849,7 +849,7 @@
 		"PathStopNextArrivals": {
 			"title": "Próximas circulações"
 		},
-		"PathStopTimetable": {
+		"PathWaypointTimetable": {
 			"next_date": "Próximos horários disponíveis a partir de {value, date, dayShort} {value, date, monthLong} {value, date, yearLong}",
 			"no_data": "Horários indisponíveis para esta data.",
 			"title": "Horários planeados nesta paragem:"
