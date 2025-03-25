@@ -840,18 +840,18 @@
 			"heading": "Search Lines"
 		},
 		"LinesListViewAll": {
-			"no_data": "Nenhuma linha encontrada para esta pesquisa"
+			"no_data": "No lines found for this query"
 		},
 		"LinesListViewFavorites": {
 			"no_favorites": "No favorite lines yet"
 		},
 		"PathStopNextArrivals": {
-			"title": "Next circulations"
+			"title": "Next arrivals"
 		},
 		"PathWaypointTimetable": {
-			"next_date": "Next times available from {value, date, dayShort} {value, date, monthLong} {value, date, yearLong}",
+			"next_date": "Next arrivals available from {value, date, dayShort} {value, date, monthLong} {value, date, yearLong}",
 			"no_data": "Timetables unavailable for this date.",
-			"title": "Scheduled times at this stop:"
+			"title": "Scheduled arrivals at this stop:"
 		},
 		"SelectActivePatternGroup": {
 			"placeholder": "Select route/destination..."
@@ -1400,11 +1400,11 @@
 		},
 		"Single": {
 			"heading": "Search Stops",
-			"lines_that_pass_here": "Lines passing through this stop"
+			"lines_that_pass_here": "Lines using this stop"
 		},
 		"StopsDetailAlerts": {
-			"heading": "Alertas ativos",
-			"subheading": "Alertas ativos para esta paragem ou para linhas que passam nesta paragem."
+			"heading": "Active alerts",
+			"subheading": "Active alerts for this stop or for lines that use this stop."
 		},
 		"StopsDetailContentTimetableHeader": {
 			"summary": "Horários estimados de passagem na paragem <stopName>{stop_name}</stopName> para o dia <dayName>{day_name, date, long}</dayName>. <changeDay>Alterar dia ›</changeDay>",
@@ -1424,12 +1424,12 @@
 		},
 		"StopsDetailContentTimetableRow": {
 			"localities": {
-				"label": "Pass through"
+				"label": "Goes through:"
 			},
-			"open_line_page": "Ver percurso completo"
+			"open_line_page": "See full path"
 		},
 		"StopsDetailContentTimetableSchedule": {
-			"end_of_day": "Fim do Dia",
+			"end_of_day": "End of Day",
 			"no_service": "No Service for the selected day"
 		},
 		"StopsListToolbar": {
