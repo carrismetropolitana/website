@@ -914,6 +914,36 @@
 			"summary_description": "passageiros transportados nesta linha nos últimos 15 dias",
 			"summary_value": "{value, number}"
 		},
+		"MetricsPageAboutOpenData": {
+			"heading": "Sobre os dados abertos",
+			"text1": "A Carris Metropolitana possui uma <b>política de dados abertos</b>, com o objetivo de promover a transparência e a proximidade com os seus passageiros, divulgando publicamente informação relativa à sua operação.",
+			"title1": "Dados Abertos"
+		},
+		"MetricsPageContacts": {
+			"heading": "Contatos",
+			"subheading": "Aqui, consegue consultar a totalidade de contactos recebidos pela Carris Metropolitana, discriminados por Pedidos de Informação, Reclamações e Outro tipo de contacto.",
+			"title1": "Open Data"
+		},
+		"MetricsPageContactsCardGroup": {
+			"main_value": "{value, number}",
+			"total_to": "total para:"
+		},
+		"MetricsPageContactsGlobalCard": {
+			"total_contacts_desc": "total de contactos nos útlimos 7 dias",
+			"total_contacts_email": "{value, number}",
+			"total_contacts_phone": "{value, number}",
+			"total_email_contacts_desc": "contactos por email",
+			"total_passengers_day": "{value, number}",
+			"total_passengers_day_contacts_desc": "total de passageiros dos útlimos 7 dias",
+			"total_phone_contacts_desc": "contactos telefónicos"
+		},
+		"MetricsPageContactsToolbar": {
+			"global": "Global",
+			"line": "Linha",
+			"municipality": "Município",
+			"toolbar_desc": "Escolha se quer ver os diferentes tipos de contacto (Pedidos de Informação, Reclamações e outros) por município ou linha."
+
+		},
 		"MetricsPageIntro": {
 			"heading": "A nossa operação ao vivo",
 			"text_1": "A Carris Metropolitana possui uma política de dados abertos, com o objetivo de promover a transparência e a proximidade com os seus passageiros, divulgando publicamente informação relativa à sua operação.",
