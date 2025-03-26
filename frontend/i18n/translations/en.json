@@ -913,6 +913,35 @@
 			"summary_description": "passageiros transportados nesta linha nos últimos 15 dias",
 			"summary_value": "{value, number}"
 		},
+		"MetricsPageAboutOpenData": {
+			"heading": "About Open Data",
+			"text1": "Carris Metropolitana has an <b>open data policy</b>, aimed at promoting transparency and closeness with its passengers by publicly sharing information related to its operations.",
+			"title1": "Open Data"
+		},
+		"MetricsPageContacts": {
+			"heading": "Contacts",
+			"subheading": "Here, you can view all contacts received by Carris Metropolitana, broken down by Information Requests, Complaints, and Other types of contact.",
+			"title1": "Open Data"
+		},
+		"MetricsPageContactsCardGroup": {
+			"main_value": "{value, number}",
+			"total_to": "total to:"
+		},
+		"MetricsPageContactsGlobalCard": {
+			"total_contacts_desc": "last 7 days total contacts",
+			"total_contacts_email": "{value, number}",
+			"total_contacts_phone": "{value, number}",
+			"total_email_contacts_desc": "contacts by email",
+			"total_passengers_day": "{value, number}",
+			"total_passengers_day_contacts_desc": "total passengers of the last 7 days",
+			"total_phone_contacts_desc": "contacts by phone"
+		},
+		"MetricsPageContactsToolbar": {
+			"global": "Global",
+			"line": "Line",
+			"municipality": "Municipality",
+			"toolbar_desc": "Choose if you want to see the different types of contacts (Information Requests, Complaints and Others), by municiplaity or line."
+		},
 		"MetricsPageIntro": {
 			"heading": "A nossa operação ao vivo",
 			"text_1": "A Carris Metropolitana possui uma política de dados abertos, com o objetivo de promover a transparência e a proximidade com os seus passageiros, divulgando publicamente informação relativa à sua operação.",
