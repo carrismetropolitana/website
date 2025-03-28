@@ -445,70 +445,54 @@
 				"circula-pt-a": {
 					"description": "Desconto de 50% mediante apresentação de declaração de rendimentos ou incapacidade superior a 60%.",
 					"href_label": "Saiba mais no site navegante.pt",
-					"price_metropolitano": "20 € / mês",
-					"price_municipal": "15 € / mês",
 					"title": "Circula PT A"
 				},
 				"circula-pt-b": {
 					"description": "Desconto de 25% mediante apresentação de declaração de rendimentos ou incapacidade superior a 60%.",
 					"href_label": "Saiba mais no site navegante.pt",
-					"price_metropolitano": "30 € / mês",
-					"price_municipal": "22,5 € / mês",
 					"title": "Circula PT B"
 				},
 				"circula-pt-plus-65-a": {
 					"description": "Desconto de 50% sobre o valor do título +65. É necessário apresentar declaração de rendimentos ou incapacidade superior a 60%. Válido apenas para a modalidade metropolitana.",
 					"href_label": "Saiba mais no site navegante.pt",
-					"price_metropolitano": "10 € / mês",
-					"price_municipal": "N/A",
 					"title": "Circula PT +65 A"
 				},
 				"circula-pt-plus-65-b": {
 					"description": "Desconto de 25% sobre o valor do título +65. É necessário apresentar declaração de rendimentos ou incapacidade superior a 60%. Válido apenas para a modalidade metropolitana.",
 					"href_label": "Saiba mais no site navegante.pt",
-					"price_metropolitano": "15 € / mês",
-					"price_municipal": "N/A",
 					"title": "Circula PT +65 B"
 				},
 				"combatente-minus-65": {
 					"description": "Desconto de 30€ para antigos combatentes com menos de 65 anos. É necessário apresentar declaração.",
 					"href_label": "Saiba mais no site navegante.pt",
-					"price_metropolitano": "10 € / mês",
-					"price_municipal": "GRÁTIS",
 					"title": "Antigo Combatente <65"
 				},
 				"combatente-plus-65": {
 					"description": "Desconto de 100% para antigos combatentes com 65 ou mais anos. É necessário apresentar declaração.",
 					"href_label": "Saiba mais no site navegante.pt",
-					"price_metropolitano": "GRÁTIS",
-					"price_municipal": "N/A",
 					"title": "Antigo Combatente >65"
+				},
+				"complement": {
+					"description": "Aditivo ao cartão navegante® para quem já possui um passe mensal. O complemento permite viajar nas linhas inter-regionais da CMetropolitana, para entrar e sair dos limites da área metropolitana de Lisboa.",
+					"title": "Complemento"
 				},
 				"family": {
 					"description": "Desconto válido para agregados familiares com pelo menos 3 indivíduos. É necessário que todos os elementos do agregado tenham o mesmo domicílio fiscal, residam num dos 18 municípios da aml, e que tenham relação familiar direta de ascendência ou descendência com o titular.",
 					"href_label": "Saiba mais no site navegante.pt",
-					"price_metropolitano": "{value} € / mês",
-					"price_municipal": "{value} € / mês",
 					"title": "Família"
 				},
 				"normal": {
 					"description": "O passe navegante® possibilita viagens em todos os operadores de transporte público, quer dentro de cada município, quer em toda a área metropolitana de Lisboa.",
-					"price_metropolitano": "{value} € / mês",
-					"price_municipal": "{value} € / mês",
 					"title": "Normal"
 				},
 				"plus-65": {
 					"description": "Desconto de 50% para utilizadores com 65 ou mais anos. Não é necessário apresentar declaração mas pode ser necessário confirmar a sua data de nascimento. Válido apenas para a modalidade metropolitana.",
 					"href_label": "Saiba mais no site navegante.pt",
-					"price_metropolitano": "20 € / mês",
-					"price_municipal": "N/A",
 					"title": "+65"
 				},
 				"sub23": {
 					"description": "Desconto de 100% para todos os jovens até aos 23 anos, inclusive. Não é necessário apresentar nenhuma declaração, mas pode ser preciso confirmar a data de nascimento.",
 					"href_label": "Saiba mais no site navegante.pt",
-					"price_metropolitano": "GRÁTIS",
-					"price_municipal": "N/A",
 					"title": "Sub23"
 				}
 			},
