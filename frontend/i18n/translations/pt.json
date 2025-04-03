@@ -1450,7 +1450,7 @@
 		"StopsListToolbar": {
 			"filters": {
 				"by_current_view": {
-					"favorites": "Favoritas",
+					"favorites": "Favoritas ({count})",
 					"list": "Lista",
 					"map": "Mapa"
 				},
