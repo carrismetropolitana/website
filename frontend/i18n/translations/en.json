@@ -912,12 +912,12 @@
 			"total_to": "total to:"
 		},
 		"MetricsPageContactsGlobalCard": {
-			"total_contacts_desc": "last 7 days total contacts",
+			"total_contacts_desc": "total de contactos no último ano",
 			"total_contacts_email": "{value, number}",
 			"total_contacts_phone": "{value, number}",
 			"total_email_contacts_desc": "contacts by email",
 			"total_passengers_day": "{value, number}",
-			"total_passengers_day_contacts_desc": "total passengers of the last 7 days",
+			"total_passengers_day_contacts_desc": "total de passageiros no útlimo ano",
 			"total_phone_contacts_desc": "contacts by phone"
 		},
 		"MetricsPageContactsToolbar": {
