@@ -913,12 +913,12 @@
 			"total_to": "total para:"
 		},
 		"MetricsPageContactsGlobalCard": {
-			"total_contacts_desc": "total de contactos nos útlimos 7 dias",
+			"total_contacts_desc": "total de contactos no último ano",
 			"total_contacts_email": "{value, number}",
 			"total_contacts_phone": "{value, number}",
 			"total_email_contacts_desc": "contactos por email",
 			"total_passengers_day": "{value, number}",
-			"total_passengers_day_contacts_desc": "total de passageiros dos útlimos 7 dias",
+			"total_passengers_day_contacts_desc": "total de passageiros no útlimo ano",
 			"total_phone_contacts_desc": "contactos telefónicos"
 		},
 		"MetricsPageContactsToolbar": {
