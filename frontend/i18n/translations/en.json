@@ -912,12 +912,12 @@
 			"total_to": "total to:"
 		},
 		"MetricsPageContactsGlobalCard": {
-			"total_contacts_desc": "total de contactos no último ano",
+			"total_contacts_desc": "last 7 days total contacts",
 			"total_contacts_email": "{value, number}",
 			"total_contacts_phone": "{value, number}",
 			"total_email_contacts_desc": "contacts by email",
 			"total_passengers_day": "{value, number}",
-			"total_passengers_day_contacts_desc": "total de passageiros no útlimo ano",
+			"total_passengers_day_contacts_desc": "total passengers of the last 7 days",
 			"total_phone_contacts_desc": "contacts by phone"
 		},
 		"MetricsPageContactsToolbar": {
@@ -1671,8 +1671,8 @@
 	},
 	"vehicles": {
 		"VehiclesList": {
-			"heading": "Veículos",
-			"subheading": "The pass navegante municipal Familia allows that each family pays at most the value of 2 municipal navegante pass indenpendently of the number of elemnts of the family. It is valid in all the companies of the public means of transport, in all of the 18 municipalities of the Lisbon metropolitan area."
+			"heading": "Vehicles",
+			"subheading": "Explore our currently active vehicles in realtime and follow the complete operation of Carris Metropolitana."
 		},
 		"VehiclesListDetails": {
 			"no_data": "Selecione um veículo",
