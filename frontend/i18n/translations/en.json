@@ -11,116 +11,6 @@
 		"subtitle": "This page is not ready yet :)",
 		"title": "Under construction"
 	},
-	"CookiesPage": {
-		"sections": {
-			"intro": {
-				"paragraphs": {
-					"1": "TML uses cookies and other similar technologies to understand how the website is used, in order to improve its content, security and performance. The goal is to provide a better browsing experience."
-				},
-				"title": "Cookies Policy"
-			},
-			"question_1": {
-				"paragraphs": {
-					"1": "Cookies are small text files with relevant information that the access device (computer, cell phone, smartphone, tablet, etc.…) loads, through the internet browser (browser), when a website is visited by the user.",
-					"2": "The use of cookies helps websites recognize the user's device on the next visit and is often essential for its functioning.",
-					"3": "The cookies used by TML do not collect personal information that allows a particular user to be identified, but only store anonymous, generic and aggregated information."
-				},
-				"title": "What are cookies and what are they for?"
-			},
-			"question_2": {
-				"paragraphs": {
-					"1": "Taking into account the purposes for which they are used, cookies can be classified as follows:",
-					"2": "- Strictly necessary cookies (also known as essential, technical or basic): they are necessary for the user to be able to access specific areas of the website, allowing navigation and use of its applications, such as access to secure areas of the website, through login. Without these cookies, services that require them cannot be provided;",
-					"3": "- Functionality cookies (also known as preference cookies): allow the website to remember the user's preferences regarding their navigation on the website, thus not needing to reconfigure and personalize it each time they visit;",
-					"4": "- Performance cookies (also known as analytical or statistical): they are essentially used to analyze how the user uses the website, allowing you to highlight articles or services that may be of interest to you, monitor the performance of the website, letting you know which most popular pages, which method of linking between pages is most effective, or to determine why some pages are receiving error messages;",
-					"5": "- Advertising cookies (also known as marketing or tracking cookies): allow the user to be provided with advertising information based on their preferences and interests, as well as helping to measure the effectiveness of the advertisements shown (e.g. how many times they are seen)."
-				},
-				"title": "What types of Cookies are there?"
-			},
-			"question_3": {
-				"paragraphs": {
-					"1": "Regarding their validity, cookies can also be classified as follows:",
-					"2": "- Permanent cookies: these are cookies that are stored on access devices, at the browser level, and are used whenever the user visits the website again. In general, they are used to direct navigation according to the user's interests, allowing the provision of a more personalized service;",
-					"3": "- Session cookies: these are temporary cookies, which are generated and are available until the user ends the session. The next time the user accesses their internet browser, cookies will no longer be stored."
-				},
-				"title": "How valid are Cookies?"
-			},
-			"question_4": {
-				"paragraphs": {
-					"1": "Depending on their origin, cookies may also have the following typology:",
-					"2": "- Own (or first-party) cookies: these are those sent to the user's device from a website/domain managed by the publisher itself and from where the service requested by the user is provided (the website owner);",
-					"3": "- Third-party (or third-party) cookies: these are those that are sent to the user's device from a domain that is not managed by the website editor, but by other entities who use the information obtained through these cookies. Given their origin and nature, the use of this type of cookies is the exclusive responsibility of the entities that use them."
-				},
-				"title": "What are the possible origins of Cookies?"
-			},
-			"question_5": {
-				"table": {
-					"header": {
-						"col_1": "Type",
-						"col_2": "Domain/Origin",
-						"col_3": "Purpose",
-						"col_4": "Validity"
-					},
-					"rows": {
-						"1": {
-							"col_1": "NEXT_LOCALE",
-							"col_2": "carrismetropolitana.pt",
-							"col_3": "Identify the user's preferred language",
-							"col_4": "1 year"
-						},
-						"2": {
-							"col_1": "anonymous_analytics_enabled",
-							"col_2": "carrismetropolitana.pt",
-							"col_3": "Obtain statistical information about website usage",
-							"col_4": "1 year"
-						}
-					}
-				},
-				"title": "What Cookies or similar technologies are used on this website?"
-			},
-			"question_6": {
-				"accept": "Accept Cookies Policy",
-				"enabled": "Cookies Policy accepted",
-				"options": {
-					"analytics": {
-						"disable": "Dados Analíticos Aceites. Recusar?",
-						"enable": "Aceitar Dados Analíticos",
-						"label": "Dados Analíticos"
-					},
-					"functional": {
-						"disable": "Dados Funcionais Aceites. Recusar?",
-						"enable": "Aceitar Dados Funcionais",
-						"label": "Dados Funcionais"
-					}
-				},
-				"paragraphs": {
-					"1": "As they are essential for the proper functioning of the website, the use of strictly necessary or essential cookies does not require prior consent from the user. The rest (functionality, performance or advertising cookies) will only be used if the user expressly authorizes their use."
-				},
-				"refuse": "Opt Out and Clear Data",
-				"refuse_modal": {
-					"cancel": "Cancel",
-					"confirm": "Yes, delete everything",
-					"description": "Ao retirar o consentimento serão apagados todos os dados guardados neste site, incluindo as suas paragens e linhas favoritas.",
-					"title": "Withdraw consent"
-				},
-				"title": "User Consent:"
-			},
-			"question_7": {
-				"paragraphs": {
-					"1": "Users can also prevent or condition the use of cookies through their browser settings. If you limit this option, however, your use of some features or the performance of some sites may be affected.",
-					"2": "Find out how at:"
-				},
-				"title": "How to control the use of Cookies?"
-			},
-			"question_8": {
-				"paragraphs": {
-					"1": "TML reserves, at any time, the right to change and/or update the information contained in this Policy, as well as the right to provide, upon request, additional, more detailed information on specific situations in which data is collected and processed. personal."
-				},
-				"title": "Right of reservation"
-			}
-		},
-		"title": "Cookies Policy"
-	},
 	"HeaderNavigationAccount": {
 		"configs": "Personalize Experience",
 		"favorites": "Favorites",
@@ -743,6 +633,285 @@
 	"layout": {
 		"NoDataLabel": {
 			"default": "No data available"
+		}
+	},
+	"legal": {
+		"CookiesPage": {
+			"sections": {
+				"intro": {
+					"paragraphs": {
+						"1": "A TML recorre à utilização de cookies e outras tecnologias similares para perceber como o website é utilizado, de modo a melhorar o seus conteúdos, segurança e desempenho. O objetivo é proporcionar uma melhor experiência de navegação."
+					},
+					"title": "Política de Cookies"
+				},
+				"question_1": {
+					"paragraphs": {
+						"1": "Cookies são pequenos ficheiros de texto com informação relevante que o dispositivo de acesso (computador, telemóvel, smartphone, tablet, etc…) carrega, através do navegador de internet (browser), quando um site é visitado pelo utilizador.",
+						"2": "A utilização de cookies ajuda os websites a reconhecer o dispositivo do utilizador na visita seguinte sendo com frequência imprescindível para o funcionamento do mesmo.",
+						"3": "Os cookies usados pela TML não recolhem informações pessoais que permitam identificar um utilizador em particular, guardando apenas informações anónimas, genéricas e agregadas."
+					},
+					"title": "O que são cookies e para que servem?"
+				},
+				"question_2": {
+					"paragraphs": {
+						"1": "Atendendo às finalidades para os quais são utilizados, os cookies podem ser classificados do seguinte modo:",
+						"2": "- Cookies estritamente necessários (também conhecidos por essenciais, técnicos ou básicos): são necessários para que o utilizador consiga aceder a áreas específicas do website, permitindo a navegação e a utilização das suas aplicações, tal como o acesso a áreas seguras do site, através de login. Sem estes cookies, os serviços que o exijam não podem ser prestados;",
+						"3": "- Cookies de funcionalidade (também conhecidos por preferenciais):permitem o website relembrar as preferências do utilizador relativamente à sua navegação no website, não necessitando, assim, de o reconfigurar e personalizar cada vez que o visita;",
+						"4": "- Cookies de performance (também conhecidos por analíticos ou estatísticos): são essencialmente utilizados para analisar a forma como o utilizador utiliza o website, permitindo destacar artigos ou serviços que podem ser do seu interesse, monitorizar o desempenho do website, dado a conhecer quais as páginas mais populares, qual o método de ligação entre páginas que é mais eficaz ou para determinar a razão de algumas páginas estarem a receber mensagens de erro;",
+						"5": "- Cookies de publicidade (também conhecidos por marketing ou de rastreio): permitem proporcionar ao utilizador informação publicitária em função de suas preferências e interesses, bem como, ajudam a medir a eficácia dos anúncios mostrados (ex. quantas vezes são vistos)."
+					},
+					"title": "Que tipos de Cookies existem?"
+				},
+				"question_3": {
+					"paragraphs": {
+						"1": "Quanto à sua validade, os cookies podem também ser classificados da seguinte forma:",
+						"2": "- Cookies permanentes: são cookies que ficam armazenados nos dispositivos de acesso, ao nível do navegador de internet (browser), e são usados sempre que o utilizador visita novamente o website. Em geral, são usados para direcionar a navegação de acordo com os interesses do utilizador, permitindo a prestação de um serviço mais personalizado;",
+						"3": "- Cookies de sessão: são cookies temporários, que são gerados e estão disponíveis até o utilizador encerrar a sessão. Da próxima vez que o utilizador aceder ao seu navegador de internet (browser), os cookies já não se encontrarão armazenados."
+					},
+					"title": "Qual a validade dos Cookies?"
+				},
+				"question_4": {
+					"paragraphs": {
+						"1": "Em função da sua origem, os cookies podem ainda ter a seguinte tipologia:",
+						"2": "- Cookies próprios (ou de primeira parte):são os que são enviados para o dispositivo do utilizador a partir de um website/domínio gerido pelo próprio editor e a partir do qual é fornecido o serviço solicitado pelo utilizador (o proprietário do website);",
+						"3": "- Cookies de terceiros (ou de terceira parte):são os que são enviados para o dispositivo do utilizador a partir de um domínio que não é gerido pelo editor do website, mas por outras entidades a quem aproveitam a informação obtida através desses cookies. Dada a sua origem e natureza, a utilização deste tipo de cookies é da exclusiva responsabilidade das entidades que os utilizam."
+					},
+					"title": "Quais as possíveis origens dos Cookies?"
+				},
+				"question_5": {
+					"table": {
+						"header": {
+							"col_1": "Tipo",
+							"col_2": "Domínio/Origem",
+							"col_3": "Finalidade",
+							"col_4": "Validade"
+						},
+						"rows": {
+							"1": {
+								"col_1": "NEXT_LOCALE",
+								"col_2": "carrismetropolitana.pt",
+								"col_3": "Identificar o idioma de preferência do utilizador",
+								"col_4": "1 ano"
+							},
+							"2": {
+								"col_1": "anonymous_analytics_enabled",
+								"col_2": "carrismetropolitana.pt",
+								"col_3": "Obter informação estatística sobre a utilização do site",
+								"col_4": "1 ano"
+							}
+						}
+					},
+					"title": "Quais os Cookies ou tecnologias similares utilizados neste site?"
+				},
+				"question_6": {
+					"accept": "Aceitar Política de Cookies",
+					"enabled": "Política de Cookies aceite",
+					"options": {
+						"analytics": {
+							"disable": "Dados Analíticos Aceites. Recusar?",
+							"enable": "Aceitar Dados Analíticos",
+							"label": "Dados Analíticos"
+						},
+						"functional": {
+							"disable": "Dados Funcionais Aceites. Recusar?",
+							"enable": "Aceitar Dados Funcionais",
+							"label": "Dados Funcionais"
+						}
+					},
+					"paragraphs": {
+						"1": "Por serem essenciais ao bom funcionamento do site, a utilização de cookies estritamente necessários ou essenciais, não carece de consentimento prévio por parte do utilizador. Os demais (cookies de funcionalidade, performance ou publicidade) apenas serão utilizados caso o utilizador expressamente autorize a sua utilização."
+					},
+					"refuse": "Recusar e Limpar Dados",
+					"refuse_modal": {
+						"cancel": "Cancelar",
+						"confirm": "Sim, apagar tudo",
+						"description": "Ao retirar o consentimento serão apagados todos os dados guardados neste site, incluindo as suas paragens e linhas favoritas.",
+						"title": "Retirar consentimento"
+					},
+					"title": "Consentimento do utilizador:"
+				},
+				"question_7": {
+					"paragraphs": {
+						"1": "Os utilizadores podem ainda impedir ou condicionar a utilização de cookies através das configurações do seu navegador. Se limitar esta opção, no entanto, a utilização de alguns recursos ou o desempenho de alguns websites pode ficar condicionada.",
+						"2": "Saiba como em:"
+					},
+					"title": "Como controlar o uso de Cookies?"
+				},
+				"question_8": {
+					"paragraphs": {
+						"1": "A TML reserva-se, a todo o tempo, no direito de alterar e/ou atualizar a informação constante da presente Política, assim como a faculdade de disponibilizar, a pedido, informações adicionais, mais detalhadas, sobre situações específicas em que são recolhidos e tratados dados pessoais."
+					},
+					"title": "Direito de reserva"
+				}
+			},
+			"title": "Política de Cookies"
+		},
+		"LegalPage": {
+			"sections": {
+				"1": {
+					"paragraphs": {
+						"1": "A Transportes Metropolitanos de Lisboa, E.M.T., S.A, através da sua empresa Carris Metropolitana, tem por objeto social a exploração do Serviço Público de Transporte rodoviário de passageiros na área metropolitana de Lisboa.",
+						"2": "Sede: Rua Cruz de Santa Apolónia, 23, 25 e 25A",
+						"3": "Endereço eletrónico de contacto: contacto@carrismetropolitana.pt"
+					},
+					"title": "1. Informação geral"
+				},
+				"2": {
+					"paragraphs": {
+						"1": "Qualquer pessoa que aceda ao website assume o papel de utilizador, comprometendo-se a observar e cumprir rigorosamente as disposições aqui contidas, bem como qualquer outra disposição legal que possa ser aplicável. O utilizador compromete-se a não utilizar este website para fins fraudulentos, e a não se envolver em qualquer conduta que possa prejudicar a imagem, interesses e direitos da Carris Metropolitana  Em caso de incumprimento pelo utilizador das condições de utilização deste website, ou de suspeita razoável por parte da Carris Metropolitana de que o utilizador as infringiu, a Carris Metropolitana reserva-se o direito de limitar, suspender ou terminar o acesso ao website, adotando quaisquer medidas técnicas necessárias para o efeito."
+					},
+					"title": "2. Condições de utilização"
+				},
+				"3": {
+					"paragraphs": {
+						"1": "A Carris Metropolitana rejeita qualquer responsabilidade pela informação publicada no seu website, sempre que esta informação tenha sido manipulada ou introduzida por um terceiro alheio ao mesmo. A Carris Metropolitana não é responsável de forma alguma, e em nenhuma circunstância, pelos conteúdos, atividades comerciais, produtos e serviços que possam ser visualizados através de ligações eletrónicas (links), direta ou indiretamente, através do website. A presença de ligações no website, salvo indicação expressa em contrário, tem uma finalidade meramente informativa e em caso algum implica uma sugestão, convite ou recomendação das mesmas. Estas ligações não representam qualquer tipo de relação entre a Carris Metropolitana e os indivíduos ou empresas que possam aceder a websites/aplicações alheias à Carris Metropolitana através destas ligações. A Carris Metropolitana reserva-se o direito de retirar unilateralmente e a qualquer momento as ligações que aparecem no website/nas aplicações. A Carris Metropolitana fornece os seus serviços e conteúdos numa base contínua, utilizando todos os meios técnicos à sua disposição para os fornecer de forma satisfatória. A Carris Metropolitana não será responsável por danos e prejuízos de qualquer tipo que possam derivar da falta de disponibilidade e/ou continuidade técnica do funcionamento deste website/aplicação. Em qualquer caso, a Carris Metropolitana tomará todas as medidas necessárias para repor os seus serviços em caso de falha técnica."
+					},
+					"title": "3. Responsabilidade"
+				},
+				"4": {
+					"paragraphs": {
+						"1": "Os conteúdos, elementos, desenhos e aplicações alojados nesta página Web, independentemente do seu formato e das suas características, bem como todos os Direitos de Propriedade Industrial e Intelectual inerentes ao referido website, são propriedade da Carris Metropolitana e estão protegidos tanto pelos regulamentos de Propriedade Industrial e Intelectual como por qualquer outra legislação que possa ser aplicável. O referido conteúdo não pode ser objeto de exploração, reprodução, distribuição, modificação, comunicação pública, transferência, transformação ou qualquer outro procedimento de divulgação que não tenha sido expressa e previamente autorizado. A Carris Metropolitana reserva-se o direito de tomar medidas legais que lhe assistam contra aqueles que violem os direitos de titularidade acima referidos."
+					},
+					"title": "4. Direitos de propriedade industrial e intelectual"
+				},
+				"5": {
+					"paragraphs": {
+						"1": "5.1. Responsável pelo tratamento",
+						"2": "Os dados pessoais recolhidos através do website www.carrismetropolitana.pt, serão tratados, na qualidade de responsável pelo tratamento, pela Transportes Metropolitanos de Lisboa, E.M.T., S.A, com sede social na Rua Cruz de Santa Apolónia, 23, 25 e 25A, 1100-187 Lisboa.O utilizador pode fornecer-nos voluntariamente informações de natureza pessoal, quer através de determinados formulários de recolha de dados incluídos na nossa página Web ou através dos endereços de correio eletrónico fornecidos para o efeito. O fornecimento de quaisquer dados de caráter pessoal através dos diferentes formulários e endereços de correio eletrónico da presente página Web implica o conhecimento e aceitação do seu tratamento nos termos indicados nas Políticas de Privacidade e de Cookies.",
+						"3": "5.2. Informações que recolhemos das visitas ao website",
+						"4": "Ao navegar e utilizar os serviços disponíveis no website, pode ser recolhida e tratada informação de cariz pessoal, bem como para efeitos de estatísticas agregadas anónimas dos visitantes do website, seja porque fornecem ativamente essa informação ou porque estão simplesmente a navegar no website. Para além das informações que voluntariamente poderá disponibilizar, as informações recolhidas podem incluir o endereço do Protocolo de Internet (IP) do dispositivo que está a utilizar, o software de navegação utilizado, o sistema operativo, a data e hora de acesso, o endereço de Internet do website através do qual está a aceder e também informações sobre a forma como utiliza o nosso website.",
+						"5": "Utilizamos esta informação para sabermos quanto tempo demora o nosso website a carregar, como é utilizado, o número de visitas e o tipo de informação mais frequentemente consultada pelo utilizador. Estas informações ajudam-nos a identificar se a nossa página Web está a funcionar corretamente e, se detetarmos falhas ou erros no seu funcionamento, a corrigi-los e a melhorar o desempenho do nosso website, para que possamos oferecer um melhor serviço a todos os utilizadores.",
+						"6": "Tendo em consideração o acima exposto, recolhemos dados de utilização e navegação para fins estatísticos e publicitários, para controlar a utilização da nossa página Web e para melhorar o nosso conhecimento dos interesses do Utilizador.",
+						"7": "5.3. Menores de idade",
+						"8": "As crianças menores de 14 anos não deverão apresentar quaisquer informações pessoais sem o consentimento dos seus pais ou tutores. A Transportes Metropolitanos de Lisboa, E.M.T., S.A., não é responsável por qualquer informação pessoal apresentada por crianças com menos de 14 anos sem a devida autorização."
+					},
+					"title": "5. Proteção de dados"
+				},
+				"6": {
+					"paragraphs": {
+						"1": "A Transportes Metropolitanos de Lisboa, E.M.T., S.A. reserva-se o direito de modificar este Aviso Legal para se adaptar à nova legislação ou jurisprudência, bem como às mudanças na estratégia e ações empresariais da Transportes Metropolitanos de Lisboa, E.M.T., S.A. e empresas relacionadas, pelo que recomendamos que o leia antes de aceder e navegar no website. Não obstante o mencionado anteriormente, as relações estabelecidas com os utilizadores antes da modificação do presente Aviso Legal serão regidas pelas regras em vigor no momento em que o utilizador acedeu ao website para o seu estabelecimento. ATransportes Metropolitanos de Lisboa, E.M.T., S.A. fornece aos utilizadores os recursos técnicos adequados para que estes possam aceder a este Aviso Legal com antecedência."
+					},
+					"title": "6. Modificações"
+				},
+				"7": {
+					"paragraphs": {
+						"1": "Para a resolução de todas as disputas ou questões relacionadas com este website ou com as atividades nele realizadas, é aplicável a lei portuguesa, à qual as partes se submetem expressamente, sendo competentes para a resolução de todas as disputas decorrentes ou relacionadas com a sua utilização, de acordo com a legislação aplicável, os Tribunais competentes. Caso qualquer disposição deste documento seja declarada inválida, será retirada ou substituída. Em qualquer caso, tal declaração de nulidade não afeta a validade das restantes disposições aqui contidas."
+					},
+					"title": "7. Lei aplicável e jurisdição"
+				}
+			},
+			"subheading": "A Transportes Metropolitanos de Lisboa, E.M.T., S.A. informa que o acesso e utilização desta nossa página Web está sujeito às seguintes condições de utilização:",
+			"title": "Aviso Legal"
+		},
+		"PrivacyPage": {
+			"sections": {
+				"intro": {
+					"paragraphs": {
+						"1": "A TML recorre à utilização de cookies e outras tecnologias similares para perceber como o website é utilizado, de modo a melhorar o seus conteúdos, segurança e desempenho. O objetivo é proporcionar uma melhor experiência de navegação."
+					},
+					"title": "Política de Cookies"
+				},
+				"question_1": {
+					"paragraphs": {
+						"1": "Cookies são pequenos ficheiros de texto com informação relevante que o dispositivo de acesso (computador, telemóvel, smartphone, tablet, etc…) carrega, através do navegador de internet (browser), quando um site é visitado pelo utilizador.",
+						"2": "A utilização de cookies ajuda os websites a reconhecer o dispositivo do utilizador na visita seguinte sendo com frequência imprescindível para o funcionamento do mesmo.",
+						"3": "Os cookies usados pela TML não recolhem informações pessoais que permitam identificar um utilizador em particular, guardando apenas informações anónimas, genéricas e agregadas."
+					},
+					"title": "O que são cookies e para que servem?"
+				},
+				"question_2": {
+					"paragraphs": {
+						"1": "Atendendo às finalidades para os quais são utilizados, os cookies podem ser classificados do seguinte modo:",
+						"2": "- Cookies estritamente necessários (também conhecidos por essenciais, técnicos ou básicos): são necessários para que o utilizador consiga aceder a áreas específicas do website, permitindo a navegação e a utilização das suas aplicações, tal como o acesso a áreas seguras do site, através de login. Sem estes cookies, os serviços que o exijam não podem ser prestados;",
+						"3": "- Cookies de funcionalidade (também conhecidos por preferenciais):permitem o website relembrar as preferências do utilizador relativamente à sua navegação no website, não necessitando, assim, de o reconfigurar e personalizar cada vez que o visita;",
+						"4": "- Cookies de performance (também conhecidos por analíticos ou estatísticos): são essencialmente utilizados para analisar a forma como o utilizador utiliza o website, permitindo destacar artigos ou serviços que podem ser do seu interesse, monitorizar o desempenho do website, dado a conhecer quais as páginas mais populares, qual o método de ligação entre páginas que é mais eficaz ou para determinar a razão de algumas páginas estarem a receber mensagens de erro;",
+						"5": "- Cookies de publicidade (também conhecidos por marketing ou de rastreio): permitem proporcionar ao utilizador informação publicitária em função de suas preferências e interesses, bem como, ajudam a medir a eficácia dos anúncios mostrados (ex. quantas vezes são vistos)."
+					},
+					"title": "Que tipos de Cookies existem?"
+				},
+				"question_3": {
+					"paragraphs": {
+						"1": "Quanto à sua validade, os cookies podem também ser classificados da seguinte forma:",
+						"2": "- Cookies permanentes: são cookies que ficam armazenados nos dispositivos de acesso, ao nível do navegador de internet (browser), e são usados sempre que o utilizador visita novamente o website. Em geral, são usados para direcionar a navegação de acordo com os interesses do utilizador, permitindo a prestação de um serviço mais personalizado;",
+						"3": "- Cookies de sessão: são cookies temporários, que são gerados e estão disponíveis até o utilizador encerrar a sessão. Da próxima vez que o utilizador aceder ao seu navegador de internet (browser), os cookies já não se encontrarão armazenados."
+					},
+					"title": "Qual a validade dos Cookies?"
+				},
+				"question_4": {
+					"paragraphs": {
+						"1": "Em função da sua origem, os cookies podem ainda ter a seguinte tipologia:",
+						"2": "- Cookies próprios (ou de primeira parte):são os que são enviados para o dispositivo do utilizador a partir de um website/domínio gerido pelo próprio editor e a partir do qual é fornecido o serviço solicitado pelo utilizador (o proprietário do website);",
+						"3": "- Cookies de terceiros (ou de terceira parte):são os que são enviados para o dispositivo do utilizador a partir de um domínio que não é gerido pelo editor do website, mas por outras entidades a quem aproveitam a informação obtida através desses cookies. Dada a sua origem e natureza, a utilização deste tipo de cookies é da exclusiva responsabilidade das entidades que os utilizam."
+					},
+					"title": "Quais as possíveis origens dos Cookies?"
+				},
+				"question_5": {
+					"table": {
+						"header": {
+							"col_1": "Tipo",
+							"col_2": "Domínio/Origem",
+							"col_3": "Finalidade",
+							"col_4": "Validade"
+						},
+						"rows": {
+							"1": {
+								"col_1": "NEXT_LOCALE",
+								"col_2": "carrismetropolitana.pt",
+								"col_3": "Identificar o idioma de preferência do utilizador",
+								"col_4": "1 ano"
+							},
+							"2": {
+								"col_1": "anonymous_analytics_enabled",
+								"col_2": "carrismetropolitana.pt",
+								"col_3": "Obter informação estatística sobre a utilização do site",
+								"col_4": "1 ano"
+							}
+						}
+					},
+					"title": "Quais os Cookies ou tecnologias similares utilizados neste site?"
+				},
+				"question_6": {
+					"accept": "Aceitar Política de Cookies",
+					"enabled": "Política de Cookies aceite",
+					"options": {
+						"analytics": {
+							"disable": "Dados Analíticos Aceites. Recusar?",
+							"enable": "Aceitar Dados Analíticos",
+							"label": "Dados Analíticos"
+						},
+						"functional": {
+							"disable": "Dados Funcionais Aceites. Recusar?",
+							"enable": "Aceitar Dados Funcionais",
+							"label": "Dados Funcionais"
+						}
+					},
+					"paragraphs": {
+						"1": "Por serem essenciais ao bom funcionamento do site, a utilização de cookies estritamente necessários ou essenciais, não carece de consentimento prévio por parte do utilizador. Os demais (cookies de funcionalidade, performance ou publicidade) apenas serão utilizados caso o utilizador expressamente autorize a sua utilização."
+					},
+					"refuse": "Recusar e Limpar Dados",
+					"refuse_modal": {
+						"cancel": "Cancelar",
+						"confirm": "Sim, apagar tudo",
+						"description": "Ao retirar o consentimento serão apagados todos os dados guardados neste site, incluindo as suas paragens e linhas favoritas.",
+						"title": "Retirar consentimento"
+					},
+					"title": "Consentimento do utilizador:"
+				},
+				"question_7": {
+					"paragraphs": {
+						"1": "Os utilizadores podem ainda impedir ou condicionar a utilização de cookies através das configurações do seu navegador. Se limitar esta opção, no entanto, a utilização de alguns recursos ou o desempenho de alguns websites pode ficar condicionada.",
+						"2": "Saiba como em:"
+					},
+					"title": "Como controlar o uso de Cookies?"
+				},
+				"question_8": {
+					"paragraphs": {
+						"1": "A TML reserva-se, a todo o tempo, no direito de alterar e/ou atualizar a informação constante da presente Política, assim como a faculdade de disponibilizar, a pedido, informações adicionais, mais detalhadas, sobre situações específicas em que são recolhidos e tratados dados pessoais."
+					},
+					"title": "Direito de reserva"
+				}
+			},
+			"title": "Política de Cookies"
 		}
 	},
 	"line": {
