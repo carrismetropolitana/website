@@ -805,113 +805,72 @@
 		},
 		"PrivacyPage": {
 			"sections": {
-				"intro": {
+				"0": {
 					"paragraphs": {
-						"1": "A TML recorre à utilização de cookies e outras tecnologias similares para perceber como o website é utilizado, de modo a melhorar o seus conteúdos, segurança e desempenho. O objetivo é proporcionar uma melhor experiência de navegação."
-					},
-					"title": "Política de Cookies"
+						"1": "Através da presente Política de Privacidade e Cookies (ou simplesmente, Política), a TML, fazendo jus ao seu compromisso de proceder ao tratamento de dados pessoais de forma licita, leal e transparente, pretende dar a conhecer aos titulares dos dados, nos termos e para os efeitos dos artigos 12.º e seguintes do Regulamento Geral sobre a Proteção de Dados (ou simplesmente, RGPD), a forma como trata os dados pessoais sob sua responsabilidade, nomeadamente, que tipo de dados recolhe, para que finalidades os trata, com quem partilha esses dados, bem como informar os titulares sobre os direitos que lhes assistem em matéria de tratamento de dados pessoais e como poderão exercer esses direitos.",
+						"2": "Por outro lado, pretende informar e esclarecer os utilizadores do seu website www.carrismetropolitana.pt, sobre o tipo de cookies utiliza, para que finalidades os utiliza, bem como a forma como os utilizadores podem gerir a sua utilização."
+					}
 				},
-				"question_1": {
+				"1": {
 					"paragraphs": {
-						"1": "Cookies são pequenos ficheiros de texto com informação relevante que o dispositivo de acesso (computador, telemóvel, smartphone, tablet, etc…) carrega, através do navegador de internet (browser), quando um site é visitado pelo utilizador.",
-						"2": "A utilização de cookies ajuda os websites a reconhecer o dispositivo do utilizador na visita seguinte sendo com frequência imprescindível para o funcionamento do mesmo.",
-						"3": "Os cookies usados pela TML não recolhem informações pessoais que permitam identificar um utilizador em particular, guardando apenas informações anónimas, genéricas e agregadas."
+						"1": "A TML - Transportes Metropolitanos de Lisboa, E.M.T., S.A. (doravante simplesmente designada por TML), é uma pessoa coletiva de direito privado, sob a forma de sociedade anónima de capitais exclusivamente públicos, que visa a prossecução de competências próprias e delegadas nos domínios da mobilidade e transportes, designadamente competências de autoridade de transportes relativamente aos serviços públicos de transporte de passageiros na área metropolitana de Lisboa, bem como no desenvolvimento, disponibilização e gestão de uma plataforma de bilhética integrada para todos os operadores do serviço público de transportes de passageiros da área metropolitana de Lisboa."
 					},
-					"title": "O que são cookies e para que servem?"
+					"title": "1. Quem somos?"
 				},
-				"question_2": {
+				"2": {
 					"paragraphs": {
-						"1": "Atendendo às finalidades para os quais são utilizados, os cookies podem ser classificados do seguinte modo:",
-						"2": "- Cookies estritamente necessários (também conhecidos por essenciais, técnicos ou básicos): são necessários para que o utilizador consiga aceder a áreas específicas do website, permitindo a navegação e a utilização das suas aplicações, tal como o acesso a áreas seguras do site, através de login. Sem estes cookies, os serviços que o exijam não podem ser prestados;",
-						"3": "- Cookies de funcionalidade (também conhecidos por preferenciais):permitem o website relembrar as preferências do utilizador relativamente à sua navegação no website, não necessitando, assim, de o reconfigurar e personalizar cada vez que o visita;",
-						"4": "- Cookies de performance (também conhecidos por analíticos ou estatísticos): são essencialmente utilizados para analisar a forma como o utilizador utiliza o website, permitindo destacar artigos ou serviços que podem ser do seu interesse, monitorizar o desempenho do website, dado a conhecer quais as páginas mais populares, qual o método de ligação entre páginas que é mais eficaz ou para determinar a razão de algumas páginas estarem a receber mensagens de erro;",
-						"5": "- Cookies de publicidade (também conhecidos por marketing ou de rastreio): permitem proporcionar ao utilizador informação publicitária em função de suas preferências e interesses, bem como, ajudam a medir a eficácia dos anúncios mostrados (ex. quantas vezes são vistos)."
-					},
-					"title": "Que tipos de Cookies existem?"
-				},
-				"question_3": {
-					"paragraphs": {
-						"1": "Quanto à sua validade, os cookies podem também ser classificados da seguinte forma:",
-						"2": "- Cookies permanentes: são cookies que ficam armazenados nos dispositivos de acesso, ao nível do navegador de internet (browser), e são usados sempre que o utilizador visita novamente o website. Em geral, são usados para direcionar a navegação de acordo com os interesses do utilizador, permitindo a prestação de um serviço mais personalizado;",
-						"3": "- Cookies de sessão: são cookies temporários, que são gerados e estão disponíveis até o utilizador encerrar a sessão. Da próxima vez que o utilizador aceder ao seu navegador de internet (browser), os cookies já não se encontrarão armazenados."
-					},
-					"title": "Qual a validade dos Cookies?"
-				},
-				"question_4": {
-					"paragraphs": {
-						"1": "Em função da sua origem, os cookies podem ainda ter a seguinte tipologia:",
-						"2": "- Cookies próprios (ou de primeira parte):são os que são enviados para o dispositivo do utilizador a partir de um website/domínio gerido pelo próprio editor e a partir do qual é fornecido o serviço solicitado pelo utilizador (o proprietário do website);",
-						"3": "- Cookies de terceiros (ou de terceira parte):são os que são enviados para o dispositivo do utilizador a partir de um domínio que não é gerido pelo editor do website, mas por outras entidades a quem aproveitam a informação obtida através desses cookies. Dada a sua origem e natureza, a utilização deste tipo de cookies é da exclusiva responsabilidade das entidades que os utilizam."
-					},
-					"title": "Quais as possíveis origens dos Cookies?"
-				},
-				"question_5": {
-					"table": {
-						"header": {
-							"col_1": "Tipo",
-							"col_2": "Domínio/Origem",
-							"col_3": "Finalidade",
-							"col_4": "Validade"
-						},
-						"rows": {
-							"1": {
-								"col_1": "NEXT_LOCALE",
-								"col_2": "carrismetropolitana.pt",
-								"col_3": "Identificar o idioma de preferência do utilizador",
-								"col_4": "1 ano"
-							},
-							"2": {
-								"col_1": "anonymous_analytics_enabled",
-								"col_2": "carrismetropolitana.pt",
-								"col_3": "Obter informação estatística sobre a utilização do site",
-								"col_4": "1 ano"
-							}
+						"1": "A TML compromete-se a tratar os dados pessoais de acordo com os princípios fundamentais vertidos no RGPD, na Lei n.º 58/2019 de 8 de agosto e demais normativos aplicáveis, relacionados com a proteção dos direitos e liberdades dos titulares dos dados.",
+						"2": "Deste modo, independentemente do contexto, da natureza, do âmbito ou finalidade, a TML compromete-se a realizar o tratamento de dados pessoais, de acordo com os seguintes princípios:",
+						"list": {
+							"1": "a) princípio da licitude, lealdade e transparência — os dados devem ser objeto de um tratamento lícito, leal e transparente em relação ao titular dos dados;",
+							"2": "b) princípio da limitação das finalidades — os dados devem ser recolhidos para finalidades determinadas, explícitas e legítimas, não podendo ser tratados posteriormente de uma forma incompatível com essas finalidades;",
+							"3": "c) princípio da minimização dos dados — os dados devem ser adequados, pertinentes e limitados ao que é necessário relativamente às finalidades para as quais são tratados;",
+							"4": "d) princípio da exatidão — os dados devem ser exatos e atualizados sempre que necessário;",
+							"5": "e) princípio da limitação da conservação — os dados devem ser conservados de uma forma que permita a identificação dos titulares dos dados apenas durante o período necessário para as finalidades para as quais são tratados;",
+							"6": "f) princípio da integridade e confidencialidade — os dados devem ser tratados de uma forma que garanta a sua segurança, incluindo a proteção contra o seu tratamento não autorizado ou ilícito e contra a sua perda, destruição ou danificação acidental, adotando as medidas técnicas ou organizativas adequadas."
 						}
 					},
-					"title": "Quais os Cookies ou tecnologias similares utilizados neste site?"
+					"title": "2. Qual o nosso compromisso?"
 				},
-				"question_6": {
-					"accept": "Aceitar Política de Cookies",
-					"enabled": "Política de Cookies aceite",
-					"options": {
-						"analytics": {
-							"disable": "Dados Analíticos Aceites. Recusar?",
-							"enable": "Aceitar Dados Analíticos",
-							"label": "Dados Analíticos"
-						},
-						"functional": {
-							"disable": "Dados Funcionais Aceites. Recusar?",
-							"enable": "Aceitar Dados Funcionais",
-							"label": "Dados Funcionais"
+				"3": {
+					"paragraphs": {
+						"1": "Na medida em que determine as finalidades e os meios de tratamento dos dados pessoais, a TML é a entidade responsável pelo seu tratamento na aceção do RGPD.",
+						"2": "Quando a TML determine conjuntamente com outra(s) entidade(s) as finalidades e os meios do tratamento dos dados, ambas serão responsáveis conjuntos pelo seu tratamento, na medida das responsabilidades acordadas entre si de forma transparente, nomeadamente no que diz respeito ao exercício dos direitos do titular dos dados e aos respetivos deveres de informação."
+					},
+					"title": "3. Quem é o Responsável pelo tratamento dos dados?"
+				},
+				"4": {
+					"paragraphs": {
+						"1": "Os dados pessoais tratados pela TML, limitam-se aos estritamente necessários à prossecução das finalidades para os quais são recolhidos, designadamente: dados de identificação, dados de contacto, dados de faturação, dados referentes a carregamentos e validações dos títulos de transporte, dados de navegação no site, bem como os que se venham a revelar estritamente necessários para o cumprimento de suas obrigações legais e contratuais."
+					},
+					"title": "4. Que tipo de dados são recolhidos e tratados?"
+				},
+				"5": {
+					"paragraphs": {
+						"1": "A TML procede à recolha e tratamento de dados pessoais, para efeitos do cumprimento de suas obrigações no âmbito das competências que lhe foram atribuídas pelo Legislação em vigor em matéria de serviço público de transporte de passageiros, nomeadamente:",
+						"2": "Complementarmente, caso um interesse legitimo prevaleça ou o titular dos dados expressamente o autorize, a TML poderá ainda tratar dados para, de acordo com as preferências de utilização dos titulares, melhorar os serviços prestados, adequar a sua informação comercial, realizar inquéritos de satisfação, passatempos e ações de promoção, envio de newsletters e ações de marketing direto.",
+						"3": "Os dados serão conservados pelos períodos fixados por lei ou, na falta desta, o que se revele necessário para a prossecução da(s) finalidade(s) que motivou a sua recolha e tratamento, findo o qual serão eliminados ou anonimizados.",
+						"4": "Para fins de arquivo de interesse público, de investigação científica ou histórica, ou para fins estatísticos, a TML poderá conservar alguns dos dados durante períodos mais longos, sem prejuízo de aplicar as garantias adequadas dos direitos e liberdades do titular dos dados, nos termos da legislação em vigor.",
+						"list": {
+							"1": "a) Disponibilizar e gerir uma plataforma tecnológica de bilhética comum a todos os operadores do serviço público de transporte de passageiros no âmbito da área de sua competência;",
+							"2": "b) Emitir e gerir os cartões de suporte à bilhética e a respetiva base de clientes;",
+							"3": "c) Realizar o tratamento da informação dos sistemas de bilhética interoperável, incluindo, nomeadamente, a informação sobre as vendas e validações de operadores e a informação aos passageiros;",
+							"4": "d) Assegurar a adaptação contínua do sistema de bilhética às novas necessidades, através do desenvolvimento de soluções estratégicas e operacionais;",
+							"5": "e) Gerir processos administrativos no âmbito das competências que lhes sejam atribuídas."
 						}
 					},
-					"paragraphs": {
-						"1": "Por serem essenciais ao bom funcionamento do site, a utilização de cookies estritamente necessários ou essenciais, não carece de consentimento prévio por parte do utilizador. Os demais (cookies de funcionalidade, performance ou publicidade) apenas serão utilizados caso o utilizador expressamente autorize a sua utilização."
-					},
-					"refuse": "Recusar e Limpar Dados",
-					"refuse_modal": {
-						"cancel": "Cancelar",
-						"confirm": "Sim, apagar tudo",
-						"description": "Ao retirar o consentimento serão apagados todos os dados guardados neste site, incluindo as suas paragens e linhas favoritas.",
-						"title": "Retirar consentimento"
-					},
-					"title": "Consentimento do utilizador:"
+					"title": "5. Para que finalidades são tratados os dados?"
 				},
-				"question_7": {
+				"6": {
 					"paragraphs": {
-						"1": "Os utilizadores podem ainda impedir ou condicionar a utilização de cookies através das configurações do seu navegador. Se limitar esta opção, no entanto, a utilização de alguns recursos ou o desempenho de alguns websites pode ficar condicionada.",
-						"2": "Saiba como em:"
+						"1": "Para efeitos do cumprimento de suas obrigações no âmbito das competências e das finalidades identificadas, a TML pode partilhar dados pessoais com os operadores que integram o sistema de serviço publico de transporte regular de passageiros na área de sua esfera de competência (saiba mais em www.carrismetropolitana.pt).",
+						"2": "A TML poderá ainda partilhar dados com outras entidades (subcontratantes), a quem recorra para efeitos da preparação e/ou execução da totalidade ou parte das finalidades acima identificadas (por exemplo: fornecedores, prestadores de serviços, etc…), bem como com entidades/autoridades públicas, no âmbito de suas atribuições.",
+						"3": "A partilha de dados com entidades terceiras, será efetuada nos termos estritamente permitidos por lei, ficando essas entidades obrigadas a um dever de sigilo e a garantir a segurança e confidencialidade dos dados."
 					},
-					"title": "Como controlar o uso de Cookies?"
-				},
-				"question_8": {
-					"paragraphs": {
-						"1": "A TML reserva-se, a todo o tempo, no direito de alterar e/ou atualizar a informação constante da presente Política, assim como a faculdade de disponibilizar, a pedido, informações adicionais, mais detalhadas, sobre situações específicas em que são recolhidos e tratados dados pessoais."
-					},
-					"title": "Direito de reserva"
+					"title": "6. Com quem são partilhados os dados?"
 				}
 			},
-			"title": "Política de Cookies"
+			"title": "Política de Privacidade"
 		}
 	},
 	"line": {
