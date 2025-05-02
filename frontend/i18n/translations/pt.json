@@ -435,7 +435,7 @@
 		"ScrollToTopButton": {
 			"label": "Início da Página"
 		},
-		"SelectOperationalDay": {
+		"SelectOperationalDate": {
 			"today": "Hoje",
 			"tomorrow": "Amanhã"
 		},
