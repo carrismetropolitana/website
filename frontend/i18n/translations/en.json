@@ -435,7 +435,7 @@
 		"ScrollToTopButton": {
 			"label": "Back to Top"
 		},
-		"SelectOperationalDay": {
+		"SelectOperationalDate": {
 			"today": "Today",
 			"tomorrow": "Tomorrow"
 		},
@@ -870,7 +870,7 @@
 					"title": "6. Com quem são partilhados os dados?"
 				}
 			},
-			"title": "Política de Privacidade"
+			"title": "Política de Cookies"
 		}
 	},
 	"line": {
