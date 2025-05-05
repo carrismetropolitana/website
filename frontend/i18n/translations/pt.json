@@ -1031,25 +1031,26 @@
 			"text1": "A Carris Metropolitana possui uma <b>política de dados abertos</b>, com o objetivo de promover a transparência e a proximidade com os seus passageiros, divulgando publicamente informação relativa à sua operação.",
 			"title1": "Dados Abertos"
 		},
-		"MetricsPageContacts": {
+		"MetricsPageComplaints": {
 			"heading": "Contactos",
 			"subheading": "Aqui, consegue consultar a totalidade de contactos recebidos pela Carris Metropolitana, discriminados por Pedidos de Informação, Reclamações e Outro tipo de contacto.",
 			"title1": "Open Data"
 		},
-		"MetricsPageContactsCardGroup": {
+		"MetricsPageComplaintsCardGroup": {
 			"main_value": "{value, number}",
 			"total_to": "total para:"
 		},
-		"MetricsPageContactsGlobalCard": {
-			"total_contacts_desc": "total de contactos no último ano",
+		"MetricsPageComplaintsGlobalCard": {
+			"last_updated": "Última atualização: {value, date, dayShort} {value, date, monthShort} {value, date, yearLong}",
+			"total_contacts_desc": "total de contactos desde o início do ano",
 			"total_contacts_email": "{value, number}",
 			"total_contacts_phone": "{value, number}",
 			"total_email_contacts_desc": "contactos por email",
 			"total_passengers_day": "{value, number}",
-			"total_passengers_day_contacts_desc": "total de passageiros no útlimo ano",
+			"total_passengers_day_contacts_desc": "total de passageiros desde o início do ano",
 			"total_phone_contacts_desc": "contactos telefónicos"
 		},
-		"MetricsPageContactsToolbar": {
+		"MetricsPageComplaintsToolbar": {
 			"global": "Global",
 			"line": "Linha",
 			"municipality": "Município",
