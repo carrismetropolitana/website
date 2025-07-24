@@ -1,0 +1,155 @@
+/* * */
+/* CONTAINER */
+
+.container {
+	display: grid;
+	grid-template-columns: 1fr 1fr;
+	gap: var(--size-spacing-40);
+	width: 100%;
+	min-height: 500px;
+}
+
+@media (width <= 900px) {
+	.container {
+		grid-template-columns: 1fr;
+	}
+}
+
+/* * */
+/* MAP SECTION */
+
+.mapContainer {
+	width: 36.875rem;
+	height: 71rem;
+	flex-shrink: 0;
+    border-radius: 1.125rem;
+}
+
+.mapImage {
+	width: 100%;
+	height: auto;
+	object-fit: contain;
+	border-radius: var(--border-radius-md);
+}
+
+@media (width <= 900px) {
+	.mapContainer {
+		order: 1;
+		width: 100%;
+		height: auto;
+	}
+}
+
+/* * */
+/* JOURNEY SECTION */
+
+.journeyContainer {
+	display: flex;
+	flex-direction: column;
+	gap: var(--size-spacing-25);
+}
+
+@media (width <= 900px) {
+	.journeyContainer {
+		order: 2;
+	}
+}
+
+/* * */
+/* ACCORDION STYLES */
+
+.accordion {
+	display: flex;
+	flex-direction: column;
+	gap: var(--size-spacing-15);
+}
+
+.accordionItem {
+	background-color: var(--color-system-background-100);
+	border: 1px solid var(--color-system-border-100);
+	border-radius: var(--border-radius-lg);
+	transition: all 200ms ease;
+}
+
+.accordionItem:hover {
+	
+}
+
+.accordionControl {
+	padding: var(--size-spacing-20);
+	background-color: transparent;
+	border: none;
+}
+
+.accordionPanel {
+	padding: 0 var(--size-spacing-20) var(--size-spacing-20) var(--size-spacing-20);
+}
+
+/* * */
+/* STEP HEADER */
+
+.stepTitle {
+	font-size: 16px;
+	font-weight: var(--font-weight-bold);
+	color: var(--color-system-text-200);
+	margin: 0;
+}
+
+/* * */
+/* LINES WRAPPER */
+
+.linesWrapper {
+	display: flex;
+	flex-direction: column;
+	gap: var(--size-spacing-10);
+	margin-top: var(--size-spacing-15);
+	padding: var(--size-spacing-20);
+	border: 1px solid var(--color-system-border-100);
+	border-radius: var(--border-radius-lg);
+	
+}
+
+.linesWrapper:first-child {
+	margin-top: 0;
+}
+
+.linesWrapper span {
+	font-size: 14px;
+	font-weight: var(--font-weight-bold);
+	color: var(--color-system-text-200);
+	margin-bottom: var(--size-spacing-8);
+}
+
+/* * */
+/* RESPONSIVE ADJUSTMENTS */
+
+@media (width <= 650px) {
+	.container {
+		gap: var(--size-spacing-20);
+	}
+	
+	.accordionControl {
+		padding: var(--size-spacing-15);
+	}
+	
+	.accordionPanel {
+		padding: 0 var(--size-spacing-15) var(--size-spacing-15) var(--size-spacing-15);
+	}
+	
+	.linesWrapper {
+		padding: var(--size-spacing-15);
+		gap: var(--size-spacing-8);
+	}
+	
+	.stepTitle {
+		font-size: 14px;
+	}
+	
+	.linesWrapper span {
+		font-size: 13px;
+	}
+    .accordion{
+        border-radius: 1.125rem;
+    }
+
+}

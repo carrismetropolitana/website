@@ -318,6 +318,48 @@
 			}
 		}
 	},
+	"arrabida": {
+		"ArrabidaHeader": {
+			"navigation": {
+				"about": "Sobre",
+				"arrabida365": "Arrábida 365",
+				"how_to_get": "Como chegar?",
+				"lines": "Linhas"
+			},
+			"subtitle": "Uma experiência única de natureza e sustentabilidade",
+			"title": "Descubra a Arrábida"
+		},
+		"ArrabidaList": {
+			"favorite_added": "Linha adicionada aos favoritos",
+			"favorite_removed": "Linha removida dos favoritos",
+			"has_alerts": "Esta linha possui alertas ativos",
+			"no_data": "Sem dados disponíveis",
+			"subtitle": "Aqui pode encontrar informações resumidas das linhas da Carris Metropolitana que servem as diferentes praias da Arrábida.",
+			"title": "Linhas",
+			"toggle_favorite": "Adicionar/remover dos favoritos"
+		},
+		"ArrabidaPage": {
+			"sections": {
+				"Arrabida365": {
+					"button": "Expandir",
+					"buttonSeeMore": "Saber Mais",
+					"subtitle": "Este projeto tem como objetivo promover a mobilidade sustentável na Serra da Arrábida, incentivando o uso do transporte público para chegar às praias, eventos e locais de interesse da região. Aqui poderá acompanhar as últimas novidades na rede da Carris Metropolitana, campanhas em curso, eventos locais e parcerias especiais.",
+					"title": "Arrábida 365"
+				},
+				"ArrabidaAbout": {
+					"text-1": "Arrábida 365",
+					"text-2": "é uma iniciativa da Carris Metropolitana em colaboração com o município de Setubal, que visa",
+					"text-3": "promover o transporte publico como meio privilegiado de acesso à Serra da Arrábida, durante todo o ano.",
+					"text-4": "Este projeto aposta na mobilidade sustentável como forma de preservar o património natural da serra, ao mesmo tempo que facilita o acesso a praias, eventos e locaisemblemáticos, com reforço de serviço e informação dedicada.",
+					"title": "Sobre"
+				}
+			}
+		},
+		"ArrabidaWay": {
+			"subtitle": "Todos os passes da Arrábida servidos pela Carris Metropolitana",
+			"title": "Como chegar?"
+		}
+	},
 	"cards": {
 		"Discounts": {
 			"heading": "Descontos",

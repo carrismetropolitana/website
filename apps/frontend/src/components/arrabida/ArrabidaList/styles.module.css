@@ -1,0 +1,147 @@
+/* * */
+/* CONTAINER WITH DESCRIPTION WIDTH FIX */
+
+.arrabidaListContainer [class*="headingWrapper"] [class*="subheading"] {
+	max-width: none;
+	white-space: nowrap;
+}
+
+@media (width <= 900px) {
+	.arrabidaListContainer [class*="headingWrapper"] [class*="subheading"] {
+		white-space: normal;
+	}
+}
+
+/* * */
+/* LIST ITEM WRAPPER */
+
+.listItemWrapper {
+	display: flex;
+	flex-direction: column;
+	width: 100%;
+	border-bottom: 1px solid var(--color-system-border-100);
+}
+
+.listItemWrapper:last-child,
+.listItemWrapper.lastItem {
+	border-bottom: none;
+}
+
+/* * */
+/* ITEM CONTAINER */
+
+.itemContainer {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	width: 100%;
+	gap: var(--size-spacing-15);
+}
+
+/* * */
+/* LINE INFO */
+
+.lineInfo {
+	display: flex;
+	align-items: center;
+	gap: var(--size-spacing-15);
+	flex: 1;
+	min-width: 0; /* Para permitir que o texto seja truncado */
+}
+
+/* * */
+/* ACTIONS */
+
+.actions {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	flex-shrink: 0;
+	padding: var(--size-spacing-5);
+	gap: var(--size-spacing-10);
+}
+
+/* * */
+/* ALERT ICON */
+
+.alertIcon {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	color: var(--color-alerts-2); /* Cor laranja */
+	cursor: pointer;
+}
+
+/* * */
+/* ALERTS CONTAINER */
+
+.alertsContainer {
+	display: flex;
+	flex-direction: column;
+	gap: var(--size-spacing-10);
+	padding: var(--size-spacing-15) var(--size-spacing-20);
+	margin-top: var(--size-spacing-10);
+}
+
+/* * */
+/* ALERTS CAROUSEL TITLE OVERRIDE */
+
+.alertsContainer p {
+	color: var(--color-alerts-2) !important;
+	font-weight: var(--font-weight-bold);
+}
+
+.alertsContainer a {
+	border: 1px solid var(--color-alerts-2);
+	border-radius: 6px;
+}
+
+/* * */
+/* ALERT ITEM */
+
+.alertItem {
+	display: flex;
+	flex-direction: column;
+	gap: var(--size-spacing-10);
+}
+
+/* * */
+/* ALERT HEADER */
+
+.alertHeader {
+	display: flex;
+	align-items: center;
+	gap: var(--size-spacing-10);
+	flex-wrap: wrap;
+}
+
+/* * */
+/* ALERT CONTENT */
+
+.alertContent {
+	display: flex;
+	flex-direction: column;
+	gap: var(--size-spacing-5);
+}
+
+/* * */
+/* ALERT TITLE */
+
+.alertTitle {
+	font-size: var(--font-size-text);
+	font-weight: var(--font-weight-bold);
+	color: var(--color-system-text-100);
+	margin: 0;
+	line-height: 1.4;
+}
+
+/* * */
+/* ALERT DESCRIPTION */
+
+.alertDescription {
+	font-size: var(--font-size-muted);
+	font-weight: var(--font-weight-text);
+	color: var(--color-system-text-200);
+	margin: 0;
+	line-height: 1.5;
+} 
