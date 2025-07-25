@@ -41,7 +41,9 @@ export function Arrabida365() {
 						<Image alt="Arrabida 365" className={styles.imageMap} height={1080} src="/assets/arrabidas/arrabida_365_map.png" width={1920} />
 						<div className={styles.imageBeeWrapper}>
 							<Image alt="Arrabida 365" className={styles.imageBee} height={1080} src="/assets/arrabidas/arrabida_365.png" width={1920} />
-							<Button className={styles.buttonSeeMore} rightSection={<IconArrowRight size={18} />}>{t('buttonSeeMore')}</Button>
+							<Link href="/news/31372">
+								<Button className={styles.buttonSeeMore} rightSection={<IconArrowRight size={18} />}>{t('buttonSeeMore')}</Button>
+							</Link>
 						</div>
 					</div>
 

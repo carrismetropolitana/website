@@ -33,7 +33,7 @@ export function ArrabidaAbout() {
 			<Surface>
 				<Section heading={t('title')} withGap withPadding>
 					<div className={styles.container}>
-						<iframe allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" className={styles.video} frameBorder="0" referrerPolicy="strict-origin-when-cross-origin" src="https://www.youtube.com/embed/LO6-1TvYBZU?si=AdR2UcktlnXQPDgD" title="YouTube video player" allowFullScreen />
+						<iframe allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" className={styles.video} frameBorder="0" referrerPolicy="strict-origin-when-cross-origin" src="https://www.youtube.com/embed/O4r8uZ_QJjg" title="YouTube video player" allowFullScreen />
 						<div className={styles.textContainer}>
 							<div className={styles.textWrapper}>
 								<Text className={styles.text}>
@@ -49,8 +49,12 @@ export function ArrabidaAbout() {
 									<ArrabidaIcon />
 									<ArrabidaLogo />
 								</div>
-								<CarrisLogo />
-								<SetubalLogo />
+								<a href="/" rel="noopener noreferrer" style={{ cursor: 'pointer' }} target="_blank">
+									<CarrisLogo />
+								</a>
+								<a href="https://www.mun-setubal.pt/" rel="noopener noreferrer" style={{ cursor: 'pointer' }} target="_blank">
+									<SetubalLogo />
+								</a>
 							</div>
 
 						</div>
