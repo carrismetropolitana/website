@@ -60,6 +60,47 @@
 	},
 	"NewsCard": {
 		"publish_date": "{publishDate, date, long}"
+	}, "PipIntro": {
+		"intro": "Thank you for helping us keep this panel working."
+	},
+	"PipStops": {
+		"no_data": "No stops available",
+		"question": "This are the stops associated to this panel"
+	},
+	"PipSurvey": {
+		"question": "Is there any problem with this panel?"
+	},
+	"PipSurveyOptions": {
+		"answer": {
+			"ok": {
+				"description": "The panel is working correctly.",
+				"title": "Everything OK"
+			},
+			"screen_damage": {
+				"description": "The panel is broken (stains, stripes). Unable to read the information.",
+				"title": "Physical Damage on the Panel"
+			},
+			"screen_graffiti": {
+				"description": "The panel is vandalized. Unable to read the information.",
+				"title": "Graffiti / Tags / Stickers on the Panel"
+			},
+			"screen_off": {
+				"description": "The panel is off. Only the Carris Metropolitana logo is displayed.",
+				"title": "Panel Off"
+			},
+			"structure_damage": {
+				"description": "The esctruture is damaged (dents, twisted box).",
+				"title": "Physical Damage on the Structure"
+			},
+			"structure_graffiti": {
+				"description": "The Structure is vandalized.",
+				"title": "Graffiti / Tags on the Structure"
+			},
+			"wrong_clock": {
+				"description": "The panel is turn on but the data/hour are incorrects.",
+				"title": "Clock is Wrong"
+			}
+		}
 	},
 	"SelectLine": {
 		"label": "Search line by number, name, location...",

@@ -61,6 +61,48 @@
 	"NewsCard": {
 		"publish_date": "{publishDate, date, long}"
 	},
+	"PipIntro": {
+		"intro": "Obrigado por nos ajudar a manter este painel a funcionar."
+	},
+	"PipStops": {
+		"no_data": "Nenhuma Paragem Disponível",
+		"question": "Estas são as paragens associadas a este painel"
+	},
+	"PipSurvey": {
+		"question": "Existe algum problema com este painel?"
+	},
+	"PipSurveyOptions": {
+		"answer": {
+			"ok": {
+				"description": "O painel está a funcionar corretamente.",
+				"title": "Tudo OK"
+			},
+			"screen_damage": {
+				"description": "O painel está avariado (manchas, riscas). Não é possível ler a informação.",
+				"title": "Danos Físicos no Painel"
+			},
+			"screen_graffiti": {
+				"description": "O painel está vandalizado. Não é possível ler a informação.",
+				"title": "Graffiti / Tags / Autocolantes no Painel"
+			},
+			"screen_off": {
+				"description": "O painel está desligado. É apresentado apenas o logótipo da Carris Metropolitana.",
+				"title": "Painel Desligado"
+			},
+			"structure_damage": {
+				"description": "A estrutura está danificada (amolgadelas, caixa torcida).",
+				"title": "Danos Físicos na Estrutura"
+			},
+			"structure_graffiti": {
+				"description": "A estrutura está vandalizada.",
+				"title": "Graffiti / Tags na Estrutura"
+			},
+			"wrong_clock": {
+				"description": "O painel está ligado mas a data/hora estão incorretas.",
+				"title": "Relógio Errado"
+			}
+		}
+	},
 	"SelectLine": {
 		"label": "Procurar linha por número, nome, localidade...",
 		"nothing_found": "Nenhum Resultado Encontrado",
