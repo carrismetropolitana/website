@@ -1,6 +1,6 @@
 export function SetubalLogo() {
 	return (
-		<svg fill="none" height="50" viewBox="0 0 74 50" width="74" xmlns="http://www.w3.org/2000/svg">
+		<svg aria-label="Logotipo Câmara Municipal Setúbal" fill="none" height="50" viewBox="0 0 74 50" width="74" xmlns="http://www.w3.org/2000/svg">
 			<g clipPath="url(#clip0_467_1276)">
 				<path clipRule="evenodd" d="M36.0535 24.6474C36.1856 25.575 35.8774 27.6952 35.8334 26.1713C35.173 22.5273 32.0689 21.5777 29.4712 20.6943C24.6941 19.4354 34.4465 13.6713 36.0756 24.6474H36.0535Z" fill="#979300" fillRule="evenodd" />
 				<path clipRule="evenodd" d="M36.8025 19.92C36.8025 20.6046 36.3622 22.1064 36.4943 21.0021C36.3842 18.2857 34.2268 17.2919 32.4216 16.3864C29.0974 14.973 36.7364 11.7928 36.8025 19.92Z" fill="#FDC400" fillRule="evenodd" />
