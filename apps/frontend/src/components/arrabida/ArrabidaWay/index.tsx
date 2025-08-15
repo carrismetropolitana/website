@@ -1,14 +1,14 @@
-import { RegularListItem } from '@/components/layout/RegularListItem';
 import { Section } from '@/components/layout/Section';
 import { Surface } from '@/components/layout/Surface';
 import { LineDisplay } from '@/components/lines/LineDisplay';
 import { useLinesContext } from '@/contexts/Lines.context';
 import { Accordion, Text } from '@mantine/core';
 import { useTranslations } from 'next-intl';
-import Image from 'next/image';
 import { useState } from 'react';
 
 import styles from './styles.module.css';
+
+import { ArrabidaMap } from '../ArrabidaMap';
 
 interface StopData {
 	lineIds: string[]
@@ -27,7 +27,8 @@ export function ArrabidaWay() {
 
 	const t = useTranslations('arrabida.ArrabidaWay');
 	const linesContext = useLinesContext();
-	const [openSections, setOpenSections] = useState<string>();
+	const [openSections, setOpenSections] = useState<string>('praia-albarquel');
+	const [selectedLineId, setSelectedLineId] = useState<null | string>(null);
 
 	// Destinations data based on the spreadsheet - now using line IDs
 	const destinationsData: DestinationData[] = [
@@ -112,6 +113,10 @@ export function ArrabidaWay() {
 		setOpenSections(value);
 	};
 
+	const handleLineClick = (lineId: string) => {
+		setSelectedLineId(lineId);
+	};
+
 	//
 	// C. Render components
 
@@ -122,12 +127,10 @@ export function ArrabidaWay() {
 					<div className={styles.container}>
 						{/* Map Section */}
 						<div className={styles.mapContainer}>
-							<Image
-								alt="Arrabida Way Map"
-								className={styles.mapImage}
-								height={600}
-								src="/assets/arrabidas/arrabida_map.png"
-								width={400}
+							<ArrabidaMap
+								onPinClick={handleAccordionChange}
+								selectedAccordionId={openSections}
+								selectedLineId={selectedLineId}
 							/>
 						</div>
 
@@ -152,9 +155,18 @@ export function ArrabidaWay() {
 														const lineData = linesContext.actions.getLineDataById(lineId);
 
 														return (
-															<RegularListItem key={lineIndex} href={`/lines/${lineId}`}>
+															<div
+																key={lineIndex}
+																className={styles.lineItem}
+																onClick={() => handleLineClick(lineId)}
+																style={{
+																	borderRadius: '8px',
+																	cursor: 'pointer',
+																	padding: '8px',
+																}}
+															>
 																<LineDisplay lineData={lineData} />
-															</RegularListItem>
+															</div>
 														);
 													})}
 												</div>
