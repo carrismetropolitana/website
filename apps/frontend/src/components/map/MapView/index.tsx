@@ -13,6 +13,15 @@ import styles from './styles.module.css';
 /* * */
 
 const MAP_LOAD_ASSETS = [
+	{ name: 'icon-car-crash', sdf: false, url: '/assets/map/car-crash.png' },
+	{ name: 'icon-barrier-block', sdf: false, url: '/assets/map/barrier-block.png' },
+	{ name: 'icon-speakerphone', sdf: false, url: '/assets/map/speakerphone.png' },
+	{ name: 'icon-calendar-event', sdf: false, url: '/assets/map/calendar-event.png' },
+	{ name: 'icon-tool', sdf: false, url: '/assets/map/tool.png' },
+	{ name: 'icon-ambulance', sdf: false, url: '/assets/map/ambulance.png' },
+	{ name: 'icon-cloud-storm', sdf: false, url: '/assets/map/cloud-storm.png' },
+	{ name: 'icon-info-triangle', sdf: false, url: '/assets/map/info-triangle.png' },
+	/* * */
 	{ name: 'cmet-bus-delay', sdf: false, url: '/assets/map/bus-delay.png' },
 	{ name: 'cmet-bus-regular', sdf: false, url: '/assets/map/bus-regular.png' },
 	{ name: 'cmet-bus-error', sdf: false, url: '/assets/map/bus-error.png' },
