@@ -35,6 +35,7 @@ export default (alertData: Alert, currentLocale = 'pt'): SimplifiedAlert => {
 	return {
 		alert_id: alertData.alert_id,
 		cause: alertData.cause,
+		coordinates: alertData.coordinates,
 		description: localizedDescriptionText,
 		effect: alertData.effect,
 		end_date: endDateObject,

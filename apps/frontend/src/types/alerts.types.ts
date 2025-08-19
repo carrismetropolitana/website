@@ -43,6 +43,7 @@ export interface Alert {
 	active_period: TimeRange
 	alert_id: string
 	cause: AlertCause
+	coordinates: [number, number]
 	description_text: TranslatedString
 	effect: AlertEffect
 	header_text: TranslatedString
@@ -64,6 +65,7 @@ export interface Alert {
 export interface SimplifiedAlert {
 	alert_id: string
 	cause: AlertCause
+	coordinates?: [number, number]
 	description: string
 	effect: AlertEffect
 	end_date?: Date
