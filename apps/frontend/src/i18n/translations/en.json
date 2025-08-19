@@ -225,7 +225,8 @@
 		"AlertsListToolbar": {
 			"by_date": {
 				"current": "This week ({count})",
-				"future": "Futures ({count})"
+				"future": "Futures ({count})",
+				"map": "Map"
 			},
 			"filters": {
 				"by_line": {
