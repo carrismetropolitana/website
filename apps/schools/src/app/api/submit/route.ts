@@ -62,7 +62,7 @@ export async function POST(request: Request) {
 	//
 	// Prepare the data for Google Sheets
 
-	const allSchoolsRes = await fetch('https://api.carrismetropolitana.pt/datasets/facilities/schools');
+	const allSchoolsRes = await fetch('https://api.carrismetropolitana.pt/v2/facilities/schools');
 	const allSchoolsData: SchoolData[] = await allSchoolsRes.json();
 
 	const schoolData = allSchoolsData.find(school => school.id === requestBody.id);

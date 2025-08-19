@@ -30,7 +30,7 @@ export function SchoolFinder({ onSelectEducationLevel, onSelectMunicipalityId, o
 	//
 	// A. Fetch data
 
-	const { data: allSchoolsData } = useSWR('https://api.carrismetropolitana.pt/datasets/facilities/schools');
+	const { data: allSchoolsData } = useSWR('https://api.carrismetropolitana.pt/v2/facilities/schools');
 
 	//
 	// B. Transform data

@@ -39,7 +39,7 @@ export function FormMain({ schoolId }: Props) {
 	//
 	// B. Fetch data
 
-	const { data: schoolData, isLoading: schoolLoading } = useSWR(`https://api.carrismetropolitana.pt/datasets/facilities/schools/${schoolId}`);
+	const { data: schoolData, isLoading: schoolLoading } = useSWR(`https://api.carrismetropolitana.pt/v2/facilities/schools/${schoolId}`);
 
 	//
 	// C. Handle actions

@@ -4,6 +4,7 @@
 
 import StopInfo from '@/components/StopInfo/StopInfo';
 import Image from 'next/image';
+import { useMemo } from 'react';
 import useSWR from 'swr';
 
 import styles from './styles.module.css';
@@ -22,10 +23,18 @@ export function RenderSchoolPdf({ schoolId }: Props) {
 	//
 	// A. Fetch data
 
-	const { data: schoolData } = useSWR(`https://api.carrismetropolitana.pt/datasets/facilities/schools/${schoolId}`);
+	const { data: allSchoolsData } = useSWR(`https://api.carrismetropolitana.pt/v2/facilities/schools`);
 
 	//
-	// B. Render components
+	// B. Transform data
+
+	const schoolData = useMemo(() => {
+		if (!allSchoolsData?.length) return null;
+		return allSchoolsData.find(item => item.id === schoolId) || null;
+	}, [allSchoolsData, schoolId]);
+
+	//
+	// C. Render components
 
 	if (!schoolData) {
 		return <div className={styles.loading}>A carregar...</div>;
@@ -48,7 +57,7 @@ export function RenderSchoolPdf({ schoolId }: Props) {
 			</div>
 
 			<div className={styles.stopsWrapper}>
-				{schoolData.stops.map(stopId => (
+				{schoolData.stop_ids.map(stopId => (
 					<div key={stopId}>
 						<StopInfo index={stopId} stop_id={stopId} />
 					</div>

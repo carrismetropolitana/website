@@ -14,33 +14,33 @@
 	},
 	"dependencies": {
 		"@carrismetropolitana/website-shared-settings": "*",
-		"@payloadcms/db-mongodb": "3.48.0",
-		"@payloadcms/email-nodemailer": "3.48.0",
-		"@payloadcms/next": "3.48.0",
-		"@payloadcms/richtext-lexical": "3.48.0",
-		"@payloadcms/storage-s3": "3.48.0",
-		"@payloadcms/ui": "3.48.0",
-		"@tmlmobilidade/utils": "20250717.1418.40",
+		"@payloadcms/db-mongodb": "3.50.0",
+		"@payloadcms/email-nodemailer": "3.50.0",
+		"@payloadcms/next": "3.50.0",
+		"@payloadcms/richtext-lexical": "3.50.0",
+		"@payloadcms/storage-s3": "3.50.0",
+		"@payloadcms/ui": "3.50.0",
+		"@tmlmobilidade/utils": "20250807.1521.32",
 		"graphql": "16.11.0",
-		"next": "15.4.2",
+		"next": "15.4.6",
 		"nodemailer": "7.0.5",
-		"payload": "3.48.0",
-		"react": "19.1.0",
-		"react-dom": "19.1.0",
+		"payload": "3.50.0",
+		"react": "19.1.1",
+		"react-dom": "19.1.1",
 		"sharp": "0.34.3"
 	},
 	"devDependencies": {
 		"@carrismetropolitana/eslint": "20250622.1204.50",
 		"@carrismetropolitana/website-shared-types": "*",
-		"@tmlmobilidade/tsconfig": "20250717.1418.40",
-		"@types/node": "24.0.15",
-		"@types/react": "19.1.8",
-		"@types/react-dom": "19.1.6",
-		"typescript": "5.8.3"
+		"@tmlmobilidade/tsconfig": "20250807.1521.32",
+		"@types/node": "24.2.0",
+		"@types/react": "19.1.9",
+		"@types/react-dom": "19.1.7",
+		"typescript": "5.9.2"
 	},
 	"overrides": {
-		"react": "19.1.0",
-		"react-dom": "19.1.0"
+		"react": "19.1.1",
+		"react-dom": "19.1.1"
 	},
-	"packageManager": "npm@11.4.2"
+	"packageManager": "npm@11.5.2"
 }

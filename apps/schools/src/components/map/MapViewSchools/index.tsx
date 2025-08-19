@@ -64,8 +64,8 @@ export function MapViewSchools({ allSchoolsData, onSelectSchool }) {
 		if (!selectSchoolMap || !allSchoolsDataAsGeojson?.features?.length) return;
 		const boundingBox = turf.bbox(allSchoolsDataAsGeojson);
 		const bounds: [[number, number], [number, number]] = [
-			[boundingBox[2], boundingBox[3]], // Northeast corner [lon, lat]
 			[boundingBox[0], boundingBox[1]], // Southwest corner [lon, lat]
+			[boundingBox[2], boundingBox[3]], // Northeast corner [lon, lat]
 		];
 		console.log(bounds);
 		selectSchoolMap.fitBounds(bounds, { duration: 2000, padding: 50 });
@@ -76,12 +76,8 @@ export function MapViewSchools({ allSchoolsData, onSelectSchool }) {
 
 	function handleMapClick(event: { features?: { properties?: { id?: number } }[] }) {
 		const feature = event.features && event.features[0];
-		if (!feature || !feature.properties || feature.properties.id === null || feature.properties.id === undefined) {
-			return;
-		}
-		const id = feature.properties.id;
-		onSelectSchool(id);
-		console.log('finally work');
+		if (!feature || !feature.properties || feature.properties.id === null || feature.properties.id === undefined) return;
+		onSelectSchool(feature.properties.id);
 	}
 
 	//

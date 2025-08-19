@@ -40,11 +40,16 @@ export function SchoolDetail({ schoolId }: Props) {
 	//
 	// B. Fetch data
 
-	const { data: schoolData } = useSWR(`https://api.carrismetropolitana.pt/datasets/facilities/schools/${schoolId}`);
+	const { data: allSchoolsData } = useSWR(`https://api.carrismetropolitana.pt/v2/facilities/schools`);
 	const { data: allStopsData } = useSWR('https://api.carrismetropolitana.pt/stops');
 
 	//
 	// C. Transform data
+
+	const schoolData = useMemo(() => {
+		if (!allSchoolsData?.length) return null;
+		return allSchoolsData.find(item => item.id === schoolId) || null;
+	}, [allSchoolsData, schoolId]);
 
 	useEffect(() => {
 		if (!schoolInfoMap || !schoolStopsAsGeojson?.features?.length) return;
@@ -71,8 +76,8 @@ export function SchoolDetail({ schoolId }: Props) {
 					type: 'Feature',
 				});
 			}
-			if (schoolData && schoolData.stops.length) {
-				for (const [stopIndex, stopCode] of schoolData.stops.entries()) {
+			if (schoolData && schoolData.stop_ids.length) {
+				for (const [stopIndex, stopCode] of schoolData.stop_ids.entries()) {
 					const stopResponse = await fetch(`https://api.carrismetropolitana.pt/stops/${stopCode}`);
 					const stopData = await stopResponse.json();
 					geoJSON.features.push({
@@ -141,10 +146,10 @@ export function SchoolDetail({ schoolId }: Props) {
 				<div className={styles.gridWrapper}>
 					<div className={styles.stopsWrapper}>
 						<BlackHeader text={`Paragens que servem a instituição: ${schoolData.name}`} />
-						{schoolData && schoolData.stops?.length > 0
+						{schoolData && schoolData.stop_ids?.length > 0
 							? (
 								<div className={styles.stopsList}>
-									{schoolData.stops.map((stopCode, stopIndex) => <StopInfo key={stopCode} index={stopIndex + 1} stop_id={stopCode} />)}
+									{schoolData.stop_ids.map((stopCode, stopIndex) => <StopInfo key={stopCode} index={stopIndex + 1} stop_id={stopCode} />)}
 								</div>
 							)
 							: (
@@ -154,7 +159,7 @@ export function SchoolDetail({ schoolId }: Props) {
 							)}
 					</div>
 					<div className={styles.actionsWrapper}>
-						{/* {schoolData && schoolData.stops?.length > 0 && <DownloadPDF school_id={schoolId} />} */}
+						{/* {schoolData && schoolData.stop_ids?.length > 0 && <DownloadPDF school_id={schoolId} />} */}
 						<PlannerCallout />
 						<NaveganteCardCallout />
 					</div>
