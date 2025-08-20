@@ -1054,7 +1054,9 @@
 		},
 		"toolbar": {
 			"center_map": "Center Map",
+			"hide_alerts": "Hide Alerts",
 			"open_google_maps": "Open in Google Maps",
+			"show_alerts": "Show Alerts",
 			"style": {
 				"map": "Map",
 				"satellite": "Satellite"

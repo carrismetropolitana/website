@@ -1,0 +1,22 @@
+.button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: var(--size-spacing-5);
+    color: var(--color-system-text-300);
+    cursor: pointer;
+    background-color: var(--color-system-background-100);
+    border: none;
+    border-radius: var(--size-spacing-5);
+    box-shadow: 0 0 5px 0 rgb(0 0 0 / 10%);
+    transition: all 300ms ease;
+
+    &:hover {
+        color: var(--color-system-text-200);
+    }
+
+    &[data-active="true"] {
+        color: #000;
+        background-color: var(--color-brand);
+    }
+}
