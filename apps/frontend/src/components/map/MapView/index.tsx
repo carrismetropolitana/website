@@ -3,12 +3,15 @@
 /* * */
 
 import { MapViewToolbar } from '@/components/map/MapViewToolbar';
+import { useDebugContext } from '@/contexts/Debug.context';
 import { useMapOptionsContext } from '@/contexts/MapOptions.context';
 import { mapDefaultConfig } from '@/settings/map.settings';
 import Map, { FullscreenControl, GeolocateControl, MapRef, NavigationControl, ScaleControl, useMap } from '@vis.gl/react-maplibre';
 import { useCallback, useEffect, useState } from 'react';
 
 import styles from './styles.module.css';
+
+import { MapViewDebug } from '../MapViewDebug';
 
 /* * */
 
@@ -88,6 +91,7 @@ export function MapView({
 	const [cursor, setCursor] = useState<string>('auto');
 	const allMaps = useMap();
 	const mapOptionsContext = useMapOptionsContext();
+	const { flags: { is_debug_mode } } = useDebugContext();
 
 	//
 	// B. Transform data
@@ -173,6 +177,8 @@ export function MapView({
 				<div className={styles.childrenWrapper}>
 					{children}
 				</div>
+				{is_debug_mode && <MapViewDebug />}
+
 			</Map>
 			<div className={styles.attributionWrapper}>
 				<a href="https://maplibre.org/" target="_blank">MapLibre</a>
