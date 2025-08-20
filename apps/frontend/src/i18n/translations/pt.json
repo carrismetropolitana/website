@@ -1809,8 +1809,14 @@
 			"subheading": "Descubra os veículos que estão ao serviço neste momento e acompanhe em tempo real a operação completa da CMetropolitana."
 		},
 		"VehiclesListDetails": {
+			"bikes_allowed": "Permite bicicletas",
+			"contactless": "Aceita pagamentos com contactless",
+			"no_bikes_allowed": "Não permite bicicletas",
+			"no_contactless": "Não aceita pagamentos com contactless",
 			"no_data": "Selecione um veículo",
-			"unknown": "Desconhecido"
+			"no_wheelchair_accessible": "Não permite mobilidade reduzida",
+			"unknown": "Desconhecido",
+			"wheelchair_accessible": "Mobilidade reduzida"
 		},
 		"VehiclesListInfoBlock": {
 			"heading": "Informação do Veículo"
