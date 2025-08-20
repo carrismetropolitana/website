@@ -62,6 +62,7 @@ interface Props {
 	scale?: boolean
 	scrollZoom?: boolean
 	toolbar?: boolean
+	toolbarExtras?: React.ReactNode
 }
 
 /* * */
@@ -85,6 +86,7 @@ export function MapView({
 	scale = false,
 	scrollZoom = true,
 	toolbar = true,
+	toolbarExtras,
 }: Props) {
 	//
 	// A. Setup variables
@@ -148,7 +150,7 @@ export function MapView({
 
 	return (
 		<div className={styles.container}>
-			{toolbar && <MapViewToolbar className={styles.toolbar} onCenterMap={onCenterMap} />}
+			{toolbar && <MapViewToolbar className={styles.toolbar} onCenterMap={onCenterMap} toolbarExtras={toolbarExtras} />}
 			<Map
 				attributionControl={false}
 				cursor={cursor}

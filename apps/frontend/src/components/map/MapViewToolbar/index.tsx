@@ -17,11 +17,12 @@ import styles from './styles.module.css';
 interface Props {
 	className?: string
 	onCenterMap?: () => void
+	toolbarExtras?: React.ReactNode
 }
 
 /* * */
 
-export function MapViewToolbar({ className, onCenterMap }: Props) {
+export function MapViewToolbar({ className, onCenterMap, toolbarExtras }: Props) {
 	//
 
 	//
@@ -74,19 +75,22 @@ export function MapViewToolbar({ className, onCenterMap }: Props) {
 
 	return (
 		<div className={classNames(styles.container, className)}>
-			<SegmentedControl classNames={{ label: styles.segmentedControlLabel }} data={mapStyles} onChange={mapOptionsContext.actions.setStyle} value={mapOptionsContext.data.style} />
-			{onCenterMap && (
-				<button className={styles.button} onClick={onCenterMap}>
-					<TextPopover text={t('center_map')} textSize="md">
-						<IconArrowsMinimize />
+			<div className={styles.left}>
+				<SegmentedControl classNames={{ label: styles.segmentedControlLabel }} data={mapStyles} onChange={mapOptionsContext.actions.setStyle} value={mapOptionsContext.data.style} />
+				{onCenterMap && (
+					<button className={styles.button} onClick={onCenterMap}>
+						<TextPopover text={t('center_map')} textSize="md">
+							<IconArrowsMinimize />
+						</TextPopover>
+					</button>
+				)}
+				<button className={styles.button} onClick={handleOpenInGoogle}>
+					<TextPopover text={t('open_google_maps')} textSize="md">
+						<IconMapShare />
 					</TextPopover>
 				</button>
-			)}
-			<button className={styles.button} onClick={handleOpenInGoogle}>
-				<TextPopover text={t('open_google_maps')} textSize="md">
-					<IconMapShare />
-				</TextPopover>
-			</button>
+			</div>
+			{toolbarExtras}
 		</div>
 	);
 
