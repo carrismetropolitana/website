@@ -26,30 +26,6 @@ const baseGeoJsonFeatureCollection = getBaseGeoJsonFeatureCollection();
 export function MapViewStyleAlerts({ data = baseGeoJsonFeatureCollection, presentBeforeId }: Props) {
 	return (
 		<Source data={data} generateId={true} id={MapViewStyleAlertsSourceId} type="geojson">
-
-			<Layer
-				beforeId={MapViewStyleAlertsLayerId}
-				id={MapViewStyleAlertsLayerId + '-background'}
-				source={MapViewStyleAlertsSourceId}
-				type="circle"
-				paint={{
-					'circle-color': [
-						'match',
-						['get', 'cause'],
-						'ACCIDENT', '#E64B23',
-						'DEMONSTRATION', '#E64B23',
-						'MEDICAL_EMERGENCY', '#E64B23',
-						'POLICE_ACTIVITY', '#E64B23',
-						'STRIKE', '#E64B23',
-						'TECHNICAL_PROBLEM', '#E64B23',
-						'CONSTRUCTION', '#E64B23',
-						'#F5A000',
-					],
-					'circle-opacity': 0.8,
-					'circle-radius': 18,
-				}}
-			/>
-
 			<Layer
 				beforeId={presentBeforeId}
 				id={MapViewStyleAlertsLayerId}
@@ -76,10 +52,8 @@ export function MapViewStyleAlerts({ data = baseGeoJsonFeatureCollection, presen
 						'interpolate',
 						['linear'],
 						['zoom'],
-						10,
-						1,
-						20,
-						1,
+						10, 0.25,
+						20, 0.5,
 					],
 				}}
 				paint={{
