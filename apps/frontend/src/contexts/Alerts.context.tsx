@@ -4,6 +4,7 @@
 
 import { type Alert, type SimplifiedAlert } from '@/types/alerts.types';
 import convertToSimplifiedAlert from '@/utils/convertToSimplifiedAlert';
+import { getBaseGeoJsonFeatureCollection } from '@/utils/map.utils';
 import { getPublicVariable } from '@carrismetropolitana/website-shared-settings';
 import { useLocale } from 'next-intl';
 import { createContext, useContext, useEffect, useState } from 'react';
@@ -21,6 +22,7 @@ interface AlertsContextState {
 	}
 	data: {
 		alerts: Alert[]
+		featureCollection: GeoJSON.FeatureCollection<GeoJSON.Point, GeoJSON.GeoJsonProperties>
 		simplified: SimplifiedAlert[]
 	}
 	flags: {
@@ -52,6 +54,7 @@ export const AlertsContextProvider = ({ children }) => {
 	// const analyticsContext = useAnalyticsContext();
 
 	const [dataSimplifiedState, setDataSimplifiedState] = useState<SimplifiedAlert[]>([]);
+	const [dataFeatureCollectionState, setDataFeatureCollectionState] = useState<GeoJSON.FeatureCollection<GeoJSON.Point, GeoJSON.GeoJsonProperties>>(null);
 
 	//
 	// B. Fetch data
@@ -68,6 +71,17 @@ export const AlertsContextProvider = ({ children }) => {
 		// THE CORRECT SPELLING IS REFERRER
 		// analyticsContext.actions.capture(ampli => ampli.captureAlertsReferer({ page_referrer: document.referrer }));
 	}, [allAlertsData]);
+
+	// Transform data into geojson
+	useEffect(() => {
+		const collection = getBaseGeoJsonFeatureCollection();
+		dataSimplifiedState.forEach((alert) => {
+			const alertFC = transformAlertDataIntoGeoJsonFeature(alert);
+			if (alertFC) collection.features.push(alertFC);
+		});
+
+		setDataFeatureCollectionState(collection);
+	}, [dataSimplifiedState]);
 
 	//
 	// D. Handle actions
@@ -103,6 +117,7 @@ export const AlertsContextProvider = ({ children }) => {
 		},
 		data: {
 			alerts: allAlertsData || [],
+			featureCollection: dataFeatureCollectionState,
 			simplified: dataSimplifiedState,
 		},
 		flags: {
@@ -121,3 +136,21 @@ export const AlertsContextProvider = ({ children }) => {
 
 	//
 };
+
+/* * */
+
+export function transformAlertDataIntoGeoJsonFeature(alertData: SimplifiedAlert): GeoJSON.Feature<GeoJSON.Point, GeoJSON.GeoJsonProperties> {
+	if (!alertData.coordinates) return null;
+	return {
+		geometry: {
+			coordinates: [alertData.coordinates[1], alertData.coordinates[0]],
+			type: 'Point',
+		},
+		properties: {
+			cause: alertData.cause,
+			effect: alertData.effect,
+			id: alertData.alert_id,
+		},
+		type: 'Feature',
+	};
+}
