@@ -4,7 +4,6 @@
 
 import type { AlertCause, AlertEffect, SimplifiedAlert } from '@/types/alerts.types.js';
 
-import { getBaseGeoJsonFeatureCollection } from '@/utils/map.utils';
 import { DateTime } from 'luxon';
 import { useQueryState } from 'nuqs';
 import { createContext, useContext, useEffect, useMemo, useState } from 'react';
@@ -32,7 +31,6 @@ interface AlertsListContextState {
 	}
 	data: {
 		filtered: SimplifiedAlert[]
-		filtered_fc: GeoJSON.FeatureCollection<GeoJSON.Point, GeoJSON.GeoJsonProperties>
 		raw: SimplifiedAlert[]
 	}
 	filters: {
@@ -70,7 +68,6 @@ export const AlertsListContextProvider = ({ children }) => {
 	// A. Setup variables
 
 	const [dataFilteredState, setDataFilteredState] = useState<SimplifiedAlert[]>([]);
-	const [dataFilteredGeojsonFCState, setDataFilteredGeojsonFCState] = useState<GeoJSON.FeatureCollection<GeoJSON.Point, GeoJSON.GeoJsonProperties>>();
 
 	const [filterByDateState, setFilterByDateState] = useState <AlertsListContextState['filters']['by_date']>('current');
 	const [filterByLineIdState, setFilterByLineIdState] = useQueryState('line_id');
@@ -174,17 +171,6 @@ export const AlertsListContextProvider = ({ children }) => {
 		setDataFilteredState(filteredAlerts);
 	}, [allAlertsData, filterByDateState, filterByLineIdState, filterBySearchQueryState, filterByStopIdState, filterByCauseState, filterByEffectState]);
 
-	// Transform data into geojson
-	useEffect(() => {
-		const collection = getBaseGeoJsonFeatureCollection();
-		allAlertsData.forEach((alert) => {
-			const alertFC = transformAlertDataIntoGeoJsonFeature(alert);
-			if (alertFC) collection.features.push(alertFC);
-		});
-
-		setDataFilteredGeojsonFCState(collection);
-	}, [allAlertsData]);
-
 	//
 	// D. Handle actions
 
@@ -238,7 +224,6 @@ export const AlertsListContextProvider = ({ children }) => {
 		},
 		data: {
 			filtered: dataFilteredState,
-			filtered_fc: dataFilteredGeojsonFCState,
 			raw: allAlertsData || [],
 		},
 		filters: {
@@ -265,21 +250,3 @@ export const AlertsListContextProvider = ({ children }) => {
 
 	//
 };
-
-/* * */
-
-export function transformAlertDataIntoGeoJsonFeature(alertData: SimplifiedAlert): GeoJSON.Feature<GeoJSON.Point, GeoJSON.GeoJsonProperties> {
-	if (!alertData.coordinates) return null;
-	return {
-		geometry: {
-			coordinates: [alertData.coordinates[1], alertData.coordinates[0]],
-			type: 'Point',
-		},
-		properties: {
-			cause: alertData.cause,
-			effect: alertData.effect,
-			id: alertData.alert_id,
-		},
-		type: 'Feature',
-	};
-}
