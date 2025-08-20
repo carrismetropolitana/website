@@ -1893,8 +1893,14 @@
 			"subheading": "Explore our currently active vehicles in realtime and follow the complete operation of Carris Metropolitana."
 		},
 		"VehiclesListDetails": {
-			"no_data": "Selecione um veículo",
-			"unknown": "Desconhecido"
+			"bikes_allowed": "Allows bicycles",
+			"contactless": "Accepts contactless payments",
+			"no_bikes_allowed": "Does not allow bicycles",
+			"no_contactless": "Does not accept contactless payments",
+			"no_data": "Select a vehicle",
+			"no_wheelchair_accessible": "Does not allow reduced mobility",
+			"unknown": "Unknown",
+			"wheelchair_accessible": "Reduced mobility"
 		},
 		"VehiclesListInfoBlock": {
 			"heading": "Informação do Veículo"
