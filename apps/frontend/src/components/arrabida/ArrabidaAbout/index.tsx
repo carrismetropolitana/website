@@ -45,16 +45,14 @@ export function ArrabidaAbout() {
 							</div>
 
 							<div className={styles.logos}>
-								<div className={styles.logoWrapper}>
+								<div aria-label="Logotipo do projeto arrábida 365" className={styles.logoWrapper}>
 									<ArrabidaIcon />
 									<ArrabidaLogo />
 								</div>
 								<a href="/" rel="noopener noreferrer" style={{ cursor: 'pointer' }} target="_blank">
 									<CarrisLogo />
 								</a>
-								<a href="https://www.mun-setubal.pt/" rel="noopener noreferrer" style={{ cursor: 'pointer' }} target="_blank">
-									<SetubalLogo />
-								</a>
+								<SetubalLogo />
 							</div>
 
 						</div>

@@ -14,11 +14,20 @@ import { Tooltip } from '@mantine/core';
 import { IconInfoTriangle } from '@tabler/icons-react';
 import { useTranslations } from 'next-intl';
 import { useMemo } from 'react';
-import { ViewportList } from 'react-viewport-list';
 
 import styles from './styles.module.css';
 
 /* * */
+
+// IDs das linhas que servem as praias da Arrábida (deduplicated and sorted)
+const ARRABIDA_LINE_IDS = [
+	'4414', // Albarquel
+	'4415', // Albarquel, ITS
+	'4470', // Creiro, ITS
+	'4471', // Albarquel
+	'4474', // Figueirinha, Albarquel
+	'4477', // Galápos, Galapinhos, Creiro
+];
 
 export function ArrabidaList() {
 	//
@@ -29,9 +38,13 @@ export function ArrabidaList() {
 	const alertsContext = useAlertsContext();
 	const t = useTranslations('arrabida.ArrabidaList');
 
-	// Memoize items to prevent ViewportList DOM issues
 	const stableItems = useMemo(() => {
-		return linesListContext.data.filtered.slice(0, 7);
+		if (!linesListContext.data.filtered?.length) return [];
+
+		const linesMap = new Map(linesListContext.data.filtered.map(line => [line.id, line]));
+		return ARRABIDA_LINE_IDS
+			.map(lineId => linesMap.get(lineId))
+			.filter(Boolean) as typeof linesListContext.data.filtered;
 	}, [linesListContext.data.filtered]);
 
 	//
@@ -42,7 +55,6 @@ export function ArrabidaList() {
 			const wasFavorite = profileContext.data.favorite_lines?.includes(lineId) || false;
 			await profileContext.actions.toggleFavoriteLine(lineId);
 
-			// Show feedback notification
 			if (wasFavorite) {
 				toast.success({ message: t('favorite_removed') + `: ${lineName}` });
 			}
@@ -59,7 +71,7 @@ export function ArrabidaList() {
 	//
 	// C. Render components
 
-	if (!linesListContext.data.filtered.length) {
+	if (!stableItems.length) {
 		return (
 			<div id="lines">
 				<Surface variant="persistent" forceOverflow>
@@ -75,29 +87,26 @@ export function ArrabidaList() {
 		<div className={styles.arrabidaListContainer} id="lines">
 			<Surface variant="persistent" forceOverflow>
 				<Section heading={t('title')} subheading={t('subtitle')} withGap withPadding>
-					<ViewportList
-						key={`viewport-${stableItems.length}`}
-						itemMargin={0}
-						items={stableItems}
-					>
-						{(item, index, array) => {
+					<ul className={styles.listContainer} style={{ height: '100%', width: '100%' }}>
+						{stableItems.map((item, index, array) => {
 							const isFavorite = profileContext.data.favorite_lines?.includes(item.id) || false;
 							const alerts = alertsContext.actions.getSimplifiedAlertsByLineId(item.id);
 							const hasAlert = alerts.length > 0;
 							const isLastItem = index === array.length - 1;
 
 							return (
-								<div key={item.id} className={`${styles.listItemWrapper} ${isLastItem ? styles.lastItem : ''}`}>
-									<RegularListItem href={`/lines/${item.id}`}>
+								<li key={item.id} className={`${styles.listItemWrapper} ${isLastItem ? styles.lastItem : ''}`}>
+									<RegularListItem href={`/lines/${item.id}`} style={{ height: '100%', width: '100%' }}>
+
 										<div className={styles.itemContainer}>
-											<div className={styles.lineInfo}>
+											<div className={styles.lineInfo} style={{ flex: 1 }}>
 												<LineBadge
 													lineData={item}
 													size="md"
 												/>
 												<LineName lineData={item} />
 											</div>
-											<div className={styles.actions}>
+											<div className={styles.actions} style={{ alignItems: 'center', display: 'flex', justifyContent: 'center' }}>
 												{hasAlert && (
 													<Tooltip
 														label={t('has_alerts')}
@@ -138,14 +147,18 @@ export function ArrabidaList() {
 									</RegularListItem>
 
 									{hasAlert && (
-										<div className={styles.alertsContainer}>
-											<AlertsCarousel alerts={alerts} />
+										<div className={styles.alertsSurfaceOverride}>
+											<Surface variant="alerts">
+												<Section withGap>
+													<AlertsCarousel alerts={alerts} />
+												</Section>
+											</Surface>
 										</div>
 									)}
-								</div>
+								</li>
 							);
-						}}
-					</ViewportList>
+						})}
+					</ul>
 				</Section>
 			</Surface>
 		</div>

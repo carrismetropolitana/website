@@ -73,27 +73,13 @@
 }
 
 /* * */
-/* ALERTS CONTAINER */
+/* ALERTS SURFACE OVERRIDE */
 
-.alertsContainer {
-	display: flex;
-	flex-direction: column;
-	gap: var(--size-spacing-10);
-	padding: var(--size-spacing-15) var(--size-spacing-20);
-	margin-top: var(--size-spacing-10);
-}
-
-/* * */
-/* ALERTS CAROUSEL TITLE OVERRIDE */
-
-.alertsContainer p {
-	color: var(--color-alerts-2) !important;
-	font-weight: var(--font-weight-bold);
-}
-
-.alertsContainer a {
-	border: 1px solid var(--color-alerts-2);
-	border-radius: 6px;
+.alertsSurfaceOverride [class*="container"][class*="alerts"] {
+	/* Remove border from Surface alerts variant only in ArrabidaList */
+	border: none ;
+	border-radius: 0;
+	background-color: transparent;
 }
 
 /* * */
