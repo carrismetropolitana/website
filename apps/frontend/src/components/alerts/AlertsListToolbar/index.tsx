@@ -42,6 +42,7 @@ export function AlertsListToolbar() {
 	const byCurrentStatusOptions = [
 		{ label: t('by_date.current', { count: alertsContext.counters.by_date.current }), value: 'current' },
 		{ label: t('by_date.future', { count: alertsContext.counters.by_date.future }), value: 'future' },
+		{ label: t('by_date.map'), value: 'map' },
 	];
 
 	//
@@ -59,30 +60,34 @@ export function AlertsListToolbar() {
 		<Surface>
 			<Section heading={t('heading')} subheading={t('subheading')} withGap withPadding>
 				<SegmentedControl data={byCurrentStatusOptions} onChange={alertsContext.actions.updateFilterByDate} value={alertsContext.filters.by_date} w="100%" fullWidth />
-				<Input leftSection={<IconSearch size={20} />} onChange={handleFilterBySearchQuery} placeholder={t('filters.text_search')} value={searchQuery ?? ''} w="100%" />
-				<ExpandToggle defaultState={!!alertsContext.filters.line_id || !!alertsContext.filters.stop_id || !!alertsContext.filters.cause || !!alertsContext.filters.effect}>
-					<div className={styles.selectsWrapper}>
-						<SelectLine
-							data={linesContext.data.lines}
-							label={t('filters.by_line.label')}
-							onSelectLineId={alertsContext.actions.updateFilterByLineId}
-							placeholder={t('filters.by_line.placeholder')}
-							selectedLineId={alertsContext.filters.line_id}
-							variant="default"
-						/>
-						<SelectStop
-							data={stopsContext.data.stops}
-							label={t('filters.by_stop.label')}
-							onSelectStopId={alertsContext.actions.updateFilterByStopId}
-							placeholder={t('filters.by_stop.placeholder')}
-							selectedStopId={alertsContext.filters.stop_id}
-							variant="default"
-						/>
-						<SelectCause onChange={alertsContext.actions.updateFilterByCause} value={alertsContext.filters.cause} />
-						<SelectEffect onChange={alertsContext.actions.updateFilterByEffect} value={alertsContext.filters.effect} />
-					</div>
-				</ExpandToggle>
-				<FoundItemsCounter text={t('found_items_counter', { count: alertsContext.data.filtered.length })} />
+				{alertsContext.filters.by_date != 'map' && (
+					<>
+						<Input leftSection={<IconSearch size={20} />} onChange={handleFilterBySearchQuery} placeholder={t('filters.text_search')} value={searchQuery ?? ''} w="100%" />
+						<ExpandToggle defaultState={!!alertsContext.filters.line_id || !!alertsContext.filters.stop_id || !!alertsContext.filters.cause || !!alertsContext.filters.effect}>
+							<div className={styles.selectsWrapper}>
+								<SelectLine
+									data={linesContext.data.lines}
+									label={t('filters.by_line.label')}
+									onSelectLineId={alertsContext.actions.updateFilterByLineId}
+									placeholder={t('filters.by_line.placeholder')}
+									selectedLineId={alertsContext.filters.line_id}
+									variant="default"
+								/>
+								<SelectStop
+									data={stopsContext.data.stops}
+									label={t('filters.by_stop.label')}
+									onSelectStopId={alertsContext.actions.updateFilterByStopId}
+									placeholder={t('filters.by_stop.placeholder')}
+									selectedStopId={alertsContext.filters.stop_id}
+									variant="default"
+								/>
+								<SelectCause onChange={alertsContext.actions.updateFilterByCause} value={alertsContext.filters.cause} />
+								<SelectEffect onChange={alertsContext.actions.updateFilterByEffect} value={alertsContext.filters.effect} />
+							</div>
+						</ExpandToggle>
+						<FoundItemsCounter text={t('found_items_counter', { count: alertsContext.data.filtered.length })} />
+					</>
+				)}
 			</Section>
 		</Surface>
 	);

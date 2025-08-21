@@ -34,7 +34,7 @@ interface AlertsListContextState {
 		raw: SimplifiedAlert[]
 	}
 	filters: {
-		by_date: 'current' | 'future'
+		by_date: 'current' | 'future' | 'map'
 		cause: AlertCause | null
 		effect: AlertEffect | null
 		line_id: null | string

@@ -3,6 +3,7 @@
 /* * */
 
 import { MapViewToolbar } from '@/components/map/MapViewToolbar';
+import { useDebugContext } from '@/contexts/Debug.context';
 import { useMapOptionsContext } from '@/contexts/MapOptions.context';
 import { mapDefaultConfig } from '@/settings/map.settings';
 import Map, { FullscreenControl, GeolocateControl, MapRef, NavigationControl, ScaleControl, useMap } from '@vis.gl/react-maplibre';
@@ -10,9 +11,20 @@ import { useCallback, useEffect, useState } from 'react';
 
 import styles from './styles.module.css';
 
+import { MapViewDebug } from '../MapViewDebug';
+
 /* * */
 
 const MAP_LOAD_ASSETS = [
+	{ name: 'icon-car-crash', sdf: false, url: '/assets/map/car-crash.png' },
+	{ name: 'icon-barrier-block', sdf: false, url: '/assets/map/barrier-block.png' },
+	{ name: 'icon-speakerphone', sdf: false, url: '/assets/map/speakerphone.png' },
+	{ name: 'icon-calendar-event', sdf: false, url: '/assets/map/calendar-event.png' },
+	{ name: 'icon-tool', sdf: false, url: '/assets/map/tool.png' },
+	{ name: 'icon-ambulance', sdf: false, url: '/assets/map/ambulance.png' },
+	{ name: 'icon-cloud-storm', sdf: false, url: '/assets/map/cloud-storm.png' },
+	{ name: 'icon-info-triangle', sdf: false, url: '/assets/map/info-triangle.png' },
+	/* * */
 	{ name: 'cmet-bus-delay', sdf: false, url: '/assets/map/bus-delay.png' },
 	{ name: 'cmet-bus-regular', sdf: false, url: '/assets/map/bus-regular.png' },
 	{ name: 'cmet-bus-error', sdf: false, url: '/assets/map/bus-error.png' },
@@ -50,6 +62,7 @@ interface Props {
 	scale?: boolean
 	scrollZoom?: boolean
 	toolbar?: boolean
+	toolbarExtras?: React.ReactNode
 }
 
 /* * */
@@ -73,12 +86,14 @@ export function MapView({
 	scale = false,
 	scrollZoom = true,
 	toolbar = true,
+	toolbarExtras,
 }: Props) {
 	//
 	// A. Setup variables
 	const [cursor, setCursor] = useState<string>('auto');
 	const allMaps = useMap();
 	const mapOptionsContext = useMapOptionsContext();
+	const { flags: { is_debug_mode } } = useDebugContext();
 
 	//
 	// B. Transform data
@@ -135,7 +150,7 @@ export function MapView({
 
 	return (
 		<div className={styles.container}>
-			{toolbar && <MapViewToolbar className={styles.toolbar} onCenterMap={onCenterMap} />}
+			{toolbar && <MapViewToolbar className={styles.toolbar} onCenterMap={onCenterMap} toolbarExtras={toolbarExtras} />}
 			<Map
 				attributionControl={false}
 				cursor={cursor}
@@ -164,6 +179,8 @@ export function MapView({
 				<div className={styles.childrenWrapper}>
 					{children}
 				</div>
+				{is_debug_mode && <MapViewDebug />}
+
 			</Map>
 			<div className={styles.attributionWrapper}>
 				<a href="https://maplibre.org/" target="_blank">MapLibre</a>
