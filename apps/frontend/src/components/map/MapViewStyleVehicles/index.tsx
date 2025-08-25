@@ -216,7 +216,7 @@ export function MapViewStyleVehicles({ presentBeforeId, showCounter, vehiclesDat
 							'interpolate',
 							['linear'],
 							['zoom'],
-							10, ['match', ['to-string', ['get', 'contactless']], 'true', 0.1, 0.05],
+							10, ['match', ['to-string', ['get', 'contactless']], 'true', 0.09, 0.05],
 							20, ['match', ['to-string', ['get', 'contactless']], 'true', 0.3, 0.15],
 						],
 						'symbol-placement': 'point',
