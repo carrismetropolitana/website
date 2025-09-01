@@ -162,7 +162,7 @@ export function ArrabidaWay() {
 																style={{
 																	borderRadius: '8px',
 																	cursor: 'pointer',
-																	padding: '8px',
+																	paddingBlock: '8px',
 																}}
 															>
 																<LineDisplay lineData={lineData} />
