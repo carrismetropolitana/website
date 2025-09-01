@@ -55,14 +55,14 @@ export function Arrabida365() {
 								src={Arrabida365Image}
 								width={1920}
 							/>
-							<Link href="/news/31372">
-								<Button
-									className={styles.buttonSeeMore}
-									rightSection={<IconArrowRight size={18} />}
-								>
-									{t('buttonSeeMore')}
-								</Button>
-							</Link>
+							<Button
+								component={Link}
+								href="/news/31372"
+								id={styles.buttonSeeMore}
+								rightSection={<IconArrowRight size={18} />}
+							>
+								{t('buttonSeeMore')}
+							</Button>
 						</div>
 					</div>
 				</Section>
