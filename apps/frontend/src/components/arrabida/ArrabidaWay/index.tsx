@@ -37,11 +37,11 @@ export function ArrabidaWay() {
 			stops: [
 				{
 					lineIds: ['4474'],
-					name: '4. Setúbal (Centro Comercial)',
+					name: '11. Setúbal (Centro Comercial)',
 				},
 				{
 					lineIds: ['4415', '4474'],
-					name: '3. Setúbal (ITS)',
+					name: '10. Setúbal (ITS)',
 				},
 				{
 					lineIds: ['4474', '4414', '4415', '4471'],
@@ -60,11 +60,11 @@ export function ArrabidaWay() {
 			stops: [
 				{
 					lineIds: ['4474'],
-					name: '2. Outão X',
+					name: '3. Outão X',
 				},
 				{
 					lineIds: ['4474'],
-					name: '1. Praia da Figueirinha',
+					name: '4. Praia da Figueirinha',
 				},
 			],
 			title: 'Praia da Figueirinha',
@@ -74,15 +74,15 @@ export function ArrabidaWay() {
 			stops: [
 				{
 					lineIds: ['4477'],
-					name: '3. Praia dos Galápos',
+					name: '5. Praia dos Galápos',
 				},
 				{
 					lineIds: ['4477'],
-					name: '2. Praia dos Galápos (acesso Pedonal)',
+					name: '6. Praia dos Galápos (acesso Pedonal)',
 				},
 				{
 					lineIds: ['4477'],
-					name: '1. Frente Praia dos Galapinhos',
+					name: '7. Frente Praia dos Galapinhos',
 				},
 			],
 			title: 'Praia dos Galápos e Galapinhos',
@@ -92,15 +92,15 @@ export function ArrabidaWay() {
 			stops: [
 				{
 					lineIds: ['4470', '4477'],
-					name: '3. Praia do Creiro (Parque de Estacionamento)',
+					name: '8. Praia do Creiro (Parque de Estacionamento)',
 				},
 				{
 					lineIds: ['4477'],
-					name: '2. Praia do Creiro',
+					name: '9. Praia do Creiro',
 				},
 				{
 					lineIds: ['4470'],
-					name: '1. Setúbal (ITS)',
+					name: '10. Setúbal (ITS)',
 				},
 			],
 			title: 'Praia do Creiro',

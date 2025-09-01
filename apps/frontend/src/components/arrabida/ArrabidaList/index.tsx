@@ -87,7 +87,7 @@ export function ArrabidaList() {
 		<div className={styles.arrabidaListContainer} id="lines">
 			<Surface variant="persistent" forceOverflow>
 				<Section heading={t('title')} subheading={t('subtitle')} withGap withPadding>
-					<ul className={styles.listContainer} style={{ height: '100%', width: '100%' }}>
+					<ul className={styles.listContainer} style={{ height: '100%', width: '100%', paddingLeft: '0' }}>
 						{stableItems.map((item, index, array) => {
 							const isFavorite = profileContext.data.favorite_lines?.includes(item.id) || false;
 							const alerts = alertsContext.actions.getSimplifiedAlertsByLineId(item.id);
@@ -106,7 +106,7 @@ export function ArrabidaList() {
 												/>
 												<LineName lineData={item} />
 											</div>
-											<div className={styles.actions} style={{ alignItems: 'center', display: 'flex', justifyContent: 'center' }}>
+											<div className={styles.actions} style={{ alignItems: 'center', display: 'flex', justifyContent: 'center',}}>
 												{hasAlert && (
 													<Tooltip
 														label={t('has_alerts')}
@@ -149,7 +149,7 @@ export function ArrabidaList() {
 									{hasAlert && (
 										<div className={styles.alertsSurfaceOverride}>
 											<Surface variant="alerts">
-												<Section withGap>
+												<Section >
 													<AlertsCarousel alerts={alerts} />
 												</Section>
 											</Surface>
