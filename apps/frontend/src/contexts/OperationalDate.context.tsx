@@ -5,7 +5,7 @@
 import { type OperationalDate } from '@tmlmobilidade/types';
 import { Dates } from '@tmlmobilidade/utils';
 import { useQueryState } from 'nuqs';
-import { createContext, useContext, useEffect, useState } from 'react';
+import { createContext, useContext, useMemo } from 'react';
 
 /* * */
 
@@ -50,8 +50,7 @@ export const OperationalDateContextProvider = ({ children }) => {
 	//
 	// A. Setup variables
 
-	const [selectedDate, setSelectedDate] = useState<Dates | null>(null);
-	const [selectedDateQuery, setSelectedDateQuery] = useQueryState('date');
+	const [selectedDateQuery, setSelectedDateQuery] = useQueryState('date', { defaultValue: useMemo(() => Dates.now('Europe/Lisbon').operational_date, []) });
 
 	//
 	// B. Transform data
@@ -63,30 +62,9 @@ export const OperationalDateContextProvider = ({ children }) => {
 		.now('Europe/Lisbon')
 		.plus({ days: 1 });
 
-	useEffect(() => {
-		if (!selectedDate) return;
-		const isToday = selectedDate.operational_date === todayDate.operational_date;
-		if (isToday) setSelectedDateQuery(null);
-		else setSelectedDateQuery(selectedDate.operational_date);
-	}, [selectedDate, todayDate]);
-
-	useEffect(() => {
-		// If no date is selected and the query is empty,
-		// set the selected date to today and the query to null
-		if (!selectedDate && !selectedDateQuery) {
-			setSelectedDate(todayDate);
-			return;
-		}
-		// If no date is selected and the query has a value,
-		// set the selected date to the query value
-		if (!selectedDate && selectedDateQuery) {
-			const selectedDateValue = Dates
-				.fromOperationalDate(selectedDateQuery, 'Europe/Lisbon')
-				.set({ hour: 15 });
-			setSelectedDate(selectedDateValue);
-			return;
-		}
-	}, [todayDate, selectedDateQuery, selectedDate]);
+	const selectedDate = useMemo(() => {
+		return Dates.fromOperationalDate(selectedDateQuery, 'Europe/Lisbon');
+	}, [selectedDateQuery]);
 
 	//
 	// C. Handle actions
@@ -95,41 +73,41 @@ export const OperationalDateContextProvider = ({ children }) => {
 		const dateValue = Dates
 			.fromOperationalDate(value, 'Europe/Lisbon')
 			.set({ hour: 15 });
-		setSelectedDate(dateValue);
+		setSelectedDateQuery(dateValue.operational_date);
 	};
 
 	const updateSelectedDateFromFormat = (value: string, format = 'yyyy-MM-dd') => {
 		const dateValue = Dates
 			.fromFormat(value, format, 'Europe/Lisbon')
 			.set({ hour: 15 });
-		setSelectedDate(dateValue);
+		setSelectedDateQuery(dateValue.operational_date);
 	};
 
 	const updateSelectedDateFromJsDate = (value: Date) => {
 		const dateValue = Dates
 			.fromJSDate(value)
 			.set({ hour: 15 });
-		setSelectedDate(dateValue);
+		setSelectedDateQuery(dateValue.operational_date);
 	};
 
 	const updateSelectedDateToToday = () => {
-		setSelectedDate(todayDate);
+		setSelectedDateQuery(todayDate.operational_date);
 	};
 
 	const updateSelectedDateToTomorrow = () => {
-		setSelectedDate(tomorrowDate);
+		setSelectedDateQuery(tomorrowDate.operational_date);
 	};
 
 	const updateSelectedDateToPlusOneDay = () => {
 		if (!selectedDate) return;
 		const dateValue = selectedDate?.plus({ days: 1 });
-		setSelectedDate(dateValue);
+		setSelectedDateQuery(dateValue.operational_date);
 	};
 
 	const updateSelectedDateToLessOneDay = () => {
 		if (!selectedDate) return;
 		const dateValue = selectedDate?.minus({ days: 1 });
-		setSelectedDate(dateValue);
+		setSelectedDateQuery(dateValue.operational_date);
 	};
 
 	//
