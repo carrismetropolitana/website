@@ -10,7 +10,6 @@ import styles from './styles.module.css';
 import { ArrabidaIcon } from '../ArrabidaHeader/ArrabidaIcon';
 import { ArrabidaLogo } from '../ArrabidaHeader/ArrabidaLogo';
 import { CarrisLogo } from './CarrisLogo';
-import { SetubalLogo } from './SetubalLogo';
 
 /* * */
 
@@ -52,7 +51,6 @@ export function ArrabidaAbout() {
 								<a href="/" rel="noopener noreferrer" style={{ cursor: 'pointer' }} target="_blank">
 									<CarrisLogo />
 								</a>
-								<SetubalLogo />
 							</div>
 
 						</div>
