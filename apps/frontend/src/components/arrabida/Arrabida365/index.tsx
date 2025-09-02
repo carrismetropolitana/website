@@ -4,7 +4,6 @@ import Arrabida365Image from '@/../public/assets/arrabidas/arrabida_365.png';
 import Arrabida365MapImage from '@/../public/assets/arrabidas/arrabida_365_map.png';
 import { Section } from '@/components/layout/Section';
 import { Surface } from '@/components/layout/Surface';
-import { Button } from '@mantine/core';
 import { IconArrowLeft, IconArrowRight } from '@tabler/icons-react';
 import { useTranslations } from 'next-intl';
 import Image from 'next/image';
@@ -48,6 +47,10 @@ export function Arrabida365() {
 							width={1920}
 						/>
 						<div className={styles.imageBeeWrapper}>
+							<Link className={styles.learnMore} href="/news/31372">
+								{t('buttonSeeMore')}
+								<IconArrowRight size={18} />
+							</Link>
 							<Image
 								alt="Notícia em destaque “Setúbal, Arrábida: O Início da Época Balnear”"
 								className={styles.imageBee}
@@ -55,14 +58,6 @@ export function Arrabida365() {
 								src={Arrabida365Image}
 								width={1920}
 							/>
-							<Button
-								component={Link}
-								href="/news/31372"
-								id={styles.buttonSeeMore}
-								rightSection={<IconArrowRight size={18} />}
-							>
-								{t('buttonSeeMore')}
-							</Button>
 						</div>
 					</div>
 				</Section>
