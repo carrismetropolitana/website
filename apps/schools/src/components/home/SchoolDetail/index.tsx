@@ -151,11 +151,10 @@ export function SchoolDetail({ schoolId }: Props) {
 								</div>
 							)}
 					</div>
-					<div className={styles.actionsWrapper}>
-						{/* {schoolData && schoolData.stop_ids?.length > 0 && <DownloadPDF school_id={schoolId} />} */}
+					{/* <div className={styles.actionsWrapper}>
 						<PlannerCallout />
 						<NaveganteCardCallout />
-					</div>
+					</div> */}
 				</div>
 
 				<GoBackButton to="/" />
