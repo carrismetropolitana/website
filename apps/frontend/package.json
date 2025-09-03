@@ -22,7 +22,7 @@
 		"@mantine/notifications": "8.2.8",
 		"@next/third-parties": "15.5.2",
 		"@tabler/icons-react": "3.34.1",
-		"@tmlmobilidade/utils": "20250830.350.11",
+		"@tmlmobilidade/utils": "20250902.1546.20",
 		"@turf/turf": "7.2.0",
 		"@vis.gl/react-maplibre": "8.0.4",
 		"classnames": "2.5.1",
@@ -46,11 +46,11 @@
 		"ukkonen": "2.2.0"
 	},
 	"devDependencies": {
-		"@carrismetropolitana/api-types": "20250830.445.32",
+		"@carrismetropolitana/api-types": "20250902.1623.9",
 		"@carrismetropolitana/eslint": "20250622.1204.50",
 		"@carrismetropolitana/website-shared-types": "*",
-		"@tmlmobilidade/tsconfig": "20250830.350.11",
-		"@tmlmobilidade/types": "20250830.350.11",
+		"@tmlmobilidade/tsconfig": "20250902.1546.20",
+		"@tmlmobilidade/types": "20250902.1546.20",
 		"@types/geojson": "7946.0.16",
 		"@types/luxon": "3.7.1",
 		"@types/node": "24.3.0",
