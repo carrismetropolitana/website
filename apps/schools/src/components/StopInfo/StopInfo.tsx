@@ -28,12 +28,12 @@ export default function StopInfo({ index, stop_id }) {
 						<div className={styles.stopName}>{stopData.name}</div>
 						<div className={styles.stopDetails}>
 							<div className={styles.stopLocation}>{stopData.locality}</div>
-							<Link className={styles.stopId} href={`https://beta.carrismetropolitana.pt/stops/${stopData.id}`} target="_blank">
+							<Link className={styles.stopId} href={`https://carrismetropolitana.pt/stops/${stopData.id}`} target="_blank">
 								#
 								{stopData.id}
 							</Link>
 							{index && (
-								<Link className={styles.openInWebsite} href={`https://beta.carrismetropolitana.pt/stops/${stopData.id}`} target="_blank">Ver no Tempo Real</Link>
+								<Link className={styles.openInWebsite} href={`https://carrismetropolitana.pt/stops/${stopData.id}`} target="_blank">Ver no Tempo Real</Link>
 							)}
 						</div>
 					</div>

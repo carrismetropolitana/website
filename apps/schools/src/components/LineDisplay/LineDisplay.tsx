@@ -28,7 +28,7 @@ export default function LineDisplay({ route_id }) {
 	// B. Handle actions
 
 	const handleClick = () => {
-		const websiteURL = `https://www.carrismetropolitana.pt/lines/?route_short_name=${routeData.short_name}&date=&route_id=${routeData.id}`;
+		const websiteURL = `https://carrismetropolitana.pt/lines/${routeData.short_name}`;
 		window.open(websiteURL, '_blank', 'noopener,noreferrer');
 	};
 
