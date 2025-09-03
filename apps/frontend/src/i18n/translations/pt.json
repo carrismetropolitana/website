@@ -1788,6 +1788,10 @@
 			"heading": "Bilhetes Ocasionais",
 			"onboard": {
 				"description": "Pode viajar na CMetropolitana adquirindo um bilhete diretamente ao motorista. Por enquanto, é apenas aceite pagamento em numerário.",
+				"inner": {
+					"description": "Consultar e atualizar dados de faturas.",
+					"title": "Portal do Utilizador"
+				},
 				"title": "Tarifa de Bordo"
 			},
 			"prepaid": {

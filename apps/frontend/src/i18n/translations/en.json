@@ -1830,6 +1830,10 @@
 			"heading": "Occasional Tickets",
 			"onboard": {
 				"description": "You can travel on CMetropolitana by purchasing a ticket directly from the driver. For now, only cash payment is accepted.",
+				"inner": {
+					"description": "Explore and update invoice data.",
+					"title": "User Portal"
+				},
 				"title": "On-board Fare"
 			},
 			"prepaid": {
