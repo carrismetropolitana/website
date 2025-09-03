@@ -5,8 +5,8 @@
 import BlackHeader from '@/components/BlackHeader/BlackHeader';
 import { GoBackButton } from '@/components/common/GoBackButton';
 // import DownloadPDF from '@/components/DownloadPDF/DownloadPDF';
-import { NaveganteCardCallout } from '@/components/home/NaveganteCardCallout';
-import { PlannerCallout } from '@/components/home/PlannerCallout';
+// import { NaveganteCardCallout } from '@/components/home/NaveganteCardCallout';
+// import { PlannerCallout } from '@/components/home/PlannerCallout';
 import { MapView } from '@/components/map/MapView';
 import { MapViewSingleSchool } from '@/components/map/MapViewSingleSchool';
 import { NoServiceMessage } from '@/components/NoServiceMessage/NoServiceMessage';
