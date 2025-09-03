@@ -69,13 +69,6 @@ export function SchoolDetail({ schoolId }: Props) {
 				features: [],
 				type: 'FeatureCollection',
 			};
-			if (schoolData) {
-				geoJSON.features.push({
-					geometry: { coordinates: [parseFloat(schoolData.lon), parseFloat(schoolData.lat)], type: 'Point' },
-					properties: {},
-					type: 'Feature',
-				});
-			}
 			if (schoolData && schoolData.stop_ids.length) {
 				for (const [stopIndex, stopCode] of schoolData.stop_ids.entries()) {
 					const stopResponse = await fetch(`https://api.carrismetropolitana.pt/stops/${stopCode}`);
