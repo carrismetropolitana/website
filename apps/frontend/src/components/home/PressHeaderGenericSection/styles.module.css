@@ -1,0 +1,17 @@
+.pressHeaderSectionWrapper {
+    height: 232px;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #FFDD00;
+    border-radius: 18px;
+    color: var(--System-Text-100, #000);
+    text-align: center;
+    font-family: Inter;
+    font-size: 64px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+}
+

@@ -59,7 +59,8 @@
 		}
 	},
 	"NewsCard": {
-		"publish_date": "{publishDate, date, long}"
+		"publish_date": "{publishDate, date, long}",
+		"see_more": "See More"
 	},
 	"SelectLine": {
 		"label": "Search line by number, name, location...",
@@ -658,6 +659,98 @@
 		},
 		"NewsSection": {
 			"section_heading": "News"
+		},
+		"PressContact": {
+			"form": {
+				"email": "Email",
+				"file": "Upload File",
+				"message": "Message",
+				"name": "Name",
+				"organization": "Organization/Press Vehicle",
+				"phone": "Phone",
+				"placeholderFile": "Choose Files",
+				"send": "Send",
+				"subject": "Subject",
+				"surname": "Nickname"
+			},
+			"section_heading": "Contact"
+		},
+		"PressFaqSection": {
+			"faqs": {
+				"carris_relationship": {
+					"answer": "Carris Metropolitana is a public transport brand distinct from Carris. Both operate under the supervision of TML - Transportes Metropolitanos de Lisboa, but they are separate entities. Carris Metropolitana serves 15 municipalities in the Lisbon metropolitan area (excluding Lisbon, Cascais and Barreiro), while Carris operates specifically in the city of Lisbon.",
+					"question": "Is Carris Metropolitana part of Carris?"
+				},
+				"commercial_use": {
+					"answer": "The use of Carris Metropolitana images and logos for commercial purposes requires prior authorization. For editorial and journalistic use, images may be used with proper attribution. For any commercial or promotional use, you should contact our communications department to obtain appropriate licenses and guidance on correct brand usage.",
+					"question": "Can I use the images and logos for commercial purposes?"
+				},
+				"contact_interviews": {
+					"answer": "To contact Carris Metropolitana for information or to request interviews, you can use our direct press channel available on this page or send an email to our communications department. We provide dedicated support to journalists and media professionals, including support materials, data and facilitation of interviews with company officials.",
+					"question": "How can I contact CMetropolitana to obtain information or request interviews?"
+				},
+				"open_data_access": {
+					"answer": "Carris Metropolitana provides open data through its official portal. You can access information about schedules, routes, real-time passenger data and operational statistics. For access to specific data or APIs, we recommend that you contact us through our official communication channels.",
+					"question": "How can I access the open data provided by CMetropolitana?"
+				},
+				"operating_municipalities": {
+					"answer": "Carris Metropolitana operates in 15 of the 18 municipalities of the Lisbon metropolitan area: Almada, Seixal, Sesimbra, Alcochete, Moita, Montijo, Palmela, Setúbal, Amadora, Oeiras, Sintra, Mafra, Vila Franca de Xira, Odivelas and Loures. The municipalities of Lisbon, Cascais and Barreiro have their own operators, but are connected through Carris Metropolitana's intermunicipal connections.",
+					"question": "In which municipalities does Carris Metropolitana operate?"
+				},
+				"service_operators": {
+					"answer": "Carris Metropolitana works with four main operators: Area 1 - Viação Alvorada (Amadora, Oeiras, Sintra, connections to Cascais and Lisbon); Area 2 - Rodoviária de Lisboa (Mafra, Vila Franca de Xira, Odivelas and Loures); Area 3 - TST (Almada, Seixal and Sesimbra); Area 4 - Alsa Todi (Alcochete, Moita, Montijo, Palmela, Setúbal and connections to Barreiro).",
+					"question": "What are the service provider operators that operate under the Carris Metropolitana brand?"
+				}
+			},
+			"section_heading": "Frequently Asked Questions",
+			"subheading": "In this section, you will find answers to the most frequently asked questions about Carris Metropolitana and our press materials. If you need additional clarifications, please do not hesitate to contact us."
+		},
+		"PressHeaderSection": {
+			"section_heading": "Press"
+		},
+		"PressKnowledgeBase": {
+			"section_heading": "Knowledge Base",
+			"subheading": "Explore and download relevant documents and other materials, such as reports, to support informative coverage about Carris Metropolitana."
+		},
+		"PressLabelSection": {
+			"buttons": {
+				"contact": "Contact us",
+				"download": "Download"
+			},
+			"cards": {
+				"download_icons": {
+					"description": "Download representative icons of our services, available in different styles and formats.",
+					"title": "Icon Downloads"
+				},
+				"download_logos": {
+					"description": "Access official logos in various formats, ready for use in communication materials.",
+					"title": "Logo Downloads"
+				},
+				"image_bank": {
+					"description": "Explore and download high-quality images that capture the essence of our services and operations.",
+					"title": "Image Bank"
+				},
+				"not_found": {
+					"description": "We have a direct channel for the Press, where you can request our institutional materials.",
+					"title": "Didn't find what you're looking for?"
+				},
+				"press_guide": {
+					"description": "Everything about how to communicate the public road transport brand of the 18 municipalities in the Lisbon metropolitan area.",
+					"title": "Press Guide"
+				},
+				"standards_manual": {
+					"description": "Consult our standards manual for guidelines on the correct use of brand and visual identity.",
+					"title": "Standards Manual"
+				}
+			},
+			"collapse_button": "Collapse",
+			"expand_button": "Expand",
+			"section_heading": "The Brand",
+			"subheading": "Carris Metropolitana is a joint initiative of the 18 municipalities of the amL, through the Lisbon Metropolitan Transport (TML), which integrates the road transport operation of the entire amL into a single image and service level, focused on serving the populations, with a high degree of technological and operational complexity, in this case, especially due to the geographical and population dimension."
+		},
+		"PressNotesBase": {
+			"section_heading": "Press Notes",
+			"subheading": "Explore and download relevant documents and other materials, such as reports, to support informative coverage about Carris Metropolitana."
 		},
 		"QuickSearchFavoritesBar": {
 			"empty": "No favorite lines yet...",
