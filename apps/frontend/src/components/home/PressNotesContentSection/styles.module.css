@@ -8,6 +8,16 @@
     padding: 0;
 }
 
+.loading,
+.error {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 200px;
+    color: var(--System-Text-200, #B4B4BC);
+    font-size: 1rem;
+}
+
 .breadcrumb {
     display: flex;
     height: 2.625rem;

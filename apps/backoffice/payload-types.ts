@@ -70,6 +70,7 @@ export interface Config {
     'case-studies': CaseStudy;
     media: Media;
     news: News;
+    notes: Note;
     topics: Topic;
     users: User;
     'payload-locked-documents': PayloadLockedDocument;
@@ -81,6 +82,7 @@ export interface Config {
     'case-studies': CaseStudiesSelect<false> | CaseStudiesSelect<true>;
     media: MediaSelect<false> | MediaSelect<true>;
     news: NewsSelect<false> | NewsSelect<true>;
+    notes: NotesSelect<false> | NotesSelect<true>;
     topics: TopicsSelect<false> | TopicsSelect<true>;
     users: UsersSelect<false> | UsersSelect<true>;
     'payload-locked-documents': PayloadLockedDocumentsSelect<false> | PayloadLockedDocumentsSelect<true>;
@@ -198,6 +200,33 @@ export interface Topic {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "notes".
+ */
+export interface Note {
+  id: string;
+  title: string;
+  /**
+   * URL única para esta nota. Será gerada automaticamente do título se deixado em branco.
+   */
+  slug: string;
+  contentType: 'link' | 'file';
+  link?: string | null;
+  file?: (string | null) | Media;
+  publishDate?: string | null;
+  status: 'draft' | 'published';
+  heroImage?: (string | null) | Media;
+  tags?: string[] | null;
+  seo?: {
+    metaTitle?: string | null;
+    metaDescription?: string | null;
+    ogImage?: (string | null) | Media;
+  };
+  authors?: (string | null) | User;
+  publishedAt: string;
+  updatedAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "users".
  */
 export interface User {
@@ -239,6 +268,10 @@ export interface PayloadLockedDocument {
     | ({
         relationTo: 'news';
         value: string | News;
+      } | null)
+    | ({
+        relationTo: 'notes';
+        value: string | Note;
       } | null)
     | ({
         relationTo: 'topics';
@@ -330,6 +363,31 @@ export interface NewsSelect<T extends boolean = true> {
   is_featured?: T;
   topics?: T;
   featured_image?: T;
+  publishedAt?: T;
+  updatedAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "notes_select".
+ */
+export interface NotesSelect<T extends boolean = true> {
+  title?: T;
+  slug?: T;
+  contentType?: T;
+  link?: T;
+  file?: T;
+  publishDate?: T;
+  status?: T;
+  heroImage?: T;
+  tags?: T;
+  seo?:
+    | T
+    | {
+        metaTitle?: T;
+        metaDescription?: T;
+        ogImage?: T;
+      };
+  authors?: T;
   publishedAt?: T;
   updatedAt?: T;
 }

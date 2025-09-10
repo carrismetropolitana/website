@@ -1,10 +1,13 @@
 'use client';
 
+import { type Note } from '@carrismetropolitana/website-shared-types';
 import { Select, TextInput } from '@mantine/core';
 import { IconArrowLeft, IconSearch } from '@tabler/icons-react';
 import { useTranslations } from 'next-intl';
 import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 import React, { useState } from 'react';
+import useSWR from 'swr';
 
 import styles from './styles.module.css';
 
@@ -22,84 +25,80 @@ interface NewsItem {
 export function PressNotesContentSection() {
 	const [searchTerm, setSearchTerm] = useState('');
 	const [selectedFilter, setSelectedFilter] = useState('');
+	const router = useRouter();
 
 	const t = useTranslations('home.PressNotesBase');
 
-	const newsItems: NewsItem[] = [
-		{
-			date: '30 de Abril de 2024',
-			id: '1',
-			image: 'https://d1csarkz8obe9u.cloudfront.net/posterpreviews/breaking-news-design-template-70665f891baf9314344e211ce2db6a12_screen.jpg?ts=1689413594',
-			isLink: true,
-			title: 'Resultados do Inquérito de Satisfação aos Passageiros',
-			topic: 'Tópico',
-		},
-		{
-			date: '30 de Fevereiro de 2024',
-			id: '2',
-			image: 'https://d1csarkz8obe9u.cloudfront.net/posterpreviews/breaking-news-design-template-70665f891baf9314344e211ce2db6a12_screen.jpg?ts=1689413594',
-			isLink: true,
-			title: 'Balanço da operação Carris Metropolitana em 2024',
-			topic: 'Tópico',
-		},
-		{
-			date: '30 de Abril de 2024',
-			id: '3',
-			image: 'https://d1csarkz8obe9u.cloudfront.net/posterpreviews/breaking-news-design-template-70665f891baf9314344e211ce2db6a12_screen.jpg?ts=1689413594',
-			isLink: true,
-			title: 'Resultados do Inquérito de Satisfação aos Passageiros',
-			topic: 'Tópico',
-		},
-		{
-			date: '30 de Abril de 2024',
-			id: '4',
-			image: 'https://d1csarkz8obe9u.cloudfront.net/posterpreviews/breaking-news-design-template-70665f891baf9314344e211ce2db6a12_screen.jpg?ts=1689413594',
-			isLink: true,
-			title: 'Resultados do Inquérito de Satisfação aos Passageiros',
-			topic: 'Tópico',
-		},
-		{
-			date: '30 de Abril de 2024',
-			id: '5',
-			image: 'https://d1csarkz8obe9u.cloudfront.net/posterpreviews/breaking-news-design-template-70665f891baf9314344e211ce2db6a12_screen.jpg?ts=1689413594',
-			isLink: false,
-			title: 'Resultados do Inquérito de Satisfação aos Passageiros',
-			topic: 'Tópico',
-		},
-		{
-			date: '30 de Abril de 2024',
-			id: '6',
-			image: 'https://d1csarkz8obe9u.cloudfront.net/posterpreviews/breaking-news-design-template-70665f891baf9314344e211ce2db6a12_screen.jpg?ts=1689413594',
-			isLink: false,
-			title: 'Resultados do Inquérito de Satisfação aos Passageiros',
-			topic: 'Tópico',
-		},
-		{
-			date: '30 de Abril de 2024',
-			id: '7',
-			image: 'https://d1csarkz8obe9u.cloudfront.net/posterpreviews/breaking-news-design-template-70665f891baf9314344e211ce2db6a12_screen.jpg?ts=1689413594',
-			isLink: false,
-			title: 'Resultados do Inquérito de Satisfação aos Passageiros',
-			topic: 'Tópico',
-		},
-		{
-			date: '30 de Abril de 2024',
-			id: '8',
-			image: 'https://d1csarkz8obe9u.cloudfront.net/posterpreviews/breaking-news-design-template-70665f891baf9314344e211ce2db6a12_screen.jpg?ts=1689413594',
-			isLink: false,
-			title: 'Resultados do Inquérito de Satisfação aos Passageiros',
-			topic: 'Tópico',
-		},
-	];
+	// Fetch notes from CMS
+	const { data: notesData, error, isLoading } = useSWR<Note[]>('/admin/public-api/notes');
+
+	// Convert CMS notes to the format expected by the existing UI
+	const newsItems: NewsItem[] = React.useMemo(() => {
+		if (!notesData) return [];
+
+		return notesData.map(note => ({
+			date: new Date(note.publishDate).toLocaleDateString('pt-PT', {
+				day: 'numeric',
+				month: 'long',
+				year: 'numeric',
+			}),
+			id: note._id,
+			image: note.heroImage?.url || 'https://d1csarkz8obe9u.cloudfront.net/posterpreviews/breaking-news-design-template-70665f891baf9314344e211ce2db6a12_screen.jpg?ts=1689413594',
+			isLink: note.contentType === 'link',
+			title: note.title,
+			topic: note.tags?.[0] || 'Geral',
+		}));
+	}, [notesData]);
 
 	const filteredNews = newsItems.filter(item =>
 		item.title.toLowerCase().includes(searchTerm.toLowerCase())
 		&& (selectedFilter === '' || item.topic === selectedFilter),
 	);
 
+	// Get unique topics for filter
+	const availableTopics = React.useMemo(() => {
+		const topics = new Set(newsItems.map(item => item.topic));
+		return Array.from(topics);
+	}, [newsItems]);
+
 	const handleTextInputChange = ({ currentTarget }) => {
 		setSearchTerm(currentTarget.value);
 	};
+
+	const handleCardClick = (newsItem: NewsItem) => {
+		// Find the original note data
+		const note = notesData?.find(n => n._id === newsItem.id);
+		if (!note) return;
+
+		if (note.contentType === 'file' && note.file?.url) {
+			// For files, trigger direct download
+			window.open(note.file.url, '_blank');
+		}
+		else if (note.contentType === 'link' && note.link) {
+			// For links, navigate to detail page which will then redirect
+			router.push(`/press/notes/${note.slug}`);
+		}
+		else {
+			// Fallback to detail page
+			router.push(`/press/notes/${note.slug}`);
+		}
+	};
+
+	if (isLoading) {
+		return (
+			<section className={styles.contentWrapper}>
+				<div className={styles.loading}>Carregando notas...</div>
+			</section>
+		);
+	}
+
+	if (error) {
+		return (
+			<section className={styles.contentWrapper}>
+				<div className={styles.error}>Erro ao carregar notas de imprensa.</div>
+			</section>
+		);
+	}
 
 	return (
 		<section className={styles.contentWrapper}>
@@ -125,9 +124,7 @@ export function PressNotesContentSection() {
 						value={selectedFilter}
 						data={[
 							{ label: 'Filtrar por tópico...', value: '' },
-							{ label: 'Tópico', value: 'Tópico' },
-							{ label: 'Relatório', value: 'Relatório' },
-							{ label: 'Notícia', value: 'Notícia' },
+							...availableTopics.map(topic => ({ label: topic, value: topic })),
 						]}
 					/>
 				</div>
@@ -142,10 +139,8 @@ export function PressNotesContentSection() {
 					<PressGenericCard
 						key={item.id}
 						newsItem={item}
+						onClick={handleCardClick}
 						showTopic={false}
-						onClick={(newsItem) => {
-							console.log('Clicked news item:', newsItem);
-						}}
 					/>
 				))}
 			</div>
