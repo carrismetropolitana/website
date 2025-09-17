@@ -1787,15 +1787,15 @@
 		"TicketsHeader": {
 			"heading": "Bilhetes Ocasionais",
 			"onboard": {
-				"description": "Pode viajar na CMetropolitana adquirindo um bilhete diretamente ao motorista. Por enquanto, é apenas aceite pagamento em numerário.",
+				"description": "Pode viajar na Carris Metropolitana adquirindo um bilhete diretamente ao motorista (em numerário), ou utilizando um cartão bancário contactless, no validador amarelo.",
 				"inner": {
-					"description": "Consultar e atualizar dados de faturas.",
+					"description": "Consultar e atualizar dados de faturas de pagamentos feitos com cartão bancário contactless.",
 					"title": "Portal do Utilizador"
 				},
 				"title": "Tarifa de Bordo"
 			},
 			"prepaid": {
-				"description": "Antes de viajar, pode adquirir um cartão navegante® pré-pago e carregar com saldo. Este saldo pode ser utilizado para viajar em qualquer linha da CMetropolitana e em qualquer operador de transportes da amL.",
+				"description": "Antes de viajar, pode adquirir um cartão navegante® pré-pago, ou utilizar o seu cartão navegante® personalizado, e carregar com saldo. Este saldo pode ser utilizado para viajar em qualquer linha da Carris Metropolitana e em qualquer operador de transportes da amL.",
 				"title": "Tarifa Pré-paga"
 			},
 			"subheading": "Descubra quanto custa viajar na CMetropolitana de vez em quando. Existem 5 categorias de tarifários, com tarifa de bordo ou pré-paga, associadas aos diferentes tipos de linhas."
