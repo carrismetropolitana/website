@@ -66,9 +66,9 @@ export function AppNaveganteStartup20250115() {
 						{t('actions.update_ios')}
 					</Button>
 				)}
-				<Button onClick={handleClose} variant="secondary">
+				{/* <Button onClick={handleClose} variant="secondary">
 					{t('actions.close')}
-				</Button>
+				</Button> */}
 			</div>
 		</div>
 	);
