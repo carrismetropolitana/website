@@ -69,6 +69,7 @@ export function AppNaveganteStartup20250115() {
 				{/* <Button onClick={handleClose} variant="secondary">
 					{t('actions.close')}
 				</Button> */}
+				<div onClick={handleClose} style={{ color: 'transparent' }}>fechar</div>
 			</div>
 		</div>
 	);
