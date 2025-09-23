@@ -125,6 +125,44 @@
 }
 
 /* * */
+/* LINE ITEM */
+
+.lineItem {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	width: 100%;
+	padding: var(--size-spacing-10) var(--size-spacing-15);
+	background-color: var(--color-system-background-100);
+	border-radius: 8px;
+	cursor: pointer;
+	transition: all 200ms ease;
+}
+
+.lineItem:hover {
+	background-color: var(--color-system-background-300);
+}
+
+.lineItem:active {
+	background-color: var(--color-system-background-200);
+}
+
+/* * */
+/* ARROW WRAPPER */
+
+.arrowWrapper {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	color: var(--color-system-text-400);
+	flex-shrink: 0;
+}
+
+.lineItem:hover .arrowWrapper {
+	color: var(--color-system-text-300);
+}
+
+/* * */
 /* RESPONSIVE ADJUSTMENTS */
 
 @media (width <= 650px) {
