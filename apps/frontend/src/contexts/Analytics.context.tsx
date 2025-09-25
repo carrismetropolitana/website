@@ -77,17 +77,16 @@ export const AnalyticsContextProvider = ({ children }) => {
 			referring_domain: document.referrer ? new URL(document.referrer).hostname : '',
 		};
 		// Execute the callback with the default event properties
-		callback(ampli, defaultProps);
+		// callback(ampli, defaultProps);
 	};
 
 	const captureWithDelay = (() => {
 		let timeout: NodeJS.Timeout | null = null;
-
 		return (callback: (instance: Ampli) => void) => {
 			if (!consentContext.data.enabled_analytics || !ampli?.isLoaded) return;
 			if (timeout) clearTimeout(timeout);
 			timeout = setTimeout(() => {
-				callback(ampli);
+				// callback(ampli);
 				timeout = null;
 			}, 1000);
 		};
