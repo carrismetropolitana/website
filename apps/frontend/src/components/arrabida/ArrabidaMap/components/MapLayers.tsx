@@ -120,6 +120,7 @@ export function MapLayers({ onPinClick, selectedAccordionId, selectedLineId, sty
 				<div
 					key={`pin-area-${pin.id}`}
 					onClick={() => handlePinClick(pin.id)}
+					title={pin.name}
 					style={{
 						cursor: 'pointer',
 						height: '50px',
@@ -130,7 +131,6 @@ export function MapLayers({ onPinClick, selectedAccordionId, selectedLineId, sty
 						width: '50px',
 						zIndex: 15,
 					}}
-					title={pin.name}
 				/>
 			))}
 
@@ -155,17 +155,17 @@ export function MapLayers({ onPinClick, selectedAccordionId, selectedLineId, sty
 			{selectedAccordionId && (() => {
 				const selectedBeach = BEACH_PINS.find(beach => beach.accordionId === selectedAccordionId);
 				if (!selectedBeach) return null;
-				
+
 				// Map accordion IDs to their respective stop numbers
 				const locationStops = {
 					'praia-albarquel': [1, 2, 3, 4], // Adjust these numbers based on actual stops for each location
-					'praia-figueirinha': [5, 6],
 					'praia-creiro': [7, 8, 9],
+					'praia-figueirinha': [5, 6],
 					'praia-galapos-galapinhos': [10, 11],
 				};
-				
+
 				const stops = locationStops[selectedAccordionId as keyof typeof locationStops] || [];
-				
+
 				return stops.map(stopNumber => (
 					<img
 						key={`selected-stop-${stopNumber}`}
