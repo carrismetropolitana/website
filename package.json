@@ -5,6 +5,7 @@
 		"build": "turbo build",
 		"build:backoffice": "turbo build --filter=@carrismetropolitana/website-backoffice",
 		"build:frontend": "turbo build --filter=@carrismetropolitana/website-frontend",
+		"build:pips": "turbo build --filter=@carrismetropolitana/website-pips",
 		"build:schools": "turbo build --filter=@carrismetropolitana/website-schools",
 		"build:shared": "turbo build --filter=./shared/*",
 		"dev": "npm run build:shared && dotenv-run -f ./environments/development/secrets/.env -- turbo dev",
