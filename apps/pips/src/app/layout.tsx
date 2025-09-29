@@ -22,7 +22,7 @@ const inter = Inter({
 
 export const metadata: Metadata = {
 	description: 'Painel interior Carris Metropolitana',
-	metadataBase: new URL(getPublicVariable('server_url_frontend')),
+	metadataBase: new URL(getPublicVariable('server_url_pips')),
 	title: 'CMetropolitana PIP',
 };
 
