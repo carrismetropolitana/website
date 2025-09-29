@@ -116,13 +116,13 @@ services:
   # # # # # # # # # # # # # # # # # # # # #
   # # # # # # # # # # # # # # # # # # # # #
 
-  # pips:
-  #   image: ghcr.io/carrismetropolitana/website-pips:production
-  #   restart: unless-stopped
-  #   mem_limit: 6g
-  #   logging:
-  #     options:
-  #       max-size: '1m'
-  #       max-file: '1'
-  #   env_file:
-  #     - ./secrets/.env
+  pips:
+    image: ghcr.io/carrismetropolitana/website-pips:production
+    restart: unless-stopped
+    mem_limit: 6g
+    logging:
+      options:
+        max-size: '1m'
+        max-file: '1'
+    env_file:
+      - ./secrets/.env
