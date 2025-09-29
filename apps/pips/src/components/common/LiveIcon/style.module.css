@@ -1,0 +1,50 @@
+/* * */
+/* CONTAINER */
+
+.container {
+	position: relative;
+	display: inline-flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	width: 20px;
+	height: 20px;
+	margin-left: -4px;
+}
+
+/* * */
+/* DOT */
+
+.dot {
+	width: 4px;
+	height: 4px;
+	background-color: var(--color-realtime-100);
+	border-radius: 999px;
+}
+
+/* * */
+/* RIPPLE */
+
+.ripple {
+	position: absolute;
+	width: 20px;
+	height: 20px;
+	background-color: var(--color-realtime-100);
+	border-radius: 999px;
+	animation: 2500ms linear infinite pulse;
+}
+
+@keyframes pulse {
+	0% {
+		opacity: 1;
+		transform: scale(0);
+	}
+	70% {
+		opacity: 0;
+		transform: scale(1);
+	}
+	100% {
+		opacity: 0;
+		transform: scale(1);
+	}
+}

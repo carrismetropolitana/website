@@ -1,0 +1,53 @@
+/* * */
+/* WRAPPERS */
+
+.infoWrapper {
+	display: flex;
+	flex-direction: column;
+	gap: var(--size-spacing-5);
+}
+
+.chartWrapper {
+	width: 100%;
+	padding-top: var(--size-spacing-15);
+}
+
+/* * */
+/* CONTENT */
+
+.bigNumberWrapper {
+	display: flex;
+	flex-direction: row;
+	gap: var(--size-spacing-10);
+	align-items: flex-start;
+}
+
+.bigNumber {
+    font-size: 60px;
+    font-weight: var(--font-weight-bold);
+	line-height: 1;
+}
+
+.liveIcon {
+    margin-top: var(--size-spacing-5);
+}
+
+.title {
+	font-size: 18px;
+	font-weight: var(--font-weight-bold);
+	color: var(--color-system-text-100)
+}
+
+.description {
+	font-size: 12px;
+	font-weight: var(--font-weight-medium);
+	line-height: 1.6;
+	color: var(--color-system-text-200);
+}
+
+.footnote {
+	font-size: 12px;
+	font-weight: var(--font-weight-medium);
+	line-height: 1.6;
+	color: var(--color-system-text-300);
+}

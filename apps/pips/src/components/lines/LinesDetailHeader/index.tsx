@@ -1,0 +1,110 @@
+'use client';
+
+/* * */
+
+import { BackButton } from '@/components/common/BackButton';
+import { FavoriteToggle } from '@/components/common/FavoriteToggle';
+import { SelectOperationalDate } from '@/components/common/SelectOperationalDate';
+import { Section } from '@/components/layout/Section';
+import { Surface } from '@/components/layout/Surface';
+import { LineBadge } from '@/components/lines/LineBadge';
+import { SelectActivePatternGroup } from '@/components/lines/SelectActivePatternGroup';
+// import { SelectActivePatternGroupExplainer } from '@/components/lines/SelectActivePatternGroupExplainer';
+import { LineDebugDetail } from '@/components/lines/LineDebugDetail';
+import { useDebugContext } from '@/contexts/Debug.context';
+import { useLinesDetailContext } from '@/contexts/LinesDetail.context';
+import { useProfileContext } from '@/contexts/Profile.context';
+import toast from '@/utils/toast';
+import { useTranslations } from 'next-intl';
+
+import styles from './styles.module.css';
+
+import { LineDisplayTts } from '../LineDisplayTts';
+
+/* * */
+
+export function LinesDetailHeader() {
+	//
+
+	//
+	// A. Setup variables
+
+	const t = useTranslations('lines.LinesDetail');
+	const profileContext = useProfileContext();
+	const linesDetailContext = useLinesDetailContext();
+	const debugContext = useDebugContext();
+
+	//
+	// B. Handle actions
+
+	const handleToggleFavorite = async () => {
+		if (!linesDetailContext.data.line) return;
+		try {
+			await profileContext.actions.toggleFavoriteLine(linesDetailContext.data.line.id);
+		}
+		catch (error) {
+			toast.error({ message: t('toggle_favorite_error', { error: error.message }) });
+		}
+	};
+
+	//
+	// C. Render components
+
+	if (!linesDetailContext.data.line) {
+		return null;
+	}
+
+	return (
+		<>
+			<Surface>
+
+				<Section withBottomDivider withPadding>
+					<BackButton href="/lines" />
+				</Section>
+
+				<Section withBottomDivider withPadding>
+					<div className={styles.headingSection}>
+						<div className={styles.headingSectionRow}>
+							<LineBadge lineData={linesDetailContext.data.line} size="lg" />
+							<FavoriteToggle color={linesDetailContext.data.line.color} isActive={linesDetailContext.flags.is_favorite} onToggle={handleToggleFavorite} />
+							<LineDisplayTts patternId={linesDetailContext.data.active_pattern?.id} />
+						</div>
+						<div className={styles.lineName}>
+							{linesDetailContext.data.line.long_name}
+						</div>
+					</div>
+				</Section>
+
+				<Section withPadding>
+					<div className={styles.container}>
+						{/* <div className={styles.patternSelectorExplainerWrapper}>
+							<SelectActivePatternGroupExplainer />
+						</div> */}
+						<div className={styles.operationalDateSelectorWrapper}>
+							<SelectOperationalDate />
+						</div>
+						<div className={styles.patternSelectorWrapper}>
+							<SelectActivePatternGroup />
+						</div>
+
+					</div>
+				</Section>
+			</Surface>
+
+			{debugContext.flags.is_debug_mode && (
+				<Surface variant="debug">
+					<Section withPadding>
+						<LineDebugDetail
+							activePattern={linesDetailContext.data.active_pattern}
+							lineColor={linesDetailContext.data.line.color}
+							totalStops={linesDetailContext.data.active_pattern?.path.length}
+						/>
+					</Section>
+				</Surface>
+			)}
+
+		</>
+	);
+
+	//
+}

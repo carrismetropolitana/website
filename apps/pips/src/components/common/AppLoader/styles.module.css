@@ -1,0 +1,29 @@
+/* * */
+/* ROOT FALLBACK */
+/* This is a fallback for the root element. */
+/* It is used to set the default colors for the app */
+/* when the theme is not yet available (suspense boundary). */
+
+.rootFallback {
+	--color-system-text-300: #9696a0;
+	--color-system-background-100: #fff;
+}
+
+@media (prefers-color-scheme: dark) {
+	.rootFallback {
+		--color-system-text-300: rgb(150 150 165);
+		--color-system-background-100: rgb(40 40 50);
+	}
+}
+
+/* * */
+/* CONTAINER */
+
+.container {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	width: 100vw;
+	height: 100vh;
+	background-color: var(--color-system-background-100);
+}

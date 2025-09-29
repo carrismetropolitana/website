@@ -1,0 +1,10 @@
+/* * */
+/* CONTAINER */
+
+.container{
+    display: flex;
+    flex-direction: column;
+	overflow: hidden;
+	border-top-left-radius: var(--border-radius-lg);
+	border-bottom-left-radius: var(--border-radius-lg);
+}

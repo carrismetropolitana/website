@@ -1,0 +1,53 @@
+/* * */
+/* CONTAINER */
+
+.container {
+    display: grid;
+	grid-template-columns: 18px 1fr;
+	gap: var(--size-spacing-10);
+	padding: 0 var(--size-spacing-20);
+	cursor: pointer;
+}
+
+.container:hover {
+	background-color: var(--color-system-background-300);
+}
+
+.container.isFirstStop {
+	padding-top: var(--size-spacing-20)
+}
+
+.container.isLastStop {
+	padding-bottom: var(--size-spacing-20)
+}
+
+.container.isSelected,
+.container.isSelected:hover {
+	cursor: default;
+	background-color: var(--color-system-background-100);
+	box-shadow: 0 0 30px 0 rgba(0, 0, 0, 0.15);
+	z-index: 10;
+}
+
+/* * */
+/* DETAILS WRAPPER */
+
+.detailsWrapper {
+	display: flex;
+	flex-direction: column;
+	gap: var(--size-spacing-15);
+	padding-top: var(--size-spacing-20);
+	padding-bottom: var(--size-spacing-15);
+}
+
+.isFirstStop .detailsWrapper {
+	padding-top: 2px;
+}
+
+.isFirstStop.isSelected .detailsWrapper {
+	padding-top: 2px;
+}
+
+.isSelected .detailsWrapper {
+	padding: var(--size-spacing-20) 0;
+}
