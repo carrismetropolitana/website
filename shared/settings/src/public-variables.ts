@@ -26,6 +26,12 @@ export const PUBLIC_VARIABLES = Object.freeze({
 		staging: 'https://staging.carrismetropolitana.pt',
 	},
 
+	server_url_pips: {
+		development: 'http://localhost:49004',
+		production: 'https://carrismetropolitana.pt',
+		staging: 'https://staging.carrismetropolitana.pt',
+	},
+
 	server_url_schools: {
 		development: 'http://localhost:49003',
 		production: 'https://carrismetropolitana.pt',
