@@ -1,0 +1,28 @@
+/* * */
+/* CONTAINER */
+
+.container {
+	display: flex;
+	flex-direction: column;
+	width: 100%;
+}
+
+@media (width < 1000px) {
+	.container {
+		grid-template:
+			"a" 50vh [a_]
+			"b" auto [b_] / 1fr;
+	}
+}
+
+
+.stopName {
+	display: flex;
+	width: 100%;
+	padding: var(--size-spacing-15);
+	font-size: 15px;
+	font-weight: 700;
+	line-height: 1;
+	color: var(--color-system-text-100);
+	background-color: var(--color-system-background-300);
+}

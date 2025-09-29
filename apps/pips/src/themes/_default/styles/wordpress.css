@@ -1,0 +1,63 @@
+/* stylelint-disable selector-id-pattern */
+/* stylelint-disable selector-class-pattern */
+
+/* * */
+/* WP RESET / COLUMNS */
+
+.wp-block-columns {
+	display: flex;
+    gap: var(--size-spacing-15);
+}
+
+.wp-block-column {
+	display: flex;
+	flex-direction: column;
+	gap: var(--size-spacing-15);
+}
+
+/* * */
+/* WP RESET / BUTTONS */
+
+.wp-block-button {
+	display: flex;
+}
+
+.wp-block-button a {
+	display: flex;
+    padding: var(--size-spacing-10) var(--size-spacing-20);
+    font-size: 18px !important;
+	font-weight: var(--font-weight-bold);
+    color: var(--color-primary-black) !important;
+    text-align: center;
+    word-break: break-all;
+    overflow-wrap: break-word;
+    cursor: pointer;
+    background-color: var(--color-brand) !important;
+    border-radius: 8px !important;
+}
+
+.wp-block-button a:hover  {
+	text-decoration: underline;
+}
+
+
+/* * */
+/* WP RESET / VIDEO */
+
+.wp-block-cover video {
+	width: 100%;
+}
+
+
+/* * */
+/* WP RESET / LINKS & MARKS */
+
+#news-content-wrapper a,
+#news-content-wrapper a * {
+	color: var(--color-system-text-100) !important;
+}
+
+#news-content-wrapper .override-mark-highlight {
+	color: var(--color-primary-black) !important;
+	background-color: var(--color-brand) !important;
+}

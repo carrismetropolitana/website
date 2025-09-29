@@ -1,0 +1,50 @@
+/* * */
+/* CONTAINER */
+
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  align-items: center;
+  justify-content: center;
+  padding: 80px 30px;
+  font-weight: 600;
+  text-align: center;
+  border-top: 1px solid var(--gray-2);
+}
+
+/* * */
+/* ICON  */
+
+.icon {
+  color: var(--current-time-100);
+}
+
+/* * */
+/* TITLE */
+
+.title {
+  font-size: 30px;
+  color: var(--reference-1);
+  text-transform: uppercase;
+}
+
+/* * */
+/* SUBTITLE */
+
+.subtitle {
+  font-size: 18px;
+  font-weight: 500;
+  color: var(--reference-1);
+}
+
+/* * */
+/* RETRY MESSAGE */
+
+.retryMessage {
+  padding: 5px 20px;
+  font-size: 15px;
+  font-weight: 500;
+  color: var(--gray-6);
+  border-radius: 999px;
+}

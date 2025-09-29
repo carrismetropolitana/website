@@ -1,0 +1,41 @@
+/* * */
+/* CONTAINER */
+
+.container {
+	display: flex;
+	flex-direction: column;
+	gap: var(--size-spacing-5);
+}
+
+/* * */
+/* TITLE */
+
+.title {
+	font-size: 12px;
+	font-style: italic;
+	font-weight: var(--font-weight-medium);
+	color: var(--color-system-text-300);
+}
+
+/* * */
+/* NO DATA */
+
+.noData {
+	font-size: 14px;
+	font-style: italic;
+	font-weight: var(--font-weight-medium);
+	color: var(--color-system-text-300);
+}
+
+.nextDate {
+	font-size: 14px;
+	font-style: italic;
+	font-weight: var(--font-weight-medium);
+	color: var(--color-status-info-text);
+	text-decoration: underline;
+	cursor: pointer;
+
+	&:hover {
+		opacity: 0.8;
+	}
+}

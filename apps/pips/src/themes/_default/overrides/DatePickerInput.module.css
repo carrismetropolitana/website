@@ -1,0 +1,38 @@
+/* * */
+/* INPUT */
+
+.input {
+	height: auto;
+	max-height: none;
+	padding: var(--size-spacing-15);
+	font-size: 18px;
+	background-color: var(--color-system-background-100);
+	border: 1px solid var(--color-system-border-200);
+	border-radius: 5px;
+}
+
+.input span {
+	color: var(--color-system-text-300);
+}
+
+.wrapper[data-with-left-section="true"] .input {
+	padding-left: calc(var(--size-spacing-15) + 30px);
+}
+
+.wrapper[data-with-right-section="true"] .input {
+	padding-right: calc(var(--size-spacing-15) + 30px);
+}
+
+/* * */
+/* SECTION */
+
+.section {
+	display: flex;
+	width: auto;
+	padding: var(--size-spacing-15);
+	color: var(--color-system-text-300);
+}
+
+.section[data-position="left"] {
+	pointer-events: none;
+}

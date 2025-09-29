@@ -1,0 +1,76 @@
+/* * */
+/* ROOT */
+
+.root {
+    background-color: var(--color-system-background-100);
+}
+
+/* * */
+/* ITEM */
+
+.item {
+	border-top: 1px solid var(--color-system-border-100);
+	border-bottom: none;
+}
+
+/* * */
+/* CONTROL */
+
+.control {
+	padding: var(--size-spacing-20);
+	background-color: var(--color-system-background-100);
+	align-items: flex-start;
+	gap: var(--size-spacing-15);
+}
+
+@media (max-width: 500px) {
+	.control {
+		padding: var(--size-spacing-20) var(--size-spacing-15);
+	}
+}
+
+/* * */
+/* CHEVRON */
+
+.chevron {
+	padding-top: 1px;
+	color: var(--color-system-text-400);
+}
+
+.item[data-active=true] .chevron {
+	transform: rotate(-90deg);
+}
+
+/* * */
+/* LABEL */
+
+.label {
+	color: var(--color-system-text-100);
+    font-size: var(--font-size-nav);
+    font-weight: var(--font-weight-nav);
+	margin-top: 2px;
+    padding: 0;
+}
+
+/* * */
+/* ICON */
+
+.icon {
+	margin: 0;
+	margin-top: 3px;
+}
+
+/* * */
+/* CONTENT */
+
+.content {
+	padding: var(--size-spacing-20);
+	padding-top: 0;
+}
+
+@media (max-width: 500px) {
+	.content {
+		padding: var(--size-spacing-20) var(--size-spacing-15);
+		padding-top: 0;
+	}
+}

@@ -1,0 +1,95 @@
+/* * */
+/* CONTAINER */
+
+.container {
+	display: flex;
+	flex-direction: column;
+
+}
+
+/* * */
+/* STOP NAME */
+
+.stopName{
+	display: flex;
+	flex-direction: row;
+	gap: var(--size-spacing-5);
+	justify-content: baseline;
+	max-width: 400px;
+	font-size: 15px;
+	font-weight: var(--font-weight-bold);
+    color: var(--color-system-text-100);
+}
+
+.stopNameUrl {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	color: var(--color-system-text-200);
+}
+
+/* * */
+/* SUB-HEADER WRAPPER */
+
+.subHeaderWrapper {
+	display: flex;
+	flex-direction: row;
+	align-items: baseline;
+}
+
+/* * */
+/* STOP LOCATION */
+
+.stopLocation{
+	font-size: 14px;
+	font-weight: var(--font-weight-semibold);
+	vertical-align: text-bottom;
+    color: var(--color-system-text-300);
+}
+
+/* * */
+/* STOP ID */
+
+.stopId {
+	margin-left: var(--size-spacing-10);
+	font-size: 12px;
+	font-weight: var(--font-weight-semibold);
+	color: var(--color-system-text-400);
+	transform: translate(0, 1px);
+	transition: all 200ms ease;
+}
+
+.isSelected .stopId:hover {
+	color: var(--color-system-text-200);
+	cursor: pointer;
+}
+
+.stopIdCopyIcon {
+	width: 11px;
+	height: 11px;
+	margin-bottom: 2px;
+	margin-left: 3px;
+	vertical-align: text-bottom;
+	color: transparent;
+	transition: all 200ms ease;
+}
+
+.isSelected .stopId:hover .stopIdCopyIcon {
+	color: var(--color-system-text-200);
+}
+
+.isSelected .stopId.isCopied,
+.isSelected .stopId.isCopied .stopIdCopyIcon {
+	color: var(--color-status-ok-text);
+}
+
+
+/* * */
+/* FACILITIES WRAPPER */
+
+.facilitiesWrapper {
+	display:flex;
+	flex-direction: row;
+    gap: var(--size-spacing-10);
+    margin-top: var(--size-spacing-5);
+}
