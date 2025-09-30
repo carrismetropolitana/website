@@ -20,9 +20,16 @@
 	display: flex;
 	width: 100%;
 	padding: var(--size-spacing-15);
-	font-size: 15px;
 	font-weight: 700;
 	line-height: 1;
 	color: var(--color-system-text-100);
 	background-color: var(--color-system-background-300);
+}
+
+.stopName.md {
+	font-size: 16px;
+}
+
+.stopName.lg {
+	font-size: 22px;
 }

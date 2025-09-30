@@ -61,6 +61,13 @@
 	"NewsCard": {
 		"publish_date": "{publishDate, date, long}"
 	},
+	"Pips": {
+		"copy_url": "Copiar URL",
+		"go_to_pips": "Ir para Pips",
+		"max_lines": "Selecionar máximo de linhas",
+		"section_heading": "Configurar URL Pips",
+		"url_copied": "URL copiado"
+	},
 	"SelectLine": {
 		"label": "Procurar linha por número, nome, localidade...",
 		"nothing_found": "Nenhum Resultado Encontrado",

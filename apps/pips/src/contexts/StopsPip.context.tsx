@@ -4,7 +4,7 @@
 
 import { useStopsContext } from '@/contexts/Stops.context';
 import { type Stop } from '@carrismetropolitana/api-types/network';
-import { useSearchParams } from 'next/navigation';
+import { usePathname, useSearchParams } from 'next/navigation';
 import { createContext, useContext, useEffect, useMemo, useState } from 'react';
 
 /* * */
@@ -15,6 +15,9 @@ interface StopsPipContextState {
 	}
 	filters: {
 		max_lines: number
+	}
+	flags: {
+		is_loading: boolean
 	}
 }
 
@@ -41,6 +44,11 @@ export const StopsPipContextProvider = ({ children }) => {
 	const stopsContext = useStopsContext();
 
 	const searchParams = useSearchParams();
+	const pathname = usePathname();
+
+	const [dataStopsState, setDataStopsState] = useState<Stop[]>([]);
+	const [stopsLoading, setStopsLoading] = useState(true);
+
 	const stopIds = useMemo(() => {
 		const raw = searchParams.get('stop_ids');
 		return raw ? raw.split(',') : [];
@@ -52,36 +60,48 @@ export const StopsPipContextProvider = ({ children }) => {
 		parseInt(searchParams.get('max_stops')) || undefined,
 	[searchParams]);
 
-	const [dataStopsState, setDataStopsState] = useState<Stop[]>([]);
-
 	//
-	// B. Fetch data
+	// B. Transform data
 
 	/**
 	 * Populate stopsData state when stopIds change.
 	 * Use data from stopsContext to avoid fetching the same data twice.
 	 */
 	useEffect(() => {
-		if (!stopIds.length || !stopsContext.data.stops?.length) return;
+		if (stopsContext.flags.is_loading) return;
 
-		const foundStops = stopIds
-			.map(id => stopsContext.actions.getStopById(id))
-			.filter((stop): stop is Stop => !!stop) // filter out undefined/null
-			.slice(0, maxStops); // Maybe this doesn't make sense since we can restrict that in stop_ids !
+		setStopsLoading(true);
 
-		setDataStopsState(foundStops);
-
-		// Optional: handle case where some stops were missing
-		const missingIds = stopIds.filter(id =>
-			!stopsContext.actions.getStopById(id),
-		);
-		if (missingIds.length > 0) {
-			console.warn(`Missing stop IDs: ${missingIds.join(', ')}`);
+		if (!stopIds.length || !stopsContext.data.stops?.length) {
+			setDataStopsState([]);
+			setStopsLoading(false);
+			return;
 		}
+
+		Promise.resolve().then(() => {
+			const foundStops = stopIds
+				.map(id => stopsContext.actions.getStopById(id))
+				.filter((stop): stop is Stop => !!stop)
+				.slice(0, maxStops);
+
+			setDataStopsState(foundStops);
+			setStopsLoading(false);
+
+			const missingIds = stopIds.filter(id => !stopsContext.actions.getStopById(id));
+			if (missingIds.length > 0) {
+				console.warn(`Missing stop IDs: ${missingIds.join(', ')}`);
+			}
+		});
 	}, [stopIds, stopsContext.data.stops]);
 
 	//
 	// C. Handle actions
+
+	useEffect(() => {
+		if (pathname === '/' && searchParams.toString() === '') {
+			setDataStopsState([]);
+		}
+	}, [pathname, searchParams]);
 
 	//
 	// D. Define context value
@@ -92,6 +112,9 @@ export const StopsPipContextProvider = ({ children }) => {
 		},
 		filters: {
 			max_lines: maxLines,
+		},
+		flags: {
+			is_loading: stopsLoading,
 		},
 	};
 

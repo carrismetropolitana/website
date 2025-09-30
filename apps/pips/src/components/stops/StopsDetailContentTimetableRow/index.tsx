@@ -11,12 +11,13 @@ import styles from './styles.module.css';
 
 interface Props {
 	arrivalData: Arrival
+	size?: 'lg' | 'md'
 	status: ArrivalStatus
 }
 
 /* * */
 
-export function StopsDetailContentTimetableRow({ arrivalData, status }: Props) {
+export function StopsDetailContentTimetableRow({ arrivalData, size, status }: Props) {
 	//
 
 	//
@@ -48,10 +49,12 @@ export function StopsDetailContentTimetableRow({ arrivalData, status }: Props) {
 					color={thisPattern.color}
 					longName={thisPattern.headsign}
 					shortName={thisPattern.line_id}
+					size={size}
 					textColor={thisPattern.text_color}
 				/>
 				<NextArrivals
 					arrivals={[arrivalData.estimated_arrival_unix || arrivalData.scheduled_arrival_unix]}
+					size={size}
 					status={status}
 					withIcon={true}
 				/>

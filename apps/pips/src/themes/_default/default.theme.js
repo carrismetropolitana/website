@@ -27,6 +27,7 @@ import AccordionOverride from '@/themes/_default/overrides/Accordion.module.css'
 import ButtonOverride from '@/themes/_default/overrides/Button.module.css';
 import DatePickerInputOverride from '@/themes/_default/overrides/DatePickerInput.module.css';
 import MultiSelectOverride from '@/themes/_default/overrides/MultiSelect.module.css';
+import NumberInputOverride from '@/themes/_default/overrides/NumberInput.module.css';
 import SegmentedControlOverride from '@/themes/_default/overrides/SegmentedControl.module.css';
 import SelectOverride from '@/themes/_default/overrides/Select.module.css';
 import SkeletonOverride from '@/themes/_default/overrides/Skeleton.module.css';
@@ -104,6 +105,24 @@ export default createTheme({
 				};
 				return defaultClasses;
 			} }),
+
+		NumberInput: TextInput.extend({
+			classNames: (_, props) => {
+				let defaultClasses = {
+					controls: NumberInputOverride.controls,
+					input: NumberInputOverride.input,
+					section: NumberInputOverride.section,
+					wrapper: NumberInputOverride.wrapper,
+				};
+				if (props.size === 'sm') {
+					defaultClasses = combineClasses(defaultClasses, [NumberInputOverride.sizeSm]);
+				}
+				if (props.variant === 'white') {
+					defaultClasses = combineClasses(defaultClasses, [NumberInputOverride.variantWhite]);
+				}
+				return defaultClasses;
+			},
+		}),
 
 		SegmentedControl: SegmentedControl.extend({
 			classNames: (_, props) => {

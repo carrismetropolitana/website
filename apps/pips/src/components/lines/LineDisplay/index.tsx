@@ -29,7 +29,7 @@ export function LineDisplay({ color, lineData, longName, shortName, size = 'md',
 		return (
 			<div className={styles.container}>
 				<LineBadge color={lineData.color} shortName={lineData.short_name} size={size} textColor={lineData.text_color} />
-				<LineName longName={lineData.long_name} />
+				<LineName longName={lineData.long_name} size={size} />
 			</div>
 		);
 	}
@@ -38,7 +38,7 @@ export function LineDisplay({ color, lineData, longName, shortName, size = 'md',
 		return (
 			<div className={styles.container}>
 				<LineBadge color={color} shortName={shortName} size={size} textColor={textColor} />
-				<LineName longName={longName} />
+				<LineName longName={longName} size={size} />
 			</div>
 		);
 	}

@@ -8,7 +8,7 @@ import styles from './styles.module.css';
 
 /* * */
 
-export function StopsDetailContentTimetable() {
+export function StopsDetailContentTimetable({ size }) {
 	//
 
 	//
@@ -27,7 +27,7 @@ export function StopsDetailContentTimetable() {
 
 	return (
 		<div className={styles.container}>
-			<StopsDetailContentTimetableRealtime />
+			<StopsDetailContentTimetableRealtime size={size} />
 		</div>
 	);
 

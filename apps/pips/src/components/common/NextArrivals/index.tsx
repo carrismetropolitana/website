@@ -4,6 +4,7 @@ import type { ArrivalStatus } from '@/types/stops.types';
 
 import { LiveIcon } from '@/components/common/LiveIcon';
 import { IconAlertCircleFilled, IconClockHour9 } from '@tabler/icons-react';
+import classNames from 'classnames/bind';
 import { DateTime } from 'luxon';
 import { useTranslations } from 'next-intl';
 import { useEffect, useState } from 'react';
@@ -23,13 +24,18 @@ interface NextArrival {
 interface Props {
 	allowPastArrivals?: boolean
 	arrivals: number[]
+	size?: 'lg' | 'md'
 	status: ArrivalStatus
 	withIcon?: boolean
 }
 
 /* * */
 
-export function NextArrivals({ allowPastArrivals = true, arrivals, status, withIcon = true }: Props) {
+const cx = classNames.bind(styles);
+
+/* * */
+
+export function NextArrivals({ allowPastArrivals = true, arrivals, size, status, withIcon = true }: Props) {
 	//
 
 	//
@@ -127,7 +133,7 @@ export function NextArrivals({ allowPastArrivals = true, arrivals, status, withI
 				)}
 				<div className={styles.list}>
 					{allFormattedArrivals.map(formattedArrival => (
-						<p key={formattedArrival.estimated_arrival_unix} className={styles.arrival}>
+						<p key={formattedArrival.estimated_arrival_unix} className={cx({ arrival: true, lg: size === 'lg', md: size === 'md' })}>
 							{formattedArrival.label}
 						</p>
 					))}
@@ -146,7 +152,7 @@ export function NextArrivals({ allowPastArrivals = true, arrivals, status, withI
 				)}
 				<div className={styles.list}>
 					{allFormattedArrivals.map(formattedArrival => (
-						<p key={formattedArrival.estimated_arrival_unix} className={styles.arrival}>
+						<p key={formattedArrival.estimated_arrival_unix} className={cx({ arrival: true, lg: size === 'lg', md: size === 'md' })}>
 							{formattedArrival.label}
 						</p>
 					))}
@@ -160,7 +166,7 @@ export function NextArrivals({ allowPastArrivals = true, arrivals, status, withI
 			<div className={`${styles.container} ${styles.passed}`}>
 				<div className={styles.list}>
 					{allFormattedArrivals.map(formattedArrival => (
-						<p key={formattedArrival.estimated_arrival_unix} className={styles.arrival}>
+						<p key={formattedArrival.estimated_arrival_unix} className={cx({ arrival: true, lg: size === 'lg', md: size === 'md' })}>
 							{formattedArrival.label}
 						</p>
 					))}
@@ -179,7 +185,7 @@ export function NextArrivals({ allowPastArrivals = true, arrivals, status, withI
 				)}
 				<div className={styles.list}>
 					{allFormattedArrivals.map(formattedArrival => (
-						<p key={formattedArrival.estimated_arrival_unix} className={styles.arrival}>
+						<p key={formattedArrival.estimated_arrival_unix} className={cx({ arrival: true, lg: size === 'lg', md: size === 'md' })}>
 							{formattedArrival.label}
 						</p>
 					))}
