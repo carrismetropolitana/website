@@ -78,7 +78,7 @@ export function SelectStops({
 			data={filteredStops}
 			label={label}
 			leftSection={<IconBusStop size={16} />}
-			nothingFoundMessage={nothingFound || t('nothingFound')}
+			nothingFoundMessage={nothingFound || t('nothing_found')}
 			onChange={onSelectStopIds}
 			onSearchChange={setSearchQuery}
 			placeholder={placeholder || t('placeholder')}
