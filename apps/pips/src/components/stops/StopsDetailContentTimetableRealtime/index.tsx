@@ -7,7 +7,7 @@ import { useTranslations } from 'next-intl';
 
 /* * */
 
-export function StopsDetailContentTimetableRealtime() {
+export function StopsDetailContentTimetableRealtime({ size }) {
 	//
 
 	//
@@ -34,6 +34,7 @@ export function StopsDetailContentTimetableRealtime() {
 						<StopsDetailContentTimetableRow
 							key={`${tripData.trip_id}-${tripData.stop_sequence}`}
 							arrivalData={tripData}
+							size={size}
 							status={tripData.estimated_arrival_unix ? 'realtime' : 'scheduled'}
 						/>
 					))}

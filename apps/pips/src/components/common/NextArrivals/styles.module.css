@@ -42,9 +42,16 @@
 /* ARRIVAL */
 
 .arrival {
-	font-size: 16px;
 	line-height: 1.1;
 	text-wrap: nowrap;
+}
+
+.arrival.md {
+	font-size: 16px;
+}
+
+.arrival.lg {
+	font-size: 22px;
 }
 
 .realtime .arrival {

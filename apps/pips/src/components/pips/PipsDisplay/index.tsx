@@ -4,7 +4,7 @@ import { StopsDetailContent } from '@/components/stops/StopsDetailContent';
 import { StopsDetailContextProvider } from '@/contexts/StopsDetail.context';
 import { useStopsPipContext } from '@/contexts/StopsPip.context';
 
-export function Pip() {
+export function PipsDisplay() {
 	const stopsPipContext = useStopsPipContext();
 
 	return (
@@ -12,7 +12,7 @@ export function Pip() {
 			{stopsPipContext.data.stops.map(stop =>
 				(
 					<StopsDetailContextProvider key={stop.id} maxLines={stopsPipContext.filters.max_lines} stopId={stop.id}>
-						<StopsDetailContent stopName={stop.long_name} />
+						<StopsDetailContent size="lg" stopName={stop.long_name} />
 					</StopsDetailContextProvider>
 				),
 			)}
