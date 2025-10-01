@@ -3,6 +3,7 @@ import { Surface } from '@/components/layout/Surface';
 import { LineDisplay } from '@/components/lines/LineDisplay';
 import { useLinesContext } from '@/contexts/Lines.context';
 import { Accordion, Text } from '@mantine/core';
+import { IconArrowNarrowRight } from '@tabler/icons-react';
 import { useTranslations } from 'next-intl';
 import { useState } from 'react';
 
@@ -160,13 +161,11 @@ export function ArrabidaWay() {
 																key={lineIndex}
 																className={styles.lineItem}
 																onClick={() => handleLineClick(lineId)}
-																style={{
-																	borderRadius: '8px',
-																	cursor: 'pointer',
-																	paddingBlock: '8px',
-																}}
 															>
 																<LineDisplay lineData={lineData} />
+																<div className={styles.arrowWrapper}>
+																	<IconArrowNarrowRight size={20} />
+																</div>
 															</div>
 														);
 													})}

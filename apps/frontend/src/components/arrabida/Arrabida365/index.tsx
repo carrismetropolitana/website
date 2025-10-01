@@ -1,7 +1,5 @@
 /* * */
 
-import Arrabida365Image from '@/../public/assets/arrabidas/arrabida_365.png';
-import Arrabida365MapImage from '@/../public/assets/arrabidas/arrabida_365_map.png';
 import { Section } from '@/components/layout/Section';
 import { Surface } from '@/components/layout/Surface';
 import { IconArrowLeft, IconArrowRight } from '@tabler/icons-react';
@@ -43,7 +41,7 @@ export function Arrabida365() {
 							alt="Imagem ilustrativa do projeto da Arrábida 365."
 							className={styles.imageMap}
 							height={1080}
-							src={Arrabida365MapImage}
+							src="/assets/arrabidas/arrabida_365_map.png"
 							width={1920}
 						/>
 						<div className={styles.imageBeeWrapper}>
@@ -55,7 +53,7 @@ export function Arrabida365() {
 								alt="Notícia em destaque “Setúbal, Arrábida: O Início da Época Balnear”"
 								className={styles.imageBee}
 								height={1080}
-								src={Arrabida365Image}
+								src="/assets/arrabidas/banner_setubal_arrabida.png"
 								width={1920}
 							/>
 						</div>

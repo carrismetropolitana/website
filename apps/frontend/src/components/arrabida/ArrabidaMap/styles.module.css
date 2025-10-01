@@ -100,7 +100,7 @@
 
 .pinScale[data-is-selected="true"]{
   transform: scale(1.05) translateY(-30px) translateX(-50px);
-  filter: drop-shadow(2px 2px 40px rgb(255, 123, 0));
+  filter: drop-shadow(2px 2px 40px rgb(0, 255, 34));
 }
 
 .pinScaleCreiro{
@@ -115,7 +115,7 @@
 
 .pinScaleCreiro[data-is-selected="true"]{
   transform: scale(1.05) translateY(-50px) translateX(-20px);
-  filter: drop-shadow(2px 2px 40px rgb(255, 123, 0));
+  filter: drop-shadow(2px 2px 40px rgb(0, 255, 34));
 }
 
 .pinScaleGalapos{
@@ -130,5 +130,5 @@
 
 .pinScaleGalapos[data-is-selected="true"]{
   transform: scale(1.05) translateY(-40px) translateX(-20px);
-  filter: drop-shadow(2px 2px 40px rgb(255, 123, 0));
+  filter: drop-shadow(2px 2px 40px rgb(1, 120, 255));
 }
