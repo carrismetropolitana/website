@@ -50,8 +50,26 @@ export function PipsConfig() {
 
 	const isButtonDisabled = useMemo(() => selectedStopIds.length === 0, [selectedStopIds]);
 
+	const parsedStops = useMemo(() => {
+		return stopsContext.data.stops.map(stop => ({
+			label: stop.long_name,
+			value: stop.id,
+		}));
+	}, [stopsContext.data.stops]);
+
 	//
-	// C. Render components
+	// C. Handle actions
+
+	const handleSelectStopIds = (ids: string[]) => {
+		setSelectedStopIds(ids);
+	};
+
+	const handleChangeMaxLines = (maxLines: number) => {
+		setMaxLines(maxLines);
+	};
+
+	//
+	// D. Render components
 
 	if (stopsPipContext.flags.is_loading) {
 		return (
@@ -68,8 +86,8 @@ export function PipsConfig() {
 
 				<div className={styles.filtersWrapper}>
 					<div className={styles.inputsWrapper}>
-						<SelectStops data={stopsContext.data.stops} onSelectStopIds={setSelectedStopIds} selectedStopIds={selectedStopIds} variant="white" />
-						<SelectMaxLines maxLines={maxLines} onChangeMaxLines={setMaxLines} />
+						<SelectStops data={parsedStops} onSelectStopIds={handleSelectStopIds} selectedStopIds={selectedStopIds} variant="white" />
+						<SelectMaxLines maxLines={maxLines} onChangeMaxLines={handleChangeMaxLines} />
 
 						<div className={styles.buttonsWrapper}>
 							<Button component={Link} disabled={isButtonDisabled} href={constructedUrl} variant="primary">{t('go_to_pips')}</Button>
