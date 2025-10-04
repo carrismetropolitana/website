@@ -1,0 +1,247 @@
+.pressLabelSectionWrapper {
+    display: flex;
+    padding: 30px 20px;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 24px;
+    border: 1px solid var(--color-system-border-200);
+    background-color: var(--color-system-background-100);
+
+    @media screen and (max-width: 40rem) {
+       border: none;
+       padding-bottom: 0px;
+    }
+
+    @media screen and (min-width: 40rem) {
+        border-radius: 18px;
+    }
+}
+
+.pressLabelSectionHeader {
+    width: 100%;    
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 23px;
+    align-self: stretch;
+}
+
+.pressLabelSectionHeader h1 {
+    font-family: "Inter";
+    font-size: 26px;
+    font-style: normal;
+    font-weight: 700;
+}
+
+.pressLabelSectionCards {
+    display: none;
+}
+
+.pressLabelSectionCardsGrid {
+    display: grid;
+    gap: 24px;
+    width: 100%;
+
+    @media screen and (min-width: 48rem) {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+/* Mobile Cards Styles */
+.pressLabelSectionMobileCards {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+
+.pressLabelSectionMobileCard {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 16px 0;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+
+    &:hover {
+        background-color: var(--color-system-background-200);
+    }
+
+    & [data-slot="mobile-card-content"] {
+        display: flex;
+        align-items: center;
+        gap: 16px;
+        flex: 1;
+    }
+
+    & [data-slot="mobile-card-icon"] {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 48px;
+        height: 48px;
+        flex-shrink: 0;
+
+        & svg {
+            width: 40px;
+            height: 40px;
+        }
+    }
+
+    & [data-slot="mobile-card-info"] {
+        flex: 1;
+    }
+
+    & [data-slot="mobile-card-title"] {
+        font-size: 16px;
+        font-weight: 600;
+        margin: 0;
+        color: var(--color-system-text-100);
+    }
+
+    & [data-slot="mobile-card-action"] {
+        display: flex;
+        align-items: center;
+        color: var(--color-system-text-300);
+    }
+}
+
+.pressLabelSectionMobileSeparator {
+    height: 1px;
+    background-color: var(--color-system-border-200);
+    width: 100vw;
+    margin-left: -20px;
+    margin-right: -20px;
+}
+
+.pressLabelSectionCard {
+    position: relative;
+    display: grid;
+    gap: 22px;
+    border-radius: 18px;
+    border: 1px solid var(--color-system-border-200);
+    padding: 26px 28px 0px 28px;
+    overflow: hidden;
+    background-color: var(--color-system-background-100);
+
+    &[data-variant="default"] {
+        grid-template-columns: 85px 1fr;
+    }
+
+    &[data-variant="contact"] {
+        grid-template-areas: "left content right";
+        grid-template-columns: min-content 1fr min-content;
+        padding-inline: 0px;
+        padding-block-start: 0px;
+
+        & [data-slot="card-image-left"] {
+            align-self: flex-end;
+            justify-self: flex-start;
+            display: flex;
+            grid-area: left;
+        }
+
+        & [data-slot="card-image-right"] {
+            align-self: flex-start;
+            justify-self: flex-end;
+            display: flex;
+            grid-area: right;
+        }
+
+        & [data-slot="card-content"] {
+            padding-block-start: 26px;
+            grid-area: content;
+        }
+    }
+
+    & [data-slot="card-header"] {
+        display: grid;
+        gap: 12px;
+    }
+
+    & [data-slot="card-title"] {
+        font-size: 18px;
+        font-weight: 600;
+    }
+
+    & [data-slot="card-description"] {
+        font-size: 14px;
+        font-weight: 500;
+        display: -webkit-box;
+        -webkit-line-clamp: 3;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+    }
+
+    & [data-slot="card-footer"] {
+        margin-block-start: 20px;
+    }
+
+    & [data-slot="card-button"] {
+        all: unset;
+        display: flex;
+        align-items: center;
+        width: 100%;
+        max-width: 320px;
+        padding: 20px 18px;
+        gap: 20px;
+        cursor: pointer;
+        transition: all 300ms ease;
+        border: none;
+        border-top: 1px solid var(--color-system-border-200);
+        
+        font-weight: 600;
+
+        &:hover {
+            color: var(--color-system-text-200);
+        }
+    }
+
+    @media screen and (max-width: 48rem) {
+        &:last-child {
+            display: none;
+        }
+    }
+}
+
+
+
+.pressLabelSectionExpandableContent {
+    overflow: hidden;
+    transition: max-height 0.3s ease-in-out, opacity 0.3s ease-in-out;
+}
+
+.pressLabelSectionExpandableContent[data-expanded="false"] {
+    max-height: 0;
+    opacity: 0;
+    margin-top: -23px;
+}
+
+.pressLabelSectionExpandableContent[data-expanded="true"] {
+    max-height: 500px;
+    opacity: 1;
+    margin-top: 0;
+    margin-bottom: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 23px;
+}
+
+.pressLabelSectionButton {
+    transition: transform 0.2s ease-in-out;
+    
+    & svg {
+        transition: transform 0.3s ease-in-out;
+    }
+}
+
+.pressLabelSectionButton:hover {
+    transform: translateY(-1px);
+}
+
+.pressLabelSectionButton[data-expanded="true"] svg {
+    transform: rotate(180deg);
+}
+
+.pressLabelSectionButtonText {
+    transition: all 0.2s ease-in-out;
+}

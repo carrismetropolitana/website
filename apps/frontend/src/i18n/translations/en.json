@@ -661,6 +661,16 @@
 			"section_heading": "News"
 		},
 		"PressContact": {
+			"errors": {
+				"email_invalid": "Please enter a valid email address.",
+				"email_required": "Please fill in your email.",
+				"message_required": "Please write a message.",
+				"name_required": "Please fill in your name.",
+				"organization_required": "Please fill in the organization.",
+				"phone_invalid": "Please enter a valid phone number (9 digits).",
+				"subject_required": "Please fill in the subject.",
+				"surname_required": "Please fill in your surname."
+			},
 			"form": {
 				"email": "Email",
 				"file": "Upload File",
@@ -670,10 +680,19 @@
 				"phone": "Phone",
 				"placeholderFile": "Choose Files",
 				"send": "Send",
+				"sending": "Sending...",
 				"subject": "Subject",
-				"surname": "Nickname"
+				"surname": "Surname"
 			},
-			"section_heading": "Contact"
+			"section_heading": "Contact",
+			"toast": {
+				"error_generic": "Please try again later.",
+				"error_title": "Error sending message",
+				"success_message": "We have received your message and will contact you shortly.",
+				"success_title": "Message sent successfully!",
+				"validation_error_message": "Please correct the errors in the form.",
+				"validation_error_title": "Validation Error"
+			}
 		},
 		"PressFaqSection": {
 			"faqs": {

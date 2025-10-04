@@ -11,6 +11,7 @@ import sharp from 'sharp';
 /* * */
 
 import { CaseStudies } from '@/schemas/CaseStudies/collection';
+import { KnowledgeBase } from '@/schemas/KnowledgeBase/collection';
 import { Media } from '@/schemas/Media/collection';
 import { News } from '@/schemas/News/collection';
 import { Notes } from '@/schemas/Notes/collection';
@@ -30,6 +31,7 @@ export default buildConfig({
 
 	collections: [
 		CaseStudies,
+		KnowledgeBase,
 		Media,
 		News,
 		Notes,
