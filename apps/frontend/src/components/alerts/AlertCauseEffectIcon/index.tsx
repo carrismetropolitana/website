@@ -2,7 +2,6 @@
 
 import type { AlertCause, AlertEffect } from '@/types/alerts.types';
 
-import { getCauseSeverityLevel, getEffectSeverityLevel } from '@/utils/alerts';
 import { IconAccessible, IconAmbulance, IconArrowBigUpLines, IconBarrierBlock, IconCalendarEvent, IconCarCrash, IconCircleArrowDown, IconCircleMinus, IconClock2, IconClockExclamation, IconCloudStorm, IconInfoTriangle, IconRouteAltRight, IconSpeakerphone, IconTool } from '@tabler/icons-react';
 import { useTranslations } from 'next-intl';
 
@@ -13,60 +12,74 @@ import styles from './styles.module.css';
 interface AlertCauseIconProps {
 	cause?: AlertCause
 	className?: string
-	size?: 'lg' | 'md'
 	withText?: boolean
 }
 
 interface AlertEffectIconProps {
 	className?: string
 	effect?: AlertEffect
-	size?: 'lg' | 'md'
 	withText?: boolean
 }
 
 /* * */
 
-export function AlertCauseIcon({ cause, className, size, withText = false }: AlertCauseIconProps) {
+export function AlertCauseIcon({ cause, className, withText = false }: AlertCauseIconProps) {
 	//
 
 	//
 	// A. Setup variables
 
 	const t = useTranslations('alerts.AlertCauseEffectIcon.cause');
-	const severityLevel = getCauseSeverityLevel(cause);
 
 	//
 	// B. Transform data
 
+	let severityLevel: number;
+	switch (cause) {
+		case 'ACCIDENT':
+		case 'DEMONSTRATION':
+		case 'MEDICAL_EMERGENCY':
+		case 'POLICE_ACTIVITY':
+		case 'STRIKE':
+		case 'TECHNICAL_PROBLEM':
+			severityLevel = 3;
+			break;
+		case 'HOLIDAY':
+			severityLevel = 0;
+			break;
+		default:
+			severityLevel = 2;
+			break;
+	}
+
 	let icon: React.ReactNode;
-	const iconSize = size === 'md' ? 20 : size === 'lg' ? 30 : 20;
 	switch (cause) {
 		case 'ACCIDENT':
 		case 'TECHNICAL_PROBLEM':
-			icon = <IconCarCrash className={styles[`severityLevel_${severityLevel}`]} size={iconSize} />;
+			icon = <IconCarCrash className={styles[`severityLevel_${severityLevel}`]} size={20} />;
 			break;
 		case 'CONSTRUCTION':
-			icon = <IconBarrierBlock className={styles[`severityLevel_${severityLevel}`]} size={iconSize} />;
+			icon = <IconBarrierBlock className={styles[`severityLevel_${severityLevel}`]} size={20} />;
 			break;
 		case 'DEMONSTRATION':
 		case 'STRIKE':
-			icon = <IconSpeakerphone className={styles[`severityLevel_${severityLevel}`]} size={iconSize} />;
+			icon = <IconSpeakerphone className={styles[`severityLevel_${severityLevel}`]} size={20} />;
 			break;
 		case 'HOLIDAY':
-			icon = <IconCalendarEvent className={styles[`severityLevel_${severityLevel}`]} size={iconSize} />;
+			icon = <IconCalendarEvent className={styles[`severityLevel_${severityLevel}`]} size={20} />;
 			break;
 		case 'MAINTENANCE':
-			icon = <IconTool className={styles[`severityLevel_${severityLevel}`]} size={iconSize} />;
+			icon = <IconTool className={styles[`severityLevel_${severityLevel}`]} size={20} />;
 			break;
 		case 'MEDICAL_EMERGENCY':
 		case 'POLICE_ACTIVITY':
-			icon = <IconAmbulance className={styles[`severityLevel_${severityLevel}`]} size={iconSize} />;
+			icon = <IconAmbulance className={styles[`severityLevel_${severityLevel}`]} size={20} />;
 			break;
 		case 'WEATHER':
-			icon = <IconCloudStorm className={styles[`severityLevel_${severityLevel}`]} size={iconSize} />;
+			icon = <IconCloudStorm className={styles[`severityLevel_${severityLevel}`]} size={20} />;
 			break;
 		default:
-			icon = <IconInfoTriangle className={styles[`severityLevel_${severityLevel}`]} size={iconSize} />;
+			icon = <IconInfoTriangle className={styles[`severityLevel_${severityLevel}`]} size={20} />;
 			break;
 	}
 
@@ -89,44 +102,60 @@ export function AlertCauseIcon({ cause, className, size, withText = false }: Ale
 
 /* * */
 
-export function AlertEffectIcon({ className, effect, size, withText = false }: AlertEffectIconProps) {
+export function AlertEffectIcon({ className, effect, withText = false }: AlertEffectIconProps) {
 	//
 
 	//
 	// A. Setup variables
 
 	const t = useTranslations('alerts.AlertCauseEffectIcon.effect');
-	const severityLevel = getEffectSeverityLevel(effect);
 
 	//
 	// B. Transform data
 
-	let icon: React.ReactNode;
-	const iconSize = size === 'md' ? 20 : size === 'lg' ? 30 : 20;
+	let severityLevel: number;
 	switch (effect) {
 		case 'ACCESSIBILITY_ISSUE':
-			icon = <IconAccessible className={styles[`severityLevel_${severityLevel}`]} size={iconSize} />;
+		case 'MODIFIED_SERVICE':
+			severityLevel = 0;
 			break;
 		case 'ADDITIONAL_SERVICE':
-			icon = <IconArrowBigUpLines className={styles[`severityLevel_${severityLevel}`]} size={iconSize} />;
-			break;
-		case 'DETOUR':
-			icon = <IconRouteAltRight className={styles[`severityLevel_${severityLevel}`]} size={iconSize} />;
-			break;
-		case 'MODIFIED_SERVICE':
-			icon = <IconClock2 className={styles[`severityLevel_${severityLevel}`]} size={iconSize} />;
+			severityLevel = 1;
 			break;
 		case 'NO_SERVICE':
-			icon = <IconCircleMinus className={styles[`severityLevel_${severityLevel}`]} size={iconSize} />;
-			break;
-		case 'REDUCED_SERVICE':
-			icon = <IconCircleArrowDown className={styles[`severityLevel_${severityLevel}`]} size={iconSize} />;
-			break;
 		case 'SIGNIFICANT_DELAYS':
-			icon = <IconClockExclamation className={styles[`severityLevel_${severityLevel}`]} size={iconSize} />;
+			severityLevel = 3;
 			break;
 		default:
-			icon = <IconInfoTriangle className={styles[`severityLevel_${severityLevel}`]} size={iconSize} />;
+			severityLevel = 2;
+			break;
+	}
+
+	let icon: React.ReactNode;
+	switch (effect) {
+		case 'ACCESSIBILITY_ISSUE':
+			icon = <IconAccessible className={styles[`severityLevel_${severityLevel}`]} size={20} />;
+			break;
+		case 'ADDITIONAL_SERVICE':
+			icon = <IconArrowBigUpLines className={styles[`severityLevel_${severityLevel}`]} size={20} />;
+			break;
+		case 'DETOUR':
+			icon = <IconRouteAltRight className={styles[`severityLevel_${severityLevel}`]} size={20} />;
+			break;
+		case 'MODIFIED_SERVICE':
+			icon = <IconClock2 className={styles[`severityLevel_${severityLevel}`]} size={20} />;
+			break;
+		case 'NO_SERVICE':
+			icon = <IconCircleMinus className={styles[`severityLevel_${severityLevel}`]} size={20} />;
+			break;
+		case 'REDUCED_SERVICE':
+			icon = <IconCircleArrowDown className={styles[`severityLevel_${severityLevel}`]} size={20} />;
+			break;
+		case 'SIGNIFICANT_DELAYS':
+			icon = <IconClockExclamation className={styles[`severityLevel_${severityLevel}`]} size={20} />;
+			break;
+		default:
+			icon = <IconInfoTriangle className={styles[`severityLevel_${severityLevel}`]} size={20} />;
 			break;
 	}
 
