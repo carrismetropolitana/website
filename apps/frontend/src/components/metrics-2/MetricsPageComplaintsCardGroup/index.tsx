@@ -1,6 +1,6 @@
 /* * */
 
-import { MetricsComplaintsPageCardGroupCard } from '@/components/metrics/MetricsPageComplaintsCardGroupCard';
+import { MetricsComplaintsPageCardGroupCard } from '@/components/metrics-2/MetricsPageComplaintsCardGroupCard';
 import { ComplaintMetrics } from '@carrismetropolitana/api-types/metrics';
 import { DateTime } from 'luxon';
 import { useMemo } from 'react';

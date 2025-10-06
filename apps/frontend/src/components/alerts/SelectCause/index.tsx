@@ -2,7 +2,7 @@
 
 /* * */
 
-import { AlertCauseIcon } from '@/components/alerts/AlertCauseEffectIcon';
+import { AlertCauseIcon } from '@/components/alerts/AlertCauseEffectIcon-2';
 // import { useDebugContext } from '@/contexts/Debug.context';
 import { AlertCause } from '@/types/alerts.types';
 import { Flex, Group, Select, SelectProps, Text } from '@mantine/core';

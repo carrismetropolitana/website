@@ -4,9 +4,9 @@
 
 import { Section } from '@/components/layout/Section';
 import { Surface } from '@/components/layout/Surface';
-import { MetricsPagePassengersDay } from '@/components/metrics/MetricsPagePassengersDay';
-import { MetricsPagePassengersMonth } from '@/components/metrics/MetricsPagePassengersMonth';
-import { MetricsPagePassengersYear } from '@/components/metrics/MetricsPagePassengersYear';
+import { MetricsPagePassengersDay } from '@/components/metrics-2/MetricsPagePassengersDay';
+import { MetricsPagePassengersMonth } from '@/components/metrics-2/MetricsPagePassengersMonth';
+import { MetricsPagePassengersYear } from '@/components/metrics-2/MetricsPagePassengersYear';
 import { SegmentedControl } from '@mantine/core';
 import { useTranslations } from 'next-intl';
 import { useState } from 'react';

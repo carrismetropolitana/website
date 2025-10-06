@@ -3,7 +3,7 @@
 /* * */
 
 import { AlertActivePeriodEnd, AlertActivePeriodStart } from '@/components/alerts/AlertActivePeriod';
-import { AlertEffectIcon } from '@/components/alerts/AlertCauseEffectIcon';
+import { AlertEffectIcon } from '@/components/alerts/AlertCauseEffectIcon-2';
 import AlertsListItemImageThumbnail from '@/components/alerts/AlertsListItemImageThumbnail';
 import Button from '@/components/common/Button';
 import { useAlertsContext } from '@/contexts/Alerts.context';
