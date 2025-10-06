@@ -183,16 +183,27 @@
 			},
 			"effect": {
 				"ACCESSIBILITY_ISSUE": "Impacto na Acessibilidade",
+				"ACCESSIBILITY_ISSUE_PLURAL": "Impactos na Acessibilidade",
 				"ADDITIONAL_SERVICE": "Aumento de Serviço",
+				"ADDITIONAL_SERVICE_PLURAL": "Aumentos de Serviço",
 				"DETOUR": "Desvio",
+				"DETOUR_PLURAL": "Desvios",
 				"MODIFIED_SERVICE": "Alteração de Horários",
+				"MODIFIED_SERVICE_PLURAL": "Alteração de Horários",
 				"NO_EFFECT": "Outro",
+				"NO_EFFECT_PLURAL": "Outros",
 				"NO_SERVICE": "Serviço Cancelado",
+				"NO_SERVICE_PLURAL": "Serviços Cancelados",
 				"OTHER_EFFECT": "Outro",
+				"OTHER_EFFECT_PLURAL": "Outros",
 				"REDUCED_SERVICE": "Serviço Reduzido",
+				"REDUCED_SERVICE_PLURAL": "Serviços Reduzidos",
 				"SIGNIFICANT_DELAYS": "Atrasos Significativos",
+				"SIGNIFICANT_DELAYS_PLURAL": "Atrasos Significativos",
 				"STOP_MOVED": "Paragem Deslocada",
-				"UNKNOWN_EFFECT": "Outro"
+				"STOP_MOVED_PLURAL": "Paragens Deslocadas",
+				"UNKNOWN_EFFECT": "Outro",
+				"UNKNOWN_EFFECT_PLURAL": "Outros"
 			}
 		},
 		"AlertsDetail": {
@@ -1033,6 +1044,10 @@
 			"heading": "Sobre os dados abertos",
 			"text1": "A Carris Metropolitana possui uma <b>política de dados abertos</b>, com o objetivo de promover a transparência e a proximidade com os seus passageiros, divulgando publicamente informação relativa à sua operação.",
 			"title1": "Dados Abertos"
+		},
+		"MetricsPageAlerts": {
+			"heading": "Disrupções",
+			"subheading": "Disrupções planeadas e o seu impacto no serviço e nos passageiros"
 		},
 		"MetricsPageComplaints": {
 			"heading": "Contactos",
