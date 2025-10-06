@@ -269,17 +269,50 @@
 		}
 	},
 	"app": {
+		"AppDeleteAccount": {
+			"actions": {
+				"submit": "Delete Account"
+			},
+			"fields": {
+				"device_id": {
+					"label": "Device ID",
+					"placeholder": "Enter your device ID"
+				},
+				"email": {
+					"label": "Email Address",
+					"placeholder": "Enter your email address"
+				},
+				"phone": {
+					"label": "Phone Number",
+					"placeholder": "Enter your phone number"
+				}
+			},
+			"heading": "Delete Account",
+			"result": {
+				"error": {
+					"message": "An error occurred while processing your request. Please contact us or try again later."
+				},
+				"not_found": {
+					"message": "No account found for the provided email address or phone number or device ID."
+				},
+				"success": {
+					"message": "Your account has been successfully deleted."
+				}
+			},
+			"separator": "or",
+			"subheading": "Delete your account associated with an email address or phone number. For any questions, please contact us. All accounts that have not been used for more than 90 days will be automatically deleted."
+		},
 		"AppDownloadBeta": {
 			"android": "Android",
 			"heading": "Beta: App CMetropolitana",
 			"iphone": "Apple iPhone",
-			"subheading": "Faça o download da versão beta da app Carris Metropolitana para iOS ou Android, e contribua para o futuro desta aplicação."
+			"subheading": "Download the beta version of the Carris Metropolitana app for iOS or Android and contribute to the future of this application."
 		},
 		"AppDownloadProduction": {
 			"android": "Android",
-			"heading": "App CMetropolitana",
+			"heading": "CMetropolitana App",
 			"iphone": "Apple iPhone",
-			"subheading": "Faça o download da app Carris Metropolitana para iOS ou Android."
+			"subheading": "Download Carris Metropolitana app for iOS or Android."
 		},
 		"AppStartupMessageDefault": {
 			"actions": {

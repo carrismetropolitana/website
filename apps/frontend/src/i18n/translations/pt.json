@@ -269,6 +269,39 @@
 		}
 	},
 	"app": {
+		"AppDeleteAccount": {
+			"actions": {
+				"submit": "Eliminar Conta"
+			},
+			"fields": {
+				"device_id": {
+					"label": "Device ID",
+					"placeholder": "Introduza o seu Device ID"
+				},
+				"email": {
+					"label": "Endereço de Email",
+					"placeholder": "Introduza o seu endereço de email"
+				},
+				"phone": {
+					"label": "Número de Telefone",
+					"placeholder": "Introduza o seu número de telefone"
+				}
+			},
+			"heading": "Eliminar Conta",
+			"result": {
+				"error": {
+					"message": "An error occurred while processing your request. Please contact us or try again later."
+				},
+				"not_found": {
+					"message": "No account found for the provided email address or phone number or device ID."
+				},
+				"success": {
+					"message": "Your account has been successfully deleted."
+				}
+			},
+			"separator": "ou",
+			"subheading": "Eliminar a sua conta associada a um endereço de email ou número de telefone. Para qualquer dúvida, por favor contacte-nos. Todas as contas que não tenham sido utilizadas durante mais de 90 dias serão automaticamente eliminadas."
+		},
 		"AppDownloadBeta": {
 			"android": "Android",
 			"heading": "Beta: App CMetropolitana",
