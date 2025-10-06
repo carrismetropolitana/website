@@ -19,7 +19,7 @@ interface PressKnowledgeBaseDetailProps {
 
 export function PressKnowledgeBaseDetail({ slug }: PressKnowledgeBaseDetailProps) {
 	const router = useRouter();
-	const t = useTranslations('home.PressKnowledgeBase');
+	const t = useTranslations('press.KnowledgeBase');
 
 	// Fetch knowledge base item data
 	const { data: item, error, isLoading } = useSWR<KnowledgeBase>(`/admin/public-api/knowledge-base/${slug}`);
@@ -161,4 +161,3 @@ export function PressKnowledgeBaseDetail({ slug }: PressKnowledgeBaseDetailProps
 		</div>
 	);
 }
-

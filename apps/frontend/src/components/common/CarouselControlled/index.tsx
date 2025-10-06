@@ -2,6 +2,8 @@
 
 /* * */
 
+import type { EmblaCarouselType } from 'embla-carousel';
+
 import { Carousel } from '@mantine/carousel';
 import { IconArrowLeft, IconArrowRight } from '@tabler/icons-react';
 import { WheelGesturesPlugin } from 'embla-carousel-wheel-gestures';
@@ -12,12 +14,12 @@ import styles from './styles.module.css';
 /* * */
 
 interface CarouselProps {
+	loop?: boolean
 	skeletonComponent?: React.ReactNode
 	skeletonQty?: number
 	slides?: SlideItemProps[]
 	slideSize?: number
 	subheading?: string
-	loop?: boolean
 }
 
 interface SlideItemProps {
@@ -27,8 +29,8 @@ interface SlideItemProps {
 
 /* * */
 
-export default function Component({ skeletonComponent, skeletonQty = 3, slides = [], slideSize = 300, subheading, loop = false }: CarouselProps) {
-	const [embla, setEmbla] = React.useState<any>(null);
+export default function Component({ loop = false, skeletonComponent, skeletonQty = 3, slides = [], slideSize = 300, subheading }: CarouselProps) {
+	const [embla, setEmbla] = React.useState<EmblaCarouselType | null>(null);
 
 	const scrollPrev = React.useCallback(() => {
 		if (embla) embla.scrollPrev();
@@ -49,14 +51,14 @@ export default function Component({ skeletonComponent, skeletonQty = 3, slides =
 					)}
 					{slides.length > 0 && (
 						<div className={styles.controlsWrapper}>
-							<button 
-								className={styles.control} 
+							<button
+								className={styles.control}
 								onClick={scrollPrev}
 							>
 								<IconArrowLeft size={30} />
 							</button>
-							<button 
-								className={styles.control} 
+							<button
+								className={styles.control}
 								onClick={scrollNext}
 							>
 								<IconArrowRight size={30} />

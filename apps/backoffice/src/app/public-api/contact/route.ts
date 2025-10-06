@@ -17,7 +17,7 @@ export async function POST(request: Request) {
 		//
 		// B. Validate required fields
 
-		const { name, surname, email, organization, subject, message } = requestBody;
+		const { email, message, name, organization, subject, surname } = requestBody;
 
 		if (!name || !surname || !email || !organization || !subject || !message) {
 			return Response.json(
@@ -266,4 +266,3 @@ Data: ${new Date().toLocaleString('pt-PT')}
 
 	//
 }
-

@@ -184,7 +184,7 @@ export function AllPins({ onPinClick, selectedAccordionId, ...props }: AllPinsPr
 				<g
 					className={styles.pinScale}
 					data-is-selected={isAccordionSelected('praia-albarquel')}
-					onClick={(e) => {
+					onClick={() => {
 						handlePinClick('albarquel');
 					}}
 				>
@@ -225,7 +225,7 @@ export function AllPins({ onPinClick, selectedAccordionId, ...props }: AllPinsPr
 				<g
 					className={styles.pinScale}
 					data-is-selected={isAccordionSelected('praia-figueirinha')}
-					onClick={e => handlePinClick('figueirinha')}
+					onClick={() => handlePinClick('figueirinha')}
 				>
 					<path
 						d="M910.16 658.11v234.41"
@@ -262,7 +262,7 @@ export function AllPins({ onPinClick, selectedAccordionId, ...props }: AllPinsPr
 				<g
 					className={styles.pinScaleCreiro}
 					data-is-selected={isAccordionSelected('praia-creiro')}
-					onClick={e => handlePinClick('creiro')}
+					onClick={() => handlePinClick('creiro')}
 				>
 					<path
 						d="M553.36 947.45V776.43"
@@ -307,7 +307,7 @@ export function AllPins({ onPinClick, selectedAccordionId, ...props }: AllPinsPr
 				<g
 					className={styles.pinScaleGalapos}
 					data-is-selected={isAccordionSelected('praia-galapos-galapinhos')}
-					onClick={e => handlePinClick('galapos')}
+					onClick={() => handlePinClick('galapos')}
 				>
 
 					<path

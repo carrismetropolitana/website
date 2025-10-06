@@ -1,9 +1,9 @@
-"use client"
+'use client';
 
 import { Button } from '@mantine/core';
-import { IconArrowDownRight, IconArrowUpRight, IconDownload, IconMessageChatbot, IconArrowRight } from '@tabler/icons-react';
+import { IconArrowDownRight, IconArrowRight, IconDownload, IconMessageChatbot } from '@tabler/icons-react';
 import { useTranslations } from 'next-intl';
-import React, { useState, useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 
 import styles from './styles.module.css';
 
@@ -92,7 +92,7 @@ const Icons = {
 	),
 	imprensa: (
 		<svg fill="none" height="94" viewBox="0 0 94 94" width="94" xmlns="http://www.w3.org/2000/svg">
-			<circle cx="47" cy="47" r="42.5" fill="#FFDD00" />
+			<circle cx="47" cy="47" fill="#FFDD00" r="42.5" />
 			<path d="M47 35.25H47.0392M43.0833 47H47V62.6667H50.9167M11.75 47C11.75 51.6291 12.6618 56.2129 14.4332 60.4896C16.2047 64.7663 18.8012 68.6522 22.0745 71.9255C25.3478 75.1988 29.2337 77.7953 33.5104 79.5668C37.7871 81.3382 42.3709 82.25 47 82.25C51.6291 82.25 56.2129 81.3382 60.4896 79.5668C64.7663 77.7953 68.6522 75.1988 71.9255 71.9255C75.1988 68.6522 77.7953 64.7663 79.5668 60.4896C81.3382 56.2129 82.25 51.6291 82.25 47C82.25 37.6511 78.5362 28.6851 71.9255 22.0745C65.3149 15.4638 56.3489 11.75 47 11.75C37.6511 11.75 28.6851 15.4638 22.0745 22.0745C15.4638 28.6851 11.75 37.6511 11.75 47Z" stroke="black" strokeLinecap="round" strokeLinejoin="round" strokeWidth="3" />
 		</svg>
 	),
@@ -129,14 +129,14 @@ const Icons = {
 
 const SectionHeader = () => {
 	const [showMore, setShowMore] = useState(false);
-	const t = useTranslations('home.PressLabelSection');
+	const t = useTranslations('press.LabelSection');
 	return (
 		<div className={styles.pressLabelSectionHeader}>
 			<h1>{t('section_heading')}</h1>
 			<p>
 				{t('subheading')}
 			</p>
-			<div 
+			<div
 				className={styles.pressLabelSectionExpandableContent}
 				data-expanded={showMore}
 			>
@@ -150,12 +150,12 @@ const SectionHeader = () => {
 			<Button
 				className={styles.pressLabelSectionButton}
 				color="gray"
+				data-expanded={showMore}
 				h={40}
 				leftSection={<IconArrowDownRight />}
 				onClick={() => setShowMore(state => !state)}
 				variant="outline"
 				w={170}
-				data-expanded={showMore}
 			>
 				<span className={styles.pressLabelSectionButtonText}>{t(showMore ? 'collapse_button' : 'expand_button')}</span>
 			</Button>
@@ -163,16 +163,15 @@ const SectionHeader = () => {
 	);
 };
 
-
 const Card: React.FC<{ card: CardProps, index: number }> = ({ card, index }) => {
 	const isContactCard = card.isContact || index === 5;
 
 	const handleContactClick = () => {
 		const contactElement = document.getElementById('press-contact-form');
 		if (contactElement) {
-			contactElement.scrollIntoView({ 
+			contactElement.scrollIntoView({
 				behavior: 'smooth',
-				block: 'start'
+				block: 'start',
 			});
 		}
 	};
@@ -197,10 +196,10 @@ const Card: React.FC<{ card: CardProps, index: number }> = ({ card, index }) => 
 					<p data-slot="card-description">{card.description}</p>
 				</div>
 				<div data-slot="card-footer">
-					<button 
-						data-slot="card-button" 
-						type="button"
+					<button
+						data-slot="card-button"
 						onClick={isContactCard ? handleContactClick : undefined}
+						type="button"
 					>
 						{card.buttonIcon}
 						{card.buttonText}
@@ -211,7 +210,7 @@ const Card: React.FC<{ card: CardProps, index: number }> = ({ card, index }) => 
 	);
 };
 
-const MobileCard: React.FC<{ card: CardProps, index: number, isLast: boolean, isFirst: boolean }> = ({ card, isLast, isFirst }) => {
+const MobileCard: React.FC<{ card: CardProps, index: number, isFirst: boolean, isLast: boolean }> = ({ card, isFirst, isLast }) => {
 	return (
 		<>
 			{isFirst && <div className={styles.pressLabelSectionMobileSeparator} />}
@@ -232,7 +231,7 @@ const MobileCard: React.FC<{ card: CardProps, index: number, isLast: boolean, is
 };
 
 export function PressLabelSection() {
-	const t = useTranslations('home.PressLabelSection');
+	const t = useTranslations('press.LabelSection');
 	const [isMobile, setIsMobile] = useState(false);
 
 	useEffect(() => {
@@ -304,12 +303,12 @@ export function PressLabelSection() {
 			{isMobile ? (
 				<div className={styles.pressLabelSectionMobileCards}>
 					{mobileCardData.map((card, index) => (
-						<MobileCard 
-							key={index} 
-							card={card} 
-							index={index} 
-							isLast={index === mobileCardData.length - 1}
+						<MobileCard
+							key={index}
+							card={card}
+							index={index}
 							isFirst={index === 0}
+							isLast={index === mobileCardData.length - 1}
 						/>
 					))}
 				</div>

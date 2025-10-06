@@ -1,3 +1,5 @@
+'use client';
+
 import type { Faq } from '@/types/faq.types';
 
 import { Accordion, AccordionControl, AccordionItem, AccordionPanel } from '@mantine/core';
@@ -6,7 +8,7 @@ import { useTranslations } from 'next-intl';
 import styles from '../PressLabelSection/styles.module.css';
 
 const SectionHeader = () => {
-	const t = useTranslations('home.PressFaqSection');
+	const t = useTranslations('press.FaqSection');
 	return (
 		<div className={styles.pressLabelSectionHeader}>
 			<h1>{t('section_heading')}</h1>
@@ -18,7 +20,7 @@ const SectionHeader = () => {
 };
 
 export function PressFaqSection() {
-	const t = useTranslations('home.PressFaqSection');
+	const t = useTranslations('press.FaqSection');
 
 	const data: Faq[] = [
 		{

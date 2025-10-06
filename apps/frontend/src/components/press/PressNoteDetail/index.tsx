@@ -19,7 +19,7 @@ interface PressNoteDetailProps {
 
 export function PressNoteDetail({ slug }: PressNoteDetailProps) {
 	const router = useRouter();
-	const t = useTranslations('home.PressNotesBase');
+	const t = useTranslations('press.NotesBase');
 
 	// Fetch note data
 	const { data: note, error, isLoading } = useSWR<Note>(`/admin/public-api/notes/${slug}`);

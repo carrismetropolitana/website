@@ -241,4 +241,3 @@ export const KnowledgeBase: CollectionConfig = {
 	timestamps: false,
 
 };
-

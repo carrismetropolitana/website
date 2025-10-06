@@ -1,14 +1,14 @@
-"use client"
+'use client';
 
-import { Button, FileInput, Textarea, TextInput } from '@mantine/core';
 import toast from '@/utils/toast';
+import { Button, Textarea, TextInput } from '@mantine/core';
 import { useTranslations } from 'next-intl';
 import { useState } from 'react';
 
 import styles from './styles.module.css';
 
 const SectionHeader = () => {
-	const t = useTranslations('home.PressContact');
+	const t = useTranslations('press.Contact');
 	return (
 		<div className={styles.pressLabelSectionHeader}>
 			<h1>{t('section_heading')}</h1>
@@ -17,7 +17,7 @@ const SectionHeader = () => {
 };
 
 export function PressContact() {
-	const t = useTranslations('home.PressContact');
+	const t = useTranslations('press.Contact');
 
 	// Form state
 	const [formData, setFormData] = useState({
@@ -48,15 +48,18 @@ export function PressContact() {
 	const formatPhoneNumber = (value: string) => {
 		// Remove all non-numeric characters
 		const numbers = value.replace(/\D/g, '');
-		
+
 		// Apply mask based on length
 		if (numbers.length <= 3) {
 			return numbers;
-		} else if (numbers.length <= 6) {
+		}
+		else if (numbers.length <= 6) {
 			return `${numbers.slice(0, 3)} ${numbers.slice(3)}`;
-		} else if (numbers.length <= 9) {
+		}
+		else if (numbers.length <= 9) {
 			return `${numbers.slice(0, 3)} ${numbers.slice(3, 6)} ${numbers.slice(6)}`;
-		} else {
+		}
+		else {
 			return `${numbers.slice(0, 3)} ${numbers.slice(3, 6)} ${numbers.slice(6, 9)}`;
 		}
 	};
@@ -64,14 +67,14 @@ export function PressContact() {
 	// Handle input changes
 	const handleInputChange = (field: string) => (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
 		let value = e.target.value;
-		
+
 		// Apply phone mask if it's the phone field
 		if (field === 'phone') {
 			value = formatPhoneNumber(value);
 		}
-		
+
 		setFormData(prev => ({ ...prev, [field]: value }));
-		
+
 		// Clear error when user starts typing
 		if (errors[field]) {
 			setErrors(prev => ({ ...prev, [field]: '' }));
@@ -214,110 +217,110 @@ export function PressContact() {
 	};
 
 	return (
-		<section id="press-contact-form" className={styles.container}>
+		<section className={styles.container} id="press-contact-form">
 			<SectionHeader />
 
 			<form className={styles.formContainer} onSubmit={handleSubmit}>
 				<div className={styles.formRow}>
 					<TextInput
 						className={styles.formInput}
+						disabled={isSubmitting}
+						error={errors.name}
 						label={t('form.name')}
-						withAsterisk
+						onBlur={handleBlur('name')}
+						onChange={handleInputChange('name')}
 						size="md"
 						value={formData.name}
-						onChange={handleInputChange('name')}
-						onBlur={handleBlur('name')}
-						error={errors.name}
-						disabled={isSubmitting}
+						withAsterisk
 					/>
 					<TextInput
 						className={styles.formInput}
+						disabled={isSubmitting}
+						error={errors.surname}
 						label={t('form.surname')}
-						withAsterisk
+						onBlur={handleBlur('surname')}
+						onChange={handleInputChange('surname')}
 						size="md"
 						value={formData.surname}
-						onChange={handleInputChange('surname')}
-						onBlur={handleBlur('surname')}
-						error={errors.surname}
-						disabled={isSubmitting}
+						withAsterisk
 					/>
 				</div>
 
 				<div className={styles.formRow}>
 					<TextInput
 						className={styles.formInput}
+						disabled={isSubmitting}
+						error={errors.email}
 						label={t('form.email')}
-						withAsterisk
+						onBlur={handleBlur('email')}
+						onChange={handleInputChange('email')}
 						size="md"
 						type="email"
 						value={formData.email}
-						onChange={handleInputChange('email')}
-						onBlur={handleBlur('email')}
-						error={errors.email}
-						disabled={isSubmitting}
+						withAsterisk
 					/>
 					<TextInput
 						className={styles.formInput}
+						disabled={isSubmitting}
+						error={errors.phone}
 						label={t('form.phone')}
+						onBlur={handleBlur('phone')}
+						onChange={handleInputChange('phone')}
 						size="md"
 						type="tel"
 						value={formData.phone}
-						onChange={handleInputChange('phone')}
-						onBlur={handleBlur('phone')}
-						error={errors.phone}
-						disabled={isSubmitting}
 					/>
 				</div>
 
 				<div className={styles.formRow} data-variant="col-full">
 					<TextInput
 						className={styles.formInput}
+						disabled={isSubmitting}
+						error={errors.organization}
 						label={t('form.organization')}
-						withAsterisk
+						onBlur={handleBlur('organization')}
+						onChange={handleInputChange('organization')}
 						size="md"
 						value={formData.organization}
-						onChange={handleInputChange('organization')}
-						onBlur={handleBlur('organization')}
-						error={errors.organization}
-						disabled={isSubmitting}
+						withAsterisk
 					/>
 				</div>
 
 				<div className={styles.formRow} data-variant="col-full">
 					<TextInput
 						className={styles.formInput}
+						disabled={isSubmitting}
+						error={errors.subject}
 						label={t('form.subject')}
-						withAsterisk
+						onBlur={handleBlur('subject')}
+						onChange={handleInputChange('subject')}
 						size="md"
 						value={formData.subject}
-						onChange={handleInputChange('subject')}
-						onBlur={handleBlur('subject')}
-						error={errors.subject}
-						disabled={isSubmitting}
+						withAsterisk
 					/>
 				</div>
 
 				<div className={styles.formRow} data-variant="col-full">
 					<Textarea
 						className={styles.formInputTextarea}
-						label={t('form.message')}
-						withAsterisk
-						size="md"
-						minRows={4}
-						value={formData.message}
-						onChange={handleInputChange('message')}
-						onBlur={handleBlur('message')}
-						error={errors.message}
 						disabled={isSubmitting}
+						error={errors.message}
+						label={t('form.message')}
+						minRows={4}
+						onBlur={handleBlur('message')}
+						onChange={handleInputChange('message')}
+						size="md"
+						value={formData.message}
+						withAsterisk
 					/>
 				</div>
 
 				<Button
 					className={styles.formButton}
-					size="compact-lg"
-					type="submit"
 					disabled={isSubmitting}
 					loading={isSubmitting}
+					size="compact-lg"
+					type="submit"
 				>
 					{isSubmitting ? t('form.sending') : t('form.send')}
 				</Button>

@@ -5,9 +5,9 @@
 import Carousel from '@/components/common/CarouselControlled';
 import { Section } from '@/components/layout/Section';
 import { Surface } from '@/components/layout/Surface';
-import { PressGenericCard } from '@/components/home/PressGenericCard';
 import { NewsCardSkeleton } from '@/components/news/NewsCardSkeleton';
 import { SeeMoreCard } from '@/components/news/SeeMoreCard';
+import { PressGenericCard } from '@/components/press/PressGenericCard';
 import { type KnowledgeBase } from '@carrismetropolitana/website-shared-types';
 import { useTranslations } from 'next-intl';
 import { useRouter } from 'next/navigation';
@@ -17,12 +17,12 @@ import useSWR from 'swr';
 /* * */
 
 interface NewsItem {
-	id: string;
-	title: string;
-	date: string;
-	topic: string;
-	image: string;
-	isLink: boolean;
+	date: string
+	id: string
+	image: string
+	isLink: boolean
+	title: string
+	topic: string
 }
 
 export function PressKnowledgeBase() {
@@ -31,13 +31,13 @@ export function PressKnowledgeBase() {
 	//
 	// A. Setup variables
 
-	const t = useTranslations('home.PressKnowledgeBase');
+	const t = useTranslations('press.KnowledgeBase');
 	const router = useRouter();
 
 	//
 	// B. Fetch data from API
 
-	const { data: knowledgeBaseData, isLoading } = useSWR<KnowledgeBase[]>('/admin/public-api/knowledge-base');
+	const { data: knowledgeBaseData } = useSWR<KnowledgeBase[]>('/admin/public-api/knowledge-base');
 
 	//
 	// C. Transform data
@@ -86,8 +86,8 @@ export function PressKnowledgeBase() {
 		component: (
 			<PressGenericCard
 				newsItem={slideItem}
-				showTopic={true}
 				onClick={handleCardClick}
+				showTopic={true}
 			/>
 		),
 	}));
@@ -104,11 +104,11 @@ export function PressKnowledgeBase() {
 	return (
 		<Surface>
 			<Section heading={t('section_heading')} href="/press/knowledge-base">
-				<Carousel 
-					subheading={t('subheading')} 
-					skeletonComponent={<NewsCardSkeleton />} 
-					skeletonQty={4} 
+				<Carousel
+					skeletonComponent={<NewsCardSkeleton />}
+					skeletonQty={4}
 					slides={carouselSlides}
+					subheading={t('subheading')}
 				/>
 			</Section>
 		</Surface>

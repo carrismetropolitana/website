@@ -62,4 +62,3 @@ export const GET = async (_request: Request, { params }: { params: Promise<{ slu
 
 	//
 };
-

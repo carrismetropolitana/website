@@ -1,6 +1,6 @@
 /* * */
 
-import { PressNotesPage } from '@/components/home/PressNotesPage';
+import { PressNotesPage } from '@/components/press/PressNotesPage';
 
 /* * */
 

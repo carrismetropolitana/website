@@ -660,119 +660,6 @@
 		"NewsSection": {
 			"section_heading": "Notícias"
 		},
-		"PressContact": {
-			"errors": {
-				"email_invalid": "Por favor insira um endereço de email válido.",
-				"email_required": "Por favor preencha o seu email.",
-				"message_required": "Por favor escreva uma mensagem.",
-				"name_required": "Por favor preencha o seu nome.",
-				"organization_required": "Por favor preencha a organização.",
-				"phone_invalid": "Por favor insira um número de telefone válido (9 dígitos).",
-				"subject_required": "Por favor preencha o assunto.",
-				"surname_required": "Por favor preencha o seu apelido."
-			},
-			"form": {
-				"email": "Email",
-				"file": "Upload de Ficheiro",
-				"message": "Mensagem",
-				"name": "Nome",
-				"organization": "Organização/Veículo de Imprensa",
-				"phone": "Telefone",
-				"placeholderFile": "Escolher Arquivos",
-				"send": "Enviar",
-				"sending": "A enviar...",
-				"subject": "Assunto",
-				"surname": "Apelido"
-			},
-			"section_heading": "Contacto",
-			"toast": {
-				"error_generic": "Por favor tente novamente mais tarde.",
-				"error_title": "Erro ao enviar mensagem",
-				"success_message": "Recebemos a sua mensagem e entraremos em contacto em breve.",
-				"success_title": "Mensagem enviada com sucesso!",
-				"validation_error_message": "Por favor corrija os erros no formulário.",
-				"validation_error_title": "Erro de Validação"
-			}
-		},
-		"PressFaqSection": {
-			"faqs": {
-				"carris_relationship": {
-					"answer": "A Carris Metropolitana é uma marca de transporte público distinta da Carris. Ambas operam sob a tutela da TML - Transportes Metropolitanos de Lisboa, mas são entidades separadas. A Carris Metropolitana serve os 15 municípios da área metropolitana de Lisboa (excluindo Lisboa, Cascais e Barreiro), enquanto a Carris opera especificamente na cidade de Lisboa.",
-					"question": "A Carris Metropolitana faz parte da Carris?"
-				},
-				"commercial_use": {
-					"answer": "O uso de imagens e logos da Carris Metropolitana para fins comerciais requer autorização prévia. Para uso editorial e jornalístico, as imagens podem ser utilizadas com devida atribuição. Para qualquer uso comercial ou promocional, deve contactar o nosso departamento de comunicação para obter as licenças apropriadas e orientações sobre o uso correto da marca.",
-					"question": "Posso usar as imagens e logos para fins comerciais?"
-				},
-				"contact_interviews": {
-					"answer": "Para contactar a Carris Metropolitana para obter informações ou solicitar entrevistas, pode utilizar o nosso canal direto de imprensa disponível nesta página ou enviar um email para o nosso departamento de comunicação. Fornecemos apoio dedicado aos jornalistas e profissionais dos media, incluindo material de apoio, dados e facilitação de entrevistas com responsáveis da empresa.",
-					"question": "Como posso contactar a CMetropolitana para obter informações ou solicitar entrevistas?"
-				},
-				"open_data_access": {
-					"answer": "A Carris Metropolitana disponibiliza dados abertos através do seu portal oficial. Pode aceder a informações sobre horários, rotas, dados de passageiros em tempo real e estatísticas operacionais. Para acesso a dados específicos ou APIs, recomendamos que entre em contacto através dos nossos canais oficiais de comunicação.",
-					"question": "Como posso aceder aos dados abertos disponibilizados pela CMetropolitana?"
-				},
-				"operating_municipalities": {
-					"answer": "A Carris Metropolitana opera em 15 dos 18 municípios da área metropolitana de Lisboa: Almada, Seixal, Sesimbra, Alcochete, Moita, Montijo, Palmela, Setúbal, Amadora, Oeiras, Sintra, Mafra, Vila Franca de Xira, Odivelas e Loures. Os municípios de Lisboa, Cascais e Barreiro têm operadores próprios, mas estão ligados através das ligações intermunicipais da Carris Metropolitana.",
-					"question": "Em que municípios opera a Carris Metropolitana?"
-				},
-				"service_operators": {
-					"answer": "A Carris Metropolitana trabalha com quatro operadores principais: Área 1 - Viação Alvorada (Amadora, Oeiras, Sintra, ligações a Cascais e Lisboa); Área 2 - Rodoviária de Lisboa (Mafra, Vila Franca de Xira, Odivelas e Loures); Área 3 - TST (Almada, Seixal e Sesimbra); Área 4 - Alsa Todi (Alcochete, Moita, Montijo, Palmela, Setúbal e ligações ao Barreiro).",
-					"question": "Quais são os operadores prestadores de serviço que atuam sob a marca Carris Metropolitana?"
-				}
-			},
-			"section_heading": "Perguntas Frequentes",
-			"subheading": "Nesta seção, encontrará respostas às perguntas mais frequentes sobre a Carris Metropolitana e nossos materiais de imprensa. Se precisar de esclarecimentos adicionais, não hesite em entrar em contacto connosco."
-		},
-		"PressHeaderSection": {
-			"section_heading": "Imprensa"
-		},
-		"PressKnowledgeBase": {
-			"section_heading": "Knowledge Base",
-			"subheading": "Explore e descarregue documentos e outros materiais relevantes, como relatórios, para apoiar a cobertura informativa sobre a Carris Metropolitana."
-		},
-		"PressLabelSection": {
-			"buttons": {
-				"contact": "Contacte-nos",
-				"download": "Descarregar"
-			},
-			"cards": {
-				"download_icons": {
-					"description": "Descarregue ícones representativos dos nossos serviços, disponíveis em diferentes estilos e formatos.",
-					"title": "Download de Ícones"
-				},
-				"download_logos": {
-					"description": "Aceda aos logotipos oficiais em vários formatos, prontos para uso em materiais de comunicação.",
-					"title": "Download de Logos"
-				},
-				"image_bank": {
-					"description": "Explore e descarregue imagens de alta qualidade que capturam a essência dos nossos serviços e operações.",
-					"title": "Banco de Imagens"
-				},
-				"not_found": {
-					"description": "Dispomos de um canal direto para a Imprensa, onde poderá solicitar os nossos materiais institucionais.",
-					"title": "Não encontrou o que procura?"
-				},
-				"press_guide": {
-					"description": "Tudo sobre como comunicar a marca de transporte público rodoviário dos 18 municípios da área metropolitana de Lisboa.",
-					"title": "Guia de Imprensa"
-				},
-				"standards_manual": {
-					"description": "Consulte o nosso manual de normas para diretrizes sobre o uso correto da marca e identidade visual.",
-					"title": "Manual de Normas"
-				}
-			},
-			"collapse_button": "Reduzir",
-			"expand_button": "Expandir",
-			"section_heading": "A Marca",
-			"show_more_content_first": "Reduzindo a idade média da frota em operação, introduzindo melhorias na performance ambiental nas viaturas, prestando mais e melhor informação ao público - que é também uniformizada e simplificada à escala metropolitana - e aumentando a oferta do que era praticado antes da entrada em funcionamento, a Carris Metropolitana continua a trabalhar no sentido de criar opcões de mobilidade para assegurar um transporte público de qualidade.",
-			"show_more_content_second": "Pretendendo fomentar comportamentos sustentáveis e contribuir para a equidade social e territorial na amL, a Carris Metropolitana opera as redes municipais para 15 dos 18 municípios (Barreiro, Cascais e Lisboa mantêm as operações locais) e a totalidade da operação intermunicipal dos 18 municípios.",
-			"subheading": "A Carris Metropolitana é uma iniciativa dos 18 municípios da amL que, através da Transportes Metropolitanos de Lisboa (TML), funde a operação rodoviária de toda a amL numa mesma imagem e nível de serviço, focado no serviço às populações, com um elevado grau de complexidade tecnológica e operacional, neste caso, sobretudo pela dimensão geográfica e populacional."
-		},
-		"PressNotesBase": {
-			"section_heading": "Notas de Imprensa",
-			"subheading": "Consulte aqui as notas de imprensa mais recentes sobre a Carris Metropolitana."
-		},
 		"QuickSearchFavoritesBar": {
 			"empty": "Ainda não tem linhas favoritas...",
 			"more": "{count, plural, one {+ # linha} other {+ # linhas}}"
@@ -1486,6 +1373,121 @@
 			"disclaimer": "Edite esta página no Github se pretende incluir a sua aplicação. A ordem é aleatória. Apenas são permitidas entradas que disponibilizem posição de veículos ou horários planeados e em tempo real.",
 			"heading": "Os nossos parceiros",
 			"subheading": "Porque os nossos dados são abertos, existem várias aplicações que oferecem experiências personalizadas para melhorar o seu dia-a-dia nos transportes."
+		}
+	},
+	"press": {
+		"Contact": {
+			"errors": {
+				"email_invalid": "Por favor insira um endereço de email válido.",
+				"email_required": "Por favor preencha o seu email.",
+				"message_required": "Por favor escreva uma mensagem.",
+				"name_required": "Por favor preencha o seu nome.",
+				"organization_required": "Por favor preencha a organização.",
+				"phone_invalid": "Por favor insira um número de telefone válido (9 dígitos).",
+				"subject_required": "Por favor preencha o assunto.",
+				"surname_required": "Por favor preencha o seu apelido."
+			},
+			"form": {
+				"email": "Email",
+				"file": "Upload de Ficheiro",
+				"message": "Mensagem",
+				"name": "Nome",
+				"organization": "Organização/Veículo de Imprensa",
+				"phone": "Telefone",
+				"placeholderFile": "Escolher Arquivos",
+				"send": "Enviar",
+				"sending": "A enviar...",
+				"subject": "Assunto",
+				"surname": "Apelido"
+			},
+			"section_heading": "Contacto",
+			"toast": {
+				"error_generic": "Por favor tente novamente mais tarde.",
+				"error_title": "Erro ao enviar mensagem",
+				"success_message": "Recebemos a sua mensagem e entraremos em contacto em breve.",
+				"success_title": "Mensagem enviada com sucesso!",
+				"validation_error_message": "Por favor corrija os erros no formulário.",
+				"validation_error_title": "Erro de Validação"
+			}
+		},
+		"FaqSection": {
+			"faqs": {
+				"carris_relationship": {
+					"answer": "A Carris Metropolitana é uma marca de transporte público distinta da Carris. Ambas operam sob a tutela da TML - Transportes Metropolitanos de Lisboa, mas são entidades separadas. A Carris Metropolitana serve os 15 municípios da área metropolitana de Lisboa (excluindo Lisboa, Cascais e Barreiro), enquanto a Carris opera especificamente na cidade de Lisboa.",
+					"question": "A Carris Metropolitana faz parte da Carris?"
+				},
+				"commercial_use": {
+					"answer": "O uso de imagens e logos da Carris Metropolitana para fins comerciais requer autorização prévia. Para uso editorial e jornalístico, as imagens podem ser utilizadas com devida atribuição. Para qualquer uso comercial ou promocional, deve contactar o nosso departamento de comunicação para obter as licenças apropriadas e orientações sobre o uso correto da marca.",
+					"question": "Posso usar as imagens e logos para fins comerciais?"
+				},
+				"contact_interviews": {
+					"answer": "Para contactar a Carris Metropolitana para obter informações ou solicitar entrevistas, pode utilizar o nosso canal direto de imprensa disponível nesta página ou enviar um email para o nosso departamento de comunicação. Fornecemos apoio dedicado aos jornalistas e profissionais dos media, incluindo material de apoio, dados e facilitação de entrevistas com responsáveis da empresa.",
+					"question": "Como posso contactar a CMetropolitana para obter informações ou solicitar entrevistas?"
+				},
+				"open_data_access": {
+					"answer": "A Carris Metropolitana disponibiliza dados abertos através do seu portal oficial. Pode aceder a informações sobre horários, rotas, dados de passageiros em tempo real e estatísticas operacionais. Para acesso a dados específicos ou APIs, recomendamos que entre em contacto através dos nossos canais oficiais de comunicação.",
+					"question": "Como posso aceder aos dados abertos disponibilizados pela CMetropolitana?"
+				},
+				"operating_municipalities": {
+					"answer": "A Carris Metropolitana opera em 15 dos 18 municípios da área metropolitana de Lisboa: Almada, Seixal, Sesimbra, Alcochete, Moita, Montijo, Palmela, Setúbal, Amadora, Oeiras, Sintra, Mafra, Vila Franca de Xira, Odivelas e Loures. Os municípios de Lisboa, Cascais e Barreiro têm operadores próprios, mas estão ligados através das ligações intermunicipais da Carris Metropolitana.",
+					"question": "Em que municípios opera a Carris Metropolitana?"
+				},
+				"service_operators": {
+					"answer": "A Carris Metropolitana trabalha com quatro operadores principais: Área 1 - Viação Alvorada (Amadora, Oeiras, Sintra, ligações a Cascais e Lisboa); Área 2 - Rodoviária de Lisboa (Mafra, Vila Franca de Xira, Odivelas e Loures); Área 3 - TST (Almada, Seixal e Sesimbra); Área 4 - Alsa Todi (Alcochete, Moita, Montijo, Palmela, Setúbal e ligações ao Barreiro).",
+					"question": "Quais são os operadores prestadores de serviço que atuam sob a marca Carris Metropolitana?"
+				}
+			},
+			"section_heading": "Perguntas Frequentes",
+			"subheading": "Nesta seção, encontrará respostas às perguntas mais frequentes sobre a Carris Metropolitana e nossos materiais de imprensa. Se precisar de esclarecimentos adicionais, não hesite em entrar em contacto connosco."
+		},
+		"HeaderSection": {
+			"section_heading": "Imprensa"
+		},
+		"KnowledgeBase": {
+			"section_heading": "Base de Conhecimento",
+			"subheading": "Explore e descarregue documentos e outros materiais relevantes, como relatórios, para apoiar a cobertura informativa sobre a Carris Metropolitana."
+		},
+		"LabelSection": {
+			"buttons": {
+				"contact": "Contacte-nos",
+				"download": "Descarregar"
+			},
+			"cards": {
+				"download_icons": {
+					"description": "Descarregue ícones representativos dos nossos serviços, disponíveis em diferentes estilos e formatos.",
+					"title": "Download de Ícones"
+				},
+				"download_logos": {
+					"description": "Aceda aos logotipos oficiais em vários formatos, prontos para uso em materiais de comunicação.",
+					"title": "Download de Logos"
+				},
+				"image_bank": {
+					"description": "Explore e descarregue imagens de alta qualidade que capturam a essência dos nossos serviços e operações.",
+					"title": "Banco de Imagens"
+				},
+				"not_found": {
+					"description": "Dispomos de um canal direto para a Imprensa, onde poderá solicitar os nossos materiais institucionais.",
+					"title": "Não encontrou o que procura?"
+				},
+				"press_guide": {
+					"description": "Tudo sobre como comunicar a marca de transporte público rodoviário dos 18 municípios da área metropolitana de Lisboa.",
+					"title": "Guia de Imprensa"
+				},
+				"standards_manual": {
+					"description": "Consulte o nosso manual de normas para diretrizes sobre o uso correto da marca e identidade visual.",
+					"title": "Manual de Normas"
+				}
+			},
+			"collapse_button": "Reduzir",
+			"expand_button": "Expandir",
+			"section_heading": "A Marca",
+			"show_more_content_first": "Reduzindo a idade média da frota em operação, introduzindo melhorias na performance ambiental nas viaturas, prestando mais e melhor informação ao público - que é também uniformizada e simplificada à escala metropolitana - e aumentando a oferta do que era praticado antes da entrada em funcionamento, a Carris Metropolitana continua a trabalhar no sentido de criar opcões de mobilidade para assegurar um transporte público de qualidade.",
+			"show_more_content_second": "Pretendendo fomentar comportamentos sustentáveis e contribuir para a equidade social e territorial na amL, a Carris Metropolitana opera as redes municipais para 15 dos 18 municípios (Barreiro, Cascais e Lisboa mantêm as operações locais) e a totalidade da operação intermunicipal dos 18 municípios.",
+			"subheading": "A Carris Metropolitana é uma iniciativa dos 18 municípios da amL que, através da Transportes Metropolitanos de Lisboa (TML), funde a operação rodoviária de toda a amL numa mesma imagem e nível de serviço, focado no serviço às populações, com um elevado grau de complexidade tecnológica e operacional, neste caso, sobretudo pela dimensão geográfica e populacional."
+		},
+		"NotesBase": {
+			"section_heading": "Notas de Imprensa",
+			"subheading": "Consulte aqui as notas de imprensa mais recentes sobre a Carris Metropolitana."
 		}
 	},
 	"profile": {

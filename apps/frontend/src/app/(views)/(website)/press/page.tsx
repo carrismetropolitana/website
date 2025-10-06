@@ -1,6 +1,6 @@
 /* * */
 
-import { PressPage } from '@/components/home/PressPage';
+import { PressPage } from '@/components/press/PressPage';
 
 /* * */
 

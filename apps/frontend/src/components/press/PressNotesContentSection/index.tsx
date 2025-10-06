@@ -1,7 +1,7 @@
 'use client';
 
+import { type Note } from '@carrismetropolitana/website-shared-types';
 import { Select, TextInput } from '@mantine/core';
-import { type KnowledgeBase } from '@carrismetropolitana/website-shared-types';
 import { IconArrowLeft, IconSearch } from '@tabler/icons-react';
 import { useTranslations } from 'next-intl';
 import Link from 'next/link';
@@ -22,33 +22,33 @@ interface NewsItem {
 	topic: string
 }
 
-export function PressKnowledgeContentSection() {
+export function PressNotesContentSection() {
 	const [searchTerm, setSearchTerm] = useState('');
 	const [selectedFilter, setSelectedFilter] = useState('');
 	const router = useRouter();
 
-	const t = useTranslations('home.PressKnowledgeBase');
+	const t = useTranslations('press.NotesBase');
 
-	// Fetch knowledge base items from CMS
-	const { data: knowledgeBaseData, error, isLoading } = useSWR<KnowledgeBase[]>('/admin/public-api/knowledge-base');
+	// Fetch notes from CMS
+	const { data: notesData, error, isLoading } = useSWR<Note[]>('/admin/public-api/notes');
 
-	// Convert CMS data to the format expected by the existing UI
+	// Convert CMS notes to the format expected by the existing UI
 	const newsItems: NewsItem[] = React.useMemo(() => {
-		if (!knowledgeBaseData) return [];
+		if (!notesData) return [];
 
-		return knowledgeBaseData.map(item => ({
-			date: new Date(item.publishDate).toLocaleDateString('pt-PT', {
+		return notesData.map(note => ({
+			date: new Date(note.publishDate).toLocaleDateString('pt-PT', {
 				day: 'numeric',
 				month: 'long',
 				year: 'numeric',
 			}),
-			id: item._id,
-			image: item.heroImage?.url || 'https://d1csarkz8obe9u.cloudfront.net/posterpreviews/breaking-news-design-template-70665f891baf9314344e211ce2db6a12_screen.jpg?ts=1689413594',
-			isLink: item.contentType === 'link',
-			title: item.title,
-			topic: item.topic || 'Geral',
+			id: note._id,
+			image: note.heroImage?.url || 'https://d1csarkz8obe9u.cloudfront.net/posterpreviews/breaking-news-design-template-70665f891baf9314344e211ce2db6a12_screen.jpg?ts=1689413594',
+			isLink: note.contentType === 'link',
+			title: note.title,
+			topic: note.tags?.[0] || 'Geral',
 		}));
-	}, [knowledgeBaseData]);
+	}, [notesData]);
 
 	const filteredNews = newsItems.filter(item =>
 		item.title.toLowerCase().includes(searchTerm.toLowerCase())
@@ -66,28 +66,28 @@ export function PressKnowledgeContentSection() {
 	};
 
 	const handleCardClick = (newsItem: NewsItem) => {
-		// Find the original knowledge base data
-		const item = knowledgeBaseData?.find(kb => kb._id === newsItem.id);
-		if (!item) return;
+		// Find the original note data
+		const note = notesData?.find(n => n._id === newsItem.id);
+		if (!note) return;
 
-		if (item.contentType === 'file' && item.file?.url) {
+		if (note.contentType === 'file' && note.file?.url) {
 			// For files, trigger direct download
-			window.open(item.file.url, '_blank');
+			window.open(note.file.url, '_blank');
 		}
-		else if (item.contentType === 'link' && item.link) {
+		else if (note.contentType === 'link' && note.link) {
 			// For links, navigate to detail page which will then redirect
-			router.push(`/press/knowledge-base/${item.slug}`);
+			router.push(`/press/notes/${note.slug}`);
 		}
 		else {
 			// Fallback to detail page
-			router.push(`/press/knowledge-base/${item.slug}`);
+			router.push(`/press/notes/${note.slug}`);
 		}
 	};
 
 	if (isLoading) {
 		return (
 			<section className={styles.contentWrapper}>
-				<div className={styles.loading}>Carregando itens da base de conhecimento...</div>
+				<div className={styles.loading}>Carregando notas...</div>
 			</section>
 		);
 	}
@@ -95,7 +95,7 @@ export function PressKnowledgeContentSection() {
 	if (error) {
 		return (
 			<section className={styles.contentWrapper}>
-				<div className={styles.error}>Erro ao carregar itens da base de conhecimento.</div>
+				<div className={styles.error}>Erro ao carregar notas de imprensa.</div>
 			</section>
 		);
 	}
@@ -139,8 +139,8 @@ export function PressKnowledgeContentSection() {
 					<PressGenericCard
 						key={item.id}
 						newsItem={item}
-						showTopic={true}
 						onClick={handleCardClick}
+						showTopic={false}
 					/>
 				))}
 			</div>

@@ -6,7 +6,7 @@ import { getPayload } from 'payload';
 
 /* * */
 
-export const GET = async (request: Request, { params }: { params: { slug: string } }) => {
+export const GET = async (request: Request, { params }: { params: Promise<{ slug: string }> }) => {
 	//
 
 	//

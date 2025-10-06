@@ -1,4 +1,3 @@
-import { IconArrowRight } from '@tabler/icons-react';
 import { useTranslations } from 'next-intl';
 import Link from 'next/link';
 
@@ -16,4 +15,4 @@ export function SeeMoreCard({ href }: SeeMoreCardProps) {
 			<h4 className={styles.title}>{t('see_more')}...</h4>
 		</Link>
 	);
-} 
+}

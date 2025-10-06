@@ -1,6 +1,6 @@
 /* * */
 
-import { PressKnowledgePage } from '@/components/home/PressKnowledgePage';
+import { PressKnowledgePage } from '@/components/press/PressKnowledgePage';
 
 /* * */
 
