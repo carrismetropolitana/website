@@ -3,7 +3,7 @@
 /* * */
 
 import { AlertActivePeriodStart } from '@/components/alerts/AlertActivePeriod';
-import { AlertCauseIcon, AlertEffectIcon } from '@/components/alerts/AlertCauseEffectIcon-2';
+import { AlertCauseIcon, AlertEffectIcon } from '@/components/alerts/AlertCauseEffectIcon';
 import { AlertInformedEntity } from '@/components/alerts/AlertInformedEntity';
 import { AlertsDetailImageThumbnail } from '@/components/alerts/AlertsDetailImageThumbnail';
 import { BackButton } from '@/components/common/BackButton';

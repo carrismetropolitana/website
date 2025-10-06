@@ -2,7 +2,7 @@
 
 import type { AlertCause, AlertEffect } from '@/types/alerts.types';
 
-import { getCauseSeverityLevel, getEffectSeverityLevel } from '@/utils/alerts-2';
+import { getCauseSeverityLevel, getEffectSeverityLevel } from '@/utils/alerts';
 import { IconAccessible, IconAmbulance, IconArrowBigUpLines, IconBarrierBlock, IconCalendarEvent, IconCarCrash, IconCircleArrowDown, IconCircleMinus, IconClock2, IconClockExclamation, IconCloudStorm, IconInfoTriangle, IconRouteAltRight, IconSpeakerphone, IconTool } from '@tabler/icons-react';
 import { useTranslations } from 'next-intl';
 

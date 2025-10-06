@@ -2,7 +2,7 @@
 
 /* * */
 
-import { AlertCauseIcon, AlertEffectIcon } from '@/components/alerts/AlertCauseEffectIcon-2';
+import { AlertCauseIcon, AlertEffectIcon } from '@/components/alerts/AlertCauseEffectIcon';
 import { Grid } from '@/components/layout/Grid';
 import { AlertCause, AlertEffect } from '@/types/alerts.types';
 
