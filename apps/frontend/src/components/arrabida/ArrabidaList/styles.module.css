@@ -46,7 +46,7 @@
 	align-items: center;
 	gap: var(--size-spacing-15);
 	flex: 1;
-	min-width: 0; /* Para permitir que o texto seja truncado */
+	min-width: 0;
 }
 
 /* * */
@@ -60,74 +60,3 @@
 	padding: var(--size-spacing-5);
 	gap: var(--size-spacing-10);
 }
-
-/* * */
-/* ALERT ICON */
-
-.alertIcon {
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	color: var(--color-alerts-2); /* Cor laranja */
-	cursor: pointer;
-}
-
-/* * */
-/* ALERTS SURFACE OVERRIDE */
-
-.alertsSurfaceOverride [class*="container"][class*="alerts"] {
-	/* Remove border from Surface alerts variant only in ArrabidaList */
-	border: none ;
-	border-radius: 0;
-	background-color: transparent;
-}
-
-/* * */
-/* ALERT ITEM */
-
-.alertItem {
-	display: flex;
-	flex-direction: column;
-	gap: var(--size-spacing-10);
-}
-
-/* * */
-/* ALERT HEADER */
-
-.alertHeader {
-	display: flex;
-	align-items: center;
-	gap: var(--size-spacing-10);
-	flex-wrap: wrap;
-}
-
-/* * */
-/* ALERT CONTENT */
-
-.alertContent {
-	display: flex;
-	flex-direction: column;
-	gap: var(--size-spacing-5);
-}
-
-/* * */
-/* ALERT TITLE */
-
-.alertTitle {
-	font-size: var(--font-size-text);
-	font-weight: var(--font-weight-bold);
-	color: var(--color-system-text-100);
-	margin: 0;
-	line-height: 1.4;
-}
-
-/* * */
-/* ALERT DESCRIPTION */
-
-.alertDescription {
-	font-size: var(--font-size-muted);
-	font-weight: var(--font-weight-text);
-	color: var(--color-system-text-200);
-	margin: 0;
-	line-height: 1.5;
-} 

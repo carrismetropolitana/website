@@ -1,4 +1,3 @@
-import { AlertsCarousel } from '@/components/common/AlertsCarousel';
 import { FavoriteToggle } from '@/components/common/FavoriteToggle';
 import { NoDataLabel } from '@/components/layout/NoDataLabel';
 import { RegularListItem } from '@/components/layout/RegularListItem';
@@ -11,7 +10,6 @@ import { useLinesListContext } from '@/contexts/LinesList.context';
 import { useProfileContext } from '@/contexts/Profile.context';
 import toast from '@/utils/toast';
 import { Tooltip } from '@mantine/core';
-import { IconInfoTriangle } from '@tabler/icons-react';
 import { useTranslations } from 'next-intl';
 import { useMemo } from 'react';
 
@@ -86,8 +84,8 @@ export function ArrabidaList() {
 	return (
 		<div className={styles.arrabidaListContainer} id="lines">
 			<Surface variant="persistent" forceOverflow>
-				<Section heading={t('title')} subheading={t('subtitle')} withGap withPadding>
-					<ul className={styles.listContainer} style={{ height: '100%', width: '100%' }}>
+				<Section heading={t('title')} subheading={t('subtitle')}>
+					<ul className={styles.listContainer} style={{ height: '100%', marginBottom: '0', padding: '0', width: '100%' }}>
 						{stableItems.map((item, index, array) => {
 							const isFavorite = profileContext.data.favorite_lines?.includes(item.id) || false;
 							const alerts = alertsContext.actions.getSimplifiedAlertsByLineId(item.id);
@@ -103,21 +101,11 @@ export function ArrabidaList() {
 												<LineBadge
 													lineData={item}
 													size="md"
+													withAlertIcon={hasAlert}
 												/>
 												<LineName lineData={item} />
 											</div>
 											<div className={styles.actions} style={{ alignItems: 'center', display: 'flex', justifyContent: 'center' }}>
-												{hasAlert && (
-													<Tooltip
-														label={t('has_alerts')}
-														position="top"
-														withArrow
-													>
-														<div className={styles.alertIcon}>
-															<IconInfoTriangle size={20} />
-														</div>
-													</Tooltip>
-												)}
 												<Tooltip
 													label={t('toggle_favorite')}
 													position="top"
@@ -145,16 +133,6 @@ export function ArrabidaList() {
 											</div>
 										</div>
 									</RegularListItem>
-
-									{hasAlert && (
-										<div className={styles.alertsSurfaceOverride}>
-											<Surface variant="alerts">
-												<Section withGap>
-													<AlertsCarousel alerts={alerts} />
-												</Section>
-											</Surface>
-										</div>
-									)}
 								</li>
 							);
 						})}

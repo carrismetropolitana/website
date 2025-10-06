@@ -4,7 +4,7 @@
 .container {
 	display: grid;
 	grid-template-columns: 1fr 1fr;
-	gap: var(--size-spacing-40);
+	gap: var(--size-spacing-20);
 	width: 100%;
 	min-height: 500px;
 }
@@ -66,33 +66,35 @@
 	gap: var(--size-spacing-15);
 }
 
+@media (width <= 900px) {
+	.accordion {
+		padding: var(--size-spacing-10);
+	}
+}
+
 .accordionItem {
+	overflow: hidden;
 	background-color: var(--color-system-background-100);
 	border: 1px solid var(--color-system-border-100);
 	border-radius: var(--border-radius-lg);
 	transition: all 200ms ease;
 }
 
-.accordionItem:hover {
-	
-}
-
 .accordionControl {
 	padding: var(--size-spacing-20);
-	background-color: transparent;
-	border: none;
+	background-color: var(--color-system-background-200);
 }
 
 .accordionPanel {
-	padding: 0 var(--size-spacing-20) var(--size-spacing-20) var(--size-spacing-20);
+	padding-top: var(--size-spacing-20);
 }
 
 /* * */
 /* STEP HEADER */
 
 .stepTitle {
-	font-size: 16px;
-	font-weight: var(--font-weight-bold);
+	font-size: 20px;
+	font-weight: var(--font-weight-semibold);
 	color: var(--color-system-text-200);
 	margin: 0;
 }
@@ -116,10 +118,48 @@
 }
 
 .linesWrapper span {
-	font-size: 14px;
-	font-weight: var(--font-weight-bold);
-	color: var(--color-system-text-200);
+	font-size: 20px;
+	font-weight: var(--font-weight-semibold);
+	color: var(--color-system-text-100);
 	margin-bottom: var(--size-spacing-8);
+}
+
+/* * */
+/* LINE ITEM */
+
+.lineItem {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	width: 100%;
+	padding: var(--size-spacing-10) var(--size-spacing-15);
+	background-color: var(--color-system-background-100);
+	border-radius: 8px;
+	cursor: pointer;
+	transition: all 200ms ease;
+}
+
+.lineItem:hover {
+	background-color: var(--color-system-background-300);
+}
+
+.lineItem:active {
+	background-color: var(--color-system-background-200);
+}
+
+/* * */
+/* ARROW WRAPPER */
+
+.arrowWrapper {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	color: var(--color-system-text-400);
+	flex-shrink: 0;
+}
+
+.lineItem:hover .arrowWrapper {
+	color: var(--color-system-text-300);
 }
 
 /* * */

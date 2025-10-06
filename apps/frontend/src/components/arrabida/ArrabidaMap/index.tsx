@@ -2,12 +2,11 @@
 
 /* * */
 
-import { DraggableAllPins } from './components/BeachPins/DraggableAllPins';
-// Line-specific overlays
-import styles from './styles.module.css';
-// Base and overlays
 import type { ArrabidaMapProps } from './types';
 
+import styles from './styles.module.css';
+
+import { DraggableMapLayers } from './components';
 import { BEACH_PINS } from './constants';
 
 /* * */
@@ -33,7 +32,7 @@ export function ArrabidaMap({
 	return (
 		<div className={styles.container}>
 			<div className={styles.mapContainer}>
-				<DraggableAllPins
+				<DraggableMapLayers
 					enableDoubleClickReset={true}
 					onPinClick={onPinClick}
 					selectedAccordionId={selectedAccordionId}

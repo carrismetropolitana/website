@@ -3,6 +3,7 @@ import { Surface } from '@/components/layout/Surface';
 import { LineDisplay } from '@/components/lines/LineDisplay';
 import { useLinesContext } from '@/contexts/Lines.context';
 import { Accordion, Text } from '@mantine/core';
+import { IconArrowNarrowRight } from '@tabler/icons-react';
 import { useTranslations } from 'next-intl';
 import { useState } from 'react';
 
@@ -36,21 +37,22 @@ export function ArrabidaWay() {
 			id: 'praia-albarquel',
 			stops: [
 				{
-					lineIds: ['4474', '4414', '4415', '4471'],
-					name: 'Albarquel (N10-4)',
-				},
-				{
-					lineIds: ['4471', '4414'],
-					name: 'Praia Albarquel',
+					lineIds: ['4474'],
+					name: '11. Setúbal (Centro Comercial)',
 				},
 				{
 					lineIds: ['4415', '4474'],
-					name: 'Setúbal (ITS)',
+					name: '10. Setúbal (ITS)',
 				},
 				{
-					lineIds: ['4474'],
-					name: 'Setúbal (Centro Comercial)',
+					lineIds: ['4474', '4414', '4415', '4471'],
+					name: '1. Albarquel (N10-4)',
 				},
+				{
+					lineIds: ['4471', '4414'],
+					name: '2. Praia Albarquel',
+				},
+
 			],
 			title: 'Praia de Albarquel',
 		},
@@ -59,11 +61,11 @@ export function ArrabidaWay() {
 			stops: [
 				{
 					lineIds: ['4474'],
-					name: 'Outão X',
+					name: '3. Outão X',
 				},
 				{
 					lineIds: ['4474'],
-					name: 'Praia da Figueirinha',
+					name: '4. Praia da Figueirinha',
 				},
 			],
 			title: 'Praia da Figueirinha',
@@ -73,15 +75,15 @@ export function ArrabidaWay() {
 			stops: [
 				{
 					lineIds: ['4477'],
-					name: 'Praia dos Galápos',
+					name: '5. Praia dos Galápos',
 				},
 				{
 					lineIds: ['4477'],
-					name: 'Praia dos Galápos (acesso Pedonal)',
+					name: '6. Praia dos Galápos (acesso Pedonal)',
 				},
 				{
 					lineIds: ['4477'],
-					name: 'Frente Praia dos Galapinhos',
+					name: '7. Frente Praia dos Galapinhos',
 				},
 			],
 			title: 'Praia dos Galápos e Galapinhos',
@@ -91,15 +93,15 @@ export function ArrabidaWay() {
 			stops: [
 				{
 					lineIds: ['4470', '4477'],
-					name: 'Praia do Creiro (Parque de Estacionamento)',
+					name: '8. Praia do Creiro (Parque de Estacionamento)',
 				},
 				{
 					lineIds: ['4477'],
-					name: 'Praia do Creiro',
+					name: '9. Praia do Creiro',
 				},
 				{
 					lineIds: ['4470'],
-					name: 'Setúbal (ITS)',
+					name: '10. Setúbal (ITS)',
 				},
 			],
 			title: 'Praia do Creiro',
@@ -159,13 +161,11 @@ export function ArrabidaWay() {
 																key={lineIndex}
 																className={styles.lineItem}
 																onClick={() => handleLineClick(lineId)}
-																style={{
-																	borderRadius: '8px',
-																	cursor: 'pointer',
-																	padding: '8px',
-																}}
 															>
 																<LineDisplay lineData={lineData} />
+																<div className={styles.arrowWrapper}>
+																	<IconArrowNarrowRight size={20} />
+																</div>
 															</div>
 														);
 													})}
