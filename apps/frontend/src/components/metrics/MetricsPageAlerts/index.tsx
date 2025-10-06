@@ -166,6 +166,7 @@ export function MetricsPageAlerts() {
 
 				<div className={styles.chartContainer}>
 					<h3 className={styles.chartTitle}>Consequências das disrupções nos serviços</h3>
+					{/* @ts-expect-error - Temp until data from the api */}
 					<AlertsCauseEffectChart data={effectsCauseRawData} />
 				</div>
 
