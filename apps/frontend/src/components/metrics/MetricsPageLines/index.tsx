@@ -5,7 +5,7 @@
 import { Grid } from '@/components/layout/Grid';
 import { Section } from '@/components/layout/Section';
 import { Surface } from '@/components/layout/Surface';
-import { MetricsCardByLine } from '@/components/metrics-2/MetricsCardByLine';
+import { MetricsCardByLine } from '@/components/metrics/MetricsCardByLine';
 import { type DemandMetricsByLine } from '@carrismetropolitana/api-types/metrics';
 import { getPublicVariable } from '@carrismetropolitana/website-shared-settings';
 import { useTranslations } from 'next-intl';

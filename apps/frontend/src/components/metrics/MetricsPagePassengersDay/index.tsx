@@ -3,7 +3,7 @@
 /* * */
 
 import { Grid } from '@/components/layout/Grid';
-import { MetricsDemandChart } from '@/components/metrics-2/MetricsDemandChart';
+import { MetricsDemandChart } from '@/components/metrics/MetricsDemandChart';
 import { type DemandMetricsByAgency, type DemandMetricsByAgencyDay } from '@carrismetropolitana/api-types/metrics';
 import { getPublicVariable } from '@carrismetropolitana/website-shared-settings';
 import { DateTime } from 'luxon';

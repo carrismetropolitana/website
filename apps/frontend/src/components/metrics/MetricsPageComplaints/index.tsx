@@ -4,9 +4,9 @@
 
 import { Section } from '@/components/layout/Section';
 import { Surface } from '@/components/layout/Surface';
-import { MetricsComplaintsPageCardGroup } from '@/components/metrics-2/MetricsPageComplaintsCardGroup';
-import { MetricsPageComplaintsGlobalCard } from '@/components/metrics-2/MetricsPageComplaintsGlobalCard';
-import { MetricsPageComplaintsToolbar } from '@/components/metrics-2/MetricsPageComplaintsToolbar';
+import { MetricsComplaintsPageCardGroup } from '@/components/metrics/MetricsPageComplaintsCardGroup';
+import { MetricsPageComplaintsGlobalCard } from '@/components/metrics/MetricsPageComplaintsGlobalCard';
+import { MetricsPageComplaintsToolbar } from '@/components/metrics/MetricsPageComplaintsToolbar';
 import { useLinesContext } from '@/contexts/Lines.context';
 import { useLocationsContext } from '@/contexts/Locations.context';
 import { type ComplaintMetrics, type DemandMetricsByAgency, type DemandMetricsByAgencyMonth, type DemandMetricsByLine } from '@carrismetropolitana/api-types/metrics';
