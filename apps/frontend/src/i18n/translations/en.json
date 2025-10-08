@@ -1074,6 +1074,67 @@
 			"text1": "Carris Metropolitana has an <b>open data policy</b>, aimed at promoting transparency and closeness with its passengers by publicly sharing information related to its operations.",
 			"title1": "Open Data"
 		},
+		"MetricsPageAlerts": {
+			"alertsEvolutionChart": {
+				"heading": "Impact on the service",
+				"last_15_days": "in the last 15 days",
+				"lines": "Lines",
+				"lines_affected": "Affected lines",
+				"passengers": "Passengers",
+				"passengers_affected": "Affected passengers"
+			},
+			"byMunicipalityChart": {
+				"description": "5 municipalities most affected since the beginning of the year",
+				"heading": "Disruptions by municipality",
+				"municipality": "Municipality"
+			},
+			"causeEffectChart": {
+				"and": "and",
+				"description_1": "In recent days, passengers were most affected by",
+				"description_2": "occurrences",
+				"description_3": "which mainly resulted in",
+				"heading": "Consequences of service disruptions"
+			},
+			"heading": "Disruptions",
+			"info": {
+				"description": "We consider external causes to be all events outside the direct control of our service, such as adverse weather conditions, traffic accidents, construction works or third-party interventions. Internal causes, on the other hand, refer to failures or operational limitations of our own operation, such as technical problems with vehicles or lack of staff.",
+				"subheading_1": "of trips not made in the last 15 days",
+				"subheading_2": "were due to external causes."
+			},
+			"pluralCauses": {
+				"ACCIDENT": "Accidents",
+				"CONSTRUCTION": "Works",
+				"DEMONSTRATION": "Events / Demonstrations",
+				"HOLIDAY": "Vacations",
+				"MAINTENANCE": "Maintenances",
+				"MEDICAL_EMERGENCY": "Medical Emergencies",
+				"OTHER_CAUSE": "Other Causes",
+				"POLICE_ACTIVITY": "Police Activities",
+				"STRIKE": "Strikes",
+				"TECHNICAL_PROBLEM": "Technical Problems",
+				"UNKNOWN_CAUSE": "Unknown Causes",
+				"WEATHER": "Bad Weather"
+			},
+			"pluralEffects": {
+				"ACCESSIBILITY_ISSUE": "Accessibility Impacts",
+				"ADDITIONAL_SERVICE": "Service Increases",
+				"DETOUR": "Detours",
+				"MODIFIED_SERVICE": "Schedule Changes",
+				"NO_EFFECT": "Others",
+				"NO_SERVICE": "Canceled Services",
+				"OTHER_EFFECT": "Others",
+				"REDUCED_SERVICE": "Reduced Services",
+				"SIGNIFICANT_DELAYS": "Significant Delays",
+				"STOP_MOVED": "Moved Stops",
+				"UNKNOWN_EFFECT": "Others"
+			},
+			"subheading": "Planned disruptions and their impact on service and passengers",
+			"summaryCards": {
+				"affected_passengers": "Affected passengers",
+				"external_causes_percentage": "Due to external causes",
+				"total_alerts": "Total disruptions"
+			}
+		},
 		"MetricsPageComplaints": {
 			"heading": "Contacts",
 			"subheading": "Here, you can view all contacts received by Carris Metropolitana, broken down by Information Requests, Complaints, and Other types of contact.",

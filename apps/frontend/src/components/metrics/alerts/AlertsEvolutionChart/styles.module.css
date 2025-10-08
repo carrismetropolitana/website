@@ -1,3 +1,6 @@
+/* * */
+/* CONTAINER */
+
 .container {
     display: flex;
     flex-direction: column;
@@ -5,6 +8,9 @@
     width: 100%;
     overflow: hidden;
 }
+
+/* * */
+/* BADGE */
 
 .badgesContainer{
     display: flex;
@@ -57,4 +63,12 @@
 .summaryDescription {
 	font-size: 16px;
 	font-weight: var(--font-weight-semibold);
+}
+
+/* * */
+/* GRAPH WRAPPER */
+
+.graphWrapper {
+	opacity: 0.2;
+	animation: fadeIn 750ms infinite alternate;
 }
