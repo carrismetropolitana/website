@@ -8,9 +8,10 @@ import { FormMainValidateCode } from '@/components/form/FormMainValidateCode';
 import Titles from '@/components/Titles/Titles';
 import { getPrefilledForm, UpdateSchoolFormProvider, useUpdateSchoolForm } from '@/form/form';
 import { updateSchoolFormSchema } from '@/form/schema';
+import { type School } from '@carrismetropolitana/api-types/facilities';
 import { notifications } from '@mantine/notifications';
 import { zod4Resolver } from 'mantine-form-zod-resolver';
-import { useEffect, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import useSWR from 'swr';
 
 // import { ModalSection } from '../ModalSection';
@@ -39,7 +40,14 @@ export function FormMain({ schoolId }: Props) {
 	//
 	// B. Fetch data
 
-	const { data: schoolData, isLoading: schoolLoading } = useSWR(`https://api.carrismetropolitana.pt/v2/facilities/schools/${schoolId}`);
+	const { data: allSchoolsData, isLoading: schoolLoading } = useSWR<School[]>('https://api.carrismetropolitana.pt/v2/facilities/schools');
+
+	//
+	// C. Transform data
+
+	const schoolData = useMemo(() => {
+		return allSchoolsData?.find(item => item.id === schoolId);
+	}, [allSchoolsData, schoolId]);
 
 	//
 	// C. Handle actions
@@ -75,8 +83,6 @@ export function FormMain({ schoolId }: Props) {
 			title: 'Formulário enviado com sucesso!',
 		});
 	};
-
-	console.log(form.errors);
 
 	//
 	// D. Render components

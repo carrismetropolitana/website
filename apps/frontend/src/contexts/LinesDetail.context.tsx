@@ -190,18 +190,25 @@ export const LinesDetailContextProvider = ({ children, lineId }) => {
 		if (!dataAllPatternsState || !operationalDateContext.data.selected_date) return;
 		const activePatterns: Pattern[] = [];
 		for (const pattern of dataAllPatternsState) {
+			let closestDateSoFar: string = null;
+			let patternGroupWithClosestDate: Pattern = null;
 			for (const patternGroup of pattern) {
-				const selected_date = operationalDateContext.data.selected_date.operational_date;
-				if (!selected_date) return;
+				const selectedDate = operationalDateContext.data.selected_date.operational_date;
+				if (!selectedDate) return;
 				// Find the closest valid date
 				const closestDate = patternGroup.valid_on.reduce((acc, curr) => {
-					if (selected_date <= curr && (acc === '' || curr < acc)) return curr;
+					if (selectedDate <= curr && (acc === '' || curr < acc)) return curr;
 					return acc;
 				}, '');
-				// If the closest date is valid, add the pattern group to the list
-				if (closestDate != '' && !activePatterns.find(activePattern => activePattern.id === patternGroup.id)) {
-					activePatterns.push(patternGroup);
+				if (!closestDateSoFar) closestDateSoFar = closestDate;
+				if (closestDate && closestDate <= closestDateSoFar) {
+					patternGroupWithClosestDate = patternGroup;
+					closestDateSoFar = closestDate;
 				}
+			}
+			// If the closest date is valid, add the pattern group to the list
+			if (patternGroupWithClosestDate && !activePatterns.find(activePattern => activePattern.id === patternGroupWithClosestDate.id)) {
+				activePatterns.push(patternGroupWithClosestDate);
 			}
 		}
 		const sortedPatterns = activePatterns.sort((a, b) => a.id.localeCompare(b.id));

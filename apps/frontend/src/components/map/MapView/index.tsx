@@ -27,6 +27,7 @@ const MAP_LOAD_ASSETS = [
 	/* * */
 	{ name: 'cmet-bus-delay', sdf: false, url: '/assets/map/bus-delay.png' },
 	{ name: 'cmet-bus-regular', sdf: false, url: '/assets/map/bus-regular.png' },
+	{ name: 'cmet-bus-cut', sdf: false, url: '/assets/map/bus-cut.png' },
 	{ name: 'cmet-bus-error', sdf: false, url: '/assets/map/bus-error.png' },
 	{ name: 'cmet-needle-pin', sdf: false, url: '/assets/map/needle-pin.png' },
 	{ name: 'cmet-shape-direction', sdf: true, url: '/assets/map/shape-direction.png' },

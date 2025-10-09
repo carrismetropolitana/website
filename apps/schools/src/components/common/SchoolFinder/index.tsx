@@ -6,6 +6,7 @@ import { SelectEducationLevel } from '@/components/common/SelectEducationLevel';
 import { SelectMunicipality } from '@/components/common/SelectMunicipality';
 import { SelectSchool } from '@/components/common/SelectSchool';
 import { MapViewSchools } from '@/components/map/MapViewSchools';
+import { School } from '@carrismetropolitana/api-types/facilities';
 import { useMemo } from 'react';
 import useSWR from 'swr';
 
@@ -30,7 +31,7 @@ export function SchoolFinder({ onSelectEducationLevel, onSelectMunicipalityId, o
 	//
 	// A. Fetch data
 
-	const { data: allSchoolsData } = useSWR('https://api.carrismetropolitana.pt/v2/facilities/schools');
+	const { data: allSchoolsData } = useSWR<School[]>('https://api.carrismetropolitana.pt/v2/facilities/schools');
 
 	//
 	// B. Transform data
@@ -81,9 +82,6 @@ export function SchoolFinder({ onSelectEducationLevel, onSelectMunicipalityId, o
 		// If an education level is selected, show schools only from that level
 		if (selectedEducationLevel) {
 			filterResult = filterResult.filter(item => item.cicles?.includes(selectedEducationLevel));
-			filterResult = filterResult.filter((school) => {
-				return school.cicles?.includes(selectedEducationLevel);
-			});
 		}
 		// Set filter results
 		return filterResult;

@@ -5,7 +5,7 @@ import { cutStringAtLength } from '@/utils/cut-string-at-length';
 
 /* * */
 
-interface Props {
+interface OpenGraphLinesDynamicProps {
 	color: string
 	localities: string[]
 	longName: string
@@ -15,7 +15,7 @@ interface Props {
 
 /* * */
 
-export function OpenGraphLinesDynamic({ color, localities, longName, shortName, textColor }: Props) {
+export function OpenGraphLinesDynamic({ color, localities, longName, shortName, textColor }: OpenGraphLinesDynamicProps) {
 	return (
 		<div style={{ alignItems: 'flex-start', backgroundColor: '#fff', display: 'flex', flexDirection: 'column', height: '100%', justifyContent: 'flex-start', padding: 50, width: '100%' }}>
 			<div style={{ alignItems: 'center', display: 'flex', justifyContent: 'space-between', width: '100%' }}>
