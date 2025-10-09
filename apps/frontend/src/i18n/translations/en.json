@@ -1618,6 +1618,7 @@
 				"links": {
 					"cards": "Monthly Pass",
 					"helpdesks": "Where to buy",
+					"tap-and-ride": "Tap & Ride",
 					"tickets": "Occasional Tickets"
 				}
 			}
@@ -1870,11 +1871,15 @@
 		"TicketsHeader": {
 			"heading": "Occasional Tickets",
 			"onboard": {
-				"description": "You can travel on CMetropolitana by purchasing a ticket directly from the driver. For now, only cash payment is accepted.",
+				"description": "You can travel on Carris Metropolitana by purchasing a ticket directly from the driver (in cash), or by using a contactless bank card at the yellow validator.",
+				"inner": {
+					"description": "Check and update invoice data for payments made with a contactless bank card.",
+					"title": "User Portal"
+				},
 				"title": "On-board Fare"
 			},
 			"prepaid": {
-				"description": "Before traveling, you can purchase a pre-paid navengante® card and load it with balance. This balance can be used to travel on any CMetropolitana line and on any amL transport operator.",
+				"description": "Before traveling, you can acquire a prepaid navegante® card or use your personalized navegante® card and load it with balance. This balance can be used to travel on any Carris Metropolitana line and with any transport operator in the AML.",
 				"title": "Pre-paid Fare"
 			},
 			"subheading": "Discover how much it costs to travel on CMetropolitana from time to time. There are 5 fare categories, with on-board or pre-paid fares, associated with different types of routes."

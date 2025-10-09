@@ -183,16 +183,27 @@
 			},
 			"effect": {
 				"ACCESSIBILITY_ISSUE": "Impacto na Acessibilidade",
+				"ACCESSIBILITY_ISSUE_PLURAL": "Impactos na Acessibilidade",
 				"ADDITIONAL_SERVICE": "Aumento de Serviço",
+				"ADDITIONAL_SERVICE_PLURAL": "Aumentos de Serviço",
 				"DETOUR": "Desvio",
+				"DETOUR_PLURAL": "Desvios",
 				"MODIFIED_SERVICE": "Alteração de Horários",
+				"MODIFIED_SERVICE_PLURAL": "Alteração de Horários",
 				"NO_EFFECT": "Outro",
+				"NO_EFFECT_PLURAL": "Outros",
 				"NO_SERVICE": "Serviço Cancelado",
+				"NO_SERVICE_PLURAL": "Serviços Cancelados",
 				"OTHER_EFFECT": "Outro",
+				"OTHER_EFFECT_PLURAL": "Outros",
 				"REDUCED_SERVICE": "Serviço Reduzido",
+				"REDUCED_SERVICE_PLURAL": "Serviços Reduzidos",
 				"SIGNIFICANT_DELAYS": "Atrasos Significativos",
+				"SIGNIFICANT_DELAYS_PLURAL": "Atrasos Significativos",
 				"STOP_MOVED": "Paragem Deslocada",
-				"UNKNOWN_EFFECT": "Outro"
+				"STOP_MOVED_PLURAL": "Paragens Deslocadas",
+				"UNKNOWN_EFFECT": "Outro",
+				"UNKNOWN_EFFECT_PLURAL": "Outros"
 			}
 		},
 		"AlertsDetail": {
@@ -1076,6 +1087,10 @@
 			"text1": "A Carris Metropolitana possui uma <b>política de dados abertos</b>, com o objetivo de promover a transparência e a proximidade com os seus passageiros, divulgando publicamente informação relativa à sua operação.",
 			"title1": "Dados Abertos"
 		},
+		"MetricsPageAlerts": {
+			"heading": "Disrupções",
+			"subheading": "Disrupções planeadas e o seu impacto no serviço e nos passageiros"
+		},
 		"MetricsPageComplaints": {
 			"heading": "Contactos",
 			"subheading": "Aqui, consegue consultar a totalidade de contactos recebidos pela Carris Metropolitana, discriminados por Pedidos de Informação, Reclamações e Outro tipo de contacto.",
@@ -1579,6 +1594,7 @@
 				"links": {
 					"cards": "Passe Mensal",
 					"helpdesks": "Onde comprar",
+					"tap-and-ride": "Tap & Ride",
 					"tickets": "Bilhetes Ocasionais"
 				}
 			}
@@ -1828,11 +1844,15 @@
 		"TicketsHeader": {
 			"heading": "Bilhetes Ocasionais",
 			"onboard": {
-				"description": "Pode viajar na CMetropolitana adquirindo um bilhete diretamente ao motorista. Por enquanto, é apenas aceite pagamento em numerário.",
+				"description": "Pode viajar na Carris Metropolitana adquirindo um bilhete diretamente ao motorista (em numerário), ou utilizando um cartão bancário contactless, no validador amarelo.",
+				"inner": {
+					"description": "Consultar e atualizar dados de faturas de pagamentos feitos com cartão bancário contactless.",
+					"title": "Portal do Utilizador"
+				},
 				"title": "Tarifa de Bordo"
 			},
 			"prepaid": {
-				"description": "Antes de viajar, pode adquirir um cartão navegante® pré-pago e carregar com saldo. Este saldo pode ser utilizado para viajar em qualquer linha da CMetropolitana e em qualquer operador de transportes da amL.",
+				"description": "Antes de viajar, pode adquirir um cartão navegante® pré-pago, ou utilizar o seu cartão navegante® personalizado, e carregar com saldo. Este saldo pode ser utilizado para viajar em qualquer linha da Carris Metropolitana e em qualquer operador de transportes da amL.",
 				"title": "Tarifa Pré-paga"
 			},
 			"subheading": "Descubra quanto custa viajar na CMetropolitana de vez em quando. Existem 5 categorias de tarifários, com tarifa de bordo ou pré-paga, associadas aos diferentes tipos de linhas."

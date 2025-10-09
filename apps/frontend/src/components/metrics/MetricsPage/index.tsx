@@ -1,6 +1,7 @@
 /* * */
 
 import { MetricsPageAboutOpenData } from '@/components/metrics/MetricsPageAboutOpenData';
+import { MetricsPageAlerts } from '@/components/metrics/MetricsPageAlerts';
 import { MetricsPageComplaints } from '@/components/metrics/MetricsPageComplaints';
 import { MetricsPageIntro } from '@/components/metrics/MetricsPageIntro';
 import { MetricsPageLines } from '@/components/metrics/MetricsPageLines';
@@ -19,6 +20,7 @@ export function MetricsPage() {
 			<MetricsPageRecords />
 			<MetricsPageLines />
 			<MetricsPageService />
+			<MetricsPageAlerts />
 			<MetricsPageComplaints />
 		</>
 	);

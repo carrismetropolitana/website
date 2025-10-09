@@ -19,13 +19,13 @@
 
 .gridWrapper {
   display: grid;
-  grid-template-columns: 1fr 250px;
+  grid-template-columns: 1fr;
   gap: 20px;
   align-items: flex-start;
   justify-content: stretch;
 }
 
-@media (max-width: 800px) {
+@media (width <= 800px) {
   .gridWrapper {
     grid-template-columns: 1fr;
   }
@@ -35,10 +35,10 @@
 /* STOPS */
 
 .stopsWrapper {
-  border-radius: 10px;
-  background-color: #ffffff;
-  box-shadow: 2px 3px 2px 0px rgba(0, 0, 0, 0.1);
   overflow: hidden;
+  background-color: #fff;
+  border-radius: 10px;
+  box-shadow: 2px 3px 2px 0 rgb(0 0 0 / 10%);
 }
 
 .stopsList {

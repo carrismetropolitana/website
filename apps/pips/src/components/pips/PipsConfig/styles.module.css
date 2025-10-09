@@ -1,0 +1,43 @@
+/* * */
+/* CONTAINER WRAPPER */
+
+.container {
+	display: flex;
+	flex-direction: column;
+	padding: var(--size-spacing-20);
+}
+
+/* * */
+/* FILTERS WRAPPER */
+
+.filtersWrapper {
+	display: flex;
+	flex-direction: column;
+	gap: var(--size-spacing-3);
+	align-items: flex-start;
+	justify-content: flex-start;
+	padding: var(--size-spacing-20);
+	padding-top: 0;
+}
+
+/* * */
+/* INPUTS WRAPPER */
+
+.inputsWrapper {
+	display: flex;
+	flex-direction: column;
+	gap: 10px;
+	align-items: stretch;
+	justify-content: flex-start;
+	width: 100%;
+}
+
+/* * */
+/* BUTTONS WRAPPER */
+
+.buttonsWrapper {
+	display: flex;
+	gap: 10px;
+	width: fit-content;
+	margin-top: var(--size-spacing-15);
+}

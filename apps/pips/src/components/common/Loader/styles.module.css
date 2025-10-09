@@ -1,0 +1,109 @@
+/* * */
+/* ROOT */
+
+.root {
+	position: relative;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	width: var(--container-size);
+	height: var(--container-size);
+
+	--center: calc(var(--container-size) / 2);
+    --radius: calc(var(--container-size) / 2 - var(--blade-size) / 2 * var(--blade-tightness));
+}
+
+/* * */
+/* PROPS / SIZE */
+
+.root[data-size="sm"] {
+	--container-size: 24px;
+	--blade-size: 7px;
+	--blade-thickness: 3px;
+	--blade-tightness: 1.25;
+}
+
+.root[data-size="md"] {
+	--container-size: 40px;
+	--blade-size: 10px;
+	--blade-thickness: 4px;
+	--blade-tightness: 1.75;
+}
+
+.root[data-size="lg"] {
+	--container-size: 60px;
+	--blade-size: 18px;
+	--blade-thickness: 7px;
+	--blade-tightness: 1.25;
+}
+
+/* * */
+/* BLADES */
+
+.blade {
+	position: absolute;
+	top: calc(var(--center) + var(--radius) * sin(var(--angle)) - var(--blade-size) / 2);
+    left: calc(var(--center) + var(--radius) * cos(var(--angle)) - var(--blade-thickness) / 2);
+    width: var(--blade-thickness);
+    height: var(--blade-size);
+    background-color: var(--color-system-text-300);
+    border-radius: 999px;
+    transform: rotate(calc(var(--angle) + 90deg));
+    animation: spinner-animation 1000ms var(--delay) linear infinite;
+    will-change: opacity;
+}
+
+.blade:nth-child(1) {
+    --angle: 0deg;
+	--delay: -1625ms;
+}
+
+.blade:nth-child(2) {
+	--angle: 45deg;
+	--delay: -1500ms;
+}
+
+.blade:nth-child(3) {
+    --angle: 90deg;
+	--delay: -1375ms;
+}
+
+.blade:nth-child(4) {
+    --angle: 135deg;
+	--delay: -1250ms;
+}
+
+.blade:nth-child(5) {
+    --angle: 180deg;
+	--delay: -1125ms;
+}
+
+.blade:nth-child(6) {
+    --angle: 225deg;
+	--delay: -1000ms;
+}
+
+.blade:nth-child(7) {
+    --angle: 270deg;
+	--delay: -875ms;
+}
+
+.blade:nth-child(8) {
+    --angle: 315deg;
+	--delay: -750ms;
+}
+
+/* * */
+/* ANIMATION */
+
+@keyframes spinner-animation {
+	0% {
+		opacity: 0.85;
+	}
+	50% {
+		opacity: 0.25;
+	}
+	100% {
+		opacity: 0.25;
+	}
+}

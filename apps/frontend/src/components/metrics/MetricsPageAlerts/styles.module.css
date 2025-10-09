@@ -1,0 +1,60 @@
+/* * */
+/* INFO SECTION */
+
+.infoWrapper {
+	display: flex;
+	flex-direction: column;
+	gap: var(--size-spacing-5);
+}
+
+.bigNumberWrapper {
+	display: flex;
+	flex-direction: row;
+	gap: var(--size-spacing-10);
+	align-items: flex-start;
+}
+
+.bigNumber {
+    font-size: 40px;
+    font-weight: var(--font-weight-bold);
+	line-height: 1;
+}
+
+.liveIcon {
+    margin-top: var(--size-spacing-5);
+}
+
+.title {
+	font-size: 18px;
+	font-weight: var(--font-weight-bold);
+	color: var(--color-system-text-100)
+}
+
+.description {
+	font-size: 12px;
+	font-weight: var(--font-weight-medium);
+	line-height: 1.6;
+	color: var(--color-system-text-200);
+}
+
+/* * */
+/* CHARTS */
+
+.chartContainer {
+	display: flex;
+	flex-direction: column;
+	gap: var(--size-spacing-30);
+	justify-content: center;
+	width: 100%;
+	padding: var(--size-spacing-20);
+	overflow: hidden;
+	color: var(--color-system-text-300);
+	background-color: var(--color-system-background-200);
+	border: 1px solid var(--color-system-border-100);
+	border-radius: var(--border-radius-lg);
+	box-shadow: var(--box-shadow-lg);
+}
+
+.chartTitle {
+	color: var(--color-system-text-100);
+}

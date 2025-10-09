@@ -27,7 +27,7 @@ export function NavigationMainMenuItem({ href, icon, label, target, ...props }: 
 			<span className={styles.label}>
 				{label}
 			</span>
-			{target === '_blank' ? <IconExternalLink className={styles.arrowIndicator} size={16} /> : <IconArrowNarrowRight className={styles.arrowIndicator} size={20} />}
+			{target === '_blank' ? <IconExternalLink className={styles.arrowIndicator} size={18} /> : <IconArrowNarrowRight className={styles.arrowIndicator} size={20} />}
 		</Menu.Item>
 	);
 }
