@@ -184,27 +184,16 @@
 			},
 			"effect": {
 				"ACCESSIBILITY_ISSUE": "Impacto na Acessibilidade",
-				"ACCESSIBILITY_ISSUE_PLURAL": "Impactos na Acessibilidade",
 				"ADDITIONAL_SERVICE": "Aumento de Serviço",
-				"ADDITIONAL_SERVICE_PLURAL": "Aumentos de Serviço",
 				"DETOUR": "Desvio",
-				"DETOUR_PLURAL": "Desvios",
 				"MODIFIED_SERVICE": "Alteração de Horários",
-				"MODIFIED_SERVICE_PLURAL": "Alteração de Horários",
 				"NO_EFFECT": "Outro",
-				"NO_EFFECT_PLURAL": "Outros",
 				"NO_SERVICE": "Serviço Cancelado",
-				"NO_SERVICE_PLURAL": "Serviços Cancelados",
 				"OTHER_EFFECT": "Outro",
-				"OTHER_EFFECT_PLURAL": "Outros",
 				"REDUCED_SERVICE": "Serviço Reduzido",
-				"REDUCED_SERVICE_PLURAL": "Serviços Reduzidos",
 				"SIGNIFICANT_DELAYS": "Atrasos Significativos",
-				"SIGNIFICANT_DELAYS_PLURAL": "Atrasos Significativos",
 				"STOP_MOVED": "Paragem Deslocada",
-				"STOP_MOVED_PLURAL": "Paragens Deslocadas",
-				"UNKNOWN_EFFECT": "Outro",
-				"UNKNOWN_EFFECT_PLURAL": "Outros"
+				"UNKNOWN_EFFECT": "Outro"
 			}
 		},
 		"AlertsDetail": {
@@ -1089,8 +1078,65 @@
 			"title1": "Dados Abertos"
 		},
 		"MetricsPageAlerts": {
+			"alertsEvolutionChart": {
+				"heading": "Impacto no serviço",
+				"last_15_days": "nos últimos 15 dias",
+				"lines": "Linhas",
+				"lines_affected": "Linhas afetadas",
+				"passengers": "Passageiros",
+				"passengers_affected": "Passageiros afetados"
+			},
+			"byMunicipalityChart": {
+				"description": "5 municípios mais afetados desde o início do ano",
+				"heading": "Disrupções por município",
+				"municipality": "Município"
+			},
+			"causeEffectChart": {
+				"and": "e",
+				"description_1": "Nos últimos 15 dias, os passageiros foram mais afetados por",
+				"description_2": "ocorrências",
+				"description_3": "que resultaram sobretudo em",
+				"heading": "Consequências das disrupções nos serviços"
+			},
 			"heading": "Disrupções",
-			"subheading": "Disrupções planeadas e o seu impacto no serviço e nos passageiros"
+			"info": {
+				"description": "Consideramos causas externas todos os eventos fora do controlo direto do nosso serviço, como condições meteorológicas adversas, acidentes de viação, obras ou intervenções de terceiros. Por outro lado, causas internas referem-se a falhas ou limitações operacionais da nossa própria operação, como problemas técnicos nos veículos ou falta de pessoal.",
+				"subheading_1": "das viagens não realizadas nos últimos 15 dias",
+				"subheading_2": "deveram-se a causas externas."
+			},
+			"pluralCauses": {
+				"ACCIDENT": "Acidentes",
+				"CONSTRUCTION": "Obras",
+				"DEMONSTRATION": "Eventos",
+				"HOLIDAY": "Férias",
+				"MAINTENANCE": "Manutenções",
+				"MEDICAL_EMERGENCY": "Emergências Médicas",
+				"OTHER_CAUSE": "Outras Causas",
+				"POLICE_ACTIVITY": "Atividade Policial",
+				"STRIKE": "Greves",
+				"TECHNICAL_PROBLEM": "Problemas Técnicos",
+				"UNKNOWN_CAUSE": "Causas Desconhecidas",
+				"WEATHER": "Mau Tempo"
+			},
+			"pluralEffects": {
+				"ACCESSIBILITY_ISSUE": "Impactos na Acessibilidade",
+				"ADDITIONAL_SERVICE": "Aumentos de Serviço",
+				"DETOUR": "Desvios",
+				"MODIFIED_SERVICE": "Alteração de Horários",
+				"NO_EFFECT": "Outros",
+				"NO_SERVICE": "Serviços Cancelados",
+				"OTHER_EFFECT": "Outros",
+				"REDUCED_SERVICE": "Serviços Reduzidos",
+				"SIGNIFICANT_DELAYS": "Atrasos Significativos",
+				"STOP_MOVED": "Paragens Deslocadas",
+				"UNKNOWN_EFFECT": "Outros"
+			},
+			"subheading": "Disrupções planeadas e o seu impacto no serviço e nos passageiros, desde o início do ano.",
+			"summaryCards": {
+				"affected_passengers": "Passageiros afetados",
+				"external_causes_percentage": "Derivadas de causas externas",
+				"total_alerts": "Total de disrupções"
+			}
 		},
 		"MetricsPageComplaints": {
 			"heading": "Contactos",

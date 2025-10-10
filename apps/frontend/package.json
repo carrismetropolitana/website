@@ -4,6 +4,7 @@
 	"private": true,
 	"scripts": {
 		"build": "next build",
+		"check-translations": "tsx src/i18n/check-translations.ts",
 		"dev": "next dev -p 49002",
 		"lint": "eslint .",
 		"lint-fix": "eslint . --fix",
@@ -46,7 +47,7 @@
 		"ukkonen": "2.2.0"
 	},
 	"devDependencies": {
-		"@carrismetropolitana/api-types": "20250902.1623.9",
+		"@carrismetropolitana/api-types": "20251007.1444.4",
 		"@carrismetropolitana/eslint": "20250622.1204.50",
 		"@carrismetropolitana/website-shared-types": "*",
 		"@tmlmobilidade/tsconfig": "20250902.1546.20",
