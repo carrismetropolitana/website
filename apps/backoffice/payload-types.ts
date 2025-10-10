@@ -68,8 +68,10 @@ export interface Config {
   blocks: {};
   collections: {
     'case-studies': CaseStudy;
+    'knowledge-base': KnowledgeBase;
     media: Media;
     news: News;
+    notes: Note;
     topics: Topic;
     users: User;
     'payload-locked-documents': PayloadLockedDocument;
@@ -79,8 +81,10 @@ export interface Config {
   collectionsJoins: {};
   collectionsSelect: {
     'case-studies': CaseStudiesSelect<false> | CaseStudiesSelect<true>;
+    'knowledge-base': KnowledgeBaseSelect<false> | KnowledgeBaseSelect<true>;
     media: MediaSelect<false> | MediaSelect<true>;
     news: NewsSelect<false> | NewsSelect<true>;
+    notes: NotesSelect<false> | NotesSelect<true>;
     topics: TopicsSelect<false> | TopicsSelect<true>;
     users: UsersSelect<false> | UsersSelect<true>;
     'payload-locked-documents': PayloadLockedDocumentsSelect<false> | PayloadLockedDocumentsSelect<true>;
@@ -139,6 +143,33 @@ export interface CaseStudy {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "knowledge-base".
+ */
+export interface KnowledgeBase {
+  id: string;
+  title: string;
+  /**
+   * URL única para este item. Será gerada automaticamente do título se deixado em branco.
+   */
+  slug: string;
+  contentType: 'link' | 'file';
+  link?: string | null;
+  file?: (string | null) | Media;
+  publishDate?: string | null;
+  status: 'draft' | 'published';
+  heroImage?: (string | null) | Media;
+  topic: 'Documentação' | 'Recursos' | 'Open Data' | 'Sustentabilidade' | 'Imprensa' | 'Tecnologia' | 'Outro';
+  seo?: {
+    metaTitle?: string | null;
+    metaDescription?: string | null;
+    ogImage?: (string | null) | Media;
+  };
+  authors?: (string | null) | User;
+  publishedAt: string;
+  updatedAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "media".
  */
 export interface Media {
@@ -155,6 +186,31 @@ export interface Media {
   height?: number | null;
   focalX?: number | null;
   focalY?: number | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "users".
+ */
+export interface User {
+  id: string;
+  name?: string | null;
+  updatedAt: string;
+  createdAt: string;
+  email: string;
+  resetPasswordToken?: string | null;
+  resetPasswordExpiration?: string | null;
+  salt?: string | null;
+  hash?: string | null;
+  loginAttempts?: number | null;
+  lockUntil?: string | null;
+  sessions?:
+    | {
+        id: string;
+        createdAt?: string | null;
+        expiresAt: string;
+      }[]
+    | null;
+  password?: string | null;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -198,28 +254,30 @@ export interface Topic {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "users".
+ * via the `definition` "notes".
  */
-export interface User {
+export interface Note {
   id: string;
-  name?: string | null;
+  title: string;
+  /**
+   * URL única para esta nota. Será gerada automaticamente do título se deixado em branco.
+   */
+  slug: string;
+  contentType: 'link' | 'file';
+  link?: string | null;
+  file?: (string | null) | Media;
+  publishDate?: string | null;
+  status: 'draft' | 'published';
+  heroImage?: (string | null) | Media;
+  tags?: string[] | null;
+  seo?: {
+    metaTitle?: string | null;
+    metaDescription?: string | null;
+    ogImage?: (string | null) | Media;
+  };
+  authors?: (string | null) | User;
+  publishedAt: string;
   updatedAt: string;
-  createdAt: string;
-  email: string;
-  resetPasswordToken?: string | null;
-  resetPasswordExpiration?: string | null;
-  salt?: string | null;
-  hash?: string | null;
-  loginAttempts?: number | null;
-  lockUntil?: string | null;
-  sessions?:
-    | {
-        id: string;
-        createdAt?: string | null;
-        expiresAt: string;
-      }[]
-    | null;
-  password?: string | null;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -233,12 +291,20 @@ export interface PayloadLockedDocument {
         value: string | CaseStudy;
       } | null)
     | ({
+        relationTo: 'knowledge-base';
+        value: string | KnowledgeBase;
+      } | null)
+    | ({
         relationTo: 'media';
         value: string | Media;
       } | null)
     | ({
         relationTo: 'news';
         value: string | News;
+      } | null)
+    | ({
+        relationTo: 'notes';
+        value: string | Note;
       } | null)
     | ({
         relationTo: 'topics';
@@ -303,6 +369,31 @@ export interface CaseStudiesSelect<T extends boolean = true> {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "knowledge-base_select".
+ */
+export interface KnowledgeBaseSelect<T extends boolean = true> {
+  title?: T;
+  slug?: T;
+  contentType?: T;
+  link?: T;
+  file?: T;
+  publishDate?: T;
+  status?: T;
+  heroImage?: T;
+  topic?: T;
+  seo?:
+    | T
+    | {
+        metaTitle?: T;
+        metaDescription?: T;
+        ogImage?: T;
+      };
+  authors?: T;
+  publishedAt?: T;
+  updatedAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "media_select".
  */
 export interface MediaSelect<T extends boolean = true> {
@@ -330,6 +421,31 @@ export interface NewsSelect<T extends boolean = true> {
   is_featured?: T;
   topics?: T;
   featured_image?: T;
+  publishedAt?: T;
+  updatedAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "notes_select".
+ */
+export interface NotesSelect<T extends boolean = true> {
+  title?: T;
+  slug?: T;
+  contentType?: T;
+  link?: T;
+  file?: T;
+  publishDate?: T;
+  status?: T;
+  heroImage?: T;
+  tags?: T;
+  seo?:
+    | T
+    | {
+        metaTitle?: T;
+        metaDescription?: T;
+        ogImage?: T;
+      };
+  authors?: T;
   publishedAt?: T;
   updatedAt?: T;
 }
