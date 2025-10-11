@@ -38,7 +38,7 @@ export function Arrabida365() {
 					<h6 className={styles.subheading}>{t('subtitle')}</h6>
 					<div className={styles.imagesWrapper}>
 						<Image
-							alt="Imagem ilustrativa do projeto da Arrábida 365."
+							alt={t('altImageMap')}
 							className={styles.imageMap}
 							height={1080}
 							src="/assets/arrabidas/arrabida_365_map.png"
@@ -50,7 +50,7 @@ export function Arrabida365() {
 								<IconArrowRight size={18} />
 							</Link>
 							<Image
-								alt="Notícia em destaque “Setúbal, Arrábida: O Início da Época Balnear”"
+								alt={t('altImageBee')}
 								className={styles.imageBee}
 								height={1080}
 								src="/assets/arrabidas/setubal_arrabida_banner.png"
