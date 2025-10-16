@@ -343,12 +343,12 @@
 		"ArrabidaPage": {
 			"sections": {
 				"Arrabida365": {
+					"altImageBee": "Featured news “Setúbal, Arrábida: The beginning of the Summer Season”",
+					"altImageMap": "Illustrative image of the Arrábida 365 project",
 					"button": "Expand",
 					"buttonSeeMore": "See More",
 					"subtitle": "This project aims to promote sustainable mobility in the Serra da Arrábida, encouraging the use of public transport to reach the beaches, events, and places of interest in the region. Here you can keep up with the latest news in the Carris Metropolitana network, ongoing campaigns, local events, and special partnerships.",
-					"title": "Arrábida 365",
-					"altImageMap": "Illustrative image of the Arrábida 365 project",
-					"altImageBee": "Featured news “Setúbal, Arrábida: The beginning of the Summer Season”"
+					"title": "Arrábida 365"
 				},
 				"ArrabidaAbout": {
 					"text-1": "Arrábida 365",

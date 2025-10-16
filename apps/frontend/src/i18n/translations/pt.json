@@ -343,12 +343,12 @@
 		"ArrabidaPage": {
 			"sections": {
 				"Arrabida365": {
+					"altImageBee": "Notícia em destaque “Setúbal, Arrábida: O Início da Época Balnear”",
+					"altImageMap": "Imagem ilustrativa do projeto da Arrábida 365.",
 					"button": "Expandir",
 					"buttonSeeMore": "Saber Mais",
 					"subtitle": "Este projeto tem como objetivo promover a mobilidade sustentável na Serra da Arrábida, incentivando o uso do transporte público para chegar às praias, eventos e locais de interesse da região. Aqui poderá acompanhar as últimas novidades na rede da Carris Metropolitana, campanhas em curso, eventos locais e parcerias especiais.",
-					"title": "Arrábida 365",
-					"altImageMap": "Imagem ilustrativa do projeto da Arrábida 365.",
-					"altImageBee": "Notícia em destaque “Setúbal, Arrábida: O Início da Época Balnear”"
+					"title": "Arrábida 365"
 				},
 				"ArrabidaAbout": {
 					"text-1": "Arrábida 365",
