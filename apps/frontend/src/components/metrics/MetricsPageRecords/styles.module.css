@@ -7,3 +7,41 @@
 	font-weight: var(--font-weight-medium);
 	color: var(--color-system-text-100);
 }
+
+/* * */
+/* CARD */
+
+.cardWrapper {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+}
+
+.cardBackground {
+  display: block;
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+}
+
+.cardContent {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  padding: var(--size-spacing-30);
+  color: #fdb71a;
+
+}
+
+.cardTitle {
+	font-size: 42px;
+}
+
+.cardDescription {
+	font-weight: var(--font-weight-semibold);
+}
+
+.cardDate {
+	font-size: var(--font-size-text);
+}

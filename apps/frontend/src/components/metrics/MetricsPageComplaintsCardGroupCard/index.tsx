@@ -44,7 +44,7 @@ export function MetricsComplaintsPageCardGroupCard({ description1, description2,
 				<div className={styles.cardBody}>
 					<Text className={styles.totalToText}>{t('total_to')}</Text>
 					{subheading === 'line' && <div className={styles.lineBadge}><LineBadge color={line_color} lineId={filter_value} /></div> }
-					{subheading === 'global' && <Text className={styles.subheading}>área metropolitana de Lisboa</Text> }
+					{subheading === 'global' && <Text className={styles.subheading}>{t('metropolitan_area')}</Text> }
 					{subheading === 'municipality' && <Text className={styles.subheading}>{municipality_name}</Text> }
 
 					<Image alt={title}className={styles.image} src={image} />

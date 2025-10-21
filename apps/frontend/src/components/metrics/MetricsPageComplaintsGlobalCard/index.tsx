@@ -12,12 +12,12 @@ import styles from './styles.module.css';
 
 interface Props {
 	allData: ComplaintMetrics[]
-	totalPassengersLastYear: number
+	totalPassengersThisYear: number
 }
 
 /* * */
 
-export function MetricsPageComplaintsGlobalCard({ allData, totalPassengersLastYear }: Props) {
+export function MetricsPageComplaintsGlobalCard({ allData, totalPassengersThisYear }: Props) {
 	//
 
 	//
@@ -31,7 +31,7 @@ export function MetricsPageComplaintsGlobalCard({ allData, totalPassengersLastYe
 	const renderTotalPassegersLastYear = () => {
 		return (
 			<div>
-				<Text className={styles.totalPassengersContactsValue}>{t('total_passengers_day', { value: totalPassengersLastYear })}</Text>
+				<Text className={styles.totalPassengersContactsValue}>{t('total_passengers_day', { value: totalPassengersThisYear })}</Text>
 				<Text className={styles.totalPassengersContactsDescription}>{t('total_passengers_day_contacts_desc')}</Text>
 			</div>
 		);

@@ -7,12 +7,13 @@ import { MetricsPageLines } from '@/components/metrics/MetricsPageLines';
 import { MetricsPagePassengers } from '@/components/metrics/MetricsPagePassengers';
 import { MetricsPageRecords } from '@/components/metrics/MetricsPageRecords';
 import { MetricsPageService } from '@/components/metrics/MetricsPageService';
+import { MetricsContextProvider } from '@/contexts/Metrics.context';
 
 /* * */
 
 export function MetricsPage() {
 	return (
-		<>
+		<MetricsContextProvider>
 			<MetricsPageIntro />
 			<MetricsPageAboutOpenData />
 			<MetricsPagePassengers />
@@ -20,6 +21,6 @@ export function MetricsPage() {
 			<MetricsPageLines />
 			<MetricsPageService />
 			<MetricsPageComplaints />
-		</>
+		</MetricsContextProvider>
 	);
 }

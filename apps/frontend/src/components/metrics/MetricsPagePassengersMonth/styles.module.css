@@ -1,9 +1,0 @@
-/* * */
-/* TEXT */
-
-.text {
-	padding: 0 5px;
-	font-size: 18px;
-	font-weight: var(--font-weight-medium);
-	color: var(--color-system-text-100);
-}

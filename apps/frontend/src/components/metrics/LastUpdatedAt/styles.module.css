@@ -1,0 +1,13 @@
+/* * */
+/* LIVE UPDATE */
+
+.lastUpdatedWrapper {
+	display: flex;
+	gap: var(--size-spacing-5);
+	align-items: center;
+}
+
+.lastUpdatedWrapper p {
+	font-weight: var(--font-weight-subtitle);
+	color: var(--color-brand);
+}

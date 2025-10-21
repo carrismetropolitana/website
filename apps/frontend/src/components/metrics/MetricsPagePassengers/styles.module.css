@@ -7,3 +7,11 @@
 	font-weight: var(--font-weight-medium);
 	color: var(--color-system-text-100);
 }
+
+/* * */
+/* DATES WRAPPER */
+
+.datesWrapper {
+	display: flex;
+	gap: var(--size-spacing-20);
+}
