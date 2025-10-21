@@ -2,11 +2,10 @@
 
 /* * */
 
-import type { DemandMetricsByLine } from '@carrismetropolitana/api-types/metrics';
-
 import { MetricsSectionDemandSkeleton } from '@/components/home/MetricsSectionDemandSkeleton';
 import { LineBadge } from '@/components/lines/LineBadge';
 import { useLinesContext } from '@/contexts/Lines.context';
+import { useMetricsContext } from '@/contexts/Metrics.context';
 import { LineChart } from '@mantine/charts';
 import { useTranslations } from 'next-intl';
 import { useEffect, useMemo, useState } from 'react';
@@ -15,94 +14,98 @@ import styles from './styles.module.css';
 
 /* * */
 
-interface Props {
-	data?: DemandMetricsByLine[]
-	main_description?: string
-	main_label?: string
-}
-
-/* * */
-
-export function MetricsCardByLine({ data, main_description, main_label }: Props) {
+export function MetricsCardByLine({ agencyId }: { agencyId: string }) {
 	//
 
 	//
 	// A. Setup variables
 
 	const t = useTranslations('metrics.MetricsCardByLine');
+
 	const linesContext = useLinesContext();
+	const metricsContext = useMetricsContext();
+
 	const [selectedLineId, setSelectedLineId] = useState<string | undefined>();
 
 	//
-	// C. Transform data
+	// B. Transform data
 
-	const formattedData = useMemo(() => {
-		return data?.map((item) => {
-			const lineData = linesContext.actions.getLineDataById(item.line_id);
-			const chartData = item.by_day.map(dayGroup => ({
-				day_group: dayGroup.day,
-				qty: dayGroup.qty,
-			}));
-			return {
-				...item,
-				chart_data: chartData,
-				line_data: lineData,
-			};
-		});
-	}, [data]);
+	const data = metricsContext.data.linesByDay.topLinesByAgency[agencyId];
+	const formattedData = data?.lines ?? [];
 
 	const selectedData = useMemo(() => {
-		if (!formattedData) return;
-		return formattedData.find(item => item.line_id === selectedLineId);
+		if (!formattedData.length) return undefined;
+		return (
+			formattedData.find(item => item.line.properties.line_id === selectedLineId)
+			|| formattedData[0]
+		);
 	}, [formattedData, selectedLineId]);
+
+	const lineData = useMemo(() => {
+		if (!selectedData) return undefined;
+		return linesContext.actions.getLineDataById(selectedData.line.properties.line_id);
+	}, [selectedData, linesContext.actions]);
 
 	const maxValue = useMemo(() => {
-		if (!selectedData) return 0;
-		const foundMaxValue = selectedData.chart_data.reduce((acc, item) => Math.max(acc, item.qty), 0);
-		// Round the number to the nearest multiple of 500
+		if (!selectedData?.chart?.length) return 0;
+		const foundMaxValue = selectedData.chart.reduce(
+			(acc, item) => Math.max(acc, item.qty),
+			0,
+		);
 		return Math.ceil(foundMaxValue / 500) * 500;
-	}, [formattedData, selectedLineId]);
+	}, [selectedData]);
+
+	//
+	// C. Handlers
 
 	useEffect(() => {
-		if (!formattedData) return;
-		if (selectedLineId) return;
-		setSelectedLineId(formattedData[0].line_id);
-	}, [formattedData]);
+		if (!formattedData?.length || selectedLineId) return;
+		setSelectedLineId(formattedData[0].line.properties.line_id);
+	}, [formattedData, selectedLineId]);
 
 	//
 	// D. Render components
 
-	if (!formattedData) {
-		return <MetricsSectionDemandSkeleton />;
-	}
+	if (!formattedData?.length) return <MetricsSectionDemandSkeleton />;
 
 	return (
 		<div className={styles.container}>
-
+			{/* Line selector */}
 			<div className={styles.metricsWrapper}>
 				<div className={`${styles.rowWrapper} ${styles.primary}`}>
 					<div className={styles.realtimeValueWrapper}>
-						{formattedData?.map(item => (
-							<div
-								key={item.line_id}
-								className={`${styles.realtimeValueWrapperItem} ${item.line_id === selectedLineId && styles.selected}`}
-								onClick={() => setSelectedLineId(item.line_id)}
-							>
-								<LineBadge key={item.line_id} lineData={item.line_data} size="lg" />
-							</div>
-						))}
+						{formattedData.map((item) => {
+							const lineInfo = linesContext.actions.getLineDataById(
+								item.line.properties.line_id,
+							);
+							return (
+								<div
+									key={item.line.properties.line_id}
+									className={`${styles.realtimeValueWrapperItem} ${
+										item.line.properties.line_id === selectedLineId
+											? styles.selected
+											: ''
+									}`}
+									onClick={() =>
+										setSelectedLineId(item.line.properties.line_id)}
+								>
+									<LineBadge lineData={lineInfo} size="lg" />
+								</div>
+							);
+						})}
 					</div>
-					{main_label && <p className={styles.label}>{main_label}</p>}
-					{main_description && <p className={styles.description}>{main_description}</p>}
+					<p className={styles.label}>{t(`agencies.${agencyId}.main_label`)}</p>
+					<p className={styles.description}>{t(`agencies.${agencyId}.main_description`)}</p>
 				</div>
 			</div>
 
+			{/* Chart */}
 			<div className={styles.graphWrapper}>
 				<LineChart
-					color={selectedData?.line_data?.color || '#ff00ff'}
+					color={lineData?.color || '#ff00ff'}
 					curveType="monotone"
-					data={selectedData?.chart_data || []}
-					dataKey="day_group"
+					data={selectedData?.chart || []}
+					dataKey="formatted_day"
 					gridAxis="none"
 					h={120}
 					strokeWidth={5}
@@ -112,12 +115,24 @@ export function MetricsCardByLine({ data, main_description, main_label }: Props)
 					withYAxis={false}
 					yAxisProps={{ domain: [0, maxValue] }}
 					referenceLines={[
-						{ color: 'var(--color-system-text-400)', label: t('reference_value', { value: maxValue }), labelPosition: 'insideBottomRight', strokeDasharray: '5 10', y: maxValue },
-						{ color: 'var(--color-system-text-400)', label: t('reference_value', { value: 0 }), labelPosition: 'insideBottomRight', strokeDasharray: '5 10', y: 0 },
+						{
+							color: 'var(--color-system-text-400)',
+							label: t('reference_value', { value: maxValue }),
+							labelPosition: 'insideBottomRight',
+							strokeDasharray: '5 10',
+							y: maxValue,
+						},
+						{
+							color: 'var(--color-system-text-400)',
+							label: t('reference_value', { value: 0 }),
+							labelPosition: 'insideBottomRight',
+							strokeDasharray: '5 10',
+							y: 0,
+						},
 					]}
 					series={[
 						{
-							color: selectedData?.line_data?.color || '#ff00ff',
+							color: lineData?.color || '#ff00ff',
 							label: 'Nº de validações',
 							name: 'qty',
 						},
@@ -125,13 +140,21 @@ export function MetricsCardByLine({ data, main_description, main_label }: Props)
 				/>
 			</div>
 
-			<div className={styles.summaryWrapper} style={{ backgroundColor: selectedData?.line_data?.color, color: selectedData?.line_data?.text_color }}>
-				<p className={styles.summaryValue}>{t('summary_value', { value: selectedData?.qty || -1 })}</p>
-				<p className={styles.summaryDescription}>{t('summary_description')}</p>
+			{/* Summary */}
+			<div
+				className={styles.summaryWrapper}
+				style={{
+					backgroundColor: lineData?.color,
+					color: lineData?.text_color,
+				}}
+			>
+				<p className={styles.summaryValue}>
+					{t('summary_value', { value: selectedData?.sum || 0 })}
+				</p>
+				<p className={styles.summaryDescription}>
+					{t('summary_description')}
+				</p>
 			</div>
-
 		</div>
 	);
-
-	//
 }

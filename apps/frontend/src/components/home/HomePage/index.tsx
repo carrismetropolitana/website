@@ -14,6 +14,7 @@ import { TarifsSection } from '@/components/home/TarifsSection';
 import { Grid } from '@/components/layout/Grid';
 import { PeriodsWidget } from '@/components/periods/PeriodsWidget';
 import { BreakpointDesktop } from '@/components/responsive/BreakpointSwitch';
+import { MetricsContextProvider } from '@/contexts/Metrics.context';
 
 import styles from './styles.module.css';
 
@@ -21,7 +22,7 @@ import styles from './styles.module.css';
 
 export function HomePage() {
 	return (
-		<>
+		<MetricsContextProvider>
 			<Grid columns="ab" withGap>
 				<BreakpointDesktop>
 					<QuickSearch />
@@ -38,6 +39,6 @@ export function HomePage() {
 			<SupportSection />
 			<MetricsSection />
 			<FeaturedSection />
-		</>
+		</MetricsContextProvider>
 	);
 }

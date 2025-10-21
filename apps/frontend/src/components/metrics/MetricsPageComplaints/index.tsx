@@ -9,9 +9,9 @@ import { MetricsPageComplaintsGlobalCard } from '@/components/metrics/MetricsPag
 import { MetricsPageComplaintsToolbar } from '@/components/metrics/MetricsPageComplaintsToolbar';
 import { useLinesContext } from '@/contexts/Lines.context';
 import { useLocationsContext } from '@/contexts/Locations.context';
-import { type ComplaintMetrics, type DemandMetricsByAgency, type DemandMetricsByAgencyMonth, type DemandMetricsByLine } from '@carrismetropolitana/api-types/metrics';
+import { useMetricsContext } from '@/contexts/Metrics.context';
+import { type ComplaintMetrics } from '@carrismetropolitana/api-types/metrics';
 import { getPublicVariable } from '@carrismetropolitana/website-shared-settings';
-import { DateTime } from 'luxon';
 import { useTranslations } from 'next-intl';
 import { useEffect, useState } from 'react';
 import useSWR from 'swr';
@@ -34,15 +34,10 @@ export function MetricsPageComplaints() {
 		last_update: '',
 		line_color: '',
 		municipality_name: '',
-		total_passengers_last_week: 0,
-		total_passengers_last_week_line_id: 0,
-		total_passengers_last_year: 0,
 	});
 
-	const todayStr = DateTime.local().toISODate();
-	const sevenDaysAgoStr = DateTime.local().minus({ days: 7 }).toISODate();
-
 	const t = useTranslations('metrics.MetricsPageComplaints');
+	const { data: demandMetrics } = useMetricsContext();
 
 	const linesContext = useLinesContext();
 	const locationsContext = useLocationsContext();
@@ -50,60 +45,14 @@ export function MetricsPageComplaints() {
 	//
 	// B. Fetch data
 
-	const { data: demandMetricsByAgencyMonthData } = useSWR<DemandMetricsByAgency[]>(`${getPublicVariable('api_url')}/metrics/demand/by_agency/month`);
-	const { data: demandMetricsByLineMonthData } = useSWR<DemandMetricsByLine[]>(`${getPublicVariable('api_url')}/metrics/demand/by_line`);
-
-	const { data: demandMetricsByAgencyYearData } = useSWR<DemandMetricsByAgency[]>(`${getPublicVariable('api_url')}/metrics/demand/by_agency/year`);
-
 	const { data: complaintsMetricsData } = useSWR<ComplaintMetrics[]>(`${getPublicVariable('api_url')}/metrics/complaints/`);
 
 	//
 	// C. Transform data
 
-	// By Month
-
-	useEffect(() => {
-		if (!demandMetricsByAgencyMonthData || demandMetricsByAgencyMonthData.length === 0) return;
-		const byDayData = demandMetricsByAgencyMonthData.flatMap((agencyBlock) => {
-			return (agencyBlock.data as DemandMetricsByAgencyMonth[]).filter((record) => {
-				return record.day_group >= sevenDaysAgoStr && record.day_group <= todayStr;
-			});
-		});
-		setState(prevState => ({
-			...prevState,
-			total_passengers_last_week: byDayData.reduce((acc, block) => acc + block.qty, 0),
-		}));
-	}, [demandMetricsByAgencyMonthData]);
-
-	useEffect(() => {
-		if (!demandMetricsByLineMonthData || demandMetricsByLineMonthData.length === 0 || state.filter_type !== 'line' || !state.filter_value) return;
-		const byLastWeekData = demandMetricsByLineMonthData.flatMap((lineBlock) => {
-			return (lineBlock.by_day).filter((record) => {
-				return record.day >= sevenDaysAgoStr && record.day <= todayStr && lineBlock.line_id === state.filter_value;
-			});
-		});
-		setState(prevState => ({
-			...prevState,
-			total_passengers_last_week_line_id: byLastWeekData.reduce((acc, block) => acc + block.qty, 0),
-		}));
-	}, [demandMetricsByLineMonthData, state.filter_type, state.filter_value]);
+	const totalPassengersThisYear = demandMetrics.totalPassengersThisYear || 0;
 
 	// By Year
-
-	useEffect(() => {
-		if (!demandMetricsByAgencyYearData || demandMetricsByAgencyYearData.length === 0) return;
-		let totalPassengersLastYear = 0;
-		// Sum total passengers for all agencies
-		for (const agencyBlock of demandMetricsByAgencyYearData) {
-			for (const record of agencyBlock.data) {
-				totalPassengersLastYear += record.qty;
-			}
-		}
-		setState(prevState => ({
-			...prevState,
-			total_passengers_last_year: totalPassengersLastYear,
-		}));
-	}, [demandMetricsByAgencyYearData]);
 
 	useEffect(() => {
 		if (!complaintsMetricsData) return;
@@ -161,9 +110,9 @@ export function MetricsPageComplaints() {
 		<Surface>
 			<div id="contactsMetrics">
 				<Section heading={t('heading')} subheading={t('subheading')} withPadding>
-					<MetricsPageComplaintsGlobalCard allData={state.complaints_global} totalPassengersLastYear={state.total_passengers_last_year} />
+					<MetricsPageComplaintsGlobalCard allData={state.complaints_global} totalPassengersThisYear={totalPassengersThisYear} />
 					<MetricsPageComplaintsToolbar allLines={linesContext.data.lines} filter_type={handleFilterChange} filter_value={value => setState(prevState => ({ ...prevState, filter_value: value }))} />
-					<MetricsComplaintsPageCardGroup data={state.filtered_data} filter_type={state.filter_type} filter_value={state.filter_value} last_update={state.last_update} lineColor={state.line_color} municipalityName={state.municipality_name} totalPassengersLastWeekLineId={state.total_passengers_last_week_line_id} totalPassengersLastYear={state.total_passengers_last_year} />
+					<MetricsComplaintsPageCardGroup data={state.filtered_data} filter_type={state.filter_type} filter_value={state.filter_value} last_update={state.last_update} lineColor={state.line_color} municipalityName={state.municipality_name} totalPassengersThisYear={totalPassengersThisYear} />
 				</Section>
 			</div>
 		</Surface>

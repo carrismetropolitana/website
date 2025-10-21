@@ -25,10 +25,7 @@ export function MetricsDemandChart({ data, data_key, data_series, display_type =
 	//
 
 	//
-	// A. Setup variables
-
-	//
-	// D. Render components
+	// A. Render components
 
 	if (!data) {
 		return <MetricsSectionDemandSkeleton />;
@@ -56,6 +53,7 @@ export function MetricsDemandChart({ data, data_key, data_series, display_type =
 						h={120}
 						series={data_series}
 						strokeWidth={5}
+						valueFormatter={value => Intl.NumberFormat('pt-PT').format(value)}
 						withDots={false}
 						withLegend={false}
 						withXAxis={false}
@@ -70,6 +68,7 @@ export function MetricsDemandChart({ data, data_key, data_series, display_type =
 						gridAxis="none"
 						h={180}
 						series={data_series}
+						valueFormatter={value => Intl.NumberFormat('pt-PT').format(value)}
 						withLegend={false}
 						withXAxis={false}
 						withYAxis={false}

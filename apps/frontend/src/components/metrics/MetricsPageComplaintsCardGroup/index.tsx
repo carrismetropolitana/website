@@ -3,6 +3,7 @@
 import { MetricsComplaintsPageCardGroupCard } from '@/components/metrics/MetricsPageComplaintsCardGroupCard';
 import { ComplaintMetrics } from '@carrismetropolitana/api-types/metrics';
 import { DateTime } from 'luxon';
+import { useTranslations } from 'next-intl';
 import { useMemo } from 'react';
 
 import styles from './styles.module.css';
@@ -16,18 +17,18 @@ interface Props {
 	last_update?: string
 	lineColor?: string
 	municipalityName?: string
-	totalPassengersLastWeek?: number
-	totalPassengersLastWeekLineId?: number
-	totalPassengersLastYear?: number
+	totalPassengersThisYear?: number
 }
 
 /* * */
 
-export function MetricsComplaintsPageCardGroup({ data, filter_type, filter_value, last_update, lineColor, municipalityName, totalPassengersLastWeek, totalPassengersLastWeekLineId, totalPassengersLastYear }: Props) {
+export function MetricsComplaintsPageCardGroup({ data, filter_type, filter_value, last_update, lineColor, municipalityName, totalPassengersThisYear }: Props) {
 	//
 
 	//
 	// A. Setup variables
+
+	const t = useTranslations('metrics.MetricsPageComplaintsCardGroup');
 
 	const filteredData = useMemo(() => {
 		return data.filter(item => item.filter_value === filter_value && item.type === filter_type);
@@ -67,8 +68,8 @@ export function MetricsComplaintsPageCardGroup({ data, filter_type, filter_value
 			description3 = last_update ? `Última atualização: ${lastUpdate}` : 'Sem data de atualização';
 		}
 		else if (filter_type === 'global') {
-			description2 = calcPercentageMunicipality(value, totalPassengersLastYear || 0);
-			description3 = ' do total de passageiros transportados no ultimo ano';
+			description2 = calcPercentageMunicipality(value, totalPassengersThisYear || 0);
+			description3 = t('total_passengers');
 		}
 
 		return {
@@ -87,10 +88,10 @@ export function MetricsComplaintsPageCardGroup({ data, filter_type, filter_value
 	};
 
 	const cardData = useMemo(() => [
-		createCardData('pedidos de informação', totalInfoRequests, '/assets/complaints/pedidos_info.svg', 'Pedidos de Informação'),
-		createCardData('total de reclamações', totalComplaints, '/assets/complaints/reclamacoes_info.svg', 'Reclamações'),
-		createCardData('total de outro* tipo de contactos', totalOther, '/assets/complaints/outros_info.svg', 'Outros*', '*perdidos e achados, sugestões e agradecimentos'),
-	], [totalInfoRequests, totalComplaints, totalOther, totalPassengersLastWeek, totalPassengersLastWeekLineId, filter_value, filter_type, lineColor, municipalityName]);
+		createCardData(t('info_requests'), totalInfoRequests, '/assets/complaints/pedidos_info.svg', t('info_requests')),
+		createCardData(t('complaints'), totalComplaints, '/assets/complaints/reclamacoes_info.svg', t('complaints')),
+		createCardData(t('others'), totalOther, '/assets/complaints/outros_info.svg', t('others'), t('others_disclaimer')),
+	], [totalInfoRequests, totalComplaints, totalOther, totalPassengersThisYear, filter_value, filter_type, lineColor, municipalityName, t]);
 
 	// C. Render components
 
@@ -99,7 +100,7 @@ export function MetricsComplaintsPageCardGroup({ data, filter_type, filter_value
 			{cardData.map((card, index) => (
 				<MetricsComplaintsPageCardGroupCard
 					key={index}
-					description1={card.description1}
+					description1={card.description1.toLocaleLowerCase()}
 					description2={card.description2}
 					description3={card.description3}
 					filter_value={filter_value}
