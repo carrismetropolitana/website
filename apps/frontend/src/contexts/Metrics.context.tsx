@@ -188,7 +188,7 @@ export const MetricsContextProvider = ({ children }) => {
 	): null | { chart: MetricDayData[], line: DemandByLineByDay, sum: number } {
 		if (!demandByLineByDay?.length) return null;
 
-		const line = demandByLineByDay.find(m => m.properties.line_id === lineId);
+		const line = demandByLineByDay.find(m => m.properties?.line_id === lineId);
 		if (!line || !line.data) return null;
 
 		const array = Object.entries(line.data).map(([day_group, dayData]) => ({
