@@ -9,7 +9,7 @@ import { type Environment, getCurrentEnvironment } from '@/environment.js';
 export const PUBLIC_VARIABLES = Object.freeze({
 
 	api_url: {
-		development: 'http://127.0.0.1:5050',
+		development: 'https://api.carrismetropolitana.pt/v2', // 'http://127.0.0.1:5050',
 		production: 'https://api.carrismetropolitana.pt/v2',
 		staging: 'https://api.carrismetropolitana.pt/v2',
 	},
