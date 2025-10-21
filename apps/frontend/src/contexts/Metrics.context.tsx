@@ -345,7 +345,7 @@ export const MetricsContextProvider = ({ children }) => {
 
 		['41', '42', '43', '44'].forEach((prefix) => {
 			const agencyLines = demandByLineByDay.filter(m =>
-				m.properties.line_id.startsWith(prefix.charAt(1)),
+				m.properties?.line_id?.startsWith(prefix.charAt(1)),
 			);
 
 			if (!agencyLines.length) {
