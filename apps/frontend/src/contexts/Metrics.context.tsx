@@ -148,12 +148,12 @@ export const MetricsContextProvider = ({ children }) => {
 			});
 	}
 
-	function formatDay(date: { day_group: string, day_type?: number, holiday?: number, notes?: string }) {
+	function formatDay(date: { day_group: string, day_type?: '1' | '2' | '3', holiday?: '0' | '1', notes?: string }) {
 		const dt = Dates.fromISO(date.day_group);
 		const formattedDate = tCommon('days.formatted', { date: dt.js_date });
 		const capitalized = formattedDate.charAt(0).toUpperCase() + formattedDate.slice(1);
 
-		if (date.holiday === 1) {
+		if (date.holiday === '1') {
 			const holidayText = date.notes?.length > 0 ? date.notes : tCommon('weekdays.holiday');
 			return `${capitalized} (${holidayText})`;
 		}
@@ -221,7 +221,7 @@ export const MetricsContextProvider = ({ children }) => {
 	const processedByDay = useMemo(() => {
 		if (!demandByAgencyByDay) return { agencies: {}, all: { chart: [], sum: 0 }, lastUpdated: null };
 
-		const aggregated: Record<string, { day_group: string, day_type?: number, holiday?: number, notes?: string, qty: number }> = {};
+		const aggregated: Record<string, { day_group: string, day_type?: '1' | '2' | '3', holiday?: '0' | '1', notes?: string, qty: number }> = {};
 
 		demandByAgencyByDay.forEach((agencyBlock) => {
 			Object.entries(agencyBlock.data).forEach(([day_group, dayData]) => {
