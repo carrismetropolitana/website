@@ -5,7 +5,8 @@
 import { MapView } from '@/components/map/MapView';
 import { useUpdateSchoolFormContext } from '@/form/form';
 import { type UpdateSchoolFormType } from '@/form/schema';
-import { useEffect, useState } from 'react';
+import { SchoolData } from '@/types/school';
+import { useEffect, useMemo, useState } from 'react';
 import { Layer, Source, useMap } from 'react-map-gl/maplibre';
 import useSWR from 'swr';
 
@@ -32,43 +33,58 @@ export function FormSectionLocationMap({ schoolId }: Props) {
 	//
 	// B. Fetch data
 
-	const { data: schoolData } = useSWR(`https://api.carrismetropolitana.pt/v2/facilities/schools/${schoolId}`);
+	const { data: allSchoolsData } = useSWR<SchoolData[]>('https://api.carrismetropolitana.pt/v2/facilities/schools');
 
 	//
 	// C. Transform data
 
+	const schoolData = useMemo(() => {
+		return allSchoolsData?.find(item => item.id === schoolId);
+	}, [allSchoolsData, schoolId]);
+
 	useEffect(() => {
 		if (!schoolInfoMap || !schoolId || !schoolData || !schoolData.lat || !schoolData.lon) return;
 		schoolInfoMap.flyTo({
-			center: [schoolData.lon, schoolData.lat],
+			center: [Number(schoolData.lon), Number(schoolData.lat)],
 			speed: 0.5,
 			zoom: 15,
 		});
 	}, [schoolInfoMap, schoolId, schoolData]);
 
-	const schoolMarkerMapData: GeoJSON.FeatureCollection = {
-		features: [{
-			geometry: {
-				coordinates: [schoolData.lon, schoolData.lat],
-				type: 'Point',
-			},
-			properties: {},
-			type: 'Feature',
-		}],
-		type: 'FeatureCollection',
-	};
+	const schoolMarkerMapData: GeoJSON.FeatureCollection = useMemo(() => {
+		const base: GeoJSON.FeatureCollection = {
+			features: [],
+			type: 'FeatureCollection',
+		};
+		if (!schoolData || !schoolData.lat || !schoolData.lon) {
+			return base;
+		}
+		return {
+			features: [{
+				geometry: {
+					coordinates: [Number(schoolData.lon), Number(schoolData.lat)],
+					type: 'Point',
+				},
+				properties: {},
+				type: 'Feature',
+			}],
+			type: 'FeatureCollection',
+		};
+	}, [schoolData]);
 
-	const selectedCoordinatesMapData: GeoJSON.FeatureCollection = {
-		features: [{
-			geometry: {
-				coordinates: [form.getValues().location.longitude, form.getValues().location.latitude],
-				type: 'Point',
-			},
-			properties: {},
-			type: 'Feature',
-		}],
-		type: 'FeatureCollection',
-	};
+	const selectedCoordinatesMapData: GeoJSON.FeatureCollection = useMemo(() => {
+		return {
+			features: [{
+				geometry: {
+					coordinates: [form.getValues().location.longitude, form.getValues().location.latitude],
+					type: 'Point',
+				},
+				properties: {},
+				type: 'Feature',
+			}],
+			type: 'FeatureCollection',
+		};
+	}, [form.values]);
 
 	//
 	// C. Handle actions

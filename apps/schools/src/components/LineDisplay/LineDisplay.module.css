@@ -6,36 +6,35 @@
   max-width: 65px;
   min-height: 24px;
   max-height: 24px;
-  border-radius: 999px;
-  color: #ffffff;
-  background-color: var(--gray9);
   font-size: 16px;
   font-weight: 800;
-  letter-spacing: 1px;
   line-height: 1;
+  color: #fff;
+  letter-spacing: 1px;
+  background-color: var(--gray9);
+  border-radius: 999px;
 }
 
 .name {
-  display: flex;
+  display: -webkit-box;
   align-items: center;
   justify-content: flex-start;
   width: 100%;
-  color: var(--reference-1);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  line-clamp: 2;
   font-size: 14px;
   font-weight: bold;
   line-height: 1.1;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  display: -webkit-box;
-  line-clamp: 2;
+  color: var(--reference-1);
   text-align: left;
 }
 
 .container {
   display: flex;
   flex-direction: row;
+  gap: 10px;
   align-items: center;
-  gap: var(--size-sm);
   width: 100%;
 }
 

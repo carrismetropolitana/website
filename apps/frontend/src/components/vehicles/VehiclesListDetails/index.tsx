@@ -11,7 +11,7 @@ import { LineName } from '@/components/lines/LineName';
 import { useLinesContext } from '@/contexts/Lines.context';
 import { useVehiclesListContext } from '@/contexts/VehiclesList.context';
 import { Table } from '@mantine/core';
-import { IconBike, IconBikeOff, IconDisabled2, IconDisabledOff, IconNfc, IconNfcOff, IconX } from '@tabler/icons-react';
+import { IconBike, IconBikeOff, IconCreditCard, IconCreditCardOff, IconDisabled2, IconDisabledOff, IconX } from '@tabler/icons-react';
 import { useTranslations } from 'next-intl';
 import { useMemo } from 'react';
 
@@ -68,7 +68,7 @@ export function VehiclesListDetails() {
 						<div className={styles.iconList}>
 							<TooltipIcon icon={vehiclesListContext.data.selected?.bikes_allowed ? <IconBike /> : <IconBikeOff />} label={vehiclesListContext.data.selected?.bikes_allowed ? t('bikes_allowed') : t('no_bikes_allowed')} position="bottom" />
 							<TooltipIcon icon={vehiclesListContext.data.selected?.wheelchair_accessible ? <IconDisabled2 /> : <IconDisabledOff />} label={vehiclesListContext.data.selected?.wheelchair_accessible ? t('wheelchair_accessible') : t('no_wheelchair_accessible')} position="bottom" />
-							<TooltipIcon icon={vehiclesListContext.data.selected.contactless ? <IconNfc /> : <IconNfcOff />} label={vehiclesListContext.data.selected.contactless ? t('contactless') : t('no_contactless')} position="bottom" />
+							<TooltipIcon icon={vehiclesListContext.data.selected.contactless ? <IconCreditCard /> : <IconCreditCardOff />} label={vehiclesListContext.data.selected.contactless ? t('contactless') : t('no_contactless')} position="bottom" />
 							{vehiclesListContext.data.selected.license_plate && <LicensePlate value={vehiclesListContext.data.selected.license_plate} />}
 						</div>
 

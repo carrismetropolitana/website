@@ -1,0 +1,120 @@
+/* * */
+/* CAROUSEL CONTAINER */
+
+.carouselContainer {
+	width: 100%;
+	padding-right: var(--size-spacing-20);
+}
+
+.carouselContainer > div > div > div {
+	width: 100% !important;
+}
+
+/* * */
+/* HEADER */
+
+.header {
+	display: flex;
+	justify-content: space-between;
+	align-items: flex-start;
+	width: 100%;
+	min-height: 70px;
+	gap: var(--size-spacing-20);
+	padding: 0 var(--size-spacing-20) var(--size-spacing-20) var(--size-spacing-25);
+}
+
+.subheading {
+	width: 100%;
+	font-size: 16px;
+	font-weight: var(--font-weight-medium);
+	color: var(--color-system-text-200);
+	line-height: 1.4;
+}
+
+/* * */
+/* CONTAINER */
+
+.container {
+	width: 360px;
+}
+
+@media only screen and (max-width: 900px) {
+	.container {
+		width: 300px;
+	}
+}
+
+/* * */
+/* CONTROL */
+
+.control {
+	opacity: 1;
+	width: 50px;
+	height: 50px;
+	border: 1px solid var(--color-system-border-200);
+	background-color: var(--color-system-background-100);
+	color: var(--color-system-text-300);
+	box-shadow: 0 0 15px 0 rgba(0, 0, 0, 0.1);
+	transition: all 100ms ease;
+	border-radius: 100%;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	cursor: pointer;
+}
+
+.control:hover {
+	border-color: var(--color-system-text-200);
+	color: var(--color-system-text-200);
+	opacity: 1;
+}
+
+.control:active {
+	color: var(--color-system-text-300);
+	border-color: var(--color-system-text-300);
+	background-color: var(--color-system-background-300);
+	opacity: 1;
+}
+
+.control[data-inactive] {
+	opacity: 0;
+	cursor: default;
+}
+
+/* * */
+/* CONTROLS WRAPPER */
+
+.controlsWrapper {
+	display: flex;
+	gap: var(--size-spacing-10);
+	align-items: center;
+	margin-top: var(--size-spacing-5);
+	flex-shrink: 0;
+}
+
+@media only screen and (max-width: 900px) {
+	.controlsWrapper {
+		display: none;
+	}
+	
+	.header {
+		min-height: auto;
+		padding-bottom: var(--size-spacing-15);
+	}
+}
+
+/* * */
+/* SLIDE WRAPPER */
+
+.slideWrapper {
+	padding: 0;
+	padding-left: var(--size-spacing-20);
+	padding-bottom: var(--size-spacing-20);
+	height: 100%;
+}
+
+@media only screen and (max-width: 900px) {
+	.slideWrapper {
+		padding-top: 0;
+	}
+}

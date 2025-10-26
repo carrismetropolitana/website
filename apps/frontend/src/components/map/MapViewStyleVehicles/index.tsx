@@ -202,17 +202,22 @@ export function MapViewStyleVehicles({ presentBeforeId, showCounter, vehiclesDat
 						'icon-allow-overlap': true,
 						'icon-anchor': 'center',
 						'icon-ignore-placement': true,
-						'icon-image': 'cmet-bus-regular',
+						'icon-image': [
+							'match',
+							['to-string', ['get', 'contactless']],
+							'true', // now it's a string, valid branch label
+							'cmet-bus-cut',
+							'cmet-bus-regular',
+						],
 						'icon-offset': [0, 0],
 						'icon-rotate': ['get', 'bearing'],
 						'icon-rotation-alignment': 'map',
-						'icon-size': ['interpolate',
+						'icon-size': [
+							'interpolate',
 							['linear'],
 							['zoom'],
-							10,
-							0.05,
-							20,
-							0.15,
+							10, ['match', ['to-string', ['get', 'contactless']], 'true', 0.09, 0.05],
+							20, ['match', ['to-string', ['get', 'contactless']], 'true', 0.3, 0.15],
 						],
 						'symbol-placement': 'point',
 					}}

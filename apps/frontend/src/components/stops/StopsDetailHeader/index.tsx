@@ -66,7 +66,7 @@ export function StopsDetailHeader() {
 					<CopyBadge
 						hasBorder={false}
 						label={`${stopsDetailContext.data.stop.lat}, ${stopsDetailContext.data.stop.lon}`}
-						value={stopsDetailContext.data.stop.lat + '\t' + stopsDetailContext.data.stop.lon}
+						value={stopsDetailContext.data.stop.lat + ',' + stopsDetailContext.data.stop.lon}
 					/>
 				</div>
 

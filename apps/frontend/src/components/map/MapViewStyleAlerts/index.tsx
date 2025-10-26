@@ -32,7 +32,9 @@ export function MapViewStyleAlerts({ data = baseGeoJsonFeatureCollection, presen
 				source={MapViewStyleAlertsSourceId}
 				type="symbol"
 				layout={{
+					'icon-allow-overlap': true,
 					'icon-anchor': 'center',
+					'icon-ignore-placement': true,
 					'icon-image': [
 						'match',
 						['get', 'cause'],

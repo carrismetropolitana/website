@@ -1,0 +1,97 @@
+.container {
+    display: flex;
+    padding: 30px 20px;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 24px;
+    border: 1px solid var(--color-system-border-200);
+    background-color: var(--color-system-background-100);
+
+    @media screen and (min-width: 40rem) {
+        border-radius: 18px;
+    }
+}
+
+.formContainer {
+    display: grid;
+    gap: 24px;
+    width: 100%;
+}
+
+.formRow {
+    display: grid;
+    width: 100%;
+    gap: 36px;
+    align-items: start;
+
+    @media screen and (min-width: 40rem) {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    &[data-variant="col-full"] > * {
+        grid-column: 1 / -1;
+    }
+}
+
+.formInput {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.formInput label {
+    font-size: 16px;
+    font-weight: 600;
+}
+
+.formInputTextarea label {
+    font-size: 16px;
+    font-weight: 600;
+}
+
+.formInputFile label {
+    font-size: 16px;
+    font-weight: 600;
+}
+
+.formInputTextarea {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.formInputTextarea textarea {
+    min-height: 162px;
+}
+
+.formInputFile {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+/* Ensure consistent input backgrounds in light and dark mode */
+.formInput input,
+.formInputTextarea textarea {
+    background-color: var(--mantine-color-default);
+}
+
+.formButton {
+    align-self: flex-end;
+    padding: 0.75rem 1.25rem;
+    border-radius: 999px;
+    font-size: 22px;
+    font-weight: 600;
+    width: 178px;
+    background-color: var(--color-brand);
+    color: black;
+
+    @media screen and (max-width: 39.9375rem) {
+        width: 100%;
+        align-self: stretch;
+        height: 56px;
+    }
+}

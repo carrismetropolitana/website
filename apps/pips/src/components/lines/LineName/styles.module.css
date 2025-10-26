@@ -1,0 +1,39 @@
+/* * */
+/* NAME */
+
+.name {
+	display: -webkit-box;
+	justify-content: flex-start;
+	width: 100%;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	-webkit-line-clamp: 3;
+	color: var(--color-system-text-100);
+	-webkit-box-orient: vertical;
+}
+
+/* * */
+/* SIZE */
+
+.name[data-size='md'] {
+	font-size: 15px;
+	font-weight: var(--font-weight-bold);
+}
+
+.name[data-size='lg'] {
+	font-size: 20px;
+	font-weight: var(--font-weight-bold);
+}
+
+/* * */
+/* ALIGN */
+
+.name[data-align='left'] {
+	align-items: flex-start;
+	text-align: left;
+}
+
+.name[data-align='center'] {
+	align-items: center;
+	text-align: center;
+}

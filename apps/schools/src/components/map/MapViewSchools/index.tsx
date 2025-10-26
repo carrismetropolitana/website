@@ -67,7 +67,6 @@ export function MapViewSchools({ allSchoolsData, onSelectSchool }) {
 			[boundingBox[0], boundingBox[1]], // Southwest corner [lon, lat]
 			[boundingBox[2], boundingBox[3]], // Northeast corner [lon, lat]
 		];
-		console.log(bounds);
 		selectSchoolMap.fitBounds(bounds, { duration: 2000, padding: 50 });
 	}, [selectSchoolMap, allSchoolsDataAsGeojson]);
 

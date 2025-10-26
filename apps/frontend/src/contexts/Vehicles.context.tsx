@@ -170,6 +170,7 @@ export function transformVehicleDataIntoGeoJsonFeature(vehicleData: Vehicle): Ge
 		properties: {
 			bearing: vehicleData.bearing,
 			block_id: vehicleData.block_id,
+			contactless: vehicleData.contactless,
 			current_status: vehicleData.current_status,
 			delay: Math.floor(Date.now() / 1000) - (vehicleData.timestamp || 0),
 			id: vehicleData.id,

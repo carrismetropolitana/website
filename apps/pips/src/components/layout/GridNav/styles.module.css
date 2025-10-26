@@ -1,0 +1,21 @@
+/* * */
+/* CONTAINER */
+
+.container {
+	display: grid;
+	grid-template-rows: 1fr;
+	grid-template-columns: repeat(4, 1fr);
+	gap: var(--size-spacing-20);
+	width: 100%;
+	padding: var(--size-spacing-20);
+	padding-top: 0;
+}
+
+@media (width <= 650px) {
+	.container {
+		display: flex;
+		flex-direction: column;
+		gap: 0;
+		padding: 0;
+	}
+}
