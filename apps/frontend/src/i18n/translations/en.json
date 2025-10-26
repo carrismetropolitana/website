@@ -360,6 +360,7 @@
 			}
 		},
 		"ArrabidaWay": {
+			"inactive_line_message": "No service until the beginning of bathing season",
 			"subtitle": "All Arrábida beaches served by Carris Metropolitana",
 			"title": "How to get there?"
 		}

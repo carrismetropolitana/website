@@ -178,7 +178,7 @@ export function ArrabidaWay() {
 														if (!isLineActive) {
 															return (
 																<div key={lineIndex} className={styles.lineItemInactive}>
-																	<InactiveLineDisplay lineId={lineId} />
+																	<InactiveLineDisplay lineId={lineId} message={t('inactive_line_message')} />
 																</div>
 															);
 														}

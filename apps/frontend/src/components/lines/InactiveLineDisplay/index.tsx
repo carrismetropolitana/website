@@ -9,12 +9,12 @@ import styles from './styles.module.css';
 
 interface Props {
 	lineId: string
-	message?: string
+	message: string
 }
 
 /* * */
 
-export function InactiveLineDisplay({ lineId, message = 'Sem serviço até ao começo da época balnear' }: Props) {
+export function InactiveLineDisplay({ lineId, message }: Props) {
 	//
 
 	return (
