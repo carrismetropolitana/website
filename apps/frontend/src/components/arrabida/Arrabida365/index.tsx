@@ -49,7 +49,7 @@ export function Arrabida365() {
 								{t('buttonSeeMore')}
 								<IconArrowRight size={18} />
 							</Link>
-							<Image
+							<img
 								alt={t('altImageBee')}
 								className={styles.imageBee}
 								height={1080}
