@@ -2,7 +2,6 @@
 
 export interface BeachPinProps {
 	isActive?: boolean
-	zoom?: number
 }
 
 export interface ArrabidaMapProps {

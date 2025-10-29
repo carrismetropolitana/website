@@ -343,7 +343,7 @@
 		"ArrabidaPage": {
 			"sections": {
 				"Arrabida365": {
-					"altImageBee": "Notícia em destaque “Setúbal, Arrábida: O Início da Época Balnear”",
+					"altImageBee": "Notícia em destaque \"Setúbal, Arrábida: O Início da Época Balnear\"",
 					"altImageMap": "Imagem ilustrativa do projeto da Arrábida 365.",
 					"button": "Expandir",
 					"buttonSeeMore": "Saber Mais",
@@ -360,6 +360,7 @@
 			}
 		},
 		"ArrabidaWay": {
+			"inactive_line_message": "Sem serviço até ao começo da época balnear",
 			"subtitle": "Todas as praias da Arrábida servidas pela Carris Metropolitana. ",
 			"title": "Como chegar?"
 		}

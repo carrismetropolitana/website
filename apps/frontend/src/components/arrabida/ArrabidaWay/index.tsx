@@ -1,5 +1,6 @@
 import { Section } from '@/components/layout/Section';
 import { Surface } from '@/components/layout/Surface';
+import { InactiveLineDisplay } from '@/components/lines/InactiveLineDisplay';
 import { LineDisplay } from '@/components/lines/LineDisplay';
 import { useLinesContext } from '@/contexts/Lines.context';
 import { Accordion, Text } from '@mantine/core';
@@ -155,7 +156,34 @@ export function ArrabidaWay() {
 													<span>{stop.name}</span>
 													{stop.lineIds.map((lineId, lineIndex) => {
 														const lineData = linesContext.actions.getLineDataById(lineId);
+														const isLoading = linesContext.flags.is_loading;
+														const isLineActive = lineData !== undefined;
 
+														// Show skeleton while loading
+														if (isLoading) {
+															return (
+																<div
+																	key={lineIndex}
+																	className={styles.lineItem}
+																>
+																	<LineDisplay />
+																	<div className={styles.arrowWrapper}>
+																		<IconArrowNarrowRight size={20} />
+																	</div>
+																</div>
+															);
+														}
+
+														// Show inactive component if line not found after loading
+														if (!isLineActive) {
+															return (
+																<div key={lineIndex} className={styles.lineItemInactive}>
+																	<InactiveLineDisplay lineId={lineId} message={t('inactive_line_message')} />
+																</div>
+															);
+														}
+
+														// Show active line
 														return (
 															<div
 																key={lineIndex}

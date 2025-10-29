@@ -53,7 +53,7 @@ export function Arrabida365() {
 								alt={t('altImageBee')}
 								className={styles.imageBee}
 								height={1080}
-								src="/assets/arrabidas/setubal_arrabida_banner.png"
+								src="https://backoffice.carrismetropolitana.pt/wp-content/uploads/2025/10/arrabida-banner.jpeg"
 								width={1920}
 							/>
 						</div>

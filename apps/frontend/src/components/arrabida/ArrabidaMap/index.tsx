@@ -6,7 +6,7 @@ import type { ArrabidaMapProps } from './types';
 
 import styles from './styles.module.css';
 
-import { DraggableMapLayers } from './components';
+import { MapContainer } from './components';
 import { BEACH_PINS } from './constants';
 
 /* * */
@@ -31,14 +31,15 @@ export function ArrabidaMap({
 
 	return (
 		<div className={styles.container}>
-			<div className={styles.mapContainer}>
-				<DraggableMapLayers
-					enableDoubleClickReset={true}
-					onPinClick={onPinClick}
-					selectedAccordionId={selectedAccordionId}
-					selectedLineId={displayLineId}
-					style={{ display: 'block', height: '100%', width: '100%' }}
-				/>
+			<div className={styles.blueBackground}>
+				<div className={styles.mapContainer}>
+					<MapContainer
+						onPinClick={onPinClick}
+						selectedAccordionId={selectedAccordionId}
+						selectedLineId={displayLineId}
+						style={{ display: 'block', width: '100%' }}
+					/>
+				</div>
 			</div>
 		</div>
 	);
