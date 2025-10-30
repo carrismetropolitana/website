@@ -8,7 +8,7 @@ import { useOperationalDateContext } from '@/contexts/OperationalDate.context';
 import { useProfileContext } from '@/contexts/Profile.context';
 import { useStopsContext } from '@/contexts/Stops.context';
 import { type SimplifiedAlert } from '@/types/alerts.types';
-import { type DemandMetricsByLine, type ServiceMetrics } from '@carrismetropolitana/api-types/metrics';
+import { type ServiceMetrics } from '@carrismetropolitana/api-types/metrics';
 import { type Line, type Pattern, type Route, type Shape, type Waypoint } from '@carrismetropolitana/api-types/network';
 import { getPublicVariable } from '@carrismetropolitana/website-shared-settings';
 import { useQueryState } from 'nuqs';
@@ -28,7 +28,6 @@ interface LinesDetailContextState {
 		active_shape: null | Shape
 		active_waypoint: null | Waypoint
 		all_patterns: null | Pattern[][]
-		demand_metrics: DemandMetricsByLine | undefined
 		highlighted_trip_ids: null | string[]
 		line: Line | undefined
 		routes: Route[]
@@ -74,7 +73,6 @@ export const LinesDetailContextProvider = ({ children, lineId }) => {
 	const operationalDateContext = useOperationalDateContext();
 
 	const [dataLineState, setDataLineState] = useState<LinesDetailContextState['data']['line']>();
-	const [dataDemandMetricsState, setDataDemandMetricsState] = useState<LinesDetailContextState['data']['demand_metrics']>();
 	const [dataServiceMetricsState, setDataServiceMetricsState] = useState<LinesDetailContextState['data']['service_metrics']>([]);
 	const [dataRoutesState, setDataRoutesState] = useState<LinesDetailContextState['data']['routes']>([]);
 
@@ -111,12 +109,6 @@ export const LinesDetailContextProvider = ({ children, lineId }) => {
 		if (!serviceMetricsData) return;
 		setDataServiceMetricsState(serviceMetricsData);
 	}, [lineId, linesContext.data.service_metrics]);
-
-	useEffect(() => {
-		const demandMetricsData = linesContext.actions.getDemandMetricsByLineId(lineId);
-		if (!demandMetricsData) return;
-		setDataDemandMetricsState(demandMetricsData);
-	}, [lineId, linesContext.data.demand_metrics]);
 
 	useEffect(() => {
 		if (!dataLineState || !dataLineState.route_ids) return;
@@ -363,7 +355,6 @@ export const LinesDetailContextProvider = ({ children, lineId }) => {
 			active_shape: dataActiveShapeState,
 			active_waypoint: dataActiveWaypointState,
 			all_patterns: dataAllPatternsState,
-			demand_metrics: dataDemandMetricsState,
 			highlighted_trip_ids: dataHighlightedTripIdsState,
 			line: dataLineState,
 			routes: dataRoutesState,
