@@ -35,7 +35,7 @@ export function NewsCard({ _id, coverImageSrc, publishDate, title }: NewsCardPro
 		<Link className={styles.container} href={`/news/${_id}`}>
 			<Image alt={title} className={styles.coverImage} fallbackSrc="/assets/common/placeholder.png" src={coverImageSrc} />
 			<p className={styles.publishDate}>{t('publish_date', { publishDate: publishDateObject })}</p>
-			<h4 className={styles.title} dangerouslySetInnerHTML={{ __html: title || 'title' }} />
+			<p className={styles.title} dangerouslySetInnerHTML={{ __html: title || 'title' }} />
 		</Link>
 	);
 

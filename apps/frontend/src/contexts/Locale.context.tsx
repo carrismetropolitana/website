@@ -58,6 +58,15 @@ export const LocaleContextProvider = ({ children }) => {
 	// C. Handle actions
 
 	useEffect(() => {
+		// Skip if window is undefined
+		if (typeof window === 'undefined') return;
+		// Set the HTML lang attribute
+		document.documentElement.lang = currentLocale;
+		console.log(`Set HTML lang attribute to: ${currentLocale}`);
+		console.log(`Current time zone: ${document.documentElement.lang}`);
+	}, [currentLocale]);
+
+	useEffect(() => {
 		// Ensure a valid locale is always set
 		const matchingLocale = getMatchingLocale(currentLocale);
 		// Exit if a match is found
