@@ -22,14 +22,6 @@ interface Props {
 /* * */
 
 export function Section({ children, heading, href, subheading, target, variant = 'default', withBottomDivider, withGap, withPadding }: Props) {
-	//
-
-	//
-	// A. Transform data
-
-	//
-	// B. Render components
-
 	return (
 		<section
 			className={`${styles.container} ${withBottomDivider && styles.withBottomDivider} ${withGap && styles.withGap} ${styles[variant]}`}
@@ -39,10 +31,10 @@ export function Section({ children, heading, href, subheading, target, variant =
 
 			{(heading || subheading) && (
 				<div className={styles.headingWrapper}>
-					{heading && !href && <h1 className={styles.heading}>{heading}</h1>}
+					{heading && !href && <p className={styles.heading}>{heading}</p>}
 					{heading && href && (
 						<Link className={styles.href} href={href} target={target}>
-							<h1 className={styles.heading}>{heading}</h1>
+							<p className={styles.heading}>{heading}</p>
 							<IconCaretRightFilled className={styles.hrefIcon} size={18} />
 						</Link>
 					)}
@@ -58,6 +50,4 @@ export function Section({ children, heading, href, subheading, target, variant =
 
 		</section>
 	);
-
-	//
 }

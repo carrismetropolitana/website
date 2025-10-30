@@ -13,7 +13,7 @@ import styles from './styles.module.css';
 
 export function Logo() {
 	return (
-		<Link className={styles.container} href="/">
+		<Link aria-label="Carris Metropolitana" className={styles.container} href="/">
 			<ThemeSwitch
 				dark={<LottiePlayer path="/assets/header/zume/zume-dark.json" style={{ height: 70, width: 150 }} loop play />}
 				light={<LottiePlayer path="/assets/header/zume/zume-light.json" style={{ height: 70, width: 150 }} loop play />}

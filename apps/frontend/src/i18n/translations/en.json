@@ -270,17 +270,50 @@
 		}
 	},
 	"app": {
+		"AppDeleteAccount": {
+			"actions": {
+				"submit": "Delete Account"
+			},
+			"fields": {
+				"device_id": {
+					"label": "Device ID",
+					"placeholder": "Enter your device ID"
+				},
+				"email": {
+					"label": "Email Address",
+					"placeholder": "Enter your email address"
+				},
+				"phone": {
+					"label": "Phone Number",
+					"placeholder": "Enter your phone number"
+				}
+			},
+			"heading": "Delete Account",
+			"result": {
+				"error": {
+					"message": "An error occurred while processing your request. Please contact us or try again later."
+				},
+				"not_found": {
+					"message": "No account found for the provided email address or phone number or device ID."
+				},
+				"success": {
+					"message": "Your account has been successfully deleted."
+				}
+			},
+			"separator": "or",
+			"subheading": "Delete your account associated with an email address or phone number. For any questions, please contact us. All accounts that have not been used for more than 90 days will be automatically deleted."
+		},
 		"AppDownloadBeta": {
 			"android": "Android",
 			"heading": "Beta: App CMetropolitana",
 			"iphone": "Apple iPhone",
-			"subheading": "Faça o download da versão beta da app Carris Metropolitana para iOS ou Android, e contribua para o futuro desta aplicação."
+			"subheading": "Download the beta version of the Carris Metropolitana app for iOS or Android and contribute to the future of this application."
 		},
 		"AppDownloadProduction": {
 			"android": "Android",
-			"heading": "App CMetropolitana",
+			"heading": "CMetropolitana App",
 			"iphone": "Apple iPhone",
-			"subheading": "Faça o download da app Carris Metropolitana para iOS ou Android."
+			"subheading": "Download Carris Metropolitana app for iOS or Android."
 		},
 		"AppStartupMessageDefault": {
 			"actions": {
@@ -510,6 +543,9 @@
 			"remove": "Remove",
 			"save": "Save"
 		},
+		"days": {
+			"formatted": "{date, date, ::EEEE, dd MMMM yyyy}"
+		},
 		"month": {
 			"april": "April",
 			"august": "August",
@@ -540,6 +576,7 @@
 		},
 		"weekdays": {
 			"friday": "Friday",
+			"holiday": "Holiday",
 			"monday": "Monday",
 			"saturday": "Saturday",
 			"short": {
@@ -650,7 +687,7 @@
 		},
 		"MetricsSection": {
 			"demand": {
-				"label": "Total passengers transported today",
+				"label": "Total passengers transported in the last 30 days",
 				"value": "{value, number}"
 			},
 			"heading": "Our live operation",
@@ -963,22 +1000,22 @@
 			"chart": {
 				"series": {
 					"fail_trip_count": {
-						"label": "Viagens não executadas"
+						"label": "Trips not made"
 					},
 					"pass_trip_count": {
-						"label": "Viagens executadas"
+						"label": "Trips made"
 					},
 					"pass_trip_percentage": {
-						"label": "Taxa de execução %"
+						"label": "Execution rate %"
 					},
 					"total_trip_count": {
-						"label": "Viagens planeadas"
+						"label": "Trips planned"
 					}
 				}
 			},
-			"description": "Taxa de execução calculada com base no total de viagens executadas face ao total de viagens planeadas para os últimos 15 dias. Para esta análise são considerados dados de posição dos veículos em tempo real e dados das validações e vendas a bordo.",
-			"footnote": "A fórmula utilizada para calcular a taxa de execução aqui apresentada reflete apenas parte do conjunto de indicadores definidos contratualmente para a avaliação do desempenho e qualidade do serviço prestado pelos Operadores.",
-			"title": "das {total_trip_count, number} viagens planeadas para os últimos 15 dias, {pass_trip_count, number} foram corretamente realizadas"
+			"description": "Execution rate calculated based on the total trips made against the total trips planned for the last 15 days. For this analysis, real-time vehicle position data and data from validations and onboard sales are considered.",
+			"footnote": "The formula used to calculate the execution rate presented here reflects only part of the set of indicators contractually defined for the evaluation of the performance and quality of the service provided by the Operators.",
+			"title": "Of the {total_trip_count, number} trips planned for the last 15 days, {pass_trip_count, number} were successfully completed"
 		},
 		"LinesDetailPath": {
 			"no_data": "Select a Path / Destination",
@@ -1069,9 +1106,36 @@
 		}
 	},
 	"metrics": {
+		"LastUpdatedAt": {
+			"last_updated_relative": "Updated {value}",
+			"updated": {
+				"days": "{count, plural, one {# day ago} other {# days ago}}",
+				"hours": "{count, plural, one {# hour ago} other {# hours ago}}",
+				"just_now": "just now",
+				"minutes": "{count, plural, one {# minute ago} other {# minutes ago}}"
+			}
+		},
 		"MetricsCardByLine": {
-			"reference_value": "{value, number} /dia",
-			"summary_description": "passageiros transportados nesta linha nos últimos 15 dias",
+			"agencies": {
+				"41": {
+					"main_description": "(Amadora, Oeiras, Sintra, Cascais e Lisboa)",
+					"main_label": "Lines with most passengers transported in area 1"
+				},
+				"42": {
+					"main_description": "(Mafra, Vila Franca de Xira, Odivelas e Loures)",
+					"main_label": "Lines with most passengers transported in area 2"
+				},
+				"43": {
+					"main_description": "(Almada, Seixal e Sesimbra)",
+					"main_label": "Lines with most passengers transported in area 3"
+				},
+				"44": {
+					"main_description": "(Alcochete, Moita, Montijo, Palmela, Setúbal e Barreiro)",
+					"main_label": "Lines with most passengers transported in area 4"
+				}
+			},
+			"reference_value": "{value, number} /day",
+			"summary_description": "passengers transported on this line in the last 30 days",
 			"summary_value": "{value, number}"
 		},
 		"MetricsPageAboutOpenData": {
@@ -1146,7 +1210,13 @@
 			"title1": "Open Data"
 		},
 		"MetricsPageComplaintsCardGroup": {
+			"complaints": "Complaints",
+			"info_requests": "Information Requests",
 			"main_value": "{value, number}",
+			"metropolitan_area": "Lisbon Metropolitan Area",
+			"others": "Others",
+			"others_disclaimer": "*lost and found, suggestions and acknowledgments",
+			"total_passengers": "of total passengers from last year",
 			"total_to": "total to:"
 		},
 		"MetricsPageComplaintsGlobalCard": {
@@ -1166,67 +1236,93 @@
 			"toolbar_desc": "Choose if you want to see the different types of contacts (Information Requests, Complaints and Others), by municiplaity or line."
 		},
 		"MetricsPageIntro": {
-			"heading": "A nossa operação ao vivo",
-			"text_1": "A Carris Metropolitana possui uma política de dados abertos, com o objetivo de promover a transparência e a proximidade com os seus passageiros, divulgando publicamente informação relativa à sua operação.",
-			"text_2": "Nesta página pode acompanhar, em tempo real, o número de passageiros transportados na rede da Carris Metropolitana. Estes dados, calculados com base no total de validações e vendas a bordo em todas as viagens, são fundamentais para uma otimização do serviço baseada nas suas nessidades."
+			"heading": "Our live operation",
+			"sections": {
+				"about_open_data": "About Open Data",
+				"contacts": "Contacts",
+				"lines": "Most Used Lines",
+				"passengers": "Total Passengers",
+				"records": "Records Broken",
+				"service": "Trips Made"
+			},
+			"text_1": "Carris Metropolitana has an open data policy, aimed at promoting transparency and closeness with its passengers by publicly sharing information related to its operations.",
+			"text_2": "On this page, you can track in real-time the number of passengers transported on the Carris Metropolitana network. This data, calculated based on the total validations and sales on board all trips, is essential for optimizing the service based on your needs."
 		},
 		"MetricsPageLines": {
-			"agencies": {
-				"41": {
-					"main_description": "(Amadora, Oeiras, Sintra, Cascais e Lisboa)",
-					"main_label": "Linhas com mais passageiros transportados na área 1"
-				},
-				"42": {
-					"main_description": "(Mafra, Vila Franca de Xira, Odivelas e Loures)",
-					"main_label": "Linhas com mais passageiros transportados na área 2"
-				},
-				"43": {
-					"main_description": "(Almada, Seixal e Sesimbra)",
-					"main_label": "Linhas com mais passageiros transportados na área 3"
-				},
-				"44": {
-					"main_description": "(Alcochete, Moita, Montijo, Palmela, Setúbal e Barreiro)",
-					"main_label": "Linhas com mais passageiros transportados na área 4"
-				}
-			},
-			"heading": "Linhas mais utilizadas",
-			"text_1": "Abaixo, pode explorar as linhas mais utilizadas e o número de passageiros transportados em cada uma delas, com base nas validações e vendas a bordo dos últimos 15 dias. Esta é uma visão detalhada por linha, que lhe permite conhecer melhor as dinâmicas dos passageiros desta rede de transportes."
+			"heading": "Most used lines",
+			"text_1": "Below, you can explore the most used lines and the number of passengers transported on each of them, based on the validations and sales on board in the last 30 days. This is a detailed view by line, allowing you to better understand the dynamics of passengers on this transport network."
 		},
 		"MetricsPagePassengers": {
-			"heading": "Total de Passageiros",
-			"period_options": {
-				"day": "Dia",
-				"month": "Mês",
-				"year": "Ano"
+			"dates": {
+				"end_date": "End date",
+				"start_date": "Start date"
 			},
-			"text_1": "Cada passageiro transportado corresponde a uma validação de um passe, bilhete pré-pago ou bilhete adquirido a bordo de um autocarro da Carris Metropolitana. Através da análise destas validações, a Carris Metropolitana obtém informação essencial sobre a utilização de cada linha. Estes dados ajudam a identificar a importância de cada rota, avaliar a necessidade de ajustes na frequência de horários e, redefinição de percursos para responder melhor às necessidades dos passageiros."
+			"heading": "Total Passengers",
+			"period_options": {
+				"by_day": "By day",
+				"by_month": "By month",
+				"by_year": "By year"
+			},
+			"text_1": "Each transported passenger corresponds to a validation of a pass, prepaid ticket, or ticket purchased on board a Carris Metropolitana bus. By analyzing these validations, Carris Metropolitana obtains essential information about the usage of each line. This data helps identify the importance of each route, assess the need for adjustments in schedule frequency, and redefine routes to better meet passenger needs."
 		},
 		"MetricsPagePassengersDay": {
 			"sections": {
 				"aml": {
-					"heading": "Na área metropolitana de Lisboa:",
-					"main_label": "passageiros transportados hoje",
+					"heading": "In the Lisbon Metropolitan Area:",
+					"main_label": "passengers transported in the selected days",
 					"main_value": "{value, number}"
 				},
 				"by_agency": {
 					"41": {
 						"main_description": "(Amadora, Oeiras, Sintra, Cascais e Lisboa)",
-						"main_label": "passageiros transportados hoje na área 1",
+						"main_label": "passengers transported in area 1",
 						"main_value": "{value, number}"
 					},
 					"42": {
 						"main_description": "(Mafra, Vila Franca de Xira, Odivelas e Loures)",
-						"main_label": "passageiros transportados hoje na área 2",
+						"main_label": "passengers transported in area 2",
 						"main_value": "{value, number}"
 					},
 					"43": {
 						"main_description": "(Almada, Seixal e Sesimbra)",
-						"main_label": "passageiros transportados hoje na área 3",
+						"main_label": "passengers transported in area 3",
 						"main_value": "{value, number}"
 					},
 					"44": {
 						"main_description": "(Alcochete, Moita, Montijo, Palmela, Setúbal e Barreiro)",
-						"main_label": "passageiros transportados hoje na área 4",
+						"main_label": "passengers transported in area 4",
+						"main_value": "{value, number}"
+					},
+					"heading": "By area:"
+				}
+			}
+		},
+		"MetricsPagePassengersHour": {
+			"sections": {
+				"aml": {
+					"heading": "In the Lisbon Metropolitan Area:",
+					"main_label": "passengers transported",
+					"main_value": "{value, number}"
+				},
+				"by_agency": {
+					"41": {
+						"main_description": "(Amadora, Oeiras, Sintra, Cascais e Lisboa)",
+						"main_label": "passengers transported in area 1",
+						"main_value": "{value, number}"
+					},
+					"42": {
+						"main_description": "(Mafra, Vila Franca de Xira, Odivelas e Loures)",
+						"main_label": "passengers transported in area 2",
+						"main_value": "{value, number}"
+					},
+					"43": {
+						"main_description": "(Almada, Seixal e Sesimbra)",
+						"main_label": "passengers transported in area 3",
+						"main_value": "{value, number}"
+					},
+					"44": {
+						"main_description": "(Alcochete, Moita, Montijo, Palmela, Setúbal e Barreiro)",
+						"main_label": "passengers transported in area 4",
 						"main_value": "{value, number}"
 					},
 					"heading": "Por área:"
@@ -1236,61 +1332,29 @@
 		"MetricsPagePassengersMonth": {
 			"sections": {
 				"aml": {
-					"heading": "Na área metropolitana de Lisboa:",
-					"main_label": "passageiros transportados este mês",
+					"heading": "In the Lisbon Metropolitan Area:",
+					"main_label": "passengers transported in the selected months",
 					"main_value": "{value, number}"
 				},
 				"by_agency": {
 					"41": {
 						"main_description": "(Amadora, Oeiras, Sintra, Cascais e Lisboa)",
-						"main_label": "passageiros transportados este mês na área 1",
+						"main_label": "passengers transported in area 1",
 						"main_value": "{value, number}"
 					},
 					"42": {
 						"main_description": "(Mafra, Vila Franca de Xira, Odivelas e Loures)",
-						"main_label": "passageiros transportados este mês na área 2",
+						"main_label": "passengers transported in area 2",
 						"main_value": "{value, number}"
 					},
 					"43": {
 						"main_description": "(Almada, Seixal e Sesimbra)",
-						"main_label": "passageiros transportados este mês na área 3",
+						"main_label": "passengers transported in area 3",
 						"main_value": "{value, number}"
 					},
 					"44": {
 						"main_description": "(Alcochete, Moita, Montijo, Palmela, Setúbal e Barreiro)",
-						"main_label": "passageiros transportados este mês na área 4",
-						"main_value": "{value, number}"
-					},
-					"heading": "Por área:"
-				}
-			}
-		},
-		"MetricsPagePassengersYear": {
-			"sections": {
-				"aml": {
-					"heading": "Na área metropolitana de Lisboa:",
-					"main_label": "passageiros transportados este ano",
-					"main_value": "{value, number}"
-				},
-				"by_agency": {
-					"41": {
-						"main_description": "(Amadora, Oeiras, Sintra, Cascais e Lisboa)",
-						"main_label": "passageiros transportados este ano na área 1",
-						"main_value": "{value, number}"
-					},
-					"42": {
-						"main_description": "(Mafra, Vila Franca de Xira, Odivelas e Loures)",
-						"main_label": "passageiros transportados este ano na área 2",
-						"main_value": "{value, number}"
-					},
-					"43": {
-						"main_description": "(Almada, Seixal e Sesimbra)",
-						"main_label": "passageiros transportados este ano na área 3",
-						"main_value": "{value, number}"
-					},
-					"44": {
-						"main_description": "(Alcochete, Moita, Montijo, Palmela, Setúbal e Barreiro)",
-						"main_label": "passageiros transportados este ano na área 4",
+						"main_label": "passengers transported in area 4",
 						"main_value": "{value, number}"
 					},
 					"heading": "Por área:"
@@ -1298,8 +1362,16 @@
 			}
 		},
 		"MetricsPageRecords": {
-			"heading": "Recordes",
-			"text_1": "Estes são os recordes mais recentes da Carris Metropolitana."
+			"day_record": {
+				"date": "{value, date, ::dd MMMM yyyy}",
+				"passengers": "Passengers transported in a single day"
+			},
+			"heading": "Records",
+			"month_record": {
+				"date": "{value, date, ::MMMM yyyy}",
+				"passengers": "Passengers transported in a month"
+			},
+			"text_1": "These are the most recent records from Carris Metropolitana."
 		}
 	},
 	"news": {
