@@ -88,8 +88,8 @@ export const MetricsContextProvider = ({ children }) => {
 
 	const tCommon = useTranslations('common');
 
-	const DEFAULT_START_DATE = Dates.now('Europe/Lisbon').minus({ days: 30 });
-	const DEFAULT_END_DATE = Dates.now('Europe/Lisbon');
+	const DEFAULT_START_DATE = Dates.now('Europe/Lisbon').minus({ days: 30 }).startOf('day').setZone('Europe/Lisbon', 'rebase_utc');
+	const DEFAULT_END_DATE = Dates.now('Europe/Lisbon').endOf('day').setZone('Europe/Lisbon', 'rebase_utc');
 
 	const [startDate, setStartDate] = useState(DEFAULT_START_DATE);
 	const [endDate, setEndDate] = useState(DEFAULT_END_DATE);
