@@ -28,7 +28,7 @@ export function useLineData(
 	const t = useTranslations('common');
 
 	const { data: lineData, isLoading } = useSWR<DemandByLineByDay[]>(
-		lineId ? `${getPublicVariable('api_url')}/metrics/demand/by_line?line_id=${lineId}` : null,
+		lineId ? `${getPublicVariable('api_url')}/metrics/demand/by_line/${lineId}` : null,
 	);
 
 	const data = useMemo(() => {
