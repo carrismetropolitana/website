@@ -6,7 +6,7 @@ import { LiveIcon } from '@/components/common/LiveIcon';
 import { Section } from '@/components/layout/Section';
 import { Surface } from '@/components/layout/Surface';
 import { useLinesDetailContext } from '@/contexts/LinesDetail.context';
-import { useMetricsContext } from '@/contexts/Metrics.context';
+import { useLineData } from '@/hooks/useLineData';
 import { LineChart } from '@mantine/charts';
 import { Dates } from '@tmlmobilidade/utils';
 import { useTranslations } from 'next-intl';
@@ -24,31 +24,27 @@ export function LinesDetailMetricsDemand() {
 
 	const t = useTranslations('lines.LinesDetailMetricsDemand');
 	const linesDetailContext = useLinesDetailContext();
-	const metricsContext = useMetricsContext();
+
+	const startDate = Dates.now('Europe/Lisbon').minus({ days: 15 });
+	const endDate = Dates.now('Europe/Lisbon');
 
 	//
-	// B. Transform data
+	// B. Fetch data
 
-	const lineData = useMemo(() => {
-		if (!linesDetailContext.data) return null;
-		const lineId = linesDetailContext.data.line?.id;
-		const endDate = Dates.now('Europe/Lisbon');
-		const startDate = Dates.now('Europe/Lisbon').minus({ days: 15 });
+	const { data: line } = useLineData(linesDetailContext.data?.line?.id || null, startDate, endDate);
 
-		const result = metricsContext.helpers.getLineDataForPeriod(lineId, startDate, endDate);
-
-		return result;
-	}, [linesDetailContext.data.line, metricsContext.helpers]);
+	//
+	// C. Transform data
 
 	const averageDemand = useMemo(() => {
-		if (!lineData) return 0;
-		return (lineData.sum / lineData.chart.length).toFixed(0);
-	}, [lineData]);
+		if (!line) return 0;
+		return (line.sum / line.chart.length).toFixed(0);
+	}, [line]);
 
 	//
-	// C. Render components
+	// D. Render components
 
-	if (!lineData) {
+	if (!line) {
 		return null;
 	}
 
@@ -59,7 +55,7 @@ export function LinesDetailMetricsDemand() {
 				<div className={styles.infoWrapper}>
 					<div className={styles.bigNumberWrapper}>
 						<h1 className={styles.bigNumber} style={{ color: linesDetailContext.data.line?.color }}>
-							{t('big_number', { value: lineData.sum || -1 })}
+							{t('big_number', { value: line.sum || -1 })}
 						</h1>
 						<LiveIcon className={styles.liveIcon} color={linesDetailContext.data.line?.color} />
 					</div>
@@ -72,7 +68,7 @@ export function LinesDetailMetricsDemand() {
 						color={linesDetailContext.data.line?.color}
 						connectNulls={false}
 						curveType="monotone"
-						data={lineData.chart}
+						data={line.chart}
 						dataKey="formatted_day"
 						gridAxis="none"
 						h={150}
