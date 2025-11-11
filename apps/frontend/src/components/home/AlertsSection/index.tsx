@@ -25,16 +25,17 @@ export function AlertsSection() {
 	// B. Transform data
 
 	const alertsActiveTodayAndTomorrow = useMemo(() => {
-		return alertsContext.data.simplified
-			.filter((alert) => {
-				const today = DateTime.now().startOf('day').toJSDate();
-				const alertDate = new Date(alert.start_date);
-				return alertDate >= today;
-			})
-			.sort((a, b) => {
-				return new Date(a.start_date).getTime() - new Date(b.start_date).getTime();
-			})
-		;
+		// Sort alerts by start date descending
+		const sortedAlerts = alertsContext.data.simplified.sort((a, b) => new Date(b.start_date).getTime() - new Date(a.start_date).getTime());
+		// Filter alerts to only include alerts that start today or tomorrow
+		const filteredAlerts = sortedAlerts.filter((alert) => {
+			const today = DateTime.now().startOf('day').toJSDate();
+			const alertDate = new Date(alert.start_date);
+			return alertDate >= today;
+		});
+
+		// If there are alerts for today and tomorrow, return them; otherwise return the 5 most recent alertsr
+		return (filteredAlerts.length > 0 ? filteredAlerts : sortedAlerts).slice(0, 5);
 	}, [alertsContext.data.simplified]);
 
 	//
