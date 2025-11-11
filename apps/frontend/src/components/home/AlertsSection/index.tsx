@@ -34,7 +34,7 @@ export function AlertsSection() {
 			return alertDate >= today;
 		});
 
-		// If there are alerts for today and tomorrow, return them; otherwise return the 5 most recent alertsr
+		// If there are alerts for today and tomorrow, return them; otherwise return the 5 most recent alerts
 		return (filteredAlerts.length > 0 ? filteredAlerts : sortedAlerts).slice(0, 5);
 	}, [alertsContext.data.simplified]);
 
