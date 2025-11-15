@@ -22,7 +22,7 @@ export function Arrabida365() {
 	//
 	// B. Transform data
 
-	//
+	// G
 	// C. Render components
 
 	return (
