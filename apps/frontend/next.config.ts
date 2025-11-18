@@ -129,6 +129,8 @@ const nextConfig: NextConfig = {
 
 			{ destination: 'https://forms.office.com/e/f6bs15vZYD', permanent: false, source: '/volley' },
 
+			{ destination: 'https://forms.office.com/e/VYHS3Pg31d', permanent: false, source: '/mini-passageiros' },
+
 			/* * */
 			/* LEGACY */
 
