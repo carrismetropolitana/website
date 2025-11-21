@@ -18,6 +18,44 @@ const LEGENDA_MAP = {
 	'praia-galapos-galapinhos': 'Mapa365_Legenda-Galaposetc',
 } as const;
 
+// Define interactive areas for each beach - includes all elements (icons, text, lines on map)
+// Each beach can have multiple clickable polygons/rectangles
+const BEACH_INTERACTIVE_AREAS = {
+	'praia-albarquel': [
+		// Beach icon and name area
+		{ height: 200, width: 350, x: 860, y: 750 },
+		// Line connection area (vertical line in legend)
+		{ height: 170, width: 40, x: 1172, y: 823 },
+		// Bus route line on map - upper section
+		{ height: 80, width: 250, x: 1400, y: 570 },
+		{ height: 120, width: 200, x: 1430, y: 620 },
+		{ height: 200, width: 150, x: 1500, y: 610 },
+		{ height: 80, width: 200, x: 1380, y: 820 },
+		{ height: 120, width: 150, x: 1210, y: 940 },
+		// Route continuing down
+		{ height: 300, width: 120, x: 1000, y: 1000 },
+		{ height: 100, width: 150, x: 890, y: 1280 },
+	],
+	'praia-creiro': [
+		// Beach icon and name area
+		{ height: 180, width: 380, x: 310, y: 1080 },
+	],
+	'praia-figueirinha': [
+		// Beach icon and name area
+		{ height: 180, width: 350, x: 520, y: 990 },
+	],
+	'praia-galapos-galapinhos': [
+		// Galapos beach icon and name area (upper)
+		{ height: 220, width: 380, x: 760, y: 1320 },
+		// Line connection between beaches
+		{ height: 165, width: 40, x: 744, y: 1335 },
+		// Galapinhos beach icon and name area (lower)
+		{ height: 230, width: 380, x: 690, y: 1580 },
+		// Lower line connection
+		{ height: 140, width: 40, x: 671, y: 1530 },
+	],
+} as const;
+
 export function MapLayers({ onPinClick, selectedAccordionId, selectedLineId, style, ...props }: MapLayersProps) {
 	const [hoveredBeachId, setHoveredBeachId] = React.useState<null | string>(null);
 
@@ -35,29 +73,29 @@ export function MapLayers({ onPinClick, selectedAccordionId, selectedLineId, sty
 		setHoveredBeachId(null);
 	};
 
-	// Define clickable pin areas with coordinates
-	// These coordinates correspond to the pin locations in Mapa365_ParagensOff.svg
-	const beachPins = [
-		{ accordionId: 'praia-albarquel', id: 'albarquel', name: 'Praia de Albarquel', x: 944, y: 805 },
-		{ accordionId: 'praia-figueirinha', id: 'figueirinha', name: 'Praia da Figueirinha', x: 659, y: 1072 },
-		{ accordionId: 'praia-creiro', id: 'creiro', name: 'Praia do Creiro', x: 393, y: 1172 },
-		{ accordionId: 'praia-galapos-galapinhos', id: 'galapos', name: 'Praia dos Galápos e Galapinhos', x: 1009, y: 1402 },
-	];
-
-	// Determine which beach to show (hovered pin takes priority over clicked accordion)
+	// Determine which beach legend to show
+	// When hovering, show the hovered beach legend; otherwise show the selected beach legend
 	const displayBeachId = hoveredBeachId || selectedAccordionId;
 
-	// Get the line ID for the displayed beach
-	const displayLineIdForBeach = React.useMemo(() => {
-		if (displayBeachId) {
-			const beach = BEACH_PINS.find(b => b.accordionId === displayBeachId);
+	// Determine which line to show
+	// When hovering over a different beach, show the hovered beach's line (not the selected one)
+	const displayLineId = React.useMemo(() => {
+		// If hovering over a beach, show its line
+		if (hoveredBeachId) {
+			const beach = BEACH_PINS.find(b => b.accordionId === hoveredBeachId);
+			return beach?.lineIds?.[0] || null;
+		}
+		// If a specific line is selected from accordion, use that
+		if (selectedLineId) {
+			return selectedLineId;
+		}
+		// Otherwise show the selected beach's default line
+		if (selectedAccordionId) {
+			const beach = BEACH_PINS.find(b => b.accordionId === selectedAccordionId);
 			return beach?.lineIds?.[0] || null;
 		}
 		return null;
-	}, [displayBeachId]);
-
-	// Use provided lineId if available, otherwise use the one from displayBeachId
-	const finalLineId = selectedLineId || displayLineIdForBeach;
+	}, [hoveredBeachId, selectedLineId, selectedAccordionId]);
 
 	const layerStyle: React.CSSProperties = {
 		height: '100%',
@@ -138,10 +176,10 @@ export function MapLayers({ onPinClick, selectedAccordionId, selectedLineId, sty
 			)}
 
 			{/* Selected or Hovered state: Show specific line */}
-			{finalLineId && (
+			{displayLineId && (
 				<img
-					alt={`Linha ${finalLineId}`}
-					src={`/assets/arrabidas/lines/Mapa365_${finalLineId}.svg`}
+					alt={`Linha ${displayLineId}`}
+					src={`/assets/arrabidas/lines/Mapa365_${displayLineId}.svg`}
 					style={{
 						display: 'block',
 						height: '100%',
@@ -155,7 +193,7 @@ export function MapLayers({ onPinClick, selectedAccordionId, selectedLineId, sty
 				/>
 			)}
 
-			{/* Interactive pin areas - always present for clicks on ParagensOff */}
+			{/* Interactive areas - covers all beach elements (icons, text, lines) */}
 			<svg
 				preserveAspectRatio="xMidYMid meet"
 				viewBox="0 0 1797.1 2210.35"
@@ -169,25 +207,28 @@ export function MapLayers({ onPinClick, selectedAccordionId, selectedLineId, sty
 					zIndex: 100,
 				}}
 			>
-				{beachPins.map(pin => (
-					<circle
-						key={pin.id}
-						cx={pin.x}
-						cy={pin.y}
-						fill="transparent"
-						onMouseEnter={() => handlePinMouseEnter(pin.accordionId)}
-						onMouseLeave={handlePinMouseLeave}
-						r={50}
-						style={{ cursor: 'pointer' }}
-						onClick={(e) => {
-							e.stopPropagation();
-							e.preventDefault();
-							handlePinClick(pin.accordionId);
-						}}
-					>
-						<title>{pin.name}</title>
-					</circle>
-				))}
+				{Object.entries(BEACH_INTERACTIVE_AREAS).map(([beachId, areas]) =>
+					areas.map((area, index) => (
+						<rect
+							key={`${beachId}-${index}`}
+							fill="transparent"
+							height={area.height}
+							onMouseEnter={() => handlePinMouseEnter(beachId)}
+							onMouseLeave={handlePinMouseLeave}
+							style={{ cursor: 'pointer' }}
+							width={area.width}
+							x={area.x}
+							y={area.y}
+							onClick={(e) => {
+								e.stopPropagation();
+								e.preventDefault();
+								handlePinClick(beachId);
+							}}
+						>
+							<title>{BEACH_PINS.find(b => b.accordionId === beachId)?.name || beachId}</title>
+						</rect>
+					)),
+				)}
 			</svg>
 		</div>
 	);
