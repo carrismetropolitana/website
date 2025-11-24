@@ -149,13 +149,9 @@ const SectionHeader = () => {
 			</div>
 			<Button
 				className={styles.pressLabelSectionButton}
-				color="gray"
 				data-expanded={showMore}
-				h={40}
 				leftSection={<IconArrowDownRight />}
 				onClick={() => setShowMore(state => !state)}
-				variant="outline"
-				w={170}
 			>
 				<span className={styles.pressLabelSectionButtonText}>{t(showMore ? 'collapse_button' : 'expand_button')}</span>
 			</Button>

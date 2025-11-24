@@ -19,6 +19,7 @@ export const GET = async () => {
 
 	const foundNotes = await payload.find({
 		collection: 'notes',
+		depth: 1,
 		limit: 0,
 		sort: '-publishDate',
 		where: {

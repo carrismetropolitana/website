@@ -2,7 +2,7 @@
 
 /* * */
 
-import Carousel from '@/components/common/CarouselControlled';
+import Carousel from '@/components/common/Carousel';
 import { Section } from '@/components/layout/Section';
 import { Surface } from '@/components/layout/Surface';
 import { NewsCardSkeleton } from '@/components/news/NewsCardSkeleton';
@@ -103,12 +103,11 @@ export function PressNotesBase() {
 
 	return (
 		<Surface>
-			<Section heading={t('section_heading')} href="/press/notes">
+			<Section heading={t('section_heading')} href="/press/notes" subheading={t('subheading')}>
 				<Carousel
 					skeletonComponent={<NewsCardSkeleton />}
 					skeletonQty={4}
 					slides={carouselSlides}
-					subheading={t('subheading')}
 				/>
 			</Section>
 		</Surface>
