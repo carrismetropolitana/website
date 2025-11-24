@@ -15,6 +15,11 @@ export interface Note {
 	authors?: string | { email: string, id: string }
 
 	/**
+	 * The main body content of the note (HTML string)
+	 */
+	body?: string
+
+	/**
 	 * The type of content - either a link or a file
 	 */
 	contentType: 'file' | 'link'
@@ -39,6 +44,11 @@ export interface Note {
 		id: string
 		url?: string
 	}
+
+	/**
+	 * The lead/summary text for the note (HTML string)
+	 */
+	lead?: string
 
 	/**
 	 * The external link if contentType is 'link'

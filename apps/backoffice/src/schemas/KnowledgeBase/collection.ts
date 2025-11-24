@@ -46,6 +46,22 @@ export const KnowledgeBase: CollectionConfig = {
 			unique: true,
 		},
 		{
+			admin: {
+				description: 'Texto de destaque/resumo que aparece no início do artigo. Suporta HTML.',
+			},
+			label: 'Lead',
+			name: 'lead',
+			type: 'textarea',
+		},
+		{
+			admin: {
+				description: 'Conteúdo principal do artigo. Suporta HTML.',
+			},
+			label: 'Conteúdo',
+			name: 'body',
+			type: 'textarea',
+		},
+		{
 			defaultValue: 'file',
 			label: 'Tipo de Conteúdo',
 			name: 'contentType',

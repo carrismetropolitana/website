@@ -41,9 +41,11 @@ export const GET = async (request: Request, { params }: { params: Promise<{ slug
 	const publicNote = {
 		_id: note.id,
 		authors: note.authors,
+		body: note.body,
 		contentType: note.contentType,
 		file: note.file,
 		heroImage: note.heroImage,
+		lead: note.lead,
 		link: note.link,
 		publishDate: note.publishDate,
 		seo: note.seo,

@@ -42,9 +42,11 @@ export const GET = async (_request: Request, { params }: { params: Promise<{ slu
 	const publicItem = {
 		_id: item.id,
 		authors: item.authors,
+		body: item.body,
 		contentType: item.contentType,
 		file: item.file,
 		heroImage: item.heroImage,
+		lead: item.lead,
 		link: item.link,
 		publishDate: item.publishDate,
 		seo: item.seo,
