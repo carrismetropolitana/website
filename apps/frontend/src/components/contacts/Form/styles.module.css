@@ -3,7 +3,9 @@
 
 .iframe {
     width: 100%;
-	height: 600px;
+	/*height: 900px;*/
     border: none;
     border-radius: 5px;
+    overflow: hidden;
+    transition: height 0.2s ease;
 }
