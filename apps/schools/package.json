@@ -22,7 +22,7 @@
 		"inflected": "2.1.0",
 		"mantine-form-zod-resolver": "1.3.0",
 		"maplibre-gl": "5.14.0",
-		"next": "16.0.7",
+		"next": "15.5.7",
 		"nodemailer": "7.0.11",
 		"react": "19.2.1",
 		"react-dom": "19.2.1",
