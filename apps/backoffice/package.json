@@ -22,7 +22,7 @@
 		"@payloadcms/ui": "3.61.1",
 		"@tmlmobilidade/utils": "20251029.1408.3",
 		"graphql": "16.11.0",
-		"next": "16.0.7",
+		"next": "15.2.3",
 		"nodemailer": "7.0.10",
 		"payload": "3.61.1",
 		"react": "19.2.1",
