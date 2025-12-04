@@ -3,7 +3,7 @@
 /* * */
 
 import Button from '@/components/common/Button';
-import Form from '@/components/contacts/Form';
+import { ContactForm } from '@/components/contacts/ContactForm';
 import { Section } from '@/components/layout/Section';
 import { Surface } from '@/components/layout/Surface';
 import { IconPhone, IconUmbrella } from '@tabler/icons-react';
@@ -15,7 +15,7 @@ import styles from './styles.module.css';
 /* * */
 
 export default function Component() {
-//
+	//
 
 	//
 	// A. Setup variables
@@ -43,7 +43,7 @@ export default function Component() {
 			</Surface>
 			<Surface>
 				<Section heading={t('form.heading')} subheading={t('form.subheading')} withPadding>
-					<Form />
+					<ContactForm />
 				</Section>
 			</Surface>
 		</>

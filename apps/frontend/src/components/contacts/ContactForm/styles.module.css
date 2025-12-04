@@ -1,0 +1,10 @@
+/* * */
+/* IFRAME */
+
+.iframe {
+	width: 100%;
+	overflow: hidden;
+	border: none;
+	border-radius: 5px;
+	transition: height 200ms ease;
+}
