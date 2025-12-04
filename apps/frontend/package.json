@@ -49,6 +49,7 @@
 		"@carrismetropolitana/api-types": "20251128.1928.11",
 		"@carrismetropolitana/eslint": "20250622.1204.50",
 		"@carrismetropolitana/website-shared-types": "*",
+		"@tmlmobilidade/dates": "20251204.1130.15",
 		"@tmlmobilidade/tsconfig": "20251204.1130.15",
 		"@tmlmobilidade/types": "20251204.1130.15",
 		"@types/geojson": "7946.0.16",

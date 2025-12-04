@@ -6,7 +6,7 @@ import { formatDay, formatMonth } from '@/utils/formatDates';
 import { TopDemandLinesByAgency } from '@carrismetropolitana/api-types/metrics';
 import { getPublicVariable } from '@carrismetropolitana/website-shared-settings';
 import { DemandByAgencyByDay, DemandByAgencyByMonth, DemandByLineByDay, TopDemandByAgency } from '@tmlmobilidade/types';
-import { Dates } from '@tmlmobilidade/utils';
+import { Dates } from '@tmlmobilidade/dates';
 import { DateTime } from 'luxon';
 import { useTranslations } from 'next-intl';
 import { createContext, useContext, useMemo, useState } from 'react';

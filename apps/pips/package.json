@@ -22,6 +22,7 @@
 		"@mantine/notifications": "8.3.9",
 		"@next/third-parties": "16.0.7",
 		"@tabler/icons-react": "3.35.0",
+		"@tmlmobilidade/dates": "20251204.1130.15",
 		"@tmlmobilidade/utils": "20251204.1130.15",
 		"@turf/turf": "7.3.1",
 		"@vis.gl/react-maplibre": "8.1.0",

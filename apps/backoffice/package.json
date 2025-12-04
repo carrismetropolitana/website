@@ -20,6 +20,7 @@
 		"@payloadcms/richtext-lexical": "3.66.0",
 		"@payloadcms/storage-s3": "3.66.0",
 		"@payloadcms/ui": "3.66.0",
+		"@tmlmobilidade/dates": "20251204.1130.15",
 		"@tmlmobilidade/utils": "20251204.1130.15",
 		"graphql": "16.12.0",
 		"next": "15.5.7",

@@ -1,4 +1,4 @@
-import { Dates } from '@tmlmobilidade/utils';
+import { Dates } from '@tmlmobilidade/dates';
 import { DateTime } from 'luxon';
 
 /**
