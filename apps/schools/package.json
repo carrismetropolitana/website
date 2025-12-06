@@ -16,7 +16,7 @@
 		"@mantine/form": "8.3.9",
 		"@mantine/notifications": "8.3.9",
 		"@tabler/icons-react": "3.35.0",
-		"@tmlmobilidade/utils": "20251204.1130.15",
+		"@tmlmobilidade/utils": "20251205.1154.10",
 		"@turf/turf": "7.3.1",
 		"googleapis": "167.0.0",
 		"inflected": "2.1.0",
@@ -34,7 +34,7 @@
 	"devDependencies": {
 		"@carrismetropolitana/api-types": "20251128.1928.11",
 		"@carrismetropolitana/eslint": "20250622.1204.50",
-		"@tmlmobilidade/tsconfig": "20251204.1130.15",
+		"@tmlmobilidade/tsconfig": "20251205.1154.10",
 		"@types/node": "24.10.1",
 		"@types/nodemailer": "7.0.4",
 		"@types/react": "19.2.7",
