@@ -36,7 +36,7 @@
 	},
 	"devDependencies": {
 		"@carrismetropolitana/eslint": "20250622.1204.50",
-		"@tmlmobilidade/tsconfig": "20251205.1154.10",
+		"@tmlmobilidade/tsconfig": "20251206.1045.7",
 		"@types/node": "24.10.1",
 		"resolve-tspaths": "0.8.23",
 		"rimraf": "6.1.2",
