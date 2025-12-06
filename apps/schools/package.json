@@ -16,6 +16,7 @@
 		"@mantine/form": "8.3.9",
 		"@mantine/notifications": "8.3.9",
 		"@tabler/icons-react": "3.35.0",
+		"@tmlmobilidade/dates": "20251205.1154.10",
 		"@tmlmobilidade/utils": "20251205.1154.10",
 		"@turf/turf": "7.3.1",
 		"googleapis": "167.0.0",
