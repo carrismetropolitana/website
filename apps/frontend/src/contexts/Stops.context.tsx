@@ -151,7 +151,7 @@ export const StopsContextProvider = ({ children }) => {
 /* * */
 
 export function transformStopDataIntoGeoJsonFeature(stopData: Stop): GeoJSON.Feature<GeoJSON.Point, GeoJSON.GeoJsonProperties> {
-	return {
+	const feature: GeoJSON.Feature<GeoJSON.Point, GeoJSON.GeoJsonProperties> = {
 		geometry: {
 			coordinates: [stopData.lon, stopData.lat],
 			type: 'Point',
@@ -165,4 +165,14 @@ export function transformStopDataIntoGeoJsonFeature(stopData: Stop): GeoJSON.Fea
 		},
 		type: 'Feature',
 	};
+
+	// Filter out falsy properties
+	Object.keys(feature.properties).forEach((key) => {
+		if (feature.properties[key as keyof typeof feature.properties] === undefined || feature.properties[key as keyof typeof feature.properties] === null) {
+			// eslint-disable-next-line @typescript-eslint/no-dynamic-delete
+			delete feature.properties[key as keyof typeof feature.properties];
+		}
+	});
+
+	return feature;
 }

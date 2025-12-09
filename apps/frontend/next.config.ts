@@ -160,6 +160,8 @@ const nextConfig: NextConfig = {
 				source: '/volley',
 			},
 
+			{ destination: 'https://forms.office.com/e/VYHS3Pg31d', permanent: false, source: '/mini-passageiros' },
+
 			/* * */
 			/* LEGACY */
 

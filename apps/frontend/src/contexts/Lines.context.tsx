@@ -3,7 +3,7 @@
 /* * */
 
 import { type CachedResource } from '@carrismetropolitana/api-types/common';
-import { type DemandMetricsByLine, type ServiceMetrics } from '@carrismetropolitana/api-types/metrics';
+import { type ServiceMetrics } from '@carrismetropolitana/api-types/metrics';
 import { type Line, type Route } from '@carrismetropolitana/api-types/network';
 import { getPublicVariable } from '@carrismetropolitana/website-shared-settings';
 import { createContext, useContext, useMemo } from 'react';
@@ -13,13 +13,11 @@ import useSWR from 'swr';
 
 interface LinesContextState {
 	actions: {
-		getDemandMetricsByLineId: (lineId: string) => DemandMetricsByLine | undefined
 		getLineDataById: (lineId: string) => Line | undefined
 		getRouteDataById: (routeId: string) => Route | undefined
 		getServiceMetricsByLineId: (lineId: string) => ServiceMetrics[] | undefined
 	}
 	data: {
-		demand_metrics: DemandMetricsByLine[]
 		lines: Line[]
 		routes: Route[]
 		service_metrics: ServiceMetrics[]
@@ -51,7 +49,6 @@ export const LinesContextProvider = ({ children }) => {
 
 	const { data: allLinesData, isLoading: allLinesLoading } = useSWR<Line[], Error>(`${getPublicVariable('api_url')}/lines`, { refreshInterval: 900000 }); // 15 minutes
 	const { data: allRoutesData, isLoading: allRoutesLoading } = useSWR<Route[], Error>(`${getPublicVariable('api_url')}/routes`, { refreshInterval: 900000 }); // 15 minutes
-	const { data: demandByLineData, isLoading: demandByLineDataLoading } = useSWR<DemandMetricsByLine[], Error>(`${getPublicVariable('api_url')}/metrics/demand/by_line`, { refreshInterval: 300000 }); // 5 minutes
 	const { data: serviceMetricsData, isLoading: serviceMetricsLoading } = useSWR<CachedResource<ServiceMetrics[]>, Error>(`${getPublicVariable('api_url')}/metrics/service/all`, { refreshInterval: 900000 }); // 15 minutes
 
 	//
@@ -65,10 +62,6 @@ export const LinesContextProvider = ({ children }) => {
 		return allRoutesData?.find(route => route.id === routeId);
 	};
 
-	const getDemandMetricsByLineId = (lineId: string) => {
-		return demandByLineData?.find(demandMetrics => demandMetrics.line_id === lineId);
-	};
-
 	const getServiceMetricsByLineId = (lineId: string) => {
 		return serviceMetricsData?.data.filter(serviceMetrics => String(serviceMetrics.line_id) === String(lineId));
 	};
@@ -78,27 +71,23 @@ export const LinesContextProvider = ({ children }) => {
 
 	const contextValue: LinesContextState = useMemo(() => ({
 		actions: {
-			getDemandMetricsByLineId,
 			getLineDataById,
 			getRouteDataById,
 			getServiceMetricsByLineId,
 		},
 		data: {
-			demand_metrics: demandByLineData || [],
 			lines: allLinesData || [],
 			routes: allRoutesData || [],
 			service_metrics: serviceMetricsData?.data || [],
 		},
 		flags: {
-			is_loading: allLinesLoading || allRoutesLoading || demandByLineDataLoading || serviceMetricsLoading,
+			is_loading: allLinesLoading || allRoutesLoading || serviceMetricsLoading,
 		},
 	}), [
 		allLinesData,
 		allLinesLoading,
 		allRoutesData,
 		allRoutesLoading,
-		demandByLineData,
-		demandByLineDataLoading,
 		serviceMetricsData,
 		serviceMetricsLoading,
 	]);
