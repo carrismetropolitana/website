@@ -16,7 +16,7 @@ const municipalDiscounts = [
 		icon: '/assets/brands/municipalities/setubal.jpg',
 		id: 'setubal-001',
 		name: 'Câmara Municipal de Setúbal',
-		validity: 'Válido até 31 dez. 2024',
+		validity: 'Válido até 31 dez. 2025',
 	},
 	{
 		description: 'A Câmara Municipal de Lisboa oferece o passe navegante® municipal Lisboa a todos os munícipes com 65 ou mais anos de idade.',
