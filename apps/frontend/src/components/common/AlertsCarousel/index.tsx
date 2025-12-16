@@ -13,7 +13,7 @@ interface Props {
 
 /* * */
 
-export function AlertsCarousel({ alerts, target = '_blank' }: Props) {
+export function AlertsCarousel({ alerts, target = '_self' }: Props) {
 	//
 
 	const carouselSlides = alerts?.map(slideItem => ({
