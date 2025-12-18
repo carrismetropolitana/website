@@ -2,9 +2,9 @@
 /* IFRAME */
 
 .iframe {
-    width: 100%;
-    border: none;
-    border-radius: 5px;
-    overflow: hidden;
-    transition: height 0.2s ease;
+	width: 100%;
+	overflow: hidden;
+	border: none;
+	border-radius: 5px;
+	transition: height 200ms ease;
 }
