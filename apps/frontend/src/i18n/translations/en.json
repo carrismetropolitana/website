@@ -1040,7 +1040,7 @@
 			"title": "Next arrivals"
 		},
 		"PathWaypointTimetable": {
-			"next_date": "Next arrivals available from {value, date, dayShort} {value, date, monthLong} {value, date, yearLong}",
+			"next_date": "This line does not have schedules on this day. Next day with schedules: {value, date, dayShort} {value, date, monthLong} {value, date, yearLong}",
 			"no_data": "Timetables unavailable for this date.",
 			"title": "Scheduled arrivals at this stop:"
 		},

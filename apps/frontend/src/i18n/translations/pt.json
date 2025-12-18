@@ -1007,7 +1007,7 @@
 			"title": "Próximas circulações"
 		},
 		"PathWaypointTimetable": {
-			"next_date": "Próximos horários disponíveis a partir de {value, date, dayShort} {value, date, monthLong} {value, date, yearLong}",
+			"next_date": "Esta linha não realiza viagens neste dia da semana. Próximo dia com horários: {value, date, dayShort} {value, date, monthLong} {value, date, yearLong}",
 			"no_data": "Horários indisponíveis para esta data.",
 			"title": "Horários planeados nesta paragem:"
 		},
