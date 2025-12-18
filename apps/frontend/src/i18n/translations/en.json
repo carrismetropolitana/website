@@ -397,8 +397,8 @@
 					"title": "Antigo Combatente >65"
 				},
 				"complement": {
-					"description": "Aditivo ao cartão navegante® para quem já possui um passe mensal. O complemento permite viajar nas linhas inter-regionais da CMetropolitana, para entrar e sair dos limites da área metropolitana de Lisboa.",
-					"title": "Complement"
+					"description": "Valor complementar, a acrescer ao valor do passe navegante mensal. Permite viajar nas linhas inter-regionais da Carris Metropolitana, para entrar e sair dos limites da amL.",
+					"title": "Complemento"
 				},
 				"family": {
 					"description": "Desconto válido para agregados familiares com pelo menos 3 indivíduos. É necessário que todos os elementos do agregado tenham o mesmo domicílio fiscal, residam num dos 18 municípios da aml, e que tenham relação familiar direta de ascendência ou descendência com o titular.",
