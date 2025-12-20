@@ -20,6 +20,7 @@ export const GET = async (request: Request, { params }: { params: Promise<{ slug
 
 	const foundNotes = await payload.find({
 		collection: 'notes',
+		depth: 2,
 		limit: 1,
 		where: {
 			and: [
@@ -42,11 +43,10 @@ export const GET = async (request: Request, { params }: { params: Promise<{ slug
 		_id: note.id,
 		authors: note.authors,
 		body: note.body,
-		contentType: note.contentType,
+		contentType: note.contentType || 'file',
 		file: note.file,
 		heroImage: note.heroImage,
 		lead: note.lead,
-		link: note.link,
 		publishDate: note.publishDate,
 		seo: note.seo,
 		slug: note.slug,

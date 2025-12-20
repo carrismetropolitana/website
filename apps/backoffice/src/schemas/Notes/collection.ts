@@ -23,7 +23,7 @@ export const Notes: CollectionConfig = {
 	},
 
 	admin: {
-		defaultColumns: ['title', 'status', 'contentType', 'publishDate'],
+		defaultColumns: ['title', 'status', 'publishDate'],
 		useAsTitle: 'title',
 	},
 
@@ -63,53 +63,20 @@ export const Notes: CollectionConfig = {
 			type: 'textarea',
 		},
 		{
-			defaultValue: 'link',
+			admin: {
+				disabled: true,
+				hidden: true,
+			},
+			defaultValue: 'file',
 			label: 'Tipo de Conteúdo',
 			name: 'contentType',
-			options: [
-				{
-					label: 'Link',
-					value: 'link',
-				},
-				{
-					label: 'Arquivo',
-					value: 'file',
-				},
-			],
-			required: true,
-			type: 'select',
-		},
-		{
-			admin: {
-				condition: ({ contentType }) => contentType === 'link',
-			},
-			label: 'URL',
-			name: 'link',
 			type: 'text',
-			validate: (value, { data }) => {
-				if (data.contentType === 'link' && !value) {
-					return 'URL é obrigatória quando o tipo de conteúdo é "Link"';
-				}
-				if (data.contentType === 'link' && value && !value.match(/^https?:\/\/.+/)) {
-					return 'URL deve começar com http:// ou https://';
-				}
-				return true;
-			},
 		},
 		{
-			admin: {
-				condition: ({ contentType }) => contentType === 'file',
-			},
 			label: 'Arquivo',
 			name: 'file',
 			relationTo: 'media',
 			type: 'relationship',
-			validate: (value, { data }) => {
-				if (data.contentType === 'file' && !value) {
-					return 'Arquivo é obrigatório quando o tipo de conteúdo é "Arquivo"';
-				}
-				return true;
-			},
 		},
 		{
 			admin: {

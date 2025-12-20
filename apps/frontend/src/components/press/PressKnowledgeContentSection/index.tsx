@@ -70,18 +70,8 @@ export function PressKnowledgeContentSection() {
 		const item = knowledgeBaseData?.find(kb => kb._id === newsItem.id);
 		if (!item) return;
 
-		if (item.contentType === 'file' && item.file?.url) {
-			// For files, trigger direct download
-			window.open(item.file.url, '_blank');
-		}
-		else if (item.contentType === 'link' && item.link) {
-			// For links, navigate to detail page which will then redirect
-			router.push(`/press/knowledge-base/${item.slug}`);
-		}
-		else {
-			// Fallback to detail page
-			router.push(`/press/knowledge-base/${item.slug}`);
-		}
+		// Always navigate to the detail page
+		router.push(`/press/knowledge-base/${item.slug}`);
 	};
 
 	if (isLoading) {

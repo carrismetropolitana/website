@@ -91,9 +91,19 @@
 /* Content Section styles */
 .contentSection {
 	display: flex;
-	flex-direction: column;
+	flex-direction: row;
 	gap: 24px;
 	padding: 1.875rem 1.25rem;
+	align-items: flex-end;
+	width: 100%;
+}
+
+/* Text container */
+.textContainer {
+	display: flex;
+	flex-direction: column;
+	gap: 24px;
+	width: 71%;
 }
 
 /* Lead styles */
@@ -128,10 +138,13 @@
 	margin-top: 16px;
 }
 
-/* Action button styles */
-.actionWrapper {
+/* Action container styles */
+.actionContainer {
 	display: flex;
-	justify-content: flex-end;
+	align-items: flex-start;
+	width: 29%;
+	justify-content: center;
+	flex-shrink: 0;
 }
 
 .actionButton {
@@ -179,5 +192,11 @@
 
 	.contentSection {
 		padding: 1.25rem;
+		flex-direction: column;
+	}
+
+	.actionContainer {
+		width: 100%;
+		justify-content: flex-end;
 	}
 }

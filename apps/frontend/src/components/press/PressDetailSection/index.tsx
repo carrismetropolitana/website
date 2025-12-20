@@ -16,7 +16,7 @@ import { PressHeaderGenericSection } from '../PressHeaderGenericSection';
 
 interface PressDetailSectionProps {
 	body?: string
-	contentType: 'file' | 'link'
+	contentType?: 'file' | 'link'
 	file?: {
 		filename?: string
 		mimeType?: string
@@ -119,44 +119,50 @@ export function PressDetailSection({
 
 				{/* Content Section */}
 				<div className={styles.contentSection}>
-					{/* Lead content */}
-					{lead && (
-						<div
-							className={styles.lead}
-							dangerouslySetInnerHTML={{ __html: lead }}
-						/>
-					)}
+					{/* Text content container */}
+					<div className={styles.textContainer}>
+						{/* Lead content */}
+						{lead && (
+							<div
+								className={styles.lead}
+								dangerouslySetInnerHTML={{ __html: lead }}
+							/>
+						)}
 
-					{/* Body content */}
-					{body && (
-						<div
-							className={styles.body}
-							dangerouslySetInnerHTML={{ __html: body }}
-						/>
-					)}
-
-					{/* Action button */}
-					<div className={styles.actionWrapper}>
-						{contentType === 'file' && file?.url ? (
-							<button
-								className={styles.actionButton}
-								onClick={handleDownload}
-								type="button"
-							>
-								<IconDownload size={18} />
-								{t('download')}
-							</button>
-						) : contentType === 'link' && link ? (
-							<button
-								className={styles.actionButton}
-								onClick={handleCopyLink}
-								type="button"
-							>
-								<IconCopy size={18} />
-								{copied ? t('copied') : t('copy_link')}
-							</button>
-						) : null}
+						{/* Body content */}
+						{body && (
+							<div
+								className={styles.body}
+								dangerouslySetInnerHTML={{ __html: body }}
+							/>
+						)}
 					</div>
+
+					{/* Action button container */}
+					{/* Show download button if file exists OR copy link button if link exists */}
+					{(file?.url || (contentType === 'link' && link)) && (
+						<div className={styles.actionContainer}>
+							{file?.url ? (
+								<button
+									className={styles.actionButton}
+									onClick={handleDownload}
+									type="button"
+								>
+									<IconDownload size={18} />
+									{t('download')}
+								</button>
+							) : contentType === 'link' && link ? (
+								<button
+									className={styles.actionButton}
+									onClick={handleCopyLink}
+									type="button"
+								>
+									<IconCopy size={18} />
+									{copied ? t('copied') : t('copy_link')}
+								</button>
+							) : null}
+						</div>
+					)}
 				</div>
 			</div>
 		</div>

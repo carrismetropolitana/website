@@ -49,7 +49,6 @@ export function PressNoteDetail({ slug }: PressNoteDetailProps) {
 			contentType={note.contentType}
 			file={note.file}
 			lead={note.lead}
-			link={note.link}
 			parentPath="/press/notes"
 			parentTitle={t('section_heading')}
 			publishDate={note.publishDate}

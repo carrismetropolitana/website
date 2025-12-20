@@ -1,6 +1,5 @@
 /**
- * Notes are press releases and official documents that can be either
- * links to external content or downloadable files.
+ * Notes are press releases and official documents with downloadable files.
  */
 export interface Note {
 
@@ -20,12 +19,12 @@ export interface Note {
 	body?: string
 
 	/**
-	 * The type of content - either a link or a file
+	 * The type of content - always 'file' for notes
 	 */
-	contentType: 'file' | 'link'
+	contentType: 'file'
 
 	/**
-	 * The file reference if contentType is 'file'
+	 * The file reference for the downloadable document
 	 */
 	file?: {
 		alt?: string
@@ -49,11 +48,6 @@ export interface Note {
 	 * The lead/summary text for the note (HTML string)
 	 */
 	lead?: string
-
-	/**
-	 * The external link if contentType is 'link'
-	 */
-	link?: string
 
 	/**
 	 * The date when the note was published

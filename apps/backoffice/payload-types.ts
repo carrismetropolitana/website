@@ -152,6 +152,14 @@ export interface KnowledgeBase {
    * URL única para este item. Será gerada automaticamente do título se deixado em branco.
    */
   slug: string;
+  /**
+   * Texto de destaque/resumo que aparece no início do artigo. Suporta HTML.
+   */
+  lead?: string | null;
+  /**
+   * Conteúdo principal do artigo. Suporta HTML.
+   */
+  body?: string | null;
   contentType: 'link' | 'file';
   link?: string | null;
   file?: (string | null) | Media;
@@ -263,8 +271,15 @@ export interface Note {
    * URL única para esta nota. Será gerada automaticamente do título se deixado em branco.
    */
   slug: string;
-  contentType: 'link' | 'file';
-  link?: string | null;
+  /**
+   * Texto de destaque/resumo que aparece no início do artigo. Suporta HTML.
+   */
+  lead?: string | null;
+  /**
+   * Conteúdo principal do artigo. Suporta HTML.
+   */
+  body?: string | null;
+  contentType?: string | null;
   file?: (string | null) | Media;
   publishDate?: string | null;
   status: 'draft' | 'published';
@@ -374,6 +389,8 @@ export interface CaseStudiesSelect<T extends boolean = true> {
 export interface KnowledgeBaseSelect<T extends boolean = true> {
   title?: T;
   slug?: T;
+  lead?: T;
+  body?: T;
   contentType?: T;
   link?: T;
   file?: T;
@@ -431,8 +448,9 @@ export interface NewsSelect<T extends boolean = true> {
 export interface NotesSelect<T extends boolean = true> {
   title?: T;
   slug?: T;
+  lead?: T;
+  body?: T;
   contentType?: T;
-  link?: T;
   file?: T;
   publishDate?: T;
   status?: T;

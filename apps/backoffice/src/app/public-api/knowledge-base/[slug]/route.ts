@@ -20,6 +20,7 @@ export const GET = async (_request: Request, { params }: { params: Promise<{ slu
 
 	const foundItems = await payload.find({
 		collection: 'knowledge-base',
+		depth: 2,
 		limit: 1,
 		where: {
 			slug: { equals: slug },

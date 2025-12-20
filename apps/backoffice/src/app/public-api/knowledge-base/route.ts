@@ -19,7 +19,7 @@ export const GET = async () => {
 
 	const foundItems = await payload.find({
 		collection: 'knowledge-base',
-		depth: 1,
+		depth: 2,
 		limit: 0,
 		sort: '-publishDate',
 		where: {

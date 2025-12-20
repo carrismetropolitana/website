@@ -11,6 +11,7 @@ interface CardProps {
 	buttonIcon?: React.ReactNode
 	buttonText?: string
 	description: string
+	downloadUrl?: string
 	imageSvg: React.ReactNode
 	imageSvgSecondary?: React.ReactNode
 	isContact?: boolean
@@ -172,6 +173,12 @@ const Card: React.FC<{ card: CardProps, index: number }> = ({ card, index }) => 
 		}
 	};
 
+	const handleDownloadClick = () => {
+		if (card.downloadUrl) {
+			window.open(card.downloadUrl, '_blank');
+		}
+	};
+
 	return (
 		<div className={styles.pressLabelSectionCard} data-variant={isContactCard ? 'contact' : 'default'}>
 			{isContactCard ? (
@@ -194,7 +201,7 @@ const Card: React.FC<{ card: CardProps, index: number }> = ({ card, index }) => 
 				<div data-slot="card-footer">
 					<button
 						data-slot="card-button"
-						onClick={isContactCard ? handleContactClick : undefined}
+						onClick={isContactCard ? handleContactClick : handleDownloadClick}
 						type="button"
 					>
 						{card.buttonIcon}
@@ -248,6 +255,7 @@ export function PressLabelSection() {
 			buttonIcon: <IconDownload />,
 			buttonText: t('buttons.download'),
 			description: t('cards.download_logos.description'),
+			downloadUrl: 'https://staging.carrismetropolitana.pt/admin/api/media/file/logos-carris-metropolitana.zip',
 			imageSvg: Icons.download,
 			title: t('cards.download_logos.title'),
 		},
@@ -255,6 +263,7 @@ export function PressLabelSection() {
 			buttonIcon: <IconDownload />,
 			buttonText: t('buttons.download'),
 			description: t('cards.image_bank.description'),
+			downloadUrl: 'https://otlis.sharepoint.com/:u:/s/GestodeContratos/EVRVtM-Cb4ZJvDoiIMQ4VQoBwBH6xA_97qlU9lXQTh-aYw?e=OuWZhV',
 			imageSvg: Icons.images,
 			title: t('cards.image_bank.title'),
 		},
@@ -262,6 +271,7 @@ export function PressLabelSection() {
 			buttonIcon: <IconDownload />,
 			buttonText: t('buttons.download'),
 			description: t('cards.download_icons.description'),
+			downloadUrl: 'https://staging.carrismetropolitana.pt/admin/api/media/file/icons-carris-metropolitana.zip',
 			imageSvg: Icons.icones,
 			title: t('cards.download_icons.title'),
 		},
@@ -269,6 +279,7 @@ export function PressLabelSection() {
 			buttonIcon: <IconDownload />,
 			buttonText: t('buttons.download'),
 			description: t('cards.standards_manual.description'),
+			downloadUrl: 'https://staging.carrismetropolitana.pt/admin/api/media/file/manual-de-normas-5mar21-carris-metropolitana.pdf',
 			imageSvg: Icons.manual,
 			title: t('cards.standards_manual.title'),
 		},
@@ -276,6 +287,7 @@ export function PressLabelSection() {
 			buttonIcon: <IconDownload />,
 			buttonText: t('buttons.download'),
 			description: t('cards.press_guide.description'),
+			downloadUrl: 'https://staging.carrismetropolitana.pt/admin/api/media/file/guia-de-imprensa-carris-metropolitana.pdf',
 			imageSvg: Icons.imprensa,
 			title: t('cards.press_guide.title'),
 		},
