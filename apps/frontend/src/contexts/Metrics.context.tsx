@@ -2,9 +2,11 @@
 
 /* * */
 
+import { formatDay, formatMonth } from '@/utils/formatDates';
+import { TopDemandLinesByAgency } from '@carrismetropolitana/api-types/metrics';
 import { getPublicVariable } from '@carrismetropolitana/website-shared-settings';
+import { Dates } from '@tmlmobilidade/dates';
 import { DemandByAgencyByDay, DemandByAgencyByMonth, DemandByLineByDay, TopDemandByAgency } from '@tmlmobilidade/types';
-import { Dates } from '@tmlmobilidade/utils';
 import { DateTime } from 'luxon';
 import { useTranslations } from 'next-intl';
 import { createContext, useContext, useMemo, useState } from 'react';
@@ -62,13 +64,6 @@ interface MetricsContextState {
 		is_demand_by_line_loading: boolean
 		is_demand_records_loading: boolean
 	}
-	helpers: {
-		getLineDataForPeriod: (
-			lineId: string,
-			start: Dates,
-			end: Dates,
-		) => null | { chart: MetricDayData[], line: DemandByLineByDay, sum: number }
-	}
 }
 
 /* * */
@@ -93,8 +88,8 @@ export const MetricsContextProvider = ({ children }) => {
 
 	const tCommon = useTranslations('common');
 
-	const DEFAULT_START_DATE = Dates.now('Europe/Lisbon').minus({ days: 30 });
-	const DEFAULT_END_DATE = Dates.now('Europe/Lisbon');
+	const DEFAULT_START_DATE = Dates.now('Europe/Lisbon').minus({ days: 30 }).startOf('day').setZone('Europe/Lisbon', 'rebase_utc');
+	const DEFAULT_END_DATE = Dates.now('Europe/Lisbon').endOf('day').setZone('Europe/Lisbon', 'rebase_utc');
 
 	const [startDate, setStartDate] = useState(DEFAULT_START_DATE);
 	const [endDate, setEndDate] = useState(DEFAULT_END_DATE);
@@ -110,8 +105,8 @@ export const MetricsContextProvider = ({ children }) => {
 		`${getPublicVariable('api_url')}/metrics/demand/by_agency/month`,
 	);
 
-	const { data: demandByLineByDay, isLoading: demandByLineByDayLoading } = useSWR<DemandByLineByDay[]>(
-		`${getPublicVariable('api_url')}/metrics/demand/by_line`,
+	const { data: topDemandByAgency, isLoading: topDemandByAgencyLoading } = useSWR<TopDemandLinesByAgency>(
+		`${getPublicVariable('api_url')}/metrics/demand/top_lines/by_agency`,
 	);
 
 	const { data: demandRecords, isLoading: demandRecordsLoading } = useSWR<TopDemandByAgency[]>(
@@ -148,29 +143,6 @@ export const MetricsContextProvider = ({ children }) => {
 			});
 	}
 
-	function formatDay(date: { day_group: string, day_type?: '1' | '2' | '3', holiday?: '0' | '1', notes?: string }) {
-		const dt = Dates.fromISO(date.day_group);
-		const formattedDate = tCommon('days.formatted', { date: dt.js_date });
-		const capitalized = formattedDate.charAt(0).toUpperCase() + formattedDate.slice(1);
-
-		if (date.holiday === '1') {
-			const holidayText = date.notes?.length > 0 ? date.notes : tCommon('weekdays.holiday');
-			return `${capitalized} (${holidayText})`;
-		}
-
-		return capitalized;
-	}
-
-	function formatMonth(monthStr: string) {
-		const dateTime = DateTime.fromFormat(monthStr, 'yyyy-LL');
-		const monthKey = [
-			'january', 'february', 'march', 'april', 'may', 'june',
-			'july', 'august', 'september', 'october', 'november', 'december',
-		][dateTime.month - 1];
-		const monthName = tCommon(`month.${monthKey}`);
-		return `${monthName.charAt(0).toUpperCase() + monthName.slice(1)}, ${dateTime.year}`;
-	}
-
 	function updateStartDate(value: string) {
 		const date = Dates.fromFormat(value, 'yyyy-MM-dd', 'Europe/Lisbon');
 		setStartDate(date);
@@ -179,38 +151,6 @@ export const MetricsContextProvider = ({ children }) => {
 	function updateEndDate(value: string) {
 		const date = Dates.fromFormat(value, 'yyyy-MM-dd', 'Europe/Lisbon');
 		setEndDate(date);
-	}
-
-	function getLineDataForPeriod(
-		lineId: string,
-		start: Dates,
-		end: Dates,
-	): null | { chart: MetricDayData[], line: DemandByLineByDay, sum: number } {
-		if (!demandByLineByDay?.length) return null;
-
-		const line = demandByLineByDay.find(m => m.properties?.line_id === lineId);
-		if (!line || !line.data) return null;
-
-		const array = Object.entries(line.data).map(([day_group, dayData]) => ({
-			day_group,
-			formatted_day: formatDay({
-				day_group,
-				day_type: dayData.day_type,
-				holiday: dayData.holiday,
-				notes: dayData.notes,
-			}),
-			qty: dayData.qty,
-		}));
-
-		const filtered = filterByDateRange(array, start, end) as MetricDayData[];
-
-		const sum = filtered.reduce((acc, d) => acc + d.qty, 0);
-
-		return {
-			chart: filtered,
-			line,
-			sum,
-		};
 	}
 
 	//
@@ -242,7 +182,7 @@ export const MetricsContextProvider = ({ children }) => {
 
 		const allAgenciesArray = Object.values(aggregated).map(item => ({
 			day_group: item.day_group,
-			formatted_day: formatDay(item),
+			formatted_day: formatDay(item, tCommon),
 			qty: item.qty,
 		}));
 
@@ -266,7 +206,7 @@ export const MetricsContextProvider = ({ children }) => {
 					day_type: dayData.day_type,
 					holiday: dayData.holiday,
 					notes: dayData.notes,
-				}),
+				}, tCommon),
 				qty: dayData.qty,
 			}));
 
@@ -295,7 +235,7 @@ export const MetricsContextProvider = ({ children }) => {
 		});
 
 		const allArray = Object.entries(aggregated).map(([month_group, qty]) => ({
-			formatted_month: formatMonth(month_group),
+			formatted_month: formatMonth(month_group, tCommon),
 			month_group,
 			qty,
 		}));
@@ -307,7 +247,7 @@ export const MetricsContextProvider = ({ children }) => {
 			const agency = demandByAgencyByMonth.find(a => a.properties.agency_id === id);
 			if (!agency) return (perAgency[id] = { chart: [], sum: 0 });
 			const arr = Object.entries(agency.data).map(([month_group, d]) => ({
-				formatted_month: formatMonth(month_group),
+				formatted_month: formatMonth(month_group, tCommon),
 				month_group,
 				qty: d.qty,
 			}));
@@ -325,9 +265,8 @@ export const MetricsContextProvider = ({ children }) => {
 	// Process lines-by-day data
 
 	const processedLinesByDay = useMemo(() => {
-		if (!demandByLineByDay) return { lastUpdated: null, topLinesByAgency: {} };
+		if (!topDemandByAgency) return { lastUpdated: null, topLinesByAgency: {} };
 
-		const TOP_LINES_COUNT = 3;
 		const DAYS_RANGE = 30;
 		const now = DateTime.now();
 		const startLimit = now.minus({ days: DAYS_RANGE });
@@ -343,41 +282,15 @@ export const MetricsContextProvider = ({ children }) => {
 			}
 		> = {};
 
-		['41', '42', '43', '44'].forEach((prefix) => {
-			const agencyLines = demandByLineByDay.filter(m =>
-				m.properties?.line_id?.startsWith(prefix.charAt(1)),
-			);
-
-			if (!agencyLines.length) {
-				topLinesByAgency[prefix] = { lines: [] };
-				return;
-			}
-
-			// Calculate total per line
-			const withTotals = agencyLines.map((line) => {
-				const entries = Object.entries(line.data || {});
-				const totalQty = entries.reduce((sum, [date, info]) => {
-					const d = DateTime.fromISO(date);
-					if (d < startLimit || d > now) return sum;
-					return sum + (info.qty || 0);
-				}, 0);
-				return { line, totalQty };
-			});
-
-			const topLines = withTotals
-				.sort((a, b) => b.totalQty - a.totalQty)
-				.slice(0, TOP_LINES_COUNT)
-				.map(x => x.line);
-
-			// For each top line, build chart
-			const linesWithChart = topLines.map((line) => {
+		Object.entries(topDemandByAgency.topLinesByAgency).forEach(([prefix, { lines }]) => {
+			const linesWithChart = lines.map((line) => {
 				const chartEntries = Object.entries(line.data || {})
 					.map(([day_group, dayData]) => {
 						const d = DateTime.fromISO(day_group);
 						if (d < startLimit || d > now) return null;
 						return {
 							day_group,
-							formatted_day: formatDay({ day_group }),
+							formatted_day: formatDay({ day_group }, tCommon),
 							qty: dayData.qty,
 						};
 					})
@@ -385,7 +298,6 @@ export const MetricsContextProvider = ({ children }) => {
 					.sort((a, b) => a.day_group.localeCompare(b.day_group)) as MetricDayData[];
 
 				const sum = chartEntries.reduce((acc, d) => acc + d.qty, 0);
-
 				return { chart: chartEntries, line, sum };
 			});
 
@@ -393,10 +305,10 @@ export const MetricsContextProvider = ({ children }) => {
 		});
 
 		return {
-			lastUpdated: demandByLineByDay?.[0]?.generated_at,
+			lastUpdated: topDemandByAgency.lastUpdated,
 			topLinesByAgency,
 		};
-	}, [demandByLineByDay, tCommon]);
+	}, [topDemandByAgency]);
 
 	// Process records data
 
@@ -452,11 +364,8 @@ export const MetricsContextProvider = ({ children }) => {
 		},
 		flags: {
 			is_demand_by_agency_loading: demandByAgencyByDayLoading || demandByAgencyByMonthLoading,
-			is_demand_by_line_loading: demandByLineByDayLoading,
+			is_demand_by_line_loading: topDemandByAgencyLoading,
 			is_demand_records_loading: demandRecordsLoading,
-		},
-		helpers: {
-			getLineDataForPeriod,
 		},
 	};
 

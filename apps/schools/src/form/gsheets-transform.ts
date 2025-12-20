@@ -4,7 +4,7 @@
 
 import { type UpdateSchoolFormType } from '@/form/schema';
 import { type SchoolData } from '@/types/school';
-import { Dates } from '@tmlmobilidade/utils';
+import { Dates } from '@tmlmobilidade/dates';
 
 /* * */
 

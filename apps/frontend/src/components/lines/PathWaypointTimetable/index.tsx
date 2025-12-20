@@ -5,7 +5,7 @@ import { useLinesDetailContext } from '@/contexts/LinesDetail.context';
 import { useOperationalDateContext } from '@/contexts/OperationalDate.context';
 import { type Timetable } from '@/types/timetables.types';
 import { createTimetable } from '@/utils/create-timetable';
-import { Dates } from '@tmlmobilidade/utils';
+import { Dates } from '@tmlmobilidade/dates';
 import { useTranslations } from 'next-intl';
 import { useMemo } from 'react';
 
