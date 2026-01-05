@@ -19,6 +19,7 @@ export const GET = async () => {
 
 	const foundNotes = await payload.find({
 		collection: 'notes',
+		depth: 2,
 		limit: 0,
 		sort: '-publishDate',
 		where: {
@@ -33,10 +34,9 @@ export const GET = async () => {
 		return {
 			_id: note.id,
 			authors: note.authors,
-			contentType: note.contentType,
+			contentType: note.contentType || 'file',
 			file: note.file,
 			heroImage: note.heroImage,
-			link: note.link,
 			publishDate: note.publishDate,
 			seo: note.seo,
 			slug: note.slug,

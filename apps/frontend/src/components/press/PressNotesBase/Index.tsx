@@ -2,7 +2,7 @@
 
 /* * */
 
-import Carousel from '@/components/common/CarouselControlled';
+import Carousel from '@/components/common/Carousel';
 import { Section } from '@/components/layout/Section';
 import { Surface } from '@/components/layout/Surface';
 import { NewsCardSkeleton } from '@/components/news/NewsCardSkeleton';
@@ -54,7 +54,7 @@ export function PressNotesBase() {
 			}),
 			id: note._id,
 			image: note.heroImage?.url || 'https://d1csarkz8obe9u.cloudfront.net/posterpreviews/breaking-news-design-template-70665f891baf9314344e211ce2db6a12_screen.jpg?ts=1689413594',
-			isLink: note.contentType === 'link',
+			isLink: false,
 			title: note.title,
 			topic: note.tags?.[0] || 'Geral',
 		}));
@@ -67,15 +67,8 @@ export function PressNotesBase() {
 		const note = notesData?.find(n => n._id === newsItem.id);
 		if (!note) return;
 
-		if (note.contentType === 'file' && note.file?.url) {
-			window.open(note.file.url, '_blank');
-		}
-		else if (note.contentType === 'link' && note.link) {
-			router.push(`/press/notes/${note.slug}`);
-		}
-		else {
-			router.push(`/press/notes/${note.slug}`);
-		}
+		// Always navigate to the detail page
+		router.push(`/press/notes/${note.slug}`);
 	};
 
 	//
@@ -103,12 +96,11 @@ export function PressNotesBase() {
 
 	return (
 		<Surface>
-			<Section heading={t('section_heading')} href="/press/notes">
+			<Section heading={t('section_heading')} href="/press/notes" subheading={t('subheading')}>
 				<Carousel
 					skeletonComponent={<NewsCardSkeleton />}
 					skeletonQty={4}
 					slides={carouselSlides}
-					subheading={t('subheading')}
 				/>
 			</Section>
 		</Surface>

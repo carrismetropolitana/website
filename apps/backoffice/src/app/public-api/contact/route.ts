@@ -109,22 +109,16 @@ export async function POST(request: Request) {
 			<body>
 				<div class="container">
 					<h1 class="title">E-mail de Confirmação</h1>
-					
+
 					<div class="card">
 						<h2 class="card-title">Confirmação de Recebimento<br>do Seu Contacto</h2>
-						
+
 						<p class="greeting">Caro(a) <strong>${name}</strong>,</p>
-						
+
 						<p class="message-text">
-							Recebemos a sua mensagem e a nossa equipa de comunicação está a analisá-la. 
-							Entraremos em contacto consigo em breve para fornecer a assistência ou 
-							informação solicitada.
+							Agradecemos o seu contacto, a nossa equipa irá dar resposta, assim que possível.
 						</p>
-						
-						<p class="message-text">
-							Agradecemos o seu interesse e confiança na Carris Metropolitana.
-						</p>
-						
+
 						<div class="signature">
 							<p class="signature-line">Atenciosamente,</p>
 							<p class="signature-line"><strong>Carris Metropolitana</strong></p>
@@ -142,9 +136,7 @@ Confirmação de Recebimento do Seu Contacto
 
 Caro(a) ${name},
 
-Recebemos a sua mensagem e a nossa equipa de comunicação está a analisá-la. Entraremos em contacto consigo em breve para fornecer a assistência ou informação solicitada.
-
-Agradecemos o seu interesse e confiança na Carris Metropolitana.
+Agradecemos o seu contacto, a nossa equipa irá dar resposta, assim que possível.
 
 Atenciosamente,
 Carris Metropolitana
@@ -245,7 +237,7 @@ Data: ${new Date().toLocaleString('pt-PT')}
 			html: adminNotificationHtml,
 			subject: `[Imprensa] ${subject}`,
 			text: adminNotificationText,
-			to: process.env.PRESS_CONTACT_EMAIL || process.env.EMAIL_FROM_ADDRESS || 'imprensa@carrismetropolitana.pt',
+			to: process.env.PRESS_CONTACT_EMAIL || 'comunicacao@carrismetropolitana.pt',
 		});
 
 		//

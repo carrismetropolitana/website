@@ -2,7 +2,7 @@
 
 /* * */
 
-import Carousel from '@/components/common/CarouselControlled';
+import Carousel from '@/components/common/Carousel';
 import { Section } from '@/components/layout/Section';
 import { Surface } from '@/components/layout/Surface';
 import { NewsCardSkeleton } from '@/components/news/NewsCardSkeleton';
@@ -67,15 +67,8 @@ export function PressKnowledgeBase() {
 		const item = knowledgeBaseData?.find(kb => kb._id === newsItem.id);
 		if (!item) return;
 
-		if (item.contentType === 'file' && item.file?.url) {
-			window.open(item.file.url, '_blank');
-		}
-		else if (item.contentType === 'link' && item.link) {
-			router.push(`/press/knowledge-base/${item.slug}`);
-		}
-		else {
-			router.push(`/press/knowledge-base/${item.slug}`);
-		}
+		// Always navigate to the detail page
+		router.push(`/press/knowledge-base/${item.slug}`);
 	};
 
 	//
@@ -103,12 +96,11 @@ export function PressKnowledgeBase() {
 
 	return (
 		<Surface>
-			<Section heading={t('section_heading')} href="/press/knowledge-base">
+			<Section heading={t('section_heading')} href="/press/knowledge-base" subheading={t('subheading')}>
 				<Carousel
 					skeletonComponent={<NewsCardSkeleton />}
 					skeletonQty={4}
 					slides={carouselSlides}
-					subheading={t('subheading')}
 				/>
 			</Section>
 		</Surface>

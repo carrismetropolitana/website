@@ -2,7 +2,7 @@
 
 import React from 'react';
 
-import { BEACH_PINS } from '../constants';
+import { BEACH_PINS, STOPS } from '../constants';
 
 export interface MapLayersProps extends React.ComponentProps<'div'> {
 	onPinClick?: (beachId: string) => void
@@ -230,6 +230,44 @@ export function MapLayers({ onPinClick, selectedAccordionId, selectedLineId, sty
 					)),
 				)}
 			</svg>
+
+			{/* Stop markers - rendered as absolute images to match other layers */}
+			{STOPS.map((stop) => {
+				const stopSize = 35; // Small size for the cropped SVG stop icons
+				// Calculate percentage positions based on SVG viewBox (1797.1 x 2210.35)
+				const left = (stop.position.x / 1797.1) * 100;
+				const top = (stop.position.y / 2210.35) * 100;
+				const widthPercent = (stopSize / 1797.1) * 100;
+
+				// Format stop ID with leading zero (1 -> 01, 11 -> 11)
+				const formattedId = String(stop.id).padStart(2, '0');
+
+				return (
+					<img
+						key={stop.id}
+						alt={stop.name}
+						src={`/assets/arrabidas/stops/${formattedId}.svg`}
+						title={stop.name}
+						onClick={(e) => {
+							e.stopPropagation();
+							e.preventDefault();
+							handlePinClick(stop.accordionId);
+						}}
+						// Add title for hover text
+						style={{
+							cursor: 'pointer',
+							left: `${left}%`,
+							pointerEvents: 'auto',
+							position: 'absolute',
+							top: `${top}%`,
+							transform: 'translate(-50%, -50%)', // Center on coordinates
+							visibility: 'visible', // Ensure visibility
+							width: `${widthPercent}%`, // Scale relative to map size
+							zIndex: 101, // Above interactive areas
+						}}
+					/>
+				);
+			})}
 		</div>
 	);
 }

@@ -10,6 +10,10 @@
     @media screen and (min-width: 40rem) {
         border-radius: 18px;
     }
+
+    @media (prefers-color-scheme: light) {
+        border-color: #E6E6F0;
+    }
 }
 
 .formContainer {

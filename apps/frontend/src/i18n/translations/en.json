@@ -1544,6 +1544,13 @@
 				"validation_error_title": "Validation Error"
 			}
 		},
+		"DetailSection": {
+			"copied": "Copied!",
+			"copy_link": "Copy Link",
+			"download": "Download",
+			"published_at": "Published on {date}",
+			"published_at_in": "Published on {date} in"
+		},
 		"FaqSection": {
 			"faqs": {
 				"carris_relationship": {

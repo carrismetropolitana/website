@@ -17,3 +17,10 @@ export interface BeachPin {
 	lineIds: string[]
 	name: string
 }
+
+export interface Stop {
+	accordionId: string
+	id: number
+	name: string
+	position: { x: number, y: number }
+}

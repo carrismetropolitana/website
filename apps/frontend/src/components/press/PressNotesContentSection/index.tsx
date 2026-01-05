@@ -44,7 +44,7 @@ export function PressNotesContentSection() {
 			}),
 			id: note._id,
 			image: note.heroImage?.url || 'https://d1csarkz8obe9u.cloudfront.net/posterpreviews/breaking-news-design-template-70665f891baf9314344e211ce2db6a12_screen.jpg?ts=1689413594',
-			isLink: note.contentType === 'link',
+			isLink: false,
 			title: note.title,
 			topic: note.tags?.[0] || 'Geral',
 		}));
@@ -70,18 +70,8 @@ export function PressNotesContentSection() {
 		const note = notesData?.find(n => n._id === newsItem.id);
 		if (!note) return;
 
-		if (note.contentType === 'file' && note.file?.url) {
-			// For files, trigger direct download
-			window.open(note.file.url, '_blank');
-		}
-		else if (note.contentType === 'link' && note.link) {
-			// For links, navigate to detail page which will then redirect
-			router.push(`/press/notes/${note.slug}`);
-		}
-		else {
-			// Fallback to detail page
-			router.push(`/press/notes/${note.slug}`);
-		}
+		// Always navigate to the detail page
+		router.push(`/press/notes/${note.slug}`);
 	};
 
 	if (isLoading) {
