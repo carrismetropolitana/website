@@ -91,9 +91,12 @@ export function MapView({
 }: Props) {
 	//
 	// A. Setup variables
+
 	const [cursor, setCursor] = useState<string>('auto');
+
 	const allMaps = useMap();
 	const mapOptionsContext = useMapOptionsContext();
+
 	const { flags: { is_debug_mode } } = useDebugContext();
 
 	//
@@ -173,10 +176,12 @@ export function MapView({
 				scrollZoom={scrollZoom}
 				style={{ height: '100%', width: '100%' }}
 			>
+
 				{navigation && <NavigationControl />}
 				{fullscreen && <FullscreenControl />}
 				{geolocate && <GeolocateControl />}
 				{scale && <ScaleControl />}
+
 				<div className={styles.childrenWrapper}>
 					{children}
 				</div>

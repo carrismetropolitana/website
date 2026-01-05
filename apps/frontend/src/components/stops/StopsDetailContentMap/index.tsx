@@ -100,6 +100,12 @@ export function StopsDetailContentMap() {
 		}
 	}
 
+	function handleOnCenterMap() {
+		if (!stopsMap) return;
+		if (!activeStopGeoJson?.features.length) return;
+		centerMap(stopsMap, stopsContext.data.stops_fc.features);
+	}
+
 	//
 	// E. Render components
 
@@ -107,6 +113,7 @@ export function StopsDetailContentMap() {
 		<MapView
 			id="stopsMap"
 			interactiveLayerIds={[MapViewStyleStopsInteractiveLayerId]}
+			onCenterMap={handleOnCenterMap}
 			onClick={handleLayerClick}
 		>
 

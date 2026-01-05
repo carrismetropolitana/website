@@ -115,8 +115,6 @@ export const MapOptionsContextProvider = ({ children }) => {
 			bounds,
 			{ padding: 25 },
 		);
-
-		// return;
 	};
 
 	//

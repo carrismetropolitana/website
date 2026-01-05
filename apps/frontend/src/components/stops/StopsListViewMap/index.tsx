@@ -63,6 +63,11 @@ export function StopsListViewMap() {
 		}
 	}
 
+	function handleOnCenterMap() {
+		if (!stopsListMap) return;
+		centerMap(stopsListMap, stopsListContext.data.filtered_fc.features);
+	}
+
 	//
 	// C. Render components
 
@@ -72,6 +77,7 @@ export function StopsListViewMap() {
 				<MapView
 					id="stopsListMap"
 					interactiveLayerIds={[MapViewStyleStopsInteractiveLayerId]}
+					onCenterMap={handleOnCenterMap}
 					onClick={handleLayerClick}
 				>
 					<MapViewStyleStops stopsData={stopsListContext.data.filtered_fc} />
