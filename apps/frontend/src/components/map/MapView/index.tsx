@@ -62,6 +62,7 @@ interface Props {
 	primarySourceId?: string
 	scale?: boolean
 	scrollZoom?: boolean
+	showCenterButton?: boolean
 	toolbar?: boolean
 	toolbarExtras?: React.ReactNode
 }
@@ -86,6 +87,7 @@ export function MapView({
 	onMoveStart,
 	scale = false,
 	scrollZoom = true,
+	showCenterButton = false,
 	toolbar = true,
 	toolbarExtras,
 }: Props) {
@@ -154,7 +156,7 @@ export function MapView({
 
 	return (
 		<div className={styles.container}>
-			{toolbar && <MapViewToolbar className={styles.toolbar} onCenterMap={onCenterMap} toolbarExtras={toolbarExtras} />}
+			{toolbar && <MapViewToolbar className={styles.toolbar} onCenterMap={onCenterMap} showCenterButton={showCenterButton} toolbarExtras={toolbarExtras} />}
 			<Map
 				attributionControl={false}
 				cursor={cursor}

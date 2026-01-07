@@ -162,6 +162,7 @@ export function VehiclesListMap() {
 			interactiveLayerIds={[MapViewStyleVehiclesInteractiveLayerId, MapViewStyleAlertsLayerId]}
 			onCenterMap={handleOnCenterMap}
 			onClick={handleLayerClick}
+			showCenterButton={true}
 			toolbarExtras={toolbarExtras}
 		>
 			{showAlerts && <MapViewStyleAlerts data={alertsContext.data.featureCollection} />}
