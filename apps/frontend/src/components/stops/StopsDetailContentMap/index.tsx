@@ -102,17 +102,15 @@ export function StopsDetailContentMap() {
 
 	function handleOnCenterMap() {
 		if (!stopsMap) return;
-		// If there's an active pattern group with a line_id, center on vehicles for that line
 		if (stopsDetailContext.data.active_pattern_group?.line_id) {
 			const lineVehiclesGeoJson = vehiclesContext.actions.getVehiclesByLineIdGeoJsonFC(stopsDetailContext.data.active_pattern_group.line_id);
 			if (lineVehiclesGeoJson?.features.length) {
 				centerMap(stopsMap, lineVehiclesGeoJson.features);
-				return;
+			}
+			else {
+				centerMap(stopsMap, activeStopGeoJson.features);
 			}
 		}
-		// Fallback to centering on all stops
-		if (!activeStopGeoJson?.features.length) return;
-		centerMap(stopsMap, stopsContext.data.stops_fc.features);
 	}
 
 	//
