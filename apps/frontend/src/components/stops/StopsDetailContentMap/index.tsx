@@ -100,19 +100,6 @@ export function StopsDetailContentMap() {
 		}
 	}
 
-	function handleOnCenterMap() {
-		if (!stopsMap) return;
-		if (stopsDetailContext.data.active_pattern_group?.line_id) {
-			const lineVehiclesGeoJson = vehiclesContext.actions.getVehiclesByLineIdGeoJsonFC(stopsDetailContext.data.active_pattern_group.line_id);
-			if (lineVehiclesGeoJson?.features.length) {
-				centerMap(stopsMap, lineVehiclesGeoJson.features);
-			}
-			else {
-				centerMap(stopsMap, activeStopGeoJson.features);
-			}
-		}
-	}
-
 	//
 	// E. Render components
 
@@ -120,7 +107,6 @@ export function StopsDetailContentMap() {
 		<MapView
 			id="stopsMap"
 			interactiveLayerIds={[MapViewStyleStopsInteractiveLayerId]}
-			onCenterMap={handleOnCenterMap}
 			onClick={handleLayerClick}
 		>
 

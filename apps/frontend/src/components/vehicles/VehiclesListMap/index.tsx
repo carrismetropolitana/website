@@ -12,11 +12,12 @@ import { useEnvironmentContext } from '@/contexts/Environment.context';
 import { transformStopDataIntoGeoJsonFeature, useStopsContext } from '@/contexts/Stops.context';
 import { transformVehicleDataIntoGeoJsonFeature, useVehiclesContext } from '@/contexts/Vehicles.context';
 import { useVehiclesListContext } from '@/contexts/VehiclesList.context';
-import { getBaseGeoJsonFeatureCollection } from '@/utils/map.utils';
+import { centerMap, getBaseGeoJsonFeatureCollection } from '@/utils/map.utils';
 import getOperationalDate from '@/utils/operation';
 import { Pattern, Shape } from '@carrismetropolitana/api-types/network';
 import { getPublicVariable } from '@carrismetropolitana/website-shared-settings';
 import { IconAlertTriangle } from '@tabler/icons-react';
+import { useMap } from '@vis.gl/react-maplibre';
 import { useTranslations } from 'next-intl';
 import { useRouter } from 'next/navigation';
 import { useEffect, useMemo, useState } from 'react';
@@ -30,6 +31,8 @@ export function VehiclesListMap() {
 
 	//
 	// A. Setup variables
+
+	const { vehiclesListMap } = useMap();
 
 	const router = useRouter();
 	const vehiclesListContext = useVehiclesListContext();
@@ -136,6 +139,12 @@ export function VehiclesListMap() {
 		}
 	}
 
+	function handleOnCenterMap() {
+		if (!vehiclesListMap) return;
+		if (!activeVehiclesGeoJsonFC?.features.length) return;
+		centerMap(vehiclesListMap, activeVehiclesGeoJsonFC.features);
+	}
+
 	//
 	// E. Render components
 
@@ -151,6 +160,7 @@ export function VehiclesListMap() {
 		<MapView
 			id="vehiclesListMap"
 			interactiveLayerIds={[MapViewStyleVehiclesInteractiveLayerId, MapViewStyleAlertsLayerId]}
+			onCenterMap={handleOnCenterMap}
 			onClick={handleLayerClick}
 			toolbarExtras={toolbarExtras}
 		>
