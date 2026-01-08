@@ -14,7 +14,6 @@ import { useVehiclesContext } from '@/contexts/Vehicles.context';
 import { centerMap, getBaseGeoJsonFeatureCollection, moveMap } from '@/utils/map.utils';
 import { Vehicle } from '@carrismetropolitana/api-types/vehicles';
 import { Popup, useMap } from '@vis.gl/react-maplibre';
-import { Position } from 'geojson';
 import { useEffect, useMemo } from 'react';
 
 import styles from './styles.module.css';
@@ -118,12 +117,14 @@ export function LinesDetailPathMap() {
 	//
 	// D. Render copmonents
 
-	const renderPopOver = (vehicleId: string, coordinates: Position, vehicle: Vehicle) => {
+	const renderPopover = (vehicleId: string, coordinates: [number, number], vehicle: Vehicle) => {
 		return (
 			<Popup
 				key={vehicleId}
 				anchor="bottom"
 				className={styles.popup}
+				closeButton={false}
+				closeOnClick={false}
 				latitude={coordinates[1]}
 				longitude={coordinates[0]}
 			>
@@ -157,13 +158,12 @@ export function LinesDetailPathMap() {
 			/>
 
 			{debugContext.flags.is_debug_mode && activeVehiclesFeatureCollection && activeVehiclesFeatureCollection.features.map((feature) => {
-				if (feature.properties?.id || feature.geometry?.coordinates || feature.geometry?.coordinates.length < 2) return null;
+				if (!feature.properties?.id || !feature.geometry?.coordinates || feature.geometry?.coordinates.length < 2) return null;
 				const vehicleId = feature.properties?.id;
 				const vehicle = vehiclesContext.actions.getVehicleById(vehicleId);
 				const coordinates = feature.geometry?.coordinates;
-				renderPopOver(vehicleId, coordinates, vehicle);
+				return renderPopover(vehicleId, [coordinates[0], coordinates[1]], vehicle);
 			})}
-
 		</MapView>
 	);
 
