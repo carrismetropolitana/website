@@ -6,12 +6,16 @@ import { MapView } from '@/components/map/MapView';
 import { MapViewStyleActiveStops, MapViewStyleActiveStopsPrimaryLayerId } from '@/components/map/MapViewStyleActiveStops';
 import { MapViewStylePath, MapViewStylePathInteractiveLayerId } from '@/components/map/MapViewStylePath';
 import { MapViewStyleVehicles, MapViewStyleVehiclesPrimaryLayerId } from '@/components/map/MapViewStyleVehicles';
+import VehicleListDetailPopoverDebug from '@/components/vehicles/VehicleListDetailPopoverDebug';
+import { useDebugContext } from '@/contexts/Debug.context';
 import { useLinesDetailContext } from '@/contexts/LinesDetail.context';
 import { transformStopDataIntoGeoJsonFeature, useStopsContext } from '@/contexts/Stops.context';
 import { useVehiclesContext } from '@/contexts/Vehicles.context';
 import { centerMap, getBaseGeoJsonFeatureCollection, moveMap } from '@/utils/map.utils';
-import { useMap } from '@vis.gl/react-maplibre';
+import { Popup, useMap } from '@vis.gl/react-maplibre';
 import { useEffect, useMemo } from 'react';
+
+import styles from './styles.module.css';
 
 /* * */
 
@@ -24,6 +28,7 @@ export function LinesDetailPathMap() {
 	const stopsContext = useStopsContext();
 	const vehiclesContext = useVehiclesContext();
 	const linesDetailContext = useLinesDetailContext();
+	const debugContext = useDebugContext();
 
 	const { linesDetailMap } = useMap();
 
@@ -134,6 +139,28 @@ export function LinesDetailPathMap() {
 				shapeData={linesDetailContext.data.active_shape?.geojson}
 				waypointsData={activePathFeatureCollection}
 			/>
+
+			{debugContext.flags.is_debug_mode && activeVehiclesFeatureCollection && activeVehiclesFeatureCollection.features.map((feature) => {
+				const vehicleId = feature.properties?.id;
+				if (!vehicleId) return null;
+				const vehicle = vehiclesContext.actions.getVehicleById(vehicleId);
+				if (!vehicle) return null;
+				const coordinates = feature.geometry?.coordinates;
+				if (!coordinates || coordinates.length < 2) return null;
+				return (
+					<Popup
+						key={vehicleId}
+						anchor="bottom"
+						className={styles.popup}
+						closeButton={false}
+						closeOnClick={false}
+						latitude={coordinates[1]}
+						longitude={coordinates[0]}
+					>
+						<VehicleListDetailPopoverDebug data={vehicle} />
+					</Popup>
+				);
+			})}
 
 		</MapView>
 	);
