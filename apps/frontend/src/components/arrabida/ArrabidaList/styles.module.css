@@ -1,0 +1,62 @@
+/* * */
+/* CONTAINER WITH DESCRIPTION WIDTH FIX */
+
+.arrabidaListContainer [class*="headingWrapper"] [class*="subheading"] {
+	max-width: none;
+	white-space: nowrap;
+}
+
+@media (width <= 900px) {
+	.arrabidaListContainer [class*="headingWrapper"] [class*="subheading"] {
+		white-space: normal;
+	}
+}
+
+/* * */
+/* LIST ITEM WRAPPER */
+
+.listItemWrapper {
+	display: flex;
+	flex-direction: column;
+	width: 100%;
+	border-bottom: 1px solid var(--color-system-border-100);
+}
+
+.listItemWrapper:last-child,
+.listItemWrapper.lastItem {
+	border-bottom: none;
+}
+
+/* * */
+/* ITEM CONTAINER */
+
+.itemContainer {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	width: 100%;
+	gap: var(--size-spacing-15);
+}
+
+/* * */
+/* LINE INFO */
+
+.lineInfo {
+	display: flex;
+	align-items: center;
+	gap: var(--size-spacing-15);
+	flex: 1;
+	min-width: 0;
+}
+
+/* * */
+/* ACTIONS */
+
+.actions {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	flex-shrink: 0;
+	padding: var(--size-spacing-5);
+	gap: var(--size-spacing-10);
+}
