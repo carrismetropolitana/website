@@ -7,7 +7,9 @@ import { MapView } from '@/components/map/MapView';
 import { MapViewStyleAlerts, MapViewStyleAlertsLayerId, MapViewStyleAlertsSourceId } from '@/components/map/MapViewStyleAlerts';
 import { MapViewStylePath } from '@/components/map/MapViewStylePath';
 import { MapViewStyleVehicles, MapViewStyleVehiclesInteractiveLayerId, MapViewStyleVehiclesPrimaryLayerId } from '@/components/map/MapViewStyleVehicles';
+import VehicleListDetailPopoverDebug from '@/components/vehicles/VehicleListDetailPopoverDebug';
 import { useAlertsContext } from '@/contexts/Alerts.context';
+import { useDebugContext } from '@/contexts/Debug.context';
 import { useEnvironmentContext } from '@/contexts/Environment.context';
 import { transformStopDataIntoGeoJsonFeature, useStopsContext } from '@/contexts/Stops.context';
 import { transformVehicleDataIntoGeoJsonFeature, useVehiclesContext } from '@/contexts/Vehicles.context';
@@ -17,6 +19,7 @@ import getOperationalDate from '@/utils/operation';
 import { Pattern, Shape } from '@carrismetropolitana/api-types/network';
 import { getPublicVariable } from '@carrismetropolitana/website-shared-settings';
 import { IconAlertTriangle } from '@tabler/icons-react';
+import { Popup } from '@vis.gl/react-maplibre';
 import { useTranslations } from 'next-intl';
 import { useRouter } from 'next/navigation';
 import { useEffect, useMemo, useState } from 'react';
@@ -37,10 +40,12 @@ export function VehiclesListMap() {
 	const stopsContext = useStopsContext();
 	const alertsContext = useAlertsContext();
 	const environmentContext = useEnvironmentContext();
+	const debugContext = useDebugContext();
 
 	const [activePatternData, setActivePatternData] = useState<Pattern | undefined>();
 	const [activeShapeData, setActiveShapeData] = useState<Shape | undefined>();
 	const [showAlerts, setShowAlerts] = useState(true);
+	const [popupInfo, setPopupInfo] = useState<null | { lngLat: { lat: number, lng: number }, vehicleId: string }>(null);
 
 	const t = useTranslations();
 
@@ -124,15 +129,25 @@ export function VehiclesListMap() {
 
 	function handleLayerClick(event) {
 		if (event.features.length !== 0 && event.features[0].source === 'default-source-vehicles') {
-			vehiclesListContext.actions.updateSelectedVehicle(event.features[0].properties.id);
+			const vehicleId = event.features[0].properties.id;
+			vehiclesListContext.actions.updateSelectedVehicle(vehicleId);
+			// Show popup at click location (only in debug mode)
+			if (debugContext.flags.is_debug_mode) {
+				setPopupInfo({
+					lngLat: event.lngLat,
+					vehicleId,
+				});
+			}
 		}
 		else if (event.features.length !== 0 && event.features[0].source === MapViewStyleAlertsSourceId) {
 			router.push(environmentContext.actions.getNormalizedHref(`/alerts/${event.features[0].properties.id}`));
+			setPopupInfo(null);
 		}
 		else {
 			setActivePatternData(undefined);
 			setActiveShapeData(undefined);
 			vehiclesListContext.actions.updateSelectedVehicle(null);
+			setPopupInfo(null);
 		}
 	}
 
@@ -148,16 +163,28 @@ export function VehiclesListMap() {
 	);
 
 	return (
-		<MapView
-			id="vehiclesListMap"
-			interactiveLayerIds={[MapViewStyleVehiclesInteractiveLayerId, MapViewStyleAlertsLayerId]}
-			onClick={handleLayerClick}
-			toolbarExtras={toolbarExtras}
-		>
-			{showAlerts && <MapViewStyleAlerts data={alertsContext.data.featureCollection} />}
-			<MapViewStyleVehicles presentBeforeId={showAlerts ? MapViewStyleAlertsLayerId : undefined} showCounter="always" vehiclesData={activeVehiclesGeoJsonFC} />
-			<MapViewStylePath presentBeforeId={MapViewStyleVehiclesPrimaryLayerId} shapeData={activePathShapeGeoJson} waypointsData={activePathWaypointsGeoJson} />
-		</MapView>
+		<>
+			<MapView
+				id="vehiclesListMap"
+				interactiveLayerIds={[MapViewStyleVehiclesInteractiveLayerId, MapViewStyleAlertsLayerId]}
+				onClick={handleLayerClick}
+				toolbarExtras={toolbarExtras}
+			>
+				{showAlerts && <MapViewStyleAlerts data={alertsContext.data.featureCollection} />}
+				<MapViewStyleVehicles presentBeforeId={showAlerts ? MapViewStyleAlertsLayerId : undefined} showCounter="always" vehiclesData={activeVehiclesGeoJsonFC} />
+				<MapViewStylePath presentBeforeId={MapViewStyleVehiclesPrimaryLayerId} shapeData={activePathShapeGeoJson} waypointsData={activePathWaypointsGeoJson} />
+				{popupInfo && vehiclesListContext.data.selected && debugContext.flags.is_debug_mode && (
+					<Popup
+						anchor="bottom"
+						latitude={popupInfo.lngLat.lat}
+						longitude={popupInfo.lngLat.lng}
+						onClose={() => setPopupInfo(null)}
+					>
+						<VehicleListDetailPopoverDebug data={vehiclesListContext.data.selected} />
+					</Popup>
+				)}
+			</MapView>
+		</>
 	);
 
 	//
