@@ -20,3 +20,7 @@
         background-color: var(--color-brand);
     }
 }
+
+.popup > div {
+    width: fit-content;
+}

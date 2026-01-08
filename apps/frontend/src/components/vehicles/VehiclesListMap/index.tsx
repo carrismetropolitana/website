@@ -176,6 +176,9 @@ export function VehiclesListMap() {
 				{popupInfo && vehiclesListContext.data.selected && debugContext.flags.is_debug_mode && (
 					<Popup
 						anchor="bottom"
+						className={styles.popup}
+						closeButton={false}
+						closeOnClick={true}
 						latitude={popupInfo.lngLat.lat}
 						longitude={popupInfo.lngLat.lng}
 						onClose={() => setPopupInfo(null)}
