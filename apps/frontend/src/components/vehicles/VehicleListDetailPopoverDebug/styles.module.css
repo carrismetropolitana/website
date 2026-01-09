@@ -1,0 +1,13 @@
+/* * */
+/* CONTAINER */
+
+.container {
+	display: flex;
+	flex-flow: column;
+	gap: var(--size-spacing-10);
+	align-items: flex-start;
+	width: fit-content;
+	padding: var(--size-spacing-10);
+	border: 1px dashed var(--color-debug);
+	border-radius: 10px;
+}
