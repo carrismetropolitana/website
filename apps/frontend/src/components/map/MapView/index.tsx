@@ -62,6 +62,7 @@ interface Props {
 	primarySourceId?: string
 	scale?: boolean
 	scrollZoom?: boolean
+	showCenterButton?: boolean
 	toolbar?: boolean
 	toolbarExtras?: React.ReactNode
 }
@@ -86,14 +87,18 @@ export function MapView({
 	onMoveStart,
 	scale = false,
 	scrollZoom = true,
+	showCenterButton = false,
 	toolbar = true,
 	toolbarExtras,
 }: Props) {
 	//
 	// A. Setup variables
+
 	const [cursor, setCursor] = useState<string>('auto');
+
 	const allMaps = useMap();
 	const mapOptionsContext = useMapOptionsContext();
+
 	const { flags: { is_debug_mode } } = useDebugContext();
 
 	//
@@ -151,7 +156,7 @@ export function MapView({
 
 	return (
 		<div className={styles.container}>
-			{toolbar && <MapViewToolbar className={styles.toolbar} onCenterMap={onCenterMap} toolbarExtras={toolbarExtras} />}
+			{toolbar && <MapViewToolbar className={styles.toolbar} onCenterMap={onCenterMap} showCenterButton={showCenterButton} toolbarExtras={toolbarExtras} />}
 			<Map
 				attributionControl={false}
 				cursor={cursor}
@@ -173,10 +178,12 @@ export function MapView({
 				scrollZoom={scrollZoom}
 				style={{ height: '100%', width: '100%' }}
 			>
+
 				{navigation && <NavigationControl />}
 				{fullscreen && <FullscreenControl />}
 				{geolocate && <GeolocateControl />}
 				{scale && <ScaleControl />}
+
 				<div className={styles.childrenWrapper}>
 					{children}
 				</div>

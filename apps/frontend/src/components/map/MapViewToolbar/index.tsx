@@ -17,12 +17,13 @@ import styles from './styles.module.css';
 interface Props {
 	className?: string
 	onCenterMap?: () => void
+	showCenterButton?: boolean
 	toolbarExtras?: React.ReactNode
 }
 
 /* * */
 
-export function MapViewToolbar({ className, onCenterMap, toolbarExtras }: Props) {
+export function MapViewToolbar({ className, onCenterMap, showCenterButton = false, toolbarExtras }: Props) {
 	//
 
 	//
@@ -77,7 +78,7 @@ export function MapViewToolbar({ className, onCenterMap, toolbarExtras }: Props)
 		<div className={classNames(styles.container, className)}>
 			<div className={styles.left}>
 				<SegmentedControl classNames={{ label: styles.segmentedControlLabel }} data={mapStyles} onChange={mapOptionsContext.actions.setStyle} value={mapOptionsContext.data.style} />
-				{onCenterMap && (
+				{showCenterButton && onCenterMap && (
 					<button className={styles.button} onClick={onCenterMap}>
 						<TextPopover text={t('center_map')} textSize="md">
 							<IconArrowsMinimize />
