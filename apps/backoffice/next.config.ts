@@ -9,7 +9,7 @@ const nextConfig: NextConfig = {
 	basePath: '/admin',
 	experimental: {
 		serverActions: {
-			bodySizeLimit: '4gb', // 2GB max body size for file uploads
+			bodySizeLimit: '4gb',
 		},
 	},
 	images: {
