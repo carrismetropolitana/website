@@ -2,7 +2,7 @@
 
 import type { AlertCause, AlertEffect } from '@/types/alerts.types';
 
-import { IconAccessible, IconAmbulance, IconArrowBigUpLines, IconBarrierBlock, IconCalendarEvent, IconCarCrash, IconCircleArrowDown, IconCircleMinus, IconClock2, IconClockExclamation, IconCloudStorm, IconInfoTriangle, IconRouteAltRight, IconSpeakerphone, IconTool } from '@tabler/icons-react';
+import { IconAccessible, IconAmbulance, IconArrowBigUpLines, IconBarrierBlock, IconCalendarEvent, IconCarCrash, IconCircleArrowDown, IconCircleMinus, IconClock2, IconClockExclamation, IconCloudStorm, IconFish, IconInfoTriangle, IconRoadOff, IconRouteAltRight, IconServerCog, IconSettings, IconSpeakerphone, IconTool, IconTrafficCone } from '@tabler/icons-react';
 import { useTranslations } from 'next-intl';
 
 import styles from './styles.module.css';
@@ -37,11 +37,20 @@ export function AlertCauseIcon({ cause, className, withText = false }: AlertCaus
 	let severityLevel: number;
 	switch (cause) {
 		case 'ACCIDENT':
+		case 'CONSTRUCTION':
 		case 'DEMONSTRATION':
+		case 'DRIVER_ABSENCE':
+		case 'DRIVER_ISSUE':
+		case 'HIGH_PASSENGER_LOAD':
+		case 'MAINTENANCE':
 		case 'MEDICAL_EMERGENCY':
 		case 'POLICE_ACTIVITY':
+		case 'ROAD_INCIDENT':
 		case 'STRIKE':
+		case 'SYSTEM_FAILURE':
 		case 'TECHNICAL_PROBLEM':
+		case 'TRAFFIC_JAM':
+		case 'WEATHER':
 			severityLevel = 3;
 			break;
 		case 'HOLIDAY':
@@ -65,6 +74,9 @@ export function AlertCauseIcon({ cause, className, withText = false }: AlertCaus
 		case 'STRIKE':
 			icon = <IconSpeakerphone className={styles[`severityLevel_${severityLevel}`]} size={20} />;
 			break;
+		case 'HIGH_PASSENGER_LOAD':
+			icon = <IconFish className={styles[`severityLevel_${severityLevel}`]} size={20} style={{ transform: 'rotate(90deg) ' }} />;
+			break;
 		case 'HOLIDAY':
 			icon = <IconCalendarEvent className={styles[`severityLevel_${severityLevel}`]} size={20} />;
 			break;
@@ -74,6 +86,18 @@ export function AlertCauseIcon({ cause, className, withText = false }: AlertCaus
 		case 'MEDICAL_EMERGENCY':
 		case 'POLICE_ACTIVITY':
 			icon = <IconAmbulance className={styles[`severityLevel_${severityLevel}`]} size={20} />;
+			break;
+		case 'ROAD_INCIDENT':
+			icon = <IconRoadOff className={styles[`severityLevel_${severityLevel}`]} size={20} />;
+			break;
+		case 'SYSTEM_FAILURE':
+			icon = <IconServerCog className={styles[`severityLevel_${severityLevel}`]} size={20} />;
+			break;
+		case 'TRAFFIC_JAM':
+			icon = <IconTrafficCone className={styles[`severityLevel_${severityLevel}`]} size={20} />;
+			break;
+		case 'VEHICLE_ISSUE':
+			icon = <IconSettings className={styles[`severityLevel_${severityLevel}`]} size={20} />;
 			break;
 		case 'WEATHER':
 			icon = <IconCloudStorm className={styles[`severityLevel_${severityLevel}`]} size={20} />;
