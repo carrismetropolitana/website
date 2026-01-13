@@ -4,6 +4,7 @@ import styles from './styles.module.css';
 
 import { Review2025CardSchemaContentGroup } from '../_data/cards';
 import Review2025GroupBadgeItem from '../Review2025GroupBadgeItem';
+import Review2025GroupLineItem from '../Review2025GroupLineItem';
 
 /* * */
 
@@ -14,7 +15,7 @@ export function Review2025Group({ data }: { data: Review2025CardSchemaContentGro
 			{data.items.map((item, index) => {
 				return item.type === 'badge'
 					? <Review2025GroupBadgeItem key={index} item={item} />
-					: <p key={index} className={styles.lineName}>{item.line_name}</p>;
+					: <Review2025GroupLineItem key={index} item={item} />;
 			})}
 		</div>
 	);
