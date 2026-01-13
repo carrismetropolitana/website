@@ -172,7 +172,7 @@
 				"CONSTRUCTION": "Obras",
 				"DEMONSTRATION": "Evento",
 				"DRIVER_ABSENCE": "Constrangimentos na Operação",
-				"DRIVER_ISSUE": "Problema com o Condutor",
+				"DRIVER_ISSUE": "Constrangimentos na Operação",
 				"HIGH_PASSENGER_LOAD": "Carga Excessiva de Passageiros",
 				"HOLIDAY": "Férias",
 				"MAINTENANCE": "Manutenção",
@@ -185,7 +185,7 @@
 				"TECHNICAL_PROBLEM": "Problema Técnico",
 				"TRAFFIC_JAM": "Congestão de Trânsito",
 				"UNKNOWN_CAUSE": "Causa Desconhecida",
-				"VEHICLE_ISSUE": "Problema no Veículo",
+				"VEHICLE_ISSUE": "Constrangimentos na Operação",
 				"WEATHER": "Mau Tempo"
 			},
 			"effect": {
