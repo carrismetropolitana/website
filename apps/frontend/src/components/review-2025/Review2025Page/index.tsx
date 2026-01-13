@@ -21,9 +21,9 @@ export function Review2025Page() {
 
 	return (
 		<div className={styles.container}>
-			{allCardsData.map(cardData => (
+			{allCardsData.map((cardData, index) => (
 				<Review2025Card
-					key={cardData._id}
+					key={index}
 					cardData={cardData}
 				/>
 			))}

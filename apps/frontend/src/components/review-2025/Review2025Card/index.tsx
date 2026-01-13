@@ -23,25 +23,28 @@ export default function Review2025Card({ cardData }: Props) {
 	return (
 		<div className={styles.container}>
 			<div className={styles.header}>
-				<p className={styles.headerTitle}>{cardData.header}</p>
+				<p className={styles.headerTitle}>{cardData.title}</p>
 				<IconCaretLeftFilled className={styles.headerIconClosed} data-open={false} />
 			</div>
 
 			<div className={styles.badgesWrapper}>
-				{cardData.badges.map(badge => (
-					<img
-						key={badge}
-						alt={badge}
-						className={styles.badge}
-						data-active={cardData.active_badges.includes(badge)}
-						src={`/assets/review-2025/images/${badge}.svg`}
-					/>
-				))}
+				{Object.keys(cardData.badges).map((badge) => {
+					if (cardData.badges[badge as keyof typeof cardData.badges] === 'hidden') return null;
+					return (
+						<img
+							key={badge}
+							alt={badge}
+							className={styles.badge}
+							data-active={cardData.badges[badge as keyof typeof cardData.badges] === 'active'}
+							src={`/assets/review-2025/images/${badge}.svg`}
+						/>
+					);
+				})}
 			</div>
 
 			<div className={styles.content}>
-				<p className={styles.contentDescription}>{cardData.content.description}</p>
-				{cardData.content.content_group.map((group, index) => (
+				<p className={styles.contentDescription}>{cardData.description}</p>
+				{cardData.content.map((group, index) => (
 					<Review2025Group key={index} data={group} />
 				))}
 
