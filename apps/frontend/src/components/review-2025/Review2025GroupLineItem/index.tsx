@@ -14,7 +14,5 @@ export default function Review2025GroupBadgeItem({ item }: { item: Review2025Car
 
 	//
 
-	return (
-		<LineDisplay lineData={actions.getLineDataById(String(item.line_id))} />
-	);
+	return <LineDisplay lineData={actions.getLineDataById(String(item.line_id))} size="md" />;
 }
