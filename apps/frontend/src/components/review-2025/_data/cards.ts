@@ -30,19 +30,21 @@ export interface Review2025CardSchema {
 }
 
 export interface Review2025CardSchemaContentGroup {
-	items: OneOrTheOther<Review2025CardSchemaContentGroupBadgeComponent, Review2025CardSchemaContentGroupLines>[]
+	items: (Review2025CardContentGroupBadgeItem | Review2025CardSchemaContentGroupLines)[]
 	title?: string
 }
 
-export interface Review2025CardSchemaContentGroupBadgeComponent {
+export interface Review2025CardContentGroupBadgeItem {
 	badge: typeof Review2025Badge[number]
 	description: string
-	title: string
+	type: 'badge'
+	value: string
 }
 
 export interface Review2025CardSchemaContentGroupLines {
 	line_id: string
 	line_name: string
+	type: 'lines'
 }
 
 /* * */
@@ -66,13 +68,26 @@ export const allCardsData: Review2025CardSchema[] = [
 					items: [
 						{
 							badge: 'PAX_TOTAL',
-							description: 'total de passageiros transportados em 2025',
-							title: 'Passageiros',
+							description: 'total de passageiros transportados',
+							type: 'badge',
+							value: '194 Milhões',
+						},
+						{
+							badge: 'KMS_TOTAL',
+							description: 'total de quilómetros percorridos',
+							type: 'badge',
+							value: '100 Milhões',
+						},
+						{
+							badge: 'TRIPS_TOTAL',
+							description: 'total de viagens realizadas',
+							type: 'badge',
+							value: '7,3 Milhões',
 						},
 					],
 				},
 			],
-			description: '',
+			description: 'Total de viagens realizadas em 2025',
 		},
 		header: 'header',
 	},

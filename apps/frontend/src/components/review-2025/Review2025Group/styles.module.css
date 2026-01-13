@@ -1,0 +1,7 @@
+.contentGroupWrapper {
+	display: flex;
+	flex-direction: column;
+	gap: var(--size-spacing-10);
+	align-items: flex-start;
+	justify-content: center;
+}
