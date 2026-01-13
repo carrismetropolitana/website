@@ -359,6 +359,51 @@
 			}
 		}
 	},
+	"arrabida": {
+		"ArrabidaHeader": {
+			"navigation": {
+				"about": "Sobre",
+				"arrabida365": "Arrábida 365",
+				"how_to_get": "Como chegar?",
+				"lines": "Linhas"
+			},
+			"subtitle": "Uma experiência única de natureza e sustentabilidade",
+			"title": "Descubra a Arrábida"
+		},
+		"ArrabidaList": {
+			"favorite_added": "Linha adicionada aos favoritos",
+			"favorite_removed": "Linha removida dos favoritos",
+			"has_alerts": "Esta linha possui alertas ativos",
+			"no_data": "Sem dados disponíveis",
+			"subtitle": "Aqui pode encontrar informações resumidas das linhas da Carris Metropolitana que servem as diferentes praias da Arrábida.",
+			"title": "Linhas",
+			"toggle_favorite": "Adicionar/remover dos favoritos"
+		},
+		"ArrabidaPage": {
+			"sections": {
+				"Arrabida365": {
+					"altImageBee": "Notícia em destaque \"Setúbal, Arrábida: O Início da Época Balnear\"",
+					"altImageMap": "Imagem ilustrativa do projeto da Arrábida 365.",
+					"button": "Expandir",
+					"buttonSeeMore": "Saber Mais",
+					"subtitle": "Este projeto tem como objetivo promover a mobilidade sustentável na Serra da Arrábida, incentivando o uso do transporte público para chegar às praias, eventos e locais de interesse da região. Aqui poderá acompanhar as últimas novidades na rede da Carris Metropolitana, campanhas em curso, eventos locais e parcerias especiais.",
+					"title": "Arrábida 365"
+				},
+				"ArrabidaAbout": {
+					"text-1": "Arrábida 365",
+					"text-2": "é uma iniciativa da Carris Metropolitana em colaboração com o município de Setubal, que visa",
+					"text-3": "promover o transporte publico como meio privilegiado de acesso à Serra da Arrábida, durante todo o ano.",
+					"text-4": "Este projeto aposta na mobilidade sustentável como forma de preservar o património natural da serra, ao mesmo tempo que facilita o acesso a praias, eventos e locaisemblemáticos, com reforço de serviço e informação dedicada.",
+					"title": "Sobre"
+				}
+			}
+		},
+		"ArrabidaWay": {
+			"inactive_line_message": "Sem serviço até ao começo da época balnear",
+			"subtitle": "Todas as praias da Arrábida servidas pela Carris Metropolitana. ",
+			"title": "Como chegar?"
+		}
+	},
 	"cards": {
 		"Discounts": {
 			"heading": "Descontos",
@@ -981,7 +1026,6 @@
 		"LinesDetailPath": {
 			"no_data": "Selecione um Percurso / Destino",
 			"summary": "Linha <lineNumber>{line_number}</lineNumber> com destino a <destinationName>{destination_name}</destinationName> no dia <dayName>{day_name, date, long}</dayName>. <changeDay>Alterar dia ›</changeDay>"
-
 		},
 		"LinesListToolbar": {
 			"by_current_view": {
@@ -1135,7 +1179,6 @@
 			"line": "Linha",
 			"municipality": "Município",
 			"toolbar_desc": "Escolha se quer ver os diferentes tipos de contacto (Pedidos de Informação, Reclamações e outros) por município ou linha."
-
 		},
 		"MetricsPageIntro": {
 			"heading": "A nossa operação ao vivo",
@@ -1766,7 +1809,6 @@
 			"hours_title": "Horas",
 			"months_description": "de março a junho 2024",
 			"months_title": "Meses"
-
 		},
 		"SurveyCriteriaCard": {
 			"firstRowText": "classes de procura de linhas (de alta a baixa procura)",
@@ -1936,7 +1978,6 @@
 					},
 					"placeholder": "Permite Mobilidade Reduzida"
 				}
-
 			},
 			"found_items_counter": "{count, plural, =0 {Nenhum Veículo encontrado.} one {Encontrado # veículo:} other {Encontrados # veículos:}}",
 			"select_vehicle": "Selecione um veículo"
