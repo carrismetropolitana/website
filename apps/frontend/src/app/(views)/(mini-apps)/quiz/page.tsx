@@ -15,7 +15,7 @@ export default async function Page() {
 		body: JSON.stringify({
 			app_version: '1.0.0',
 			short_link_destination: 'https://carrismetropolitana.pt/quiz',
-			short_link_id: 'quiz_emoji',
+			short_link_id: 'quiz_emoji_website',
 			user_token: sessionToken,
 		}),
 		headers: { 'Content-Type': 'application/json' },
