@@ -36,16 +36,17 @@
 	margin-top: 0;
 	overflow: hidden;
 	clip-path: inset(0 0 100% 0);
-	transition: all 200ms ease-out calc(var(--animation-duration-close) - 200ms),
-				clip-path var(--animation-duration-close) ease,
-				max-height var(--animation-duration-close) ease;
+	transition: all var(--animation-duration-open) ease-out,
+				clip-path var(--animation-duration-open) ease-out,
+				max-height var(--animation-duration-open) ease-out;
 
 	&[data-open='true'] {
 		max-height: 5000px;
 		margin-top: var(--size-spacing-10);
 		clip-path: inset(0 0 0% 0);
-		transition: all var(--animation-duration-open) ease-out,
-					max-height var(--animation-duration-open) ease-out;
+		transition: all 200ms ease-out calc(var(--animation-duration-close) - 200ms),
+					clip-path var(--animation-duration-close) ease,
+					max-height var(--animation-duration-close) ease;
 	}
 }
 

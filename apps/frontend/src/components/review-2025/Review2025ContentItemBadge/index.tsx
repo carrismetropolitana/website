@@ -16,7 +16,7 @@ export default function Review2025ContentItemBadge({ item }: { item: Review2025C
 
 	return (
 		<div className={styles.container}>
-			<IconComponent />
+			<IconComponent className={styles.badge} />
 			<div>
 				<p className={styles.contentDescription}>{item.description}</p>
 				<p className={styles.contentValue}>{item.value}</p>
