@@ -138,8 +138,8 @@ export const amlData: Review2025Card[] = [
 			{
 				items: [
 					{ badge: 'PAX_TOTAL', description: 'total de passageiros transportados', type: 'badge', value: '194 Milhões' },
-					{ badge: 'PAX_TOTAL', description: 'total de quilómetros percorridos', type: 'badge', value: '90 Milhões' },
-					{ badge: 'PAX_TOTAL', description: 'total de viagens realizadas', type: 'badge', value: '5,8 Milhões' },
+					{ badge: 'KMS_TOTAL', description: 'total de quilómetros percorridos', type: 'badge', value: '90 Milhões' },
+					{ badge: 'TRIPS_TOTAL', description: 'total de viagens realizadas', type: 'badge', value: '5,8 Milhões' },
 				],
 			},
 		],
@@ -218,7 +218,7 @@ export const areaData: Review2025Card[] = [
 			{
 				items: [
 					{ badge: 'PAX_TOTAL', description: 'total de passageiros transportados', type: 'badge', value: '66,1 Milhões' },
-					{ badge: 'PAX_TOTAL', description: 'total de viagens realizadas', type: 'badge', value: '1,9 Milhões' },
+					{ badge: 'TRIPS_TOTAL', description: 'total de viagens realizadas', type: 'badge', value: '1,9 Milhões' },
 				],
 			},
 			{
@@ -241,7 +241,7 @@ export const areaData: Review2025Card[] = [
 			{
 				items: [
 					{ badge: 'PAX_TOTAL', description: 'total de passageiros transportados', type: 'badge', value: '63,4 Milhões' },
-					{ badge: 'PAX_TOTAL', description: 'total de viagens realizadas', type: 'badge', value: '1,6 Milhões' },
+					{ badge: 'TRIPS_TOTAL', description: 'total de viagens realizadas', type: 'badge', value: '1,6 Milhões' },
 				],
 			},
 			{
@@ -264,7 +264,7 @@ export const areaData: Review2025Card[] = [
 			{
 				items: [
 					{ badge: 'PAX_TOTAL', description: 'total de passageiros transportados', type: 'badge', value: '41,7 Milhões' },
-					{ badge: 'PAX_TOTAL', description: 'total de viagens realizadas', type: 'badge', value: '1,3 Milhões' },
+					{ badge: 'TRIPS_TOTAL', description: 'total de viagens realizadas', type: 'badge', value: '1,3 Milhões' },
 				],
 			},
 			{
@@ -287,7 +287,7 @@ export const areaData: Review2025Card[] = [
 			{
 				items: [
 					{ badge: 'PAX_TOTAL', description: 'total de passageiros transportados', type: 'badge', value: '22,6 Milhões' },
-					{ badge: 'PAX_TOTAL', description: 'total de viagens realizadas', type: 'badge', value: '815,3 mil' },
+					{ badge: 'TRIPS_TOTAL', description: 'total de viagens realizadas', type: 'badge', value: '815,3 mil' },
 				],
 			},
 			{
@@ -316,8 +316,8 @@ export const municipalityData: Review2025Card[] = [
 			{
 				items: [
 					{ badge: 'PAX_TOTAL', description: 'total de passageiros transportados', type: 'badge', value: '15,5 milhões' },
-					{ badge: 'PAX_TOTAL', description: 'total de viagens realizadas', type: 'badge', value: '' },
-					{ badge: 'PAX_TOTAL', description: 'percentagem de crescimento face a 2024', type: 'badge', value: '11%' },
+					{ badge: 'TRIPS_TOTAL', description: 'total de viagens realizadas', type: 'badge', value: '' },
+					{ badge: 'GROWTH', description: 'percentagem de crescimento face a 2024', type: 'badge', value: '11%' },
 				],
 			},
 			{
@@ -341,8 +341,8 @@ export const municipalityData: Review2025Card[] = [
 			{
 				items: [
 					{ badge: 'PAX_TOTAL', description: 'total de passageiros transportados', type: 'badge', value: '2,8 milhões' },
-					{ badge: 'PAX_TOTAL', description: 'total de viagens realizadas', type: 'badge', value: '' },
-					{ badge: 'PAX_TOTAL', description: 'percentagem de crescimento face a 2024', type: 'badge', value: '19%' },
+					{ badge: 'TRIPS_TOTAL', description: 'total de viagens realizadas', type: 'badge', value: '' },
+					{ badge: 'GROWTH', description: 'percentagem de crescimento face a 2024', type: 'badge', value: '19%' },
 				],
 			},
 			{
@@ -366,8 +366,8 @@ export const municipalityData: Review2025Card[] = [
 			{
 				items: [
 					{ badge: 'PAX_TOTAL', description: 'total de passageiros transportados', type: 'badge', value: '20,4 milhões' },
-					{ badge: 'PAX_TOTAL', description: 'total de viagens realizadas', type: 'badge', value: '' },
-					{ badge: 'PAX_TOTAL', description: 'percentagem de crescimento face a 2024', type: 'badge', value: '10%' },
+					{ badge: 'TRIPS_TOTAL', description: 'total de viagens realizadas', type: 'badge', value: '' },
+					{ badge: 'GROWTH', description: 'percentagem de crescimento face a 2024', type: 'badge', value: '10%' },
 				],
 			},
 			{
@@ -391,8 +391,8 @@ export const municipalityData: Review2025Card[] = [
 			{
 				items: [
 					{ badge: 'PAX_TOTAL', description: 'total de passageiros transportados', type: 'badge', value: '12,7 milhões' },
-					{ badge: 'PAX_TOTAL', description: 'total de viagens realizadas', type: 'badge', value: '' },
-					{ badge: 'PAX_TOTAL', description: 'percentagem de crescimento face a 2024', type: 'badge', value: '10%' },
+					{ badge: 'TRIPS_TOTAL', description: 'total de viagens realizadas', type: 'badge', value: '' },
+					{ badge: 'GROWTH', description: 'percentagem de crescimento face a 2024', type: 'badge', value: '10%' },
 				],
 			},
 			{
@@ -416,8 +416,8 @@ export const municipalityData: Review2025Card[] = [
 			{
 				items: [
 					{ badge: 'PAX_TOTAL', description: 'total de passageiros transportados', type: 'badge', value: '30,4 milhões' },
-					{ badge: 'PAX_TOTAL', description: 'total de viagens realizadas', type: 'badge', value: '' },
-					{ badge: 'PAX_TOTAL', description: 'percentagem de crescimento face a 2024', type: 'badge', value: '13%' },
+					{ badge: 'TRIPS_TOTAL', description: 'total de viagens realizadas', type: 'badge', value: '' },
+					{ badge: 'GROWTH', description: 'percentagem de crescimento face a 2024', type: 'badge', value: '13%' },
 				],
 			},
 			{
@@ -441,8 +441,8 @@ export const municipalityData: Review2025Card[] = [
 			{
 				items: [
 					{ badge: 'PAX_TOTAL', description: 'total de passageiros transportados', type: 'badge', value: '23,5 milhões' },
-					{ badge: 'PAX_TOTAL', description: 'total de viagens realizadas', type: 'badge', value: '' },
-					{ badge: 'PAX_TOTAL', description: 'percentagem de crescimento face a 2024', type: 'badge', value: '7%' },
+					{ badge: 'TRIPS_TOTAL', description: 'total de viagens realizadas', type: 'badge', value: '' },
+					{ badge: 'GROWTH', description: 'percentagem de crescimento face a 2024', type: 'badge', value: '7%' },
 				],
 			},
 			{
@@ -466,8 +466,8 @@ export const municipalityData: Review2025Card[] = [
 			{
 				items: [
 					{ badge: 'PAX_TOTAL', description: 'total de passageiros transportados', type: 'badge', value: '3,1 milhões' },
-					{ badge: 'PAX_TOTAL', description: 'total de viagens realizadas', type: 'badge', value: '' },
-					{ badge: 'PAX_TOTAL', description: 'percentagem de crescimento face a 2024', type: 'badge', value: '9%' },
+					{ badge: 'TRIPS_TOTAL', description: 'total de viagens realizadas', type: 'badge', value: '' },
+					{ badge: 'GROWTH', description: 'percentagem de crescimento face a 2024', type: 'badge', value: '9%' },
 				],
 			},
 			{
@@ -491,8 +491,8 @@ export const municipalityData: Review2025Card[] = [
 			{
 				items: [
 					{ badge: 'PAX_TOTAL', description: 'total de passageiros transportados', type: 'badge', value: '16,3 milhões' },
-					{ badge: 'PAX_TOTAL', description: 'total de viagens realizadas', type: 'badge', value: '' },
-					{ badge: 'PAX_TOTAL', description: 'percentagem de crescimento face a 2024', type: 'badge', value: '8%' },
+					{ badge: 'TRIPS_TOTAL', description: 'total de viagens realizadas', type: 'badge', value: '' },
+					{ badge: 'GROWTH', description: 'percentagem de crescimento face a 2024', type: 'badge', value: '8%' },
 				],
 			},
 			{
@@ -516,8 +516,8 @@ export const municipalityData: Review2025Card[] = [
 			{
 				items: [
 					{ badge: 'PAX_TOTAL', description: 'total de passageiros transportados', type: 'badge', value: '9 milhões' },
-					{ badge: 'PAX_TOTAL', description: 'total de viagens realizadas', type: 'badge', value: '' },
-					{ badge: 'PAX_TOTAL', description: 'percentagem de crescimento face a 2024', type: 'badge', value: '14%' },
+					{ badge: 'TRIPS_TOTAL', description: 'total de viagens realizadas', type: 'badge', value: '' },
+					{ badge: 'GROWTH', description: 'percentagem de crescimento face a 2024', type: 'badge', value: '14%' },
 				],
 			},
 			{
@@ -541,8 +541,8 @@ export const municipalityData: Review2025Card[] = [
 			{
 				items: [
 					{ badge: 'PAX_TOTAL', description: 'total de passageiros transportados', type: 'badge', value: '19,5 milhões' },
-					{ badge: 'PAX_TOTAL', description: 'total de viagens realizadas', type: 'badge', value: '' },
-					{ badge: 'PAX_TOTAL', description: 'percentagem de crescimento face a 2024', type: 'badge', value: '11%' },
+					{ badge: 'TRIPS_TOTAL', description: 'total de viagens realizadas', type: 'badge', value: '' },
+					{ badge: 'GROWTH', description: 'percentagem de crescimento face a 2024', type: 'badge', value: '11%' },
 				],
 			},
 			{
@@ -566,8 +566,8 @@ export const municipalityData: Review2025Card[] = [
 			{
 				items: [
 					{ badge: 'PAX_TOTAL', description: 'total de passageiros transportados', type: 'badge', value: '17,3 milhões' },
-					{ badge: 'PAX_TOTAL', description: 'total de viagens realizadas', type: 'badge', value: '' },
-					{ badge: 'PAX_TOTAL', description: 'percentagem de crescimento face a 2024', type: 'badge', value: '12%' },
+					{ badge: 'TRIPS_TOTAL', description: 'total de viagens realizadas', type: 'badge', value: '' },
+					{ badge: 'GROWTH', description: 'percentagem de crescimento face a 2024', type: 'badge', value: '12%' },
 				],
 			},
 			{
@@ -591,8 +591,8 @@ export const municipalityData: Review2025Card[] = [
 			{
 				items: [
 					{ badge: 'PAX_TOTAL', description: 'total de passageiros transportados', type: 'badge', value: '2,7 milhões' },
-					{ badge: 'PAX_TOTAL', description: 'total de viagens realizadas', type: 'badge', value: '' },
-					{ badge: 'PAX_TOTAL', description: 'percentagem de crescimento face a 2024', type: 'badge', value: '8%' },
+					{ badge: 'TRIPS_TOTAL', description: 'total de viagens realizadas', type: 'badge', value: '' },
+					{ badge: 'GROWTH', description: 'percentagem de crescimento face a 2024', type: 'badge', value: '8%' },
 				],
 			},
 			{
@@ -616,8 +616,8 @@ export const municipalityData: Review2025Card[] = [
 			{
 				items: [
 					{ badge: 'PAX_TOTAL', description: 'total de passageiros transportados', type: 'badge', value: '1,3 milhões' },
-					{ badge: 'PAX_TOTAL', description: 'total de viagens realizadas', type: 'badge', value: '' },
-					{ badge: 'PAX_TOTAL', description: 'percentagem de crescimento face a 2024', type: 'badge', value: '9%' },
+					{ badge: 'TRIPS_TOTAL', description: 'total de viagens realizadas', type: 'badge', value: '' },
+					{ badge: 'GROWTH', description: 'percentagem de crescimento face a 2024', type: 'badge', value: '9%' },
 				],
 			},
 			{
@@ -641,8 +641,8 @@ export const municipalityData: Review2025Card[] = [
 			{
 				items: [
 					{ badge: 'PAX_TOTAL', description: 'total de passageiros transportados', type: 'badge', value: '1,6 milhões' },
-					{ badge: 'PAX_TOTAL', description: 'total de viagens realizadas', type: 'badge', value: '' },
-					{ badge: 'PAX_TOTAL', description: 'percentagem de crescimento face a 2024', type: 'badge', value: '14%' },
+					{ badge: 'TRIPS_TOTAL', description: 'total de viagens realizadas', type: 'badge', value: '' },
+					{ badge: 'GROWTH', description: 'percentagem de crescimento face a 2024', type: 'badge', value: '14%' },
 				],
 			},
 			{
@@ -666,8 +666,8 @@ export const municipalityData: Review2025Card[] = [
 			{
 				items: [
 					{ badge: 'PAX_TOTAL', description: 'total de passageiros transportados', type: 'badge', value: '3,2 milhões' },
-					{ badge: 'PAX_TOTAL', description: 'total de viagens realizadas', type: 'badge', value: '' },
-					{ badge: 'PAX_TOTAL', description: 'percentagem de crescimento face a 2024', type: 'badge', value: '23%' },
+					{ badge: 'TRIPS_TOTAL', description: 'total de viagens realizadas', type: 'badge', value: '' },
+					{ badge: 'GROWTH', description: 'percentagem de crescimento face a 2024', type: 'badge', value: '23%' },
 				],
 			},
 			{
@@ -691,8 +691,8 @@ export const municipalityData: Review2025Card[] = [
 			{
 				items: [
 					{ badge: 'PAX_TOTAL', description: 'total de passageiros transportados', type: 'badge', value: '3,3 milhões' },
-					{ badge: 'PAX_TOTAL', description: 'total de viagens realizadas', type: 'badge', value: '' },
-					{ badge: 'PAX_TOTAL', description: 'percentagem de crescimento face a 2024', type: 'badge', value: '17%' },
+					{ badge: 'TRIPS_TOTAL', description: 'total de viagens realizadas', type: 'badge', value: '' },
+					{ badge: 'GROWTH', description: 'percentagem de crescimento face a 2024', type: 'badge', value: '17%' },
 				],
 			},
 			{
@@ -716,8 +716,8 @@ export const municipalityData: Review2025Card[] = [
 			{
 				items: [
 					{ badge: 'PAX_TOTAL', description: 'total de passageiros transportados', type: 'badge', value: '1,8 milhões' },
-					{ badge: 'PAX_TOTAL', description: 'total de viagens realizadas', type: 'badge', value: '' },
-					{ badge: 'PAX_TOTAL', description: 'percentagem de crescimento face a 2024', type: 'badge', value: '26%' },
+					{ badge: 'TRIPS_TOTAL', description: 'total de viagens realizadas', type: 'badge', value: '' },
+					{ badge: 'GROWTH', description: 'percentagem de crescimento face a 2024', type: 'badge', value: '26%' },
 				],
 			},
 			{
@@ -741,8 +741,8 @@ export const municipalityData: Review2025Card[] = [
 			{
 				items: [
 					{ badge: 'PAX_TOTAL', description: 'total de passageiros transportados', type: 'badge', value: '8,4 milhões' },
-					{ badge: 'PAX_TOTAL', description: 'total de viagens realizadas', type: 'badge', value: '' },
-					{ badge: 'PAX_TOTAL', description: 'percentagem de crescimento face a 2024', type: 'badge', value: '16%' },
+					{ badge: 'TRIPS_TOTAL', description: 'total de viagens realizadas', type: 'badge', value: '' },
+					{ badge: 'GROWTH', description: 'percentagem de crescimento face a 2024', type: 'badge', value: '16%' },
 				],
 			},
 			{
@@ -770,7 +770,7 @@ export const terminalsData: Review2025Card[] = [
 			{
 				items: [
 					{ badge: 'PAX_TOTAL', description: 'total de passageiros transportados', type: 'badge', value: '' },
-					{ badge: 'PAX_TOTAL', description: 'percentagem de crescimento face a 2024', type: 'badge', value: '36%' },
+					{ badge: 'GROWTH', description: 'percentagem de crescimento face a 2024', type: 'badge', value: '36%' },
 				],
 			},
 		],
@@ -785,7 +785,7 @@ export const terminalsData: Review2025Card[] = [
 			{
 				items: [
 					{ badge: 'PAX_TOTAL', description: 'total de passageiros transportados', type: 'badge', value: '' },
-					{ badge: 'PAX_TOTAL', description: 'percentagem de crescimento face a 2024', type: 'badge', value: '27%' },
+					{ badge: 'GROWTH', description: 'percentagem de crescimento face a 2024', type: 'badge', value: '27%' },
 				],
 			},
 		],
@@ -800,7 +800,7 @@ export const terminalsData: Review2025Card[] = [
 			{
 				items: [
 					{ badge: 'PAX_TOTAL', description: 'total de passageiros transportados', type: 'badge', value: '' },
-					{ badge: 'PAX_TOTAL', description: 'percentagem de crescimento face a 2024', type: 'badge', value: '23%' },
+					{ badge: 'GROWTH', description: 'percentagem de crescimento face a 2024', type: 'badge', value: '23%' },
 				],
 			},
 		],
@@ -815,7 +815,7 @@ export const terminalsData: Review2025Card[] = [
 			{
 				items: [
 					{ badge: 'PAX_TOTAL', description: 'total de passageiros transportados', type: 'badge', value: '' },
-					{ badge: 'PAX_TOTAL', description: 'percentagem de crescimento face a 2024', type: 'badge', value: '20%' },
+					{ badge: 'GROWTH', description: 'percentagem de crescimento face a 2024', type: 'badge', value: '20%' },
 				],
 			},
 		],
@@ -830,7 +830,7 @@ export const terminalsData: Review2025Card[] = [
 			{
 				items: [
 					{ badge: 'PAX_TOTAL', description: 'total de passageiros transportados', type: 'badge', value: '' },
-					{ badge: 'PAX_TOTAL', description: 'percentagem de crescimento face a 2024', type: 'badge', value: '16%' },
+					{ badge: 'GROWTH', description: 'percentagem de crescimento face a 2024', type: 'badge', value: '16%' },
 				],
 			},
 		],
@@ -845,7 +845,7 @@ export const terminalsData: Review2025Card[] = [
 			{
 				items: [
 					{ badge: 'PAX_TOTAL', description: 'total de passageiros transportados', type: 'badge', value: '' },
-					{ badge: 'PAX_TOTAL', description: 'percentagem de crescimento face a 2024', type: 'badge', value: '11%' },
+					{ badge: 'GROWTH', description: 'percentagem de crescimento face a 2024', type: 'badge', value: '11%' },
 				],
 			},
 		],
@@ -860,7 +860,7 @@ export const terminalsData: Review2025Card[] = [
 			{
 				items: [
 					{ badge: 'PAX_TOTAL', description: 'total de passageiros transportados', type: 'badge', value: '' },
-					{ badge: 'PAX_TOTAL', description: 'percentagem de crescimento face a 2024', type: 'badge', value: '10%' },
+					{ badge: 'GROWTH', description: 'percentagem de crescimento face a 2024', type: 'badge', value: '10%' },
 				],
 			},
 		],
@@ -875,7 +875,7 @@ export const terminalsData: Review2025Card[] = [
 			{
 				items: [
 					{ badge: 'PAX_TOTAL', description: 'total de passageiros transportados', type: 'badge', value: '' },
-					{ badge: 'PAX_TOTAL', description: 'percentagem de crescimento face a 2024', type: 'badge', value: '9%' },
+					{ badge: 'GROWTH', description: 'percentagem de crescimento face a 2024', type: 'badge', value: '9%' },
 				],
 			},
 		],
@@ -890,7 +890,7 @@ export const terminalsData: Review2025Card[] = [
 			{
 				items: [
 					{ badge: 'PAX_TOTAL', description: 'total de passageiros transportados', type: 'badge', value: '' },
-					{ badge: 'PAX_TOTAL', description: 'percentagem de crescimento face a 2024', type: 'badge', value: '7%' },
+					{ badge: 'GROWTH', description: 'percentagem de crescimento face a 2024', type: 'badge', value: '7%' },
 				],
 			},
 		],
@@ -905,7 +905,7 @@ export const terminalsData: Review2025Card[] = [
 			{
 				items: [
 					{ badge: 'PAX_TOTAL', description: 'total de passageiros transportados', type: 'badge', value: '' },
-					{ badge: 'PAX_TOTAL', description: 'percentagem de crescimento face a 2024', type: 'badge', value: '7%' },
+					{ badge: 'GROWTH', description: 'percentagem de crescimento face a 2024', type: 'badge', value: '7%' },
 				],
 			},
 		],
