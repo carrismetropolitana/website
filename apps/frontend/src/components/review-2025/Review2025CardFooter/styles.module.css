@@ -35,8 +35,7 @@
 
 .shareButtons {
 	display: flex;
-	flex-direction: row;
-	flex-wrap: wrap;
+	flex-flow: row wrap;
 	gap: var(--size-spacing-10);
 	align-items: center;
 	justify-content: center;
