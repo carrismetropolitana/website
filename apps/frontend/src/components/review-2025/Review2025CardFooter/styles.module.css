@@ -1,0 +1,53 @@
+/* * */
+/* MODAL */
+
+.modalContent {
+	display: flex;
+	flex-direction: column;
+	gap: var(--size-spacing-15);
+	align-items: center;
+	padding: var(--size-spacing-10) 0;
+}
+
+.modalTitle {
+	font-size: var(--font-size-h4);
+	font-weight: var(--font-weight-bold);
+	color: var(--color-system-text-100);
+}
+
+.modalMessage {
+	font-size: var(--font-size-text);
+	color: var(--color-system-text-200);
+	text-align: center;
+}
+
+.modalUrl {
+	padding: var(--size-spacing-10) var(--size-spacing-15);
+	font-size: var(--font-size-text-small);
+	color: var(--color-system-text-300);
+	word-break: break-all;
+	background-color: var(--color-system-background-200);
+	border-radius: var(--size-border-radius-small);
+}
+
+/* * */
+/* SHARE BUTTONS */
+
+.shareButtons {
+	display: flex;
+	flex-direction: row;
+	flex-wrap: wrap;
+	gap: var(--size-spacing-10);
+	align-items: center;
+	justify-content: center;
+}
+
+.shareButton {
+	color: var(--color-system-text-200);
+	transition: all 150ms ease;
+
+	&:hover {
+		color: var(--color-system-text-100);
+		transform: scale(1.1);
+	}
+}
