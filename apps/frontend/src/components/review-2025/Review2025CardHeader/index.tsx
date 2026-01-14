@@ -20,8 +20,8 @@ interface Props {
 export function Review2025CardHeader({ cardData, isOpen, onToggle }: Props) {
 	//
 	return (
-		<div className={styles.container}>
-			<div className={styles.header} onClick={onToggle} style={{ cursor: 'pointer' }}>
+		<div className={styles.container} onClick={onToggle}>
+			<div className={styles.header}>
 				<p className={styles.headerTitle}>{cardData.title}</p>
 				<IconCaretLeftFilled className={styles.headerIconClosed} data-open={isOpen} />
 			</div>
