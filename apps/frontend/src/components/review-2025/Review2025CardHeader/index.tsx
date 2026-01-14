@@ -2,21 +2,19 @@
 
 import { IconCaretLeftFilled } from '@tabler/icons-react';
 
-import styles from '../Review2025Card/styles.module.css';
+import styles from './styles.module.css';
 
 import { Review2025Card } from '../_data/cards';
 
 /* * */
 
-export function Review2025CardHeader({ 
-	cardData, 
-	isOpen, 
-	onToggle 
-}: { 
-	cardData: Review2025Card;
-	isOpen: boolean;
-	onToggle: () => void;
-}) {
+interface Props {
+	cardData: Review2025Card
+	isOpen: boolean
+	onToggle: () => void
+}
+
+export function Review2025CardHeader({ cardData, isOpen, onToggle }: Props) {
 	//
 	return (
 		<>

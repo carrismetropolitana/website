@@ -23,60 +23,6 @@
 }
 
 /* * */
-/* HEADER */
-
-.headerIconClosed {
-    color: var(--color-system-text-300);
-	transition: transform 150ms ease-in-out;
-
-    &[data-open='false'] {
-		transform: rotate(0deg);
-	}
-
-    &[data-open='true'] {
-		transform: rotate(-90deg);
-	}
-}
-
-.header {
-	display: flex;
-	flex-direction: row;
-	align-items: center;
-	justify-content: space-between;
-	width: 100%;
-
-	
-}
-
-
-
-.headerTitle {
-    font-size: var(--font-size-title);
-    font-weight: var(--font-weight-title);
-	color: var(--color-system-text-200);
-}
-
-/* * */
-/* BADGES WRAPPER */
-
-.badgesWrapper {
-	display: flex;
-	flex-direction: row;
-	align-items: center;
-	justify-content: space-evenly;
-    width: 100%;
-}
-
-/* TODO: Fix Color */
-.badge {
-	width: 42px;
-	
-    &[data-active='true'] {
-        background-color: red; 
-	}
-}
-
-/* * */
 /* CONTENT */
 
 .content {
