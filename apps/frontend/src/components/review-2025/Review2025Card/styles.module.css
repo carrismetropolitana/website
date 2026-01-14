@@ -3,7 +3,6 @@
 .container {
 	display: flex;
 	flex-wrap: wrap;
-    gap: var(--size-spacing-20);
     align-items: center;
 	justify-content: flex-start;
 	width: 100%;
