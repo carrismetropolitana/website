@@ -1,0 +1,21 @@
+/* * */
+
+import { Grid } from '@/components/layout/Grid';
+import { Surface } from '@/components/layout/Surface';
+import { areaData } from '@/components/review-2025/_data/cards';
+
+import Review2025Card from '../Review2025Card';
+
+/* * */
+
+export function Review2025AreaGroup() {
+	//
+	return (
+		<Surface forceOverflow>
+			<Grid columns="abb">
+				{areaData.map((data, index) => <Review2025Card key={index} data={data} />)}
+			</Grid>
+		</Surface>
+	);
+	//
+}
