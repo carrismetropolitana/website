@@ -33,6 +33,7 @@ type BadgeState = 'active' | 'hidden' | 'inactive';
 export interface Review2025Card {
 	_group: string
 	_group_title?: string
+	area?: 1 | 2 | 3 | 4
 	badges: {
 		BRIDGES_TOTAL: BadgeState
 		GROWTH: BadgeState
@@ -308,6 +309,7 @@ export const areaData: Review2025Card[] = [
 export const municipalityData: Review2025Card[] = [
 	{
 		_group: 'por município',
+		area: 1,
 		badges: municipalityBadges,
 		color: '#0c807e',
 		content: [
@@ -332,6 +334,7 @@ export const municipalityData: Review2025Card[] = [
 	},
 	{
 		_group: 'por município',
+		area: 1,
 		badges: municipalityBadges,
 		color: '#0c807e',
 		content: [
@@ -356,6 +359,7 @@ export const municipalityData: Review2025Card[] = [
 	},
 	{
 		_group: 'por município',
+		area: 1,
 		badges: municipalityBadges,
 		color: '#0c807e',
 		content: [
@@ -380,6 +384,7 @@ export const municipalityData: Review2025Card[] = [
 	},
 	{
 		_group: 'por município',
+		area: 1,
 		badges: municipalityBadges,
 		color: '#0c807e',
 		content: [
@@ -404,6 +409,7 @@ export const municipalityData: Review2025Card[] = [
 	},
 	{
 		_group: 'por município',
+		area: 1,
 		badges: municipalityBadges,
 		color: '#0c807e',
 		content: [
@@ -428,6 +434,7 @@ export const municipalityData: Review2025Card[] = [
 	},
 	{
 		_group: 'por município',
+		area: 2,
 		badges: municipalityBadges,
 		color: '#0c807e',
 		content: [
@@ -452,6 +459,7 @@ export const municipalityData: Review2025Card[] = [
 	},
 	{
 		_group: 'por município',
+		area: 2,
 		badges: municipalityBadges,
 		color: '#0c807e',
 		content: [
@@ -476,6 +484,7 @@ export const municipalityData: Review2025Card[] = [
 	},
 	{
 		_group: 'por município',
+		area: 2,
 		badges: municipalityBadges,
 		color: '#0c807e',
 		content: [
@@ -500,6 +509,7 @@ export const municipalityData: Review2025Card[] = [
 	},
 	{
 		_group: 'por município',
+		area: 2,
 		badges: municipalityBadges,
 		color: '#0c807e',
 		content: [
@@ -524,6 +534,7 @@ export const municipalityData: Review2025Card[] = [
 	},
 	{
 		_group: 'por município',
+		area: 3,
 		badges: municipalityBadges,
 		color: '#0c807e',
 		content: [
@@ -548,6 +559,7 @@ export const municipalityData: Review2025Card[] = [
 	},
 	{
 		_group: 'por município',
+		area: 3,
 		badges: municipalityBadges,
 		color: '#0c807e',
 		content: [
@@ -572,6 +584,7 @@ export const municipalityData: Review2025Card[] = [
 	},
 	{
 		_group: 'por município',
+		area: 3,
 		badges: municipalityBadges,
 		color: '#0c807e',
 		content: [
@@ -596,6 +609,7 @@ export const municipalityData: Review2025Card[] = [
 	},
 	{
 		_group: 'por município',
+		area: 4,
 		badges: municipalityBadges,
 		color: '#0c807e',
 		content: [
@@ -620,6 +634,7 @@ export const municipalityData: Review2025Card[] = [
 	},
 	{
 		_group: 'por município',
+		area: 4,
 		badges: municipalityBadges,
 		color: '#0c807e',
 		content: [
@@ -644,6 +659,7 @@ export const municipalityData: Review2025Card[] = [
 	},
 	{
 		_group: 'por município',
+		area: 4,
 		badges: municipalityBadges,
 		color: '#0c807e',
 		content: [
@@ -668,6 +684,7 @@ export const municipalityData: Review2025Card[] = [
 	},
 	{
 		_group: 'por município',
+		area: 4,
 		badges: municipalityBadges,
 		color: '#0c807e',
 		content: [
@@ -692,6 +709,7 @@ export const municipalityData: Review2025Card[] = [
 	},
 	{
 		_group: 'por município',
+		area: 4,
 		badges: municipalityBadges,
 		color: '#0c807e',
 		content: [
@@ -716,6 +734,7 @@ export const municipalityData: Review2025Card[] = [
 	},
 	{
 		_group: 'por município',
+		area: 4,
 		badges: municipalityBadges,
 		color: '#0c807e',
 		content: [
