@@ -1,5 +1,6 @@
 'use client';
 
+import { Section } from '@/components/layout/Section';
 import { allCardsData } from '@/components/review-2025/_data/cards';
 
 import styles from './styles.module.css';
@@ -20,14 +21,16 @@ export function Review2025Page() {
 	// B. Render components
 
 	return (
-		<div className={styles.container}>
-			{allCardsData.map((cardData, index) => (
-				<Review2025Card
-					key={index}
-					cardData={cardData}
-				/>
-			))}
-		</div>
+		<>
+			<Section heading="Retroespectiva 2025">
+				{allCardsData.map((cardData, index) => (
+					<Review2025Card
+						key={index}
+						cardData={cardData}
+					/>
+				))}
+			</Section>
+		</>
 	);
 
 	//

@@ -6,12 +6,17 @@
     gap: var(--size-spacing-20);
     align-items: center;
 	justify-content: flex-start;
-    width: 360px;
+	width: 100%;
+	max-width: 478px;
     padding: var(--size-spacing-20);
 	overflow-x: hidden;
     background: var(--color-system-background-100);
-    border: 2px solid #C61D23;
+    border: 3px solid #C61D23;
     border-radius: 18px;
+
+	@media screen and (width <= 650px) {
+		max-width: 100%;
+	}
 
 }
 

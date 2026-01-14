@@ -21,7 +21,7 @@ export default function Review2025Card({ cardData }: Props) {
 	// A. Render components
 
 	return (
-		<div className={styles.container}>
+		<div className={styles.container} style={{ borderColor: cardData.color }}>
 			<div className={styles.header}>
 				<p className={styles.headerTitle}>{cardData.title}</p>
 				<IconCaretLeftFilled className={styles.headerIconClosed} data-open={false} />
