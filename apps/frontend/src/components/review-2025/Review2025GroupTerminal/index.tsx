@@ -3,7 +3,7 @@
 import { Grid } from '@/components/layout/Grid';
 import { Section } from '@/components/layout/Section';
 import { Surface } from '@/components/layout/Surface';
-import { municipalityData } from '@/components/review-2025/_data/cards';
+import { terminalsData } from '@/components/review-2025/_data/cards';
 
 import styles from './styles.module.css';
 
@@ -11,19 +11,19 @@ import Review2025Card from '../Review2025Card';
 
 /* * */
 
-export function Review2025MunicipalityGroup() {
+export function Review2025GroupTerminal() {
 	//
 	return (
 		<Surface forceOverflow>
 			<Section withPadding="desktop" withGap>
 				<div className={styles.headingWrapper}>
-					<h2 className={styles.heading}>Municípios</h2>
-					<h5 className={styles.subheading}>Evolução da operação por município em 2025</h5>
+					<h2 className={styles.heading}>Terminais</h2>
+					<h5 className={styles.subheading}>Evolução da operação nos terminais em 2025</h5>
 				</div>
 			</Section>
 			<Section withGap withPadding>
 				<Grid columns="abc" withGap>
-					{municipalityData.map((data, index) => <Review2025Card key={index} data={data} />)}
+					{terminalsData.map((data, index) => <Review2025Card key={index} data={data} />)}
 				</Grid>
 			</Section>
 		</Surface>
