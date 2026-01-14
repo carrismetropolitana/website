@@ -21,7 +21,7 @@ export function Review2025AMLGroup() {
 					<h5 className={styles.subheading}>Evolução da operação na Área Metropolitana de Lisboa em 2025</h5>
 				</div>
 			</Section>
-			<Section withPadding="desktop" withGap>
+			<Section withGap withPadding>
 				<Grid columns="abc" withGap>
 					{amlData.map((data, index) => <Review2025Card key={index} data={data} />)}
 				</Grid>

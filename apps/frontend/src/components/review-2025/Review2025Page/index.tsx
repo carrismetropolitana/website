@@ -24,7 +24,7 @@ export function Review2025Page() {
 
 	return (
 		<>
-			<Section heading="Retroespectiva 2025" withGap withPadding>
+			<Section heading="Retroespectiva 2025" withGap>
 				<Review2025AMLGroup />
 				<Review2025AreaGroup />
 				<Review2025MunicipalityGroup />
