@@ -1775,6 +1775,129 @@
 			}
 		}
 	},
+	"review-2025": {
+		"Review2025CardFooter": {
+			"share": {
+				"button": "Partilhar",
+				"copied": "Copiado!",
+				"copy_link": "Copiar link",
+				"message": "Partilhe este cartão nas suas redes sociais",
+				"share_text": "{title} - Carris Metropolitana 2025",
+				"title": "Partilhar"
+			}
+		},
+		"Review2025GroupAML": {
+			"heading": "Área Metropolitana de Lisboa",
+			"subheading": "Evolução da operação na Área Metropolitana de Lisboa em 2025"
+		},
+		"Review2025GroupArea": {
+			"heading": "Áreas",
+			"subheading": "Áreas de atuação da Carris Metropolitana"
+		},
+		"Review2025GroupMunicipality": {
+			"heading": "Municípios",
+			"subheading": "Evolução da operação por município em 2025"
+		},
+		"Review2025GroupTerminal": {
+			"heading": "Terminais",
+			"subheading": "Evolução da operação nos terminais em 2025"
+		},
+		"Review2025Intro": {
+			"alt": "Retroespectiva 2025"
+		},
+		"Review2025Page": {
+			"heading": "Retroespectiva 2025"
+		},
+		"cards": {
+			"aml": {
+				"aml": {
+					"description": "Em 2025, fomos 13,3% maiores que no ano passado!",
+					"title": "área metropolitana de Lisboa"
+				},
+				"curiosities": {
+					"description": "",
+					"title": "curiosidades"
+				},
+				"records": {
+					"description": "",
+					"title": "Recordes"
+				}
+			},
+			"areas": {
+				"area_1": {
+					"description": "",
+					"title": "área 1"
+				},
+				"area_2": {
+					"description": "",
+					"title": "área 2"
+				},
+				"area_3": {
+					"description": "",
+					"title": "área 3"
+				},
+				"area_4": {
+					"description": "",
+					"title": "área 4"
+				}
+			},
+			"common": {
+				"descriptions": {
+					"growth_percentage": "percentagem de crescimento face a 2024",
+					"pax_lisbon": "total de passageiros transportados para Lisboa",
+					"pax_over_tagus": "total de passageiros transportados sobre o Tejo",
+					"pax_total": "total de passageiros transportados",
+					"record_holiday": "recorde de passageiros transportados num domingo / feriado ({date})",
+					"record_saturday": "recorde de passageiros transportados num sábado ({date})",
+					"record_weekday": "recorde de passageiros transportados num dia útil ({date})",
+					"total_km": "total de quilómetros percorridos",
+					"total_trips": "total de viagens realizadas"
+				},
+				"groups": {
+					"aml": "área metropolitana de Lisboa",
+					"areas": "por áreas",
+					"municipalities": "por município",
+					"terminals": "por terminal"
+				},
+				"section_titles": {
+					"records": "Recordes",
+					"top_lines": "top 3 linhas"
+				}
+			},
+			"municipalities": {
+				"alcochete": "Alcochete",
+				"almada": "Almada",
+				"amadora": "Amadora",
+				"barreiro": "Barreiro",
+				"cascais": "Cascais",
+				"lisboa": "Lisboa",
+				"loures": "Loures",
+				"mafra": "Mafra",
+				"moita": "Moita",
+				"montijo": "Montijo",
+				"odivelas": "Odivelas",
+				"oeiras": "Oeiras",
+				"palmela": "Palmela",
+				"seixal": "Seixal",
+				"sesimbra": "Sesimbra",
+				"setubal": "Setúbal",
+				"sintra": "Sintra",
+				"vila_franca_de_xira": "Vila Franca de Xira"
+			},
+			"terminals": {
+				"agualva_cacem": "Agualva-Cacém (Estação)",
+				"amadora": "Amadora (Estação)",
+				"cacilhas": "Cacilhas (Cais Fluvial)",
+				"campo_grande": "Campo Grande (Metro)",
+				"fogueteiro": "Fogueteiro (Estação)",
+				"gare_oriente": "Gare do Oriente (Estação)",
+				"odivelas": "Odivelas (Metro)",
+				"pontinha": "Pontinha (Metro)",
+				"portela_sintra": "Portela de Sintra (Estação)",
+				"pragal": "Pragal (Estação)"
+			}
+		}
+	},
 	"schedule": {
 		"hours": "Hora",
 		"minutes": "Min.",

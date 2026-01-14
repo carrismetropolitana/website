@@ -1774,6 +1774,129 @@
 			}
 		}
 	},
+	"review-2025": {
+		"Review2025CardFooter": {
+			"share": {
+				"button": "Share",
+				"copied": "Copied!",
+				"copy_link": "Copy link",
+				"message": "Share this card on your social networks",
+				"share_text": "{title} - Carris Metropolitana 2025",
+				"title": "Share"
+			}
+		},
+		"Review2025GroupAML": {
+			"heading": "Lisbon Metropolitan Area",
+			"subheading": "Evolution of operations in the Lisbon Metropolitan Area in 2025"
+		},
+		"Review2025GroupArea": {
+			"heading": "Areas",
+			"subheading": "Carris Metropolitana operating areas"
+		},
+		"Review2025GroupMunicipality": {
+			"heading": "Municipalities",
+			"subheading": "Evolution of operations by municipality in 2025"
+		},
+		"Review2025GroupTerminal": {
+			"heading": "Terminals",
+			"subheading": "Evolution of operations at terminals in 2025"
+		},
+		"Review2025Intro": {
+			"alt": "2025 Review"
+		},
+		"Review2025Page": {
+			"heading": "2025 Review"
+		},
+		"cards": {
+			"aml": {
+				"aml": {
+					"description": "In 2025, we were 13.3% bigger than last year!",
+					"title": "Lisbon Metropolitan Area"
+				},
+				"curiosities": {
+					"description": "",
+					"title": "curiosities"
+				},
+				"records": {
+					"description": "",
+					"title": "Records"
+				}
+			},
+			"areas": {
+				"area_1": {
+					"description": "",
+					"title": "area 1"
+				},
+				"area_2": {
+					"description": "",
+					"title": "area 2"
+				},
+				"area_3": {
+					"description": "",
+					"title": "area 3"
+				},
+				"area_4": {
+					"description": "",
+					"title": "area 4"
+				}
+			},
+			"common": {
+				"descriptions": {
+					"growth_percentage": "percentage growth compared to 2024",
+					"pax_lisbon": "total passengers transported to Lisbon",
+					"pax_over_tagus": "total passengers transported over the Tagus",
+					"pax_total": "total passengers transported",
+					"record_holiday": "passenger record on a Sunday / holiday ({date})",
+					"record_saturday": "passenger record on a Saturday ({date})",
+					"record_weekday": "passenger record on a weekday ({date})",
+					"total_km": "total kilometers traveled",
+					"total_trips": "total trips made"
+				},
+				"groups": {
+					"aml": "Lisbon Metropolitan Area",
+					"areas": "by areas",
+					"municipalities": "by municipality",
+					"terminals": "by terminal"
+				},
+				"section_titles": {
+					"records": "Records",
+					"top_lines": "top 3 lines"
+				}
+			},
+			"municipalities": {
+				"alcochete": "Alcochete",
+				"almada": "Almada",
+				"amadora": "Amadora",
+				"barreiro": "Barreiro",
+				"cascais": "Cascais",
+				"lisboa": "Lisbon",
+				"loures": "Loures",
+				"mafra": "Mafra",
+				"moita": "Moita",
+				"montijo": "Montijo",
+				"odivelas": "Odivelas",
+				"oeiras": "Oeiras",
+				"palmela": "Palmela",
+				"seixal": "Seixal",
+				"sesimbra": "Sesimbra",
+				"setubal": "Setúbal",
+				"sintra": "Sintra",
+				"vila_franca_de_xira": "Vila Franca de Xira"
+			},
+			"terminals": {
+				"agualva_cacem": "Agualva-Cacém (Station)",
+				"amadora": "Amadora (Station)",
+				"cacilhas": "Cacilhas (Ferry Terminal)",
+				"campo_grande": "Campo Grande (Metro)",
+				"fogueteiro": "Fogueteiro (Station)",
+				"gare_oriente": "Gare do Oriente (Station)",
+				"odivelas": "Odivelas (Metro)",
+				"pontinha": "Pontinha (Metro)",
+				"portela_sintra": "Portela de Sintra (Station)",
+				"pragal": "Pragal (Station)"
+			}
+		}
+	},
 	"schedule": {
 		"hours": "Time",
 		"minutes": "Min.",
