@@ -22,7 +22,7 @@ export function Review2025AMLGroup() {
 				</div>
 			</Section>
 			<Section withPadding="desktop" withGap>
-				<Grid columns="ab" withGap>
+				<Grid columns="abc" withGap>
 					{amlData.map((data, index) => <Review2025Card key={index} data={data} />)}
 				</Grid>
 			</Section>
