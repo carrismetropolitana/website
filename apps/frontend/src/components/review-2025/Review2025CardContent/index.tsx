@@ -7,13 +7,7 @@ import { Review2025ContentGroup } from '../Review2025ContentGroup';
 
 /* * */
 
-export function Review2025CardContent({ 
-	cardData, 
-	isOpen 
-}: { 
-	cardData: Review2025Card;
-	isOpen: boolean;
-}) {
+export function Review2025CardContent({ cardData, isOpen }: { cardData: Review2025Card, isOpen: boolean }) {
 	//
 	return (
 		<div className={`${styles.content} ${styles.contentCollapsible}`} data-open={isOpen}>

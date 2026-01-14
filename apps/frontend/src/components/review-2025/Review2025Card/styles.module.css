@@ -7,13 +7,13 @@
 	justify-content: flex-start;
 	width: 100%;
 	height: 100%;
-    padding: var(--size-spacing-20);
+    padding: var(--size-spacing-15);
 	overflow-x: hidden;
     background: var(--color-system-background-100);
-    border: 3px solid #C61D23;
+    border: 2px solid #fff;
     border-radius: 18px;
 
-	--animation-duration-open: 300ms;
+	--animation-duration-open: 600ms;
 	--animation-duration-close: 600ms;
 
 	@media screen and (width <= 650px) {
@@ -32,7 +32,7 @@
 .content {
 	display: flex;
 	flex-direction: column;
-	gap: var(--size-spacing-10);
+	gap: var(--size-spacing-20);
 	width: 100%;
 }
 
@@ -56,6 +56,7 @@
 }
 
 .contentDescription {
+	margin-top: var(--size-spacing-10);
 	font-size: var(--font-size-text);
 	font-weight: var(--font-weight-text);
 	color: var(--color-system-text-200);
