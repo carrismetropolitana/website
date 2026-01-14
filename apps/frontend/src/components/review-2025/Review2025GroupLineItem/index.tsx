@@ -1,5 +1,6 @@
 /* * */
 
+import { RegularListItem } from '@/components/layout/RegularListItem';
 import { LineDisplay } from '@/components/lines/LineDisplay';
 import { useLinesContext } from '@/contexts/Lines.context';
 
@@ -14,5 +15,9 @@ export default function Review2025GroupBadgeItem({ item }: { item: Review2025Car
 
 	//
 
-	return <LineDisplay lineData={actions.getLineDataById(String(item.line_id))} size="md" />;
+	return (
+		<RegularListItem key={item.line_id} href={`/lines/${item.line_id}`} style={{ borderBottom: 'none', borderRadius: 'var(--border-radius-sm)', padding: 'var(--size-spacing-5)' }}>
+			<LineDisplay lineData={actions.getLineDataById(String(item.line_id))} size="md" />
+		</RegularListItem>
+	);
 }

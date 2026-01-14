@@ -1,22 +1,5 @@
-.container {
-	display: flex;
-	flex-direction: row;
-	gap: var(--size-spacing-15);
-}
-
-.badge {
-	width: 42px;
-	height: 42px;
-}
-
-.contentDescription {
-	font-size: var(--font-size-muted);
-	font-weight: var(--font-weight-muted);
-	color: var(--color-system-text-300);
-}
-
-.contentValue {
-	font-size: var(--font-size-title);
-	font-weight: var(--font-weight-title);
-	color: var(--color-system-text-200);
+.lineItem {
+	padding: var(--size-spacing-5);
+	border-bottom: none;
+	border-radius: var(--border-radius-sm);
 }
