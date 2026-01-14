@@ -21,7 +21,7 @@ export function Review2025AreaGroup() {
 					<h5 className={styles.subheading}>Áreas de atuação da Carris Metropolitana</h5>
 				</div>
 			</Section>
-			<Section withPadding="desktop" withGap>
+			<Section withGap withPadding>
 				<Grid columns="abc" withGap>
 					{areaData.map((data, index) => <Review2025Card key={index} data={data} />)}
 				</Grid>
