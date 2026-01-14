@@ -7,7 +7,6 @@
     align-items: center;
 	justify-content: flex-start;
 	width: 100%;
-	max-width: 350px;
     padding: var(--size-spacing-20);
 	overflow-x: hidden;
     background: var(--color-system-background-100);
