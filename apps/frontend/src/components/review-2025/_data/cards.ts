@@ -1,5 +1,9 @@
 /* * */
 
+import * as Icons from './icons';
+
+/* * */
+
 export const Review2025Badge = [
 	'PAX_TOTAL',
 	'RECORDES_DU',
@@ -11,6 +15,18 @@ export const Review2025Badge = [
 	'RECORDES_DOM',
 	'GROWTH',
 ] as const;
+
+export const Review2025BadgeToIcon: Record<typeof Review2025Badge[number], keyof typeof Icons> = {
+	BRIDGES_TOTAL: 'BridgesTotalIcon',
+	GROWTH: 'GrowthIcon',
+	KMS_TOTAL: 'KmsTotalIcon',
+	LX_TOTAL: 'LxTotalIcon',
+	PAX_TOTAL: 'PaxTotalIcon',
+	RECORDES_DOM: 'RecordesDomIcon',
+	RECORDES_DU: 'RecordesDuIcon',
+	RECORDES_SAB: 'RecordesSabIcon',
+	TRIPS_TOTAL: 'TripsTotalIcon',
+} as const;
 
 type BadgeState = 'active' | 'hidden' | 'inactive';
 

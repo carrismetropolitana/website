@@ -30,7 +30,7 @@ export default function Review2025Card({ data }: { data: Review2025Card }) {
 	// C. Render components
 
 	return (
-		<div className={styles.container} style={{ borderColor: data.color }}>
+		<div className={styles.container} data-open={isOpen} style={{ borderColor: data.color }}>
 			<Review2025CardHeader cardData={data} isOpen={isOpen} onToggle={handleToggle} />
 			<Review2025CardContent cardData={data} isOpen={isOpen} />
 			<Review2025CardFooter isOpen={isOpen} />

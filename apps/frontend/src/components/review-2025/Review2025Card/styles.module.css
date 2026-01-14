@@ -6,6 +6,7 @@
     align-items: center;
 	justify-content: flex-start;
 	width: 100%;
+	height: 100%;
     padding: var(--size-spacing-20);
 	overflow-x: hidden;
     background: var(--color-system-background-100);
@@ -17,6 +18,10 @@
 
 	@media screen and (width <= 650px) {
 		max-width: 100%;
+	}
+
+	&[data-open='true'] {
+		align-self: stretch;
 	}
 
 }
