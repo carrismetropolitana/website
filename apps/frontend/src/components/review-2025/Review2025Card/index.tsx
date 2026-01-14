@@ -1,41 +1,37 @@
 /* * */
 
 import Button from '@/components/common/Button';
-import { Review2025CardSchema } from '@/components/review-2025/_data/cards';
 import { IconCaretLeftFilled, IconShare } from '@tabler/icons-react';
 
 import styles from './styles.module.css';
 
-import { Review2025Group } from '../Review2025Group';
+import { Review2025Card } from '../_data/cards';
+import { Review2025ContentGroup } from '../Review2025ContentGroup';
 
 /* * */
 
-interface Props {
-	cardData: Review2025CardSchema
-}
-
-export default function Review2025Card({ cardData }: Props) {
+export default function Review2025Card({ data }: { data: Review2025Card }) {
 	//
 
 	//
 	// A. Render components
 
 	return (
-		<div className={styles.container} style={{ borderColor: cardData.color }}>
+		<div className={styles.container} style={{ borderColor: data.color }}>
 			<div className={styles.header}>
-				<p className={styles.headerTitle}>{cardData.title}</p>
+				<p className={styles.headerTitle}>{data.title}</p>
 				<IconCaretLeftFilled className={styles.headerIconClosed} data-open={false} />
 			</div>
 
 			<div className={styles.badgesWrapper}>
-				{Object.keys(cardData.badges).map((badge) => {
-					if (cardData.badges[badge as keyof typeof cardData.badges] === 'hidden') return null;
+				{Object.keys(data.badges).map((badge) => {
+					if (data.badges[badge as keyof typeof data.badges] === 'hidden') return null;
 					return (
 						<img
 							key={badge}
 							alt={badge}
 							className={styles.badge}
-							data-active={cardData.badges[badge as keyof typeof cardData.badges] === 'active'}
+							data-active={data.badges[badge as keyof typeof data.badges] === 'active'}
 							src={`/assets/review-2025/images/${badge}.svg`}
 						/>
 					);
@@ -43,9 +39,9 @@ export default function Review2025Card({ cardData }: Props) {
 			</div>
 
 			<div className={styles.content}>
-				<p className={styles.contentDescription}>{cardData.description}</p>
-				{cardData.content.map((group, index) => (
-					<Review2025Group key={index} data={group} />
+				<p className={styles.contentDescription}>{data.description}</p>
+				{data.content.map((group, index) => (
+					<Review2025ContentGroup key={index} data={group} />
 				))}
 
 			</div>

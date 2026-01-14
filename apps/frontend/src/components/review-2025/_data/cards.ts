@@ -14,7 +14,7 @@ export const Review2025Badge = [
 
 type BadgeState = 'active' | 'hidden' | 'inactive';
 
-export interface Review2025CardSchema {
+export interface Review2025Card {
 	_group: string
 	_group_title?: string
 	badges: {
@@ -29,24 +29,24 @@ export interface Review2025CardSchema {
 		TRIPS_TOTAL: BadgeState
 	}
 	color: string
-	content: Review2025CardSchemaContentGroup[]
+	content: Review2025CardContentGroup[]
 	description: string
 	title: string
 }
 
-export interface Review2025CardSchemaContentGroup {
-	items: (Review2025CardContentGroupBadgeItem | Review2025CardContentGroupLineItem)[]
+export interface Review2025CardContentGroup {
+	items: (Review2025CardContentItemBadge | Review2025CardContentItemLine)[]
 	title?: string
 }
 
-export interface Review2025CardContentGroupBadgeItem {
+export interface Review2025CardContentItemBadge {
 	badge: typeof Review2025Badge[number]
 	description: string
 	type: 'badge'
 	value: string
 }
 
-export interface Review2025CardContentGroupLineItem {
+export interface Review2025CardContentItemLine {
 	line_id: number
 	type: 'lines'
 }
@@ -99,7 +99,7 @@ const terminalBadges: Record<typeof Review2025Badge[number], BadgeState> = {
 
 //
 // AML Data
-const amlData: Review2025CardSchema[] = [
+export const amlData: Review2025Card[] = [
 	//
 	// Area Metropolitana de Lisboa
 
@@ -192,7 +192,7 @@ const amlData: Review2025CardSchema[] = [
 
 //
 // Area Data
-const areaData: Review2025CardSchema[] = [
+export const areaData: Review2025Card[] = [
 	{
 		_group: 'por áreas',
 		badges: areaBadges,
@@ -289,7 +289,7 @@ const areaData: Review2025CardSchema[] = [
 
 //
 // Municipality Data
-const municipalityData: Review2025CardSchema[] = [
+export const municipalityData: Review2025Card[] = [
 	{
 		_group: 'por município',
 		badges: municipalityBadges,
@@ -726,7 +726,7 @@ const municipalityData: Review2025CardSchema[] = [
 
 //
 // Terminal Data
-const terminalsData: Review2025CardSchema[] = [
+export const terminalsData: Review2025Card[] = [
 	{
 		_group: 'por terminal',
 		badges: terminalBadges,
@@ -877,11 +877,4 @@ const terminalsData: Review2025CardSchema[] = [
 		description: '',
 		title: 'Pontinha (Metro)',
 	},
-];
-
-export const allCardsData: Review2025CardSchema[] = [
-	...amlData,
-	...areaData,
-	...municipalityData,
-	...terminalsData,
 ];

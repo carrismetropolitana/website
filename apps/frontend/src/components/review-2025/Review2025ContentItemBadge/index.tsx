@@ -2,11 +2,11 @@
 
 import styles from './styles.module.css';
 
-import { Review2025CardContentGroupBadgeItem } from '../_data/cards';
+import { Review2025CardContentItemBadge } from '../_data/cards';
 
 /* * */
 
-export default function Review2025GroupBadgeItem({ item }: { item: Review2025CardContentGroupBadgeItem }) {
+export default function Review2025ContentItemBadge({ item }: { item: Review2025CardContentItemBadge }) {
 	return (
 		<div className={styles.container}>
 			<img alt={item.badge} className={styles.badge} src={`/assets/review-2025/images/${item.badge}.svg`} />

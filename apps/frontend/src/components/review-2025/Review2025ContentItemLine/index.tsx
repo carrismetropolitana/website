@@ -4,11 +4,11 @@ import { RegularListItem } from '@/components/layout/RegularListItem';
 import { LineDisplay } from '@/components/lines/LineDisplay';
 import { useLinesContext } from '@/contexts/Lines.context';
 
-import { Review2025CardContentGroupLineItem } from '../_data/cards';
+import { Review2025CardContentItemLine } from '../_data/cards';
 
 /* * */
 
-export default function Review2025GroupBadgeItem({ item }: { item: Review2025CardContentGroupLineItem }) {
+export default function Review2025ContentItemLineItem({ item }: { item: Review2025CardContentItemLine }) {
 	//
 
 	const { actions } = useLinesContext();

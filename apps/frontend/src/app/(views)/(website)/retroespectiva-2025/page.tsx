@@ -6,8 +6,8 @@ import { type Metadata } from 'next';
 /* * */
 
 export const metadata: Metadata = {
-	description: 'Explore a verdadeira dimensão da CMetropolitana em 2024.',
-	title: 'CMetropolitana | Viagem 2024',
+	description: 'Explore a verdadeira dimensão da CMetropolitana em 2025.',
+	title: 'CMetropolitana | Retroespectiva 2025',
 };
 
 /* * */
