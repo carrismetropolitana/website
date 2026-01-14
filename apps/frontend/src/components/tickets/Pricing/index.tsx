@@ -32,7 +32,7 @@ export function Pricing() {
 					</div>
 					<div className={styles.pricing}>
 						<div className={styles.pricingItem}>
-							<h3 className={styles.priceValue}>1,25€</h3>
+							<h3 className={styles.priceValue}>1,30€</h3>
 							<p className={styles.priceLabel}>{t('ticket_types.onboard')}</p>
 						</div>
 						<div className={styles.pricingItem}>
@@ -51,7 +51,7 @@ export function Pricing() {
 					</div>
 					<div className={styles.pricing}>
 						<div className={styles.pricingItem}>
-							<h3 className={styles.priceValue}>2,60€</h3>
+							<h3 className={styles.priceValue}>2,70€</h3>
 							<p className={styles.priceLabel}>{t('ticket_types.onboard')}</p>
 						</div>
 						<div className={styles.pricingItem}>
@@ -70,7 +70,7 @@ export function Pricing() {
 					</div>
 					<div className={styles.pricing}>
 						<div className={styles.pricingItem}>
-							<h3 className={styles.priceValue}>4,50€</h3>
+							<h3 className={styles.priceValue}>4,65€</h3>
 							<p className={styles.priceLabel}>{t('ticket_types.onboard')}</p>
 						</div>
 						<div className={styles.pricingItem}>
@@ -89,12 +89,12 @@ export function Pricing() {
 					</div>
 					<div className={styles.pricing}>
 						<div className={styles.pricingItem}>
-							<h3 className={styles.priceValue}>3,10€</h3>
+							<h3 className={styles.priceValue}>3,20€</h3>
 							<p className={styles.priceLabel}>{t('ticket_types.onboard')}</p>
 							<p className={styles.priceLabel}>{t('ticket_types.onboard_start_by_29')}</p>
 						</div>
 						<div className={styles.pricingItem}>
-							<h3 className={styles.priceValue}>3,60€</h3>
+							<h3 className={styles.priceValue}>3,70€</h3>
 							<p className={styles.priceLabel}>{t('ticket_types.onboard')}</p>
 							<p className={styles.priceLabel}>{t('ticket_types.onboard_start_by_49')}</p>
 						</div>
@@ -114,7 +114,7 @@ export function Pricing() {
 					</div>
 					<div className={styles.pricing}>
 						<div className={styles.pricingItem}>
-							<h3 className={styles.priceValue}>4,50€</h3>
+							<h3 className={styles.priceValue}>4,65€</h3>
 							<p className={styles.priceLabel}>{t('ticket_types.onboard')}</p>
 						</div>
 						<div className={styles.pricingItem}>

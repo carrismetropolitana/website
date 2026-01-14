@@ -1,7 +1,7 @@
 /* * */
 
 import { type NavigationGroup } from '@/types/navigation.types';
-import { IconAlertTriangle, IconArrowLoopRight, IconBellSchool, IconBuildingStore, IconBus, IconBusStop, IconChartBar, IconCreditCardPay, IconDirections, IconHelpHexagon, IconHomeSpark, IconListSearch, IconMapQuestion, IconMessages, IconNews, IconPrompt, IconTicket, IconUmbrella, IconUserHeart } from '@tabler/icons-react';
+import { IconAlertTriangle, IconArrowLoopRight, IconBellSchool, IconBuildingStore, IconBus, IconBusStop, IconChartBar, IconCreditCardPay, IconDirections, IconHelpHexagon, IconHomeSpark, IconListSearch, IconMapQuestion, IconMessages, IconNews, IconPrompt, IconTicket, IconUserHeart } from '@tabler/icons-react';
 
 /* * */
 
@@ -32,7 +32,6 @@ export const mainNavigationGroup: NavigationGroup[] = [
 		_id: 'support',
 		links: [
 			{ _id: 'faq', href: '/faq', icon: <IconHelpHexagon /> },
-			{ _id: 'lost-and-found', href: '/lost-and-found', icon: <IconUmbrella /> },
 			{ _id: 'stores', href: '/stores', icon: <IconBuildingStore /> },
 			{ _id: 'contacts', href: '/contacts', icon: <IconMessages /> },
 		],

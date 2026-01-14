@@ -172,28 +172,35 @@
 				"ACCIDENT": "Accident",
 				"CONSTRUCTION": "Works",
 				"DEMONSTRATION": "Event / Demonstration",
-				"HOLIDAY": "Vacation",
+				"DRIVER_ABSENCE": "Operation Constraints",
+				"DRIVER_ISSUE": "Operation Constraints",
+				"HIGH_PASSENGER_LOAD": "High Passenger Load",
+				"HOLIDAY": "Holiday",
 				"MAINTENANCE": "Maintenance",
 				"MEDICAL_EMERGENCY": "Medical Emergency",
 				"OTHER_CAUSE": "Other Causes",
 				"POLICE_ACTIVITY": "Police Activity",
+				"ROAD_INCIDENT": "Road Incident",
 				"STRIKE": "Strike",
+				"SYSTEM_FAILURE": "System Failure",
 				"TECHNICAL_PROBLEM": "Technical Problem",
+				"TRAFFIC_JAM": "Traffic Jam",
 				"UNKNOWN_CAUSE": "Unknown Cause",
+				"VEHICLE_ISSUE": "Vehicle Issue",
 				"WEATHER": "Bad Weather"
 			},
 			"effect": {
-				"ACCESSIBILITY_ISSUE": "Impact on Accessibility",
-				"ADDITIONAL_SERVICE": "Service Increase",
+				"ACCESSIBILITY_ISSUE": "Accessibility Issue",
+				"ADDITIONAL_SERVICE": "Additional Service",
 				"DETOUR": "Detour",
 				"MODIFIED_SERVICE": "Schedule Changes",
-				"NO_EFFECT": "Other",
+				"NO_EFFECT": "No Effect",
 				"NO_SERVICE": "Canceled Service",
 				"OTHER_EFFECT": "Other",
 				"REDUCED_SERVICE": "Reduced Service",
 				"SIGNIFICANT_DELAYS": "Significant Delays",
 				"STOP_MOVED": "Diversion Stop",
-				"UNKNOWN_EFFECT": "Other"
+				"UNKNOWN_EFFECT": "Unknown Effect"
 			}
 		},
 		"AlertsDetail": {
@@ -443,8 +450,8 @@
 					"title": "Antigo Combatente >65"
 				},
 				"complement": {
-					"description": "Aditivo ao cartão navegante® para quem já possui um passe mensal. O complemento permite viajar nas linhas inter-regionais da CMetropolitana, para entrar e sair dos limites da área metropolitana de Lisboa.",
-					"title": "Complement"
+					"description": "Valor complementar, a acrescer ao valor do passe navegante mensal. Permite viajar nas linhas inter-regionais da Carris Metropolitana, para entrar e sair dos limites da amL.",
+					"title": "Complemento"
 				},
 				"family": {
 					"description": "Desconto válido para agregados familiares com pelo menos 3 indivíduos. É necessário que todos os elementos do agregado tenham o mesmo domicílio fiscal, residam num dos 18 municípios da aml, e que tenham relação familiar direta de ascendência ou descendência com o titular.",
@@ -1045,7 +1052,7 @@
 			"title": "Next arrivals"
 		},
 		"PathWaypointTimetable": {
-			"next_date": "Next arrivals available from {value, date, dayShort} {value, date, monthLong} {value, date, yearLong}",
+			"next_date": "This line does not have schedules on this day. Next day with schedules: {value, date, dayShort} {value, date, monthLong} {value, date, yearLong}",
 			"no_data": "Timetables unavailable for this date.",
 			"title": "Scheduled arrivals at this stop:"
 		},
@@ -1985,7 +1992,6 @@
 			"hours_title": "Hours",
 			"months_description": "from March until June 2024",
 			"months_title": "Months"
-
 		},
 		"SurveyCriteriaCard": {
 			"firstRowText": "Line Searching Classes (from high to low)",
@@ -2009,7 +2015,6 @@
 			"subtitle": "Select one of the options below to browse trough the page.",
 			"title": "Quick Access",
 			"value": "7.2"
-
 		},
 		"SurveyLevelPassenger": {
 			"heading": "Passenger Characterization",

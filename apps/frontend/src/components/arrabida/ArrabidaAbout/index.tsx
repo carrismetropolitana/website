@@ -10,6 +10,7 @@ import styles from './styles.module.css';
 import { ArrabidaIcon } from '../ArrabidaHeader/ArrabidaIcon';
 import { ArrabidaLogo } from '../ArrabidaHeader/ArrabidaLogo';
 import { CarrisLogo } from './CarrisLogo';
+import { SetubalLogo } from './SetubalLogo';
 
 /* * */
 
@@ -50,6 +51,9 @@ export function ArrabidaAbout() {
 								</div>
 								<a href="/" rel="noopener noreferrer" style={{ cursor: 'pointer' }} target="_blank">
 									<CarrisLogo />
+								</a>
+								<a href="https://www.mun-setubal.pt/ " rel="noopener noreferrer" style={{ cursor: 'pointer' }} target="_blank">
+									<SetubalLogo />
 								</a>
 							</div>
 

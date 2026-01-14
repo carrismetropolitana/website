@@ -62,13 +62,13 @@ export const AnalyticsContextProvider = ({ children }) => {
 		}
 	}, [consentContext.data.init_status, consentContext.data.enabled_analytics, ampli?.isLoaded]);
 
-	const capture = (callback: (instance: Ampli, props: DefaultEventProps) => void) => {
+	const capture = (_callback: (instance: Ampli, props: DefaultEventProps) => void) => {
 		// Skip if analytics is disabled or Ampli is not loaded
 		if (!consentContext.data.enabled_analytics || !ampli?.isLoaded) return;
 		// Skip if window or document are not available
 		if (typeof window === 'undefined' && typeof document === 'undefined') return;
 		// Setup default properties for all events
-		const defaultProps: DefaultEventProps = {
+		const _defaultProps: DefaultEventProps = {
 			app_version: pjson.version,
 			domain: window.location.hostname,
 			locale: document.documentElement.lang,
@@ -82,7 +82,7 @@ export const AnalyticsContextProvider = ({ children }) => {
 
 	const captureWithDelay = (() => {
 		let timeout: NodeJS.Timeout | null = null;
-		return (callback: (instance: Ampli) => void) => {
+		return (_callback: (instance: Ampli) => void) => {
 			if (!consentContext.data.enabled_analytics || !ampli?.isLoaded) return;
 			if (timeout) clearTimeout(timeout);
 			timeout = setTimeout(() => {

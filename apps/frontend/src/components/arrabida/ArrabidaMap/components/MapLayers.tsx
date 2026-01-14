@@ -204,7 +204,7 @@ export function MapLayers({ onPinClick, selectedAccordionId, selectedLineId, sty
 					position: 'absolute',
 					top: 0,
 					width: '100%',
-					zIndex: 100,
+					zIndex: 10,
 				}}
 			>
 				{Object.entries(BEACH_INTERACTIVE_AREAS).map(([beachId, areas]) =>
@@ -263,7 +263,7 @@ export function MapLayers({ onPinClick, selectedAccordionId, selectedLineId, sty
 							transform: 'translate(-50%, -50%)', // Center on coordinates
 							visibility: 'visible', // Ensure visibility
 							width: `${widthPercent}%`, // Scale relative to map size
-							zIndex: 101, // Above interactive areas
+							zIndex: 11, // Above interactive areas
 						}}
 					/>
 				);

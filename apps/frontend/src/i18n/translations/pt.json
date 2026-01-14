@@ -172,8 +172,8 @@
 				"ACCIDENT": "Acidente",
 				"CONSTRUCTION": "Obras",
 				"DEMONSTRATION": "Evento",
-				"DRIVER_ABSENCE": "Falta do Condutor",
-				"DRIVER_ISSUE": "Problema com o Condutor",
+				"DRIVER_ABSENCE": "Constrangimentos na Operação",
+				"DRIVER_ISSUE": "Constrangimentos na Operação",
 				"HIGH_PASSENGER_LOAD": "Carga Excessiva de Passageiros",
 				"HOLIDAY": "Férias",
 				"MAINTENANCE": "Manutenção",
@@ -186,7 +186,7 @@
 				"TECHNICAL_PROBLEM": "Problema Técnico",
 				"TRAFFIC_JAM": "Congestão de Trânsito",
 				"UNKNOWN_CAUSE": "Causa Desconhecida",
-				"VEHICLE_ISSUE": "Problema no Veículo",
+				"VEHICLE_ISSUE": "Constrangimentos na Operação",
 				"WEATHER": "Mau Tempo"
 			},
 			"effect": {
@@ -450,7 +450,7 @@
 					"title": "Antigo Combatente >65"
 				},
 				"complement": {
-					"description": "Aditivo ao cartão navegante® para quem já possui um passe mensal. O complemento permite viajar nas linhas inter-regionais da CMetropolitana, para entrar e sair dos limites da área metropolitana de Lisboa.",
+					"description": "Valor complementar, a acrescer ao valor do passe navegante mensal. Permite viajar nas linhas inter-regionais da Carris Metropolitana, para entrar e sair dos limites da amL.",
 					"title": "Complemento"
 				},
 				"family": {
@@ -1027,7 +1027,6 @@
 		"LinesDetailPath": {
 			"no_data": "Selecione um Percurso / Destino",
 			"summary": "Linha <lineNumber>{line_number}</lineNumber> com destino a <destinationName>{destination_name}</destinationName> no dia <dayName>{day_name, date, long}</dayName>. <changeDay>Alterar dia ›</changeDay>"
-
 		},
 		"LinesListToolbar": {
 			"by_current_view": {
@@ -1053,7 +1052,7 @@
 			"title": "Próximas circulações"
 		},
 		"PathWaypointTimetable": {
-			"next_date": "Próximos horários disponíveis a partir de {value, date, dayShort} {value, date, monthLong} {value, date, yearLong}",
+			"next_date": "Esta linha não realiza viagens neste dia da semana. Próximo dia com horários: {value, date, dayShort} {value, date, monthLong} {value, date, yearLong}",
 			"no_data": "Horários indisponíveis para esta data.",
 			"title": "Horários planeados nesta paragem:"
 		},
@@ -1242,7 +1241,6 @@
 			"line": "Linha",
 			"municipality": "Município",
 			"toolbar_desc": "Escolha se quer ver os diferentes tipos de contacto (Pedidos de Informação, Reclamações e outros) por município ou linha."
-
 		},
 		"MetricsPageIntro": {
 			"heading": "A nossa operação ao vivo",
@@ -1995,7 +1993,6 @@
 			"hours_title": "Horas",
 			"months_description": "de março a junho 2024",
 			"months_title": "Meses"
-
 		},
 		"SurveyCriteriaCard": {
 			"firstRowText": "classes de procura de linhas (de alta a baixa procura)",
@@ -2165,7 +2162,6 @@
 					},
 					"placeholder": "Permite Mobilidade Reduzida"
 				}
-
 			},
 			"found_items_counter": "{count, plural, =0 {Nenhum Veículo encontrado.} one {Encontrado # veículo:} other {Encontrados # veículos:}}",
 			"select_vehicle": "Selecione um veículo"

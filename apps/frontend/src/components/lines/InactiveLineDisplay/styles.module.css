@@ -11,7 +11,6 @@
 
 /* Override text color to gray for the message */
 .container :global(div[class*="name"]) {
-	color: var(--color-system-text-300);
 	font-weight: var(--font-weight-medium);
+	color: var(--color-system-text-300);
 }
-

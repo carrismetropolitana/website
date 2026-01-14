@@ -4,7 +4,6 @@
 
 import { LottiePlayer } from '@/components/common/LottiePlayer';
 import { ThemeSwitch } from '@/components/responsive/ThemeSwitch';
-// import { Image } from '@mantine/core';
 import Link from 'next/link';
 
 import styles from './styles.module.css';

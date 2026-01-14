@@ -6,11 +6,20 @@ import { AlertCause, AlertEffect } from '@/types/alerts.types';
 export function getCauseSeverityLevel(cause: AlertCause): number {
 	switch (cause) {
 		case 'ACCIDENT':
+		case 'CONSTRUCTION':
 		case 'DEMONSTRATION':
+		case 'DRIVER_ABSENCE':
+		case 'DRIVER_ISSUE':
+		case 'HIGH_PASSENGER_LOAD':
+		case 'MAINTENANCE':
 		case 'MEDICAL_EMERGENCY':
 		case 'POLICE_ACTIVITY':
+		case 'ROAD_INCIDENT':
 		case 'STRIKE':
+		case 'SYSTEM_FAILURE':
 		case 'TECHNICAL_PROBLEM':
+		case 'TRAFFIC_JAM':
+		case 'WEATHER':
 			return 3;
 		case 'HOLIDAY':
 			return 0;
