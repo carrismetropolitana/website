@@ -3,7 +3,6 @@
 /* * */
 
 import { Surface } from '@/components/layout/Surface';
-import { BreakpointSwitch } from '@/components/responsive/BreakpointSwitch';
 import { Image } from '@mantine/core';
 import { useTranslations } from 'next-intl';
 
@@ -16,10 +15,7 @@ export function Review2025Intro() {
 
 	return (
 		<Surface forceOverflow>
-			<BreakpointSwitch
-				desktop={<Image alt={t('alt')} className={styles.image} src="/assets/review-2025/images/banner_web.png" />}
-				mobile={<Image alt={t('alt')} className={styles.image} src="/assets/review-2025/images/banner_mobile.png" />}
-			/>
+			<Image alt={t('alt')} className={styles.image} src="/assets/review-2025/images/banner_mobile.png" />
 		</Surface>
 	);
 }
