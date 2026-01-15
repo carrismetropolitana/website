@@ -100,7 +100,7 @@
 		padding-bottom: unset;
 	}
 	.container[data-with-padding-mobile='true'] .childrenWrapper  {
-		padding: var(--size-spacing-20);
+		padding: var(--size-spacing-10);
 	}
 }
 
