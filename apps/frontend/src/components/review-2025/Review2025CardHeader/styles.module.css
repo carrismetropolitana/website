@@ -47,12 +47,23 @@
 	width: 100%;	
 }
 
-
+.headerTitleWrapper {
+	display: flex;
+	flex-direction: column;
+	align-items: flex-start;
+	justify-content: flex-start;
+}
 
 .headerTitle {
     font-size: var(--font-size-title);
     font-weight: var(--font-weight-title);
 	color: var(--color-system-text-200);
+}
+
+.headerSubtitle {
+	font-size: var(--font-size-muted);
+	font-weight: var(--font-weight-muted);
+	color: var(--color-system-text-300);
 }
 
 /* * */

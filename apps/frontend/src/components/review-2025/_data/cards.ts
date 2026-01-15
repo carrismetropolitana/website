@@ -48,6 +48,7 @@ export interface Review2025CardSchema {
 	color: string
 	content: Review2025CardSchemaContentGroup[]
 	description: string
+	subtitle?: string
 	title: string
 }
 
@@ -231,6 +232,7 @@ export const areaData: Review2025CardSchema[] = [
 			},
 		],
 		description: '',
+		subtitle: '(Amadora, Cascais, Lisboa, Oeiras, Sintra)',
 		title: 'área 1',
 	},
 	{
@@ -254,6 +256,7 @@ export const areaData: Review2025CardSchema[] = [
 			},
 		],
 		description: '',
+		subtitle: '(Loures, Mafra, Odivelas, Vila Franca de Xira)',
 		title: 'área 2',
 	},
 	{
@@ -277,6 +280,7 @@ export const areaData: Review2025CardSchema[] = [
 			},
 		],
 		description: '',
+		subtitle: '(Almada, Seixal, Sesimbra)',
 		title: 'área 3',
 	},
 	{
@@ -300,6 +304,7 @@ export const areaData: Review2025CardSchema[] = [
 			},
 		],
 		description: '',
+		subtitle: '(Alcochete, Barreiro, Moita, Montijo, Palmela, Setúbal)',
 		title: 'área 4',
 	},
 ];

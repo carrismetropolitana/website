@@ -21,7 +21,10 @@ export function Review2025CardHeader({ cardData, isOpen, onToggle }: Props) {
 	return (
 		<div className={styles.container} onClick={onToggle}>
 			<div className={styles.header}>
-				<p className={styles.headerTitle}>{cardData.title}</p>
+				<div className={styles.headerTitleWrapper}>
+					<p className={styles.headerTitle}>{cardData.title}</p>
+					{cardData.subtitle && <p className={styles.headerSubtitle}>{cardData.subtitle}</p>}
+				</div>
 				<IconCaretLeftFilled className={styles.headerIconClosed} data-open={isOpen} />
 			</div>
 
