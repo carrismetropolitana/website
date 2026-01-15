@@ -58,6 +58,8 @@ export function Review2025GroupMunicipality() {
 					<h2 className={styles.heading}>{t('heading')}</h2>
 					<h5 className={styles.subheading}>{t('subheading')}</h5>
 				</div>
+			</Section>
+			<Section withGap withPadding>
 				<Select
 					className={styles.filter}
 					data={areaFilterOptions}
@@ -68,8 +70,6 @@ export function Review2025GroupMunicipality() {
 					w="100%"
 					clearable
 				/>
-			</Section>
-			<Section withGap withPadding>
 				<Grid columns="abc" withGap>
 					{filteredData.map((data, index) => <Review2025Card key={index} data={data} />)}
 				</Grid>
