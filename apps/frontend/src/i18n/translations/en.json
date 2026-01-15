@@ -1795,7 +1795,15 @@
 		},
 		"Review2025GroupMunicipality": {
 			"heading": "Municipalities",
-			"subheading": "Evolution of operations by municipality in 2025"
+			"subheading": "Evolution of operations by municipality in 2025",
+			"filter": {
+				"all": "All",
+				"area1": "Area 1",
+				"area2": "Area 2",
+				"area3": "Area 3",
+				"area4": "Area 4",
+				"placeholder": "Filter by area"
+			}
 		},
 		"Review2025GroupTerminal": {
 			"heading": "Terminals",
