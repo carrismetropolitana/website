@@ -1795,8 +1795,6 @@
 			"subheading": "Áreas de atuação da Carris Metropolitana"
 		},
 		"Review2025GroupMunicipality": {
-			"heading": "Municípios",
-			"subheading": "Evolução da operação por município em 2025",
 			"filter": {
 				"all": "Todas",
 				"area1": "Área 1",
@@ -1804,7 +1802,9 @@
 				"area3": "Área 3",
 				"area4": "Área 4",
 				"placeholder": "Filtrar por área"
-			}
+			},
+			"heading": "Municípios",
+			"subheading": "Evolução da operação por município em 2025"
 		},
 		"Review2025GroupTerminal": {
 			"heading": "Terminais",

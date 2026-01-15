@@ -1794,8 +1794,6 @@
 			"subheading": "Carris Metropolitana operating areas"
 		},
 		"Review2025GroupMunicipality": {
-			"heading": "Municipalities",
-			"subheading": "Evolution of operations by municipality in 2025",
 			"filter": {
 				"all": "All",
 				"area1": "Area 1",
@@ -1803,7 +1801,9 @@
 				"area3": "Area 3",
 				"area4": "Area 4",
 				"placeholder": "Filter by area"
-			}
+			},
+			"heading": "Municipalities",
+			"subheading": "Evolution of operations by municipality in 2025"
 		},
 		"Review2025GroupTerminal": {
 			"heading": "Terminals",
