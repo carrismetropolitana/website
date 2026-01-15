@@ -12,12 +12,12 @@ import { useMemo } from 'react';
 import cardStyles from '../Review2025Card/styles.module.css';
 import styles from './styles.module.css';
 
-import { Review2025Card } from '../_data/cards';
+import { Review2025CardSchema } from '../_data/cards';
 
 /* * */
 
 interface Props {
-	cardData: Review2025Card
+	cardData: Review2025CardSchema
 	isOpen: boolean
 }
 

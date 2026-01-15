@@ -30,7 +30,7 @@ export const Review2025BadgeToIcon: Record<typeof Review2025Badge[number], keyof
 
 type BadgeState = 'active' | 'hidden' | 'inactive';
 
-export interface Review2025Card {
+export interface Review2025CardSchema {
 	_group: string
 	_group_title?: string
 	area?: 1 | 2 | 3 | 4
@@ -46,24 +46,24 @@ export interface Review2025Card {
 		TRIPS_TOTAL: BadgeState
 	}
 	color: string
-	content: Review2025CardContentGroup[]
+	content: Review2025CardSchemaContentGroup[]
 	description: string
 	title: string
 }
 
-export interface Review2025CardContentGroup {
-	items: (Review2025CardContentItemBadge | Review2025CardContentItemLine)[]
+export interface Review2025CardSchemaContentGroup {
+	items: (Review2025CardSchemaContentItemBadge | Review2025CardSchemaContentItemLine)[]
 	title?: string
 }
 
-export interface Review2025CardContentItemBadge {
+export interface Review2025CardSchemaContentItemBadge {
 	badge: typeof Review2025Badge[number]
 	description: string
 	type: 'badge'
 	value: string
 }
 
-export interface Review2025CardContentItemLine {
+export interface Review2025CardSchemaContentItemLine {
 	line_id: number
 	type: 'lines'
 }
@@ -116,7 +116,7 @@ const terminalBadges: Record<typeof Review2025Badge[number], BadgeState> = {
 
 //
 // AML Data
-export const amlData: Review2025Card[] = [
+export const amlData: Review2025CardSchema[] = [
 	//
 	// Area Metropolitana de Lisboa
 
@@ -209,7 +209,7 @@ export const amlData: Review2025Card[] = [
 
 //
 // Area Data
-export const areaData: Review2025Card[] = [
+export const areaData: Review2025CardSchema[] = [
 	{
 		_group: 'por áreas',
 		badges: areaBadges,
@@ -306,7 +306,7 @@ export const areaData: Review2025Card[] = [
 
 //
 // Municipality Data
-export const municipalityData: Review2025Card[] = [
+export const municipalityData: Review2025CardSchema[] = [
 	{
 		_group: 'por município',
 		area: 1,
@@ -761,7 +761,7 @@ export const municipalityData: Review2025Card[] = [
 
 //
 // Terminal Data
-export const terminalsData: Review2025Card[] = [
+export const terminalsData: Review2025CardSchema[] = [
 	{
 		_group: 'por terminal',
 		badges: terminalBadges,

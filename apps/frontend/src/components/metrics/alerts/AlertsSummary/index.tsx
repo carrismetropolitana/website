@@ -24,7 +24,7 @@ export function AlertsSummary({ data }: { data?: AlertsSummaryType }) {
 	const summaryCards = [
 		{
 			description: t('total_alerts'),
-			icon: <AlertCauseIcon cause={AlertCause.OTHER_CAUSE} className={styles.cardIcon} size="lg" />,
+			icon: <AlertCauseIcon cause={AlertCause.ACCIDENT} className={styles.cardIcon} size="lg" />,
 			title: data?.total_alerts ? data.total_alerts.toLocaleString() : '-',
 		},
 		{

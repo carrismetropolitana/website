@@ -1,18 +1,17 @@
 'use client';
 /* * */
 
-import { Space } from '@mantine/core';
 import { IconCaretLeftFilled } from '@tabler/icons-react';
 
 import styles from './styles.module.css';
 
-import { Review2025BadgeToIcon, Review2025Card } from '../_data/cards';
+import { Review2025BadgeToIcon, Review2025CardSchema } from '../_data/cards';
 import * as Icons from '../_data/icons';
 
 /* * */
 
 interface Props {
-	cardData: Review2025Card
+	cardData: Review2025CardSchema
 	isOpen: boolean
 	onToggle: () => void
 }

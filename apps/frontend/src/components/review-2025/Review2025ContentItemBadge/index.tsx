@@ -2,12 +2,12 @@
 
 import styles from './styles.module.css';
 
-import { Review2025BadgeToIcon, Review2025CardContentItemBadge } from '../_data/cards';
+import { Review2025BadgeToIcon, Review2025CardSchemaContentItemBadge } from '../_data/cards';
 import * as Icons from '../_data/icons';
 
 /* * */
 
-export default function Review2025ContentItemBadge({ item }: { item: Review2025CardContentItemBadge }) {
+export default function Review2025ContentItemBadge({ item }: { item: Review2025CardSchemaContentItemBadge }) {
 	const IconComponent = Icons[Review2025BadgeToIcon[item.badge]];
 
 	if (!IconComponent) {

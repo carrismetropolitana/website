@@ -6,14 +6,14 @@ import { useState } from 'react';
 
 import styles from './styles.module.css';
 
-import { Review2025Card } from '../_data/cards';
+import { Review2025CardSchema } from '../_data/cards';
 import { Review2025CardContent } from '../Review2025CardContent';
 import { Review2025CardFooter } from '../Review2025CardFooter';
 import { Review2025CardHeader } from '../Review2025CardHeader';
 
 /* * */
 
-export default function Review2025Card({ data }: { data: Review2025Card }) {
+export default function Review2025Card({ data }: { data: Review2025CardSchema }) {
 	//
 	// A. Setup variables
 
