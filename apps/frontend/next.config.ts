@@ -134,6 +134,7 @@ const nextConfig: NextConfig = {
 			{ destination: '/survey', permanent: true, source: '/inquerito' },
 
 			{ destination: '/viagem-2024', permanent: true, source: '/viagem2024' },
+			{ destination: '/retrospectiva-2025', permanent: true, source: '/retroespectiva-2025' },
 
 			/* * */
 			/* SCHOOLS */
