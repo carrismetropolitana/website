@@ -1800,7 +1800,10 @@
 				"area2": "Area 2",
 				"area3": "Area 3",
 				"area4": "Area 4",
-				"placeholder": "Filter by area"
+				"placeholder": "Filter by area",
+				"search": {
+					"placeholder": "Search by municipality"
+				}
 			},
 			"heading": "Municipalities",
 			"subheading": "Evolution of operations by municipality in 2025"

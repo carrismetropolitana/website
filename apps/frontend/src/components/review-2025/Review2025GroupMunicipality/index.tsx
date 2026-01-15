@@ -6,8 +6,8 @@ import { Grid } from '@/components/layout/Grid';
 import { Section } from '@/components/layout/Section';
 import { Surface } from '@/components/layout/Surface';
 import { municipalityData } from '@/components/review-2025/_data/cards';
-import { Select } from '@mantine/core';
-import { IconFilter } from '@tabler/icons-react';
+import { Select, TextInput } from '@mantine/core';
+import { IconFilter, IconSearch } from '@tabler/icons-react';
 import { useTranslations } from 'next-intl';
 import { useMemo, useState } from 'react';
 
@@ -21,6 +21,7 @@ export function Review2025GroupMunicipality() {
 	//
 	const t = useTranslations('review-2025.Review2025GroupMunicipality');
 	const [selectedArea, setSelectedArea] = useState<null | string>(null);
+	const [searchText, setSearchText] = useState<string>('');
 
 	//
 	// A. Setup variables
@@ -37,16 +38,32 @@ export function Review2025GroupMunicipality() {
 		setSelectedArea(value === 'all' || value === null ? null : value);
 	};
 
+	const handleSearchTextChange = ({ currentTarget }) => {
+		setSearchText(currentTarget.value);
+	};
+
 	//
 	// B. Transform data
 
 	const filteredData = useMemo(() => {
-		if (!selectedArea) {
-			return municipalityData;
+		let filtered = municipalityData;
+
+		// Filter by area
+		if (selectedArea) {
+			const areaNumber = parseInt(selectedArea, 10) as 1 | 2 | 3 | 4;
+			filtered = filtered.filter(data => data.area === areaNumber);
 		}
-		const areaNumber = parseInt(selectedArea, 10) as 1 | 2 | 3 | 4;
-		return municipalityData.filter(data => data.area === areaNumber);
-	}, [selectedArea]);
+
+		// Filter by name (title)
+		if (searchText.trim()) {
+			const searchLower = searchText.toLowerCase().trim();
+			filtered = filtered.filter(data =>
+				data.title.toLowerCase().includes(searchLower),
+			);
+		}
+
+		return filtered;
+	}, [selectedArea, searchText]);
 
 	//
 	// C. Render components
@@ -69,6 +86,15 @@ export function Review2025GroupMunicipality() {
 					value={selectedArea}
 					w="100%"
 					clearable
+				/>
+				<TextInput
+					classNames={{ input: styles.searchInput }}
+					leftSection={<IconSearch size={20} />}
+					onChange={handleSearchTextChange}
+					placeholder={t('filter.search.placeholder')}
+					type="search"
+					value={searchText}
+					w="100%"
 				/>
 				<Grid columns="abc" withGap>
 					{filteredData.map((data, index) => <Review2025Card key={index} data={data} />)}

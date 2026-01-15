@@ -31,6 +31,14 @@
 
 
 /* * */
+/* FILTER */
+
+.searchInput {
+	width: 100%;
+	font-size: var(--font-size-subtitle);
+}
+
+/* * */
 /* LINKS GRID */
 
 .linksGrid {

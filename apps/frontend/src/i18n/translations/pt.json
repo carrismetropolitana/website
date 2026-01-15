@@ -1801,7 +1801,10 @@
 				"area2": "Área 2",
 				"area3": "Área 3",
 				"area4": "Área 4",
-				"placeholder": "Filtrar por área"
+				"placeholder": "Filtrar por área",
+				"search": {
+					"placeholder": "Pesquisar por município"
+				}
 			},
 			"heading": "Municípios",
 			"subheading": "Evolução da operação por município em 2025"
