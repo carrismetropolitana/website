@@ -15,7 +15,7 @@ export function Review2025Intro() {
 
 	return (
 		<Surface forceOverflow>
-			<Image alt={t('alt')} className={styles.image} src="/assets/review-2025/images/banner_mobile.png" />
+			<Image alt={t('alt')} className={styles.image} src="/assets/review-2025/banner_mobile.png" />
 		</Surface>
 	);
 }
