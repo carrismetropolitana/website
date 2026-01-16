@@ -18,10 +18,7 @@ export default function PayloadNews({ newsId }: { newsId: string }) {
 		setReady(true);
 	}, []);
 
-	const { data, error, isLoading } = useSWR(
-		newsId ? `/api/payload-news/${newsId}` : null,
-		fetcher,
-	);
+	const { data, error, isLoading } = useSWR(newsId ? `/api/payload-news/${newsId}` : null, fetcher);
 
 	if (!ready || isLoading) return <p>Loading…</p>;
 	if (error) return <p>Error loading content</p>;
