@@ -33,7 +33,7 @@
 .list {
 	display: flex;
 	flex-direction: row;
-	gap: var(--size-spacing-5);
+	gap: var(--size-spacing-10);
 	align-items: center;
 	justify-content: flex-start;
 }
@@ -51,16 +51,16 @@
 }
 
 .arrival.lg {
-	font-size: 22px;
+	font-size: 26px;
 }
 
 .realtime .arrival {
-	font-weight: var(--font-weight-bold);
+	font-weight: var(--font-weight-extrabold);
 	color: var(--color-realtime-100);
 }
 
 .scheduled .arrival {
-	font-weight: var(--font-weight-bold);
+	font-weight: var(--font-weight-extrabold);
 	font-variant-numeric: tabular-nums;
 	color: var(--color-system-text-100);
 }

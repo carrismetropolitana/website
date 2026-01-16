@@ -17,12 +17,14 @@
 
 .name[data-size='md'] {
 	font-size: 15px;
-	font-weight: var(--font-weight-bold);
+	font-weight: var(--font-weight-extrabold);
+	line-height: 1.3;
 }
 
 .name[data-size='lg'] {
 	font-size: 20px;
-	font-weight: var(--font-weight-bold);
+	font-weight: var(--font-weight-extrabold);
+	line-height: 1.3;
 }
 
 /* * */
