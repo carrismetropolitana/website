@@ -7,9 +7,6 @@ import { type NextConfig } from 'next';
 
 const nextConfig: NextConfig = {
 	basePath: '/admin',
-	output: 'standalone',
-	reactStrictMode: true,
-
 	images: {
 		remotePatterns: [
 			{
@@ -18,7 +15,10 @@ const nextConfig: NextConfig = {
 				protocol: 'https',
 			},
 		],
-	}
+	},
+	output: 'standalone',
+
+	reactStrictMode: true,
 };
 
 /* * */

@@ -24,6 +24,7 @@ import { ItalicFeatureClient as ItalicFeatureClient_e70f5e05f09f93e00b997edb1ef0
 import { GeneralStatusMessageLabel as GeneralStatusMessageLabel_52099edc813454fee3d5335f6a4aed35 } from '@/components/GeneralStatusMessageLabel/index'
 import { HomeSliderMessageLabel as HomeSliderMessageLabel_257d5701fbc8afd2f21de3c70108de6a } from '@/components/HomeSliderMessageLabel/index'
 import { S3ClientUploadHandler as S3ClientUploadHandler_f97aa6c64367fa259c5bc0567239ef24 } from '@payloadcms/storage-s3/client'
+import { CollectionCards as CollectionCards_ab83ff7e88da8d3530831f296ec4756a } from '@payloadcms/ui/rsc'
 
 export const importMap = {
   "@payloadcms/richtext-lexical/rsc#RscEntryLexicalCell": RscEntryLexicalCell_44fe37237e0ebf4470c9990d8cb7b07e,
@@ -51,5 +52,6 @@ export const importMap = {
   "@payloadcms/richtext-lexical/client#ItalicFeatureClient": ItalicFeatureClient_e70f5e05f09f93e00b997edb1ef0c864,
   "@/components/GeneralStatusMessageLabel/index#GeneralStatusMessageLabel": GeneralStatusMessageLabel_52099edc813454fee3d5335f6a4aed35,
   "@/components/HomeSliderMessageLabel/index#HomeSliderMessageLabel": HomeSliderMessageLabel_257d5701fbc8afd2f21de3c70108de6a,
-  "@payloadcms/storage-s3/client#S3ClientUploadHandler": S3ClientUploadHandler_f97aa6c64367fa259c5bc0567239ef24
+  "@payloadcms/storage-s3/client#S3ClientUploadHandler": S3ClientUploadHandler_f97aa6c64367fa259c5bc0567239ef24,
+  "@payloadcms/ui/rsc#CollectionCards": CollectionCards_ab83ff7e88da8d3530831f296ec4756a
 }

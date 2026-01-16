@@ -13,7 +13,7 @@ import { NewsListToolbar } from '@/components/news/NewsListToolbar';
 import { useNewsListContext } from '@/contexts/NewsList.context';
 import { useTranslations } from 'next-intl';
 
-import { PayloadDemo } from './PayloadDemo';
+import PayloadFullDemo from './PayloadDemo';
 
 /* * */
 
@@ -37,7 +37,8 @@ export function NewsList() {
 			</Section>
 
 			<Section withPadding>
-				<PayloadDemo />
+				<PayloadFullDemo newsId="682479b26cd7b7e99ba4bf6e" />
+
 			</Section>
 
 			<Section heading={t('heading')} withBottomDivider withGap withPadding>
