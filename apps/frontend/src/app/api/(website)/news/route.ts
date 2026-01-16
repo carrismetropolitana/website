@@ -1,23 +1,28 @@
-/* * */
+export async function GET(req: Request) {
+	const url = new URL(req.url);
+	const page = url.searchParams.get('page') ?? '1';
+	const limit = url.searchParams.get('limit') ?? '20';
 
-interface NewsData {
-	_id: number
-	content: string
-	cover_image_src: string
-	publish_date: string
-	title: string
-}
+	const payloadBaseUrl = process.env.PAYLOAD_BASE_URL ?? 'http://localhost:49001';
+	const payloadBasePath = process.env.PAYLOAD_BASE_PATH ?? '/admin';
 
-/* * */
+	const payloadUrl
+		= `${payloadBaseUrl}${payloadBasePath}/api/news?depth=0&sort=-publishedAt&page=${page}&limit=${limit}`;
 
-export async function GET() {
-	//
+	const res = await fetch(payloadUrl, {
+		headers: { Accept: 'application/json' },
+		next: { revalidate: 180 },
+	});
 
-	const allNewsData = await fetch('https://backoffice.carrismetropolitana.pt/?api=news').then(res => res.json());
+	if (!res.ok) {
+		const text = await res.text();
+		return Response.json({ error: text }, { status: res.status });
+	}
 
-	if (!allNewsData || !allNewsData.data) return Response.json([], { status: 500, statusText: 'Unable to fetch news data' });
+	const json = await res.json();
 
-	return Response.json(allNewsData.data as NewsData, { headers: { 'Cache-Control': 'public, max-age=180' } });
-
-	//
+	// return only docs so your context remains NewsData[]
+	return Response.json(json.docs ?? [], {
+		headers: { 'Cache-Control': 'public, max-age=180' },
+	});
 }

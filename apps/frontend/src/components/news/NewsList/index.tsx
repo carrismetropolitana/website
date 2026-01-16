@@ -10,10 +10,9 @@ import { Surface } from '@/components/layout/Surface';
 import { NewsCard } from '@/components/news/NewsCard';
 import { NewsCardSkeleton } from '@/components/news/NewsCardSkeleton';
 import { NewsListToolbar } from '@/components/news/NewsListToolbar';
+import PayloadNews from '@/components/payload-components';
 import { useNewsListContext } from '@/contexts/NewsList.context';
 import { useTranslations } from 'next-intl';
-
-import PayloadFullDemo from './PayloadDemo';
 
 /* * */
 
@@ -37,7 +36,7 @@ export function NewsList() {
 			</Section>
 
 			<Section withPadding>
-				<PayloadFullDemo newsId="682479b26cd7b7e99ba4bf6e" />
+				<PayloadNews newsId="682479b26cd7b7e99ba4bf6e" />
 
 			</Section>
 

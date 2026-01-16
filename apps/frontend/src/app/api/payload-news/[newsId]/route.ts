@@ -2,20 +2,19 @@ import { NextResponse } from 'next/server';
 
 export async function GET(
 	_req: Request,
-	{ params }: { params: { newsId: string } },
+	{ params }: { params: Promise<{ newsId: string }> },
 ) {
 	try {
-		const { newsId } = params;
+		const { newsId } = await params;
 
 		const payloadUrl
 			= `http://localhost:49001/admin/api/news/${newsId}?depth=2&draft=false&trash=false`;
 
 		const res = await fetch(payloadUrl, {
+			cache: 'no-store',
 			headers: {
 				Accept: 'application/json',
 			},
-			// optional: avoid weird caching during dev
-			cache: 'no-store',
 		});
 
 		if (!res.ok) {

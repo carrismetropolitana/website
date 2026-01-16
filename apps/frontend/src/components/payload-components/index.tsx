@@ -11,7 +11,7 @@ const fetcher = async (url: string) => {
 	return res.json();
 };
 
-export default function PayloadFullDemo({ newsId }: { newsId: string }) {
+export default function PayloadNews({ newsId }: { newsId: string }) {
 	const [ready, setReady] = useState(false);
 
 	useEffect(() => {
