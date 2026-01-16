@@ -15,7 +15,6 @@ interface SelectStopsProps {
 	onSelectStopIds: (stopIds: string[]) => void
 	placeholder?: string
 	selectedStopIds: string[]
-	variant: 'default' | 'white'
 }
 
 /* * */
