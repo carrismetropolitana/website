@@ -75,7 +75,7 @@ export interface Review2025CardSchemaContentItemLine {
 // Area Badges
 const areaBadges: Record<typeof Review2025Badge[number], BadgeState> = {
 	BRIDGES_TOTAL: 'inactive',
-	GROWTH: 'inactive',
+	GROWTH: 'active',
 	KMS_TOTAL: 'inactive',
 	LX_TOTAL: 'inactive',
 	PAX_TOTAL: 'active',
@@ -125,7 +125,7 @@ export const amlData: Review2025CardSchema[] = [
 		_group: 'área metropolitana de Lisboa',
 		badges: {
 			BRIDGES_TOTAL: 'inactive',
-			GROWTH: 'inactive',
+			GROWTH: 'active',
 			KMS_TOTAL: 'active',
 			LX_TOTAL: 'inactive',
 			PAX_TOTAL: 'active',
@@ -138,13 +138,14 @@ export const amlData: Review2025CardSchema[] = [
 		content: [
 			{
 				items: [
+					{ badge: 'GROWTH', description: 'percentagem de crescimento face a 2024', type: 'badge', value: '11.5%' },
 					{ badge: 'PAX_TOTAL', description: 'total de passageiros transportados', type: 'badge', value: '194 Milhões' },
 					{ badge: 'KMS_TOTAL', description: 'total de quilómetros percorridos', type: 'badge', value: '90 Milhões' },
 					{ badge: 'TRIPS_TOTAL', description: 'total de viagens realizadas', type: 'badge', value: '5,8 Milhões' },
 				],
 			},
 		],
-		description: 'Em 2025, fomos 13,3% maiores que no ano passado!',
+		description: 'Em 2025, fomos 11,47% maiores que no ano passado!',
 		title: 'área metropolitana de Lisboa',
 	},
 
@@ -174,7 +175,7 @@ export const amlData: Review2025CardSchema[] = [
 				],
 			},
 		],
-		description: '',
+		description: 'Em 2025, quebrámos 16 vezes o recorde de passageiros transportados num dia útil!',
 		title: 'Recordes',
 	},
 
@@ -218,6 +219,7 @@ export const areaData: Review2025CardSchema[] = [
 		content: [
 			{
 				items: [
+					{ badge: 'GROWTH', description: 'percentagem de crescimento face a 2024', type: 'badge', value: '11.9%' },
 					{ badge: 'PAX_TOTAL', description: 'total de passageiros transportados', type: 'badge', value: '66,1 Milhões' },
 					{ badge: 'TRIPS_TOTAL', description: 'total de viagens realizadas', type: 'badge', value: '1,9 Milhões' },
 				],
@@ -231,7 +233,7 @@ export const areaData: Review2025CardSchema[] = [
 				title: 'Recordes',
 			},
 		],
-		description: '',
+		description: 'Em 2025, na área 1, quebrámos 12 vezes o recorde de passageiros transportados num dia útil!',
 		subtitle: '(Amadora, Cascais, Lisboa, Oeiras, Sintra)',
 		title: 'área 1',
 	},
@@ -242,6 +244,7 @@ export const areaData: Review2025CardSchema[] = [
 		content: [
 			{
 				items: [
+					{ badge: 'GROWTH', description: 'percentagem de crescimento face a 2024', type: 'badge', value: '8.8%' },
 					{ badge: 'PAX_TOTAL', description: 'total de passageiros transportados', type: 'badge', value: '63,4 Milhões' },
 					{ badge: 'TRIPS_TOTAL', description: 'total de viagens realizadas', type: 'badge', value: '1,6 Milhões' },
 				],
@@ -255,7 +258,7 @@ export const areaData: Review2025CardSchema[] = [
 				title: 'Recordes',
 			},
 		],
-		description: '',
+		description: 'Em 2025, na área 2, quebrámos 12 vezes o recorde de passageiros transportados num dia útil!',
 		subtitle: '(Loures, Mafra, Odivelas, Vila Franca de Xira)',
 		title: 'área 2',
 	},
@@ -266,6 +269,7 @@ export const areaData: Review2025CardSchema[] = [
 		content: [
 			{
 				items: [
+					{ badge: 'GROWTH', description: 'percentagem de crescimento face a 2024', type: 'badge', value: '11.6%' },
 					{ badge: 'PAX_TOTAL', description: 'total de passageiros transportados', type: 'badge', value: '41,7 Milhões' },
 					{ badge: 'TRIPS_TOTAL', description: 'total de viagens realizadas', type: 'badge', value: '1,3 Milhões' },
 				],
@@ -279,7 +283,7 @@ export const areaData: Review2025CardSchema[] = [
 				title: 'Recordes',
 			},
 		],
-		description: '',
+		description: 'Em 2025, na área 3, quebrámos 11 vezes o recorde de passageiros transportados num dia útil!',
 		subtitle: '(Almada, Seixal, Sesimbra)',
 		title: 'área 3',
 	},
@@ -290,6 +294,7 @@ export const areaData: Review2025CardSchema[] = [
 		content: [
 			{
 				items: [
+					{ badge: 'GROWTH', description: 'percentagem de crescimento face a 2024', type: 'badge', value: '17.9%' },
 					{ badge: 'PAX_TOTAL', description: 'total de passageiros transportados', type: 'badge', value: '22,6 Milhões' },
 					{ badge: 'TRIPS_TOTAL', description: 'total de viagens realizadas', type: 'badge', value: '815,3 mil' },
 				],
@@ -303,7 +308,7 @@ export const areaData: Review2025CardSchema[] = [
 				title: 'Recordes',
 			},
 		],
-		description: '',
+		description: 'Em 2025, na área 4, quebrámos 15 vezes o recorde de passageiros transportados num dia útil!',
 		subtitle: '(Alcochete, Barreiro, Moita, Montijo, Palmela, Setúbal)',
 		title: 'área 4',
 	},
@@ -334,7 +339,7 @@ export const municipalityData: Review2025CardSchema[] = [
 				title: 'top 3 linhas',
 			},
 		],
-		description: '',
+		description: 'Em 2025, a Amadora foi 10,6% maior que no ano passado!',
 		title: 'Amadora',
 	},
 	{
@@ -359,7 +364,7 @@ export const municipalityData: Review2025CardSchema[] = [
 				title: 'top 3 linhas',
 			},
 		],
-		description: '',
+		description: 'Em 2025, Cascais foi 19% maior que no ano passado!',
 		title: 'Cascais',
 	},
 	{
@@ -384,7 +389,7 @@ export const municipalityData: Review2025CardSchema[] = [
 				title: 'top 3 linhas',
 			},
 		],
-		description: '',
+		description: 'Em 2025, Lisboa foi 10,1% maior que no ano passado!',
 		title: 'Lisboa',
 	},
 	{
@@ -409,7 +414,7 @@ export const municipalityData: Review2025CardSchema[] = [
 				title: 'top 3 linhas',
 			},
 		],
-		description: '',
+		description: 'Em 2025, Oeiras foi 10% maior que no ano passado!',
 		title: 'Oeiras',
 	},
 	{
@@ -434,7 +439,7 @@ export const municipalityData: Review2025CardSchema[] = [
 				title: 'top 3 linhas',
 			},
 		],
-		description: '',
+		description: 'Em 2025, Sintra foi 13,3% maior que no ano passado!',
 		title: 'Sintra',
 	},
 	{
@@ -459,7 +464,7 @@ export const municipalityData: Review2025CardSchema[] = [
 				title: 'top 3 linhas',
 			},
 		],
-		description: '',
+		description: 'Em 2025, Loures foi 7,3% maior que no ano passado!',
 		title: 'Loures',
 	},
 	{
@@ -484,7 +489,7 @@ export const municipalityData: Review2025CardSchema[] = [
 				title: 'top 3 linhas',
 			},
 		],
-		description: '',
+		description: 'Em 2025, Mafra foi 9,4% maior que no ano passado!',
 		title: 'Mafra',
 	},
 	{
@@ -509,7 +514,7 @@ export const municipalityData: Review2025CardSchema[] = [
 				title: 'top 3 linhas',
 			},
 		],
-		description: '',
+		description: 'Em 2025, Odivelas foi 7,8% maior que no ano passado!',
 		title: 'Odivelas',
 	},
 	{
@@ -534,7 +539,7 @@ export const municipalityData: Review2025CardSchema[] = [
 				title: 'top 3 linhas',
 			},
 		],
-		description: '',
+		description: 'Em 2025, Vila Franca de Xira foi 14,1% maior que no ano passado!',
 		title: 'Vila Franca de Xira',
 	},
 	{
@@ -559,7 +564,7 @@ export const municipalityData: Review2025CardSchema[] = [
 				title: 'top 3 linhas',
 			},
 		],
-		description: '',
+		description: 'Em 2025, Almada foi 10,4% maior que no ano passado!',
 		title: 'Almada',
 	},
 	{
@@ -584,7 +589,7 @@ export const municipalityData: Review2025CardSchema[] = [
 				title: 'top 3 linhas',
 			},
 		],
-		description: '',
+		description: 'Em 2025, o Seixal foi 12,3% maior que no ano passado!',
 		title: 'Seixal',
 	},
 	{
@@ -609,7 +614,7 @@ export const municipalityData: Review2025CardSchema[] = [
 				title: 'top 3 linhas',
 			},
 		],
-		description: '',
+		description: 'Em 2025, Sesimbra foi 7,5% maior que no ano passado!',
 		title: 'Sesimbra',
 	},
 	{
@@ -634,7 +639,7 @@ export const municipalityData: Review2025CardSchema[] = [
 				title: 'top 3 linhas',
 			},
 		],
-		description: '',
+		description: 'Em 2025, Alcochete foi 8,8% maior que no ano passado!',
 		title: 'Alcochete',
 	},
 	{
@@ -659,7 +664,7 @@ export const municipalityData: Review2025CardSchema[] = [
 				title: 'top 3 linhas',
 			},
 		],
-		description: '',
+		description: 'Em 2025, o Barreiro foi 13,8% maior que no ano passado!',
 		title: 'Barreiro',
 	},
 	{
@@ -684,7 +689,7 @@ export const municipalityData: Review2025CardSchema[] = [
 				title: 'top 3 linhas',
 			},
 		],
-		description: '',
+		description: 'Em 2025, a Moita foi 23,4% maior que no ano passado!',
 		title: 'Moita',
 	},
 	{
@@ -709,7 +714,7 @@ export const municipalityData: Review2025CardSchema[] = [
 				title: 'top 3 linhas',
 			},
 		],
-		description: '',
+		description: 'Em 2025, o Montijo foi 17,4% maior que no ano passado!',
 		title: 'Montijo',
 	},
 	{
@@ -734,7 +739,7 @@ export const municipalityData: Review2025CardSchema[] = [
 				title: 'top 3 linhas',
 			},
 		],
-		description: '',
+		description: 'Em 2025, Palmela foi 26,2% maior que no ano passado!',
 		title: 'Palmela',
 	},
 	{
@@ -759,7 +764,7 @@ export const municipalityData: Review2025CardSchema[] = [
 				title: 'top 3 linhas',
 			},
 		],
-		description: '',
+		description: 'Em 2025, Setúbal foi 15,5% maior que no ano passado!',
 		title: 'Setúbal',
 	},
 ];
