@@ -12,20 +12,25 @@ const fetcher = async (url: string) => {
 };
 
 export default function PayloadNews({ newsId }: { newsId: string }) {
-	const [ready, setReady] = useState(false);
+	//
 
-	useEffect(() => {
-		setReady(true);
-	}, []);
+	//
+	// A. Setup Variables
 
 	const { data, error, isLoading } = useSWR(newsId ? `/api/payload-news/${newsId}` : null, fetcher);
 
-	if (!ready || isLoading) return <p>Loading…</p>;
-	if (error) return <p>Error loading content</p>;
-	if (!data) return <p>No content found</p>;
+	//
+	// B. Transform Data
 
 	const page = data.doc ?? data;
 	const { body, layout, summary, title } = page;
+
+	//
+	// C. Render Components
+
+	if (isLoading) return <p>Loading…</p>;
+	if (error) return <p>Error loading content</p>;
+	if (!data) return <p>No content found</p>;
 
 	return (
 		<div style={{ border: '2px dashed #aaa', marginTop: 32, padding: 24 }}>
@@ -55,4 +60,6 @@ export default function PayloadNews({ newsId }: { newsId: string }) {
 			</details>
 		</div>
 	);
+
+	//
 }

@@ -58,7 +58,7 @@ export const NewsListContextProvider = ({ children }) => {
 	// B. Fetch data
 
 	const { data: allNewsData, isLoading: allNewsLoading } = useSWR<NewsData[], Error>(`/api/news`, { refreshInterval: 900000 }); // 15 minutes
-
+	console.log(allNewsData);
 	//
 	// C. Transform data
 
@@ -82,7 +82,7 @@ export const NewsListContextProvider = ({ children }) => {
 
 		if (filterByDate) {
 			filterResult = filterResult.filter((newsItem) => {
-				const newsItemDate = DateTime.fromISO(newsItem.publish_date);
+				const newsItemDate = DateTime.fromISO(newsItem.published_at);
 				return newsItemDate.hasSame(DateTime.fromFormat(filterByDate, 'yyyy-MM-dd'), 'day');
 			});
 		}

@@ -6,6 +6,7 @@ export async function GET(_req: Request, { params }: { params: Promise<{ newsId:
 
 		const payloadBaseUrl = process.env.PAYLOAD_BASE_URL ?? 'http://localhost:49001';
 		const payloadBasePath = process.env.PAYLOAD_BASE_PATH ?? '/admin';
+
 		const payloadUrl = `${payloadBaseUrl}${payloadBasePath}/api/news/${newsId}?depth=2&draft=false&trash=false`;
 
 		const res = await fetch(payloadUrl, { cache: 'no-store', headers: { Accept: 'application/json' } });

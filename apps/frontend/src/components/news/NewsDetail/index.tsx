@@ -8,6 +8,7 @@ import { Surface } from '@/components/layout/Surface';
 import { NewsDetailContent } from '@/components/news/NewsDetailContent';
 import { NewsDetailHeader } from '@/components/news/NewsDetailHeader';
 import { NewsDetailSidebar } from '@/components/news/NewsDetailSidebar';
+import PayloadNews from '@/components/payload-components';
 import { NewsData } from '@/types/news.types';
 import { useEffect, useState } from 'react';
 import useSWR from 'swr';
@@ -59,11 +60,15 @@ export function NewsDetail({ newsId }) {
 
 			<NewsDetailHeader newsData={newsData} />
 
-			<Section withPadding>
+			{/* <Section withPadding>
 				<div className={styles.innerWrapper}>
 					{!isLoading && data && <NewsDetailContent content={data.content} />}
 					{!isLoading && data && <NewsDetailSidebar newsData={data} />}
 				</div>
+			</Section> */}
+
+			<Section withPadding>
+				<PayloadNews newsId={newsId} />
 			</Section>
 
 		</Surface>

@@ -59,7 +59,7 @@
 		}
 	},
 	"NewsCard": {
-		"publish_date": "{publishDate, date, long}"
+		"publish_date": "{published_at, date, dd/MM/yyyy}"
 	},
 	"Pips": {
 		"copy_url": "Copy URL",
@@ -1267,7 +1267,7 @@
 			"found_items_counter": "{count, plural, =0 {No news found.} one {Found # news item} other {Found # news}}"
 		},
 		"SinglePageHeader": {
-			"publish_date": "Posted in {value, date, long}"
+			"publish_date": "Posted in {published_at, date, dd/MM/yyyy}"
 		}
 	},
 	"notifications": {

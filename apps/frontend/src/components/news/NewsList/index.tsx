@@ -10,7 +10,6 @@ import { Surface } from '@/components/layout/Surface';
 import { NewsCard } from '@/components/news/NewsCard';
 import { NewsCardSkeleton } from '@/components/news/NewsCardSkeleton';
 import { NewsListToolbar } from '@/components/news/NewsListToolbar';
-import PayloadNews from '@/components/payload-components';
 import { useNewsListContext } from '@/contexts/NewsList.context';
 import { useTranslations } from 'next-intl';
 
@@ -35,11 +34,6 @@ export function NewsList() {
 				<BackButton href="/" />
 			</Section>
 
-			<Section withPadding>
-				<PayloadNews newsId="682479b26cd7b7e99ba4bf6e" />
-
-			</Section>
-
 			<Section heading={t('heading')} withBottomDivider withGap withPadding>
 				<NewsListToolbar />
 			</Section>
@@ -59,11 +53,15 @@ export function NewsList() {
 					<Grid columns="abcd" withGap>
 						{newsListContext.data.filtered.map(newsItem => (
 							<NewsCard
-								key={newsItem._id}
-								_id={newsItem._id}
-								coverImageSrc={newsItem.cover_image_src}
-								publishDate={newsItem.publish_date}
+								key={newsItem.id}
+								id={newsItem.id}
+								published_at={newsItem.published_at}
 								title={newsItem.title}
+								coverImageSrc={{
+									alt: newsItem.title,
+									thumbnailURL: newsItem.featured_image,
+									url: newsItem.featured_image,
+								}}
 							/>
 						))}
 					</Grid>

@@ -7,7 +7,7 @@ export async function GET(req: Request) {
 	const payloadBasePath = process.env.PAYLOAD_BASE_PATH ?? '/admin';
 
 	const payloadUrl
-		= `${payloadBaseUrl}${payloadBasePath}/api/news?depth=0&sort=-publishedAt&page=${page}&limit=${limit}`;
+		= `${payloadBaseUrl}${payloadBasePath}/api/news?depth=1&sort=-publishedAt&page=${page}&limit=${limit}`;
 
 	const res = await fetch(payloadUrl, {
 		headers: { Accept: 'application/json' },

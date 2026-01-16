@@ -9,16 +9,22 @@ import styles from './styles.module.css';
 
 /* * */
 
+interface CoverImageSrc {
+	alt?: string
+	thumbnailURL?: string
+	url?: string
+}
+
 interface NewsCardProps {
-	_id: string
-	coverImageSrc: string
-	publishDate: string
+	coverImageSrc?: CoverImageSrc
+	id: string
+	published_at: string
 	title: string
 }
 
 /* * */
 
-export function NewsCard({ _id, coverImageSrc, publishDate, title }: NewsCardProps) {
+export function NewsCard({ coverImageSrc, id, published_at, title }: NewsCardProps) {
 	//
 
 	//
@@ -26,15 +32,15 @@ export function NewsCard({ _id, coverImageSrc, publishDate, title }: NewsCardPro
 
 	const t = useTranslations('NewsCard');
 
-	const publishDateObject = DateTime.fromISO(publishDate).toJSDate();
+	const publishDateObject = DateTime.fromISO(published_at).toFormat('dd/MM/yyyy');
 
 	//
 	// B. Render components
 
 	return (
-		<Link className={styles.container} href={`/news/${_id}`}>
-			<Image alt={title} className={styles.coverImage} fallbackSrc="/assets/common/placeholder.png" src={coverImageSrc} />
-			<p className={styles.publishDate}>{t('publish_date', { publishDate: publishDateObject })}</p>
+		<Link className={styles.container} href={`news/${id}`}>
+			<Image alt={coverImageSrc.alt} className={styles.coverImage} fallbackSrc="/assets/common/placeholder.png" src={coverImageSrc.url} />
+			<p className={styles.publishDate}>{t('publish_date', { published_at: publishDateObject })}</p>
 			<p className={styles.title} dangerouslySetInnerHTML={{ __html: title || 'title' }} />
 		</Link>
 	);

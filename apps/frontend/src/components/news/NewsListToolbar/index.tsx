@@ -28,7 +28,7 @@ export function NewsListToolbar() {
 	// B. Transform data
 
 	const availableDates = useMemo(() => {
-		const formatedDates = newsListContext.data.raw.map(newsItem => DateTime.fromISO(newsItem.publish_date).toFormat('yyyyMMdd'));
+		const formatedDates = newsListContext.data.raw.map(newsItem => DateTime.fromISO(newsItem.published_at).toFormat('yyyyMMdd'));
 		return new Set(formatedDates);
 	}, [newsListContext.data.raw]);
 
