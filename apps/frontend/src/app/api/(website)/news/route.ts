@@ -21,7 +21,6 @@ export async function GET(req: Request) {
 
 	const json = await res.json();
 
-	// return only docs so your context remains NewsData[]
 	return Response.json(json.docs ?? [], {
 		headers: { 'Cache-Control': 'public, max-age=180' },
 	});
