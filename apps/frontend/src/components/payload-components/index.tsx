@@ -16,8 +16,6 @@ export default function PayloadNews({ data }: PayloadNewsProps) {
 
 	return (
 		<div style={{ border: '2px dashed #aaa', marginTop: 32, padding: 24 }}>
-			<h2>{data.title}</h2>
-			{data.summary && <h4 style={{ opacity: 0.8 }}>{data.summary}</h4>}
 
 			{data.body && (
 				<section style={{ marginTop: 24 }}>

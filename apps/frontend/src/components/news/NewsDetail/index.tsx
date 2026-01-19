@@ -8,7 +8,6 @@ import { Surface } from '@/components/layout/Surface';
 import { NewsDetailHeader } from '@/components/news/NewsDetailHeader';
 import PayloadNews from '@/components/payload-components';
 import { NewsData } from '@/types/news.types';
-import { Loader } from '@mantine/core';
 import useSWR from 'swr';
 
 import styles from './styles.module.css';
@@ -26,24 +25,27 @@ export function NewsDetail({ newsId }: { newsId: string }) {
 	//
 	// C. Render components
 
-	return isLoading
-		? <Loader size="lg" /> : (
-			<Surface>
+	if (isLoading) {
+		return <></>;
+	}
 
-				<Section withBottomDivider withPadding>
-					<BackButton />
-				</Section>
+	return (
+		<Surface>
 
-				<NewsDetailHeader newsData={newsData} />
+			<Section withBottomDivider withPadding>
+				<BackButton />
+			</Section>
 
-				<Section withPadding>
-					<div className={styles.innerWrapper}>
-						<PayloadNews data={newsData} />
-					</div>
-				</Section>
+			<NewsDetailHeader newsData={newsData} />
 
-			</Surface>
-		);
+			<Section withPadding>
+				<div className={styles.innerWrapper}>
+					<PayloadNews data={newsData} />
+				</div>
+			</Section>
+
+		</Surface>
+	);
 
 	//
 }
