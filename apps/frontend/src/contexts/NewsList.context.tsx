@@ -82,7 +82,7 @@ export const NewsListContextProvider = ({ children }) => {
 
 		if (filterByDate) {
 			filterResult = filterResult.filter((newsItem) => {
-				const newsItemDate = DateTime.fromISO(newsItem.published_at);
+				const newsItemDate = DateTime.fromISO(newsItem.publishedAt);
 				return newsItemDate.hasSame(DateTime.fromFormat(filterByDate, 'yyyy-MM-dd'), 'day');
 			});
 		}

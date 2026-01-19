@@ -2,11 +2,13 @@
 'use client';
 
 import { RichText as PayloadRichText } from '@payloadcms/richtext-lexical/react';
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import useSWR from 'swr';
 
 const fetcher = async (url: string) => {
 	const res = await fetch(url);
+
+	console.log('=======>', res);
 	if (!res.ok) throw new Error(`Fetch failed: ${res.status}`);
 	return res.json();
 };

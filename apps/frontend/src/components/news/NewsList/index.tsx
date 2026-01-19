@@ -55,7 +55,7 @@ export function NewsList() {
 							<NewsCard
 								key={newsItem.id}
 								id={newsItem.id}
-								published_at={newsItem.published_at}
+								publishedAt={newsItem.publishedAt}
 								title={newsItem.title}
 								coverImageSrc={{
 									alt: newsItem.title,

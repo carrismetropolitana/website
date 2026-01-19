@@ -18,13 +18,13 @@ interface CoverImageSrc {
 interface NewsCardProps {
 	coverImageSrc?: CoverImageSrc
 	id: string
-	published_at: string
+	publishedAt: string
 	title: string
 }
 
 /* * */
 
-export function NewsCard({ coverImageSrc, id, published_at, title }: NewsCardProps) {
+export function NewsCard({ coverImageSrc, id, publishedAt, title }: NewsCardProps) {
 	//
 
 	//
@@ -32,7 +32,7 @@ export function NewsCard({ coverImageSrc, id, published_at, title }: NewsCardPro
 
 	const t = useTranslations('NewsCard');
 
-	const publishDateObject = DateTime.fromISO(published_at).toFormat('dd/MM/yyyy');
+	const publishDateObject = DateTime.fromISO(publishedAt).toJSDate();
 
 	//
 	// B. Render components
@@ -41,7 +41,7 @@ export function NewsCard({ coverImageSrc, id, published_at, title }: NewsCardPro
 		<Link className={styles.container} href={`news/${id}`}>
 			<Image alt={coverImageSrc.alt} className={styles.coverImage} fallbackSrc="/assets/common/placeholder.png" src={coverImageSrc.url} />
 			<p className={styles.publishDate}>{t('publish_date', { published_at: publishDateObject })}</p>
-			<p className={styles.title} dangerouslySetInnerHTML={{ __html: title || 'title' }} />
+			<p className={styles.title}>{title}</p>
 		</Link>
 	);
 
