@@ -10,6 +10,7 @@ import sharp from 'sharp';
 
 /* * */
 
+import { Articles } from '@/schemas/Articles/collection';
 import { CaseStudies } from '@/schemas/CaseStudies/collection';
 import { KnowledgeBase } from '@/schemas/KnowledgeBase/collection';
 import { Media } from '@/schemas/Media/collection';
@@ -30,6 +31,7 @@ export default buildConfig({
 	admin: { user: 'users' },
 
 	collections: [
+		Articles,
 		CaseStudies,
 		KnowledgeBase,
 		Media,
