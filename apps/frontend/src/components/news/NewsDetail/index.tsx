@@ -5,74 +5,45 @@
 import { BackButton } from '@/components/common/BackButton';
 import { Section } from '@/components/layout/Section';
 import { Surface } from '@/components/layout/Surface';
-import { NewsDetailContent } from '@/components/news/NewsDetailContent';
 import { NewsDetailHeader } from '@/components/news/NewsDetailHeader';
-import { NewsDetailSidebar } from '@/components/news/NewsDetailSidebar';
 import PayloadNews from '@/components/payload-components';
 import { NewsData } from '@/types/news.types';
-import { useEffect, useState } from 'react';
+import { Loader } from '@mantine/core';
 import useSWR from 'swr';
 
 import styles from './styles.module.css';
 
 /* * */
 
-export function NewsDetail({ newsId }) {
+export function NewsDetail({ newsId }: { newsId: string }) {
 	//
 
 	//
 	// A. Fetch Data
 
-	const { data: newsData, isLoading } = useSWR(`/api/news/${newsId}`);
-	const [data, setData] = useState<NewsData>();
-
-	//
-	// B. Transform Data
-
-	// Give a unique ID to each heading in the content to be able
-	// to link to them from the sidebar
-
-	useEffect(() => {
-		if (!newsData) return;
-
-		const content = document.createElement('div');
-		content.innerHTML = newsData.content;
-
-		content.querySelectorAll('h2, h3').forEach((heading, index) => {
-			heading.id = `heading-${index}`;
-		});
-
-		const newData = newsData;
-		newData.content = content.innerHTML;
-
-		setData(newData);
-	}, [newsData]);
+	const { data: newsData, isLoading } = useSWR<NewsData>(`/api/payload-news/${newsId}`);
 
 	//
 	// C. Render components
 
-	return (
-		<Surface>
+	return isLoading
+		? <Loader size="lg" /> : (
+			<Surface>
 
-			<Section withBottomDivider withPadding>
-				<BackButton />
-			</Section>
+				<Section withBottomDivider withPadding>
+					<BackButton />
+				</Section>
 
-			<NewsDetailHeader newsData={newsData} />
+				<NewsDetailHeader newsData={newsData} />
 
-			{/* <Section withPadding>
-				<div className={styles.innerWrapper}>
-					{!isLoading && data && <NewsDetailContent content={data.content} />}
-					{!isLoading && data && <NewsDetailSidebar newsData={data} />}
-				</div>
-			</Section> */}
+				<Section withPadding>
+					<div className={styles.innerWrapper}>
+						<PayloadNews data={newsData} />
+					</div>
+				</Section>
 
-			<Section withPadding>
-				<PayloadNews newsId={newsId} />
-			</Section>
-
-		</Surface>
-	);
+			</Surface>
+		);
 
 	//
 }
