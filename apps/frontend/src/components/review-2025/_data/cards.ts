@@ -145,7 +145,7 @@ export const amlData: Review2025CardSchema[] = [
 				],
 			},
 		],
-		description: 'Em 2025, fomos 11,47% maiores que no ano passado!',
+		description: '',
 		title: 'área metropolitana de Lisboa',
 	},
 
@@ -205,7 +205,7 @@ export const amlData: Review2025CardSchema[] = [
 			},
 		],
 		description: '',
-		title: 'curiosidades',
+		title: 'Curiosidades',
 	},
 ];
 
@@ -327,7 +327,7 @@ export const municipalityData: Review2025CardSchema[] = [
 				items: [
 					{ badge: 'PAX_TOTAL', description: 'total de passageiros transportados', type: 'badge', value: '15,5 milhões' },
 					{ badge: 'TRIPS_TOTAL', description: 'total de viagens realizadas', type: 'badge', value: '835,6 mil' },
-					{ badge: 'GROWTH', description: 'percentagem de crescimento face a 2024', type: 'badge', value: '11%' },
+					{ badge: 'GROWTH', description: 'percentagem de crescimento face a 2024', type: 'badge', value: '10,6%' },
 				],
 			},
 			{
@@ -339,7 +339,7 @@ export const municipalityData: Review2025CardSchema[] = [
 				title: 'top 3 linhas',
 			},
 		],
-		description: 'Em 2025, a Amadora foi 10,6% maior que no ano passado!',
+		description: '',
 		title: 'Amadora',
 	},
 	{
@@ -352,7 +352,7 @@ export const municipalityData: Review2025CardSchema[] = [
 				items: [
 					{ badge: 'PAX_TOTAL', description: 'total de passageiros transportados', type: 'badge', value: '2,8 milhões' },
 					{ badge: 'TRIPS_TOTAL', description: 'total de viagens realizadas', type: 'badge', value: '308 mil' },
-					{ badge: 'GROWTH', description: 'percentagem de crescimento face a 2024', type: 'badge', value: '19%' },
+					{ badge: 'GROWTH', description: 'percentagem de crescimento face a 2024', type: 'badge', value: '19,3%' },
 				],
 			},
 			{
@@ -364,7 +364,7 @@ export const municipalityData: Review2025CardSchema[] = [
 				title: 'top 3 linhas',
 			},
 		],
-		description: 'Em 2025, Cascais foi 19% maior que no ano passado!',
+		description: '',
 		title: 'Cascais',
 	},
 	{
@@ -377,7 +377,7 @@ export const municipalityData: Review2025CardSchema[] = [
 				items: [
 					{ badge: 'PAX_TOTAL', description: 'total de passageiros transportados', type: 'badge', value: '20,4 milhões' },
 					{ badge: 'TRIPS_TOTAL', description: 'total de viagens realizadas', type: 'badge', value: '1,8 Milhões' },
-					{ badge: 'GROWTH', description: 'percentagem de crescimento face a 2024', type: 'badge', value: '10%' },
+					{ badge: 'GROWTH', description: 'percentagem de crescimento face a 2024', type: 'badge', value: '10,1%' },
 				],
 			},
 			{
@@ -389,7 +389,7 @@ export const municipalityData: Review2025CardSchema[] = [
 				title: 'top 3 linhas',
 			},
 		],
-		description: 'Em 2025, Lisboa foi 10,1% maior que no ano passado!',
+		description: '',
 		title: 'Lisboa',
 	},
 	{
@@ -414,7 +414,7 @@ export const municipalityData: Review2025CardSchema[] = [
 				title: 'top 3 linhas',
 			},
 		],
-		description: 'Em 2025, Oeiras foi 10% maior que no ano passado!',
+		description: '',
 		title: 'Oeiras',
 	},
 	{
@@ -427,7 +427,7 @@ export const municipalityData: Review2025CardSchema[] = [
 				items: [
 					{ badge: 'PAX_TOTAL', description: 'total de passageiros transportados', type: 'badge', value: '30,4 milhões' },
 					{ badge: 'TRIPS_TOTAL', description: 'total de viagens realizadas', type: 'badge', value: '1,4 Milhões' },
-					{ badge: 'GROWTH', description: 'percentagem de crescimento face a 2024', type: 'badge', value: '13%' },
+					{ badge: 'GROWTH', description: 'percentagem de crescimento face a 2024', type: 'badge', value: '13,3%' },
 				],
 			},
 			{
@@ -439,7 +439,7 @@ export const municipalityData: Review2025CardSchema[] = [
 				title: 'top 3 linhas',
 			},
 		],
-		description: 'Em 2025, Sintra foi 13,3% maior que no ano passado!',
+		description: '',
 		title: 'Sintra',
 	},
 	{
@@ -452,7 +452,7 @@ export const municipalityData: Review2025CardSchema[] = [
 				items: [
 					{ badge: 'PAX_TOTAL', description: 'total de passageiros transportados', type: 'badge', value: '23,5 milhões' },
 					{ badge: 'TRIPS_TOTAL', description: 'total de viagens realizadas', type: 'badge', value: '1 Milhão' },
-					{ badge: 'GROWTH', description: 'percentagem de crescimento face a 2024', type: 'badge', value: '7%' },
+					{ badge: 'GROWTH', description: 'percentagem de crescimento face a 2024', type: 'badge', value: '7,3%' },
 				],
 			},
 			{
@@ -464,7 +464,7 @@ export const municipalityData: Review2025CardSchema[] = [
 				title: 'top 3 linhas',
 			},
 		],
-		description: 'Em 2025, Loures foi 7,3% maior que no ano passado!',
+		description: '',
 		title: 'Loures',
 	},
 	{
@@ -477,7 +477,7 @@ export const municipalityData: Review2025CardSchema[] = [
 				items: [
 					{ badge: 'PAX_TOTAL', description: 'total de passageiros transportados', type: 'badge', value: '3,1 milhões' },
 					{ badge: 'TRIPS_TOTAL', description: 'total de viagens realizadas', type: 'badge', value: '207,1 mil' },
-					{ badge: 'GROWTH', description: 'percentagem de crescimento face a 2024', type: 'badge', value: '9%' },
+					{ badge: 'GROWTH', description: 'percentagem de crescimento face a 2024', type: 'badge', value: '9,4%' },
 				],
 			},
 			{
@@ -489,7 +489,7 @@ export const municipalityData: Review2025CardSchema[] = [
 				title: 'top 3 linhas',
 			},
 		],
-		description: 'Em 2025, Mafra foi 9,4% maior que no ano passado!',
+		description: '',
 		title: 'Mafra',
 	},
 	{
@@ -502,7 +502,7 @@ export const municipalityData: Review2025CardSchema[] = [
 				items: [
 					{ badge: 'PAX_TOTAL', description: 'total de passageiros transportados', type: 'badge', value: '16,3 milhões' },
 					{ badge: 'TRIPS_TOTAL', description: 'total de viagens realizadas', type: 'badge', value: '756,3 mil' },
-					{ badge: 'GROWTH', description: 'percentagem de crescimento face a 2024', type: 'badge', value: '8%' },
+					{ badge: 'GROWTH', description: 'percentagem de crescimento face a 2024', type: 'badge', value: '7,8%' },
 				],
 			},
 			{
@@ -514,7 +514,7 @@ export const municipalityData: Review2025CardSchema[] = [
 				title: 'top 3 linhas',
 			},
 		],
-		description: 'Em 2025, Odivelas foi 7,8% maior que no ano passado!',
+		description: '',
 		title: 'Odivelas',
 	},
 	{
@@ -527,7 +527,7 @@ export const municipalityData: Review2025CardSchema[] = [
 				items: [
 					{ badge: 'PAX_TOTAL', description: 'total de passageiros transportados', type: 'badge', value: '9 milhões' },
 					{ badge: 'TRIPS_TOTAL', description: 'total de viagens realizadas', type: 'badge', value: '373,6 mil' },
-					{ badge: 'GROWTH', description: 'percentagem de crescimento face a 2024', type: 'badge', value: '14%' },
+					{ badge: 'GROWTH', description: 'percentagem de crescimento face a 2024', type: 'badge', value: '14,1%' },
 				],
 			},
 			{
@@ -539,7 +539,7 @@ export const municipalityData: Review2025CardSchema[] = [
 				title: 'top 3 linhas',
 			},
 		],
-		description: 'Em 2025, Vila Franca de Xira foi 14,1% maior que no ano passado!',
+		description: '',
 		title: 'Vila Franca de Xira',
 	},
 	{
@@ -552,7 +552,7 @@ export const municipalityData: Review2025CardSchema[] = [
 				items: [
 					{ badge: 'PAX_TOTAL', description: 'total de passageiros transportados', type: 'badge', value: '19,5 milhões' },
 					{ badge: 'TRIPS_TOTAL', description: 'total de viagens realizadas', type: 'badge', value: '976,1 mil' },
-					{ badge: 'GROWTH', description: 'percentagem de crescimento face a 2024', type: 'badge', value: '11%' },
+					{ badge: 'GROWTH', description: 'percentagem de crescimento face a 2024', type: 'badge', value: '11,4%' },
 				],
 			},
 			{
@@ -564,7 +564,7 @@ export const municipalityData: Review2025CardSchema[] = [
 				title: 'top 3 linhas',
 			},
 		],
-		description: 'Em 2025, Almada foi 10,4% maior que no ano passado!',
+		description: '',
 		title: 'Almada',
 	},
 	{
@@ -577,7 +577,7 @@ export const municipalityData: Review2025CardSchema[] = [
 				items: [
 					{ badge: 'PAX_TOTAL', description: 'total de passageiros transportados', type: 'badge', value: '17,3 milhões' },
 					{ badge: 'TRIPS_TOTAL', description: 'total de viagens realizadas', type: 'badge', value: '776,9 mil' },
-					{ badge: 'GROWTH', description: 'percentagem de crescimento face a 2024', type: 'badge', value: '12%' },
+					{ badge: 'GROWTH', description: 'percentagem de crescimento face a 2024', type: 'badge', value: '12,3%' },
 				],
 			},
 			{
@@ -589,7 +589,7 @@ export const municipalityData: Review2025CardSchema[] = [
 				title: 'top 3 linhas',
 			},
 		],
-		description: 'Em 2025, o Seixal foi 12,3% maior que no ano passado!',
+		description: '',
 		title: 'Seixal',
 	},
 	{
@@ -602,7 +602,7 @@ export const municipalityData: Review2025CardSchema[] = [
 				items: [
 					{ badge: 'PAX_TOTAL', description: 'total de passageiros transportados', type: 'badge', value: '2,7 milhões' },
 					{ badge: 'TRIPS_TOTAL', description: 'total de viagens realizadas', type: 'badge', value: '212,9 mil' },
-					{ badge: 'GROWTH', description: 'percentagem de crescimento face a 2024', type: 'badge', value: '8%' },
+					{ badge: 'GROWTH', description: 'percentagem de crescimento face a 2024', type: 'badge', value: '7,5%' },
 				],
 			},
 			{
@@ -614,7 +614,7 @@ export const municipalityData: Review2025CardSchema[] = [
 				title: 'top 3 linhas',
 			},
 		],
-		description: 'Em 2025, Sesimbra foi 7,5% maior que no ano passado!',
+		description: '',
 		title: 'Sesimbra',
 	},
 	{
@@ -627,7 +627,7 @@ export const municipalityData: Review2025CardSchema[] = [
 				items: [
 					{ badge: 'PAX_TOTAL', description: 'total de passageiros transportados', type: 'badge', value: '1,3 milhões' },
 					{ badge: 'TRIPS_TOTAL', description: 'total de viagens realizadas', type: 'badge', value: '153,2 mil' },
-					{ badge: 'GROWTH', description: 'percentagem de crescimento face a 2024', type: 'badge', value: '9%' },
+					{ badge: 'GROWTH', description: 'percentagem de crescimento face a 2024', type: 'badge', value: '8,8%' },
 				],
 			},
 			{
@@ -639,7 +639,7 @@ export const municipalityData: Review2025CardSchema[] = [
 				title: 'top 3 linhas',
 			},
 		],
-		description: 'Em 2025, Alcochete foi 8,8% maior que no ano passado!',
+		description: '',
 		title: 'Alcochete',
 	},
 	{
@@ -652,7 +652,7 @@ export const municipalityData: Review2025CardSchema[] = [
 				items: [
 					{ badge: 'PAX_TOTAL', description: 'total de passageiros transportados', type: 'badge', value: '1,6 milhões' },
 					{ badge: 'TRIPS_TOTAL', description: 'total de viagens realizadas', type: 'badge', value: '173,1 mil' },
-					{ badge: 'GROWTH', description: 'percentagem de crescimento face a 2024', type: 'badge', value: '14%' },
+					{ badge: 'GROWTH', description: 'percentagem de crescimento face a 2024', type: 'badge', value: '13,8%' },
 				],
 			},
 			{
@@ -664,7 +664,7 @@ export const municipalityData: Review2025CardSchema[] = [
 				title: 'top 3 linhas',
 			},
 		],
-		description: 'Em 2025, o Barreiro foi 13,8% maior que no ano passado!',
+		description: '',
 		title: 'Barreiro',
 	},
 	{
@@ -677,7 +677,7 @@ export const municipalityData: Review2025CardSchema[] = [
 				items: [
 					{ badge: 'PAX_TOTAL', description: 'total de passageiros transportados', type: 'badge', value: '3,2 milhões' },
 					{ badge: 'TRIPS_TOTAL', description: 'total de viagens realizadas', type: 'badge', value: '150,6 mil' },
-					{ badge: 'GROWTH', description: 'percentagem de crescimento face a 2024', type: 'badge', value: '23%' },
+					{ badge: 'GROWTH', description: 'percentagem de crescimento face a 2024', type: 'badge', value: '23,4%' },
 				],
 			},
 			{
@@ -689,7 +689,7 @@ export const municipalityData: Review2025CardSchema[] = [
 				title: 'top 3 linhas',
 			},
 		],
-		description: 'Em 2025, a Moita foi 23,4% maior que no ano passado!',
+		description: '',
 		title: 'Moita',
 	},
 	{
@@ -702,7 +702,7 @@ export const municipalityData: Review2025CardSchema[] = [
 				items: [
 					{ badge: 'PAX_TOTAL', description: 'total de passageiros transportados', type: 'badge', value: '3,3 milhões' },
 					{ badge: 'TRIPS_TOTAL', description: 'total de viagens realizadas', type: 'badge', value: '227,7 mil' },
-					{ badge: 'GROWTH', description: 'percentagem de crescimento face a 2024', type: 'badge', value: '17%' },
+					{ badge: 'GROWTH', description: 'percentagem de crescimento face a 2024', type: 'badge', value: '17,4%' },
 				],
 			},
 			{
@@ -714,7 +714,7 @@ export const municipalityData: Review2025CardSchema[] = [
 				title: 'top 3 linhas',
 			},
 		],
-		description: 'Em 2025, o Montijo foi 17,4% maior que no ano passado!',
+		description: '',
 		title: 'Montijo',
 	},
 	{
@@ -727,7 +727,7 @@ export const municipalityData: Review2025CardSchema[] = [
 				items: [
 					{ badge: 'PAX_TOTAL', description: 'total de passageiros transportados', type: 'badge', value: '1,8 milhões' },
 					{ badge: 'TRIPS_TOTAL', description: 'total de viagens realizadas', type: 'badge', value: '200 mil' },
-					{ badge: 'GROWTH', description: 'percentagem de crescimento face a 2024', type: 'badge', value: '26%' },
+					{ badge: 'GROWTH', description: 'percentagem de crescimento face a 2024', type: 'badge', value: '26,2%' },
 				],
 			},
 			{
@@ -739,7 +739,7 @@ export const municipalityData: Review2025CardSchema[] = [
 				title: 'top 3 linhas',
 			},
 		],
-		description: 'Em 2025, Palmela foi 26,2% maior que no ano passado!',
+		description: '',
 		title: 'Palmela',
 	},
 	{
@@ -752,7 +752,7 @@ export const municipalityData: Review2025CardSchema[] = [
 				items: [
 					{ badge: 'PAX_TOTAL', description: 'total de passageiros transportados', type: 'badge', value: '8,4 milhões' },
 					{ badge: 'TRIPS_TOTAL', description: 'total de viagens realizadas', type: 'badge', value: '474,2 mil' },
-					{ badge: 'GROWTH', description: 'percentagem de crescimento face a 2024', type: 'badge', value: '16%' },
+					{ badge: 'GROWTH', description: 'percentagem de crescimento face a 2024', type: 'badge', value: '15,5%' },
 				],
 			},
 			{
@@ -764,7 +764,7 @@ export const municipalityData: Review2025CardSchema[] = [
 				title: 'top 3 linhas',
 			},
 		],
-		description: 'Em 2025, Setúbal foi 15,5% maior que no ano passado!',
+		description: '',
 		title: 'Setúbal',
 	},
 ];
@@ -780,7 +780,7 @@ export const terminalsData: Review2025CardSchema[] = [
 			{
 				items: [
 					{ badge: 'PAX_TOTAL', description: 'total de passageiros transportados', type: 'badge', value: '2,6 Milhões' },
-					{ badge: 'GROWTH', description: 'percentagem de crescimento face a 2024', type: 'badge', value: '36%' },
+					{ badge: 'GROWTH', description: 'percentagem de crescimento face a 2024', type: 'badge', value: '35,9%' },
 				],
 			},
 		],
@@ -795,7 +795,7 @@ export const terminalsData: Review2025CardSchema[] = [
 			{
 				items: [
 					{ badge: 'PAX_TOTAL', description: 'total de passageiros transportados', type: 'badge', value: '1,8 Milhões' },
-					{ badge: 'GROWTH', description: 'percentagem de crescimento face a 2024', type: 'badge', value: '27%' },
+					{ badge: 'GROWTH', description: 'percentagem de crescimento face a 2024', type: 'badge', value: '26,5%' },
 				],
 			},
 		],
@@ -810,7 +810,7 @@ export const terminalsData: Review2025CardSchema[] = [
 			{
 				items: [
 					{ badge: 'PAX_TOTAL', description: 'total de passageiros transportados', type: 'badge', value: '5,1 Milhões' },
-					{ badge: 'GROWTH', description: 'percentagem de crescimento face a 2024', type: 'badge', value: '23%' },
+					{ badge: 'GROWTH', description: 'percentagem de crescimento face a 2024', type: 'badge', value: '23,1%' },
 				],
 			},
 		],
@@ -825,7 +825,7 @@ export const terminalsData: Review2025CardSchema[] = [
 			{
 				items: [
 					{ badge: 'PAX_TOTAL', description: 'total de passageiros transportados', type: 'badge', value: '1,8 Milhões' },
-					{ badge: 'GROWTH', description: 'percentagem de crescimento face a 2024', type: 'badge', value: '20%' },
+					{ badge: 'GROWTH', description: 'percentagem de crescimento face a 2024', type: 'badge', value: '19,7%' },
 				],
 			},
 		],
@@ -855,7 +855,7 @@ export const terminalsData: Review2025CardSchema[] = [
 			{
 				items: [
 					{ badge: 'PAX_TOTAL', description: 'total de passageiros transportados', type: 'badge', value: '' },
-					{ badge: 'GROWTH', description: 'percentagem de crescimento face a 2024', type: 'badge', value: '11%' },
+					{ badge: 'GROWTH', description: 'percentagem de crescimento face a 2024', type: 'badge', value: '11,2%' },
 				],
 			},
 		],
@@ -885,7 +885,7 @@ export const terminalsData: Review2025CardSchema[] = [
 			{
 				items: [
 					{ badge: 'PAX_TOTAL', description: 'total de passageiros transportados', type: 'badge', value: '1,5 Milhões' },
-					{ badge: 'GROWTH', description: 'percentagem de crescimento face a 2024', type: 'badge', value: '9%' },
+					{ badge: 'GROWTH', description: 'percentagem de crescimento face a 2024', type: 'badge', value: '9,3%' },
 				],
 			},
 		],
@@ -900,7 +900,7 @@ export const terminalsData: Review2025CardSchema[] = [
 			{
 				items: [
 					{ badge: 'PAX_TOTAL', description: 'total de passageiros transportados', type: 'badge', value: '2,5 Milhões' },
-					{ badge: 'GROWTH', description: 'percentagem de crescimento face a 2024', type: 'badge', value: '7%' },
+					{ badge: 'GROWTH', description: 'percentagem de crescimento face a 2024', type: 'badge', value: '6,7%' },
 				],
 			},
 		],
@@ -915,7 +915,7 @@ export const terminalsData: Review2025CardSchema[] = [
 			{
 				items: [
 					{ badge: 'PAX_TOTAL', description: 'total de passageiros transportados', type: 'badge', value: '2 Milhões' },
-					{ badge: 'GROWTH', description: 'percentagem de crescimento face a 2024', type: 'badge', value: '7%' },
+					{ badge: 'GROWTH', description: 'percentagem de crescimento face a 2024', type: 'badge', value: '6,9%' },
 				],
 			},
 		],
