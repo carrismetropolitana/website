@@ -1094,7 +1094,7 @@
 					"title": "Área 4 | Alsa Todi"
 				}
 			},
-			"subheading": "O serviço de transporte da Carris Metropolitana é assegurado por 4 prestadores de serviço, cada um explorando a sua zona da Área Metropolitana de Lisboa, conforme a imagem seguinte. Por esta razão, a melhor forma de reaver o seu objeto é contactar o operador da área utilizada."
+			"subheading": "O serviço de transporte da Carris Metropolitana é assegurado por 4 prestadores de serviço, cada um explorando a sua zona da área metropolitana de Lisboa, conforme a imagem seguinte. Por esta razão, a melhor forma de reaver o seu objeto é contactar o operador da área utilizada."
 		}
 	},
 	"map": {
@@ -1220,7 +1220,7 @@
 			"complaints": "Reclamações",
 			"info_requests": "Pedidos de informação",
 			"main_value": "{value, number}",
-			"metropolitan_area": "Área Metropolitana de Lisboa",
+			"metropolitan_area": "área metropolitana de Lisboa",
 			"others": "Outros",
 			"others_disclaimer": "*perdidos e achados, sugestões e agradecimentos",
 			"total_passengers": "de passageiros totais do ano passado",
@@ -1787,8 +1787,8 @@
 			}
 		},
 		"Review2025GroupAML": {
-			"heading": "Área Metropolitana de Lisboa",
-			"subheading": "Evolução da operação na Área Metropolitana de Lisboa em 2025"
+			"heading": "área metropolitana de Lisboa",
+			"subheading": "Evolução da operação na área metropolitana de Lisboa em 2025"
 		},
 		"Review2025GroupArea": {
 			"heading": "Áreas",
