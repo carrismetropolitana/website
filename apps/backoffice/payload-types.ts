@@ -182,6 +182,7 @@ export interface News {
     };
     [k: string]: unknown;
   };
+  line_id?: string | null;
   is_featured?: boolean | null;
   topics?: (string | Topic)[] | null;
   featured_image?: (string | null) | Media;
@@ -347,6 +348,7 @@ export interface NewsSelect<T extends boolean = true> {
   title?: T;
   summary?: T;
   body?: T;
+  line_id?: T;
   is_featured?: T;
   topics?: T;
   featured_image?: T;

@@ -10,6 +10,7 @@ import sharp from 'sharp';
 
 /* * */
 
+import { MentionFeature } from '@/lexical/mentions/feature.server';
 import { CaseStudies } from '@/schemas/CaseStudies/collection';
 import { Media } from '@/schemas/Media/collection';
 import { News } from '@/schemas/News/collection';
@@ -37,7 +38,12 @@ export default buildConfig({
 
 	db: mongooseAdapter({ url: process.env.WEBSITEDB_URI || 'mongodb://placeholder:placeholder@placeholder:12345/placeholder' }),
 
-	editor: lexicalEditor(),
+	editor: lexicalEditor({
+		features: ({ defaultFeatures }) => [
+			...defaultFeatures,
+			MentionFeature(),
+		],
+	}),
 
 	email: nodemailerAdapter({
 		defaultFromAddress: process.env.EMAIL_FROM_ADDRESS ?? '',
