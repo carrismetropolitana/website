@@ -28,15 +28,9 @@ export default buildConfig({
 
 	admin: { user: 'users' },
 
-	collections: [
-		CaseStudies,
-		Media,
-		News,
-		Topics,
-		Users,
-	],
+	collections: [CaseStudies, Media, News, Topics, Users],
 
-	db: mongooseAdapter({ url: process.env.WEBSITEDB_URI || 'mongodb://placeholder:placeholder@placeholder:12345/placeholder' }),
+	db: mongooseAdapter({ url: process.env.WEBSITEDB_URI ?? 'mongodb://placeholder:placeholder@placeholder:12345/placeholder' }),
 
 	editor: lexicalEditor({
 		features: ({ defaultFeatures }) => [

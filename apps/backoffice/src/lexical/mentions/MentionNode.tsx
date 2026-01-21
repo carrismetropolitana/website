@@ -1,26 +1,34 @@
+/* * */
+
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import type { JSX } from 'react';
 
 import { DecoratorNode, type LexicalNode, type NodeKey } from '@payloadcms/richtext-lexical/lexical';
 import React, { lazy, Suspense } from 'react';
 
+/* * */
+
 const LazyLineBadge = lazy(async () => {
 	const mod = await import('@/components/LineBadge/index');
 	return { default: mod.LineBadge };
 });
 
+/* * */
+
 export class MentionNode extends DecoratorNode<JSX.Element> {
 	__id: string;
 	__label: string;
+	__mentionType: string;
 
-	constructor(id: string, label: string, key?: NodeKey) {
+	constructor(id: string, label: string, mentionType = 'line', key?: NodeKey) {
 		super(key);
 		this.__id = id;
 		this.__label = label;
+		this.__mentionType = mentionType;
 	}
 
 	static override clone(node: MentionNode) {
-		return new MentionNode(node.__id, node.__label, node.__key);
+		return new MentionNode(node.__id, node.__label, node.__mentionType, node.__key);
 	}
 
 	static override getType() {
@@ -28,7 +36,9 @@ export class MentionNode extends DecoratorNode<JSX.Element> {
 	}
 
 	static override importJSON(serialized: any) {
-		return new MentionNode(serialized.id, serialized.label);
+		// Backwards-compatible default for existing saved content.
+		const mentionType = serialized.mentionType ?? 'line';
+		return new MentionNode(serialized.id, serialized.label, mentionType);
 	}
 
 	override createDOM() {
@@ -59,6 +69,7 @@ export class MentionNode extends DecoratorNode<JSX.Element> {
 		return {
 			id: this.__id,
 			label: this.__label,
+			mentionType: this.__mentionType,
 			type: 'mention',
 			version: 1,
 		};
@@ -73,10 +84,16 @@ export class MentionNode extends DecoratorNode<JSX.Element> {
 	}
 }
 
-export function $createMentionNode(id: string, label: string) {
-	return new MentionNode(id, label);
+/* * */
+
+export function $createMentionNode(id: string, label: string, mentionType = 'line') {
+	return new MentionNode(id, label, mentionType);
 }
+
+/* * */
 
 export function $isMentionNode(node: LexicalNode): node is MentionNode {
 	return node instanceof MentionNode;
 }
+
+/* * */

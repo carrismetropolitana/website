@@ -2,7 +2,6 @@
 
 import { featuredImageField } from '@/fields/featured-image';
 import { isFeaturedField } from '@/fields/is-featured';
-import { lineIdField } from '@/fields/line-id';
 import { publishedAtField } from '@/fields/published-at';
 import { topicsField } from '@/fields/topics';
 import { updatedAtField } from '@/fields/updated-at';
@@ -40,7 +39,6 @@ export const News: CollectionConfig = {
 			required: true,
 			type: 'richText',
 		},
-		lineIdField,
 		isFeaturedField,
 		topicsField,
 		featuredImageField,

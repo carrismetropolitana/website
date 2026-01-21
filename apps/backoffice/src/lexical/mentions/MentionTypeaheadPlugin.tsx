@@ -1,28 +1,23 @@
 'use client';
-
+/* * */
 import type { Line } from '@carrismetropolitana/api-types/network';
 
 import { useLinesContext } from '@/contexts/Lines.context';
-import {
-	$createTextNode,
-	$getSelection,
-	$isRangeSelection,
-} from '@payloadcms/richtext-lexical/lexical';
+import { $createTextNode, $getSelection, $isRangeSelection } from '@payloadcms/richtext-lexical/lexical';
 import { useLexicalComposerContext } from '@payloadcms/richtext-lexical/lexical/react/LexicalComposerContext';
-import {
-	LexicalTypeaheadMenuPlugin,
-	MenuOption,
-	type MenuRenderFn,
-	type TriggerFn,
-} from '@payloadcms/richtext-lexical/lexical/react/LexicalTypeaheadMenuPlugin';
+import { LexicalTypeaheadMenuPlugin, MenuOption, type MenuRenderFn, type TriggerFn } from '@payloadcms/richtext-lexical/lexical/react/LexicalTypeaheadMenuPlugin';
 import React, { useMemo, useState } from 'react';
 import * as ReactDOM from 'react-dom';
 
 import { $createMentionNode } from './MentionNode';
 
+/* * */
+
 const MAX_RESULTS = 8;
 const TRIGGER = 'line:';
 const MAX_QUERY_LENGTH = 50;
+
+/* * */
 
 class MentionOption extends MenuOption {
 	line: Line;
@@ -37,9 +32,17 @@ function getOptionLabel(line: Line) {
 }
 
 export function MentionTypeaheadPlugin() {
+	//
+
+	//
+	// A. Setup Variables
+
 	const linesContext = useLinesContext();
 	const [editor] = useLexicalComposerContext();
 	const [queryString, setQueryString] = useState<null | string>(null);
+
+	//
+	// B. Transform Data
 
 	const options = useMemo(() => {
 		const q = (queryString ?? '').trim().toLowerCase();
@@ -55,18 +58,19 @@ export function MentionTypeaheadPlugin() {
 		return filtered.slice(0, MAX_RESULTS).map(line => new MentionOption(line));
 	}, [linesContext.data.lines, queryString]);
 
+	//
+	// C. Handle Actions
+
 	// Lexical's built-in `useBasicTypeaheadTriggerMatch` is intended for 1-char triggers (like '@').
 	// For multi-char triggers like 'line:', we implement our own trigger matcher.
 	const triggerFn: TriggerFn = (text) => {
 		const idx = text.lastIndexOf(TRIGGER);
 		if (idx === -1) return null;
 
-		// Only trigger at start-of-text or after whitespace
 		if (idx > 0 && !/\s/.test(text[idx - 1])) return null;
 
 		const matchingString = text.slice(idx + TRIGGER.length);
 
-		// If user already typed a space after line:, do not keep the menu open.
 		if (/\s/.test(matchingString)) return null;
 		if (matchingString.length > MAX_QUERY_LENGTH) return null;
 
@@ -76,6 +80,8 @@ export function MentionTypeaheadPlugin() {
 			replaceableString: TRIGGER + matchingString,
 		};
 	};
+	//
+	// D. Render Component
 
 	const menuRenderFn: MenuRenderFn<MentionOption> = (anchorElementRef, { options, selectedIndex, selectOptionAndCleanUp, setHighlightedIndex }, matchingString) => {
 		if (!anchorElementRef.current || options.length === 0) return null;
@@ -100,7 +106,6 @@ export function MentionTypeaheadPlugin() {
 								isSelected ? 'mention-typeahead__item--selected' : null,
 							].filter(Boolean).join(' ')}
 							onMouseDown={(e) => {
-								// Prevent editor from losing selection before we insert the node
 								e.preventDefault();
 								setHighlightedIndex(i);
 								selectOptionAndCleanUp(option);
@@ -157,5 +162,3 @@ export function MentionTypeaheadPlugin() {
 		/>
 	);
 }
-
-export default MentionTypeaheadPlugin;
