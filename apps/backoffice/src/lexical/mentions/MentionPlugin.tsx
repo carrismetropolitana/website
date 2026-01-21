@@ -3,6 +3,7 @@
 import { useLexicalComposerContext } from '@payloadcms/richtext-lexical/lexical/react/LexicalComposerContext';
 import { useEffect } from 'react';
 
+import { MentionTypeaheadPlugin } from './MentionTypeaheadPlugin';
 import { registerMentionTransform } from './registerTransform';
 
 export function MentionPlugin() {
@@ -12,7 +13,7 @@ export function MentionPlugin() {
 		return registerMentionTransform(editor);
 	}, [editor]);
 
-	return null;
+	return <MentionTypeaheadPlugin />;
 }
 
 export default MentionPlugin;

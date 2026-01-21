@@ -13,6 +13,7 @@ import styles from './styles.module.css';
 /* * */
 
 interface Props {
+	as?: 'div' | 'span'
 	color?: string
 	lineData?: Line
 	lineId?: string
@@ -29,7 +30,7 @@ const cx = classNames.bind(styles);
 
 /* * */
 
-export const LineBadge = ({ color, lineData, lineId, onClick, shortName, size = 'md', textColor, withAlertIcon = false }: Props) => {
+export const LineBadge = ({ as: asProp = 'div', color, lineData, lineId, onClick, shortName, size = 'md', textColor, withAlertIcon = false }: Props) => {
 	//
 
 	//
@@ -45,8 +46,10 @@ export const LineBadge = ({ color, lineData, lineId, onClick, shortName, size = 
 	//
 	// C. Render components
 
+	const Component = asProp;
+
 	return (
-		<div
+		<Component
 			className={cx({ badge: true, clickable: !!onClick, lg: size === 'lg', md: size === 'md' })}
 			onClick={onClick}
 			style={{ backgroundColor: color || lineData?.color || fetchedLineData?.color, color: textColor || lineData?.text_color || fetchedLineData?.text_color }}
@@ -57,7 +60,7 @@ export const LineBadge = ({ color, lineData, lineId, onClick, shortName, size = 
 					<IconInfoTriangleFilled size={12} />
 				</div>
 			)}
-		</div>
+		</Component>
 	);
 
 	//

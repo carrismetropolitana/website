@@ -2,6 +2,12 @@
 import type { JSX } from 'react';
 
 import { DecoratorNode, type LexicalNode, type NodeKey } from '@payloadcms/richtext-lexical/lexical';
+import React, { lazy, Suspense } from 'react';
+
+const LazyLineBadge = lazy(async () => {
+	const mod = await import('@/components/LineBadge/index');
+	return { default: mod.LineBadge };
+});
 
 export class MentionNode extends DecoratorNode<JSX.Element> {
 	__id: string;
@@ -32,9 +38,19 @@ export class MentionNode extends DecoratorNode<JSX.Element> {
 	}
 
 	override decorate() {
+		const href = `https://carrismetropolitana.pt/lines/${this.__id}`;
 		return (
 			<span className="mention" data-line-id={this.__id}>
-				@{this.__label}
+				<Suspense fallback={(
+					<a className="mention__link" href={href} rel="noreferrer noopener" target="_blank">
+						<span className="mention">line:{this.__label}</span>
+					</a>
+				)}
+				>
+					<a className="mention__link" href={href} rel="noreferrer noopener" target="_blank">
+						<LazyLineBadge as="span" lineId={this.__id} size="md" />
+					</a>
+				</Suspense>
 			</span>
 		);
 	}

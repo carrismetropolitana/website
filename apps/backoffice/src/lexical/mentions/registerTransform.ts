@@ -3,7 +3,9 @@ import { $createTextNode, type LexicalEditor, TextNode } from '@payloadcms/richt
 
 import { $createMentionNode } from './MentionNode';
 
-const REGEX = /@(\d+)/;
+// Only convert once the user "finishes" the mention (e.g. typing a space/punctuation).
+// This avoids converting after the first digit while the user is still typing.
+const REGEX = /line:(\d+)(?=[\s.,;:!?])/;
 
 export function registerMentionTransform(editor: LexicalEditor) {
 	return editor.registerNodeTransform(TextNode, (node) => {
@@ -16,7 +18,7 @@ export function registerMentionTransform(editor: LexicalEditor) {
 		const before = text.slice(0, match.index);
 		const after = text.slice(match.index + match[0].length);
 
-		const mention = $createMentionNode(id, `Line ${id}`);
+		const mention = $createMentionNode(id, id);
 
 		if (before) node.insertBefore($createTextNode(before));
 		node.replace(mention);

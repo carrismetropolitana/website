@@ -1,8 +1,60 @@
 .mention {
-	background: #e6f0ff;
-	color: #1d4ed8;
-	padding: 0 4px;
-	border-radius: 4px;
-	font-weight: 600;
-	line-height: 1.4;
+ border-radius: 999px;
+}
+
+.mention__link,
+.mention__link:visited,
+.mention__link:hover,
+.mention__link:active {
+	color: inherit;
+	text-decoration: none;
+}
+
+.mention__link {
+	display: inline-flex;
+	align-items: center;
+}
+
+.mention-typeahead {
+	background: #2d2d2d;
+	border: 1px solid rgba(0, 0, 0, 0.12);
+	border-radius: 10px;
+	box-shadow: 0 12px 28px rgba(0, 0, 0, 0.18);
+	display: flex;
+	flex-direction: column;
+	gap: 2px;
+	max-height: 280px;
+	overflow: auto;
+	padding: 6px;
+	width: min(520px, 80vw);
+}
+
+.mention-typeahead__item {
+	align-items: center;
+	border: 0;
+	border-radius: 8px;
+	cursor: pointer;
+	display: flex;
+	gap: 8px;
+	justify-content: flex-start;
+	padding: 8px 10px;
+	text-align: left;
+	background: transparent;
+	color: inherit;
+}
+
+.mention-typeahead__item--selected {
+	background: rgba(29, 78, 216, 0.08);
+}
+
+.mention-typeahead__label {
+	font-weight: 700;
+	white-space: nowrap;
+}
+
+.mention-typeahead__subtitle {
+	opacity: 0.7;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
 }
