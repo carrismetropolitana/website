@@ -58,12 +58,12 @@ export function useRenderLexicalNode() {
 
 		// Handle horizontal rule
 		if (nodeType === 'horizontalrule') {
-			return <hr />;
+			return <hr key={key} />;
 		}
 
 		// Handle text nodes
 		if (nodeType === 'text') {
-			return <Text format={node.format} text={node.text} />;
+			return <Text key={key} format={node.format} text={node.text} />;
 		}
 
 		// Handle links
