@@ -6,6 +6,7 @@ import { LineMention } from '@/components/payload-components/lineMention';
 import { List } from '@/components/payload-components/lists';
 import { ListItem } from '@/components/payload-components/lists/listItem';
 import { Paragraph } from '@/components/payload-components/paragraph';
+import { Text } from '@/components/payload-components/text';
 import { LexicalNode } from '@/types/lexical-node.types';
 import Link from 'next/link';
 import { type ReactNode } from 'react';
@@ -55,39 +56,14 @@ export function useRenderLexicalNode() {
 			return <LineMention key={key} id={node.id} label={node.label} mentionType={node.mentionType} />;
 		}
 
-		// Handle linebreak
+		// Handle horizontal rule
 		if (nodeType === 'horizontalrule') {
 			return <hr />;
 		}
 
 		// Handle text nodes
 		if (nodeType === 'text') {
-			let text: ReactNode = node.text || '';
-			const format = node.format || 0;
-
-			if (format & 16) {
-				text = <code key="code">{text}</code>;
-			}
-			else {
-				if (format & 1) {
-					// Bold
-					text = <strong key="bold">{text}</strong>;
-				}
-				if (format & 2) {
-					// Italic
-					text = <em key="italic">{text}</em>;
-				}
-				if (format & 4) {
-					// Strikethrough
-					text = <s key="strike">{text}</s>;
-				}
-				if (format & 8) {
-					// Underline
-					text = <u key="underline">{text}</u>;
-				}
-			}
-
-			return text;
+			return <Text format={node.format} text={node.text} />;
 		}
 
 		// Handle links
