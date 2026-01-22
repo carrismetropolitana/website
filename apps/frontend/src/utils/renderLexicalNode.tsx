@@ -55,6 +55,11 @@ export function useRenderLexicalNode() {
 			return <LineMention key={key} id={node.id} label={node.label} mentionType={node.mentionType} />;
 		}
 
+		// Handle linebreak
+		if (nodeType === 'horizontalrule') {
+			return <hr />;
+		}
+
 		// Handle text nodes
 		if (nodeType === 'text') {
 			let text: ReactNode = node.text || '';
@@ -82,7 +87,7 @@ export function useRenderLexicalNode() {
 				}
 			}
 
-			return <>{text}</>;
+			return text;
 		}
 
 		// Handle links
@@ -147,7 +152,7 @@ export function useRenderLexicalNode() {
 		}
 
 		if (node.text) {
-			return <>{node.text}</>;
+			return node.text;
 		}
 
 		return null;
