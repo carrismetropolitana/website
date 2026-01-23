@@ -3,12 +3,12 @@
 
 import { Heading } from '@/components/payload-components/heading';
 import { LineMention } from '@/components/payload-components/lineMention';
+import { Links } from '@/components/payload-components/links';
 import { List } from '@/components/payload-components/lists';
 import { ListItem } from '@/components/payload-components/lists/listItem';
 import { Paragraph } from '@/components/payload-components/paragraph';
 import { Text } from '@/components/payload-components/text';
 import { LexicalNode } from '@/types/lexical-node.types';
-import Link from 'next/link';
 import { type ReactNode } from 'react';
 
 /* * */
@@ -68,29 +68,7 @@ export function useRenderLexicalNode() {
 
 		// Handle links
 		if (nodeType === 'link') {
-			const url = node.url || '';
-			const linkType = node.fields?.linkType || 'custom';
-			const newTab = node.fields?.newTab || false;
-
-			let href = url;
-			if (linkType === 'internal' && node.fields?.doc) {
-				const relationTo = node.fields.doc.relationTo;
-				const slug = node.fields.doc.value?.slug;
-				if (relationTo && slug) {
-					href = `/${relationTo}/${slug}`;
-				}
-			}
-
-			return (
-				<Link
-					key={key}
-					href={href}
-					rel={newTab ? 'noreferrer noopener' : undefined}
-					target={newTab ? '_blank' : undefined}
-				>
-					{children.map((child, idx) => renderLexicalNode(child, idx))}
-				</Link>
-			);
+			return <Links key={key} children={children} fields={node.fields} url={node.url} />;
 		}
 
 		// Handle linebreak
