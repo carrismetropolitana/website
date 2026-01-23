@@ -14,7 +14,7 @@ import { $createMentionNode } from './MentionNode';
 
 /* * */
 
-const MAX_RESULTS = 8;
+const MAX_RESULTS = 50;
 const TRIGGER = 'line:';
 const MAX_QUERY_LENGTH = 50;
 
@@ -77,6 +77,7 @@ export function MentionTypeaheadPlugin() {
 
 		return { leadOffset: idx, matchingString, replaceableString: TRIGGER + matchingString };
 	};
+
 	//
 	// D. Render Component
 
@@ -132,14 +133,13 @@ export function MentionTypeaheadPlugin() {
 
 				editor.update(() => {
 					const selection = $getSelection();
+
 					if (!$isRangeSelection(selection)) return;
 
-					// Cursor offset within the text node at the time of selection.
 					const cursorOffset = selection.anchor.offset;
 					const text = textNodeContainingQuery.getTextContent();
-
-					// Find the 'line:' that starts this query (closest one before cursor).
 					const start = text.lastIndexOf(TRIGGER, Math.max(0, cursorOffset - 1));
+
 					if (start === -1) return;
 
 					const end = start + TRIGGER.length + matchingString.length;

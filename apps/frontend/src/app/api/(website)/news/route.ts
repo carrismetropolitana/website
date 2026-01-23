@@ -1,18 +1,23 @@
-export async function GET(req: Request) {
-	const url = new URL(req.url);
-	const page = url.searchParams.get('page') ?? '1';
-	const limit = url.searchParams.get('limit') ?? '20';
+export async function GET() {
+	//
+
+	//
+	// A. Setup variables
 
 	const payloadBaseUrl = process.env.PAYLOAD_BASE_URL ?? 'http://localhost:49001';
 	const payloadBasePath = process.env.PAYLOAD_BASE_PATH ?? '/admin';
+	const payloadUrl = `${payloadBaseUrl}${payloadBasePath}/api/news?depth=1&draft=false&trash=false&sort=-publishedAt`;
 
-	const payloadUrl
-		= `${payloadBaseUrl}${payloadBasePath}/api/news?depth=1&sort=-publishedAt&page=${page}&limit=${limit}`;
+	//
+	// B. Fetch data
 
 	const res = await fetch(payloadUrl, {
 		headers: { Accept: 'application/json' },
 		next: { revalidate: 180 },
 	});
+
+	//
+	// C. Transform Data
 
 	if (!res.ok) {
 		const text = await res.text();
@@ -21,7 +26,13 @@ export async function GET(req: Request) {
 
 	const json = await res.json();
 
-	return Response.json(json.docs ?? [], {
+	if (!json || !json.docs) {
+		return Response.json([], { status: 500, statusText: 'Unable to fetch news data' });
+	}
+
+	return Response.json(json.docs, {
 		headers: { 'Cache-Control': 'public, max-age=180' },
 	});
+
+	//
 }
