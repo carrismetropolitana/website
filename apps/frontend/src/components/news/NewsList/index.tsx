@@ -57,10 +57,10 @@ export function NewsList() {
 								id={newsItem.id}
 								publishedAt={newsItem.publishedAt}
 								title={newsItem.title}
-								coverImageSrc={{
-									alt: newsItem.title,
-									thumbnailURL: newsItem.featured_image,
-									url: newsItem.featured_image,
+								featuredImageSrc={{
+									filename: newsItem.featured_image?.filename,
+									thumbnailURL: newsItem.featured_image?.thumbnailURL,
+									url: newsItem.featured_image?.url,
 								}}
 							/>
 						))}

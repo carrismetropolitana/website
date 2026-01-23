@@ -9,14 +9,14 @@ import styles from './styles.module.css';
 
 /* * */
 
-interface CoverImageSrc {
-	alt?: string
+interface FeaturedImageSrc {
+	filename?: string
 	thumbnailURL?: string
 	url?: string
 }
 
 interface NewsCardProps {
-	coverImageSrc?: CoverImageSrc
+	featuredImageSrc?: FeaturedImageSrc
 	id: string
 	publishedAt: string
 	title: string
@@ -24,7 +24,7 @@ interface NewsCardProps {
 
 /* * */
 
-export function NewsCard({ coverImageSrc, id, publishedAt, title }: NewsCardProps) {
+export function NewsCard({ featuredImageSrc, id, publishedAt, title }: NewsCardProps) {
 	//
 
 	//
@@ -36,10 +36,10 @@ export function NewsCard({ coverImageSrc, id, publishedAt, title }: NewsCardProp
 
 	//
 	// B. Render components
-
+	console.log(featuredImageSrc);
 	return (
 		<Link className={styles.container} href={`news/${id}`}>
-			<Image alt={coverImageSrc.alt} className={styles.coverImage} fallbackSrc="/assets/common/placeholder.png" src={coverImageSrc.url} />
+			<Image alt={featuredImageSrc.filename} className={styles.coverImage} fallbackSrc="/assets/common/placeholder.png" src={featuredImageSrc.url} />
 			<p className={styles.publishDate}>{t('publish_date', { published_at: formattedDate })}</p>
 			<p className={styles.title}>{title}</p>
 		</Link>
