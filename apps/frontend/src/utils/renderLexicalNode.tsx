@@ -1,12 +1,14 @@
 'use client';
 /* * */
 
+import { Code } from '@/components/payload-components/code';
 import { Heading } from '@/components/payload-components/heading';
 import { LineMention } from '@/components/payload-components/lineMention';
 import { Links } from '@/components/payload-components/links';
 import { List } from '@/components/payload-components/lists';
 import { ListItem } from '@/components/payload-components/lists/listItem';
 import { Paragraph } from '@/components/payload-components/paragraph';
+import { Quote } from '@/components/payload-components/quote';
 import { Text } from '@/components/payload-components/text';
 import { LexicalNode } from '@/types/lexical-node.types';
 import { type ReactNode } from 'react';
@@ -78,22 +80,12 @@ export function useRenderLexicalNode() {
 
 		// Handle blockquote
 		if (nodeType === 'quote') {
-			return (
-				<blockquote key={key}>
-					{children.map((child, idx) => renderLexicalNode(child, idx))}
-				</blockquote>
-			);
+			return <Quote key={key} children={children} />;
 		}
 
 		// Handle code blocks
 		if (nodeType === 'code') {
-			return (
-				<pre key={key}>
-					<code>
-						{children.map((child, idx) => renderLexicalNode(child, idx))}
-					</code>
-				</pre>
-			);
+			return <Code key={key} children={children} />;
 		}
 
 		// Fallback: render children if any
