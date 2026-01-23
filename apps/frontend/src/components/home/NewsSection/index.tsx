@@ -39,9 +39,10 @@ export function NewsSection() {
 				id={slideItem.id}
 				publishedAt={slideItem.publishedAt}
 				title={slideItem.title}
-				coverImageSrc={{
-					alt: slideItem.title,
-					url: slideItem.featured_image,
+				featuredImageSrc={{
+					filename: slideItem.featured_image?.filename,
+					thumbnailURL: slideItem.featured_image?.thumbnailURL,
+					url: slideItem.featured_image?.url,
 				}}
 			/>
 		),

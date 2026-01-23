@@ -36,10 +36,9 @@ export function NewsCard({ featuredImageSrc, id, publishedAt, title }: NewsCardP
 
 	//
 	// B. Render components
-	console.log(featuredImageSrc);
 	return (
 		<Link className={styles.container} href={`news/${id}`}>
-			<Image alt={featuredImageSrc.filename} className={styles.coverImage} fallbackSrc="/assets/common/placeholder.png" src={featuredImageSrc.url} />
+			<Image alt={featuredImageSrc?.filename} className={styles.coverImage} fallbackSrc="/assets/common/placeholder.png" src={featuredImageSrc?.url} />
 			<p className={styles.publishDate}>{t('publish_date', { published_at: formattedDate })}</p>
 			<p className={styles.title}>{title}</p>
 		</Link>

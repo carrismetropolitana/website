@@ -57,11 +57,13 @@ export function NewsList() {
 								id={newsItem.id}
 								publishedAt={newsItem.publishedAt}
 								title={newsItem.title}
-								featuredImageSrc={{
-									filename: newsItem.featured_image?.filename,
-									thumbnailURL: newsItem.featured_image?.thumbnailURL,
-									url: newsItem.featured_image?.url,
-								}}
+								featuredImageSrc={
+									{
+										filename: newsItem.featured_image?.filename,
+										thumbnailURL: newsItem.featured_image?.thumbnailURL,
+										url: newsItem.featured_image?.url,
+									}
+								}
 							/>
 						))}
 					</Grid>
