@@ -2,6 +2,7 @@
 /* * */
 import type { Line } from '@carrismetropolitana/api-types/network';
 
+import { LineBadge } from '@/components/LineBadge';
 import { useLinesContext } from '@/contexts/Lines.context';
 import { $createTextNode, $getSelection, $isRangeSelection } from '@payloadcms/richtext-lexical/lexical';
 import { useLexicalComposerContext } from '@payloadcms/richtext-lexical/lexical/react/LexicalComposerContext';
@@ -74,11 +75,7 @@ export function MentionTypeaheadPlugin() {
 		if (/\s/.test(matchingString)) return null;
 		if (matchingString.length > MAX_QUERY_LENGTH) return null;
 
-		return {
-			leadOffset: idx,
-			matchingString,
-			replaceableString: TRIGGER + matchingString,
-		};
+		return { leadOffset: idx, matchingString, replaceableString: TRIGGER + matchingString };
 	};
 	//
 	// D. Render Component
@@ -91,27 +88,27 @@ export function MentionTypeaheadPlugin() {
 				{options.map((option, i) => {
 					const isSelected = selectedIndex === i;
 					const label = getOptionLabel(option.line);
-					const subtitle = option.line.long_name ? `— ${option.line.long_name}` : '';
+					const subtitle = option.line.long_name ? option.line.long_name : option.line.short_name;
 
 					return (
 						<button
 							key={option.key}
 							ref={el => option.setRefElement(el)}
 							aria-selected={isSelected}
+							className={['mention-typeahead__item', isSelected ? 'mention-typeahead__item--selected' : null].filter(Boolean).join(' ')}
 							onMouseEnter={() => setHighlightedIndex(i)}
 							role="option"
 							type="button"
-							className={[
-								'mention-typeahead__item',
-								isSelected ? 'mention-typeahead__item--selected' : null,
-							].filter(Boolean).join(' ')}
 							onMouseDown={(e) => {
 								e.preventDefault();
 								setHighlightedIndex(i);
 								selectOptionAndCleanUp(option);
 							}}
 						>
-							<span className="mention-typeahead__label">{TRIGGER}{label}</span>
+
+							<span className="mention-typeahead__label">
+								<LineBadge lineId={label} size="md" />
+							</span>
 							{subtitle ? <span className="mention-typeahead__subtitle">{subtitle}</span> : null}
 							{matchingString ? null : null}
 						</button>

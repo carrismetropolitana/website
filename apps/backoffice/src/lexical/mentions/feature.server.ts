@@ -6,13 +6,7 @@ import { MentionNode } from './MentionNode';
 export const MentionFeature = createServerFeature({
 	feature: () => ({
 		ClientFeature: '@/lexical/mentions/feature.client#MentionFeatureClient',
-
-		nodes: [
-			{
-				node: MentionNode,
-			},
-		],
+		nodes: [{ node: MentionNode }],
 	}),
-
 	key: 'mentions',
 });
