@@ -1,0 +1,68 @@
+/* * */
+/* TABLE */
+
+.table {
+  width: 100%;
+  table-layout: fixed;
+}
+
+.table th,
+.table td {
+  box-sizing: border-box;
+  justify-content: center;
+  width: 1%;
+  min-width: 120px;
+  padding: 8px 12px;
+  text-align: center;
+}
+
+.table th:first-child,
+.table td:first-child {
+  text-align: left;
+}
+
+.table tr {
+  height: 40px;
+}
+
+.cell {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  padding: 5px;
+}
+
+.cell.active {
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  margin: 0 auto;
+  font-weight: bold;
+  color: #fff;
+  background-color: var(--color-alerts-2);
+  border-radius: 50%;
+}
+
+/* * */
+/* SKELETON */
+
+.tableSkeleton {
+  width: 100%;
+  padding: 16px 0;
+}
+
+.skeletonRow {
+  display: flex;
+  align-items: center;
+  margin-bottom: 12px;
+}
+
+/* * */
+/* DESCRIPTION */
+
+.description {
+  font-size: 16px;
+	font-weight: var(--font-weight-semibold);
+}

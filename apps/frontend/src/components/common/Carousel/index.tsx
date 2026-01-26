@@ -29,7 +29,7 @@ export default function Component({ skeletonComponent, skeletonQty = 3, slides =
 	return (
 		<Carousel
 			classNames={{ container: styles.container, control: styles.control, controls: styles.controlsWrapper }}
-			emblaOptions={{ align: 'start', dragFree: true, skipSnaps: true }}
+			emblaOptions={{ align: 'start', dragFree: true }}
 			height="100%"
 			nextControlIcon={<IconArrowRight size={20} />}
 			plugins={[WheelGesturesPlugin()]}

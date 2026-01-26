@@ -2,13 +2,7 @@
 /* CONTAINER */
 
 .container {
-	width: 360px;
-}
-
-@media only screen and (max-width: 900px) {
-	.container {
-		width: 300px;
-	}
+	width: 100% !important;
 }
 
 /* * */

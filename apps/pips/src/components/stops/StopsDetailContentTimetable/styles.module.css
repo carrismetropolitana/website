@@ -8,9 +8,3 @@
 
 	/* padding: var(--size-spacing-15); */
 }
-
-@media (width < 1000px){
-	.container{
-		gap: var(--size-spacing-10);
-	}
-}

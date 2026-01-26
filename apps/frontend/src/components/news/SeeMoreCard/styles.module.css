@@ -1,0 +1,20 @@
+.container {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	height: 100%;
+	min-height: 280px;
+	background-color: var(--color-primary);
+	padding: 0 var(--size-spacing-20);
+	border-radius: 10px;
+
+    &:hover {
+        text-decoration: underline;
+    }
+}
+
+.title {
+	font-size: 1.2rem;
+	font-weight: 600;
+	color: var(--color-primary);
+}

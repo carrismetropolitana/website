@@ -7,9 +7,11 @@ import { type NextConfig } from 'next';
 
 const nextConfig: NextConfig = {
 	basePath: '/admin',
-	output: 'standalone',
-	reactStrictMode: true,
-
+	experimental: {
+		serverActions: {
+			bodySizeLimit: '4gb',
+		},
+	},
 	images: {
 		remotePatterns: [
 			{
@@ -18,7 +20,9 @@ const nextConfig: NextConfig = {
 				protocol: 'https',
 			},
 		],
-	}
+	},
+	output: 'standalone',
+	reactStrictMode: true,
 };
 
 /* * */

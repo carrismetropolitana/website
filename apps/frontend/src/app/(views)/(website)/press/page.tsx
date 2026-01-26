@@ -1,9 +1,9 @@
 /* * */
 
-import { AboutPage } from '@/components/about/AboutPage';
+import { PressPage } from '@/components/press/PressPage';
 
 /* * */
 
 export default function Page() {
-	return <AboutPage />;
+	return <PressPage />;
 }

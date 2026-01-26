@@ -114,4 +114,7 @@
 	.container.abcd {
 		grid-template-columns: 1fr;
 	}
+	.container.withGap {
+		gap: var(--size-spacing-10);
+	}
 }
