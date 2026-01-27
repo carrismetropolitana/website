@@ -1,4 +1,7 @@
+import { AccordionData } from './accordion.types';
+
 export interface NewsData {
+	accordion?: AccordionData
 	body: string
 	featured_image: {
 		filename: string

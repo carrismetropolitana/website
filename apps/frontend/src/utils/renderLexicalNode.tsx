@@ -1,8 +1,10 @@
 'use client';
 /* * */
 
+import { Accordion } from '@/components/payload-components/accordion';
 import { Code } from '@/components/payload-components/code';
 import { Heading } from '@/components/payload-components/heading';
+import { ImageComponent } from '@/components/payload-components/image';
 import { LineMention } from '@/components/payload-components/lineMention';
 import { Links } from '@/components/payload-components/links';
 import { List } from '@/components/payload-components/lists';
@@ -10,6 +12,7 @@ import { ListItem } from '@/components/payload-components/lists/listItem';
 import { Paragraph } from '@/components/payload-components/paragraph';
 import { Quote } from '@/components/payload-components/quote';
 import { Text } from '@/components/payload-components/text';
+import { AccordionData } from '@/types/accordion.types';
 import { LexicalNode } from '@/types/lexical-node.types';
 import { type ReactNode } from 'react';
 
@@ -86,6 +89,23 @@ export function useRenderLexicalNode() {
 		// Handle code blocks
 		if (nodeType === 'code') {
 			return <Code key={key} children={children} />;
+		}
+
+		// Handle Image block
+		if (nodeType === 'upload') {
+			const imageValue = node.value as { filename?: string, url?: string };
+			return <ImageComponent key={key} alt={imageValue.filename} src={imageValue.url} />;
+		}
+
+		// Handle accordion block
+		if (nodeType === 'accordion') {
+			// Payload blocks store field data in fields with the field name as key
+			// Since the accordionField is named 'accordion', the data is in fields.accordion
+			const accordionItems = (node.fields as { accordion?: AccordionData })?.accordion;
+			if (accordionItems && Array.isArray(accordionItems) && accordionItems.length > 0) {
+				return <Accordion key={key} items={accordionItems} />;
+			}
+			return null;
 		}
 
 		// Fallback: render children if any
