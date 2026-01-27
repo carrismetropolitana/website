@@ -96,7 +96,7 @@ export function useRenderLexicalNode() {
 			return <ImageComponent key={key} alt={imageValue.filename} height={imageValue.height} src={imageValue.url} width={imageValue.width} />;
 		}
 
-		// Handle accordion block (Payload blocks: type === 'block', fields.blockType, fields.accordion)
+		// Handle accordion block
 		if (nodeType === 'block' && node.fields?.blockType === 'accordion') {
 			const items = (node.fields?.accordion ?? []).map(i => ({ content: i.content ?? '', id: i.id ?? '', title: i.title ?? '' }));
 			return items.length ? <Accordion key={key} items={items} /> : null;

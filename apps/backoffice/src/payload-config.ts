@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 /* * */
 
 import { getPublicVariable } from '@carrismetropolitana/website-shared-settings';
@@ -11,14 +10,12 @@ import sharp from 'sharp';
 
 /* * */
 
-import { accordionField } from '@/fields/accordion';
 import { MentionFeature } from '@/lexical/mentions/feature.server';
 import { CaseStudies } from '@/schemas/CaseStudies/collection';
 import { Media } from '@/schemas/Media/collection';
 import { News } from '@/schemas/News/collection';
 import { Topics } from '@/schemas/Topics/collection';
 import { Users } from '@/schemas/Users/collection';
-import { BlocksFeature } from '@payloadcms/richtext-lexical';
 
 /* * */
 
@@ -36,29 +33,10 @@ export default buildConfig({
 	db: mongooseAdapter({ url: process.env.WEBSITEDB_URI ?? 'mongodb://placeholder:placeholder@placeholder:12345/placeholder' }),
 
 	editor: lexicalEditor({
-		features: ({ defaultFeatures }) => {
-			const blocksFeature = defaultFeatures.find(feature => feature.key === 'blocks');
-			const otherFeatures = defaultFeatures.filter(feature => feature.key !== 'blocks');
-
-			const existingBlocks = blocksFeature && 'blocks' in blocksFeature && Array.isArray((blocksFeature as { blocks: unknown[] }).blocks)
-				? (blocksFeature as { blocks: { fields: unknown[], slug: string }[] }).blocks
-				: [];
-
-			return [
-				...otherFeatures,
-				BlocksFeature({
-
-					blocks: [
-						...(existingBlocks as { fields: unknown[], slug: string }[]),
-						{
-							fields: [accordionField],
-							slug: 'accordion',
-						},
-					] as any,
-				}),
-				MentionFeature(),
-			];
-		},
+		features: ({ defaultFeatures }) => [
+			...defaultFeatures,
+			MentionFeature(),
+		],
 	}),
 
 	email: nodemailerAdapter({
