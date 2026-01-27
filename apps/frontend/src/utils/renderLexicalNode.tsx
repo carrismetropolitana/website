@@ -12,7 +12,6 @@ import { ListItem } from '@/components/payload-components/lists/listItem';
 import { Paragraph } from '@/components/payload-components/paragraph';
 import { Quote } from '@/components/payload-components/quote';
 import { Text } from '@/components/payload-components/text';
-import { AccordionData } from '@/types/accordion.types';
 import { LexicalNode } from '@/types/lexical-node.types';
 import { type ReactNode } from 'react';
 
@@ -93,19 +92,14 @@ export function useRenderLexicalNode() {
 
 		// Handle Image block
 		if (nodeType === 'upload') {
-			const imageValue = node.value as { filename?: string, url?: string };
-			return <ImageComponent key={key} alt={imageValue.filename} src={imageValue.url} />;
+			const imageValue = node.value as { filename?: string, height?: number, url?: string, width?: number };
+			return <ImageComponent key={key} alt={imageValue.filename} height={imageValue.height} src={imageValue.url} width={imageValue.width} />;
 		}
 
-		// Handle accordion block
-		if (nodeType === 'accordion') {
-			// Payload blocks store field data in fields with the field name as key
-			// Since the accordionField is named 'accordion', the data is in fields.accordion
-			const accordionItems = (node.fields as { accordion?: AccordionData })?.accordion;
-			if (accordionItems && Array.isArray(accordionItems) && accordionItems.length > 0) {
-				return <Accordion key={key} items={accordionItems} />;
-			}
-			return null;
+		// Handle accordion block (Payload blocks: type === 'block', fields.blockType, fields.accordion)
+		if (nodeType === 'block' && node.fields?.blockType === 'accordion') {
+			const items = (node.fields?.accordion ?? []).map(i => ({ content: i.content ?? '', id: i.id ?? '', title: i.title ?? '' }));
+			return items.length ? <Accordion key={key} items={items} /> : null;
 		}
 
 		// Fallback: render children if any

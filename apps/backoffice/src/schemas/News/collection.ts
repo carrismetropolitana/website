@@ -1,6 +1,5 @@
 /* * */
 
-import { accordionField } from '@/fields/accordion';
 import { featuredImageField } from '@/fields/featured-image';
 import { isFeaturedField } from '@/fields/is-featured';
 import { publishedAtField } from '@/fields/published-at';
@@ -45,7 +44,6 @@ export const News: CollectionConfig = {
 		featuredImageField,
 		publishedAtField,
 		updatedAtField,
-		accordionField,
 	],
 
 	labels: {

@@ -1,12 +1,16 @@
 'use client';
 /* * */
 
-import { AccordionData } from '@/types/accordion.types';
-
 /* * */
 
+interface AccordionItem {
+	content: string
+	id?: string
+	title: string
+}
+
 interface AccordionProps {
-	items: AccordionData
+	items: AccordionItem[]
 }
 
 /* * */
@@ -18,8 +22,8 @@ export function Accordion({ items }: AccordionProps) {
 
 	return (
 		<div>
-			{items.map(item => (
-				<details key={item.id} style={{ marginBottom: '1rem' }}>
+			{items.map((item, index) => (
+				<details key={item.id || index} style={{ marginBottom: '1rem' }}>
 					<summary style={{ cursor: 'pointer', fontWeight: 'bold', padding: '0.5rem 0' }}>
 						{item.title}
 					</summary>

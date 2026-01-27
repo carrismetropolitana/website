@@ -7,6 +7,8 @@ export interface LexicalNode {
 			id?: string
 			title?: string
 		}[]
+		blockName?: string
+		blockType?: string
 		doc?: {
 			relationTo?: string
 			value?: {
