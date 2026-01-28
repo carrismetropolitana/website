@@ -21,7 +21,7 @@ export function MetricsPage() {
 			<MetricsPageRecords />
 			<MetricsPageLines />
 			<MetricsPageService />
-			<MetricsPageAlerts />
+			{/* <MetricsPageAlerts /> */}
 			<MetricsPageComplaints />
 		</MetricsContextProvider>
 	);
