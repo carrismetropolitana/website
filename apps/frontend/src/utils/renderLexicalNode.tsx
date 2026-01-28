@@ -12,6 +12,7 @@ import { ListItem } from '@/components/payload-components/lists/listItem';
 import { Paragraph } from '@/components/payload-components/paragraph';
 import { Quote } from '@/components/payload-components/quote';
 import { Text } from '@/components/payload-components/text';
+import { AccordionItem } from '@/types/accordion.types';
 import { LexicalNode } from '@/types/lexical-node.types';
 import { type ReactNode } from 'react';
 
@@ -98,7 +99,7 @@ export function useRenderLexicalNode() {
 
 		// Handle accordion block
 		if (nodeType === 'block' && node.fields?.blockType === 'accordion') {
-			const items = (node.fields?.accordion ?? []).map(i => ({ content: i.content ?? '', id: i.id ?? '', title: i.title ?? '' }));
+			const items: AccordionItem[] = (node.fields?.accordion ?? []).map(item => ({ content: item.content ?? '', id: item.id ?? '', title: item.title ?? '' }));
 			return items.length ? <Accordion key={key} items={items} /> : null;
 		}
 
