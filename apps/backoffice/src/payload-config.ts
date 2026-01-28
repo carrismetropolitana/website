@@ -12,8 +12,10 @@ import sharp from 'sharp';
 
 import { MentionFeature } from '@/lexical/mention/feature.server';
 import { CaseStudies } from '@/schemas/CaseStudies/collection';
+import { KnowledgeBase } from '@/schemas/KnowledgeBase/collection';
 import { Media } from '@/schemas/Media/collection';
 import { News } from '@/schemas/News/collection';
+import { Notes } from '@/schemas/Notes/collection';
 import { Topics } from '@/schemas/Topics/collection';
 import { Users } from '@/schemas/Users/collection';
 

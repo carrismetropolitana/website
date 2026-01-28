@@ -9,13 +9,14 @@ import { useTranslations } from 'next-intl';
 /* * */
 
 interface Props {
+	label?: string
 	maxLines: number | string
 	onChangeMaxLines: (maxLines: number) => void
 }
 
 /* * */
 
-export function SelectMaxLines({ maxLines, onChangeMaxLines }: Props) {
+export function SelectMaxLines({ label, maxLines, onChangeMaxLines }: Props) {
 	//
 
 	//
@@ -28,6 +29,7 @@ export function SelectMaxLines({ maxLines, onChangeMaxLines }: Props) {
 	return (
 		<NumberInput
 			autoComplete="off"
+			label={label || t('max_lines')}
 			leftSection={<IconArrowLoopRight size={20} />}
 			min={0}
 			onChange={onChangeMaxLines}

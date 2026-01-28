@@ -7,6 +7,10 @@
 		"dev": "next dev -p 49002",
 		"lint": "eslint .",
 		"lint-fix": "eslint . --fix",
+		"check-translations": "tsx src/i18n/check-translations.ts",
+		"dev": "next dev -p 49002",
+		"lint": "eslint ./src && tsc --noEmit",
+		"lint-fix": "eslint ./src --fix",
 		"start": "next start"
 	},
 	"dependencies": {

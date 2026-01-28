@@ -2,32 +2,32 @@
 /* BADGE */
 
 .badge {
+	position: relative;
 	display: flex;
 	align-items: center;
 	justify-content: center;
-	border-radius: 999px;
-	color: var(--color-system-background-100);
-	background-color: var(--color-system-text-200);
 	font-weight: var(--font-weight-extrabold);
-	letter-spacing: 1px;
 	line-height: 1;
-	position: relative;
+	color: var(--color-system-background-100);
+	letter-spacing: 1.5px;
+	background-color: var(--color-system-text-200);
+	border-radius: 999px;
 }
 
 .badge.md {
-	font-size: 16px;
 	min-width: 65px;
 	max-width: 65px;
 	min-height: 26px;
 	max-height: 26px;
+	font-size: 16px;
 }
 
 .badge.lg {
-	font-size: 22px;
 	min-width: 85px;
 	max-width: 85px;
 	min-height: 34px;
 	max-height: 34px;
+	font-size: 22px;
 }
 
 .badge.clickable {
@@ -36,8 +36,8 @@
 }
 
 .badge.clickable:hover {
+	box-shadow: 0 0 10px rgb(0 0 0 / 10%);
 	transform: scale(1.05);
-	box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
 
@@ -45,15 +45,15 @@
 /* ALERT ICON */
 
 .alertIcon {
-	background-color: var(--color-primary-white);
-	width: 20px;
-	height: 20px;
-	border-radius: 999px;
 	position: absolute;
-	right: -10px;
 	top: -10px;
+	right: -10px;
 	display: flex;
 	align-items: center;
 	justify-content: center;
+	width: 20px;
+	height: 20px;
 	color: var(--color-status-info-text);
+	background-color: var(--color-primary-white);
+	border-radius: 999px;
 }
