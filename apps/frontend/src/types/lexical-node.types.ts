@@ -16,9 +16,21 @@ export interface LexicalNode {
 				slug?: string
 			}
 		}
+		images?: {
+			relationTo?: string
+			value?: {
+				filename?: string
+				height?: number
+				id?: string
+				mimeType?: string
+				url?: string
+				width?: number
+			}
+		}[]
 		linkType?: string
 		newTab?: boolean
 		source?: 'external' | 'upload'
+		title?: string
 		video?: {
 			relationTo?: string
 			value?: {

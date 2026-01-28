@@ -23,6 +23,7 @@ import { GeneralStatus } from '@/schemas/GeneralStatus/global';
 import { HomeSlider } from '@/schemas/HomeSlider/global';
 
 import { accordionFields } from './fields/accordion';
+import { galleryFields } from './fields/gallery';
 import { videoFields } from './fields/video';
 
 /* * */
@@ -52,6 +53,10 @@ export default buildConfig({
 					{
 						fields: accordionFields,
 						slug: 'accordion',
+					},
+					{
+						fields: galleryFields,
+						slug: 'gallery',
 					},
 					{
 						fields: videoFields,

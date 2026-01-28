@@ -50,8 +50,6 @@ export function NewsDetailSidebar({ newsBody }: NewsDetailSidebarProps) {
 				return [document.getElementById(item.id)];
 			}).flat();
 
-			console.log(headers);
-
 			// For each nested header, check if it's in the viewport
 			const activeHeader = headers.reverse().find((header) => {
 				if (!header) return false;

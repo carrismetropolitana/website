@@ -3,6 +3,7 @@
 
 import { Accordion } from '@/components/payload-components/accordion';
 import { Code } from '@/components/payload-components/code';
+import { Gallery } from '@/components/payload-components/gallery';
 import { Heading } from '@/components/payload-components/heading';
 import { ImageComponent } from '@/components/payload-components/image';
 import { LineMention } from '@/components/payload-components/lineMention';
@@ -102,6 +103,11 @@ export function useRenderLexicalNode() {
 		if (nodeType === 'block' && node.fields?.blockType === 'accordion') {
 			const items: AccordionItem[] = (node.fields?.accordion ?? []).map(item => ({ content: item.content ?? '', id: item.id ?? '', title: item.title ?? '' }));
 			return items.length ? <Accordion key={key} items={items} /> : null;
+		}
+
+		// Handle gallery block
+		if (nodeType === 'block' && node.fields?.blockType === 'gallery') {
+			return <Gallery key={key} fields={node.fields} />;
 		}
 
 		// Handle video block
