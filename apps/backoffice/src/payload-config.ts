@@ -3,14 +3,14 @@
 import { getPublicVariable } from '@carrismetropolitana/website-shared-settings';
 import { mongooseAdapter } from '@payloadcms/db-mongodb';
 import { nodemailerAdapter } from '@payloadcms/email-nodemailer';
-import { lexicalEditor } from '@payloadcms/richtext-lexical';
+import { BlocksFeature, lexicalEditor } from '@payloadcms/richtext-lexical';
 import { s3Storage } from '@payloadcms/storage-s3';
 import { buildConfig } from 'payload';
 import sharp from 'sharp';
 
 /* * */
 
-import { MentionFeature } from '@/lexical/mentions/feature.server';
+import { MentionFeature } from '@/lexical/mention/feature.server';
 import { CaseStudies } from '@/schemas/CaseStudies/collection';
 import { Media } from '@/schemas/Media/collection';
 import { News } from '@/schemas/News/collection';
@@ -22,11 +22,23 @@ import { Users } from '@/schemas/Users/collection';
 import { GeneralStatus } from '@/schemas/GeneralStatus/global';
 import { HomeSlider } from '@/schemas/HomeSlider/global';
 
+import { accordionFields } from './fields/accordion';
+import { videoFields } from './fields/video';
+
 /* * */
 
 export default buildConfig({
 
-	admin: { user: 'users' },
+	admin: {
+		livePreview: {
+			collections: ['news'],
+			url: ({ data }) => {
+				if (!data?.id) return undefined;
+				return `${getPublicVariable('server_url_frontend')}/news/${data.id}`;
+			},
+		},
+		user: 'users',
+	},
 
 	collections: [CaseStudies, Media, News, Topics, Users],
 
@@ -35,6 +47,18 @@ export default buildConfig({
 	editor: lexicalEditor({
 		features: ({ defaultFeatures }) => [
 			...defaultFeatures,
+			BlocksFeature({
+				blocks: [
+					{
+						fields: accordionFields,
+						slug: 'accordion',
+					},
+					{
+						fields: videoFields,
+						slug: 'video',
+					},
+				],
+			}),
 			MentionFeature(),
 		],
 	}),

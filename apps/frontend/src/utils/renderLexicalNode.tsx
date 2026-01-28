@@ -12,6 +12,7 @@ import { ListItem } from '@/components/payload-components/lists/listItem';
 import { Paragraph } from '@/components/payload-components/paragraph';
 import { Quote } from '@/components/payload-components/quote';
 import { Text } from '@/components/payload-components/text';
+import { Video } from '@/components/payload-components/video';
 import { AccordionItem } from '@/types/accordion.types';
 import { LexicalNode } from '@/types/lexical-node.types';
 import { type ReactNode } from 'react';
@@ -101,6 +102,11 @@ export function useRenderLexicalNode() {
 		if (nodeType === 'block' && node.fields?.blockType === 'accordion') {
 			const items: AccordionItem[] = (node.fields?.accordion ?? []).map(item => ({ content: item.content ?? '', id: item.id ?? '', title: item.title ?? '' }));
 			return items.length ? <Accordion key={key} items={items} /> : null;
+		}
+
+		// Handle video block
+		if (nodeType === 'block' && node.fields?.blockType === 'video') {
+			return <Video key={key} fields={node.fields} />;
 		}
 
 		// Fallback: render children if any

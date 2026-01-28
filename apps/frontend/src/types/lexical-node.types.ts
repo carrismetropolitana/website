@@ -9,6 +9,7 @@ export interface LexicalNode {
 		}[]
 		blockName?: string
 		blockType?: string
+		caption?: string
 		doc?: {
 			relationTo?: string
 			value?: {
@@ -17,6 +18,17 @@ export interface LexicalNode {
 		}
 		linkType?: string
 		newTab?: boolean
+		source?: 'external' | 'upload'
+		video?: {
+			relationTo?: string
+			value?: {
+				filename?: string
+				id?: string
+				mimeType?: string
+				url?: string
+			}
+		}
+		videoUrl?: string
 	}
 	format?: number
 	id?: string
