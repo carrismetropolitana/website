@@ -140,7 +140,9 @@ export function ArrabidaWay() {
 						{/* Journey Steps Section */}
 						<div className={styles.journeyContainer}>
 							<Accordion
+								chevronPosition="right"
 								className={styles.accordion}
+								classNames={{ chevron: styles.accordionChevron }}
 								defaultValue="praia-albarquel"
 								onChange={handleAccordionChange}
 								value={openSections}
@@ -184,10 +186,11 @@ export function ArrabidaWay() {
 														}
 
 														// Show active line
+														const isSelected = selectedLineId === lineId;
 														return (
 															<div
 																key={lineIndex}
-																className={styles.lineItem}
+																className={`${styles.lineItem} ${isSelected ? styles.lineItemSelected : ''}`}
 																onClick={() => handleLineClick(lineId)}
 															>
 																<LineDisplay lineData={lineData} />
