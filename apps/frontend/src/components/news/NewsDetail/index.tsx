@@ -6,6 +6,7 @@ import { BackButton } from '@/components/common/BackButton';
 import { Section } from '@/components/layout/Section';
 import { Surface } from '@/components/layout/Surface';
 import { NewsDetailHeader } from '@/components/news/NewsDetailHeader';
+import { NewsDetailSidebar } from '@/components/news/NewsDetailSidebar';
 import PayloadNews from '@/components/payload-components';
 import { NewsData } from '@/types/news.types';
 import useSWR from 'swr';
@@ -39,8 +40,17 @@ export function NewsDetail({ newsId }: { newsId: string }) {
 			<NewsDetailHeader newsData={newsData} />
 
 			<Section withPadding>
+				<div className={styles.innerWrapper} />
+			</Section>
+
+			<Section withPadding>
 				<div className={styles.innerWrapper}>
-					<PayloadNews data={newsData} />
+					{!isLoading && newsData && (
+						<>
+							<PayloadNews data={newsData} />
+							{newsData.body && <NewsDetailSidebar newsBody={newsData.body} />}
+						</>
+					)}
 				</div>
 			</Section>
 

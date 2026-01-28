@@ -2,7 +2,7 @@
 
 /* * */
 
-import type { NewsData } from '@/types/news.types';
+import type { LexicalNode } from '@/types/lexical-node.types';
 
 import Link from 'next/link';
 import { useEffect, useState } from 'react';
@@ -13,13 +13,17 @@ import useHook, { TocTreeItem } from './hook';
 
 /* * */
 
-export function NewsDetailSidebar({ newsData }: { newsData: NewsData }) {
+interface NewsDetailSidebarProps {
+	newsBody: LexicalNode | string | undefined
+}
+
+export function NewsDetailSidebar({ newsBody }: NewsDetailSidebarProps) {
 	//
 
 	//
 	// A. Setup variables
 
-	const tableOfContents = useHook(newsData);
+	const tableOfContents = useHook(newsBody);
 	const [activeId, setActiveId] = useState<null | string>(null);
 
 	//
@@ -45,6 +49,8 @@ export function NewsDetailSidebar({ newsData }: { newsData: NewsData }) {
 				}
 				return [document.getElementById(item.id)];
 			}).flat();
+
+			console.log(headers);
 
 			// For each nested header, check if it's in the viewport
 			const activeHeader = headers.reverse().find((header) => {
