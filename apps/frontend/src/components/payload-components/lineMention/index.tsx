@@ -1,8 +1,9 @@
 'use client';
 /* * */
 
-import { LineBadge } from '@/components/lines/LineBadge';
+import { LineDisplay } from '@/components/lines/LineDisplay';
 import { useEnvironmentContext } from '@/contexts/Environment.context';
+import { useLinesContext } from '@/contexts/Lines.context';
 import { useRouter } from 'next/navigation';
 
 /* * */
@@ -22,12 +23,14 @@ export function LineMention({ id = '', label = '', mentionType = 'line' }: LineM
 	// A. Setup variables
 
 	const environmentContext = useEnvironmentContext();
+	const linesContext = useLinesContext();
 	const router = useRouter();
 
 	//
 	// B. Handle actions
 
-	const handleLineBadgeClick = (lineId: string) => {
+	const handleLineClick = (e: React.MouseEvent, lineId: string) => {
+		e.preventDefault();
 		const lineHref = environmentContext.actions.getNormalizedHref(`/lines/${lineId}`);
 		router.push(lineHref);
 	};
@@ -36,9 +39,14 @@ export function LineMention({ id = '', label = '', mentionType = 'line' }: LineM
 	// C. Render components
 
 	if (mentionType === 'line' && id) {
+		const lineHref = environmentContext.actions.getNormalizedHref(`/lines/${id}`);
+		const lineData = linesContext.actions.getLineDataById(id);
+
 		return (
 			<span style={{ display: 'inline-block', lineHeight: 0, verticalAlign: 'middle' }}>
-				<LineBadge lineId={id} onClick={() => handleLineBadgeClick(id)} size="md" />
+				<a href={lineHref} onClick={e => handleLineClick(e, id)} style={{ color: 'inherit', textDecoration: 'none' }}>
+					<LineDisplay lineData={lineData} size="md" />
+				</a>
 			</span>
 		);
 	}

@@ -8,9 +8,9 @@ import React, { lazy, Suspense } from 'react';
 
 /* * */
 
-const LazyLineBadge = lazy(async () => {
-	const mod = await import('@/components/LineBadge/index');
-	return { default: mod.LineBadge };
+const LazyLineDisplay = lazy(async () => {
+	const mod = await import('@/components/lines/LineDisplay/index');
+	return { default: mod.LineDisplay };
 });
 
 /* * */
@@ -58,7 +58,7 @@ export class MentionNode extends DecoratorNode<JSX.Element> {
 				)}
 				>
 					<a className="mention__link" href={href} rel="noreferrer noopener" target="_blank">
-						<LazyLineBadge as="span" lineId={this.__id} size="md" />
+						<LazyLineDisplay lineId={this.__id} size="md" />
 					</a>
 				</Suspense>
 			</span>

@@ -2,7 +2,7 @@
 /* * */
 import type { Line } from '@carrismetropolitana/api-types/network';
 
-import { LineBadge } from '@/components/LineBadge';
+import { LineDisplay } from '@/components/lines/LineDisplay';
 import { useLinesContext } from '@/contexts/Lines.context';
 import { $createTextNode, $getSelection, $isRangeSelection } from '@payloadcms/richtext-lexical/lexical';
 import { useLexicalComposerContext } from '@payloadcms/richtext-lexical/lexical/react/LexicalComposerContext';
@@ -81,15 +81,13 @@ export function MentionTypeaheadPlugin() {
 	//
 	// D. Render Component
 
-	const menuRenderFn: MenuRenderFn<MentionOption> = (anchorElementRef, { options, selectedIndex, selectOptionAndCleanUp, setHighlightedIndex }, matchingString) => {
+	const menuRenderFn: MenuRenderFn<MentionOption> = (anchorElementRef, { options, selectedIndex, selectOptionAndCleanUp, setHighlightedIndex }) => {
 		if (!anchorElementRef.current || options.length === 0) return null;
 
 		return ReactDOM.createPortal(
 			<div aria-label="Mentions" className="mention-typeahead" role="listbox">
 				{options.map((option, i) => {
 					const isSelected = selectedIndex === i;
-					const label = getOptionLabel(option.line);
-					const subtitle = option.line.long_name ? option.line.long_name : option.line.short_name;
 
 					return (
 						<button
@@ -106,12 +104,9 @@ export function MentionTypeaheadPlugin() {
 								selectOptionAndCleanUp(option);
 							}}
 						>
-
 							<span className="mention-typeahead__label">
-								<LineBadge lineId={label} size="md" />
+								<LineDisplay lineData={option.line} size="md" />
 							</span>
-							{subtitle ? <span className="mention-typeahead__subtitle">{subtitle}</span> : null}
-							{matchingString ? null : null}
 						</button>
 					);
 				})}
