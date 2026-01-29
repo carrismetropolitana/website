@@ -72,6 +72,8 @@ export interface Config {
     news: News;
     topics: Topic;
     users: User;
+    'knowledge-base': KnowledgeBase;
+    notes: Note;
     'payload-kv': PayloadKv;
     'payload-locked-documents': PayloadLockedDocument;
     'payload-preferences': PayloadPreference;
@@ -84,6 +86,8 @@ export interface Config {
     news: NewsSelect<false> | NewsSelect<true>;
     topics: TopicsSelect<false> | TopicsSelect<true>;
     users: UsersSelect<false> | UsersSelect<true>;
+    'knowledge-base': KnowledgeBaseSelect<false> | KnowledgeBaseSelect<true>;
+    notes: NotesSelect<false> | NotesSelect<true>;
     'payload-kv': PayloadKvSelect<false> | PayloadKvSelect<true>;
     'payload-locked-documents': PayloadLockedDocumentsSelect<false> | PayloadLockedDocumentsSelect<true>;
     'payload-preferences': PayloadPreferencesSelect<false> | PayloadPreferencesSelect<true>;
@@ -226,6 +230,75 @@ export interface User {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "knowledge-base".
+ */
+export interface KnowledgeBase {
+  id: string;
+  title: string;
+  /**
+   * URL única para este item. Será gerada automaticamente do título se deixado em branco.
+   */
+  slug: string;
+  /**
+   * Texto de destaque/resumo que aparece no início do artigo. Suporta HTML.
+   */
+  lead?: string | null;
+  /**
+   * Conteúdo principal do artigo. Suporta HTML.
+   */
+  body?: string | null;
+  contentType: 'link' | 'file';
+  link?: string | null;
+  file?: (string | null) | Media;
+  publishDate?: string | null;
+  status: 'draft' | 'published';
+  heroImage?: (string | null) | Media;
+  topic: 'Documentação' | 'Recursos' | 'Open Data' | 'Sustentabilidade' | 'Imprensa' | 'Tecnologia' | 'Outro';
+  seo?: {
+    metaTitle?: string | null;
+    metaDescription?: string | null;
+    ogImage?: (string | null) | Media;
+  };
+  authors?: (string | null) | User;
+  publishedAt: string;
+  updatedAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "notes".
+ */
+export interface Note {
+  id: string;
+  title: string;
+  /**
+   * URL única para esta nota. Será gerada automaticamente do título se deixado em branco.
+   */
+  slug: string;
+  /**
+   * Texto de destaque/resumo que aparece no início do artigo. Suporta HTML.
+   */
+  lead?: string | null;
+  /**
+   * Conteúdo principal do artigo. Suporta HTML.
+   */
+  body?: string | null;
+  contentType?: string | null;
+  file?: (string | null) | Media;
+  publishDate?: string | null;
+  status: 'draft' | 'published';
+  heroImage?: (string | null) | Media;
+  tags?: string[] | null;
+  seo?: {
+    metaTitle?: string | null;
+    metaDescription?: string | null;
+    ogImage?: (string | null) | Media;
+  };
+  authors?: (string | null) | User;
+  publishedAt: string;
+  updatedAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "payload-kv".
  */
 export interface PayloadKv {
@@ -267,6 +340,14 @@ export interface PayloadLockedDocument {
     | ({
         relationTo: 'users';
         value: string | User;
+      } | null)
+    | ({
+        relationTo: 'knowledge-base';
+        value: string | KnowledgeBase;
+      } | null)
+    | ({
+        relationTo: 'notes';
+        value: string | Note;
       } | null);
   globalSlug?: string | null;
   user: {
@@ -385,6 +466,59 @@ export interface UsersSelect<T extends boolean = true> {
         createdAt?: T;
         expiresAt?: T;
       };
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "knowledge-base_select".
+ */
+export interface KnowledgeBaseSelect<T extends boolean = true> {
+  title?: T;
+  slug?: T;
+  lead?: T;
+  body?: T;
+  contentType?: T;
+  link?: T;
+  file?: T;
+  publishDate?: T;
+  status?: T;
+  heroImage?: T;
+  topic?: T;
+  seo?:
+    | T
+    | {
+        metaTitle?: T;
+        metaDescription?: T;
+        ogImage?: T;
+      };
+  authors?: T;
+  publishedAt?: T;
+  updatedAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "notes_select".
+ */
+export interface NotesSelect<T extends boolean = true> {
+  title?: T;
+  slug?: T;
+  lead?: T;
+  body?: T;
+  contentType?: T;
+  file?: T;
+  publishDate?: T;
+  status?: T;
+  heroImage?: T;
+  tags?: T;
+  seo?:
+    | T
+    | {
+        metaTitle?: T;
+        metaDescription?: T;
+        ogImage?: T;
+      };
+  authors?: T;
+  publishedAt?: T;
+  updatedAt?: T;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
