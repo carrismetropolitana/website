@@ -43,7 +43,7 @@ export default buildConfig({
 		user: 'users',
 	},
 
-	collections: [CaseStudies, Media, News, Topics, Users],
+	collections: [CaseStudies, Media, News, Topics, Users, KnowledgeBase, Notes],
 
 	db: mongooseAdapter({ url: process.env.WEBSITEDB_URI ?? 'mongodb://placeholder:placeholder@placeholder:12345/placeholder' }),
 
