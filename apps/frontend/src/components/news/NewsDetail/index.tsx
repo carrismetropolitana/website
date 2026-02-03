@@ -21,7 +21,7 @@ export function NewsDetail({ newsId }: { newsId: string }) {
 	//
 	// A. Fetch Data
 
-	const { data: newsData, isLoading } = useSWR<NewsData>(`/api/payload-news/${newsId}`);
+	const { data: newsData, isLoading } = useSWR<NewsData>(`/api/news/${newsId}`);
 
 	//
 	// C. Render components
