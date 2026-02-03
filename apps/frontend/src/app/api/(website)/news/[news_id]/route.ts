@@ -1,5 +1,3 @@
-import { NextResponse } from 'next/server';
-
 export async function GET(_req: Request, { params }: { params: Promise<{ news_id: string }> }) {
 	//
 
@@ -15,30 +13,19 @@ export async function GET(_req: Request, { params }: { params: Promise<{ news_id
 	//
 	// B. Fetch data
 
-	try {
-		const res = await fetch(payloadUrl, {
-			cache: 'no-store',
-			headers: {
-				Accept: 'application/json',
-			},
-		});
+	const res = await fetch(payloadUrl, { headers: { Accept: 'application/json' }, next: { revalidate: 60 } });
 
-		//
-		// C. Transform Data
+	//
+	// C. Transform Data
 
-		if (!res.ok) {
-			const text = await res.text();
-			return NextResponse.json({ error: text }, { status: res.status });
-		}
-
-		return NextResponse.json(await res.json());
+	if (!res.ok) {
+		const text = await res.text();
+		return Response.json({ error: text }, { status: res.status });
 	}
-	catch (err) {
-		return NextResponse.json(
-			{ error: err instanceof Error ? err.message : 'Unknown error' },
-			{ status: 500 },
-		);
-	}
+
+	return Response.json(await res.json(), {
+		headers: { 'Cache-Control': 'public, max-age=60' },
+	});
 
 	//
 }

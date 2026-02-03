@@ -11,10 +11,7 @@ export async function GET() {
 	//
 	// B. Fetch data
 
-	const res = await fetch(payloadUrl, {
-		headers: { Accept: 'application/json' },
-		next: { revalidate: 180 },
-	});
+	const res = await fetch(payloadUrl, { headers: { Accept: 'application/json' }, next: { revalidate: 180 } });
 
 	//
 	// C. Transform Data
