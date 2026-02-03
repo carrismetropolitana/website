@@ -59,7 +59,7 @@ export function useRenderLexicalNode() {
 		}
 
 		// Handle mention nodes - convert to LineBadge if it's a line mention
-		if (nodeType === 'mention') {
+		if (nodeType === 'limention') {
 			return <LineMention key={key} id={node.id} label={node.label} mentionType={node.mentionType} />;
 		}
 
@@ -73,9 +73,14 @@ export function useRenderLexicalNode() {
 			return <Text key={key} format={node.format} text={node.text} />;
 		}
 
-		// Handle links
+		// Handle links (both inline and block)
 		if (nodeType === 'link') {
 			return <Links key={key} children={children} fields={node.fields} url={node.url} />;
+		}
+
+		// Handle link block
+		if (nodeType === 'block' && node.fields?.blockType === 'link') {
+			return <Links key={key} fields={node.fields} />;
 		}
 
 		// Handle linebreak

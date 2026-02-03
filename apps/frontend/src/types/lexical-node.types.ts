@@ -30,7 +30,9 @@ export interface LexicalNode {
 		linkType?: string
 		newTab?: boolean
 		source?: 'external' | 'upload'
+		text?: string
 		title?: string
+		url?: string
 		video?: {
 			relationTo?: string
 			value?: {

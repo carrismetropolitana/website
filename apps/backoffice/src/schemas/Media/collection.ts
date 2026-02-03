@@ -5,10 +5,11 @@ import { type CollectionConfig } from 'payload';
 /* * */
 
 export const Media: CollectionConfig = {
-
 	access: {
-		create: () => true,
+		create: ({ req }) => Boolean(req.user),
+		delete: ({ req }) => Boolean(req.user),
 		read: () => true,
+		update: ({ req }) => Boolean(req.user),
 	},
 
 	fields: [
@@ -26,6 +27,11 @@ export const Media: CollectionConfig = {
 				}
 			},
 		],
+	},
+
+	labels: {
+		plural: 'Multimédia',
+		singular: 'Multimédia',
 	},
 
 	slug: 'media',

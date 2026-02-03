@@ -6,9 +6,9 @@
 	align-items: center;
 	justify-content: center;
 	border-radius: 999px;
-	color: var(--color-system-background-100);
-	background-color: var(--color-system-text-200);
-	font-weight: var(--font-weight-extrabold);
+	color: #fff;
+	background-color: #5a5a64;
+	font-weight: 800;
 	letter-spacing: 1px;
 	line-height: 1;
 	position: relative;
@@ -45,9 +45,9 @@
 /* ALERT ICON */
 
 .alertIcon {
-	background-color: var(--color-primary-white);
+	background-color: #fff;
 	width: 20px;
-	height: 20px;
+	height: 20px;	
 	border-radius: 999px;
 	position: absolute;
 	right: -10px;
@@ -55,5 +55,5 @@
 	display: flex;
 	align-items: center;
 	justify-content: center;
-	color: var(--color-status-info-text);
+	color: #054B8C;
 }

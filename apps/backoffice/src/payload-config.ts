@@ -26,6 +26,7 @@ import { HomeSlider } from '@/schemas/HomeSlider/global';
 
 import { accordionFields } from './fields/accordion';
 import { galleryFields } from './fields/gallery';
+import { linkFields } from './fields/link';
 import { videoFields } from './fields/video';
 
 /* * */
@@ -59,6 +60,10 @@ export default buildConfig({
 					{
 						fields: galleryFields,
 						slug: 'gallery',
+					},
+					{
+						fields: linkFields,
+						slug: 'link',
 					},
 					{
 						fields: videoFields,

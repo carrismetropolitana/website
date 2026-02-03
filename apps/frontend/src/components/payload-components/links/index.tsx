@@ -8,7 +8,7 @@ import Link from 'next/link';
 /* * */
 
 interface LinkProps {
-	children: LexicalNode[]
+	children?: LexicalNode[]
 	fields?: {
 		doc?: {
 			relationTo?: string
@@ -18,13 +18,15 @@ interface LinkProps {
 		}
 		linkType?: string
 		newTab?: boolean
+		text?: string
+		url?: string
 	}
 	url?: string
 }
 
 /* * */
 
-export function Links({ children, fields, url = '' }: LinkProps) {
+export function Links({ children = [], fields, url = '' }: LinkProps) {
 	//
 
 	//
@@ -33,8 +35,11 @@ export function Links({ children, fields, url = '' }: LinkProps) {
 	const renderLexicalNode = useRenderLexicalNode();
 	const linkType = fields?.linkType || 'custom';
 	const newTab = fields?.newTab || false;
+	const linkRel = newTab ? 'noreferrer noopener' : undefined;
+	const linkTarget = newTab ? '_blank' : undefined;
 
-	let href = url;
+	// Determine the href - supports both inline links and block links
+	let href = url || fields?.url || '';
 	if (linkType === 'internal' && fields?.doc) {
 		const relationTo = fields.doc.relationTo;
 		const slug = fields.doc.value?.slug;
@@ -43,18 +48,60 @@ export function Links({ children, fields, url = '' }: LinkProps) {
 		}
 	}
 
+	if (!href || href.trim() === '') {
+		return null;
+	}
+
+	// Determine the link text/content
+	// For block links: use fields.text or fallback to href
+	// For inline links: render children
+	const isBlockLink = fields?.text !== undefined || (fields?.url && children.length === 0);
+	const linkContent = isBlockLink
+		? (fields?.text || href)
+		: children.map((child, idx) => renderLexicalNode(child, idx));
+
+	// Check if it's an external URL
+	const isExternal = href.startsWith('http://') || href.startsWith('https://') || href.startsWith('//');
+
 	//
 	// B. Render components
 
-	return (
+	// For block links, wrap in a div with margin
+	const linkElement = isExternal ? (
+		<a
+			href={href}
+			rel={linkRel}
+			target={linkTarget}
+			style={{
+				color: '#0066cc',
+				textDecoration: 'underline',
+			}}
+		>
+			{linkContent}
+		</a>
+	) : (
 		<Link
 			href={href}
-			rel={newTab ? 'noreferrer noopener' : undefined}
-			target={newTab ? '_blank' : undefined}
+			rel={linkRel}
+			target={linkTarget}
+			style={isBlockLink ? {
+				color: '#0066cc',
+				textDecoration: 'underline',
+			} : undefined}
 		>
-			{children.map((child, idx) => renderLexicalNode(child, idx))}
+			{linkContent}
 		</Link>
 	);
+
+	if (isBlockLink) {
+		return (
+			<div style={{ margin: '1rem 0' }}>
+				{linkElement}
+			</div>
+		);
+	}
+
+	return linkElement;
 
 	//
 }

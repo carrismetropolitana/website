@@ -8,7 +8,7 @@
 	overflow: hidden;
 	text-overflow: ellipsis;
 	-webkit-line-clamp: 3;
-	color: var(--color-system-text-100);
+	color: #fff;
 	-webkit-box-orient: vertical;
 }
 
@@ -17,13 +17,13 @@
 
 .name[data-size='md'] {
 	font-size: 15px;
-	font-weight: var(--font-weight-extrabold);
+	font-weight: 800;
 	line-height: 1.3;
 }
 
 .name[data-size='lg'] {
 	font-size: 20px;
-	font-weight: var(--font-weight-extrabold);
+	font-weight: 800;
 	line-height: 1.3;
 }
 

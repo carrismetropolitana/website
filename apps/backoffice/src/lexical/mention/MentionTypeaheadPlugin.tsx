@@ -62,8 +62,6 @@ export function MentionTypeaheadPlugin() {
 	//
 	// C. Handle Actions
 
-	// Lexical's built-in `useBasicTypeaheadTriggerMatch` is intended for 1-char triggers (like '@').
-	// For multi-char triggers like 'line:', we implement our own trigger matcher.
 	const triggerFn: TriggerFn = (text) => {
 		const idx = text.lastIndexOf(TRIGGER);
 		if (idx === -1) return null;
