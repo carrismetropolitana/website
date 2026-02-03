@@ -59,7 +59,7 @@ export function useRenderLexicalNode() {
 		}
 
 		// Handle mention nodes - convert to LineBadge if it's a line mention
-		if (nodeType === 'limention') {
+		if (nodeType === 'mention' && node.mentionType === 'line') {
 			return <LineMention key={key} id={node.id} label={node.label} mentionType={node.mentionType} />;
 		}
 
@@ -106,7 +106,11 @@ export function useRenderLexicalNode() {
 
 		// Handle accordion block
 		if (nodeType === 'block' && node.fields?.blockType === 'accordion') {
-			const items: AccordionItem[] = (node.fields?.accordion ?? []).map(item => ({ content: item.content ?? '', id: item.id ?? '', title: item.title ?? '' }));
+			const items: AccordionItem[] = (node.fields?.accordion ?? []).map(item => ({
+				content: item.content ?? '',
+				id: item.id ?? '',
+				title: item.title ?? '',
+			}));
 			return items.length ? <Accordion key={key} items={items} /> : null;
 		}
 

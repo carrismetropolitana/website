@@ -1,10 +1,14 @@
 'use client';
 /* * */
 
+import type { LexicalNode, LexicalRichText } from '@/types/lexical-node.types';
+
+import { useRenderLexicalNode } from '@/utils/renderLexicalNode';
+
 /* * */
 
 interface AccordionItem {
-	content: string
+	content: LexicalRichText | string
 	id?: string
 	title: string
 }
@@ -18,7 +22,29 @@ interface AccordionProps {
 export function Accordion({ items }: AccordionProps) {
 	//
 	//
-	// A. Render components
+	// A. Setup
+
+	const renderLexicalNode = useRenderLexicalNode();
+
+	//
+	// B. Helper to render content
+
+	function renderContent(content: LexicalRichText | string) {
+		// If content is a string, render as plain text
+		if (typeof content === 'string') {
+			return content;
+		}
+
+		// If content is Lexical rich text, render using the Lexical renderer
+		if (content && typeof content === 'object' && 'root' in content) {
+			return renderLexicalNode(content.root as unknown as LexicalNode);
+		}
+
+		return null;
+	}
+
+	//
+	// C. Render components
 
 	return (
 		<div>
@@ -28,7 +54,7 @@ export function Accordion({ items }: AccordionProps) {
 						{item.title}
 					</summary>
 					<div style={{ padding: '1rem 0', paddingLeft: '1rem', whiteSpace: 'pre-wrap' }}>
-						{item.content}
+						{renderContent(item.content)}
 					</div>
 				</details>
 			))}

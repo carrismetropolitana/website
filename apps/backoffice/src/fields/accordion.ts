@@ -2,6 +2,10 @@
 
 import type { Field } from 'payload';
 
+import { lexicalEditor } from '@payloadcms/richtext-lexical';
+
+import { MentionFeature } from '@/lexical/mention/feature.server';
+
 /* * */
 
 export const accordionFields: Field[] = [
@@ -17,10 +21,16 @@ export const accordionFields: Field[] = [
 				type: 'text',
 			},
 			{
+				editor: lexicalEditor({
+					features: ({ defaultFeatures }) => [
+						...defaultFeatures,
+						MentionFeature(),
+					],
+				}),
 				label: 'Conteúdo',
 				name: 'content',
 				required: true,
-				type: 'textarea',
+				type: 'richText',
 			},
 		],
 		label: 'Accordion',

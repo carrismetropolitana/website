@@ -1,9 +1,20 @@
+export interface LexicalRichText {
+	root: {
+		children: LexicalNode[]
+		direction?: 'ltr' | 'rtl'
+		format?: string
+		indent?: number
+		type: 'root'
+		version: number
+	}
+}
+
 export interface LexicalNode {
 	children?: LexicalNode[]
 	direction?: 'ltr' | 'rtl'
 	fields?: {
 		accordion?: {
-			content?: string
+			content?: LexicalRichText | string
 			id?: string
 			title?: string
 		}[]
