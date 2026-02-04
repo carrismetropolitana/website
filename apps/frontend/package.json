@@ -4,9 +4,6 @@
 	"private": true,
 	"scripts": {
 		"build": "next build",
-		"dev": "next dev -p 49002",
-		"lint": "eslint .",
-		"lint-fix": "eslint . --fix",
 		"check-translations": "tsx src/i18n/check-translations.ts",
 		"dev": "next dev -p 49002",
 		"lint": "eslint ./src && tsc --noEmit",

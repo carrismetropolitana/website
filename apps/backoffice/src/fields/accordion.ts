@@ -2,9 +2,8 @@
 
 import type { Field } from 'payload';
 
-import { lexicalEditor } from '@payloadcms/richtext-lexical';
-
 import { MentionFeature } from '@/lexical/mention/feature.server';
+import { lexicalEditor } from '@payloadcms/richtext-lexical';
 
 /* * */
 

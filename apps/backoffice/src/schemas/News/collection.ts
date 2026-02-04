@@ -54,12 +54,14 @@ export const News: CollectionConfig = {
 
 	slug: 'news',
 
-	timestamps: false,
+	timestamps: true,
 
-	// versions: {
-	// 	drafts: {
-	// 		autosave: true,
-	// 	},
-	// },
+	versions: {
+		drafts: {
+			autosave: {
+				interval: 500,
+			},
+		},
+	},
 
 };

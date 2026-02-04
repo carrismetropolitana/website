@@ -23,7 +23,6 @@ export const videoFields: Field[] = [
 	},
 	{
 		admin: {
-			// Show this field only when the sibling "source" is "media"
 			condition: (_, siblingData) => siblingData?.source === 'media',
 		},
 		filterOptions: () => ({
@@ -39,7 +38,6 @@ export const videoFields: Field[] = [
 	},
 	{
 		admin: {
-			// Show this field only when the sibling "source" is "external"
 			condition: (_, siblingData) => siblingData?.source === 'external',
 		},
 		label: 'URL do vídeo',

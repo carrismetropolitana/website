@@ -1,7 +1,11 @@
 /* * */
 
 import { NewsDetailPreview } from '@/components/news/NewsDetailPreview';
-import { getPublicVariable } from '@carrismetropolitana/website-shared-settings';
+
+/* * */
+
+// Disable caching for preview page
+export const dynamic = 'force-dynamic';
 
 /* * */
 
@@ -19,9 +23,9 @@ export default async function PreviewPage({ searchParams }: { searchParams: Prom
 	}
 
 	// Fetch draft data server-side
+	// Note: Payload admin is at root '/', so API is at '/api'
 	const payloadBaseUrl = process.env.PAYLOAD_BASE_URL ?? 'http://localhost:49001';
-	const payloadBasePath = process.env.PAYLOAD_BASE_PATH ?? '/admin';
-	const payloadUrl = `${payloadBaseUrl}${payloadBasePath}/api/news/${newsId}?depth=2&draft=true&trash=false`;
+	const payloadUrl = `${payloadBaseUrl}/api/news/${newsId}?depth=2&draft=true`;
 
 	let newsData = null;
 	try {
@@ -37,5 +41,5 @@ export default async function PreviewPage({ searchParams }: { searchParams: Prom
 		console.error('Failed to fetch preview data:', error);
 	}
 
-	return <NewsDetailPreview initialData={newsData} newsId={newsId} />;
+	return <NewsDetailPreview initialData={newsData} />;
 }

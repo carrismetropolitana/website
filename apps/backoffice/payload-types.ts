@@ -191,6 +191,8 @@ export interface News {
   featured_image?: (string | null) | Media;
   publishedAt: string;
   updatedAt: string;
+  createdAt: string;
+  _status?: ('draft' | 'published') | null;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -436,6 +438,8 @@ export interface NewsSelect<T extends boolean = true> {
   featured_image?: T;
   publishedAt?: T;
   updatedAt?: T;
+  createdAt?: T;
+  _status?: T;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema

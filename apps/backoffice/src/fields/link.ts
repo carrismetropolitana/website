@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 /* * */
 
 import type { Field } from 'payload';
@@ -9,9 +8,9 @@ export const linkFields: Field[] = [
 	{
 		admin: {
 			components: {
-				afterInput: ['@/components/LinkFieldPreview#LinkFieldPreview'] as any,
+				afterInput: ['@/components/LinkFieldPreview#LinkFieldPreview'] as const,
 			},
-			description: 'URL do link. Deve começar com http:// ou https://',
+			description: 'Deve começar com http:// ou https://',
 		},
 		label: 'URL',
 		name: 'url',

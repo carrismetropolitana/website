@@ -40,10 +40,6 @@ interface GalleryProps {
 export function Gallery({ fields }: GalleryProps) {
 	//
 
-	// Debug: log the fields to see the structure
-	console.log('Gallery component - fields:', fields);
-	console.log('Gallery component - fields.images:', fields?.images);
-
 	if (!fields || !fields.images || fields.images.length === 0) {
 		console.log('Gallery: No images found');
 		return null;
@@ -71,11 +67,13 @@ export function Gallery({ fields }: GalleryProps) {
 				}}
 			>
 				{images.map((imageRel, i) => {
-					// Handle different possible structures
-					// Try value first, then file, then direct object
+					if (!imageRel || typeof imageRel === 'string') {
+						return null;
+					}
+
 					let imageValue = imageRel?.value;
 
-					if (!imageValue && 'file' in imageRel) {
+					if (!imageValue && typeof imageRel === 'object' && 'file' in imageRel) {
 						imageValue = (imageRel as any).file;
 					}
 
@@ -84,7 +82,6 @@ export function Gallery({ fields }: GalleryProps) {
 					}
 
 					if (!imageValue) {
-						console.log(`Gallery: Skipping image ${i} - no imageValue`);
 						return null;
 					}
 

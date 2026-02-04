@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 /* * */
 
 import type { Field } from 'payload';
@@ -9,9 +8,9 @@ export const galleryFields: Field[] = [
 	{
 		admin: {
 			components: {
-				afterInput: ['@/components/GalleryFieldPreview#GalleryFieldPreview'] as any,
+				afterInput: ['@/components/GalleryFieldPreview#GalleryFieldPreview'] as const,
 			},
-			description: 'Selecione uma ou mais imagens para a galeria. As imagens selecionadas serão exibidas aqui.',
+			description: 'As imagens selecionadas serão exibidas aqui.',
 		},
 		filterOptions: () => ({
 			mimeType: {
