@@ -3,6 +3,8 @@
 
 import { useField } from '@payloadcms/ui';
 
+import styles from './styles.module.css';
+
 /* * */
 
 export function LinkFieldPreview() {
@@ -20,8 +22,8 @@ export function LinkFieldPreview() {
 		return null;
 	}
 
-	// Extract domain from URL for display
 	let displayUrl = value;
+
 	try {
 		const url = new URL(value);
 		displayUrl = url.hostname + url.pathname;
@@ -30,33 +32,21 @@ export function LinkFieldPreview() {
 		}
 	}
 	catch {
-		// If URL parsing fails, use the original value
 		displayUrl = value;
 	}
 
 	return (
-		<div style={{ marginTop: '8px' }}>
+		<div className={styles.container}>
 			<a
+				className={styles.link}
 				href={value}
 				rel="noreferrer noopener"
-				style={{
-					alignItems: 'center',
-					background: '#f5f5f5',
-					border: '1px solid #e0e0e0',
-					borderRadius: '4px',
-					color: '#0066cc',
-					display: 'flex',
-					fontSize: '12px',
-					gap: '8px',
-					padding: '8px 12px',
-					textDecoration: 'none',
-				}}
 				target="_blank"
 			>
 				<svg
+					className={styles.icon}
 					fill="none"
 					height="14"
-					style={{ flexShrink: 0 }}
 					viewBox="0 0 24 24"
 					width="14"
 					xmlns="http://www.w3.org/2000/svg"
@@ -69,7 +59,7 @@ export function LinkFieldPreview() {
 						strokeWidth="2"
 					/>
 				</svg>
-				<span style={{ overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
+				<span className={styles.text}>
 					{displayUrl}
 				</span>
 			</a>
