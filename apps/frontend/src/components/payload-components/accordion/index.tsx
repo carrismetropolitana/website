@@ -30,12 +30,10 @@ export function Accordion({ items }: AccordionProps) {
 	// B. Helper to render content
 
 	function renderContent(content: LexicalRichText | string) {
-		// If content is a string, render as plain text
 		if (typeof content === 'string') {
 			return content;
 		}
 
-		// If content is Lexical rich text, render using the Lexical renderer
 		if (content && typeof content === 'object' && 'root' in content) {
 			return renderLexicalNode(content.root as unknown as LexicalNode);
 		}

@@ -38,7 +38,7 @@ export default buildConfig({
 			collections: ['news'],
 			url: ({ data }) => {
 				if (!data?.id) return undefined;
-				return `${getPublicVariable('server_url_frontend')}/news/${data.id}`;
+				return `${getPublicVariable('server_url_frontend')}/news/preview?id=${data.id}`;
 			},
 		},
 		user: 'users',

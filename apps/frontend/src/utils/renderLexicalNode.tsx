@@ -6,7 +6,7 @@ import { Code } from '@/components/payload-components/code';
 import { Gallery } from '@/components/payload-components/gallery';
 import { Heading } from '@/components/payload-components/heading';
 import { ImageComponent } from '@/components/payload-components/image';
-import { LineMention } from '@/components/payload-components/lineMention';
+import { LineMention } from '@/components/payload-components/line-mention';
 import { Links } from '@/components/payload-components/links';
 import { List } from '@/components/payload-components/lists';
 import { ListItem } from '@/components/payload-components/lists/listItem';
@@ -126,11 +126,7 @@ export function useRenderLexicalNode() {
 
 		// Fallback: render children if any
 		if (children.length > 0) {
-			return (
-				<>
-					{children.map((child, idx) => renderLexicalNode(child, idx))}
-				</>
-			);
+			return children.map((child, idx) => renderLexicalNode(child, idx));
 		}
 
 		if (node.text) {

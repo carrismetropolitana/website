@@ -4,7 +4,9 @@
 import { LexicalNode } from '@/types/lexical-node.types';
 import { useRenderLexicalNode } from '@/utils/renderLexicalNode';
 import Link from 'next/link';
+import { useMemo } from 'react';
 
+import styles from './styles.module.css';
 /* * */
 
 interface LinkProps {
@@ -33,69 +35,63 @@ export function Links({ children = [], fields, url = '' }: LinkProps) {
 	// A. Setup variables
 
 	const renderLexicalNode = useRenderLexicalNode();
-	const linkType = fields?.linkType || 'custom';
-	const newTab = fields?.newTab || false;
-	const linkRel = newTab ? 'noreferrer noopener' : undefined;
-	const linkTarget = newTab ? '_blank' : undefined;
 
-	// Determine the href - supports both inline links and block links
-	let href = url || fields?.url || '';
-	if (linkType === 'internal' && fields?.doc) {
-		const relationTo = fields.doc.relationTo;
-		const slug = fields.doc.value?.slug;
-		if (relationTo && slug) {
-			href = `/${relationTo}/${slug}`;
+	//
+	// A. Compute href early and validate
+
+	const href = useMemo(() => {
+		let computedHref = url || fields?.url || '';
+
+		if (fields?.linkType === 'internal' && fields?.doc) {
+			const relationTo = fields.doc.relationTo;
+			const slug = fields.doc.value?.slug;
+			if (relationTo && slug) {
+				computedHref = `/${relationTo}/${slug}`;
+			}
 		}
-	}
 
-	if (!href || href.trim() === '') {
+		return computedHref.trim() || null;
+	}, [url, fields?.url, fields?.linkType, fields?.doc?.relationTo, fields?.doc?.value?.slug]);
+
+	if (!href) {
 		return null;
 	}
 
-	// Determine the link text/content
-	// For block links: use fields.text or fallback to href
-	// For inline links: render children
-	const isBlockLink = fields?.text !== undefined || (fields?.url && children.length === 0);
-	const linkContent = isBlockLink
-		? (fields?.text || href)
-		: children.map((child, idx) => renderLexicalNode(child, idx));
+	//
+	// B. Setup variables
 
-	// Check if it's an external URL
+	const newTab = fields?.newTab ?? false;
+	const isBlockLink = fields?.text !== undefined || (fields?.url && children.length === 0);
 	const isExternal = href.startsWith('http://') || href.startsWith('https://') || href.startsWith('//');
 
-	//
-	// B. Render components
+	const linkContent = useMemo(() => {
+		if (isBlockLink) {
+			return fields?.text || href;
+		}
+		return children.map((child, idx) => renderLexicalNode(child, idx));
+	}, [isBlockLink, fields?.text, href, children, renderLexicalNode]);
 
-	// For block links, wrap in a div with margin
+	const linkProps = useMemo(() => ({
+		rel: newTab ? ('noreferrer noopener' as const) : undefined,
+		target: newTab ? ('_blank' as const) : undefined,
+	}), [newTab]);
+
+	//
+	// C. Render components
+
 	const linkElement = isExternal ? (
-		<a
-			href={href}
-			rel={linkRel}
-			target={linkTarget}
-			style={{
-				color: '#0066cc',
-				textDecoration: 'underline',
-			}}
-		>
+		<a href={href} {...linkProps} className={styles.linkStyle}>
 			{linkContent}
 		</a>
 	) : (
-		<Link
-			href={href}
-			rel={linkRel}
-			target={linkTarget}
-			style={isBlockLink ? {
-				color: '#0066cc',
-				textDecoration: 'underline',
-			} : undefined}
-		>
+		<Link href={href} {...linkProps} className={isBlockLink ? styles.linkStyle : undefined}>
 			{linkContent}
 		</Link>
 	);
 
 	if (isBlockLink) {
 		return (
-			<div style={{ margin: '1rem 0' }}>
+			<div className={styles.blockWrapperStyle}>
 				{linkElement}
 			</div>
 		);

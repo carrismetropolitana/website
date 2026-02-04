@@ -59,6 +59,8 @@ export const NewsListContextProvider = ({ children }) => {
 
 	const { data: allNewsData, isLoading: allNewsLoading } = useSWR<NewsData[], Error>(`/api/news`, { refreshInterval: 900000 }); // 15 minutes
 
+	console.log('allNewsData', allNewsData);
+
 	//
 	// C. Transform data
 

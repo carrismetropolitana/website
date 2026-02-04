@@ -1,0 +1,8 @@
+.linkStyle {
+	color: var(--color-system-text-100);
+	text-decoration: underline;
+}
+
+.blockWrapperStyle {
+	margin: var(--size-spacing-10) 0;
+}

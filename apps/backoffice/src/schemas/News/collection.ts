@@ -47,7 +47,6 @@ export const News: CollectionConfig = {
 		publishedAtField,
 		updatedAtField,
 	],
-
 	labels: {
 		plural: 'Notícias',
 		singular: 'Notícia',
@@ -56,5 +55,11 @@ export const News: CollectionConfig = {
 	slug: 'news',
 
 	timestamps: false,
+
+	// versions: {
+	// 	drafts: {
+	// 		autosave: true,
+	// 	},
+	// },
 
 };

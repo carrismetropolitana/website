@@ -22,7 +22,7 @@ export function Paragraph({ children }: ParagraphProps) {
 	const renderLexicalNode = useRenderLexicalNode();
 	const hasMention = children.some(child => hasLineMentionNode(child));
 	const Tag = hasMention ? 'div' : 'p';
-	const style = hasMention ? { marginBottom: '1em' } : undefined;
+	const style = hasMention ? { marginBottom: 'var(--size-spacing-10)' } : undefined;
 
 	//
 	// B. Render components
