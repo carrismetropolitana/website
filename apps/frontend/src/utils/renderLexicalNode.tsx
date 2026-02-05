@@ -70,7 +70,7 @@ export function useRenderLexicalNode() {
 
 		// Handle text nodes
 		if (nodeType === 'text') {
-			return <Text key={key} format={node.format} text={node.text} />;
+			return <Text key={key} format={node.format} style={node.style} text={node.text} />;
 		}
 
 		// Handle links (both inline and block)
