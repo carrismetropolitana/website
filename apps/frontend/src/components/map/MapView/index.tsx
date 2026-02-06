@@ -2,6 +2,7 @@
 
 /* * */
 
+import { MapViewDebug } from '@/components/map/MapViewDebug';
 import { MapViewToolbar } from '@/components/map/MapViewToolbar';
 import { useDebugContext } from '@/contexts/Debug.context';
 import { useMapOptionsContext } from '@/contexts/MapOptions.context';
@@ -10,8 +11,6 @@ import Map, { FullscreenControl, GeolocateControl, MapRef, NavigationControl, Sc
 import { useCallback, useEffect, useState } from 'react';
 
 import styles from './styles.module.css';
-
-import { MapViewDebug } from '../MapViewDebug';
 
 /* * */
 
@@ -41,7 +40,8 @@ const MAP_LOAD_ASSETS = [
 
 export type MapStyle = 'map' | 'satellite';
 
-interface Props {
+interface MapViewProps {
+	autoZoom?: boolean
 	children: React.ReactNode
 	fullscreen?: boolean
 	geolocate?: boolean
@@ -52,6 +52,7 @@ interface Props {
 	navigation?: boolean
 	onCenterMap?: () => void
 	onClick?: (arg0) => void
+	onDrag?: (arg0) => void
 	onMouseEnter?: (arg0) => void // When the mouse enters the interactive layer
 	onMouseLeave?: (arg0) => void // When the mouse leaves the interactive layer
 	onMouseOut?: (arg0) => void // When the mouse enters the map
@@ -59,42 +60,30 @@ interface Props {
 	onMove?: (arg0) => void
 	onMoveEnd?: (arg0) => void
 	onMoveStart?: (arg0) => void
+	onZoom?: (arg0) => void
 	primarySourceId?: string
 	scale?: boolean
 	scrollZoom?: boolean
+	showCenterButton?: boolean
 	toolbar?: boolean
 	toolbarExtras?: React.ReactNode
 }
 
 /* * */
 
-export function MapView({
-	children,
-	fullscreen = true,
-	geolocate = true,
-	id,
-	interactiveLayerIds = [],
-	mapStyle,
-	navigation = true,
-	onCenterMap,
-	onClick,
-	onMouseEnter,
-	onMouseLeave,
-	onMouseOut,
-	onMouseOver,
-	onMoveEnd,
-	onMoveStart,
-	scale = false,
-	scrollZoom = true,
-	toolbar = true,
-	toolbarExtras,
-}: Props) {
+export function MapView({ autoZoom, children, fullscreen = true, geolocate = true, id, interactiveLayerIds = [], mapStyle, navigation = true, onCenterMap, onClick, onDrag, onMouseEnter, onMouseLeave, onMouseOut, onMouseOver, onMoveEnd, onMoveStart, onZoom, scale = false, scrollZoom = true, showCenterButton = false, toolbar = true, toolbarExtras }: MapViewProps) {
+	//
+
 	//
 	// A. Setup variables
-	const [cursor, setCursor] = useState<string>('auto');
+
 	const allMaps = useMap();
+
 	const mapOptionsContext = useMapOptionsContext();
-	const { flags: { is_debug_mode } } = useDebugContext();
+
+	const debugContext = useDebugContext();
+
+	const [cursor, setCursor] = useState<string>('auto');
 
 	//
 	// B. Transform data
@@ -114,44 +103,43 @@ export function MapView({
 
 	//
 	// C. Handle actions
+
 	const handleOnMouseEnter = useCallback((event) => {
 		setCursor('pointer');
-
-		if (onMouseEnter) {
-			onMouseEnter(event);
-		}
+		if (onMouseEnter) onMouseEnter(event);
 	}, []);
 
 	const handleOnMouseLeave = useCallback((event) => {
 		setCursor('auto');
-
-		if (onMouseLeave) {
-			onMouseLeave(event);
-		}
+		if (onMouseLeave) onMouseLeave(event);
 	}, []);
 
 	const handleOnMoveStart = useCallback((event) => {
 		setCursor('grab');
-
-		if (onMoveStart) {
-			onMoveStart(event);
-		}
+		if (onMoveStart) onMoveStart(event);
 	}, []);
 
 	const handleOnMoveEnd = useCallback((event) => {
 		setCursor('auto');
-
-		if (onMoveEnd) {
-			onMoveEnd(event);
-		}
+		if (onMoveEnd) onMoveEnd(event);
 	}, []);
 
 	//
-	// C. Render components
+	// D. Render components
 
 	return (
 		<div className={styles.container}>
-			{toolbar && <MapViewToolbar className={styles.toolbar} onCenterMap={onCenterMap} toolbarExtras={toolbarExtras} />}
+
+			{toolbar && (
+				<MapViewToolbar
+					autoZoom={autoZoom}
+					className={styles.toolbar}
+					onCenterMap={onCenterMap}
+					showCenterButton={showCenterButton}
+					toolbarExtras={toolbarExtras}
+				/>
+			)}
+
 			<Map
 				attributionControl={false}
 				cursor={cursor}
@@ -163,6 +151,7 @@ export function MapView({
 				maxZoom={mapDefaultConfig.maxZoom}
 				minZoom={mapDefaultConfig.minZoom}
 				onClick={onClick}
+				onDrag={onDrag}
 				onMouseEnter={handleOnMouseEnter}
 				onMouseLeave={handleOnMouseLeave}
 				onMouseOut={onMouseOut}
@@ -170,24 +159,30 @@ export function MapView({
 				onMove={handleOnMoveStart}
 				onMoveEnd={handleOnMoveEnd}
 				onMoveStart={handleOnMoveStart}
+				onZoom={onZoom}
 				scrollZoom={scrollZoom}
 				style={{ height: '100%', width: '100%' }}
 			>
+
 				{navigation && <NavigationControl />}
 				{fullscreen && <FullscreenControl />}
 				{geolocate && <GeolocateControl />}
 				{scale && <ScaleControl />}
+
 				<div className={styles.childrenWrapper}>
 					{children}
 				</div>
-				{is_debug_mode && <MapViewDebug />}
+
+				{debugContext.flags.is_debug_mode && <MapViewDebug />}
 
 			</Map>
+
 			<div className={styles.attributionWrapper}>
 				<a href="https://maplibre.org/" target="_blank">MapLibre</a>
 				<a href="https://www.openmaptiles.org/" target="_blank">© OpenMapTiles</a>
 				<a href="https://www.openstreetmap.org/copyright" target="_blank">© OpenStreetMap contributors</a>
 			</div>
+
 		</div>
 	);
 }

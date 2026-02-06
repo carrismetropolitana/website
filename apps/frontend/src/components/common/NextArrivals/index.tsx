@@ -1,3 +1,5 @@
+'use client';
+
 /* * */
 
 import type { ArrivalStatus } from '@/types/stops.types';

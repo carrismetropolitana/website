@@ -34,6 +34,8 @@ services:
       options:
         max-size: '1m'
         max-file: '1'
+    ports:
+      - 27017:27017
     volumes:
       - websitedbdata:/data/db
     env_file:
@@ -104,6 +106,20 @@ services:
 
   schools:
     image: ghcr.io/carrismetropolitana/website-schools:staging
+    restart: unless-stopped
+    mem_limit: 6g
+    logging:
+      options:
+        max-size: '1m'
+        max-file: '1'
+    env_file:
+      - ./secrets/.env
+
+  # # # # # # # # # # # # # # # # # # # # #
+  # # # # # # # # # # # # # # # # # # # # #
+
+  pips:
+    image: ghcr.io/carrismetropolitana/website-pips:staging
     restart: unless-stopped
     mem_limit: 6g
     logging:

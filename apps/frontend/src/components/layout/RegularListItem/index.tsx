@@ -1,9 +1,10 @@
-/* * */
+'use client';
 
-import type { LegacyRef } from 'react';
+/* * */
 
 import { IconArrowNarrowRight } from '@tabler/icons-react';
 import Link from 'next/link';
+import { type RefObject } from 'react';
 
 import styles from './styles.module.css';
 
@@ -14,7 +15,7 @@ interface Props {
 	href: string
 	icon?: React.ReactNode
 	onClick?: () => void
-	refFn?: LegacyRef<HTMLAnchorElement>
+	refFn?: RefObject<HTMLAnchorElement>
 	style?: React.CSSProperties
 }
 

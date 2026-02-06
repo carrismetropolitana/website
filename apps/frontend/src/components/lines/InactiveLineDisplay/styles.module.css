@@ -1,0 +1,16 @@
+/* * */
+/* CONTAINER */
+
+.container {
+	display: flex;
+	flex-direction: row;
+	gap: var(--size-spacing-10);
+	align-items: center;
+	justify-content: flex-start;
+}
+
+/* Override text color to gray for the message */
+.container :global(div[class*="name"]) {
+	font-weight: var(--font-weight-medium);
+	color: var(--color-system-text-300);
+}

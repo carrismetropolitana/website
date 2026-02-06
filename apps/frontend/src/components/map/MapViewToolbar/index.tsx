@@ -6,7 +6,7 @@ import TextPopover from '@/components/common/TextPopover';
 import { useAnalyticsContext } from '@/contexts/Analytics.context';
 import { useMapOptionsContext } from '@/contexts/MapOptions.context';
 import { SegmentedControl, SegmentedControlItem } from '@mantine/core';
-import { IconArrowsMinimize, IconMapShare } from '@tabler/icons-react';
+import { IconArrowsMinimize, IconMapShare, IconZoomScan } from '@tabler/icons-react';
 import classNames from 'classnames';
 import { useTranslations } from 'next-intl';
 
@@ -15,14 +15,16 @@ import styles from './styles.module.css';
 /* * */
 
 interface Props {
+	autoZoom?: boolean
 	className?: string
 	onCenterMap?: () => void
+	showCenterButton?: boolean
 	toolbarExtras?: React.ReactNode
 }
 
 /* * */
 
-export function MapViewToolbar({ className, onCenterMap, toolbarExtras }: Props) {
+export function MapViewToolbar({ autoZoom, className, onCenterMap, showCenterButton = false, toolbarExtras }: Props) {
 	//
 
 	//
@@ -77,10 +79,10 @@ export function MapViewToolbar({ className, onCenterMap, toolbarExtras }: Props)
 		<div className={classNames(styles.container, className)}>
 			<div className={styles.left}>
 				<SegmentedControl classNames={{ label: styles.segmentedControlLabel }} data={mapStyles} onChange={mapOptionsContext.actions.setStyle} value={mapOptionsContext.data.style} />
-				{onCenterMap && (
+				{showCenterButton && onCenterMap && (
 					<button className={styles.button} onClick={onCenterMap}>
 						<TextPopover text={t('center_map')} textSize="md">
-							<IconArrowsMinimize />
+							{autoZoom ? <IconZoomScan /> : <IconArrowsMinimize />}
 						</TextPopover>
 					</button>
 				)}

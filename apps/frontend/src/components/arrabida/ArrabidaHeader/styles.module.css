@@ -1,0 +1,124 @@
+/* * */
+/* CONTAINER */
+
+.container {
+	position: sticky;
+	top: 0;
+	z-index: 100;
+	display: flex;
+	flex-direction: row;
+	gap: var(--size-spacing-20);
+	justify-content: space-between;
+	width: 100%;
+	background-color: var(--color-system-background-100);
+	border: 1px solid var(--color-system-border-100);
+	border-radius: var(--border-radius-lg);
+	transition: all 400ms ease;
+}
+
+.container.isSticky {
+	width: calc(100% + var(--size-spacing-20) + var(--size-spacing-20));
+	border-top-color: transparent;
+	border-top-left-radius: 0;
+	border-top-right-radius: 0;
+	box-shadow: 0 0 40px 0 rgb(0 0 0 / 7%);
+	transform: translate(-20px, 0);
+}
+
+@media (width <= 1200px) {
+	.container.isSticky {
+		border-color: transparent;
+		border-bottom-color: var(--color-system-border-100);
+		border-radius: 0;
+	}
+}
+
+@media (width <= 650px) {
+	.container,
+	.container.isSticky {
+		width: 100%;
+		box-shadow: none;
+		transform: none;
+	}
+}
+
+/* * */
+/* NAV WRAPPER */
+
+.navWrapper {
+	display: flex;
+	flex-direction: row;
+	gap: var(--size-spacing-30);
+	justify-content: flex-start;
+	align-items: center;
+	width: 70%;
+	padding-left: var(--size-spacing-20);
+	border-left: 1px solid var(--color-system-border-100);
+	border-radius: var(--border-radius-lg);
+}
+
+/* * */
+/* LOGO WRAPPER */
+
+.logoWrapper {
+	display: flex;
+	align-items: center;
+	gap: var(--size-spacing-10);
+	justify-content: flex-start;
+	width: 30%;
+}
+
+/* * */
+/* CONTENT WRAPPER */
+
+.contentWrapper {
+	display: flex;
+	flex-direction: row;
+	gap: var(--size-spacing-30);
+	justify-content: flex-end;
+	align-items: center;
+	width: 100%;
+	padding-right: var(--size-spacing-20);
+}
+
+/* * */
+/* NAV LIST */
+
+.navList {
+	display: flex;
+	flex-direction: row;
+	gap: var(--size-spacing-40);
+	justify-content: center;
+	width: 100%;
+	margin: 0;
+	padding: 0;
+	list-style: none;
+	font-size: var(--font-size-subtitle);
+	font-weight: var(--font-weight-subtitle);
+	line-height: normal;
+}
+
+.navList li a {
+	color: inherit;
+	text-decoration: none;
+	transition: color 200ms ease;
+}
+
+.navList li a:hover {
+	color: var(--color-system-text-200);
+}
+
+@media (width <= 900px) {
+	.navList {
+		display: none;
+	}
+	
+	.logoWrapper {
+		width: 100%;
+		justify-content: center;
+	}
+	
+	.contentWrapper {
+		justify-content: center;
+	}
+}

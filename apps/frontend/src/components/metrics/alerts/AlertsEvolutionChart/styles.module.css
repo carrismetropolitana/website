@@ -1,0 +1,74 @@
+/* * */
+/* CONTAINER */
+
+.container {
+    display: flex;
+    flex-direction: column;
+    gap: var(--size-spacing-30);
+    width: 100%;
+    overflow: hidden;
+}
+
+/* * */
+/* BADGE */
+
+.badgesContainer{
+    display: flex;
+    gap: var(--size-spacing-10);
+}
+
+.badge {
+	position: relative;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+    min-width: 85px;
+	min-height: 34px;
+	max-height: 34px;
+	font-size: 12px;
+	font-weight: var(--font-weight-extrabold);
+	line-height: 1;
+	color: var(--color-system-text-100);
+	letter-spacing: 1px;
+	cursor: pointer;
+	background-color: var(--color-system-text-200);
+	border-radius: 999px;
+    opacity: 0.2;
+	transition: all 200ms ease;
+}
+
+.badge.active {
+    background-color: var(--color-brand);
+    opacity: 1;
+}
+
+.badge:hover:not(.active) {
+    opacity: 0.4;
+}
+
+/* * */
+/* SUMMARY */
+
+.summaryWrapper {
+	display: flex;
+	flex-direction: column;
+	border-radius: var(--border-radius-lg);
+}
+
+.summaryValue {
+	font-size: 20px;
+	font-weight: var(--font-weight-bold);
+}
+
+.summaryDescription {
+	font-size: 16px;
+	font-weight: var(--font-weight-semibold);
+}
+
+/* * */
+/* GRAPH WRAPPER */
+
+.graphWrapper {
+	opacity: 0.2;
+	animation: fadeIn 750ms infinite alternate;
+}

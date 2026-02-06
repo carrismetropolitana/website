@@ -1,8 +1,8 @@
 'use client';
 
-import TextPopover from '@/components/common/TextPopover';
 /* * */
 
+import TextPopover from '@/components/common/TextPopover';
 import { MapView } from '@/components/map/MapView';
 import { MapViewStyleAlerts, MapViewStyleAlertsLayerId, MapViewStyleAlertsSourceId } from '@/components/map/MapViewStyleAlerts';
 import { MapViewStylePath } from '@/components/map/MapViewStylePath';
@@ -12,11 +12,12 @@ import { useEnvironmentContext } from '@/contexts/Environment.context';
 import { transformStopDataIntoGeoJsonFeature, useStopsContext } from '@/contexts/Stops.context';
 import { transformVehicleDataIntoGeoJsonFeature, useVehiclesContext } from '@/contexts/Vehicles.context';
 import { useVehiclesListContext } from '@/contexts/VehiclesList.context';
-import { getBaseGeoJsonFeatureCollection } from '@/utils/map.utils';
+import { centerMap, getBaseGeoJsonFeatureCollection } from '@/utils/map.utils';
 import getOperationalDate from '@/utils/operation';
 import { Pattern, Shape } from '@carrismetropolitana/api-types/network';
 import { getPublicVariable } from '@carrismetropolitana/website-shared-settings';
 import { IconAlertTriangle } from '@tabler/icons-react';
+import { useMap } from '@vis.gl/react-maplibre';
 import { useTranslations } from 'next-intl';
 import { useRouter } from 'next/navigation';
 import { useEffect, useMemo, useState } from 'react';
@@ -31,6 +32,8 @@ export function VehiclesListMap() {
 	//
 	// A. Setup variables
 
+	const { vehiclesListMap } = useMap();
+
 	const router = useRouter();
 	const vehiclesListContext = useVehiclesListContext();
 	const vehiclesContext = useVehiclesContext();
@@ -38,6 +41,7 @@ export function VehiclesListMap() {
 	const alertsContext = useAlertsContext();
 	const environmentContext = useEnvironmentContext();
 
+	const [isAutoZoom, setIsAutoZoom] = useState(true);
 	const [activePatternData, setActivePatternData] = useState<Pattern | undefined>();
 	const [activeShapeData, setActiveShapeData] = useState<Shape | undefined>();
 	const [showAlerts, setShowAlerts] = useState(true);
@@ -123,6 +127,7 @@ export function VehiclesListMap() {
 	// D. Handle actions
 
 	function handleLayerClick(event) {
+		setIsAutoZoom(false);
 		if (event.features.length !== 0 && event.features[0].source === 'default-source-vehicles') {
 			vehiclesListContext.actions.updateSelectedVehicle(event.features[0].properties.id);
 		}
@@ -135,6 +140,26 @@ export function VehiclesListMap() {
 			vehiclesListContext.actions.updateSelectedVehicle(null);
 		}
 	}
+
+	function handleOnCenterMap() {
+		if (!vehiclesListMap) return;
+		if (!activeVehiclesGeoJsonFC?.features.length) return;
+		centerMap(vehiclesListMap, activeVehiclesGeoJsonFC.features);
+		setIsAutoZoom(true);
+	}
+
+	useEffect(() => {
+		if (isAutoZoom) return;
+		const timeout = setTimeout(() => setIsAutoZoom(true), 300_000);
+		return () => clearTimeout(timeout);
+	}, [isAutoZoom]);
+
+	useEffect(() => {
+		if (!isAutoZoom) return;
+		if (!vehiclesListMap) return;
+		if (!activeVehiclesGeoJsonFC?.features.length) return;
+		centerMap(vehiclesListMap, activeVehiclesGeoJsonFC.features);
+	}, [vehiclesListMap, activeVehiclesGeoJsonFC, isAutoZoom]);
 
 	//
 	// E. Render components
@@ -149,9 +174,13 @@ export function VehiclesListMap() {
 
 	return (
 		<MapView
+			autoZoom={isAutoZoom}
 			id="vehiclesListMap"
 			interactiveLayerIds={[MapViewStyleVehiclesInteractiveLayerId, MapViewStyleAlertsLayerId]}
+			onCenterMap={handleOnCenterMap}
 			onClick={handleLayerClick}
+			onDrag={() => setIsAutoZoom(false)}
+			showCenterButton={true}
 			toolbarExtras={toolbarExtras}
 		>
 			{showAlerts && <MapViewStyleAlerts data={alertsContext.data.featureCollection} />}

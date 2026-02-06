@@ -1,0 +1,53 @@
+'use client';
+/* * */
+
+import { IconCaretLeftFilled } from '@tabler/icons-react';
+
+import styles from './styles.module.css';
+
+import { Review2025BadgeToIcon, Review2025CardSchema } from '../_data/cards';
+import * as Icons from '../_data/icons';
+
+/* * */
+
+interface Props {
+	cardData: Review2025CardSchema
+	isOpen: boolean
+	onToggle: () => void
+}
+
+export function Review2025CardHeader({ cardData, isOpen, onToggle }: Props) {
+	//
+	return (
+		<div className={styles.container} onClick={onToggle}>
+			<div className={styles.header}>
+				<div className={styles.headerTitleWrapper}>
+					<p className={styles.headerTitle}>{cardData.title}</p>
+					{cardData.subtitle && <p className={styles.headerSubtitle}>{cardData.subtitle}</p>}
+				</div>
+				<IconCaretLeftFilled className={styles.headerIconClosed} data-open={isOpen} />
+			</div>
+
+			<div className={styles.badgesWrapper}>
+				{Object.keys(cardData.badges).map((badge) => {
+					const badgeState = cardData.badges[badge as keyof typeof cardData.badges];
+					if (badgeState === 'hidden') return null;
+
+					const IconComponent = Icons[Review2025BadgeToIcon[badge]];
+					if (!IconComponent) return null;
+
+					return (
+						<IconComponent
+							key={badge}
+							backgroundColor={badgeState === 'active' ? cardData.color : undefined}
+							className={styles.badge}
+							color={badgeState === 'active' ? '#fff' : undefined}
+
+						/>
+					);
+				})}
+			</div>
+		</div>
+	);
+	//
+}
