@@ -11,53 +11,6 @@
 	height: 70px;
 	min-height: 70px;
 	max-height: 70px;
-}
-
-/* * */
-/* MESSAGE OVERLAY */
-
-.messageOverlay {
-	position: fixed;
-	inset: 0;
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	z-index: 9999;
-	pointer-events: none;
-	animation: fadeIn 0.3s ease-in;
-}
-
-.messageText {
-	font-size: clamp(2rem, 5vw, 4rem);
-	font-weight: bold;
-	text-align: center;
-	color: #fff;
-	text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5), 0 0 20px rgba(0, 0, 0, 0.8);
-	padding: 2rem;
-	background: rgba(0, 0, 0, 0.6);
-	border-radius: 1rem;
-	backdrop-filter: blur(10px);
-	animation: scaleIn 0.3s ease-out;
-	max-width: 90vw;
-	line-height: 1.2;
-}
-
-@keyframes fadeIn {
-	from {
-		opacity: 0;
-	}
-	to {
-		opacity: 1;
-	}
-}
-
-@keyframes scaleIn {
-	from {
-		transform: scale(0.8);
-		opacity: 0;
-	}
-	to {
-		transform: scale(1);
-		opacity: 1;
-	}
+	cursor: pointer;
+	user-select: none;
 }
