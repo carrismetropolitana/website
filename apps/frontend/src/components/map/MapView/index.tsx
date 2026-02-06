@@ -41,12 +41,13 @@ const MAP_LOAD_ASSETS = [
 
 export type MapStyle = 'map' | 'satellite';
 
-interface Props {
+interface MapViewProps {
 	children: React.ReactNode
 	fullscreen?: boolean
 	geolocate?: boolean
 	id?: string
 	interactiveLayerIds?: string[]
+	isAutoZoom?: boolean
 	mapObject?: MapRef
 	mapStyle?: MapStyle
 	navigation?: boolean
@@ -59,9 +60,11 @@ interface Props {
 	onMove?: (arg0) => void
 	onMoveEnd?: (arg0) => void
 	onMoveStart?: (arg0) => void
+	onZoom?: (arg0) => void
 	primarySourceId?: string
 	scale?: boolean
 	scrollZoom?: boolean
+	setAutoZoom?: (value: boolean) => void
 	showCenterButton?: boolean
 	toolbar?: boolean
 	toolbarExtras?: React.ReactNode
@@ -69,37 +72,21 @@ interface Props {
 
 /* * */
 
-export function MapView({
-	children,
-	fullscreen = true,
-	geolocate = true,
-	id,
-	interactiveLayerIds = [],
-	mapStyle,
-	navigation = true,
-	onCenterMap,
-	onClick,
-	onMouseEnter,
-	onMouseLeave,
-	onMouseOut,
-	onMouseOver,
-	onMoveEnd,
-	onMoveStart,
-	scale = false,
-	scrollZoom = true,
-	showCenterButton = false,
-	toolbar = true,
-	toolbarExtras,
-}: Props) {
+export function MapView({ children, fullscreen = true, geolocate = true, id, interactiveLayerIds = [], isAutoZoom, mapStyle, navigation = true, onCenterMap, onClick, onMouseEnter, onMouseLeave, onMouseOut, onMouseOver, onMoveEnd, onMoveStart, onZoom, scale = false, scrollZoom = true, setAutoZoom, showCenterButton = false, toolbar = true, toolbarExtras }: MapViewProps) {
+	//
+
 	//
 	// A. Setup variables
 
-	const [cursor, setCursor] = useState<string>('auto');
-
 	const allMaps = useMap();
+
 	const mapOptionsContext = useMapOptionsContext();
 
-	const { flags: { is_debug_mode } } = useDebugContext();
+	const debugContext = useDebugContext();
+
+	const [cursor, setCursor] = useState<string>('auto');
+
+	const [isAutoZoomFlag, setIsAutoZoomFlag] = useState(true);
 
 	//
 	// B. Transform data
@@ -119,44 +106,42 @@ export function MapView({
 
 	//
 	// C. Handle actions
+
 	const handleOnMouseEnter = useCallback((event) => {
 		setCursor('pointer');
-
-		if (onMouseEnter) {
-			onMouseEnter(event);
-		}
+		if (onMouseEnter) onMouseEnter(event);
 	}, []);
 
 	const handleOnMouseLeave = useCallback((event) => {
 		setCursor('auto');
-
-		if (onMouseLeave) {
-			onMouseLeave(event);
-		}
+		if (onMouseLeave) onMouseLeave(event);
 	}, []);
 
 	const handleOnMoveStart = useCallback((event) => {
 		setCursor('grab');
-
-		if (onMoveStart) {
-			onMoveStart(event);
-		}
+		if (onMoveStart) onMoveStart(event);
 	}, []);
 
 	const handleOnMoveEnd = useCallback((event) => {
 		setCursor('auto');
-
-		if (onMoveEnd) {
-			onMoveEnd(event);
-		}
+		if (onMoveEnd) onMoveEnd(event);
 	}, []);
 
 	//
-	// C. Render components
+	// D. Render components
 
 	return (
 		<div className={styles.container}>
-			{toolbar && <MapViewToolbar className={styles.toolbar} onCenterMap={onCenterMap} showCenterButton={showCenterButton} toolbarExtras={toolbarExtras} />}
+
+			{toolbar && (
+				<MapViewToolbar
+					className={styles.toolbar}
+					onCenterMap={onCenterMap}
+					showCenterButton={showCenterButton}
+					toolbarExtras={toolbarExtras}
+				/>
+			)}
+
 			<Map
 				attributionControl={false}
 				cursor={cursor}
@@ -175,6 +160,7 @@ export function MapView({
 				onMove={handleOnMoveStart}
 				onMoveEnd={handleOnMoveEnd}
 				onMoveStart={handleOnMoveStart}
+				onZoom={onZoom}
 				scrollZoom={scrollZoom}
 				style={{ height: '100%', width: '100%' }}
 			>
@@ -187,7 +173,8 @@ export function MapView({
 				<div className={styles.childrenWrapper}>
 					{children}
 				</div>
-				{is_debug_mode && <MapViewDebug />}
+
+				{debugContext.flags.is_debug_mode && <MapViewDebug />}
 
 			</Map>
 			<div className={styles.attributionWrapper}>
