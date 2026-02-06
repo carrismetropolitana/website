@@ -7,21 +7,19 @@ import { Image } from '@mantine/core';
 
 interface ImageProps {
 	alt?: string
-	height?: number
 	src?: string
-	width?: number
 }
 
 /* * */
 
-export function ImageComponent({ alt, height, src, width }: ImageProps) {
+export function ImageComponent({ alt, src }: ImageProps) {
 	//
 
 	//
 	// A. Render components
 
 	return (
-		<Image alt={alt || ''} fallbackSrc="/assets/common/placeholder.png" height={height} src={src} width={width} />
+		<Image alt={alt || ''} fallbackSrc="/assets/common/placeholder.png" fit="contain" src={src} style={{ height: 'auto', maxWidth: '100%' }} />
 	);
 
 	//

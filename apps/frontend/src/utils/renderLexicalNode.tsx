@@ -19,6 +19,8 @@ import { type ReactNode } from 'react';
 
 /* * */
 
+// Custom Block Renderer
+
 function renderBlock(node: LexicalNode, key?: number): ReactNode {
 	switch (node.fields?.blockType) {
 		case 'accordion': {
@@ -37,6 +39,8 @@ function renderBlock(node: LexicalNode, key?: number): ReactNode {
 }
 
 /* * */
+
+// Standard Lexical Node Renderer
 
 function renderNode(node: LexicalNode, key?: number): ReactNode {
 	if (!node || typeof node !== 'object') return null;
@@ -60,8 +64,8 @@ function renderNode(node: LexicalNode, key?: number): ReactNode {
 		case 'root': return renderChildren();
 		case 'text': return <Text key={key} format={node.format} style={node.style} text={node.text} />;
 		case 'upload': {
-			const img = node.value as { filename?: string, height?: number, url?: string, width?: number };
-			return <ImageComponent key={key} alt={img.filename} height={img.height} src={img.url} width={img.width} />;
+			const img = node.value as { filename?: string, url?: string };
+			return <ImageComponent key={key} alt={img.filename} src={img.url} />;
 		}
 		default: return children.length > 0 ? renderChildren() : (node.text ?? null);
 	}
@@ -72,3 +76,5 @@ function renderNode(node: LexicalNode, key?: number): ReactNode {
 export function useRenderLexicalNode() {
 	return renderNode;
 }
+
+/* * */

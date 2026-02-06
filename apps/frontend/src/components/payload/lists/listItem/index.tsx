@@ -4,6 +4,7 @@
 import { LexicalNode } from '@/types/lexical-node.types';
 import { useRenderLexicalNode } from '@/utils/renderLexicalNode';
 
+import styles from './styles.module.css';
 /* * */
 
 interface ListItemProps {
@@ -24,7 +25,7 @@ export function ListItem({ children }: ListItemProps) {
 	// B. Render components
 
 	return (
-		<li>
+		<li className={styles.listItem}>
 			{children.map((child, idx) => renderLexicalNode(child, idx))}
 		</li>
 	);
