@@ -1490,7 +1490,8 @@
 			"diesel": "Diesel",
 			"electricity": "Eletricidade",
 			"lpg_auto": "GPL",
-			"natural_gas": "Gás Natural"
+			"natural_gas": "Gás Natural",
+			"hybrid": "Híbrido"
 		}
 	},
 	"periods": {
