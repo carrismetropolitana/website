@@ -6,7 +6,7 @@ import { MapView } from '@/components/map/MapView';
 import { MapViewStyleActiveStops, MapViewStyleActiveStopsPrimaryLayerId } from '@/components/map/MapViewStyleActiveStops';
 import { MapViewStylePath, MapViewStylePathInteractiveLayerId } from '@/components/map/MapViewStylePath';
 import { MapViewStyleVehicles, MapViewStyleVehiclesPrimaryLayerId } from '@/components/map/MapViewStyleVehicles';
-import VehicleListDetailPopoverDebug from '@/components/vehicles/VehicleListDetailPopoverDebug';
+import { VehicleListDetailPopoverDebug } from '@/components/vehicles/VehicleListDetailPopoverDebug';
 import { useDebugContext } from '@/contexts/Debug.context';
 import { useLinesDetailContext } from '@/contexts/LinesDetail.context';
 import { transformStopDataIntoGeoJsonFeature, useStopsContext } from '@/contexts/Stops.context';

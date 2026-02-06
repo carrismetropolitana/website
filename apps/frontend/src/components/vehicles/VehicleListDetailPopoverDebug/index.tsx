@@ -13,7 +13,7 @@ interface VehicleListDetailPopoverProps {
 	data: undefined | Vehicle
 }
 
-export default function VehicleListDetailPopoverDebug({ data }: VehicleListDetailPopoverProps) {
+export function VehicleListDetailPopoverDebug({ data }: VehicleListDetailPopoverProps) {
 	//
 
 	//
