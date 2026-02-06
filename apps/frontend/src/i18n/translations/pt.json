@@ -169,6 +169,7 @@
 		},
 		"AlertCauseEffectIcon": {
 			"cause": {
+				"ABUSIVE_PARKING": "Estacionamento Abusivo",
 				"ACCIDENT": "Acidente",
 				"CONSTRUCTION": "Obras",
 				"DEMONSTRATION": "Evento / Manifestação",
@@ -178,7 +179,7 @@
 				"MEDICAL_EMERGENCY": "Emergência Médica",
 				"POLICE_ACTIVITY": "Atividade Policial",
 				"PUBLIC_DISORDER": "Desacatos",
-				"ROAD_ISSUE": "Estacionamento Abusivo",
+				"ROAD_ISSUE": "Incidente na Via",
 				"STRIKE": "Greve",
 				"TECHNICAL_ISSUE": "Problema Técnico",
 				"TRAFFIC_JAM": "Trânsito",

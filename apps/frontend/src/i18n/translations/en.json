@@ -169,6 +169,7 @@
 		},
 		"AlertCauseEffectIcon": {
 			"cause": {
+				"ABUSIVE_PARKING": "Abusive Parking",
 				"ACCIDENT": "Accident",
 				"CONSTRUCTION": "Construction Works",
 				"DEMONSTRATION": "Event / Demonstration",

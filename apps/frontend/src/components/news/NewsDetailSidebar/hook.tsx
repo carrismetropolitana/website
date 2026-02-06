@@ -1,3 +1,5 @@
+'use client';
+
 /**
  * Custom hook to parse HTML and generate Table of Contents tree.
  */
