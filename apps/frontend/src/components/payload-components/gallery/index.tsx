@@ -4,6 +4,8 @@
 
 import { Image } from '@mantine/core';
 
+import styles from './styles.module.css';
+
 /* * */
 
 interface GalleryImage {
@@ -52,20 +54,13 @@ export function Gallery({ fields }: GalleryProps) {
 	// A. Render components
 
 	return (
-		<div style={{ margin: '2rem 0' }}>
+		<div className={styles.wrapper}>
 			{title && (
-				<h3 style={{ fontSize: '1.5rem', fontWeight: 'bold', marginBottom: '1rem' }}>
+				<h3 className={styles.title}>
 					{title}
 				</h3>
 			)}
-			<div
-				style={{
-					display: 'grid',
-					gap: '1rem',
-					gridTemplateColumns: 'repeat(auto-fill, 200px)',
-					justifyContent: 'start',
-				}}
-			>
+			<div className={styles.grid}>
 				{images.map((imageRel, i) => {
 					if (!imageRel || typeof imageRel === 'string') {
 						return null;
@@ -88,34 +83,13 @@ export function Gallery({ fields }: GalleryProps) {
 					const imageUrl = imageValue.url;
 
 					return (
-						<div
-							key={imageValue.id || i}
-							style={{
-								alignItems: 'center',
-								aspectRatio: '1',
-								background: '#f5f5f5',
-								borderRadius: '8px',
-								display: 'flex',
-								height: '200px',
-								justifyContent: 'center',
-								overflow: 'hidden',
-								position: 'relative',
-								width: '200px',
-							}}
-						>
+						<div key={imageValue.id || i} className={styles.item}>
 							<Image
 								alt={imageValue.filename || `Gallery image ${i + 1}`}
 								fallbackSrc="/assets/common/placeholder.png"
 								height={200}
 								src={imageUrl}
 								width={200}
-								style={{
-									height: 'auto',
-									maxHeight: '100%',
-									maxWidth: '100%',
-									objectFit: 'contain',
-									width: 'auto',
-								}}
 							/>
 						</div>
 					);

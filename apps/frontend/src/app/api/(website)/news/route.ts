@@ -6,7 +6,7 @@ export async function GET() {
 
 	const payloadBaseUrl = process.env.PAYLOAD_BASE_URL ?? 'http://localhost:49001';
 	const payloadBasePath = process.env.PAYLOAD_BASE_PATH ?? '/admin';
-	const payloadUrl = `${payloadBaseUrl}${payloadBasePath}/api/news?draft=false&trash=false&sort=-publishedAt`;
+	const payloadUrl = `${payloadBaseUrl}${payloadBasePath}/api/news?draft=false&trash=false&sort=-publishedAt&pagination=false`;
 
 	//
 	// B. Fetch data

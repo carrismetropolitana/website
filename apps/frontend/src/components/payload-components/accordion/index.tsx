@@ -5,6 +5,8 @@ import type { LexicalNode, LexicalRichText } from '@/types/lexical-node.types';
 
 import { useRenderLexicalNode } from '@/utils/renderLexicalNode';
 
+import styles from './styles.module.css';
+
 /* * */
 
 interface AccordionItem {
@@ -47,11 +49,11 @@ export function Accordion({ items }: AccordionProps) {
 	return (
 		<div>
 			{items.map((item, index) => (
-				<details key={item.id || index} style={{ marginBottom: '1rem' }}>
-					<summary style={{ cursor: 'pointer', fontWeight: 'bold', padding: '0.5rem 0' }}>
+				<details key={item.id || index} className={styles.item}>
+					<summary className={styles.summary}>
 						{item.title}
 					</summary>
-					<div style={{ padding: '1rem 0', paddingLeft: '1rem', whiteSpace: 'pre-wrap' }}>
+					<div className={styles.content}>
 						{renderContent(item.content)}
 					</div>
 				</details>

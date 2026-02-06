@@ -6,6 +6,8 @@ import { useEnvironmentContext } from '@/contexts/Environment.context';
 import { useLinesContext } from '@/contexts/Lines.context';
 import { useRouter } from 'next/navigation';
 
+import styles from './styles.module.css';
+
 /* * */
 
 interface LineMentionProps {
@@ -43,8 +45,8 @@ export function LineMention({ id = '', label = '', mentionType = 'line' }: LineM
 		const lineData = linesContext.actions.getLineDataById(id);
 
 		return (
-			<span style={{ display: 'inline-block', lineHeight: 0, verticalAlign: 'middle' }}>
-				<a href={lineHref} onClick={e => handleLineClick(e, id)} style={{ color: 'inherit', textDecoration: 'none' }}>
+			<span className={styles.wrapper}>
+				<a className={styles.link} href={lineHref} onClick={e => handleLineClick(e, id)}>
 					<LineDisplay lineData={lineData} size="md" />
 				</a>
 			</span>
@@ -52,7 +54,7 @@ export function LineMention({ id = '', label = '', mentionType = 'line' }: LineM
 	}
 
 	return (
-		<span style={{ display: 'inline-block', verticalAlign: 'middle' }}>
+		<span className={styles.fallback}>
 			{mentionType}:{label || id}
 		</span>
 	);
