@@ -1,8 +1,8 @@
 'use client';
 
-import TextPopover from '@/components/common/TextPopover';
 /* * */
 
+import TextPopover from '@/components/common/TextPopover';
 import { MapView } from '@/components/map/MapView';
 import { MapViewStyleAlerts, MapViewStyleAlertsLayerId, MapViewStyleAlertsSourceId } from '@/components/map/MapViewStyleAlerts';
 import { MapViewStylePath } from '@/components/map/MapViewStylePath';
@@ -41,6 +41,7 @@ export function VehiclesListMap() {
 	const alertsContext = useAlertsContext();
 	const environmentContext = useEnvironmentContext();
 
+	const [isAutoZoom, setIsAutoZoom] = useState(true);
 	const [activePatternData, setActivePatternData] = useState<Pattern | undefined>();
 	const [activeShapeData, setActiveShapeData] = useState<Shape | undefined>();
 	const [showAlerts, setShowAlerts] = useState(true);
@@ -126,6 +127,7 @@ export function VehiclesListMap() {
 	// D. Handle actions
 
 	function handleLayerClick(event) {
+		setIsAutoZoom(false);
 		if (event.features.length !== 0 && event.features[0].source === 'default-source-vehicles') {
 			vehiclesListContext.actions.updateSelectedVehicle(event.features[0].properties.id);
 		}
@@ -143,7 +145,21 @@ export function VehiclesListMap() {
 		if (!vehiclesListMap) return;
 		if (!activeVehiclesGeoJsonFC?.features.length) return;
 		centerMap(vehiclesListMap, activeVehiclesGeoJsonFC.features);
+		setIsAutoZoom(true);
 	}
+
+	useEffect(() => {
+		if (isAutoZoom) return;
+		const timeout = setTimeout(() => setIsAutoZoom(true), 300_000);
+		return () => clearTimeout(timeout);
+	}, [isAutoZoom]);
+
+	useEffect(() => {
+		if (!isAutoZoom) return;
+		if (!vehiclesListMap) return;
+		if (!activeVehiclesGeoJsonFC?.features.length) return;
+		centerMap(vehiclesListMap, activeVehiclesGeoJsonFC.features);
+	}, [vehiclesListMap, activeVehiclesGeoJsonFC, isAutoZoom]);
 
 	//
 	// E. Render components
@@ -158,10 +174,12 @@ export function VehiclesListMap() {
 
 	return (
 		<MapView
+			autoZoom={isAutoZoom}
 			id="vehiclesListMap"
 			interactiveLayerIds={[MapViewStyleVehiclesInteractiveLayerId, MapViewStyleAlertsLayerId]}
 			onCenterMap={handleOnCenterMap}
 			onClick={handleLayerClick}
+			onDrag={() => setIsAutoZoom(false)}
 			showCenterButton={true}
 			toolbarExtras={toolbarExtras}
 		>

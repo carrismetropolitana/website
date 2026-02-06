@@ -2,6 +2,7 @@
 
 /* * */
 
+import { MapViewDebug } from '@/components/map/MapViewDebug';
 import { MapViewToolbar } from '@/components/map/MapViewToolbar';
 import { useDebugContext } from '@/contexts/Debug.context';
 import { useMapOptionsContext } from '@/contexts/MapOptions.context';
@@ -10,8 +11,6 @@ import Map, { FullscreenControl, GeolocateControl, MapRef, NavigationControl, Sc
 import { useCallback, useEffect, useState } from 'react';
 
 import styles from './styles.module.css';
-
-import { MapViewDebug } from '../MapViewDebug';
 
 /* * */
 
@@ -42,17 +41,18 @@ const MAP_LOAD_ASSETS = [
 export type MapStyle = 'map' | 'satellite';
 
 interface MapViewProps {
+	autoZoom?: boolean
 	children: React.ReactNode
 	fullscreen?: boolean
 	geolocate?: boolean
 	id?: string
 	interactiveLayerIds?: string[]
-	isAutoZoom?: boolean
 	mapObject?: MapRef
 	mapStyle?: MapStyle
 	navigation?: boolean
 	onCenterMap?: () => void
 	onClick?: (arg0) => void
+	onDrag?: (arg0) => void
 	onMouseEnter?: (arg0) => void // When the mouse enters the interactive layer
 	onMouseLeave?: (arg0) => void // When the mouse leaves the interactive layer
 	onMouseOut?: (arg0) => void // When the mouse enters the map
@@ -64,7 +64,6 @@ interface MapViewProps {
 	primarySourceId?: string
 	scale?: boolean
 	scrollZoom?: boolean
-	setAutoZoom?: (value: boolean) => void
 	showCenterButton?: boolean
 	toolbar?: boolean
 	toolbarExtras?: React.ReactNode
@@ -72,7 +71,7 @@ interface MapViewProps {
 
 /* * */
 
-export function MapView({ children, fullscreen = true, geolocate = true, id, interactiveLayerIds = [], isAutoZoom, mapStyle, navigation = true, onCenterMap, onClick, onMouseEnter, onMouseLeave, onMouseOut, onMouseOver, onMoveEnd, onMoveStart, onZoom, scale = false, scrollZoom = true, setAutoZoom, showCenterButton = false, toolbar = true, toolbarExtras }: MapViewProps) {
+export function MapView({ autoZoom, children, fullscreen = true, geolocate = true, id, interactiveLayerIds = [], mapStyle, navigation = true, onCenterMap, onClick, onDrag, onMouseEnter, onMouseLeave, onMouseOut, onMouseOver, onMoveEnd, onMoveStart, onZoom, scale = false, scrollZoom = true, showCenterButton = false, toolbar = true, toolbarExtras }: MapViewProps) {
 	//
 
 	//
@@ -85,8 +84,6 @@ export function MapView({ children, fullscreen = true, geolocate = true, id, int
 	const debugContext = useDebugContext();
 
 	const [cursor, setCursor] = useState<string>('auto');
-
-	const [isAutoZoomFlag, setIsAutoZoomFlag] = useState(true);
 
 	//
 	// B. Transform data
@@ -135,6 +132,7 @@ export function MapView({ children, fullscreen = true, geolocate = true, id, int
 
 			{toolbar && (
 				<MapViewToolbar
+					autoZoom={autoZoom}
 					className={styles.toolbar}
 					onCenterMap={onCenterMap}
 					showCenterButton={showCenterButton}
@@ -153,6 +151,7 @@ export function MapView({ children, fullscreen = true, geolocate = true, id, int
 				maxZoom={mapDefaultConfig.maxZoom}
 				minZoom={mapDefaultConfig.minZoom}
 				onClick={onClick}
+				onDrag={onDrag}
 				onMouseEnter={handleOnMouseEnter}
 				onMouseLeave={handleOnMouseLeave}
 				onMouseOut={onMouseOut}
@@ -177,11 +176,13 @@ export function MapView({ children, fullscreen = true, geolocate = true, id, int
 				{debugContext.flags.is_debug_mode && <MapViewDebug />}
 
 			</Map>
+
 			<div className={styles.attributionWrapper}>
 				<a href="https://maplibre.org/" target="_blank">MapLibre</a>
 				<a href="https://www.openmaptiles.org/" target="_blank">© OpenMapTiles</a>
 				<a href="https://www.openstreetmap.org/copyright" target="_blank">© OpenStreetMap contributors</a>
 			</div>
+
 		</div>
 	);
 }
