@@ -1,0 +1,5 @@
+.lineItem {
+	padding: var(--size-spacing-5);
+	border-bottom: none;
+	border-radius: var(--border-radius-sm);
+}

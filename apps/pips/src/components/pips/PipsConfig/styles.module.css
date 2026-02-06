@@ -13,7 +13,7 @@
 .filtersWrapper {
 	display: flex;
 	flex-direction: column;
-	gap: var(--size-spacing-3);
+	gap: var(--size-spacing-30);
 	align-items: flex-start;
 	justify-content: flex-start;
 	padding: var(--size-spacing-20);
@@ -21,15 +21,82 @@
 }
 
 /* * */
-/* INPUTS WRAPPER */
+/* MAIN INPUTS ROW (70/30 split) */
 
-.inputsWrapper {
+.mainInputsRow {
+	display: flex;
+	flex-direction: row;
+	gap: var(--size-spacing-15);
+	align-items: flex-start;
+	width: 100%;
+}
+
+.stopsInput {
+	flex: 0 0 70%;
+}
+
+.maxLinesInput {
+	flex: 0 0 calc(30% - var(--size-spacing-15));
+}
+
+/* * */
+/* DISPLAY CONFIG WRAPPER */
+
+.displayConfigWrapper {
 	display: flex;
 	flex-direction: column;
-	gap: 10px;
-	align-items: stretch;
-	justify-content: flex-start;
+	gap: var(--size-spacing-30);
 	width: 100%;
+}
+
+/* * */
+/* ZOOM SECTION */
+
+.zoomSection {
+	display: flex;
+	flex: 0 0 calc(35% - var(--size-spacing-15));
+	flex-direction: column;
+}
+
+/* * */
+/* SCROLL SECTION */
+
+.scrollSection {
+	display: flex;
+	flex: 0 0 calc(65% - var(--size-spacing-15));
+	flex-direction: column;
+	gap: var(--size-spacing-20);
+}
+
+.switchWrapper {
+	display: flex;
+	align-items: center;
+	padding-top: 0;
+}
+
+/* * */
+/* RESPONSIVE */
+
+@media (width <= 900px) {
+	.mainInputsRow {
+		flex-direction: column;
+	}
+
+	.stopsInput,
+	.maxLinesInput {
+		flex: 1 1 100%;
+		width: 100%;
+	}
+
+	.displayConfigWrapper {
+		flex-direction: column;
+	}
+
+	.zoomSection,
+	.scrollSection {
+		flex: 1 1 100%;
+		width: 100%;
+	}
 }
 
 /* * */

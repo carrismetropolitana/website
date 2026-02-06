@@ -1,0 +1,108 @@
+'use client';
+
+/* * */
+
+import Carousel from '@/components/common/Carousel';
+import { Section } from '@/components/layout/Section';
+import { Surface } from '@/components/layout/Surface';
+import { NewsCardSkeleton } from '@/components/news/NewsCardSkeleton';
+import { SeeMoreCard } from '@/components/news/SeeMoreCard';
+import { PressGenericCard } from '@/components/press/PressGenericCard';
+import { type KnowledgeBase } from '@carrismetropolitana/website-shared-types';
+import { useTranslations } from 'next-intl';
+import { useRouter } from 'next/navigation';
+import React from 'react';
+import useSWR from 'swr';
+
+/* * */
+
+interface NewsItem {
+	date: string
+	id: string
+	image: string
+	isLink: boolean
+	title: string
+	topic: string
+}
+
+export function PressKnowledgeBase() {
+	//
+
+	//
+	// A. Setup variables
+
+	const t = useTranslations('press.KnowledgeBase');
+	const router = useRouter();
+
+	//
+	// B. Fetch data from API
+
+	const { data: knowledgeBaseData } = useSWR<KnowledgeBase[]>('/admin/public-api/knowledge-base');
+
+	//
+	// C. Transform data
+
+	const newsItems: NewsItem[] = React.useMemo(() => {
+		if (!knowledgeBaseData) return [];
+
+		// Take only the first 6 items for the carousel
+		return knowledgeBaseData.slice(0, 6).map(item => ({
+			date: new Date(item.publishDate).toLocaleDateString('pt-PT', {
+				day: 'numeric',
+				month: 'long',
+				year: 'numeric',
+			}),
+			id: item._id,
+			image: item.heroImage?.url || 'https://d1csarkz8obe9u.cloudfront.net/posterpreviews/breaking-news-design-template-70665f891baf9314344e211ce2db6a12_screen.jpg?ts=1689413594',
+			isLink: item.contentType === 'link',
+			title: item.title,
+			topic: item.topic || 'Geral',
+		}));
+	}, [knowledgeBaseData]);
+
+	//
+	// D. Handle click
+
+	const handleCardClick = (newsItem: NewsItem) => {
+		const item = knowledgeBaseData?.find(kb => kb._id === newsItem.id);
+		if (!item) return;
+
+		// Always navigate to the detail page
+		router.push(`/press/knowledge-base/${item.slug}`);
+	};
+
+	//
+	// E. Build carousel slides
+
+	const carouselSlides = newsItems.map(slideItem => ({
+		_id: slideItem.id,
+		component: (
+			<PressGenericCard
+				newsItem={slideItem}
+				onClick={handleCardClick}
+				showTopic={true}
+			/>
+		),
+	}));
+
+	// Add "See More" card as last item
+	carouselSlides.push({
+		_id: 'see-more',
+		component: <SeeMoreCard href="/press/knowledge-base" />,
+	});
+
+	//
+	// F. Render components
+
+	return (
+		<Surface>
+			<Section heading={t('section_heading')} href="/press/knowledge-base" subheading={t('subheading')}>
+				<Carousel
+					skeletonComponent={<NewsCardSkeleton />}
+					skeletonQty={4}
+					slides={carouselSlides}
+				/>
+			</Section>
+		</Surface>
+	);
+}

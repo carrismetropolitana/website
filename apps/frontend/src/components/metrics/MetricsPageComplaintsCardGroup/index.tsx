@@ -1,3 +1,5 @@
+'use client';
+
 /* * */
 
 import { MetricsComplaintsPageCardGroupCard } from '@/components/metrics/MetricsPageComplaintsCardGroupCard';

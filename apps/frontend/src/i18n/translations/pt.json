@@ -59,7 +59,8 @@
 		}
 	},
 	"NewsCard": {
-		"publish_date": "{publishDate, date, long}"
+		"publish_date": "{publishDate, date, long}",
+		"see_more": "Veja Mais"
 	},
 	"SelectLine": {
 		"label": "Procurar linha por número, nome, localidade...",
@@ -168,38 +169,32 @@
 		},
 		"AlertCauseEffectIcon": {
 			"cause": {
+				"ABUSIVE_PARKING": "Estacionamento Abusivo",
 				"ACCIDENT": "Acidente",
 				"CONSTRUCTION": "Obras",
-				"DEMONSTRATION": "Evento",
-				"DRIVER_ABSENCE": "Falta do Condutor",
-				"DRIVER_ISSUE": "Problema com o Condutor",
-				"HIGH_PASSENGER_LOAD": "Carga Excessiva de Passageiros",
-				"HOLIDAY": "Férias",
-				"MAINTENANCE": "Manutenção",
+				"DEMONSTRATION": "Evento / Manifestação",
+				"DRIVER_ABSENCE": "Ausência de Motorista",
+				"DRIVER_ISSUE": "Problema com Motorista",
+				"HIGH_PASSENGER_LOAD": "Elevada Lotação",
 				"MEDICAL_EMERGENCY": "Emergência Médica",
-				"OTHER_CAUSE": "Outras Causas",
 				"POLICE_ACTIVITY": "Atividade Policial",
-				"ROAD_INCIDENT": "Incidente na Estrada",
+				"PUBLIC_DISORDER": "Desacatos",
+				"ROAD_ISSUE": "Incidente na Via",
 				"STRIKE": "Greve",
-				"SYSTEM_FAILURE": "Falha do Sistema",
-				"TECHNICAL_PROBLEM": "Problema Técnico",
-				"TRAFFIC_JAM": "Congestão de Trânsito",
-				"UNKNOWN_CAUSE": "Causa Desconhecida",
-				"VEHICLE_ISSUE": "Problema no Veículo",
-				"WEATHER": "Mau Tempo"
+				"TECHNICAL_ISSUE": "Problema Técnico",
+				"TRAFFIC_JAM": "Trânsito",
+				"WEATHER": "Condições Meteorológicas"
 			},
 			"effect": {
 				"ACCESSIBILITY_ISSUE": "Impacto na Acessibilidade",
-				"ADDITIONAL_SERVICE": "Aumento de Serviço",
+				"ADDITIONAL_SERVICE": "Serviço Adicional",
 				"DETOUR": "Desvio",
-				"MODIFIED_SERVICE": "Alteração de Horários",
-				"NO_EFFECT": "Outro",
-				"NO_SERVICE": "Serviço Cancelado",
-				"OTHER_EFFECT": "Outro",
-				"REDUCED_SERVICE": "Serviço Reduzido",
+				"NO_SERVICE": "Cancelamento",
+				"ON_BOARD_SALE_ISSUE": "Venda a Bordo Condicionada",
+				"REALTIME_INFO_ISSUE": "Impacto na Informação ao Público",
+				"REDUCED_SERVICE": "Encurtamento de Percurso",
 				"SIGNIFICANT_DELAYS": "Atrasos Significativos",
-				"STOP_MOVED": "Paragem Deslocada",
-				"UNKNOWN_EFFECT": "Outro"
+				"STOP_MOVED": "Paragem Deslocada"
 			}
 		},
 		"AlertsDetail": {
@@ -357,6 +352,51 @@
 				"close": "Fechar",
 				"learn_more": "Saber mais"
 			}
+		}
+	},
+	"arrabida": {
+		"ArrabidaHeader": {
+			"navigation": {
+				"about": "Sobre",
+				"arrabida365": "Arrábida 365",
+				"how_to_get": "Como chegar?",
+				"lines": "Linhas"
+			},
+			"subtitle": "Uma experiência única de natureza e sustentabilidade",
+			"title": "Descubra a Arrábida"
+		},
+		"ArrabidaList": {
+			"favorite_added": "Linha adicionada aos favoritos",
+			"favorite_removed": "Linha removida dos favoritos",
+			"has_alerts": "Esta linha possui alertas ativos",
+			"no_data": "Sem dados disponíveis",
+			"subtitle": "Aqui pode encontrar informações resumidas das linhas da Carris Metropolitana que servem as diferentes praias da Arrábida.",
+			"title": "Linhas",
+			"toggle_favorite": "Adicionar/remover dos favoritos"
+		},
+		"ArrabidaPage": {
+			"sections": {
+				"Arrabida365": {
+					"altImageBee": "Notícia em destaque \"Setúbal, Arrábida: O Início da Época Balnear\"",
+					"altImageMap": "Imagem ilustrativa do projeto da Arrábida 365.",
+					"button": "Expandir",
+					"buttonSeeMore": "Saber Mais",
+					"subtitle": "Este projeto tem como objetivo promover a mobilidade sustentável na Serra da Arrábida, incentivando o uso do transporte público para chegar às praias, eventos e locais de interesse da região. Aqui poderá acompanhar as últimas novidades na rede da Carris Metropolitana, campanhas em curso, eventos locais e parcerias especiais.",
+					"title": "Arrábida 365"
+				},
+				"ArrabidaAbout": {
+					"text-1": "Arrábida 365",
+					"text-2": "é uma iniciativa da Carris Metropolitana em colaboração com o município de Setúbal, que visa",
+					"text-3": "promover o transporte publico como meio privilegiado de acesso à Serra da Arrábida, durante todo o ano.",
+					"text-4": "Este projeto aposta na mobilidade sustentável como forma de preservar o património natural da serra, ao mesmo tempo que facilita o acesso a praias, eventos e locais emblemáticos, com reforço de serviço e informação dedicada.",
+					"title": "Sobre"
+				}
+			}
+		},
+		"ArrabidaWay": {
+			"inactive_line_message": "Sem serviço até ao começo da época balnear",
+			"subtitle": "Todas as praias da Arrábida servidas pela Carris Metropolitana. ",
+			"title": "Como chegar?"
 		}
 	},
 	"cards": {
@@ -981,7 +1021,6 @@
 		"LinesDetailPath": {
 			"no_data": "Selecione um Percurso / Destino",
 			"summary": "Linha <lineNumber>{line_number}</lineNumber> com destino a <destinationName>{destination_name}</destinationName> no dia <dayName>{day_name, date, long}</dayName>. <changeDay>Alterar dia ›</changeDay>"
-
 		},
 		"LinesListToolbar": {
 			"by_current_view": {
@@ -1049,7 +1088,7 @@
 					"title": "Área 4 | Alsa Todi"
 				}
 			},
-			"subheading": "O serviço de transporte da Carris Metropolitana é assegurado por 4 prestadores de serviço, cada um explorando a sua zona da Área Metropolitana de Lisboa, conforme a imagem seguinte. Por esta razão, a melhor forma de reaver o seu objeto é contactar o operador da área utilizada."
+			"subheading": "O serviço de transporte da Carris Metropolitana é assegurado por 4 prestadores de serviço, cada um explorando a sua zona da área metropolitana de Lisboa, conforme a imagem seguinte. Por esta razão, a melhor forma de reaver o seu objeto é contactar o operador da área utilizada."
 		}
 	},
 	"map": {
@@ -1105,6 +1144,67 @@
 			"text1": "A Carris Metropolitana possui uma <b>política de dados abertos</b>, com o objetivo de promover a transparência e a proximidade com os seus passageiros, divulgando publicamente informação relativa à sua operação.",
 			"title1": "Dados Abertos"
 		},
+		"MetricsPageAlerts": {
+			"alertsEvolutionChart": {
+				"heading": "Impacto no serviço",
+				"last_15_days": "nos últimos 15 dias",
+				"lines": "Linhas",
+				"lines_affected": "Linhas afetadas",
+				"passengers": "Passageiros",
+				"passengers_affected": "Passageiros afetados"
+			},
+			"byMunicipalityChart": {
+				"description": "5 municípios mais afetados desde o início do ano",
+				"heading": "Disrupções por município",
+				"municipality": "Município"
+			},
+			"causeEffectChart": {
+				"and": "e",
+				"description_1": "Nos últimos 15 dias, os passageiros foram mais afetados por",
+				"description_2": "ocorrências",
+				"description_3": "que resultaram sobretudo em",
+				"heading": "Consequências das disrupções nos serviços"
+			},
+			"heading": "Disrupções",
+			"info": {
+				"description": "Consideramos causas externas todos os eventos fora do controlo direto do nosso serviço, como condições meteorológicas adversas, acidentes de viação, obras ou intervenções de terceiros. Por outro lado, causas internas referem-se a falhas ou limitações operacionais da nossa própria operação, como problemas técnicos nos veículos ou falta de pessoal.",
+				"subheading_1": "das viagens não realizadas nos últimos 15 dias",
+				"subheading_2": "deveram-se a causas externas."
+			},
+			"pluralCauses": {
+				"ACCIDENT": "Acidentes",
+				"CONSTRUCTION": "Obras",
+				"DEMONSTRATION": "Eventos",
+				"HOLIDAY": "Férias",
+				"MAINTENANCE": "Manutenções",
+				"MEDICAL_EMERGENCY": "Emergências Médicas",
+				"OTHER_CAUSE": "Outras Causas",
+				"POLICE_ACTIVITY": "Atividade Policial",
+				"STRIKE": "Greves",
+				"TECHNICAL_PROBLEM": "Problemas Técnicos",
+				"UNKNOWN_CAUSE": "Causas Desconhecidas",
+				"WEATHER": "Mau Tempo"
+			},
+			"pluralEffects": {
+				"ACCESSIBILITY_ISSUE": "Impactos na Acessibilidade",
+				"ADDITIONAL_SERVICE": "Aumentos de Serviço",
+				"DETOUR": "Desvios",
+				"MODIFIED_SERVICE": "Alteração de Horários",
+				"NO_EFFECT": "Outros",
+				"NO_SERVICE": "Serviços Cancelados",
+				"OTHER_EFFECT": "Outros",
+				"REDUCED_SERVICE": "Serviços Reduzidos",
+				"SIGNIFICANT_DELAYS": "Atrasos Significativos",
+				"STOP_MOVED": "Paragens Deslocadas",
+				"UNKNOWN_EFFECT": "Outros"
+			},
+			"subheading": "Disrupções planeadas e o seu impacto no serviço e nos passageiros, desde o início do ano.",
+			"summaryCards": {
+				"affected_passengers": "Passageiros afetados",
+				"external_causes_percentage": "Derivadas de causas externas",
+				"total_alerts": "Total de disrupções"
+			}
+		},
 		"MetricsPageComplaints": {
 			"heading": "Contactos",
 			"subheading": "Aqui, consegue consultar a totalidade de contactos recebidos pela Carris Metropolitana, discriminados por Pedidos de Informação, Reclamações e Outro tipo de contacto.",
@@ -1114,7 +1214,7 @@
 			"complaints": "Reclamações",
 			"info_requests": "Pedidos de informação",
 			"main_value": "{value, number}",
-			"metropolitan_area": "Área Metropolitana de Lisboa",
+			"metropolitan_area": "área metropolitana de Lisboa",
 			"others": "Outros",
 			"others_disclaimer": "*perdidos e achados, sugestões e agradecimentos",
 			"total_passengers": "de passageiros totais do ano passado",
@@ -1135,7 +1235,6 @@
 			"line": "Linha",
 			"municipality": "Município",
 			"toolbar_desc": "Escolha se quer ver os diferentes tipos de contacto (Pedidos de Informação, Reclamações e outros) por município ou linha."
-
 		},
 		"MetricsPageIntro": {
 			"heading": "A nossa operação ao vivo",
@@ -1391,7 +1490,8 @@
 			"diesel": "Diesel",
 			"electricity": "Eletricidade",
 			"lpg_auto": "GPL",
-			"natural_gas": "Gás Natural"
+			"natural_gas": "Gás Natural",
+			"hybrid": "Híbrido"
 		}
 	},
 	"periods": {
@@ -1410,6 +1510,128 @@
 			"disclaimer": "Edite esta página no Github se pretende incluir a sua aplicação. A ordem é aleatória. Apenas são permitidas entradas que disponibilizem posição de veículos ou horários planeados e em tempo real.",
 			"heading": "Os nossos parceiros",
 			"subheading": "Porque os nossos dados são abertos, existem várias aplicações que oferecem experiências personalizadas para melhorar o seu dia-a-dia nos transportes."
+		}
+	},
+	"press": {
+		"Contact": {
+			"errors": {
+				"email_invalid": "Por favor insira um endereço de email válido.",
+				"email_required": "Por favor preencha o seu email.",
+				"message_required": "Por favor escreva uma mensagem.",
+				"name_required": "Por favor preencha o seu nome.",
+				"organization_required": "Por favor preencha a organização.",
+				"phone_invalid": "Por favor insira um número de telefone válido (9 dígitos).",
+				"subject_required": "Por favor preencha o assunto.",
+				"surname_required": "Por favor preencha o seu apelido."
+			},
+			"form": {
+				"email": "Email",
+				"file": "Upload de Ficheiro",
+				"message": "Mensagem",
+				"name": "Nome",
+				"organization": "Organização/Veículo de Imprensa",
+				"phone": "Telefone",
+				"placeholderFile": "Escolher Arquivos",
+				"send": "Enviar",
+				"sending": "A enviar...",
+				"subject": "Assunto",
+				"surname": "Apelido"
+			},
+			"section_heading": "Contacto",
+			"toast": {
+				"error_generic": "Por favor tente novamente mais tarde.",
+				"error_title": "Erro ao enviar mensagem",
+				"success_message": "Recebemos a sua mensagem e entraremos em contacto em breve.",
+				"success_title": "Mensagem enviada com sucesso!",
+				"validation_error_message": "Por favor corrija os erros no formulário.",
+				"validation_error_title": "Erro de Validação"
+			}
+		},
+		"DetailSection": {
+			"copied": "Copiado!",
+			"copy_link": "Copiar Link",
+			"download": "Download",
+			"published_at": "Publicada a {date}",
+			"published_at_in": "Publicada a {date} em"
+		},
+		"FaqSection": {
+			"faqs": {
+				"carris_relationship": {
+					"answer": "A Carris Metropolitana é uma marca de transporte público distinta da Carris. Ambas operam sob a tutela da TML - Transportes Metropolitanos de Lisboa, mas são entidades separadas. A Carris Metropolitana serve os 15 municípios da área metropolitana de Lisboa (excluindo Lisboa, Cascais e Barreiro), enquanto a Carris opera especificamente na cidade de Lisboa.",
+					"question": "A Carris Metropolitana faz parte da Carris?"
+				},
+				"commercial_use": {
+					"answer": "O uso de imagens e logos da Carris Metropolitana para fins comerciais requer autorização prévia. Para uso editorial e jornalístico, as imagens podem ser utilizadas com devida atribuição. Para qualquer uso comercial ou promocional, deve contactar o nosso departamento de comunicação para obter as licenças apropriadas e orientações sobre o uso correto da marca.",
+					"question": "Posso usar as imagens e logos para fins comerciais?"
+				},
+				"contact_interviews": {
+					"answer": "Para contactar a Carris Metropolitana para obter informações ou solicitar entrevistas, pode utilizar o nosso canal direto de imprensa disponível nesta página ou enviar um email para o nosso departamento de comunicação. Fornecemos apoio dedicado aos jornalistas e profissionais dos media, incluindo material de apoio, dados e facilitação de entrevistas com responsáveis da empresa.",
+					"question": "Como posso contactar a CMetropolitana para obter informações ou solicitar entrevistas?"
+				},
+				"open_data_access": {
+					"answer": "A Carris Metropolitana disponibiliza dados abertos através do seu portal oficial. Pode aceder a informações sobre horários, rotas, dados de passageiros em tempo real e estatísticas operacionais. Para acesso a dados específicos ou APIs, recomendamos que entre em contacto através dos nossos canais oficiais de comunicação.",
+					"question": "Como posso aceder aos dados abertos disponibilizados pela CMetropolitana?"
+				},
+				"operating_municipalities": {
+					"answer": "A Carris Metropolitana opera em 15 dos 18 municípios da área metropolitana de Lisboa: Almada, Seixal, Sesimbra, Alcochete, Moita, Montijo, Palmela, Setúbal, Amadora, Oeiras, Sintra, Mafra, Vila Franca de Xira, Odivelas e Loures. Os municípios de Lisboa, Cascais e Barreiro têm operadores próprios, mas estão ligados através das ligações intermunicipais da Carris Metropolitana.",
+					"question": "Em que municípios opera a Carris Metropolitana?"
+				},
+				"service_operators": {
+					"answer": "A Carris Metropolitana trabalha com quatro operadores principais: Área 1 - Viação Alvorada (Amadora, Oeiras, Sintra, ligações a Cascais e Lisboa); Área 2 - Rodoviária de Lisboa (Mafra, Vila Franca de Xira, Odivelas e Loures); Área 3 - TST (Almada, Seixal e Sesimbra); Área 4 - Alsa Todi (Alcochete, Moita, Montijo, Palmela, Setúbal e ligações ao Barreiro).",
+					"question": "Quais são os operadores prestadores de serviço que atuam sob a marca Carris Metropolitana?"
+				}
+			},
+			"section_heading": "Perguntas Frequentes",
+			"subheading": "Nesta seção, encontrará respostas às perguntas mais frequentes sobre a Carris Metropolitana e nossos materiais de imprensa. Se precisar de esclarecimentos adicionais, não hesite em entrar em contacto connosco."
+		},
+		"HeaderSection": {
+			"section_heading": "Imprensa"
+		},
+		"KnowledgeBase": {
+			"section_heading": "Base de Conhecimento",
+			"subheading": "Explore e descarregue documentos e outros materiais relevantes, como relatórios, para apoiar a cobertura informativa sobre a Carris Metropolitana."
+		},
+		"LabelSection": {
+			"buttons": {
+				"contact": "Contacte-nos",
+				"download": "Descarregar"
+			},
+			"cards": {
+				"download_icons": {
+					"description": "Descarregue ícones representativos dos nossos serviços, disponíveis em diferentes estilos e formatos.",
+					"title": "Download de Ícones"
+				},
+				"download_logos": {
+					"description": "Aceda aos logotipos oficiais em vários formatos, prontos para uso em materiais de comunicação.",
+					"title": "Download de Logos"
+				},
+				"image_bank": {
+					"description": "Explore e descarregue imagens de alta qualidade que capturam a essência dos nossos serviços e operações.",
+					"title": "Banco de Imagens"
+				},
+				"not_found": {
+					"description": "Dispomos de um canal direto para a Imprensa, onde poderá solicitar os nossos materiais institucionais.",
+					"title": "Não encontrou o que procura?"
+				},
+				"press_guide": {
+					"description": "Tudo sobre como comunicar a marca de transporte público rodoviário dos 18 municípios da área metropolitana de Lisboa.",
+					"title": "Guia de Imprensa"
+				},
+				"standards_manual": {
+					"description": "Consulte o nosso manual de normas para diretrizes sobre o uso correto da marca e identidade visual.",
+					"title": "Manual de Normas"
+				}
+			},
+			"collapse_button": "Reduzir",
+			"expand_button": "Expandir",
+			"section_heading": "A Marca",
+			"show_more_content_first": "Reduzindo a idade média da frota em operação, introduzindo melhorias na performance ambiental nas viaturas, prestando mais e melhor informação ao público - que é também uniformizada e simplificada à escala metropolitana - e aumentando a oferta do que era praticado antes da entrada em funcionamento, a Carris Metropolitana continua a trabalhar no sentido de criar opcões de mobilidade para assegurar um transporte público de qualidade.",
+			"show_more_content_second": "Pretendendo fomentar comportamentos sustentáveis e contribuir para a equidade social e territorial na amL, a Carris Metropolitana opera as redes municipais para 15 dos 18 municípios (Barreiro, Cascais e Lisboa mantêm as operações locais) e a totalidade da operação intermunicipal dos 18 municípios.",
+			"subheading": "A Carris Metropolitana é uma iniciativa dos 18 municípios da amL que, através da Transportes Metropolitanos de Lisboa (TML), funde a operação rodoviária de toda a amL numa mesma imagem e nível de serviço, focado no serviço às populações, com um elevado grau de complexidade tecnológica e operacional, neste caso, sobretudo pela dimensão geográfica e populacional."
+		},
+		"NotesBase": {
+			"section_heading": "Notas de Imprensa",
+			"subheading": "Consulte aqui as notas de imprensa mais recentes sobre a Carris Metropolitana."
 		}
 	},
 	"profile": {
@@ -1545,6 +1767,140 @@
 			"tabs": {
 				"overview": "Viagem 2024",
 				"quiz": "Quiz"
+			}
+		}
+	},
+	"review-2025": {
+		"Review2025CardFooter": {
+			"share": {
+				"button": "Partilhar",
+				"copied": "Copiado!",
+				"copy_link": "Copiar link",
+				"message": "Partilhe este cartão nas suas redes sociais",
+				"share_text": "{title} - Carris Metropolitana 2025",
+				"title": "Partilhar"
+			}
+		},
+		"Review2025GroupAML": {
+			"heading": "área metropolitana de Lisboa",
+			"subheading": "Evolução da operação na área metropolitana de Lisboa em 2025"
+		},
+		"Review2025GroupArea": {
+			"heading": "Áreas",
+			"subheading": "Áreas de atuação da Carris Metropolitana"
+		},
+		"Review2025GroupMunicipality": {
+			"filter": {
+				"all": "Todas",
+				"area1": "Área 1",
+				"area2": "Área 2",
+				"area3": "Área 3",
+				"area4": "Área 4",
+				"placeholder": "Filtrar por área",
+				"search": {
+					"placeholder": "Pesquisar por município"
+				}
+			},
+			"heading": "Municípios",
+			"subheading": "Evolução da operação por município em 2025"
+		},
+		"Review2025GroupTerminal": {
+			"heading": "Terminais",
+			"subheading": "Evolução da operação nos terminais em 2025"
+		},
+		"Review2025Intro": {
+			"alt": "Retrospectiva 2025"
+		},
+		"Review2025Page": {
+			"heading": "Retrospectiva 2025"
+		},
+		"cards": {
+			"aml": {
+				"aml": {
+					"description": "Em 2025, fomos 13,3% maiores que no ano passado!",
+					"title": "área metropolitana de Lisboa"
+				},
+				"curiosities": {
+					"description": "",
+					"title": "curiosidades"
+				},
+				"records": {
+					"description": "",
+					"title": "Recordes"
+				}
+			},
+			"areas": {
+				"area_1": {
+					"description": "",
+					"title": "área 1"
+				},
+				"area_2": {
+					"description": "",
+					"title": "área 2"
+				},
+				"area_3": {
+					"description": "",
+					"title": "área 3"
+				},
+				"area_4": {
+					"description": "",
+					"title": "área 4"
+				}
+			},
+			"common": {
+				"descriptions": {
+					"growth_percentage": "percentagem de crescimento face a 2024",
+					"pax_lisbon": "total de passageiros transportados para Lisboa",
+					"pax_over_tagus": "total de passageiros transportados sobre o Tejo",
+					"pax_total": "total de passageiros transportados",
+					"record_holiday": "recorde de passageiros transportados num domingo / feriado ({date})",
+					"record_saturday": "recorde de passageiros transportados num sábado ({date})",
+					"record_weekday": "recorde de passageiros transportados num dia útil ({date})",
+					"total_km": "total de quilómetros percorridos",
+					"total_trips": "total de viagens realizadas"
+				},
+				"groups": {
+					"aml": "área metropolitana de Lisboa",
+					"areas": "por áreas",
+					"municipalities": "por município",
+					"terminals": "por terminal"
+				},
+				"section_titles": {
+					"records": "Recordes",
+					"top_lines": "top 3 linhas"
+				}
+			},
+			"municipalities": {
+				"alcochete": "Alcochete",
+				"almada": "Almada",
+				"amadora": "Amadora",
+				"barreiro": "Barreiro",
+				"cascais": "Cascais",
+				"lisboa": "Lisboa",
+				"loures": "Loures",
+				"mafra": "Mafra",
+				"moita": "Moita",
+				"montijo": "Montijo",
+				"odivelas": "Odivelas",
+				"oeiras": "Oeiras",
+				"palmela": "Palmela",
+				"seixal": "Seixal",
+				"sesimbra": "Sesimbra",
+				"setubal": "Setúbal",
+				"sintra": "Sintra",
+				"vila_franca_de_xira": "Vila Franca de Xira"
+			},
+			"terminals": {
+				"agualva_cacem": "Agualva-Cacém (Estação)",
+				"amadora": "Amadora (Estação)",
+				"cacilhas": "Cacilhas (Cais Fluvial)",
+				"campo_grande": "Campo Grande (Metro)",
+				"fogueteiro": "Fogueteiro (Estação)",
+				"gare_oriente": "Gare do Oriente (Estação)",
+				"odivelas": "Odivelas (Metro)",
+				"pontinha": "Pontinha (Metro)",
+				"portela_sintra": "Portela de Sintra (Estação)",
+				"pragal": "Pragal (Estação)"
 			}
 		}
 	},
@@ -1766,7 +2122,6 @@
 			"hours_title": "Horas",
 			"months_description": "de março a junho 2024",
 			"months_title": "Meses"
-
 		},
 		"SurveyCriteriaCard": {
 			"firstRowText": "classes de procura de linhas (de alta a baixa procura)",
@@ -1936,7 +2291,6 @@
 					},
 					"placeholder": "Permite Mobilidade Reduzida"
 				}
-
 			},
 			"found_items_counter": "{count, plural, =0 {Nenhum Veículo encontrado.} one {Encontrado # veículo:} other {Encontrados # veículos:}}",
 			"select_vehicle": "Selecione um veículo"

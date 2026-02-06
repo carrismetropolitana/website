@@ -1,3 +1,5 @@
+'use client';
+
 /* * */
 
 import { TimetableDisplay } from '@/components/common/TimetableDisplay';

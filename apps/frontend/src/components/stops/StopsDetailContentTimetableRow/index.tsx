@@ -1,3 +1,5 @@
+'use client';
+
 /* * */
 
 import { NextArrivals } from '@/components/common/NextArrivals';

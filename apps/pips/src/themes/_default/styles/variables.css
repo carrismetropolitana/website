@@ -63,14 +63,15 @@
 
 	/* * */
 	/* COLOR / REALTIME */
+	/* Updated color to have more contrast */
 
-	--color-realtime-0: rgb(0 215 50 / 0%);
-	--color-realtime-5: rgb(0 215 50 / 5%);
-	--color-realtime-15: rgb(0 215 50 / 15%);
-	--color-realtime-25: rgb(0 215 50 / 25%);
-	--color-realtime-50: rgb(0 215 50 / 50%);
-	--color-realtime-75: rgb(0 215 50 / 75%);
-	--color-realtime-100: rgb(0 205 50 / 100%);
+	--color-realtime-0: rgb(0 160 40 / 0%);
+	--color-realtime-5: rgb(0 160 40 / 5%);
+	--color-realtime-15: rgb(0 160 40 / 15%);
+	--color-realtime-25: rgb(0 160 40 / 25%);
+	--color-realtime-50: rgb(0 160 40 / 50%);
+	--color-realtime-75: rgb(0 160 40 / 75%);
+	--color-realtime-100: rgb(0 160 40 / 100%);
 
 	/* * */
 	/* SIZE / WIDTH */

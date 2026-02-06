@@ -179,7 +179,7 @@
 				"ACCIDENT": "Accident",
 				"CONSTRUCTION": "Works",
 				"DEMONSTRATION": "Event / Demonstration",
-				"DRIVER_ABSENCE": "Driver Absence",
+				"DRIVER_ABSENCE": "Operation Constraints",
 				"DRIVER_ISSUE": "Driver Issue",
 				"HIGH_PASSENGER_LOAD": "High Passenger Load",
 				"HOLIDAY": "Vacation",
@@ -1365,7 +1365,8 @@
 			"diesel": "Diesel",
 			"electricity": "Electricity",
 			"lpg_auto": "GPL",
-			"natural_gas": "Natural Gas"
+			"natural_gas": "Natural Gas",
+			"hybrid": "Hybrid"
 		}
 	},
 	"periods": {

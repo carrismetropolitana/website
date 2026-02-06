@@ -1,3 +1,5 @@
+'use client';
+
 /* * */
 
 import { ComplaintMetrics } from '@carrismetropolitana/api-types/metrics';

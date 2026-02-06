@@ -1,0 +1,35 @@
+/* * */
+/* HEADER */
+
+.headerContainer {
+	padding: var(--size-spacing-30) 0;
+	text-align: center;
+}
+
+.title {
+	margin-bottom: var(--size-spacing-10);
+	font-size: 32px;
+	font-weight: var(--font-weight-bold);
+	color: var(--color-system-text-100);
+}
+
+.subtitle {
+	font-size: 16px;
+	font-weight: var(--font-weight-medium);
+	color: var(--color-system-text-80);
+}
+
+/* * */
+/* TEXT */
+
+.text {
+	margin-top: var(--size-spacing-20);
+	font-size: 14px;
+	font-weight: var(--font-weight-medium);
+	line-height: 1.6;
+	color: var(--color-system-text-100);
+}
+
+.text:first-child {
+	margin-top: unset;
+} 
