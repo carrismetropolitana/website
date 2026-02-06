@@ -3,17 +3,19 @@
 
 import { LexicalNode } from '@/types/lexical-node.types';
 import { hasLineMentionNode } from '@/utils/hasLineMetion';
+import { parseStyleString } from '@/utils/parseStyleString';
 import { useRenderLexicalNode } from '@/utils/renderLexicalNode';
 
 /* * */
 
 interface ParagraphProps {
 	children: LexicalNode[]
+	style?: string
 }
 
 /* * */
 
-export function Paragraph({ children }: ParagraphProps) {
+export function Paragraph({ children, style: styleStr }: ParagraphProps) {
 	//
 
 	//
@@ -21,15 +23,26 @@ export function Paragraph({ children }: ParagraphProps) {
 
 	const renderLexicalNode = useRenderLexicalNode();
 	const hasMention = children.some(child => hasLineMentionNode(child));
+	const contentChildren = children.filter(child => child.type !== 'linebreak');
 	const Tag = hasMention ? 'div' : 'p';
-	const style = hasMention ? { marginBottom: 'var(--size-spacing-10)' } : undefined;
+
+	const inlineStyle = {
+		...(hasMention ? { marginBottom: 'var(--size-spacing-10)' } : {}),
+		...(styleStr ? parseStyleString(styleStr) : {}),
+	};
+
+	const style = Object.keys(inlineStyle).length > 0 ? inlineStyle : undefined;
 
 	//
 	// B. Render components
 
+	if (contentChildren.length === 0) {
+		return <Tag style={style} />;
+	}
+
 	return (
 		<Tag style={style}>
-			{children.map((child, idx) => renderLexicalNode(child, idx))}
+			{contentChildren.map((child, idx) => renderLexicalNode(child, idx))}
 		</Tag>
 	);
 

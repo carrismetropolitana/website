@@ -49,14 +49,13 @@ function renderNode(node: LexicalNode, key?: number): ReactNode {
 		case 'code': return <Code key={key} children={children} />;
 		case 'heading': return <Heading key={key} children={children} tag={node.tag} />;
 		case 'horizontalrule': return <hr key={key} />;
-		case 'linebreak': return <br key={key} />;
 		case 'link': return <Links key={key} children={children} fields={node.fields} url={node.url} />;
 		case 'list': return <List key={key} children={children} listType={node.listType} />;
 		case 'listitem': return <ListItem key={key} children={children} />;
 		case 'mention': return node.mentionType === 'line'
 			? <LineMention key={key} id={node.id} label={node.label} mentionType={node.mentionType} />
 			: null;
-		case 'paragraph': return <Paragraph key={key} children={children} />;
+		case 'paragraph': return <Paragraph key={key} children={children} style={node.style} />;
 		case 'quote': return <Quote key={key} children={children} />;
 		case 'root': return renderChildren();
 		case 'text': return <Text key={key} format={node.format} style={node.style} text={node.text} />;
