@@ -2,6 +2,7 @@
 /* * */
 
 import { LexicalNode } from '@/types/lexical-node.types';
+import { extractTextFromNode, slugify } from '@/utils/lexical-helpers';
 import { useRenderLexicalNode } from '@/utils/renderLexicalNode';
 import { useMemo } from 'react';
 
@@ -14,27 +15,6 @@ interface HeadingProps {
 
 /* * */
 
-function extractTextFromNode(node: LexicalNode): string {
-	if (node.text) {
-		return node.text;
-	}
-	if (node.children && node.children.length > 0) {
-		return node.children.map(extractTextFromNode).join('');
-	}
-	return '';
-}
-
-function slugify(text: string): string {
-	return text
-		.toLowerCase()
-		.trim()
-		.replace(/[^\w\s-]/g, '')
-		.replace(/[\s_-]+/g, '-')
-		.replace(/^-+|-+$/g, '');
-}
-
-/* * */
-
 export function Heading({ children, tag = 'h1' }: HeadingProps) {
 	//
 
@@ -42,21 +22,25 @@ export function Heading({ children, tag = 'h1' }: HeadingProps) {
 	// A. Setup variables
 
 	const renderLexicalNode = useRenderLexicalNode();
-	const HeadingTag = tag as 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6';
 
 	const id = useMemo(() => {
 		const text = children.map(extractTextFromNode).join('');
 		return slugify(text);
 	}, [children]);
 
+	const renderedChildren = children.map((child, idx) => renderLexicalNode(child, idx));
+
 	//
 	// B. Render components
 
-	return (
-		<HeadingTag id={id}>
-			{children.map((child, idx) => renderLexicalNode(child, idx))}
-		</HeadingTag>
-	);
+	if (tag === 'h1') return <h1 id={id}>{renderedChildren}</h1>;
+	if (tag === 'h2') return <h2 id={id}>{renderedChildren}</h2>;
+	if (tag === 'h3') return <h3 id={id}>{renderedChildren}</h3>;
+	if (tag === 'h4') return <h4 id={id}>{renderedChildren}</h4>;
+	if (tag === 'h5') return <h5 id={id}>{renderedChildren}</h5>;
+	if (tag === 'h6') return <h6 id={id}>{renderedChildren}</h6>;
+
+	return <h1 id={id}>{renderedChildren}</h1>;
 
 	//
 }
