@@ -2,8 +2,8 @@
 /* * */
 
 import { LexicalNode } from '@/types/lexical-node.types';
-import { extractTextFromNode, slugify } from '@/utils/lexical-helpers';
 import { useRenderLexicalNode } from '@/utils/renderLexicalNode';
+import { extractTextFromNode, slugify } from '@/utils/sidebarHelper';
 import { useMemo } from 'react';
 
 /* * */
