@@ -1,5 +1,6 @@
 /* * */
 
+import { ArrabidaLogo } from '@/components/arrabida/ArrabidaHeader/ArrabidaLogo';
 import { type NavigationGroup } from '@/types/navigation.types';
 import { IconAlertTriangle, IconArrowLoopRight, IconBellSchool, IconBuildingStore, IconBus, IconBusStop, IconChartBar, IconCreditCardPay, IconDirections, IconHelpHexagon, IconHomeSpark, IconListSearch, IconMapQuestion, IconMessages, IconNews, IconPrompt, IconTicket, IconUserHeart } from '@tabler/icons-react';
 
@@ -46,6 +47,7 @@ export const mainNavigationGroup: NavigationGroup[] = [
 			{ _id: 'drivers', href: '/drivers', icon: <IconUserHeart />, target: '_blank' },
 			{ _id: 'about', href: '/about', icon: <IconHomeSpark /> },
 			{ _id: 'vehicles', href: '/vehicles', icon: <IconBus /> },
+			{ _id: 'arrabida365', href: '/arrabida365', icon: <ArrabidaLogo /> },
 		],
 	},
 
