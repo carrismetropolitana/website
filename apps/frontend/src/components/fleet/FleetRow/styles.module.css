@@ -1,0 +1,47 @@
+.row {
+	display: grid;
+	flex-direction: row;
+	grid-template-columns: max-content 1fr 1fr;
+	gap: var(--size-spacing-10); 
+  	align-items: center;
+	width: 100%;
+  	height: 40px;
+	padding: var(--size-spacing-10);
+	text-align: center;
+  	border-bottom: 1px solid var(--color-system-text-300);
+}
+
+.row div {
+	overflow: hidden;
+  	text-overflow: ellipsis;
+	white-space: nowrap;
+}
+
+.container {
+	display: flex;
+	flex-direction: row;
+	gap: var(--size-spacing-10);
+	align-items: center;
+	justify-content: flex-start;
+}
+
+.statusDiv {
+	display: flex;
+	flex-direction: row;
+	gap: var(--size-spacing-5);
+	align-items: center;
+	justify-content: center;
+	width: 100%;
+	text-align: center;
+}
+
+.pastDeparture span {
+	font-style: italic;
+	color: var(--color-system-text-200);
+}
+
+.vehicleInfo {
+	display: none;
+	width: 100%;
+	background-color: red;
+}

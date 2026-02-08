@@ -622,6 +622,100 @@
 			"subheading": "On this page, you will find answers to the most frequently asked questions about our service. If you need any further clarification, please feel free to contact us."
 		}
 	},
+	"fleet": {
+		"FleetListToolbar": {
+			"filters": {
+				"by_agency": {
+					"placeholder": "All operators"
+				},
+				"by_bikes": {
+					"options": {
+						"false": "No",
+						"true": "Yes"
+					},
+					"placeholder": "Allows Bycicles"
+				},
+				"by_contactless": {
+					"options": {
+						"false": "No",
+						"true": "Yes"
+					},
+					"placeholder": "Supports Contactless"
+				},
+				"by_make_model": {
+					"placeholder": "Brand and Model"
+				},
+				"by_propulsion": {
+					"placeholder": "All kinds of propulsion"
+				},
+				"by_search": {
+					"placeholder": "Search by id, license plate..."
+				},
+				"by_state": {
+					"options": {
+						"active": "Active | In service",
+						"active_1h": "Active in the last hour",
+						"active_7d": "Active in the last 7 days",
+						"active_today": "Active today",
+						"inactive": "Last seen >7 days ago",
+						"no_data": "No data",
+						"no_service": "Not in service"
+					},
+					"placeholder": "Vehicle state"
+				},
+				"by_wheelchair": {
+					"options": {
+						"false": "No",
+						"true": "Yes"
+					},
+					"placeholder": "Allows Reduced Mobility"
+				}
+			},
+			"found_items_counter": "{count, plural, =0 {No vehicle found.} one {Found # vehicle} other {Found # vehicles}}"
+		},
+		"FleetMetrics": {
+			"heading": "Fleet by numbers",
+			"total_circulating": "{count}",
+			"total_circulating_footer": "{percentage}% of our total fleet",
+			"total_circulating_title": "Vehicles circulating on Carris Metropolitana.",
+			"total_electric": "{count}",
+			"total_electric_footer": "{percentage}% of Carris Metropolitana's fleet is environmentally friendly!",
+			"total_electric_title": "Electric vehicles"
+		},
+		"FleetPage": {
+			"heading": "Fleet",
+			"links": {
+				"download_metadata": "Download data",
+				"download_metadata_description": "You can download a list of our fleet as a CSV, following the GTFS (General Transit Feed Specification) specifications. This file contains all of the metadata for existing vehicles.",
+				"issues": "Open an Issue",
+				"issues_description": "If you find any issue in thi spage, please open an Issue on this repository with a suggestion/correction.",
+				"use_api": "API",
+				"use_api_description": "We've made our fleet list available, in real time, through our API. This endpoint, besides returning the vehicles' metadata, also contains information related to the current/past trips.",
+				"view_map": "Map",
+				"view_map_description": "View all active vehicles on an interactive map."
+			},
+			"subheading": "Learn more about our fleet and all vehicles in Carris Metropolitana!"
+		},
+		"FleetTable": {
+			"header": {
+				"agency": "Operator",
+				"capacity": "Capacity",
+				"fleetId": "Fleet #",
+				"model": "Model",
+				"propulsion": "Propulsion",
+				"status": "Status"
+			},
+			"no_data": "No vehicle found",
+			"status": {
+				"activeHour": "{mins, plural, one {Was active # min ago on} other {Was active # mins ago on}}",
+				"activeNow": "Active on",
+				"activeToday": "{hours, plural, one {Was active #h on} other {Was active #h on}}",
+				"activeWeek": "{days, plural, one {Last seen yesterday} other {Last seen # days ago}}",
+				"no_data": "No information available"
+			},
+			"unknown": "Unknown"
+		}
+	},
 	"footer": {
 		"DebugToggle": {
 			"disabled": "Turn on Debug",
@@ -1488,9 +1582,9 @@
 		"VehiclePropulsion": {
 			"diesel": "Diesel",
 			"electricity": "Electricity",
+			"hybrid": "Hybrid",
 			"lpg_auto": "GPL",
-			"natural_gas": "Natural Gas",
-			"hybrid": "Hybrid"
+			"natural_gas": "Natural Gas"
 		}
 	},
 	"periods": {
@@ -2246,7 +2340,7 @@
 	},
 	"vehicles": {
 		"VehiclesList": {
-			"heading": "Vehicles",
+			"heading": "Active Vehicles",
 			"subheading": "Explore our currently active vehicles in realtime and follow the complete operation of Carris Metropolitana."
 		},
 		"VehiclesListDetails": {
@@ -2260,35 +2354,35 @@
 			"wheelchair_accessible": "Reduced mobility"
 		},
 		"VehiclesListInfoBlock": {
-			"heading": "Informação do Veículo"
+			"heading": "Vehicle Information"
 		},
 		"VehiclesListToolbar": {
 			"filters": {
 				"by_agency": {
-					"placeholder": "Todos os operadores"
+					"placeholder": "All operators"
 				},
 				"by_bikes": {
 					"options": {
-						"false": "Não",
-						"true": "Sim"
+						"false": "No",
+						"true": "Yes"
 					},
-					"placeholder": "Permite Bicicletas"
+					"placeholder": "Allows Bycicles"
 				},
 				"by_make_model": {
-					"placeholder": "Marca e Modelo"
+					"placeholder": "Brand and Model"
 				},
 				"by_propulsion": {
-					"placeholder": "Todos os tipos de propulsão"
+					"placeholder": "All kinds of propulsion"
 				},
 				"by_search": {
-					"placeholder": "Pesquisar por id, matrícula..."
+					"placeholder": "Search by id, license plate..."
 				},
 				"by_wheelchair": {
 					"options": {
-						"false": "Não",
-						"true": "Sim"
+						"false": "No",
+						"true": "Yes"
 					},
-					"placeholder": "Permite Mobilidade Reduzida"
+					"placeholder": "Allows Reduced Mobility"
 				}
 			},
 			"found_items_counter": "{count, plural, =0 {No vehicle found.} one {Found # vehicle} other {Found # vehicles}}",

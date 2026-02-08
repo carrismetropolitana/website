@@ -1,0 +1,56 @@
+/* * */
+/* CONTAINER */
+
+.tableHeader {
+	width: 100%;
+	background-color: var(--color-system-background-200);
+}
+
+.tableHeader th {
+	align-items: center;
+	justify-content: flex-start;
+	padding: var(--size-spacing-10);
+	white-space: nowrap;
+	
+}
+
+.tableHeaderLastChild {
+	width: 100%;
+}
+
+.tableCell {
+	width: 100%;
+}
+
+.tableCell td {
+	padding: var(--size-spacing-10);;
+	text-align: center;
+	white-space: nowrap;
+}
+
+.tableCell td:last-child {
+	width: 100%;
+}
+
+.container {
+	display: flex;
+	flex-direction: row;
+	gap: var(--size-spacing-10);
+	align-items: center;
+	justify-content: flex-start;
+}
+
+.statusDiv {
+	display: flex;
+	flex-direction: row;
+	gap: var(--size-spacing-5);
+	align-items: center;
+	justify-content: center;
+	width: 100%;
+	text-align: center;
+}
+
+.pastDeparture span {
+	font-style: italic;
+	color: var(--color-system-text-200);
+}

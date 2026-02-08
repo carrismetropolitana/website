@@ -1,0 +1,18 @@
+.table {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+
+.header {
+  position: sticky;
+  top: 0;
+  width: 100%;
+  font-weight: 600;
+  background: var(--color-system-background-200);
+}
+
+.body {
+    max-height: 100vh;
+    overflow-y: auto;
+}

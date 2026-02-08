@@ -13,6 +13,7 @@ interface VehiclesListContextState {
 	actions: {
 		updateFilterByAgency: (values: string[]) => void
 		updateFilterByBikes: (value: string) => void
+		updateFilterByContactless: (value: string) => void
 		updateFilterByMakeAndModel: (values: string[]) => void
 		updateFilterByPropulsion: (values: string[]) => void
 		updateFilterBySearch: (value: string) => void
@@ -27,6 +28,7 @@ interface VehiclesListContextState {
 	filters: {
 		by_agency: null | string
 		by_bikes: null | string
+		by_contactless: null | string
 		by_make_and_model: null | string
 		by_propulsion: null | string
 		by_search: string
@@ -62,6 +64,7 @@ export const VehiclesListContextProvider = ({ children }) => {
 	const [filterByWheelchairState, setFilterByWheelchairState] = useQueryState('by_wheelchair', { clearOnDefault: true });
 	const [filterByAgencyState, setFilterByAgencyState] = useQueryState('by_agency', { clearOnDefault: true });
 	const [filterByBikesState, setByBikesState] = useQueryState('by_bikes', { clearOnDefault: true });
+	const [filterByContactlessState, setByContactlessState] = useQueryState('by_contactless', { clearOnDefault: true });
 	const [filterByMakeAndModelState, setFilterByMakeAndModelState] = useQueryState('by_make_and_model', { clearOnDefault: true });
 	const [filterBySearchState, setFilterBySearchState] = useQueryState('by_search', { clearOnDefault: true, defaultValue: '' });
 	const [filterByPropulsionState, setFilterByPropulsionState] = useQueryState('by_propulsion', { clearOnDefault: true });
@@ -93,6 +96,10 @@ export const VehiclesListContextProvider = ({ children }) => {
 
 		if (filterByBikesState) {
 			filterResult = filterResult.filter(item => item.bikes_allowed?.toString() === filterByBikesState);
+		}
+
+		if (filterByContactlessState) {
+			filterResult = filterResult.filter(item => item.contactless.toString() === filterByContactlessState);
 		}
 
 		if (filterByWheelchairState) {
@@ -129,7 +136,7 @@ export const VehiclesListContextProvider = ({ children }) => {
 	useEffect(() => {
 		const filteredVehicles = applyFiltersToData();
 		setDataFilteredState(filteredVehicles);
-	}, [filterBySearchState, filterByAgencyState, filterByBikesState, filterByMakeAndModelState, filterByPropulsionState, filterByWheelchairState, vehiclesContext.data.vehicles]);
+	}, [filterBySearchState, filterByAgencyState, filterByBikesState, filterByContactlessState, filterByMakeAndModelState, filterByPropulsionState, filterByWheelchairState, vehiclesContext.data.vehicles]);
 
 	//
 	// D. Handle actions
@@ -145,6 +152,10 @@ export const VehiclesListContextProvider = ({ children }) => {
 
 	const updateFilterByBikes = (value: string) => {
 		setByBikesState(value);
+	};
+
+	const updateFilterByContactless = (value: string) => {
+		setByContactlessState(value);
 	};
 
 	const updateFilterByWheelchair = (value: string) => {
@@ -180,6 +191,7 @@ export const VehiclesListContextProvider = ({ children }) => {
 		actions: {
 			updateFilterByAgency,
 			updateFilterByBikes,
+			updateFilterByContactless,
 			updateFilterByMakeAndModel,
 			updateFilterByPropulsion,
 			updateFilterBySearch,
@@ -194,6 +206,7 @@ export const VehiclesListContextProvider = ({ children }) => {
 		filters: {
 			by_agency: filterByAgencyState,
 			by_bikes: filterByBikesState,
+			by_contactless: filterByContactlessState,
 			by_make_and_model: filterByMakeAndModelState,
 			by_propulsion: filterByPropulsionState,
 			by_search: filterBySearchState,
