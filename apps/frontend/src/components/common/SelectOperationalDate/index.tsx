@@ -65,6 +65,33 @@ function checkHoliday(calendarDate: dayjs.Dayjs): [boolean, string, string] {
 	return [false, '', ''];
 }
 
+export const dayRenderer: DatePickerProps['renderDay'] = (date) => {
+	const t = useTranslations('common.SelectOperationalDate');
+
+	const calendarDate = dayjs(date);
+	const day = calendarDate.date();
+	const year = calendarDate.year();
+	const isHoliday = checkHoliday(calendarDate);
+	if (isHoliday[0]) {
+		return (
+			<Tooltip
+				events={{ focus: true, hover: true, touch: true }}
+				label={t(isHoliday[2], { year: year })}
+				withArrow
+			>
+				<div className={isHoliday[0] ? styles.publicHoliday : ''}>
+					{t(isHoliday[1])}
+				</div>
+			</Tooltip>
+		);
+	}
+	else {
+		return (
+			day
+		);
+	}
+};
+
 /* * */
 export function SelectOperationalDate() {
 	//
@@ -77,31 +104,6 @@ export function SelectOperationalDate() {
 
 	const t = useTranslations('common.SelectOperationalDate');
 	const operationalDateContext = useOperationalDateContext();
-
-	const dayRenderer: DatePickerProps['renderDay'] = (date) => {
-		const calendarDate = dayjs(date);
-		const day = calendarDate.date();
-		const year = calendarDate.year();
-		const isHoliday = checkHoliday(calendarDate);
-		if (isHoliday[0]) {
-			return (
-				<Tooltip
-					events={{ focus: true, hover: true, touch: true }}
-					label={t(isHoliday[2], { year: year })}
-					withArrow
-				>
-					<div className={isHoliday[0] ? styles.publicHoliday : ''}>
-						{t(isHoliday[1])}
-					</div>
-				</Tooltip>
-			);
-		}
-		else {
-			return (
-				day
-			);
-		}
-	};
 
 	const [selectedSegmentedControlOption, setSelectedSegmentedControlOption] = useState<string | undefined>();
 
