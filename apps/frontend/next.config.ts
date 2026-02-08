@@ -127,7 +127,7 @@ const nextConfig: NextConfig = {
 			{ destination: '/about', permanent: true, source: '/sobre' },
 
 			{ destination: '/vehicles', permanent: true, source: '/veiculos' },
-			{ destination: '/vehicles', permanent: true, source: '/frota' },
+			{ destination: '/fleet', permanent: true, source: '/frota' },
 
 			/* * */
 			/* UNLISTED */
