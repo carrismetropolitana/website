@@ -2,6 +2,7 @@
 
 /* * */
 
+import { dayRenderer } from '@/components/common/SelectOperationalDate';
 import { Section } from '@/components/layout/Section';
 import { Surface } from '@/components/layout/Surface';
 import { LastUpdatedAt } from '@/components/metrics/LastUpdatedAt';
@@ -10,7 +11,8 @@ import { MetricsPagePassengersMonth } from '@/components/metrics/MetricsPagePass
 import { useLocaleContext } from '@/contexts/Locale.context';
 import { useMetricsContext } from '@/contexts/Metrics.context';
 import { SegmentedControl } from '@mantine/core';
-import { DatePickerInput } from '@mantine/dates';
+import { DatePickerInput, DatePickerProps } from '@mantine/dates';
+import dayjs from 'dayjs';
 import { useTranslations } from 'next-intl';
 import { useState } from 'react';
 
@@ -58,6 +60,7 @@ export function MetricsPagePassengers() {
 							minDate={new Date('2024-01-01')}
 							onChange={actions.setStartDate}
 							placeholder={t('dates.start_date')}
+							renderDay={dayRenderer}
 							value={filters.startDate.js_date}
 						/>
 						<DatePickerInput
@@ -67,6 +70,7 @@ export function MetricsPagePassengers() {
 							minDate={filters.startDate.js_date}
 							onChange={actions.setEndDate}
 							placeholder={t('dates.end_date')}
+							renderDay={dayRenderer}
 							value={filters.endDate.js_date}
 						/>
 					</div>
