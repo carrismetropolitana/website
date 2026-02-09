@@ -10,6 +10,17 @@ const nextConfig: NextConfig = {
 	images: {
 		remotePatterns: [
 			{
+				hostname: 'localhost',
+				pathname: '/**',
+				port: '49001',
+				protocol: 'http',
+			},
+			{
+				hostname: 'staging.carrismetropolitana.pt',
+				pathname: '/**',
+				protocol: 'https',
+			},
+			{
 				hostname: '*.oraclecloud.com',
 				port: '',
 				protocol: 'https',

@@ -29,6 +29,8 @@ import { GalleryFieldPreview as GalleryFieldPreview_3bf36e9fa6af0807e30df4acfadd
 import { LinkFieldPreview as LinkFieldPreview_3b9f1bbd1ad5afd6976cb9bf2edd577c } from '@/components/LinkFieldPreview'
 import { GeneralStatusMessageLabel as GeneralStatusMessageLabel_52099edc813454fee3d5335f6a4aed35 } from '@/components/GeneralStatusMessageLabel/index'
 import { HomeSliderMessageLabel as HomeSliderMessageLabel_257d5701fbc8afd2f21de3c70108de6a } from '@/components/HomeSliderMessageLabel/index'
+import { Icons as Icons_537d74cd4b75d6c420c521af18c7f707 } from '@/graphics/Icon/index.tsx'
+import { Logos as Logos_6c8490617bef60039b781082d4fedeae } from '@/graphics/Logo/index.tsx'
 import { S3ClientUploadHandler as S3ClientUploadHandler_f97aa6c64367fa259c5bc0567239ef24 } from '@payloadcms/storage-s3/client'
 import { CollectionCards as CollectionCards_ab83ff7e88da8d3530831f296ec4756a } from '@payloadcms/ui/rsc'
 
@@ -64,6 +66,8 @@ export const importMap = {
   "@/components/LinkFieldPreview#LinkFieldPreview": LinkFieldPreview_3b9f1bbd1ad5afd6976cb9bf2edd577c,
   "@/components/GeneralStatusMessageLabel/index#GeneralStatusMessageLabel": GeneralStatusMessageLabel_52099edc813454fee3d5335f6a4aed35,
   "@/components/HomeSliderMessageLabel/index#HomeSliderMessageLabel": HomeSliderMessageLabel_257d5701fbc8afd2f21de3c70108de6a,
+  "@/graphics/Icon/index.tsx#Icons": Icons_537d74cd4b75d6c420c521af18c7f707,
+  "@/graphics/Logo/index.tsx#Logos": Logos_6c8490617bef60039b781082d4fedeae,
   "@payloadcms/storage-s3/client#S3ClientUploadHandler": S3ClientUploadHandler_f97aa6c64367fa259c5bc0567239ef24,
   "@payloadcms/ui/rsc#CollectionCards": CollectionCards_ab83ff7e88da8d3530831f296ec4756a
 }

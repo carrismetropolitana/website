@@ -15,7 +15,8 @@ export async function GET(
 	}
 
 	const payloadBaseUrl = process.env.PAYLOAD_BASE_URL ?? 'http://localhost:49001';
-	const payloadUrl = `${payloadBaseUrl}/api/media/${id}?depth=2&draft=false&locale=undefined&trash=false`;
+	const payloadBasePath = process.env.PAYLOAD_BASE_PATH ?? '/admin';
+	const payloadUrl = `${payloadBaseUrl}${payloadBasePath}/api/media/${id}?depth=2&draft=false&locale=undefined&trash=false`;
 
 	try {
 		const response = await fetch(payloadUrl, {

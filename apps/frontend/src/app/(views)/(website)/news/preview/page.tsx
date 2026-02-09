@@ -23,9 +23,9 @@ export default async function PreviewPage({ searchParams }: { searchParams: Prom
 	}
 
 	// Fetch draft data server-side
-	// Note: Payload admin is at root '/', so API is at '/api'
 	const payloadBaseUrl = process.env.PAYLOAD_BASE_URL ?? 'http://localhost:49001';
-	const payloadUrl = `${payloadBaseUrl}/api/news/${newsId}?depth=2&draft=true`;
+	const payloadBasePath = process.env.PAYLOAD_BASE_PATH ?? '/admin';
+	const payloadUrl = `${payloadBaseUrl}${payloadBasePath}/api/news/${newsId}?depth=2&draft=true`;
 
 	let newsData = null;
 	try {

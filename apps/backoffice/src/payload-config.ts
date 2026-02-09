@@ -34,7 +34,12 @@ import { videoFields } from './fields/video';
 export default buildConfig({
 
 	admin: {
-
+		components: {
+			graphics: {
+				Icon: '@/graphics/Icon/index.tsx#Icons',
+				Logo: '@/graphics/Logo/index.tsx#Logos',
+			},
+		},
 		livePreview: {
 			collections: ['news'],
 			url: ({ data }) => {

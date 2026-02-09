@@ -14,28 +14,20 @@ import styles from '../NewsDetail/styles.module.css';
 
 /* * */
 
-/**
- * Deep merge helper that preserves populated relationship objects
- */
 function deepMerge(oldValue: any, newValue: any, path = ''): any {
-	// If new value is a string ID but old value is a populated object, keep the old object
-	if (typeof newValue === 'string' && oldValue && typeof oldValue === 'object' && !Array.isArray(oldValue)) {
+	if ((typeof newValue === 'string' || typeof newValue === 'number') && oldValue && typeof oldValue === 'object' && !Array.isArray(oldValue)) {
 		return oldValue;
 	}
 
-	// For arrays, merge each item
 	if (Array.isArray(newValue) && Array.isArray(oldValue)) {
-		// Special handling for images arrays in gallery blocks
 		if (path.includes('images') || path.includes('gallery')) {
-			// Helper to extract ID from various structures
 			const getId = (obj: any): null | string => {
 				if (!obj) return null;
 				if (typeof obj === 'string') return obj;
-				// Check various possible ID locations
+				if (typeof obj === 'number') return String(obj);
 				return obj?.id || obj?.value?.id || obj?.file?.id || obj?.value?.value?.id || null;
 			};
 
-			// Match images by ID to preserve full objects
 			return newValue.map((item: any) => {
 				const itemId = getId(item);
 				if (!itemId) return item;
@@ -47,43 +39,34 @@ function deepMerge(oldValue: any, newValue: any, path = ''): any {
 				});
 
 				if (matched) {
-					// If item is just an ID string, return the full matched object
-					if (typeof item === 'string') {
-						console.log(`[LivePreview] Matched ID ${item} to object:`, matched);
+					if (typeof item === 'string' || typeof item === 'number') {
 						return matched;
 					}
-					// If both are objects, merge them (preserving the matched object's structure)
 					if (typeof matched === 'object' && typeof item === 'object') {
-						// Preserve the structure from old (with value/file), but update any other fields
 						return deepMerge(matched, item, path);
 					}
 					return matched;
 				}
 
-				console.log(`[LivePreview] No match found for ID: ${itemId}, oldValue length: ${oldValue.length}`);
 				return item;
 			});
 		}
-		// For other arrays, merge by index
 		return newValue.map((item, index) => {
 			const oldItem = oldValue[index];
 			if (item && typeof item === 'object' && oldItem && typeof oldItem === 'object') {
 				return deepMerge(oldItem, item, `${path}[${index}]`);
 			}
-			// If item is a string ID but oldItem is an object, keep oldItem
-			if (typeof item === 'string' && oldItem && typeof oldItem === 'object') {
+			if ((typeof item === 'string' || typeof item === 'number') && oldItem && typeof oldItem === 'object') {
 				return oldItem;
 			}
 			return item;
 		});
 	}
 
-	// For objects, recursively merge
 	if (newValue && typeof newValue === 'object' && !Array.isArray(newValue)) {
 		if (oldValue && typeof oldValue === 'object' && !Array.isArray(oldValue)) {
 			const merged = { ...oldValue };
 			for (const key of Object.keys(newValue)) {
-				// Special handling for fields.images in gallery blocks
 				if (key === 'images' && path.includes('fields')) {
 					merged[key] = deepMerge(oldValue[key], newValue[key], `${path}.${key}`);
 				}
@@ -95,7 +78,6 @@ function deepMerge(oldValue: any, newValue: any, path = ''): any {
 		}
 	}
 
-	// Otherwise use new value
 	return newValue;
 }
 
@@ -109,27 +91,22 @@ function mergeData(initialData: any, formData: any): any {
 		const newValue = formData[key];
 		const oldValue = initialData[key];
 
-		// Special handling for body (Lexical JSON structure)
 		if (key === 'body' && oldValue && newValue) {
-			// If body is already a string (JSON), parse it
 			const oldBody = typeof oldValue === 'string' ? JSON.parse(oldValue) : oldValue;
 			const newBody = typeof newValue === 'string' ? JSON.parse(newValue) : newValue;
 
-			// Merge Lexical structure, preserving image objects in blocks
 			if (oldBody.root && newBody.root) {
 				const mergedBody = { ...newBody };
 				mergedBody.root = deepMerge(oldBody.root, newBody.root, 'body.root');
 				merged[key] = mergedBody;
 				continue;
 			}
-			// If parsing failed or structure is different, keep old body
 			if (oldBody && (!newBody || !newBody.root)) {
 				merged[key] = oldValue;
 				continue;
 			}
 		}
 
-		// For other fields, use deep merge
 		merged[key] = deepMerge(oldValue, newValue, key);
 	}
 
@@ -174,47 +151,42 @@ export function NewsDetailPreview({ initialData }: NewsDetailPreviewProps) {
 	const [data, setData] = useState<any>(initialData);
 	const hasSentReadyMessage = useRef<boolean>(false);
 
-	/**
-	 * Fetch image data from Payload API via frontend proxy (avoids CORS)
-	 */
-	const fetchImageData = async (imageId: string): Promise<any> => {
+	const fetchImageData = async (imageId: number | string): Promise<any> => {
+		const id = String(imageId);
 		try {
-			// Use frontend API route as proxy to avoid CORS
-			const url = `http://localhost:49001/api/media/${imageId}?depth=2&draft=false&trash=false`;
+			const url = `/api/media/${id}`;
 			const response = await fetch(url);
 			if (response.ok) {
 				return await response.json();
 			}
 		}
 		catch (error) {
-			console.error(`[LivePreview] Failed to fetch image ${imageId}:`, error);
+			console.error(`[LivePreview] Failed to fetch image ${id}:`, error);
 		}
 		return null;
 	};
 
-	/**
-	 * Process images array - fetch data for any IDs that are strings
-	 */
+	const getImageId = (item: any): null | string => {
+		if (!item) return null;
+		if (typeof item === 'string') return item;
+		if (typeof item === 'number') return String(item);
+		return item?.id || item?.value?.id || item?.file?.id || item?.value?.value?.id || null;
+	};
+
 	const processImagesArray = async (images: any[], oldImages: any[]): Promise<any[]> => {
 		const processed = await Promise.all(
 			images.map(async (item) => {
-				// If it's already an object with URL, return it
 				if (item && typeof item === 'object' && (item.url || item.value?.url || item.file?.url)) {
 					return item;
 				}
 
-				// If it's a string ID, try to find in old images first
-				if (typeof item === 'string') {
-					const matched = oldImages?.find((old: any) => {
-						const oldId = old?.id || old?.value?.id || old?.file?.id;
-						return oldId === item;
-					});
+				const itemId = getImageId(item);
+				if (itemId) {
+					const matched = oldImages?.find((old: any) => getImageId(old) === itemId);
 					if (matched) return matched;
 
-					// Fetch from API
-					const imageData = await fetchImageData(item);
+					const imageData = await fetchImageData(itemId);
 					if (imageData) {
-						// Return in the format Gallery component expects
 						return {
 							value: {
 								filename: imageData.filename,
@@ -234,20 +206,64 @@ export function NewsDetailPreview({ initialData }: NewsDetailPreviewProps) {
 		return processed;
 	};
 
-	// Debug: log initial data structure on mount
-	useEffect(() => {
-		if (initialData?.body) {
-			const body = typeof initialData.body === 'string' ? JSON.parse(initialData.body) : initialData.body;
-			if (body?.root?.children) {
-				const galleryBlocks = body.root.children.filter(
-					(c: any) => c.type === 'block' && c.fields?.blockType === 'gallery',
-				);
-				if (galleryBlocks.length > 0) {
-					console.log('[LivePreview] Initial data gallery images:', galleryBlocks[0].fields?.images);
-					console.log('[LivePreview] First initial image:', galleryBlocks[0].fields?.images?.[0]);
+	const processUploadNodes = async (node: any): Promise<any> => {
+		if (!node) return node;
+
+		if (node.type === 'upload') {
+			const value = node.value;
+			// Already has URL
+			if (value && typeof value === 'object' && value.url) return node;
+
+			const id = value != null ? (typeof value === 'object' ? value?.id : String(value)) : null;
+			if (id) {
+				const imageData = await fetchImageData(id);
+				if (imageData) {
+					return { ...node, value: imageData };
 				}
 			}
+			return node;
 		}
+
+		if (Array.isArray(node.children)) {
+			node = { ...node, children: await Promise.all(node.children.map((c: any) => processUploadNodes(c))) };
+		}
+
+		return node;
+	};
+
+	const processBodyImages = async (body: any, prevBody?: any): Promise<any> => {
+		if (!body?.root?.children) return body;
+
+		const prevGalleryBlocks = prevBody?.root?.children?.filter(
+			(c: any) => c.type === 'block' && c.fields?.blockType === 'gallery',
+		) || [];
+
+		const processedChildren = await Promise.all(
+			body.root.children.map(async (block: any, index: number) => {
+				// Process gallery blocks
+				if (block.type === 'block' && block.fields?.blockType === 'gallery' && block.fields?.images) {
+					const prevBlock = prevGalleryBlocks[index] ?? prevGalleryBlocks.find((b: any) => b.fields?.blockType === 'gallery');
+					const prevImages = prevBlock?.fields?.images || [];
+					const processedImages = await processImagesArray(block.fields.images, prevImages);
+					return { ...block, fields: { ...block.fields, images: processedImages } };
+				}
+
+				return processUploadNodes(block);
+			}),
+		);
+
+		return { ...body, root: { ...body.root, children: processedChildren } };
+	};
+
+	useEffect(() => {
+		if (!initialData?.body) return;
+
+		const body = typeof initialData.body === 'string' ? JSON.parse(initialData.body) : initialData.body;
+		if (!body?.root?.children) return;
+
+		processBodyImages(body).then((processedBody) => {
+			setData(prev => (prev ? { ...prev, body: processedBody } : prev));
+		});
 	}, [initialData]);
 
 	const handleMessage = useCallback((event: MessageEvent) => {
@@ -258,38 +274,14 @@ export function NewsDetailPreview({ initialData }: NewsDetailPreviewProps) {
 				setData((prev) => {
 					const merged = mergeData(prev, eventData.data);
 
-					// Process images in gallery blocks asynchronously
+					// Process images (gallery + upload nodes) asynchronously
 					if (merged?.body) {
 						const mergedBody = typeof merged.body === 'string' ? JSON.parse(merged.body) : merged.body;
-						if (mergedBody?.root?.children) {
-							const prevBody = typeof prev?.body === 'string' ? JSON.parse(prev.body) : prev?.body;
-							const prevGalleryBlocks = prevBody?.root?.children?.filter(
-								(c: any) => c.type === 'block' && c.fields?.blockType === 'gallery',
-							) || [];
+						const prevBody = typeof prev?.body === 'string' ? JSON.parse(prev.body) : prev?.body;
 
-							// Process each gallery block asynchronously
-							mergedBody.root.children.forEach(async (block: any, index: number) => {
-								if (block.type === 'block' && block.fields?.blockType === 'gallery' && block.fields?.images) {
-									const prevBlock = prevGalleryBlocks[index] || prevGalleryBlocks.find((b: any) => b.fields?.blockType === 'gallery');
-									const prevImages = prevBlock?.fields?.images || [];
-
-									// Fetch image data for any IDs
-									const processedImages = await processImagesArray(block.fields.images, prevImages);
-
-									// Update state with processed images
-									setData((current) => {
-										const currentBody = typeof current?.body === 'string' ? JSON.parse(current.body) : current?.body;
-										if (currentBody?.root?.children?.[index]?.fields) {
-											const updatedBody = JSON.parse(JSON.stringify(currentBody)); // Deep clone
-											updatedBody.root.children[index].fields.images = processedImages;
-											return { ...current, body: updatedBody };
-										}
-										return current;
-									});
-								}
-							});
-							merged.body = mergedBody;
-						}
+						processBodyImages(mergedBody, prevBody).then((processedBody) => {
+							setData(current => ({ ...current, body: processedBody }));
+						});
 					}
 					return merged;
 				});
@@ -301,11 +293,7 @@ export function NewsDetailPreview({ initialData }: NewsDetailPreviewProps) {
 		window.addEventListener('message', handleMessage);
 		if (!hasSentReadyMessage.current && window.parent && window.parent !== window) {
 			hasSentReadyMessage.current = true;
-
-			window.parent.postMessage(
-				{ ready: true, type: 'payload-live-preview' },
-				'*',
-			);
+			window.parent.postMessage({ ready: true, type: 'payload-live-preview' }, '*');
 		}
 
 		return () => {
