@@ -3,7 +3,7 @@
 import { getPublicVariable } from '@carrismetropolitana/website-shared-settings';
 import { mongooseAdapter } from '@payloadcms/db-mongodb';
 import { nodemailerAdapter } from '@payloadcms/email-nodemailer';
-import { BlocksFeature, lexicalEditor } from '@payloadcms/richtext-lexical';
+import { BlocksFeature, EXPERIMENTAL_TableFeature, lexicalEditor } from '@payloadcms/richtext-lexical';
 import { s3Storage } from '@payloadcms/storage-s3';
 import { buildConfig } from 'payload';
 import sharp from 'sharp';
@@ -73,6 +73,7 @@ export default buildConfig({
 				],
 			}),
 			BackgroundColorFeature(),
+			EXPERIMENTAL_TableFeature(),
 			MentionFeature(),
 		],
 	}),
