@@ -38,10 +38,6 @@ export function NewsDetailPreview({ initialData }: NewsDetailPreviewProps) {
 			<NewsDetailHeader newsData={newsData} />
 
 			<Section withPadding>
-				<div className={styles.innerWrapper} />
-			</Section>
-
-			<Section withPadding>
 				<div className={styles.innerWrapper}>
 					<PayloadNews data={newsData} />
 					{newsData.body && <NewsDetailSidebar newsBody={newsData.body} />}
