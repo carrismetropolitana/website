@@ -12,10 +12,12 @@ import { List } from '@/components/payload/lists';
 import { ListItem } from '@/components/payload/lists/listItem';
 import { Paragraph } from '@/components/payload/paragraph';
 import { Quote } from '@/components/payload/quote';
+import { Table } from '@/components/payload/table';
+import { TableCell } from '@/components/payload/table-cell';
 import { Text } from '@/components/payload/text';
 import { Video } from '@/components/payload/video';
 import { LexicalNode } from '@/types/lexical-node.types';
-import { type CSSProperties, type ReactNode } from 'react';
+import { type ReactNode } from 'react';
 
 /* * */
 
@@ -62,24 +64,8 @@ function renderNode(node: LexicalNode, key?: number): ReactNode {
 		case 'paragraph': return <Paragraph key={key} children={children} style={node.style} />;
 		case 'quote': return <Quote key={key} children={children} />;
 		case 'root': return renderChildren();
-		case 'table': return (
-			<div key={key} style={{ margin: 'var(--size-spacing-10) 0', overflowX: 'auto' }}>
-				<table style={{ borderCollapse: 'collapse', width: '100%' }}>
-					{renderChildren()}
-				</table>
-			</div>
-		);
-		case 'tablecell': {
-			const headerState = (node as { headerState?: number }).headerState ?? 0;
-			const Tag = headerState > 0 ? 'th' : 'td';
-			const style: CSSProperties = {
-				border: '1px solid var(--color-system-border-200, #ccc)',
-				padding: 'var(--size-spacing-10)',
-			};
-			const bg = (node as { backgroundColor?: string }).backgroundColor;
-			if (bg) style.backgroundColor = bg;
-			return <Tag key={key} style={style}>{renderChildren()}</Tag>;
-		}
+		case 'table': return <Table key={key} children={children} />;
+		case 'tablecell': return <TableCell key={key} backgroundColor={(node as { backgroundColor?: string }).backgroundColor} children={children} headerState={(node as { headerState?: number }).headerState} />;
 		case 'tablerow': return <tr key={key}>{renderChildren()}</tr>;
 		case 'text': return <Text key={key} format={node.format} style={node.style} text={node.text} />;
 		case 'upload': {
