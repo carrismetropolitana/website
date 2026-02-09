@@ -40,10 +40,6 @@ export function NewsDetail({ newsId }: { newsId: string }) {
 			<NewsDetailHeader newsData={newsData} />
 
 			<Section withPadding>
-				<div className={styles.innerWrapper} />
-			</Section>
-
-			<Section withPadding>
 				<div className={styles.innerWrapper}>
 					{!isLoading && newsData && (
 						<>
