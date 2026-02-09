@@ -100,10 +100,12 @@ export interface Config {
   globals: {
     'general-status': GeneralStatus;
     'home-slider': HomeSlider;
+    settings: Setting;
   };
   globalsSelect: {
     'general-status': GeneralStatusSelect<false> | GeneralStatusSelect<true>;
     'home-slider': HomeSliderSelect<false> | HomeSliderSelect<true>;
+    settings: SettingsSelect<false> | SettingsSelect<true>;
   };
   locale: null;
   user: User & {
@@ -612,6 +614,19 @@ export interface HomeSlider {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "settings".
+ */
+export interface Setting {
+  id: string;
+  lightModeIcon?: (string | null) | Media;
+  lightModeLogo?: (string | null) | Media;
+  darkModeIcon?: (string | null) | Media;
+  darkModeLogo?: (string | null) | Media;
+  updatedAt?: string | null;
+  createdAt?: string | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "general-status_select".
  */
 export interface GeneralStatusSelect<T extends boolean = true> {
@@ -646,6 +661,19 @@ export interface HomeSliderSelect<T extends boolean = true> {
         end_date?: T;
         id?: T;
       };
+  updatedAt?: T;
+  createdAt?: T;
+  globalType?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "settings_select".
+ */
+export interface SettingsSelect<T extends boolean = true> {
+  lightModeIcon?: T;
+  lightModeLogo?: T;
+  darkModeIcon?: T;
+  darkModeLogo?: T;
   updatedAt?: T;
   createdAt?: T;
   globalType?: T;

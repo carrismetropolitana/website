@@ -10,6 +10,7 @@ import sharp from 'sharp';
 
 /* * */
 
+import { BackgroundColorFeature } from '@/lexical/backgroundColor/feature.server';
 import { MentionFeature } from '@/lexical/mention/feature.server';
 import { CaseStudies } from '@/schemas/CaseStudies/collection';
 import { KnowledgeBase } from '@/schemas/KnowledgeBase/collection';
@@ -21,6 +22,7 @@ import { Users } from '@/schemas/Users/collection';
 
 /* * */
 
+import { Settings } from '@/globals/config';
 import { GeneralStatus } from '@/schemas/GeneralStatus/global';
 import { HomeSlider } from '@/schemas/HomeSlider/global';
 
@@ -29,11 +31,10 @@ import { galleryFields } from './fields/gallery';
 import { linkFields } from './fields/link';
 import { videoFields } from './fields/video';
 
-/* * */
-
 export default buildConfig({
 
 	admin: {
+
 		livePreview: {
 			collections: ['news'],
 			url: ({ data }) => {
@@ -71,6 +72,7 @@ export default buildConfig({
 					},
 				],
 			}),
+			BackgroundColorFeature(),
 			MentionFeature(),
 		],
 	}),
@@ -92,6 +94,7 @@ export default buildConfig({
 	globals: [
 		GeneralStatus,
 		HomeSlider,
+		Settings,
 	],
 
 	plugins: [
