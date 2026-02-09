@@ -26,11 +26,12 @@ import { type ReactNode } from 'react';
 function renderBlock(node: LexicalNode, key?: number): ReactNode {
 	switch (node.fields?.blockType) {
 		case 'accordion': {
-			const items = (node.fields.accordion ?? []).map(item => ({
+			const raw = node.fields?.accordion;
+			const items = Array.isArray(raw) ? raw.map(item => ({
 				content: item.content ?? '',
 				id: item.id ?? '',
 				title: item.title ?? '',
-			}));
+			})) : [];
 			return items.length ? <Accordion key={key} items={items} /> : null;
 		}
 		case 'gallery': return <Gallery key={key} fields={node.fields} />;

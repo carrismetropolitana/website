@@ -51,6 +51,7 @@ export const BackgroundColorFeatureClient = createClientFeature(() => {
 				if (!$isRangeSelection(selection)) return;
 				$patchStyleText(selection, {
 					'background-color': value ?? null,
+					'color': value ? '#000000' : null,
 				});
 			});
 		},

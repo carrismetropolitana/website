@@ -12,6 +12,7 @@ export const accordionFields: Field[] = [
 		admin: {
 			initCollapsed: false,
 		},
+		defaultValue: [],
 		fields: [
 			{
 				label: 'Título',
