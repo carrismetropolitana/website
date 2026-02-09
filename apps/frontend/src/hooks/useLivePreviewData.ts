@@ -10,12 +10,14 @@ import { useCallback, useEffect, useRef, useState } from 'react';
 
 /* * */
 
-const LIVE_PREVIEW_TYPE = 'payload-live-preview';
-
-/* * */
-
 export function useLivePreviewData(initialData: any) {
+	//
+
+	//
+	// A. Setup variables
+
 	const [data, setData] = useState<any>(initialData);
+	const newsData: NewsData | null = data ? transformPayloadData(data) : null;
 	const hasSentReady = useRef(false);
 
 	const applyProcessedBody = useCallback((processedBody: any) => {
@@ -35,7 +37,7 @@ export function useLivePreviewData(initialData: any) {
 		const handleMessage = (event: MessageEvent) => {
 			const { data: formData, type } = event.data || {};
 
-			if (type !== LIVE_PREVIEW_TYPE || !formData) return;
+			if (type !== 'payload-live-preview' || !formData) return;
 
 			setData((prev: any) => {
 				const merged = mergeData(prev, formData);
@@ -56,13 +58,11 @@ export function useLivePreviewData(initialData: any) {
 
 		if (!hasSentReady.current && window.parent !== window) {
 			hasSentReady.current = true;
-			window.parent.postMessage({ ready: true, type: LIVE_PREVIEW_TYPE }, '*');
+			window.parent.postMessage({ ready: true, type: 'payload-live-preview' }, '*');
 		}
 
 		return () => window.removeEventListener('message', handleMessage);
 	}, []);
-
-	const newsData: NewsData | null = data ? transformPayloadData(data) : null;
 
 	return { newsData };
 }
