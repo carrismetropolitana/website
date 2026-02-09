@@ -25,12 +25,7 @@ export function Paragraph({ children, style: styleStr }: ParagraphProps) {
 	const hasMention = children.some(child => hasLineMentionNode(child));
 	const contentChildren = children.filter(child => child.type !== 'linebreak');
 	const Tag = hasMention ? 'div' : 'p';
-
-	const inlineStyle = {
-		...(hasMention ? { marginBottom: 'var(--size-spacing-10)' } : {}),
-		...(styleStr ? parseStyleString(styleStr) : {}),
-	};
-
+	const inlineStyle = { ...(hasMention ? { marginBottom: 'var(--size-spacing-10)' } : {}), ...(styleStr ? parseStyleString(styleStr) : {}) };
 	const style = Object.keys(inlineStyle).length > 0 ? inlineStyle : undefined;
 
 	//

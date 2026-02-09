@@ -6,6 +6,8 @@ import { useDebugContext } from '@/contexts/Debug.context';
 import { NewsData } from '@/types/news.types';
 import { useRenderLexicalNode } from '@/utils/renderLexicalNode';
 
+import styles from './styles.module.css';
+
 /* * */
 
 interface PayloadNewsProps {
@@ -33,7 +35,7 @@ export default function PayloadNews({ data }: PayloadNewsProps) {
 		<>
 
 			{data.body && rootNode && (
-				<section style={{ marginTop: 24 }}>
+				<section className={styles.content}>
 					{renderLexicalNode(rootNode)}
 				</section>
 			)}
