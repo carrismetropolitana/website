@@ -5,9 +5,9 @@
 import { BackButton } from '@/components/common/BackButton';
 import { Section } from '@/components/layout/Section';
 import { Surface } from '@/components/layout/Surface';
+import { NewsDetailContent } from '@/components/news/NewsDetailContent';
 import { NewsDetailHeader } from '@/components/news/NewsDetailHeader';
 import { NewsDetailSidebar } from '@/components/news/NewsDetailSidebar';
-import PayloadNews from '@/components/payload';
 import { NewsData } from '@/types/news.types';
 import useSWR from 'swr';
 
@@ -26,10 +26,6 @@ export function NewsDetail({ newsId }: { newsId: string }) {
 	//
 	// C. Render components
 
-	if (isLoading) {
-		return <></>;
-	}
-
 	return (
 		<Surface>
 
@@ -43,7 +39,7 @@ export function NewsDetail({ newsId }: { newsId: string }) {
 				<div className={styles.innerWrapper}>
 					{!isLoading && newsData && (
 						<>
-							<PayloadNews data={newsData} />
+							<NewsDetailContent data={newsData} />
 							{newsData.body && <NewsDetailSidebar newsBody={newsData.body} />}
 						</>
 					)}
