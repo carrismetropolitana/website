@@ -1,38 +1,29 @@
-/* * */
+export async function GET(_request: Request, { params }: { params: Promise<{ id: string }> }) {
+	//
 
-import { NextResponse } from 'next/server';
+	//
+	// A. Setup variables
 
-/* * */
-
-export async function GET(
-	request: Request,
-	{ params }: { params: Promise<{ id: string }> },
-) {
 	const { id } = await params;
+	const PAYLOAD_API = `${process.env.PAYLOAD_BASE_URL ?? 'https://placeholder.pt'}${process.env.PAYLOAD_BASE_PATH ?? '/admin'}/api/media`;
 
-	if (!id) {
-		return NextResponse.json({ error: 'Image ID required' }, { status: 400 });
+	//
+	// B. Fetch data
+
+	if (!id) return Response.json({ error: 'Image ID required' }, { status: 400 });
+
+	const res = await fetch(`${PAYLOAD_API}/${id}?depth=2&draft=false&locale=undefined&trash=false`, { cache: 'no-store', headers: { Accept: 'application/json' } });
+
+	if (!res.ok) {
+		return Response.json({ error: 'Failed to fetch image' }, { status: res.status });
 	}
 
-	const payloadBaseUrl = process.env.PAYLOAD_BASE_URL ?? 'http://localhost:49001';
-	const payloadBasePath = process.env.PAYLOAD_BASE_PATH ?? '/admin';
-	const payloadUrl = `${payloadBaseUrl}${payloadBasePath}/api/media/${id}?depth=2&draft=false&locale=undefined&trash=false`;
+	const data = await res.json();
 
-	try {
-		const response = await fetch(payloadUrl, {
-			cache: 'no-store',
-			headers: { Accept: 'application/json' },
-		});
+	//
+	// C. Return data
 
-		if (!response.ok) {
-			return NextResponse.json({ error: 'Failed to fetch image' }, { status: response.status });
-		}
+	return Response.json(data);
 
-		const data = await response.json();
-		return NextResponse.json(data);
-	}
-	catch (error) {
-		console.error('Failed to fetch image from Payload:', error);
-		return NextResponse.json({ error: 'Internal server error' }, { status: 500 });
-	}
+	//
 }

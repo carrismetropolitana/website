@@ -8,8 +8,6 @@ import { useRenderLexicalNode } from '@/utils/renderLexicalNode';
 
 import styles from './styles.module.css';
 
-import { Section } from '../layout/Section';
-
 /* * */
 
 interface PayloadNewsProps {
