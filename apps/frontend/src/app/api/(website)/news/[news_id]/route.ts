@@ -1,12 +1,10 @@
-export async function GET(req: Request, { params }: { params: Promise<{ news_id: string }> }) {
+export async function GET({ params }: { params: Promise<{ news_id: string }> }) {
 	//
 
 	//
 	// A. Setup variables
 
 	const { news_id } = await params;
-	const { searchParams } = new URL(req.url);
-	const draft = searchParams.get('draft') === 'true';
 
 	const payloadBaseUrl = process.env.PAYLOAD_BASE_URL ?? 'http://localhost:49001';
 	const payloadBasePath = process.env.PAYLOAD_BASE_PATH ?? '/admin';
