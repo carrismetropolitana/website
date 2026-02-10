@@ -2,6 +2,7 @@ import { LexicalNode } from '@/types/lexical-node.types';
 
 /* * */
 
+// Extracts plain text from a LexicalNode tree structure by recursively traversing its children.
 export function extractTextFromNode(node: LexicalNode): string {
 	if (node.text) {
 		return node.text;
@@ -14,6 +15,7 @@ export function extractTextFromNode(node: LexicalNode): string {
 
 /* * */
 
+// Extracts plain text from a LexicalNode tree structure by recursively traversing its children.
 export function slugify(text: string): string {
 	return text
 		.toLowerCase()
@@ -22,3 +24,5 @@ export function slugify(text: string): string {
 		.replace(/[\s_-]+/g, '-')
 		.replace(/^-+|-+$/g, '');
 }
+
+/* * */

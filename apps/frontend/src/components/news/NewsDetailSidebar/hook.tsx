@@ -31,6 +31,7 @@ export default function useHook(newsBody: LexicalNode | string | undefined): Toc
 		}
 
 		let parsedBody: LexicalNode | undefined | { root?: { children?: LexicalNode[] } };
+
 		if (typeof newsBody === 'string') {
 			try {
 				parsedBody = JSON.parse(newsBody) as LexicalNode | { root?: { children?: LexicalNode[] } };
@@ -51,16 +52,16 @@ export default function useHook(newsBody: LexicalNode | string | undefined): Toc
 		}
 
 		const result: TocHeading[] = [];
-		for (const child of rootNode.children) {
+		rootNode.children.forEach((child, index) => {
 			if (child.type === 'heading' && child.tag) {
 				const level = parseInt(child.tag.replace('h', '')) || 1;
 				const text = extractTextFromNode(child);
 
 				if (text && (level === 2 || level === 3)) {
-					result.push({ id: slugify(text), level, text });
+					result.push({ id: `${slugify(text)}-${index}`, level, text });
 				}
 			}
-		}
+		});
 
 		setHeadings(result);
 	}, [newsBody]);

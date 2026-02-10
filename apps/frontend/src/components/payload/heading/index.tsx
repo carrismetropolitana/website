@@ -10,12 +10,13 @@ import { useMemo } from 'react';
 
 interface HeadingProps {
 	children: LexicalNode[]
+	index?: number
 	tag?: string
 }
 
 /* * */
 
-export function Heading({ children, tag = 'h1' }: HeadingProps) {
+export function Heading({ children, index, tag = 'h1' }: HeadingProps) {
 	//
 
 	//
@@ -25,8 +26,9 @@ export function Heading({ children, tag = 'h1' }: HeadingProps) {
 
 	const id = useMemo(() => {
 		const text = children.map(extractTextFromNode).join('');
-		return slugify(text);
-	}, [children]);
+		const base = slugify(text);
+		return typeof index === 'number' ? `${base}-${index}` : base;
+	}, [children, index]);
 
 	const renderedChildren = children.map((child, idx) => renderLexicalNode(child, idx));
 

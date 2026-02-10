@@ -7,8 +7,9 @@ import type { LexicalNode } from '@/types/lexical-node.types';
 import Link from 'next/link';
 import { useEffect, useState } from 'react';
 
-import useHook from './hook';
 import styles from './styles.module.css';
+
+import useHook from './hook';
 
 /* * */
 

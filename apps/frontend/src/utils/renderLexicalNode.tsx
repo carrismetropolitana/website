@@ -13,7 +13,7 @@ import { ListItem } from '@/components/payload/lists/listItem';
 import { Paragraph } from '@/components/payload/paragraph';
 import { Quote } from '@/components/payload/quote';
 import { Table } from '@/components/payload/table';
-import { TableCell } from '@/components/payload/table-cell';
+import { TableCell } from '@/components/payload/table/table-cell';
 import { Text } from '@/components/payload/text';
 import { Video } from '@/components/payload/video';
 import { LexicalNode } from '@/types/lexical-node.types';
@@ -54,7 +54,7 @@ function renderNode(node: LexicalNode, key?: number): ReactNode {
 	switch (node.type) {
 		case 'block': return renderBlock(node, key);
 		case 'code': return <Code key={key} children={children} />;
-		case 'heading': return <Heading key={key} children={children} tag={node.tag} />;
+		case 'heading': return <Heading key={key} children={children} index={key} tag={node.tag} />;
 		case 'horizontalrule': return <hr key={key} />;
 		case 'link': return <Links key={key} children={children} fields={node.fields} url={node.url} />;
 		case 'list': return <List key={key} children={children} listType={node.listType} />;
