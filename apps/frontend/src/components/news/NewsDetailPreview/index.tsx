@@ -5,9 +5,9 @@ import type { NewsData } from '@/types/news.types';
 
 import { Section } from '@/components/layout/Section';
 import { Surface } from '@/components/layout/Surface';
+import { NewsDetailContent } from '@/components/news/NewsDetailContent';
 import { NewsDetailHeader } from '@/components/news/NewsDetailHeader';
 import { NewsDetailSidebar } from '@/components/news/NewsDetailSidebar';
-import PayloadNews from '@/components/payload';
 import { useLivePreviewData } from '@/hooks/useLivePreviewData';
 
 import styles from '../NewsDetail/styles.module.css';
@@ -39,8 +39,8 @@ export function NewsDetailPreview({ initialData }: NewsDetailPreviewProps) {
 
 			<Section withPadding>
 				<div className={styles.innerWrapper}>
-					<PayloadNews data={newsData} />
-					{newsData.body && <NewsDetailSidebar newsBody={newsData.body} />}
+					<NewsDetailContent data={newsData} />
+					<NewsDetailSidebar newsBody={newsData.body} />
 				</div>
 			</Section>
 		</Surface>

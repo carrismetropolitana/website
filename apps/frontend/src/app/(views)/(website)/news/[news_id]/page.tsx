@@ -17,7 +17,7 @@ export async function generateMetadata({ params }): Promise<Metadata> {
 	//
 	// B. Fetch data
 
-	const newsResponse = await fetch(`${getPublicVariable('api_url')}/api/news/${news_id}`);
+	const newsResponse = await fetch(`${getPublicVariable('server_url_backoffice')}/admin/public-api/news/${news_id}`);
 	const newsData = await newsResponse.json();
 
 	//

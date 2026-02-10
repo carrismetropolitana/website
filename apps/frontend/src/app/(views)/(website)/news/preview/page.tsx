@@ -1,6 +1,7 @@
 /* * */
 
 import { NewsDetailPreview } from '@/components/news/NewsDetailPreview';
+import { getPublicVariable } from '@carrismetropolitana/website-shared-settings';
 
 /* * */
 
@@ -21,9 +22,7 @@ export default async function PreviewPage({ searchParams }: { searchParams: Prom
 		);
 	}
 
-	const payloadBaseUrl = process.env.PAYLOAD_BASE_URL ?? 'http://localhost:49001';
-	const payloadBasePath = process.env.PAYLOAD_BASE_PATH ?? '/admin';
-	const payloadUrl = `${payloadBaseUrl}${payloadBasePath}/api/news/${newsId}?depth=2&draft=true`;
+	const payloadUrl = `${getPublicVariable('server_url_backoffice')}/admin/public-api/news/${newsId}?depth=2&draft=true`;
 
 	let newsData = null;
 	try {

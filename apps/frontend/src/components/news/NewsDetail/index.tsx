@@ -9,6 +9,7 @@ import { NewsDetailContent } from '@/components/news/NewsDetailContent';
 import { NewsDetailHeader } from '@/components/news/NewsDetailHeader';
 import { NewsDetailSidebar } from '@/components/news/NewsDetailSidebar';
 import { NewsData } from '@/types/news.types';
+import { getPublicVariable } from '@carrismetropolitana/website-shared-settings';
 import useSWR from 'swr';
 
 import styles from './styles.module.css';
@@ -21,7 +22,8 @@ export function NewsDetail({ newsId }: { newsId: string }) {
 	//
 	// A. Fetch Data
 
-	const { data: newsData, isLoading } = useSWR<NewsData>(`/api/news/${newsId}`);
+	const newsApiUrl = `${getPublicVariable('server_url_backoffice')}/admin/public-api/news/${newsId}`;
+	const { data: newsData, isLoading } = useSWR<NewsData>(newsApiUrl);
 
 	//
 	// C. Render components

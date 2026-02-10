@@ -25,7 +25,7 @@ export function NewsSection() {
 	//
 	// B. Fetch Data
 
-	const { data: allNewsData } = useSWR('/api/news');
+	const { data: allNewsData } = useSWR('admin/public-api/news');
 
 	//
 	// C. Transform data

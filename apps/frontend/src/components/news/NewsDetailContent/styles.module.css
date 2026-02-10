@@ -68,8 +68,7 @@
 
 .content a {
 	color: var(--color-system-text-100);
-	text-decoration: underline;
-	border-radius: 5px;
+	cursor: pointer;
 }
 
 .content a:hover {
