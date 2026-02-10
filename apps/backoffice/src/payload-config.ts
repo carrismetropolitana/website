@@ -48,7 +48,7 @@ export default buildConfig({
 			},
 		},
 		meta: {
-			description: 'Backoffice da Carris Metropolitana',
+			description: 'Backoffice da CMetropolitana',
 			icons: [
 				{
 					rel: 'icon',
@@ -56,7 +56,7 @@ export default buildConfig({
 					url: '/admin/favicon.png',
 				},
 			],
-			title: 'Backoffice | Carris Metropolitana',
+			title: 'Backoffice | CMetropolitana',
 		},
 		user: 'users',
 	},
