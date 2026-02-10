@@ -47,6 +47,17 @@ export default buildConfig({
 				return `${getPublicVariable('server_url_frontend')}/news/preview?id=${data.id}`;
 			},
 		},
+		meta: {
+			description: 'Backoffice da Carris Metropolitana',
+			icons: [
+				{
+					rel: 'icon',
+					type: 'image/png',
+					url: '/admin/favicon.png',
+				},
+			],
+			title: 'Backoffice | Carris Metropolitana',
+		},
 		user: 'users',
 	},
 
