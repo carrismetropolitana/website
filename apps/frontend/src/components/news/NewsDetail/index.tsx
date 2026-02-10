@@ -40,7 +40,7 @@ export function NewsDetail({ newsId }: { newsId: string }) {
 					{!isLoading && newsData && (
 						<>
 							<NewsDetailContent data={newsData} />
-							{newsData.body && <NewsDetailSidebar newsBody={newsData.body} />}
+							<NewsDetailSidebar newsBody={newsData.body} />
 						</>
 					)}
 				</div>
