@@ -1,4 +1,4 @@
-export async function GET({ params }: { params: Promise<{ news_id: string }> }) {
+export async function GET(req: Request, { params }: { params: Promise<{ news_id: string }> }) {
 	//
 
 	//
@@ -14,7 +14,9 @@ export async function GET({ params }: { params: Promise<{ news_id: string }> }) 
 	// B. Fetch data
 
 	const res = await fetch(payloadUrl, {
-		cache: 'no-store',
+		cache: 'default',
+		headers: { Accept: 'application/json' },
+
 	});
 
 	//
