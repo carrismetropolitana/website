@@ -8,29 +8,31 @@ import { useLexicalComposerContext } from '@payloadcms/richtext-lexical/lexical/
 import { useCallback, useEffect, useRef, useState } from 'react';
 import * as ReactDOM from 'react-dom';
 
+import styles from './styles.module.css';
+
 import { subscribeAnchorPopover } from './anchorPopoverStore';
-import { $isCustomHeadingNode, type CustomHeadingNode } from './CustomHeadingNode';
+import { $isCustomHeadingNode } from './CustomHeadingNode';
 import { defaultHeadingAnchorFeatureProps } from './types';
 
 /* * */
 
-interface HeadingAnchorPluginProps {
-	clientProps: HeadingAnchorFeatureProps
-}
+const propsWithDefaults = (p: HeadingAnchorFeatureProps) => ({ ...defaultHeadingAnchorFeatureProps, ...p });
 
-export function HeadingAnchorPlugin({ clientProps }: HeadingAnchorPluginProps) {
+/* * */
+
+export function HeadingAnchorPlugin({ clientProps }: { clientProps: HeadingAnchorFeatureProps }) {
 	//
 
 	//
-	// A. Setup variables
+	// A. Setup Variables
 
-	const { inputWidth, label, placeholder } = { ...defaultHeadingAnchorFeatureProps, ...clientProps };
+	const { inputWidth, label, placeholder } = propsWithDefaults(clientProps);
 	const [editor] = useLexicalComposerContext();
 	const [headingKey, setHeadingKey] = useState<null | string>(null);
 	const [anchorId, setAnchorId] = useState('');
 	const [position, setPosition] = useState<null | { left: number, top: number }>(null);
-	const panelRef = useRef<HTMLDivElement>(null);
 	const backdropRef = useRef<HTMLDivElement>(null);
+	const panelRef = useRef<HTMLDivElement>(null);
 	const updateNodeTimeoutRef = useRef<null | ReturnType<typeof setTimeout>>(null);
 
 	//
@@ -42,23 +44,8 @@ export function HeadingAnchorPlugin({ clientProps }: HeadingAnchorPluginProps) {
 			return;
 		}
 		const dom = editor.getElementByKey(headingKey);
-		if (dom) {
-			const rect = dom.getBoundingClientRect();
-			setPosition({
-				left: rect.left,
-				top: rect.top - 28,
-			});
-		}
+		setPosition(dom ? { left: dom.getBoundingClientRect().left, top: dom.getBoundingClientRect().top - 28 } : null);
 	}, [editor, headingKey]);
-
-	useEffect(() => {
-		if (!headingKey) return;
-		const onKeyDown = (e: KeyboardEvent) => {
-			if (e.key === 'Escape') handleClose();
-		};
-		window.addEventListener('keydown', onKeyDown);
-		return () => window.removeEventListener('keydown', onKeyDown);
-	}, [headingKey]);
 
 	useEffect(() => {
 		return subscribeAnchorPopover((key) => {
@@ -66,9 +53,7 @@ export function HeadingAnchorPlugin({ clientProps }: HeadingAnchorPluginProps) {
 			if (key) {
 				editor.getEditorState().read(() => {
 					const node = $getNodeByKey(key);
-					if (node && $isCustomHeadingNode(node)) {
-						setAnchorId((node as CustomHeadingNode).getAnchorId());
-					}
+					if ($isCustomHeadingNode(node)) setAnchorId(node.getAnchorId());
 				});
 			}
 		});
@@ -83,36 +68,40 @@ export function HeadingAnchorPlugin({ clientProps }: HeadingAnchorPluginProps) {
 			window.removeEventListener('resize', updatePosition);
 		};
 	}, [updatePosition]);
-
 	//
 	// C. Handle Actions
 
 	const handleChange = (value: string) => {
 		const sanitized = value.toLowerCase().replace(/\s+/g, '-');
 		setAnchorId(sanitized);
-		if (!headingKey) return;
 		if (updateNodeTimeoutRef.current) clearTimeout(updateNodeTimeoutRef.current);
 		updateNodeTimeoutRef.current = setTimeout(() => {
 			updateNodeTimeoutRef.current = null;
+			if (!headingKey) return;
 			editor.update(() => {
 				const node = $getNodeByKey(headingKey);
-				if (node && $isCustomHeadingNode(node)) {
-					node.setAnchorId(sanitized);
-				}
+				if ($isCustomHeadingNode(node)) node.setAnchorId(sanitized);
 			});
 		}, 250);
 	};
 
-	const handleClose = () => {
+	const handleClose = useCallback(() => {
 		if (updateNodeTimeoutRef.current) {
 			clearTimeout(updateNodeTimeoutRef.current);
 			updateNodeTimeoutRef.current = null;
 		}
 		setHeadingKey(null);
-	};
+	}, []);
+
+	useEffect(() => {
+		if (!headingKey) return;
+		const onKeyDown = (e: KeyboardEvent) => e.key === 'Escape' && handleClose();
+		window.addEventListener('keydown', onKeyDown);
+		return () => window.removeEventListener('keydown', onKeyDown);
+	}, [headingKey, handleClose]);
 
 	//
-	// D. Render components
+	// D. Render Component
 
 	if (!headingKey || !position) return null;
 
@@ -120,49 +109,18 @@ export function HeadingAnchorPlugin({ clientProps }: HeadingAnchorPluginProps) {
 		<>
 			<div
 				ref={backdropRef}
-				onMouseDown={(e) => {
-					if (e.target === backdropRef.current) handleClose();
-				}}
-				style={{
-					inset: 0,
-					position: 'fixed',
-					zIndex: 99,
-				}}
+				className={styles.backdrop}
+				onMouseDown={e => e.target === backdropRef.current && handleClose()}
 				aria-hidden
 			/>
-			<div
-				ref={panelRef}
-				onMouseDown={e => e.preventDefault()}
-				style={{
-					alignItems: 'center',
-					background: 'var(--theme-elevation-50)',
-					border: '1px solid var(--theme-elevation-150)',
-					borderRadius: '4px',
-					boxShadow: '0 1px 3px rgba(0,0,0,0.1)',
-					display: 'flex',
-					fontSize: '12px',
-					gap: '4px',
-					left: position.left,
-					padding: '2px 8px',
-					position: 'fixed',
-					top: position.top,
-					zIndex: 100,
-				}}
-			>
-				<span style={{ color: 'var(--theme-elevation-500)', fontWeight: 600 }}>{label}</span>
+			<div ref={panelRef} className={styles.panel} onMouseDown={e => e.preventDefault()} style={{ left: position.left, top: position.top }}>
+				<span className={styles.label}>{label}</span>
 				<input
+					className={styles.input}
 					onChange={e => handleChange(e.target.value)}
 					placeholder={placeholder}
+					style={{ width: `${inputWidth}px` }}
 					value={anchorId}
-					style={{
-						background: 'transparent',
-						border: 'none',
-						color: 'var(--theme-elevation-800)',
-						fontSize: '12px',
-						outline: 'none',
-						padding: '2px 0',
-						width: `${inputWidth}px`,
-					}}
 					autoFocus
 				/>
 			</div>

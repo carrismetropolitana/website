@@ -1,5 +1,3 @@
-/* * */
-
 export interface HeadingAnchorFeatureProps {
 	inputWidth?: number
 	label?: string
