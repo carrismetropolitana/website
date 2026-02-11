@@ -125,7 +125,7 @@
 .minute.isHighlighted {
 	margin: 2px;
 	color: var(--color-system-text-100);
-	background-color: var(--color-system-background-100);
+	background-color: var(--color-brand);
 	border-radius: 100%;
 
 	&[data-is-dark="true"] {
