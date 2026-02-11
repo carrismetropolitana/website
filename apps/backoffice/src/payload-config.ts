@@ -3,7 +3,7 @@
 import { getPublicVariable } from '@carrismetropolitana/website-shared-settings';
 import { mongooseAdapter } from '@payloadcms/db-mongodb';
 import { nodemailerAdapter } from '@payloadcms/email-nodemailer';
-import { BlocksFeature, EXPERIMENTAL_TableFeature, lexicalEditor } from '@payloadcms/richtext-lexical';
+import { BlocksFeature, EXPERIMENTAL_TableFeature, HeadingFeature, lexicalEditor } from '@payloadcms/richtext-lexical';
 import { s3Storage } from '@payloadcms/storage-s3';
 import { buildConfig } from 'payload';
 import sharp from 'sharp';
@@ -11,6 +11,7 @@ import sharp from 'sharp';
 /* * */
 
 import { BackgroundColorFeature } from '@/lexical/backgroundColor/feature.server';
+import { HeadingAnchorFeature } from '@/lexical/headingAnchor/feature.server';
 import { MentionFeature } from '@/lexical/mention/feature.server';
 import { CaseStudies } from '@/schemas/CaseStudies/collection';
 import { KnowledgeBase } from '@/schemas/KnowledgeBase/collection';
@@ -67,7 +68,9 @@ export default buildConfig({
 
 	editor: lexicalEditor({
 		features: ({ defaultFeatures }) => [
-			...defaultFeatures,
+			...defaultFeatures.filter(f => f.key !== 'heading'),
+			HeadingFeature({ enabledHeadingSizes: ['h2', 'h3'] }),
+			HeadingAnchorFeature(),
 			BlocksFeature({
 				blocks: [
 					{

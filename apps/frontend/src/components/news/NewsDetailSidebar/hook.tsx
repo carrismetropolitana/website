@@ -45,20 +45,24 @@ export default function useHook(newsBody: LexicalNode | string | undefined): Toc
 			parsedBody = newsBody;
 		}
 
-		const rootNode = (parsedBody && typeof parsedBody === 'object' && 'root' in parsedBody ? parsedBody.root : parsedBody) as LexicalNode | undefined | { children?: LexicalNode[] };
+		const rootNode = (parsedBody && typeof parsedBody === 'object' && 'root' in parsedBody ? parsedBody.root : parsedBody) as LexicalNode | { children?: LexicalNode[] };
+
 		if (!rootNode || !rootNode.children || !Array.isArray(rootNode.children)) {
 			setHeadings([]);
 			return;
 		}
 
 		const result: TocHeading[] = [];
+
 		rootNode.children.forEach((child, index) => {
-			if (child.type === 'heading' && child.tag) {
+			if (child.type === 'custom-heading' && child.tag) {
 				const level = parseInt(child.tag.replace('h', '')) || 1;
 				const text = extractTextFromNode(child);
+				const anchorId = (child as { anchorId?: string }).anchorId;
+				const id = (anchorId && anchorId.trim() !== '') ? anchorId : `${slugify(text)}-${index}`;
 
 				if (text && (level === 2 || level === 3)) {
-					result.push({ id: `${slugify(text)}-${index}`, level, text });
+					result.push({ id, level, text });
 				}
 			}
 		});

@@ -50,7 +50,11 @@ function renderNode(node: LexicalNode, key?: number): ReactNode {
 	switch (node.type) {
 		case 'block': return renderBlock(node, key);
 		case 'code': return <Code key={key} children={children} />;
-		case 'heading': return <Heading key={key} children={children} index={key} tag={node.tag} />;
+		case 'custom-heading':
+		case 'heading': {
+			const anchorId = (node as { anchorId?: string }).anchorId;
+			return <Heading key={key} anchorId={anchorId} children={children} index={key} tag={node.tag} />;
+		}
 		case 'horizontalrule': return <hr key={key} />;
 		case 'link': return <Links key={key} children={children} fields={node.fields} url={node.url} />;
 		case 'list': return <List key={key} children={children} listType={node.listType} />;
