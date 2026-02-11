@@ -189,6 +189,7 @@ export interface News {
     [k: string]: unknown;
   };
   is_featured?: boolean | null;
+  is_unlisted?: boolean | null;
   topics?: (string | Topic)[] | null;
   featured_image?: (string | null) | Media;
   publishedAt: string;
@@ -436,6 +437,7 @@ export interface NewsSelect<T extends boolean = true> {
   summary?: T;
   body?: T;
   is_featured?: T;
+  is_unlisted?: T;
   topics?: T;
   featured_image?: T;
   publishedAt?: T;

@@ -15,7 +15,12 @@ export const GET = async () => {
 		draft: false,
 		limit: 0,
 		sort: '-publishedAt',
-		where: {},
+		where: {
+			or: [
+				{ is_unlisted: { equals: false } },
+				{ is_unlisted: { equals: undefined } },
+			],
+		},
 	});
 
 	const docs = result.docs ?? [];

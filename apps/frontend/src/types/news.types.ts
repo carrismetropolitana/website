@@ -9,6 +9,8 @@ export interface NewsData {
 		url: string
 	}
 	id: string
+	is_featured: boolean
+	is_unlisted: boolean
 	publishedAt: string
 	summary: string
 	title: string

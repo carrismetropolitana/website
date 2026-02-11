@@ -2,6 +2,7 @@
 
 import { featuredImageField } from '@/fields/featured-image';
 import { isFeaturedField } from '@/fields/is-featured';
+import { isUnlistedField } from '@/fields/is-unlisted';
 import { publishedAtField } from '@/fields/published-at';
 import { topicsField } from '@/fields/topics';
 import { updatedAtField } from '@/fields/updated-at';
@@ -42,6 +43,7 @@ export const News: CollectionConfig = {
 			type: 'richText',
 		},
 		isFeaturedField,
+		isUnlistedField,
 		topicsField,
 		featuredImageField,
 		publishedAtField,
