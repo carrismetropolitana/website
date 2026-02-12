@@ -177,6 +177,7 @@
 				"DRIVER_ISSUE": "Problema com Motorista",
 				"HIGH_PASSENGER_LOAD": "Elevada Lotação",
 				"MEDICAL_EMERGENCY": "Emergência Médica",
+				"NETWORK_UPDATE": "Atualização da Rede",
 				"POLICE_ACTIVITY": "Atividade Policial",
 				"PUBLIC_DISORDER": "Desacatos",
 				"ROAD_ISSUE": "Incidente na Via",
@@ -189,6 +190,7 @@
 				"ACCESSIBILITY_ISSUE": "Impacto na Acessibilidade",
 				"ADDITIONAL_SERVICE": "Serviço Adicional",
 				"DETOUR": "Desvio",
+				"MODIFIED_SERVICE": "Serviço Modificado",
 				"NO_SERVICE": "Cancelamento",
 				"ON_BOARD_SALE_ISSUE": "Venda a Bordo Condicionada",
 				"REALTIME_INFO_ISSUE": "Impacto na Informação ao Público",
@@ -1489,9 +1491,9 @@
 		"VehiclePropulsion": {
 			"diesel": "Diesel",
 			"electricity": "Eletricidade",
+			"hybrid": "Híbrido",
 			"lpg_auto": "GPL",
-			"natural_gas": "Gás Natural",
-			"hybrid": "Híbrido"
+			"natural_gas": "Gás Natural"
 		}
 	},
 	"periods": {
