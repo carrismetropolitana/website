@@ -80,7 +80,7 @@ export function StopsDetailContentTimetableRow({ arrivalData, status }: Props) {
 					shortName={thisPattern.line_id}
 					textColor={thisPattern.text_color}
 				/>
-				{isSelected && debugContext.flags.is_debug_mode && (
+				{status === 'passed' && debugContext.flags.is_debug_mode && (
 					<NextArrivals
 						arrivals={[arrivalData.scheduled_arrival_unix]}
 						status="scheduled"
