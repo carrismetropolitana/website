@@ -20,7 +20,7 @@ interface Translation {
 /* * */
 
 export interface TranslatedImage {
-	localizedImage: LocalizedImage[]
+	localized_image: LocalizedImage[]
 }
 
 interface LocalizedImage {
