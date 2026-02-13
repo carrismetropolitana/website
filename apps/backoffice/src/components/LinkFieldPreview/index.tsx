@@ -18,18 +18,12 @@ export function LinkFieldPreview() {
 	//
 	// B. Render components
 
-	if (!value || typeof value !== 'string' || value.trim() === '') {
-		return null;
-	}
+	if (!value?.trim()) return null;
 
 	let displayUrl = value;
-
 	try {
 		const url = new URL(value);
-		displayUrl = url.hostname + url.pathname;
-		if (url.search) {
-			displayUrl += url.search;
-		}
+		displayUrl = url.hostname + url.pathname + url.search;
 	}
 	catch {
 		displayUrl = value;
@@ -37,12 +31,7 @@ export function LinkFieldPreview() {
 
 	return (
 		<div className={styles.container}>
-			<a
-				className={styles.link}
-				href={value}
-				rel="noreferrer noopener"
-				target="_blank"
-			>
+			<a className={styles.link} href={value} rel="noreferrer noopener" target="_blank">
 				<svg
 					className={styles.icon}
 					fill="none"
@@ -59,9 +48,7 @@ export function LinkFieldPreview() {
 						strokeWidth="2"
 					/>
 				</svg>
-				<span className={styles.text}>
-					{displayUrl}
-				</span>
+				<span className={styles.text}> {displayUrl} </span>
 			</a>
 		</div>
 	);
