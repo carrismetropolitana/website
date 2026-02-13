@@ -13,6 +13,7 @@
 		"start": "next start"
 	},
 	"dependencies": {
+		"@carrismetropolitana/api-types": "20251128.1928.11",
 		"@carrismetropolitana/website-shared-settings": "*",
 		"@payloadcms/db-mongodb": "3.76.1",
 		"@payloadcms/email-nodemailer": "3.76.1",
