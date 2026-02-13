@@ -7,6 +7,11 @@ import { type NextConfig } from 'next';
 
 const nextConfig: NextConfig = {
 	basePath: '/admin',
+	experimental: {
+		serverActions: {
+			bodySizeLimit: '4gb',
+		},
+	},
 	images: {
 		dangerouslyAllowLocalIP: true,
 		remotePatterns: [
