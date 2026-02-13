@@ -1,6 +1,6 @@
 .toolbarIcon {
-    border: '1px solid var(--theme-elevation-250)',;
-    borderRadius: 2,;
-    height: 12,;
-    width: 16,
+	border: 1px solid var(--theme-elevation-250);
+	border-radius: 2px;
+	height: 12px;
+	width: 16px;
 }

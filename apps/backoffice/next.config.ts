@@ -8,6 +8,7 @@ import { type NextConfig } from 'next';
 const nextConfig: NextConfig = {
 	basePath: '/admin',
 	images: {
+		dangerouslyAllowLocalIP: true,
 		remotePatterns: [
 			{
 				hostname: 'localhost',

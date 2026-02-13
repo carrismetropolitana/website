@@ -27,18 +27,22 @@ import { Settings } from '@/globals/config';
 import { GeneralStatus } from '@/schemas/GeneralStatus/global';
 import { HomeSlider } from '@/schemas/HomeSlider/global';
 
+/* * */
+
 import { accordionFields } from './fields/accordion';
 import { galleryFields } from './fields/gallery';
 import { linkFields } from './fields/link';
 import { videoFields } from './fields/video';
+
+/* * */
 
 export default buildConfig({
 
 	admin: {
 		components: {
 			graphics: {
-				Icon: '@/graphics/Icon/index.tsx#Icons',
-				Logo: '@/graphics/Logo/index.tsx#Logos',
+				Icon: { exportName: 'Icons', path: '@/graphics/Icon/index.tsx' },
+				Logo: { exportName: 'Logos', path: '@/graphics/Logo/index.tsx' },
 			},
 		},
 		livePreview: {
@@ -50,13 +54,6 @@ export default buildConfig({
 		},
 		meta: {
 			description: 'Backoffice da CMetropolitana',
-			icons: [
-				{
-					rel: 'icon',
-					type: 'image/png',
-					url: '/admin/favicon.png',
-				},
-			],
 			title: 'Backoffice | CMetropolitana',
 		},
 		user: 'users',

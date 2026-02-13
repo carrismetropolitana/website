@@ -1,9 +1,10 @@
-import type { LexicalNode } from '@/types/lexical-node.types';
 'use client';
 
 /**
  * Custom hook to parse HTML and generate Table of Contents tree.
  */
+
+import type { LexicalNode } from '@/types/lexical-node.types';
 
 import { extractTextFromNode, slugify } from '@/utils/sidebarHelper';
 import { useEffect, useState } from 'react';

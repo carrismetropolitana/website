@@ -20,8 +20,24 @@ export async function Icons() {
 
 	return (
 		<>
-			<Image alt={lightModeIcon?.alt ?? 'Icon CM Light Mode'} className="light-mode-image" height={lightModeIcon?.height} src={lightModeIcon?.url} width={lightModeIcon?.width} />
-			<Image alt={darkModeIcon?.alt ?? 'Icon CM Dark Mode'} className="dark-mode-image" height={darkModeIcon?.height} src={darkModeIcon?.url} width={darkModeIcon?.width} />
+			{lightModeIcon?.url ? (
+				<Image
+					alt={lightModeIcon.alt ?? 'Icon CM Light Mode'}
+					className="light-mode-image"
+					height={lightModeIcon.height ?? 32}
+					src={lightModeIcon.url}
+					width={lightModeIcon.width ?? 32}
+				/>
+			) : null}
+			{darkModeIcon?.url ? (
+				<Image
+					alt={darkModeIcon.alt ?? 'Icon CM Dark Mode'}
+					className="dark-mode-image"
+					height={darkModeIcon.height ?? 32}
+					src={darkModeIcon.url}
+					width={darkModeIcon.width ?? 32}
+				/>
+			) : null}
 		</>
 	);
 
