@@ -53,7 +53,7 @@ function renderNode(node: LexicalNode, key?: number): ReactNode {
 		case 'custom-heading':
 		case 'heading': {
 			const anchorId = (node as { anchorId?: string }).anchorId;
-			return <Heading key={key} anchorId={anchorId} children={children} index={key} tag={node.tag} />;
+			return <Heading key={key} anchorId={anchorId} children={children} index={key} tag={node.tag as 'h2' | 'h3'} />;
 		}
 		case 'horizontalrule': return <hr key={key} />;
 		case 'link': return <Links key={key} children={children} fields={node.fields} url={node.url} />;
