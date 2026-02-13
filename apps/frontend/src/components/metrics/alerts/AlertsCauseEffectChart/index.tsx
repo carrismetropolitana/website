@@ -1,3 +1,5 @@
+'use client';
+
 import { AlertEffect } from '@/types/alerts.types';
 import { AlertsCauseEffect as AlertsCauseEffectType } from '@carrismetropolitana/api-types/metrics';
 import { BarChart } from '@mantine/charts';

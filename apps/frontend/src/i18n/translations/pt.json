@@ -59,7 +59,8 @@
 		}
 	},
 	"NewsCard": {
-		"publish_date": "{published_at, date, long}"
+		"publish_date": "{published_at, date, long}",
+		"see_more": "Veja Mais"
 	},
 	"SelectLine": {
 		"label": "Procurar linha por número, nome, localidade...",

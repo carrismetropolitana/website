@@ -1366,7 +1366,8 @@
 			"electricity": "Electricity",
 			"hybrid": "Hybrid",
 			"lpg_auto": "GPL",
-			"natural_gas": "Natural Gas"
+			"natural_gas": "Natural Gas",
+			"hybrid": "Hybrid"
 		}
 	},
 	"periods": {

@@ -1,6 +1,5 @@
 /* * */
 
-import { MetricsPageAlerts } from '@/components/metrics/alerts/MetricsPageAlerts';
 import { MetricsPageAboutOpenData } from '@/components/metrics/MetricsPageAboutOpenData';
 import { MetricsPageComplaints } from '@/components/metrics/MetricsPageComplaints';
 import { MetricsPageIntro } from '@/components/metrics/MetricsPageIntro';
@@ -21,7 +20,6 @@ export function MetricsPage() {
 			<MetricsPageRecords />
 			<MetricsPageLines />
 			<MetricsPageService />
-			<MetricsPageAlerts />
 			<MetricsPageComplaints />
 		</MetricsContextProvider>
 	);
