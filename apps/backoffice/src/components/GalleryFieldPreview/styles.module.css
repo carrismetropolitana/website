@@ -1,3 +1,6 @@
+/* * */
+/* LOADING CONTAINER */
+
 .loadingContainer {
 	background: #f5f5f5;
 	border-radius: 4px;
@@ -7,12 +10,18 @@
 	padding: 8px;
 }
 
+/* * */
+/* GALLERY CONTAINER */
+
 .galleryContainer {
 	display: flex;
 	flex-wrap: wrap;
 	gap: 8px;
 	margin-top: 8px;
 }
+
+/* * */
+/* GALLERY IMAGE CONTAINER */
 
 .imageContainer {
 	border: 1px solid #e0e0e0;
@@ -22,6 +31,9 @@
 	position: relative;
 	width: 60px;
 }
+
+/* * */
+/* GALLERY IMAGE */
 
 .image {
 	height: 100%;
