@@ -27,6 +27,8 @@ export function transformPayloadData(payloadData: any): NewsData {
 		body,
 		featured_image,
 		id: payloadData.id || '',
+		is_featured: payloadData.is_featured || false,
+		is_unlisted: payloadData.is_unlisted || false,
 		publishedAt: payloadData.publishedAt || '',
 		summary: payloadData.summary || '',
 		title: payloadData.title || '',
