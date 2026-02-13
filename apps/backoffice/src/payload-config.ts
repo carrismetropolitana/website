@@ -41,8 +41,8 @@ export default buildConfig({
 	admin: {
 		components: {
 			graphics: {
-				Icon: { exportName: 'Icons', path: '@/graphics/Icon/index.tsx' },
-				Logo: { exportName: 'Logos', path: '@/graphics/Logo/index.tsx' },
+				Icon: '@/graphics/Icon/index.tsx#Icons',
+				Logo: '@/graphics/Logo/index.tsx#Logos',
 			},
 		},
 		livePreview: {
@@ -60,6 +60,11 @@ export default buildConfig({
 	},
 
 	collections: [CaseStudies, Media, News, Topics, Users, KnowledgeBase, Notes],
+
+	csrf: [
+		getPublicVariable('server_url_backoffice').replace(/\/$/, ''),
+		`${getPublicVariable('server_url_backoffice').replace(/\/$/, '')}/admin`,
+	],
 
 	db: mongooseAdapter({ url: process.env.WEBSITEDB_URI ?? 'mongodb://placeholder:placeholder@placeholder:12345/placeholder' }),
 
@@ -149,7 +154,7 @@ export default buildConfig({
 
 	secret: process.env.PAYLOAD_SECRET || 'placeholder',
 
-	serverURL: getPublicVariable('server_url_backoffice'),
+	serverURL: `${getPublicVariable('server_url_backoffice').replace(/\/$/, '')}/admin`,
 
 	sharp: sharp,
 

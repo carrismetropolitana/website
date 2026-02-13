@@ -13,7 +13,6 @@ const nextConfig: NextConfig = {
 		},
 	},
 	images: {
-		dangerouslyAllowLocalIP: true,
 		remotePatterns: [
 			{
 				hostname: 'localhost',

@@ -20,24 +20,8 @@ export async function Logos() {
 
 	return (
 		<>
-			{lightModeLogo?.url ? (
-				<Image
-					alt={lightModeLogo.alt ?? 'Logo CM Light Mode'}
-					className="light-mode-image"
-					height={lightModeLogo.height ?? 120}
-					src={lightModeLogo.url}
-					width={lightModeLogo.width ?? 120}
-				/>
-			) : null}
-			{darkModeLogo?.url ? (
-				<Image
-					alt={darkModeLogo.alt ?? 'Logo CM Dark Mode'}
-					className="dark-mode-image"
-					height={darkModeLogo.height ?? 120}
-					src={darkModeLogo.url}
-					width={darkModeLogo.width ?? 120}
-				/>
-			) : null}
+			<Image alt={lightModeLogo?.alt ?? 'Logo CM Light Mode'} className="light-mode-image" height={lightModeLogo?.height} src={lightModeLogo?.url} width={lightModeLogo?.width} />
+			<Image alt={darkModeLogo?.alt ?? 'Logo CM Dark Mode'} className="dark-mode-image" height={darkModeLogo?.height} src={darkModeLogo?.url} width={darkModeLogo?.width} />
 		</>
 	);
 
