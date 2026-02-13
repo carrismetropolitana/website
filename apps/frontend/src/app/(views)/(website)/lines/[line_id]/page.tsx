@@ -21,11 +21,25 @@ export async function generateMetadata({ params }): Promise<Metadata> {
 	//
 	// B. Fetch data
 
-	const allLinesResponse = await fetch(`${getPublicVariable('api_url')}/lines`);
-	const allLinesData: Line[] = await allLinesResponse.json();
-
-	const fetchedLocalitiesResponse = await fetch(`${getPublicVariable('api_url')}/locations/localities`);
-	const fetchedLocalitiesData: ApiResponse<Locality[]> = await fetchedLocalitiesResponse.json();
+	let allLinesData: Line[] | null = null;
+	let fetchedLocalitiesData: ApiResponse<Locality[]> | null = null;
+	try {
+		const [allLinesResponse, fetchedLocalitiesResponse] = await Promise.all([
+			fetch(`${getPublicVariable('api_url')}/lines`),
+			fetch(`${getPublicVariable('api_url')}/locations/localities`),
+		]);
+		if (!allLinesResponse.ok || !fetchedLocalitiesResponse.ok) throw new Error('Failed to fetch lines or localities');
+		[allLinesData, fetchedLocalitiesData] = await Promise.all([
+			allLinesResponse.json(),
+			fetchedLocalitiesResponse.json(),
+		]);
+	}
+	catch {
+		return {
+			description: `Horarios planeados e em tempo real da linha ${line_id}.`,
+			title: `Linha ${line_id}`,
+		};
+	}
 	const allLocalitiesData: Locality[] = fetchedLocalitiesData.status === 'success' ? fetchedLocalitiesData.data : [];
 
 	//

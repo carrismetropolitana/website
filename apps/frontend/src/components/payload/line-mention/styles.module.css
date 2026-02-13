@@ -1,0 +1,15 @@
+.wrapper {
+	display: inline-block;
+	line-height: 0;
+	vertical-align: middle;
+}
+
+.link {
+	color: inherit;
+	text-decoration: none;
+}
+
+.fallback {
+	display: inline-block;
+	vertical-align: middle;
+}

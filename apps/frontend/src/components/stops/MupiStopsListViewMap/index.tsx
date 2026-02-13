@@ -1,3 +1,5 @@
+'use client';
+
 /* * */
 
 import { Surface } from '@/components/layout/Surface';

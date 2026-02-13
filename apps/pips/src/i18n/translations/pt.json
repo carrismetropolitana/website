@@ -59,7 +59,7 @@
 		}
 	},
 	"NewsCard": {
-		"publish_date": "{publishDate, date, long}"
+		"publish_date": "{published_at, date, dd/MM/yyyy}"
 	},
 	"Pips": {
 		"copy_url": "Copiar URL",
@@ -1220,7 +1220,7 @@
 			"found_items_counter": "{count, plural, =0 {Nenhuma notícia encontrada.} one {Encontrada # noticia:} other {Encontradas # notícias:}}"
 		},
 		"SinglePageHeader": {
-			"publish_date": "Publicada a {value, date, long}"
+			"publish_date": "Publicada a {published_at, date, dd/MM/yyyy}"
 		}
 	},
 	"notifications": {
@@ -1318,7 +1318,8 @@
 			"diesel": "Diesel",
 			"electricity": "Eletricidade",
 			"lpg_auto": "GPL",
-			"natural_gas": "Gás Natural"
+			"natural_gas": "Gás Natural",
+			"hybrid": "Híbrido"
 		}
 	},
 	"periods": {

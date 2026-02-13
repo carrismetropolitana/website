@@ -1,3 +1,5 @@
+'use client';
+
 /* * */
 import { Select } from '@mantine/core';
 import { IconSortAscending, IconSortDescending } from '@tabler/icons-react';

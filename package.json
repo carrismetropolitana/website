@@ -9,8 +9,8 @@
 		"build:schools": "turbo build --filter=@carrismetropolitana/website-schools",
 		"build:shared": "turbo build --filter=./shared/*",
 		"dev": "npm run build:shared && dotenv-run -f ./environments/development/secrets/.env -- turbo dev",
-		"dev:backoffice": "dotenv-run -f ./environments/development/secrets/.env -- turbo dev --filter=@carrismetropolitana/website-backoffice",
-		"dev:frontend": "dotenv-run -f ./environments/development/secrets/.env -- turbo dev --filter=@carrismetropolitana/website-frontend",
+		"dev:backoffice": "dotenv-run -f ./environments/staging/secrets/.env -- turbo dev --filter=@carrismetropolitana/website-backoffice",
+		"dev:frontend": "dotenv-run -f ./environments/staging/secrets/.env -- turbo dev --filter=@carrismetropolitana/website-frontend",
 		"dev:pips": "dotenv-run -f ./environments/development/secrets/.env -- turbo dev --filter=@carrismetropolitana/website-pips",
 		"dev:schools": "dotenv-run -f ./environments/development/secrets/.env -- turbo dev --filter=@carrismetropolitana/website-schools",
 		"lint": "turbo lint",
@@ -24,10 +24,10 @@
 	"devDependencies": {
 		"@carrismetropolitana/eslint": "20250622.1204.50",
 		"@dotenv-run/cli": "1.3.6",
-		"turbo": "2.6.3",
+		"turbo": "2.8.3",
 		"typescript": "5.9.3"
 	},
-	"packageManager": "npm@11.6.4",
+	"packageManager": "npm@11.9.0",
 	"engines": {
 		"node": ">=18"
 	},

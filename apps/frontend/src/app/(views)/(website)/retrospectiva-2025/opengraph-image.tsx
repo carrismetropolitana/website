@@ -1,6 +1,6 @@
 /* * */
 
-import { OpenGraphReview2024Default } from '@/opengraph/OpenGraphReview2024Default';
+import { OpenGraphReview2025Default } from '@/opengraph/OpenGraphReview2025Default';
 import fs from 'fs';
 import { ImageResponse } from 'next/og';
 
@@ -8,7 +8,7 @@ import { ImageResponse } from 'next/og';
 
 export default async function Image() {
 	return new ImageResponse(
-		<OpenGraphReview2024Default />,
+		<OpenGraphReview2025Default />,
 		{
 			fonts: [
 				{ data: fs.readFileSync(`${process.cwd()}/public/assets/fonts/Inter-Medium.ttf`).buffer as ArrayBuffer, name: 'Inter', style: 'normal', weight: 500 },

@@ -9,43 +9,21 @@ import { NewsDetailContent } from '@/components/news/NewsDetailContent';
 import { NewsDetailHeader } from '@/components/news/NewsDetailHeader';
 import { NewsDetailSidebar } from '@/components/news/NewsDetailSidebar';
 import { NewsData } from '@/types/news.types';
-import { useEffect, useState } from 'react';
+import { getPublicVariable } from '@carrismetropolitana/website-shared-settings';
 import useSWR from 'swr';
 
 import styles from './styles.module.css';
 
 /* * */
 
-export function NewsDetail({ newsId }) {
+export function NewsDetail({ newsId }: { newsId: string }) {
 	//
 
 	//
 	// A. Fetch Data
 
-	const { data: newsData, isLoading } = useSWR(`/api/news/${newsId}`);
-	const [data, setData] = useState<NewsData>();
-
-	//
-	// B. Transform Data
-
-	// Give a unique ID to each heading in the content to be able
-	// to link to them from the sidebar
-
-	useEffect(() => {
-		if (!newsData) return;
-
-		const content = document.createElement('div');
-		content.innerHTML = newsData.content;
-
-		content.querySelectorAll('h2, h3').forEach((heading, index) => {
-			heading.id = `heading-${index}`;
-		});
-
-		const newData = newsData;
-		newData.content = content.innerHTML;
-
-		setData(newData);
-	}, [newsData]);
+	const newsApiUrl = `${getPublicVariable('server_url_backoffice')}/admin/public-api/news/${newsId}`;
+	const { data: newsData, isLoading } = useSWR<NewsData>(newsApiUrl);
 
 	//
 	// C. Render components
@@ -61,8 +39,12 @@ export function NewsDetail({ newsId }) {
 
 			<Section withPadding>
 				<div className={styles.innerWrapper}>
-					{!isLoading && data && <NewsDetailContent content={data.content} />}
-					{!isLoading && data && <NewsDetailSidebar newsData={data} />}
+					{!isLoading && newsData && (
+						<>
+							<NewsDetailContent data={newsData} />
+							<NewsDetailSidebar newsBody={newsData.body} />
+						</>
+					)}
 				</div>
 			</Section>
 
