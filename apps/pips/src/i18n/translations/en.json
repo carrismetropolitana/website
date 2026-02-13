@@ -1364,9 +1364,9 @@
 		"VehiclePropulsion": {
 			"diesel": "Diesel",
 			"electricity": "Electricity",
+			"hybrid": "Hybrid",
 			"lpg_auto": "GPL",
-			"natural_gas": "Natural Gas",
-			"hybrid": "Hybrid"
+			"natural_gas": "Natural Gas"
 		}
 	},
 	"periods": {
