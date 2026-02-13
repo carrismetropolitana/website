@@ -68,6 +68,8 @@ export const importMap = {
   "@/lexical/headingAnchor/feature.client#HeadingAnchorFeatureClient": HeadingAnchorFeatureClient_eaf9b82c83898f5d31545126068a138e,
   "@/components/GeneralStatusMessageLabel/index#GeneralStatusMessageLabel": GeneralStatusMessageLabel_52099edc813454fee3d5335f6a4aed35,
   "@/components/HomeSliderMessageLabel/index#HomeSliderMessageLabel": HomeSliderMessageLabel_257d5701fbc8afd2f21de3c70108de6a,
+  "@/graphics/Icon/index.tsx#Icons": Icons_537d74cd4b75d6c420c521af18c7f707,
+  "@/graphics/Logo/index.tsx#Logos": Logos_6c8490617bef60039b781082d4fedeae,
   "@payloadcms/storage-s3/client#S3ClientUploadHandler": S3ClientUploadHandler_f97aa6c64367fa259c5bc0567239ef24,
   "@payloadcms/next/rsc#CollectionCards": CollectionCards_f9c02e79a4aed9a3924487c0cd4cafb1
 }
