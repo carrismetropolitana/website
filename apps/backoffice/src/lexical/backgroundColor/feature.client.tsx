@@ -5,6 +5,7 @@ import { createClientFeature, toolbarFormatGroupWithItems } from '@payloadcms/ri
 import { $getSelection, $isRangeSelection } from '@payloadcms/richtext-lexical/lexical';
 import { $patchStyleText } from '@payloadcms/richtext-lexical/lexical/selection';
 
+import styles from './style.module.css';
 /* * */
 
 const PRESET_COLORS = [
@@ -22,13 +23,8 @@ function BackgroundColorIcon({ color }: { color?: null | string }) {
 	return (
 		<div style={{ alignItems: 'center', display: 'flex', justifyContent: 'center', padding: 4 }}>
 			<div
-				style={{
-					backgroundColor: color ?? 'transparent',
-					border: '1px solid var(--theme-elevation-250)',
-					borderRadius: 2,
-					height: 12,
-					width: 16,
-				}}
+				className={styles.toolbarIcon}
+				style={{ backgroundColor: color ?? 'transparent' }}
 			/>
 		</div>
 	);
@@ -37,12 +33,9 @@ function BackgroundColorIcon({ color }: { color?: null | string }) {
 /* * */
 
 export const BackgroundColorFeatureClient = createClientFeature(() => {
-	const items = PRESET_COLORS.map(({ key, label, value }) => ({
+	const items = PRESET_COLORS.map(({ key, label, value }, index) => ({
 		ChildComponent: () => <BackgroundColorIcon color={value} />,
-		isActive: ({ selection }) => {
-			if (!$isRangeSelection(selection)) return false;
-			return false;
-		},
+		isActive: () => false,
 		key,
 		label,
 		onSelect: ({ editor }) => {
@@ -55,15 +48,12 @@ export const BackgroundColorFeatureClient = createClientFeature(() => {
 				});
 			});
 		},
-		order: 10 + PRESET_COLORS.findIndex(c => c.key === key),
+		order: 10 + index,
 	}));
 
+	const groups = [toolbarFormatGroupWithItems(items)];
 	return {
-		toolbarFixed: {
-			groups: [toolbarFormatGroupWithItems(items)],
-		},
-		toolbarInline: {
-			groups: [toolbarFormatGroupWithItems(items)],
-		},
+		toolbarFixed: { groups },
+		toolbarInline: { groups },
 	};
 });

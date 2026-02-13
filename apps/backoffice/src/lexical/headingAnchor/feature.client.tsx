@@ -72,10 +72,7 @@ const anchorToolbarGroup = {
 
 /* * */
 
-export const HeadingAnchorFeatureClient = createClientFeature<
-	HeadingAnchorFeatureProps,
-	HeadingAnchorFeatureProps
->(() => ({
+export const HeadingAnchorFeatureClient = createClientFeature<HeadingAnchorFeatureProps, HeadingAnchorFeatureProps>(() => ({
 	nodes: [
 		{ replace: HeadingNode, with: (node: HeadingNode) => new CustomHeadingNode(node.__tag), withKlass: CustomHeadingNode },
 		CustomHeadingNode,
