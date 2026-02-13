@@ -1,3 +1,5 @@
+'use client';
+
 /* * */
 
 import { NoDataLabel } from '@/components/layout/NoDataLabel';

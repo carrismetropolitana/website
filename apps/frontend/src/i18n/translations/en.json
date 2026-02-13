@@ -168,45 +168,41 @@
 		},
 		"AlertCauseEffectIcon": {
 			"cause": {
+				"ABUSIVE_PARKING": "Abusive Parking",
 				"ACCIDENT": "Accident",
-				"CONSTRUCTION": "Works",
+				"CONSTRUCTION": "Construction Works",
 				"DEMONSTRATION": "Event / Demonstration",
 				"DRIVER_ABSENCE": "Operation Constraints",
 				"DRIVER_ISSUE": "Operation Constraints",
 				"HIGH_PASSENGER_LOAD": "High Passenger Load",
-				"HOLIDAY": "Holiday",
-				"MAINTENANCE": "Maintenance",
 				"MEDICAL_EMERGENCY": "Medical Emergency",
-				"OTHER_CAUSE": "Other Causes",
+				"NETWORK_UPDATE": "Network Update",
 				"POLICE_ACTIVITY": "Police Activity",
-				"ROAD_INCIDENT": "Road Incident",
+				"PUBLIC_DISORDER": "Public Disorder",
+				"ROAD_ISSUE": "Road Issue",
 				"STRIKE": "Strike",
-				"SYSTEM_FAILURE": "System Failure",
-				"TECHNICAL_PROBLEM": "Technical Problem",
+				"TECHNICAL_ISSUE": "Technical Issue",
 				"TRAFFIC_JAM": "Traffic Jam",
-				"UNKNOWN_CAUSE": "Unknown Cause",
-				"VEHICLE_ISSUE": "Vehicle Issue",
-				"WEATHER": "Bad Weather"
+				"WEATHER": "Weather Conditions"
 			},
 			"effect": {
-				"ACCESSIBILITY_ISSUE": "Accessibility Issue",
+				"ACCESSIBILITY_ISSUE": "Accessibility Impact",
 				"ADDITIONAL_SERVICE": "Additional Service",
 				"DETOUR": "Detour",
-				"MODIFIED_SERVICE": "Schedule Changes",
-				"NO_EFFECT": "No Effect",
-				"NO_SERVICE": "Canceled Service",
-				"OTHER_EFFECT": "Other",
-				"REDUCED_SERVICE": "Reduced Service",
+				"MODIFIED_SERVICE": "Modified Service",
+				"NO_SERVICE": "Cancellation",
+				"ON_BOARD_SALE_ISSUE": "On-board Sale Restricted",
+				"REALTIME_INFO_ISSUE": "Real-time Information Impact",
+				"REDUCED_SERVICE": "Route Shortening",
 				"SIGNIFICANT_DELAYS": "Significant Delays",
-				"STOP_MOVED": "Diversion Stop",
-				"UNKNOWN_EFFECT": "Unknown Effect"
+				"STOP_MOVED": "Stop Moved"
 			}
 		},
 		"AlertsDetail": {
 			"more_info": "More information"
 		},
 		"AlertsDetailImageThumbnail": {
-			"open_full_image": "Abrir imagem numa nova janela"
+			"open_full_image": "Open image in a new window"
 		},
 		"AlertsListEmpty": {
 			"default": {
@@ -261,10 +257,10 @@
 		"ConsentPopup": {
 			"actions": {
 				"accept": "OK",
-				"hide_options": "Esconder Opções",
-				"refuse": "Não, obrigado",
-				"save": "Guardar",
-				"show_options": "Mostrar Opções"
+				"hide_options": "Hide Options",
+				"refuse": "NNo, thanks",
+				"save": "Save",
+				"show_options": "Show Options"
 			},
 			"options": {
 				"analytics": "Guardar dados analíticos",
@@ -1493,6 +1489,7 @@
 		"VehiclePropulsion": {
 			"diesel": "Diesel",
 			"electricity": "Electricity",
+			"hybrid": "Hybrid",
 			"lpg_auto": "GPL",
 			"natural_gas": "Natural Gas"
 		}

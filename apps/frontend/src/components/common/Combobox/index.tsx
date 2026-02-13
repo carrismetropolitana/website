@@ -1,3 +1,5 @@
+'use client';
+
 /* * */
 
 import { Combobox, InputBase, useCombobox } from '@mantine/core';

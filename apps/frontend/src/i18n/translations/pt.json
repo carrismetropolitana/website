@@ -168,38 +168,34 @@
 		},
 		"AlertCauseEffectIcon": {
 			"cause": {
+				"ABUSIVE_PARKING": "Estacionamento Abusivo",
 				"ACCIDENT": "Acidente",
 				"CONSTRUCTION": "Obras",
-				"DEMONSTRATION": "Evento",
-				"DRIVER_ABSENCE": "Constrangimentos na Operação",
-				"DRIVER_ISSUE": "Constrangimentos na Operação",
-				"HIGH_PASSENGER_LOAD": "Carga Excessiva de Passageiros",
-				"HOLIDAY": "Férias",
-				"MAINTENANCE": "Manutenção",
+				"DEMONSTRATION": "Evento / Manifestação",
+				"DRIVER_ABSENCE": "Ausência de Motorista",
+				"DRIVER_ISSUE": "Problema com Motorista",
+				"HIGH_PASSENGER_LOAD": "Elevada Lotação",
 				"MEDICAL_EMERGENCY": "Emergência Médica",
-				"OTHER_CAUSE": "Outras Causas",
+				"NETWORK_UPDATE": "Atualização da Rede",
 				"POLICE_ACTIVITY": "Atividade Policial",
-				"ROAD_INCIDENT": "Incidente na Estrada",
+				"PUBLIC_DISORDER": "Desacatos",
+				"ROAD_ISSUE": "Incidente na Via",
 				"STRIKE": "Greve",
-				"SYSTEM_FAILURE": "Falha do Sistema",
-				"TECHNICAL_PROBLEM": "Problema Técnico",
-				"TRAFFIC_JAM": "Congestão de Trânsito",
-				"UNKNOWN_CAUSE": "Causa Desconhecida",
-				"VEHICLE_ISSUE": "Constrangimentos na Operação",
-				"WEATHER": "Mau Tempo"
+				"TECHNICAL_ISSUE": "Problema Técnico",
+				"TRAFFIC_JAM": "Trânsito",
+				"WEATHER": "Condições Meteorológicas"
 			},
 			"effect": {
 				"ACCESSIBILITY_ISSUE": "Impacto na Acessibilidade",
-				"ADDITIONAL_SERVICE": "Aumento de Serviço",
+				"ADDITIONAL_SERVICE": "Serviço Adicional",
 				"DETOUR": "Desvio",
-				"MODIFIED_SERVICE": "Alteração de Horários",
-				"NO_EFFECT": "Outro",
-				"NO_SERVICE": "Serviço Cancelado",
-				"OTHER_EFFECT": "Outro",
-				"REDUCED_SERVICE": "Serviço Reduzido",
+				"MODIFIED_SERVICE": "Serviço Modificado",
+				"NO_SERVICE": "Cancelamento",
+				"ON_BOARD_SALE_ISSUE": "Venda a Bordo Condicionada",
+				"REALTIME_INFO_ISSUE": "Impacto na Informação ao Público",
+				"REDUCED_SERVICE": "Encurtamento de Percurso",
 				"SIGNIFICANT_DELAYS": "Atrasos Significativos",
-				"STOP_MOVED": "Paragem Deslocada",
-				"UNKNOWN_EFFECT": "Outro"
+				"STOP_MOVED": "Paragem Deslocada"
 			}
 		},
 		"AlertsDetail": {
@@ -1494,6 +1490,7 @@
 		"VehiclePropulsion": {
 			"diesel": "Diesel",
 			"electricity": "Eletricidade",
+			"hybrid": "Híbrido",
 			"lpg_auto": "GPL",
 			"natural_gas": "Gás Natural"
 		}

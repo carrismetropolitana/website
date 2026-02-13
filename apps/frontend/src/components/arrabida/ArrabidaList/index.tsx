@@ -1,3 +1,5 @@
+'use client';
+
 import { FavoriteToggle } from '@/components/common/FavoriteToggle';
 import { NoDataLabel } from '@/components/layout/NoDataLabel';
 import { RegularListItem } from '@/components/layout/RegularListItem';

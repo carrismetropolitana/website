@@ -81,9 +81,9 @@
 /* SUMMARY */
 
 .summary {
-	display: flex;
-	flex-direction: row;
-	gap: var(--size-spacing-5);
+	display: grid;
+	grid-template-columns: 1fr auto auto;
+	gap: var(--size-spacing-10);
 	align-items: center;
 	justify-content: space-between;
 	padding: var(--size-spacing-15);

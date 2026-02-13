@@ -1,3 +1,5 @@
+'use client';
+
 import { AlertsEvolution as AlertsEvolutionType } from '@carrismetropolitana/api-types/metrics';
 import { LineChart, Sparkline } from '@mantine/charts';
 import { Badge, Skeleton } from '@mantine/core';
