@@ -21,7 +21,6 @@ interface ImageValue {
 
 export function GalleryFieldPreview() {
 	//
-
 	//
 	// A. Setup variables
 
@@ -33,32 +32,28 @@ export function GalleryFieldPreview() {
 
 	useEffect(() => {
 		if (!value?.length) return setImages([]);
-
 		const ids = value.filter((item): item is string => typeof item === 'string');
-
-		Promise.all(ids.map(async (id) => {
-			const response = await fetch(`/admin/api/media/${id}`);
-			return response.ok ? response.json() : null;
-		})).then(results => setImages(results.filter(Boolean)));
+		Promise.all(
+			ids.map(id =>
+				fetch(`/admin/api/media/${id}`).then(res => (res.ok ? res.json() : null)),
+			),
+		).then(results => setImages(results.filter(Boolean)));
 	}, [value]);
 
 	//
 	// C. Render components
 
 	if (!value?.length) return null;
-
-	if (!images.length) {
-		return <div className={styles.loadingContainer}>Loading...</div>;
-	}
+	if (!images.length) return <div className={styles.loadingContainer}>Loading...</div>;
 
 	return (
 		<div className={styles.galleryContainer}>
-			{images.map((image, i) => (
-				<div key={image.id || i} className={styles.imageContainer}>
+			{images.map((img, i) => (
+				<div key={img.id ?? i} className={styles.imageContainer}>
 					<img
-						alt={image.filename || `Image ${i + 1}`}
+						alt={img.filename ?? `Image ${i + 1}`}
 						className={styles.image}
-						src={image.thumbnailURL || image.url}
+						src={img.thumbnailURL ?? img.url}
 					/>
 				</div>
 			))}
