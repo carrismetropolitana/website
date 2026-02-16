@@ -147,9 +147,9 @@ export const FleetListContextProvider = ({ children }) => {
 			const makeModelValues = filterByMakeAndModelState.split(';').filter(Boolean);
 			filterResult = filterResult.filter((item) => {
 				return makeModelValues.some((val) => {
-					const [makeFilter, modelFilter] = val.split('-').map(s => s.trim().toLowerCase());
-					const itemMake = item.make?.toLowerCase() || '';
-					const itemModel = item.model?.toLowerCase() || '';
+					const [makeFilter, modelFilter] = val.split('-').map(s => s.trim().toLowerCase()); // Mercedes-Benz has a dash in the middle. Make/Model is formated as 'MAKE - MODEL' so its safe to include a space before/after the check
+					const itemMake = item.make?.toLowerCase().replaceAll('-', '') || ''; // discards dashes in the make/model, to be inline with the makeFilter/modelFilter.
+					const itemModel = item.model?.toLowerCase().replaceAll('-', '') || '';
 					return itemMake.includes(makeFilter) && itemModel.includes(modelFilter);
 				});
 			});

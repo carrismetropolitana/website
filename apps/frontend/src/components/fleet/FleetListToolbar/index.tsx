@@ -55,7 +55,7 @@ export function FleetListToolbar() {
 				group: make,
 				items: Array
 					.from(models)
-					.map(model => ({ label: `${make} - ${model}`, value: `${make}-${model}` }))
+					.map(model => ({ label: `${make} - ${model}`, value: `${make.replaceAll('-', '')}-${model.replaceAll('-', '')}` })) // mercedes-benz becomes mercedesbenz to not break the filter
 					.sort((a, b) => a.label.localeCompare(b.label)),
 			}))
 			.sort((a, b) => a.group.localeCompare(b.group));
