@@ -214,11 +214,12 @@ export const LinesDetailContextProvider = ({ children, lineId }) => {
 				// Check if the alert is active and has a matching route
 				const hasMatchingRoute = dataLineState?.route_ids.includes(informedEntity.route_id || '');
 				const isActive = (simplifiedAlertData.end_date && !isNaN(simplifiedAlertData.end_date.getTime())) ? new Date(simplifiedAlertData.end_date).getTime() >= new Date().getTime() : true;
-				return hasMatchingRoute && isActive;
+				const hasMatchingStop = dataAllPatternsState?.some(pattern => pattern.some(patternGroup => patternGroup.path.some(waypoint => waypoint.stop_id === informedEntity.stop_id)));
+				return isActive && (hasMatchingRoute || hasMatchingStop);
 			});
 		});
 		setDataActiveAlertsState(activeAlerts);
-	}, [alertsContext.data.simplified, dataLineState]);
+	}, [alertsContext.data.simplified, dataLineState, dataAllPatternsState]);
 
 	//
 	// D. Handle actions
