@@ -3,6 +3,8 @@
 /* * */
 
 import { useAlertsContext } from '@/contexts/Alerts.context';
+import { useAnalyticsContext } from '@/contexts/Analytics.context';
+import { useDebugContext } from '@/contexts/Debug.context';
 import { useLinesContext } from '@/contexts/Lines.context';
 import { useOperationalDateContext } from '@/contexts/OperationalDate.context';
 import { useProfileContext } from '@/contexts/Profile.context';
@@ -14,8 +16,6 @@ import { getPublicVariable } from '@carrismetropolitana/website-shared-settings'
 import { DateTime } from 'luxon';
 import { notFound } from 'next/navigation';
 import { createContext, useContext, useEffect, useState } from 'react';
-
-import { useAnalyticsContext } from './Analytics.context';
 
 /* * */
 
@@ -77,6 +77,7 @@ export const StopsDetailContextProvider = ({ children, stopId }: { children: Rea
 	const profileContext = useProfileContext();
 	const operationalDateContext = useOperationalDateContext();
 	const analyticsContext = useAnalyticsContext();
+	const debugContext = useDebugContext();
 
 	const [dataStopState, setDataStopState] = useState<Stop | undefined>(undefined);
 	const [dataActiveStopIdState, setDataActiveStopIdState] = useState<string>(stopId);
@@ -232,7 +233,8 @@ export const StopsDetailContextProvider = ({ children, stopId }: { children: Rea
 					return (arrival.estimated_arrival_unix || arrival.scheduled_arrival_unix) < nowInUnixSeconds;
 				})
 				.filter((arrival) => {
-					// Skip the last stop
+					// When debug is off, skip last-stop arrivals (show them only in debug mode).
+					if (debugContext.flags.is_debug_mode) return true;
 					const lastStopSequence = dataValidPatternsState
 						?.find(patternGroup => patternGroup.id === arrival.pattern_id)?.path
 						.sort((a, b) => a.stop_sequence - b.stop_sequence)
@@ -253,7 +255,8 @@ export const StopsDetailContextProvider = ({ children, stopId }: { children: Rea
 					return (arrival.estimated_arrival_unix || arrival.scheduled_arrival_unix) >= nowInUnixSeconds;
 				})
 				.filter((arrival) => {
-					// Skip the last stop
+					// When debug is off, skip last-stop arrivals (show them only in debug mode).
+					if (debugContext.flags.is_debug_mode) return true;
 					const lastStopSequence = dataValidPatternsState
 						?.find(patternGroup => patternGroup.id === arrival.pattern_id)?.path
 						.sort((a, b) => a.stop_sequence - b.stop_sequence)
@@ -271,7 +274,7 @@ export const StopsDetailContextProvider = ({ children, stopId }: { children: Rea
 		prepareTimetableRealtimeData();
 		const interval = setInterval(prepareTimetableRealtimeData, 1000);
 		return () => clearInterval(interval);
-	}, [dataTimetableRealtimeState]);
+	}, [dataTimetableRealtimeState, dataValidPatternsState, debugContext.flags.is_debug_mode]);
 
 	/**
 	 * Prepare timetable schedule data for the selected stop.
@@ -283,7 +286,6 @@ export const StopsDetailContextProvider = ({ children, stopId }: { children: Rea
 		const validScheduledTrips: Arrival[] = [];
 
 		for (const patternGroup of dataValidPatternsState || []) {
-			// Skip the last stop
 			const lastStopSequence = patternGroup.path
 				.sort((a, b) => a.stop_sequence - b.stop_sequence)
 				.slice(-1)[0]?.stop_sequence;
@@ -295,8 +297,8 @@ export const StopsDetailContextProvider = ({ children, stopId }: { children: Rea
 				for (const stopTime of trip.schedule) {
 					// Skip if not for the selected stop
 					if (stopTime.stop_id !== dataActiveStopIdState) continue;
-					// Skip the last stop
-					if (stopTime.stop_sequence === lastStopSequence) continue;
+					// When debug is off, skip last-stop arrivals (show them only in debug mode).
+					if (!debugContext.flags.is_debug_mode && stopTime.stop_sequence === lastStopSequence) continue;
 					// Convert the arrival time into a unix timestamp.
 					// The arrival time is in 24h+ format, so we need to split it into hours, minutes, and seconds.
 					// Remember that if the hour is greater than 24, it means the arrival time is on the next day, and we need to add one day to the timestamp.
@@ -326,7 +328,7 @@ export const StopsDetailContextProvider = ({ children, stopId }: { children: Rea
 		}
 		validScheduledTrips.sort((a, b) => (a.scheduled_arrival_unix - b.scheduled_arrival_unix));
 		setDataTimetableScheduleState(validScheduledTrips);
-	}, [operationalDateContext.data.selected_date, dataValidPatternsState, dataActiveStopIdState]);
+	}, [operationalDateContext.data.selected_date, dataValidPatternsState, dataActiveStopIdState, debugContext.flags.is_debug_mode]);
 
 	/**
 	 * Fill state with valid pattern groups for the selected operational day.
