@@ -25,6 +25,12 @@ interface Options {
 	/**
 	 * The minimum length of a query word to be considered in the search. Ignored when query is a number.
 	 */
+	/**
+	 * When true, only return documents that contain ALL query words (AND semantics).
+	 * When false, documents matching any query word are included (OR semantics).
+	 * @default true
+	 */
+	matchAllWords?: boolean
 	minimumQueryLength?: number
 	/**
 	 * The portion of top results to show.
@@ -44,6 +50,7 @@ interface Options {
 
 interface FinalOptions {
 	boostMultiplier: number
+	matchAllWords: boolean
 	minimumQueryLength: number
 	threshold: number
 	useLevenshtein: boolean
@@ -74,6 +81,7 @@ function normalizeString(str: string): string {
 export function createDocCollection<T extends SearchableDocument<T>>(docs: T[], scoring: Partial<Record<KeyWithStringOrStringArrayValue<T>, number>>, options: Options = {}) {
 	const defaultOptions = {
 		boostMultiplier: 1.5,
+		matchAllWords: true,
 		minimumQueryLength: 1,
 		threshold: 2,
 		useLevenshtein: true,
@@ -175,8 +183,10 @@ function searchDocuments<T extends SearchableDocument<T>>(
      * @param queryWords - The query words to match.
      * @returns - The relevance score.
      */
-	const calculateScore = <T>(doc: T, boost: boolean | undefined, queryWords: string[], scoring: Partial<Record<KeyWithStringOrStringArrayValue<T>, number>>): number => {
+	const calculateScore = <T>(doc: T, boost: boolean | undefined, queryWords: string[], scoring: Partial<Record<KeyWithStringOrStringArrayValue<T>, number>>): { allWordsMatched: boolean, score: number } => {
 		let totalScore = 0;
+		// Track whether each query word has at least one match (for matchAllWords filtering)
+		const queryWordMatched = queryWords.map(() => false);
 
 		// The algorithm implements a prefix search per word,
 		// followed by a fuzzy search if the prefix search is not successful
@@ -219,23 +229,31 @@ function searchDocuments<T extends SearchableDocument<T>>(
 				if (queryWords.length > 0) {
 					// Match each query word against a locality.
 					// We do not match against each word in the locality as this would be very slow. TODO improve
-					queryWords.forEach((queryWord: string) => {
+					queryWords.forEach((queryWord: string, qi: number) => {
+						const wordScore = matchWord(documentStrings, queryWord);
+						if (wordScore > 0) {
+							queryWordMatched[qi] = true;
+						}
 						// The length penalty is a factor that decreases the score
 						// of a word match based on the length of the query word.
 						// This is to prevent short words from being too heavily weighted.
 						// The penalty is a factor of the length of the query word divided by 4
 						// The penalty is then clamped between 0 and 1.
 						const lengthPenalty = Math.min(queryWord.length / 4, 1);
-						totalScore += matchWord(documentStrings, queryWord) * multiplier * lengthPenalty;
+						totalScore += wordScore * multiplier * lengthPenalty;
 					});
 				}
 			}
 			else if (typeof documentValue === 'string') {
 				const documentWords = documentValue.split(' ');
-				queryWords.forEach((queryWord: string) => {
+				queryWords.forEach((queryWord: string, qi: number) => {
+					const wordScore = matchWord(documentWords, queryWord);
+					if (wordScore > 0) {
+						queryWordMatched[qi] = true;
+					}
 					// See above
 					const lengthPenalty = Math.min(queryWord.length / 4, 1);
-					totalScore += matchWord(documentWords, queryWord) * multiplier * lengthPenalty;
+					totalScore += wordScore * multiplier * lengthPenalty;
 				});
 
 				if (queryWords.length > 1) {
@@ -251,7 +269,8 @@ function searchDocuments<T extends SearchableDocument<T>>(
 			totalScore *= options.boostMultiplier;
 		}
 
-		return totalScore;
+		const allWordsMatched = queryWords.length === 0 || queryWordMatched.every(Boolean);
+		return { allWordsMatched, score: totalScore };
 	};
 
 	// Normalize query and split into words, filtering out words that are too short and that are not numbers
@@ -260,17 +279,21 @@ function searchDocuments<T extends SearchableDocument<T>>(
 		.filter((word: string) => word.length > 0 && (word.length >= options.minimumQueryLength || !Number.isNaN(Number(word))));
 
 	// Calculate the score for each document, using the normalized string
-	const scoredDocs = docs.map(doc => ({
-		doc: doc.doc,
-		score: calculateScore<typeof doc.normalized>(doc.normalized, doc.doc.boost, queryWords, scoreWeights),
-	}));
+	const scoredDocs = docs.map((doc) => {
+		const { allWordsMatched, score } = calculateScore<typeof doc.normalized>(doc.normalized, doc.doc.boost, queryWords, scoreWeights);
+		return { allWordsMatched, doc: doc.doc, score };
+	});
 
 	// Sort the documents by score
 	const sortedScoreDocs = scoredDocs.sort((a, b) => b.score - a.score);
 
-	// Filter out documents with a score less than half of the top score
+	// Filter: require score above threshold AND (when matchAllWords) document must contain every query word
 	const bestScore = sortedScoreDocs[0]?.score;
-	const filteredScoreDocs = sortedScoreDocs.filter(scoredDoc => scoredDoc.score > Math.floor(bestScore / options.threshold) || bestScore === 0);
+	const filteredScoreDocs = sortedScoreDocs.filter(
+		scoredDoc =>
+			(scoredDoc.score > Math.floor(bestScore / options.threshold) || bestScore === 0)
+			&& (!options.matchAllWords || scoredDoc.allWordsMatched),
+	);
 
 	// If top score is 0, we filter out all documents
 	if (bestScore === 0) {
