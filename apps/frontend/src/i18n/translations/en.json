@@ -184,6 +184,7 @@
 				"STRIKE": "Strike",
 				"TECHNICAL_ISSUE": "Technical Issue",
 				"TRAFFIC_JAM": "Traffic Jam",
+				"VEHICLE_ISSUE": "Technical Issue",
 				"WEATHER": "Weather Conditions"
 			},
 			"effect": {

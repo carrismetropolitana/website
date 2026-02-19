@@ -184,6 +184,7 @@
 				"STRIKE": "Greve",
 				"TECHNICAL_ISSUE": "Problema Técnico",
 				"TRAFFIC_JAM": "Trânsito",
+				"VEHICLE_ISSUE": "Problema Técnico",
 				"WEATHER": "Condições Meteorológicas"
 			},
 			"effect": {
