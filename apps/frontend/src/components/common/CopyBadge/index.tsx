@@ -1,6 +1,7 @@
 /* * */
 
 import { useClipboard } from '@mantine/hooks';
+import { IconEyePlus } from '@tabler/icons-react';
 
 import styles from './styles.module.css';
 
@@ -29,6 +30,9 @@ export function CopyBadge({ hasBorder = true, label, size = 'md', value }: Props
 	return (
 		<div className={`${styles.container} ${hasBorder && styles.hasBorder} ${styles[size]}`} onClick={() => clipboard.copy(value)}>
 			{clipboard.copied ? 'Copied' : label ? label : value}
+			{label?.includes('Trip ID') && (
+				<IconEyePlus color="var(--color-system-text-300)" onClick={() => alert('test')} size={16} />
+			)}
 		</div>
 	);
 
