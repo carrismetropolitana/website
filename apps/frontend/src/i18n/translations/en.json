@@ -2009,6 +2009,9 @@
 			}
 		},
 		"StopsDetailContentTimetableRow": {
+			"debug_modal": {
+				"title": "Trip IDs related to this arrival"
+			},
 			"localities": {
 				"label": "Goes through:"
 			},

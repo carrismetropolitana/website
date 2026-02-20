@@ -5,7 +5,6 @@ import { StopsDetailContentTimetableRowModal } from '@/components/stops/StopsDet
 import { type Arrival } from '@/types/stops.types';
 import { useDisclosure } from '@mantine/hooks';
 import { IconEyePlus } from '@tabler/icons-react';
-import { useState } from 'react';
 
 import styles from './styles.module.css';
 

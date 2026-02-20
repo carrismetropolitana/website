@@ -3,6 +3,7 @@
 import { CopyBadge } from '@/components/common/CopyBadge';
 import { type Arrival } from '@/types/stops.types';
 import { Modal } from '@mantine/core';
+import { useTranslations } from 'next-intl';
 
 import styles from './styles.module.css';
 
@@ -17,10 +18,23 @@ interface Props {
 /* * */
 
 export function StopsDetailContentTimetableRowModal({ arrivalData, onClose, opened }: Props) {
+	//
+
+	//
+	// A. Setup variables
+
+	const t = useTranslations('stops.StopsDetailContentTimetableRow.debug_modal');
+
+	//
+	// B. Handle actions
+
 	const handleCloseClick = (e: React.MouseEvent) => {
 		e.stopPropagation();
 		onClose();
 	};
+
+	//
+	// B. Render Components
 
 	return (
 		<Modal
@@ -29,11 +43,13 @@ export function StopsDetailContentTimetableRowModal({ arrivalData, onClose, open
 			opened={opened}
 			overlayProps={{ onClick: handleCloseClick }}
 			size="md"
-			title="Trip IDs related to this arrival"
+			title={t('title')}
 		>
 			<div className={styles.container}>
 				{arrivalData.trip_id && <CopyBadge label={`Trip ID: ${arrivalData.trip_id}`} value={arrivalData.trip_id} />}
 			</div>
 		</Modal>
 	);
+
+	//
 }
