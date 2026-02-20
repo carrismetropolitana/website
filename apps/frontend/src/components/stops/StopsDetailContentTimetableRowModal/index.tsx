@@ -17,15 +17,21 @@ interface Props {
 /* * */
 
 export function StopsDetailContentTimetableRowModal({ arrivalData, onClose, opened }: Props) {
+	const handleCloseClick = (e: React.MouseEvent) => {
+		e.stopPropagation();
+		onClose();
+	};
+
 	return (
 		<Modal
+			closeButtonProps={{ onClick: handleCloseClick }}
 			onClose={onClose}
 			opened={opened}
-			size="lg"
+			overlayProps={{ onClick: handleCloseClick }}
+			size="md"
 			title="Trip IDs related to this arrival"
 		>
 			<div className={styles.container}>
-				<p>Trip IDs related to this arrival</p>
 				{arrivalData.trip_id && <CopyBadge label={`Trip ID: ${arrivalData.trip_id}`} value={arrivalData.trip_id} />}
 			</div>
 		</Modal>

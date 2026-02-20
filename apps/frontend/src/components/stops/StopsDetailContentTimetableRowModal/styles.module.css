@@ -4,6 +4,4 @@
 	gap: var(--size-spacing-10);
 	align-items: flex-start;
     padding: var(--size-spacing-10);
-    border: 1px dashed var(--color-debug);
-    border-radius: 10px;
 }

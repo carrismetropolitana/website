@@ -7,3 +7,9 @@
     border: 1px dashed var(--color-debug);
     border-radius: 10px;
 }
+
+.seeMore{
+	display: flex;
+	gap: 8px;
+	align-items: center;
+}
