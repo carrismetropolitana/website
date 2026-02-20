@@ -9,13 +9,14 @@ import styles from './styles.module.css';
 /* * */
 
 interface Props {
+	arrivalData: Arrival
 	onClose: () => void
 	opened: boolean
 }
 
 /* * */
 
-export function StopsDetailContentTimetableRowModal({ onClose, opened }: Props) {
+export function StopsDetailContentTimetableRowModal({ arrivalData, onClose, opened }: Props) {
 	return (
 		<Modal
 			onClose={onClose}
@@ -25,7 +26,7 @@ export function StopsDetailContentTimetableRowModal({ onClose, opened }: Props) 
 		>
 			<div className={styles.container}>
 				<p>Trip IDs related to this arrival</p>
-				{/* <CopyBadge label={`Trip ID: ${arrivalData.trip_id || 'NULL'}`} value={arrivalData.trip_id || 'NULL'} /> */}
+				{arrivalData.trip_id && <CopyBadge label={`Trip ID: ${arrivalData.trip_id}`} value={arrivalData.trip_id} />}
 			</div>
 		</Modal>
 	);
