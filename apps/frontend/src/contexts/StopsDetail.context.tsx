@@ -317,6 +317,7 @@ export const StopsDetailContextProvider = ({ children, stopId }: { children: Rea
 						route_id: patternGroup.route_id,
 						scheduled_arrival: stopTime.arrival_time_24h,
 						scheduled_arrival_unix: arrivalUnixTimestamp,
+						service_id: trip.service_ids.length ? trip.service_ids[0] : '',
 						stop_sequence: stopTime.stop_sequence,
 						trip_id: trip.trip_ids.length ? trip.trip_ids[0] : '',
 						vehicle_id: null,

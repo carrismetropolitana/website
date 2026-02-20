@@ -37,6 +37,7 @@ export interface Arrival {
 	route_id: string
 	scheduled_arrival: string
 	scheduled_arrival_unix: number
+	service_id: null | string
 	stop_sequence: number
 	trip_id: string
 	vehicle_id: null | string

@@ -1,6 +1,7 @@
 /* * */
 
 import { CopyBadge } from '@/components/common/CopyBadge';
+import { useStopsDetailContext } from '@/contexts/StopsDetail.context';
 import { type Arrival } from '@/types/stops.types';
 import { Modal, Table } from '@mantine/core';
 import { useTranslations } from 'next-intl';
@@ -24,6 +25,7 @@ export function StopsDetailContentTimetableRowModal({ arrivalData, onClose, open
 	// A. Setup variables
 
 	const t = useTranslations('stops.StopsDetailContentTimetableRow.debug_modal');
+	const stopsDetailContext = useStopsDetailContext();
 
 	//
 	// B. Handle actions
@@ -32,8 +34,6 @@ export function StopsDetailContentTimetableRowModal({ arrivalData, onClose, open
 		e.stopPropagation();
 		onClose();
 	};
-
-	console.log(arrivalData);
 
 	//
 	// B. Render Components
@@ -48,18 +48,24 @@ export function StopsDetailContentTimetableRowModal({ arrivalData, onClose, open
 			title={t('title')}
 		>
 			<div className={styles.container}>
-				<Table striped>
+				<Table border={1} striped>
 					<Table.Thead>
 						<Table.Tr>
 							<Table.Th>Trip ID</Table.Th>
 							<Table.Th>Plan</Table.Th>
+							<Table.Th>Service ID</Table.Th>
+							<Table.Th>Headsign</Table.Th>
 						</Table.Tr>
 					</Table.Thead>
 					<Table.Tbody>
-						<Table.Tr>
-							<Table.Td>{arrivalData.trip_id}</Table.Td>
-							<Table.Td>{arrivalData.trip_id.split(']')[0] + ']'}</Table.Td>
-						</Table.Tr>
+						{stopsDetailContext.data.timetable_schedule?.map(item => (
+							<Table.Tr key={item.trip_id}>
+								<Table.Td><CopyBadge value={item.trip_id} /></Table.Td>
+								<Table.Td><CopyBadge value={item.trip_id.split(']')[0] + ']'} /></Table.Td>
+								<Table.Td><CopyBadge value={item.service_id || 'NULL'} /></Table.Td>
+								<Table.Td><CopyBadge value={item.headsign || 'NULL'} /></Table.Td>
+							</Table.Tr>
+						))}
 					</Table.Tbody>
 				</Table>
 			</div>
