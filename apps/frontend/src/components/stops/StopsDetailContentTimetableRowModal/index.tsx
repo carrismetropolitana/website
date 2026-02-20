@@ -2,7 +2,7 @@
 
 import { CopyBadge } from '@/components/common/CopyBadge';
 import { type Arrival } from '@/types/stops.types';
-import { Modal } from '@mantine/core';
+import { Modal, Table } from '@mantine/core';
 import { useTranslations } from 'next-intl';
 
 import styles from './styles.module.css';
@@ -33,6 +33,8 @@ export function StopsDetailContentTimetableRowModal({ arrivalData, onClose, open
 		onClose();
 	};
 
+	console.log(arrivalData);
+
 	//
 	// B. Render Components
 
@@ -42,11 +44,24 @@ export function StopsDetailContentTimetableRowModal({ arrivalData, onClose, open
 			onClose={onClose}
 			opened={opened}
 			overlayProps={{ onClick: handleCloseClick }}
-			size="md"
+			size="auto"
 			title={t('title')}
 		>
 			<div className={styles.container}>
-				{arrivalData.trip_id && <CopyBadge label={`Trip ID: ${arrivalData.trip_id}`} value={arrivalData.trip_id} />}
+				<Table striped>
+					<Table.Thead>
+						<Table.Tr>
+							<Table.Th>Trip ID</Table.Th>
+							<Table.Th>Plan</Table.Th>
+						</Table.Tr>
+					</Table.Thead>
+					<Table.Tbody>
+						<Table.Tr>
+							<Table.Td>{arrivalData.trip_id}</Table.Td>
+							<Table.Td>{arrivalData.trip_id.split(']')[0] + ']'}</Table.Td>
+						</Table.Tr>
+					</Table.Tbody>
+				</Table>
 			</div>
 		</Modal>
 	);
