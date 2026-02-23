@@ -49,7 +49,7 @@ export function StopsDetailContentTimetableRowDebug({ arrivalData }: Props) {
 			<CopyBadge label={`Estimado: ${arrivalData.estimated_arrival || 'NULL'} (${arrivalData.estimated_arrival_unix || 'NULL'})`} value={arrivalData.estimated_arrival_unix || 'NULL'} />
 			<CopyBadge label={`Observado: ${arrivalData.observed_arrival || 'NULL'} (${arrivalData.observed_arrival_unix || 'NULL'})`} value={arrivalData.observed_arrival_unix || 'NULL'} />
 
-			<StopsDetailContentTimetableRowModal arrivalData={arrivalData} onClose={() => close()} opened={isModalOpen} />
+			<StopsDetailContentTimetableRowModal onClose={() => close()} opened={isModalOpen} />
 		</div>
 	);
 

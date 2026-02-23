@@ -11,14 +11,13 @@ import styles from './styles.module.css';
 /* * */
 
 interface Props {
-	arrivalData: Arrival
 	onClose: () => void
 	opened: boolean
 }
 
 /* * */
 
-export function StopsDetailContentTimetableRowModal({ arrivalData, onClose, opened }: Props) {
+export function StopsDetailContentTimetableRowModal({ onClose, opened }: Props) {
 	//
 
 	//
@@ -38,6 +37,7 @@ export function StopsDetailContentTimetableRowModal({ arrivalData, onClose, open
 	//
 	// B. Render Components
 
+	console.log('dammm', stopsDetailContext.data.timetable_realtime_future);
 	return (
 		<Modal
 			closeButtonProps={{ onClick: handleCloseClick }}
@@ -48,7 +48,7 @@ export function StopsDetailContentTimetableRowModal({ arrivalData, onClose, open
 			title={t('title')}
 		>
 			<div className={styles.container}>
-				<Table border={1} striped>
+				<Table border={2} striped>
 					<Table.Thead>
 						<Table.Tr>
 							<Table.Th>Trip ID</Table.Th>
