@@ -3,9 +3,9 @@
 
 import type { CampaignLayoutBlock } from '@/types/campaign.types';
 
-import { ThreeColumnsTextBlock } from '@/components/campaigns/blocks/ThreeColumnsTextBlock';
-import { TwoColumnsTextBlock } from '@/components/campaigns/blocks/TwoColumnsTextBlock';
-import { TwoColumnsTextImageBlock } from '@/components/campaigns/blocks/TwoColumnsTextImageBlock';
+import { ThreeColumnsTextBlock } from '@/components/payload/ThreeColumnsTextBlock';
+import { TwoColumnsTextBlock } from '@/components/payload/TwoColumnsTextBlock';
+import { TwoColumnsTextImageBlock } from '@/components/payload/TwoColumnsTextImageBlock';
 
 /* * */
 

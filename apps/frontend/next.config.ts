@@ -117,6 +117,7 @@ const nextConfig: NextConfig = {
 			/* MORE */
 
 			{ destination: '/news', permanent: true, source: '/noticias' },
+			{ destination: '/campaigns', permanent: true, source: '/campanhas' },
 
 			{ destination: '/metrics', permanent: true, source: '/metricas' },
 

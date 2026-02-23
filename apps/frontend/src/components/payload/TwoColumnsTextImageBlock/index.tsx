@@ -14,6 +14,8 @@ interface TwoColumnsTextImageBlockProps {
 	text?: unknown
 }
 
+/* * */
+
 function resolveImage(image: TwoColumnsTextImageBlockProps['image']): { alt?: string, url?: string } {
 	if (!image || typeof image === 'number') return {};
 	const obj = image as Record<string, unknown>;
