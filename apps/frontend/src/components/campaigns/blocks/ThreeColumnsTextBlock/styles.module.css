@@ -1,0 +1,18 @@
+/* * */
+
+.container {
+	display: grid;
+	gap: var(--size-spacing-20);
+	grid-template-columns: 1fr 1fr 1fr;
+	width: 100%;
+}
+
+.column {
+	min-width: 0;
+}
+
+@media (width <= 768px) {
+	.container {
+		grid-template-columns: 1fr;
+	}
+}

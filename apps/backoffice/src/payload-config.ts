@@ -13,6 +13,7 @@ import sharp from 'sharp';
 import { BackgroundColorFeature } from '@/lexical/backgroundColor/feature.server';
 import { HeadingAnchorFeature } from '@/lexical/headingAnchor/feature.server';
 import { MentionFeature } from '@/lexical/mention/feature.server';
+import { Campaigns } from '@/schemas/Campaigns/collection';
 import { CaseStudies } from '@/schemas/CaseStudies/collection';
 import { KnowledgeBase } from '@/schemas/KnowledgeBase/collection';
 import { Media } from '@/schemas/Media/collection';
@@ -59,7 +60,7 @@ export default buildConfig({
 		user: 'users',
 	},
 
-	collections: [CaseStudies, Media, News, Topics, Users, KnowledgeBase, Notes],
+	collections: [Campaigns, CaseStudies, Media, News, Topics, Users, KnowledgeBase, Notes],
 
 	csrf: [
 		getPublicVariable('server_url_backoffice').replace(/\/$/, ''),
