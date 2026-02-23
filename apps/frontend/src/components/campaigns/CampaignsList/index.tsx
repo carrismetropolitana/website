@@ -9,7 +9,6 @@ import { Grid } from '@/components/layout/Grid';
 import { NoDataLabel } from '@/components/layout/NoDataLabel';
 import { Section } from '@/components/layout/Section';
 import { Surface } from '@/components/layout/Surface';
-import { NewsListToolbar } from '@/components/news/NewsListToolbar';
 import { useCampaignsListContext } from '@/contexts/CampaignsList.context';
 
 /* * */
@@ -30,10 +29,6 @@ export function CampaignsList() {
 
 			<Section withBottomDivider withPadding>
 				<BackButton href="/" />
-			</Section>
-
-			<Section heading={t('heading')} withBottomDivider withGap withPadding>
-				<NewsListToolbar />
 			</Section>
 
 			{campaignsListContext.flags.is_loading && (

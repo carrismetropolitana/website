@@ -2,11 +2,19 @@
 'use client';
 /* * */
 
-import { NewsData } from '@/types/news.types';
-import { processBodyImages } from '@/utils/livePreviewImages';
+import type { CampaignData } from '@/types/campaign.types';
+import type { NewsData } from '@/types/news.types';
+
+import { processBodyImages, processLayoutImages } from '@/utils/livePreviewImages';
 import { mergeData } from '@/utils/livePreviewMerge';
-import { transformPayloadData } from '@/utils/livePreviewTransform';
+import { transformCampaignPayloadData, transformPayloadData } from '@/utils/livePreviewTransform';
 import { useCallback, useEffect, useRef, useState } from 'react';
+
+/* * */
+
+function isCampaignData(data: any): boolean {
+	return Boolean(data && Array.isArray(data.layout));
+}
 
 /* * */
 
@@ -17,11 +25,17 @@ export function useLivePreviewData(initialData: any) {
 	// A. Setup variables
 
 	const [data, setData] = useState<any>(initialData);
-	const newsData: NewsData | null = data ? transformPayloadData(data) : null;
+	const isCampaign = isCampaignData(data);
+	const newsData: NewsData | null = isCampaign ? null : (data ? transformPayloadData(data) : null);
+	const campaignData: CampaignData | null = isCampaign ? (data ? transformCampaignPayloadData(data) : null) : null;
 	const hasSentReady = useRef(false);
 
 	const applyProcessedBody = useCallback((processedBody: any) => {
 		setData((prev: any) => (prev ? { ...prev, body: processedBody } : prev));
+	}, []);
+
+	const applyProcessedLayout = useCallback((processedLayout: any[]) => {
+		setData((prev: any) => (prev ? { ...prev, layout: processedLayout } : prev));
 	}, []);
 
 	useEffect(() => {
@@ -32,6 +46,12 @@ export function useLivePreviewData(initialData: any) {
 
 		processBodyImages(body).then(applyProcessedBody);
 	}, [initialData, applyProcessedBody]);
+
+	useEffect(() => {
+		if (!initialData?.layout || !Array.isArray(initialData.layout)) return;
+
+		processLayoutImages(initialData.layout).then(applyProcessedLayout);
+	}, [initialData, applyProcessedLayout]);
 
 	useEffect(() => {
 		const handleMessage = (event: MessageEvent) => {
@@ -50,6 +70,13 @@ export function useLivePreviewData(initialData: any) {
 					});
 				}
 
+				if (merged?.layout && Array.isArray(merged.layout)) {
+					const prevLayout = prev?.layout;
+					processLayoutImages(merged.layout, prevLayout).then((processed) => {
+						setData((current: any) => ({ ...current, layout: processed }));
+					});
+				}
+
 				return merged;
 			});
 		};
@@ -64,5 +91,5 @@ export function useLivePreviewData(initialData: any) {
 		return () => window.removeEventListener('message', handleMessage);
 	}, []);
 
-	return { newsData };
+	return { campaignData, newsData };
 }

@@ -105,6 +105,17 @@ export function mergeData(initialData: any, formData: any): any {
 			}
 		}
 
+		if (key === 'layout' && Array.isArray(oldValue) && Array.isArray(newValue)) {
+			merged[key] = newValue.map((item, index) => {
+				const oldItem = oldValue[index];
+				if (item && typeof item === 'object' && oldItem && typeof oldItem === 'object') {
+					return deepMerge(oldItem, item, `layout[${index}]`);
+				}
+				return item;
+			});
+			continue;
+		}
+
 		merged[key] = deepMerge(oldValue, newValue, key);
 	}
 

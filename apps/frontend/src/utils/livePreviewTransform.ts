@@ -1,7 +1,21 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 /* * */
 
-import { NewsData } from '@/types/news.types';
+import type { CampaignData } from '@/types/campaign.types';
+import type { NewsData } from '@/types/news.types';
+
+/* * */
+
+export function transformCampaignPayloadData(payloadData: any): CampaignData {
+	return {
+		id: payloadData.id || '',
+		layout: payloadData.layout ?? [],
+		slug: payloadData.slug || '',
+		status: payloadData.status || '',
+		title: payloadData.title || '',
+		updatedAt: payloadData.updatedAt || payloadData.updated_at || '',
+	};
+}
 
 /* * */
 

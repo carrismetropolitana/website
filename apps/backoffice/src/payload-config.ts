@@ -47,10 +47,13 @@ export default buildConfig({
 			},
 		},
 		livePreview: {
-			collections: ['news'],
-			url: ({ data }) => {
+			collections: ['news', 'campaigns'],
+			url: ({ collectionConfig, data }) => {
 				if (!data?.id) return undefined;
-				return `${getPublicVariable('server_url_frontend')}/news/preview?id=${data.id}`;
+				const base = getPublicVariable('server_url_frontend');
+				return collectionConfig?.slug === 'campaigns'
+					? `${base}/campaigns/preview?id=${data.id}`
+					: `${base}/news/preview?id=${data.id}`;
 			},
 		},
 		meta: {

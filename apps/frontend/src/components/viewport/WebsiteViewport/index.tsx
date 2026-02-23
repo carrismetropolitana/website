@@ -26,9 +26,9 @@ export function WebsiteViewport({ children }) {
 	// Check if we're on the arrabida365 page
 	const isArrabidaPage = pathname === '/arrabida365';
 
-	// Hide navbar on news preview (live preview iframe from backoffice)
-	const isNewsPreviewPage = pathname === '/news/preview';
-	const showNavbar = searchParams.get('origin') !== 'app' && !isNewsPreviewPage;
+	// Hide navbar on preview pages (live preview iframe from backoffice)
+	const isPreviewPage = pathname === '/news/preview' || pathname === '/campaigns/preview';
+	const showNavbar = searchParams.get('origin') !== 'app' && !isPreviewPage;
 
 	//
 	// B. Render components

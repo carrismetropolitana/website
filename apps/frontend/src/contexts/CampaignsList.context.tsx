@@ -3,8 +3,6 @@
 import { CampaignData } from '@/types/campaign.types';
 /* * */
 
-// import { useAnalyticsContext } from '@/contexts/Analytics.context';
-import { NewsData } from '@/types/news.types';
 import { getPublicVariable } from '@carrismetropolitana/website-shared-settings';
 import { DateTime } from 'luxon';
 import { createContext, useContext, useEffect, useState } from 'react';

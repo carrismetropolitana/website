@@ -84,6 +84,43 @@ export async function processUploadNode(node: any): Promise<any> {
 
 /* * */
 
+/* * */
+
+function hasBlockImageUrl(image: any): boolean {
+	if (!image || typeof image === 'number') return false;
+	const obj = image as Record<string, unknown>;
+	return Boolean(obj.url || obj?.value?.url || obj?.file?.url);
+}
+
+/* * */
+
+export async function processLayoutImages(layout: any[], prevLayout?: any[]): Promise<any[]> {
+	if (!Array.isArray(layout)) return layout;
+
+	return Promise.all(
+		layout.map(async (block, index) => {
+			if (block?.blockType !== 'two-columns-text-image' || !block.image) return block;
+
+			const image = block.image;
+			if (hasBlockImageUrl(image)) return block;
+
+			const id = getImageId(image);
+			if (!id) return block;
+
+			const prevBlock = prevLayout?.[index];
+			const prevImage = prevBlock?.blockType === 'two-columns-text-image' ? prevBlock.image : undefined;
+			if (prevImage && getImageId(prevImage) === id && hasBlockImageUrl(prevImage)) {
+				return { ...block, image: prevImage };
+			}
+
+			const media = await fetchMedia(id);
+			return media ? { ...block, image: media } : block;
+		}),
+	);
+}
+
+/* * */
+
 export async function processBodyImages(body: any, prevBody?: any): Promise<any> {
 	if (!body?.root?.children) return body;
 

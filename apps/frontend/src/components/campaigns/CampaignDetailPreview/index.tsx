@@ -6,7 +6,7 @@ import { Surface } from '@/components/layout/Surface';
 import { useLivePreviewData } from '@/hooks/useLivePreviewData';
 import { CampaignData } from '@/types/campaign.types';
 
-import styles from '../NewsDetail/styles.module.css';
+import styles from '../CampaignDetail/styles.module.css';
 
 import { CampaignDetailContent } from '../CampaignDetailContent';
 import { CampaignDetailHeader } from '../CampaignDetailHeader';
