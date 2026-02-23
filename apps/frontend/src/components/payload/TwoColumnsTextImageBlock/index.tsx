@@ -2,7 +2,8 @@
 /* * */
 
 import { ImageComponent } from '@/components/payload/image';
-import { useRenderLexicalNode } from '@/utils/renderLexicalNode';
+import { resolveImageProps } from '@/utils/media';
+import { getLexicalRoot, useRenderLexicalNode } from '@/utils/renderLexicalNode';
 
 import styles from './styles.module.css';
 
@@ -16,23 +17,11 @@ interface TwoColumnsTextImageBlockProps {
 
 /* * */
 
-function resolveImage(image: TwoColumnsTextImageBlockProps['image']): { alt?: string, url?: string } {
-	if (!image || typeof image === 'number') return {};
-	const obj = image as Record<string, unknown>;
-	const value = obj.value as Record<string, unknown> | undefined;
-	const source = value ?? obj;
-	return {
-		alt: (source.filename as string) ?? (source.alt as string),
-		url: source.url as string,
-	};
-}
-
 export function TwoColumnsTextImageBlock({ image, imagePosition = 'right', text }: TwoColumnsTextImageBlockProps) {
 	const renderLexicalNode = useRenderLexicalNode();
-	const textJson = typeof text === 'string' ? JSON.parse(text) : text;
-	const rootNode = textJson?.root ?? textJson;
+	const { alt: imageAlt, url: imageUrl } = resolveImageProps(image);
+	const rootNode = getLexicalRoot(text);
 	const textContent = rootNode ? renderLexicalNode(rootNode) : null;
-	const { alt: imageAlt, url: imageUrl } = resolveImage(image);
 
 	const textColumn = <div className={styles.column}>{textContent}</div>;
 	const imageColumn = (

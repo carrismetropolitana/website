@@ -47,7 +47,7 @@ export function CampaignsList() {
 						{campaignsListContext.data.filtered.map(campaignItem => (
 							<CampaignsCard
 								key={campaignItem.id}
-								id={campaignItem.id}
+								id={campaignItem.slug}
 								title={campaignItem.title}
 							/>
 						))}

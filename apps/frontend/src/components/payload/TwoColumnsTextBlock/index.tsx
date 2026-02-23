@@ -1,7 +1,7 @@
 'use client';
 /* * */
 
-import { useRenderLexicalNode } from '@/utils/renderLexicalNode';
+import { getLexicalRoot, useRenderLexicalNode } from '@/utils/renderLexicalNode';
 
 import styles from './styles.module.css';
 
@@ -14,10 +14,8 @@ interface TwoColumnsTextBlockProps {
 
 export function TwoColumnsTextBlock({ leftColumn, rightColumn }: TwoColumnsTextBlockProps) {
 	const renderLexicalNode = useRenderLexicalNode();
-	const leftRoot = typeof leftColumn === 'string' ? JSON.parse(leftColumn) : leftColumn;
-	const rightRoot = typeof rightColumn === 'string' ? JSON.parse(rightColumn) : rightColumn;
-	const leftNode = leftRoot?.root ?? leftRoot;
-	const rightNode = rightRoot?.root ?? rightRoot;
+	const leftNode = getLexicalRoot(leftColumn);
+	const rightNode = getLexicalRoot(rightColumn);
 
 	return (
 		<div className={styles.container}>

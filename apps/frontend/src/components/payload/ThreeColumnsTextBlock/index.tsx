@@ -1,7 +1,7 @@
 'use client';
 /* * */
 
-import { useRenderLexicalNode } from '@/utils/renderLexicalNode';
+import { getLexicalRoot, useRenderLexicalNode } from '@/utils/renderLexicalNode';
 
 import styles from './styles.module.css';
 
@@ -15,16 +15,9 @@ interface ThreeColumnsTextBlockProps {
 
 export function ThreeColumnsTextBlock({ centerColumn, leftColumn, rightColumn }: ThreeColumnsTextBlockProps) {
 	const renderLexicalNode = useRenderLexicalNode();
-
-	const parseAndGetRoot = (content: unknown) => {
-		if (!content) return null;
-		const json = typeof content === 'string' ? JSON.parse(content) : content;
-		return json?.root ?? json;
-	};
-
-	const leftNode = parseAndGetRoot(leftColumn);
-	const centerNode = parseAndGetRoot(centerColumn);
-	const rightNode = parseAndGetRoot(rightColumn);
+	const leftNode = getLexicalRoot(leftColumn);
+	const centerNode = getLexicalRoot(centerColumn);
+	const rightNode = getLexicalRoot(rightColumn);
 
 	return (
 		<div className={styles.container}>

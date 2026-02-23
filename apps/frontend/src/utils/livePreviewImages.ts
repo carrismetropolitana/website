@@ -1,29 +1,9 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 /* * */
 
-export async function fetchMedia(id: number | string): Promise<any> {
-	try {
-		const response = await fetch(`/api/media/${String(id)}`);
-		if (response.ok) return await response.json();
-	}
-	catch (error) {
-		console.error(`[LivePreview] Failed to fetch media ${id}:`, error);
-	}
-	return null;
-}
+import { fetchMedia, getImageId, hasMediaUrl } from '@/utils/media';
 
 /* * */
-
-function getImageId(item: any): null | string {
-	if (!item) return null;
-	if (typeof item === 'string') return item;
-	if (typeof item === 'number') return String(item);
-	return item?.id || item?.value?.id || item?.file?.id || null;
-}
-
-function hasImageUrl(item: any): boolean {
-	return Boolean(item && typeof item === 'object' && (item.url || item.value?.url || item.file?.url));
-}
 
 function toGalleryImageFormat(media: any) {
 	return {
@@ -43,7 +23,7 @@ function toGalleryImageFormat(media: any) {
 export async function processGalleryImages(images: any[], prevImages: any[]): Promise<any[]> {
 	return Promise.all(
 		images.map(async (item) => {
-			if (hasImageUrl(item)) return item;
+			if (hasMediaUrl(item)) return item;
 
 			const id = getImageId(item);
 			if (!id) return item;
@@ -84,16 +64,6 @@ export async function processUploadNode(node: any): Promise<any> {
 
 /* * */
 
-/* * */
-
-function hasBlockImageUrl(image: any): boolean {
-	if (!image || typeof image === 'number') return false;
-	const obj = image as Record<string, unknown>;
-	return Boolean(obj.url || obj?.value?.url || obj?.file?.url);
-}
-
-/* * */
-
 export async function processLayoutImages(layout: any[], prevLayout?: any[]): Promise<any[]> {
 	if (!Array.isArray(layout)) return layout;
 
@@ -102,14 +72,14 @@ export async function processLayoutImages(layout: any[], prevLayout?: any[]): Pr
 			if (block?.blockType !== 'two-columns-text-image' || !block.image) return block;
 
 			const image = block.image;
-			if (hasBlockImageUrl(image)) return block;
+			if (hasMediaUrl(image)) return block;
 
 			const id = getImageId(image);
 			if (!id) return block;
 
 			const prevBlock = prevLayout?.[index];
 			const prevImage = prevBlock?.blockType === 'two-columns-text-image' ? prevBlock.image : undefined;
-			if (prevImage && getImageId(prevImage) === id && hasBlockImageUrl(prevImage)) {
+			if (prevImage && getImageId(prevImage) === id && hasMediaUrl(prevImage)) {
 				return { ...block, image: prevImage };
 			}
 

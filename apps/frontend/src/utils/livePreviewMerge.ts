@@ -1,23 +1,14 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 /* * */
 
-/**
- * Preserve populated object when new value is just an ID reference
- */
+import { getImageId } from '@/utils/media';
+
+/* * */
+
 function preservePopulatedObject(oldValue: any, newValue: any): boolean {
 	const isId = typeof newValue === 'string' || typeof newValue === 'number';
 	const hasPopulatedObject = oldValue && typeof oldValue === 'object' && !Array.isArray(oldValue);
 	return Boolean(isId && hasPopulatedObject);
-}
-
-/**
- * Extract ID from various image reference structures
- */
-function getImageId(obj: any): null | string {
-	if (!obj) return null;
-	if (typeof obj === 'string') return obj;
-	if (typeof obj === 'number') return String(obj);
-	return obj?.id || obj?.value?.id || obj?.file?.id || obj?.value?.value?.id || null;
 }
 
 /**

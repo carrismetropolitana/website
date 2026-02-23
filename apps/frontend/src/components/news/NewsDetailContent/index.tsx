@@ -4,7 +4,7 @@
 
 import { useDebugContext } from '@/contexts/Debug.context';
 import { NewsData } from '@/types/news.types';
-import { useRenderLexicalNode } from '@/utils/renderLexicalNode';
+import { getLexicalRoot, useRenderLexicalNode } from '@/utils/renderLexicalNode';
 
 import styles from './styles.module.css';
 
@@ -18,15 +18,9 @@ interface NewsDetailContentProps {
 
 export function NewsDetailContent({ data }: NewsDetailContentProps) {
 	//
-
-	//
-	// A. Setup variables
-
 	const renderLexicalNode = useRenderLexicalNode();
 	const debugContext = useDebugContext();
-
-	const bodyJSON = typeof data.body === 'string' ? JSON.parse(data.body) : data.body;
-	const rootNode = bodyJSON?.root || bodyJSON;
+	const rootNode = getLexicalRoot(data.body);
 
 	//
 	// B. Render components

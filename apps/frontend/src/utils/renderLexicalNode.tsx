@@ -79,6 +79,24 @@ function renderNode(node: LexicalNode, key?: number): ReactNode {
 
 /* * */
 
+/**
+ * Extract Lexical root node from various content formats (string, object with root, raw root).
+ */
+export function getLexicalRoot(content: unknown): LexicalNode | null {
+	if (!content) return null;
+	let json: unknown;
+	try {
+		json = typeof content === 'string' ? JSON.parse(content) : content;
+	}
+	catch {
+		return null;
+	}
+	if (!json || typeof json !== 'object') return null;
+	return (json as { root?: LexicalNode }).root ?? (json as LexicalNode);
+}
+
+/* * */
+
 export function useRenderLexicalNode() {
 	return renderNode;
 }
