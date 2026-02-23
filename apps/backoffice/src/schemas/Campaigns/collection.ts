@@ -15,10 +15,7 @@ export const Campaigns: CollectionConfig = {
 	access: {
 		create: ({ req: { user } }) => Boolean(user),
 		delete: ({ req: { user } }) => Boolean(user),
-		read: ({ req: { user } }) => {
-			if (user) return true;
-			return { status: { equals: 'published' } };
-		},
+		read: () => true,
 		update: ({ req: { user } }) => Boolean(user),
 	},
 
