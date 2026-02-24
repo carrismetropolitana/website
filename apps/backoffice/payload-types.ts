@@ -147,120 +147,28 @@ export interface Campaign {
    * URL única para esta campanha. Será gerada automaticamente do título se deixado em branco.
    */
   slug: string;
-  layout?:
-    | (
-        | {
-            leftColumn: {
-              root: {
-                type: string;
-                children: {
-                  type: any;
-                  version: number;
-                  [k: string]: unknown;
-                }[];
-                direction: ('ltr' | 'rtl') | null;
-                format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
-                indent: number;
-                version: number;
-              };
-              [k: string]: unknown;
-            };
-            rightColumn: {
-              root: {
-                type: string;
-                children: {
-                  type: any;
-                  version: number;
-                  [k: string]: unknown;
-                }[];
-                direction: ('ltr' | 'rtl') | null;
-                format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
-                indent: number;
-                version: number;
-              };
-              [k: string]: unknown;
-            };
-            id?: string | null;
-            blockName?: string | null;
-            blockType: 'two-columns-text';
-          }
-        | {
-            text: {
-              root: {
-                type: string;
-                children: {
-                  type: any;
-                  version: number;
-                  [k: string]: unknown;
-                }[];
-                direction: ('ltr' | 'rtl') | null;
-                format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
-                indent: number;
-                version: number;
-              };
-              [k: string]: unknown;
-            };
-            image: string | Media;
-            imagePosition?: ('left' | 'right') | null;
-            id?: string | null;
-            blockName?: string | null;
-            blockType: 'two-columns-text-image';
-          }
-        | {
-            leftColumn: {
-              root: {
-                type: string;
-                children: {
-                  type: any;
-                  version: number;
-                  [k: string]: unknown;
-                }[];
-                direction: ('ltr' | 'rtl') | null;
-                format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
-                indent: number;
-                version: number;
-              };
-              [k: string]: unknown;
-            };
-            centerColumn: {
-              root: {
-                type: string;
-                children: {
-                  type: any;
-                  version: number;
-                  [k: string]: unknown;
-                }[];
-                direction: ('ltr' | 'rtl') | null;
-                format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
-                indent: number;
-                version: number;
-              };
-              [k: string]: unknown;
-            };
-            rightColumn: {
-              root: {
-                type: string;
-                children: {
-                  type: any;
-                  version: number;
-                  [k: string]: unknown;
-                }[];
-                direction: ('ltr' | 'rtl') | null;
-                format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
-                indent: number;
-                version: number;
-              };
-              [k: string]: unknown;
-            };
-            id?: string | null;
-            blockName?: string | null;
-            blockType: 'three-columns-text';
-          }
-      )[]
-    | null;
-  status: 'draft' | 'published';
+  body: {
+    root: {
+      type: string;
+      children: {
+        type: any;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  };
+  is_unlisted?: boolean | null;
+  featured_image?: (string | null) | Media;
+  publishedAt: string;
   updatedAt: string;
+  status: 'draft' | 'published';
   createdAt: string;
+  _status?: ('draft' | 'published') | null;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -538,39 +446,14 @@ export interface PayloadMigration {
 export interface CampaignsSelect<T extends boolean = true> {
   title?: T;
   slug?: T;
-  layout?:
-    | T
-    | {
-        'two-columns-text'?:
-          | T
-          | {
-              leftColumn?: T;
-              rightColumn?: T;
-              id?: T;
-              blockName?: T;
-            };
-        'two-columns-text-image'?:
-          | T
-          | {
-              text?: T;
-              image?: T;
-              imagePosition?: T;
-              id?: T;
-              blockName?: T;
-            };
-        'three-columns-text'?:
-          | T
-          | {
-              leftColumn?: T;
-              centerColumn?: T;
-              rightColumn?: T;
-              id?: T;
-              blockName?: T;
-            };
-      };
-  status?: T;
+  body?: T;
+  is_unlisted?: T;
+  featured_image?: T;
+  publishedAt?: T;
   updatedAt?: T;
+  status?: T;
   createdAt?: T;
+  _status?: T;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema

@@ -1,13 +1,11 @@
 /* * */
 
+import { featuredImageField } from '@/fields/featured-image';
+import { isUnlistedField } from '@/fields/is-unlisted';
+import { publishedAtField } from '@/fields/published-at';
+import { updatedAtField } from '@/fields/updated-at';
 import { slugify } from '@/utils/slugify';
 import { type CollectionConfig } from 'payload';
-
-/* * */
-
-import { ThreeColumnsTextBlock } from '@/components/three-columns-text';
-import { TwoColumnsTextBlock } from '@/components/two-columns-text';
-import { TwoColumnsTextImageBlock } from '@/components/two-columns-text-image';
 
 /* * */
 
@@ -42,16 +40,18 @@ export const Campaigns: CollectionConfig = {
 			type: 'text',
 			unique: true,
 		},
+
 		{
-			blocks: [
-				TwoColumnsTextBlock,
-				TwoColumnsTextImageBlock,
-				ThreeColumnsTextBlock,
-			],
-			label: 'Layout',
-			name: 'layout',
-			type: 'blocks',
+			label: 'Corpo da Campanha',
+			name: 'body',
+			required: true,
+			type: 'richText',
 		},
+		isUnlistedField,
+		featuredImageField,
+		publishedAtField,
+		updatedAtField,
+
 		{
 			admin: {
 				position: 'sidebar',
@@ -85,5 +85,11 @@ export const Campaigns: CollectionConfig = {
 
 	slug: 'campaigns',
 
-	timestamps: true,
+	versions: {
+		drafts: {
+			autosave: {
+				interval: 500,
+			},
+		},
+	},
 };
