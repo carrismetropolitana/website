@@ -15,10 +15,6 @@
 	min-width: 0;
 }
 
-.column:last-child {
-	border-right: none;
-}
-
 /* * */
 
 @media (width <= 768px) {

@@ -12,11 +12,6 @@
 
 .column {
 	min-width: 0;
-	border-right: 1px solid var(--color-system-border-100);
-}
-
-.column:last-child {
-	border-right: none;
 }
 
 /* * */
