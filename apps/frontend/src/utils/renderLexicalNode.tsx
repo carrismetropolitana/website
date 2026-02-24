@@ -32,6 +32,10 @@ function renderBlock(node: LexicalNode, key?: number): ReactNode {
 		}
 		case 'gallery': return <Gallery key={key} fields={node.fields} />;
 		case 'link': return <Links key={key} fields={node.fields} />;
+		case 'spacer': {
+			const height = node.fields?.height ?? 32;
+			return <div key={key} style={{ height: `${height}px` }} />;
+		}
 		case 'video': return <Video key={key} fields={node.fields} />;
 		default: return null;
 	}

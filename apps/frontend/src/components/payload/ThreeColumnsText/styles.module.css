@@ -5,14 +5,18 @@
 	grid-template-columns: 1fr 1fr 1fr;
 	gap: var(--size-spacing-20);
 	width: 100%;
-	border: 1px solid red;
+	padding: 20px 0;
+	text-align: center;
 }
 
 /* * */
 
 .column {
 	min-width: 0;
-	border: 1px solid red;
+}
+
+.column:last-child {
+	border-right: none;
 }
 
 /* * */

@@ -13,6 +13,7 @@ import sharp from 'sharp';
 import { BackgroundColorFeature } from '@/lexical/backgroundColor/feature.server';
 import { HeadingAnchorFeature } from '@/lexical/headingAnchor/feature.server';
 import { MentionFeature } from '@/lexical/mention/feature.server';
+import { SpacerFeature } from '@/lexical/spacer/feature.server';
 import { Campaigns } from '@/schemas/Campaigns/collection';
 import { CaseStudies } from '@/schemas/CaseStudies/collection';
 import { KnowledgeBase } from '@/schemas/KnowledgeBase/collection';
@@ -33,6 +34,7 @@ import { HomeSlider } from '@/schemas/HomeSlider/global';
 import { accordionFields } from './fields/accordion';
 import { galleryFields } from './fields/gallery';
 import { linkFields } from './fields/link';
+import { spacerFields } from './fields/spacer';
 import { videoFields } from './fields/video';
 
 /* * */
@@ -80,6 +82,10 @@ export default buildConfig({
 			BlocksFeature({
 				blocks: [
 					{
+						fields: spacerFields,
+						slug: 'spacer',
+					},
+					{
 						fields: accordionFields,
 						slug: 'accordion',
 					},
@@ -100,6 +106,7 @@ export default buildConfig({
 			BackgroundColorFeature(),
 			EXPERIMENTAL_TableFeature(),
 			MentionFeature(),
+			SpacerFeature(),
 		],
 	}),
 

@@ -27,6 +27,7 @@ export interface LexicalNode {
 				slug?: string
 			}
 		}
+		height?: number
 		images?: {
 			relationTo?: string
 			value?: {

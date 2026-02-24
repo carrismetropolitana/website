@@ -1,8 +1,9 @@
 /* * */
 
 export interface CampaignLayoutBlock {
-	blockType: 'three-columns-text' | 'two-columns-text' | 'two-columns-text-image'
+	blockType: 'spacer' | 'three-columns-text' | 'two-columns-text' | 'two-columns-text-image'
 	centerColumn?: unknown
+	height?: number
 	id?: string
 	image?: number | { filename?: string, id?: string, url?: string }
 	imagePosition?: 'left' | 'right'

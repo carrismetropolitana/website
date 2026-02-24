@@ -26,6 +26,13 @@ export function CampaignLayoutRenderer({ blocks }: CampaignLayoutRendererProps) 
 			{blocks.map((block, index) => {
 				const key = block.id ?? index;
 				switch (block.blockType) {
+					case 'spacer':
+						return (
+							<div
+								key={key}
+								style={{ height: `${block.height ?? 32}px` }}
+							/>
+						);
 					case 'three-columns-text':
 						return (
 							<ThreeColumnsText

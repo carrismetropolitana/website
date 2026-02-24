@@ -2,14 +2,11 @@
 
 import type { Block } from 'payload';
 
-import { campaignLexicalEditor } from '@/fields/campaign-lexical-editor';
-
 /* * */
 
 export const TwoColumnsTextImageBlock: Block = {
 	fields: [
 		{
-			editor: campaignLexicalEditor,
 			label: 'Texto',
 			name: 'text',
 			required: true,

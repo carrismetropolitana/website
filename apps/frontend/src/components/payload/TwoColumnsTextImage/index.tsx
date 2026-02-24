@@ -39,7 +39,7 @@ export function TwoColumnsTextImage({ image, imagePosition = 'right', text }: Tw
 					<div className={styles.column}>
 						{imageUrl ? <ImageComponent alt={imageAlt} src={imageUrl} /> : null}
 					</div>
-					<div className={styles.column}>{textContent}</div>;
+					<div className={styles.column}>{textContent}</div>
 				</>
 			)}
 
