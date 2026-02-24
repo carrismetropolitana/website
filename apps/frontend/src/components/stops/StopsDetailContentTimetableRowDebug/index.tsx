@@ -38,7 +38,7 @@ export function StopsDetailContentTimetableRowDebug({ arrivalData }: Props) {
 	return (
 		<div className={styles.container}>
 
-			{arrivalData.trip_id.length > 0 && (
+			{arrivalData.related_trip_ids?.length > 1 && arrivalData.related_trip_ids?.length !== undefined && (
 				<div className={styles.seeMore}>
 					<CopyBadge label={`Trip ID: ${arrivalData.trip_id || 'NULL'}`} value={arrivalData.trip_id || 'NULL'} />
 					<IconEyePlus className={styles.seeMoreIcon} color="var(--color-system-text-300)" onClick={e => handleOpenModal(e)} size={16} />

@@ -1,8 +1,8 @@
 /* * */
 
+import type { Arrival } from '@/types/stops.types';
+
 import { CopyBadge } from '@/components/common/CopyBadge';
-import { useStopsDetailContext } from '@/contexts/StopsDetail.context';
-import { Arrival } from '@/types/stops.types';
 import { Modal, Table } from '@mantine/core';
 import { useTranslations } from 'next-intl';
 
@@ -20,17 +20,21 @@ interface Props {
 
 export function StopsDetailContentTimetableRowModal({ arrivalData, onClose, opened }: Props) {
 	//
-
-	console.log('arrivalData', arrivalData);
-
-	//
 	// A. Setup variables
 
 	const t = useTranslations('stops.StopsDetailContentTimetableRow.debug_modal');
-	const stopsDetailContext = useStopsDetailContext();
 
 	//
-	// B. Handle actions
+	// B. Transform data
+
+	const parseTripId = (tripId: string) => {
+		const plan = tripId.includes('[') && tripId.includes(']') ? tripId.substring(tripId.indexOf('[') + 1, tripId.indexOf(']')) : 'NULL';
+		const serviceId = tripId.split('|')[1] || 'NULL';
+		return { plan, serviceId };
+	};
+
+	//
+	// C. Handle actions
 
 	const handleCloseClick = (e: React.MouseEvent) => {
 		e.stopPropagation();
@@ -38,7 +42,7 @@ export function StopsDetailContentTimetableRowModal({ arrivalData, onClose, open
 	};
 
 	//
-	// B. Render Components
+	// D. Render Components
 
 	return (
 		<Modal
@@ -60,18 +64,17 @@ export function StopsDetailContentTimetableRowModal({ arrivalData, onClose, open
 						</Table.Tr>
 					</Table.Thead>
 					<Table.Tbody>
-						{stopsDetailContext.data.timetable_realtime?.map(item => (
-							<Table.Tr key={item.trip_id}>
-								<Table.Td><CopyBadge value={item.trip_id} /></Table.Td>
-								<Table.Td>
-									<CopyBadge value={item.trip_id.includes('[') && item.trip_id.includes(']') ? item.trip_id.substring(item.trip_id.indexOf('[') + 1, item.trip_id.indexOf(']')) : 'NULL'} />
-								</Table.Td>
-								<Table.Td>
-									<CopyBadge value={item.trip_id.split('|')[1] || 'NULL'} />
-								</Table.Td>
-								<Table.Td><CopyBadge value={item.headsign || 'NULL'} /></Table.Td>
-							</Table.Tr>
-						))}
+						{arrivalData.related_trip_ids.map((tripId) => {
+							const { plan, serviceId } = parseTripId(tripId);
+							return (
+								<Table.Tr key={tripId}>
+									<Table.Td><CopyBadge value={tripId} /></Table.Td>
+									<Table.Td><CopyBadge value={plan} /></Table.Td>
+									<Table.Td><CopyBadge value={serviceId} /></Table.Td>
+									<Table.Td><CopyBadge value={arrivalData.headsign || 'NULL'} /></Table.Td>
+								</Table.Tr>
+							);
+						})}
 					</Table.Tbody>
 				</Table>
 			</div>

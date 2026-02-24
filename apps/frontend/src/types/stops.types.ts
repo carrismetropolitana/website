@@ -34,6 +34,7 @@ export interface Arrival {
 	observed_arrival: null | string
 	observed_arrival_unix: null | number
 	pattern_id: string
+	related_trip_ids?: string[]
 	route_id: string
 	scheduled_arrival: string
 	scheduled_arrival_unix: number
