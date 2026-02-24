@@ -12,6 +12,7 @@ import sharp from 'sharp';
 
 import { BackgroundColorFeature } from '@/lexical/backgroundColor/feature.server';
 import { HeadingAnchorFeature } from '@/lexical/headingAnchor/feature.server';
+import { LayoutFeature } from '@/lexical/layout/feature.server';
 import { MentionFeature } from '@/lexical/mention/feature.server';
 import { SpacerFeature } from '@/lexical/spacer/feature.server';
 import { Campaigns } from '@/schemas/Campaigns/collection';
@@ -31,6 +32,10 @@ import { HomeSlider } from '@/schemas/HomeSlider/global';
 
 /* * */
 
+import { ThreeColumnsTextBlock } from '@/lexical/layout/three-columns-text';
+import { TwoColumnsTextBlock } from '@/lexical/layout/two-columns-text';
+import { TwoColumnsTextImageBlock } from '@/lexical/layout/two-columns-text-image';
+
 import { accordionFields } from './fields/accordion';
 import { galleryFields } from './fields/gallery';
 import { linkFields } from './fields/link';
@@ -40,7 +45,6 @@ import { videoFields } from './fields/video';
 /* * */
 
 export default buildConfig({
-
 	admin: {
 		components: {
 			graphics: {
@@ -65,6 +69,32 @@ export default buildConfig({
 		user: 'users',
 	},
 
+	blocks: [
+		{
+			fields: spacerFields,
+			slug: 'spacer',
+		},
+		{
+			fields: accordionFields,
+			slug: 'accordion',
+		},
+		{
+			fields: galleryFields,
+			slug: 'gallery',
+		},
+		{
+			fields: linkFields,
+			slug: 'link',
+		},
+		{
+			fields: videoFields,
+			slug: 'video',
+		},
+		{ ...ThreeColumnsTextBlock, admin: { group: 'Layout' } },
+		{ ...TwoColumnsTextBlock, admin: { group: 'Layout' } },
+		{ ...TwoColumnsTextImageBlock, admin: { group: 'Layout' } },
+	],
+
 	collections: [Campaigns, CaseStudies, Media, News, Topics, Users, KnowledgeBase, Notes],
 
 	csrf: [
@@ -77,36 +107,25 @@ export default buildConfig({
 	editor: lexicalEditor({
 		features: ({ defaultFeatures }) => [
 			...defaultFeatures.filter(f => f.key !== 'heading'),
+			LayoutFeature(),
+			SpacerFeature(),
 			HeadingFeature({ enabledHeadingSizes: ['h2', 'h3'] }),
 			HeadingAnchorFeature(),
 			BlocksFeature({
 				blocks: [
-					{
-						fields: spacerFields,
-						slug: 'spacer',
-					},
-					{
-						fields: accordionFields,
-						slug: 'accordion',
-					},
-					{
-						fields: galleryFields,
-						slug: 'gallery',
-					},
-					{
-						fields: linkFields,
-						slug: 'link',
-					},
-					{
-						fields: videoFields,
-						slug: 'video',
-					},
+					'spacer',
+					'accordion',
+					'gallery',
+					'link',
+					'video',
+					'three-columns-text',
+					'two-columns-text',
+					'two-columns-text-image',
 				],
 			}),
 			BackgroundColorFeature(),
 			EXPERIMENTAL_TableFeature(),
 			MentionFeature(),
-			SpacerFeature(),
 		],
 	}),
 

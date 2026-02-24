@@ -21,7 +21,7 @@ interface NewsDetailPreviewProps {
 /* * */
 
 export function NewsDetailPreview({ initialData }: NewsDetailPreviewProps) {
-	const { newsData } = useLivePreviewData(initialData);
+	const { newsData } = useLivePreviewData(initialData, 'news');
 
 	if (!newsData) {
 		return (

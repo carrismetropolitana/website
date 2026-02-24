@@ -1,22 +1,31 @@
 /* * */
 
-export interface CampaignLayoutBlock {
-	blockType: 'spacer' | 'three-columns-text' | 'two-columns-text' | 'two-columns-text-image'
-	centerColumn?: unknown
-	height?: number
-	id?: string
-	image?: number | { filename?: string, id?: string, url?: string }
-	imagePosition?: 'left' | 'right'
-	leftColumn?: unknown
-	rightColumn?: unknown
-	text?: unknown
-}
+import { LexicalNode, LexicalRichText } from './lexical-node.types';
 
 export interface CampaignData {
+	body: string
+	featured_image?: {
+		filename: string
+		thumbnailURL: string
+		url: string
+	}
 	id: string
-	layout?: CampaignLayoutBlock[]
+	is_unlisted?: boolean
+	publishedAt: string
 	slug: string
 	status: string
 	title: string
 	updatedAt: string
 }
+
+/* * */
+
+export interface CampaignRaw {
+	body?: LexicalRichText
+	id: string
+	slug: string
+	title: string
+	updatedAt: string
+}
+
+/* * */

@@ -12,6 +12,7 @@ export const GET = async () => {
 	const foundCampaigns = await payload.find({
 		collection: 'campaigns',
 		depth: 2,
+		draft: false,
 		limit: 0,
 		sort: '-updatedAt',
 		where: {

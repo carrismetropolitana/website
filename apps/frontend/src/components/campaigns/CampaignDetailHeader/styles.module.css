@@ -10,3 +10,14 @@
 	height: 40px;
 	width: 60%;
 }
+
+.publishDate {
+	font-size: var(--font-size-text);
+	font-weight: var(--font-weight-medium);
+	color: var(--color-system-text-300);
+}
+
+.publishDateSkeleton {
+	width: 30%;
+	height: 20px;
+}

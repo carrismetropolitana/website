@@ -1,18 +1,18 @@
 'use client';
 /* * */
 
-import type { CampaignData } from '@/types/campaign.types';
-
 import { CampaignDetailContent } from '@/components/campaigns/CampaignDetailContent';
 import { CampaignDetailHeader } from '@/components/campaigns/CampaignDetailHeader';
 import { Section } from '@/components/layout/Section';
 import { Surface } from '@/components/layout/Surface';
 import { useLivePreviewData } from '@/hooks/useLivePreviewData';
 
+import styles from '../CampaignDetail/styles.module.css';
+
 /* * */
 
 interface CampaignDetailPreviewProps {
-	initialData: CampaignData
+	initialData: null | Record<string, unknown>
 }
 
 /* * */
@@ -23,7 +23,7 @@ export function CampaignDetailPreview({ initialData }: CampaignDetailPreviewProp
 	//
 	// A. Setup Variables
 
-	const { campaignData } = useLivePreviewData(initialData);
+	const { campaignData } = useLivePreviewData(initialData, 'campaign');
 
 	//
 	// B. Render Components
@@ -40,10 +40,12 @@ export function CampaignDetailPreview({ initialData }: CampaignDetailPreviewProp
 
 	return (
 		<Surface>
-			<CampaignDetailHeader title={campaignData.title} />
+			<CampaignDetailHeader campaignData={campaignData} />
 
 			<Section withPadding>
-				<CampaignDetailContent data={campaignData} />
+				<div className={styles.innerWrapper}>
+					<CampaignDetailContent data={campaignData} />
+				</div>
 			</Section>
 		</Surface>
 	);

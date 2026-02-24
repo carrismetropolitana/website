@@ -15,6 +15,7 @@ export const GET = async (_request: Request, { params }: { params: Promise<{ slu
 	const foundCampaigns = await payload.find({
 		collection: 'campaigns',
 		depth: 2,
+		draft: false,
 		limit: 1,
 		where: {
 			and: [

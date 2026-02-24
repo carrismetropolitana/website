@@ -1,6 +1,6 @@
 'use client';
 
-import { CampaignData } from '@/types/campaign.types';
+import type { CampaignRaw } from '@/types/campaign.types';
 /* * */
 
 import { getPublicVariable } from '@carrismetropolitana/website-shared-settings';
@@ -16,8 +16,8 @@ interface CampaignsListContextState {
 		updateFilterBySearch: (value: string) => void
 	}
 	data: {
-		filtered: CampaignData[]
-		raw: CampaignData[]
+		filtered: CampaignRaw[]
+		raw: CampaignRaw[]
 	}
 	filters: {
 		by_date: null | string
@@ -48,7 +48,7 @@ export const CampaignsListContextProvider = ({ children }) => {
 	//
 	// A. Setup variables
 
-	const [dataFilteredState, setDataFilteredState] = useState<CampaignData[]>([]);
+	const [dataFilteredState, setDataFilteredState] = useState<CampaignRaw[]>([]);
 	const [filterBySearch, setFilterBySearch] = useState<CampaignsListContextState['filters']['by_search']>('');
 	const [filterByDate, setFilterByDate] = useState<CampaignsListContextState['filters']['by_date']>(null);
 
@@ -58,7 +58,7 @@ export const CampaignsListContextProvider = ({ children }) => {
 	// B. Fetch data
 
 	const campaignsApiUrl = `${getPublicVariable('server_url_backoffice')}/admin/public-api/campaigns`;
-	const { data: allCampaignsData, isLoading: allCampaignsLoading } = useSWR<CampaignData[], Error>(campaignsApiUrl, { refreshInterval: 900000 }); // 15 minutes
+	const { data: allCampaignsData, isLoading: allCampaignsLoading } = useSWR<CampaignRaw[], Error>(campaignsApiUrl, { refreshInterval: 900000 }); // 15 minutes
 
 	//
 	// C. Transform data
@@ -66,7 +66,7 @@ export const CampaignsListContextProvider = ({ children }) => {
 	const applyFiltersToData = () => {
 		//
 
-		let filterResult: CampaignData[] = allCampaignsData || [];
+		let filterResult: CampaignRaw[] = allCampaignsData || [];
 
 		//
 		// Filter by news date

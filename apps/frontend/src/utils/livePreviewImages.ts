@@ -64,38 +64,15 @@ export async function processUploadNode(node: any): Promise<any> {
 
 /* * */
 
-export async function processLayoutImages(layout: any[], prevLayout?: any[]): Promise<any[]> {
-	if (!Array.isArray(layout)) return layout;
-
-	return Promise.all(
-		layout.map(async (block, index) => {
-			if (block?.blockType !== 'two-columns-text-image' || !block.image) return block;
-
-			const image = block.image;
-			if (hasMediaUrl(image)) return block;
-
-			const id = getImageId(image);
-			if (!id) return block;
-
-			const prevBlock = prevLayout?.[index];
-			const prevImage = prevBlock?.blockType === 'two-columns-text-image' ? prevBlock.image : undefined;
-			if (prevImage && getImageId(prevImage) === id && hasMediaUrl(prevImage)) {
-				return { ...block, image: prevImage };
-			}
-
-			const media = await fetchMedia(id);
-			return media ? { ...block, image: media } : block;
-		}),
-	);
-}
-
-/* * */
-
 export async function processBodyImages(body: any, prevBody?: any): Promise<any> {
 	if (!body?.root?.children) return body;
 
 	const prevGalleryBlocks = prevBody?.root?.children?.filter(
 		(c: any) => c.type === 'block' && c.fields?.blockType === 'gallery',
+	) || [];
+
+	const prevTwoColumnsBlocks = prevBody?.root?.children?.filter(
+		(c: any) => c.type === 'block' && c.fields?.blockType === 'two-columns-text-image',
 	) || [];
 
 	const processedChildren = await Promise.all(
@@ -107,6 +84,25 @@ export async function processBodyImages(body: any, prevBody?: any): Promise<any>
 				const prevImages = prevBlock?.fields?.images || [];
 				const images = await processGalleryImages(block.fields.images, prevImages);
 				return { ...block, fields: { ...block.fields, images } };
+			}
+
+			const isTwoColumnsImage = block.type === 'block' && block.fields?.blockType === 'two-columns-text-image' && block.fields?.image;
+
+			if (isTwoColumnsImage) {
+				const image = block.fields.image;
+				if (hasMediaUrl(image)) return block;
+
+				const id = getImageId(image);
+				if (!id) return processUploadNode(block);
+
+				const prevBlock = prevTwoColumnsBlocks[index] ?? prevTwoColumnsBlocks.find((b: any) => b.fields?.blockType === 'two-columns-text-image');
+				const prevImage = prevBlock?.fields?.image;
+				if (prevImage && getImageId(prevImage) === id && hasMediaUrl(prevImage)) {
+					return { ...block, fields: { ...block.fields, image: prevImage } };
+				}
+
+				const media = await fetchMedia(id);
+				return media ? { ...block, fields: { ...block.fields, image: media } } : processUploadNode(block);
 			}
 
 			return processUploadNode(block);

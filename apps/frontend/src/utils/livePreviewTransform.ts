@@ -7,9 +7,24 @@ import type { NewsData } from '@/types/news.types';
 /* * */
 
 export function transformCampaignPayloadData(payloadData: any): CampaignData {
+	const body = typeof payloadData.body === 'string'
+		? payloadData.body
+		: JSON.stringify(payloadData.body ?? {});
+
+	const featured_image = payloadData.featured_image && typeof payloadData.featured_image === 'object'
+		? {
+			filename: payloadData.featured_image.filename || '',
+			thumbnailURL: payloadData.featured_image.sizes?.thumbnail?.url || payloadData.featured_image.url || '',
+			url: payloadData.featured_image.url || '',
+		}
+		: undefined;
+
 	return {
+		body,
+		featured_image,
 		id: payloadData.id || '',
-		layout: payloadData.layout ?? [],
+		is_unlisted: payloadData.is_unlisted ?? false,
+		publishedAt: payloadData.publishedAt || payloadData.updatedAt || '',
 		slug: payloadData.slug || '',
 		status: payloadData.status || '',
 		title: payloadData.title || '',
@@ -19,7 +34,7 @@ export function transformCampaignPayloadData(payloadData: any): CampaignData {
 
 /* * */
 
-export function transformPayloadData(payloadData: any): NewsData {
+export function transformNewsPayloadData(payloadData: any): NewsData {
 	const body = typeof payloadData.body === 'string'
 		? payloadData.body
 		: JSON.stringify(payloadData.body ?? {});

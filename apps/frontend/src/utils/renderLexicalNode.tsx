@@ -16,6 +16,9 @@ import { Spacer } from '@/components/payload/spacer';
 import { Table } from '@/components/payload/table';
 import { TableCell } from '@/components/payload/table/table-cell';
 import { Text } from '@/components/payload/text';
+import { ThreeColumnsText } from '@/components/payload/ThreeColumnsText';
+import { TwoColumnsText } from '@/components/payload/TwoColumnsText';
+import { TwoColumnsTextImage } from '@/components/payload/TwoColumnsTextImage';
 import { Video } from '@/components/payload/video';
 import { LexicalNode } from '@/types/lexical-node.types';
 import { type ReactNode } from 'react';
@@ -34,6 +37,38 @@ function renderBlock(node: LexicalNode, key?: number): ReactNode {
 		case 'gallery': return <Gallery key={key} fields={node.fields} />;
 		case 'link': return <Links key={key} fields={node.fields} />;
 		case 'spacer': return <Spacer height={node.fields?.height ?? 32} />;
+		case 'three-columns-text': {
+			const f = node.fields as { centerColumn?: unknown, leftColumn?: unknown, rightColumn?: unknown };
+			return (
+				<ThreeColumnsText
+					key={key}
+					centerColumn={f?.centerColumn}
+					leftColumn={f?.leftColumn}
+					rightColumn={f?.rightColumn}
+				/>
+			);
+		}
+		case 'two-columns-text': {
+			const f = node.fields as { leftColumn?: unknown, rightColumn?: unknown };
+			return (
+				<TwoColumnsText
+					key={key}
+					leftColumn={f?.leftColumn}
+					rightColumn={f?.rightColumn}
+				/>
+			);
+		}
+		case 'two-columns-text-image': {
+			const f = node.fields as { image?: unknown, imagePosition?: 'left' | 'right', text?: unknown };
+			return (
+				<TwoColumnsTextImage
+					key={key}
+					image={f?.image}
+					imagePosition={f?.imagePosition}
+					text={f?.text}
+				/>
+			);
+		}
 		case 'video': return <Video key={key} fields={node.fields} />;
 		default: return null;
 	}

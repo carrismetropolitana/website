@@ -1,7 +1,6 @@
 import { RscEntryLexicalCell as RscEntryLexicalCell_44fe37237e0ebf4470c9990d8cb7b07e } from '@payloadcms/richtext-lexical/rsc'
 import { RscEntryLexicalField as RscEntryLexicalField_44fe37237e0ebf4470c9990d8cb7b07e } from '@payloadcms/richtext-lexical/rsc'
 import { LexicalDiffComponent as LexicalDiffComponent_44fe37237e0ebf4470c9990d8cb7b07e } from '@payloadcms/richtext-lexical/rsc'
-import { SpacerFeatureClient as SpacerFeatureClient_fe946e2108d3e238f649c6c7e6ebcacf } from '@/lexical/spacer/feature.client'
 import { MentionFeatureClient as MentionFeatureClient_719947979d3cd927e94d2cc42d4c5006 } from '@/lexical/mention/feature.client'
 import { TableFeatureClient as TableFeatureClient_e70f5e05f09f93e00b997edb1ef0c864 } from '@payloadcms/richtext-lexical/client'
 import { BackgroundColorFeatureClient as BackgroundColorFeatureClient_f7a8d5d95ad80633f4682a373be4a83f } from '@/lexical/backgroundColor/feature.client'
@@ -29,6 +28,8 @@ import { ItalicFeatureClient as ItalicFeatureClient_e70f5e05f09f93e00b997edb1ef0
 import { GalleryFieldPreview as GalleryFieldPreview_3bf36e9fa6af0807e30df4acfaddf436 } from '@/components/GalleryFieldPreview'
 import { LinkFieldPreview as LinkFieldPreview_3b9f1bbd1ad5afd6976cb9bf2edd577c } from '@/components/LinkFieldPreview'
 import { HeadingAnchorFeatureClient as HeadingAnchorFeatureClient_eaf9b82c83898f5d31545126068a138e } from '@/lexical/headingAnchor/feature.client'
+import { SpacerFeatureClient as SpacerFeatureClient_fe946e2108d3e238f649c6c7e6ebcacf } from '@/lexical/spacer/feature.client'
+import { LayoutFeatureClient as LayoutFeatureClient_434c49a2b92860673d8bffc9986b18c4 } from '@/lexical/layout/feature.client'
 import { GeneralStatusMessageLabel as GeneralStatusMessageLabel_52099edc813454fee3d5335f6a4aed35 } from '@/components/GeneralStatusMessageLabel/index'
 import { HomeSliderMessageLabel as HomeSliderMessageLabel_257d5701fbc8afd2f21de3c70108de6a } from '@/components/HomeSliderMessageLabel/index'
 import { Icons as Icons_537d74cd4b75d6c420c521af18c7f707 } from '@/graphics/Icon/index.tsx'
@@ -40,7 +41,6 @@ export const importMap = {
   "@payloadcms/richtext-lexical/rsc#RscEntryLexicalCell": RscEntryLexicalCell_44fe37237e0ebf4470c9990d8cb7b07e,
   "@payloadcms/richtext-lexical/rsc#RscEntryLexicalField": RscEntryLexicalField_44fe37237e0ebf4470c9990d8cb7b07e,
   "@payloadcms/richtext-lexical/rsc#LexicalDiffComponent": LexicalDiffComponent_44fe37237e0ebf4470c9990d8cb7b07e,
-  "@/lexical/spacer/feature.client#SpacerFeatureClient": SpacerFeatureClient_fe946e2108d3e238f649c6c7e6ebcacf,
   "@/lexical/mention/feature.client#MentionFeatureClient": MentionFeatureClient_719947979d3cd927e94d2cc42d4c5006,
   "@payloadcms/richtext-lexical/client#TableFeatureClient": TableFeatureClient_e70f5e05f09f93e00b997edb1ef0c864,
   "@/lexical/backgroundColor/feature.client#BackgroundColorFeatureClient": BackgroundColorFeatureClient_f7a8d5d95ad80633f4682a373be4a83f,
@@ -68,6 +68,8 @@ export const importMap = {
   "@/components/GalleryFieldPreview#GalleryFieldPreview": GalleryFieldPreview_3bf36e9fa6af0807e30df4acfaddf436,
   "@/components/LinkFieldPreview#LinkFieldPreview": LinkFieldPreview_3b9f1bbd1ad5afd6976cb9bf2edd577c,
   "@/lexical/headingAnchor/feature.client#HeadingAnchorFeatureClient": HeadingAnchorFeatureClient_eaf9b82c83898f5d31545126068a138e,
+  "@/lexical/spacer/feature.client#SpacerFeatureClient": SpacerFeatureClient_fe946e2108d3e238f649c6c7e6ebcacf,
+  "@/lexical/layout/feature.client#LayoutFeatureClient": LayoutFeatureClient_434c49a2b92860673d8bffc9986b18c4,
   "@/components/GeneralStatusMessageLabel/index#GeneralStatusMessageLabel": GeneralStatusMessageLabel_52099edc813454fee3d5335f6a4aed35,
   "@/components/HomeSliderMessageLabel/index#HomeSliderMessageLabel": HomeSliderMessageLabel_257d5701fbc8afd2f21de3c70108de6a,
   "@/graphics/Icon/index.tsx#Icons": Icons_537d74cd4b75d6c420c521af18c7f707,

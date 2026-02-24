@@ -4,7 +4,7 @@
 .content {
 	display: flex;
 	flex-direction: column;
-	gap: var(--size-spacing-24);
+	gap: var(--size-spacing-15);
 }
 
 /* * */
