@@ -12,6 +12,7 @@ import { List } from '@/components/payload/lists';
 import { ListItem } from '@/components/payload/lists/listItem';
 import { Paragraph } from '@/components/payload/paragraph';
 import { Quote } from '@/components/payload/quote';
+import { Spacer } from '@/components/payload/spacer';
 import { Table } from '@/components/payload/table';
 import { TableCell } from '@/components/payload/table/table-cell';
 import { Text } from '@/components/payload/text';
@@ -32,10 +33,7 @@ function renderBlock(node: LexicalNode, key?: number): ReactNode {
 		}
 		case 'gallery': return <Gallery key={key} fields={node.fields} />;
 		case 'link': return <Links key={key} fields={node.fields} />;
-		case 'spacer': {
-			const height = node.fields?.height ?? 32;
-			return <div key={key} style={{ height: `${height}px` }} />;
-		}
+		case 'spacer': return <Spacer height={node.fields?.height ?? 32} />;
 		case 'video': return <Video key={key} fields={node.fields} />;
 		default: return null;
 	}
