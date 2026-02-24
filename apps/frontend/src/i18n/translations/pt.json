@@ -2011,7 +2011,7 @@
 		},
 		"StopsDetailContentTimetableRow": {
 			"debug_modal": {
-				"title": "IDs de viagens relacionadas com esta chegada"
+				"title": "IDs de viagens relacionadas"
 			},
 			"localities": {
 				"label": "Passa por"

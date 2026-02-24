@@ -2010,7 +2010,7 @@
 		},
 		"StopsDetailContentTimetableRow": {
 			"debug_modal": {
-				"title": "Trip IDs related to this arrival"
+				"title": "Trip IDs related"
 			},
 			"localities": {
 				"label": "Goes through:"
