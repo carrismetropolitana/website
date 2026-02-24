@@ -12,9 +12,7 @@ import sharp from 'sharp';
 
 import { BackgroundColorFeature } from '@/lexical/backgroundColor/feature.server';
 import { HeadingAnchorFeature } from '@/lexical/headingAnchor/feature.server';
-import { LayoutFeature } from '@/lexical/layout/feature.server';
 import { MentionFeature } from '@/lexical/mention/feature.server';
-import { SpacerFeature } from '@/lexical/spacer/feature.server';
 import { Campaigns } from '@/schemas/Campaigns/collection';
 import { CaseStudies } from '@/schemas/CaseStudies/collection';
 import { KnowledgeBase } from '@/schemas/KnowledgeBase/collection';
@@ -90,9 +88,18 @@ export default buildConfig({
 			fields: videoFields,
 			slug: 'video',
 		},
-		{ ...ThreeColumnsTextBlock, admin: { group: 'Layout' } },
-		{ ...TwoColumnsTextBlock, admin: { group: 'Layout' } },
-		{ ...TwoColumnsTextImageBlock, admin: { group: 'Layout' } },
+		{
+			...ThreeColumnsTextBlock,
+			admin: { group: 'Layout' },
+		},
+		{
+			...TwoColumnsTextBlock,
+			admin: { group: 'Layout' },
+		},
+		{
+			...TwoColumnsTextImageBlock,
+			admin: { group: 'Layout' },
+		},
 	],
 
 	collections: [Campaigns, CaseStudies, Media, News, Topics, Users, KnowledgeBase, Notes],
@@ -107,8 +114,6 @@ export default buildConfig({
 	editor: lexicalEditor({
 		features: ({ defaultFeatures }) => [
 			...defaultFeatures.filter(f => f.key !== 'heading'),
-			LayoutFeature(),
-			SpacerFeature(),
 			HeadingFeature({ enabledHeadingSizes: ['h2', 'h3'] }),
 			HeadingAnchorFeature(),
 			BlocksFeature({
