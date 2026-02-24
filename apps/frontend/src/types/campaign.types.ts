@@ -1,7 +1,5 @@
 /* * */
 
-import { LexicalNode, LexicalRichText } from './lexical-node.types';
-
 export interface CampaignData {
 	body: string
 	featured_image?: {
@@ -14,16 +12,6 @@ export interface CampaignData {
 	publishedAt: string
 	slug: string
 	status: string
-	title: string
-	updatedAt: string
-}
-
-/* * */
-
-export interface CampaignRaw {
-	body?: LexicalRichText
-	id: string
-	slug: string
 	title: string
 	updatedAt: string
 }

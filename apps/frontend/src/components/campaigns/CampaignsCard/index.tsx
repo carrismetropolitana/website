@@ -15,7 +15,7 @@ interface FeaturedImageSrc {
 
 interface CampaignsCardProps {
 	featuredImageSrc?: FeaturedImageSrc
-	id: string
+	id?: string
 	title: string
 }
 
@@ -26,6 +26,7 @@ export function CampaignsCard({ featuredImageSrc, id, title }: CampaignsCardProp
 
 	//
 	// A. Render components
+
 	return (
 		<Link className={styles.container} href={`campaigns/${id}`}>
 			<Image

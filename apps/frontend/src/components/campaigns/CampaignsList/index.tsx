@@ -49,6 +49,13 @@ export function CampaignsList() {
 								key={campaignItem.id}
 								id={campaignItem.slug}
 								title={campaignItem.title}
+								featuredImageSrc={
+									{
+										filename: campaignItem.featured_image?.filename,
+										thumbnailURL: campaignItem.featured_image?.thumbnailURL,
+										url: campaignItem.featured_image?.url,
+									}
+								}
 							/>
 						))}
 					</Grid>

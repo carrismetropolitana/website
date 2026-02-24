@@ -1,6 +1,6 @@
 'use client';
 
-import type { CampaignRaw } from '@/types/campaign.types';
+import type { CampaignData } from '@/types/campaign.types';
 /* * */
 
 import { getPublicVariable } from '@carrismetropolitana/website-shared-settings';
@@ -16,8 +16,8 @@ interface CampaignsListContextState {
 		updateFilterBySearch: (value: string) => void
 	}
 	data: {
-		filtered: CampaignRaw[]
-		raw: CampaignRaw[]
+		filtered: CampaignData[]
+		raw: CampaignData[]
 	}
 	filters: {
 		by_date: null | string
@@ -48,17 +48,15 @@ export const CampaignsListContextProvider = ({ children }) => {
 	//
 	// A. Setup variables
 
-	const [dataFilteredState, setDataFilteredState] = useState<CampaignRaw[]>([]);
+	const [dataFilteredState, setDataFilteredState] = useState<CampaignData[]>([]);
 	const [filterBySearch, setFilterBySearch] = useState<CampaignsListContextState['filters']['by_search']>('');
 	const [filterByDate, setFilterByDate] = useState<CampaignsListContextState['filters']['by_date']>(null);
-
-	// const analyticsContext = useAnalyticsContext();
 
 	//
 	// B. Fetch data
 
 	const campaignsApiUrl = `${getPublicVariable('server_url_backoffice')}/admin/public-api/campaigns`;
-	const { data: allCampaignsData, isLoading: allCampaignsLoading } = useSWR<CampaignRaw[], Error>(campaignsApiUrl, { refreshInterval: 900000 }); // 15 minutes
+	const { data: allCampaignsData, isLoading: allCampaignsLoading } = useSWR<CampaignData[], Error>(campaignsApiUrl, { refreshInterval: 900000 }); // 15 minutes
 
 	//
 	// C. Transform data
@@ -66,13 +64,13 @@ export const CampaignsListContextProvider = ({ children }) => {
 	const applyFiltersToData = () => {
 		//
 
-		let filterResult: CampaignRaw[] = allCampaignsData || [];
+		let filterResult: CampaignData[] = allCampaignsData || [];
 
 		//
 		// Filter by news date
 
 		if (filterBySearch) {
-			filterResult = filterResult.filter((campaignItem) => {
+			filterResult = filterResult.filter((campaignItem: CampaignData) => {
 				const titleLowerCase = campaignItem.title.toLowerCase();
 				return titleLowerCase.includes(filterBySearch.toLowerCase());
 			});
@@ -82,7 +80,7 @@ export const CampaignsListContextProvider = ({ children }) => {
 		// Filter by news title
 
 		if (filterByDate) {
-			filterResult = filterResult.filter((campaignItem) => {
+			filterResult = filterResult.filter((campaignItem: CampaignData) => {
 				const campaignItemDate = DateTime.fromISO(campaignItem.updatedAt);
 				return campaignItemDate.hasSame(DateTime.fromFormat(filterByDate, 'yyyy-MM-dd'), 'day');
 			});

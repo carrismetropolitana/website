@@ -1,7 +1,7 @@
 /* * */
 
 import { type NavigationGroup } from '@/types/navigation.types';
-import { IconAlertTriangle, IconArrowLoopRight, IconBellSchool, IconBuildingStore, IconBus, IconBusStop, IconChartBar, IconCreditCardPay, IconDirections, IconHelpHexagon, IconHomeSpark, IconListSearch, IconMapQuestion, IconMessages, IconNews, IconPrompt, IconTicket, IconUserHeart } from '@tabler/icons-react';
+import { IconAlertTriangle, IconArrowLoopRight, IconBellSchool, IconBuildingStore, IconBus, IconBusStop, IconChartBar, IconCreditCardPay, IconDirections, IconHelpHexagon, IconHomeSpark, IconListSearch, IconMapQuestion, IconMessages, IconNews, IconPrompt, IconSpeakerphone, IconTicket, IconUserHeart } from '@tabler/icons-react';
 
 /* * */
 
@@ -41,6 +41,7 @@ export const mainNavigationGroup: NavigationGroup[] = [
 		_id: 'more',
 		links: [
 			{ _id: 'news', href: '/news', icon: <IconNews /> },
+			{ _id: 'campaigns', href: '/campaigns', icon: <IconSpeakerphone /> },
 			{ _id: 'metrics', href: '/metrics', icon: <IconChartBar /> },
 			{ _id: 'open-data', href: '/open-data', icon: <IconPrompt /> },
 			{ _id: 'drivers', href: '/drivers', icon: <IconUserHeart />, target: '_blank' },
