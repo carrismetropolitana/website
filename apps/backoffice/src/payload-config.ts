@@ -1,18 +1,6 @@
 /* * */
 
-import { getPublicVariable } from '@carrismetropolitana/website-shared-settings';
-import { mongooseAdapter } from '@payloadcms/db-mongodb';
-import { nodemailerAdapter } from '@payloadcms/email-nodemailer';
-import { BlocksFeature, EXPERIMENTAL_TableFeature, HeadingFeature, lexicalEditor } from '@payloadcms/richtext-lexical';
-import { s3Storage } from '@payloadcms/storage-s3';
-import { buildConfig } from 'payload';
-import sharp from 'sharp';
-
-/* * */
-
-import { BackgroundColorFeature } from '@/lexical/backgroundColor/feature.server';
-import { HeadingAnchorFeature } from '@/lexical/headingAnchor/feature.server';
-import { MentionFeature } from '@/lexical/mention/feature.server';
+import { lexicalEditorConfig } from '@/lexical-editor-config';
 import { Campaigns } from '@/schemas/Campaigns/collection';
 import { CaseStudies } from '@/schemas/CaseStudies/collection';
 import { KnowledgeBase } from '@/schemas/KnowledgeBase/collection';
@@ -21,6 +9,12 @@ import { News } from '@/schemas/News/collection';
 import { Notes } from '@/schemas/Notes/collection';
 import { Topics } from '@/schemas/Topics/collection';
 import { Users } from '@/schemas/Users/collection';
+import { getPublicVariable } from '@carrismetropolitana/website-shared-settings';
+import { mongooseAdapter } from '@payloadcms/db-mongodb';
+import { nodemailerAdapter } from '@payloadcms/email-nodemailer';
+import { s3Storage } from '@payloadcms/storage-s3';
+import { buildConfig } from 'payload';
+import sharp from 'sharp';
 
 /* * */
 
@@ -111,28 +105,7 @@ export default buildConfig({
 
 	db: mongooseAdapter({ url: process.env.WEBSITEDB_URI ?? 'mongodb://placeholder:placeholder@placeholder:12345/placeholder' }),
 
-	editor: lexicalEditor({
-		features: ({ defaultFeatures }) => [
-			...defaultFeatures.filter(f => f.key !== 'heading'),
-			HeadingFeature({ enabledHeadingSizes: ['h2', 'h3'] }),
-			HeadingAnchorFeature(),
-			BlocksFeature({
-				blocks: [
-					'spacer',
-					'accordion',
-					'gallery',
-					'link',
-					'video',
-					'three-columns-text',
-					'two-columns-text',
-					'two-columns-text-image',
-				],
-			}),
-			BackgroundColorFeature(),
-			EXPERIMENTAL_TableFeature(),
-			MentionFeature(),
-		],
-	}),
+	editor: lexicalEditorConfig,
 
 	email: nodemailerAdapter({
 		defaultFromAddress: process.env.EMAIL_FROM_ADDRESS ?? '',

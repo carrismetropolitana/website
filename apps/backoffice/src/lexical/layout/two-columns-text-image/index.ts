@@ -2,14 +2,14 @@
 
 import type { Block } from 'payload';
 
-import { lexicalEditor } from '@payloadcms/richtext-lexical';
+import { lexicalEditorConfigColumn } from '@/lexical-editor-config-layout';
 
 /* * */
 
 export const TwoColumnsTextImageBlock: Block = {
 	fields: [
 		{
-			editor: lexicalEditor({ features: ({ defaultFeatures }) => defaultFeatures }),
+			editor: lexicalEditorConfigColumn,
 			label: 'Texto',
 			name: 'text',
 			required: true,

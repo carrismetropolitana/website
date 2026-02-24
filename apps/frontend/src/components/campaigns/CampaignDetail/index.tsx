@@ -10,8 +10,6 @@ import { CampaignData } from '@/types/campaign.types';
 import { getPublicVariable } from '@carrismetropolitana/website-shared-settings';
 import useSWR from 'swr';
 
-import styles from './styles.module.css';
-
 /* * */
 
 interface CampaignDetailProps {
@@ -31,13 +29,11 @@ export function CampaignDetail({ slug }: CampaignDetailProps) {
 			<CampaignDetailHeader campaignData={campaignData} />
 
 			<Section withPadding>
-				<div className={styles.innerWrapper}>
-					{!isLoading && campaignData && (
-						<>
-							<CampaignDetailContent data={campaignData} />
-						</>
-					)}
-				</div>
+				{!isLoading && campaignData && (
+					<>
+						<CampaignDetailContent data={campaignData} />
+					</>
+				)}
 			</Section>
 		</Surface>
 	);

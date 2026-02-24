@@ -7,8 +7,6 @@ import { Section } from '@/components/layout/Section';
 import { Surface } from '@/components/layout/Surface';
 import { useLivePreviewData } from '@/hooks/useLivePreviewData';
 
-import styles from '../CampaignDetail/styles.module.css';
-
 /* * */
 
 interface CampaignDetailPreviewProps {
@@ -43,9 +41,7 @@ export function CampaignDetailPreview({ initialData }: CampaignDetailPreviewProp
 			<CampaignDetailHeader campaignData={campaignData} />
 
 			<Section withPadding>
-				<div className={styles.innerWrapper}>
-					<CampaignDetailContent data={campaignData} />
-				</div>
+				<CampaignDetailContent data={campaignData} />
 			</Section>
 		</Surface>
 	);
