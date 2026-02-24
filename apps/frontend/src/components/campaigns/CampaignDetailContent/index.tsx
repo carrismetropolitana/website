@@ -17,12 +17,19 @@ interface CampaignDetailContentProps {
 /* * */
 
 export function CampaignDetailContent({ data }: CampaignDetailContentProps) {
-	const layout = data.layout ?? [];
+	//
+
+	//
+	// A. Setup Variables
+
 	const debugContext = useDebugContext();
+
+	//
+	// B. Render Components
 
 	return (
 		<section className={styles.content}>
-			<CampaignLayoutRenderer blocks={layout} />
+			<CampaignLayoutRenderer blocks={data.layout} />
 
 			{debugContext.flags.is_debug_mode && (
 				<details>
@@ -32,4 +39,6 @@ export function CampaignDetailContent({ data }: CampaignDetailContentProps) {
 			)}
 		</section>
 	);
+
+	//
 }

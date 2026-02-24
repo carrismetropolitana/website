@@ -18,7 +18,15 @@ interface CampaignDetailPreviewProps {
 /* * */
 
 export function CampaignDetailPreview({ initialData }: CampaignDetailPreviewProps) {
+	//
+
+	//
+	// A. Setup Variables
+
 	const { campaignData } = useLivePreviewData(initialData);
+
+	//
+	// B. Render Components
 
 	if (!campaignData) {
 		return (
@@ -39,4 +47,6 @@ export function CampaignDetailPreview({ initialData }: CampaignDetailPreviewProp
 			</Section>
 		</Surface>
 	);
+
+	//
 }

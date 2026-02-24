@@ -12,7 +12,14 @@ interface CampaignDetailHeaderProps {
 	title?: string
 }
 
-export function CampaignDetailHeader({ title }: CampaignDetailHeaderProps) {
+/* * */
+
+export function CampaignDetailHeader({ title = 'Carris Metropolitana' }: CampaignDetailHeaderProps) {
+	//
+
+	//
+	// A. Render Components
+
 	if (!title) {
 		return (
 			<Section withBottomDivider withGap withPadding>
@@ -26,4 +33,6 @@ export function CampaignDetailHeader({ title }: CampaignDetailHeaderProps) {
 			<h1 className={styles.title}>{title}</h1>
 		</Section>
 	);
+
+	//
 }
