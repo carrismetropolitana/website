@@ -64,7 +64,7 @@ export function StopsDetailContentTimetableRowModal({ arrivalData, onClose, open
 						</Table.Tr>
 					</Table.Thead>
 					<Table.Tbody>
-						{arrivalData.related_trip_ids.map((tripId) => {
+						{arrivalData.related_trip_ids?.map((tripId) => {
 							const { plan, serviceId } = parseTripId(tripId);
 							return (
 								<Table.Tr key={tripId}>
