@@ -17,32 +17,43 @@ interface TwoColumnsTextImageBlockProps {
 
 /* * */
 
-export function TwoColumnsTextImageBlock({ image, imagePosition = 'right', text }: TwoColumnsTextImageBlockProps) {
+export function TwoColumnsTextImage({ image, imagePosition = 'right', text }: TwoColumnsTextImageBlockProps) {
+	//
+
+	//
+	// A. Setup Variables
+
 	const renderLexicalNode = useRenderLexicalNode();
 	const { alt: imageAlt, url: imageUrl } = resolveImageProps(image);
 	const rootNode = getLexicalRoot(text);
 	const textContent = rootNode ? renderLexicalNode(rootNode) : null;
 
-	const textColumn = <div className={styles.column}>{textContent}</div>;
-	const imageColumn = (
-		<div className={styles.column}>
-			{imageUrl ? <ImageComponent alt={imageAlt} src={imageUrl} /> : null}
-		</div>
-	);
+	//
+	// B. Render Components
 
 	return (
 		<div className={styles.container}>
-			{imagePosition === 'left' ? (
+
+			{imagePosition === 'left' && (
 				<>
-					{imageColumn}
-					{textColumn}
-				</>
-			) : (
-				<>
-					{textColumn}
-					{imageColumn}
+					<div className={styles.column}>
+						{imageUrl ? <ImageComponent alt={imageAlt} src={imageUrl} /> : null}
+					</div>
+					<div className={styles.column}>{textContent}</div>;
 				</>
 			)}
+
+			{imagePosition === 'right' && (
+				<>
+					<div className={styles.column}>{textContent}</div>
+					<div className={styles.column}>
+						{imageUrl ? <ImageComponent alt={imageAlt} src={imageUrl} /> : null}
+					</div>
+				</>
+			)}
+
 		</div>
 	);
+
+	//
 }

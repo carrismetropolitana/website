@@ -3,9 +3,9 @@
 
 import type { CampaignLayoutBlock } from '@/types/campaign.types';
 
-import { ThreeColumnsTextBlock } from '@/components/payload/ThreeColumnsTextBlock';
-import { TwoColumnsTextBlock } from '@/components/payload/TwoColumnsTextBlock';
-import { TwoColumnsTextImageBlock } from '@/components/payload/TwoColumnsTextImageBlock';
+import { ThreeColumnsText } from '@/components/payload/ThreeColumnsText';
+import { TwoColumnsText } from '@/components/payload/TwoColumnsText';
+import { TwoColumnsTextImage } from '@/components/payload/TwoColumnsTextImage';
 
 /* * */
 
@@ -14,6 +14,11 @@ interface CampaignLayoutRendererProps {
 }
 
 export function CampaignLayoutRenderer({ blocks }: CampaignLayoutRendererProps) {
+	//
+
+	//
+	// A. Render Components
+
 	if (!blocks || blocks.length === 0) return null;
 
 	return (
@@ -23,7 +28,7 @@ export function CampaignLayoutRenderer({ blocks }: CampaignLayoutRendererProps) 
 				switch (block.blockType) {
 					case 'three-columns-text':
 						return (
-							<ThreeColumnsTextBlock
+							<ThreeColumnsText
 								key={key}
 								centerColumn={block.centerColumn}
 								leftColumn={block.leftColumn}
@@ -32,7 +37,7 @@ export function CampaignLayoutRenderer({ blocks }: CampaignLayoutRendererProps) 
 						);
 					case 'two-columns-text':
 						return (
-							<TwoColumnsTextBlock
+							<TwoColumnsText
 								key={key}
 								leftColumn={block.leftColumn}
 								rightColumn={block.rightColumn}
@@ -40,7 +45,7 @@ export function CampaignLayoutRenderer({ blocks }: CampaignLayoutRendererProps) 
 						);
 					case 'two-columns-text-image':
 						return (
-							<TwoColumnsTextImageBlock
+							<TwoColumnsTextImage
 								key={key}
 								image={block.image}
 								imagePosition={block.imagePosition}
@@ -53,4 +58,6 @@ export function CampaignLayoutRenderer({ blocks }: CampaignLayoutRendererProps) 
 			})}
 		</>
 	);
+
+	//
 }

@@ -38,7 +38,7 @@ export function resolveImageProps(image: unknown): { alt?: string, url?: string 
 /**
  * Fetch full media object by ID (for live preview when payload sends ID-only refs).
  */
-export async function fetchMedia(id: number | string): Promise<Record<string, unknown> | null> {
+export async function fetchMedia(id: number | string): Promise<null | Record<string, unknown>> {
 	try {
 		const res = await fetch(`/api/media/${String(id)}`);
 		if (res.ok) return await res.json();

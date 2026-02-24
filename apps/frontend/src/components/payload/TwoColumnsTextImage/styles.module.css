@@ -2,14 +2,19 @@
 
 .container {
 	display: grid;
-	gap: var(--size-spacing-20);
 	grid-template-columns: 1fr 1fr;
+	gap: var(--size-spacing-20);
 	width: 100%;
 }
 
+/* * */
+
 .column {
 	min-width: 0;
+	border: 1px solid red;
 }
+
+/* * */
 
 @media (width <= 768px) {
 	.container {
