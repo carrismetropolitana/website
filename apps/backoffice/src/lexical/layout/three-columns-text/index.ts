@@ -2,7 +2,7 @@
 
 import type { Block } from 'payload';
 
-import { lexicalEditorConfigColumn } from '@/lexical-editor-config-layout';
+import { lexicalEditorConfigColumn } from '@/configs/lexical-editor-config-layout';
 
 /* * */
 

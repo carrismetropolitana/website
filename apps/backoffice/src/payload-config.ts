@@ -1,6 +1,6 @@
 /* * */
 
-import { lexicalEditorConfig } from '@/lexical-editor-config';
+import { lexicalEditorConfig } from '@/configs/lexical-editor-config';
 import { Campaigns } from '@/schemas/Campaigns/collection';
 import { CaseStudies } from '@/schemas/CaseStudies/collection';
 import { KnowledgeBase } from '@/schemas/KnowledgeBase/collection';
