@@ -1,0 +1,38 @@
+/* * */
+/* CONTAINER */
+
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  padding: 25px;
+  text-align: center;
+  background-color: var(--color-reference-0);
+  border: 1px solid var(--gray-2);
+  border-radius: 10px;
+  box-shadow: 0 0 15px 0 rgb(0 0 0 / 3%);
+}
+
+.container:active {
+  background-color: var(--gray-1);
+  opacity: 0.8;
+}
+
+/* * */
+/* TITLE */
+
+.title {
+  font-size: 20px;
+  font-weight: 600;
+}
+
+/* * */
+/* DESCRIPTION */
+
+.description {
+  font-size: 16px;
+  font-weight: 500;
+  color: var(--gray-6);
+}
