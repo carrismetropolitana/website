@@ -1,7 +1,8 @@
 'use client';
 /* * */
 
-import { useTranslations } from 'next-intl';
+import { Section } from '@/components/layout/Section';
+import { Surface } from '@/components/layout/Surface';
 
 /* * */
 
@@ -17,15 +18,15 @@ export function PipsSurveyPage({ pipId }: PipsSurveyPageProps) {
 	//
 	// A. Setup variables
 
-	const t = useTranslations('review-2025.Review2025Page');
-
 	//
 	// B. Render components
 
 	return (
-		<>
-			<p>Pips Survey Page with id {pipId} </p>
-		</>
+		<Surface>
+			<Section withPadding>
+				<p>dsjfhshf</p>
+			</Section>
+		</Surface>
 	);
 
 	//
