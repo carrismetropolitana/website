@@ -18,15 +18,15 @@ export default function FrontendPipSurveyAnswer({ description, id, title }) {
 	//
 	// B. Handle actions
 
-	const handleSelectAnswer = () => {
-		pipsContext.selectAnswer(id);
+	const handleSelectAnswer = (answerCode: string) => {
+		pipsContext.actions.selectAnswer(answerCode);
 	};
 
 	//
 	// C. Render components
 
 	return (
-		<div className={styles.container} onClick={handleSelectAnswer}>
+		<div className={styles.container} onClick={() => handleSelectAnswer(id)}>
 			<p className={styles.title}>{title}</p>
 			<p className={styles.description}>{description}</p>
 		</div>
