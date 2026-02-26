@@ -27,13 +27,11 @@ export default function PipsSurveyPage() {
 	// C. Render components
 
 	return (
-		<Section>
+		<Section withGap withPadding>
 			<Surface>
-				<div className={styles.container}>
-					<PipsSurveyHeader pipId={pipId} />
-					<div className={styles.answersGrid}>
-						{options.map(option => <PipsSurveyOption key={option._id} description={option.content.description} id={option._id} title={option.content.title} />)}
-					</div>
+				<PipsSurveyHeader pipId={pipId} />
+				<div className={styles.answersGrid}>
+					{options.map(option => <PipsSurveyOption key={option._id} description={option.content.description} id={option._id} title={option.content.title} />)}
 				</div>
 			</Surface>
 		</Section>
