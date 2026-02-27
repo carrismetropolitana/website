@@ -1,12 +1,12 @@
 'use client';
-
 /* * */
 
 import { type Facility } from '@carrismetropolitana/api-types/facilities';
-import React, { createContext, useCallback, useContext, useEffect, useState } from 'react';
+import React, { createContext, useCallback, useContext, useMemo, useState } from 'react';
 import useSWR from 'swr';
 
 /* * */
+
 interface PipsSurveyState {
 	selected_answer_code: null | string
 }
@@ -47,82 +47,63 @@ export const PipsContextProvider = ({ children, pipId }: { children: React.React
 	//
 	// A. Setup variables
 
-	const [surveyState, setSurveyState] = useState<PipsSurveyState | undefined>(undefined);
-	const [pipData, setPipData] = useState<Facility | undefined>(undefined);
-	const { data: pipsData, isLoading: isLoadingPipsData } = useSWR<Facility[]>(`https://api.carrismetropolitana.pt/v2/facilities/pips`);
+	const [surveyState, setSurveyState] = useState<PipsSurveyState>({ selected_answer_code: null });
+	const { data: pipsData, isLoading } = useSWR<Facility[]>('https://api.carrismetropolitana.pt/v2/facilities/pips');
+	const pipData = useMemo(() => pipsData?.find(pip => pip.id === pipId), [pipsData, pipId]);
 
 	//
-	// B. Transform data
+	// B. Handle actions
 
-	useEffect(() => {
-		if (!pipsData?.length || !pipId) return;
-		setPipData(pipsData.find(pip => pip.id === pipId));
-	}, [pipsData, pipId]);
-
-	//
-	// C. Handle actions
-
-	const updateSurvey = useCallback((newSurveyState: PipsSurveyState) => {
-		if (!newSurveyState) return;
-		setSurveyState(newSurveyState);
-	},
-	[]);
-
-	const selectAnswer = async (answerCode: string) => {
-		updateSurvey({ selected_answer_code: answerCode });
+	const selectAnswer = useCallback(async (answerCode: string) => {
+		setSurveyState({ selected_answer_code: answerCode });
 		try {
 			await fetch('https://stats.carrismetropolitana.pt/collector/feedback/pipStatus', {
-				body: JSON.stringify({
-					answer_code: answerCode,
-					pip_id: pipId,
-				}),
+				body: JSON.stringify({ answer_code: answerCode, pip_id: pipId }),
 				headers: { 'Content-Type': 'application/json; charset=utf-8' },
 				method: 'POST',
 			});
 		}
 		catch (error) {
-			console.log(error);
+			console.error(error);
 		}
 
-		// if (!pipData?.stop_ids || pipData?.stop_ids.length === 0) {
-		// 	window.location.href = '/stops';
-		// }
-
-		// else
-
-		console.log(pipData?.stop_ids, pipData?.id);
-		if (pipData?.stop_ids?.length === 1) {
-			window.location.href = `/stops/${pipData.stop_ids[0]}`;
+		if (!pipData?.stop_ids?.length) {
+			window.location.href = '/stops';
 		}
-	};
+		else if (pipData.stop_ids.length === 1) {
+			const stopId = pipData.stop_ids[0];
+			window.location.href = `/stops/${stopId}`;
+		}
+	}, [pipId, pipData]);
 
-	const selectStop = (stopId: string) => {
+	const selectStop = useCallback((stopId: string) => {
 		window.location.href = `/stops/${stopId}`;
-	};
+	}, []);
 
+	//
 	// C. Define context value
 
-	const contextValue: PipsContextState = {
+	const value = useMemo<PipsContextState>(() => ({
 		actions: {
 			selectAnswer,
 			selectStop,
 		},
 		data: {
 			allPipsData: pipsData,
-			pipData: pipData,
-			pipId: pipId,
-			survey: surveyState || { selected_answer_code: null },
+			pipData,
+			pipId,
+			survey: surveyState,
 		},
 		flags: {
-			is_loading: isLoadingPipsData,
+			is_loading: isLoading,
 		},
-	};
+	}), [pipsData, pipData, pipId, surveyState, isLoading, selectAnswer, selectStop]);
 
 	//
 	// D. Render components
 
 	return (
-		<PipsContext.Provider value={contextValue}>
+		<PipsContext.Provider value={value}>
 			{children}
 		</PipsContext.Provider>
 	);
