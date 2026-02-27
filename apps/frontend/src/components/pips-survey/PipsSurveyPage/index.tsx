@@ -21,7 +21,7 @@ export default function PipsSurveyPage() {
 
 	const pipsContext = usePipsContext();
 	const options = pipsSurveyOptionsData;
-	const pipId = pipsContext.data.item_id;
+	const pipId = pipsContext.data.pipId || '0';
 
 	//
 	// C. Render components

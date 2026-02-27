@@ -17,7 +17,7 @@ interface PipsContextState {
 		selectStop: (stopId: string) => void
 	}
 	data: {
-		allPipsData: Facility | undefined
+		allPipsData: Facility[] | undefined
 		pipData: Facility | undefined
 		pipId: string | undefined
 		survey: PipsSurveyState
@@ -49,17 +49,14 @@ export const PipsContextProvider = ({ children, pipId }: { children: React.React
 
 	const [surveyState, setSurveyState] = useState<PipsSurveyState | undefined>(undefined);
 	const [pipData, setPipData] = useState<Facility | undefined>(undefined);
-	const { data: pipsData, isLoading: isLoadingPipsData } = useSWR<Facility | undefined>(`https://api.carrismetropolitana.pt/v2/facilities/pips`);
+	const { data: pipsData, isLoading: isLoadingPipsData } = useSWR<Facility[]>(`https://api.carrismetropolitana.pt/v2/facilities/pips`);
 
 	//
 	// B. Transform data
 
 	useEffect(() => {
-		if (!pipsData) return;
-		const pip = pipsData.find((pip: Facility) => pip.id === pipId);
-		if (pip) {
-			setItemData(pip);
-		}
+		if (!pipsData?.length || !pipId) return;
+		setPipData(pipsData.find(pip => pip.id === pipId));
 	}, [pipsData, pipId]);
 
 	//
@@ -87,11 +84,14 @@ export const PipsContextProvider = ({ children, pipId }: { children: React.React
 			console.log(error);
 		}
 
-		if (!pipData?.stop_ids || pipData?.stop_ids.length === 0) {
-			window.location.href = '/stops';
-		}
+		// if (!pipData?.stop_ids || pipData?.stop_ids.length === 0) {
+		// 	window.location.href = '/stops';
+		// }
 
-		else if (pipData?.stop_ids?.length === 1) {
+		// else
+
+		console.log(pipData?.stop_ids, pipData?.id);
+		if (pipData?.stop_ids?.length === 1) {
 			window.location.href = `/stops/${pipData.stop_ids[0]}`;
 		}
 	};
