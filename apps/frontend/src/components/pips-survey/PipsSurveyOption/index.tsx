@@ -7,7 +7,13 @@ import styles from './styles.module.css';
 
 /* * */
 
-export default function FrontendPipSurveyAnswer({ description, id, title }) {
+interface PipsSurveyOptionProps {
+	answerCode: string
+	description: string
+	title: string
+}
+
+export default function FrontendPipSurveyAnswer({ answerCode, description, title }: PipsSurveyOptionProps) {
 	//
 
 	//
@@ -26,7 +32,7 @@ export default function FrontendPipSurveyAnswer({ description, id, title }) {
 	// C. Render components
 
 	return (
-		<div className={styles.container} onClick={() => handleSelectAnswer(id)}>
+		<div className={styles.container} onClick={() => handleSelectAnswer(answerCode)}>
 			<p className={styles.title}>{title}</p>
 			<p className={styles.description}>{description}</p>
 		</div>

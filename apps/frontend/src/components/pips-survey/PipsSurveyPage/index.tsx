@@ -31,7 +31,7 @@ export default function PipsSurveyPage() {
 			<Surface>
 				<PipsSurveyHeader pipId={pipId} />
 				<div className={styles.answersGrid}>
-					{options.map(option => <PipsSurveyOption key={option._id} description={option.content.description} id={option._id} title={option.content.title} />)}
+					{options.map(option => <PipsSurveyOption key={option._id} answerCode={option.content.code} description={option.content.description} title={option.content.title} />)}
 				</div>
 			</Surface>
 		</Section>

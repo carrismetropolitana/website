@@ -1,16 +1,12 @@
 'use client';
+
 /* * */
 
-import { createContext, useCallback, useContext, useState } from 'react';
+import { type Facility } from '@carrismetropolitana/api-types/facilities';
+import React, { createContext, useCallback, useContext, useEffect, useState } from 'react';
 import useSWR from 'swr';
 
 /* * */
-
-interface PipsItemData {
-	pip_id: string
-	stops?: string[]
-}
-
 interface PipsSurveyState {
 	selected_answer_code: null | string
 }
@@ -21,9 +17,13 @@ interface PipsContextState {
 		selectStop: (stopId: string) => void
 	}
 	data: {
-		item_data: PipsItemData | undefined
-		item_id: string | undefined
+		allPipsData: Facility | undefined
+		pipData: Facility | undefined
+		pipId: string | undefined
 		survey: PipsSurveyState
+	}
+	flags: {
+		is_loading: boolean | undefined
 	}
 }
 
@@ -48,14 +48,25 @@ export const PipsContextProvider = ({ children, pipId }: { children: React.React
 	// A. Setup variables
 
 	const [surveyState, setSurveyState] = useState<PipsSurveyState | undefined>(undefined);
-	const { data: itemData } = useSWR<PipsItemData>(pipId && `https://api.carrismetropolitana.pt/datasets/facilities/pip/${pipId}`);
+	const [pipData, setPipData] = useState<Facility | undefined>(undefined);
+	const { data: pipsData, isLoading: isLoadingPipsData } = useSWR<Facility | undefined>(`https://api.carrismetropolitana.pt/v2/facilities/pips`);
 
 	//
-	// B. Handle actions
+	// B. Transform data
+
+	useEffect(() => {
+		if (!pipsData) return;
+		const pip = pipsData.find((pip: Facility) => pip.id === pipId);
+		if (pip) {
+			setItemData(pip);
+		}
+	}, [pipsData, pipId]);
+
+	//
+	// C. Handle actions
 
 	const updateSurvey = useCallback((newSurveyState: PipsSurveyState) => {
 		if (!newSurveyState) return;
-		console.log('updateSurvey', newSurveyState);
 		setSurveyState(newSurveyState);
 	},
 	[]);
@@ -76,20 +87,19 @@ export const PipsContextProvider = ({ children, pipId }: { children: React.React
 			console.log(error);
 		}
 
-		// if (!itemData?.stops || itemData?.stops.length === 0) {
-		// 	window.location.href = '/stops';
-		// }
+		if (!pipData?.stop_ids || pipData?.stop_ids.length === 0) {
+			window.location.href = '/stops';
+		}
 
-		// else if (itemData?.stops?.length === 1) {
-		// 	window.location.href = `/stops/${itemData?.stops[0]}`;
-		// }
+		else if (pipData?.stop_ids?.length === 1) {
+			window.location.href = `/stops/${pipData.stop_ids[0]}`;
+		}
 	};
 
 	const selectStop = (stopId: string) => {
 		window.location.href = `/stops/${stopId}`;
 	};
 
-	//
 	// C. Define context value
 
 	const contextValue: PipsContextState = {
@@ -98,9 +108,13 @@ export const PipsContextProvider = ({ children, pipId }: { children: React.React
 			selectStop,
 		},
 		data: {
-			item_data: itemData,
-			item_id: pipId,
-			survey: surveyState,
+			allPipsData: pipsData,
+			pipData: pipData,
+			pipId: pipId,
+			survey: surveyState || { selected_answer_code: null },
+		},
+		flags: {
+			is_loading: isLoadingPipsData,
 		},
 	};
 
