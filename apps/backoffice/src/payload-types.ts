@@ -15,6 +15,7 @@ export interface Config {
     media: Media;
     'payload-preferences': PayloadPreference;
     'payload-migrations': PayloadMigration;
+     articles: Article
   };
   db: {
     defaultIDType: string;
