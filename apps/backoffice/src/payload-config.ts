@@ -24,6 +24,7 @@ import { Users } from '@/schemas/Users/collection';
 /* * */
 
 import { Settings } from '@/globals/config';
+import { Articles } from '@/schemas/Articles/collection';
 import { GeneralStatus } from '@/schemas/GeneralStatus/global';
 import { HomeSlider } from '@/schemas/HomeSlider/global';
 
@@ -59,7 +60,7 @@ export default buildConfig({
 		user: 'users',
 	},
 
-	collections: [CaseStudies, Media, News, Topics, Users, KnowledgeBase, Notes],
+	collections: [CaseStudies, Media, News, Topics, Users, KnowledgeBase, Notes, Articles],
 
 	csrf: [
 		getPublicVariable('server_url_backoffice').replace(/\/$/, ''),
