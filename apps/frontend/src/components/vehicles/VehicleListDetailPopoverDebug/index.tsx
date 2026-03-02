@@ -34,13 +34,13 @@ export function VehicleListDetailPopoverDebug({ data }: VehicleListDetailPopover
 
 	const renderExtraData = () => {
 		return (
-			<>
+			<div className={styles.container}>
 				<CopyBadge label={`Timestamp: ${timestampString}`} value={timestampString} />
 				<CopyBadge label={`Delay: ${delayString}`} value={delayString} />
 				<CopyBadge label={`Status: ${data.current_status} : ${data.stop_id}`} value={data.current_status} />
 				<CopyBadge label={`Block ID: ${data.block_id}`} value={data.block_id} />
 				<CopyBadge label={`Shift ID: ${data.shift_id}`} value={data.shift_id} />
-			</>
+			</div>
 		);
 	};
 
@@ -49,7 +49,9 @@ export function VehicleListDetailPopoverDebug({ data }: VehicleListDetailPopover
 			<CopyBadge label={`Vehicle ID: ${data.id}`} value={data.id} />
 			<CopyBadge label={`Trip ID: ${data.trip_id}`} value={data.trip_id} />
 
-			{expanded ? <IconEyeMinus className={styles.expandButton} color="var(--color-debug)" onClick={() => setExpanded(prev => !prev)} size={20} /> : <IconEyePlus className={styles.expandButton} color="var(--color-debug)" onClick={() => setExpanded(prev => !prev)} size={20} />}
+			{expanded
+				? <IconEyeMinus className={styles.expandButton} color="var(--color-debug)" onClick={() => setExpanded(prev => !prev)} size={20} />
+				: <IconEyePlus className={styles.expandButton} color="var(--color-debug)" onClick={() => setExpanded(prev => !prev)} size={20} />}
 
 			{expanded && renderExtraData()}
 		</div>

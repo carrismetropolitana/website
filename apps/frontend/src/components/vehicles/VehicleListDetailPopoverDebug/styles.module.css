@@ -11,3 +11,7 @@
 	border: 1px dashed var(--color-debug);
 	border-radius: 10px;
 }
+
+.expandButton {
+	align-self: flex-end;
+}
