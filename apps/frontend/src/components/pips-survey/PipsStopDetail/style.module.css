@@ -1,0 +1,32 @@
+/* * */
+/* CONTAINER */
+
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    padding: 15px;
+    text-align: center;
+    background-color: var(--color-reference-0);
+    border: 1px solid var(--gray-2);
+    border-radius: 10px;
+    box-shadow: 0 0 10px 0 rgb(0 0 0 / 5%);
+  }
+  
+  /* * */
+  /* STOP NAME */
+  
+  .stopName {
+    font-size: 18px;
+    font-weight: 600;
+  }
+  
+  /* * */
+  /* STOP ID */
+  
+  .stopId {
+    font-size: 16px;
+    font-weight: 500;
+  }

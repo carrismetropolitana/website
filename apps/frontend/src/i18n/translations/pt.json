@@ -67,6 +67,10 @@
 			"question": "Existe algum problema com este painel?",
 			"subtitle": "Obrigado por nos ajudar a manter este painel a funcionar.",
 			"title": "Painel {pipId}"
+		},
+		"stops_list": {
+			"no_data": "Nenhuma paragem disponível",
+			"question": "Estas são as paragens associadas a este painel"
 		}
 	},
 	"SelectLine": {

@@ -67,6 +67,10 @@
 			"question": "Is there any problem with this panel?",
 			"subtitle": "Thank you for helping us keep this panel working.",
 			"title": "Display {pipId}"
+		},
+		"stops_list": {
+			"no_data": "No stops available",
+			"question": "These are the stops associated with this panel"
 		}
 	},
 	"SelectLine": {
