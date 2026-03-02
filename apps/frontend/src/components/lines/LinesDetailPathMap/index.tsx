@@ -14,7 +14,7 @@ import { useVehiclesContext } from '@/contexts/Vehicles.context';
 import { centerMap, getBaseGeoJsonFeatureCollection, moveMap } from '@/utils/map.utils';
 import { Vehicle } from '@carrismetropolitana/api-types/vehicles';
 import { Popup, useMap } from '@vis.gl/react-maplibre';
-import { useEffect, useMemo } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 
 import styles from './styles.module.css';
 
@@ -32,6 +32,7 @@ export function LinesDetailPathMap() {
 	const debugContext = useDebugContext();
 
 	const { linesDetailMap } = useMap();
+	const [openVehicleId, setOpenVehicleId] = useState<null | string>(null);
 
 	//
 	// B. Transform Data
@@ -99,9 +100,15 @@ export function LinesDetailPathMap() {
 
 	function handleLayerClick(event) {
 		if (!linesDetailMap) return;
-		const features = linesDetailMap.queryRenderedFeatures(event.point, { layers: [MapViewStylePathInteractiveLayerId] });
-		if (!features.length) return;
-		for (const feature of features) {
+		const vehicleFeatures = linesDetailMap.queryRenderedFeatures(event.point, { layers: [MapViewStyleVehiclesPrimaryLayerId] });
+		if (vehicleFeatures.length > 0) {
+			const vehicleId = String(vehicleFeatures[0].properties?.id ?? '');
+			setOpenVehicleId(prev => (prev === vehicleId ? null : vehicleId));
+			return;
+		}
+		const pathFeatures = linesDetailMap.queryRenderedFeatures(event.point, { layers: [MapViewStylePathInteractiveLayerId] });
+		if (!pathFeatures.length) return;
+		for (const feature of pathFeatures) {
 			if (feature.properties.id !== linesDetailContext.data.active_waypoint?.stop_id) {
 				linesDetailContext.actions.setActiveWaypoint(feature.properties.id, feature.properties.sequence);
 				return;
@@ -121,10 +128,11 @@ export function LinesDetailPathMap() {
 		return (
 			<Popup
 				key={vehicleId}
+
 				anchor="bottom"
 				className={styles.popup}
-				closeButton={false}
-				closeOnClick={false}
+				closeButton={true}
+				closeOnClick={true}
 				latitude={coordinates[1]}
 				longitude={coordinates[0]}
 			>
@@ -136,7 +144,7 @@ export function LinesDetailPathMap() {
 	return (
 		<MapView
 			id="linesDetailMap"
-			interactiveLayerIds={[MapViewStylePathInteractiveLayerId]}
+			interactiveLayerIds={[MapViewStylePathInteractiveLayerId, MapViewStyleVehiclesPrimaryLayerId]}
 			onCenterMap={handleCenterMap}
 			onClick={handleLayerClick}
 		>
@@ -159,7 +167,8 @@ export function LinesDetailPathMap() {
 
 			{debugContext.flags.is_debug_mode && activeVehiclesFeatureCollection && activeVehiclesFeatureCollection.features.map((feature) => {
 				if (!feature.properties?.id || !feature.geometry?.coordinates || feature.geometry?.coordinates.length < 2) return null;
-				const vehicleId = feature.properties?.id;
+				const vehicleId = String(feature.properties.id);
+				if (vehicleId !== openVehicleId) return null;
 				const vehicle = vehiclesContext.actions.getVehicleById(vehicleId);
 				const coordinates = feature.geometry?.coordinates;
 				return renderPopover(vehicleId, [coordinates[0], coordinates[1]], vehicle);
