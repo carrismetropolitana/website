@@ -1,6 +1,6 @@
 /* * */
 
-import PipsSurveyPage from '@/components/pips-survey/PipsSurveyPage';
+import { PipsSurvey } from '@/components/pips-survey/PipsSurvey';
 import { PipsContextProvider } from '@/contexts/Pips.context';
 
 /* * */
@@ -18,7 +18,7 @@ export default async function Page({ params }) {
 
 	return (
 		<PipsContextProvider pipId={pip_Id}>
-			<PipsSurveyPage />
+			<PipsSurvey />
 		</PipsContextProvider>
 	);
 

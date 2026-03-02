@@ -13,7 +13,7 @@ interface PipsSurveyOptionProps {
 	title: string
 }
 
-export default function FrontendPipSurveyAnswer({ answerCode, description, title }: PipsSurveyOptionProps) {
+export function PipsSurveyOption({ answerCode, description, title }: PipsSurveyOptionProps) {
 	//
 
 	//

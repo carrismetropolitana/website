@@ -2,22 +2,22 @@
 
 import { Loader } from '@/components/common/Loader';
 import { NoDataLabel } from '@/components/layout/NoDataLabel';
-import PipsStopDetail from '@/components/pips-survey/PipsStopDetail';
+import { PipsStopDetail } from '@/components/pips-survey/PipsStopDetail';
 import { usePipsContext } from '@/contexts/Pips.context';
 import { useTranslations } from 'next-intl';
 
-import styles from './FrontendPipStops.module.css';
+import styles from './styles.module.css';
 
 /* * */
 
-export default function FrontendPipStops() {
+export function PipsStopsList() {
 	//
 
 	//
 	// A. Setup variables
 
 	const pipsContext = usePipsContext();
-	const t = useTranslations('PipsStopsList');
+	const t = useTranslations('PipsSurvey.stops_list');
 
 	//
 	// B. Render components

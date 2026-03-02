@@ -3,17 +3,16 @@
 
 import { Section } from '@/components/layout/Section';
 import { Surface } from '@/components/layout/Surface';
+import { pipsSurveyOptionsData } from '@/components/pips-survey/_data/options';
 import { PipsSurveyHeader } from '@/components/pips-survey/PipsSurveyHeader';
-import PipsSurveyOption from '@/components/pips-survey/PipsSurveyOption';
+import { PipsSurveyOption } from '@/components/pips-survey/PipsSurveyOption';
 import { usePipsContext } from '@/contexts/Pips.context';
 
 import styles from './styles.module.css';
 
-import { pipsSurveyOptionsData } from '../_data/options';
-
 /* * */
 
-export default function PipsSurveyPage() {
+export function PipPage() {
 	//
 
 	//

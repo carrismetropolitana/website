@@ -2,10 +2,9 @@
 
 import { Loader } from '@/components/common/Loader';
 import { usePipsContext } from '@/contexts/Pips.context';
-import { getPublicVariable } from '@carrismetropolitana/website-shared-settings';
-import useSWR from 'swr';
+import { useStopsContext } from '@/contexts/Stops.context';
 
-import styles from './FrontendPipStopsStop.module.css';
+import styles from './styles.module.css';
 
 /* * */
 
@@ -15,17 +14,19 @@ interface PipsStopDetailProps {
 
 /* * */
 
-export default function FrontendPipStopsStop({ stopId }: PipsStopDetailProps) {
+export function PipsStopDetail({ stopId }: PipsStopDetailProps) {
 	//
 
 	//
 	// A. Setup variables
 
 	const pipsContext = usePipsContext();
+	const stopsContext = useStopsContext();
+
 	//
 	// B. Handle actions
 
-	const { data: stopData } = useSWR(stopId && `${getPublicVariable('api_url')}/v2/stops/${stopId}`);
+	const stop = stopsContext.actions.getStopById(stopId);
 
 	//
 	// B. Handle actions
@@ -37,10 +38,10 @@ export default function FrontendPipStopsStop({ stopId }: PipsStopDetailProps) {
 	//
 	// C. Render components
 
-	if (stopData) {
+	if (stop) {
 		<div className={styles.container} onClick={handleSelectAnswer}>
-			<p className={styles.stopName}>{stopData.name}</p>
-			<p className={styles.stopId}>{stopData.id}</p>
+			<p className={styles.stopName}>{stop?.long_name}</p>
+			<p className={styles.stopId}>{stop?.id}</p>
 		</div>;
 	}
 
