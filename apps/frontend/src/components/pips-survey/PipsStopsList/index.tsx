@@ -18,11 +18,13 @@ export function PipsStopsList() {
 
 	const pipsContext = usePipsContext();
 	const t = useTranslations('PipsSurvey.stops_list');
+	const pipData = pipsContext.data.pipData;
+	const stopIds = pipData?.stop_ids ?? [];
 
 	//
 	// B. Render components
 
-	if (pipsContext.flags.is_loading || !pipsContext.data.pipData) {
+	if (pipsContext.flags.is_loading || !pipData) {
 		return (
 			<Section withGap withPadding>
 				<Loader visible />
@@ -30,7 +32,7 @@ export function PipsStopsList() {
 		);
 	}
 
-	if (!pipsContext.data.pipData.stop_ids?.length) {
+	if (!stopIds.length) {
 		return (
 			<Section withGap withPadding>
 				<NoDataLabel text={t('no_data')} />
@@ -41,7 +43,7 @@ export function PipsStopsList() {
 	return (
 		<Section withGap withPadding>
 			<Grid columns="abcd" withGap>
-				{pipsContext.data.pipData.stop_ids.map(stopId => (
+				{stopIds.map(stopId => (
 					<PipsStopDetail key={stopId} stopId={stopId} />
 				))}
 			</Grid>

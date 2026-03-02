@@ -18,6 +18,7 @@ export function PipsSurvey() {
 	// A. Setup variables
 
 	const pipsContext = usePipsContext();
+	const hasSelectedAnswer = !!pipsContext.data.survey.selected_answer_code;
 
 	//
 	// C. Render components
@@ -26,7 +27,7 @@ export function PipsSurvey() {
 		<Section withPadding>
 			<Surface>
 				<PipsSurveyHeader pipId={pipsContext.data.pipId} />
-				{!pipsContext.data.survey.selected_answer_code ? <PipPage /> : <PipsStopsList />}
+				{!hasSelectedAnswer ? <PipPage /> : <PipsStopsList />}
 			</Surface>
 		</Section>
 	);

@@ -27,9 +27,13 @@ export function PipsSurveyHeader({ pipId }: PipsSurveyHeaderProps) {
 	//
 	// B. Render components
 
+	const questionText = pipsContext.data.survey.selected_answer_code
+		? t('question_pip_stops')
+		: t('question');
+
 	return (
 		<Section heading={t('title', { pipId: Number(pipId) })} subheading={t('subtitle')} withGap withPadding>
-			{!pipsContext.data.survey.selected_answer_code ? <p className={styles.question}>{t('question')}</p> : <p className={styles.question}>{t('question_pip_stops')}</p>}
+			<p className={styles.question}>{questionText}</p>
 		</Section>
 	);
 

@@ -47,7 +47,7 @@ export const pipsSurveyOptionsData: PipsSurveyOptionsSchema[] = [
 		content: {
 			code: 'screen_damage',
 			description: 'O painel está avariado (manchas, riscas). Não é possível ler a informação.',
-			title: 'Danos Físicos no Painel ',
+			title: 'Danos Físicos no Painel',
 		},
 	},
 	{

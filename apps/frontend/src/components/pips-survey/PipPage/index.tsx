@@ -23,7 +23,14 @@ export function PipPage() {
 	return (
 		<Section withGap withPadding>
 			<div className={styles.answersGrid}>
-				{options.map(option => <PipsSurveyOption key={option._id} answerCode={option.content.code} description={option.content.description} title={option.content.title} />)}
+				{options.map(option => (
+					<PipsSurveyOption
+						key={option._id}
+						answerCode={option.content.code ?? ''}
+						description={option.content.description ?? ''}
+						title={option.content.title ?? ''}
+					/>
+				))}
 			</div>
 		</Section>
 	);

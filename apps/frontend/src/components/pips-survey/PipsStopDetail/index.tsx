@@ -28,10 +28,7 @@ export function PipsStopDetail({ stopId }: PipsStopDetailProps) {
 
 	const stop = stopsContext.actions.getStopById(String(stopId));
 
-	//
-	// B. Handle actions
-
-	const handleSelectAnswer = () => {
+	const handleSelectStop = () => {
 		pipsContext.actions.selectStop(String(stopId));
 	};
 
@@ -40,7 +37,7 @@ export function PipsStopDetail({ stopId }: PipsStopDetailProps) {
 
 	if (stop) {
 		return (
-			<div className={styles.container} onClick={handleSelectAnswer}>
+			<div className={styles.container} onClick={handleSelectStop}>
 				<p className={styles.stopName}>{stop.long_name}</p>
 				<p className={styles.stopId}>{stop.id}</p>
 			</div>
@@ -50,4 +47,6 @@ export function PipsStopDetail({ stopId }: PipsStopDetailProps) {
 	if (pipsContext.flags.is_loading) {
 		return <Loader visible />;
 	}
+
+	return null;
 }

@@ -24,7 +24,7 @@ export function PipsSurveyOption({ answerCode, description, title }: PipsSurveyO
 	//
 	// B. Handle actions
 
-	const handleSelectAnswer = (answerCode: string) => {
+	const handleSelectAnswer = () => {
 		pipsContext.actions.selectAnswer(answerCode);
 	};
 
@@ -32,7 +32,7 @@ export function PipsSurveyOption({ answerCode, description, title }: PipsSurveyO
 	// C. Render components
 
 	return (
-		<div className={styles.container} onClick={() => handleSelectAnswer(answerCode)}>
+		<div className={styles.container} onClick={handleSelectAnswer}>
 			<p className={styles.title}>{title}</p>
 			<p className={styles.description}>{description}</p>
 		</div>
