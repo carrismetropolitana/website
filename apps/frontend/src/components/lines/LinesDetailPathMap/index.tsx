@@ -32,7 +32,7 @@ export function LinesDetailPathMap() {
 	const debugContext = useDebugContext();
 
 	const { linesDetailMap } = useMap();
-	const [openVehicleId, setOpenVehicleId] = useState<null | string>(null);
+	const [openVehicleIds, setOpenVehicleIds] = useState<string[]>([]);
 
 	//
 	// B. Transform Data
@@ -103,7 +103,10 @@ export function LinesDetailPathMap() {
 		const vehicleFeatures = linesDetailMap.queryRenderedFeatures(event.point, { layers: [MapViewStyleVehiclesPrimaryLayerId] });
 		if (vehicleFeatures.length > 0) {
 			const vehicleId = String(vehicleFeatures[0].properties?.id ?? '');
-			setOpenVehicleId(prev => (prev === vehicleId ? null : vehicleId));
+			setOpenVehicleIds((prev) => {
+				if (prev.includes(vehicleId)) return prev;
+				return [...prev, vehicleId];
+			});
 			return;
 		}
 		const pathFeatures = linesDetailMap.queryRenderedFeatures(event.point, { layers: [MapViewStylePathInteractiveLayerId] });
@@ -121,6 +124,10 @@ export function LinesDetailPathMap() {
 		centerMap(linesDetailMap, [linesDetailContext.data.active_shape.geojson], { padding: 60 });
 	}
 
+	function handleClosePopup(vehicleId: string) {
+		setOpenVehicleIds(prev => prev.filter(id => id !== vehicleId));
+	};
+
 	//
 	// D. Render copmonents
 
@@ -128,13 +135,13 @@ export function LinesDetailPathMap() {
 		return (
 			<Popup
 				key={vehicleId}
-
 				anchor="bottom"
 				className={styles.popup}
 				closeButton={true}
-				closeOnClick={true}
+				closeOnClick={false}
 				latitude={coordinates[1]}
 				longitude={coordinates[0]}
+				onClose={() => handleClosePopup(vehicleId)}
 			>
 				<VehicleListDetailPopoverDebug data={vehicle} />
 			</Popup>
@@ -168,7 +175,7 @@ export function LinesDetailPathMap() {
 			{debugContext.flags.is_debug_mode && activeVehiclesFeatureCollection && activeVehiclesFeatureCollection.features.map((feature) => {
 				if (!feature.properties?.id || !feature.geometry?.coordinates || feature.geometry?.coordinates.length < 2) return null;
 				const vehicleId = String(feature.properties.id);
-				if (vehicleId !== openVehicleId) return null;
+				if (!openVehicleIds.includes(vehicleId)) return null;
 				const vehicle = vehiclesContext.actions.getVehicleById(vehicleId);
 				const coordinates = feature.geometry?.coordinates;
 				return renderPopover(vehicleId, [coordinates[0], coordinates[1]], vehicle);
