@@ -70,9 +70,13 @@ export const PipsContextProvider = ({ children, pipId }: { children: React.React
 		if (!pipData?.stop_ids?.length) {
 			window.location.href = '/stops';
 		}
+
 		else if (pipData.stop_ids.length === 1) {
 			const stopId = pipData.stop_ids[0];
 			window.location.href = `/stops/${stopId}`;
+		}
+		else if (pipData.stop_ids.length > 1) {
+			return;
 		}
 	}, [pipId, pipData]);
 

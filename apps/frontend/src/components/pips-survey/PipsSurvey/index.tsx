@@ -26,7 +26,7 @@ export function PipsSurvey() {
 		<Section withPadding>
 			<Surface>
 				<PipsSurveyHeader pipId={pipsContext.data.pipId} />
-				{!pipsContext.data.survey ? <PipPage /> : <PipsStopsList />}
+				{!pipsContext.data.survey.selected_answer_code ? <PipPage /> : <PipsStopsList />}
 			</Surface>
 		</Section>
 	);

@@ -2,7 +2,6 @@
 /* * */
 
 import { Section } from '@/components/layout/Section';
-import { Surface } from '@/components/layout/Surface';
 import { pipsSurveyOptionsData } from '@/components/pips-survey/_data/options';
 import { PipsSurveyOption } from '@/components/pips-survey/PipsSurveyOption';
 
@@ -23,11 +22,9 @@ export function PipPage() {
 
 	return (
 		<Section withGap withPadding>
-			<Surface>
-				<div className={styles.answersGrid}>
-					{options.map(option => <PipsSurveyOption key={option._id} answerCode={option.content.code} description={option.content.description} title={option.content.title} />)}
-				</div>
-			</Surface>
+			<div className={styles.answersGrid}>
+				{options.map(option => <PipsSurveyOption key={option._id} answerCode={option.content.code} description={option.content.description} title={option.content.title} />)}
+			</div>
 		</Section>
 	);
 
