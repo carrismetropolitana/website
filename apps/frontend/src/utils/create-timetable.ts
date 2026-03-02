@@ -73,9 +73,11 @@ export function createTimetable(primaryPatternGroup: Pattern, secondaryPatternGr
 			trip.schedule.forEach((schedule) => {
 				// Skip if the schedule is not for the given stop ID (removed stop sequence check)
 				if (schedule.stop_id !== stopId /* || schedule.stop_sequence !== stopSequence */) return;
+
 				// Skip if this is the last stop of the variant (terminus arrival only)
 				const lastWaypoint = patternGroup.path[patternGroup.path.length - 1];
 				if (schedule.stop_id === lastWaypoint.stop_id && schedule.stop_sequence === lastWaypoint.stop_sequence) return;
+
 				// Extract the hour and minute from the arrival time in 24h format
 				const [hourValue, minuteValue] = schedule.arrival_time.split(':').map(Number);
 				const [hour24, minute24] = schedule.arrival_time_24h.split(':').map(timeComponent => String(Number(timeComponent)).padStart(2, '0'));
