@@ -65,6 +65,7 @@
 	"PipsSurvey": {
 		"header": {
 			"question": "Existe algum problema com este painel?",
+			"question_pip_stops": "Estas são as paragens associadas a este painel",
 			"subtitle": "Obrigado por nos ajudar a manter este painel a funcionar.",
 			"title": "Painel {pipId}"
 		},
