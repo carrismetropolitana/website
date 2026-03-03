@@ -45,6 +45,7 @@ export function SelectStops({
 			onChange={onSelectStopIds}
 			placeholder={placeholder || t('placeholder')}
 			value={selectedStopIds}
+			w="100%"
 			clearable
 			searchable
 		/>

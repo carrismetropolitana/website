@@ -11,13 +11,11 @@ import { createContext, useContext, useEffect, useMemo, useState } from 'react';
 
 interface StopsPipContextState {
 	data: {
+		pip_id?: string
 		stops: Stop[]
 	}
 	display: {
 		scale: number
-	}
-	filters: {
-		max_lines: number
 	}
 	flags: {
 		is_loading: boolean
@@ -56,9 +54,12 @@ export const StopsPipContextProvider = ({ children }) => {
 		const raw = searchParams.get('stop_ids');
 		return raw ? raw.split(',') : [];
 	}, [searchParams]);
-	const maxLines = useMemo(() =>
-		parseInt(searchParams.get('max_lines')) || undefined,
-	[searchParams]);
+
+	const pipId = useMemo(() => {
+		const raw = searchParams.get('pip_id');
+		return raw && raw.trim().length > 0 ? raw.trim() : undefined;
+	}, [searchParams]);
+
 	const maxStops = useMemo(() =>
 		parseInt(searchParams.get('max_stops')) || undefined,
 	[searchParams]);
@@ -122,13 +123,11 @@ export const StopsPipContextProvider = ({ children }) => {
 
 	const contextValue: StopsPipContextState = {
 		data: {
+			pip_id: pipId,
 			stops: dataStopsState,
 		},
 		display: {
 			scale,
-		},
-		filters: {
-			max_lines: maxLines,
 		},
 		flags: {
 			is_loading: stopsLoading,

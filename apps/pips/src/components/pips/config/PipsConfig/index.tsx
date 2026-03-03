@@ -1,13 +1,13 @@
 'use client';
 
 import { Loader } from '@/components/common/Loader';
-import { SelectMaxLines } from '@/components/common/SelectMaxLines';
 import { SelectStops } from '@/components/common/SelectStops';
+import { Grid } from '@/components/layout/Grid';
 import { Section } from '@/components/layout/Section';
 import { Surface } from '@/components/layout/Surface';
 import { useStopsContext } from '@/contexts/Stops.context';
 import { useStopsPipContext } from '@/contexts/StopsPip.context';
-import { Button, CopyButton, NumberInput } from '@mantine/core';
+import { Button, CopyButton, NumberInput, TextInput } from '@mantine/core';
 import { IconLink, IconZoomScan } from '@tabler/icons-react';
 import { useTranslations } from 'next-intl';
 import Link from 'next/link';
@@ -27,7 +27,7 @@ export function PipsConfig() {
 	const stopsContext = useStopsContext();
 
 	const [selectedStopIds, setSelectedStopIds] = useState<string[]>([]);
-	const [maxLines, setMaxLines] = useState('3');
+	const [pipId, setPipId] = useState('');
 	const [scale, setScale] = useState('1.0');
 
 	//
@@ -41,15 +41,15 @@ export function PipsConfig() {
 		if (selectedStopIds.length > 0) {
 			params.set('stop_ids', selectedStopIds.join(','));
 		}
-		if (maxLines) {
-			params.set('max_lines', maxLines);
+		if (pipId.trim().length > 0) {
+			params.set('pip_id', pipId.trim());
 		}
 		if (scale !== '1.0') {
 			params.set('scale', scale);
 		}
 
 		return `${window.location.origin}/pips${params.toString() ? `?${params.toString()}` : ''}`;
-	}, [selectedStopIds, maxLines, scale]);
+	}, [selectedStopIds, pipId, scale]);
 
 	const isButtonDisabled = useMemo(() => selectedStopIds.length === 0, [selectedStopIds]);
 
@@ -67,8 +67,8 @@ export function PipsConfig() {
 		setSelectedStopIds(ids);
 	};
 
-	const handleChangeMaxLines = (value: number | string) => {
-		setMaxLines(value ? String(value) : '');
+	const handleChangePipId = (value: string) => {
+		setPipId(value);
 	};
 
 	const handleChangeScale = (value: number | string) => {
@@ -92,42 +92,40 @@ export function PipsConfig() {
 				<Section heading={t('section_heading')} />
 
 				<div className={styles.filtersWrapper}>
-					<div className={styles.mainInputsRow}>
-						<div className={styles.stopsInput}>
-							<SelectStops
-								data={parsedStops}
-								label="Paragens"
-								onSelectStopIds={handleSelectStopIds}
-								selectedStopIds={selectedStopIds}
-							/>
-						</div>
-
-						<div className={styles.maxLinesInput}>
-							<SelectMaxLines
-								label="Número de circulações"
-								maxLines={maxLines}
-								onChangeMaxLines={handleChangeMaxLines}
-							/>
-						</div>
-					</div>
-
-					<div className={styles.displayConfigWrapper}>
-						<NumberInput
-							autoComplete="off"
-							decimalScale={1}
-							description="Fator de escala (0.5-3.0)"
-							label="Fator de zoom da página"
-							leftSection={<IconZoomScan size={20} />}
-							max={3.0}
-							min={0.5}
-							onChange={handleChangeScale}
-							placeholder="0.5 - 3.0"
-							size="md"
-							step={0.1}
-							value={scale}
+					<Section withGap>
+						<SelectStops
+							data={parsedStops}
+							label="Paragens"
+							onSelectStopIds={handleSelectStopIds}
+							selectedStopIds={selectedStopIds}
 						/>
 
-					</div>
+						<Grid columns="ab" withGap>
+							<TextInput
+								description="Identificador do PIP (ex: 504)"
+								label="PIP ID"
+								onChange={event => handleChangePipId(event.currentTarget.value)}
+								placeholder="504"
+								size="md"
+								value={pipId}
+							/>
+
+							<NumberInput
+								autoComplete="off"
+								decimalScale={1}
+								description="Fator de escala (0.5-3.0)"
+								label="Fator de zoom da página"
+								leftSection={<IconZoomScan size={20} />}
+								max={3.0}
+								min={0.5}
+								onChange={handleChangeScale}
+								placeholder="0.5 - 3.0"
+								size="md"
+								step={0.1}
+								value={scale}
+							/>
+						</Grid>
+					</Section>
 
 					<div className={styles.buttonsWrapper}>
 						<Button component={Link} disabled={isButtonDisabled} href={constructedUrl} variant="primary">{t('go_to_pips')}</Button>

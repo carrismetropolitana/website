@@ -3,6 +3,7 @@
 /* * */
 
 import { LottiePlayer } from '@/components/common/LottiePlayer';
+import { useStopsPipContext } from '@/contexts/StopsPip.context';
 import { Text } from '@mantine/core';
 import { Dates } from '@tmlmobilidade/dates';
 import Link from 'next/link';
@@ -13,6 +14,8 @@ import styles from './styles.module.css';
 /* * */
 
 export function PipsHeader() {
+	const stopsPipContext = useStopsPipContext();
+	const pipId = stopsPipContext.data.pip_id;
 	//
 	// A. Live clock
 
@@ -43,8 +46,7 @@ export function PipsHeader() {
 
 			{/* Stop ID */}
 			<div className={styles.context}>
-				<Text className={styles.stop}>ID: 504</Text>
-				{/* This must come from PipsConfig */}
+				<Text className={styles.stop}>ID: {pipId || '--'}</Text>
 			</div>
 
 			{/* Branding */}
