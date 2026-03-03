@@ -3,7 +3,7 @@
 import { Loader } from '@/components/common/Loader';
 import { useStopsPipContext } from '@/contexts/StopsPip.context';
 
-import { PipsConfig } from '../PipsConfig';
+import { PipsConfig } from '../../config/PipsConfig';
 import { PipsDisplay } from '../PipsDisplay';
 
 export function PipsHome() {

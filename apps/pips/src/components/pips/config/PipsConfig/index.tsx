@@ -7,8 +7,8 @@ import { Section } from '@/components/layout/Section';
 import { Surface } from '@/components/layout/Surface';
 import { useStopsContext } from '@/contexts/Stops.context';
 import { useStopsPipContext } from '@/contexts/StopsPip.context';
-import { Button, CopyButton, NumberInput, Switch, Text } from '@mantine/core';
-import { IconArrowsVertical, IconCircleNumber0, IconLink, IconZoomScan } from '@tabler/icons-react';
+import { Button, CopyButton, NumberInput } from '@mantine/core';
+import { IconLink, IconZoomScan } from '@tabler/icons-react';
 import { useTranslations } from 'next-intl';
 import Link from 'next/link';
 import { useMemo, useState } from 'react';
@@ -29,9 +29,6 @@ export function PipsConfig() {
 	const [selectedStopIds, setSelectedStopIds] = useState<string[]>([]);
 	const [maxLines, setMaxLines] = useState('3');
 	const [scale, setScale] = useState('1.0');
-	const [autoScroll, setAutoScroll] = useState(false);
-	const [scrollSpeed, setScrollSpeed] = useState('50');
-	const [scrollPause, setScrollPause] = useState('2000');
 
 	//
 	// B. Transform data
@@ -50,18 +47,9 @@ export function PipsConfig() {
 		if (scale !== '1.0') {
 			params.set('scale', scale);
 		}
-		if (autoScroll) {
-			params.set('auto_scroll', 'true');
-		}
-		if (scrollSpeed !== '50') {
-			params.set('scroll_speed', scrollSpeed);
-		}
-		if (scrollPause !== '2000') {
-			params.set('scroll_pause', scrollPause);
-		}
 
 		return `${window.location.origin}/pips${params.toString() ? `?${params.toString()}` : ''}`;
-	}, [selectedStopIds, maxLines, scale, autoScroll, scrollSpeed, scrollPause]);
+	}, [selectedStopIds, maxLines, scale]);
 
 	const isButtonDisabled = useMemo(() => selectedStopIds.length === 0, [selectedStopIds]);
 
@@ -85,18 +73,6 @@ export function PipsConfig() {
 
 	const handleChangeScale = (value: number | string) => {
 		setScale(value ? String(value) : '1.0');
-	};
-
-	const handleChangeAutoScroll = (checked: boolean) => {
-		setAutoScroll(checked);
-	};
-
-	const handleChangeScrollSpeed = (value: number | string) => {
-		setScrollSpeed(value ? String(value) : '50');
-	};
-
-	const handleChangeScrollPause = (value: number | string) => {
-		setScrollPause(value ? String(value) : '2000');
 	};
 
 	//
@@ -150,46 +126,6 @@ export function PipsConfig() {
 							step={0.1}
 							value={scale}
 						/>
-
-						<div className={styles.switchWrapper}>
-							<Switch
-								checked={autoScroll}
-								description="Ativa o scroll automático na página caso o conteúdo exceda a altura da janela"
-								label="Auto Scroll"
-								onChange={event => handleChangeAutoScroll(event.currentTarget.checked)}
-								size="md"
-							/>
-						</div>
-
-						{autoScroll && (
-							<>
-								<NumberInput
-									autoComplete="off"
-									description="Milissegundos entre passos (10-500ms)"
-									label="Velocidade de Scroll"
-									leftSection={<IconArrowsVertical size={20} />}
-									max={500}
-									min={10}
-									onChange={handleChangeScrollSpeed}
-									placeholder="10-500ms"
-									size="md"
-									value={scrollSpeed}
-								/>
-
-								<NumberInput
-									autoComplete="off"
-									description="Pausa no topo/fundo (500-10000ms)"
-									label="Pausa de Scroll"
-									leftSection={<IconCircleNumber0 size={20} />}
-									max={10000}
-									min={500}
-									onChange={handleChangeScrollPause}
-									placeholder="500-10000ms"
-									size="md"
-									value={scrollPause}
-								/>
-							</>
-						)}
 
 					</div>
 

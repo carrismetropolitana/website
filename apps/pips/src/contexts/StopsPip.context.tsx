@@ -14,10 +14,7 @@ interface StopsPipContextState {
 		stops: Stop[]
 	}
 	display: {
-		auto_scroll: boolean
 		scale: number
-		scroll_pause: number
-		scroll_speed: number
 	}
 	filters: {
 		max_lines: number
@@ -70,36 +67,11 @@ export const StopsPipContextProvider = ({ children }) => {
 	const scale = useMemo(() => {
 		const raw = searchParams.get('scale');
 		const parsed = parseFloat(raw);
-		// Validate range: 0.5 to 3.0
-		if (!isNaN(parsed) && parsed >= 0.5 && parsed <= 3.0) {
+		// Validate range: 0.1 to 3.0
+		if (!isNaN(parsed) && parsed >= 0.1 && parsed <= 3.0) {
 			return parsed;
 		}
 		return 1.0; // Default scale
-	}, [searchParams]);
-
-	const autoScroll = useMemo(() => {
-		const raw = searchParams.get('auto_scroll');
-		return raw === 'true' || raw === '1';
-	}, [searchParams]);
-
-	const scrollSpeed = useMemo(() => {
-		const raw = searchParams.get('scroll_speed');
-		const parsed = parseInt(raw);
-		// Validate range: 10ms to 500ms
-		if (!isNaN(parsed) && parsed >= 10 && parsed <= 500) {
-			return parsed;
-		}
-		return 50; // Default scroll speed in ms
-	}, [searchParams]);
-
-	const scrollPause = useMemo(() => {
-		const raw = searchParams.get('scroll_pause');
-		const parsed = parseInt(raw);
-		// Validate range: 500ms to 10000ms
-		if (!isNaN(parsed) && parsed >= 500 && parsed <= 10000) {
-			return parsed;
-		}
-		return 2000; // Default pause duration in ms
 	}, [searchParams]);
 
 	//
@@ -153,10 +125,7 @@ export const StopsPipContextProvider = ({ children }) => {
 			stops: dataStopsState,
 		},
 		display: {
-			auto_scroll: autoScroll,
 			scale,
-			scroll_pause: scrollPause,
-			scroll_speed: scrollSpeed,
 		},
 		filters: {
 			max_lines: maxLines,

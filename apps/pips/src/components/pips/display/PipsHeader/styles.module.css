@@ -1,0 +1,73 @@
+.container {
+	display: grid;
+	grid-template-columns: auto 1fr auto;
+	align-items: center;
+	padding: 0 var(--size-spacing-20);
+	color: var(--color-system-text-100);
+	background: var(--color-system-background-100);
+}
+
+.logo {
+	display: flex;
+	align-items: center;
+	justify-self: center;
+}
+
+.context {
+	line-height: 1.2;
+	text-align: center;
+}
+
+.stop {
+	font-size: 22px;
+	font-weight: 600;
+	letter-spacing: 0.3px;
+}
+
+.subtitle {
+	display: block;
+	margin-top: 4px;
+	font-size: 14px;
+	opacity: 0.7;
+}
+
+/* * */
+/* CLOCK */
+
+.dateContainer {
+	display: flex;
+	flex-direction: column;
+	gap: 4px;
+	align-items: flex-end;
+	font-size: 14px;
+	color: var(--color-system-text-70);
+}
+
+.timeContainer {
+    position: relative;
+	display: flex;
+    justify-content: flex-end;
+	width: 100%;
+  	font-feature-settings: "tnum";
+	font-variant-numeric: tabular-nums;
+}
+
+.hours, .minutes, .seconds {
+	font-family: var(--font-family-monospace);
+	font-size: 42px;
+	font-weight: 800;
+	line-height: 1;
+}
+
+.seconds {
+    align-self: flex-end;
+    margin-left: 5px;
+	font-size: 21px;
+	opacity: 0.25;
+}
+
+.date {
+	font-size: 28px;
+	font-weight: 500;
+	color: var(--color-system-text-70);
+}
