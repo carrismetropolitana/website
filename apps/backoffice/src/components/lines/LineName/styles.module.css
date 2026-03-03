@@ -8,8 +8,15 @@
 	overflow: hidden;
 	text-overflow: ellipsis;
 	-webkit-line-clamp: 3;
-	color: #fff;
 	-webkit-box-orient: vertical;
+}
+
+.name[data-theme='light'] {
+	color: #000;
+}
+
+.name[data-theme='dark'] {
+	color: #fff;
 }
 
 /* * */

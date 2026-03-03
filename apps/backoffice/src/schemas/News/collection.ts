@@ -19,11 +19,10 @@ export const News: CollectionConfig = {
 
 	},
 	admin: {
+		defaultColumns: ['featured_image', 'title', 'publishedAt', '_status'],
 		useAsTitle: 'title',
 	},
-
 	fields: [
-
 		{
 			label: 'Título',
 			name: 'title',
