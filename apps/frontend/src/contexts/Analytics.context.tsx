@@ -4,7 +4,7 @@
 
 import { type Ampli, ampli } from '@/amplitude';
 import { useConsentContext } from '@/contexts/Consent.context';
-import { GoogleTagManager } from '@next/third-parties/google';
+// import { GoogleTagManager } from '@next/third-parties/google';
 import pjson from 'package.json';
 import { createContext, useContext, useEffect } from 'react';
 
@@ -107,7 +107,7 @@ export const AnalyticsContextProvider = ({ children }) => {
 
 	return (
 		<AnalyticsContext.Provider value={contextValue}>
-			{consentContext.data.enabled_analytics && <GoogleTagManager gtmId="AW-17080796220" />}
+			{/* {consentContext.data.enabled_analytics && <GoogleTagManager gtmId="AW-17080796220" />} */}
 			{children}
 		</AnalyticsContext.Provider>
 	);
