@@ -74,7 +74,7 @@ export function createTimetable(primaryPatternGroup: Pattern, secondaryPatternGr
 				// Skip if the schedule is not for the given stop ID (removed stop sequence check)
 				if (schedule.stop_id !== stopId /* || schedule.stop_sequence !== stopSequence */) return;
 
-				// Skip if this is the last stop of the variant (terminus arrival only)
+				// Skip if this is the last stop of the variant
 				const lastWaypoint = patternGroup.path[patternGroup.path.length - 1];
 				if (schedule.stop_id === lastWaypoint.stop_id && schedule.stop_sequence === lastWaypoint.stop_sequence) return;
 
