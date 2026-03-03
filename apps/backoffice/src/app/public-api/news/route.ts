@@ -16,6 +16,7 @@ export const GET = async () => {
 		limit: 0,
 		sort: '-publishedAt',
 		where: {
+			_status: { equals: 'published' },
 			or: [
 				{ is_unlisted: { equals: false } },
 				{ is_unlisted: { equals: undefined } },
