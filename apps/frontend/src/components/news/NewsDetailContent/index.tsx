@@ -2,42 +2,55 @@
 
 /* * */
 
-import { useEffect } from 'react';
+import { useDebugContext } from '@/contexts/Debug.context';
+import { NewsData } from '@/types/news.types';
+import { useRenderLexicalNode } from '@/utils/renderLexicalNode';
 
 import styles from './styles.module.css';
 
 /* * */
 
-export function NewsDetailContent({ content }: { content: string }) {
+interface NewsDetailContentProps {
+	data: NewsData
+}
+
+/* * */
+
+export function NewsDetailContent({ data }: NewsDetailContentProps) {
 	//
 
 	//
-	// A. Transform data
+	// A. Setup variables
 
-	useEffect(() => {
-		// Remove unecessary Wordpress HTML
-		document.querySelectorAll('#news-content-wrapper .wp-block-spacer').forEach(el => el.remove());
-		// Select all img elements that are descendants of the specified class
-		document.querySelectorAll(`#news-content-wrapper img`).forEach((el) => {
-			el.removeAttribute('style');
-			el.removeAttribute('width');
-			el.removeAttribute('height');
-			el.removeAttribute('sizes');
-		});
-		// Select all marks with yellow background
-		document.querySelectorAll(`#news-content-wrapper mark`).forEach((el) => {
-			const currentBackgroundColor = getComputedStyle(el).backgroundColor;
-			if (currentBackgroundColor === '#ffdd00' || currentBackgroundColor === 'rgb(255, 221, 0)') {
-				el.classList.add('override-mark-highlight');
-			}
-		});
-	});
+	const renderLexicalNode = useRenderLexicalNode();
+	const debugContext = useDebugContext();
+
+	const bodyJSON = typeof data.body === 'string' ? JSON.parse(data.body) : data.body;
+	const rootNode = bodyJSON?.root || bodyJSON;
 
 	//
 	// B. Render components
 
 	return (
-		<div className={styles.content} dangerouslySetInnerHTML={{ __html: content }} id="news-content-wrapper" />
+		<>
+
+			{data.body && rootNode && (
+
+				<section className={styles.content}>
+
+					{renderLexicalNode(rootNode)}
+
+					{debugContext.flags.is_debug_mode && (
+						<details>
+							<summary>Raw Lexical JSON</summary>
+							<pre style={{ whiteSpace: 'pre-wrap' }}>{JSON.stringify(data, null, 2)}</pre>
+						</details>
+					)}
+				</section>
+
+			)}
+
+		</>
 	);
 
 	//

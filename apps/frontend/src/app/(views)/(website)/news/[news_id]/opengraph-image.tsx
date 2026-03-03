@@ -14,7 +14,7 @@ export default async function Image({ params }) {
 	//
 	// A. Fetch data
 
-	const newsResponse = await fetch(`${getPublicVariable('api_url')}/api/news/${params.news_id}`);
+	const newsResponse = await fetch(`${getPublicVariable('server_url_backoffice')}/admin/public-api/news/${params.news_id}`);
 	const newsData = await newsResponse.json();
 
 	//

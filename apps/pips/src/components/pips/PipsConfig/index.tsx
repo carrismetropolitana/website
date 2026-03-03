@@ -7,7 +7,7 @@ import { Section } from '@/components/layout/Section';
 import { Surface } from '@/components/layout/Surface';
 import { useStopsContext } from '@/contexts/Stops.context';
 import { useStopsPipContext } from '@/contexts/StopsPip.context';
-import { Button, CopyButton, NumberInput, Switch, Text } from '@mantine/core';
+import { Button, CopyButton, NumberInput, Switch } from '@mantine/core';
 import { IconArrowsVertical, IconCircleNumber0, IconLink, IconZoomScan } from '@tabler/icons-react';
 import { useTranslations } from 'next-intl';
 import Link from 'next/link';

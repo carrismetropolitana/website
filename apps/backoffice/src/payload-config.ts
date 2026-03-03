@@ -3,14 +3,16 @@
 import { getPublicVariable } from '@carrismetropolitana/website-shared-settings';
 import { mongooseAdapter } from '@payloadcms/db-mongodb';
 import { nodemailerAdapter } from '@payloadcms/email-nodemailer';
-import { lexicalEditor } from '@payloadcms/richtext-lexical';
+import { BlocksFeature, EXPERIMENTAL_TableFeature, HeadingFeature, lexicalEditor } from '@payloadcms/richtext-lexical';
 import { s3Storage } from '@payloadcms/storage-s3';
 import { buildConfig } from 'payload';
 import sharp from 'sharp';
 
 /* * */
 
-import { Articles } from '@/schemas/Articles/collection';
+import { BackgroundColorFeature } from '@/lexical/backgroundColor/feature.server';
+import { HeadingAnchorFeature } from '@/lexical/headingAnchor/feature.server';
+import { MentionFeature } from '@/lexical/mention/feature.server';
 import { CaseStudies } from '@/schemas/CaseStudies/collection';
 import { KnowledgeBase } from '@/schemas/KnowledgeBase/collection';
 import { Media } from '@/schemas/Media/collection';
@@ -21,29 +23,82 @@ import { Users } from '@/schemas/Users/collection';
 
 /* * */
 
+import { Settings } from '@/globals/config';
+import { Articles } from '@/schemas/Articles/collection';
 import { GeneralStatus } from '@/schemas/GeneralStatus/global';
 import { HomeSlider } from '@/schemas/HomeSlider/global';
 
 /* * */
 
+import { accordionFields } from './fields/accordion';
+import { galleryFields } from './fields/gallery';
+import { linkFields } from './fields/link';
+import { videoFields } from './fields/video';
+
+/* * */
+
 export default buildConfig({
 
-	admin: { user: 'users' },
+	admin: {
+		components: {
+			graphics: {
+				Icon: '@/graphics/Icon/index.tsx#Icons',
+				Logo: '@/graphics/Logo/index.tsx#Logos',
+			},
+		},
+		livePreview: {
+			collections: ['news'],
+			url: ({ data }) => {
+				if (!data?.id) return undefined;
+				return `${getPublicVariable('server_url_frontend')}/news/preview?id=${data.id}`;
+			},
+		},
+		meta: {
+			description: 'Backoffice da CMetropolitana',
+			title: 'Backoffice | CMetropolitana',
+		},
+		user: 'users',
+	},
 
-	collections: [
-		Articles,
-		CaseStudies,
-		KnowledgeBase,
-		Media,
-		News,
-		Notes,
-		Topics,
-		Users,
+	collections: [CaseStudies, Media, News, Topics, Users, KnowledgeBase, Notes, Articles],
+
+	csrf: [
+		getPublicVariable('server_url_backoffice').replace(/\/$/, ''),
+		`${getPublicVariable('server_url_backoffice').replace(/\/$/, '')}/admin`,
 	],
 
-	db: mongooseAdapter({ url: process.env.WEBSITEDB_URI || 'mongodb://placeholder:placeholder@placeholder:12345/placeholder' }),
+	db: mongooseAdapter({ url: process.env.WEBSITEDB_URI ?? 'mongodb://placeholder:placeholder@placeholder:12345/placeholder' }),
 
-	editor: lexicalEditor(),
+	editor: lexicalEditor({
+		features: ({ defaultFeatures }) => [
+			...defaultFeatures.filter(f => f.key !== 'heading'),
+			HeadingFeature({ enabledHeadingSizes: ['h2', 'h3'] }),
+			HeadingAnchorFeature(),
+			BlocksFeature({
+				blocks: [
+					{
+						fields: accordionFields,
+						slug: 'accordion',
+					},
+					{
+						fields: galleryFields,
+						slug: 'gallery',
+					},
+					{
+						fields: linkFields,
+						slug: 'link',
+					},
+					{
+						fields: videoFields,
+						slug: 'video',
+					},
+				],
+			}),
+			BackgroundColorFeature(),
+			EXPERIMENTAL_TableFeature(),
+			MentionFeature(),
+		],
+	}),
 
 	email: nodemailerAdapter({
 		defaultFromAddress: process.env.EMAIL_FROM_ADDRESS ?? '',
@@ -62,6 +117,7 @@ export default buildConfig({
 	globals: [
 		GeneralStatus,
 		HomeSlider,
+		Settings,
 	],
 
 	plugins: [
@@ -99,7 +155,7 @@ export default buildConfig({
 
 	secret: process.env.PAYLOAD_SECRET || 'placeholder',
 
-	serverURL: getPublicVariable('server_url_backoffice'),
+	serverURL: `${getPublicVariable('server_url_backoffice').replace(/\/$/, '')}/admin`,
 
 	sharp: sharp,
 

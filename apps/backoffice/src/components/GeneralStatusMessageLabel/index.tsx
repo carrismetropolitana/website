@@ -1,5 +1,4 @@
 'use client';
-
 /* * */
 
 import { useRowLabel } from '@payloadcms/ui';
@@ -8,17 +7,16 @@ import { useRowLabel } from '@payloadcms/ui';
 
 export const GeneralStatusMessageLabel = () => {
 	//
+	// A. Setup variables
 
 	const { data } = useRowLabel<{ is_enabled: boolean, title: string }>();
 
-	if (!data) {
-		return '---';
-	}
+	//
+	// B. Render components
 
-	const isEnabled = data.is_enabled ? '✅' : '❌';
-	const title = data.title || 'Untitled Message';
+	if (!data) return '---';
 
-	return `${isEnabled} ${title}`.trim();
+	return `${data.is_enabled ? '✅' : '❌'} ${data.title ?? 'Untitled Message'}`.trim();
 
 	//
 };

@@ -1,57 +1,24 @@
 /* * */
-/* CONTENT */
+/* CONTENT WRAPPER */
 
 .content {
 	display: flex;
 	flex-direction: column;
-	gap: var(--size-spacing-10);
-}
-
-
-/* * */
-/* RESET / FIGURES, IMAGES & VIDEOS */
-
-.content figure {
-	padding: 0;
-	margin: 0;
-	margin-bottom: var(--size-spacing-15);
-	overflow: hidden;
-	border: 1px solid var(--color-system-border-100);
-	border-radius: 5px;
-}
-
-.content figure img {
-	width: 100%;
-	height: auto;
-	padding: 0;
-	margin: 0;
-}
-
-.content figure video {
-	width: 100%;
-	height: auto;
-	padding: 0;
-	margin: 0;
+	gap: var(--size-spacing-15);
 }
 
 /* * */
-/* RESET / HEADINGS */
-
-.content h1 {
-	margin-top: var(--size-spacing-20);
-	font-size: 24px;
-	font-weight: var(--font-weight-bold);
-	color: var(--color-system-text-100);
-}
-
-/* * */
-/* RESET / PARAGRAPHS */
+/* PARAGRAPHS */
 
 .content p {
-	margin-top: var(--size-spacing-10);
-	margin-bottom: var(--size-spacing-10);
+	margin: 0;
 	font-size: 18px;
+	line-height: 1.5;
 	color: var(--color-system-text-100);
+}
+
+.content p + p {
+	margin-top: var(--size-spacing-10);
 }
 
 .content p strong {
@@ -63,18 +30,57 @@
 }
 
 /* * */
-/* RESET / LINKS */
+/* HEADINGS */
+
+.content h1,
+.content h2,
+.content h3,
+.content h4,
+.content h5,
+.content h6 {
+	margin: 0;
+	margin-top: var(--size-spacing-20);
+	margin-bottom: var(--size-spacing-5);
+	font-weight: var(--font-weight-bold);
+	color: var(--color-system-text-100);
+}
+
+.content h1 {
+	font-size: 24px;
+}
+
+.content h2 {
+	font-size: 22px;
+}
+
+.content h3 {
+	font-size: 20px;
+}
+
+.content h4,
+.content h5,
+.content h6 {
+	font-size: 18px;
+}
+
+/* * */
+/* LINKS */
 
 .content a {
 	color: var(--color-system-text-100);
-	text-decoration: underline;
-	border-radius: 5px;
+	cursor: pointer;
 }
 
 .content a:hover {
 	background-color: var(--color-system-background-300);
 }
 
-
 /* * */
-/* FOR MORE RESET STYLES PLEASE LOOK AT @/themes/wordpress.css FILE */
+/* QUOTES */
+
+.content blockquote {
+	padding-left: var(--size-spacing-15);
+	margin: var(--size-spacing-10) 0;
+	color: var(--color-system-text-200);
+	border-left: 4px solid var(--color-system-border-200);
+}

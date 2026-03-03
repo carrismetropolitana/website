@@ -11,14 +11,9 @@ export const HomeSliderMessageLabel = () => {
 
 	const { data } = useRowLabel<{ is_enabled: boolean, title: string }>();
 
-	if (!data) {
-		return '---';
-	}
+	if (!data) return '---';
 
-	const isEnabled = data.is_enabled ? '✅' : '❌';
-	const title = data.title || 'Untitled Slide';
-
-	return `${isEnabled} ${title}`.trim();
+	return `${data.is_enabled ? '✅' : '❌'} ${data.title ?? 'Untitled Slide'}`.trim();
 
 	//
 };

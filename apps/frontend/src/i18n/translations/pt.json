@@ -59,7 +59,7 @@
 		}
 	},
 	"NewsCard": {
-		"publish_date": "{publishDate, date, long}",
+		"publish_date": "{published_at, date, long}",
 		"see_more": "Veja Mais"
 	},
 	"SelectLine": {
@@ -1395,7 +1395,7 @@
 			"found_items_counter": "{count, plural, =0 {Nenhuma notícia encontrada.} one {Encontrada # noticia:} other {Encontradas # notícias:}}"
 		},
 		"SinglePageHeader": {
-			"publish_date": "Publicada a {value, date, long}"
+			"publish_date": "Publicada a {published_at, date, long}"
 		}
 	},
 	"notifications": {
