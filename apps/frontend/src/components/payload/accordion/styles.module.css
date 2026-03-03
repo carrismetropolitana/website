@@ -1,0 +1,15 @@
+.item {
+	margin-bottom: var(--size-spacing-10);
+}
+
+.summary {
+	padding: var(--size-spacing-5) 0;
+	font-weight: bold;
+	cursor: pointer;
+}
+
+.content {
+	padding: var(--size-spacing-10) 0;
+	padding-left: var(--size-spacing-10);
+	white-space: pre-wrap;
+}

@@ -9,6 +9,8 @@ import React from 'react';
 
 import { importMap } from './importMap.js';
 import './custom.scss';
+import { LinesContextProvider } from '@/contexts/Lines.context';
+import { ConfigProviders } from '@/providers/config-providers';
 
 interface Args {
 	children: React.ReactNode
@@ -25,7 +27,11 @@ const serverFunction: ServerFunctionClient = async function (args) {
 
 const Layout = ({ children }: Args) => (
 	<RootLayout config={config} importMap={importMap} serverFunction={serverFunction}>
-		{children}
+		<ConfigProviders>
+			<LinesContextProvider>			
+				{children}
+			</LinesContextProvider>
+		</ConfigProviders>
 	</RootLayout>
 );
 

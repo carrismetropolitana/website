@@ -1,0 +1,4 @@
+.link {
+	color: var(--color-system-text-100);
+	text-decoration: underline;
+}

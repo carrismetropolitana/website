@@ -67,14 +67,14 @@ export interface Config {
   };
   blocks: {};
   collections: {
-    articles: Article;
     'case-studies': CaseStudy;
-    'knowledge-base': KnowledgeBase;
     media: Media;
     news: News;
-    notes: Note;
     topics: Topic;
     users: User;
+    'knowledge-base': KnowledgeBase;
+    notes: Note;
+    articles: Article;
     'payload-kv': PayloadKv;
     'payload-locked-documents': PayloadLockedDocument;
     'payload-preferences': PayloadPreference;
@@ -82,14 +82,14 @@ export interface Config {
   };
   collectionsJoins: {};
   collectionsSelect: {
-    articles: ArticlesSelect<false> | ArticlesSelect<true>;
     'case-studies': CaseStudiesSelect<false> | CaseStudiesSelect<true>;
-    'knowledge-base': KnowledgeBaseSelect<false> | KnowledgeBaseSelect<true>;
     media: MediaSelect<false> | MediaSelect<true>;
     news: NewsSelect<false> | NewsSelect<true>;
-    notes: NotesSelect<false> | NotesSelect<true>;
     topics: TopicsSelect<false> | TopicsSelect<true>;
     users: UsersSelect<false> | UsersSelect<true>;
+    'knowledge-base': KnowledgeBaseSelect<false> | KnowledgeBaseSelect<true>;
+    notes: NotesSelect<false> | NotesSelect<true>;
+    articles: ArticlesSelect<false> | ArticlesSelect<true>;
     'payload-kv': PayloadKvSelect<false> | PayloadKvSelect<true>;
     'payload-locked-documents': PayloadLockedDocumentsSelect<false> | PayloadLockedDocumentsSelect<true>;
     'payload-preferences': PayloadPreferencesSelect<false> | PayloadPreferencesSelect<true>;
@@ -102,15 +102,15 @@ export interface Config {
   globals: {
     'general-status': GeneralStatus;
     'home-slider': HomeSlider;
+    settings: Setting;
   };
   globalsSelect: {
     'general-status': GeneralStatusSelect<false> | GeneralStatusSelect<true>;
     'home-slider': HomeSliderSelect<false> | HomeSliderSelect<true>;
+    settings: SettingsSelect<false> | SettingsSelect<true>;
   };
   locale: null;
-  user: User & {
-    collection: 'users';
-  };
+  user: User;
   jobs: {
     tasks: unknown;
     workflows: unknown;
@@ -133,6 +133,178 @@ export interface UserAuthOperations {
     email: string;
     password: string;
   };
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "case-studies".
+ */
+export interface CaseStudy {
+  id: string;
+  title: string;
+  amount: number;
+  is_enabled: boolean;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "media".
+ */
+export interface Media {
+  id: string;
+  alt?: string | null;
+  updatedAt: string;
+  createdAt: string;
+  url?: string | null;
+  thumbnailURL?: string | null;
+  filename?: string | null;
+  mimeType?: string | null;
+  filesize?: number | null;
+  width?: number | null;
+  height?: number | null;
+  focalX?: number | null;
+  focalY?: number | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "news".
+ */
+export interface News {
+  id: string;
+  title: string;
+  summary: string;
+  body: {
+    root: {
+      type: string;
+      children: {
+        type: any;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  };
+  is_featured?: boolean | null;
+  is_unlisted?: boolean | null;
+  topics?: (string | Topic)[] | null;
+  featured_image?: (string | null) | Media;
+  publishedAt: string;
+  updatedAt: string;
+  createdAt: string;
+  _status?: ('draft' | 'published') | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "topics".
+ */
+export interface Topic {
+  id: string;
+  title: string;
+  description?: string | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "users".
+ */
+export interface User {
+  id: string;
+  name?: string | null;
+  updatedAt: string;
+  createdAt: string;
+  enableAPIKey?: boolean | null;
+  apiKey?: string | null;
+  apiKeyIndex?: string | null;
+  email: string;
+  resetPasswordToken?: string | null;
+  resetPasswordExpiration?: string | null;
+  salt?: string | null;
+  hash?: string | null;
+  loginAttempts?: number | null;
+  lockUntil?: string | null;
+  sessions?:
+    | {
+        id: string;
+        createdAt?: string | null;
+        expiresAt: string;
+      }[]
+    | null;
+  password?: string | null;
+  collection: 'users';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "knowledge-base".
+ */
+export interface KnowledgeBase {
+  id: string;
+  title: string;
+  /**
+   * URL única para este item. Será gerada automaticamente do título se deixado em branco.
+   */
+  slug: string;
+  /**
+   * Texto de destaque/resumo que aparece no início do artigo. Suporta HTML.
+   */
+  lead?: string | null;
+  /**
+   * Conteúdo principal do artigo. Suporta HTML.
+   */
+  body?: string | null;
+  contentType: 'link' | 'file';
+  link?: string | null;
+  file?: (string | null) | Media;
+  publishDate?: string | null;
+  status: 'draft' | 'published';
+  heroImage?: (string | null) | Media;
+  topic: 'Documentação' | 'Recursos' | 'Open Data' | 'Sustentabilidade' | 'Imprensa' | 'Tecnologia' | 'Outro';
+  seo?: {
+    metaTitle?: string | null;
+    metaDescription?: string | null;
+    ogImage?: (string | null) | Media;
+  };
+  authors?: (string | null) | User;
+  publishedAt: string;
+  updatedAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "notes".
+ */
+export interface Note {
+  id: string;
+  title: string;
+  /**
+   * URL única para esta nota. Será gerada automaticamente do título se deixado em branco.
+   */
+  slug: string;
+  /**
+   * Texto de destaque/resumo que aparece no início do artigo. Suporta HTML.
+   */
+  lead?: string | null;
+  /**
+   * Conteúdo principal do artigo. Suporta HTML.
+   */
+  body?: string | null;
+  contentType?: string | null;
+  file?: (string | null) | Media;
+  publishDate?: string | null;
+  status: 'draft' | 'published';
+  heroImage?: (string | null) | Media;
+  tags?: string[] | null;
+  seo?: {
+    metaTitle?: string | null;
+    metaDescription?: string | null;
+    ogImage?: (string | null) | Media;
+  };
+  authors?: (string | null) | User;
+  publishedAt: string;
+  updatedAt: string;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -189,171 +361,6 @@ export interface Article {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "media".
- */
-export interface Media {
-  id: string;
-  alt?: string | null;
-  updatedAt: string;
-  createdAt: string;
-  url?: string | null;
-  thumbnailURL?: string | null;
-  filename?: string | null;
-  mimeType?: string | null;
-  filesize?: number | null;
-  width?: number | null;
-  height?: number | null;
-  focalX?: number | null;
-  focalY?: number | null;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "case-studies".
- */
-export interface CaseStudy {
-  id: string;
-  title: string;
-  amount: number;
-  is_enabled: boolean;
-  updatedAt: string;
-  createdAt: string;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "knowledge-base".
- */
-export interface KnowledgeBase {
-  id: string;
-  title: string;
-  /**
-   * URL única para este item. Será gerada automaticamente do título se deixado em branco.
-   */
-  slug: string;
-  /**
-   * Texto de destaque/resumo que aparece no início do artigo. Suporta HTML.
-   */
-  lead?: string | null;
-  /**
-   * Conteúdo principal do artigo. Suporta HTML.
-   */
-  body?: string | null;
-  contentType: 'link' | 'file';
-  link?: string | null;
-  file?: (string | null) | Media;
-  publishDate?: string | null;
-  status: 'draft' | 'published';
-  heroImage?: (string | null) | Media;
-  topic: 'Documentação' | 'Recursos' | 'Open Data' | 'Sustentabilidade' | 'Imprensa' | 'Tecnologia' | 'Outro';
-  seo?: {
-    metaTitle?: string | null;
-    metaDescription?: string | null;
-    ogImage?: (string | null) | Media;
-  };
-  authors?: (string | null) | User;
-  publishedAt: string;
-  updatedAt: string;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "users".
- */
-export interface User {
-  id: string;
-  name?: string | null;
-  updatedAt: string;
-  createdAt: string;
-  email: string;
-  resetPasswordToken?: string | null;
-  resetPasswordExpiration?: string | null;
-  salt?: string | null;
-  hash?: string | null;
-  loginAttempts?: number | null;
-  lockUntil?: string | null;
-  sessions?:
-    | {
-        id: string;
-        createdAt?: string | null;
-        expiresAt: string;
-      }[]
-    | null;
-  password?: string | null;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "news".
- */
-export interface News {
-  id: string;
-  title: string;
-  summary: string;
-  body: {
-    root: {
-      type: string;
-      children: {
-        type: any;
-        version: number;
-        [k: string]: unknown;
-      }[];
-      direction: ('ltr' | 'rtl') | null;
-      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
-      indent: number;
-      version: number;
-    };
-    [k: string]: unknown;
-  };
-  is_featured?: boolean | null;
-  topics?: (string | Topic)[] | null;
-  featured_image?: (string | null) | Media;
-  publishedAt: string;
-  updatedAt: string;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "topics".
- */
-export interface Topic {
-  id: string;
-  title: string;
-  description?: string | null;
-  updatedAt: string;
-  createdAt: string;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "notes".
- */
-export interface Note {
-  id: string;
-  title: string;
-  /**
-   * URL única para esta nota. Será gerada automaticamente do título se deixado em branco.
-   */
-  slug: string;
-  /**
-   * Texto de destaque/resumo que aparece no início do artigo. Suporta HTML.
-   */
-  lead?: string | null;
-  /**
-   * Conteúdo principal do artigo. Suporta HTML.
-   */
-  body?: string | null;
-  contentType?: string | null;
-  file?: (string | null) | Media;
-  publishDate?: string | null;
-  status: 'draft' | 'published';
-  heroImage?: (string | null) | Media;
-  tags?: string[] | null;
-  seo?: {
-    metaTitle?: string | null;
-    metaDescription?: string | null;
-    ogImage?: (string | null) | Media;
-  };
-  authors?: (string | null) | User;
-  publishedAt: string;
-  updatedAt: string;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "payload-kv".
  */
 export interface PayloadKv {
@@ -377,16 +384,8 @@ export interface PayloadLockedDocument {
   id: string;
   document?:
     | ({
-        relationTo: 'articles';
-        value: string | Article;
-      } | null)
-    | ({
         relationTo: 'case-studies';
         value: string | CaseStudy;
-      } | null)
-    | ({
-        relationTo: 'knowledge-base';
-        value: string | KnowledgeBase;
       } | null)
     | ({
         relationTo: 'media';
@@ -397,16 +396,24 @@ export interface PayloadLockedDocument {
         value: string | News;
       } | null)
     | ({
-        relationTo: 'notes';
-        value: string | Note;
-      } | null)
-    | ({
         relationTo: 'topics';
         value: string | Topic;
       } | null)
     | ({
         relationTo: 'users';
         value: string | User;
+      } | null)
+    | ({
+        relationTo: 'knowledge-base';
+        value: string | KnowledgeBase;
+      } | null)
+    | ({
+        relationTo: 'notes';
+        value: string | Note;
+      } | null)
+    | ({
+        relationTo: 'articles';
+        value: string | Article;
       } | null);
   globalSlug?: string | null;
   user: {
@@ -452,6 +459,141 @@ export interface PayloadMigration {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "case-studies_select".
+ */
+export interface CaseStudiesSelect<T extends boolean = true> {
+  title?: T;
+  amount?: T;
+  is_enabled?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "media_select".
+ */
+export interface MediaSelect<T extends boolean = true> {
+  alt?: T;
+  updatedAt?: T;
+  createdAt?: T;
+  url?: T;
+  thumbnailURL?: T;
+  filename?: T;
+  mimeType?: T;
+  filesize?: T;
+  width?: T;
+  height?: T;
+  focalX?: T;
+  focalY?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "news_select".
+ */
+export interface NewsSelect<T extends boolean = true> {
+  title?: T;
+  summary?: T;
+  body?: T;
+  is_featured?: T;
+  is_unlisted?: T;
+  topics?: T;
+  featured_image?: T;
+  publishedAt?: T;
+  updatedAt?: T;
+  createdAt?: T;
+  _status?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "topics_select".
+ */
+export interface TopicsSelect<T extends boolean = true> {
+  title?: T;
+  description?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "users_select".
+ */
+export interface UsersSelect<T extends boolean = true> {
+  name?: T;
+  updatedAt?: T;
+  createdAt?: T;
+  enableAPIKey?: T;
+  apiKey?: T;
+  apiKeyIndex?: T;
+  email?: T;
+  resetPasswordToken?: T;
+  resetPasswordExpiration?: T;
+  salt?: T;
+  hash?: T;
+  loginAttempts?: T;
+  lockUntil?: T;
+  sessions?:
+    | T
+    | {
+        id?: T;
+        createdAt?: T;
+        expiresAt?: T;
+      };
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "knowledge-base_select".
+ */
+export interface KnowledgeBaseSelect<T extends boolean = true> {
+  title?: T;
+  slug?: T;
+  lead?: T;
+  body?: T;
+  contentType?: T;
+  link?: T;
+  file?: T;
+  publishDate?: T;
+  status?: T;
+  heroImage?: T;
+  topic?: T;
+  seo?:
+    | T
+    | {
+        metaTitle?: T;
+        metaDescription?: T;
+        ogImage?: T;
+      };
+  authors?: T;
+  publishedAt?: T;
+  updatedAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "notes_select".
+ */
+export interface NotesSelect<T extends boolean = true> {
+  title?: T;
+  slug?: T;
+  lead?: T;
+  body?: T;
+  contentType?: T;
+  file?: T;
+  publishDate?: T;
+  status?: T;
+  heroImage?: T;
+  tags?: T;
+  seo?:
+    | T
+    | {
+        metaTitle?: T;
+        metaDescription?: T;
+        ogImage?: T;
+      };
+  authors?: T;
+  publishedAt?: T;
+  updatedAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "articles_select".
  */
 export interface ArticlesSelect<T extends boolean = true> {
@@ -489,135 +631,6 @@ export interface ArticlesSelect<T extends boolean = true> {
       };
   publishedAt?: T;
   updatedAt?: T;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "case-studies_select".
- */
-export interface CaseStudiesSelect<T extends boolean = true> {
-  title?: T;
-  amount?: T;
-  is_enabled?: T;
-  updatedAt?: T;
-  createdAt?: T;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "knowledge-base_select".
- */
-export interface KnowledgeBaseSelect<T extends boolean = true> {
-  title?: T;
-  slug?: T;
-  lead?: T;
-  body?: T;
-  contentType?: T;
-  link?: T;
-  file?: T;
-  publishDate?: T;
-  status?: T;
-  heroImage?: T;
-  topic?: T;
-  seo?:
-    | T
-    | {
-        metaTitle?: T;
-        metaDescription?: T;
-        ogImage?: T;
-      };
-  authors?: T;
-  publishedAt?: T;
-  updatedAt?: T;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "media_select".
- */
-export interface MediaSelect<T extends boolean = true> {
-  alt?: T;
-  updatedAt?: T;
-  createdAt?: T;
-  url?: T;
-  thumbnailURL?: T;
-  filename?: T;
-  mimeType?: T;
-  filesize?: T;
-  width?: T;
-  height?: T;
-  focalX?: T;
-  focalY?: T;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "news_select".
- */
-export interface NewsSelect<T extends boolean = true> {
-  title?: T;
-  summary?: T;
-  body?: T;
-  is_featured?: T;
-  topics?: T;
-  featured_image?: T;
-  publishedAt?: T;
-  updatedAt?: T;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "notes_select".
- */
-export interface NotesSelect<T extends boolean = true> {
-  title?: T;
-  slug?: T;
-  lead?: T;
-  body?: T;
-  contentType?: T;
-  file?: T;
-  publishDate?: T;
-  status?: T;
-  heroImage?: T;
-  tags?: T;
-  seo?:
-    | T
-    | {
-        metaTitle?: T;
-        metaDescription?: T;
-        ogImage?: T;
-      };
-  authors?: T;
-  publishedAt?: T;
-  updatedAt?: T;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "topics_select".
- */
-export interface TopicsSelect<T extends boolean = true> {
-  title?: T;
-  description?: T;
-  updatedAt?: T;
-  createdAt?: T;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "users_select".
- */
-export interface UsersSelect<T extends boolean = true> {
-  name?: T;
-  updatedAt?: T;
-  createdAt?: T;
-  email?: T;
-  resetPasswordToken?: T;
-  resetPasswordExpiration?: T;
-  salt?: T;
-  hash?: T;
-  loginAttempts?: T;
-  lockUntil?: T;
-  sessions?:
-    | T
-    | {
-        id?: T;
-        createdAt?: T;
-        expiresAt?: T;
-      };
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -701,6 +714,19 @@ export interface HomeSlider {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "settings".
+ */
+export interface Setting {
+  id: string;
+  lightModeIcon?: (string | null) | Media;
+  lightModeLogo?: (string | null) | Media;
+  darkModeIcon?: (string | null) | Media;
+  darkModeLogo?: (string | null) | Media;
+  updatedAt?: string | null;
+  createdAt?: string | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "general-status_select".
  */
 export interface GeneralStatusSelect<T extends boolean = true> {
@@ -735,6 +761,19 @@ export interface HomeSliderSelect<T extends boolean = true> {
         end_date?: T;
         id?: T;
       };
+  updatedAt?: T;
+  createdAt?: T;
+  globalType?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "settings_select".
+ */
+export interface SettingsSelect<T extends boolean = true> {
+  lightModeIcon?: T;
+  lightModeLogo?: T;
+  darkModeIcon?: T;
+  darkModeLogo?: T;
   updatedAt?: T;
   createdAt?: T;
   globalType?: T;
