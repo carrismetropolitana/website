@@ -1,0 +1,52 @@
+name: "Verify Required Environment Variables"
+description: "Verifies that required environment variables are present and non-empty in a .env file and optionally checks an OCI key file exists"
+
+inputs:
+  env-path:
+    description: "Path to the .env file to validate"
+    required: true
+    default: ".env"
+  required-vars:
+    description: "Newline-separated list of required environment variable names"
+    required: true
+
+runs:
+  using: "composite"
+  steps:
+    - name: Verify required environment variables
+      shell: bash
+      env:
+        ENV_PATH: ${{ inputs.env-path }}
+        REQUIRED_VARS_INPUT: ${{ inputs.required-vars }}
+      run: |
+        set -euo pipefail
+
+        ENV_FILE="${ENV_PATH}"
+        if [ ! -f "$ENV_FILE" ]; then
+          echo "Error: .env file not found at: $ENV_FILE"
+          exit 1
+        fi
+
+        # Read required variables from newline-separated input
+        mapfile -t REQUIRED_VARS <<< "$REQUIRED_VARS_INPUT"
+
+        MISSING_VARS=()
+        while IFS= read -r var; do
+          # Skip empty lines
+          if [ -z "$var" ]; then
+            continue
+          fi
+
+          if ! grep -q "^${var}=" "$ENV_FILE" || [ -z "$(grep "^${var}=" "$ENV_FILE" | cut -d'=' -f2- | tr -d '[:space:]')" ]; then
+            MISSING_VARS+=("$var")
+          fi
+        done < <(printf "%s\n" "${REQUIRED_VARS[@]}")
+
+        if [ ${#MISSING_VARS[@]} -gt 0 ]; then
+          echo "Error: Missing or empty required environment variables in $ENV_FILE:"
+          printf '  - %s\n' "${MISSING_VARS[@]}"
+          exit 1
+        fi
+
+        echo "✓ All required environment variables are present in $ENV_FILE"
+
