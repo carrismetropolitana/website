@@ -175,32 +175,47 @@
 		},
 		"AlertCauseEffectIcon": {
 			"cause": {
+				"ABUSIVE_PARKING": "Estacionamento Abusivo",
 				"ACCIDENT": "Acidente",
 				"CONSTRUCTION": "Obras",
-				"DEMONSTRATION": "Evento",
+				"DEMONSTRATION": "Evento / Manifestação",
+				"DRIVER_ABSENCE": "Ausência de Motorista",
+				"DRIVER_ISSUE": "Problema com Motorista",
+				"HIGH_PASSENGER_LOAD": "Elevada Lotação",
 				"HOLIDAY": "Férias",
 				"MAINTENANCE": "Manutenção",
 				"MEDICAL_EMERGENCY": "Emergência Médica",
+				"NETWORK_UPDATE": "Atualização de Rede",
 				"OTHER_CAUSE": "Outras Causas",
 				"POLICE_ACTIVITY": "Atividade Policial",
+				"PUBLIC_DISORDER": "Desacatos",
+				"ROAD_ISSUE": "Incidente na Via",
 				"STRIKE": "Greve",
+				"TECHNICAL_ISSUE": "Problema Técnico",
 				"TECHNICAL_PROBLEM": "Problema Técnico",
+				"TRAFFIC_JAM": "Trânsito",
 				"UNKNOWN_CAUSE": "Causa Desconhecida",
-				"WEATHER": "Mau Tempo"
+				"VEHICLE_ISSUE": "Problema com Veículo",
+				"WEATHER": "Condições Meteorológicas"
 			},
 			"effect": {
 				"ACCESSIBILITY_ISSUE": "Impacto na Acessibilidade",
-				"ADDITIONAL_SERVICE": "Aumento de Serviço",
+				"ADDITIONAL_SERVICE": "Serviço Adicional",
 				"DETOUR": "Desvio",
-				"MODIFIED_SERVICE": "Alteração de Horários",
+				"MODIFIED_SERVICE": "Serviço Modificado",
 				"NO_EFFECT": "Outro",
-				"NO_SERVICE": "Serviço Cancelado",
+				"NO_SERVICE": "Cancelamento",
+				"ON_BOARD_SALE_ISSUE": "Venda a Bordo Condicionada",
 				"OTHER_EFFECT": "Outro",
-				"REDUCED_SERVICE": "Serviço Reduzido",
+				"REALTIME_INFO_ISSUE": "Impacto na Informação ao Público",
+				"REDUCED_SERVICE": "Encurtamento de Percurso",
 				"SIGNIFICANT_DELAYS": "Atrasos Significativos",
 				"STOP_MOVED": "Paragem Deslocada",
 				"UNKNOWN_EFFECT": "Outro"
 			}
+		},
+		"AlertCauseEffectLabel": {
+			"label": "{effect} causado por {cause}"
 		},
 		"AlertsDetail": {
 			"more_info": "Mais informações"
