@@ -92,7 +92,7 @@ jobs:
             STAGING_PASSWORD
             STAGING_AUTH_DATABASE
             STAGING_DB
-            EXCLUDE_COLLECTIONS
+          # EXCLUDE_COLLECTIONS
 
       # # # # # # # # # # # # # # # # # # # # #
       # Run Sync
