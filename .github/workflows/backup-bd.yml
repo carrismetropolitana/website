@@ -55,7 +55,7 @@ jobs:
 
           # Write .env and patch OCI_KEY_FILE to absolute path
           ABS_KEY="$(pwd)/oci_key.pem"
-          echo "${{ secrets.ENV_SYNC_ENV }}" > .env
+          echo "${{ secrets.BACKUP_BD_ENV }}" > .env
           chmod 600 .env
 
           # Ensure OCI_KEY_FILE is correctly set
