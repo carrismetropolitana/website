@@ -1,0 +1,9 @@
+.wrapper {
+	margin: var(--size-spacing-10) 0;
+	overflow-x: auto;
+}
+
+.table {
+	width: 100%;
+	border-collapse: collapse;
+}

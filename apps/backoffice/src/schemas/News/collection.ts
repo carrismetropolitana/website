@@ -2,6 +2,7 @@
 
 import { featuredImageField } from '@/fields/featured-image';
 import { isFeaturedField } from '@/fields/is-featured';
+import { isUnlistedField } from '@/fields/is-unlisted';
 import { publishedAtField } from '@/fields/published-at';
 import { topicsField } from '@/fields/topics';
 import { updatedAtField } from '@/fields/updated-at';
@@ -10,15 +11,17 @@ import { type CollectionConfig } from 'payload';
 /* * */
 
 export const News: CollectionConfig = {
-
 	access: {
+		create: ({ req }) => Boolean(req.user),
+		delete: ({ req }) => Boolean(req.user),
 		read: () => true,
-	},
+		update: ({ req }) => Boolean(req.user),
 
+	},
 	admin: {
+		defaultColumns: ['featured_image', 'title', 'publishedAt', '_status'],
 		useAsTitle: 'title',
 	},
-
 	fields: [
 		{
 			label: 'Título',
@@ -39,12 +42,12 @@ export const News: CollectionConfig = {
 			type: 'richText',
 		},
 		isFeaturedField,
+		isUnlistedField,
 		topicsField,
 		featuredImageField,
 		publishedAtField,
 		updatedAtField,
 	],
-
 	labels: {
 		plural: 'Notícias',
 		singular: 'Notícia',
@@ -52,6 +55,14 @@ export const News: CollectionConfig = {
 
 	slug: 'news',
 
-	timestamps: false,
+	timestamps: true,
+
+	versions: {
+		drafts: {
+			autosave: {
+				interval: 500,
+			},
+		},
+	},
 
 };

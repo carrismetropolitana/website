@@ -3,6 +3,7 @@
 import { useLinesDetailContext } from '@/contexts/LinesDetail.context';
 import { type Timetable } from '@/types/timetables.types';
 import { type Minute } from '@/types/timetables.types';
+import { useColorScheme } from '@mantine/hooks';
 import { useTranslations } from 'next-intl';
 
 import styles from './styles.module.css';
@@ -73,6 +74,7 @@ function TimetableSchedulesMinute({ isHighlighted, minuteData, onClick, selected
 	// A. Transform data
 
 	const isSelected = selectedExceptionIds.some(exceptionId => minuteData.exception_ids.includes(exceptionId));
+	const isDark = useColorScheme();
 
 	//
 	// B. Handle actions
@@ -92,6 +94,7 @@ function TimetableSchedulesMinute({ isHighlighted, minuteData, onClick, selected
 		<p
 			key={minuteData.minute_value}
 			className={`${styles.minute} ${minuteData.exception_ids.length > 0 && styles.withException} ${isSelected && styles.isSelected} ${!isSelected && selectedExceptionIds.length > 0 && styles.isOthersSelected} ${isHighlighted && styles.isHighlighted}`}
+			data-is-dark={isDark === 'dark' ? 'true' : 'false'}
 			onClick={onClick}
 			onMouseOut={handleMouseOutException}
 			onMouseOver={handleMouseOverException}

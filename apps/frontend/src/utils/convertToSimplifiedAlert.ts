@@ -20,9 +20,9 @@ export default (alertData: Alert, currentLocale = 'pt'): SimplifiedAlert => {
 	else localizedDescriptionText = descriptionTextLocaleMatch.text;
 	// Find the localized image URL
 	let localizedImageUrl: null | string = null;
-	if (alertData.image && alertData.image.localizedImage?.length) {
-		const imageLocaleMatch = alertData.image.localizedImage.find(item => item.language === currentLocale.split('-')[0]);
-		if (!imageLocaleMatch) localizedImageUrl = alertData.image.localizedImage[0].url.length > 0 ? alertData.image.localizedImage[0].url : null;
+	if (alertData.image && alertData.image.localized_image?.length) {
+		const imageLocaleMatch = alertData.image.localized_image.find(item => item.language === currentLocale.split('-')[0]);
+		if (!imageLocaleMatch) localizedImageUrl = alertData.image.localized_image[0].url.length > 0 ? alertData.image.localized_image[0].url : null;
 		else localizedImageUrl = imageLocaleMatch.url.length > 0 ? imageLocaleMatch.url : null;
 	}
 	// Start date

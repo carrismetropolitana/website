@@ -19,11 +19,25 @@ export async function generateMetadata({ params }): Promise<Metadata> {
 	//
 	// B. Fetch data
 
-	const allStopsResponse = await fetch(`${getPublicVariable('api_url')}/stops`);
-	const allStopsData: Stop[] = await allStopsResponse.json();
-
-	const allLinesResponse = await fetch(`${getPublicVariable('api_url')}/lines`);
-	const allLinesData: Line[] = await allLinesResponse.json();
+	let allStopsData: null | Stop[] = null;
+	let allLinesData: Line[] | null = null;
+	try {
+		const [allStopsResponse, allLinesResponse] = await Promise.all([
+			fetch(`${getPublicVariable('api_url')}/stops`),
+			fetch(`${getPublicVariable('api_url')}/lines`),
+		]);
+		if (!allStopsResponse.ok || !allLinesResponse.ok) throw new Error('Failed to fetch stops or lines');
+		[allStopsData, allLinesData] = await Promise.all([
+			allStopsResponse.json(),
+			allLinesResponse.json(),
+		]);
+	}
+	catch {
+		return {
+			description: `Horarios planeados e em tempo real na paragem #${stop_id}.`,
+			title: `Paragem ${stop_id}`,
+		};
+	}
 
 	//
 	// C. Transform data

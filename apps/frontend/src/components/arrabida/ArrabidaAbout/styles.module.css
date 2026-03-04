@@ -6,7 +6,7 @@ width: 100%;
 height: 100%;
 }
 
-@media (max-width: 768px) {
+@media (width <= 768px) {
 .container {
 grid-template-columns: 1fr;
 }
@@ -19,23 +19,23 @@ gap: 10px;
 }
 
 .textBold {
+display: inline;
+font-size: 14px;
 font-weight: 900;
 color: var(--color-system-text-200);
-font-size: 14px;
-display: inline;
 }
 
 .text {
-font-weight: 400;
-color: var(--color-system-text-200);
 font-size: 14px;
+font-weight: 400;
 line-height: 1.5;
+color: var(--color-system-text-200);
 }
 
 .video {
-border: 1px solid var(--color-system-text-400);
 width: 100%;
 height: 420px;
+border: 1px solid var(--color-system-text-400);
 border-radius: 10px;
 }
 
@@ -43,24 +43,24 @@ border-radius: 10px;
 display: flex;
 flex-direction: column;
 gap: 10px;
-height: 100%;
 justify-content: space-between;
+height: 100%;
 }
 
 .logos {
 display: flex;
-justify-content: space-around;
 align-items: center;
+justify-content: space-around;
 }
 
 .logoWrapper {
 display: flex;
-align-items: center;
 gap: 10px;
+align-items: center;
 }
 
 
-@media (max-width: 768px) {
+@media (width <= 768px) {
 .logos {
 justify-content: space-between;
 }

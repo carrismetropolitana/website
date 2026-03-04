@@ -49,10 +49,8 @@ export default async function Image({ params }) {
 
 	return new ImageResponse(
 		<OpenGraphAlertsDynamic
-			// @ts-expect-error: Improper formatting of API types
-			description={alertData.descriptionText?.translation.pop()?.text}
-			// @ts-expect-error: Improper formatting of API types
-			title={alertData.headerText?.translation.pop()?.text}
+			description={alertData.description_text?.translation.pop()?.text}
+			title={alertData.header_text?.translation.pop()?.text}
 		/>,
 		{
 			fonts: [

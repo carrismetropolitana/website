@@ -7,18 +7,33 @@ import { type NextConfig } from 'next';
 
 const nextConfig: NextConfig = {
 	basePath: '/admin',
-	output: 'standalone',
-	reactStrictMode: true,
-
+	experimental: {
+		serverActions: {
+			bodySizeLimit: '4gb',
+		},
+	},
 	images: {
 		remotePatterns: [
+			{
+				hostname: 'localhost',
+				pathname: '/**',
+				port: '49001',
+				protocol: 'http',
+			},
+			{
+				hostname: 'staging.carrismetropolitana.pt',
+				pathname: '/**',
+				protocol: 'https',
+			},
 			{
 				hostname: '*.oraclecloud.com',
 				port: '',
 				protocol: 'https',
 			},
 		],
-	}
+	},
+	output: 'standalone',
+	reactStrictMode: true,
 };
 
 /* * */

@@ -85,6 +85,10 @@
 	background-color: var(--color-system-background-200);
 }
 
+.accordionChevron {
+	visibility: hidden;
+}
+
 .accordionPanel {
 	padding-top: var(--size-spacing-20);
 }
@@ -110,7 +114,7 @@
 	padding: var(--size-spacing-20);
 	border: 1px solid var(--color-system-border-100);
 	border-radius: var(--border-radius-lg);
-	
+
 }
 
 .linesWrapper:first-child {
@@ -147,6 +151,10 @@
 	background-color: var(--color-system-background-200);
 }
 
+.lineItemSelected {
+	background-color: var(--color-system-background-300);
+}
+
 .lineItemInactive {
 	display: flex;
 	align-items: center;
@@ -168,6 +176,7 @@
 	justify-content: center;
 	color: var(--color-system-text-400);
 	flex-shrink: 0;
+	visibility: hidden;
 }
 
 .lineItem:hover .arrowWrapper {
@@ -181,24 +190,24 @@
 	.container {
 		gap: var(--size-spacing-20);
 	}
-	
+
 	.accordionControl {
 		padding: var(--size-spacing-15);
 	}
-	
+
 	.accordionPanel {
 		padding: 0 var(--size-spacing-15) var(--size-spacing-15) var(--size-spacing-15);
 	}
-	
+
 	.linesWrapper {
 		padding: var(--size-spacing-15);
 		gap: var(--size-spacing-8);
 	}
-	
+
 	.stepTitle {
 		font-size: 14px;
 	}
-	
+
 	.linesWrapper span {
 		font-size: 13px;
 	}
