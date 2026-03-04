@@ -11,7 +11,7 @@ import { Button, CopyButton, NumberInput, TextInput } from '@mantine/core';
 import { IconLink, IconZoomScan } from '@tabler/icons-react';
 import { useTranslations } from 'next-intl';
 import Link from 'next/link';
-import { useMemo, useState } from 'react';
+import { useCallback, useMemo, useState } from 'react';
 
 import styles from './styles.module.css';
 
@@ -53,27 +53,29 @@ export function PipsConfig() {
 
 	const isButtonDisabled = useMemo(() => selectedStopIds.length === 0, [selectedStopIds]);
 
-	const parsedStops = useMemo(() => {
-		return stopsContext.data.stops.map(stop => ({
-			label: stop.long_name,
-			value: stop.id,
-		}));
-	}, [stopsContext.data.stops]);
-
 	//
 	// C. Handle actions
 
-	const handleSelectStopIds = (ids: string[]) => {
+	const handleSelectStopIds = useCallback((ids: string[]) => {
 		setSelectedStopIds(ids);
-	};
+	}, []);
 
-	const handleChangePipId = (value: string) => {
+	const handleChangePipId = useCallback((value: string) => {
 		setPipId(value);
-	};
+	}, []);
 
-	const handleChangeScale = (value: number | string) => {
+	const handleChangeScale = useCallback((value: number | string) => {
 		setScale(value ? String(value) : '1.0');
-	};
+	}, []);
+
+	const stopsSelect = useMemo(() => (
+		<SelectStops
+			data={stopsContext.data.stops}
+			label="Paragens"
+			onSelectStopIds={handleSelectStopIds}
+			selectedStopIds={selectedStopIds}
+		/>
+	), [handleSelectStopIds, selectedStopIds, stopsContext.data.stops]);
 
 	//
 	// D. Render components
@@ -93,12 +95,7 @@ export function PipsConfig() {
 
 				<div className={styles.filtersWrapper}>
 					<Section withGap>
-						<SelectStops
-							data={parsedStops}
-							label="Paragens"
-							onSelectStopIds={handleSelectStopIds}
-							selectedStopIds={selectedStopIds}
-						/>
+						{stopsSelect}
 
 						<Grid columns="ab" withGap>
 							<TextInput
