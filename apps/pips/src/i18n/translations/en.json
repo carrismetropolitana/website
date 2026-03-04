@@ -176,6 +176,7 @@
 		},
 		"AlertCauseEffectIcon": {
 			"cause": {
+				"ABUSIVE_PARKING": "Abusive Parking",
 				"ACCIDENT": "Accident",
 				"CONSTRUCTION": "Works",
 				"DEMONSTRATION": "Event / Demonstration",
@@ -185,11 +186,15 @@
 				"HOLIDAY": "Vacation",
 				"MAINTENANCE": "Maintenance",
 				"MEDICAL_EMERGENCY": "Medical Emergency",
+				"NETWORK_UPDATE": "Network Update",
 				"OTHER_CAUSE": "Other Causes",
 				"POLICE_ACTIVITY": "Police Activity",
+				"PUBLIC_DISORDER": "Public Disorder",
 				"ROAD_INCIDENT": "Road Incident",
+				"ROAD_ISSUE": "Road Issue",
 				"STRIKE": "Strike",
 				"SYSTEM_FAILURE": "System Failure",
+				"TECHNICAL_ISSUE": "Technical Issue",
 				"TECHNICAL_PROBLEM": "Technical Problem",
 				"TRAFFIC_JAM": "Traffic Jam",
 				"UNKNOWN_CAUSE": "Unknown Cause",
@@ -203,12 +208,17 @@
 				"MODIFIED_SERVICE": "Schedule Changes",
 				"NO_EFFECT": "Other",
 				"NO_SERVICE": "Canceled Service",
+				"ON_BOARD_SALE_ISSUE": "On-board Sale Issue",
 				"OTHER_EFFECT": "Other",
+				"REALTIME_INFO_ISSUE": "Real-time Info Issue",
 				"REDUCED_SERVICE": "Reduced Service",
 				"SIGNIFICANT_DELAYS": "Significant Delays",
 				"STOP_MOVED": "Diversion Stop",
 				"UNKNOWN_EFFECT": "Other"
 			}
+		},
+		"AlertCauseEffectLabel": {
+			"label": "{effect} caused by {cause}"
 		},
 		"AlertsDetail": {
 			"more_info": "More information"

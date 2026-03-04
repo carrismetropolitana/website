@@ -6,16 +6,15 @@
 }
 
 .table {
+	--pips-col-time: 10%;
+	--pips-col-line: 40%;
+	--pips-col-stop: 50%;
 	width: 100%;
 	font-size: 20px;
 	table-layout: fixed;
 	border-collapse: collapse;
 }
 
-.rowEven,
-.rowOdd {
-	height: var(--pips-row-height);
-}
 
 .thead {
 	position: sticky;
@@ -32,19 +31,15 @@
 }
 
 .th:nth-child(1) {
-	width: 10%;
+	width: var(--pips-col-time);
 }
 
 .th:nth-child(2) {
-	width: 30%;
+	width: var(--pips-col-line);
 }
 
 .th:nth-child(3) {
-	width: 45%;
-}
-
-.th:nth-child(4) {
-	width: 15%;
+	width: var(--pips-col-stop);
 }
 
 .rowEven {
@@ -52,40 +47,64 @@
 }
 
 .rowOdd {
-	background-color: var(--color-system-background-200);
+	background-color: var(--color-system-background-100);
 }
 
 .td {
+	box-sizing: border-box;
 	padding: 0;
 	vertical-align: middle;
-	border-bottom: 1px solid var(--color-system-border-100);
+	border-bottom: 2px solid var(--color-system-border-100);
 }
 
 .timeCell {
+	box-sizing: border-box;
 	display: flex;
 	align-items: center;
 	height: 100%;
-	padding: 0 12px;
+	padding: 15px 12px;
+}
+
+/* Group the info row + warning row visually without affecting column widths */
+.rowWithWarningsTop > .td {
+	padding-bottom: 0;
+	background-color: var(--color-status-warning-background);
+	border-bottom: 0;
+	box-shadow: none;
+}
+
+.rowWithWarningsTop > .td:first-child {
+	box-shadow: inset 6px 0 0 0 var(--color-status-warning-text);
+}
+
+.rowWithWarningsTop > .td:first-child .timeCell {
+	padding-left: 18px;
+}
+
+.rowWithWarningsTop > .td:last-child {
+	box-shadow: inset -1px 0 0 0 var(--color-status-warning-text);
 }
 
 .lineCell {
+	box-sizing: border-box;
 	display: flex;
 	align-items: center;
 	height: 100%;
-	padding: 0 12px;
+	padding: 15px 12px;
 }
 
 .stopCell {
+	box-sizing: border-box;
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
 	height: 100%;
-	padding: 0 12px;
+	padding: 15px 12px;
 }
 
 .stopName {
 	margin-bottom: 4px;
-	font-size: 20px;
+	font-size: var(--font-size-heading);
 	font-weight: 600;
 	color: var(--color-primary-black);
 }
@@ -96,17 +115,11 @@
 	color: var(--color-system-text-200);
 }
 
-.warningsCell {
-	display: flex;
-	align-items: center;
-	height: 100%;
-	padding: 0 12px;
-}
-
 .warnings {
 	display: flex;
-	flex-direction: column;
-	gap: 6px;
+	flex-flow: row wrap;
+	gap: 8px;
+	align-items: center;
 }
 
 .warning {
@@ -114,9 +127,35 @@
 	gap: 6px;
 	align-items: center;
 	padding: 6px 10px;
-	font-size: 14px;
-	color: #E65100;
-	background-color: #FFF3E0;
-	border-left: 3px solid #FF6F00;
+	font-size: var(--font-size-title);
+	font-weight: var(--font-weight-title);
+	color: var(--color-status-danger-text);
+	background-color: var(--color-status-danger-background);
+	border: 1px solid var(--color-status-danger-border);
 	border-radius: 4px;
+}
+
+.warningsRow {
+	background-color: var(--color-status-warning-background);
+}
+
+.warningsRowTd {
+	padding: 0 15px 12px;
+	background-color: var(--color-status-warning-background);
+	border-bottom: 1px solid var(--color-system-border-100);
+}
+
+.rowWithWarningsBottom > .warningsRowTd {
+	padding-left: 18px;
+	border-bottom: 0;
+	box-shadow:
+		inset 6px 0 0 0 var(--color-status-warning-text),
+		inset -1px 0 0 0 var(--color-status-warning-text),
+		inset 0 -2px 0 0 var(--color-status-warning-text);
+}
+
+.warningsRowInner {
+	display: flex;
+	gap: 10px;
+	align-items: center;
 }

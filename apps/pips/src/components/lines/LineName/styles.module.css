@@ -22,7 +22,7 @@
 }
 
 .name[data-size='lg'] {
-	font-size: 20px;
+	font-size: var(--font-size-heading);
 	font-weight: var(--font-weight-extrabold);
 	line-height: 1.3;
 }

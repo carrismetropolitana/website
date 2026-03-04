@@ -2,6 +2,8 @@
 
 /* * */
 
+import type { AlertCause, AlertEffect } from '@/types/alerts.types';
+
 import { useAlertsContext } from '@/contexts/Alerts.context';
 import { useStopsPipContext } from '@/contexts/StopsPip.context';
 import { type Arrival } from '@/types/stops.types';
@@ -16,7 +18,12 @@ export interface MergedArrival extends Arrival {
 	stop_id: string
 	stop_long_name: string
 	stop_short_name: string
-	warnings: string[]
+	warnings: ArrivalWarning[]
+}
+
+export interface ArrivalWarning {
+	cause: AlertCause
+	effect: AlertEffect
 }
 
 interface PipsArrivalsContextState {
@@ -97,7 +104,7 @@ export const PipsArrivalsContextProvider = ({ children }) => {
 			if (!stop) return;
 
 			arrivals.forEach((arrival) => {
-				const warningsSet = new Set<string>();
+				const warningsMap = new Map<string, ArrivalWarning>();
 				const now = new Date();
 
 				const matchingAlerts = (alertsContext.data.simplified || []).filter((alert) => {
@@ -114,7 +121,10 @@ export const PipsArrivalsContextProvider = ({ children }) => {
 				});
 
 				matchingAlerts.forEach((alert) => {
-					if (alert.title) warningsSet.add(alert.title);
+					const key = `${alert.effect}|${alert.cause}`;
+					if (!warningsMap.has(key)) {
+						warningsMap.set(key, { cause: alert.cause, effect: alert.effect });
+					}
 				});
 
 				flatArrivals.push({
@@ -122,7 +132,7 @@ export const PipsArrivalsContextProvider = ({ children }) => {
 					stop_id: stopId,
 					stop_long_name: stop.long_name,
 					stop_short_name: stop.short_name,
-					warnings: [...warningsSet],
+					warnings: Array.from(warningsMap.values()),
 				});
 			});
 		});
