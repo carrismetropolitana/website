@@ -20,9 +20,7 @@ import { PipsArrivalsTableTimeCell } from './PipsArrivalsTableTimeCell';
 
 interface Props {
 	arrival: MergedArrival
-	extraHeightPx?: number
 	index: number
-	isLast?: boolean
 	nowInSeconds: number
 }
 
@@ -55,7 +53,7 @@ function translateOrFallback(
 
 /* * */
 
-export function PipsArrivalsTableRow({ arrival, extraHeightPx, index, isLast, nowInSeconds }: Props) {
+export function PipsArrivalsTableRow({ arrival, index, nowInSeconds }: Props) {
 	const linesContext = useLinesContext();
 	const tCauseEffect = useTranslations('alerts.AlertCauseEffectIcon');
 	const tWarningLabel = useTranslations('alerts.AlertCauseEffectLabel');
@@ -65,13 +63,10 @@ export function PipsArrivalsTableRow({ arrival, extraHeightPx, index, isLast, no
 	const status: ArrivalStatus = arrival.estimated_arrival_unix !== null ? 'realtime' : 'scheduled';
 	const hasWarnings = arrival.warnings.length > 0;
 	const rowClassName = `${index % 2 === 0 ? styles.rowEven : styles.rowOdd} ${hasWarnings ? styles.rowWithWarningsTop : ''}`;
-	const baseRowStyle = isLast && extraHeightPx
-		? ({ ['--pips-row-extra' as never]: `${extraHeightPx}px` })
-		: undefined;
 
 	return (
 		<>
-			<tr className={rowClassName} style={baseRowStyle}>
+			<tr className={rowClassName}>
 				<td className={styles.td}>
 					<div className={styles.timeCell}>
 						<PipsArrivalsTableTimeCell

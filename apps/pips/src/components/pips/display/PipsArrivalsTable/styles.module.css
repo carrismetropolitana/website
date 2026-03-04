@@ -7,12 +7,18 @@
 
 .table {
 	--pips-col-time: 10%;
-	--pips-col-line: 40%;
-	--pips-col-stop: 50%;
+	--pips-col-line: 50%;
+	--pips-col-stop: 40%;
 	width: 100%;
-	font-size: 20px;
 	table-layout: fixed;
 	border-collapse: collapse;
+}
+
+/* Vertical PIPs mode needs a wider time column */
+[data-orientation="vertical"] .table {
+	--pips-col-time: 15%;
+	--pips-col-line: 45%;
+	--pips-col-stop: 40%;
 }
 
 
@@ -26,7 +32,8 @@
 
 .th {
 	padding: 16px 12px;
-	font-weight: 600;
+	font-size: var(--font-size-heading);
+	font-weight: var(--font-weight-heading);
 	text-align: left;
 }
 

@@ -2,7 +2,10 @@
 	display: grid;
 	grid-template-columns: auto 1fr auto;
 	align-items: center;
+	height: 100px;
+	min-height: 100px;
 	padding: 0 var(--size-spacing-20);
+	overflow: hidden;
 	color: var(--color-system-text-100);
 	background: var(--color-system-background-100);
 }
@@ -10,7 +13,11 @@
 .logo {
 	display: flex;
 	align-items: center;
+	justify-content: center;
 	justify-self: center;
+	width: 250px;
+	height: 100px;
+	overflow: hidden;
 }
 
 .context {

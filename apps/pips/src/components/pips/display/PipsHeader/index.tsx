@@ -55,12 +55,14 @@ export function PipsHeader() {
 				className={styles.logo}
 				href="/"
 			>
-				<LottiePlayer
-					path="pips/assets/header/zume/zume-light.json"
-					style={{ height: 100, width: 250 }}
-					loop
-					play
-				/>
+				<div style={{ height: 100, width: 250 }}>
+					<LottiePlayer
+						path="pips/assets/header/zume/zume-light.json"
+						style={{ height: 100, width: 250 }}
+						loop
+						play
+					/>
+				</div>
 			</Link>
 
 			{/* Date */}
