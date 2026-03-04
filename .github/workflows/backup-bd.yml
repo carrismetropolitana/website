@@ -45,7 +45,6 @@ jobs:
       # Secrets / Environment Setup
       # # # # # # # # # # # # # # # # # # # # #
       - name: Configure Secrets (.env + key file)
-        working-directory: /
         run: |
           mkdir -p secrets
 
@@ -99,7 +98,6 @@ jobs:
       # Run Sync
       # # # # # # # # # # # # # # # # # # # # #
       - name: Run Backup BD
-        working-directory: /
         run: |
           set -e
           echo "Running DB sync..."
@@ -110,7 +108,6 @@ jobs:
       # # # # # # # # # # # # # # # # # # # # #
       - name: Upload backup artifacts to OCI
         if: always()
-        working-directory: /
         run: |
           echo "Uploading artifacts to OCI bucket..."
           npx @tmlmobilidade/env-sync --upload-artifacts || echo "Artifact upload failed or no artifacts to upload"
