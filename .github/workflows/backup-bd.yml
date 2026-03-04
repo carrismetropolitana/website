@@ -67,7 +67,7 @@ jobs:
       - name: Verify .env configuration
         uses: ./.github/actions/verify-env
         with:
-          env-path: ./environments/production/secrets/.env
+          env-path: .env
           required-vars: |
             OCI_KEY_FILE
             OCI_COMPARTMENT
