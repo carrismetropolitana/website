@@ -21,13 +21,25 @@ export function PipsArrivalsTable() {
 	const pipsArrivalsContext = usePipsArrivalsContext();
 	const [nowInSeconds, setNowInSeconds] = useState(() => DateTime.now().toSeconds());
 	const [rowsToShow, setRowsToShow] = useState<null | number>(null);
-	const [rowHeightPx, setRowHeightPx] = useState<null | number>(null);
-	const [lastRowExtraPx, setLastRowExtraPx] = useState(0);
+	const rowsToShowRef = useRef<null | number>(null);
+	const scheduleFitRef = useRef<(() => void) | null>(null);
+	const rafIdRef = useRef<null | number>(null);
 
 	const containerRef = useRef<HTMLDivElement | null>(null);
 	const tableRef = useRef<HTMLTableElement | null>(null);
 
 	const MIN_ROW_HEIGHT_PX = 68;
+	const SHRINK_OVERFLOW_PX = 2;
+	const GROW_SPARE_EXTRA_PX = 12;
+	const MIN_ADJUST_INTERVAL_MS = 250;
+	const lastAdjustAtRef = useRef(0);
+	const lastRevalidateAtRef = useRef(0);
+	const prevVisibleCountRef = useRef<number>(0);
+	const REVALIDATE_COOLDOWN_MS = 4000;
+
+	useEffect(() => {
+		rowsToShowRef.current = rowsToShow;
+	}, [rowsToShow]);
 
 	useEffect(() => {
 		const interval = setInterval(() => {
@@ -48,65 +60,115 @@ export function PipsArrivalsTable() {
 	}, [pipsArrivalsContext.data.merged_arrivals, nowInSeconds]);
 
 	//
-	// Compute how many rows to show and their height based on container size and actual rendered warnings height
+	// Compute how many rows to show based on available space.
+	// We measure the rendered tbody height so the layout stays responsive (no text clipping)
+	// even when fonts/warnings make rows taller than the minimum.
 	useLayoutEffect(() => {
 		const container = containerRef.current;
 		const table = tableRef.current;
 		if (!container || !table) return;
 
-		const update = () => {
+		const computeFit = () => {
 			const thead = table.querySelector('thead');
-			const containerHeight = container.getBoundingClientRect().height;
-			const headerHeight = thead ? thead.getBoundingClientRect().height : 0;
-			const availableHeight = Math.max(0, containerHeight - headerHeight);
+			const tbody = table.querySelector('tbody');
+			if (!tbody) return;
 
+			// Use layout measurements (not affected by CSS transforms).
+			// In vertical mode the whole canvas is rotated, and `getBoundingClientRect()`
+			// swaps axes which breaks the available height calculation.
+			const containerHeight = container.clientHeight;
+			const headerHeight = thead ? (thead as HTMLElement).offsetHeight : 0;
+			const availableHeight = Math.max(0, containerHeight - headerHeight);
 			if (availableHeight <= 0) return;
+
 			const arrivalsCount = visibleArrivals.length;
 			if (arrivalsCount === 0) return;
 
 			const maxRowsByMinHeight = Math.max(1, Math.floor(availableHeight / MIN_ROW_HEIGHT_PX));
-			const maxRowsToShow = Math.min(arrivalsCount, maxRowsByMinHeight);
+			const clampedTarget = Math.min(arrivalsCount, maxRowsByMinHeight);
 
-			// Ensure rowsToShow is initialized and never exceeds what can fit at MIN height.
-			const safeRowsToShow = Math.max(1, Math.min(rowsToShow ?? maxRowsToShow, maxRowsToShow));
-			if (rowsToShow !== safeRowsToShow) {
-				setRowsToShow(safeRowsToShow);
+			const currentRows = rowsToShowRef.current;
+			if (currentRows === null) {
+				setRowsToShow(clampedTarget);
 				return;
 			}
 
-			// Measure the *actual* rendered height of warnings rows for the current slice.
-			const warningsHeightPx = Array.from(table.querySelectorAll(`tbody tr.${styles.warningsRow}`)).reduce(
-				(acc, row) => acc + row.getBoundingClientRect().height,
-				0,
-			);
-
-			const heightForBaseRowsPx = Math.max(0, availableHeight - warningsHeightPx);
-			let nextRowHeightPx = Math.floor(heightForBaseRowsPx / safeRowsToShow);
-
-			// If the computed height falls below the minimum, reduce the number of rows until it fits.
-			if (nextRowHeightPx < MIN_ROW_HEIGHT_PX && safeRowsToShow > 1) {
-				setRowsToShow(safeRowsToShow - 1);
+			// Clamp when arrivals shrink.
+			if (currentRows > arrivalsCount) {
+				setRowsToShow(arrivalsCount);
+				return;
+			}
+			if (currentRows < 1) {
+				setRowsToShow(1);
 				return;
 			}
 
-			nextRowHeightPx = Math.max(MIN_ROW_HEIGHT_PX, nextRowHeightPx);
-			const remainderPx = Math.max(0, Math.floor(heightForBaseRowsPx - nextRowHeightPx * safeRowsToShow));
+			const tbodyHeight = (tbody as HTMLElement).offsetHeight;
+			const nowMs = performance.now();
+			const canGrow = (nowMs - lastAdjustAtRef.current) >= MIN_ADJUST_INTERVAL_MS;
+			const overflowPx = tbodyHeight - availableHeight;
+			const sparePx = availableHeight - tbodyHeight;
 
-			setRowHeightPx(prev => (prev === nextRowHeightPx ? prev : nextRowHeightPx));
-			setLastRowExtraPx(prev => (prev === remainderPx ? prev : remainderPx));
+			// If it overflows even a little, reduce rows until it fits (avoid visual cropping).
+			if (overflowPx > SHRINK_OVERFLOW_PX) {
+				if (currentRows > 1) {
+					lastAdjustAtRef.current = nowMs;
+					setRowsToShow(currentRows - 1);
+				}
+				return;
+			}
+
+			// Only grow when there is clearly enough spare space to avoid oscillation.
+			if (canGrow && currentRows < clampedTarget && sparePx >= (MIN_ROW_HEIGHT_PX + GROW_SPARE_EXTRA_PX)) {
+				lastAdjustAtRef.current = nowMs;
+				setRowsToShow(currentRows + 1);
+			}
 		};
 
-		update();
-		const ro = new ResizeObserver(() => update());
+		const scheduleFit = () => {
+			if (rafIdRef.current !== null) return;
+			rafIdRef.current = window.requestAnimationFrame(() => {
+				rafIdRef.current = null;
+				computeFit();
+			});
+		};
+
+		scheduleFitRef.current = scheduleFit;
+
+		scheduleFit();
+		const ro = new ResizeObserver(() => scheduleFit());
 		ro.observe(container);
 		ro.observe(table);
 
-		window.addEventListener('resize', update);
+		window.addEventListener('resize', scheduleFit);
 		return () => {
-			window.removeEventListener('resize', update);
+			window.removeEventListener('resize', scheduleFit);
 			ro.disconnect();
+			if (rafIdRef.current !== null) {
+				window.cancelAnimationFrame(rafIdRef.current);
+				rafIdRef.current = null;
+			}
+			scheduleFitRef.current = null;
 		};
-	}, [pipsArrivalsContext.data.merged_arrivals, visibleArrivals.length, rowsToShow]);
+	}, [visibleArrivals.length]);
+
+	useEffect(() => {
+		const prevCount = prevVisibleCountRef.current;
+		const currentCount = visibleArrivals.length;
+		prevVisibleCountRef.current = currentCount;
+
+		// If arrivals just dropped off (e.g. "A chegar" → gone) and we now have fewer
+		// items than the number of rows that fit, revalidate immediately so the next
+		// arrivals come in without waiting for the 10s SWR refresh.
+		if (rowsToShow === null) return;
+		if (currentCount >= rowsToShow) return;
+		if (currentCount >= prevCount) return;
+
+		const nowMs = performance.now();
+		if ((nowMs - lastRevalidateAtRef.current) < REVALIDATE_COOLDOWN_MS) return;
+		lastRevalidateAtRef.current = nowMs;
+		pipsArrivalsContext.actions.revalidate();
+	}, [pipsArrivalsContext.actions, rowsToShow, visibleArrivals.length]);
 
 	const arrivalsToRender = useMemo(() => {
 		if (!rowsToShow) return visibleArrivals;
@@ -134,7 +196,6 @@ export function PipsArrivalsTable() {
 		<div
 			ref={containerRef}
 			className={styles.container}
-			style={rowHeightPx ? ({ ['--pips-row-height' as never]: `${rowHeightPx}px` }) : undefined}
 		>
 			<table ref={tableRef} className={styles.table}>
 				<thead className={styles.thead}>
@@ -149,9 +210,7 @@ export function PipsArrivalsTable() {
 						<PipsArrivalsTableRow
 							key={`${arrival.trip_id}-${arrival.stop_sequence}-${index}`}
 							arrival={arrival}
-							extraHeightPx={index === arrivalsToRender.length - 1 ? lastRowExtraPx : 0}
 							index={index}
-							isLast={index === arrivalsToRender.length - 1}
 							nowInSeconds={nowInSeconds}
 						/>
 					))}

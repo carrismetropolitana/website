@@ -27,6 +27,9 @@ export interface ArrivalWarning {
 }
 
 interface PipsArrivalsContextState {
+	actions: {
+		revalidate: () => void
+	}
 	data: {
 		merged_arrivals: MergedArrival[]
 	}
@@ -85,7 +88,7 @@ export const PipsArrivalsContextProvider = ({ children }) => {
 		return results;
 	};
 
-	const { data: arrivalsData, isLoading: arrivalsLoading } = useSWR(
+	const { data: arrivalsData, isLoading: arrivalsLoading, mutate: revalidateArrivals } = useSWR(
 		stopIds.length > 0 ? `arrivals-multi?stopIds=${stopIds.join(',')}` : null,
 		fetcher,
 		{ refreshInterval: 10000 }, // 10 seconds
@@ -160,13 +163,18 @@ export const PipsArrivalsContextProvider = ({ children }) => {
 	// D. Define context value
 
 	const contextValue: PipsArrivalsContextState = useMemo(() => ({
+		actions: {
+			revalidate: () => {
+				void revalidateArrivals();
+			},
+		},
 		data: {
 			merged_arrivals: mergedArrivals,
 		},
 		flags: {
 			is_loading: arrivalsLoading,
 		},
-	}), [mergedArrivals, arrivalsLoading]);
+	}), [arrivalsLoading, mergedArrivals, revalidateArrivals]);
 
 	//
 	// E. Render components

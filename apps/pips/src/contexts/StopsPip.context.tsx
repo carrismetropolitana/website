@@ -9,12 +9,17 @@ import { createContext, useContext, useEffect, useMemo, useState } from 'react';
 
 /* * */
 
+export type PipsDisplayOrientation = 'landscape' | 'vertical';
+export type PipsDisplayRotation = 'ccw' | 'cw';
+
 interface StopsPipContextState {
 	data: {
 		pip_id?: string
 		stops: Stop[]
 	}
 	display: {
+		orientation: PipsDisplayOrientation
+		rotation: PipsDisplayRotation
 		scale: number
 	}
 	flags: {
@@ -75,6 +80,16 @@ export const StopsPipContextProvider = ({ children }) => {
 		return 1.0; // Default scale
 	}, [searchParams]);
 
+	const orientation = useMemo<PipsDisplayOrientation>(() => {
+		const raw = searchParams.get('orientation');
+		return raw === 'vertical' ? 'vertical' : 'landscape';
+	}, [searchParams]);
+
+	const rotation = useMemo<PipsDisplayRotation>(() => {
+		const raw = searchParams.get('rotation');
+		return raw === 'ccw' ? 'ccw' : 'cw';
+	}, [searchParams]);
+
 	//
 	// B. Transform data
 
@@ -127,6 +142,8 @@ export const StopsPipContextProvider = ({ children }) => {
 			stops: dataStopsState,
 		},
 		display: {
+			orientation,
+			rotation,
 			scale,
 		},
 		flags: {

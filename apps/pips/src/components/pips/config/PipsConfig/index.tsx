@@ -6,8 +6,8 @@ import { Grid } from '@/components/layout/Grid';
 import { Section } from '@/components/layout/Section';
 import { Surface } from '@/components/layout/Surface';
 import { useStopsContext } from '@/contexts/Stops.context';
-import { useStopsPipContext } from '@/contexts/StopsPip.context';
-import { Button, CopyButton, NumberInput, TextInput } from '@mantine/core';
+import { type PipsDisplayOrientation, type PipsDisplayRotation, useStopsPipContext } from '@/contexts/StopsPip.context';
+import { Button, CopyButton, NumberInput, SegmentedControl, TextInput } from '@mantine/core';
 import { IconLink, IconZoomScan } from '@tabler/icons-react';
 import { useTranslations } from 'next-intl';
 import Link from 'next/link';
@@ -29,6 +29,8 @@ export function PipsConfig() {
 	const [selectedStopIds, setSelectedStopIds] = useState<string[]>([]);
 	const [pipId, setPipId] = useState('');
 	const [scale, setScale] = useState('1.0');
+	const [orientation, setOrientation] = useState<PipsDisplayOrientation>(stopsPipContext.display.orientation);
+	const [rotation, setRotation] = useState<PipsDisplayRotation>(stopsPipContext.display.rotation);
 
 	//
 	// B. Transform data
@@ -47,9 +49,13 @@ export function PipsConfig() {
 		if (scale !== '1.0') {
 			params.set('scale', scale);
 		}
+		if (orientation === 'vertical') {
+			params.set('orientation', 'vertical');
+			params.set('rotation', rotation);
+		}
 
 		return `${window.location.origin}/pips${params.toString() ? `?${params.toString()}` : ''}`;
-	}, [selectedStopIds, pipId, scale]);
+	}, [selectedStopIds, pipId, scale, orientation, rotation]);
 
 	const isButtonDisabled = useMemo(() => selectedStopIds.length === 0, [selectedStopIds]);
 
@@ -66,6 +72,14 @@ export function PipsConfig() {
 
 	const handleChangeScale = useCallback((value: number | string) => {
 		setScale(value ? String(value) : '1.0');
+	}, []);
+
+	const handleChangeOrientation = useCallback((value: string) => {
+		setOrientation(value === 'vertical' ? 'vertical' : 'landscape');
+	}, []);
+
+	const handleChangeRotation = useCallback((value: string) => {
+		setRotation(value === 'ccw' ? 'ccw' : 'cw');
 	}, []);
 
 	const stopsSelect = useMemo(() => (
@@ -121,6 +135,35 @@ export function PipsConfig() {
 								step={0.1}
 								value={scale}
 							/>
+						</Grid>
+
+						<Grid columns="ab" withGap>
+							<div>
+								<div style={{ fontWeight: 600, marginBottom: 6 }}>Orientação</div>
+								<SegmentedControl
+									fullWidth={true}
+									onChange={handleChangeOrientation}
+									value={orientation}
+									data={[
+										{ label: 'Horizontal', value: 'landscape' },
+										{ label: 'Vertical', value: 'vertical' },
+									]}
+								/>
+							</div>
+
+							<div>
+								<div style={{ fontWeight: 600, marginBottom: 6 }}>Rotação</div>
+								<SegmentedControl
+									disabled={orientation !== 'vertical'}
+									fullWidth={true}
+									onChange={handleChangeRotation}
+									value={rotation}
+									data={[
+										{ label: '↻ (cw)', value: 'cw' },
+										{ label: '↺ (ccw)', value: 'ccw' },
+									]}
+								/>
+							</div>
 						</Grid>
 					</Section>
 
