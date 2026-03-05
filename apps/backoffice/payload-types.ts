@@ -110,9 +110,7 @@ export interface Config {
     settings: SettingsSelect<false> | SettingsSelect<true>;
   };
   locale: null;
-  user: User & {
-    collection: 'users';
-  };
+  user: User;
   jobs: {
     tasks: unknown;
     workflows: unknown;
@@ -174,6 +172,10 @@ export interface Media {
 export interface News {
   id: string;
   title: string;
+  /**
+   * URL amigável para esta notícia. Será gerada automaticamente do título se deixado em branco.
+   */
+  slug?: string | null;
   summary: string;
   body: {
     root: {
@@ -237,6 +239,7 @@ export interface User {
       }[]
     | null;
   password?: string | null;
+  collection: 'users';
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -493,6 +496,7 @@ export interface MediaSelect<T extends boolean = true> {
  */
 export interface NewsSelect<T extends boolean = true> {
   title?: T;
+  slug?: T;
   summary?: T;
   body?: T;
   is_featured?: T;

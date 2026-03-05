@@ -12,6 +12,7 @@ export interface NewsData {
 	is_featured: boolean
 	is_unlisted: boolean
 	publishedAt: string
+	slug?: string
 	summary: string
 	title: string
 	topics: string[]
