@@ -12,31 +12,19 @@ export const GET = async (_request: Request, { params }: { params: Promise<{ slu
 
 	const payload = await getPayload({ config: payloadConfig });
 
-	let doc = null;
+	const result = await payload.find({
+		collection: 'news',
+		depth: 2,
+		limit: 1,
+		where: {
+			or: [
+				{ id: { equals: identifier } },
+				{ slug: { equals: identifier } },
+			],
+		},
+	});
 
-	try {
-		doc = await payload.findByID({
-			collection: 'news',
-			depth: 2,
-			draft: false,
-			id: identifier,
-		});
-	}
-	catch {
-		const result = await payload.find({
-			collection: 'news',
-			depth: 2,
-			limit: 1,
-			where: {
-				and: [
-					{ slug: { equals: identifier } },
-					{ _status: { equals: 'published' } },
-				],
-			},
-		});
-		doc = result.docs[0] ?? null;
-	}
-
+	const doc = result.docs[0];
 	if (!doc) return Response.json({ error: 'Not found' }, { status: 404 });
 
 	return Response.json(doc, {
