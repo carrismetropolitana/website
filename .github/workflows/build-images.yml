@@ -169,3 +169,34 @@ jobs:
           tags: ghcr.io/carrismetropolitana/website-pips:${{ github.ref_name }}
           build-args: |
             ENVIRONMENT=${{ github.ref_name }}
+
+  # # # # # # # # # # # # # # # # # # # # #
+  # # # # # # # # # # # # # # # # # # # # #
+
+  backupd:
+    name: backupd (MongoDB Backup)
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      packages: write
+
+    steps:
+
+      - name: Checkout repository
+        uses: actions/checkout@main
+
+      - name: Login to GitHub Container Registry
+        uses: docker/login-action@master
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Build and Push Docker Image
+        uses: docker/build-push-action@master
+        with:
+          push: true
+          file: ./apps/backupd/Dockerfile
+          tags: ghcr.io/carrismetropolitana/website-backupd:${{ github.ref_name }}
+          build-args: |
+            ENVIRONMENT=${{ github.ref_name }}
