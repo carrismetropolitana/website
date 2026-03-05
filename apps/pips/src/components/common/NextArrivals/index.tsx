@@ -11,15 +11,9 @@ import { useEffect, useState } from 'react';
 
 import styles from './styles.module.css';
 
-/* * */
+import { computeFormattedArrivals, type FormattedArrival } from './utils';
 
-interface NextArrival {
-	estimated_arrival_hours: number
-	estimated_arrival_minutes: number
-	estimated_arrival_seconds: number
-	estimated_arrival_unix: number
-	label: string
-}
+/* * */
 
 interface Props {
 	allowPastArrivals?: boolean
@@ -43,7 +37,7 @@ export function NextArrivals({ allowPastArrivals = true, arrivals, size, status,
 
 	const t = useTranslations('common.NextArrivals');
 
-	const [allFormattedArrivals, setFormattedArrivals] = useState<NextArrival[]>([]);
+	const [allFormattedArrivals, setFormattedArrivals] = useState<FormattedArrival[]>([]);
 
 	//
 	// B. Transform data
@@ -52,59 +46,8 @@ export function NextArrivals({ allowPastArrivals = true, arrivals, size, status,
 		//
 
 		const formatArrivals = () => {
-			//
 			const nowInSeconds = DateTime.now().toSeconds();
-			const allFormattedArrivalsResult: NextArrival[] = [];
-			//
-			for (const unixTimestamp of arrivals) {
-				// Check if arrival is in the past
-				if (!allowPastArrivals && unixTimestamp < nowInSeconds) continue;
-				// Prepare the time values
-				const secondsUntilArrival = Math.floor(unixTimestamp - nowInSeconds);
-				const minutesUntilArrival = Math.floor(secondsUntilArrival / 60);
-				const hoursUntilArrival = Math.floor(minutesUntilArrival / 60);
-
-				// For realtime arrivals we calculate a relative time to the current time
-				// (ex: "a chegar", "5 min", "1 hora", "1 hora 30 min")
-				if (status === 'realtime') {
-				//
-					let labelResult = '';
-					//
-					if (minutesUntilArrival <= 0) {
-						labelResult = t('arriving');
-					}
-					if (hoursUntilArrival > 0) {
-						labelResult += `${hoursUntilArrival} ${t('hours')} `;
-					}
-					if (minutesUntilArrival > 0) {
-						labelResult += `${minutesUntilArrival % 60} ${t('minutes')}`;
-					}
-					//
-					allFormattedArrivalsResult.push({
-						estimated_arrival_hours: hoursUntilArrival,
-						estimated_arrival_minutes: minutesUntilArrival,
-						estimated_arrival_seconds: secondsUntilArrival,
-						estimated_arrival_unix: unixTimestamp,
-						label: labelResult.trim(),
-					});
-				}
-
-				// For scheduled arrivals we just display the absolute arrival value in hours and minutes
-				// (ex: "13:45", "14:30")
-				if (status === 'scheduled' || status === 'passed' || status === 'canceled') {
-					allFormattedArrivalsResult.push({
-						estimated_arrival_hours: hoursUntilArrival,
-						estimated_arrival_minutes: minutesUntilArrival,
-						estimated_arrival_seconds: secondsUntilArrival,
-						estimated_arrival_unix: unixTimestamp,
-						label: DateTime.fromSeconds(unixTimestamp).toFormat('HH:mm'),
-					});
-				}
-			}
-
-			setFormattedArrivals(allFormattedArrivalsResult);
-
-			//
+			setFormattedArrivals(computeFormattedArrivals({ allowPastArrivals, arrivals, nowInSeconds, status, t }));
 		};
 
 		formatArrivals();
@@ -114,7 +57,7 @@ export function NextArrivals({ allowPastArrivals = true, arrivals, size, status,
 		return () => clearInterval(interval);
 
 		//
-	}, [arrivals, status]);
+	}, [allowPastArrivals, arrivals, status, t]);
 
 	//
 	// C. Render components

@@ -53,11 +53,18 @@ export function NewsList() {
 					<Grid columns="abcd" withGap>
 						{newsListContext.data.filtered.map(newsItem => (
 							<NewsCard
-								key={newsItem._id}
-								_id={newsItem._id}
-								coverImageSrc={newsItem.cover_image_src}
-								publishDate={newsItem.publish_date}
+								key={newsItem.id}
+								id={newsItem.id}
+								publishedAt={newsItem.publishedAt}
+								slug={newsItem.slug}
 								title={newsItem.title}
+								featuredImageSrc={
+									{
+										filename: newsItem.featured_image?.filename,
+										thumbnailURL: newsItem.featured_image?.thumbnailURL,
+										url: newsItem.featured_image?.url,
+									}
+								}
 							/>
 						))}
 					</Grid>
@@ -71,7 +78,6 @@ export function NewsList() {
 					</Grid>
 				</Section>
 			)}
-
 		</Surface>
 	);
 

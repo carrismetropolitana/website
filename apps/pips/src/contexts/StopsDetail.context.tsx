@@ -63,7 +63,7 @@ export function useStopsDetailContext() {
 
 /* * */
 
-export const StopsDetailContextProvider = ({ children, maxLines, stopId }: { children: React.ReactNode, maxLines?: number, stopId: string }) => {
+export const StopsDetailContextProvider = ({ children, stopId }: { children: React.ReactNode, stopId: string }) => {
 	//
 
 	//
@@ -255,8 +255,7 @@ export const StopsDetailContextProvider = ({ children, maxLines, stopId }: { chi
 					const minimumArrivalA = a.estimated_arrival_unix || a.scheduled_arrival_unix;
 					const minimumArrivalB = b.estimated_arrival_unix || b.scheduled_arrival_unix;
 					return minimumArrivalA - minimumArrivalB;
-				})
-				.slice(0, maxLines);
+				});
 			setDataTimetableRealtimePastState(timetableRealtimePastResult || []);
 			setDataTimetableRealtimeFutureState(timetableRealtimeFutureResult || []);
 		};

@@ -1,7 +1,20 @@
+import { AccordionData } from './accordion.types';
+
 export interface NewsData {
-	_id: string
-	content: string
-	cover_image_src: string
-	publish_date: string
+	accordion?: AccordionData
+	body: string
+	featured_image: {
+		filename: string
+		thumbnailURL: string
+		url: string
+	}
+	id: string
+	is_featured: boolean
+	is_unlisted: boolean
+	publishedAt: string
+	slug?: string
+	summary: string
 	title: string
+	topics: string[]
+	updated_at: string
 }
