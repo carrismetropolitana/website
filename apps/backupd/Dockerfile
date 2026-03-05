@@ -1,9 +1,9 @@
 FROM mongo:latest
 
-WORKDIR /backupd
+WORKDIR /app
 
 COPY . .
 
-RUN chmod +x backupd.sh websitedb.sh
+RUN chmod +x /app/apps/backupd/backupd.sh /app/apps/backupd/websitedb.sh
 
-CMD ["sh", "backupd.sh"]
+CMD ["sh", "/app/apps/backupd/backupd.sh"]
