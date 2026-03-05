@@ -56,6 +56,7 @@ export function NewsList() {
 								key={newsItem.id}
 								id={newsItem.id}
 								publishedAt={newsItem.publishedAt}
+								slug={newsItem.slug}
 								title={newsItem.title}
 								featuredImageSrc={
 									{

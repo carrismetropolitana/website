@@ -21,7 +21,7 @@ const nextConfig: NextConfig = {
 				protocol: 'http',
 			},
 			{
-				hostname: 'staging.carrismetropolitana.pt',
+				hostname: '*.carrismetropolitana.pt',
 				pathname: '/**',
 				protocol: 'https',
 			},

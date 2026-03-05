@@ -19,12 +19,13 @@ interface NewsCardProps {
 	featuredImageSrc?: FeaturedImageSrc
 	id: string
 	publishedAt: string
+	slug?: string
 	title: string
 }
 
 /* * */
 
-export function NewsCard({ featuredImageSrc, id, publishedAt, title }: NewsCardProps) {
+export function NewsCard({ featuredImageSrc, id, publishedAt, slug, title }: NewsCardProps) {
 	//
 
 	//
@@ -37,7 +38,7 @@ export function NewsCard({ featuredImageSrc, id, publishedAt, title }: NewsCardP
 	//
 	// B. Render components
 	return (
-		<Link className={styles.container} href={`news/${id}`}>
+		<Link className={styles.container} href={`news/${slug || id}`}>
 			<Image
 				alt={featuredImageSrc?.filename}
 				className={styles.coverImage}

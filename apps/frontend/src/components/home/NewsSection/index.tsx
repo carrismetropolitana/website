@@ -38,6 +38,7 @@ export function NewsSection() {
 			<NewsCard
 				id={slideItem.id}
 				publishedAt={slideItem.publishedAt}
+				slug={slideItem.slug}
 				title={slideItem.title}
 				featuredImageSrc={{
 					filename: slideItem.featured_image?.filename,

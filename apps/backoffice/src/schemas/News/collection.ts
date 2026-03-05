@@ -6,6 +6,7 @@ import { isUnlistedField } from '@/fields/is-unlisted';
 import { publishedAtField } from '@/fields/published-at';
 import { topicsField } from '@/fields/topics';
 import { updatedAtField } from '@/fields/updated-at';
+import { slugify } from '@/utils/slugify';
 import { type CollectionConfig } from 'payload';
 
 /* * */
@@ -30,6 +31,16 @@ export const News: CollectionConfig = {
 			type: 'text',
 		},
 		{
+			admin: {
+				description: 'URL amigável para esta notícia. Será gerada automaticamente do título se deixado em branco.',
+			},
+			index: true,
+			label: 'Slug',
+			name: 'slug',
+			type: 'text',
+			unique: true,
+		},
+		{
 			label: 'Resumo curto',
 			name: 'summary',
 			required: true,
@@ -48,6 +59,16 @@ export const News: CollectionConfig = {
 		publishedAtField,
 		updatedAtField,
 	],
+	hooks: {
+		beforeValidate: [
+			async ({ data }) => {
+				if (data.title && !data.slug) {
+					data.slug = slugify(data.title);
+				}
+			},
+		],
+	},
+
 	labels: {
 		plural: 'Notícias',
 		singular: 'Notícia',
