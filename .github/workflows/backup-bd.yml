@@ -101,7 +101,7 @@ jobs:
         run: |
           set -e
           echo "Running DB sync..."
-          npx @tmlmobilidade/env-sync --db-only --env-path .env
+          npx @tmlmobilidade/env-sync --db-only --env-file .env
 
       # # # # # # # # # # # # # # # # # # # # #
       # Upload artifacts to OCI (secure storage for public repos)
@@ -110,4 +110,4 @@ jobs:
         if: always()
         run: |
           echo "Uploading artifacts to OCI bucket..."
-          npx @tmlmobilidade/env-sync --upload-artifacts --env-path .env || echo "Artifact upload failed or no artifacts to upload"
+          npx @tmlmobilidade/env-sync --upload-artifacts --env-file .env || echo "Artifact upload failed or no artifacts to upload"
