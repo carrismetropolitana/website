@@ -1,0 +1,7 @@
+.container {
+	display: flex;
+	flex-flow: column;
+	gap: var(--size-spacing-10);
+	align-items: flex-start;
+    padding: var(--size-spacing-10);
+}

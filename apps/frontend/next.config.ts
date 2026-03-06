@@ -7,7 +7,6 @@ import createNextIntlPlugin from 'next-intl/plugin';
 /* * */
 
 const nextConfig: NextConfig = {
-
 	async headers() {
 		return [
 			{
@@ -266,7 +265,6 @@ const nextConfig: NextConfig = {
 			},
 		];
 	},
-
 };
 
 /* * */

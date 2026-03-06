@@ -9,16 +9,23 @@ import styles from './styles.module.css';
 
 /* * */
 
+interface FeaturedImageSrc {
+	filename?: string
+	thumbnailURL?: string
+	url?: string
+}
+
 interface NewsCardProps {
-	_id: string
-	coverImageSrc: string
-	publishDate: string
+	featuredImageSrc?: FeaturedImageSrc
+	id: string
+	publishedAt: string
+	slug?: string
 	title: string
 }
 
 /* * */
 
-export function NewsCard({ _id, coverImageSrc, publishDate, title }: NewsCardProps) {
+export function NewsCard({ featuredImageSrc, id, publishedAt, slug, title }: NewsCardProps) {
 	//
 
 	//
@@ -26,16 +33,21 @@ export function NewsCard({ _id, coverImageSrc, publishDate, title }: NewsCardPro
 
 	const t = useTranslations('NewsCard');
 
-	const publishDateObject = DateTime.fromISO(publishDate).toJSDate();
+	const formattedDate = DateTime.fromISO(publishedAt).toJSDate();
 
 	//
 	// B. Render components
-
 	return (
-		<Link className={styles.container} href={`/news/${_id}`}>
-			<Image alt={title} className={styles.coverImage} fallbackSrc="/assets/common/placeholder.png" src={coverImageSrc} />
-			<p className={styles.publishDate}>{t('publish_date', { publishDate: publishDateObject })}</p>
-			<p className={styles.title} dangerouslySetInnerHTML={{ __html: title || 'title' }} />
+		<Link className={styles.container} href={`news/${slug || id}`}>
+			<Image
+				alt={featuredImageSrc?.filename}
+				className={styles.coverImage}
+				fallbackSrc="/assets/common/placeholder.png"
+				loading="lazy"
+				src={featuredImageSrc?.thumbnailURL ?? featuredImageSrc?.url}
+			/>
+			<p className={styles.publishDate}>{t('publish_date', { published_at: formattedDate })}</p>
+			<p className={styles.title}>{title}</p>
 		</Link>
 	);
 
