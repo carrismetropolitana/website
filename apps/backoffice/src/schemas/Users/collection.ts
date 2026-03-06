@@ -10,7 +10,9 @@ export const Users: CollectionConfig = {
 		useAsTitle: 'email',
 	},
 
-	auth: true,
+	auth: {
+		useAPIKey: true,
+	},
 
 	fields: [
 		{

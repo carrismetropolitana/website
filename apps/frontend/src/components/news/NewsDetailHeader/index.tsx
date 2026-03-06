@@ -22,7 +22,7 @@ export function NewsDetailHeader({ newsData }) {
 	//
 	// B. Transform data
 
-	const formattedDate = DateTime.fromISO(newsData?.publish_date).toJSDate();
+	const formattedDate = DateTime.fromISO(newsData?.publishedAt).toJSDate();
 
 	//
 	// C. Render components
@@ -38,8 +38,8 @@ export function NewsDetailHeader({ newsData }) {
 
 	return (
 		<Section withBottomDivider withGap withPadding>
-			<h1 className={styles.title} dangerouslySetInnerHTML={{ __html: newsData?.title || 'title' }} />
-			<p className={styles.publishDate}>{t('publish_date', { value: formattedDate })}</p>
+			<h1 className={styles.title}>{newsData?.title}</h1>
+			<p className={styles.publishDate}>{t('publish_date', { published_at: formattedDate })}</p>
 		</Section>
 	);
 

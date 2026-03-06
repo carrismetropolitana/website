@@ -13,9 +13,7 @@ export const Articles: CollectionConfig = {
 		create: ({ req: { user } }) => Boolean(user),
 		delete: ({ req: { user } }) => Boolean(user),
 		read: ({ req: { user } }) => {
-			// If user is authenticated, return all records
 			if (user) return true;
-			// Otherwise, only return published records
 			return { status: { equals: 'published' } };
 		},
 		update: ({ req: { user } }) => Boolean(user),
@@ -242,7 +240,6 @@ export const Articles: CollectionConfig = {
 	hooks: {
 		beforeChange: [
 			async ({ data }) => {
-				// Set publishDate if publishing without date
 				if (data.status === 'published' && !data.publishDate) {
 					data.publishDate = new Date();
 				}
@@ -250,7 +247,6 @@ export const Articles: CollectionConfig = {
 		],
 		beforeValidate: [
 			async ({ data }) => {
-				// Auto-generate slug if empty
 				if (data.title && !data.slug) {
 					data.slug = slugify(data.title);
 				}

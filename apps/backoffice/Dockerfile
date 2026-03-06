@@ -74,7 +74,7 @@ RUN npm ci
 
 COPY --from=pruner /app/out/full/ .
 
-RUN npx @helperkits/bumper /app/apps/${PROJECT}/package.json
+RUN npx @tmlmobilidade/repo-version --output=/app/apps/${PROJECT}/package.json
 
 RUN turbo run build --filter=@carrismetropolitana/website-${PROJECT}
 

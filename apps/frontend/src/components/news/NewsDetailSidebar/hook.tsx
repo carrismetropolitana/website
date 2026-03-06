@@ -4,75 +4,82 @@
  * Custom hook to parse HTML and generate Table of Contents tree.
  */
 
-import { NewsData } from '@/types/news.types';
+import type { LexicalNode } from '@/types/lexical-node.types';
+
+import { extractTextFromNode, slugify } from '@/utils/sidebarHelper';
 import { useEffect, useState } from 'react';
 
-// Define the types for Heading and TOC item
-export interface TocTreeItem extends Heading {
-	children: TocTreeItem[]
-	parent?: TocTreeItem
-}
+/* * */
 
-interface Heading {
+export interface TocHeading {
 	id: string
 	level: number
 	text: string
 }
 
-// Custom hook to parse HTML and generate TOC tree
-export default function useHook(news: NewsData): TocTreeItem[] {
-	const [toc, setToc] = useState<TocTreeItem[]>([]);
+/* * */
 
-	// Function to parse HTML and extract headings
-	const parseHeadings = (news: NewsData): Heading[] => {
-		const parser = new DOMParser();
-		const doc = parser.parseFromString(news.content, 'text/html');
-		const headings = Array.from(doc.querySelectorAll('h2, h3'));
+export default function useHook(newsBody: LexicalNode | string | undefined): TocHeading[] {
+	//
 
-		const res: Heading[] = [
-		];
+	//
+	// A. Setup variables
 
-		headings.forEach((heading) => {
-			const id = heading.id;
-			const level = parseInt(heading.tagName[1]);
-			const text = heading.textContent || '';
-			res.push({ id, level, text });
-		});
+	const [headings, setHeadings] = useState<TocHeading[]>([]);
 
-		return res;
-	};
-
-	// Function to build a tree structure from headings
-	const buildTocTree = (headings: Heading[]): TocTreeItem[] => {
-		const toc: TocTreeItem[] = [];
-		let current: TocTreeItem | undefined = { children: toc, id: '', level: 0, text: '' };
-
-		headings.forEach((heading) => {
-			const item: TocTreeItem = { ...heading, children: [] };
-
-			if (heading.level === 1) {
-				toc.push(item);
-				current = item;
-			}
-			else {
-				let parent = current;
-				while (parent && parent.level >= heading.level) {
-					parent = parent.parent;
-				}
-				item.parent = parent;
-				parent?.children.push(item);
-				current = item;
-			}
-		});
-
-		return toc;
-	};
+	//
+	// B. Transform Data
 
 	useEffect(() => {
-		const headings = parseHeadings(news);
-		const tocTree = buildTocTree(headings);
-		setToc(tocTree);
-	}, [news]);
+		if (!newsBody) {
+			setHeadings([]);
+			return;
+		}
 
-	return toc;
-};
+		let parsedBody: LexicalNode | undefined | { root?: { children?: LexicalNode[] } };
+
+		if (typeof newsBody === 'string') {
+			try {
+				parsedBody = JSON.parse(newsBody) as LexicalNode | { root?: { children?: LexicalNode[] } };
+			}
+			catch {
+				setHeadings([]);
+				return;
+			}
+		}
+		else {
+			parsedBody = newsBody;
+		}
+
+		const rootNode = (parsedBody && typeof parsedBody === 'object' && 'root' in parsedBody ? parsedBody.root : parsedBody) as LexicalNode | { children?: LexicalNode[] };
+
+		if (!rootNode || !rootNode.children || !Array.isArray(rootNode.children)) {
+			setHeadings([]);
+			return;
+		}
+
+		const result: TocHeading[] = [];
+
+		rootNode.children.forEach((child, index) => {
+			if (child.type === 'custom-heading' && child.tag) {
+				const level = parseInt(child.tag.replace('h', '')) || 1;
+				const text = extractTextFromNode(child);
+				const anchorId = (child as { anchorId?: string }).anchorId;
+				const id = (anchorId && anchorId.trim() !== '') ? anchorId : `${slugify(text)}-${index}`;
+
+				if (text && (level === 2 || level === 3)) {
+					result.push({ id, level, text });
+				}
+			}
+		});
+
+		setHeadings(result);
+	}, [newsBody]);
+
+	//
+	// C. Return
+
+	return headings;
+
+	//
+}

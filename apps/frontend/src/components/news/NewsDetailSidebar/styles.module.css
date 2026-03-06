@@ -8,27 +8,21 @@
 	color: var(--color-system-text-300);
 
 	& ul {
+		display: flex;
+		flex-direction: column;
+		gap: var(--size-spacing-10);
 		padding-inline-start: 20px;
 		list-style: none;
 	}
+}
 
-	& li {
-		margin-left: 0;
-	}
-
-	/* stylelint-disable-next-line selector-pseudo-class-no-unknown */
-	& :global(ul) {
-		display: flex;
-		flex-direction: column;
-		gap: 10px;
-		margin: 5px 0;
-	}
+.nested {
+	padding-left: var(--size-spacing-15);
 }
 
 .active {
 	color: var(--color-system-text-100);
 }
-
 
 @media (width <= 900px) {
 	.nav {

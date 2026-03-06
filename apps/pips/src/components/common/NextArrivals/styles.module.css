@@ -51,7 +51,7 @@
 }
 
 .arrival.lg {
-	font-size: 26px;
+	font-size: var(--font-size-heading);
 }
 
 .realtime .arrival {

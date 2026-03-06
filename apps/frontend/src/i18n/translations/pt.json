@@ -59,7 +59,7 @@
 		}
 	},
 	"NewsCard": {
-		"publish_date": "{publishDate, date, long}",
+		"publish_date": "{published_at, date, long}",
 		"see_more": "Veja Mais"
 	},
 	"SelectLine": {
@@ -173,8 +173,8 @@
 				"ACCIDENT": "Acidente",
 				"CONSTRUCTION": "Obras",
 				"DEMONSTRATION": "Evento / Manifestação",
-				"DRIVER_ABSENCE": "Ausência de Motorista",
-				"DRIVER_ISSUE": "Problema com Motorista",
+				"DRIVER_ABSENCE": "Problema Técnico",
+				"DRIVER_ISSUE": "Problema Técnico",
 				"HIGH_PASSENGER_LOAD": "Elevada Lotação",
 				"MEDICAL_EMERGENCY": "Emergência Médica",
 				"NETWORK_UPDATE": "Atualização da Rede",
@@ -184,6 +184,7 @@
 				"STRIKE": "Greve",
 				"TECHNICAL_ISSUE": "Problema Técnico",
 				"TRAFFIC_JAM": "Trânsito",
+				"VEHICLE_ISSUE": "Problema Técnico",
 				"WEATHER": "Condições Meteorológicas"
 			},
 			"effect": {
@@ -1394,7 +1395,7 @@
 			"found_items_counter": "{count, plural, =0 {Nenhuma notícia encontrada.} one {Encontrada # noticia:} other {Encontradas # notícias:}}"
 		},
 		"SinglePageHeader": {
-			"publish_date": "Publicada a {value, date, long}"
+			"publish_date": "Publicada a {published_at, date, long}"
 		}
 	},
 	"notifications": {

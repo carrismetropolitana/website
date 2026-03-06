@@ -9,18 +9,18 @@ import { createContext, useContext, useEffect, useMemo, useState } from 'react';
 
 /* * */
 
+export type PipsDisplayOrientation = 'landscape' | 'vertical';
+export type PipsDisplayRotation = 'ccw' | 'cw';
+
 interface StopsPipContextState {
 	data: {
+		pip_id?: string
 		stops: Stop[]
 	}
 	display: {
-		auto_scroll: boolean
+		orientation: PipsDisplayOrientation
+		rotation: PipsDisplayRotation
 		scale: number
-		scroll_pause: number
-		scroll_speed: number
-	}
-	filters: {
-		max_lines: number
 	}
 	flags: {
 		is_loading: boolean
@@ -59,9 +59,12 @@ export const StopsPipContextProvider = ({ children }) => {
 		const raw = searchParams.get('stop_ids');
 		return raw ? raw.split(',') : [];
 	}, [searchParams]);
-	const maxLines = useMemo(() =>
-		parseInt(searchParams.get('max_lines')) || undefined,
-	[searchParams]);
+
+	const pipId = useMemo(() => {
+		const raw = searchParams.get('pip_id');
+		return raw && raw.trim().length > 0 ? raw.trim() : undefined;
+	}, [searchParams]);
+
 	const maxStops = useMemo(() =>
 		parseInt(searchParams.get('max_stops')) || undefined,
 	[searchParams]);
@@ -70,36 +73,21 @@ export const StopsPipContextProvider = ({ children }) => {
 	const scale = useMemo(() => {
 		const raw = searchParams.get('scale');
 		const parsed = parseFloat(raw);
-		// Validate range: 0.5 to 3.0
-		if (!isNaN(parsed) && parsed >= 0.5 && parsed <= 3.0) {
+		// Validate range: 0.1 to 3.0
+		if (!isNaN(parsed) && parsed >= 0.1 && parsed <= 3.0) {
 			return parsed;
 		}
 		return 1.0; // Default scale
 	}, [searchParams]);
 
-	const autoScroll = useMemo(() => {
-		const raw = searchParams.get('auto_scroll');
-		return raw === 'true' || raw === '1';
+	const orientation = useMemo<PipsDisplayOrientation>(() => {
+		const raw = searchParams.get('orientation');
+		return raw === 'vertical' ? 'vertical' : 'landscape';
 	}, [searchParams]);
 
-	const scrollSpeed = useMemo(() => {
-		const raw = searchParams.get('scroll_speed');
-		const parsed = parseInt(raw);
-		// Validate range: 10ms to 500ms
-		if (!isNaN(parsed) && parsed >= 10 && parsed <= 500) {
-			return parsed;
-		}
-		return 50; // Default scroll speed in ms
-	}, [searchParams]);
-
-	const scrollPause = useMemo(() => {
-		const raw = searchParams.get('scroll_pause');
-		const parsed = parseInt(raw);
-		// Validate range: 500ms to 10000ms
-		if (!isNaN(parsed) && parsed >= 500 && parsed <= 10000) {
-			return parsed;
-		}
-		return 2000; // Default pause duration in ms
+	const rotation = useMemo<PipsDisplayRotation>(() => {
+		const raw = searchParams.get('rotation');
+		return raw === 'ccw' ? 'ccw' : 'cw';
 	}, [searchParams]);
 
 	//
@@ -150,16 +138,13 @@ export const StopsPipContextProvider = ({ children }) => {
 
 	const contextValue: StopsPipContextState = {
 		data: {
+			pip_id: pipId,
 			stops: dataStopsState,
 		},
 		display: {
-			auto_scroll: autoScroll,
+			orientation,
+			rotation,
 			scale,
-			scroll_pause: scrollPause,
-			scroll_speed: scrollSpeed,
-		},
-		filters: {
-			max_lines: maxLines,
 		},
 		flags: {
 			is_loading: stopsLoading,

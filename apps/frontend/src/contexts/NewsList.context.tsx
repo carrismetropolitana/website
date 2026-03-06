@@ -4,6 +4,7 @@
 
 // import { useAnalyticsContext } from '@/contexts/Analytics.context';
 import { NewsData } from '@/types/news.types';
+import { getPublicVariable } from '@carrismetropolitana/website-shared-settings';
 import { DateTime } from 'luxon';
 import { createContext, useContext, useEffect, useState } from 'react';
 import useSWR from 'swr';
@@ -57,7 +58,8 @@ export const NewsListContextProvider = ({ children }) => {
 	//
 	// B. Fetch data
 
-	const { data: allNewsData, isLoading: allNewsLoading } = useSWR<NewsData[], Error>(`/api/news`, { refreshInterval: 900000 }); // 15 minutes
+	const newsApiUrl = `${getPublicVariable('server_url_backoffice')}/admin/public-api/news`;
+	const { data: allNewsData, isLoading: allNewsLoading } = useSWR<NewsData[], Error>(newsApiUrl, { refreshInterval: 900000 }); // 15 minutes
 
 	//
 	// C. Transform data
@@ -82,7 +84,7 @@ export const NewsListContextProvider = ({ children }) => {
 
 		if (filterByDate) {
 			filterResult = filterResult.filter((newsItem) => {
-				const newsItemDate = DateTime.fromISO(newsItem.publish_date);
+				const newsItemDate = DateTime.fromISO(newsItem.publishedAt);
 				return newsItemDate.hasSame(DateTime.fromFormat(filterByDate, 'yyyy-MM-dd'), 'day');
 			});
 		}
