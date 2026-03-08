@@ -92,3 +92,9 @@
 		width: 20px;
 	}
 }
+
+/* * */
+/* DATE PICKER / PUBLIC HOLIDAY DATE OVERRIDE */
+.publicHoliday {
+	color: var(--mantine-color-red-6) !important;
+}

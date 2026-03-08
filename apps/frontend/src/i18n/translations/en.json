@@ -509,7 +509,7 @@
 			}
 		},
 		"FavoriteToggle": {
-			"disabled": "É necessário permitir cookies para adicionar favoritos"
+			"disabled": "You must allow cookies to add favorites"
 		},
 		"NextArrivals": {
 			"arriving": "Coming up",
@@ -520,6 +520,25 @@
 			"label": "Back to Top"
 		},
 		"SelectOperationalDate": {
+			"christmasHoliday": "C",
+			"easterHoliday": "E",
+			"publicHoliday": "H",
+			"publicHolidayNames": {
+				"assuncaoNossaSenhora": "Assumption of Mary",
+				"carnival": "Carnival {year}",
+				"christmas": "Christmas {year}",
+				"corpusChristi": "Corpus Christi {year}",
+				"diaDaLiberdade": "Liberty Day (25th April)",
+				"diaDePortugal": "Portugal, Camões and Portuguese Communities Day",
+				"diaDoTrabalhador": "Labour Day",
+				"easter": "Easter {year}",
+				"goodFriday": "Good Friday {year}",
+				"imaculadaConceicao": "Feast of the Immaculate Conception",
+				"implatacaoRepublica": "Republic Implementation Day",
+				"newYears": "New Years Day {year}",
+				"restauracaoIndependencia": "Restoration of Independence Day",
+				"todosOsSantos": "All Saints' Day"
+			},
 			"today": "Today",
 			"tomorrow": "Tomorrow"
 		},

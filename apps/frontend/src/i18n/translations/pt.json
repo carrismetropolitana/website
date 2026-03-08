@@ -520,6 +520,25 @@
 			"label": "Início da Página"
 		},
 		"SelectOperationalDate": {
+			"christmasHoliday": "N",
+			"easterHoliday": "P",
+			"publicHoliday": "F",
+			"publicHolidayNames": {
+				"assuncaoNossaSenhora": "Dia da Assunção de Nossa Senhora",
+				"carnival": "Carnaval {year}",
+				"christmas": "Natal {year}",
+				"corpusChristi": "Corpo de Deus {year}",
+				"diaDaLiberdade": "Dia da Liberdade (25 de abril)",
+				"diaDePortugal": "Dia de Portugal, de Camões e das Comunidades Portuguesas",
+				"diaDoTrabalhador": "Dia do Trabalhador",
+				"easter": "Páscoa {year}",
+				"goodFriday": "Sexta-Feira Santa {year}",
+				"imaculadaConceicao": "Dia da Imaculada Conceição",
+				"implatacaoRepublica": "Dia da Implatação da República",
+				"newYears": "Ano Novo {year}",
+				"restauracaoIndependencia": "Dia da Restauração da Independência",
+				"todosOsSantos": "Dia de Todos os Santos"
+			},
 			"today": "Hoje",
 			"tomorrow": "Amanhã"
 		},
