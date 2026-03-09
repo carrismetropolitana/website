@@ -1,0 +1,151 @@
+# # #
+
+name: cmet-website-sandbox
+
+volumes:
+  websitedbdata:
+  certbotdata:
+
+services:
+  #
+
+  # # # # # # # # # # # # # # # # # # # # #
+  # # # # # # # # # # # # # # # # # # # # #
+
+  watchtower:
+    image: containrrr/watchtower
+    mem_limit: 100m
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+    environment:
+      - WATCHTOWER_POLL_INTERVAL=10
+      - WATCHTOWER_CLEANUP=TRUE
+      - WATCHTOWER_INCLUDE_STOPPED=TRUE
+      - WATCHTOWER_REVIVE_STOPPED=TRUE
+      - WATCHTOWER_ROLLING_RESTART=TRUE
+
+  # # # # # # # # # # # # # # # # # # # # #
+  # # # # # # # # # # # # # # # # # # # # #
+
+  websitedb:
+    image: mongo
+    restart: unless-stopped
+    logging:
+      options:
+        max-size: '1m'
+        max-file: '1'
+    ports:
+      - 27017:27017
+    volumes:
+      - ./websitedbdata:/data/db
+    env_file:
+      - ./secrets/.env
+
+  # # # # # # # # # # # # # # # # # # # # #
+  # # # # # # # # # # # # # # # # # # # # #
+
+  backupd:
+    image: ghcr.io/carrismetropolitana/website-backupd:sandbox
+    deploy:
+      restart_policy:
+        condition: on-failure
+        delay: 5s
+      resources:
+        limits:
+          memory: 500mb
+    logging:
+      options:
+        max-size: '1m'
+        max-file: '1'
+    volumes:
+      - ./backups/:/backups
+    env_file:
+      - ./secrets/.env
+
+  # # # # # # # # # # # # # # # # # # # # #
+  # # # # # # # # # # # # # # # # # # # # #
+
+  certbot:
+    image: certbot/certbot
+    restart: unless-stopped
+    mem_limit: 100m
+    volumes:
+      - ./letsencrypt:/etc/letsencrypt
+      - certbotdata:/var/www/certbot
+    entrypoint: "/bin/sh -c 'trap exit TERM; while :; do certbot renew; sleep 12h & wait $${!}; done;'"
+
+  # # # # # # # # # # # # # # # # # # # # #
+  # # # # # # # # # # # # # # # # # # # # #
+
+  nginx:
+    image: ghcr.io/carrismetropolitana/website-nginx:sandbox
+    restart: unless-stopped
+    mem_limit: 1g
+    logging:
+      options:
+        max-size: '1m'
+        max-file: '1'
+    volumes:
+      - ./secrets/uptime.conf:/etc/nginx/uptime.conf
+      - ./letsencrypt:/etc/letsencrypt
+      - certbotdata:/var/www/certbot
+    ports:
+      - 80:80
+      - 443:443
+    command: '/bin/sh -c ''while :; do sleep 6h & wait $${!}; nginx -s reload; done & nginx -g "daemon off;"'''
+
+  # # # # # # # # # # # # # # # # # # # # #
+  # # # # # # # # # # # # # # # # # # # # #
+
+  backoffice:
+    image: ghcr.io/carrismetropolitana/website-backoffice:sandbox
+    restart: unless-stopped
+    mem_limit: 6g
+    logging:
+      options:
+        max-size: '1m'
+        max-file: '1'
+    env_file:
+      - ./secrets/.env
+
+  # # # # # # # # # # # # # # # # # # # # #
+  # # # # # # # # # # # # # # # # # # # # #
+
+  frontend:
+    image: ghcr.io/carrismetropolitana/website-frontend:sandbox
+    restart: unless-stopped
+    mem_limit: 6g
+    logging:
+      options:
+        max-size: '1m'
+        max-file: '1'
+    env_file:
+      - ./secrets/.env
+
+  # # # # # # # # # # # # # # # # # # # # #
+  # # # # # # # # # # # # # # # # # # # # #
+
+  schools:
+    image: ghcr.io/carrismetropolitana/website-schools:sandbox
+    restart: unless-stopped
+    mem_limit: 6g
+    logging:
+      options:
+        max-size: '1m'
+        max-file: '1'
+    env_file:
+      - ./secrets/.env
+
+  # # # # # # # # # # # # # # # # # # # # #
+  # # # # # # # # # # # # # # # # # # # # #
+
+  pips:
+    image: ghcr.io/carrismetropolitana/website-pips:sandbox
+    restart: unless-stopped
+    mem_limit: 6g
+    logging:
+      options:
+        max-size: '1m'
+        max-file: '1'
+    env_file:
+      - ./secrets/.env
