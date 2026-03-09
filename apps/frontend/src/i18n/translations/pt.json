@@ -626,6 +626,100 @@
 			"subheading": "Nesta página encontra respostas às perguntas mais frequentes sobre o nosso serviço. Caso pretenda esclarecimentos adicionais não hesite em falar connosco."
 		}
 	},
+	"fleet": {
+		"FleetListToolbar": {
+			"filters": {
+				"by_agency": {
+					"placeholder": "Todos os operadores"
+				},
+				"by_bikes": {
+					"options": {
+						"false": "Não",
+						"true": "Sim"
+					},
+					"placeholder": "Permite Bicicletas"
+				},
+				"by_contactless": {
+					"options": {
+						"false": "Não",
+						"true": "Sim"
+					},
+					"placeholder": "Suporta Contactless"
+				},
+				"by_make_model": {
+					"placeholder": "Marca e Modelo"
+				},
+				"by_propulsion": {
+					"placeholder": "Todos os tipos de propulsão"
+				},
+				"by_search": {
+					"placeholder": "Pesquisar por id, matrícula..."
+				},
+				"by_state": {
+					"options": {
+						"active": "Ativo | Em serviço",
+						"active_1h": "Circulou na última hora",
+						"active_7d": "Circulou nos últimos 7 dias",
+						"active_today": "Circulou hoje",
+						"inactive": "Circulou à mais de 7 dias",
+						"no_data": "Sem dados",
+						"no_service": "Fora de serviço"
+					},
+					"placeholder": "Estado do veículo"
+				},
+				"by_wheelchair": {
+					"options": {
+						"false": "Não",
+						"true": "Sim"
+					},
+					"placeholder": "Permite Mobilidade Reduzida"
+				}
+			},
+			"found_items_counter": "{count, plural, =0 {Nenhum Veículo encontrado.} one {Encontrado # veículo:} other {Encontrados # veículos:}}"
+		},
+		"FleetMetrics": {
+			"heading": "A frota em números",
+			"total_circulating": "{count}",
+			"total_circulating_footer": "{percentage}% da frota total",
+			"total_circulating_title": "Veículos a realizar serviço na Carris Metropolitana.",
+			"total_electric": "{count}",
+			"total_electric_footer": "{percentage}% da frota da Carris Metropolitana já é amiga do ambiente!",
+			"total_electric_title": "Veículos elétricos"
+		},
+		"FleetPage": {
+			"heading": "Frota",
+			"links": {
+				"download_metadata": "Descarregar dados",
+				"download_metadata_description": "Disponibilizamos a lista de frota em formato CSV, seguindo as específicações de GTFS (General Transit Feed Specification). Este ficheiro contém todos os metadados dos veículos existentes",
+				"issues": "Abrir um Issue",
+				"issues_description": "Caso encontre algum erro nesta página, por favor abra um novo Issue neste repositório com a sugestão de correção.",
+				"use_api": "API",
+				"use_api_description": "Disponibilizamos também a lista de frota, em tempo real, através da API. Este endpoint, para além dos metadados dos veículos, contém informações relativas aos serviços que estejam a efetuar/efetuaram anteriormente.",
+				"view_map": "Mapa",
+				"view_map_description": "Pode ver os veículos que estão atualmente a circular num mapa interativo."
+			},
+			"subheading": "Descubra a nossa frota e aprenda mais sobre os veículos da Carris Metropolitana!"
+		},
+		"FleetTable": {
+			"header": {
+				"agency": "Operador",
+				"capacity": "Capacidade",
+				"fleetId": "# Frota",
+				"model": "Modelo",
+				"propulsion": "Propulsão",
+				"status": "Estado"
+			},
+			"no_data": "Nenhum veículo encontrado",
+			"status": {
+				"activeHour": "{mins, plural, one {Circulou há # min na} other {Circulou há # mins na}}",
+				"activeNow": "A circular na",
+				"activeToday": "{hours, plural, one {Circulou há #h na} other {Circulou há #h na}}",
+				"activeWeek": "{days, plural, one {Circulou ontem} other {Circulou há # dias}}",
+				"no_data": "Sem informações disponíveis"
+			},
+			"unknown": "Desconhecido"
+		}
+	},
 	"footer": {
 		"DebugToggle": {
 			"disabled": "Ligar Debug",
@@ -1482,6 +1576,10 @@
 			"43": "TST",
 			"44": "Alsa Todi"
 		},
+		"Contactless": {
+			"false": "Não",
+			"true": "Sim"
+		},
 		"VehicleEmissionClass": {
 			"euro_1": "EURO 1",
 			"euro_2": "EURO 2",
@@ -2254,7 +2352,7 @@
 	},
 	"vehicles": {
 		"VehiclesList": {
-			"heading": "Frota",
+			"heading": "Veículos ativos",
 			"subheading": "Descubra os veículos que estão ao serviço neste momento e acompanhe em tempo real a operação completa da CMetropolitana."
 		},
 		"VehiclesListDetails": {

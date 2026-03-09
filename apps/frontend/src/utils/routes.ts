@@ -17,6 +17,12 @@ export const RoutesSupport = Object.freeze({
 		},
 		route: '/faq',
 	},
+	FLEET: {
+		int: {
+			pt: '/frota',
+		},
+		route: '/fleet',
+	},
 	LOST_AND_FOUND: {
 		intl: {
 			pt: '/perdidos-e-achados',

@@ -1,0 +1,18 @@
+.subheading {
+    width: 100%;
+    font-size: 14px;
+    font-weight: 400;
+    color: var(--color-system-text-200);
+}
+
+.gridNavOverride {
+  grid-template-columns: 1fr;
+}
+
+.text {
+	padding-left: 5px;
+	font-size: 16px;
+	font-weight: var(--font-weight-medium);
+	line-height: 1.6;
+	color: var(--color-system-text-100);
+}

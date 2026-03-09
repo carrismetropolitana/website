@@ -2,14 +2,14 @@
 
 /* * */
 
-import { useVehiclesContext } from '@/contexts/Vehicles.context';
+import { useFleetContext } from '@/contexts//Fleet.context';
 import { Vehicle } from '@carrismetropolitana/api-types/vehicles';
 import { useQueryState } from 'nuqs';
 import { createContext, useContext, useEffect, useState } from 'react';
 
 /* * */
 
-interface VehiclesListContextState {
+interface FleetListContextState {
 	actions: {
 		updateFilterByAgency: (values: string[]) => void
 		updateFilterByBikes: (value: string) => void
@@ -17,6 +17,7 @@ interface VehiclesListContextState {
 		updateFilterByMakeAndModel: (values: string[]) => void
 		updateFilterByPropulsion: (values: string[]) => void
 		updateFilterBySearch: (value: string) => void
+		updateFilterByVehicleState: (value: string) => void
 		updateFilterByWheelchair: (value: string) => void
 		updateSelectedVehicle: (value: null | string) => void
 	}
@@ -32,6 +33,7 @@ interface VehiclesListContextState {
 		by_make_and_model: null | string
 		by_propulsion: null | string
 		by_search: string
+		by_vehicle_state: null | string
 		by_wheelchair: null | string
 		selected_vehicle: null | string
 	}
@@ -40,26 +42,26 @@ interface VehiclesListContextState {
 	}
 }
 
-const VehiclesListContext = createContext<undefined | VehiclesListContextState>(undefined);
+const FleetListContext = createContext<FleetListContextState | undefined>(undefined);
 
-export function useVehiclesListContext() {
-	const context = useContext(VehiclesListContext);
+export function useFleetListContext() {
+	const context = useContext(FleetListContext);
 	if (!context) {
-		throw new Error('useVehiclesListContext must be used within a VehiclesListContext');
+		throw new Error('useFleetListContext must be used within a VehiclesListContext');
 	}
 	return context;
 }
 
-export const VehiclesListContextProvider = ({ children }) => {
+export const FleetListContextProvider = ({ children }) => {
 	//
 
 	//
 	// A. Setup variables
 
-	const vehiclesContext = useVehiclesContext();
+	const fleetContext = useFleetContext();
 
-	const [dataFilteredState, setDataFilteredState] = useState<VehiclesListContextState['data']['filtered']>([]);
-	const [dataSelectedState, setDataSelectedState] = useState<VehiclesListContextState['data']['selected']>(null);
+	const [dataFilteredState, setDataFilteredState] = useState<FleetListContextState['data']['filtered']>([]);
+	const [dataSelectedState, setDataSelectedState] = useState<FleetListContextState['data']['selected']>(null);
 
 	const [filterByWheelchairState, setFilterByWheelchairState] = useQueryState('by_wheelchair', { clearOnDefault: true });
 	const [filterByAgencyState, setFilterByAgencyState] = useQueryState('by_agency', { clearOnDefault: true });
@@ -67,6 +69,8 @@ export const VehiclesListContextProvider = ({ children }) => {
 	const [filterByContactlessState, setByContactlessState] = useQueryState('by_contactless', { clearOnDefault: true });
 	const [filterByMakeAndModelState, setFilterByMakeAndModelState] = useQueryState('by_make_and_model', { clearOnDefault: true });
 	const [filterBySearchState, setFilterBySearchState] = useQueryState('by_search', { clearOnDefault: true, defaultValue: '' });
+	const [filterByVehicleState, setFilterByVehicleState] = useQueryState('by_vehicle_state', { clearOnDefault: true, defaultValue: '' });
+
 	const [filterByPropulsionState, setFilterByPropulsionState] = useQueryState('by_propulsion', { clearOnDefault: true });
 
 	//
@@ -75,16 +79,39 @@ export const VehiclesListContextProvider = ({ children }) => {
 	const applyFiltersToData = () => {
 		//
 
-		let filterResult = vehiclesContext.data.vehicles || [];
-
-		// Only include vehicles with active trips
-		filterResult = filterResult.filter(item => item.trip_id);
-
-		// Only include vehicles where timestamp is within the last 2 minutes
-		const nowInUnixSeconds = new Date().getTime() / 1000;
-		filterResult = filterResult.filter(item => item.timestamp && nowInUnixSeconds - item.timestamp < 120);
+		let filterResult = fleetContext.data.vehicles || [];
 
 		// Apply the user filters
+
+		const nowInUnixSeconds = new Date().getTime() / 1000;
+
+		const operationalDayInUnixSeconds = fleetContext.actions.getOperationalDate().getTime() / 1000;
+
+		if (filterByVehicleState) {
+			switch (filterByVehicleState) {
+				case 'active':
+					filterResult = filterResult.filter(item => item.timestamp && nowInUnixSeconds - item.timestamp < 120);
+					break;
+				case 'active_1h':
+					filterResult = filterResult.filter(item => item.timestamp && nowInUnixSeconds - item.timestamp < 3600);
+					break;
+				case 'active_7d':
+					filterResult = filterResult.filter(item => item.timestamp && nowInUnixSeconds - item.timestamp < 604_800);
+					break;
+				case 'active_today':
+					filterResult = filterResult.filter(item => item.timestamp && item.timestamp >= operationalDayInUnixSeconds);
+					break;
+				case 'inactive':
+					filterResult = filterResult.filter(item => !item.trip_id || (item.timestamp && nowInUnixSeconds - item.timestamp >= 604_800));
+					break;
+				case 'no_data':
+					filterResult = filterResult.filter(item => !item.trip_id);
+					break;
+				case 'no_service':
+					filterResult = filterResult.filter(item => item.timestamp && nowInUnixSeconds - item.timestamp >= 120);
+					break;
+			}
+		}
 
 		if (filterBySearchState) {
 			filterResult = filterResult.filter((item) => {
@@ -99,7 +126,7 @@ export const VehiclesListContextProvider = ({ children }) => {
 		}
 
 		if (filterByContactlessState) {
-			filterResult = filterResult.filter(item => item.contactless.toString() === filterByContactlessState);
+			filterResult = filterResult.filter(item => (item.contactless || false).toString() === filterByContactlessState);
 		}
 
 		if (filterByWheelchairState) {
@@ -120,9 +147,9 @@ export const VehiclesListContextProvider = ({ children }) => {
 			const makeModelValues = filterByMakeAndModelState.split(';').filter(Boolean);
 			filterResult = filterResult.filter((item) => {
 				return makeModelValues.some((val) => {
-					const [makeFilter, modelFilter] = val.split('-').map(s => s.trim().toLowerCase());
-					const itemMake = item.make?.toLowerCase() || '';
-					const itemModel = item.model?.toLowerCase() || '';
+					const [makeFilter, modelFilter] = val.split('-').map(s => s.trim().toLowerCase()); // Mercedes-Benz has a dash in the middle. Make/Model is formated as 'MAKE - MODEL' so its safe to include a space before/after the check
+					const itemMake = item.make?.toLowerCase().replaceAll('-', '') || ''; // discards dashes in the make/model, to be inline with the makeFilter/modelFilter.
+					const itemModel = item.model?.toLowerCase().replaceAll('-', '') || '';
 					return itemMake.includes(makeFilter) && itemModel.includes(modelFilter);
 				});
 			});
@@ -136,7 +163,7 @@ export const VehiclesListContextProvider = ({ children }) => {
 	useEffect(() => {
 		const filteredVehicles = applyFiltersToData();
 		setDataFilteredState(filteredVehicles);
-	}, [filterBySearchState, filterByAgencyState, filterByBikesState, filterByContactlessState, filterByMakeAndModelState, filterByPropulsionState, filterByWheelchairState, vehiclesContext.data.vehicles]);
+	}, [filterBySearchState, filterByAgencyState, filterByBikesState, filterByVehicleState, filterByContactlessState, filterByMakeAndModelState, filterByPropulsionState, filterByWheelchairState, fleetContext.data.vehicles]);
 
 	//
 	// D. Handle actions
@@ -174,20 +201,24 @@ export const VehiclesListContextProvider = ({ children }) => {
 
 	const updateSelectedVehicle = (vehicleId: null | string) => {
 		if (!vehicleId) setDataSelectedState(null);
-		if (!vehiclesContext.data.vehicles) return;
-		const foundVehicleData = vehiclesContext.data.vehicles.find(item => item.id === vehicleId);
+		if (!fleetContext.data.vehicles) return;
+		const foundVehicleData = fleetContext.data.vehicles.find(item => item.id === vehicleId);
 		setDataSelectedState(foundVehicleData || null);
+	};
+
+	const updateFilterByVehicleState = (value: string) => {
+		setFilterByVehicleState(value || null);
 	};
 
 	useEffect(() => {
 		if (!dataSelectedState) return;
 		updateSelectedVehicle(dataSelectedState.id);
-	}, [vehiclesContext.data.vehicles, dataSelectedState]);
+	}, [fleetContext.data.vehicles, dataSelectedState]);
 
 	//
 	// E. Define context value
 
-	const contextValue: VehiclesListContextState = {
+	const contextValue: FleetListContextState = {
 		actions: {
 			updateFilterByAgency,
 			updateFilterByBikes,
@@ -195,12 +226,13 @@ export const VehiclesListContextProvider = ({ children }) => {
 			updateFilterByMakeAndModel,
 			updateFilterByPropulsion,
 			updateFilterBySearch,
+			updateFilterByVehicleState,
 			updateFilterByWheelchair,
 			updateSelectedVehicle,
 		},
 		data: {
 			filtered: dataFilteredState,
-			raw: vehiclesContext.data.vehicles || [],
+			raw: fleetContext.data.vehicles || [],
 			selected: dataSelectedState,
 		},
 		filters: {
@@ -210,11 +242,12 @@ export const VehiclesListContextProvider = ({ children }) => {
 			by_make_and_model: filterByMakeAndModelState,
 			by_propulsion: filterByPropulsionState,
 			by_search: filterBySearchState,
+			by_vehicle_state: filterByVehicleState,
 			by_wheelchair: filterByWheelchairState,
 			selected_vehicle: dataSelectedState?.id || null,
 		},
 		flags: {
-			is_loading: vehiclesContext.flags.is_loading,
+			is_loading: fleetContext.flags.is_loading,
 		},
 	};
 
@@ -222,9 +255,9 @@ export const VehiclesListContextProvider = ({ children }) => {
 	// F. Render components
 
 	return (
-		<VehiclesListContext.Provider value={contextValue}>
+		<FleetListContext.Provider value={contextValue}>
 			{children}
-		</VehiclesListContext.Provider>
+		</FleetListContext.Provider>
 	);
 
 	//

@@ -45,7 +45,7 @@ export const mainNavigationGroup: NavigationGroup[] = [
 			{ _id: 'open-data', href: '/open-data', icon: <IconPrompt /> },
 			{ _id: 'drivers', href: '/drivers', icon: <IconUserHeart />, target: '_blank' },
 			{ _id: 'about', href: '/about', icon: <IconHomeSpark /> },
-			{ _id: 'vehicles', href: '/vehicles', icon: <IconBus /> },
+			{ _id: 'vehicles', href: '/fleet', icon: <IconBus /> },
 		],
 	},
 
