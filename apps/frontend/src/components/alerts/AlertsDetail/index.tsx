@@ -8,9 +8,11 @@ import { AlertInformedEntity } from '@/components/alerts/AlertInformedEntity';
 import { AlertsDetailImageThumbnail } from '@/components/alerts/AlertsDetailImageThumbnail';
 import { BackButton } from '@/components/common/BackButton';
 import Button from '@/components/common/Button';
+import { CopyBadge } from '@/components/common/CopyBadge';
 import { Section } from '@/components/layout/Section';
 import { Surface } from '@/components/layout/Surface';
 import { useAlertsContext } from '@/contexts/Alerts.context';
+import { useDebugContext } from '@/contexts/Debug.context';
 import { IconExternalLink } from '@tabler/icons-react';
 import { useTranslations } from 'next-intl';
 import { useMemo } from 'react';
@@ -33,6 +35,7 @@ export function AlertsDetail({ alertId }: Props) {
 
 	const t = useTranslations('alerts.AlertsDetail');
 	const alertsContext = useAlertsContext();
+	const debugContext = useDebugContext();
 
 	//
 	// B. Fetch data
@@ -67,6 +70,7 @@ export function AlertsDetail({ alertId }: Props) {
 						{simplifiedAlertData?.cause && <AlertCauseIcon cause={simplifiedAlertData.cause} withText />}
 						{simplifiedAlertData?.effect && <AlertEffectIcon effect={simplifiedAlertData.effect} withText />}
 						{simplifiedAlertData?.start_date && <AlertActivePeriodStart date={simplifiedAlertData.start_date} />}
+						{debugContext.flags.is_debug_mode && simplifiedAlertData?.alert_id && <CopyBadge label={`#${simplifiedAlertData.alert_id}`} value={simplifiedAlertData.alert_id} />}
 						{/* {simplifiedAlertData?.end_date && <AlertActivePeriodEnd date={simplifiedAlertData.end_date} />} */}
 					</div>
 				</Section>
