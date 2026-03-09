@@ -209,17 +209,17 @@ export const LinesDetailContextProvider = ({ children, lineId }) => {
 
 	useEffect(() => {
 		if (!alertsContext.data.simplified) return;
-		const activeAlerts = alertsContext.data.simplified.filter((simplifiedAlertData) => {
-			return simplifiedAlertData.informed_entity.some((informedEntity) => {
-				// Check if the alert is active and has a matching route
-				const hasMatchingRoute = dataLineState?.route_ids.includes(informedEntity.route_id || '');
-				const isActive = (simplifiedAlertData.end_date && !isNaN(simplifiedAlertData.end_date.getTime())) ? new Date(simplifiedAlertData.end_date).getTime() >= new Date().getTime() : true;
-				const hasMatchingStop = dataAllPatternsState?.some(pattern => pattern.some(patternGroup => patternGroup.path.some(waypoint => waypoint.stop_id === informedEntity.stop_id)));
-				return isActive && (hasMatchingRoute || hasMatchingStop);
-			});
+
+		const activeAlerts = alertsContext.actions.getSimplifiedAlertsByLineId(lineId).filter((simplifiedAlertData) => {
+			const isActive = (simplifiedAlertData.end_date && !isNaN(simplifiedAlertData.end_date.getTime()))
+				? new Date(simplifiedAlertData.end_date).getTime() >= new Date().getTime()
+				: true;
+
+			return isActive;
 		});
+
 		setDataActiveAlertsState(activeAlerts);
-	}, [alertsContext.data.simplified, dataLineState, dataAllPatternsState]);
+	}, [alertsContext.data.simplified, lineId]);
 
 	//
 	// D. Handle actions
