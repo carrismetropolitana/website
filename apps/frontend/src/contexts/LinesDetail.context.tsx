@@ -211,21 +211,19 @@ export const LinesDetailContextProvider = ({ children, lineId }) => {
 		if (!alertsContext.data.simplified) return;
 
 		const activeAlerts = alertsContext.data.simplified.filter((simplifiedAlertData) => {
-			const isActive = (simplifiedAlertData.end_date && !isNaN(simplifiedAlertData.end_date.getTime()))
-				? new Date(simplifiedAlertData.end_date).getTime() >= new Date().getTime()
-				: true;
+			const isActive = (simplifiedAlertData.end_date && !isNaN(simplifiedAlertData.end_date.getTime())) ? new Date(simplifiedAlertData.end_date).getTime() >= new Date().getTime() : true;
 
 			if (!isActive) return false;
 
 			return simplifiedAlertData.informed_entity.some((informedEntity) => {
 				const isForThisLine = informedEntity.line_id == null || informedEntity.line_id === lineId;
+
 				if (!isForThisLine) return false;
 
 				const hasMatchingRoute = dataLineState?.route_ids?.includes(informedEntity.route_id || '');
+
 				const hasMatchingStop = informedEntity.stop_id != null && dataAllPatternsState?.some(pattern =>
-					pattern.some(patternGroup =>
-						patternGroup.path.some(waypoint => waypoint.stop_id === informedEntity.stop_id),
-					),
+					pattern.some(patternGroup => patternGroup.path.some(waypoint => waypoint.stop_id === informedEntity.stop_id)),
 				);
 
 				return hasMatchingRoute || hasMatchingStop;
