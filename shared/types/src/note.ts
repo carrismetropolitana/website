@@ -1,5 +1,6 @@
 /**
  * Notes are press releases and official documents with downloadable files.
+ *
  */
 export interface Note {
 
