@@ -1498,8 +1498,9 @@
 	},
 	"payload": {
 		"pdf": {
+			"error": "Error loading PDF",
+			"loading": "Loading PDF...",
 			"toolbar": {
-				"download": "Download",
 				"next": "Next",
 				"previous": "Previous"
 			}
