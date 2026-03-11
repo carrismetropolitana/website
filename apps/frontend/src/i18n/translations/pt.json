@@ -1498,6 +1498,17 @@
 			"natural_gas": "Gás Natural"
 		}
 	},
+	"payload": {
+		"pdf": {
+			"PdfViewer": {
+				"download": "Descarregar",
+				"error": "Erro ao carregar o PDF",
+				"loading": "A carregar o PDF...",
+				"next": "Seguinte",
+				"previous": "Anterior"
+			}
+		}
+	},
 	"periods": {
 		"PeriodsWidgetItem": {
 			"from": "inicia a {value, date, dayShort} {value, date, monthShort} {value, date, yearLong}",

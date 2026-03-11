@@ -11,6 +11,7 @@ import { Links } from '@/components/payload/links';
 import { List } from '@/components/payload/lists';
 import { ListItem } from '@/components/payload/lists/listItem';
 import { Paragraph } from '@/components/payload/paragraph';
+import { Pdf } from '@/components/payload/pdf';
 import { Quote } from '@/components/payload/quote';
 import { Table } from '@/components/payload/table';
 import { TableCell } from '@/components/payload/table/table-cell';
@@ -70,8 +71,19 @@ function renderNode(node: LexicalNode, key?: number): ReactNode {
 		case 'tablerow': return <tr key={key}>{renderChildren()}</tr>;
 		case 'text': return <Text key={key} format={node.format} style={node.style} text={node.text} />;
 		case 'upload': {
-			const img = node.value as { filename?: string, url?: string };
-			return <ImageComponent key={key} alt={img.filename} src={img.url} />;
+			const file = node.value as { alt?: string, filename?: string, mimeType?: string, url?: string };
+			if (!file?.url) return null;
+			if (file.mimeType?.startsWith('image/')) {
+				return <ImageComponent key={key} alt={file.alt ?? file.filename} src={file.url} />;
+			}
+			if (file.mimeType === 'application/pdf') {
+				return <Pdf key={key} url={file.url} />;
+			}
+			return (
+				<a key={key} href={file.url} rel="noopener noreferrer" target="_blank">
+					{file.filename ?? 'Download file'}
+				</a>
+			);
 		}
 		default: return children.length > 0 ? renderChildren() : (node.text ?? null);
 	}
