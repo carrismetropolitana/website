@@ -24,7 +24,7 @@ export function PdfToolbar({ numPages, onDownload, onNextPage, onPrevPage, pageN
 	//
 	// A. Setup variables
 
-	const t = useTranslations('payload.pdf.PdfViewer.toolbar');
+	const t = useTranslations('payload.pdf.toolbar');
 
 	//
 	// B. Render components

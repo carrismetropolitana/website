@@ -1,0 +1,24 @@
+.pageCount {
+	min-width: 30px;
+	font-size: var(--font-size-text);
+	color: var(--color-system-text-300);
+	text-align: center;
+}
+
+.controls {
+	display: flex;
+	gap: var(--size-spacing-20);
+	align-items: center;
+	justify-content: center;
+	padding-top : var(--size-spacing-10);
+}
+
+.button:disabled {
+	cursor: not-allowed;
+	background-color: var(--color-system-background-100);
+	opacity: 0.5;
+}
+
+.button:hover:not(:disabled) {
+	background-color: var(--color-system-background-200);
+}

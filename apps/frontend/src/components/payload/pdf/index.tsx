@@ -1,14 +1,13 @@
 'use client';
 /* * */
 
-import { Button } from '@mantine/core';
-
 import 'react-pdf/dist/Page/AnnotationLayer.css';
 import 'react-pdf/dist/Page/TextLayer.css';
-import { useTranslations } from 'next-intl';
 import { useEffect, useState } from 'react';
 
 import styles from './styles.module.css';
+
+import { PdfToolbar } from './pdfToolbar';
 
 /* * */
 
@@ -34,7 +33,6 @@ export function Pdf({ url }: PdfProps) {
 	const [currentPage, setCurrentPage] = useState<number>(1);
 	const [error, setError] = useState<null | string>(null);
 	const [ReactPdf, setReactPdf] = useState<null | typeof import('react-pdf')>(null);
-	const t = useTranslations('payload.pdf.PdfViewer');
 	//
 
 	useEffect(() => {
@@ -113,7 +111,7 @@ export function Pdf({ url }: PdfProps) {
 				/>
 			</Document>
 
-		
+			<PdfToolbar numPages={numPages} onDownload={handleDownload} onNextPage={goToNextPage} onPrevPage={goToPrevPage} pageNumber={currentPage} />
 		</div>
 	);
 

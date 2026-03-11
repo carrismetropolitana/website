@@ -1500,10 +1500,8 @@
 	},
 	"payload": {
 		"pdf": {
-			"PdfViewer": {
+			"toolbar": {
 				"download": "Descarregar",
-				"error": "Erro ao carregar o PDF",
-				"loading": "A carregar o PDF...",
 				"next": "Seguinte",
 				"previous": "Anterior"
 			}

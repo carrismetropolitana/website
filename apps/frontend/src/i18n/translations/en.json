@@ -1498,13 +1498,12 @@
 	},
 	"payload": {
 		"pdf": {
-			"PdfViewer": {
+			"toolbar": {
 				"download": "Download",
-				"error": "Failed to load PDF",
-				"loading": "Loading PDF...",
 				"next": "Next",
 				"previous": "Previous"
 			}
+
 		}
 	},
 	"periods": {
