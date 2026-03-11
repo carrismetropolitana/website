@@ -97,6 +97,7 @@ export function Pdf({ url }: PdfProps) {
 
 	return (
 		<div className={styles.container}>
+
 			<Document
 				file={proxiedUrl}
 				loading={<div className={styles.loading}>Loading PDF...</div>}
@@ -112,6 +113,7 @@ export function Pdf({ url }: PdfProps) {
 			</Document>
 
 			<PdfToolbar numPages={numPages} onDownload={handleDownload} onNextPage={goToNextPage} onPrevPage={goToPrevPage} pageNumber={currentPage} />
+
 		</div>
 	);
 

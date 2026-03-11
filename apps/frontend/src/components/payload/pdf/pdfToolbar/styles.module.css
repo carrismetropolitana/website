@@ -6,11 +6,12 @@
 }
 
 .controls {
+	position: relative;
 	display: flex;
 	gap: var(--size-spacing-20);
 	align-items: center;
 	justify-content: center;
-	padding-top : var(--size-spacing-10);
+	padding-top: var(--size-spacing-10);
 }
 
 .button:disabled {
@@ -21,4 +22,9 @@
 
 .button:hover:not(:disabled) {
 	background-color: var(--color-system-background-200);
+}
+
+.downloadButton {
+	position: absolute;
+	right: 0;
 }
