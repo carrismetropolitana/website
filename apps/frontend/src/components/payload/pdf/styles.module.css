@@ -4,10 +4,9 @@
 	flex-direction: column;
 	align-items: center;
 	width: 100%;
-	padding: var(--size-spacing-20);
+	padding: var(--size-spacing-10);
 	background-color: var(--color-system-background-200);
 	border-radius: var(--border-radius-md);
-	box-shadow: 0 0 10px 0 rgb(0 0 0 / 10%);
 }
 
 .page {

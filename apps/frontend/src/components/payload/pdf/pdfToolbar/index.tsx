@@ -2,6 +2,7 @@
 /* * */
 
 import { Button } from '@mantine/core';
+import { IconDownload } from '@tabler/icons-react';
 import { useTranslations } from 'next-intl';
 
 import styles from './styles.module.css';
@@ -30,11 +31,11 @@ export function PdfToolbar({ numPages, onDownload, onNextPage, onPrevPage, pageN
 	// B. Render components
 
 	return (
-		<div className={styles.controls}>
+		<div className={styles.toolbar}>
 			<Button className={styles.button} disabled={pageNumber <= 1} onClick={onPrevPage} variant="default"> {t('previous')} </Button>
 			<span className={styles.pageCount}>{pageNumber} / {numPages}</span>
 			<Button className={styles.button} disabled={pageNumber >= numPages} onClick={onNextPage} variant="default"> {t('next')} </Button>
-			<Button className={styles.downloadButton} onClick={onDownload} variant="default">Descarregar</Button>
+			<div className={styles.downloadButton} onClick={onDownload}><IconDownload size={16} /></div>
 		</div>
 	);
 

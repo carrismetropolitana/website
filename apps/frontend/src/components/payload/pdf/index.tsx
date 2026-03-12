@@ -3,25 +3,17 @@
 
 import 'react-pdf/dist/Page/AnnotationLayer.css';
 import 'react-pdf/dist/Page/TextLayer.css';
+import { PdfToolbar } from '@/components/payload/pdf/pdfToolbar';
+import { getProxiedUrl } from '@/utils/getProxiedUrl';
 import { useTranslations } from 'next-intl';
 import { useEffect, useState } from 'react';
 
 import styles from './styles.module.css';
 
-import { PdfToolbar } from './pdfToolbar';
-
 /* * */
 
 interface PdfProps {
 	url?: string
-}
-
-/* * */
-
-function getProxiedUrl(url: string): string {
-	const filename = url.split('/').pop();
-	if (!filename) return url;
-	return `/api/media/file/${encodeURIComponent(filename)}`;
 }
 
 /* * */
