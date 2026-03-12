@@ -27,5 +27,4 @@
 	position: absolute;
 	right: var(--size-spacing-20);
 	bottom: var(--size-spacing-20);
-	box-shadow: 0 2px 8px rgb(0 0 0 / 15%);
 }
