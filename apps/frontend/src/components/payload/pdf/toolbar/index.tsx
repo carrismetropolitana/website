@@ -9,7 +9,7 @@ import styles from './styles.module.css';
 
 /* * */
 
-interface pdfToolbarProps {
+interface ToolbarProps {
 	numPages: number
 	onDownload: () => void
 	onNextPage: () => void
@@ -19,7 +19,7 @@ interface pdfToolbarProps {
 
 /* * */
 
-export function PdfToolbar({ numPages, onDownload, onNextPage, onPrevPage, pageNumber }: pdfToolbarProps) {
+export function Toolbar({ numPages, onDownload, onNextPage, onPrevPage, pageNumber }: ToolbarProps) {
 	//
 
 	//
