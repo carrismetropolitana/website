@@ -67,6 +67,7 @@ export interface LexicalNode {
 	type?: string
 	url?: string
 	value?: number | {
+		alt?: string
 		createdAt?: string
 		filename?: string
 		filesize?: number
