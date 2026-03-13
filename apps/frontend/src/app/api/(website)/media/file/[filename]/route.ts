@@ -2,7 +2,8 @@ export async function GET(_request: Request, { params }: { params: Promise<{ fil
 	//
 
 	const { filename } = await params;
-	const baseUrl = `${process.env.PAYLOAD_BASE_URL ?? 'https://placeholder.pt'}${process.env.PAYLOAD_BASE_PATH ?? '/admin'}/api/media/file`;
+	const origin = (process.env.PAYLOAD_BASE_URL ?? 'https://placeholder.pt').replace(/\/$/, '');
+	const baseUrl = `${origin}/admin/api/media/file`;
 
 	if (!filename) return new Response('Filename required', { status: 400 });
 

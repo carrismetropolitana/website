@@ -6,11 +6,19 @@
  */
 export function normalizeMediaSrc(src: string): string {
 	if (!src) return src;
-	if (src.startsWith('/')) return src;
+
+	const normalizePath = (path: string) => {
+		if (path.startsWith('/admin/api/media')) return path;
+		if (path.startsWith('/api/media')) return `/admin${path}`;
+		return path;
+	};
+
+	if (src.startsWith('/')) return normalizePath(src);
 
 	try {
 		const parsed = new URL(src);
-		return `${parsed.pathname}${parsed.search}${parsed.hash}`;
+		const normalizedPath = normalizePath(parsed.pathname);
+		return `${normalizedPath}${parsed.search}${parsed.hash}`;
 	}
 	catch {
 		return src;
