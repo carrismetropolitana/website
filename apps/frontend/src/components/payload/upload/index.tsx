@@ -32,9 +32,6 @@ export function renderUpload(node: LexicalNode, key?: number): ReactNode {
 	const label = file?.filename ?? '';
 	const mimeType = file?.mimeType ?? '';
 
-	console.log('rawUrl', rawUrl);
-	console.log('url', url);
-
 	//
 	// B. Render components
 
