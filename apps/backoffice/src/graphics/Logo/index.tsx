@@ -1,5 +1,6 @@
 import config from '@/payload-config';
 import { Media } from '@/payload-types';
+import { normalizeMediaSrc } from '@/utils/normalize-media-src';
 import Image from 'next/image';
 import { getPayload } from 'payload';
 import React from 'react';
@@ -24,7 +25,7 @@ export async function Logos() {
 					alt={lightModeLogo.alt ?? 'Logo CM Light Mode'}
 					className="light-mode-image"
 					height={lightModeLogo.height}
-					src={lightModeLogo.url}
+					src={normalizeMediaSrc(lightModeLogo.url)}
 					width={lightModeLogo.width}
 				/>
 			)}
@@ -34,7 +35,7 @@ export async function Logos() {
 					alt={darkModeLogo.alt ?? 'Logo CM Dark Mode'}
 					className="dark-mode-image"
 					height={darkModeLogo.height}
-					src={darkModeLogo.url}
+					src={normalizeMediaSrc(darkModeLogo.url)}
 					width={darkModeLogo.width}
 				/>
 			)}

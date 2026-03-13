@@ -1,5 +1,6 @@
 import config from '@/payload-config';
 import { Media } from '@/payload-types';
+import { normalizeMediaSrc } from '@/utils/normalize-media-src';
 import Image from 'next/image';
 import { getPayload } from 'payload';
 import React from 'react';
@@ -24,7 +25,7 @@ export async function Icons() {
 					alt={lightModeIcon.alt ?? 'Icon CM Light Mode'}
 					className="light-mode-image"
 					height={lightModeIcon.height}
-					src={lightModeIcon.url}
+					src={normalizeMediaSrc(lightModeIcon.url)}
 					width={lightModeIcon.width}
 				/>
 			)}
@@ -34,7 +35,7 @@ export async function Icons() {
 					alt={darkModeIcon.alt ?? 'Icon CM Dark Mode'}
 					className="dark-mode-image"
 					height={darkModeIcon.height}
-					src={darkModeIcon.url}
+					src={normalizeMediaSrc(darkModeIcon.url)}
 					width={darkModeIcon.width}
 				/>
 			)}
