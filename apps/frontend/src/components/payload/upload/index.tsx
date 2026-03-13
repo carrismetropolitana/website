@@ -25,9 +25,15 @@ export function renderUpload(node: LexicalNode, key?: number): ReactNode {
 	// A. Setup variables
 
 	const file = node.value as undefined | UploadValue;
-	const url = file?.url;
+	const rawUrl = file?.url;
+	const url = rawUrl?.includes('/api/media') && !rawUrl?.includes('/admin/api/media')
+		? rawUrl.replace('/api/media', '/admin/api/media')
+		: rawUrl;
 	const label = file?.filename ?? '';
 	const mimeType = file?.mimeType ?? '';
+
+	console.log('rawUrl', rawUrl);
+	console.log('url', url);
 
 	//
 	// B. Render components
@@ -35,10 +41,10 @@ export function renderUpload(node: LexicalNode, key?: number): ReactNode {
 	if (!url) return <p key={key}>Ficheiro inválido</p>;
 
 	// Is an image render as an image
-	if (mimeType.startsWith('image/')) return <ImageComponent key={key} alt={file?.alt ?? file?.filename} src={url} />;
+	if (mimeType.startsWith('image/') && url) return <ImageComponent key={key} alt={file?.alt ?? file?.filename} src={url} />;
 
 	// Is a pdf file render as a pdf viewer
-	if (mimeType === 'application/pdf') return <Pdf key={key} url={url} />;
+	if (mimeType === 'application/pdf' && url) return <Pdf key={key} url={url} />;
 
 	// Render as a download link
 	return (
