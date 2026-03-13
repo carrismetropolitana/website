@@ -6,7 +6,7 @@ import 'react-pdf/dist/Page/TextLayer.css';
 import { Toolbar } from '@/components/payload/pdf/toolbar';
 import { getProxiedUrl } from '@/utils/getProxiedUrl';
 import { useTranslations } from 'next-intl';
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useMemo, useRef, useState } from 'react';
 import { Document, Page, pdfjs } from 'react-pdf';
 
 import styles from './styles.module.css';
@@ -31,7 +31,7 @@ export function Viewer({ url }: { url: string }) {
 	const [error, setError] = useState<null | string>(null);
 	const [pageWidth, setPageWidth] = useState<number | undefined>(undefined);
 	const containerRef = useRef<HTMLDivElement>(null);
-	const proxiedUrl = getProxiedUrl(url);
+	const proxiedUrl = useMemo(() => getProxiedUrl(url), [url]);
 
 	const t = useTranslations('payload.pdf');
 
@@ -88,6 +88,7 @@ export function Viewer({ url }: { url: string }) {
 
 	return (
 		<div ref={containerRef} className={styles.container}>
+
 			<Document
 				file={proxiedUrl}
 				loading={<div className={styles.loading}>{t('loading')}</div>}
@@ -96,6 +97,7 @@ export function Viewer({ url }: { url: string }) {
 			>
 				<Page
 					className={styles.page}
+					loading=""
 					pageNumber={currentPage}
 					renderTextLayer={true}
 					width={pageWidth}
