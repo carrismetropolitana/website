@@ -6,7 +6,7 @@ import 'react-pdf/dist/Page/TextLayer.css';
 import { Toolbar } from '@/components/payload/pdf/toolbar';
 import { getProxiedUrl } from '@/utils/getProxiedUrl';
 import { useTranslations } from 'next-intl';
-import { useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { Document, Page, pdfjs } from 'react-pdf';
 
 import styles from './styles.module.css';
@@ -29,9 +29,25 @@ export function Viewer({ url }: { url: string }) {
 	const [numPages, setNumPages] = useState<number>(0);
 	const [currentPage, setCurrentPage] = useState<number>(1);
 	const [error, setError] = useState<null | string>(null);
+	const [pageWidth, setPageWidth] = useState<number | undefined>(undefined);
+	const containerRef = useRef<HTMLDivElement>(null);
 	const proxiedUrl = getProxiedUrl(url);
 
 	const t = useTranslations('payload.pdf');
+
+	useEffect(() => {
+		const measure = () => {
+			const el = containerRef.current;
+			if (!el) return;
+			const cs = getComputedStyle(el);
+			const width = el.clientWidth - parseFloat(cs.paddingLeft) - parseFloat(cs.paddingRight);
+			setPageWidth(width);
+		};
+
+		measure();
+		window.addEventListener('resize', measure);
+		return () => window.removeEventListener('resize', measure);
+	}, []);
 
 	//
 	// B. Handle Actions
@@ -71,7 +87,7 @@ export function Viewer({ url }: { url: string }) {
 	}
 
 	return (
-		<div className={styles.container}>
+		<div ref={containerRef} className={styles.container}>
 			<Document
 				file={proxiedUrl}
 				loading={<div className={styles.loading}>{t('loading')}</div>}
@@ -82,7 +98,7 @@ export function Viewer({ url }: { url: string }) {
 					className={styles.page}
 					pageNumber={currentPage}
 					renderTextLayer={true}
-					width={undefined}
+					width={pageWidth}
 				/>
 			</Document>
 
