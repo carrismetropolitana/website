@@ -22,7 +22,7 @@ export async function Icons() {
 		<>
 			{lightModeIcon?.url && (
 				<Image
-					alt={lightModeIcon.alt ?? 'Icon CM Light Mode'}
+					alt="Icon CM Light Mode"
 					className="light-mode-image"
 					height={lightModeIcon.height}
 					src={normalizeMediaSrc(lightModeIcon.url)}
@@ -32,7 +32,7 @@ export async function Icons() {
 
 			{darkModeIcon?.url && (
 				<Image
-					alt={darkModeIcon.alt ?? 'Icon CM Dark Mode'}
+					alt="Icon CM Dark Mode"
 					className="dark-mode-image"
 					height={darkModeIcon.height}
 					src={normalizeMediaSrc(darkModeIcon.url)}
