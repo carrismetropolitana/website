@@ -1,0 +1,8 @@
+# # # # # # # # # # # # # # # # # # #
+# # PUBLIC NONSENSITIVE VARIABLES # #
+# # # # # # # # # # # # # # # # # # #
+
+ENVIRONMENT="sandbox"
+
+PRIMARY_DOMAIN="sandbox.carrismetropolitana.pt"
+

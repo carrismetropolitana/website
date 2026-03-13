@@ -35,9 +35,11 @@ export function CopyBadge({ hasBorder = true, label, size = 'md', value }: Props
 	// C. Render components
 
 	return (
-		<div className={`${styles.container} ${hasBorder && styles.hasBorder} ${styles[size]}`} onClick={handleCopy}>
-			{clipboard.copied ? 'Copied' : label ? label : value}
-		</div>
+		<>
+			<div className={`${styles.container} ${hasBorder && styles.hasBorder} ${styles[size]}`} onClick={handleCopy}>
+				{clipboard.copied ? 'Copied' : label ? label : value}
+			</div>
+		</>
 	);
 
 	//

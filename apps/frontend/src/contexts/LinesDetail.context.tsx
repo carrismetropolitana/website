@@ -209,17 +209,29 @@ export const LinesDetailContextProvider = ({ children, lineId }) => {
 
 	useEffect(() => {
 		if (!alertsContext.data.simplified) return;
+
 		const activeAlerts = alertsContext.data.simplified.filter((simplifiedAlertData) => {
+			const isActive = (simplifiedAlertData.end_date && !isNaN(simplifiedAlertData.end_date.getTime())) ? new Date(simplifiedAlertData.end_date).getTime() >= new Date().getTime() : true;
+
+			if (!isActive) return false;
+
 			return simplifiedAlertData.informed_entity.some((informedEntity) => {
-				// Check if the alert is active and has a matching route
-				const hasMatchingRoute = dataLineState?.route_ids.includes(informedEntity.route_id || '');
-				const isActive = (simplifiedAlertData.end_date && !isNaN(simplifiedAlertData.end_date.getTime())) ? new Date(simplifiedAlertData.end_date).getTime() >= new Date().getTime() : true;
-				const hasMatchingStop = dataAllPatternsState?.some(pattern => pattern.some(patternGroup => patternGroup.path.some(waypoint => waypoint.stop_id === informedEntity.stop_id)));
-				return isActive && (hasMatchingRoute || hasMatchingStop);
+				const isForThisLine = informedEntity.line_id == null || informedEntity.line_id === lineId;
+
+				if (!isForThisLine) return false;
+
+				const hasMatchingRoute = dataLineState?.route_ids?.includes(informedEntity.route_id || '');
+
+				const hasMatchingStop = informedEntity.stop_id != null && dataAllPatternsState?.some(pattern =>
+					pattern.some(patternGroup => patternGroup.path.some(waypoint => waypoint.stop_id === informedEntity.stop_id)),
+				);
+
+				return hasMatchingRoute || hasMatchingStop;
 			});
 		});
+
 		setDataActiveAlertsState(activeAlerts);
-	}, [alertsContext.data.simplified, dataLineState, dataAllPatternsState]);
+	}, [alertsContext.data.simplified, lineId, dataLineState, dataAllPatternsState]);
 
 	//
 	// D. Handle actions
