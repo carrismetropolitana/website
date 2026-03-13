@@ -21,12 +21,23 @@ const nextConfig: NextConfig = {
 				protocol: 'http',
 			},
 			{
+				hostname: 'carrismetropolitana.pt',
+				pathname: '/**',
+				protocol: 'https',
+			},
+			{
+				hostname: 'staging.carrismetropolitana.pt',
+				pathname: '/**',
+				protocol: 'https',
+			},
+			{
 				hostname: '*.carrismetropolitana.pt',
 				pathname: '/**',
 				protocol: 'https',
 			},
 			{
 				hostname: '*.oraclecloud.com',
+				pathname: '/**',
 				port: '',
 				protocol: 'https',
 			},

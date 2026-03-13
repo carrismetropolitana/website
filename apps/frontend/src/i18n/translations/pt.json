@@ -1500,8 +1500,8 @@
 	},
 	"payload": {
 		"pdf": {
-			"error": "Erro ao carregar PDF",
-			"loading": "A carregar PDF...",
+			"error": "Erro ao carregar documento",
+			"loading": "A carregar documento...",
 			"toolbar": {
 				"next": "Seguinte",
 				"previous": "Anterior"

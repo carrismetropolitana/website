@@ -32,7 +32,7 @@ export function renderUpload(node: LexicalNode, key?: number): ReactNode {
 	//
 	// B. Render components
 
-	if (!url) return <p>Ficheiro inválido</p>;
+	if (!url) return <p key={key}>Ficheiro inválido</p>;
 
 	// Is an image render as an image
 	if (mimeType.startsWith('image/')) return <ImageComponent key={key} alt={file?.alt ?? file?.filename} src={url} />;

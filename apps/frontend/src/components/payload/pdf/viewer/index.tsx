@@ -6,7 +6,7 @@ import 'react-pdf/dist/Page/TextLayer.css';
 import { Toolbar } from '@/components/payload/pdf/toolbar';
 import { getProxiedUrl } from '@/utils/getProxiedUrl';
 import { useTranslations } from 'next-intl';
-import { useState } from 'react';
+import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { Document, Page, pdfjs } from 'react-pdf';
 
 import styles from './styles.module.css';
@@ -29,9 +29,45 @@ export function Viewer({ url }: { url: string }) {
 	const [numPages, setNumPages] = useState<number>(0);
 	const [currentPage, setCurrentPage] = useState<number>(1);
 	const [error, setError] = useState<null | string>(null);
-	const proxiedUrl = getProxiedUrl(url);
+	const [pageWidth, setPageWidth] = useState<number | undefined>(undefined);
+	const containerRef = useRef<HTMLDivElement>(null);
+	const resizeRafRef = useRef<null | number>(null);
+	const resizeTimeoutRef = useRef<null | ReturnType<typeof setTimeout>>(null);
+	const proxiedUrl = useMemo(() => getProxiedUrl(url), [url]);
 
 	const t = useTranslations('payload.pdf');
+
+	const measureContainer = useCallback(() => {
+		const el = containerRef.current;
+		if (!el) return;
+
+		if (resizeRafRef.current) cancelAnimationFrame(resizeRafRef.current);
+		resizeRafRef.current = requestAnimationFrame(() => {
+			const cs = getComputedStyle(el);
+			const width = el.clientWidth - parseFloat(cs.paddingLeft) - parseFloat(cs.paddingRight);
+			const viewportWidth = window.innerWidth || width;
+			const safeWidth = Math.min(width, viewportWidth - 24);
+			const nextWidth = Math.max(0, Math.floor(safeWidth));
+			setPageWidth(prev => (prev === nextWidth ? prev : nextWidth));
+		});
+	}, []);
+
+	useEffect(() => {
+		measureContainer();
+		const handleResize = () => {
+			if (resizeTimeoutRef.current) clearTimeout(resizeTimeoutRef.current);
+			resizeTimeoutRef.current = setTimeout(measureContainer, 120);
+		};
+		window.addEventListener('resize', handleResize);
+		window.addEventListener('orientationchange', handleResize);
+
+		return () => {
+			window.removeEventListener('resize', handleResize);
+			window.removeEventListener('orientationchange', handleResize);
+			if (resizeRafRef.current) cancelAnimationFrame(resizeRafRef.current);
+			if (resizeTimeoutRef.current) clearTimeout(resizeTimeoutRef.current);
+		};
+	}, [measureContainer]);
 
 	//
 	// B. Handle Actions
@@ -40,6 +76,7 @@ export function Viewer({ url }: { url: string }) {
 		setNumPages(numPages);
 		setCurrentPage(1);
 		setError(null);
+		measureContainer();
 	}
 
 	function handleDocumentLoadError(err: Error) {
@@ -71,7 +108,8 @@ export function Viewer({ url }: { url: string }) {
 	}
 
 	return (
-		<div className={styles.container}>
+		<div ref={containerRef} className={styles.container}>
+
 			<Document
 				file={proxiedUrl}
 				loading={<div className={styles.loading}>{t('loading')}</div>}
@@ -80,9 +118,10 @@ export function Viewer({ url }: { url: string }) {
 			>
 				<Page
 					className={styles.page}
+					loading=""
 					pageNumber={currentPage}
 					renderTextLayer={true}
-					width={undefined}
+					width={pageWidth}
 				/>
 			</Document>
 
