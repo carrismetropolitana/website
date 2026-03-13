@@ -97,7 +97,7 @@ export function Viewer({ url }: { url: string }) {
 			>
 				<Page
 					className={styles.page}
-					loading=""
+					loading={t('loading')}
 					pageNumber={currentPage}
 					renderTextLayer={true}
 					width={pageWidth}
