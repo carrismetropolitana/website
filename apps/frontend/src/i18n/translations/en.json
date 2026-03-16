@@ -2033,7 +2033,7 @@
 		},
 		"StopsDetailContentTimetableRow": {
 			"debug_modal": {
-				"title": "Trip IDs related"
+				"title": "This data represents equal trip IDs for different days"
 			},
 			"localities": {
 				"label": "Goes through:"
