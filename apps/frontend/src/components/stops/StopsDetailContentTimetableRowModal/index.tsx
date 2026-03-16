@@ -25,16 +25,7 @@ export function StopsDetailContentTimetableRowModal({ arrivalData, onClose, open
 	const t = useTranslations('stops.StopsDetailContentTimetableRow.debug_modal');
 
 	//
-	// B. Transform data
-
-	const parseTripId = (tripId: string) => {
-		const plan = tripId.includes('[') && tripId.includes(']') ? tripId.substring(tripId.indexOf('[') + 1, tripId.indexOf(']')) : 'NULL';
-		const serviceId = tripId.split('|')[1] || 'NULL';
-		return { plan, serviceId };
-	};
-
-	//
-	// C. Handle actions
+	// B. Handle actions
 
 	const handleCloseClick = (e: React.MouseEvent) => {
 		e.stopPropagation();
@@ -42,7 +33,9 @@ export function StopsDetailContentTimetableRowModal({ arrivalData, onClose, open
 	};
 
 	//
-	// D. Render Components
+	// C. Render Components
+
+	console.log('on modal:', arrivalData);
 
 	return (
 		<Modal
@@ -58,20 +51,13 @@ export function StopsDetailContentTimetableRowModal({ arrivalData, onClose, open
 					<Table.Thead>
 						<Table.Tr>
 							<Table.Th>Trip ID</Table.Th>
-							<Table.Th>Plan</Table.Th>
-							<Table.Th>Service ID</Table.Th>
-							<Table.Th>Headsign</Table.Th>
 						</Table.Tr>
 					</Table.Thead>
 					<Table.Tbody>
 						{arrivalData.related_trip_ids?.map((tripId) => {
-							const { plan, serviceId } = parseTripId(tripId);
 							return (
 								<Table.Tr key={tripId}>
 									<Table.Td><CopyBadge value={tripId} /></Table.Td>
-									<Table.Td><CopyBadge value={plan} /></Table.Td>
-									<Table.Td><CopyBadge value={serviceId} /></Table.Td>
-									<Table.Td><CopyBadge value={arrivalData.headsign || 'NULL'} /></Table.Td>
 								</Table.Tr>
 							);
 						})}

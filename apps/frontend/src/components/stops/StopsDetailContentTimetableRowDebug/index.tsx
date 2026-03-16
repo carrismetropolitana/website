@@ -37,14 +37,10 @@ export function StopsDetailContentTimetableRowDebug({ arrivalData }: Props) {
 
 	return (
 		<div className={styles.container}>
-
 			<div className={styles.seeMore}>
 				<CopyBadge label={`Trip ID: ${arrivalData.trip_id || 'NULL'}`} value={arrivalData.trip_id || 'NULL'} />
-				{arrivalData.related_trip_ids?.length > 1 && (
-					<IconEyePlus className={styles.seeMoreIcon} color="var(--color-system-text-300)" onClick={e => handleOpenModal(e)} size={16} />
-				)}
+				<IconEyePlus className={styles.seeMoreIcon} color="var(--color-system-text-300)" onClick={e => handleOpenModal(e)} size={16} />
 			</div>
-
 			<CopyBadge label={`Stop Sequence: ${typeof arrivalData.stop_sequence === 'number' ? arrivalData.stop_sequence : 'NULL'}`} value={arrivalData.stop_sequence || 'NULL'} />
 			<CopyBadge label={`Vehicle ID: ${arrivalData.vehicle_id || 'NULL'}`} value={arrivalData.vehicle_id || 'NULL'} />
 			<CopyBadge label={`Planeado: ${arrivalData.scheduled_arrival || 'NULL'} (${arrivalData.scheduled_arrival_unix || 'NULL'})`} value={arrivalData.scheduled_arrival_unix || 'NULL'} />
