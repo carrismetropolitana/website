@@ -62,6 +62,17 @@
 		"publish_date": "{publishDate, date, long}",
 		"see_more": "See More"
 	},
+	"PipsSurvey": {
+		"header": {
+			"question": "Is there any problem with this panel?",
+			"question_pip_stops": "These are the stops associated with this panel",
+			"subtitle": "Thank you for helping us keep this panel working.",
+			"title": "Display {pipId}"
+		},
+		"stops_list": {
+			"no_data": "No stops available"
+		}
+	},
 	"SelectLine": {
 		"label": "Search line by number, name, location...",
 		"nothing_found": "No Results Found",
