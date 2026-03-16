@@ -22,14 +22,17 @@ export function StopsDetailContentTimetableRowDebug({ arrivalData }: Props) {
 	//
 	// A. Setup variables
 
-	const [isModalOpen, { close, open: openModal }] = useDisclosure(false);
+	const [isModalOpen, { close, open }] = useDisclosure(false);
 
 	//
 	// B. Handle actions
+	const handleCloseModal = () => {
+		close();
+	};
 
 	const handleOpenModal = (e: React.MouseEvent<SVGSVGElement>) => {
 		e.stopPropagation();
-		openModal();
+		open();
 	};
 
 	//
@@ -47,7 +50,7 @@ export function StopsDetailContentTimetableRowDebug({ arrivalData }: Props) {
 			<CopyBadge label={`Estimado: ${arrivalData.estimated_arrival || 'NULL'} (${arrivalData.estimated_arrival_unix || 'NULL'})`} value={arrivalData.estimated_arrival_unix || 'NULL'} />
 			<CopyBadge label={`Observado: ${arrivalData.observed_arrival || 'NULL'} (${arrivalData.observed_arrival_unix || 'NULL'})`} value={arrivalData.observed_arrival_unix || 'NULL'} />
 
-			<StopsDetailContentTimetableRowModal arrivalData={arrivalData} onClose={() => close()} opened={isModalOpen} />
+			<StopsDetailContentTimetableRowModal arrivalData={arrivalData} onClose={handleCloseModal} opened={isModalOpen} />
 		</div>
 	);
 

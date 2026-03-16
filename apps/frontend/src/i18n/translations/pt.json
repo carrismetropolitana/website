@@ -2035,7 +2035,7 @@
 		},
 		"StopsDetailContentTimetableRow": {
 			"debug_modal": {
-				"title": "IDs de viagens relacionadas"
+				"title": "Estes dados representam trip IDs iguais para diferentes dias"
 			},
 			"localities": {
 				"label": "Passa por"
