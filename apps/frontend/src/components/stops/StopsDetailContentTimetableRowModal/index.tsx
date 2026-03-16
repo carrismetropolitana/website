@@ -52,13 +52,27 @@ export function StopsDetailContentTimetableRowModal({ arrivalData, onClose, open
 						</Table.Tr>
 					</Table.Thead>
 					<Table.Tbody>
-						{arrivalData.related_trip_ids?.map((tripId) => {
+
+						{!arrivalData.related_trip_ids?.length && (
+							<Table.Tr>
+								<Table.Td><CopyBadge value={arrivalData.trip_id} /></Table.Td>
+							</Table.Tr>
+						)}
+
+						{arrivalData.related_trip_ids && arrivalData.related_trip_ids.length > 1 && arrivalData.related_trip_ids.map((tripId) => {
 							return (
 								<Table.Tr key={tripId}>
 									<Table.Td><CopyBadge value={tripId} /></Table.Td>
 								</Table.Tr>
 							);
 						})}
+
+						{!arrivalData.related_trip_ids?.length && !arrivalData.trip_id && (
+							<Table.Tr>
+								<Table.Td><CopyBadge value="NULL" /></Table.Td>
+							</Table.Tr>
+						)}
+
 					</Table.Tbody>
 				</Table>
 			</div>
