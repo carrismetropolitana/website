@@ -35,8 +35,6 @@ export function StopsDetailContentTimetableRowModal({ arrivalData, onClose, open
 	//
 	// C. Render Components
 
-	console.log('on modal:', arrivalData);
-
 	return (
 		<Modal
 			closeButtonProps={{ onClick: handleCloseClick }}
