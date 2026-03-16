@@ -1507,6 +1507,17 @@
 			"natural_gas": "Natural Gas"
 		}
 	},
+	"payload": {
+		"pdf": {
+			"error": "Error loading PDF",
+			"loading": "Loading PDF...",
+			"toolbar": {
+				"next": "Next",
+				"previous": "Previous"
+			}
+
+		}
+	},
 	"periods": {
 		"PeriodsWidgetItem": {
 			"from": "starts at {value, date, dayShort} {value, date, monthShort} {value, date, yearLong}",

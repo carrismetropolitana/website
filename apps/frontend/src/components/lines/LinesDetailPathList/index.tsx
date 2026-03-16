@@ -82,10 +82,6 @@ export function LinesDetailPathList() {
 				ampli.stopSelected({ ...props, stop_id: selectedStopId });
 			}
 		});
-
-		if (selectedStop) {
-			selectedStop.scrollIntoView({ behavior: 'smooth', block: 'center' });
-		}
 	}, [linesDetailContext.data.active_waypoint]);
 
 	//

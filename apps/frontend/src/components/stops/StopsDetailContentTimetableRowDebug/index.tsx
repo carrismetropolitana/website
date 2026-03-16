@@ -38,12 +38,12 @@ export function StopsDetailContentTimetableRowDebug({ arrivalData }: Props) {
 	return (
 		<div className={styles.container}>
 
-			{arrivalData.related_trip_ids?.length > 1 && arrivalData.related_trip_ids?.length !== undefined && (
-				<div className={styles.seeMore}>
-					<CopyBadge label={`Trip ID: ${arrivalData.trip_id || 'NULL'}`} value={arrivalData.trip_id || 'NULL'} />
+			<div className={styles.seeMore}>
+				<CopyBadge label={`Trip ID: ${arrivalData.trip_id || 'NULL'}`} value={arrivalData.trip_id || 'NULL'} />
+				{arrivalData.related_trip_ids?.length > 1 && (
 					<IconEyePlus className={styles.seeMoreIcon} color="var(--color-system-text-300)" onClick={e => handleOpenModal(e)} size={16} />
-				</div>
-			)}
+				)}
+			</div>
 
 			<CopyBadge label={`Stop Sequence: ${typeof arrivalData.stop_sequence === 'number' ? arrivalData.stop_sequence : 'NULL'}`} value={arrivalData.stop_sequence || 'NULL'} />
 			<CopyBadge label={`Vehicle ID: ${arrivalData.vehicle_id || 'NULL'}`} value={arrivalData.vehicle_id || 'NULL'} />

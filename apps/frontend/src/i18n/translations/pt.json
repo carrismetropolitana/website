@@ -190,6 +190,7 @@
 				"HIGH_PASSENGER_LOAD": "Elevada Lotação",
 				"MEDICAL_EMERGENCY": "Emergência Médica",
 				"NETWORK_UPDATE": "Atualização da Rede",
+				"OTHER_CAUSE": "Atualização de Rede",
 				"POLICE_ACTIVITY": "Atividade Policial",
 				"PUBLIC_DISORDER": "Desacatos",
 				"ROAD_ISSUE": "Incidente na Via",
@@ -1507,6 +1508,16 @@
 			"hybrid": "Híbrido",
 			"lpg_auto": "GPL",
 			"natural_gas": "Gás Natural"
+		}
+	},
+	"payload": {
+		"pdf": {
+			"error": "Erro ao carregar documento",
+			"loading": "A carregar documento...",
+			"toolbar": {
+				"next": "Seguinte",
+				"previous": "Anterior"
+			}
 		}
 	},
 	"periods": {
