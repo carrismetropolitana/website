@@ -67,6 +67,8 @@ export interface Config {
   };
   blocks: {};
   collections: {
+    campaigns: Campaign;
+    articles: Article;
     'case-studies': CaseStudy;
     media: Media;
     news: News;
@@ -74,7 +76,6 @@ export interface Config {
     users: User;
     'knowledge-base': KnowledgeBase;
     notes: Note;
-    articles: Article;
     'payload-kv': PayloadKv;
     'payload-locked-documents': PayloadLockedDocument;
     'payload-preferences': PayloadPreference;
@@ -82,6 +83,8 @@ export interface Config {
   };
   collectionsJoins: {};
   collectionsSelect: {
+    campaigns: CampaignsSelect<false> | CampaignsSelect<true>;
+    articles: ArticlesSelect<false> | ArticlesSelect<true>;
     'case-studies': CaseStudiesSelect<false> | CaseStudiesSelect<true>;
     media: MediaSelect<false> | MediaSelect<true>;
     news: NewsSelect<false> | NewsSelect<true>;
@@ -89,7 +92,6 @@ export interface Config {
     users: UsersSelect<false> | UsersSelect<true>;
     'knowledge-base': KnowledgeBaseSelect<false> | KnowledgeBaseSelect<true>;
     notes: NotesSelect<false> | NotesSelect<true>;
-    articles: ArticlesSelect<false> | ArticlesSelect<true>;
     'payload-kv': PayloadKvSelect<false> | PayloadKvSelect<true>;
     'payload-locked-documents': PayloadLockedDocumentsSelect<false> | PayloadLockedDocumentsSelect<true>;
     'payload-preferences': PayloadPreferencesSelect<false> | PayloadPreferencesSelect<true>;
@@ -136,15 +138,37 @@ export interface UserAuthOperations {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "case-studies".
+ * via the `definition` "campaigns".
  */
-export interface CaseStudy {
+export interface Campaign {
   id: string;
   title: string;
-  amount: number;
-  is_enabled: boolean;
+  /**
+   * URL única para esta campanha. Será gerada automaticamente do título se deixado em branco.
+   */
+  slug: string;
+  body: {
+    root: {
+      type: string;
+      children: {
+        type: any;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  };
+  is_unlisted?: boolean | null;
+  featured_image?: (string | null) | Media;
+  publishedAt: string;
   updatedAt: string;
+  status: 'draft' | 'published';
   createdAt: string;
+  _status?: ('draft' | 'published') | null;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -164,6 +188,71 @@ export interface Media {
   height?: number | null;
   focalX?: number | null;
   focalY?: number | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "articles".
+ */
+export interface Article {
+  id: string;
+  title: string;
+  /**
+   * URL única para este artigo. Será gerada automaticamente do título se deixado em branco.
+   */
+  slug: string;
+  /**
+   * Resumo curto do artigo que aparece na listagem e no início do artigo.
+   */
+  description: string;
+  type: 'tecnologia' | 'operacao' | 'sustentabilidade' | 'comunicacao';
+  /**
+   * Tempo estimado de leitura em minutos.
+   */
+  readTime: number;
+  heroImage: string | Media;
+  /**
+   * Legenda que aparece sobre a imagem de destaque.
+   */
+  heroImageCaption?: string | null;
+  /**
+   * Conteúdo do artigo em formato Markdown. Suporta títulos (##), listas, links, citações e muito mais.
+   */
+  content: string;
+  author: {
+    picture?: (string | null) | Media;
+    name: string;
+    role: string;
+    /**
+     * Breve descrição sobre o autor.
+     */
+    bio?: string | null;
+    social?: {
+      linkedin?: string | null;
+      twitter?: string | null;
+      email?: string | null;
+    };
+  };
+  publishDate: string;
+  status: 'draft' | 'published';
+  seo?: {
+    metaTitle?: string | null;
+    metaDescription?: string | null;
+    ogImage?: (string | null) | Media;
+  };
+  publishedAt: string;
+  updatedAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "case-studies".
+ */
+export interface CaseStudy {
+  id: string;
+  title: string;
+  amount: number;
+  is_enabled: boolean;
+  updatedAt: string;
+  createdAt: string;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -312,59 +401,6 @@ export interface Note {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "articles".
- */
-export interface Article {
-  id: string;
-  title: string;
-  /**
-   * URL única para este artigo. Será gerada automaticamente do título se deixado em branco.
-   */
-  slug: string;
-  /**
-   * Resumo curto do artigo que aparece na listagem e no início do artigo.
-   */
-  description: string;
-  type: 'tecnologia' | 'operacao' | 'sustentabilidade' | 'comunicacao';
-  /**
-   * Tempo estimado de leitura em minutos.
-   */
-  readTime: number;
-  heroImage: string | Media;
-  /**
-   * Legenda que aparece sobre a imagem de destaque.
-   */
-  heroImageCaption?: string | null;
-  /**
-   * Conteúdo do artigo em formato Markdown. Suporta títulos (##), listas, links, citações e muito mais.
-   */
-  content: string;
-  author: {
-    picture?: (string | null) | Media;
-    name: string;
-    role: string;
-    /**
-     * Breve descrição sobre o autor.
-     */
-    bio?: string | null;
-    social?: {
-      linkedin?: string | null;
-      twitter?: string | null;
-      email?: string | null;
-    };
-  };
-  publishDate: string;
-  status: 'draft' | 'published';
-  seo?: {
-    metaTitle?: string | null;
-    metaDescription?: string | null;
-    ogImage?: (string | null) | Media;
-  };
-  publishedAt: string;
-  updatedAt: string;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "payload-kv".
  */
 export interface PayloadKv {
@@ -387,6 +423,14 @@ export interface PayloadKv {
 export interface PayloadLockedDocument {
   id: string;
   document?:
+    | ({
+        relationTo: 'campaigns';
+        value: string | Campaign;
+      } | null)
+    | ({
+        relationTo: 'articles';
+        value: string | Article;
+      } | null)
     | ({
         relationTo: 'case-studies';
         value: string | CaseStudy;
@@ -414,10 +458,6 @@ export interface PayloadLockedDocument {
     | ({
         relationTo: 'notes';
         value: string | Note;
-      } | null)
-    | ({
-        relationTo: 'articles';
-        value: string | Article;
       } | null);
   globalSlug?: string | null;
   user: {
@@ -460,6 +500,62 @@ export interface PayloadMigration {
   batch?: number | null;
   updatedAt: string;
   createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "campaigns_select".
+ */
+export interface CampaignsSelect<T extends boolean = true> {
+  title?: T;
+  slug?: T;
+  body?: T;
+  is_unlisted?: T;
+  featured_image?: T;
+  publishedAt?: T;
+  updatedAt?: T;
+  status?: T;
+  createdAt?: T;
+  _status?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "articles_select".
+ */
+export interface ArticlesSelect<T extends boolean = true> {
+  title?: T;
+  slug?: T;
+  description?: T;
+  type?: T;
+  readTime?: T;
+  heroImage?: T;
+  heroImageCaption?: T;
+  content?: T;
+  author?:
+    | T
+    | {
+        picture?: T;
+        name?: T;
+        role?: T;
+        bio?: T;
+        social?:
+          | T
+          | {
+              linkedin?: T;
+              twitter?: T;
+              email?: T;
+            };
+      };
+  publishDate?: T;
+  status?: T;
+  seo?:
+    | T
+    | {
+        metaTitle?: T;
+        metaDescription?: T;
+        ogImage?: T;
+      };
+  publishedAt?: T;
+  updatedAt?: T;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -594,46 +690,6 @@ export interface NotesSelect<T extends boolean = true> {
         ogImage?: T;
       };
   authors?: T;
-  publishedAt?: T;
-  updatedAt?: T;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "articles_select".
- */
-export interface ArticlesSelect<T extends boolean = true> {
-  title?: T;
-  slug?: T;
-  description?: T;
-  type?: T;
-  readTime?: T;
-  heroImage?: T;
-  heroImageCaption?: T;
-  content?: T;
-  author?:
-    | T
-    | {
-        picture?: T;
-        name?: T;
-        role?: T;
-        bio?: T;
-        social?:
-          | T
-          | {
-              linkedin?: T;
-              twitter?: T;
-              email?: T;
-            };
-      };
-  publishDate?: T;
-  status?: T;
-  seo?:
-    | T
-    | {
-        metaTitle?: T;
-        metaDescription?: T;
-        ogImage?: T;
-      };
   publishedAt?: T;
   updatedAt?: T;
 }
