@@ -13,7 +13,7 @@ export function FeaturedSection() {
 			<Section heading="Destaques" withPadding>
 				<Grid columns="abc" withGap>
 					<FeaturedSectionCard coverImageSrc="/assets/home/drivers.png" href="https://backoffice.carrismetropolitana.pt/motoristas/" title="Recrutamento" />
-					<FeaturedSectionCard coverImageSrc="/assets/home/loures.png" href="https://carrismetropolitana.pt/news/19913" title="Estudo de Caso" />
+					<FeaturedSectionCard coverImageSrc="/assets/home/loures.png" href="https://carrismetropolitana.pt/news/69a96c64f4ea8db5214711a3" title="Estudo de Caso" />
 					<FeaturedSectionCard coverImageSrc="/assets/home/participe.png" href="https://backoffice.carrismetropolitana.pt/participe" title="Participe" />
 				</Grid>
 			</Section>
