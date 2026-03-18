@@ -3,6 +3,7 @@
 /* * */
 
 import { useDebugContext } from '@/contexts/Debug.context';
+import { useEnvironmentContext } from '@/contexts/Environment.context';
 import { useProfileContext } from '@/contexts/Profile.context';
 import { IconHeartFilled } from '@tabler/icons-react';
 
@@ -30,6 +31,8 @@ export function PathWaypointSpine({ backgroundColor, foregroundColor, isFirstSto
 
 	const profileContext = useProfileContext();
 	const debugContext = useDebugContext();
+	const environmentContext = useEnvironmentContext();
+	const isMupi = environmentContext.data.value === 'mupi';
 
 	//
 	// B. Transform data
@@ -45,8 +48,8 @@ export function PathWaypointSpine({ backgroundColor, foregroundColor, isFirstSto
 			style={{ backgroundColor: backgroundColor }}
 		>
 			{debugContext.flags.is_debug_mode && <div className={`${styles.marker} ${styles.stopSequence}`} style={{ color: foregroundColor }}>{stopSequence}</div>}
-			{!debugContext.flags.is_debug_mode && isFavoriteStop && <IconHeartFilled className={`${styles.marker} ${styles.favorite}`} color={foregroundColor} />}
-			{!debugContext.flags.is_debug_mode && !isFavoriteStop && <div className={styles.marker} style={{ backgroundColor: foregroundColor }} />}
+			{!debugContext.flags.is_debug_mode && !isMupi && isFavoriteStop && <IconHeartFilled className={`${styles.marker} ${styles.favorite}`} color={foregroundColor} />}
+			{!debugContext.flags.is_debug_mode && (isMupi || !isFavoriteStop) && <div className={styles.marker} style={{ backgroundColor: foregroundColor }} />}
 		</div>
 	);
 

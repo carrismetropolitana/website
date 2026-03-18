@@ -3,6 +3,7 @@
 /* * */
 
 import { useAlertsContext } from '@/contexts/Alerts.context';
+import { useEnvironmentContext } from '@/contexts/Environment.context';
 import { useLinesContext } from '@/contexts/Lines.context';
 import { useOperationalDateContext } from '@/contexts/OperationalDate.context';
 import { useProfileContext } from '@/contexts/Profile.context';
@@ -71,6 +72,7 @@ export const LinesDetailContextProvider = ({ children, lineId }) => {
 	const alertsContext = useAlertsContext();
 	const profileContext = useProfileContext();
 	const operationalDateContext = useOperationalDateContext();
+	const environmentContext = useEnvironmentContext();
 
 	const [dataLineState, setDataLineState] = useState<LinesDetailContextState['data']['line']>();
 	const [dataServiceMetricsState, setDataServiceMetricsState] = useState<LinesDetailContextState['data']['service_metrics']>([]);
@@ -98,6 +100,14 @@ export const LinesDetailContextProvider = ({ children, lineId }) => {
 		if (!lineData) return;
 		setDataLineState(lineData);
 	}, [lineId, linesContext.data.lines]);
+
+	useEffect(() => {
+		if (!lineId) return;
+		const normalizedLineHref = environmentContext.actions.getNormalizedHref(`/lines/${lineId}`);
+		if (typeof window !== 'undefined' && window.location.pathname !== normalizedLineHref) {
+			window.history.replaceState({}, '', normalizedLineHref + window.location.search);
+		}
+	}, [lineId, environmentContext.data.value]);
 
 	useEffect(() => {
 		const isFavorite = profileContext.data.favorite_lines?.includes(lineId) ? true : false;

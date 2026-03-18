@@ -4,6 +4,7 @@
 
 import { SelectLine } from '@/components/common/SelectLine';
 import { SelectStop } from '@/components/common/SelectStop';
+import { useEnvironmentContext } from '@/contexts/Environment.context';
 import { useLinesContext } from '@/contexts/Lines.context';
 import { useStopsContext } from '@/contexts/Stops.context';
 import { SegmentedControl } from '@mantine/core';
@@ -30,6 +31,7 @@ export function QuickSearchWidget() {
 	const [selectedLineId, setSelectedLineId] = useState(null);
 	const [selectedStopId, setSelectedStopId] = useState(null);
 	const router = useRouter();
+	const environmentContext = useEnvironmentContext();
 
 	//
 	// B. Transform data
@@ -44,7 +46,7 @@ export function QuickSearchWidget() {
 
 	const handleSelectLine = (selectedLineId) => {
 		setSelectedLineId(selectedLineId);
-		router.push(`/lines/${selectedLineId}`);
+		router.push(environmentContext.actions.getNormalizedHref(`/lines/${selectedLineId}`));
 	};
 
 	const handleSelectStop = (selectedStopId) => {

@@ -5,6 +5,7 @@ import { RegularListItem } from '@/components/layout/RegularListItem';
 import { Section } from '@/components/layout/Section';
 import { Surface } from '@/components/layout/Surface';
 import { LineDisplay } from '@/components/lines/LineDisplay';
+import { useEnvironmentContext } from '@/contexts/Environment.context';
 import { useLinesListContext } from '@/contexts/LinesList.context';
 import { useTranslations } from 'next-intl';
 import { ViewportList } from 'react-viewport-list';
@@ -18,6 +19,7 @@ export function LinesListViewAll() {
 	// A. Setup variables
 
 	const linesListContext = useLinesListContext();
+	const environmentContext = useEnvironmentContext();
 	const t = useTranslations('lines.LinesListViewAll');
 
 	//
@@ -38,7 +40,7 @@ export function LinesListViewAll() {
 			<Section>
 				<ViewportList itemMargin={0} items={linesListContext.data.filtered}>
 					{item => (
-						<RegularListItem key={item.id} href={`/lines/${item.id}`}>
+						<RegularListItem key={item.id} href={environmentContext.actions.getNormalizedHref(`/lines/${item.id}`)}>
 							<LineDisplay lineData={item} />
 						</RegularListItem>
 					)}
