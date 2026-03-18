@@ -5,6 +5,7 @@ import { RegularListItem } from '@/components/layout/RegularListItem';
 import { Section } from '@/components/layout/Section';
 import { Surface } from '@/components/layout/Surface';
 import { StopDisplay } from '@/components/stops/StopDisplay';
+import { useEnvironmentContext } from '@/contexts/Environment.context';
 import { useStopsListContext } from '@/contexts/StopsList.context';
 import { useTranslations } from 'next-intl';
 
@@ -18,6 +19,7 @@ export function StopsListViewFavorites() {
 
 	const t = useTranslations('stops.StopsListViewFavorites');
 	const stopsListContext = useStopsListContext();
+	const environmentContext = useEnvironmentContext();
 
 	//
 	// B. Render components
@@ -36,7 +38,7 @@ export function StopsListViewFavorites() {
 		<Surface variant="persistent" forceOverflow>
 			<Section>
 				{stopsListContext.data.favorites.map(stop => (
-					<RegularListItem key={stop.id} href={`/stops/${stop.id}`}>
+					<RegularListItem key={stop.id} href={environmentContext.actions.getNormalizedHref(`/stops/${stop.id}`)}>
 						<StopDisplay stopData={stop} />
 					</RegularListItem>
 				))}

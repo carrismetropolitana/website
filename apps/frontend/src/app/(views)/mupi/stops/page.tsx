@@ -1,11 +1,11 @@
 /* * */
 
-import { MupiStopsList } from '@/components/stops/MupiStopsList';
+import { StopsList } from '@/components/stops/StopsList';
 
 /* * */
 
 export default function Page() {
 	return (
-		<MupiStopsList />
+		<StopsList />
 	);
 }

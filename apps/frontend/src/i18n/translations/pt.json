@@ -2006,6 +2006,9 @@
 		}
 	},
 	"stops": {
+		"MupiStopsListViewAll": {
+			"no_data": "Nenhuma paragem encontrada para esta pesquisa"
+		},
 		"Page": {
 			"heading": "Pesquisar Paragens"
 		},

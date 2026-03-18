@@ -2004,6 +2004,9 @@
 		}
 	},
 	"stops": {
+		"MupiStopsListViewAll": {
+			"no_data": "No stops found for this search"
+		},
 		"Page": {
 			"heading": "Search Stops"
 		},
