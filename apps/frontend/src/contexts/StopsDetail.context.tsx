@@ -106,10 +106,7 @@ export const StopsDetailContextProvider = ({ children, stopId }: { children: Rea
 		const foundStopData = stopsContext.actions.getStopById(dataActiveStopIdState);
 		if (foundStopData) {
 			setDataStopState(foundStopData);
-			const normalizedStopHref = environmentContext.actions.getNormalizedHref(`/stops/${dataActiveStopIdState}`);
-			if (typeof window !== 'undefined' && window.location.pathname !== normalizedStopHref) {
-				window.history.replaceState({}, '', normalizedStopHref + window.location.search);
-			}
+			window.history.replaceState({}, '', environmentContext.actions.getNormalizedHref(`/stops/${dataActiveStopIdState}`) + window.location.search);
 		}
 		else {
 			notFound();

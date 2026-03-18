@@ -21,6 +21,7 @@ export function LinesListViewAll() {
 	const linesListContext = useLinesListContext();
 	const environmentContext = useEnvironmentContext();
 	const t = useTranslations('lines.LinesListViewAll');
+	const environmentContext = useEnvironmentContext();
 
 	//
 	// B. Render components

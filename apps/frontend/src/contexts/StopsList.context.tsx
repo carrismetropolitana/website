@@ -3,6 +3,7 @@
 /* * */
 
 import { useAnalyticsContext } from '@/contexts/Analytics.context';
+import { useEnvironmentContext } from '@/contexts/Environment.context';
 import { useProfileContext } from '@/contexts/Profile.context';
 import { transformStopDataIntoGeoJsonFeature, useStopsContext } from '@/contexts/Stops.context';
 import { createDocCollection } from '@/hooks/useOtherSearch';
@@ -63,6 +64,8 @@ export const StopsListContextProvider = ({ children }) => {
 	const profileContext = useProfileContext();
 	const stopsContext = useStopsContext();
 	const analyticsContext = useAnalyticsContext();
+	const environmentContext = useEnvironmentContext();
+	const isMupi = environmentContext.data.value === 'mupi';
 
 	const [dataFilteredState, setDataFilteredState] = useState<Stop[]>([]);
 	const [dataFilteredGeojsonFCState, setDataFilteredGeojsonFCState] = useState<GeoJSON.FeatureCollection<GeoJSON.Point, GeoJSON.GeoJsonProperties>>();
@@ -177,6 +180,7 @@ export const StopsListContextProvider = ({ children }) => {
 	};
 
 	const updateFilterByCurrentView = (value: StopsListContextState['filters']['by_current_view']) => {
+		if (isMupi && value === 'favorites') return;
 		setFilterByCurrentViewState(value);
 		analyticsContext.actions.capture(ampli => ampli.changeStopsViewType({ view_type: value }));
 	};
