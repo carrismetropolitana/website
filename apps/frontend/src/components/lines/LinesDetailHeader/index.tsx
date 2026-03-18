@@ -11,15 +11,15 @@ import { LineBadge } from '@/components/lines/LineBadge';
 import { SelectActivePatternGroup } from '@/components/lines/SelectActivePatternGroup';
 // import { SelectActivePatternGroupExplainer } from '@/components/lines/SelectActivePatternGroupExplainer';
 import { LineDebugDetail } from '@/components/lines/LineDebugDetail';
+import { LineDisplayTts } from '@/components/lines/LineDisplayTts';
 import { useDebugContext } from '@/contexts/Debug.context';
+import { useEnvironmentContext } from '@/contexts/Environment.context';
 import { useLinesDetailContext } from '@/contexts/LinesDetail.context';
 import { useProfileContext } from '@/contexts/Profile.context';
 import toast from '@/utils/toast';
 import { useTranslations } from 'next-intl';
 
 import styles from './styles.module.css';
-
-import { LineDisplayTts } from '../LineDisplayTts';
 
 /* * */
 
@@ -33,6 +33,8 @@ export function LinesDetailHeader() {
 	const profileContext = useProfileContext();
 	const linesDetailContext = useLinesDetailContext();
 	const debugContext = useDebugContext();
+	const environmentContext = useEnvironmentContext();
+	const isMupi = environmentContext.data.value === 'mupi';
 
 	//
 	// B. Handle actions
@@ -66,7 +68,7 @@ export function LinesDetailHeader() {
 					<div className={styles.headingSection}>
 						<div className={styles.headingSectionRow}>
 							<LineBadge lineData={linesDetailContext.data.line} size="lg" />
-							<FavoriteToggle color={linesDetailContext.data.line.color} isActive={linesDetailContext.flags.is_favorite} onToggle={handleToggleFavorite} />
+							{!isMupi && <FavoriteToggle color={linesDetailContext.data.line.color} isActive={linesDetailContext.flags.is_favorite} onToggle={handleToggleFavorite} />}
 							<LineDisplayTts patternId={linesDetailContext.data.active_pattern?.id} />
 						</div>
 						<div className={styles.lineName}>
