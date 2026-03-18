@@ -3,6 +3,7 @@
 
 import { useAlertsContext } from '@/contexts/Alerts.context';
 import { useDebugContext } from '@/contexts/Debug.context';
+import { useEnvironmentContext } from '@/contexts/Environment.context';
 import { useLinesContext } from '@/contexts/Lines.context';
 import { useOperationalDateContext } from '@/contexts/OperationalDate.context';
 import { useProfileContext } from '@/contexts/Profile.context';
@@ -75,6 +76,7 @@ export const StopsDetailContextProvider = ({ children, stopId }: { children: Rea
 	const profileContext = useProfileContext();
 	const operationalDateContext = useOperationalDateContext();
 	const debugContext = useDebugContext();
+	const environmentContext = useEnvironmentContext();
 	const [dataStopState, setDataStopState] = useState<Stop | undefined>(undefined);
 	const [dataActiveStopIdState, setDataActiveStopIdState] = useState<string>(stopId);
 	const [dataLinesState, setDataLinesState] = useState<Line[] | undefined>(undefined);
@@ -104,12 +106,12 @@ export const StopsDetailContextProvider = ({ children, stopId }: { children: Rea
 		const foundStopData = stopsContext.actions.getStopById(dataActiveStopIdState);
 		if (foundStopData) {
 			setDataStopState(foundStopData);
-			window.history.replaceState({}, '', `/stops/${dataActiveStopIdState}` + window.location.search);
+			window.history.replaceState({}, '', environmentContext.actions.getNormalizedHref(`/stops/${dataActiveStopIdState}`) + window.location.search);
 		}
 		else {
 			notFound();
 		}
-	}, [stopsContext.data.stops, dataActiveStopIdState]);
+	}, [stopsContext.data.stops, dataActiveStopIdState, environmentContext.data.value]);
 
 	/**
  	* Fetch line data for the selected stop.
