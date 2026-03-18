@@ -76,7 +76,7 @@ export function StopsDetailHeader() {
 				<div className={styles.headingWrapper}>
 					<div className={styles.nameWrapper}>
 						<StopDisplayName longName={stopsDetailContext.data.stop.long_name} size="lg" />
-						{!isMupi && <StopDisplayTts stopId={stopsDetailContext.data.stop.id} />}
+						<StopDisplayTts stopId={stopsDetailContext.data.stop.id} />
 						{!isMupi && <FavoriteToggle color="var(--color-brand)" isActive={stopsDetailContext.flags.is_favorite} onToggle={handleToggleFavorite} />}
 					</div>
 					<StopDisplayLocation localityId={stopsDetailContext.data.stop.locality_id} municipalityId={stopsDetailContext.data.stop.municipality_id} size="lg" />
