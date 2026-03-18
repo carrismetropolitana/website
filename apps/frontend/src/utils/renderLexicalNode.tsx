@@ -11,9 +11,13 @@ import { List } from '@/components/payload/lists';
 import { ListItem } from '@/components/payload/lists/listItem';
 import { Paragraph } from '@/components/payload/paragraph';
 import { Quote } from '@/components/payload/quote';
+import { Spacer } from '@/components/payload/spacer';
 import { Table } from '@/components/payload/table';
 import { TableCell } from '@/components/payload/table/table-cell';
 import { Text } from '@/components/payload/text';
+import { ThreeColumnsText } from '@/components/payload/ThreeColumnsText';
+import { TwoColumnsText } from '@/components/payload/TwoColumnsText';
+import { TwoColumnsTextImage } from '@/components/payload/TwoColumnsTextImage';
 import { renderUpload } from '@/components/payload/upload';
 import { Video } from '@/components/payload/video';
 import { LexicalNode } from '@/types/lexical-node.types';
@@ -31,6 +35,39 @@ function renderBlock(node: LexicalNode, key?: number): ReactNode {
 		}
 		case 'gallery': return <Gallery key={key} fields={node.fields} />;
 		case 'link': return <Links key={key} fields={node.fields} />;
+		case 'spacer': return <Spacer key={key} height={node.fields?.height} />;
+		case 'three-columns-text': {
+			const f = node.fields as { centerColumn?: unknown, leftColumn?: unknown, rightColumn?: unknown };
+			return (
+				<ThreeColumnsText
+					key={key}
+					centerColumn={f?.centerColumn}
+					leftColumn={f?.leftColumn}
+					rightColumn={f?.rightColumn}
+				/>
+			);
+		}
+		case 'two-columns-text': {
+			const f = node.fields as { leftColumn?: unknown, rightColumn?: unknown };
+			return (
+				<TwoColumnsText
+					key={key}
+					leftColumn={f?.leftColumn}
+					rightColumn={f?.rightColumn}
+				/>
+			);
+		}
+		case 'two-columns-text-image': {
+			const f = node.fields as { image?: unknown, imagePosition?: 'left' | 'right', text?: unknown };
+			return (
+				<TwoColumnsTextImage
+					key={key}
+					image={f?.image}
+					imagePosition={f?.imagePosition}
+					text={f?.text}
+				/>
+			);
+		}
 		case 'video': return <Video key={key} fields={node.fields} />;
 		default: return null;
 	}
@@ -67,6 +104,24 @@ function renderNode(node: LexicalNode, key?: number): ReactNode {
 		case 'upload': return renderUpload(node, key);
 		default: return children.length > 0 ? renderChildren() : (node.text ?? null);
 	}
+}
+
+/* * */
+
+/**
+ * Extract Lexical root node from various content formats (string, object with root, raw root).
+ */
+export function getLexicalRoot(content: unknown): LexicalNode | null {
+	if (!content) return null;
+	let json: unknown;
+	try {
+		json = typeof content === 'string' ? JSON.parse(content) : content;
+	}
+	catch {
+		return null;
+	}
+	if (!json || typeof json !== 'object') return null;
+	return (json as { root?: LexicalNode }).root ?? (json as LexicalNode);
 }
 
 /* * */

@@ -13,6 +13,7 @@ import sharp from 'sharp';
 import { BackgroundColorFeature } from '@/lexical/backgroundColor/feature.server';
 import { HeadingAnchorFeature } from '@/lexical/headingAnchor/feature.server';
 import { MentionFeature } from '@/lexical/mention/feature.server';
+import { Campaigns } from '@/schemas/Campaigns/collection';
 import { CaseStudies } from '@/schemas/CaseStudies/collection';
 import { KnowledgeBase } from '@/schemas/KnowledgeBase/collection';
 import { Media } from '@/schemas/Media/collection';
@@ -30,10 +31,13 @@ import { HomeSlider } from '@/schemas/HomeSlider/global';
 
 /* * */
 
-import { accordionFields } from './fields/accordion';
-import { galleryFields } from './fields/gallery';
-import { linkFields } from './fields/link';
-import { videoFields } from './fields/video';
+import { accordionFields } from '@/fields/accordion';
+import { galleryFields } from '@/fields/gallery';
+import { linkFields } from '@/fields/link';
+import { videoFields } from '@/fields/video';
+import { ThreeColumnsTextBlock } from '@/lexical/layout/three-columns-text';
+import { TwoColumnsTextBlock } from '@/lexical/layout/two-columns-text';
+import { TwoColumnsTextImageBlock } from '@/lexical/layout/two-columns-text-image';
 
 /* * */
 
@@ -47,10 +51,14 @@ export default buildConfig({
 			},
 		},
 		livePreview: {
-			collections: ['news'],
-			url: ({ data }) => {
+			collections: ['news', 'campaigns'],
+			url: ({ collectionConfig, data }) => {
 				if (!data?.id) return undefined;
-				return `${getPublicVariable('server_url_frontend')}/news/preview?id=${data.id}`;
+				const base = getPublicVariable('server_url_frontend');
+				const slug = collectionConfig?.slug as unknown as string | undefined;
+				return slug === 'campaigns'
+					? `${base}/campaigns/preview?id=${data.id}`
+					: `${base}/news/preview?id=${data.id}`;
 			},
 		},
 		meta: {
@@ -60,7 +68,7 @@ export default buildConfig({
 		user: 'users',
 	},
 
-	collections: [CaseStudies, Media, News, Topics, Users, KnowledgeBase, Notes, Articles],
+	collections: [Campaigns, Articles, CaseStudies, Media, News, Topics, Users, KnowledgeBase, Notes],
 
 	csrf: [
 		getPublicVariable('server_url_backoffice').replace(/\/$/, ''),
@@ -91,6 +99,18 @@ export default buildConfig({
 					{
 						fields: videoFields,
 						slug: 'video',
+					},
+					{
+						...ThreeColumnsTextBlock,
+						admin: { group: 'Layout' },
+					},
+					{
+						...TwoColumnsTextBlock,
+						admin: { group: 'Layout' },
+					},
+					{
+						...TwoColumnsTextImageBlock,
+						admin: { group: 'Layout' },
 					},
 				],
 			}),
