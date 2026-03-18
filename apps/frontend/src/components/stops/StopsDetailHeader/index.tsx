@@ -12,6 +12,7 @@ import { LineBadge } from '@/components/lines/LineBadge';
 import { StopDisplayLocation } from '@/components/stops/StopDisplayLocation';
 import { StopDisplayName } from '@/components/stops/StopDisplayName';
 import { StopDisplayTts } from '@/components/stops/StopDisplayTts';
+import { useEnvironmentContext } from '@/contexts/Environment.context';
 import { useProfileContext } from '@/contexts/Profile.context';
 import { useStopsDetailContext } from '@/contexts/StopsDetail.context';
 import toast from '@/utils/toast';
@@ -28,6 +29,8 @@ export function StopsDetailHeader() {
 
 	const profileContext = useProfileContext();
 	const stopsDetailContext = useStopsDetailContext();
+	const environmentContext = useEnvironmentContext();
+	const isMupi = environmentContext.data.value === 'mupi';
 
 	//
 	// B. Handle actions
@@ -73,8 +76,8 @@ export function StopsDetailHeader() {
 				<div className={styles.headingWrapper}>
 					<div className={styles.nameWrapper}>
 						<StopDisplayName longName={stopsDetailContext.data.stop.long_name} size="lg" />
-						<StopDisplayTts stopId={stopsDetailContext.data.stop.id} />
-						<FavoriteToggle color="var(--color-brand)" isActive={stopsDetailContext.flags.is_favorite} onToggle={handleToggleFavorite} />
+						{!isMupi && <StopDisplayTts stopId={stopsDetailContext.data.stop.id} />}
+						{!isMupi && <FavoriteToggle color="var(--color-brand)" isActive={stopsDetailContext.flags.is_favorite} onToggle={handleToggleFavorite} />}
 					</div>
 					<StopDisplayLocation localityId={stopsDetailContext.data.stop.locality_id} municipalityId={stopsDetailContext.data.stop.municipality_id} size="lg" />
 				</div>
