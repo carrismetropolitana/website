@@ -3,16 +3,13 @@
 import { getPublicVariable } from '@carrismetropolitana/website-shared-settings';
 import { mongooseAdapter } from '@payloadcms/db-mongodb';
 import { nodemailerAdapter } from '@payloadcms/email-nodemailer';
-import { BlocksFeature, EXPERIMENTAL_TableFeature, HeadingFeature, lexicalEditor } from '@payloadcms/richtext-lexical';
 import { s3Storage } from '@payloadcms/storage-s3';
-import { buildConfig } from 'payload';
+import { type Block, buildConfig } from 'payload';
 import sharp from 'sharp';
 
 /* * */
 
-import { BackgroundColorFeature } from '@/lexical/backgroundColor/feature.server';
-import { HeadingAnchorFeature } from '@/lexical/headingAnchor/feature.server';
-import { MentionFeature } from '@/lexical/mention/feature.server';
+import { createLexicalConfig } from '@/configs/lexical-editor-config';
 import { Campaigns } from '@/schemas/Campaigns/collection';
 import { CaseStudies } from '@/schemas/CaseStudies/collection';
 import { KnowledgeBase } from '@/schemas/KnowledgeBase/collection';
@@ -42,6 +39,55 @@ import { TwoColumnsTextBlock } from '@/lexical/layout/two-columns-text';
 import { TwoColumnsTextImageBlock } from '@/lexical/layout/two-columns-text-image';
 
 import { spacerFields } from './fields/spacer';
+
+/* * */
+
+const richTextBlocks: Block[] = [
+	{
+		fields: spacerFields,
+		slug: 'spacer',
+	},
+	{
+		fields: accordionFields,
+		slug: 'accordion',
+	},
+	{
+		fields: galleryFields,
+		slug: 'gallery',
+	},
+	{
+		fields: linkFields,
+		slug: 'link',
+	},
+	{
+		fields: videoFields,
+		slug: 'video',
+	},
+	{
+		admin: { group: 'Layout' },
+		fields: sectionFields,
+		slug: 'section',
+	},
+	{
+		admin: { group: 'Layout' },
+		fields: surfaceFields,
+		slug: 'surface',
+	},
+	{
+		...ThreeColumnsTextBlock,
+		admin: { group: 'Layout' },
+	},
+	{
+		...TwoColumnsTextBlock,
+		admin: { group: 'Layout' },
+	},
+	{
+		...TwoColumnsTextImageBlock,
+		admin: { group: 'Layout' },
+	},
+];
+
+const lexicalEditorConfig = createLexicalConfig(richTextBlocks);
 
 /* * */
 
@@ -81,62 +127,7 @@ export default buildConfig({
 
 	db: mongooseAdapter({ url: process.env.WEBSITEDB_URI ?? 'mongodb://placeholder:placeholder@placeholder:12345/placeholder' }),
 
-	editor: lexicalEditor({
-		features: ({ defaultFeatures }) => [
-			...defaultFeatures.filter(f => f.key !== 'heading'),
-			BlocksFeature({
-				blocks: [
-					{
-						fields: spacerFields,
-						slug: 'spacer',
-					},
-					{
-						fields: accordionFields,
-						slug: 'accordion',
-					},
-					{
-						fields: galleryFields,
-						slug: 'gallery',
-					},
-					{
-						fields: linkFields,
-						slug: 'link',
-					},
-					{
-						fields: videoFields,
-						slug: 'video',
-					},
-					{
-						admin: { group: 'Layout' },
-						fields: sectionFields,
-						slug: 'section',
-					},
-					{
-						admin: { group: 'Layout' },
-						fields: surfaceFields,
-						slug: 'surface',
-					},
-					{
-						...ThreeColumnsTextBlock,
-						admin: { group: 'Layout' },
-					},
-					{
-						...TwoColumnsTextBlock,
-						admin: { group: 'Layout' },
-					},
-					{
-						...TwoColumnsTextImageBlock,
-						admin: { group: 'Layout' },
-					},
-				],
-			}),
-			HeadingFeature({ enabledHeadingSizes: ['h2', 'h3'] }),
-			HeadingAnchorFeature(),
-			BackgroundColorFeature(),
-			EXPERIMENTAL_TableFeature(),
-			MentionFeature(),
-		],
-	}),
+	editor: lexicalEditorConfig,
 
 	email: nodemailerAdapter({
 		defaultFromAddress: process.env.EMAIL_FROM_ADDRESS ?? '',

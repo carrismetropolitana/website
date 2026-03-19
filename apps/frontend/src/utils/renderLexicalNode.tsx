@@ -2,7 +2,6 @@
 /* * */
 
 import { Section } from '@/components/layout/Section';
-import { Surface } from '@/components/layout/Surface';
 import { Accordion } from '@/components/payload/accordion';
 import { Code } from '@/components/payload/code';
 import { Gallery } from '@/components/payload/gallery';
@@ -14,6 +13,7 @@ import { ListItem } from '@/components/payload/lists/listItem';
 import { Paragraph } from '@/components/payload/paragraph';
 import { Quote } from '@/components/payload/quote';
 import { Spacer } from '@/components/payload/spacer';
+import { Surface } from '@/components/payload/surface';
 import { Table } from '@/components/payload/table';
 import { TableCell } from '@/components/payload/table/table-cell';
 import { Text } from '@/components/payload/text';
@@ -38,19 +38,12 @@ function renderBlock(node: LexicalNode, key?: number): ReactNode {
 		case 'gallery': return <Gallery key={key} fields={node.fields} />;
 		case 'link': return <Links key={key} fields={node.fields} />;
 		case 'section': {
-			const f = node.fields as {
-				content?: unknown
-				variant?: 'default' | 'muted' | 'standout' | 'success' | 'warning'
-				withBottomDivider?: boolean
-				withGap?: boolean
-				withPadding?: 'all' | 'desktop' | 'mobile' | 'none'
-			};
+			const f = node.fields as { content?: unknown, withBottomDivider?: boolean, withGap?: boolean, withPadding?: 'all' | 'desktop' | 'mobile' | 'none' };
 			const contentRoot = getLexicalRoot(f?.content);
 			const withPadding = f?.withPadding === 'all' ? true : (f?.withPadding === 'none' ? undefined : f?.withPadding);
 			return (
 				<Section
 					key={key}
-					variant={f?.variant}
 					withBottomDivider={f?.withBottomDivider}
 					withGap={f?.withGap}
 					withPadding={withPadding}
@@ -65,14 +58,25 @@ function renderBlock(node: LexicalNode, key?: number): ReactNode {
 		}
 		case 'surface': {
 			const f = node.fields as {
+				backgroundImage?: unknown
+				backgroundOverlay?: boolean
 				content?: unknown
 				forceOverflow?: boolean
 				fullHeight?: boolean
+				hasBackgroundImage?: boolean
 				variant?: 'alerts' | 'brand2' | 'brand' | 'debug' | 'default' | 'muted' | 'persistent' | 'standout' | 'success' | 'warning'
 			};
 			const contentRoot = getLexicalRoot(f?.content);
+			const backgroundImageUrl = getRelationshipImageUrl(f?.backgroundImage);
 			return (
-				<Surface key={key} forceOverflow={f?.forceOverflow} fullHeight={f?.fullHeight} variant={f?.variant}>
+				<Surface
+					key={key}
+					backgroundImageUrl={f?.hasBackgroundImage ? backgroundImageUrl : undefined}
+					backgroundOverlay={f?.backgroundOverlay}
+					forceOverflow={f?.forceOverflow}
+					fullHeight={f?.fullHeight}
+					variant={f?.variant}
+				>
 					{contentRoot ? renderNode(contentRoot) : null}
 				</Surface>
 			);
@@ -163,6 +167,23 @@ export function getLexicalRoot(content: unknown): LexicalNode | null {
 	}
 	if (!json || typeof json !== 'object') return null;
 	return (json as { root?: LexicalNode }).root ?? (json as LexicalNode);
+}
+
+/* * */
+
+function getRelationshipImageUrl(value: unknown): string | undefined {
+	if (!value || typeof value !== 'object') return undefined;
+
+	const v = value as {
+		file?: { url?: string }
+		url?: string
+		value?: {
+			file?: { url?: string }
+			url?: string
+		}
+	};
+
+	return v.url ?? v.value?.url ?? v.file?.url ?? v.value?.file?.url;
 }
 
 /* * */

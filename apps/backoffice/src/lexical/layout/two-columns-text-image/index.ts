@@ -2,14 +2,14 @@
 
 import type { Block } from 'payload';
 
-import { lexicalEditorConfigColumn } from '@/configs/lexical-editor-config';
+import { lexicalEditorConfig } from '@/configs/lexical-editor-config';
 
 /* * */
 
 export const TwoColumnsTextImageBlock: Block = {
 	fields: [
 		{
-			editor: lexicalEditorConfigColumn,
+			editor: lexicalEditorConfig,
 			label: 'Texto',
 			name: 'text',
 			required: true,

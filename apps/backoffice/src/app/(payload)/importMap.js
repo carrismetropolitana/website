@@ -7,6 +7,8 @@ import { BackgroundColorFeatureClient as BackgroundColorFeatureClient_f7a8d5d95a
 import { HeadingAnchorFeatureClient as HeadingAnchorFeatureClient_eaf9b82c83898f5d31545126068a138e } from '@/lexical/headingAnchor/feature.client'
 import { HeadingFeatureClient as HeadingFeatureClient_e70f5e05f09f93e00b997edb1ef0c864 } from '@payloadcms/richtext-lexical/client'
 import { BlocksFeatureClient as BlocksFeatureClient_e70f5e05f09f93e00b997edb1ef0c864 } from '@payloadcms/richtext-lexical/client'
+import { GalleryFieldPreview as GalleryFieldPreview_3bf36e9fa6af0807e30df4acfaddf436 } from '@/components/GalleryFieldPreview'
+import { LinkFieldPreview as LinkFieldPreview_3b9f1bbd1ad5afd6976cb9bf2edd577c } from '@/components/LinkFieldPreview'
 import { InlineToolbarFeatureClient as InlineToolbarFeatureClient_e70f5e05f09f93e00b997edb1ef0c864 } from '@payloadcms/richtext-lexical/client'
 import { HorizontalRuleFeatureClient as HorizontalRuleFeatureClient_e70f5e05f09f93e00b997edb1ef0c864 } from '@payloadcms/richtext-lexical/client'
 import { UploadFeatureClient as UploadFeatureClient_e70f5e05f09f93e00b997edb1ef0c864 } from '@payloadcms/richtext-lexical/client'
@@ -26,8 +28,6 @@ import { StrikethroughFeatureClient as StrikethroughFeatureClient_e70f5e05f09f93
 import { UnderlineFeatureClient as UnderlineFeatureClient_e70f5e05f09f93e00b997edb1ef0c864 } from '@payloadcms/richtext-lexical/client'
 import { BoldFeatureClient as BoldFeatureClient_e70f5e05f09f93e00b997edb1ef0c864 } from '@payloadcms/richtext-lexical/client'
 import { ItalicFeatureClient as ItalicFeatureClient_e70f5e05f09f93e00b997edb1ef0c864 } from '@payloadcms/richtext-lexical/client'
-import { GalleryFieldPreview as GalleryFieldPreview_3bf36e9fa6af0807e30df4acfaddf436 } from '@/components/GalleryFieldPreview'
-import { LinkFieldPreview as LinkFieldPreview_3b9f1bbd1ad5afd6976cb9bf2edd577c } from '@/components/LinkFieldPreview'
 import { GeneralStatusMessageLabel as GeneralStatusMessageLabel_52099edc813454fee3d5335f6a4aed35 } from '@/components/GeneralStatusMessageLabel/index'
 import { HomeSliderMessageLabel as HomeSliderMessageLabel_257d5701fbc8afd2f21de3c70108de6a } from '@/components/HomeSliderMessageLabel/index'
 import { Icons as Icons_537d74cd4b75d6c420c521af18c7f707 } from '@/graphics/Icon/index.tsx'
@@ -45,6 +45,8 @@ export const importMap = {
   "@/lexical/headingAnchor/feature.client#HeadingAnchorFeatureClient": HeadingAnchorFeatureClient_eaf9b82c83898f5d31545126068a138e,
   "@payloadcms/richtext-lexical/client#HeadingFeatureClient": HeadingFeatureClient_e70f5e05f09f93e00b997edb1ef0c864,
   "@payloadcms/richtext-lexical/client#BlocksFeatureClient": BlocksFeatureClient_e70f5e05f09f93e00b997edb1ef0c864,
+  "@/components/GalleryFieldPreview#GalleryFieldPreview": GalleryFieldPreview_3bf36e9fa6af0807e30df4acfaddf436,
+  "@/components/LinkFieldPreview#LinkFieldPreview": LinkFieldPreview_3b9f1bbd1ad5afd6976cb9bf2edd577c,
   "@payloadcms/richtext-lexical/client#InlineToolbarFeatureClient": InlineToolbarFeatureClient_e70f5e05f09f93e00b997edb1ef0c864,
   "@payloadcms/richtext-lexical/client#HorizontalRuleFeatureClient": HorizontalRuleFeatureClient_e70f5e05f09f93e00b997edb1ef0c864,
   "@payloadcms/richtext-lexical/client#UploadFeatureClient": UploadFeatureClient_e70f5e05f09f93e00b997edb1ef0c864,
@@ -64,8 +66,6 @@ export const importMap = {
   "@payloadcms/richtext-lexical/client#UnderlineFeatureClient": UnderlineFeatureClient_e70f5e05f09f93e00b997edb1ef0c864,
   "@payloadcms/richtext-lexical/client#BoldFeatureClient": BoldFeatureClient_e70f5e05f09f93e00b997edb1ef0c864,
   "@payloadcms/richtext-lexical/client#ItalicFeatureClient": ItalicFeatureClient_e70f5e05f09f93e00b997edb1ef0c864,
-  "@/components/GalleryFieldPreview#GalleryFieldPreview": GalleryFieldPreview_3bf36e9fa6af0807e30df4acfaddf436,
-  "@/components/LinkFieldPreview#LinkFieldPreview": LinkFieldPreview_3b9f1bbd1ad5afd6976cb9bf2edd577c,
   "@/components/GeneralStatusMessageLabel/index#GeneralStatusMessageLabel": GeneralStatusMessageLabel_52099edc813454fee3d5335f6a4aed35,
   "@/components/HomeSliderMessageLabel/index#HomeSliderMessageLabel": HomeSliderMessageLabel_257d5701fbc8afd2f21de3c70108de6a,
   "@/graphics/Icon/index.tsx#Icons": Icons_537d74cd4b75d6c420c521af18c7f707,

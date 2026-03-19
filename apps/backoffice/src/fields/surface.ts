@@ -2,7 +2,7 @@
 
 import type { Field } from 'payload';
 
-import { lexicalEditorConfigColumn } from '@/configs/lexical-editor-config';
+import { lexicalEditorConfig } from '@/configs/lexical-editor-config';
 
 /* * */
 
@@ -20,10 +20,40 @@ export const surfaceFields: Field[] = [
 		type: 'checkbox',
 	},
 	{
-		editor: lexicalEditorConfigColumn,
+		defaultValue: false,
+		label: 'Usar imagem de fundo',
+		name: 'hasBackgroundImage',
+		type: 'checkbox',
+	},
+	{
+		admin: {
+			condition: (_, siblingData) => siblingData?.hasBackgroundImage === true,
+		},
+		filterOptions: () => ({
+			mimeType: {
+				in: ['image/jpeg', 'image/png', 'image/webp', 'image/gif'],
+			},
+		}),
+		label: 'Imagem de fundo',
+		name: 'backgroundImage',
+		relationTo: 'media',
+		required: false,
+		type: 'relationship',
+	},
+	{
+		admin: {
+			condition: (_, siblingData) => siblingData?.hasBackgroundImage === true,
+		},
+		defaultValue: false,
+		label: 'Aplicar overlay escuro',
+		name: 'backgroundOverlay',
+		type: 'checkbox',
+	},
+	{
+		editor: lexicalEditorConfig,
 		label: 'Conteúdo',
 		name: 'content',
-		required: true,
+		required: false,
 		type: 'richText',
 	},
 ];

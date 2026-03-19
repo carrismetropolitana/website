@@ -18,6 +18,19 @@ export interface LexicalNode {
 			id?: string
 			title?: string
 		}[]
+		backgroundImage?: number | {
+			file?: {
+				url?: string
+			}
+			url?: string
+			value?: {
+				file?: {
+					url?: string
+				}
+				url?: string
+			}
+		}
+		backgroundOverlay?: boolean
 		blockName?: string
 		blockType?: string
 		caption?: string
@@ -30,6 +43,7 @@ export interface LexicalNode {
 		}
 		forceOverflow?: boolean
 		fullHeight?: boolean
+		hasBackgroundImage?: boolean
 		images?: {
 			relationTo?: string
 			value?: {
@@ -47,6 +61,7 @@ export interface LexicalNode {
 		text?: string
 		title?: string
 		url?: string
+		variant?: 'alerts' | 'brand2' | 'brand' | 'debug' | 'default' | 'muted' | 'persistent' | 'standout' | 'success' | 'warning'
 		video?: {
 			relationTo?: string
 			value?: {

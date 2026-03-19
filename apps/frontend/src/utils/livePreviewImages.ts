@@ -97,15 +97,50 @@ export async function processBodyImages(body: any, prevBody?: any): Promise<any>
 		(c: any) => c.type === 'block' && c.fields?.blockType === 'gallery',
 	) || [];
 
+	const prevSurfaceBlocks = prevBody?.root?.children?.filter(
+		(c: any) => c.type === 'block' && c.fields?.blockType === 'surface',
+	) || [];
+
+	const processSurfaceBackgroundImage = async (block: any, prevBlock?: any) => {
+		const f = block?.fields;
+		if (!f?.hasBackgroundImage) return block;
+		if (!f?.backgroundImage) return block;
+
+		// If we already have a URL, nothing to do.
+		if (hasImageUrl(f.backgroundImage)) return block;
+
+		// Reuse previous resolved media if possible (avoid extra network calls).
+		const prevBg = prevBlock?.fields?.backgroundImage;
+		if (prevBg && hasImageUrl(prevBg)) {
+			return { ...block, fields: { ...f, backgroundImage: prevBg } };
+		}
+
+		const id = getImageId(f.backgroundImage);
+		if (!id) return block;
+
+		const media = await fetchMedia(id);
+		return media ? { ...block, fields: { ...f, backgroundImage: media } } : block;
+	};
+
 	const processedChildren = await Promise.all(
 		body.root.children.map(async (block: any, index: number) => {
 			const isGallery = block.type === 'block' && block.fields?.blockType === 'gallery' && block.fields?.images;
+			const isSurface = block.type === 'block' && block.fields?.blockType === 'surface';
+			const isSpacer = block.type === 'block' && block.fields?.blockType === 'spacer';
 
 			if (isGallery) {
 				const prevBlock = prevGalleryBlocks[index] ?? prevGalleryBlocks.find((b: any) => b.fields?.blockType === 'gallery');
 				const prevImages = prevBlock?.fields?.images || [];
 				const images = await processGalleryImages(block.fields.images, prevImages);
 				return { ...block, fields: { ...block.fields, images } };
+			}
+
+			// Spacers have only numeric height; don't touch them in post-processing.
+			if (isSpacer) return block;
+
+			if (isSurface) {
+				const prevBlock = prevSurfaceBlocks[index] ?? prevSurfaceBlocks.find((b: any) => b.fields?.blockType === 'surface');
+				return processSurfaceBackgroundImage(block, prevBlock);
 			}
 
 			return processUploadNode(block);

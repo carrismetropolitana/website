@@ -4,8 +4,10 @@ import { Surface } from '@/components/layout/Surface';
 /* * */
 
 import { CampaignData } from '@/types/campaign.types';
+import { processBodyImages } from '@/utils/livePreviewImages';
 import { getLexicalRoot, useRenderLexicalNode } from '@/utils/renderLexicalNode';
 import { Skeleton } from '@mantine/core';
+import { useEffect, useState } from 'react';
 
 /* * */
 
@@ -19,8 +21,22 @@ export function CampaignDetailContent({ data }: CampaignDetailContentProps) {
 	//
 	// A. Setup variables
 
-	const bodyRoot = getLexicalRoot(data?.body);
 	const renderLexicalNode = useRenderLexicalNode();
+	const [processedBody, setProcessedBody] = useState<unknown>(null);
+
+	useEffect(() => {
+		if (!data?.body) return;
+
+		try {
+			const parsed = typeof data.body === 'string' ? JSON.parse(data.body) : data.body;
+			processBodyImages(parsed).then(setProcessedBody);
+		}
+		catch {
+			setProcessedBody(null);
+		}
+	}, [data?.body]);
+
+	const bodyRoot = getLexicalRoot(processedBody ?? data?.body);
 
 	//
 	// B. Render components

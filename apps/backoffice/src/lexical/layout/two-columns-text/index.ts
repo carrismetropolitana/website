@@ -2,21 +2,21 @@
 
 import type { Block } from 'payload';
 
-import { lexicalEditorConfigColumn } from '@/configs/lexical-editor-config';
+import { lexicalEditorConfig } from '@/configs/lexical-editor-config';
 
 /* * */
 
 export const TwoColumnsTextBlock: Block = {
 	fields: [
 		{
-			editor: lexicalEditorConfigColumn,
+			editor: lexicalEditorConfig,
 			label: 'Coluna esquerda',
 			name: 'leftColumn',
 			required: true,
 			type: 'richText',
 		},
 		{
-			editor: lexicalEditorConfigColumn,
+			editor: lexicalEditorConfig,
 			label: 'Coluna direita',
 			name: 'rightColumn',
 			required: true,

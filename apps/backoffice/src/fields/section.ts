@@ -2,7 +2,7 @@
 
 import type { Field } from 'payload';
 
-import { lexicalEditorConfigColumn } from '@/configs/lexical-editor-config';
+import { lexicalEditorConfig } from '@/configs/lexical-editor-config';
 
 /* * */
 
@@ -32,7 +32,7 @@ export const sectionFields: Field[] = [
 		type: 'select',
 	},
 	{
-		editor: lexicalEditorConfigColumn,
+		editor: lexicalEditorConfig,
 		label: 'Conteúdo',
 		name: 'content',
 		required: true,
