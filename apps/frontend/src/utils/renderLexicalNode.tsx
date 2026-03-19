@@ -35,7 +35,10 @@ function renderBlock(node: LexicalNode, key?: number): ReactNode {
 		}
 		case 'gallery': return <Gallery key={key} fields={node.fields} />;
 		case 'link': return <Links key={key} fields={node.fields} />;
-		case 'spacer': return <Spacer key={key} height={node.fields?.height} />;
+		case 'spacer': {
+			const f = node.fields as { height?: number };
+			return <Spacer key={key} height={f?.height} />;
+		}
 		case 'three-columns-text': {
 			const f = node.fields as { centerColumn?: unknown, leftColumn?: unknown, rightColumn?: unknown };
 			return (
