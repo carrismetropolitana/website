@@ -7,6 +7,7 @@ export interface CampaignData {
 		thumbnailURL: string
 		url: string
 	}
+	has_default_surface?: boolean
 	id: string
 	is_unlisted?: boolean
 	publishedAt: string

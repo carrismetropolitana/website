@@ -1,11 +1,13 @@
 /* * */
 
+import type { CollectionConfig } from 'payload';
+
 import { featuredImageField } from '@/fields/featured-image';
+import { hasDefaultSurfaceField } from '@/fields/has-default-surface';
 import { isUnlistedField } from '@/fields/is-unlisted';
 import { publishedAtField } from '@/fields/published-at';
 import { updatedAtField } from '@/fields/updated-at';
 import { slugify } from '@/utils/slugify';
-import { type CollectionConfig } from 'payload';
 
 /* * */
 
@@ -47,10 +49,6 @@ export const Campaigns: CollectionConfig = {
 			required: true,
 			type: 'richText',
 		},
-		isUnlistedField,
-		featuredImageField,
-		publishedAtField,
-		updatedAtField,
 
 		{
 			admin: {
@@ -66,6 +64,12 @@ export const Campaigns: CollectionConfig = {
 			required: true,
 			type: 'select',
 		},
+		isUnlistedField,
+		hasDefaultSurfaceField,
+		featuredImageField,
+		publishedAtField,
+		updatedAtField,
+
 	],
 
 	hooks: {

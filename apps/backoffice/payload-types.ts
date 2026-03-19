@@ -162,11 +162,12 @@ export interface Campaign {
     };
     [k: string]: unknown;
   };
+  status: 'draft' | 'published';
   is_unlisted?: boolean | null;
+  has_default_surface?: boolean | null;
   featured_image?: (string | null) | Media;
   publishedAt: string;
   updatedAt: string;
-  status: 'draft' | 'published';
   createdAt: string;
   _status?: ('draft' | 'published') | null;
 }
@@ -509,11 +510,12 @@ export interface CampaignsSelect<T extends boolean = true> {
   title?: T;
   slug?: T;
   body?: T;
+  status?: T;
   is_unlisted?: T;
+  has_default_surface?: T;
   featured_image?: T;
   publishedAt?: T;
   updatedAt?: T;
-  status?: T;
   createdAt?: T;
   _status?: T;
 }

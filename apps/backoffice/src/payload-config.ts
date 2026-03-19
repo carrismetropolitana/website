@@ -39,6 +39,8 @@ import { ThreeColumnsTextBlock } from '@/lexical/layout/three-columns-text';
 import { TwoColumnsTextBlock } from '@/lexical/layout/two-columns-text';
 import { TwoColumnsTextImageBlock } from '@/lexical/layout/two-columns-text-image';
 
+import { spacerFields } from './fields/spacer';
+
 /* * */
 
 export default buildConfig({
@@ -80,10 +82,12 @@ export default buildConfig({
 	editor: lexicalEditor({
 		features: ({ defaultFeatures }) => [
 			...defaultFeatures.filter(f => f.key !== 'heading'),
-			HeadingFeature({ enabledHeadingSizes: ['h2', 'h3'] }),
-			HeadingAnchorFeature(),
 			BlocksFeature({
 				blocks: [
+					{
+						fields: spacerFields,
+						slug: 'spacer',
+					},
 					{
 						fields: accordionFields,
 						slug: 'accordion',
@@ -114,6 +118,8 @@ export default buildConfig({
 					},
 				],
 			}),
+			HeadingFeature({ enabledHeadingSizes: ['h2', 'h3'] }),
+			HeadingAnchorFeature(),
 			BackgroundColorFeature(),
 			EXPERIMENTAL_TableFeature(),
 			MentionFeature(),
