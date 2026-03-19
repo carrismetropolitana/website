@@ -8,6 +8,6 @@ interface Props {
 
 /* * */
 
-export function Spacer({ height = 32 }: Props): ReactElement {
+export function Spacer({ height = 20 }: Props): ReactElement {
 	return <div style={{ height: `${height}px` }} />;
 }
