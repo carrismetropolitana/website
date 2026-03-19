@@ -64,9 +64,15 @@ export async function processUploadNode(node: any): Promise<any> {
 
 	if (node.type === 'upload') {
 		const value = node.value;
-		if (value && typeof value === 'object' && value.url) return node;
+		if (value && typeof value === 'object' && typeof value.url === 'string') return node;
 
-		const id = value != null ? (typeof value === 'object' ? value?.id : String(value)) : null;
+		// Payload sometimes wraps uploaded media in `file` or `value`.
+		if (value && typeof value === 'object') {
+			if (value.file && typeof value.file.url === 'string') return { ...node, value: value.file };
+			if (value.value && typeof value.value.url === 'string') return { ...node, value: value.value };
+		}
+
+		const id = getImageId(value);
 		if (id) {
 			const media = await fetchMedia(id);
 			if (media) return { ...node, value: media };
@@ -91,6 +97,87 @@ export async function processBodyImages(body: any, prevBody?: any): Promise<any>
 		(c: any) => c.type === 'block' && c.fields?.blockType === 'gallery',
 	) || [];
 
+	const processSingleImage = async (img: any): Promise<any> => {
+		if (hasImageUrl(img)) return img;
+		const id = getImageId(img);
+		if (!id) return img;
+		const media = await fetchMedia(id);
+		return media || img;
+	};
+
+	const isRichTextValue = (v: any): boolean => Boolean(v?.root?.children);
+
+	const processRichTextValue = async (richText: any, prevRichText?: any): Promise<any> => {
+		if (!isRichTextValue(richText)) return richText;
+
+		const prevRichTextGalleryBlocks = prevRichText?.root?.children?.filter(
+			(c: any) => c.type === 'block' && c.fields?.blockType === 'gallery',
+		) || [];
+
+		const processedChildren = await Promise.all(
+			richText.root.children.map(async (block: any, index: number) => {
+				const isGallery = block.type === 'block' && block.fields?.blockType === 'gallery' && block.fields?.images;
+				if (isGallery) {
+					const prevBlock = prevRichTextGalleryBlocks[index] ?? prevRichTextGalleryBlocks.find((b: any) => b.fields?.blockType === 'gallery');
+					const prevImages = prevBlock?.fields?.images || [];
+					const images = await processGalleryImages(block.fields.images, prevImages);
+					return { ...block, fields: { ...block.fields, images } };
+				}
+
+				return processLexicalNode(block, prevRichText?.root?.children?.[index]);
+			}),
+		);
+
+		return { ...richText, root: { ...richText.root, children: processedChildren } };
+	};
+
+	const processLexicalNode = async (node: any, prevNode?: any): Promise<any> => {
+		if (!node) return node;
+
+		// Resolve layout block images that are not `upload` nodes.
+		if (node.type === 'block') {
+			const blockType = node.fields?.blockType;
+			if (blockType === 'two-columns-text-image') {
+				const nextFields = { ...node.fields };
+				if (nextFields.image) {
+					nextFields.image = await processSingleImage(nextFields.image);
+				}
+				if (nextFields.text && isRichTextValue(nextFields.text)) {
+					nextFields.text = await processRichTextValue(nextFields.text, prevNode?.fields?.text);
+				}
+				return processUploadNode({ ...node, fields: nextFields });
+			}
+
+			if (blockType === 'two-columns-text') {
+				const nextFields = { ...node.fields };
+				if (nextFields.leftColumn && isRichTextValue(nextFields.leftColumn)) {
+					nextFields.leftColumn = await processRichTextValue(nextFields.leftColumn, prevNode?.fields?.leftColumn);
+				}
+				if (nextFields.rightColumn && isRichTextValue(nextFields.rightColumn)) {
+					nextFields.rightColumn = await processRichTextValue(nextFields.rightColumn, prevNode?.fields?.rightColumn);
+				}
+				return processUploadNode({ ...node, fields: nextFields });
+			}
+
+			if (blockType === 'three-columns-text') {
+				const nextFields = { ...node.fields };
+				if (nextFields.leftColumn && isRichTextValue(nextFields.leftColumn)) {
+					nextFields.leftColumn = await processRichTextValue(nextFields.leftColumn, prevNode?.fields?.leftColumn);
+				}
+				if (nextFields.centerColumn && isRichTextValue(nextFields.centerColumn)) {
+					nextFields.centerColumn = await processRichTextValue(nextFields.centerColumn, prevNode?.fields?.centerColumn);
+				}
+				if (nextFields.rightColumn && isRichTextValue(nextFields.rightColumn)) {
+					nextFields.rightColumn = await processRichTextValue(nextFields.rightColumn, prevNode?.fields?.rightColumn);
+				}
+				return processUploadNode({ ...node, fields: nextFields });
+			}
+		}
+
+		// Fallback: handle `upload` nodes + any children.
+		return processUploadNode(node);
+	};
+
 	const processedChildren = await Promise.all(
 		body.root.children.map(async (block: any, index: number) => {
 			const isGallery = block.type === 'block' && block.fields?.blockType === 'gallery' && block.fields?.images;
@@ -102,7 +189,7 @@ export async function processBodyImages(body: any, prevBody?: any): Promise<any>
 				return { ...block, fields: { ...block.fields, images } };
 			}
 
-			return processUploadNode(block);
+			return processLexicalNode(block, prevBody?.root?.children?.[index]);
 		}),
 	);
 

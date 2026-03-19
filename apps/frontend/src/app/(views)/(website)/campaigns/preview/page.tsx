@@ -22,7 +22,7 @@ export default async function PreviewPage({ searchParams }: { searchParams: Prom
 		);
 	}
 
-	const payloadUrl = `${getPublicVariable('server_url_backoffice')}/admin/public-api/campaigns/${campaignId}`;
+	const payloadUrl = `${getPublicVariable('server_url_backoffice')}/admin/public-api/campaigns/${campaignId}?depth=2&draft=false&locale=undefined&trash=false`;
 
 	let campaignData = null;
 	try {

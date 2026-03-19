@@ -25,7 +25,7 @@ export function CampaignDetailContent({ data }: CampaignDetailContentProps) {
 	//
 	// B. Render components
 
-	if (!data.body || !bodyRoot) {
+	if (!data?.body || !bodyRoot) {
 		return <Skeleton height={100} />;
 	}
 

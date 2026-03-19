@@ -1,47 +1,23 @@
 'use client';
-
 /* * */
 
-import { CampaignDetailContent } from '@/components/campaigns/CampaignDetail/CampaignDetailContent';
 import { Section } from '@/components/layout/Section';
 import { Surface } from '@/components/layout/Surface';
+import { useLivePreviewData } from '@/hooks/useLivePreviewData';
 import { CampaignData } from '@/types/campaign.types';
-import { useEffect, useState } from 'react';
+
+import { CampaignDetailContent } from '../CampaignDetail/CampaignDetailContent';
 
 /* * */
 
-interface Props {
-	initialData: CampaignData | null
+interface CampaignDetailPreviewProps {
+	initialData: CampaignData
 }
 
 /* * */
 
-export function CampaignDetailPreview({ initialData }: Props) {
-	//
-
-	//
-	// A. Setup variables
-
-	const [campaignData, setCampaignData] = useState<CampaignData | null>(initialData);
-	//
-	// B. Transform Data
-
-	useEffect(() => {
-		const handleMessage = (event: MessageEvent) => {
-			const { data, type } = event.data || {};
-			if (type !== 'payload-live-preview' || !data) return;
-			setCampaignData(prev => ({ ...(prev || {}), ...data }));
-		};
-
-		window.addEventListener('message', handleMessage);
-		if (window.parent !== window) {
-			window.parent.postMessage({ ready: true, type: 'payload-live-preview' }, '*');
-		}
-		return () => window.removeEventListener('message', handleMessage);
-	}, []);
-
-	//
-	// C. Render Components
+export function CampaignDetailPreview({ initialData }: CampaignDetailPreviewProps) {
+	const { campaignData } = useLivePreviewData(initialData);
 
 	if (!campaignData) {
 		return (
@@ -56,6 +32,4 @@ export function CampaignDetailPreview({ initialData }: Props) {
 	return (
 		<CampaignDetailContent data={campaignData} />
 	);
-
-	//
 }
