@@ -8,8 +8,8 @@ import { Block, BlockSlug } from 'payload';
 
 /* * */
 
-export const BLOCKS_MAIN = ['spacer', 'accordion', 'gallery', 'link', 'video', 'three-columns-text', 'two-columns-text', 'two-columns-text-image'] as const;
-export const LAYOUT_BLOCK_SLUGS = ['three-columns-text', 'two-columns-text', 'two-columns-text-image'] as const;
+export const BLOCKS_MAIN = ['spacer', 'accordion', 'gallery', 'link', 'video', 'surface', 'section', 'three-columns-text', 'two-columns-text', 'two-columns-text-image'] as const;
+export const LAYOUT_BLOCK_SLUGS = ['surface', 'section', 'three-columns-text', 'two-columns-text', 'two-columns-text-image'] as const;
 export const BLOCKS_COLUMN = BLOCKS_MAIN.filter((b): b is (typeof BLOCKS_MAIN)[number] => !(LAYOUT_BLOCK_SLUGS as readonly string[]).includes(b)) as (typeof BLOCKS_MAIN)[number][];
 
 /* * */

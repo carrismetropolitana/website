@@ -21,12 +21,15 @@ export interface LexicalNode {
 		blockName?: string
 		blockType?: string
 		caption?: string
+		content?: LexicalRichText | string
 		doc?: {
 			relationTo?: string
 			value?: {
 				slug?: string
 			}
 		}
+		forceOverflow?: boolean
+		fullHeight?: boolean
 		images?: {
 			relationTo?: string
 			value?: {
@@ -54,6 +57,9 @@ export interface LexicalNode {
 			}
 		}
 		videoUrl?: string
+		withBottomDivider?: boolean
+		withGap?: boolean
+		withPadding?: 'all' | 'desktop' | 'mobile' | 'none'
 	}
 	format?: number
 	id?: string

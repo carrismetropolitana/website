@@ -34,6 +34,8 @@ import { HomeSlider } from '@/schemas/HomeSlider/global';
 import { accordionFields } from '@/fields/accordion';
 import { galleryFields } from '@/fields/gallery';
 import { linkFields } from '@/fields/link';
+import { sectionFields } from '@/fields/section';
+import { surfaceFields } from '@/fields/surface';
 import { videoFields } from '@/fields/video';
 import { ThreeColumnsTextBlock } from '@/lexical/layout/three-columns-text';
 import { TwoColumnsTextBlock } from '@/lexical/layout/two-columns-text';
@@ -103,6 +105,16 @@ export default buildConfig({
 					{
 						fields: videoFields,
 						slug: 'video',
+					},
+					{
+						admin: { group: 'Layout' },
+						fields: sectionFields,
+						slug: 'section',
+					},
+					{
+						admin: { group: 'Layout' },
+						fields: surfaceFields,
+						slug: 'surface',
 					},
 					{
 						...ThreeColumnsTextBlock,

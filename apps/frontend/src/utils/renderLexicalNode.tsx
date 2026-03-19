@@ -1,6 +1,8 @@
 'use client';
 /* * */
 
+import { Section } from '@/components/layout/Section';
+import { Surface } from '@/components/layout/Surface';
 import { Accordion } from '@/components/payload/accordion';
 import { Code } from '@/components/payload/code';
 import { Gallery } from '@/components/payload/gallery';
@@ -35,9 +37,45 @@ function renderBlock(node: LexicalNode, key?: number): ReactNode {
 		}
 		case 'gallery': return <Gallery key={key} fields={node.fields} />;
 		case 'link': return <Links key={key} fields={node.fields} />;
+		case 'section': {
+			const f = node.fields as {
+				content?: unknown
+				variant?: 'default' | 'muted' | 'standout' | 'success' | 'warning'
+				withBottomDivider?: boolean
+				withGap?: boolean
+				withPadding?: 'all' | 'desktop' | 'mobile' | 'none'
+			};
+			const contentRoot = getLexicalRoot(f?.content);
+			const withPadding = f?.withPadding === 'all' ? true : (f?.withPadding === 'none' ? undefined : f?.withPadding);
+			return (
+				<Section
+					key={key}
+					variant={f?.variant}
+					withBottomDivider={f?.withBottomDivider}
+					withGap={f?.withGap}
+					withPadding={withPadding}
+				>
+					{contentRoot ? renderNode(contentRoot) : null}
+				</Section>
+			);
+		}
 		case 'spacer': {
 			const f = node.fields as { height?: number };
 			return <Spacer key={key} height={f?.height} />;
+		}
+		case 'surface': {
+			const f = node.fields as {
+				content?: unknown
+				forceOverflow?: boolean
+				fullHeight?: boolean
+				variant?: 'alerts' | 'brand2' | 'brand' | 'debug' | 'default' | 'muted' | 'persistent' | 'standout' | 'success' | 'warning'
+			};
+			const contentRoot = getLexicalRoot(f?.content);
+			return (
+				<Surface key={key} forceOverflow={f?.forceOverflow} fullHeight={f?.fullHeight} variant={f?.variant}>
+					{contentRoot ? renderNode(contentRoot) : null}
+				</Surface>
+			);
 		}
 		case 'three-columns-text': {
 			const f = node.fields as { centerColumn?: unknown, leftColumn?: unknown, rightColumn?: unknown };
