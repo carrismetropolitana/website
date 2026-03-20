@@ -34,6 +34,7 @@ export interface LexicalNode {
 		blockName?: string
 		blockType?: string
 		buttonColor?: string
+		buttonTextColor?: string
 		caption?: string
 		content?: LexicalRichText | string
 		doc?: {

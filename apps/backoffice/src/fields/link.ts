@@ -43,10 +43,23 @@ export const linkFields: Field[] = [
 			components: {
 				Field: '@/components/ButtonColorField#ButtonColorField',
 			},
+			condition: (_, siblingData) => siblingData?.isButton === true,
 		},
 		defaultValue: '#ffdd01',
-		label: 'Cor do botão',
+		label: 'Cor de fundo do botão',
 		name: 'buttonColor',
+		type: 'text',
+	},
+	{
+		admin: {
+			components: {
+				Field: '@/components/ButtonColorField#ButtonColorField',
+			},
+			condition: (_, siblingData) => siblingData?.isButton === true,
+		},
+		defaultValue: '#000000',
+		label: 'Cor do texto do botão',
+		name: 'buttonTextColor',
 		type: 'text',
 	},
 	{

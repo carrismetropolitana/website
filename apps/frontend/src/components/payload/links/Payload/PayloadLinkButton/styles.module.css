@@ -1,19 +1,14 @@
-.link {
-	color: var(--color-system-text-100);
-	text-decoration: underline;
-}
-
 .linkButton {
 	display: inline-flex;
 	align-items: center;
 	justify-content: center;
 	padding: var(--size-spacing-10);
+	font-weight: var(--font-weight-semibold);
+	color: var(--color-primary-black);
+	text-decoration: none;
+	background-color: var(--color-brand);
 	border: 1px solid transparent;
 	border-radius: 5px;
-	background-color: var(--color-brand);
-	color: var(--color-primary-black);
-	font-weight: var(--font-weight-semibold);
-	text-decoration: none;
 	transition: all 200ms ease;
 }
 
