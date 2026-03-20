@@ -1,9 +1,4 @@
-.row {
-	display: flex;
-	flex-wrap: wrap;
-	align-items: center;
-	gap: 10px;
-}
+/* SWATCH */
 
 .swatch {
 	box-sizing: border-box;
@@ -21,10 +16,4 @@
 	opacity: 0.6;
 }
 
-.hexInput {
-	flex: 1;
-	min-width: 7rem;
-	max-width: 11rem;
-	font-family: var(--font-mono, ui-monospace, monospace);
-	font-size: 13px;
-}
+/* * */
