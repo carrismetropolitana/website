@@ -33,6 +33,7 @@ export interface LexicalNode {
 		backgroundOverlay?: boolean
 		blockName?: string
 		blockType?: string
+		buttonColor?: string
 		caption?: string
 		content?: LexicalRichText | string
 		doc?: {
@@ -55,6 +56,7 @@ export interface LexicalNode {
 				width?: number
 			}
 		}[]
+		isButton?: boolean
 		linkType?: string
 		newTab?: boolean
 		source?: 'external' | 'upload'

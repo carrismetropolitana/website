@@ -34,6 +34,32 @@ export const linkFields: Field[] = [
 	},
 	{
 		defaultValue: false,
+		label: 'Estilos de Botão?',
+		name: 'isButton',
+		type: 'checkbox',
+	},
+	{
+		admin: {
+			components: {
+				Field: '@/components/ButtonColorField#ButtonColorField',
+			},
+			condition: (_, siblingData) => siblingData?.isButton === true,
+			description: 'Cor de fundo do botão (hex). Por omissão usa o amarelo da marca.',
+		},
+		defaultValue: '#ffdd01',
+		label: 'Cor do botão',
+		name: 'buttonColor',
+		type: 'text',
+		validate: (value) => {
+			if (!value || !value.trim()) return true;
+			if (!/^#([0-9A-Fa-f]{3}|[0-9A-Fa-f]{6})$/.test(value.trim())) {
+				return 'Use um código de cor hexadecimal (#RGB ou #RRGGBB)';
+			}
+			return true;
+		},
+	},
+	{
+		defaultValue: false,
 		label: 'Abrir em nova aba',
 		name: 'newTab',
 		type: 'checkbox',

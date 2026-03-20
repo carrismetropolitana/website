@@ -9,6 +9,7 @@ import { HeadingFeatureClient as HeadingFeatureClient_e70f5e05f09f93e00b997edb1e
 import { BlocksFeatureClient as BlocksFeatureClient_e70f5e05f09f93e00b997edb1ef0c864 } from '@payloadcms/richtext-lexical/client'
 import { GalleryFieldPreview as GalleryFieldPreview_3bf36e9fa6af0807e30df4acfaddf436 } from '@/components/GalleryFieldPreview'
 import { LinkFieldPreview as LinkFieldPreview_3b9f1bbd1ad5afd6976cb9bf2edd577c } from '@/components/LinkFieldPreview'
+import { ButtonColorField as ButtonColorField_2db2ddd607dd1294df42af416f4dfddd } from '@/components/ButtonColorField'
 import { InlineToolbarFeatureClient as InlineToolbarFeatureClient_e70f5e05f09f93e00b997edb1ef0c864 } from '@payloadcms/richtext-lexical/client'
 import { HorizontalRuleFeatureClient as HorizontalRuleFeatureClient_e70f5e05f09f93e00b997edb1ef0c864 } from '@payloadcms/richtext-lexical/client'
 import { UploadFeatureClient as UploadFeatureClient_e70f5e05f09f93e00b997edb1ef0c864 } from '@payloadcms/richtext-lexical/client'
@@ -47,6 +48,7 @@ export const importMap = {
   "@payloadcms/richtext-lexical/client#BlocksFeatureClient": BlocksFeatureClient_e70f5e05f09f93e00b997edb1ef0c864,
   "@/components/GalleryFieldPreview#GalleryFieldPreview": GalleryFieldPreview_3bf36e9fa6af0807e30df4acfaddf436,
   "@/components/LinkFieldPreview#LinkFieldPreview": LinkFieldPreview_3b9f1bbd1ad5afd6976cb9bf2edd577c,
+  "@/components/ButtonColorField#ButtonColorField": ButtonColorField_2db2ddd607dd1294df42af416f4dfddd,
   "@payloadcms/richtext-lexical/client#InlineToolbarFeatureClient": InlineToolbarFeatureClient_e70f5e05f09f93e00b997edb1ef0c864,
   "@payloadcms/richtext-lexical/client#HorizontalRuleFeatureClient": HorizontalRuleFeatureClient_e70f5e05f09f93e00b997edb1ef0c864,
   "@payloadcms/richtext-lexical/client#UploadFeatureClient": UploadFeatureClient_e70f5e05f09f93e00b997edb1ef0c864,
