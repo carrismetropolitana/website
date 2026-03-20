@@ -10,17 +10,6 @@ import styles from './styles.module.css';
 
 /* * */
 
-function hexToCssColor(raw: string | undefined): string | undefined {
-	if (!raw) return undefined;
-	const v = raw.trim();
-	if (!/^#([0-9A-Fa-f]{3}|[0-9A-Fa-f]{6})$/.test(v)) return undefined;
-	if (/^#[0-9A-Fa-f]{3}$/.test(v)) {
-		const [, r, g, b] = v;
-		return `#${r}${r}${g}${g}${b}${b}`;
-	}
-	return v;
-}
-
 interface LinkProps {
 	children?: LexicalNode[]
 	fields?: {
@@ -40,8 +29,6 @@ interface LinkProps {
 	url?: string
 }
 
-/* * */
-
 export function Links({ children = [], fields, url = '' }: LinkProps) {
 	//
 
@@ -49,52 +36,19 @@ export function Links({ children = [], fields, url = '' }: LinkProps) {
 	// A. Setup variables
 
 	const renderLexicalNode = useRenderLexicalNode();
-
-	//
-	// B. Resolve href
-
-	let href = url || fields?.url || '';
-
-	if (fields?.linkType === 'internal' && fields?.doc?.relationTo && fields?.doc?.value?.slug) {
-		href = `/${fields.doc.relationTo}/${fields.doc.value.slug}`;
-	}
-
-	if (!href.trim()) return null;
-
-	//
-	// C. Resolve content and target
-
-	const content = children.length > 0
-		? children.map((child, idx) => renderLexicalNode(child, idx))
-		: fields?.text || href;
-
+	const href = fields?.linkType === 'internal' && fields?.doc?.relationTo && fields?.doc?.value?.slug ? `/${fields.doc.relationTo}/${fields.doc.value.slug}` : (url || fields?.url || '');
+	const content = children.length > 0 ? children.map((child, idx) => renderLexicalNode(child, idx)) : fields?.text || href;
 	const isExternal = href.startsWith('http') || href.startsWith('//');
 	const target = fields?.newTab ? '_blank' : undefined;
 	const rel = fields?.newTab ? 'noreferrer noopener' : undefined;
-
-	const className = classNames(styles.link, {
-		[styles.linkButton]: fields?.isButton,
-	});
-
-	const buttonBackground = fields?.isButton ? hexToCssColor(fields?.buttonColor) : undefined;
-	const inlineStyle = buttonBackground ? { backgroundColor: buttonBackground } : undefined;
+	const className = classNames(styles.link, { [styles.linkButton]: fields?.isButton });
+	const style = fields?.isButton && fields?.buttonColor ? { backgroundColor: fields?.buttonColor } : undefined;
+	const shared = { className, href, rel, style, target };
 
 	//
-	// D. Render components
+	// B. Render components
 
-	if (isExternal) {
-		return (
-			<a className={className} href={href} rel={rel} style={inlineStyle} target={target}>
-				{content}
-			</a>
-		);
-	}
-
-	return (
-		<Link className={className} href={href} rel={rel} style={inlineStyle} target={target}>
-			{content}
-		</Link>
-	);
+	return isExternal ? <a {...shared}>{content}</a> : <Link {...shared}>{content}</Link>;
 
 	//
 }
