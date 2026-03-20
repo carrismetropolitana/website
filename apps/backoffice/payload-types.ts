@@ -685,6 +685,7 @@ export interface GeneralStatus {
   id: string;
   messages?:
     | {
+        is_debug?: boolean | null;
         is_enabled?: boolean | null;
         title?: string | null;
         more_info_url?: string | null;
@@ -738,6 +739,7 @@ export interface GeneralStatusSelect<T extends boolean = true> {
   messages?:
     | T
     | {
+        is_debug?: T;
         is_enabled?: T;
         title?: T;
         more_info_url?: T;
