@@ -4,7 +4,7 @@ import type { LexicalNode } from '@/types/lexical-node.types';
 
 /* * */
 
-export interface PayloadLexicalLinkFields {
+export interface PayloadLexicalLink {
 	buttonColor?: string
 	buttonTextColor?: string
 	doc?: {
@@ -22,6 +22,6 @@ export interface PayloadLexicalLinkFields {
 
 export interface PayloadLexicalLinkProps {
 	children?: LexicalNode[]
-	fields?: PayloadLexicalLinkFields
+	fields?: PayloadLexicalLink
 	url?: string
 }

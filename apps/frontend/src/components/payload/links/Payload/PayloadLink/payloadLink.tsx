@@ -1,7 +1,7 @@
 'use client';
 /* * */
 
-import type { PayloadLexicalLinkProps } from '@/components/payload/links/types';
+import type { PayloadLexicalLinkProps } from '@/types/link.types';
 import type { CSSProperties, ReactNode } from 'react';
 
 import { useRenderLexicalNode } from '@/utils/renderLexicalNode';
@@ -11,7 +11,7 @@ import styles from './styles.module.css';
 
 /* * */
 
-export interface PayloadLexicalLink {
+export interface PayloadLink {
 	content: ReactNode
 	href: string
 	isExternal: boolean
@@ -21,17 +21,18 @@ export interface PayloadLexicalLink {
 
 interface PayloadLinkRenderProps {
 	className: string
+	model: PayloadLink
 	style?: CSSProperties
-	type: PayloadLexicalLink
 }
 
-export function usePayloadLexicalLink({ children = [], fields, url = '' }: PayloadLexicalLinkProps): null | PayloadLexicalLink {
-	//
+/* * */
 
+export function usePayloadLexicalLink({ children = [], fields, url = '' }: PayloadLexicalLinkProps): null | PayloadLink {
 	//
 	// A. Setup variables
 
 	const renderLexicalNode = useRenderLexicalNode();
+
 	const href = fields?.linkType === 'internal' && fields?.doc?.relationTo && fields?.doc?.value?.slug ? `/${fields.doc.relationTo}/${fields.doc.value.slug}` : (url || fields?.url || '');
 	const content = children.length > 0 ? children.map((child, idx) => renderLexicalNode(child, idx)) : fields?.text || href;
 	const isExternal = href.startsWith('http') || href.startsWith('//');
@@ -46,13 +47,13 @@ export function usePayloadLexicalLink({ children = [], fields, url = '' }: Paylo
 	//
 }
 
-export function PayloadLinkRender({ className, style, type }: PayloadLinkRenderProps) {
+export function PayloadLinkRender({ className, model, style }: PayloadLinkRenderProps) {
 	//
 
 	//
 	// A. Setup variables
 
-	const { content, href, isExternal, rel, target } = type;
+	const { content, href, isExternal, rel, target } = model;
 	const shared = { className, href, rel, style, target };
 
 	//
@@ -69,13 +70,14 @@ export function PayloadLink(props: PayloadLexicalLinkProps) {
 	//
 	// A. Setup variables
 
-	const type = usePayloadLexicalLink(props);
-	if (!type) return null;
+	const model = usePayloadLexicalLink(props);
 
 	//
 	// B. Render components
 
-	return <PayloadLinkRender className={styles.link} type={type} />;
+	if (!model) return null;
+
+	return <PayloadLinkRender className={styles.link} model={model} />;
 
 	//
 }
