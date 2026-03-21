@@ -78,6 +78,7 @@ export interface Config {
     notes: Note;
     projects: Project;
     faqs: Faq;
+    videos: Video;
     'payload-kv': PayloadKv;
     'payload-locked-documents': PayloadLockedDocument;
     'payload-preferences': PayloadPreference;
@@ -96,6 +97,7 @@ export interface Config {
     notes: NotesSelect<false> | NotesSelect<true>;
     projects: ProjectsSelect<false> | ProjectsSelect<true>;
     faqs: FaqsSelect<false> | FaqsSelect<true>;
+    videos: VideosSelect<false> | VideosSelect<true>;
     'payload-kv': PayloadKvSelect<false> | PayloadKvSelect<true>;
     'payload-locked-documents': PayloadLockedDocumentsSelect<false> | PayloadLockedDocumentsSelect<true>;
     'payload-preferences': PayloadPreferencesSelect<false> | PayloadPreferencesSelect<true>;
@@ -437,6 +439,52 @@ export interface Project {
       }[]
     | null;
   is_unlisted?: boolean | null;
+  /**
+   * URL única para este artigo. Será gerada automaticamente do título se deixado em branco.
+   */
+  slug: string;
+  /**
+   * Resumo curto do artigo que aparece na listagem e no início do artigo.
+   */
+  type: 'tecnologia' | 'operacao' | 'sustentabilidade' | 'comunicacao';
+  /**
+   * Tempo estimado de leitura em minutos.
+   */
+  readTime: number;
+  heroImage: string | Media;
+  /**
+   * Legenda que aparece sobre a imagem de destaque.
+   */
+  heroImageCaption?: string | null;
+  /**
+   * Conteúdo do artigo em formato Markdown. Suporta títulos (##), listas, links, citações e muito mais.
+   */
+  content: string;
+  author: {
+    picture?: (string | null) | Media;
+    name: string;
+    role: string;
+    /**
+     * Breve descrição sobre o autor.
+     */
+    bio?: string | null;
+    /**
+     * Se este artigo foi escrito por um especialista, lembre-se de marcar para que possa ser entregue as devidas páginas
+     */
+    expertAuthor: boolean;
+    social?: {
+      linkedin?: string | null;
+      twitter?: string | null;
+      email?: string | null;
+    };
+  };
+  publishDate: string;
+  status: 'draft' | 'published';
+  seo?: {
+    metaTitle?: string | null;
+    metaDescription?: string | null;
+    ogImage?: (string | null) | Media;
+  };
   publishedAt: string;
   updatedAt: string;
   featured_image?: (string | null) | Media;
@@ -469,6 +517,31 @@ export interface Faq {
   publishedAt: string;
   updatedAt: string;
   createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "videos".
+ */
+export interface Video {
+  id: string;
+  title: string;
+  /**
+   * URL única para este vídeo. Será gerada automaticamente do título se deixado em branco.
+   */
+  slug: string;
+  /**
+   * Resumo curto do vídeo que aparece na listagem e nos card dos vídeos.
+   */
+  description: string;
+  type: 'tecnologia' | 'operacao' | 'sustentabilidade' | 'comunicacao';
+  video: string | Media;
+  thumbnail: string | Media;
+  /**
+   * Legenda que aparece sobre a thumbnail, importante para acessibilidade para leitores de tela.
+   */
+  thumbnailCaptions?: string | null;
+  publishedAt: string;
+  updatedAt: string;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -537,6 +610,10 @@ export interface PayloadLockedDocument {
     | ({
         relationTo: 'faqs';
         value: string | Faq;
+      } | null)
+    | ({
+        relationTo: 'videos';
+        value: string | Video;
       } | null);
   globalSlug?: string | null;
   user: {
@@ -789,6 +866,27 @@ export interface ProjectsSelect<T extends boolean = true> {
     | {
         value?: T;
         id?: T;
+        picture?: T;
+        name?: T;
+        role?: T;
+        bio?: T;
+        expertAuthor?: T;
+        social?:
+          | T
+          | {
+              linkedin?: T;
+              twitter?: T;
+              email?: T;
+            };
+      };
+  publishDate?: T;
+  status?: T;
+  seo?:
+    | T
+    | {
+        metaTitle?: T;
+        metaDescription?: T;
+        ogImage?: T;
       };
   is_unlisted?: T;
   publishedAt?: T;
@@ -808,6 +906,21 @@ export interface FaqsSelect<T extends boolean = true> {
   publishedAt?: T;
   updatedAt?: T;
   createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "videos_select".
+ */
+export interface VideosSelect<T extends boolean = true> {
+  title?: T;
+  slug?: T;
+  description?: T;
+  type?: T;
+  video?: T;
+  thumbnail?: T;
+  thumbnailCaptions?: T;
+  publishedAt?: T;
+  updatedAt?: T;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
