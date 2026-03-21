@@ -34,6 +34,7 @@ import { accordionFields } from './fields/accordion';
 import { galleryFields } from './fields/gallery';
 import { linkFields } from './fields/link';
 import { videoFields } from './fields/video';
+import { Videos } from './schemas/Videos/collection';
 
 /* * */
 
@@ -60,8 +61,7 @@ export default buildConfig({
 		user: 'users',
 	},
 
-	collections: [CaseStudies, Media, News, Topics, Users, KnowledgeBase, Notes, Articles],
-
+	collections: [CaseStudies, Media, News, Topics, Users, KnowledgeBase, Notes, Articles, Videos],
 	csrf: [
 		getPublicVariable('server_url_backoffice').replace(/\/$/, ''),
 		`${getPublicVariable('server_url_backoffice').replace(/\/$/, '')}/admin`,

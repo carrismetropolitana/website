@@ -75,6 +75,7 @@ export interface Config {
     'knowledge-base': KnowledgeBase;
     notes: Note;
     articles: Article;
+    videos: Video;
     'payload-kv': PayloadKv;
     'payload-locked-documents': PayloadLockedDocument;
     'payload-preferences': PayloadPreference;
@@ -90,6 +91,7 @@ export interface Config {
     'knowledge-base': KnowledgeBaseSelect<false> | KnowledgeBaseSelect<true>;
     notes: NotesSelect<false> | NotesSelect<true>;
     articles: ArticlesSelect<false> | ArticlesSelect<true>;
+    videos: VideosSelect<false> | VideosSelect<true>;
     'payload-kv': PayloadKvSelect<false> | PayloadKvSelect<true>;
     'payload-locked-documents': PayloadLockedDocumentsSelect<false> | PayloadLockedDocumentsSelect<true>;
     'payload-preferences': PayloadPreferencesSelect<false> | PayloadPreferencesSelect<true>;
@@ -347,6 +349,10 @@ export interface Article {
      * Breve descrição sobre o autor.
      */
     bio?: string | null;
+    /**
+     * Se este artigo foi escrito por um especialista, lembre-se de marcar para que possa ser entregue as devidas páginas
+     */
+    expertAuthor: boolean;
     social?: {
       linkedin?: string | null;
       twitter?: string | null;
@@ -360,6 +366,31 @@ export interface Article {
     metaDescription?: string | null;
     ogImage?: (string | null) | Media;
   };
+  publishedAt: string;
+  updatedAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "videos".
+ */
+export interface Video {
+  id: string;
+  title: string;
+  /**
+   * URL única para este vídeo. Será gerada automaticamente do título se deixado em branco.
+   */
+  slug: string;
+  /**
+   * Resumo curto do vídeo que aparece na listagem e nos card dos vídeos.
+   */
+  description: string;
+  type: 'tecnologia' | 'operacao' | 'sustentabilidade' | 'comunicacao';
+  video: string | Media;
+  thumbnail: string | Media;
+  /**
+   * Legenda que aparece sobre a thumbnail, importante para acessibilidade para leitores de tela.
+   */
+  thumbnailCaptions?: string | null;
   publishedAt: string;
   updatedAt: string;
 }
@@ -418,6 +449,10 @@ export interface PayloadLockedDocument {
     | ({
         relationTo: 'articles';
         value: string | Article;
+      } | null)
+    | ({
+        relationTo: 'videos';
+        value: string | Video;
       } | null);
   globalSlug?: string | null;
   user: {
@@ -617,6 +652,7 @@ export interface ArticlesSelect<T extends boolean = true> {
         name?: T;
         role?: T;
         bio?: T;
+        expertAuthor?: T;
         social?:
           | T
           | {
@@ -634,6 +670,21 @@ export interface ArticlesSelect<T extends boolean = true> {
         metaDescription?: T;
         ogImage?: T;
       };
+  publishedAt?: T;
+  updatedAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "videos_select".
+ */
+export interface VideosSelect<T extends boolean = true> {
+  title?: T;
+  slug?: T;
+  description?: T;
+  type?: T;
+  video?: T;
+  thumbnail?: T;
+  thumbnailCaptions?: T;
   publishedAt?: T;
   updatedAt?: T;
 }
