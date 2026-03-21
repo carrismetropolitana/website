@@ -1,14 +1,14 @@
 /* * */
 
+import type { CollectionConfig } from 'payload';
+
 import { publishedAtField } from '@/fields/published-at';
 import { updatedAtField } from '@/fields/updated-at';
 import { slugify } from '@/utils/slugify';
-import { type CollectionConfig } from 'payload';
 
 /* * */
 
 export const Articles: CollectionConfig = {
-
 	access: {
 		create: ({ req: { user } }) => Boolean(user),
 		delete: ({ req: { user } }) => Boolean(user),
@@ -34,7 +34,8 @@ export const Articles: CollectionConfig = {
 		},
 		{
 			admin: {
-				description: 'URL única para este artigo. Será gerada automaticamente do título se deixado em branco.',
+				description:
+					'URL única para este artigo. Será gerada automaticamente do título se deixado em branco.',
 			},
 			index: true,
 			label: 'Slug',
@@ -45,7 +46,8 @@ export const Articles: CollectionConfig = {
 		},
 		{
 			admin: {
-				description: 'Resumo curto do artigo que aparece na listagem e no início do artigo.',
+				description:
+					'Resumo curto do artigo que aparece na listagem e no início do artigo.',
 			},
 			label: 'Descrição',
 			maxLength: 500,
@@ -113,7 +115,8 @@ export const Articles: CollectionConfig = {
 		},
 		{
 			admin: {
-				description: 'Conteúdo do artigo em formato Markdown. Suporta títulos (##), listas, links, citações e muito mais.',
+				description:
+					'Conteúdo do artigo em formato Markdown. Suporta títulos (##), listas, links, citações e muito mais.',
 			},
 			label: 'Conteúdo (Markdown)',
 			name: 'content',
@@ -147,6 +150,18 @@ export const Articles: CollectionConfig = {
 					label: 'Biografia',
 					name: 'bio',
 					type: 'textarea',
+				},
+				{
+					admin: {
+						description: 'Se este artigo foi escrito por um especialista, lembre-se de marcar para que possa ser entregue conteúdos de especialistas separadamente.',
+						position: 'sidebar',
+					},
+					defaultValue: false,
+					label: 'Artigo escrito por um especialista',
+
+					name: 'expertAuthor',
+					required: true,
+					type: 'checkbox',
 				},
 				{
 					fields: [
@@ -250,6 +265,9 @@ export const Articles: CollectionConfig = {
 				if (data.title && !data.slug) {
 					data.slug = slugify(data.title);
 				}
+				if (data.slug) {
+					data.slug = slugify(data.slug);
+				}
 			},
 		],
 	},
@@ -262,5 +280,4 @@ export const Articles: CollectionConfig = {
 	slug: 'articles',
 
 	timestamps: false,
-
 };
