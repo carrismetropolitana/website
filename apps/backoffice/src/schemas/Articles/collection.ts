@@ -158,7 +158,6 @@ export const Articles: CollectionConfig = {
 					},
 					defaultValue: false,
 					label: 'Artigo escrito por um especialista',
-
 					name: 'expertAuthor',
 					required: true,
 					type: 'checkbox',
