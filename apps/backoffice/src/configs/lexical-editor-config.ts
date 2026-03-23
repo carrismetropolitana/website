@@ -240,8 +240,24 @@ const nestedRichTextEditorSafeBlocks = lexicalEditor({
 	]),
 });
 
+function withSafeColumnEditor(block: Block): Block {
+	if (block.slug !== 'three-columns-text' && block.slug !== 'two-columns-text' && block.slug !== 'two-columns-text-image') return block;
+
+	return {
+		...block,
+		fields: (block.fields as Field[]).map((f) => {
+			if (!f || typeof f !== 'object') return f;
+			if ((f as Field).type !== 'richText') return f;
+			return {
+				...f,
+				editor: nestedRichTextEditorSafeBlocks,
+			};
+		}) as Field[],
+	};
+}
+
 const FULL_NESTED_BLOCKS: Block[] = [
-	...SAFE_NESTED_BLOCKS,
+	...SAFE_NESTED_BLOCKS.map(withSafeColumnEditor),
 	{
 		fields: [
 			{
