@@ -4,7 +4,8 @@
 import type { LexicalRichText, RelationshipMedia } from '@/types/lexical-node.types';
 
 import { ImageComponent } from '@/components/payload/image';
-import { getLexicalRoot, useRenderLexicalNode } from '@/utils/renderLexicalNode';
+import { getLexicalRoot } from '@/utils/getLexicalRoot';
+import { useRenderLexicalNode } from '@/utils/renderLexicalNode';
 
 import styles from './styles.module.css';
 

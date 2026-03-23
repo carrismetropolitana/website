@@ -4,8 +4,9 @@ import { Surface } from '@/components/layout/Surface';
 /* * */
 
 import { CampaignData } from '@/types/campaign.types';
+import { getLexicalRoot } from '@/utils/getLexicalRoot';
 import { processBodyImages } from '@/utils/livePreviewImages';
-import { getLexicalRoot, useRenderLexicalNode } from '@/utils/renderLexicalNode';
+import { useRenderLexicalNode } from '@/utils/renderLexicalNode';
 import { Skeleton } from '@mantine/core';
 import { useEffect, useState } from 'react';
 

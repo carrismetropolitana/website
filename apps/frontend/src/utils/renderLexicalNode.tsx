@@ -28,23 +28,30 @@ import { TwoColumnsText } from '@/components/payload/TwoColumnsText';
 import { TwoColumnsTextImage } from '@/components/payload/TwoColumnsTextImage';
 import { renderUpload } from '@/components/payload/upload';
 import { Video } from '@/components/payload/video';
+import { getLexicalRoot } from '@/utils/getLexicalRoot';
+import { getRelationshipImageUrl } from '@/utils/getRelationshipImageUrl';
+
 /* * */
 
 // Custom Block Renderer
 
 function renderBlock(node: LexicalNode, key?: number): ReactNode {
+	//
+
+	//
+	// A. Setup variables
+
 	const blockSlug = node.fields?.blockType ?? node.fields?.blockName;
+
+	//
+	// B. Render Components
 
 	switch (blockSlug) {
 		case 'accordion': {
 			const items = Array.isArray(node.fields?.accordion) ? node.fields?.accordion.map(item => ({ content: item.content ?? '', id: item.id ?? '', title: item.title ?? '' })) : [];
 			return items.length ? <Accordion key={key} items={items} /> : null;
 		}
-		case 'card': {
-			return (
-				<Card key={key} borderColor={node.fields?.borderColor} cards={node.fields?.cards} primaryColor={node.fields?.primaryColor} textColor={node.fields?.textColor} />
-			);
-		}
+		case 'card': return <Card key={key} borderColor={node.fields?.borderColor} cards={node.fields?.cards} primaryColor={node.fields?.primaryColor} textColor={node.fields?.textColor} />;
 		case 'gallery': return <Gallery key={key} fields={node.fields} />;
 		case 'link': {
 			const raw = node.fields;
@@ -58,7 +65,6 @@ function renderBlock(node: LexicalNode, key?: number): ReactNode {
 				text: typeof raw?.text === 'string' ? raw.text : undefined,
 				url: raw?.url,
 			};
-
 			return <Links key={key} fields={linkFields} />;
 		}
 		case 'section': {
@@ -93,6 +99,8 @@ function renderBlock(node: LexicalNode, key?: number): ReactNode {
 		case 'video': return <Video key={key} fields={node.fields} />;
 		default: return <NotImplemented key={key} blockSlug={blockSlug} />;
 	}
+
+	//
 }
 
 // Standard Lexical Node renderer
@@ -141,41 +149,6 @@ function renderNode(node: LexicalNode, key?: number): ReactNode {
 		default: return children.length > 0 ? renderChildren() : (node.text ?? null);
 	}
 }
-
-/* * */
-
-/**
- * Extract Lexical root node from various content formats (string, object with root, raw root).
- */
-export function getLexicalRoot(content: unknown): LexicalNode | null {
-	if (!content) return null;
-	let json: unknown;
-	try {
-		json = typeof content === 'string' ? JSON.parse(content) : content;
-	}
-	catch {
-		return null;
-	}
-	if (!json || typeof json !== 'object') return null;
-	return (json as { root?: LexicalNode }).root ?? (json as LexicalNode);
-}
-
-/* * */
-
-function getRelationshipImageUrl(value: unknown): string | undefined {
-	if (!value || typeof value !== 'object') return undefined;
-	const v = value as {
-		file?: { url?: string }
-		url?: string
-		value?: {
-			file?: { url?: string }
-			url?: string
-		}
-	};
-	return v.url ?? v.value?.url ?? v.file?.url ?? v.value?.file?.url;
-}
-
-/* * */
 
 export function useRenderLexicalNode() {
 	return renderNode;

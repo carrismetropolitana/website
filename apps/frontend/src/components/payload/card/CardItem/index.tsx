@@ -23,32 +23,12 @@ interface CustomCSSProperties extends CSSProperties {
 
 /* * */
 
-function getRelationshipImageUrl(value: unknown): string | undefined {
-	if (!value || typeof value !== 'object') return undefined;
+export function CardItem({ card, colors, isFirstChild, isLastChild }: { card: PayloadCardItem, colors: CustomCSSProperties, isFirstChild: boolean, isLastChild: boolean }) {
+	//
 
-	const v = value as {
-		file?: { url?: string }
-		url?: string
-		value?: {
-			file?: { url?: string }
-			url?: string
-		}
-	};
+	//
+	// A. Setup Variables
 
-	return v.url ?? v.value?.url ?? v.file?.url ?? v.value?.file?.url;
-}
-
-export function CardItem({
-	card,
-	colors,
-	isFirstChild,
-	isLastChild,
-}: {
-	card: PayloadCardItem
-	colors: CustomCSSProperties
-	isFirstChild: boolean
-	isLastChild: boolean
-}) {
 	const [isOpen, setIsOpen] = useState(false);
 
 	const titleText = typeof card.title === 'string' ? card.title : '';
@@ -59,6 +39,9 @@ export function CardItem({
 	const handleToggleIsOpen = () => setIsOpen(prev => !prev);
 
 	const descriptionLines = useMemo(() => descriptionText.split('\n'), [descriptionText]);
+
+	//
+	// B. Render Components
 
 	return (
 		<div
@@ -99,4 +82,6 @@ export function CardItem({
 			</div>
 		</div>
 	);
+
+	//
 }
