@@ -1,10 +1,10 @@
 'use client';
 /* * */
 
+import { useRenderLexicalNode } from '@/components/payload/lexical-renderer';
 import { LexicalNode } from '@/types/lexical-node.types';
 import { hasLineMentionNode } from '@/utils/hasLineMetion';
 import { parseStyleString } from '@/utils/parseStyleString';
-import { useRenderLexicalNode } from '@/utils/renderLexicalNode';
 
 /* * */
 

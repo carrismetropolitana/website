@@ -3,7 +3,7 @@
 
 import type { LexicalNode, LexicalRichText } from '@/types/lexical-node.types';
 
-import { useRenderLexicalNode } from '@/utils/renderLexicalNode';
+import { useRenderLexicalNode } from '@/components/payload/lexical-renderer';
 
 import styles from './styles.module.css';
 

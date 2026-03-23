@@ -3,10 +3,10 @@ import { Section } from '@/components/layout/Section';
 import { Surface } from '@/components/layout/Surface';
 /* * */
 
+import { useRenderLexicalNode } from '@/components/payload/lexical-renderer';
 import { CampaignData } from '@/types/campaign.types';
 import { getLexicalRoot } from '@/utils/getLexicalRoot';
 import { processBodyImages } from '@/utils/livePreviewImages';
-import { useRenderLexicalNode } from '@/utils/renderLexicalNode';
 import { Skeleton } from '@mantine/core';
 import { useEffect, useState } from 'react';
 

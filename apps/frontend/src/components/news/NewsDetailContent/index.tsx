@@ -2,9 +2,9 @@
 
 /* * */
 
+import { useRenderLexicalNode } from '@/components/payload/lexical-renderer';
 import { useDebugContext } from '@/contexts/Debug.context';
 import { NewsData } from '@/types/news.types';
-import { useRenderLexicalNode } from '@/utils/renderLexicalNode';
 
 import styles from './styles.module.css';
 
