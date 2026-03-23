@@ -15,6 +15,7 @@ import { LineMention } from '@/components/payload/line-mention';
 import { Links } from '@/components/payload/links';
 import { List } from '@/components/payload/lists';
 import { ListItem } from '@/components/payload/lists/listItem';
+import { NotImplemented } from '@/components/payload/NotImplemented';
 import { Paragraph } from '@/components/payload/paragraph';
 import { Quote } from '@/components/payload/quote';
 import { Spacer } from '@/components/payload/spacer';
@@ -41,13 +42,7 @@ function renderBlock(node: LexicalNode, key?: number): ReactNode {
 		}
 		case 'card': {
 			return (
-				<Card
-					key={key}
-					borderColor={node.fields?.borderColor}
-					cards={node.fields?.cards}
-					primaryColor={node.fields?.primaryColor}
-					textColor={node.fields?.textColor}
-				/>
+				<Card key={key} borderColor={node.fields?.borderColor} cards={node.fields?.cards} primaryColor={node.fields?.primaryColor} textColor={node.fields?.textColor} />
 			);
 		}
 		case 'gallery': return <Gallery key={key} fields={node.fields} />;
@@ -70,19 +65,12 @@ function renderBlock(node: LexicalNode, key?: number): ReactNode {
 			const contentRoot = getLexicalRoot(node.fields?.content);
 			const withPadding = node.fields?.withPadding === 'all' ? true : (node.fields?.withPadding === 'none' ? undefined : node.fields?.withPadding);
 			return (
-				<Section
-					key={key}
-					withBottomDivider={node.fields?.withBottomDivider}
-					withGap={node.fields?.withGap}
-					withPadding={withPadding}
-				>
+				<Section key={key} withBottomDivider={node.fields?.withBottomDivider} withGap={node.fields?.withGap} withPadding={withPadding}>
 					{contentRoot ? renderNode(contentRoot) : null}
 				</Section>
 			);
 		}
-		case 'spacer': {
-			return <Spacer key={key} height={node.fields?.height} />;
-		}
+		case 'spacer': return <Spacer key={key} height={node.fields?.height} />;
 		case 'surface': {
 			const contentRoot = getLexicalRoot(node.fields?.content);
 			const backgroundImageUrl = getRelationshipImageUrl(node.fields?.backgroundImage);
@@ -99,37 +87,11 @@ function renderBlock(node: LexicalNode, key?: number): ReactNode {
 				</Surface>
 			);
 		}
-		case 'three-columns-text': {
-			return (
-				<ThreeColumnsText
-					key={key}
-					centerColumn={node.fields?.centerColumn}
-					leftColumn={node.fields?.leftColumn}
-					rightColumn={node.fields?.rightColumn}
-				/>
-			);
-		}
-		case 'two-columns-text': {
-			return (
-				<TwoColumnsText
-					key={key}
-					leftColumn={node.fields?.leftColumn}
-					rightColumn={node.fields?.rightColumn}
-				/>
-			);
-		}
-		case 'two-columns-text-image': {
-			return (
-				<TwoColumnsTextImage
-					key={key}
-					image={node.fields?.image}
-					imagePosition={node.fields?.imagePosition}
-					text={node.fields?.text}
-				/>
-			);
-		}
+		case 'three-columns-text': return <ThreeColumnsText key={key} centerColumn={node.fields?.centerColumn} leftColumn={node.fields?.leftColumn} rightColumn={node.fields?.rightColumn} />;
+		case 'two-columns-text': return <TwoColumnsText key={key} leftColumn={node.fields?.leftColumn} rightColumn={node.fields?.rightColumn} />;
+		case 'two-columns-text-image': return <TwoColumnsTextImage key={key} image={node.fields?.image} imagePosition={node.fields?.imagePosition} text={node.fields?.text} />;
 		case 'video': return <Video key={key} fields={node.fields} />;
-		default: return null;
+		default: return <NotImplemented key={key} blockSlug={blockSlug} />;
 	}
 }
 
@@ -202,7 +164,6 @@ export function getLexicalRoot(content: unknown): LexicalNode | null {
 
 function getRelationshipImageUrl(value: unknown): string | undefined {
 	if (!value || typeof value !== 'object') return undefined;
-
 	const v = value as {
 		file?: { url?: string }
 		url?: string
@@ -211,7 +172,6 @@ function getRelationshipImageUrl(value: unknown): string | undefined {
 			url?: string
 		}
 	};
-
 	return v.url ?? v.value?.url ?? v.file?.url ?? v.value?.file?.url;
 }
 
