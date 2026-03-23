@@ -5,6 +5,7 @@
 import { FoundItemsCounter } from '@/components/common/FoundItemsCounter';
 import { Section } from '@/components/layout/Section';
 import { Surface } from '@/components/layout/Surface';
+import { useEnvironmentContext } from '@/contexts/Environment.context';
 import { useStopsListContext } from '@/contexts/StopsList.context';
 import { SegmentedControl, TextInput } from '@mantine/core';
 import { IconArrowLoopRight } from '@tabler/icons-react';
@@ -20,6 +21,8 @@ export function StopsListToolbar() {
 
 	const t = useTranslations('stops.StopsListToolbar');
 	const stopsListContext = useStopsListContext();
+	const environmentContext = useEnvironmentContext();
+	const isMupi = environmentContext.data.value === 'mupi';
 
 	//
 	// B. Transform data
@@ -27,7 +30,7 @@ export function StopsListToolbar() {
 	const currentViewOptions = [
 		{ label: t('filters.by_current_view.map'), value: 'map' },
 		{ label: t('filters.by_current_view.list'), value: 'list' },
-		{ label: t('filters.by_current_view.favorites', { count: stopsListContext.counters.favorites }), value: 'favorites' },
+		...(!isMupi ? [{ label: t('filters.by_current_view.favorites', { count: stopsListContext.counters.favorites }), value: 'favorites' }] : []),
 	];
 
 	//

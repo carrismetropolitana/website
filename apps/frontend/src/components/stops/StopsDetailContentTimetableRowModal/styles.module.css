@@ -4,4 +4,19 @@
 	gap: var(--size-spacing-10);
 	align-items: flex-start;
     padding: var(--size-spacing-10);
+}	
+
+.list {
+	left: 0;
+	display: flex;
+	flex-direction: column;
+	gap: var(--size-spacing-10);
+	width: 100%;
+	list-style: none;
+}
+
+.title {
+	font-size: var(--font-size-muted);
+	font-weight: var(--font-weight-muted);
+	color: var(--color-system-text-300);
 }

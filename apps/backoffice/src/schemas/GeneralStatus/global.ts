@@ -21,6 +21,12 @@ export const GeneralStatus: GlobalConfig = {
 			fields: [
 				{
 					defaultValue: false,
+					label: 'Is Debug',
+					name: 'is_debug',
+					type: 'checkbox',
+				},
+				{
+					defaultValue: false,
 					label: 'Is Enabled',
 					name: 'is_enabled',
 					type: 'checkbox',

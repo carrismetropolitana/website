@@ -18,6 +18,11 @@ export interface GeneralStatusMessage {
 	end_date?: number
 
 	/**
+	 * When true, the message only shows while site debug mode is active.
+	 */
+	is_debug?: boolean
+
+	/**
 	 * The title of the status.
 	 */
 	is_enabled: boolean
