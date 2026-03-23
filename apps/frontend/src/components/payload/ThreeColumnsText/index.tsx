@@ -1,6 +1,8 @@
 'use client';
 /* * */
 
+import type { LexicalRichText } from '@/types/lexical-node.types';
+
 import { getLexicalRoot, useRenderLexicalNode } from '@/utils/renderLexicalNode';
 
 import styles from './styles.module.css';
@@ -8,9 +10,9 @@ import styles from './styles.module.css';
 /* * */
 
 interface ThreeColumnsTextBlockProps {
-	centerColumn?: unknown
-	leftColumn?: unknown
-	rightColumn?: unknown
+	centerColumn?: LexicalRichText | string
+	leftColumn?: LexicalRichText | string
+	rightColumn?: LexicalRichText | string
 }
 
 /* * */

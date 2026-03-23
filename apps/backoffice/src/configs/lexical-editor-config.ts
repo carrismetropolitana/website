@@ -233,10 +233,21 @@ const SAFE_NESTED_BLOCKS: Block[] = [
 	},
 ];
 
-const nestedRichTextEditorSafeBlocks = lexicalEditor({
+let nestedRichTextEditorSafeBlocks = lexicalEditor({
 	features: ({ defaultFeatures }) => ([
 		...createLexicalFeaturesNoBlocks()({ defaultFeatures }),
 		BlocksFeature({ blocks: SAFE_NESTED_BLOCKS }),
+	]),
+});
+
+const RECURSIVE_LAYOUT_SLUGS = ['three-columns-text', 'two-columns-text', 'two-columns-text-image'] as const;
+
+const COLUMN_SAFE_BLOCKS: Block[] = SAFE_NESTED_BLOCKS.filter(block => !RECURSIVE_LAYOUT_SLUGS.includes(block.slug as (typeof RECURSIVE_LAYOUT_SLUGS)[number]));
+
+const nestedRichTextEditorColumnsSafeBlocks = lexicalEditor({
+	features: ({ defaultFeatures }) => ([
+		...createLexicalFeaturesNoBlocks()({ defaultFeatures }),
+		BlocksFeature({ blocks: COLUMN_SAFE_BLOCKS }),
 	]),
 });
 
@@ -250,11 +261,18 @@ function withSafeColumnEditor(block: Block): Block {
 			if ((f as Field).type !== 'richText') return f;
 			return {
 				...f,
-				editor: nestedRichTextEditorSafeBlocks,
+				editor: nestedRichTextEditorColumnsSafeBlocks,
 			};
 		}) as Field[],
 	};
 }
+
+nestedRichTextEditorSafeBlocks = lexicalEditor({
+	features: ({ defaultFeatures }) => ([
+		...createLexicalFeaturesNoBlocks()({ defaultFeatures }),
+		BlocksFeature({ blocks: SAFE_NESTED_BLOCKS.map(withSafeColumnEditor) }),
+	]),
+});
 
 const FULL_NESTED_BLOCKS: Block[] = [
 	...SAFE_NESTED_BLOCKS.map(withSafeColumnEditor),
@@ -357,7 +375,6 @@ export function createLexicalConfig(blocks: readonly Block[]) {
 	});
 }
 
-// Adds custom blocks to nested richText editors without infinite recursion.
 export const lexicalEditorConfig = lexicalEditor({
 	features: ({ defaultFeatures }) => ([
 		...createLexicalFeaturesNoBlocks()({ defaultFeatures }),

@@ -19,33 +19,38 @@ export interface LexicalNode {
 			title?: string
 		}[]
 		backgroundImage?: number | {
-			file?: {
-				url?: string
-			}
+			file?: { url?: string }
 			url?: string
 			value?: {
-				file?: {
-					url?: string
-				}
+				file?: { url?: string }
 				url?: string
 			}
 		}
 		backgroundOverlay?: boolean
 		blockName?: string
 		blockType?: string
+		borderColor?: string
 		buttonColor?: string
 		buttonTextColor?: string
 		caption?: string
+		cards?: {
+			description?: string
+			image?: RelationshipMedia
+			number?: string
+			title?: string
+		}[]
+		centerColumn?: LexicalRichText | string
 		content?: LexicalRichText | string
 		doc?: {
 			relationTo?: string
-			value?: {
-				slug?: string
-			}
+			value?: { slug?: string }
 		}
 		forceOverflow?: boolean
 		fullHeight?: boolean
 		hasBackgroundImage?: boolean
+		height?: number
+		image?: RelationshipMedia
+		imagePosition?: 'left' | 'right'
 		images?: {
 			relationTo?: string
 			value?: {
@@ -58,10 +63,15 @@ export interface LexicalNode {
 			}
 		}[]
 		isButton?: boolean
+		leftColumn?: LexicalRichText | string
 		linkType?: string
 		newTab?: boolean
+		number?: string
+		primaryColor?: string
+		rightColumn?: LexicalRichText | string
 		source?: 'external' | 'upload'
-		text?: string
+		text?: LexicalRichText | string
+		textColor?: string
 		title?: string
 		url?: string
 		variant?: 'alerts' | 'brand2' | 'brand' | 'debug' | 'default' | 'muted' | 'persistent' | 'standout' | 'success' | 'warning'
@@ -105,4 +115,13 @@ export interface LexicalNode {
 		url?: string
 		width?: number
 	}
+}
+
+export interface RelationshipMedia {
+	alt?: string
+	file?: { url?: string }
+	filename?: string
+	id?: string
+	url?: string
+	value?: { url?: string }
 }

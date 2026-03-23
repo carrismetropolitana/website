@@ -1,6 +1,10 @@
 'use client';
 /* * */
 
+import type { LexicalNode } from '@/types/lexical-node.types';
+import type { PayloadLexicalLink } from '@/types/link.types';
+import type { ReactNode } from 'react';
+
 import { Section } from '@/components/layout/Section';
 import { Accordion } from '@/components/payload/accordion';
 import { Card } from '@/components/payload/card';
@@ -23,34 +27,53 @@ import { TwoColumnsText } from '@/components/payload/TwoColumnsText';
 import { TwoColumnsTextImage } from '@/components/payload/TwoColumnsTextImage';
 import { renderUpload } from '@/components/payload/upload';
 import { Video } from '@/components/payload/video';
-import { LexicalNode } from '@/types/lexical-node.types';
-import { type ReactNode } from 'react';
-
 /* * */
 
 // Custom Block Renderer
 
 function renderBlock(node: LexicalNode, key?: number): ReactNode {
-	switch (node.fields?.blockType) {
+	const blockSlug = node.fields?.blockType ?? node.fields?.blockName;
+
+	switch (blockSlug) {
 		case 'accordion': {
 			const items = Array.isArray(node.fields?.accordion) ? node.fields?.accordion.map(item => ({ content: item.content ?? '', id: item.id ?? '', title: item.title ?? '' })) : [];
 			return items.length ? <Accordion key={key} items={items} /> : null;
 		}
 		case 'card': {
-			const f = node.fields as { borderColor?: unknown, cards?: unknown, primaryColor?: unknown, textColor?: unknown };
-			return <Card key={key} borderColor={f?.borderColor} cards={f?.cards} primaryColor={f?.primaryColor} textColor={f?.textColor} />;
+			return (
+				<Card
+					key={key}
+					borderColor={node.fields?.borderColor}
+					cards={node.fields?.cards}
+					primaryColor={node.fields?.primaryColor}
+					textColor={node.fields?.textColor}
+				/>
+			);
 		}
 		case 'gallery': return <Gallery key={key} fields={node.fields} />;
-		case 'link': return <Links key={key} fields={node.fields} />;
+		case 'link': {
+			const raw = node.fields;
+			const linkFields: PayloadLexicalLink = {
+				buttonColor: raw?.buttonColor,
+				buttonTextColor: raw?.buttonTextColor,
+				doc: raw?.doc,
+				isButton: raw?.isButton,
+				linkType: raw?.linkType,
+				newTab: raw?.newTab,
+				text: typeof raw?.text === 'string' ? raw.text : undefined,
+				url: raw?.url,
+			};
+
+			return <Links key={key} fields={linkFields} />;
+		}
 		case 'section': {
-			const f = node.fields as { content?: unknown, withBottomDivider?: boolean, withGap?: boolean, withPadding?: 'all' | 'desktop' | 'mobile' | 'none' };
-			const contentRoot = getLexicalRoot(f?.content);
-			const withPadding = f?.withPadding === 'all' ? true : (f?.withPadding === 'none' ? undefined : f?.withPadding);
+			const contentRoot = getLexicalRoot(node.fields?.content);
+			const withPadding = node.fields?.withPadding === 'all' ? true : (node.fields?.withPadding === 'none' ? undefined : node.fields?.withPadding);
 			return (
 				<Section
 					key={key}
-					withBottomDivider={f?.withBottomDivider}
-					withGap={f?.withGap}
+					withBottomDivider={node.fields?.withBottomDivider}
+					withGap={node.fields?.withGap}
 					withPadding={withPadding}
 				>
 					{contentRoot ? renderNode(contentRoot) : null}
@@ -58,63 +81,50 @@ function renderBlock(node: LexicalNode, key?: number): ReactNode {
 			);
 		}
 		case 'spacer': {
-			const f = node.fields as { height?: number };
-			return <Spacer key={key} height={f?.height} />;
+			return <Spacer key={key} height={node.fields?.height} />;
 		}
 		case 'surface': {
-			const f = node.fields as {
-				backgroundImage?: unknown
-				backgroundOverlay?: boolean
-				content?: unknown
-				forceOverflow?: boolean
-				fullHeight?: boolean
-				hasBackgroundImage?: boolean
-				variant?: 'alerts' | 'brand2' | 'brand' | 'debug' | 'default' | 'muted' | 'persistent' | 'standout' | 'success' | 'warning'
-			};
-			const contentRoot = getLexicalRoot(f?.content);
-			const backgroundImageUrl = getRelationshipImageUrl(f?.backgroundImage);
+			const contentRoot = getLexicalRoot(node.fields?.content);
+			const backgroundImageUrl = getRelationshipImageUrl(node.fields?.backgroundImage);
 			return (
 				<Surface
 					key={key}
-					backgroundImageUrl={f?.hasBackgroundImage ? backgroundImageUrl : undefined}
-					backgroundOverlay={f?.backgroundOverlay}
-					forceOverflow={f?.forceOverflow}
-					fullHeight={f?.fullHeight}
-					variant={f?.variant}
+					backgroundImageUrl={node.fields?.hasBackgroundImage ? backgroundImageUrl : undefined}
+					backgroundOverlay={node.fields?.backgroundOverlay}
+					forceOverflow={node.fields?.forceOverflow}
+					fullHeight={node.fields?.fullHeight}
+					variant={node.fields?.variant}
 				>
 					{contentRoot ? renderNode(contentRoot) : null}
 				</Surface>
 			);
 		}
 		case 'three-columns-text': {
-			const f = node.fields as { centerColumn?: unknown, leftColumn?: unknown, rightColumn?: unknown };
 			return (
 				<ThreeColumnsText
 					key={key}
-					centerColumn={f?.centerColumn}
-					leftColumn={f?.leftColumn}
-					rightColumn={f?.rightColumn}
+					centerColumn={node.fields?.centerColumn}
+					leftColumn={node.fields?.leftColumn}
+					rightColumn={node.fields?.rightColumn}
 				/>
 			);
 		}
 		case 'two-columns-text': {
-			const f = node.fields as { leftColumn?: unknown, rightColumn?: unknown };
 			return (
 				<TwoColumnsText
 					key={key}
-					leftColumn={f?.leftColumn}
-					rightColumn={f?.rightColumn}
+					leftColumn={node.fields?.leftColumn}
+					rightColumn={node.fields?.rightColumn}
 				/>
 			);
 		}
 		case 'two-columns-text-image': {
-			const f = node.fields as { image?: unknown, imagePosition?: 'left' | 'right', text?: unknown };
 			return (
 				<TwoColumnsTextImage
 					key={key}
-					image={f?.image}
-					imagePosition={f?.imagePosition}
-					text={f?.text}
+					image={node.fields?.image}
+					imagePosition={node.fields?.imagePosition}
+					text={node.fields?.text}
 				/>
 			);
 		}
@@ -140,7 +150,21 @@ function renderNode(node: LexicalNode, key?: number): ReactNode {
 			return <Heading key={key} anchorId={anchorId} children={children} index={key} tag={node.tag as 'h2' | 'h3'} />;
 		}
 		case 'horizontalrule': return <hr key={key} />;
-		case 'link': return <Links key={key} children={children} fields={node.fields} url={node.url} />;
+		case 'link': {
+			const raw = node.fields;
+			const linkFields: PayloadLexicalLink = {
+				buttonColor: raw?.buttonColor,
+				buttonTextColor: raw?.buttonTextColor,
+				doc: raw?.doc,
+				isButton: raw?.isButton,
+				linkType: raw?.linkType,
+				newTab: raw?.newTab,
+				text: typeof raw?.text === 'string' ? raw.text : undefined,
+				url: raw?.url,
+			};
+
+			return <Links key={key} children={children} fields={linkFields} url={node.url} />;
+		}
 		case 'list': return <List key={key} children={children} listType={node.listType} />;
 		case 'listitem': return <ListItem key={key} children={children} />;
 		case 'mention': return node.mentionType === 'line' ? <LineMention key={key} id={node.id} label={node.label} mentionType={node.mentionType} /> : null;

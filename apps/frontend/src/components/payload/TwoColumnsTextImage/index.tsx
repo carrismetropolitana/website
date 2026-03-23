@@ -1,6 +1,8 @@
 'use client';
 /* * */
 
+import type { LexicalRichText, RelationshipMedia } from '@/types/lexical-node.types';
+
 import { ImageComponent } from '@/components/payload/image';
 import { getLexicalRoot, useRenderLexicalNode } from '@/utils/renderLexicalNode';
 
@@ -9,9 +11,9 @@ import styles from './styles.module.css';
 /* * */
 
 interface TwoColumnsTextImageBlockProps {
-	image?: { alt?: string, filename?: string, id?: string, url?: string }
+	image?: RelationshipMedia
 	imagePosition?: 'left' | 'right'
-	text?: unknown
+	text?: LexicalRichText | string
 }
 
 /* * */

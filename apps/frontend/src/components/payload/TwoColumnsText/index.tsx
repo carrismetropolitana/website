@@ -1,6 +1,8 @@
 'use client';
 /* * */
 
+import type { LexicalRichText } from '@/types/lexical-node.types';
+
 import { getLexicalRoot, useRenderLexicalNode } from '@/utils/renderLexicalNode';
 
 import styles from './styles.module.css';
@@ -8,8 +10,8 @@ import styles from './styles.module.css';
 /* * */
 
 interface TwoColumnsTextBlockProps {
-	leftColumn?: unknown
-	rightColumn?: unknown
+	leftColumn?: LexicalRichText | string
+	rightColumn?: LexicalRichText | string
 }
 
 export function TwoColumnsText({ leftColumn, rightColumn }: TwoColumnsTextBlockProps) {
