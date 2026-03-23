@@ -3,8 +3,8 @@
 
 import type { PayloadLexicalLinkProps } from '@/types/link.types';
 
-import { CustomLink } from '@/components/payload/links/Payload/CustomLink';
-import { LinkButton } from '@/components/payload/links/Payload/LinkButton';
+import { CustomLink } from '@/components/payload/links/CustomLink';
+import { LinkButton } from '@/components/payload/links/LinkButton';
 
 /* * */
 

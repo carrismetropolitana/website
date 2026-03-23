@@ -1,6 +1,6 @@
 'use client';
 
-import type { CustomLink } from '@/components/payload/links/Payload/CustomLink';
+import type { CustomLink } from '@/components/payload/links/CustomLink';
 import type { CSSProperties } from 'react';
 
 import { Link } from '@/components/common/Link/';

@@ -153,6 +153,66 @@ const SAFE_NESTED_BLOCKS: Block[] = [
 		},
 		slug: 'two-columns-text-image',
 	},
+	{
+		admin: { group: 'Layout' },
+		fields: [
+			{
+				label: 'Cor da borda (hex/rgb)',
+				name: 'borderColor',
+				type: 'text',
+			},
+			{
+				label: 'Cor primária (hex/rgb)',
+				name: 'primaryColor',
+				type: 'text',
+			},
+			{
+				label: 'Cor do texto (hex/rgb)',
+				name: 'textColor',
+				type: 'text',
+			},
+			{
+				admin: {
+					initCollapsed: false,
+				},
+				defaultValue: [],
+				fields: [
+					{
+						label: 'Título do cartão',
+						name: 'title',
+						required: true,
+						type: 'text',
+					},
+					{
+						label: 'Número (ex: 25m)',
+						name: 'number',
+						required: true,
+						type: 'text',
+					},
+					{
+						label: 'Imagem (opcional)',
+						name: 'image',
+						relationTo: 'media',
+						type: 'relationship',
+					},
+					{
+						label: 'Texto no conteúdo (opcional)',
+						name: 'description',
+						type: 'textarea',
+					},
+				] as Field[],
+				label: 'Cartões para stack',
+				minRows: 1,
+				name: 'cards',
+				type: 'array',
+			},
+		] as Field[],
+		labels: {
+			plural: 'Card',
+			singular: 'Card',
+		},
+		slug: 'card',
+	},
 ];
 
 const nestedRichTextEditorSafeBlocks = lexicalEditor({

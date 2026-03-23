@@ -4,7 +4,7 @@
 import type { PayloadLexicalLinkProps } from '@/types/link.types';
 import type { ReactNode } from 'react';
 
-import { CustomLinkRender } from '@/components/payload/links/Payload/CustomLink/CustomLinkRender';
+import { CustomLinkRender } from '@/components/payload/links/CustomLink/CustomLinkRender';
 import { useCustomLink } from '@/hooks/useCustomLink';
 
 import styles from './styles.module.css';

@@ -34,6 +34,7 @@ import { linkFields } from '@/fields/link';
 import { sectionFields } from '@/fields/section';
 import { surfaceFields } from '@/fields/surface';
 import { videoFields } from '@/fields/video';
+import { CardBlock } from '@/lexical/layout/card';
 import { ThreeColumnsTextBlock } from '@/lexical/layout/three-columns-text';
 import { TwoColumnsTextBlock } from '@/lexical/layout/two-columns-text';
 import { TwoColumnsTextImageBlock } from '@/lexical/layout/two-columns-text-image';
@@ -83,6 +84,10 @@ const richTextBlocks: Block[] = [
 	},
 	{
 		...TwoColumnsTextImageBlock,
+		admin: { group: 'Layout' },
+	},
+	{
+		...CardBlock,
 		admin: { group: 'Layout' },
 	},
 ];

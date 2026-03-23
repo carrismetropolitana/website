@@ -3,6 +3,7 @@
 
 import { Section } from '@/components/layout/Section';
 import { Accordion } from '@/components/payload/accordion';
+import { PayloadCard } from '@/components/payload/card';
 import { Code } from '@/components/payload/code';
 import { Gallery } from '@/components/payload/gallery';
 import { Heading } from '@/components/payload/heading';
@@ -34,6 +35,10 @@ function renderBlock(node: LexicalNode, key?: number): ReactNode {
 		case 'accordion': {
 			const items = Array.isArray(node.fields?.accordion) ? node.fields?.accordion.map(item => ({ content: item.content ?? '', id: item.id ?? '', title: item.title ?? '' })) : [];
 			return items.length ? <Accordion key={key} items={items} /> : null;
+		}
+		case 'card': {
+			const f = node.fields as { borderColor?: unknown, cards?: unknown, primaryColor?: unknown, textColor?: unknown };
+			return <PayloadCard key={key} borderColor={f?.borderColor} cards={f?.cards} primaryColor={f?.primaryColor} textColor={f?.textColor} />;
 		}
 		case 'gallery': return <Gallery key={key} fields={node.fields} />;
 		case 'link': return <Links key={key} fields={node.fields} />;

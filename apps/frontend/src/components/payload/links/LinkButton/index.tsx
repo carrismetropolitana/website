@@ -4,7 +4,7 @@
 import type { PayloadLexicalLinkProps } from '@/types/link.types';
 import type { CSSProperties } from 'react';
 
-import { CustomLinkRender } from '@/components/payload/links/Payload/CustomLink/CustomLinkRender';
+import { CustomLinkRender } from '@/components/payload/links/CustomLink/CustomLinkRender';
 import { useCustomLink } from '@/hooks/useCustomLink';
 
 import styles from './styles.module.css';
@@ -12,13 +12,10 @@ import styles from './styles.module.css';
 /* * */
 
 function buttonStyleFromFields(fields: PayloadLexicalLinkProps['fields']): CSSProperties | undefined {
-	const bg = fields?.buttonColor?.trim();
-	const fg = fields?.buttonTextColor?.trim();
-	const next: CSSProperties = {
-		...(bg ? { backgroundColor: bg } : {}),
-		...(fg ? { color: fg } : {}),
-	};
-	return Object.keys(next).length ? next : undefined;
+	const bg = fields?.buttonColor;
+	const fg = fields?.buttonTextColor;
+	const next: CSSProperties = { ...(bg ? { backgroundColor: bg } : {}), ...(fg ? { color: fg } : {}) };
+	return next ?? undefined;
 }
 
 export function LinkButton(props: PayloadLexicalLinkProps) {
