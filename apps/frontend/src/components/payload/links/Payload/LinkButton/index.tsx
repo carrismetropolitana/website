@@ -4,7 +4,8 @@
 import type { PayloadLexicalLinkProps } from '@/types/link.types';
 import type { CSSProperties } from 'react';
 
-import { PayloadLinkRender, usePayloadLexicalLink } from '@/components/payload/links/Payload/PayloadLink/payloadLink';
+import { CustomLinkRender } from '@/components/payload/links/Payload/CustomLink/CustomLinkRender';
+import { useCustomLink } from '@/hooks/useCustomLink';
 
 import styles from './styles.module.css';
 
@@ -20,11 +21,11 @@ function buttonStyleFromFields(fields: PayloadLexicalLinkProps['fields']): CSSPr
 	return Object.keys(next).length ? next : undefined;
 }
 
-export function PayloadLinkButton(props: PayloadLexicalLinkProps) {
-	const model = usePayloadLexicalLink(props);
+export function LinkButton(props: PayloadLexicalLinkProps) {
+	const model = useCustomLink(props);
 	if (!model) return null;
 
 	const style = buttonStyleFromFields(props.fields);
 
-	return <PayloadLinkRender className={styles.linkButton} model={model} style={style} />;
+	return <CustomLinkRender className={styles.linkButton} model={model} style={style} />;
 }

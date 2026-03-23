@@ -3,11 +3,11 @@
 
 import type { PayloadLexicalLinkProps } from '@/types/link.types';
 
-import { PayloadLink } from '@/components/payload/links/Payload/PayloadLink/payloadLink';
-import { PayloadLinkButton } from '@/components/payload/links/Payload/PayloadLinkButton/payloadLinkButton';
+import { CustomLink } from '@/components/payload/links/Payload/CustomLink';
+import { LinkButton } from '@/components/payload/links/Payload/LinkButton';
 
 /* * */
 
 export function Links(props: PayloadLexicalLinkProps) {
-	return props.fields?.isButton ? <PayloadLinkButton {...props} /> : <PayloadLink {...props} />;
+	return props.fields?.isButton ? <LinkButton {...props} /> : <CustomLink {...props} />;
 }
