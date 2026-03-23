@@ -1,0 +1,128 @@
+.container {
+	display: grid;
+	grid-template-columns: 1fr;
+	gap: 0;
+	align-items: flex-start;
+	justify-content: flex-start;
+	width: 100%;
+	margin-top: -20px;
+
+	--animation-duration-open: 600ms;
+	--animation-duration-close: 600ms;
+}
+
+.container[data-open='false'] {
+	grid-template-rows: min-content 0fr;
+	transition: grid-template-rows var(--animation-duration-close) ease-out;
+}
+
+.container[data-open='true'] {
+	grid-template-rows: min-content 1fr;
+	transition: grid-template-rows var(--animation-duration-open) ease-out;
+}
+
+.container[data-is-first='true'] {
+	margin-top: 0;
+}
+
+.header {
+	z-index: 10;
+	display: flex;
+	flex-direction: row;
+	gap: 5px;
+	align-items: center;
+	justify-content: space-between;
+	width: 100%;
+	padding: 20px;
+	padding-bottom: 40px;
+	cursor: pointer;
+	background-color: var(--color-primary);
+	border: 2px solid var(--color-border);
+	border-radius: 18px 18px 0 0;
+	box-shadow: 0 -4px 0 0 rgb(0 0 0 / 5%);
+}
+
+.headerTitle {
+	font-size: 16px;
+	font-weight: var(--font-weight-bold);
+	color: var(--color-text);
+}
+
+.headerNumber {
+	font-size: 20px;
+	font-weight: var(--font-weight-bold);
+	color: var(--color-text);
+}
+
+.container[data-open='true'] .header {
+	padding-bottom: 20px;
+	transition: all 50ms ease-out;
+}
+
+.container[data-open='false'] .header {
+	padding-bottom: 40px;
+	transition: all 50ms ease-out calc(var(--animation-duration-open) - 100ms);
+}
+
+.container[data-is-last='true'] .header {
+	padding-bottom: 20px;
+}
+
+.container[data-is-last='true'][data-open='false'] .header {
+	border-radius: 18px;
+	transition: all 100ms ease-out calc(var(--animation-duration-close) - 50ms);
+}
+
+.content {
+	width: 100%;
+	overflow: hidden;
+	border-right: 2px solid var(--color-border);
+	border-left: 2px solid var(--color-border);
+	transition: all 500ms ease-out;
+}
+
+.container[data-open='false'] .content {
+	background-color: var(--color-primary);
+	border-color: var(--color-border);
+	clip-path: inset(0 0 100% 0);
+	transition: all 200ms ease-out calc(var(--animation-duration-close) - 200ms),
+				clip-path var(--animation-duration-close) ease;
+}
+
+.container[data-open='true'] .content {
+	background-color: var(--color-system-background-200);
+	border-color: var(--color-border);
+	clip-path: inset(0 0 0% 0);
+	transition: all var(--animation-duration-close) ease-out;
+}
+
+.container[data-is-last='true'] .content {
+	border-bottom: 2px solid var(--color-border);
+	border-bottom-right-radius: 18px;
+	border-bottom-left-radius: 18px;
+}
+
+.innerWrapper {
+	display: flex;
+	flex-direction: column;
+	gap: 20px;
+	width: 100%;
+	padding: 20px;
+	padding-bottom: 40px;
+}
+
+.contentLottie {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	min-height: 200px;
+	background: #fff;
+	border: 1px solid var(--color-system-border-100);
+	border-radius: 18px;
+}
+
+.contentDescription {
+	font-size: 14px;
+	font-weight: var(--font-weight-medium);
+	color: var(--color-text);}
+

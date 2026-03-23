@@ -157,16 +157,34 @@ const SAFE_NESTED_BLOCKS: Block[] = [
 		admin: { group: 'Layout' },
 		fields: [
 			{
+				admin: {
+					components: {
+						Field: '@/components/ButtonColorField#ButtonColorField',
+					},
+				},
+				defaultValue: '#ffdd01',
 				label: 'Cor da borda (hex/rgb)',
 				name: 'borderColor',
 				type: 'text',
 			},
 			{
+				admin: {
+					components: {
+						Field: '@/components/ButtonColorField#ButtonColorField',
+					},
+				},
+				defaultValue: '#ffdd01',
 				label: 'Cor primária (hex/rgb)',
 				name: 'primaryColor',
 				type: 'text',
 			},
 			{
+				admin: {
+					components: {
+						Field: '@/components/ButtonColorField#ButtonColorField',
+					},
+				},
+				defaultValue: '#000000',
 				label: 'Cor do texto (hex/rgb)',
 				name: 'textColor',
 				type: 'text',

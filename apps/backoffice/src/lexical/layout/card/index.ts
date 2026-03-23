@@ -7,16 +7,34 @@ import type { Block, Field } from 'payload';
 export const CardBlock: Block = {
 	fields: [
 		{
+			admin: {
+				components: {
+					Field: '@/components/ButtonColorField#ButtonColorField',
+				},
+			},
+			defaultValue: '#ffdd01',
 			label: 'Cor da borda',
 			name: 'borderColor',
 			type: 'text',
 		},
 		{
+			admin: {
+				components: {
+					Field: '@/components/ButtonColorField#ButtonColorField',
+				},
+			},
+			defaultValue: '#ffdd01',
 			label: 'Cor primária',
 			name: 'primaryColor',
 			type: 'text',
 		},
 		{
+			admin: {
+				components: {
+					Field: '@/components/ButtonColorField#ButtonColorField',
+				},
+			},
+			defaultValue: '#000000',
 			label: 'Cor do texto',
 			name: 'textColor',
 			type: 'text',
