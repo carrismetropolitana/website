@@ -45,13 +45,14 @@
 .headerTitle {
 	font-size: 16px;
 	font-weight: var(--font-weight-bold);
-	color: var(--color-text);
+	color: var(--color-title);
+	text-align:left;
 }
 
 .headerNumber {
 	font-size: 20px;
 	font-weight: var(--font-weight-bold);
-	color: var(--color-text);
+	color: var(--color-title);
 }
 
 .container[data-open='true'] .header {
@@ -124,5 +125,6 @@
 .contentDescription {
 	font-size: 14px;
 	font-weight: var(--font-weight-medium);
-	color: var(--color-text);}
+	color: var(--color-text);
+}
 

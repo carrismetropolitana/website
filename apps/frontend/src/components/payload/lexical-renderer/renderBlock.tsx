@@ -40,7 +40,7 @@ export function renderBlock(node: LexicalNode, key: number | undefined, renderNo
 				: [];
 			return items.length ? <Accordion key={key} items={items} /> : null;
 		}
-		case 'card': return <Card key={key} borderColor={node.fields?.borderColor} cards={node.fields?.cards} primaryColor={node.fields?.primaryColor} textColor={node.fields?.textColor} />;
+		case 'card': return <Card key={key} borderColor={node.fields?.borderColor} cards={node.fields?.cards} primaryColor={node.fields?.primaryColor} textColor={node.fields?.textColor} titleColor={node.fields?.titleColor} />;
 		case 'gallery': return <Gallery key={key} fields={node.fields} />;
 		case 'link': {
 			const raw = node.fields;

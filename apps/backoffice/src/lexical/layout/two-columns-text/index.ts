@@ -24,8 +24,8 @@ export const TwoColumnsTextBlock: Block = {
 		},
 	],
 	labels: {
-		plural: 'Duas colunas (texto)',
-		singular: 'Duas colunas (texto)',
+		plural: 'Duas colunas',
+		singular: 'Duas colunas',
 	},
 	slug: 'two-columns-text',
 };

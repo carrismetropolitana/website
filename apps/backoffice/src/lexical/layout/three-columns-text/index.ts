@@ -31,8 +31,8 @@ export const ThreeColumnsTextBlock: Block = {
 		},
 	],
 	labels: {
-		plural: 'Três colunas (texto)',
-		singular: 'Três colunas (texto)',
+		plural: 'Três colunas',
+		singular: 'Três colunas',
 	},
 	slug: 'three-columns-text',
 };

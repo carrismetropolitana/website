@@ -35,7 +35,18 @@ export const CardBlock: Block = {
 				},
 			},
 			defaultValue: '#000000',
-			label: 'Cor do texto',
+			label: 'Cor do título e número',
+			name: 'titleColor',
+			type: 'text',
+		},
+		{
+			admin: {
+				components: {
+					Field: '@/components/ButtonColorField#ButtonColorField',
+				},
+			},
+			defaultValue: '#000000',
+			label: 'Cor da descrição',
 			name: 'textColor',
 			type: 'text',
 		},

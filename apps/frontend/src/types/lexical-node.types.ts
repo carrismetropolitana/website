@@ -73,6 +73,7 @@ export interface LexicalNode {
 		text?: LexicalRichText | string
 		textColor?: string
 		title?: string
+		titleColor?: string
 		url?: string
 		variant?: 'alerts' | 'brand2' | 'brand' | 'debug' | 'default' | 'muted' | 'persistent' | 'standout' | 'success' | 'warning'
 		video?: {

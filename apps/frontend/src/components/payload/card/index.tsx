@@ -12,6 +12,7 @@ interface PayloadCardProps {
 	cards?: unknown
 	primaryColor?: unknown
 	textColor?: unknown
+	titleColor?: unknown
 }
 
 interface PayloadCardItem {
@@ -25,12 +26,14 @@ interface CustomCSSProperties extends CSSProperties {
 	'--color-border'?: string
 	'--color-primary': string
 	'--color-text': string
+	'--color-title': string
 }
 
-export function Card({ borderColor, cards, primaryColor, textColor }: PayloadCardProps) {
+export function Card({ borderColor, cards, primaryColor, textColor, titleColor }: PayloadCardProps) {
 	// A. Transform data
 	const primary = typeof primaryColor === 'string' ? primaryColor : undefined;
-	const text = typeof textColor === 'string' ? textColor : undefined;
+	const text = typeof textColor === 'string' && textColor.trim().length > 0 ? textColor : 'var(--color-system-text-100)';
+	const title = typeof titleColor === 'string' ? titleColor : text;
 	const border = typeof borderColor === 'string' ? borderColor : undefined;
 
 	const cardItems: PayloadCardItem[] = Array.isArray(cards)
@@ -43,12 +46,13 @@ export function Card({ borderColor, cards, primaryColor, textColor }: PayloadCar
 		: [];
 
 	// B. Render components
-	if (!cardItems.length || !primary || !text) return null;
+	if (!cardItems.length || !primary || !title) return null;
 
 	const colors: CustomCSSProperties = {
 		'--color-border': border ?? primary,
 		'--color-primary': primary,
 		'--color-text': text,
+		'--color-title': title,
 	};
 
 	return (

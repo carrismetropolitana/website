@@ -85,8 +85,8 @@ const SAFE_NESTED_BLOCKS: Block[] = [
 			},
 		] as Field[],
 		labels: {
-			plural: 'Três colunas (texto)',
-			singular: 'Três colunas (texto)',
+			plural: 'Três colunas',
+			singular: 'Três colunas',
 		},
 		slug: 'three-columns-text',
 	},
@@ -109,8 +109,8 @@ const SAFE_NESTED_BLOCKS: Block[] = [
 			},
 		] as Field[],
 		labels: {
-			plural: 'Duas colunas (texto)',
-			singular: 'Duas colunas (texto)',
+			plural: 'Duas colunas',
+			singular: 'Duas colunas',
 		},
 		slug: 'two-columns-text',
 	},
@@ -185,7 +185,18 @@ const SAFE_NESTED_BLOCKS: Block[] = [
 					},
 				},
 				defaultValue: '#000000',
-				label: 'Cor do texto (hex/rgb)',
+				label: 'Cor do título e número (hex/rgb)',
+				name: 'titleColor',
+				type: 'text',
+			},
+			{
+				admin: {
+					components: {
+						Field: '@/components/ButtonColorField#ButtonColorField',
+					},
+				},
+				defaultValue: '#000000',
+				label: 'Cor da descrição (hex/rgb)',
 				name: 'textColor',
 				type: 'text',
 			},

@@ -22,6 +22,7 @@ interface CustomCSSProperties extends CSSProperties {
 	'--color-border'?: string
 	'--color-primary': string
 	'--color-text': string
+	'--color-title': string
 }
 
 /* * */
