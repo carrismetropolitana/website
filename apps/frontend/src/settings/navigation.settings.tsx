@@ -24,7 +24,9 @@ export const mainNavigationGroup: NavigationGroup[] = [
 			{ _id: 'tickets', href: '/tickets', icon: <IconTicket /> },
 			{ _id: 'cards', href: '/cards', icon: <IconCreditCardPay /> },
 			{ _id: 'helpdesks', href: '/helpdesks', icon: <IconMapQuestion /> },
-			{ _id: 'tap-and-ride', href: 'https://tap-and-ride.carrismetropolitana.pt', icon: <IconListSearch />, target: '_blank' },
+			{ _id: 'portal-utilizador', href: 'https://tap-and-ride.carrismetropolitana.pt', icon: <IconListSearch />, target: '_blank' },
+			{ _id: 'tap-and-ride', href: '/tap-and-ride', icon: <IconListSearch /> },
+
 		],
 	},
 
