@@ -2221,7 +2221,14 @@
 		}
 	},
 	"tap-and-ride": {
-		"title": "Tap & Ride"
+		"Section1": {
+			"what_is": {
+				"content": "O Tap&Ride permite aos passageiros utilizarem cartões bancários com tecnologia contactless como forma de pagamento direto da tarifa de bordo nos autocarros, proporcionando uma alternativa prática, rápida e sem necessidade de dinheiro físico ou títulos de transporte pré-comprados.",
+				"title": "O que é?"
+			}
+		},
+		"heading": "Tap&Ride: Pagamento com cartão bancário contactless",
+		"subheading": "Selecione abaixo para onde deseja navegar"
 	},
 	"tickets": {
 		"Pricing": {

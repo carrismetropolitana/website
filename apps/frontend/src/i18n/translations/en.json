@@ -2219,7 +2219,14 @@
 		}
 	},
 	"tap-and-ride": {
-		"title": "Tap & Ride"
+		"Section1": {
+			"what_is": {
+				"content": "The Tap&Ride allows passengers to use contactless bank cards as a direct payment for the on-board fare on buses, providing a practical, fast, and cashless alternative without the need for physical money or pre-purchased transport titles.",
+				"title": "What is?"
+			}
+		},
+		"heading": "Tap&Ride: Payment with contactless bank card",
+		"subheading": "Select below to where you want to navigate"
 	},
 	"tickets": {
 		"Pricing": {

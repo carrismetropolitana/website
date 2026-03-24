@@ -1,0 +1,32 @@
+.imagesWrapper {
+    display: grid;
+    width: 50%;
+    margin-top: var(--size-spacing-20);
+    margin-bottom: 
+    var(--size-spacing-10);
+}
+
+.imageMap {
+    width: 100%;
+    height: auto;
+    margin-top: var(--size-spacing-20);
+    object-fit: cover;
+}
+
+@media (width <= 650px) {
+	.imageMap {
+		width: 100%;
+        height: auto;
+        margin-top: var(--size-spacing-20);
+        object-fit: cover;
+	}
+}
+
+@media (width > 650px) {
+	.imageMap {
+	width: 100%;
+    height: auto;
+    margin-top: var(--size-spacing-20);
+    object-fit: cover;
+	}
+}
