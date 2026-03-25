@@ -1,8 +1,8 @@
 'use client';
 /* * */
 
+import { useRenderLexicalNode } from '@/components/payload/lexical-renderer';
 import { LexicalNode } from '@/types/lexical-node.types';
-import { useRenderLexicalNode } from '@/utils/renderLexicalNode';
 
 /* * */
 

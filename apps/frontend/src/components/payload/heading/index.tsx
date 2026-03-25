@@ -3,7 +3,7 @@
 
 import type { LexicalNode } from '@/types/lexical-node.types';
 
-import { useRenderLexicalNode } from '@/utils/renderLexicalNode';
+import { useRenderLexicalNode } from '@/components/payload/lexical-renderer';
 import { extractTextFromNode, slugify } from '@/utils/sidebarHelper';
 import { useMemo } from 'react';
 
