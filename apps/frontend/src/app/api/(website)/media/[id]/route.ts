@@ -6,7 +6,7 @@ export async function GET(_request: Request, { params }: { params: Promise<{ id:
 
 	const { id } = await params;
 	const baseUrl = (process.env.PAYLOAD_BASE_URL ?? 'https://placeholder.pt').replace(/\/$/, '');
-	const PAYLOAD_API = `${baseUrl}/admin/api/media`;
+	const PAYLOAD_API = `${baseUrl}/admin/api/media/file`;
 
 	//
 	// B. Fetch data

@@ -2260,7 +2260,7 @@
 		"TicketsHeader": {
 			"heading": "Occasional Tickets",
 			"onboard": {
-				"description": "You can travel on Carris Metropolitana by purchasing a ticket directly from the driver (in cash), or by using a contactless bank card at the yellow validator.",
+				"description": "You can travel on Carris Metropolitana by purchasing a ticket directly from the driver (in cash), or by using a contactless bank card at the yellow validator of some vehicles, in areas 1, 2 and 3.",
 				"inner": {
 					"description": "Check and update invoice data for payments made with a contactless bank card.",
 					"title": "User Portal"

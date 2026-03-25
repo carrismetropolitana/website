@@ -2262,7 +2262,7 @@
 		"TicketsHeader": {
 			"heading": "Bilhetes Ocasionais",
 			"onboard": {
-				"description": "Pode viajar na Carris Metropolitana adquirindo um bilhete diretamente ao motorista (em numerário), ou utilizando um cartão bancário contactless, no validador amarelo.",
+				"description": "Pode viajar na Carris Metropolitana adquirindo um bilhete diretamente ao motorista (em numerário), ou utilizando um cartão bancário contactless, no validador amarelo de algumas viaturas das áreas 1,2 e 3.",
 				"inner": {
 					"description": "Consultar e atualizar dados de faturas de pagamentos feitos com cartão bancário contactless.",
 					"title": "Portal do Utilizador"

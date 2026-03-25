@@ -1,6 +1,7 @@
 /* * */
 
 import payloadConfig from '@/payload-config';
+import { getPublicHeaders } from '@/utils/get-public-headers';
 import { getPayload } from 'payload';
 
 /* * */
@@ -22,7 +23,7 @@ export async function POST(request: Request) {
 		if (!name || !surname || !email || !organization || !subject || !message) {
 			return Response.json(
 				{ error: 'Todos os campos obrigatórios devem ser preenchidos.', success: false },
-				{ status: 400 },
+				{ headers: getPublicHeaders(null), status: 400 },
 			);
 		}
 
@@ -31,7 +32,7 @@ export async function POST(request: Request) {
 		if (!emailRegex.test(email)) {
 			return Response.json(
 				{ error: 'Por favor insira um endereço de email válido.', success: false },
-				{ status: 400 },
+				{ headers: getPublicHeaders(null), status: 400 },
 			);
 		}
 
@@ -245,14 +246,14 @@ Data: ${new Date().toLocaleString('pt-PT')}
 
 		return Response.json(
 			{ message: 'Mensagem enviada com sucesso! Entraremos em contacto em breve.', success: true },
-			{ status: 200 },
+			{ headers: getPublicHeaders(null), status: 200 },
 		);
 	}
 	catch (error) {
 		console.error('Error sending press contact email:', error);
 		return Response.json(
 			{ error: 'Erro ao enviar mensagem. Por favor tente novamente mais tarde.', success: false },
-			{ status: 500 },
+			{ headers: getPublicHeaders(null), status: 500 },
 		);
 	}
 
