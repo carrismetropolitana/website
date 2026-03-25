@@ -13,8 +13,6 @@ interface Props {
 
 export function Spacer({ height = 20 }: Props): ReactElement {
 	const px = typeof height === 'number' && !Number.isNaN(height) ? height : Number(height) || 20;
-
-	// Padding survives flex layouts better than height on empty boxes (Section.childrenWrapper is flex).
 	const style: CSSProperties = {
 		alignSelf: 'stretch',
 		boxSizing: 'border-box',
