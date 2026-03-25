@@ -127,7 +127,7 @@ const nextConfig: NextConfig = {
 
 			{ destination: '/vehicles', permanent: true, source: '/veiculos' },
 			{ destination: '/vehicles', permanent: true, source: '/frota' },
-			{ destination: '/resultados-inquerito-2025', permanent: true, source: '/news/inquerito-de-satisfaçao-ao-passageiro' },
+			{ destination: '/news/inquerito-de-satisfaçao-ao-passageiro', permanent: true, source: '/resultados-inquerito-2025' },
 			/* * */
 			/* UNLISTED */
 
