@@ -10,6 +10,8 @@ import { processBodyImages } from '@/utils/livePreviewImages';
 import { Skeleton } from '@mantine/core';
 import { useEffect, useState } from 'react';
 
+import styles from './styles.module.css';
+
 /* * */
 
 interface CampaignDetailContentProps {
@@ -46,16 +48,16 @@ export function CampaignDetailContent({ data }: CampaignDetailContentProps) {
 		return <Skeleton height={100} />;
 	}
 
+	const body = data.body && bodyRoot ? (
+		<div className={styles.lexicalRoot}>{renderLexicalNode(bodyRoot)}</div>
+	) : null;
+
 	return data.has_default_surface ? (
 		<Surface>
-			<Section withPadding>
-				{data.body && bodyRoot && renderLexicalNode(bodyRoot)}
-			</Section>
+			<Section withPadding>{body}</Section>
 		</Surface>
 	) : (
-		<>
-			{data.body && bodyRoot && renderLexicalNode(bodyRoot)}
-		</>
+		<Section withPadding>{body}</Section>
 	);
 
 	//
