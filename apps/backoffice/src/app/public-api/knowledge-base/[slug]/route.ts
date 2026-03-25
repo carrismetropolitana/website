@@ -32,7 +32,7 @@ export const GET = async (_request: Request, { params }: { params: Promise<{ slu
 	// Check if item was found
 
 	if (!foundItems.docs.length) {
-		return Response.json({ error: 'Item not found' }, { status: 404 });
+		return Response.json({ error: 'Item not found' }, { headers: getPublicHeaders(null), status: 404 });
 	}
 
 	const item = foundItems.docs[0];

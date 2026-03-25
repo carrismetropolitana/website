@@ -18,7 +18,7 @@ import { TwoColumnsText } from '@/components/payload/TwoColumnsText';
 import { TwoColumnsTextImage } from '@/components/payload/TwoColumnsTextImage';
 import { Video } from '@/components/payload/video';
 import { getLexicalRoot } from '@/utils/getLexicalRoot';
-import { getRelationshipImageUrl } from '@/utils/getRelationshipImageUrl';
+import { getResolvedRelationshipImageUrl } from '@/utils/getRelationshipImageUrl';
 
 /* * */
 
@@ -68,7 +68,7 @@ export function renderBlock(node: LexicalNode, key: number | undefined, renderNo
 		case 'spacer': return <Spacer key={key} height={node.fields?.height} />;
 		case 'surface': {
 			const contentRoot = getLexicalRoot(node.fields?.content);
-			const backgroundImageUrl = getRelationshipImageUrl(node.fields?.backgroundImage);
+			const backgroundImageUrl = getResolvedRelationshipImageUrl(node.fields?.backgroundImage);
 			return (
 				<Surface key={key} backgroundImageUrl={node.fields?.hasBackgroundImage ? backgroundImageUrl : undefined} backgroundOverlay={node.fields?.backgroundOverlay} forceOverflow={node.fields?.forceOverflow} fullHeight={node.fields?.fullHeight} variant={node.fields?.variant}>
 					{contentRoot ? renderNode(contentRoot) : null}

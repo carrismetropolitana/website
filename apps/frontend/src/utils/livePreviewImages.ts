@@ -90,62 +90,84 @@ export async function processUploadNode(node: any): Promise<any> {
 
 /* * */
 
+async function processSurfaceBackgroundImage(block: any, prevBlock?: any) {
+	const f = block?.fields;
+	if (!f?.hasBackgroundImage) return block;
+	if (!f?.backgroundImage) return block;
+
+	if (hasImageUrl(f.backgroundImage)) return block;
+
+	const prevBg = prevBlock?.fields?.backgroundImage;
+	if (prevBg && hasImageUrl(prevBg)) {
+		return { ...block, fields: { ...f, backgroundImage: prevBg } };
+	}
+
+	const id = getImageId(f.backgroundImage);
+	if (!id) return block;
+
+	const media = await fetchMedia(id);
+	return media ? { ...block, fields: { ...f, backgroundImage: media } } : block;
+}
+
+/**
+ * Walks the full Lexical tree (including nested blocks inside section/surface content)
+ * so surface backgrounds and uploads resolve everywhere, not only at the document root.
+ */
+async function processLexicalNode(node: any, prevNode: any): Promise<any> {
+	if (!node || typeof node !== 'object') return node;
+
+	let result = node;
+
+	if (result.fields?.content?.root?.children) {
+		const prevContent = prevNode?.fields?.content;
+		const processedContent = await processLexicalBody(result.fields.content, prevContent);
+		result = { ...result, fields: { ...result.fields, content: processedContent } };
+	}
+
+	if (result.type === 'upload') {
+		return processUploadNode(result);
+	}
+
+	if (result.type === 'block') {
+		const f = result.fields;
+		if (f?.blockType === 'gallery' && f?.images) {
+			const prevImages = prevNode?.fields?.images || [];
+			const images = await processGalleryImages(f.images, prevImages);
+			result = { ...result, fields: { ...result.fields, images } };
+		}
+		if (f?.blockType === 'surface') {
+			result = await processSurfaceBackgroundImage(result, prevNode);
+		}
+		if (f?.blockType === 'spacer') {
+			return result;
+		}
+	}
+
+	if (Array.isArray(result.children)) {
+		const prevChildren = prevNode?.children;
+		result = {
+			...result,
+			children: await Promise.all(
+				result.children.map((child: any, i: number) => processLexicalNode(child, prevChildren?.[i])),
+			),
+		};
+	}
+
+	return result;
+}
+
+async function processLexicalBody(body: any, prevBody: any): Promise<any> {
+	if (!body?.root?.children) return body;
+	const prevChildren = prevBody?.root?.children || [];
+	const children = await Promise.all(
+		body.root.children.map((c: any, i: number) => processLexicalNode(c, prevChildren[i])),
+	);
+	return { ...body, root: { ...body.root, children } };
+}
+
+/* * */
+
 export async function processBodyImages(body: any, prevBody?: any): Promise<any> {
 	if (!body?.root?.children) return body;
-
-	const prevGalleryBlocks = prevBody?.root?.children?.filter(
-		(c: any) => c.type === 'block' && c.fields?.blockType === 'gallery',
-	) || [];
-
-	const prevSurfaceBlocks = prevBody?.root?.children?.filter(
-		(c: any) => c.type === 'block' && c.fields?.blockType === 'surface',
-	) || [];
-
-	const processSurfaceBackgroundImage = async (block: any, prevBlock?: any) => {
-		const f = block?.fields;
-		if (!f?.hasBackgroundImage) return block;
-		if (!f?.backgroundImage) return block;
-
-		// If we already have a URL, nothing to do.
-		if (hasImageUrl(f.backgroundImage)) return block;
-
-		// Reuse previous resolved media if possible (avoid extra network calls).
-		const prevBg = prevBlock?.fields?.backgroundImage;
-		if (prevBg && hasImageUrl(prevBg)) {
-			return { ...block, fields: { ...f, backgroundImage: prevBg } };
-		}
-
-		const id = getImageId(f.backgroundImage);
-		if (!id) return block;
-
-		const media = await fetchMedia(id);
-		return media ? { ...block, fields: { ...f, backgroundImage: media } } : block;
-	};
-
-	const processedChildren = await Promise.all(
-		body.root.children.map(async (block: any, index: number) => {
-			const isGallery = block.type === 'block' && block.fields?.blockType === 'gallery' && block.fields?.images;
-			const isSurface = block.type === 'block' && block.fields?.blockType === 'surface';
-			const isSpacer = block.type === 'block' && block.fields?.blockType === 'spacer';
-
-			if (isGallery) {
-				const prevBlock = prevGalleryBlocks[index] ?? prevGalleryBlocks.find((b: any) => b.fields?.blockType === 'gallery');
-				const prevImages = prevBlock?.fields?.images || [];
-				const images = await processGalleryImages(block.fields.images, prevImages);
-				return { ...block, fields: { ...block.fields, images } };
-			}
-
-			// Spacers have only numeric height; don't touch them in post-processing.
-			if (isSpacer) return block;
-
-			if (isSurface) {
-				const prevBlock = prevSurfaceBlocks[index] ?? prevSurfaceBlocks.find((b: any) => b.fields?.blockType === 'surface');
-				return processSurfaceBackgroundImage(block, prevBlock);
-			}
-
-			return processUploadNode(block);
-		}),
-	);
-
-	return { ...body, root: { ...body.root, children: processedChildren } };
+	return processLexicalBody(body, prevBody);
 }

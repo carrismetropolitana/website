@@ -8,7 +8,9 @@ import { getPayload } from 'payload';
 
 export const GET = async (_request: Request, { params }: { params: Promise<{ slug: string }> }) => {
 	const { slug } = await params;
-	if (!slug) return Response.json({ error: 'Campaign slug required' }, { status: 400 });
+	if (!slug) {
+		return Response.json({ error: 'Campaign slug required' }, { headers: getPublicHeaders(null), status: 400 });
+	}
 
 	const payload = await getPayload({ config: payloadConfig });
 
@@ -26,7 +28,7 @@ export const GET = async (_request: Request, { params }: { params: Promise<{ slu
 	});
 
 	if (!foundCampaigns.docs.length) {
-		return Response.json({ error: 'Campaign not found' }, { status: 404 });
+		return Response.json({ error: 'Campaign not found' }, { headers: getPublicHeaders(null), status: 404 });
 	}
 
 	const campaign = foundCampaigns.docs[0];
