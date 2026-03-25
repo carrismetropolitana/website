@@ -3,8 +3,8 @@
 
 import type { PayloadLexicalLinkProps } from '@/types/link.types';
 
-import { CustomLink } from '@/components/payload/links/CustomLink';
 import { useRenderLexicalNode } from '@/components/payload/lexical-renderer';
+import { CustomLink } from '@/components/payload/links/CustomLink';
 
 /* * */
 

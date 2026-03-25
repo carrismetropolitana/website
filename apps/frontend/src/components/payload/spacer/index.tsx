@@ -3,6 +3,8 @@
 
 import React, { type CSSProperties, type ReactElement } from 'react';
 
+import styles from './styles.module.css';
+
 /* * */
 
 interface Props {
@@ -13,14 +15,10 @@ interface Props {
 
 export function Spacer({ height = 20 }: Props): ReactElement {
 	const px = typeof height === 'number' && !Number.isNaN(height) ? height : Number(height) || 20;
-	const style: CSSProperties = {
-		alignSelf: 'stretch',
-		boxSizing: 'border-box',
-		flexShrink: 0,
-		minWidth: 0,
-		paddingTop: `${px}px`,
-		width: '100%',
-	};
 
-	return <div style={style} aria-hidden />;
+	const style = {
+		'--spacer-height': `${px}px`,
+	} as CSSProperties;
+
+	return <div className={styles.root} style={style} aria-hidden />;
 }

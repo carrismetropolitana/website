@@ -1,8 +1,0 @@
-.lexicalRoot {
-	box-sizing: border-box;
-	display: block;
-	flex: 0 1 auto;
-	align-self: stretch;
-	width: 100%;
-	min-width: 0;
-}

@@ -1,16 +1,15 @@
 'use client';
-import { Section } from '@/components/layout/Section';
-import { Surface } from '@/components/layout/Surface';
 /* * */
 
+import { Section } from '@/components/layout/Section';
+import { Surface } from '@/components/layout/Surface';
 import { useRenderLexicalNode } from '@/components/payload/lexical-renderer';
 import { CampaignData } from '@/types/campaign.types';
 import { getLexicalRoot } from '@/utils/getLexicalRoot';
 import { processBodyImages } from '@/utils/livePreviewImages';
+import { parseCampaignBody } from '@/utils/parseCampaignBody';
 import { Skeleton } from '@mantine/core';
 import { useEffect, useState } from 'react';
-
-import styles from './styles.module.css';
 
 /* * */
 
@@ -31,26 +30,21 @@ export function CampaignDetailContent({ data }: CampaignDetailContentProps) {
 		if (!data?.body) return;
 
 		try {
-			const parsed = typeof data.body === 'string' ? JSON.parse(data.body) : data.body;
-			processBodyImages(parsed).then(setProcessedBody);
+			processBodyImages(data.body).then(setProcessedBody);
 		}
 		catch {
 			setProcessedBody(null);
 		}
 	}, [data?.body]);
 
-	const bodyRoot = getLexicalRoot(processedBody ?? data?.body);
-
 	//
 	// B. Render components
 
-	if (!data?.body || !bodyRoot) {
+	if (!data?.body) {
 		return <Skeleton height={100} />;
 	}
 
-	const body = data.body && bodyRoot ? (
-		<div className={styles.lexicalRoot}>{renderLexicalNode(bodyRoot)}</div>
-	) : null;
+	const body = data.body ? (<div key={data.slug ?? data.id}>{renderLexicalNode(getLexicalRoot(parseCampaignBody(processedBody ?? data?.body)))}</div>) : null;
 
 	return data.has_default_surface ? (
 		<Surface>
