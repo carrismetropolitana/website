@@ -216,12 +216,16 @@ export const LinesDetailContextProvider = ({ children, lineId }) => {
 			if (!isActive) return false;
 
 			return simplifiedAlertData.informed_entity.some((informedEntity) => {
-				const isForThisLine = informedEntity.line_id == null || informedEntity.line_id === lineId;
+				const lineOperatorDigit = lineId?.trim().slice(0, 1);
+				const informedAgencyId = informedEntity.agency_id?.trim();
+				const informedOperatorDigit = informedAgencyId?.slice(-1);
+				const hasMatchingArea = informedOperatorDigit != null && lineOperatorDigit != null && informedOperatorDigit === lineOperatorDigit;
+				if (hasMatchingArea) return true;
 
+				const isForThisLine = informedEntity.line_id == null || informedEntity.line_id === lineId;
 				if (!isForThisLine) return false;
 
 				const hasMatchingRoute = dataLineState?.route_ids?.includes(informedEntity.route_id || '');
-
 				const hasMatchingStop = informedEntity.stop_id != null && dataAllPatternsState?.some(pattern =>
 					pattern.some(patternGroup => patternGroup.path.some(waypoint => waypoint.stop_id === informedEntity.stop_id)),
 				);
