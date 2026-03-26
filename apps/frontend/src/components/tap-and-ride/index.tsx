@@ -3,8 +3,8 @@
 /* * */
 
 import { Surface } from '@/components/layout/Surface';
-import { TapAndRideContent } from '@/components/tap-and-ride/tapAndRideContent';
-import { TapAndRideHeader } from '@/components/tap-and-ride/tapAndRideHeader';
+import { TapAndRideContent } from '@/components/tap-and-ride/TapAndRideContent';
+import { TapAndRideHeader } from '@/components/tap-and-ride/TapAndRideHeader';
 import { IconArrowLeft } from '@tabler/icons-react';
 import { useTranslations } from 'next-intl';
 import Link from 'next/link';

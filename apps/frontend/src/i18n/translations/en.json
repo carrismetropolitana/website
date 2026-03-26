@@ -2231,9 +2231,11 @@
 				"title": "What is?"
 			},
 			"where_available": {
-				"content": "Esta nova opção está disponível nas linhas cujo número começa por 1, 2 ou 3, correspondentes às áreas já abrangidas. As linhas que começam por 4 serão incluídas em breve.",
-				"subcontent": "É possível verificar a sua existência a bordo do autocarro, consultando os métodos de pagamento disponíveis, presentes no visor do validador amarelo. Se o ecrã do validador apresentar uma faixa amarela com os ícones de Multibanco / VISA / MasterCard e Apple Pay/Google Pay, como na imagem abaixo, aceita o pagamento Tap&Ride.",
-				"title": "Onde está disponível?"
+				"buttonLabel": "Saber mais",
+				"content": "This new option is available on lines whose number starts with 1, 2 or 3, corresponding to the areas already covered. Lines starting with 4 will be included soon.",
+				"subcontent": "It is possible to check its existence on the bus, by consulting the available payment methods, present on the yellow validator screen. If the validator screen displays a yellow band with the icons of Multibanco / VISA / MasterCard and Apple Pay/Google Pay, as in the image below, it accepts the Tap&Ride payment.",
+				"subcontent2": "You can also check through real-time schedules or on the map below, which vehicles have this payment method:",
+				"title": "Where is it available?"
 			}
 		},
 		"Section3": {

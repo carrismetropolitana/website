@@ -1,10 +1,10 @@
 'use client';
 
-import { Accordion, AccordionControl, AccordionItem, AccordionPanel } from '@mantine/core';
-/* * */
-
-import { Section } from '@/components/layout/Section';
+import Button from '@/components/common/Button';
+import { TapAndRideAccordion } from '@/components/tap-and-ride/TapAndRideAccordion';
+import { VehiclesListMap } from '@/components/vehicles/VehiclesListMap';
 import { Image } from '@mantine/core';
+import { IconBook } from '@tabler/icons-react';
 import { useTranslations } from 'next-intl';
 
 import styles from './styles.module.css';
@@ -26,25 +26,32 @@ export function TapAndRideSection1() {
 	// B. Render components
 
 	return (
-		<Section withPadding>
-			<Image alt="Tap and Ride" src="/assets/tap-and-ride/what_is_banner.svg" />
-			<Accordion className={styles.accordion}>
-				{whatIsItem && (
-					<AccordionItem value={whatIsItem.id}>
-						<AccordionControl><span className={styles.accordionControl}>{t(whatIsItem.title)}</span></AccordionControl>
-						<AccordionPanel>
-							<div>{t(whatIsItem.content)}</div>
-							{whereAvailableItem && (
-								<>
-									<div className={styles.accordionControl}>{t(whereAvailableItem.title)}</div>
-									<div>{t(whereAvailableItem.content)}</div>
-									{whereAvailableItem.subcontent && <div>{t(whereAvailableItem.subcontent)}</div>}
-								</>
-							)}
-						</AccordionPanel>
-					</AccordionItem>
-				)}
-			</Accordion>
-		</Section>
+		<TapAndRideAccordion
+			imageAlt="Tap and Ride"
+			imageSrc="/assets/tap-and-ride/what_is_banner.svg"
+			items={whatIsItem ? [{
+				id: whatIsItem.id,
+				panel: (
+					<>
+						<div className={styles.whatIsContentContainer}>{t(whatIsItem.content)}</div>
+						<div className={styles.whereAvailableContentContainer}>
+							<p className={styles.title}>{t(whereAvailableItem.title)}</p>
+							<p className={styles.content}>{t(whereAvailableItem.content)}</p>
+							<div className={styles.subcontentContainer}>
+								<p className={styles.subcontentText}>{t(whereAvailableItem.subcontent)}</p>
+								<Image className={styles.subcontentImage} fallbackSrc="/assets/common/placeholder.png" src="/assets/tap-and-ride/validator_tap-and-ride.png" />
+								<p className={styles.subcontentText}>{t(whereAvailableItem.subcontent2)}</p>
+								<div className={styles.vehiclesListMapContainer}>
+									<VehiclesListMap toolbar={false} />
+								</div>
+								<Button className={styles.button} icon={<IconBook />} label={t('Section1.where_available.buttonLabel')} variant="primary" />
+							</div>
+						</div>
+
+					</>
+				),
+				title: t(whatIsItem.title),
+			}] : []}
+		/>
 	);
 }
