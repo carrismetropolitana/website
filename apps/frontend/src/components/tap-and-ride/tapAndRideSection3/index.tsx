@@ -35,7 +35,7 @@ export function TapAndRideSection3() {
 	};
 
 	return (
-		<Section heading={t('heading')} subheading={t('subheading')} withPadding>
+		<Section withPadding>
 			<Accordion className={styles.accordion}>
 				<Image alt="Tap and Ride" src="/assets/tap-and-ride/what_is_banner.svg" />
 				{data.map(item => renderAccordionItem(item))}

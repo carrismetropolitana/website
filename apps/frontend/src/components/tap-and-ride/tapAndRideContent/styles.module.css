@@ -1,7 +1,11 @@
 .contentRow {
 	display: flex;
-	flex-direction: row;
+	flex-wrap: wrap;
 	gap: var(--size-spacing-5);
 	align-items: center;
-	justify-content: flex-start;
+	justify-content: center;
+}
+
+.contentRow > * {
+	flex: 0 0 calc((100% - (2 * var(--size-spacing-5))) / 3);
 }
