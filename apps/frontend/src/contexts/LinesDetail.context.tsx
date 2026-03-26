@@ -216,16 +216,45 @@ export const LinesDetailContextProvider = ({ children, lineId }) => {
 			if (!isActive) return false;
 
 			return simplifiedAlertData.informed_entity.some((informedEntity) => {
-				const lineOperatorDigit = lineId?.trim().slice(0, 1);
+				const normalizedLineId = lineId?.trim();
+				const lineOperatorDigit = normalizedLineId?.match(/\d/)?.[0];
 				const informedAgencyId = informedEntity.agency_id?.trim();
 				const informedOperatorDigit = informedAgencyId?.slice(-1);
 				const hasMatchingArea = informedOperatorDigit != null && lineOperatorDigit != null && informedOperatorDigit === lineOperatorDigit;
-				if (hasMatchingArea) return true;
+				const areaOk = !informedAgencyId || hasMatchingArea;
 
+				if (!areaOk) return false;
+
+				if (informedEntity.line_id != null) return informedEntity.line_id.trim() === normalizedLineId;
+
+				if (informedEntity.route_id != null) return dataLineState?.route_ids?.includes(informedEntity.route_id);
+
+				if (informedEntity.stop_id != null) {
+					return dataAllPatternsState?.some(pattern => pattern.some(patternGroup => patternGroup.path.some(waypoint => waypoint.stop_id === informedEntity.stop_id)));
+				}
+
+				return true;
+			});
+		});
+
+		setDataActiveAlertsState(activeAlerts);
+	}, [alertsContext.data.simplified, lineId, dataLineState, dataAllPatternsState]);
+
+	useEffect(() => {
+		if (!alertsContext.data.simplified) return;
+
+		const activeAlerts = alertsContext.data.simplified.filter((simplifiedAlertData) => {
+			const isActive = (simplifiedAlertData.end_date && !isNaN(simplifiedAlertData.end_date.getTime())) ? new Date(simplifiedAlertData.end_date).getTime() >= new Date().getTime() : true;
+
+			if (!isActive) return false;
+
+			return simplifiedAlertData.informed_entity.some((informedEntity) => {
 				const isForThisLine = informedEntity.line_id == null || informedEntity.line_id === lineId;
+
 				if (!isForThisLine) return false;
 
 				const hasMatchingRoute = dataLineState?.route_ids?.includes(informedEntity.route_id || '');
+
 				const hasMatchingStop = informedEntity.stop_id != null && dataAllPatternsState?.some(pattern =>
 					pattern.some(patternGroup => patternGroup.path.some(waypoint => waypoint.stop_id === informedEntity.stop_id)),
 				);
