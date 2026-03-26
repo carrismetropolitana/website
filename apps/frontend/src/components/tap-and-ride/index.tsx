@@ -3,8 +3,8 @@
 /* * */
 
 import { Surface } from '@/components/layout/Surface';
+import { TapAndRideContent } from '@/components/tap-and-ride/tapAndRideContent';
 import { TapAndRideHeader } from '@/components/tap-and-ride/tapAndRideHeader';
-import { TapAndRideSection1 } from '@/components/tap-and-ride/tapAndRideSection1';
 import { IconArrowLeft } from '@tabler/icons-react';
 import { useTranslations } from 'next-intl';
 import Link from 'next/link';
@@ -19,7 +19,7 @@ export function TapAndRide() {
 	//
 	// A. Setup variables
 
-	const commonT = useTranslations('common');
+	const common = useTranslations('common');
 
 	//
 	// B. Render components
@@ -29,11 +29,11 @@ export function TapAndRide() {
 			<div className={styles.backButton}>
 				<Link className={styles.container} href="/">
 					<IconArrowLeft size={14} />
-					<span className={styles.label}>{commonT('BackButton.label')}</span>
+					<span className={styles.label}>{common('BackButton.label')}</span>
 				</Link>
 			</div>
 			<TapAndRideHeader />
-			<TapAndRideSection1 />
+			<TapAndRideContent />
 		</Surface>
 	);
 
