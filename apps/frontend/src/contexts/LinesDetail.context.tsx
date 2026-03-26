@@ -216,17 +216,24 @@ export const LinesDetailContextProvider = ({ children, lineId }) => {
 			if (!isActive) return false;
 
 			return simplifiedAlertData.informed_entity.some((informedEntity) => {
-				const isForThisLine = informedEntity.line_id == null || informedEntity.line_id === lineId;
+				const normalizedLineId = lineId?.trim();
+				const lineOperatorDigit = normalizedLineId?.match(/\d/)?.[0];
+				const informedAgencyId = informedEntity.agency_id?.trim();
+				const informedOperatorDigit = informedAgencyId?.slice(-1);
+				const hasMatchingArea = informedOperatorDigit != null && lineOperatorDigit != null && informedOperatorDigit === lineOperatorDigit;
+				const areaOk = !informedAgencyId || hasMatchingArea;
 
-				if (!isForThisLine) return false;
+				if (!areaOk) return false;
 
-				const hasMatchingRoute = dataLineState?.route_ids?.includes(informedEntity.route_id || '');
+				if (informedEntity.line_id != null) return informedEntity.line_id.trim() === normalizedLineId;
 
-				const hasMatchingStop = informedEntity.stop_id != null && dataAllPatternsState?.some(pattern =>
-					pattern.some(patternGroup => patternGroup.path.some(waypoint => waypoint.stop_id === informedEntity.stop_id)),
-				);
+				if (informedEntity.route_id != null) return dataLineState?.route_ids?.includes(informedEntity.route_id);
 
-				return hasMatchingRoute || hasMatchingStop;
+				if (informedEntity.stop_id != null) {
+					return dataAllPatternsState?.some(pattern => pattern.some(patternGroup => patternGroup.path.some(waypoint => waypoint.stop_id === informedEntity.stop_id)));
+				}
+
+				return true;
 			});
 		});
 
