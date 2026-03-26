@@ -20,25 +20,30 @@ export function TapAndRideSection1() {
 	// A. Setup variables
 
 	const t = useTranslations('tap-and-ride');
-	const data = tapAndRideData;
+	const [whatIsItem, whereAvailableItem] = tapAndRideData;
 
 	//
 	// B. Render components
 
-	const renderAccordionItem = (item: { content: string, id: string, title: string }) => {
-		return (
-			<AccordionItem key={item.id} value={item.id}>
-				<AccordionControl><span className={styles.accordionControl}>{t(item.title)}</span></AccordionControl>
-				<AccordionPanel><div>{t(item.content)}</div></AccordionPanel>
-			</AccordionItem>
-		);
-	};
-
 	return (
 		<Section withPadding>
+			<Image alt="Tap and Ride" src="/assets/tap-and-ride/what_is_banner.svg" />
 			<Accordion className={styles.accordion}>
-				<Image alt="Tap and Ride" src="/assets/tap-and-ride/what_is_banner.svg" />
-				{data.map(item => renderAccordionItem(item))}
+				{whatIsItem && (
+					<AccordionItem value={whatIsItem.id}>
+						<AccordionControl><span className={styles.accordionControl}>{t(whatIsItem.title)}</span></AccordionControl>
+						<AccordionPanel>
+							<div>{t(whatIsItem.content)}</div>
+							{whereAvailableItem && (
+								<>
+									<div className={styles.accordionControl}>{t(whereAvailableItem.title)}</div>
+									<div>{t(whereAvailableItem.content)}</div>
+									{whereAvailableItem.subcontent && <div>{t(whereAvailableItem.subcontent)}</div>}
+								</>
+							)}
+						</AccordionPanel>
+					</AccordionItem>
+				)}
 			</Accordion>
 		</Section>
 	);

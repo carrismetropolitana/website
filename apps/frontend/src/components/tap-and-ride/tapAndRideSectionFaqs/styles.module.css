@@ -13,31 +13,16 @@
 /* * */
 /* Accordion Control */
 
+
 .accordionControl {
 	font-size: var(--font-size-title);
 	font-weight: var(--font-weight-title);
 	color: var(--color-system-text-100);
 }
 
-.imagesWrapper {
-    display: grid;
-    width: 100%;
-    margin-top: var(--size-spacing-20);
-    margin-bottom: var(--size-spacing-10);
-}
+/* * */
+/* Accordion Control */
 
-@media (width <= 650px) {
-	.imageMap {
-		width: 100%;
-        height: auto;
-        object-fit: cover;
-	}
-}
-
-@media (width > 650px) {
-	.imageMap {
-	width: 100%;
-    height: auto;
-    object-fit: cover;
-	}
+.accordionItem {
+	border:none;
 }

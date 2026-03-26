@@ -2225,6 +2225,35 @@
 				"title": "What is?"
 			}
 		},
+		"Section2": {
+			"what_is": {
+				"content": "The Tap&Ride allows passengers to use contactless bank cards as a direct payment for the on-board fare on buses, providing a practical, fast, and cashless alternative without the need for physical money or pre-purchased transport titles.",
+				"title": "What is?"
+			},
+			"where_available": {
+				"content": "Esta nova opção está disponível nas linhas cujo número começa por 1, 2 ou 3, correspondentes às áreas já abrangidas. As linhas que começam por 4 serão incluídas em breve.",
+				"subcontent": "É possível verificar a sua existência a bordo do autocarro, consultando os métodos de pagamento disponíveis, presentes no visor do validador amarelo. Se o ecrã do validador apresentar uma faixa amarela com os ícones de Multibanco / VISA / MasterCard e Apple Pay/Google Pay, como na imagem abaixo, aceita o pagamento Tap&Ride.",
+				"title": "Onde está disponível?"
+			}
+		},
+		"Section3": {
+			"what_is": {
+				"content": "The Tap&Ride allows passengers to use contactless bank cards as a direct payment for the on-board fare on buses, providing a practical, fast, and cashless alternative without the need for physical money or pre-purchased transport titles.",
+				"title": "What is?"
+			}
+		},
+		"Section4": {
+			"what_is": {
+				"content": "The Tap&Ride allows passengers to use contactless bank cards as a direct payment for the on-board fare on buses, providing a practical, fast, and cashless alternative without the need for physical money or pre-purchased transport titles.",
+				"title": "What is?"
+			}
+		},
+		"Section5": {
+			"what_is": {
+				"content": "The Tap&Ride allows passengers to use contactless bank cards as a direct payment for the on-board fare on buses, providing a practical, fast, and cashless alternative without the need for physical money or pre-purchased transport titles.",
+				"title": "What is?"
+			}
+		},
 		"heading": "Tap&Ride: Payment with contactless bank card",
 		"subheading": "Select below to where you want to navigate"
 	},
