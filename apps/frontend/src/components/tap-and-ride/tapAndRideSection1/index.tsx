@@ -4,7 +4,7 @@
 import Button from '@/components/common/Button';
 import { TapAndRideAccordion } from '@/components/tap-and-ride/TapAndRideAccordion';
 import { Image } from '@mantine/core';
-import { IconBook } from '@tabler/icons-react';
+import { IconBook, IconMap } from '@tabler/icons-react';
 import { useTranslations } from 'next-intl';
 
 import styles from './styles.module.css';
@@ -43,7 +43,8 @@ export function TapAndRideSection1() {
 								<p className={styles.subcontentText}>{t(whereAvailableItem.subcontent)}</p>
 								<Image className={styles.subcontentImage} fallbackSrc="/assets/common/placeholder.png" src="/assets/tap-and-ride/validator_tap-and-ride.png" />
 								<p className={styles.subcontentText}>{t(whereAvailableItem.subcontent2)}</p>
-								<Button className={styles.button} icon={<IconBook />} label={t('Section1.where_available.buttonLabel')} variant="primary" />
+								<Image className={styles.subcontentImage} fallbackSrc="/assets/common/placeholder.png" src="/assets/tap-and-ride/AF_CUT_Mapa.svg" />
+								<Button className={styles.button} icon={<IconMap />} label={t('Section1.where_available.buttonLabel')} variant="primary" />
 							</div>
 						</div>
 

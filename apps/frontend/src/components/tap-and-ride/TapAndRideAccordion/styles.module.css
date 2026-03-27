@@ -22,6 +22,15 @@
 }
 
 /* * */
+/* Title shown under the control (when header shows image) */
+.panelTitleBelowControl {
+	margin: 0 0 var(--size-spacing-10) 0;
+	font-size: var(--font-size-title);
+	font-weight: var(--font-weight-title);
+	color: var(--color-system-text-100);
+}
+
+/* * */
 /* Accordion Item */
 .accordionItem {
 	padding: var(--size-spacing-10);

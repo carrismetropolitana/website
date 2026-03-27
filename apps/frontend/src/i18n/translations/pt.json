@@ -2227,7 +2227,7 @@
 				"title": "O que é?"
 			},
 			"where_available": {
-				"buttonLabel": "Saber mais",
+				"buttonLabel": "Ver Mapa",
 				"content": "Esta nova opção está disponível nas linhas cujo número começa por 1, 2 ou 3, correspondentes às áreas já abrangidas. As linhas que começam por 4 serão incluídas em breve.",
 				"subcontent": "É possível verificar a sua existência a bordo do autocarro, consultando os métodos de pagamento disponíveis, presentes no visor do validador amarelo. Se o ecrã do validador apresentar uma faixa amarela com os ícones de Multibanco / VISA / MasterCard e Apple Pay/Google Pay, como na imagem abaixo, aceita o pagamento Tap&Ride.",
 				"subcontent2": "Também poderá verificar através dos horários em Tempo Real, ou no mapa abaixo, que viaturas possuem este método de pagamento:",

@@ -33,15 +33,34 @@ export function TapAndRideAccordion({ imageAlt, imageSrc, items, withBorder = fa
 	return (
 		<Section withPadding>
 			<Accordion className={styles.accordion} onChange={setOpenedItem} value={openedItem}>
-				{items.map(item => (
-					<AccordionItem key={item.id} className={withBorder ? styles.withBorder : styles.accordionItem} value={item.id}>
-						{openedItem === item.id && <Image alt={imageAlt} className={styles.image} src={imageSrc} />}
-						<AccordionControl><span className={styles.accordionControl}>{item.title}</span></AccordionControl>
-						<AccordionPanel>
-							{item.panel}
-						</AccordionPanel>
-					</AccordionItem>
-				))}
+				{items.map((item) => {
+					const isOpen = openedItem === item.id;
+					const showImageInControl = isOpen && Boolean(imageSrc);
+
+					return (
+						<AccordionItem key={item.id} className={withBorder ? styles.withBorder : styles.accordionItem} value={item.id}>
+							<AccordionControl>
+								{showImageInControl
+									? (
+										<Image alt={imageAlt ?? ''} className={styles.image} src={imageSrc} />
+									)
+									: (
+										<span className={styles.accordionControl}>{item.title}</span>
+									)}
+							</AccordionControl>
+							<AccordionPanel>
+								{showImageInControl ? (
+									<>
+										<div className={styles.panelTitleBelowControl}>{item.title}</div>
+										{item.panel}
+									</>
+								) : (
+									item.panel
+								)}
+							</AccordionPanel>
+						</AccordionItem>
+					);
+				})}
 			</Accordion>
 		</Section>
 	);

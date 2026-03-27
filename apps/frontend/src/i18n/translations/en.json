@@ -2225,7 +2225,7 @@
 				"title": "What is?"
 			},
 			"where_available": {
-				"buttonLabel": "Saber mais",
+				"buttonLabel": "View Map",
 				"content": "This new option is available on lines whose number starts with 1, 2 or 3, corresponding to the areas already covered. Lines starting with 4 will be included soon.",
 				"subcontent": "It is possible to check its existence on the bus, by consulting the available payment methods, present on the yellow validator screen. If the validator screen displays a yellow band with the icons of Multibanco / VISA / MasterCard and Apple Pay/Google Pay, as in the image below, it accepts the Tap&Ride payment.",
 				"subcontent2": "You can also check through real-time schedules or on the map below, which vehicles have this payment method:",
