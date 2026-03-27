@@ -1,9 +1,11 @@
 'use client';
 /* * */
 
-import { Accordion } from '@/components/payload/accordion';
+import type { LexicalNode } from '@/types/lexical-node.types';
+import type { PayloadLexicalLink } from '@/types/link.types';
+import type { ReactNode } from 'react';
+
 import { Code } from '@/components/payload/code';
-import { Gallery } from '@/components/payload/gallery';
 import { Heading } from '@/components/payload/heading';
 import { LineMention } from '@/components/payload/line-mention';
 import { Links } from '@/components/payload/links';
@@ -15,37 +17,28 @@ import { Table } from '@/components/payload/table';
 import { TableCell } from '@/components/payload/table/table-cell';
 import { Text } from '@/components/payload/text';
 import { renderUpload } from '@/components/payload/upload';
-import { Video } from '@/components/payload/video';
-import { LexicalNode } from '@/types/lexical-node.types';
-import { type ReactNode } from 'react';
+
+import { renderBlock } from './renderBlock';
 
 /* * */
 
-// Custom Block Renderer
-
-function renderBlock(node: LexicalNode, key?: number): ReactNode {
-	switch (node.fields?.blockType) {
-		case 'accordion': {
-			const items = Array.isArray(node.fields?.accordion) ? node.fields?.accordion.map(item => ({ content: item.content ?? '', id: item.id ?? '', title: item.title ?? '' })) : [];
-			return items.length ? <Accordion key={key} items={items} /> : null;
-		}
-		case 'gallery': return <Gallery key={key} fields={node.fields} />;
-		case 'link': return <Links key={key} fields={node.fields} />;
-		case 'video': return <Video key={key} fields={node.fields} />;
-		default: return null;
-	}
-}
-
 // Standard Lexical Node renderer
+export function renderNode(node: LexicalNode, key?: number): ReactNode {
+	//
 
-function renderNode(node: LexicalNode, key?: number): ReactNode {
-	if (!node || typeof node !== 'object') return null;
+	//
+	// A. Setup variables
 
 	const children = node.children ?? [];
 	const renderChildren = () => children.map((child, idx) => renderNode(child, idx));
 
+	//
+	// B. Render components
+
+	if (!node || typeof node !== 'object') return null;
+
 	switch (node.type) {
-		case 'block': return renderBlock(node, key);
+		case 'block': return renderBlock(node, key, renderNode);
 		case 'code': return <Code key={key} children={children} />;
 		case 'custom-heading':
 		case 'heading': {
@@ -53,7 +46,21 @@ function renderNode(node: LexicalNode, key?: number): ReactNode {
 			return <Heading key={key} anchorId={anchorId} children={children} index={key} tag={node.tag as 'h2' | 'h3'} />;
 		}
 		case 'horizontalrule': return <hr key={key} />;
-		case 'link': return <Links key={key} children={children} fields={node.fields} url={node.url} />;
+		case 'link': {
+			const raw = node.fields;
+			const linkFields: PayloadLexicalLink = {
+				buttonColor: raw?.buttonColor,
+				buttonTextColor: raw?.buttonTextColor,
+				doc: raw?.doc,
+				isButton: raw?.isButton,
+				linkType: raw?.linkType,
+				newTab: raw?.newTab,
+				text: typeof raw?.text === 'string' ? raw.text : undefined,
+				url: raw?.url,
+			};
+
+			return <Links key={key} children={children} fields={linkFields} url={node.url} />;
+		}
 		case 'list': return <List key={key} children={children} listType={node.listType} />;
 		case 'listitem': return <ListItem key={key} children={children} />;
 		case 'mention': return node.mentionType === 'line' ? <LineMention key={key} id={node.id} label={node.label} mentionType={node.mentionType} /> : null;
@@ -61,18 +68,22 @@ function renderNode(node: LexicalNode, key?: number): ReactNode {
 		case 'quote': return <Quote key={key} children={children} />;
 		case 'root': return renderChildren();
 		case 'table': return <Table key={key} children={children} />;
-		case 'tablecell': return <TableCell key={key} backgroundColor={(node as { backgroundColor?: string }).backgroundColor} children={children} headerState={(node as { headerState?: number }).headerState} />;
+		case 'tablecell':
+			return (
+				<TableCell
+					key={key}
+					backgroundColor={(node as { backgroundColor?: string }).backgroundColor}
+					children={children}
+					headerState={(node as { headerState?: number }).headerState}
+				/>
+			);
 		case 'tablerow': return <tr key={key}>{renderChildren()}</tr>;
 		case 'text': return <Text key={key} format={node.format} style={node.style} text={node.text} />;
 		case 'upload': return renderUpload(node, key);
 		default: return children.length > 0 ? renderChildren() : (node.text ?? null);
 	}
-}
 
-/* * */
-
-export function useRenderLexicalNode() {
-	return renderNode;
+	//
 }
 
 /* * */

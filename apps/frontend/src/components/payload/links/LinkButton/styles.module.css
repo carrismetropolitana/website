@@ -1,0 +1,19 @@
+.linkButton {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	min-width: 150px;
+	padding: var(--size-spacing-10);
+	font-weight: var(--font-weight-semibold);
+	color: var(--color-primary-black);
+	text-decoration: none;
+	background-color: var(--color-brand);
+	border: 1px solid transparent;
+	border-radius: 5px;
+	transition: all 200ms ease;
+}
+
+.linkButton:hover {
+	border-color: var(--color-system-border-200);
+	box-shadow: 0 0 15px 0 rgb(0 0 0 / 3%);
+}

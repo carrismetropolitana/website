@@ -2,10 +2,12 @@
 'use client';
 /* * */
 
+import type { CampaignData } from '@/types/campaign.types';
+
 import { NewsData } from '@/types/news.types';
 import { processBodyImages } from '@/utils/livePreviewImages';
 import { mergeData } from '@/utils/livePreviewMerge';
-import { transformPayloadData } from '@/utils/livePreviewTransform';
+import { transformCampaignPayloadData, transformPayloadData } from '@/utils/livePreviewTransform';
 import { useCallback, useEffect, useRef, useState } from 'react';
 
 /* * */
@@ -18,6 +20,7 @@ export function useLivePreviewData(initialData: any) {
 
 	const [data, setData] = useState<any>(initialData);
 	const newsData: NewsData | null = data ? transformPayloadData(data) : null;
+	const campaignData: CampaignData | null = data ? transformCampaignPayloadData(data) : null;
 	const hasSentReady = useRef(false);
 
 	const applyProcessedBody = useCallback((processedBody: any) => {
@@ -64,5 +67,5 @@ export function useLivePreviewData(initialData: any) {
 		return () => window.removeEventListener('message', handleMessage);
 	}, []);
 
-	return { newsData };
+	return { campaignData, newsData };
 }

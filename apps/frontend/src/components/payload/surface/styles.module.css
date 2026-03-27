@@ -1,0 +1,30 @@
+.withBackgroundImage {
+	--surface-background-image: none;
+}
+
+.backgroundImageLayer {
+	position: absolute;
+	inset: 0;
+	z-index: 0;
+	pointer-events: none;
+	border-radius: inherit;
+	background-image: var(--surface-background-image);
+	background-repeat: no-repeat;
+	background-position: center;
+	background-size: cover;
+}
+
+.backgroundOverlayLayer {
+	position: absolute;
+	inset: 0;
+	z-index: 0;
+	pointer-events: none;
+	border-radius: inherit;
+	background: rgb(0 0 0 / 35%);
+}
+
+.contentLayer {
+	position: relative;
+	z-index: 1;
+}
+
