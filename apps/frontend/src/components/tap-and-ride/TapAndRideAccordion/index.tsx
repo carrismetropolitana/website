@@ -34,29 +34,20 @@ export function TapAndRideAccordion({ imageAlt, imageSrc, items, withBorder = fa
 		<Section withPadding>
 			<Accordion className={styles.accordion} onChange={setOpenedItem} value={openedItem}>
 				{items.map((item) => {
-					const isOpen = openedItem === item.id;
-					const showImageInControl = isOpen && Boolean(imageSrc);
+					const headerShowsImage = openedItem === item.id && Boolean(imageSrc);
 
 					return (
 						<AccordionItem key={item.id} className={withBorder ? styles.withBorder : styles.accordionItem} value={item.id}>
 							<AccordionControl>
-								{showImageInControl
-									? (
-										<Image alt={imageAlt ?? ''} className={styles.image} src={imageSrc} />
-									)
-									: (
-										<span className={styles.accordionControl}>{item.title}</span>
-									)}
+								{headerShowsImage
+									? <Image alt={imageAlt ?? ''} className={styles.image} src={imageSrc} />
+									: <span className={styles.accordionControl}>{item.title}</span>}
 							</AccordionControl>
 							<AccordionPanel>
-								{showImageInControl ? (
-									<>
-										<div className={styles.panelTitleBelowControl}>{item.title}</div>
-										{item.panel}
-									</>
-								) : (
-									item.panel
+								{headerShowsImage && (
+									<div className={styles.panelTitleBelowControl}>{item.title}</div>
 								)}
+								{item.panel}
 							</AccordionPanel>
 						</AccordionItem>
 					);
