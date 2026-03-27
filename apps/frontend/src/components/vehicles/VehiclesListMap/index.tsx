@@ -26,13 +26,7 @@ import styles from './styles.module.css';
 
 /* * */
 
-interface VehiclesListMapProps {
-	toolbar?: boolean
-}
-
-/* * */
-
-export function VehiclesListMap({ toolbar = true }: VehiclesListMapProps) {
+export function VehiclesListMap() {
 	//
 
 	//
@@ -187,7 +181,6 @@ export function VehiclesListMap({ toolbar = true }: VehiclesListMapProps) {
 			onClick={handleLayerClick}
 			onDrag={() => setIsAutoZoom(false)}
 			showCenterButton={true}
-			toolbar={toolbar}
 			toolbarExtras={toolbarExtras}
 		>
 			{showAlerts && <MapViewStyleAlerts data={alertsContext.data.featureCollection} />}

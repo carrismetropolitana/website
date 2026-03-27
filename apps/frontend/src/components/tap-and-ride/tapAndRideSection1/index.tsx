@@ -3,7 +3,6 @@
 
 import Button from '@/components/common/Button';
 import { TapAndRideAccordion } from '@/components/tap-and-ride/TapAndRideAccordion';
-import { VehiclesListMap } from '@/components/vehicles/VehiclesListMap';
 import { Image } from '@mantine/core';
 import { IconBook } from '@tabler/icons-react';
 import { useTranslations } from 'next-intl';
