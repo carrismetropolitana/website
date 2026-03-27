@@ -26,7 +26,6 @@ export function TapAndRideContent() {
 				<TapAndRideSection3 />
 				<TapAndRideSection4 />
 				<TapAndRideSection5 />
-
 			</div>
 			<TapAndRideSectionFaqs />
 		</>

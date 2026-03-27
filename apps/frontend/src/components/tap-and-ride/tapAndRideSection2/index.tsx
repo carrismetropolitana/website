@@ -19,7 +19,7 @@ export function TapAndRideSection2() {
 
 	return (
 		<TapAndRideContentSection
-			imageAlt="Tap and Ride"
+			imageAlt="Tap&Ride"
 			imageSrc="/assets/tap-and-ride/AF_CUT_Tarifas.png"
 			item={tapAndRideDataSection2}
 			renderPanel={(t, item) => (
