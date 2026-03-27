@@ -31,7 +31,7 @@ export const GET = async (request: Request, { params }: { params: Promise<{ slug
 	});
 
 	if (!foundNotes.docs.length) {
-		return Response.json({ error: 'Note not found' }, { status: 404 });
+		return Response.json({ error: 'Note not found' }, { headers: getPublicHeaders(null), status: 404 });
 	}
 
 	const note = foundNotes.docs[0];
