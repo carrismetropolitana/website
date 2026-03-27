@@ -1,5 +1,4 @@
 'use client';
-
 /* * */
 
 import { Surface } from '@/components/layout/Surface';
@@ -13,7 +12,7 @@ import styles from './styles.module.css';
 
 /* * */
 
-export function TapAndRide() {
+export function TapAndRidePage() {
 	//
 
 	//
