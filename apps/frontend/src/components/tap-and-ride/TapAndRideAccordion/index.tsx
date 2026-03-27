@@ -26,9 +26,14 @@ interface TapAndRideAccordionProps {
 
 export function TapAndRideAccordion({ imageAlt, imageSrc, items, withBorder = false }: TapAndRideAccordionProps) {
 	//
+
+	//
+	// A. Setup variables
+
 	const [openedItem, setOpenedItem] = useState<null | string>(null);
 
-	// . Render components
+	//
+	// B. Render components
 
 	return (
 		<Section withPadding>
@@ -55,4 +60,6 @@ export function TapAndRideAccordion({ imageAlt, imageSrc, items, withBorder = fa
 			</Accordion>
 		</Section>
 	);
+
+	//
 }
