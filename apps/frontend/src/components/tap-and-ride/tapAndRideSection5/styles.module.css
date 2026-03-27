@@ -1,43 +1,16 @@
 /* * */
-/* Accordion */
-
-.accordion {
-	gap: var(--size-spacing-10);
-    width: 100%;
-	padding: var(--size-spacing-20);
-	background-color: var(--color-system-background-100);
-	border: 1px solid var(--color-system-border-100);
-	border-radius: var(--border-radius-lg);
+/* Content */
+.content {
+	font-size: var(--font-size-text);
+	font-weight: var(--font-weight-text);
+	color: var(--color-system-text-200);
 }
 
 /* * */
-/* Accordion Control */
-
-.accordionControl {
-	font-size: var(--font-size-title);
-	font-weight: var(--font-weight-title);
-	color: var(--color-system-text-100);
-}
-
-.imagesWrapper {
-    display: grid;
-    width: 100%;
-    margin-top: var(--size-spacing-20);
-    margin-bottom: var(--size-spacing-10);
-}
-
-@media (width <= 650px) {
-	.imageMap {
-		width: 100%;
-        height: auto;
-        object-fit: cover;
-	}
-}
-
-@media (width > 650px) {
-	.imageMap {
-	width: 100%;
-    height: auto;
-    object-fit: cover;
-	}
+/* Subcontent */
+.subcontent {
+	margin-top: var(--size-spacing-20);
+	font-size: var(--font-size-text);
+	font-weight: var(--font-weight-text);
+	color: var(--color-system-text-200);
 }

@@ -1,18 +1,32 @@
+/* * */
+/* Accordion */
 .accordion {
-	gap: var(--size-spacing-10);
+	gap: var(--size-spacing-5);
 	width: 100%;
-	padding: var(--size-spacing-20);
+	padding: var(--size-spacing-10);
 	background-color: var(--color-system-background-100);
 	border: 1px solid var(--color-system-border-100);
 	border-radius: var(--border-radius-lg);
 }
 
+.withBorder {
+	border-top: none;
+	border-bottom: 1px solid var(--color-system-border-100);
+}
+
+/* * */
+/* Accordion Control */
 .accordionControl {
 	font-size: var(--font-size-title);
 	font-weight: var(--font-weight-title);
 	color: var(--color-system-text-100);
 }
 
+/* * */
+/* Accordion Item */
+.accordionItem {
+	border:none;
+}	
 
 /* * */
 /* Image */
@@ -31,7 +45,3 @@
     object-fit: cover;
 	}
 }
-
-.accordionItem {
-	border:none;
-}	

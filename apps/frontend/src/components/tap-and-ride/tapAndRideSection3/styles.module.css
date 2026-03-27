@@ -1,43 +1,36 @@
 /* * */
-/* Accordion */
-
-.accordion {
-	gap: var(--size-spacing-10);
-    width: 100%;
-	padding: var(--size-spacing-20);
-	background-color: var(--color-system-background-100);
-	border: 1px solid var(--color-system-border-100);
-	border-radius: var(--border-radius-lg);
+/* Content */
+.content {
+	margin-bottom: var(--size-spacing-20);
+	font-size: var(--font-size-text);
+	font-weight: var(--font-weight-text);
+	color: var(--color-system-text-200);
 }
 
 /* * */
-/* Accordion Control */
-
-.accordionControl {
+/* Title */
+.title {
+	margin-bottom: var(--size-spacing-20);
 	font-size: var(--font-size-title);
 	font-weight: var(--font-weight-title);
 	color: var(--color-system-text-100);
 }
 
-.imagesWrapper {
-    display: grid;
-    width: 100%;
-    margin-top: var(--size-spacing-20);
-    margin-bottom: var(--size-spacing-10);
+/* * */
+/* Invoice Edit Content Container */
+.invoiceEditContentContainer {
+	padding-top: var(--size-spacing-20);
+	border-top: 2px solid var(--color-system-border-100)
 }
 
-@media (width <= 650px) {
-	.imageMap {
-		width: 100%;
-        height: auto;
-        object-fit: cover;
-	}
-}
-
-@media (width > 650px) {
-	.imageMap {
-	width: 100%;
-    height: auto;
-    object-fit: cover;
-	}
-}
+/* * */
+/* Invoice Edit Content Button */
+.button {
+	display: flex;
+	width: fit-content;
+	margin-inline: auto;
+	margin-top: var(--size-spacing-20);
+	font-size: var(--font-size-nav);
+	font-weight: var(--font-weight-nav);
+	color: var(--color-system-text-300);
+}	

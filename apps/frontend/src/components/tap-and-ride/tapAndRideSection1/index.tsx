@@ -1,4 +1,5 @@
 'use client';
+/* * */
 
 import Button from '@/components/common/Button';
 import { TapAndRideAccordion } from '@/components/tap-and-ride/TapAndRideAccordion';
@@ -9,7 +10,7 @@ import { useTranslations } from 'next-intl';
 
 import styles from './styles.module.css';
 
-import { tapAndRideData } from '../_data/data';
+import { tapAndRideDataSection1 } from '../_data/data';
 
 /* * */
 
@@ -20,7 +21,7 @@ export function TapAndRideSection1() {
 	// A. Setup variables
 
 	const t = useTranslations('tap-and-ride');
-	const [whatIsItem, whereAvailableItem] = tapAndRideData;
+	const [whatIsItem, whereAvailableItem] = tapAndRideDataSection1;
 
 	//
 	// B. Render components

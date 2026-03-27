@@ -1,11 +1,12 @@
 'use client';
+/* * */
 
 import { TapAndRideAccordion } from '@/components/tap-and-ride/TapAndRideAccordion';
 import { useTranslations } from 'next-intl';
 
 import styles from './styles.module.css';
 
-import { tapAndRideData } from '../_data/data';
+import { tapAndRideDataSection4 } from '../_data/data';
 
 /* * */
 
@@ -16,7 +17,6 @@ export function TapAndRideSection4() {
 	// A. Setup variables
 
 	const t = useTranslations('tap-and-ride');
-	const [whatIsItem, whereAvailableItem] = tapAndRideData;
 
 	//
 	// B. Render components
@@ -24,21 +24,15 @@ export function TapAndRideSection4() {
 	return (
 		<TapAndRideAccordion
 			imageAlt="Tap and Ride"
-			imageSrc="/assets/tap-and-ride/what_is_banner.svg"
-			items={whatIsItem ? [{
-				id: whatIsItem.id,
+			imageSrc="/assets/tap-and-ride/AF_CUT_Fiscalizacao.png"
+			items={tapAndRideDataSection4 ? [{
+				id: tapAndRideDataSection4.id,
 				panel: (
-					<>
-						<div className={styles.whatIsContentContainer}>{t(whatIsItem.content)}</div>
-						<div className={styles.whereAvailableContentContainer}>
-							<p className={styles.title}>{t(whereAvailableItem.title)}</p>
-							<p className={styles.content}>{t(whereAvailableItem.content)}</p>
-							<div className={styles.subcontentContainer}>{t(whereAvailableItem.subcontent)}</div>
-						</div>
-
-					</>
+					<div className={styles.tarifsContentContainer}>
+						<p className={styles.content}>{t(tapAndRideDataSection4.content)}</p>
+					</div>
 				),
-				title: t(whatIsItem.title),
+				title: t(tapAndRideDataSection4.title),
 			}] : []}
 		/>
 	);

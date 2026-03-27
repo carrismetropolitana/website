@@ -16,14 +16,15 @@ interface TapAndRideAccordionItemProps {
 }
 
 interface TapAndRideAccordionProps {
-	imageAlt: string
-	imageSrc: string
+	imageAlt?: string
+	imageSrc?: string
 	items: TapAndRideAccordionItemProps[]
+	withBorder?: boolean
 }
 
 /* * */
 
-export function TapAndRideAccordion({ imageAlt, imageSrc, items }: TapAndRideAccordionProps) {
+export function TapAndRideAccordion({ imageAlt, imageSrc, items, withBorder = false }: TapAndRideAccordionProps) {
 	//
 	const [openedItem, setOpenedItem] = useState<null | string>(null);
 
@@ -33,7 +34,7 @@ export function TapAndRideAccordion({ imageAlt, imageSrc, items }: TapAndRideAcc
 		<Section withPadding>
 			<Accordion className={styles.accordion} onChange={setOpenedItem} value={openedItem}>
 				{items.map(item => (
-					<AccordionItem key={item.id} className={styles.accordionItem} value={item.id}>
+					<AccordionItem key={item.id} className={withBorder ? styles.withBorder : styles.accordionItem} value={item.id}>
 						{openedItem === item.id && <Image alt={imageAlt} className={styles.image} src={imageSrc} />}
 						<AccordionControl><span className={styles.accordionControl}>{item.title}</span></AccordionControl>
 						<AccordionPanel>
