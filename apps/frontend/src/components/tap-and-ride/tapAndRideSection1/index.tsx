@@ -44,9 +44,6 @@ export function TapAndRideSection1() {
 								<p className={styles.subcontentText}>{t(whereAvailableItem.subcontent)}</p>
 								<Image className={styles.subcontentImage} fallbackSrc="/assets/common/placeholder.png" src="/assets/tap-and-ride/validator_tap-and-ride.png" />
 								<p className={styles.subcontentText}>{t(whereAvailableItem.subcontent2)}</p>
-								<div className={styles.vehiclesListMapContainer}>
-									<VehiclesListMap toolbar={false} />
-								</div>
 								<Button className={styles.button} icon={<IconBook />} label={t('Section1.where_available.buttonLabel')} variant="primary" />
 							</div>
 						</div>

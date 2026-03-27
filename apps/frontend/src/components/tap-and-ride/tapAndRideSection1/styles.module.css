@@ -54,14 +54,6 @@
 }
 
 /* * */
-/* Where Available Vehicles List Map Container */
-.vehiclesListMapContainer {
-	width: 100%;
-	height: 300px;
-	margin-top: var(--size-spacing-20);
-}
-
-/* * */
 /* Where Available Button */
 .button {
 	display: flex;
