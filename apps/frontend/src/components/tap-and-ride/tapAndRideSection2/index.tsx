@@ -2,9 +2,8 @@
 /* * */
 
 import Button from '@/components/common/Button';
-import { TapAndRideAccordion } from '@/components/tap-and-ride/TapAndRideAccordion';
+import { TapAndRideContentSection } from '@/components/tap-and-ride/TapAndRideContentSection';
 import { IconExternalLink } from '@tabler/icons-react';
-import { useTranslations } from 'next-intl';
 
 import styles from './styles.module.css';
 
@@ -16,32 +15,24 @@ export function TapAndRideSection2() {
 	//
 
 	//
-	// A. Setup variables
-
-	const t = useTranslations('tap-and-ride');
-
-	//
 	// B. Render components
 
 	return (
-		<TapAndRideAccordion
+		<TapAndRideContentSection
 			imageAlt="Tap and Ride"
 			imageSrc="/assets/tap-and-ride/AF_CUT_Tarifas.png"
-			items={tapAndRideDataSection2 ? [{
-				id: tapAndRideDataSection2.id,
-				panel: (
-					<>
-						<div className={styles.tarifsContentContainer}>
-							{t(tapAndRideDataSection2.content)}
-						</div>
-						<div className={styles.subcontentContainer}>
-							<p className={styles.subcontentText}>{t(tapAndRideDataSection2.subcontent)}</p>
-						</div>
-						<Button className={styles.button} icon={<IconExternalLink size={18} />} label={t('Section2.tarifs.buttonLabel')} />
-					</>
-				),
-				title: t(tapAndRideDataSection2.title),
-			}] : []}
+			item={tapAndRideDataSection2}
+			renderPanel={(t, item) => (
+				<div>
+					<div className={styles.tarifsContentContainer}>
+						{t(item.content)}
+					</div>
+					<div className={styles.subcontentContainer}>
+						<p className={styles.subcontentText}>{t(item.subcontent)}</p>
+					</div>
+					<Button className={styles.button} icon={<IconExternalLink size={18} />} label={t('Section2.tarifs.buttonLabel')} />
+				</div>
+			)}
 		/>
 	);
 }

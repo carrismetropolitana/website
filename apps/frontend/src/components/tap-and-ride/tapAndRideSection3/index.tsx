@@ -29,23 +29,23 @@ export function TapAndRideSection3() {
 		<TapAndRideAccordion
 			imageAlt="Tap and Ride"
 			imageSrc="/assets/tap-and-ride/AF_CUT_Faturas.png"
-			items={tapAndRideDataSection3 ? [{
+			items={[{
 				id: invoicesItem.id,
 				panel: (
-					<>
+					<div>
 						<div className={styles.invoicesContentContainer}>
 							<p className={styles.content}>{t(invoicesItem.content)}</p>
 						</div>
 						<div className={styles.invoiceEditContentContainer}>
 							<p className={styles.title}>{t(invoiceEditItem.title)}</p>
 							<p className={styles.content}>{t(invoiceEditItem.content)}</p>
-							<p>{t(invoiceEditItem.subcontent)}</p>
+							<p className={styles.content}>{t(invoiceEditItem.subcontent)}</p>
 						</div>
 						<Button className={styles.button} icon={<IconExternalLink size={18} />} label={t('Section3.invoice_edit.buttonLabel')} />
-					</>
+					</div>
 				),
 				title: t(invoicesItem.title),
-			}] : []}
+			}]}
 		/>
 	);
 }

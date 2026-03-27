@@ -29,7 +29,7 @@ export function TapAndRideSectionFaqs() {
 					id: item.id,
 					panel: (<> {t(item.content)} </>),
 					title: t(item.title),
-				})) || []}
+				}))}
 			/>
 		</Section>
 	);

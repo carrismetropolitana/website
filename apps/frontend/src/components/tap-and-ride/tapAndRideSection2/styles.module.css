@@ -33,11 +33,4 @@
 	color: var(--color-system-text-300);
 }	
 
-/* * */
-/* Tarifs Title */
-
-.title{
-	font-size: var(--font-size-title);
-	font-weight: var(--font-weight-title);
-	color: var(--color-system-text-200);
-}
+ 

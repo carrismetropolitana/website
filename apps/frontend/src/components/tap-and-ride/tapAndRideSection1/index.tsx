@@ -29,12 +29,14 @@ export function TapAndRideSection1() {
 	return (
 		<TapAndRideAccordion
 			imageAlt="Tap and Ride"
-			imageSrc="/assets/tap-and-ride/what_is_banner.svg"
-			items={whatIsItem ? [{
+			imageSrc="/assets/tap-and-ride/CUT_Card1.png"
+			items={[{
 				id: whatIsItem.id,
 				panel: (
 					<>
-						<div className={styles.whatIsContentContainer}>{t(whatIsItem.content)}</div>
+						<div className={styles.whatIsContentContainer}>
+							<p className={styles.content}>{t(whatIsItem.content)}</p>
+						</div>
 						<div className={styles.whereAvailableContentContainer}>
 							<p className={styles.title}>{t(whereAvailableItem.title)}</p>
 							<p className={styles.content}>{t(whereAvailableItem.content)}</p>
@@ -52,7 +54,7 @@ export function TapAndRideSection1() {
 					</>
 				),
 				title: t(whatIsItem.title),
-			}] : []}
+			}]}
 		/>
 	);
 }

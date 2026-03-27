@@ -2,10 +2,22 @@
 	display: flex;
 	flex-wrap: wrap;
 	gap: var(--size-spacing-5);
-	align-items: center;
-	justify-content: center;
+	align-items: flex-start;
+	justify-content: flex-start;
 }
 
 .contentRow > * {
-	flex: 0 0 calc((100% - (2 * var(--size-spacing-5))) / 3);
+	flex: 0 0 calc((100% - 2 * var(--size-spacing-5)) / 3);
+}
+
+@media (width <= 1024px) {
+	.contentRow > * {
+		flex: 0 0 calc((100% - var(--size-spacing-5)) / 2);
+	}
+}
+
+@media (width <= 768px) {
+	.contentRow > * {
+		flex: 0 0 100%;
+	}
 }
