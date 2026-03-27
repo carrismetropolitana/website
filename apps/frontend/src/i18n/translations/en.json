@@ -1997,6 +1997,7 @@
 				"links": {
 					"cards": "Monthly Pass",
 					"helpdesks": "Where to buy",
+					"portal-utilizador": "User Portal",
 					"tap-and-ride": "Tap & Ride",
 					"tickets": "Occasional Tickets"
 				}
@@ -2216,6 +2217,87 @@
 			"searchInput": "Search result...",
 			"subheading": "Public Information"
 		}
+	},
+	"tap-and-ride": {
+		"Section1": {
+			"what_is": {
+				"content": "The Tap&Ride allows passengers to use contactless bank cards as a direct payment for the on-board fare on buses, providing a practical, fast, and cashless alternative without the need for physical money or pre-purchased transport titles.",
+				"title": "What is?"
+			},
+			"where_available": {
+				"buttonLabel": "View Map",
+				"content": "This new option is available on lines whose number starts with 1, 2 or 3, corresponding to the areas already covered. Lines starting with 4 will be included soon.",
+				"subcontent": "It is possible to check its existence on the bus, by consulting the available payment methods, present on the yellow validator screen. If the validator screen displays a yellow band with the icons of Multibanco / VISA / MasterCard and Apple Pay/Google Pay, as in the image below, it accepts the Tap&Ride payment.",
+				"subcontent2": "You can also check through real-time schedules or on the map below, which vehicles have this payment method:",
+				"title": "Where is it available?"
+			}
+		},
+		"Section2": {
+			"tarifs": {
+				"buttonLabel": "Check Tariffs",
+				"content": "The values practiced are those related to the on-board fare associated with each line.",
+				"subcontent": "You can better know the Carris Metropolitana tariff through the table on the bus, in our app or on our website.",
+				"title": "Tarifs"
+			}
+		},
+		"Section3": {
+			"invoice_edit": {
+				"buttonLabel": "Access the Portal",
+				"content": "After the validation moment, the invoice will be available on the platform for 5 business days to change the data.",
+				"subcontent": "Once this period has passed, the invoice will remain available only for consultation.",
+				"title": "Deadlines for invoice editing:"
+			},
+			"invoices": {
+				"content": "For payments made with bank cards, it is possible to consult, edit and obtain invoices through the User Portal.",
+				"title": "Invoices"
+			}
+		},
+		"Section4": {
+			"inspection": {
+				"content": "On the buses of Carris Metropolitana, inspections are carried out. These are carried out by responsible staff duly identified, who will seek to ensure that the on-board titles are valid.",
+				"title": "Inspection"
+			}
+		},
+		"Section5": {
+			"how_to": {
+				"content": "Com a introdução do pagamento com cartão bancário, é importante garantir que a validação do título de transporte é feita corretamente, de forma a evitar uma cobrança indesejada.",
+				"subcontent": "Para isso, garanta que valida o seu título diretamente no validador, retirando-o da mochila ou carteira, onde se poderão encontrar cartões bancários.",
+				"title": "Como Validar?"
+			}
+		},
+		"SectionFaqs": {
+			"faq1": {
+				"content": "Accepts bank cards, national and international, with contactless technology, from the Visa and Mastercard networks.",
+				"title": "Which cards are accepted?"
+			},
+			"faq2": {
+				"content": "No. Simply enter the bus and approach your card to the yellow validator. The on-board fare will be automatically charged.",
+				"title": "Do I need to buy a ticket before entering?"
+			},
+			"faq3": {
+				"content": "No. Each card is valid only for one trip per person. Each passenger must use their own card.",
+				"title": "Can I use the same card for multiple people?"
+			},
+			"faq4": {
+				"content": "If you accidentally approach the card and the validation is successful, the fare will be charged. We recommend keeping the card in a secure location, separate from other payment methods or transport cards.",
+				"title": "What happens if I accidentally approach the card?"
+			},
+			"faq5": {
+				"content": "No. This is an alternative to cash payment for the on-board fare. Passes and titles continue to exist normally.",
+				"title": "Does this payment method replace existing passes and titles?"
+			},
+			"faq6": {
+				"content": "Yes. The contactless payment uses the same security technology as traditional card payments.",
+				"title": "Is the system secure?"
+			},
+			"faq7": {
+				"content": "In case of questions or support, you can call the passenger support line through the number 210 418 800 or fill out the form available on the site.",
+				"title": "I have questions or need to report an error"
+			},
+			"heading": "Frequently Asked Questions"
+		},
+		"heading": "Tap&Ride: Payment with contactless bank card",
+		"subheading": "Select below to where you want to navigate"
 	},
 	"tickets": {
 		"Pricing": {

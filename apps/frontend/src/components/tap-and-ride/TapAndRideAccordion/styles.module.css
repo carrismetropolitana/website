@@ -1,0 +1,57 @@
+/* * */
+/* Accordion */
+.accordion {
+	gap: var(--size-spacing-5);
+	width: 100%;
+	background-color: var(--color-system-background-100);
+	border-radius: var(--border-radius-lg);
+}
+
+.withBorder {
+	width: 100%;
+	border-top: 1px solid var(--color-system-border-100);
+	border-bottom: 1px solid var(--color-system-border-100);
+}
+
+/* * */
+/* Accordion Control */
+.accordionControl {
+	font-size: var(--font-size-title);
+	font-weight: var(--font-weight-title);
+	color: var(--color-system-text-100);
+}
+
+/* * */
+/* Title shown under the control (when header shows image) */
+.panelTitleBelowControl {
+	margin: 0 0 var(--size-spacing-10) 0;
+	font-size: var(--font-size-title);
+	font-weight: var(--font-weight-title);
+	color: var(--color-system-text-100);
+}
+
+/* * */
+/* Accordion Item */
+.accordionItem {
+	padding: var(--size-spacing-10);
+	border: 1px solid var(--color-system-border-100);
+	border-radius: var(--border-radius-lg);
+}	
+
+/* * */
+/* Image */
+@media (width <= 650px) {
+	.image {
+		width: 100%;
+        height: auto;
+        object-fit: cover;
+	}
+}
+
+@media (width > 650px) {
+	.image {
+	width: 100%;
+    height: auto;
+    object-fit: cover;
+	}
+}

@@ -1,0 +1,36 @@
+/* * */
+/* Content */
+.content {
+	margin-bottom: var(--size-spacing-20);
+	font-size: var(--font-size-text);
+	font-weight: var(--font-weight-text);
+	color: var(--color-system-text-200);
+}
+
+/* * */
+/* Title */
+.title {
+	margin-bottom: var(--size-spacing-20);
+	font-size: var(--font-size-title);
+	font-weight: var(--font-weight-title);
+	color: var(--color-system-text-100);
+}
+
+/* * */
+/* Invoice Edit Content Container */
+.invoiceEditContentContainer {
+	padding-top: var(--size-spacing-20);
+	border-top: 2px solid var(--color-system-border-100)
+}
+
+/* * */
+/* Invoice Edit Content Button */
+.button {
+	display: flex;
+	width: fit-content;
+	margin-inline: auto;
+	margin-top: var(--size-spacing-20);
+	font-size: var(--font-size-nav);
+	font-weight: var(--font-weight-nav);
+	color: var(--color-system-text-300);
+}	

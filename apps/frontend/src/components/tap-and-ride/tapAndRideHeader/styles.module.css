@@ -1,0 +1,45 @@
+/* * */
+/* Image */
+
+.image {
+    width: 100%;
+    margin-top: var(--size-spacing-20);
+    margin-bottom: var(--size-spacing-20);
+    object-fit: contain;
+}
+
+@media (width <= 650px) {
+	.image {
+		width: 100%;
+        height: auto;
+        margin-top: var(--size-spacing-20);
+        object-fit: contain;
+	}
+}
+
+@media (width > 650px) {
+	.image {
+	width: 100%;
+    height: auto;
+    margin-top: var(--size-spacing-20);
+    object-fit: contain;
+	}
+}
+
+/* * */
+/* Title */
+
+.title {
+	font-size: var(--font-size-heading);
+	font-weight: var(--font-weight-heading);
+	color: var(--color-system-text-100);
+}
+
+/* * */
+/* Subheading */
+
+.subheading {
+	font-size: var(--font-size-text);
+	font-weight: var(--font-weight-text);
+	color: var(--color-system-text-200);
+}
