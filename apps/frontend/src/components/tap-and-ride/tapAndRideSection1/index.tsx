@@ -4,7 +4,7 @@
 import Button from '@/components/common/Button';
 import { TapAndRideAccordion } from '@/components/tap-and-ride/TapAndRideAccordion';
 import { Image } from '@mantine/core';
-import { IconBook, IconMap } from '@tabler/icons-react';
+import { IconMap } from '@tabler/icons-react';
 import { useTranslations } from 'next-intl';
 
 import styles from './styles.module.css';
@@ -54,4 +54,6 @@ export function TapAndRideSection1() {
 			}]}
 		/>
 	);
+
+	//
 }

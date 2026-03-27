@@ -13,7 +13,7 @@ export function TapAndRideSection5() {
 	//
 
 	//
-	// B. Render components
+	// A. Render components
 
 	return (
 		<TapAndRideContentSection
@@ -28,4 +28,6 @@ export function TapAndRideSection5() {
 			)}
 		/>
 	);
+
+	//
 }
