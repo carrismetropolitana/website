@@ -23,6 +23,7 @@
 		"@payloadcms/ui": "3.76.1",
 		"@tabler/icons-react": "3.36.1",
 		"@tmlmobilidade/dates": "20260213.1500.47",
+		"@tmlmobilidade/rss": "file:../../../../tmlmobilidade/go/packages/rss",
 		"@tmlmobilidade/utils": "20260213.1500.47",
 		"classnames": "2.5.1",
 		"graphql": "16.12.0",
