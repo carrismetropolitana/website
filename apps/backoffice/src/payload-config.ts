@@ -10,6 +10,7 @@ import sharp from 'sharp';
 /* * */
 
 import { createLexicalConfig } from '@/configs/lexical-editor-config';
+import { newsRssFeed } from '@/plugins/NewsRssFeed';
 import { Campaigns } from '@/schemas/Campaigns/collection';
 import { CaseStudies } from '@/schemas/CaseStudies/collection';
 import { KnowledgeBase } from '@/schemas/KnowledgeBase/collection';
@@ -155,6 +156,7 @@ export default buildConfig({
 	],
 
 	plugins: [
+		newsRssFeed(),
 		s3Storage({
 			bucket: process.env.OCI_S3_NAMESPACE ?? 'placeholder', // Bucket should be the namespace in OCI Object Storage
 			collections: {
