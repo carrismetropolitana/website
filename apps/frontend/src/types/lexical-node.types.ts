@@ -18,15 +18,39 @@ export interface LexicalNode {
 			id?: string
 			title?: string
 		}[]
-		blockName?: string
-		blockType?: string
-		caption?: string
-		doc?: {
-			relationTo?: string
+		backgroundImage?: number | {
+			file?: { url?: string }
+			url?: string
 			value?: {
-				slug?: string
+				file?: { url?: string }
+				url?: string
 			}
 		}
+		backgroundOverlay?: boolean
+		blockName?: string
+		blockType?: string
+		borderColor?: string
+		buttonColor?: string
+		buttonTextColor?: string
+		caption?: string
+		cards?: {
+			description?: string
+			image?: RelationshipMedia
+			number?: string
+			title?: string
+		}[]
+		centerColumn?: LexicalRichText | string
+		content?: LexicalRichText | string
+		doc?: {
+			relationTo?: string
+			value?: { slug?: string }
+		}
+		forceOverflow?: boolean
+		fullHeight?: boolean
+		hasBackgroundImage?: boolean
+		height?: number
+		image?: RelationshipMedia
+		imagePosition?: 'left' | 'right'
 		images?: {
 			relationTo?: string
 			value?: {
@@ -38,12 +62,20 @@ export interface LexicalNode {
 				width?: number
 			}
 		}[]
+		isButton?: boolean
+		leftColumn?: LexicalRichText | string
 		linkType?: string
 		newTab?: boolean
+		number?: string
+		primaryColor?: string
+		rightColumn?: LexicalRichText | string
 		source?: 'external' | 'upload'
-		text?: string
+		text?: LexicalRichText | string
+		textColor?: string
 		title?: string
+		titleColor?: string
 		url?: string
+		variant?: 'alerts' | 'brand2' | 'brand' | 'debug' | 'default' | 'muted' | 'persistent' | 'standout' | 'success' | 'warning'
 		video?: {
 			relationTo?: string
 			value?: {
@@ -54,6 +86,9 @@ export interface LexicalNode {
 			}
 		}
 		videoUrl?: string
+		withBottomDivider?: boolean
+		withGap?: boolean
+		withPadding?: 'all' | 'desktop' | 'mobile' | 'none'
 	}
 	format?: number
 	id?: string
@@ -81,4 +116,13 @@ export interface LexicalNode {
 		url?: string
 		width?: number
 	}
+}
+
+export interface RelationshipMedia {
+	alt?: string
+	file?: { url?: string }
+	filename?: string
+	id?: string
+	url?: string
+	value?: { url?: string }
 }

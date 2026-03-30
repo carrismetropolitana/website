@@ -50,6 +50,7 @@ export const GET = async () => {
 			return {
 				_id: item.id,
 				end_date: item.end_date ? Dates.fromISO(item.end_date).unix_timestamp : null,
+				is_debug: Boolean(item.is_debug),
 				is_enabled: item.is_enabled,
 				more_info_url: item.more_info_url,
 				severity: item.severity,

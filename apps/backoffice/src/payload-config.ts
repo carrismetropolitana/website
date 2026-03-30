@@ -3,16 +3,14 @@
 import { getPublicVariable } from '@carrismetropolitana/website-shared-settings';
 import { mongooseAdapter } from '@payloadcms/db-mongodb';
 import { nodemailerAdapter } from '@payloadcms/email-nodemailer';
-import { BlocksFeature, EXPERIMENTAL_TableFeature, HeadingFeature, lexicalEditor } from '@payloadcms/richtext-lexical';
 import { s3Storage } from '@payloadcms/storage-s3';
-import { buildConfig } from 'payload';
+import { type Block, buildConfig } from 'payload';
 import sharp from 'sharp';
 
 /* * */
 
-import { BackgroundColorFeature } from '@/lexical/backgroundColor/feature.server';
-import { HeadingAnchorFeature } from '@/lexical/headingAnchor/feature.server';
-import { MentionFeature } from '@/lexical/mention/feature.server';
+import { createLexicalConfig } from '@/configs/lexical-editor-config';
+import { Campaigns } from '@/schemas/Campaigns/collection';
 import { CaseStudies } from '@/schemas/CaseStudies/collection';
 import { KnowledgeBase } from '@/schemas/KnowledgeBase/collection';
 import { Media } from '@/schemas/Media/collection';
@@ -30,11 +28,79 @@ import { HomeSlider } from '@/schemas/HomeSlider/global';
 
 /* * */
 
+<<<<<<< HEAD
 import { accordionFields } from './fields/accordion';
 import { galleryFields } from './fields/gallery';
 import { linkFields } from './fields/link';
 import { videoFields } from './fields/video';
 import { Videos } from './schemas/Videos/collection';
+=======
+import { accordionFields } from '@/fields/accordion';
+import { galleryFields } from '@/fields/gallery';
+import { linkFields } from '@/fields/link';
+import { sectionFields } from '@/fields/section';
+import { surfaceFields } from '@/fields/surface';
+import { videoFields } from '@/fields/video';
+import { CardBlock } from '@/lexical/layout/card';
+import { ThreeColumnsTextBlock } from '@/lexical/layout/three-columns-text';
+import { TwoColumnsTextBlock } from '@/lexical/layout/two-columns-text';
+import { TwoColumnsTextImageBlock } from '@/lexical/layout/two-columns-text-image';
+
+import { spacerFields } from './fields/spacer';
+
+/* * */
+
+const richTextBlocks: Block[] = [
+	{
+		fields: spacerFields,
+		slug: 'spacer',
+	},
+	{
+		fields: accordionFields,
+		slug: 'accordion',
+	},
+	{
+		fields: galleryFields,
+		slug: 'gallery',
+	},
+	{
+		fields: linkFields,
+		slug: 'link',
+	},
+	{
+		fields: videoFields,
+		slug: 'video',
+	},
+	{
+		admin: { group: 'Layout' },
+		fields: sectionFields,
+		slug: 'section',
+	},
+	{
+		admin: { group: 'Layout' },
+		fields: surfaceFields,
+		slug: 'surface',
+	},
+	{
+		...ThreeColumnsTextBlock,
+		admin: { group: 'Layout' },
+	},
+	{
+		...TwoColumnsTextBlock,
+		admin: { group: 'Layout' },
+	},
+	{
+		...TwoColumnsTextImageBlock,
+		admin: { group: 'Layout' },
+	},
+	{
+		...CardBlock,
+		admin: { group: 'Layout' },
+	},
+];
+
+const lexicalEditorConfig = createLexicalConfig(richTextBlocks);
+>>>>>>> staging
 
 /* * */
 
@@ -48,10 +114,14 @@ export default buildConfig({
 			},
 		},
 		livePreview: {
-			collections: ['news'],
-			url: ({ data }) => {
+			collections: ['news', 'campaigns'],
+			url: ({ collectionConfig, data }) => {
 				if (!data?.id) return undefined;
-				return `${getPublicVariable('server_url_frontend')}/news/preview?id=${data.id}`;
+				const base = getPublicVariable('server_url_frontend');
+				const slug = collectionConfig?.slug as unknown as string | undefined;
+				return slug === 'campaigns'
+					? `${base}/campaigns/preview?id=${data.id}`
+					: `${base}/news/preview?id=${data.id}`;
 			},
 		},
 		meta: {
@@ -61,7 +131,8 @@ export default buildConfig({
 		user: 'users',
 	},
 
-	collections: [CaseStudies, Media, News, Topics, Users, KnowledgeBase, Notes, Articles, Videos],
+	collections: [Campaigns, Articles, CaseStudies, Media, News, Topics, Users, KnowledgeBase, Notes, Videos],
+
 	csrf: [
 		getPublicVariable('server_url_backoffice').replace(/\/$/, ''),
 		`${getPublicVariable('server_url_backoffice').replace(/\/$/, '')}/admin`,
@@ -69,36 +140,7 @@ export default buildConfig({
 
 	db: mongooseAdapter({ url: process.env.WEBSITEDB_URI ?? 'mongodb://placeholder:placeholder@placeholder:12345/placeholder' }),
 
-	editor: lexicalEditor({
-		features: ({ defaultFeatures }) => [
-			...defaultFeatures.filter(f => f.key !== 'heading'),
-			HeadingFeature({ enabledHeadingSizes: ['h2', 'h3'] }),
-			HeadingAnchorFeature(),
-			BlocksFeature({
-				blocks: [
-					{
-						fields: accordionFields,
-						slug: 'accordion',
-					},
-					{
-						fields: galleryFields,
-						slug: 'gallery',
-					},
-					{
-						fields: linkFields,
-						slug: 'link',
-					},
-					{
-						fields: videoFields,
-						slug: 'video',
-					},
-				],
-			}),
-			BackgroundColorFeature(),
-			EXPERIMENTAL_TableFeature(),
-			MentionFeature(),
-		],
-	}),
+	editor: lexicalEditorConfig,
 
 	email: nodemailerAdapter({
 		defaultFromAddress: process.env.EMAIL_FROM_ADDRESS ?? '',

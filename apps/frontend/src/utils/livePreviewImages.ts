@@ -64,9 +64,15 @@ export async function processUploadNode(node: any): Promise<any> {
 
 	if (node.type === 'upload') {
 		const value = node.value;
-		if (value && typeof value === 'object' && value.url) return node;
+		if (value && typeof value === 'object' && typeof value.url === 'string') return node;
 
-		const id = value != null ? (typeof value === 'object' ? value?.id : String(value)) : null;
+		// Payload sometimes wraps uploaded media in `file` or `value`.
+		if (value && typeof value === 'object') {
+			if (value.file && typeof value.file.url === 'string') return { ...node, value: value.file };
+			if (value.value && typeof value.value.url === 'string') return { ...node, value: value.value };
+		}
+
+		const id = getImageId(value);
 		if (id) {
 			const media = await fetchMedia(id);
 			if (media) return { ...node, value: media };
@@ -84,27 +90,84 @@ export async function processUploadNode(node: any): Promise<any> {
 
 /* * */
 
+async function processSurfaceBackgroundImage(block: any, prevBlock?: any) {
+	const f = block?.fields;
+	if (!f?.hasBackgroundImage) return block;
+	if (!f?.backgroundImage) return block;
+
+	if (hasImageUrl(f.backgroundImage)) return block;
+
+	const prevBg = prevBlock?.fields?.backgroundImage;
+	if (prevBg && hasImageUrl(prevBg)) {
+		return { ...block, fields: { ...f, backgroundImage: prevBg } };
+	}
+
+	const id = getImageId(f.backgroundImage);
+	if (!id) return block;
+
+	const media = await fetchMedia(id);
+	return media ? { ...block, fields: { ...f, backgroundImage: media } } : block;
+}
+
+/**
+ * Walks the full Lexical tree (including nested blocks inside section/surface content)
+ * so surface backgrounds and uploads resolve everywhere, not only at the document root.
+ */
+async function processLexicalNode(node: any, prevNode: any): Promise<any> {
+	if (!node || typeof node !== 'object') return node;
+
+	let result = node;
+
+	if (result.fields?.content?.root?.children) {
+		const prevContent = prevNode?.fields?.content;
+		const processedContent = await processLexicalBody(result.fields.content, prevContent);
+		result = { ...result, fields: { ...result.fields, content: processedContent } };
+	}
+
+	if (result.type === 'upload') {
+		return processUploadNode(result);
+	}
+
+	if (result.type === 'block') {
+		const f = result.fields;
+		if (f?.blockType === 'gallery' && f?.images) {
+			const prevImages = prevNode?.fields?.images || [];
+			const images = await processGalleryImages(f.images, prevImages);
+			result = { ...result, fields: { ...result.fields, images } };
+		}
+		if (f?.blockType === 'surface') {
+			result = await processSurfaceBackgroundImage(result, prevNode);
+		}
+		if (f?.blockType === 'spacer') {
+			return result;
+		}
+	}
+
+	if (Array.isArray(result.children)) {
+		const prevChildren = prevNode?.children;
+		result = {
+			...result,
+			children: await Promise.all(
+				result.children.map((child: any, i: number) => processLexicalNode(child, prevChildren?.[i])),
+			),
+		};
+	}
+
+	return result;
+}
+
+async function processLexicalBody(body: any, prevBody: any): Promise<any> {
+	if (!body?.root?.children) return body;
+	const prevChildren = prevBody?.root?.children || [];
+	const children = await Promise.all(
+		body.root.children.map((c: any, i: number) => processLexicalNode(c, prevChildren[i])),
+	);
+	return { ...body, root: { ...body.root, children } };
+}
+
+/* * */
+
 export async function processBodyImages(body: any, prevBody?: any): Promise<any> {
 	if (!body?.root?.children) return body;
-
-	const prevGalleryBlocks = prevBody?.root?.children?.filter(
-		(c: any) => c.type === 'block' && c.fields?.blockType === 'gallery',
-	) || [];
-
-	const processedChildren = await Promise.all(
-		body.root.children.map(async (block: any, index: number) => {
-			const isGallery = block.type === 'block' && block.fields?.blockType === 'gallery' && block.fields?.images;
-
-			if (isGallery) {
-				const prevBlock = prevGalleryBlocks[index] ?? prevGalleryBlocks.find((b: any) => b.fields?.blockType === 'gallery');
-				const prevImages = prevBlock?.fields?.images || [];
-				const images = await processGalleryImages(block.fields.images, prevImages);
-				return { ...block, fields: { ...block.fields, images } };
-			}
-
-			return processUploadNode(block);
-		}),
-	);
-
-	return { ...body, root: { ...body.root, children: processedChildren } };
+	return processLexicalBody(body, prevBody);
 }

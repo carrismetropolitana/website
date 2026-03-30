@@ -4,6 +4,7 @@
 
 import type { Line } from '@carrismetropolitana/api-types/network';
 
+import { useEnvironmentContext } from '@/contexts/Environment.context';
 import { useLinesContext } from '@/contexts/Lines.context';
 import { useProfileContext } from '@/contexts/Profile.context';
 import { createDocCollection } from '@/hooks/useOtherSearch';
@@ -63,7 +64,9 @@ export const LinesListContextProvider = ({ children }) => {
 
 	const linesContext = useLinesContext();
 	const profileContext = useProfileContext();
+	const environmentContext = useEnvironmentContext();
 	const analyticsContext = useAnalyticsContext();
+	const isMupi = environmentContext.data.value === 'mupi';
 
 	const [dataFilteredState, setDataFilteredState] = useState<Line[]>([]);
 	const [dataFavoritesState, setDataFavoritesState] = useState<Line[]>([]);
@@ -144,10 +147,10 @@ export const LinesListContextProvider = ({ children }) => {
 	}, [linesContext.data.lines, profileContext.data.favorite_lines]);
 
 	useEffect(() => {
-		if (dataFavoritesState.length > 0) {
+		if (!isMupi && dataFavoritesState.length > 0) {
 			setFilterByCurrentViewState('favorites');
 		}
-	}, [dataFavoritesState.length]);
+	}, [dataFavoritesState.length, isMupi]);
 
 	//
 	// D. Handle actions
@@ -157,6 +160,7 @@ export const LinesListContextProvider = ({ children }) => {
 	};
 
 	const updateFilterByCurrentView = (value: LinesListContextState['filters']['by_current_view']) => {
+		if (isMupi && value === 'favorites') return;
 		setFilterByCurrentViewState(value);
 	};
 

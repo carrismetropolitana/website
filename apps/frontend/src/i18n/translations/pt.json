@@ -62,6 +62,18 @@
 		"publish_date": "{published_at, date, long}",
 		"see_more": "Veja Mais"
 	},
+	"PipsSurvey": {
+		"header": {
+			"question": "Existe algum problema com este painel?",
+			"question_pip_stops": "Estas são as paragens associadas a este painel",
+			"subtitle": "Obrigado por nos ajudar a manter este painel a funcionar.",
+			"title": "Painel {pipId}"
+		},
+		"stops_list": {
+			"no_data": "Nenhuma paragem disponível",
+			"question": "Estas são as paragens associadas a este painel"
+		}
+	},
 	"SelectLine": {
 		"label": "Procurar linha por número, nome, localidade...",
 		"nothing_found": "Nenhum Resultado Encontrado",
@@ -2023,7 +2035,7 @@
 		},
 		"StopsDetailContentTimetableRow": {
 			"debug_modal": {
-				"title": "IDs de viagens relacionadas"
+				"title": "Estes dados representam trip IDs iguais para diferentes dias"
 			},
 			"localities": {
 				"label": "Passa por"
@@ -2239,7 +2251,7 @@
 		"TicketsHeader": {
 			"heading": "Bilhetes Ocasionais",
 			"onboard": {
-				"description": "Pode viajar na Carris Metropolitana adquirindo um bilhete diretamente ao motorista (em numerário), ou utilizando um cartão bancário contactless, no validador amarelo.",
+				"description": "Pode viajar na Carris Metropolitana adquirindo um bilhete diretamente ao motorista (em numerário), ou utilizando um cartão bancário contactless, no validador amarelo de algumas viaturas das áreas 1,2 e 3.",
 				"inner": {
 					"description": "Consultar e atualizar dados de faturas de pagamentos feitos com cartão bancário contactless.",
 					"title": "Portal do Utilizador"

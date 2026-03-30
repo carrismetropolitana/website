@@ -36,7 +36,7 @@ export function PeriodsWidget() {
 	//
 	// B. Fetch data
 
-	const { data: periodsData } = useSWR('https://api.carrismetropolitana.pt/periods'); // TODO: Replace with the correct API endpoint
+	const { data: periodsData } = useSWR('https://api.carrismetropolitana.pt/v2/periods');
 
 	//
 	// C. Transform data
@@ -49,20 +49,20 @@ export function PeriodsWidget() {
 			const operationalDate = getOperationalDate();
 			// For each period, check if it contains the date for today
 			const filteredPeriods = periodsData.map((period) => {
-				// Filter valid pairs with 'until' dates before the current date
-				const validPairsFiltered = period.valid.filter((validPair) => {
-					return Number(validPair.until) >= Number(operationalDate);
+				// Filter valid pairs with 'end' dates before the current date
+				const validPairsFiltered = period.valid_ranges?.filter((validPair) => {
+					return Number(validPair.end) >= Number(operationalDate);
 				});
 				// Format the valid pairs into the display format
 				const validPairsFormatted = validPairsFiltered.map((validPair) => {
-					const fromDateFormatted = DateTime.fromFormat(validPair.from, 'yyyyMMdd', { zone: 'Europe/Lisbon' }).set({ hour: 10 }).toJSDate();
-					const untilDateFormatted = DateTime.fromFormat(validPair.until, 'yyyyMMdd', { zone: 'Europe/Lisbon' }).set({ hour: 10 }).toJSDate();
+					const fromDateFormatted = DateTime.fromFormat(validPair.start, 'yyyyMMdd', { zone: 'Europe/Lisbon' }).set({ hour: 10 }).toJSDate();
+					const untilDateFormatted = DateTime.fromFormat(validPair.end, 'yyyyMMdd', { zone: 'Europe/Lisbon' }).set({ hour: 10 }).toJSDate();
 					return { from: fromDateFormatted, until: untilDateFormatted };
 				});
 				// Return the formatted period data
 				return {
 					id: period.id,
-					isActive: period.dates.includes(operationalDate) ? true : false,
+					isActive: period.valid_on.includes(operationalDate) ? true : false,
 					name: period.name,
 					validPairs: validPairsFormatted,
 				};

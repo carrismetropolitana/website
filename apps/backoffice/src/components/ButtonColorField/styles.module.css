@@ -1,0 +1,19 @@
+/* SWATCH */
+
+.swatch {
+	box-sizing: border-box;
+	width: 42px;
+	height: 38px;
+	padding: 0;
+	border: 1px solid var(--theme-elevation-150);
+	border-radius: 4px;
+	cursor: pointer;
+	background: transparent;
+}
+
+.swatch:disabled {
+	cursor: not-allowed;
+	opacity: 0.6;
+}
+
+/* * */

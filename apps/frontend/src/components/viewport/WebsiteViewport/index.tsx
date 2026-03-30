@@ -28,7 +28,9 @@ export function WebsiteViewport({ children }) {
 
 	// Hide navbar on news preview (live preview iframe from backoffice)
 	const isNewsPreviewPage = pathname === '/news/preview';
-	const showNavbar = searchParams.get('origin') !== 'app' && !isNewsPreviewPage;
+	// Hide navbar on campaigns preview (live preview iframe from backoffice)
+	const isCampaignsPreviewPage = pathname === '/campaigns/preview';
+	const showNavbar = searchParams.get('origin') !== 'app' && !isNewsPreviewPage && !isCampaignsPreviewPage;
 
 	//
 	// B. Render components

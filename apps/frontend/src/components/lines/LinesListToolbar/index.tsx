@@ -5,6 +5,7 @@
 import { FoundItemsCounter } from '@/components/common/FoundItemsCounter';
 import { Section } from '@/components/layout/Section';
 import { Surface } from '@/components/layout/Surface';
+import { useEnvironmentContext } from '@/contexts/Environment.context';
 import { useLinesListContext } from '@/contexts/LinesList.context';
 import { SegmentedControl, TextInput } from '@mantine/core';
 import { IconArrowLoopRight } from '@tabler/icons-react';
@@ -20,13 +21,15 @@ export function LinesListToolbar() {
 
 	const t = useTranslations('lines.LinesListToolbar');
 	const linesContext = useLinesListContext();
+	const environmentContext = useEnvironmentContext();
+	const isMupi = environmentContext.data.value === 'mupi';
 
 	//
 	// B. Transform data
 
 	const currentViewOptions = [
 		{ label: t('by_current_view.all'), value: 'all' },
-		{ label: t('by_current_view.favorites', { count: linesContext.counters.favorites }), value: 'favorites' },
+		...(!isMupi ? [{ label: t('by_current_view.favorites', { count: linesContext.counters.favorites }), value: 'favorites' }] : []),
 	];
 
 	//

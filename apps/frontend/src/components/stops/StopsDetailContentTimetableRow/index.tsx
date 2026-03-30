@@ -95,7 +95,7 @@ export function StopsDetailContentTimetableRow({ arrivalData, status }: Props) {
 			</div>
 
 			{isSelected && debugContext.flags.is_debug_mode && (
-				<div className={styles.details}>
+				<div className={styles.details} onClick={e => e.stopPropagation()}>
 					<StopsDetailContentTimetableRowDebug arrivalData={arrivalData} />
 				</div>
 			)}

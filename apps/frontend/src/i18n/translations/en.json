@@ -62,6 +62,17 @@
 		"publish_date": "{publishDate, date, long}",
 		"see_more": "See More"
 	},
+	"PipsSurvey": {
+		"header": {
+			"question": "Is there any problem with this panel?",
+			"question_pip_stops": "These are the stops associated with this panel",
+			"subtitle": "Thank you for helping us keep this panel working.",
+			"title": "Display {pipId}"
+		},
+		"stops_list": {
+			"no_data": "No stops available"
+		}
+	},
 	"SelectLine": {
 		"label": "Search line by number, name, location...",
 		"nothing_found": "No Results Found",
@@ -2022,7 +2033,7 @@
 		},
 		"StopsDetailContentTimetableRow": {
 			"debug_modal": {
-				"title": "Trip IDs related"
+				"title": "This data represents equal trip IDs for different days"
 			},
 			"localities": {
 				"label": "Goes through:"
@@ -2238,7 +2249,7 @@
 		"TicketsHeader": {
 			"heading": "Occasional Tickets",
 			"onboard": {
-				"description": "You can travel on Carris Metropolitana by purchasing a ticket directly from the driver (in cash), or by using a contactless bank card at the yellow validator.",
+				"description": "You can travel on Carris Metropolitana by purchasing a ticket directly from the driver (in cash), or by using a contactless bank card at the yellow validator of some vehicles, in areas 1, 2 and 3.",
 				"inner": {
 					"description": "Check and update invoice data for payments made with a contactless bank card.",
 					"title": "User Portal"
