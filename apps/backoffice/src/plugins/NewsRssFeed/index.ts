@@ -16,7 +16,7 @@ export function newsRssFeed() {
 	//
 	// A. Setup variables
 
-	const strippedUrl = getPublicVariable('server_url_frontend').replace(/\/$/, '');
+	const strippedUrl = getPublicVariable('server_url_backoffice').replace(/\/$/, '');
 
 	//
 	// B. Setup Endpoint
@@ -48,12 +48,7 @@ export function newsRssFeed() {
 			const itemsXml = docs.map(doc => rssItemXml(doc, frontendBase)).join('\n');
 			const xml = rssFeedXml(itemsXml, frontendBase);
 
-			return new Response(xml, {
-				headers: {
-					...getPublicHeaders(180),
-					'Content-Type': 'application/rss+xml; charset=utf-8',
-				},
-			});
+			return new Response(xml, { headers: { ...getPublicHeaders(180), 'Content-Type': 'application/rss+xml; charset=utf-8' } });
 		},
 		method: 'get',
 		path: '/xml',
