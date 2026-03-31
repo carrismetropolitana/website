@@ -12,6 +12,14 @@ const nextConfig: NextConfig = {
 			bodySizeLimit: '4gb',
 		},
 	},
+	async rewrites() {
+		return [
+			{
+				destination: '/api/feeds/news',
+				source: '/api/news.rss',
+			},
+		];
+	},
 	images: {
 		remotePatterns: [
 			{
