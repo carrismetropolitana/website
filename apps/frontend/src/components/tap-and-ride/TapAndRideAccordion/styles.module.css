@@ -2,7 +2,6 @@
 /* Accordion */
 .accordion {
 	width: 100%;
-	background-color: var(--color-system-background-100);
 }
 
 .withOuterPadding {
@@ -34,7 +33,7 @@
 /* * */
 /* Accordion Item */
 .accordionItem {
-	padding: var(--size-spacing-5);
+	padding: var(--size-spacing-10);
 	border: 1px solid var(--color-system-border-100);
 	border-bottom: 1px solid var(--color-system-border-100) !important;
 	border-radius: var(--border-radius-lg);

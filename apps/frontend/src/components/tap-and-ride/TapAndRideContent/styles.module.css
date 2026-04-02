@@ -17,6 +17,12 @@
 }
 
 @media (width <= 768px) {
+
+	.contentRow {
+		margin-right: 0;
+		margin-left: 0;
+	}
+	
 	.contentRow > * {
 		flex: 0 0 100%;
 	}
