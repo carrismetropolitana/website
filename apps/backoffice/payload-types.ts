@@ -526,18 +526,18 @@ export interface Video {
   id: string;
   title: string;
   /**
-   * URL única para este vídeo. Será gerada automaticamente do título se deixado em branco.
+   * URL única para este vídeo. Será gerada automaticamente a partir do título se deixado em branco.
    */
   slug: string;
   /**
-   * Resumo curto do vídeo que aparece na listagem e nos card dos vídeos.
+   * Resumo curto do vídeo que poderá ser enviado para leitores de tela, ou seções onde uma decrição for necessária.
    */
-  description: string;
+  description?: string | null;
   type: 'tecnologia' | 'operacao' | 'sustentabilidade' | 'comunicacao';
   video: string | Media;
   thumbnail: string | Media;
   /**
-   * Legenda que aparece sobre a thumbnail, importante para acessibilidade para leitores de tela.
+   * Legenda que aparecerá em relação a thumbnail, será utilizada para acessibilidade e para leitores de tela.
    */
   thumbnailCaptions?: string | null;
   publishedAt: string;

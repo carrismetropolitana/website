@@ -42,6 +42,7 @@ import { TwoColumnsTextBlock } from '@/lexical/layout/two-columns-text';
 import { TwoColumnsTextImageBlock } from '@/lexical/layout/two-columns-text-image';
 import { Videos } from './schemas/Videos/collection';
 import { spacerFields } from './fields/spacer';
+import { Videos } from './schemas/Videos/collection';
 
 /* * */
 
