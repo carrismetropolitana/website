@@ -36,7 +36,7 @@ export function TapAndRideAccordion({ imageAlt, imageSrc, items, withBorder = fa
 	// B. Render components
 
 	return (
-		<Section withPadding>
+		<Section>
 			<Accordion className={styles.accordion} onChange={setOpenedItem} value={openedItem}>
 				{items.map((item) => {
 					const headerShowsImage = openedItem === item.id && Boolean(imageSrc);
