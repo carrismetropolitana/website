@@ -1,18 +1,16 @@
 .contentRow {
 	display: flex;
 	flex-wrap: wrap;
-	gap: var(--size-spacing-5);
-	align-items: flex-start;
 	justify-content: center;
 }
 
 .contentRow > * {
-	flex: 0 0 calc((100% - 2 * var(--size-spacing-5)) / 3);
+	flex: 0 0 calc(100% / 3);
 }
 
 @media (width <= 1024px) {
 	.contentRow > * {
-		flex: 0 0 calc((100% - var(--size-spacing-5)) / 2);
+		flex: 0 0 calc(100% / 2);
 	}
 }
 
