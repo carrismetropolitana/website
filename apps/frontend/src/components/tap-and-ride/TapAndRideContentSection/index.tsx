@@ -21,13 +21,16 @@ interface TapAndRideContentSectionProps<TItem extends TapAndRideKeyedItem> {
 
 /* * */
 
-export function TapAndRideContentSection<TItem extends TapAndRideKeyedItem>({
-	imageAlt,
-	imageSrc,
-	item,
-	renderPanel,
-}: TapAndRideContentSectionProps<TItem>) {
+export function TapAndRideContentSection<TItem extends TapAndRideKeyedItem>({ imageAlt, imageSrc, item, renderPanel }: TapAndRideContentSectionProps<TItem>) {
+	//
+
+	//
+	// A. Setup variables
+
 	const t = useTranslations('tap-and-ride');
+
+	//
+	// B. Render components
 
 	return (
 		<TapAndRideAccordion
@@ -40,4 +43,6 @@ export function TapAndRideContentSection<TItem extends TapAndRideKeyedItem>({
 			}]}
 		/>
 	);
+
+	//
 }

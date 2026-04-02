@@ -2,8 +2,11 @@
 /* Accordion */
 .accordion {
 	width: 100%;
-	padding: var(--size-spacing-10);
 	background-color: var(--color-system-background-100);
+}
+
+.withOuterPadding {
+	padding: var(--size-spacing-5);
 }
 
 .withBorder {
