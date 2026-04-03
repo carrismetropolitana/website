@@ -23,7 +23,7 @@ export const GET = async (request: Request) => {
 
 	const whereClause: Where = {
 		status: { equals: 'published' },
-		...(type && { type: { equals: type } }),
+		...(type && { type: { in: type } }),
 		...(expertArticle && { 'author.expertAuthor': { equals: expertArticle } }),
 	};
 
