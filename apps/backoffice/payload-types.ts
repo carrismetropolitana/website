@@ -533,13 +533,37 @@ export interface Video {
    * Resumo curto do vídeo que poderá ser enviado para leitores de tela, ou seções onde uma decrição for necessária.
    */
   description?: string | null;
-  type: 'tecnologia' | 'operacao' | 'sustentabilidade' | 'comunicacao';
-  video: string | Media;
-  thumbnail: string | Media;
   /**
    * Legenda que aparecerá em relação a thumbnail, será utilizada para acessibilidade e para leitores de tela.
    */
   thumbnailCaptions?: string | null;
+  author: {
+    picture?: (string | null) | Media;
+    name: string;
+    role: string;
+    /**
+     * Breve descrição sobre o autor.
+     */
+    bio?: string | null;
+    /**
+     * Se este artigo foi escrito por um especialista, lembre-se de marcar para que possa ser entregue conteúdos de especialistas separadamente.
+     */
+    expertAuthor: boolean;
+    social?: {
+      linkedin?: string | null;
+      twitter?: string | null;
+      email?: string | null;
+    };
+  };
+  type: 'tecnologia' | 'operacao' | 'sustentabilidade' | 'comunicacao';
+  video: string | Media;
+  thumbnail: string | Media;
+  status: 'draft' | 'published';
+  seo?: {
+    metaTitle?: string | null;
+    metaDescription?: string | null;
+    ogImage?: (string | null) | Media;
+  };
   publishedAt: string;
   updatedAt: string;
 }
@@ -915,10 +939,34 @@ export interface VideosSelect<T extends boolean = true> {
   title?: T;
   slug?: T;
   description?: T;
+  thumbnailCaptions?: T;
+  author?:
+    | T
+    | {
+        picture?: T;
+        name?: T;
+        role?: T;
+        bio?: T;
+        expertAuthor?: T;
+        social?:
+          | T
+          | {
+              linkedin?: T;
+              twitter?: T;
+              email?: T;
+            };
+      };
   type?: T;
   video?: T;
   thumbnail?: T;
-  thumbnailCaptions?: T;
+  status?: T;
+  seo?:
+    | T
+    | {
+        metaTitle?: T;
+        metaDescription?: T;
+        ogImage?: T;
+      };
   publishedAt?: T;
   updatedAt?: T;
 }

@@ -57,6 +57,81 @@ export const Videos: CollectionConfig = {
 		},
 		{
 			admin: {
+				description: 'Legenda que aparecerá em relação a thumbnail, será utilizada para acessibilidade e para leitores de tela.',
+			},
+			label: 'Legenda da Thumbnail',
+			maxLength: 200,
+			name: 'thumbnailCaptions',
+			type: 'text',
+		},
+		{
+			fields: [
+				{
+					label: 'Foto',
+					name: 'picture',
+					relationTo: 'media',
+					type: 'upload',
+				},
+				{
+					label: 'Nome',
+					name: 'name',
+					required: true,
+					type: 'text',
+				},
+				{
+					label: 'Cargo/Função',
+					name: 'role',
+					required: true,
+					type: 'text',
+				},
+				{
+					admin: {
+						description: 'Breve descrição sobre o autor.',
+					},
+					label: 'Biografia',
+					name: 'bio',
+					type: 'textarea',
+				},
+				{
+					admin: {
+						description: 'Se este artigo foi escrito por um especialista, lembre-se de marcar para que possa ser entregue conteúdos de especialistas separadamente.',
+						position: 'sidebar',
+					},
+					defaultValue: false,
+					label: 'Artigo escrito por um especialista',
+					name: 'expertAuthor',
+					required: true,
+					type: 'checkbox',
+				},
+				{
+					fields: [
+						{
+							label: 'LinkedIn',
+							name: 'linkedin',
+							type: 'text',
+						},
+						{
+							label: 'X (Twitter)',
+							name: 'twitter',
+							type: 'text',
+						},
+						{
+							label: 'Email',
+							name: 'email',
+							type: 'email',
+						},
+					],
+					label: 'Redes Sociais',
+					name: 'social',
+					type: 'group',
+				},
+			],
+			label: 'Autor',
+			name: 'author',
+			type: 'group',
+		},
+		{
+			admin: {
 				position: 'sidebar',
 			},
 			label: 'Tipo',
@@ -109,12 +184,48 @@ export const Videos: CollectionConfig = {
 		},
 		{
 			admin: {
-				description: 'Legenda que aparecerá em relação a thumbnail, será utilizada para acessibilidade e para leitores de tela.',
+				position: 'sidebar',
 			},
-			label: 'Legenda da Thumbnail',
-			maxLength: 200,
-			name: 'thumbnailCaptions',
-			type: 'text',
+			defaultValue: 'draft',
+			label: 'Status',
+			name: 'status',
+			options: [
+				{
+					label: 'Rascunho',
+					value: 'draft',
+				},
+				{
+					label: 'Publicado',
+					value: 'published',
+				},
+			],
+			required: true,
+			type: 'select',
+		},
+		{
+			fields: [
+				{
+					label: 'Título Meta',
+					maxLength: 60,
+					name: 'metaTitle',
+					type: 'text',
+				},
+				{
+					label: 'Descrição Meta',
+					maxLength: 160,
+					name: 'metaDescription',
+					type: 'textarea',
+				},
+				{
+					label: 'Imagem OG',
+					name: 'ogImage',
+					relationTo: 'media',
+					type: 'upload',
+				},
+			],
+			label: 'SEO',
+			name: 'seo',
+			type: 'group',
 		},
 		publishedAtField,
 		updatedAtField,

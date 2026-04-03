@@ -1,0 +1,50 @@
+import payloadConfig from '@/payload-config';
+import { getPublicHeaders } from '@/utils/get-public-headers';
+import { getPayload, type Where } from 'payload';
+
+/* * */
+
+export const GET = async (request: Request) => {
+	//
+
+	//
+	// A. Setup Payload and other necessary variables for handling requests.
+
+	const { searchParams } = new URL(request.url);
+	const type = searchParams.get('type');
+	const limit = Number(searchParams.get('limit')) || 10;
+	const page = Number(searchParams.get('page')) || 1;
+	const videoAuthorIsExpert = Boolean	(searchParams.get('expert-author') || false);
+
+	const payload = await getPayload({ config: payloadConfig });
+
+	//
+	// B. Build the where clause, optionally filtering by type (mapped to the type field).
+
+	const whereClause: Where = {
+		status: { equals: 'published' },
+		...(type && { type: { equals: type } }),
+		...(videoAuthorIsExpert && { 'video.expertAuthor': { equals: videoAuthorIsExpert } }),
+	};
+
+	//
+	// C. Retrieve published articles from the database.
+
+	const foundArticles = await payload.find({
+		collection: 'videos',
+		depth: 1,
+		limit,
+		page,
+		sort: '-publishDate',
+		where: whereClause,
+	});
+
+	//
+	// Return articles as a JSON response.
+
+	return Response.json(foundArticles, {
+		headers: getPublicHeaders(60),
+	});
+
+	//
+};
