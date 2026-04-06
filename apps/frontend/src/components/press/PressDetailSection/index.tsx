@@ -2,6 +2,7 @@
 
 /* * */
 
+import { useRenderLexicalNode } from '@/components/payload/lexical-renderer';
 import { IconArrowLeft, IconCopy, IconDownload } from '@tabler/icons-react';
 import { useTranslations } from 'next-intl';
 import Link from 'next/link';
@@ -15,7 +16,7 @@ import { PressHeaderGenericSection } from '../PressHeaderGenericSection';
 /* * */
 
 interface PressDetailSectionProps {
-	body?: string
+	body?: Record<string, unknown> | string
 	contentType?: 'file' | 'link'
 	file?: {
 		filename?: string
@@ -47,6 +48,18 @@ export function PressDetailSection({
 }: PressDetailSectionProps) {
 	const [copied, setCopied] = useState(false);
 	const t = useTranslations('press.DetailSection');
+	const renderLexicalNode = useRenderLexicalNode();
+
+	// Parse body as Lexical JSON
+	const bodyJSON = typeof body === 'string' ? (() => {
+		try {
+			return JSON.parse(body);
+		}
+		catch {
+			return null;
+		}
+	})() : body;
+	const rootNode = bodyJSON?.root || bodyJSON;
 
 	// Format the publish date
 	const formattedDate = new Date(publishDate).toLocaleDateString('pt-PT', {
@@ -130,7 +143,12 @@ export function PressDetailSection({
 						)}
 
 						{/* Body content */}
-						{body && (
+						{body && rootNode && (
+							<div className={styles.body}>
+								{renderLexicalNode(rootNode)}
+							</div>
+						)}
+						{body && !rootNode && typeof body === 'string' && (
 							<div
 								className={styles.body}
 								dangerouslySetInnerHTML={{ __html: body }}

@@ -227,6 +227,10 @@ export interface Article {
      * Breve descrição sobre o autor.
      */
     bio?: string | null;
+    /**
+     * Se este artigo foi escrito por um especialista, lembre-se de marcar para que possa ser entregue conteúdos de especialistas separadamente.
+     */
+    expertAuthor: boolean;
     social?: {
       linkedin?: string | null;
       twitter?: string | null;
@@ -381,10 +385,21 @@ export interface Note {
    * Texto de destaque/resumo que aparece no início do artigo. Suporta HTML.
    */
   lead?: string | null;
-  /**
-   * Conteúdo principal do artigo. Suporta HTML.
-   */
-  body?: string | null;
+  body: {
+    root: {
+      type: string;
+      children: {
+        type: any;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  };
   contentType?: string | null;
   file?: (string | null) | Media;
   publishDate?: string | null;
@@ -539,6 +554,7 @@ export interface ArticlesSelect<T extends boolean = true> {
         name?: T;
         role?: T;
         bio?: T;
+        expertAuthor?: T;
         social?:
           | T
           | {
