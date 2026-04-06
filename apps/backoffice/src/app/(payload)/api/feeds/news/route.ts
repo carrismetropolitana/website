@@ -1,6 +1,6 @@
 /* * */
 
-import type { Media, News } from '@/../../payload-types';
+import type { Media, News } from '@/../payload-types';
 import payloadConfig from '@/payload-config';
 import { getPublicHeaders } from '@/utils/get-public-headers';
 import { normalizeMediaSrc } from '@/utils/normalize-media-src';
@@ -10,18 +10,8 @@ import { getPayload } from 'payload';
 
 /* * */
 
-const absoluteImageUrl = (backofficeBase: string, url: null | string | undefined): null | string => {
-	if (!url) return null;
-	if (url.startsWith('http')) return url;
-	const normalized = normalizeMediaSrc(url);
-	const base = backofficeBase.replace(/\/$/, '');
-	return `${base}${normalized.startsWith('/') ? '' : '/'}${normalized}`;
-};
-
 export const GET = async () => {
 	const payload = await getPayload({ config: payloadConfig });
-	const frontendBase = getPublicVariable('server_url_frontend').replace(/\/$/, '');
-	const backofficeBase = getPublicVariable('server_url_backoffice').replace(/\/$/, '');
 	const docs = (await payload.find({
 		collection: 'news',
 		depth: 1,
@@ -31,17 +21,24 @@ export const GET = async () => {
 		where: { _status: { equals: 'published' }, or: [{ is_unlisted: { equals: false } }, { is_unlisted: { equals: undefined } }] },
 	})).docs as News[];
 	if (!docs.length) return new Response('No news available.', { headers: { ...getPublicHeaders(60), 'Content-Type': 'text/plain; charset=utf-8' }, status: 404 });
+
 	const rawItems = docs.map((doc) => {
+		const link = `${ getPublicVariable('server_url_frontend')}news/${doc.slug || doc.id}`;
 		const media = typeof doc.featured_image === 'object' && doc.featured_image ? doc.featured_image as Media : null;
-		const imageUrl = absoluteImageUrl(backofficeBase, media?.url ?? null);
-		const summary = imageUrl ? `${doc.summary}\n\nImage: ${imageUrl}` : doc.summary;
+		const imageUrl = !media?.url
+			? undefined
+			: (media.url.startsWith('http')
+				? media.url
+				: `${getPublicVariable('server_url_backoffice')}${normalizeMediaSrc(media.url).startsWith('/') ? '' : '/'}${normalizeMediaSrc(media.url)}`);
+		const summary = imageUrl ? `${doc.summary}\n\${imageUrl}` : doc.summary;
 		return {
-			link: `${frontendBase}/news/${doc.slug || doc.id}`,
+			link,
 			publishDate: doc.publishedAt,
 			summary,
 			title: doc.title,
 		};
 	});
+
 	return new Response(createRssFeed(rawItems, {
 		copyright: 'Carris Metropolitana',
 		description: 'Noticias e atualizacoes da Carris Metropolitana.',
