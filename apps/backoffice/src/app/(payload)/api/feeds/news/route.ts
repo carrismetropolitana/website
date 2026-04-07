@@ -11,11 +11,20 @@ import { getPayload } from 'payload';
 /* * */
 
 export const GET = async () => {
+	//
+
+	//
+	//A. Setup variables
+
 	const payload = await getPayload({ config: payloadConfig });
 	const frontendBase = getPublicVariable('server_url_frontend').replace(/\/$/, '');
 	const backofficeBase = getPublicVariable('server_url_backoffice').replace(/\/$/, '');
 	const newsListUrl = `${backofficeBase}/admin/api/news`;
 	const feedSelfUrl = `${backofficeBase}/api/news.rss`;
+
+	//
+	//B. Fetch data
+
 	const docs = (await payload.find({
 		collection: 'news',
 		depth: 1,
@@ -24,23 +33,21 @@ export const GET = async () => {
 		sort: '-publishedAt',
 		where: { _status: { equals: 'published' }, or: [{ is_unlisted: { equals: false } }, { is_unlisted: { equals: undefined } }] },
 	})).docs as News[];
+
+	//
+	//C. Transform data
+
 	if (!docs.length) return new Response('No news available.', { headers: { ...getPublicHeaders(60), 'Content-Type': 'text/plain; charset=utf-8' }, status: 404 });
-
-
 
 	const rawItems = docs.map((doc) => {
 		const link = `${frontendBase}/news/${doc.slug || doc.id}`;
 		const media = typeof doc.featured_image === 'object' && doc.featured_image ? doc.featured_image as Media : null;
 		const normalizedPath = media?.url ? normalizeMediaSrc(media.url) : undefined;
-		 
-		const imageUrl = !media?.url
-			? undefined
+		const imageUrl = !media?.url ? undefined
 			: (media.url.startsWith('http')
 				? media.url
 				: `${backofficeBase}${normalizedPath?.startsWith('/') ? '' : '/'}${normalizedPath}`);
-
-		const images = !imageUrl
-			? undefined
+		const images = !imageUrl ? undefined
 			: [{
 				alt: media?.alt ?? doc.title,
 				...(media?.filesize != null && Number.isFinite(media.filesize) ? { length: media.filesize } : {}),
@@ -57,6 +64,9 @@ export const GET = async () => {
 			title: doc.title,
 		};
 	});
+
+	//
+	//D. Send RSS feed
 
 	return new Response(createRssFeed(rawItems, {
 		copyright: 'Carris Metropolitana',
