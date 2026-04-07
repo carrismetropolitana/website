@@ -22,7 +22,7 @@
 		"@payloadcms/storage-s3": "3.76.1",
 		"@payloadcms/ui": "3.76.1",
 		"@tabler/icons-react": "3.41.1",
-		"@tmlmobilidade/dates": "20260406.1442.3",
+		"@tmlmobilidade/dates": "20260213.1500.47",
 		"@tmlmobilidade/rss": "20260406.1442.3",
 		"@tmlmobilidade/utils": "20260406.1442.3",
 		"classnames": "2.5.1",
