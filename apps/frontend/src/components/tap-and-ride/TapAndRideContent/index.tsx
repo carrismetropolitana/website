@@ -19,7 +19,7 @@ export function TapAndRideContent() {
 	// A. Render components
 
 	return (
-		<>
+		<div>
 			<div className={styles.contentRow}>
 				<TapAndRideSection1 />
 				<TapAndRideSection2 />
@@ -28,7 +28,7 @@ export function TapAndRideContent() {
 				<TapAndRideSection5 />
 			</div>
 			<TapAndRideSectionFaqs />
-		</>
+		</div>
 	);
 
 	//

@@ -25,6 +25,7 @@ export function TapAndRideSectionFaqs() {
 		<Section heading={t('SectionFaqs.heading')}>
 			<TapAndRideAccordion
 				withBorder={true}
+				withOuterPadding={false}
 				items={tapAndRideDataSectionFaqs?.map(item => ({
 					id: item.id,
 					panel: (<> {t(item.content)} </>),

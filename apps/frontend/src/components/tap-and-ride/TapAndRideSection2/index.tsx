@@ -30,7 +30,12 @@ export function TapAndRideSection2() {
 					<div className={styles.subcontentContainer}>
 						<p className={styles.subcontentText}>{t(item.subcontent)}</p>
 					</div>
-					<Button className={styles.button} icon={<IconExternalLink size={18} />} label={t('Section2.tarifs.buttonLabel')} />
+					<Button
+						className={styles.button}
+						href="/tickets"
+						icon={<IconExternalLink size={18} />}
+						label={t('Section2.tarifs.buttonLabel')}
+					/>
 				</div>
 			)}
 		/>

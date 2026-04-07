@@ -18,7 +18,7 @@ export function TapAndRideHeader() {
 
 	const localeContext = useLocaleContext();
 	const t = useTranslations('tap-and-ride');
-	const bannerImageSrc = localeContext.data.current_locale.includes('pt') ? '/assets/tap-and-ride/AF_CUT_BannerL_PT.png' : '/assets/tap-and-ride/AF_CUT_BannerL_ENG.png';
+	const bannerImageSrc = localeContext.data.current_locale.includes('pt') ? '/assets/tap-and-ride/AF_CUT_BannerS_PT.png' : '/assets/tap-and-ride/AF_CUT_BannerS_ENG.png';
 
 	//
 	// B. Render Components

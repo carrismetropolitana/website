@@ -41,7 +41,13 @@ export function TapAndRideSection3() {
 							<p className={styles.content}>{t(invoiceEditItem.content)}</p>
 							<p className={styles.content}>{t(invoiceEditItem.subcontent)}</p>
 						</div>
-						<Button className={styles.button} icon={<IconExternalLink size={18} />} label={t('Section3.invoice_edit.buttonLabel')} />
+						<Button
+							className={styles.button}
+							href="https://tap-and-ride.carrismetropolitana.pt"
+							icon={<IconExternalLink size={18} />}
+							label={t('Section3.invoice_edit.buttonLabel')}
+							target="_blank"
+						/>
 					</div>
 				),
 				title: t(invoicesItem.title),

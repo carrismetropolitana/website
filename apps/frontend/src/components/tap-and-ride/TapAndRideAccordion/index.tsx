@@ -20,11 +20,12 @@ interface TapAndRideAccordionProps {
 	imageSrc?: string
 	items: TapAndRideAccordionItemProps[]
 	withBorder?: boolean
+	withOuterPadding?: boolean
 }
 
 /* * */
 
-export function TapAndRideAccordion({ imageAlt, imageSrc, items, withBorder = false }: TapAndRideAccordionProps) {
+export function TapAndRideAccordion({ imageAlt, imageSrc, items, withBorder = false, withOuterPadding = true }: TapAndRideAccordionProps) {
 	//
 
 	//
@@ -36,8 +37,8 @@ export function TapAndRideAccordion({ imageAlt, imageSrc, items, withBorder = fa
 	// B. Render components
 
 	return (
-		<Section withPadding>
-			<Accordion className={styles.accordion} onChange={setOpenedItem} value={openedItem}>
+		<Section>
+			<Accordion className={`${styles.accordion} ${withOuterPadding ? styles.withOuterPadding : ''}`} onChange={setOpenedItem} value={openedItem}>
 				{items.map((item) => {
 					const headerShowsImage = openedItem === item.id && Boolean(imageSrc);
 
