@@ -65,13 +65,12 @@ interface MapViewProps {
 	scale?: boolean
 	scrollZoom?: boolean
 	showCenterButton?: boolean
-	toolbar?: boolean
 	toolbarExtras?: React.ReactNode
 }
 
 /* * */
 
-export function MapView({ autoZoom, children, fullscreen = true, geolocate = true, id, interactiveLayerIds = [], mapStyle, navigation = true, onCenterMap, onClick, onDrag, onMouseEnter, onMouseLeave, onMouseOut, onMouseOver, onMoveEnd, onMoveStart, onZoom, scale = false, scrollZoom = true, showCenterButton = false, toolbar = true, toolbarExtras }: MapViewProps) {
+export function MapView({ autoZoom, children, fullscreen = true, geolocate = true, id, interactiveLayerIds = [], mapStyle, navigation = true, onCenterMap, onClick, onDrag, onMouseEnter, onMouseLeave, onMouseOut, onMouseOver, onMoveEnd, onMoveStart, onZoom, scale = false, scrollZoom = true, showCenterButton = false, toolbarExtras }: MapViewProps) {
 	//
 
 	//
@@ -130,15 +129,13 @@ export function MapView({ autoZoom, children, fullscreen = true, geolocate = tru
 	return (
 		<div className={styles.container}>
 
-			{toolbar && (
-				<MapViewToolbar
-					autoZoom={autoZoom}
-					className={styles.toolbar}
-					onCenterMap={onCenterMap}
-					showCenterButton={showCenterButton}
-					toolbarExtras={toolbarExtras}
-				/>
-			)}
+			<MapViewToolbar
+				autoZoom={autoZoom}
+				className={styles.toolbar}
+				onCenterMap={onCenterMap}
+				showCenterButton={showCenterButton}
+				toolbarExtras={toolbarExtras}
+			/>
 
 			<Map
 				attributionControl={false}

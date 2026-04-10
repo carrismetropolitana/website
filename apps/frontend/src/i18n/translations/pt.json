@@ -1999,6 +1999,7 @@
 				"links": {
 					"cards": "Passe Mensal",
 					"helpdesks": "Onde comprar",
+					"portal-utilizador": "Portal do Utilizador",
 					"tap-and-ride": "Tap & Ride",
 					"tickets": "Bilhetes Ocasionais"
 				}
@@ -2217,6 +2218,93 @@
 			"by_category": "Filtrar por Categoria",
 			"searchInput": "Pesquisar Resultados...",
 			"subheading": "Informação ao Público"
+		}
+	},
+	"tap-and-ride": {
+		"Section1": {
+			"what_is": {
+				"content": "O Tap&Ride permite aos passageiros utilizarem cartões bancários com tecnologia contactless como forma de pagamento direto da tarifa de bordo nos autocarros, proporcionando uma alternativa prática, rápida e sem necessidade de dinheiro físico ou títulos de transporte pré-comprados.",
+				"title": "O que é?"
+			},
+			"where_available": {
+				"buttonLabel": "Ver Mapa",
+				"content": "Esta nova opção está disponível nas linhas cujo número começa por 1, 2 ou 3, correspondentes às áreas já abrangidas. As linhas que começam por 4 serão incluídas em breve.",
+				"subcontent": "É possível verificar a sua existência a bordo do autocarro, consultando os métodos de pagamento disponíveis, presentes no visor do validador amarelo. Se o ecrã do validador apresentar uma faixa amarela com os ícones de Multibanco / VISA / MasterCard e Apple Pay/Google Pay, como na imagem abaixo, aceita o pagamento Tap&Ride.",
+				"subcontent2": "Também poderá verificar através dos horários em Tempo Real, ou no mapa abaixo, que viaturas possuem este método de pagamento:",
+				"title": "Onde está disponível?"
+			}
+		},
+		"Section2": {
+			"tarifs": {
+				"buttonLabel": "Consultar Tarifas",
+				"content": "Os valores praticados são os referentes ao valor da tarifa de bordo associada a cada linha.",
+				"subcontent": "Poderá conhecer melhor o tarifário da Carris Metropolitana através da tabela a bordo do autocarro, na nossa app ou no site.",
+				"title": "Tarifas"
+			}
+		},
+		"Section3": {
+			"invoice_edit": {
+				"buttonLabel": "Aceder ao Portal",
+				"content": "Depois do momento de validação, a fatura ficará disponível na plataforma por 5 dias úteis para alteração dos dados.",
+				"subcontent": "Uma vez passado este prazo, a fatura permanecerá disponível apenas para consulta.",
+				"title": "Prazos para edição de fatura:"
+			},
+			"invoices": {
+				"content": "Para pagamentos feitos com cartões bancários, é possível consultar, editar e obter faturas através do Portal do Utilizador.",
+				"title": "Faturas"
+			}
+		},
+		"Section4": {
+			"inspection": {
+				"content": "A bordo dos autocarros da Carris Metropolitana, decorrem ações de fiscalização. As mesmas são levadas a cabo por responsáveis devidamente identificados, que procurarão garantir que os títulos a bordo são válidos.",
+				"title": "Fiscalização"
+			}
+		},
+		"Section5": {
+			"how_to": {
+				"content": "Com a introdução do pagamento com cartão bancário, é importante garantir que a validação do título de transporte é feita corretamente, de forma a evitar uma cobrança indesejada.",
+				"subcontent": "Para isso, garanta que valida o seu título diretamente no validador, retirando-o da mochila ou carteira, onde se poderão encontrar cartões bancários.",
+				"title": "Como Validar?"
+			}
+		},
+		"SectionFaqs": {
+			"faq1": {
+				"content": "São aceites cartões bancários, nacionais e internacionais, com tecnologia contactless, das redes Visa e Mastercard.",
+				"title": "Que cartões são aceites?"
+			},
+			"faq2": {
+				"content": "Não. Basta entrar no autocarro e aproximar o seu cartão do validador amarelo. A tarifa de bordo será automaticamente cobrada.",
+				"title": "Preciso de comprar bilhete antes de entrar?"
+			},
+			"faq3": {
+				"content": "Não. Cada cartão é válido apenas para uma viagem por pessoa. Cada passageiro deve usar o seu próprio cartão.",
+				"title": "Posso usar o mesmo cartão para várias pessoas?"
+			},
+			"faq4": {
+				"content": "Se aproximar o cartão de forma acidental e a validação for bem-sucedida, a tarifa será cobrada. Aconselhamos a guardar o cartão num local seguro, separado de outros meios de pagamento ou cartões de transporte.",
+				"title": "O que acontece se aproximar o cartão sem querer?"
+			},
+			"faq5": {
+				"content": "Não. Trata-se de uma alternativa ao pagamento em dinheiro para a tarifa de bordo. Os passes e títulos continuam a existir normalmente.",
+				"title": "Este método de pagamento substitui os passes e títulos existentes?"
+			},
+			"faq6": {
+				"content": "Sim. O pagamento contactless utiliza a mesma tecnologia de segurança dos pagamentos tradicionais com cartão.",
+				"title": "O sistema é seguro?"
+			},
+			"faq7": {
+				"content": "Em caso de dúvidas ou suporte, poderá ligar para a linha de apoio ao passageiro através do número 210 418 800 ou preencher o formulário disponível no site.",
+				"title": "Tenho dúvidas ou preciso de reportar um erro"
+			},
+			"heading": "Perguntas Frequentes"
+		},
+		"heading": "Tap&Ride: Pagamento com cartão bancário contactless",
+		"subheading": "Selecione abaixo para onde deseja navegar",
+		"tarifs": {
+			"buttonLabel": "Consultar Tarifas",
+			"content": "Os valores praticados são os referentes ao valor da tarifa de bordo associada a cada linha.",
+			"subcontent": "Poderá conhecer melhor o tarifário da Carris Metropolitana através da tabela a bordo do autocarro, na nossa app ou no site.",
+			"title": "Tarifas"
 		}
 	},
 	"tickets": {

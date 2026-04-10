@@ -309,6 +309,7 @@ export interface Topic {
 export interface User {
   id: string;
   name?: string | null;
+  role: 'administrator' | 'editor';
   updatedAt: string;
   createdAt: string;
   enableAPIKey?: boolean | null;
@@ -622,6 +623,7 @@ export interface TopicsSelect<T extends boolean = true> {
  */
 export interface UsersSelect<T extends boolean = true> {
   name?: T;
+  role?: T;
   updatedAt?: T;
   createdAt?: T;
   enableAPIKey?: T;

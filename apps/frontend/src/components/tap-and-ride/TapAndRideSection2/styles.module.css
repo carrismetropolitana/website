@@ -1,0 +1,36 @@
+/* * */
+/* Tarifs Subcontent Container */
+.subcontentContainer {
+	margin-top: var(--size-spacing-20);
+	margin-bottom: var(--size-spacing-20);
+}
+
+/* * */
+/* Tarifs Subcontent Text */
+.subcontentText {
+	font-size: var(--font-size-text);
+	font-weight: var(--font-weight-text);
+	color: var(--color-system-text-200);
+}
+
+/* * */
+/* Tarifs Content Container */
+.tarifsContentContainer {
+	font-size: var(--font-size-text);
+	font-weight: var(--font-weight-text);
+	color: var(--color-system-text-200);
+}
+
+/* * */
+/* Tarifs Button */
+.button {
+	display: flex;
+	width: fit-content;
+	margin-inline: auto;
+	margin-top: var(--size-spacing-20);
+	font-size: var(--font-size-nav);
+	font-weight: var(--font-weight-nav);
+	color: var(--color-system-text-300);
+}	
+
+ 
