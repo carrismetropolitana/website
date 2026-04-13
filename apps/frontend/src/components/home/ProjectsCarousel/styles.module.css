@@ -4,21 +4,12 @@
 .root {
 	max-width: min(100%, 920px);
 	height: 100%;
-	margin-top: var(--size-spacing-20);
 	cursor: grab;
 	transition: all 200ms ease;
 }
 
 .carouselSlide {
-	box-sizing: border-box;
 	height: 100%;
-	padding: 0 var(--size-spacing-10) var(--size-spacing-10);
-}
-
-.carouselSlide:hover {
-	z-index: 90;
-	box-shadow: 0 0 12px 0 rgb(0 0 0 / 8%);
-	transform: scale(1.01);
 }
 
 .root:active {

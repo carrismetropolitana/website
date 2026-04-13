@@ -25,33 +25,30 @@ export function ProjectsCarousel() {
 	// C. Render components
 
 	return (
-		<>
-			<Carousel
-				classNames={{ control: styles.control, controls: styles.controlsWrapper, root: styles.root, slide: styles.carouselSlide }}
-				emblaOptions={{ align: 'start', slidesToScroll: 1 }}
-				nextControlIcon={<IconArrowRight size={18} />}
-				previousControlIcon={<IconArrowLeft size={18} />}
-				slideGap="md"
-				slideSize={{ base: '100%', md: '33.333333%' }}
-				style={{ flex: 1, maxWidth: '100%' }}
-				withControls={projectsData?.length > 0}
-				withIndicators
-			>
+		<Carousel
+			classNames={{ control: styles.control, controls: styles.controlsWrapper, root: styles.root, slide: styles.carouselSlide }}
+			emblaOptions={{ align: 'start', slidesToScroll: 1 }}
+			nextControlIcon={<IconArrowRight size={18} />}
+			previousControlIcon={<IconArrowLeft size={18} />}
+			slideGap="md"
+			slideSize={{ base: '100%', md: '33.333333%' }}
+			style={{ flex: 1, maxWidth: '100%' }}
+			withControls={projectsData?.length > 0}
+			withIndicators
+		>
 
-				{projectsData?.map(item => (
-					<Carousel.Slide key={item.id ?? item._id} className={styles.slideWrapper}>
-						<ProjectsCarouselCard
-							coverImageSrc={item.featured_image?.thumbnailURL ?? item.featured_image?.url}
-							href={item.more_info_url}
-							keywords={item.keywords}
-							title={item.title}
-						/>
-					</Carousel.Slide>
-				))}
+			{projectsData?.map(item => (
+				<Carousel.Slide key={item.id ?? item._id} className={styles.slideWrapper}>
+					<ProjectsCarouselCard
+						coverImageSrc={item.featured_image?.thumbnailURL ?? item.featured_image?.url}
+						href={item.more_info_url}
+						keywords={item.keywords}
+						title={item.title}
+					/>
+				</Carousel.Slide>
+			))}
 
-			</Carousel>
-
-		</>
+		</Carousel>
 	);
 
 	//

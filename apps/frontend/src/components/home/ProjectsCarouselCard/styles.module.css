@@ -1,10 +1,13 @@
-/* Card_Project-style: white shell, title + chevron, dominant image, yellow tags */
 
 .card {
+	box-sizing: border-box;
 	display: grid;
 	grid-template-rows: auto minmax(220px, 1fr) auto;
 	grid-template-columns: 1fr;
 	gap: var(--size-spacing-5);
+	min-width: 0;
+	height: 100%;
+	min-height: 0;
 	padding: var(--size-spacing-15);
 	background-color: var(--color-primary-white);
 	border: 1px solid var(--color-system-border-100);
@@ -15,7 +18,10 @@
 .header {
 	display: flex;
 	flex-direction: row;
+	gap: var(--size-spacing-10);
+	align-items: center;
 	justify-content: space-between;
+	min-width: 0;
 }
 
 .title {
@@ -41,6 +47,11 @@
 	width: 100%;
 	height: 100%;
 	object-fit: contain;
+}
+
+.image:hover {
+	opacity: 0.5;
+	transform: scale(1.01);;
 }
 
 .learnMore {
@@ -80,14 +91,14 @@
 .keywords {
 	display: flex;
 	flex-wrap: wrap;
-	gap: var(--size-spacing-8);
+	gap: var(--size-spacing-5);
 	padding: 0;
 	margin: 0;
 	list-style: none;
 }
 
 .keyword {
-	padding: 8px var(--size-spacing-15);
+	padding: 8px var(--size-spacing-10);
 	font-size: 14px;
 	font-weight: 700;
 	line-height: 1.2;

@@ -24,7 +24,7 @@ export function ProjectsCarouselCard({ coverImageSrc, href, keywords, title }: P
 	//
 	// A. Setup variables
 
-	const t = useTranslations('home.MainCarouselCard');
+	const t = useTranslations('home.ProjectsCarouselCard');
 
 	const keywordItems = keywords?.filter(k => k.value?.trim()) ?? [];
 
@@ -46,6 +46,7 @@ export function ProjectsCarouselCard({ coverImageSrc, href, keywords, title }: P
 			</div>
 
 			<div className={styles.imageArea}>
+
 				<Image
 					alt={title ?? ''}
 					className={styles.image}
@@ -54,25 +55,24 @@ export function ProjectsCarouselCard({ coverImageSrc, href, keywords, title }: P
 					radius="var(--border-radius-lg)"
 					src={coverImageSrc}
 				/>
-				{href ? (
+
+				{href && (
 					<Link className={styles.learnMore} href={href} target="_blank">
 						{t('learn_more')}
 						<IconArrowRight size={18} />
 					</Link>
-				) : null}
+				)}
 			</div>
 
-			<div className={styles.body}>
-				{keywordItems.length > 0 ? (
-					<ul className={styles.keywords}>
-						{keywordItems.map((k, i) => (
-							<li key={`${k.value}-${i}`} className={styles.keyword}>
-								{k.value?.startsWith('#') ? k.value : `#${k.value}`}
-							</li>
-						))}
-					</ul>
-				) : null}
-			</div>
+			{keywordItems.length > 0 && (
+				<ul className={styles.keywords}>
+					{keywordItems.map((k, i) => (
+						<li key={`${k.value}-${i}`} className={styles.keyword}>
+							{k.value?.startsWith('#') ? k.value : `#${k.value}`}
+						</li>
+					))}
+				</ul>
+			)}
 		</div>
 	);
 
