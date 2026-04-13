@@ -717,6 +717,9 @@
 		"NewsSection": {
 			"section_heading": "Notícias"
 		},
+		"ProjectsCarouselCard": {
+			"learn_more": "Saber mais"
+		},
 		"QuickSearchFavoritesBar": {
 			"empty": "Ainda não tem linhas favoritas...",
 			"more": "{count, plural, one {+ # linha} other {+ # linhas}}"

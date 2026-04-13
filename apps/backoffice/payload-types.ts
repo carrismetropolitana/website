@@ -413,17 +413,22 @@ export interface Note {
  */
 export interface Project {
   id: string;
-  projects?:
+  _order?: string | null;
+  title?: string | null;
+  more_info_url?: string | null;
+  description?: string | null;
+  keywords?:
     | {
-        title?: string | null;
-        more_info_url?: string | null;
-        is_unlisted?: boolean | null;
-        featured_image?: (string | null) | Media;
+        value?: string | null;
         id?: string | null;
       }[]
     | null;
+  is_unlisted?: boolean | null;
+  publishedAt: string;
   updatedAt: string;
+  featured_image?: (string | null) | Media;
   createdAt: string;
+  _status?: ('draft' | 'published') | null;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -731,17 +736,22 @@ export interface NotesSelect<T extends boolean = true> {
  * via the `definition` "projects_select".
  */
 export interface ProjectsSelect<T extends boolean = true> {
-  projects?:
+  _order?: T;
+  title?: T;
+  more_info_url?: T;
+  description?: T;
+  keywords?:
     | T
     | {
-        title?: T;
-        more_info_url?: T;
-        is_unlisted?: T;
-        featured_image?: T;
+        value?: T;
         id?: T;
       };
+  is_unlisted?: T;
+  publishedAt?: T;
   updatedAt?: T;
+  featured_image?: T;
   createdAt?: T;
+  _status?: T;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema

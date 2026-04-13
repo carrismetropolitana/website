@@ -189,6 +189,7 @@
 				"HIGH_PASSENGER_LOAD": "High Passenger Load",
 				"MEDICAL_EMERGENCY": "Medical Emergency",
 				"NETWORK_UPDATE": "Network Update",
+				"OTHER_CAUSE": "Network Update",
 				"POLICE_ACTIVITY": "Police Activity",
 				"PUBLIC_DISORDER": "Public Disorder",
 				"ROAD_ISSUE": "Road Issue",
@@ -714,6 +715,9 @@
 		},
 		"NewsSection": {
 			"section_heading": "News"
+		},
+		"ProjectsCarouselCard": {
+			"learn_more": "Find out more"
 		},
 		"QuickSearchFavoritesBar": {
 			"empty": "No favorite lines yet...",
