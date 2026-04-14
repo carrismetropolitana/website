@@ -25,11 +25,9 @@ export function ProjectsPage() {
 			<Surface>
 				<Section heading={t('heading')} subheading={t('subheading')} />
 			</Surface>
-
 			<Section>
 				<ProjectsList />
 			</Section>
-
 		</>
 	);
 
