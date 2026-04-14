@@ -26,11 +26,11 @@ export function ProjectsPage() {
 			<Surface>
 				<Section heading={t('heading')} subheading={t('subheading')} />
 			</Surface>
-			<Surface>
-				<Section withPadding>
-					<ProjectsList />
-				</Section>
-			</Surface>
+
+			<Section>
+				<ProjectsList />
+			</Section>
+
 		</>
 	);
 
