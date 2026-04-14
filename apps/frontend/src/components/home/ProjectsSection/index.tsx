@@ -1,13 +1,12 @@
 /* * */
 
+import { ProjectsCarousel } from '@/components/home/ProjectsCarousel';
 import { Section } from '@/components/layout/Section';
 import { Surface } from '@/components/layout/Surface';
 
-import { ProjectsCarousel } from '../ProjectsCarousel';
-
 /* * */
 
-export function FeaturedSection() {
+export function ProjectsSection() {
 	//
 
 	//

@@ -22,10 +22,12 @@ export function ProjectsPage() {
 	// B. Render components
 
 	return (
-		<Surface>
-			<Section heading={t('heading')} subheading={t('subheading')} withGap withPadding />
-			<Grid children={<ProjectsList />} columns="ab" withGap />
-		</Surface>
+		<>
+			<Surface>
+				<Section heading={t('heading')} subheading={t('subheading')} />
+			</Surface>
+			<ProjectsList />
+		</>
 	);
 
 	//
