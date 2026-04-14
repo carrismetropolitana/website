@@ -19,10 +19,8 @@ export function ProjectsList() {
 
 	return (
 		<Grid
+			children={projectsContext.data.raw.map(item => (<ProjectsCard key={`${item._id}-${item.title}`} project={item} />))}
 			columns="ab"
-			children={projectsContext.data.raw.map(item => (
-				<ProjectsCard key={`${item._id}-${item.title}`} project={item} />
-			))}
 			withGap
 		/>
 	);
