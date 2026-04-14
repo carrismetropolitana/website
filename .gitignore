@@ -158,4 +158,4 @@ uptime.conf
 # Yalc
 .yalc
 yalc.*
-.cursor/rules/caveman.mdc
+.cursor/rules/*

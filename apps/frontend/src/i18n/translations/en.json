@@ -59,7 +59,7 @@
 		}
 	},
 	"NewsCard": {
-		"publish_date": "{publishDate, date, long}",
+		"publish_date": "{published_at, date, long}",
 		"see_more": "See More"
 	},
 	"PipsSurvey": {
@@ -715,6 +715,9 @@
 		},
 		"NewsSection": {
 			"section_heading": "News"
+		},
+		"ProjectsCarouselCard": {
+			"learn_more": "Find out more"
 		},
 		"QuickSearchFavoritesBar": {
 			"empty": "No favorite lines yet...",
@@ -1690,6 +1693,12 @@
 			"success": "Profile synchronized successfully!"
 		}
 	},
+	"projects": {
+		"ProjectsPage": {
+			"heading": "Projects",
+			"subheading": "Carris Metropolitana develops projects in various areas, aiming to contribute to more sustainable mobility, foster a closer relationship with passengers, or showcase different aspects of road transport operations. Learn more about them below:"
+		}
+	},
 	"review-2024": {
 		"Review2024Card": {
 			"share": {
@@ -1971,6 +1980,7 @@
 					"metrics": "Our live operation",
 					"news": "News",
 					"open-data": "Open Data",
+					"projects": "Projects",
 					"vehicles": "Fleet"
 				}
 			},

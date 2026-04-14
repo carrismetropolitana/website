@@ -76,6 +76,7 @@ export interface Config {
     users: User;
     'knowledge-base': KnowledgeBase;
     notes: Note;
+    projects: Project;
     'payload-kv': PayloadKv;
     'payload-locked-documents': PayloadLockedDocument;
     'payload-preferences': PayloadPreference;
@@ -92,6 +93,7 @@ export interface Config {
     users: UsersSelect<false> | UsersSelect<true>;
     'knowledge-base': KnowledgeBaseSelect<false> | KnowledgeBaseSelect<true>;
     notes: NotesSelect<false> | NotesSelect<true>;
+    projects: ProjectsSelect<false> | ProjectsSelect<true>;
     'payload-kv': PayloadKvSelect<false> | PayloadKvSelect<true>;
     'payload-locked-documents': PayloadLockedDocumentsSelect<false> | PayloadLockedDocumentsSelect<true>;
     'payload-preferences': PayloadPreferencesSelect<false> | PayloadPreferencesSelect<true>;
@@ -100,7 +102,7 @@ export interface Config {
   db: {
     defaultIDType: string;
   };
-  fallbackLocale: null;
+  fallbackLocale: ('false' | 'none' | 'null') | false | null | ('pt-PT' | 'en') | ('pt-PT' | 'en')[];
   globals: {
     'general-status': GeneralStatus;
     'home-slider': HomeSlider;
@@ -111,7 +113,7 @@ export interface Config {
     'home-slider': HomeSliderSelect<false> | HomeSliderSelect<true>;
     settings: SettingsSelect<false> | SettingsSelect<true>;
   };
-  locale: null;
+  locale: 'pt-PT' | 'en';
   user: User;
   jobs: {
     tasks: unknown;
@@ -407,6 +409,29 @@ export interface Note {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "projects".
+ */
+export interface Project {
+  id: string;
+  _order?: string | null;
+  title?: string | null;
+  more_info_url?: string | null;
+  description?: string | null;
+  keywords?:
+    | {
+        value?: string | null;
+        id?: string | null;
+      }[]
+    | null;
+  is_unlisted?: boolean | null;
+  publishedAt: string;
+  updatedAt: string;
+  featured_image?: (string | null) | Media;
+  createdAt: string;
+  _status?: ('draft' | 'published') | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "payload-kv".
  */
 export interface PayloadKv {
@@ -464,6 +489,10 @@ export interface PayloadLockedDocument {
     | ({
         relationTo: 'notes';
         value: string | Note;
+      } | null)
+    | ({
+        relationTo: 'projects';
+        value: string | Project;
       } | null);
   globalSlug?: string | null;
   user: {
@@ -701,6 +730,28 @@ export interface NotesSelect<T extends boolean = true> {
   authors?: T;
   publishedAt?: T;
   updatedAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "projects_select".
+ */
+export interface ProjectsSelect<T extends boolean = true> {
+  _order?: T;
+  title?: T;
+  more_info_url?: T;
+  description?: T;
+  keywords?:
+    | T
+    | {
+        value?: T;
+        id?: T;
+      };
+  is_unlisted?: T;
+  publishedAt?: T;
+  updatedAt?: T;
+  featured_image?: T;
+  createdAt?: T;
+  _status?: T;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
