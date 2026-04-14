@@ -227,6 +227,10 @@ export interface Article {
      * Breve descrição sobre o autor.
      */
     bio?: string | null;
+    /**
+     * Se este artigo foi escrito por um especialista, lembre-se de marcar para que possa ser entregue conteúdos de especialistas separadamente.
+     */
+    expertAuthor: boolean;
     social?: {
       linkedin?: string | null;
       twitter?: string | null;
@@ -540,6 +544,7 @@ export interface ArticlesSelect<T extends boolean = true> {
         name?: T;
         role?: T;
         bio?: T;
+        expertAuthor?: T;
         social?:
           | T
           | {
