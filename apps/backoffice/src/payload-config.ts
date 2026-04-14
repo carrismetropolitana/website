@@ -155,6 +155,12 @@ export default buildConfig({
 		Settings,
 	],
 
+	localization: {
+		defaultLocale: 'pt-PT',
+		fallback: true,
+		locales: ['pt-PT', 'en'],
+	},
+
 	plugins: [
 		s3Storage({
 			bucket: process.env.OCI_S3_NAMESPACE ?? 'placeholder', // Bucket should be the namespace in OCI Object Storage

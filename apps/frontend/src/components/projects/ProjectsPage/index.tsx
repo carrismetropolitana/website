@@ -1,6 +1,5 @@
 'use client';
 
-import { Grid } from '@/components/layout/Grid';
 /* * */
 
 import { Section } from '@/components/layout/Section';

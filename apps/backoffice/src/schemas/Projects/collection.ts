@@ -20,6 +20,7 @@ export const Projects: CollectionConfig = {
 	fields: [
 		{
 			label: 'Title',
+			localized: true,
 			name: 'title',
 			type: 'text',
 		},
@@ -30,6 +31,7 @@ export const Projects: CollectionConfig = {
 		},
 		{
 			label: 'Description',
+			localized: true,
 			name: 'description',
 			type: 'textarea',
 		},
@@ -54,10 +56,6 @@ export const Projects: CollectionConfig = {
 		plural: 'Projetos',
 		singular: 'Projeto',
 	},
-	/**
-	 * Drag-and-drop order in the admin list view. Adds a hidden `_order` field (fractional index), not an editor-facing form field.
-	 * @see https://payloadcms.com/docs/configuration/collections#orderable
-	 */
 	orderable: true,
 	slug: 'projects',
 	versions: {

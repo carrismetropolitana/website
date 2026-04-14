@@ -4,6 +4,8 @@
 
 import type { Project } from '@/types/projects.type';
 
+import { useLocaleContext } from '@/contexts/Locale.context';
+import { DEFAULT_LOCALE_CODE, getMatchingLocale } from '@/i18n/config';
 import { getPublicVariable } from '@carrismetropolitana/website-shared-settings';
 import { createContext, useContext } from 'react';
 import useSWR from 'swr';
@@ -36,10 +38,16 @@ export function useProjectsListContext() {
 export const ProjectsListContextProvider = ({ children }) => {
 	//
 
+	const localeContext = useLocaleContext();
+	const currentLocale = localeContext.data.current_locale;
+
 	//
 	// B. Fetch data
 
-	const projectsApiUrl = `${getPublicVariable('server_url_backoffice')}/admin/public-api/projects`;
+	const matchingLocale = getMatchingLocale(currentLocale) ?? getMatchingLocale(DEFAULT_LOCALE_CODE);
+	const normalizedLocaleCode = matchingLocale?._id ?? DEFAULT_LOCALE_CODE;
+	const payloadLocale = normalizedLocaleCode === 'en' ? 'en' : 'pt-PT';
+	const projectsApiUrl = `${getPublicVariable('server_url_backoffice')}/admin/public-api/projects?locale=${payloadLocale}`;
 	const { data: allProjectsData, isLoading: allProjectsLoading } = useSWR<Project[], Error>(projectsApiUrl, { refreshInterval: 900000 }); // 15 minutes
 
 	//

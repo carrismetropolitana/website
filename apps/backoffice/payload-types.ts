@@ -102,7 +102,7 @@ export interface Config {
   db: {
     defaultIDType: string;
   };
-  fallbackLocale: null;
+  fallbackLocale: ('false' | 'none' | 'null') | false | null | ('pt-PT' | 'en') | ('pt-PT' | 'en')[];
   globals: {
     'general-status': GeneralStatus;
     'home-slider': HomeSlider;
@@ -113,7 +113,7 @@ export interface Config {
     'home-slider': HomeSliderSelect<false> | HomeSliderSelect<true>;
     settings: SettingsSelect<false> | SettingsSelect<true>;
   };
-  locale: null;
+  locale: 'pt-PT' | 'en';
   user: User;
   jobs: {
     tasks: unknown;
