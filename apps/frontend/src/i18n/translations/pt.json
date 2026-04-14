@@ -1694,6 +1694,12 @@
 			"success": "Perfil sincronizado com sucesso!"
 		}
 	},
+	"projects": {
+		"ProjectsPage": {
+			"heading": "Projetos",
+			"subheading": "A Carris Metropolitana desenvolve projetos de diferentes âmbitos, que procuram contribuir para uma mobilidade mais sustentável, ter uma relação mais próxima com os passageiros, ou demonstrar diferentes aspetos da operação rodoviária. Conheça-os abaixo: "
+		}
+	},
 	"review-2024": {
 		"Review2024Card": {
 			"share": {
@@ -1975,6 +1981,7 @@
 					"metrics": "A nossa Operação ao Vivo",
 					"news": "Notícias",
 					"open-data": "Dados Abertos",
+					"projects": "Projetos",
 					"vehicles": "Frota"
 				}
 			},

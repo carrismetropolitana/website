@@ -15,7 +15,7 @@ export function FeaturedSection() {
 
 	return (
 		<Surface>
-			<Section heading="Projetos" withPadding>
+			<Section heading="Projetos" href="/projects" withPadding>
 				<ProjectsCarousel />
 			</Section>
 		</Surface>
