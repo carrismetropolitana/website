@@ -1586,7 +1586,7 @@
 		"FaqSection": {
 			"faqs": {
 				"carris_relationship": {
-					"answer": "A Carris Metropolitana é uma marca de transporte público distinta da Carris. Ambas operam sob a tutela da TML - Transportes Metropolitanos de Lisboa, mas são entidades separadas. A Carris Metropolitana serve os 15 municípios da área metropolitana de Lisboa (excluindo Lisboa, Cascais e Barreiro), enquanto a Carris opera especificamente na cidade de Lisboa.",
+					"answer": "A Carris Metropolitana e a Carris são entidades e marcas distintas, cada uma com as suas operações e áreas geográficas específicas.\n\nA Carris Metropolitana é a marca estabelecida pela Transportes Metropolitanos de Lisboa (TML), que gere os serviços de transporte público rodoviário em várias regiões municipais e intermunicipais da área metropolitana.\n\nPor sua vez, a Carris opera exclusivamente no município de Lisboa, tal como a MobiCascais em Cascais e os TCB (Transportes Coletivos do Barreiro) no Barreiro.",
 					"question": "A Carris Metropolitana faz parte da Carris?"
 				},
 				"commercial_use": {
@@ -1598,11 +1598,11 @@
 					"question": "Como posso contactar a CMetropolitana para obter informações ou solicitar entrevistas?"
 				},
 				"open_data_access": {
-					"answer": "A Carris Metropolitana disponibiliza dados abertos através do seu portal oficial. Pode aceder a informações sobre horários, rotas, dados de passageiros em tempo real e estatísticas operacionais. Para acesso a dados específicos ou APIs, recomendamos que entre em contacto através dos nossos canais oficiais de comunicação.",
+					"answer": "A Carris Metropolitana disponibiliza dados abertos através do seu site oficial. Pode aceder a informações sobre horários em tempo real, percursos e número de contactos obtidos. Para acesso a dados específicos ou APIs, recomendamos que entre em contacto através dos nossos canais oficiais de comunicação.",
 					"question": "Como posso aceder aos dados abertos disponibilizados pela CMetropolitana?"
 				},
 				"operating_municipalities": {
-					"answer": "A Carris Metropolitana opera em 15 dos 18 municípios da área metropolitana de Lisboa: Almada, Seixal, Sesimbra, Alcochete, Moita, Montijo, Palmela, Setúbal, Amadora, Oeiras, Sintra, Mafra, Vila Franca de Xira, Odivelas e Loures. Os municípios de Lisboa, Cascais e Barreiro têm operadores próprios, mas estão ligados através das ligações intermunicipais da Carris Metropolitana.",
+					"answer": "A Carris Metropolitana opera nos 18 municípios da AML: Alcochete, Almada, Amadora, Barreiro*, Cascais*, Lisboa*, Loures, Oeiras, Odivelas, Mafra, Moita, Montijo, Palmela, Seixal, Sesimbra, Setúbal, Sintra e Vila Franca de Xira.\n\n*Barreiro, Cascais e Lisboa são servidos, em maior parte, pelos respetivos operadores municipais.",
 					"question": "Em que municípios opera a Carris Metropolitana?"
 				},
 				"service_operators": {

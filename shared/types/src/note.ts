@@ -14,9 +14,9 @@ export interface Note {
 	authors?: string | { email: string, id: string }
 
 	/**
-	 * The main body content of the note (HTML string)
+	 * The main body content of the note (Lexical rich text JSON)
 	 */
-	body?: string
+	body?: Record<string, unknown> | string
 
 	/**
 	 * The type of content - always 'file' for notes

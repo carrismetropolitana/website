@@ -277,3 +277,11 @@
 .pressLabelSectionButtonText {
     transition: all 0.2s ease-in-out;
 }
+
+.innerWrapper p {
+    margin: 0;
+}
+
+.innerWrapper p + p {
+    margin-top: 12px;
+}
