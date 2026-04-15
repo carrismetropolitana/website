@@ -17,17 +17,18 @@ export const Faqs: CollectionConfig = {
 
 	fields: [
 		{
-			label: 'Answer',
-			localized: true,
-			name: 'answer',
-			type: 'richText',
-		},
-		{
 			label: 'Question',
 			localized: true,
 			name: 'question',
 			type: 'textarea',
 		},
+		{
+			label: 'Answer',
+			localized: true,
+			name: 'answer',
+			type: 'richText',
+		},
+
 		{
 			label: 'Topic',
 			name: 'topic',
