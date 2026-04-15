@@ -388,10 +388,21 @@ export interface Note {
    * Texto de destaque/resumo que aparece no início do artigo. Suporta HTML.
    */
   lead?: string | null;
-  /**
-   * Conteúdo principal do artigo. Suporta HTML.
-   */
-  body?: string | null;
+  body: {
+    root: {
+      type: string;
+      children: {
+        type: any;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  };
   contentType?: string | null;
   file?: (string | null) | Media;
   publishDate?: string | null;

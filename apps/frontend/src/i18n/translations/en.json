@@ -1585,7 +1585,7 @@
 		"FaqSection": {
 			"faqs": {
 				"carris_relationship": {
-					"answer": "Carris Metropolitana is a public transport brand distinct from Carris. Both operate under the supervision of TML - Transportes Metropolitanos de Lisboa, but they are separate entities. Carris Metropolitana serves 15 municipalities in the Lisbon metropolitan area (excluding Lisbon, Cascais and Barreiro), while Carris operates specifically in the city of Lisbon.",
+					"answer": "Carris Metropolitana and Carris are distinct entities and brands, each with their own operations and specific geographic areas.\n\nCarris Metropolitana is the brand established by Transportes Metropolitanos de Lisboa (TML), which manages public road transport services across several municipal and intermunicipal regions of the metropolitan area.\n\nCarris, in turn, operates exclusively in the municipality of Lisbon, just as MobiCascais does in Cascais and TCB (Transportes Coletivos do Barreiro) in Barreiro.",
 					"question": "Is Carris Metropolitana part of Carris?"
 				},
 				"commercial_use": {
@@ -1597,11 +1597,11 @@
 					"question": "How can I contact CMetropolitana to obtain information or request interviews?"
 				},
 				"open_data_access": {
-					"answer": "Carris Metropolitana provides open data through its official portal. You can access information about schedules, routes, real-time passenger data and operational statistics. For access to specific data or APIs, we recommend that you contact us through our official communication channels.",
+					"answer": "Carris Metropolitana provides open data through its official website. You can access information about real-time schedules, routes and the number of contacts obtained. For access to specific data or APIs, we recommend that you contact us through our official communication channels.",
 					"question": "How can I access the open data provided by CMetropolitana?"
 				},
 				"operating_municipalities": {
-					"answer": "Carris Metropolitana operates in 15 of the 18 municipalities of the Lisbon metropolitan area: Almada, Seixal, Sesimbra, Alcochete, Moita, Montijo, Palmela, Setúbal, Amadora, Oeiras, Sintra, Mafra, Vila Franca de Xira, Odivelas and Loures. The municipalities of Lisbon, Cascais and Barreiro have their own operators, but are connected through Carris Metropolitana's intermunicipal connections.",
+					"answer": "Carris Metropolitana operates across all 18 municipalities of the AML: Alcochete, Almada, Amadora, Barreiro*, Cascais*, Lisbon*, Loures, Oeiras, Odivelas, Mafra, Moita, Montijo, Palmela, Seixal, Sesimbra, Setúbal, Sintra and Vila Franca de Xira.\n\n*Barreiro, Cascais and Lisbon are served, for the most part, by their respective municipal operators.",
 					"question": "In which municipalities does Carris Metropolitana operate?"
 				},
 				"service_operators": {
