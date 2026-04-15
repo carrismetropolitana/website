@@ -1,0 +1,16 @@
+/* * */
+/* Content */
+.content {
+	font-size: var(--font-size-text);
+	font-weight: var(--font-weight-text);
+	color: var(--color-system-text-200);
+}
+
+/* * */
+/* Subcontent */
+.subcontent {
+	margin-top: var(--size-spacing-20);
+	font-size: var(--font-size-text);
+	font-weight: var(--font-weight-text);
+	color: var(--color-system-text-200);
+}

@@ -45,6 +45,14 @@ const nextConfig: NextConfig = {
 	},
 	output: 'standalone',
 	reactStrictMode: true,
+	async rewrites() {
+		return [
+			{
+				destination: '/api/feeds/news',
+				source: '/api/news.rss',
+			},
+		];
+	},
 };
 
 /* * */
