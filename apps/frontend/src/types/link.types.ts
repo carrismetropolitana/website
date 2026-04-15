@@ -22,6 +22,7 @@ export interface PayloadLexicalLink {
 
 export interface PayloadLexicalLinkProps {
 	children?: LexicalNode[]
+	disableChildAutoLink?: boolean
 	fields?: PayloadLexicalLink
 	url?: string
 }

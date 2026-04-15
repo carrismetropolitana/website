@@ -10,7 +10,7 @@ export const linkFields: Field[] = [
 			components: {
 				afterInput: ['@/components/LinkFieldPreview#LinkFieldPreview'] as const,
 			},
-			description: 'Deve começar com http:// ou https://',
+			description: 'Aceita http://, https://, mailto: e tel:. Para links no meio de frase, use ferramenta de link inline no editor.',
 		},
 		label: 'URL',
 		name: 'url',
@@ -20,8 +20,8 @@ export const linkFields: Field[] = [
 			if (!value) {
 				return 'URL é obrigatório';
 			}
-			if (!value.match(/^https?:\/\/.+/)) {
-				return 'URL deve começar com http:// ou https://';
+			if (!value.match(/^(https?:\/\/.+|mailto:[^\s@]+@[^\s@]+\.[^\s@]+|tel:\+?[0-9()\-\s]+)$/i)) {
+				return 'URL deve começar com http://, https://, mailto: ou tel:';
 			}
 			return true;
 		},

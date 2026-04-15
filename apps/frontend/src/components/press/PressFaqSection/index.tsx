@@ -1,6 +1,6 @@
 'use client';
 
-import type { Faq } from '@/types/faq.types';
+import type { PressFaqItem } from '@/types/press-faq.types';
 
 import { Accordion, AccordionControl, AccordionItem, AccordionPanel } from '@mantine/core';
 import { useTranslations } from 'next-intl';
@@ -24,7 +24,7 @@ export function PressFaqSection() {
 
 	const toHtml = (text: string) => text.split('\n\n').map(p => `<p>${p}</p>`).join('');
 
-	const data: Faq[] = [
+	const data: PressFaqItem[] = [
 		{
 			_id: '1',
 			body: toHtml(t('faqs.operating_municipalities.answer')),
