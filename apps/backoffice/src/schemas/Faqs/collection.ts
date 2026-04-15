@@ -2,7 +2,18 @@
 
 import { publishedAtField } from '@/fields/published-at';
 import { updatedAtField } from '@/fields/updated-at';
+import { EXPERIMENTAL_TableFeature, HeadingFeature, lexicalEditor } from '@payloadcms/richtext-lexical';
 import { CollectionConfig } from 'payload';
+
+/* * */
+
+const faqAnswerEditor = lexicalEditor({
+	features: ({ defaultFeatures }) => ([
+		...defaultFeatures.filter(f => ['paragraph', 'toolbarInline', 'upload'].includes(f.key)),
+		HeadingFeature({ enabledHeadingSizes: ['h2', 'h3'] }),
+		EXPERIMENTAL_TableFeature(),
+	]),
+});
 
 /* * */
 
@@ -23,6 +34,7 @@ export const Faqs: CollectionConfig = {
 			type: 'textarea',
 		},
 		{
+			editor: faqAnswerEditor,
 			label: 'Answer',
 			localized: true,
 			name: 'answer',
