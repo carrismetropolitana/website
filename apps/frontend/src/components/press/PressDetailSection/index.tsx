@@ -51,14 +51,7 @@ export function PressDetailSection({
 	const renderLexicalNode = useRenderLexicalNode();
 
 	// Parse body as Lexical JSON
-	const bodyJSON = typeof body === 'string' ? (() => {
-		try {
-			return JSON.parse(body);
-		}
-		catch {
-			return null;
-		}
-	})() : body;
+	const bodyJSON = typeof body === 'string' ? JSON.parse(body) : body;
 	const rootNode = bodyJSON?.root || bodyJSON;
 
 	// Format the publish date
@@ -147,12 +140,6 @@ export function PressDetailSection({
 							<div className={styles.body}>
 								{renderLexicalNode(rootNode)}
 							</div>
-						)}
-						{body && !rootNode && typeof body === 'string' && (
-							<div
-								className={styles.body}
-								dangerouslySetInnerHTML={{ __html: body }}
-							/>
 						)}
 					</div>
 
