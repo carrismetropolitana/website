@@ -21,7 +21,8 @@ export const GET = async (request: Request) => {
 		fallbackLocale: requestedFallbackLocale,
 		limit: 0,
 		locale: requestedLocale,
-		sort: '_order',
+		sort: '-publishedAt',
+
 	});
 
 	const docs = result.docs ?? [];
