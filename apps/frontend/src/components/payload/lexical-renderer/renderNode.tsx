@@ -66,7 +66,7 @@ export function renderNode(node: LexicalNode, key?: number, options: RenderNodeO
 				url: raw?.url,
 			};
 
-			return <Links key={key} children={children} disableChildAutoLink fields={linkFields} url={node.url} />;
+			return <Links key={key} children={children} fields={linkFields} url={node.url} disableChildAutoLink />;
 		}
 		case 'list': return <List key={key} children={children} listType={node.listType} />;
 		case 'listitem': return <ListItem key={key} children={children} />;
