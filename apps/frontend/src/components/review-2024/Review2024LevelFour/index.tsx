@@ -49,7 +49,7 @@ export function Review2024LevelFour() {
 						<Link href="/app" target="_blank">
 							<Image className={styles.linksGridImage} src="/assets/review-2024/images/socials-app.svg" w="100%" />
 						</Link>
-						<Link href={URLS.socials.twitter} target="_blank">
+						<Link href={URLS.socials.x} target="_blank">
 							<Image className={styles.linksGridImage} src="/assets/review-2024/images/socials-twitter.svg" w="100%" />
 						</Link>
 					</div>

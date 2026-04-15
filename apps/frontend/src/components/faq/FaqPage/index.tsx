@@ -2,6 +2,8 @@
 
 /* * */
 
+import type { FaqTopicGroup } from '@/types/faq.types';
+
 // import allFaqData from '@/components/faq/_data/faq.json';
 import { FaqList } from '@/components/faq/FaqList';
 import { Section } from '@/components/layout/Section';
@@ -20,6 +22,7 @@ export function FaqPage() {
 	// A. Setup variables
 
 	const faqsContext = useFaqsContext();
+	const faqGroups: FaqTopicGroup[] = faqsContext.data.raw;
 	const t = useTranslations('faq.Page');
 
 	//
@@ -32,7 +35,7 @@ export function FaqPage() {
 					<Button leftSection={<IconPhoneCheck size={18} />}>{t('contacts')}</Button>
 				</Section>
 			</Surface>
-			<FaqList data={faqsContext.data.raw} />
+			<FaqList data={faqGroups} />
 		</>
 	);
 
