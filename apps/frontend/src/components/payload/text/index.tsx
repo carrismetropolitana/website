@@ -7,6 +7,7 @@ import { type ReactNode } from 'react';
 /* * */
 
 interface TextProps {
+	disableAutoLink?: boolean
 	format?: number
 	style?: string
 	text?: string
@@ -14,7 +15,7 @@ interface TextProps {
 
 /* * */
 
-export function Text({ format = 0, style: styleStr, text = '' }: TextProps) {
+export function Text({ disableAutoLink = false, format = 0, style: styleStr, text = '' }: TextProps) {
 	//
 
 	//
@@ -27,6 +28,13 @@ export function Text({ format = 0, style: styleStr, text = '' }: TextProps) {
 	const FORMAT_UNDERLINE = 8;
 
 	const inlineStyle = styleStr ? parseStyleString(styleStr) : undefined;
+	const trimmedText = text.trim();
+	const isBareEmail = /^[^\s<>()[\]\\.,;:@"]+@[^\s<>()[\]\\.,;:@"]+\.[^\s<>()[\]\\.,;:@"]+$/i.test(trimmedText);
+	const hrefFromText = isBareEmail ? `mailto:${trimmedText}` : trimmedText;
+	const isMailtoHref = /^mailto:\S+$/i.test(trimmedText);
+	const isTelHref = /^tel:\+?[0-9()\-\s]+$/i.test(trimmedText);
+	const isAutoLink = !disableAutoLink && (/^(https?:\/\/\S+|\/\/\S+)$/i.test(trimmedText) || isMailtoHref || isTelHref || isBareEmail);
+	const isWebLink = /^https?:\/\//i.test(trimmedText) || trimmedText.startsWith('//');
 
 	//
 	// B. Render components
@@ -42,7 +50,23 @@ export function Text({ format = 0, style: styleStr, text = '' }: TextProps) {
 	if (format & FORMAT_UNDERLINE) formattedText = <u key="underline">{formattedText}</u>;
 
 	if (inlineStyle) {
+		if (isAutoLink) {
+			return (
+				<a href={hrefFromText} rel={isWebLink ? 'noreferrer noopener' : undefined} style={inlineStyle} target={isWebLink ? '_blank' : undefined}>
+					{formattedText}
+				</a>
+			);
+		}
+
 		return <span style={inlineStyle}>{formattedText}</span>;
+	}
+
+	if (isAutoLink) {
+		return (
+			<a href={hrefFromText} rel={isWebLink ? 'noreferrer noopener' : undefined} target={isWebLink ? '_blank' : undefined}>
+				{formattedText}
+			</a>
+		);
 	}
 
 	return formattedText;

@@ -8,6 +8,7 @@ import { spacerFields } from '@/fields/spacer';
 import { videoFields } from '@/fields/video';
 import { BackgroundColorFeature } from '@/lexical/backgroundColor/feature.server';
 import { HeadingAnchorFeature } from '@/lexical/headingAnchor/feature.server';
+import { MailtoAutoLinkFeature } from '@/lexical/mailto-autolink/feature.server';
 import { MentionFeature } from '@/lexical/mention/feature.server';
 import { BlocksFeature, EXPERIMENTAL_TableFeature, HeadingFeature, lexicalEditor } from '@payloadcms/richtext-lexical';
 
@@ -22,6 +23,7 @@ function createLexicalFeatures(blocks: readonly Block[]) {
 		BackgroundColorFeature(),
 		EXPERIMENTAL_TableFeature(),
 		MentionFeature(),
+		MailtoAutoLinkFeature(),
 	]);
 }
 
@@ -33,6 +35,7 @@ function createLexicalFeaturesNoBlocks() {
 		BackgroundColorFeature(),
 		EXPERIMENTAL_TableFeature(),
 		MentionFeature(),
+		MailtoAutoLinkFeature(),
 	]);
 }
 
