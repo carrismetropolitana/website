@@ -2,6 +2,7 @@
 
 import { publishedAtField } from '@/fields/published-at';
 import { updatedAtField } from '@/fields/updated-at';
+import { MailtoAutoLinkFeature } from '@/lexical/mailto-autolink/feature.server';
 import { EXPERIMENTAL_TableFeature, HeadingFeature, lexicalEditor } from '@payloadcms/richtext-lexical';
 import { CollectionConfig } from 'payload';
 
@@ -10,6 +11,7 @@ import { CollectionConfig } from 'payload';
 const faqAnswerEditor = lexicalEditor({
 	features: ({ defaultFeatures }) => ([
 		...defaultFeatures.filter(f => ['link', 'paragraph', 'toolbarInline', 'upload'].includes(f.key)),
+		MailtoAutoLinkFeature(),
 		HeadingFeature({ enabledHeadingSizes: ['h2', 'h3'] }),
 		EXPERIMENTAL_TableFeature(),
 	]),

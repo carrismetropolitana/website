@@ -449,7 +449,6 @@ export interface Project {
  */
 export interface Faq {
   id: string;
-  _order?: string | null;
   question?: string | null;
   answer?: {
     root: {
@@ -803,7 +802,6 @@ export interface ProjectsSelect<T extends boolean = true> {
  * via the `definition` "faqs_select".
  */
 export interface FaqsSelect<T extends boolean = true> {
-  _order?: T;
   question?: T;
   answer?: T;
   topic?: T;
