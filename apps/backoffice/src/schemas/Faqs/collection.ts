@@ -9,7 +9,7 @@ import { CollectionConfig } from 'payload';
 
 const faqAnswerEditor = lexicalEditor({
 	features: ({ defaultFeatures }) => ([
-		...defaultFeatures.filter(f => ['paragraph', 'toolbarInline', 'upload'].includes(f.key)),
+		...defaultFeatures.filter(f => ['link', 'paragraph', 'toolbarInline', 'upload'].includes(f.key)),
 		HeadingFeature({ enabledHeadingSizes: ['h2', 'h3'] }),
 		EXPERIMENTAL_TableFeature(),
 	]),
