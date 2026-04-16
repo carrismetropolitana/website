@@ -20,12 +20,15 @@ const faqAnswerEditor = lexicalEditor({
 export const Faqs: CollectionConfig = {
 
 	access: {
-		create: ({ req: { user } }) => Boolean(user),
-		delete: ({ req: { user } }) => Boolean(user),
+		create: ({ req }) => Boolean(req.user),
+		delete: ({ req }) => Boolean(req.user),
 		read: () => true,
-		update: ({ req: { user } }) => Boolean(user),
+		update: ({ req }) => Boolean(req.user),
 	},
-
+	admin: {
+		defaultColumns: ['question', 'answer', 'topic'],
+		useAsTitle: 'question',
+	},
 	fields: [
 		{
 			label: 'Question',
@@ -54,6 +57,5 @@ export const Faqs: CollectionConfig = {
 		plural: 'Faqs',
 		singular: 'Faq',
 	},
-	orderable: true,
 	slug: 'faqs',
 };
