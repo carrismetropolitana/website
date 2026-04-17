@@ -4,6 +4,40 @@ import { type GlobalConfig } from 'payload';
 
 /* * */
 
+function normalizeMoreInfoUrl(value: unknown): unknown {
+	if (typeof value !== 'string') return value;
+
+	const trimmedValue = value.trim();
+	if (!trimmedValue) return '';
+
+	const normalizedValue = /^https?:\/\//i.test(trimmedValue)
+		? trimmedValue
+		: `https://${trimmedValue.replace(/^\/+/, '')}`;
+
+	try {
+		const parsedUrl = new URL(normalizedValue);
+		if (!parsedUrl.hostname.startsWith('www.') && parsedUrl.hostname.split('.').length === 2) {
+			parsedUrl.hostname = `www.${parsedUrl.hostname}`;
+		}
+		return parsedUrl.toString();
+	}
+	catch {
+		return normalizedValue;
+	}
+}
+
+function validateMoreInfoUrl(value: unknown): string | true {
+	if (value == null) return true;
+	if (typeof value !== 'string') return 'URL inválido';
+
+	const trimmedValue = value.trim();
+	if (!trimmedValue) return true;
+
+	return /^https?:\/\/\S+$/i.test(trimmedValue) ? true : 'URL deve começar com http:// ou https://';
+}
+
+/* * */
+
 export const HomeSlider: GlobalConfig = {
 
 	access: {
@@ -44,9 +78,15 @@ export const HomeSlider: GlobalConfig = {
 							type: 'text',
 						},
 						{
+							hooks: {
+								beforeValidate: [
+									({ value }) => normalizeMoreInfoUrl(value),
+								],
+							},
 							label: 'More Info URL (optional)',
 							name: 'more_info_url',
 							type: 'text',
+							validate: validateMoreInfoUrl,
 						},
 					],
 					type: 'row',

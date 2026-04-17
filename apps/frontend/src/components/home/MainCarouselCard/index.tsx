@@ -3,7 +3,6 @@
 import { Image } from '@mantine/core';
 import { IconArrowRight } from '@tabler/icons-react';
 import { useTranslations } from 'next-intl';
-import Link from 'next/link';
 
 import styles from './styles.module.css';
 
@@ -36,10 +35,10 @@ export function MainCarouselCard({ coverImageSrc, href, title }: Props) {
 
 	return (
 		<div className={styles.container}>
-			<Link className={styles.learnMore} href={href} target="_blank">
+			<a className={styles.learnMore} href={href} rel="noopener noreferrer" target="_blank">
 				{t('learn_more')}
 				<IconArrowRight size={18} />
-			</Link>
+			</a>
 			<Image alt={title} fallbackSrc="/assets/common/placeholder.png" src={coverImageSrc} />
 		</div>
 	);
