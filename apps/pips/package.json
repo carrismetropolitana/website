@@ -47,7 +47,7 @@
 		"ukkonen": "2.2.0"
 	},
 	"devDependencies": {
-		"@carrismetropolitana/api-types": "20251128.1928.11",
+		"@carrismetropolitana/api-types": "20260418.1441.51",
 		"@carrismetropolitana/eslint": "20250622.1204.50",
 		"@carrismetropolitana/website-shared-types": "*",
 		"@tmlmobilidade/tsconfig": "20260213.1500.47",
