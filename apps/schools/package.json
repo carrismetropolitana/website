@@ -29,14 +29,14 @@
 		"react-dom": "19.2.4",
 		"react-map-gl": "8.1.0",
 		"sharp": "0.34.5",
-		"swr": "2.4.0",
+		"swr": "2.4.1",
 		"zod": "4.1.12"
 	},
 	"devDependencies": {
-		"@carrismetropolitana/api-types": "20260419.156.14",
+		"@carrismetropolitana/api-types": "20260419.1736.4",
 		"@carrismetropolitana/eslint": "20250622.1204.50",
 		"@tmlmobilidade/tsconfig": "20260213.1500.47",
-		"@types/node": "25.2.3",
+		"@types/node": "25.6.0",
 		"@types/nodemailer": "7.0.9",
 		"@types/react": "19.2.14",
 		"postcss": "8.5.6",

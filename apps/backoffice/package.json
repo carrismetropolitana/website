@@ -13,7 +13,7 @@
 		"start": "next start"
 	},
 	"dependencies": {
-		"@carrismetropolitana/api-types": "20260419.156.14",
+		"@carrismetropolitana/api-types": "20260419.1736.4",
 		"@carrismetropolitana/website-shared-settings": "*",
 		"@payloadcms/db-mongodb": "3.76.1",
 		"@payloadcms/email-nodemailer": "3.76.1",
@@ -39,7 +39,7 @@
 		"@carrismetropolitana/eslint": "20250622.1204.50",
 		"@carrismetropolitana/website-shared-types": "*",
 		"@tmlmobilidade/tsconfig": "20260406.1442.3",
-		"@types/node": "25.5.2",
+		"@types/node": "25.6.0",
 		"@types/react": "19.2.14",
 		"@types/react-dom": "19.2.3",
 		"typescript": "6.0.3"
