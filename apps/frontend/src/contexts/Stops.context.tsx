@@ -93,7 +93,7 @@ export const StopsContextProvider = ({ children }) => {
 			getStopByIdGeoJsonFC,
 		},
 		data: {
-			stops: allStopsData,
+			stops: allStopsData ?? [],
 			stops_fc: dataStopsFCState,
 		},
 		flags: {
