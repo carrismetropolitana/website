@@ -15,12 +15,12 @@
 	"dependencies": {
 		"@carrismetropolitana/api-types": "20260419.1736.4",
 		"@carrismetropolitana/website-shared-settings": "*",
-		"@payloadcms/db-mongodb": "3.76.1",
-		"@payloadcms/email-nodemailer": "3.76.1",
-		"@payloadcms/next": "3.76.1",
-		"@payloadcms/richtext-lexical": "3.76.1",
-		"@payloadcms/storage-s3": "3.76.1",
-		"@payloadcms/ui": "3.76.1",
+		"@payloadcms/db-mongodb": "3.83.0",
+		"@payloadcms/email-nodemailer": "3.83.0",
+		"@payloadcms/next": "3.83.0",
+		"@payloadcms/richtext-lexical": "3.83.0",
+		"@payloadcms/storage-s3": "3.83.0",
+		"@payloadcms/ui": "3.83.0",
 		"@tabler/icons-react": "3.41.1",
 		"@tmlmobilidade/dates": "20260418.1237.24",
 		"@tmlmobilidade/rss": "20260418.1237.24",
@@ -29,9 +29,9 @@
 		"graphql": "16.13.2",
 		"next": "15.4.11",
 		"nodemailer": "8.0.5",
-		"payload": "3.76.1",
-		"react": "19.2.4",
-		"react-dom": "19.2.4",
+		"payload": "3.83.0",
+		"react": "19.2.5",
+		"react-dom": "19.2.5",
 		"sharp": "0.34.5",
 		"swr": "2.4.1"
 	},
@@ -45,8 +45,8 @@
 		"typescript": "6.0.3"
 	},
 	"overrides": {
-		"react": "19.2.4",
-		"react-dom": "19.2.4"
+		"react": "19.2.5",
+		"react-dom": "19.2.5"
 	},
 	"packageManager": "npm@11.12.1"
 }
