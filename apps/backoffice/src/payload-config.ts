@@ -40,8 +40,9 @@ import { CardBlock } from '@/lexical/layout/card';
 import { ThreeColumnsTextBlock } from '@/lexical/layout/three-columns-text';
 import { TwoColumnsTextBlock } from '@/lexical/layout/two-columns-text';
 import { TwoColumnsTextImageBlock } from '@/lexical/layout/two-columns-text-image';
-import { Videos } from './schemas/Videos/collection';
+
 import { spacerFields } from './fields/spacer';
+import { Interviews } from './schemas/Interviews/collection';
 import { Videos } from './schemas/Videos/collection';
 
 /* * */
@@ -126,7 +127,7 @@ export default buildConfig({
 		user: 'users',
 	},
 
-	collections: [Campaigns, Articles, CaseStudies, Media, News, Topics, Users, KnowledgeBase, Notes, Projects, Faqs, Videos],
+	collections: [Campaigns, Articles, CaseStudies, Media, News, Topics, Users, KnowledgeBase, Notes, Projects, Faqs, Videos, Interviews],
 
 	csrf: [
 		getPublicVariable('server_url_backoffice').replace(/\/$/, ''),
