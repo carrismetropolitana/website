@@ -79,6 +79,7 @@ export interface Config {
     projects: Project;
     faqs: Faq;
     videos: Video;
+    interviews: Interview;
     'payload-kv': PayloadKv;
     'payload-locked-documents': PayloadLockedDocument;
     'payload-preferences': PayloadPreference;
@@ -98,6 +99,7 @@ export interface Config {
     projects: ProjectsSelect<false> | ProjectsSelect<true>;
     faqs: FaqsSelect<false> | FaqsSelect<true>;
     videos: VideosSelect<false> | VideosSelect<true>;
+    interviews: InterviewsSelect<false> | InterviewsSelect<true>;
     'payload-kv': PayloadKvSelect<false> | PayloadKvSelect<true>;
     'payload-locked-documents': PayloadLockedDocumentsSelect<false> | PayloadLockedDocumentsSelect<true>;
     'payload-preferences': PayloadPreferencesSelect<false> | PayloadPreferencesSelect<true>;
@@ -439,52 +441,6 @@ export interface Project {
       }[]
     | null;
   is_unlisted?: boolean | null;
-  /**
-   * URL única para este artigo. Será gerada automaticamente do título se deixado em branco.
-   */
-  slug: string;
-  /**
-   * Resumo curto do artigo que aparece na listagem e no início do artigo.
-   */
-  type: 'tecnologia' | 'operacao' | 'sustentabilidade' | 'comunicacao';
-  /**
-   * Tempo estimado de leitura em minutos.
-   */
-  readTime: number;
-  heroImage: string | Media;
-  /**
-   * Legenda que aparece sobre a imagem de destaque.
-   */
-  heroImageCaption?: string | null;
-  /**
-   * Conteúdo do artigo em formato Markdown. Suporta títulos (##), listas, links, citações e muito mais.
-   */
-  content: string;
-  author: {
-    picture?: (string | null) | Media;
-    name: string;
-    role: string;
-    /**
-     * Breve descrição sobre o autor.
-     */
-    bio?: string | null;
-    /**
-     * Se este artigo foi escrito por um especialista, lembre-se de marcar para que possa ser entregue as devidas páginas
-     */
-    expertAuthor: boolean;
-    social?: {
-      linkedin?: string | null;
-      twitter?: string | null;
-      email?: string | null;
-    };
-  };
-  publishDate: string;
-  status: 'draft' | 'published';
-  seo?: {
-    metaTitle?: string | null;
-    metaDescription?: string | null;
-    ogImage?: (string | null) | Media;
-  };
   publishedAt: string;
   updatedAt: string;
   featured_image?: (string | null) | Media;
@@ -569,6 +525,75 @@ export interface Video {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "interviews".
+ */
+export interface Interview {
+  id: string;
+  title: string;
+  /**
+   * URL única para esta entrevista. Será gerada automaticamente do título se deixado em branco.
+   */
+  slug: string;
+  /**
+   * Resumo curto da entrevista que aparece na listagem e no início da página.
+   */
+  description: string;
+  type: 'tecnologia' | 'operacao' | 'sustentabilidade' | 'comunicacao';
+  guest: {
+    picture?: (string | null) | Media;
+    name: string;
+    role: string;
+  };
+  host: {
+    picture?: (string | null) | Media;
+    name: string;
+    role: string;
+    /**
+     * Breve descrição sobre o host.
+     */
+    bio?: string | null;
+    social?: {
+      linkedin?: string | null;
+      twitter?: string | null;
+      email?: string | null;
+    };
+  };
+  /**
+   * Ficheiro de áudio da entrevista (upload direto).
+   */
+  audioFile?: (string | null) | Media;
+  /**
+   * URL externa do ficheiro de áudio. Usado se não houver upload direto.
+   */
+  audioUrl?: string | null;
+  /**
+   * Duração do áudio em segundos.
+   */
+  audioDuration?: number | null;
+  /**
+   * Tempo estimado de leitura em minutos.
+   */
+  readTime: number;
+  /**
+   * Transcrição da entrevista em formato Markdown. Suporta títulos (##), listas, links, citações e muito mais.
+   */
+  transcript?: string | null;
+  /**
+   * Ficheiro PDF com a transcrição completa da entrevista.
+   */
+  transcriptPdf?: (string | null) | Media;
+  publishDate: string;
+  status: 'draft' | 'published';
+  seo?: {
+    metaTitle?: string | null;
+    metaDescription?: string | null;
+    ogImage?: (string | null) | Media;
+  };
+  publishedAt: string;
+  updatedAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "payload-kv".
  */
 export interface PayloadKv {
@@ -638,6 +663,10 @@ export interface PayloadLockedDocument {
     | ({
         relationTo: 'videos';
         value: string | Video;
+      } | null)
+    | ({
+        relationTo: 'interviews';
+        value: string | Interview;
       } | null);
   globalSlug?: string | null;
   user: {
@@ -890,27 +919,6 @@ export interface ProjectsSelect<T extends boolean = true> {
     | {
         value?: T;
         id?: T;
-        picture?: T;
-        name?: T;
-        role?: T;
-        bio?: T;
-        expertAuthor?: T;
-        social?:
-          | T
-          | {
-              linkedin?: T;
-              twitter?: T;
-              email?: T;
-            };
-      };
-  publishDate?: T;
-  status?: T;
-  seo?:
-    | T
-    | {
-        metaTitle?: T;
-        metaDescription?: T;
-        ogImage?: T;
       };
   is_unlisted?: T;
   publishedAt?: T;
@@ -959,6 +967,55 @@ export interface VideosSelect<T extends boolean = true> {
   type?: T;
   video?: T;
   thumbnail?: T;
+  status?: T;
+  seo?:
+    | T
+    | {
+        metaTitle?: T;
+        metaDescription?: T;
+        ogImage?: T;
+      };
+  publishedAt?: T;
+  updatedAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "interviews_select".
+ */
+export interface InterviewsSelect<T extends boolean = true> {
+  title?: T;
+  slug?: T;
+  description?: T;
+  type?: T;
+  guest?:
+    | T
+    | {
+        picture?: T;
+        name?: T;
+        role?: T;
+      };
+  host?:
+    | T
+    | {
+        picture?: T;
+        name?: T;
+        role?: T;
+        bio?: T;
+        social?:
+          | T
+          | {
+              linkedin?: T;
+              twitter?: T;
+              email?: T;
+            };
+      };
+  audioFile?: T;
+  audioUrl?: T;
+  audioDuration?: T;
+  readTime?: T;
+  transcript?: T;
+  transcriptPdf?: T;
+  publishDate?: T;
   status?: T;
   seo?:
     | T
