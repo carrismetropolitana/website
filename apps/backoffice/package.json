@@ -13,40 +13,40 @@
 		"start": "next start"
 	},
 	"dependencies": {
-		"@carrismetropolitana/api-types": "20260317.2218.39",
+		"@carrismetropolitana/api-types": "20260419.1736.4",
 		"@carrismetropolitana/website-shared-settings": "*",
-		"@payloadcms/db-mongodb": "3.76.1",
-		"@payloadcms/email-nodemailer": "3.76.1",
-		"@payloadcms/next": "3.76.1",
-		"@payloadcms/richtext-lexical": "3.76.1",
-		"@payloadcms/storage-s3": "3.76.1",
-		"@payloadcms/ui": "3.76.1",
+		"@payloadcms/db-mongodb": "3.83.0",
+		"@payloadcms/email-nodemailer": "3.83.0",
+		"@payloadcms/next": "3.83.0",
+		"@payloadcms/richtext-lexical": "3.83.0",
+		"@payloadcms/storage-s3": "3.83.0",
+		"@payloadcms/ui": "3.83.0",
 		"@tabler/icons-react": "3.41.1",
-		"@tmlmobilidade/dates": "20260213.1500.47",
-		"@tmlmobilidade/rss": "20260406.1442.3",
-		"@tmlmobilidade/utils": "20260406.1442.3",
+		"@tmlmobilidade/dates": "20260418.1237.24",
+		"@tmlmobilidade/rss": "20260418.1237.24",
+		"@tmlmobilidade/utils": "20260418.1237.24",
 		"classnames": "2.5.1",
-		"graphql": "16.12.0",
+		"graphql": "16.13.2",
 		"next": "15.4.11",
-		"nodemailer": "8.0.1",
-		"payload": "3.76.1",
-		"react": "19.2.4",
-		"react-dom": "19.2.4",
+		"nodemailer": "8.0.5",
+		"payload": "3.83.0",
+		"react": "19.2.5",
+		"react-dom": "19.2.5",
 		"sharp": "0.34.5",
-		"swr": "2.4.0"
+		"swr": "2.4.1"
 	},
 	"devDependencies": {
 		"@carrismetropolitana/eslint": "20250622.1204.50",
 		"@carrismetropolitana/website-shared-types": "*",
-		"@tmlmobilidade/tsconfig": "20260406.1442.3",
-		"@types/node": "25.5.2",
+		"@tmlmobilidade/tsconfig": "20260418.1237.24",
+		"@types/node": "25.6.0",
 		"@types/react": "19.2.14",
 		"@types/react-dom": "19.2.3",
-		"typescript": "5.9.3"
+		"typescript": "6.0.3"
 	},
 	"overrides": {
-		"react": "19.2.4",
-		"react-dom": "19.2.4"
+		"react": "19.2.5",
+		"react-dom": "19.2.5"
 	},
 	"packageManager": "npm@11.12.1"
 }

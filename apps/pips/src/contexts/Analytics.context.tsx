@@ -2,10 +2,10 @@
 
 /* * */
 
+import pjson from '#/package.json';
 import { type Ampli, ampli } from '@/amplitude';
 import { useConsentContext } from '@/contexts/Consent.context';
 import { GoogleTagManager } from '@next/third-parties/google';
-import pjson from 'package.json';
 import { createContext, useContext, useEffect } from 'react';
 
 /* * */

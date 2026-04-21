@@ -854,7 +854,7 @@ export const terminalsData: Review2025CardSchema[] = [
 		content: [
 			{
 				items: [
-					{ badge: 'PAX_TOTAL', description: 'total de passageiros transportados', type: 'badge', value: '' },
+					{ badge: 'PAX_TOTAL', description: 'total de passageiros transportados', type: 'badge', value: '1,2 Milhões' },
 					{ badge: 'GROWTH', description: 'percentagem de crescimento face a 2024', type: 'badge', value: '11,2%' },
 				],
 			},

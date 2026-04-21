@@ -4,9 +4,9 @@ import type { Waypoint } from '@carrismetropolitana/api-types/network';
 
 import { IconDisplay } from '@/components/common/IconDisplay';
 import { useAnalyticsContext } from '@/contexts/Analytics.context';
-import { useLocationsContext } from '@/contexts/Locations.context';
 import { useOperationalDateContext } from '@/contexts/OperationalDate.context';
 import { useStopsContext } from '@/contexts/Stops.context';
+import { formatStopLocation } from '@/utils/formatStopLocation';
 import { useClipboard } from '@mantine/hooks';
 import { IconCheck, IconCopy } from '@tabler/icons-react';
 import { IconArrowUpRight } from '@tabler/icons-react';
@@ -32,7 +32,6 @@ export function PathWaypointHeader({ isFirstStop, isLastStop, isSelected, waypoi
 	// A. Setup variables
 
 	const stopsContext = useStopsContext();
-	const locationsContext = useLocationsContext();
 	const operationalDateContext = useOperationalDateContext();
 	const analyticsContext = useAnalyticsContext();
 
@@ -42,8 +41,7 @@ export function PathWaypointHeader({ isFirstStop, isLastStop, isSelected, waypoi
 	// B. Fetch data
 
 	const stopData = stopsContext.actions.getStopById(waypointData.stop_id);
-	const localityData = stopData?.locality_id ? locationsContext.actions.getLocalityById(stopData.locality_id) : undefined;
-	const municipalityData = stopData?.municipality_id ? locationsContext.actions.getMunicipalityById(stopData.municipality_id) : undefined;
+
 	//
 	// C. Handle actions
 
@@ -82,7 +80,7 @@ export function PathWaypointHeader({ isFirstStop, isLastStop, isSelected, waypoi
 			</p>
 
 			<div className={styles.subHeaderWrapper}>
-				<p className={styles.stopLocation}>{localityData?.display || municipalityData?.name}</p>
+				<p className={styles.stopLocation}>{formatStopLocation(stopData.locality_name, stopData.municipality_name)}</p>
 				<p className={`${styles.stopId} ${stopIdClipboard.copied && styles.isCopied}`} onClick={handleClickStopId}>
 					#{stopData.id}
 					{stopIdClipboard.copied ? <IconCheck className={styles.stopIdCopyIcon} /> : <IconCopy className={styles.stopIdCopyIcon} />}
