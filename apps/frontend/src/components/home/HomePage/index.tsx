@@ -3,10 +3,10 @@
 /* * */
 
 import { AlertsSection } from '@/components/home/AlertsSection';
-import { FeaturedSection } from '@/components/home/FeaturedSection';
 import { MainCarousel } from '@/components/home/MainCarousel';
 import { MetricsSection } from '@/components/home/MetricsSection';
 import { NewsSection } from '@/components/home/NewsSection';
+import { ProjectsSection } from '@/components/home/ProjectsSection';
 import { QuickSearch } from '@/components/home/QuickSearch';
 import { SchedulesSection } from '@/components/home/SchedulesSection';
 import { SupportSection } from '@/components/home/SupportSection';
@@ -38,7 +38,7 @@ export function HomePage() {
 			<TarifsSection />
 			<SupportSection />
 			<MetricsSection />
-			<FeaturedSection />
+			<ProjectsSection />
 		</MetricsContextProvider>
 	);
 }

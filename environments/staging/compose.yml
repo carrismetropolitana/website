@@ -37,7 +37,28 @@ services:
     ports:
       - 27017:27017
     volumes:
-      - websitedbdata:/data/db
+      - ./websitedbdata:/data/db
+    env_file:
+      - ./secrets/.env
+
+  # # # # # # # # # # # # # # # # # # # # #
+  # # # # # # # # # # # # # # # # # # # # #
+
+  backupd:
+    image: ghcr.io/carrismetropolitana/website-backupd:staging
+    deploy:
+      restart_policy:
+        condition: on-failure
+        delay: 5s
+      resources:
+        limits:
+          memory: 500mb
+    logging:
+      options:
+        max-size: '1m'
+        max-file: '1'
+    volumes:
+      - ./backups/:/backups
     env_file:
       - ./secrets/.env
 

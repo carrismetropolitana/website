@@ -22,15 +22,22 @@ import { renderBlock } from './renderBlock';
 
 /* * */
 
+export interface RenderNodeOptions {
+	disableAutoLink?: boolean
+}
+
+/* * */
+
 // Standard Lexical Node renderer
-export function renderNode(node: LexicalNode, key?: number): ReactNode {
+export function renderNode(node: LexicalNode, key?: number, options: RenderNodeOptions = {}): ReactNode {
 	//
 
 	//
 	// A. Setup variables
 
+	const { disableAutoLink = false } = options;
 	const children = node.children ?? [];
-	const renderChildren = () => children.map((child, idx) => renderNode(child, idx));
+	const renderChildren = () => children.map((child, idx) => renderNode(child, idx, options));
 
 	//
 	// B. Render components
@@ -59,7 +66,7 @@ export function renderNode(node: LexicalNode, key?: number): ReactNode {
 				url: raw?.url,
 			};
 
-			return <Links key={key} children={children} fields={linkFields} url={node.url} />;
+			return <Links key={key} children={children} fields={linkFields} url={node.url} disableChildAutoLink />;
 		}
 		case 'list': return <List key={key} children={children} listType={node.listType} />;
 		case 'listitem': return <ListItem key={key} children={children} />;
@@ -78,7 +85,7 @@ export function renderNode(node: LexicalNode, key?: number): ReactNode {
 				/>
 			);
 		case 'tablerow': return <tr key={key}>{renderChildren()}</tr>;
-		case 'text': return <Text key={key} format={node.format} style={node.style} text={node.text} />;
+		case 'text': return <Text key={key} disableAutoLink={disableAutoLink} format={node.format} style={node.style} text={node.text} />;
 		case 'upload': return renderUpload(node, key);
 		default: return children.length > 0 ? renderChildren() : (node.text ?? null);
 	}

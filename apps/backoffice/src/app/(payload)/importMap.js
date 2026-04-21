@@ -1,6 +1,7 @@
 import { RscEntryLexicalCell as RscEntryLexicalCell_44fe37237e0ebf4470c9990d8cb7b07e } from '@payloadcms/richtext-lexical/rsc'
 import { RscEntryLexicalField as RscEntryLexicalField_44fe37237e0ebf4470c9990d8cb7b07e } from '@payloadcms/richtext-lexical/rsc'
 import { LexicalDiffComponent as LexicalDiffComponent_44fe37237e0ebf4470c9990d8cb7b07e } from '@payloadcms/richtext-lexical/rsc'
+import { MailtoAutoLinkFeatureClient as MailtoAutoLinkFeatureClient_3a0cacb48aaa9b3a30496056acdeaf3b } from '@/lexical/mailto-autolink/feature.client'
 import { MentionFeatureClient as MentionFeatureClient_719947979d3cd927e94d2cc42d4c5006 } from '@/lexical/mention/feature.client'
 import { TableFeatureClient as TableFeatureClient_e70f5e05f09f93e00b997edb1ef0c864 } from '@payloadcms/richtext-lexical/client'
 import { BackgroundColorFeatureClient as BackgroundColorFeatureClient_f7a8d5d95ad80633f4682a373be4a83f } from '@/lexical/backgroundColor/feature.client'
@@ -41,6 +42,7 @@ export const importMap = {
   "@payloadcms/richtext-lexical/rsc#RscEntryLexicalCell": RscEntryLexicalCell_44fe37237e0ebf4470c9990d8cb7b07e,
   "@payloadcms/richtext-lexical/rsc#RscEntryLexicalField": RscEntryLexicalField_44fe37237e0ebf4470c9990d8cb7b07e,
   "@payloadcms/richtext-lexical/rsc#LexicalDiffComponent": LexicalDiffComponent_44fe37237e0ebf4470c9990d8cb7b07e,
+  "@/lexical/mailto-autolink/feature.client#MailtoAutoLinkFeatureClient": MailtoAutoLinkFeatureClient_3a0cacb48aaa9b3a30496056acdeaf3b,
   "@/lexical/mention/feature.client#MentionFeatureClient": MentionFeatureClient_719947979d3cd927e94d2cc42d4c5006,
   "@payloadcms/richtext-lexical/client#TableFeatureClient": TableFeatureClient_e70f5e05f09f93e00b997edb1ef0c864,
   "@/lexical/backgroundColor/feature.client#BackgroundColorFeatureClient": BackgroundColorFeatureClient_f7a8d5d95ad80633f4682a373be4a83f,

@@ -76,6 +76,8 @@ export interface Config {
     users: User;
     'knowledge-base': KnowledgeBase;
     notes: Note;
+    projects: Project;
+    faqs: Faq;
     'payload-kv': PayloadKv;
     'payload-locked-documents': PayloadLockedDocument;
     'payload-preferences': PayloadPreference;
@@ -92,6 +94,8 @@ export interface Config {
     users: UsersSelect<false> | UsersSelect<true>;
     'knowledge-base': KnowledgeBaseSelect<false> | KnowledgeBaseSelect<true>;
     notes: NotesSelect<false> | NotesSelect<true>;
+    projects: ProjectsSelect<false> | ProjectsSelect<true>;
+    faqs: FaqsSelect<false> | FaqsSelect<true>;
     'payload-kv': PayloadKvSelect<false> | PayloadKvSelect<true>;
     'payload-locked-documents': PayloadLockedDocumentsSelect<false> | PayloadLockedDocumentsSelect<true>;
     'payload-preferences': PayloadPreferencesSelect<false> | PayloadPreferencesSelect<true>;
@@ -100,7 +104,7 @@ export interface Config {
   db: {
     defaultIDType: string;
   };
-  fallbackLocale: null;
+  fallbackLocale: ('false' | 'none' | 'null') | false | null | ('pt-PT' | 'en') | ('pt-PT' | 'en')[];
   globals: {
     'general-status': GeneralStatus;
     'home-slider': HomeSlider;
@@ -111,7 +115,7 @@ export interface Config {
     'home-slider': HomeSliderSelect<false> | HomeSliderSelect<true>;
     settings: SettingsSelect<false> | SettingsSelect<true>;
   };
-  locale: null;
+  locale: 'pt-PT' | 'en';
   widgets: {
     collections: CollectionsWidget;
   };
@@ -230,6 +234,10 @@ export interface Article {
      * Breve descrição sobre o autor.
      */
     bio?: string | null;
+    /**
+     * Se este artigo foi escrito por um especialista, lembre-se de marcar para que possa ser entregue conteúdos de especialistas separadamente.
+     */
+    expertAuthor: boolean;
     social?: {
       linkedin?: string | null;
       twitter?: string | null;
@@ -385,10 +393,21 @@ export interface Note {
    * Texto de destaque/resumo que aparece no início do artigo. Suporta HTML.
    */
   lead?: string | null;
-  /**
-   * Conteúdo principal do artigo. Suporta HTML.
-   */
-  body?: string | null;
+  body: {
+    root: {
+      type: string;
+      children: {
+        type: any;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  };
   contentType?: string | null;
   file?: (string | null) | Media;
   publishDate?: string | null;
@@ -403,6 +422,56 @@ export interface Note {
   authors?: (string | null) | User;
   publishedAt: string;
   updatedAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "projects".
+ */
+export interface Project {
+  id: string;
+  _order?: string | null;
+  title?: string | null;
+  more_info_url?: string | null;
+  description?: string | null;
+  keywords?:
+    | {
+        value?: string | null;
+        id?: string | null;
+      }[]
+    | null;
+  is_unlisted?: boolean | null;
+  publishedAt: string;
+  updatedAt: string;
+  featured_image?: (string | null) | Media;
+  createdAt: string;
+  _status?: ('draft' | 'published') | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "faqs".
+ */
+export interface Faq {
+  id: string;
+  question?: string | null;
+  answer?: {
+    root: {
+      type: string;
+      children: {
+        type: any;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  } | null;
+  topic?: (string | null) | Topic;
+  publishedAt: string;
+  updatedAt: string;
+  createdAt: string;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -463,6 +532,14 @@ export interface PayloadLockedDocument {
     | ({
         relationTo: 'notes';
         value: string | Note;
+      } | null)
+    | ({
+        relationTo: 'projects';
+        value: string | Project;
+      } | null)
+    | ({
+        relationTo: 'faqs';
+        value: string | Faq;
       } | null);
   globalSlug?: string | null;
   user: {
@@ -543,6 +620,7 @@ export interface ArticlesSelect<T extends boolean = true> {
         name?: T;
         role?: T;
         bio?: T;
+        expertAuthor?: T;
         social?:
           | T
           | {
@@ -699,6 +777,40 @@ export interface NotesSelect<T extends boolean = true> {
   authors?: T;
   publishedAt?: T;
   updatedAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "projects_select".
+ */
+export interface ProjectsSelect<T extends boolean = true> {
+  _order?: T;
+  title?: T;
+  more_info_url?: T;
+  description?: T;
+  keywords?:
+    | T
+    | {
+        value?: T;
+        id?: T;
+      };
+  is_unlisted?: T;
+  publishedAt?: T;
+  updatedAt?: T;
+  featured_image?: T;
+  createdAt?: T;
+  _status?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "faqs_select".
+ */
+export interface FaqsSelect<T extends boolean = true> {
+  question?: T;
+  answer?: T;
+  topic?: T;
+  publishedAt?: T;
+  updatedAt?: T;
+  createdAt?: T;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema

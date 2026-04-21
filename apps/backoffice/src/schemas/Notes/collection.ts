@@ -55,12 +55,10 @@ export const Notes: CollectionConfig = {
 			type: 'textarea',
 		},
 		{
-			admin: {
-				description: 'Conteúdo principal do artigo. Suporta HTML.',
-			},
 			label: 'Conteúdo',
 			name: 'body',
-			type: 'textarea',
+			required: true,
+			type: 'richText',
 		},
 		{
 			admin: {

@@ -16,6 +16,7 @@ import { KnowledgeBase } from '@/schemas/KnowledgeBase/collection';
 import { Media } from '@/schemas/Media/collection';
 import { News } from '@/schemas/News/collection';
 import { Notes } from '@/schemas/Notes/collection';
+import { Projects } from '@/schemas/Projects/collection';
 import { Topics } from '@/schemas/Topics/collection';
 import { Users } from '@/schemas/Users/collection';
 
@@ -23,6 +24,7 @@ import { Users } from '@/schemas/Users/collection';
 
 import { Settings } from '@/globals/config';
 import { Articles } from '@/schemas/Articles/collection';
+import { Faqs } from '@/schemas/Faqs/collection';
 import { GeneralStatus } from '@/schemas/GeneralStatus/global';
 import { HomeSlider } from '@/schemas/HomeSlider/global';
 
@@ -123,7 +125,7 @@ export default buildConfig({
 		user: 'users',
 	},
 
-	collections: [Campaigns, Articles, CaseStudies, Media, News, Topics, Users, KnowledgeBase, Notes],
+	collections: [Campaigns, Articles, CaseStudies, Media, News, Topics, Users, KnowledgeBase, Notes, Projects, Faqs],
 
 	csrf: [
 		getPublicVariable('server_url_backoffice').replace(/\/$/, ''),
@@ -153,6 +155,12 @@ export default buildConfig({
 		HomeSlider,
 		Settings,
 	],
+
+	localization: {
+		defaultLocale: 'pt-PT',
+		fallback: true,
+		locales: ['pt-PT', 'en'],
+	},
 
 	plugins: [
 		s3Storage({
