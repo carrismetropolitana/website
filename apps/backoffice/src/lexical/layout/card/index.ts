@@ -63,9 +63,8 @@ export const CardBlock: Block = {
 					type: 'text',
 				},
 				{
-					label: 'Número (ex: 25m)',
+					label: 'Número (opcional, ex: 25)',
 					name: 'number',
-					required: true,
 					type: 'text',
 				},
 				{
@@ -80,7 +79,7 @@ export const CardBlock: Block = {
 					type: 'textarea',
 				},
 			] as Field[],
-			label: 'Cartões para stack',
+			label: 'Cartões da Stack',
 			minRows: 1,
 			name: 'cards',
 			type: 'array',

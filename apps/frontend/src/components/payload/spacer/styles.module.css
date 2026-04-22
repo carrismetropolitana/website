@@ -1,11 +1,7 @@
 .root {
-	box-sizing: border-box;
+	display: block;
 	flex-shrink: 0;
-	align-self: stretch;
 	width: 100%;
-	min-width: 0;
-	padding: 0;
-	margin: 0;
-	overflow: visible;
-	border-top: var(--spacer-height, 20px) solid transparent;
+	min-width: 100%;
+	height: var(--spacer-height, 20px);
 }

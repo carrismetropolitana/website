@@ -5,12 +5,12 @@ import type { LexicalNode } from '@/types/lexical-node.types';
 import type { PayloadLexicalLink } from '@/types/link.types';
 import type { ReactNode } from 'react';
 
-import { Section } from '@/components/layout/Section';
 import { Accordion } from '@/components/payload/accordion';
 import { Card } from '@/components/payload/card';
 import { Gallery } from '@/components/payload/gallery';
 import { Links } from '@/components/payload/links';
 import { NotImplemented } from '@/components/payload/NotImplemented';
+import { Section } from '@/components/payload/section';
 import { Spacer } from '@/components/payload/spacer';
 import { Surface } from '@/components/payload/surface';
 import { ThreeColumnsText } from '@/components/payload/ThreeColumnsText';
