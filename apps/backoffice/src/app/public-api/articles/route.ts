@@ -14,7 +14,7 @@ export const GET = async (request: Request) => {
 	const type = searchParams.get('type');
 	const limit = Number(searchParams.get('limit')) || 10;
 	const page = Number(searchParams.get('page')) || 1;
-	const expertArticle = Boolean	(searchParams.get('expert-article') || false);
+	const expertArticle = JSON.parse(searchParams.get('expert-article'));
 
 	const payload = await getPayload({ config: payloadConfig });
 
