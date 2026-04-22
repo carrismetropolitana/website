@@ -1,7 +1,7 @@
 'use client';
 /* * */
 
-import type { CSSProperties, ReactNode } from 'react';
+import type { ReactNode } from 'react';
 
 import styles from './styles.module.css';
 import layoutStyles from '@/components/layout/Surface/styles.module.css';
