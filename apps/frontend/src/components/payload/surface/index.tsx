@@ -1,7 +1,7 @@
 'use client';
 /* * */
 
-import type { ReactNode } from 'react';
+import type { CSSProperties, ReactNode } from 'react';
 
 import styles from './styles.module.css';
 import layoutStyles from '@/components/layout/Surface/styles.module.css';
@@ -18,10 +18,21 @@ interface Props {
 }
 
 /* * */
-
 export function Surface({ backgroundImageUrl, backgroundOverlay, children, forceOverflow, fullHeight, variant = 'default' }: Props) {
-	const containerClass = [layoutStyles.container, forceOverflow && layoutStyles.forceOverflow, fullHeight && layoutStyles.fullHeight && styles.withBackgroundImage, variant && layoutStyles[variant]].join(' ');
-	const containerStyle = { backgroundImage: `url("${backgroundImageUrl}")`, backgroundSize: 'cover' };
+	const containerClass = [
+		layoutStyles.container,
+		forceOverflow && layoutStyles.forceOverflow,
+		fullHeight && layoutStyles.fullHeight,
+		(backgroundImageUrl || backgroundOverlay) && styles.withBackgroundImage,
+		(backgroundImageUrl || backgroundOverlay) && styles.edgeToEdge,
+		variant && layoutStyles[variant],
+	].filter(Boolean).join(' ');
+	const containerStyle = backgroundImageUrl
+		? {
+			['--surface-background-image' as keyof CSSProperties]: `url("${backgroundImageUrl}")`,
+			['--surface-offset' as keyof CSSProperties]: '24px',
+		}
+		: undefined;
 	return (
 		<div className={containerClass} style={containerStyle}>
 			{backgroundImageUrl && <div className={styles.backgroundImageLayer} />}
