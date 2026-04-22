@@ -29,7 +29,7 @@ export function CampaignDetailContent({ data }: CampaignDetailContentProps) {
 		return <Skeleton height={100} />;
 	}
 
-	const body = data.body ? (<div key={data.slug ?? data.id}>{renderLexicalNode(getLexicalRoot(data?.body))}</div>) : null;
+	const body = data.body ? (<div key={data.slug ?? data.id} style={{ width: '100%' }}>{renderLexicalNode(getLexicalRoot(data?.body))}</div>) : null;
 
 	return data.has_default_surface ? (
 		<Surface>

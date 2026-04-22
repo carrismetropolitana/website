@@ -18,25 +18,36 @@ interface Props {
 }
 
 /* * */
-export function Surface({ backgroundImageUrl, backgroundOverlay, children, forceOverflow, fullHeight, variant = 'default' }: Props) {
+
+export function Surface({
+	backgroundImageUrl,
+	backgroundOverlay,
+	children,
+	forceOverflow,
+	fullHeight,
+	variant = 'default',
+}: Props) {
 	const containerClass = [
 		layoutStyles.container,
 		forceOverflow && layoutStyles.forceOverflow,
 		fullHeight && layoutStyles.fullHeight,
 		(backgroundImageUrl || backgroundOverlay) && styles.withBackgroundImage,
-		(backgroundImageUrl || backgroundOverlay) && styles.edgeToEdge,
 		variant && layoutStyles[variant],
 	].filter(Boolean).join(' ');
-	const containerStyle = backgroundImageUrl
-		? {
-			['--surface-background-image' as keyof CSSProperties]: `url("${backgroundImageUrl}")`,
-			['--surface-offset' as keyof CSSProperties]: '24px',
-		}
-		: undefined;
+
 	return (
-		<div className={containerClass} style={containerStyle}>
-			{backgroundImageUrl && <div className={styles.backgroundImageLayer} />}
+		<div className={containerClass}>
+			{backgroundImageUrl && (
+				<img
+					alt=""
+					className={styles.backgroundImageLayer}
+					src={backgroundImageUrl}
+					aria-hidden
+				/>
+			)}
+
 			{backgroundOverlay && <div className={styles.backgroundOverlayLayer} />}
+
 			<div className={styles.contentLayer}>{children}</div>
 		</div>
 	);
