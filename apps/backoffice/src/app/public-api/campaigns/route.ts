@@ -9,18 +9,23 @@ import { getPayload } from 'payload';
 export const GET = async () => {
 	const payload = await getPayload({ config: payloadConfig });
 
-	const foundCampaigns = await payload.find({
+	const result = await payload.find({
 		collection: 'campaigns',
 		depth: 2,
 		draft: false,
 		limit: 0,
-		sort: '-updatedAt',
+		sort: '-publishedAt',
 		where: {
-			status: { equals: 'published' },
+			_status: { equals: 'published' },
+			or: [
+				{ is_unlisted: { equals: false } },
+				{ is_unlisted: { equals: undefined } },
+			],
 		},
 	});
 
-	return Response.json(foundCampaigns.docs, {
-		headers: getPublicHeaders(60),
+	const docs = result.docs ?? [];
+	return Response.json(docs, {
+		headers: getPublicHeaders(180),
 	});
 };

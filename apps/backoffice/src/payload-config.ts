@@ -9,7 +9,7 @@ import sharp from 'sharp';
 
 /* * */
 
-import { createLexicalConfig } from '@/configs/lexical-editor-config';
+import { createLexicalConfig, lexicalEditorConfig as nestedLexicalEditorConfig } from '@/configs/lexical-editor-config';
 import { Campaigns } from '@/schemas/Campaigns/collection';
 import { CaseStudies } from '@/schemas/CaseStudies/collection';
 import { KnowledgeBase } from '@/schemas/KnowledgeBase/collection';
@@ -33,8 +33,8 @@ import { HomeSlider } from '@/schemas/HomeSlider/global';
 import { accordionFields } from '@/fields/accordion';
 import { galleryFields } from '@/fields/gallery';
 import { linkFields } from '@/fields/link';
-import { sectionFields } from '@/fields/section';
-import { surfaceFields } from '@/fields/surface';
+import { createSectionFields } from '@/fields/section';
+import { createSurfaceFields } from '@/fields/surface';
 import { videoFields } from '@/fields/video';
 import { CardBlock } from '@/lexical/layout/card';
 import { ThreeColumnsTextBlock } from '@/lexical/layout/three-columns-text';
@@ -68,12 +68,12 @@ const richTextBlocks: Block[] = [
 	},
 	{
 		admin: { group: 'Layout' },
-		fields: sectionFields,
+		fields: createSectionFields(nestedLexicalEditorConfig),
 		slug: 'section',
 	},
 	{
 		admin: { group: 'Layout' },
-		fields: surfaceFields,
+		fields: createSurfaceFields(nestedLexicalEditorConfig),
 		slug: 'surface',
 	},
 	{
@@ -94,7 +94,7 @@ const richTextBlocks: Block[] = [
 	},
 ];
 
-const lexicalEditorConfig = createLexicalConfig(richTextBlocks);
+const mainLexicalEditorConfig = createLexicalConfig(richTextBlocks);
 
 /* * */
 
@@ -134,7 +134,7 @@ export default buildConfig({
 
 	db: mongooseAdapter({ url: process.env.WEBSITEDB_URI ?? 'mongodb://placeholder:placeholder@placeholder:12345/placeholder' }),
 
-	editor: lexicalEditorConfig,
+	editor: mainLexicalEditorConfig,
 
 	email: nodemailerAdapter({
 		defaultFromAddress: process.env.EMAIL_FROM_ADDRESS ?? '',

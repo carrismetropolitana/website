@@ -4,7 +4,9 @@ import type { Block, Field } from 'payload';
 
 import { galleryFields } from '@/fields/gallery';
 import { linkFields } from '@/fields/link';
+import { createSectionFields } from '@/fields/section';
 import { spacerFields } from '@/fields/spacer';
+import { createSurfaceFields } from '@/fields/surface';
 import { videoFields } from '@/fields/video';
 import { BackgroundColorFeature } from '@/lexical/backgroundColor/feature.server';
 import { HeadingAnchorFeature } from '@/lexical/headingAnchor/feature.server';
@@ -216,9 +218,8 @@ const SAFE_NESTED_BLOCKS: Block[] = [
 						type: 'text',
 					},
 					{
-						label: 'Número (ex: 25m)',
+						label: 'Número (opcional, ex: 25)',
 						name: 'number',
-						required: true,
 						type: 'text',
 					},
 					{
@@ -233,7 +234,7 @@ const SAFE_NESTED_BLOCKS: Block[] = [
 						type: 'textarea',
 					},
 				] as Field[],
-				label: 'Cartões para stack',
+				label: 'Cartões da Stack',
 				minRows: 1,
 				name: 'cards',
 				type: 'array',
@@ -321,64 +322,12 @@ const FULL_NESTED_BLOCKS: Block[] = [
 	},
 	{
 		admin: { group: 'Layout' },
-		fields: [
-			{
-				defaultValue: false,
-				label: 'Com Espaçamento Entre Elementos',
-				name: 'withGap',
-				type: 'checkbox',
-			},
-			{
-				defaultValue: false,
-				label: 'Com Divisor Inferior',
-				name: 'withBottomDivider',
-				type: 'checkbox',
-			},
-			{
-				defaultValue: 'none',
-				label: 'Padding',
-				name: 'withPadding',
-				options: [
-					{ label: 'Sem padding', value: 'none' },
-					{ label: 'Desktop', value: 'desktop' },
-					{ label: 'Mobile', value: 'mobile' },
-					{ label: 'Desktop + Mobile', value: 'all' },
-				],
-				type: 'select',
-			},
-			{
-				editor: nestedRichTextEditorSafeBlocks,
-				label: 'Conteúdo',
-				name: 'content',
-				required: true,
-				type: 'richText',
-			},
-		] as Field[],
+		fields: createSectionFields(nestedRichTextEditorSafeBlocks),
 		slug: 'section',
 	},
 	{
 		admin: { group: 'Layout' },
-		fields: [
-			{
-				defaultValue: false,
-				label: 'Full Height',
-				name: 'fullHeight',
-				type: 'checkbox',
-			},
-			{
-				defaultValue: false,
-				label: 'Force Overflow',
-				name: 'forceOverflow',
-				type: 'checkbox',
-			},
-			{
-				editor: nestedRichTextEditorSafeBlocks,
-				label: 'Conteúdo',
-				name: 'content',
-				required: true,
-				type: 'richText',
-			},
-		] as Field[],
+		fields: createSurfaceFields(nestedRichTextEditorSafeBlocks),
 		slug: 'surface',
 	},
 ];

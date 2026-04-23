@@ -1,3 +1,4 @@
+'use client';
 /* * */
 
 import { Grid } from '@/components/layout/Grid';
