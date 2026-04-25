@@ -512,7 +512,36 @@ export interface Video {
     };
   };
   type: 'tecnologia' | 'operacao' | 'sustentabilidade' | 'comunicacao';
+  /**
+   * Tempo estimado de visualização em minutos.
+   */
+  readTime: number;
   video: string | Media;
+  /**
+   * Conteúdo do vídeo em formato Markdown. Exemplo:
+   * ## Descrição do Vídeo
+   *
+   * Texto introdutório...
+   *
+   * ### Destaques do Vídeo
+   * - Ponto 1
+   * - Ponto 2
+   */
+  content: string;
+  /**
+   * Capítulos apresentados no leitor de vídeo.
+   */
+  chapters?:
+    | {
+        /**
+         * Formato MM:SS ou HH:MM:SS. Ex.: 02:15 ou 01:02:15.
+         */
+        startTime: string;
+        title: string;
+        id?: string | null;
+      }[]
+    | null;
+  publishDate: string;
   thumbnail: string | Media;
   status: 'draft' | 'published';
   seo?: {
@@ -965,7 +994,17 @@ export interface VideosSelect<T extends boolean = true> {
             };
       };
   type?: T;
+  readTime?: T;
   video?: T;
+  content?: T;
+  chapters?:
+    | T
+    | {
+        startTime?: T;
+        title?: T;
+        id?: T;
+      };
+  publishDate?: T;
   thumbnail?: T;
   status?: T;
   seo?:
