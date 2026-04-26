@@ -8,6 +8,8 @@ import { slugify } from '@/utils/slugify';
 
 /* * */
 
+const chapterTimecodePattern = /^\d{2}:\d{2}(?::\d{2})?$/;
+
 export const Videos: CollectionConfig = {
 	access: {
 		create: ({ req: { user } }) => Boolean(user),
@@ -92,17 +94,17 @@ export const Videos: CollectionConfig = {
 					name: 'bio',
 					type: 'textarea',
 				},
-				{
-					admin: {
-						description: 'Se este artigo foi escrito por um especialista, lembre-se de marcar para que possa ser entregue conteúdos de especialistas separadamente.',
-						position: 'sidebar',
+					{
+						admin: {
+							description: 'Se este vídeo foi produzido por um especialista, marque esta opção para permitir filtros e destaques de conteúdos especializados.',
+							position: 'sidebar',
+						},
+						defaultValue: false,
+						label: 'Vídeo produzido por um especialista',
+						name: 'expertAuthor',
+						required: true,
+						type: 'checkbox',
 					},
-					defaultValue: false,
-					label: 'Artigo escrito por um especialista',
-					name: 'expertAuthor',
-					required: true,
-					type: 'checkbox',
-				},
 				{
 					fields: [
 						{
@@ -159,6 +161,18 @@ export const Videos: CollectionConfig = {
 		},
 		{
 			admin: {
+				description: 'Tempo estimado de visualização em minutos.',
+				position: 'sidebar',
+			},
+			defaultValue: 5,
+			label: 'Tempo de Visualização (min)',
+			min: 1,
+			name: 'readTime',
+			required: true,
+			type: 'number',
+		},
+		{
+			admin: {
 				position: 'sidebar',
 			},
 			filterOptions: {
@@ -171,6 +185,62 @@ export const Videos: CollectionConfig = {
 			relationTo: 'media',
 			required: true,
 			type: 'upload',
+		},
+		{
+			admin: {
+				description:
+					'Conteúdo do vídeo em formato Markdown. Exemplo:\n## Descrição do Vídeo\n\nTexto introdutório...\n\n### Destaques do Vídeo\n- Ponto 1\n- Ponto 2',
+			},
+			label: 'Conteúdo (Markdown)',
+			name: 'content',
+			required: true,
+			type: 'textarea',
+		},
+		{
+			admin: {
+				description: 'Capítulos apresentados no leitor de vídeo.',
+			},
+			fields: [
+				{
+					admin: {
+						description: 'Formato MM:SS ou HH:MM:SS. Ex.: 02:15 ou 01:02:15.',
+					},
+					label: 'Tempo Inicial',
+					name: 'startTime',
+					required: true,
+					type: 'text',
+					validate: (value) => {
+						if (!value) return 'O tempo inicial é obrigatório.';
+						return chapterTimecodePattern.test(value) || 'Utilize MM:SS ou HH:MM:SS.';
+					},
+				},
+				{
+					label: 'Título do Capítulo',
+					name: 'title',
+					required: true,
+					type: 'text',
+				},
+			],
+			label: 'Capítulos',
+			labels: {
+				plural: 'Capítulos',
+				singular: 'Capítulo',
+			},
+			name: 'chapters',
+			type: 'array',
+		},
+		{
+			admin: {
+				date: {
+					pickerAppearance: 'dayAndTime',
+				},
+				position: 'sidebar',
+			},
+			defaultValue: () => new Date(),
+			label: 'Data de Publicação',
+			name: 'publishDate',
+			required: true,
+			type: 'date',
 		},
 		{
 			admin: {
