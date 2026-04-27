@@ -79,7 +79,7 @@ export function StopsDetailHeader() {
 						<StopDisplayTts stopId={stopsDetailContext.data.stop.id} />
 						{!isMupi && <FavoriteToggle color="var(--color-brand)" isActive={stopsDetailContext.flags.is_favorite} onToggle={handleToggleFavorite} />}
 					</div>
-					<StopDisplayLocation localityId={stopsDetailContext.data.stop.locality_id} municipalityId={stopsDetailContext.data.stop.municipality_id} size="lg" />
+					<StopDisplayLocation localityName={stopsDetailContext.data.stop.locality_name} municipalityName={stopsDetailContext.data.stop.municipality_name} size="lg" />
 				</div>
 
 			</Section>

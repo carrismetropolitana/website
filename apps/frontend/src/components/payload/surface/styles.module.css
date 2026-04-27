@@ -1,30 +1,31 @@
-.withBackgroundImage {
-	--surface-background-image: none;
-}
-
 .backgroundImageLayer {
-	position: absolute;
-	inset: 0;
+	position: relative;
 	z-index: 0;
-	pointer-events: none;
-	border-radius: inherit;
-	background-image: var(--surface-background-image);
-	background-repeat: no-repeat;
-	background-position: center;
-	background-size: cover;
+	display: block;
+	width: 100%;
+	height: auto;
 }
 
 .backgroundOverlayLayer {
 	position: absolute;
 	inset: 0;
-	z-index: 0;
+	z-index: 1;
 	pointer-events: none;
-	border-radius: inherit;
-	background: rgb(0 0 0 / 35%);
+	background: rgb(0 0 0 / 15.7%);
+}
+
+.withBackgroundImage {
+	position: relative;
+	display: flex;
+	flex-direction: column;
+	width: 100%;
+	isolation: isolate;
 }
 
 .contentLayer {
 	position: relative;
-	z-index: 1;
+	z-index: 2;
+	display: flex;
+	flex-direction: column;
+	width: 100%;
 }
-

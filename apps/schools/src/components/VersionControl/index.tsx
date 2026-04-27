@@ -2,7 +2,7 @@
 
 /* * */
 
-import pjson from 'package.json';
+import pjson from '#/package.json';
 
 import styles from './styles.module.css';
 

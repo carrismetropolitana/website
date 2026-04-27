@@ -1,7 +1,7 @@
 'use client';
 /* * */
 
-import React, { type CSSProperties, type ReactElement } from 'react';
+import React, { type ReactElement } from 'react';
 
 import styles from './styles.module.css';
 
@@ -16,9 +16,7 @@ interface Props {
 export function Spacer({ height = 20 }: Props): ReactElement {
 	const px = typeof height === 'number' && !Number.isNaN(height) ? height : Number(height) || 20;
 
-	const style = {
-		'--spacer-height': `${px}px`,
-	} as CSSProperties;
-
-	return <div className={styles.root} style={style} aria-hidden />;
+	return (
+		<div className={styles.root} style={{ height: `${px}px`, width: '100%' }} />
+	);
 }

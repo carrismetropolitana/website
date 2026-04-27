@@ -19,6 +19,8 @@ interface CampaignDetailPreviewProps {
 export function CampaignDetailPreview({ initialData }: CampaignDetailPreviewProps) {
 	const { campaignData } = useLivePreviewData(initialData);
 
+	console.log(campaignData);
+
 	if (!campaignData) {
 		return (
 			<Surface>

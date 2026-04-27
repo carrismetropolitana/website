@@ -1,6 +1,6 @@
 /* * */
 
-import pjson from 'package.json';
+import pjson from '#/package.json';
 
 /* * */
 

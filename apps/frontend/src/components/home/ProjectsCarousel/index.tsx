@@ -1,5 +1,3 @@
-'use client';
-
 /* * */
 
 import { ProjectsCarouselCard } from '@/components/home/ProjectsCarouselCard';

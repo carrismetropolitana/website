@@ -2,54 +2,28 @@
 
 /* * */
 
-import { useLocationsContext } from '@/contexts/Locations.context';
+import { formatStopLocation } from '@/utils/formatStopLocation';
 
 import styles from './styles.module.css';
 
 /* * */
 
 interface Props {
-	localityId?: string
-	municipalityId?: string
+	localityName?: string
+	municipalityName?: string
 	size?: 'lg' | 'md'
 }
 
 /* * */
 
-export function StopDisplayLocation({ localityId, municipalityId, size = 'md' }: Props) {
+export function StopDisplayLocation({ localityName, municipalityName, size = 'md' }: Props) {
 	//
 
-	//
-	// A. Setup variables
-
-	const locationsContext = useLocationsContext();
-
-	//
-	// B. Fetch data
-
-	const localityData = localityId && locationsContext.actions.getLocalityById(localityId);
-	const municipalityData = municipalityId && locationsContext.actions.getMunicipalityById(municipalityId);
-
-	//
-	// C. Render components
-
-	if (localityData) {
-		return (
-			<p className={`${styles.location} ${styles[size]}`}>
-				{localityData.display}
-			</p>
-		);
-	}
-
-	if (municipalityData) {
-		return (
-			<p className={`${styles.location} ${styles[size]}`}>
-				{municipalityData.name}
-			</p>
-		);
-	}
-
-	return null;
+	return (
+		<p className={`${styles.location} ${styles[size]}`}>
+			{formatStopLocation(localityName, municipalityName)}
+		</p>
+	);
 
 	//
 }

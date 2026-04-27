@@ -73,7 +73,7 @@ export function MainCarousel() {
 						<MainCarouselCard
 							coverImageSrc={item.image_url}
 							href={item.more_info_url}
-							title="item.title"
+							title={item.title}
 						/>
 					</Carousel.Slide>
 				))}

@@ -24,7 +24,7 @@ export function StopDisplay({ size = 'md', skeletonWidth = 200, stopData }: Prop
 		? (
 			<div className={`${styles.container} ${styles[size]}`}>
 				<StopDisplayName longName={stopData.long_name} />
-				<StopDisplayLocation localityId={stopData.locality_id} municipalityId={stopData.municipality_id} />
+				<StopDisplayLocation localityName={stopData.locality_name} municipalityName={stopData.municipality_name} />
 			</div>
 		)
 		: (

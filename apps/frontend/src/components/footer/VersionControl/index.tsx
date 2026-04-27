@@ -2,9 +2,9 @@
 
 /* * */
 
+import pjson from '#/package.json';
 import { URLS } from '@/settings/urls.settings';
 import Link from 'next/link';
-import pjson from 'package.json';
 
 /* * */
 
