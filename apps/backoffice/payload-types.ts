@@ -80,6 +80,7 @@ export interface Config {
     faqs: Faq;
     videos: Video;
     interviews: Interview;
+    reports: Report;
     'payload-kv': PayloadKv;
     'payload-locked-documents': PayloadLockedDocument;
     'payload-preferences': PayloadPreference;
@@ -100,6 +101,7 @@ export interface Config {
     faqs: FaqsSelect<false> | FaqsSelect<true>;
     videos: VideosSelect<false> | VideosSelect<true>;
     interviews: InterviewsSelect<false> | InterviewsSelect<true>;
+    reports: ReportsSelect<false> | ReportsSelect<true>;
     'payload-kv': PayloadKvSelect<false> | PayloadKvSelect<true>;
     'payload-locked-documents': PayloadLockedDocumentsSelect<false> | PayloadLockedDocumentsSelect<true>;
     'payload-preferences': PayloadPreferencesSelect<false> | PayloadPreferencesSelect<true>;
@@ -626,6 +628,85 @@ export interface Interview {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "reports".
+ */
+export interface Report {
+  id: string;
+  title: string;
+  /**
+   * URL única para este relatório. Será gerada automaticamente do título se deixado em branco.
+   */
+  slug: string;
+  /**
+   * Resumo curto do relatório que aparece na listagem e no início da página.
+   */
+  description: string;
+  type: 'tecnologia' | 'operacao' | 'sustentabilidade' | 'comunicacao';
+  /**
+   * Tempo estimado de leitura em minutos.
+   */
+  readTime: number;
+  heroImage: string | Media;
+  /**
+   * Legenda que aparece sobre a imagem de destaque.
+   */
+  heroImageCaption?: string | null;
+  /**
+   * Ficheiro PDF disponível para download na página do relatório.
+   */
+  reportPdf: string | Media;
+  /**
+   * Ano ou edição destacada no bloco principal do relatório.
+   */
+  reportYear: number;
+  publicationDetails: {
+    author: string;
+    category: string;
+    period: string;
+    language: string;
+  };
+  executiveSummary: {
+    title: string;
+    description: string;
+  };
+  /**
+   * Bloco de contexto ou objetivos destacado abaixo do resumo executivo.
+   */
+  featuredSummary: {
+    title: string;
+    description: string;
+  };
+  highlights?:
+    | {
+        value: string;
+        title: string;
+        description?: string | null;
+        id?: string | null;
+      }[]
+    | null;
+  keyFindings?:
+    | {
+        value: string;
+        label: string;
+        id?: string | null;
+      }[]
+    | null;
+  /**
+   * Metodologia do relatório em formato Markdown.
+   */
+  methodology?: string | null;
+  publishDate: string;
+  status: 'draft' | 'published';
+  seo?: {
+    metaTitle?: string | null;
+    metaDescription?: string | null;
+    ogImage?: (string | null) | Media;
+  };
+  publishedAt: string;
+  updatedAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "payload-kv".
  */
 export interface PayloadKv {
@@ -699,6 +780,10 @@ export interface PayloadLockedDocument {
     | ({
         relationTo: 'interviews';
         value: string | Interview;
+      } | null)
+    | ({
+        relationTo: 'reports';
+        value: string | Report;
       } | null);
   globalSlug?: string | null;
   user: {
@@ -1057,6 +1142,68 @@ export interface InterviewsSelect<T extends boolean = true> {
   readTime?: T;
   transcript?: T;
   transcriptPdf?: T;
+  publishDate?: T;
+  status?: T;
+  seo?:
+    | T
+    | {
+        metaTitle?: T;
+        metaDescription?: T;
+        ogImage?: T;
+      };
+  publishedAt?: T;
+  updatedAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "reports_select".
+ */
+export interface ReportsSelect<T extends boolean = true> {
+  title?: T;
+  slug?: T;
+  description?: T;
+  type?: T;
+  readTime?: T;
+  heroImage?: T;
+  heroImageCaption?: T;
+  reportPdf?: T;
+  reportYear?: T;
+  publicationDetails?:
+    | T
+    | {
+        author?: T;
+        category?: T;
+        period?: T;
+        language?: T;
+      };
+  executiveSummary?:
+    | T
+    | {
+        title?: T;
+        description?: T;
+      };
+  featuredSummary?:
+    | T
+    | {
+        title?: T;
+        description?: T;
+      };
+  highlights?:
+    | T
+    | {
+        value?: T;
+        title?: T;
+        description?: T;
+        id?: T;
+      };
+  keyFindings?:
+    | T
+    | {
+        value?: T;
+        label?: T;
+        id?: T;
+      };
+  methodology?: T;
   publishDate?: T;
   status?: T;
   seo?:
