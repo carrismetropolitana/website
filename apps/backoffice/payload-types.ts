@@ -507,7 +507,7 @@ export interface Video {
      */
     bio?: string | null;
     /**
-     * Se este artigo foi escrito por um especialista, lembre-se de marcar para que possa ser entregue conteúdos de especialistas separadamente.
+     * Se este vídeo foi produzido por um especialista, marque esta opção para permitir filtros e destaques de conteúdos especializados.
      */
     expertAuthor: boolean;
     social?: {
@@ -674,6 +674,9 @@ export interface Report {
    */
   featuredSummary: {
     title: string;
+    /**
+     * Conteúdo em Markdown. Suporta títulos, listas, links, citações e outros elementos renderizados no frontend.
+     */
     description: string;
   };
   highlights?:
@@ -688,6 +691,10 @@ export interface Report {
     | {
         value: string;
         label: string;
+        /**
+         * A cor do ícone é herdada automaticamente do tipo do relatório.
+         */
+        icon: 'users' | 'route' | 'fleet' | 'energy' | 'growth' | 'sustainability' | 'communication' | 'technology';
         id?: string | null;
       }[]
     | null;
@@ -1201,6 +1208,7 @@ export interface ReportsSelect<T extends boolean = true> {
     | {
         value?: T;
         label?: T;
+        icon?: T;
         id?: T;
       };
   methodology?: T;

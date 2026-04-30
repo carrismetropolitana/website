@@ -27,6 +27,41 @@ const reportTypeOptions = [
 	},
 ];
 
+const keyFindingIconOptions = [
+	{
+		label: 'Passageiros',
+		value: 'users',
+	},
+	{
+		label: 'Linhas / Rotas',
+		value: 'route',
+	},
+	{
+		label: 'Frota',
+		value: 'fleet',
+	},
+	{
+		label: 'Energia',
+		value: 'energy',
+	},
+	{
+		label: 'Crescimento',
+		value: 'growth',
+	},
+	{
+		label: 'Sustentabilidade',
+		value: 'sustainability',
+	},
+	{
+		label: 'Comunicação',
+		value: 'communication',
+	},
+	{
+		label: 'Tecnologia',
+		value: 'technology',
+	},
+];
+
 /* * */
 
 export const Reports: CollectionConfig = {
@@ -204,7 +239,11 @@ export const Reports: CollectionConfig = {
 					type: 'text',
 				},
 				{
-					label: 'Descrição',
+					admin: {
+						description:
+							'Conteúdo em Markdown. Suporta títulos, listas, links, citações e outros elementos renderizados no frontend.',
+					},
+					label: 'Descrição (Markdown)',
 					name: 'description',
 					required: true,
 					type: 'textarea',
@@ -261,6 +300,18 @@ export const Reports: CollectionConfig = {
 					name: 'label',
 					required: true,
 					type: 'text',
+				},
+				{
+					admin: {
+						description:
+							'A cor do ícone é herdada automaticamente do tipo do relatório.',
+					},
+					defaultValue: 'growth',
+					label: 'Ícone',
+					name: 'icon',
+					options: keyFindingIconOptions,
+					required: true,
+					type: 'select',
 				},
 			],
 			label: 'Principais Conclusões',
