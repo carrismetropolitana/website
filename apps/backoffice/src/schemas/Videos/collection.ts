@@ -94,17 +94,17 @@ export const Videos: CollectionConfig = {
 					name: 'bio',
 					type: 'textarea',
 				},
-					{
-						admin: {
-							description: 'Se este vídeo foi produzido por um especialista, marque esta opção para permitir filtros e destaques de conteúdos especializados.',
-							position: 'sidebar',
-						},
-						defaultValue: false,
-						label: 'Vídeo produzido por um especialista',
-						name: 'expertAuthor',
-						required: true,
-						type: 'checkbox',
+				{
+					admin: {
+						description: 'Se este vídeo foi produzido por um especialista, marque esta opção para permitir filtros e destaques de conteúdos especializados.',
+						position: 'sidebar',
 					},
+					defaultValue: false,
+					label: 'Vídeo produzido por um especialista',
+					name: 'expertAuthor',
+					required: true,
+					type: 'checkbox',
+				},
 				{
 					fields: [
 						{
