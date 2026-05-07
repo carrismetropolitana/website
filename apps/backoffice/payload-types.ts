@@ -78,6 +78,9 @@ export interface Config {
     notes: Note;
     projects: Project;
     faqs: Faq;
+    videos: Video;
+    interviews: Interview;
+    reports: Report;
     'payload-kv': PayloadKv;
     'payload-locked-documents': PayloadLockedDocument;
     'payload-preferences': PayloadPreference;
@@ -96,6 +99,9 @@ export interface Config {
     notes: NotesSelect<false> | NotesSelect<true>;
     projects: ProjectsSelect<false> | ProjectsSelect<true>;
     faqs: FaqsSelect<false> | FaqsSelect<true>;
+    videos: VideosSelect<false> | VideosSelect<true>;
+    interviews: InterviewsSelect<false> | InterviewsSelect<true>;
+    reports: ReportsSelect<false> | ReportsSelect<true>;
     'payload-kv': PayloadKvSelect<false> | PayloadKvSelect<true>;
     'payload-locked-documents': PayloadLockedDocumentsSelect<false> | PayloadLockedDocumentsSelect<true>;
     'payload-preferences': PayloadPreferencesSelect<false> | PayloadPreferencesSelect<true>;
@@ -475,6 +481,239 @@ export interface Faq {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "videos".
+ */
+export interface Video {
+  id: string;
+  title: string;
+  /**
+   * URL única para este vídeo. Será gerada automaticamente a partir do título se deixado em branco.
+   */
+  slug: string;
+  /**
+   * Resumo curto do vídeo que poderá ser enviado para leitores de tela, ou seções onde uma decrição for necessária.
+   */
+  description?: string | null;
+  /**
+   * Legenda que aparecerá em relação a thumbnail, será utilizada para acessibilidade e para leitores de tela.
+   */
+  thumbnailCaptions?: string | null;
+  author: {
+    picture?: (string | null) | Media;
+    name: string;
+    role: string;
+    /**
+     * Breve descrição sobre o autor.
+     */
+    bio?: string | null;
+    /**
+     * Se este vídeo foi produzido por um especialista, marque esta opção para permitir filtros e destaques de conteúdos especializados.
+     */
+    expertAuthor: boolean;
+    social?: {
+      linkedin?: string | null;
+      twitter?: string | null;
+      email?: string | null;
+    };
+  };
+  type: 'tecnologia' | 'operacao' | 'sustentabilidade' | 'comunicacao';
+  /**
+   * Tempo estimado de visualização em minutos.
+   */
+  readTime: number;
+  video: string | Media;
+  /**
+   * Conteúdo do vídeo em formato Markdown. Exemplo:
+   * ## Descrição do Vídeo
+   *
+   * Texto introdutório...
+   *
+   * ### Destaques do Vídeo
+   * - Ponto 1
+   * - Ponto 2
+   */
+  content: string;
+  /**
+   * Capítulos apresentados no leitor de vídeo.
+   */
+  chapters?:
+    | {
+        /**
+         * Formato MM:SS ou HH:MM:SS. Ex.: 02:15 ou 01:02:15.
+         */
+        startTime: string;
+        title: string;
+        id?: string | null;
+      }[]
+    | null;
+  publishDate: string;
+  thumbnail: string | Media;
+  status: 'draft' | 'published';
+  seo?: {
+    metaTitle?: string | null;
+    metaDescription?: string | null;
+    ogImage?: (string | null) | Media;
+  };
+  publishedAt: string;
+  updatedAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "interviews".
+ */
+export interface Interview {
+  id: string;
+  title: string;
+  /**
+   * URL única para esta entrevista. Será gerada automaticamente do título se deixado em branco.
+   */
+  slug: string;
+  /**
+   * Resumo curto da entrevista que aparece na listagem e no início da página.
+   */
+  description: string;
+  type: 'tecnologia' | 'operacao' | 'sustentabilidade' | 'comunicacao';
+  guest: {
+    picture?: (string | null) | Media;
+    name: string;
+    role: string;
+  };
+  host: {
+    picture?: (string | null) | Media;
+    name: string;
+    role: string;
+    /**
+     * Breve descrição sobre o host.
+     */
+    bio?: string | null;
+    social?: {
+      linkedin?: string | null;
+      twitter?: string | null;
+      email?: string | null;
+    };
+  };
+  /**
+   * Ficheiro de áudio da entrevista (upload direto).
+   */
+  audioFile?: (string | null) | Media;
+  /**
+   * URL externa do ficheiro de áudio. Usado se não houver upload direto.
+   */
+  audioUrl?: string | null;
+  /**
+   * Duração do áudio em segundos.
+   */
+  audioDuration?: number | null;
+  /**
+   * Tempo estimado de leitura em minutos.
+   */
+  readTime: number;
+  /**
+   * Transcrição da entrevista em formato Markdown. Suporta títulos (##), listas, links, citações e muito mais.
+   */
+  transcript?: string | null;
+  /**
+   * Ficheiro PDF com a transcrição completa da entrevista.
+   */
+  transcriptPdf?: (string | null) | Media;
+  publishDate: string;
+  status: 'draft' | 'published';
+  seo?: {
+    metaTitle?: string | null;
+    metaDescription?: string | null;
+    ogImage?: (string | null) | Media;
+  };
+  publishedAt: string;
+  updatedAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "reports".
+ */
+export interface Report {
+  id: string;
+  title: string;
+  /**
+   * URL única para este relatório. Será gerada automaticamente do título se deixado em branco.
+   */
+  slug: string;
+  /**
+   * Resumo curto do relatório que aparece na listagem e no início da página.
+   */
+  description: string;
+  type: 'tecnologia' | 'operacao' | 'sustentabilidade' | 'comunicacao';
+  /**
+   * Tempo estimado de leitura em minutos.
+   */
+  readTime: number;
+  heroImage: string | Media;
+  /**
+   * Legenda que aparece sobre a imagem de destaque.
+   */
+  heroImageCaption?: string | null;
+  /**
+   * Ficheiro PDF disponível para download na página do relatório.
+   */
+  reportPdf: string | Media;
+  /**
+   * Ano ou edição destacada no bloco principal do relatório.
+   */
+  reportYear: number;
+  publicationDetails: {
+    author: string;
+    category: string;
+    period: string;
+    language: string;
+  };
+  executiveSummary: {
+    title: string;
+    description: string;
+  };
+  /**
+   * Bloco de contexto ou objetivos destacado abaixo do resumo executivo.
+   */
+  featuredSummary: {
+    title: string;
+    /**
+     * Conteúdo em Markdown. Suporta títulos, listas, links, citações e outros elementos renderizados no frontend.
+     */
+    description: string;
+  };
+  highlights?:
+    | {
+        value: string;
+        title: string;
+        description?: string | null;
+        id?: string | null;
+      }[]
+    | null;
+  keyFindings?:
+    | {
+        value: string;
+        label: string;
+        /**
+         * A cor do ícone é herdada automaticamente do tipo do relatório.
+         */
+        icon: 'users' | 'route' | 'fleet' | 'energy' | 'growth' | 'sustainability' | 'communication' | 'technology';
+        id?: string | null;
+      }[]
+    | null;
+  /**
+   * Metodologia do relatório em formato Markdown.
+   */
+  methodology?: string | null;
+  publishDate: string;
+  status: 'draft' | 'published';
+  seo?: {
+    metaTitle?: string | null;
+    metaDescription?: string | null;
+    ogImage?: (string | null) | Media;
+  };
+  publishedAt: string;
+  updatedAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "payload-kv".
  */
 export interface PayloadKv {
@@ -540,6 +779,18 @@ export interface PayloadLockedDocument {
     | ({
         relationTo: 'faqs';
         value: string | Faq;
+      } | null)
+    | ({
+        relationTo: 'videos';
+        value: string | Video;
+      } | null)
+    | ({
+        relationTo: 'interviews';
+        value: string | Interview;
+      } | null)
+    | ({
+        relationTo: 'reports';
+        value: string | Report;
       } | null);
   globalSlug?: string | null;
   user: {
@@ -811,6 +1062,167 @@ export interface FaqsSelect<T extends boolean = true> {
   publishedAt?: T;
   updatedAt?: T;
   createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "videos_select".
+ */
+export interface VideosSelect<T extends boolean = true> {
+  title?: T;
+  slug?: T;
+  description?: T;
+  thumbnailCaptions?: T;
+  author?:
+    | T
+    | {
+        picture?: T;
+        name?: T;
+        role?: T;
+        bio?: T;
+        expertAuthor?: T;
+        social?:
+          | T
+          | {
+              linkedin?: T;
+              twitter?: T;
+              email?: T;
+            };
+      };
+  type?: T;
+  readTime?: T;
+  video?: T;
+  content?: T;
+  chapters?:
+    | T
+    | {
+        startTime?: T;
+        title?: T;
+        id?: T;
+      };
+  publishDate?: T;
+  thumbnail?: T;
+  status?: T;
+  seo?:
+    | T
+    | {
+        metaTitle?: T;
+        metaDescription?: T;
+        ogImage?: T;
+      };
+  publishedAt?: T;
+  updatedAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "interviews_select".
+ */
+export interface InterviewsSelect<T extends boolean = true> {
+  title?: T;
+  slug?: T;
+  description?: T;
+  type?: T;
+  guest?:
+    | T
+    | {
+        picture?: T;
+        name?: T;
+        role?: T;
+      };
+  host?:
+    | T
+    | {
+        picture?: T;
+        name?: T;
+        role?: T;
+        bio?: T;
+        social?:
+          | T
+          | {
+              linkedin?: T;
+              twitter?: T;
+              email?: T;
+            };
+      };
+  audioFile?: T;
+  audioUrl?: T;
+  audioDuration?: T;
+  readTime?: T;
+  transcript?: T;
+  transcriptPdf?: T;
+  publishDate?: T;
+  status?: T;
+  seo?:
+    | T
+    | {
+        metaTitle?: T;
+        metaDescription?: T;
+        ogImage?: T;
+      };
+  publishedAt?: T;
+  updatedAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "reports_select".
+ */
+export interface ReportsSelect<T extends boolean = true> {
+  title?: T;
+  slug?: T;
+  description?: T;
+  type?: T;
+  readTime?: T;
+  heroImage?: T;
+  heroImageCaption?: T;
+  reportPdf?: T;
+  reportYear?: T;
+  publicationDetails?:
+    | T
+    | {
+        author?: T;
+        category?: T;
+        period?: T;
+        language?: T;
+      };
+  executiveSummary?:
+    | T
+    | {
+        title?: T;
+        description?: T;
+      };
+  featuredSummary?:
+    | T
+    | {
+        title?: T;
+        description?: T;
+      };
+  highlights?:
+    | T
+    | {
+        value?: T;
+        title?: T;
+        description?: T;
+        id?: T;
+      };
+  keyFindings?:
+    | T
+    | {
+        value?: T;
+        label?: T;
+        icon?: T;
+        id?: T;
+      };
+  methodology?: T;
+  publishDate?: T;
+  status?: T;
+  seo?:
+    | T
+    | {
+        metaTitle?: T;
+        metaDescription?: T;
+        ogImage?: T;
+      };
+  publishedAt?: T;
+  updatedAt?: T;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
