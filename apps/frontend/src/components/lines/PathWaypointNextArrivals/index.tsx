@@ -1,6 +1,9 @@
+'use client';
+
 /* * */
 
 import { LiveIcon } from '@/components/common/LiveIcon';
+import { useDebugContext } from '@/contexts/Debug.context';
 import { IconClockHour9 } from '@tabler/icons-react';
 import dayjs from 'dayjs';
 import { useTranslations } from 'next-intl';
@@ -16,8 +19,10 @@ export function PathWaypointNextArrivals({ realtimeArrivals, scheduledArrivals }
 	// A. Setup variables
 
 	const t = useTranslations('lines.PathStopNextArrivals');
+	const debugContext = useDebugContext();
 
 	const now = Date.now();
+	const isDebugMode = debugContext.flags.is_debug_mode;
 
 	//
 	// D. Render components
@@ -32,8 +37,8 @@ export function PathWaypointNextArrivals({ realtimeArrivals, scheduledArrivals }
 			<div className={styles.arrivalsWrapper}>
 
 				{realtimeArrivals.length > 0 && (
-					<div className={styles.realtimeArrivalsWrapper}>
-						<LiveIcon />
+					<div className={`${styles.realtimeArrivalsWrapper} ${isDebugMode && styles.debug}`}>
+						<LiveIcon color={isDebugMode ? 'var(--color-debug)' : undefined} />
 						<div className={styles.realtimeArrivalsList}>
 							{realtimeArrivals.map(realtimeArrival => realtimeArrival != undefined && (
 								<div key={realtimeArrival.unixTs} className={styles.realtimeArrival}>{formatDelta(realtimeArrival.unixTs - now)}</div>

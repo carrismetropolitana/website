@@ -5,10 +5,11 @@
 import { NoDataLabel } from '@/components/layout/NoDataLabel';
 import { PathWaypoint } from '@/components/lines/PathWaypoint';
 import { useAnalyticsContext } from '@/contexts/Analytics.context';
+import { useDebugContext } from '@/contexts/Debug.context';
 import { useLinesDetailContext } from '@/contexts/LinesDetail.context';
 import { NextArrival } from '@/types/timetables.types';
+import { getArrivalsApiBaseUrl } from '@/utils/getArrivalsApiBaseUrl';
 import { PatternRealtime } from '@/utils/types';
-import { getPublicVariable } from '@carrismetropolitana/website-shared-settings';
 import { useEffect, useMemo } from 'react';
 import useSWR from 'swr';
 
@@ -24,11 +25,12 @@ export function LinesDetailPathList() {
 
 	const linesDetailContext = useLinesDetailContext();
 	const analyticsContext = useAnalyticsContext();
+	const debugContext = useDebugContext();
 
 	//
 	// B. Fetch data
 
-	const { data: patternRealtimeData } = useSWR<PatternRealtime[]>(linesDetailContext.data.active_pattern?.id && `${getPublicVariable('api_url')}/arrivals/by_pattern/${linesDetailContext.data.active_pattern.id}`, { refreshInterval: 10000 });
+	const { data: patternRealtimeData } = useSWR<PatternRealtime[]>(linesDetailContext.data.active_pattern?.id && `${getArrivalsApiBaseUrl(debugContext.flags.is_debug_mode)}/arrivals/by_pattern/${linesDetailContext.data.active_pattern.id}`, { refreshInterval: 10000 });
 
 	//
 	// C. Transform data

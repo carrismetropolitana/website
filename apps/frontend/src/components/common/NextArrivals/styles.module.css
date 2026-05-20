@@ -52,6 +52,10 @@
 	color: var(--color-realtime-100);
 }
 
+.realtime.debug .arrival {
+	color: var(--color-go);
+}
+
 .scheduled .arrival {
 	font-weight: var(--font-weight-bold);
 	font-variant-numeric: tabular-nums;

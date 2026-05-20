@@ -5,6 +5,7 @@
 import type { ArrivalStatus } from '@/types/stops.types';
 
 import { LiveIcon } from '@/components/common/LiveIcon';
+import { useDebugContext } from '@/contexts/Debug.context';
 import { IconAlertCircleFilled, IconClockHour9 } from '@tabler/icons-react';
 import { DateTime } from 'luxon';
 import { useTranslations } from 'next-intl';
@@ -38,8 +39,10 @@ export function NextArrivals({ allowPastArrivals = true, arrivals, status, withI
 	// A. Setup variables
 
 	const t = useTranslations('common.NextArrivals');
+	const debugContext = useDebugContext();
 
 	const [allFormattedArrivals, setFormattedArrivals] = useState<NextArrival[]>([]);
+	const isDebugMode = debugContext.flags.is_debug_mode;
 
 	//
 	// B. Transform data
@@ -121,10 +124,10 @@ export function NextArrivals({ allowPastArrivals = true, arrivals, status, withI
 
 	if (status === 'realtime') {
 		return (
-			<div className={`${styles.container} ${styles.realtime}`}>
+			<div className={`${styles.container} ${styles.realtime} ${isDebugMode && styles.debug}`}>
 				{withIcon && (
 					<div className={styles.icon}>
-						<LiveIcon />
+						<LiveIcon color={isDebugMode ? 'var(--color-debug)' : undefined} />
 					</div>
 				)}
 				<div className={styles.list}>

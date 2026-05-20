@@ -10,6 +10,7 @@ import { useProfileContext } from '@/contexts/Profile.context';
 import { useStopsContext } from '@/contexts/Stops.context';
 import { type SimplifiedAlert } from '@/types/alerts.types';
 import { type Arrival } from '@/types/stops.types';
+import { getArrivalsApiBaseUrl } from '@/utils/getArrivalsApiBaseUrl';
 import { type Line, type Pattern, type Shape, type Stop } from '@carrismetropolitana/api-types/network';
 import { getPublicVariable } from '@carrismetropolitana/website-shared-settings';
 import { DateTime } from 'luxon';
@@ -141,7 +142,7 @@ export const StopsDetailContextProvider = ({ children, stopId }: { children: Rea
 		const fetchData = async () => {
 			try {
 				if (!dataActiveStopIdState) return;
-				const realtimeData = await fetch(`${getPublicVariable('api_url')}/arrivals/by_stop/${dataActiveStopIdState}`)
+				const realtimeData = await fetch(`${getArrivalsApiBaseUrl(debugContext.flags.is_debug_mode)}/arrivals/by_stop/${dataActiveStopIdState}`)
 					.then((response) => {
 						if (!response.ok) console.log(`Failed to fetch realtime data for stopId: ${dataActiveStopIdState}`);
 						else return response.json();
@@ -157,7 +158,7 @@ export const StopsDetailContextProvider = ({ children, stopId }: { children: Rea
 		fetchData();
 		const interval = setInterval(fetchData, 10000);
 		return () => clearInterval(interval);
-	}, [dataActiveStopIdState]);
+	}, [dataActiveStopIdState, debugContext.flags.is_debug_mode]);
 
 	/**
  	* Fetch pattern data for the selected stop.
