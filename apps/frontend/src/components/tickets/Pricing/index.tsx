@@ -101,10 +101,6 @@ export function Pricing() {
 						<div className={styles.pricingItem}>
 							<h3 className={styles.priceValue}>-</h3>
 						</div>
-						{/* <div className={styles.pricingItem}>
-							<h3 className={styles.priceValue}>1,55€</h3>
-							<p className={styles.priceLabel}>{t('ticket_types.prepaid')}</p>
-						</div> */}
 					</div>
 				</div>
 			</Surface>
