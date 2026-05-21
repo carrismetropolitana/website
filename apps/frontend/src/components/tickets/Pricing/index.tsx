@@ -94,14 +94,12 @@ export function Pricing() {
 							<p className={styles.priceLabel}>{t('ticket_types.onboard_start_by_29')}</p>
 						</div>
 						<div className={styles.pricingItem}>
-							<h3 className={styles.priceValue}>3,20€</h3>
-							<p className={styles.priceLabel}>{t('ticket_types.onboard')}</p>
-							<p className={styles.priceLabel}>{t('ticket_types.onboard_start_by_29')}</p>
-						</div>
-						<div className={styles.pricingItem}>
 							<h3 className={styles.priceValue}>3,70€</h3>
 							<p className={styles.priceLabel}>{t('ticket_types.onboard')}</p>
 							<p className={styles.priceLabel}>{t('ticket_types.onboard_start_by_49')}</p>
+						</div>
+						<div className={styles.pricingItem}>
+							<h3 className={styles.priceValue}>-</h3>
 						</div>
 						{/* <div className={styles.pricingItem}>
 							<h3 className={styles.priceValue}>1,55€</h3>
