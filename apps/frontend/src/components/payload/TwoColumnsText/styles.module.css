@@ -5,13 +5,17 @@
 	grid-template-columns: 1fr 1fr;
 	gap: var(--size-spacing-20);
 	width: 100%;
-	padding: 20px 0;
 }
 
 /* * */
 
 .column {
 	min-width: 0;
+	text-align: center;
+}
+
+.column > * {
+	margin-inline: auto;
 }
 
 /* * */

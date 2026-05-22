@@ -1,0 +1,42 @@
+.container {
+	width: 100% !important;
+}
+
+.slide {
+	padding: 0;
+}
+
+.controls {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	width: 100%;
+	padding: 0;
+}
+
+.control {
+	width: 44px;
+	aspect-ratio: 1;
+	color: var(--color-system-text-300);
+	background-color: var(--color-system-background-100);
+	border: 1px solid var(--color-system-border-200);
+	box-shadow: 0 0 12px 0 rgb(0 0 0 / 10%);
+	opacity: 1;
+	transition: all 100ms ease;
+}
+
+.control:hover {
+	color: var(--color-system-text-200);
+	border-color: var(--color-system-text-200);
+}
+
+.control[data-inactive] {
+	cursor: default;
+	opacity: 0;
+}
+
+@media only screen and (width <= 900px) {
+	.controls {
+		display: none;
+	}
+}
