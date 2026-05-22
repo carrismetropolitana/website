@@ -13,6 +13,11 @@
 
 .column {
 	min-width: 0;
+	text-align: center;
+}
+
+.column > * {
+	margin-inline: auto;
 }
 
 /* * */

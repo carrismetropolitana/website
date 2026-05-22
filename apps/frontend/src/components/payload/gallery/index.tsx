@@ -87,9 +87,10 @@ export function Gallery({ fields }: GalleryProps) {
 							<Image
 								alt={imageValue.filename || `Gallery image ${i + 1}`}
 								fallbackSrc="/assets/common/placeholder.png"
-								height={200}
+								fit="cover"
+								h="100%"
 								src={imageUrl}
-								width={200}
+								w="100%"
 							/>
 						</div>
 					);

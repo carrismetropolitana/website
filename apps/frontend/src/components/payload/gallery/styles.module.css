@@ -14,11 +14,7 @@
 
 .item {
 	position: relative;
-	display: flex;
-	align-items: center;
-	justify-content: center;
 	width: 200px;
-	height: 200px;
 	aspect-ratio: 1;
 	overflow: hidden;
 	background: var(--color-system-background-200);
@@ -26,9 +22,9 @@
 }
 
 .item img {
-	width: auto;
-	max-width: 100%;
-	height: auto;
-	max-height: 100%;
-	object-fit: contain;
+	display: block;
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+	object-position: center;
 }
