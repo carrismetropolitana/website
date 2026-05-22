@@ -28,3 +28,12 @@
 	object-fit: cover;
 	object-position: center;
 }
+
+.carouselSlide {
+	position: relative;
+	width: 100%;
+	aspect-ratio: 16 / 9;
+	overflow: hidden;
+	background: var(--color-system-background-200);
+	border-radius: var(--border-radius-md);
+}

@@ -15,7 +15,7 @@ interface CarouselProps {
 	skeletonComponent?: React.ReactNode
 	skeletonQty?: number
 	slides?: SlideItemProps[]
-	slideSize?: number
+	slideSize?: number | string
 }
 
 interface SlideItemProps {
