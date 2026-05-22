@@ -1,8 +1,6 @@
 'use client';
-/* * */
 
 import { useField } from '@payloadcms/ui';
-import { IconChevronLeft, IconChevronRight } from '@tabler/icons-react';
 import { useEffect, useState } from 'react';
 
 import styles from './styles.module.css';
@@ -26,10 +24,7 @@ export function GalleryFieldPreview() {
 	// A. Setup variables
 
 	const { value } = useField<(ImageValue | string)[]>({ path: 'images' });
-	const { value: isCarousel } = useField<boolean>({ path: 'isCarousel' });
 	const [images, setImages] = useState<ImageValue[]>([]);
-	const [activeIndex, setActiveIndex] = useState(0);
-	const activeImage = images?.[activeIndex];
 
 	//
 	// B. Fetch data
@@ -43,10 +38,6 @@ export function GalleryFieldPreview() {
 			),
 		).then(results => setImages(results.filter(Boolean)));
 	}, [value]);
-
-	useEffect(() => {
-		setActiveIndex(0);
-	}, [images.length, isCarousel]);
 
 	//
 	// D. Render components
