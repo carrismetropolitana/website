@@ -52,10 +52,6 @@
 	color: var(--color-realtime-100);
 }
 
-.realtime.debug .arrival {
-	color: var(--color-go);
-}
-
 .scheduled .arrival {
 	font-weight: var(--font-weight-bold);
 	font-variant-numeric: tabular-nums;
@@ -71,4 +67,15 @@
 	font-weight: var(--font-weight-medium);
 	color: var(--color-status-danger-text);
 	text-decoration: line-through;
+}
+
+/* * */
+/* DEBUG GO ARRIVAL */
+
+.debugGo {
+	font-size: 16px;
+	font-weight: var(--font-weight-bold);
+	line-height: 1.1;
+	color: var(--color-brand-go);
+	text-wrap: nowrap;
 }
