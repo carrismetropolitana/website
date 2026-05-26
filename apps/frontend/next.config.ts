@@ -135,7 +135,6 @@ const nextConfig: NextConfig = {
 
 			{ destination: '/viagem-2024', permanent: true, source: '/viagem2024' },
 			{ destination: '/retrospectiva-2025', permanent: true, source: '/retroespectiva-2025' },
-			// { destination: '/campaigns/whatsapp', permanent: true, source: '/whatsapp' },
 
 			/* * */
 			/* SCHOOLS */
