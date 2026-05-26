@@ -211,12 +211,6 @@ const nextConfig: NextConfig = {
 				source: '/novobanco',
 			},
 			{
-				destination:
-					'https://backoffice.carrismetropolitana.pt/mini-passageiros',
-				permanent: false,
-				source: '/mini-passageiros',
-			},
-			{
 				destination: 'https://backoffice.carrismetropolitana.pt/praias-area1',
 				permanent: false,
 				source: '/praias-area1',
