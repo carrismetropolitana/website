@@ -117,15 +117,18 @@ export const AlertsListContextProvider = ({ children }) => {
 		filterResult = filterResult.filter((item) => {
 			const alertStartDateInSeconds = DateTime.fromJSDate(item.start_date).toUnixInteger();
 			//
+			if (filterByDateState === 'map') {
+				return item.coordinates?.length === 2 && item.coordinates.every(Number.isFinite);
+			}
+			//
 			if (filterByDateState === 'current') {
 				// If the alert start date is before one week from now, then the alert is considered 'current'.
 				return alertStartDateInSeconds <= oneWeekFromNowInUnixSeconds;
 			}
-			else {
-				// If the alert start date is after one week from now, then the alert is considered 'future'.
-				// Otherwise, it is considered 'current'.
-				return alertStartDateInSeconds > oneWeekFromNowInUnixSeconds;
-			}
+			//
+			// If the alert start date is after one week from now, then the alert is considered 'future'.
+			// Otherwise, it is considered 'current'.
+			return alertStartDateInSeconds > oneWeekFromNowInUnixSeconds;
 		});
 
 		if (filterByLineIdState) {
