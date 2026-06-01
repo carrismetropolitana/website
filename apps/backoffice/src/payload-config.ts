@@ -16,8 +16,10 @@ import { KnowledgeBase } from '@/schemas/KnowledgeBase/collection';
 import { Media } from '@/schemas/Media/collection';
 import { News } from '@/schemas/News/collection';
 import { Notes } from '@/schemas/Notes/collection';
+import { Partnerships } from '@/schemas/Partnerships/collection';
 import { Projects } from '@/schemas/Projects/collection';
 import { Reports } from '@/schemas/Reports/collection';
+import { SpecialSeries } from '@/schemas/SpecialSeries/collection';
 import { Topics } from '@/schemas/Topics/collection';
 import { Users } from '@/schemas/Users/collection';
 
@@ -128,7 +130,7 @@ export default buildConfig({
 		user: 'users',
 	},
 
-	collections: [Campaigns, Articles, CaseStudies, Media, News, Topics, Users, KnowledgeBase, Notes, Projects, Faqs, Videos, Interviews, Reports],
+	collections: [Campaigns, Articles, CaseStudies, Media, News, Topics, SpecialSeries, Partnerships, Users, KnowledgeBase, Notes, Projects, Faqs, Videos, Interviews, Reports],
 	csrf: [
 		getPublicVariable('server_url_backoffice').replace(/\/$/, ''),
 		`${getPublicVariable('server_url_backoffice').replace(/\/$/, '')}/admin`,

@@ -2,9 +2,18 @@
 
 import type { CollectionConfig } from 'payload';
 
+import { partnershipField, specialSeriesField, themeField } from '@/fields/content-classification';
 import { publishedAtField } from '@/fields/published-at';
 import { updatedAtField } from '@/fields/updated-at';
 import { slugify } from '@/utils/slugify';
+
+/* * */
+
+interface InterviewBranchData {
+	audioFile?: unknown
+	audioUrl?: unknown
+	contentFormat?: 'audio' | 'transcript'
+}
 
 /* * */
 
@@ -58,29 +67,25 @@ export const Interviews: CollectionConfig = {
 			admin: {
 				position: 'sidebar',
 			},
-			label: 'Tipo',
-			name: 'type',
+			defaultValue: 'transcript',
+			label: 'Formato',
+			name: 'contentFormat',
 			options: [
 				{
-					label: 'Tecnologia',
-					value: 'tecnologia',
+					label: 'Transcrição',
+					value: 'transcript',
 				},
 				{
-					label: 'Operação',
-					value: 'operacao',
-				},
-				{
-					label: 'Sustentabilidade',
-					value: 'sustentabilidade',
-				},
-				{
-					label: 'Comunicação',
-					value: 'comunicacao',
+					label: 'Áudio',
+					value: 'audio',
 				},
 			],
 			required: true,
 			type: 'select',
 		},
+		themeField,
+		specialSeriesField,
+		partnershipField,
 		{
 			fields: [
 				{
@@ -163,23 +168,38 @@ export const Interviews: CollectionConfig = {
 		},
 		{
 			admin: {
+				condition: (_, siblingData) => siblingData?.contentFormat === 'audio',
 				description: 'Ficheiro de áudio da entrevista (upload direto).',
 			},
 			label: 'Ficheiro de Áudio',
 			name: 'audioFile',
 			relationTo: 'media',
 			type: 'upload',
+			validate: (value, { data }) => {
+				const branchData = data as InterviewBranchData;
+				if (branchData.contentFormat !== 'audio') return true;
+				if (value || branchData.audioUrl) return true;
+				return 'Adicione um ficheiro de áudio ou uma URL externa.';
+			},
 		},
 		{
 			admin: {
+				condition: (_, siblingData) => siblingData?.contentFormat === 'audio',
 				description: 'URL externa do ficheiro de áudio. Usado se não houver upload direto.',
 			},
 			label: 'URL do Áudio (externo)',
 			name: 'audioUrl',
 			type: 'text',
+			validate: (value, { data }) => {
+				const branchData = data as InterviewBranchData;
+				if (branchData.contentFormat !== 'audio') return true;
+				if (value || branchData.audioFile) return true;
+				return 'Adicione uma URL externa ou faça upload de um ficheiro de áudio.';
+			},
 		},
 		{
 			admin: {
+				condition: (_, siblingData) => siblingData?.contentFormat === 'audio',
 				description: 'Duração do áudio em segundos.',
 				position: 'sidebar',
 			},
@@ -187,9 +207,16 @@ export const Interviews: CollectionConfig = {
 			min: 1,
 			name: 'audioDuration',
 			type: 'number',
+			validate: (value, { data }) => {
+				const branchData = data as InterviewBranchData;
+				if (branchData.contentFormat !== 'audio') return true;
+				if (value) return true;
+				return 'A duração do áudio é obrigatória.';
+			},
 		},
 		{
 			admin: {
+				condition: (_, siblingData) => siblingData?.contentFormat === 'transcript',
 				description: 'Tempo estimado de leitura em minutos.',
 				position: 'sidebar',
 			},
@@ -197,20 +224,33 @@ export const Interviews: CollectionConfig = {
 			label: 'Tempo de Leitura (min)',
 			min: 1,
 			name: 'readTime',
-			required: true,
 			type: 'number',
+			validate: (value, { data }) => {
+				const branchData = data as InterviewBranchData;
+				if (branchData.contentFormat !== 'transcript') return true;
+				if (value) return true;
+				return 'O tempo de leitura é obrigatório para entrevistas em transcrição.';
+			},
 		},
 		{
 			admin: {
+				condition: (_, siblingData) => siblingData?.contentFormat === 'transcript',
 				description:
 					'Transcrição da entrevista em formato Markdown. Suporta títulos (##), listas, links, citações e muito mais.',
 			},
 			label: 'Transcrição (Markdown)',
 			name: 'transcript',
 			type: 'textarea',
+			validate: (value, { data }) => {
+				const branchData = data as InterviewBranchData;
+				if (branchData.contentFormat !== 'transcript') return true;
+				if (value) return true;
+				return 'A transcrição é obrigatória.';
+			},
 		},
 		{
 			admin: {
+				condition: (_, siblingData) => siblingData?.contentFormat === 'transcript',
 				description: 'Ficheiro PDF com a transcrição completa da entrevista.',
 				position: 'sidebar',
 			},
@@ -286,6 +326,18 @@ export const Interviews: CollectionConfig = {
 			async ({ data }) => {
 				if (data.status === 'published' && !data.publishDate) {
 					data.publishDate = new Date();
+				}
+
+				if (data.contentFormat === 'audio') {
+					data.readTime = null;
+					data.transcript = null;
+					data.transcriptPdf = null;
+				}
+
+				if (data.contentFormat === 'transcript') {
+					data.audioFile = null;
+					data.audioUrl = null;
+					data.audioDuration = null;
 				}
 			},
 		],

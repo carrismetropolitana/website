@@ -1,5 +1,6 @@
 /* * */
 
+import { optionalThemeField, partnershipField, specialSeriesField } from '@/fields/content-classification';
 import { featuredImageField } from '@/fields/featured-image';
 import { isFeaturedField } from '@/fields/is-featured';
 import { isUnlistedField } from '@/fields/is-unlisted';
@@ -52,6 +53,9 @@ export const News: CollectionConfig = {
 			required: true,
 			type: 'richText',
 		},
+		optionalThemeField,
+		specialSeriesField,
+		partnershipField,
 		isFeaturedField,
 		isUnlistedField,
 		topicsField,

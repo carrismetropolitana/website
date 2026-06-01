@@ -12,30 +12,24 @@ export const GET = async (request: Request) => {
 
 	const { searchParams } = new URL(request.url);
 	const type = searchParams.get('type');
-	const specialSeries = searchParams.get('special-series');
-	const partnership = searchParams.get('partnership');
 	const limit = Number(searchParams.get('limit')) || 10;
 	const page = Number(searchParams.get('page')) || 1;
-	const expertAuthor = JSON.parse(searchParams.get('expert-author') ?? 'false');
 
 	const payload = await getPayload({ config: payloadConfig });
 
 	//
-	// B. Build the where clause, optionally filtering by type (mapped to the type field).
+	// B. Build the where clause, optionally filtering by type.
 
 	const whereClause: Where = {
 		status: { equals: 'published' },
 		...(type && { type: { in: type } }),
-		...(specialSeries && { specialSeries: { equals: specialSeries } }),
-		...(partnership && { partnership: { equals: partnership } }),
-		...(expertAuthor && { 'author.expertAuthor': { equals: expertAuthor } }),
 	};
 
 	//
-	// C. Retrieve published videos from the database.
+	// C. Retrieve published case studies from the database.
 
-	const foundVideos = await payload.find({
-		collection: 'videos',
+	const foundCaseStudies = await payload.find({
+		collection: 'case-studies',
 		depth: 1,
 		limit,
 		page,
@@ -44,9 +38,9 @@ export const GET = async (request: Request) => {
 	});
 
 	//
-	// Return videos as a JSON response.
+	// Return case studies as a JSON response.
 
-	return Response.json(foundVideos, {
+	return Response.json(foundCaseStudies, {
 		headers: getPublicHeaders(60),
 	});
 
