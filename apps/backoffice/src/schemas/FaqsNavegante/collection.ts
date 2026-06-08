@@ -38,5 +38,6 @@ export const FaqsNavegante: CollectionConfig = {
 		plural: 'Faqs Navegante',
 		singular: 'Faq Navegante',
 	},
+	orderable: true,
 	slug: 'faqs-navegante',
 };

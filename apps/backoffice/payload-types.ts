@@ -481,6 +481,7 @@ export interface Faq {
  */
 export interface FaqsNavegante {
   id: string;
+  _order?: string | null;
   question?: string | null;
   answer?: string | null;
   publishedAt: string;
@@ -835,6 +836,7 @@ export interface FaqsSelect<T extends boolean = true> {
  * via the `definition` "faqs-navegante_select".
  */
 export interface FaqsNaveganteSelect<T extends boolean = true> {
+  _order?: T;
   question?: T;
   answer?: T;
   publishedAt?: T;
