@@ -8,8 +8,8 @@ import styles from './styles.module.css';
 interface VideoProps {
 	fields?: {
 		caption?: string
-		source?: 'external' | 'upload'
-		video?: { value?: { url?: string } }
+		source?: 'external' | 'media'
+		video?: { url?: string }
 		videoUrl?: string
 	}
 }
@@ -19,9 +19,7 @@ interface VideoProps {
 export function Video({ fields }: VideoProps) {
 	//
 
-	if (!fields) return null;
-
-	const src = fields.source === 'external' ? fields.videoUrl : fields.video?.value?.url;
+	const src = fields?.source === 'external' ? fields?.videoUrl : fields?.video?.url;
 
 	if (!src) return null;
 
@@ -33,7 +31,7 @@ export function Video({ fields }: VideoProps) {
 			<video className={styles.video} controls>
 				<source src={src} />
 			</video>
-			{fields.caption && <figcaption className={styles.caption}>{fields.caption}</figcaption>}
+			{fields?.caption && <figcaption className={styles.caption}>{fields?.caption}</figcaption>}
 		</figure>
 	);
 

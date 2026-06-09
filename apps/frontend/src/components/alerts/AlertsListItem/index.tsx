@@ -57,7 +57,7 @@ export function AlertListItem({ alertId }: Props) {
 			<Accordion.Panel classNames={{ content: styles.contentWrapper }}>
 				<div className={styles.infoBar}>
 					<AlertActivePeriodStart date={simplifiedAlertData?.start_date} size="sm" />
-					<AlertActivePeriodEnd date={simplifiedAlertData?.end_date} size="sm" />
+					{/* <AlertActivePeriodEnd date={simplifiedAlertData?.end_date} size="sm" /> */}
 				</div>
 				<p className={styles.description}>{simplifiedAlertData?.description}</p>
 				{simplifiedAlertData?.image_url && <AlertsListItemImageThumbnail alertId={simplifiedAlertData?.alert_id || ''} alertTitle={simplifiedAlertData?.title || ''} alt={simplifiedAlertData?.title} href={`/alerts/${alertId}`} src={simplifiedAlertData.image_url} />}

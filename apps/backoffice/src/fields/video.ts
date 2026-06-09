@@ -27,7 +27,7 @@ export const videoFields: Field[] = [
 		},
 		filterOptions: () => ({
 			mimeType: {
-				equals: 'video/mp4',
+				like: 'video/',
 			},
 		}),
 		label: 'Media (opcional)',

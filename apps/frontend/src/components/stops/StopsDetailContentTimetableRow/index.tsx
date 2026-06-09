@@ -90,6 +90,7 @@ export function StopsDetailContentTimetableRow({ arrivalData, status }: Props) {
 				<NextArrivals
 					arrivals={[arrivalData.observed_arrival_unix || arrivalData.scheduled_arrival_unix]}
 					status={status}
+					tripId={arrivalData.trip_id}
 					withIcon={true}
 				/>
 			</div>
