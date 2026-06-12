@@ -55,7 +55,7 @@ export const AnalyticsContextProvider = ({ children }) => {
 		if (consentContext.data.init_status && consentContext.data.enabled_analytics && !ampli?.isLoaded) {
 			ampli.load({ client: { configuration: { appVersion: pjson.version, autocapture: false } }, environment: 'default' });
 			ampli.client.setOptOut(false);
-			capture((instance, props) => instance.sessionStarted(props));
+			// capture((instance, props) => instance.sessionStarted(props));
 		}
 		else if (consentContext.data.init_status && ampli?.isLoaded) {
 			ampli.client.setOptOut(true);
