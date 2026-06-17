@@ -29,6 +29,7 @@ import { Users } from '@/schemas/Users/collection';
 import { Settings } from '@/globals/config';
 import { Articles } from '@/schemas/Articles/collection';
 import { Faqs } from '@/schemas/Faqs/collection';
+import { FaqsNavegante } from '@/schemas/FaqsNavegante/collection';
 import { GeneralStatus } from '@/schemas/GeneralStatus/global';
 import { HomeSlider } from '@/schemas/HomeSlider/global';
 
@@ -131,7 +132,7 @@ export default buildConfig({
 		user: 'users',
 	},
 
-	collections: [Campaigns, Articles, CaseStudies, ContentTypes, Media, News, Topics, SpecialSeries, Partnerships, Users, KnowledgeBase, Notes, Projects, Faqs, Videos, Interviews, Reports],
+	collections: [Campaigns, Articles, CaseStudies, ContentTypes, Media, News, Topics, SpecialSeries, Partnerships, Users, KnowledgeBase, Notes, Projects, Faqs, FaqsNavegante, Videos, Interviews, Reports],
 	csrf: [
 		getPublicVariable('server_url_backoffice').replace(/\/$/, ''),
 		`${getPublicVariable('server_url_backoffice').replace(/\/$/, '')}/admin`,

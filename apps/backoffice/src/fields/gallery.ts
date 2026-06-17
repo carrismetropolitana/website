@@ -30,4 +30,10 @@ export const galleryFields: Field[] = [
 		required: false,
 		type: 'text',
 	},
+	{
+		defaultValue: false,
+		label: 'Exibir como carrossel',
+		name: 'isCarousel',
+		type: 'checkbox',
+	},
 ];

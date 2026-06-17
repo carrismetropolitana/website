@@ -45,7 +45,12 @@ export function Arrabida365() {
 							width={1920}
 						/>
 						<div className={styles.imageBeeWrapper}>
-							<Link className={styles.learnMore} href="/news/31372">
+							<Link
+								className={styles.learnMore}
+								href="https://www.mun-setubal.pt/wp-content/uploads/2026/04/FCS26-PROGRAMA-PTonline.pdf"
+								rel="noopener noreferrer"
+								target="_blank"
+							>
 								{t('buttonSeeMore')}
 								<IconArrowRight size={18} />
 							</Link>
@@ -53,7 +58,7 @@ export function Arrabida365() {
 								alt={t('altImageBee')}
 								className={styles.imageBee}
 								height={1080}
-								src="https://backoffice.carrismetropolitana.pt/wp-content/uploads/2025/10/arrabida-banner.jpeg"
+								src="https://staging.carrismetropolitana.pt/admin/api/media/file/media-1777386013015-sta_de_caminhadas_arrabida.jpg"
 								width={1920}
 							/>
 						</div>

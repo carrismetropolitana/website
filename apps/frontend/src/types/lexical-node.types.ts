@@ -69,7 +69,7 @@ export interface LexicalNode {
 		number?: string
 		primaryColor?: string
 		rightColumn?: LexicalRichText | string
-		source?: 'external' | 'upload'
+		source?: 'external' | 'media'
 		text?: LexicalRichText | string
 		textColor?: string
 		title?: string
@@ -77,13 +77,10 @@ export interface LexicalNode {
 		url?: string
 		variant?: 'alerts' | 'brand2' | 'brand' | 'debug' | 'default' | 'muted' | 'persistent' | 'standout' | 'success' | 'warning'
 		video?: {
-			relationTo?: string
-			value?: {
-				filename?: string
-				id?: string
-				mimeType?: string
-				url?: string
-			}
+			filename?: string
+			id?: string
+			mimeType?: string
+			url?: string
 		}
 		videoUrl?: string
 		withBottomDivider?: boolean

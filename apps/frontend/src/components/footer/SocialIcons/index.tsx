@@ -31,7 +31,7 @@ export function SocialIcons() {
 			<Link aria-label="X" className={`${styles.iconWrapper} ${styles.x}`} href={URLS.socials.x} rel="noopener noreferrer" target="_blank">
 				<IconBrandX />
 			</Link>
-			<Link aria-label="WhatsApp" className={`${styles.iconWrapper} ${styles.whatsapp}`} href={URLS.socials.whatsapp} rel="noopener noreferrer" target="_blank">
+			<Link aria-label="WhatsApp" className={`${styles.iconWrapper} ${styles.whatsapp}`} href="/whatsapp" rel="noopener noreferrer" target="_blank">
 				<IconBrandWhatsapp />
 			</Link>
 		</div>

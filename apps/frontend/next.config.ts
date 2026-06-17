@@ -161,8 +161,6 @@ const nextConfig: NextConfig = {
 				source: '/volley',
 			},
 
-			{ destination: 'https://forms.office.com/e/VYHS3Pg31d', permanent: false, source: '/mini-passageiros' },
-
 			/* * */
 			/* LEGACY */
 
@@ -212,12 +210,6 @@ const nextConfig: NextConfig = {
 				source: '/novobanco',
 			},
 			{
-				destination:
-					'https://backoffice.carrismetropolitana.pt/mini-passageiros',
-				permanent: false,
-				source: '/mini-passageiros',
-			},
-			{
 				destination: 'https://backoffice.carrismetropolitana.pt/praias-area1',
 				permanent: false,
 				source: '/praias-area1',
@@ -263,6 +255,16 @@ const nextConfig: NextConfig = {
 				permanent: false,
 				source: '/taguspark',
 			},
+		];
+	},
+	async rewrites() {
+		return [
+
+			{
+				destination: '/campaigns/:slug',
+				source: '/:slug',
+			},
+
 		];
 	},
 };

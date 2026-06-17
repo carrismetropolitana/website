@@ -1,5 +1,4 @@
 'use client';
-/* * */
 
 import { useField } from '@payloadcms/ui';
 import { useEffect, useState } from 'react';
@@ -41,7 +40,7 @@ export function GalleryFieldPreview() {
 	}, [value]);
 
 	//
-	// C. Render components
+	// D. Render components
 
 	if (!value?.length) return null;
 	if (!images.length) return <div className={styles.loadingContainer}>Loading...</div>;
