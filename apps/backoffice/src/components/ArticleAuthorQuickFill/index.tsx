@@ -2,7 +2,7 @@
 /* * */
 
 import { useField } from '@payloadcms/ui';
-import { useEffect, useMemo, useState } from 'react';
+import { useEffect, useState } from 'react';
 
 import styles from './styles.module.css';
 
@@ -46,31 +46,15 @@ interface AuthorOption {
 	value: string
 }
 
-interface Props {
-	path?: string
-}
-
 /* * */
 
-const getBasePath = (path?: string) => {
-	if (!path) return 'author';
-	const segments = path.split('.');
-	segments.pop();
-	return segments.join('.') || 'author';
-};
-
-const getMediaId = (value?: MediaValue | null | string) => {
-	if (!value) return undefined;
-	if (typeof value === 'string') return value;
-	return value.id;
-};
-
-const normalize = (value?: null | string) => value?.trim().toLowerCase() ?? '';
-
 const getAuthorKey = (author: ArticleAuthor) => {
-	const email = normalize(author.social?.email);
+	const email = author.social?.email?.trim().toLocaleLowerCase('pt') ?? '';
 	if (email) return `email:${email}`;
-	return `name:${normalize(author.name)}|role:${normalize(author.role)}`;
+
+	const name = author.name?.trim().toLocaleLowerCase('pt') ?? '';
+	const role = author.role?.trim().toLocaleLowerCase('pt') ?? '';
+	return `name:${name}|role:${role}`;
 };
 
 const getAuthorLabel = (author: ArticleAuthor) => {
@@ -82,21 +66,20 @@ const getAuthorLabel = (author: ArticleAuthor) => {
 
 /* * */
 
-export function ArticleAuthorQuickFill({ path }: Props) {
+export function ArticleAuthorQuickFill() {
 	//
 
 	//
 	// A. Setup variables
 
-	const basePath = useMemo(() => getBasePath(path), [path]);
-	const pictureField = useField<string>({ path: `${basePath}.picture`, potentiallyStalePath: `${basePath}.picture` });
-	const nameField = useField<string>({ path: `${basePath}.name`, potentiallyStalePath: `${basePath}.name` });
-	const roleField = useField<string>({ path: `${basePath}.role`, potentiallyStalePath: `${basePath}.role` });
-	const bioField = useField<string>({ path: `${basePath}.bio`, potentiallyStalePath: `${basePath}.bio` });
-	const expertAuthorField = useField<boolean>({ path: `${basePath}.expertAuthor`, potentiallyStalePath: `${basePath}.expertAuthor` });
-	const linkedinField = useField<string>({ path: `${basePath}.social.linkedin`, potentiallyStalePath: `${basePath}.social.linkedin` });
-	const twitterField = useField<string>({ path: `${basePath}.social.twitter`, potentiallyStalePath: `${basePath}.social.twitter` });
-	const emailField = useField<string>({ path: `${basePath}.social.email`, potentiallyStalePath: `${basePath}.social.email` });
+	const pictureField = useField<string>({ path: 'author.picture', potentiallyStalePath: 'author.picture' });
+	const nameField = useField<string>({ path: 'author.name', potentiallyStalePath: 'author.name' });
+	const roleField = useField<string>({ path: 'author.role', potentiallyStalePath: 'author.role' });
+	const bioField = useField<string>({ path: 'author.bio', potentiallyStalePath: 'author.bio' });
+	const expertAuthorField = useField<boolean>({ path: 'author.expertAuthor', potentiallyStalePath: 'author.expertAuthor' });
+	const linkedinField = useField<string>({ path: 'author.social.linkedin', potentiallyStalePath: 'author.social.linkedin' });
+	const twitterField = useField<string>({ path: 'author.social.twitter', potentiallyStalePath: 'author.social.twitter' });
+	const emailField = useField<string>({ path: 'author.social.email', potentiallyStalePath: 'author.social.email' });
 
 	const [isLoading, setIsLoading] = useState(true);
 	const [options, setOptions] = useState<AuthorOption[]>([]);
@@ -188,7 +171,7 @@ export function ArticleAuthorQuickFill({ path }: Props) {
 		if (!selectedOption) return;
 
 		const { author } = selectedOption;
-		const mediaId = getMediaId(author.picture);
+		const mediaId = typeof author.picture === 'string' ? author.picture : author.picture?.id;
 
 		if (mediaId) pictureField.setValue(mediaId);
 		if (author.name) nameField.setValue(author.name);

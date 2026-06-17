@@ -12,6 +12,7 @@ import sharp from 'sharp';
 import { createLexicalConfig, lexicalEditorConfig as nestedLexicalEditorConfig } from '@/configs/lexical-editor-config';
 import { Campaigns } from '@/schemas/Campaigns/collection';
 import { CaseStudies } from '@/schemas/CaseStudies/collection';
+import { ContentTypes } from '@/schemas/ContentTypes/collection';
 import { KnowledgeBase } from '@/schemas/KnowledgeBase/collection';
 import { Media } from '@/schemas/Media/collection';
 import { News } from '@/schemas/News/collection';
@@ -130,7 +131,7 @@ export default buildConfig({
 		user: 'users',
 	},
 
-	collections: [Campaigns, Articles, CaseStudies, Media, News, Topics, SpecialSeries, Partnerships, Users, KnowledgeBase, Notes, Projects, Faqs, Videos, Interviews, Reports],
+	collections: [Campaigns, Articles, CaseStudies, ContentTypes, Media, News, Topics, SpecialSeries, Partnerships, Users, KnowledgeBase, Notes, Projects, Faqs, Videos, Interviews, Reports],
 	csrf: [
 		getPublicVariable('server_url_backoffice').replace(/\/$/, ''),
 		`${getPublicVariable('server_url_backoffice').replace(/\/$/, '')}/admin`,

@@ -70,6 +70,7 @@ export interface Config {
     campaigns: Campaign;
     articles: Article;
     'case-studies': CaseStudy;
+    'content-types': ContentType;
     media: Media;
     news: News;
     topics: Topic;
@@ -93,6 +94,7 @@ export interface Config {
     campaigns: CampaignsSelect<false> | CampaignsSelect<true>;
     articles: ArticlesSelect<false> | ArticlesSelect<true>;
     'case-studies': CaseStudiesSelect<false> | CaseStudiesSelect<true>;
+    'content-types': ContentTypesSelect<false> | ContentTypesSelect<true>;
     media: MediaSelect<false> | MediaSelect<true>;
     news: NewsSelect<false> | NewsSelect<true>;
     topics: TopicsSelect<false> | TopicsSelect<true>;
@@ -126,6 +128,9 @@ export interface Config {
     settings: SettingsSelect<false> | SettingsSelect<true>;
   };
   locale: 'pt-PT' | 'en';
+  widgets: {
+    collections: CollectionsWidget;
+  };
   user: User;
   jobs: {
     tasks: unknown;
@@ -325,7 +330,7 @@ export interface CaseStudy {
    * Resumo curto do caso de estudo que aparece na listagem e no início da página.
    */
   description: string;
-  type: 'tecnologia' | 'operacao' | 'sustentabilidade' | 'comunicacao';
+  type: string | ContentType;
   /**
    * Tempo estimado de leitura em minutos.
    */
@@ -366,6 +371,21 @@ export interface CaseStudy {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "content-types".
+ */
+export interface ContentType {
+  id: string;
+  title: string;
+  /**
+   * URL única para este tipo. Será gerada automaticamente do título se deixado em branco.
+   */
+  slug: string;
+  description?: string | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "news".
  */
 export interface News {
@@ -391,15 +411,6 @@ export interface News {
     };
     [k: string]: unknown;
   };
-  type?: ('comunicacao' | 'tecnologia' | 'operacao' | 'sustentabilidade') | null;
-  /**
-   * Opcional. Use quando este conteúdo fizer parte de uma Série Especial.
-   */
-  specialSeries?: (string | null) | SpecialSery;
-  /**
-   * Opcional. Use quando este conteúdo fizer parte de uma parceria.
-   */
-  partnership?: (string | null) | Partnership;
   is_featured?: boolean | null;
   is_unlisted?: boolean | null;
   topics?: (string | Topic)[] | null;
@@ -682,7 +693,7 @@ export interface Interview {
    */
   description: string;
   contentFormat: 'transcript' | 'audio';
-  type: 'comunicacao' | 'tecnologia' | 'operacao' | 'sustentabilidade';
+  type: string | ContentType;
   /**
    * Opcional. Use quando este conteúdo fizer parte de uma Série Especial.
    */
@@ -865,6 +876,10 @@ export interface PayloadLockedDocument {
     | ({
         relationTo: 'case-studies';
         value: string | CaseStudy;
+      } | null)
+    | ({
+        relationTo: 'content-types';
+        value: string | ContentType;
       } | null)
     | ({
         relationTo: 'media';
@@ -1063,6 +1078,17 @@ export interface CaseStudiesSelect<T extends boolean = true> {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "content-types_select".
+ */
+export interface ContentTypesSelect<T extends boolean = true> {
+  title?: T;
+  slug?: T;
+  description?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "media_select".
  */
 export interface MediaSelect<T extends boolean = true> {
@@ -1088,9 +1114,6 @@ export interface NewsSelect<T extends boolean = true> {
   slug?: T;
   summary?: T;
   body?: T;
-  type?: T;
-  specialSeries?: T;
-  partnership?: T;
   is_featured?: T;
   is_unlisted?: T;
   topics?: T;
@@ -1559,6 +1582,16 @@ export interface SettingsSelect<T extends boolean = true> {
   updatedAt?: T;
   createdAt?: T;
   globalType?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "collections_widget".
+ */
+export interface CollectionsWidget {
+  data?: {
+    [k: string]: unknown;
+  };
+  width: 'full';
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema

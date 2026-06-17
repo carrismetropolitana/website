@@ -2,6 +2,7 @@
 
 import type { CollectionConfig } from 'payload';
 
+import { contentTypeField } from '@/fields/content-type';
 import { publishedAtField } from '@/fields/published-at';
 import { updatedAtField } from '@/fields/updated-at';
 import { slugify } from '@/utils/slugify';
@@ -63,33 +64,7 @@ export const CaseStudies: CollectionConfig = {
 			required: true,
 			type: 'textarea',
 		},
-		{
-			admin: {
-				position: 'sidebar',
-			},
-			label: 'Tipo',
-			name: 'type',
-			options: [
-				{
-					label: 'Tecnologia',
-					value: 'tecnologia',
-				},
-				{
-					label: 'Operação',
-					value: 'operacao',
-				},
-				{
-					label: 'Sustentabilidade',
-					value: 'sustentabilidade',
-				},
-				{
-					label: 'Comunicação',
-					value: 'comunicacao',
-				},
-			],
-			required: true,
-			type: 'select',
-		},
+		contentTypeField,
 		{
 			admin: {
 				description: 'Tempo estimado de leitura em minutos.',

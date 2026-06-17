@@ -2,28 +2,12 @@
 
 import payloadConfig from '@/payload-config';
 import { getPublicHeaders } from '@/utils/get-public-headers';
-import { getPayload, type Where } from 'payload';
+import { getPayload } from 'payload';
 
 /* * */
 
-export const GET = async (request: Request) => {
-	const { searchParams } = new URL(request.url);
-	const type = searchParams.get('type');
-	const specialSeries = searchParams.get('special-series');
-	const partnership = searchParams.get('partnership');
-
+export const GET = async () => {
 	const payload = await getPayload({ config: payloadConfig });
-
-	const whereClause: Where = {
-		_status: { equals: 'published' },
-		...(type && { type: { in: type } }),
-		...(specialSeries && { specialSeries: { equals: specialSeries } }),
-		...(partnership && { partnership: { equals: partnership } }),
-		or: [
-			{ is_unlisted: { equals: false } },
-			{ is_unlisted: { equals: undefined } },
-		],
-	};
 
 	const result = await payload.find({
 		collection: 'news',
@@ -31,7 +15,13 @@ export const GET = async (request: Request) => {
 		draft: false,
 		limit: 0,
 		sort: '-publishedAt',
-		where: whereClause,
+		where: {
+			_status: { equals: 'published' },
+			or: [
+				{ is_unlisted: { equals: false } },
+				{ is_unlisted: { equals: undefined } },
+			],
+		},
 	});
 
 	const docs = result.docs ?? [];

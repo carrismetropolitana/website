@@ -2,8 +2,10 @@
 
 import type { CollectionConfig } from 'payload';
 
-import { partnershipField, specialSeriesField, themeField } from '@/fields/content-classification';
+import { contentTypeField } from '@/fields/content-type';
+import { partnershipField } from '@/fields/partnership';
 import { publishedAtField } from '@/fields/published-at';
+import { specialSeriesField } from '@/fields/special-series';
 import { updatedAtField } from '@/fields/updated-at';
 import { slugify } from '@/utils/slugify';
 
@@ -83,7 +85,7 @@ export const Interviews: CollectionConfig = {
 			required: true,
 			type: 'select',
 		},
-		themeField,
+		contentTypeField,
 		specialSeriesField,
 		partnershipField,
 		{
