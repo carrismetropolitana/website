@@ -2,7 +2,10 @@
 
 import type { CollectionConfig } from 'payload';
 
+import { partnershipField } from '@/fields/partnership';
 import { publishedAtField } from '@/fields/published-at';
+import { specialSeriesField } from '@/fields/special-series';
+import { subjectField } from '@/fields/subject';
 import { updatedAtField } from '@/fields/updated-at';
 import { slugify } from '@/utils/slugify';
 
@@ -132,33 +135,9 @@ export const Videos: CollectionConfig = {
 			name: 'author',
 			type: 'group',
 		},
-		{
-			admin: {
-				position: 'sidebar',
-			},
-			label: 'Tipo',
-			name: 'type',
-			options: [
-				{
-					label: 'Tecnologia',
-					value: 'tecnologia',
-				},
-				{
-					label: 'Operação',
-					value: 'operacao',
-				},
-				{
-					label: 'Sustentabilidade',
-					value: 'sustentabilidade',
-				},
-				{
-					label: 'Comunicação',
-					value: 'comunicacao',
-				},
-			],
-			required: true,
-			type: 'select',
-		},
+		subjectField,
+		specialSeriesField,
+		partnershipField,
 		{
 			admin: {
 				description: 'Tempo estimado de visualização em minutos.',
