@@ -1,5 +1,6 @@
 import payloadConfig from '@/payload-config';
 import { getPublicHeaders } from '@/utils/get-public-headers';
+import { hydratePublicCaseStudyRelations } from '@/utils/hydrate-public-content-relations';
 import { getPayload, type Where } from 'payload';
 
 /* * */
@@ -30,17 +31,22 @@ export const GET = async (request: Request) => {
 
 	const foundCaseStudies = await payload.find({
 		collection: 'case-studies',
-		depth: 1,
+		depth: 0,
 		limit,
 		page,
 		sort: '-publishDate',
 		where: whereClause,
 	});
 
+	const response = {
+		...foundCaseStudies,
+		docs: await Promise.all(foundCaseStudies.docs.map(caseStudy => hydratePublicCaseStudyRelations(payload, caseStudy))),
+	};
+
 	//
 	// Return case studies as a JSON response.
 
-	return Response.json(foundCaseStudies, {
+	return Response.json(response, {
 		headers: getPublicHeaders(60),
 	});
 

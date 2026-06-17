@@ -2,6 +2,7 @@
 
 import payloadConfig from '@/payload-config';
 import { getPublicHeaders } from '@/utils/get-public-headers';
+import { hydratePublicCaseStudyRelations } from '@/utils/hydrate-public-content-relations';
 import { getPayload } from 'payload';
 
 /* * */
@@ -16,7 +17,7 @@ export const GET = async (_request: Request, { params }: { params: Promise<{ slu
 
 	const foundCaseStudies = await payload.find({
 		collection: 'case-studies',
-		depth: 2,
+		depth: 0,
 		draft: false,
 		limit: 1,
 		where: {
@@ -31,7 +32,7 @@ export const GET = async (_request: Request, { params }: { params: Promise<{ slu
 		return Response.json({ error: 'Case study not found' }, { headers: getPublicHeaders(null), status: 404 });
 	}
 
-	const caseStudy = foundCaseStudies.docs[0];
+	const caseStudy = await hydratePublicCaseStudyRelations(payload, foundCaseStudies.docs[0]);
 
 	return Response.json(caseStudy, {
 		headers: getPublicHeaders(3600),
