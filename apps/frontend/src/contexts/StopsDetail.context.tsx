@@ -10,6 +10,7 @@ import { useProfileContext } from '@/contexts/Profile.context';
 import { useStopsContext } from '@/contexts/Stops.context';
 import { type SimplifiedAlert } from '@/types/alerts.types';
 import { type Arrival } from '@/types/stops.types';
+import { getArrivalsApiBaseUrl } from '@/utils/getArrivalsApiBaseUrl';
 import { type Line, type Pattern, type Shape, type Stop } from '@carrismetropolitana/api-types/network';
 import { getPublicVariable } from '@carrismetropolitana/website-shared-settings';
 import { DateTime } from 'luxon';
@@ -36,7 +37,6 @@ interface StopsDetailContextState {
 		stop: Stop | undefined
 		timetable_realtime: Arrival[] | undefined
 		timetable_realtime_future: Arrival[] | undefined
-		timetable_realtime_go: Arrival[] | undefined
 		timetable_realtime_past: Arrival[] | undefined
 		timetable_schedule: Arrival[] | undefined
 		valid_pattern_groups: Pattern[] | undefined
@@ -84,7 +84,6 @@ export const StopsDetailContextProvider = ({ children, stopId }: { children: Rea
 	const [dataPatternsState, setDataPatternsState] = useState<Pattern[][] | undefined>(undefined);
 	const [dataValidPatternsState, setDataValidPatternsState] = useState<Pattern[] | undefined>(undefined);
 	const [dataShapeState, setDataShapeState] = useState<Shape | undefined>(undefined);
-	const [dataArrivalsGo, setDataArrivalsGo] = useState<Arrival[] | undefined>(undefined);
 	const [dataTimetableRealtimeState, setDataTimetableRealtimeState] = useState<Arrival[] | undefined>(undefined);
 	const [dataTimetableRealtimePastState, setDataTimetableRealtimePastState] = useState<Arrival[] | undefined>(undefined);
 	const [dataTimetableRealtimeFutureState, setDataTimetableRealtimeFutureState] = useState<Arrival[] | undefined>(undefined);
@@ -130,16 +129,20 @@ export const StopsDetailContextProvider = ({ children, stopId }: { children: Rea
 	}, [dataStopState]);
 
 	/**
-	* Fetch realtime arrivals data for the selected stop.
-	* This effect runs whenever the `dataStopState` changes.
-	* It fetches line data for each line associated with the stop and updates the state.
-	*/
+
+ * Fetch realtime arrivals data for the selected stop.
+
+ * This effect runs whenever the `dataStopState` changes.
+
+ * It fetches line data for each line associated with the stop and updates the state.
+
+ */
 
 	useEffect(() => {
 		const fetchData = async () => {
 			try {
 				if (!dataActiveStopIdState) return;
-				const realtimeData = await fetch(`${getPublicVariable('api_url')}/arrivals/by_stop/${dataActiveStopIdState}`)
+				const realtimeData = await fetch(`${getArrivalsApiBaseUrl(debugContext.flags.is_debug_mode)}/arrivals/by_stop/${dataActiveStopIdState}`)
 					.then((response) => {
 						if (!response.ok) console.log(`Failed to fetch realtime data for stopId: ${dataActiveStopIdState}`);
 						else return response.json();
@@ -155,35 +158,7 @@ export const StopsDetailContextProvider = ({ children, stopId }: { children: Rea
 		fetchData();
 		const interval = setInterval(fetchData, 10000);
 		return () => clearInterval(interval);
-	}, [dataActiveStopIdState]);
-
-	/**
-	* Fetch realtime arrivals data for the selected stop from GO API.
-	* This effect runs whenever the `dataStopState` changes.
-	* It fetches line data for each line associated with the stop and updates the state.
-	*/
-
-	useEffect(() => {
-		const fetchData = async () => {
-			try {
-				if (!dataActiveStopIdState) return;
-				const realtimeData = await fetch(`https://go.tmlmobilidade.pt/eta/api/arrivals/by_stop/${dataActiveStopIdState}`)
-					.then((response) => {
-						if (!response.ok) console.log(`Failed to fetch realtime data for stopId: ${dataActiveStopIdState}`);
-						else return response.json();
-					});
-				setDataArrivalsGo(realtimeData);
-			}
-			catch (error) {
-				console.error('Error fetching realtime data:', error);
-				setDataArrivalsGo([]);
-			}
-		};
-		//
-		fetchData();
-		const interval = setInterval(fetchData, 10000);
-		return () => clearInterval(interval);
-	}, [dataActiveStopIdState]);
+	}, [dataActiveStopIdState, debugContext.flags.is_debug_mode]);
 
 	/**
  	* Fetch pattern data for the selected stop.
@@ -469,7 +444,6 @@ export const StopsDetailContextProvider = ({ children, stopId }: { children: Rea
 			stop: dataStopState,
 			timetable_realtime: dataTimetableRealtimeState,
 			timetable_realtime_future: dataTimetableRealtimeFutureState,
-			timetable_realtime_go: dataArrivalsGo,
 			timetable_realtime_past: dataTimetableRealtimePastState,
 			timetable_schedule: dataTimetableScheduleState,
 			valid_pattern_groups: dataValidPatternsState,

@@ -30,18 +30,18 @@
 .scheduledArrivalsWrapper {
 	display: flex;
 	flex-direction: row;
+	gap: var(--size-spacing-5);
 	align-items: center;
 	justify-content: flex-start;
-	gap: var(--size-spacing-5);
 }
 
 .realtimeArrivalsList,
 .scheduledArrivalsList {
 	display: flex;
 	flex-direction: row;
+	gap: var(--size-spacing-10);
 	align-items: center;
 	justify-content: flex-start;
-	gap: var(--size-spacing-10);
 }
 
 /* * */
@@ -51,6 +51,10 @@
 	font-size: 16px;
 	font-weight: var(--font-weight-bold);
 	color: var(--color-realtime-100);
+}
+
+.realtimeArrivalsWrapper.debug .realtimeArrival {
+	color: var(--color-go);
 }
 
 /* * */

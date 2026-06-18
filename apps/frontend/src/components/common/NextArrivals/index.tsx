@@ -6,7 +6,6 @@ import type { ArrivalStatus } from '@/types/stops.types';
 
 import { LiveIcon } from '@/components/common/LiveIcon';
 import { useDebugContext } from '@/contexts/Debug.context';
-import { useStopsDetailContext } from '@/contexts/StopsDetail.context';
 import { IconAlertCircleFilled, IconClockHour9 } from '@tabler/icons-react';
 import { DateTime } from 'luxon';
 import { useTranslations } from 'next-intl';
@@ -28,49 +27,22 @@ interface Props {
 	allowPastArrivals?: boolean
 	arrivals: number[]
 	status: ArrivalStatus
-	tripId?: string
 	withIcon?: boolean
 }
 
 /* * */
 
-// Debug-only sub-component: shows the matching GO API ETA alongside the
-// production realtime arrival. Renders nothing when debug mode is off or
-// when no matching GO arrival exists for the given trip.
-function DebugGoArrival({ tripId }: { tripId?: string }) {
-	const debugContext = useDebugContext();
-	const stopsDetailContext = useStopsDetailContext();
-
-	if (!debugContext.flags.is_debug_mode || !tripId) return null;
-
-	const goArrival = stopsDetailContext.data.timetable_realtime_go?.find(arrival => arrival.trip_id === tripId);
-	const goUnix = goArrival?.estimated_arrival_unix ?? goArrival?.scheduled_arrival_unix;
-	if (!goUnix) return null;
-
-	const nowInSeconds = DateTime.now().toSeconds();
-	const minutesUntilArrival = Math.floor((goUnix - nowInSeconds) / 60);
-	const label = minutesUntilArrival <= 0
-		? '<1 min'
-		: `${minutesUntilArrival} min`;
-
-	return (
-		<p className={styles.debugGo} title="GO ETA (debug)">
-			{label}
-		</p>
-	);
-}
-
-/* * */
-
-export function NextArrivals({ allowPastArrivals = true, arrivals, status, tripId, withIcon = true }: Props) {
+export function NextArrivals({ allowPastArrivals = true, arrivals, status, withIcon = true }: Props) {
 	//
 
 	//
 	// A. Setup variables
 
 	const t = useTranslations('common.NextArrivals');
+	const debugContext = useDebugContext();
 
 	const [allFormattedArrivals, setFormattedArrivals] = useState<NextArrival[]>([]);
+	const isDebugMode = debugContext.flags.is_debug_mode;
 
 	//
 	// B. Transform data
@@ -152,10 +124,10 @@ export function NextArrivals({ allowPastArrivals = true, arrivals, status, tripI
 
 	if (status === 'realtime') {
 		return (
-			<div className={`${styles.container} ${styles.realtime}`}>
+			<div className={`${styles.container} ${styles.realtime} ${isDebugMode && styles.debug}`}>
 				{withIcon && (
 					<div className={styles.icon}>
-						<LiveIcon />
+						<LiveIcon color={isDebugMode ? 'var(--color-debug)' : undefined} />
 					</div>
 				)}
 				<div className={styles.list}>
@@ -164,7 +136,6 @@ export function NextArrivals({ allowPastArrivals = true, arrivals, status, tripI
 							{formattedArrival.label}
 						</p>
 					))}
-					<DebugGoArrival tripId={tripId} />
 				</div>
 			</div>
 		);
