@@ -12,7 +12,7 @@ import { type SimplifiedAlert } from '@/types/alerts.types';
 import { type Arrival } from '@/types/stops.types';
 import { type Line, type Pattern, type Shape, type Stop } from '@carrismetropolitana/api-types/network';
 import { getPublicVariable } from '@carrismetropolitana/website-shared-settings';
-import { Dates } from '@tmlmobilidade/dates';
+import { HubAlert } from '@tmlmobilidade/types';
 import { DateTime } from 'luxon';
 import { notFound } from 'next/navigation';
 import { createContext, useContext, useEffect, useState } from 'react';
@@ -26,7 +26,7 @@ interface StopsDetailContextState {
 		setActiveTripId: (tripId: string, stopSequence: number) => void
 	}
 	data: {
-		active_alerts: SimplifiedAlert[] | undefined
+		active_alerts: HubAlert[] | undefined
 		active_pattern_group: Pattern | undefined
 		active_shape: Shape | undefined
 		active_stop_id: string
@@ -89,7 +89,7 @@ export const StopsDetailContextProvider = ({ children, stopId }: { children: Rea
 	const [dataTimetableRealtimeFutureState, setDataTimetableRealtimeFutureState] = useState<Arrival[] | undefined>(undefined);
 	const [dataTimetableScheduleState, setDataTimetableScheduleState] = useState<Arrival[] | undefined>(undefined);
 	const [dataActivePatternState, setDataActivePatternState] = useState<Pattern | undefined>(undefined);
-	const [dataActiveAlertsState, setDataActiveAlertsState] = useState<SimplifiedAlert[] | undefined>(undefined);
+	const [dataActiveAlertsState, setDataActiveAlertsState] = useState<HubAlert[] | undefined>(undefined);
 	const [dataActiveTripIdState, setDataActiveTripIdState] = useState<string | undefined>(undefined);
 	const [dataActiveStopSequenceState, setDataActiveStopSequenceState] = useState<number | undefined>(undefined);
 	const [flagIsFavoriteState, setFlagIsFavoriteState] = useState<boolean>(false);

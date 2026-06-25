@@ -56,7 +56,7 @@ export function QuickSearchFavoritesBar() {
 		// Extend array with check if any of these lines have active alerts
 		const extendedFavoriteLinesWithAlerts = sortedFavoriteLines.map((lineData) => {
 			return {
-				has_alert: alertsContext.actions.getSimplifiedAlertsByLineId(lineData.id).length > 0,
+				has_alert: alertsContext.actions.getAlertsByLineId(lineData.id).length > 0,
 				line: lineData,
 			};
 		});
