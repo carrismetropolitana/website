@@ -12,6 +12,7 @@ import { type SimplifiedAlert } from '@/types/alerts.types';
 import { type Arrival } from '@/types/stops.types';
 import { type Line, type Pattern, type Shape, type Stop } from '@carrismetropolitana/api-types/network';
 import { getPublicVariable } from '@carrismetropolitana/website-shared-settings';
+import { Dates } from '@tmlmobilidade/dates';
 import { DateTime } from 'luxon';
 import { notFound } from 'next/navigation';
 import { createContext, useContext, useEffect, useState } from 'react';
@@ -360,19 +361,19 @@ export const StopsDetailContextProvider = ({ children, stopId }: { children: Rea
 		setDataValidPatternsState(activePatterns);
 	}, [dataPatternsState, operationalDateContext.data.selected_date]);
 
-	useEffect(() => {
-		if (!alertsContext.data.simplified) return;
-		const activeAlerts = alertsContext.data.simplified.filter((simplifiedAlertData) => {
-			return simplifiedAlertData.informed_entity.some((informedEntity) => {
-				if (!informedEntity.stop_id && !informedEntity.route_id) return false;
-				const hasMatchingStop = informedEntity.stop_id === dataActiveStopIdState;
-				const hasMatchingRoute = dataStopState?.route_ids.includes(informedEntity.route_id || '');
-				const isActive = simplifiedAlertData.end_date ? simplifiedAlertData.end_date >= new Date() : true;
-				return (hasMatchingStop || hasMatchingRoute) && isActive;
-			});
-		});
-		setDataActiveAlertsState(activeAlerts);
-	}, [alertsContext.data.simplified, dataStopState, dataActiveStopIdState]);
+	// useEffect(() => {
+	// 	if (!alertsContext.data.alerts) return;
+	// 	const activeAlerts = alertsContext.data.alerts.filter((alertData) => {
+	// 		return alertData.references.some((reference) => {
+	// 			if (!reference.parent_id && !reference.route_id) return false;
+	// 			const hasMatchingStop = reference.parent_id === dataActiveStopIdState;
+	// 			const hasMatchingRoute = dataStopState?.route_ids.includes(reference.child_ids.includes(dataActiveStopIdState));
+	// 			const isActive = alertData.active_period_end_date ? Dates.fromUnixTimestamp(alertData.active_period_end_date) >= new Date() : true;
+	// 			return (hasMatchingStop || hasMatchingRoute) && isActive;
+	// 		});
+	// 	});
+	// 	setDataActiveAlertsState(activeAlerts);
+	// }, [alertsContext.data.alerts, dataStopState, dataActiveStopIdState]);
 
 	//
 	// D. Handle actions

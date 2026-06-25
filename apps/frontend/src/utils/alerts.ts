@@ -1,35 +1,32 @@
+import type { HubAlert } from '@tmlmobilidade/types';
+
 /* * */
 
-import { AlertCause, AlertEffect } from '@/types/alerts.types';
-
-// Helper function to get severity level for a cause
-export function getCauseSeverityLevel(cause: AlertCause): number {
+export function getCauseSeverityLevel(cause?: HubAlert['cause']): number {
 	switch (cause) {
+		case 'ABUSIVE_PARKING':
 		case 'ACCIDENT':
 		case 'CONSTRUCTION':
 		case 'DEMONSTRATION':
 		case 'DRIVER_ABSENCE':
 		case 'DRIVER_ISSUE':
 		case 'HIGH_PASSENGER_LOAD':
-		case 'MAINTENANCE':
 		case 'MEDICAL_EMERGENCY':
+		case 'NETWORK_UPDATE':
 		case 'POLICE_ACTIVITY':
-		case 'ROAD_INCIDENT':
+		case 'PUBLIC_DISORDER':
+		case 'ROAD_ISSUE':
 		case 'STRIKE':
-		case 'SYSTEM_FAILURE':
-		case 'TECHNICAL_PROBLEM':
+		case 'TECHNICAL_ISSUE':
 		case 'TRAFFIC_JAM':
 		case 'WEATHER':
 			return 3;
-		case 'HOLIDAY':
-			return 0;
 		default:
 			return 2;
 	}
 }
 
-// Helper function to get severity level for an effect
-export function getEffectSeverityLevel(effect: AlertEffect): number {
+export function getEffectSeverityLevel(effect?: HubAlert['effect']): number {
 	switch (effect) {
 		case 'ACCESSIBILITY_ISSUE':
 		case 'MODIFIED_SERVICE':

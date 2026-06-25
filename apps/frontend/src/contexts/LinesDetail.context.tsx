@@ -11,6 +11,7 @@ import { type SimplifiedAlert } from '@/types/alerts.types';
 import { type ServiceMetrics } from '@carrismetropolitana/api-types/metrics';
 import { type Line, type Pattern, type Route, type Shape, type Waypoint } from '@carrismetropolitana/api-types/network';
 import { getPublicVariable } from '@carrismetropolitana/website-shared-settings';
+import { HubAlert } from '@tmlmobilidade/types';
 import { useQueryState } from 'nuqs';
 import { createContext, useContext, useEffect, useState } from 'react';
 
@@ -23,7 +24,7 @@ interface LinesDetailContextState {
 		setHighlightedTripIds: (tripIds: string[]) => void
 	}
 	data: {
-		active_alerts: SimplifiedAlert[] | undefined
+		active_alerts: HubAlert[] | undefined
 		active_pattern: null | Pattern
 		active_shape: null | Shape
 		active_waypoint: null | Waypoint
@@ -208,38 +209,36 @@ export const LinesDetailContextProvider = ({ children, lineId }) => {
 	}, [dataAllPatternsState, operationalDateContext.data.selected_date]);
 
 	useEffect(() => {
-		if (!alertsContext.data.simplified) return;
+		if (!alertsContext.data.alerts) return;
 
-		const activeAlerts = alertsContext.data.simplified.filter((simplifiedAlertData) => {
-			const isActive = (simplifiedAlertData.end_date && !isNaN(simplifiedAlertData.end_date.getTime())) ? new Date(simplifiedAlertData.end_date).getTime() >= new Date().getTime() : true;
+		const activeAlerts = alertsContext.data.alerts.filter((alertData) => {
+			const isActive = (alertData.active_period_end_date ? new Date(alertData.active_period_end_date).getTime() >= new Date().getTime() : true);
 
 			if (!isActive) return false;
 
-			return simplifiedAlertData.informed_entity.some((informedEntity) => {
+			return alertData.references.some((reference) => {
 				const normalizedLineId = lineId?.trim();
 				const lineOperatorDigit = normalizedLineId?.match(/\d/)?.[0];
-				const informedAgencyId = informedEntity.agency_id?.trim();
+				const informedAgencyId = alertData.agency_id?.trim();
 				const informedOperatorDigit = informedAgencyId?.slice(-1);
 				const hasMatchingArea = informedOperatorDigit != null && lineOperatorDigit != null && informedOperatorDigit === lineOperatorDigit;
 				const areaOk = !informedAgencyId || hasMatchingArea;
 
 				if (!areaOk) return false;
 
-				if (informedEntity.line_id != null) return informedEntity.line_id.trim() === normalizedLineId;
+				if (reference.parent_id != null) return reference.parent_id.trim() === normalizedLineId;
 
-				if (informedEntity.route_id != null) return dataLineState?.route_ids?.includes(informedEntity.route_id);
+				if (reference.child_ids.includes(normalizedLineId)) return true;
 
-				if (informedEntity.stop_id != null) {
-					return dataAllPatternsState?.some(pattern => pattern.some(patternGroup => patternGroup.path.some(waypoint => waypoint.stop_id === informedEntity.stop_id)));
+				if (reference.child_ids.includes(normalizedLineId)) {
+					return dataAllPatternsState?.some(pattern => pattern.some(patternGroup => patternGroup.path.some(waypoint => reference.child_ids.includes(waypoint.stop_id))));
 				}
 
-				return true;
+				return false;
 			});
 		});
-
 		setDataActiveAlertsState(activeAlerts);
-	}, [alertsContext.data.simplified, lineId, dataLineState, dataAllPatternsState]);
-
+	}, [alertsContext.data.alerts, lineId, dataLineState, dataAllPatternsState]);
 	//
 	// D. Handle actions
 
