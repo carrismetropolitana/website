@@ -1,8 +1,8 @@
 'use client';
 
-import { useFilterByAgencyIds } from '@/hooks/useFilterByAgencyIds';
+import { normalizeAlertReferenceId } from '@/utils/alerts';
 import { getBaseGeoJsonFeatureCollection } from '@/utils/map.utils';
-import { getPublicVariable } from '@carrismetropolitana/website-shared-settings';
+import { CARRIS_METROPOLITANA_AGENCY_IDS, getPublicVariable } from '@carrismetropolitana/website-shared-settings';
 import { HubAlert } from '@tmlmobilidade/types';
 import { createContext, type PropsWithChildren, useContext, useMemo } from 'react';
 import useSWR from 'swr';
@@ -46,7 +46,16 @@ export function AlertsContextProvider({ children }: PropsWithChildren) {
 	// A. Fetch data
 
 	const { data: allAlertsData, isLoading: allAlertsLoading } = useSWR<{ data: HubAlert[] }>(`${getPublicVariable('go_api_url')}/alerts`, { refreshInterval: 180000 }); // 3 minutes
-	const filteredAlertsData = useFilterByAgencyIds(allAlertsData?.data);
+	const filteredAlertsData = useMemo(() => {
+		const allowedAgencyIds = new Set<string>(CARRIS_METROPOLITANA_AGENCY_IDS);
+		return (allAlertsData?.data ?? []).filter((alertData) => {
+			if (allowedAgencyIds.has(String(alertData.agency_id))) return true;
+			return alertData.references.some((reference) => {
+				const referenceIds = [reference.parent_id, ...reference.child_ids];
+				return referenceIds.some(referenceId => CARRIS_METROPOLITANA_AGENCY_IDS.some(agencyId => String(referenceId).trim().startsWith(`[${agencyId}]`)));
+			});
+		});
+	}, [allAlertsData?.data]);
 
 	//
 	// B. Transform data
@@ -68,17 +77,19 @@ export function AlertsContextProvider({ children }: PropsWithChildren) {
 	};
 
 	const getAlertsByLineId = (lineId: string): HubAlert[] => {
+		const normalizedLineId = normalizeAlertReferenceId(lineId);
 		return filteredAlertsData.filter((item) => {
-			if (item.reference_type === 'lines') return item.references.some(reference => reference.parent_id === lineId);
-			if (item.reference_type === 'stops') return item.references.some(reference => reference.child_ids.includes(lineId));
+			if (item.reference_type === 'lines') return item.references.some(reference => normalizeAlertReferenceId(reference.parent_id) === normalizedLineId);
+			if (item.reference_type === 'stops') return item.references.some(reference => reference.child_ids.some(childId => normalizeAlertReferenceId(childId) === normalizedLineId));
 			return false;
 		});
 	};
 
-	const getAlertsByStopId = (lineId: string): HubAlert[] => {
+	const getAlertsByStopId = (stopId: string): HubAlert[] => {
+		const normalizedStopId = normalizeAlertReferenceId(stopId);
 		return filteredAlertsData.filter((item) => {
-			if (item.reference_type === 'stops') return item.references.some(reference => reference.parent_id === lineId);
-			if (item.reference_type === 'lines') return item.references.some(reference => reference.child_ids.includes(lineId));
+			if (item.reference_type === 'stops') return item.references.some(reference => normalizeAlertReferenceId(reference.parent_id) === normalizedStopId);
+			if (item.reference_type === 'lines') return item.references.some(reference => reference.child_ids.some(childId => normalizeAlertReferenceId(childId) === normalizedStopId));
 			return false;
 		});
 	};

@@ -4,8 +4,8 @@
 
 import { getBaseGeoJsonFeatureCollection } from '@/utils/map.utils';
 import { type Stop } from '@carrismetropolitana/api-types/network';
-import { getPublicVariable } from '@carrismetropolitana/website-shared-settings';
-import { createContext, useContext, useEffect, useState } from 'react';
+import { CARRIS_METROPOLITANA_AGENCY_IDS, getPublicVariable } from '@carrismetropolitana/website-shared-settings';
+import { createContext, useContext, useEffect, useMemo, useState } from 'react';
 import useSWR from 'swr';
 
 /* * */
@@ -50,29 +50,36 @@ export const StopsContextProvider = ({ children }) => {
 	// B. Fetch data
 
 	const { data: allStopsData, isLoading: allStopsLoading } = useSWR<Stop[]>(`${getPublicVariable('api_url')}/stops`, { refreshInterval: 900000 }); // 15 minutes
+	const filteredStopsData = useMemo(() => {
+		const allowedOperatorDigits = new Set(CARRIS_METROPOLITANA_AGENCY_IDS.map(agencyId => agencyId.slice(-1)));
+		return (allStopsData ?? []).filter((stopData) => {
+			const lineIds = stopData.line_ids || (stopData as Stop & { lines?: string[] }).lines || [];
+			return lineIds.some(lineId => allowedOperatorDigits.has(lineId.at(0) ?? ''));
+		});
+	}, [allStopsData]);
 
 	//
 	// C. Transform data
 
 	useEffect(() => {
 		// Check if all data is available
-		if (!allStopsData) return;
+		if (!filteredStopsData) return;
 		// Transform data into GeoJSON FeatureCollection
 		const collection = getBaseGeoJsonFeatureCollection();
-		allStopsData.forEach((stop) => {
+		filteredStopsData.forEach((stop) => {
 			const stopFC = transformStopDataIntoGeoJsonFeature(stop);
 			if (stopFC) collection.features.push(stopFC);
 		});
 		// Set state value
 		setDataStopsFCState(collection);
 		//
-	}, [allStopsData]);
+	}, [filteredStopsData]);
 
 	//
 	// D. Handle actions
 
 	const getStopById = (stopId: string): Stop | undefined => {
-		return allStopsData?.find(stop => stop.id === stopId);
+		return filteredStopsData.find(stop => stop.id === stopId);
 	};
 
 	const getStopByIdGeoJsonFC = (stopId: string): GeoJSON.FeatureCollection | undefined => {
@@ -93,7 +100,7 @@ export const StopsContextProvider = ({ children }) => {
 			getStopByIdGeoJsonFC,
 		},
 		data: {
-			stops: allStopsData ?? [],
+			stops: filteredStopsData,
 			stops_fc: dataStopsFCState,
 		},
 		flags: {

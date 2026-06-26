@@ -22,7 +22,6 @@ export function LinesDetailAlerts() {
 	//
 	// B. Render components
 
-	console.log('LinesDetailAlerts', linesDetailContext.data.active_alerts);
 	if (!linesDetailContext.data.line || !linesDetailContext.data.active_alerts || linesDetailContext.data.active_alerts?.length === 0) {
 		return null;
 	}

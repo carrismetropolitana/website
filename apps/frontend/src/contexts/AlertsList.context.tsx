@@ -5,6 +5,7 @@
 import type { AlertCause, AlertEffect } from '@/types/alerts.types.js';
 import type { HubAlert } from '@tmlmobilidade/types';
 
+import { normalizeAlertReferenceId } from '@/utils/alerts';
 import { DateTime } from 'luxon';
 import { useQueryState } from 'nuqs';
 import { createContext, useContext, useEffect, useMemo, useState } from 'react';
@@ -133,11 +134,21 @@ export const AlertsListContextProvider = ({ children }) => {
 		});
 
 		if (filterByLineIdState) {
-			filterResult = filterResult.filter(alert => alert.references.some(reference => reference.parent_id === filterByLineIdState));
+			const normalizedLineId = normalizeAlertReferenceId(filterByLineIdState);
+			filterResult = filterResult.filter(alert => alert.references.some((reference) => {
+				const parentId = normalizeAlertReferenceId(reference.parent_id);
+				const childIds = reference.child_ids.map(normalizeAlertReferenceId);
+				return parentId === normalizedLineId || childIds.includes(normalizedLineId);
+			}));
 		}
 
 		if (filterByStopIdState) {
-			filterResult = filterResult.filter(alert => alert.references.some(reference => reference.child_ids.includes(filterByStopIdState)));
+			const normalizedStopId = normalizeAlertReferenceId(filterByStopIdState);
+			filterResult = filterResult.filter(alert => alert.references.some((reference) => {
+				const parentId = normalizeAlertReferenceId(reference.parent_id);
+				const childIds = reference.child_ids.map(normalizeAlertReferenceId);
+				return parentId === normalizedStopId || childIds.includes(normalizedStopId);
+			}));
 		}
 
 		// TODO: municipalityId does not exist in the informed_entity, needs to be added in API

@@ -7,6 +7,7 @@ import { useLinesContext } from '@/contexts/Lines.context';
 import { useOperationalDateContext } from '@/contexts/OperationalDate.context';
 import { useProfileContext } from '@/contexts/Profile.context';
 import { useStopsContext } from '@/contexts/Stops.context';
+import { normalizeAlertReferenceId } from '@/utils/alerts';
 import { type ServiceMetrics } from '@carrismetropolitana/api-types/metrics';
 import { type Line, type Pattern, type Route, type Shape, type Waypoint } from '@carrismetropolitana/api-types/network';
 import { getPublicVariable } from '@carrismetropolitana/website-shared-settings';
@@ -216,7 +217,7 @@ export const LinesDetailContextProvider = ({ children, lineId }) => {
 			if (!isActive) return false;
 
 			return alertData.references.some((reference) => {
-				const normalizedLineId = lineId?.trim();
+				const normalizedLineId = normalizeAlertReferenceId(lineId);
 				const lineOperatorDigit = normalizedLineId?.match(/\d/)?.[0];
 				const informedAgencyId = alertData.agency_id?.trim();
 				const informedOperatorDigit = informedAgencyId?.slice(-1);
@@ -225,15 +226,13 @@ export const LinesDetailContextProvider = ({ children, lineId }) => {
 
 				if (!areaOk) return false;
 
-				if (reference.parent_id != null) return reference.parent_id.trim() === normalizedLineId;
+				const parentId = normalizeAlertReferenceId(reference.parent_id);
+				const childIds = reference.child_ids.map(normalizeAlertReferenceId);
 
-				if (reference.child_ids.includes(normalizedLineId)) return true;
+				const hasMatchingLine = parentId === normalizedLineId || childIds.includes(normalizedLineId);
+				const hasMatchingStop = dataAllPatternsState?.some(pattern => pattern.some(patternGroup => patternGroup.path.some(waypoint => childIds.includes(normalizeAlertReferenceId(waypoint.stop_id)))));
 
-				if (reference.child_ids.includes(normalizedLineId)) {
-					return dataAllPatternsState?.some(pattern => pattern.some(patternGroup => patternGroup.path.some(waypoint => reference.child_ids.includes(waypoint.stop_id))));
-				}
-
-				return false;
+				return hasMatchingLine || hasMatchingStop;
 			});
 		});
 		setDataActiveAlertsState(activeAlerts);

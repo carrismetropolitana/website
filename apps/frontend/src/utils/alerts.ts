@@ -2,6 +2,12 @@ import type { HubAlert } from '@tmlmobilidade/types';
 
 /* * */
 
+export function normalizeAlertReferenceId(referenceId: null | number | string | undefined): string {
+	return String(referenceId ?? '').trim().replace(/^\[\d+\]/, '');
+}
+
+/* * */
+
 export function getCauseSeverityLevel(cause?: HubAlert['cause']): number {
 	switch (cause) {
 		case 'ABUSIVE_PARKING':
