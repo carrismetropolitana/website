@@ -70,15 +70,21 @@ export interface Config {
     campaigns: Campaign;
     articles: Article;
     'case-studies': CaseStudy;
+    'content-types': ContentType;
     media: Media;
     news: News;
     topics: Topic;
+    'special-series': SpecialSery;
+    partnerships: Partnership;
     users: User;
     'knowledge-base': KnowledgeBase;
     notes: Note;
     projects: Project;
     faqs: Faq;
     'faqs-navegante': FaqsNavegante;
+    videos: Video;
+    interviews: Interview;
+    reports: Report;
     'payload-kv': PayloadKv;
     'payload-locked-documents': PayloadLockedDocument;
     'payload-preferences': PayloadPreference;
@@ -89,15 +95,21 @@ export interface Config {
     campaigns: CampaignsSelect<false> | CampaignsSelect<true>;
     articles: ArticlesSelect<false> | ArticlesSelect<true>;
     'case-studies': CaseStudiesSelect<false> | CaseStudiesSelect<true>;
+    'content-types': ContentTypesSelect<false> | ContentTypesSelect<true>;
     media: MediaSelect<false> | MediaSelect<true>;
     news: NewsSelect<false> | NewsSelect<true>;
     topics: TopicsSelect<false> | TopicsSelect<true>;
+    'special-series': SpecialSeriesSelect<false> | SpecialSeriesSelect<true>;
+    partnerships: PartnershipsSelect<false> | PartnershipsSelect<true>;
     users: UsersSelect<false> | UsersSelect<true>;
     'knowledge-base': KnowledgeBaseSelect<false> | KnowledgeBaseSelect<true>;
     notes: NotesSelect<false> | NotesSelect<true>;
     projects: ProjectsSelect<false> | ProjectsSelect<true>;
     faqs: FaqsSelect<false> | FaqsSelect<true>;
     'faqs-navegante': FaqsNaveganteSelect<false> | FaqsNaveganteSelect<true>;
+    videos: VideosSelect<false> | VideosSelect<true>;
+    interviews: InterviewsSelect<false> | InterviewsSelect<true>;
+    reports: ReportsSelect<false> | ReportsSelect<true>;
     'payload-kv': PayloadKvSelect<false> | PayloadKvSelect<true>;
     'payload-locked-documents': PayloadLockedDocumentsSelect<false> | PayloadLockedDocumentsSelect<true>;
     'payload-preferences': PayloadPreferencesSelect<false> | PayloadPreferencesSelect<true>;
@@ -214,7 +226,15 @@ export interface Article {
    * Resumo curto do artigo que aparece na listagem e no início do artigo.
    */
   description: string;
-  type: 'tecnologia' | 'operacao' | 'sustentabilidade' | 'comunicacao';
+  type: 'comunicacao' | 'tecnologia' | 'operacao' | 'sustentabilidade';
+  /**
+   * Opcional. Use quando este conteúdo fizer parte de uma Série Especial.
+   */
+  specialSeries?: (string | null) | SpecialSery;
+  /**
+   * Opcional. Use quando este conteúdo fizer parte de uma parceria.
+   */
+  partnership?: (string | null) | Partnership;
   /**
    * Tempo estimado de leitura em minutos.
    */
@@ -224,10 +244,21 @@ export interface Article {
    * Legenda que aparece sobre a imagem de destaque.
    */
   heroImageCaption?: string | null;
-  /**
-   * Conteúdo do artigo em formato Markdown. Suporta títulos (##), listas, links, citações e muito mais.
-   */
-  content: string;
+  content: {
+    root: {
+      type: string;
+      children: {
+        type: any;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  };
   author: {
     picture?: (string | null) | Media;
     name: string;
@@ -258,13 +289,100 @@ export interface Article {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "special-series".
+ */
+export interface SpecialSery {
+  id: string;
+  title: string;
+  /**
+   * URL única para esta série. Será gerada automaticamente do título se deixado em branco.
+   */
+  slug: string;
+  description?: string | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "partnerships".
+ */
+export interface Partnership {
+  id: string;
+  title: string;
+  /**
+   * URL única para esta parceria. Será gerada automaticamente do título se deixado em branco.
+   */
+  slug: string;
+  description?: string | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "case-studies".
  */
 export interface CaseStudy {
   id: string;
   title: string;
-  amount: number;
-  is_enabled: boolean;
+  /**
+   * URL única para este caso de estudo. Será gerada automaticamente do título se deixado em branco.
+   */
+  slug: string;
+  /**
+   * Resumo curto do caso de estudo que aparece na listagem e no início da página.
+   */
+  description: string;
+  type: string | ContentType;
+  /**
+   * Tempo estimado de leitura em minutos.
+   */
+  readTime: number;
+  heroImage: string | Media;
+  /**
+   * Legenda que aparece sobre a imagem de destaque.
+   */
+  heroImageCaption?: string | null;
+  /**
+   * Conteúdo do caso de estudo em formato Markdown. Suporta títulos (##), listas, links, citações e muito mais.
+   */
+  content: string;
+  author: {
+    picture?: (string | null) | Media;
+    name: string;
+    role: string;
+    /**
+     * Breve descrição sobre o autor.
+     */
+    bio?: string | null;
+    expertAuthor: boolean;
+    social?: {
+      linkedin?: string | null;
+      twitter?: string | null;
+      email?: string | null;
+    };
+  };
+  publishDate: string;
+  status: 'draft' | 'published';
+  seo?: {
+    metaTitle?: string | null;
+    metaDescription?: string | null;
+    ogImage?: (string | null) | Media;
+  };
+  publishedAt: string;
+  updatedAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "content-types".
+ */
+export interface ContentType {
+  id: string;
+  title: string;
+  /**
+   * URL única para este tipo. Será gerada automaticamente do título se deixado em branco.
+   */
+  slug: string;
+  description?: string | null;
   updatedAt: string;
   createdAt: string;
 }
@@ -490,6 +608,256 @@ export interface FaqsNavegante {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "videos".
+ */
+export interface Video {
+  id: string;
+  title: string;
+  /**
+   * URL única para este vídeo. Será gerada automaticamente a partir do título se deixado em branco.
+   */
+  slug: string;
+  /**
+   * Resumo curto do vídeo que poderá ser enviado para leitores de tela, ou seções onde uma decrição for necessária.
+   */
+  description?: string | null;
+  /**
+   * Legenda que aparecerá em relação a thumbnail, será utilizada para acessibilidade e para leitores de tela.
+   */
+  thumbnailCaptions?: string | null;
+  author: {
+    picture?: (string | null) | Media;
+    name: string;
+    role: string;
+    /**
+     * Breve descrição sobre o autor.
+     */
+    bio?: string | null;
+    /**
+     * Se este vídeo foi produzido por um especialista, marque esta opção para permitir filtros e destaques de conteúdos especializados.
+     */
+    expertAuthor: boolean;
+    social?: {
+      linkedin?: string | null;
+      twitter?: string | null;
+      email?: string | null;
+    };
+  };
+  type: 'comunicacao' | 'tecnologia' | 'operacao' | 'sustentabilidade';
+  /**
+   * Opcional. Use quando este conteúdo fizer parte de uma Série Especial.
+   */
+  specialSeries?: (string | null) | SpecialSery;
+  /**
+   * Opcional. Use quando este conteúdo fizer parte de uma parceria.
+   */
+  partnership?: (string | null) | Partnership;
+  /**
+   * Tempo estimado de visualização em minutos.
+   */
+  readTime: number;
+  video: string | Media;
+  /**
+   * Conteúdo do vídeo em formato Markdown. Exemplo:
+   * ## Descrição do Vídeo
+   *
+   * Texto introdutório...
+   *
+   * ### Destaques do Vídeo
+   * - Ponto 1
+   * - Ponto 2
+   */
+  content: string;
+  /**
+   * Capítulos apresentados no leitor de vídeo.
+   */
+  chapters?:
+    | {
+        /**
+         * Formato MM:SS ou HH:MM:SS. Ex.: 02:15 ou 01:02:15.
+         */
+        startTime: string;
+        title: string;
+        id?: string | null;
+      }[]
+    | null;
+  publishDate: string;
+  thumbnail: string | Media;
+  status: 'draft' | 'published';
+  seo?: {
+    metaTitle?: string | null;
+    metaDescription?: string | null;
+    ogImage?: (string | null) | Media;
+  };
+  publishedAt: string;
+  updatedAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "interviews".
+ */
+export interface Interview {
+  id: string;
+  title: string;
+  /**
+   * URL única para esta entrevista. Será gerada automaticamente do título se deixado em branco.
+   */
+  slug: string;
+  /**
+   * Resumo curto da entrevista que aparece na listagem e no início da página.
+   */
+  description: string;
+  contentFormat: 'transcript' | 'audio';
+  type: string | ContentType;
+  /**
+   * Opcional. Use quando este conteúdo fizer parte de uma Série Especial.
+   */
+  specialSeries?: (string | null) | SpecialSery;
+  /**
+   * Opcional. Use quando este conteúdo fizer parte de uma parceria.
+   */
+  partnership?: (string | null) | Partnership;
+  guest: {
+    picture?: (string | null) | Media;
+    name: string;
+    role: string;
+  };
+  host: {
+    picture?: (string | null) | Media;
+    name: string;
+    role: string;
+    /**
+     * Breve descrição sobre o host.
+     */
+    bio?: string | null;
+    social?: {
+      linkedin?: string | null;
+      twitter?: string | null;
+      email?: string | null;
+    };
+  };
+  /**
+   * Ficheiro de áudio da entrevista (upload direto).
+   */
+  audioFile?: (string | null) | Media;
+  /**
+   * URL externa do ficheiro de áudio. Usado se não houver upload direto.
+   */
+  audioUrl?: string | null;
+  /**
+   * Duração do áudio em segundos.
+   */
+  audioDuration?: number | null;
+  /**
+   * Tempo estimado de leitura em minutos.
+   */
+  readTime?: number | null;
+  /**
+   * Transcrição da entrevista em formato Markdown. Suporta títulos (##), listas, links, citações e muito mais.
+   */
+  transcript?: string | null;
+  /**
+   * Ficheiro PDF com a transcrição completa da entrevista.
+   */
+  transcriptPdf?: (string | null) | Media;
+  publishDate: string;
+  status: 'draft' | 'published';
+  seo?: {
+    metaTitle?: string | null;
+    metaDescription?: string | null;
+    ogImage?: (string | null) | Media;
+  };
+  publishedAt: string;
+  updatedAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "reports".
+ */
+export interface Report {
+  id: string;
+  title: string;
+  /**
+   * URL única para este relatório. Será gerada automaticamente do título se deixado em branco.
+   */
+  slug: string;
+  /**
+   * Resumo curto do relatório que aparece na listagem e no início da página.
+   */
+  description: string;
+  type: 'tecnologia' | 'operacao' | 'sustentabilidade' | 'comunicacao';
+  /**
+   * Tempo estimado de leitura em minutos.
+   */
+  readTime: number;
+  heroImage: string | Media;
+  /**
+   * Legenda que aparece sobre a imagem de destaque.
+   */
+  heroImageCaption?: string | null;
+  /**
+   * Ficheiro PDF disponível para download na página do relatório.
+   */
+  reportPdf: string | Media;
+  /**
+   * Ano ou edição destacada no bloco principal do relatório.
+   */
+  reportYear: number;
+  publicationDetails: {
+    author: string;
+    category: string;
+    period: string;
+    language: string;
+  };
+  executiveSummary: {
+    title: string;
+    description: string;
+  };
+  /**
+   * Bloco de contexto ou objetivos destacado abaixo do resumo executivo.
+   */
+  featuredSummary: {
+    title: string;
+    /**
+     * Conteúdo em Markdown. Suporta títulos, listas, links, citações e outros elementos renderizados no frontend.
+     */
+    description: string;
+  };
+  highlights?:
+    | {
+        value: string;
+        title: string;
+        description?: string | null;
+        id?: string | null;
+      }[]
+    | null;
+  keyFindings?:
+    | {
+        value: string;
+        label: string;
+        /**
+         * A cor do ícone é herdada automaticamente do tipo do relatório.
+         */
+        icon: 'users' | 'route' | 'fleet' | 'energy' | 'growth' | 'sustainability' | 'communication' | 'technology';
+        id?: string | null;
+      }[]
+    | null;
+  /**
+   * Metodologia do relatório em formato Markdown.
+   */
+  methodology?: string | null;
+  publishDate: string;
+  status: 'draft' | 'published';
+  seo?: {
+    metaTitle?: string | null;
+    metaDescription?: string | null;
+    ogImage?: (string | null) | Media;
+  };
+  publishedAt: string;
+  updatedAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "payload-kv".
  */
 export interface PayloadKv {
@@ -525,6 +893,10 @@ export interface PayloadLockedDocument {
         value: string | CaseStudy;
       } | null)
     | ({
+        relationTo: 'content-types';
+        value: string | ContentType;
+      } | null)
+    | ({
         relationTo: 'media';
         value: string | Media;
       } | null)
@@ -535,6 +907,14 @@ export interface PayloadLockedDocument {
     | ({
         relationTo: 'topics';
         value: string | Topic;
+      } | null)
+    | ({
+        relationTo: 'special-series';
+        value: string | SpecialSery;
+      } | null)
+    | ({
+        relationTo: 'partnerships';
+        value: string | Partnership;
       } | null)
     | ({
         relationTo: 'users';
@@ -559,6 +939,18 @@ export interface PayloadLockedDocument {
     | ({
         relationTo: 'faqs-navegante';
         value: string | FaqsNavegante;
+      } | null)
+    | ({
+        relationTo: 'videos';
+        value: string | Video;
+      } | null)
+    | ({
+        relationTo: 'interviews';
+        value: string | Interview;
+      } | null)
+    | ({
+        relationTo: 'reports';
+        value: string | Report;
       } | null);
   globalSlug?: string | null;
   user: {
@@ -628,6 +1020,8 @@ export interface ArticlesSelect<T extends boolean = true> {
   slug?: T;
   description?: T;
   type?: T;
+  specialSeries?: T;
+  partnership?: T;
   readTime?: T;
   heroImage?: T;
   heroImageCaption?: T;
@@ -666,8 +1060,49 @@ export interface ArticlesSelect<T extends boolean = true> {
  */
 export interface CaseStudiesSelect<T extends boolean = true> {
   title?: T;
-  amount?: T;
-  is_enabled?: T;
+  slug?: T;
+  description?: T;
+  type?: T;
+  readTime?: T;
+  heroImage?: T;
+  heroImageCaption?: T;
+  content?: T;
+  author?:
+    | T
+    | {
+        picture?: T;
+        name?: T;
+        role?: T;
+        bio?: T;
+        expertAuthor?: T;
+        social?:
+          | T
+          | {
+              linkedin?: T;
+              twitter?: T;
+              email?: T;
+            };
+      };
+  publishDate?: T;
+  status?: T;
+  seo?:
+    | T
+    | {
+        metaTitle?: T;
+        metaDescription?: T;
+        ogImage?: T;
+      };
+  publishedAt?: T;
+  updatedAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "content-types_select".
+ */
+export interface ContentTypesSelect<T extends boolean = true> {
+  title?: T;
+  slug?: T;
+  description?: T;
   updatedAt?: T;
   createdAt?: T;
 }
@@ -713,6 +1148,28 @@ export interface NewsSelect<T extends boolean = true> {
  */
 export interface TopicsSelect<T extends boolean = true> {
   title?: T;
+  description?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "special-series_select".
+ */
+export interface SpecialSeriesSelect<T extends boolean = true> {
+  title?: T;
+  slug?: T;
+  description?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "partnerships_select".
+ */
+export interface PartnershipsSelect<T extends boolean = true> {
+  title?: T;
+  slug?: T;
   description?: T;
   updatedAt?: T;
   createdAt?: T;
@@ -842,6 +1299,172 @@ export interface FaqsNaveganteSelect<T extends boolean = true> {
   publishedAt?: T;
   updatedAt?: T;
   createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "videos_select".
+ */
+export interface VideosSelect<T extends boolean = true> {
+  title?: T;
+  slug?: T;
+  description?: T;
+  thumbnailCaptions?: T;
+  author?:
+    | T
+    | {
+        picture?: T;
+        name?: T;
+        role?: T;
+        bio?: T;
+        expertAuthor?: T;
+        social?:
+          | T
+          | {
+              linkedin?: T;
+              twitter?: T;
+              email?: T;
+            };
+      };
+  type?: T;
+  specialSeries?: T;
+  partnership?: T;
+  readTime?: T;
+  video?: T;
+  content?: T;
+  chapters?:
+    | T
+    | {
+        startTime?: T;
+        title?: T;
+        id?: T;
+      };
+  publishDate?: T;
+  thumbnail?: T;
+  status?: T;
+  seo?:
+    | T
+    | {
+        metaTitle?: T;
+        metaDescription?: T;
+        ogImage?: T;
+      };
+  publishedAt?: T;
+  updatedAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "interviews_select".
+ */
+export interface InterviewsSelect<T extends boolean = true> {
+  title?: T;
+  slug?: T;
+  description?: T;
+  contentFormat?: T;
+  type?: T;
+  specialSeries?: T;
+  partnership?: T;
+  guest?:
+    | T
+    | {
+        picture?: T;
+        name?: T;
+        role?: T;
+      };
+  host?:
+    | T
+    | {
+        picture?: T;
+        name?: T;
+        role?: T;
+        bio?: T;
+        social?:
+          | T
+          | {
+              linkedin?: T;
+              twitter?: T;
+              email?: T;
+            };
+      };
+  audioFile?: T;
+  audioUrl?: T;
+  audioDuration?: T;
+  readTime?: T;
+  transcript?: T;
+  transcriptPdf?: T;
+  publishDate?: T;
+  status?: T;
+  seo?:
+    | T
+    | {
+        metaTitle?: T;
+        metaDescription?: T;
+        ogImage?: T;
+      };
+  publishedAt?: T;
+  updatedAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "reports_select".
+ */
+export interface ReportsSelect<T extends boolean = true> {
+  title?: T;
+  slug?: T;
+  description?: T;
+  type?: T;
+  readTime?: T;
+  heroImage?: T;
+  heroImageCaption?: T;
+  reportPdf?: T;
+  reportYear?: T;
+  publicationDetails?:
+    | T
+    | {
+        author?: T;
+        category?: T;
+        period?: T;
+        language?: T;
+      };
+  executiveSummary?:
+    | T
+    | {
+        title?: T;
+        description?: T;
+      };
+  featuredSummary?:
+    | T
+    | {
+        title?: T;
+        description?: T;
+      };
+  highlights?:
+    | T
+    | {
+        value?: T;
+        title?: T;
+        description?: T;
+        id?: T;
+      };
+  keyFindings?:
+    | T
+    | {
+        value?: T;
+        label?: T;
+        icon?: T;
+        id?: T;
+      };
+  methodology?: T;
+  publishDate?: T;
+  status?: T;
+  seo?:
+    | T
+    | {
+        metaTitle?: T;
+        metaDescription?: T;
+        ogImage?: T;
+      };
+  publishedAt?: T;
+  updatedAt?: T;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema

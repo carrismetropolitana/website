@@ -2,7 +2,10 @@
 
 import type { CollectionConfig } from 'payload';
 
+import { partnershipField } from '@/fields/partnership';
 import { publishedAtField } from '@/fields/published-at';
+import { specialSeriesField } from '@/fields/special-series';
+import { subjectField } from '@/fields/subject';
 import { updatedAtField } from '@/fields/updated-at';
 import { slugify } from '@/utils/slugify';
 
@@ -55,33 +58,9 @@ export const Articles: CollectionConfig = {
 			required: true,
 			type: 'textarea',
 		},
-		{
-			admin: {
-				position: 'sidebar',
-			},
-			label: 'Tipo',
-			name: 'type',
-			options: [
-				{
-					label: 'Tecnologia',
-					value: 'tecnologia',
-				},
-				{
-					label: 'Operação',
-					value: 'operacao',
-				},
-				{
-					label: 'Sustentabilidade',
-					value: 'sustentabilidade',
-				},
-				{
-					label: 'Comunicação',
-					value: 'comunicacao',
-				},
-			],
-			required: true,
-			type: 'select',
-		},
+		subjectField,
+		specialSeriesField,
+		partnershipField,
 		{
 			admin: {
 				description: 'Tempo estimado de leitura em minutos.',
@@ -114,17 +93,22 @@ export const Articles: CollectionConfig = {
 			type: 'text',
 		},
 		{
-			admin: {
-				description:
-					'Conteúdo do artigo em formato Markdown. Suporta títulos (##), listas, links, citações e muito mais.',
-			},
-			label: 'Conteúdo (Markdown)',
+			label: 'Conteúdo',
 			name: 'content',
 			required: true,
-			type: 'textarea',
+			type: 'richText',
 		},
 		{
 			fields: [
+				{
+					admin: {
+						components: {
+							Field: '@/components/ArticleAuthorQuickFill#ArticleAuthorQuickFill',
+						},
+					},
+					name: 'authorQuickFill',
+					type: 'ui',
+				},
 				{
 					label: 'Foto',
 					name: 'picture',

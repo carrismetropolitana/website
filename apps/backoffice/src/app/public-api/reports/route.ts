@@ -12,30 +12,24 @@ export const GET = async (request: Request) => {
 
 	const { searchParams } = new URL(request.url);
 	const type = searchParams.get('type');
-	const specialSeries = searchParams.get('special-series');
-	const partnership = searchParams.get('partnership');
 	const limit = Number(searchParams.get('limit')) || 10;
 	const page = Number(searchParams.get('page')) || 1;
-	const expertArticle = JSON.parse(searchParams.get('expert-article') ?? 'false');
 
 	const payload = await getPayload({ config: payloadConfig });
 
 	//
-	// B. Build the where clause, optionally filtering by type (mapped to the type field).
+	// B. Build the where clause, optionally filtering by type.
 
 	const whereClause: Where = {
 		status: { equals: 'published' },
 		...(type && { type: { in: type } }),
-		...(specialSeries && { specialSeries: { equals: specialSeries } }),
-		...(partnership && { partnership: { equals: partnership } }),
-		...(expertArticle && { 'author.expertAuthor': { equals: expertArticle } }),
 	};
 
 	//
-	// C. Retrieve published articles from the database.
+	// C. Retrieve published reports from the database.
 
-	const foundArticles = await payload.find({
-		collection: 'articles',
+	const foundReports = await payload.find({
+		collection: 'reports',
 		depth: 1,
 		limit,
 		page,
@@ -44,9 +38,9 @@ export const GET = async (request: Request) => {
 	});
 
 	//
-	// Return articles as a JSON response.
+	// Return reports as a JSON response.
 
-	return Response.json(foundArticles, {
+	return Response.json(foundReports, {
 		headers: getPublicHeaders(60),
 	});
 

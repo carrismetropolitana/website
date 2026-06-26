@@ -1,5 +1,6 @@
 import payloadConfig from '@/payload-config';
 import { getPublicHeaders } from '@/utils/get-public-headers';
+import { hydratePublicInterviewRelations } from '@/utils/hydrate-public-content-relations';
 import { getPayload, type Where } from 'payload';
 
 /* * */
@@ -16,37 +17,40 @@ export const GET = async (request: Request) => {
 	const partnership = searchParams.get('partnership');
 	const limit = Number(searchParams.get('limit')) || 10;
 	const page = Number(searchParams.get('page')) || 1;
-	const expertArticle = JSON.parse(searchParams.get('expert-article') ?? 'false');
 
 	const payload = await getPayload({ config: payloadConfig });
 
 	//
-	// B. Build the where clause, optionally filtering by type (mapped to the type field).
+	// B. Build the where clause, optionally filtering by type.
 
 	const whereClause: Where = {
 		status: { equals: 'published' },
-		...(type && { type: { in: type } }),
+		...(type && { type: { equals: type } }),
 		...(specialSeries && { specialSeries: { equals: specialSeries } }),
 		...(partnership && { partnership: { equals: partnership } }),
-		...(expertArticle && { 'author.expertAuthor': { equals: expertArticle } }),
 	};
 
 	//
-	// C. Retrieve published articles from the database.
+	// C. Retrieve published interviews from the database.
 
-	const foundArticles = await payload.find({
-		collection: 'articles',
-		depth: 1,
+	const foundInterviews = await payload.find({
+		collection: 'interviews',
+		depth: 0,
 		limit,
 		page,
 		sort: '-publishDate',
 		where: whereClause,
 	});
 
-	//
-	// Return articles as a JSON response.
+	const response = {
+		...foundInterviews,
+		docs: await Promise.all(foundInterviews.docs.map(interview => hydratePublicInterviewRelations(payload, interview))),
+	};
 
-	return Response.json(foundArticles, {
+	//
+	// Return interviews as a JSON response.
+
+	return Response.json(response, {
 		headers: getPublicHeaders(60),
 	});
 

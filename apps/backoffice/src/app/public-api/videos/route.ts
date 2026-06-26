@@ -16,7 +16,7 @@ export const GET = async (request: Request) => {
 	const partnership = searchParams.get('partnership');
 	const limit = Number(searchParams.get('limit')) || 10;
 	const page = Number(searchParams.get('page')) || 1;
-	const expertArticle = JSON.parse(searchParams.get('expert-article') ?? 'false');
+	const expertAuthor = JSON.parse(searchParams.get('expert-author') ?? 'false');
 
 	const payload = await getPayload({ config: payloadConfig });
 
@@ -28,14 +28,14 @@ export const GET = async (request: Request) => {
 		...(type && { type: { in: type } }),
 		...(specialSeries && { specialSeries: { equals: specialSeries } }),
 		...(partnership && { partnership: { equals: partnership } }),
-		...(expertArticle && { 'author.expertAuthor': { equals: expertArticle } }),
+		...(expertAuthor && { 'author.expertAuthor': { equals: expertAuthor } }),
 	};
 
 	//
-	// C. Retrieve published articles from the database.
+	// C. Retrieve published videos from the database.
 
-	const foundArticles = await payload.find({
-		collection: 'articles',
+	const foundVideos = await payload.find({
+		collection: 'videos',
 		depth: 1,
 		limit,
 		page,
@@ -44,9 +44,9 @@ export const GET = async (request: Request) => {
 	});
 
 	//
-	// Return articles as a JSON response.
+	// Return videos as a JSON response.
 
-	return Response.json(foundArticles, {
+	return Response.json(foundVideos, {
 		headers: getPublicHeaders(60),
 	});
 
