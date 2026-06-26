@@ -7,7 +7,6 @@ import { useLinesContext } from '@/contexts/Lines.context';
 import { useOperationalDateContext } from '@/contexts/OperationalDate.context';
 import { useProfileContext } from '@/contexts/Profile.context';
 import { useStopsContext } from '@/contexts/Stops.context';
-import { type SimplifiedAlert } from '@/types/alerts.types';
 import { type ServiceMetrics } from '@carrismetropolitana/api-types/metrics';
 import { type Line, type Pattern, type Route, type Shape, type Waypoint } from '@carrismetropolitana/api-types/network';
 import { getPublicVariable } from '@carrismetropolitana/website-shared-settings';
