@@ -209,10 +209,10 @@ export const LinesDetailContextProvider = ({ children, lineId }) => {
 	}, [dataAllPatternsState, operationalDateContext.data.selected_date]);
 
 	useEffect(() => {
-		if (!alertsContext.data.alerts) return;
+		if (!alertsContext.data.alerts || !operationalDateContext.data.selected_date) return;
 
 		const activeAlerts = alertsContext.data.alerts.filter((alertData) => {
-			const isActive = (alertData.active_period_end_date ? new Date(alertData.active_period_end_date).getTime() >= new Date().getTime() : true);
+			const isActive = alertData.active_period_end_date ? alertData.active_period_end_date >= operationalDateContext.data.selected_date.set({ hour: 0, millisecond: 0, minute: 0, second: 0 }).js_date.getTime() : true;
 
 			if (!isActive) return false;
 
@@ -236,7 +236,7 @@ export const LinesDetailContextProvider = ({ children, lineId }) => {
 			});
 		});
 		setDataActiveAlertsState(activeAlerts);
-	}, [alertsContext.data.alerts, lineId, dataLineState, dataAllPatternsState]);
+	}, [alertsContext.data.alerts, lineId, dataLineState, dataAllPatternsState, operationalDateContext.data.selected_date]);
 	//
 	// D. Handle actions
 

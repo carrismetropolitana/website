@@ -6,8 +6,6 @@ export function normalizeAlertReferenceId(referenceId: null | number | string | 
 	return String(referenceId ?? '').trim().replace(/^\[\d+\]/, '');
 }
 
-/* * */
-
 export function getCauseSeverityLevel(cause?: HubAlert['cause']): number {
 	switch (cause) {
 		case 'ABUSIVE_PARKING':

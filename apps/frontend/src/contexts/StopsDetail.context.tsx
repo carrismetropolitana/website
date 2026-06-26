@@ -361,18 +361,18 @@ export const StopsDetailContextProvider = ({ children, stopId }: { children: Rea
 	}, [dataPatternsState, operationalDateContext.data.selected_date]);
 
 	useEffect(() => {
-		if (!dataStopState) return;
+		if (!dataStopState || !operationalDateContext.data.selected_date) return;
 
 		const stopAlerts = alertsContext.actions.getAlertsByStopId(dataActiveStopIdState);
 		const lineAlerts = dataStopState.line_ids.flatMap(lineId => alertsContext.actions.getAlertsByLineId(lineId));
 		const activeAlerts = [...stopAlerts, ...lineAlerts].filter((alertData, index, allAlerts) => {
-			const isActive = alertData.active_period_end_date ? alertData.active_period_end_date >= Date.now() : true;
+			const isActive = alertData.active_period_end_date ? alertData.active_period_end_date >= operationalDateContext.data.selected_date.set({ hour: 0, millisecond: 0, minute: 0, second: 0 }).js_date.getTime() : true;
 			const isUnique = allAlerts.findIndex(item => item._id === alertData._id) === index;
 			return isActive && isUnique;
 		});
 
 		setDataActiveAlertsState(activeAlerts);
-	}, [alertsContext.data.alerts, dataStopState, dataActiveStopIdState]);
+	}, [alertsContext.data.alerts, dataStopState, dataActiveStopIdState, operationalDateContext.data.selected_date]);
 
 	//
 	// D. Handle actions
