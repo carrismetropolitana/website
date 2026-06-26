@@ -68,14 +68,3 @@
 	color: var(--color-status-danger-text);
 	text-decoration: line-through;
 }
-
-/* * */
-/* DEBUG GO ARRIVAL */
-
-.debugGo {
-	font-size: 16px;
-	font-weight: var(--font-weight-bold);
-	line-height: 1.1;
-	color: var(--color-brand-go);
-	text-wrap: nowrap;
-}
