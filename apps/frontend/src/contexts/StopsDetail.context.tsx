@@ -8,7 +8,6 @@ import { useLinesContext } from '@/contexts/Lines.context';
 import { useOperationalDateContext } from '@/contexts/OperationalDate.context';
 import { useProfileContext } from '@/contexts/Profile.context';
 import { useStopsContext } from '@/contexts/Stops.context';
-import { type SimplifiedAlert } from '@/types/alerts.types';
 import { type Arrival } from '@/types/stops.types';
 import { type Line, type Pattern, type Shape, type Stop } from '@carrismetropolitana/api-types/network';
 import { getPublicVariable } from '@carrismetropolitana/website-shared-settings';
@@ -361,19 +360,19 @@ export const StopsDetailContextProvider = ({ children, stopId }: { children: Rea
 		setDataValidPatternsState(activePatterns);
 	}, [dataPatternsState, operationalDateContext.data.selected_date]);
 
-	// useEffect(() => {
-	// 	if (!alertsContext.data.alerts) return;
-	// 	const activeAlerts = alertsContext.data.alerts.filter((alertData) => {
-	// 		return alertData.references.some((reference) => {
-	// 			if (!reference.parent_id && !reference.route_id) return false;
-	// 			const hasMatchingStop = reference.parent_id === dataActiveStopIdState;
-	// 			const hasMatchingRoute = dataStopState?.route_ids.includes(reference.child_ids.includes(dataActiveStopIdState));
-	// 			const isActive = alertData.active_period_end_date ? Dates.fromUnixTimestamp(alertData.active_period_end_date) >= new Date() : true;
-	// 			return (hasMatchingStop || hasMatchingRoute) && isActive;
-	// 		});
-	// 	});
-	// 	setDataActiveAlertsState(activeAlerts);
-	// }, [alertsContext.data.alerts, dataStopState, dataActiveStopIdState]);
+	useEffect(() => {
+		if (!dataStopState) return;
+
+		const stopAlerts = alertsContext.actions.getAlertsByStopId(dataActiveStopIdState);
+		const lineAlerts = dataStopState.line_ids.flatMap(lineId => alertsContext.actions.getAlertsByLineId(lineId));
+		const activeAlerts = [...stopAlerts, ...lineAlerts].filter((alertData, index, allAlerts) => {
+			const isActive = alertData.active_period_end_date ? alertData.active_period_end_date >= Date.now() : true;
+			const isUnique = allAlerts.findIndex(item => item._id === alertData._id) === index;
+			return isActive && isUnique;
+		});
+
+		setDataActiveAlertsState(activeAlerts);
+	}, [alertsContext.data.alerts, dataStopState, dataActiveStopIdState]);
 
 	//
 	// D. Handle actions
