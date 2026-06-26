@@ -259,6 +259,20 @@ const nextConfig: NextConfig = {
 	},
 	async rewrites() {
 		return [
+			{
+				source: '/quiz-arrabida365',
+				destination: '/arrabida365/quiz',
+			},
+
+			{
+				source: '/quiz-arrabida365/resultado/:letter',
+				destination: '/arrabida365/quiz/resultado/:letter',
+			},
+
+			{
+				source: '/quiz-arrabida365/resultado/:letter/opengraph-image',
+				destination: '/arrabida365/quiz/resultado/:letter/opengraph-image',
+			},
 
 			{
 				destination: '/campaigns/:slug',
