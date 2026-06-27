@@ -24,6 +24,7 @@ export const Articles: CollectionConfig = {
 
 	admin: {
 		defaultColumns: ['title', 'status', 'type', 'publishDate'],
+		group: 'CICM',
 		useAsTitle: 'title',
 	},
 
