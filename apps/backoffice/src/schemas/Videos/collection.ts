@@ -26,6 +26,7 @@ export const Videos: CollectionConfig = {
 
 	admin: {
 		defaultColumns: ['title', 'status', 'type', 'publishDate'],
+		group: 'CICM',
 		useAsTitle: 'title',
 	},
 

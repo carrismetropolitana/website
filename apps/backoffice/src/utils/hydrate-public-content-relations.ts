@@ -70,7 +70,7 @@ export async function hydratePublicInterviewRelations(payload: Payload, intervie
 	const [type, guestPicture, hostPicture, audioFile, transcriptPdf, seoOgImage] = await Promise.all([
 		hydrateContentType(payload, interview.type),
 		hydrateMedia(payload, interview.guest.picture),
-		hydrateMedia(payload, interview.host.picture),
+		hydrateMedia(payload, interview.host?.picture),
 		hydrateMedia(payload, interview.audioFile),
 		hydrateMedia(payload, interview.transcriptPdf),
 		hydrateMedia(payload, interview.seo?.ogImage),
@@ -83,10 +83,12 @@ export async function hydratePublicInterviewRelations(payload: Payload, intervie
 			...interview.guest,
 			picture: guestPicture,
 		},
-		host: {
-			...interview.host,
-			picture: hostPicture,
-		},
+		host: interview.host
+			? {
+				...interview.host,
+				picture: hostPicture,
+			}
+			: interview.host,
 		seo: interview.seo
 			? {
 				...interview.seo,

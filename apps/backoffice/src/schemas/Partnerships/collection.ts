@@ -16,6 +16,7 @@ export const Partnerships: CollectionConfig = {
 
 	admin: {
 		defaultColumns: ['title', 'slug', 'updatedAt'],
+		group: 'CICM',
 		useAsTitle: 'title',
 	},
 

@@ -30,6 +30,7 @@ export const CaseStudies: CollectionConfig = {
 
 	admin: {
 		defaultColumns: ['title', 'status', 'type', 'publishDate'],
+		group: 'CICM',
 		useAsTitle: 'title',
 	},
 
@@ -97,14 +98,10 @@ export const CaseStudies: CollectionConfig = {
 			type: 'text',
 		},
 		{
-			admin: {
-				description:
-					'Conteúdo do caso de estudo em formato Markdown. Suporta títulos (##), listas, links, citações e muito mais.',
-			},
-			label: 'Conteúdo (Markdown)',
+			label: 'Conteúdo',
 			name: 'content',
 			required: true,
-			type: 'textarea',
+			type: 'richText',
 		},
 		{
 			admin: {

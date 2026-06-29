@@ -77,6 +77,7 @@ export const Reports: CollectionConfig = {
 
 	admin: {
 		defaultColumns: ['title', 'status', 'type', 'publishDate'],
+		group: 'CICM',
 		useAsTitle: 'title',
 	},
 

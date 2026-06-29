@@ -32,6 +32,7 @@ export const Interviews: CollectionConfig = {
 
 	admin: {
 		defaultColumns: ['title', 'status', 'type', 'publishDate'],
+		group: 'CICM',
 		useAsTitle: 'title',
 	},
 
@@ -124,13 +125,11 @@ export const Interviews: CollectionConfig = {
 				{
 					label: 'Nome',
 					name: 'name',
-					required: true,
 					type: 'text',
 				},
 				{
 					label: 'Cargo/Função',
 					name: 'role',
-					required: true,
 					type: 'text',
 				},
 				{
@@ -237,12 +236,10 @@ export const Interviews: CollectionConfig = {
 		{
 			admin: {
 				condition: (_, siblingData) => siblingData?.contentFormat === 'transcript',
-				description:
-					'Transcrição da entrevista em formato Markdown. Suporta títulos (##), listas, links, citações e muito mais.',
 			},
-			label: 'Transcrição (Markdown)',
+			label: 'Transcrição',
 			name: 'transcript',
-			type: 'textarea',
+			type: 'richText',
 			validate: (value, { data }) => {
 				const branchData = data as InterviewBranchData;
 				if (branchData.contentFormat !== 'transcript') return true;

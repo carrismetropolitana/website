@@ -342,10 +342,21 @@ export interface CaseStudy {
    * Legenda que aparece sobre a imagem de destaque.
    */
   heroImageCaption?: string | null;
-  /**
-   * Conteúdo do caso de estudo em formato Markdown. Suporta títulos (##), listas, links, citações e muito mais.
-   */
-  content: string;
+  content: {
+    root: {
+      type: string;
+      children: {
+        type: any;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  };
   author: {
     picture?: (string | null) | Media;
     name: string;
@@ -722,10 +733,10 @@ export interface Interview {
     name: string;
     role: string;
   };
-  host: {
+  host?: {
     picture?: (string | null) | Media;
-    name: string;
-    role: string;
+    name?: string | null;
+    role?: string | null;
     /**
      * Breve descrição sobre o host.
      */
@@ -752,10 +763,21 @@ export interface Interview {
    * Tempo estimado de leitura em minutos.
    */
   readTime?: number | null;
-  /**
-   * Transcrição da entrevista em formato Markdown. Suporta títulos (##), listas, links, citações e muito mais.
-   */
-  transcript?: string | null;
+  transcript?: {
+    root: {
+      type: string;
+      children: {
+        type: any;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  } | null;
   /**
    * Ficheiro PDF com a transcrição completa da entrevista.
    */
