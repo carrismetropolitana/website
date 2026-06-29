@@ -2,7 +2,7 @@
 
 /* * */
 
-import { AlertActivePeriodEnd, AlertActivePeriodStart } from '@/components/alerts/AlertActivePeriod';
+import { AlertActivePeriodStart } from '@/components/alerts/AlertActivePeriod';
 import { AlertEffectIcon } from '@/components/alerts/AlertCauseEffectIcon';
 import AlertsListItemImageThumbnail from '@/components/alerts/AlertsListItemImageThumbnail';
 import Button from '@/components/common/Button';
@@ -38,7 +38,6 @@ export function AlertListItem({ alertId }: Props) {
 	// B. Transform data
 
 	const alertData = alertsContext.actions.getAlertById(alertId);
-
 	const alertHref = environmentContext.actions.getNormalizedHref(`/alerts/${alertId}`);
 
 	//
@@ -57,7 +56,6 @@ export function AlertListItem({ alertId }: Props) {
 			<Accordion.Panel classNames={{ content: styles.contentWrapper }}>
 				<div className={styles.infoBar}>
 					<AlertActivePeriodStart date={new Date(alertData?.active_period_start_date)} size="sm" />
-					{/* <AlertActivePeriodEnd date={simplifiedAlertData?.end_date} size="sm" /> */}
 				</div>
 				<p className={styles.description}>{alertData?.description}</p>
 				{alertData?.image_url && <AlertsListItemImageThumbnail alertId={alertData?._id || ''} alertTitle={alertData?.title || ''} alt={alertData?.title} href={`/alerts/${alertId}`} src={alertData.image_url} />}

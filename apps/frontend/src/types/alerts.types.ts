@@ -1,7 +1,7 @@
 /* * */
 
 import { EntitySelector, TimeRange, TranslatedImage, TranslatedString } from '@/types/gtfsrt.types.js';
-import { HubAlert } from '@tmlmobilidade/types';
+import { type HubAlert } from '@tmlmobilidade/types';
 
 /* * */
 
