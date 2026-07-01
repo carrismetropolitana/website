@@ -2,7 +2,7 @@
 
 import { AlertsCarouselSlide } from '@/components/common/AlertsCarouselSlide';
 import Carousel from '@/components/common/Carousel';
-import { type HubAlert } from '@tmlmobilidade/types';
+import { type HubAlert } from '@tmlmobilidade/go-types-public-info';
 
 /* * */
 

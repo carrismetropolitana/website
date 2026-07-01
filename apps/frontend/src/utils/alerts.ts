@@ -1,4 +1,4 @@
-import type { HubAlert } from '@tmlmobilidade/types';
+import type { HubAlert } from '@tmlmobilidade/go-types-public-info';
 
 /* * */
 
