@@ -7,10 +7,11 @@ import { useLinesContext } from '@/contexts/Lines.context';
 import { useOperationalDateContext } from '@/contexts/OperationalDate.context';
 import { useProfileContext } from '@/contexts/Profile.context';
 import { useStopsContext } from '@/contexts/Stops.context';
-import { type SimplifiedAlert } from '@/types/alerts.types';
+import { normalizeAlertReferenceId } from '@/utils/alerts';
 import { type ServiceMetrics } from '@carrismetropolitana/api-types/metrics';
 import { type Line, type Pattern, type Route, type Shape, type Waypoint } from '@carrismetropolitana/api-types/network';
 import { getPublicVariable } from '@carrismetropolitana/website-shared-settings';
+import { type HubAlert } from '@tmlmobilidade/go-types-public-info';
 import { useQueryState } from 'nuqs';
 import { createContext, useContext, useEffect, useState } from 'react';
 
@@ -23,7 +24,7 @@ interface LinesDetailContextState {
 		setHighlightedTripIds: (tripIds: string[]) => void
 	}
 	data: {
-		active_alerts: SimplifiedAlert[] | undefined
+		active_alerts: HubAlert[] | undefined
 		active_pattern: null | Pattern
 		active_shape: null | Shape
 		active_waypoint: null | Waypoint
@@ -208,38 +209,34 @@ export const LinesDetailContextProvider = ({ children, lineId }) => {
 	}, [dataAllPatternsState, operationalDateContext.data.selected_date]);
 
 	useEffect(() => {
-		if (!alertsContext.data.simplified) return;
+		if (!alertsContext.data.alerts || !operationalDateContext.data.selected_date) return;
 
-		const activeAlerts = alertsContext.data.simplified.filter((simplifiedAlertData) => {
-			const isActive = (simplifiedAlertData.end_date && !isNaN(simplifiedAlertData.end_date.getTime())) ? new Date(simplifiedAlertData.end_date).getTime() >= new Date().getTime() : true;
+		const activeAlerts = alertsContext.data.alerts.filter((alertData) => {
+			const isActive = alertData.active_period_end_date ? alertData.active_period_end_date >= operationalDateContext.data.selected_date.set({ hour: 0, millisecond: 0, minute: 0, second: 0 }).js_date.getTime() : true;
 
 			if (!isActive) return false;
 
-			return simplifiedAlertData.informed_entity.some((informedEntity) => {
-				const normalizedLineId = lineId?.trim();
+			return alertData.references.some((reference) => {
+				const normalizedLineId = normalizeAlertReferenceId(lineId);
 				const lineOperatorDigit = normalizedLineId?.match(/\d/)?.[0];
-				const informedAgencyId = informedEntity.agency_id?.trim();
+				const informedAgencyId = alertData.agency_id?.trim();
 				const informedOperatorDigit = informedAgencyId?.slice(-1);
 				const hasMatchingArea = informedOperatorDigit != null && lineOperatorDigit != null && informedOperatorDigit === lineOperatorDigit;
 				const areaOk = !informedAgencyId || hasMatchingArea;
 
 				if (!areaOk) return false;
 
-				if (informedEntity.line_id != null) return informedEntity.line_id.trim() === normalizedLineId;
+				const parentId = normalizeAlertReferenceId(reference.parent_id);
+				const childIds = reference.child_ids.map(normalizeAlertReferenceId);
 
-				if (informedEntity.route_id != null) return dataLineState?.route_ids?.includes(informedEntity.route_id);
+				const hasMatchingLine = parentId === normalizedLineId || childIds.includes(normalizedLineId);
+				const hasMatchingStop = dataAllPatternsState?.some(pattern => pattern.some(patternGroup => patternGroup.path.some(waypoint => childIds.includes(normalizeAlertReferenceId(waypoint.stop_id)))));
 
-				if (informedEntity.stop_id != null) {
-					return dataAllPatternsState?.some(pattern => pattern.some(patternGroup => patternGroup.path.some(waypoint => waypoint.stop_id === informedEntity.stop_id)));
-				}
-
-				return true;
+				return hasMatchingLine || hasMatchingStop;
 			});
 		});
-
 		setDataActiveAlertsState(activeAlerts);
-	}, [alertsContext.data.simplified, lineId, dataLineState, dataAllPatternsState]);
-
+	}, [alertsContext.data.alerts, lineId, dataLineState, dataAllPatternsState, operationalDateContext.data.selected_date]);
 	//
 	// D. Handle actions
 
