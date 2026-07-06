@@ -4,9 +4,8 @@
 
 import { AlertsListGroup } from '@/components/alerts/AlertsListGroup';
 import { AlertsListToolbar } from '@/components/alerts/AlertsListToolbar';
+import { AlertsListViewMap } from '@/components/alerts/AlertsListViewMap';
 import { useAlertsListContext } from '@/contexts/AlertsList.context';
-
-import { AlertsListViewMap } from '../AlertsListViewMap';
 
 /* * */
 

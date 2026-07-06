@@ -72,10 +72,10 @@ export function SelectPattern({ date_filter, onChange, patterns, value, ...props
 
 		data.forEach(group => group.items.sort((a, b) => a.direction_id - b.direction_id));
 
-		data.sort((a, b) => a.group.localeCompare(b.group));
+		data.sort((a, b) => String(a.group).localeCompare(String(b.group)));
 
 		data = data.map((group, index) => {
-			const routeData = linesContext.actions.getRouteDataById(group.group);
+			const routeData = linesContext.actions.getRouteDataById(String(group.group));
 			const letterIndex = String.fromCharCode(65 + index);
 			return ({ ...group, group: `${letterIndex} | ${routeData?.long_name}` });
 		});

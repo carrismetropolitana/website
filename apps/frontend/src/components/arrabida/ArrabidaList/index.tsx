@@ -90,7 +90,7 @@ export function ArrabidaList() {
 					<ul className={styles.listContainer} style={{ height: '100%', marginBottom: '0', padding: '0', width: '100%' }}>
 						{stableItems.map((item, index, array) => {
 							const isFavorite = profileContext.data.favorite_lines?.includes(item.id) || false;
-							const alerts = alertsContext.actions.getSimplifiedAlertsByLineId(item.id);
+							const alerts = alertsContext.actions.getAlertsByLineId(item.id);
 							const hasAlert = alerts.length > 0;
 							const isLastItem = index === array.length - 1;
 

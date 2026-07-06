@@ -2,12 +2,12 @@
 
 import { AlertsCarouselSlide } from '@/components/common/AlertsCarouselSlide';
 import Carousel from '@/components/common/Carousel';
-import { type SimplifiedAlert } from '@/types/alerts.types';
+import { type HubAlert } from '@tmlmobilidade/go-types-public-info';
 
 /* * */
 
 interface Props {
-	alerts: SimplifiedAlert[]
+	alerts: HubAlert[]
 	target?: '_blank' | '_self'
 }
 
@@ -17,7 +17,7 @@ export function AlertsCarousel({ alerts, target = '_self' }: Props) {
 	//
 
 	const carouselSlides = alerts?.map(slideItem => ({
-		_id: slideItem.alert_id + slideItem.description,
+		_id: slideItem._id + slideItem.title,
 		component: (
 			<AlertsCarouselSlide alert={slideItem} target={target} />
 		),

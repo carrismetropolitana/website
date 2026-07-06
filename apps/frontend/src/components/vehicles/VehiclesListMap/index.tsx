@@ -183,7 +183,7 @@ export function VehiclesListMap() {
 			showCenterButton={true}
 			toolbarExtras={toolbarExtras}
 		>
-			{showAlerts && <MapViewStyleAlerts data={alertsContext.data.featureCollection} />}
+			{showAlerts && <MapViewStyleAlerts data={alertsContext.data.fc} />}
 			<MapViewStyleVehicles presentBeforeId={showAlerts ? MapViewStyleAlertsLayerId : undefined} showCounter="always" vehiclesData={activeVehiclesGeoJsonFC} />
 			<MapViewStylePath presentBeforeId={MapViewStyleVehiclesPrimaryLayerId} shapeData={activePathShapeGeoJson} waypointsData={activePathWaypointsGeoJson} />
 		</MapView>

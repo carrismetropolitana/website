@@ -1,6 +1,5 @@
 'use client';
 
-import { AlertEffect } from '@/types/alerts.types';
 import { AlertsCauseEffect as AlertsCauseEffectType } from '@carrismetropolitana/api-types/metrics';
 import { BarChart } from '@mantine/charts';
 import { Skeleton } from '@mantine/core';
@@ -98,7 +97,6 @@ export function AlertsCauseEffectChart({ data }: { data?: AlertsCauseEffectType[
 	const mainEffectsList = useMemo(() => (
 		mainCause
 			? mainCause.effects
-				.filter(effect => ![AlertEffect.NO_EFFECT, AlertEffect.OTHER_EFFECT, AlertEffect.UNKNOWN_EFFECT].includes(effect.type as AlertEffect))
 				.sort((a, b) => b.value - a.value)
 				.map(effect => t(`pluralEffects.${effect.type}`))
 			: []

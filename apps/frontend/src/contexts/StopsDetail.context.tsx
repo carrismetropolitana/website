@@ -8,10 +8,10 @@ import { useLinesContext } from '@/contexts/Lines.context';
 import { useOperationalDateContext } from '@/contexts/OperationalDate.context';
 import { useProfileContext } from '@/contexts/Profile.context';
 import { useStopsContext } from '@/contexts/Stops.context';
-import { type SimplifiedAlert } from '@/types/alerts.types';
 import { type Arrival } from '@/types/stops.types';
 import { type Line, type Pattern, type Shape, type Stop } from '@carrismetropolitana/api-types/network';
 import { getPublicVariable } from '@carrismetropolitana/website-shared-settings';
+import { type HubAlert } from '@tmlmobilidade/go-types-public-info';
 import { DateTime } from 'luxon';
 import { notFound } from 'next/navigation';
 import { createContext, useContext, useEffect, useState } from 'react';
@@ -25,7 +25,7 @@ interface StopsDetailContextState {
 		setActiveTripId: (tripId: string, stopSequence: number) => void
 	}
 	data: {
-		active_alerts: SimplifiedAlert[] | undefined
+		active_alerts: HubAlert[] | undefined
 		active_pattern_group: Pattern | undefined
 		active_shape: Shape | undefined
 		active_stop_id: string
@@ -88,7 +88,7 @@ export const StopsDetailContextProvider = ({ children, stopId }: { children: Rea
 	const [dataTimetableRealtimeFutureState, setDataTimetableRealtimeFutureState] = useState<Arrival[] | undefined>(undefined);
 	const [dataTimetableScheduleState, setDataTimetableScheduleState] = useState<Arrival[] | undefined>(undefined);
 	const [dataActivePatternState, setDataActivePatternState] = useState<Pattern | undefined>(undefined);
-	const [dataActiveAlertsState, setDataActiveAlertsState] = useState<SimplifiedAlert[] | undefined>(undefined);
+	const [dataActiveAlertsState, setDataActiveAlertsState] = useState<HubAlert[] | undefined>(undefined);
 	const [dataActiveTripIdState, setDataActiveTripIdState] = useState<string | undefined>(undefined);
 	const [dataActiveStopSequenceState, setDataActiveStopSequenceState] = useState<number | undefined>(undefined);
 	const [flagIsFavoriteState, setFlagIsFavoriteState] = useState<boolean>(false);
@@ -361,18 +361,18 @@ export const StopsDetailContextProvider = ({ children, stopId }: { children: Rea
 	}, [dataPatternsState, operationalDateContext.data.selected_date]);
 
 	useEffect(() => {
-		if (!alertsContext.data.simplified) return;
-		const activeAlerts = alertsContext.data.simplified.filter((simplifiedAlertData) => {
-			return simplifiedAlertData.informed_entity.some((informedEntity) => {
-				if (!informedEntity.stop_id && !informedEntity.route_id) return false;
-				const hasMatchingStop = informedEntity.stop_id === dataActiveStopIdState;
-				const hasMatchingRoute = dataStopState?.route_ids.includes(informedEntity.route_id || '');
-				const isActive = simplifiedAlertData.end_date ? simplifiedAlertData.end_date >= new Date() : true;
-				return (hasMatchingStop || hasMatchingRoute) && isActive;
-			});
+		if (!dataStopState || !operationalDateContext.data.selected_date) return;
+
+		const stopAlerts = alertsContext.actions.getAlertsByStopId(dataActiveStopIdState);
+		const lineAlerts = dataStopState.line_ids.flatMap(lineId => alertsContext.actions.getAlertsByLineId(lineId));
+		const activeAlerts = [...stopAlerts, ...lineAlerts].filter((alertData, index, allAlerts) => {
+			const isActive = alertData.active_period_end_date ? alertData.active_period_end_date >= operationalDateContext.data.selected_date.set({ hour: 0, millisecond: 0, minute: 0, second: 0 }).js_date.getTime() : true;
+			const isUnique = allAlerts.findIndex(item => item._id === alertData._id) === index;
+			return isActive && isUnique;
 		});
+
 		setDataActiveAlertsState(activeAlerts);
-	}, [alertsContext.data.simplified, dataStopState, dataActiveStopIdState]);
+	}, [alertsContext.data.alerts, dataStopState, dataActiveStopIdState, operationalDateContext.data.selected_date]);
 
 	//
 	// D. Handle actions

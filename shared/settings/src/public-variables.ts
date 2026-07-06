@@ -7,11 +7,15 @@ import { type Environment, getCurrentEnvironment } from '@/environment.js';
  * to be used in other applications from this repo.
  */
 export const PUBLIC_VARIABLES = Object.freeze({
-
 	api_url: {
-		development: 'https://api.carrismetropolitana.pt/v2', // 'http://127.0.0.1:5050',
+		development: 'https://api.carrismetropolitana.pt/v2',
 		production: 'https://api.carrismetropolitana.pt/v2',
 		staging: 'https://api.carrismetropolitana.pt/v2',
+	},
+	go_api_url: {
+		development: 'https://go.tmlmobilidade.pt/hub/api/v1',
+		production: 'https://go.tmlmobilidade.pt/hub/api/v1',
+		staging: 'https://go.tmlmobilidade.pt/hub/api/v1',
 	},
 
 	server_url_backoffice: {
