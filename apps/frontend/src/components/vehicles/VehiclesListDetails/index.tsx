@@ -57,7 +57,7 @@ function VehiclesListDetailsContent() {
 
 	//
 	// C. Render components
-	console.log('metadata', metadata);
+
 	return (
 		<Section withGap withPadding>
 

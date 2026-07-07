@@ -14,6 +14,7 @@ import { transformStopDataIntoGeoJsonFeature, useStopsContext } from '@/contexts
 import { transformVehicleDataIntoGeoJsonFeature, useVehiclesContext } from '@/contexts/Vehicles.context';
 import { useVehiclesListContext } from '@/contexts/VehiclesList.context';
 import { centerMap, getBaseGeoJsonFeatureCollection } from '@/utils/map.utils';
+import { buildVehicleMetadataMap, getVehicleMetadataForPosition } from '@/utils/vehicles.utils';
 import { Pattern, Shape } from '@carrismetropolitana/api-types/network';
 import { getPublicVariable } from '@carrismetropolitana/website-shared-settings';
 import { IconAlertTriangle } from '@tabler/icons-react';
@@ -63,10 +64,6 @@ export function VehiclesListMap() {
 			if (!operationalDate) return;
 
 			const fetchedPatternResponse = await fetch(`${getPublicVariable('go_api_url')}/network/patterns/${encodeURIComponent(vehiclesListContext.data.selected.pattern_id)}`);
-			if (!fetchedPatternResponse.ok) {
-				setActivePatternData(undefined);
-				return;
-			}
 
 			const fetchedPatternResponseData: { data?: Pattern[] } = await fetchedPatternResponse.json();
 			const fetchedPatternData = fetchedPatternResponseData.data;
@@ -88,10 +85,6 @@ export function VehiclesListMap() {
 			}
 
 			const fetchedShapeResponse = await fetch(`${getPublicVariable('go_api_url')}/network/shapes/${encodeURIComponent(activePatternData.shape_id)}`);
-			if (!fetchedShapeResponse.ok) {
-				setActiveShapeData(undefined);
-				return;
-			}
 
 			const fetchedShapeResponseData: { data?: Shape } = await fetchedShapeResponse.json();
 			setActiveShapeData(fetchedShapeResponseData.data);
@@ -129,20 +122,24 @@ export function VehiclesListMap() {
 		return { ...activeShapeData?.geojson, properties: { color: activePatternData.color } };
 	}, [activePatternData, activeShapeData]);
 
+	const metadataByVehicleId = useMemo(() => {
+		return buildVehicleMetadataMap(vehiclesListContext.data.metadata);
+	}, [vehiclesListContext.data.metadata]);
+
 	const activeVehiclesGeoJsonFC = useMemo(() => {
 		const collection = getBaseGeoJsonFeatureCollection();
 		if (vehiclesListContext.data.selected) {
-			const vehicleGeoJsonFeature = transformVehicleDataIntoGeoJsonFeature(vehiclesListContext.data.selected);
-			collection.features.push(vehicleGeoJsonFeature);
+			const contactless = getVehicleMetadataForPosition(vehiclesListContext.data.selected, metadataByVehicleId)?.contactless ?? false;
+			collection.features.push(transformVehicleDataIntoGeoJsonFeature(vehiclesListContext.data.selected, contactless));
 		}
 		else {
 			vehiclesListContext.data.filtered.forEach((vehicle) => {
-				const vehicleGeoJsonFeature = transformVehicleDataIntoGeoJsonFeature(vehicle);
-				collection.features.push(vehicleGeoJsonFeature);
+				const contactless = getVehicleMetadataForPosition(vehicle, metadataByVehicleId)?.contactless ?? false;
+				collection.features.push(transformVehicleDataIntoGeoJsonFeature(vehicle, contactless));
 			});
 		}
 		return collection;
-	}, [vehiclesListContext.data.filtered, vehiclesListContext.data.selected, vehiclesContext.data.vehicles]);
+	}, [metadataByVehicleId, vehiclesListContext.data.filtered, vehiclesListContext.data.selected, vehiclesContext.data.vehicles]);
 
 	//
 	// D. Handle actions

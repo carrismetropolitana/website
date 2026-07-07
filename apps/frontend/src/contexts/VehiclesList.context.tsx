@@ -87,8 +87,8 @@ export const VehiclesListContextProvider = ({ children }) => {
 		filterResult = filterResult.filter(item => item.trip_id);
 
 		// Only include vehicles where received_at is within the last 2 minutes
-		const nowInUnixMilliseconds = Date.now();
-		filterResult = filterResult.filter(item => item.received_at && nowInUnixMilliseconds - item.received_at < 120_000);
+		const now = Date.now();
+		filterResult = filterResult.filter(item => item.received_at && now - item.received_at < 120_000);
 
 		if (filterBySearchState) {
 			filterResult = filterResult.filter((item) => {

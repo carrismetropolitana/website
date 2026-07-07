@@ -1,6 +1,8 @@
 'use client';
 
 import { useFilterByAgencyIds } from '@/hooks/useFilterByAgencyIds';
+import { type HubVehicleMetadata } from '@/types/vehicles.types';
+import { buildVehicleMetadataMap, getVehicleMetadataForPosition } from '@/utils/vehicles.utils';
 import { getPublicVariable } from '@carrismetropolitana/website-shared-settings';
 import { getBaseGeoJsonFeatureCollection } from '@tmlmobilidade/geo';
 import { type HubVehiclePosition } from '@tmlmobilidade/go-types-public-info';
@@ -21,7 +23,7 @@ interface VehiclesContextState {
 		getVehiclesByTripIdGeoJsonFC: (tripId: string) => GeoJSON.FeatureCollection | undefined
 	}
 	data: {
-		fc: GeoJSON.FeatureCollection<GeoJSON.Point, HubVehiclePosition>
+		fc: GeoJSON.FeatureCollection
 		vehicles: HubVehiclePosition[]
 	}
 	flags: {
@@ -43,74 +45,93 @@ export function useVehiclesContext() {
 
 /* * */
 
-export function VehiclesContextProvider({ children }: PropsWithChildren) {
+export const VehiclesContextProvider = ({ children }: PropsWithChildren) => {
 	//
 
 	//
 	// A. Fetch data
 
 	const { data: allVehiclesPositionsResponse, isLoading: allVehiclesPositionsLoading } = useSWR<{ data: HubVehiclePosition[] }>(`${getPublicVariable('go_api_url')}/realtime/vehicles/positions`, { refreshInterval: 5_000 }); // 5 seconds
+	const { data: allVehiclesMetadata = [] } = useSWR<HubVehicleMetadata[]>(`${getPublicVariable('go_api_url')}/realtime/vehicles/metadata`, { refreshInterval: 900_000 }); // 15 minutes
+
 	const allowedVehicles = useFilterByAgencyIds(allVehiclesPositionsResponse?.data);
+	const metadataByVehicleId = useMemo(() => buildVehicleMetadataMap(allVehiclesMetadata), [allVehiclesMetadata]);
+
+	const allVehiclesData = useMemo(() => {
+		const now = Date.now();
+		return allowedVehicles.filter(vehicle => (vehicle.received_at ?? 0) > now - 180_000);
+	}, [allowedVehicles]);
 
 	//
 	// B. Transform data
 
 	const vehiclesGeoJsonFeatureCollection = useMemo(() => {
-		const collection = getBaseGeoJsonFeatureCollection<GeoJSON.Point, HubVehiclePosition>();
-		allowedVehicles.forEach((vehicle) => {
-			collection.features.push(transformVehicleDataIntoGeoJsonFeature(vehicle));
+		const collection = getBaseGeoJsonFeatureCollection();
+		allVehiclesData.forEach((vehicle) => {
+			const contactless = getVehicleMetadataForPosition(vehicle, metadataByVehicleId)?.contactless ?? false;
+			collection.features.push(transformVehicleDataIntoGeoJsonFeature(vehicle, contactless));
 		});
 		return collection;
-	}, [allowedVehicles]);
+	}, [allVehiclesData, metadataByVehicleId]);
 
 	//
 	// B. Handle actions
 
 	const getVehicleById = (vehicleId: string): HubVehiclePosition | undefined => {
-		return allowedVehicles.find(vehicle => vehicle.vehicle_id === vehicleId || vehicle._id === vehicleId);
+		return allVehiclesData.find(vehicle => vehicle.vehicle_id === vehicleId || vehicle._id === vehicleId);
 	};
 
 	const getVehicleByIdGeoJsonFC = (vehicleId: string): GeoJSON.FeatureCollection | undefined => {
 		const vehicle = getVehicleById(vehicleId);
 		if (!vehicle) return;
+		const contactless = getVehicleMetadataForPosition(vehicle, metadataByVehicleId)?.contactless ?? false;
 		const collection = getBaseGeoJsonFeatureCollection();
-		collection.features.push(transformVehicleDataIntoGeoJsonFeature(vehicle));
+		collection.features.push(transformVehicleDataIntoGeoJsonFeature(vehicle, contactless));
 		return collection;
 	};
 
 	const getVehiclesByLineId = (lineId: string): HubVehiclePosition[] => {
-		return allowedVehicles.filter(vehicle => vehicle.line_id === lineId);
+		return allVehiclesData.filter(vehicle => vehicle.line_id === lineId);
 	};
 
 	const getVehiclesByLineIdGeoJsonFC = (lineId: string): GeoJSON.FeatureCollection | undefined => {
 		const vehicles = getVehiclesByLineId(lineId);
 		if (!vehicles) return;
 		const collection = getBaseGeoJsonFeatureCollection();
-		vehicles.forEach(vehicle => collection.features.push(transformVehicleDataIntoGeoJsonFeature(vehicle)));
+		vehicles.forEach((vehicle) => {
+			const contactless = getVehicleMetadataForPosition(vehicle, metadataByVehicleId)?.contactless ?? false;
+			collection.features.push(transformVehicleDataIntoGeoJsonFeature(vehicle, contactless));
+		});
 		return collection;
 	};
 
 	const getVehiclesByPatternId = (patternId: string): HubVehiclePosition[] => {
-		return allowedVehicles.filter(vehicle => vehicle.pattern_id === patternId);
+		return allVehiclesData.filter(vehicle => vehicle.pattern_id === patternId);
 	};
 
 	const getVehiclesByPatternIdGeoJsonFC = (patternId: string) => {
 		const vehicles = getVehiclesByPatternId(patternId);
 		if (!vehicles) return;
 		const collection = getBaseGeoJsonFeatureCollection();
-		vehicles.forEach(vehicle => collection.features.push(transformVehicleDataIntoGeoJsonFeature(vehicle)));
+		vehicles.forEach((vehicle) => {
+			const contactless = getVehicleMetadataForPosition(vehicle, metadataByVehicleId)?.contactless ?? false;
+			collection.features.push(transformVehicleDataIntoGeoJsonFeature(vehicle, contactless));
+		});
 		return collection;
 	};
 
 	const getVehiclesByTripId = (tripId: string): HubVehiclePosition[] => {
-		return allowedVehicles.filter(vehicle => vehicle.trip_id === tripId);
+		return allVehiclesData.filter(vehicle => vehicle.trip_id === tripId);
 	};
 
 	const getVehiclesByTripIdGeoJsonFC = (tripId: string) => {
 		const vehicles = getVehiclesByTripId(tripId);
 		if (!vehicles) return;
 		const collection = getBaseGeoJsonFeatureCollection();
-		vehicles.forEach(vehicle => collection.features.push(transformVehicleDataIntoGeoJsonFeature(vehicle)));
+		vehicles.forEach((vehicle) => {
+			const contactless = getVehicleMetadataForPosition(vehicle, metadataByVehicleId)?.contactless ?? false;
+			collection.features.push(transformVehicleDataIntoGeoJsonFeature(vehicle, contactless));
+		});
 		return collection;
 	};
 
@@ -130,7 +151,7 @@ export function VehiclesContextProvider({ children }: PropsWithChildren) {
 		},
 		data: {
 			fc: vehiclesGeoJsonFeatureCollection,
-			vehicles: allowedVehicles,
+			vehicles: allVehiclesData,
 		},
 		flags: {
 			isLoading: allVehiclesPositionsLoading,
@@ -151,14 +172,29 @@ export function VehiclesContextProvider({ children }: PropsWithChildren) {
 
 /* * */
 
-export function transformVehicleDataIntoGeoJsonFeature(vehicleData: HubVehiclePosition): GeoJSON.Feature<GeoJSON.Point, HubVehiclePosition> {
+export function transformVehicleDataIntoGeoJsonFeature(vehicleData: HubVehiclePosition, contactless = false): GeoJSON.Feature<GeoJSON.Point> {
+	const receivedAt = vehicleData.received_at || 0;
+
 	return {
 		geometry: {
 			coordinates: [vehicleData.longitude || 0, vehicleData.latitude || 0],
 			type: 'Point',
 		},
 		id: String(vehicleData.vehicle_id),
-		properties: vehicleData,
+		properties: {
+			bearing: vehicleData.bearing,
+			contactless,
+			current_status: vehicleData.current_status,
+			delay: Math.floor((Date.now() - receivedAt) / 1000),
+			id: vehicleData.vehicle_id,
+			line_id: vehicleData.line_id,
+			pattern_id: vehicleData.pattern_id,
+			speed: vehicleData.speed,
+			stop_id: vehicleData.stop_id,
+			timeString: receivedAt ? new Date(receivedAt).toLocaleString() : '',
+			trip_id: vehicleData.trip_id,
+			vehicle_id: vehicleData.vehicle_id,
+		},
 		type: 'Feature',
 	};
 }
