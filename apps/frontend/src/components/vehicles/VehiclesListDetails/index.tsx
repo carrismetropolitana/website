@@ -61,7 +61,10 @@ function VehiclesListDetailsContent() {
 	return (
 		<Section withGap withPadding>
 
-			{position ? (
+			{ !position && <NoDataLabel text={t('no_data')} />}
+
+			{ position && (
+
 				<>
 					<IconX className={styles.closeButton} onClick={() => vehiclesListContext.actions.updateSelectedVehicle(null)} />
 
@@ -86,12 +89,10 @@ function VehiclesListDetailsContent() {
 								))}
 							</Table.Tbody>
 						</Table>
-
 					</div>
 				</>
-			) : (
-				<NoDataLabel text={t('no_data')} />
 			)}
+
 		</Section>
 	);
 
