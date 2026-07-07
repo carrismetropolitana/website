@@ -67,7 +67,7 @@ export function VehiclesContextProvider({ children }: PropsWithChildren) {
 	// B. Handle actions
 
 	const getVehicleById = (vehicleId: string): HubVehiclePosition | undefined => {
-		return allowedVehicles.find(vehicle => vehicle._id === vehicleId);
+		return allowedVehicles.find(vehicle => vehicle.vehicle_id === vehicleId || vehicle._id === vehicleId);
 	};
 
 	const getVehicleByIdGeoJsonFC = (vehicleId: string): GeoJSON.FeatureCollection | undefined => {
@@ -79,7 +79,7 @@ export function VehiclesContextProvider({ children }: PropsWithChildren) {
 	};
 
 	const getVehiclesByLineId = (lineId: string): HubVehiclePosition[] => {
-		return allowedVehicles.filter(vehicle => vehicle.trip_id === lineId);
+		return allowedVehicles.filter(vehicle => vehicle.line_id === lineId);
 	};
 
 	const getVehiclesByLineIdGeoJsonFC = (lineId: string): GeoJSON.FeatureCollection | undefined => {
@@ -91,7 +91,7 @@ export function VehiclesContextProvider({ children }: PropsWithChildren) {
 	};
 
 	const getVehiclesByPatternId = (patternId: string): HubVehiclePosition[] => {
-		return allowedVehicles.filter(vehicle => vehicle.trip_id === patternId);
+		return allowedVehicles.filter(vehicle => vehicle.pattern_id === patternId);
 	};
 
 	const getVehiclesByPatternIdGeoJsonFC = (patternId: string) => {
