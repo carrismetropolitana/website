@@ -29,10 +29,9 @@ export function VehiclesListToolbar() {
 	// B. Transform data
 
 	const propulsionOptions = useMemo(() => {
-		if (!vehiclesListContext.data.raw) return [];
-		const allOptionsValues = new Set<string>(vehiclesListContext.data.raw.map(item => item.propulsion).filter(Boolean).map(String));
+		const allOptionsValues = new Set<string>(vehiclesListContext.data.metadata.map(item => item.propulsion).filter(Boolean));
 		return Array.from(allOptionsValues).map(value => ({ label: optionsLabels(`VehiclePropulsion.${value}`), value: value })) || [];
-	}, [vehiclesListContext.data.raw]);
+	}, [vehiclesListContext.data.metadata]);
 
 	const agencyOptions = useMemo(() => {
 		if (!vehiclesListContext.data.raw) return [];
@@ -41,9 +40,8 @@ export function VehiclesListToolbar() {
 	}, [vehiclesListContext.data.raw]);
 
 	const makeAndModelOptions = useMemo(() => {
-		if (!vehiclesListContext.data.raw) return [];
 		const allOptionsMap = new Map<string, Set<string>>();
-		vehiclesListContext.data.raw.forEach((item) => {
+		vehiclesListContext.data.metadata.forEach((item) => {
 			if (!item.make || !item.model) return;
 			if (!allOptionsMap.has(item.make)) allOptionsMap.set(item.make, new Set<string>());
 			allOptionsMap.get(item.make)?.add(item.model);
@@ -58,7 +56,7 @@ export function VehiclesListToolbar() {
 					.sort((a, b) => a.label.localeCompare(b.label)),
 			}))
 			.sort((a, b) => a.group.localeCompare(b.group));
-	}, [vehiclesListContext.data.raw]);
+	}, [vehiclesListContext.data.metadata]);
 
 	//
 	// C. Handle actions

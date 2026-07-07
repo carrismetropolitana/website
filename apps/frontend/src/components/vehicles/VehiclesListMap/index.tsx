@@ -129,7 +129,7 @@ export function VehiclesListMap() {
 	function handleLayerClick(event) {
 		setIsAutoZoom(false);
 		if (event.features.length !== 0 && event.features[0].source === 'default-source-vehicles') {
-			vehiclesListContext.actions.updateSelectedVehicle(event.features[0].properties.id);
+			vehiclesListContext.actions.updateSelectedVehicle(event.features[0].properties.vehicle_id);
 		}
 		else if (event.features.length !== 0 && event.features[0].source === MapViewStyleAlertsSourceId) {
 			router.push(environmentContext.actions.getNormalizedHref(`/alerts/${event.features[0].properties.id}`));
