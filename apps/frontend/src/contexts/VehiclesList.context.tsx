@@ -79,14 +79,14 @@ export const VehiclesListContextProvider = ({ children }) => {
 
 		// Only include vehicles where timestamp is within the last 2 minutes
 		const nowInUnixSeconds = new Date().getTime() / 1000;
-		filterResult = filterResult.filter(item => item.timestamp && nowInUnixSeconds - item.timestamp < 120);
+		filterResult = filterResult.filter(item => item.created_at && nowInUnixSeconds - item.created_at < 120);
 
 		// Apply the user filters
 
 		if (filterBySearchState) {
 			filterResult = filterResult.filter((item) => {
-				const matchedVehicleId = item.id?.toLowerCase().includes(filterBySearchState.toLowerCase());
-				const matchedLicensePlate = item.license_plate?.toLowerCase().includes(filterBySearchState.toLowerCase());
+				const matchedVehicleId = item._id?.toLowerCase().includes(filterBySearchState.toLowerCase());
+				const matchedLicensePlate = item.vehicle_id?.toLowerCase().includes(filterBySearchState.toLowerCase());
 				return matchedVehicleId || matchedLicensePlate;
 			});
 		}

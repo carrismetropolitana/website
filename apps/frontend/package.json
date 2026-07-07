@@ -54,6 +54,7 @@
 		"@carrismetropolitana/eslint": "20250622.1204.50",
 		"@carrismetropolitana/website-shared-types": "*",
 		"@tmlmobilidade/dates": "20260418.1237.24",
+		"@tmlmobilidade/geo": "20260706.1839.32",
 		"@tmlmobilidade/go-types-public-info": "20260624.1309.39",
 		"@tmlmobilidade/tsconfig": "20260418.1237.24",
 		"@tmlmobilidade/types": "20260418.1237.24",

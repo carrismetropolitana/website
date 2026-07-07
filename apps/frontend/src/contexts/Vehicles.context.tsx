@@ -1,8 +1,8 @@
 'use client';
 
-import { getBaseGeoJsonFeatureCollection } from '@/utils/map.utils';
-import { CARRIS_METROPOLITANA_AGENCY_IDS, CarrisMetropolitanaAgencyId } from '@carrismetropolitana/website-shared-settings';
-import { API_ROUTES } from '@tmlmobilidade/consts';
+import { useFilterByAgencyIds } from '@/hooks/useFilterByAgencyIds';
+import { getPublicVariable } from '@carrismetropolitana/website-shared-settings';
+import { getBaseGeoJsonFeatureCollection } from '@tmlmobilidade/geo';
 import { type HubVehiclePosition } from '@tmlmobilidade/go-types-public-info';
 import { createContext, type PropsWithChildren, useContext, useMemo } from 'react';
 import useSWR from 'swr';
@@ -21,7 +21,7 @@ interface VehiclesContextState {
 		getVehiclesByTripIdGeoJsonFC: (tripId: string) => GeoJSON.FeatureCollection | undefined
 	}
 	data: {
-		fc: GeoJSON.FeatureCollection
+		fc: GeoJSON.FeatureCollection<GeoJSON.Point, HubVehiclePosition>
 		vehicles: HubVehiclePosition[]
 	}
 	flags: {
@@ -49,27 +49,25 @@ export function VehiclesContextProvider({ children }: PropsWithChildren) {
 	//
 	// A. Fetch data
 
-	const { data: allVehiclesPositionsData, isLoading: allVehiclesPositionsLoading } = useSWR<HubVehiclePosition[], Error>({ credentials: 'omit', url: API_ROUTES.hub.REALTIME_VEHICLES_POSITIONS }, { refreshInterval: 5_000 }); // 5 seconds
+	const { data: allVehiclesPositionsResponse, isLoading: allVehiclesPositionsLoading } = useSWR<{ data: HubVehiclePosition[] }>(`${getPublicVariable('go_api_url')}/realtime/vehicles/positions`, { refreshInterval: 5_000 }); // 5 seconds
+	const allowedVehicles = useFilterByAgencyIds(allVehiclesPositionsResponse?.data);
 
 	//
 	// B. Transform data
 
 	const vehiclesGeoJsonFeatureCollection = useMemo(() => {
-		const collection = getBaseGeoJsonFeatureCollection();
-		allVehiclesPositionsData?.forEach((vehicle) => {
-			// Skip if vehicle position is not from an allowed agency
-			if (!CARRIS_METROPOLITANA_AGENCY_IDS.includes(vehicle.agency_id as CarrisMetropolitanaAgencyId)) return;
-			// Add the vehicle position to the collection
+		const collection = getBaseGeoJsonFeatureCollection<GeoJSON.Point, HubVehiclePosition>();
+		allowedVehicles.forEach((vehicle) => {
 			collection.features.push(transformVehicleDataIntoGeoJsonFeature(vehicle));
 		});
 		return collection;
-	}, [allVehiclesPositionsData]);
+	}, [allowedVehicles]);
 
 	//
 	// B. Handle actions
 
 	const getVehicleById = (vehicleId: string): HubVehiclePosition | undefined => {
-		return allVehiclesPositionsData?.find(vehicle => vehicle._id === vehicleId);
+		return allowedVehicles.find(vehicle => vehicle._id === vehicleId);
 	};
 
 	const getVehicleByIdGeoJsonFC = (vehicleId: string): GeoJSON.FeatureCollection | undefined => {
@@ -81,7 +79,7 @@ export function VehiclesContextProvider({ children }: PropsWithChildren) {
 	};
 
 	const getVehiclesByLineId = (lineId: string): HubVehiclePosition[] => {
-		return allVehiclesPositionsData?.filter(vehicle => vehicle.trip_id === lineId) || [];
+		return allowedVehicles.filter(vehicle => vehicle.trip_id === lineId);
 	};
 
 	const getVehiclesByLineIdGeoJsonFC = (lineId: string): GeoJSON.FeatureCollection | undefined => {
@@ -93,7 +91,7 @@ export function VehiclesContextProvider({ children }: PropsWithChildren) {
 	};
 
 	const getVehiclesByPatternId = (patternId: string): HubVehiclePosition[] => {
-		return allVehiclesPositionsData?.filter(vehicle => vehicle.trip_id === patternId) || [];
+		return allowedVehicles.filter(vehicle => vehicle.trip_id === patternId);
 	};
 
 	const getVehiclesByPatternIdGeoJsonFC = (patternId: string) => {
@@ -105,7 +103,7 @@ export function VehiclesContextProvider({ children }: PropsWithChildren) {
 	};
 
 	const getVehiclesByTripId = (tripId: string): HubVehiclePosition[] => {
-		return allVehiclesPositionsData?.filter(vehicle => vehicle.trip_id === tripId) || [];
+		return allowedVehicles.filter(vehicle => vehicle.trip_id === tripId);
 	};
 
 	const getVehiclesByTripIdGeoJsonFC = (tripId: string) => {
@@ -132,7 +130,7 @@ export function VehiclesContextProvider({ children }: PropsWithChildren) {
 		},
 		data: {
 			fc: vehiclesGeoJsonFeatureCollection,
-			vehicles: allVehiclesPositionsData || [],
+			vehicles: allowedVehicles,
 		},
 		flags: {
 			isLoading: allVehiclesPositionsLoading,
