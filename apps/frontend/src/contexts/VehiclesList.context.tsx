@@ -7,6 +7,7 @@ import { type HubVehicleMetadata } from '@/types/vehicles.types';
 import { buildVehicleMetadataMap, getVehicleMetadataForPosition } from '@/utils/vehicles.utils';
 import { getPublicVariable } from '@carrismetropolitana/website-shared-settings';
 import { type HubVehiclePosition } from '@tmlmobilidade/go-types-public-info';
+import { DateTime } from 'luxon';
 import { useQueryState } from 'nuqs';
 import { createContext, useContext, useEffect, useMemo, useState } from 'react';
 import useSWR from 'swr';
@@ -86,9 +87,9 @@ export const VehiclesListContextProvider = ({ children }) => {
 		// Only include vehicles with active trips
 		filterResult = filterResult.filter(item => item.trip_id);
 
-		// Only include vehicles where received_at is within the last 2 minutes
-		const now = Date.now();
-		filterResult = filterResult.filter(item => item.received_at && now - item.received_at < 120_000);
+		// Only include vehicles where timestamp is within the last 2 minutes
+		const nowInUnixSeconds = DateTime.now().toUnixInteger();
+		filterResult = filterResult.filter(item => item.received_at && nowInUnixSeconds - Math.floor(item.received_at / 1000) < 120);
 
 		if (filterBySearchState) {
 			filterResult = filterResult.filter((item) => {
