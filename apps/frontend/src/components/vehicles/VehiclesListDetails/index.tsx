@@ -40,7 +40,7 @@ function VehiclesListDetailsContent() {
 
 	const activeLineData = useMemo(() => {
 		return linesContext.actions.getLineDataById(position?.line_id || '');
-	}, [position?.line_id]);
+	}, [linesContext.actions, linesContext.data.lines, position?.line_id]);
 
 	const rows = [
 		{ label: 'ID', value: position?.vehicle_id },
@@ -57,7 +57,7 @@ function VehiclesListDetailsContent() {
 
 	//
 	// C. Render components
-
+	console.log('metadata', metadata);
 	return (
 		<Section withGap withPadding>
 
