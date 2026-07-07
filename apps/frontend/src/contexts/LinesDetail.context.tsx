@@ -9,9 +9,8 @@ import { useProfileContext } from '@/contexts/Profile.context';
 import { useStopsContext } from '@/contexts/Stops.context';
 import { normalizeAlertReferenceId } from '@/utils/alerts';
 import { type ServiceMetrics } from '@carrismetropolitana/api-types/metrics';
-import { type Line, type Pattern, type Route, type Shape, type Waypoint } from '@carrismetropolitana/api-types/network';
 import { getPublicVariable } from '@carrismetropolitana/website-shared-settings';
-import { type HubAlert } from '@tmlmobilidade/go-types-public-info';
+import { type HubAlert, type HubLine, type HubPattern, type HubRoute, type HubShape, type HubWaypoint } from '@tmlmobilidade/go-types-public-info';
 import { useQueryState } from 'nuqs';
 import { createContext, useContext, useEffect, useState } from 'react';
 
@@ -25,15 +24,15 @@ interface LinesDetailContextState {
 	}
 	data: {
 		active_alerts: HubAlert[] | undefined
-		active_pattern: null | Pattern
-		active_shape: null | Shape
-		active_waypoint: null | Waypoint
-		all_patterns: null | Pattern[][]
+		active_pattern: HubPattern | null
+		active_shape: HubShape | null
+		active_waypoint: HubWaypoint | null
+		all_patterns: HubPattern[][] | null
 		highlighted_trip_ids: null | string[]
-		line: Line | undefined
-		routes: Route[]
+		line: HubLine | undefined
+		routes: HubRoute[]
 		service_metrics: ServiceMetrics[]
-		valid_patterns: Pattern[] | undefined
+		valid_patterns: HubPattern[] | undefined
 	}
 	filters: {
 		active_pattern_id: null | string
@@ -181,10 +180,10 @@ export const LinesDetailContextProvider = ({ children, lineId }) => {
 
 	useEffect(() => {
 		if (!dataAllPatternsState || !operationalDateContext.data.selected_date) return;
-		const activePatterns: Pattern[] = [];
+		const activePatterns: HubPattern[] = [];
 		for (const pattern of dataAllPatternsState) {
 			let closestDateSoFar: string = null;
-			let patternGroupWithClosestDate: Pattern = null;
+			let patternGroupWithClosestDate: HubPattern = null;
 			for (const patternGroup of pattern) {
 				const selectedDate = operationalDateContext.data.selected_date.operational_date;
 				if (!selectedDate) return;
@@ -200,11 +199,11 @@ export const LinesDetailContextProvider = ({ children, lineId }) => {
 				}
 			}
 			// If the closest date is valid, add the pattern group to the list
-			if (patternGroupWithClosestDate && !activePatterns.find(activePattern => activePattern.id === patternGroupWithClosestDate.id)) {
+			if (patternGroupWithClosestDate && !activePatterns.find(activePattern => activePattern._id === patternGroupWithClosestDate._id)) {
 				activePatterns.push(patternGroupWithClosestDate);
 			}
 		}
-		const sortedPatterns = activePatterns.sort((a, b) => a.id.localeCompare(b.id));
+		const sortedPatterns = activePatterns.sort((a, b) => a._id.localeCompare(b._id));
 		setDataValidPatternsState(sortedPatterns);
 	}, [dataAllPatternsState, operationalDateContext.data.selected_date]);
 
@@ -259,9 +258,9 @@ export const LinesDetailContextProvider = ({ children, lineId }) => {
 	 */
 	useEffect(() => {
 		// Return early if no patterns are available or no filter value for active_pattern_id
-		if (!dataValidPatternsState || !filterActivePatternIdState) return;
+		if (!dataValidPatternsState || filterActivePatternIdState === null) return;
 		// If there is a filter value for active pattern, set the pattern with that ID
-		const foundActivePatternData = dataValidPatternsState.find(activePattern => activePattern.id === filterActivePatternIdState);
+		const foundActivePatternData = dataValidPatternsState.find(activePattern => activePattern._id === filterActivePatternIdState);
 		if (!foundActivePatternData) return;
 		setDataActivePatternState(foundActivePatternData);
 		//
@@ -321,7 +320,7 @@ export const LinesDetailContextProvider = ({ children, lineId }) => {
 		const foundPatternData = dataValidPatternsState.find(validPattern => validPattern.version_id === patternVersionId);
 		// Update the state
 		if (foundPatternData) {
-			setFilterActivePatternIdState(foundPatternData.id);
+			setFilterActivePatternIdState(foundPatternData._id);
 			setFlagIsInteractiveModeState(false);
 		}
 	};

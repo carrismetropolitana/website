@@ -110,9 +110,9 @@ export function StopsDetailContentMap() {
 			onClick={handleLayerClick}
 		>
 
-			{/* <MapViewStyleVehicles
+			<MapViewStyleVehicles
 				vehiclesData={activeVehicleGeoJson}
-			/> */}
+			/>
 
 			<MapViewStyleActiveStops
 				presentBeforeId={MapViewStyleVehiclesPrimaryLayerId}
