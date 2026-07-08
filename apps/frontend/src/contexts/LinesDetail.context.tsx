@@ -46,8 +46,6 @@ interface LinesDetailContextState {
 	}
 }
 
-/* * */
-
 const LinesDetailContext = createContext<LinesDetailContextState | undefined>(undefined);
 
 export function useLinesDetailContext() {
@@ -112,39 +110,35 @@ export const LinesDetailContextProvider = ({ children, lineId }) => {
 
 	useEffect(() => {
 		if (!dataLineState || !dataLineState.route_ids) return;
-		dataLineState.route_ids.forEach((routeId) => {
+		const routesData = dataLineState.route_ids.map((routeId) => {
 			const routeData = linesContext.actions.getRouteDataById(routeId);
-			if (!routeData) return;
-			setDataRoutesState(prev => [...prev, routeData]);
-		});
+			if (!routeData) return null;
+			return routeData;
+		}).filter((routeData): routeData is HubRoute => routeData !== null);
+		setDataRoutesState(routesData);
 	}, [dataLineState, linesContext.data.routes]);
 
 	useEffect(() => {
 		(async () => {
 			try {
 				if (!dataLineState) return;
-				const fetchPromises = dataLineState.pattern_ids.map((patternId) => {
-					return fetch(`${getPublicVariable('api_url')}/patterns/${patternId}`)
-						.then(response => response.json())
-						.then((patternData) => {
-							return patternData.map((patternGroup) => {
-								patternGroup.path = patternGroup.path.map((waypoint) => {
-									const stopData = stopsContext.actions.getStopById(waypoint.stop_id);
-									if (!stopData) return waypoint;
-									return { ...waypoint, stop: stopData };
-								});
-								return patternGroup;
-							});
-						});
+				const fetchPromises = dataLineState.pattern_ids.map(async (patternId) => {
+					const response = await fetch(`${getPublicVariable('go_api_url')}/hub/api/v1/network/patterns/${encodeURIComponent(patternId)}`);
+					if (!response.ok) {
+						console.log(`Failed to fetch pattern data for patternId: ${patternId}`);
+						return null;
+					}
+					const patternPayload = await response.json() as HubPattern[] | { data?: HubPattern[] };
+					return Array.isArray(patternPayload) ? patternPayload : patternPayload.data ?? [];
 				});
-				const resultData = await Promise.all(fetchPromises);
+				const resultData = (await Promise.all(fetchPromises)).filter((patternData): patternData is HubPattern[] => patternData !== null);
 				setDataAllPatternsState(resultData);
 			}
 			catch (error) {
 				console.error('Error fetching pattern data:', error);
 			}
 		})();
-	}, [dataLineState, stopsContext.data.stops]);
+	}, [dataLineState]);
 
 	/**
 	 * TASK: Fetch shape data for the active pattern.
@@ -154,10 +148,11 @@ export const LinesDetailContextProvider = ({ children, lineId }) => {
 		if (!dataActivePatternState) return;
 		(async () => {
 			try {
-				const shapeData = await fetch(`${getPublicVariable('api_url')}/shapes/${dataActivePatternState.shape_id}`).then((response) => {
+				const shapePayload = await fetch(`${getPublicVariable('go_api_url')}/hub/api/v1/network/shapes/${encodeURIComponent(dataActivePatternState.shape_id)}`).then((response) => {
 					if (!response.ok) console.log(`Failed to fetch shape data for shapeId: ${dataActivePatternState.shape_id}`);
 					else return response.json();
-				});
+				}) as HubShape | undefined | { data?: HubShape };
+				const shapeData: HubShape | undefined = shapePayload && 'data' in shapePayload ? shapePayload.data : shapePayload as HubShape | undefined;
 				if (shapeData) {
 					shapeData.geojson = {
 						...shapeData.geojson,
@@ -180,14 +175,13 @@ export const LinesDetailContextProvider = ({ children, lineId }) => {
 
 	useEffect(() => {
 		if (!dataAllPatternsState || !operationalDateContext.data.selected_date) return;
+		const selectedDate = operationalDateContext.data.selected_date.operational_date;
+		if (!selectedDate) return;
 		const activePatterns: HubPattern[] = [];
 		for (const pattern of dataAllPatternsState) {
 			let closestDateSoFar: string = null;
 			let patternGroupWithClosestDate: HubPattern = null;
 			for (const patternGroup of pattern) {
-				const selectedDate = operationalDateContext.data.selected_date.operational_date;
-				if (!selectedDate) return;
-				// Find the closest valid date
 				const closestDate = patternGroup.valid_on.reduce((acc, curr) => {
 					if (selectedDate <= curr && (acc === '' || curr < acc)) return curr;
 					return acc;
@@ -198,7 +192,6 @@ export const LinesDetailContextProvider = ({ children, lineId }) => {
 					closestDateSoFar = closestDate;
 				}
 			}
-			// If the closest date is valid, add the pattern group to the list
 			if (patternGroupWithClosestDate && !activePatterns.find(activePattern => activePattern._id === patternGroupWithClosestDate._id)) {
 				activePatterns.push(patternGroupWithClosestDate);
 			}
