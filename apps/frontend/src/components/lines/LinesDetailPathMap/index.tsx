@@ -38,8 +38,8 @@ export function LinesDetailPathMap() {
 	// B. Transform Data
 
 	const activeVehiclesFeatureCollection = useMemo(() => {
-		if (!linesDetailContext.data.active_pattern?.id) return;
-		return vehiclesContext.actions.getVehiclesByPatternIdGeoJsonFC(linesDetailContext.data.active_pattern.id);
+		if (!linesDetailContext.data.active_pattern?._id) return;
+		return vehiclesContext.actions.getVehiclesByPatternIdGeoJsonFC(linesDetailContext.data.active_pattern._id);
 	}, [linesDetailContext.data.active_pattern, vehiclesContext.data.vehicles]);
 
 	const activePathFeatureCollection = useMemo(() => {
@@ -90,7 +90,7 @@ export function LinesDetailPathMap() {
 			if (!linesDetailContext.data.active_waypoint) return;
 			const stopData = stopsContext.actions.getStopById(linesDetailContext.data.active_waypoint.stop_id);
 			if (!stopData) return;
-			moveMap(linesDetailMap, [stopData.lon, stopData.lat]);
+			moveMap(linesDetailMap, [stopData.longitude, stopData.latitude]);
 		}
 		else {
 			if (!linesDetailContext.data.active_shape?.geojson) return;

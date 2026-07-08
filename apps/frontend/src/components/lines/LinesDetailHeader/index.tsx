@@ -43,7 +43,7 @@ export function LinesDetailHeader() {
 	const handleToggleFavorite = async () => {
 		if (!linesDetailContext.data.line) return;
 		try {
-			await profileContext.actions.toggleFavoriteLine(linesDetailContext.data.line.id);
+			await profileContext.actions.toggleFavoriteLine(linesDetailContext.data.line._id);
 		}
 		catch (error) {
 			toast.error({ message: t('toggle_favorite_error', { error: error.message }) });
@@ -70,7 +70,7 @@ export function LinesDetailHeader() {
 						<div className={styles.headingSectionRow}>
 							<LineBadge lineData={linesDetailContext.data.line} size="lg" />
 							{!isMupi && <FavoriteToggle color={linesDetailContext.data.line.color} isActive={linesDetailContext.flags.is_favorite} onToggle={handleToggleFavorite} />}
-							<LineDisplayTts patternId={linesDetailContext.data.active_pattern?.id} />
+							<LineDisplayTts patternId={linesDetailContext.data.active_pattern?._id} />
 						</div>
 						<div className={styles.lineName}>
 							{linesDetailContext.data.line.long_name}

@@ -40,14 +40,14 @@ export function AlertInformedEntity({ lineId, routeId, stopId }: Props) {
 	}, [linesContext.data.lines]);
 
 	const stopData = useMemo<HubStop | undefined>(() => {
-		return stopsContext.data.stops?.find(stop => stop.id === stopId);
+		return stopsContext.data.stops?.find(stop => stop._id.toString() === stopId);
 	}, [stopsContext.data.stops]);
 
 	//
 	// C. Handle actions
 
 	const handleLineBadgeClick = () => {
-		const lineHref = environmentContext.actions.getNormalizedHref(`/lines/${lineData?.id}`);
+		const lineHref = environmentContext.actions.getNormalizedHref(`/lines/${lineData?._id}`);
 		router.push(lineHref);
 	};
 
@@ -62,7 +62,7 @@ export function AlertInformedEntity({ lineId, routeId, stopId }: Props) {
 
 	if (stopId && stopData) {
 		return (
-			<p>{stopData.long_name}</p>
+			<p>{stopData.name}</p>
 		);
 	}
 

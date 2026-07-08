@@ -67,7 +67,7 @@ export function PathWaypointHeader({ isFirstStop, isLastStop, isSelected, waypoi
 		<div className={`${styles.container} ${isFirstStop && styles.isFirstStop} ${isLastStop && styles.isLastStop} ${isSelected && styles.isSelected}`}>
 
 			<p className={styles.stopName}>
-				{stopData.long_name}
+				{stopData.name}
 				{isSelected && (
 					<Link
 						className={styles.stopNameUrl}
@@ -82,17 +82,20 @@ export function PathWaypointHeader({ isFirstStop, isLastStop, isSelected, waypoi
 			<div className={styles.subHeaderWrapper}>
 				<p className={styles.stopLocation}>{formatStopLocation(stopData.locality_name, stopData.municipality_name)}</p>
 				<p className={`${styles.stopId} ${stopIdClipboard.copied && styles.isCopied}`} onClick={handleClickStopId}>
-					#{stopData.id}
+					#{stopData._id}
 					{stopIdClipboard.copied ? <IconCheck className={styles.stopIdCopyIcon} /> : <IconCopy className={styles.stopIdCopyIcon} />}
 				</p>
 			</div>
-			{isSelected && stopData.facilities.length > 0 && (
+
+			{/* {isSelected && stopData.facilities.length > 0 && (
 				<div className={styles.facilitiesWrapper}>
 					{stopData.facilities.map(facility => (
 						<IconDisplay key={facility} category="facilities" name={facility} />
 					))}
 				</div>
-			)}
+			)} */}
+
+			//TODO
 		</div>
 	);
 

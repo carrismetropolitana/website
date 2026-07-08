@@ -2,9 +2,10 @@
 
 /* * */
 
+import type { HubLine } from '@tmlmobilidade/go-types-public-info';
+
 import { useLinesContext } from '@/contexts/Lines.context';
 import { IconInfoTriangleFilled } from '@tabler/icons-react';
-import { HubLine } from '@tmlmobilidade/go-types-public-info';
 import classNames from 'classnames/bind';
 
 import styles from './styles.module.css';

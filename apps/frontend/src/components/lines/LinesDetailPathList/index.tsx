@@ -28,7 +28,7 @@ export function LinesDetailPathList() {
 	//
 	// B. Fetch data
 
-	const { data: patternRealtimeData } = useSWR<PatternRealtime[]>(linesDetailContext.data.active_pattern?.id && `${getPublicVariable('api_url')}/arrivals/by_pattern/${linesDetailContext.data.active_pattern.id}`, { refreshInterval: 10000 });
+	const { data: patternRealtimeData } = useSWR<PatternRealtime[]>(linesDetailContext.data.active_pattern?._id && `${getPublicVariable('api_url')}/arrivals/by_pattern/${linesDetailContext.data.active_pattern._id}`, { refreshInterval: 10000 });
 
 	//
 	// C. Transform data
@@ -37,7 +37,7 @@ export function LinesDetailPathList() {
 		// Return early if there is no patternRealtimeData
 		if (!patternRealtimeData) return;
 		// Filter arrrivals for the current pattern
-		const arrivalsForCurrentPattern = patternRealtimeData?.filter(arrivalData => arrivalData.pattern_id === linesDetailContext.data.active_pattern?.id) || [];
+		const arrivalsForCurrentPattern = patternRealtimeData?.filter(arrivalData => arrivalData.pattern_id === linesDetailContext.data.active_pattern?._id) || [];
 		// Organize arrivals by Stop ID
 		const result = new Map<string, NextArrival[]>();
 		arrivalsForCurrentPattern.forEach((arrivalData) => {
@@ -61,7 +61,7 @@ export function LinesDetailPathList() {
 			result.get(key)?.sort((a, b) => a.unixTs - b.unixTs);
 		}
 		return result;
-	}, [patternRealtimeData, linesDetailContext.data.active_pattern?.id]);
+	}, [patternRealtimeData, linesDetailContext.data.active_pattern?._id]);
 
 	const sortedStops = useMemo(() => {
 		return linesDetailContext.data.active_pattern?.path.sort((a, b) => a.stop_sequence - b.stop_sequence);
