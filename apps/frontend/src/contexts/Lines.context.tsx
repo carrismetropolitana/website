@@ -47,8 +47,8 @@ export const LinesContextProvider = ({ children }) => {
 	//
 	// A. Fetch data
 
-	const { data: linesResponse, isLoading: allLinesLoading } = useSWR<HubLine[], Error>(`${getPublicVariable('go_api_url')}hub/api/v1/network/lines`, { refreshInterval: 900000 }); // 15 minutes
-	const { data: routesResponse, isLoading: allRoutesLoading } = useSWR<HubRoute[], Error>(`${getPublicVariable('go_api_url')}hub/api/v1/network/routes`, { refreshInterval: 900000 }); // 15 minutes
+	const { data: linesResponse, isLoading: allLinesLoading } = useSWR<HubLine[], Error>(`${getPublicVariable('go_api_url')}/hub/api/v1/network/lines`, { refreshInterval: 900000 }); // 15 minutes
+	const { data: routesResponse, isLoading: allRoutesLoading } = useSWR<HubRoute[], Error>(`${getPublicVariable('go_api_url')}/hub/api/v1/network/routes`, { refreshInterval: 900000 }); // 15 minutes
 	const { data: serviceMetricsData, isLoading: serviceMetricsLoading } = useSWR<CachedResource<ServiceMetrics[]>, Error>(`${getPublicVariable('api_url')}/metrics/service/all`, { refreshInterval: 900000 }); // 15 minutes
 
 	//

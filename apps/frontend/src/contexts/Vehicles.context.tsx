@@ -51,8 +51,8 @@ export const VehiclesContextProvider = ({ children }: PropsWithChildren) => {
 	//
 	// A. Fetch data
 
-	const { data: allVehiclesPositionsResponse, isLoading: allVehiclesPositionsLoading } = useSWR<{ data: HubVehiclePosition[] }>(`${getPublicVariable('go_api_url')}hub/api/v1/realtime/vehicles/positions`, { refreshInterval: 5_000 }); // 5 seconds
-	const { data: allVehiclesMetadata = [] } = useSWR<HubVehicleMetadata[]>(`${getPublicVariable('go_api_url')}hub/api/v1/realtime/vehicles/metadata`, { refreshInterval: 900_000 }); // 15 minutes
+	const { data: allVehiclesPositionsResponse, isLoading: allVehiclesPositionsLoading } = useSWR<{ data: HubVehiclePosition[] }>(`${getPublicVariable('go_api_url')}/hub/api/v1/realtime/vehicles/positions`, { refreshInterval: 5_000 }); // 5 seconds
+	const { data: allVehiclesMetadata = [] } = useSWR<HubVehicleMetadata[]>(`${getPublicVariable('go_api_url')}/hub/api/v1/realtime/vehicles/metadata`, { refreshInterval: 900_000 }); // 15 minutes
 
 	const allVehiclesData = useMemo(() => {
 		if (!allVehiclesPositionsResponse?.data) return [];

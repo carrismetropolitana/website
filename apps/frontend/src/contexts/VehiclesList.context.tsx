@@ -74,7 +74,7 @@ export const VehiclesListContextProvider = ({ children }) => {
 	//
 	// B. Fetch data
 
-	const { data: allVehiclesMetadata = [], isLoading: allVehiclesMetadataLoading } = useSWR<HubVehicleMetadata[]>(`${getPublicVariable('go_api_url')}hub/api/v1/realtime/vehicles/metadata`, { refreshInterval: 900_000 }); // 15 minutes
+	const { data: allVehiclesMetadata = [], isLoading: allVehiclesMetadataLoading } = useSWR<HubVehicleMetadata[]>(`${getPublicVariable('go_api_url')}/hub/api/v1/realtime/vehicles/metadata`, { refreshInterval: 900_000 }); // 15 minutes
 
 	//
 	// C. Transform data
