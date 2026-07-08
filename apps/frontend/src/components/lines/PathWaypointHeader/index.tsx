@@ -87,13 +87,13 @@ export function PathWaypointHeader({ isFirstStop, isLastStop, isSelected, waypoi
 				</p>
 			</div>
 
-			{/* {isSelected && stopData.facilities.length > 0 && (
+			{isSelected && stopData.flags.length > 0 && (
 				<div className={styles.facilitiesWrapper}>
-					{stopData.facilities.map(facility => (
-						<IconDisplay key={facility} category="facilities" name={facility} />
+					{stopData.flags.map(flag => (
+						<IconDisplay key={flag.short_name} category="facilities" name={flag.short_name} />
 					))}
 				</div>
-			)} */}
+			)}
 
 			//TODO
 		</div>

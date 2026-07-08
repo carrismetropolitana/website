@@ -47,22 +47,25 @@ export const LinesContextProvider = ({ children }) => {
 	//
 	// A. Fetch data
 
-	const { data: lines, isLoading: allLinesLoading } = useSWR<HubLine[], Error>(`${getPublicVariable('go_api_url')}/network/lines`, { refreshInterval: 900000 }); // 15 minutes
-	const { data: routes, isLoading: allRoutesLoading } = useSWR<HubRoute[], Error>(`${getPublicVariable('go_api_url')}/network/routes`, { refreshInterval: 900000 }); // 15 minutes
+	const { data: linesResponse, isLoading: allLinesLoading } = useSWR<HubLine[], Error>(`${getPublicVariable('go_api_url')}/network/lines`, { refreshInterval: 900000 }); // 15 minutes
+	const { data: routesResponse, isLoading: allRoutesLoading } = useSWR<HubRoute[], Error>(`${getPublicVariable('go_api_url')}/network/routes`, { refreshInterval: 900000 }); // 15 minutes
 	const { data: serviceMetricsData, isLoading: serviceMetricsLoading } = useSWR<CachedResource<ServiceMetrics[]>, Error>(`${getPublicVariable('api_url')}/metrics/service/all`, { refreshInterval: 900000 }); // 15 minutes
 
 	//
 	// B. Handle actions
 
 	const getLineDataById = (lineId: string) => {
-		return lines?.find(line => line._id === lineId);
+		if (!allLinesLoading) return;
+		return linesResponse.find(line => line._id === lineId);
 	};
 
 	const getRouteDataById = (routeId: string) => {
-		return routes?.find(route => route._id === routeId);
+		if (!allRoutesLoading) return;
+		return routesResponse.find(route => route._id === routeId);
 	};
 
 	const getServiceMetricsByLineId = (lineId: string) => {
+		if (!serviceMetricsLoading) return;
 		return serviceMetricsData?.data.filter(serviceMetrics => String(serviceMetrics.line_id) === String(lineId));
 	};
 
@@ -76,17 +79,17 @@ export const LinesContextProvider = ({ children }) => {
 			getServiceMetricsByLineId,
 		},
 		data: {
-			lines,
-			routes,
+			lines: linesResponse,
+			routes: routesResponse,
 			service_metrics: serviceMetricsData?.data || [],
 		},
 		flags: {
 			is_loading: allLinesLoading || allRoutesLoading || serviceMetricsLoading,
 		},
 	}), [
-		lines,
+		linesResponse,
 		allLinesLoading,
-		routes,
+		routesResponse,
 		allRoutesLoading,
 		serviceMetricsData,
 		serviceMetricsLoading,

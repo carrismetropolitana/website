@@ -79,7 +79,10 @@ export const StopsContextProvider = ({ children }) => {
 	// D. Handle actions
 
 	const getStopById = (stopId: string): HubStop | undefined => {
-		return filteredStopsData.find(stop => stop._id.toString() === stopId);
+		return filteredStopsData.find((stop) => {
+			const id = stop._id ?? (stop as HubStop & { id?: number | string }).id;
+			return id?.toString() === stopId;
+		});
 	};
 
 	const getStopByIdGeoJsonFC = (stopId: string): GeoJSON.FeatureCollection | undefined => {
@@ -122,18 +125,29 @@ export const StopsContextProvider = ({ children }) => {
 
 /* * */
 
-export function transformStopDataIntoGeoJsonFeature(stopData: HubStop): GeoJSON.Feature<GeoJSON.Point, GeoJSON.GeoJsonProperties> {
+export function transformStopDataIntoGeoJsonFeature(stopData: HubStop): GeoJSON.Feature<GeoJSON.Point, GeoJSON.GeoJsonProperties> | undefined {
+	const legacyStopData = stopData as HubStop & {
+		id?: number | string
+		lat?: number
+		lon?: number
+		long_name?: string
+	};
+	const id = stopData._id ?? legacyStopData.id;
+	const lat = stopData.latitude ?? legacyStopData.lat;
+	const lon = stopData.longitude ?? legacyStopData.lon;
+	if (lat === undefined || lon === undefined) return;
+
 	const feature: GeoJSON.Feature<GeoJSON.Point, GeoJSON.GeoJsonProperties> = {
 		geometry: {
-			coordinates: [stopData.longitude, stopData.latitude],
+			coordinates: [lon, lat],
 			type: 'Point',
 		},
 		properties: {
 			current_status: stopData.lifecycle_status,
-			id: stopData.flags[0].stop_id,
-			lat: stopData.latitude,
-			lon: stopData.longitude,
-			long_name: stopData.tts_name,
+			id: id?.toString(),
+			lat,
+			lon,
+			long_name: stopData.name,
 		},
 		type: 'Feature',
 	};

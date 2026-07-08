@@ -40,10 +40,7 @@ export function PathWaypointSpine({ backgroundColor, foregroundColor, isFirstSto
 	// C. Render components
 
 	return (
-		<div
-			className={`${styles.container} ${isFirstStop && styles.isFirstStop} ${isLastStop && styles.isLastStop} ${isSelected && styles.isSelected}`}
-			style={{ backgroundColor: backgroundColor }}
-		>
+		<div className={`${styles.container} ${isFirstStop && styles.isFirstStop} ${isLastStop && styles.isLastStop} ${isSelected && styles.isSelected}`} style={{ backgroundColor: backgroundColor }}>
 			{debugContext.flags.is_debug_mode && <div className={`${styles.marker} ${styles.stopSequence}`} style={{ color: foregroundColor }}>{stopSequence}</div>}
 			{!debugContext.flags.is_debug_mode && isFavoriteStop && <IconHeartFilled className={`${styles.marker} ${styles.favorite}`} color={foregroundColor} />}
 			{!debugContext.flags.is_debug_mode && !isFavoriteStop && <div className={styles.marker} style={{ backgroundColor: foregroundColor }} />}
