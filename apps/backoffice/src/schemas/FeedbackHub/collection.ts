@@ -37,6 +37,5 @@ export const FeedbackHub: CollectionConfig = {
 		plural: 'Feedback Hub',
 		singular: 'Feedback Hub',
 	},
-	orderable: true,
 	slug: 'feedback-hub',
 };
