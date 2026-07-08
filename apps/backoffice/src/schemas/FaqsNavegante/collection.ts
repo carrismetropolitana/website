@@ -16,6 +16,7 @@ export const FaqsNavegante: CollectionConfig = {
 	},
 	admin: {
 		defaultColumns: ['question', 'answer'],
+		group: 'Navegante®',
 		useAsTitle: 'question',
 	},
 	fields: [
