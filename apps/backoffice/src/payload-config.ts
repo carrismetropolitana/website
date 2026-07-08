@@ -26,6 +26,7 @@ import { Settings } from '@/globals/config';
 import { Articles } from '@/schemas/Articles/collection';
 import { Faqs } from '@/schemas/Faqs/collection';
 import { FaqsNavegante } from '@/schemas/FaqsNavegante/collection';
+import { FeedbackHub } from '@/schemas/FeedbackHub/collection';
 import { GeneralStatus } from '@/schemas/GeneralStatus/global';
 import { HomeSlider } from '@/schemas/HomeSlider/global';
 
@@ -126,7 +127,7 @@ export default buildConfig({
 		user: 'users',
 	},
 
-	collections: [Campaigns, Articles, CaseStudies, Media, News, Topics, Users, KnowledgeBase, Notes, Projects, Faqs, FaqsNavegante],
+	collections: [Campaigns, Articles, CaseStudies, Media, News, Topics, Users, KnowledgeBase, Notes, Projects, Faqs, FaqsNavegante, FeedbackHub],
 
 	csrf: [
 		getPublicVariable('server_url_backoffice').replace(/\/$/, ''),

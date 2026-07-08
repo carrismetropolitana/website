@@ -79,6 +79,7 @@ export interface Config {
     projects: Project;
     faqs: Faq;
     'faqs-navegante': FaqsNavegante;
+    'feedback-hub': FeedbackHub;
     'payload-kv': PayloadKv;
     'payload-locked-documents': PayloadLockedDocument;
     'payload-preferences': PayloadPreference;
@@ -98,6 +99,7 @@ export interface Config {
     projects: ProjectsSelect<false> | ProjectsSelect<true>;
     faqs: FaqsSelect<false> | FaqsSelect<true>;
     'faqs-navegante': FaqsNaveganteSelect<false> | FaqsNaveganteSelect<true>;
+    'feedback-hub': FeedbackHubSelect<false> | FeedbackHubSelect<true>;
     'payload-kv': PayloadKvSelect<false> | PayloadKvSelect<true>;
     'payload-locked-documents': PayloadLockedDocumentsSelect<false> | PayloadLockedDocumentsSelect<true>;
     'payload-preferences': PayloadPreferencesSelect<false> | PayloadPreferencesSelect<true>;
@@ -490,6 +492,19 @@ export interface FaqsNavegante {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "feedback-hub".
+ */
+export interface FeedbackHub {
+  id: string;
+  _order?: string | null;
+  question?: string | null;
+  answer?: string | null;
+  publishedAt: string;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "payload-kv".
  */
 export interface PayloadKv {
@@ -559,6 +574,10 @@ export interface PayloadLockedDocument {
     | ({
         relationTo: 'faqs-navegante';
         value: string | FaqsNavegante;
+      } | null)
+    | ({
+        relationTo: 'feedback-hub';
+        value: string | FeedbackHub;
       } | null);
   globalSlug?: string | null;
   user: {
@@ -836,6 +855,18 @@ export interface FaqsSelect<T extends boolean = true> {
  * via the `definition` "faqs-navegante_select".
  */
 export interface FaqsNaveganteSelect<T extends boolean = true> {
+  _order?: T;
+  question?: T;
+  answer?: T;
+  publishedAt?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "feedback-hub_select".
+ */
+export interface FeedbackHubSelect<T extends boolean = true> {
   _order?: T;
   question?: T;
   answer?: T;
