@@ -53,7 +53,7 @@ export function SelectLine({ data = [], label, nothingFound, onSelectLineId, pla
 			short_name: 1,
 			tts_name: 0.9,
 		});
-	}, [data]);
+	}, [data, profileContext.data.favorite_lines]);
 
 	const selectedLineData = useMemo(() => {
 		return data.find(item => item._id === selectedLineId);

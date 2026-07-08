@@ -1,13 +1,18 @@
 'use client';
 
-/* * */
-
+import { useFilterByAgencyIds } from '@/hooks/useFilterByAgencyIds';
 import { type CachedResource } from '@carrismetropolitana/api-types/common';
 import { type ServiceMetrics } from '@carrismetropolitana/api-types/metrics';
 import { getPublicVariable } from '@carrismetropolitana/website-shared-settings';
 import { type HubLine, type HubRoute } from '@tmlmobilidade/go-types-public-info';
 import { createContext, useContext, useMemo } from 'react';
 import useSWR from 'swr';
+
+/* * */
+
+interface LinesResponse<T> {
+	data: T
+}
 
 /* * */
 
@@ -47,25 +52,24 @@ export const LinesContextProvider = ({ children }) => {
 	//
 	// A. Fetch data
 
-	const { data: linesResponse, isLoading: allLinesLoading } = useSWR<HubLine[], Error>(`${getPublicVariable('go_api_url')}/hub/api/v1/network/lines`, { refreshInterval: 900000 }); // 15 minutes
-	const { data: routesResponse, isLoading: allRoutesLoading } = useSWR<HubRoute[], Error>(`${getPublicVariable('go_api_url')}/hub/api/v1/network/routes`, { refreshInterval: 900000 }); // 15 minutes
+	const { data: linesResponse, isLoading: allLinesLoading } = useSWR<LinesResponse<HubLine[]>, Error>(`${getPublicVariable('go_api_url')}/hub/api/v1/network/lines`, { refreshInterval: 900000 }); // 15 minutes
+	const { data: routesResponse, isLoading: allRoutesLoading } = useSWR<LinesResponse<HubRoute[]>, Error>(`${getPublicVariable('go_api_url')}/hub/api/v1/network/routes`, { refreshInterval: 900000 }); // 15 minutes
 	const { data: serviceMetricsData, isLoading: serviceMetricsLoading } = useSWR<CachedResource<ServiceMetrics[]>, Error>(`${getPublicVariable('api_url')}/metrics/service/all`, { refreshInterval: 900000 }); // 15 minutes
+	const linesData = useFilterByAgencyIds(linesResponse?.data || []);
+	const routesData = useFilterByAgencyIds(routesResponse?.data || []);
 
 	//
 	// B. Handle actions
 
 	const getLineDataById = (lineId: string) => {
-		if (!allLinesLoading) return;
-		return linesResponse.find(line => line._id === lineId);
+		return linesData.find(line => line._id === lineId);
 	};
 
 	const getRouteDataById = (routeId: string) => {
-		if (!allRoutesLoading) return;
-		return routesResponse.find(route => route._id === routeId);
+		return routesData.find(route => route._id === routeId);
 	};
 
 	const getServiceMetricsByLineId = (lineId: string) => {
-		if (!serviceMetricsLoading) return;
 		return serviceMetricsData?.data.filter(serviceMetrics => String(serviceMetrics.line_id) === String(lineId));
 	};
 
@@ -79,17 +83,17 @@ export const LinesContextProvider = ({ children }) => {
 			getServiceMetricsByLineId,
 		},
 		data: {
-			lines: linesResponse,
-			routes: routesResponse,
+			lines: linesData,
+			routes: routesData,
 			service_metrics: serviceMetricsData?.data || [],
 		},
 		flags: {
 			is_loading: allLinesLoading || allRoutesLoading || serviceMetricsLoading,
 		},
 	}), [
-		linesResponse,
+		linesData,
 		allLinesLoading,
-		routesResponse,
+		routesData,
 		allRoutesLoading,
 		serviceMetricsData,
 		serviceMetricsLoading,
