@@ -9,9 +9,9 @@ import { useOperationalDateContext } from '@/contexts/OperationalDate.context';
 import { useProfileContext } from '@/contexts/Profile.context';
 import { useStopsContext } from '@/contexts/Stops.context';
 import { type Arrival } from '@/types/stops.types';
-import { type Line, type Pattern, type Shape, type Stop } from '@carrismetropolitana/api-types/network';
+import { type Shape } from '@carrismetropolitana/api-types/network';
 import { getPublicVariable } from '@carrismetropolitana/website-shared-settings';
-import { type HubAlert } from '@tmlmobilidade/go-types-public-info';
+import { type HubAlert, type HubLine, type HubPattern, type HubStop } from '@tmlmobilidade/go-types-public-info';
 import { DateTime } from 'luxon';
 import { notFound } from 'next/navigation';
 import { createContext, useContext, useEffect, useState } from 'react';
@@ -26,19 +26,19 @@ interface StopsDetailContextState {
 	}
 	data: {
 		active_alerts: HubAlert[] | undefined
-		active_pattern_group: Pattern | undefined
+		active_pattern_group: HubPattern | undefined
 		active_shape: Shape | undefined
 		active_stop_id: string
 		active_stop_sequence: number | undefined
 		active_trip_id: string | undefined
-		lines: Line[] | undefined
-		patterns: Pattern[][] | undefined
-		stop: Stop | undefined
+		lines: HubLine[] | undefined
+		patterns: HubPattern[][] | undefined
+		stop: HubStop | undefined
 		timetable_realtime: Arrival[] | undefined
 		timetable_realtime_future: Arrival[] | undefined
 		timetable_realtime_past: Arrival[] | undefined
 		timetable_schedule: Arrival[] | undefined
-		valid_pattern_groups: Pattern[] | undefined
+		valid_pattern_groups: HubPattern[] | undefined
 	}
 	filters: {
 		none: string | undefined
@@ -77,17 +77,17 @@ export const StopsDetailContextProvider = ({ children, stopId }: { children: Rea
 	const operationalDateContext = useOperationalDateContext();
 	const debugContext = useDebugContext();
 	const environmentContext = useEnvironmentContext();
-	const [dataStopState, setDataStopState] = useState<Stop | undefined>(undefined);
+	const [dataStopState, setDataStopState] = useState<HubStop | undefined>(undefined);
 	const [dataActiveStopIdState, setDataActiveStopIdState] = useState<string>(stopId);
-	const [dataLinesState, setDataLinesState] = useState<Line[] | undefined>(undefined);
-	const [dataPatternsState, setDataPatternsState] = useState<Pattern[][] | undefined>(undefined);
-	const [dataValidPatternsState, setDataValidPatternsState] = useState<Pattern[] | undefined>(undefined);
+	const [dataLinesState, setDataLinesState] = useState<HubLine[] | undefined>(undefined);
+	const [dataPatternsState, setDataPatternsState] = useState<HubPattern[][] | undefined>(undefined);
+	const [dataValidPatternsState, setDataValidPatternsState] = useState<HubPattern[] | undefined>(undefined);
 	const [dataShapeState, setDataShapeState] = useState<Shape | undefined>(undefined);
 	const [dataTimetableRealtimeState, setDataTimetableRealtimeState] = useState<Arrival[] | undefined>(undefined);
 	const [dataTimetableRealtimePastState, setDataTimetableRealtimePastState] = useState<Arrival[] | undefined>(undefined);
 	const [dataTimetableRealtimeFutureState, setDataTimetableRealtimeFutureState] = useState<Arrival[] | undefined>(undefined);
 	const [dataTimetableScheduleState, setDataTimetableScheduleState] = useState<Arrival[] | undefined>(undefined);
-	const [dataActivePatternState, setDataActivePatternState] = useState<Pattern | undefined>(undefined);
+	const [dataActivePatternState, setDataActivePatternState] = useState<HubPattern | undefined>(undefined);
 	const [dataActiveAlertsState, setDataActiveAlertsState] = useState<HubAlert[] | undefined>(undefined);
 	const [dataActiveTripIdState, setDataActiveTripIdState] = useState<string | undefined>(undefined);
 	const [dataActiveStopSequenceState, setDataActiveStopSequenceState] = useState<number | undefined>(undefined);
@@ -242,7 +242,7 @@ export const StopsDetailContextProvider = ({ children, stopId }: { children: Rea
 					// When debug is off, skip last-stop arrivals (show them only in debug mode).
 					if (debugContext.flags.is_debug_mode) return true;
 					const lastStopSequence = dataValidPatternsState
-						?.find(patternGroup => patternGroup.id === arrival.pattern_id)?.path
+						?.find(patternGroup => patternGroup._id === arrival.pattern_id)?.path
 						.sort((a, b) => a.stop_sequence - b.stop_sequence)
 						.slice(-1)[0]?.stop_sequence;
 					return arrival.stop_sequence !== lastStopSequence;
@@ -265,7 +265,7 @@ export const StopsDetailContextProvider = ({ children, stopId }: { children: Rea
 					if (debugContext.flags.is_debug_mode) return true;
 
 					const lastStopSequence = dataValidPatternsState
-						?.find(patternGroup => patternGroup.id === arrival.pattern_id)?.path
+						?.find(patternGroup => patternGroup._id === arrival.pattern_id)?.path
 						.sort((a, b) => a.stop_sequence - b.stop_sequence)
 						.slice(-1)[0]?.stop_sequence;
 					return arrival.stop_sequence !== lastStopSequence;
@@ -325,7 +325,7 @@ export const StopsDetailContextProvider = ({ children, stopId }: { children: Rea
 						line_id: patternGroup.line_id,
 						observed_arrival: null,
 						observed_arrival_unix: null,
-						pattern_id: patternGroup.id,
+						pattern_id: patternGroup._id,
 						related_trip_ids: trip.trip_ids,
 						route_id: patternGroup.route_id,
 						scheduled_arrival: stopTime.arrival_time_24h,
@@ -349,7 +349,7 @@ export const StopsDetailContextProvider = ({ children, stopId }: { children: Rea
 
 	useEffect(() => {
 		if (!dataPatternsState || !operationalDateContext.data.selected_date) return;
-		const activePatterns: Pattern[] = [];
+		const activePatterns: HubPattern[] = [];
 		for (const pattern of dataPatternsState) {
 			for (const patternGroup of pattern) {
 				if (patternGroup.valid_on.includes(operationalDateContext.data.selected_date.operational_date)) {

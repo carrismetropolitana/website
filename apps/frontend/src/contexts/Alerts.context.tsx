@@ -45,7 +45,7 @@ export function AlertsContextProvider({ children }: PropsWithChildren) {
 	//
 	// A. Fetch data
 
-	const { data: allAlertsData, isLoading: allAlertsLoading } = useSWR<{ data: HubAlert[] }>(`${getPublicVariable('go_api_url')}/alerts`, { refreshInterval: 180000 }); // 3 minutes
+	const { data: allAlertsData, isLoading: allAlertsLoading } = useSWR<{ data: HubAlert[] }>(`${getPublicVariable('go_api_url')}hub/api/v1/alerts`, { refreshInterval: 180000 }); // 3 minutes
 	const filteredAlertsData = useMemo(() => {
 		const allowedAgencyIds = new Set<string>(CARRIS_METROPOLITANA_AGENCY_IDS);
 		return (allAlertsData?.data ?? []).filter((alertData) => {

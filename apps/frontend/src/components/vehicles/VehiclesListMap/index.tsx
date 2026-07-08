@@ -63,7 +63,7 @@ export function VehiclesListMap() {
 			const operationalDate = operationalDateContext.data.selected_date?.operational_date;
 			if (!operationalDate) return;
 
-			const fetchedPatternResponse = await fetch(`${getPublicVariable('go_api_url')}/network/patterns/${encodeURIComponent(vehiclesListContext.data.selected.pattern_id)}`);
+			const fetchedPatternResponse = await fetch(`${getPublicVariable('go_api_url')}hub/api/v1/network/patterns/${encodeURIComponent(vehiclesListContext.data.selected.pattern_id)}`);
 
 			const fetchedPatternResponseData: { data?: Pattern[] } = await fetchedPatternResponse.json();
 			const fetchedPatternData = fetchedPatternResponseData.data;
@@ -84,7 +84,7 @@ export function VehiclesListMap() {
 				return;
 			}
 
-			const fetchedShapeResponse = await fetch(`${getPublicVariable('go_api_url')}/network/shapes/${encodeURIComponent(activePatternData.shape_id)}`);
+			const fetchedShapeResponse = await fetch(`${getPublicVariable('go_api_url')}hub/api/v1/network/shapes/${encodeURIComponent(activePatternData.shape_id)}`);
 
 			const fetchedShapeResponseData: { data?: Shape } = await fetchedShapeResponse.json();
 			setActiveShapeData(fetchedShapeResponseData.data);

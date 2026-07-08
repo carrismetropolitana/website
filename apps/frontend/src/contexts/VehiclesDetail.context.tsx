@@ -43,7 +43,7 @@ export function VehiclesDetailContextProvider({ children, vehicleId }: PropsWith
 	// A. Setup variables
 
 	const vehiclesContext = useVehiclesContext();
-	const metadataApiUrl = vehicleId ? `${getPublicVariable('go_api_url')}/realtime/vehicles/metadata` : null;
+	const metadataApiUrl = vehicleId ? `${getPublicVariable('go_api_url')}hub/api/v1/realtime/vehicles/metadata` : null;
 
 	//
 	// B. Fetch data

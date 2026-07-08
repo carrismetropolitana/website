@@ -13,9 +13,9 @@ export const PUBLIC_VARIABLES = Object.freeze({
 		staging: 'https://api.carrismetropolitana.pt/v2',
 	},
 	go_api_url: {
-		development: 'https://go.tmlmobilidade.pt/hub/api/v1',
-		production: 'https://go.tmlmobilidade.pt/hub/api/v1',
-		staging: 'https://go.tmlmobilidade.pt/hub/api/v1',
+		development: 'https://go.tmlmobilidade.pt',
+		production: 'https://go.tmlmobilidade.pt',
+		staging: 'https://go.tmlmobilidade.pt',
 	},
 
 	server_url_backoffice: {
