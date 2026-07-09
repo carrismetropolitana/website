@@ -170,15 +170,10 @@ export const StopsDetailContextProvider = ({ children, stopId }: { children: Rea
 		(async () => {
 			try {
 				const patternsData = await Promise.all(dataStopState.pattern_ids.map(async (patternId) => {
-					const response = await fetch(`${getPublicVariable('go_api_url')}/hub/api/v1/network/patterns/${encodeURIComponent(patternId)}`);
-					if (!response.ok) {
-						console.log(`Failed to fetch pattern data for patternId: ${patternId}`);
-						return [];
-					}
-					const patternPayload = await response.json() as HubPattern | HubPattern[] | { data?: HubPattern | HubPattern[] };
-					const patternData = 'data' in patternPayload ? patternPayload.data : patternPayload;
-					if (!patternData) return [];
-					return Array.isArray(patternData) ? patternData : [patternData];
+					const response = await fetch(`${getPublicVariable('go_api_url')}/hub/api/v1/network/patterns/${patternId}`);
+					const patternPayload = await response.json();
+
+					return patternPayload.data as HubPattern[];
 				}));
 				setDataPatternsState(patternsData);
 			}
