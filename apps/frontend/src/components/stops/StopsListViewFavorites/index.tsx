@@ -36,7 +36,7 @@ export function StopsListViewFavorites() {
 		<Surface variant="persistent" forceOverflow>
 			<Section>
 				{stopsListContext.data.favorites.map(stop => (
-					<RegularListItem key={stop.id} href={`/stops/${stop.id}`}>
+					<RegularListItem key={stop._id} href={`/stops/${stop._id}`}>
 						<StopDisplay stopData={stop} />
 					</RegularListItem>
 				))}

@@ -27,7 +27,7 @@ export function StopsListViewAll() {
 
 	if (!stopsListContext.data.filtered.length) {
 		return (
-			<Surface variant="persistent" forceOverflow>
+			<Surface forceOverflow variant="persistent">
 				<Section>
 					<NoDataLabel text={t('no_data')} withMinHeight />
 				</Section>
@@ -36,11 +36,11 @@ export function StopsListViewAll() {
 	}
 
 	return (
-		<Surface variant="persistent" forceOverflow>
+		<Surface forceOverflow variant="persistent">
 			<Section>
 				<ViewportList itemMargin={0} items={stopsListContext.data.filtered}>
 					{item => (
-						<RegularListItem key={item.id} href={environmentContext.actions.getNormalizedHref(`/stops/${item.id}`)}>
+						<RegularListItem href={environmentContext.actions.getNormalizedHref(`/stops/${item._id}`)} key={item._id}>
 							<StopDisplay stopData={item} />
 						</RegularListItem>
 					)}
