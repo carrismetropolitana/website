@@ -1,20 +1,13 @@
 'use client';
 
 import { useFilterByAgencyIds } from '@/hooks/useFilterByAgencyIds';
+import { type GoApiResponse } from '@/types/api.types';
 import { type CachedResource } from '@carrismetropolitana/api-types/common';
 import { type ServiceMetrics } from '@carrismetropolitana/api-types/metrics';
 import { getPublicVariable } from '@carrismetropolitana/website-shared-settings';
 import { type HubLine, type HubRoute } from '@tmlmobilidade/go-types-public-info';
 import { createContext, useContext, useMemo } from 'react';
 import useSWR from 'swr';
-
-/* * */
-
-interface LinesResponse<T> {
-	data: T
-}
-
-/* * */
 
 interface LinesContextState {
 	actions: {
@@ -52,11 +45,11 @@ export const LinesContextProvider = ({ children }) => {
 	//
 	// A. Fetch data
 
-	const { data: linesResponse, isLoading: allLinesLoading } = useSWR<LinesResponse<HubLine[]>, Error>(`${getPublicVariable('go_api_url')}/hub/api/v1/network/lines`, { refreshInterval: 900000 }); // 15 minutes
-	const { data: routesResponse, isLoading: allRoutesLoading } = useSWR<LinesResponse<HubRoute[]>, Error>(`${getPublicVariable('go_api_url')}/hub/api/v1/network/routes`, { refreshInterval: 900000 }); // 15 minutes
+	const { data: linesResponse, isLoading: allLinesLoading } = useSWR<GoApiResponse<HubLine[]>, Error>(`${getPublicVariable('go_api_url')}/hub/api/v1/network/lines`, { refreshInterval: 900000 }); // 15 minutes
+	const { data: routesResponse, isLoading: allRoutesLoading } = useSWR<GoApiResponse<HubRoute[]>, Error>(`${getPublicVariable('go_api_url')}/hub/api/v1/network/routes`, { refreshInterval: 900000 }); // 15 minutes
 	const { data: serviceMetricsData, isLoading: serviceMetricsLoading } = useSWR<CachedResource<ServiceMetrics[]>, Error>(`${getPublicVariable('api_url')}/metrics/service/all`, { refreshInterval: 900000 }); // 15 minutes
-	const linesData = useFilterByAgencyIds(linesResponse?.data || []);
-	const routesData = useFilterByAgencyIds(routesResponse?.data || []);
+	const linesData = useFilterByAgencyIds(linesResponse).data;
+	const routesData = useFilterByAgencyIds(routesResponse).data;
 
 	//
 	// B. Handle actions
