@@ -56,6 +56,7 @@ export function PathWaypointHeader({ isFirstStop, isLastStop, isSelected, waypoi
 		});
 	};
 
+	console.log('stopData', stopData);
 	//
 	// D. Render components
 

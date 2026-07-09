@@ -49,7 +49,8 @@ export const StopsContextProvider = ({ children }) => {
 	//
 	// B. Fetch data
 
-	const { data: allStopsData, isLoading: allStopsLoading } = useSWR<HubStop[]>(`${getPublicVariable('api_url')}/stops`, { refreshInterval: 900000 }); // 15 minutes
+	const { data: allStopsData, isLoading: allStopsLoading } = useSWR<HubStop[]>(`${getPublicVariable('go_api_url')}/hub/api/v1/network/stops`, { refreshInterval: 900000 }); // 15 minutes
+
 	const filteredStopsData = useMemo(() => {
 		const allowedOperatorDigits = new Set(CARRIS_METROPOLITANA_AGENCY_IDS.map(agencyId => agencyId.slice(-1)));
 		return (allStopsData ?? []).filter((stopData) => {
