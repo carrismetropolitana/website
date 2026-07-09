@@ -95,8 +95,6 @@ export function PathWaypointHeader({ isFirstStop, isLastStop, isSelected, waypoi
 					))}
 				</div>
 			)}
-
-			//TODO
 		</div>
 	);
 
