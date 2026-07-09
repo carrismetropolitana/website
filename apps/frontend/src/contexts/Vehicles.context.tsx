@@ -1,5 +1,6 @@
 'use client';
 
+import { type GoApiResponse } from '@/types/api.types';
 import { type HubVehicleMetadata } from '@/types/vehicles.types';
 import { buildVehicleMetadataMap, getVehicleMetadataForPosition } from '@/utils/vehicles.utils';
 import { CARRIS_METROPOLITANA_AGENCY_IDS, getPublicVariable } from '@carrismetropolitana/website-shared-settings';
@@ -52,7 +53,7 @@ export const VehiclesContextProvider = ({ children }: PropsWithChildren) => {
 	// A. Fetch data
 
 	const { data: allVehiclesPositionsResponse, isLoading: allVehiclesPositionsLoading } = useSWR<{ data: HubVehiclePosition[] }>(`${getPublicVariable('go_api_url')}/hub/api/v1/realtime/vehicles/positions`, { refreshInterval: 5_000 }); // 5 seconds
-	const { data: allVehiclesMetadata = [] } = useSWR<HubVehicleMetadata[]>(`${getPublicVariable('go_api_url')}/hub/api/v1/realtime/vehicles/metadata`, { refreshInterval: 900_000 }); // 15 minutes
+	const { data: allVehiclesMetadataResponse } = useSWR<GoApiResponse<HubVehicleMetadata[]>>(`${getPublicVariable('go_api_url')}/hub/api/v1/realtime/vehicles/metadata`, { refreshInterval: 900_000 }); // 15 minutes
 
 	const allVehiclesData = useMemo(() => {
 		if (!allVehiclesPositionsResponse?.data) return [];
@@ -60,7 +61,7 @@ export const VehiclesContextProvider = ({ children }: PropsWithChildren) => {
 		return allVehiclesPositionsResponse.data.filter(vehicle => (CARRIS_METROPOLITANA_AGENCY_IDS as readonly string[]).includes(String(vehicle.agency_id)) && Math.floor((vehicle.received_at ?? 0) / 1000) > now - 180);
 	}, [allVehiclesPositionsResponse?.data]);
 
-	const metadataByVehicleId = useMemo(() => buildVehicleMetadataMap(allVehiclesMetadata), [allVehiclesMetadata]);
+	const metadataByVehicleId = useMemo(() => buildVehicleMetadataMap(allVehiclesMetadataResponse?.data), [allVehiclesMetadataResponse?.data]);
 
 	//
 	// B. Transform data

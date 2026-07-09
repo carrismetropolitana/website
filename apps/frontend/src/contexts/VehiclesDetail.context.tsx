@@ -3,6 +3,7 @@
 /* * */
 
 import { useVehiclesContext } from '@/contexts/Vehicles.context';
+import { type GoApiResponse } from '@/types/api.types';
 import { type HubVehicleMetadata } from '@/types/vehicles.types';
 import { getMetadataVehicleIdFromPositionVehicleId } from '@/utils/vehicles.utils';
 import { getPublicVariable } from '@carrismetropolitana/website-shared-settings';
@@ -48,7 +49,7 @@ export function VehiclesDetailContextProvider({ children, vehicleId }: PropsWith
 	//
 	// B. Fetch data
 
-	const { data: allVehiclesMetadata, isLoading: allVehiclesMetadataLoading } = useSWR<HubVehicleMetadata[]>(metadataApiUrl, { refreshInterval: 900_000 }); // 15 minutes
+	const { data: allVehiclesMetadataResponse, isLoading: allVehiclesMetadataLoading } = useSWR<GoApiResponse<HubVehicleMetadata[]>>(metadataApiUrl, { refreshInterval: 900_000 }); // 15 minutes
 
 	//
 	// C. Transform data
@@ -59,11 +60,11 @@ export function VehiclesDetailContextProvider({ children, vehicleId }: PropsWith
 	}, [vehicleId, vehiclesContext.data.vehicles]);
 
 	const metadataData = useMemo(() => {
-		if (!vehicleId || !allVehiclesMetadata) return null;
+		if (!vehicleId || !allVehiclesMetadataResponse?.data) return null;
 
 		const metadataVehicleId = getMetadataVehicleIdFromPositionVehicleId(vehicleId);
-		return allVehiclesMetadata.find(vehicle => vehicle.vehicle_id === metadataVehicleId) ?? null;
-	}, [allVehiclesMetadata, vehicleId]);
+		return allVehiclesMetadataResponse.data.find(vehicle => vehicle.vehicle_id === metadataVehicleId) ?? null;
+	}, [allVehiclesMetadataResponse?.data, vehicleId]);
 
 	//
 	// D. Define context value

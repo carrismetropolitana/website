@@ -3,6 +3,7 @@
 /* * */
 
 import { useVehiclesContext } from '@/contexts/Vehicles.context';
+import { type GoApiResponse } from '@/types/api.types';
 import { type HubVehicleMetadata } from '@/types/vehicles.types';
 import { buildVehicleMetadataMap, getVehicleMetadataForPosition } from '@/utils/vehicles.utils';
 import { getPublicVariable } from '@carrismetropolitana/website-shared-settings';
@@ -74,10 +75,12 @@ export const VehiclesListContextProvider = ({ children }) => {
 	//
 	// B. Fetch data
 
-	const { data: allVehiclesMetadata = [], isLoading: allVehiclesMetadataLoading } = useSWR<HubVehicleMetadata[]>(`${getPublicVariable('go_api_url')}/hub/api/v1/realtime/vehicles/metadata`, { refreshInterval: 900_000 }); // 15 minutes
+	const { data: allVehiclesMetadataResponse, isLoading: allVehiclesMetadataLoading } = useSWR<GoApiResponse<HubVehicleMetadata[]>>(`${getPublicVariable('go_api_url')}/hub/api/v1/realtime/vehicles/metadata`, { refreshInterval: 900_000 }); // 15 minutes
 
 	//
 	// C. Transform data
+
+	const allVehiclesMetadata = allVehiclesMetadataResponse?.data || [];
 
 	const metadataByVehicleId = useMemo(() => buildVehicleMetadataMap(allVehiclesMetadata), [allVehiclesMetadata]);
 
