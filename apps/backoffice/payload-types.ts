@@ -496,7 +496,8 @@ export interface FaqsNavegante {
  */
 export interface FeedbackHub {
   id: string;
-  _order?: string | null;
+  reasonType: 'lines' | 'stops';
+  reasonSubtype?: ('line-service' | 'vehicle' | 'driver') | null;
   question?: string | null;
   answer?: string | null;
   publishedAt: string;
@@ -867,7 +868,8 @@ export interface FaqsNaveganteSelect<T extends boolean = true> {
  * via the `definition` "feedback-hub_select".
  */
 export interface FeedbackHubSelect<T extends boolean = true> {
-  _order?: T;
+  reasonType?: T;
+  reasonSubtype?: T;
   question?: T;
   answer?: T;
   publishedAt?: T;
