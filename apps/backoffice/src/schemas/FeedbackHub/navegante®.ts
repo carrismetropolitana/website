@@ -14,9 +14,9 @@ export const FeedbackHub: CollectionConfig = {
 		update: ({ req }) => Boolean(req.user),
 	},
 	admin: {
-		defaultColumns: ['reasonType', 'reasonSubtype', 'question', 'answer'],
+		defaultColumns: ['reasonType', 'reasonCategory', 'reason'],
 		group: 'Navegante®',
-		useAsTitle: 'question',
+		useAsTitle: 'reason',
 	},
 	fields: [
 		{
@@ -39,8 +39,8 @@ export const FeedbackHub: CollectionConfig = {
 			admin: {
 				condition: ({ reasonType }) => reasonType === 'lines',
 			},
-			label: 'Reason Subtype',
-			name: 'reasonSubtype',
+			label: 'Reason category',
+			name: 'reasonCategory',
 			options: [
 				{
 					label: 'Linha/Serviço',
@@ -57,20 +57,14 @@ export const FeedbackHub: CollectionConfig = {
 			],
 			type: 'select',
 			validate: (value, { data }) => {
-				if (data?.reasonType === 'lines' && !value) return 'Subtipo é obrigatório quando o tipo é "Linhas".';
+				if (data?.reasonType === 'lines' && !value) return 'A categoria é obrigatória quando o tipo é "Linhas".';
 				return true;
 			},
 		},
 		{
-			label: 'Question',
+			label: 'Reason',
 			localized: true,
-			name: 'question',
-			type: 'textarea',
-		},
-		{
-			label: 'Answer',
-			localized: true,
-			name: 'answer',
+			name: 'reason',
 			type: 'textarea',
 		},
 		publishedAtField,
@@ -80,7 +74,7 @@ export const FeedbackHub: CollectionConfig = {
 		beforeChange: [
 			({ data }) => {
 				if (!data || !Object.prototype.hasOwnProperty.call(data, 'reasonType') || data.reasonType === 'lines') return data;
-				return { ...data, reasonSubtype: null };
+				return { ...data, reasonCategory: null };
 			},
 		],
 	},

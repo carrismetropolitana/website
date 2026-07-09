@@ -497,9 +497,8 @@ export interface FaqsNavegante {
 export interface FeedbackHub {
   id: string;
   reasonType: 'lines' | 'stops';
-  reasonSubtype?: ('line-service' | 'vehicle' | 'driver') | null;
-  question?: string | null;
-  answer?: string | null;
+  reasonCategory?: ('line-service' | 'vehicle' | 'driver') | null;
+  reason?: string | null;
   publishedAt: string;
   updatedAt: string;
   createdAt: string;
@@ -869,9 +868,8 @@ export interface FaqsNaveganteSelect<T extends boolean = true> {
  */
 export interface FeedbackHubSelect<T extends boolean = true> {
   reasonType?: T;
-  reasonSubtype?: T;
-  question?: T;
-  answer?: T;
+  reasonCategory?: T;
+  reason?: T;
   publishedAt?: T;
   updatedAt?: T;
   createdAt?: T;
