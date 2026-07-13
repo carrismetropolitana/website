@@ -27,8 +27,8 @@ export function MetricsPageComplaintsToolbar({ allLines, filter_type, filter_val
 	// A. Setup variables
 
 	const t = useTranslations('metrics.MetricsPageComplaintsToolbar');
-	const [line, setLine] = useState(null);
-	const [municipality, setMunicipality] = useState(null);
+	const [line, setLine] = useState<null | string>(null);
+	const [municipality, setMunicipality] = useState<null | string>(null);
 	const AML = [
 		{ label: 'Alcochete', value: '1502' },
 		{ label: 'Almada', value: '1503' },
@@ -52,30 +52,31 @@ export function MetricsPageComplaintsToolbar({ allLines, filter_type, filter_val
 	//
 	// B. Handle actions
 
-	const handleLineChange = (value) => {
+	const handleLineChange = (value: null | string) => {
 		if (municipality) {
 			setMunicipality(null);
 		}
-		if (value === '-') {
+		if (!value || value === '-') {
 			filter_type('global');
-			filter_value(value);
+			filter_value('-');
 			setLine(null);
 		}
 		else {
-			const lineId = value && value.length > 4 ? value.substring(4, value.length) : null;
+			const selectedLine = allLines.find(item => item._id === value);
+			const lineId = selectedLine?.short_name || value;
 			filter_type('line');
 			filter_value(lineId);
-			setLine(lineId);
+			setLine(value);
 		}
 	};
 
-	const handleMunicipalityChange = (value) => {
+	const handleMunicipalityChange = (value: null | string) => {
 		if (line) {
 			setLine(null);
 		}
-		if (value === '-') {
+		if (!value || value === '-') {
 			filter_type('global');
-			filter_value(value);
+			filter_value('-');
 			setMunicipality(null);
 		}
 		else {
