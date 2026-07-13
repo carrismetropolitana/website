@@ -232,10 +232,6 @@ export interface Article {
    */
   specialSeries?: (string | null) | SpecialSery;
   /**
-   * Opcional. Use quando este conteúdo fizer parte de uma parceria.
-   */
-  partnership?: (string | null) | Partnership;
-  /**
    * Tempo estimado de leitura em minutos.
    */
   readTime: number;
@@ -304,21 +300,6 @@ export interface SpecialSery {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "partnerships".
- */
-export interface Partnership {
-  id: string;
-  title: string;
-  /**
-   * URL única para esta parceria. Será gerada automaticamente do título se deixado em branco.
-   */
-  slug: string;
-  description?: string | null;
-  updatedAt: string;
-  createdAt: string;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "case-studies".
  */
 export interface CaseStudy {
@@ -332,7 +313,7 @@ export interface CaseStudy {
    * Resumo curto do caso de estudo que aparece na listagem e no início da página.
    */
   description: string;
-  type: string | ContentType;
+  type: 'comunicacao' | 'tecnologia' | 'operacao' | 'sustentabilidade';
   /**
    * Tempo estimado de leitura em minutos.
    */
@@ -440,6 +421,21 @@ export interface News {
 export interface Topic {
   id: string;
   title: string;
+  description?: string | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "partnerships".
+ */
+export interface Partnership {
+  id: string;
+  title: string;
+  /**
+   * URL única para esta parceria. Será gerada automaticamente do título se deixado em branco.
+   */
+  slug: string;
   description?: string | null;
   updatedAt: string;
   createdAt: string;
@@ -660,10 +656,6 @@ export interface Video {
    */
   specialSeries?: (string | null) | SpecialSery;
   /**
-   * Opcional. Use quando este conteúdo fizer parte de uma parceria.
-   */
-  partnership?: (string | null) | Partnership;
-  /**
    * Tempo estimado de visualização em minutos.
    */
   readTime: number;
@@ -719,15 +711,11 @@ export interface Interview {
    */
   description: string;
   contentFormat: 'transcript' | 'audio';
-  type: string | ContentType;
+  type: 'comunicacao' | 'tecnologia' | 'operacao' | 'sustentabilidade';
   /**
    * Opcional. Use quando este conteúdo fizer parte de uma Série Especial.
    */
   specialSeries?: (string | null) | SpecialSery;
-  /**
-   * Opcional. Use quando este conteúdo fizer parte de uma parceria.
-   */
-  partnership?: (string | null) | Partnership;
   guest: {
     picture?: (string | null) | Media;
     name: string;
@@ -779,7 +767,7 @@ export interface Interview {
     [k: string]: unknown;
   } | null;
   /**
-   * Ficheiro PDF com a transcrição completa da entrevista.
+   * Ficheiro PDF com a entrevista escrita completa.
    */
   transcriptPdf?: (string | null) | Media;
   publishDate: string;
@@ -820,7 +808,7 @@ export interface Report {
   /**
    * Ficheiro PDF disponível para download na página do relatório.
    */
-  reportPdf: string | Media;
+  reportPdf?: (string | null) | Media;
   /**
    * Ano ou edição destacada no bloco principal do relatório.
    */
@@ -1043,7 +1031,6 @@ export interface ArticlesSelect<T extends boolean = true> {
   description?: T;
   type?: T;
   specialSeries?: T;
-  partnership?: T;
   readTime?: T;
   heroImage?: T;
   heroImageCaption?: T;
@@ -1349,7 +1336,6 @@ export interface VideosSelect<T extends boolean = true> {
       };
   type?: T;
   specialSeries?: T;
-  partnership?: T;
   readTime?: T;
   video?: T;
   content?: T;
@@ -1384,7 +1370,6 @@ export interface InterviewsSelect<T extends boolean = true> {
   contentFormat?: T;
   type?: T;
   specialSeries?: T;
-  partnership?: T;
   guest?:
     | T
     | {

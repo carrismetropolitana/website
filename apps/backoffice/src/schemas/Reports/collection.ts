@@ -161,7 +161,6 @@ export const Reports: CollectionConfig = {
 			label: 'PDF do Relatório',
 			name: 'reportPdf',
 			relationTo: 'media',
-			required: true,
 			type: 'upload',
 		},
 		{

@@ -2,10 +2,9 @@
 
 import type { CollectionConfig } from 'payload';
 
-import { contentTypeField } from '@/fields/content-type';
-import { partnershipField } from '@/fields/partnership';
 import { publishedAtField } from '@/fields/published-at';
 import { specialSeriesField } from '@/fields/special-series';
+import { subjectField } from '@/fields/subject';
 import { updatedAtField } from '@/fields/updated-at';
 import { slugify } from '@/utils/slugify';
 
@@ -71,24 +70,23 @@ export const Interviews: CollectionConfig = {
 				position: 'sidebar',
 			},
 			defaultValue: 'transcript',
-			label: 'Formato',
+			label: 'Tipo de entrevista',
 			name: 'contentFormat',
 			options: [
 				{
-					label: 'Transcrição',
+					label: 'Escrita',
 					value: 'transcript',
 				},
 				{
-					label: 'Áudio',
+					label: 'Audio',
 					value: 'audio',
 				},
 			],
 			required: true,
 			type: 'select',
 		},
-		contentTypeField,
+		subjectField,
 		specialSeriesField,
-		partnershipField,
 		{
 			fields: [
 				{
@@ -171,6 +169,24 @@ export const Interviews: CollectionConfig = {
 			admin: {
 				condition: (_, siblingData) => siblingData?.contentFormat === 'audio',
 				description: 'Ficheiro de áudio da entrevista (upload direto).',
+				position: 'sidebar',
+			},
+			filterOptions: {
+				mimeType: {
+					in: [
+						'audio/aac',
+						'audio/flac',
+						'audio/m4a',
+						'audio/mp3',
+						'audio/mp4',
+						'audio/mpeg',
+						'audio/ogg',
+						'audio/wav',
+						'audio/webm',
+						'audio/x-m4a',
+						'audio/x-wav',
+					],
+				},
 			},
 			label: 'Ficheiro de Áudio',
 			name: 'audioFile',
@@ -222,7 +238,7 @@ export const Interviews: CollectionConfig = {
 				position: 'sidebar',
 			},
 			defaultValue: 5,
-			label: 'Tempo de Leitura (min)',
+			label: 'Tempo de Leitura da Escrita (min)',
 			min: 1,
 			name: 'readTime',
 			type: 'number',
@@ -230,30 +246,30 @@ export const Interviews: CollectionConfig = {
 				const branchData = data as InterviewBranchData;
 				if (branchData.contentFormat !== 'transcript') return true;
 				if (value) return true;
-				return 'O tempo de leitura é obrigatório para entrevistas em transcrição.';
+				return 'O tempo de leitura é obrigatório para entrevistas escritas.';
 			},
 		},
 		{
 			admin: {
 				condition: (_, siblingData) => siblingData?.contentFormat === 'transcript',
 			},
-			label: 'Transcrição',
+			label: 'Escrita',
 			name: 'transcript',
 			type: 'richText',
 			validate: (value, { data }) => {
 				const branchData = data as InterviewBranchData;
 				if (branchData.contentFormat !== 'transcript') return true;
 				if (value) return true;
-				return 'A transcrição é obrigatória.';
+				return 'O conteúdo da entrevista escrita é obrigatório.';
 			},
 		},
 		{
 			admin: {
 				condition: (_, siblingData) => siblingData?.contentFormat === 'transcript',
-				description: 'Ficheiro PDF com a transcrição completa da entrevista.',
+				description: 'Ficheiro PDF com a entrevista escrita completa.',
 				position: 'sidebar',
 			},
-			label: 'PDF da Transcrição',
+			label: 'PDF da Escrita',
 			name: 'transcriptPdf',
 			relationTo: 'media',
 			type: 'upload',
