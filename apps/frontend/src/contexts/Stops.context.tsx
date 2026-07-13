@@ -77,7 +77,7 @@ export const StopsContextProvider = ({ children }) => {
 		});
 	}, [stopAgencyIdsByLinePrefix]);
 
-	const filteredStopsData = useFilterByAgencyIds(allStopsData, { getAgencyIds: getStopAgencyIds }).data;
+	const filteredStopsData = useFilterByAgencyIds(allStopsData, { dataType: 'stop', getAgencyIds: getStopAgencyIds }).data;
 
 	//
 	// D. Transform data

@@ -48,8 +48,8 @@ export const LinesContextProvider = ({ children }) => {
 	const { data: linesResponse, isLoading: allLinesLoading } = useSWR<GoApiResponse<HubLine[]>, Error>(`${getPublicVariable('go_api_url')}/hub/api/v1/network/lines`, { refreshInterval: 900000 }); // 15 minutes
 	const { data: routesResponse, isLoading: allRoutesLoading } = useSWR<GoApiResponse<HubRoute[]>, Error>(`${getPublicVariable('go_api_url')}/hub/api/v1/network/routes`, { refreshInterval: 900000 }); // 15 minutes
 	const { data: serviceMetricsData, isLoading: serviceMetricsLoading } = useSWR<CachedResource<ServiceMetrics[]>, Error>(`${getPublicVariable('api_url')}/metrics/service/all`, { refreshInterval: 900000 }); // 15 minutes
-	const linesData = useFilterByAgencyIds(linesResponse).data;
-	const routesData = useFilterByAgencyIds(routesResponse).data;
+	const linesData = useFilterByAgencyIds(linesResponse, { dataType: 'line' }).data;
+	const routesData = useFilterByAgencyIds(routesResponse, { dataType: 'route' }).data;
 
 	//
 	// B. Handle actions
