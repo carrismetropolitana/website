@@ -62,9 +62,10 @@ export function MetricsPageComplaintsToolbar({ allLines, filter_type, filter_val
 			setLine(null);
 		}
 		else {
+			const lineId = value && value.length > 4 ? value.substring(4, value.length) : null;
 			filter_type('line');
-			filter_value(value);
-			setLine(value);
+			filter_value(lineId);
+			setLine(lineId);
 		}
 	};
 

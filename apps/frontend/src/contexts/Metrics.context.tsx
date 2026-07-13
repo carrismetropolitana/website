@@ -116,11 +116,7 @@ export const MetricsContextProvider = ({ children }) => {
 	//
 	// C. Helpers
 
-	function filterByDateRange(
-		data: MetricDayData[] | MetricMonthData[] = [],
-		start: Dates,
-		end: Dates,
-	) {
+	function filterByDateRange(data: MetricDayData[] | MetricMonthData[] = [], start: Dates, end: Dates) {
 		return data
 			.filter((item) => {
 				const hasMonthGroup = 'month_group' in item;
