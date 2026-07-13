@@ -3,8 +3,8 @@
 /* * */
 
 import { Section } from '@/components/layout/Section';
-import { Line } from '@carrismetropolitana/api-types/network';
 import { Select, Text } from '@mantine/core';
+import { type HubLine } from '@tmlmobilidade/go-types-public-info';
 import { useTranslations } from 'next-intl';
 import { useState } from 'react';
 
@@ -13,7 +13,7 @@ import styles from './styles.module.css';
 /* * */
 
 interface Props {
-	allLines: Line[]
+	allLines: HubLine[]
 	filter_type: (value) => void
 	filter_value: (value) => void
 }
@@ -92,7 +92,7 @@ export function MetricsPageComplaintsToolbar({ allLines, filter_type, filter_val
 			<Text className={styles.toolbarDescription}>{t('toolbar_desc')}</Text>
 			<div className={styles.toolbarContainer}>
 				<Select
-					data={allLines.map(item => ({ label: `${item.id} - ${item.long_name}`, value: item.id }))}
+					data={allLines.map(item => ({ label: `${item._id} - ${item.long_name}`, value: item._id }))}
 					onChange={_value => handleLineChange(_value)}
 					onClear={() => handleLineChange('-')}
 					placeholder={t('line')}
