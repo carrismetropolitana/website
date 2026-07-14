@@ -29,7 +29,7 @@ export function StopDisplayTts({ stopId }: Props) {
 	//
 	// A. Setup variables
 
-	const { data: stopTtsData, error: stopTtsError, isLoading: stopTtsLoading } = useSWR<StopTtsResponse, Error>(stopId ? getPublicVariable('go_api_url') + '/stops/api/stops/tts/tts-' + stopId : null);
+	const { data: stopTtsData, error: stopTtsError, isLoading: stopTtsLoading } = useSWR<StopTtsResponse, Error>(getPublicVariable('go_api_url') + '/stops/api/stops/tts/tts-' + stopId);
 	const audioUrl = stopTtsData?.file?.url;
 	const [isPlaying, setIsPlaying] = useState(false);
 	const audioRef = useRef<HTMLAudioElement | null>(null);
