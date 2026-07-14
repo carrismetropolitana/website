@@ -44,12 +44,10 @@ export function VehiclesDetailContextProvider({ children, vehicleId }: PropsWith
 	// A. Setup variables
 
 	const vehiclesContext = useVehiclesContext();
-	const metadataApiUrl = vehicleId ? `${getPublicVariable('go_api_url')}/hub/api/v1/realtime/vehicles/metadata` : null;
-
 	//
 	// B. Fetch data
 
-	const { data: allVehiclesMetadataResponse, isLoading: allVehiclesMetadataLoading } = useSWR<GoApiResponse<HubVehicleMetadata[]>>(metadataApiUrl, { refreshInterval: 900_000 }); // 15 minutes
+	const { data: allVehiclesMetadataResponse, isLoading: allVehiclesMetadataLoading } = useSWR<GoApiResponse<HubVehicleMetadata[]>>(`${getPublicVariable('go_api_url')}/hub/api/v1/realtime/vehicles/metadata`, { refreshInterval: 900_000 }); // 15 minutes
 
 	//
 	// C. Transform data
