@@ -255,28 +255,16 @@ const nextConfig: NextConfig = {
 				permanent: false,
 				source: '/taguspark',
 			},
-			{
-				source: '/quiz-arrabida365',
-				destination: '/arrabida365/quiz',
-			},
-
-			{
-				source: '/quiz-arrabida365/resultado/:letter',
-				destination: '/arrabida365/quiz/resultado/:letter',
-			},
-
-			{
-				source: '/quiz-arrabida365/resultado/:letter/opengraph-image',
-				destination: '/arrabida365/quiz/resultado/:letter/opengraph-image',
-			}
 		];
 	},
 	async rewrites() {
 		return [
+
 			{
 				destination: '/campaigns/:slug',
 				source: '/:slug',
-			}
+			},
+
 		];
 	},
 };
