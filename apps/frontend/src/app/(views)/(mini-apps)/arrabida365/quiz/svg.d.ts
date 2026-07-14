@@ -1,9 +1,9 @@
 declare module '*.svg' {
 	const src: {
-		src: string;
-		height: number;
-		width: number;
-		blurDataURL?: string;
+		blurDataURL?: string
+		height: number
+		src: string
+		width: number
 	};
 
 	export default src;

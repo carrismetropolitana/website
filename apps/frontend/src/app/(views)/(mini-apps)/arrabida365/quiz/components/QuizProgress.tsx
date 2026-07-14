@@ -1,12 +1,12 @@
 import styles from '../styles.module.css';
 
-type QuizProgressProps = {
-	currentQuestion: number;
-	totalQuestions: number;
-	progress: number;
-};
+interface QuizProgressProps {
+	currentQuestion: number
+	progress: number
+	totalQuestions: number
+}
 
-export function QuizProgress({ currentQuestion, totalQuestions, progress }: QuizProgressProps) {
+export function QuizProgress({ currentQuestion, progress, totalQuestions }: QuizProgressProps) {
 	return (
 		<div className={styles.progressIndicator}>
 			<div className={styles.progressHeader}>
@@ -17,7 +17,7 @@ export function QuizProgress({ currentQuestion, totalQuestions, progress }: Quiz
 			</div>
 
 			<div className={styles.progressBar}>
-				<div className={styles.progressFill} style={{ width: `${progress}%` }}></div>
+				<div className={styles.progressFill} style={{ width: `${progress}%` }} />
 			</div>
 		</div>
 	);

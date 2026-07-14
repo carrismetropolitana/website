@@ -1,56 +1,56 @@
 import type { Metadata } from 'next';
 
-import { SITE_URL, QUIZ_BASE_PATH } from './siteConfig';
+import { QUIZ_BASE_PATH, SITE_URL } from './siteConfig';
 
 const quizUrl = `${SITE_URL}${QUIZ_BASE_PATH}`;
 const defaultOgImage = `${quizUrl}/opengraph-image.jpg`;
 
 export const metadata: Metadata = {
-  metadataBase: new URL(SITE_URL),
-
-  title: 'Quiz Arrábida 365',
-
-  description:
+	description:
     'Descobre o teu perfil de passageiro da Arrábida 365 e encontra o percurso de verão ideal para ti.',
 
-  openGraph: {
-    title: 'Quiz Arrábida 365',
+	metadataBase: new URL(SITE_URL),
 
-    description:
+	openGraph: {
+		description:
       'Descobre o teu perfil de passageiro da Arrábida 365 e encontra o percurso de verão ideal para ti.',
 
-    url: quizUrl,
+		images: [
+			{
+				alt: 'Quiz Arrábida 365',
+				height: 630,
+				url: defaultOgImage,
+				width: 1200,
+			},
+		],
 
-    siteName: 'Arrábida 365',
+		siteName: 'Arrábida 365',
 
-    images: [
-      {
-        url: defaultOgImage,
-        width: 1200,
-        height: 630,
-        alt: 'Quiz Arrábida 365',
-      },
-    ],
+		title: 'Quiz Arrábida 365',
 
-    type: 'website',
-  },
+		type: 'website',
 
-  twitter: {
-    card: 'summary_large_image',
+		url: quizUrl,
+	},
 
-    title: 'Quiz Arrábida 365',
+	title: 'Quiz Arrábida 365',
 
-    description:
+	twitter: {
+		card: 'summary_large_image',
+
+		description:
       'Descobre o teu perfil de passageiro da Arrábida 365 e encontra o percurso de verão ideal para ti.',
 
-    images: [defaultOgImage],
-  },
+		images: [defaultOgImage],
+
+		title: 'Quiz Arrábida 365',
+	},
 };
 
 export default function QuizLayout({
-  children,
+	children,
 }: {
-  children: React.ReactNode;
+	children: React.ReactNode
 }) {
-  return <>{children}</>;
+	return <>{children}</>;
 }

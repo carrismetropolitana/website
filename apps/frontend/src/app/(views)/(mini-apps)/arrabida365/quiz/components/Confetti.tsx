@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import styles from '../styles.module.css';
 
 export function Confetti() {
@@ -17,13 +18,13 @@ export function Confetti() {
 						key={i}
 						className={styles.confetti}
 						style={{
+							['--drift' as any]: `${drift}px`,
+							animationDelay: `${delay}s`,
+							animationDuration: `${animationDuration}s`,
+							backgroundColor: color,
+							height: `${size * 2}px`,
 							left: `${leftPosition}%`,
 							width: `${size}px`,
-							height: `${size * 2}px`,
-							backgroundColor: color,
-							animationDuration: `${animationDuration}s`,
-							animationDelay: `${delay}s`,
-							['--drift' as any]: `${drift}px`,
 						}}
 					/>
 				);

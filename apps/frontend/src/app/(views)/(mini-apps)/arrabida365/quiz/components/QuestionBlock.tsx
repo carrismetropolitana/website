@@ -1,35 +1,37 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
+import styles from '../styles.module.css';
+
 import { Question } from '../data';
 import { AnswerOptions } from './AnswerOptions';
 import { QuestionHeader } from './QuestionHeader';
 import { QuestionIllustration } from './QuestionIllustration';
 import { QuizProgress } from './QuizProgress';
-import styles from '../styles.module.css';
 
-type QuestionBlockProps = {
-	currentQ: Question;
-	currentQuestion: number;
-	totalQuestions: number;
-	progress: number;
-	selectedAnswer: string;
-	questionIllustrations: Record<string, any>;
-	onAnswerSelect: (value: string) => void;
-};
+interface QuestionBlockProps {
+	currentQ: Question
+	currentQuestion: number
+	onAnswerSelect: (value: string) => void
+	progress: number
+	questionIllustrations: Record<string, any>
+	selectedAnswer: string
+	totalQuestions: number
+}
 
 export function QuestionBlock({
 	currentQ,
 	currentQuestion,
-	totalQuestions,
-	progress,
-	selectedAnswer,
-	questionIllustrations,
 	onAnswerSelect,
+	progress,
+	questionIllustrations,
+	selectedAnswer,
+	totalQuestions,
 }: QuestionBlockProps) {
 	return (
 		<div className={styles.questionContent}>
 			<QuizProgress
 				currentQuestion={currentQuestion}
-				totalQuestions={totalQuestions}
 				progress={progress}
+				totalQuestions={totalQuestions}
 			/>
 
 			<QuestionHeader
@@ -44,8 +46,8 @@ export function QuestionBlock({
 
 			<AnswerOptions
 				currentQ={currentQ}
-				selectedAnswer={selectedAnswer}
 				onAnswerSelect={onAnswerSelect}
+				selectedAnswer={selectedAnswer}
 			/>
 		</div>
 	);

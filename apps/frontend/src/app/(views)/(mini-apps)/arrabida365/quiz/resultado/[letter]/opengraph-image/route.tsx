@@ -1,12 +1,12 @@
+import { NextResponse } from 'next/server';
 import { readFile } from 'node:fs/promises';
 import path from 'node:path';
-import { NextResponse } from 'next/server';
 
-type RouteProps = {
+interface RouteProps {
 	params: Promise<{
-		letter: string;
-	}>;
-};
+		letter: string
+	}>
+}
 
 const ogFiles = {
 	a: 'og-a.png',
@@ -23,15 +23,15 @@ export async function GET(_: Request, { params }: RouteProps) {
 	const filePath = path.join(
 		process.cwd(),
 		'src/app/(views)/(mini-apps)/arrabida365/quiz/assets/opengraph',
-		fileName
+		fileName,
 	);
 
 	const imageBuffer = await readFile(filePath);
 
 	return new NextResponse(imageBuffer, {
 		headers: {
-			'Content-Type': 'image/png',
 			'Cache-Control': 'public, max-age=3600, stale-while-revalidate=120',
+			'Content-Type': 'image/png',
 		},
 	});
 }

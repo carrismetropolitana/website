@@ -1,9 +1,10 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import styles from '../styles.module.css';
 
-type QuestionIllustrationProps = {
-	illustration?: string;
-	questionIllustrations: Record<string, any>;
-};
+interface QuestionIllustrationProps {
+	illustration?: string
+	questionIllustrations: Record<string, any>
+}
 
 function getImageSrc(image: any) {
 	if (typeof image === 'string') return image;
@@ -20,11 +21,11 @@ export function QuestionIllustration({
 
 	return (
 		<div className={styles.illustrationContainer}>
-			<div className={styles.illustrationGlow}></div>
+			<div className={styles.illustrationGlow} />
 			<img
-				src={imageSrc}
 				alt=""
 				className={styles.questionIllustration}
+				src={imageSrc}
 			/>
 		</div>
 	);

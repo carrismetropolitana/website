@@ -1,108 +1,109 @@
-import { headers } from 'next/headers';
 import type { Metadata } from 'next';
+
+import { headers } from 'next/headers';
 import { notFound, redirect } from 'next/navigation';
 
-import { SITE_URL, QUIZ_BASE_PATH } from '../../siteConfig';
 import { getResultByLetter } from '../../data';
+import { QUIZ_BASE_PATH, SITE_URL } from '../../siteConfig';
 
-type PageProps = {
-  params: Promise<{
-    letter: string;
-  }>;
-};
+interface PageProps {
+	params: Promise<{
+		letter: string
+	}>
+}
 
 export async function generateMetadata({
-  params,
+	params,
 }: PageProps): Promise<Metadata> {
-  const { letter } = await params;
-  const result = getResultByLetter(letter);
+	const { letter } = await params;
+	const result = getResultByLetter(letter);
 
-  if (!result) {
-    return {
-      title: 'Quiz Arrábida 365',
-      description:
+	if (!result) {
+		return {
+			description:
         'Descobre o teu perfil de passageiro da Arrábida 365 e encontra o percurso de verão ideal para ti.',
-    };
-  }
+			title: 'Quiz Arrábida 365',
+		};
+	}
 
-  const lowerLetter = result.letter.toLowerCase();
+	const lowerLetter = result.letter.toLowerCase();
 
-  const resultUrl =
-    `${SITE_URL}${QUIZ_BASE_PATH}/resultado/${lowerLetter}`;
+	const resultUrl
+    = `${SITE_URL}${QUIZ_BASE_PATH}/resultado/${lowerLetter}`;
 
-  const ogImageUrl =
-    `${SITE_URL}${QUIZ_BASE_PATH}/resultado/${lowerLetter}/opengraph-image`;
+	const ogImageUrl
+    = `${SITE_URL}${QUIZ_BASE_PATH}/resultado/${lowerLetter}/opengraph-image`;
 
-  return {
-    title: `Sou ${result.title} | Quiz Arrábida 365`,
-
-    description:
+	return {
+		description:
       'Descobre o teu perfil de passageiro da Arrábida 365. Faz tu também o quiz.',
 
-    openGraph: {
-      title: `Sou ${result.title} | Quiz Arrábida 365`,
-
-      description:
+		openGraph: {
+			description:
         'Descobre o teu perfil de passageiro da Arrábida 365. Faz tu também o quiz.',
 
-      url: resultUrl,
-      siteName: 'Arrábida 365',
-      type: 'website',
+			images: [
+				{
+					alt: `Resultado do quiz: ${result.title}`,
+					height: 630,
+					url: ogImageUrl,
+					width: 1200,
+				},
+			],
 
-      images: [
-        {
-          url: ogImageUrl,
-          width: 1200,
-          height: 630,
-          alt: `Resultado do quiz: ${result.title}`,
-        },
-      ],
-    },
+			siteName: 'Arrábida 365',
+			title: `Sou ${result.title} | Quiz Arrábida 365`,
+			type: 'website',
 
-    twitter: {
-      card: 'summary_large_image',
+			url: resultUrl,
+		},
 
-      title: `Sou ${result.title} | Quiz Arrábida 365`,
+		title: `Sou ${result.title} | Quiz Arrábida 365`,
 
-      description:
+		twitter: {
+			card: 'summary_large_image',
+
+			description:
         'Descobre o teu perfil de passageiro da Arrábida 365. Faz tu também o quiz.',
 
-      images: [ogImageUrl],
-    },
-  };
+			images: [ogImageUrl],
+
+			title: `Sou ${result.title} | Quiz Arrábida 365`,
+		},
+	};
 }
 
 export default async function SharedResultPage({
-  params,
+	params,
 }: PageProps) {
-  const { letter } = await params;
-  const result = getResultByLetter(letter);
+	const { letter } = await params;
+	const result = getResultByLetter(letter);
 
-  if (!result) {
-    notFound();
-  }
+	if (!result) {
+		notFound();
+	}
 
-  const headersList = await headers();
+	const headersList = await headers();
 
-  const userAgent =
-    headersList.get('user-agent')?.toLowerCase() || '';
+	const userAgent
+    = headersList.get('user-agent')?.toLowerCase() || '';
 
-  const isPreviewBot =
-    userAgent.includes('whatsapp') ||
-    userAgent.includes('facebookexternalhit') ||
-    userAgent.includes('facebot') ||
-    userAgent.includes('meta-externalagent') ||
-    userAgent.includes('meta-externalfetcher') ||
-    userAgent.includes('twitterbot') ||
-    userAgent.includes('linkedinbot') ||
-    userAgent.includes('telegrambot') ||
-    userAgent.includes('slackbot') ||
-    userAgent.includes('discordbot') ||
-    userAgent.includes('pinterestbot');
+	const isPreviewBot
+    = userAgent.includes('whatsapp')
+      || userAgent.includes('facebookexternalhit')
+      || userAgent.includes('facebot')
+      || userAgent.includes('meta-externalagent')
+      || userAgent.includes('meta-externalfetcher')
+      || userAgent.includes('twitterbot')
+      || userAgent.includes('linkedinbot')
+      || userAgent.includes('telegrambot')
+      || userAgent.includes('slackbot')
+      || userAgent.includes('discordbot')
+      || userAgent.includes('pinterestbot');
 
-  if (!isPreviewBot) {
-    redirect(QUIZ_BASE_PATH);
-  }
+	if (!isPreviewBot) {
+		redirect(QUIZ_BASE_PATH);
+	}
 
-  return null;
+	return null;
 }

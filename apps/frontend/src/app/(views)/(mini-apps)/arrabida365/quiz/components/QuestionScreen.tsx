@@ -1,49 +1,51 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
+import styles from '../styles.module.css';
+
 import { Question } from '../data';
 import { QuestionBlock } from './QuestionBlock';
 import { QuestionNavigation } from './QuestionNavigation';
-import styles from '../styles.module.css';
 
-type QuestionScreenProps = {
-	currentQ: Question;
-	currentQuestion: number;
-	totalQuestions: number;
-	progress: number;
-	selectedAnswer: string;
-	questionIllustrations: Record<string, any>;
-	onAnswerSelect: (value: string) => void;
-	onBack: () => void;
-	onNext: () => void;
-};
+interface QuestionScreenProps {
+	currentQ: Question
+	currentQuestion: number
+	onAnswerSelect: (value: string) => void
+	onBack: () => void
+	onNext: () => void
+	progress: number
+	questionIllustrations: Record<string, any>
+	selectedAnswer: string
+	totalQuestions: number
+}
 
 export function QuestionScreen({
 	currentQ,
 	currentQuestion,
-	totalQuestions,
-	progress,
-	selectedAnswer,
-	questionIllustrations,
 	onAnswerSelect,
 	onBack,
 	onNext,
+	progress,
+	questionIllustrations,
+	selectedAnswer,
+	totalQuestions,
 }: QuestionScreenProps) {
 	return (
 		<div className={styles.contentContainer}>
 			<QuestionBlock
 				currentQ={currentQ}
 				currentQuestion={currentQuestion}
-				totalQuestions={totalQuestions}
-				progress={progress}
-				selectedAnswer={selectedAnswer}
-				questionIllustrations={questionIllustrations}
 				onAnswerSelect={onAnswerSelect}
+				progress={progress}
+				questionIllustrations={questionIllustrations}
+				selectedAnswer={selectedAnswer}
+				totalQuestions={totalQuestions}
 			/>
 
 			<QuestionNavigation
 				currentQuestion={currentQuestion}
-				totalQuestions={totalQuestions}
-				selectedAnswer={selectedAnswer}
 				onBack={onBack}
 				onNext={onNext}
+				selectedAnswer={selectedAnswer}
+				totalQuestions={totalQuestions}
 			/>
 		</div>
 	);

@@ -1,32 +1,33 @@
 import styles from '../styles.module.css';
+
 import { Question } from '../data';
 
-type AnswerOptionsProps = {
-	currentQ: Question;
-	selectedAnswer: string;
-	onAnswerSelect: (value: string) => void;
-};
+interface AnswerOptionsProps {
+	currentQ: Question
+	onAnswerSelect: (value: string) => void
+	selectedAnswer: string
+}
 
 export function AnswerOptions({
 	currentQ,
-	selectedAnswer,
 	onAnswerSelect,
+	selectedAnswer,
 }: AnswerOptionsProps) {
 	return (
 		<div className={styles.answerOptions}>
-			{currentQ.options.map((option) => (
+			{currentQ.options.map(option => (
 				<label key={option.value} className={styles.answerOption}>
 					<input
-						type="radio"
-						name={`q${currentQ.id}`}
-						value={option.value}
 						checked={selectedAnswer === option.value}
-						onChange={() => onAnswerSelect(option.value)}
 						className={styles.answerRadio}
+						name={`q${currentQ.id}`}
+						onChange={() => onAnswerSelect(option.value)}
+						type="radio"
+						value={option.value}
 					/>
 
 					<div className={styles.answerCard}>
-						<div className={styles.radioCircle}></div>
+						<div className={styles.radioCircle} />
 
 						<div className={styles.answerText}>
 							<span className={styles.answerLabel}>

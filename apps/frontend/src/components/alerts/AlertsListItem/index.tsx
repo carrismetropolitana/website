@@ -2,7 +2,7 @@
 
 /* * */
 
-import { AlertActivePeriodEnd, AlertActivePeriodStart } from '@/components/alerts/AlertActivePeriod';
+import { AlertActivePeriodStart } from '@/components/alerts/AlertActivePeriod';
 import { AlertEffectIcon } from '@/components/alerts/AlertCauseEffectIcon';
 import AlertsListItemImageThumbnail from '@/components/alerts/AlertsListItemImageThumbnail';
 import Button from '@/components/common/Button';

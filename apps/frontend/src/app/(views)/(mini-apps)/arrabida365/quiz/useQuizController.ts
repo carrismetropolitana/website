@@ -1,19 +1,21 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { useState } from 'react';
+
 import {
-	questions,
 	calculateResult,
-	PersonalityResult,
 	getResultSharePath,
+	PersonalityResult,
+	questions,
 } from './data';
 
-type Screen = 'start' | 'question' | 'loading' | 'result' | 'afterShare';
+type Screen = 'afterShare' | 'loading' | 'question' | 'result' | 'start';
 
 export function useQuizController() {
 	const [screen, setScreen] = useState<Screen>('start');
 	const [currentQuestion, setCurrentQuestion] = useState(0);
 	const [answers, setAnswers] = useState<string[]>([]);
 	const [selectedAnswer, setSelectedAnswer] = useState<string>('');
-	const [result, setResult] = useState<PersonalityResult | null>(null);
+	const [result, setResult] = useState<null | PersonalityResult>(null);
 	const [showConfetti, setShowConfetti] = useState(false);
 	const [shareMessage, setShareMessage] = useState<string>('');
 	const [isSharing, setIsSharing] = useState(false);
@@ -39,9 +41,10 @@ export function useQuizController() {
 		if (currentQuestion < questions.length - 1) {
 			setCurrentQuestion(currentQuestion + 1);
 			setTimeout(() => {
-				window.scrollTo({ top: 0, behavior: 'smooth' });
+				window.scrollTo({ behavior: 'smooth', top: 0 });
 			}, 0);
-		} else {
+		}
+		else {
 			setScreen('loading');
 			setTimeout(() => {
 				const calculatedResult = calculateResult(newAnswers);
@@ -60,7 +63,7 @@ export function useQuizController() {
 			const previousAnswer = newAnswers.pop();
 			setAnswers(newAnswers);
 			setSelectedAnswer(previousAnswer || '');
-			window.scrollTo({ top: 0, behavior: 'smooth' });
+			window.scrollTo({ behavior: 'smooth', top: 0 });
 		}
 	};
 
@@ -69,7 +72,8 @@ export function useQuizController() {
 			try {
 				await navigator.clipboard.writeText(text);
 				return true;
-			} catch (err) {
+			}
+			catch (err) {
 				console.error('Clipboard API failed:', err);
 			}
 		}
@@ -87,7 +91,9 @@ export function useQuizController() {
 			const successful = document.execCommand('copy');
 			document.body.removeChild(textArea);
 			return successful;
-		} catch (error) {
+		}
+		catch (error) {
+			console.error('Clipboard API failed:', error);
 			document.body.removeChild(textArea);
 			return false;
 		}
@@ -99,8 +105,8 @@ export function useQuizController() {
 		const shareUrl = `${window.location.origin}${getResultSharePath(result.letter)}`;
 
 		const shareData = {
-			title: 'Quiz Arrábida 365',
 			text: 'Descobri o meu perfil de passageiro da Arrábida 365. Faz tu também o quiz.',
+			title: 'Quiz Arrábida 365',
 			url: shareUrl,
 		};
 
@@ -109,11 +115,13 @@ export function useQuizController() {
 				setIsSharing(true);
 				await navigator.share(shareData);
 				setScreen('afterShare');
-			} catch (err: any) {
+			}
+			catch (err: any) {
 				if (err?.name !== 'AbortError' && err?.name !== 'InvalidStateError') {
 					console.error('Error sharing:', err);
 				}
-			} finally {
+			}
+			finally {
 				setIsSharing(false);
 			}
 
@@ -124,7 +132,8 @@ export function useQuizController() {
 
 		if (copied) {
 			setShareMessage('Link copiado!');
-		} else {
+		}
+		else {
 			setShareMessage('Não foi possível copiar o link.');
 		}
 
@@ -140,7 +149,8 @@ export function useQuizController() {
 
 		if (copied) {
 			setShareMessage('Link copiado!');
-		} else {
+		}
+		else {
 			setShareMessage('Não foi possível copiar o link.');
 		}
 
@@ -159,22 +169,22 @@ export function useQuizController() {
 	const currentQ = questions[currentQuestion];
 
 	return {
-		screen,
+		currentQ,
 		currentQuestion,
-		selectedAnswer,
-		result,
-		showConfetti,
-		shareMessage,
+		handleAnswerSelect,
+		handleBack,
+		handleCopyLink,
+		handleNext,
+		handleRestart,
+		handleShare,
+		handleStart,
 		isSharing,
 		progress,
-		currentQ,
-		handleStart,
-		handleAnswerSelect,
-		handleNext,
-		handleBack,
-		handleShare,
-		handleCopyLink,
-		handleRestart,
+		result,
+		screen,
+		selectedAnswer,
 		setScreen,
+		shareMessage,
+		showConfetti,
 	};
 }

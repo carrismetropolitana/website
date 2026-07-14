@@ -256,19 +256,20 @@ const nextConfig: NextConfig = {
 				source: '/taguspark',
 			},
 			{
-				source: '/quiz-arrabida365',
 				destination: '/arrabida365/quiz',
+				permanent: true,
+				source: '/quiz-arrabida365',
 			},
-
 			{
-				source: '/quiz-arrabida365/resultado/:letter',
 				destination: '/arrabida365/quiz/resultado/:letter',
+				permanent: true,
+				source: '/quiz-arrabida365/resultado/:letter',
 			},
-
 			{
-				source: '/quiz-arrabida365/resultado/:letter/opengraph-image',
 				destination: '/arrabida365/quiz/resultado/:letter/opengraph-image',
-			}
+				permanent: true,
+				source: '/quiz-arrabida365/resultado/:letter/opengraph-image',
+			},
 		];
 	},
 	async rewrites() {
@@ -276,7 +277,7 @@ const nextConfig: NextConfig = {
 			{
 				destination: '/campaigns/:slug',
 				source: '/:slug',
-			}
+			},
 		];
 	},
 };
