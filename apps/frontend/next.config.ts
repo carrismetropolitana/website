@@ -255,10 +255,6 @@ const nextConfig: NextConfig = {
 				permanent: false,
 				source: '/taguspark',
 			},
-		];
-	},
-	async rewrites() {
-		return [
 			{
 				source: '/quiz-arrabida365',
 				destination: '/arrabida365/quiz',
@@ -272,13 +268,15 @@ const nextConfig: NextConfig = {
 			{
 				source: '/quiz-arrabida365/resultado/:letter/opengraph-image',
 				destination: '/arrabida365/quiz/resultado/:letter/opengraph-image',
-			},
-
+			}
+		];
+	},
+	async rewrites() {
+		return [
 			{
 				destination: '/campaigns/:slug',
 				source: '/:slug',
-			},
-
+			}
 		];
 	},
 };
