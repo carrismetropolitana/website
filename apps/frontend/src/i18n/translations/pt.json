@@ -2017,12 +2017,20 @@
 		}
 	},
 	"stops": {
+		"NextArrivals": {
+			"arriving": "A chegar",
+			"hours": "h",
+			"minutes": "min"
+		},
 		"Page": {
 			"heading": "Pesquisar Paragens"
 		},
 		"Single": {
 			"heading": "Pesquisar Paragens",
 			"lines_that_pass_here": "Linhas que passam nesta paragem"
+		},
+		"StopsDetail": {
+			"title": "Paragem"
 		},
 		"StopsDetailAlerts": {
 			"heading": "Alertas ativos",
@@ -2056,6 +2064,17 @@
 		"StopsDetailContentTimetableSchedule": {
 			"end_of_day": "Fim do Dia",
 			"no_service": "Sem Serviço para o dia selecionado"
+		},
+		"StopsDetailViewTimetable": {
+			"end_of_day": "Fim do Dia",
+			"no_service": "Sem Serviço para o dia selecionado",
+			"show_past_trips_toggle": {
+				"hide": "Esconder passagens anteriores",
+				"show": "Ver passagens anteriores"
+			}
+		},
+		"StopsDetailViewTimetableRow": {
+			"localities": "Passa por: {localities}"
 		},
 		"StopsListToolbar": {
 			"filters": {

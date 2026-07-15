@@ -2,123 +2,91 @@
 
 /* * */
 
-import { NextArrivals } from '@/components/common/NextArrivals';
 import { LineDisplay } from '@/components/lines/LineDisplay';
-import { StopsDetailContentTimetableRowDebug } from '@/components/stops/StopsDetailContentTimetableRowDebug';
-import { useDebugContext } from '@/contexts/Debug.context';
-import { useLocationsContext } from '@/contexts/Locations.context';
-import { useOperationalDateContext } from '@/contexts/OperationalDate.context';
-import { useStopsDetailContext } from '@/contexts/StopsDetail.context';
-import { Arrival, ArrivalStatus } from '@/types/stops.types';
+import { StopsDetailContentTimetableClock } from '@/components/stops/StopsDetailContentTimetableClock';
+import { StopsDetailViewTimetableRowArrival } from '@/components/stops/StopsDetailContentTimetableRowArrival';
+import { StopsDetailViewTimetableData } from '@/contexts/StopsDetail.context';
+import { useSelectedTrip } from '@/hooks/use-selected-trip';
 import { useTranslations } from 'next-intl';
-import Link from 'next/link';
-import { useCallback, useMemo } from 'react';
+import { useMemo } from 'react';
 
 import styles from './styles.module.css';
 
 /* * */
 
-interface Props {
-	arrivalData: Arrival
-	status: ArrivalStatus
+interface StopsDetailViewTimetableRowProps {
+	data: StopsDetailViewTimetableData
+	withClock: boolean
 }
 
 /* * */
 
-export function StopsDetailContentTimetableRow({ arrivalData, status }: Props) {
+export function StopsDetailViewTimetableRow({ data, withClock }: StopsDetailViewTimetableRowProps) {
 	//
 
 	//
 	// A. Setup variables
 
-	const t = useTranslations('stops.StopsDetailContentTimetableRow');
-	const stopsDetailContext = useStopsDetailContext();
-	const locationsContext = useLocationsContext();
+	const t = useTranslations('stops.StopsDetailViewTimetableRow');
 
-	const operationalDateContext = useOperationalDateContext();
-	const selectedDate = operationalDateContext.data.selected_date;
-
-	const debugContext = useDebugContext();
+	const { selectedTripData, setSelectedTrip } = useSelectedTrip();
 
 	//
 	// B. Transform data
 
 	const isSelected = useMemo(() => {
-		const isSameTripId = stopsDetailContext.data.active_trip_id === arrivalData.trip_id;
-		const isSameStopSequence = stopsDetailContext.data.active_stop_sequence === arrivalData.stop_sequence;
-		return isSameTripId && isSameStopSequence;
-	}, [stopsDetailContext.data.active_trip_id, stopsDetailContext.data.active_stop_sequence, arrivalData.trip_id, arrivalData.stop_sequence]);
-
-	// This is needed to avoid rerendering the component when the time changes
-	const thisPattern = stopsDetailContext.data.valid_pattern_groups?.find(pattern => pattern.id === arrivalData.pattern_id);
+		const isSamePatternId = selectedTripData.patternId === data.pattern_id;
+		const isSameTripId = selectedTripData.tripId === data.trip_ids[0];
+		const isSameStopSequence = selectedTripData.stopSequence === data.stop_sequence;
+		return isSamePatternId && isSameTripId && isSameStopSequence;
+	}, [selectedTripData, data]); ;
 
 	//
 	// C. Handle actions
 
-	const handleSelectTrip = useCallback(() => {
-		if (isSelected) {
-			stopsDetailContext.actions.resetActiveTripId();
-			return;
-		}
-		stopsDetailContext.actions.setActiveTripId(arrivalData.trip_id, arrivalData.stop_sequence);
-	}, [arrivalData.trip_id, arrivalData.stop_sequence, stopsDetailContext.actions.setActiveTripId]);
+	const handleClick = () => {
+		setSelectedTrip(data.pattern_id, data.trip_ids[0], data.stop_sequence);
+	};
 
 	//
 	// D. Render components
 
-	if (!thisPattern) {
-		return null;
-	}
-
 	return (
-		<div className={`${styles.container} ${styles[status]} ${isSelected && styles.isSelected}`} onClick={handleSelectTrip}>
+		<>
 
-			<div className={styles.summary}>
-				<LineDisplay
-					color={thisPattern.color}
-					longName={thisPattern.headsign}
-					shortName={thisPattern.line_id}
-					textColor={thisPattern.text_color}
-				/>
-				{status === 'passed' && debugContext.flags.is_debug_mode && (
-					<NextArrivals
-						arrivals={[arrivalData.scheduled_arrival_unix]}
-						status="scheduled"
-						withIcon={true}
+			{withClock && (
+				<div className={styles.clockWrapper}>
+					<StopsDetailContentTimetableClock />
+				</div>
+			)}
+
+			<div
+				className={styles.container}
+				data-is-past={data.is_past}
+				data-is-selected={isSelected}
+				data-with-clock={withClock}
+				onClick={handleClick}
+			>
+
+				<div className={styles.summary}>
+					<LineDisplay
+						agencyId={data.agency_id}
+						color={data.color}
+						longName={data.headsign}
+						shortName={data.short_name}
+						textColor={data.text_color}
 					/>
+					<StopsDetailViewTimetableRowArrival data={data} />
+				</div>
+
+				{data.locality_names?.length > 0 && (
+					<div className={styles.details}>
+						<p className={styles.localitiesList}>{t('localities', { localities: data.locality_names.join(', ') })}</p>
+					</div>
 				)}
-				<NextArrivals
-					arrivals={[arrivalData.observed_arrival_unix || arrivalData.scheduled_arrival_unix]}
-					status={status}
-					withIcon={true}
-				/>
+
 			</div>
 
-			{isSelected && debugContext.flags.is_debug_mode && (
-				<div className={styles.details} onClick={e => e.stopPropagation()}>
-					<StopsDetailContentTimetableRowDebug arrivalData={arrivalData} />
-				</div>
-			)}
-
-			{isSelected && (
-				<div className={styles.details}>
-					<Link className={styles.openLinePage} href={`/lines/${arrivalData.line_id}?&date=${selectedDate?.operational_date}&active_pattern_id=${thisPattern?.id}`} onClick={e => e.stopPropagation()} target="_blank">{t('open_line_page')}</Link>
-					{thisPattern.locality_ids.length > 0 && (
-						<div className={styles.localitiesListWrapper}>
-							<p className={styles.localitiesLabel}>{t('localities.label')}</p>
-							<p>
-								{thisPattern.locality_ids.map((localityId, index) => (
-									<span key={index}>
-										{index > 0 && <span className={styles.localitySeparator}> • </span>}
-										<span className={styles.localityName}>{locationsContext.actions.getLocalityById(localityId)?.name}</span>
-									</span>
-								))}
-							</p>
-						</div>
-					)}
-				</div>
-			)}
-
-		</div>
+		</>
 	);
 }

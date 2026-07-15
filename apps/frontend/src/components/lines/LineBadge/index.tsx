@@ -13,6 +13,7 @@ import styles from './styles.module.css';
 /* * */
 
 interface Props {
+	agencyId?: string
 	color?: string
 	lineData?: HubLine
 	lineId?: string

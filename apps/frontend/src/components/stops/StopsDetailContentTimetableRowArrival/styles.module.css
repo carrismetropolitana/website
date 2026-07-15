@@ -1,0 +1,48 @@
+/* * */
+/* VALUE */
+
+.container {
+	display: flex;
+	flex-direction: row;
+	gap: 5px;
+	align-items: center;
+	justify-content: flex-start;
+}
+
+/* * */
+/* LABEL */
+
+.label {
+	font-size: 16px;
+	font-weight: var(--font-weight-bold);
+	font-variant-numeric: tabular-nums;
+	line-height: 1.1;
+	color: var(--color-system-text-100);
+	text-wrap: nowrap;
+}
+
+.container[data-is-realtime='true'] .label {
+	color: var(--color-status-warning-primary);
+}
+
+.scheduledSecondary {
+	font-size: 12px;
+	font-weight: var(--font-weight-semibold);
+	font-variant-numeric: tabular-nums;
+	color: var(--color-system-text-200);
+}
+
+/* * */
+/* BETA */
+
+.beta {
+	padding: 2px 3px;
+	font-size: 10px;
+	font-weight: var(--font-weight-bold);
+	line-height: 1;
+	color: var(--color-status-warning-primary);
+	text-align: center;
+	text-transform: uppercase;
+	border: 1px solid var(--color-status-warning-primary);
+	border-radius: 4px;
+}
