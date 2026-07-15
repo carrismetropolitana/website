@@ -2,8 +2,8 @@
 
 import type { CollectionConfig } from 'payload';
 
-import { contentTypeField } from '@/fields/content-type';
 import { publishedAtField } from '@/fields/published-at';
+import { subjectField } from '@/fields/subject';
 import { updatedAtField } from '@/fields/updated-at';
 import { slugify } from '@/utils/slugify';
 
@@ -65,7 +65,7 @@ export const CaseStudies: CollectionConfig = {
 			required: true,
 			type: 'textarea',
 		},
-		contentTypeField,
+		subjectField,
 		{
 			admin: {
 				description: 'Tempo estimado de leitura em minutos.',
