@@ -164,7 +164,7 @@ export const personalityResults: Record<string, PersonalityResult> = {
 	'result-a': {
 		description: 'Ninguém aproveita tanto o sol e as ondas como tu.',
 		id: 'result-a',
-		illustration: 'result-a.svg',
+		illustration: 'result-a.png',
 		letter: 'A',
 		routeDescription: 'Esta linha leva-te a um dia entre mergulhos, areia dourada e dias sem pressa!',
 		routeName: 'Creiro - Galapos',
@@ -174,7 +174,7 @@ export const personalityResults: Record<string, PersonalityResult> = {
 	'result-b': {
 		description: 'Uau, conheces todos os trilhos e os locais mais secretos da Arrábida.',
 		id: 'result-b',
-		illustration: 'result-b.svg',
+		illustration: 'result-b.png',
 		letter: 'B',
 		routeDescription: 'Esta linha leva-te a um passeio entre a serra e algumas das paisagens mais incríveis da Arrábida!',
 		routeName: ' Setúbal (ITS) - Praia do Creiro via Vila Nogueira de Azeitão',
@@ -184,7 +184,7 @@ export const personalityResults: Record<string, PersonalityResult> = {
 	'result-c': {
 		description: 'Doutorado em Choco Frito e nas melhores tascas da região.',
 		id: 'result-c',
-		illustration: 'result-c.svg',
+		illustration: 'result-c.png',
 		letter: 'C',
 		routeDescription: 'Entre petiscos, mercados e restaurantes típicos, esta linha é perfeita para descobrir os sabores da região!',
 		routeName: 'Praia da Figueirinha - Setúbal (Centro Comercial)',
@@ -194,7 +194,7 @@ export const personalityResults: Record<string, PersonalityResult> = {
 	'result-d': {
 		description: 'Com ou sem golden hour, tens o melhor olhar para fotografia.',
 		id: 'result-d',
-		illustration: 'result-d.svg',
+		illustration: 'result-d.png',
 		letter: 'D',
 		routeDescription: 'Com esta linha, há sempre uma nova vista para descobrir e fotografar!',
 		routeName: 'Setúbal (ITS) - Praia do Creiro via Vila Nogueira de Azeitão',

@@ -3,16 +3,16 @@
 
 import styles from './styles.module.css';
 
-import afterShareBus from './assets/after-share-bus.svg';
-import questionAImage from './assets/question-a.svg';
-import questionBImage from './assets/question-b.svg';
-import questionCImage from './assets/question-c.svg';
-import questionDImage from './assets/question-d.svg';
-import questionEImage from './assets/question-e.svg';
-import resultAImage from './assets/result-a.svg';
-import resultBImage from './assets/result-b.svg';
-import resultCImage from './assets/result-c.svg';
-import resultDImage from './assets/result-d.svg';
+import afterShareBus from './assets/after-share-bus.png';
+import questionAImage from './assets/question-a.png';
+import questionBImage from './assets/question-b.png';
+import questionCImage from './assets/question-c.png';
+import questionDImage from './assets/question-d.png';
+import questionEImage from './assets/question-e.png';
+import resultAImage from './assets/result-a.png';
+import resultBImage from './assets/result-b.png';
+import resultCImage from './assets/result-c.png';
+import resultDImage from './assets/result-d.png';
 import { AfterShareScreen } from './components/AfterShareScreen';
 import { LoadingScreen } from './components/LoadingScreen';
 import { QuestionScreen } from './components/QuestionScreen';
@@ -23,10 +23,10 @@ import { questions } from './data';
 import { useQuizController } from './useQuizController';
 
 const resultImages: Record<string, any> = {
-	'result-a.svg': resultAImage,
-	'result-b.svg': resultBImage,
-	'result-c.svg': resultCImage,
-	'result-d.svg': resultDImage,
+	'result-a.png': resultAImage,
+	'result-b.png': resultBImage,
+	'result-c.png': resultCImage,
+	'result-d.png': resultDImage,
 };
 
 const questionIllustrations: Record<string, any> = {

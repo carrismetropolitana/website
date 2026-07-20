@@ -1,4 +1,4 @@
-declare module '*.svg' {
+declare module '*.png' {
 	const src: {
 		blurDataURL?: string
 		height: number
