@@ -12,7 +12,7 @@ import { fetchPatterns } from '@/hooks/fetch-patterns';
 import { type Arrival } from '@/types/stops.types';
 import { getPublicVariable } from '@carrismetropolitana/website-shared-settings';
 import { Dates } from '@tmlmobilidade/dates';
-import { type HubAlert, type HubLine, type HubPattern, type HubStop } from '@tmlmobilidade/go-types-public-info';
+import { type HubAlert, type HubLine, type HubPattern, type HubShape, type HubStop } from '@tmlmobilidade/go-types-public-info';
 import { UnixTimestamp } from '@tmlmobilidade/types';
 import { convertGTFSTimeStringAndOperationalDateToUnixTimestamp } from '@tmlmobilidade/utils';
 import { DateTime } from 'luxon';
@@ -48,12 +48,14 @@ export interface StopsDetailViewTimetableData {
 interface StopsDetailContextState {
 	actions: {
 		resetActiveTripId: () => void
+		setActiveStopId: (stopId: string) => void
 		setActiveTripId: (tripId: string, stopSequence: number) => void
 	}
 	data: {
 		active_alerts: HubAlert[]
 		associated_lines: HubLine[]
 		highlighted_pattern: HubPattern
+		highlighted_shape: HubShape
 		highlighted_stop_sequence: number
 		highlighted_trip_id: string
 		stop: HubStop
@@ -124,13 +126,13 @@ export const StopsDetailContextProvider = ({ children, stopId }: { children: Rea
 	const [dataActiveStopIdState, setDataActiveStopIdState] = useState<string>(stopId);
 	const [dataPatternsState, setDataPatternsState] = useState<HubPattern[][] | undefined>(undefined);
 	const [dataValidPatternsState, setDataValidPatternsState] = useState<HubPattern[] | undefined>(undefined);
-	const [dataTimetableRealtimeState, setDataTimetableRealtimeState] = useState<Arrival[] | undefined>(undefined);
 
 	const [isLoading, setIsLoading] = useState<boolean>(false);
 
 	const [associatedPatternsData, setAssociatedPatternsData] = useState<HubPattern[][]>();
 
 	const [highlightedPattern, setHighlightedPattern] = useState<HubPattern>();
+	const [highlightedShape, setHighlightedShape] = useState<HubShape>();
 	const [highlightedTripId, setHighlightedTripId] = useState<string>();
 	const [highlightedStopSequence, setHighlightedStopSequence] = useState<number>();
 
@@ -138,9 +140,9 @@ export const StopsDetailContextProvider = ({ children, stopId }: { children: Rea
 	// B. Fetch data
 
 	const selectedStopData = useMemo(() => {
-		if (!stopId || !stopsContext.data.stops?.length) return;
-		return stopsContext.actions.getStopById(stopId);
-	}, [stopId, stopsContext.data.stops, stopsContext.actions]);
+		if (!dataActiveStopIdState || !stopsContext.data.stops?.length) return;
+		return stopsContext.actions.getStopById(dataActiveStopIdState);
+	}, [dataActiveStopIdState, stopsContext.data.stops, stopsContext.actions]);
 
 	const associatedLinesData = useMemo(() => {
 		if (!selectedStopData) return;
@@ -156,6 +158,42 @@ export const StopsDetailContextProvider = ({ children, stopId }: { children: Rea
 			setIsLoading(false);
 		})();
 	}, [selectedStopData]);
+
+	useEffect(() => {
+		if (!highlightedPattern) {
+			setHighlightedShape(undefined);
+			return;
+		}
+
+		let isCancelled = false;
+		(async () => {
+			try {
+				const response = await fetch(`${getPublicVariable('go_api_url')}/hub/api/v1/network/shapes/${encodeURIComponent(highlightedPattern.shape_id)}`);
+				if (!response.ok) throw new Error(`Failed to fetch shape ${highlightedPattern.shape_id}`);
+				const payload = await response.json() as { data?: HubShape };
+				const shapeData = payload.data;
+				if (isCancelled || !shapeData) return;
+				setHighlightedShape({
+					...shapeData,
+					geojson: {
+						...shapeData.geojson,
+						properties: {
+							...shapeData.geojson.properties,
+							color: highlightedPattern.color,
+							text_color: highlightedPattern.text_color,
+						},
+					},
+				});
+			}
+			catch (error) {
+				if (!isCancelled) console.error('Error fetching highlighted shape:', error);
+			}
+		})();
+
+		return () => {
+			isCancelled = true;
+		};
+	}, [highlightedPattern]);
 
 	/**
  	* Populate stopData state when stopId changes.
@@ -197,28 +235,6 @@ export const StopsDetailContextProvider = ({ children, stopId }: { children: Rea
  * It fetches line data for each line associated with the stop and updates the state.
 
  */
-
-	useEffect(() => {
-		const fetchData = async () => {
-			try {
-				if (!dataActiveStopIdState) return;
-				const realtimeData = await fetch(`${getPublicVariable('api_url')}/arrivals/by_stop/${dataActiveStopIdState}`)
-					.then((response) => {
-						if (!response.ok) console.log(`Failed to fetch realtime data for stopId: ${dataActiveStopIdState}`);
-						else return response.json();
-					});
-				setDataTimetableRealtimeState(realtimeData);
-			}
-			catch (error) {
-				console.error('Error fetching realtime data:', error);
-				setDataTimetableRealtimeState([]);
-			}
-		};
-		//
-		fetchData();
-		const interval = setInterval(fetchData, 10000);
-		return () => clearInterval(interval);
-	}, [dataActiveStopIdState]);
 
 	/**
  	* Fetch pattern data for the selected stop.
@@ -325,7 +341,7 @@ export const StopsDetailContextProvider = ({ children, stopId }: { children: Rea
 				// Loop through each stop time of the trip
 				for (const stopTime of tripData.schedule) {
 					// Skip if this stop time is not for the selected stop
-					if (String(stopTime.stop_id) !== String(stopId)) continue;
+					if (String(stopTime.stop_id) !== String(dataActiveStopIdState)) continue;
 					// Set a unique and stable ID for this arrival data
 					const uniqueIdValueForArrivalData = `${operationalDateContext.data.selected_date.operational_date}-${patternData.version_id}-${tripData.version_id}-${stopTime.stop_id}-${stopTime.stop_sequence}-${stopTime.arrival_time}`;
 					// Convert GTFS time string to Unix Timestamp
@@ -372,11 +388,10 @@ export const StopsDetailContextProvider = ({ children, stopId }: { children: Rea
 		}
 		// Return the timetable data, sorted by scheduled arrival time
 		return timetableDataForSelectedDate.sort((a, b) => a.arrival_effective_ms - b.arrival_effective_ms);
-	}, [validPatternsData, operationalDateContext.data.selected_date, operationalDateContext.flags.is_today_selected, stopId, tripUpdatesContext.actions]);
+	}, [validPatternsData, operationalDateContext.data.selected_date, operationalDateContext.flags.is_today_selected, dataActiveStopIdState, tripUpdatesContext.actions]);
 
 	useEffect(() => {
 		const prepareTimetableRealtimeData = () => {
-			if (!dataTimetableRealtimeState) return;
 			// const nowInUnixSeconds = DateTime.now().toSeconds();
 			// const timetableRealtimePastResult = dataTimetableRealtimeState
 			// 	.filter((arrival) => {
@@ -430,7 +445,7 @@ export const StopsDetailContextProvider = ({ children, stopId }: { children: Rea
 		prepareTimetableRealtimeData();
 		const interval = setInterval(prepareTimetableRealtimeData, 1000);
 		return () => clearInterval(interval);
-	}, [dataTimetableRealtimeState, dataValidPatternsState, debugContext.flags.is_debug_mode]);
+	}, [dataValidPatternsState, debugContext.flags.is_debug_mode]);
 
 	/**
  	* Prepare timetable schedule data for the selected stop.
@@ -526,6 +541,11 @@ export const StopsDetailContextProvider = ({ children, stopId }: { children: Rea
 	//
 	// D. Handle actions
 
+	const setActiveStopId = (activeStopId: string) => {
+		resetActiveTripId();
+		setDataActiveStopIdState(activeStopId);
+	};
+
 	const setActiveTripId = (tripId: string, stopSequence: number) => {
 		const activePattern = validPatternsData?.find(patternGroup => patternGroup.trips.find(trip => trip.trip_ids.includes(tripId)));
 		if (activePattern) setHighlightedPattern(activePattern);
@@ -557,6 +577,7 @@ export const StopsDetailContextProvider = ({ children, stopId }: { children: Rea
 
 	const resetActiveTripId = () => {
 		setHighlightedPattern(undefined);
+		setHighlightedShape(undefined);
 		setHighlightedTripId(undefined);
 		setHighlightedStopSequence(undefined);
 	};
@@ -619,12 +640,14 @@ export const StopsDetailContextProvider = ({ children, stopId }: { children: Rea
 		// },
 		actions: {
 			resetActiveTripId,
+			setActiveStopId,
 			setActiveTripId,
 		},
 		data: {
 			active_alerts: activeAlertsData,
 			associated_lines: associatedLinesData,
 			highlighted_pattern: highlightedPattern,
+			highlighted_shape: highlightedShape,
 			highlighted_stop_sequence: highlightedStopSequence,
 			highlighted_trip_id: highlightedTripId,
 			stop: selectedStopData,

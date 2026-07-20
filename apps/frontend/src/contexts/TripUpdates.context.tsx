@@ -1,5 +1,6 @@
 'use client';
 
+import { type GoApiResponse } from '@/types/api.types';
 import { API_ROUTES } from '@tmlmobilidade/consts';
 import { type GtfsRtFeedMessage } from '@tmlmobilidade/go-types-gtfs-rt';
 import { type UnixTimestamp, validateUnixTimestamp } from '@tmlmobilidade/go-types-shared';
@@ -49,7 +50,7 @@ export function TripUpdatesContextProvider({ children }: PropsWithChildren) {
 	//
 	// A. Fetch data
 
-	const { data: tripUpdatesData, error: tripUpdatesError, isLoading: tripUpdatesLoading } = useSWR<GtfsRtFeedMessage, Error>({ credentials: 'omit', url: API_ROUTES.hub.REALTIME_TRIP_UPDATES }, { refreshInterval: 30_000 }); // 30 seconds
+	const { data: tripUpdatesResponse, error: tripUpdatesError, isLoading: tripUpdatesLoading } = useSWR<GoApiResponse<GtfsRtFeedMessage>, Error>({ credentials: 'omit', url: API_ROUTES.hub.REALTIME_TRIP_UPDATES }, { refreshInterval: 30_000 }); // 30 seconds
 
 	//
 	// B. Transform data
@@ -58,6 +59,7 @@ export function TripUpdatesContextProvider({ children }: PropsWithChildren) {
 		// Setup a new map instance
 		const map = new Map<string, PreparedTripUpdate>();
 		// If there is no data, return the empty map
+		const tripUpdatesData = tripUpdatesResponse?.data;
 		if (!tripUpdatesData?.entity?.length) return map;
 		// Iterate over the entities
 		for (const entity of tripUpdatesData?.entity ?? []) {
@@ -81,7 +83,7 @@ export function TripUpdatesContextProvider({ children }: PropsWithChildren) {
 			}
 		}
 		return map;
-	}, [tripUpdatesData]);
+	}, [tripUpdatesResponse]);
 
 	// console.log('tripUpdatesMap:', tripUpdatesMap);
 
