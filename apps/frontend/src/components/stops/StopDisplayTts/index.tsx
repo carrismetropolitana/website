@@ -2,7 +2,7 @@
 
 /* * */
 
-import { useAnalyticsContext } from '@/contexts/Analytics.context';
+// import { useAnalyticsContext } from '@/contexts/Analytics.context';
 import { getPublicVariable } from '@carrismetropolitana/website-shared-settings';
 import { IconPlayerPause, IconVolume } from '@tabler/icons-react';
 import { type File } from '@tmlmobilidade/types';
@@ -33,7 +33,7 @@ export function StopDisplayTts({ stopId }: Props) {
 	const audioUrl = stopTtsData?.file?.url;
 	const [isPlaying, setIsPlaying] = useState(false);
 	const audioRef = useRef<HTMLAudioElement | null>(null);
-	const analyticsContext = useAnalyticsContext();
+	// const analyticsContext = useAnalyticsContext();
 
 	//
 	// B. Transform data
@@ -71,7 +71,7 @@ export function StopDisplayTts({ stopId }: Props) {
 
 		try {
 			await audio.play();
-			analyticsContext.actions.capture(ampli => ampli.stopAudioPlayed({ audio_played: 'true', stop_id: stopId }));
+			// analyticsContext.actions.capture(ampli => ampli.stopAudioPlayed({ audio_played: 'true', stop_id: stopId }));
 		}
 		catch {
 			audioRef.current = null;
