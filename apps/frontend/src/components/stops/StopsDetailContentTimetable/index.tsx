@@ -82,7 +82,7 @@ export function StopsDetailContentTimetable() {
 	return (
 		<div className={styles.container}>
 			{operationalDateContext.flags.is_today_selected &&	(
-				<p className={styles.toggleShowPastArrivals} onClick={toggleShowPastArrivals}>
+				<p className={styles.showPastTripsToggle} onClick={toggleShowPastArrivals}>
 					{showPastArrivals ? t('show_past_trips_toggle.hide') : t('show_past_trips_toggle.show')}
 				</p>
 			)}

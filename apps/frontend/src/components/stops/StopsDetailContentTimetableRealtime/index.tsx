@@ -47,17 +47,16 @@ export function StopsDetailContentTimetableRealtime() {
 
 	return (
 		<>
-			{/*
+
 			<p className={styles.showPastTripsToggle} onClick={handleToggleShowPastTrips}>
 				{showPastTrips ? t('show_past_trips_toggle.hide') : t('show_past_trips_toggle.show')}
-			</p> */}
+			</p>
 
 			{!showPastTrips && mostRecentPastTrip && (
 				<div>
 					<StopsDetailViewTimetableRow
 						data={mostRecentPastTrip}
 						withClock={false}
-						// status="passed"
 					/>
 				</div>
 			)}
@@ -67,7 +66,6 @@ export function StopsDetailContentTimetableRealtime() {
 					<StopsDetailViewTimetableRow
 						data={tripData}
 						withClock={false}
-						// status="passed"
 					/>
 				</div>
 			))}
@@ -81,7 +79,6 @@ export function StopsDetailContentTimetableRealtime() {
 							key={`${tripData.trip_ids[0]}-${tripData.stop_sequence}`}
 							data={tripData}
 							withClock={false}
-							// status={tripData.arrival_effective_ms ? 'realtime' : 'scheduled'}
 						/>
 					))}
 					<NoDataLabel text={t('end_of_day')} withMinHeight />

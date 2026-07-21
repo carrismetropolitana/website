@@ -83,7 +83,7 @@ export function StopsDetailViewTimetableRow({ data, withClock }: Props) {
 
 			{withClock && <StopsDetailContentTimetableClock />}
 
-			<div className={`${styles.container} ${styles[status]} ${isSelected ? styles.isSelected : ''}`} onClick={handleClick}>
+			<div className={`${styles.container} ${styles[status]} ${isSelected && styles.isSelected}`} onClick={handleClick}>
 
 				<div className={styles.summary}>
 					<LineDisplay
