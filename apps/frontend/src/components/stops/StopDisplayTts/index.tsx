@@ -2,10 +2,12 @@
 
 /* * */
 
-import { useAnalyticsContext } from '@/contexts/Analytics.context';
-import { audioTtsUrl } from '@/settings/urls.settings';
+// import { useAnalyticsContext } from '@/contexts/Analytics.context';
+import { getPublicVariable } from '@carrismetropolitana/website-shared-settings';
 import { IconPlayerPause, IconVolume } from '@tabler/icons-react';
+import { type File } from '@tmlmobilidade/types';
 import { useEffect, useRef, useState } from 'react';
+import useSWR from 'swr';
 
 import styles from './styles.module.css';
 
@@ -13,6 +15,10 @@ import styles from './styles.module.css';
 
 interface Props {
 	stopId?: string
+}
+
+interface StopTtsResponse {
+	file: File | null
 }
 
 /* * */
@@ -23,54 +29,64 @@ export function StopDisplayTts({ stopId }: Props) {
 	//
 	// A. Setup variables
 
+	const { data: stopTtsData, error: stopTtsError, isLoading: stopTtsLoading } = useSWR<StopTtsResponse, Error>(getPublicVariable('go_api_url') + '/stops/api/stops/tts/tts-' + stopId);
+	const audioUrl = stopTtsData?.file?.url;
 	const [isPlaying, setIsPlaying] = useState(false);
-	const audioPlayer = useRef<HTMLAudioElement | null>(null);
-	const analyticsContext = useAnalyticsContext();
+	const audioRef = useRef<HTMLAudioElement | null>(null);
+	// const analyticsContext = useAnalyticsContext();
 
 	//
 	// B. Transform data
 
 	useEffect(() => {
-		audioPlayer.current = new Audio(`${audioTtsUrl}/stops/${stopId}.mp3`);
-	}, [stopId]);
-
-	useEffect(() => {
-		if (audioPlayer.current) {
-			audioPlayer.current.onplaying = () => setIsPlaying(true);
-			audioPlayer.current.onpause = () => setIsPlaying(false);
-			audioPlayer.current.onabort = () => setIsPlaying(false);
-		}
 		return () => {
-			if (audioPlayer.current) {
-				audioPlayer.current.onplaying = null;
-				audioPlayer.current.onpause = null;
-				audioPlayer.current.onabort = null;
-			}
+			audioRef.current?.pause();
+			audioRef.current = null;
+			setIsPlaying(false);
 		};
 	}, [stopId]);
 
 	//
 	// C. Handle actions
 
-	const handleToogleAudio = () => {
+	const handleToggleAudio = async () => {
+		if (!audioUrl || !stopId) return;
+
 		if (isPlaying) {
-			audioPlayer.current?.pause();
+			audioRef.current?.pause();
+			return;
 		}
-		else {
-			audioPlayer.current?.load();
-			audioPlayer.current?.play();
+
+		audioRef.current?.pause();
+
+		const audio = new Audio(audioUrl);
+		audio.onplaying = () => setIsPlaying(true);
+		audio.onpause = () => setIsPlaying(false);
+		audio.onabort = () => setIsPlaying(false);
+		audio.onended = () => {
+			audioRef.current = null;
+			setIsPlaying(false);
+		};
+		audioRef.current = audio;
+
+		try {
+			await audio.play();
+			// analyticsContext.actions.capture(ampli => ampli.stopAudioPlayed({ audio_played: 'true', stop_id: stopId }));
 		}
-		analyticsContext.actions.capture(ampli => ampli.stopAudioPlayed({ audio_played: 'true', stop_id: stopId || '' }));
+		catch {
+			audioRef.current = null;
+			setIsPlaying(false);
+		}
 	};
 
 	//
 	// D. Render components
 
-	return audioPlayer && (
-		<div className={`${styles.container} ${isPlaying && styles.isPlaying}`} onClick={handleToogleAudio}>
-			{isPlaying
-				? <IconPlayerPause />
-				: <IconVolume />}
+	if (!stopId || stopTtsLoading || stopTtsError || !audioUrl) return null;
+
+	return (
+		<div className={`${styles.container} ${isPlaying && styles.isPlaying}`} onClick={handleToggleAudio}>
+			{isPlaying ? <IconPlayerPause /> : <IconVolume />}
 		</div>
 	);
 

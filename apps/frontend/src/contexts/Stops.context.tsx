@@ -2,21 +2,23 @@
 
 /* * */
 
+import { useFilterByAgencyIds } from '@/hooks/useFilterByAgencyIds';
+import { type GoApiResponse } from '@/types/api.types';
 import { getBaseGeoJsonFeatureCollection } from '@/utils/map.utils';
-import { type Stop } from '@carrismetropolitana/api-types/network';
 import { CARRIS_METROPOLITANA_AGENCY_IDS, getPublicVariable } from '@carrismetropolitana/website-shared-settings';
-import { createContext, useContext, useEffect, useMemo, useState } from 'react';
+import { type HubStop } from '@tmlmobilidade/go-types-public-info';
+import { createContext, useCallback, useContext, useEffect, useMemo, useState } from 'react';
 import useSWR from 'swr';
 
 /* * */
 
 interface StopsContextState {
 	actions: {
-		getStopById: (stopId: string) => Stop | undefined
+		getStopById: (stopId: string) => HubStop | undefined
 		getStopByIdGeoJsonFC: (stopId: string) => GeoJSON.FeatureCollection | undefined
 	}
 	data: {
-		stops: Stop[]
+		stops: HubStop[]
 		stops_fc: GeoJSON.FeatureCollection<GeoJSON.Point, GeoJSON.GeoJsonProperties> | undefined
 	}
 	flags: {
@@ -49,17 +51,36 @@ export const StopsContextProvider = ({ children }) => {
 	//
 	// B. Fetch data
 
-	const { data: allStopsData, isLoading: allStopsLoading } = useSWR<Stop[]>(`${getPublicVariable('api_url')}/stops`, { refreshInterval: 900000 }); // 15 minutes
-	const filteredStopsData = useMemo(() => {
-		const allowedOperatorDigits = new Set(CARRIS_METROPOLITANA_AGENCY_IDS.map(agencyId => agencyId.slice(-1)));
-		return (allStopsData ?? []).filter((stopData) => {
-			const lineIds = stopData.line_ids || (stopData as Stop & { lines?: string[] }).lines || [];
-			return lineIds.some(lineId => allowedOperatorDigits.has(lineId.at(0) ?? ''));
-		});
-	}, [allStopsData]);
+	const { data: allStopsData, isLoading: allStopsLoading } = useSWR<GoApiResponse<HubStop[]>, Error>(`${getPublicVariable('go_api_url')}/hub/api/v1/network/stops`, { refreshInterval: 900000 }); // 15 minutes
 
 	//
-	// C. Transform data
+	// C. Filter data
+
+	const stopAgencyIdsByLinePrefix = useMemo(() => {
+		return new Map(CARRIS_METROPOLITANA_AGENCY_IDS.map(agencyId => [agencyId.slice(-1), agencyId]));
+	}, []);
+
+	const getStopAgencyIds = useCallback((stopData: HubStop) => {
+		const normalizedStopData = stopData as HubStop & {
+			agency_id?: string
+			agency_ids?: string[]
+			lines?: string[]
+		};
+
+		if (normalizedStopData.agency_ids?.length) return normalizedStopData.agency_ids;
+		if (normalizedStopData.agency_id) return normalizedStopData.agency_id;
+
+		const lineIds = stopData.line_ids || normalizedStopData.lines || [];
+		return lineIds.flatMap((lineId) => {
+			const agencyId = stopAgencyIdsByLinePrefix.get(lineId.at(0) ?? '');
+			return agencyId ? [agencyId] : [];
+		});
+	}, [stopAgencyIdsByLinePrefix]);
+
+	const filteredStopsData = useFilterByAgencyIds(allStopsData, { dataType: 'stop', getAgencyIds: getStopAgencyIds }).data;
+
+	//
+	// D. Transform data
 
 	useEffect(() => {
 		// Check if all data is available
@@ -76,10 +97,13 @@ export const StopsContextProvider = ({ children }) => {
 	}, [filteredStopsData]);
 
 	//
-	// D. Handle actions
+	// E. Handle actions
 
-	const getStopById = (stopId: string): Stop | undefined => {
-		return filteredStopsData.find(stop => stop.id === stopId);
+	const getStopById = (stopId: string): HubStop | undefined => {
+		return filteredStopsData.find((stop) => {
+			const id = stop._id ?? (stop as HubStop & { id?: number | string }).id;
+			return id?.toString() === stopId;
+		});
 	};
 
 	const getStopByIdGeoJsonFC = (stopId: string): GeoJSON.FeatureCollection | undefined => {
@@ -92,7 +116,7 @@ export const StopsContextProvider = ({ children }) => {
 	};
 
 	//
-	// E. Define context value
+	// F. Define context value
 
 	const contextValue: StopsContextState = {
 		actions: {
@@ -109,7 +133,7 @@ export const StopsContextProvider = ({ children }) => {
 	};
 
 	//
-	// F. Render components
+	// G. Render components
 
 	return (
 		<StopsContext.Provider value={contextValue}>
@@ -122,18 +146,29 @@ export const StopsContextProvider = ({ children }) => {
 
 /* * */
 
-export function transformStopDataIntoGeoJsonFeature(stopData: Stop): GeoJSON.Feature<GeoJSON.Point, GeoJSON.GeoJsonProperties> {
+export function transformStopDataIntoGeoJsonFeature(stopData: HubStop): GeoJSON.Feature<GeoJSON.Point, GeoJSON.GeoJsonProperties> | undefined {
+	const legacyStopData = stopData as HubStop & {
+		id?: number | string
+		lat?: number
+		lon?: number
+		long_name?: string
+	};
+	const id = stopData._id ?? legacyStopData.id;
+	const lat = stopData.latitude ?? legacyStopData.lat;
+	const lon = stopData.longitude ?? legacyStopData.lon;
+	if (lat === undefined || lon === undefined) return;
+
 	const feature: GeoJSON.Feature<GeoJSON.Point, GeoJSON.GeoJsonProperties> = {
 		geometry: {
-			coordinates: [stopData.lon, stopData.lat],
+			coordinates: [lon, lat],
 			type: 'Point',
 		},
 		properties: {
-			current_status: stopData.operational_status,
-			id: stopData.id,
-			lat: stopData.lat,
-			lon: stopData.lon,
-			long_name: stopData.long_name,
+			current_status: stopData.lifecycle_status,
+			id: id?.toString(),
+			lat,
+			lon,
+			long_name: stopData.name,
 		},
 		type: 'Feature',
 	};

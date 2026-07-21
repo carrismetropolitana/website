@@ -5,7 +5,7 @@
 import type { AlertCause, AlertEffect } from '@/types/alerts.types.js';
 import type { HubAlert } from '@tmlmobilidade/go-types-public-info';
 
-import { normalizeAlertReferenceId } from '@/utils/alerts';
+import { normalizeReferenceId } from '@/utils/alerts';
 import { DateTime } from 'luxon';
 import { useQueryState } from 'nuqs';
 import { createContext, useContext, useEffect, useMemo, useState } from 'react';
@@ -134,19 +134,19 @@ export const AlertsListContextProvider = ({ children }) => {
 		});
 
 		if (filterByLineIdState) {
-			const normalizedLineId = normalizeAlertReferenceId(filterByLineIdState);
+			const normalizedLineId = normalizeReferenceId(filterByLineIdState);
 			filterResult = filterResult.filter(alert => alert.references.some((reference) => {
-				const parentId = normalizeAlertReferenceId(reference.parent_id);
-				const childIds = reference.child_ids.map(normalizeAlertReferenceId);
+				const parentId = normalizeReferenceId(reference.parent_id);
+				const childIds = reference.child_ids.map(normalizeReferenceId);
 				return parentId === normalizedLineId || childIds.includes(normalizedLineId);
 			}));
 		}
 
 		if (filterByStopIdState) {
-			const normalizedStopId = normalizeAlertReferenceId(filterByStopIdState);
+			const normalizedStopId = normalizeReferenceId(filterByStopIdState);
 			filterResult = filterResult.filter(alert => alert.references.some((reference) => {
-				const parentId = normalizeAlertReferenceId(reference.parent_id);
-				const childIds = reference.child_ids.map(normalizeAlertReferenceId);
+				const parentId = normalizeReferenceId(reference.parent_id);
+				const childIds = reference.child_ids.map(normalizeReferenceId);
 				return parentId === normalizedStopId || childIds.includes(normalizedStopId);
 			}));
 		}

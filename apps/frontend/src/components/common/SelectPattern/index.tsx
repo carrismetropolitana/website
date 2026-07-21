@@ -4,11 +4,11 @@
 
 import { useDebugContext } from '@/contexts/Debug.context';
 import { useLinesContext } from '@/contexts/Lines.context';
-import { useLocationsContext } from '@/contexts/Locations.context';
 import { useStopsContext } from '@/contexts/Stops.context';
-import { Pattern } from '@carrismetropolitana/api-types/network';
+import { formatStopLocation } from '@/utils/formatStopLocation';
 import { ComboboxItem, ComboboxItemGroup, Flex, Group, Select, SelectProps, Text } from '@mantine/core';
 import { IconAlertTriangle } from '@tabler/icons-react';
+import { type HubPattern } from '@tmlmobilidade/go-types-public-info';
 import { useTranslations } from 'next-intl';
 import { useMemo } from 'react';
 
@@ -16,12 +16,22 @@ import { useMemo } from 'react';
 
 export interface Props extends SelectProps {
 	date_filter?: string
-	patterns: Pattern[]
+	patterns: HubPattern[]
 }
 
 interface CustomComboboxItem extends ComboboxItem {
 	direction_id: number
 	pattern_id: string
+}
+
+const PLACEHOLDER_HEADSIGN = 'HeadSign to be defined';
+
+function getPatternTitle(pattern: HubPattern, routeLongName?: string) {
+	if (pattern.headsign && pattern.headsign !== PLACEHOLDER_HEADSIGN) {
+		return pattern.headsign;
+	}
+
+	return pattern.long_name || routeLongName || pattern.headsign;
 }
 
 /* * */
@@ -37,25 +47,39 @@ export function SelectPattern({ date_filter, onChange, patterns, value, ...props
 	const debugContext = useDebugContext();
 	const linesContext = useLinesContext();
 	const stopsContext = useStopsContext();
-	const locationsContext = useLocationsContext();
 
 	//
 	// B. Transform data
 
-	const validPatternsSelectOptions = useMemo(() => {
+	const patternsForSelect = useMemo(() => {
 		if (!patterns) return [];
+
+		const withPath = patterns.filter(pattern => pattern.path.length > 0);
+		const base = withPath.length > 0 ? withPath : patterns;
+		const selected = value ? patterns.find(pattern => pattern.version_id === value) : undefined;
+
+		if (selected && !base.some(pattern => pattern.version_id === value)) {
+			return [...base, selected];
+		}
+
+		return base;
+	}, [patterns, value]);
+
+	const validPatternsSelectOptions = useMemo(() => {
+		if (!patternsForSelect.length) return [];
 
 		let data: ComboboxItemGroup<CustomComboboxItem>[] = [];
 
 		// Filter patterns by date
-		patterns.map((patternGroupData) => {
+		patternsForSelect.map((patternGroupData) => {
 			const group = data.find(group => group.group === patternGroupData.route_id);
+			const routeData = linesContext.data.routes.find(route => route._id === patternGroupData.route_id);
 
 			const item = {
 				direction_id: patternGroupData.direction_id,
-				disabled: date_filter ? !patternGroupData.valid_on.includes(date_filter) : false,
-				label: patternGroupData.headsign,
-				pattern_id: patternGroupData.id,
+				disabled: (date_filter ? !patternGroupData.valid_on.includes(date_filter) : false) || !patternGroupData.path.length,
+				label: getPatternTitle(patternGroupData, routeData?.long_name),
+				pattern_id: patternGroupData._id,
 				value: patternGroupData.version_id,
 			};
 
@@ -81,7 +105,7 @@ export function SelectPattern({ date_filter, onChange, patterns, value, ...props
 		});
 
 		return data;
-	}, [patterns]);
+	}, [date_filter, linesContext.data.routes, patternsForSelect]);
 
 	//
 	// C. Render components
@@ -89,8 +113,8 @@ export function SelectPattern({ date_filter, onChange, patterns, value, ...props
 	const renderSelectOption: SelectProps['renderOption'] = ({ option }: { option: CustomComboboxItem }) => {
 		//
 
-		const patternData = patterns.find(pattern => pattern.version_id === option.value);
-		if (!patternData || !patternData.path.length) {
+		const patternData = patternsForSelect.find(pattern => pattern.version_id === option.value);
+		if (!patternData?.path.length) {
 			return (
 				<Flex align="center" gap={5} justify="center">
 					<IconAlertTriangle size={14} />
@@ -100,17 +124,17 @@ export function SelectPattern({ date_filter, onChange, patterns, value, ...props
 		};
 
 		const firstStopData = stopsContext.actions.getStopById(patternData.path[0].stop_id);
-		const firstStopLocality = locationsContext.data.localitites.find(locality => locality.id === firstStopData?.locality_id);
-		const firstStopMunicipality = locationsContext.data.municipalities.find(municipality => municipality.id === firstStopData?.municipality_id);
+		const firstStopLocation = formatStopLocation(firstStopData?.locality_name, firstStopData?.municipality_name);
+		const routeData = linesContext.data.routes.find(route => route._id === patternData.route_id);
 
 		return (
 			<Group key={option.value} gap={2}>
 				<Flex direction="column">
 					<Flex align="flex-end" gap={5}>
-						<Text fw="bold">{patternData.headsign}</Text>
-						{debugContext.flags.is_debug_mode && <Text c="gray" size="xs">({patternData.id})</Text>}
+						<Text fw="bold">{getPatternTitle(patternData, routeData?.long_name)}</Text>
+						{debugContext.flags.is_debug_mode && <Text c="gray" size="xs">({patternData._id})</Text>}
 					</Flex>
-					<Text size="xs">{t('option_label', { locality: firstStopLocality?.display || firstStopMunicipality?.name || '' })}</Text>
+					<Text size="xs">{t('option_label', { locality: firstStopLocation || '' })}</Text>
 				</Flex>
 			</Group>
 		);
@@ -119,7 +143,7 @@ export function SelectPattern({ date_filter, onChange, patterns, value, ...props
 	const renderSelectRoot = (props) => {
 		//
 
-		const patternData = patterns.find(pattern => pattern.version_id === value);
+		const patternData = patternsForSelect.find(pattern => pattern.version_id === value);
 
 		if (!patternData) {
 			return (
@@ -134,8 +158,8 @@ export function SelectPattern({ date_filter, onChange, patterns, value, ...props
 		return (
 			<div {...props}>
 				<Flex align="center" gap={5}>
-					<Text fw="bold">{patternData.headsign}</Text>
-					{debugContext.flags.is_debug_mode && <Text c="gray" size="xs">{patternData.id}</Text>}
+					<Text fw="bold">{getPatternTitle(patternData, routeData?.long_name)}</Text>
+					{debugContext.flags.is_debug_mode && <Text c="gray" size="xs">{patternData._id}</Text>}
 				</Flex>
 				<Text size="xs">{routeData?.long_name}</Text>
 			</div>

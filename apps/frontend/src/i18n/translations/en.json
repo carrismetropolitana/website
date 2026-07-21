@@ -1496,12 +1496,12 @@
 			"44": "Alsa Todi"
 		},
 		"VehicleEmissionClass": {
-			"euro_1": "EURO 1",
-			"euro_2": "EURO 2",
-			"euro_3": "EURO 3",
-			"euro_4": "EURO 4",
-			"euro_5": "EURO 5",
-			"euro_6": "EURO 6"
+			"EURO_I": "EURO 1",
+			"EURO_II": "EURO 2",
+			"EURO_III": "EURO 3",
+			"EURO_IV": "EURO 4",
+			"EURO_V": "EURO 5",
+			"EURO_VI": "EURO 6"
 		},
 		"VehiclePropulsion": {
 			"diesel": "Diesel",
@@ -2016,12 +2016,20 @@
 		}
 	},
 	"stops": {
+		"NextArrivals": {
+			"arriving": "Arriving",
+			"hours": "h",
+			"minutes": "min"
+		},
 		"Page": {
 			"heading": "Search Stops"
 		},
 		"Single": {
 			"heading": "Search Stops",
 			"lines_that_pass_here": "Lines using this stop"
+		},
+		"StopsDetail": {
+			"title": "Stop"
 		},
 		"StopsDetailAlerts": {
 			"heading": "Active alerts",
@@ -2035,14 +2043,6 @@
 				"line": "Line"
 			}
 		},
-		"StopsDetailContentTimetableRealtime": {
-			"end_of_day": "End of day",
-			"no_service": "No Service Today",
-			"show_past_trips_toggle": {
-				"hide": "Hide previous passages",
-				"show": "View previous passages"
-			}
-		},
 		"StopsDetailContentTimetableRow": {
 			"debug_modal": {
 				"title": "This data represents equal trip IDs for different days"
@@ -2052,9 +2052,16 @@
 			},
 			"open_line_page": "See full path"
 		},
-		"StopsDetailContentTimetableSchedule": {
+		"StopsDetailViewTimetable": {
 			"end_of_day": "End of Day",
-			"no_service": "No Service for the selected day"
+			"no_service": "No Service for the selected day",
+			"show_past_trips_toggle": {
+				"hide": "Hide previous arrivals",
+				"show": "Show previous arrivals"
+			}
+		},
+		"StopsDetailViewTimetableRow": {
+			"localities": "Goes through: {localities}"
 		},
 		"StopsListToolbar": {
 			"filters": {

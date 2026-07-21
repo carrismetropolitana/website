@@ -2,7 +2,7 @@ import type { HubAlert } from '@tmlmobilidade/go-types-public-info';
 
 /* * */
 
-export function normalizeAlertReferenceId(referenceId: null | number | string | undefined): string {
+export function normalizeReferenceId(referenceId: null | number | string | undefined): string {
 	return String(referenceId ?? '').trim().replace(/^\[\d+\]/, '');
 }
 
