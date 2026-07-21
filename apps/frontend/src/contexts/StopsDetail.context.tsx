@@ -14,7 +14,7 @@ import { normalizeReferenceId } from '@/utils/alerts';
 import { getPublicVariable } from '@carrismetropolitana/website-shared-settings';
 import { Dates } from '@tmlmobilidade/dates';
 import { type HubAlert, type HubLine, type HubPattern, type HubShape, type HubStop } from '@tmlmobilidade/go-types-public-info';
-import { UnixTimestamp } from '@tmlmobilidade/types';
+import { type UnixTimestamp } from '@tmlmobilidade/types';
 import { convertGTFSTimeStringAndOperationalDateToUnixTimestamp } from '@tmlmobilidade/utils';
 import { notFound } from 'next/navigation';
 import { createContext, useContext, useEffect, useMemo, useState } from 'react';
