@@ -8,7 +8,7 @@ import { useProfileContext } from '@/contexts/Profile.context';
 import { transformStopDataIntoGeoJsonFeature, useStopsContext } from '@/contexts/Stops.context';
 import { createDocCollection } from '@/hooks/useOtherSearch';
 import { getBaseGeoJsonFeatureCollection } from '@/utils/map.utils';
-import { HubStop } from '@tmlmobilidade/go-types-public-info';
+import { type HubStop } from '@tmlmobilidade/go-types-public-info';
 import { createContext, useContext, useEffect, useMemo, useState } from 'react';
 
 /* * */

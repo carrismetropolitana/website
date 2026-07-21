@@ -3,7 +3,7 @@
 import { LineBadge } from '@/components/lines/LineBadge';
 import { LineName } from '@/components/lines/LineName';
 import { Skeleton } from '@mantine/core';
-import { HubLine } from '@tmlmobilidade/go-types-public-info';
+import { type HubLine } from '@tmlmobilidade/go-types-public-info';
 
 import styles from './styles.module.css';
 
