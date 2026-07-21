@@ -72,7 +72,7 @@ export function StopsDetailViewTimetableRow({ data, withClock }: Props) {
 	const handleClick = () => {
 		setSelectedTrip(data.pattern_id, data.trip_ids[0], data.stop_sequence);
 		if (isSelected) stopsDetailContext.actions.resetActiveTripId();
-		else stopsDetailContext.actions.setActiveTripId(data.trip_ids[0], data.stop_sequence);
+		else stopsDetailContext.actions.setActiveTripId(data.trip_ids[0]);
 	};
 
 	//

@@ -2044,14 +2044,6 @@
 				"line": "Linha"
 			}
 		},
-		"StopsDetailContentTimetableRealtime": {
-			"end_of_day": "Fim do Dia",
-			"no_service": "Sem Serviço Hoje",
-			"show_past_trips_toggle": {
-				"hide": "Esconder passagens anteriores",
-				"show": "Ver passagens anteriores"
-			}
-		},
 		"StopsDetailContentTimetableRow": {
 			"debug_modal": {
 				"title": "Estes dados representam trip IDs iguais para diferentes dias"
@@ -2060,10 +2052,6 @@
 				"label": "Passa por"
 			},
 			"open_line_page": "Ver percurso completo"
-		},
-		"StopsDetailContentTimetableSchedule": {
-			"end_of_day": "Fim do Dia",
-			"no_service": "Sem Serviço para o dia selecionado"
 		},
 		"StopsDetailViewTimetable": {
 			"end_of_day": "Fim do Dia",
