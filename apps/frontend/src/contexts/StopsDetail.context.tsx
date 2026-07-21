@@ -6,10 +6,12 @@ import { useDebugContext } from '@/contexts/Debug.context';
 import { useEnvironmentContext } from '@/contexts/Environment.context';
 import { useLinesContext } from '@/contexts/Lines.context';
 import { useOperationalDateContext } from '@/contexts/OperationalDate.context';
+import { useProfileContext } from '@/contexts/Profile.context';
 import { useStopsContext } from '@/contexts/Stops.context';
 import { useTripUpdatesContext } from '@/contexts/TripUpdates.context';
 import { fetchPatterns } from '@/hooks/fetch-patterns';
 import { type Arrival } from '@/types/stops.types';
+import { normalizeAlertReferenceId } from '@/utils/alerts';
 import { getPublicVariable } from '@carrismetropolitana/website-shared-settings';
 import { Dates } from '@tmlmobilidade/dates';
 import { type HubAlert, type HubLine, type HubPattern, type HubShape, type HubStop } from '@tmlmobilidade/go-types-public-info';
@@ -53,22 +55,23 @@ interface StopsDetailContextState {
 	}
 	data: {
 		active_alerts: HubAlert[]
-		associated_lines: HubLine[]
 		highlighted_pattern: HubPattern
 		highlighted_shape: HubShape
 		highlighted_stop_sequence: number
 		highlighted_trip_id: string
+		lines: HubLine[]
 		stop: HubStop
 		timetable: StopsDetailViewTimetableData[]
 	}
-	flags: {
-		is_loading: boolean
+	filters: {
+		none: string | undefined
 	}
-	// actions: {
-	// 	resetActiveTripId: () => void
-	// 	setActiveStopId: (stopId: string) => void
-	// 	setActiveTripId: (tripId: string, stopSequence: number) => void
-	// }
+	flags: {
+		is_favorite: boolean
+		is_loading: boolean
+		is_loading_timetable: boolean
+	}
+
 	// data: {
 	// 	active_alerts: HubAlert[] | undefined
 	// 	active_pattern_group: HubPattern | undefined
@@ -85,14 +88,7 @@ interface StopsDetailContextState {
 	// 	timetable_schedule: Arrival[] | undefined
 	// 	valid_pattern_groups: HubPattern[] | undefined
 	// }
-	// filters: {
-	// 	none: string | undefined
-	// }
-	// flags: {
-	// 	is_favorite: boolean
-	// 	is_loading: boolean
-	// 	is_loading_timetable: boolean
-	// }
+
 }
 
 /* * */
@@ -118,19 +114,20 @@ export const StopsDetailContextProvider = ({ children, stopId }: { children: Rea
 	const stopsContext = useStopsContext();
 	const linesContext = useLinesContext();
 	const alertsContext = useAlertsContext();
+	const profileContext = useProfileContext();
 	const operationalDateContext = useOperationalDateContext();
 	const tripUpdatesContext = useTripUpdatesContext();
 	const debugContext = useDebugContext();
 	const environmentContext = useEnvironmentContext();
 	const [dataStopState, setDataStopState] = useState<HubStop | undefined>(undefined);
+	const [dataActiveAlertsState, setDataActiveAlertsState] = useState<HubAlert[]>([]);
 	const [dataActiveStopIdState, setDataActiveStopIdState] = useState<string>(stopId);
 	const [dataPatternsState, setDataPatternsState] = useState<HubPattern[][] | undefined>(undefined);
 	const [dataValidPatternsState, setDataValidPatternsState] = useState<HubPattern[] | undefined>(undefined);
-
+	const [flagIsFavoriteState, setFlagIsFavoriteState] = useState<boolean>(false);
 	const [isLoading, setIsLoading] = useState<boolean>(false);
-
+	const [currentTimestamp, setCurrentTimestamp] = useState(() => Dates.now('Europe/Lisbon').unix_timestamp);
 	const [associatedPatternsData, setAssociatedPatternsData] = useState<HubPattern[][]>();
-
 	const [highlightedPattern, setHighlightedPattern] = useState<HubPattern>();
 	const [highlightedShape, setHighlightedShape] = useState<HubShape>();
 	const [highlightedTripId, setHighlightedTripId] = useState<string>();
@@ -294,26 +291,33 @@ export const StopsDetailContextProvider = ({ children, stopId }: { children: Rea
 
 	// C. Transform data
 
-	// useEffect(() => {
-	// 	setFlagIsFavoriteState(profileContext.data.favorite_stops?.includes(stopId) ? true : false);
-	// }, [profileContext.data.favorite_stops, stopId]);
+	useEffect(() => {
+		setFlagIsFavoriteState(profileContext.data.favorite_stops?.includes(stopId) ? true : false);
+	}, [profileContext.data.favorite_stops, stopId]);
 
-	const activeAlertsData = useMemo(() => {
-		// Skip if no data is available
-		if (!selectedStopData) return [];
-		if (!alertsContext.data.alerts) return [];
-		// Return active alerts for the selected stop
-		return alertsContext.data.alerts.filter((alert) => {
-			// Include this alert if it is associated with any of the selected stop's agencies
-			if (alert.reference_type === 'agency') return selectedStopData.agency_ids.includes(alert.agency_id);
-			// Include this alert if it directly assigned to the selected stop
-			if (alert.reference_type === 'stops') return alert.references.some(reference => reference.parent_id === String(selectedStopData._id));
-			// Include this alert if it is associated with any of the selected stop's lines
-			if (alert.reference_type === 'lines') return alert.references.some(reference => reference.child_ids.includes(String(selectedStopData._id)));
-			// Otherwise, exclude this alert
-			return false;
+	useEffect(() => {
+		if (!dataStopState) {
+			setDataActiveAlertsState([]);
+			return;
+		}
+
+		const normalizedStopId = normalizeAlertReferenceId(dataActiveStopIdState);
+		const normalizedLineIds = new Set(dataStopState.line_ids.map(normalizeAlertReferenceId));
+
+		const activeAlerts = alertsContext.data.alerts.filter((alert) => {
+			const hasMatchingReference = alert.references.some((reference) => {
+				if (alert.reference_type === 'stops') return normalizeAlertReferenceId(reference.parent_id) === normalizedStopId;
+				if (alert.reference_type !== 'lines') return false;
+				const hasMatchingLine = normalizedLineIds.has(normalizeAlertReferenceId(reference.parent_id));
+				const hasMatchingStop = reference.child_ids.some(childId => normalizeAlertReferenceId(childId) === normalizedStopId);
+				return hasMatchingLine || hasMatchingStop;
+			});
+			const isActive = !alert.active_period_end_date || alert.active_period_end_date >= Date.now();
+			return hasMatchingReference && isActive;
 		});
-	}, [selectedStopData, alertsContext.data.alerts]);
+
+		setDataActiveAlertsState(activeAlerts);
+	}, [alertsContext.data.alerts, dataStopState, dataActiveStopIdState]);
 
 	const validPatternsData = useMemo(() => {
 		// Skip if no associated patterns data or no operational date is selected
@@ -356,8 +360,10 @@ export const StopsDetailContextProvider = ({ children, stopId }: { children: Rea
 					// Detect the position of this stop time in the pattern
 					const isFirstStop = stopTime.stop_sequence === patternData.path[0].stop_sequence;
 					const isLastStop = stopTime.stop_sequence === patternData.path[patternData.path.length - 1].stop_sequence;
+					// When debug is off, skip last-stop arrivals (show them only in debug mode).
+					if (!debugContext.flags.is_debug_mode && isLastStop) continue;
 					// Detect the temporal status of this stop time
-					const isPast = effectiveArrivalMs < Dates.now('Europe/Lisbon').unix_timestamp;
+					const isPast = effectiveArrivalMs < currentTimestamp;
 					const isRealtime = !!estimatedArrivalMs && operationalDateContext.flags.is_today_selected;
 					// Add this stop time to the timetable array
 					timetableDataForSelectedDate.push({
@@ -388,64 +394,19 @@ export const StopsDetailContextProvider = ({ children, stopId }: { children: Rea
 		}
 		// Return the timetable data, sorted by scheduled arrival time
 		return timetableDataForSelectedDate.sort((a, b) => a.arrival_effective_ms - b.arrival_effective_ms);
-	}, [validPatternsData, operationalDateContext.data.selected_date, operationalDateContext.flags.is_today_selected, dataActiveStopIdState, tripUpdatesContext.actions]);
+	}, [validPatternsData, operationalDateContext.data.selected_date, operationalDateContext.flags.is_today_selected, dataActiveStopIdState, tripUpdatesContext.actions, debugContext.flags.is_debug_mode, currentTimestamp]);
 
 	useEffect(() => {
-		const prepareTimetableRealtimeData = () => {
-			// const nowInUnixSeconds = DateTime.now().toSeconds();
-			// const timetableRealtimePastResult = dataTimetableRealtimeState
-			// 	.filter((arrival) => {
-			// 		// If the arrival has an observed arrival time,
-			// 		// then it means the vehicle has already passed the stop.
-			// 		if (arrival.observed_arrival_unix) return true;
-			// 		// Include it in the past if the estimated arrival time is in the past.
-			// 		return (arrival.estimated_arrival_unix || arrival.scheduled_arrival_unix) < nowInUnixSeconds;
-			// 	})
-
-			// 	.filter((arrival) => {
-			// 		// When debug is off, skip last-stop arrivals (show them only in debug mode).
-			// 		if (debugContext.flags.is_debug_mode) return true;
-			// 		const lastStopSequence = dataValidPatternsState
-			// 			?.find(patternGroup => patternGroup._id === arrival.pattern_id)?.path
-			// 			.sort((a, b) => a.stop_sequence - b.stop_sequence)
-			// 			.slice(-1)[0]?.stop_sequence;
-			// 		return arrival.stop_sequence !== lastStopSequence;
-			// 	})
-			// 	.sort((a, b) => {
-			// 		const minimumArrivalA = a.observed_arrival_unix || a.scheduled_arrival_unix;
-			// 		const minimumArrivalB = b.observed_arrival_unix || b.scheduled_arrival_unix;
-			// 		return minimumArrivalA - minimumArrivalB;
-			// 	});
-			// const timetableRealtimeFutureResult = dataTimetableRealtimeState
-			// 	.filter((arrival) => {
-			// 		// If the arrival has an observed arrival time,
-			// 		// then it means the vehicle has already passed the stop.
-			// 		if (arrival.observed_arrival_unix) return false;
-			// 		// Include it in the future if the estimated arrival time is in the future.
-			// 		return (arrival.estimated_arrival_unix || arrival.scheduled_arrival_unix) >= nowInUnixSeconds;
-			// 	})
-			// 	.filter((arrival) => {
-			// 		// When debug is off, skip last-stop arrivals (show them only in debug mode).
-			// 		if (debugContext.flags.is_debug_mode) return true;
-
-			// 		const lastStopSequence = dataValidPatternsState
-			// 			?.find(patternGroup => patternGroup._id === arrival.pattern_id)?.path
-			// 			.sort((a, b) => a.stop_sequence - b.stop_sequence)
-			// 			.slice(-1)[0]?.stop_sequence;
-			// 		return arrival.stop_sequence !== lastStopSequence;
-			// 	})
-			// 	.sort((a, b) => {
-			// 		const minimumArrivalA = a.estimated_arrival_unix || a.scheduled_arrival_unix;
-			// 		const minimumArrivalB = b.estimated_arrival_unix || b.scheduled_arrival_unix;
-			// 		return minimumArrivalA - minimumArrivalB;
-			// 	});
-			// setDataTimetableRealtimePastState(timetableRealtimePastResult || []);
-			// setDataTimetableRealtimeFutureState(timetableRealtimeFutureResult || []);
+		const updateCurrentTimestamp = () => {
+			setCurrentTimestamp(Dates.now('Europe/Lisbon').unix_timestamp);
 		};
-		prepareTimetableRealtimeData();
-		const interval = setInterval(prepareTimetableRealtimeData, 1000);
+
+		updateCurrentTimestamp();
+		if (!operationalDateContext.flags.is_today_selected) return;
+
+		const interval = setInterval(updateCurrentTimestamp, 1000);
 		return () => clearInterval(interval);
-	}, [dataValidPatternsState, debugContext.flags.is_debug_mode]);
+	}, [operationalDateContext.flags.is_today_selected]);
 
 	/**
  	* Prepare timetable schedule data for the selected stop.
@@ -524,20 +485,6 @@ export const StopsDetailContextProvider = ({ children, stopId }: { children: Rea
 		setDataValidPatternsState(activePatterns);
 	}, [dataPatternsState, operationalDateContext.data.selected_date]);
 
-	// useEffect(() => {
-	// 	if (!dataStopState || !operationalDateContext.data.selected_date) return;
-
-	// 	const stopAlerts = alertsContext.actions.getAlertsByStopId(dataActiveStopIdState);
-	// 	const lineAlerts = dataStopState.line_ids.flatMap(lineId => alertsContext.actions.getAlertsByLineId(lineId));
-	// 	const activeAlerts = [...stopAlerts, ...lineAlerts].filter((alertData, index, allAlerts) => {
-	// 		const isActive = alertData.active_period_end_date ? alertData.active_period_end_date >= operationalDateContext.data.selected_date.set({ hour: 0, millisecond: 0, minute: 0, second: 0 }).js_date.getTime() : true;
-	// 		const isUnique = allAlerts.findIndex(item => item._id === alertData._id) === index;
-	// 		return isActive && isUnique;
-	// 	});
-
-	// 	setDataActiveAlertsState(activeAlerts);
-	// }, [alertsContext.data.alerts, dataStopState, dataActiveStopIdState, operationalDateContext.data.selected_date]);
-
 	//
 	// D. Handle actions
 
@@ -551,29 +498,8 @@ export const StopsDetailContextProvider = ({ children, stopId }: { children: Rea
 		if (activePattern) setHighlightedPattern(activePattern);
 		setHighlightedTripId(tripId);
 		setHighlightedStopSequence(stopSequence);
+		// analyticsContext.actions.capture(ampli => ampli.stopTripClicked({ trip_id: tripId }));
 	};
-
-	// const setActiveStopId = (stopId: string) => {
-	// 	resetActiveTripId();
-	// 	setDataActiveStopIdState(stopId);
-	// };
-
-	// const setActiveTripId = (tripId: string, stopSequence: number) => {
-	// 	const activePattern = dataValidPatternsState?.find(patternGroup => patternGroup.trips.find(trip => trip.trip_ids.includes(tripId)));
-	// 	if (activePattern) {
-	// 		setDataActivePatternState(activePattern);
-	// 	}
-	// 	setDataActiveTripIdState(tripId);
-	// 	setDataActiveStopSequenceState(stopSequence);
-	// 	// analyticsContext.actions.capture(ampli => ampli.stopTripClicked({ trip_id: tripId }));
-	// };
-
-	// const resetActiveTripId = () => {
-	// 	setDataActivePatternState(undefined);
-	// 	setDataActiveTripIdState(undefined);
-	// 	setDataShapeState(undefined);
-	// 	setDataActiveStopSequenceState(undefined);
-	// };
 
 	const resetActiveTripId = () => {
 		setHighlightedPattern(undefined);
@@ -582,38 +508,33 @@ export const StopsDetailContextProvider = ({ children, stopId }: { children: Rea
 		setHighlightedStopSequence(undefined);
 	};
 
-	// useEffect(() => {
-	// 	// Setup a keyboard listener for up and down arrow keys to navigate through the timetable.
-	// 	const handleKeyPress = (event: KeyboardEvent) => {
-	// 		if (event.key === 'ArrowUp' || event.key === 'ArrowDown') {
-	// 			event.preventDefault();
-	// 			// If not today, select from the schedule trips array
-	// 			if (!operationalDateContext.flags.is_today_selected) {
-	// 				const activeTripTimetableScheduleIndex = dataTimetableScheduleState?.findIndex(arrival => arrival.trip_id === dataActiveTripIdState);
-	// 				if (activeTripTimetableScheduleIndex !== undefined && activeTripTimetableScheduleIndex > -1) {
-	// 					const foundArrivalData = dataTimetableScheduleState?.[activeTripTimetableScheduleIndex + (event.key === 'ArrowUp' ? -1 : 1)];
-	// 					if (foundArrivalData) {
-	// 						setActiveTripId(foundArrivalData.trip_id, foundArrivalData.stop_sequence);
-	// 						return;
-	// 					}
-	// 				}
-	// 			}
-	// 			//
-	// 		}
-	// 	};
-	// 	document.addEventListener('keydown', handleKeyPress);
-	// 	return () => document.removeEventListener('keydown', handleKeyPress);
-	// }, [dataActiveStopSequenceState, dataTimetableScheduleState]);
+	useEffect(() => {
+		// Setup a keyboard listener for up and down arrow keys to navigate through the timetable.
+		const handleKeyPress = (event: KeyboardEvent) => {
+			if (event.key === 'ArrowUp' || event.key === 'ArrowDown') {
+				event.preventDefault();
+				// If not today, select from the schedule trips array
+				if (!operationalDateContext.flags.is_today_selected) {
+					const activeTripTimetableScheduleIndex = timetableDataForSelectedDate?.findIndex(arrival => arrival.trip_ids.includes(highlightedTripId));
+					if (activeTripTimetableScheduleIndex !== undefined && activeTripTimetableScheduleIndex > -1) {
+						const foundArrivalData = timetableDataForSelectedDate?.[activeTripTimetableScheduleIndex + (event.key === 'ArrowUp' ? -1 : 1)];
+						if (foundArrivalData) {
+							setActiveTripId(foundArrivalData.trip_ids[0], foundArrivalData.stop_sequence);
+							return;
+						}
+					}
+				}
+				//
+			}
+		};
+		document.addEventListener('keydown', handleKeyPress);
+		return () => document.removeEventListener('keydown', handleKeyPress);
+	}, [timetableDataForSelectedDate, highlightedTripId, operationalDateContext.flags.is_today_selected]);
 
 	//
 	// E. Define context value
 
 	const contextValue: StopsDetailContextState = {
-		// actions: {
-		// 	resetActiveTripId,
-		// 	setActiveStopId,
-		// 	setActiveTripId,
-		// },
 		// data: {
 		// 	active_alerts: activeAlertsData,
 		// 	active_pattern_group: dataActivePatternState,
@@ -630,31 +551,28 @@ export const StopsDetailContextProvider = ({ children, stopId }: { children: Rea
 		// 	timetable_schedule: dataTimetableScheduleState,
 		// 	valid_pattern_groups: dataValidPatternsState,
 		// },
-		// filters: {
-		// 	none: undefined,
-		// },
-		// flags: {
-		// 	is_favorite: flagIsFavoriteState,
-		// 	is_loading: dataPatternsState === undefined,
-		// 	is_loading_timetable: dataPatternsState === undefined || dataTimetableRealtimeState === undefined,
-		// },
 		actions: {
 			resetActiveTripId,
 			setActiveStopId,
 			setActiveTripId,
 		},
 		data: {
-			active_alerts: activeAlertsData,
-			associated_lines: associatedLinesData,
+			active_alerts: dataActiveAlertsState,
 			highlighted_pattern: highlightedPattern,
 			highlighted_shape: highlightedShape,
 			highlighted_stop_sequence: highlightedStopSequence,
 			highlighted_trip_id: highlightedTripId,
+			lines: associatedLinesData,
 			stop: selectedStopData,
 			timetable: timetableDataForSelectedDate,
 		},
+		filters: {
+			none: undefined,
+		},
 		flags: {
+			is_favorite: flagIsFavoriteState,
 			is_loading: isLoading || stopsContext.flags.is_loading || linesContext.flags.is_loading,
+			is_loading_timetable: dataPatternsState === undefined,
 		},
 	};
 

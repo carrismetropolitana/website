@@ -38,7 +38,7 @@ export function StopsDetailHeader() {
 	const handleToggleFavorite = () => {
 		if (!stopsDetailContext.data.stop) return;
 		try {
-			profileContext.actions.toggleFavoriteStop(stopsDetailContext.data.stop._id.toString());
+			profileContext.actions.toggleFavoriteStop(String(stopsDetailContext.data.stop._id));
 		}
 		catch (error) {
 			toast.error({ message: 'Error: ' + error.message });

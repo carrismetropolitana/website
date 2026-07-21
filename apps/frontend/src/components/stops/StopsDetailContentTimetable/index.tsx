@@ -107,10 +107,7 @@ export function StopsDetailContentTimetable() {
 				))}
 			</div>
 
-			<NoDataLabel
-				text={t('end_of_day')}
-				withMinHeight
-			/>
+			<NoDataLabel text={t('end_of_day')} withMinHeight />
 		</div>
 	);
 
