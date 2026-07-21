@@ -2,7 +2,6 @@
 
 import type { CollectionConfig } from 'payload';
 
-import { partnershipField } from '@/fields/partnership';
 import { publishedAtField } from '@/fields/published-at';
 import { specialSeriesField } from '@/fields/special-series';
 import { subjectField } from '@/fields/subject';
@@ -138,7 +137,6 @@ export const Videos: CollectionConfig = {
 		},
 		subjectField,
 		specialSeriesField,
-		partnershipField,
 		{
 			admin: {
 				description: 'Tempo estimado de visualização em minutos.',

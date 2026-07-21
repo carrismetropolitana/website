@@ -1,6 +1,7 @@
 import payloadConfig from '@/payload-config';
 import { getPublicHeaders } from '@/utils/get-public-headers';
 import { hydratePublicInterviewRelations } from '@/utils/hydrate-public-content-relations';
+import { resolveSpecialSeriesFilter } from '@/utils/resolve-special-series-filter';
 import { getPayload, type Where } from 'payload';
 
 /* * */
@@ -14,20 +15,19 @@ export const GET = async (request: Request) => {
 	const { searchParams } = new URL(request.url);
 	const type = searchParams.get('type');
 	const specialSeries = searchParams.get('special-series');
-	const partnership = searchParams.get('partnership');
 	const limit = Number(searchParams.get('limit')) || 10;
 	const page = Number(searchParams.get('page')) || 1;
 
 	const payload = await getPayload({ config: payloadConfig });
+	const specialSeriesFilter = await resolveSpecialSeriesFilter(payload, specialSeries);
 
 	//
 	// B. Build the where clause, optionally filtering by type.
 
 	const whereClause: Where = {
 		status: { equals: 'published' },
-		...(type && { type: { equals: type } }),
-		...(specialSeries && { specialSeries: { equals: specialSeries } }),
-		...(partnership && { partnership: { equals: partnership } }),
+		...(type && { type: { in: type } }),
+		...(specialSeriesFilter.length && { specialSeries: { in: specialSeriesFilter } }),
 	};
 
 	//
