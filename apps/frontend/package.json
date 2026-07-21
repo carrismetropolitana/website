@@ -68,7 +68,7 @@
 		"postcss": "8.5.19",
 		"postcss-preset-mantine": "1.18.0",
 		"postcss-simple-vars": "7.0.1",
-		"typescript": "7.0.2",
+		"typescript": "6.0.3",
 		"typescript-plugin-css-modules": "5.2.0"
 	},
 	"overrides": {

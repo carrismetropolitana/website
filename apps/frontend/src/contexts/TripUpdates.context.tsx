@@ -1,9 +1,9 @@
 'use client';
 
 import { type GoApiResponse } from '@/types/api.types';
-import { API_ROUTES } from '@tmlmobilidade/consts';
+import { getPublicVariable } from '@carrismetropolitana/website-shared-settings';
 import { type GtfsRtFeedMessage } from '@tmlmobilidade/go-types-gtfs-rt';
-import { type UnixTimestamp, validateUnixTimestamp } from '@tmlmobilidade/go-types-shared';
+import { type UnixTimestamp, validateUnixTimestamp } from '@tmlmobilidade/types';
 import { createContext, type PropsWithChildren, useCallback, useContext, useMemo } from 'react';
 import useSWR from 'swr';
 
@@ -50,7 +50,7 @@ export function TripUpdatesContextProvider({ children }: PropsWithChildren) {
 	//
 	// A. Fetch data
 
-	const { data: tripUpdatesResponse, error: tripUpdatesError, isLoading: tripUpdatesLoading } = useSWR<GoApiResponse<GtfsRtFeedMessage>, Error>({ credentials: 'omit', url: API_ROUTES.hub.REALTIME_TRIP_UPDATES }, { refreshInterval: 30_000 }); // 30 seconds
+	const { data: tripUpdatesResponse, error: tripUpdatesError, isLoading: tripUpdatesLoading } = useSWR<GoApiResponse<GtfsRtFeedMessage>, Error>(`${getPublicVariable('go_api_url')}/hub/api/v1/realtime/trip-updates`, { refreshInterval: 30_000 }); // 30 seconds
 
 	//
 	// B. Transform data
