@@ -10,7 +10,7 @@ import { useProfileContext } from '@/contexts/Profile.context';
 import { useStopsContext } from '@/contexts/Stops.context';
 import { useTripUpdatesContext } from '@/contexts/TripUpdates.context';
 import { fetchPatterns } from '@/hooks/fetch-patterns';
-import { normalizeAlertReferenceId } from '@/utils/alerts';
+import { normalizeReferenceId } from '@/utils/alerts';
 import { getPublicVariable } from '@carrismetropolitana/website-shared-settings';
 import { Dates } from '@tmlmobilidade/dates';
 import { type HubAlert, type HubLine, type HubPattern, type HubShape, type HubStop } from '@tmlmobilidade/go-types-public-info';
@@ -190,15 +190,15 @@ export const StopsDetailContextProvider = ({ children, stopId }: { children: Rea
 	const activeAlertsData = useMemo(() => {
 		if (!selectedStopData) return [];
 
-		const normalizedStopId = normalizeAlertReferenceId(dataActiveStopIdState);
-		const normalizedLineIds = new Set(selectedStopData.line_ids.map(normalizeAlertReferenceId));
+		const normalizedStopId = normalizeReferenceId(dataActiveStopIdState);
+		const normalizedLineIds = new Set(selectedStopData.line_ids.map(normalizeReferenceId));
 
 		return alertsContext.data.alerts.filter((alert) => {
 			const hasMatchingReference = alert.references.some((reference) => {
-				if (alert.reference_type === 'stops') return normalizeAlertReferenceId(reference.parent_id) === normalizedStopId;
+				if (alert.reference_type === 'stops') return normalizeReferenceId(reference.parent_id) === normalizedStopId;
 				if (alert.reference_type !== 'lines') return false;
-				const hasMatchingLine = normalizedLineIds.has(normalizeAlertReferenceId(reference.parent_id));
-				const hasMatchingStop = reference.child_ids.some(childId => normalizeAlertReferenceId(childId) === normalizedStopId);
+				const hasMatchingLine = normalizedLineIds.has(normalizeReferenceId(reference.parent_id));
+				const hasMatchingStop = reference.child_ids.some(childId => normalizeReferenceId(childId) === normalizedStopId);
 				return hasMatchingLine || hasMatchingStop;
 			});
 			const isActive = !alert.active_period_end_date || alert.active_period_end_date >= Date.now();

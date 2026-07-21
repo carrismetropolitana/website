@@ -11,6 +11,7 @@ import { useOperationalDateContext } from '@/contexts/OperationalDate.context';
 import { type StopsDetailViewTimetableData, useStopsDetailContext } from '@/contexts/StopsDetail.context';
 import { useSelectedTrip } from '@/hooks/use-selected-trip';
 import { type Arrival, type ArrivalStatus } from '@/types/stops.types';
+import { normalizeReferenceId } from '@/utils/alerts';
 import { useTranslations } from 'next-intl';
 import Link from 'next/link';
 
@@ -46,6 +47,7 @@ export function StopsDetailViewTimetableRow({ data, withClock }: Props) {
 	const isSelected = isSamePatternId && isSameTripId && isSameStopSequence;
 
 	const status: ArrivalStatus = data.is_past ? 'passed' : data.is_realtime ? 'realtime' : 'scheduled';
+	const lineId = normalizeReferenceId(data.line_id);
 	const scheduledArrivalUnix = data.arrival_scheduled_ms / 1_000;
 	const effectiveArrivalUnix = (data.arrival_effective_ms ?? data.arrival_scheduled_ms) / 1_000;
 
@@ -116,7 +118,7 @@ export function StopsDetailViewTimetableRow({ data, withClock }: Props) {
 					<div className={styles.details}>
 						<Link
 							className={styles.openLinePage}
-							href={`/lines/${data.line_id}?date=${operationalDateContext.data.selected_date?.operational_date}&active_pattern_id=${data.pattern_id}`}
+							href={`/lines/${lineId}?date=${operationalDateContext.data.selected_date?.operational_date}&active_pattern_id=${data.pattern_id}`}
 							onClick={event => event.stopPropagation()}
 							target="_blank"
 						>

@@ -1,6 +1,6 @@
 'use client';
 
-import { normalizeAlertReferenceId } from '@/utils/alerts';
+import { normalizeReferenceId } from '@/utils/alerts';
 import { getBaseGeoJsonFeatureCollection } from '@/utils/map.utils';
 import { CARRIS_METROPOLITANA_AGENCY_IDS, getPublicVariable } from '@carrismetropolitana/website-shared-settings';
 import { type HubAlert } from '@tmlmobilidade/go-types-public-info';
@@ -77,19 +77,19 @@ export function AlertsContextProvider({ children }: PropsWithChildren) {
 	};
 
 	const getAlertsByLineId = (lineId: string): HubAlert[] => {
-		const normalizedLineId = normalizeAlertReferenceId(lineId);
+		const normalizedLineId = normalizeReferenceId(lineId);
 		return filteredAlertsData.filter((item) => {
-			if (item.reference_type === 'lines') return item.references.some(reference => normalizeAlertReferenceId(reference.parent_id) === normalizedLineId);
-			if (item.reference_type === 'stops') return item.references.some(reference => reference.child_ids.some(childId => normalizeAlertReferenceId(childId) === normalizedLineId));
+			if (item.reference_type === 'lines') return item.references.some(reference => normalizeReferenceId(reference.parent_id) === normalizedLineId);
+			if (item.reference_type === 'stops') return item.references.some(reference => reference.child_ids.some(childId => normalizeReferenceId(childId) === normalizedLineId));
 			return false;
 		});
 	};
 
 	const getAlertsByStopId = (stopId: string): HubAlert[] => {
-		const normalizedStopId = normalizeAlertReferenceId(stopId);
+		const normalizedStopId = normalizeReferenceId(stopId);
 		return filteredAlertsData.filter((item) => {
-			if (item.reference_type === 'stops') return item.references.some(reference => normalizeAlertReferenceId(reference.parent_id) === normalizedStopId);
-			if (item.reference_type === 'lines') return item.references.some(reference => reference.child_ids.some(childId => normalizeAlertReferenceId(childId) === normalizedStopId));
+			if (item.reference_type === 'stops') return item.references.some(reference => normalizeReferenceId(reference.parent_id) === normalizedStopId);
+			if (item.reference_type === 'lines') return item.references.some(reference => reference.child_ids.some(childId => normalizeReferenceId(childId) === normalizedStopId));
 			return false;
 		});
 	};

@@ -7,7 +7,7 @@ import { useLinesContext } from '@/contexts/Lines.context';
 import { useOperationalDateContext } from '@/contexts/OperationalDate.context';
 import { useProfileContext } from '@/contexts/Profile.context';
 import { useStopsContext } from '@/contexts/Stops.context';
-import { normalizeAlertReferenceId } from '@/utils/alerts';
+import { normalizeReferenceId } from '@/utils/alerts';
 import { type ServiceMetrics } from '@carrismetropolitana/api-types/metrics';
 import { getPublicVariable } from '@carrismetropolitana/website-shared-settings';
 import { type HubAlert, type HubLine, type HubPattern, type HubRoute, type HubShape, type HubWaypoint } from '@tmlmobilidade/go-types-public-info';
@@ -209,7 +209,7 @@ export const LinesDetailContextProvider = ({ children, lineId }) => {
 			if (!isActive) return false;
 
 			return alertData.references.some((reference) => {
-				const normalizedLineId = normalizeAlertReferenceId(lineId);
+				const normalizedLineId = normalizeReferenceId(lineId);
 				const lineOperatorDigit = normalizedLineId?.match(/\d/)?.[0];
 				const informedAgencyId = alertData.agency_id?.trim();
 				const informedOperatorDigit = informedAgencyId?.slice(-1);
@@ -218,11 +218,11 @@ export const LinesDetailContextProvider = ({ children, lineId }) => {
 
 				if (!areaOk) return false;
 
-				const parentId = normalizeAlertReferenceId(reference.parent_id);
-				const childIds = reference.child_ids.map(normalizeAlertReferenceId);
+				const parentId = normalizeReferenceId(reference.parent_id);
+				const childIds = reference.child_ids.map(normalizeReferenceId);
 
 				const hasMatchingLine = parentId === normalizedLineId || childIds.includes(normalizedLineId);
-				const hasMatchingStop = dataAllPatternsState?.some(pattern => pattern.some(patternGroup => patternGroup.path.some(waypoint => childIds.includes(normalizeAlertReferenceId(waypoint.stop_id)))));
+				const hasMatchingStop = dataAllPatternsState?.some(pattern => pattern.some(patternGroup => patternGroup.path.some(waypoint => childIds.includes(normalizeReferenceId(waypoint.stop_id)))));
 
 				return hasMatchingLine || hasMatchingStop;
 			});
