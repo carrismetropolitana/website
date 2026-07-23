@@ -63,8 +63,8 @@ export function StopsDetailHeader() {
 
 				<div className={styles.badgesWrapper}>
 					<CopyBadge
-						label={'#' + stopsDetailContext.data.stop._id}
-						value={stopsDetailContext.data.stop._id}
+						label={'#' + stopsDetailContext.data.stop.flags[0]?.stop_id}
+						value={stopsDetailContext.data.stop.flags[0]?.stop_id}
 					/>
 					<CopyBadge
 						hasBorder={false}
