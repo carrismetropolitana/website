@@ -3,13 +3,13 @@
 import type { GoApiResponse } from '@carrismetropolitana/website-shared-types';
 
 import { CARRIS_METROPOLITANA_AGENCY_IDS } from '@carrismetropolitana/website-shared-settings';
-import { type HubLine, type HubRoute, type HubStop } from '@tmlmobilidade/go-types-public-info';
+import { type HubLine } from '@tmlmobilidade/go-types-public-info';
 import { useMemo } from 'react';
 
 /* * */
 
-type AgencyId = HubLine['agency_id'] | HubStop['agency_ids'][number];
-type FilterDataType = 'line' | 'route' | 'stop';
+type AgencyId = HubLine['agency_id'];
+type FilterDataType = 'line';
 
 interface UseFilterByAgencyIdsOptions<T> {
 	agencyIds?: readonly AgencyId[]
@@ -35,24 +35,6 @@ export function useFilterByAgencyIds<T>(response?: GoApiResponse<T[]>, options: 
 						...item,
 						_id: normalizeLineId(lineData._id),
 						short_name: normalizeLineId(lineData.short_name),
-					};
-				}
-
-				case 'route': {
-					const routeData = item as Pick<HubRoute, 'line_id'> & T;
-					if (!routeData.line_id) return item;
-					return {
-						...item,
-						line_id: normalizeLineId(routeData.line_id),
-					};
-				}
-
-				case 'stop': {
-					const stopData = item as Pick<HubStop, 'line_ids'> & T;
-					if (!stopData.line_ids) return item;
-					return {
-						...item,
-						line_ids: stopData.line_ids.map(normalizeLineId),
 					};
 				}
 

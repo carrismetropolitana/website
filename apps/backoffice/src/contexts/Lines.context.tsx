@@ -4,8 +4,8 @@
 
 import type { GoApiResponse } from '@carrismetropolitana/website-shared-types';
 
-import { getPublicVariable } from '@carrismetropolitana/website-shared-settings'; ;
 import { useFilterByAgencyIds } from '@/hooks/useFilterByAgencyIds';
+import { getPublicVariable } from '@carrismetropolitana/website-shared-settings';
 import { type HubLine } from '@tmlmobilidade/go-types-public-info';
 import { createContext, type ReactNode, useContext, useMemo } from 'react';
 import useSWR from 'swr';
