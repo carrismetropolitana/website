@@ -2,8 +2,10 @@
 
 /* * */
 
+import { type GoApiResponse } from '@/types/api.types';
 import { type Line } from '@carrismetropolitana/api-types/network';
-import { getPublicVariable } from '@carrismetropolitana/website-shared-settings';
+import { getPublicVariable } from '@carrismetropolitana/website-shared-settings'; ;
+import { type HubLine } from '@tmlmobilidade/go-types-public-info';
 import { createContext, type ReactNode, useContext, useMemo } from 'react';
 import useSWR from 'swr';
 
@@ -41,7 +43,8 @@ export const LinesContextProvider = ({ children }: { children: ReactNode }) => {
 	//
 	// A. Fetch data
 
-	const { data: allLinesData, isLoading: allLinesLoading } = useSWR<Line[], Error>(`${getPublicVariable('api_url')}/lines`, { refreshInterval: 900000 }); // 15 minutes
+	const { data: allLinesResponse, isLoading: allLinesLoading } = useSWR<GoApiResponse<HubLine[]>, Error>(`${getPublicVariable('go_api_url')}/hub/api/v1/network/lines`, { refreshInterval: 900000 }); // 15 minutes
+	const allLinesData = useFilterByAgencyIds(allLinesResponse, { dataType: 'line' }).data;
 
 	//
 	// B. Handle actions
