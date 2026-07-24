@@ -4,7 +4,8 @@
 
 import { useFilterByAgencyIds } from '@/hooks/useFilterByAgencyIds';
 import { getBaseGeoJsonFeatureCollection } from '@/utils/map.utils';
-import { CARRIS_METROPOLITANA_AGENCY_IDS, getPublicVariable, type GoApiResponse } from '@carrismetropolitana/website-shared-settings';
+import { CARRIS_METROPOLITANA_AGENCY_IDS, getPublicVariable } from '@carrismetropolitana/website-shared-settings';
+import { type GoApiResponse } from '@carrismetropolitana/website-shared-types';
 import { type HubStop } from '@tmlmobilidade/go-types-public-info';
 import { createContext, useCallback, useContext, useEffect, useMemo, useState } from 'react';
 import useSWR from 'swr';
