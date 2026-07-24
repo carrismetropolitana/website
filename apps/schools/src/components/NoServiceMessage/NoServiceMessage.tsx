@@ -17,7 +17,7 @@ export function NoServiceMessage({ municipality_id, municipality_name }) {
 	const messages = useMemo(() => {
 		const otherOperators = {
 			1105: { article: 'de', operator_name: 'MobiCascais', operator_phone: '+351 800 203 186', operator_website: 'https://mobi.cascais.pt/geral/nova-rede-municipal-horarios-percursos-das-linhas-municipais' },
-			1106: { article: 'de', operator_name: 'Carris Municipal', operator_phone: '+351 213 613 000', operator_website: 'https://www.carris.pt' },
+			1106: { article: 'de', operator_name: 'CARRIS', operator_phone: '+351 213 613 000', operator_website: 'https://www.carris.pt' },
 			1504: { article: 'do', operator_name: 'TCB', operator_phone: '+351 212 068 592', operator_website: 'https://www.tcbarreiro.pt' },
 		};
 		//

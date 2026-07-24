@@ -47,7 +47,7 @@ export function Arrabida365() {
 						<div className={styles.imageBeeWrapper}>
 							<Link
 								className={styles.learnMore}
-								href="https://www.mun-setubal.pt/wp-content/uploads/2026/04/FCS26-PROGRAMA-PTonline.pdf"
+								href="/arrabida365/quiz"
 								rel="noopener noreferrer"
 								target="_blank"
 							>
@@ -58,7 +58,7 @@ export function Arrabida365() {
 								alt={t('altImageBee')}
 								className={styles.imageBee}
 								height={1080}
-								src="https://staging.carrismetropolitana.pt/admin/api/media/file/media-1777386013015-sta_de_caminhadas_arrabida.jpg"
+								src="/assets/arrabidas/arrabida_quiz_banner_geral.png"
 								width={1920}
 							/>
 						</div>
