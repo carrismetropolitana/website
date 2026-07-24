@@ -17,7 +17,7 @@ import { getPublicVariable } from '@carrismetropolitana/website-shared-settings'
 import { GoApiResponse } from '@carrismetropolitana/website-shared-types';
 import { HubStop } from '@tmlmobilidade/go-types-public-info';
 import * as turf from '@turf/turf';
-import { useEffect, useMemo, useState } from 'react';
+import { useEffect, useMemo } from 'react';
 import { Layer, Source, useMap } from 'react-map-gl/maplibre';
 import useSWR from 'swr';
 
@@ -38,13 +38,12 @@ export function SchoolDetail({ schoolId }: Props) {
 	// A. Setup variables
 
 	const { schoolInfoMap } = useMap();
-	const [schoolStopsAsGeojson, setSchoolStopsAsGeojson] = useState(null);
 
 	//
 	// B. Fetch data
 
 	const { data: allSchoolsData } = useSWR(`https://api.carrismetropolitana.pt/v2/facilities/schools`);
-	const { data: allStopsData } = useSWR<GoApiResponse<HubStop[]>, Error>(`${getPublicVariable('go_api_url')}/hub/api/v1/network/stops`, { refreshInterval: 900000 }); // 15 minutes
+	const { data: allStopsData, isLoading: allStopsLoading } = useSWR<GoApiResponse<HubStop[]>, Error>(`${getPublicVariable('go_api_url')}/hub/api/v1/network/stops`, { refreshInterval: 900000 }); // 15 minutes
 
 	//
 	// C. Transform data
@@ -53,6 +52,24 @@ export function SchoolDetail({ schoolId }: Props) {
 		if (!allSchoolsData?.length) return null;
 		return allSchoolsData.find(item => item.id === schoolId) || null;
 	}, [allSchoolsData, schoolId]);
+
+	const schoolStopsAsGeojson = useMemo(() => {
+		const geoJSON: GeoJSON.FeatureCollection = {
+			features: [],
+			type: 'FeatureCollection',
+		};
+		if (!schoolData?.stop_ids?.length || !allStopsData?.data?.length) return geoJSON;
+		for (const [stopIndex, stopCode] of schoolData.stop_ids.entries()) {
+			const stopData = allStopsData.data.find(stop => stop._id === stopCode);
+			if (!stopData) continue;
+			geoJSON.features.push({
+				geometry: { coordinates: [stopData.longitude, stopData.latitude], type: 'Point' },
+				properties: { index: stopIndex + 1 },
+				type: 'Feature',
+			});
+		}
+		return geoJSON;
+	}, [allStopsData?.data, schoolData]);
 
 	useEffect(() => {
 		if (!schoolInfoMap || !schoolStopsAsGeojson?.features?.length) return;
@@ -66,34 +83,12 @@ export function SchoolDetail({ schoolId }: Props) {
 		schoolInfoMap.fitBounds(bounds, { duration: 2000, padding: 150 });
 	}, [schoolInfoMap, schoolStopsAsGeojson]);
 
-	useEffect(() => {
-		(async () => {
-			const geoJSON: GeoJSON.FeatureCollection = {
-				features: [],
-				type: 'FeatureCollection',
-			};
-			if (schoolData && schoolData.stop_ids.length) {
-				for (const [stopIndex, stopCode] of schoolData.stop_ids.entries()) {
-					const stopResponse = await fetch(`${getPublicVariable('go_api_url')}/hub/api/v1/network/stops/${stopCode}`);
-					const stopData = await stopResponse.json();
-					geoJSON.features.push({
-						geometry: { coordinates: [parseFloat(stopData.lon), parseFloat(stopData.lat)], type: 'Point' },
-						properties: { index: stopIndex + 1 },
-						type: 'Feature',
-					});
-				}
-			}
-
-			setSchoolStopsAsGeojson(geoJSON);
-		})();
-	}, [schoolData]);
-
 	const allStopsDataAsGeojson = useMemo(() => {
 		const geoJSON: GeoJSON.FeatureCollection = {
 			features: [],
 			type: 'FeatureCollection',
 		};
-		if (allStopsData) {
+		if (allStopsData && !allStopsLoading) {
 			for (const stop of allStopsData.data) {
 				geoJSON.features.push({
 					geometry: { coordinates: [stop.longitude, stop.latitude], type: 'Point' },
@@ -103,7 +98,7 @@ export function SchoolDetail({ schoolId }: Props) {
 			}
 		}
 		return geoJSON;
-	}, [allStopsData]);
+	}, [allStopsData, allStopsLoading]);
 
 	//
 	// D. Render components

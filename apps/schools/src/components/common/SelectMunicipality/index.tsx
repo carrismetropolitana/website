@@ -1,6 +1,5 @@
 'use client';
 
-import { Municipality } from '@carrismetropolitana/api-types/locations';
 import { getPublicVariable } from '@carrismetropolitana/website-shared-settings';
 import { GoApiResponse } from '@carrismetropolitana/website-shared-types';
 /* * */
@@ -12,8 +11,15 @@ import useSWR from 'swr';
 /* * */
 
 interface Props {
-	onSelectMunicipalityId: (municipalityId: string) => void
+	onSelectMunicipalityId: (municipalityId: null | string) => void
 	selectedMunicipalityId: null | string
+}
+
+interface MunicipalityFeature {
+	_id: string
+	properties: {
+		name: string
+	}
 }
 
 /* * */
@@ -24,7 +30,7 @@ export function SelectMunicipality({ onSelectMunicipalityId, selectedMunicipalit
 	//
 	// A. Fetch data
 
-	const { data: allMunicipalitiesData, isLoading: allMunicipalitiesLoading } = useSWR<GoApiResponse<Municipality[]>, Error>(`${getPublicVariable('go_api_url')}/locations/api/locations/municipalities`, { refreshInterval: 900000 }); // 15 minutes
+	const { data: allMunicipalitiesData, isLoading: allMunicipalitiesLoading } = useSWR<GoApiResponse<MunicipalityFeature[]>, Error>(`${getPublicVariable('go_api_url')}/locations/api/locations/municipalities`, { refreshInterval: 900000 }); // 15 minutes
 
 	//
 	// B. Transform data
@@ -34,10 +40,10 @@ export function SelectMunicipality({ onSelectMunicipalityId, selectedMunicipalit
 		if (!allMunicipalitiesData || allMunicipalitiesLoading) return [];
 		// Return formatted array for select
 		const collator = new Intl.Collator('en', { numeric: true, sensitivity: 'base' });
-		const allMunicipalitiesSorted = allMunicipalitiesData.data?.sort((a, b) => collator.compare(a.name, b.name));
-		return allMunicipalitiesSorted.map(item => ({ label: item.name, value: item.id }));
+		const allMunicipalitiesSorted = [...allMunicipalitiesData.data].sort((a, b) => collator.compare(a.properties.name, b.properties.name));
+		return allMunicipalitiesSorted.map(item => ({ label: item.properties.name, value: item._id }));
 		//
-	}, [allMunicipalitiesData, selectedMunicipalityId]);
+	}, [allMunicipalitiesData, allMunicipalitiesLoading]);
 
 	//
 	// C. Render components
