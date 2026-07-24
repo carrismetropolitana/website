@@ -7,6 +7,8 @@ import { GoBackButton } from '@/components/common/GoBackButton';
 // import DownloadPDF from '@/components/DownloadPDF/DownloadPDF';
 // import { NaveganteCardCallout } from '@/components/home/NaveganteCardCallout';
 // import { PlannerCallout } from '@/components/home/PlannerCallout';
+import type { GoApiResponse } from '@carrismetropolitana/website-shared-types';
+
 import { MapView } from '@/components/map/MapView';
 import { MapViewSingleSchool } from '@/components/map/MapViewSingleSchool';
 import { NoServiceMessage } from '@/components/NoServiceMessage/NoServiceMessage';
@@ -15,7 +17,6 @@ import StopInfo from '@/components/StopInfo/StopInfo';
 import Titles from '@/components/Titles/Titles';
 import { getHubStopCode, useFilterByAgencyIds } from '@/hooks/useFilterByAgencyIds';
 import { getPublicVariable } from '@carrismetropolitana/website-shared-settings';
-import { GoApiResponse } from '@carrismetropolitana/website-shared-types';
 import { HubStop } from '@tmlmobilidade/go-types-public-info';
 import * as turf from '@turf/turf';
 import { useEffect, useMemo } from 'react';
