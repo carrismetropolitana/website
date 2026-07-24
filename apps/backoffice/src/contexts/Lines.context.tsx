@@ -2,9 +2,10 @@
 
 /* * */
 
-import { type GoApiResponse } from '@/types/api.types';
-import { type Line } from '@carrismetropolitana/api-types/network';
+import type { GoApiResponse } from '@carrismetropolitana/website-shared-types';
+
 import { getPublicVariable } from '@carrismetropolitana/website-shared-settings'; ;
+import { useFilterByAgencyIds } from '@/hooks/useFilterByAgencyIds';
 import { type HubLine } from '@tmlmobilidade/go-types-public-info';
 import { createContext, type ReactNode, useContext, useMemo } from 'react';
 import useSWR from 'swr';
@@ -13,10 +14,10 @@ import useSWR from 'swr';
 
 interface LinesContextState {
 	actions: {
-		getLineDataById: (lineId: string) => Line | undefined
+		getLineDataById: (lineId: string) => HubLine | undefined
 	}
 	data: {
-		lines: Line[]
+		lines: HubLine[]
 	}
 	flags: {
 		is_loading: boolean
@@ -50,7 +51,7 @@ export const LinesContextProvider = ({ children }: { children: ReactNode }) => {
 	// B. Handle actions
 
 	const getLineDataById = (lineId: string) => {
-		return allLinesData?.find(line => line.id === lineId);
+		return allLinesData?.find(line => line._id === lineId);
 	};
 
 	//
