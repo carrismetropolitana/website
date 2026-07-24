@@ -13,6 +13,7 @@ import { NoServiceMessage } from '@/components/NoServiceMessage/NoServiceMessage
 import SourceDisclaimer from '@/components/SourceDisclaimer/SourceDisclaimer';
 import StopInfo from '@/components/StopInfo/StopInfo';
 import Titles from '@/components/Titles/Titles';
+import { getHubStopCode, useFilterByAgencyIds } from '@/hooks/useFilterByAgencyIds';
 import { getPublicVariable } from '@carrismetropolitana/website-shared-settings';
 import { GoApiResponse } from '@carrismetropolitana/website-shared-types';
 import { HubStop } from '@tmlmobilidade/go-types-public-info';
@@ -46,7 +47,12 @@ export function SchoolDetail({ schoolId }: Props) {
 	const { data: allStopsData, isLoading: allStopsLoading } = useSWR<GoApiResponse<HubStop[]>, Error>(`${getPublicVariable('go_api_url')}/hub/api/v1/network/stops`, { refreshInterval: 900000 }); // 15 minutes
 
 	//
-	// C. Transform data
+	// C. Filter data
+
+	const filteredStopsData = useFilterByAgencyIds(allStopsData, { dataType: 'stop' }).data;
+
+	//
+	// D. Transform data
 
 	const schoolData = useMemo(() => {
 		if (!allSchoolsData?.length) return null;
@@ -58,9 +64,9 @@ export function SchoolDetail({ schoolId }: Props) {
 			features: [],
 			type: 'FeatureCollection',
 		};
-		if (!schoolData?.stop_ids?.length || !allStopsData?.data?.length) return geoJSON;
+		if (!schoolData?.stop_ids?.length || !filteredStopsData.length) return geoJSON;
 		for (const [stopIndex, stopCode] of schoolData.stop_ids.entries()) {
-			const stopData = allStopsData.data.find(stop => stop._id === stopCode);
+			const stopData = filteredStopsData.find(stop => getHubStopCode(stop) === stopCode);
 			if (!stopData) continue;
 			geoJSON.features.push({
 				geometry: { coordinates: [stopData.longitude, stopData.latitude], type: 'Point' },
@@ -69,7 +75,7 @@ export function SchoolDetail({ schoolId }: Props) {
 			});
 		}
 		return geoJSON;
-	}, [allStopsData?.data, schoolData]);
+	}, [filteredStopsData, schoolData]);
 
 	useEffect(() => {
 		if (!schoolInfoMap || !schoolStopsAsGeojson?.features?.length) return;
@@ -88,8 +94,8 @@ export function SchoolDetail({ schoolId }: Props) {
 			features: [],
 			type: 'FeatureCollection',
 		};
-		if (allStopsData && !allStopsLoading) {
-			for (const stop of allStopsData.data) {
+		if (!allStopsLoading) {
+			for (const stop of filteredStopsData) {
 				geoJSON.features.push({
 					geometry: { coordinates: [stop.longitude, stop.latitude], type: 'Point' },
 					properties: {},
@@ -98,10 +104,10 @@ export function SchoolDetail({ schoolId }: Props) {
 			}
 		}
 		return geoJSON;
-	}, [allStopsData, allStopsLoading]);
+	}, [filteredStopsData, allStopsLoading]);
 
 	//
-	// D. Render components
+	// E. Render components
 
 	return (
 		schoolData && (

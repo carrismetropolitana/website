@@ -3,6 +3,7 @@
 /* * */
 
 import { LineDisplay } from '@/components/LineDisplay/LineDisplay';
+import { getHubStopCode, useFilterByAgencyIds } from '@/hooks/useFilterByAgencyIds';
 import { type ApiResponse } from '@carrismetropolitana/api-types/common';
 import { type Locality } from '@carrismetropolitana/api-types/locations';
 import { getPublicVariable } from '@carrismetropolitana/website-shared-settings';
@@ -25,11 +26,16 @@ export default function StopInfo({ index, stop_id }) {
 	const { data: allLocalitiesData } = useSWR<ApiResponse<Locality[]>, Error>(`${getPublicVariable('go_api_url')}/locations/api/locations/localities`, { refreshInterval: 900000 }); // 15 minutes
 
 	//
-	// B. Transform data
+	// B. Filter data
+
+	const filteredStopsData = useFilterByAgencyIds(allStopsData, { dataType: 'stop' }).data;
+
+	//
+	// C. Transform data
 
 	const stopData: HubStop = useMemo(() => {
-		return allStopsData?.data?.find(item => item._id === stop_id);
-	}, [allStopsData?.data, stop_id]);
+		return filteredStopsData.find(item => getHubStopCode(item) === stop_id);
+	}, [filteredStopsData, stop_id]);
 
 	const localityData: Locality = useMemo(() => {
 		if (allLocalitiesData?.status !== 'success') return;
@@ -37,7 +43,7 @@ export default function StopInfo({ index, stop_id }) {
 	}, [allLocalitiesData, stopData]);
 
 	//
-	// C. Render components
+	// D. Render components
 
 	return (
 		stopData
