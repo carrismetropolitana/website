@@ -1,6 +1,7 @@
 'use client';
 
-import { type GoApiResponse } from '@/types/api.types';
+import type { GoApiResponse } from '@carrismetropolitana/website-shared-types';
+
 import { getPublicVariable } from '@carrismetropolitana/website-shared-settings';
 import { type GtfsRtFeedMessage } from '@tmlmobilidade/go-types-gtfs-rt';
 import { type UnixTimestamp, validateUnixTimestamp } from '@tmlmobilidade/types';
