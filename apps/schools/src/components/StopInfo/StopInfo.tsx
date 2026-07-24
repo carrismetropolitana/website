@@ -5,7 +5,8 @@
 import { LineDisplay } from '@/components/LineDisplay/LineDisplay';
 import { type ApiResponse } from '@carrismetropolitana/api-types/common';
 import { type Locality } from '@carrismetropolitana/api-types/locations';
-import { type Stop } from '@carrismetropolitana/api-types/network';
+import { getPublicVariable, type GoApiResponse } from '@carrismetropolitana/website-shared-settings';
+import { type HubStop } from '@tmlmobilidade/go-types-public-info';
 import Link from 'next/link';
 import { useMemo } from 'react';
 import useSWR from 'swr';
@@ -19,8 +20,7 @@ export default function StopInfo({ index, stop_id }) {
 
 	//
 	// A. Fetch data
-
-	const { data: allStopsData } = useSWR<Stop[]>('https://api.carrismetropolitana.pt/v2/stops');
+	const { data: allStopsData } = useSWR<GoApiResponse<HubStop[]>, Error>(`${getPublicVariable('go_api_url')}/hub/api/v1/network/stops`, { refreshInterval: 900000 }); // 15 minutes
 	const { data: allLocalitiesData } = useSWR<ApiResponse<Locality[]>>('https://api.carrismetropolitana.pt/v2/locations/localities');
 
 	//
