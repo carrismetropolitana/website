@@ -5,7 +5,7 @@
 // import { useAnalyticsContext } from '@/contexts/Analytics.context';
 import { getPublicVariable } from '@carrismetropolitana/website-shared-settings';
 import { IconPlayerPause, IconVolume } from '@tabler/icons-react';
-import { type File } from '@tmlmobilidade/types';
+import { type Attachment } from '@tmlmobilidade/types';
 import { useEffect, useRef, useState } from 'react';
 import useSWR from 'swr';
 
@@ -18,7 +18,7 @@ interface Props {
 }
 
 interface StopTtsResponse {
-	file: File | null
+	file: Attachment | null
 }
 
 /* * */
