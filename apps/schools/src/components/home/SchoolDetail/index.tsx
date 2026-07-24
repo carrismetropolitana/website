@@ -13,6 +13,9 @@ import { NoServiceMessage } from '@/components/NoServiceMessage/NoServiceMessage
 import SourceDisclaimer from '@/components/SourceDisclaimer/SourceDisclaimer';
 import StopInfo from '@/components/StopInfo/StopInfo';
 import Titles from '@/components/Titles/Titles';
+import { getPublicVariable } from '@carrismetropolitana/website-shared-settings';
+import { GoApiResponse } from '@carrismetropolitana/website-shared-types';
+import { HubStop } from '@tmlmobilidade/go-types-public-info';
 import * as turf from '@turf/turf';
 import { useEffect, useMemo, useState } from 'react';
 import { Layer, Source, useMap } from 'react-map-gl/maplibre';
@@ -41,7 +44,7 @@ export function SchoolDetail({ schoolId }: Props) {
 	// B. Fetch data
 
 	const { data: allSchoolsData } = useSWR(`https://api.carrismetropolitana.pt/v2/facilities/schools`);
-	const { data: allStopsData } = useSWR('https://api.carrismetropolitana.pt/stops');
+	const { data: allStopsData } = useSWR<GoApiResponse<HubStop[]>, Error>(`${getPublicVariable('go_api_url')}/hub/api/v1/network/stops`, { refreshInterval: 900000 }); // 15 minutes
 
 	//
 	// C. Transform data
@@ -71,7 +74,7 @@ export function SchoolDetail({ schoolId }: Props) {
 			};
 			if (schoolData && schoolData.stop_ids.length) {
 				for (const [stopIndex, stopCode] of schoolData.stop_ids.entries()) {
-					const stopResponse = await fetch(`https://api.carrismetropolitana.pt/stops/${stopCode}`);
+					const stopResponse = await fetch(`${getPublicVariable('go_api_url')}/hub/api/v1/network/stops/${stopCode}`);
 					const stopData = await stopResponse.json();
 					geoJSON.features.push({
 						geometry: { coordinates: [parseFloat(stopData.lon), parseFloat(stopData.lat)], type: 'Point' },
@@ -91,9 +94,9 @@ export function SchoolDetail({ schoolId }: Props) {
 			type: 'FeatureCollection',
 		};
 		if (allStopsData) {
-			for (const stop of allStopsData) {
+			for (const stop of allStopsData.data) {
 				geoJSON.features.push({
-					geometry: { coordinates: [stop.lon, stop.lat], type: 'Point' },
+					geometry: { coordinates: [stop.longitude, stop.latitude], type: 'Point' },
 					properties: {},
 					type: 'Feature',
 				});
