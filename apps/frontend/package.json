@@ -50,7 +50,7 @@
 		"ukkonen": "2.2.0"
 	},
 	"devDependencies": {
-		"@carrismetropolitana/api-types": "20260419.1736.4",
+		"@carrismetropolitana/api-types": "20260726.2136.34",
 		"@carrismetropolitana/eslint": "20250622.1204.50",
 		"@carrismetropolitana/website-shared-types": "*",
 		"@tmlmobilidade/dates": "20260418.1237.24",
