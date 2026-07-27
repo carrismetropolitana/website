@@ -1,7 +1,7 @@
 'use client';
 
+import { GoApiResponse } from '@/types/go-api-types';
 import { CARRIS_METROPOLITANA_AGENCY_IDS } from '@carrismetropolitana/website-shared-settings';
-import { type GoApiResponse } from '@carrismetropolitana/website-shared-types';
 import { type HubLine, type HubRoute, type HubStop } from '@tmlmobilidade/go-types-public-info';
 import { useMemo } from 'react';
 /* * */

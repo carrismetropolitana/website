@@ -3,8 +3,8 @@
 /* * */
 
 import { MapView } from '@/components/map/MapView';
+import { GoApiResponse } from '@/types/go-api-types';
 import { getPublicVariable } from '@carrismetropolitana/website-shared-settings';
-import { GoApiResponse } from '@carrismetropolitana/website-shared-types';
 import { HubStop } from '@tmlmobilidade/go-types-public-info';
 import * as turf from '@turf/turf';
 import { useEffect, useMemo } from 'react';

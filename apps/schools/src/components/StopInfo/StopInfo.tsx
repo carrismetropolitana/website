@@ -4,10 +4,10 @@
 
 import { LineDisplay } from '@/components/LineDisplay/LineDisplay';
 import { getHubStopCode, useFilterByAgencyIds } from '@/hooks/useFilterByAgencyIds';
+import { GoApiResponse } from '@/types/go-api-types';
 import { type ApiResponse } from '@carrismetropolitana/api-types/common';
 import { type Locality } from '@carrismetropolitana/api-types/locations';
 import { getPublicVariable } from '@carrismetropolitana/website-shared-settings';
-import { type GoApiResponse } from '@carrismetropolitana/website-shared-types';
 import { type HubStop } from '@tmlmobilidade/go-types-public-info';
 import Link from 'next/link';
 import { useMemo } from 'react';

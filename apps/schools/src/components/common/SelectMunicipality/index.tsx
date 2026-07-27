@@ -1,7 +1,8 @@
 'use client';
 
+import { GoApiResponse } from '@/types/go-api-types';
 import { getPublicVariable } from '@carrismetropolitana/website-shared-settings';
-import { GoApiResponse } from '@carrismetropolitana/website-shared-types';
+
 /* * */
 
 import { Select } from '@mantine/core';
