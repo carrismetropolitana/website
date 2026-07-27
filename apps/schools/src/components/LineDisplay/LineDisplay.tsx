@@ -2,8 +2,8 @@
 
 /* * */
 
+import { GoApiResponse } from '@/types/go-api-types';
 import { getPublicVariable } from '@carrismetropolitana/website-shared-settings';
-import { GoApiResponse } from '@carrismetropolitana/website-shared-types';
 import { HubPattern } from '@tmlmobilidade/go-types-public-info';
 import useSWR from 'swr';
 
