@@ -30,12 +30,12 @@ export function LineDisplay({ patternId }: LineDisplayProps) {
 
 	if (patternData?.data?.length > 0) {
 		return (
-			<a className={styles.container} href={`https://carrismetropolitana.pt/lines/${patternData[0].line_id}?active_pattern_id=${patternData[0].id}`} target="_blank">
-				<div className={styles.badge} style={{ backgroundColor: patternData[0].color, color: patternData[0].text_color }}>
-					{patternData[0].short_name || '• • •'}
+			<a className={styles.container} href={`https://carrismetropolitana.pt/lines/${patternData.data[0].line_id}?active_pattern_id=${patternData.data[0]._id}`} target="_blank">
+				<div className={styles.badge} style={{ backgroundColor: patternData.data[0].color, color: patternData.data[0].text_color }}>
+					{patternData.data[0].short_name || '• • •'}
 				</div>
 				<div className={styles.name}>
-					{patternData[0].headsign}
+					{patternData.data[0].headsign}
 				</div>
 			</a>
 		);
