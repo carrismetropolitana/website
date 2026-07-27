@@ -1,11 +1,9 @@
 'use client';
 
-import type { GoApiResponse } from '@carrismetropolitana/website-shared-types';
-
 import { CARRIS_METROPOLITANA_AGENCY_IDS } from '@carrismetropolitana/website-shared-settings';
+import { type GoApiResponse } from '@carrismetropolitana/website-shared-types';
 import { type HubLine, type HubRoute, type HubStop } from '@tmlmobilidade/go-types-public-info';
 import { useMemo } from 'react';
-
 /* * */
 
 type AgencyId = HubLine['agency_id'] | HubStop['agency_ids'][number];
@@ -19,13 +17,20 @@ interface UseFilterByAgencyIdsOptions<T> {
 
 /* * */
 
+export function getHubStopCode(stopData: HubStop): string {
+	const normalizedStopData = stopData as HubStop & {
+		flags?: { stop_id?: number | string }[]
+	};
+	return String(normalizedStopData.flags?.[0]?.stop_id ?? stopData._id);
+}
+
 export function useFilterByAgencyIds<T>(response?: GoApiResponse<T[]>, options: UseFilterByAgencyIdsOptions<T> = {}): GoApiResponse<T[]> {
-	const agencyIds = options.agencyIds || CARRIS_METROPOLITANA_AGENCY_IDS;
 	const dataType = options.dataType;
 	const getAgencyIds = options.getAgencyIds;
 
 	return useMemo(() => {
-		const allowedAgencyIds = new Set(agencyIds.map(String));
+		const allowedAgencyIds = new Set(CARRIS_METROPOLITANA_AGENCY_IDS.map(String));
+		const stopAgencyIdsByLinePrefix = new Map(CARRIS_METROPOLITANA_AGENCY_IDS.map(agencyId => [agencyId.slice(-1), agencyId]));
 		const normalizeLineId = (lineId: string) => lineId.replace(/^\[[^\]]+\]/, '');
 		const normalizeData = (item: T): T => {
 			switch (dataType) {
@@ -62,7 +67,23 @@ export function useFilterByAgencyIds<T>(response?: GoApiResponse<T[]>, options: 
 		};
 
 		const filteredData = (response?.data || []).filter((item) => {
-			const itemAgencyIds = getAgencyIds ? getAgencyIds(item) : (item as Partial<Pick<HubLine, 'agency_id'>>).agency_id;
+			const itemAgencyIds = getAgencyIds ? getAgencyIds(item) : (() => {
+				if (dataType !== 'stop') return (item as Partial<Pick<HubLine, 'agency_id'>>).agency_id;
+				const stopData = item as Partial<HubStop> & {
+					agency_id?: string
+					agency_ids?: string[]
+					lines?: string[]
+				};
+				if (stopData.agency_ids?.length) return stopData.agency_ids;
+				if (stopData.agency_id) return stopData.agency_id;
+
+				const lineIds = stopData.line_ids || stopData.lines || [];
+				return lineIds.flatMap((lineId) => {
+					const lineIdWithoutAgency = lineId.replace(/^\[[^\]]+\]/, '');
+					const agencyId = stopAgencyIdsByLinePrefix.get(lineIdWithoutAgency.at(0) ?? '');
+					return agencyId ? [agencyId] : [];
+				});
+			})();
 			const normalizedItemAgencyIds = Array.isArray(itemAgencyIds) ? itemAgencyIds : [itemAgencyIds];
 			return normalizedItemAgencyIds.some(itemAgencyId => itemAgencyId !== undefined && itemAgencyId !== null && allowedAgencyIds.has(String(itemAgencyId)));
 		}).map(normalizeData);
@@ -72,5 +93,5 @@ export function useFilterByAgencyIds<T>(response?: GoApiResponse<T[]>, options: 
 			error: response?.error || '',
 			status_code: response?.status_code || '',
 		};
-	}, [response, agencyIds, dataType, getAgencyIds]);
+	}, [response, dataType, getAgencyIds]);
 }

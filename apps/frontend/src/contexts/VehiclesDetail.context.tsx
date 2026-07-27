@@ -2,8 +2,9 @@
 
 /* * */
 
+import type { GoApiResponse } from '@carrismetropolitana/website-shared-types';
+
 import { useVehiclesContext } from '@/contexts/Vehicles.context';
-import { type GoApiResponse } from '@/types/api.types';
 import { type HubVehicleMetadata } from '@/types/vehicles.types';
 import { getMetadataVehicleIdFromPositionVehicleId } from '@/utils/vehicles.utils';
 import { getPublicVariable } from '@carrismetropolitana/website-shared-settings';
