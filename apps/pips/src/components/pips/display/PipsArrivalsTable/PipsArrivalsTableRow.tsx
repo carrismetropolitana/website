@@ -78,7 +78,13 @@ export function PipsArrivalsTableRow({ arrival, index, nowInSeconds }: Props) {
 				</td>
 				<td className={styles.td}>
 					<div className={styles.lineCell}>
-						{lineData && <LineDisplay color={lineData.color} longName={arrival.headsign} shortName={lineData.short_name} size="lg" textColor={lineData.text_color} />}
+						<LineDisplay
+							color={lineData?.color ?? arrival.line_color}
+							longName={arrival.headsign}
+							shortName={lineData?.short_name ?? arrival.line_short_name}
+							size="lg"
+							textColor={lineData?.text_color ?? arrival.line_text_color}
+						/>
 					</div>
 				</td>
 				<td className={styles.td}>

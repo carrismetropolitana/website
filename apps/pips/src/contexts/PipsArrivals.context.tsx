@@ -18,6 +18,9 @@ import useSWR from 'swr';
 /* * */
 
 export interface MergedArrival extends Arrival {
+	line_color: string
+	line_short_name: string
+	line_text_color: string
 	stop_id: string
 	stop_long_name: string
 	stop_short_name: string
@@ -59,6 +62,12 @@ interface PreparedTripUpdate {
 	stop_id: string
 	trip_id: string
 	vehicle_id: null | string
+}
+
+/* * */
+
+function normalizeTripId(tripId: string) {
+	return tripId.replace(/^\[[^\]]+\](\[[^\]]+\])?/, '');
 }
 
 interface PipsArrivalsContextState {
@@ -146,7 +155,7 @@ export const PipsArrivalsContextProvider = ({ children }: PropsWithChildren) => 
 				const arrivalTime = stopTimeUpdate.arrival?.time;
 				if (!arrivalTime) continue;
 
-				const key = `${tripUpdate.trip.trip_id}-${stopTimeUpdate.stop_id}`;
+				const key = `${normalizeTripId(tripUpdate.trip.trip_id)}-${stopTimeUpdate.stop_id}`;
 				map.set(key, {
 					arrival_time_unix: arrivalTime,
 					stop_id: stopTimeUpdate.stop_id,
@@ -185,7 +194,7 @@ export const PipsArrivalsContextProvider = ({ children }: PropsWithChildren) => 
 					const scheduledArrivalMs = convertGTFSTimeStringAndOperationalDateToUnixTimestamp(stopTime.arrival_time, operationalDateContext.data.selected_date.operational_date);
 					const scheduledArrivalUnix = Math.floor(scheduledArrivalMs / 1000);
 					const tripUpdate = operationalDateContext.flags.is_today_selected
-						? tripData.trip_ids.map(tripId => tripUpdatesMap.get(`${tripId}-${stopTime.stop_id}`)).find(Boolean)
+						? tripData.trip_ids.map(tripId => tripUpdatesMap.get(`${normalizeTripId(tripId)}-${stopTime.stop_id}`)).find(Boolean)
 						: undefined;
 					const estimatedArrivalUnix = tripUpdate?.arrival_time_unix ?? null;
 					const warningsMap = new Map<string, ArrivalWarning>();
@@ -205,7 +214,10 @@ export const PipsArrivalsContextProvider = ({ children }: PropsWithChildren) => 
 						estimated_arrival: estimatedArrivalUnix ? DateTime.fromSeconds(estimatedArrivalUnix).toFormat('HH:mm') : null,
 						estimated_arrival_unix: estimatedArrivalUnix,
 						headsign: patternData.headsign,
+						line_color: patternData.color,
 						line_id: patternData.line_id,
+						line_short_name: patternData.short_name,
+						line_text_color: patternData.text_color,
 						observed_arrival: null,
 						observed_arrival_unix: null,
 						pattern_id: patternData._id,
