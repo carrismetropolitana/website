@@ -21,7 +21,6 @@ import { PipsArrivalsTableTimeCell } from './PipsArrivalsTableTimeCell';
 interface Props {
 	arrival: MergedArrival
 	index: number
-	nowInSeconds: number
 }
 
 type TranslationFn = ReturnType<typeof useTranslations>;
@@ -53,14 +52,14 @@ function translateOrFallback(
 
 /* * */
 
-export function PipsArrivalsTableRow({ arrival, index, nowInSeconds }: Props) {
+export function PipsArrivalsTableRow({ arrival, index }: Props) {
 	const linesContext = useLinesContext();
 	const tCauseEffect = useTranslations('alerts.AlertCauseEffectIcon');
 	const tWarningLabel = useTranslations('alerts.AlertCauseEffectLabel');
 
 	const lineData = linesContext.actions.getLineDataById(arrival.line_id);
 	const arrivalUnix = arrival.estimated_arrival_unix ?? arrival.scheduled_arrival_unix;
-	const status: ArrivalStatus = arrival.estimated_arrival_unix !== null ? 'realtime' : 'scheduled';
+	const status: ArrivalStatus = typeof arrival.estimated_arrival_unix === 'number' ? 'realtime' : 'scheduled';
 	const hasWarnings = arrival.warnings.length > 0;
 	const rowClassName = `${index % 2 === 0 ? styles.rowEven : styles.rowOdd} ${hasWarnings ? styles.rowWithWarningsTop : ''}`;
 
@@ -71,7 +70,6 @@ export function PipsArrivalsTableRow({ arrival, index, nowInSeconds }: Props) {
 					<div className={styles.timeCell}>
 						<PipsArrivalsTableTimeCell
 							arrivalUnix={arrivalUnix}
-							nowInSeconds={nowInSeconds}
 							status={status}
 						/>
 					</div>

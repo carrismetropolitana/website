@@ -34,6 +34,9 @@ export interface ArrivalWarning {
 
 interface TripUpdatesFeed {
 	entity: TripUpdateEntity[]
+	header?: null | {
+		timestamp?: null | number
+	}
 }
 
 interface TripUpdateEntity {
@@ -146,6 +149,10 @@ export const PipsArrivalsContextProvider = ({ children }: PropsWithChildren) => 
 		const map = new Map<string, PreparedTripUpdate>();
 		const tripUpdatesData = tripUpdatesResponse?.data;
 		if (!tripUpdatesData?.entity?.length) return map;
+
+		const feedTimestamp = tripUpdatesData.header?.timestamp;
+		const isFeedFresh = typeof feedTimestamp === 'number' && Math.abs(DateTime.now().toSeconds() - feedTimestamp) <= 300;
+		if (!isFeedFresh) return map;
 
 		for (const entity of tripUpdatesData.entity) {
 			const tripUpdate = entity.trip_update;
