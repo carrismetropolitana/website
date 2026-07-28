@@ -7,6 +7,7 @@ import { useEnvironmentContext } from '@/contexts/Environment.context';
 import { useLinesContext } from '@/contexts/Lines.context';
 import { useOperationalDateContext } from '@/contexts/OperationalDate.context';
 import { useStopsContext } from '@/contexts/Stops.context';
+import { fetchPatterns } from '@/hooks/fetch-patterns';
 import { normalizeReferenceId } from '@/utils/alerts';
 import { getPublicVariable } from '@carrismetropolitana/website-shared-settings';
 import { Dates } from '@tmlmobilidade/dates';
@@ -15,6 +16,8 @@ import { type UnixTimestamp } from '@tmlmobilidade/types';
 import { convertGTFSTimeStringAndOperationalDateToUnixTimestamp } from '@tmlmobilidade/utils';
 import { notFound } from 'next/navigation';
 import { createContext, useContext, useEffect, useMemo, useState } from 'react';
+
+import { useTripUpdatesContext } from './TripUpdates.context';
 
 /* * */
 
@@ -52,7 +55,6 @@ interface StopsDetailContextState {
 		timetable: StopsDetailViewTimetableData[]
 	}
 	flags: {
-		is_favorite: boolean
 		is_loading: boolean
 	}
 }
@@ -80,11 +82,10 @@ export const StopsDetailContextProvider = ({ children, stopId }: { children: Rea
 	const stopsContext = useStopsContext();
 	const linesContext = useLinesContext();
 	const alertsContext = useAlertsContext();
-	const profileContext = useProfileContext();
 	const operationalDateContext = useOperationalDateContext();
-	const tripUpdatesContext = useTripUpdatesContext();
 	const debugContext = useDebugContext();
 	const environmentContext = useEnvironmentContext();
+	const tripUpdatesContext = useTripUpdatesContext();
 	const [dataActiveStopIdState, setDataActiveStopIdState] = useState<string>(stopId);
 	const [isLoading, setIsLoading] = useState<boolean>(false);
 	const [currentTimestamp, setCurrentTimestamp] = useState(() => Dates.now('Europe/Lisbon').unix_timestamp);
@@ -181,8 +182,6 @@ export const StopsDetailContextProvider = ({ children, stopId }: { children: Rea
 
 	//
 	// C. Transform data
-
-	const isFavoriteData = profileContext.data.favorite_stops?.includes(dataActiveStopIdState) ?? false;
 
 	const activeAlertsData = useMemo(() => {
 		if (!selectedStopData) return [];
@@ -347,7 +346,6 @@ export const StopsDetailContextProvider = ({ children, stopId }: { children: Rea
 			timetable: timetableDataForSelectedDate,
 		},
 		flags: {
-			is_favorite: isFavoriteData,
 			is_loading: isLoading || stopsContext.flags.is_loading || linesContext.flags.is_loading,
 		},
 	};
