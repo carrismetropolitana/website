@@ -110,16 +110,14 @@ export const PipsArrivalsContextProvider = ({ children }) => {
 				const warningsMap = new Map<string, ArrivalWarning>();
 				const now = new Date();
 
-				const matchingAlerts = (alertsContext.data.simplified || []).filter((alert) => {
-					const isActive = alert.end_date ? alert.end_date >= now : true;
+				const matchingAlerts = (alertsContext.data.alerts || []).filter((alert) => {
+					const isActive = alert.active_period_end_date ? alert.active_period_end_date >= now : true;
 					if (!isActive) return false;
 
-					return alert.informed_entity.some((entity) => {
+					return alert.affected_entities.some((entity) => {
 						const matchesStop = entity.stop_id ? entity.stop_id === stopId : false;
-						const matchesExactRoute = entity.route_id ? entity.route_id === arrival.route_id : false;
 						const matchesLineId = entity.line_id ? entity.line_id === arrival.line_id : false;
-						const matchesRoutePrefixForLine = entity.route_id ? entity.route_id.startsWith(arrival.line_id) : false;
-						return matchesStop || matchesExactRoute || matchesLineId || matchesRoutePrefixForLine;
+						return matchesStop || matchesLineId;
 					});
 				});
 
