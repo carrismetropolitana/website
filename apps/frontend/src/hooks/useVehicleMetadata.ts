@@ -3,7 +3,7 @@
 /* * */
 
 import { type HubVehicleMetadata } from '@/types/vehicles.types';
-import { getPublicVariable } from '@carrismetropolitana/website-shared-settings';
+import { CARRIS_METROPOLITANA_NUMERIC_AGENCY_IDS, getPublicVariable } from '@carrismetropolitana/website-shared-settings';
 import { useCallback, useMemo } from 'react';
 import useSWR from 'swr';
 
@@ -11,10 +11,15 @@ import useSWR from 'swr';
 
 type HubVehicleMetadataResponse = HubVehicleMetadata[] | { data?: HubVehicleMetadata[] | null };
 
-function getMetadataVehicleId(vehicleId: string): string {
-	const match = vehicleId.match(/^\[(\d+)\](.+)$/);
-	if (match) return `${match[1]}-${match[2]}`;
-	return vehicleId;
+const VEHICLE_ID_WITH_AGENCY_REGEX = /^\[([^\]]+)\](.+)$/;
+
+function getVehicleMetadataLookupId(vehicleId: string): string {
+	const match = vehicleId.match(VEHICLE_ID_WITH_AGENCY_REGEX);
+	if (!match) return vehicleId;
+
+	const [, agencyId, vehicleNumber] = match;
+	const metadataAgencyId = CARRIS_METROPOLITANA_NUMERIC_AGENCY_IDS[agencyId] ?? agencyId;
+	return `${metadataAgencyId}-${vehicleNumber}`;
 }
 
 /* * */
@@ -44,7 +49,7 @@ export function useVehicleMetadata() {
 
 	const getMetadataForVehicleId = useCallback((vehicleId: null | string | undefined): HubVehicleMetadata | undefined => {
 		if (!vehicleId) return;
-		return metadataByVehicleId.get(getMetadataVehicleId(vehicleId));
+		return metadataByVehicleId.get(getVehicleMetadataLookupId(vehicleId));
 	}, [metadataByVehicleId]);
 
 	//

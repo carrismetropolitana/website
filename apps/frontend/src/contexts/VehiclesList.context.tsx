@@ -125,12 +125,8 @@ export const VehiclesListContextProvider = ({ children }) => {
 			const makeModelValues = filterByMakeAndModelState.split(';').filter(Boolean);
 			filterResult = filterResult.filter((item) => {
 				const metadata = getVehicleMetadata(item.vehicle_id);
-				return makeModelValues.some((val) => {
-					const [makeFilter, modelFilter] = val.split('-').map(s => s.trim().toLowerCase());
-					const itemMake = metadata?.make?.toLowerCase() || '';
-					const itemModel = metadata?.model?.toLowerCase() || '';
-					return itemMake.includes(makeFilter) && itemModel.includes(modelFilter);
-				});
+				if (!metadata?.make || !metadata?.model) return false;
+				return makeModelValues.includes(`${metadata.make}-${metadata.model}`);
 			});
 		}
 
