@@ -2,15 +2,11 @@
 
 /* * */
 
-import type { GoApiResponse } from '@carrismetropolitana/website-shared-types';
-
 import { useVehiclesContext } from '@/contexts/Vehicles.context';
+import { useVehicleMetadata } from '@/hooks/useVehicleMetadata';
 import { type HubVehicleMetadata } from '@/types/vehicles.types';
-import { getMetadataVehicleIdFromPositionVehicleId } from '@/utils/vehicles.utils';
-import { getPublicVariable } from '@carrismetropolitana/website-shared-settings';
 import { type HubVehiclePosition } from '@tmlmobilidade/go-types-public-info';
 import { createContext, type PropsWithChildren, useContext, useMemo } from 'react';
-import useSWR from 'swr';
 
 /* * */
 
@@ -45,13 +41,11 @@ export function VehiclesDetailContextProvider({ children, vehicleId }: PropsWith
 	// A. Setup variables
 
 	const vehiclesContext = useVehiclesContext();
-	//
-	// B. Fetch data
-
-	const { data: allVehiclesMetadataResponse, isLoading: allVehiclesMetadataLoading } = useSWR<GoApiResponse<HubVehicleMetadata[]>>(`${getPublicVariable('go_api_url')}/hub/api/v1/realtime/vehicles/metadata`, { refreshInterval: 900_000 }); // 15 minutes
+	const vehicleMetadata = useVehicleMetadata();
+	const getVehicleMetadata = vehicleMetadata.actions.getMetadataForVehicleId;
 
 	//
-	// C. Transform data
+	// B. Transform data
 
 	const positionData = useMemo(() => {
 		if (!vehicleId) return null;
@@ -59,14 +53,12 @@ export function VehiclesDetailContextProvider({ children, vehicleId }: PropsWith
 	}, [vehicleId, vehiclesContext.data.vehicles]);
 
 	const metadataData = useMemo(() => {
-		if (!vehicleId || !allVehiclesMetadataResponse?.data) return null;
-
-		const metadataVehicleId = getMetadataVehicleIdFromPositionVehicleId(vehicleId);
-		return allVehiclesMetadataResponse.data.find(vehicle => vehicle.vehicle_id === metadataVehicleId) ?? null;
-	}, [allVehiclesMetadataResponse?.data, vehicleId]);
+		if (!vehicleId) return null;
+		return getVehicleMetadata(vehicleId) ?? null;
+	}, [getVehicleMetadata, vehicleId]);
 
 	//
-	// D. Define context value
+	// C. Define context value
 
 	const contextValue: VehiclesDetailContextState = {
 		data: {
@@ -74,12 +66,12 @@ export function VehiclesDetailContextProvider({ children, vehicleId }: PropsWith
 			position: positionData,
 		},
 		flags: {
-			isLoading: vehiclesContext.flags.isLoading || allVehiclesMetadataLoading,
+			isLoading: vehiclesContext.flags.isLoading || vehicleMetadata.flags.isLoading,
 		},
 	};
 
 	//
-	// E. Render components
+	// D. Render components
 
 	return (
 		<VehiclesDetailContext.Provider value={contextValue}>

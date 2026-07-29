@@ -1495,7 +1495,11 @@
 			"41": "Viação Alvorada",
 			"42": "Rodoviária de Lisboa",
 			"43": "TST",
-			"44": "Alsa Todi"
+			"44": "Alsa Todi",
+			"A2L1N": "Alsa Todi",
+			"BNA17": "Rodoviária de Lisboa",
+			"LA77N": "Viação Alvorada",
+			"YA15B": "Transportes Sul Tejo"
 		},
 		"VehicleEmissionClass": {
 			"EURO_I": "EURO 1",

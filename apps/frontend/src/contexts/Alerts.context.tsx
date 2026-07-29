@@ -125,10 +125,9 @@ export function AlertsContextProvider({ children }: PropsWithChildren) {
 
 /* * */
 
-export function transformAlertDataIntoGeoJsonFeature(alertData: HubAlert): GeoJSON.Feature<GeoJSON.Point, GeoJSON.GeoJsonProperties> {
-	// Skip alerts without coordinates
-	if (!alertData.coordinates?.length) return null;
-	// Transform alert data into a GeoJSON feature
+export function transformAlertDataIntoGeoJsonFeature(alertData: HubAlert): GeoJSON.Feature<GeoJSON.Point, GeoJSON.GeoJsonProperties> | null {
+	if (!alertData.coordinates || alertData.coordinates.length !== 2 || !alertData.coordinates.every(Number.isFinite)) return null;
+
 	return {
 		geometry: {
 			coordinates: [alertData.coordinates[1], alertData.coordinates[0]],
