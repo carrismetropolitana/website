@@ -9,6 +9,7 @@ import { useAlertsContext } from '@/contexts/Alerts.context';
 import { useOperationalDateContext } from '@/contexts/OperationalDate.context';
 import { useStopsPipContext } from '@/contexts/StopsPip.context';
 import { type Arrival } from '@/types/stops.types';
+import { normalizeReferenceId } from '@/utils/alerts';
 import { getPublicVariable } from '@carrismetropolitana/website-shared-settings';
 import { convertGTFSTimeStringAndOperationalDateToUnixTimestamp } from '@tmlmobilidade/utils';
 import { DateTime } from 'luxon';
@@ -205,10 +206,20 @@ export const PipsArrivalsContextProvider = ({ children }: PropsWithChildren) => 
 						: undefined;
 					const estimatedArrivalUnix = tripUpdate?.arrival_time_unix ?? null;
 					const warningsMap = new Map<string, ArrivalWarning>();
-					const matchingAlerts = [
-						...alertsContext.actions.getAlertsByStopId(String(stop._id)),
-						...alertsContext.actions.getAlertsByLineId(patternData.line_id),
-					].filter(alert => !alert.active_period_end_date || alert.active_period_end_date >= nowInMilliseconds);
+					const normalizedStopId = normalizeReferenceId(stop._id);
+					const normalizedLineId = normalizeReferenceId(patternData.line_id);
+					const matchingAlerts = alertsContext.data.alerts.filter((alert) => {
+						const isActive = !alert.active_period_end_date || alert.active_period_end_date >= nowInMilliseconds;
+						if (!isActive) return false;
+
+						return alert.references.some((reference) => {
+							if (alert.reference_type === 'stops') return normalizeReferenceId(reference.parent_id) === normalizedStopId;
+							if (alert.reference_type !== 'lines') return false;
+							if (normalizeReferenceId(reference.parent_id) !== normalizedLineId) return false;
+							if (!reference.child_ids.length) return true;
+							return reference.child_ids.some(childId => normalizeReferenceId(childId) === normalizedStopId);
+						});
+					});
 
 					for (const alert of matchingAlerts) {
 						const key = `${alert.effect}|${alert.cause}`;

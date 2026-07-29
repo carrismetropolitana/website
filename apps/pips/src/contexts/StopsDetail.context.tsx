@@ -193,9 +193,9 @@ export const StopsDetailContextProvider = ({ children, stopId }: { children: Rea
 			const hasMatchingReference = alert.references.some((reference) => {
 				if (alert.reference_type === 'stops') return normalizeReferenceId(reference.parent_id) === normalizedStopId;
 				if (alert.reference_type !== 'lines') return false;
-				const hasMatchingLine = normalizedLineIds.has(normalizeReferenceId(reference.parent_id));
-				const hasMatchingStop = reference.child_ids.some(childId => normalizeReferenceId(childId) === normalizedStopId);
-				return hasMatchingLine || hasMatchingStop;
+				if (!normalizedLineIds.has(normalizeReferenceId(reference.parent_id))) return false;
+				if (!reference.child_ids.length) return true;
+				return reference.child_ids.some(childId => normalizeReferenceId(childId) === normalizedStopId);
 			});
 			const isActive = !alert.active_period_end_date || alert.active_period_end_date >= Date.now();
 			return hasMatchingReference && isActive;
