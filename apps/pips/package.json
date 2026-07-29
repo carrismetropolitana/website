@@ -23,7 +23,7 @@
 		"@next/third-parties": "16.2.4",
 		"@tabler/icons-react": "3.41.1",
 		"@tmlmobilidade/dates": "20260418.1237.24",
-		"@tmlmobilidade/utils": "20260418.1237.24",
+		"@tmlmobilidade/utils": "20260724.30.25",
 		"@turf/turf": "7.3.5",
 		"@vis.gl/react-maplibre": "8.1.1",
 		"classnames": "2.5.1",

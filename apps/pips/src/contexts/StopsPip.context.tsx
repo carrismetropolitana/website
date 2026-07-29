@@ -3,7 +3,7 @@
 /* * */
 
 import { useStopsContext } from '@/contexts/Stops.context';
-import { type Stop } from '@carrismetropolitana/api-types/network';
+import { type HubStop } from '@tmlmobilidade/go-types-public-info';
 import { usePathname, useSearchParams } from 'next/navigation';
 import { createContext, useContext, useEffect, useMemo, useState } from 'react';
 
@@ -15,7 +15,7 @@ export type PipsDisplayRotation = 'ccw' | 'cw';
 interface StopsPipContextState {
 	data: {
 		pip_id?: string
-		stops: Stop[]
+		stops: HubStop[]
 	}
 	display: {
 		orientation: PipsDisplayOrientation
@@ -52,7 +52,7 @@ export const StopsPipContextProvider = ({ children }) => {
 	const searchParams = useSearchParams();
 	const pathname = usePathname();
 
-	const [dataStopsState, setDataStopsState] = useState<Stop[]>([]);
+	const [dataStopsState, setDataStopsState] = useState<HubStop[]>([]);
 	const [stopsLoading, setStopsLoading] = useState(true);
 
 	const stopIds = useMemo(() => {
@@ -111,7 +111,7 @@ export const StopsPipContextProvider = ({ children }) => {
 		Promise.resolve().then(() => {
 			const foundStops = stopIds
 				.map(id => stopsContext.actions.getStopById(id))
-				.filter((stop): stop is Stop => !!stop)
+				.filter((stop): stop is HubStop => !!stop)
 				.slice(0, maxStops);
 
 			setDataStopsState(foundStops);
