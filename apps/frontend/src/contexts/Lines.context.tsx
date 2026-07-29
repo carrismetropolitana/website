@@ -56,7 +56,8 @@ export const LinesContextProvider = ({ children }) => {
 	// B. Handle actions
 
 	const getLineDataById = (lineId: string) => {
-		return linesData.find(line => line._id === lineId);
+		const normalizedLineId = lineId.replace(/^\[[^\]]+\]/, '');
+		return linesData.find(line => line._id === normalizedLineId);
 	};
 
 	const getRouteDataById = (routeId: string) => {

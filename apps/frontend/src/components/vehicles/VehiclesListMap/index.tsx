@@ -43,7 +43,7 @@ export function VehiclesListMap() {
 	const environmentContext = useEnvironmentContext();
 	const operationalDateContext = useOperationalDateContext();
 
-	const [isAutoZoom, setIsAutoZoom] = useState(true);
+	const [isAutoZoom, setIsAutoZoom] = useState(false);
 	const [activePatternData, setActivePatternData] = useState<Pattern | undefined>();
 	const [activeShapeData, setActiveShapeData] = useState<Shape | undefined>();
 	const [showAlerts, setShowAlerts] = useState(true);

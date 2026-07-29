@@ -55,7 +55,14 @@ export const VehiclesContextProvider = ({ children }: PropsWithChildren) => {
 	const allVehiclesData = useMemo(() => {
 		if (!allVehiclesPositionsResponse?.data) return [];
 		const now = DateTime.now().toUnixInteger();
-		return allVehiclesPositionsResponse.data.filter(vehicle => (CARRIS_METROPOLITANA_AGENCY_IDS as readonly string[]).includes(String(vehicle.agency_id)) && Math.floor((vehicle.received_at ?? 0) / 1000) > now - 180);
+		return allVehiclesPositionsResponse.data.filter((vehicle) => {
+			if (!(CARRIS_METROPOLITANA_AGENCY_IDS as readonly string[]).includes(String(vehicle.agency_id))) return false;
+			if (Math.floor((vehicle.received_at ?? 0) / 1000) <= now - 180) return false;
+			if (!Number.isFinite(vehicle.latitude) || !Number.isFinite(vehicle.longitude)) return false;
+			if (vehicle.latitude < 38 || vehicle.latitude > 39.5) return false;
+			if (vehicle.longitude < -10 || vehicle.longitude > -8) return false;
+			return true;
+		});
 	}, [allVehiclesPositionsResponse?.data]);
 
 	//
@@ -173,7 +180,7 @@ export function transformVehicleDataIntoGeoJsonFeature(vehicleData: HubVehiclePo
 
 	return {
 		geometry: {
-			coordinates: [vehicleData.longitude || 0, vehicleData.latitude || 0],
+			coordinates: [vehicleData.longitude, vehicleData.latitude],
 			type: 'Point',
 		},
 		id: String(vehicleData.vehicle_id),
