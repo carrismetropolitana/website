@@ -1,6 +1,7 @@
 'use client';
 
-import { type GoApiResponse } from '@/types/api.types';
+import type { GoApiResponse } from '@carrismetropolitana/website-shared-types';
+
 import { type HubVehicleMetadata } from '@/types/vehicles.types';
 import { buildVehicleMetadataMap, getVehicleMetadataForPosition } from '@/utils/vehicles.utils';
 import { CARRIS_METROPOLITANA_AGENCY_IDS, getPublicVariable } from '@carrismetropolitana/website-shared-settings';

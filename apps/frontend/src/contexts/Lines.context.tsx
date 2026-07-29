@@ -1,7 +1,8 @@
 'use client';
 
+import type { GoApiResponse } from '@carrismetropolitana/website-shared-types';
+
 import { useFilterByAgencyIds } from '@/hooks/useFilterByAgencyIds';
-import { type GoApiResponse } from '@/types/api.types';
 import { type CachedResource } from '@carrismetropolitana/api-types/common';
 import { type ServiceMetrics } from '@carrismetropolitana/api-types/metrics';
 import { getPublicVariable } from '@carrismetropolitana/website-shared-settings';
