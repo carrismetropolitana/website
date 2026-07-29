@@ -1,17 +1,12 @@
 'use client';
 
-import type { GoApiResponse } from '@carrismetropolitana/website-shared-types';
-
-import { type HubVehicleMetadata } from '@/types/vehicles.types';
-import { buildVehicleMetadataMap, getVehicleMetadataForPosition } from '@/utils/vehicles.utils';
+import { useVehicleMetadata } from '@/hooks/useVehicleMetadata';
 import { CARRIS_METROPOLITANA_AGENCY_IDS, getPublicVariable } from '@carrismetropolitana/website-shared-settings';
 import { getBaseGeoJsonFeatureCollection } from '@tmlmobilidade/geo';
 import { type HubVehiclePosition } from '@tmlmobilidade/go-types-public-info';
 import { DateTime } from 'luxon';
 import { createContext, type PropsWithChildren, useContext, useMemo } from 'react';
 import useSWR from 'swr';
-
-/* * */
 
 interface VehiclesContextState {
 	actions: {
@@ -53,8 +48,9 @@ export const VehiclesContextProvider = ({ children }: PropsWithChildren) => {
 	//
 	// A. Fetch data
 
+	const vehicleMetadata = useVehicleMetadata();
+	const getVehicleMetadata = vehicleMetadata.actions.getMetadataForVehicleId;
 	const { data: allVehiclesPositionsResponse, isLoading: allVehiclesPositionsLoading } = useSWR<{ data: HubVehiclePosition[] }>(`${getPublicVariable('go_api_url')}/hub/api/v1/realtime/vehicles/positions`, { refreshInterval: 5_000 }); // 5 seconds
-	const { data: allVehiclesMetadataResponse } = useSWR<GoApiResponse<HubVehicleMetadata[]>>(`${getPublicVariable('go_api_url')}/hub/api/v1/realtime/vehicles/metadata`, { refreshInterval: 900_000 }); // 15 minutes
 
 	const allVehiclesData = useMemo(() => {
 		if (!allVehiclesPositionsResponse?.data) return [];
@@ -62,19 +58,17 @@ export const VehiclesContextProvider = ({ children }: PropsWithChildren) => {
 		return allVehiclesPositionsResponse.data.filter(vehicle => (CARRIS_METROPOLITANA_AGENCY_IDS as readonly string[]).includes(String(vehicle.agency_id)) && Math.floor((vehicle.received_at ?? 0) / 1000) > now - 180);
 	}, [allVehiclesPositionsResponse?.data]);
 
-	const metadataByVehicleId = useMemo(() => buildVehicleMetadataMap(allVehiclesMetadataResponse?.data), [allVehiclesMetadataResponse?.data]);
-
 	//
 	// B. Transform data
 
 	const vehiclesGeoJsonFeatureCollection = useMemo(() => {
 		const collection = getBaseGeoJsonFeatureCollection();
 		allVehiclesData.forEach((vehicle) => {
-			const contactless = getVehicleMetadataForPosition(vehicle, metadataByVehicleId)?.contactless ?? false;
+			const contactless = getVehicleMetadata(vehicle.vehicle_id)?.contactless ?? false;
 			collection.features.push(transformVehicleDataIntoGeoJsonFeature(vehicle, contactless));
 		});
 		return collection;
-	}, [allVehiclesData, metadataByVehicleId]);
+	}, [allVehiclesData, getVehicleMetadata]);
 
 	//
 	// B. Handle actions
@@ -86,7 +80,7 @@ export const VehiclesContextProvider = ({ children }: PropsWithChildren) => {
 	const getVehicleByIdGeoJsonFC = (vehicleId: string): GeoJSON.FeatureCollection | undefined => {
 		const vehicle = getVehicleById(vehicleId);
 		if (!vehicle) return;
-		const contactless = getVehicleMetadataForPosition(vehicle, metadataByVehicleId)?.contactless ?? false;
+		const contactless = getVehicleMetadata(vehicle.vehicle_id)?.contactless ?? false;
 		const collection = getBaseGeoJsonFeatureCollection();
 		collection.features.push(transformVehicleDataIntoGeoJsonFeature(vehicle, contactless));
 		return collection;
@@ -101,7 +95,7 @@ export const VehiclesContextProvider = ({ children }: PropsWithChildren) => {
 		if (!vehicles) return;
 		const collection = getBaseGeoJsonFeatureCollection();
 		vehicles.forEach((vehicle) => {
-			const contactless = getVehicleMetadataForPosition(vehicle, metadataByVehicleId)?.contactless ?? false;
+			const contactless = getVehicleMetadata(vehicle.vehicle_id)?.contactless ?? false;
 			collection.features.push(transformVehicleDataIntoGeoJsonFeature(vehicle, contactless));
 		});
 		return collection;
@@ -116,7 +110,7 @@ export const VehiclesContextProvider = ({ children }: PropsWithChildren) => {
 		if (!vehicles) return;
 		const collection = getBaseGeoJsonFeatureCollection();
 		vehicles.forEach((vehicle) => {
-			const contactless = getVehicleMetadataForPosition(vehicle, metadataByVehicleId)?.contactless ?? false;
+			const contactless = getVehicleMetadata(vehicle.vehicle_id)?.contactless ?? false;
 			collection.features.push(transformVehicleDataIntoGeoJsonFeature(vehicle, contactless));
 		});
 		return collection;
@@ -131,7 +125,7 @@ export const VehiclesContextProvider = ({ children }: PropsWithChildren) => {
 		if (!vehicles) return;
 		const collection = getBaseGeoJsonFeatureCollection();
 		vehicles.forEach((vehicle) => {
-			const contactless = getVehicleMetadataForPosition(vehicle, metadataByVehicleId)?.contactless ?? false;
+			const contactless = getVehicleMetadata(vehicle.vehicle_id)?.contactless ?? false;
 			collection.features.push(transformVehicleDataIntoGeoJsonFeature(vehicle, contactless));
 		});
 		return collection;

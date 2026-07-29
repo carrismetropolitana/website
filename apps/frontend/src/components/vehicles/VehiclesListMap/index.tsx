@@ -13,8 +13,8 @@ import { useOperationalDateContext } from '@/contexts/OperationalDate.context';
 import { transformStopDataIntoGeoJsonFeature, useStopsContext } from '@/contexts/Stops.context';
 import { transformVehicleDataIntoGeoJsonFeature, useVehiclesContext } from '@/contexts/Vehicles.context';
 import { useVehiclesListContext } from '@/contexts/VehiclesList.context';
+import { useVehicleMetadata } from '@/hooks/useVehicleMetadata';
 import { centerMap, getBaseGeoJsonFeatureCollection } from '@/utils/map.utils';
-import { buildVehicleMetadataMap, getVehicleMetadataForPosition } from '@/utils/vehicles.utils';
 import { Pattern, Shape } from '@carrismetropolitana/api-types/network';
 import { getPublicVariable } from '@carrismetropolitana/website-shared-settings';
 import { IconAlertTriangle } from '@tabler/icons-react';
@@ -24,8 +24,6 @@ import { useRouter } from 'next/navigation';
 import { useEffect, useMemo, useState } from 'react';
 
 import styles from './styles.module.css';
-
-/* * */
 
 export function VehiclesListMap() {
 	//
@@ -38,6 +36,8 @@ export function VehiclesListMap() {
 	const router = useRouter();
 	const vehiclesListContext = useVehiclesListContext();
 	const vehiclesContext = useVehiclesContext();
+	const vehicleMetadata = useVehicleMetadata();
+	const getVehicleMetadata = vehicleMetadata.actions.getMetadataForVehicleId;
 	const stopsContext = useStopsContext();
 	const alertsContext = useAlertsContext();
 	const environmentContext = useEnvironmentContext();
@@ -122,24 +122,20 @@ export function VehiclesListMap() {
 		return { ...activeShapeData?.geojson, properties: { color: activePatternData.color } };
 	}, [activePatternData, activeShapeData]);
 
-	const metadataByVehicleId = useMemo(() => {
-		return buildVehicleMetadataMap(vehiclesListContext.data.metadata);
-	}, [vehiclesListContext.data.metadata]);
-
 	const activeVehiclesGeoJsonFC = useMemo(() => {
 		const collection = getBaseGeoJsonFeatureCollection();
 		if (vehiclesListContext.data.selected) {
-			const contactless = getVehicleMetadataForPosition(vehiclesListContext.data.selected, metadataByVehicleId)?.contactless ?? false;
+			const contactless = getVehicleMetadata(vehiclesListContext.data.selected.vehicle_id)?.contactless ?? false;
 			collection.features.push(transformVehicleDataIntoGeoJsonFeature(vehiclesListContext.data.selected, contactless));
 		}
 		else {
 			vehiclesListContext.data.filtered.forEach((vehicle) => {
-				const contactless = getVehicleMetadataForPosition(vehicle, metadataByVehicleId)?.contactless ?? false;
+				const contactless = getVehicleMetadata(vehicle.vehicle_id)?.contactless ?? false;
 				collection.features.push(transformVehicleDataIntoGeoJsonFeature(vehicle, contactless));
 			});
 		}
 		return collection;
-	}, [metadataByVehicleId, vehiclesListContext.data.filtered, vehiclesListContext.data.selected, vehiclesContext.data.vehicles]);
+	}, [getVehicleMetadata, vehiclesListContext.data.filtered, vehiclesListContext.data.selected, vehiclesContext.data.vehicles]);
 
 	//
 	// D. Handle actions

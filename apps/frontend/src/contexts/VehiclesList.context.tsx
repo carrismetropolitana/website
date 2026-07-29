@@ -2,17 +2,13 @@
 
 /* * */
 
-import type { GoApiResponse } from '@carrismetropolitana/website-shared-types';
-
 import { useVehiclesContext } from '@/contexts/Vehicles.context';
+import { useVehicleMetadata } from '@/hooks/useVehicleMetadata';
 import { type HubVehicleMetadata } from '@/types/vehicles.types';
-import { buildVehicleMetadataMap, getVehicleMetadataForPosition } from '@/utils/vehicles.utils';
-import { getPublicVariable } from '@carrismetropolitana/website-shared-settings';
 import { type HubVehiclePosition } from '@tmlmobilidade/go-types-public-info';
 import { DateTime } from 'luxon';
 import { useQueryState } from 'nuqs';
 import { createContext, useContext, useEffect, useMemo, useState } from 'react';
-import useSWR from 'swr';
 
 /* * */
 
@@ -63,6 +59,8 @@ export const VehiclesListContextProvider = ({ children }) => {
 	// A. Setup variables
 
 	const vehiclesContext = useVehiclesContext();
+	const vehicleMetadata = useVehicleMetadata();
+	const getVehicleMetadata = vehicleMetadata.actions.getMetadataForVehicleId;
 
 	const [dataSelectedState, setDataSelectedState] = useState<VehiclesListContextState['data']['selected']>(null);
 
@@ -74,16 +72,7 @@ export const VehiclesListContextProvider = ({ children }) => {
 	const [filterByPropulsionState, setFilterByPropulsionState] = useQueryState('by_propulsion', { clearOnDefault: true });
 
 	//
-	// B. Fetch data
-
-	const { data: allVehiclesMetadataResponse, isLoading: allVehiclesMetadataLoading } = useSWR<GoApiResponse<HubVehicleMetadata[]>>(`${getPublicVariable('go_api_url')}/hub/api/v1/realtime/vehicles/metadata`, { refreshInterval: 900_000 }); // 15 minutes
-
-	//
-	// C. Transform data
-
-	const allVehiclesMetadata = allVehiclesMetadataResponse?.data || [];
-
-	const metadataByVehicleId = useMemo(() => buildVehicleMetadataMap(allVehiclesMetadata), [allVehiclesMetadata]);
+	// B. Transform data
 
 	const dataFilteredState = useMemo(() => {
 		let filterResult = vehiclesContext.data.vehicles || [];
@@ -97,7 +86,7 @@ export const VehiclesListContextProvider = ({ children }) => {
 
 		if (filterBySearchState) {
 			filterResult = filterResult.filter((item) => {
-				const metadata = getVehicleMetadataForPosition(item, metadataByVehicleId);
+				const metadata = getVehicleMetadata(item.vehicle_id);
 				const matchedVehicleId = item.vehicle_id?.toLowerCase().includes(filterBySearchState.toLowerCase());
 				const matchedTripId = item.trip_id?.toLowerCase().includes(filterBySearchState.toLowerCase());
 				const matchedLicensePlate = metadata?.license_plate?.toLowerCase().includes(filterBySearchState.toLowerCase());
@@ -107,14 +96,14 @@ export const VehiclesListContextProvider = ({ children }) => {
 
 		if (filterByBikesState) {
 			filterResult = filterResult.filter((item) => {
-				const metadata = getVehicleMetadataForPosition(item, metadataByVehicleId);
+				const metadata = getVehicleMetadata(item.vehicle_id);
 				return String(metadata?.bicycles) === filterByBikesState;
 			});
 		}
 
 		if (filterByWheelchairState) {
 			filterResult = filterResult.filter((item) => {
-				const metadata = getVehicleMetadataForPosition(item, metadataByVehicleId);
+				const metadata = getVehicleMetadata(item.vehicle_id);
 				return String(metadata?.wheelchair) === filterByWheelchairState;
 			});
 		}
@@ -122,7 +111,7 @@ export const VehiclesListContextProvider = ({ children }) => {
 		if (filterByPropulsionState) {
 			const propulsionValues = filterByPropulsionState.split(';').filter(Boolean);
 			filterResult = filterResult.filter((item) => {
-				const metadata = getVehicleMetadataForPosition(item, metadataByVehicleId);
+				const metadata = getVehicleMetadata(item.vehicle_id);
 				return metadata?.propulsion && propulsionValues.includes(metadata.propulsion);
 			});
 		}
@@ -135,7 +124,7 @@ export const VehiclesListContextProvider = ({ children }) => {
 		if (filterByMakeAndModelState) {
 			const makeModelValues = filterByMakeAndModelState.split(';').filter(Boolean);
 			filterResult = filterResult.filter((item) => {
-				const metadata = getVehicleMetadataForPosition(item, metadataByVehicleId);
+				const metadata = getVehicleMetadata(item.vehicle_id);
 				return makeModelValues.some((val) => {
 					const [makeFilter, modelFilter] = val.split('-').map(s => s.trim().toLowerCase());
 					const itemMake = metadata?.make?.toLowerCase() || '';
@@ -153,12 +142,12 @@ export const VehiclesListContextProvider = ({ children }) => {
 		filterByPropulsionState,
 		filterBySearchState,
 		filterByWheelchairState,
-		metadataByVehicleId,
+		getVehicleMetadata,
 		vehiclesContext.data.vehicles,
 	]);
 
 	//
-	// D. Handle actions
+	// C. Handle actions
 
 	const updateFilterBySearch = (value: string) => {
 		setFilterBySearchState(value);
@@ -200,7 +189,7 @@ export const VehiclesListContextProvider = ({ children }) => {
 	}, [vehiclesContext.data.vehicles, dataSelectedState]);
 
 	//
-	// E. Define context value
+	// D. Define context value
 
 	const contextValue: VehiclesListContextState = {
 		actions: {
@@ -214,7 +203,7 @@ export const VehiclesListContextProvider = ({ children }) => {
 		},
 		data: {
 			filtered: dataFilteredState,
-			metadata: allVehiclesMetadata,
+			metadata: vehicleMetadata.data.metadata,
 			raw: vehiclesContext.data.vehicles || [],
 			selected: dataSelectedState,
 		},
@@ -228,7 +217,7 @@ export const VehiclesListContextProvider = ({ children }) => {
 			selected_vehicle: dataSelectedState?.vehicle_id || null,
 		},
 		flags: {
-			is_loading: vehiclesContext.flags.isLoading || allVehiclesMetadataLoading,
+			is_loading: vehiclesContext.flags.isLoading || vehicleMetadata.flags.isLoading,
 		},
 	};
 
