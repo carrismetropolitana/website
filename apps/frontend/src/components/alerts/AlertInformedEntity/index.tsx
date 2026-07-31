@@ -8,6 +8,7 @@ import { LineBadge } from '@/components/lines/LineBadge';
 import { useEnvironmentContext } from '@/contexts/Environment.context';
 import { useLinesContext } from '@/contexts/Lines.context';
 import { useStopsContext } from '@/contexts/Stops.context';
+import { normalizeReferenceId } from '@/utils/alerts';
 import { useRouter } from 'next/navigation';
 import { useMemo } from 'react';
 
@@ -36,12 +37,16 @@ export function AlertInformedEntity({ lineId, routeId, stopId }: Props) {
 	// B. Transform data
 
 	const lineData = useMemo<HubLine | undefined>(() => {
-		return linesContext.data.lines?.find(line => line._id === lineId || line.route_ids.some(itemId => itemId === routeId));
-	}, [linesContext.data.lines]);
+		if (lineId) return linesContext.actions.getLineDataById(lineId);
+		if (!routeId) return;
+		const normalizedRouteId = normalizeReferenceId(routeId);
+		return linesContext.data.lines?.find(line => line.route_ids.some(itemId => normalizeReferenceId(itemId) === normalizedRouteId));
+	}, [lineId, linesContext.actions, linesContext.data.lines, routeId]);
 
 	const stopData = useMemo<HubStop | undefined>(() => {
-		return stopsContext.data.stops?.find(stop => stop._id.toString() === stopId);
-	}, [stopsContext.data.stops]);
+		const normalizedStopId = normalizeReferenceId(stopId);
+		return stopsContext.data.stops?.find(stop => normalizeReferenceId(stop._id) === normalizedStopId);
+	}, [stopId, stopsContext.data.stops]);
 
 	//
 	// C. Handle actions

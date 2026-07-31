@@ -26,6 +26,8 @@ export function LinesDetailAlerts() {
 		return null;
 	}
 
+	console.log(linesDetailContext.data.active_alerts);
+
 	return (
 		<Surface variant="alerts">
 			<Section heading={t('heading')} withGap>

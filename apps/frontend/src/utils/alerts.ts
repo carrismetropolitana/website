@@ -3,7 +3,7 @@ import type { HubAlert } from '@tmlmobilidade/go-types-public-info';
 /* * */
 
 export function normalizeReferenceId(referenceId: null | number | string | undefined): string {
-	return String(referenceId ?? '').trim().replace(/^\[\d+\]/, '');
+	return String(referenceId ?? '').trim().replace(/^\[[^\]]+\]/, '');
 }
 
 export function getCauseSeverityLevel(cause?: HubAlert['cause']): number {

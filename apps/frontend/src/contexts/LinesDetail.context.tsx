@@ -9,7 +9,7 @@ import { useProfileContext } from '@/contexts/Profile.context';
 import { useStopsContext } from '@/contexts/Stops.context';
 import { normalizeReferenceId } from '@/utils/alerts';
 import { type ServiceMetrics } from '@carrismetropolitana/api-types/metrics';
-import { getPublicVariable } from '@carrismetropolitana/website-shared-settings';
+import { CARRIS_METROPOLITANA_NUMERIC_AGENCY_IDS, getPublicVariable } from '@carrismetropolitana/website-shared-settings';
 import { type HubAlert, type HubLine, type HubPattern, type HubRoute, type HubShape, type HubWaypoint } from '@tmlmobilidade/go-types-public-info';
 import { useQueryState } from 'nuqs';
 import { createContext, useContext, useEffect, useState } from 'react';
@@ -203,20 +203,21 @@ export const LinesDetailContextProvider = ({ children, lineId }) => {
 	useEffect(() => {
 		if (!alertsContext.data.alerts || !operationalDateContext.data.selected_date) return;
 
+		const normalizedLineId = normalizeReferenceId(lineId);
+		const lineAgencyId = dataLineState?.agency_id?.trim();
+		const lineAgencyIds = new Set([lineAgencyId, lineAgencyId ? CARRIS_METROPOLITANA_NUMERIC_AGENCY_IDS[lineAgencyId] : undefined].filter((agencyId): agencyId is string => Boolean(agencyId)));
+
 		const activeAlerts = alertsContext.data.alerts.filter((alertData) => {
 			const isActive = alertData.active_period_end_date ? alertData.active_period_end_date >= operationalDateContext.data.selected_date.set({ hour: 0, millisecond: 0, minute: 0, second: 0 }).js_date.getTime() : true;
 
 			if (!isActive) return false;
 
 			return alertData.references.some((reference) => {
-				const normalizedLineId = normalizeReferenceId(lineId);
-				const lineOperatorDigit = normalizedLineId?.match(/\d/)?.[0];
 				const informedAgencyId = alertData.agency_id?.trim();
-				const informedOperatorDigit = informedAgencyId?.slice(-1);
-				const hasMatchingArea = informedOperatorDigit != null && lineOperatorDigit != null && informedOperatorDigit === lineOperatorDigit;
-				const areaOk = !informedAgencyId || hasMatchingArea;
+				const informedAgencyIds = new Set([informedAgencyId, informedAgencyId ? CARRIS_METROPOLITANA_NUMERIC_AGENCY_IDS[informedAgencyId] : undefined].filter((agencyId): agencyId is string => Boolean(agencyId)));
+				const agencyOk = !informedAgencyId || !lineAgencyIds.size || [...informedAgencyIds].some(agencyId => lineAgencyIds.has(agencyId));
 
-				if (!areaOk) return false;
+				if (!agencyOk) return false;
 
 				const parentId = normalizeReferenceId(reference.parent_id);
 				const childIds = reference.child_ids.map(normalizeReferenceId);
