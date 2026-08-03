@@ -21,12 +21,13 @@ import styles from './styles.module.css';
 
 interface Props {
 	data: StopsDetailViewTimetableData
+	status: ArrivalStatus
 	withClock: boolean
 }
 
 /* * */
 
-export function StopsDetailViewTimetableRow({ data, withClock }: Props) {
+export function StopsDetailViewTimetableRow({ data, status, withClock }: Props) {
 	//
 
 	//
@@ -46,7 +47,6 @@ export function StopsDetailViewTimetableRow({ data, withClock }: Props) {
 	const isSameStopSequence = selectedTripData.stopSequence === data.stop_sequence;
 	const isSelected = isSamePatternId && isSameTripId && isSameStopSequence;
 
-	const status: ArrivalStatus = data.is_past ? 'passed' : data.is_realtime ? 'realtime' : 'scheduled';
 	const lineId = normalizeReferenceId(data.line_id);
 	const scheduledArrivalUnix = data.arrival_scheduled_ms / 1_000;
 	const effectiveArrivalUnix = (data.arrival_effective_ms ?? data.arrival_scheduled_ms) / 1_000;

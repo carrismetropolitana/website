@@ -2047,6 +2047,14 @@
 				"line": "Line"
 			}
 		},
+		"StopsDetailContentTimetableRealtime": {
+			"end_of_day": "End of Day",
+			"no_service": "No Service Today",
+			"show_past_trips_toggle": {
+				"hide": "Hide previous arrivals",
+				"show": "Show previous arrivals"
+			}
+		},
 		"StopsDetailContentTimetableRow": {
 			"debug_modal": {
 				"title": "This data represents equal trip IDs for different days"
@@ -2056,16 +2064,9 @@
 			},
 			"open_line_page": "See full path"
 		},
-		"StopsDetailViewTimetable": {
+		"StopsDetailContentTimetableSchedule": {
 			"end_of_day": "End of Day",
-			"no_service": "No Service for the selected day",
-			"show_past_trips_toggle": {
-				"hide": "Hide previous arrivals",
-				"show": "Show previous arrivals"
-			}
-		},
-		"StopsDetailViewTimetableRow": {
-			"localities": "Goes through: {localities}"
+			"no_service": "No Service for the selected day"
 		},
 		"StopsListToolbar": {
 			"filters": {
