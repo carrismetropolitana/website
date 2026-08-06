@@ -125,18 +125,7 @@ export const StopsDetailContextProvider = ({ children, stopId }: { children: Rea
 
 	const etaApiUrl = operationalDateContext.flags.is_today_selected && dataActiveStopIdState ? `${getPublicVariable('go_api_url')}/hub/api/v1/realtime/eta/by-stop/${encodeURIComponent(dataActiveStopIdState)}` : null;
 	const { data: etaResponse } = useSWR<GoApiResponse<HubEtaByStop[]>, Error>(etaApiUrl, { refreshInterval: 30_000 });
-
-	const etaByTripAndStop = useMemo(() => {
-		const etaMap = new Map<string, UnixTimestamp>();
-		const etaData = Array.isArray(etaResponse?.data) ? etaResponse.data : [];
-		for (const eta of etaData) {
-			if (!eta || typeof eta.trip_id !== 'string' || typeof eta.stop_id !== 'string') continue;
-			const arrivalMs = getEtaArrivalMs(eta);
-			if (arrivalMs === undefined) continue;
-			etaMap.set(`${eta.trip_id}-${eta.stop_id}`, arrivalMs);
-		}
-		return etaMap;
-	}, [etaResponse]);
+	const etaData = Array.isArray(etaResponse?.data) ? etaResponse.data : [];
 
 	/**
 	 * Get associated lines data for the selected stop.
@@ -270,11 +259,10 @@ export const StopsDetailContextProvider = ({ children, stopId }: { children: Rea
 					// Convert GTFS time string to Unix Timestamp
 					const scheduledArrivalMs = convertGTFSTimeStringAndOperationalDateToUnixTimestamp(stopTime.arrival_time, operationalDateContext.data.selected_date.operational_date);
 					// Fetch ETA for this trip and stop, if available.
-					const estimatedArrivalMs = operationalDateContext.flags.is_today_selected
-						? tripData.trip_ids
-							.map(tripId => etaByTripAndStop.get(`${tripId}-${String(stopTime.stop_id)}`))
-							.find(arrivalMs => arrivalMs !== undefined) ?? null
-						: null;
+					const eta = operationalDateContext.flags.is_today_selected
+						? etaData.find(item => item && tripData.trip_ids.includes(item.trip_id) && String(item.stop_id) === String(stopTime.stop_id))
+						: undefined;
+					const estimatedArrivalMs = eta ? getEtaArrivalMs(eta) ?? null : null;
 					// Use scheduled time when no ETA exists.
 					const effectiveArrivalMs = estimatedArrivalMs ?? scheduledArrivalMs;
 					// Detect the position of this stop time in the pattern
@@ -307,7 +295,7 @@ export const StopsDetailContextProvider = ({ children, stopId }: { children: Rea
 		}
 		// Return the timetable data, sorted by scheduled arrival time
 		return timetableDataForSelectedDate.sort((a, b) => a.arrival_effective_ms - b.arrival_effective_ms);
-	}, [validPatternsData, operationalDateContext.data.selected_date, operationalDateContext.flags.is_today_selected, dataActiveStopIdState, etaByTripAndStop, debugContext.flags.is_debug_mode, currentTimestamp]);
+	}, [validPatternsData, operationalDateContext.data.selected_date, operationalDateContext.flags.is_today_selected, dataActiveStopIdState, etaData, debugContext.flags.is_debug_mode, currentTimestamp]);
 
 	useEffect(() => {
 		const updateCurrentTimestamp = () => {

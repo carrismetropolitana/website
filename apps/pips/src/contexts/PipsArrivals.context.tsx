@@ -42,13 +42,6 @@ interface HubEtaByStop {
 	vehicle_id: null | string
 }
 
-interface PreparedEta {
-	arrival_time_unix: number
-	stop_id: string
-	trip_id: string
-	vehicle_id: null | string
-}
-
 interface PipsArrivalsContextState {
 	actions: {
 		revalidate: () => void
@@ -117,35 +110,7 @@ export const PipsArrivalsContextProvider = ({ children }: PropsWithChildren) => 
 		stopIds.length > 0 ? `${getPublicVariable('go_api_url')}/hub/api/v1/realtime/eta` : null,
 		{ refreshInterval: 30000 }, // 30 seconds
 	);
-
-	//
-	// C. Transform data
-
-	const etaMap = useMemo(() => {
-		const map = new Map<string, PreparedEta>();
-		const etaData = Array.isArray(etaResponse?.data) ? etaResponse.data : [];
-
-		for (const eta of etaData) {
-			if (!eta || typeof eta.trip_id !== 'string' || typeof eta.stop_id !== 'string' || !eta.eta_at) continue;
-
-			const positionCreatedAtMs = Number(eta.position_created_at);
-			const etaSeconds = Number(eta.eta_seconds);
-			const arrivalTimeMs = Number.isFinite(positionCreatedAtMs) && Number.isFinite(etaSeconds)
-				? positionCreatedAtMs + Math.round(etaSeconds) * 1000
-				: Date.parse(eta.eta_at);
-			if (!Number.isFinite(arrivalTimeMs)) continue;
-
-			const key = `${eta.trip_id}-${eta.stop_id}`;
-			map.set(key, {
-				arrival_time_unix: Math.floor(arrivalTimeMs / 1000),
-				stop_id: eta.stop_id,
-				trip_id: eta.trip_id,
-				vehicle_id: eta.vehicle_id ?? null,
-			});
-		}
-
-		return map;
-	}, [etaResponse]);
+	const etaData = Array.isArray(etaResponse?.data) ? etaResponse.data : [];
 
 	const mergedArrivals = useMemo<MergedArrival[]>(() => {
 		if (!patternsData || !stopsPipContext.data.stops.length || !operationalDateContext.data.selected_date) return [];
@@ -173,9 +138,14 @@ export const PipsArrivalsContextProvider = ({ children }: PropsWithChildren) => 
 					const scheduledArrivalMs = convertGTFSTimeStringAndOperationalDateToUnixTimestamp(stopTime.arrival_time, operationalDateContext.data.selected_date.operational_date);
 					const scheduledArrivalUnix = Math.floor(scheduledArrivalMs / 1000);
 					const eta = operationalDateContext.flags.is_today_selected
-						? tripData.trip_ids.map(tripId => etaMap.get(`${tripId}-${stopTime.stop_id}`)).find(Boolean)
+						? etaData.find(item => item && tripData.trip_ids.includes(item.trip_id) && String(item.stop_id) === String(stopTime.stop_id))
 						: undefined;
-					const estimatedArrivalUnix = eta?.arrival_time_unix ?? null;
+					const estimatedArrivalMs = eta
+						? Number.isFinite(Number(eta.position_created_at)) && Number.isFinite(Number(eta.eta_seconds))
+							? Number(eta.position_created_at) + Math.round(Number(eta.eta_seconds)) * 1000
+							: eta.eta_at ? Date.parse(eta.eta_at) : NaN
+						: NaN;
+					const estimatedArrivalUnix = Number.isFinite(estimatedArrivalMs) ? Math.floor(estimatedArrivalMs / 1000) : null;
 					const warningsMap = new Map<string, ArrivalWarning>();
 					const normalizedStopId = normalizeReferenceId(stop._id);
 					const normalizedLineId = normalizeReferenceId(patternData.line_id);
@@ -242,7 +212,7 @@ export const PipsArrivalsContextProvider = ({ children }: PropsWithChildren) => 
 			.slice(0, 50); // Limit to first 50 arrivals
 
 		return futureArrivals;
-	}, [patternsData, stopsPipContext.data.stops, operationalDateContext.data.selected_date, operationalDateContext.flags.is_today_selected, stopIds, etaMap, alertsContext.actions]);
+	}, [patternsData, stopsPipContext.data.stops, operationalDateContext.data.selected_date, operationalDateContext.flags.is_today_selected, stopIds, etaData, alertsContext.actions]);
 
 	//
 	// D. Define context value
