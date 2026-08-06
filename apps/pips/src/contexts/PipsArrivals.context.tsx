@@ -33,45 +33,20 @@ export interface ArrivalWarning {
 	effect: string
 }
 
-interface TripUpdatesFeed {
-	entity: TripUpdateEntity[]
-	header?: null | {
-		timestamp?: null | number
-	}
-}
-
-interface TripUpdateEntity {
-	trip_update?: null | {
-		stop_time_update?: null | TripUpdateStopTime[]
-		trip: {
-			route_id: string
-			trip_id: string
-		}
-		vehicle?: null | {
-			id?: null | string
-		}
-	}
-}
-
-interface TripUpdateStopTime {
-	arrival?: null | {
-		time?: null | number
-	}
-	stop_id: string
-	stop_sequence?: null | number
-}
-
-interface PreparedTripUpdate {
-	arrival_time_unix: number
+interface HubEtaByStop {
+	eta_at: null | string
+	eta_seconds: null | string
+	position_created_at: null | string
 	stop_id: string
 	trip_id: string
 	vehicle_id: null | string
 }
 
-/* * */
-
-function normalizeTripId(tripId: string) {
-	return tripId.replace(/^\[[^\]]+\](\[[^\]]+\])?/, '');
+interface PreparedEta {
+	arrival_time_unix: number
+	stop_id: string
+	trip_id: string
+	vehicle_id: null | string
 }
 
 interface PipsArrivalsContextState {
@@ -138,43 +113,39 @@ export const PipsArrivalsContextProvider = ({ children }: PropsWithChildren) => 
 		{ refreshInterval: 900000 }, // 15 minutes
 	);
 
-	const { data: tripUpdatesResponse, isLoading: tripUpdatesLoading, mutate: revalidateTripUpdates } = useSWR<GoApiResponse<TripUpdatesFeed>, Error>(
-		stopIds.length > 0 ? `${getPublicVariable('go_api_url')}/hub/api/v1/realtime/trip-updates` : null,
+	const { data: etaResponse, isLoading: etaLoading, mutate: revalidateEta } = useSWR<GoApiResponse<HubEtaByStop[]>, Error>(
+		stopIds.length > 0 ? `${getPublicVariable('go_api_url')}/hub/api/v1/realtime/eta` : null,
 		{ refreshInterval: 30000 }, // 30 seconds
 	);
 
 	//
 	// C. Transform data
 
-	const tripUpdatesMap = useMemo(() => {
-		const map = new Map<string, PreparedTripUpdate>();
-		const tripUpdatesData = tripUpdatesResponse?.data;
-		if (!tripUpdatesData?.entity?.length) return map;
+	const etaMap = useMemo(() => {
+		const map = new Map<string, PreparedEta>();
+		const etaData = Array.isArray(etaResponse?.data) ? etaResponse.data : [];
 
-		const feedTimestamp = tripUpdatesData.header?.timestamp;
-		const isFeedFresh = typeof feedTimestamp === 'number' && Math.abs(DateTime.now().toSeconds() - feedTimestamp) <= 300;
-		if (!isFeedFresh) return map;
+		for (const eta of etaData) {
+			if (!eta || typeof eta.trip_id !== 'string' || typeof eta.stop_id !== 'string' || !eta.eta_at) continue;
 
-		for (const entity of tripUpdatesData.entity) {
-			const tripUpdate = entity.trip_update;
-			if (!tripUpdate?.stop_time_update?.length) continue;
+			const positionCreatedAtMs = Number(eta.position_created_at);
+			const etaSeconds = Number(eta.eta_seconds);
+			const arrivalTimeMs = Number.isFinite(positionCreatedAtMs) && Number.isFinite(etaSeconds)
+				? positionCreatedAtMs + Math.round(etaSeconds) * 1000
+				: Date.parse(eta.eta_at);
+			if (!Number.isFinite(arrivalTimeMs)) continue;
 
-			for (const stopTimeUpdate of tripUpdate.stop_time_update) {
-				const arrivalTime = stopTimeUpdate.arrival?.time;
-				if (!arrivalTime) continue;
-
-				const key = `${normalizeTripId(tripUpdate.trip.trip_id)}-${stopTimeUpdate.stop_id}`;
-				map.set(key, {
-					arrival_time_unix: arrivalTime,
-					stop_id: stopTimeUpdate.stop_id,
-					trip_id: tripUpdate.trip.trip_id,
-					vehicle_id: tripUpdate.vehicle?.id ?? null,
-				});
-			}
+			const key = `${eta.trip_id}-${eta.stop_id}`;
+			map.set(key, {
+				arrival_time_unix: Math.floor(arrivalTimeMs / 1000),
+				stop_id: eta.stop_id,
+				trip_id: eta.trip_id,
+				vehicle_id: eta.vehicle_id ?? null,
+			});
 		}
 
 		return map;
-	}, [tripUpdatesResponse]);
+	}, [etaResponse]);
 
 	const mergedArrivals = useMemo<MergedArrival[]>(() => {
 		if (!patternsData || !stopsPipContext.data.stops.length || !operationalDateContext.data.selected_date) return [];
@@ -201,10 +172,10 @@ export const PipsArrivalsContextProvider = ({ children }: PropsWithChildren) => 
 
 					const scheduledArrivalMs = convertGTFSTimeStringAndOperationalDateToUnixTimestamp(stopTime.arrival_time, operationalDateContext.data.selected_date.operational_date);
 					const scheduledArrivalUnix = Math.floor(scheduledArrivalMs / 1000);
-					const tripUpdate = operationalDateContext.flags.is_today_selected
-						? tripData.trip_ids.map(tripId => tripUpdatesMap.get(`${normalizeTripId(tripId)}-${stopTime.stop_id}`)).find(Boolean)
+					const eta = operationalDateContext.flags.is_today_selected
+						? tripData.trip_ids.map(tripId => etaMap.get(`${tripId}-${stopTime.stop_id}`)).find(Boolean)
 						: undefined;
-					const estimatedArrivalUnix = tripUpdate?.arrival_time_unix ?? null;
+					const estimatedArrivalUnix = eta?.arrival_time_unix ?? null;
 					const warningsMap = new Map<string, ArrivalWarning>();
 					const normalizedStopId = normalizeReferenceId(stop._id);
 					const normalizedLineId = normalizeReferenceId(patternData.line_id);
@@ -246,8 +217,8 @@ export const PipsArrivalsContextProvider = ({ children }: PropsWithChildren) => 
 						stop_long_name: stop.name,
 						stop_sequence: stopTime.stop_sequence,
 						stop_short_name: stop.short_name,
-						trip_id: tripUpdate?.trip_id ?? tripData.trip_ids[0] ?? '',
-						vehicle_id: tripUpdate?.vehicle_id ?? null,
+						trip_id: eta?.trip_id ?? tripData.trip_ids[0] ?? '',
+						vehicle_id: eta?.vehicle_id ?? null,
 						warnings: Array.from(warningsMap.values()),
 					});
 				}
@@ -271,7 +242,7 @@ export const PipsArrivalsContextProvider = ({ children }: PropsWithChildren) => 
 			.slice(0, 50); // Limit to first 50 arrivals
 
 		return futureArrivals;
-	}, [patternsData, stopsPipContext.data.stops, operationalDateContext.data.selected_date, operationalDateContext.flags.is_today_selected, stopIds, tripUpdatesMap, alertsContext.actions]);
+	}, [patternsData, stopsPipContext.data.stops, operationalDateContext.data.selected_date, operationalDateContext.flags.is_today_selected, stopIds, etaMap, alertsContext.actions]);
 
 	//
 	// D. Define context value
@@ -279,16 +250,16 @@ export const PipsArrivalsContextProvider = ({ children }: PropsWithChildren) => 
 	const contextValue: PipsArrivalsContextState = useMemo(() => ({
 		actions: {
 			revalidate: () => {
-				void revalidateTripUpdates();
+				void revalidateEta();
 			},
 		},
 		data: {
 			merged_arrivals: mergedArrivals,
 		},
 		flags: {
-			is_loading: patternsLoading || tripUpdatesLoading || stopsPipContext.flags.is_loading,
+			is_loading: patternsLoading || etaLoading || stopsPipContext.flags.is_loading,
 		},
-	}), [mergedArrivals, patternsLoading, revalidateTripUpdates, stopsPipContext.flags.is_loading, tripUpdatesLoading]);
+	}), [mergedArrivals, patternsLoading, revalidateEta, stopsPipContext.flags.is_loading, etaLoading]);
 
 	//
 	// E. Render components
