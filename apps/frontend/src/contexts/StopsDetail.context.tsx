@@ -1,6 +1,8 @@
 'use client';
 /* * */
 
+import type { GoApiResponse } from '@carrismetropolitana/website-shared-types';
+
 import { useAlertsContext } from '@/contexts/Alerts.context';
 import { useDebugContext } from '@/contexts/Debug.context';
 import { useEnvironmentContext } from '@/contexts/Environment.context';
@@ -8,16 +10,16 @@ import { useLinesContext } from '@/contexts/Lines.context';
 import { useOperationalDateContext } from '@/contexts/OperationalDate.context';
 import { useProfileContext } from '@/contexts/Profile.context';
 import { useStopsContext } from '@/contexts/Stops.context';
-import { useTripUpdatesContext } from '@/contexts/TripUpdates.context';
 import { fetchPatterns } from '@/hooks/fetch-patterns';
 import { normalizeReferenceId } from '@/utils/alerts';
 import { getPublicVariable } from '@carrismetropolitana/website-shared-settings';
 import { Dates } from '@tmlmobilidade/dates';
 import { type HubAlert, type HubLine, type HubPattern, type HubShape, type HubStop } from '@tmlmobilidade/go-types-public-info';
-import { type UnixTimestamp } from '@tmlmobilidade/types';
+import { type UnixTimestamp, validateUnixTimestamp } from '@tmlmobilidade/types';
 import { convertGTFSTimeStringAndOperationalDateToUnixTimestamp } from '@tmlmobilidade/utils';
 import { notFound } from 'next/navigation';
 import { createContext, useContext, useEffect, useMemo, useState } from 'react';
+import useSWR from 'swr';
 
 /* * */
 
@@ -37,6 +39,14 @@ export interface StopsDetailViewTimetableData {
 	stop_sequence: number
 	text_color: string
 	trip_ids: string[]
+}
+
+interface HubEtaByStop {
+	eta_at: null | string
+	eta_seconds: null | string
+	position_created_at: null | string
+	stop_id: string
+	trip_id: string
 }
 
 interface StopsDetailContextState {
@@ -85,7 +95,6 @@ export const StopsDetailContextProvider = ({ children, stopId }: { children: Rea
 	const alertsContext = useAlertsContext();
 	const profileContext = useProfileContext();
 	const operationalDateContext = useOperationalDateContext();
-	const tripUpdatesContext = useTripUpdatesContext();
 	const debugContext = useDebugContext();
 	const environmentContext = useEnvironmentContext();
 	const [dataActiveStopIdState, setDataActiveStopIdState] = useState<string>(stopId);
@@ -99,10 +108,28 @@ export const StopsDetailContextProvider = ({ children, stopId }: { children: Rea
 	//
 	// B. Fetch data
 
+	function getEtaArrivalMs(eta: HubEtaByStop): undefined | UnixTimestamp {
+		if (!eta.eta_at) return;
+
+		if (Number.isFinite(Number(eta.position_created_at)) && Number.isFinite(Number(eta.eta_seconds))) {
+			return validateUnixTimestamp(Number(eta.position_created_at) + Math.round(Number(eta.eta_seconds)) * 1000);
+		}
+
+		return validateUnixTimestamp(Date.parse(eta.eta_at));
+	}
+
 	const selectedStopData = useMemo(() => {
 		if (!dataActiveStopIdState || !stopsContext.data.stops?.length) return;
 		return stopsContext.actions.getStopById(dataActiveStopIdState);
 	}, [dataActiveStopIdState, stopsContext.data.stops, stopsContext.actions]);
+
+	/**
+	 * Fetch associate estimates
+	 */
+
+	const etaApiUrl = operationalDateContext.flags.is_today_selected && dataActiveStopIdState ? `${getPublicVariable('go_api_url')}/hub/api/v1/realtime/eta/by-stop/${encodeURIComponent(dataActiveStopIdState)}` : null;
+	const { data: etaResponse } = useSWR<GoApiResponse<HubEtaByStop[]>, Error>(etaApiUrl, { refreshInterval: 30_000 });
+	const etaData = Array.isArray(etaResponse?.data) ? etaResponse.data : [];
 
 	/**
 	 * Get associated lines data for the selected stop.
@@ -237,19 +264,20 @@ export const StopsDetailContextProvider = ({ children, stopId }: { children: Rea
 					const uniqueIdValueForArrivalData = `${operationalDateContext.data.selected_date.operational_date}-${patternData.version_id}-${tripData.version_id}-${stopTime.stop_id}-${stopTime.stop_sequence}-${stopTime.arrival_time}`;
 					// Convert GTFS time string to Unix Timestamp
 					const scheduledArrivalMs = convertGTFSTimeStringAndOperationalDateToUnixTimestamp(stopTime.arrival_time, operationalDateContext.data.selected_date.operational_date);
-					// Fetch the trip update for this stop time
-					const tripUpdate = tripUpdatesContext.actions.getTripUpdateForStop(tripData.trip_ids, stopTime.stop_id);
-					// Extract the arrival time, delay and effective arrival time
-					// from the trip update, if any was found
-					const estimatedArrivalMs = tripUpdate?.arrival_time;
-					const effectiveArrivalMs = estimatedArrivalMs || scheduledArrivalMs;
+					// Fetch ETA for this trip and stop, if available.
+					const eta = operationalDateContext.flags.is_today_selected
+						? etaData.find(item => item && tripData.trip_ids.includes(item.trip_id) && String(item.stop_id) === String(stopTime.stop_id))
+						: undefined;
+					const estimatedArrivalMs = eta ? getEtaArrivalMs(eta) ?? null : null;
+					// Use scheduled time when no ETA exists.
+					const effectiveArrivalMs = estimatedArrivalMs ?? scheduledArrivalMs;
 					// Detect the position of this stop time in the pattern
 					const isLastStop = stopTime.stop_sequence === patternData.path[patternData.path.length - 1].stop_sequence;
 					// When debug is off, skip last-stop arrivals (show them only in debug mode).
 					if (!debugContext.flags.is_debug_mode && isLastStop) continue;
 					// Detect the temporal status of this stop time
 					const isPast = effectiveArrivalMs < currentTimestamp;
-					const isRealtime = !!estimatedArrivalMs && operationalDateContext.flags.is_today_selected;
+					const isRealtime = estimatedArrivalMs !== null && operationalDateContext.flags.is_today_selected;
 					// Add this stop time to the timetable array
 					timetableDataForSelectedDate.push({
 						_id: uniqueIdValueForArrivalData,
@@ -273,7 +301,7 @@ export const StopsDetailContextProvider = ({ children, stopId }: { children: Rea
 		}
 		// Return the timetable data, sorted by scheduled arrival time
 		return timetableDataForSelectedDate.sort((a, b) => a.arrival_effective_ms - b.arrival_effective_ms);
-	}, [validPatternsData, operationalDateContext.data.selected_date, operationalDateContext.flags.is_today_selected, dataActiveStopIdState, tripUpdatesContext.actions, debugContext.flags.is_debug_mode, currentTimestamp]);
+	}, [validPatternsData, operationalDateContext.data.selected_date, operationalDateContext.flags.is_today_selected, dataActiveStopIdState, etaData, debugContext.flags.is_debug_mode, currentTimestamp]);
 
 	useEffect(() => {
 		const updateCurrentTimestamp = () => {

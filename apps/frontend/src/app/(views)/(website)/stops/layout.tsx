@@ -1,7 +1,6 @@
 /* * */
 
 import { StopsListContextProvider } from '@/contexts/StopsList.context';
-import { TripUpdatesContextProvider } from '@/contexts/TripUpdates.context';
 import { type Metadata } from 'next';
 
 /* * */
@@ -16,9 +15,7 @@ export const metadata: Metadata = {
 export default function Layout({ children }) {
 	return (
 		<StopsListContextProvider>
-			<TripUpdatesContextProvider>
-				{children}
-			</TripUpdatesContextProvider>
+			{children}
 		</StopsListContextProvider>
 	);
 }

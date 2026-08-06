@@ -33,45 +33,13 @@ export interface ArrivalWarning {
 	effect: string
 }
 
-interface TripUpdatesFeed {
-	entity: TripUpdateEntity[]
-	header?: null | {
-		timestamp?: null | number
-	}
-}
-
-interface TripUpdateEntity {
-	trip_update?: null | {
-		stop_time_update?: null | TripUpdateStopTime[]
-		trip: {
-			route_id: string
-			trip_id: string
-		}
-		vehicle?: null | {
-			id?: null | string
-		}
-	}
-}
-
-interface TripUpdateStopTime {
-	arrival?: null | {
-		time?: null | number
-	}
-	stop_id: string
-	stop_sequence?: null | number
-}
-
-interface PreparedTripUpdate {
-	arrival_time_unix: number
+interface HubEtaByStop {
+	eta_at: null | string
+	eta_seconds: null | string
+	position_created_at: null | string
 	stop_id: string
 	trip_id: string
 	vehicle_id: null | string
-}
-
-/* * */
-
-function normalizeTripId(tripId: string) {
-	return tripId.replace(/^\[[^\]]+\](\[[^\]]+\])?/, '');
 }
 
 interface PipsArrivalsContextState {
@@ -138,43 +106,11 @@ export const PipsArrivalsContextProvider = ({ children }: PropsWithChildren) => 
 		{ refreshInterval: 900000 }, // 15 minutes
 	);
 
-	const { data: tripUpdatesResponse, isLoading: tripUpdatesLoading, mutate: revalidateTripUpdates } = useSWR<GoApiResponse<TripUpdatesFeed>, Error>(
-		stopIds.length > 0 ? `${getPublicVariable('go_api_url')}/hub/api/v1/realtime/trip-updates` : null,
+	const { data: etaResponse, isLoading: etaLoading, mutate: revalidateEta } = useSWR<GoApiResponse<HubEtaByStop[]>, Error>(
+		stopIds.length > 0 ? `${getPublicVariable('go_api_url')}/hub/api/v1/realtime/eta` : null,
 		{ refreshInterval: 30000 }, // 30 seconds
 	);
-
-	//
-	// C. Transform data
-
-	const tripUpdatesMap = useMemo(() => {
-		const map = new Map<string, PreparedTripUpdate>();
-		const tripUpdatesData = tripUpdatesResponse?.data;
-		if (!tripUpdatesData?.entity?.length) return map;
-
-		const feedTimestamp = tripUpdatesData.header?.timestamp;
-		const isFeedFresh = typeof feedTimestamp === 'number' && Math.abs(DateTime.now().toSeconds() - feedTimestamp) <= 300;
-		if (!isFeedFresh) return map;
-
-		for (const entity of tripUpdatesData.entity) {
-			const tripUpdate = entity.trip_update;
-			if (!tripUpdate?.stop_time_update?.length) continue;
-
-			for (const stopTimeUpdate of tripUpdate.stop_time_update) {
-				const arrivalTime = stopTimeUpdate.arrival?.time;
-				if (!arrivalTime) continue;
-
-				const key = `${normalizeTripId(tripUpdate.trip.trip_id)}-${stopTimeUpdate.stop_id}`;
-				map.set(key, {
-					arrival_time_unix: arrivalTime,
-					stop_id: stopTimeUpdate.stop_id,
-					trip_id: tripUpdate.trip.trip_id,
-					vehicle_id: tripUpdate.vehicle?.id ?? null,
-				});
-			}
-		}
-
-		return map;
-	}, [tripUpdatesResponse]);
+	const etaData = Array.isArray(etaResponse?.data) ? etaResponse.data : [];
 
 	const mergedArrivals = useMemo<MergedArrival[]>(() => {
 		if (!patternsData || !stopsPipContext.data.stops.length || !operationalDateContext.data.selected_date) return [];
@@ -201,10 +137,15 @@ export const PipsArrivalsContextProvider = ({ children }: PropsWithChildren) => 
 
 					const scheduledArrivalMs = convertGTFSTimeStringAndOperationalDateToUnixTimestamp(stopTime.arrival_time, operationalDateContext.data.selected_date.operational_date);
 					const scheduledArrivalUnix = Math.floor(scheduledArrivalMs / 1000);
-					const tripUpdate = operationalDateContext.flags.is_today_selected
-						? tripData.trip_ids.map(tripId => tripUpdatesMap.get(`${normalizeTripId(tripId)}-${stopTime.stop_id}`)).find(Boolean)
+					const eta = operationalDateContext.flags.is_today_selected
+						? etaData.find(item => item && tripData.trip_ids.includes(item.trip_id) && String(item.stop_id) === String(stopTime.stop_id))
 						: undefined;
-					const estimatedArrivalUnix = tripUpdate?.arrival_time_unix ?? null;
+					const estimatedArrivalMs = eta
+						? Number.isFinite(Number(eta.position_created_at)) && Number.isFinite(Number(eta.eta_seconds))
+							? Number(eta.position_created_at) + Math.round(Number(eta.eta_seconds)) * 1000
+							: eta.eta_at ? Date.parse(eta.eta_at) : NaN
+						: NaN;
+					const estimatedArrivalUnix = Number.isFinite(estimatedArrivalMs) ? Math.floor(estimatedArrivalMs / 1000) : null;
 					const warningsMap = new Map<string, ArrivalWarning>();
 					const normalizedStopId = normalizeReferenceId(stop._id);
 					const normalizedLineId = normalizeReferenceId(patternData.line_id);
@@ -246,8 +187,8 @@ export const PipsArrivalsContextProvider = ({ children }: PropsWithChildren) => 
 						stop_long_name: stop.name,
 						stop_sequence: stopTime.stop_sequence,
 						stop_short_name: stop.short_name,
-						trip_id: tripUpdate?.trip_id ?? tripData.trip_ids[0] ?? '',
-						vehicle_id: tripUpdate?.vehicle_id ?? null,
+						trip_id: eta?.trip_id ?? tripData.trip_ids[0] ?? '',
+						vehicle_id: eta?.vehicle_id ?? null,
 						warnings: Array.from(warningsMap.values()),
 					});
 				}
@@ -271,7 +212,7 @@ export const PipsArrivalsContextProvider = ({ children }: PropsWithChildren) => 
 			.slice(0, 50); // Limit to first 50 arrivals
 
 		return futureArrivals;
-	}, [patternsData, stopsPipContext.data.stops, operationalDateContext.data.selected_date, operationalDateContext.flags.is_today_selected, stopIds, tripUpdatesMap, alertsContext.actions]);
+	}, [patternsData, stopsPipContext.data.stops, operationalDateContext.data.selected_date, operationalDateContext.flags.is_today_selected, stopIds, etaData, alertsContext.actions]);
 
 	//
 	// D. Define context value
@@ -279,16 +220,16 @@ export const PipsArrivalsContextProvider = ({ children }: PropsWithChildren) => 
 	const contextValue: PipsArrivalsContextState = useMemo(() => ({
 		actions: {
 			revalidate: () => {
-				void revalidateTripUpdates();
+				void revalidateEta();
 			},
 		},
 		data: {
 			merged_arrivals: mergedArrivals,
 		},
 		flags: {
-			is_loading: patternsLoading || tripUpdatesLoading || stopsPipContext.flags.is_loading,
+			is_loading: patternsLoading || etaLoading || stopsPipContext.flags.is_loading,
 		},
-	}), [mergedArrivals, patternsLoading, revalidateTripUpdates, stopsPipContext.flags.is_loading, tripUpdatesLoading]);
+	}), [mergedArrivals, patternsLoading, revalidateEta, stopsPipContext.flags.is_loading, etaLoading]);
 
 	//
 	// E. Render components
