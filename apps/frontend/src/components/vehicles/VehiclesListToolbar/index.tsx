@@ -54,7 +54,7 @@ export function VehiclesListToolbar() {
 				group: make,
 				items: Array
 					.from(models)
-					.map(model => ({ label: `${make} - ${model}`, value: `${make}-${model}` }))
+					.map(model => ({ label: `${make} - ${model}`, value: `${make.replaceAll('-', '')}-${model.replaceAll('-', '')}` })) // discards dashes from make/model to not break the filter in VehicleFilter - it won't accept any make/model with dashes in it as it separates the make/model by splitting the string where the first '-' is
 					.sort((a, b) => a.label.localeCompare(b.label)),
 			}))
 			.sort((a, b) => a.group.localeCompare(b.group));

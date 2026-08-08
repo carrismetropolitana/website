@@ -114,8 +114,8 @@ export const VehiclesListContextProvider = ({ children }) => {
 			filterResult = filterResult.filter((item) => {
 				return makeModelValues.some((val) => {
 					const [makeFilter, modelFilter] = val.split('-').map(s => s.trim().toLowerCase());
-					const itemMake = item.make?.toLowerCase() || '';
-					const itemModel = item.model?.toLowerCase() || '';
+					const itemMake = item.make?.toLowerCase().replaceAll('-', '') || ''; // discards dashes from make/model to be inline with the filter, and as these aren't really necessary. mercedes-benz becomes mercedesbenz and there won't be a model with dashes in its name
+					const itemModel = item.model?.toLowerCase().replaceAll('-', '') || '';
 					return itemMake.includes(makeFilter) && itemModel.includes(modelFilter);
 				});
 			});
