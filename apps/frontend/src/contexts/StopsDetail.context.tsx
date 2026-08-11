@@ -261,10 +261,8 @@ export const StopsDetailContextProvider = ({ children, stopId }: { children: Rea
 					// Extract the arrival time, delay and effective arrival time
 					// from the trip update, if any was found
 					const estimatedArrivalMs = eta?.eta_at;
-					const arrivalDelayMs = eta?.eta_seconds * 1000;
 					const effectiveArrivalMs = estimatedArrivalMs || scheduledArrivalMs;
 					// Detect the position of this stop time in the pattern
-					const isFirstStop = stopTime.stop_sequence === patternData.path[0].stop_sequence;
 					const isLastStop = stopTime.stop_sequence === patternData.path[patternData.path.length - 1].stop_sequence;
 					// When debug is off, skip last-stop arrivals (show them only in debug mode).
 					if (!debugContext.flags.is_debug_mode && isLastStop) continue;
