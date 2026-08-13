@@ -1,11 +1,12 @@
 'use client';
 /* * */
+import type { Line } from '@carrismetropolitana/api-types/network';
+
 import { LineDisplay } from '@/components/lines/LineDisplay';
 import { useLinesContext } from '@/contexts/Lines.context';
 import { $createTextNode, $getSelection, $isRangeSelection } from '@payloadcms/richtext-lexical/lexical';
 import { useLexicalComposerContext } from '@payloadcms/richtext-lexical/lexical/react/LexicalComposerContext';
 import { LexicalTypeaheadMenuPlugin, MenuOption, type MenuRenderFn, type TriggerFn } from '@payloadcms/richtext-lexical/lexical/react/LexicalTypeaheadMenuPlugin';
-import { type HubLine } from '@tmlmobilidade/go-types-public-info';
 import React, { useMemo, useState } from 'react';
 import * as ReactDOM from 'react-dom';
 
@@ -20,15 +21,15 @@ const MAX_QUERY_LENGTH = 50;
 /* * */
 
 class MentionOption extends MenuOption {
-	line: HubLine;
-	constructor(line: HubLine) {
-		super(line._id);
+	line: Line;
+	constructor(line: Line) {
+		super(line.id);
 		this.line = line;
 	}
 }
 
-function getOptionLabel(line: HubLine) {
-	return line.short_name || line._id;
+function getOptionLabel(line: Line) {
+	return line.short_name || line.id;
 }
 
 export function MentionTypeaheadPlugin() {
@@ -51,7 +52,7 @@ export function MentionTypeaheadPlugin() {
 		const filtered = linesContext.data.lines.filter((line) => {
 			const short = (line.short_name || '').toLowerCase();
 			const long = (line.long_name || '').toLowerCase();
-			const id = (line._id || '').toLowerCase();
+			const id = (line.id || '').toLowerCase();
 			return short.includes(q) || long.includes(q) || id.includes(q);
 		});
 
@@ -142,7 +143,7 @@ export function MentionTypeaheadPlugin() {
 					if (!mentionTextNode) return;
 
 					const label = getOptionLabel(option.line);
-					const mentionNode = $createMentionNode(option.line._id, label);
+					const mentionNode = $createMentionNode(option.line.id, label);
 
 					mentionTextNode.replace(mentionNode);
 					mentionNode.insertAfter($createTextNode(' '));

@@ -31,7 +31,7 @@ export function LinesDetailMetricsDemand() {
 	//
 	// B. Fetch data
 
-	const { data: line } = useLineData(linesDetailContext.data?.line?._id || null, startDate, endDate);
+	const { data: line } = useLineData(linesDetailContext.data?.line?.id || null, startDate, endDate);
 
 	//
 	// C. Transform data

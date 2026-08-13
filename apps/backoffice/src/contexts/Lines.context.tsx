@@ -2,11 +2,8 @@
 
 /* * */
 
-import type { GoApiResponse } from '@carrismetropolitana/website-shared-types';
-
-import { useFilterByAgencyIds } from '@/hooks/useFilterByAgencyIds';
+import { type Line } from '@carrismetropolitana/api-types/network';
 import { getPublicVariable } from '@carrismetropolitana/website-shared-settings';
-import { type HubLine } from '@tmlmobilidade/go-types-public-info';
 import { createContext, type ReactNode, useContext, useMemo } from 'react';
 import useSWR from 'swr';
 
@@ -14,10 +11,10 @@ import useSWR from 'swr';
 
 interface LinesContextState {
 	actions: {
-		getLineDataById: (lineId: string) => HubLine | undefined
+		getLineDataById: (lineId: string) => Line | undefined
 	}
 	data: {
-		lines: HubLine[]
+		lines: Line[]
 	}
 	flags: {
 		is_loading: boolean
@@ -44,14 +41,13 @@ export const LinesContextProvider = ({ children }: { children: ReactNode }) => {
 	//
 	// A. Fetch data
 
-	const { data: allLinesResponse, isLoading: allLinesLoading } = useSWR<GoApiResponse<HubLine[]>, Error>(`${getPublicVariable('go_api_url')}/hub/api/v1/network/lines`, { refreshInterval: 900000 }); // 15 minutes
-	const allLinesData = useFilterByAgencyIds(allLinesResponse, { dataType: 'line' }).data;
+	const { data: allLinesData, isLoading: allLinesLoading } = useSWR<Line[], Error>(`${getPublicVariable('api_url')}/lines`, { refreshInterval: 900000 }); // 15 minutes
 
 	//
 	// B. Handle actions
 
 	const getLineDataById = (lineId: string) => {
-		return allLinesData?.find(line => line._id === lineId);
+		return allLinesData?.find(line => line.id === lineId);
 	};
 
 	//

@@ -38,7 +38,7 @@ export function StopsDetailHeader() {
 	const handleToggleFavorite = () => {
 		if (!stopsDetailContext.data.stop) return;
 		try {
-			profileContext.actions.toggleFavoriteStop(String(stopsDetailContext.data.stop._id));
+			profileContext.actions.toggleFavoriteStop(stopsDetailContext.data.stop.id);
 		}
 		catch (error) {
 			toast.error({ message: 'Error: ' + error.message });
@@ -63,20 +63,20 @@ export function StopsDetailHeader() {
 
 				<div className={styles.badgesWrapper}>
 					<CopyBadge
-						label={'#' + stopsDetailContext.data.stop.flags[0]?.stop_id}
-						value={stopsDetailContext.data.stop.flags[0]?.stop_id}
+						label={'#' + stopsDetailContext.data.stop.id}
+						value={stopsDetailContext.data.stop.id}
 					/>
 					<CopyBadge
 						hasBorder={false}
-						label={`${stopsDetailContext.data.stop.latitude}, ${stopsDetailContext.data.stop.longitude}`}
-						value={stopsDetailContext.data.stop.latitude + ',' + stopsDetailContext.data.stop.longitude}
+						label={`${stopsDetailContext.data.stop.lat}, ${stopsDetailContext.data.stop.lon}`}
+						value={stopsDetailContext.data.stop.lat + ',' + stopsDetailContext.data.stop.lon}
 					/>
 				</div>
 
 				<div className={styles.headingWrapper}>
 					<div className={styles.nameWrapper}>
-						<StopDisplayName longName={stopsDetailContext.data.stop.name} size="lg" />
-						<StopDisplayTts stopId={stopsDetailContext.data.stop._id.toString()} />
+						<StopDisplayName longName={stopsDetailContext.data.stop.long_name} size="lg" />
+						<StopDisplayTts stopId={stopsDetailContext.data.stop.id} />
 						{!isMupi && <FavoriteToggle color="var(--color-brand)" isActive={stopsDetailContext.flags.is_favorite} onToggle={handleToggleFavorite} />}
 					</div>
 					<StopDisplayLocation localityName={stopsDetailContext.data.stop.locality_name} municipalityName={stopsDetailContext.data.stop.municipality_name} size="lg" />
@@ -86,19 +86,19 @@ export function StopsDetailHeader() {
 
 			<Section>
 				<div className={styles.iconsWrapper}>
-					{stopsDetailContext.data.stop.flags.length > 0 && (
+					{stopsDetailContext.data.stop.facilities.length > 0 && (
 						<>
-							{stopsDetailContext.data.stop.flags.map((facility, index) => (
+							{stopsDetailContext.data.stop.facilities.map((facility, index) => (
 								<div key={index} className={styles.iconFacilityWrapper}>
-									<IconDisplay key={facility.short_name} category="facilities" name={facility.short_name} />
+									<IconDisplay key={facility} category="facilities" name={facility} />
 								</div>
 							))}
 							<div className={styles.iconsDivider} />
 						</>
 					)}
 					{stopsDetailContext.data.lines && stopsDetailContext.data.lines.map(line => (
-						<div key={line._id} className={styles.iconLineBadgeWrapper}>
-							<LineBadge key={line._id} lineData={line} />
+						<div key={line.id} className={styles.iconLineBadgeWrapper}>
+							<LineBadge key={line.id} lineData={line} />
 						</div>
 					))}
 				</div>

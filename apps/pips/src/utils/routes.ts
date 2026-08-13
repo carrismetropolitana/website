@@ -1,5 +1,3 @@
-import { getPublicVariable } from '@carrismetropolitana/website-shared-settings';
-
 export const RoutesSupport = Object.freeze({
 	COMPLAINTS: {
 		intl: {
@@ -69,7 +67,7 @@ export const Routes = Object.freeze({
 	...RoutesSupport,
 	...RoutesLostAndFound,
 
-	API: process.env.NEXT_PUBLIC_API_URL ?? getPublicVariable('go_api_url'),
+	API: process.env.NEXT_PUBLIC_API_URL ?? 'https://api.carrismetropolitana.pt/v2',
 	API_ACCOUNTS: process.env.ACCOUNTS_API_URL ?? 'https:://accounts.carrismetropolitana.pt',
 	METRICS: {
 		intl: {

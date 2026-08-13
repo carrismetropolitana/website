@@ -7,10 +7,10 @@ import { useLinesContext } from '@/contexts/Lines.context';
 import { useOperationalDateContext } from '@/contexts/OperationalDate.context';
 import { useProfileContext } from '@/contexts/Profile.context';
 import { useStopsContext } from '@/contexts/Stops.context';
-import { normalizeReferenceId } from '@/utils/alerts';
+import { type SimplifiedAlert } from '@/types/alerts.types';
 import { type ServiceMetrics } from '@carrismetropolitana/api-types/metrics';
-import { CARRIS_METROPOLITANA_NUMERIC_AGENCY_IDS, getPublicVariable } from '@carrismetropolitana/website-shared-settings';
-import { type HubAlert, type HubLine, type HubPattern, type HubRoute, type HubShape, type HubWaypoint } from '@tmlmobilidade/go-types-public-info';
+import { type Line, type Pattern, type Route, type Shape, type Waypoint } from '@carrismetropolitana/api-types/network';
+import { getPublicVariable } from '@carrismetropolitana/website-shared-settings';
 import { useQueryState } from 'nuqs';
 import { createContext, useContext, useEffect, useState } from 'react';
 
@@ -23,16 +23,16 @@ interface LinesDetailContextState {
 		setHighlightedTripIds: (tripIds: string[]) => void
 	}
 	data: {
-		active_alerts: HubAlert[] | undefined
-		active_pattern: HubPattern | null
-		active_shape: HubShape | null
-		active_waypoint: HubWaypoint | null
-		all_patterns: HubPattern[][] | null
+		active_alerts: SimplifiedAlert[] | undefined
+		active_pattern: null | Pattern
+		active_shape: null | Shape
+		active_waypoint: null | Waypoint
+		all_patterns: null | Pattern[][]
 		highlighted_trip_ids: null | string[]
-		line: HubLine | undefined
-		routes: HubRoute[]
+		line: Line | undefined
+		routes: Route[]
 		service_metrics: ServiceMetrics[]
-		valid_patterns: HubPattern[] | undefined
+		valid_patterns: Pattern[] | undefined
 	}
 	filters: {
 		active_pattern_id: null | string
@@ -45,6 +45,8 @@ interface LinesDetailContextState {
 		is_loading: boolean
 	}
 }
+
+/* * */
 
 const LinesDetailContext = createContext<LinesDetailContextState | undefined>(undefined);
 
@@ -110,35 +112,39 @@ export const LinesDetailContextProvider = ({ children, lineId }) => {
 
 	useEffect(() => {
 		if (!dataLineState || !dataLineState.route_ids) return;
-		const routesData = dataLineState.route_ids.map((routeId) => {
+		dataLineState.route_ids.forEach((routeId) => {
 			const routeData = linesContext.actions.getRouteDataById(routeId);
-			if (!routeData) return null;
-			return routeData;
-		}).filter((routeData): routeData is HubRoute => routeData !== null);
-		setDataRoutesState(routesData);
+			if (!routeData) return;
+			setDataRoutesState(prev => [...prev, routeData]);
+		});
 	}, [dataLineState, linesContext.data.routes]);
 
 	useEffect(() => {
 		(async () => {
 			try {
 				if (!dataLineState) return;
-				const fetchPromises = dataLineState.pattern_ids.map(async (patternId) => {
-					const response = await fetch(`${getPublicVariable('go_api_url')}/hub/api/v1/network/patterns/${encodeURIComponent(patternId)}`);
-					if (!response.ok) {
-						console.log(`Failed to fetch pattern data for patternId: ${patternId}`);
-						return null;
-					}
-					const patternPayload = await response.json() as HubPattern[] | { data?: HubPattern[] };
-					return Array.isArray(patternPayload) ? patternPayload : patternPayload.data ?? [];
+				const fetchPromises = dataLineState.pattern_ids.map((patternId) => {
+					return fetch(`${getPublicVariable('api_url')}/patterns/${patternId}`)
+						.then(response => response.json())
+						.then((patternData) => {
+							return patternData.map((patternGroup) => {
+								patternGroup.path = patternGroup.path.map((waypoint) => {
+									const stopData = stopsContext.actions.getStopById(waypoint.stop_id);
+									if (!stopData) return waypoint;
+									return { ...waypoint, stop: stopData };
+								});
+								return patternGroup;
+							});
+						});
 				});
-				const resultData = (await Promise.all(fetchPromises)).filter((patternData): patternData is HubPattern[] => patternData !== null);
+				const resultData = await Promise.all(fetchPromises);
 				setDataAllPatternsState(resultData);
 			}
 			catch (error) {
 				console.error('Error fetching pattern data:', error);
 			}
 		})();
-	}, [dataLineState]);
+	}, [dataLineState, stopsContext.data.stops]);
 
 	/**
 	 * TASK: Fetch shape data for the active pattern.
@@ -148,11 +154,10 @@ export const LinesDetailContextProvider = ({ children, lineId }) => {
 		if (!dataActivePatternState) return;
 		(async () => {
 			try {
-				const shapePayload = await fetch(`${getPublicVariable('go_api_url')}/hub/api/v1/network/shapes/${encodeURIComponent(dataActivePatternState.shape_id)}`).then((response) => {
+				const shapeData = await fetch(`${getPublicVariable('api_url')}/shapes/${dataActivePatternState.shape_id}`).then((response) => {
 					if (!response.ok) console.log(`Failed to fetch shape data for shapeId: ${dataActivePatternState.shape_id}`);
 					else return response.json();
-				}) as HubShape | undefined | { data?: HubShape };
-				const shapeData: HubShape | undefined = shapePayload && 'data' in shapePayload ? shapePayload.data : shapePayload as HubShape | undefined;
+				});
 				if (shapeData) {
 					shapeData.geojson = {
 						...shapeData.geojson,
@@ -175,13 +180,14 @@ export const LinesDetailContextProvider = ({ children, lineId }) => {
 
 	useEffect(() => {
 		if (!dataAllPatternsState || !operationalDateContext.data.selected_date) return;
-		const selectedDate = operationalDateContext.data.selected_date.operational_date;
-		if (!selectedDate) return;
-		const activePatterns: HubPattern[] = [];
+		const activePatterns: Pattern[] = [];
 		for (const pattern of dataAllPatternsState) {
 			let closestDateSoFar: string = null;
-			let patternGroupWithClosestDate: HubPattern = null;
+			let patternGroupWithClosestDate: Pattern = null;
 			for (const patternGroup of pattern) {
+				const selectedDate = operationalDateContext.data.selected_date.operational_date;
+				if (!selectedDate) return;
+				// Find the closest valid date
 				const closestDate = patternGroup.valid_on.reduce((acc, curr) => {
 					if (selectedDate <= curr && (acc === '' || curr < acc)) return curr;
 					return acc;
@@ -192,44 +198,48 @@ export const LinesDetailContextProvider = ({ children, lineId }) => {
 					closestDateSoFar = closestDate;
 				}
 			}
-			if (patternGroupWithClosestDate && !activePatterns.find(activePattern => activePattern._id === patternGroupWithClosestDate._id)) {
+			// If the closest date is valid, add the pattern group to the list
+			if (patternGroupWithClosestDate && !activePatterns.find(activePattern => activePattern.id === patternGroupWithClosestDate.id)) {
 				activePatterns.push(patternGroupWithClosestDate);
 			}
 		}
-		const sortedPatterns = activePatterns.sort((a, b) => a._id.localeCompare(b._id));
+		const sortedPatterns = activePatterns.sort((a, b) => a.id.localeCompare(b.id));
 		setDataValidPatternsState(sortedPatterns);
 	}, [dataAllPatternsState, operationalDateContext.data.selected_date]);
 
 	useEffect(() => {
-		if (!alertsContext.data.alerts || !operationalDateContext.data.selected_date) return;
+		if (!alertsContext.data.simplified) return;
 
-		const normalizedLineId = normalizeReferenceId(lineId);
-		const lineAgencyId = dataLineState?.agency_id?.trim();
-		const lineAgencyIds = new Set([lineAgencyId, lineAgencyId ? CARRIS_METROPOLITANA_NUMERIC_AGENCY_IDS[lineAgencyId] : undefined].filter((agencyId): agencyId is string => Boolean(agencyId)));
-
-		const activeAlerts = alertsContext.data.alerts.filter((alertData) => {
-			const isActive = alertData.active_period_end_date ? alertData.active_period_end_date >= operationalDateContext.data.selected_date.set({ hour: 0, millisecond: 0, minute: 0, second: 0 }).js_date.getTime() : true;
+		const activeAlerts = alertsContext.data.simplified.filter((simplifiedAlertData) => {
+			const isActive = (simplifiedAlertData.end_date && !isNaN(simplifiedAlertData.end_date.getTime())) ? new Date(simplifiedAlertData.end_date).getTime() >= new Date().getTime() : true;
 
 			if (!isActive) return false;
 
-			return alertData.references.some((reference) => {
-				const informedAgencyId = alertData.agency_id?.trim();
-				const informedAgencyIds = new Set([informedAgencyId, informedAgencyId ? CARRIS_METROPOLITANA_NUMERIC_AGENCY_IDS[informedAgencyId] : undefined].filter((agencyId): agencyId is string => Boolean(agencyId)));
-				const agencyOk = !informedAgencyId || !lineAgencyIds.size || [...informedAgencyIds].some(agencyId => lineAgencyIds.has(agencyId));
+			return simplifiedAlertData.informed_entity.some((informedEntity) => {
+				const normalizedLineId = lineId?.trim();
+				const lineOperatorDigit = normalizedLineId?.match(/\d/)?.[0];
+				const informedAgencyId = informedEntity.agency_id?.trim();
+				const informedOperatorDigit = informedAgencyId?.slice(-1);
+				const hasMatchingArea = informedOperatorDigit != null && lineOperatorDigit != null && informedOperatorDigit === lineOperatorDigit;
+				const areaOk = !informedAgencyId || hasMatchingArea;
 
-				if (!agencyOk) return false;
+				if (!areaOk) return false;
 
-				const parentId = normalizeReferenceId(reference.parent_id);
-				const childIds = reference.child_ids.map(normalizeReferenceId);
+				if (informedEntity.line_id != null) return informedEntity.line_id.trim() === normalizedLineId;
 
-				const hasMatchingLine = parentId === normalizedLineId || childIds.includes(normalizedLineId);
-				const hasMatchingStop = dataAllPatternsState?.some(pattern => pattern.some(patternGroup => patternGroup.path.some(waypoint => childIds.includes(normalizeReferenceId(waypoint.stop_id)))));
+				if (informedEntity.route_id != null) return dataLineState?.route_ids?.includes(informedEntity.route_id);
 
-				return hasMatchingLine || hasMatchingStop;
+				if (informedEntity.stop_id != null) {
+					return dataAllPatternsState?.some(pattern => pattern.some(patternGroup => patternGroup.path.some(waypoint => waypoint.stop_id === informedEntity.stop_id)));
+				}
+
+				return true;
 			});
 		});
+
 		setDataActiveAlertsState(activeAlerts);
-	}, [alertsContext.data.alerts, lineId, dataLineState, dataAllPatternsState, operationalDateContext.data.selected_date]);
+	}, [alertsContext.data.simplified, lineId, dataLineState, dataAllPatternsState]);
+
 	//
 	// D. Handle actions
 
@@ -252,9 +262,9 @@ export const LinesDetailContextProvider = ({ children, lineId }) => {
 	 */
 	useEffect(() => {
 		// Return early if no patterns are available or no filter value for active_pattern_id
-		if (!dataValidPatternsState || filterActivePatternIdState === null) return;
+		if (!dataValidPatternsState || !filterActivePatternIdState) return;
 		// If there is a filter value for active pattern, set the pattern with that ID
-		const foundActivePatternData = dataValidPatternsState.find(activePattern => activePattern._id === filterActivePatternIdState);
+		const foundActivePatternData = dataValidPatternsState.find(activePattern => activePattern.id === filterActivePatternIdState);
 		if (!foundActivePatternData) return;
 		setDataActivePatternState(foundActivePatternData);
 		//
@@ -314,7 +324,7 @@ export const LinesDetailContextProvider = ({ children, lineId }) => {
 		const foundPatternData = dataValidPatternsState.find(validPattern => validPattern.version_id === patternVersionId);
 		// Update the state
 		if (foundPatternData) {
-			setFilterActivePatternIdState(foundPatternData._id);
+			setFilterActivePatternIdState(foundPatternData.id);
 			setFlagIsInteractiveModeState(false);
 		}
 	};

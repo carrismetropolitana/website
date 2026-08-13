@@ -3,8 +3,8 @@
 /* * */
 
 import { Section } from '@/components/layout/Section';
+import { Line } from '@carrismetropolitana/api-types/network';
 import { Select, Text } from '@mantine/core';
-import { type HubLine } from '@tmlmobilidade/go-types-public-info';
 import { useTranslations } from 'next-intl';
 import { useState } from 'react';
 
@@ -13,7 +13,7 @@ import styles from './styles.module.css';
 /* * */
 
 interface Props {
-	allLines: HubLine[]
+	allLines: Line[]
 	filter_type: (value) => void
 	filter_value: (value) => void
 }
@@ -27,8 +27,8 @@ export function MetricsPageComplaintsToolbar({ allLines, filter_type, filter_val
 	// A. Setup variables
 
 	const t = useTranslations('metrics.MetricsPageComplaintsToolbar');
-	const [line, setLine] = useState<null | string>(null);
-	const [municipality, setMunicipality] = useState<null | string>(null);
+	const [line, setLine] = useState(null);
+	const [municipality, setMunicipality] = useState(null);
 	const AML = [
 		{ label: 'Alcochete', value: '1502' },
 		{ label: 'Almada', value: '1503' },
@@ -52,31 +52,29 @@ export function MetricsPageComplaintsToolbar({ allLines, filter_type, filter_val
 	//
 	// B. Handle actions
 
-	const handleLineChange = (value: null | string) => {
+	const handleLineChange = (value) => {
 		if (municipality) {
 			setMunicipality(null);
 		}
-		if (!value || value === '-') {
+		if (value === '-') {
 			filter_type('global');
-			filter_value('-');
+			filter_value(value);
 			setLine(null);
 		}
 		else {
-			const selectedLine = allLines.find(item => item._id === value);
-			const lineId = selectedLine?.short_name || value;
 			filter_type('line');
-			filter_value(lineId);
+			filter_value(value);
 			setLine(value);
 		}
 	};
 
-	const handleMunicipalityChange = (value: null | string) => {
+	const handleMunicipalityChange = (value) => {
 		if (line) {
 			setLine(null);
 		}
-		if (!value || value === '-') {
+		if (value === '-') {
 			filter_type('global');
-			filter_value('-');
+			filter_value(value);
 			setMunicipality(null);
 		}
 		else {
@@ -94,7 +92,7 @@ export function MetricsPageComplaintsToolbar({ allLines, filter_type, filter_val
 			<Text className={styles.toolbarDescription}>{t('toolbar_desc')}</Text>
 			<div className={styles.toolbarContainer}>
 				<Select
-					data={allLines.map(item => ({ label: `${item._id} - ${item.long_name}`, value: item._id }))}
+					data={allLines.map(item => ({ label: `${item.id} - ${item.long_name}`, value: item.id }))}
 					onChange={_value => handleLineChange(_value)}
 					onClear={() => handleLineChange('-')}
 					placeholder={t('line')}

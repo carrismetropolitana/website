@@ -1,7 +1,7 @@
 /* * */
 
 import { type Timetable } from '@/types/timetables.types';
-import { type HubPattern, type HubRoute } from '@tmlmobilidade/go-types-public-info';
+import { type Pattern, type Route } from '@carrismetropolitana/api-types/network';
 
 /**
  * This function creates a timetable for a set of patterns of a line, for a specific stop and date.
@@ -16,7 +16,7 @@ import { type HubPattern, type HubRoute } from '@tmlmobilidade/go-types-public-i
  * @returns The timetable for the given patterns and stop.
  */
 
-export function createTimetable(primaryPatternGroup: HubPattern, secondaryPatternGroups: HubPattern[], mentionedRoutes: HubRoute[], stopId: string, stopSequence: number, operationalDate: string): Timetable {
+export function createTimetable(primaryPatternGroup: Pattern, secondaryPatternGroups: Pattern[], mentionedRoutes: Route[], stopId: string, stopSequence: number, operationalDate: string): Timetable {
 //
 
 	// 1.
@@ -31,7 +31,7 @@ export function createTimetable(primaryPatternGroup: HubPattern, secondaryPatter
 	// 2.
 	// Extract the currently valid Pattern Group from the primary and secondary patterns.
 	// To check if a pattern is valid for the given date, we need to check if the date is included in the pattern's dates array.
-	const validSecondaryPatternGroups: HubPattern[] = secondaryPatternGroups.flat().filter(patternGroup => patternGroup.valid_on.includes(operationalDate) && patternGroup.direction_id === primaryPatternGroup.direction_id);
+	const validSecondaryPatternGroups: Pattern[] = secondaryPatternGroups.flat().filter(patternGroup => patternGroup.valid_on.includes(operationalDate) && patternGroup.direction_id === primaryPatternGroup.direction_id);
 
 	// 3.
 	// Create the timetable for the primary pattern first
@@ -109,12 +109,12 @@ export function createTimetable(primaryPatternGroup: HubPattern, secondaryPatter
 
 				// Since we're processing secondary Patterns, we have to reuse or create exceptions for each minute entry.
 
-				let existingException = timetableResult.exceptions.find(exception => exception.pattern_id === patternGroup._id);
+				let existingException = timetableResult.exceptions.find(exception => exception.pattern_id === patternGroup.id);
 
 				// Create a new exception if it doesn't exist yet
 
 				if (!existingException) {
-					const mentionedRoute = mentionedRoutes.find(route => route._id === patternGroup.route_id);
+					const mentionedRoute = mentionedRoutes.find(route => route.id === patternGroup.route_id);
 
 					existingException = {
 
@@ -122,7 +122,7 @@ export function createTimetable(primaryPatternGroup: HubPattern, secondaryPatter
 
 						pattern_headsign: patternGroup.headsign,
 
-						pattern_id: patternGroup._id,
+						pattern_id: patternGroup.id,
 
 						pattern_version_id: patternGroup.version_id,
 

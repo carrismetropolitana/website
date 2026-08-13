@@ -2,7 +2,7 @@
 
 /* * */
 
-import type { HubLine } from '@tmlmobilidade/go-types-public-info';
+import type { Line } from '@carrismetropolitana/api-types/network';
 
 import { LineDisplay } from '@/components/lines/LineDisplay';
 import { useProfileContext } from '@/contexts/Profile.context';
@@ -18,7 +18,7 @@ import styles from './styles.module.css';
 /* * */
 
 interface SelectLineProps {
-	data: HubLine[]
+	data: Line[]
 	label?: string
 	nothingFound?: string
 	onSelectLineId: (lineId: null | string) => void
@@ -45,18 +45,18 @@ export function SelectLine({ data = [], label, nothingFound, onSelectLineId, pla
 	// B. Transform data
 
 	const { search } = useMemo(() => {
-		const boostedData = data.map(item => ({ ...item, boost: profileContext.data.favorite_lines?.includes(item._id) ? true : false }));
+		const boostedData = data.map(item => ({ ...item, boost: profileContext.data.favorite_lines?.includes(item.id) ? true : false }));
 		return createDocCollection(boostedData, {
-			_id: 2,
+			id: 2,
 			locality_ids: 1,
 			long_name: 1,
 			short_name: 1,
 			tts_name: 0.9,
 		});
-	}, [data, profileContext.data.favorite_lines]);
+	}, [data]);
 
 	const selectedLineData = useMemo(() => {
-		return data.find(item => item._id === selectedLineId);
+		return data.find(item => item.id === selectedLineId);
 	}, [selectedLineId, data]);
 
 	//
@@ -151,7 +151,7 @@ export function SelectLine({ data = [], label, nothingFound, onSelectLineId, pla
 					{allLinesDataFilteredBySearchQuery.length === 0
 						? <Combobox.Empty>{nothingFound || t('nothing_found')}</Combobox.Empty>
 						: allLinesDataFilteredBySearchQuery.map(item => (
-							<Combobox.Option key={item._id} className={item._id === selectedLineData?._id ? styles.selected : ''} value={item._id}>
+							<Combobox.Option key={item.id} className={item.id === selectedLineData?.id ? styles.selected : ''} value={item.id}>
 								<div className={styles.comboboxOption}>
 									<LineDisplay lineData={item} />
 								</div>

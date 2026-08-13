@@ -3,8 +3,6 @@
 import type { CollectionConfig } from 'payload';
 
 import { publishedAtField } from '@/fields/published-at';
-import { specialSeriesField } from '@/fields/special-series';
-import { subjectField } from '@/fields/subject';
 import { updatedAtField } from '@/fields/updated-at';
 import { slugify } from '@/utils/slugify';
 
@@ -23,7 +21,6 @@ export const Articles: CollectionConfig = {
 
 	admin: {
 		defaultColumns: ['title', 'status', 'type', 'publishDate'],
-		group: 'CICM',
 		useAsTitle: 'title',
 	},
 
@@ -58,8 +55,33 @@ export const Articles: CollectionConfig = {
 			required: true,
 			type: 'textarea',
 		},
-		subjectField,
-		specialSeriesField,
+		{
+			admin: {
+				position: 'sidebar',
+			},
+			label: 'Tipo',
+			name: 'type',
+			options: [
+				{
+					label: 'Tecnologia',
+					value: 'tecnologia',
+				},
+				{
+					label: 'Operação',
+					value: 'operacao',
+				},
+				{
+					label: 'Sustentabilidade',
+					value: 'sustentabilidade',
+				},
+				{
+					label: 'Comunicação',
+					value: 'comunicacao',
+				},
+			],
+			required: true,
+			type: 'select',
+		},
 		{
 			admin: {
 				description: 'Tempo estimado de leitura em minutos.',
@@ -92,22 +114,17 @@ export const Articles: CollectionConfig = {
 			type: 'text',
 		},
 		{
-			label: 'Conteúdo',
+			admin: {
+				description:
+					'Conteúdo do artigo em formato Markdown. Suporta títulos (##), listas, links, citações e muito mais.',
+			},
+			label: 'Conteúdo (Markdown)',
 			name: 'content',
 			required: true,
-			type: 'richText',
+			type: 'textarea',
 		},
 		{
 			fields: [
-				{
-					admin: {
-						components: {
-							Field: '@/components/ArticleAuthorQuickFill#ArticleAuthorQuickFill',
-						},
-					},
-					name: 'authorQuickFill',
-					type: 'ui',
-				},
 				{
 					label: 'Foto',
 					name: 'picture',

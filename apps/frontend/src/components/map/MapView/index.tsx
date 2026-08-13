@@ -15,14 +15,14 @@ import styles from './styles.module.css';
 /* * */
 
 const MAP_LOAD_ASSETS = [
-	{ name: 'map-alert-icon-accident', sdf: false, url: '/assets/map/alerts/map-alert-icon-accident.png' },
-	{ name: 'map-alert-icon-barrier', sdf: false, url: '/assets/map/alerts/map-alert-icon-barrier.png' },
-	{ name: 'map-alert-icon-calendar', sdf: false, url: '/assets/map/alerts/map-alert-icon-calendar.png' },
-	{ name: 'map-alert-icon-emergency', sdf: false, url: '/assets/map/alerts/map-alert-icon-emergency.png' },
-	{ name: 'map-alert-icon-info', sdf: false, url: '/assets/map/alerts/map-alert-icon-info.png' },
-	{ name: 'map-alert-icon-megaphone', sdf: false, url: '/assets/map/alerts/map-alert-icon-megaphone.png' },
-	{ name: 'map-alert-icon-storm', sdf: false, url: '/assets/map/alerts/map-alert-icon-storm.png' },
-	{ name: 'map-alert-icon-tool', sdf: false, url: '/assets/map/alerts/map-alert-icon-tool.png' },
+	{ name: 'icon-car-crash', sdf: false, url: '/assets/map/car-crash.png' },
+	{ name: 'icon-barrier-block', sdf: false, url: '/assets/map/barrier-block.png' },
+	{ name: 'icon-speakerphone', sdf: false, url: '/assets/map/speakerphone.png' },
+	{ name: 'icon-calendar-event', sdf: false, url: '/assets/map/calendar-event.png' },
+	{ name: 'icon-tool', sdf: false, url: '/assets/map/tool.png' },
+	{ name: 'icon-ambulance', sdf: false, url: '/assets/map/ambulance.png' },
+	{ name: 'icon-cloud-storm', sdf: false, url: '/assets/map/cloud-storm.png' },
+	{ name: 'icon-info-triangle', sdf: false, url: '/assets/map/info-triangle.png' },
 	/* * */
 	{ name: 'cmet-bus-delay', sdf: false, url: '/assets/map/bus-delay.png' },
 	{ name: 'cmet-bus-regular', sdf: false, url: '/assets/map/bus-regular.png' },

@@ -27,7 +27,7 @@
 		"@tmlmobilidade/utils": "20260418.1237.24",
 		"classnames": "2.5.1",
 		"graphql": "16.13.2",
-		"next": "16.2.10",
+		"next": "15.4.11",
 		"nodemailer": "8.0.5",
 		"payload": "3.83.0",
 		"react": "19.2.5",
@@ -38,7 +38,6 @@
 	"devDependencies": {
 		"@carrismetropolitana/eslint": "20250622.1204.50",
 		"@carrismetropolitana/website-shared-types": "*",
-		"@tmlmobilidade/go-types-public-info": "20260724.30.25",
 		"@tmlmobilidade/tsconfig": "20260418.1237.24",
 		"@types/node": "25.6.0",
 		"@types/react": "19.2.14",

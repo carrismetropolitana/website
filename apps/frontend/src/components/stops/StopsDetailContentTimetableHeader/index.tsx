@@ -45,7 +45,7 @@ export function StopsDetailContentTimetableHeader() {
 							changeDay: chunks => <a className={styles.changeDay} href="#">{chunks}</a>,
 							day_name: operationalDateContext.data.selected_date.js_date,
 							dayName: chunks => <span className={styles.dayName}>{chunks}</span>,
-							stop_name: stopsDetailContext.data.stop?.name || '-',
+							stop_name: stopsDetailContext.data.stop?.long_name || '-',
 							stopName: chunks => <span className={styles.stopName}>{chunks}</span>,
 						})}
 					</p>

@@ -12,7 +12,7 @@ import { useLinesDetailContext } from '@/contexts/LinesDetail.context';
 import { transformStopDataIntoGeoJsonFeature, useStopsContext } from '@/contexts/Stops.context';
 import { useVehiclesContext } from '@/contexts/Vehicles.context';
 import { centerMap, getBaseGeoJsonFeatureCollection, moveMap } from '@/utils/map.utils';
-import { type HubVehiclePosition } from '@tmlmobilidade/go-types-public-info';
+import { Vehicle } from '@carrismetropolitana/api-types/vehicles';
 import { Popup, useMap } from '@vis.gl/react-maplibre';
 import { useEffect, useMemo, useState } from 'react';
 
@@ -38,8 +38,8 @@ export function LinesDetailPathMap() {
 	// B. Transform Data
 
 	const activeVehiclesFeatureCollection = useMemo(() => {
-		if (!linesDetailContext.data.active_pattern?._id) return;
-		return vehiclesContext.actions.getVehiclesByPatternIdGeoJsonFC(linesDetailContext.data.active_pattern._id);
+		if (!linesDetailContext.data.active_pattern?.id) return;
+		return vehiclesContext.actions.getVehiclesByPatternIdGeoJsonFC(linesDetailContext.data.active_pattern?.id);
 	}, [linesDetailContext.data.active_pattern, vehiclesContext.data.vehicles]);
 
 	const activePathFeatureCollection = useMemo(() => {
@@ -58,7 +58,7 @@ export function LinesDetailPathMap() {
 			collection.features.push(result);
 		});
 		return collection;
-	}, [linesDetailContext.data.active_pattern, stopsContext.data.stops]);
+	}, [linesDetailContext.data.active_pattern, vehiclesContext.data.vehicles]);
 
 	const activeStopFeatureCollection = useMemo(() => {
 		// Exit early if there is no active pattern or active waypoint
@@ -77,7 +77,7 @@ export function LinesDetailPathMap() {
 		collection.features.push(result);
 		return collection;
 		//
-	}, [linesDetailContext.data.active_waypoint, linesDetailContext.data.active_pattern, stopsContext.data.stops]);
+	}, [linesDetailContext.data.active_waypoint, linesDetailContext.data.active_pattern]);
 
 	//
 	// C. Handle Actions
@@ -90,20 +90,19 @@ export function LinesDetailPathMap() {
 			if (!linesDetailContext.data.active_waypoint) return;
 			const stopData = stopsContext.actions.getStopById(linesDetailContext.data.active_waypoint.stop_id);
 			if (!stopData) return;
-			moveMap(linesDetailMap, [stopData.longitude, stopData.latitude]);
+			moveMap(linesDetailMap, [stopData.lon, stopData.lat]);
 		}
 		else {
 			if (!linesDetailContext.data.active_shape?.geojson) return;
 			centerMap(linesDetailMap, [linesDetailContext.data.active_shape.geojson], { padding: 60 });
 		}
-	}, [linesDetailMap, linesDetailContext.data.active_waypoint, linesDetailContext.data.active_shape, linesDetailContext.flags.is_interactive_mode, stopsContext.data.stops]);
+	}, [linesDetailMap, linesDetailContext.data.active_waypoint, linesDetailContext.data.active_shape]);
 
 	function handleLayerClick(event) {
 		if (!linesDetailMap) return;
 		const vehicleFeatures = linesDetailMap.queryRenderedFeatures(event.point, { layers: [MapViewStyleVehiclesPrimaryLayerId] });
 		if (vehicleFeatures.length > 0) {
-			const vehicleId = String(vehicleFeatures[0].properties?.vehicle_id ?? vehicleFeatures[0].id ?? '');
-			if (!vehicleId) return;
+			const vehicleId = String(vehicleFeatures[0].properties?.id ?? '');
 			setOpenVehicleIds((prev) => {
 				if (prev.includes(vehicleId)) return prev;
 				return [...prev, vehicleId];
@@ -132,7 +131,7 @@ export function LinesDetailPathMap() {
 	//
 	// D. Render copmonents
 
-	const renderPopover = (vehicleId: string, coordinates: [number, number], vehicle: HubVehiclePosition | undefined) => {
+	const renderPopover = (vehicleId: string, coordinates: [number, number], vehicle: Vehicle) => {
 		return (
 			<Popup
 				key={vehicleId}
@@ -159,7 +158,7 @@ export function LinesDetailPathMap() {
 
 			<MapViewStyleVehicles
 				showCounter="always"
-				vehiclesData={activeVehiclesFeatureCollection as GeoJSON.FeatureCollection<GeoJSON.Point> | undefined}
+				vehiclesData={activeVehiclesFeatureCollection}
 			/>
 
 			<MapViewStyleActiveStops
@@ -173,13 +172,13 @@ export function LinesDetailPathMap() {
 				waypointsData={activePathFeatureCollection}
 			/>
 
-			{debugContext.flags.is_debug_mode && activeVehiclesFeatureCollection?.features.map((feature) => {
-				if (feature.geometry?.type !== 'Point') return null;
-				const vehicleId = String(feature.properties?.vehicle_id ?? feature.id ?? '');
-				if (!vehicleId || !openVehicleIds.includes(vehicleId)) return null;
+			{debugContext.flags.is_debug_mode && activeVehiclesFeatureCollection && activeVehiclesFeatureCollection.features.map((feature) => {
+				if (!feature.properties?.id || !feature.geometry?.coordinates || feature.geometry?.coordinates.length < 2) return null;
+				const vehicleId = String(feature.properties.id);
+				if (!openVehicleIds.includes(vehicleId)) return null;
 				const vehicle = vehiclesContext.actions.getVehicleById(vehicleId);
-				const [longitude, latitude] = feature.geometry.coordinates;
-				return renderPopover(vehicleId, [longitude, latitude], vehicle);
+				const coordinates = feature.geometry?.coordinates;
+				return renderPopover(vehicleId, [coordinates[0], coordinates[1]], vehicle);
 			})}
 		</MapView>
 	);

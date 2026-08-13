@@ -13,12 +13,8 @@ import { NoServiceMessage } from '@/components/NoServiceMessage/NoServiceMessage
 import SourceDisclaimer from '@/components/SourceDisclaimer/SourceDisclaimer';
 import StopInfo from '@/components/StopInfo/StopInfo';
 import Titles from '@/components/Titles/Titles';
-import { getHubStopCode, useFilterByAgencyIds } from '@/hooks/useFilterByAgencyIds';
-import { GoApiResponse } from '@/types/go-api-types';
-import { getPublicVariable } from '@carrismetropolitana/website-shared-settings';
-import { HubStop } from '@tmlmobilidade/go-types-public-info';
 import * as turf from '@turf/turf';
-import { useEffect, useMemo } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import { Layer, Source, useMap } from 'react-map-gl/maplibre';
 import useSWR from 'swr';
 
@@ -39,43 +35,21 @@ export function SchoolDetail({ schoolId }: Props) {
 	// A. Setup variables
 
 	const { schoolInfoMap } = useMap();
+	const [schoolStopsAsGeojson, setSchoolStopsAsGeojson] = useState(null);
 
 	//
 	// B. Fetch data
 
 	const { data: allSchoolsData } = useSWR(`https://api.carrismetropolitana.pt/v2/facilities/schools`);
-	const { data: allStopsData, isLoading: allStopsLoading } = useSWR<GoApiResponse<HubStop[]>, Error>(`${getPublicVariable('go_api_url')}/hub/api/v1/network/stops`, { refreshInterval: 900000 }); // 15 minutes
+	const { data: allStopsData } = useSWR('https://api.carrismetropolitana.pt/stops');
 
 	//
-	// C. Filter data
-
-	const filteredStopsData = useFilterByAgencyIds(allStopsData, { dataType: 'stop' }).data;
-
-	//
-	// D. Transform data
+	// C. Transform data
 
 	const schoolData = useMemo(() => {
 		if (!allSchoolsData?.length) return null;
 		return allSchoolsData.find(item => item.id === schoolId) || null;
 	}, [allSchoolsData, schoolId]);
-
-	const schoolStopsAsGeojson = useMemo(() => {
-		const geoJSON: GeoJSON.FeatureCollection = {
-			features: [],
-			type: 'FeatureCollection',
-		};
-		if (!schoolData?.stop_ids?.length || !filteredStopsData.length) return geoJSON;
-		for (const [stopIndex, stopCode] of schoolData.stop_ids.entries()) {
-			const stopData = filteredStopsData.find(stop => getHubStopCode(stop) === stopCode);
-			if (!stopData) continue;
-			geoJSON.features.push({
-				geometry: { coordinates: [stopData.longitude, stopData.latitude], type: 'Point' },
-				properties: { index: stopIndex + 1 },
-				type: 'Feature',
-			});
-		}
-		return geoJSON;
-	}, [filteredStopsData, schoolData]);
 
 	useEffect(() => {
 		if (!schoolInfoMap || !schoolStopsAsGeojson?.features?.length) return;
@@ -89,25 +63,47 @@ export function SchoolDetail({ schoolId }: Props) {
 		schoolInfoMap.fitBounds(bounds, { duration: 2000, padding: 150 });
 	}, [schoolInfoMap, schoolStopsAsGeojson]);
 
+	useEffect(() => {
+		(async () => {
+			const geoJSON: GeoJSON.FeatureCollection = {
+				features: [],
+				type: 'FeatureCollection',
+			};
+			if (schoolData && schoolData.stop_ids.length) {
+				for (const [stopIndex, stopCode] of schoolData.stop_ids.entries()) {
+					const stopResponse = await fetch(`https://api.carrismetropolitana.pt/stops/${stopCode}`);
+					const stopData = await stopResponse.json();
+					geoJSON.features.push({
+						geometry: { coordinates: [parseFloat(stopData.lon), parseFloat(stopData.lat)], type: 'Point' },
+						properties: { index: stopIndex + 1 },
+						type: 'Feature',
+					});
+				}
+			}
+
+			setSchoolStopsAsGeojson(geoJSON);
+		})();
+	}, [schoolData]);
+
 	const allStopsDataAsGeojson = useMemo(() => {
 		const geoJSON: GeoJSON.FeatureCollection = {
 			features: [],
 			type: 'FeatureCollection',
 		};
-		if (!allStopsLoading) {
-			for (const stop of filteredStopsData) {
+		if (allStopsData) {
+			for (const stop of allStopsData) {
 				geoJSON.features.push({
-					geometry: { coordinates: [stop.longitude, stop.latitude], type: 'Point' },
+					geometry: { coordinates: [stop.lon, stop.lat], type: 'Point' },
 					properties: {},
 					type: 'Feature',
 				});
 			}
 		}
 		return geoJSON;
-	}, [filteredStopsData, allStopsLoading]);
+	}, [allStopsData]);
 
 	//
-	// E. Render components
+	// D. Render components
 
 	return (
 		schoolData && (

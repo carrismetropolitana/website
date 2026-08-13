@@ -36,7 +36,7 @@ export function AlertsListGroup() {
 		if (!alertsListContext.data) return [];
 		//
 		const groupedAlerts: AlertGroupByDate[] = alertsListContext.data.filtered.reduce((result: AlertGroupByDate[], item) => {
-			const alertStartDateObject = DateTime.fromMillis(item.active_period_start_date);
+			const alertStartDateObject = DateTime.fromJSDate(item.start_date);
 			const alertStartDateString = alertStartDateObject.toFormat('yyyyMMdd');
 			const existingGroup = result.find(group => group.value === alertStartDateString);
 			if (existingGroup) {
@@ -94,7 +94,7 @@ export function AlertsListGroup() {
 					<GroupedListItem key={alertGroup.value} label={t('label', { count: alertGroup.items.length })} title={alertGroup.title}>
 						<Accordion>
 							{alertGroup.items.map(alert => (
-								<AlertListItem key={alert._id} alertId={alert._id} />
+								<AlertListItem key={alert.alert_id} alertId={alert.alert_id} />
 							))}
 						</Accordion>
 					</GroupedListItem>

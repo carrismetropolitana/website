@@ -2,10 +2,8 @@
 
 /* * */
 
-import type { AlertCause, AlertEffect } from '@/types/alerts.types.js';
-import type { HubAlert } from '@tmlmobilidade/go-types-public-info';
+import type { AlertCause, AlertEffect, SimplifiedAlert } from '@/types/alerts.types.js';
 
-import { normalizeReferenceId } from '@/utils/alerts';
 import { DateTime } from 'luxon';
 import { useQueryState } from 'nuqs';
 import { createContext, useContext, useEffect, useMemo, useState } from 'react';
@@ -32,8 +30,8 @@ interface AlertsListContextState {
 		}
 	}
 	data: {
-		filtered: HubAlert[]
-		raw: HubAlert[]
+		filtered: SimplifiedAlert[]
+		raw: SimplifiedAlert[]
 	}
 	filters: {
 		by_date: 'current' | 'future' | 'map'
@@ -69,7 +67,7 @@ export const AlertsListContextProvider = ({ children }) => {
 	//
 	// A. Setup variables
 
-	const [dataFilteredState, setDataFilteredState] = useState<HubAlert[]>([]);
+	const [dataFilteredState, setDataFilteredState] = useState<SimplifiedAlert[]>([]);
 
 	const [filterByDateState, setFilterByDateState] = useState <AlertsListContextState['filters']['by_date']>('current');
 	const [filterByLineIdState, setFilterByLineIdState] = useQueryState('line_id');
@@ -93,7 +91,7 @@ export const AlertsListContextProvider = ({ children }) => {
 	const alertsContext = useAlertsContext();
 	const analyticsContext = useAnalyticsContext();
 
-	const allAlertsData = useMemo(() => alertsContext.data.alerts, [alertsContext.data.alerts]);
+	const allAlertsData = useMemo(() => alertsContext.data.simplified, [alertsContext.data.simplified]);
 
 	//
 	// C. Transform data
@@ -101,7 +99,7 @@ export const AlertsListContextProvider = ({ children }) => {
 	// Set Counters
 	const currentWeekAlerts = allAlertsData?.filter((item) => {
 		const oneWeekFromNowInUnixSeconds = DateTime.now().plus({ week: 1 }).endOf('day').toUnixInteger();
-		const alertStartDateInSeconds = DateTime.fromMillis(item.active_period_start_date).toUnixInteger();
+		const alertStartDateInSeconds = DateTime.fromJSDate(item.start_date).toUnixInteger();
 		// If the alert start date is before one week from now, then the alert is considered 'current'.
 		return alertStartDateInSeconds <= oneWeekFromNowInUnixSeconds;
 	}).length;
@@ -109,7 +107,7 @@ export const AlertsListContextProvider = ({ children }) => {
 	const applyFiltersToData = () => {
 		//
 
-		let filterResult: HubAlert[] = allAlertsData || [];
+		let filterResult: SimplifiedAlert[] = allAlertsData || [];
 
 		//
 		// Filter by_date
@@ -117,38 +115,25 @@ export const AlertsListContextProvider = ({ children }) => {
 		const oneWeekFromNowInUnixSeconds = DateTime.now().plus({ week: 1 }).endOf('day').toUnixInteger();
 
 		filterResult = filterResult.filter((item) => {
-			const alertStartDateInSeconds = DateTime.fromMillis(item.active_period_start_date).toUnixInteger();
-			//
-			if (filterByDateState === 'map') {
-				return item.coordinates?.length === 2 && item.coordinates.every(Number.isFinite);
-			}
+			const alertStartDateInSeconds = DateTime.fromJSDate(item.start_date).toUnixInteger();
 			//
 			if (filterByDateState === 'current') {
 				// If the alert start date is before one week from now, then the alert is considered 'current'.
 				return alertStartDateInSeconds <= oneWeekFromNowInUnixSeconds;
 			}
-			//
-			// If the alert start date is after one week from now, then the alert is considered 'future'.
-			// Otherwise, it is considered 'current'.
-			return alertStartDateInSeconds > oneWeekFromNowInUnixSeconds;
+			else {
+				// If the alert start date is after one week from now, then the alert is considered 'future'.
+				// Otherwise, it is considered 'current'.
+				return alertStartDateInSeconds > oneWeekFromNowInUnixSeconds;
+			}
 		});
 
 		if (filterByLineIdState) {
-			const normalizedLineId = normalizeReferenceId(filterByLineIdState);
-			filterResult = filterResult.filter(alert => alert.references.some((reference) => {
-				const parentId = normalizeReferenceId(reference.parent_id);
-				const childIds = reference.child_ids.map(normalizeReferenceId);
-				return parentId === normalizedLineId || childIds.includes(normalizedLineId);
-			}));
+			filterResult = filterResult.filter(alert => alert.informed_entity.some(entity => entity.line_id === filterByLineIdState));
 		}
 
 		if (filterByStopIdState) {
-			const normalizedStopId = normalizeReferenceId(filterByStopIdState);
-			filterResult = filterResult.filter(alert => alert.references.some((reference) => {
-				const parentId = normalizeReferenceId(reference.parent_id);
-				const childIds = reference.child_ids.map(normalizeReferenceId);
-				return parentId === normalizedStopId || childIds.includes(normalizedStopId);
-			}));
+			filterResult = filterResult.filter(alert => alert.informed_entity.some(entity => entity.stop_id === filterByStopIdState));
 		}
 
 		// TODO: municipalityId does not exist in the informed_entity, needs to be added in API

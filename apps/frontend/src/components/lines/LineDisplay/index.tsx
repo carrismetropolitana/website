@@ -1,9 +1,10 @@
 /* * */
 
+import type { Line } from '@carrismetropolitana/api-types/network';
+
 import { LineBadge } from '@/components/lines/LineBadge';
 import { LineName } from '@/components/lines/LineName';
 import { Skeleton } from '@mantine/core';
-import { type HubLine } from '@tmlmobilidade/go-types-public-info';
 
 import styles from './styles.module.css';
 
@@ -11,7 +12,7 @@ import styles from './styles.module.css';
 
 interface Props {
 	color?: string
-	lineData?: HubLine
+	lineData?: Line
 	longName?: string
 	shortName?: string
 	size?: 'lg' | 'md'

@@ -1,6 +1,6 @@
 /* * */
 
-import { type HubLine } from '@tmlmobilidade/go-types-public-info';
+import type { Line } from '@carrismetropolitana/api-types/network';
 
 import styles from './styles.module.css';
 
@@ -8,7 +8,7 @@ import styles from './styles.module.css';
 
 interface Props {
 	align?: 'center' | 'left' | 'right'
-	lineData?: HubLine
+	lineData?: Line
 	longName?: string
 	size?: 'lg' | 'md'
 }

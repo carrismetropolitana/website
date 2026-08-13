@@ -8,7 +8,7 @@ import { useProfileContext } from '@/contexts/Profile.context';
 import { transformStopDataIntoGeoJsonFeature, useStopsContext } from '@/contexts/Stops.context';
 import { createDocCollection } from '@/hooks/useOtherSearch';
 import { getBaseGeoJsonFeatureCollection } from '@/utils/map.utils';
-import { type HubStop } from '@tmlmobilidade/go-types-public-info';
+import { type Stop } from '@carrismetropolitana/api-types/network';
 import { createContext, useContext, useEffect, useMemo, useState } from 'react';
 
 /* * */
@@ -25,8 +25,8 @@ interface StopsListContextState {
 		favorites: number
 	}
 	data: {
-		favorites: HubStop[]
-		filtered: HubStop[]
+		favorites: Stop[]
+		filtered: Stop[]
 		filtered_fc: GeoJSON.FeatureCollection<GeoJSON.Point, GeoJSON.GeoJsonProperties>
 	}
 	filters: {
@@ -67,9 +67,9 @@ export const StopsListContextProvider = ({ children }) => {
 	const environmentContext = useEnvironmentContext();
 	const isMupi = environmentContext.data.value === 'mupi';
 
-	const [dataFilteredState, setDataFilteredState] = useState<HubStop[]>([]);
+	const [dataFilteredState, setDataFilteredState] = useState<Stop[]>([]);
 	const [dataFilteredGeojsonFCState, setDataFilteredGeojsonFCState] = useState<GeoJSON.FeatureCollection<GeoJSON.Point, GeoJSON.GeoJsonProperties>>();
-	const [dataFavoritesState, setDataFavoritesState] = useState<HubStop[]>([]);
+	const [dataFavoritesState, setDataFavoritesState] = useState<Stop[]>([]);
 
 	const [filterByAttributeState, setFilterByAttributeState] = useState <StopsListContextState['filters']['by_attribute']>(null);
 	const [filterByCurrentViewState, setFilterByCurrentViewState] = useState <StopsListContextState['filters']['by_current_view']>('map');
@@ -83,17 +83,16 @@ export const StopsListContextProvider = ({ children }) => {
 	const searchHook = useMemo(() => {
 		// Prepare data for search function
 		const preparedSearchCollection = stopsContext.data.stops.map((item) => {
-			const isFavorite = profileContext.data.favorite_stops?.includes(item._id.toString()) ? true : false;
+			const isFavorite = profileContext.data.favorite_stops?.includes(item.id) ? true : false;
 			return {
 				...item,
 				boost: isFavorite,
-				id: item._id.toString(),
 			};
 		});
 		return createDocCollection(preparedSearchCollection, {
 			id: 2,
 			// locality_name: 1.5,
-			name: 1,
+			long_name: 1,
 			short_name: 1,
 			tts_name: 1.5,
 		}, {
@@ -101,7 +100,7 @@ export const StopsListContextProvider = ({ children }) => {
 		});
 	}, [stopsContext.data.stops, profileContext.data.favorite_stops]);
 
-	const applyFiltersToData = (allData: HubStop[] = []) => {
+	const applyFiltersToData = (allData: Stop[] = []) => {
 		//
 
 		let filterResult = allData;
@@ -155,7 +154,7 @@ export const StopsListContextProvider = ({ children }) => {
 	}, [stopsContext.data.stops, filterByAttributeState, filterByFacilityState, filterByMunicipalityOrLocalityState, filterBySearchState]);
 
 	useEffect(() => {
-		const favoritesStopsData = stopsContext.data.stops?.filter(stop => profileContext.data.favorite_stops?.includes(stop._id.toString())) || [];
+		const favoritesStopsData = stopsContext.data.stops?.filter(stop => profileContext.data.favorite_stops?.includes(stop.id)) || [];
 		setDataFavoritesState(favoritesStopsData);
 	}, [stopsContext.data.stops, profileContext.data.favorite_stops]);
 

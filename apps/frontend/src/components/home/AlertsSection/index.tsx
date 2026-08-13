@@ -26,17 +26,17 @@ export function AlertsSection() {
 
 	const alertsActiveTodayAndTomorrow = useMemo(() => {
 		// Sort alerts by start date descending
-		const sortedAlerts = alertsContext.data.alerts.sort((a, b) => new Date(b.active_period_start_date).getTime() - new Date(a.active_period_start_date).getTime());
+		const sortedAlerts = alertsContext.data.simplified.sort((a, b) => new Date(b.start_date).getTime() - new Date(a.start_date).getTime());
 		// Filter alerts to only include alerts that start today or tomorrow
 		const filteredAlerts = sortedAlerts.filter((alert) => {
 			const today = DateTime.now().startOf('day').toJSDate();
-			const alertDate = new Date(alert.active_period_start_date);
+			const alertDate = new Date(alert.start_date);
 			return alertDate >= today;
 		});
 
 		// If there are alerts for today and tomorrow, return them; otherwise return the 5 most recent alerts
 		return (filteredAlerts.length > 0 ? filteredAlerts : sortedAlerts).slice(0, 5);
-	}, [alertsContext.data.alerts]);
+	}, [alertsContext.data.simplified]);
 
 	//
 	// C. Render components

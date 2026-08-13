@@ -36,7 +36,7 @@ export function LinesListViewFavorites() {
 		<Surface variant="persistent" forceOverflow>
 			<Section>
 				{linesListContext.data.favorites.map(line => (
-					<RegularListItem key={line._id} href={`/lines/${line._id}`}>
+					<RegularListItem key={line.id} href={`/lines/${line.id}`}>
 						<LineDisplay lineData={line} />
 					</RegularListItem>
 				))}

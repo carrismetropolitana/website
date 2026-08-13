@@ -211,6 +211,7 @@ export function PipsArrivalsTable() {
 							key={`${arrival.trip_id}-${arrival.stop_sequence}-${index}`}
 							arrival={arrival}
 							index={index}
+							nowInSeconds={nowInSeconds}
 						/>
 					))}
 				</tbody>

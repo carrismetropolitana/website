@@ -37,14 +37,15 @@ export function AlertListItem({ alertId }: Props) {
 	//
 	// B. Transform data
 
-	const alertData = alertsContext.actions.getAlertById(alertId);
+	const simplifiedAlertData = alertsContext.actions.getSimplifiedAlertById(alertId);
+
 	const alertHref = environmentContext.actions.getNormalizedHref(`/alerts/${alertId}`);
 
 	//
 	// C. Handle Actions
 
 	const handleAlertDetailClick = () => {
-		analyticsContext.actions.capture(ampli => ampli.alertClicked({ alert_id: alertId, alert_title: alertData?.title || '' }));
+		analyticsContext.actions.capture(ampli => ampli.alertClicked({ alert_id: alertId, alert_title: simplifiedAlertData?.title || '' }));
 	};
 
 	//
@@ -52,13 +53,14 @@ export function AlertListItem({ alertId }: Props) {
 
 	return (
 		<Accordion.Item value={alertId}>
-			<Accordion.Control icon={<AlertEffectIcon effect={alertData?.effect} />}>{alertData?.title}</Accordion.Control>
+			<Accordion.Control icon={<AlertEffectIcon effect={simplifiedAlertData?.effect} />}>{simplifiedAlertData?.title}</Accordion.Control>
 			<Accordion.Panel classNames={{ content: styles.contentWrapper }}>
 				<div className={styles.infoBar}>
-					<AlertActivePeriodStart date={new Date(alertData?.active_period_start_date)} size="sm" />
+					<AlertActivePeriodStart date={simplifiedAlertData?.start_date} size="sm" />
+					{/* <AlertActivePeriodEnd date={simplifiedAlertData?.end_date} size="sm" /> */}
 				</div>
-				<p className={styles.description}>{alertData?.description}</p>
-				{alertData?.image_url && <AlertsListItemImageThumbnail alertId={alertData?._id || ''} alertTitle={alertData?.title || ''} alt={alertData?.title} href={`/alerts/${alertId}`} src={alertData.image_url} />}
+				<p className={styles.description}>{simplifiedAlertData?.description}</p>
+				{simplifiedAlertData?.image_url && <AlertsListItemImageThumbnail alertId={simplifiedAlertData?.alert_id || ''} alertTitle={simplifiedAlertData?.title || ''} alt={simplifiedAlertData?.title} href={`/alerts/${alertId}`} src={simplifiedAlertData.image_url} />}
 				<div onClick={handleAlertDetailClick}>
 					<Button href={alertHref} icon={<IconArrowUpRight size={16} />} label={t('open')} variant="pill" />
 				</div>

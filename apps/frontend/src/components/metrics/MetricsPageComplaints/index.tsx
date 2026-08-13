@@ -60,7 +60,7 @@ export function MetricsPageComplaints() {
 		const municipal_complaints = complaintsMetricsData.filter(item => item.type === 'municipality' && item.filter_value === state.filter_value);
 		const global_complaints = complaintsMetricsData.filter(item => item.type === 'global' && item.filter_value === '-');
 		const last_update = complaintsMetricsData.find(item => item.type === 'global' && item.filter_value === '-')?.last_update || '';
-		const lineColor = linesContext.data.lines.find(line => line._id === state.filter_value)?.color || '';
+		const lineColor = linesContext.data.lines.find(line => line.id === state.filter_value)?.color || '';
 		const municipalityName = locationsContext.data.municipalities.find(municipality => municipality.id === state.filter_value)?.name || '';
 
 		setState(prevState => ({

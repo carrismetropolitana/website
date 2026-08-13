@@ -1,6 +1,8 @@
 'use client';
 
-import { Dates } from '@tmlmobilidade/dates';
+/* * */
+
+import { DateTime } from 'luxon';
 import { useEffect, useState } from 'react';
 
 import styles from './styles.module.css';
@@ -21,7 +23,7 @@ export function StopsDetailContentTimetableClock() {
 
 	useEffect(() => {
 		const interval = setInterval(() => {
-			const currentTime = Dates.now('Europe/Lisbon');
+			const currentTime = DateTime.now().setZone('Europe/Lisbon');
 			setCurrentTimeHours(currentTime.toFormat('HH'));
 			setCurrentTimeMinutes(currentTime.toFormat('mm'));
 		}, 1000);
@@ -42,4 +44,6 @@ export function StopsDetailContentTimetableClock() {
 			</div>
 		</div>
 	);
+
+	//
 }

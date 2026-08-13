@@ -1,27 +1,32 @@
 'use client';
 
-import { normalizeReferenceId } from '@/utils/alerts';
+/* * */
+
+import { type Alert, type SimplifiedAlert } from '@/types/alerts.types';
+import convertToSimplifiedAlert from '@/utils/convertToSimplifiedAlert';
 import { getBaseGeoJsonFeatureCollection } from '@/utils/map.utils';
-import { CARRIS_METROPOLITANA_AGENCY_IDS, getPublicVariable } from '@carrismetropolitana/website-shared-settings';
-import { type HubAlert } from '@tmlmobilidade/go-types-public-info';
-import { createContext, type PropsWithChildren, useContext, useMemo } from 'react';
+import { getPublicVariable } from '@carrismetropolitana/website-shared-settings';
+import { useLocale } from 'next-intl';
+import { createContext, useContext, useEffect, useState } from 'react';
 import useSWR from 'swr';
+
+// import { useAnalyticsContext } from './Analytics.context';
 
 /* * */
 
 interface AlertsContextState {
 	actions: {
-		getAlertById: (alertId: string) => HubAlert | null
-		getAlertsByLineId: (lineId: string) => HubAlert[]
-		getAlertsByStopId: (stopId: string) => HubAlert[]
+		getSimplifiedAlertById: (alertId: string) => null | SimplifiedAlert
+		getSimplifiedAlertsByLineId: (lineId: string) => SimplifiedAlert[]
+		getSimplifiedAlertsByStopId: (stopId: string) => SimplifiedAlert[]
 	}
 	data: {
-		alerts: HubAlert[]
-		fc: GeoJSON.FeatureCollection<GeoJSON.Geometry, GeoJSON.GeoJsonProperties>
+		alerts: Alert[]
+		featureCollection: GeoJSON.FeatureCollection<GeoJSON.Point, GeoJSON.GeoJsonProperties>
+		simplified: SimplifiedAlert[]
 	}
 	flags: {
-		error: Error | undefined
-		isLoading: boolean
+		is_loading: boolean
 	}
 }
 
@@ -39,108 +44,112 @@ export function useAlertsContext() {
 
 /* * */
 
-export function AlertsContextProvider({ children }: PropsWithChildren) {
+export const AlertsContextProvider = ({ children }) => {
 	//
 
 	//
-	// A. Fetch data
+	// A. Setup variables
 
-	const { data: allAlertsData, isLoading: allAlertsLoading } = useSWR<{ data: HubAlert[] }>(`${getPublicVariable('go_api_url')}/hub/api/v1/alerts`, { refreshInterval: 180000 }); // 3 minutes
-	const filteredAlertsData = useMemo(() => {
-		const allowedAgencyIds = new Set<string>(CARRIS_METROPOLITANA_AGENCY_IDS);
-		return (allAlertsData?.data ?? []).filter((alertData) => {
-			if (allowedAgencyIds.has(String(alertData.agency_id))) return true;
-			return alertData.references.some((reference) => {
-				const referenceIds = [reference.parent_id, ...reference.child_ids];
-				return referenceIds.some(referenceId => CARRIS_METROPOLITANA_AGENCY_IDS.some(agencyId => String(referenceId).trim().startsWith(`[${agencyId}]`)));
-			});
-		});
-	}, [allAlertsData?.data]);
+	const currentLocale = useLocale();
+	// const analyticsContext = useAnalyticsContext();
+
+	const [dataSimplifiedState, setDataSimplifiedState] = useState<SimplifiedAlert[]>([]);
+	const [dataFeatureCollectionState, setDataFeatureCollectionState] = useState<GeoJSON.FeatureCollection<GeoJSON.Point, GeoJSON.GeoJsonProperties>>(null);
 
 	//
-	// B. Transform data
+	// B. Fetch data
 
-	const dataFeatureCollectionState = useMemo(() => {
+	const { data: allAlertsData, isLoading: allAlertsLoading } = useSWR<Alert[], Error>(`${getPublicVariable('api_url')}/alerts`, { refreshInterval: 180000 }); // 3 minutes
+
+	//
+	// C. Transform data
+
+	useEffect(() => {
+		// if (!allAlertsData) return;
+		const allSimplifiedAlerts = allAlertsData?.map(alert => convertToSimplifiedAlert(alert, currentLocale));
+		setDataSimplifiedState(allSimplifiedAlerts || []);
+		// THE CORRECT SPELLING IS REFERRER
+		// analyticsContext.actions.capture(ampli => ampli.captureAlertsReferer({ page_referrer: document.referrer }));
+	}, [allAlertsData]);
+
+	// Transform data into geojson
+	useEffect(() => {
 		const collection = getBaseGeoJsonFeatureCollection();
-		filteredAlertsData.forEach((item) => {
-			const alertFC = transformAlertDataIntoGeoJsonFeature(item);
+		dataSimplifiedState.forEach((alert) => {
+			const alertFC = transformAlertDataIntoGeoJsonFeature(alert);
 			if (alertFC) collection.features.push(alertFC);
 		});
-		return collection;
-	}, [filteredAlertsData]);
+
+		setDataFeatureCollectionState(collection);
+	}, [dataSimplifiedState]);
 
 	//
-	// C. Handle actions
+	// D. Handle actions
 
-	const getAlertById = (alertId: string): HubAlert | null => {
-		return filteredAlertsData.find(item => item._id === alertId) || null;
+	const getSimplifiedAlertById = (alertId: string): null | SimplifiedAlert => {
+		return dataSimplifiedState.find(item => item.alert_id.toLowerCase() === alertId.toLowerCase()) || null;
 	};
 
-	const getAlertsByLineId = (lineId: string): HubAlert[] => {
-		const normalizedLineId = normalizeReferenceId(lineId);
-		return filteredAlertsData.filter((item) => {
-			if (item.reference_type === 'lines') return item.references.some(reference => normalizeReferenceId(reference.parent_id) === normalizedLineId);
-			if (item.reference_type === 'stops') return item.references.some(reference => reference.child_ids.some(childId => normalizeReferenceId(childId) === normalizedLineId));
-			return false;
+	const getSimplifiedAlertsByLineId = (lineId: string): SimplifiedAlert[] => {
+		// TODO: Update this to use informed_entity.lineId instead of routeId
+		// This is a temporary solution to filter by lineId until the API is updated
+		return dataSimplifiedState.filter((simplifiedAlert) => {
+			// Include this element if any informed_entity...
+			return simplifiedAlert.informed_entity.some((informedEntity) => {
+				// ...has a routeId that starts with the lineId
+				return informedEntity.route_id?.startsWith(lineId);
+			});
 		});
 	};
 
-	const getAlertsByStopId = (stopId: string): HubAlert[] => {
-		const normalizedStopId = normalizeReferenceId(stopId);
-		return filteredAlertsData.filter((item) => {
-			if (item.reference_type === 'stops') return item.references.some(reference => normalizeReferenceId(reference.parent_id) === normalizedStopId);
-			if (item.reference_type === 'lines') return item.references.some(reference => reference.child_ids.some(childId => normalizeReferenceId(childId) === normalizedStopId));
-			return false;
-		});
+	const getSimplifiedAlertsByStopId = (stopId: string): SimplifiedAlert[] => {
+		return dataSimplifiedState.filter(simplifiedAlert => simplifiedAlert.informed_entity.some(informedEntity => informedEntity.stop_id === stopId));
 	};
 
 	//
-	// D. Define context value
+	// E. Define context value
 
 	const contextValue: AlertsContextState = {
 		actions: {
-			getAlertById,
-			getAlertsByLineId,
-			getAlertsByStopId,
+			getSimplifiedAlertById,
+			getSimplifiedAlertsByLineId,
+			getSimplifiedAlertsByStopId,
 		},
 		data: {
-			alerts: filteredAlertsData,
-			fc: dataFeatureCollectionState,
+			alerts: allAlertsData || [],
+			featureCollection: dataFeatureCollectionState,
+			simplified: dataSimplifiedState,
 		},
 		flags: {
-			error: undefined,
-			isLoading: allAlertsLoading,
+			is_loading: allAlertsLoading,
 		},
 	};
 
 	//
-	// E. Render components
+	// F. Render components
 
 	return (
 		<AlertsContext.Provider value={contextValue}>
 			{children}
 		</AlertsContext.Provider>
 	);
+
+	//
 };
 
 /* * */
 
-export function transformAlertDataIntoGeoJsonFeature(alertData: HubAlert): GeoJSON.Feature<GeoJSON.Point, GeoJSON.GeoJsonProperties> {
-	// Skip alerts without coordinates
-	if (!alertData.coordinates?.length) return null;
-	// Transform alert data into a GeoJSON feature
+export function transformAlertDataIntoGeoJsonFeature(alertData: SimplifiedAlert): GeoJSON.Feature<GeoJSON.Point, GeoJSON.GeoJsonProperties> {
+	if (!alertData.coordinates) return null;
 	return {
 		geometry: {
 			coordinates: [alertData.coordinates[1], alertData.coordinates[0]],
 			type: 'Point',
 		},
 		properties: {
-			_id: alertData._id,
 			cause: alertData.cause,
-			description: alertData.description,
 			effect: alertData.effect,
-			id: alertData._id,
-			title: alertData.title,
+			id: alertData.alert_id,
 		},
 		type: 'Feature',
 	};

@@ -3,12 +3,9 @@
 /* * */
 
 import { LineDisplay } from '@/components/LineDisplay/LineDisplay';
-import { getHubStopCode, useFilterByAgencyIds } from '@/hooks/useFilterByAgencyIds';
-import { GoApiResponse } from '@/types/go-api-types';
 import { type ApiResponse } from '@carrismetropolitana/api-types/common';
 import { type Locality } from '@carrismetropolitana/api-types/locations';
-import { getPublicVariable } from '@carrismetropolitana/website-shared-settings';
-import { type HubStop } from '@tmlmobilidade/go-types-public-info';
+import { type Stop } from '@carrismetropolitana/api-types/network';
 import Link from 'next/link';
 import { useMemo } from 'react';
 import useSWR from 'swr';
@@ -22,20 +19,16 @@ export default function StopInfo({ index, stop_id }) {
 
 	//
 	// A. Fetch data
-	const { data: allStopsData } = useSWR<GoApiResponse<HubStop[]>, Error>(`${getPublicVariable('go_api_url')}/hub/api/v1/network/stops`, { refreshInterval: 900000 }); // 15 minutes
-	const { data: allLocalitiesData } = useSWR<ApiResponse<Locality[]>, Error>(`${getPublicVariable('go_api_url')}/locations/api/locations/localities`, { refreshInterval: 900000 }); // 15 minutes
+
+	const { data: allStopsData } = useSWR<Stop[]>('https://api.carrismetropolitana.pt/v2/stops');
+	const { data: allLocalitiesData } = useSWR<ApiResponse<Locality[]>>('https://api.carrismetropolitana.pt/v2/locations/localities');
 
 	//
-	// B. Filter data
+	// B. Transform data
 
-	const filteredStopsData = useFilterByAgencyIds(allStopsData, { dataType: 'stop' }).data;
-
-	//
-	// C. Transform data
-
-	const stopData: HubStop = useMemo(() => {
-		return filteredStopsData.find(item => getHubStopCode(item) === stop_id);
-	}, [filteredStopsData, stop_id]);
+	const stopData: Stop = useMemo(() => {
+		return allStopsData?.find(item => item.id === stop_id);
+	}, [allStopsData, stop_id, allLocalitiesData]);
 
 	const localityData: Locality = useMemo(() => {
 		if (allLocalitiesData?.status !== 'success') return;
@@ -43,7 +36,7 @@ export default function StopInfo({ index, stop_id }) {
 	}, [allLocalitiesData, stopData]);
 
 	//
-	// D. Render components
+	// C. Render components
 
 	return (
 		stopData
@@ -53,15 +46,15 @@ export default function StopInfo({ index, stop_id }) {
 				<div className={styles.headerWrapper}>
 					{index && <div className={styles.stopIndex}>{index}</div>}
 					<div className={styles.header}>
-						<div className={styles.stopName}>{stopData.name}</div>
+						<div className={styles.stopName}>{stopData.long_name}</div>
 						<div className={styles.stopDetails}>
 							{localityData?.name && <div className={styles.stopLocation}>{localityData.name}</div>}
-							<Link className={styles.stopId} href={`https://carrismetropolitana.pt/stops/${stopData._id}`} target="_blank">
+							<Link className={styles.stopId} href={`https://carrismetropolitana.pt/stops/${stopData.id}`} target="_blank">
 								#
-								{stopData._id}
+								{stopData.id}
 							</Link>
 							{index && (
-								<Link className={styles.openInWebsite} href={`https://carrismetropolitana.pt/stops/${stopData._id}`} target="_blank">Ver no Tempo Real</Link>
+								<Link className={styles.openInWebsite} href={`https://carrismetropolitana.pt/stops/${stopData.id}`} target="_blank">Ver no Tempo Real</Link>
 							)}
 						</div>
 					</div>

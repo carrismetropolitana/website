@@ -40,7 +40,7 @@ export function AlertsDetail({ alertId }: Props) {
 	//
 	// B. Fetch data
 
-	const alertData = alertsContext.actions.getAlertById(alertId);
+	const simplifiedAlertData = alertsContext.actions.getSimplifiedAlertById(alertId);
 
 	//
 	// C. Transform data
@@ -48,12 +48,12 @@ export function AlertsDetail({ alertId }: Props) {
 	const uniqueInformedEntityLineIds = useMemo(() => {
 		const set = new Set<string>();
 
-		alertData?.references.forEach((reference) => {
-			const lineId = reference.parent_id;
+		simplifiedAlertData?.informed_entity.forEach((entity) => {
+			const lineId = entity.route_id?.split('_')[0];
 			if (lineId) set.add(lineId);
 		});
 		return Array.from(set);
-	}, [alertData]);
+	}, [simplifiedAlertData]);
 
 	//
 	// D. Render components
@@ -65,16 +65,16 @@ export function AlertsDetail({ alertId }: Props) {
 				<Section withBottomDivider withPadding>
 					<BackButton />
 				</Section>
-				<Section heading={alertData?.title} withBottomDivider withPadding>
+				<Section heading={simplifiedAlertData?.title} withBottomDivider withPadding>
 					<div className={styles.infoBar}>
-						{alertData?.cause && <AlertCauseIcon cause={alertData.cause} withText />}
-						{alertData?.effect && <AlertEffectIcon effect={alertData.effect} withText />}
-						{alertData?.active_period_start_date && <AlertActivePeriodStart date={new Date(alertData.active_period_start_date)} />}
-						{debugContext.flags.is_debug_mode && alertData?._id && <CopyBadge label={`#${alertData._id}`} value={alertData._id} />}
+						{simplifiedAlertData?.cause && <AlertCauseIcon cause={simplifiedAlertData.cause} withText />}
+						{simplifiedAlertData?.effect && <AlertEffectIcon effect={simplifiedAlertData.effect} withText />}
+						{simplifiedAlertData?.start_date && <AlertActivePeriodStart date={simplifiedAlertData.start_date} />}
+						{debugContext.flags.is_debug_mode && simplifiedAlertData?.alert_id && <CopyBadge label={`#${simplifiedAlertData.alert_id}`} value={simplifiedAlertData.alert_id} />}
 						{/* {simplifiedAlertData?.end_date && <AlertActivePeriodEnd date={simplifiedAlertData.end_date} />} */}
 					</div>
 				</Section>
-				{alertData?.references && (
+				{simplifiedAlertData?.informed_entity && (
 					<Section withPadding>
 						<div className={styles.infoBar}>
 							{uniqueInformedEntityLineIds.map((lineId, index) => (
@@ -88,9 +88,9 @@ export function AlertsDetail({ alertId }: Props) {
 			<Surface>
 				<Section withPadding>
 					<div className={styles.contentWrapper}>
-						{alertData?.description && <p className={styles.description}>{alertData.description}</p>}
-						{alertData?.image_url && <AlertsDetailImageThumbnail imageUrl={alertData.image_url} title={alertData.title} />}
-						{alertData?.info_url && <Button href={alertData.info_url || '#'} icon={<IconExternalLink size={18} />} label={t('more_info')} />}
+						{simplifiedAlertData?.description && <p className={styles.description}>{simplifiedAlertData.description}</p>}
+						{simplifiedAlertData?.image_url && <AlertsDetailImageThumbnail imageUrl={simplifiedAlertData?.image_url} title={simplifiedAlertData?.title} />}
+						{simplifiedAlertData?.url && <Button href={simplifiedAlertData.url || '#'} icon={<IconExternalLink size={18} />} label={t('more_info')} />}
 					</div>
 				</Section>
 			</Surface>

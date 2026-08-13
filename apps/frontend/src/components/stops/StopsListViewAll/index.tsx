@@ -40,7 +40,7 @@ export function StopsListViewAll() {
 			<Section>
 				<ViewportList itemMargin={0} items={stopsListContext.data.filtered}>
 					{item => (
-						<RegularListItem key={item._id} href={environmentContext.actions.getNormalizedHref(`/stops/${item._id}`)}>
+						<RegularListItem key={item.id} href={environmentContext.actions.getNormalizedHref(`/stops/${item.id}`)}>
 							<StopDisplay stopData={item} />
 						</RegularListItem>
 					)}

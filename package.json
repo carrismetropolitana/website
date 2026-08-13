@@ -27,9 +27,6 @@
 		"turbo": "2.9.6",
 		"typescript": "6.0.3"
 	},
-	"overrides": {
-		"@tmlmobilidade/go-types-shared": "20260724.30.25"
-	},
 	"packageManager": "npm@11.12.1",
 	"engines": {
 		"node": ">=18"

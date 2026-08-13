@@ -1,36 +1,35 @@
-import type { HubAlert } from '@tmlmobilidade/go-types-public-info';
-
 /* * */
 
-export function normalizeReferenceId(referenceId: null | number | string | undefined): string {
-	return String(referenceId ?? '').trim().replace(/^\[[^\]]+\]/, '');
-}
+import { AlertCause, AlertEffect } from '@/types/alerts.types';
 
-export function getCauseSeverityLevel(cause?: HubAlert['cause']): number {
+// Helper function to get severity level for a cause
+export function getCauseSeverityLevel(cause: AlertCause): number {
 	switch (cause) {
-		case 'ABUSIVE_PARKING':
 		case 'ACCIDENT':
 		case 'CONSTRUCTION':
 		case 'DEMONSTRATION':
 		case 'DRIVER_ABSENCE':
 		case 'DRIVER_ISSUE':
 		case 'HIGH_PASSENGER_LOAD':
+		case 'MAINTENANCE':
 		case 'MEDICAL_EMERGENCY':
-		case 'NETWORK_UPDATE':
 		case 'POLICE_ACTIVITY':
-		case 'PUBLIC_DISORDER':
-		case 'ROAD_ISSUE':
+		case 'ROAD_INCIDENT':
 		case 'STRIKE':
-		case 'TECHNICAL_ISSUE':
+		case 'SYSTEM_FAILURE':
+		case 'TECHNICAL_PROBLEM':
 		case 'TRAFFIC_JAM':
 		case 'WEATHER':
 			return 3;
+		case 'HOLIDAY':
+			return 0;
 		default:
 			return 2;
 	}
 }
 
-export function getEffectSeverityLevel(effect?: HubAlert['effect']): number {
+// Helper function to get severity level for an effect
+export function getEffectSeverityLevel(effect: AlertEffect): number {
 	switch (effect) {
 		case 'ACCESSIBILITY_ISSUE':
 		case 'MODIFIED_SERVICE':

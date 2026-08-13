@@ -2,13 +2,11 @@
 
 /* * */
 
-import type { HubLine, HubStop } from '@tmlmobilidade/go-types-public-info';
-
 import { LineBadge } from '@/components/lines/LineBadge';
 import { useEnvironmentContext } from '@/contexts/Environment.context';
 import { useLinesContext } from '@/contexts/Lines.context';
 import { useStopsContext } from '@/contexts/Stops.context';
-import { normalizeReferenceId } from '@/utils/alerts';
+import { type Line, type Stop } from '@carrismetropolitana/api-types/network';
 import { useRouter } from 'next/navigation';
 import { useMemo } from 'react';
 
@@ -36,23 +34,19 @@ export function AlertInformedEntity({ lineId, routeId, stopId }: Props) {
 	//
 	// B. Transform data
 
-	const lineData = useMemo<HubLine | undefined>(() => {
-		if (lineId) return linesContext.actions.getLineDataById(lineId);
-		if (!routeId) return;
-		const normalizedRouteId = normalizeReferenceId(routeId);
-		return linesContext.data.lines?.find(line => line.route_ids.some(itemId => normalizeReferenceId(itemId) === normalizedRouteId));
-	}, [lineId, linesContext.actions, linesContext.data.lines, routeId]);
+	const lineData = useMemo<Line | undefined>(() => {
+		return linesContext.data.lines?.find(line => line.id === lineId || line.route_ids.some(itemId => itemId === routeId));
+	}, [linesContext.data.lines]);
 
-	const stopData = useMemo<HubStop | undefined>(() => {
-		const normalizedStopId = normalizeReferenceId(stopId);
-		return stopsContext.data.stops?.find(stop => normalizeReferenceId(stop._id) === normalizedStopId);
-	}, [stopId, stopsContext.data.stops]);
+	const stopData = useMemo<Stop | undefined>(() => {
+		return stopsContext.data.stops?.find(stop => stop.id === stopId);
+	}, [stopsContext.data.stops]);
 
 	//
 	// C. Handle actions
 
 	const handleLineBadgeClick = () => {
-		const lineHref = environmentContext.actions.getNormalizedHref(`/lines/${lineData?._id}`);
+		const lineHref = environmentContext.actions.getNormalizedHref(`/lines/${lineData?.id}`);
 		router.push(lineHref);
 	};
 
@@ -67,7 +61,7 @@ export function AlertInformedEntity({ lineId, routeId, stopId }: Props) {
 
 	if (stopId && stopData) {
 		return (
-			<p>{stopData.name}</p>
+			<p>{stopData.long_name}</p>
 		);
 	}
 

@@ -4,8 +4,8 @@ import { LinesDetail } from '@/components/lines/LinesDetail';
 import { LinesDetailContextProvider } from '@/contexts/LinesDetail.context';
 import { type ApiResponse } from '@carrismetropolitana/api-types/common';
 import { type Locality } from '@carrismetropolitana/api-types/locations';
+import { type Line } from '@carrismetropolitana/api-types/network';
 import { getPublicVariable } from '@carrismetropolitana/website-shared-settings';
-import { type HubLine } from '@tmlmobilidade/go-types-public-info';
 import { type Metadata } from 'next';
 
 /* * */
@@ -17,30 +17,27 @@ export async function generateMetadata({ params }): Promise<Metadata> {
 	// A. Setup variables
 
 	const { line_id } = await params;
-	const lineId = decodeURIComponent(line_id);
 
 	//
 	// B. Fetch data
 
-	let allLinesData: HubLine[] | null = null;
+	let allLinesData: Line[] | null = null;
 	let fetchedLocalitiesData: ApiResponse<Locality[]> | null = null;
 	try {
 		const [allLinesResponse, fetchedLocalitiesResponse] = await Promise.all([
-			fetch(`${getPublicVariable('go_api_url')}/hub/api/v1/network/lines`),
+			fetch(`${getPublicVariable('api_url')}/lines`),
 			fetch(`${getPublicVariable('api_url')}/locations/localities`),
 		]);
 		if (!allLinesResponse.ok || !fetchedLocalitiesResponse.ok) throw new Error('Failed to fetch lines or localities');
-		const [allLinesResponseData, fetchedLocalitiesResponseData] = await Promise.all([
-			allLinesResponse.json() as Promise<{ data: HubLine[] }>,
+		[allLinesData, fetchedLocalitiesData] = await Promise.all([
+			allLinesResponse.json(),
 			fetchedLocalitiesResponse.json(),
 		]);
-		allLinesData = allLinesResponseData.data;
-		fetchedLocalitiesData = fetchedLocalitiesResponseData;
 	}
 	catch {
 		return {
-			description: `Horarios planeados e em tempo real da linha ${lineId}.`,
-			title: `Linha ${lineId}`,
+			description: `Horarios planeados e em tempo real da linha ${line_id}.`,
+			title: `Linha ${line_id}`,
 		};
 	}
 	const allLocalitiesData: Locality[] = fetchedLocalitiesData.status === 'success' ? fetchedLocalitiesData.data : [];
@@ -48,7 +45,7 @@ export async function generateMetadata({ params }): Promise<Metadata> {
 	//
 	// C. Transform data
 
-	const lineData = allLinesData.find(item => item._id === lineId);
+	const lineData = allLinesData.find(item => item.id === line_id);
 
 	const goesTroughString = allLocalitiesData
 		.filter(item => lineData?.locality_ids?.includes(item.id))
@@ -59,8 +56,8 @@ export async function generateMetadata({ params }): Promise<Metadata> {
 	// D. Render components
 
 	return {
-		description: lineData ? `Horários planeados e em tempo real da linha ${lineData.short_name}. Esta linha passa por ${goesTroughString}.` : `Horarios planeados e em tempo real da linha ${lineId}.`,
-		title: lineData ? `${lineData.short_name} | ${lineData.long_name}` : `Linha ${lineId}`,
+		description: `Horários planeados e em tempo real da linha ${lineData?.short_name}. Esta linha passa por ${goesTroughString}.`,
+		title: `${lineData?.short_name} | ${lineData?.long_name}`,
 	};
 
 	//
@@ -70,9 +67,8 @@ export async function generateMetadata({ params }): Promise<Metadata> {
 
 export default async function Page({ params }) {
 	const { line_id } = await params;
-	const lineId = decodeURIComponent(line_id);
 	return (
-		<LinesDetailContextProvider lineId={lineId}>
+		<LinesDetailContextProvider lineId={line_id}>
 			<LinesDetail />
 		</LinesDetailContextProvider>
 	);

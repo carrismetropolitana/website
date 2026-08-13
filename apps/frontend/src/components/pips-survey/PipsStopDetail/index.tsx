@@ -38,8 +38,8 @@ export function PipsStopDetail({ stopId }: PipsStopDetailProps) {
 	if (stop) {
 		return (
 			<div className={styles.container} onClick={handleSelectStop}>
-				<p className={styles.stopName}>{stop.name}</p>
-				<p className={styles.stopId}>{stop._id}</p>
+				<p className={styles.stopName}>{stop.long_name}</p>
+				<p className={styles.stopId}>{stop.id}</p>
 			</div>
 		);
 	}

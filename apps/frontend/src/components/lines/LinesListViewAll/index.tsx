@@ -40,7 +40,7 @@ export function LinesListViewAll() {
 			<Section>
 				<ViewportList itemMargin={0} items={linesListContext.data.filtered}>
 					{item => (
-						<RegularListItem key={item._id} href={environmentContext.actions.getNormalizedHref(`/lines/${item._id}`)}>
+						<RegularListItem key={item.id} href={environmentContext.actions.getNormalizedHref(`/lines/${item.id}`)}>
 							<LineDisplay lineData={item} />
 						</RegularListItem>
 					)}
