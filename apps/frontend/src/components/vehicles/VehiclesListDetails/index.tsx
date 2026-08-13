@@ -9,6 +9,7 @@ import { Section } from '@/components/layout/Section';
 import { LineBadge } from '@/components/lines/LineBadge';
 import { LineName } from '@/components/lines/LineName';
 import { useLinesContext } from '@/contexts/Lines.context';
+import { useVehiclesDetailContext, VehiclesDetailContextProvider } from '@/contexts/VehiclesDetail.context';
 import { useVehiclesListContext } from '@/contexts/VehiclesList.context';
 import { Table } from '@mantine/core';
 import { IconBike, IconBikeOff, IconCreditCard, IconCreditCardOff, IconDisabled2, IconDisabledOff, IconX } from '@tabler/icons-react';
@@ -19,7 +20,7 @@ import styles from './styles.module.css';
 
 /* * */
 
-export function VehiclesListDetails() {
+function VehiclesListDetailsContent() {
 	//
 
 	//
@@ -30,25 +31,28 @@ export function VehiclesListDetails() {
 
 	const linesContext = useLinesContext();
 	const vehiclesListContext = useVehiclesListContext();
+	const vehiclesDetailContext = useVehiclesDetailContext();
+
+	const { metadata, position } = vehiclesDetailContext.data;
 
 	//
 	// B. Fetch data
 
 	const activeLineData = useMemo(() => {
-		return linesContext.actions.getLineDataById(vehiclesListContext.data.selected?.line_id || '');
-	}, [vehiclesListContext.data.selected?.line_id]);
+		return linesContext.actions.getLineDataById(position?.line_id || '');
+	}, [linesContext.actions, linesContext.data.lines, position?.line_id]);
 
 	const rows = [
-		{ label: 'ID', value: vehiclesListContext.data.selected?.id },
-		{ label: 'Lugares Sentados', value: vehiclesListContext.data.selected?.capacity_seated },
-		{ label: 'Lugares em pé', value: vehiclesListContext.data.selected?.capacity_standing },
-		{ label: 'Capacidade Total', value: vehiclesListContext.data.selected?.capacity_total },
-		{ label: 'Marca', value: vehiclesListContext.data.selected?.make },
-		{ label: 'Modelo', value: vehiclesListContext.data.selected?.model },
-		{ label: 'Propulsão', value: vehiclesListContext.data.selected?.propulsion ? optionLabels(`VehiclePropulsion.${vehiclesListContext.data.selected.propulsion}`) : t('unknown') },
-		{ label: 'Emission Class', value: vehiclesListContext.data.selected?.emission_class ? optionLabels(`VehicleEmissionClass.${vehiclesListContext.data.selected.emission_class}`) : t('unknown') },
-		{ label: 'Estado Atual', value: vehiclesListContext.data.selected?.current_status },
-		{ label: 'Trip ID', value: vehiclesListContext.data.selected?.trip_id || t('unknown') },
+		{ label: 'ID', value: position?.vehicle_id },
+		{ label: 'Lugares Sentados', value: metadata?.available_seats },
+		{ label: 'Lugares em pé', value: metadata?.available_standing },
+		{ label: 'Capacidade Total', value: metadata ? metadata.available_seats + metadata.available_standing : undefined },
+		{ label: 'Marca', value: metadata?.make },
+		{ label: 'Modelo', value: metadata?.model },
+		{ label: 'Propulsão', value: metadata?.propulsion ? optionLabels(`VehiclePropulsion.${metadata.propulsion}`) : t('unknown') },
+		{ label: 'Emission Class', value: metadata?.emission ? optionLabels(`VehicleEmissionClass.${metadata.emission}`) : t('unknown') },
+		{ label: 'Estado Atual', value: position?.current_status },
+		{ label: 'Trip ID', value: position?.trip_id || t('unknown') },
 	];
 
 	//
@@ -57,7 +61,10 @@ export function VehiclesListDetails() {
 	return (
 		<Section withGap withPadding>
 
-			{vehiclesListContext.data.selected ? (
+			{ !position && <NoDataLabel text={t('no_data')} />}
+
+			{ position && (
+
 				<>
 					<IconX className={styles.closeButton} onClick={() => vehiclesListContext.actions.updateSelectedVehicle(null)} />
 
@@ -66,10 +73,10 @@ export function VehiclesListDetails() {
 						<LineName align="center" lineData={activeLineData} size="lg" />
 
 						<div className={styles.iconList}>
-							<TooltipIcon icon={vehiclesListContext.data.selected?.bikes_allowed ? <IconBike /> : <IconBikeOff />} label={vehiclesListContext.data.selected?.bikes_allowed ? t('bikes_allowed') : t('no_bikes_allowed')} position="bottom" />
-							<TooltipIcon icon={vehiclesListContext.data.selected?.wheelchair_accessible ? <IconDisabled2 /> : <IconDisabledOff />} label={vehiclesListContext.data.selected?.wheelchair_accessible ? t('wheelchair_accessible') : t('no_wheelchair_accessible')} position="bottom" />
-							<TooltipIcon icon={vehiclesListContext.data.selected.contactless ? <IconCreditCard /> : <IconCreditCardOff />} label={vehiclesListContext.data.selected.contactless ? t('contactless') : t('no_contactless')} position="bottom" />
-							{vehiclesListContext.data.selected.license_plate && <LicensePlate value={vehiclesListContext.data.selected.license_plate} />}
+							<TooltipIcon icon={metadata?.bicycles ? <IconBike /> : <IconBikeOff />} label={metadata?.bicycles ? t('bikes_allowed') : t('no_bikes_allowed')} position="bottom" />
+							<TooltipIcon icon={metadata?.wheelchair ? <IconDisabled2 /> : <IconDisabledOff />} label={metadata?.wheelchair ? t('wheelchair_accessible') : t('no_wheelchair_accessible')} position="bottom" />
+							<TooltipIcon icon={metadata?.contactless ? <IconCreditCard /> : <IconCreditCardOff />} label={metadata?.contactless ? t('contactless') : t('no_contactless')} position="bottom" />
+							{metadata?.license_plate && <LicensePlate value={metadata.license_plate} />}
 						</div>
 
 						<Table withRowBorders>
@@ -82,14 +89,22 @@ export function VehiclesListDetails() {
 								))}
 							</Table.Tbody>
 						</Table>
-
 					</div>
 				</>
-			) : (
-				<NoDataLabel text={t('no_data')} />
 			)}
+
 		</Section>
 	);
 
 	//
+}
+
+export function VehiclesListDetails() {
+	const vehiclesListContext = useVehiclesListContext();
+
+	return (
+		<VehiclesDetailContextProvider vehicleId={vehiclesListContext.filters.selected_vehicle}>
+			<VehiclesListDetailsContent />
+		</VehiclesDetailContextProvider>
+	);
 }

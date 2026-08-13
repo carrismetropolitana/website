@@ -6,7 +6,7 @@ import { formatDay, formatMonth } from '@/utils/formatDates';
 import { TopDemandLinesByAgency } from '@carrismetropolitana/api-types/metrics';
 import { getPublicVariable } from '@carrismetropolitana/website-shared-settings';
 import { Dates } from '@tmlmobilidade/dates';
-import { DemandByAgencyByDay, DemandByAgencyByMonth, DemandByLineByDay, TopDemandByAgency } from '@tmlmobilidade/types';
+import { type DemandByAgencyByDay, type DemandByAgencyByMonth, type DemandByLineByDay, type TopDemandByAgency } from '@tmlmobilidade/types';
 import { DateTime } from 'luxon';
 import { useTranslations } from 'next-intl';
 import { createContext, useContext, useMemo, useState } from 'react';
@@ -116,11 +116,7 @@ export const MetricsContextProvider = ({ children }) => {
 	//
 	// C. Helpers
 
-	function filterByDateRange(
-		data: MetricDayData[] | MetricMonthData[] = [],
-		start: Dates,
-		end: Dates,
-	) {
+	function filterByDateRange(data: MetricDayData[] | MetricMonthData[] = [], start: Dates, end: Dates) {
 		return data
 			.filter((item) => {
 				const hasMonthGroup = 'month_group' in item;

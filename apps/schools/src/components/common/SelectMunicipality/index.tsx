@@ -1,5 +1,8 @@
 'use client';
 
+import { GoApiResponse } from '@/types/go-api-types';
+import { getPublicVariable } from '@carrismetropolitana/website-shared-settings';
+
 /* * */
 
 import { Select } from '@mantine/core';
@@ -9,8 +12,15 @@ import useSWR from 'swr';
 /* * */
 
 interface Props {
-	onSelectMunicipalityId: (municipalityId: string) => void
+	onSelectMunicipalityId: (municipalityId: null | string) => void
 	selectedMunicipalityId: null | string
+}
+
+interface MunicipalityFeature {
+	_id: string
+	properties: {
+		name: string
+	}
 }
 
 /* * */
@@ -21,20 +31,20 @@ export function SelectMunicipality({ onSelectMunicipalityId, selectedMunicipalit
 	//
 	// A. Fetch data
 
-	const { data: allMunicipalitiesData } = useSWR('https://api.carrismetropolitana.pt/municipalities');
+	const { data: allMunicipalitiesData, isLoading: allMunicipalitiesLoading } = useSWR<GoApiResponse<MunicipalityFeature[]>, Error>(`${getPublicVariable('go_api_url')}/locations/api/locations/municipalities`, { refreshInterval: 900000 }); // 15 minutes
 
 	//
 	// B. Transform data
 
 	const allMunicipalitiesDataAsSelectOptions = useMemo(() => {
 		// Return empty array if data is not available
-		if (!allMunicipalitiesData) return [];
+		if (!allMunicipalitiesData || allMunicipalitiesLoading) return [];
 		// Return formatted array for select
 		const collator = new Intl.Collator('en', { numeric: true, sensitivity: 'base' });
-		const allMunicipalitiesSorted = allMunicipalitiesData.sort((a, b) => collator.compare(a.name, b.name));
-		return allMunicipalitiesSorted.map(item => ({ label: item.name, value: item.id }));
+		const allMunicipalitiesSorted = [...allMunicipalitiesData.data].sort((a, b) => collator.compare(a.properties.name, b.properties.name));
+		return allMunicipalitiesSorted.map(item => ({ label: item.properties.name, value: item._id }));
 		//
-	}, [allMunicipalitiesData, selectedMunicipalityId]);
+	}, [allMunicipalitiesData, allMunicipalitiesLoading]);
 
 	//
 	// C. Render components

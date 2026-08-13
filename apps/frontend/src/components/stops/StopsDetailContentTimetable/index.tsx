@@ -22,7 +22,7 @@ export function StopsDetailContentTimetable() {
 	//
 	// B. Render components
 
-	if (stopsDetailContext.flags.is_loading_timetable) {
+	if (stopsDetailContext.flags.is_loading) {
 		return (
 			<StopsDetailContentTimetableSkeleton />
 		);

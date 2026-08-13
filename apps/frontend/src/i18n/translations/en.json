@@ -1089,21 +1089,21 @@
 		"Page": {
 			"heading": "Lost and Found",
 			"operator_sections": {
-				"41": {
-					"description": "Send an email to passenger@viacaoalvorada.pt with information about the line used, timetable and description of the object. If possible, include the vehicle number or license plate.",
-					"title": "Area 1 | Viação Alvorada"
+				"A2L1N": {
+					"description": "Fill out the Online Form available on the operator's website or send an email to passageiros@alsa.com with information about the line used, time and description of the object. If possible, include the vehicle number or license plate.",
+					"title": "Area 4 | Alsa Todi"
 				},
-				"42": {
+				"BNA17": {
 					"description": "Fill out the Online Form available on the operator's website with information about the line used, time and description of the object. If possible, include the vehicle number or license plate.",
 					"title": "Area 2 | Rodoviária de Lisboa"
 				},
-				"43": {
+				"LA77N": {
+					"description": "Send an email to passenger@viacaoalvorada.pt with information about the line used, timetable and description of the object. If possible, include the vehicle number or license plate.",
+					"title": "Area 1 | Viação Alvorada"
+				},
+				"YA15B": {
 					"description": "Fill out the Online Form available on the operator's website with information about the line used, time and description of the object. If possible, include the vehicle number or license plate.",
 					"title": "Area 3 | TST"
-				},
-				"44": {
-					"description": "Fill out the Online Form available on the operator's website or send an email to passageiros@alsa.com with information about the line used, time and description of the object. If possible, include the vehicle number or license plate.",
-					"title": "Area 4 | Alsa Todi"
 				}
 			},
 			"subheading": "Carris Metropolitana's transport service is provided by 4 transport operators, each operating in their own area of the Lisbon Metropolitan Area, as shown in the image below. Therefore, the best way to recover your object is to directly contact the operator of the area you used."
@@ -1493,15 +1493,19 @@
 			"41": "Viação Alvorada",
 			"42": "Rodoviária de Lisboa",
 			"43": "TST",
-			"44": "Alsa Todi"
+			"44": "Alsa Todi",
+			"A2L1N": "Alsa Todi",
+			"BNA17": "Rodoviária de Lisboa",
+			"LA77N": "Viação Alvorada",
+			"YA15B": "Transportes Sul Tejo"
 		},
 		"VehicleEmissionClass": {
-			"euro_1": "EURO 1",
-			"euro_2": "EURO 2",
-			"euro_3": "EURO 3",
-			"euro_4": "EURO 4",
-			"euro_5": "EURO 5",
-			"euro_6": "EURO 6"
+			"EURO_I": "EURO 1",
+			"EURO_II": "EURO 2",
+			"EURO_III": "EURO 3",
+			"EURO_IV": "EURO 4",
+			"EURO_V": "EURO 5",
+			"EURO_VI": "EURO 6"
 		},
 		"VehiclePropulsion": {
 			"diesel": "Diesel",
@@ -2016,12 +2020,20 @@
 		}
 	},
 	"stops": {
+		"NextArrivals": {
+			"arriving": "Arriving",
+			"hours": "h",
+			"minutes": "min"
+		},
 		"Page": {
 			"heading": "Search Stops"
 		},
 		"Single": {
 			"heading": "Search Stops",
 			"lines_that_pass_here": "Lines using this stop"
+		},
+		"StopsDetail": {
+			"title": "Stop"
 		},
 		"StopsDetailAlerts": {
 			"heading": "Active alerts",
@@ -2036,11 +2048,11 @@
 			}
 		},
 		"StopsDetailContentTimetableRealtime": {
-			"end_of_day": "End of day",
+			"end_of_day": "End of Day",
 			"no_service": "No Service Today",
 			"show_past_trips_toggle": {
-				"hide": "Hide previous passages",
-				"show": "View previous passages"
+				"hide": "Hide previous arrivals",
+				"show": "Show previous arrivals"
 			}
 		},
 		"StopsDetailContentTimetableRow": {

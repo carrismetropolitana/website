@@ -48,10 +48,10 @@ export const LocationsContextProvider = ({ children }) => {
 	//
 	// A. Fetch data
 
-	const { data: fetchedDistrictsData, isLoading: fetchedDistrictsLoading } = useSWR<ApiResponse<District[]>, Error>(`${getPublicVariable('api_url')}/locations/districts`, { refreshInterval: 900000 }); // 15 minutes
-	const { data: fetchedMunicipalitiesData, isLoading: fetchedMunicipalitiesLoading } = useSWR<ApiResponse<Municipality[]>, Error>(`${getPublicVariable('api_url')}/locations/municipalities`, { refreshInterval: 900000 }); // 15 minutes
-	const { data: fetchedParishesData, isLoading: fetchedParishesLoading } = useSWR<ApiResponse<Parish[]>, Error>(`${getPublicVariable('api_url')}/locations/parishes`, { refreshInterval: 900000 }); // 15 minutes
-	const { data: fetchedLocalitiesData, isLoading: fetchedLocalitiesLoading } = useSWR<ApiResponse<Locality[]>, Error>(`${getPublicVariable('api_url')}/locations/localities`, { refreshInterval: 900000 }); // 15 minutes
+	const { data: fetchedDistrictsData, isLoading: fetchedDistrictsLoading } = useSWR<ApiResponse<District[]>, Error>(`${getPublicVariable('go_api_url')}/locations/api/locations/districts`, { refreshInterval: 900000 }); // 15 minutes
+	const { data: fetchedMunicipalitiesData, isLoading: fetchedMunicipalitiesLoading } = useSWR<ApiResponse<Municipality[]>, Error>(`${getPublicVariable('go_api_url')}/locations/api/locations/municipalities`, { refreshInterval: 900000 }); // 15 minutes
+	const { data: fetchedParishesData, isLoading: fetchedParishesLoading } = useSWR<ApiResponse<Parish[]>, Error>(`${getPublicVariable('go_api_url')}/locations/api/locations/parishes`, { refreshInterval: 900000 }); // 15 minutes
+	const { data: fetchedLocalitiesData, isLoading: fetchedLocalitiesLoading } = useSWR<ApiResponse<Locality[]>, Error>(`${getPublicVariable('go_api_url')}/locations/api/locations/localities`, { refreshInterval: 900000 }); // 15 minutes
 
 	//
 	// B. Transform data

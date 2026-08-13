@@ -9,11 +9,12 @@ import { MapViewStylePath } from '@/components/map/MapViewStylePath';
 import { MapViewStyleVehicles, MapViewStyleVehiclesInteractiveLayerId, MapViewStyleVehiclesPrimaryLayerId } from '@/components/map/MapViewStyleVehicles';
 import { useAlertsContext } from '@/contexts/Alerts.context';
 import { useEnvironmentContext } from '@/contexts/Environment.context';
+import { useOperationalDateContext } from '@/contexts/OperationalDate.context';
 import { transformStopDataIntoGeoJsonFeature, useStopsContext } from '@/contexts/Stops.context';
 import { transformVehicleDataIntoGeoJsonFeature, useVehiclesContext } from '@/contexts/Vehicles.context';
 import { useVehiclesListContext } from '@/contexts/VehiclesList.context';
+import { useVehicleMetadata } from '@/hooks/useVehicleMetadata';
 import { centerMap, getBaseGeoJsonFeatureCollection } from '@/utils/map.utils';
-import getOperationalDate from '@/utils/operation';
 import { Pattern, Shape } from '@carrismetropolitana/api-types/network';
 import { getPublicVariable } from '@carrismetropolitana/website-shared-settings';
 import { IconAlertTriangle } from '@tabler/icons-react';
@@ -23,8 +24,6 @@ import { useRouter } from 'next/navigation';
 import { useEffect, useMemo, useState } from 'react';
 
 import styles from './styles.module.css';
-
-/* * */
 
 export function VehiclesListMap() {
 	//
@@ -37,11 +36,14 @@ export function VehiclesListMap() {
 	const router = useRouter();
 	const vehiclesListContext = useVehiclesListContext();
 	const vehiclesContext = useVehiclesContext();
+	const vehicleMetadata = useVehicleMetadata();
+	const getVehicleMetadata = vehicleMetadata.actions.getMetadataForVehicleId;
 	const stopsContext = useStopsContext();
 	const alertsContext = useAlertsContext();
 	const environmentContext = useEnvironmentContext();
+	const operationalDateContext = useOperationalDateContext();
 
-	const [isAutoZoom, setIsAutoZoom] = useState(true);
+	const [isAutoZoom, setIsAutoZoom] = useState(false);
 	const [activePatternData, setActivePatternData] = useState<Pattern | undefined>();
 	const [activeShapeData, setActiveShapeData] = useState<Shape | undefined>();
 	const [showAlerts, setShowAlerts] = useState(true);
@@ -53,16 +55,27 @@ export function VehiclesListMap() {
 
 	useEffect(() => {
 		(async () => {
-			if (!vehiclesListContext.data.selected) return;
-			if (vehiclesListContext.data.selected.pattern_id) {
-				const todayOperationalDate = getOperationalDate();
-				const fetchedPatternResponse = await fetch(`${getPublicVariable('api_url')}/patterns/${vehiclesListContext.data.selected.pattern_id}`);
-				const fetchedPatternData = await fetchedPatternResponse.json();
-				const activePatternVersion = fetchedPatternData.find(item => item.valid_on.includes(todayOperationalDate));
-				setActivePatternData(activePatternVersion);
+			if (!vehiclesListContext.data.selected?.pattern_id) {
+				setActivePatternData(undefined);
+				return;
 			}
+
+			const operationalDate = operationalDateContext.data.selected_date?.operational_date;
+			if (!operationalDate) return;
+
+			const fetchedPatternResponse = await fetch(`${getPublicVariable('go_api_url')}/hub/api/v1/network/patterns/${encodeURIComponent(vehiclesListContext.data.selected.pattern_id)}`);
+
+			const fetchedPatternResponseData: { data?: Pattern[] } = await fetchedPatternResponse.json();
+			const fetchedPatternData = fetchedPatternResponseData.data;
+			if (!Array.isArray(fetchedPatternData) || fetchedPatternData.length === 0) {
+				setActivePatternData(undefined);
+				return;
+			}
+
+			const activePatternVersion = fetchedPatternData.find(item => item.valid_on?.includes(operationalDate)) ?? fetchedPatternData[0];
+			setActivePatternData(activePatternVersion);
 		})();
-	}, [vehiclesListContext.data.selected]);
+	}, [operationalDateContext.data.selected_date, vehiclesListContext.data.selected]);
 
 	useEffect(() => {
 		(async () => {
@@ -70,10 +83,11 @@ export function VehiclesListMap() {
 				setActiveShapeData(undefined);
 				return;
 			}
-			const fetchedShapeResponse = await fetch(`${getPublicVariable('api_url')}/shapes/${activePatternData.shape_id}`);
-			if (!fetchedShapeResponse.ok) return;
-			const fetchedShapeData = await fetchedShapeResponse.json();
-			setActiveShapeData(fetchedShapeData);
+
+			const fetchedShapeResponse = await fetch(`${getPublicVariable('go_api_url')}/hub/api/v1/network/shapes/${encodeURIComponent(activePatternData.shape_id)}`);
+
+			const fetchedShapeResponseData: { data?: Shape } = await fetchedShapeResponse.json();
+			setActiveShapeData(fetchedShapeResponseData.data);
 		})();
 	}, [activePatternData]);
 
@@ -111,17 +125,17 @@ export function VehiclesListMap() {
 	const activeVehiclesGeoJsonFC = useMemo(() => {
 		const collection = getBaseGeoJsonFeatureCollection();
 		if (vehiclesListContext.data.selected) {
-			const vehicleGeoJsonFeature = transformVehicleDataIntoGeoJsonFeature(vehiclesListContext.data.selected);
-			collection.features.push(vehicleGeoJsonFeature);
+			const contactless = getVehicleMetadata(vehiclesListContext.data.selected.vehicle_id)?.contactless ?? false;
+			collection.features.push(transformVehicleDataIntoGeoJsonFeature(vehiclesListContext.data.selected, contactless));
 		}
 		else {
 			vehiclesListContext.data.filtered.forEach((vehicle) => {
-				const vehicleGeoJsonFeature = transformVehicleDataIntoGeoJsonFeature(vehicle);
-				collection.features.push(vehicleGeoJsonFeature);
+				const contactless = getVehicleMetadata(vehicle.vehicle_id)?.contactless ?? false;
+				collection.features.push(transformVehicleDataIntoGeoJsonFeature(vehicle, contactless));
 			});
 		}
 		return collection;
-	}, [vehiclesListContext.data.filtered, vehiclesListContext.data.selected, vehiclesContext.data.vehicles]);
+	}, [getVehicleMetadata, vehiclesListContext.data.filtered, vehiclesListContext.data.selected, vehiclesContext.data.vehicles]);
 
 	//
 	// D. Handle actions
@@ -129,7 +143,7 @@ export function VehiclesListMap() {
 	function handleLayerClick(event) {
 		setIsAutoZoom(false);
 		if (event.features.length !== 0 && event.features[0].source === 'default-source-vehicles') {
-			vehiclesListContext.actions.updateSelectedVehicle(event.features[0].properties.id);
+			vehiclesListContext.actions.updateSelectedVehicle(event.features[0].properties.vehicle_id);
 		}
 		else if (event.features.length !== 0 && event.features[0].source === MapViewStyleAlertsSourceId) {
 			router.push(environmentContext.actions.getNormalizedHref(`/alerts/${event.features[0].properties.id}`));
@@ -183,8 +197,8 @@ export function VehiclesListMap() {
 			showCenterButton={true}
 			toolbarExtras={toolbarExtras}
 		>
-			{showAlerts && <MapViewStyleAlerts data={alertsContext.data.featureCollection} />}
-			<MapViewStyleVehicles presentBeforeId={showAlerts ? MapViewStyleAlertsLayerId : undefined} showCounter="always" vehiclesData={activeVehiclesGeoJsonFC} />
+			{showAlerts && <MapViewStyleAlerts data={alertsContext.data.fc} />}
+			<MapViewStyleVehicles presentBeforeId={showAlerts ? MapViewStyleAlertsLayerId : undefined} showCounter="always" vehiclesData={activeVehiclesGeoJsonFC as GeoJSON.FeatureCollection<GeoJSON.Point> | undefined} />
 			<MapViewStylePath presentBeforeId={MapViewStyleVehiclesPrimaryLayerId} shapeData={activePathShapeGeoJson} waypointsData={activePathWaypointsGeoJson} />
 		</MapView>
 	);

@@ -22,7 +22,7 @@
 		"googleapis": "171.4.0",
 		"inflected": "2.1.0",
 		"mantine-form-zod-resolver": "1.3.0",
-		"maplibre-gl": "5.23.0",
+		"maplibre-gl": "5.24.0",
 		"next": "15.4.11",
 		"nodemailer": "8.0.5",
 		"react": "19.2.5",
@@ -35,6 +35,7 @@
 	"devDependencies": {
 		"@carrismetropolitana/api-types": "20260726.2136.34",
 		"@carrismetropolitana/eslint": "20250622.1204.50",
+		"@tmlmobilidade/go-types-public-info": "20260724.30.25",
 		"@tmlmobilidade/tsconfig": "20260418.1237.24",
 		"@types/node": "25.6.0",
 		"@types/nodemailer": "8.0.0",
@@ -42,5 +43,6 @@
 		"postcss": "8.5.10",
 		"postcss-preset-mantine": "1.18.0",
 		"postcss-simple-vars": "7.0.1"
-	}
+	},
+	"packageManager": "npm@11.12.1"
 }

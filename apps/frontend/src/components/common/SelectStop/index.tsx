@@ -2,11 +2,11 @@
 
 /* * */
 
+import type { HubStop } from '@tmlmobilidade/go-types-public-info';
+
 import { StopDisplay } from '@/components/stops/StopDisplay';
 import { useProfileContext } from '@/contexts/Profile.context';
-import { useStopsContext } from '@/contexts/Stops.context';
 import { createDocCollection } from '@/hooks/useOtherSearch';
-import { type Stop } from '@carrismetropolitana/api-types/network';
 import { ActionIcon, Combobox, Group, TextInput, useCombobox } from '@mantine/core';
 import { useDebouncedValue } from '@mantine/hooks';
 import { IconBusStop, IconSelector, IconX } from '@tabler/icons-react';
@@ -18,7 +18,7 @@ import styles from './styles.module.css';
 /* * */
 
 interface SelectStopProps {
-	data: Stop[]
+	data: HubStop[]
 	label?: string
 	nothingFound?: string
 	onSelectStopId: (stopId: null | string) => void
@@ -40,40 +40,47 @@ export function SelectStop({ data = [], label, nothingFound, onSelectStopId, pla
 	const [debouncedSearchQuery] = useDebouncedValue(searchQuery, 200);
 
 	const profileContext = useProfileContext();
-	const stopsContext = useStopsContext();
 
 	const comboboxStore = useCombobox();
+
+	const sortStopsById = (stops: HubStop[]) => [...stops].sort((a, b) => a._id - b._id);
 
 	//
 	// B. Transform data
 
 	const { search } = useMemo(() => {
-		// Prepare data for search function
-		const preparedSearchCollection = stopsContext.data.stops.map((item) => {
-			const isFavorite = profileContext.data.favorite_stops?.includes(item.id) ? true : false;
+		const preparedSearchCollection = data.map((item) => {
+			const isFavorite = profileContext.data.favorite_stops?.includes(item._id.toString()) ? true : false;
 
 			return {
 				...item,
 				boost: isFavorite,
+				id: item._id.toString(),
 			};
 		});
 		return createDocCollection(preparedSearchCollection, {
+			district_name: 1,
 			id: 2,
-			long_name: 1,
+			locality_name: 1,
+			municipality_name: 1,
+			name: 1,
 			short_name: 1,
 			tts_name: 1.5,
 		});
-	}, [data]);
+	}, [data, profileContext.data.favorite_stops]);
 
 	const selectedStopData = useMemo(() => {
-		return data.find(item => item.id === selectedStopId);
+		return data.find(item => item._id.toString() === selectedStopId);
 	}, [data, selectedStopId]);
 
 	//
 	// C. Search
 
 	const allStopsDataFilteredBySearchQuery = useMemo(() => {
-		const filteredData = debouncedSearchQuery ? search(debouncedSearchQuery) : data;
+		let filteredData = debouncedSearchQuery ? search(debouncedSearchQuery) : data;
+		if (!debouncedSearchQuery || /^\d+$/.test(debouncedSearchQuery.trim())) {
+			filteredData = sortStopsById(filteredData);
+		}
 		return filteredData.slice(0, 100);
 	}, [debouncedSearchQuery, search, data]);
 
@@ -161,7 +168,7 @@ export function SelectStop({ data = [], label, nothingFound, onSelectStopId, pla
 					{allStopsDataFilteredBySearchQuery.length === 0
 						? <Combobox.Empty>{nothingFound || t('nothing_found')}</Combobox.Empty>
 						: allStopsDataFilteredBySearchQuery.map(item => (
-							<Combobox.Option key={item.id} className={item.id === selectedStopData?.id ? styles.selected : ''} value={item.id}>
+							<Combobox.Option key={item._id} className={item._id === selectedStopData?._id ? styles.selected : ''} value={item._id.toString()}>
 								<div className={styles.comboboxOption}>
 									<StopDisplay stopData={item} />
 								</div>

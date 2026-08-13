@@ -32,52 +32,52 @@ export function StopsDetailContentMap() {
 	// B. Fetch data
 
 	const activeStopGeoJson = useMemo(() => {
-		return stopsContext.actions.getStopByIdGeoJsonFC(stopsDetailContext.data.active_stop_id);
-	}, [stopsDetailContext.data.active_stop_id, stopsDetailContext.data.stop]);
+		if (!stopsDetailContext.data.stop) return;
+		return stopsContext.actions.getStopByIdGeoJsonFC(String(stopsDetailContext.data.stop._id));
+	}, [stopsDetailContext.data.stop, stopsContext.actions]);
 
 	const activePathWaypointsGeoJson = useMemo(() => {
-		if (!stopsDetailContext.data.active_pattern_group?.path) return;
+		if (!stopsDetailContext.data.highlighted_pattern?.path) return;
 		const collection = getBaseGeoJsonFeatureCollection();
-		stopsDetailContext.data.active_pattern_group.path.forEach((pathStop) => {
+		stopsDetailContext.data.highlighted_pattern.path.forEach((pathStop) => {
 			const stopData = stopsContext.actions.getStopById(pathStop.stop_id);
 			if (!stopData) return;
 			const result = transformStopDataIntoGeoJsonFeature(stopData);
 			result.properties = {
 				...result.properties,
-				color: stopsDetailContext.data.active_pattern_group?.color,
-				text_color: stopsDetailContext.data.active_pattern_group?.text_color,
+				color: stopsDetailContext.data.highlighted_pattern?.color,
+				text_color: stopsDetailContext.data.highlighted_pattern?.text_color,
 			};
 			collection.features.push(result);
 		});
 		return collection;
-	}, [stopsDetailContext.data.active_trip_id, vehiclesContext.data.vehicles]);
+	}, [stopsContext.actions, stopsDetailContext.data.highlighted_pattern]);
 
 	const activePathShapeGeoJson = useMemo(() => {
-		if (!stopsDetailContext.data.active_shape) return;
-		return stopsDetailContext.data.active_shape?.geojson;
-	}, [stopsDetailContext.data.active_shape]);
+		return stopsDetailContext.data.highlighted_shape?.geojson;
+	}, [stopsDetailContext.data.highlighted_shape]);
 
-	const activeVehicleGeoJson = useMemo(() => {
-		if (!stopsDetailContext.data.active_trip_id) return;
-		return vehiclesContext.actions.getVehiclesByTripIdGeoJsonFC(stopsDetailContext.data.active_trip_id);
-	}, [stopsDetailContext.data.active_trip_id, vehiclesContext.data.vehicles]);
+	const activeVehicleGeoJson = useMemo<GeoJSON.FeatureCollection<GeoJSON.Point> | undefined>(() => {
+		if (!stopsDetailContext.data.highlighted_trip_id) return;
+		return vehiclesContext.actions.getVehiclesByTripIdGeoJsonFC(stopsDetailContext.data.highlighted_trip_id) as GeoJSON.FeatureCollection<GeoJSON.Point> | undefined;
+	}, [stopsDetailContext.data.highlighted_trip_id, vehiclesContext.actions, vehiclesContext.data.vehicles]);
 
 	//
 	// B. Transform Data
 
 	useEffect(() => {
 		if (!stopsDetailContext.data.stop || !stopsMap) return;
-		const coordinates = [stopsDetailContext.data.stop.lon, stopsDetailContext.data.stop.lat];
+		const coordinates = [stopsDetailContext.data.stop.longitude, stopsDetailContext.data.stop.latitude];
 		if (coordinates.some(isNaN)) return;
 		moveMap(stopsMap, coordinates);
-		if (stopsDetailContext.data.active_trip_id) {
+		if (stopsDetailContext.data.highlighted_trip_id) {
 			// Create a feature collection with the vehicle and the stop
-			const vehicleFC = vehiclesContext.actions.getVehiclesByTripIdGeoJsonFC(stopsDetailContext.data.active_trip_id);
-			const stopFC = stopsContext.actions.getStopByIdGeoJsonFC(stopsDetailContext.data.active_stop_id);
+			const vehicleFC = vehiclesContext.actions.getVehiclesByTripIdGeoJsonFC(stopsDetailContext.data.highlighted_trip_id);
+			const stopFC = stopsContext.actions.getStopByIdGeoJsonFC(String(stopsDetailContext.data.stop._id));
 			if (!vehicleFC?.features.length || !stopFC?.features.length) return;
 			centerMap(stopsMap, [vehicleFC.features[0], stopFC.features[0]], { padding: 70 });
 		}
-	}, [stopsDetailContext.data.stop, stopsDetailContext.data.active_trip_id, vehiclesContext.data.vehicles, stopsMap]);
+	}, [stopsDetailContext.data.stop, stopsDetailContext.data.highlighted_trip_id, stopsContext.actions, vehiclesContext.actions, vehiclesContext.data.vehicles, stopsMap]);
 
 	//
 	// C. Handle Actions
@@ -87,14 +87,14 @@ export function StopsDetailContentMap() {
 		const features = stopsMap.queryRenderedFeatures(event.point);
 		if (!features.length) return;
 		for (const feature of features) {
-			if (feature.properties.id === stopsDetailContext.data.active_stop_id) {
+			if (feature.properties.id === String(stopsDetailContext.data.stop?._id)) {
 				continue;
 			}
 			else if (feature.layer.id !== MapViewStyleStopsInteractiveLayerId) {
 				continue;
 			}
 			else {
-				stopsDetailContext.actions.setActiveStopId(feature.properties.id);
+				stopsDetailContext.actions.setActiveStopId(String(feature.properties.id));
 				return;
 			}
 		}
@@ -128,7 +128,7 @@ export function StopsDetailContentMap() {
 			<MapViewStyleStops
 				presentBeforeId={MapViewStylePathPrimaryLayerId}
 				stopsData={stopsContext.data.stops_fc}
-				style={stopsDetailContext.data.active_shape ? 'muted' : 'primary'}
+				style={stopsDetailContext.data.highlighted_shape ? 'muted' : 'primary'}
 			/>
 
 		</MapView>
