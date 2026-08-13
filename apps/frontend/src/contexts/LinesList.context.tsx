@@ -2,7 +2,7 @@
 
 /* * */
 
-import type { Line } from '@carrismetropolitana/api-types/network';
+import type { HubLine } from '@tmlmobilidade/go-types-public-info';
 
 import { useEnvironmentContext } from '@/contexts/Environment.context';
 import { useLinesContext } from '@/contexts/Lines.context';
@@ -26,9 +26,9 @@ interface LinesListContextState {
 		favorites: number
 	}
 	data: {
-		favorites: Line[]
-		filtered: Line[]
-		raw: Line[]
+		favorites: HubLine[]
+		filtered: HubLine[]
+		raw: HubLine[]
 	}
 	filters: {
 		by_attribute: null | string
@@ -68,8 +68,8 @@ export const LinesListContextProvider = ({ children }) => {
 	const analyticsContext = useAnalyticsContext();
 	const isMupi = environmentContext.data.value === 'mupi';
 
-	const [dataFilteredState, setDataFilteredState] = useState<Line[]>([]);
-	const [dataFavoritesState, setDataFavoritesState] = useState<Line[]>([]);
+	const [dataFilteredState, setDataFilteredState] = useState<HubLine[]>([]);
+	const [dataFavoritesState, setDataFavoritesState] = useState<HubLine[]>([]);
 
 	const [filterByAttributeState, setFilterByAttributeState] = useState <LinesListContextState['filters']['by_attribute']>(null);
 	const [filterByCurrentViewState, setFilterByCurrentViewState] = useState <LinesListContextState['filters']['by_current_view']>('all');
@@ -80,7 +80,7 @@ export const LinesListContextProvider = ({ children }) => {
 	//
 	// C. Transform data
 
-	const applyFiltersToData = (allData: Line[] = []) => {
+	const applyFiltersToData = (allData: HubLine[] = []) => {
 		//
 
 		let filterResult = allData;
@@ -117,9 +117,9 @@ export const LinesListContextProvider = ({ children }) => {
 
 		if (filterBySearchState) {
 			// Give extra weight to favorite lines
-			const boostedData = filterResult.map(line => ({ ...line, boost: profileContext.data.favorite_lines?.includes(line.id) ? true : false }));
+			const boostedData = filterResult.map(line => ({ ...line, boost: profileContext.data.favorite_lines?.includes(line._id) ? true : false }));
 			const searchHook = createDocCollection(boostedData, {
-				id: 4,
+				_id: 4,
 				// locality_ids: 1,
 				long_name: 2,
 				short_name: 4,
@@ -142,7 +142,7 @@ export const LinesListContextProvider = ({ children }) => {
 	}, [linesContext.data.lines, filterByAttributeState, filterByFacilityState, filterByMunicipalityOrLocalityState, filterBySearchState]);
 
 	useEffect(() => {
-		const favoritesLinesData = linesContext.data.lines?.filter(line => profileContext.data.favorite_lines?.includes(line.id)) || [];
+		const favoritesLinesData = linesContext.data.lines?.filter(line => profileContext.data.favorite_lines?.includes(line._id)) || [];
 		setDataFavoritesState(favoritesLinesData);
 	}, [linesContext.data.lines, profileContext.data.favorite_lines]);
 

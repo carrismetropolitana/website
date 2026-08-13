@@ -3,9 +3,12 @@
 /* * */
 
 import { useVehiclesContext } from '@/contexts/Vehicles.context';
-import { Vehicle } from '@carrismetropolitana/api-types/vehicles';
+import { useVehicleMetadata } from '@/hooks/useVehicleMetadata';
+import { type HubVehicleMetadata } from '@/types/vehicles.types';
+import { type HubVehiclePosition } from '@tmlmobilidade/go-types-public-info';
+import { DateTime } from 'luxon';
 import { useQueryState } from 'nuqs';
-import { createContext, useContext, useEffect, useState } from 'react';
+import { createContext, useContext, useEffect, useMemo, useState } from 'react';
 
 /* * */
 
@@ -20,9 +23,10 @@ interface VehiclesListContextState {
 		updateSelectedVehicle: (value: null | string) => void
 	}
 	data: {
-		filtered: Vehicle[]
-		raw: Vehicle[]
-		selected: null | Vehicle
+		filtered: HubVehiclePosition[]
+		metadata: HubVehicleMetadata[]
+		raw: HubVehiclePosition[]
+		selected: HubVehiclePosition | null
 	}
 	filters: {
 		by_agency: null | string
@@ -55,8 +59,9 @@ export const VehiclesListContextProvider = ({ children }) => {
 	// A. Setup variables
 
 	const vehiclesContext = useVehiclesContext();
+	const vehicleMetadata = useVehicleMetadata();
+	const getVehicleMetadata = vehicleMetadata.actions.getMetadataForVehicleId;
 
-	const [dataFilteredState, setDataFilteredState] = useState<VehiclesListContextState['data']['filtered']>([]);
 	const [dataSelectedState, setDataSelectedState] = useState<VehiclesListContextState['data']['selected']>(null);
 
 	const [filterByWheelchairState, setFilterByWheelchairState] = useQueryState('by_wheelchair', { clearOnDefault: true });
@@ -67,41 +72,48 @@ export const VehiclesListContextProvider = ({ children }) => {
 	const [filterByPropulsionState, setFilterByPropulsionState] = useQueryState('by_propulsion', { clearOnDefault: true });
 
 	//
-	// C. Transform data
+	// B. Transform data
 
-	const applyFiltersToData = () => {
-		//
-
+	const dataFilteredState = useMemo(() => {
 		let filterResult = vehiclesContext.data.vehicles || [];
 
 		// Only include vehicles with active trips
 		filterResult = filterResult.filter(item => item.trip_id);
 
 		// Only include vehicles where timestamp is within the last 2 minutes
-		const nowInUnixSeconds = new Date().getTime() / 1000;
-		filterResult = filterResult.filter(item => item.timestamp && nowInUnixSeconds - item.timestamp < 120);
-
-		// Apply the user filters
+		const nowInUnixSeconds = DateTime.now().toUnixInteger();
+		filterResult = filterResult.filter(item => item.received_at && nowInUnixSeconds - Math.floor(item.received_at / 1000) < 120);
 
 		if (filterBySearchState) {
 			filterResult = filterResult.filter((item) => {
-				const matchedVehicleId = item.id?.toLowerCase().includes(filterBySearchState.toLowerCase());
-				const matchedLicensePlate = item.license_plate?.toLowerCase().includes(filterBySearchState.toLowerCase());
-				return matchedVehicleId || matchedLicensePlate;
+				const metadata = getVehicleMetadata(item.vehicle_id);
+				const matchedVehicleId = item.vehicle_id?.toLowerCase().includes(filterBySearchState.toLowerCase());
+				const matchedTripId = item.trip_id?.toLowerCase().includes(filterBySearchState.toLowerCase());
+				const matchedLicensePlate = metadata?.license_plate?.toLowerCase().includes(filterBySearchState.toLowerCase());
+				return matchedVehicleId || matchedTripId || matchedLicensePlate;
 			});
 		}
 
 		if (filterByBikesState) {
-			filterResult = filterResult.filter(item => item.bikes_allowed?.toString() === filterByBikesState);
+			filterResult = filterResult.filter((item) => {
+				const metadata = getVehicleMetadata(item.vehicle_id);
+				return String(metadata?.bicycles) === filterByBikesState;
+			});
 		}
 
 		if (filterByWheelchairState) {
-			filterResult = filterResult.filter(item => item.wheelchair_accessible?.toString() === filterByWheelchairState);
+			filterResult = filterResult.filter((item) => {
+				const metadata = getVehicleMetadata(item.vehicle_id);
+				return String(metadata?.wheelchair) === filterByWheelchairState;
+			});
 		}
 
 		if (filterByPropulsionState) {
 			const propulsionValues = filterByPropulsionState.split(';').filter(Boolean);
-			filterResult = filterResult.filter(item => item.propulsion && propulsionValues.includes(item.propulsion));
+			filterResult = filterResult.filter((item) => {
+				const metadata = getVehicleMetadata(item.vehicle_id);
+				return metadata?.propulsion && propulsionValues.includes(metadata.propulsion);
+			});
 		}
 
 		if (filterByAgencyState) {
@@ -112,27 +124,26 @@ export const VehiclesListContextProvider = ({ children }) => {
 		if (filterByMakeAndModelState) {
 			const makeModelValues = filterByMakeAndModelState.split(';').filter(Boolean);
 			filterResult = filterResult.filter((item) => {
-				return makeModelValues.some((val) => {
-					const [makeFilter, modelFilter] = val.split('-').map(s => s.trim().toLowerCase());
-					const itemMake = item.make?.toLowerCase() || '';
-					const itemModel = item.model?.toLowerCase() || '';
-					return itemMake.includes(makeFilter) && itemModel.includes(modelFilter);
-				});
+				const metadata = getVehicleMetadata(item.vehicle_id);
+				if (!metadata?.make || !metadata?.model) return false;
+				return makeModelValues.includes(`${metadata.make}-${metadata.model}`);
 			});
 		}
 
 		return filterResult;
-
-		//
-	};
-
-	useEffect(() => {
-		const filteredVehicles = applyFiltersToData();
-		setDataFilteredState(filteredVehicles);
-	}, [filterBySearchState, filterByAgencyState, filterByBikesState, filterByMakeAndModelState, filterByPropulsionState, filterByWheelchairState, vehiclesContext.data.vehicles]);
+	}, [
+		filterByAgencyState,
+		filterByBikesState,
+		filterByMakeAndModelState,
+		filterByPropulsionState,
+		filterBySearchState,
+		filterByWheelchairState,
+		getVehicleMetadata,
+		vehiclesContext.data.vehicles,
+	]);
 
 	//
-	// D. Handle actions
+	// C. Handle actions
 
 	const updateFilterBySearch = (value: string) => {
 		setFilterBySearchState(value);
@@ -164,17 +175,17 @@ export const VehiclesListContextProvider = ({ children }) => {
 	const updateSelectedVehicle = (vehicleId: null | string) => {
 		if (!vehicleId) setDataSelectedState(null);
 		if (!vehiclesContext.data.vehicles) return;
-		const foundVehicleData = vehiclesContext.data.vehicles.find(item => item.id === vehicleId);
+		const foundVehicleData = vehiclesContext.data.vehicles.find(item => item.vehicle_id === vehicleId);
 		setDataSelectedState(foundVehicleData || null);
 	};
 
 	useEffect(() => {
 		if (!dataSelectedState) return;
-		updateSelectedVehicle(dataSelectedState.id);
+		updateSelectedVehicle(dataSelectedState.vehicle_id);
 	}, [vehiclesContext.data.vehicles, dataSelectedState]);
 
 	//
-	// E. Define context value
+	// D. Define context value
 
 	const contextValue: VehiclesListContextState = {
 		actions: {
@@ -188,6 +199,7 @@ export const VehiclesListContextProvider = ({ children }) => {
 		},
 		data: {
 			filtered: dataFilteredState,
+			metadata: vehicleMetadata.data.metadata,
 			raw: vehiclesContext.data.vehicles || [],
 			selected: dataSelectedState,
 		},
@@ -198,10 +210,10 @@ export const VehiclesListContextProvider = ({ children }) => {
 			by_propulsion: filterByPropulsionState,
 			by_search: filterBySearchState,
 			by_wheelchair: filterByWheelchairState,
-			selected_vehicle: dataSelectedState?.id || null,
+			selected_vehicle: dataSelectedState?.vehicle_id || null,
 		},
 		flags: {
-			is_loading: vehiclesContext.flags.is_loading,
+			is_loading: vehiclesContext.flags.isLoading || vehicleMetadata.flags.isLoading,
 		},
 	};
 

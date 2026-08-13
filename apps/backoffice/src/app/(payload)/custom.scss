@@ -1,6 +1,1505 @@
-.mention {
- border-radius: 999px;
+/* =========================================================
+   CARRIS METROPOLITANA
+   PAYLOAD ADMIN THEME
+   ========================================================= */
+
+
+/* =========================================================
+   TOKENS
+   ========================================================= */
+
+   :root {
+
+	/* =====================================================
+	   COLOR / BRAND
+	   ===================================================== */
+
+	--color-brand: #ffdd01;
+
+	--color-lines-proxima: #3d85c6;
+	--color-lines-longa: #c61d23;
+	--color-lines-rapida: #fdb71a;
+	--color-lines-inter-regional: #bb3e96;
+	--color-lines-mar: #0c807e;
+	--color-lines-turistica: #ff6900;
+
+
+	/* =====================================================
+	   COLOR / DEBUG
+	   ===================================================== */
+
+	--color-debug: #055252;
+
+
+	/* =====================================================
+	   COLOR / SYSTEM
+	   ===================================================== */
+
+	--color-system-background-100: #ffffff;
+	--color-system-background-200: #f7f7f8;
+	--color-system-background-300: #f1f1f3;
+	--color-system-background-400: #e9e9ec;
+	--color-system-background-900: #000000;
+
+	--color-system-border-100: #ededf0;
+	--color-system-border-200: #dfdfe4;
+	--color-system-border-300: #cacad1;
+
+	--color-system-text-100: #111114;
+	--color-system-text-200: #5a5a64;
+	--color-system-text-300: #9696a0;
+	--color-system-text-400: #d2d2dc;
+	--color-system-text-900: #ffffff;
+
+
+	/* =====================================================
+	   COLOR / PRIMARY
+	   ===================================================== */
+
+	--color-primary-white: #ffffff;
+	--color-primary-black: #000000;
+
+
+	/* =====================================================
+	   COLOR / STATUS
+	   ===================================================== */
+
+	--color-status-info-background: #f1f7fd;
+	--color-status-info-border: #d8e9f8;
+	--color-status-info-text: #054b8c;
+	--color-status-info-shadow: #054b8c80;
+
+	--color-status-ok-background: #eef8ef;
+	--color-status-ok-border: #d8edd9;
+	--color-status-ok-text: #2d963d;
+	--color-status-ok-shadow: #2d8c3c80;
+
+	--color-status-warning-background: #fff9f0;
+	--color-status-warning-border: #fbe9cc;
+	--color-status-warning-text: #d58500;
+	--color-status-warning-shadow: #f0960080;
+
+	--color-status-danger-background: #fff3ef;
+	--color-status-danger-border: #f7ddd5;
+	--color-status-danger-text: #d94723;
+	--color-status-danger-shadow: #e64a2380;
+
+
+	/* =====================================================
+	   COLOR / REALTIME
+	   ===================================================== */
+
+	--color-realtime-0: rgb(0 215 50 / 0%);
+	--color-realtime-5: rgb(0 215 50 / 5%);
+	--color-realtime-15: rgb(0 215 50 / 15%);
+	--color-realtime-25: rgb(0 215 50 / 25%);
+	--color-realtime-50: rgb(0 215 50 / 50%);
+	--color-realtime-75: rgb(0 215 50 / 75%);
+	--color-realtime-100: rgb(0 205 50 / 100%);
+
+
+	/* =====================================================
+	   SIZE
+	   ===================================================== */
+
+	--size-max-width-viewport: 1200px;
+	--size-max-width-text: 700px;
+
+	--size-height-header: 71px;
+
+	--size-spacing-5: 5px;
+	--size-spacing-10: 10px;
+	--size-spacing-15: 15px;
+	--size-spacing-20: 20px;
+	--size-spacing-25: 25px;
+	--size-spacing-30: 30px;
+	--size-spacing-40: 40px;
+	--size-spacing-60: 60px;
+
+
+	/* =====================================================
+	   FONT
+	   ===================================================== */
+
+	--font-weight-extrabold: 800;
+	--font-weight-bold: 700;
+	--font-weight-semibold: 600;
+	--font-weight-medium: 400;
+
+	--font-size-heading: 26px;
+	--font-weight-heading: 700;
+
+	--font-size-title: 20px;
+	--font-weight-title: 600;
+
+	--font-size-subtitle: 18px;
+	--font-weight-subtitle: 600;
+
+	--font-size-nav: 16px;
+	--font-weight-nav: 600;
+
+	--font-size-text: 14px;
+	--font-weight-text: 500;
+
+	--font-size-muted: 12px;
+	--font-weight-muted: 500;
+
+	--font-family-monospace: 'Menlo', monospace;
+
+
+	/* =====================================================
+	   RADIUS
+	   ===================================================== */
+
+	--border-radius-xs: 4px;
+	--border-radius-sm: 7px;
+	--border-radius-md: 12px;
+	--border-radius-lg: 18px;
+	--border-radius-xl: 30px;
+
+
+	/* =====================================================
+	   SHADOWS
+	   ===================================================== */
+
+	--shadow-xs:
+		0 1px 2px rgb(0 0 0 / 3%);
+
+	--shadow-sm:
+		0 2px 8px rgb(0 0 0 / 4%),
+		0 1px 2px rgb(0 0 0 / 2%);
+
+	--shadow-md:
+		0 8px 28px rgb(0 0 0 / 7%),
+		0 2px 6px rgb(0 0 0 / 3%);
+
+	--shadow-lg:
+		0 24px 60px rgb(0 0 0 / 12%);
+
+
+	/* =====================================================
+	   BRAND STATES
+	   ===================================================== */
+
+	--brand-soft: rgb(255 221 1 / 8%);
+	--brand-medium: rgb(255 221 1 / 15%);
+	--brand-strong: rgb(255 221 1 / 28%);
+	--brand-border: rgb(255 221 1 / 60%);
+
+	--transition-ui: 140ms ease;
 }
+
+
+/* =========================================================
+   LIGHT THEME
+   ========================================================= */
+
+html[data-theme='light'] {
+
+	--theme-bg: #f4f4f5;
+	--theme-input-bg: #ffffff;
+	--theme-text: #111114;
+
+	--theme-elevation-0: #ffffff;
+	--theme-elevation-50: #fafafa;
+	--theme-elevation-100: #f5f5f6;
+	--theme-elevation-150: #efeff1;
+	--theme-elevation-200: #e7e7ea;
+	--theme-elevation-250: #dedee3;
+	--theme-elevation-300: #d4d4da;
+	--theme-elevation-350: #c8c8cf;
+	--theme-elevation-400: #b9b9c1;
+	--theme-elevation-450: #a8a8b1;
+	--theme-elevation-500: #9696a0;
+	--theme-elevation-550: #85858f;
+	--theme-elevation-600: #73737e;
+	--theme-elevation-650: #62626c;
+	--theme-elevation-700: #505058;
+	--theme-elevation-750: #414148;
+	--theme-elevation-800: #333339;
+	--theme-elevation-850: #27272c;
+	--theme-elevation-900: #1c1c20;
+	--theme-elevation-950: #101013;
+	--theme-elevation-1000: #000000;
+}
+
+
+/* =========================================================
+   DARK THEME
+   ========================================================= */
+
+html[data-theme='dark'] {
+
+	--color-system-background-100: #27272f;
+	--color-system-background-200: #1d1d23;
+	--color-system-background-300: #17171c;
+
+	--color-system-border-100: #35353e;
+	--color-system-border-200: #44444e;
+	--color-system-border-300: #575762;
+
+	--color-system-text-100: #ffffff;
+	--color-system-text-200: #c8c8d2;
+	--color-system-text-300: #9696a5;
+	--color-system-text-400: #686875;
+
+	--theme-bg: #19191f;
+	--theme-input-bg: #282830;
+	--theme-text: #ffffff;
+
+	--theme-elevation-0: #222229;
+	--theme-elevation-50: #26262e;
+	--theme-elevation-100: #2a2a32;
+	--theme-elevation-150: #303038;
+	--theme-elevation-200: #36363f;
+	--theme-elevation-250: #3d3d46;
+	--theme-elevation-300: #45454f;
+	--theme-elevation-350: #50505a;
+	--theme-elevation-400: #5b5b66;
+	--theme-elevation-450: #686873;
+	--theme-elevation-500: #787883;
+	--theme-elevation-550: #898994;
+	--theme-elevation-600: #9999a4;
+	--theme-elevation-650: #aaaab4;
+	--theme-elevation-700: #babac3;
+	--theme-elevation-750: #c9c9d1;
+	--theme-elevation-800: #d7d7dd;
+	--theme-elevation-850: #e1e1e6;
+	--theme-elevation-900: #eaeaed;
+	--theme-elevation-950: #f5f5f7;
+	--theme-elevation-1000: #ffffff;
+
+	--brand-soft: rgb(255 221 1 / 7%);
+	--brand-medium: rgb(255 221 1 / 14%);
+	--brand-strong: rgb(255 221 1 / 24%);
+
+	--shadow-xs:
+		0 1px 2px rgb(0 0 0 / 15%);
+
+	--shadow-sm:
+		0 3px 12px rgb(0 0 0 / 18%);
+
+	--shadow-md:
+		0 12px 32px rgb(0 0 0 / 24%);
+
+	--shadow-lg:
+		0 28px 70px rgb(0 0 0 / 38%);
+}
+
+
+/* =========================================================
+   GLOBAL
+   ========================================================= */
+
+html,
+body {
+	background: var(--theme-bg);
+	color: var(--theme-text);
+}
+
+
+body {
+	-webkit-font-smoothing: antialiased;
+	text-rendering: optimizeLegibility;
+}
+
+
+::selection {
+	background: var(--color-brand);
+	color: #000000;
+}
+
+
+/* =========================================================
+   PAGE SURFACE
+   ========================================================= */
+
+.template-default,
+.collection-list,
+.document-edit,
+.dashboard {
+	background: var(--theme-bg);
+}
+
+
+/* =========================================================
+   APP HEADER / BREADCRUMBS
+   ========================================================= */
+
+.app-header {
+	background: var(--theme-elevation-0);
+
+	border-bottom: 1px solid var(--theme-elevation-200);
+
+	box-shadow: var(--shadow-xs);
+}
+
+
+/*
+ * The breadcrumb/header surface needs stronger separation
+ * from the actual content below it.
+ */
+
+.step-nav {
+	background: var(--theme-elevation-0);
+}
+
+
+/* =========================================================
+   PAGE TITLES
+   ========================================================= */
+
+/*
+ * The screenshots were too tight here.
+ */
+
+.collection-list__header,
+.list-header {
+	padding-top: 24px;
+	padding-bottom: 20px;
+}
+
+
+.collection-list__header h1,
+.list-header h1 {
+	margin-top: 0;
+	margin-bottom: 0;
+
+	line-height: 1.1;
+}
+
+
+/*
+ * Document title area.
+ */
+
+.document-edit .doc-controls,
+.document-edit .document-controls {
+	background: var(--theme-elevation-0);
+
+	border-bottom: 1px solid var(--theme-elevation-200);
+
+	box-shadow: var(--shadow-xs);
+}
+
+
+.document-edit .doc-controls h1,
+.document-edit .document-controls h1,
+.document-edit h1:first-of-type {
+	line-height: 1.15;
+}
+
+
+/*
+ * Give document titles breathing room beneath the breadcrumb.
+ */
+
+.document-edit .doc-controls,
+.document-edit .document-controls {
+	padding-top: 14px;
+	padding-bottom: 14px;
+}
+
+
+/* =========================================================
+   SIDEBAR / NAV
+   ========================================================= */
+
+.nav {
+	background: var(--theme-elevation-0);
+
+	border-right: 1px solid var(--theme-elevation-200);
+
+	box-shadow:
+		4px 0 18px rgb(0 0 0 / 2%);
+}
+
+
+/*
+ * More breathing room around collections.
+ */
+
+.nav__scroll {
+	padding:
+		14px
+		10px
+		24px;
+}
+
+
+/* =========================================================
+   SIDEBAR / GROUPS
+   ========================================================= */
+
+.nav-group {
+	margin-top: 18px;
+}
+
+
+.nav-group:first-child {
+	margin-top: 8px;
+}
+
+
+.nav-group + .nav-group {
+	padding-top: 16px;
+
+	border-top: 1px solid var(--theme-elevation-150);
+}
+
+
+/*
+ * Collections / Globals / CICM
+ */
+
+.nav-group__toggle {
+	min-height: 28px;
+
+	padding:
+		4px
+		8px;
+
+	border-radius: var(--border-radius-sm);
+
+	color: var(--theme-elevation-500);
+
+	font-size: 11px;
+	font-weight: 700;
+
+	letter-spacing: 0.055em;
+
+	text-transform: uppercase;
+
+	transition:
+		background-color var(--transition-ui),
+		color var(--transition-ui);
+}
+
+
+.nav-group__toggle:hover {
+	background: var(--theme-elevation-100);
+
+	color: var(--theme-elevation-700);
+}
+
+
+/* =========================================================
+   SIDEBAR / LINKS
+   ========================================================= */
+
+.nav__link {
+	position: relative;
+
+	margin: 1px 0;
+
+	border-radius: var(--border-radius-sm);
+
+	transition:
+		background-color var(--transition-ui),
+		color var(--transition-ui),
+		box-shadow var(--transition-ui);
+}
+
+
+.nav__link:hover {
+	background: var(--theme-elevation-100);
+
+	color: var(--theme-text);
+}
+
+
+/*
+ * Active collection:
+ *
+ * subtle Carris yellow, rather than a huge yellow block.
+ */
+
+.nav__link--active,
+.nav__link[aria-current='page'] {
+	background: var(--brand-soft);
+
+	color: var(--theme-text);
+
+	font-weight: 700;
+
+	box-shadow:
+		inset 3px 0 0 var(--color-brand);
+}
+
+
+.nav__link--active:hover,
+.nav__link[aria-current='page']:hover {
+	background: var(--brand-medium);
+}
+
+
+/*
+ * Make labels less visually cramped.
+ */
+
+.nav__link {
+	padding-top: 7px;
+	padding-bottom: 7px;
+}
+
+
+/* =========================================================
+   NAV TOGGLER
+   ========================================================= */
+
+.nav-toggler {
+	border-radius: var(--border-radius-sm);
+
+	transition:
+		background-color var(--transition-ui),
+		box-shadow var(--transition-ui);
+}
+
+
+.nav-toggler:hover {
+	background: var(--theme-elevation-100);
+}
+
+
+/* =========================================================
+   LINKS
+   ========================================================= */
+
+a {
+	text-decoration-color: var(--color-brand);
+	text-decoration-thickness: 2px;
+	text-underline-offset: 3px;
+}
+
+
+/* =========================================================
+   COLLECTION VIEW
+   ========================================================= */
+
+.collection-list {
+	min-height: 100%;
+}
+
+
+/*
+ * Separate header, filters and data visually.
+ */
+
+.collection-list .list-controls {
+	margin-bottom: 20px;
+}
+
+
+/* =========================================================
+   LIST CONTROLS / SEARCH
+   ========================================================= */
+
+.list-controls {
+	background: var(--theme-elevation-0);
+
+	border: 1px solid var(--theme-elevation-200);
+	border-radius: var(--border-radius-md);
+
+	box-shadow: var(--shadow-sm);
+
+	overflow: hidden;
+}
+
+
+.list-controls__wrap {
+	background: var(--theme-elevation-0);
+}
+
+
+.search-filter,
+.search-filter input {
+	background: var(--theme-elevation-0);
+}
+
+
+.search-filter input {
+	border: 0;
+	border-radius: 0;
+
+	box-shadow: none;
+}
+
+
+.search-filter input:focus {
+	border: 0 !important;
+
+	box-shadow: none !important;
+}
+
+
+/* =========================================================
+   LIST CONTROL BUTTONS
+   ========================================================= */
+
+.list-controls .btn {
+	background: var(--theme-elevation-100);
+
+	border: 1px solid transparent;
+	border-radius: 999px;
+
+	box-shadow: none;
+}
+
+
+.list-controls .btn:hover {
+	background: var(--theme-elevation-150);
+
+	border-color: var(--theme-elevation-200);
+}
+
+
+/* =========================================================
+   TABLE
+   ========================================================= */
+
+.table {
+	background: var(--theme-elevation-0);
+
+	border: 1px solid var(--theme-elevation-200);
+	border-radius: var(--border-radius-md);
+
+	box-shadow: var(--shadow-sm);
+
+	overflow: hidden;
+}
+
+
+.table table {
+	width: 100%;
+
+	background: var(--theme-elevation-0);
+
+	border-collapse: separate;
+	border-spacing: 0;
+}
+
+
+/* =========================================================
+   TABLE / HEADER
+   ========================================================= */
+
+.table thead,
+.table thead tr,
+.table thead th {
+	background: var(--theme-elevation-100);
+}
+
+
+.table th {
+	border-bottom: 1px solid var(--theme-elevation-250);
+
+	color: var(--theme-elevation-650);
+
+	font-size: 12px;
+	font-weight: 700;
+
+	letter-spacing: 0.025em;
+
+	vertical-align: middle;
+}
+
+
+/*
+ * No giant yellow underline.
+ */
+
+.table thead th::after {
+	display: none;
+}
+
+
+/* =========================================================
+   TABLE / ROWS
+   ========================================================= */
+
+.table tbody tr,
+.table tbody tr:nth-child(even) {
+	background: var(--theme-elevation-0);
+
+	transition:
+		background-color var(--transition-ui);
+}
+
+
+.table tbody td {
+	background: transparent;
+
+	border-bottom: 1px solid var(--theme-elevation-150);
+
+	color: var(--theme-text);
+
+	vertical-align: middle;
+
+	transition:
+		background-color var(--transition-ui),
+		box-shadow var(--transition-ui);
+}
+
+
+.table tbody tr:last-child td {
+	border-bottom: 0;
+}
+
+
+.table tbody tr:hover,
+.table tbody tr:nth-child(even):hover {
+	background: var(--theme-elevation-50);
+}
+
+
+.table tbody tr:hover td:first-child {
+	box-shadow:
+		inset 3px 0 0 var(--color-brand);
+}
+
+
+/* =========================================================
+   TABLE / CHECKBOX COLUMN
+   ========================================================= */
+
+.table th:first-child,
+.table td:first-child {
+	background: transparent;
+
+	border-right: 1px solid var(--theme-elevation-150);
+}
+
+
+/* =========================================================
+   TABLE / TYPOGRAPHY
+   ========================================================= */
+
+.table tbody td:nth-child(2) {
+	font-weight: 600;
+}
+
+
+.table tbody td:nth-child(n + 3) {
+	color: var(--theme-elevation-650);
+}
+
+
+/* =========================================================
+   TABLE / LINKS
+   ========================================================= */
+
+.table tbody a {
+	color: var(--theme-text);
+
+	font-weight: 600;
+
+	text-decoration:
+		underline
+		var(--color-brand)
+		2px;
+
+	text-underline-offset: 4px;
+}
+
+
+.table tbody a:hover {
+	text-decoration-color: var(--color-lines-proxima);
+}
+
+
+/* =========================================================
+   TABLE / SELECTED
+   ========================================================= */
+
+.table tbody tr[aria-selected='true'] {
+	background: var(--brand-soft);
+}
+
+
+.table tbody tr[aria-selected='true'] td:first-child {
+	box-shadow:
+		inset 3px 0 0 var(--color-brand);
+}
+
+
+/* =========================================================
+   DOCUMENT EDITOR
+   ========================================================= */
+
+/*
+ * Outer editor background.
+ */
+
+.document-edit {
+	background: var(--theme-bg);
+}
+
+
+/*
+ * This is deliberately different from the input/card color.
+ */
+
+.document-fields {
+	background: transparent;
+}
+
+
+/* =========================================================
+   DOCUMENT MAIN SURFACE
+   ========================================================= */
+
+/*
+ * Payload versions can expose slightly different wrappers.
+ * These selectors target the common main editor surfaces.
+ */
+
+.document-fields__main,
+.document-fields__edit {
+	background: var(--theme-elevation-0);
+
+	border: 1px solid var(--theme-elevation-200);
+	border-radius: var(--border-radius-lg);
+
+	box-shadow: var(--shadow-sm);
+}
+
+
+/*
+ * Don't force dimensions; only add internal breathing room.
+ */
+
+.document-fields__main {
+	padding: 24px;
+}
+
+
+/* =========================================================
+   DOCUMENT SIDEBAR SURFACE
+   ========================================================= */
+
+.document-fields__sidebar,
+.document-sidebar {
+	background: var(--theme-elevation-0);
+
+	border: 1px solid var(--theme-elevation-200);
+	border-radius: var(--border-radius-lg);
+
+	box-shadow: var(--shadow-sm);
+}
+
+
+/* =========================================================
+   DOC STATUS / META ROW
+   ========================================================= */
+
+.doc-controls__meta,
+.document-controls__meta {
+	background: var(--theme-elevation-50);
+
+	border-top: 1px solid var(--theme-elevation-150);
+	border-bottom: 1px solid var(--theme-elevation-200);
+}
+
+
+/* =========================================================
+   BUTTONS
+   ========================================================= */
+
+.btn {
+	border-radius: var(--border-radius-sm);
+
+	box-shadow: none;
+
+	transition:
+		background-color var(--transition-ui),
+		border-color var(--transition-ui),
+		color var(--transition-ui),
+		box-shadow var(--transition-ui);
+}
+
+
+.btn:hover {
+	transform: none;
+}
+
+
+.btn--style-primary {
+	background: var(--color-brand);
+
+	border-color: var(--color-brand);
+
+	color: #000000;
+
+	font-weight: 700;
+}
+
+
+.btn--style-primary:hover,
+.btn--style-primary:focus-visible {
+	background: #efd000;
+
+	border-color: #efd000;
+
+	color: #000000;
+
+	box-shadow:
+		0 0 0 3px var(--brand-medium);
+}
+
+
+.btn--style-secondary {
+	background: var(--theme-elevation-0);
+
+	border: 1px solid var(--theme-elevation-250);
+
+	color: var(--theme-text);
+
+	box-shadow: var(--shadow-xs);
+}
+
+
+.btn--style-secondary:hover {
+	background: var(--theme-elevation-100);
+
+	border-color: var(--theme-elevation-300);
+}
+
+
+/* =========================================================
+   INPUTS
+   ========================================================= */
+
+input,
+textarea,
+select,
+.rs__control {
+	background: var(--theme-input-bg);
+
+	border-color: var(--theme-elevation-250);
+	border-radius: var(--border-radius-sm);
+
+	box-shadow: var(--shadow-xs);
+
+	transition:
+		background-color var(--transition-ui),
+		border-color var(--transition-ui),
+		box-shadow var(--transition-ui);
+}
+
+
+input:hover,
+textarea:hover,
+.rs__control:hover {
+	border-color: var(--theme-elevation-350);
+}
+
+
+input:focus,
+textarea:focus,
+.rs__control--is-focused {
+	border-color: var(--color-brand) !important;
+
+	box-shadow:
+		0 0 0 3px var(--brand-soft) !important;
+}
+
+
+/* =========================================================
+   LABELS
+   ========================================================= */
+
+.field-label {
+	color: var(--theme-elevation-750);
+
+	font-weight: 600;
+}
+
+
+.field-description {
+	color: var(--theme-elevation-500);
+}
+
+
+.required {
+	color: var(--color-lines-longa);
+}
+
+
+/* =========================================================
+   FIELD GROUPS
+   ========================================================= */
+
+.group-field {
+	border-color: var(--theme-elevation-200);
+}
+
+
+/* =========================================================
+   CHECKBOXES
+   ========================================================= */
+
+.checkbox-input__input,
+.table .checkbox-input__input {
+	background: var(--theme-elevation-0);
+
+	border-color: var(--theme-elevation-300);
+	border-radius: var(--border-radius-xs);
+
+	box-shadow: var(--shadow-xs);
+
+	transition:
+		background-color var(--transition-ui),
+		border-color var(--transition-ui),
+		box-shadow var(--transition-ui);
+}
+
+
+.checkbox-input__input:hover {
+	border-color: var(--color-brand);
+}
+
+
+.checkbox-input__input:checked {
+	background: var(--color-brand);
+
+	border-color: var(--color-brand);
+
+	color: #000000;
+}
+
+
+/* =========================================================
+   COLLAPSIBLES
+   ========================================================= */
+
+.collapsible {
+	background: var(--theme-elevation-0);
+
+	border: 1px solid var(--theme-elevation-200);
+	border-radius: var(--border-radius-md);
+
+	box-shadow: var(--shadow-xs);
+
+	overflow: hidden;
+}
+
+
+.collapsible__toggle {
+	background: var(--theme-elevation-50);
+
+	border-bottom-color: var(--theme-elevation-150);
+}
+
+
+.collapsible__toggle:hover {
+	background: var(--theme-elevation-100);
+}
+
+
+/* =========================================================
+   ARRAY / BLOCKS
+   ========================================================= */
+
+.array-field__row,
+.blocks-field__row {
+	background: var(--theme-elevation-0);
+
+	border: 1px solid var(--theme-elevation-200);
+	border-radius: var(--border-radius-md);
+
+	box-shadow: var(--shadow-xs);
+}
+
+
+/*
+ * Nested content should still be distinguishable.
+ */
+
+.array-field__row .array-field__row,
+.blocks-field__row .blocks-field__row {
+	background: var(--theme-elevation-50);
+
+	box-shadow: none;
+}
+
+
+/* =========================================================
+   RICH TEXT / LEXICAL
+   ========================================================= */
+
+.editor-container,
+.lexical-rich-text-field {
+	background: var(--theme-elevation-0);
+
+	border-color: var(--theme-elevation-200);
+	border-radius: var(--border-radius-md);
+
+	box-shadow: var(--shadow-sm);
+
+	overflow: hidden;
+}
+
+
+.editor-container:focus-within {
+	border-color: var(--color-brand);
+
+	box-shadow:
+		0 0 0 3px var(--brand-soft);
+}
+
+
+/*
+ * Toolbar visually distinct from text area.
+ */
+
+.editor-container [class*='toolbar'],
+.lexical-rich-text-field [class*='toolbar'] {
+	background: var(--theme-elevation-100);
+
+	border-bottom: 1px solid var(--theme-elevation-200);
+}
+
+
+/* =========================================================
+   SELECT / REACT SELECT
+   ========================================================= */
+
+.rs__menu {
+	background: var(--theme-elevation-0);
+
+	border: 1px solid var(--theme-elevation-200);
+	border-radius: var(--border-radius-md);
+
+	box-shadow: var(--shadow-md);
+
+	overflow: hidden;
+}
+
+
+.rs__option {
+	border-radius: var(--border-radius-sm);
+}
+
+
+.rs__option--is-focused {
+	background: var(--theme-elevation-100);
+}
+
+
+.rs__option--is-selected {
+	background: var(--color-brand) !important;
+
+	color: #000000 !important;
+}
+
+
+/* =========================================================
+   POPUPS / DROPDOWNS
+   ========================================================= */
+
+.popup-button-list,
+.dropdown-menu {
+	background: var(--theme-elevation-0);
+
+	border: 1px solid var(--theme-elevation-200);
+	border-radius: var(--border-radius-md);
+
+	box-shadow: var(--shadow-md);
+
+	overflow: hidden;
+}
+
+
+.popup-button-list__button {
+	border-radius: var(--border-radius-sm);
+}
+
+
+.popup-button-list__button:hover {
+	background: var(--theme-elevation-100);
+}
+
+
+/* =========================================================
+   TABS
+   ========================================================= */
+
+.tabs-field__tabs {
+	border-bottom-color: var(--theme-elevation-200);
+}
+
+
+.tabs-field__tab-button {
+	border-radius:
+		var(--border-radius-sm)
+		var(--border-radius-sm)
+		0
+		0;
+
+	transition:
+		background-color var(--transition-ui),
+		color var(--transition-ui);
+}
+
+
+.tabs-field__tab-button:hover {
+	background: var(--theme-elevation-100);
+}
+
+
+.tabs-field__tab-button--active {
+	color: var(--theme-text);
+
+	font-weight: 700;
+}
+
+
+/* =========================================================
+   CARDS
+   ========================================================= */
+
+.card {
+	background: var(--theme-elevation-0);
+
+	border: 1px solid var(--theme-elevation-200);
+	border-radius: var(--border-radius-md);
+
+	box-shadow: var(--shadow-sm);
+
+	transition:
+		border-color var(--transition-ui),
+		box-shadow var(--transition-ui);
+}
+
+
+.card:hover {
+	border-color: var(--theme-elevation-250);
+
+	box-shadow: var(--shadow-md);
+}
+
+
+/* =========================================================
+   DASHBOARD CARDS
+   ========================================================= */
+
+.dashboard .card {
+	position: relative;
+
+	overflow: hidden;
+}
+
+
+.dashboard .card::before {
+	position: absolute;
+
+	top: 0;
+	bottom: 0;
+	left: 0;
+
+	width: 3px;
+
+	background: var(--color-brand);
+
+	content: '';
+}
+
+
+.dashboard .card:nth-child(6n + 1)::before {
+	background: var(--color-lines-proxima);
+}
+
+
+.dashboard .card:nth-child(6n + 2)::before {
+	background: var(--color-lines-longa);
+}
+
+
+.dashboard .card:nth-child(6n + 3)::before {
+	background: var(--color-lines-rapida);
+}
+
+
+.dashboard .card:nth-child(6n + 4)::before {
+	background: var(--color-lines-inter-regional);
+}
+
+
+.dashboard .card:nth-child(6n + 5)::before {
+	background: var(--color-lines-mar);
+}
+
+
+.dashboard .card:nth-child(6n + 6)::before {
+	background: var(--color-lines-turistica);
+}
+
+
+/* =========================================================
+   PILLS
+   ========================================================= */
+
+.pill {
+	border-radius: 999px;
+
+	font-weight: 600;
+}
+
+
+.pill--style-light {
+	background: var(--theme-elevation-100);
+}
+
+
+/* =========================================================
+   STATUS
+   ========================================================= */
+
+.status {
+	display: inline-flex;
+	align-items: center;
+
+	border-radius: 999px;
+
+	font-weight: 600;
+}
+
+
+.status--published,
+.status--active,
+.status--success {
+	background: var(--color-status-ok-background);
+
+	border-color: var(--color-status-ok-border);
+
+	color: var(--color-status-ok-text);
+}
+
+
+.status--draft {
+	background: var(--theme-elevation-100);
+
+	border-color: var(--theme-elevation-200);
+
+	color: var(--theme-elevation-600);
+}
+
+
+.status--warning {
+	background: var(--color-status-warning-background);
+
+	border-color: var(--color-status-warning-border);
+
+	color: var(--color-status-warning-text);
+}
+
+
+.status--error,
+.status--danger {
+	background: var(--color-status-danger-background);
+
+	border-color: var(--color-status-danger-border);
+
+	color: var(--color-status-danger-text);
+}
+
+
+/* =========================================================
+   MODALS / DRAWERS
+   ========================================================= */
+
+.modal,
+.drawer__content {
+	background: var(--theme-elevation-0);
+
+	border: 1px solid var(--theme-elevation-200);
+
+	box-shadow: var(--shadow-lg);
+}
+
+
+.modal {
+	border-radius: var(--border-radius-lg);
+}
+
+
+.drawer__content {
+	border-radius:
+		var(--border-radius-lg)
+		0
+		0
+		var(--border-radius-lg);
+}
+
+
+/* =========================================================
+   TOASTS
+   ========================================================= */
+
+.payload-toast-container [role='status'],
+.payload-toast-container [role='alert'] {
+	border-radius: var(--border-radius-md);
+
+	box-shadow: var(--shadow-md);
+}
+
+
+/* =========================================================
+   FOCUS
+   ========================================================= */
+
+button:focus-visible,
+a:focus-visible,
+[tabindex]:focus-visible {
+	outline: 2px solid var(--color-brand);
+	outline-offset: 2px;
+}
+
+
+/* =========================================================
+   SCROLLBAR
+   ========================================================= */
+
+* {
+	scrollbar-color:
+		var(--theme-elevation-300)
+		transparent;
+
+	scrollbar-width: thin;
+}
+
+
+::-webkit-scrollbar {
+	width: 8px;
+	height: 8px;
+}
+
+
+::-webkit-scrollbar-track {
+	background: transparent;
+}
+
+
+::-webkit-scrollbar-thumb {
+	background: var(--theme-elevation-300);
+
+	border-radius: 999px;
+}
+
+
+::-webkit-scrollbar-thumb:hover {
+	background: var(--theme-elevation-450);
+}
+
+
+/* =========================================================
+   MENTIONS
+   ========================================================= */
+
+.mention {
+	border-radius: 999px;
+}
+
 
 .mention__link,
 .mention__link:visited,
@@ -10,59 +1509,1043 @@
 	text-decoration: none;
 }
 
+
 .mention__link {
 	display: inline-flex;
 	align-items: center;
 }
 
+
 .mention-typeahead {
-	background: #2d2d2d;
-	border: 1px solid rgba(0, 0, 0, 0.12);
-	border-radius: 10px;
-	box-shadow: 0 12px 28px rgba(0, 0, 0, 0.18);
 	display: flex;
 	flex-direction: column;
+
 	gap: 2px;
-	max-height: 280px;
-	overflow: auto;
-	padding: 6px;
+
 	width: min(520px, 80vw);
+	max-height: 280px;
+
+	padding: 6px;
+
+	overflow: auto;
+
+	background: var(--theme-elevation-0);
+
+	border: 1px solid var(--theme-elevation-200);
+	border-radius: var(--border-radius-md);
+
+	box-shadow: var(--shadow-md);
 }
+
 
 .mention-typeahead__item {
-	align-items: center;
-	border: 0;
-	border-radius: 8px;
-	cursor: pointer;
 	display: flex;
-	gap: 8px;
+	align-items: center;
 	justify-content: flex-start;
+
+	gap: 8px;
+
 	padding: 8px 10px;
-	text-align: left;
+
 	background: transparent;
+
+	border: 0;
+	border-radius: var(--border-radius-sm);
+
 	color: inherit;
+
+	cursor: pointer;
+
+	text-align: left;
+
+	transition:
+		background-color var(--transition-ui);
 }
 
-.mention-typeahead__item--selected {
-	background: rgba(29, 78, 216, 0.08);
+
+.mention-typeahead__item:hover {
+	background: var(--theme-elevation-100);
 }
+
+
+.mention-typeahead__item--selected {
+	background: var(--brand-soft);
+}
+
 
 .mention-typeahead__label {
 	font-weight: 700;
+
 	white-space: nowrap;
 }
 
+
 .mention-typeahead__subtitle {
-	opacity: 0.7;
 	overflow: hidden;
+
+	opacity: 0.7;
+
 	text-overflow: ellipsis;
 	white-space: nowrap;
 }
 
-html[data-theme="dark"] .light-mode-image {
+
+/* =========================================================
+   LIGHT / DARK IMAGES
+   ========================================================= */
+
+html[data-theme='dark'] .light-mode-image {
 	display: none;
 }
 
-html[data-theme="light"] .dark-mode-image {
+
+html[data-theme='light'] .dark-mode-image {
 	display: none;
-} 
+}
+
+
+/* =========================================================
+   THEME ELEMENTS
+   ========================================================= */
+
+theme-light {
+	display: contents;
+}
+
+
+html[data-theme='dark'] theme-light {
+	display: none;
+}
+
+
+theme-dark {
+	display: contents;
+}
+
+
+html[data-theme='light'] theme-dark {
+	display: none;
+}
+
+
+/* =========================================================
+   BREAKPOINT HELPERS
+   ========================================================= */
+
+breakpoint-desktop {
+	display: contents;
+}
+
+
+breakpoint-mobile {
+	display: contents;
+}
+
+
+@media only screen and (width <= 900px) {
+
+	breakpoint-desktop {
+		display: none;
+	}
+
+}
+
+
+@media only screen and (width >= 901px) {
+
+	breakpoint-mobile {
+		display: none;
+	}
+
+}
+
+
+/* =========================================================
+   MOBILE
+   ========================================================= */
+
+@media (width <= 650px) {
+
+	:root {
+		--font-size-heading: 26px;
+		--font-size-title: 20px;
+		--font-size-text: 14px;
+		--font-size-muted: 12px;
+	}
+
+
+	.document-fields__main {
+		padding: 16px;
+	}
+
+
+	.collection-list__header,
+	.list-header {
+		padding-top: 18px;
+		padding-bottom: 16px;
+	}
+
+}
+
+/* =========================================================
+   FINAL LAYOUT REFINEMENTS
+   ========================================================= */
+
+
+/* =========================================================
+   SIDEBAR
+   ========================================================= */
+
+   .nav {
+	background: var(--theme-elevation-0);
+
+	border-right: 1px solid var(--theme-elevation-200);
+
+	box-shadow:
+		4px 0 18px rgb(0 0 0 / 2%);
+}
+
+
+/*
+ * Reserve real space for the hide/show button.
+ *
+ * This is the main fix for COLLECTIONS touching the button.
+ */
+
+.nav__scroll {
+	box-sizing: border-box;
+
+	padding:
+		68px
+		16px
+		96px;
+}
+
+
+/*
+ * Keep the nav toggle clearly above the scrolling content.
+ */
+
+.nav-toggler {
+	z-index: 5;
+
+	border: 1px solid var(--theme-elevation-200);
+	border-radius: var(--border-radius-sm);
+
+	background: var(--theme-elevation-50);
+
+	box-shadow: var(--shadow-xs);
+
+	transition:
+		background-color var(--transition-ui),
+		border-color var(--transition-ui),
+		box-shadow var(--transition-ui);
+}
+
+
+.nav-toggler:hover {
+	background: var(--theme-elevation-100);
+
+	border-color: var(--theme-elevation-300);
+
+	box-shadow: var(--shadow-sm);
+}
+
+
+/* =========================================================
+   SIDEBAR / GROUPS
+   ========================================================= */
+
+/*
+ * Remove Payload/default spacing fighting with our spacing.
+ */
+
+.nav-group {
+	margin: 0;
+
+	padding: 0;
+}
+
+
+/*
+ * Every group after the first gets one clean separator
+ * and predictable spacing.
+ */
+
+.nav-group + .nav-group {
+	margin-top: 18px;
+
+	padding-top: 18px;
+
+	border-top: 1px solid var(--theme-elevation-150);
+}
+
+
+/*
+ * Collection / Globals / CICM headings
+ */
+
+.nav-group__toggle {
+	box-sizing: border-box;
+
+	width: 100%;
+	min-height: 30px;
+
+	margin: 0 0 6px;
+	padding: 4px 8px;
+
+	border-radius: var(--border-radius-sm);
+
+	color: var(--theme-elevation-500);
+
+	font-size: 11px;
+	font-weight: 700;
+
+	letter-spacing: 0.055em;
+
+	text-transform: uppercase;
+
+	transition:
+		background-color var(--transition-ui),
+		color var(--transition-ui);
+}
+
+
+.nav-group__toggle:hover {
+	background: var(--theme-elevation-100);
+
+	color: var(--theme-elevation-700);
+}
+
+
+/*
+ * Don't let collapsed groups become huge empty sections.
+ */
+
+.nav-group:has(.nav-group__toggle[aria-expanded='false']) {
+	padding-bottom: 0;
+}
+
+
+/* =========================================================
+   SIDEBAR / LINKS
+   ========================================================= */
+
+.nav__link {
+	position: relative;
+
+	box-sizing: border-box;
+
+	min-height: 36px;
+
+	margin: 2px 0;
+	padding: 8px 10px;
+
+	border-radius: var(--border-radius-sm);
+
+	line-height: 1.25;
+
+	transition:
+		background-color var(--transition-ui),
+		color var(--transition-ui),
+		box-shadow var(--transition-ui);
+}
+
+
+.nav__link:hover {
+	background: var(--theme-elevation-100);
+
+	color: var(--theme-text);
+}
+
+
+.nav__link--active,
+.nav__link[aria-current='page'] {
+	background: var(--brand-soft);
+
+	color: var(--theme-text);
+
+	font-weight: 700;
+
+	box-shadow:
+		inset 3px 0 0 var(--color-brand);
+}
+
+
+.nav__link--active:hover,
+.nav__link[aria-current='page']:hover {
+	background: var(--brand-medium);
+}
+
+
+/* =========================================================
+   EDIT VIEW / HEADER
+   ========================================================= */
+
+/*
+ * The edit header should read as one white surface.
+ */
+
+.document-header,
+.doc-header {
+	background: var(--theme-elevation-0);
+
+	border-bottom: 1px solid var(--theme-elevation-150);
+
+	box-shadow: none;
+}
+
+
+/*
+ * Document title.
+ */
+
+.document-header h1,
+.doc-header h1,
+.document-edit h1:first-of-type {
+	margin-top: 0;
+	margin-bottom: 0;
+
+	line-height: 1.1;
+
+	letter-spacing: -0.025em;
+}
+
+
+/*
+ * The controls row is part of the header,
+ * not another random grey surface.
+ */
+
+.doc-controls {
+	background: var(--theme-elevation-0);
+
+	border-top: 1px solid var(--theme-elevation-150);
+	border-bottom: 1px solid var(--theme-elevation-200);
+
+	box-shadow: var(--shadow-xs);
+}
+
+
+/*
+ * Remove the grey slab feeling around metadata.
+ */
+
+.doc-controls__meta,
+.document-controls__meta {
+	background: var(--theme-elevation-0);
+
+	border: 0;
+}
+
+
+/*
+ * Metadata should be visually secondary.
+ */
+
+.doc-controls__meta,
+.doc-controls__meta *,
+.document-controls__meta,
+.document-controls__meta * {
+	color: var(--theme-elevation-550);
+}
+
+
+.doc-controls__meta strong,
+.document-controls__meta strong {
+	color: var(--theme-elevation-800);
+}
+
+
+/* =========================================================
+   DOCUMENT CONTENT AREA
+   ========================================================= */
+
+/*
+ * This is the important fix for the two editor surfaces
+ * physically touching each other.
+ */
+
+.document-fields {
+	box-sizing: border-box;
+
+	gap: 18px;
+	column-gap: 18px;
+	row-gap: 18px;
+
+	padding:
+		18px;
+
+	background: var(--theme-bg);
+
+	align-items: start;
+}
+
+
+/*
+ * Main editor and right-hand sidebar become two independent
+ * surfaces.
+ */
+
+.document-fields__main,
+.document-fields__edit,
+.document-fields__sidebar,
+.document-sidebar {
+	box-sizing: border-box;
+
+	margin: 0;
+
+	background: var(--theme-elevation-0);
+
+	border: 1px solid var(--theme-elevation-200);
+	border-radius: var(--border-radius-lg);
+
+	box-shadow: var(--shadow-sm);
+}
+
+
+/*
+ * Avoid child content visually escaping the rounded surface.
+ */
+
+.document-fields__main,
+.document-fields__sidebar,
+.document-sidebar {
+	overflow: clip;
+}
+
+
+/*
+ * Don't add another fake background behind fields.
+ */
+
+.document-fields__edit {
+	background: transparent;
+}
+
+
+/* =========================================================
+   DOCUMENT SURFACE INTERNAL SEPARATION
+   ========================================================= */
+
+/*
+ * Nested groups should feel like content inside a card,
+ * not another full white page.
+ */
+
+.document-fields .group-field {
+	border-color: var(--theme-elevation-200);
+}
+
+
+/*
+ * Give nested block/collapsible structures a slightly
+ * different surface so their hierarchy is readable.
+ */
+
+.document-fields .collapsible {
+	background: var(--theme-elevation-50);
+
+	border: 1px solid var(--theme-elevation-200);
+	border-radius: var(--border-radius-md);
+
+	box-shadow: var(--shadow-xs);
+}
+
+
+.document-fields .collapsible__toggle {
+	background: var(--theme-elevation-50);
+
+	border-bottom-color: var(--theme-elevation-150);
+}
+
+
+.document-fields .collapsible__toggle:hover {
+	background: var(--theme-elevation-100);
+}
+
+
+/*
+ * Actual content inside collapsibles remains white.
+ */
+
+.document-fields .collapsible__content {
+	background: var(--theme-elevation-0);
+}
+
+
+/* =========================================================
+   NESTED ARRAY / BLOCK SURFACES
+   ========================================================= */
+
+.array-field__row,
+.blocks-field__row {
+	background: var(--theme-elevation-0);
+
+	border: 1px solid var(--theme-elevation-200);
+	border-radius: var(--border-radius-md);
+
+	box-shadow: var(--shadow-xs);
+}
+
+
+/*
+ * Nested blocks should not disappear into their parent.
+ */
+
+.array-field__row .array-field__row,
+.array-field__row .blocks-field__row,
+.blocks-field__row .array-field__row,
+.blocks-field__row .blocks-field__row {
+	background: var(--theme-elevation-50);
+
+	border-color: var(--theme-elevation-200);
+
+	box-shadow: none;
+}
+
+
+/* =========================================================
+   EDIT SIDEBAR FIELDS
+   ========================================================= */
+
+.document-fields__sidebar input,
+.document-fields__sidebar textarea,
+.document-fields__sidebar .rs__control,
+.document-sidebar input,
+.document-sidebar textarea,
+.document-sidebar .rs__control {
+	background: var(--theme-elevation-0);
+}
+
+
+/*
+ * Relationship / upload rows need visible definition too.
+ */
+
+.document-fields__sidebar [class*='relationship'],
+.document-fields__sidebar [class*='upload'],
+.document-sidebar [class*='relationship'],
+.document-sidebar [class*='upload'] {
+	border-radius: var(--border-radius-sm);
+}
+
+
+/* =========================================================
+   COLLECTION PAGE SPACING
+   ========================================================= */
+
+/*
+ * Keep page title away from the breadcrumb/header.
+ */
+
+.collection-list__header,
+.list-header {
+	padding-top: 28px;
+	padding-bottom: 20px;
+}
+
+
+/*
+ * Visually separate title -> toolbar -> table.
+ */
+
+.collection-list .list-controls {
+	margin-bottom: 20px;
+}
+
+
+/* =========================================================
+   LIST CONTROLS
+   ========================================================= */
+
+.list-controls {
+	background: var(--theme-elevation-0);
+
+	border: 1px solid var(--theme-elevation-200);
+	border-radius: var(--border-radius-md);
+
+	box-shadow: var(--shadow-sm);
+
+	overflow: hidden;
+}
+
+
+/* =========================================================
+   TABLE
+   ========================================================= */
+
+.table {
+	background: var(--theme-elevation-0);
+
+	border: 1px solid var(--theme-elevation-200);
+	border-radius: var(--border-radius-md);
+
+	box-shadow: var(--shadow-sm);
+
+	overflow: hidden;
+}
+
+
+.table thead,
+.table thead tr,
+.table thead th {
+	background: var(--theme-elevation-100);
+}
+
+
+.table th {
+	border-bottom: 1px solid var(--theme-elevation-250);
+}
+
+
+.table tbody tr,
+.table tbody tr:nth-child(even) {
+	background: var(--theme-elevation-0);
+}
+
+
+.table tbody td {
+	border-bottom: 1px solid var(--theme-elevation-150);
+}
+
+
+.table tbody tr:last-child td {
+	border-bottom: 0;
+}
+
+
+.table tbody tr:hover,
+.table tbody tr:nth-child(even):hover {
+	background: var(--theme-elevation-50);
+}
+
+
+.table tbody tr:hover td:first-child {
+	box-shadow:
+		inset 3px 0 0 var(--color-brand);
+}
+
+
+/* =========================================================
+   FIELDS
+   ========================================================= */
+
+input,
+textarea,
+select,
+.rs__control {
+	background: var(--theme-input-bg);
+
+	border-color: var(--theme-elevation-250);
+	border-radius: var(--border-radius-sm);
+
+	box-shadow: var(--shadow-xs);
+}
+
+
+input:hover,
+textarea:hover,
+.rs__control:hover {
+	border-color: var(--theme-elevation-350);
+}
+
+
+input:focus,
+textarea:focus,
+.rs__control--is-focused {
+	border-color: var(--color-brand) !important;
+
+	box-shadow:
+		0 0 0 3px var(--brand-soft) !important;
+}
+
+
+/* =========================================================
+   RICH TEXT
+   ========================================================= */
+
+.editor-container,
+.lexical-rich-text-field {
+	background: var(--theme-elevation-0);
+
+	border: 1px solid var(--theme-elevation-200);
+	border-radius: var(--border-radius-md);
+
+	box-shadow: var(--shadow-sm);
+
+	overflow: hidden;
+}
+
+
+.editor-container [class*='toolbar'],
+.lexical-rich-text-field [class*='toolbar'] {
+	background: var(--theme-elevation-100);
+
+	border-bottom: 1px solid var(--theme-elevation-200);
+}
+
+
+/* =========================================================
+   MOBILE / DRAWER SIDEBAR
+   ========================================================= */
+
+@media (width <= 1024px) {
+
+	/*
+	 * Mobile nav toggle is larger, so reserve slightly
+	 * more room above COLLECTIONS.
+	 */
+
+	.nav__scroll {
+		padding:
+			84px
+			20px
+			96px;
+	}
+
+
+	.nav-group + .nav-group {
+		margin-top: 20px;
+
+		padding-top: 20px;
+	}
+
+
+	/*
+	 * Less wasted space between sidebar links.
+	 */
+
+	.nav__link {
+		min-height: 42px;
+
+		margin: 2px 0;
+		padding:
+			9px
+			0;
+	}
+
+
+	.nav-group__toggle {
+		padding-right: 0;
+		padding-left: 0;
+	}
+
+
+	/*
+	 * Editor cards remain separated on narrower screens.
+	 */
+
+	.document-fields {
+		gap: 14px;
+
+		padding: 14px;
+	}
+
+}
+
+
+/* =========================================================
+   VERY SMALL SCREENS
+   ========================================================= */
+
+@media (width <= 650px) {
+
+	.document-fields {
+		gap: 12px;
+
+		padding: 12px;
+	}
+
+
+	.collection-list__header,
+	.list-header {
+		padding-top: 20px;
+		padding-bottom: 16px;
+	}
+
+}
+/* =========================================================
+   DOCUMENT HEADER / FINAL COMPACTING
+   ========================================================= */
+
+/*
+ * Main title/header surface.
+ */
+
+ .document-header,
+ .doc-header {
+	 min-height: unset;
+ 
+	 padding-top: 18px;
+	 padding-bottom: 18px;
+ 
+	 background: var(--theme-elevation-0);
+ 
+	 border-bottom: 1px solid var(--theme-elevation-200);
+ 
+	 box-shadow: none;
+ }
+ 
+ 
+ /*
+  * Document title.
+  */
+ 
+ .document-header h1,
+ .doc-header h1,
+ .document-edit h1:first-of-type {
+	 margin: 0;
+ 
+	 line-height: 1.05;
+ 
+	 letter-spacing: -0.025em;
+ }
+ 
+ 
+ /* =========================================================
+	DOCUMENT TABS / EDIT / API
+	========================================================= */
+ 
+ .document-header [role='tablist'],
+ .doc-header [role='tablist'] {
+	 align-self: center;
+ 
+	 gap: 6px;
+ }
+ 
+ 
+ .document-header [role='tab'],
+ .doc-header [role='tab'] {
+	 border-radius: var(--border-radius-sm);
+ 
+	 transition:
+		 background-color var(--transition-ui),
+		 color var(--transition-ui);
+ }
+ 
+ 
+ .document-header [role='tab']:hover,
+ .doc-header [role='tab']:hover {
+	 background: var(--theme-elevation-100);
+ }
+ 
+ 
+ /* =========================================================
+	META + SAVE ROW
+	========================================================= */
+ 
+ .doc-controls {
+	 min-height: unset;
+ 
+	 padding-top: 10px;
+	 padding-bottom: 10px;
+ 
+	 background: var(--theme-elevation-50);
+ 
+	 border-top: 0;
+	 border-bottom: 1px solid var(--theme-elevation-200);
+ 
+	 box-shadow: none;
+ }
+ 
+ 
+ /*
+  * Remove unnecessary vertical spacing Payload may add
+  * around metadata.
+  */
+ 
+ .doc-controls__meta,
+ .document-controls__meta {
+	 margin-top: 0;
+	 margin-bottom: 0;
+ 
+	 padding-top: 0;
+	 padding-bottom: 0;
+ 
+	 background: transparent;
+ 
+	 border: 0;
+ }
+ 
+ 
+ /*
+  * Metadata should feel secondary.
+  */
+ 
+ .doc-controls__meta,
+ .doc-controls__meta *,
+ .document-controls__meta,
+ .document-controls__meta * {
+	 color: var(--theme-elevation-500);
+ }
+ 
+ 
+ .doc-controls__meta strong,
+ .document-controls__meta strong {
+	 color: var(--theme-elevation-700);
+ 
+	 font-weight: 600;
+ }
+ 
+ 
+ /* =========================================================
+	ACTION BUTTONS
+	========================================================= */
+ 
+ .doc-controls .btn {
+	 margin-top: 0;
+	 margin-bottom: 0;
+ }
+ 
+ 
+ .doc-controls .btn--style-primary {
+	 box-shadow: none;
+ }
+ 
+ 
+ .doc-controls .btn--style-primary:hover,
+ .doc-controls .btn--style-primary:focus-visible {
+	 box-shadow:
+		 0 0 0 3px var(--brand-medium);
+ }
+ 
+ 
+ /* =========================================================
+	SPACE BETWEEN HEADER AND EDITOR
+	========================================================= */
+ 
+ /*
+  * Keeps the document surfaces from starting immediately
+  * against the controls bar.
+  */
+ 
+ .document-fields {
+	 padding-top: 18px;
+ }
+ 
+ 
+ /* =========================================================
+	MOBILE
+	========================================================= */
+ 
+ @media (width <= 650px) {
+ 
+	 .document-header,
+	 .doc-header {
+		 padding-top: 14px;
+		 padding-bottom: 14px;
+	 }
+ 
+ 
+	 .doc-controls {
+		 padding-top: 8px;
+		 padding-bottom: 8px;
+	 }
+ 
+ 
+	 .document-fields {
+		 padding-top: 12px;
+	 }
+ 
+ }

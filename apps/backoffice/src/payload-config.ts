@@ -12,11 +12,15 @@ import sharp from 'sharp';
 import { createLexicalConfig, lexicalEditorConfig as nestedLexicalEditorConfig } from '@/configs/lexical-editor-config';
 import { Campaigns } from '@/schemas/Campaigns/collection';
 import { CaseStudies } from '@/schemas/CaseStudies/collection';
+import { ContentTypes } from '@/schemas/ContentTypes/collection';
 import { KnowledgeBase } from '@/schemas/KnowledgeBase/collection';
 import { Media } from '@/schemas/Media/collection';
 import { News } from '@/schemas/News/collection';
 import { Notes } from '@/schemas/Notes/collection';
+import { Partnerships } from '@/schemas/Partnerships/collection';
 import { Projects } from '@/schemas/Projects/collection';
+import { Reports } from '@/schemas/Reports/collection';
+import { SpecialSeries } from '@/schemas/SpecialSeries/collection';
 import { Topics } from '@/schemas/Topics/collection';
 import { Users } from '@/schemas/Users/collection';
 
@@ -43,6 +47,8 @@ import { TwoColumnsTextBlock } from '@/lexical/layout/two-columns-text';
 import { TwoColumnsTextImageBlock } from '@/lexical/layout/two-columns-text-image';
 
 import { spacerFields } from './fields/spacer';
+import { Interviews } from './schemas/Interviews/collection';
+import { Videos } from './schemas/Videos/collection';
 
 /* * */
 
@@ -126,8 +132,7 @@ export default buildConfig({
 		user: 'users',
 	},
 
-	collections: [Campaigns, Articles, CaseStudies, Media, News, Topics, Users, KnowledgeBase, Notes, Projects, Faqs, FaqsNavegante],
-
+	collections: [Campaigns, Articles, CaseStudies, ContentTypes, Media, News, Topics, SpecialSeries, Partnerships, Users, KnowledgeBase, Notes, Projects, Faqs, FaqsNavegante, Videos, Interviews, Reports],
 	csrf: [
 		getPublicVariable('server_url_backoffice').replace(/\/$/, ''),
 		`${getPublicVariable('server_url_backoffice').replace(/\/$/, '')}/admin`,

@@ -1,25 +1,24 @@
 'use client';
 
-/* * */
+import type { GoApiResponse } from '@carrismetropolitana/website-shared-types';
 
+import { useFilterByAgencyIds } from '@/hooks/useFilterByAgencyIds';
 import { type CachedResource } from '@carrismetropolitana/api-types/common';
 import { type ServiceMetrics } from '@carrismetropolitana/api-types/metrics';
-import { type Line, type Route } from '@carrismetropolitana/api-types/network';
 import { getPublicVariable } from '@carrismetropolitana/website-shared-settings';
+import { type HubLine, type HubRoute } from '@tmlmobilidade/go-types-public-info';
 import { createContext, useContext, useMemo } from 'react';
 import useSWR from 'swr';
 
-/* * */
-
 interface LinesContextState {
 	actions: {
-		getLineDataById: (lineId: string) => Line | undefined
-		getRouteDataById: (routeId: string) => Route | undefined
+		getLineDataById: (lineId: string) => HubLine | undefined
+		getRouteDataById: (routeId: string) => HubRoute | undefined
 		getServiceMetricsByLineId: (lineId: string) => ServiceMetrics[] | undefined
 	}
 	data: {
-		lines: Line[]
-		routes: Route[]
+		lines: HubLine[]
+		routes: HubRoute[]
 		service_metrics: ServiceMetrics[]
 	}
 	flags: {
@@ -47,19 +46,22 @@ export const LinesContextProvider = ({ children }) => {
 	//
 	// A. Fetch data
 
-	const { data: allLinesData, isLoading: allLinesLoading } = useSWR<Line[], Error>(`${getPublicVariable('api_url')}/lines`, { refreshInterval: 900000 }); // 15 minutes
-	const { data: allRoutesData, isLoading: allRoutesLoading } = useSWR<Route[], Error>(`${getPublicVariable('api_url')}/routes`, { refreshInterval: 900000 }); // 15 minutes
+	const { data: linesResponse, isLoading: allLinesLoading } = useSWR<GoApiResponse<HubLine[]>, Error>(`${getPublicVariable('go_api_url')}/hub/api/v1/network/lines`, { refreshInterval: 900000 }); // 15 minutes
+	const { data: routesResponse, isLoading: allRoutesLoading } = useSWR<GoApiResponse<HubRoute[]>, Error>(`${getPublicVariable('go_api_url')}/hub/api/v1/network/routes`, { refreshInterval: 900000 }); // 15 minutes
 	const { data: serviceMetricsData, isLoading: serviceMetricsLoading } = useSWR<CachedResource<ServiceMetrics[]>, Error>(`${getPublicVariable('api_url')}/metrics/service/all`, { refreshInterval: 900000 }); // 15 minutes
+	const linesData = useFilterByAgencyIds(linesResponse, { dataType: 'line' }).data;
+	const routesData = useFilterByAgencyIds(routesResponse, { dataType: 'route' }).data;
 
 	//
 	// B. Handle actions
 
 	const getLineDataById = (lineId: string) => {
-		return allLinesData?.find(line => line.id === lineId);
+		const normalizedLineId = lineId.replace(/^\[[^\]]+\]/, '');
+		return linesData.find(line => line._id === normalizedLineId);
 	};
 
 	const getRouteDataById = (routeId: string) => {
-		return allRoutesData?.find(route => route.id === routeId);
+		return routesData.find(route => route._id === routeId);
 	};
 
 	const getServiceMetricsByLineId = (lineId: string) => {
@@ -76,17 +78,17 @@ export const LinesContextProvider = ({ children }) => {
 			getServiceMetricsByLineId,
 		},
 		data: {
-			lines: allLinesData || [],
-			routes: allRoutesData || [],
+			lines: linesData,
+			routes: routesData,
 			service_metrics: serviceMetricsData?.data || [],
 		},
 		flags: {
 			is_loading: allLinesLoading || allRoutesLoading || serviceMetricsLoading,
 		},
 	}), [
-		allLinesData,
+		linesData,
 		allLinesLoading,
-		allRoutesData,
+		routesData,
 		allRoutesLoading,
 		serviceMetricsData,
 		serviceMetricsLoading,

@@ -2,7 +2,7 @@
 
 /* * */
 
-import type { Line } from '@carrismetropolitana/api-types/network';
+import type { HubLine } from '@tmlmobilidade/go-types-public-info';
 
 import { useLinesContext } from '@/contexts/Lines.context';
 import { IconInfoTriangleFilled } from '@tabler/icons-react';
@@ -13,8 +13,9 @@ import styles from './styles.module.css';
 /* * */
 
 interface Props {
+	agencyId?: string
 	color?: string
-	lineData?: Line
+	lineData?: HubLine
 	lineId?: string
 	onClick?: () => void
 	shortName?: string

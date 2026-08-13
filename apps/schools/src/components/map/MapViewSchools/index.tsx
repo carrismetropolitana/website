@@ -3,6 +3,9 @@
 /* * */
 
 import { MapView } from '@/components/map/MapView';
+import { GoApiResponse } from '@/types/go-api-types';
+import { getPublicVariable } from '@carrismetropolitana/website-shared-settings';
+import { HubStop } from '@tmlmobilidade/go-types-public-info';
 import * as turf from '@turf/turf';
 import { useEffect, useMemo } from 'react';
 import { Layer, Source, useMap } from 'react-map-gl/maplibre';
@@ -21,7 +24,7 @@ export function MapViewSchools({ allSchoolsData, onSelectSchool }) {
 	//
 	// B. Fetch data
 
-	const { data: allStopsData } = useSWR('https://api.carrismetropolitana.pt/stops');
+	const { data: allStopsData } = useSWR<GoApiResponse<HubStop[]>, Error>(`${getPublicVariable('go_api_url')}/hub/api/v1/network/stops`, { refreshInterval: 900000 }); // 15 minutes
 
 	//
 	// C. Transform data
@@ -32,9 +35,9 @@ export function MapViewSchools({ allSchoolsData, onSelectSchool }) {
 			type: 'FeatureCollection',
 		};
 		if (allStopsData) {
-			for (const stop of allStopsData) {
+			for (const stop of allStopsData.data) {
 				geoJSON.features.push({
-					geometry: { coordinates: [stop.lon, stop.lat], type: 'Point' },
+					geometry: { coordinates: [stop.longitude, stop.latitude], type: 'Point' },
 					properties: {},
 					type: 'Feature',
 				});

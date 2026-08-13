@@ -41,7 +41,7 @@ export function ArrabidaList() {
 	const stableItems = useMemo(() => {
 		if (!linesListContext.data.filtered?.length) return [];
 
-		const linesMap = new Map(linesListContext.data.filtered.map(line => [line.id, line]));
+		const linesMap = new Map(linesListContext.data.filtered.map(line => [line._id, line]));
 		return ARRABIDA_LINE_IDS
 			.map(lineId => linesMap.get(lineId))
 			.filter(Boolean) as typeof linesListContext.data.filtered;
@@ -89,14 +89,14 @@ export function ArrabidaList() {
 				<Section heading={t('title')} subheading={t('subtitle')}>
 					<ul className={styles.listContainer} style={{ height: '100%', marginBottom: '0', padding: '0', width: '100%' }}>
 						{stableItems.map((item, index, array) => {
-							const isFavorite = profileContext.data.favorite_lines?.includes(item.id) || false;
-							const alerts = alertsContext.actions.getSimplifiedAlertsByLineId(item.id);
+							const isFavorite = profileContext.data.favorite_lines?.includes(item._id) || false;
+							const alerts = alertsContext.actions.getAlertsByLineId(item._id);
 							const hasAlert = alerts.length > 0;
 							const isLastItem = index === array.length - 1;
 
 							return (
-								<li key={item.id} className={`${styles.listItemWrapper} ${isLastItem ? styles.lastItem : ''}`}>
-									<RegularListItem href={`/lines/${item.id}`} style={{ height: '100%', width: '100%' }}>
+								<li key={item._id} className={`${styles.listItemWrapper} ${isLastItem ? styles.lastItem : ''}`}>
+									<RegularListItem href={`/lines/${item._id}`} style={{ height: '100%', width: '100%' }}>
 
 										<div className={styles.itemContainer}>
 											<div className={styles.lineInfo} style={{ flex: 1 }}>
@@ -127,7 +127,7 @@ export function ArrabidaList() {
 															color={item.color}
 															isActive={isFavorite}
 															onToggle={() => {
-																handleToggleFavorite(item.id, item.long_name);
+																handleToggleFavorite(item._id, item.long_name);
 															}}
 														/>
 													</div>

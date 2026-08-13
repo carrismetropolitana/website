@@ -2,7 +2,7 @@
 
 /* * */
 
-import type { Stop } from '@carrismetropolitana/api-types/network';
+import type { HubStop } from '@tmlmobilidade/go-types-public-info';
 
 import { createDocCollection } from '@/hooks/useOtherSearch';
 import { MultiSelect } from '@mantine/core';
@@ -16,12 +16,12 @@ interface StopOption {
 	value: string
 }
 
-interface SearchStopDoc extends Record<string, unknown>, Stop {}
+interface SearchStopDoc extends HubStop, Record<string, unknown> {}
 
 /* * */
 
 interface SelectStopsProps {
-	data: Stop[]
+	data: HubStop[]
 	label?: string
 	nothingFound?: string
 	onSelectStopIds: (stopIds: string[]) => void
@@ -58,14 +58,14 @@ export function SelectStops({
 	const initialSuggestions = useMemo(() => {
 		// Show a small list even before typing (avoid rendering thousands of items)
 		return [...data]
-			.sort((a, b) => (a.long_name || '').localeCompare((b.long_name || ''), undefined, { sensitivity: 'base' }))
+			.sort((a, b) => (a.name || '').localeCompare((b.name || ''), undefined, { sensitivity: 'base' }))
 			.slice(0, 50);
 	}, [data]);
 
 	const selectedStops = useMemo(() => {
 		if (!selectedStopIds.length) return [];
 		const selectedSet = new Set(selectedStopIds);
-		return data.filter(stop => selectedSet.has(stop.id));
+		return data.filter(stop => selectedSet.has(String(stop._id)));
 	}, [data, selectedStopIds]);
 
 	const results = useMemo(() => {
@@ -75,11 +75,11 @@ export function SelectStops({
 
 	const options = useMemo(() => {
 		const byId = new Map<string, StopOption>();
-		const addStop = (stop: Stop) => {
-			if (!stop?.id) return;
-			byId.set(stop.id, {
-				label: stop.long_name ? `${stop.long_name} (${stop.id})` : stop.id,
-				value: stop.id,
+		const addStop = (stop: HubStop) => {
+			if (!String(stop?._id)) return;
+			byId.set(String(stop._id), {
+				label: stop.name ? `${stop.name} (${stop._id})` : String(stop._id),
+				value: String(stop._id),
 			});
 		};
 

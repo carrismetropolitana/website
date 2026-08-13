@@ -4,7 +4,7 @@
 
 import { NoDataLabel } from '@/components/layout/NoDataLabel';
 import { StopsDetailContentTimetableClock } from '@/components/stops/StopsDetailContentTimetableClock';
-import { StopsDetailContentTimetableRow } from '@/components/stops/StopsDetailContentTimetableRow';
+import { StopsDetailViewTimetableRow } from '@/components/stops/StopsDetailContentTimetableRow';
 import { useStopsDetailContext } from '@/contexts/StopsDetail.context';
 import { useTranslations } from 'next-intl';
 import { useState } from 'react';
@@ -27,7 +27,10 @@ export function StopsDetailContentTimetableRealtime() {
 	//
 	// B. Transform data
 
-	const mostRecentPastTrip = stopsDetailContext.data.timetable_realtime_past?.[stopsDetailContext.data.timetable_realtime_past?.length - 1] ?? null;
+	const pastTrips = stopsDetailContext.data.timetable.filter(item => item.is_past);
+	const futureTrips = stopsDetailContext.data.timetable.filter(item => !item.is_past);
+	const mostRecentPastTrip = pastTrips[pastTrips.length - 1] ?? null;
+	const tripsToRender = showPastTrips ? pastTrips : mostRecentPastTrip ? [mostRecentPastTrip] : [];
 
 	//
 	// C. Handle actions
@@ -37,9 +40,9 @@ export function StopsDetailContentTimetableRealtime() {
 	};
 
 	//
-	// C. Render components
+	// D. Render components
 
-	if ((!stopsDetailContext.data.timetable_realtime_past || stopsDetailContext.data.timetable_realtime_past?.length === 0) && (!stopsDetailContext.data.timetable_realtime_future || stopsDetailContext.data.timetable_realtime_future?.length === 0)) {
+	if (!stopsDetailContext.data.timetable.length) {
 		return (
 			<NoDataLabel text={t('no_service')} withMinHeight />
 		);
@@ -52,33 +55,25 @@ export function StopsDetailContentTimetableRealtime() {
 				{showPastTrips ? t('show_past_trips_toggle.hide') : t('show_past_trips_toggle.show')}
 			</p>
 
-			{!showPastTrips && mostRecentPastTrip && (
-				<div>
-					<StopsDetailContentTimetableRow
-						arrivalData={mostRecentPastTrip}
-						status="passed"
-					/>
-				</div>
-			)}
-
-			{showPastTrips && stopsDetailContext.data.timetable_realtime_past?.length && stopsDetailContext.data.timetable_realtime_past.map(tripData => (
-				<div key={`${tripData.trip_id}-${tripData.stop_sequence}`}>
-					<StopsDetailContentTimetableRow
-						arrivalData={tripData}
-						status="passed"
-					/>
-				</div>
+			{tripsToRender.map(tripData => (
+				<StopsDetailViewTimetableRow
+					key={tripData._id}
+					data={tripData}
+					status="passed"
+					withClock={false}
+				/>
 			))}
 
 			<StopsDetailContentTimetableClock />
 
-			{stopsDetailContext.data.timetable_realtime_future && stopsDetailContext.data.timetable_realtime_future.length > 0 && (
+			{futureTrips.length > 0 && (
 				<>
-					{stopsDetailContext.data.timetable_realtime_future.map(tripData => (
-						<StopsDetailContentTimetableRow
-							key={`${tripData.trip_id}-${tripData.stop_sequence}`}
-							arrivalData={tripData}
-							status={tripData.estimated_arrival_unix ? 'realtime' : 'scheduled'}
+					{futureTrips.map(tripData => (
+						<StopsDetailViewTimetableRow
+							key={tripData._id}
+							data={tripData}
+							status={tripData.is_realtime ? 'realtime' : 'scheduled'}
+							withClock={false}
 						/>
 					))}
 					<NoDataLabel text={t('end_of_day')} withMinHeight />

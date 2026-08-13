@@ -2,11 +2,10 @@
 
 /* * */
 
-import type { Line, Stop } from '@carrismetropolitana/api-types/network';
-
 import { useLinesContext } from '@/contexts/Lines.context';
 import { useProfileContext } from '@/contexts/Profile.context';
 import { useStopsContext } from '@/contexts/Stops.context';
+import { type HubLine, type HubStop } from '@tmlmobilidade/go-types-public-info';
 import { createContext, useContext, useEffect, useState } from 'react';
 
 /* * */
@@ -19,8 +18,8 @@ interface ProfileListContextState {
 		favorites: number
 	}
 	data: {
-		favorite_lines: Line[]
-		favorite_stops: Stop[]
+		favorite_lines: HubLine[]
+		favorite_stops: HubStop[]
 	}
 	filters: {
 		by_current_view: 'lines' | 'stops'
@@ -54,8 +53,8 @@ export const ProfileListContextProvider = ({ children }) => {
 	const linesContext = useLinesContext();
 	const stopsContext = useStopsContext();
 
-	const [dataFavoriteLinesState, setDataFavoriteLinesState] = useState<Line[]>([]);
-	const [dataFavoriteStopsState, setDataFavoriteStopsState] = useState<Stop[]>([]);
+	const [dataFavoriteLinesState, setDataFavoriteLinesState] = useState<HubLine[]>([]);
+	const [dataFavoriteStopsState, setDataFavoriteStopsState] = useState<HubStop[]>([]);
 
 	const [filterByCurrentViewState, setFilterByCurrentViewState] = useState <ProfileListContextState['filters']['by_current_view']>('lines');
 
@@ -64,10 +63,10 @@ export const ProfileListContextProvider = ({ children }) => {
 
 	useEffect(() => {
 		if (linesContext.data.lines) {
-			setDataFavoriteLinesState(linesContext.data.lines.filter(lineData => profileContext.data.favorite_lines?.includes(lineData.id)));
+			setDataFavoriteLinesState(linesContext.data.lines.filter(lineData => profileContext.data.favorite_lines?.includes(lineData._id.toString())));
 		}
 		if (stopsContext.data.stops) {
-			setDataFavoriteStopsState(stopsContext.data.stops.filter(stopData => profileContext.data.favorite_stops?.includes(stopData.id)));
+			setDataFavoriteStopsState(stopsContext.data.stops.filter(stopData => profileContext.data.favorite_stops?.includes(stopData._id.toString())));
 		}
 	}, []);
 
