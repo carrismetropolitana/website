@@ -141,7 +141,7 @@ export const Interviews: CollectionConfig = {
 		},
 		{
 			admin: {
-				description: 'Por predefinição, é usado o autor Equipa Carris. Selecione outro autor para o substituir.',
+				description: 'Por predefinição, é usado o autor Equipa Carris Metropolitana. Selecione outro autor para o substituir.',
 			},
 			hasMany: true,
 			label: 'Autores',

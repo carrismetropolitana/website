@@ -5,8 +5,8 @@ export const DEFAULT_INTERVIEW_AUTHOR_SLUG = 'equipa-carris';
 
 const DEFAULT_INTERVIEW_AUTHOR_DATA = {
 	expertAuthor: false,
-	name: 'Equipa Carris',
-	role: 'Equipa Carris',
+	name: 'Equipa Carris Metropolitana',
+	role: 'Equipa Carris Metropolitana',
 	slug: DEFAULT_INTERVIEW_AUTHOR_SLUG,
 } as const;
 

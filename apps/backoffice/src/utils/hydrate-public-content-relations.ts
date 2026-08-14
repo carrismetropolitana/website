@@ -12,9 +12,9 @@ const DEFAULT_INTERVIEW_AUTHOR: Author = {
 	createdAt: '',
 	expertAuthor: false,
 	id: 'equipa-carris',
-	name: 'Equipa Carris',
+	name: 'Equipa Carris Metropolitana',
 	picture: null,
-	role: 'Equipa Carris',
+	role: 'Equipa Carris Metropolitana',
 	slug: 'equipa-carris',
 	updatedAt: '',
 };
