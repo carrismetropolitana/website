@@ -717,7 +717,7 @@ export interface Interview {
     role: string;
   };
   /**
-   * Por predefinição, é usado o autor Equipa Carris. Selecione outro autor para o substituir.
+   * Por predefinição, é usado o autor Equipa Carris Metropolitana. Selecione outro autor para o substituir.
    */
   authors?: (string | Author)[] | null;
   /**
