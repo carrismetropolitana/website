@@ -2,6 +2,7 @@
 
 import payloadConfig from '@/payload-config';
 import { getPublicHeaders } from '@/utils/get-public-headers';
+import { hydratePublicArticleRelations } from '@/utils/hydrate-public-content-relations';
 import { getPayload } from 'payload';
 
 /* * */
@@ -33,7 +34,7 @@ export const GET = async (_request: Request, { params }: { params: Promise<{ slu
 
 	const article = foundArticles.docs[0];
 
-	return Response.json(article, {
+	return Response.json(await hydratePublicArticleRelations(payload, article), {
 		headers: getPublicHeaders(3600),
 	});
 };

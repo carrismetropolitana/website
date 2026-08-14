@@ -2,7 +2,7 @@
 
 import type { CollectionConfig } from 'payload';
 
-import { publishedAtField } from '@/fields/published-at';
+import { hiddenPublishedAtField } from '@/fields/published-at';
 import { specialSeriesField } from '@/fields/special-series';
 import { subjectField } from '@/fields/subject';
 import { updatedAtField } from '@/fields/updated-at';
@@ -70,70 +70,11 @@ export const Videos: CollectionConfig = {
 			type: 'text',
 		},
 		{
-			fields: [
-				{
-					label: 'Foto',
-					name: 'picture',
-					relationTo: 'media',
-					type: 'upload',
-				},
-				{
-					label: 'Nome',
-					name: 'name',
-					required: true,
-					type: 'text',
-				},
-				{
-					label: 'Cargo/Função',
-					name: 'role',
-					required: true,
-					type: 'text',
-				},
-				{
-					admin: {
-						description: 'Breve descrição sobre o autor.',
-					},
-					label: 'Biografia',
-					name: 'bio',
-					type: 'textarea',
-				},
-				{
-					admin: {
-						description: 'Se este vídeo foi produzido por um especialista, marque esta opção para permitir filtros e destaques de conteúdos especializados.',
-						position: 'sidebar',
-					},
-					defaultValue: false,
-					label: 'Vídeo produzido por um especialista',
-					name: 'expertAuthor',
-					required: true,
-					type: 'checkbox',
-				},
-				{
-					fields: [
-						{
-							label: 'LinkedIn',
-							name: 'linkedin',
-							type: 'text',
-						},
-						{
-							label: 'X (Twitter)',
-							name: 'twitter',
-							type: 'text',
-						},
-						{
-							label: 'Email',
-							name: 'email',
-							type: 'email',
-						},
-					],
-					label: 'Redes Sociais',
-					name: 'social',
-					type: 'group',
-				},
-			],
-			label: 'Autor',
-			name: 'author',
-			type: 'group',
+			hasMany: true,
+			label: 'Autores',
+			name: 'authors',
+			relationTo: 'authors',
+			type: 'relationship',
 		},
 		subjectField,
 		specialSeriesField,
@@ -165,14 +106,10 @@ export const Videos: CollectionConfig = {
 			type: 'upload',
 		},
 		{
-			admin: {
-				description:
-					'Conteúdo do vídeo em formato Markdown. Exemplo:\n## Descrição do Vídeo\n\nTexto introdutório...\n\n### Destaques do Vídeo\n- Ponto 1\n- Ponto 2',
-			},
-			label: 'Conteúdo (Markdown)',
+			label: 'Conteúdo',
 			name: 'content',
 			required: true,
-			type: 'textarea',
+			type: 'richText',
 		},
 		{
 			admin: {
@@ -275,7 +212,7 @@ export const Videos: CollectionConfig = {
 			name: 'seo',
 			type: 'group',
 		},
-		publishedAtField,
+		hiddenPublishedAtField,
 		updatedAtField,
 	],
 

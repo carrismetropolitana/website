@@ -10,8 +10,10 @@ import sharp from 'sharp';
 /* * */
 
 import { createLexicalConfig, lexicalEditorConfig as nestedLexicalEditorConfig } from '@/configs/lexical-editor-config';
+import { Authors } from '@/schemas/Authors/collection';
 import { Campaigns } from '@/schemas/Campaigns/collection';
 import { CaseStudies } from '@/schemas/CaseStudies/collection';
+import { CicmReactions } from '@/schemas/CicmReactions/collection';
 import { ContentTypes } from '@/schemas/ContentTypes/collection';
 import { KnowledgeBase } from '@/schemas/KnowledgeBase/collection';
 import { Media } from '@/schemas/Media/collection';
@@ -45,6 +47,7 @@ import { CardBlock } from '@/lexical/layout/card';
 import { ThreeColumnsTextBlock } from '@/lexical/layout/three-columns-text';
 import { TwoColumnsTextBlock } from '@/lexical/layout/two-columns-text';
 import { TwoColumnsTextImageBlock } from '@/lexical/layout/two-columns-text-image';
+import { ensureDefaultInterviewAuthor } from '@/utils/default-interview-author';
 
 import { spacerFields } from './fields/spacer';
 import { Interviews } from './schemas/Interviews/collection';
@@ -132,7 +135,7 @@ export default buildConfig({
 		user: 'users',
 	},
 
-	collections: [Campaigns, Articles, CaseStudies, ContentTypes, Media, News, Topics, SpecialSeries, Partnerships, Users, KnowledgeBase, Notes, Projects, Faqs, FaqsNavegante, Videos, Interviews, Reports],
+	collections: [Campaigns, Articles, Authors, CaseStudies, CicmReactions, ContentTypes, Media, News, Topics, SpecialSeries, Partnerships, Users, KnowledgeBase, Notes, Projects, Faqs, FaqsNavegante, Videos, Interviews, Reports],
 	csrf: [
 		getPublicVariable('server_url_backoffice').replace(/\/$/, ''),
 		`${getPublicVariable('server_url_backoffice').replace(/\/$/, '')}/admin`,
@@ -168,6 +171,10 @@ export default buildConfig({
 		locales: ['pt-PT', 'en'],
 	},
 
+	onInit: async (payload) => {
+		await ensureDefaultInterviewAuthor(payload);
+	},
+
 	plugins: [
 		s3Storage({
 			bucket: process.env.OCI_S3_NAMESPACE ?? 'placeholder', // Bucket should be the namespace in OCI Object Storage
@@ -180,6 +187,7 @@ export default buildConfig({
 					secretAccessKey: process.env.OCI_S3_SECRET_ACCESS_KEY ?? 'placeholder',
 				},
 				endpoint: process.env.OCI_S3_ENDPOINT ?? 'https://placeholder.endpoint.com',
+				forcePathStyle: process.env.ENVIRONMENT === 'development',
 				region: process.env.OCI_S3_REGION ?? 'placeholder',
 				requestHandler: {
 					connectionTimeout: 5_000,
