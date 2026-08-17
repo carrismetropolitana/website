@@ -6,6 +6,7 @@ import { publishedAtField } from '@/fields/published-at';
 import { specialSeriesField } from '@/fields/special-series';
 import { subjectField } from '@/fields/subject';
 import { updatedAtField } from '@/fields/updated-at';
+import { ensureDefaultInterviewAuthor } from '@/utils/default-interview-author';
 import { slugify } from '@/utils/slugify';
 
 /* * */
@@ -14,6 +15,32 @@ interface InterviewBranchData {
 	audioFile?: unknown
 	audioUrl?: unknown
 	contentFormat?: 'audio' | 'transcript'
+	transcription?: unknown[]
+}
+
+const AUDIO_MIME_TYPES = [
+	'audio/aac',
+	'audio/flac',
+	'audio/m4a',
+	'audio/mp3',
+	'audio/mp4',
+	'audio/mpeg',
+	'audio/ogg',
+	'audio/wav',
+	'audio/webm',
+	'audio/x-m4a',
+	'audio/x-wav',
+] as const;
+
+function getMediaMimeType(value: unknown): string | undefined {
+	if (!value || typeof value !== 'object' || !('mimeType' in value)) return undefined;
+	return typeof value.mimeType === 'string' ? value.mimeType : undefined;
+}
+
+function getMediaId(value: unknown): number | string | undefined {
+	if (typeof value === 'number' || typeof value === 'string') return value;
+	if (!value || typeof value !== 'object' || !('id' in value)) return undefined;
+	return typeof value.id === 'number' || typeof value.id === 'string' ? value.id : undefined;
 }
 
 /* * */
@@ -113,57 +140,14 @@ export const Interviews: CollectionConfig = {
 			type: 'group',
 		},
 		{
-			fields: [
-				{
-					label: 'Foto',
-					name: 'picture',
-					relationTo: 'media',
-					type: 'upload',
-				},
-				{
-					label: 'Nome',
-					name: 'name',
-					type: 'text',
-				},
-				{
-					label: 'Cargo/Função',
-					name: 'role',
-					type: 'text',
-				},
-				{
-					admin: {
-						description: 'Breve descrição sobre o host.',
-					},
-					label: 'Biografia',
-					name: 'bio',
-					type: 'textarea',
-				},
-				{
-					fields: [
-						{
-							label: 'LinkedIn',
-							name: 'linkedin',
-							type: 'text',
-						},
-						{
-							label: 'X (Twitter)',
-							name: 'twitter',
-							type: 'text',
-						},
-						{
-							label: 'Email',
-							name: 'email',
-							type: 'email',
-						},
-					],
-					label: 'Redes Sociais',
-					name: 'social',
-					type: 'group',
-				},
-			],
-			label: 'Host',
-			name: 'host',
-			type: 'group',
+			admin: {
+				description: 'Por predefinição, é usado o autor Equipa Carris Metropolitana. Selecione outro autor para o substituir.',
+			},
+			hasMany: true,
+			label: 'Autores',
+			name: 'authors',
+			relationTo: 'authors',
+			type: 'relationship',
 		},
 		{
 			admin: {
@@ -173,30 +157,44 @@ export const Interviews: CollectionConfig = {
 			},
 			filterOptions: {
 				mimeType: {
-					in: [
-						'audio/aac',
-						'audio/flac',
-						'audio/m4a',
-						'audio/mp3',
-						'audio/mp4',
-						'audio/mpeg',
-						'audio/ogg',
-						'audio/wav',
-						'audio/webm',
-						'audio/x-m4a',
-						'audio/x-wav',
-					],
+					in: [...AUDIO_MIME_TYPES],
 				},
 			},
 			label: 'Ficheiro de Áudio',
 			name: 'audioFile',
 			relationTo: 'media',
 			type: 'upload',
-			validate: (value, { data }) => {
+			validate: async (value, { data, req }) => {
 				const branchData = data as InterviewBranchData;
 				if (branchData.contentFormat !== 'audio') return true;
-				if (value || branchData.audioUrl) return true;
-				return 'Adicione um ficheiro de áudio ou uma URL externa.';
+				if (!value) {
+					if (branchData.audioUrl) return true;
+					return 'Adicione um ficheiro de áudio ou uma URL externa.';
+				}
+
+				let mimeType = getMediaMimeType(value);
+				const mediaId = getMediaId(value);
+
+				if (!mimeType && mediaId) {
+					try {
+						const media = await req.payload.findByID({
+							collection: 'media',
+							id: mediaId,
+							req,
+						});
+						mimeType = media.mimeType ?? undefined;
+					}
+					catch {
+						return 'Não foi possível validar o ficheiro de áudio selecionado.';
+					}
+				}
+
+				if (mimeType && AUDIO_MIME_TYPES.includes(mimeType as (typeof AUDIO_MIME_TYPES)[number])) {
+					return true;
+				}
+
+				if (!mimeType) return 'Não foi possível validar o tipo do ficheiro de áudio.';
+				return 'Selecione um ficheiro num formato de áudio suportado.';
 			},
 		},
 		{
@@ -251,25 +249,73 @@ export const Interviews: CollectionConfig = {
 		},
 		{
 			admin: {
-				condition: (_, siblingData) => siblingData?.contentFormat === 'transcript',
+				components: {
+					beforeInput: ['@/components/TranscriptBulkImport#TranscriptBulkImport'],
+				},
+				description:
+					'Cada entrada é uma fala. Em áudio, início e fim sincronizam o destaque com o leitor.',
 			},
-			label: 'Escrita',
-			name: 'transcript',
-			type: 'richText',
-			validate: (value, { data }) => {
-				const branchData = data as InterviewBranchData;
-				if (branchData.contentFormat !== 'transcript') return true;
-				if (value) return true;
-				return 'O conteúdo da entrevista escrita é obrigatório.';
-			},
+			fields: [
+				{
+					label: 'Orador',
+					name: 'speaker',
+					options: [
+						{ label: 'Entrevistador', value: 'host' },
+						{ label: 'Convidado', value: 'guest' },
+					],
+					required: true,
+					type: 'select',
+				},
+				{
+					admin: { description: 'Sobrescreve o nome do orador, quando necessário.' },
+					label: 'Nome apresentado',
+					name: 'speakerName',
+					type: 'text',
+				},
+				{
+					admin: {
+						components: {
+							afterInput: ['@/components/AutoFillTranscriptStartTime#AutoFillTranscriptStartTime'],
+						},
+						description: 'Segundo em que esta fala começa no áudio. Opcional em entrevistas escritas.',
+					},
+					label: 'Início da fala (segundos)',
+					min: 0,
+					name: 'startTime',
+					type: 'number',
+				},
+				{
+					admin: {
+						description: 'Segundo em que esta fala termina no áudio. Opcional em entrevistas escritas.',
+					},
+					label: 'Fim da fala (segundos)',
+					min: 0,
+					name: 'endTime',
+					type: 'number',
+					validate: (value, { siblingData }) => {
+						if (value === undefined || value === null) return true;
+						if (typeof siblingData?.startTime !== 'number') return true;
+						return value >= siblingData.startTime || 'O fim deve ser igual ou posterior ao início.';
+					},
+				},
+				{
+					label: 'Texto',
+					name: 'text',
+					required: true,
+					type: 'textarea',
+				},
+			],
+			label: 'Transcrição',
+			minRows: 1,
+			name: 'transcription',
+			type: 'array',
 		},
 		{
 			admin: {
-				condition: (_, siblingData) => siblingData?.contentFormat === 'transcript',
-				description: 'Ficheiro PDF com a entrevista escrita completa.',
+				description: 'Ficheiro PDF com a transcrição completa.',
 				position: 'sidebar',
 			},
-			label: 'PDF da Escrita',
+			label: 'PDF da Transcrição',
 			name: 'transcriptPdf',
 			relationTo: 'media',
 			type: 'upload',
@@ -345,8 +391,6 @@ export const Interviews: CollectionConfig = {
 
 				if (data.contentFormat === 'audio') {
 					data.readTime = null;
-					data.transcript = null;
-					data.transcriptPdf = null;
 				}
 
 				if (data.contentFormat === 'transcript') {
@@ -357,13 +401,20 @@ export const Interviews: CollectionConfig = {
 			},
 		],
 		beforeValidate: [
-			async ({ data }) => {
+			async ({ data, operation, req }) => {
 				if (data.title && !data.slug) {
 					data.slug = slugify(data.title);
 				}
 				if (data.slug) {
 					data.slug = slugify(data.slug);
 				}
+
+				if (operation !== 'create' || (Array.isArray(data.authors) && data.authors.length > 0)) {
+					return;
+				}
+
+				const equipaCarris = await ensureDefaultInterviewAuthor(req.payload);
+				data.authors = [equipaCarris.id];
 			},
 		],
 	},

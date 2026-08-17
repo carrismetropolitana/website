@@ -69,7 +69,9 @@ export interface Config {
   collections: {
     campaigns: Campaign;
     articles: Article;
+    authors: Author;
     'case-studies': CaseStudy;
+    'cicm-reactions': CicmReaction;
     'content-types': ContentType;
     media: Media;
     news: News;
@@ -94,7 +96,9 @@ export interface Config {
   collectionsSelect: {
     campaigns: CampaignsSelect<false> | CampaignsSelect<true>;
     articles: ArticlesSelect<false> | ArticlesSelect<true>;
+    authors: AuthorsSelect<false> | AuthorsSelect<true>;
     'case-studies': CaseStudiesSelect<false> | CaseStudiesSelect<true>;
+    'cicm-reactions': CicmReactionsSelect<false> | CicmReactionsSelect<true>;
     'content-types': ContentTypesSelect<false> | ContentTypesSelect<true>;
     media: MediaSelect<false> | MediaSelect<true>;
     news: NewsSelect<false> | NewsSelect<true>;
@@ -255,24 +259,7 @@ export interface Article {
     };
     [k: string]: unknown;
   };
-  author: {
-    picture?: (string | null) | Media;
-    name: string;
-    role: string;
-    /**
-     * Breve descrição sobre o autor.
-     */
-    bio?: string | null;
-    /**
-     * Se este artigo foi escrito por um especialista, lembre-se de marcar para que possa ser entregue conteúdos de especialistas separadamente.
-     */
-    expertAuthor: boolean;
-    social?: {
-      linkedin?: string | null;
-      twitter?: string | null;
-      email?: string | null;
-    };
-  };
+  authors?: (string | Author)[] | null;
   publishDate: string;
   status: 'draft' | 'published';
   seo?: {
@@ -295,6 +282,29 @@ export interface SpecialSery {
    */
   slug: string;
   description?: string | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "authors".
+ */
+export interface Author {
+  id: string;
+  name: string;
+  /**
+   * Identificador único do autor, gerado a partir do nome quando deixado em branco.
+   */
+  slug: string;
+  role: string;
+  bio?: string | null;
+  picture?: (string | null) | Media;
+  expertAuthor: boolean;
+  social?: {
+    linkedin?: string | null;
+    twitter?: string | null;
+    email?: string | null;
+  };
   updatedAt: string;
   createdAt: string;
 }
@@ -338,21 +348,7 @@ export interface CaseStudy {
     };
     [k: string]: unknown;
   };
-  author: {
-    picture?: (string | null) | Media;
-    name: string;
-    role: string;
-    /**
-     * Breve descrição sobre o autor.
-     */
-    bio?: string | null;
-    expertAuthor: boolean;
-    social?: {
-      linkedin?: string | null;
-      twitter?: string | null;
-      email?: string | null;
-    };
-  };
+  authors?: (string | Author)[] | null;
   publishDate: string;
   status: 'draft' | 'published';
   seo?: {
@@ -362,6 +358,18 @@ export interface CaseStudy {
   };
   publishedAt: string;
   updatedAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "cicm-reactions".
+ */
+export interface CicmReaction {
+  id: string;
+  contentType: 'article' | 'video' | 'interview' | 'case-study';
+  contentId: string;
+  visitorHash: string;
+  updatedAt: string;
+  createdAt: string;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -632,24 +640,7 @@ export interface Video {
    * Legenda que aparecerá em relação a thumbnail, será utilizada para acessibilidade e para leitores de tela.
    */
   thumbnailCaptions?: string | null;
-  author: {
-    picture?: (string | null) | Media;
-    name: string;
-    role: string;
-    /**
-     * Breve descrição sobre o autor.
-     */
-    bio?: string | null;
-    /**
-     * Se este vídeo foi produzido por um especialista, marque esta opção para permitir filtros e destaques de conteúdos especializados.
-     */
-    expertAuthor: boolean;
-    social?: {
-      linkedin?: string | null;
-      twitter?: string | null;
-      email?: string | null;
-    };
-  };
+  authors?: (string | Author)[] | null;
   type: 'comunicacao' | 'tecnologia' | 'operacao' | 'sustentabilidade';
   /**
    * Opcional. Use quando este conteúdo fizer parte de uma Série Especial.
@@ -660,17 +651,21 @@ export interface Video {
    */
   readTime: number;
   video: string | Media;
-  /**
-   * Conteúdo do vídeo em formato Markdown. Exemplo:
-   * ## Descrição do Vídeo
-   *
-   * Texto introdutório...
-   *
-   * ### Destaques do Vídeo
-   * - Ponto 1
-   * - Ponto 2
-   */
-  content: string;
+  content: {
+    root: {
+      type: string;
+      children: {
+        type: any;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  };
   /**
    * Capítulos apresentados no leitor de vídeo.
    */
@@ -721,20 +716,10 @@ export interface Interview {
     name: string;
     role: string;
   };
-  host?: {
-    picture?: (string | null) | Media;
-    name?: string | null;
-    role?: string | null;
-    /**
-     * Breve descrição sobre o host.
-     */
-    bio?: string | null;
-    social?: {
-      linkedin?: string | null;
-      twitter?: string | null;
-      email?: string | null;
-    };
-  };
+  /**
+   * Por predefinição, é usado o autor Equipa Carris Metropolitana. Selecione outro autor para o substituir.
+   */
+  authors?: (string | Author)[] | null;
   /**
    * Ficheiro de áudio da entrevista (upload direto).
    */
@@ -751,23 +736,30 @@ export interface Interview {
    * Tempo estimado de leitura em minutos.
    */
   readTime?: number | null;
-  transcript?: {
-    root: {
-      type: string;
-      children: {
-        type: any;
-        version: number;
-        [k: string]: unknown;
-      }[];
-      direction: ('ltr' | 'rtl') | null;
-      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
-      indent: number;
-      version: number;
-    };
-    [k: string]: unknown;
-  } | null;
   /**
-   * Ficheiro PDF com a entrevista escrita completa.
+   * Cada entrada é uma fala. Em áudio, início e fim sincronizam o destaque com o leitor.
+   */
+  transcription?:
+    | {
+        speaker: 'host' | 'guest';
+        /**
+         * Sobrescreve o nome do orador, quando necessário.
+         */
+        speakerName?: string | null;
+        /**
+         * Segundo em que esta fala começa no áudio. Opcional em entrevistas escritas.
+         */
+        startTime?: number | null;
+        /**
+         * Segundo em que esta fala termina no áudio. Opcional em entrevistas escritas.
+         */
+        endTime?: number | null;
+        text: string;
+        id?: string | null;
+      }[]
+    | null;
+  /**
+   * Ficheiro PDF com a transcrição completa.
    */
   transcriptPdf?: (string | null) | Media;
   publishDate: string;
@@ -829,13 +821,26 @@ export interface Report {
   featuredSummary: {
     title: string;
     /**
-     * Conteúdo em Markdown. Suporta títulos, listas, links, citações e outros elementos renderizados no frontend.
+     * Conteúdo formatado do bloco em destaque.
      */
-    description: string;
+    description: {
+      root: {
+        type: string;
+        children: {
+          type: any;
+          version: number;
+          [k: string]: unknown;
+        }[];
+        direction: ('ltr' | 'rtl') | null;
+        format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+        indent: number;
+        version: number;
+      };
+      [k: string]: unknown;
+    };
   };
   highlights?:
     | {
-        value: string;
         title: string;
         description?: string | null;
         id?: string | null;
@@ -853,9 +858,23 @@ export interface Report {
       }[]
     | null;
   /**
-   * Metodologia do relatório em formato Markdown.
+   * Conteúdo formatado da metodologia do relatório.
    */
-  methodology?: string | null;
+  methodology?: {
+    root: {
+      type: string;
+      children: {
+        type: any;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  } | null;
   publishDate: string;
   status: 'draft' | 'published';
   seo?: {
@@ -899,8 +918,16 @@ export interface PayloadLockedDocument {
         value: string | Article;
       } | null)
     | ({
+        relationTo: 'authors';
+        value: string | Author;
+      } | null)
+    | ({
         relationTo: 'case-studies';
         value: string | CaseStudy;
+      } | null)
+    | ({
+        relationTo: 'cicm-reactions';
+        value: string | CicmReaction;
       } | null)
     | ({
         relationTo: 'content-types';
@@ -1035,22 +1062,7 @@ export interface ArticlesSelect<T extends boolean = true> {
   heroImage?: T;
   heroImageCaption?: T;
   content?: T;
-  author?:
-    | T
-    | {
-        picture?: T;
-        name?: T;
-        role?: T;
-        bio?: T;
-        expertAuthor?: T;
-        social?:
-          | T
-          | {
-              linkedin?: T;
-              twitter?: T;
-              email?: T;
-            };
-      };
+  authors?: T;
   publishDate?: T;
   status?: T;
   seo?:
@@ -1065,6 +1077,27 @@ export interface ArticlesSelect<T extends boolean = true> {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "authors_select".
+ */
+export interface AuthorsSelect<T extends boolean = true> {
+  name?: T;
+  slug?: T;
+  role?: T;
+  bio?: T;
+  picture?: T;
+  expertAuthor?: T;
+  social?:
+    | T
+    | {
+        linkedin?: T;
+        twitter?: T;
+        email?: T;
+      };
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "case-studies_select".
  */
 export interface CaseStudiesSelect<T extends boolean = true> {
@@ -1076,22 +1109,7 @@ export interface CaseStudiesSelect<T extends boolean = true> {
   heroImage?: T;
   heroImageCaption?: T;
   content?: T;
-  author?:
-    | T
-    | {
-        picture?: T;
-        name?: T;
-        role?: T;
-        bio?: T;
-        expertAuthor?: T;
-        social?:
-          | T
-          | {
-              linkedin?: T;
-              twitter?: T;
-              email?: T;
-            };
-      };
+  authors?: T;
   publishDate?: T;
   status?: T;
   seo?:
@@ -1103,6 +1121,17 @@ export interface CaseStudiesSelect<T extends boolean = true> {
       };
   publishedAt?: T;
   updatedAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "cicm-reactions_select".
+ */
+export interface CicmReactionsSelect<T extends boolean = true> {
+  contentType?: T;
+  contentId?: T;
+  visitorHash?: T;
+  updatedAt?: T;
+  createdAt?: T;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -1318,22 +1347,7 @@ export interface VideosSelect<T extends boolean = true> {
   slug?: T;
   description?: T;
   thumbnailCaptions?: T;
-  author?:
-    | T
-    | {
-        picture?: T;
-        name?: T;
-        role?: T;
-        bio?: T;
-        expertAuthor?: T;
-        social?:
-          | T
-          | {
-              linkedin?: T;
-              twitter?: T;
-              email?: T;
-            };
-      };
+  authors?: T;
   type?: T;
   specialSeries?: T;
   readTime?: T;
@@ -1377,26 +1391,21 @@ export interface InterviewsSelect<T extends boolean = true> {
         name?: T;
         role?: T;
       };
-  host?:
-    | T
-    | {
-        picture?: T;
-        name?: T;
-        role?: T;
-        bio?: T;
-        social?:
-          | T
-          | {
-              linkedin?: T;
-              twitter?: T;
-              email?: T;
-            };
-      };
+  authors?: T;
   audioFile?: T;
   audioUrl?: T;
   audioDuration?: T;
   readTime?: T;
-  transcript?: T;
+  transcription?:
+    | T
+    | {
+        speaker?: T;
+        speakerName?: T;
+        startTime?: T;
+        endTime?: T;
+        text?: T;
+        id?: T;
+      };
   transcriptPdf?: T;
   publishDate?: T;
   status?: T;
@@ -1447,7 +1456,6 @@ export interface ReportsSelect<T extends boolean = true> {
   highlights?:
     | T
     | {
-        value?: T;
         title?: T;
         description?: T;
         id?: T;

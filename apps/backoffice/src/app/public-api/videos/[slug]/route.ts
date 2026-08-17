@@ -2,6 +2,7 @@
 
 import payloadConfig from '@/payload-config';
 import { getPublicHeaders } from '@/utils/get-public-headers';
+import { hydratePublicVideoRelations } from '@/utils/hydrate-public-content-relations';
 import { getPayload } from 'payload';
 
 /* * */
@@ -33,7 +34,7 @@ export const GET = async (_request: Request, { params }: { params: Promise<{ slu
 
 	const video = foundVideos.docs[0];
 
-	return Response.json(video, {
+	return Response.json(await hydratePublicVideoRelations(payload, video), {
 		headers: getPublicHeaders(3600),
 	});
 };

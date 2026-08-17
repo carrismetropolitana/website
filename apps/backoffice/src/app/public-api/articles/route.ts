@@ -1,5 +1,9 @@
 import payloadConfig from '@/payload-config';
 import { getPublicHeaders } from '@/utils/get-public-headers';
+import { hydratePublicArticleRelations } from '@/utils/hydrate-public-content-relations';
+import { resolveExpertAuthorFilter } from '@/utils/resolve-expert-author-filter';
+import { resolveListFilter } from '@/utils/resolve-list-filter';
+import { resolvePublicContentFilter } from '@/utils/resolve-public-content-filter';
 import { resolveSpecialSeriesFilter } from '@/utils/resolve-special-series-filter';
 import { getPayload, type Where } from 'payload';
 
@@ -19,16 +23,20 @@ export const GET = async (request: Request) => {
 	const expertArticle = JSON.parse(searchParams.get('expert-article') ?? 'false');
 
 	const payload = await getPayload({ config: payloadConfig });
+	const typeFilter = resolveListFilter(type);
 	const specialSeriesFilter = await resolveSpecialSeriesFilter(payload, specialSeries);
+	const publicContentFilter = resolvePublicContentFilter(searchParams);
+	const expertAuthorIds = await resolveExpertAuthorFilter(payload, expertArticle);
 
 	//
 	// B. Build the where clause, optionally filtering by type (mapped to the type field).
 
 	const whereClause: Where = {
 		status: { equals: 'published' },
-		...(type && { type: { in: type } }),
+		...publicContentFilter,
+		...(typeFilter.length && { type: { in: typeFilter } }),
 		...(specialSeriesFilter.length && { specialSeries: { in: specialSeriesFilter } }),
-		...(expertArticle && { 'author.expertAuthor': { equals: expertArticle } }),
+		...(expertArticle && { authors: { in: expertAuthorIds } }),
 	};
 
 	//
@@ -36,7 +44,7 @@ export const GET = async (request: Request) => {
 
 	const foundArticles = await payload.find({
 		collection: 'articles',
-		depth: 1,
+		depth: 2,
 		limit,
 		page,
 		sort: '-publishDate',
@@ -46,7 +54,10 @@ export const GET = async (request: Request) => {
 	//
 	// Return articles as a JSON response.
 
-	return Response.json(foundArticles, {
+	return Response.json({
+		...foundArticles,
+		docs: await Promise.all(foundArticles.docs.map(article => hydratePublicArticleRelations(payload, article))),
+	}, {
 		headers: getPublicHeaders(60),
 	});
 

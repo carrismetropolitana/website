@@ -17,7 +17,7 @@ export const GET = async (_request: Request, { params }: { params: Promise<{ slu
 
 	const foundInterviews = await payload.find({
 		collection: 'interviews',
-		depth: 0,
+		depth: 2,
 		draft: false,
 		limit: 1,
 		where: {

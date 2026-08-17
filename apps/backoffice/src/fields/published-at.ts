@@ -32,3 +32,11 @@ export const publishedAtField: Field = {
 
 	type: 'date',
 };
+
+export const hiddenPublishedAtField: Field = {
+	...publishedAtField,
+	admin: {
+		...publishedAtField.admin,
+		hidden: true,
+	},
+};

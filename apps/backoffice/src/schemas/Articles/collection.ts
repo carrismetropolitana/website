@@ -98,79 +98,11 @@ export const Articles: CollectionConfig = {
 			type: 'richText',
 		},
 		{
-			fields: [
-				{
-					admin: {
-						components: {
-							Field: '@/components/ArticleAuthorQuickFill#ArticleAuthorQuickFill',
-						},
-					},
-					name: 'authorQuickFill',
-					type: 'ui',
-				},
-				{
-					label: 'Foto',
-					name: 'picture',
-					relationTo: 'media',
-					type: 'upload',
-				},
-				{
-					label: 'Nome',
-					name: 'name',
-					required: true,
-					type: 'text',
-				},
-				{
-					label: 'Cargo/Função',
-					name: 'role',
-					required: true,
-					type: 'text',
-				},
-				{
-					admin: {
-						description: 'Breve descrição sobre o autor.',
-					},
-					label: 'Biografia',
-					name: 'bio',
-					type: 'textarea',
-				},
-				{
-					admin: {
-						description: 'Se este artigo foi escrito por um especialista, lembre-se de marcar para que possa ser entregue conteúdos de especialistas separadamente.',
-						position: 'sidebar',
-					},
-					defaultValue: false,
-					label: 'Artigo escrito por um especialista',
-					name: 'expertAuthor',
-					required: true,
-					type: 'checkbox',
-				},
-				{
-					fields: [
-						{
-							label: 'LinkedIn',
-							name: 'linkedin',
-							type: 'text',
-						},
-						{
-							label: 'X (Twitter)',
-							name: 'twitter',
-							type: 'text',
-						},
-						{
-							label: 'Email',
-							name: 'email',
-							type: 'email',
-						},
-					],
-					label: 'Redes Sociais',
-					name: 'social',
-					type: 'group',
-				},
-			],
-			label: 'Autor',
-			name: 'author',
-			type: 'group',
+			hasMany: true,
+			label: 'Autores',
+			name: 'authors',
+			relationTo: 'authors',
+			type: 'relationship',
 		},
 		{
 			admin: {

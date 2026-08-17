@@ -2,7 +2,7 @@
 
 import type { CollectionConfig } from 'payload';
 
-import { publishedAtField } from '@/fields/published-at';
+import { hiddenPublishedAtField } from '@/fields/published-at';
 import { updatedAtField } from '@/fields/updated-at';
 import { slugify } from '@/utils/slugify';
 
@@ -116,7 +116,7 @@ export const Reports: CollectionConfig = {
 			admin: {
 				position: 'sidebar',
 			},
-			label: 'Tipo',
+			label: 'Tema',
 			name: 'type',
 			options: reportTypeOptions,
 			required: true,
@@ -240,13 +240,12 @@ export const Reports: CollectionConfig = {
 				},
 				{
 					admin: {
-						description:
-							'Conteúdo em Markdown. Suporta títulos, listas, links, citações e outros elementos renderizados no frontend.',
+						description: 'Conteúdo formatado do bloco em destaque.',
 					},
-					label: 'Descrição (Markdown)',
+					label: 'Descrição',
 					name: 'description',
 					required: true,
-					type: 'textarea',
+					type: 'richText',
 				},
 			],
 			label: 'Bloco em Destaque',
@@ -255,13 +254,6 @@ export const Reports: CollectionConfig = {
 		},
 		{
 			fields: [
-				{
-					label: 'Valor',
-					maxLength: 80,
-					name: 'value',
-					required: true,
-					type: 'text',
-				},
 				{
 					label: 'Título',
 					maxLength: 120,
@@ -325,11 +317,11 @@ export const Reports: CollectionConfig = {
 		},
 		{
 			admin: {
-				description: 'Metodologia do relatório em formato Markdown.',
+				description: 'Conteúdo formatado da metodologia do relatório.',
 			},
-			label: 'Metodologia (Markdown)',
+			label: 'Metodologia',
 			name: 'methodology',
-			type: 'textarea',
+			type: 'richText',
 		},
 		{
 			admin: {
@@ -389,7 +381,7 @@ export const Reports: CollectionConfig = {
 			name: 'seo',
 			type: 'group',
 		},
-		publishedAtField,
+		hiddenPublishedAtField,
 		updatedAtField,
 	],
 

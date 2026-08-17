@@ -9,14 +9,6 @@ import { slugify } from '@/utils/slugify';
 
 /* * */
 
-const DEFAULT_CASE_STUDY_AUTHOR = {
-	expertAuthor: false,
-	name: 'Carris Metropolitana',
-	role: 'Equipa Carris Metropolitana',
-};
-
-/* * */
-
 export const CaseStudies: CollectionConfig = {
 	access: {
 		create: ({ req: { user } }) => Boolean(user),
@@ -104,71 +96,11 @@ export const CaseStudies: CollectionConfig = {
 			type: 'richText',
 		},
 		{
-			admin: {
-				hidden: true,
-			},
-			fields: [
-				{
-					label: 'Foto',
-					name: 'picture',
-					relationTo: 'media',
-					type: 'upload',
-				},
-				{
-					defaultValue: DEFAULT_CASE_STUDY_AUTHOR.name,
-					label: 'Nome',
-					name: 'name',
-					required: true,
-					type: 'text',
-				},
-				{
-					defaultValue: DEFAULT_CASE_STUDY_AUTHOR.role,
-					label: 'Cargo/Função',
-					name: 'role',
-					required: true,
-					type: 'text',
-				},
-				{
-					admin: {
-						description: 'Breve descrição sobre o autor.',
-					},
-					label: 'Biografia',
-					name: 'bio',
-					type: 'textarea',
-				},
-				{
-					defaultValue: DEFAULT_CASE_STUDY_AUTHOR.expertAuthor,
-					label: 'Caso de estudo escrito por um especialista',
-					name: 'expertAuthor',
-					required: true,
-					type: 'checkbox',
-				},
-				{
-					fields: [
-						{
-							label: 'LinkedIn',
-							name: 'linkedin',
-							type: 'text',
-						},
-						{
-							label: 'X (Twitter)',
-							name: 'twitter',
-							type: 'text',
-						},
-						{
-							label: 'Email',
-							name: 'email',
-							type: 'email',
-						},
-					],
-					label: 'Redes Sociais',
-					name: 'social',
-					type: 'group',
-				},
-			],
-			label: 'Autor',
-			name: 'author',
-			type: 'group',
+			hasMany: true,
+			label: 'Autores',
+			name: 'authors',
+			relationTo: 'authors',
+			type: 'relationship',
 		},
 		{
 			admin: {
@@ -238,11 +170,6 @@ export const CaseStudies: CollectionConfig = {
 				if (data.status === 'published' && !data.publishDate) {
 					data.publishDate = new Date();
 				}
-
-				data.author = {
-					...data.author,
-					...DEFAULT_CASE_STUDY_AUTHOR,
-				};
 			},
 		],
 		beforeValidate: [
@@ -253,11 +180,6 @@ export const CaseStudies: CollectionConfig = {
 				if (data.slug) {
 					data.slug = slugify(data.slug);
 				}
-
-				data.author = {
-					...data.author,
-					...DEFAULT_CASE_STUDY_AUTHOR,
-				};
 			},
 		],
 	},

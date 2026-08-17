@@ -42,8 +42,8 @@ export interface StopsDetailViewTimetableData {
 }
 
 interface HubEtaByStop {
-	eta_at: null | UnixTimestamp
-	eta_seconds: null | number
+	eta_at: null | string
+	eta_seconds: null | string
 	position_created_at: null | string
 	stop_id: string
 	trip_id: string
@@ -107,6 +107,16 @@ export const StopsDetailContextProvider = ({ children, stopId }: { children: Rea
 
 	//
 	// B. Fetch data
+
+	function getEtaArrivalMs(eta: HubEtaByStop): undefined | UnixTimestamp {
+		if (!eta.eta_at) return;
+
+		if (Number.isFinite(Number(eta.position_created_at)) && Number.isFinite(Number(eta.eta_seconds))) {
+			return validateUnixTimestamp(Number(eta.position_created_at) + Math.round(Number(eta.eta_seconds)) * 1000);
+		}
+
+		return validateUnixTimestamp(Date.parse(eta.eta_at));
+	}
 
 	const selectedStopData = useMemo(() => {
 		if (!dataActiveStopIdState || !stopsContext.data.stops?.length) return;
@@ -256,19 +266,18 @@ export const StopsDetailContextProvider = ({ children, stopId }: { children: Rea
 					const scheduledArrivalMs = convertGTFSTimeStringAndOperationalDateToUnixTimestamp(stopTime.arrival_time, operationalDateContext.data.selected_date.operational_date);
 					// Fetch ETA for this trip and stop, if available.
 					const eta = operationalDateContext.flags.is_today_selected
-						? etaData?.find(eta => eta.trip_id.substring(eta.trip_id.indexOf(']') + 1) === tripData.trip_ids.find(tripId => tripId.substring(tripId.indexOf(']') + 1) === eta.trip_id.substring(eta.trip_id.indexOf(']') + 1))?.substring(eta.trip_id.indexOf(']') + 1))
+						? etaData.find(item => item && tripData.trip_ids.includes(item.trip_id) && String(item.stop_id) === String(stopTime.stop_id))
 						: undefined;
-					// Extract the arrival time, delay and effective arrival time
-					// from the trip update, if any was found
-					const estimatedArrivalMs = eta?.eta_at;
-					const effectiveArrivalMs = estimatedArrivalMs || scheduledArrivalMs;
+					const estimatedArrivalMs = eta ? getEtaArrivalMs(eta) ?? null : null;
+					// Use scheduled time when no ETA exists.
+					const effectiveArrivalMs = estimatedArrivalMs ?? scheduledArrivalMs;
 					// Detect the position of this stop time in the pattern
 					const isLastStop = stopTime.stop_sequence === patternData.path[patternData.path.length - 1].stop_sequence;
 					// When debug is off, skip last-stop arrivals (show them only in debug mode).
 					if (!debugContext.flags.is_debug_mode && isLastStop) continue;
 					// Detect the temporal status of this stop time
-					const isPast = Number(effectiveArrivalMs) < Dates.now('Europe/Lisbon').unix_timestamp;
-					const isRealtime = !!estimatedArrivalMs && operationalDateContext.flags.is_today_selected;
+					const isPast = effectiveArrivalMs < currentTimestamp;
+					const isRealtime = estimatedArrivalMs !== null && operationalDateContext.flags.is_today_selected;
 					// Add this stop time to the timetable array
 					timetableDataForSelectedDate.push({
 						_id: uniqueIdValueForArrivalData,

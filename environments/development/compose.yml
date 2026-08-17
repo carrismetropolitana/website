@@ -4,6 +4,7 @@ name: cmet-website-development
 
 volumes:
   websitedbdata:
+ # miniodata:
 
 services:
   #
@@ -24,3 +25,39 @@ services:
       - websitedbdata:/data/db
     env_file:
       - ./secrets/.env
+
+  # # # # # # # # # # # # # # # # # # # # #
+  # # # # # # # # # # # # # # # # # # # # #
+  ## mini io required for cicm project, I leave it commented out so it does not start automatically
+  # minio:
+    # image: minio/minio:latest
+    # restart: unless-stopped
+    # logging:
+      # options:
+        # max-size: '1m'
+        # max-file: '1'
+    # command: server /data --console-address ":9001"
+    # ports:
+      # - 9002:9000
+      # - 9003:9001
+    # environment:
+      # MINIO_ROOT_USER: minioadmin
+      # MINIO_ROOT_PASSWORD: minioadmin
+    # volumes:
+      # - # miniodata:/data
+
+  # # # # # # # # # # # # # # # # # # # # #
+  # # # # # # # # # # # # # # # # # # # # #
+
+  # minio-init:
+    # image: minio/mc:latest
+    # depends_on:
+      # - minio
+    # entrypoint: >
+      # /bin/sh -c "
+      # sleep 3;
+      # mc alias set local http://minio:9000 minioadmin minioadmin;
+      # mc mb --ignore-existing local/media;
+      # mc anonymous set public local/media;
+      # exit 0;
+      # "
