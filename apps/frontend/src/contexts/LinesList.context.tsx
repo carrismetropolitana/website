@@ -46,6 +46,10 @@ interface LinesListContextState {
 
 const LinesListContext = createContext<LinesListContextState | undefined>(undefined);
 
+const sortLinesByShortName = (lines: HubLine[]) => {
+	return [...lines].sort((firstLine, secondLine) => firstLine.short_name.localeCompare(secondLine.short_name, undefined, { numeric: true }));
+};
+
 export function useLinesListContext() {
 	const context = useContext(LinesListContext);
 	if (!context) {
@@ -131,7 +135,7 @@ export const LinesListContextProvider = ({ children }) => {
 		//
 		// Return resulting items
 
-		return filterResult;
+		return sortLinesByShortName(filterResult);
 
 		//
 	};
@@ -143,7 +147,7 @@ export const LinesListContextProvider = ({ children }) => {
 
 	useEffect(() => {
 		const favoritesLinesData = linesContext.data.lines?.filter(line => profileContext.data.favorite_lines?.includes(line._id)) || [];
-		setDataFavoritesState(favoritesLinesData);
+		setDataFavoritesState(sortLinesByShortName(favoritesLinesData));
 	}, [linesContext.data.lines, profileContext.data.favorite_lines]);
 
 	useEffect(() => {
