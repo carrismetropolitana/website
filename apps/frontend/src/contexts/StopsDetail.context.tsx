@@ -208,15 +208,12 @@ export const StopsDetailContextProvider = ({ children, stopId }: { children: Rea
 		if (!selectedStopData) return [];
 
 		const normalizedStopId = normalizeReferenceId(dataActiveStopIdState);
-		const normalizedLineIds = new Set(selectedStopData.line_ids.map(normalizeReferenceId));
 
 		return alertsContext.data.alerts.filter((alert) => {
+			if (alert.reference_type !== 'stops') return false;
+
 			const hasMatchingReference = alert.references.some((reference) => {
-				if (alert.reference_type === 'stops') return normalizeReferenceId(reference.parent_id) === normalizedStopId;
-				if (alert.reference_type !== 'lines') return false;
-				const hasMatchingLine = normalizedLineIds.has(normalizeReferenceId(reference.parent_id));
-				const hasMatchingStop = reference.child_ids.some(childId => normalizeReferenceId(childId) === normalizedStopId);
-				return hasMatchingLine || hasMatchingStop;
+				return normalizeReferenceId(reference.parent_id) === normalizedStopId;
 			});
 			const isActive = !alert.active_period_end_date || alert.active_period_end_date >= Date.now();
 			return hasMatchingReference && isActive;

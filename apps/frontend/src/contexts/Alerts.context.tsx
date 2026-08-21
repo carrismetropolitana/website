@@ -78,20 +78,12 @@ export function AlertsContextProvider({ children }: PropsWithChildren) {
 
 	const getAlertsByLineId = (lineId: string): HubAlert[] => {
 		const normalizedLineId = normalizeReferenceId(lineId);
-		return filteredAlertsData.filter((item) => {
-			if (item.reference_type === 'lines') return item.references.some(reference => normalizeReferenceId(reference.parent_id) === normalizedLineId);
-			if (item.reference_type === 'stops') return item.references.some(reference => reference.child_ids.some(childId => normalizeReferenceId(childId) === normalizedLineId));
-			return false;
-		});
+		return filteredAlertsData.filter(item => item.reference_type === 'lines' && item.references.some(reference => normalizeReferenceId(reference.parent_id) === normalizedLineId));
 	};
 
 	const getAlertsByStopId = (stopId: string): HubAlert[] => {
 		const normalizedStopId = normalizeReferenceId(stopId);
-		return filteredAlertsData.filter((item) => {
-			if (item.reference_type === 'stops') return item.references.some(reference => normalizeReferenceId(reference.parent_id) === normalizedStopId);
-			if (item.reference_type === 'lines') return item.references.some(reference => reference.child_ids.some(childId => normalizeReferenceId(childId) === normalizedStopId));
-			return false;
-		});
+		return filteredAlertsData.filter(item => item.reference_type === 'stops' && item.references.some(reference => normalizeReferenceId(reference.parent_id) === normalizedStopId));
 	};
 
 	//

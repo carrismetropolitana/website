@@ -135,20 +135,12 @@ export const AlertsListContextProvider = ({ children }) => {
 
 		if (filterByLineIdState) {
 			const normalizedLineId = normalizeReferenceId(filterByLineIdState);
-			filterResult = filterResult.filter(alert => alert.references.some((reference) => {
-				const parentId = normalizeReferenceId(reference.parent_id);
-				const childIds = reference.child_ids.map(normalizeReferenceId);
-				return parentId === normalizedLineId || childIds.includes(normalizedLineId);
-			}));
+			filterResult = filterResult.filter(alert => alert.reference_type === 'lines' && alert.references.some(reference => normalizeReferenceId(reference.parent_id) === normalizedLineId));
 		}
 
 		if (filterByStopIdState) {
 			const normalizedStopId = normalizeReferenceId(filterByStopIdState);
-			filterResult = filterResult.filter(alert => alert.references.some((reference) => {
-				const parentId = normalizeReferenceId(reference.parent_id);
-				const childIds = reference.child_ids.map(normalizeReferenceId);
-				return parentId === normalizedStopId || childIds.includes(normalizedStopId);
-			}));
+			filterResult = filterResult.filter(alert => alert.reference_type === 'stops' && alert.references.some(reference => normalizeReferenceId(reference.parent_id) === normalizedStopId));
 		}
 
 		// TODO: municipalityId does not exist in the informed_entity, needs to be added in API

@@ -211,6 +211,7 @@ export const LinesDetailContextProvider = ({ children, lineId }) => {
 			const isActive = alertData.active_period_end_date ? alertData.active_period_end_date >= operationalDateContext.data.selected_date.set({ hour: 0, millisecond: 0, minute: 0, second: 0 }).js_date.getTime() : true;
 
 			if (!isActive) return false;
+			if (alertData.reference_type !== 'lines') return false;
 
 			return alertData.references.some((reference) => {
 				const informedAgencyId = alertData.agency_id?.trim();
@@ -220,16 +221,11 @@ export const LinesDetailContextProvider = ({ children, lineId }) => {
 				if (!agencyOk) return false;
 
 				const parentId = normalizeReferenceId(reference.parent_id);
-				const childIds = reference.child_ids.map(normalizeReferenceId);
-
-				const hasMatchingLine = parentId === normalizedLineId || childIds.includes(normalizedLineId);
-				const hasMatchingStop = dataAllPatternsState?.some(pattern => pattern.some(patternGroup => patternGroup.path.some(waypoint => childIds.includes(normalizeReferenceId(waypoint.stop_id)))));
-
-				return hasMatchingLine || hasMatchingStop;
+				return parentId === normalizedLineId;
 			});
 		});
 		setDataActiveAlertsState(activeAlerts);
-	}, [alertsContext.data.alerts, lineId, dataLineState, dataAllPatternsState, operationalDateContext.data.selected_date]);
+	}, [alertsContext.data.alerts, lineId, dataLineState, operationalDateContext.data.selected_date]);
 	//
 	// D. Handle actions
 
