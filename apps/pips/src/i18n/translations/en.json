@@ -1050,6 +1050,22 @@
 		"Page": {
 			"heading": "Lost and Found",
 			"operator_sections": {
+				"41": {
+					"description": "Send an email to passenger@viacaoalvorada.pt with information about the line used, timetable and description of the object. If possible, include the vehicle number or license plate.",
+					"title": "Area 1 | Viação Alvorada"
+				},
+				"42": {
+					"description": "Fill out the Online Form available on the operator's website with information about the line used, time and description of the object. If possible, include the vehicle number or license plate.",
+					"title": "Area 2 | Rodoviária de Lisboa"
+				},
+				"43": {
+					"description": "Fill out the Online Form available on the operator's website with information about the line used, time and description of the object. If possible, include the vehicle number or license plate.",
+					"title": "Area 3 | TST"
+				},
+				"44": {
+					"description": "Fill out the Online Form available on the operator's website with information about the line used, time and description of the object. If possible, include the vehicle number or license plate.",
+					"title": "Area 4 | Alsa Todi"
+				},
 				"A2L1N": {
 					"description": "Fill out the Online Form available on the operator's website or send an email to passageiros@alsa.com with information about the line used, time and description of the object. If possible, include the vehicle number or license plate.",
 					"title": "Area 4 | Alsa Todi"

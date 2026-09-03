@@ -1090,6 +1090,22 @@
 		"Page": {
 			"heading": "Perdidos e Achados",
 			"operator_sections": {
+				"41": {
+					"description": "Envie um email para passenger@viacaoalvorada.pt com informação da linha utilizada, hora e descrição do objecto. Se possível, inclua o número ou matrícula do veículo.",
+					"title": "Área 1 | Viação Alvorada"
+				},
+				"42": {
+					"description": "Preencha o Formulário Online disponibilizado no site do operador com informação da linha utilizada, hora e descrição do objeto. Se possível, inclua o número ou matrícula do veículo.",
+					"title": "Área 2 | Rodoviária de Lisboa"
+				},
+				"43": {
+					"description": "Preencha o Formulário Online disponibilizado no site do operador com informação da linha utilizada, hora e descrição do objeto. Se possível, inclua o número ou matrícula do veículo.",
+					"title": "Área 3 | TST"
+				},
+				"44": {
+					"description": "Preencha o Formulário Online disponibilizado no site do operador com informação da linha utilizada, hora e descrição do objeto. Se possível, inclua o número ou matrícula do veículo.",
+					"title": "Área 4 | Alsa Todi"
+				},
 				"A2L1N": {
 					"description": "Preencha o Formulário Online disponibilizado no site do operador ou envie email para passageiros@alsa.com com informação da linha utilizada, hora e descrição do objeto. Se possível, inclua o número ou matrícula do veículo.",
 					"title": "Área 4 | Alsa Todi"
