@@ -4,7 +4,7 @@
 
 import { CopyBadge } from '@/components/common/CopyBadge';
 import { IconEyeMinus, IconEyePlus } from '@tabler/icons-react';
-import { type HubVehiclePosition } from '@tmlmobilidade/go-types-hub';
+import { type HubV1ApiVehiclePosition } from '@tmlmobilidade/go-types-hub';
 import { useState } from 'react';
 
 import styles from './styles.module.css';
@@ -12,7 +12,7 @@ import styles from './styles.module.css';
 /* * */
 
 interface VehicleListDetailPopoverProps {
-	data: HubVehiclePosition | undefined
+	data: HubV1ApiVehiclePosition | undefined
 }
 
 export function VehicleListDetailPopoverDebug({ data }: VehicleListDetailPopoverProps) {

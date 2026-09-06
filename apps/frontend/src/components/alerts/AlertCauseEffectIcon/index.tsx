@@ -1,7 +1,7 @@
 /* * */
 
 import { getCauseSeverityLevel, getEffectSeverityLevel } from '@/utils/alerts';
-import { IconAccessible, IconAmbulance, IconArrowBigUpLines, IconBarrierBlock, IconCarCrash, IconCircleArrowDown, IconCircleMinus, IconClock2, IconClockExclamation, IconCloudStorm, IconFish, IconInfoTriangle, IconRoadOff, IconRouteAltRight, IconServerCog, IconSettings, IconSpeakerphone, IconTool, IconTrafficCone } from '@tabler/icons-react';
+import { IconAccessible, IconAmbulance, IconArrowBigUpLines, IconBarrierBlock, IconCarCrash, IconCircleArrowDown, IconCircleMinus, IconClock2, IconClockExclamation, IconCloudStorm, IconInfoTriangle, IconRouteAltRight, IconSpeakerphone, IconTool } from '@tabler/icons-react';
 import { type HubV1ApiAlert } from '@tmlmobilidade/go-types-hub';
 import { useTranslations } from 'next-intl';
 
@@ -41,9 +41,6 @@ export function AlertCauseIcon({ cause, className, size, withText = false }: Ale
 	let icon: React.ReactNode;
 	const iconSize = size === 'md' ? 20 : size === 'lg' ? 30 : 20;
 	switch (cause) {
-		case 'ABUSIVE_PARKING':
-			icon = <IconTrafficCone className={styles[`severityLevel_${severityLevel}`]} size={20} />;
-			break;
 		case 'ACCIDENT':
 			icon = <IconCarCrash className={styles[`severityLevel_${severityLevel}`]} size={iconSize} />;
 			break;
@@ -54,32 +51,12 @@ export function AlertCauseIcon({ cause, className, size, withText = false }: Ale
 		case 'STRIKE':
 			icon = <IconSpeakerphone className={styles[`severityLevel_${severityLevel}`]} size={iconSize} />;
 			break;
-		case 'DRIVER_ABSENCE':
-		case 'DRIVER_ISSUE':
-		case 'TECHNICAL_ISSUE':
-			icon = <IconTool className={styles[`severityLevel_${severityLevel}`]} size={iconSize} />;
-			break;
-		case 'HIGH_PASSENGER_LOAD':
-			icon = <IconFish className={styles[`severityLevel_${severityLevel}`]} size={20} style={{ transform: 'rotate(90deg) ' }} />;
-			break;
 		case 'MEDICAL_EMERGENCY':
 		case 'POLICE_ACTIVITY':
 			icon = <IconAmbulance className={styles[`severityLevel_${severityLevel}`]} size={iconSize} />;
 			break;
-		case 'NETWORK_UPDATE':
-			icon = <IconServerCog className={styles[`severityLevel_${severityLevel}`]} size={20} />;
-			break;
-		case 'PUBLIC_DISORDER':
-			icon = <IconSpeakerphone className={styles[`severityLevel_${severityLevel}`]} size={iconSize} />;
-			break;
-		case 'ROAD_ISSUE':
-			icon = <IconRoadOff className={styles[`severityLevel_${severityLevel}`]} size={20} />;
-			break;
-		case 'TRAFFIC_JAM':
-			icon = <IconTrafficCone className={styles[`severityLevel_${severityLevel}`]} size={20} />;
-			break;
-		case 'VEHICLE_ISSUE':
-			icon = <IconSettings className={styles[`severityLevel_${severityLevel}`]} size={20} />;
+		case 'TECHNICAL_ISSUE':
+			icon = <IconTool className={styles[`severityLevel_${severityLevel}`]} size={iconSize} />;
 			break;
 		case 'WEATHER':
 			icon = <IconCloudStorm className={styles[`severityLevel_${severityLevel}`]} size={iconSize} />;
@@ -137,12 +114,6 @@ export function AlertEffectIcon({ className, effect, size, withText = false }: A
 			break;
 		case 'NO_SERVICE':
 			icon = <IconCircleMinus className={styles[`severityLevel_${severityLevel}`]} size={iconSize} />;
-			break;
-		case 'ON_BOARD_SALE_ISSUE':
-			icon = <IconCircleMinus className={styles[`severityLevel_${severityLevel}`]} size={iconSize} />;
-			break;
-		case 'REALTIME_INFO_ISSUE':
-			icon = <IconServerCog className={styles[`severityLevel_${severityLevel}`]} size={iconSize} />;
 			break;
 		case 'REDUCED_SERVICE':
 			icon = <IconCircleArrowDown className={styles[`severityLevel_${severityLevel}`]} size={iconSize} />;

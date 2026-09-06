@@ -5,7 +5,7 @@
 import { useVehiclesContext } from '@/contexts/Vehicles.context';
 import { useVehicleMetadata } from '@/hooks/useVehicleMetadata';
 import { type HubVehicleMetadata } from '@/types/vehicles.types';
-import { type HubVehiclePosition } from '@tmlmobilidade/go-types-hub';
+import { type HubV1ApiVehiclePosition } from '@tmlmobilidade/go-types-hub';
 import { DateTime } from 'luxon';
 import { useQueryState } from 'nuqs';
 import { createContext, useContext, useEffect, useMemo, useState } from 'react';
@@ -23,10 +23,10 @@ interface VehiclesListContextState {
 		updateSelectedVehicle: (value: null | string) => void
 	}
 	data: {
-		filtered: HubVehiclePosition[]
+		filtered: HubV1ApiVehiclePosition[]
 		metadata: HubVehicleMetadata[]
-		raw: HubVehiclePosition[]
-		selected: HubVehiclePosition | null
+		raw: HubV1ApiVehiclePosition[]
+		selected: HubV1ApiVehiclePosition | null
 	}
 	filters: {
 		by_agency: null | string

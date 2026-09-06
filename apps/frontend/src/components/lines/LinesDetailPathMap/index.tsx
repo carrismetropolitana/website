@@ -12,7 +12,7 @@ import { useLinesDetailContext } from '@/contexts/LinesDetail.context';
 import { transformStopDataIntoGeoJsonFeature, useStopsContext } from '@/contexts/Stops.context';
 import { useVehiclesContext } from '@/contexts/Vehicles.context';
 import { centerMap, getBaseGeoJsonFeatureCollection, moveMap } from '@/utils/map.utils';
-import { type HubVehiclePosition } from '@tmlmobilidade/go-types-hub';
+import { type HubV1ApiVehiclePosition } from '@tmlmobilidade/go-types-hub';
 import { Popup, useMap } from '@vis.gl/react-maplibre';
 import { useEffect, useMemo, useState } from 'react';
 
@@ -132,7 +132,7 @@ export function LinesDetailPathMap() {
 	//
 	// D. Render copmonents
 
-	const renderPopover = (vehicleId: string, coordinates: [number, number], vehicle: HubVehiclePosition | undefined) => {
+	const renderPopover = (vehicleId: string, coordinates: [number, number], vehicle: HubV1ApiVehiclePosition | undefined) => {
 		return (
 			<Popup
 				key={vehicleId}

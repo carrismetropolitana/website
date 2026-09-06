@@ -5,7 +5,7 @@
 import { useVehiclesContext } from '@/contexts/Vehicles.context';
 import { useVehicleMetadata } from '@/hooks/useVehicleMetadata';
 import { type HubVehicleMetadata } from '@/types/vehicles.types';
-import { type HubVehiclePosition } from '@tmlmobilidade/go-types-hub';
+import { type HubV1ApiVehiclePosition } from '@tmlmobilidade/go-types-hub';
 import { createContext, type PropsWithChildren, useContext, useMemo } from 'react';
 
 /* * */
@@ -13,7 +13,7 @@ import { createContext, type PropsWithChildren, useContext, useMemo } from 'reac
 interface VehiclesDetailContextState {
 	data: {
 		metadata: HubVehicleMetadata | null
-		position: HubVehiclePosition | null
+		position: HubV1ApiVehiclePosition | null
 	}
 	flags: {
 		isLoading: boolean

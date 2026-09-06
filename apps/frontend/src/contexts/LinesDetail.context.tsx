@@ -12,8 +12,10 @@ import { type ServiceMetrics } from '@carrismetropolitana/api-types/metrics';
 import { CARRIS_METROPOLITANA_NUMERIC_AGENCY_IDS, getPublicVariable } from '@carrismetropolitana/website-shared-settings';
 import { type HubV1ApiAlert, type HubV1ApiLine, type HubV1ApiPattern, type HubV1ApiPatternWaypoint, type HubV1ApiRoute } from '@tmlmobilidade/go-types-hub';
 import { OperationalDateInt } from '@tmlmobilidade/go-types-shared';
+import { fromEncodedPolylineToGeoJsonLineString } from '@tmlmobilidade/go-utils-geo';
+import { type LineString } from 'geojson';
 import { useQueryState } from 'nuqs';
-import { createContext, useContext, useEffect, useState } from 'react';
+import { createContext, useContext, useEffect, useMemo, useState } from 'react';
 
 /* * */
 
@@ -26,6 +28,7 @@ interface LinesDetailContextState {
 	data: {
 		active_alerts: HubV1ApiAlert[] | undefined
 		active_pattern: HubV1ApiPattern | null
+		active_shape: null | { geojson: GeoJSON.Feature<LineString>, id: string }
 		active_waypoint: HubV1ApiPatternWaypoint | null
 		all_patterns: HubV1ApiPattern[][] | null
 		highlighted_trip_ids: null | string[]
@@ -195,6 +198,26 @@ export const LinesDetailContextProvider = ({ children, lineId }) => {
 		});
 		setDataActiveAlertsState(activeAlerts);
 	}, [alertsContext.data.alerts, lineId, dataLineState, operationalDateContext.data.selected_date]);
+
+	const activeShapeGeojson = useMemo(() => {
+		const collection: GeoJSON.Feature<LineString> = { geometry: { coordinates: [], type: 'LineString' }, properties: { color: '', text_color: '' }, type: 'Feature' };
+		if (!dataActivePatternState?.shape_polyline) return collection;
+		const shapeGeojson = fromEncodedPolylineToGeoJsonLineString(dataActivePatternState.shape_polyline);
+		collection.geometry = shapeGeojson;
+		collection.properties = {
+			color: dataActivePatternState.color,
+			text_color: dataActivePatternState.text_color,
+		};
+		return collection;
+	}, [dataActivePatternState]);
+
+	const activeShapeData = useMemo(() => {
+		return {
+			geojson: activeShapeGeojson,
+			id: dataActivePatternState?._id,
+		};
+	}, [activeShapeGeojson, dataActivePatternState?._id]);
+
 	//
 	// D. Handle actions
 
@@ -327,6 +350,7 @@ export const LinesDetailContextProvider = ({ children, lineId }) => {
 		data: {
 			active_alerts: dataActiveAlertsState,
 			active_pattern: dataActivePatternState,
+			active_shape: activeShapeData,
 			active_waypoint: dataActiveWaypointState,
 			all_patterns: dataAllPatternsState,
 			highlighted_trip_ids: dataHighlightedTripIdsState,
