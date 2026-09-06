@@ -61,23 +61,10 @@ export const StopsContextProvider = ({ children }) => {
 	}, []);
 
 	const getStopAgencyIds = useCallback((stopData: HubV1ApiStop) => {
-		const normalizedStopData = stopData as HubV1ApiStop & {
-			agency_id?: string
-			agency_ids?: string[]
-			lines?: string[]
-		};
-
-		if (normalizedStopData.agency_ids?.length) return normalizedStopData.agency_ids;
-		if (normalizedStopData.agency_id) return normalizedStopData.agency_id;
-
-		const lineIds = stopData.line_ids || normalizedStopData.lines || [];
-		return lineIds.flatMap((lineId) => {
-			const agencyId = stopAgencyIdsByLinePrefix.get(lineId.at(0) ?? '');
-			return agencyId ? [agencyId] : [];
-		});
+		if (stopData.agency_ids?.length) return stopData.agency_ids;
 	}, [stopAgencyIdsByLinePrefix]);
 
-	const filteredStopsData = useFilterByAgencyIds(allStopsData, { dataType: 'stop', getAgencyIds: getStopAgencyIds }).data;
+	const filteredStopsData = useFilterByAgencyIds(allStopsData, { dataType: 'stop', getAgencyIds: getStopAgencyIds });
 
 	//
 	// D. Transform data

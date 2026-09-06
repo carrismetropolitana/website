@@ -26,6 +26,7 @@
 		"@tmlmobilidade/geo": "latest",
 		"@tmlmobilidade/go-types-gtfs-rt": "latest",
 		"@tmlmobilidade/go-types-hub": "latest",
+		"@tmlmobilidade/go-types-performance": "latest",
 		"@tmlmobilidade/go-types-shared": "latest",
 		"@tmlmobilidade/go-utils-dates": "latest",
 		"@tmlmobilidade/go-utils-geo": "latest",

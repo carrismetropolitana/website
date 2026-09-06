@@ -13,9 +13,10 @@ import { normalizeReferenceId } from '@/utils/alerts';
 import { getPublicVariable } from '@carrismetropolitana/website-shared-settings';
 import { type GoApiResponse } from '@carrismetropolitana/website-shared-types';
 import { type HubV1ApiAlert, type HubV1ApiLine, type HubV1ApiPattern, type HubV1ApiStop } from '@tmlmobilidade/go-types-hub';
-import { type UnixMilliseconds } from '@tmlmobilidade/go-types-shared';
+import { OperationalDate, type UnixMilliseconds } from '@tmlmobilidade/go-types-shared';
 import { Dates } from '@tmlmobilidade/go-utils-dates';
-import { convertGTFSTimeStringAndOperationalDateToUnixTimestamp } from '@tmlmobilidade/utils';
+import { convertGTFSTimeStringAndOperationalDateToUnixMilliseconds } from '@tmlmobilidade/utils';
+import { Feature, LineString } from 'geojson';
 import { notFound } from 'next/navigation';
 import { createContext, useContext, useEffect, useMemo, useState } from 'react';
 import useSWR from 'swr';
@@ -57,7 +58,7 @@ interface StopsDetailContextState {
 	data: {
 		active_alerts: HubV1ApiAlert[]
 		highlighted_pattern: HubV1ApiPattern
-		highlighted_shape: HubShape
+		highlighted_shape: Feature<LineString>
 		highlighted_trip_id: string
 		lines: HubV1ApiLine[]
 		stop: HubV1ApiStop
@@ -101,7 +102,7 @@ export const StopsDetailContextProvider = ({ children, stopId }: { children: Rea
 	const [currentTimestamp, setCurrentTimestamp] = useState(() => Dates.now('Europe/Lisbon').unix_milliseconds);
 	const [associatedPatternsData, setAssociatedPatternsData] = useState<HubV1ApiPattern[][]>();
 	const [highlightedPattern, setHighlightedPattern] = useState<HubV1ApiPattern>();
-	const [highlightedShape, setHighlightedShape] = useState<HubShape>();
+	const [highlightedShape, setHighlightedShape] = useState<Feature<LineString>>();
 	const [highlightedTripId, setHighlightedTripId] = useState<string>();
 
 	//
@@ -144,50 +145,9 @@ export const StopsDetailContextProvider = ({ children, stopId }: { children: Rea
 	}, [selectedStopData]);
 
 	/**
-	 * Get associated shape data for the highlighted pattern.
-	 */
-
-	useEffect(() => {
-		if (!highlightedPattern) {
-			setHighlightedShape(undefined);
-			return;
-		}
-
-		let isCancelled = false;
-		(async () => {
-			try {
-				const response = await fetch(`${getPublicVariable('go_api_url')}/hub/api/v1/network/shapes/${encodeURIComponent(highlightedPattern.shape_id)}`);
-				if (!response.ok) throw new Error(`Failed to fetch shape ${highlightedPattern.shape_id}`);
-				const payload = await response.json() as { data?: HubShape };
-				const shapeData = payload.data;
-				if (isCancelled || !shapeData) return;
-				setHighlightedShape({
-					...shapeData,
-					geojson: {
-						...shapeData.geojson,
-						properties: {
-							...shapeData.geojson.properties,
-							color: highlightedPattern.color,
-							text_color: highlightedPattern.text_color,
-						},
-					},
-				});
-			}
-			catch (error) {
-				if (!isCancelled) console.error('Error fetching highlighted shape:', error);
-			}
-		})();
-
-		return () => {
-			isCancelled = true;
-		};
-	}, [highlightedPattern]);
-
-	/**
 	 * Update the URL when the selected stop changes.
 	 * Validate the stop using data already available in stopsContext.
  	*/
-
 	useEffect(() => {
 		if (!dataActiveStopIdState || !stopsContext.data.stops || !stopsContext.data.stops.length) return;
 		if (selectedStopData) {
@@ -225,7 +185,7 @@ export const StopsDetailContextProvider = ({ children, stopId }: { children: Rea
 		// Return patterns with trips on the selected operational date
 		return associatedPatternsData
 			.flat()
-			.filter(patternGroup => patternGroup.valid_on.includes(operationalDateContext.data.selected_date.operational_date));
+			.filter(patternGroup => patternGroup.valid_on.includes(operationalDateContext.data.selected_date.operational_date_int));
 	}, [associatedPatternsData, operationalDateContext.data.selected_date]);
 
 	/**
@@ -241,15 +201,15 @@ export const StopsDetailContextProvider = ({ children, stopId }: { children: Rea
 		for (const patternData of validPatternsData) {
 			for (const tripData of patternData.trips) {
 				// Skip if this trip is not valid for the selected operational date
-				if (!tripData.valid_on.includes(operationalDateContext.data.selected_date.operational_date)) continue;
+				if (!tripData.valid_on.includes(operationalDateContext.data.selected_date.operational_date_int)) continue;
 				// Loop through each stop time of the trip
 				for (const stopTime of tripData.schedule) {
 					// Skip if this stop time is not for the selected stop
 					if (String(stopTime.stop_id) !== String(dataActiveStopIdState)) continue;
 					// Set a unique and stable ID for this arrival data
-					const uniqueIdValueForArrivalData = `${operationalDateContext.data.selected_date.operational_date}-${patternData.version_id}-${tripData.version_id}-${stopTime.stop_id}-${stopTime.stop_sequence}-${stopTime.arrival_time}`;
+					const uniqueIdValueForArrivalData = `${operationalDateContext.data.selected_date.operational_date_int}-${patternData.version_id}-${tripData.version_id}-${stopTime.stop_id}-${stopTime.stop_sequence}-${stopTime.arrival_time}`;
 					// Convert GTFS time string to Unix Timestamp
-					const scheduledArrivalMs = convertGTFSTimeStringAndOperationalDateToUnixMilliseconds(stopTime.arrival_time, operationalDateContext.data.selected_date.operational_date);
+					const scheduledArrivalMs = convertGTFSTimeStringAndOperationalDateToUnixMilliseconds(stopTime.arrival_time, String(operationalDateContext.data.selected_date.operational_date_int) as OperationalDate);
 					// Fetch ETA for this trip and stop, if available.
 					const eta = operationalDateContext.flags.is_today_selected
 						? etaData?.find(eta => eta.trip_id.substring(eta.trip_id.indexOf(']') + 1) === tripData.trip_ids.find(tripId => tripId.substring(tripId.indexOf(']') + 1) === eta.trip_id.substring(eta.trip_id.indexOf(']') + 1))?.substring(eta.trip_id.indexOf(']') + 1))

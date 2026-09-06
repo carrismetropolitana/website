@@ -118,7 +118,7 @@ export function StopsDetailViewTimetableRow({ data, status, withClock }: Props) 
 					<div className={styles.details}>
 						<Link
 							className={styles.openLinePage}
-							href={`/lines/${lineId}?date=${operationalDateContext.data.selected_date?.operational_date}&active_pattern_id=${data.pattern_id}`}
+							href={`/lines/${lineId}?date=${operationalDateContext.data.selected_date?.operational_date_int}&active_pattern_id=${data.pattern_id}`}
 							onClick={event => event.stopPropagation()}
 							target="_blank"
 						>

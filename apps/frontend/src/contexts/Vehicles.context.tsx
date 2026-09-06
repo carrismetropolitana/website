@@ -94,7 +94,7 @@ export const VehiclesContextProvider = ({ children }: PropsWithChildren) => {
 	};
 
 	const getVehiclesByLineId = (lineId: string): HubV1ApiVehiclePosition[] => {
-		return allVehiclesData.filter(vehicle => vehicle.line_id === lineId);
+		return allVehiclesData.filter(vehicle => vehicle.route_short_name === lineId);
 	};
 
 	const getVehiclesByLineIdGeoJsonFC = (lineId: string): GeoJSON.FeatureCollection | undefined => {
@@ -109,7 +109,7 @@ export const VehiclesContextProvider = ({ children }: PropsWithChildren) => {
 	};
 
 	const getVehiclesByPatternId = (patternId: string): HubV1ApiVehiclePosition[] => {
-		return allVehiclesData.filter(vehicle => vehicle.pattern_id === patternId);
+		return allVehiclesData.filter(vehicle => vehicle.shape_id === patternId);
 	};
 
 	const getVehiclesByPatternIdGeoJsonFC = (patternId: string) => {
@@ -190,8 +190,8 @@ export function transformVehicleDataIntoGeoJsonFeature(vehicleData: HubV1ApiVehi
 			current_status: vehicleData.current_status,
 			delay: Math.floor((Date.now() - receivedAt) / 1000),
 			id: vehicleData.vehicle_id,
-			line_id: vehicleData.line_id,
-			pattern_id: vehicleData.pattern_id,
+			line_id: vehicleData.route_short_name,
+			pattern_id: vehicleData.shape_id,
 			speed: vehicleData.speed,
 			stop_id: vehicleData.stop_id,
 			timeString: receivedAt ? new Date(receivedAt).toLocaleString() : '',

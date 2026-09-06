@@ -2,8 +2,8 @@
 
 import { formatDay } from '@/utils/formatDates';
 import { getPublicVariable } from '@carrismetropolitana/website-shared-settings';
+import { type DemandByLineByDay } from '@tmlmobilidade/go-types-performance';
 import { Dates } from '@tmlmobilidade/go-utils-dates';
-import { type DemandByLineByDay } from '@tmlmobilidade/types';
 import { useTranslations } from 'next-intl';
 import { useMemo } from 'react';
 import useSWR from 'swr';
