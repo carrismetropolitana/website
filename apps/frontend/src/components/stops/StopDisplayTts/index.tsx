@@ -5,7 +5,7 @@
 // import { useAnalyticsContext } from '@/contexts/Analytics.context';
 import { getPublicVariable } from '@carrismetropolitana/website-shared-settings';
 import { IconPlayerPause, IconVolume } from '@tabler/icons-react';
-import { type Attachment } from '@tmlmobilidade/types';
+import { type Attachment } from '@tmlmobilidade/go-types-shared';
 import { useEffect, useRef, useState } from 'react';
 import useSWR from 'swr';
 
