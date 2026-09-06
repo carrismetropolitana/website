@@ -5,8 +5,8 @@
 import { formatDay, formatMonth } from '@/utils/formatDates';
 import { TopDemandLinesByAgency } from '@carrismetropolitana/api-types/metrics';
 import { getPublicVariable } from '@carrismetropolitana/website-shared-settings';
+import { type DemandByAgencyByDay, type DemandByAgencyByMonth, type DemandByLineByDay, type TopDemandByAgency } from '@tmlmobilidade/go-types-performance';
 import { Dates } from '@tmlmobilidade/go-utils-dates';
-import { type DemandByAgencyByDay, type DemandByAgencyByMonth, type DemandByLineByDay, type TopDemandByAgency } from '@tmlmobilidade/types';
 import { DateTime } from 'luxon';
 import { useTranslations } from 'next-intl';
 import { createContext, useContext, useMemo, useState } from 'react';
