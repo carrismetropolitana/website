@@ -287,7 +287,7 @@ export const MetricsContextProvider = ({ children }) => {
 						return {
 							day_group,
 							formatted_day: formatDay({ day_group }, tCommon),
-							qty: dayData.qty,
+							qty: dayData['qty'] ?? 0,
 						};
 					})
 					.filter(Boolean)
