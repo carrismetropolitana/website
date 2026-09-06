@@ -2,7 +2,7 @@
 
 import { GoApiResponse } from '@/types/go-api-types';
 import { CARRIS_METROPOLITANA_AGENCY_IDS } from '@carrismetropolitana/website-shared-settings';
-import { type HubV1ApiLine, type HubRoute, type HubV1ApiStop } from '@tmlmobilidade/go-types-hub';
+import { type HubV1ApiLine, type HubV1ApiRoute, type HubV1ApiStop } from '@tmlmobilidade/go-types-hub';
 import { useMemo } from 'react';
 /* * */
 
@@ -44,7 +44,7 @@ export function useFilterByAgencyIds<T>(response?: GoApiResponse<T[]>, options: 
 				}
 
 				case 'route': {
-					const routeData = item as Pick<HubRoute, 'line_id'> & T;
+					const routeData = item as Pick<HubV1ApiRoute, 'line_id'> & T;
 					if (!routeData.line_id) return item;
 					return {
 						...item,

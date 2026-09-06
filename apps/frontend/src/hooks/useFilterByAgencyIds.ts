@@ -1,9 +1,8 @@
 'use client';
 
-import type { GoApiResponse } from '@carrismetropolitana/website-shared-types';
-
 import { CARRIS_METROPOLITANA_AGENCY_IDS } from '@carrismetropolitana/website-shared-settings';
-import { type HubV1ApiLine, type HubRoute, type HubV1ApiStop } from '@tmlmobilidade/go-types-hub';
+import { type HubV1ApiLine, type HubV1ApiRoute, type HubV1ApiStop } from '@tmlmobilidade/go-types-hub';
+import { ApiResponse } from '@tmlmobilidade/go-types-shared';
 import { useMemo } from 'react';
 
 /* * */
@@ -19,7 +18,7 @@ interface UseFilterByAgencyIdsOptions<T> {
 
 /* * */
 
-export function useFilterByAgencyIds<T>(response?: GoApiResponse<T[]>, options: UseFilterByAgencyIdsOptions<T> = {}): GoApiResponse<T[]> {
+export function useFilterByAgencyIds<T>(response?: ApiResponse<T[]>, options: UseFilterByAgencyIdsOptions<T> = {}): T[] {
 	const agencyIds = options.agencyIds || CARRIS_METROPOLITANA_AGENCY_IDS;
 	const dataType = options.dataType;
 	const getAgencyIds = options.getAgencyIds;
@@ -39,7 +38,7 @@ export function useFilterByAgencyIds<T>(response?: GoApiResponse<T[]>, options: 
 				}
 
 				case 'route': {
-					const routeData = item as Pick<HubRoute, 'line_id'> & T;
+					const routeData = item as Pick<HubV1ApiRoute, 'line_id'> & T;
 					if (!routeData.line_id) return item;
 					return {
 						...item,
@@ -67,10 +66,6 @@ export function useFilterByAgencyIds<T>(response?: GoApiResponse<T[]>, options: 
 			return normalizedItemAgencyIds.some(itemAgencyId => itemAgencyId !== undefined && itemAgencyId !== null && allowedAgencyIds.has(String(itemAgencyId)));
 		}).map(normalizeData);
 
-		return {
-			data: filteredData,
-			error: response?.error || '',
-			status_code: response?.status_code || '',
-		};
+		return filteredData;
 	}, [response, agencyIds, dataType, getAgencyIds]);
 }
