@@ -1,4 +1,3 @@
-import { useLocationsContext } from '@/contexts/Locations.context';
 import { AlertsByMunicipality as AlertsByMunicipalityType } from '@carrismetropolitana/api-types/metrics';
 import { Skeleton, Table } from '@mantine/core';
 import classNames from 'classnames/bind';
@@ -21,8 +20,6 @@ export function AlertsByMunicipality({ data }: { data?: AlertsByMunicipalityType
 	const t = useTranslations('metrics.MetricsPageAlerts.byMunicipalityChart');
 	const alertsT = useTranslations('alerts');
 
-	const locationsContext = useLocationsContext();
-
 	//
 	// B. Transform Data
 
@@ -37,9 +34,7 @@ export function AlertsByMunicipality({ data }: { data?: AlertsByMunicipalityType
 
 	const formattedData = {
 		body: safeData.map((row) => {
-			const municipalityName
-                = locationsContext.data.municipalities.find(m => m.id === row.municipality_id)?.name
-                  || row.municipality_id;
+			const municipalityName = row.municipality_id;
 
 			// Get values for each cause type in the same order as rawCauses
 			const values = rawCauses.map(type =>

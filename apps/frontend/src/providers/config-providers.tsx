@@ -43,6 +43,4 @@ export function ConfigProviders({ children }) {
 			</DebugContextProvider>
 		</SWRConfig>
 	);
-
-	//
 }
