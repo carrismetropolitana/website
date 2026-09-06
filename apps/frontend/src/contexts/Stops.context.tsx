@@ -6,7 +6,7 @@ import { useFilterByAgencyIds } from '@/hooks/useFilterByAgencyIds';
 import { getBaseGeoJsonFeatureCollection } from '@/utils/map.utils';
 import { CARRIS_METROPOLITANA_AGENCY_IDS, getPublicVariable } from '@carrismetropolitana/website-shared-settings';
 import { type GoApiResponse } from '@carrismetropolitana/website-shared-types';
-import { type HubStop } from '@tmlmobilidade/go-types-hub';
+import { type HubV1ApiStop } from '@tmlmobilidade/go-types-hub';
 import { createContext, useCallback, useContext, useEffect, useMemo, useState } from 'react';
 import useSWR from 'swr';
 
@@ -14,11 +14,11 @@ import useSWR from 'swr';
 
 interface StopsContextState {
 	actions: {
-		getStopById: (stopId: string) => HubStop | undefined
+		getStopById: (stopId: string) => HubV1ApiStop | undefined
 		getStopByIdGeoJsonFC: (stopId: string) => GeoJSON.FeatureCollection | undefined
 	}
 	data: {
-		stops: HubStop[]
+		stops: HubV1ApiStop[]
 		stops_fc: GeoJSON.FeatureCollection<GeoJSON.Point, GeoJSON.GeoJsonProperties> | undefined
 	}
 	flags: {
@@ -51,7 +51,7 @@ export const StopsContextProvider = ({ children }) => {
 	//
 	// B. Fetch data
 
-	const { data: allStopsData, isLoading: allStopsLoading } = useSWR<GoApiResponse<HubStop[]>, Error>(`${getPublicVariable('go_api_url')}/hub/api/v1/network/stops`, { refreshInterval: 900000 }); // 15 minutes
+	const { data: allStopsData, isLoading: allStopsLoading } = useSWR<GoApiResponse<HubV1ApiStop[]>, Error>(`${getPublicVariable('go_api_url')}/hub/api/v1/network/stops`, { refreshInterval: 900000 }); // 15 minutes
 
 	//
 	// C. Filter data
@@ -60,8 +60,8 @@ export const StopsContextProvider = ({ children }) => {
 		return new Map(CARRIS_METROPOLITANA_AGENCY_IDS.map(agencyId => [agencyId.slice(-1), agencyId]));
 	}, []);
 
-	const getStopAgencyIds = useCallback((stopData: HubStop) => {
-		const normalizedStopData = stopData as HubStop & {
+	const getStopAgencyIds = useCallback((stopData: HubV1ApiStop) => {
+		const normalizedStopData = stopData as HubV1ApiStop & {
 			agency_id?: string
 			agency_ids?: string[]
 			lines?: string[]
@@ -99,9 +99,9 @@ export const StopsContextProvider = ({ children }) => {
 	//
 	// E. Handle actions
 
-	const getStopById = (stopId: string): HubStop | undefined => {
+	const getStopById = (stopId: string): HubV1ApiStop | undefined => {
 		return filteredStopsData.find((stop) => {
-			const id = stop._id ?? (stop as HubStop & { id?: number | string }).id;
+			const id = stop._id ?? (stop as HubV1ApiStop & { id?: number | string }).id;
 			return id?.toString() === stopId;
 		});
 	};
@@ -146,8 +146,8 @@ export const StopsContextProvider = ({ children }) => {
 
 /* * */
 
-export function transformStopDataIntoGeoJsonFeature(stopData: HubStop): GeoJSON.Feature<GeoJSON.Point, GeoJSON.GeoJsonProperties> | undefined {
-	const legacyStopData = stopData as HubStop & {
+export function transformStopDataIntoGeoJsonFeature(stopData: HubV1ApiStop): GeoJSON.Feature<GeoJSON.Point, GeoJSON.GeoJsonProperties> | undefined {
+	const legacyStopData = stopData as HubV1ApiStop & {
 		id?: number | string
 		lat?: number
 		lon?: number

@@ -5,7 +5,7 @@
 import { useLinesContext } from '@/contexts/Lines.context';
 import { useProfileContext } from '@/contexts/Profile.context';
 import { useStopsContext } from '@/contexts/Stops.context';
-import { type HubLine, type HubStop } from '@tmlmobilidade/go-types-hub';
+import { type HubLine, type HubV1ApiStop } from '@tmlmobilidade/go-types-hub';
 import { createContext, useContext, useEffect, useState } from 'react';
 
 /* * */
@@ -19,7 +19,7 @@ interface ProfileListContextState {
 	}
 	data: {
 		favorite_lines: HubLine[]
-		favorite_stops: HubStop[]
+		favorite_stops: HubV1ApiStop[]
 	}
 	filters: {
 		by_current_view: 'lines' | 'stops'
@@ -54,7 +54,7 @@ export const ProfileListContextProvider = ({ children }) => {
 	const stopsContext = useStopsContext();
 
 	const [dataFavoriteLinesState, setDataFavoriteLinesState] = useState<HubLine[]>([]);
-	const [dataFavoriteStopsState, setDataFavoriteStopsState] = useState<HubStop[]>([]);
+	const [dataFavoriteStopsState, setDataFavoriteStopsState] = useState<HubV1ApiStop[]>([]);
 
 	const [filterByCurrentViewState, setFilterByCurrentViewState] = useState <ProfileListContextState['filters']['by_current_view']>('lines');
 

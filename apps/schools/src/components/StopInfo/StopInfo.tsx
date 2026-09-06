@@ -3,12 +3,12 @@
 /* * */
 
 import { LineDisplay } from '@/components/LineDisplay/LineDisplay';
-import { getHubStopCode, useFilterByAgencyIds } from '@/hooks/useFilterByAgencyIds';
+import { getHubV1ApiStopCode, useFilterByAgencyIds } from '@/hooks/useFilterByAgencyIds';
 import { GoApiResponse } from '@/types/go-api-types';
 import { type ApiResponse } from '@carrismetropolitana/api-types/common';
 import { type Locality } from '@carrismetropolitana/api-types/locations';
 import { getPublicVariable } from '@carrismetropolitana/website-shared-settings';
-import { type HubStop } from '@tmlmobilidade/go-types-hub';
+import { type HubV1ApiStop } from '@tmlmobilidade/go-types-hub';
 import Link from 'next/link';
 import { useMemo } from 'react';
 import useSWR from 'swr';
@@ -22,7 +22,7 @@ export default function StopInfo({ index, stop_id }) {
 
 	//
 	// A. Fetch data
-	const { data: allStopsData } = useSWR<GoApiResponse<HubStop[]>, Error>(`${getPublicVariable('go_api_url')}/hub/api/v1/network/stops`, { refreshInterval: 900000 }); // 15 minutes
+	const { data: allStopsData } = useSWR<GoApiResponse<HubV1ApiStop[]>, Error>(`${getPublicVariable('go_api_url')}/hub/api/v1/network/stops`, { refreshInterval: 900000 }); // 15 minutes
 	const { data: allLocalitiesData } = useSWR<ApiResponse<Locality[]>, Error>(`${getPublicVariable('go_api_url')}/locations/api/locations/localities`, { refreshInterval: 900000 }); // 15 minutes
 
 	//
@@ -33,8 +33,8 @@ export default function StopInfo({ index, stop_id }) {
 	//
 	// C. Transform data
 
-	const stopData: HubStop = useMemo(() => {
-		return filteredStopsData.find(item => getHubStopCode(item) === stop_id);
+	const stopData: HubV1ApiStop = useMemo(() => {
+		return filteredStopsData.find(item => getHubV1ApiStopCode(item) === stop_id);
 	}, [filteredStopsData, stop_id]);
 
 	const localityData: Locality = useMemo(() => {

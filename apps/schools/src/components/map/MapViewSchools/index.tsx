@@ -5,7 +5,7 @@
 import { MapView } from '@/components/map/MapView';
 import { GoApiResponse } from '@/types/go-api-types';
 import { getPublicVariable } from '@carrismetropolitana/website-shared-settings';
-import { HubStop } from '@tmlmobilidade/go-types-hub';
+import { HubV1ApiStop } from '@tmlmobilidade/go-types-hub';
 import * as turf from '@turf/turf';
 import { useEffect, useMemo } from 'react';
 import { Layer, Source, useMap } from 'react-map-gl/maplibre';
@@ -24,7 +24,7 @@ export function MapViewSchools({ allSchoolsData, onSelectSchool }) {
 	//
 	// B. Fetch data
 
-	const { data: allStopsData } = useSWR<GoApiResponse<HubStop[]>, Error>(`${getPublicVariable('go_api_url')}/hub/api/v1/network/stops`, { refreshInterval: 900000 }); // 15 minutes
+	const { data: allStopsData } = useSWR<GoApiResponse<HubV1ApiStop[]>, Error>(`${getPublicVariable('go_api_url')}/hub/api/v1/network/stops`, { refreshInterval: 900000 }); // 15 minutes
 
 	//
 	// C. Transform data

@@ -1,16 +1,16 @@
 /* * */
 
-import type { Waypoint } from '@carrismetropolitana/api-types/network';
-
-import { IconDisplay } from '@/components/common/IconDisplay';
 import { useAnalyticsContext } from '@/contexts/Analytics.context';
+import { useLinesDetailContext } from '@/contexts/LinesDetail.context';
 import { useOperationalDateContext } from '@/contexts/OperationalDate.context';
 import { useStopsContext } from '@/contexts/Stops.context';
 import { formatStopLocation } from '@/utils/formatStopLocation';
 import { useClipboard } from '@mantine/hooks';
 import { IconCheck, IconCopy } from '@tabler/icons-react';
 import { IconArrowUpRight } from '@tabler/icons-react';
+import { HubV1ApiPatternWaypoint } from '@tmlmobilidade/go-types-hub';
 import Link from 'next/link';
+import { useMemo } from 'react';
 
 import styles from './styles.module.css';
 
@@ -20,7 +20,7 @@ interface Props {
 	isFirstStop?: boolean
 	isLastStop?: boolean
 	isSelected: boolean
-	waypointData: Waypoint
+	waypointData: HubV1ApiPatternWaypoint
 }
 
 /* * */
@@ -34,6 +34,7 @@ export function PathWaypointHeader({ isFirstStop, isLastStop, isSelected, waypoi
 	const stopsContext = useStopsContext();
 	const operationalDateContext = useOperationalDateContext();
 	const analyticsContext = useAnalyticsContext();
+	const linesDetailContext = useLinesDetailContext();
 
 	const stopIdClipboard = useClipboard();
 
@@ -41,6 +42,12 @@ export function PathWaypointHeader({ isFirstStop, isLastStop, isSelected, waypoi
 	// B. Fetch data
 
 	const stopData = stopsContext.actions.getStopById(waypointData.stop_id);
+
+	const stopFlagForAgency = useMemo(() => {
+		if (!stopData?.flags) return null;
+		if (!linesDetailContext.data.line?.agency_id) return null;
+		return stopData.flags.find(flag => flag.agency_id === linesDetailContext.data.line?.agency_id);
+	}, [stopData, linesDetailContext.data.line?.agency_id]);
 
 	//
 	// C. Handle actions
@@ -59,7 +66,7 @@ export function PathWaypointHeader({ isFirstStop, isLastStop, isSelected, waypoi
 	//
 	// D. Render components
 
-	if (!stopData) {
+	if (!stopData || !stopFlagForAgency) {
 		return null;
 	}
 
@@ -82,20 +89,11 @@ export function PathWaypointHeader({ isFirstStop, isLastStop, isSelected, waypoi
 			<div className={styles.subHeaderWrapper}>
 				<p className={styles.stopLocation}>{formatStopLocation(stopData.locality_name, stopData.municipality_name)}</p>
 				<p className={`${styles.stopId} ${stopIdClipboard.copied && styles.isCopied}`} onClick={handleClickStopId}>
-					#{stopData._id}
+					#{stopFlagForAgency.stop_id}
 					{stopIdClipboard.copied ? <IconCheck className={styles.stopIdCopyIcon} /> : <IconCopy className={styles.stopIdCopyIcon} />}
 				</p>
 			</div>
 
-			{isSelected && stopData.flags.length > 0 && (
-				<div className={styles.facilitiesWrapper}>
-					{stopData.flags.map(flag => (
-						<IconDisplay key={flag.short_name} category="facilities" name={flag.short_name} />
-					))}
-				</div>
-			)}
 		</div>
 	);
-
-	//
 }

@@ -3,12 +3,12 @@
 import type { GoApiResponse } from '@carrismetropolitana/website-shared-types';
 
 import { CARRIS_METROPOLITANA_AGENCY_IDS } from '@carrismetropolitana/website-shared-settings';
-import { type HubLine, type HubRoute, type HubStop } from '@tmlmobilidade/go-types-hub';
+import { type HubLine, type HubRoute, type HubV1ApiStop } from '@tmlmobilidade/go-types-hub';
 import { useMemo } from 'react';
 
 /* * */
 
-type AgencyId = HubLine['agency_id'] | HubStop['agency_ids'][number];
+type AgencyId = HubLine['agency_id'] | HubV1ApiStop['agency_ids'][number];
 type FilterDataType = 'line' | 'route' | 'stop';
 
 interface UseFilterByAgencyIdsOptions<T> {
@@ -48,7 +48,7 @@ export function useFilterByAgencyIds<T>(response?: GoApiResponse<T[]>, options: 
 				}
 
 				case 'stop': {
-					const stopData = item as Pick<HubStop, 'line_ids'> & T;
+					const stopData = item as Pick<HubV1ApiStop, 'line_ids'> & T;
 					if (!stopData.line_ids) return item;
 					return {
 						...item,

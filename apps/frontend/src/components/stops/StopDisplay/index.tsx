@@ -1,6 +1,6 @@
 /* * */
 
-import type { HubStop } from '@tmlmobilidade/go-types-hub';
+import type { HubV1ApiStop } from '@tmlmobilidade/go-types-hub';
 
 import { Skeleton } from '@mantine/core';
 
@@ -14,7 +14,7 @@ import { StopDisplayName } from '../StopDisplayName';
 interface Props {
 	size?: 'lg' | 'md'
 	skeletonWidth?: number
-	stopData?: HubStop
+	stopData?: HubV1ApiStop
 }
 
 /* * */

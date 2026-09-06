@@ -2,7 +2,7 @@
 
 /* * */
 
-import type { HubStop } from '@tmlmobilidade/go-types-hub';
+import type { HubV1ApiStop } from '@tmlmobilidade/go-types-hub';
 
 import { createDocCollection } from '@/hooks/useOtherSearch';
 import { MultiSelect } from '@mantine/core';
@@ -16,12 +16,12 @@ interface StopOption {
 	value: string
 }
 
-interface SearchStopDoc extends HubStop, Record<string, unknown> {}
+interface SearchStopDoc extends HubV1ApiStop, Record<string, unknown> {}
 
 /* * */
 
 interface SelectStopsProps {
-	data: HubStop[]
+	data: HubV1ApiStop[]
 	label?: string
 	nothingFound?: string
 	onSelectStopIds: (stopIds: string[]) => void
@@ -75,7 +75,7 @@ export function SelectStops({
 
 	const options = useMemo(() => {
 		const byId = new Map<string, StopOption>();
-		const addStop = (stop: HubStop) => {
+		const addStop = (stop: HubV1ApiStop) => {
 			if (!String(stop?._id)) return;
 			byId.set(String(stop._id), {
 				label: stop.name ? `${stop.name} (${stop._id})` : String(stop._id),

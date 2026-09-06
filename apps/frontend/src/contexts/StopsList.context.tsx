@@ -8,7 +8,7 @@ import { useProfileContext } from '@/contexts/Profile.context';
 import { transformStopDataIntoGeoJsonFeature, useStopsContext } from '@/contexts/Stops.context';
 import { createDocCollection } from '@/hooks/useOtherSearch';
 import { getBaseGeoJsonFeatureCollection } from '@/utils/map.utils';
-import { type HubStop } from '@tmlmobilidade/go-types-hub';
+import { type HubV1ApiStop } from '@tmlmobilidade/go-types-hub';
 import { createContext, useContext, useEffect, useMemo, useState } from 'react';
 
 /* * */
@@ -25,8 +25,8 @@ interface StopsListContextState {
 		favorites: number
 	}
 	data: {
-		favorites: HubStop[]
-		filtered: HubStop[]
+		favorites: HubV1ApiStop[]
+		filtered: HubV1ApiStop[]
 		filtered_fc: GeoJSON.FeatureCollection<GeoJSON.Point, GeoJSON.GeoJsonProperties>
 	}
 	filters: {
@@ -67,9 +67,9 @@ export const StopsListContextProvider = ({ children }) => {
 	const environmentContext = useEnvironmentContext();
 	const isMupi = environmentContext.data.value === 'mupi';
 
-	const [dataFilteredState, setDataFilteredState] = useState<HubStop[]>([]);
+	const [dataFilteredState, setDataFilteredState] = useState<HubV1ApiStop[]>([]);
 	const [dataFilteredGeojsonFCState, setDataFilteredGeojsonFCState] = useState<GeoJSON.FeatureCollection<GeoJSON.Point, GeoJSON.GeoJsonProperties>>();
-	const [dataFavoritesState, setDataFavoritesState] = useState<HubStop[]>([]);
+	const [dataFavoritesState, setDataFavoritesState] = useState<HubV1ApiStop[]>([]);
 
 	const [filterByAttributeState, setFilterByAttributeState] = useState <StopsListContextState['filters']['by_attribute']>(null);
 	const [filterByCurrentViewState, setFilterByCurrentViewState] = useState <StopsListContextState['filters']['by_current_view']>('map');
@@ -101,7 +101,7 @@ export const StopsListContextProvider = ({ children }) => {
 		});
 	}, [stopsContext.data.stops, profileContext.data.favorite_stops]);
 
-	const applyFiltersToData = (allData: HubStop[] = []) => {
+	const applyFiltersToData = (allData: HubV1ApiStop[] = []) => {
 		//
 
 		let filterResult = allData;

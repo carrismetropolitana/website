@@ -13,10 +13,10 @@ import { NoServiceMessage } from '@/components/NoServiceMessage/NoServiceMessage
 import SourceDisclaimer from '@/components/SourceDisclaimer/SourceDisclaimer';
 import StopInfo from '@/components/StopInfo/StopInfo';
 import Titles from '@/components/Titles/Titles';
-import { getHubStopCode, useFilterByAgencyIds } from '@/hooks/useFilterByAgencyIds';
+import { getHubV1ApiStopCode, useFilterByAgencyIds } from '@/hooks/useFilterByAgencyIds';
 import { GoApiResponse } from '@/types/go-api-types';
 import { getPublicVariable } from '@carrismetropolitana/website-shared-settings';
-import { HubStop } from '@tmlmobilidade/go-types-hub';
+import { HubV1ApiStop } from '@tmlmobilidade/go-types-hub';
 import * as turf from '@turf/turf';
 import { useEffect, useMemo } from 'react';
 import { Layer, Source, useMap } from 'react-map-gl/maplibre';
@@ -44,7 +44,7 @@ export function SchoolDetail({ schoolId }: Props) {
 	// B. Fetch data
 
 	const { data: allSchoolsData } = useSWR(`https://api.carrismetropolitana.pt/v2/facilities/schools`);
-	const { data: allStopsData, isLoading: allStopsLoading } = useSWR<GoApiResponse<HubStop[]>, Error>(`${getPublicVariable('go_api_url')}/hub/api/v1/network/stops`, { refreshInterval: 900000 }); // 15 minutes
+	const { data: allStopsData, isLoading: allStopsLoading } = useSWR<GoApiResponse<HubV1ApiStop[]>, Error>(`${getPublicVariable('go_api_url')}/hub/api/v1/network/stops`, { refreshInterval: 900000 }); // 15 minutes
 
 	//
 	// C. Filter data
@@ -66,7 +66,7 @@ export function SchoolDetail({ schoolId }: Props) {
 		};
 		if (!schoolData?.stop_ids?.length || !filteredStopsData.length) return geoJSON;
 		for (const [stopIndex, stopCode] of schoolData.stop_ids.entries()) {
-			const stopData = filteredStopsData.find(stop => getHubStopCode(stop) === stopCode);
+			const stopData = filteredStopsData.find(stop => getHubV1ApiStopCode(stop) === stopCode);
 			if (!stopData) continue;
 			geoJSON.features.push({
 				geometry: { coordinates: [stopData.longitude, stopData.latitude], type: 'Point' },

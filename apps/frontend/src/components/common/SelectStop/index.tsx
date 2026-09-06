@@ -2,7 +2,7 @@
 
 /* * */
 
-import type { HubStop } from '@tmlmobilidade/go-types-hub';
+import type { HubV1ApiStop } from '@tmlmobilidade/go-types-hub';
 
 import { StopDisplay } from '@/components/stops/StopDisplay';
 import { useProfileContext } from '@/contexts/Profile.context';
@@ -18,7 +18,7 @@ import styles from './styles.module.css';
 /* * */
 
 interface SelectStopProps {
-	data: HubStop[]
+	data: HubV1ApiStop[]
 	label?: string
 	nothingFound?: string
 	onSelectStopId: (stopId: null | string) => void
@@ -43,7 +43,7 @@ export function SelectStop({ data = [], label, nothingFound, onSelectStopId, pla
 
 	const comboboxStore = useCombobox();
 
-	const sortStopsById = (stops: HubStop[]) => [...stops].sort((a, b) => a._id - b._id);
+	const sortStopsById = (stops: HubV1ApiStop[]) => [...stops].sort((a, b) => a._id - b._id);
 
 	//
 	// B. Transform data

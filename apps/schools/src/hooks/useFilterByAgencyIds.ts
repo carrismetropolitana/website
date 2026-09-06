@@ -2,11 +2,11 @@
 
 import { GoApiResponse } from '@/types/go-api-types';
 import { CARRIS_METROPOLITANA_AGENCY_IDS } from '@carrismetropolitana/website-shared-settings';
-import { type HubLine, type HubRoute, type HubStop } from '@tmlmobilidade/go-types-hub';
+import { type HubLine, type HubRoute, type HubV1ApiStop } from '@tmlmobilidade/go-types-hub';
 import { useMemo } from 'react';
 /* * */
 
-type AgencyId = HubLine['agency_id'] | HubStop['agency_ids'][number];
+type AgencyId = HubLine['agency_id'] | HubV1ApiStop['agency_ids'][number];
 type FilterDataType = 'line' | 'route' | 'stop';
 
 interface UseFilterByAgencyIdsOptions<T> {
@@ -17,8 +17,8 @@ interface UseFilterByAgencyIdsOptions<T> {
 
 /* * */
 
-export function getHubStopCode(stopData: HubStop): string {
-	const normalizedStopData = stopData as HubStop & {
+export function getHubV1ApiStopCode(stopData: HubV1ApiStop): string {
+	const normalizedStopData = stopData as HubV1ApiStop & {
 		flags?: { stop_id?: number | string }[]
 	};
 	return String(normalizedStopData.flags?.[0]?.stop_id ?? stopData._id);
@@ -53,7 +53,7 @@ export function useFilterByAgencyIds<T>(response?: GoApiResponse<T[]>, options: 
 				}
 
 				case 'stop': {
-					const stopData = item as Pick<HubStop, 'line_ids'> & T;
+					const stopData = item as Pick<HubV1ApiStop, 'line_ids'> & T;
 					if (!stopData.line_ids) return item;
 					return {
 						...item,
@@ -69,7 +69,7 @@ export function useFilterByAgencyIds<T>(response?: GoApiResponse<T[]>, options: 
 		const filteredData = (response?.data || []).filter((item) => {
 			const itemAgencyIds = getAgencyIds ? getAgencyIds(item) : (() => {
 				if (dataType !== 'stop') return (item as Partial<Pick<HubLine, 'agency_id'>>).agency_id;
-				const stopData = item as Partial<HubStop> & {
+				const stopData = item as Partial<HubV1ApiStop> & {
 					agency_id?: string
 					agency_ids?: string[]
 					lines?: string[]
