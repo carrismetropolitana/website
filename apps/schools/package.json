@@ -35,8 +35,8 @@
 	"devDependencies": {
 		"@carrismetropolitana/api-types": "20260726.2136.34",
 		"@carrismetropolitana/eslint": "20250622.1204.50",
-		"@tmlmobilidade/go-types-hub": "20260724.30.25",
-		"@tmlmobilidade/tsconfig": "20260418.1237.24",
+		"@tmlmobilidade/go-types-hub": "latest",
+		"@tmlmobilidade/go-utils-tsconfig": "latest",
 		"@types/node": "26.4.1",
 		"@types/nodemailer": "8.0.1",
 		"@types/react": "19.2.18",
