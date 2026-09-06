@@ -116,7 +116,7 @@ import { NoDataLabel } from '@/components/layout/NoDataLabel';
 import { PathWaypoint } from '@/components/lines/PathWaypoint';
 import { useLinesDetailContext } from '@/contexts/LinesDetail.context';
 import { useOperationalDateContext } from '@/contexts/OperationalDate.context';
-import { Dates } from '@tmlmobilidade/dates';
+import { Dates } from '@tmlmobilidade/go-utils-dates';
 import { useMemo } from 'react';
 
 import styles from './styles.module.css';

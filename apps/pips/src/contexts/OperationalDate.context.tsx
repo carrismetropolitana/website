@@ -2,7 +2,7 @@
 
 /* * */
 
-import { Dates } from '@tmlmobilidade/dates';
+import { Dates } from '@tmlmobilidade/go-utils-dates';
 import { type OperationalDate } from '@tmlmobilidade/types';
 import { useQueryState } from 'nuqs';
 import { createContext, useContext, useMemo } from 'react';

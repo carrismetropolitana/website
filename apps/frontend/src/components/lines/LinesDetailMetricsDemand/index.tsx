@@ -8,7 +8,7 @@ import { Surface } from '@/components/layout/Surface';
 import { useLinesDetailContext } from '@/contexts/LinesDetail.context';
 import { useLineData } from '@/hooks/useLineData';
 import { LineChart } from '@mantine/charts';
-import { Dates } from '@tmlmobilidade/dates';
+import { Dates } from '@tmlmobilidade/go-utils-dates';
 import { useTranslations } from 'next-intl';
 import { useMemo } from 'react';
 
