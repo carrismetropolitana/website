@@ -34,5 +34,11 @@
 	"workspaces": [
 		"shared/*",
 		"apps/*"
-	]
+	],
+	"allowScripts": {
+		"@parcel/watcher@2.6.0": true,
+		"@swc/core@1.16.2": true,
+		"fsevents@2.3.3": true,
+		"sharp@0.35.4": true
+	}
 }
