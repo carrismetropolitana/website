@@ -10,7 +10,8 @@ import { useStopsContext } from '@/contexts/Stops.context';
 import { normalizeReferenceId } from '@/utils/alerts';
 import { type ServiceMetrics } from '@carrismetropolitana/api-types/metrics';
 import { CARRIS_METROPOLITANA_NUMERIC_AGENCY_IDS, getPublicVariable } from '@carrismetropolitana/website-shared-settings';
-import { type HubAlert, type HubLine, type HubPattern, type HubRoute, type HubWaypoint } from '@tmlmobilidade/go-types-hub';
+import { type HubV1ApiAlert, type HubV1ApiLine, type HubV1ApiPattern, type HubV1ApiPatternWaypoint, type HubV1ApiRoute } from '@tmlmobilidade/go-types-hub';
+import { OperationalDateInt } from '@tmlmobilidade/go-types-shared';
 import { useQueryState } from 'nuqs';
 import { createContext, useContext, useEffect, useState } from 'react';
 
@@ -23,15 +24,15 @@ interface LinesDetailContextState {
 		setHighlightedTripIds: (tripIds: string[]) => void
 	}
 	data: {
-		active_alerts: HubAlert[] | undefined
-		active_pattern: HubPattern | null
-		active_waypoint: HubWaypoint | null
-		all_patterns: HubPattern[][] | null
+		active_alerts: HubV1ApiAlert[] | undefined
+		active_pattern: HubV1ApiPattern | null
+		active_waypoint: HubV1ApiPatternWaypoint | null
+		all_patterns: HubV1ApiPattern[][] | null
 		highlighted_trip_ids: null | string[]
-		line: HubLine | undefined
-		routes: HubRoute[]
+		line: HubV1ApiLine | undefined
+		routes: HubV1ApiRoute[]
 		service_metrics: ServiceMetrics[]
-		valid_patterns: HubPattern[] | undefined
+		valid_patterns: HubV1ApiPattern[] | undefined
 	}
 	filters: {
 		active_pattern_id: null | string
@@ -112,7 +113,7 @@ export const LinesDetailContextProvider = ({ children, lineId }) => {
 			const routeData = linesContext.actions.getRouteDataById(routeId);
 			if (!routeData) return null;
 			return routeData;
-		}).filter((routeData): routeData is HubRoute => routeData !== null);
+		}).filter((routeData): routeData is HubV1ApiRoute => routeData !== null);
 		setDataRoutesState(routesData);
 	}, [dataLineState, linesContext.data.routes]);
 
@@ -126,10 +127,10 @@ export const LinesDetailContextProvider = ({ children, lineId }) => {
 						console.log(`Failed to fetch pattern data for patternId: ${patternId}`);
 						return null;
 					}
-					const patternPayload = await response.json() as HubPattern[] | { data?: HubPattern[] };
+					const patternPayload = await response.json() as HubV1ApiPattern[] | { data?: HubV1ApiPattern[] };
 					return Array.isArray(patternPayload) ? patternPayload : patternPayload.data ?? [];
 				});
-				const resultData = (await Promise.all(fetchPromises)).filter((patternData): patternData is HubPattern[] => patternData !== null);
+				const resultData = (await Promise.all(fetchPromises)).filter((patternData): patternData is HubV1ApiPattern[] => patternData !== null);
 				setDataAllPatternsState(resultData);
 			}
 			catch (error) {
@@ -143,17 +144,17 @@ export const LinesDetailContextProvider = ({ children, lineId }) => {
 
 	useEffect(() => {
 		if (!dataAllPatternsState || !operationalDateContext.data.selected_date) return;
-		const selectedDate = operationalDateContext.data.selected_date.operational_date;
+		const selectedDate = operationalDateContext.data.selected_date.operational_date_int;
 		if (!selectedDate) return;
-		const activePatterns: HubPattern[] = [];
+		const activePatterns: HubV1ApiPattern[] = [];
 		for (const pattern of dataAllPatternsState) {
-			let closestDateSoFar: string = null;
-			let patternGroupWithClosestDate: HubPattern = null;
+			let closestDateSoFar: OperationalDateInt = null;
+			let patternGroupWithClosestDate: HubV1ApiPattern = null;
 			for (const patternGroup of pattern) {
 				const closestDate = patternGroup.valid_on.reduce((acc, curr) => {
-					if (selectedDate <= curr && (acc === '' || curr < acc)) return curr;
+					if (selectedDate <= curr && (acc === null || curr < acc)) return curr;
 					return acc;
-				}, '');
+				}, null);
 				if (!closestDateSoFar) closestDateSoFar = closestDate;
 				if (closestDate && closestDate <= closestDateSoFar) {
 					patternGroupWithClosestDate = patternGroup;

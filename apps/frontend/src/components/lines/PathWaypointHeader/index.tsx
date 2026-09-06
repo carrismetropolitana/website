@@ -71,7 +71,7 @@ export function PathWaypointHeader({ isFirstStop, isLastStop, isSelected, waypoi
 				{isSelected && (
 					<Link
 						className={styles.stopNameUrl}
-						href={`/stops/${waypointData.stop_id}?date=${operationalDateContext.data.selected_date?.operational_date}`}
+						href={`/stops/${waypointData.stop_id}?date=${operationalDateContext.data.selected_date?.operational_date_int}`}
 						target="_blank"
 					>
 						<IconArrowUpRight onClick={handleOpenStopDetails} size={16} />
