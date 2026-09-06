@@ -199,11 +199,11 @@ export function LinesDetailPathList() {
 		if (!activePattern || !selectedDate) return result;
 
 		for (const trip of activePattern.trips) {
-			if (!trip.valid_on.includes(selectedDate.js_date.toISOString())) continue;
+			if (!trip.valid_on.includes(selectedDate.operational_date_int)) continue;
 			for (const stopTime of trip.schedule) {
 				const stopKey = `${stopTime.stop_id}-${stopTime.stop_sequence}`;
 				const [hours, minutes, seconds = 0] = stopTime.arrival_time_24h.split(':').map(Number);
-				const unixTs = Dates.now('Europe/Lisbon').set({ hour: hours, millisecond: 0, minute: minutes, second: seconds }).unix_timestamp;
+				const unixTs = Dates.now('Europe/Lisbon').set({ hour: hours, millisecond: 0, minute: minutes, second: seconds }).unix_milliseconds;
 				if (!result.get(stopKey)) result.set(stopKey, []);
 				result.get(stopKey)?.push({ type: 'scheduled', unixTs });
 			}

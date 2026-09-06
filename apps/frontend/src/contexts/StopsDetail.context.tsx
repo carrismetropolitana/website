@@ -98,7 +98,7 @@ export const StopsDetailContextProvider = ({ children, stopId }: { children: Rea
 	const environmentContext = useEnvironmentContext();
 	const [dataActiveStopIdState, setDataActiveStopIdState] = useState<string>(stopId);
 	const [isLoading, setIsLoading] = useState<boolean>(false);
-	const [currentTimestamp, setCurrentTimestamp] = useState(() => Dates.now('Europe/Lisbon').unix_timestamp);
+	const [currentTimestamp, setCurrentTimestamp] = useState(() => Dates.now('Europe/Lisbon').unix_milliseconds);
 	const [associatedPatternsData, setAssociatedPatternsData] = useState<HubV1ApiPattern[][]>();
 	const [highlightedPattern, setHighlightedPattern] = useState<HubV1ApiPattern>();
 	const [highlightedShape, setHighlightedShape] = useState<HubShape>();
@@ -263,7 +263,7 @@ export const StopsDetailContextProvider = ({ children, stopId }: { children: Rea
 					// When debug is off, skip last-stop arrivals (show them only in debug mode).
 					if (!debugContext.flags.is_debug_mode && isLastStop) continue;
 					// Detect the temporal status of this stop time
-					const isPast = Number(effectiveArrivalMs) < Dates.now('Europe/Lisbon').unix_timestamp;
+					const isPast = Number(effectiveArrivalMs) < Dates.now('Europe/Lisbon').unix_milliseconds;
 					const isRealtime = !!estimatedArrivalMs && operationalDateContext.flags.is_today_selected;
 					// Add this stop time to the timetable array
 					timetableDataForSelectedDate.push({
@@ -292,7 +292,7 @@ export const StopsDetailContextProvider = ({ children, stopId }: { children: Rea
 
 	useEffect(() => {
 		const updateCurrentTimestamp = () => {
-			setCurrentTimestamp(Dates.now('Europe/Lisbon').unix_timestamp);
+			setCurrentTimestamp(Dates.now('Europe/Lisbon').unix_milliseconds);
 		};
 
 		updateCurrentTimestamp();

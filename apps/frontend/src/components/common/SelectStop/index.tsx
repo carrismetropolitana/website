@@ -43,7 +43,7 @@ export function SelectStop({ data = [], label, nothingFound, onSelectStopId, pla
 
 	const comboboxStore = useCombobox();
 
-	const sortStopsById = (stops: HubV1ApiStop[]) => [...stops].sort((a, b) => a._id - b._id);
+	const sortStopsById = (stops: HubV1ApiStop[]) => [...stops].sort((a, b) => a._id.localeCompare(b._id));
 
 	//
 	// B. Transform data

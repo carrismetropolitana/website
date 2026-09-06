@@ -33,7 +33,7 @@ export function StopsDetailViewTimetableRowArrival({ data }: StopsDetailViewTime
 	useEffect(() => {
 		const formatArrivals = () => {
 			// Prepare the time values
-			const nowUnixMilliseconds = Dates.now('Europe/Lisbon').unix_timestamp;
+			const nowUnixMilliseconds = Dates.now('Europe/Lisbon').unix_milliseconds;
 			const relativeArrivalMs = data.arrival_effective_ms - nowUnixMilliseconds;
 			// If arrival is in the past
 			if (relativeArrivalMs <= 0) {
