@@ -3,7 +3,7 @@
 /* * */
 
 import type { AlertCause, AlertEffect } from '@/types/alerts.types.js';
-import type { HubAlert } from '@tmlmobilidade/go-types-public-info';
+import type { HubAlert } from '@tmlmobilidade/go-types-hub';
 
 import { normalizeReferenceId } from '@/utils/alerts';
 import { DateTime } from 'luxon';

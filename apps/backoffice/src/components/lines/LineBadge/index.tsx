@@ -4,7 +4,7 @@
 
 import { useLinesContext } from '@/contexts/Lines.context';
 import { IconInfoTriangleFilled } from '@tabler/icons-react';
-import { type HubLine } from '@tmlmobilidade/go-types-public-info';
+import { type HubLine } from '@tmlmobilidade/go-types-hub';
 import classNames from 'classnames/bind';
 
 import styles from './styles.module.css';

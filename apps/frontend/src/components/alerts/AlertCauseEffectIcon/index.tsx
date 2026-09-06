@@ -2,7 +2,7 @@
 
 import { getCauseSeverityLevel, getEffectSeverityLevel } from '@/utils/alerts';
 import { IconAccessible, IconAmbulance, IconArrowBigUpLines, IconBarrierBlock, IconCarCrash, IconCircleArrowDown, IconCircleMinus, IconClock2, IconClockExclamation, IconCloudStorm, IconFish, IconInfoTriangle, IconRoadOff, IconRouteAltRight, IconServerCog, IconSettings, IconSpeakerphone, IconTool, IconTrafficCone } from '@tabler/icons-react';
-import { type HubAlert } from '@tmlmobilidade/go-types-public-info';
+import { type HubAlert } from '@tmlmobilidade/go-types-hub';
 import { useTranslations } from 'next-intl';
 
 import styles from './styles.module.css';

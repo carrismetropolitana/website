@@ -10,7 +10,7 @@ import { useStopsContext } from '@/contexts/Stops.context';
 import { normalizeReferenceId } from '@/utils/alerts';
 import { type ServiceMetrics } from '@carrismetropolitana/api-types/metrics';
 import { CARRIS_METROPOLITANA_NUMERIC_AGENCY_IDS, getPublicVariable } from '@carrismetropolitana/website-shared-settings';
-import { type HubAlert, type HubLine, type HubPattern, type HubRoute, type HubShape, type HubWaypoint } from '@tmlmobilidade/go-types-public-info';
+import { type HubAlert, type HubLine, type HubPattern, type HubRoute, type HubWaypoint } from '@tmlmobilidade/go-types-hub';
 import { useQueryState } from 'nuqs';
 import { createContext, useContext, useEffect, useState } from 'react';
 
@@ -25,7 +25,6 @@ interface LinesDetailContextState {
 	data: {
 		active_alerts: HubAlert[] | undefined
 		active_pattern: HubPattern | null
-		active_shape: HubShape | null
 		active_waypoint: HubWaypoint | null
 		all_patterns: HubPattern[][] | null
 		highlighted_trip_ids: null | string[]
@@ -78,7 +77,6 @@ export const LinesDetailContextProvider = ({ children, lineId }) => {
 	const [dataValidPatternsState, setDataValidPatternsState] = useState<LinesDetailContextState['data']['valid_patterns']>();
 	const [dataActiveAlertsState, setDataActiveAlertsState] = useState<LinesDetailContextState['data']['active_alerts']>();
 	const [dataActivePatternState, setDataActivePatternState] = useState<LinesDetailContextState['data']['active_pattern']>(null);
-	const [dataActiveShapeState, setDataActiveShapeState] = useState<LinesDetailContextState['data']['active_shape']>(null);
 	const [dataActiveWaypointState, setDataActiveWaypointState] = useState<LinesDetailContextState['data']['active_waypoint']>(null);
 	const [dataHighlightedTripIdsState, setDataHighlightedTripIdsState] = useState<LinesDetailContextState['data']['highlighted_trip_ids']>([]);
 	const [filterActivePatternIdState, setFilterActivePatternIdState] = useQueryState('active_pattern_id');
@@ -139,36 +137,6 @@ export const LinesDetailContextProvider = ({ children, lineId }) => {
 			}
 		})();
 	}, [dataLineState]);
-
-	/**
-	 * TASK: Fetch shape data for the active pattern.
-	 * WHEN: The `dataActivePatternState` changes.
-	 */
-	useEffect(() => {
-		if (!dataActivePatternState) return;
-		(async () => {
-			try {
-				const shapePayload = await fetch(`${getPublicVariable('go_api_url')}/hub/api/v1/network/shapes/${encodeURIComponent(dataActivePatternState.shape_id)}`).then((response) => {
-					if (!response.ok) console.log(`Failed to fetch shape data for shapeId: ${dataActivePatternState.shape_id}`);
-					else return response.json();
-				}) as HubShape | undefined | { data?: HubShape };
-				const shapeData: HubShape | undefined = shapePayload && 'data' in shapePayload ? shapePayload.data : shapePayload as HubShape | undefined;
-				if (shapeData) {
-					shapeData.geojson = {
-						...shapeData.geojson,
-						properties: {
-							color: dataActivePatternState.color,
-							text_color: dataActivePatternState.text_color,
-						},
-					};
-				}
-				setDataActiveShapeState(shapeData);
-			}
-			catch (error) {
-				console.error('Error fetching shape data:', error);
-			}
-		})();
-	}, [dataActivePatternState]);
 
 	//
 	// C. Transform data
@@ -358,7 +326,6 @@ export const LinesDetailContextProvider = ({ children, lineId }) => {
 		data: {
 			active_alerts: dataActiveAlertsState,
 			active_pattern: dataActivePatternState,
-			active_shape: dataActiveShapeState,
 			active_waypoint: dataActiveWaypointState,
 			all_patterns: dataAllPatternsState,
 			highlighted_trip_ids: dataHighlightedTripIdsState,

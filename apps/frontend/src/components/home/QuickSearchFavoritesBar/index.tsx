@@ -2,7 +2,7 @@
 
 /* * */
 
-import type { HubLine } from '@tmlmobilidade/go-types-public-info';
+import type { HubLine } from '@tmlmobilidade/go-types-hub';
 
 import { Loader } from '@/components/common/Loader';
 import { LineBadge } from '@/components/lines/LineBadge';

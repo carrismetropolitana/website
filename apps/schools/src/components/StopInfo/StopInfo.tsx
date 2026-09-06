@@ -8,7 +8,7 @@ import { GoApiResponse } from '@/types/go-api-types';
 import { type ApiResponse } from '@carrismetropolitana/api-types/common';
 import { type Locality } from '@carrismetropolitana/api-types/locations';
 import { getPublicVariable } from '@carrismetropolitana/website-shared-settings';
-import { type HubStop } from '@tmlmobilidade/go-types-public-info';
+import { type HubStop } from '@tmlmobilidade/go-types-hub';
 import Link from 'next/link';
 import { useMemo } from 'react';
 import useSWR from 'swr';

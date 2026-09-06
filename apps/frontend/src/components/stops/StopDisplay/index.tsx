@@ -1,6 +1,6 @@
 /* * */
 
-import type { HubStop } from '@tmlmobilidade/go-types-public-info';
+import type { HubStop } from '@tmlmobilidade/go-types-hub';
 
 import { Skeleton } from '@mantine/core';
 

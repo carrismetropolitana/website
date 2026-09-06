@@ -3,7 +3,7 @@
 /* * */
 
 import type { GoApiResponse } from '@carrismetropolitana/website-shared-types';
-import type { HubPattern } from '@tmlmobilidade/go-types-public-info';
+import type { HubPattern } from '@tmlmobilidade/go-types-hub';
 
 import { useAlertsContext } from '@/contexts/Alerts.context';
 import { useOperationalDateContext } from '@/contexts/OperationalDate.context';

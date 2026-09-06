@@ -5,7 +5,7 @@ import { LinesDetailContextProvider } from '@/contexts/LinesDetail.context';
 import { type ApiResponse } from '@carrismetropolitana/api-types/common';
 import { type Locality } from '@carrismetropolitana/api-types/locations';
 import { getPublicVariable } from '@carrismetropolitana/website-shared-settings';
-import { type HubLine } from '@tmlmobilidade/go-types-public-info';
+import { type HubLine } from '@tmlmobilidade/go-types-hub';
 import { type Metadata } from 'next';
 
 /* * */

@@ -3,7 +3,7 @@
 import { useVehicleMetadata } from '@/hooks/useVehicleMetadata';
 import { CARRIS_METROPOLITANA_AGENCY_IDS, getPublicVariable } from '@carrismetropolitana/website-shared-settings';
 import { getBaseGeoJsonFeatureCollection } from '@tmlmobilidade/geo';
-import { type HubVehiclePosition } from '@tmlmobilidade/go-types-public-info';
+import { type HubVehiclePosition } from '@tmlmobilidade/go-types-hub';
 import { DateTime } from 'luxon';
 import { createContext, type PropsWithChildren, useContext, useMemo } from 'react';
 import useSWR from 'swr';

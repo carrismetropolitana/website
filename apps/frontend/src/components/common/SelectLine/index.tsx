@@ -2,7 +2,7 @@
 
 /* * */
 
-import type { HubLine } from '@tmlmobilidade/go-types-public-info';
+import type { HubLine } from '@tmlmobilidade/go-types-hub';
 
 import { LineDisplay } from '@/components/lines/LineDisplay';
 import { useProfileContext } from '@/contexts/Profile.context';

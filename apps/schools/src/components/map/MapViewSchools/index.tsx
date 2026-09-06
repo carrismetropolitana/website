@@ -5,7 +5,7 @@
 import { MapView } from '@/components/map/MapView';
 import { GoApiResponse } from '@/types/go-api-types';
 import { getPublicVariable } from '@carrismetropolitana/website-shared-settings';
-import { HubStop } from '@tmlmobilidade/go-types-public-info';
+import { HubStop } from '@tmlmobilidade/go-types-hub';
 import * as turf from '@turf/turf';
 import { useEffect, useMemo } from 'react';
 import { Layer, Source, useMap } from 'react-map-gl/maplibre';

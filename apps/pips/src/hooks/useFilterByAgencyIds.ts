@@ -3,7 +3,7 @@
 import type { GoApiResponse } from '@carrismetropolitana/website-shared-types';
 
 import { CARRIS_METROPOLITANA_AGENCY_IDS } from '@carrismetropolitana/website-shared-settings';
-import { type HubLine, type HubRoute, type HubStop } from '@tmlmobilidade/go-types-public-info';
+import { type HubLine, type HubRoute, type HubStop } from '@tmlmobilidade/go-types-hub';
 import { useMemo } from 'react';
 
 /* * */

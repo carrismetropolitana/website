@@ -1,7 +1,7 @@
 'use client';
 
 import { getPublicVariable } from '@carrismetropolitana/website-shared-settings';
-import { type HubPattern } from '@tmlmobilidade/go-types-public-info';
+import { type HubPattern } from '@tmlmobilidade/go-types-hub';
 
 /**
  * Fetch one or more patterns by their IDs in parallel.

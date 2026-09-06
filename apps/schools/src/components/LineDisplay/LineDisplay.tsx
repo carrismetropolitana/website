@@ -4,7 +4,7 @@
 
 import { GoApiResponse } from '@/types/go-api-types';
 import { getPublicVariable } from '@carrismetropolitana/website-shared-settings';
-import { HubPattern } from '@tmlmobilidade/go-types-public-info';
+import { HubPattern } from '@tmlmobilidade/go-types-hub';
 import useSWR from 'swr';
 
 import styles from './LineDisplay.module.css';

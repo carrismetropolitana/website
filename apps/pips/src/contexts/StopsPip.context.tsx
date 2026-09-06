@@ -3,7 +3,7 @@
 /* * */
 
 import { useStopsContext } from '@/contexts/Stops.context';
-import { type HubStop } from '@tmlmobilidade/go-types-public-info';
+import { type HubStop } from '@tmlmobilidade/go-types-hub';
 import { usePathname, useSearchParams } from 'next/navigation';
 import { createContext, useContext, useEffect, useMemo, useState } from 'react';
 

@@ -5,7 +5,7 @@ import { useLinesContext } from '@/contexts/Lines.context';
 import { $createTextNode, $getSelection, $isRangeSelection } from '@payloadcms/richtext-lexical/lexical';
 import { useLexicalComposerContext } from '@payloadcms/richtext-lexical/lexical/react/LexicalComposerContext';
 import { LexicalTypeaheadMenuPlugin, MenuOption, type MenuRenderFn, type TriggerFn } from '@payloadcms/richtext-lexical/lexical/react/LexicalTypeaheadMenuPlugin';
-import { type HubLine } from '@tmlmobilidade/go-types-public-info';
+import { type HubLine } from '@tmlmobilidade/go-types-hub';
 import React, { useMemo, useState } from 'react';
 import * as ReactDOM from 'react-dom';
 

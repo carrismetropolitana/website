@@ -3,7 +3,7 @@
 import { normalizeReferenceId } from '@/utils/alerts';
 import { getBaseGeoJsonFeatureCollection } from '@/utils/map.utils';
 import { CARRIS_METROPOLITANA_AGENCY_IDS, getPublicVariable } from '@carrismetropolitana/website-shared-settings';
-import { type HubAlert } from '@tmlmobilidade/go-types-public-info';
+import { type HubAlert } from '@tmlmobilidade/go-types-hub';
 import { createContext, type PropsWithChildren, useContext, useMemo } from 'react';
 import useSWR from 'swr';
 

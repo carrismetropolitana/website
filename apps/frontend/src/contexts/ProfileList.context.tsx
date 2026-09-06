@@ -5,7 +5,7 @@
 import { useLinesContext } from '@/contexts/Lines.context';
 import { useProfileContext } from '@/contexts/Profile.context';
 import { useStopsContext } from '@/contexts/Stops.context';
-import { type HubLine, type HubStop } from '@tmlmobilidade/go-types-public-info';
+import { type HubLine, type HubStop } from '@tmlmobilidade/go-types-hub';
 import { createContext, useContext, useEffect, useState } from 'react';
 
 /* * */

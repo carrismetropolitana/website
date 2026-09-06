@@ -4,7 +4,7 @@
 
 import { Section } from '@/components/layout/Section';
 import { Select, Text } from '@mantine/core';
-import { type HubLine } from '@tmlmobilidade/go-types-public-info';
+import { type HubLine } from '@tmlmobilidade/go-types-hub';
 import { useTranslations } from 'next-intl';
 import { useState } from 'react';
 

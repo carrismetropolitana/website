@@ -5,7 +5,7 @@ import { LineBadge } from '@/components/lines/LineBadge';
 import { LineName } from '@/components/lines/LineName';
 import { useLinesContext } from '@/contexts/Lines.context';
 import { ShimmerEffect } from '@payloadcms/ui';
-import { type HubLine } from '@tmlmobilidade/go-types-public-info';
+import { type HubLine } from '@tmlmobilidade/go-types-hub';
 
 import styles from './styles.module.css';
 

@@ -1,7 +1,7 @@
 /* * */
 
 import { CopyBadge } from '@/components/common/CopyBadge';
-import { type HubPattern } from '@tmlmobilidade/go-types-public-info';
+import { type HubPattern } from '@tmlmobilidade/go-types-hub';
 
 import styles from './styles.module.css';
 

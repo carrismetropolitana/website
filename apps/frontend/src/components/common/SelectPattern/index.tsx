@@ -8,7 +8,7 @@ import { useStopsContext } from '@/contexts/Stops.context';
 import { formatStopLocation } from '@/utils/formatStopLocation';
 import { ComboboxItem, ComboboxItemGroup, Flex, Group, Select, SelectProps, Text } from '@mantine/core';
 import { IconAlertTriangle } from '@tabler/icons-react';
-import { type HubPattern } from '@tmlmobilidade/go-types-public-info';
+import { type HubPattern } from '@tmlmobilidade/go-types-hub';
 import { useTranslations } from 'next-intl';
 import { useMemo } from 'react';
 

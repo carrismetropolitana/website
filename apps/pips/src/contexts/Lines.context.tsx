@@ -6,7 +6,7 @@ import { useFilterByAgencyIds } from '@/hooks/useFilterByAgencyIds';
 import { type CachedResource } from '@carrismetropolitana/api-types/common';
 import { type ServiceMetrics } from '@carrismetropolitana/api-types/metrics';
 import { getPublicVariable } from '@carrismetropolitana/website-shared-settings';
-import { type HubLine, type HubRoute } from '@tmlmobilidade/go-types-public-info';
+import { type HubLine, type HubRoute } from '@tmlmobilidade/go-types-hub';
 import { createContext, useContext, useMemo } from 'react';
 import useSWR from 'swr';
 

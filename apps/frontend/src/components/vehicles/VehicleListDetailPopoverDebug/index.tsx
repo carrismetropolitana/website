@@ -4,7 +4,7 @@
 
 import { CopyBadge } from '@/components/common/CopyBadge';
 import { IconEyeMinus, IconEyePlus } from '@tabler/icons-react';
-import { type HubVehiclePosition } from '@tmlmobilidade/go-types-public-info';
+import { type HubVehiclePosition } from '@tmlmobilidade/go-types-hub';
 import { useState } from 'react';
 
 import styles from './styles.module.css';

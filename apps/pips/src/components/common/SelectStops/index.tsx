@@ -2,7 +2,7 @@
 
 /* * */
 
-import type { HubStop } from '@tmlmobilidade/go-types-public-info';
+import type { HubStop } from '@tmlmobilidade/go-types-hub';
 
 import { createDocCollection } from '@/hooks/useOtherSearch';
 import { MultiSelect } from '@mantine/core';

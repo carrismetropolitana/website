@@ -2,7 +2,7 @@
 
 /* * */
 
-import type { HubLine, HubStop } from '@tmlmobilidade/go-types-public-info';
+import type { HubLine, HubStop } from '@tmlmobilidade/go-types-hub';
 
 import { LineBadge } from '@/components/lines/LineBadge';
 import { useEnvironmentContext } from '@/contexts/Environment.context';

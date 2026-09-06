@@ -1,6 +1,7 @@
 {
 	"reject": [
 		"zod",
+		"typescript",
 		"@carrismetropolitana/eslint"
 	]
 }

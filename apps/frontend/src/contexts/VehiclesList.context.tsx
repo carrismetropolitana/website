@@ -5,7 +5,7 @@
 import { useVehiclesContext } from '@/contexts/Vehicles.context';
 import { useVehicleMetadata } from '@/hooks/useVehicleMetadata';
 import { type HubVehicleMetadata } from '@/types/vehicles.types';
-import { type HubVehiclePosition } from '@tmlmobilidade/go-types-public-info';
+import { type HubVehiclePosition } from '@tmlmobilidade/go-types-hub';
 import { DateTime } from 'luxon';
 import { useQueryState } from 'nuqs';
 import { createContext, useContext, useEffect, useMemo, useState } from 'react';
