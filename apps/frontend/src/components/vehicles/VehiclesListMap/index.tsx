@@ -15,10 +15,11 @@ import { transformVehicleDataIntoGeoJsonFeature, useVehiclesContext } from '@/co
 import { useVehiclesListContext } from '@/contexts/VehiclesList.context';
 import { useVehicleMetadata } from '@/hooks/useVehicleMetadata';
 import { centerMap, getBaseGeoJsonFeatureCollection } from '@/utils/map.utils';
-import { Pattern, Shape } from '@carrismetropolitana/api-types/network';
 import { getPublicVariable } from '@carrismetropolitana/website-shared-settings';
 import { IconAlertTriangle } from '@tabler/icons-react';
+import { HubV1ApiPattern } from '@tmlmobilidade/go-types-hub';
 import { useMap } from '@vis.gl/react-maplibre';
+import { Feature, LineString } from 'geojson';
 import { useTranslations } from 'next-intl';
 import { useRouter } from 'next/navigation';
 import { useEffect, useMemo, useState } from 'react';
@@ -44,8 +45,8 @@ export function VehiclesListMap() {
 	const operationalDateContext = useOperationalDateContext();
 
 	const [isAutoZoom, setIsAutoZoom] = useState(false);
-	const [activePatternData, setActivePatternData] = useState<Pattern | undefined>();
-	const [activeShapeData, setActiveShapeData] = useState<Shape | undefined>();
+	const [activePatternData, setActivePatternData] = useState<HubV1ApiPattern | undefined>();
+	const [activeShapeData, setActiveShapeData] = useState<Feature<LineString> | undefined>();
 	const [showAlerts, setShowAlerts] = useState(true);
 
 	const t = useTranslations();
@@ -55,17 +56,17 @@ export function VehiclesListMap() {
 
 	useEffect(() => {
 		(async () => {
-			if (!vehiclesListContext.data.selected?.pattern_id) {
+			if (!vehiclesListContext.data.selected?.shape_id) {
 				setActivePatternData(undefined);
 				return;
 			}
 
-			const operationalDate = operationalDateContext.data.selected_date?.operational_date;
+			const operationalDate = operationalDateContext.data.selected_date?.operational_date_int;
 			if (!operationalDate) return;
 
-			const fetchedPatternResponse = await fetch(`${getPublicVariable('go_api_url')}/hub/api/v1/network/patterns/${encodeURIComponent(vehiclesListContext.data.selected.pattern_id)}`);
+			const fetchedPatternResponse = await fetch(`${getPublicVariable('go_api_url')}/hub/api/v1/network/patterns/${encodeURIComponent(vehiclesListContext.data.selected.shape_id)}`);
 
-			const fetchedPatternResponseData: { data?: Pattern[] } = await fetchedPatternResponse.json();
+			const fetchedPatternResponseData: { data?: HubV1ApiPattern[] } = await fetchedPatternResponse.json();
 			const fetchedPatternData = fetchedPatternResponseData.data;
 			if (!Array.isArray(fetchedPatternData) || fetchedPatternData.length === 0) {
 				setActivePatternData(undefined);
@@ -76,20 +77,6 @@ export function VehiclesListMap() {
 			setActivePatternData(activePatternVersion);
 		})();
 	}, [operationalDateContext.data.selected_date, vehiclesListContext.data.selected]);
-
-	useEffect(() => {
-		(async () => {
-			if (!activePatternData?.shape_id) {
-				setActiveShapeData(undefined);
-				return;
-			}
-
-			const fetchedShapeResponse = await fetch(`${getPublicVariable('go_api_url')}/hub/api/v1/network/shapes/${encodeURIComponent(activePatternData.shape_id)}`);
-
-			const fetchedShapeResponseData: { data?: Shape } = await fetchedShapeResponse.json();
-			setActiveShapeData(fetchedShapeResponseData.data);
-		})();
-	}, [activePatternData]);
 
 	useEffect(() => {
 		if (vehiclesListContext.data.selected) return;
@@ -119,7 +106,7 @@ export function VehiclesListMap() {
 
 	const activePathShapeGeoJson = useMemo(() => {
 		if (!activePatternData || !activeShapeData) return;
-		return { ...activeShapeData?.geojson, properties: { color: activePatternData.color } };
+		return { ...activeShapeData, properties: { color: activePatternData.color } };
 	}, [activePatternData, activeShapeData]);
 
 	const activeVehiclesGeoJsonFC = useMemo(() => {

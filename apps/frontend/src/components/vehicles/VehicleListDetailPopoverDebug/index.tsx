@@ -38,8 +38,8 @@ export function VehicleListDetailPopoverDebug({ data }: VehicleListDetailPopover
 				<CopyBadge label={`Timestamp: ${timestampString}`} value={timestampString} />
 				<CopyBadge label={`Delay: ${delayString}`} value={delayString} />
 				<CopyBadge label={`Status: ${data.current_status ?? 'N/A'} : ${data.stop_id ?? 'N/A'}`} value={data.current_status ?? 'N/A'} />
-				<CopyBadge label={`Pattern ID: ${data.pattern_id ?? 'N/A'}`} value={data.pattern_id ?? 'N/A'} />
-				<CopyBadge label={`Line ID: ${data.line_id ?? 'N/A'}`} value={data.line_id ?? 'N/A'} />
+				<CopyBadge label={`Pattern ID: ${data.shape_id ?? 'N/A'}`} value={data.shape_id ?? 'N/A'} />
+				<CopyBadge label={`Line ID: ${data.route_short_name ?? 'N/A'}`} value={data.route_short_name ?? 'N/A'} />
 			</div>
 		);
 	};

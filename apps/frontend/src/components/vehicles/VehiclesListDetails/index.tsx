@@ -39,8 +39,8 @@ function VehiclesListDetailsContent() {
 	// B. Fetch data
 
 	const activeLineData = useMemo(() => {
-		return linesContext.actions.getLineDataById(position?.line_id || '');
-	}, [linesContext.actions, linesContext.data.lines, position?.line_id]);
+		return linesContext.actions.getLineDataById(position?.route_short_name || '');
+	}, [linesContext.actions, linesContext.data.lines, position?.route_short_name]);
 
 	const rows = [
 		{ label: 'ID', value: position?.vehicle_id },

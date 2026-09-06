@@ -54,7 +54,7 @@ export function StopsDetailContentMap() {
 	}, [stopsContext.actions, stopsDetailContext.data.highlighted_pattern]);
 
 	const activePathShapeGeoJson = useMemo(() => {
-		return stopsDetailContext.data.highlighted_shape?.geojson;
+		return stopsDetailContext.data.highlighted_shape;
 	}, [stopsDetailContext.data.highlighted_shape]);
 
 	const activeVehicleGeoJson = useMemo<GeoJSON.FeatureCollection<GeoJSON.Point> | undefined>(() => {
