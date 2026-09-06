@@ -5,7 +5,7 @@ import { LineBadge } from '@/components/lines/LineBadge';
 import { LineName } from '@/components/lines/LineName';
 import { useLinesContext } from '@/contexts/Lines.context';
 import { ShimmerEffect } from '@payloadcms/ui';
-import { type HubLine } from '@tmlmobilidade/go-types-hub';
+import { type HubV1ApiLine } from '@tmlmobilidade/go-types-hub';
 
 import styles from './styles.module.css';
 
@@ -13,7 +13,7 @@ import styles from './styles.module.css';
 
 interface Props {
 	color?: string
-	lineData?: HubLine
+	lineData?: HubV1ApiLine
 	lineId?: string
 	longName?: string
 	shortName?: string

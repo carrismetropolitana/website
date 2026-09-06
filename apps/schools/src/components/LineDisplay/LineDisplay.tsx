@@ -4,7 +4,7 @@
 
 import { GoApiResponse } from '@/types/go-api-types';
 import { getPublicVariable } from '@carrismetropolitana/website-shared-settings';
-import { HubPattern } from '@tmlmobilidade/go-types-hub';
+import { HubV1ApiPattern } from '@tmlmobilidade/go-types-hub';
 import useSWR from 'swr';
 
 import styles from './LineDisplay.module.css';
@@ -23,7 +23,7 @@ export function LineDisplay({ patternId }: LineDisplayProps) {
 	//
 	// A. Fetch data
 
-	const { data: patternData } = useSWR<GoApiResponse<HubPattern[]>, Error>(`${getPublicVariable('go_api_url')}/hub/api/v1/network/patterns/${patternId}`, { refreshInterval: 900000 }); // 15 minutes
+	const { data: patternData } = useSWR<GoApiResponse<HubV1ApiPattern[]>, Error>(`${getPublicVariable('go_api_url')}/hub/api/v1/network/patterns/${patternId}`, { refreshInterval: 900000 }); // 15 minutes
 
 	//
 	// B. Render components

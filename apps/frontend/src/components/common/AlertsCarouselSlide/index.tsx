@@ -3,7 +3,7 @@
 import { AlertActivePeriodStart } from '@/components/alerts/AlertActivePeriod';
 import { useAnalyticsContext } from '@/contexts/Analytics.context';
 import { IconCircleArrowRightFilled } from '@tabler/icons-react';
-import { type HubAlert } from '@tmlmobilidade/go-types-hub';
+import { type HubV1ApiAlert } from '@tmlmobilidade/go-types-hub';
 import Link from 'next/link';
 
 import styles from './styles.module.css';
@@ -11,7 +11,7 @@ import styles from './styles.module.css';
 /* * */
 
 interface Props {
-	alert: HubAlert
+	alert: HubV1ApiAlert
 	target?: '_blank' | '_self'
 }
 

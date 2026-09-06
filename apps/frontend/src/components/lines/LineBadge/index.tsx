@@ -2,7 +2,7 @@
 
 /* * */
 
-import type { HubLine } from '@tmlmobilidade/go-types-hub';
+import type { HubV1ApiLine } from '@tmlmobilidade/go-types-hub';
 
 import { useLinesContext } from '@/contexts/Lines.context';
 import { IconInfoTriangleFilled } from '@tabler/icons-react';
@@ -15,7 +15,7 @@ import styles from './styles.module.css';
 interface Props {
 	agencyId?: string
 	color?: string
-	lineData?: HubLine
+	lineData?: HubV1ApiLine
 	lineId?: string
 	onClick?: () => void
 	shortName?: string

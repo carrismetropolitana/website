@@ -2,7 +2,7 @@
 
 /* * */
 
-import type { HubLine, HubV1ApiStop } from '@tmlmobilidade/go-types-hub';
+import type { HubV1ApiLine, HubV1ApiStop } from '@tmlmobilidade/go-types-hub';
 
 import { LineBadge } from '@/components/lines/LineBadge';
 import { useEnvironmentContext } from '@/contexts/Environment.context';
@@ -36,7 +36,7 @@ export function AlertInformedEntity({ lineId, routeId, stopId }: Props) {
 	//
 	// B. Transform data
 
-	const lineData = useMemo<HubLine | undefined>(() => {
+	const lineData = useMemo<HubV1ApiLine | undefined>(() => {
 		if (lineId) return linesContext.actions.getLineDataById(lineId);
 		if (!routeId) return;
 		const normalizedRouteId = normalizeReferenceId(routeId);

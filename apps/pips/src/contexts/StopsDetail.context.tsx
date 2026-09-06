@@ -13,9 +13,9 @@ import { fetchPatterns } from '@/hooks/fetch-patterns';
 import { normalizeReferenceId } from '@/utils/alerts';
 import { getPublicVariable } from '@carrismetropolitana/website-shared-settings';
 import { Dates } from '@tmlmobilidade/go-utils-dates';
-import { type HubAlert, type HubLine, type HubPattern, type HubShape, type HubV1ApiStop } from '@tmlmobilidade/go-types-hub';
-import { type UnixTimestamp, validateUnixTimestamp } from '@tmlmobilidade/types';
-import { convertGTFSTimeStringAndOperationalDateToUnixTimestamp } from '@tmlmobilidade/utils';
+import { type HubV1ApiAlert, type HubV1ApiLine, type HubV1ApiPattern, type HubShape, type HubV1ApiStop } from '@tmlmobilidade/go-types-hub';
+import { type UnixMilliseconds, validateUnixMilliseconds } from '@tmlmobilidade/types';
+import { convertGTFSTimeStringAndOperationalDateToUnixMilliseconds } from '@tmlmobilidade/utils';
 import { notFound } from 'next/navigation';
 import { createContext, useContext, useEffect, useMemo, useState } from 'react';
 import useSWR from 'swr';
@@ -24,9 +24,9 @@ import useSWR from 'swr';
 
 export interface StopsDetailViewTimetableData {
 	_id: string
-	arrival_effective_ms: null | UnixTimestamp
-	arrival_estimated_ms: null | UnixTimestamp
-	arrival_scheduled_ms: UnixTimestamp
+	arrival_effective_ms: null | UnixMilliseconds
+	arrival_estimated_ms: null | UnixMilliseconds
+	arrival_scheduled_ms: UnixMilliseconds
 	color: string
 	headsign: string
 	is_past: boolean
@@ -41,7 +41,7 @@ export interface StopsDetailViewTimetableData {
 }
 
 interface HubEtaByStop {
-	eta_at: null | UnixTimestamp
+	eta_at: null | UnixMilliseconds
 	eta_seconds: null | number
 	position_created_at: null | string
 	stop_id: string
@@ -55,11 +55,11 @@ interface StopsDetailContextState {
 		setActiveTripId: (tripId: string) => void
 	}
 	data: {
-		active_alerts: HubAlert[]
-		highlighted_pattern: HubPattern
+		active_alerts: HubV1ApiAlert[]
+		highlighted_pattern: HubV1ApiPattern
 		highlighted_shape: HubShape
 		highlighted_trip_id: string
-		lines: HubLine[]
+		lines: HubV1ApiLine[]
 		stop: HubV1ApiStop
 		timetable: StopsDetailViewTimetableData[]
 	}
@@ -97,8 +97,8 @@ export const StopsDetailContextProvider = ({ children, stopId }: { children: Rea
 	const [dataActiveStopIdState, setDataActiveStopIdState] = useState<string>(stopId);
 	const [isLoading, setIsLoading] = useState<boolean>(false);
 	const [currentTimestamp, setCurrentTimestamp] = useState(() => Dates.now('Europe/Lisbon').unix_timestamp);
-	const [associatedPatternsData, setAssociatedPatternsData] = useState<HubPattern[][]>();
-	const [highlightedPattern, setHighlightedPattern] = useState<HubPattern>();
+	const [associatedPatternsData, setAssociatedPatternsData] = useState<HubV1ApiPattern[][]>();
+	const [highlightedPattern, setHighlightedPattern] = useState<HubV1ApiPattern>();
 	const [highlightedShape, setHighlightedShape] = useState<HubShape>();
 	const [highlightedTripId, setHighlightedTripId] = useState<string>();
 
@@ -244,7 +244,7 @@ export const StopsDetailContextProvider = ({ children, stopId }: { children: Rea
 					// Set a unique and stable ID for this arrival data
 					const uniqueIdValueForArrivalData = `${operationalDateContext.data.selected_date.operational_date}-${patternData.version_id}-${tripData.version_id}-${stopTime.stop_id}-${stopTime.stop_sequence}-${stopTime.arrival_time}`;
 					// Convert GTFS time string to Unix Timestamp
-					const scheduledArrivalMs = convertGTFSTimeStringAndOperationalDateToUnixTimestamp(stopTime.arrival_time, operationalDateContext.data.selected_date.operational_date);
+					const scheduledArrivalMs = convertGTFSTimeStringAndOperationalDateToUnixMilliseconds(stopTime.arrival_time, operationalDateContext.data.selected_date.operational_date);
 					// Fetch ETA for this trip and stop, if available.
 					const eta = operationalDateContext.flags.is_today_selected
 						? etaData?.find(eta => eta.trip_id.substring(eta.trip_id.indexOf(']') + 1) === tripData.trip_ids.find(tripId => tripId.substring(tripId.indexOf(']') + 1) === eta.trip_id.substring(eta.trip_id.indexOf(']') + 1))?.substring(eta.trip_id.indexOf(']') + 1))

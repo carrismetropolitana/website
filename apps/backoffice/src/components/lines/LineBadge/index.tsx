@@ -4,7 +4,7 @@
 
 import { useLinesContext } from '@/contexts/Lines.context';
 import { IconInfoTriangleFilled } from '@tabler/icons-react';
-import { type HubLine } from '@tmlmobilidade/go-types-hub';
+import { type HubV1ApiLine } from '@tmlmobilidade/go-types-hub';
 import classNames from 'classnames/bind';
 
 import styles from './styles.module.css';
@@ -14,7 +14,7 @@ import styles from './styles.module.css';
 interface Props {
 	as?: 'div' | 'span'
 	color?: string
-	lineData?: HubLine
+	lineData?: HubV1ApiLine
 	lineId?: string
 	onClick?: () => void
 	shortName?: string

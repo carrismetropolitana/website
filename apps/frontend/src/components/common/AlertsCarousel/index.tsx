@@ -2,12 +2,12 @@
 
 import { AlertsCarouselSlide } from '@/components/common/AlertsCarouselSlide';
 import Carousel from '@/components/common/Carousel';
-import { type HubAlert } from '@tmlmobilidade/go-types-hub';
+import { type HubV1ApiAlert } from '@tmlmobilidade/go-types-hub';
 
 /* * */
 
 interface Props {
-	alerts: HubAlert[]
+	alerts: HubV1ApiAlert[]
 	target?: '_blank' | '_self'
 }
 

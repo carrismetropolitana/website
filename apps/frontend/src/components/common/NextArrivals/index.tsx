@@ -52,11 +52,11 @@ export function NextArrivals({ allowPastArrivals = true, arrivals, status, withI
 			const nowInSeconds = DateTime.now().toSeconds();
 			const allFormattedArrivalsResult: NextArrival[] = [];
 			//
-			for (const unixTimestamp of arrivals) {
+			for (const UnixMilliseconds of arrivals) {
 				// Check if arrival is in the past
-				if (!allowPastArrivals && unixTimestamp < nowInSeconds) continue;
+				if (!allowPastArrivals && UnixMilliseconds < nowInSeconds) continue;
 				// Prepare the time values
-				const secondsUntilArrival = Math.floor(unixTimestamp - nowInSeconds);
+				const secondsUntilArrival = Math.floor(UnixMilliseconds - nowInSeconds);
 				const minutesUntilArrival = Math.floor(secondsUntilArrival / 60);
 				const hoursUntilArrival = Math.floor(minutesUntilArrival / 60);
 
@@ -80,7 +80,7 @@ export function NextArrivals({ allowPastArrivals = true, arrivals, status, withI
 						estimated_arrival_hours: hoursUntilArrival,
 						estimated_arrival_minutes: minutesUntilArrival,
 						estimated_arrival_seconds: secondsUntilArrival,
-						estimated_arrival_unix: unixTimestamp,
+						estimated_arrival_unix: UnixMilliseconds,
 						label: labelResult.trim(),
 					});
 				}
@@ -92,8 +92,8 @@ export function NextArrivals({ allowPastArrivals = true, arrivals, status, withI
 						estimated_arrival_hours: hoursUntilArrival,
 						estimated_arrival_minutes: minutesUntilArrival,
 						estimated_arrival_seconds: secondsUntilArrival,
-						estimated_arrival_unix: unixTimestamp,
-						label: DateTime.fromSeconds(unixTimestamp).toFormat('HH:mm'),
+						estimated_arrival_unix: UnixMilliseconds,
+						label: DateTime.fromSeconds(UnixMilliseconds).toFormat('HH:mm'),
 					});
 				}
 			}

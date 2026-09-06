@@ -1,7 +1,7 @@
 /* * */
 
 import { EntitySelector, TimeRange, TranslatedImage, TranslatedString } from '@/types/gtfsrt.types.js';
-import { type HubAlert } from '@tmlmobilidade/go-types-hub';
+import { type HubV1ApiAlert } from '@tmlmobilidade/go-types-hub';
 
 /* * */
 
@@ -85,7 +85,7 @@ export interface SimplifiedAlert {
 /* * */
 
 export interface AlertGroupByDate {
-	items: HubAlert[]
+	items: HubV1ApiAlert[]
 	label?: string
 	title: string
 	value: string

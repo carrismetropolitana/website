@@ -1,14 +1,14 @@
 /* * */
 
 import { CopyBadge } from '@/components/common/CopyBadge';
-import { type HubPattern } from '@tmlmobilidade/go-types-hub';
+import { type HubV1ApiPattern } from '@tmlmobilidade/go-types-hub';
 
 import styles from './styles.module.css';
 
 /* * */
 
 interface Props {
-	activePattern: HubPattern | null
+	activePattern: HubV1ApiPattern | null
 	lineColor: string
 	totalStops: number | undefined
 }

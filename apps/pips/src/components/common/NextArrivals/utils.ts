@@ -25,10 +25,10 @@ interface ComputeFormattedArrivalsArgs {
 export function computeFormattedArrivals({ allowPastArrivals, arrivals, nowInSeconds, status, t }: ComputeFormattedArrivalsArgs) {
 	const result: FormattedArrival[] = [];
 
-	for (const unixTimestamp of arrivals) {
-		if (!allowPastArrivals && unixTimestamp < nowInSeconds) continue;
+	for (const UnixMilliseconds of arrivals) {
+		if (!allowPastArrivals && UnixMilliseconds < nowInSeconds) continue;
 
-		const secondsUntilArrival = Math.floor(unixTimestamp - nowInSeconds);
+		const secondsUntilArrival = Math.floor(UnixMilliseconds - nowInSeconds);
 		const minutesUntilArrival = Math.floor(secondsUntilArrival / 60);
 		const hoursUntilArrival = Math.floor(minutesUntilArrival / 60);
 
@@ -49,7 +49,7 @@ export function computeFormattedArrivals({ allowPastArrivals, arrivals, nowInSec
 				estimated_arrival_hours: hoursUntilArrival,
 				estimated_arrival_minutes: minutesUntilArrival,
 				estimated_arrival_seconds: secondsUntilArrival,
-				estimated_arrival_unix: unixTimestamp,
+				estimated_arrival_unix: UnixMilliseconds,
 				label: label.trim(),
 			});
 		}
@@ -59,8 +59,8 @@ export function computeFormattedArrivals({ allowPastArrivals, arrivals, nowInSec
 				estimated_arrival_hours: hoursUntilArrival,
 				estimated_arrival_minutes: minutesUntilArrival,
 				estimated_arrival_seconds: secondsUntilArrival,
-				estimated_arrival_unix: unixTimestamp,
-				label: DateTime.fromSeconds(unixTimestamp).toFormat('HH:mm'),
+				estimated_arrival_unix: UnixMilliseconds,
+				label: DateTime.fromSeconds(UnixMilliseconds).toFormat('HH:mm'),
 			});
 		}
 	}

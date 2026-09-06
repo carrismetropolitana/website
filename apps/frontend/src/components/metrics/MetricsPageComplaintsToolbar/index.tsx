@@ -4,7 +4,7 @@
 
 import { Section } from '@/components/layout/Section';
 import { Select, Text } from '@mantine/core';
-import { type HubLine } from '@tmlmobilidade/go-types-hub';
+import { type HubV1ApiLine } from '@tmlmobilidade/go-types-hub';
 import { useTranslations } from 'next-intl';
 import { useState } from 'react';
 
@@ -13,7 +13,7 @@ import styles from './styles.module.css';
 /* * */
 
 interface Props {
-	allLines: HubLine[]
+	allLines: HubV1ApiLine[]
 	filter_type: (value) => void
 	filter_value: (value) => void
 }

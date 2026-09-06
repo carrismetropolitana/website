@@ -3,7 +3,7 @@
 /* * */
 
 import type { AlertCause, AlertEffect } from '@/types/alerts.types.js';
-import type { HubAlert } from '@tmlmobilidade/go-types-hub';
+import type { HubV1ApiAlert } from '@tmlmobilidade/go-types-hub';
 
 import { normalizeReferenceId } from '@/utils/alerts';
 import { DateTime } from 'luxon';
@@ -32,8 +32,8 @@ interface AlertsListContextState {
 		}
 	}
 	data: {
-		filtered: HubAlert[]
-		raw: HubAlert[]
+		filtered: HubV1ApiAlert[]
+		raw: HubV1ApiAlert[]
 	}
 	filters: {
 		by_date: 'current' | 'future' | 'map'
@@ -69,7 +69,7 @@ export const AlertsListContextProvider = ({ children }) => {
 	//
 	// A. Setup variables
 
-	const [dataFilteredState, setDataFilteredState] = useState<HubAlert[]>([]);
+	const [dataFilteredState, setDataFilteredState] = useState<HubV1ApiAlert[]>([]);
 
 	const [filterByDateState, setFilterByDateState] = useState <AlertsListContextState['filters']['by_date']>('current');
 	const [filterByLineIdState, setFilterByLineIdState] = useQueryState('line_id');
@@ -109,7 +109,7 @@ export const AlertsListContextProvider = ({ children }) => {
 	const applyFiltersToData = () => {
 		//
 
-		let filterResult: HubAlert[] = allAlertsData || [];
+		let filterResult: HubV1ApiAlert[] = allAlertsData || [];
 
 		//
 		// Filter by_date

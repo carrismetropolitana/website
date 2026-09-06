@@ -2,7 +2,7 @@
 
 /* * */
 
-import type { HubLine } from '@tmlmobilidade/go-types-hub';
+import type { HubV1ApiLine } from '@tmlmobilidade/go-types-hub';
 
 import { LineDisplay } from '@/components/lines/LineDisplay';
 import { useProfileContext } from '@/contexts/Profile.context';
@@ -18,7 +18,7 @@ import styles from './styles.module.css';
 /* * */
 
 interface SelectLineProps {
-	data: HubLine[]
+	data: HubV1ApiLine[]
 	label?: string
 	nothingFound?: string
 	onSelectLineId: (lineId: null | string) => void

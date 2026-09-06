@@ -1,4 +1,4 @@
-import type { HubAlert } from '@tmlmobilidade/go-types-hub';
+import type { HubV1ApiAlert } from '@tmlmobilidade/go-types-hub';
 
 /* * */
 
@@ -6,7 +6,7 @@ export function normalizeReferenceId(referenceId: null | number | string | undef
 	return String(referenceId ?? '').trim().replace(/^\[[^\]]+\]/, '');
 }
 
-export function getCauseSeverityLevel(cause?: HubAlert['cause']): number {
+export function getCauseSeverityLevel(cause?: HubV1ApiAlert['cause']): number {
 	switch (cause) {
 		case 'ABUSIVE_PARKING':
 		case 'ACCIDENT':
@@ -30,7 +30,7 @@ export function getCauseSeverityLevel(cause?: HubAlert['cause']): number {
 	}
 }
 
-export function getEffectSeverityLevel(effect?: HubAlert['effect']): number {
+export function getEffectSeverityLevel(effect?: HubV1ApiAlert['effect']): number {
 	switch (effect) {
 		case 'ACCESSIBILITY_ISSUE':
 		case 'MODIFIED_SERVICE':

@@ -8,7 +8,7 @@ import { useStopsContext } from '@/contexts/Stops.context';
 import { formatStopLocation } from '@/utils/formatStopLocation';
 import { ComboboxItem, ComboboxItemGroup, Flex, Group, Select, SelectProps, Text } from '@mantine/core';
 import { IconAlertTriangle } from '@tabler/icons-react';
-import { type HubPattern } from '@tmlmobilidade/go-types-hub';
+import { type HubV1ApiPattern } from '@tmlmobilidade/go-types-hub';
 import { useTranslations } from 'next-intl';
 import { useMemo } from 'react';
 
@@ -16,7 +16,7 @@ import { useMemo } from 'react';
 
 export interface Props extends SelectProps {
 	date_filter?: string
-	patterns: HubPattern[]
+	patterns: HubV1ApiPattern[]
 }
 
 interface CustomComboboxItem extends ComboboxItem {
@@ -26,7 +26,7 @@ interface CustomComboboxItem extends ComboboxItem {
 
 const PLACEHOLDER_HEADSIGN = 'HeadSign to be defined';
 
-function getPatternTitle(pattern: HubPattern, routeLongName?: string) {
+function getPatternTitle(pattern: HubV1ApiPattern, routeLongName?: string) {
 	if (pattern.headsign && pattern.headsign !== PLACEHOLDER_HEADSIGN) {
 		return pattern.headsign;
 	}

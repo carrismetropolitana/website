@@ -5,7 +5,7 @@ import { useLinesContext } from '@/contexts/Lines.context';
 import { $createTextNode, $getSelection, $isRangeSelection } from '@payloadcms/richtext-lexical/lexical';
 import { useLexicalComposerContext } from '@payloadcms/richtext-lexical/lexical/react/LexicalComposerContext';
 import { LexicalTypeaheadMenuPlugin, MenuOption, type MenuRenderFn, type TriggerFn } from '@payloadcms/richtext-lexical/lexical/react/LexicalTypeaheadMenuPlugin';
-import { type HubLine } from '@tmlmobilidade/go-types-hub';
+import { type HubV1ApiLine } from '@tmlmobilidade/go-types-hub';
 import React, { useMemo, useState } from 'react';
 import * as ReactDOM from 'react-dom';
 
@@ -20,14 +20,14 @@ const MAX_QUERY_LENGTH = 50;
 /* * */
 
 class MentionOption extends MenuOption {
-	line: HubLine;
-	constructor(line: HubLine) {
+	line: HubV1ApiLine;
+	constructor(line: HubV1ApiLine) {
 		super(line._id);
 		this.line = line;
 	}
 }
 
-function getOptionLabel(line: HubLine) {
+function getOptionLabel(line: HubV1ApiLine) {
 	return line.short_name || line._id;
 }
 

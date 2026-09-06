@@ -2,7 +2,7 @@
 
 /* * */
 
-import type { HubLine } from '@tmlmobilidade/go-types-hub';
+import type { HubV1ApiLine } from '@tmlmobilidade/go-types-hub';
 
 import { useEnvironmentContext } from '@/contexts/Environment.context';
 import { useLinesContext } from '@/contexts/Lines.context';
@@ -26,9 +26,9 @@ interface LinesListContextState {
 		favorites: number
 	}
 	data: {
-		favorites: HubLine[]
-		filtered: HubLine[]
-		raw: HubLine[]
+		favorites: HubV1ApiLine[]
+		filtered: HubV1ApiLine[]
+		raw: HubV1ApiLine[]
 	}
 	filters: {
 		by_attribute: null | string
@@ -46,7 +46,7 @@ interface LinesListContextState {
 
 const LinesListContext = createContext<LinesListContextState | undefined>(undefined);
 
-const sortLinesByShortName = (lines: HubLine[]) => {
+const sortLinesByShortName = (lines: HubV1ApiLine[]) => {
 	return [...lines].sort((firstLine, secondLine) => firstLine.short_name.localeCompare(secondLine.short_name, undefined, { numeric: true }));
 };
 
@@ -72,8 +72,8 @@ export const LinesListContextProvider = ({ children }) => {
 	const analyticsContext = useAnalyticsContext();
 	const isMupi = environmentContext.data.value === 'mupi';
 
-	const [dataFilteredState, setDataFilteredState] = useState<HubLine[]>([]);
-	const [dataFavoritesState, setDataFavoritesState] = useState<HubLine[]>([]);
+	const [dataFilteredState, setDataFilteredState] = useState<HubV1ApiLine[]>([]);
+	const [dataFavoritesState, setDataFavoritesState] = useState<HubV1ApiLine[]>([]);
 
 	const [filterByAttributeState, setFilterByAttributeState] = useState <LinesListContextState['filters']['by_attribute']>(null);
 	const [filterByCurrentViewState, setFilterByCurrentViewState] = useState <LinesListContextState['filters']['by_current_view']>('all');
@@ -84,7 +84,7 @@ export const LinesListContextProvider = ({ children }) => {
 	//
 	// C. Transform data
 
-	const applyFiltersToData = (allData: HubLine[] = []) => {
+	const applyFiltersToData = (allData: HubV1ApiLine[] = []) => {
 		//
 
 		let filterResult = allData;

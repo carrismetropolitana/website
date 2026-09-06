@@ -3,7 +3,7 @@
 /* * */
 
 import type { GoApiResponse } from '@carrismetropolitana/website-shared-types';
-import type { HubPattern } from '@tmlmobilidade/go-types-hub';
+import type { HubV1ApiPattern } from '@tmlmobilidade/go-types-hub';
 
 import { useAlertsContext } from '@/contexts/Alerts.context';
 import { useOperationalDateContext } from '@/contexts/OperationalDate.context';
@@ -11,7 +11,7 @@ import { useStopsPipContext } from '@/contexts/StopsPip.context';
 import { type Arrival } from '@/types/stops.types';
 import { normalizeReferenceId } from '@/utils/alerts';
 import { getPublicVariable } from '@carrismetropolitana/website-shared-settings';
-import { convertGTFSTimeStringAndOperationalDateToUnixTimestamp } from '@tmlmobilidade/utils';
+import { convertGTFSTimeStringAndOperationalDateToUnixMilliseconds } from '@tmlmobilidade/utils';
 import { DateTime } from 'luxon';
 import { createContext, type PropsWithChildren, useContext, useMemo } from 'react';
 import useSWR from 'swr';
@@ -93,14 +93,14 @@ export const PipsArrivalsContextProvider = ({ children }: PropsWithChildren) => 
 		const patternPromises = patternIdsFromUrl.map(async (patternId) => {
 			const response = await fetch(`${getPublicVariable('go_api_url')}/hub/api/v1/network/patterns/${encodeURIComponent(patternId)}`);
 			if (!response.ok) return [];
-			const payload = await response.json() as GoApiResponse<HubPattern[]>;
+			const payload = await response.json() as GoApiResponse<HubV1ApiPattern[]>;
 			return payload.data ?? [];
 		});
 
 		return (await Promise.all(patternPromises)).flat();
 	};
 
-	const { data: patternsData, isLoading: patternsLoading } = useSWR<HubPattern[]>(
+	const { data: patternsData, isLoading: patternsLoading } = useSWR<HubV1ApiPattern[]>(
 		patternIds.length > 0 ? `patterns-multi?patternIds=${patternIds.join(',')}` : null,
 		fetchPatterns,
 		{ refreshInterval: 900000 }, // 15 minutes
@@ -135,7 +135,7 @@ export const PipsArrivalsContextProvider = ({ children }: PropsWithChildren) => 
 					const isLastStop = stopTime.stop_sequence === patternData.path[patternData.path.length - 1].stop_sequence;
 					if (isLastStop) continue;
 
-					const scheduledArrivalMs = convertGTFSTimeStringAndOperationalDateToUnixTimestamp(stopTime.arrival_time, operationalDateContext.data.selected_date.operational_date);
+					const scheduledArrivalMs = convertGTFSTimeStringAndOperationalDateToUnixMilliseconds(stopTime.arrival_time, operationalDateContext.data.selected_date.operational_date);
 					const scheduledArrivalUnix = Math.floor(scheduledArrivalMs / 1000);
 					const eta = operationalDateContext.flags.is_today_selected
 						? etaData.find(item => item && tripData.trip_ids.includes(item.trip_id) && String(item.stop_id) === String(stopTime.stop_id))

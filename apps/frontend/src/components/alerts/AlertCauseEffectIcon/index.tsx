@@ -2,7 +2,7 @@
 
 import { getCauseSeverityLevel, getEffectSeverityLevel } from '@/utils/alerts';
 import { IconAccessible, IconAmbulance, IconArrowBigUpLines, IconBarrierBlock, IconCarCrash, IconCircleArrowDown, IconCircleMinus, IconClock2, IconClockExclamation, IconCloudStorm, IconFish, IconInfoTriangle, IconRoadOff, IconRouteAltRight, IconServerCog, IconSettings, IconSpeakerphone, IconTool, IconTrafficCone } from '@tabler/icons-react';
-import { type HubAlert } from '@tmlmobilidade/go-types-hub';
+import { type HubV1ApiAlert } from '@tmlmobilidade/go-types-hub';
 import { useTranslations } from 'next-intl';
 
 import styles from './styles.module.css';
@@ -10,7 +10,7 @@ import styles from './styles.module.css';
 /* * */
 
 interface AlertCauseIconProps {
-	cause?: HubAlert['cause']
+	cause?: HubV1ApiAlert['cause']
 	className?: string
 	size?: 'lg' | 'md'
 	withText?: boolean
@@ -18,7 +18,7 @@ interface AlertCauseIconProps {
 
 interface AlertEffectIconProps {
 	className?: string
-	effect?: HubAlert['effect']
+	effect?: HubV1ApiAlert['effect']
 	size?: 'lg' | 'md'
 	withText?: boolean
 }

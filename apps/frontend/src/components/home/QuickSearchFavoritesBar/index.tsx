@@ -2,7 +2,7 @@
 
 /* * */
 
-import type { HubLine } from '@tmlmobilidade/go-types-hub';
+import type { HubV1ApiLine } from '@tmlmobilidade/go-types-hub';
 
 import { Loader } from '@/components/common/Loader';
 import { LineBadge } from '@/components/lines/LineBadge';
@@ -24,7 +24,7 @@ const DISPLAY_LIMIT = 5;
 
 interface FavoriteItem {
 	has_alert: boolean
-	line: HubLine
+	line: HubV1ApiLine
 }
 
 /* * */

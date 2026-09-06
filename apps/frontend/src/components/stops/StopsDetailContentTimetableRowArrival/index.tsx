@@ -33,12 +33,12 @@ export function StopsDetailViewTimetableRowArrival({ data }: StopsDetailViewTime
 	useEffect(() => {
 		const formatArrivals = () => {
 			// Prepare the time values
-			const nowUnixTimestamp = Dates.now('Europe/Lisbon').unix_timestamp;
-			const relativeArrivalMs = data.arrival_effective_ms - nowUnixTimestamp;
+			const nowUnixMilliseconds = Dates.now('Europe/Lisbon').unix_timestamp;
+			const relativeArrivalMs = data.arrival_effective_ms - nowUnixMilliseconds;
 			// If arrival is in the past
 			if (relativeArrivalMs <= 0) {
 				const absoluteArrivalLabel = Dates
-					.fromUnixTimestamp(data.arrival_scheduled_ms)
+					.fromUnixMilliseconds(data.arrival_scheduled_ms)
 					.setZone('Europe/Lisbon', 'offset_only')
 					.toFormat('HH:mm');
 				setFormattedArrivalLabel(absoluteArrivalLabel);
@@ -61,7 +61,7 @@ export function StopsDetailViewTimetableRowArrival({ data }: StopsDetailViewTime
 			// If scheduled, format the arrival label as absolute HH:mm
 			if (!data.is_realtime) {
 				const absoluteArrivalLabel = Dates
-					.fromUnixTimestamp(data.arrival_scheduled_ms)
+					.fromUnixMilliseconds(data.arrival_scheduled_ms)
 					.setZone('Europe/Lisbon', 'offset_only')
 					.toFormat('HH:mm');
 				setFormattedArrivalLabel(absoluteArrivalLabel);

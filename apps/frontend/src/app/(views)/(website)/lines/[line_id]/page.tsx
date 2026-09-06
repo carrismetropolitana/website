@@ -5,7 +5,7 @@ import { LinesDetailContextProvider } from '@/contexts/LinesDetail.context';
 import { type ApiResponse } from '@carrismetropolitana/api-types/common';
 import { type Locality } from '@carrismetropolitana/api-types/locations';
 import { getPublicVariable } from '@carrismetropolitana/website-shared-settings';
-import { type HubLine } from '@tmlmobilidade/go-types-hub';
+import { type HubV1ApiLine } from '@tmlmobilidade/go-types-hub';
 import { type Metadata } from 'next';
 
 /* * */
@@ -22,7 +22,7 @@ export async function generateMetadata({ params }): Promise<Metadata> {
 	//
 	// B. Fetch data
 
-	let allLinesData: HubLine[] | null = null;
+	let allLinesData: HubV1ApiLine[] | null = null;
 	let fetchedLocalitiesData: ApiResponse<Locality[]> | null = null;
 	try {
 		const [allLinesResponse, fetchedLocalitiesResponse] = await Promise.all([
@@ -31,7 +31,7 @@ export async function generateMetadata({ params }): Promise<Metadata> {
 		]);
 		if (!allLinesResponse.ok || !fetchedLocalitiesResponse.ok) throw new Error('Failed to fetch lines or localities');
 		const [allLinesResponseData, fetchedLocalitiesResponseData] = await Promise.all([
-			allLinesResponse.json() as Promise<{ data: HubLine[] }>,
+			allLinesResponse.json() as Promise<{ data: HubV1ApiLine[] }>,
 			fetchedLocalitiesResponse.json(),
 		]);
 		allLinesData = allLinesResponseData.data;
