@@ -18,6 +18,7 @@ import { centerMap, getBaseGeoJsonFeatureCollection } from '@/utils/map.utils';
 import { getPublicVariable } from '@carrismetropolitana/website-shared-settings';
 import { IconAlertTriangle } from '@tabler/icons-react';
 import { HubV1ApiPattern } from '@tmlmobilidade/go-types-hub';
+import { fromEncodedPolylineToGeoJsonLineString } from '@tmlmobilidade/go-utils-geo';
 import { useMap } from '@vis.gl/react-maplibre';
 import { Feature, LineString } from 'geojson';
 import { useTranslations } from 'next-intl';
@@ -75,6 +76,13 @@ export function VehiclesListMap() {
 
 			const activePatternVersion = fetchedPatternData.find(item => item.valid_on?.includes(operationalDate)) ?? fetchedPatternData[0];
 			setActivePatternData(activePatternVersion);
+			// Convert the encoded polyline to a GeoJSON LineString
+			const polyline = fromEncodedPolylineToGeoJsonLineString(activePatternVersion.shape_polyline);
+			setActiveShapeData({
+				geometry: polyline,
+				properties: { color: activePatternVersion.color },
+				type: 'Feature',
+			});
 		})();
 	}, [operationalDateContext.data.selected_date, vehiclesListContext.data.selected]);
 
