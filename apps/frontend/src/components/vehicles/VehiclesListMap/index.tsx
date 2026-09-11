@@ -57,7 +57,7 @@ export function VehiclesListMap() {
 
 	useEffect(() => {
 		(async () => {
-			if (!vehiclesListContext.data.selected?.shape_id) {
+			if (!vehiclesListContext.data.selected?.pattern_id) {
 				setActivePatternData(undefined);
 				return;
 			}
@@ -65,7 +65,7 @@ export function VehiclesListMap() {
 			const operationalDate = operationalDateContext.data.selected_date?.operational_date_int;
 			if (!operationalDate) return;
 
-			const fetchedPatternResponse = await fetch(`${getPublicVariable('go_api_url')}/hub/api/v1/network/patterns/${encodeURIComponent(vehiclesListContext.data.selected.shape_id)}`);
+			const fetchedPatternResponse = await fetch(`${getPublicVariable('go_api_url')}/hub/api/v1/network/patterns/${encodeURIComponent(vehiclesListContext.data.selected.pattern_id)}`);
 
 			const fetchedPatternResponseData: { data?: HubV1ApiPattern[] } = await fetchedPatternResponse.json();
 			const fetchedPatternData = fetchedPatternResponseData.data;

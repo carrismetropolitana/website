@@ -15,6 +15,7 @@ import { type GoApiResponse } from '@carrismetropolitana/website-shared-types';
 import { type HubV1ApiAlert, type HubV1ApiLine, type HubV1ApiPattern, type HubV1ApiStop } from '@tmlmobilidade/go-types-hub';
 import { OperationalDate, type UnixMilliseconds } from '@tmlmobilidade/go-types-shared';
 import { Dates } from '@tmlmobilidade/go-utils-dates';
+import { fromEncodedPolylineToGeoJsonLineString } from '@tmlmobilidade/go-utils-geo';
 import { convertGTFSTimeStringAndOperationalDateToUnixMilliseconds } from '@tmlmobilidade/utils';
 import { Feature, LineString } from 'geojson';
 import { notFound } from 'next/navigation';
@@ -102,7 +103,6 @@ export const StopsDetailContextProvider = ({ children, stopId }: { children: Rea
 	const [currentTimestamp, setCurrentTimestamp] = useState(() => Dates.now('Europe/Lisbon').unix_milliseconds);
 	const [associatedPatternsData, setAssociatedPatternsData] = useState<HubV1ApiPattern[][]>();
 	const [highlightedPattern, setHighlightedPattern] = useState<HubV1ApiPattern>();
-	const [highlightedShape, setHighlightedShape] = useState<Feature<LineString>>();
 	const [highlightedTripId, setHighlightedTripId] = useState<string>();
 
 	//
@@ -262,6 +262,18 @@ export const StopsDetailContextProvider = ({ children, stopId }: { children: Rea
 		return () => clearInterval(interval);
 	}, [operationalDateContext.flags.is_today_selected]);
 
+	const activeShapeGeojson = useMemo(() => {
+		const collection: GeoJSON.Feature<LineString> = { geometry: { coordinates: [], type: 'LineString' }, properties: { color: '', text_color: '' }, type: 'Feature' };
+		if (!highlightedPattern?.shape_polyline) return collection;
+		const shapeGeojson = fromEncodedPolylineToGeoJsonLineString(highlightedPattern.shape_polyline);
+		collection.geometry = shapeGeojson;
+		collection.properties = {
+			color: highlightedPattern.color,
+			text_color: highlightedPattern.text_color,
+		};
+		return collection;
+	}, [highlightedPattern]);
+
 	//
 	// D. Handle actions
 
@@ -279,7 +291,6 @@ export const StopsDetailContextProvider = ({ children, stopId }: { children: Rea
 
 	const resetActiveTripId = () => {
 		setHighlightedPattern(undefined);
-		setHighlightedShape(undefined);
 		setHighlightedTripId(undefined);
 	};
 
@@ -318,7 +329,7 @@ export const StopsDetailContextProvider = ({ children, stopId }: { children: Rea
 		data: {
 			active_alerts: activeAlertsData,
 			highlighted_pattern: highlightedPattern,
-			highlighted_shape: highlightedShape,
+			highlighted_shape: activeShapeGeojson,
 			highlighted_trip_id: highlightedTripId,
 			lines: associatedLinesData,
 			stop: selectedStopData,

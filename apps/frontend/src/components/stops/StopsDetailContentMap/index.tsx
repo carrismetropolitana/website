@@ -53,10 +53,6 @@ export function StopsDetailContentMap() {
 		return collection;
 	}, [stopsContext.actions, stopsDetailContext.data.highlighted_pattern]);
 
-	const activePathShapeGeoJson = useMemo(() => {
-		return stopsDetailContext.data.highlighted_shape;
-	}, [stopsDetailContext.data.highlighted_shape]);
-
 	const activeVehicleGeoJson = useMemo<GeoJSON.FeatureCollection<GeoJSON.Point> | undefined>(() => {
 		if (!stopsDetailContext.data.highlighted_trip_id) return;
 		return vehiclesContext.actions.getVehiclesByTripIdGeoJsonFC(stopsDetailContext.data.highlighted_trip_id) as GeoJSON.FeatureCollection<GeoJSON.Point> | undefined;
@@ -121,7 +117,7 @@ export function StopsDetailContentMap() {
 
 			<MapViewStylePath
 				presentBeforeId={MapViewStyleActiveStopsPrimaryLayerId}
-				shapeData={activePathShapeGeoJson}
+				shapeData={stopsDetailContext.data.highlighted_shape}
 				waypointsData={activePathWaypointsGeoJson}
 			/>
 
