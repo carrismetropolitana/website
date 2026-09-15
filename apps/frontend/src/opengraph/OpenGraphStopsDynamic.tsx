@@ -3,14 +3,14 @@
 import CMetropolitanaLogoLight from '@/components/common/CMetropolitanaLogoLight';
 import FacilityIcon from '@/components/facilities/FacilityIcon';
 import { cutStringAtLength } from '@/utils/cut-string-at-length';
-import { Line } from '@carrismetropolitana/api-types/network';
+import { type HubV1ApiLine } from '@tmlmobilidade/go-types-hub';
 
 /* * */
 
 interface Props {
 	facilities: string[]
 	id: string
-	lines: Line[]
+	lines: HubV1ApiLine[]
 	location: string | undefined
 	name: string
 }
@@ -93,7 +93,7 @@ export function OpenGraphStopsDynamic({ facilities, id, lines, location, name }:
 				)}
 				<div style={{ alignItems: 'center', display: 'flex', flexDirection: 'row', gap: 25, justifyContent: 'flex-start' }}>
 					{lines.slice(0, availableSlotsForLines).map(item => (
-						<div key={item.id} style={{ alignItems: 'center', backgroundColor: item.color, borderRadius: 999, color: item.text_color, display: 'flex', fontSize: 50, fontWeight: 700, height: 68, justifyContent: 'center', lineHeight: 1, paddingTop: 4, textAlign: 'center', width: 195 }}>
+						<div key={item._id} style={{ alignItems: 'center', backgroundColor: item.color, borderRadius: 999, color: item.text_color, display: 'flex', fontSize: 50, fontWeight: 700, height: 68, justifyContent: 'center', lineHeight: 1, paddingTop: 4, textAlign: 'center', width: 195 }}>
 							{item.short_name}
 						</div>
 					))}

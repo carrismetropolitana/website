@@ -2,10 +2,7 @@
 
 import { LinesDetail } from '@/components/lines/LinesDetail';
 import { LinesDetailContextProvider } from '@/contexts/LinesDetail.context';
-import { type ApiResponse } from '@carrismetropolitana/api-types/common';
-import { type Locality } from '@carrismetropolitana/api-types/locations';
-import { getPublicVariable } from '@carrismetropolitana/website-shared-settings';
-import { type HubV1ApiLine } from '@tmlmobilidade/go-types-hub';
+import { fetchGoLine } from '@/utils/go-api.server';
 import { type Metadata } from 'next';
 
 /* * */
@@ -19,48 +16,30 @@ export async function generateMetadata({ params }): Promise<Metadata> {
 	const { line_id } = await params;
 	const lineId = decodeURIComponent(line_id);
 
+	const fallbackMetadata: Metadata = {
+		description: `Horarios planeados e em tempo real da linha ${lineId}.`,
+		title: `Linha ${lineId}`,
+	};
+
 	//
 	// B. Fetch data
+	// Only this line is fetched. Never fetch the full lines or
+	// localities collections here, as this runs on every request.
 
-	let allLinesData: HubV1ApiLine[] | null = null;
-	let fetchedLocalitiesData: ApiResponse<Locality[]> | null = null;
-	try {
-		const [allLinesResponse, fetchedLocalitiesResponse] = await Promise.all([
-			fetch(`${getPublicVariable('go_api_url')}/hub/api/v1/network/lines`),
-			fetch(`${getPublicVariable('api_url')}/locations/localities`),
-		]);
-		if (!allLinesResponse.ok || !fetchedLocalitiesResponse.ok) throw new Error('Failed to fetch lines or localities');
-		const [allLinesResponseData, fetchedLocalitiesResponseData] = await Promise.all([
-			allLinesResponse.json() as Promise<{ data: HubV1ApiLine[] }>,
-			fetchedLocalitiesResponse.json(),
-		]);
-		allLinesData = allLinesResponseData.data;
-		fetchedLocalitiesData = fetchedLocalitiesResponseData;
-	}
-	catch {
-		return {
-			description: `Horarios planeados e em tempo real da linha ${lineId}.`,
-			title: `Linha ${lineId}`,
-		};
-	}
-	const allLocalitiesData: Locality[] = fetchedLocalitiesData.status === 'success' ? fetchedLocalitiesData.data : [];
+	const lineData = await fetchGoLine(lineId);
+	if (!lineData) return fallbackMetadata;
 
 	//
 	// C. Transform data
 
-	const lineData = allLinesData.find(item => item._id === lineId);
-
-	const goesTroughString = allLocalitiesData
-		.filter(item => lineData?.locality_ids?.includes(item.id))
-		.map(item => item.name)
-		.join(', ');
+	const goesTroughString = (lineData.locality_names ?? []).join(', ');
 
 	//
 	// D. Render components
 
 	return {
-		description: lineData ? `Horários planeados e em tempo real da linha ${lineData.short_name}. Esta linha passa por ${goesTroughString}.` : `Horarios planeados e em tempo real da linha ${lineId}.`,
-		title: lineData ? `${lineData.short_name} | ${lineData.long_name}` : `Linha ${lineId}`,
+		description: `Horários planeados e em tempo real da linha ${lineData.short_name}. Esta linha passa por ${goesTroughString}.`,
+		title: `${lineData.short_name} | ${lineData.long_name}`,
 	};
 
 	//

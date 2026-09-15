@@ -2,8 +2,7 @@
 
 import { StopsDetail } from '@/components/stops/StopsDetail';
 import { StopsDetailContextProvider } from '@/contexts/StopsDetail.context';
-import { type Line, type Stop } from '@carrismetropolitana/api-types/network';
-import { getPublicVariable } from '@carrismetropolitana/website-shared-settings';
+import { fetchGoLines, fetchGoStop } from '@/utils/go-api.server';
 import { type Metadata } from 'next';
 
 /* * */
@@ -16,45 +15,32 @@ export async function generateMetadata({ params }): Promise<Metadata> {
 
 	const { stop_id } = await params;
 
+	const fallbackMetadata: Metadata = {
+		description: `Horarios planeados e em tempo real na paragem #${stop_id}.`,
+		title: `Paragem ${stop_id}`,
+	};
+
 	//
 	// B. Fetch data
+	// Only this stop and its lines are fetched. Never fetch the full
+	// stops or lines collections here, as this runs on every request.
 
-	let allStopsData: null | Stop[] = null;
-	let allLinesData: Line[] | null = null;
-	try {
-		const [allStopsResponse, allLinesResponse] = await Promise.all([
-			fetch(`${getPublicVariable('api_url')}/stops`),
-			fetch(`${getPublicVariable('api_url')}/lines`),
-		]);
-		if (!allStopsResponse.ok || !allLinesResponse.ok) throw new Error('Failed to fetch stops or lines');
-		[allStopsData, allLinesData] = await Promise.all([
-			allStopsResponse.json(),
-			allLinesResponse.json(),
-		]);
-	}
-	catch {
-		return {
-			description: `Horarios planeados e em tempo real na paragem #${stop_id}.`,
-			title: `Paragem ${stop_id}`,
-		};
-	}
+	const stopData = await fetchGoStop(stop_id);
+	if (!stopData) return fallbackMetadata;
+
+	const linesData = await fetchGoLines(stopData.line_ids ?? []);
 
 	//
 	// C. Transform data
 
-	const stopData = allStopsData.find(item => item.id === stop_id);
-	const linesAtThisStopString = allLinesData
-		.filter(item => stopData?.line_ids.includes(item.id))
-		.sort((a, b) => a.id.localeCompare(b.id))
-		.map(item => item.short_name)
-		.join(', ');
+	const linesAtThisStopString = linesData.map(item => item.short_name).join(', ');
 
 	//
 	// D. Render components
 
 	return {
-		description: `Horários planeados e em tempo real na paragem #${stopData?.id}. Nesta paragem passam as linhas ${linesAtThisStopString}.`,
-		title: stopData?.long_name,
+		description: `Horários planeados e em tempo real na paragem #${stopData._id}. Nesta paragem passam as linhas ${linesAtThisStopString}.`,
+		title: stopData.name,
 	};
 
 	//
