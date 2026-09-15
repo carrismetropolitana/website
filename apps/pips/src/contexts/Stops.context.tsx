@@ -57,21 +57,20 @@ export const StopsContextProvider = ({ children }) => {
 	// C. Filter data
 
 	const stopAgencyIdsByLinePrefix = useMemo(() => {
-		return new Map(CARRIS_METROPOLITANA_AGENCY_IDS.map(agencyId => [agencyId.slice(-1), agencyId]));
+		return new Map<string, string>(CARRIS_METROPOLITANA_AGENCY_IDS.map(agencyId => [agencyId.slice(-1), agencyId]));
 	}, []);
 
-	const getStopAgencyIds = useCallback((stopData: HubV1ApiStop) => {
-		const normalizedStopData = stopData as HubV1ApiStop & {
+	const getStopAgencyIds = useCallback((stopData: HubV1ApiStop): string | string[] => {
+		const legacyStopData = stopData as HubV1ApiStop & {
 			agency_id?: string
-			agency_ids?: string[]
 			lines?: string[]
 		};
 
-		if (normalizedStopData.agency_ids?.length) return normalizedStopData.agency_ids;
-		if (normalizedStopData.agency_id) return normalizedStopData.agency_id;
+		if (stopData.agency_ids.length) return stopData.agency_ids;
+		if (legacyStopData.agency_id) return legacyStopData.agency_id;
 
-		const lineIds = stopData.line_ids || normalizedStopData.lines || [];
-		return lineIds.flatMap((lineId) => {
+		const lineIds: string[] = stopData.line_ids.length ? stopData.line_ids : (legacyStopData.lines ?? []);
+		return lineIds.flatMap((lineId): string[] => {
 			const agencyId = stopAgencyIdsByLinePrefix.get(lineId.at(0) ?? '');
 			return agencyId ? [agencyId] : [];
 		});
