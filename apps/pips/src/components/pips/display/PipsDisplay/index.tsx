@@ -4,8 +4,7 @@
 
 /* * */
 
-import { PipsArrivalsTable } from '@/components/pips/display/PipsArrivalsTable';
-import { PipsArrivalsContextProvider } from '@/contexts/PipsArrivals.context';
+import { PipsArrivalsPanel } from '@/components/pips/display/PipsArrivalsPanel';
 import { useStopsPipContext } from '@/contexts/StopsPip.context';
 
 import styles from './styles.module.css';
@@ -48,11 +47,7 @@ export function PipsDisplay() {
 				<div className={styles.canvas} style={canvasStyle}>
 					<div className={styles.content}>
 						<PipsHeader />
-						<PipsArrivalsContextProvider>
-							<div className={styles.tableViewport}>
-								<PipsArrivalsTable />
-							</div>
-						</PipsArrivalsContextProvider>
+						<PipsArrivalsPanel />
 					</div>
 				</div>
 			</div>

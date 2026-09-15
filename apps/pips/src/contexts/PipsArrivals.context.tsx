@@ -14,7 +14,7 @@ import { getPublicVariable } from '@carrismetropolitana/website-shared-settings'
 import { OperationalTime } from '@tmlmobilidade/go-types-shared';
 import { fromOperationalTimeAndOperationalDateToUnixMilliseconds } from '@tmlmobilidade/utils';
 import { DateTime } from 'luxon';
-import { createContext, type PropsWithChildren, useContext, useMemo } from 'react';
+import { createContext, type PropsWithChildren, useCallback, useContext, useMemo } from 'react';
 import useSWR from 'swr';
 
 /* * */
@@ -111,7 +111,10 @@ export const PipsArrivalsContextProvider = ({ children }: PropsWithChildren) => 
 		stopIds.length > 0 ? `${getPublicVariable('go_api_url')}/hub/api/v1/realtime/eta` : null,
 		{ refreshInterval: 30000 }, // 30 seconds
 	);
-	const etaData = Array.isArray(etaResponse?.data) ? etaResponse.data : [];
+	const etaData = useMemo(
+		() => (Array.isArray(etaResponse?.data) ? etaResponse.data : []),
+		[etaResponse?.data],
+	);
 
 	const mergedArrivals = useMemo<MergedArrival[]>(() => {
 		if (!patternsData || !stopsPipContext.data.stops.length || !operationalDateContext.data.selected_date) return [];
@@ -213,24 +216,30 @@ export const PipsArrivalsContextProvider = ({ children }: PropsWithChildren) => 
 			.slice(0, 50); // Limit to first 50 arrivals
 
 		return futureArrivals;
-	}, [patternsData, stopsPipContext.data.stops, operationalDateContext.data.selected_date, operationalDateContext.flags.is_today_selected, stopIds, etaData, alertsContext.actions]);
+	}, [patternsData, stopsPipContext.data.stops, operationalDateContext.data.selected_date, operationalDateContext.flags.is_today_selected, stopIds, etaData, alertsContext.data.alerts]);
 
 	//
 	// D. Define context value
 
+	const revalidate = useCallback(() => {
+		void revalidateEta();
+	}, [revalidateEta]);
+
+	const isPatternsInitialLoading = patternIds.length > 0 && patternsData === undefined && patternsLoading;
+	const isEtaInitialLoading = stopIds.length > 0 && etaResponse === undefined && etaLoading;
+	const isInitialLoading = isPatternsInitialLoading || isEtaInitialLoading || stopsPipContext.flags.is_loading;
+
 	const contextValue: PipsArrivalsContextState = useMemo(() => ({
 		actions: {
-			revalidate: () => {
-				void revalidateEta();
-			},
+			revalidate,
 		},
 		data: {
 			merged_arrivals: mergedArrivals,
 		},
 		flags: {
-			is_loading: patternsLoading || etaLoading || stopsPipContext.flags.is_loading,
+			is_loading: isInitialLoading,
 		},
-	}), [mergedArrivals, patternsLoading, revalidateEta, stopsPipContext.flags.is_loading, etaLoading]);
+	}), [mergedArrivals, isInitialLoading, revalidate]);
 
 	//
 	// E. Render components
