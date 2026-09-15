@@ -11,7 +11,8 @@ import { useStopsPipContext } from '@/contexts/StopsPip.context';
 import { type Arrival } from '@/types/stops.types';
 import { normalizeReferenceId } from '@/utils/alerts';
 import { getPublicVariable } from '@carrismetropolitana/website-shared-settings';
-import { convertGTFSTimeStringAndOperationalDateToUnixMilliseconds } from '@tmlmobilidade/utils';
+import { OperationalTime } from '@tmlmobilidade/go-types-shared';
+import { fromOperationalTimeAndOperationalDateToUnixMilliseconds } from '@tmlmobilidade/utils';
 import { DateTime } from 'luxon';
 import { createContext, type PropsWithChildren, useContext, useMemo } from 'react';
 import useSWR from 'swr';
@@ -121,10 +122,10 @@ export const PipsArrivalsContextProvider = ({ children }: PropsWithChildren) => 
 		const nowInMilliseconds = Date.now();
 
 		for (const patternData of patternsData) {
-			if (!patternData.valid_on.includes(operationalDateContext.data.selected_date.operational_date)) continue;
+			if (!patternData.valid_on.includes(operationalDateContext.data.selected_date)) continue;
 
 			for (const tripData of patternData.trips) {
-				if (!tripData.valid_on.includes(operationalDateContext.data.selected_date.operational_date)) continue;
+				if (!tripData.valid_on.includes(operationalDateContext.data.selected_date)) continue;
 
 				for (const stopTime of tripData.schedule) {
 					if (!stopIdsSet.has(String(stopTime.stop_id))) continue;
@@ -135,7 +136,7 @@ export const PipsArrivalsContextProvider = ({ children }: PropsWithChildren) => 
 					const isLastStop = stopTime.stop_sequence === patternData.path[patternData.path.length - 1].stop_sequence;
 					if (isLastStop) continue;
 
-					const scheduledArrivalMs = convertGTFSTimeStringAndOperationalDateToUnixMilliseconds(stopTime.arrival_time, operationalDateContext.data.selected_date.operational_date);
+					const scheduledArrivalMs = fromOperationalTimeAndOperationalDateToUnixMilliseconds(stopTime.arrival_time as OperationalTime, operationalDateContext.data.selected_date);
 					const scheduledArrivalUnix = Math.floor(scheduledArrivalMs / 1000);
 					const eta = operationalDateContext.flags.is_today_selected
 						? etaData.find(item => item && tripData.trip_ids.includes(item.trip_id) && String(item.stop_id) === String(stopTime.stop_id))
