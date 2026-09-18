@@ -108,7 +108,7 @@ export const PipsArrivalsContextProvider = ({ children }: PropsWithChildren) => 
 	);
 
 	const { data: etaResponse, isLoading: etaLoading, mutate: revalidateEta } = useSWR<GoApiResponse<HubEtaByStop[]>, Error>(
-		stopIds.length > 0 ? `${getPublicVariable('go_api_url')}/hub/api/v1/realtime/eta` : null,
+		stopIds.length > 0 ? `${getPublicVariable('go_api_url')}/hub/api/v1/eta` : null,
 		{ refreshInterval: 30000 }, // 30 seconds
 	);
 	const etaData = useMemo(

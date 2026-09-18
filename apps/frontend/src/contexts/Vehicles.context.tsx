@@ -50,7 +50,7 @@ export const VehiclesContextProvider = ({ children }: PropsWithChildren) => {
 
 	const vehicleMetadata = useVehicleMetadata();
 	const getVehicleMetadata = vehicleMetadata.actions.getMetadataForVehicleId;
-	const { data: allVehiclesPositionsResponse, isLoading: allVehiclesPositionsLoading } = useSWR<{ data: HubV1ApiVehiclePosition[] }>(`${getPublicVariable('go_api_url')}/hub/api/v1/realtime/vehicles/positions`, { refreshInterval: 5_000 }); // 5 seconds
+	const { data: allVehiclesPositionsResponse, isLoading: allVehiclesPositionsLoading } = useSWR<{ data: HubV1ApiVehiclePosition[] }>(`${getPublicVariable('go_api_url')}/hub/api/v1/vehicles/positions`, { refreshInterval: 5_000 }); // 5 seconds
 
 	const allVehiclesData = useMemo(() => {
 		if (!allVehiclesPositionsResponse?.data) return [];

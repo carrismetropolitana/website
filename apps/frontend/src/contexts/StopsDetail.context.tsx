@@ -117,7 +117,7 @@ export const StopsDetailContextProvider = ({ children, stopId }: { children: Rea
 	 * Fetch associate estimates
 	 */
 
-	const etaApiUrl = operationalDateContext.flags.is_today_selected && dataActiveStopIdState ? `${getPublicVariable('go_api_url')}/hub/api/v1/realtime/eta/by-stop/${encodeURIComponent(dataActiveStopIdState)}` : null;
+	const etaApiUrl = operationalDateContext.flags.is_today_selected && dataActiveStopIdState ? `${getPublicVariable('go_api_url')}/hub/api/v1/eta/by-stop/${encodeURIComponent(dataActiveStopIdState)}` : null;
 	const { data: etaResponse } = useSWR<GoApiResponse<HubEtaByStop[]>, Error>(etaApiUrl, { refreshInterval: 30_000 });
 	const etaData = Array.isArray(etaResponse?.data) ? etaResponse.data : [];
 

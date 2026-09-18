@@ -169,7 +169,7 @@ export function LinesDetailPathList() {
 		async () => {
 			const responses = await Promise.all(
 				patternStopIds.map(async (stopId) => {
-					const response = await fetch(`${getPublicVariable('go_api_url')}/hub/api/v1/realtime/eta/by-stop/${encodeURIComponent(stopId)}`);
+					const response = await fetch(`${getPublicVariable('go_api_url')}/hub/api/v1/eta/by-stop/${encodeURIComponent(stopId)}`);
 					if (!response.ok) return [];
 					const payload = await response.json() as GoApiResponse<HubEtaByStop[]>;
 					return Array.isArray(payload.data) ? payload.data : [];
