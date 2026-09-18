@@ -124,7 +124,19 @@ export const VehiclesContextProvider = ({ children }: PropsWithChildren) => {
 	};
 
 	const getVehiclesByTripId = (tripId: string): HubV1ApiVehiclePosition[] => {
-		return allVehiclesData.filter(vehicle => vehicle.trip_id === tripId);
+		// Exact match first. Schedule trip_ids and vehicle trip_ids often differ by
+		// calendar/service segment (e.g. …|7|2|1100 vs …|1|1|1100) while sharing the
+		// same pattern + start time — fall back to that key when needed.
+		const exactMatches = allVehiclesData.filter(vehicle => vehicle.trip_id === tripId);
+		if (exactMatches.length > 0) return exactMatches;
+
+		const matchKey = getTripIdMatchKey(tripId);
+		if (!matchKey) return [];
+
+		return allVehiclesData.filter((vehicle) => {
+			if (!vehicle.trip_id) return false;
+			return getTripIdMatchKey(vehicle.trip_id) === matchKey;
+		});
 	};
 
 	const getVehiclesByTripIdGeoJsonFC = (tripId: string) => {
@@ -172,6 +184,20 @@ export const VehiclesContextProvider = ({ children }: PropsWithChildren) => {
 
 	//
 };
+
+/* * */
+
+/**
+ * Build a stable key for matching schedule vs realtime trip IDs.
+ * Trip IDs look like `[PCN1R][BNA17]2794_0_1|7|2|1100` — strip leading `[…]`
+ * tags, then keep `{pattern_id}|{start_time}` (first and last `|` segments).
+ */
+export function getTripIdMatchKey(tripId: string): null | string {
+	const core = tripId.replace(/^(\[[^\]]+\])+/, '');
+	const parts = core.split('|');
+	if (parts.length < 2 || !parts[0] || !parts[parts.length - 1]) return null;
+	return `${parts[0]}|${parts[parts.length - 1]}`;
+}
 
 /* * */
 
