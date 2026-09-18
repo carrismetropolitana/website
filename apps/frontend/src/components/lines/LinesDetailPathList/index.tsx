@@ -114,10 +114,15 @@
 
 import { NoDataLabel } from '@/components/layout/NoDataLabel';
 import { PathWaypoint } from '@/components/lines/PathWaypoint';
+import { useDebugContext } from '@/contexts/Debug.context';
 import { useLinesDetailContext } from '@/contexts/LinesDetail.context';
 import { useOperationalDateContext } from '@/contexts/OperationalDate.context';
+import { getPublicVariable } from '@carrismetropolitana/website-shared-settings';
+import { type GoApiResponse } from '@carrismetropolitana/website-shared-types';
+import { type UnixMilliseconds } from '@tmlmobilidade/go-types-shared';
 import { Dates } from '@tmlmobilidade/go-utils-dates';
 import { useMemo } from 'react';
+import useSWR from 'swr';
 
 import styles from './styles.module.css';
 
@@ -128,6 +133,14 @@ interface NextArrival {
 	unixTs: number
 }
 
+interface HubEtaByStop {
+	eta_at: null | UnixMilliseconds
+	eta_seconds: null | number
+	position_created_at: null | string
+	stop_id: string
+	trip_id: string
+}
+
 export function LinesDetailPathList() {
 	//
 
@@ -136,61 +149,68 @@ export function LinesDetailPathList() {
 
 	const linesDetailContext = useLinesDetailContext();
 	const operationalDateContext = useOperationalDateContext();
+	const debugContext = useDebugContext();
 
 	//
-	// B. Transform data
+	// B. Fetch data
+
+	const patternStopIds = useMemo(() => {
+		const activePattern = linesDetailContext.data.active_pattern;
+		if (!activePattern) return [];
+		return [...new Set(activePattern.path.map(waypoint => String(waypoint.stop_id)))];
+	}, [linesDetailContext.data.active_pattern]);
+
+	const etaApiKey = operationalDateContext.flags.is_today_selected && patternStopIds.length > 0
+		? ['lines-detail-eta-by-stop', ...patternStopIds]
+		: null;
+
+	const { data: etaData = [] } = useSWR<HubEtaByStop[]>(
+		etaApiKey,
+		async () => {
+			const responses = await Promise.all(
+				patternStopIds.map(async (stopId) => {
+					const response = await fetch(`${getPublicVariable('go_api_url')}/hub/api/v1/realtime/eta/by-stop/${encodeURIComponent(stopId)}`);
+					if (!response.ok) return [];
+					const payload = await response.json() as GoApiResponse<HubEtaByStop[]>;
+					return Array.isArray(payload.data) ? payload.data : [];
+				}),
+			);
+			return responses.flat();
+		},
+		{ refreshInterval: 30_000 },
+	);
+
+	//
+	// C. Transform data
 
 	const realtimeArrivalsByStop = useMemo<Map<string, NextArrival[]>>(() => {
-		return new Map<string, NextArrival[]>();
-		// const result = new Map<string, NextArrival[]>();
-		// const activePattern = linesDetailContext.data.active_pattern;
-		// if (!activePattern || !operationalDate.isTodaySelected) return result;
-		// if (!tripUpdatesContext.data.map.size) return result;
+		const result = new Map<string, NextArrival[]>();
+		const activePattern = linesDetailContext.data.active_pattern;
+		const selectedDate = operationalDateContext.data.selected_date;
+		if (!activePattern || !selectedDate || !operationalDateContext.flags.is_today_selected) return result;
 
-		// const stopSequenceToStopId = new Map<number, string>();
-		// const stopSequenceToAllowedStopIds = new Map<number, Set<string>>();
-		// const validStopKeys = new Set(activePattern.path.map((waypoint) => {
-		// 	stopSequenceToStopId.set(waypoint.stop_sequence, waypoint.stop_id);
-		// 	const allowedStopIds = new Set([waypoint.stop_id, ...(stopsContext.actions.getLegacyStopIds(waypoint.stop_id) ?? [])]);
-		// 	stopSequenceToAllowedStopIds.set(waypoint.stop_sequence, allowedStopIds);
-		// 	return `${waypoint.stop_id}-${waypoint.stop_sequence}`;
-		// }));
-		// const validTripIds = new Set<string>();
-		// activePattern.trips.forEach((trip) => {
-		// 	trip.trip_ids.forEach((tripId) => {
-		// 		validTripIds.add(tripId);
-		// 	});
-		// });
+		for (const tripData of activePattern.trips) {
+			if (!tripData.valid_on.includes(selectedDate.operational_date_int)) continue;
+			for (const stopTime of tripData.schedule) {
+				const stopKey = `${stopTime.stop_id}-${stopTime.stop_sequence}`;
+				const eta = etaData.find(etaItem => String(etaItem.stop_id) === String(stopTime.stop_id) && etaItem.trip_id.substring(etaItem.trip_id.indexOf(']') + 1) === tripData.trip_ids.find(tripId => tripId.substring(tripId.indexOf(']') + 1) === etaItem.trip_id.substring(etaItem.trip_id.indexOf(']') + 1))?.substring(etaItem.trip_id.indexOf(']') + 1));
+				const estimatedArrivalMs = eta?.eta_at;
+				if (!estimatedArrivalMs) continue;
 
-		// for (const entity of tripUpdatesContext.data.map.values()) {
-		// 	const tripUpdate = getTripUpdateFromEntity(entity);
-		// 	const tripId = tripUpdate?.trip?.trip_id;
-		// 	if (!tripId || !tripUpdate?.stop_time_update?.length) continue;
-		// 	if (!validTripIds.has(tripId)) continue;
+				const isLastStop = stopTime.stop_sequence === activePattern.path[activePattern.path.length - 1].stop_sequence;
+				if (!debugContext.flags.is_debug_mode && isLastStop) continue;
 
-		// 	for (const stopUpdate of tripUpdate.stop_time_update) {
-		// 		const stopSequence = stopUpdate.stop_sequence;
-		// 		if (stopSequence == null) continue;
-		// 		const stopId = String(stopUpdate.stop_id);
-		// 		const allowedStopIds = stopSequenceToAllowedStopIds.get(stopSequence);
-		// 		if (!allowedStopIds?.has(stopId)) continue;
-		// 		const canonicalStopId = stopSequenceToStopId.get(stopSequence);
-		// 		if (!canonicalStopId) continue;
-		// 		const stopKey = `${canonicalStopId}-${stopSequence}`;
-		// 		if (!validStopKeys.has(stopKey)) continue;
-		// 		const arrivalTime = stopUpdate.arrival?.time;
-		// 		if (arrivalTime == null) continue;
-		// 		if (!result.get(stopKey)) result.set(stopKey, []);
-		// 		result.get(stopKey)?.push({ type: 'realtime', unixTs: arrivalTime * 1000 });
-		// 	}
-		// }
+				if (!result.get(stopKey)) result.set(stopKey, []);
+				result.get(stopKey)?.push({ type: 'realtime', unixTs: Number(estimatedArrivalMs) });
+			}
+		}
 
-		// for (const key of result.keys()) {
-		// 	result.get(key)?.sort((a, b) => a.unixTs - b.unixTs);
-		// }
+		for (const key of result.keys()) {
+			result.get(key)?.sort((a, b) => a.unixTs - b.unixTs);
+		}
 
-		// return result;
-	}, []);
+		return result;
+	}, [linesDetailContext.data.active_pattern, operationalDateContext.data.selected_date, operationalDateContext.flags.is_today_selected, etaData, debugContext.flags.is_debug_mode]);
 
 	const scheduledArrivalsByStop = useMemo<Map<string, NextArrival[]>>(() => {
 		const result = new Map<string, NextArrival[]>();
@@ -243,7 +263,7 @@ export function LinesDetailPathList() {
 	}, [linesDetailContext.data.active_pattern?.path]);
 
 	//
-	// C. Render components
+	// D. Render components
 
 	if (!sortedStops?.length || !linesDetailContext.data.active_pattern) {
 		return <NoDataLabel />;
