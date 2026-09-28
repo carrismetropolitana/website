@@ -6,6 +6,7 @@ import { hiddenPublishedAtField } from '@/fields/published-at';
 import { specialSeriesField } from '@/fields/special-series';
 import { subjectField } from '@/fields/subject';
 import { updatedAtField } from '@/fields/updated-at';
+import { normalizeRichTextValue } from '@/utils/normalize-rich-text';
 import { slugify } from '@/utils/slugify';
 
 /* * */
@@ -106,6 +107,9 @@ export const Videos: CollectionConfig = {
 			type: 'upload',
 		},
 		{
+			hooks: {
+				afterRead: [normalizeRichTextValue],
+			},
 			label: 'Conteúdo',
 			name: 'content',
 			required: true,

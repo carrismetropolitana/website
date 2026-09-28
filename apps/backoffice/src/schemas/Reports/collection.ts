@@ -4,6 +4,7 @@ import type { CollectionConfig } from 'payload';
 
 import { hiddenPublishedAtField } from '@/fields/published-at';
 import { updatedAtField } from '@/fields/updated-at';
+import { normalizeRichTextValue } from '@/utils/normalize-rich-text';
 import { slugify } from '@/utils/slugify';
 
 /* * */
@@ -242,6 +243,9 @@ export const Reports: CollectionConfig = {
 					admin: {
 						description: 'Conteúdo formatado do bloco em destaque.',
 					},
+					hooks: {
+						afterRead: [normalizeRichTextValue],
+					},
 					label: 'Descrição',
 					name: 'description',
 					required: true,
@@ -318,6 +322,9 @@ export const Reports: CollectionConfig = {
 		{
 			admin: {
 				description: 'Conteúdo formatado da metodologia do relatório.',
+			},
+			hooks: {
+				afterRead: [normalizeRichTextValue],
 			},
 			label: 'Metodologia',
 			name: 'methodology',
