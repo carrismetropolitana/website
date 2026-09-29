@@ -10,9 +10,12 @@ import { useStopsContext } from '@/contexts/Stops.context';
 import { normalizeReferenceId } from '@/utils/alerts';
 import { type ServiceMetrics } from '@carrismetropolitana/api-types/metrics';
 import { CARRIS_METROPOLITANA_NUMERIC_AGENCY_IDS, getPublicVariable } from '@carrismetropolitana/website-shared-settings';
-import { type HubAlert, type HubLine, type HubPattern, type HubRoute, type HubShape, type HubWaypoint } from '@tmlmobilidade/go-types-public-info';
+import { type HubV1ApiAlert, type HubV1ApiLine, type HubV1ApiPattern, type HubV1ApiPatternWaypoint, type HubV1ApiRoute } from '@tmlmobilidade/go-types-hub';
+import { OperationalDateInt } from '@tmlmobilidade/go-types-shared';
+import { fromEncodedPolylineToGeoJsonLineString } from '@tmlmobilidade/go-utils-geo';
+import { type LineString } from 'geojson';
 import { useQueryState } from 'nuqs';
-import { createContext, useContext, useEffect, useState } from 'react';
+import { createContext, useContext, useEffect, useMemo, useState } from 'react';
 
 /* * */
 
@@ -23,16 +26,16 @@ interface LinesDetailContextState {
 		setHighlightedTripIds: (tripIds: string[]) => void
 	}
 	data: {
-		active_alerts: HubAlert[] | undefined
-		active_pattern: HubPattern | null
-		active_shape: HubShape | null
-		active_waypoint: HubWaypoint | null
-		all_patterns: HubPattern[][] | null
+		active_alerts: HubV1ApiAlert[] | undefined
+		active_pattern: HubV1ApiPattern | null
+		active_shape: null | { geojson: GeoJSON.Feature<LineString>, id: string }
+		active_waypoint: HubV1ApiPatternWaypoint | null
+		all_patterns: HubV1ApiPattern[][] | null
 		highlighted_trip_ids: null | string[]
-		line: HubLine | undefined
-		routes: HubRoute[]
+		line: HubV1ApiLine | undefined
+		routes: HubV1ApiRoute[]
 		service_metrics: ServiceMetrics[]
-		valid_patterns: HubPattern[] | undefined
+		valid_patterns: HubV1ApiPattern[] | undefined
 	}
 	filters: {
 		active_pattern_id: null | string
@@ -78,7 +81,6 @@ export const LinesDetailContextProvider = ({ children, lineId }) => {
 	const [dataValidPatternsState, setDataValidPatternsState] = useState<LinesDetailContextState['data']['valid_patterns']>();
 	const [dataActiveAlertsState, setDataActiveAlertsState] = useState<LinesDetailContextState['data']['active_alerts']>();
 	const [dataActivePatternState, setDataActivePatternState] = useState<LinesDetailContextState['data']['active_pattern']>(null);
-	const [dataActiveShapeState, setDataActiveShapeState] = useState<LinesDetailContextState['data']['active_shape']>(null);
 	const [dataActiveWaypointState, setDataActiveWaypointState] = useState<LinesDetailContextState['data']['active_waypoint']>(null);
 	const [dataHighlightedTripIdsState, setDataHighlightedTripIdsState] = useState<LinesDetailContextState['data']['highlighted_trip_ids']>([]);
 	const [filterActivePatternIdState, setFilterActivePatternIdState] = useQueryState('active_pattern_id');
@@ -114,7 +116,7 @@ export const LinesDetailContextProvider = ({ children, lineId }) => {
 			const routeData = linesContext.actions.getRouteDataById(routeId);
 			if (!routeData) return null;
 			return routeData;
-		}).filter((routeData): routeData is HubRoute => routeData !== null);
+		}).filter((routeData): routeData is HubV1ApiRoute => routeData !== null);
 		setDataRoutesState(routesData);
 	}, [dataLineState, linesContext.data.routes]);
 
@@ -128,10 +130,10 @@ export const LinesDetailContextProvider = ({ children, lineId }) => {
 						console.log(`Failed to fetch pattern data for patternId: ${patternId}`);
 						return null;
 					}
-					const patternPayload = await response.json() as HubPattern[] | { data?: HubPattern[] };
+					const patternPayload = await response.json() as HubV1ApiPattern[] | { data?: HubV1ApiPattern[] };
 					return Array.isArray(patternPayload) ? patternPayload : patternPayload.data ?? [];
 				});
-				const resultData = (await Promise.all(fetchPromises)).filter((patternData): patternData is HubPattern[] => patternData !== null);
+				const resultData = (await Promise.all(fetchPromises)).filter((patternData): patternData is HubV1ApiPattern[] => patternData !== null);
 				setDataAllPatternsState(resultData);
 			}
 			catch (error) {
@@ -140,52 +142,22 @@ export const LinesDetailContextProvider = ({ children, lineId }) => {
 		})();
 	}, [dataLineState]);
 
-	/**
-	 * TASK: Fetch shape data for the active pattern.
-	 * WHEN: The `dataActivePatternState` changes.
-	 */
-	useEffect(() => {
-		if (!dataActivePatternState) return;
-		(async () => {
-			try {
-				const shapePayload = await fetch(`${getPublicVariable('go_api_url')}/hub/api/v1/network/shapes/${encodeURIComponent(dataActivePatternState.shape_id)}`).then((response) => {
-					if (!response.ok) console.log(`Failed to fetch shape data for shapeId: ${dataActivePatternState.shape_id}`);
-					else return response.json();
-				}) as HubShape | undefined | { data?: HubShape };
-				const shapeData: HubShape | undefined = shapePayload && 'data' in shapePayload ? shapePayload.data : shapePayload as HubShape | undefined;
-				if (shapeData) {
-					shapeData.geojson = {
-						...shapeData.geojson,
-						properties: {
-							color: dataActivePatternState.color,
-							text_color: dataActivePatternState.text_color,
-						},
-					};
-				}
-				setDataActiveShapeState(shapeData);
-			}
-			catch (error) {
-				console.error('Error fetching shape data:', error);
-			}
-		})();
-	}, [dataActivePatternState]);
-
 	//
 	// C. Transform data
 
 	useEffect(() => {
 		if (!dataAllPatternsState || !operationalDateContext.data.selected_date) return;
-		const selectedDate = operationalDateContext.data.selected_date.operational_date;
+		const selectedDate = operationalDateContext.data.selected_date.operational_date_int;
 		if (!selectedDate) return;
-		const activePatterns: HubPattern[] = [];
+		const activePatterns: HubV1ApiPattern[] = [];
 		for (const pattern of dataAllPatternsState) {
-			let closestDateSoFar: string = null;
-			let patternGroupWithClosestDate: HubPattern = null;
+			let closestDateSoFar: OperationalDateInt = null;
+			let patternGroupWithClosestDate: HubV1ApiPattern = null;
 			for (const patternGroup of pattern) {
 				const closestDate = patternGroup.valid_on.reduce((acc, curr) => {
-					if (selectedDate <= curr && (acc === '' || curr < acc)) return curr;
+					if (selectedDate <= curr && (acc === null || curr < acc)) return curr;
 					return acc;
-				}, '');
+				}, null);
 				if (!closestDateSoFar) closestDateSoFar = closestDate;
 				if (closestDate && closestDate <= closestDateSoFar) {
 					patternGroupWithClosestDate = patternGroup;
@@ -211,6 +183,7 @@ export const LinesDetailContextProvider = ({ children, lineId }) => {
 			const isActive = alertData.active_period_end_date ? alertData.active_period_end_date >= operationalDateContext.data.selected_date.set({ hour: 0, millisecond: 0, minute: 0, second: 0 }).js_date.getTime() : true;
 
 			if (!isActive) return false;
+			if (alertData.reference_type !== 'lines') return false;
 
 			return alertData.references.some((reference) => {
 				const informedAgencyId = alertData.agency_id?.trim();
@@ -220,16 +193,31 @@ export const LinesDetailContextProvider = ({ children, lineId }) => {
 				if (!agencyOk) return false;
 
 				const parentId = normalizeReferenceId(reference.parent_id);
-				const childIds = reference.child_ids.map(normalizeReferenceId);
-
-				const hasMatchingLine = parentId === normalizedLineId || childIds.includes(normalizedLineId);
-				const hasMatchingStop = dataAllPatternsState?.some(pattern => pattern.some(patternGroup => patternGroup.path.some(waypoint => childIds.includes(normalizeReferenceId(waypoint.stop_id)))));
-
-				return hasMatchingLine || hasMatchingStop;
+				return parentId === normalizedLineId;
 			});
 		});
 		setDataActiveAlertsState(activeAlerts);
-	}, [alertsContext.data.alerts, lineId, dataLineState, dataAllPatternsState, operationalDateContext.data.selected_date]);
+	}, [alertsContext.data.alerts, lineId, dataLineState, operationalDateContext.data.selected_date]);
+
+	const activeShapeGeojson = useMemo(() => {
+		const collection: GeoJSON.Feature<LineString> = { geometry: { coordinates: [], type: 'LineString' }, properties: { color: '', text_color: '' }, type: 'Feature' };
+		if (!dataActivePatternState?.shape_polyline) return collection;
+		const shapeGeojson = fromEncodedPolylineToGeoJsonLineString(dataActivePatternState.shape_polyline);
+		collection.geometry = shapeGeojson;
+		collection.properties = {
+			color: dataActivePatternState.color,
+			text_color: dataActivePatternState.text_color,
+		};
+		return collection;
+	}, [dataActivePatternState]);
+
+	const activeShapeData = useMemo(() => {
+		return {
+			geojson: activeShapeGeojson,
+			id: dataActivePatternState?._id,
+		};
+	}, [activeShapeGeojson, dataActivePatternState?._id]);
+
 	//
 	// D. Handle actions
 
@@ -362,7 +350,7 @@ export const LinesDetailContextProvider = ({ children, lineId }) => {
 		data: {
 			active_alerts: dataActiveAlertsState,
 			active_pattern: dataActivePatternState,
-			active_shape: dataActiveShapeState,
+			active_shape: activeShapeData,
 			active_waypoint: dataActiveWaypointState,
 			all_patterns: dataAllPatternsState,
 			highlighted_trip_ids: dataHighlightedTripIdsState,

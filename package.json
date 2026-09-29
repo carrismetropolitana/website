@@ -24,18 +24,21 @@
 	"devDependencies": {
 		"@carrismetropolitana/eslint": "20250622.1204.50",
 		"@dotenv-run/cli": "1.3.6",
-		"turbo": "2.9.6",
+		"turbo": "2.10.12",
 		"typescript": "6.0.3"
 	},
-	"overrides": {
-		"@tmlmobilidade/go-types-shared": "20260724.30.25"
-	},
-	"packageManager": "npm@11.12.1",
+	"packageManager": "npm@12.0.2",
 	"engines": {
 		"node": ">=18"
 	},
 	"workspaces": [
 		"shared/*",
 		"apps/*"
-	]
+	],
+	"allowScripts": {
+		"@parcel/watcher@2.6.0": true,
+		"@swc/core@1.16.2": true,
+		"fsevents@2.3.3": true,
+		"sharp@0.35.4": true
+	}
 }

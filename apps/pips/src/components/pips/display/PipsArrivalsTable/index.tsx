@@ -178,14 +178,16 @@ export function PipsArrivalsTable() {
 	//
 	// C. Render loading state
 
-	if (pipsArrivalsContext.flags.is_loading) {
+	const hasArrivals = pipsArrivalsContext.data.merged_arrivals.length > 0;
+
+	if (pipsArrivalsContext.flags.is_loading && !hasArrivals) {
 		return <PipsArrivalsTableSkeleton />;
 	}
 
 	//
 	// D. Render empty state
 
-	if (pipsArrivalsContext.data.merged_arrivals.length === 0) {
+	if (!hasArrivals) {
 		return <PipsArrivalsTableEmpty />;
 	}
 

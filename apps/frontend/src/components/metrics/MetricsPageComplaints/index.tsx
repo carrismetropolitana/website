@@ -8,7 +8,6 @@ import { MetricsComplaintsPageCardGroup } from '@/components/metrics/MetricsPage
 import { MetricsPageComplaintsGlobalCard } from '@/components/metrics/MetricsPageComplaintsGlobalCard';
 import { MetricsPageComplaintsToolbar } from '@/components/metrics/MetricsPageComplaintsToolbar';
 import { useLinesContext } from '@/contexts/Lines.context';
-import { useLocationsContext } from '@/contexts/Locations.context';
 import { useMetricsContext } from '@/contexts/Metrics.context';
 import { type ComplaintMetrics } from '@carrismetropolitana/api-types/metrics';
 import { getPublicVariable } from '@carrismetropolitana/website-shared-settings';
@@ -40,7 +39,6 @@ export function MetricsPageComplaints() {
 	const { data: demandMetrics } = useMetricsContext();
 
 	const linesContext = useLinesContext();
-	const locationsContext = useLocationsContext();
 
 	//
 	// B. Fetch data
@@ -61,7 +59,6 @@ export function MetricsPageComplaints() {
 		const global_complaints = complaintsMetricsData.filter(item => item.type === 'global' && item.filter_value === '-');
 		const last_update = complaintsMetricsData.find(item => item.type === 'global' && item.filter_value === '-')?.last_update || '';
 		const lineColor = linesContext.data.lines.find(line => line._id === state.filter_value)?.color || '';
-		const municipalityName = locationsContext.data.municipalities.find(municipality => municipality.id === state.filter_value)?.name || '';
 
 		setState(prevState => ({
 			...prevState,
@@ -71,7 +68,7 @@ export function MetricsPageComplaints() {
 			filtered_data: prevState.filtered_data.length ? prevState.filtered_data : global_complaints,
 			last_update: last_update,
 			line_color: lineColor,
-			municipality_name: municipalityName,
+			municipality_name: '',
 		}));
 	}, [complaintsMetricsData, state.filter_type, state.filter_value]);
 
@@ -117,6 +114,4 @@ export function MetricsPageComplaints() {
 			</div>
 		</Surface>
 	);
-
-	//
 }

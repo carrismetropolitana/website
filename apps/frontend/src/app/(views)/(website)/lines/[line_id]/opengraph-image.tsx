@@ -2,10 +2,7 @@
 
 import { OpenGraphLinesDefault } from '@/opengraph/OpenGraphLinesDefault';
 import { OpenGraphLinesDynamic } from '@/opengraph/OpenGraphLinesDynamic';
-import { type ApiResponse } from '@carrismetropolitana/api-types/common';
-import { type Locality } from '@carrismetropolitana/api-types/locations';
-import { type Line } from '@carrismetropolitana/api-types/network';
-import { getPublicVariable } from '@carrismetropolitana/website-shared-settings';
+import { fetchGoLine } from '@/utils/go-api.server';
 import fs from 'fs';
 import { ImageResponse } from 'next/og';
 
@@ -15,21 +12,16 @@ export default async function Image({ params }) {
 	//
 
 	//
-	// A. Fetch data
+	// A. Setup variables
 
-	const allLinesResponse = await fetch(`${getPublicVariable('api_url')}/lines`);
-	const allLinesData: Line[] = await allLinesResponse.json();
-
-	const allLocalitiesResponse = await fetch(`${getPublicVariable('api_url')}/locations/localities`);
-	const allLocalitiesResult: ApiResponse<Locality[]> = await allLocalitiesResponse.json();
-	const allLocalitiesData = allLocalitiesResult.status === 'success' ? allLocalitiesResult.data : [];
+	const { line_id } = await params;
 
 	//
-	// B. Transform data
+	// B. Fetch data
+	// Only this line is fetched. Never fetch the full lines or
+	// localities collections here, as this runs on every request.
 
-	const lineData = allLinesData.find(item => item.id === params.line_id);
-
-	const localitiesForLine = allLocalitiesData.filter(item => lineData?.locality_ids.includes(item.id)).map(item => item.name);
+	const lineData = await fetchGoLine(decodeURIComponent(line_id));
 
 	//
 	// C. Render components
@@ -52,7 +44,7 @@ export default async function Image({ params }) {
 	return new ImageResponse(
 		<OpenGraphLinesDynamic
 			color={lineData.color}
-			localities={localitiesForLine}
+			localities={lineData.locality_names ?? []}
 			longName={lineData.long_name}
 			shortName={lineData.short_name}
 			textColor={lineData.text_color}

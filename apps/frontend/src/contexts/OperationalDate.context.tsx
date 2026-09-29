@@ -2,8 +2,8 @@
 
 /* * */
 
-import { Dates } from '@tmlmobilidade/dates';
-import { type OperationalDate } from '@tmlmobilidade/types';
+import { OperationalDateIntSchema } from '@tmlmobilidade/go-types-shared';
+import { Dates } from '@tmlmobilidade/go-utils-dates';
 import { useQueryState } from 'nuqs';
 import { createContext, useContext, useMemo } from 'react';
 
@@ -11,7 +11,7 @@ import { createContext, useContext, useMemo } from 'react';
 
 interface OperationalDateContextState {
 	actions: {
-		updateSelectedDate: (value: OperationalDate) => void
+		updateSelectedDate: (value: string) => void
 		updateSelectedDateFromFormat: (value: string, format?: string) => void
 		updateSelectedDateFromJsDate: (value: Date) => void
 		updateSelectedDateToLessOneDay: () => void
@@ -50,7 +50,9 @@ export const OperationalDateContextProvider = ({ children }) => {
 	//
 	// A. Setup variables
 
-	const [selectedDateQuery, setSelectedDateQuery] = useQueryState('date', { defaultValue: useMemo(() => Dates.now('Europe/Lisbon').operational_date, []) });
+	const defaultDate = useMemo(() => Dates.now('Europe/Lisbon').operational_date_int, []);
+
+	const [selectedDateQuery, setSelectedDateQuery] = useQueryState('date', { defaultValue: String(defaultDate) });
 
 	//
 	// B. Transform data
@@ -63,7 +65,9 @@ export const OperationalDateContextProvider = ({ children }) => {
 		.plus({ days: 1 });
 
 	const selectedDate = useMemo(() => {
-		return Dates.fromOperationalDate(selectedDateQuery, 'Europe/Lisbon');
+		const parsedDate = OperationalDateIntSchema.safeParse(selectedDateQuery);
+		if (!parsedDate.success) return;
+		return Dates.fromOperationalDateInt(parsedDate.data, 'Europe/Lisbon');
 	}, [selectedDateQuery]);
 
 	//
@@ -71,43 +75,43 @@ export const OperationalDateContextProvider = ({ children }) => {
 
 	const updateSelectedDate = (value: string) => {
 		const dateValue = Dates
-			.fromOperationalDate(value, 'Europe/Lisbon')
+			.fromOperationalDateInt(value, 'Europe/Lisbon')
 			.set({ hour: 15 });
-		setSelectedDateQuery(dateValue.operational_date);
+		setSelectedDateQuery(String(dateValue.operational_date_int));
 	};
 
 	const updateSelectedDateFromFormat = (value: string, format = 'yyyy-MM-dd') => {
 		const dateValue = Dates
 			.fromFormat(value, format, 'Europe/Lisbon')
 			.set({ hour: 15 });
-		setSelectedDateQuery(dateValue.operational_date);
+		setSelectedDateQuery(String(dateValue.operational_date_int));
 	};
 
 	const updateSelectedDateFromJsDate = (value: Date) => {
 		const dateValue = Dates
 			.fromJSDate(value)
 			.set({ hour: 15 });
-		setSelectedDateQuery(dateValue.operational_date);
+		setSelectedDateQuery(String(dateValue.operational_date_int));
 	};
 
 	const updateSelectedDateToToday = () => {
-		setSelectedDateQuery(todayDate.operational_date);
+		setSelectedDateQuery(String(todayDate.operational_date_int));
 	};
 
 	const updateSelectedDateToTomorrow = () => {
-		setSelectedDateQuery(tomorrowDate.operational_date);
+		setSelectedDateQuery(String(tomorrowDate.operational_date_int));
 	};
 
 	const updateSelectedDateToPlusOneDay = () => {
 		if (!selectedDate) return;
 		const dateValue = selectedDate?.plus({ days: 1 });
-		setSelectedDateQuery(dateValue.operational_date);
+		setSelectedDateQuery(String(dateValue.operational_date_int));
 	};
 
 	const updateSelectedDateToLessOneDay = () => {
 		if (!selectedDate) return;
 		const dateValue = selectedDate?.minus({ days: 1 });
-		setSelectedDateQuery(dateValue.operational_date);
+		setSelectedDateQuery(String(dateValue.operational_date_int));
 	};
 
 	//
@@ -129,8 +133,8 @@ export const OperationalDateContextProvider = ({ children }) => {
 			tomorrow: tomorrowDate,
 		},
 		flags: {
-			is_today_selected: selectedDate?.operational_date === todayDate.operational_date,
-			is_tomorrow_selected: selectedDate?.operational_date === tomorrowDate.operational_date,
+			is_today_selected: selectedDate?.operational_date_int === todayDate.operational_date_int,
+			is_tomorrow_selected: selectedDate?.operational_date_int === tomorrowDate.operational_date_int,
 		},
 	};
 
@@ -142,6 +146,4 @@ export const OperationalDateContextProvider = ({ children }) => {
 			{children}
 		</OperationalDateContext.Provider>
 	);
-
-	//
 };

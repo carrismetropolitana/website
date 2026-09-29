@@ -3,25 +3,25 @@
 import { useVehicleMetadata } from '@/hooks/useVehicleMetadata';
 import { CARRIS_METROPOLITANA_AGENCY_IDS, getPublicVariable } from '@carrismetropolitana/website-shared-settings';
 import { getBaseGeoJsonFeatureCollection } from '@tmlmobilidade/geo';
-import { type HubVehiclePosition } from '@tmlmobilidade/go-types-public-info';
+import { type HubV1ApiVehiclePosition } from '@tmlmobilidade/go-types-hub';
 import { DateTime } from 'luxon';
 import { createContext, type PropsWithChildren, useContext, useMemo } from 'react';
 import useSWR from 'swr';
 
 interface VehiclesContextState {
 	actions: {
-		getVehicleById: (vehicleId: string) => HubVehiclePosition | undefined
+		getVehicleById: (vehicleId: string) => HubV1ApiVehiclePosition | undefined
 		getVehicleByIdGeoJsonFC: (vehicleId: string) => GeoJSON.FeatureCollection | undefined
-		getVehiclesByLineId: (lineId: string) => HubVehiclePosition[]
+		getVehiclesByLineId: (lineId: string) => HubV1ApiVehiclePosition[]
 		getVehiclesByLineIdGeoJsonFC: (lineId: string) => GeoJSON.FeatureCollection | undefined
-		getVehiclesByPatternId: (patternId: string) => HubVehiclePosition[]
+		getVehiclesByPatternId: (patternId: string) => HubV1ApiVehiclePosition[]
 		getVehiclesByPatternIdGeoJsonFC: (patternId: string) => GeoJSON.FeatureCollection | undefined
-		getVehiclesByTripId: (tripId: string) => HubVehiclePosition[]
+		getVehiclesByTripId: (tripId: string) => HubV1ApiVehiclePosition[]
 		getVehiclesByTripIdGeoJsonFC: (tripId: string) => GeoJSON.FeatureCollection | undefined
 	}
 	data: {
 		fc: GeoJSON.FeatureCollection
-		vehicles: HubVehiclePosition[]
+		vehicles: HubV1ApiVehiclePosition[]
 	}
 	flags: {
 		isLoading: boolean
@@ -50,7 +50,7 @@ export const VehiclesContextProvider = ({ children }: PropsWithChildren) => {
 
 	const vehicleMetadata = useVehicleMetadata();
 	const getVehicleMetadata = vehicleMetadata.actions.getMetadataForVehicleId;
-	const { data: allVehiclesPositionsResponse, isLoading: allVehiclesPositionsLoading } = useSWR<{ data: HubVehiclePosition[] }>(`${getPublicVariable('go_api_url')}/hub/api/v1/realtime/vehicles/positions`, { refreshInterval: 5_000 }); // 5 seconds
+	const { data: allVehiclesPositionsResponse, isLoading: allVehiclesPositionsLoading } = useSWR<{ data: HubV1ApiVehiclePosition[] }>(`${getPublicVariable('go_api_url')}/hub/api/v1/vehicles/positions`, { refreshInterval: 5_000 }); // 5 seconds
 
 	const allVehiclesData = useMemo(() => {
 		if (!allVehiclesPositionsResponse?.data) return [];
@@ -80,7 +80,7 @@ export const VehiclesContextProvider = ({ children }: PropsWithChildren) => {
 	//
 	// B. Handle actions
 
-	const getVehicleById = (vehicleId: string): HubVehiclePosition | undefined => {
+	const getVehicleById = (vehicleId: string): HubV1ApiVehiclePosition | undefined => {
 		return allVehiclesData.find(vehicle => vehicle.vehicle_id === vehicleId || vehicle._id === vehicleId);
 	};
 
@@ -93,8 +93,8 @@ export const VehiclesContextProvider = ({ children }: PropsWithChildren) => {
 		return collection;
 	};
 
-	const getVehiclesByLineId = (lineId: string): HubVehiclePosition[] => {
-		return allVehiclesData.filter(vehicle => vehicle.line_id === lineId);
+	const getVehiclesByLineId = (lineId: string): HubV1ApiVehiclePosition[] => {
+		return allVehiclesData.filter(vehicle => vehicle.route_short_name === lineId);
 	};
 
 	const getVehiclesByLineIdGeoJsonFC = (lineId: string): GeoJSON.FeatureCollection | undefined => {
@@ -108,7 +108,7 @@ export const VehiclesContextProvider = ({ children }: PropsWithChildren) => {
 		return collection;
 	};
 
-	const getVehiclesByPatternId = (patternId: string): HubVehiclePosition[] => {
+	const getVehiclesByPatternId = (patternId: string): HubV1ApiVehiclePosition[] => {
 		return allVehiclesData.filter(vehicle => vehicle.pattern_id === patternId);
 	};
 
@@ -123,8 +123,20 @@ export const VehiclesContextProvider = ({ children }: PropsWithChildren) => {
 		return collection;
 	};
 
-	const getVehiclesByTripId = (tripId: string): HubVehiclePosition[] => {
-		return allVehiclesData.filter(vehicle => vehicle.trip_id === tripId);
+	const getVehiclesByTripId = (tripId: string): HubV1ApiVehiclePosition[] => {
+		// Exact match first. Schedule trip_ids and vehicle trip_ids often differ by
+		// calendar/service segment (e.g. …|7|2|1100 vs …|1|1|1100) while sharing the
+		// same pattern + start time — fall back to that key when needed.
+		const exactMatches = allVehiclesData.filter(vehicle => vehicle.trip_id === tripId);
+		if (exactMatches.length > 0) return exactMatches;
+
+		const matchKey = getTripIdMatchKey(tripId);
+		if (!matchKey) return [];
+
+		return allVehiclesData.filter((vehicle) => {
+			if (!vehicle.trip_id) return false;
+			return getTripIdMatchKey(vehicle.trip_id) === matchKey;
+		});
 	};
 
 	const getVehiclesByTripIdGeoJsonFC = (tripId: string) => {
@@ -175,7 +187,21 @@ export const VehiclesContextProvider = ({ children }: PropsWithChildren) => {
 
 /* * */
 
-export function transformVehicleDataIntoGeoJsonFeature(vehicleData: HubVehiclePosition, contactless = false): GeoJSON.Feature<GeoJSON.Point> {
+/**
+ * Build a stable key for matching schedule vs realtime trip IDs.
+ * Trip IDs look like `[PCN1R][BNA17]2794_0_1|7|2|1100` — strip leading `[…]`
+ * tags, then keep `{pattern_id}|{start_time}` (first and last `|` segments).
+ */
+export function getTripIdMatchKey(tripId: string): null | string {
+	const core = tripId.replace(/^(\[[^\]]+\])+/, '');
+	const parts = core.split('|');
+	if (parts.length < 2 || !parts[0] || !parts[parts.length - 1]) return null;
+	return `${parts[0]}|${parts[parts.length - 1]}`;
+}
+
+/* * */
+
+export function transformVehicleDataIntoGeoJsonFeature(vehicleData: HubV1ApiVehiclePosition, contactless = false): GeoJSON.Feature<GeoJSON.Point> {
 	const receivedAt = vehicleData.received_at || 0;
 
 	return {
@@ -190,8 +216,9 @@ export function transformVehicleDataIntoGeoJsonFeature(vehicleData: HubVehiclePo
 			current_status: vehicleData.current_status,
 			delay: Math.floor((Date.now() - receivedAt) / 1000),
 			id: vehicleData.vehicle_id,
-			line_id: vehicleData.line_id,
+			line_id: vehicleData.route_short_name,
 			pattern_id: vehicleData.pattern_id,
+			shape_id: vehicleData.shape_id,
 			speed: vehicleData.speed,
 			stop_id: vehicleData.stop_id,
 			timeString: receivedAt ? new Date(receivedAt).toLocaleString() : '',

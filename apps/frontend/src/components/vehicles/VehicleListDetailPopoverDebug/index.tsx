@@ -4,7 +4,7 @@
 
 import { CopyBadge } from '@/components/common/CopyBadge';
 import { IconEyeMinus, IconEyePlus } from '@tabler/icons-react';
-import { type HubVehiclePosition } from '@tmlmobilidade/go-types-public-info';
+import { type HubV1ApiVehiclePosition } from '@tmlmobilidade/go-types-hub';
 import { useState } from 'react';
 
 import styles from './styles.module.css';
@@ -12,7 +12,7 @@ import styles from './styles.module.css';
 /* * */
 
 interface VehicleListDetailPopoverProps {
-	data: HubVehiclePosition | undefined
+	data: HubV1ApiVehiclePosition | undefined
 }
 
 export function VehicleListDetailPopoverDebug({ data }: VehicleListDetailPopoverProps) {
@@ -38,8 +38,9 @@ export function VehicleListDetailPopoverDebug({ data }: VehicleListDetailPopover
 				<CopyBadge label={`Timestamp: ${timestampString}`} value={timestampString} />
 				<CopyBadge label={`Delay: ${delayString}`} value={delayString} />
 				<CopyBadge label={`Status: ${data.current_status ?? 'N/A'} : ${data.stop_id ?? 'N/A'}`} value={data.current_status ?? 'N/A'} />
+				<CopyBadge label={`Shape ID: ${data.shape_id ?? 'N/A'}`} value={data.shape_id ?? 'N/A'} />
 				<CopyBadge label={`Pattern ID: ${data.pattern_id ?? 'N/A'}`} value={data.pattern_id ?? 'N/A'} />
-				<CopyBadge label={`Line ID: ${data.line_id ?? 'N/A'}`} value={data.line_id ?? 'N/A'} />
+				<CopyBadge label={`Line ID: ${data.route_short_name ?? 'N/A'}`} value={data.route_short_name ?? 'N/A'} />
 			</div>
 		);
 	};

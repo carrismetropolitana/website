@@ -3,10 +3,7 @@
 import { OpenGraphStopsDefault } from '@/opengraph/OpenGraphStopsDefault';
 import { OpenGraphStopsDynamic } from '@/opengraph/OpenGraphStopsDynamic';
 import { formatStopLocation } from '@/utils/formatStopLocation';
-import { ApiResponse } from '@carrismetropolitana/api-types/common';
-import { Locality, Municipality } from '@carrismetropolitana/api-types/locations';
-import { type Line, type Stop } from '@carrismetropolitana/api-types/network';
-import { getPublicVariable } from '@carrismetropolitana/website-shared-settings';
+import { fetchGoLines, fetchGoStop } from '@/utils/go-api.server';
 import fs from 'fs';
 import { ImageResponse } from 'next/og';
 
@@ -16,36 +13,22 @@ export default async function Image({ params }) {
 	//
 
 	//
-	// A. Fetch data
+	// A. Setup variables
 
-	const allStopsResponse = await fetch(`${getPublicVariable('api_url')}/stops`);
-	const allStopsData: Stop[] = await allStopsResponse.json();
-
-	const allLinesResponse = await fetch(`${getPublicVariable('api_url')}/lines`);
-	const allLinesData: Line[] = await allLinesResponse.json();
-
-	const allMunicipalitiesResponse = await fetch(`${getPublicVariable('api_url')}/locations/municipalities`);
-	const allMunicipalitiesResult: ApiResponse<Municipality[]> = await allMunicipalitiesResponse.json();
-	const allMunicipalitiesData = allMunicipalitiesResult.status === 'success' ? allMunicipalitiesResult.data : [];
-
-	const allLocalitiesResponse = await fetch(`${getPublicVariable('api_url')}/locations/localities`);
-	const allLocalitiesResult: ApiResponse<Locality[]> = await allLocalitiesResponse.json();
-	const allLocalitiesData = allLocalitiesResult.status === 'success' ? allLocalitiesResult.data : [];
+	const { stop_id } = await params;
 
 	//
-	// B. Transform data
+	// B. Fetch data
+	// Only this stop and its lines are fetched. Never fetch the full
+	// stops or lines collections here, as this runs on every request.
 
-	const stopData = allStopsData.find(item => item.id === params.stop_id);
-
-	const linesDataForStop = allLinesData.filter(item => stopData?.line_ids.includes(item.id));
-
-	const municipalityDataForStop = allMunicipalitiesData.find(item => item.id === stopData?.municipality_id);
-	const localityDataForStop = allLocalitiesData.find(item => item.id === stopData?.locality_id);
+	const stopData = await fetchGoStop(stop_id);
+	const linesDataForStop = stopData ? await fetchGoLines(stopData.line_ids ?? []) : [];
 
 	//
 	// C. Render components
 
-	if (!stopData || !stopData.long_name) {
+	if (!stopData || !stopData.name) {
 		return new ImageResponse(
 			<OpenGraphStopsDefault />,
 			{
@@ -62,11 +45,11 @@ export default async function Image({ params }) {
 
 	return new ImageResponse(
 		<OpenGraphStopsDynamic
-			facilities={stopData.facilities}
-			id={params.stop_id}
+			facilities={[]}
+			id={stop_id}
 			lines={linesDataForStop}
-			location={formatStopLocation(localityDataForStop?.name, municipalityDataForStop?.name)}
-			name={stopData.long_name}
+			location={formatStopLocation(stopData.locality_name ?? undefined, stopData.municipality_name)}
+			name={stopData.name}
 		/>,
 		{
 			fonts: [

@@ -5,7 +5,7 @@
 import { LottiePlayer } from '@/components/common/LottiePlayer';
 import { useStopsPipContext } from '@/contexts/StopsPip.context';
 import { Text } from '@mantine/core';
-import { Dates } from '@tmlmobilidade/dates';
+import { Dates } from '@tmlmobilidade/go-utils-dates';
 import Link from 'next/link';
 import { useEffect, useState } from 'react';
 

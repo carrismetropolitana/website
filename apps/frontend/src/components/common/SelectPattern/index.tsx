@@ -8,25 +8,26 @@ import { useStopsContext } from '@/contexts/Stops.context';
 import { formatStopLocation } from '@/utils/formatStopLocation';
 import { ComboboxItem, ComboboxItemGroup, Flex, Group, Select, SelectProps, Text } from '@mantine/core';
 import { IconAlertTriangle } from '@tabler/icons-react';
-import { type HubPattern } from '@tmlmobilidade/go-types-public-info';
+import { type HubV1ApiPattern } from '@tmlmobilidade/go-types-hub';
+import { OperationalDateInt } from '@tmlmobilidade/go-types-shared';
 import { useTranslations } from 'next-intl';
 import { useMemo } from 'react';
 
 /* * */
 
 export interface Props extends SelectProps {
-	date_filter?: string
-	patterns: HubPattern[]
+	date_filter?: OperationalDateInt
+	patterns: HubV1ApiPattern[]
 }
 
 interface CustomComboboxItem extends ComboboxItem {
-	direction_id: number
+	direction_id: '0' | '1'
 	pattern_id: string
 }
 
 const PLACEHOLDER_HEADSIGN = 'HeadSign to be defined';
 
-function getPatternTitle(pattern: HubPattern, routeLongName?: string) {
+function getPatternTitle(pattern: HubV1ApiPattern, routeLongName?: string) {
 	if (pattern.headsign && pattern.headsign !== PLACEHOLDER_HEADSIGN) {
 		return pattern.headsign;
 	}
@@ -94,7 +95,7 @@ export function SelectPattern({ date_filter, onChange, patterns, value, ...props
 			}
 		});
 
-		data.forEach(group => group.items.sort((a, b) => a.direction_id - b.direction_id));
+		data.forEach(group => group.items.sort((a, b) => a.direction_id.localeCompare(b.direction_id)));
 
 		data.sort((a, b) => String(a.group).localeCompare(String(b.group)));
 

@@ -3,7 +3,7 @@
 /* * */
 
 import type { GoApiResponse } from '@carrismetropolitana/website-shared-types';
-import type { HubPattern } from '@tmlmobilidade/go-types-public-info';
+import type { HubV1ApiPattern } from '@tmlmobilidade/go-types-hub';
 
 import { useAlertsContext } from '@/contexts/Alerts.context';
 import { useOperationalDateContext } from '@/contexts/OperationalDate.context';
@@ -11,9 +11,10 @@ import { useStopsPipContext } from '@/contexts/StopsPip.context';
 import { type Arrival } from '@/types/stops.types';
 import { normalizeReferenceId } from '@/utils/alerts';
 import { getPublicVariable } from '@carrismetropolitana/website-shared-settings';
-import { convertGTFSTimeStringAndOperationalDateToUnixTimestamp } from '@tmlmobilidade/utils';
+import { OperationalTime } from '@tmlmobilidade/go-types-shared';
+import { fromOperationalTimeAndOperationalDateToUnixMilliseconds } from '@tmlmobilidade/utils';
 import { DateTime } from 'luxon';
-import { createContext, type PropsWithChildren, useContext, useMemo } from 'react';
+import { createContext, type PropsWithChildren, useCallback, useContext, useMemo } from 'react';
 import useSWR from 'swr';
 
 /* * */
@@ -93,24 +94,27 @@ export const PipsArrivalsContextProvider = ({ children }: PropsWithChildren) => 
 		const patternPromises = patternIdsFromUrl.map(async (patternId) => {
 			const response = await fetch(`${getPublicVariable('go_api_url')}/hub/api/v1/network/patterns/${encodeURIComponent(patternId)}`);
 			if (!response.ok) return [];
-			const payload = await response.json() as GoApiResponse<HubPattern[]>;
+			const payload = await response.json() as GoApiResponse<HubV1ApiPattern[]>;
 			return payload.data ?? [];
 		});
 
 		return (await Promise.all(patternPromises)).flat();
 	};
 
-	const { data: patternsData, isLoading: patternsLoading } = useSWR<HubPattern[]>(
+	const { data: patternsData, isLoading: patternsLoading } = useSWR<HubV1ApiPattern[]>(
 		patternIds.length > 0 ? `patterns-multi?patternIds=${patternIds.join(',')}` : null,
 		fetchPatterns,
 		{ refreshInterval: 900000 }, // 15 minutes
 	);
 
 	const { data: etaResponse, isLoading: etaLoading, mutate: revalidateEta } = useSWR<GoApiResponse<HubEtaByStop[]>, Error>(
-		stopIds.length > 0 ? `${getPublicVariable('go_api_url')}/hub/api/v1/realtime/eta` : null,
+		stopIds.length > 0 ? `${getPublicVariable('go_api_url')}/hub/api/v1/eta` : null,
 		{ refreshInterval: 30000 }, // 30 seconds
 	);
-	const etaData = Array.isArray(etaResponse?.data) ? etaResponse.data : [];
+	const etaData = useMemo(
+		() => (Array.isArray(etaResponse?.data) ? etaResponse.data : []),
+		[etaResponse?.data],
+	);
 
 	const mergedArrivals = useMemo<MergedArrival[]>(() => {
 		if (!patternsData || !stopsPipContext.data.stops.length || !operationalDateContext.data.selected_date) return [];
@@ -121,10 +125,10 @@ export const PipsArrivalsContextProvider = ({ children }: PropsWithChildren) => 
 		const nowInMilliseconds = Date.now();
 
 		for (const patternData of patternsData) {
-			if (!patternData.valid_on.includes(operationalDateContext.data.selected_date.operational_date)) continue;
+			if (!patternData.valid_on.includes(operationalDateContext.data.selected_date)) continue;
 
 			for (const tripData of patternData.trips) {
-				if (!tripData.valid_on.includes(operationalDateContext.data.selected_date.operational_date)) continue;
+				if (!tripData.valid_on.includes(operationalDateContext.data.selected_date)) continue;
 
 				for (const stopTime of tripData.schedule) {
 					if (!stopIdsSet.has(String(stopTime.stop_id))) continue;
@@ -135,7 +139,7 @@ export const PipsArrivalsContextProvider = ({ children }: PropsWithChildren) => 
 					const isLastStop = stopTime.stop_sequence === patternData.path[patternData.path.length - 1].stop_sequence;
 					if (isLastStop) continue;
 
-					const scheduledArrivalMs = convertGTFSTimeStringAndOperationalDateToUnixTimestamp(stopTime.arrival_time, operationalDateContext.data.selected_date.operational_date);
+					const scheduledArrivalMs = fromOperationalTimeAndOperationalDateToUnixMilliseconds(stopTime.arrival_time as OperationalTime, operationalDateContext.data.selected_date);
 					const scheduledArrivalUnix = Math.floor(scheduledArrivalMs / 1000);
 					const eta = operationalDateContext.flags.is_today_selected
 						? etaData.find(item => item && tripData.trip_ids.includes(item.trip_id) && String(item.stop_id) === String(stopTime.stop_id))
@@ -212,24 +216,30 @@ export const PipsArrivalsContextProvider = ({ children }: PropsWithChildren) => 
 			.slice(0, 50); // Limit to first 50 arrivals
 
 		return futureArrivals;
-	}, [patternsData, stopsPipContext.data.stops, operationalDateContext.data.selected_date, operationalDateContext.flags.is_today_selected, stopIds, etaData, alertsContext.actions]);
+	}, [patternsData, stopsPipContext.data.stops, operationalDateContext.data.selected_date, operationalDateContext.flags.is_today_selected, stopIds, etaData, alertsContext.data.alerts]);
 
 	//
 	// D. Define context value
 
+	const revalidate = useCallback(() => {
+		void revalidateEta();
+	}, [revalidateEta]);
+
+	const isPatternsInitialLoading = patternIds.length > 0 && patternsData === undefined && patternsLoading;
+	const isEtaInitialLoading = stopIds.length > 0 && etaResponse === undefined && etaLoading;
+	const isInitialLoading = isPatternsInitialLoading || isEtaInitialLoading || stopsPipContext.flags.is_loading;
+
 	const contextValue: PipsArrivalsContextState = useMemo(() => ({
 		actions: {
-			revalidate: () => {
-				void revalidateEta();
-			},
+			revalidate,
 		},
 		data: {
 			merged_arrivals: mergedArrivals,
 		},
 		flags: {
-			is_loading: patternsLoading || etaLoading || stopsPipContext.flags.is_loading,
+			is_loading: isInitialLoading,
 		},
-	}), [mergedArrivals, patternsLoading, revalidateEta, stopsPipContext.flags.is_loading, etaLoading]);
+	}), [mergedArrivals, isInitialLoading, revalidate]);
 
 	//
 	// E. Render components

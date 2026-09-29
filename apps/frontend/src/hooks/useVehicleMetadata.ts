@@ -30,7 +30,7 @@ export function useVehicleMetadata() {
 	//
 	// A. Fetch data
 
-	const { data: metadataResponse, isLoading } = useSWR<HubVehicleMetadataResponse>(`${getPublicVariable('go_api_url')}/hub/api/v1/realtime/vehicles/metadata`, { refreshInterval: 900_000 }); // 15 minutes
+	const { data: metadataResponse, isLoading } = useSWR<HubVehicleMetadataResponse>(`${getPublicVariable('go_api_url')}/hub/api/v1/vehicles/metadata`, { refreshInterval: 900_000 }); // 15 minutes
 
 	//
 	// B. Transform data

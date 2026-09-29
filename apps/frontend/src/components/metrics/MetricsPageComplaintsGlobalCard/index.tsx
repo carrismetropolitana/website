@@ -3,7 +3,7 @@
 import { type ComplaintMetrics } from '@carrismetropolitana/api-types/metrics';
 import { Text } from '@mantine/core';
 import { IconAt, IconPhoneCheck } from '@tabler/icons-react';
-import { Dates } from '@tmlmobilidade/dates';
+import { Dates } from '@tmlmobilidade/go-utils-dates';
 import { useTranslations } from 'next-intl';
 
 import styles from './styles.module.css';
@@ -94,7 +94,7 @@ export function MetricsPageComplaintsGlobalCard({ allData, totalPassengersThisYe
 				</div>
 			</div>
 
-			{allData?.length > 0 && <p className={styles.lastUpdatedDate}>{t('last_updated', { value: Dates.fromOperationalDate(allData[0].last_update, 'Europe/Lisbon').js_date })}</p>}
+			{allData?.length > 0 && <p className={styles.lastUpdatedDate}>{t('last_updated', { value: Dates.fromOperationalDateInt(allData[0].last_update, 'Europe/Lisbon').js_date })}</p>}
 
 		</>
 	);
