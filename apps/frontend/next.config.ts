@@ -150,6 +150,20 @@ const nextConfig: NextConfig = {
 
 			{
 				destination:
+					'https://www.cm-odivelas.pt/pages/2672',
+				permanent: false,
+				source: '/inquerito-odivelas',
+			},
+
+			{
+				destination:
+					'https://whatsapp.com/channel/0029Vb868PwBVJkxMm6GJq2a',
+				permanent: false,
+				source: '/whatsapp-area3',
+			},
+
+			{
+				destination:
 					'https://open.spotify.com/user/31zy3uavd2sad4ozlwoze2usqmku',
 				permanent: false,
 				source: '/spotify',
