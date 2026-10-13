@@ -1,5 +1,4 @@
 'use client';
-/* * */
 
 import { useAlertsContext } from '@/contexts/Alerts.context';
 import { useDebugContext } from '@/contexts/Debug.context';
@@ -10,6 +9,7 @@ import { useProfileContext } from '@/contexts/Profile.context';
 import { useStopsContext } from '@/contexts/Stops.context';
 import { fetchPatterns } from '@/hooks/fetch-patterns';
 import { normalizeReferenceId } from '@/utils/alerts';
+import { CARRIS_METROPOLITANA_AGENCY_IDS } from '@carrismetropolitana/website-shared-settings';
 import { getPublicVariable } from '@carrismetropolitana/website-shared-settings';
 import { type GoApiResponse } from '@carrismetropolitana/website-shared-types';
 import { type HubV1ApiAlert, type HubV1ApiLine, type HubV1ApiPattern, type HubV1ApiStop } from '@tmlmobilidade/go-types-hub';
@@ -113,6 +113,8 @@ export const StopsDetailContextProvider = ({ children, stopId }: { children: Rea
 		return stopsContext.actions.getStopById(dataActiveStopIdState);
 	}, [dataActiveStopIdState, stopsContext.data.stops, stopsContext.actions]);
 
+	console.log('selectedStopData', selectedStopData);
+
 	/**
 	 * Fetch associate estimates
 	 */
@@ -139,7 +141,8 @@ export const StopsDetailContextProvider = ({ children, stopId }: { children: Rea
 			if (!selectedStopData) return;
 			setIsLoading(true);
 			const patternsData = await fetchPatterns(selectedStopData.pattern_ids);
-			setAssociatedPatternsData(patternsData);
+			const cmPatternsData = patternsData.filter(patternGroup => patternGroup.some(pattern => CARRIS_METROPOLITANA_AGENCY_IDS.includes(pattern.agency_id)));
+			setAssociatedPatternsData(cmPatternsData);
 			setIsLoading(false);
 		})();
 	}, [selectedStopData]);
