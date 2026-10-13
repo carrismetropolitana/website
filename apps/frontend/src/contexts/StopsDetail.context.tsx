@@ -113,8 +113,6 @@ export const StopsDetailContextProvider = ({ children, stopId }: { children: Rea
 		return stopsContext.actions.getStopById(dataActiveStopIdState);
 	}, [dataActiveStopIdState, stopsContext.data.stops, stopsContext.actions]);
 
-	console.log('selectedStopData', selectedStopData);
-
 	/**
 	 * Fetch associate estimates
 	 */
