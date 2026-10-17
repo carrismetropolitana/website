@@ -25,6 +25,11 @@ interface Props {
 	alertId: string
 }
 
+interface InformedEntity {
+	lineId?: string
+	stopId?: string
+}
+
 /* * */
 
 export function AlertsDetail({ alertId }: Props) {
@@ -45,14 +50,27 @@ export function AlertsDetail({ alertId }: Props) {
 	//
 	// C. Transform data
 
-	const uniqueInformedEntityLineIds = useMemo(() => {
-		const set = new Set<string>();
+	const informedEntities = useMemo((): InformedEntity[] => {
+		if (!alertData?.references?.length) return [];
 
-		alertData?.references.forEach((reference) => {
-			const lineId = reference.parent_id;
-			if (lineId) set.add(lineId);
+		const lineIsParent = alertData.reference_type === 'lines';
+		if (!lineIsParent && alertData.reference_type !== 'stops') return [];
+
+		const seen = new Set<string>();
+
+		return alertData.references.flatMap((reference) => {
+			const childIds: (string | undefined)[] = reference.child_ids.length > 0 ? reference.child_ids : [undefined];
+			return childIds.map((childId): InformedEntity => (
+				lineIsParent
+					? { lineId: reference.parent_id, stopId: childId }
+					: { lineId: childId, stopId: reference.parent_id }
+			));
+		}).filter((entity) => {
+			const key = `${entity.lineId ?? ''}|${entity.stopId ?? ''}`;
+			if (seen.has(key)) return false;
+			seen.add(key);
+			return true;
 		});
-		return Array.from(set);
 	}, [alertData]);
 
 	//
@@ -74,11 +92,11 @@ export function AlertsDetail({ alertId }: Props) {
 						{/* {simplifiedAlertData?.end_date && <AlertActivePeriodEnd date={simplifiedAlertData.end_date} />} */}
 					</div>
 				</Section>
-				{alertData?.references && (
+				{informedEntities.length > 0 && (
 					<Section withPadding>
 						<div className={styles.infoBar}>
-							{uniqueInformedEntityLineIds.map((lineId, index) => (
-								<AlertInformedEntity key={index} lineId={lineId} />
+							{informedEntities.map((entity, index) => (
+								<AlertInformedEntity key={index} lineId={entity.lineId} stopId={entity.stopId} />
 							))}
 						</div>
 					</Section>
