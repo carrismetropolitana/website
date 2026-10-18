@@ -8,7 +8,7 @@ import { useOperationalDateContext } from '@/contexts/OperationalDate.context';
 import { useProfileContext } from '@/contexts/Profile.context';
 import { useStopsContext } from '@/contexts/Stops.context';
 import { fetchPatterns } from '@/hooks/fetch-patterns';
-import { normalizeReferenceId } from '@/utils/alerts';
+import { alertReferencesStopId } from '@/utils/alerts';
 import { CARRIS_METROPOLITANA_AGENCY_IDS } from '@carrismetropolitana/website-shared-settings';
 import { getPublicVariable } from '@carrismetropolitana/website-shared-settings';
 import { type GoApiResponse } from '@carrismetropolitana/website-shared-types';
@@ -167,16 +167,9 @@ export const StopsDetailContextProvider = ({ children, stopId }: { children: Rea
 	const activeAlertsData = useMemo(() => {
 		if (!selectedStopData) return [];
 
-		const normalizedStopId = normalizeReferenceId(dataActiveStopIdState);
-
 		return alertsContext.data.alerts.filter((alert) => {
-			if (alert.reference_type !== 'stops') return false;
-
-			const hasMatchingReference = alert.references.some((reference) => {
-				return normalizeReferenceId(reference.parent_id) === normalizedStopId;
-			});
 			const isActive = !alert.active_period_end_date || alert.active_period_end_date >= Date.now();
-			return hasMatchingReference && isActive;
+			return alertReferencesStopId(alert, dataActiveStopIdState) && isActive;
 		});
 	}, [alertsContext.data.alerts, selectedStopData, dataActiveStopIdState]);
 

@@ -6,6 +6,34 @@ export function normalizeReferenceId(referenceId: null | number | string | undef
 	return String(referenceId ?? '').trim().replace(/^\[[^\]]+\]/, '');
 }
 
+export function alertReferencesLineId(alert: HubV1ApiAlert, lineId: string): boolean {
+	const normalizedLineId = normalizeReferenceId(lineId);
+
+	return alert.references.some((reference) => {
+		if (alert.reference_type === 'lines') {
+			return normalizeReferenceId(reference.parent_id) === normalizedLineId;
+		}
+		if (alert.reference_type === 'stops') {
+			return reference.child_ids.some(childId => normalizeReferenceId(childId) === normalizedLineId);
+		}
+		return false;
+	});
+}
+
+export function alertReferencesStopId(alert: HubV1ApiAlert, stopId: string): boolean {
+	const normalizedStopId = normalizeReferenceId(stopId);
+
+	return alert.references.some((reference) => {
+		if (alert.reference_type === 'stops') {
+			return normalizeReferenceId(reference.parent_id) === normalizedStopId;
+		}
+		if (alert.reference_type === 'lines') {
+			return reference.child_ids.some(childId => normalizeReferenceId(childId) === normalizedStopId);
+		}
+		return false;
+	});
+}
+
 export function getCauseSeverityLevel(cause?: HubV1ApiAlert['cause']): number {
 	switch (cause) {
 		case 'ACCIDENT':
