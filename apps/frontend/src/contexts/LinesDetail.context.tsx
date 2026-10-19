@@ -182,7 +182,7 @@ export const LinesDetailContextProvider = ({ children, lineId }) => {
 			const isActive = alertData.active_period_end_date ? alertData.active_period_end_date >= operationalDateContext.data.selected_date.set({ hour: 0, millisecond: 0, minute: 0, second: 0 }).js_date.getTime() : true;
 
 			if (!isActive) return false;
-			if (!alertReferencesLineId(alertData, lineId)) return false;
+			if (!alertReferencesLineId(alertData, dataLineState)) return false;
 
 			const informedAgencyId = alertData.agency_id?.trim();
 			const informedAgencyIds = new Set([informedAgencyId, informedAgencyId ? CARRIS_METROPOLITANA_NUMERIC_AGENCY_IDS[informedAgencyId] : undefined].filter((agencyId): agencyId is string => Boolean(agencyId)));
