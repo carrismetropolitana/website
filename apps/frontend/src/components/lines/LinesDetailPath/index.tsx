@@ -54,7 +54,7 @@ export function LinesDetailPath() {
 								dayName: chunks => <span className={styles.dayName}>{chunks}</span>,
 								destination_name: linesDetailContext.data.active_pattern?.headsign,
 								destinationName: chunks => <span className={styles.destinationName}>{chunks}</span>,
-								line_number: linesDetailContext.data.active_pattern?.line_id,
+								line_number: linesDetailContext.data.active_pattern?.short_name,
 								lineNumber: chunks => <span className={styles.lineNumber}>{chunks}</span>,
 							})}
 						</p>
