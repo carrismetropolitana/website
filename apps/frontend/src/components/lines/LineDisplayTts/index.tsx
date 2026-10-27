@@ -4,6 +4,7 @@
 
 import { useAnalyticsContext } from '@/contexts/Analytics.context';
 import { audioTtsUrl } from '@/settings/urls.settings';
+import { normalizeReferenceId } from '@/utils/alerts';
 import { IconPlayerPause, IconVolume } from '@tabler/icons-react';
 import { useEffect, useRef, useState } from 'react';
 
@@ -31,7 +32,7 @@ export function LineDisplayTts({ patternId }: Props) {
 	// B. Transform data
 
 	useEffect(() => {
-		audioPlayer.current = new Audio(`${audioTtsUrl}/patterns/${patternId}.mp3`);
+		audioPlayer.current = new Audio(`${audioTtsUrl}/patterns/${normalizeReferenceId(patternId)}.mp3`);
 	}, [patternId]);
 
 	useEffect(() => {
