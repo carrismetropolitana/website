@@ -41,7 +41,7 @@ export function FormSectionCyclesItem({ fieldKey, label }: Props) {
 					{...form.getInputProps(`school_cycles.${fieldKey}._is_enabled`, { type: 'checkbox' })}
 				/>
 
-				<Collapse in={isEnabled}>
+				<Collapse expanded={isEnabled}>
 					<div className={styles.timeGrid}>
 						<TimePicker
 							label="Principal Hora de entrada de manhã"
