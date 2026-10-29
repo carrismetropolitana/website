@@ -1,9 +1,45 @@
-import type { HubV1ApiAlert } from '@tmlmobilidade/go-types-hub';
+import type { HubV1ApiAlert, HubV1ApiLine } from '@tmlmobilidade/go-types-hub';
 
 /* * */
 
 export function normalizeReferenceId(referenceId: null | number | string | undefined): string {
 	return String(referenceId ?? '').trim().replace(/^\[[^\]]+\]/, '');
+}
+
+export function alertReferencesLineId(alert: HubV1ApiAlert, line: HubV1ApiLine): boolean {
+	//
+
+	// Check if line is provided
+	if (!line) return false;
+
+	const normalizedLineId = normalizeReferenceId(line._id);
+
+	return alert.references.some((reference) => {
+		if (alert.reference_type === 'lines') {
+			return normalizeReferenceId(reference.parent_id) === normalizedLineId;
+		}
+		if (alert.reference_type === 'stops') {
+			return reference.child_ids.some(childId => normalizeReferenceId(childId) === normalizedLineId);
+		}
+		if (alert.reference_type === 'agency') {
+			return reference.parent_id === line.agency_id;
+		}
+		return false;
+	});
+}
+
+export function alertReferencesStopId(alert: HubV1ApiAlert, stopId: string): boolean {
+	const normalizedStopId = normalizeReferenceId(stopId);
+
+	return alert.references.some((reference) => {
+		if (alert.reference_type === 'stops') {
+			return normalizeReferenceId(reference.parent_id) === normalizedStopId;
+		}
+		if (alert.reference_type === 'lines') {
+			return reference.child_ids.some(childId => normalizeReferenceId(childId) === normalizedStopId);
+		}
+		return false;
+	});
 }
 
 export function getCauseSeverityLevel(cause?: HubV1ApiAlert['cause']): number {
