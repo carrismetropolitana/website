@@ -3,7 +3,6 @@
 import { getPublicVariable } from '@carrismetropolitana/website-shared-settings';
 import { type Metadata } from 'next';
 import { Inter } from 'next/font/google';
-import Script from 'next/script';
 import { type PropsWithChildren } from 'react';
 
 /* * */
@@ -37,7 +36,6 @@ export default async function RootLayout({ children }: PropsWithChildren) {
 			</head>
 			<body>
 				{children}
-				<Script src="https://code.tidio.co/nthktfuicqeoza2keki9ojdd6g4swlab.js" strategy="afterInteractive" />
 			</body>
 		</html>
 	);

@@ -46,7 +46,7 @@ export const mainNavigationGroup: NavigationGroup[] = [
 			{ _id: 'projects', href: '/projects', icon: <IconFileArrowRight /> },
 			{ _id: 'metrics', href: '/metrics', icon: <IconChartBar /> },
 			{ _id: 'open-data', href: '/open-data', icon: <IconPrompt /> },
-			// { _id: 'drivers', href: '/drivers', icon: <IconUserHeart />, target: '_blank' },
+			{ _id: 'drivers', href: '/drivers', icon: <IconUserHeart />, target: '_blank' },
 			{ _id: 'about', href: '/about', icon: <IconHomeSpark /> },
 			{ _id: 'vehicles', href: '/vehicles', icon: <IconBus /> },
 		],

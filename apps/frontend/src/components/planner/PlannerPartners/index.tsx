@@ -56,11 +56,6 @@ const partnerApps: ParnerApp[] = [
 		title: 'Movize',
 		url: 'https://movize.pt',
 	},
-	{
-		image_url: '/assets/planner/trilho.png',
-		title: 'Trilho',
-		url: 'https://trilhoapp.com',
-	},
 ];
 
 /* * */
