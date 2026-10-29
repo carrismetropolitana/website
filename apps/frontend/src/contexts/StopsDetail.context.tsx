@@ -13,7 +13,7 @@ import { normalizeReferenceId } from '@/utils/alerts';
 import { getPublicVariable } from '@carrismetropolitana/website-shared-settings';
 import { type GoApiResponse } from '@carrismetropolitana/website-shared-types';
 import { type HubV1ApiAlert, type HubV1ApiLine, type HubV1ApiPattern, type HubV1ApiStop } from '@tmlmobilidade/go-types-hub';
-import { OperationalDate, type UnixMilliseconds } from '@tmlmobilidade/go-types-shared';
+import { OperationalDate, type UnixMilliseconds, validateUnixMilliseconds } from '@tmlmobilidade/go-types-shared';
 import { Dates } from '@tmlmobilidade/go-utils-dates';
 import { fromEncodedPolylineToGeoJsonLineString } from '@tmlmobilidade/go-utils-geo';
 import { convertGTFSTimeStringAndOperationalDateToUnixMilliseconds } from '@tmlmobilidade/utils';
@@ -108,14 +108,14 @@ export const StopsDetailContextProvider = ({ children, stopId }: { children: Rea
 	//
 	// B. Fetch data
 
-	function getEtaArrivalMs(eta: HubEtaByStop): undefined | UnixTimestamp {
+	function getEtaArrivalMs(eta: HubEtaByStop): undefined | UnixMilliseconds {
 		if (!eta.eta_at) return;
 
 		if (Number.isFinite(Number(eta.position_created_at)) && Number.isFinite(Number(eta.eta_seconds))) {
-			return validateUnixTimestamp(Number(eta.position_created_at) + Math.round(Number(eta.eta_seconds)) * 1000);
+			return validateUnixMilliseconds(Number(eta.position_created_at) + Math.round(Number(eta.eta_seconds)) * 1000);
 		}
 
-		return validateUnixTimestamp(Date.parse(eta.eta_at));
+		return validateUnixMilliseconds(eta.eta_at);
 	}
 
 	const selectedStopData = useMemo(() => {
