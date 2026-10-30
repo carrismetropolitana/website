@@ -25,7 +25,7 @@ export function ScrollToTopButton({ showAfterHeight }: Props) {
 	// B. Render components
 
 	return (
-		<Affix position={{ bottom: 20, right: 20 }}>
+		<Affix position={{ bottom: 20, left: 20 }}>
 			<Transition mounted={scroll.y > showAfterHeight} transition="slide-up">
 				{transitionStyles => (
 					<Button
