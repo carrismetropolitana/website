@@ -44,7 +44,7 @@ export const LinesContextProvider = ({ children }: { children: ReactNode }) => {
 	//
 	// A. Fetch data
 
-	const { data: allLinesResponse, isLoading: allLinesLoading } = useSWR<GoApiResponse<HubV1ApiLine[]>, Error>(`${getPublicVariable('go_api_url')}/hub/api/v1/network/lines`, { refreshInterval: 900000 }); // 15 minutes
+	const { data: allLinesResponse, isLoading: allLinesLoading } = useSWR<GoApiResponse<HubV1ApiLine[]>, Error>(`${getPublicVariable('go_api_url')}/hub/api/v1/LA3SO/network/lines`, { refreshInterval: 900000 }); // 15 minutes
 	const allLinesData = useFilterByAgencyIds(allLinesResponse, { dataType: 'line' }).data;
 
 	//

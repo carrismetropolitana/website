@@ -23,7 +23,7 @@ export function LineDisplay({ patternId }: LineDisplayProps) {
 	//
 	// A. Fetch data
 
-	const { data: patternData } = useSWR<GoApiResponse<HubV1ApiPattern[]>, Error>(`${getPublicVariable('go_api_url')}/hub/api/v1/network/patterns/${patternId}`, { refreshInterval: 900000 }); // 15 minutes
+	const { data: patternData } = useSWR<GoApiResponse<HubV1ApiPattern[]>, Error>(`${getPublicVariable('go_api_url')}/hub/api/v1/LA3SO/network/patterns/${patternId}`, { refreshInterval: 900000 }); // 15 minutes
 
 	//
 	// B. Render components
