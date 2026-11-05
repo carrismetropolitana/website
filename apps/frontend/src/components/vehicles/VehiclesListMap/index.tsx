@@ -65,7 +65,7 @@ export function VehiclesListMap() {
 			const operationalDate = operationalDateContext.data.selected_date?.operational_date_int;
 			if (!operationalDate) return;
 
-			const fetchedPatternResponse = await fetch(`${getPublicVariable('go_api_url')}/hub/api/v1/network/patterns/${encodeURIComponent(vehiclesListContext.data.selected.pattern_id)}`);
+			const fetchedPatternResponse = await fetch(`${getPublicVariable('go_api_url')}/hub/api/v1/LA3SO/network/patterns/${encodeURIComponent(vehiclesListContext.data.selected.pattern_id)}`);
 
 			const fetchedPatternResponseData: { data?: HubV1ApiPattern[] } = await fetchedPatternResponse.json();
 			const fetchedPatternData = fetchedPatternResponseData.data;

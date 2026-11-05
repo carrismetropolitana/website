@@ -92,7 +92,7 @@ export const PipsArrivalsContextProvider = ({ children }: PropsWithChildren) => 
 		if (patternIdsFromUrl.length === 0) return [];
 
 		const patternPromises = patternIdsFromUrl.map(async (patternId) => {
-			const response = await fetch(`${getPublicVariable('go_api_url')}/hub/api/v1/network/patterns/${encodeURIComponent(patternId)}`);
+			const response = await fetch(`${getPublicVariable('go_api_url')}/hub/api/v1/LA3SO/network/patterns/${encodeURIComponent(patternId)}`);
 			if (!response.ok) return [];
 			const payload = await response.json() as GoApiResponse<HubV1ApiPattern[]>;
 			return payload.data ?? [];
@@ -108,7 +108,7 @@ export const PipsArrivalsContextProvider = ({ children }: PropsWithChildren) => 
 	);
 
 	const { data: etaResponse, isLoading: etaLoading, mutate: revalidateEta } = useSWR<GoApiResponse<HubEtaByStop[]>, Error>(
-		stopIds.length > 0 ? `${getPublicVariable('go_api_url')}/hub/api/v1/eta` : null,
+		stopIds.length > 0 ? `${getPublicVariable('go_api_url')}/hub/api/v1/LA3SO/eta` : null,
 		{ refreshInterval: 30000 }, // 30 seconds
 	);
 	const etaData = useMemo(

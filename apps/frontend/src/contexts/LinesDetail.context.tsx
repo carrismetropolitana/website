@@ -125,7 +125,7 @@ export const LinesDetailContextProvider = ({ children, lineId }) => {
 			try {
 				if (!dataLineState) return;
 				const fetchPromises = dataLineState.pattern_ids.map(async (patternId) => {
-					const response = await fetch(`${getPublicVariable('go_api_url')}/hub/api/v1/network/patterns/${encodeURIComponent(patternId)}`);
+					const response = await fetch(`${getPublicVariable('go_api_url')}/hub/api/v1/LA3SO/network/patterns/${encodeURIComponent(patternId)}`);
 					if (!response.ok) {
 						console.log(`Failed to fetch pattern data for patternId: ${patternId}`);
 						return null;

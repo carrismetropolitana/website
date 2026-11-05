@@ -24,7 +24,7 @@ export function MapViewSchools({ allSchoolsData, onSelectSchool }) {
 	//
 	// B. Fetch data
 
-	const { data: allStopsData } = useSWR<GoApiResponse<HubV1ApiStop[]>, Error>(`${getPublicVariable('go_api_url')}/hub/api/v1/network/stops`, { refreshInterval: 900000 }); // 15 minutes
+	const { data: allStopsData } = useSWR<GoApiResponse<HubV1ApiStop[]>, Error>(`${getPublicVariable('go_api_url')}/hub/api/v1/LA3SO/network/stops`, { refreshInterval: 900000 }); // 15 minutes
 
 	//
 	// C. Transform data

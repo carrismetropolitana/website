@@ -44,7 +44,7 @@ export function SchoolDetail({ schoolId }: Props) {
 	// B. Fetch data
 
 	const { data: allSchoolsData } = useSWR(`https://api.carrismetropolitana.pt/v2/facilities/schools`);
-	const { data: allStopsData, isLoading: allStopsLoading } = useSWR<GoApiResponse<HubV1ApiStop[]>, Error>(`${getPublicVariable('go_api_url')}/hub/api/v1/network/stops`, { refreshInterval: 900000 }); // 15 minutes
+	const { data: allStopsData, isLoading: allStopsLoading } = useSWR<GoApiResponse<HubV1ApiStop[]>, Error>(`${getPublicVariable('go_api_url')}/hub/api/v1/LA3SO/network/stops`, { refreshInterval: 900000 }); // 15 minutes
 
 	//
 	// C. Filter data

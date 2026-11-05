@@ -22,7 +22,7 @@ export default function StopInfo({ index, stop_id }) {
 
 	//
 	// A. Fetch data
-	const { data: allStopsData } = useSWR<GoApiResponse<HubV1ApiStop[]>, Error>(`${getPublicVariable('go_api_url')}/hub/api/v1/network/stops`, { refreshInterval: 900000 }); // 15 minutes
+	const { data: allStopsData } = useSWR<GoApiResponse<HubV1ApiStop[]>, Error>(`${getPublicVariable('go_api_url')}/hub/api/v1/LA3SO/network/stops`, { refreshInterval: 900000 }); // 15 minutes
 	const { data: allLocalitiesData } = useSWR<ApiResponse<Locality[]>, Error>(`${getPublicVariable('go_api_url')}/locations/api/locations/localities`, { refreshInterval: 900000 }); // 15 minutes
 
 	//

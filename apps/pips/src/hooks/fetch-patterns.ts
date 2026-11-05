@@ -10,7 +10,7 @@ import { type HubV1ApiPattern } from '@tmlmobilidade/go-types-hub';
  */
 export async function fetchPatterns(patternIds: string[]): Promise<HubV1ApiPattern[][]> {
 	const fetchPromises = patternIds.map((patternId) => {
-		return fetch(getPublicVariable('go_api_url') + '/hub/api/v1/network/patterns/' + patternId)
+		return fetch(getPublicVariable('go_api_url') + '/hub/api/v1/LA3SO/network/patterns/' + patternId)
 			.then(response => response.json())
 			.then(data => data.data as HubV1ApiPattern[]);
 	});

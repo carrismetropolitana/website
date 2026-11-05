@@ -30,11 +30,11 @@ async function fetchGoApiEntity<T>(path: string): Promise<null | T> {
 }
 
 export function fetchGoStop(stopId: string): Promise<HubV1ApiStop | null> {
-	return fetchGoApiEntity<HubV1ApiStop>(`/hub/api/v1/network/stops/${encodeURIComponent(stopId)}`);
+	return fetchGoApiEntity<HubV1ApiStop>(`/hub/api/v1/LA3SO/network/stops/${encodeURIComponent(stopId)}`);
 }
 
 export function fetchGoLine(lineId: string): Promise<HubV1ApiLine | null> {
-	return fetchGoApiEntity<HubV1ApiLine>(`/hub/api/v1/network/lines/${encodeURIComponent(lineId)}`);
+	return fetchGoApiEntity<HubV1ApiLine>(`/hub/api/v1/LA3SO/network/lines/${encodeURIComponent(lineId)}`);
 }
 
 /**
