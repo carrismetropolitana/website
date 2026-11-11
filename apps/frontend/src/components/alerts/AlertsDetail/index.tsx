@@ -13,6 +13,8 @@ import { Section } from '@/components/layout/Section';
 import { Surface } from '@/components/layout/Surface';
 import { useAlertsContext } from '@/contexts/Alerts.context';
 import { useDebugContext } from '@/contexts/Debug.context';
+import { useLinesContext } from '@/contexts/Lines.context';
+import { normalizeReferenceId } from '@/utils/alerts';
 import { IconExternalLink } from '@tabler/icons-react';
 import { useTranslations } from 'next-intl';
 import { useMemo } from 'react';
@@ -41,6 +43,7 @@ export function AlertsDetail({ alertId }: Props) {
 	const t = useTranslations('alerts.AlertsDetail');
 	const alertsContext = useAlertsContext();
 	const debugContext = useDebugContext();
+	const { getLineDataById } = useLinesContext().actions;
 
 	//
 	// B. Fetch data
@@ -66,12 +69,13 @@ export function AlertsDetail({ alertId }: Props) {
 					: { lineId: childId, stopId: reference.parent_id }
 			));
 		}).filter((entity) => {
-			const key = `${entity.lineId ?? ''}|${entity.stopId ?? ''}`;
+			const lineData = entity.lineId ? getLineDataById(entity.lineId) : undefined;
+			const key = lineData ? `line:${lineData._id}` : `stop:${normalizeReferenceId(entity.stopId)}`;
 			if (seen.has(key)) return false;
 			seen.add(key);
 			return true;
 		});
-	}, [alertData]);
+	}, [alertData, getLineDataById]);
 
 	//
 	// D. Render components
