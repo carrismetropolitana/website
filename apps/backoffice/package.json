@@ -27,7 +27,7 @@
 		"@tmlmobilidade/utils": "20260911.1540.7",
 		"classnames": "2.5.1",
 		"graphql": "16.13.2",
-		"next": "16.3.4",
+		"next": "16.4.6",
 		"nodemailer": "8.0.5",
 		"payload": "3.88.0",
 		"react": "19.2.8",
