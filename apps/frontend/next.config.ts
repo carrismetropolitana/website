@@ -122,6 +122,7 @@ const nextConfig: NextConfig = {
 			{ destination: '/about', permanent: true, source: '/sobre' },
 
 			{ destination: '/drivers', permanent: true, source: '/motoristas' },
+			{ destination: '/drivers', permanent: true, source: '/recrutamento' },
 			{ destination: '/drivers', permanent: true, source: '/recrutamento-motoristas' },
 			{ destination: '/drivers', permanent: true, source: '/recrutamento-de-motoristas' },
 
