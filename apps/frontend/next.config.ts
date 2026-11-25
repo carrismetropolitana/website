@@ -100,11 +100,7 @@ const nextConfig: NextConfig = {
 			{ destination: '/faq', permanent: true, source: '/perguntas' },
 			{ destination: '/faq', permanent: true, source: '/perguntas-frequentes' },
 
-			{
-				destination: '/lost-and-found',
-				permanent: true,
-				source: '/perdidos-e-achados',
-			},
+			{ destination: '/lost-and-found', permanent: true, source: '/perdidos-e-achados' },
 
 			{ destination: '/stores', permanent: true, source: '/encm' },
 			{ destination: '/stores', permanent: true, source: '/lojas' },
@@ -125,9 +121,14 @@ const nextConfig: NextConfig = {
 
 			{ destination: '/about', permanent: true, source: '/sobre' },
 
+			{ destination: '/drivers', permanent: true, source: '/motoristas' },
+			{ destination: '/drivers', permanent: true, source: '/recrutamento-motoristas' },
+			{ destination: '/drivers', permanent: true, source: '/recrutamento-de-motoristas' },
+
 			{ destination: '/vehicles', permanent: true, source: '/veiculos' },
 			{ destination: '/vehicles', permanent: true, source: '/frota' },
 			{ destination: '/news/inquerito-de-satisfaçao-ao-passageiro', permanent: true, source: '/resultados-inquerito-2025' },
+
 			/* * */
 			/* UNLISTED */
 
@@ -202,11 +203,6 @@ const nextConfig: NextConfig = {
 				destination: 'https://backoffice.carrismetropolitana.pt/participe',
 				permanent: false,
 				source: '/participe',
-			},
-			{
-				destination: 'https://backoffice.carrismetropolitana.pt/motoristas',
-				permanent: false,
-				source: '/drivers',
 			},
 			{
 				destination: 'https://backoffice.carrismetropolitana.pt/motoristas',
