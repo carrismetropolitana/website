@@ -163,6 +163,13 @@ const nextConfig: NextConfig = {
 				permanent: false,
 				source: '/whatsapp-area3',
 			},
+			
+			{
+				destination:
+					'https://www.instagram.com/carrismetropolitana/?hl=en',
+				permanent: false,
+				source: '/natal-2026',
+			},
 
 			{
 				destination:
